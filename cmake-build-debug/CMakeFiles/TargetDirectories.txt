@@ -1,4 +1,4 @@
-C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-debug/CMakeFiles/Interface_Engine.dir
-C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-debug/CMakeFiles/Interface_Engine_ex.dir
-C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/andrewkoro105/Projects/Interface_Engine/cmake-build-debug/CMakeFiles/Interface_Engine.dir
+/home/andrewkoro105/Projects/Interface_Engine/cmake-build-debug/CMakeFiles/ass.dir
+/home/andrewkoro105/Projects/Interface_Engine/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/andrewkoro105/Projects/Interface_Engine/cmake-build-debug/CMakeFiles/rebuild_cache.dir

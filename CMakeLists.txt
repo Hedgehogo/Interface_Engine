@@ -3,8 +3,7 @@ project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(Interface_Engine STATIC
-        enums/corner/corner.h
+add_library(${PROJECT_NAME} enums/corner/corner.h
         enums/side/side.h
         enums/size/size.h
         enums/enums.h
@@ -71,30 +70,14 @@ add_library(Interface_Engine STATIC
         iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/displayPanelInteraction.h
         iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp iObject/panel/interaction/panelInteraction.cpp iObject/panel/interaction/panelInteraction.h iObject/panel/interaction/hidePanelInteraction.h iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h)
 
-set(SFML_STATIC_LIBRARIES TRUE)
-
-set(CMAKE_EXE_LINKER_FLAGS "-static")
-
-set(SFML_DIR "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
+set(SFML_DIR "\\home\\andrewkoro105\\SFML-2.5.1\\lib\\cmake\\SFML")
 
 set(CMAKE_MODULE_PATH "${cmaKE_CURRENT_LIST_DIR}/cmake_modules")
 
 find_package(SFML 2.5 REQUIRED graphics network audio window system)
 
-target_link_libraries(Interface_Engine PUBLIC sfml-graphics sfml-system)
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-system)
 
+add_executable(ass main.cpp)
 
-#[[set_target_properties(Interface_Engine PROPERTIES PUBLIC_HEADER "UI.h")
-
-export(TARGETS Interface_Engine FILE Interface_Engine-config.cmake)
-
-install(TARGETS Interface_Engine ARCHIVE DESTINATION ${PROJECT_BINARY_DIR}/lib
-        PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}/public_headers")]]
-
-#-------------------------------
-
-add_executable(Interface_Engine_ex main.cpp)
-
-#find_library(`Yes_Science` Interface_Engine)
-
-target_link_libraries(Interface_Engine_ex PRIVATE Interface_Engine)
+target_link_libraries(ass PRIVATE ${PROJECT_NAME})
