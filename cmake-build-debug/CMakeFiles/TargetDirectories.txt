@@ -1,0 +1,4 @@
+C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-debug/CMakeFiles/Interface_Engine.dir
+C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-debug/CMakeFiles/Interface_Engine_ex.dir
+C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-debug/CMakeFiles/rebuild_cache.dir
