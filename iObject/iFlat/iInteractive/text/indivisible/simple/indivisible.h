@@ -12,6 +12,7 @@ namespace ui{
     public:
         Indivisible(sf::Text text, BaseTextBlock* parent);
         void draw() override;
+
         special isSpecial();
     };
 }

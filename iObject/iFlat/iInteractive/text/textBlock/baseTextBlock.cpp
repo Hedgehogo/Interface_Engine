@@ -15,8 +15,9 @@ ui::BaseTextBlock::BaseTextBlock(std::wstring text, sf::Color color, sf::Text::S
     this->text.setStyle(style);
 }
 
-void ui::BaseTextBlock::init(sf::RenderWindow &window) {
-    this->window = &window;
+void ui::BaseTextBlock::init(ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack) {
+    this->interactionManager = &interactionManager;
+    this->interactionStack = &interactionStack;
 }
 
 void ui::BaseTextBlock::setTextVariables(uint lineSpacing, int size, sf::Font *font) {

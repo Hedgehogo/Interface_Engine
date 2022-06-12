@@ -7,5 +7,7 @@ namespace ui {
         TextBlock(std::wstring text, sf::Color color, sf::Font &font, sf::Text::Style style = {}, int size = 0);
         TextBlock(std::wstring text, sf::Color color, sf::Text::Style style = {}, int size = 0);
         std::vector<BaseIndivisible*> divide();
+        void update() override;
+        bool updateInteractions(sf::Vector2f mousePosition) override;
 	};
 }

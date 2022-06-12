@@ -20,9 +20,6 @@ namespace ui {
 
         sf::Vector2f minSize;
 
-        bool interact;
-        bool oldInteract;
-        IInteraction* oldInteraction;
         Align align;
 
         uint size;
@@ -48,8 +45,6 @@ namespace ui {
         void resizeLeft(sf::Vector2f startRender, sf::Vector2f endRender);
         void resizeRight(sf::Vector2f startRender, sf::Vector2f endRender);
         void resizeCenter(sf::Vector2f startRender, sf::Vector2f endRender);
-
-        sf::Vector2f getTextSize();
 
         sf::Vector2f getMinSize() override;
 

@@ -39,3 +39,11 @@ std::vector<ui::BaseIndivisible*> ui::TextBlock::divide() {
     }
     return result;
 }
+
+void ui::TextBlock::update() {
+
+}
+bool ui::TextBlock::updateInteractions(sf::Vector2f mousePosition) {
+    return false;
+}
+

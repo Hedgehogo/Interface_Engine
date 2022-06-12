@@ -2,10 +2,12 @@
 #include "SFML/Graphics.hpp"
 #include "../../simple/interactiveSimple.h"
 #include "../indivisible/baseIndivisible.h"
+#include "../../../../../interaction/interactionStack/interactionStack.h"
 namespace ui {
 	class BaseTextBlock{
 	protected:
-        sf::RenderWindow *window;
+        ui::InteractionManager *interactionManager;
+        ui::InteractionStack *interactionStack;
 		sf::Text text;
 
         uint lineSpacing;
@@ -17,9 +19,12 @@ namespace ui {
         BaseTextBlock(std::wstring text, sf::Color color, sf::Text::Style style, int size = 0);
 
         void setTextVariables(uint lineSpacing, int size, sf::Font *font);
-        void init(sf::RenderWindow &window);
+        virtual void init(ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack);
 
         virtual std::vector<BaseIndivisible*> divide() = 0;
 
-	};
+        virtual void update() = 0;
+
+        virtual bool updateInteractions(sf::Vector2f mousePosition) = 0;
+    };
 }

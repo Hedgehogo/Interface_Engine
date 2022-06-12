@@ -19,4 +19,3 @@ ui::BaseIndivisible::special ui::Indivisible::isSpecial() {
         return BaseIndivisible::special::enter;
     return BaseIndivisible::special::no;
 }
-

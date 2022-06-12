@@ -1,7 +1,8 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
-#include "../../../../../interaction/iInteraction/iInteraction.h"
+#include "../../../../../interaction/interactionManager/interactionManager.h"
+#include "../../../../../interaction/interactionStack/interactionStack.h"
 
 namespace ui{
     class BaseTextBlock;
@@ -21,7 +22,13 @@ namespace ui{
 
         BaseIndivisible(BaseTextBlock* parent);
 
-        void init(sf::RenderWindow &window);
+        void init(sf::RenderWindow &window, ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack);
+
+        bool in(sf::Vector2f mousePosition);
+
+        void update();
+
+        bool updateInteractions(sf::Vector2f mousePosition);
 
         void setPosition(const sf::Vector2f &position);
 

@@ -17,26 +17,25 @@ ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, IDrawn *background, 
 void ui::Text::init(sf::RenderWindow &window, ui::Panel *parent, ui::PanelStack &overlayStack) {
     this->window = &window;
     for (ui::BaseIndivisible* textBlock : textIndivisibleBlocks) {
-        textBlock->init(window);
+        textBlock->init(window, *interactionManager, *interactionStack);
     }
     IObject::initObject(background, window, *interactionStack, *interactionManager, parent, overlayStack);
 }
 
 void ui::Text::update() {
-    if(interact != oldInteract) {
-        oldInteract = interact;
-        if(interact) {
-
-        } else {
-            //interactionManager->deleteInteraction(*oldInteraction);
-        }
+    for (ui::BaseIndivisible* indivisible : textIndivisibleBlocks) {
+        indivisible->update();
     }
-    interact = false;
 }
 
 bool ui::Text::updateInteractions(sf::Vector2f mousePosition) {
-    interact = true;
-    return true;
+    bool result = false;
+    for (ui::BaseIndivisible* indivisible : textIndivisibleBlocks) {
+        if (indivisible->in(mousePosition))
+            if (indivisible->updateInteractions(mousePosition))
+                result = true;
+    }
+    return result;
 }
 
 void ui::Text::draw() {

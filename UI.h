@@ -21,3 +21,4 @@
 #include "iObject/iFlat/interface/interface.h"
 #include "iObject/iFlat/iInteractive/text/text.h"
 #include "iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.h"
+#include "iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.h"

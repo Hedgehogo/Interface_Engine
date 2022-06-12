@@ -27,7 +27,8 @@ int main() {
                             L"Исполнитель ",
                             sf::Color::White
                         },
-                        new ui::TextBlock{
+                        new ui::InteractiveTextBlock{
+                            0,
                             L"Робот",
                             sf::Color::Red,
                             sf::Text::Style::Bold
@@ -49,7 +50,7 @@ int main() {
                 0.5
             }
         },
-		InteractionStack {
+		ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
 				new ui::MouseLambdaInteraction {
 					new ui::ButtonEvent_LambdaSimple {
