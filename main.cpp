@@ -12,63 +12,43 @@ int main() {
 	sf::Sprite sprite;
 	sf::Font font;
 	font.loadFromFile("segoeui.ttf");
+
+    const std::wstring text = L"Ass";
+
 	
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
 	ui::Interface interface {
-		/*new ui::LayerWithConstBorder {
-			new ui::FullColor{sf::Color::Cyan},
-			new ui::LayerWithConstRatio {
-				new ui::LayerWithConstRatio {
-					new ui::Sprite{sprite, sf::Vector2f(0, 0), texture},
-					new ui::FullColor{sf::Color::Red},
-					new ui::FullColor{sf::Color::Yellow},
-					0.8f,
-					ui::LayerWithConstRatio::UpLeft,
-					{0, 0}
-				},
-				new ui::LayerWithBorder {
-					{
-						{
-							new ui::FullColor{sf::Color::Green},
-							new ui::FullColor{sf::Color::Yellow},
-							new ui::FullColor{sf::Color::Red}
-						},
-						{
-							new ui::FullColor{sf::Color::Blue},
-							new ui::Sprite{sprite, sf::Vector2f(0, 0), texture_2},
-							new ui::Button {
-								new ui::FullColor{sf::Color::Blue}, 0, sf::Vector2f(0, 0)
-							}
-						}
-					},
-					{0.5f},
-					{0.3f, 0.8f},
-					{0, 0}
-				},
-				new ui::FullColor{sf::Color::Magenta},
-				0.5f,
-				ui::LayerWithConstRatio::UpRight,
-				{0, 0}
-			},
-			ui::LayerWithConstBorder::Side::Left, 20, {50, 50}
-		}*/
-		new ui::LayerWithConstBorder {
-			new ui::Slider {
-				new ui::Capsule({200, 200, 200}),
-				new ui::FullColor({37, 37, 38}),
-				sf::Vector2f{1.0f, 0.5f}
-			},
-			new ui::ButtonWithPanel {
-				new ui::Panel {
-					new ui::FullColor{{200, 200, 200}},
-					sf::Vector2f{50, 50}
-				},
-				new ui::PointingDisplayPanelInteraction{},
-				new ui::FullColor{{37, 37, 38}}
-			},
-			ui::Side::Right, 10
-		},
+        new ui::LayerWithBorderVertical{
+            {
+                new ui::Text{
+                    {
+                        new ui::TextBlock{
+                            L"Исполнитель ",
+                            sf::Color::White
+                        },
+                        new ui::TextBlock{
+                            L"Робот",
+                            sf::Color::Red,
+                            sf::Text::Style::Bold
+                        },
+                        new ui::TextBlock{
+                            L"действует на клетчатой доске, между соседними клетками которой могут стоять стены. Робот передвигается по клеткам доски и может выполнять команды 1 (вверх), 2 (вниз), 3 (вправо) и 4 (влево), переходя на соседнюю клетку в направлении, указанном в скобках. Если в этом направлении между клетками стоит стена, то Робот разрушается. Робот успешно выполнил программу \n1132432 \nКакую последовательность из трех команд должен выполнить Робот, чтобы вернуться в ту клетку, где он был перед началом выполнения программы, и не разрушиться вне зависимости от того, какие стены стоят на поле?",
+                            sf::Color::White
+                        }
+                    },
+                    new ui::FullColor(sf::Color::Black),
+                    14,
+                    14,
+                    &font,
+                    ui::Text::Align::left
+                },
+                new ui::FullColor(sf::Color::Cyan)
+            },
+            {
+                0.5
+            }
+        },
 		InteractionStack {
 			std::vector<ui::IInteraction *> {
 				new ui::MouseLambdaInteraction {

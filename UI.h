@@ -19,3 +19,5 @@
 #include "iObject/iFlat/iInteractive/simple/button/buttonWithIndex/buttonWithIndex.h"
 #include "iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/buttonWithPanel.h"
 #include "iObject/iFlat/interface/interface.h"
+#include "iObject/iFlat/iInteractive/text/text.h"
+#include "iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.h"

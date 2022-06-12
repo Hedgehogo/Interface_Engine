@@ -59,16 +59,16 @@ add_library(${PROJECT_NAME} enums/corner/corner.h
         iObject/iFlat/iInteractive/simple/slider/interaction/slideEvent/sliderEvent.cpp iObject/iFlat/iInteractive/simple/slider/interaction/slideEvent/sliderEvent.h
         iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.cpp iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.h
         iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.cpp iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.h
-        iObject/iFlat/iInteractive/simple/text/text.cpp iObject/iFlat/iInteractive/simple/text/text.h
-        iObject/iFlat/iInteractive/simple/text/textBlock/iTextBlock.cpp iObject/iFlat/iInteractive/simple/text/textBlock/iTextBlock.h
-        iObject/iFlat/iInteractive/simple/text/textBlock/link/linkTextBlock.cpp iObject/iFlat/iInteractive/simple/text/textBlock/link/linkTextBlock.h
-        iObject/iFlat/iInteractive/simple/text/textBlock/base/baseTextBlock.cpp iObject/iFlat/iInteractive/simple/text/textBlock/base/baseTextBlock.h
+        iObject/iFlat/iInteractive/text/text.cpp iObject/iFlat/iInteractive/text/text.h
+        iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.h
+        iObject/iFlat/iInteractive/text/textBlock/link/linkTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/link/linkTextBlock.h
+        iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.cpp iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.h
         iObject/panel/panel.cpp iObject/panel/panel.h
         iObject/panel/panelStack/panelStack.cpp iObject/panel/panelStack/panelStack.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
         UI.h
         iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/displayPanelInteraction.h
-        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp iObject/panel/interaction/panelInteraction.cpp iObject/panel/interaction/panelInteraction.h iObject/panel/interaction/hidePanelInteraction.h iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h)
+        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp iObject/panel/interaction/panelInteraction.cpp iObject/panel/interaction/panelInteraction.h iObject/panel/interaction/hidePanelInteraction.h iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h iObject/iFlat/iInteractive/text/indivisible/baseIndivisible.cpp iObject/iFlat/iInteractive/text/indivisible/baseIndivisible.h iObject/iFlat/iInteractive/text/indivisible/simple/indivisible.cpp iObject/iFlat/iInteractive/text/indivisible/simple/indivisible.h)
 
 set(SFML_DIR "\\home\\andrewkoro105\\SFML-2.5.1\\lib\\cmake\\SFML")
 
