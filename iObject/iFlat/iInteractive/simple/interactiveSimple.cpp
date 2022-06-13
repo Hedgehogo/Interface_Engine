@@ -18,3 +18,9 @@ bool ui::Interactive_Simple::updateInteractions(sf::Vector2f mousePosition) {
 	interact = true;
 	return true;
 }
+
+void ui::Interactive_Simple::copy(ui::Interactive_Simple *interactive_Simple) {
+	IInteractive::copy(interactive_Simple);
+	interactive_Simple->interact = this->interact;
+	interactive_Simple->oldInteract = this->oldInteract;
+}

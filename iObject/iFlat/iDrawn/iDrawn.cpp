@@ -15,5 +15,9 @@ namespace ui {
 	
 	void IDrawn::update() {
 	}
+	
+	void IDrawn::copy(IDrawn *iDrawn) {
+		iDrawn->window = this->window;
+	}
 }
 

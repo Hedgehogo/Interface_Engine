@@ -9,4 +9,9 @@ namespace ui {
 	}
 	
 	IInteractive::IInteractive() : interactionStack(nullptr) {}
+	
+	void IInteractive::copy(IInteractive *iInteractive) {
+		iInteractive->interactionStack = this->interactionStack;
+		iInteractive->interactionManager = this->interactionManager;
+	}
 }

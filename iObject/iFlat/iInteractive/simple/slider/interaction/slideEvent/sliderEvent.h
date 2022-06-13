@@ -6,10 +6,12 @@ namespace ui {
 	class BaseSlider;
 	class SliderEvent : public ButtonEvent_Simple {
 	protected:
-		BaseSlider& slider;
+		BaseSlider* slider;
 		sf::Vector2i startMousePosition;
 		sf::Vector2f startValue;
 		sf::Vector2i division;
+		
+		void copy(SliderEvent* sliderEvent);
 		
 		void startPressed(sf::Vector2i windowPosition) override;
 		
@@ -20,6 +22,10 @@ namespace ui {
 		void notPressed  (sf::Vector2i windowPosition) override;
 		
 	public:
-		SliderEvent(BaseSlider &slider, sf::Vector2i division = {0, 0});
+		explicit SliderEvent(BaseSlider &slider, sf::Vector2i division = {0, 0});
+		
+		void setSlider(BaseSlider& slider);
+		
+		SliderEvent* copy() override;
 	};
 }

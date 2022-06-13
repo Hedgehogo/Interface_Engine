@@ -19,5 +19,11 @@ namespace ui {
 			notPressed(mousePosition);
 		}
 	}
+	
+	ButtonEvent_LambdaSimple *ButtonEvent_LambdaSimple::copy() {
+		ButtonEvent_LambdaSimple* buttonEventLambdaSimple{new ButtonEvent_LambdaSimple{startPressed, whilePressed, stopPressed, notPressed}};
+		ButtonEvent::copy(buttonEventLambdaSimple);
+		return buttonEventLambdaSimple;
+	}
 }
 

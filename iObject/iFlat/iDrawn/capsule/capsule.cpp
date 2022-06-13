@@ -38,3 +38,10 @@ sf::Vector2f ui::Capsule::getMinSize() {
 sf::Vector2f ui::Capsule::getNormalSize() {
 	return {1, 1};
 }
+
+ui::Capsule *ui::Capsule::copy() {
+	Capsule* capsule{new Capsule{circle.getFillColor()}};
+	IDrawn::copy(capsule);
+	capsule->resize(size, position);
+	return capsule;
+}

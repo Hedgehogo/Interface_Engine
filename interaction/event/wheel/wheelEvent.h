@@ -9,6 +9,8 @@ namespace ui {
 	class WheelEvent {
 	protected:
 		bool active;
+		
+		void copy(WheelEvent* wheelEvent);
 	
 	public:
 		explicit WheelEvent();
@@ -16,5 +18,7 @@ namespace ui {
 		virtual ~WheelEvent() = default;
 		
 		virtual void update(sf::Vector2i mousePosition, int value) = 0;
+		
+		virtual WheelEvent* copy() = 0;
 	};
 }

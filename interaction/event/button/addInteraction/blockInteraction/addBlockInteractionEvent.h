@@ -9,5 +9,7 @@ namespace ui {
 		
 	public:
 		explicit AddBlockInteractionEvent(IInteraction &interaction);
+		
+		AddBlockInteractionEvent* copy() override;
 	};
 }

@@ -28,4 +28,8 @@ namespace ui {
 	sf::Vector2f Button::getNormalSize() {
 		return background->getNormalSize();
 	}
+	
+	void Button::copy(Button *button) {
+		Interactive_Simple::copy(button);
+	}
 }

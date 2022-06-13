@@ -12,10 +12,18 @@ namespace ui {
 		
 		~OneButtonInteraction() override;
 		
+		sf::Mouse::Button getButton();
+		
+		ButtonEvent* getEvent();
+		
+		void setEvent(ButtonEvent *event);
+		
 		void start(sf::Vector2i mousePosition) override;
 		
 		bool update(sf::Vector2i mousePosition) override;
 		
 		void finish(sf::Vector2i mousePosition) override;
+		
+		OneButtonInteraction* copy() override;
 	};
 }

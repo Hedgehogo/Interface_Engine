@@ -15,3 +15,7 @@ sf::Vector2f ui::Empty::getMinSize() {
 sf::Vector2f ui::Empty::getNormalSize() {
 	return {};
 }
+
+ui::Empty *ui::Empty::copy() {
+	return new Empty{};
+}

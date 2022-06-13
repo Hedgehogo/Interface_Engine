@@ -47,28 +47,31 @@ namespace ui {
 	}
 	
 	sf::Vector2f LayerWithConstCenter::getMinSize() {
-		sf::Vector2f maxSize {object->getMinSize()};
-		sf::Vector2f backgroundSize {background->getMinSize()};
-		if(maxSize.x < minimumSize.x) {
-			maxSize.x = minimumSize.x;
-		} else if (maxSize.x < backgroundSize.x) {
-			maxSize.x = backgroundSize.x;
-		}
-		if(maxSize.y < minimumSize.y) {
-			maxSize.y = minimumSize.y;
-		} else if (maxSize.y < backgroundSize.y) {
-			maxSize.y = backgroundSize.y;
-		}
-		return maxSize;
+		sf::Vector2f objectMinSize {object->getMinSize()};
+		sf::Vector2f backgroundMinSize {background->getMinSize()};
+		objectMinSize = sf::Vector2f{std::max(objectMinSize.x, objectMinSize.y * aspectRatio), std::max(objectMinSize.y, objectMinSize.x / aspectRatio)};
+		return {std::max({objectMinSize.x, backgroundMinSize.x, minimumSize.x}), std::max({objectMinSize.y, backgroundMinSize.y, minimumSize.y})};
 	}
 	
 	sf::Vector2f LayerWithConstCenter::getNormalSize() {
-		sf::Vector2f objectNormalSize = object->getNormalSize();
-		sf::Vector2f backgroundNormalSize = background->getNormalSize();
-		return {(objectNormalSize.x > backgroundNormalSize.x ? objectNormalSize.x : backgroundNormalSize.x), (objectNormalSize.y > backgroundNormalSize.y ? objectNormalSize.y : backgroundNormalSize.y)};
+		sf::Vector2f objectNormalSize {object->getNormalSize()};
+		sf::Vector2f backgroundNormalSize {background->getNormalSize()};
+		objectNormalSize = sf::Vector2f{std::max(objectNormalSize.x, objectNormalSize.y * aspectRatio), std::max(objectNormalSize.y, objectNormalSize.x / aspectRatio)};
+		return {std::max(objectNormalSize.x, backgroundNormalSize.x), std::max(objectNormalSize.y, backgroundNormalSize.y)};
 	}
 	
 	void LayerWithConstCenter::update() {
 		object->update();
+	}
+	
+	void LayerWithConstCenter::copy(LayerWithConstCenter *layerWithConstCenter) {
+		ILayer::copy(layerWithConstCenter);
+		layerWithConstCenter->sizeOffset = this->sizeOffset;
+	}
+	
+	LayerWithConstCenter *LayerWithConstCenter::copy() {
+		LayerWithConstCenter* layerWithConstCenter{new LayerWithConstCenter{object, background, aspectRatio, minimumSize}};
+		LayerWithConstCenter::copy(layerWithConstCenter);
+		return layerWithConstCenter;
 	}
 }

@@ -36,3 +36,10 @@ sf::Vector2f ui::Rectangle::getMinSize() {
 sf::Vector2f ui::Rectangle::getNormalSize() {
 	return sf::Vector2f(radius * 2, radius * 2);
 }
+
+ui::Rectangle *ui::Rectangle::copy() {
+	Rectangle* rectangle{new Rectangle{circle.getFillColor(), radius}};
+	IDrawn::copy(rectangle);
+	rectangle->resize(size, position);
+	return rectangle;
+}

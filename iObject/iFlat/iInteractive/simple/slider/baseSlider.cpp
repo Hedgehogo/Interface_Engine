@@ -80,3 +80,11 @@ sf::Vector2f ui::BaseSlider::getMinSize() {
 sf::Vector2f ui::BaseSlider::getNormalSize() {
 	return background->getNormalSize();
 }
+
+void ui::BaseSlider::copy(ui::BaseSlider *baseSlider) {
+	Interactive_Simple::copy(baseSlider);
+	baseSlider->value = this->value;
+	baseSlider->position = this->position;
+	baseSlider->sliderSize = this->sliderSize;
+	baseSlider->moveZoneSize = this->moveZoneSize;
+}

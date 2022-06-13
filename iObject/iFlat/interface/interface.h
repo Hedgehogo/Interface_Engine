@@ -43,5 +43,7 @@ namespace ui {
 		void update(int wheel);
 		
 		void updateCluster();
+		
+		Interface* copy() override;
 	};
 }

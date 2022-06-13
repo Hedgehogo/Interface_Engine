@@ -10,7 +10,7 @@ namespace ui {
 		IFlat *secondObject;
 		IDrawn *background;
 		
-		bool verticalSide;        //true = up
+		bool verticalSide;      //true = up
 		bool horizontalSide;    //true = left
 		sf::Vector2f constSize;
 		sf::Vector2f secondSize;
@@ -21,8 +21,12 @@ namespace ui {
 		
 		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) override;
 		
+		void copy(LayerWithConstRatio* layerWithConstRatio);
+		
 	public:
 		LayerWithConstRatio(IFlat *constObject, IFlat *secondObject, IDrawn *background, float aspectRatio, Corner corner = Corner::UpLeft, sf::Vector2f minSize = {0, 0});
+		
+		Corner getCorner();
 		
 		void draw() override;
 		
@@ -35,6 +39,8 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		void update() override;
+		
+		LayerWithConstRatio* copy() override;
 	};
 	
 	typedef LayerWithConstRatio LayerWCRatio;
