@@ -8,4 +8,11 @@ namespace ui {
 	
 	ButtonWithIndex::ButtonWithIndex(ui::IDrawn *background, uint16_t interaction) :
 		Button(background, nullptr), interactionIndex(interaction) {}
+	
+	ButtonWithIndex *ButtonWithIndex::copy() {
+		ButtonWithIndex* buttonWithIndex{new ButtonWithIndex{dynamic_cast<IDrawn*>(background), interactionIndex}};
+		Button::copy(buttonWithIndex);
+		buttonWithIndex->interaction = this->interaction;
+		return buttonWithIndex;
+	}
 }

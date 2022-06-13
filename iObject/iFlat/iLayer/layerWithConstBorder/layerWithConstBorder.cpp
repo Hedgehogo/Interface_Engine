@@ -61,15 +61,27 @@ namespace ui {
 	sf::Vector2f LayerWithConstBorder::getNormalSize() {
 		sf::Vector2f constNormalSize = constObject->getNormalSize();
 		sf::Vector2f secondNormalSize = secondObject->getNormalSize();
-		if(side == Side::Down || side == Side::Down) {
-			return {(constNormalSize.x > secondNormalSize.x ? constNormalSize.x : secondNormalSize.x), secondNormalSize.y + borderDistance};
+		if(side == Side::Down || side == Side::Up) {
+			return {std::max(constNormalSize.x, secondNormalSize.x), secondNormalSize.y + borderDistance};
 		} else {
-			return {secondNormalSize.x + borderDistance, (constNormalSize.y > secondNormalSize.y ? constNormalSize.y : secondNormalSize.y)};
+			return {secondNormalSize.x + borderDistance, std::max(constNormalSize.y, secondNormalSize.y)};
 		}
 	}
 	
 	void LayerWithConstBorder::update() {
 		constObject->update();
 		secondObject->update();
+	}
+	
+	void LayerWithConstBorder::copy(LayerWithConstBorder *layerWithConstBorder) {
+		ILayer::copy(layerWithConstBorder);
+		layerWithConstBorder->positionConstObject = this->positionConstObject;
+		layerWithConstBorder->sizeConstObject = this->sizeConstObject;
+	}
+	
+	LayerWithConstBorder *LayerWithConstBorder::copy() {
+		LayerWithConstBorder* layerWithConstBorder{new LayerWithConstBorder{constObject, secondObject, side, borderDistance, minimumSize}};
+		LayerWithConstBorder::copy(layerWithConstBorder);
+		return layerWithConstBorder;
 	}
 }

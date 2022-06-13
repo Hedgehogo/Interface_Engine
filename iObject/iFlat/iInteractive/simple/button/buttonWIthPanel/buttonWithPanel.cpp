@@ -18,3 +18,12 @@ void ui::ButtonWithPanel::resize(sf::Vector2f size, sf::Vector2f position) {
 	Button::resize(size, position);
 	panel->resize(size, position);
 }
+
+ui::ButtonWithPanel *ui::ButtonWithPanel::copy() {
+	Panel* panel1{panel->copy()};
+	DisplayPanelInteraction* displayPanelInteraction{dynamic_cast<ui::DisplayPanelInteraction*>(interaction)->copy()};
+	displayPanelInteraction->setPanel(*panel1);
+	ButtonWithPanel* buttonWithPanel{new ButtonWithPanel{panel1, displayPanelInteraction, background->copy()}};
+	Button::copy(buttonWithPanel);
+	return buttonWithPanel;
+}

@@ -10,6 +10,8 @@ namespace ui {
 	protected:
 		SliderWheelEvent wheelEvent;
 		PressedInteraction slideInteraction;
+		
+		SliderInteraction(SliderWheelEvent wheelEvent, PressedInteraction slideInteraction);
 	
 	public:
 		SliderInteraction(BaseSlider &slider, sf::Mouse::Button button, bool wheelHorizontal = false, SliderWheelEvent::Sensitivity wheelRelativity = SliderWheelEvent::Sensitivity::relationSlider, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
@@ -18,6 +20,10 @@ namespace ui {
 		
 		void init(InteractionManager &interactionManager);
 		
+		void setSlider(BaseSlider &slider);
+		
 		bool update(sf::Vector2i mousePosition) override;
+		
+		SliderInteraction* copy() override;
 	};
 }

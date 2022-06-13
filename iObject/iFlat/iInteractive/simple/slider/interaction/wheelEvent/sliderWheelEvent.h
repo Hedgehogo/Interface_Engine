@@ -10,7 +10,7 @@ namespace ui {
 			relationSlider
 		};
 	protected:
-		BaseSlider& slider;
+		BaseSlider* slider;
 		sf::Vector2f sensitivity;
 		bool horizontal;
 		bool relativity;
@@ -25,5 +25,9 @@ namespace ui {
 		
 	public:
 		explicit SliderWheelEvent(BaseSlider &slider, bool horizontal = false, Sensitivity relativity = Sensitivity::relationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
+		
+		void setSlider(BaseSlider& slider);
+		
+		SliderWheelEvent* copy() override;
 	};
 }

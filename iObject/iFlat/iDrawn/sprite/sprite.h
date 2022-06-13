@@ -15,9 +15,9 @@ namespace ui {
 		sf::Vector2f position;
 	
 	public:
-		Sprite(sf::Sprite &sprite, sf::Vector2f minSize, sf::Texture &texture, sf::IntRect rect);
+		Sprite(sf::Sprite &sprite, sf::Texture &texture, sf::IntRect rect, sf::Vector2f minSize);
 		
-		Sprite(sf::Sprite &sprite, sf::Vector2f minSize, sf::Texture &texture);
+		Sprite(sf::Sprite &sprite, sf::Texture &texture, sf::Vector2f minSize);
 		
 		void draw() override;
 		
@@ -26,5 +26,7 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
+		
+		Sprite* copy() override;
 	};
 }

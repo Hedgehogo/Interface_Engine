@@ -10,6 +10,8 @@ namespace ui {
 	protected:
 		IInteraction* interaction;
 		
+		void copy(Interactive_Simple* interactive_Simple);
+		
 	public:
 		explicit Interactive_Simple(IInteraction* interaction);
 		

@@ -29,6 +29,8 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		void update() override;
+		
+		LayerWithBorderVertical* copy() override;
 	};
 	
 	typedef LayerWithBorderVertical LayerWBoundV;

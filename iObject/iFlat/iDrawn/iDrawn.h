@@ -11,6 +11,8 @@ namespace ui {
 		
 		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) override;
 		
+		void copy(IDrawn* iDrawn);
+		
 	public:
 		IDrawn();
 		
@@ -25,5 +27,7 @@ namespace ui {
 		sf::Vector2f getMinSize() override = 0;
 		
 		sf::Vector2f getNormalSize() override = 0;
+		
+		IDrawn* copy() override = 0;
 	};
 }

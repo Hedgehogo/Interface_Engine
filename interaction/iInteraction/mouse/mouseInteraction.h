@@ -12,6 +12,10 @@ namespace ui {
 		
 		~MouseInteraction() override;
 		
+		void setLeftButtonEvent(ButtonEvent* leftMouseButton);
+		
+		void setRightButtonEvent(ButtonEvent* rightMouseButton);
+		
 		bool update(sf::Vector2i mousePosition) override;
 	};
 }

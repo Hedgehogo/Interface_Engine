@@ -8,8 +8,8 @@
 namespace ui {
 	class LayerWithConstBezel : public ILayer {
 	protected:
-		IDrawn *bezel;
 		IFlat *object;
+		IDrawn *bezel;
 		float thickness;
 		
 		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) override;
@@ -30,6 +30,8 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		void update() override;
+		
+		LayerWithConstBezel* copy() override;
 	};
 	
 	typedef LayerWithConstBezel LayerWCBezel;

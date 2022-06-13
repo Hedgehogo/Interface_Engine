@@ -3,10 +3,10 @@
 
 
 namespace ui {
-	Sprite::Sprite(sf::Sprite& sprite, sf::Vector2f minSize, sf::Texture& texture, sf::IntRect rect) :
+	Sprite::Sprite(sf::Sprite &sprite, sf::Texture &texture, sf::IntRect rect, sf::Vector2f minSize) :
 		IDrawn(), sprite(sprite), minimumSize(minSize), texture(texture), rect(rect) {}
 	
-	Sprite::Sprite(sf::Sprite& sprite, sf::Vector2f minSize, sf::Texture& texture) :
+	Sprite::Sprite(sf::Sprite &sprite, sf::Texture &texture, sf::Vector2f minSize) :
 		IDrawn(), sprite(sprite), minimumSize(minSize), texture(texture), rect(sf::Vector2i(0, 0), static_cast<sf::Vector2i>(texture.getSize())) {}
 
 	void Sprite::draw() {
@@ -29,5 +29,12 @@ namespace ui {
 	
 	sf::Vector2f Sprite::getNormalSize(){
 		return {static_cast<float>(texture.getSize().x), static_cast<float>(texture.getSize().y)};
+	}
+	
+	Sprite *Sprite::copy() {
+		Sprite* sprite1 {new Sprite{sprite, texture, rect, minimumSize}};
+		IDrawn::copy(sprite1);
+		sprite1->scale = this->scale;
+		return sprite1;
 	}
 }

@@ -337,21 +337,13 @@ build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithConstCenter/
   OBJECT_DIR = CMakeFiles\Interface_Engine.dir
   OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iLayer\layerWithConstCenter
 
-build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithInteractiveOverlay/layerWithInteractiveOverlay.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/iLayer/layerWithInteractiveOverlay/layerWithInteractiveOverlay.cpp || cmake_object_order_depends_target_Interface_Engine
+build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.cpp || cmake_object_order_depends_target_Interface_Engine
   DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iLayer\layerWithInteractiveOverlay\layerWithInteractiveOverlay.cpp.obj.d
+  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iLayer\layerWithAlternativeObject\layerWithAlternativeObject.cpp.obj.d
   FLAGS = -g -std=gnu++17
   INCLUDES = -isystem C:/SFML-2.5.1-clion/include
   OBJECT_DIR = CMakeFiles\Interface_Engine.dir
-  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iLayer\layerWithInteractiveOverlay
-
-build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithAlternativeInteraction/layerWithAlternativeInteraction.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/iLayer/layerWithAlternativeInteraction/layerWithAlternativeInteraction.cpp || cmake_object_order_depends_target_Interface_Engine
-  DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iLayer\layerWithAlternativeInteraction\layerWithAlternativeInteraction.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -isystem C:/SFML-2.5.1-clion/include
-  OBJECT_DIR = CMakeFiles\Interface_Engine.dir
-  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iLayer\layerWithAlternativeInteraction
+  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iLayer\layerWithAlternativeObject
 
 build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/iInteractive.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/iInteractive/iInteractive.cpp || cmake_object_order_depends_target_Interface_Engine
   DEFINES = -DSFML_STATIC
@@ -392,6 +384,14 @@ build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/button/b
   INCLUDES = -isystem C:/SFML-2.5.1-clion/include
   OBJECT_DIR = CMakeFiles\Interface_Engine.dir
   OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\button\buttonWIthPanel
+
+build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp || cmake_object_order_depends_target_Interface_Engine
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\button\buttonWIthPanel\interaction\pointingDisplayPanelInteraction\pointingDisplayPanelInteraction.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -isystem C:/SFML-2.5.1-clion/include
+  OBJECT_DIR = CMakeFiles\Interface_Engine.dir
+  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\button\buttonWIthPanel\interaction\pointingDisplayPanelInteraction
 
 build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/baseSlider.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/iInteractive/simple/slider/baseSlider.cpp || cmake_object_order_depends_target_Interface_Engine
   DEFINES = -DSFML_STATIC
@@ -441,38 +441,6 @@ build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/i
   OBJECT_DIR = CMakeFiles\Interface_Engine.dir
   OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\slider\interaction\interaction
 
-build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/text/text.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/iInteractive/simple/text/text.cpp || cmake_object_order_depends_target_Interface_Engine
-  DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\text\text.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -isystem C:/SFML-2.5.1-clion/include
-  OBJECT_DIR = CMakeFiles\Interface_Engine.dir
-  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\text
-
-build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/text/textBlock/iTextBlock.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/iInteractive/simple/text/textBlock/iTextBlock.cpp || cmake_object_order_depends_target_Interface_Engine
-  DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\text\textBlock\iTextBlock.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -isystem C:/SFML-2.5.1-clion/include
-  OBJECT_DIR = CMakeFiles\Interface_Engine.dir
-  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\text\textBlock
-
-build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/text/textBlock/link/linkTextBlock.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/iInteractive/simple/text/textBlock/link/linkTextBlock.cpp || cmake_object_order_depends_target_Interface_Engine
-  DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\text\textBlock\link\linkTextBlock.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -isystem C:/SFML-2.5.1-clion/include
-  OBJECT_DIR = CMakeFiles\Interface_Engine.dir
-  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\text\textBlock\link
-
-build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/text/textBlock/base/baseTextBlock.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/iInteractive/simple/text/textBlock/base/baseTextBlock.cpp || cmake_object_order_depends_target_Interface_Engine
-  DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\text\textBlock\base\baseTextBlock.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -isystem C:/SFML-2.5.1-clion/include
-  OBJECT_DIR = CMakeFiles\Interface_Engine.dir
-  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\text\textBlock\base
-
 build CMakeFiles/Interface_Engine.dir/iObject/panel/panel.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/panel/panel.cpp || cmake_object_order_depends_target_Interface_Engine
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\panel\panel.cpp.obj.d
@@ -480,30 +448,6 @@ build CMakeFiles/Interface_Engine.dir/iObject/panel/panel.cpp.obj: CXX_COMPILER_
   INCLUDES = -isystem C:/SFML-2.5.1-clion/include
   OBJECT_DIR = CMakeFiles\Interface_Engine.dir
   OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\panel
-
-build CMakeFiles/Interface_Engine.dir/iObject/panel/panelStack/panelStack.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/panel/panelStack/panelStack.cpp || cmake_object_order_depends_target_Interface_Engine
-  DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\panel\panelStack\panelStack.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -isystem C:/SFML-2.5.1-clion/include
-  OBJECT_DIR = CMakeFiles\Interface_Engine.dir
-  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\panel\panelStack
-
-build CMakeFiles/Interface_Engine.dir/iObject/iFlat/interface/interface.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/interface/interface.cpp || cmake_object_order_depends_target_Interface_Engine
-  DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\iFlat\interface\interface.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -isystem C:/SFML-2.5.1-clion/include
-  OBJECT_DIR = CMakeFiles\Interface_Engine.dir
-  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\interface
-
-build CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp || cmake_object_order_depends_target_Interface_Engine
-  DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\button\buttonWIthPanel\interaction\pointingDisplayPanelInteraction\pointingDisplayPanelInteraction.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -isystem C:/SFML-2.5.1-clion/include
-  OBJECT_DIR = CMakeFiles\Interface_Engine.dir
-  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\iInteractive\simple\button\buttonWIthPanel\interaction\pointingDisplayPanelInteraction
 
 build CMakeFiles/Interface_Engine.dir/iObject/panel/interaction/panelInteraction.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/panel/interaction/panelInteraction.cpp || cmake_object_order_depends_target_Interface_Engine
   DEFINES = -DSFML_STATIC
@@ -521,6 +465,22 @@ build CMakeFiles/Interface_Engine.dir/iObject/panel/interaction/pointingHidePane
   OBJECT_DIR = CMakeFiles\Interface_Engine.dir
   OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\panel\interaction\pointingHidePanelInteraction
 
+build CMakeFiles/Interface_Engine.dir/iObject/panel/panelStack/panelStack.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/panel/panelStack/panelStack.cpp || cmake_object_order_depends_target_Interface_Engine
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\panel\panelStack\panelStack.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -isystem C:/SFML-2.5.1-clion/include
+  OBJECT_DIR = CMakeFiles\Interface_Engine.dir
+  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\panel\panelStack
+
+build CMakeFiles/Interface_Engine.dir/iObject/iFlat/interface/interface.cpp.obj: CXX_COMPILER__Interface_Engine_Debug C$:/Users/Professional/CLionProjects/Interface_Engine/iObject/iFlat/interface/interface.cpp || cmake_object_order_depends_target_Interface_Engine
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\Interface_Engine.dir\iObject\iFlat\interface\interface.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -isystem C:/SFML-2.5.1-clion/include
+  OBJECT_DIR = CMakeFiles\Interface_Engine.dir
+  OBJECT_FILE_DIR = CMakeFiles\Interface_Engine.dir\iObject\iFlat\interface
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target Interface_Engine
@@ -529,7 +489,7 @@ build CMakeFiles/Interface_Engine.dir/iObject/panel/interaction/pointingHidePane
 #############################################
 # Link the static library libInterface_Engine.a
 
-build libInterface_Engine.a: CXX_STATIC_LIBRARY_LINKER__Interface_Engine_Debug CMakeFiles/Interface_Engine.dir/interaction/event/button/buttonEvent.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/button/empty/emptyEvent.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/button/simple/buttonEventSimple.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/button/lambdaSimple/buttonEvent_LambdaSimple.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/button/addInteraction/addInteractionEvent.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/button/addInteraction/blockInteraction/addBlockInteractionEvent.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/wheel/wheelEvent.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/wheel/simple/wheelEventSimple.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/empty/emptyInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/lambda/lambdaInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/double/doubleInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/mouse/mouseInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/mouse/lambda/mouseLambdaInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/block/iBlockInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/oneButton/oneButtonInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/block/pressed/pressedInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/interactionManager/interactionManager.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/interactionStack/interactionStack.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iObject.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/range/range.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/iDrawn.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/iLayer.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/fullColor/fullColor.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/rectangle/rectangle.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/capsule/capsule.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/caption/caption.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/sprite/sprite.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/empty/empty.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/bar/bar.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithBorder/layerWithBorder.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithBorder/layerWithBorderHorizontal.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithBorder/layerWithBorderVertical.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithConstRatio/layerWithConstRatio.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithConstBezel/layerWithConstBezel.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithConstBorder/layerWithConstBorder.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithConstCenter/layerWithConstCenter.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithInteractiveOverlay/layerWithInteractiveOverlay.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithAlternativeInteraction/layerWithAlternativeInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/iInteractive.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/interactiveSimple.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/button/button.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/button/buttonWithIndex/buttonWithIndex.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/buttonWithPanel.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/baseSlider.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/slider/slider.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/const/constSlider.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/interaction/slideEvent/sliderEvent.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/text/text.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/text/textBlock/iTextBlock.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/text/textBlock/link/linkTextBlock.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/text/textBlock/base/baseTextBlock.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/panel/panel.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/panel/panelStack/panelStack.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/interface/interface.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/panel/interaction/panelInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp.obj
+build libInterface_Engine.a: CXX_STATIC_LIBRARY_LINKER__Interface_Engine_Debug CMakeFiles/Interface_Engine.dir/interaction/event/button/buttonEvent.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/button/empty/emptyEvent.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/button/simple/buttonEventSimple.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/button/lambdaSimple/buttonEvent_LambdaSimple.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/button/addInteraction/addInteractionEvent.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/button/addInteraction/blockInteraction/addBlockInteractionEvent.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/wheel/wheelEvent.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/event/wheel/simple/wheelEventSimple.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/empty/emptyInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/lambda/lambdaInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/double/doubleInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/mouse/mouseInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/mouse/lambda/mouseLambdaInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/block/iBlockInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/oneButton/oneButtonInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/iInteraction/block/pressed/pressedInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/interactionManager/interactionManager.cpp.obj CMakeFiles/Interface_Engine.dir/interaction/interactionStack/interactionStack.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iObject.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/range/range.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/iDrawn.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/iLayer.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/fullColor/fullColor.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/rectangle/rectangle.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/capsule/capsule.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/caption/caption.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/sprite/sprite.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/empty/empty.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iDrawn/bar/bar.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithBorder/layerWithBorder.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithBorder/layerWithBorderHorizontal.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithBorder/layerWithBorderVertical.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithConstRatio/layerWithConstRatio.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithConstBezel/layerWithConstBezel.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithConstBorder/layerWithConstBorder.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithConstCenter/layerWithConstCenter.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/iInteractive.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/interactiveSimple.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/button/button.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/button/buttonWithIndex/buttonWithIndex.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/buttonWithPanel.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/baseSlider.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/slider/slider.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/const/constSlider.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/interaction/slideEvent/sliderEvent.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/panel/panel.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/panel/interaction/panelInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/panel/panelStack/panelStack.cpp.obj CMakeFiles/Interface_Engine.dir/iObject/iFlat/interface/interface.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles\Interface_Engine.dir
   POST_BUILD = cd .

@@ -68,4 +68,10 @@ namespace ui {
 		sf::Wheel::value = wheel;
 		update();
 	}
+	
+	Interface *Interface::copy() {
+		Interface* interface {new Interface{object->copy(), interactionStack, window}};
+		interface->init();
+		return interface;
+	}
 }
