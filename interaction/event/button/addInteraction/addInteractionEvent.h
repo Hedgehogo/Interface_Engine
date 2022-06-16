@@ -14,7 +14,7 @@ namespace ui {
 		
 		void whilePressed(sf::Vector2i windowPosition) override;
 		
-		void notPressed  (sf::Vector2i windowPosition) override;
+		void whileNotPressed  (sf::Vector2i windowPosition) override;
 		
 		void copy(AddInteractionEvent* addInteractionEvent);
 		

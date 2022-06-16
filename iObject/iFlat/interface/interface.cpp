@@ -24,7 +24,7 @@ namespace ui {
 		delete object;
 	}
 	
-	bool Interface::inWindow(sf::Vector2f position) {
+	bool Interface::isInWindow(sf::Vector2f position) {
 		return position.x > 0 && position.x < static_cast<float>(window.getSize().x) && position.y > 0 && position.y < static_cast<float>(window.getSize().y);
 	}
 	
@@ -55,7 +55,7 @@ namespace ui {
 	
 	void Interface::update() {
 		sf::Vector2f mousePosition = static_cast<sf::Vector2f>(interactionManager.getPosition());
-		if(inWindow(mousePosition) && !interactionManager.blocked()) {
+		if(isInWindow(mousePosition) && !interactionManager.isBlocked()) {
 			panelStack.updateInteractions(mousePosition);
 			object->updateInteractions(mousePosition);
 		}

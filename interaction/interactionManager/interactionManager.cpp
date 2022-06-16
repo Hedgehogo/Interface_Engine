@@ -26,7 +26,7 @@ void ui::InteractionManager::clear() {
 	interactions.clear();
 }
 
-bool ui::InteractionManager::blocked() {
+bool ui::InteractionManager::isBlocked() {
 	return block;
 }
 

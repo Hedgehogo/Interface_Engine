@@ -72,7 +72,7 @@ set(SFML_STATIC_LIBRARIES TRUE)
 
 set(CMAKE_EXE_LINKER_FLAGS "-static")
 
-set(SFML_DIR "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
+set(SFML_DIR "E:\\SFML-2.5.1\\lib\\cmake\\SFML")
 
 set(CMAKE_MODULE_PATH "${cmaKE_CURRENT_LIST_DIR}/cmake_modules")
 
