@@ -1,19 +1,20 @@
 #pragma once
-#include "../panel.h"
 #include "../../../interaction/iInteraction/iInteraction.h"
 
 namespace ui {
+	class Panel;
+	class PanelManager;
 	class PanelInteraction : public IInteraction {
 	protected:
 		Panel* panel;
-		PanelStack* panelStack;
+		PanelManager* panelStack;
 		
 		void copy(PanelInteraction* panelInteraction);
 	
 	public:
-		PanelInteraction() = default;
+		PanelInteraction();
 		
-		void init(Panel& panel, PanelStack& panelStack);
+		void init(Panel& panel, PanelManager& panelStack);
 		
 		void setPanel(Panel& panel);
 		

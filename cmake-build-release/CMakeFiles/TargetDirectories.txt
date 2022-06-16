@@ -1,4 +1,0 @@
-C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-release/CMakeFiles/Interface_Engine.dir
-C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-release/CMakeFiles/Interface_Engine_ex.dir
-C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-release/CMakeFiles/edit_cache.dir
-C:/Users/Professional/CLionProjects/Interface_Engine/cmake-build-release/CMakeFiles/rebuild_cache.dir

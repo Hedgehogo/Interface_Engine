@@ -1,6 +1,8 @@
 #include "panelInteraction.h"
 
-void ui::PanelInteraction::init(ui::Panel &panel, ui::PanelStack &panelStack) {
+ui::PanelInteraction::PanelInteraction() : panel(nullptr), panelStack(nullptr) {}
+
+void ui::PanelInteraction::init(ui::Panel &panel, ui::PanelManager &panelStack) {
 	this->panel = &panel;
 	this->panelStack = &panelStack;
 }

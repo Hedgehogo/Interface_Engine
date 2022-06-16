@@ -1,7 +1,7 @@
 #include "layerWithConstCenter.h"
 
 namespace ui {
-	void LayerWithConstCenter::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) {
+	void LayerWithConstCenter::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) {
 		initObject(object, window, interactionStack, interactionManager, parent, overlayStack);
 		initObject(background, window, interactionStack, interactionManager, parent, overlayStack);
 	}

@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 namespace ui {
-	void IDrawn::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) {
+	void IDrawn::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) {
 		this->window = &window;
 	}
 	

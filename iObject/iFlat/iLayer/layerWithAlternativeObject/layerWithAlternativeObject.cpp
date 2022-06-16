@@ -4,7 +4,7 @@
 ui::LayerWithAlternativeObject::LayerWithAlternativeObject(ui::IFlat *topObject, ui::IFlat *bottomObject, sf::Vector2f minimumSize) :
 	ILayer({0, 0}), topObject(topObject), bottomObject(bottomObject) {}
 
-void ui::LayerWithAlternativeObject::init(sf::RenderWindow &window, InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::Panel *parent, ui::PanelStack &panelStack) {
+void ui::LayerWithAlternativeObject::init(sf::RenderWindow &window, InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::Panel *parent, ui::PanelManager &panelStack) {
 	initObject(topObject, window, interactionStack, interactionManager, parent, panelStack);
 	initObject(bottomObject, window, interactionStack, interactionManager, parent, panelStack);
 }

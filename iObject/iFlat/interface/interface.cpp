@@ -2,7 +2,7 @@
 #include <utility>
 
 namespace ui {
-	void Interface::init(sf::RenderWindow&, InteractionStack&, InteractionManager&, Panel *parent, PanelStack&) {
+	void Interface::init(sf::RenderWindow&, InteractionStack&, InteractionManager&, Panel *parent, PanelManager&) {
 		if(!initialized) {
 			initObject(object, this->window, this->interactionStack, this->interactionManager, parent, this->panelStack);
 			initialized = true;
@@ -59,9 +59,9 @@ namespace ui {
 			panelStack.updateInteractions(mousePosition);
 			object->updateInteractions(mousePosition);
 		}
+		updateCluster();
 		panelStack.update();
 		object->update();
-		updateCluster();
 	}
 	
 	void Interface::update(int wheel) {

@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "../iFlat.h"
-#include "../../panel/panelStack/panelStack.h"
+#include "../../panel/panelManager/panelManager.h"
 #include "../../../interaction/interactionManager/interactionManager.h"
 #include "../../../interaction/interactionStack/interactionStack.h"
 #include "../../../interaction/event/wheel/wheelEvent.h"
@@ -13,11 +13,11 @@ namespace ui {
 		sf::RenderWindow &window;
 		InteractionStack interactionStack;
 		InteractionManager interactionManager;
-		PanelStack panelStack;
+		PanelManager panelStack;
 		IFlat *object;
 		bool initialized;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) override;
+		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) override;
 		
 		bool inWindow(sf::Vector2f position);
 		

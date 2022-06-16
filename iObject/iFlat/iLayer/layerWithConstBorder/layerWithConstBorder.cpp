@@ -1,6 +1,6 @@
 #include "layerWithConstBorder.h"
 namespace ui {
-	void LayerWithConstBorder::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) {
+	void LayerWithConstBorder::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) {
 		initObject(secondObject, window, interactionStack, interactionManager, parent, overlayStack);
 		initObject(constObject, window, interactionStack, interactionManager, parent, overlayStack);
 	}

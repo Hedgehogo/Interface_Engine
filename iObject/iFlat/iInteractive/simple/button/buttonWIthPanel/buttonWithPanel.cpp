@@ -3,7 +3,7 @@
 ui::ButtonWithPanel::ButtonWithPanel(ui::Panel *panel, ui::DisplayPanelInteraction *interaction, ui::IFlat *background) :
 	Button(background, interaction), panel(panel) {}
 
-void ui::ButtonWithPanel::init(sf::RenderWindow &window, ui::Panel *parent, ui::PanelStack &panelStack) {
+void ui::ButtonWithPanel::init(sf::RenderWindow &window, ui::Panel *parent, ui::PanelManager &panelStack) {
 	Button::init(window, parent, panelStack);
 	initObject(panel, window, *interactionStack, *interactionManager, parent, panelStack);
 	dynamic_cast<ui::DisplayPanelInteraction*>(interaction)->init(*panel, panelStack);

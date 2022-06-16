@@ -1,7 +1,7 @@
 #include "layerWithConstRatio.h"
 
 namespace ui {
-	void LayerWithConstRatio::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) {
+	void LayerWithConstRatio::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) {
 		initObject(constObject, window, interactionStack, interactionManager, parent, overlayStack);
 		initObject(secondObject, window, interactionStack, interactionManager, parent, overlayStack);
 		initObject(background, window, interactionStack, interactionManager, parent, overlayStack);

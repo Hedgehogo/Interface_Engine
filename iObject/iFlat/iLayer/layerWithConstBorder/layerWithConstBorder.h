@@ -14,7 +14,7 @@ namespace ui {
 		float borderDistance;
 		Side side;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) override;
+		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) override;
 		
 		void copy(LayerWithConstBorder* layerWithConstBorder);
 	
