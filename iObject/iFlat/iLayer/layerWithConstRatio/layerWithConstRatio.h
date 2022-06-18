@@ -25,7 +25,9 @@ namespace ui {
 		
 	public:
 		LayerWithConstRatio(IFlat *constObject, IFlat *secondObject, IDrawn *background, float aspectRatio, Corner corner = Corner::UpLeft, sf::Vector2f minSize = {0, 0});
-		
+
+        ~LayerWithConstRatio() override;
+
 		Corner getCorner();
 		
 		void draw() override;

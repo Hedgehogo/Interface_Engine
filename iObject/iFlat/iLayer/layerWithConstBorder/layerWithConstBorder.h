@@ -20,7 +20,9 @@ namespace ui {
 	
 	public:
 		LayerWithConstBorder(IFlat *constObject, IFlat *secondObject, Side side, float borderDistance, sf::Vector2f minSize = {0, 0});
-		
+
+        ~LayerWithConstBorder() override;
+
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
