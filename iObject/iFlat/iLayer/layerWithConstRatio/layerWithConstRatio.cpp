@@ -18,19 +18,18 @@ namespace ui {
     }
 
     Corner LayerWithConstRatio::getCorner() {
-		if(verticalSide && horizontalSide) {
-			return Corner::UpLeft;
-		}
-		if(verticalSide && !horizontalSide) {
-			return Corner::UpRight;
-		}
-		if(!verticalSide && horizontalSide) {
-			return Corner::DownLeft;
-		}
-		if(!verticalSide && !horizontalSide) {
-			return Corner::DownRight;
-		}
-		return Corner::UpLeft;
+            if (verticalSide){
+                if (horizontalSide){
+                    return Corner::UpLeft;
+                }
+                return Corner::UpRight;
+            }
+            else{
+                if (horizontalSide){
+                    return Corner::DownLeft;
+                }
+                return Corner::DownRight;
+            }
 	}
 	
 	void LayerWithConstRatio::draw(){
