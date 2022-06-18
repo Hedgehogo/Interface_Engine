@@ -7,7 +7,12 @@ namespace ui {
 	
 	LayerWithConstBorder::LayerWithConstBorder(IFlat *constObject, IFlat *secondObject, Side side, float borderDistance, sf::Vector2f minSize) :
 		ILayer(minSize), constObject(constObject), side(side), secondObject(secondObject), borderDistance(borderDistance) {}
-	
+
+    LayerWithConstBorder::~LayerWithConstBorder() {
+        delete constObject;
+        delete secondObject;
+    }
+
 	void LayerWithConstBorder::draw() {
 		constObject->draw();
 		secondObject->draw();

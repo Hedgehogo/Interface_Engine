@@ -11,14 +11,8 @@ ui::BaseSlider::BaseSlider(ui::IDrawn *slider, ui::IDrawn *background, SliderInt
 	Interactive_Simple(interaction), slider(slider), background(background), value(), position(), sliderSize(), moveZoneSize() {}
 
 void ui::BaseSlider::cutBackValue() {
-	if(value.x > 1)
-		value.x = 1;
-	if(value.x < 0)
-		value.x = 0;
-	if(value.y > 1)
-		value.y = 1;
-	if(value.y < 0)
-		value.y = 0;
+    value.x = std::max(0.f,std::min(1.f,value.x));
+    value.y = std::max(0.f,std::min(1.f,value.y));
 }
 
 sf::Vector2f ui::BaseSlider::getAreaSize() {

@@ -10,21 +10,26 @@ namespace ui {
 	LayerWithConstRatio::LayerWithConstRatio(IFlat *constObject, IFlat *secondObject, IDrawn* background, float aspectRatio, Corner corner, sf::Vector2f minSize) :
 		constObject(constObject), secondObject(secondObject), background(background), verticalSide(corner == Corner::UpLeft || corner == Corner::UpRight), horizontalSide(corner == Corner::UpLeft || corner == Corner::DownLeft), aspectRatio(aspectRatio),
 		ILayer(minSize), constSize(), secondSize(), constPosition(), secondPosition(), renderSecond(true) {}
-	
-	Corner LayerWithConstRatio::getCorner() {
-		if(verticalSide && horizontalSide) {
-			return Corner::UpLeft;
-		}
-		if(verticalSide && !horizontalSide) {
-			return Corner::UpRight;
-		}
-		if(!verticalSide && horizontalSide) {
-			return Corner::DownLeft;
-		}
-		if(!verticalSide && !horizontalSide) {
-			return Corner::DownRight;
-		}
-		return Corner::UpLeft;
+
+    LayerWithConstRatio::~LayerWithConstRatio(){
+        delete constObject;
+        delete secondObject;
+        delete background;
+    }
+
+    Corner LayerWithConstRatio::getCorner() {
+            if (verticalSide){
+                if (horizontalSide){
+                    return Corner::UpLeft;
+                }
+                return Corner::UpRight;
+            }
+            else{
+                if (horizontalSide){
+                    return Corner::DownLeft;
+                }
+                return Corner::DownRight;
+            }
 	}
 	
 	void LayerWithConstRatio::draw(){

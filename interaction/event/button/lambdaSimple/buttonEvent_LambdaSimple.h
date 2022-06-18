@@ -10,10 +10,10 @@ namespace ui {
 		
 		void (*whilePressed)(sf::Vector2i windowPosition);
 		
-		void (*notPressed  )(sf::Vector2i windowPosition);
+		void (*whileNotPressed  )(sf::Vector2i windowPosition);
 	
 	public:
-		explicit ButtonEvent_LambdaSimple(void (*startPressed)(sf::Vector2i windowPosition), void (*whilePressed )(sf::Vector2i windowPosition) = [](sf::Vector2i) {}, void (*stopPressed)(sf::Vector2i windowPosition) = [](sf::Vector2i) {}, void (*notPressed  )(sf::Vector2i windowPosition) = [](sf::Vector2i) {});
+		explicit ButtonEvent_LambdaSimple(void (*startPressed)(sf::Vector2i windowPosition), void (*whilePressed )(sf::Vector2i windowPosition) = [](sf::Vector2i) {}, void (*stopPressed)(sf::Vector2i windowPosition) = [](sf::Vector2i) {}, void (*whileNotPressed  )(sf::Vector2i windowPosition) = [](sf::Vector2i) {});
 		
 		void update(sf::Vector2i mousePosition, bool press) override;
 		

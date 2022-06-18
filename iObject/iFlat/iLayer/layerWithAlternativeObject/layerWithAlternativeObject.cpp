@@ -32,13 +32,14 @@ void ui::LayerWithAlternativeObject::update() {
 }
 
 bool ui::LayerWithAlternativeObject::updateInteractions(sf::Vector2f mousePosition) {
-	if(!topObject->updateInteractions(mousePosition)) {
-		if(!bottomObject->updateInteractions(mousePosition)) {
-			return false;
-		}
-		return true;
-	}
-	return true;
+    return topObject->updateInteractions(mousePosition) || bottomObject->updateInteractions(mousePosition);
+    
+    /*  //same as on top
+    if(!topObject->updateInteractions(mousePosition)) {
+        return bottomObject->updateInteractions(mousePosition);
+    }
+    return true;
+    */
 }
 
 sf::Vector2f ui::LayerWithAlternativeObject::getMinSize() {
