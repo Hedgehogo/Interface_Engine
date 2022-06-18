@@ -14,3 +14,9 @@ void ui::PointingDisplayPanelInteraction::finish(sf::Vector2i) {
 	panel->setParentProcessed(false);
 }
 
+ui::PointingDisplayPanelInteraction *ui::PointingDisplayPanelInteraction::copy() {
+	PointingDisplayPanelInteraction* pointingDisplayPanelInteraction {new PointingDisplayPanelInteraction{}};
+	PanelInteraction::copy(pointingDisplayPanelInteraction);
+	return pointingDisplayPanelInteraction;
+}
+

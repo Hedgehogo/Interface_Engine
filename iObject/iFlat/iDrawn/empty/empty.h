@@ -13,5 +13,7 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
+		
+		Empty* copy() override;
 	};
 }

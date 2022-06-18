@@ -1,8 +1,8 @@
 #include "buttonEvent_LambdaSimple.h"
 
 namespace ui {
-	ButtonEvent_LambdaSimple::ButtonEvent_LambdaSimple(void (*startPressed)(sf::Vector2i windowPosition), void (*whilePressed )(sf::Vector2i windowPosition), void (*stopPressed)(sf::Vector2i windowPosition), void (*notPressed  )(sf::Vector2i windowPosition)) :
-		ButtonEvent(), startPressed(startPressed), whilePressed(whilePressed), stopPressed(stopPressed), notPressed(notPressed) {}
+	ButtonEvent_LambdaSimple::ButtonEvent_LambdaSimple(void (*startPressed)(sf::Vector2i windowPosition), void (*whilePressed )(sf::Vector2i windowPosition), void (*stopPressed)(sf::Vector2i windowPosition), void (*whileNotPressed  )(sf::Vector2i windowPosition)) :
+		ButtonEvent(), startPressed(startPressed), whilePressed(whilePressed), stopPressed(stopPressed), whileNotPressed(whileNotPressed) {}
 	
 	void ButtonEvent_LambdaSimple::update(sf::Vector2i mousePosition, bool press) {
 		if(this->pressed != press) {
@@ -16,8 +16,14 @@ namespace ui {
 		if(this->pressed) {
 			whilePressed(mousePosition);
 		} else {
-			notPressed(mousePosition);
+			whileNotPressed(mousePosition);
 		}
+	}
+	
+	ButtonEvent_LambdaSimple *ButtonEvent_LambdaSimple::copy() {
+		ButtonEvent_LambdaSimple* buttonEventLambdaSimple{new ButtonEvent_LambdaSimple{startPressed, whilePressed, stopPressed, whileNotPressed}};
+		ButtonEvent::copy(buttonEventLambdaSimple);
+		return buttonEventLambdaSimple;
 	}
 }
 

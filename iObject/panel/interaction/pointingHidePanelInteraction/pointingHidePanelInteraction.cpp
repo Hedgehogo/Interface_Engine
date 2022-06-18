@@ -13,3 +13,10 @@ bool ui::PointingHidePanelInteraction::update(sf::Vector2i mousePosition) {
 }
 
 void ui::PointingHidePanelInteraction::finish(sf::Vector2i) {}
+
+ui::PointingHidePanelInteraction *ui::PointingHidePanelInteraction::copy() {
+	PointingHidePanelInteraction* pointingHidePanelInteraction {new PointingHidePanelInteraction{}};
+	pointingHidePanelInteraction->panel = this->panel;
+	pointingHidePanelInteraction->panelStack = this->panelStack;
+	return pointingHidePanelInteraction;
+}

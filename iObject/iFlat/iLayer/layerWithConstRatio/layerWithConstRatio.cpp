@@ -11,6 +11,22 @@ namespace ui {
 		constObject(constObject), secondObject(secondObject), background(background), verticalSide(corner == Corner::UpLeft || corner == Corner::UpRight), horizontalSide(corner == Corner::UpLeft || corner == Corner::DownLeft), aspectRatio(aspectRatio),
 		ILayer(minSize), constSize(), secondSize(), constPosition(), secondPosition(), renderSecond(true) {}
 	
+	Corner LayerWithConstRatio::getCorner() {
+		if(verticalSide && horizontalSide) {
+			return Corner::UpLeft;
+		}
+		if(verticalSide && !horizontalSide) {
+			return Corner::UpRight;
+		}
+		if(!verticalSide && horizontalSide) {
+			return Corner::DownLeft;
+		}
+		if(!verticalSide && !horizontalSide) {
+			return Corner::DownRight;
+		}
+		return Corner::UpLeft;
+	}
+	
 	void LayerWithConstRatio::draw(){
 		background->draw();
 		constObject->draw();
@@ -67,17 +83,35 @@ namespace ui {
 	}
 	
 	sf::Vector2f LayerWithConstRatio::getMinSize() {
-		return constObject->getMinSize() + secondObject->getMinSize();
+		sf::Vector2f constMinSize {constObject->getMinSize()};
+		constMinSize = sf::Vector2f{std::max(constMinSize.x, constMinSize.y * aspectRatio), std::max(constMinSize.y, constMinSize.x / aspectRatio)};
+		return {std::max(constMinSize.x, minimumSize.x), std::max(constMinSize.y, minimumSize.y)};
 	}
 	
 	sf::Vector2f LayerWithConstRatio::getNormalSize() {
-		sf::Vector2f secondNormalSize = secondObject->getNormalSize();
-		sf::Vector2f constNormalSize = constObject->getNormalSize();
-		return {(secondNormalSize.x > constNormalSize.x ? secondNormalSize.x : constNormalSize.x), secondNormalSize.y + constNormalSize.y};
+		sf::Vector2f constNormalSize {constObject->getNormalSize()};
+		sf::Vector2f secondNormalSize {secondObject->getNormalSize()};
+		constNormalSize = sf::Vector2f{std::max(constNormalSize.x, constNormalSize.y * aspectRatio), std::max(constNormalSize.y, constNormalSize.x / aspectRatio)};
+		return {constNormalSize.x + secondNormalSize.x, std::max(constNormalSize.y, secondNormalSize.y)};
 	}
 	
 	void LayerWithConstRatio::update() {
 		constObject->update();
 		secondObject->update();
+	}
+	
+	void LayerWithConstRatio::copy(LayerWithConstRatio *layerWithConstRatio) {
+		ILayer::copy(layerWithConstRatio);
+		layerWithConstRatio->constSize = this->constSize;
+		layerWithConstRatio->secondSize = this->secondSize;
+		layerWithConstRatio->constPosition = this->constPosition;
+		layerWithConstRatio->secondPosition = this->secondPosition;
+		layerWithConstRatio->renderSecond = this->renderSecond;
+	}
+	
+	LayerWithConstRatio *LayerWithConstRatio::copy() {
+		LayerWithConstRatio* layerWithConstRatio{new LayerWithConstRatio{constObject->copy(), secondObject->copy(), background->copy(), aspectRatio, getCorner(), minimumSize}};
+		LayerWithConstRatio::copy(layerWithConstRatio);
+		return layerWithConstRatio;
 	}
 }

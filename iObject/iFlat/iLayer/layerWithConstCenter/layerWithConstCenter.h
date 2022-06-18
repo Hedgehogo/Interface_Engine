@@ -12,6 +12,8 @@ namespace ui {
 		float aspectRatio;
 		
 		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) override;
+		
+		void copy(LayerWithConstCenter* layerWithConstCenter);
 	
 	public:
 		LayerWithConstCenter(IFlat *object, IDrawn *background, float aspectRatio, sf::Vector2f minSize = sf::Vector2f());
@@ -31,6 +33,8 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		void update() override;
+		
+		LayerWithConstCenter* copy() override;
 	};
 	
 	typedef LayerWithConstCenter LayerWCCenter;

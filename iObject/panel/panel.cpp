@@ -11,7 +11,7 @@ ui::Panel::Panel(IFlat *object, Size verticalSize, Size horizontalSize, sf::Vect
 		this->size.y = objectNormalSize.y;
 }
 
-ui::Panel::Panel(ui::IFlat *object, sf::Vector2f size, bool displayed) :
+ui::Panel::Panel(IFlat *object, sf::Vector2f size, bool displayed) :
 	object(object), verticalSize(Size::constant), horizontalSize(Size::constant), size(size), interaction(new PointingHidePanelInteraction{}), position(0, 0), displayed(false), active(false) {
 	
 }
@@ -86,4 +86,14 @@ sf::Vector2f ui::Panel::getNormalSize() {
 
 sf::Vector2f ui::Panel::getMinSize() {
 	return object->getMinSize();
+}
+
+ui::Panel *ui::Panel::copy() {
+	Panel* panel {new Panel(object->copy(), verticalSize, horizontalSize, size, displayed)};
+	panel->position = this->position;
+	panel->interactionManager = this->interactionManager;
+	panel->interaction = this->interaction;
+	panel->active = this->active;
+	panel->parentProcessed = this->parentProcessed;
+	return panel;
 }

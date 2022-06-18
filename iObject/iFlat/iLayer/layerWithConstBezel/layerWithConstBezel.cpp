@@ -43,14 +43,22 @@ namespace ui {
 	}
 	
 	sf::Vector2f LayerWithConstBezel::getMinSize() {
-		return minimumSize;
+		sf::Vector2f objectMinSize {object->getMinSize()};
+		sf::Vector2f bezelMinSize {bezel->getMinSize()};
+		return {std::max({objectMinSize.x + thickness * 2, bezelMinSize.x, minimumSize.x}), std::max({objectMinSize.y + thickness * 2, bezelMinSize.y, minimumSize.y})};
 	}
 	
 	sf::Vector2f LayerWithConstBezel::getNormalSize() {
-		return object->getNormalSize() + sf::Vector2f(thickness * 2, thickness * 2);
+		sf::Vector2f objectNormalSize {object->getNormalSize()};
+		sf::Vector2f bezelMinSize {bezel->getMinSize()};
+		return {std::max(objectNormalSize.x + thickness * 2, bezelMinSize.x), std::max(objectNormalSize.y + thickness * 2, bezelMinSize.y)};
 	}
 	
 	void LayerWithConstBezel::update() {
 		object->update();
+	}
+	
+	LayerWithConstBezel *LayerWithConstBezel::copy() {
+		return new LayerWithConstBezel{object->copy(), bezel->copy(), thickness};
 	}
 }

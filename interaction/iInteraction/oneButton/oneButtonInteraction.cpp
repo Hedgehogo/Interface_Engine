@@ -6,6 +6,19 @@ ui::OneButtonInteraction::~OneButtonInteraction() {
 	delete event;
 }
 
+sf::Mouse::Button ui::OneButtonInteraction::getButton() {
+	return button;
+}
+
+ui::ButtonEvent *ui::OneButtonInteraction::getEvent() {
+	return event;
+}
+
+void ui::OneButtonInteraction::setEvent(ui::ButtonEvent *event) {
+	delete this->event;
+	this->event = event;
+}
+
 void ui::OneButtonInteraction::start(sf::Vector2i) {}
 
 bool ui::OneButtonInteraction::update(sf::Vector2i mousePosition) {
@@ -14,3 +27,7 @@ bool ui::OneButtonInteraction::update(sf::Vector2i mousePosition) {
 }
 
 void ui::OneButtonInteraction::finish(sf::Vector2i) {}
+
+ui::OneButtonInteraction *ui::OneButtonInteraction::copy() {
+	return new OneButtonInteraction{event->copy(), button};
+}

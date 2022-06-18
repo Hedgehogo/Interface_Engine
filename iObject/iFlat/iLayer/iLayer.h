@@ -9,6 +9,8 @@ namespace ui {
 		
 		sf::Vector2f position;
 		sf::Vector2f size;
+		
+		void copy(ILayer* iLayer);
 	
 	public:
 		explicit ILayer(sf::Vector2f minSize, sf::Vector2f size = {0.0f, 0.0f});

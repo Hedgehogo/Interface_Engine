@@ -21,7 +21,7 @@ namespace ui {
 		
 		void clear();
 		
-		bool blocked();
+		bool isBlocked();
 		
 		virtual sf::Vector2i getPosition();
 		

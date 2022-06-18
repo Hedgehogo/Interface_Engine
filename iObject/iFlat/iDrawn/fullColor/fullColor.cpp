@@ -21,4 +21,10 @@ namespace ui {
 	sf::Vector2f FullColor::getNormalSize(){
 		return normalSize;
 	}
+	
+	FullColor *FullColor::copy() {
+		FullColor* fullColor {new FullColor{rectangle.getFillColor(), normalSize}};
+		IDrawn::copy(fullColor);
+		return fullColor;
+	}
 }

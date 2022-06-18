@@ -5,7 +5,7 @@
 namespace ui {
 	class AddInteractionEvent : public ButtonEvent_Simple {
 	protected:
-		IInteraction& interaction;
+		IInteraction* interaction;
 		InteractionManager* interactionManager;
 		
 		void startPressed(sf::Vector2i windowPosition) override;
@@ -14,11 +14,17 @@ namespace ui {
 		
 		void whilePressed(sf::Vector2i windowPosition) override;
 		
-		void notPressed  (sf::Vector2i windowPosition) override;
+		void whileNotPressed  (sf::Vector2i windowPosition) override;
+		
+		void copy(AddInteractionEvent* addInteractionEvent);
 		
 	public:
-		AddInteractionEvent(IInteraction& interaction);
+		explicit AddInteractionEvent(IInteraction& interaction);
 		
 		void init(InteractionManager &interactionManager);
+		
+		void setInteraction(IInteraction& interaction);
+		
+		AddInteractionEvent* copy() override;
 	};
 }

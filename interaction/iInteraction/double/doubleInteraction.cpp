@@ -7,11 +7,18 @@
 ui::DoubleInteraction::DoubleInteraction(ui::IInteraction *first, ui::IInteraction *second) :
 	first(first), second(second) {}
 
+ui::DoubleInteraction::~DoubleInteraction() {
+	delete first;
+	delete second;
+}
+
 void ui::DoubleInteraction::setFirst(ui::IInteraction *first) {
+	delete this->first;
 	this->first = first;
 }
 
 void ui::DoubleInteraction::setSecond(ui::IInteraction *second) {
+	delete this->second;
 	this->second = second;
 }
 
@@ -49,4 +56,8 @@ void ui::DoubleInteraction::finish(sf::Vector2i mousePosition) {
 	if(first != nullptr) {
 		first->finish(mousePosition);
 	}
+}
+
+ui::DoubleInteraction *ui::DoubleInteraction::copy() {
+	return new DoubleInteraction{first->copy(), second->copy()};
 }

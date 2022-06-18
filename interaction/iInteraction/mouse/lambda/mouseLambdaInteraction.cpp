@@ -7,3 +7,7 @@ ui::MouseLambdaInteraction::~MouseLambdaInteraction() {
 	delete leftMouseButton;
 	delete rightMouseButton;
 }
+
+ui::MouseLambdaInteraction *ui::MouseLambdaInteraction::copy() {
+	return new MouseLambdaInteraction{leftMouseButton->copy(), rightMouseButton->copy(), startPointing, finishPointing};
+}

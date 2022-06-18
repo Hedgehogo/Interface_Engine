@@ -3,7 +3,8 @@ project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(${PROJECT_NAME} enums/corner/corner.h
+add_library(${PROJECT_NAME}
+        enums/corner/corner.h
         enums/side/side.h
         enums/size/size.h
         enums/enums.h
@@ -26,8 +27,7 @@ add_library(${PROJECT_NAME} enums/corner/corner.h
         interaction/iInteraction/block/pressed/pressedInteraction.cpp interaction/iInteraction/block/pressed/pressedInteraction.h
         interaction/interactionManager/interactionManager.cpp interaction/interactionManager/interactionManager.h
         interaction/interactionStack/interactionStack.cpp interaction/interactionStack/interactionStack.h
-        iObject/iObject.h
-        iObject/iObject.cpp
+        iObject/iObject.h iObject/iObject.cpp
         iObject/iFlat/iFlat.h
         iObject/iFlat/range/range.cpp iObject/iFlat/range/range.h
         iObject/iFlat/iDrawn/iDrawn.cpp iObject/iFlat/iDrawn/iDrawn.h
@@ -46,29 +46,27 @@ add_library(${PROJECT_NAME} enums/corner/corner.h
         iObject/iFlat/iLayer/layerWithConstBezel/layerWithConstBezel.cpp iObject/iFlat/iLayer/layerWithConstBezel/layerWithConstBezel.h
         iObject/iFlat/iLayer/layerWithConstBorder/layerWithConstBorder.cpp iObject/iFlat/iLayer/layerWithConstBorder/layerWithConstBorder.h
         iObject/iFlat/iLayer/layerWithConstCenter/layerWithConstCenter.cpp iObject/iFlat/iLayer/layerWithConstCenter/layerWithConstCenter.h
-        iObject/iFlat/iLayer/layerWithInteractiveOverlay/layerWithInteractiveOverlay.cpp iObject/iFlat/iLayer/layerWithInteractiveOverlay/layerWithInteractiveOverlay.h
-        iObject/iFlat/iLayer/layerWithAlternativeInteraction/layerWithAlternativeInteraction.cpp iObject/iFlat/iLayer/layerWithAlternativeInteraction/layerWithAlternativeInteraction.h
+        iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.cpp iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.h
         iObject/iFlat/iInteractive/iInteractive.cpp iObject/iFlat/iInteractive/iInteractive.h
         iObject/iFlat/iInteractive/simple/interactiveSimple.cpp iObject/iFlat/iInteractive/simple/interactiveSimple.h
         iObject/iFlat/iInteractive/simple/button/button.cpp iObject/iFlat/iInteractive/simple/button/button.h
         iObject/iFlat/iInteractive/simple/button/buttonWithIndex/buttonWithIndex.cpp iObject/iFlat/iInteractive/simple/button/buttonWithIndex/buttonWithIndex.h
         iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/buttonWithPanel.cpp iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/buttonWithPanel.h
+        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/displayPanelInteraction.h
+        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp
         iObject/iFlat/iInteractive/simple/slider/baseSlider.cpp iObject/iFlat/iInteractive/simple/slider/baseSlider.h
         iObject/iFlat/iInteractive/simple/slider/slider/slider.cpp iObject/iFlat/iInteractive/simple/slider/slider/slider.h
         iObject/iFlat/iInteractive/simple/slider/const/constSlider.cpp iObject/iFlat/iInteractive/simple/slider/const/constSlider.h
         iObject/iFlat/iInteractive/simple/slider/interaction/slideEvent/sliderEvent.cpp iObject/iFlat/iInteractive/simple/slider/interaction/slideEvent/sliderEvent.h
         iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.cpp iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.h
         iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.cpp iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.h
-        iObject/iFlat/iInteractive/simple/text/text.cpp iObject/iFlat/iInteractive/simple/text/text.h
-        iObject/iFlat/iInteractive/simple/text/textBlock/iTextBlock.cpp iObject/iFlat/iInteractive/simple/text/textBlock/iTextBlock.h
-        iObject/iFlat/iInteractive/simple/text/textBlock/link/linkTextBlock.cpp iObject/iFlat/iInteractive/simple/text/textBlock/link/linkTextBlock.h
-        iObject/iFlat/iInteractive/simple/text/textBlock/base/baseTextBlock.cpp iObject/iFlat/iInteractive/simple/text/textBlock/base/baseTextBlock.h
         iObject/panel/panel.cpp iObject/panel/panel.h
+        iObject/panel/interaction/panelInteraction.cpp iObject/panel/interaction/panelInteraction.h
+        iObject/panel/interaction/hidePanelInteraction.h
+        iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h
         iObject/panel/panelStack/panelStack.cpp iObject/panel/panelStack/panelStack.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
-        UI.h
-        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/displayPanelInteraction.h
-        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp iObject/panel/interaction/panelInteraction.cpp iObject/panel/interaction/panelInteraction.h iObject/panel/interaction/hidePanelInteraction.h iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h)
+        UI.h)
 
 set(SFML_DIR "\\home\\andrewkoro105\\SFML-2.5.1\\lib\\cmake\\SFML")
 
@@ -78,6 +76,6 @@ find_package(SFML 2.5 REQUIRED graphics network audio window system)
 
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-system)
 
-add_executable(ass main.cpp)
+add_executable(${PROJECT_NAME}_ex main.cpp)
 
-target_link_libraries(ass PRIVATE ${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})

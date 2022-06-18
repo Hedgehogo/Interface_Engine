@@ -13,8 +13,10 @@ namespace ui {
 	public:
 		ButtonWithPanel(Panel *panel, DisplayPanelInteraction* interaction, IFlat *background);
 		
-		~ButtonWithPanel();
+		~ButtonWithPanel() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		
+		ButtonWithPanel* copy() override;
 	};
 }

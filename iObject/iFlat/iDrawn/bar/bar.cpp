@@ -51,3 +51,11 @@ sf::Vector2f ui::Bar::getMinSize() {
 sf::Vector2f ui::Bar::getNormalSize() {
 	return strip->getNormalSize();
 }
+
+ui::Bar *ui::Bar::copy() {
+	Bar* bar {new Bar{background, strip, division, offset, horizontal}};
+	IDrawn::copy(bar);
+	bar->value = this->value;
+	bar->resize(size, position);
+	return bar;
+}

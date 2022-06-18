@@ -95,4 +95,18 @@ namespace ui {
 			object->update();
 		}
 	}
+	
+	LayerWithBorderHorizontal *LayerWithBorderHorizontal::copy() {
+		std::vector<IFlat *> newObjects(objects.size());
+		for(int i = 0; i < newObjects.size(); ++i) {
+			newObjects[i] = objects[i]->copy();
+		}
+		std::vector<float> newBounds(boundsHorizontal.size() - 2);
+		for(int i = 0; i < newBounds.size(); ++i) {
+			newBounds[i] = boundsHorizontal[i + 1];
+		}
+		LayerWithBorderHorizontal* layerWithBorderHorizontal{new LayerWithBorderHorizontal{newObjects, newBounds, minimumSize}};
+		ILayer::copy(layerWithBorderHorizontal);
+		return layerWithBorderHorizontal;
+	}
 }
