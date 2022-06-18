@@ -10,13 +10,14 @@ namespace ui {
 	}
 	
 	void PanelManager::displayPanel(Panel *panel) {
-		activePanels.push_back(panel);
+		if(std::find(activePanels.begin(), activePanels.end(), panel) == activePanels.end())
+			activePanels.push_back(panel);
 	}
 	
 	void PanelManager::hidePanel(Panel *panel) {
 		for(unsigned i = 0; i < activePanels.size(); ++i) {
 			if(activePanels[i] == panel) {
-				activePanels.erase(activePanels.cbegin() + i);
+				activePanels.erase(activePanels.cbegin() + i, activePanels.cend());
 				break;
 			}
 		}
@@ -37,7 +38,7 @@ namespace ui {
 	void PanelManager::updateInteractions(sf::Vector2f mousePosition) {
 		bool active = true;
 		for(long long i = static_cast<long long>(activePanels.size()) - 1; i >= 0; --i) {
-			active = active && !activePanels[i]->updateInteractions(true, mousePosition);
+			active = active && !activePanels[i]->updateInteractions(active, mousePosition);
 		}
 	}
 }

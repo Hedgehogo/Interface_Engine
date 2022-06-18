@@ -19,7 +19,7 @@ namespace ui {
 		
 		void whilePressed(sf::Vector2i windowPosition) override;
 		
-		void notPressed  (sf::Vector2i windowPosition) override;
+		void whileNotPressed  (sf::Vector2i windowPosition) override;
 		
 	public:
 		explicit SliderEvent(BaseSlider &slider, sf::Vector2i division = {0, 0});

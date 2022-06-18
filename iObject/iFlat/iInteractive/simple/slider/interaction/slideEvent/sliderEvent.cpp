@@ -22,7 +22,7 @@ void ui::SliderEvent::whilePressed(sf::Vector2i windowPosition) {
 	slider->roundValueToDivision(division);
 }
 
-void ui::SliderEvent::notPressed(sf::Vector2i) {}
+void ui::SliderEvent::whileNotPressed(sf::Vector2i) {}
 
 void ui::SliderEvent::setSlider(ui::BaseSlider &slider) {
 	this->slider = &slider;

@@ -1,9 +1,9 @@
 #pragma once
 #include "../button.h"
-#include "interaction/displayPanelInteraction.h"
-#include "interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h"
 #include "../../../../../panel/panel.h"
-#include "../../../../../panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h"
+#include "../../../../../panel/interaction/display/pointing/pointingDisplayPanelInteraction.h"
+#include "../../../../../panel/interaction/hide/pointing/pointingHidePanelInteraction.h"
+#include "../../../../../panel/interaction/hide/click/clickHidePanelInteraction.h"
 
 namespace ui {
 	class ButtonWithPanel : public Button {

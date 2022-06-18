@@ -26,27 +26,23 @@ void ui::InteractionManager::clear() {
 	interactions.clear();
 }
 
-bool ui::InteractionManager::blocked() {
+bool ui::InteractionManager::isBlocked() {
 	return block;
 }
 
-sf::Vector2i ui::InteractionManager::getPosition() {
-	return position;
-}
-
-void ui::InteractionManager::update() {
-	position = sf::Mouse::getPosition(window);
+void ui::InteractionManager::update(sf::Vector2i mousePosition) {
+	position = mousePosition;
 	for(auto& interaction : deleteInteractions) {
-		interaction->finish(position);
+		interaction->finish(mousePosition);
 	}
 	deleteInteractions.clear();
 	for(auto& interaction : addInteractions) {
-		interaction->start(position);
+		interaction->start(mousePosition);
 	}
 	addInteractions.clear();
 	block = false;
 	for(auto& interaction : interactions) {
-		if(interaction->update(position)) {
+		if(interaction->update(mousePosition)) {
 			block = true;
 		}
 	}
