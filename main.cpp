@@ -4,7 +4,7 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(400, 200), "SFML works!");
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	
+
 	sf::Texture texture;
 	texture.loadFromFile("image.png");
 	sf::Texture texture_2;
@@ -12,9 +12,6 @@ int main() {
 	sf::Sprite sprite;
 	sf::Font font;
 	font.loadFromFile("segoeui.ttf");
-
-    const std::wstring text = L"Ass";
-
 	
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
@@ -24,27 +21,44 @@ int main() {
                 new ui::Text{
                     {
                         new ui::TextBlock{
-                            L"Исполнитель ",
-                            sf::Color::White
+                            L"Съешь же ещё ",
+                            sf::Color::Red,
+                            &font,
+                            sf::Text::Style::Bold,
                         },
                         new ui::InteractiveTextBlock{
                             0,
-                            L"Робот",
-                            sf::Color::Red,
-                            sf::Text::Style::Bold
+                            L"этих ",
+                            sf::Color::Green,
+                            &font,
+                            sf::Text::Style::Bold,
+                            46
                         },
                         new ui::TextBlock{
-                            L"действует на клетчатой доске, между соседними клетками которой могут стоять стены. Робот передвигается по клеткам доски и может выполнять команды 1 (вверх), 2 (вниз), 3 (вправо) и 4 (влево), переходя на соседнюю клетку в направлении, указанном в скобках. Если в этом направлении между клетками стоит стена, то Робот разрушается. Робот успешно выполнил программу \n1132432 \nКакую последовательность из трех команд должен выполнить Робот, чтобы вернуться в ту клетку, где он был перед началом выполнения программы, и не разрушиться вне зависимости от того, какие стены стоят на поле?",
-                            sf::Color::White
+                          L"мягких французских булок да выпей чаю",
+                          sf::Color::Red,
+                          &font,
+                          sf::Text::Style::Bold
                         }
                     },
-                    new ui::FullColor(sf::Color::Black),
+                    new ui::FullColor(sf::Color::White),
                     14,
-                    14,
-                    &font,
-                    ui::Text::Align::left
+                    1.15,
+                    &font
                 },
-                new ui::FullColor(sf::Color::Cyan)
+                    new ui::Text{
+                        {
+                            new ui::InteractiveTextBlock{
+                                0,
+                                L"The quick brown fox jumps over the lazy dog"
+                            }
+                        },
+                        new ui::FullColor(sf::Color(0, 0, 0, 127)),
+                        46,
+                        1.15,
+                        &font,
+                        sf::Color::White
+                    }
             },
             {
                 0.5

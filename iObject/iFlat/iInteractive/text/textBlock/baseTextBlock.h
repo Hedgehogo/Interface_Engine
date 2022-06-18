@@ -1,27 +1,30 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "../../simple/interactiveSimple.h"
-#include "../indivisible/baseIndivisible.h"
+#include "../character/baseCharacter.h"
 #include "../../../../../interaction/interactionStack/interactionStack.h"
+#include "../character/baseCharacter.h"
+#include "../textVariables.h"
+
 namespace ui {
 	class BaseTextBlock{
 	protected:
         ui::InteractionManager *interactionManager;
         ui::InteractionStack *interactionStack;
-		sf::Text text;
 
-        uint lineSpacing;
+        TextVariables textVariables;
 	public:
         struct Edge{
             int start, end;
         };
-        BaseTextBlock(std::wstring text, sf::Color color, sf::Text::Style style, sf::Font &font, int size = 0);
-        BaseTextBlock(std::wstring text, sf::Color color, sf::Text::Style style, int size = 0);
+        BaseTextBlock();
 
-        void setTextVariables(uint lineSpacing, int size, sf::Font *font);
+        void setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Font *font , uint size);
         virtual void init(ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack);
 
-        virtual std::vector<BaseIndivisible*> divide() = 0;
+        virtual bool in(sf::Vector2f mousePosition) = 0;
+
+        virtual std::vector<BaseCharacter*> character() = 0;
 
         virtual void update() = 0;
 

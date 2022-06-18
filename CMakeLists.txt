@@ -61,14 +61,13 @@ add_library(${PROJECT_NAME} enums/corner/corner.h
         iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.cpp iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.h
         iObject/iFlat/iInteractive/text/text.cpp iObject/iFlat/iInteractive/text/text.h
         iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.h
-        iObject/iFlat/iInteractive/text/textBlock/link/linkTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/link/linkTextBlock.h
         iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.cpp iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.h
         iObject/panel/panel.cpp iObject/panel/panel.h
         iObject/panel/panelStack/panelStack.cpp iObject/panel/panelStack/panelStack.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
         UI.h
         iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/displayPanelInteraction.h
-        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp iObject/panel/interaction/panelInteraction.cpp iObject/panel/interaction/panelInteraction.h iObject/panel/interaction/hidePanelInteraction.h iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h iObject/iFlat/iInteractive/text/indivisible/baseIndivisible.cpp iObject/iFlat/iInteractive/text/indivisible/baseIndivisible.h iObject/iFlat/iInteractive/text/indivisible/simple/indivisible.cpp iObject/iFlat/iInteractive/text/indivisible/simple/indivisible.h iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.h)
+        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp iObject/panel/interaction/panelInteraction.cpp iObject/panel/interaction/panelInteraction.h iObject/panel/interaction/hidePanelInteraction.h iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h iObject/iFlat/iInteractive/text/character/baseCharacter.cpp iObject/iFlat/iInteractive/text/character/baseCharacter.h iObject/iFlat/iInteractive/text/character/simple/character.cpp iObject/iFlat/iInteractive/text/character/simple/character.h iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.h iObject/iFlat/iInteractive/text/textVariables.h)
 
 set(SFML_DIR "\\home\\andrewkoro105\\SFML-2.5.1\\lib\\cmake\\SFML")
 
@@ -78,6 +77,6 @@ find_package(SFML 2.5 REQUIRED graphics network audio window system)
 
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-system)
 
-add_executable(ass main.cpp)
+add_executable(${PROJECT_NAME}_ex main.cpp)
 
-target_link_libraries(ass PRIVATE ${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})

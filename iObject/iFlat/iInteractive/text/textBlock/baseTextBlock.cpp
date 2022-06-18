@@ -1,30 +1,21 @@
 #include "baseTextBlock.h"
 
-ui::BaseTextBlock::BaseTextBlock(std::wstring text, sf::Color color, sf::Text::Style style, sf::Font &font, int size) {
-	this->text.setString(text);
-	this->text.setFont(font);
-	this->text.setCharacterSize(size);
-	this->text.setFillColor(color);
-	this->text.setStyle(style);
-}
-
-ui::BaseTextBlock::BaseTextBlock(std::wstring text, sf::Color color, sf::Text::Style style, int size) {
-    this->text.setString(text);
-    this->text.setCharacterSize(size);
-    this->text.setFillColor(color);
-    this->text.setStyle(style);
-}
+ui::BaseTextBlock::BaseTextBlock() {}
 
 void ui::BaseTextBlock::init(ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack) {
     this->interactionManager = &interactionManager;
     this->interactionStack = &interactionStack;
 }
 
-void ui::BaseTextBlock::setTextVariables(uint lineSpacing, int size, sf::Font *font) {
-    this->lineSpacing = lineSpacing;
-
-    if (text.getCharacterSize() == 0)
-        text.setCharacterSize(size);
-    if (text.getFont() == nullptr)
-        text.setFont(*font);
+void ui::BaseTextBlock::setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Font *font , uint size) {
+    if (textVariables.TextColor == sf::Color(255, 255, 255, 0))
+        textVariables.TextColor = TextColor;
+    if (textVariables.textSelectionColor == sf::Color(255, 255, 255, 0))
+        textVariables.textSelectionColor = textSelectionColor;
+    if (textVariables.backgroundSelectionColor == sf::Color(255, 255, 255, 0))
+        textVariables.backgroundSelectionColor = backgroundSelectionColor;
+    if (textVariables.font == nullptr)
+        textVariables.font = font;
+    if (textVariables.size == 0)
+        textVariables.size = size;
 }
