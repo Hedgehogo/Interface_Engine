@@ -7,13 +7,13 @@ ui::PointingDisplayPanelInteraction::PointingDisplayPanelInteraction() : Display
 void ui::PointingDisplayPanelInteraction::start(sf::Vector2i) {
 	panelManager->displayPanel(panel);
 	panel->setParentProcessed(true);
-	std::cout << "start display: " << panel << "\n";
+	//std::cout << "start display: " << panel << "\n";
 }
 
 bool ui::PointingDisplayPanelInteraction::update(sf::Vector2i) { return false; }
 
 void ui::PointingDisplayPanelInteraction::finish(sf::Vector2i) {
-	std::cout << "finish display: " << panel << "\n";
+	//std::cout << "finish display: " << panel << "\n";
 	panel->setParentProcessed(false);
 }
 
