@@ -52,8 +52,8 @@ add_library(${PROJECT_NAME} STATIC
         iObject/iFlat/iInteractive/simple/button/button.cpp iObject/iFlat/iInteractive/simple/button/button.h
         iObject/iFlat/iInteractive/simple/button/buttonWithIndex/buttonWithIndex.cpp iObject/iFlat/iInteractive/simple/button/buttonWithIndex/buttonWithIndex.h
         iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/buttonWithPanel.cpp iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/buttonWithPanel.h
-        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/displayPanelInteraction.h
-        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp
+        iObject/panel/interaction/display/displayPanelInteraction.h
+        iObject/panel/interaction/display/pointing/pointingDisplayPanelInteraction.h iObject/panel/interaction/display/pointing/pointingDisplayPanelInteraction.cpp
         iObject/iFlat/iInteractive/simple/slider/baseSlider.cpp iObject/iFlat/iInteractive/simple/slider/baseSlider.h
         iObject/iFlat/iInteractive/simple/slider/slider/slider.cpp iObject/iFlat/iInteractive/simple/slider/slider/slider.h
         iObject/iFlat/iInteractive/simple/slider/const/constSlider.cpp iObject/iFlat/iInteractive/simple/slider/const/constSlider.h
@@ -61,12 +61,12 @@ add_library(${PROJECT_NAME} STATIC
         iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.cpp iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.h
         iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.cpp iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.h
         iObject/panel/panel.cpp iObject/panel/panel.h
-        iObject/panel/interaction/panelInteraction.cpp iObject/panel/interaction/panelInteraction.h
-        iObject/panel/interaction/hidePanelInteraction.h
-        iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h
+        iObject/panel/interaction/basePanelInteraction.cpp iObject/panel/interaction/basePanelInteraction.h
+        iObject/panel/interaction/hide/hidePanelInteraction.h
+        iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.cpp iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.h
         iObject/panel/panelManager/panelManager.cpp iObject/panel/panelManager/panelManager.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
-        UI.h)
+        UI.h iObject/panel/interaction/click/clickPanelInteraction.cpp iObject/panel/interaction/click/clickPanelInteraction.h iObject/panel/interaction/hide/hidePanelInteraction.cpp iObject/panel/interaction/event/panelEvent.cpp iObject/panel/interaction/event/panelEvent.h iObject/panel/interaction/panelInteraction/panelInteraction.cpp iObject/panel/interaction/panelInteraction/panelInteraction.h iObject/panel/interaction/event/hide/hidePanelEvent.cpp iObject/panel/interaction/event/hide/hidePanelEvent.h iObject/panel/interaction/hide/click/clickHidePanelInteraction.cpp iObject/panel/interaction/hide/click/clickHidePanelInteraction.h)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 

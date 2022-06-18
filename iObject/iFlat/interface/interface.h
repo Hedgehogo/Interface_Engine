@@ -13,7 +13,7 @@ namespace ui {
 		sf::RenderWindow &window;
 		InteractionStack interactionStack;
 		InteractionManager interactionManager;
-		PanelManager panelStack;
+		PanelManager panelManager;
 		IFlat *object;
 		bool initialized;
 		
@@ -42,7 +42,7 @@ namespace ui {
 		
 		void update(int wheel);
 		
-		void updateCluster();
+		void updateCluster(sf::Vector2f mousePosition);
 		
 		Interface* copy() override;
 	};

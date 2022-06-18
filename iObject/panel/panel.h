@@ -7,6 +7,7 @@ namespace ui {
 	class Panel : public IObject {
 	protected:
 		sf::Vector2f position;
+		sf::Vector2f offset;
 		sf::Vector2f size;
 		Size verticalSize;
 		Size horizontalSize;
@@ -29,9 +30,9 @@ namespace ui {
 		void copy(Panel* panel);
 	
 	public:
-		Panel(IFlat *object, HidePanelInteraction* interaction, Corner parentCorner, Corner panelCorner, Size verticalSize, Size horizontalSize, sf::Vector2f size = sf::Vector2f{}, bool displayed = false);
+		Panel(IFlat *object, HidePanelInteraction *interaction, Corner parentCorner, Corner panelCorner, sf::Vector2f offset, Size verticalSize, Size horizontalSize, sf::Vector2f size = sf::Vector2f{}, bool displayed = false);
 		
-		Panel(IFlat *object, HidePanelInteraction* interaction, sf::Vector2f size, Corner parentCorner = Corner::DownLeft, Corner panelCorner = Corner::UpLeft, bool displayed = false);
+		Panel(IFlat *object, HidePanelInteraction *interaction, sf::Vector2f size, Corner parentCorner = Corner::DownLeft, Corner panelCorner = Corner::UpLeft, sf::Vector2f offset = sf::Vector2f{}, bool displayed = false);
 		
 		~Panel() override;
 		

@@ -1,9 +1,9 @@
 #include "panel.h"
 #include "panelManager/panelManager.h"
-#include "interaction/hidePanelInteraction.h"
+#include "interaction/hide/hidePanelInteraction.h"
 
-ui::Panel::Panel(IFlat *object, HidePanelInteraction* interaction, Corner parentCorner, Corner panelCorner, Size verticalSize, Size horizontalSize, sf::Vector2f size, bool displayed) :
-	object(object), verticalSize(verticalSize), horizontalSize(horizontalSize), size(size), parentCorner(parentCorner), panelCorner(panelCorner),
+ui::Panel::Panel(IFlat *object, HidePanelInteraction *interaction, Corner parentCorner, Corner panelCorner, sf::Vector2f offset, Size verticalSize, Size horizontalSize, sf::Vector2f size, bool displayed) :
+	object(object), verticalSize(verticalSize), horizontalSize(horizontalSize), size(size), parentCorner(parentCorner), panelCorner(panelCorner), offset(offset),
 	interaction(interaction), position(0, 0), displayed(displayed), oldDisplayed(false), active(false), parentProcessed(false), interactionManager(nullptr) {
 	sf::Vector2f objectNormalSize = object->getNormalSize();
 	if(horizontalSize == Size::regardingChild)
@@ -12,8 +12,8 @@ ui::Panel::Panel(IFlat *object, HidePanelInteraction* interaction, Corner parent
 		this->size.y = objectNormalSize.y;
 }
 
-ui::Panel::Panel(IFlat *object, HidePanelInteraction* interaction, sf::Vector2f size, Corner parentCorner, Corner panelCorner, bool displayed) :
-	object(object), verticalSize(Size::constant), horizontalSize(Size::constant), size(size), parentCorner(parentCorner), panelCorner(panelCorner),
+ui::Panel::Panel(IFlat *object, HidePanelInteraction *interaction, sf::Vector2f size, Corner parentCorner, Corner panelCorner, sf::Vector2f offset, bool displayed) :
+	object(object), verticalSize(Size::constant), horizontalSize(Size::constant), size(size), parentCorner(parentCorner), panelCorner(panelCorner), offset(offset),
 	interaction(interaction), position(0, 0), displayed(displayed), oldDisplayed(false), active(false), parentProcessed(false), interactionManager(nullptr) {}
 
 void ui::Panel::init(sf::RenderWindow &window, InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::Panel *parent, ui::PanelManager &panelManager) {
@@ -60,7 +60,7 @@ void ui::Panel::resize(sf::Vector2f size, sf::Vector2f position) {
 		this->size.x = size.x;
 	if(verticalSize == Size::regardingParent)
 		this->size.y = size.y;
-	this->position = position + cornerToPositionOffset(parentCorner, size) - cornerToPositionOffset(panelCorner, this->size);
+	this->position = position + offset + cornerToPositionOffset(parentCorner, size) - cornerToPositionOffset(panelCorner, this->size);
 	object->resize(this->size, this->position);
 }
 
@@ -111,7 +111,7 @@ void ui::Panel::copy(ui::Panel *panel) {
 }
 
 ui::Panel *ui::Panel::copy() {
-	Panel* panel {new Panel(object->copy(), interaction->copy(), Corner::DownLeft, Corner::DownLeft, verticalSize, horizontalSize, size, displayed)};
+	Panel* panel {new Panel(object->copy(), interaction->copy(), parentCorner, panelCorner, offset, verticalSize, horizontalSize, size, displayed)};
 	panel->interaction->setPanel(*panel);
 	Panel::copy(panel);
 	return panel;
