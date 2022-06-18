@@ -18,7 +18,7 @@ bool ui::PointingHidePanelInteraction::update(sf::Vector2i mousePosition) {
 		}
 		std::cout << ": " << panel << "\n";
 	}*/
-	std::cout << (panel->isActive() ? "active: " : "not active: ") << panel << std::endl;
+	//std::cout << (panel->isActive() ? "active: " : "not active: ") << panel << std::endl;
 	if(panel->isActive() && !panel->getParentProcessed() && !panel->inPanel(static_cast<sf::Vector2f>(mousePosition))) {
 		panelManager->hidePanel(panel);
 		//std::cout << "hide: " << panel << "\n";

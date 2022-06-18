@@ -60,7 +60,13 @@ namespace ui {
 	}
 	
 	sf::Vector2f LayerWithConstBorder::getMinSize() {
-		return minimumSize;
+		sf::Vector2f constMinSize = constObject->getMinSize();
+		sf::Vector2f secondMinSize = secondObject->getMinSize();
+		if(side == Side::Down || side == Side::Up) {
+			return {std::max(constMinSize.x, secondMinSize.x), secondMinSize.y + borderDistance};
+		} else {
+			return {secondMinSize.x + borderDistance, std::max(constMinSize.y, secondMinSize.y)};
+		}
 	}
 	
 	sf::Vector2f LayerWithConstBorder::getNormalSize() {
