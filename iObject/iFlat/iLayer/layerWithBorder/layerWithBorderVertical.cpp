@@ -3,7 +3,7 @@
 #include <vector>
 
 namespace ui {
-	void LayerWithBorderVertical::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) {
+	void LayerWithBorderVertical::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) {
 		for (auto& object : objects) {
 			initObject(object, window, interactionStack, interactionManager, parent, overlayStack);
 		}
@@ -13,6 +13,14 @@ namespace ui {
 		ILayer(minSize), objects(std::move(objects)), boundsVertical(std::move(boundsVertical))  {
 		this->boundsVertical.insert(this->boundsVertical.begin(), 0.0f);
 		this->boundsVertical.push_back(1.0f);
+	}
+	
+	LayerWithBorderVertical::LayerWithBorderVertical(std::vector<IFlat *> objects, sf::Vector2f minSize) :
+		ILayer(minSize), objects(std::move(objects)), boundsVertical(this->objects.size() + 1, 1.0f) {
+		int count = this->objects.size();
+		for(int i = 0; i < count; ++i) {
+			boundsVertical[i] = static_cast<float>(i) / static_cast<float>(count);
+		}
 	}
 	
 	LayerWithBorderVertical::~LayerWithBorderVertical() {

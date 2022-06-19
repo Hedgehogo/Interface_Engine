@@ -11,10 +11,12 @@ namespace ui {
 		std::vector<IFlat *> objects;
 		std::vector<float> boundsVertical;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) override;
+		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) override;
 		
 	public:
 		LayerWithBorderVertical(std::vector<IFlat *> objects, std::vector<float> boundsVertical, sf::Vector2f minSize = {0, 0});
+		
+		LayerWithBorderVertical(std::vector<IFlat *> objects, sf::Vector2f minSize = {0, 0});
 		
 		~LayerWithBorderVertical() override;
 		

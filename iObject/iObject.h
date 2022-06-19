@@ -6,13 +6,13 @@
 
 namespace ui {
 	class Panel;
-	class PanelStack;
+	class PanelManager;
 	
 	class IObject {
 	protected:
-		virtual void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &panelStack) = 0;
+		virtual void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &panelStack) = 0;
 		
-		void initObject(IObject *object, sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack);
+		void initObject(IObject *object, sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack);
 		
 	public:
 		virtual ~IObject() = default;

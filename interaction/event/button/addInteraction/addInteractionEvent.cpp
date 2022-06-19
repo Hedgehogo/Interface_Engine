@@ -10,7 +10,7 @@ void ui::AddInteractionEvent::stopPressed(sf::Vector2i windowPosition) {
 
 void ui::AddInteractionEvent::whilePressed(sf::Vector2i windowPosition) {}
 
-void ui::AddInteractionEvent::whileNotPressed(sf::Vector2i) {}
+void ui::AddInteractionEvent::whileNotPressed(sf::Vector2i windowPosition) {}
 
 ui::AddInteractionEvent::AddInteractionEvent(ui::IInteraction &interaction) : ButtonEvent_Simple(), interactionManager(nullptr), interaction(&interaction) {}
 

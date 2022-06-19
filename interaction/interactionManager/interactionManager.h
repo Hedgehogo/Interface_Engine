@@ -23,9 +23,7 @@ namespace ui {
 		
 		bool isBlocked();
 		
-		virtual sf::Vector2i getPosition();
-		
-		virtual void update();
+		virtual void update(sf::Vector2i mousePosition);
 	};
 }
 

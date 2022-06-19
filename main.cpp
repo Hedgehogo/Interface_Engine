@@ -4,6 +4,7 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
+	//window.setFramerateLimit(5);
 	
 	sf::Texture texture;
 	texture.loadFromFile("image.png");
@@ -15,6 +16,37 @@ int main() {
 	
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
+	
+	ui::ButtonWithPanel* buttonWithPanel {
+		new ui::ButtonWithPanel {
+			new ui::Panel {
+				new ui::ButtonWithPanel {
+					new ui::Panel {
+						new ui::LayerWithConstBezel {
+							new ui::FullColor{{60, 63, 65}},
+							new ui::FullColor{{81, 81, 81}},
+							1
+						},
+						new ui::PointingHidePanelInteraction{},
+						ui::Corner::DownLeft, ui::Corner::UpLeft, {0, -1},
+						ui::Size::constant, ui::Size::regardingParent, sf::Vector2f{0, 100}
+					},
+					new ui::PointingDisplayPanelInteraction{},
+					new ui::LayerWithConstBezel {
+						new ui::FullColor{{60, 63, 65}},
+						new ui::FullColor{{81, 81, 81}},
+						1
+					},
+				},
+				new ui::ClickHidePanelInteraction{sf::Mouse::Left},
+				ui::Corner::UpRight, ui::Corner::UpLeft, {-5, 5},
+				ui::Size::regardingParent, ui::Size::regardingParent,sf::Vector2f{50, 50},
+			},
+			new ui::PointingDisplayPanelInteraction{},
+			new ui::FullColor{{78, 82, 84}}
+		},
+	};
+	
 	ui::Interface interface {
 		/*new ui::LayerWithConstBorder {
 			new ui::FullColor{sf::Color::Cyan},
@@ -55,17 +87,28 @@ int main() {
 		}*/
 		new ui::LayerWithConstBorder {
 			new ui::Slider {
-				new ui::Capsule({200, 200, 200}),
-				new ui::FullColor({37, 37, 38}),
+				new ui::Capsule({78, 78, 78}),
+				new ui::FullColor({43, 43, 43}),
 				sf::Vector2f{1.0f, 0.5f}
 			},
-			new ui::ButtonWithPanel {
-				new ui::Panel {
-					new ui::FullColor{{200, 200, 200}},
-					sf::Vector2f{50, 50}
+			new ui::LayerWithConstRatio {
+				new ui::LayerWithConstBezel {
+					new ui::LayerWithConstBorder {
+						new ui::LayerWithBorderVertical {
+							{
+								buttonWithPanel,
+								new ui::FullColor{{60, 63, 65}},
+								buttonWithPanel->copy()
+							}
+						},
+						new ui::FullColor{{60, 63, 65}},
+						ui::Side::Up, 81
+					},
+					new ui::FullColor{{50, 50, 50}}, 1
 				},
-				new ui::PointingDisplayPanelInteraction{},
-				new ui::FullColor{{37, 37, 38}}
+				new ui::FullColor{{43, 43, 43}},
+				new ui::FullColor{{43, 43, 43}},
+				1.f / 3.f, ui::Corner::UpLeft
 			},
 			ui::Side::Right, 10
 		},

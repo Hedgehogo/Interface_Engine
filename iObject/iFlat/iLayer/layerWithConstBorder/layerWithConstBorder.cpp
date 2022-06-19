@@ -1,13 +1,18 @@
 #include "layerWithConstBorder.h"
 namespace ui {
-	void LayerWithConstBorder::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) {
+	void LayerWithConstBorder::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) {
 		initObject(secondObject, window, interactionStack, interactionManager, parent, overlayStack);
 		initObject(constObject, window, interactionStack, interactionManager, parent, overlayStack);
 	}
 	
 	LayerWithConstBorder::LayerWithConstBorder(IFlat *constObject, IFlat *secondObject, Side side, float borderDistance, sf::Vector2f minSize) :
 		ILayer(minSize), constObject(constObject), side(side), secondObject(secondObject), borderDistance(borderDistance) {}
-	
+
+    LayerWithConstBorder::~LayerWithConstBorder() {
+        delete constObject;
+        delete secondObject;
+    }
+
 	void LayerWithConstBorder::draw() {
 		constObject->draw();
 		secondObject->draw();
@@ -55,7 +60,13 @@ namespace ui {
 	}
 	
 	sf::Vector2f LayerWithConstBorder::getMinSize() {
-		return minimumSize;
+		sf::Vector2f constMinSize = constObject->getMinSize();
+		sf::Vector2f secondMinSize = secondObject->getMinSize();
+		if(side == Side::Down || side == Side::Up) {
+			return {std::max(constMinSize.x, secondMinSize.x), secondMinSize.y + borderDistance};
+		} else {
+			return {secondMinSize.x + borderDistance, std::max(constMinSize.y, secondMinSize.y)};
+		}
 	}
 	
 	sf::Vector2f LayerWithConstBorder::getNormalSize() {

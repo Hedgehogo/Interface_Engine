@@ -1,14 +1,16 @@
 #pragma once
 #include "../button.h"
-#include "interaction/displayPanelInteraction.h"
-#include "interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h"
+#include "../../../../../panel/panel.h"
+#include "../../../../../panel/interaction/display/pointing/pointingDisplayPanelInteraction.h"
+#include "../../../../../panel/interaction/hide/pointing/pointingHidePanelInteraction.h"
+#include "../../../../../panel/interaction/hide/click/clickHidePanelInteraction.h"
 
 namespace ui {
 	class ButtonWithPanel : public Button {
 	protected:
 		Panel *panel;
 		
-		void init(sf::RenderWindow &window, Panel *parent, PanelStack &panelStack) override;
+		void init(sf::RenderWindow &window, Panel *parent, PanelManager &panelStack) override;
 		
 	public:
 		ButtonWithPanel(Panel *panel, DisplayPanelInteraction* interaction, IFlat *background);

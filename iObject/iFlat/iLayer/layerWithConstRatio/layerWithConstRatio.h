@@ -19,13 +19,15 @@ namespace ui {
 		bool renderSecond;
 		const float aspectRatio;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) override;
+		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) override;
 		
 		void copy(LayerWithConstRatio* layerWithConstRatio);
 		
 	public:
 		LayerWithConstRatio(IFlat *constObject, IFlat *secondObject, IDrawn *background, float aspectRatio, Corner corner = Corner::UpLeft, sf::Vector2f minSize = {0, 0});
-		
+
+        ~LayerWithConstRatio() override;
+
 		Corner getCorner();
 		
 		void draw() override;
