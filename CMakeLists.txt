@@ -3,7 +3,8 @@ project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(${PROJECT_NAME} enums/corner/corner.h
+add_library(${PROJECT_NAME}
+        enums/corner/corner.h
         enums/side/side.h
         enums/size/size.h
         enums/enums.h
@@ -26,8 +27,7 @@ add_library(${PROJECT_NAME} enums/corner/corner.h
         interaction/iInteraction/block/pressed/pressedInteraction.cpp interaction/iInteraction/block/pressed/pressedInteraction.h
         interaction/interactionManager/interactionManager.cpp interaction/interactionManager/interactionManager.h
         interaction/interactionStack/interactionStack.cpp interaction/interactionStack/interactionStack.h
-        iObject/iObject.h
-        iObject/iObject.cpp
+        iObject/iObject.h iObject/iObject.cpp
         iObject/iFlat/iFlat.h
         iObject/iFlat/range/range.cpp iObject/iFlat/range/range.h
         iObject/iFlat/iDrawn/iDrawn.cpp iObject/iFlat/iDrawn/iDrawn.h
@@ -46,13 +46,14 @@ add_library(${PROJECT_NAME} enums/corner/corner.h
         iObject/iFlat/iLayer/layerWithConstBezel/layerWithConstBezel.cpp iObject/iFlat/iLayer/layerWithConstBezel/layerWithConstBezel.h
         iObject/iFlat/iLayer/layerWithConstBorder/layerWithConstBorder.cpp iObject/iFlat/iLayer/layerWithConstBorder/layerWithConstBorder.h
         iObject/iFlat/iLayer/layerWithConstCenter/layerWithConstCenter.cpp iObject/iFlat/iLayer/layerWithConstCenter/layerWithConstCenter.h
-        iObject/iFlat/iLayer/layerWithInteractiveOverlay/layerWithInteractiveOverlay.cpp iObject/iFlat/iLayer/layerWithInteractiveOverlay/layerWithInteractiveOverlay.h
-        iObject/iFlat/iLayer/layerWithAlternativeInteraction/layerWithAlternativeInteraction.cpp iObject/iFlat/iLayer/layerWithAlternativeInteraction/layerWithAlternativeInteraction.h
+        iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.cpp iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.h
         iObject/iFlat/iInteractive/iInteractive.cpp iObject/iFlat/iInteractive/iInteractive.h
         iObject/iFlat/iInteractive/simple/interactiveSimple.cpp iObject/iFlat/iInteractive/simple/interactiveSimple.h
         iObject/iFlat/iInteractive/simple/button/button.cpp iObject/iFlat/iInteractive/simple/button/button.h
         iObject/iFlat/iInteractive/simple/button/buttonWithIndex/buttonWithIndex.cpp iObject/iFlat/iInteractive/simple/button/buttonWithIndex/buttonWithIndex.h
         iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/buttonWithPanel.cpp iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/buttonWithPanel.h
+        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/displayPanelInteraction.h
+        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp
         iObject/iFlat/iInteractive/simple/slider/baseSlider.cpp iObject/iFlat/iInteractive/simple/slider/baseSlider.h
         iObject/iFlat/iInteractive/simple/slider/slider/slider.cpp iObject/iFlat/iInteractive/simple/slider/slider/slider.h
         iObject/iFlat/iInteractive/simple/slider/const/constSlider.cpp iObject/iFlat/iInteractive/simple/slider/const/constSlider.h
@@ -63,11 +64,21 @@ add_library(${PROJECT_NAME} enums/corner/corner.h
         iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.h
         iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.cpp iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.h
         iObject/panel/panel.cpp iObject/panel/panel.h
+        iObject/panel/interaction/panelInteraction.cpp iObject/panel/interaction/panelInteraction.h
+        iObject/panel/interaction/hidePanelInteraction.h
+        iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h
         iObject/panel/panelStack/panelStack.cpp iObject/panel/panelStack/panelStack.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
         UI.h
         iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/displayPanelInteraction.h
-        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp iObject/panel/interaction/panelInteraction.cpp iObject/panel/interaction/panelInteraction.h iObject/panel/interaction/hidePanelInteraction.h iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h iObject/iFlat/iInteractive/text/character/baseCharacter.cpp iObject/iFlat/iInteractive/text/character/baseCharacter.h iObject/iFlat/iInteractive/text/character/simple/character.cpp iObject/iFlat/iInteractive/text/character/simple/character.h iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.h iObject/iFlat/iInteractive/text/textVariables.h)
+        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.h
+       	iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/interaction/pointingDisplayPanelInteraction/pointingDisplayPanelInteraction.cpp
+       	iObject/panel/interaction/panelInteraction.cpp iObject/panel/interaction/panelInteraction.h iObject/panel/interaction/hidePanelInteraction.h
+       	iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.cpp iObject/panel/interaction/pointingHidePanelInteraction/pointingHidePanelInteraction.h
+       	iObject/iFlat/iInteractive/text/character/baseCharacter.cpp iObject/iFlat/iInteractive/text/character/baseCharacter.h
+       	iObject/iFlat/iInteractive/text/character/simple/character.cpp iObject/iFlat/iInteractive/text/character/simple/character.h
+       	iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.h
+       	iObject/iFlat/iInteractive/text/textVariables.h)
 
 set(SFML_DIR "\\home\\andrewkoro105\\SFML-2.5.1\\lib\\cmake\\SFML")
 

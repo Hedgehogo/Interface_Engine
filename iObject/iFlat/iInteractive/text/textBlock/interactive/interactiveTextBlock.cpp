@@ -2,7 +2,7 @@
 
 ui::InteractiveTextBlock::InteractiveTextBlock(ui::IInteraction *interaction, std::wstring text, sf::Color textColor, sf::Font *font, sf::Text::Style style, int size, sf::Color textSelectionColor,
                                                sf::Color backgroundSelectionColor) :
-    interaction(interaction), TextBlock(text, textColor, font, style, size, textSelectionColor, backgroundSelectionColor), interact(false), oldInteract(false) {}
+    interaction(interaction), TextBlock(text, textColor, font, style, size, textSelectionColor, backgroundSelectionColor), interact(false), oldInteract(false), indexInteraction(-1) {}
 
 ui::InteractiveTextBlock::InteractiveTextBlock(int indexInteraction, std::wstring text, sf::Color textColor, sf::Font *font, sf::Text::Style style, int size, sf::Color textSelectionColor,
                                                sf::Color backgroundSelectionColor) :
@@ -47,3 +47,17 @@ bool ui::InteractiveTextBlock::in(sf::Vector2f mousePosition) {
     }
     return false;
 }
+
+ui::InteractiveTextBlock::InteractiveTextBlock(std::wstring str, TextVariables textVariables, ui::IInteraction *interaction) :
+    TextBlock(str, textVariables), interaction(interaction), interact(false), oldInteract(false) {}
+
+ui::InteractiveTextBlock::InteractiveTextBlock(std::wstring str, TextVariables textVariables, int indexInteraction) :
+    TextBlock(str, textVariables), indexInteraction(indexInteraction), interact(false), oldInteract(false) {}
+
+ui::InteractiveTextBlock *ui::InteractiveTextBlock::copy() {
+    if (indexInteraction == -1)
+        return new InteractiveTextBlock(str, textVariables, interaction->copy());
+    else
+        return new InteractiveTextBlock(str, textVariables, indexInteraction);
+}
+

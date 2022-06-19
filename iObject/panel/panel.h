@@ -49,5 +49,7 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		sf::Vector2f getMinSize() override;
+		
+		Panel* copy() override;
 	};
 }

@@ -13,6 +13,8 @@ namespace ui {
 		
 		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) override;
 		
+		void copy(IInteractive* iInteractive);
+		
 	public:
 		explicit IInteractive();
 	};

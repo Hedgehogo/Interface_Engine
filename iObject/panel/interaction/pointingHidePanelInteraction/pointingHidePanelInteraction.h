@@ -9,5 +9,7 @@ namespace ui {
 		bool update(sf::Vector2i mousePosition) override;
 		
 		void finish(sf::Vector2i mousePosition) override;
+		
+		PointingHidePanelInteraction* copy() override;
 	};
 }

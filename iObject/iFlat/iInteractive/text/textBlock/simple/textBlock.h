@@ -8,6 +8,8 @@ namespace ui {
     protected:
         std::wstring str;
 	public:
+        TextBlock(std::wstring str, TextVariables textVariables);
+
         TextBlock(std::wstring text, sf::Color textColor = sf::Color(255, 255, 255, 0),
                   sf::Font *font = nullptr, sf::Text::Style style = {}, int size = 0,
                   sf::Color textSelectionColor = sf::Color(255, 255, 255, 0),
@@ -18,5 +20,6 @@ namespace ui {
 
         void update() override;
         bool updateInteractions(sf::Vector2f mousePosition) override;
+        TextBlock * copy() override;
 	};
 }

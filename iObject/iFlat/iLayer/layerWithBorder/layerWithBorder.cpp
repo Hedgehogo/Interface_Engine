@@ -133,4 +133,28 @@ namespace ui {
 			}
 		}
 	}
+	
+	LayerWithBorder *LayerWithBorder::copy() {
+		sf::Vector2u count(objects.size(), 0);
+		if(count.x != 0) {
+			count.y = objects[0].size();
+		}
+		std::vector<std::vector<IFlat *>> newObjects(count.x, std::vector<IFlat *>(count.y, nullptr));
+		for(int x = 0; x < count.x; ++x) {
+			for(int y = 0; y < count.y; ++y) {
+				newObjects[x][y] = objects[x][y]->copy();
+			}
+		}
+		std::vector<float> newBoundsHorizontal(boundsHorizontal.size() - 2);
+		for(int i = 0; i < newBoundsHorizontal.size(); ++i) {
+			newBoundsHorizontal[i] = boundsHorizontal[i + 1];
+		}
+		std::vector<float> newBoundsVertical(boundsVertical.size() - 2);
+		for(int i = 0; i < newBoundsVertical.size(); ++i) {
+			newBoundsVertical[i] = boundsVertical[i + 1];
+		}
+		LayerWithBorder* layerWithBorder{new LayerWithBorder{newObjects, newBoundsHorizontal, newBoundsVertical, minimumSize}};
+		ILayer::copy(layerWithBorder);
+		return layerWithBorder;
+	}
 }

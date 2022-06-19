@@ -9,6 +9,8 @@ namespace ui {
 		
 		void init(sf::RenderWindow &window, Panel *parent, PanelStack &overlayStack) override;
 		
+		void copy(Button* button);
+		
 	public:
 		Button(IFlat *background, IInteraction* interaction);
 		

@@ -10,5 +10,7 @@ namespace ui {
 	
 	public:
 		ButtonWithIndex(ui::IDrawn *background, uint16_t interaction);
+		
+		ButtonWithIndex* copy() override;
 	};
 }

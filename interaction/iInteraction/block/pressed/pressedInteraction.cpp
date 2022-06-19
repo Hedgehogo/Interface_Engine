@@ -13,5 +13,15 @@ bool ui::PressedInteraction::update(sf::Vector2i mousePosition) {
 		event->update(mousePosition, false);
 		interactionManager->deleteInteraction(*this);
 	}
-	return true;
+	return IBlockInteraction::update(mousePosition);
+}
+
+void ui::PressedInteraction::copy(ui::PressedInteraction *pressedInteraction) {
+	pressedInteraction->interactionManager = this->interactionManager;
+}
+
+ui::PressedInteraction *ui::PressedInteraction::copy() {
+	PressedInteraction* pressedInteraction{new PressedInteraction{event->copy(), button}};
+	PressedInteraction::copy(pressedInteraction);
+	return pressedInteraction;
 }

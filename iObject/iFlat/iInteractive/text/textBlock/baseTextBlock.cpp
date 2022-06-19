@@ -2,6 +2,8 @@
 
 ui::BaseTextBlock::BaseTextBlock() {}
 
+ui::BaseTextBlock::BaseTextBlock(ui::TextVariables textVariables) : textVariables(textVariables) {}
+
 void ui::BaseTextBlock::init(ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack) {
     this->interactionManager = &interactionManager;
     this->interactionStack = &interactionStack;

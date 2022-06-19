@@ -11,6 +11,8 @@ ui::TextBlock::TextBlock(std::wstring text, sf::Color textColor, sf::Font *font,
     textVariables.backgroundSelectionColor = backgroundSelectionColor;
 }
 
+ui::TextBlock::TextBlock(std::wstring str, ui::TextVariables textVariables) : str(str), BaseTextBlock(textVariables) {}
+
 std::vector<ui::BaseCharacter*> ui::TextBlock::character() {
     std::vector<ui::BaseCharacter*> result;
     for (wchar_t character : str) {
@@ -26,4 +28,8 @@ bool ui::TextBlock::updateInteractions(sf::Vector2f mousePosition) {
 
 bool ui::TextBlock::in(sf::Vector2f mousePosition) {
     return false;
+}
+
+ui::TextBlock *ui::TextBlock::copy() {
+    return new TextBlock(str, textVariables);
 }

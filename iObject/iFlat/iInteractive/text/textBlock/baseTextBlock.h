@@ -19,6 +19,8 @@ namespace ui {
         };
         BaseTextBlock();
 
+        BaseTextBlock(TextVariables textVariables);
+
         void setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Font *font , uint size);
         virtual void init(ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack);
 
@@ -29,5 +31,7 @@ namespace ui {
         virtual void update() = 0;
 
         virtual bool updateInteractions(sf::Vector2f mousePosition) = 0;
+
+        virtual BaseTextBlock *copy() = 0;
     };
 }

@@ -28,5 +28,7 @@ namespace ui {
 		virtual sf::Vector2f getMinSize() = 0;
 		
 		virtual sf::Vector2f getNormalSize() = 0;
+		
+		virtual IObject* copy() = 0;
 	};
 }

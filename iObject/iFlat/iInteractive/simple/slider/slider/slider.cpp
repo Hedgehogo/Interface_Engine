@@ -22,3 +22,13 @@ sf::Vector2f ui::Slider::getMinSize() {
 	minSize = {minSize.x / scale.x, minSize.y / scale.y};
 	return minSize;
 }
+
+ui::Slider::Slider(ui::IDrawn *slider, ui::IDrawn *background, SliderInteraction *interaction, sf::Vector2f sliderScale) :
+	BaseSlider(slider, background, interaction), scale(sliderScale) {}
+
+ui::Slider *ui::Slider::copy() {
+	Slider* slider1 {new Slider{slider->copy(), background->copy(), dynamic_cast<SliderInteraction*>(interaction->copy()), scale}};
+	dynamic_cast<SliderInteraction*>(slider1->interaction)->setSlider(*slider1);
+	BaseSlider::copy(slider1);
+	return slider1;
+}

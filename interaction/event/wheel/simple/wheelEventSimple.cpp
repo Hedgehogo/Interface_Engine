@@ -14,6 +14,6 @@ void ui::WheelEvent_Simple::update(sf::Vector2i mousePosition, int value) {
 	if(this->active) {
 		whilePressed(mousePosition, value);
 	} else {
-		notPressed(mousePosition, value);
+        whileNotPressed(mousePosition, value);
 	}
 }

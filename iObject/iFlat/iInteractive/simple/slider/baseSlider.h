@@ -17,6 +17,8 @@ namespace ui {
 		
 		void cutBackValue();
 		
+		void copy(BaseSlider* baseSlider);
+		
 	public:
 		BaseSlider(ui::IDrawn *slider, ui::IDrawn *background, SliderInteraction* interaction);
 		

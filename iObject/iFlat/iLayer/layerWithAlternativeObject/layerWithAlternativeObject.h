@@ -1,26 +1,18 @@
 #pragma once
-
 #include "../iLayer.h"
-#include "../../iDrawn/iDrawn.h"
-#include "../../../panel/panel.h"
-#include "../../../panel/panelStack/panelStack.h"
-#include "../../../../interaction/interactionManager/interactionManager.h"
-#include "../../../../interaction/interactionStack/interactionStack.h"
-
 
 namespace ui {
-	class LayerWithInteractiveOverlay : public ILayer {
+	class LayerWithAlternativeObject : public ILayer {
 	protected:
-		PanelStack *panelStack;
-		Panel *panel;
-		IFlat *object;
+		IFlat* topObject;
+		IFlat* bottomObject;
 		
 		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &panelStack) override;
-		
+	
 	public:
-		LayerWithInteractiveOverlay(Panel *panel, IFlat *object);
+		LayerWithAlternativeObject(IFlat* topObject, IFlat* bottomObject, sf::Vector2f minimumSize);
 		
-		~LayerWithInteractiveOverlay() override;
+		~LayerWithAlternativeObject() override;
 		
 		void draw() override;
 		
@@ -33,5 +25,10 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
+		
+		LayerWithAlternativeObject* copy() override;
 	};
+	
+	typedef LayerWithAlternativeObject LayerWAObject;
+	typedef LayerWithAlternativeObject LWAO;
 }

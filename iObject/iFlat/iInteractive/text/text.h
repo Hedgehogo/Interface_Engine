@@ -67,5 +67,9 @@ namespace ui {
         sf::Vector2f getMinSize() override;
 
         sf::Vector2f getNormalSize() override;
+    protected:
+        Text(std::vector<ui::BaseTextBlock *> textBlocks, IDrawn *background = new ui::FullColor(sf::Color::White), uint size = 14, float lineSpacing = 1.15, ui::Text::Align align = Align::left);
+    public:
+        Text *copy() override;
     };
 }

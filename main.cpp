@@ -2,7 +2,7 @@
 #include "UI.h"
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(400, 200), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
 
 	sf::Texture texture;
@@ -15,50 +15,38 @@ int main() {
 	
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
+
+    ui::Text * text = new ui::Text{{
+                       new ui::TextBlock{
+                           L"Съешь же ещё ",
+                           sf::Color::Red,
+                           &font,
+                           sf::Text::Style::Bold,
+                       },
+                       new ui::InteractiveTextBlock{
+                           0,
+                           L"этих ",
+                           sf::Color::Green,
+                           &font,
+                           sf::Text::Style::Bold,
+                           46
+                       },
+                       new ui::TextBlock{
+                           L"мягких французских булок да выпей чаю",
+                           sf::Color::Red,
+                           &font,
+                           sf::Text::Style::Bold
+                       }
+                   },
+                   new ui::FullColor(sf::Color::White),
+                   14,
+                   1.15,
+                   &font};
+
 	ui::Interface interface {
         new ui::LayerWithBorderVertical{
-            {
-                new ui::Text{
-                    {
-                        new ui::TextBlock{
-                            L"Съешь же ещё ",
-                            sf::Color::Red,
-                            &font,
-                            sf::Text::Style::Bold,
-                        },
-                        new ui::InteractiveTextBlock{
-                            0,
-                            L"этих ",
-                            sf::Color::Green,
-                            &font,
-                            sf::Text::Style::Bold,
-                            46
-                        },
-                        new ui::TextBlock{
-                          L"мягких французских булок да выпей чаю",
-                          sf::Color::Red,
-                          &font,
-                          sf::Text::Style::Bold
-                        }
-                    },
-                    new ui::FullColor(sf::Color::White),
-                    14,
-                    1.15,
-                    &font
-                },
-                    new ui::Text{
-                        {
-                            new ui::InteractiveTextBlock{
-                                0,
-                                L"The quick brown fox jumps over the lazy dog"
-                            }
-                        },
-                        new ui::FullColor(sf::Color(0, 0, 0, 127)),
-                        46,
-                        1.15,
-                        &font,
-                        sf::Color::White
-                    }
+            {text,
+                    text->copy()
             },
             {
                 0.5

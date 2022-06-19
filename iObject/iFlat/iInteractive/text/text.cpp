@@ -158,3 +158,20 @@ sf::Vector2f ui::Text::getMinSize() {
 sf::Vector2f ui::Text::getNormalSize() {
     return sf::Vector2f();
 }
+
+ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::IDrawn *background, uint size, float lineSpacing, ui::Text::Align align) :
+    textBocks(textBlocks), background(background), size(size), lineSpacing(lineSpacing), align(align){
+    for (ui::BaseTextBlock* textBlock : textBlocks) {
+        std::vector<ui::BaseCharacter*> characters = textBlock->character();
+        textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
+    }
+}
+
+ui::Text *ui::Text::copy() {
+    std::vector<BaseTextBlock *> copyTextBlocks;
+    for (BaseTextBlock * textBlock : textBocks) {
+        copyTextBlocks.push_back(textBlock->copy());
+    }
+
+    return new Text{copyTextBlocks, background->copy(), size, lineSpacing, align};
+}

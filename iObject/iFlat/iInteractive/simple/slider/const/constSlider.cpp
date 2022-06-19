@@ -25,3 +25,13 @@ void ui::ConstSlider::resize(sf::Vector2f size, sf::Vector2f position) {
 	moveZoneSize = size - sliderSize;
 	background->resize(size, position);
 }
+
+ui::ConstSlider::ConstSlider(ui::IDrawn *slider, ui::IDrawn *background, ui::SliderInteraction *interaction) :
+	BaseSlider(slider, background, interaction) {}
+
+ui::ConstSlider* ui::ConstSlider::copy() {
+	ConstSlider* constSlider {new ConstSlider{slider->copy(), background->copy(), dynamic_cast<SliderInteraction*>(interaction->copy())}};
+	dynamic_cast<SliderInteraction*>(constSlider->interaction)->setSlider(*constSlider);
+	BaseSlider::copy(constSlider);
+	return constSlider;
+}

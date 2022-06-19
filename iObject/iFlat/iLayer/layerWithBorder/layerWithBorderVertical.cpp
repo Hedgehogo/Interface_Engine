@@ -63,13 +63,7 @@ namespace ui {
 				minimumSize.x = size.x;
 			}
 		}
-		if(minimumSize.x < this->minimumSize.x){
-			minimumSize.x = this->minimumSize.x;
-		}
-		if(minimumSize.y < this->minimumSize.y){
-			minimumSize.y = this->minimumSize.y;
-		}
-		return minimumSize;
+		return {std::max(minimumSize.x, this->minimumSize.x), std::max(minimumSize.y, this->minimumSize.y)};
 	}
 	
 	sf::Vector2f LayerWithBorderVertical::getNormalSize() {
@@ -93,5 +87,19 @@ namespace ui {
 		for(IFlat* object : objects) {
 			object->update();
 		}
+	}
+	
+	LayerWithBorderVertical *LayerWithBorderVertical::copy() {
+		std::vector<IFlat *> newObjects(objects.size());
+		for(int i = 0; i < newObjects.size(); ++i) {
+			newObjects[i] = objects[i]->copy();
+		}
+		std::vector<float> newBounds(boundsVertical.size() - 2);
+		for(int i = 0; i < newBounds.size(); ++i) {
+			newBounds[i] = boundsVertical[i + 1];
+		}
+		LayerWithBorderVertical* layerWithBorderVertical{new LayerWithBorderVertical{newObjects, newBounds, minimumSize}};
+		ILayer::copy(layerWithBorderVertical);
+		return layerWithBorderVertical;
 	}
 }

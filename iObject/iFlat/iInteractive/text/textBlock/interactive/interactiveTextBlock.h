@@ -30,5 +30,12 @@ namespace ui {
 
         void update() override;
         bool updateInteractions(sf::Vector2f mousePosition) override;
+
+    protected:
+        InteractiveTextBlock(std::wstring str, TextVariables textVariables, ui::IInteraction *interaction);
+        InteractiveTextBlock(std::wstring str, TextVariables textVariables, int indexInteraction);
+    public:
+
+        InteractiveTextBlock * copy() override;
     };
 }

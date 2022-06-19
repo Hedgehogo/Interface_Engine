@@ -19,7 +19,7 @@ namespace ui {
 		
 		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelStack &overlayStack) override;
 		
-		bool inWindow(sf::Vector2f position);
+		bool isInWindow(sf::Vector2f position);
 		
 	public:
 		void init();
@@ -43,5 +43,7 @@ namespace ui {
 		void update(int wheel);
 		
 		void updateCluster();
+		
+		Interface* copy() override;
 	};
 }

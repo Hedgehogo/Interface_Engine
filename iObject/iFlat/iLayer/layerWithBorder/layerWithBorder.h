@@ -28,6 +28,8 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		void update() override;
+		
+		LayerWithBorder* copy() override;
 	};
 	
 	typedef LayerWithBorder LayerWBorder;

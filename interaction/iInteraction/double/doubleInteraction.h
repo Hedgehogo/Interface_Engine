@@ -9,12 +9,23 @@ namespace ui {
 		
 	public:
 		DoubleInteraction(IInteraction* first, IInteraction* second);
+		
+		~DoubleInteraction() override;
+		
 		void setFirst(IInteraction* first);
+		
 		void setSecond(IInteraction* second);
+		
 		IInteraction* getFirst();
+		
 		IInteraction* getSecond();
+		
 		void start(sf::Vector2i mousePosition) override;
+		
 		bool update(sf::Vector2i mousePosition) override;
+		
 		void finish(sf::Vector2i mousePosition) override;
+		
+		DoubleInteraction* copy() override;
 	};
 }
