@@ -12,9 +12,9 @@ namespace ui {
 		defaultSize = size;
 	}
 	
-	void Caption::init(sf::RenderWindow &window, InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::Panel *parent, ui::PanelManager &overlayStack) {
+	void Caption::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 		this->window = &window;
-		initObject(background, window, interactionStack, interactionManager, parent, overlayStack);
+		initObject(background, window, interactionStack, interactionManager, panelManager);
 	}
 	
 	Caption::Caption(const std::wstring& text, IDrawn *background, sf::Font &font, sf::Vector2f minimumSize, int size, sf::Color color, sf::Text::Style style, float rotation) :

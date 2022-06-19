@@ -2,9 +2,9 @@
 
 ui::PanelEvent::PanelEvent() : panel(nullptr), panelManager(nullptr) {}
 
-void ui::PanelEvent::init(ui::Panel &panel, ui::PanelManager &panelStack) {
+void ui::PanelEvent::init(ui::Panel &panel, ui::PanelManager &panelManager) {
 	this->panel = &panel;
-	this->panelManager = &panelStack;
+	this->panelManager = &panelManager;
 }
 
 void ui::PanelEvent::setPanel(ui::Panel &panel) {

@@ -1,13 +1,13 @@
-#include "rectangle.h"
+#include "roundedRectangle.h"
 
-ui::Rectangle::Rectangle(sf::Color color, float radius) : radius(radius) {
+ui::RoundedRectangle::RoundedRectangle(sf::Color color, float radius) : radius(radius) {
 	horizontalRectangle.setFillColor(color);
 	verticalRectangle.setFillColor(color);
 	circle.setFillColor(color);
 	circle.setRadius(radius);
 }
 
-void ui::Rectangle::draw() {
+void ui::RoundedRectangle::draw() {
 	window->draw(horizontalRectangle);
 	window->draw(verticalRectangle);
 	circle.setPosition(position);
@@ -20,7 +20,7 @@ void ui::Rectangle::draw() {
 	window->draw(circle);
 }
 
-void ui::Rectangle::resize(sf::Vector2f size, sf::Vector2f position) {
+void ui::RoundedRectangle::resize(sf::Vector2f size, sf::Vector2f position) {
 	this->size = size;
 	this->position = position;
 	verticalRectangle.setSize({size.x - radius * 2, size.y});
@@ -29,16 +29,16 @@ void ui::Rectangle::resize(sf::Vector2f size, sf::Vector2f position) {
 	horizontalRectangle.setPosition(position + sf::Vector2f{0, radius});
 }
 
-sf::Vector2f ui::Rectangle::getMinSize() {
+sf::Vector2f ui::RoundedRectangle::getMinSize() {
 	return sf::Vector2f(radius * 2, radius * 2);
 }
 
-sf::Vector2f ui::Rectangle::getNormalSize() {
+sf::Vector2f ui::RoundedRectangle::getNormalSize() {
 	return sf::Vector2f(radius * 2, radius * 2);
 }
 
-ui::Rectangle *ui::Rectangle::copy() {
-	Rectangle* rectangle{new Rectangle{circle.getFillColor(), radius}};
+ui::RoundedRectangle *ui::RoundedRectangle::copy() {
+	RoundedRectangle* rectangle{new RoundedRectangle{circle.getFillColor(), radius}};
 	IDrawn::copy(rectangle);
 	rectangle->resize(size, position);
 	return rectangle;

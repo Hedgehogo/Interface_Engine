@@ -2,7 +2,7 @@
 #include "../iDrawn.h"
 
 namespace ui {
-	class Rectangle : public IDrawn {
+	class RoundedRectangle : public IDrawn {
 	protected:
 		sf::RectangleShape horizontalRectangle;
 		sf::RectangleShape verticalRectangle;
@@ -12,7 +12,7 @@ namespace ui {
 		float radius;
 		
 	public:
-		Rectangle(sf::Color color, float radius);
+		RoundedRectangle(sf::Color color, float radius);
 		
 		void draw() override;
 		
@@ -22,6 +22,6 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() override;
 		
-		Rectangle* copy() override;
+		RoundedRectangle* copy() override;
 	};
 }
