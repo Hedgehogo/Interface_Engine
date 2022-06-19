@@ -12,7 +12,7 @@ namespace ui {
 		defaultSize = size;
 	}
 	
-	void Caption::init(sf::RenderWindow &window, InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::Panel *parent, ui::PanelStack &overlayStack) {
+	void Caption::init(sf::RenderWindow &window, InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::Panel *parent, ui::PanelManager &overlayStack) {
 		this->window = &window;
 		initObject(background, window, interactionStack, interactionManager, parent, overlayStack);
 	}

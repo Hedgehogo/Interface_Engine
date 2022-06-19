@@ -4,7 +4,6 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-
 	sf::Texture texture;
 	texture.loadFromFile("image.png");
 	sf::Texture texture_2;

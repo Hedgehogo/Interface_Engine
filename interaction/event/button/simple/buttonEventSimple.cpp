@@ -14,6 +14,6 @@ void ui::ButtonEvent_Simple::update(sf::Vector2i mousePosition, bool press) {
 	if(this->pressed) {
 		whilePressed(mousePosition);
 	} else {
-        whileNotPressed(mousePosition);
+		whileNotPressed(mousePosition);
 	}
 }

@@ -32,7 +32,7 @@ namespace ui {
         std::vector<BaseTextBlock*> textBocks;
 
         ui::IDrawn *background;
-        void init(sf::RenderWindow &window, Panel *parent, PanelStack &overlayStack);
+        void init(sf::RenderWindow &window, Panel *parent, PanelManager &overlayStack);
     public:
 
         Text(std::vector<ui::BaseTextBlock *> textBlocks, IDrawn *background = new ui::FullColor(sf::Color::White),

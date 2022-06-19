@@ -1,7 +1,7 @@
 #include <cmath>
 #include "bar.h"
 
-void ui::Bar::init(sf::RenderWindow &window, InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::Panel *parent, ui::PanelStack &overlayStack) {
+void ui::Bar::init(sf::RenderWindow &window, InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::Panel *parent, ui::PanelManager &overlayStack) {
 	initObject(background, window, interactionStack, interactionManager, parent, overlayStack);
 	initObject(strip, window, interactionStack, interactionManager, parent, overlayStack);
 }

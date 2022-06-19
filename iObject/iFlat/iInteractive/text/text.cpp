@@ -33,7 +33,7 @@ ui::Text::~Text() {
     delete background;
 }
 
-void ui::Text::init(sf::RenderWindow &window, ui::Panel *parent, ui::PanelStack &overlayStack) {
+void ui::Text::init(sf::RenderWindow &window, ui::Panel *parent, ui::PanelManager &overlayStack) {
     this->window = &window;
     for (ui::BaseCharacter* character : textCharacters) {
         character->init(window);

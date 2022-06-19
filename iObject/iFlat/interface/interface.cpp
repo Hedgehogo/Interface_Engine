@@ -2,23 +2,23 @@
 #include <utility>
 
 namespace ui {
-	void Interface::init(sf::RenderWindow&, InteractionStack&, InteractionManager&, Panel *parent, PanelStack&) {
+	void Interface::init(sf::RenderWindow&, InteractionStack&, InteractionManager&, Panel *parent, PanelManager&) {
 		if(!initialized) {
-			initObject(object, this->window, this->interactionStack, this->interactionManager, parent, this->panelStack);
+			initObject(object, this->window, this->interactionStack, this->interactionManager, parent, this->panelManager);
 			initialized = true;
 		}
 	}
 	
 	void Interface::init() {
 		if(!initialized) {
-			initObject(object, window, interactionStack, interactionManager, nullptr, panelStack);
+			initObject(object, window, interactionStack, interactionManager, nullptr, panelManager);
 			resize(static_cast<sf::Vector2f>(window.getSize()), sf::Vector2f(0, 0));
 			initialized = true;
 		}
 	}
 	
 	Interface::Interface(IFlat* object, InteractionStack interactionStack, sf::RenderWindow &window) :
-		object(object), interactionStack(std::move(interactionStack)), window(window), interactionManager(window), panelStack(), initialized(false) {}
+		object(object), interactionStack(std::move(interactionStack)), window(window), interactionManager(window), panelManager(), initialized(false) {}
 	
 	Interface::~Interface() {
 		delete object;
@@ -30,7 +30,7 @@ namespace ui {
 	
 	void Interface::draw() {
 		object->draw();
-		panelStack.draw();
+		panelManager.draw();
 	}
 	
 	void Interface::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -49,19 +49,19 @@ namespace ui {
 		return object->getNormalSize();
 	}
 	
-	void Interface::updateCluster() {
-		interactionManager.update();
+	void Interface::updateCluster(sf::Vector2f mousePosition) {
+		interactionManager.update(static_cast<sf::Vector2i>(mousePosition));
 	}
 	
 	void Interface::update() {
-		sf::Vector2f mousePosition = static_cast<sf::Vector2f>(interactionManager.getPosition());
+		sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 		if(isInWindow(mousePosition) && !interactionManager.isBlocked()) {
-			panelStack.updateInteractions(mousePosition);
+			panelManager.updateInteractions(mousePosition);
 			object->updateInteractions(mousePosition);
 		}
-		panelStack.update();
+		panelManager.update();
 		object->update();
-		updateCluster();
+		updateCluster(mousePosition);
 	}
 	
 	void Interface::update(int wheel) {
