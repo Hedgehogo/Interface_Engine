@@ -33,7 +33,7 @@ add_library(${PROJECT_NAME} STATIC
         iObject/iFlat/iDrawn/iDrawn.cpp iObject/iFlat/iDrawn/iDrawn.h
         iObject/iFlat/iLayer/iLayer.cpp iObject/iFlat/iLayer/iLayer.h
         iObject/iFlat/iDrawn/fullColor/fullColor.cpp iObject/iFlat/iDrawn/fullColor/fullColor.h
-        iObject/iFlat/iDrawn/rectangle/rectangle.cpp iObject/iFlat/iDrawn/rectangle/rectangle.h
+        iObject/iFlat/iDrawn/roundedRectangle/roundedRectangle.cpp iObject/iFlat/iDrawn/roundedRectangle/roundedRectangle.h
         iObject/iFlat/iDrawn/capsule/capsule.cpp iObject/iFlat/iDrawn/capsule/capsule.h
         iObject/iFlat/iDrawn/caption/caption.cpp iObject/iFlat/iDrawn/caption/caption.h
         iObject/iFlat/iDrawn/sprite/sprite.cpp iObject/iFlat/iDrawn/sprite/sprite.h
