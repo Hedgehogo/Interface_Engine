@@ -1,6 +1,9 @@
+#include <iostream>
 #include "pressedInteraction.h"
 
-ui::PressedInteraction::PressedInteraction(ui::ButtonEvent *event, sf::Mouse::Button button) : OneButtonInteraction(event, button), interactionManager(nullptr) {}
+ui::PressedInteraction::PressedInteraction(ui::ButtonEvent *event, sf::Mouse::Button button) : IInteraction(true), OneButtonInteraction(event, button), interactionManager(nullptr) {
+	std::cout << isBlocked();
+}
 
 void ui::PressedInteraction::init(InteractionManager &interactionManager) {
 	this->interactionManager = &interactionManager;

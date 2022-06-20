@@ -70,7 +70,7 @@ namespace ui {
 	}
 	
 	LayerWithConstCenter *LayerWithConstCenter::copy() {
-		LayerWithConstCenter* layerWithConstCenter{new LayerWithConstCenter{object, background, aspectRatio, minimumSize}};
+		LayerWithConstCenter* layerWithConstCenter{new LayerWithConstCenter{object->copy(), background->copy(), aspectRatio, minimumSize}};
 		LayerWithConstCenter::copy(layerWithConstCenter);
 		return layerWithConstCenter;
 	}

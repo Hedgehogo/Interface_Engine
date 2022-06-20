@@ -91,7 +91,7 @@ namespace ui {
 	}
 	
 	LayerWithConstBorder *LayerWithConstBorder::copy() {
-		LayerWithConstBorder* layerWithConstBorder{new LayerWithConstBorder{constObject, secondObject, side, borderDistance, minimumSize}};
+		LayerWithConstBorder* layerWithConstBorder{new LayerWithConstBorder{constObject->copy(), secondObject->copy(), side, borderDistance, minimumSize}};
 		LayerWithConstBorder::copy(layerWithConstBorder);
 		return layerWithConstBorder;
 	}

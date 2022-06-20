@@ -71,7 +71,7 @@ add_library(${PROJECT_NAME} STATIC
         iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.cpp iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.h
         iObject/panel/panelManager/panelManager.cpp iObject/panel/panelManager/panelManager.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
-        UI.h)
+        UI.h interaction/iInteraction/iInteraction.cpp)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 

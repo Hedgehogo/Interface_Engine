@@ -17,7 +17,7 @@ int main() {
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
 	
-	ui::ButtonWithPanel* buttonWithPanel {
+	/*ui::ButtonWithPanel* buttonWithPanel {
 		new ui::ButtonWithPanel {
 			new ui::Panel {
 				new ui::ButtonWithPanel {
@@ -45,7 +45,7 @@ int main() {
 			new ui::PointingDisplayPanelInteraction{},
 			new ui::FullColor{{78, 82, 84}}
 		},
-	};
+	};*/
 	
 	ui::Interface interface {
 		/*new ui::LayerWithConstBorder {
@@ -85,7 +85,7 @@ int main() {
 			},
 			ui::LayerWithConstBorder::Side::Left, 20, {50, 50}
 		}*/
-		new ui::LayerWithConstBorder {
+		/*new ui::LayerWithConstBorder {
 			new ui::Slider {
 				new ui::Capsule({78, 78, 78}),
 				new ui::FullColor({43, 43, 43}),
@@ -111,6 +111,19 @@ int main() {
 				1.f / 3.f, ui::Corner::UpLeft
 			},
 			ui::Side::Right, 10
+		},*/
+		new ui::LayerWithConstBorder {
+			new ui::Slider {
+				new ui::Capsule({78, 78, 78}),
+				new ui::FullColor({43, 43, 43}),
+				sf::Vector2f{1.0f, 0.5f}
+			},
+			new ui::Slider {
+				new ui::Capsule({78, 78, 78}),
+				new ui::FullColor({43, 43, 43}),
+				sf::Vector2f{1.0f, 0.5f}
+			},
+			ui::Side::Right, 100
 		},
 		InteractionStack {
 			std::vector<ui::IInteraction *> {
