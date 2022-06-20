@@ -1,5 +1,6 @@
 #include "interface.h"
 #include <utility>
+#include <iostream>
 
 namespace ui {
 	void Interface::init(sf::RenderWindow &, InteractionStack &, InteractionManager &, PanelManager &) {
@@ -11,8 +12,12 @@ namespace ui {
 	
 	void Interface::init() {
 		if(!initialized) {
+            sf::Vector2f windowSize = static_cast<sf::Vector2f>(window.getSize());
 			initObject(object, window, interactionStack, interactionManager, panelManager);
-			resize(static_cast<sf::Vector2f>(window.getSize()), sf::Vector2f(0, 0));
+            sf::Vector2f minSize = object->getMinSize();
+            sf::Vector2f size (std::max(windowSize.x,minSize.x), std::max(windowSize.y,minSize.y));
+			resize(size,sf::Vector2f(0, 0));
+            window.setSize(static_cast<sf::Vector2u>(size));
 			initialized = true;
 		}
 	}
