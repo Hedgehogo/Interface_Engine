@@ -19,3 +19,6 @@ layers.md
 /cmake-build-release/cmake_install.cmake
 /cmake-build-release/CMakeCache.txt
 /cmake-build-release/Interface_Engine-config.cmake
+*.swp
+/cmake-build-release/build.ninja.tmp57d9e
+/cmake-build-debug/build.ninja.tmpf183e
