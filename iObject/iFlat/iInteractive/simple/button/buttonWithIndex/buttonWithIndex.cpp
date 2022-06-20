@@ -1,8 +1,8 @@
 #include "buttonWithIndex.h"
 
 namespace ui {
-	void ButtonWithIndex::init(sf::RenderWindow &window, Panel *parent, PanelManager &overlayStack) {
-		Button::init(window, parent, overlayStack);
+	void ButtonWithIndex::init(sf::RenderWindow &window, PanelManager &panelManager) {
+		Button::init(window, panelManager);
 		interaction = interactionStack->at(interactionIndex);
 	}
 	

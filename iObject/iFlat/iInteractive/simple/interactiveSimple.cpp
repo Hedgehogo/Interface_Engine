@@ -14,7 +14,7 @@ void ui::Interactive_Simple::update() {
 	interact = false;
 }
 
-bool ui::Interactive_Simple::updateInteractions(sf::Vector2f mousePosition) {
+bool ui::Interactive_Simple::updateInteractions(sf::Vector2f) {
 	interact = true;
 	return true;
 }

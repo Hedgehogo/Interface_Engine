@@ -5,7 +5,7 @@
 #include "iObject/iFlat/iDrawn/sprite/sprite.h"
 #include "iObject/iFlat/iDrawn/caption/caption.h"
 #include "iObject/iFlat/iDrawn/capsule/capsule.h"
-#include "iObject/iFlat/iDrawn/rectangle/rectangle.h"
+#include "iObject/iFlat/iDrawn/roundedRectangle/roundedRectangle.h"
 #include "iObject/iFlat/iLayer/layerWithBorder/layerWithBorderHorizontal.h"
 #include "iObject/iFlat/iLayer/layerWithBorder/layerWithBorderVertical.h"
 #include "iObject/iFlat/iLayer/layerWithBorder/layerWithBorder.h"

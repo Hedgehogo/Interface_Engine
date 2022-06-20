@@ -2,16 +2,16 @@
 #include <utility>
 
 namespace ui {
-	void Interface::init(sf::RenderWindow&, InteractionStack&, InteractionManager&, Panel *parent, PanelManager&) {
+	void Interface::init(sf::RenderWindow &, InteractionStack &, InteractionManager &, PanelManager &) {
 		if(!initialized) {
-			initObject(object, this->window, this->interactionStack, this->interactionManager, parent, this->panelManager);
+			initObject(object, this->window, this->interactionStack, this->interactionManager, this->panelManager);
 			initialized = true;
 		}
 	}
 	
 	void Interface::init() {
 		if(!initialized) {
-			initObject(object, window, interactionStack, interactionManager, nullptr, panelManager);
+			initObject(object, window, interactionStack, interactionManager, panelManager);
 			resize(static_cast<sf::Vector2f>(window.getSize()), sf::Vector2f(0, 0));
 			initialized = true;
 		}

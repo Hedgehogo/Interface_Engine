@@ -21,7 +21,7 @@ namespace ui {
 		bool displayed;
 		bool active;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &panelManager) override;
+		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
 		static sf::Vector2f cornerToPositionOffset(Corner corner, sf::Vector2f size);
 		

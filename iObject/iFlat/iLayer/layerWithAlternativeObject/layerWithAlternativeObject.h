@@ -7,7 +7,7 @@ namespace ui {
 		IFlat* topObject;
 		IFlat* bottomObject;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &panelStack) override;
+		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 	
 	public:
 		LayerWithAlternativeObject(IFlat* topObject, IFlat* bottomObject, sf::Vector2f minimumSize);

@@ -8,7 +8,7 @@ namespace ui {
 	public:
 		BasePanelInteraction() = default;
 		
-		virtual void init(Panel& panel, PanelManager& panelStack) = 0;
+		virtual void init(Panel& panel, PanelManager& panelManager) = 0;
 		
 		virtual void setPanel(Panel& panel) = 0;
 		

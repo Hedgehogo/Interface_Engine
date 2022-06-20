@@ -1,9 +1,9 @@
 #include "baseSlider.h"
 #include <cmath>
 
-void ui::BaseSlider::init(sf::RenderWindow &window, ui::Panel *parent, ui::PanelManager &overlayStack) {
-	initObject(background, window, *interactionStack, *interactionManager, parent, overlayStack);
-	initObject(slider, window, *interactionStack, *interactionManager, parent, overlayStack);
+void ui::BaseSlider::init(sf::RenderWindow &window, PanelManager &panelManager) {
+	initObject(background, window, *interactionStack, *interactionManager, panelManager);
+	initObject(slider, window, *interactionStack, *interactionManager, panelManager);
 	dynamic_cast<SliderInteraction*>(interaction)->init(*interactionManager);
 }
 

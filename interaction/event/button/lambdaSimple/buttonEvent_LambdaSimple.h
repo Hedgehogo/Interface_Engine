@@ -19,4 +19,5 @@ namespace ui {
 		
 		ButtonEvent_LambdaSimple* copy() override;
 	};
+
 }
