@@ -184,7 +184,7 @@ int main() {
 			false,
 			0.75
 		},
-		ui::InteractionStack {
+		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
 				ui::MouseLambdaInteraction::debug.copy()
 			}
