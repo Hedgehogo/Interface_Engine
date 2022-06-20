@@ -3,9 +3,9 @@
 #include <vector>
 
 namespace ui {
-	void LayerWithBorderVertical::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) {
+	void LayerWithBorderVertical::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 		for (auto& object : objects) {
-			initObject(object, window, interactionStack, interactionManager, parent, overlayStack);
+			initObject(object, window, interactionStack, interactionManager, panelManager);
 		}
 	}
 	

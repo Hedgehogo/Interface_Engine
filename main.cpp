@@ -14,7 +14,6 @@ int main() {
 	
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
-
 	ui::Interface interface {
         new ui::LayerWithBorderVertical{
             {
@@ -76,22 +75,7 @@ int main() {
         },
 		ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
-				new ui::MouseLambdaInteraction {
-					new ui::ButtonEvent_LambdaSimple {
-						[](sf::Vector2i) {std::cout << "sl";},
-						[](sf::Vector2i) {std::cout << "wl";},
-						[](sf::Vector2i) {std::cout << "sl";},
-						[](sf::Vector2i) {std::cout << "nl";}
-					},
-					new ui::ButtonEvent_LambdaSimple {
-						[](sf::Vector2i) {std::cout << "sr" << std::endl;},
-						[](sf::Vector2i) {std::cout << "wr" << std::endl;},
-						[](sf::Vector2i) {std::cout << "sr" << std::endl;},
-						[](sf::Vector2i) {std::cout << "nr" << std::endl;}
-					},
-					[](sf::Vector2i) {std::cout << "sp" << std::endl;},
-					[](sf::Vector2i) {std::cout << "fp" << std::endl;}
-				},
+				ui::MouseLambdaInteraction::debug.copy()
 			}
 		},
 		window
@@ -130,5 +114,6 @@ int main() {
 		interface.update(wheel);
 		interface.draw();
 		window.display();
+        
 	}
 }

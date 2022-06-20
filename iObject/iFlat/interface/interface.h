@@ -17,7 +17,7 @@ namespace ui {
 		IFlat *object;
 		bool initialized;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) override;
+		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
 		bool isInWindow(sf::Vector2f position);
 		

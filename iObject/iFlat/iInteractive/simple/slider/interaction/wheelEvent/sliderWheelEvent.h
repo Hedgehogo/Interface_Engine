@@ -15,13 +15,13 @@ namespace ui {
 		bool horizontal;
 		bool relativity;
 		
-		void startPressed(sf::Vector2i windowPosition, int value) override;
+		void startPressed(sf::Vector2i mousePosition, int value) override;
 		
-		void stopPressed(sf::Vector2i windowPosition, int value) override;
+		void stopPressed(sf::Vector2i mousePosition, int value) override;
 		
-		void whilePressed(sf::Vector2i windowPosition, int value) override;
+		void whilePressed(sf::Vector2i mousePosition, int value) override;
 		
-		void whileNotPressed(sf::Vector2i, int) override;
+		void whileNotPressed(sf::Vector2i mousePosition, int value) override;
 		
 	public:
 		explicit SliderWheelEvent(BaseSlider &slider, bool horizontal = false, Sensitivity relativity = Sensitivity::relationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});

@@ -35,7 +35,7 @@ ui::Text::~Text() {
     delete background;
 }
 
-void ui::Text::init(sf::RenderWindow &window, ui::Panel *parent, ui::PanelManager &overlayStack) {
+void ui::Text::init(sf::RenderWindow &window, ui::PanelManager &overlayStack) {
     this->window = &window;
     for (ui::BaseCharacter* character : textCharacters) {
         character->init(window);
@@ -43,7 +43,7 @@ void ui::Text::init(sf::RenderWindow &window, ui::Panel *parent, ui::PanelManage
     for (BaseTextBlock * textBlock : textBocks) {
         textBlock->init(*interactionManager, *interactionStack);
     }
-    IObject::initObject(background, window, *interactionStack, *interactionManager, parent, overlayStack);
+    IObject::initObject(background, window, *interactionStack, *interactionManager, overlayStack);
 }
 
 void ui::Text::update() {
