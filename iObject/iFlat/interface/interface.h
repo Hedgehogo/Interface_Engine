@@ -11,7 +11,7 @@ namespace ui {
 	class Interface : public IFlat {
 	protected:
 		sf::RenderWindow &window;
-		InteractionStack interactionStack;
+		InteractionStack* interactionStack;
 		InteractionManager interactionManager;
 		PanelManager panelManager;
 		IFlat *object;
@@ -24,7 +24,7 @@ namespace ui {
 	public:
 		void init();
 		
-		Interface(IFlat *object, InteractionStack interactionStack, sf::RenderWindow &window);
+		Interface(IFlat *object, InteractionStack *interactionStack, sf::RenderWindow &window);
 		
 		~Interface() override;
 		

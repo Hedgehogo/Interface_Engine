@@ -4,7 +4,7 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	window.setFramerateLimit(5);
+	//window.setFramerateLimit(5);
 	
 	sf::Texture texture;
 	texture.loadFromFile("image.png");
@@ -17,7 +17,7 @@ int main() {
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
 	
-	ui::ButtonWithPanel* buttonWithPanel {
+	/*ui::ButtonWithPanel* buttonWithPanel {
 		new ui::ButtonWithPanel {
 			new ui::Panel {
 				new ui::ButtonWithPanel {
@@ -45,7 +45,7 @@ int main() {
 			new ui::PointingDisplayPanelInteraction{},
 			new ui::FullColor{{78, 82, 84}}
 		},
-	};
+	};*/
 	
 	ui::Interface interface {
 		/*new ui::LayerWithConstBorder {
@@ -85,7 +85,7 @@ int main() {
 			},
 			ui::LayerWithConstBorder::Side::Left, 20, {50, 50}
 		}*/
-		new ui::LayerWithConstBorder {
+		/*new ui::LayerWithConstBorder {
 			new ui::Slider {
 				new ui::Capsule({78, 78, 78}),
 				new ui::FullColor({43, 43, 43}),
@@ -111,9 +111,81 @@ int main() {
 				1.f / 3.f, ui::Corner::UpLeft
 			},
 			ui::Side::Right, 10
+		},*/
+		new  ui::LayerWithMovableBorder{
+			new ui::LayerWithMovableBorder{
+				new ui::LayerWithBorderHorizontal{
+					{
+						new ui::FullColor{{22, 22, 22}},
+						new ui::LayerWithConstRatio{
+							new ui::LayerWithAlternativeObject{
+								new ui::Capsule{{255, 0, 0}},
+								new ui::LayerWithBorderVertical{
+									{
+										new ui::Empty,
+										new ui::FullColor{{255, 0, 0}}
+									}
+								},
+							},
+							new ui::FullColor{{22, 22, 22}},
+							new ui::FullColor{{22, 22, 22}},
+							1,
+							ui::Corner::DownLeft
+						},
+						new ui::FullColor{{22, 22, 22}}
+					},
+					{
+						0.45,
+						0.55
+					}
+				},
+				new ui::LayerWithBorderHorizontal{
+					{
+						new ui::FullColor{{22, 22, 22}},
+						new ui::FullColor{{255, 0, 0}},
+						new ui::FullColor{{22, 22, 22}}
+					},
+					{
+						0.45,
+						0.55
+					}
+				},
+				false
+			},
+			new ui::LayerWithConstCenter{
+				new ui::LayerWithAlternativeObject{
+					new ui::LayerWithBorderHorizontal{
+						{
+							new ui::Capsule{{255, 0, 0}},
+							new ui::Capsule{{255, 0, 0}}
+						},
+						{0.5}
+					},
+					new ui::LayerWithBorderVertical{
+						{
+							new ui::LayerWithBorderHorizontal{
+								{
+									new ui::Empty,
+									new ui::FullColor{{255, 0, 0}},
+									new ui::Empty
+								},
+								{
+									0.25,
+									0.75
+								}
+							},
+							new ui::Empty
+						}
+					}
+				},
+				new ui::FullColor{{22, 22, 22}},
+				2
+			},
+			false,
+			0.75
 		},
-		ui::InteractionStack {
-			std::vector<ui::IInteraction *>{
+		new ui::InteractionStack {
+			std::vector<ui::IInteraction *> {
 				ui::MouseLambdaInteraction::debug.copy()
 			}
 		},
@@ -121,7 +193,7 @@ int main() {
 	};
 	
 	interface.init();
-	
+    //window.setFramerateLimit(5);
 	while(window.isOpen()) {
 		sf::Event event{};
 		int wheel = 0;
@@ -153,5 +225,6 @@ int main() {
 		interface.update(wheel);
 		interface.draw();
 		window.display();
+        
 	}
 }

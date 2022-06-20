@@ -2,7 +2,7 @@
 #include "pressedInteraction.h"
 
 ui::PressedInteraction::PressedInteraction(ui::ButtonEvent *event, sf::Mouse::Button button) : IInteraction(true), OneButtonInteraction(event, button), interactionManager(nullptr) {
-	std::cout << isBlocked();
+	//std::cout << isBlocked();
 }
 
 void ui::PressedInteraction::init(InteractionManager &interactionManager) {
