@@ -89,7 +89,17 @@ set(SFML_STATIC_LIBRARIES TRUE)
 
 set(CMAKE_EXE_LINKER_FLAGS "-static")
 
-set(SFML_DIR "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
+set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")
+set(SFML_PATH_2 "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
+set(SFML_PATH_3 "~\\SFML-2.5.1\\lib\\cmake\\SFML")
+
+if(EXISTS ${SFML_PATH_1})
+    set(SFML_DIR ${SFML_PATH_1})
+elseif(EXISTS ${SFML_PATH_2})
+    set(SFML_DIR ${SFML_PATH_2})
+elseif(EXISTS ${SFML_PATH_3})
+    set(SFML_DIR ${SFML_PATH_3})
+endif()
 
 set(CMAKE_MODULE_PATH "${cmaKE_CURRENT_LIST_DIR}/cmake_modules")
 
