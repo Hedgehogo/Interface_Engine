@@ -2,16 +2,16 @@
 #include <utility>
 
 namespace ui {
-	void Interface::init(sf::RenderWindow&, InteractionStack&, InteractionManager&, Panel *parent, PanelManager&) {
+	void Interface::init(sf::RenderWindow &, InteractionStack &, InteractionManager &, PanelManager &) {
 		if(!initialized) {
-			initObject(object, this->window, this->interactionStack, this->interactionManager, parent, this->panelManager);
+			initObject(object, this->window, this->interactionStack, this->interactionManager, this->panelManager);
 			initialized = true;
 		}
 	}
 	
 	void Interface::init() {
 		if(!initialized) {
-			initObject(object, window, interactionStack, interactionManager, nullptr, panelManager);
+			initObject(object, window, interactionStack, interactionManager, panelManager);
 			resize(static_cast<sf::Vector2f>(window.getSize()), sf::Vector2f(0, 0));
 			initialized = true;
 		}
@@ -24,7 +24,7 @@ namespace ui {
 		delete object;
 	}
 	
-	bool Interface::inWindow(sf::Vector2f position) {
+	bool Interface::isInWindow(sf::Vector2f position) {
 		return position.x > 0 && position.x < static_cast<float>(window.getSize().x) && position.y > 0 && position.y < static_cast<float>(window.getSize().y);
 	}
 	
@@ -55,7 +55,7 @@ namespace ui {
 	
 	void Interface::update() {
 		sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
-		if(inWindow(mousePosition) && !interactionManager.isBlocked()) {
+		if(isInWindow(mousePosition) && !interactionManager.isBlocked()) {
 			panelManager.updateInteractions(mousePosition);
 			object->updateInteractions(mousePosition);
 		}

@@ -2,14 +2,14 @@
 #include <SFML/Graphics.hpp>
 
 namespace ui {
-	void IDrawn::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) {
+	void IDrawn::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 		this->window = &window;
 	}
 	
 	IDrawn::IDrawn() : window(nullptr) {
 	}
 	
-	bool IDrawn::updateInteractions(sf::Vector2f mousePosition) {
+	bool IDrawn::updateInteractions(sf::Vector2f) {
 		return true;
 	}
 	

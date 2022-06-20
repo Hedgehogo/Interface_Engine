@@ -8,7 +8,7 @@ namespace ui {
 	public:
 		ClickPanelInteraction(PanelEvent *event, sf::Mouse::Button button);
 		
-		void init(Panel& panel, PanelManager& panelStack) override;
+		void init(Panel& panel, PanelManager& panelManager) override;
 		
 		void setPanel(Panel& panel) override;
 		

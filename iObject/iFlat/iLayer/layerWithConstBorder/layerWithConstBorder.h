@@ -14,13 +14,15 @@ namespace ui {
 		float borderDistance;
 		Side side;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack) override;
+		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
 		void copy(LayerWithConstBorder* layerWithConstBorder);
 	
 	public:
 		LayerWithConstBorder(IFlat *constObject, IFlat *secondObject, Side side, float borderDistance, sf::Vector2f minSize = {0, 0});
-		
+
+        ~LayerWithConstBorder() override;
+
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;

@@ -1,5 +1,4 @@
 #include "sliderInteraction.h"
-
 #include <utility>
 
 ui::SliderInteraction::SliderInteraction(BaseSlider &slider, sf::Mouse::Button button, bool wheelHorizontal, SliderWheelEvent::Sensitivity wheelRelativity, sf::Vector2f wheelSensitivity) :

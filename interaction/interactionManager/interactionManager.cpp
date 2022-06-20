@@ -27,7 +27,12 @@ void ui::InteractionManager::clear() {
 }
 
 bool ui::InteractionManager::isBlocked() {
-	return block;
+	for(auto& interaction : interactions) {
+		if(interaction->isBlocked()) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void ui::InteractionManager::update(sf::Vector2i mousePosition) {
@@ -40,10 +45,7 @@ void ui::InteractionManager::update(sf::Vector2i mousePosition) {
 		interaction->start(mousePosition);
 	}
 	addInteractions.clear();
-	block = false;
 	for(auto& interaction : interactions) {
-		if(interaction->update(mousePosition)) {
-			block = true;
-		}
+		interaction->update(mousePosition);
 	}
 }

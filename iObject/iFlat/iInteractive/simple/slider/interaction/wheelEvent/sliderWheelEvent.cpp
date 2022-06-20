@@ -24,7 +24,7 @@ void ui::SliderWheelEvent::whilePressed(sf::Vector2i, int value) {
 	slider->setValue(slider->getValue() + move);
 }
 
-void ui::SliderWheelEvent::notPressed(sf::Vector2i, int) {}
+void ui::SliderWheelEvent::whileNotPressed(sf::Vector2i, int) {}
 
 void ui::SliderWheelEvent::setSlider(ui::BaseSlider &slider) {
 	this->slider = &slider;

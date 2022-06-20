@@ -5,18 +5,18 @@
 ui::SliderEvent::SliderEvent(BaseSlider &slider, sf::Vector2i division) :
 	slider(&slider), division(division), startMousePosition(), startValue() {}
 
-void ui::SliderEvent::startPressed(sf::Vector2i windowPosition) {
-	if(!slider->onSlider(windowPosition)) {
-		slider->setValueByMouse(windowPosition);
+void ui::SliderEvent::startPressed(sf::Vector2i mousePosition) {
+	if(!slider->onSlider(mousePosition)) {
+		slider->setValueByMouse(mousePosition);
 	}
 	startValue = slider->getValue();
-	startMousePosition = windowPosition;
+	startMousePosition = mousePosition;
 }
 
 void ui::SliderEvent::stopPressed(sf::Vector2i) {}
 
-void ui::SliderEvent::whilePressed(sf::Vector2i windowPosition) {
-	sf::Vector2i mouseOffset{windowPosition.x - startMousePosition.x, windowPosition.y - startMousePosition.y};
+void ui::SliderEvent::whilePressed(sf::Vector2i mousePosition) {
+	sf::Vector2i mouseOffset{mousePosition.x - startMousePosition.x, mousePosition.y - startMousePosition.y};
 	slider->setValue(startValue);
 	slider->move(mouseOffset);
 	slider->roundValueToDivision(division);

@@ -10,9 +10,9 @@ namespace ui {
 	
 	class IObject {
 	protected:
-		virtual void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &panelStack) = 0;
+		virtual void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) = 0;
 		
-		void initObject(IObject *object, sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, Panel *parent, PanelManager &overlayStack);
+		void initObject(IObject *object, sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager);
 		
 	public:
 		virtual ~IObject() = default;

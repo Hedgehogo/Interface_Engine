@@ -5,8 +5,15 @@
 
 namespace ui {
 	class IInteraction {
+	private:
+		bool blocked;
+		
 	public:
+		explicit IInteraction(bool blocked = false);
+		
 		virtual ~IInteraction() = default;
+		
+		bool isBlocked() const;
 		
 		virtual void start(sf::Vector2i mousePosition) = 0;
 		

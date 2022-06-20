@@ -10,6 +10,7 @@ layers.md
 /cmake-build-debug/CMakeCache.txt
 /cmake-build-debug/hellolib-config.cmake
 /cmake-build-debug/Interface_Engine-config.cmake
+/cmake-build-debug/build.ninja.tmpf183e
 /cmake-build-release/.cmake/
 /cmake-build-release/CMakeFiles/
 /cmake-build-release/Testing/
@@ -19,6 +20,5 @@ layers.md
 /cmake-build-release/cmake_install.cmake
 /cmake-build-release/CMakeCache.txt
 /cmake-build-release/Interface_Engine-config.cmake
-*.swp
 /cmake-build-release/build.ninja.tmp57d9e
-/cmake-build-debug/build.ninja.tmpf183e
+*.swp
