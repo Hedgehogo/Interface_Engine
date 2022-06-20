@@ -4,7 +4,7 @@
 #include "../../../interaction/interactionStack/interactionStack.h"
 
 namespace ui {
-	class IInteractive : public IFlat {
+	class IInteractive : public virtual IFlat {
 	protected:
 		InteractionStack* interactionStack;
 		InteractionManager* interactionManager;

@@ -8,8 +8,6 @@ namespace ui {
 		
 		MouseLambdaInteraction(ui::ButtonEvent *leftMouseButton, ui::ButtonEvent *rightMouseButton, void ( *startPointing)(sf::Vector2i mousePosition), void (*finishPointing)(sf::Vector2i mousePosition));
 		
-		~MouseLambdaInteraction() override;
-		
 		MouseLambdaInteraction* copy() override;
 	};
 }

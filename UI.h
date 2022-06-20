@@ -14,6 +14,7 @@
 #include "iObject/iFlat/iLayer/layerWithConstCenter/layerWithConstCenter.h"
 #include "iObject/iFlat/iLayer/layerWithConstBorder/layerWithConstBorder.h"
 #include "iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.h"
+#include "iObject/iFlat/iLayer/layerWithMovableBorder/layerWithMovableBorder.h"
 #include "iObject/iFlat/iInteractive/simple/slider/const/constSlider.h"
 #include "iObject/iFlat/iInteractive/simple/slider/slider/slider.h"
 #include "iObject/iFlat/iInteractive/simple/button/button.h"
