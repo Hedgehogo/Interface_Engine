@@ -3,7 +3,7 @@
 #include "../../../enums/enums.h"
 #include "../iFlat.h"
 namespace ui {
-	class ILayer : public IFlat {
+	class ILayer : public virtual IFlat {
 	protected:
 		sf::Vector2f minimumSize;
 		

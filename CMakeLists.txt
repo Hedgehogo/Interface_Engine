@@ -3,14 +3,7 @@ project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(${PROJECT_NAME}
-		iObject/iFlat/iInteractive/text/text.cpp iObject/iFlat/iInteractive/text/text.h
-		iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.h
-		iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.cpp iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.h
-		iObject/iFlat/iInteractive/text/character/baseCharacter.cpp iObject/iFlat/iInteractive/text/character/baseCharacter.h
-		iObject/iFlat/iInteractive/text/character/simple/character.cpp iObject/iFlat/iInteractive/text/character/simple/character.h
-		iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.h
-		iObject/iFlat/iInteractive/text/textVariables.h
+add_library(${PROJECT_NAME} STATIC
         enums/corner/corner.h
         enums/side/side.h
         enums/size/size.h
@@ -36,7 +29,6 @@ add_library(${PROJECT_NAME}
         interaction/interactionStack/interactionStack.cpp interaction/interactionStack/interactionStack.h
         iObject/iObject.h iObject/iObject.cpp
         iObject/iFlat/iFlat.h
-        range/range.cpp range/range.h
         iObject/iFlat/iDrawn/iDrawn.cpp iObject/iFlat/iDrawn/iDrawn.h
         iObject/iFlat/iLayer/iLayer.cpp iObject/iFlat/iLayer/iLayer.h
         iObject/iFlat/iDrawn/fullColor/fullColor.cpp iObject/iFlat/iDrawn/fullColor/fullColor.h
@@ -80,14 +72,28 @@ add_library(${PROJECT_NAME}
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
         UI.h interaction/iInteraction/iInteraction.cpp)
 
-set(SFML_DIR "\\home\\andrewkoro105\\SFML-2.5.1\\lib\\cmake\\SFML")
+set(SFML_STATIC_LIBRARIES TRUE)
+
+set(CMAKE_EXE_LINKER_FLAGS "-static")
+
+set(SFML_DIR "E:\\SFML-2.5.1\\lib\\cmake\\SFML")
 
 set(CMAKE_MODULE_PATH "${cmaKE_CURRENT_LIST_DIR}/cmake_modules")
 
 find_package(SFML 2.5 REQUIRED graphics network audio window system)
 
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-system)
+target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system)
+
+#[[set_target_properties(Interface_Engine PROPERTIES PUBLIC_HEADER "UI.h")
+
+export(TARGETS Interface_Engine FILE Interface_Engine-config.cmake)
+
+install(TARGETS Interface_Engine ARCHIVE DESTINATION ${PROJECT_BINARY_DIR}/lib
+        PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}/public_headers")]]
+
+#-------------------------------
 
 add_executable(${PROJECT_NAME}_ex main.cpp)
 
+#find_library(`Yes_Science` Interface_Engine)
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})

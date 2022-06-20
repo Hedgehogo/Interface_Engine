@@ -1,6 +1,9 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
+
+typedef unsigned uint;
+
 namespace ui {
 
     struct TextVariables {
