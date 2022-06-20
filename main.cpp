@@ -73,7 +73,7 @@ int main() {
                 }
             }
         },
-		ui::InteractionStack {
+		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
 				ui::MouseLambdaInteraction::debug.copy()
 			}

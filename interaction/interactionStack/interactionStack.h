@@ -11,5 +11,7 @@ namespace ui {
         ui::IInteraction *at(unsigned index);
 
         void add(ui::IInteraction *element);
+
+        ~InteractionStack();
     };
 }

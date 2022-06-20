@@ -4,11 +4,6 @@ namespace ui {
 	MouseInteraction::MouseInteraction(ButtonEvent* leftMouseButton, ButtonEvent* rightMouseButton) :
 		leftMouseButton(leftMouseButton), rightMouseButton(rightMouseButton) {}
 	
-	MouseInteraction::~MouseInteraction() {
-		delete leftMouseButton;
-		delete rightMouseButton;
-	}
-	
 	void MouseInteraction::setLeftButtonEvent(ButtonEvent* leftMouseButton) {
 		delete this->leftMouseButton;
 		this->leftMouseButton = leftMouseButton->copy();
