@@ -16,7 +16,7 @@ add_library(${PROJECT_NAME} STATIC
         interaction/event/button/addInteraction/blockInteraction/addBlockInteractionEvent.cpp interaction/event/button/addInteraction/blockInteraction/addBlockInteractionEvent.h
         interaction/event/wheel/wheelEvent.cpp interaction/event/wheel/wheelEvent.h
         interaction/event/wheel/simple/wheelEventSimple.cpp interaction/event/wheel/simple/wheelEventSimple.h
-        interaction/iInteraction/iInteraction.h
+        interaction/iInteraction/iInteraction.cpp interaction/iInteraction/iInteraction.h
         interaction/iInteraction/empty/emptyInteraction.cpp interaction/iInteraction/empty/emptyInteraction.h
         interaction/iInteraction/lambda/lambdaInteraction.cpp interaction/iInteraction/lambda/lambdaInteraction.h
         interaction/iInteraction/double/doubleInteraction.cpp interaction/iInteraction/double/doubleInteraction.h
@@ -29,7 +29,6 @@ add_library(${PROJECT_NAME} STATIC
         interaction/interactionStack/interactionStack.cpp interaction/interactionStack/interactionStack.h
         iObject/iObject.h iObject/iObject.cpp
         iObject/iFlat/iFlat.h
-        iObject/iFlat/range/range.cpp iObject/iFlat/range/range.h
         iObject/iFlat/iDrawn/iDrawn.cpp iObject/iFlat/iDrawn/iDrawn.h
         iObject/iFlat/iLayer/iLayer.cpp iObject/iFlat/iLayer/iLayer.h
         iObject/iFlat/iDrawn/fullColor/fullColor.cpp iObject/iFlat/iDrawn/fullColor/fullColor.h
@@ -47,6 +46,12 @@ add_library(${PROJECT_NAME} STATIC
         iObject/iFlat/iLayer/layerWithConstBorder/layerWithConstBorder.cpp iObject/iFlat/iLayer/layerWithConstBorder/layerWithConstBorder.h
         iObject/iFlat/iLayer/layerWithConstCenter/layerWithConstCenter.cpp iObject/iFlat/iLayer/layerWithConstCenter/layerWithConstCenter.h
         iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.cpp iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.h
+        iObject/iFlat/iLayer/layerWithMovableBorder/layerWithMovableBorder.h
+        iObject/iFlat/iLayer/layerWithMovableBorder/layerWithMovableBorder.cpp
+        iObject/iFlat/iLayer/layerWithMovableBorder/interaction/event/movableBorderEvent.h
+        iObject/iFlat/iLayer/layerWithMovableBorder/interaction/event/movableBorderEvent.cpp
+        iObject/iFlat/iLayer/layerWithMovableBorder/interaction/interaction/movableBorderInteraction.h
+        iObject/iFlat/iLayer/layerWithMovableBorder/interaction/interaction/movableBorderInteraction.cpp
         iObject/iFlat/iInteractive/iInteractive.cpp iObject/iFlat/iInteractive/iInteractive.h
         iObject/iFlat/iInteractive/simple/interactiveSimple.cpp iObject/iFlat/iInteractive/simple/interactiveSimple.h
         iObject/iFlat/iInteractive/simple/button/button.cpp iObject/iFlat/iInteractive/simple/button/button.h
@@ -58,6 +63,13 @@ add_library(${PROJECT_NAME} STATIC
         iObject/iFlat/iInteractive/simple/slider/interaction/slideEvent/sliderEvent.cpp iObject/iFlat/iInteractive/simple/slider/interaction/slideEvent/sliderEvent.h
         iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.cpp iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.h
         iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.cpp iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.h
+        iObject/iFlat/iInteractive/text/text.cpp iObject/iFlat/iInteractive/text/text.h
+        iObject/iFlat/iInteractive/text/textVariables.h
+        iObject/iFlat/iInteractive/text/character/baseCharacter.cpp iObject/iFlat/iInteractive/text/character/baseCharacter.h
+        iObject/iFlat/iInteractive/text/character/simple/character.cpp iObject/iFlat/iInteractive/text/character/simple/character.h
+        iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.h
+        iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.cpp iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.h
+        iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.h
         iObject/panel/panel.cpp iObject/panel/panel.h
         iObject/panel/interaction/event/panelEvent.cpp iObject/panel/interaction/event/panelEvent.h
         iObject/panel/interaction/event/hide/hidePanelEvent.cpp iObject/panel/interaction/event/hide/hidePanelEvent.h
@@ -71,7 +83,7 @@ add_library(${PROJECT_NAME} STATIC
         iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.cpp iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.h
         iObject/panel/panelManager/panelManager.cpp iObject/panel/panelManager/panelManager.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
-        UI.h interaction/iInteraction/iInteraction.cpp)
+        UI.h)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 

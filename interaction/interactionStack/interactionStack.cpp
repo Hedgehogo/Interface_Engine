@@ -1,6 +1,6 @@
 #include "interactionStack.h"
 
-ui::InteractionStack::InteractionStack(std::vector<ui::IInteraction *> &&interactionStack) : interactionStack(std::move(interactionStack)) {}
+ui::InteractionStack::InteractionStack(std::vector<ui::IInteraction *> &&interactionStack) : interactionStack(std::move(interactionStack)){}
 
 ui::InteractionStack::~InteractionStack() {
 	for(const auto &interaction: interactionStack) {
