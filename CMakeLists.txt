@@ -29,7 +29,7 @@ add_library(${PROJECT_NAME}
 		interaction/interactionStack/interactionStack.cpp interaction/interactionStack/interactionStack.h
 		iObject/iObject.h iObject/iObject.cpp
 		iObject/iFlat/iFlat.h
-		iObject/iFlat/range/range.cpp iObject/iFlat/range/range.h
+        range/range.cpp range/range.h
 		iObject/iFlat/iDrawn/iDrawn.cpp iObject/iFlat/iDrawn/iDrawn.h
 		iObject/iFlat/iLayer/iLayer.cpp iObject/iFlat/iLayer/iLayer.h
 		iObject/iFlat/iDrawn/fullColor/fullColor.cpp iObject/iFlat/iDrawn/fullColor/fullColor.h

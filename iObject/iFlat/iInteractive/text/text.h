@@ -54,12 +54,18 @@ namespace ui {
 
         float lineSize = 0;
 
-        void printCharacter(sf::Vector2f &position, ui::BaseCharacter* character);
+        sf::Vector2f nextPosition;
 
-        void porting(sf::Vector2f &position, int i, float startRenderX);
-        void autoPorting(sf::Vector2f &position, int i, float startRenderX);
+        sf::Vector2f startRender;
+        sf::Vector2f endRender;
+
+        void printCharacter(ui::BaseCharacter* character);
+
+        void porting(int i);
+        void autoPorting(int i);
 
         void equalize(uint i);
+
     public:
 
         void resize(sf::Vector2f size, sf::Vector2f position) override;

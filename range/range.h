@@ -8,7 +8,7 @@ namespace ui {
 		Type max;
 	};
 
-	typedef Range<int> RangeUIi;
-	typedef Range<float> RangeUIf;
-	typedef Range<unsigned int> RangeUIu;
+	typedef Range<int> RangeI;
+	typedef Range<float> RangeF;
+	typedef Range<unsigned int> RangeU;
 }

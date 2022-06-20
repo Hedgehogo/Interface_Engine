@@ -15,40 +15,63 @@ int main() {
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
 
-    ui::Text * text = new ui::Text{{
-                       new ui::TextBlock{
-                           L"Съешь же ещё ",
-                           sf::Color::Red,
-                           &font,
-                           sf::Text::Style::Bold,
-                       },
-                       new ui::InteractiveTextBlock{
-                           0,
-                           L"этих ",
-                           sf::Color::Green,
-                           &font,
-                           sf::Text::Style::Bold,
-                           46
-                       },
-                       new ui::TextBlock{
-                           L"мягких французских булок да выпей чаю",
-                           sf::Color::Red,
-                           &font,
-                           sf::Text::Style::Bold
-                       }
-                   },
-                   new ui::FullColor(sf::Color::White),
-                   14,
-                   1.15,
-                   &font};
-
 	ui::Interface interface {
         new ui::LayerWithBorderVertical{
-            {text,
-                    text->copy()
-            },
             {
-                0.5
+                new ui::Text{
+                    {
+                        new ui::TextBlock{
+                            L"Съешь же ещё этих мягких французских булок да выпей чаю",
+                            sf::Color::Red,
+                            &font,
+                            sf::Text::Style::Bold
+                        }
+                    },
+                    new ui::FullColor(sf::Color::White),
+                    14,
+                    1.15,
+                    &font,
+                    sf::Color(0, 0, 0),
+                    sf::Color(255, 255, 255),
+                    sf::Color(255, 0, 0),
+                    ui::Text::Align::left
+                },
+                new ui::Text{
+                    {
+                        new ui::TextBlock{
+                            L"Съешь же ещё этих мягких французских булок да выпей чаю",
+                            sf::Color::Red,
+                            &font,
+                            sf::Text::Style::Bold
+                        }
+                    },
+                    new ui::FullColor(sf::Color::White),
+                    14,
+                    1.15,
+                    &font,
+                    sf::Color(0, 0, 0),
+                    sf::Color(255, 255, 255),
+                    sf::Color(255, 0, 0),
+                    ui::Text::Align::right
+                },
+                new ui::Text{
+                    {
+                        new ui::TextBlock{
+                            L"Съешь же ещё этих мягких французских булок да выпей чаю",
+                            sf::Color::Red,
+                            &font,
+                            sf::Text::Style::Bold
+                        }
+                    },
+                    new ui::FullColor(sf::Color::White),
+                    14,
+                    1.15,
+                    &font,
+                    sf::Color(0, 0, 0),
+                    sf::Color(255, 255, 255),
+                    sf::Color(255, 0, 0),
+                    ui::Text::Align::center
+                }
             }
         },
 		ui::InteractionStack {

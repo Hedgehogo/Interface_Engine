@@ -31,6 +31,8 @@ namespace ui{
 
         virtual void move(sf::Vector2f position) = 0;
 
+        const sf::Vector2f &getPosition() const;
+
         virtual float getHeight() = 0;
 
         virtual float getAdvance() = 0;

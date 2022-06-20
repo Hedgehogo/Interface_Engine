@@ -2,7 +2,7 @@
 #include "text.h"
 
 ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::IDrawn *background, int size, float lineSpacing, sf::Font *font
-               , sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, ui::Text::Align align) :
+    , sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, ui::Text::Align align) :
     background(background), align(align), size(size), lineSpacing(lineSpacing), textBocks(textBlocks){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
         textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, font, size);
@@ -13,14 +13,16 @@ ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::IDrawn *backgrou
     float wordSizeX = 0;
 
     for (ui::BaseCharacter *character : textCharacters) {
-        if (character->isSpecial() == BaseCharacter::Special::space){
+        if (character->isSpecial() == BaseCharacter::Special::no){
+            wordSizeX += character->getAdvance();
+        }else{
             if (minSize.x < wordSizeX)
                 minSize.x = wordSizeX;
             wordSizeX = 0;
-        }else{
-            wordSizeX += character->getAdvance();
         }
     }
+    if (minSize.x < wordSizeX)
+        minSize.x = wordSizeX;
 }
 
 ui::Text::~Text() {
@@ -67,36 +69,48 @@ void ui::Text::draw() {
     }
 }
 
-void ui::Text::printCharacter(sf::Vector2f &position, ui::BaseCharacter* character) {
-    character->setPosition(position);
-    position.x += character->getAdvance();
+void ui::Text::printCharacter(ui::BaseCharacter* character) {
+    character->setPosition(nextPosition);
+    nextPosition.x += character->getAdvance();
     if (lineSize < character->getHeight())
         lineSize = character->getHeight();
     distanceEnter++;
 }
 
 void ui::Text::equalize(uint i) {
+    sf::Vector2f offset{endRender.x - (textCharacters[i - 1]->getPosition().x + textCharacters[i - 1]->getAdvance()), lineSize};
+
+    switch (align) {
+        case Align::left:
+            offset.x = 0;
+            break;
+        case Align::center:
+            offset.x /= 2;
+            break;
+    }
+
     for (uint j = i - distanceEnter; j < i; ++j) {
-        textCharacters[j]->move({0, lineSize});
+        textCharacters[j]->move(offset);
     }
 }
 
-void ui::Text::autoPorting(sf::Vector2f &position, int i, float startRenderX) {
+void ui::Text::autoPorting(int i) {
 
-    porting(position, i, startRenderX);
+    porting(i);
 
     for (uint j = i - distanceSpace; j < i; ++j) {
-        printCharacter(position, textCharacters[j]);
+        printCharacter(textCharacters[j]);
     }
 
     distanceEnter = distanceSpace;
     distanceSpace = 0;
 }
 
-void ui::Text::porting(sf::Vector2f &position, int i, float startRenderX) {
-    equalize(i);
-    position.y += lineSize * lineSpacing;
-    position.x = startRenderX;
+void ui::Text::porting(int i) {
+    distanceEnter -= distanceSpace + 1;
+    equalize(i - (distanceSpace + 1));
+    nextPosition.y += lineSize * lineSpacing;
+    nextPosition.x = startRender.x;
 
     distanceEnter = 0;
     lineSize = 0;
@@ -105,9 +119,9 @@ void ui::Text::porting(sf::Vector2f &position, int i, float startRenderX) {
 void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
     background->resize(size, position);
 
-    sf::Vector2f startRender = position;
-    sf::Vector2f endRender = position + size;
-    position = startRender;
+    startRender = position;
+    endRender = position + size;
+    this->nextPosition = startRender;
 
     for (int i = 0; i < textCharacters.size(); i++) {
         ui::BaseCharacter* character = textCharacters[i];
@@ -120,29 +134,29 @@ void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
 
         switch (specialText) {
             case BaseCharacter::Special::no:
-                printCharacter(position, character);
+                printCharacter(character);
                 distanceSpace++;
                 break;
             case BaseCharacter::Special::space:
-                if (position.x< endRender.x){
-                    printCharacter(position, character);
+                if (this->nextPosition.x < endRender.x){
+                    printCharacter(character);
                     distanceSpace = 0;
                 } else{
                     distanceEnter++;
                     distanceSpace++;
-                    autoPorting(position, i + 1, startRender.x);
+                    autoPorting(i + 1);
                 }
                 break;
             case BaseCharacter::Special::enter:
-                distanceSpace++;
+                distanceSpace = 0;
                 distanceEnter++;
-                porting(position, i + 1, startRender.x);
+                porting(i + 1);
                 break;
         }
     }
 
-    if (endRender.x < position.x){
-        autoPorting(position, textCharacters.size(), startRender.x);
+    if (endRender.x < this->nextPosition.x){
+        autoPorting(textCharacters.size());
     }
     equalize(textCharacters.size());
 

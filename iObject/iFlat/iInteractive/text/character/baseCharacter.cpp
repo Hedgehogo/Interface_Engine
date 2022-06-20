@@ -15,3 +15,7 @@ bool ui::BaseCharacter::in(sf::Vector2f mousePosition) {
     return position.x < mousePosition.x && position.x + getAdvance() > mousePosition.x &&
            position.y < mousePosition.y && position.y + getHeight()> mousePosition.y;
 }
+
+const sf::Vector2f &ui::BaseCharacter::getPosition() const {
+    return position;
+}
