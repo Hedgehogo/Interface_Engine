@@ -4,7 +4,7 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	//window.setFramerateLimit(5);
+	window.setFramerateLimit(60);
 	
 	sf::Texture texture;
 	texture.loadFromFile("image.png");
@@ -17,13 +17,25 @@ int main() {
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
 	
-	/*ui::ButtonWithPanel* buttonWithPanel {
+	ui::ButtonWithPanel* buttonWithPanel {
 		new ui::ButtonWithPanel {
 			new ui::Panel {
 				new ui::ButtonWithPanel {
 					new ui::Panel {
 						new ui::LayerWithConstBezel {
-							new ui::FullColor{{60, 63, 65}},
+							new ui::Text{
+                                {
+                                    new ui::InteractiveTextBlock{
+                                        0,
+                                        L"соси жопу грёбаный убюдок мать твою, иди сюда блять"
+                                    }
+                                },
+                                new ui::FullColor{{60, 63, 65}},
+                                14,
+                                1.15,
+                                &font,
+                                sf::Color::Green
+                            },
 							new ui::FullColor{{81, 81, 81}},
 							1
 						},
@@ -45,7 +57,7 @@ int main() {
 			new ui::PointingDisplayPanelInteraction{},
 			new ui::FullColor{{78, 82, 84}}
 		},
-	};*/
+	};
 	
 	ui::Interface interface {
 		/*new ui::LayerWithConstBorder {
@@ -111,7 +123,7 @@ int main() {
 				1.f / 3.f, ui::Corner::UpLeft
 			},
 			ui::Side::Right, 10
-		},*/
+		}*/
 		new  ui::LayerWithMovableBorder{
 			new ui::LayerWithMovableBorder{
 				new ui::LayerWithBorderHorizontal{
@@ -119,11 +131,11 @@ int main() {
 						new ui::FullColor{{22, 22, 22}},
 						new ui::LayerWithConstRatio{
 							new ui::LayerWithAlternativeObject{
-								new ui::Capsule{{255, 0, 0}},
+								new ui::Capsule{sf::Color(0x9f6e5cff)},
 								new ui::LayerWithBorderVertical{
 									{
 										new ui::Empty,
-										new ui::FullColor{{255, 0, 0}}
+										new ui::FullColor{{159, 110, 92}}
 									}
 								},
 							},
@@ -142,7 +154,7 @@ int main() {
 				new ui::LayerWithBorderHorizontal{
 					{
 						new ui::FullColor{{22, 22, 22}},
-						new ui::FullColor{{255, 0, 0}},
+						new ui::FullColor{{159, 110, 92}},
 						new ui::FullColor{{22, 22, 22}}
 					},
 					{
@@ -156,8 +168,8 @@ int main() {
 				new ui::LayerWithAlternativeObject{
 					new ui::LayerWithBorderHorizontal{
 						{
-							new ui::Capsule{{255, 0, 0}},
-							new ui::Capsule{{255, 0, 0}}
+							new ui::Capsule{{159, 110, 92}},
+							new ui::Capsule{{159, 110, 92}}
 						},
 						{0.5}
 					},
@@ -166,7 +178,7 @@ int main() {
 							new ui::LayerWithBorderHorizontal{
 								{
 									new ui::Empty,
-									new ui::FullColor{{255, 0, 0}},
+									new ui::FullColor{{159, 110, 92}},
 									new ui::Empty
 								},
 								{

@@ -5,7 +5,7 @@ ui::InteractionManager::InteractionManager(sf::RenderWindow &window) :
 	window(window), interactions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {}
 
 void ui::InteractionManager::addInteraction(IInteraction &interaction) {
-	interactions.push_back(&interaction);
+
 	addInteractions.push_back(&interaction);
 }
 
@@ -43,9 +43,10 @@ void ui::InteractionManager::update(sf::Vector2i mousePosition) {
 	deleteInteractions.clear();
 	for(auto& interaction : addInteractions) {
 		interaction->start(mousePosition);
+        interactions.push_back(interaction);
 	}
 	addInteractions.clear();
-	for(auto& interaction : interactions) {
+	for(auto interaction : interactions) {
 		interaction->update(mousePosition);
 	}
 }

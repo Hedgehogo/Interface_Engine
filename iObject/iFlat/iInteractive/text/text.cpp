@@ -59,7 +59,7 @@ bool ui::Text::updateInteractions(sf::Vector2f mousePosition) {
             if (textBock->updateInteractions(mousePosition))
                 return true;
     }
-    return false;
+    return background->updateInteractions(mousePosition);
 }
 
 void ui::Text::draw() {

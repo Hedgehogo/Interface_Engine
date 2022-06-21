@@ -3,7 +3,7 @@ project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(${PROJECT_NAME} #[[STATIC]]
+add_library(${PROJECT_NAME}
         enums/corner/corner.h
         enums/side/side.h
         enums/size/size.h
@@ -88,19 +88,18 @@ add_library(${PROJECT_NAME} #[[STATIC]]
 
 set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")
 set(SFML_PATH_2 "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
-set(SFML_PATH_3 "\\home\\andrewkoro105\\SFML-2.5.1\\lib\\cmake\\SFML")
+set(SFML_PATH_3 "~\\SFML-2.5.1\\lib\\cmake\\SFML")
+
+if(EXISTS ${SFML_PATH_1} OR EXISTS ${SFML_PATH_2})
+    set(SFML_STATIC_LIBRARIES TRUE)
+    set(CMAKE_EXE_LINKER_FLAGS "-static")
+endif()
 
 if(EXISTS ${SFML_PATH_1})
-    set(SFML_STATIC_LIBRARIES TRUE)
-    set(CMAKE_EXE_LINKER_FLAGS "-static")
-
     set(SFML_DIR ${SFML_PATH_1})
 elseif(EXISTS ${SFML_PATH_2})
-    set(SFML_STATIC_LIBRARIES TRUE)
-    set(CMAKE_EXE_LINKER_FLAGS "-static")
-
     set(SFML_DIR ${SFML_PATH_2})
-elseif(EXISTS /)
+else()
     set(SFML_DIR ${SFML_PATH_3})
 endif()
 

@@ -1,9 +1,5 @@
 #include "layerWithMovableBorder.h"
-#include "../../../../interaction/iInteraction/oneButton/oneButtonInteraction.h"
-#include "../../../../interaction/iInteraction/block/pressed/pressedInteraction.h"
 #include "../../../../interaction/event/button/addInteraction/addInteractionEvent.h"
-#include "../../../../interaction/event/button/addInteraction/blockInteraction/addBlockInteractionEvent.h"
-#include <iostream>
 #include <algorithm>
 
 ui::LayerWithMovableBorder::LayerWithMovableBorder(ui::IFlat *firstObject, ui::IFlat *secondObject, bool isHorizontalBorder,
