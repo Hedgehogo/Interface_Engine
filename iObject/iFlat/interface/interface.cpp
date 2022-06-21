@@ -16,8 +16,8 @@ namespace ui {
 			initObject(object, window, *interactionStack, interactionManager, panelManager);
             sf::Vector2f minSize = object->getMinSize();
             sf::Vector2f size (std::max(windowSize.x,minSize.x), std::max(windowSize.y,minSize.y));
+			window.setSize(static_cast<sf::Vector2u>(size));
 			resize(size,sf::Vector2f(0, 0));
-            window.setSize(static_cast<sf::Vector2u>(size));
 			initialized = true;
 		}
 	}
@@ -44,6 +44,14 @@ namespace ui {
 	
 	bool Interface::updateInteractions(sf::Vector2f) {
 		return false;
+	}
+	
+	sf::Vector2f Interface::getPosition() {
+		return object->getPosition();
+	}
+	
+	sf::Vector2f Interface::getSize() {
+		return object->getSize();
 	}
 	
 	sf::Vector2f Interface::getMinSize() {

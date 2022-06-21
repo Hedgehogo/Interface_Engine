@@ -39,8 +39,7 @@ namespace ui {
 	}
 	
 	void LayerWithBorderVertical::resize(sf::Vector2f size, sf::Vector2f position) {
-		this->size = size;
-		this->position = position;
+		ILayer::resize(size, position);
 		sf::Vector2f coordinate{ 0, 0 };
 		sf::Vector2f objectSize{ size };
 		for (unsigned y = 0; y < objects.size(); ++y) {

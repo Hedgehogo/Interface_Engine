@@ -16,6 +16,7 @@ namespace ui {
             right,
             center
         };
+		
     protected:
         sf::RenderWindow *window;
 
@@ -33,8 +34,8 @@ namespace ui {
 
         ui::IDrawn *background;
         void init(sf::RenderWindow &window, PanelManager &overlayStack);
+		
     public:
-
         Text(std::vector<ui::BaseTextBlock *> textBlocks, IDrawn *background = new ui::FullColor(sf::Color::White),
              int size = 14, float lineSpacing = 1.15, sf::Font *font = nullptr,
              sf::Color textColor = sf::Color(0, 0, 0), sf::Color textSelectionColor = sf::Color(0, 0, 0),
@@ -67,14 +68,19 @@ namespace ui {
         void equalize(uint i);
 
     public:
-
         void resize(sf::Vector2f size, sf::Vector2f position) override;
+		
+		sf::Vector2f getPosition() override;
+		
+		sf::Vector2f getSize() override;
 
         sf::Vector2f getMinSize() override;
 
         sf::Vector2f getNormalSize() override;
+		
     protected:
         Text(std::vector<ui::BaseTextBlock *> textBlocks, IDrawn *background = new ui::FullColor(sf::Color::White), uint size = 14, float lineSpacing = 1.15, ui::Text::Align align = Align::left);
+		
     public:
         Text *copy() override;
     };

@@ -3,8 +3,8 @@
 #include "interaction/hide/hidePanelInteraction.h"
 
 ui::Panel::Panel(IFlat *object, HidePanelInteraction *interaction, Corner parentCorner, Corner panelCorner, sf::Vector2f offset, Size verticalSize, Size horizontalSize, sf::Vector2f size, bool displayed) :
-	object(object), verticalSize(verticalSize), horizontalSize(horizontalSize), size(size), parentCorner(parentCorner), panelCorner(panelCorner), offset(offset),
-	interaction(interaction), position(0, 0), displayed(displayed), oldDisplayed(false), active(false), parentProcessed(false), interactionManager(nullptr) {
+	Layout(size), object(object), verticalSize(verticalSize), horizontalSize(horizontalSize), parentCorner(parentCorner), panelCorner(panelCorner), offset(offset),
+	interaction(interaction), displayed(displayed), oldDisplayed(false), active(false), parentProcessed(false), interactionManager(nullptr) {
 	sf::Vector2f objectNormalSize = object->getNormalSize();
 	if(horizontalSize == Size::regardingChild)
 		this->size.x = objectNormalSize.x;
@@ -13,8 +13,8 @@ ui::Panel::Panel(IFlat *object, HidePanelInteraction *interaction, Corner parent
 }
 
 ui::Panel::Panel(IFlat *object, HidePanelInteraction *interaction, sf::Vector2f size, Corner parentCorner, Corner panelCorner, sf::Vector2f offset, bool displayed) :
-	object(object), verticalSize(Size::constant), horizontalSize(Size::constant), size(size), parentCorner(parentCorner), panelCorner(panelCorner), offset(offset),
-	interaction(interaction), position(0, 0), displayed(displayed), oldDisplayed(false), active(false), parentProcessed(false), interactionManager(nullptr) {}
+	Layout(size), object(object), verticalSize(Size::constant), horizontalSize(Size::constant), parentCorner(parentCorner), panelCorner(panelCorner), offset(offset),
+	interaction(interaction), displayed(displayed), oldDisplayed(false), active(false), parentProcessed(false), interactionManager(nullptr) {}
 
 void ui::Panel::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 	initObject(object, window, interactionStack, interactionManager, panelManager);

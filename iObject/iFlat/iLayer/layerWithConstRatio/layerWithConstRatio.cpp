@@ -41,8 +41,7 @@ namespace ui {
 	}
 	
 	void LayerWithConstRatio::resize(sf::Vector2f size, sf::Vector2f position) {
-		this->size = size;
-		this->position = position;
+		ILayer::resize(size, position);
 		
 		constSize = sf::Vector2f(size.x / size.y > aspectRatio ? sf::Vector2f{size.y * aspectRatio, size.y} : sf::Vector2f{size.x, size.x / aspectRatio});
 		secondSize = sf::Vector2f(size.x / size.y > aspectRatio ? sf::Vector2f{size.x - constSize.x, size.y} : sf::Vector2f{size.x, size.y - constSize.y} );

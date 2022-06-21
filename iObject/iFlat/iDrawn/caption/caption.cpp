@@ -18,7 +18,7 @@ namespace ui {
 	}
 	
 	Caption::Caption(const std::wstring& text, IDrawn *background, sf::Font &font, sf::Vector2f minimumSize, int size, sf::Color color, sf::Text::Style style, float rotation) :
-		str(text), minimumSize(minimumSize), background(background) {
+		str(text), background(background), minimumSize(minimumSize) {
 		this->text.setString(text);
 		this->text.setFont(font);
 		this->text.setCharacterSize(size);
@@ -28,15 +28,13 @@ namespace ui {
 	}
 	
 	Caption::Caption(const std::wstring& text, IDrawn *background, sf::Font &font, int size, sf::Color color, sf::Text::Style style, float rotation) :
-		str(text), background(background) {
+		str(text), background(background), minimumSize() {
 		this->text.setString(text);
 		this->text.setFont(font);
 		this->text.setCharacterSize(size);
 		this->text.setFillColor(color);
 		this->text.setStyle(style);
 		this->text.setRotation(rotation);
-		minimumSize.x = this->text.getGlobalBounds().width;
-		minimumSize.y = this->text.getGlobalBounds().height;
 	}
 	
 	void Caption::draw() {
@@ -59,6 +57,14 @@ namespace ui {
 		text.setPosition(position - sf::Vector2f(text.getGlobalBounds().left - text.getPosition().x, text.getGlobalBounds().top - text.getPosition().y));
 	}
 	
+	sf::Vector2f Caption::getPosition() {
+		return background->getPosition();
+	}
+	
+	sf::Vector2f Caption::getSize() {
+		return background->getSize();
+	}
+	
 	sf::Vector2f Caption::getMinSize() {
 		return minimumSize;
 	}
@@ -66,5 +72,13 @@ namespace ui {
 	sf::Vector2f Caption::getNormalSize() {
 		sf::FloatRect rect = text.getGlobalBounds();
 		return {rect.width, rect.height};
+	}
+	
+	Caption::Caption(sf::Text text, IDrawn *background, std::wstring str, sf::Vector2f minimumSize) : text(text), background(background), str(str), minimumSize(minimumSize) {}
+	
+	Caption *Caption::copy() {
+		Caption* caption{new Caption{text, background, str, minimumSize}};
+		IDrawn::copy(caption);
+		return caption;
 	}
 }

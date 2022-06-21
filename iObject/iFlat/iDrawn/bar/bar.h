@@ -3,12 +3,10 @@
 #include "../empty/empty.h"
 
 namespace ui {
-	class Bar : public IDrawn {
+	class Bar : public IDrawn, public Layout {
 	protected:
 		IDrawn* strip;
 		IDrawn* background;
-		sf::Vector2f position;
-		sf::Vector2f size;
 		bool horizontal;
 		float offset;
 		int division;

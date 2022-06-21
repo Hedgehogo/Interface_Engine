@@ -67,6 +67,14 @@ void ui::BaseSlider::draw() {
 	slider->draw();
 }
 
+sf::Vector2f ui::BaseSlider::getPosition() {
+	return position;
+}
+
+sf::Vector2f ui::BaseSlider::getSize() {
+	return sliderSize + moveZoneSize;
+}
+
 sf::Vector2f ui::BaseSlider::getMinSize() {
 	return background->getMinSize();
 }

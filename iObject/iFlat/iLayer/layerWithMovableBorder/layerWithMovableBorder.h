@@ -5,7 +5,7 @@
 #include "../../../../interaction/iInteraction/block/pressed/pressedInteraction.h"
 
 namespace ui{
-    class LayerWithMovableBorder: public ILayer, public Interactive_Simple {
+    class LayerWithMovableBorder : public ILayer, public Interactive_Simple {
         IFlat *firstObject;
         IFlat *secondObject;
 
@@ -23,21 +23,17 @@ namespace ui{
 
         ~LayerWithMovableBorder() override;
 
-        float getBorderValue() ;
+        float getBorderValue();
 
-        void setBorderValue(float borderValue) ;
+        void setBorderValue(float borderValue);
 
-        float getBorderValueNow() ;
+        float getBorderValueNow();
 
         int getBorderInteractionSize();
 
         void setBorderInteractionSize(int size);
 
         bool getIsHorizontalBorder();
-
-        sf::Vector2f getSize();
-
-        sf::Vector2f getPosition();
 
         bool isInBorder(sf::Vector2f pointPosition);
 
