@@ -17,7 +17,7 @@ int main() {
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
 	
-	ui::ButtonWithPanel* buttonWithPanel {
+	/*ui::ButtonWithPanel* buttonWithPanel {
 		new ui::ButtonWithPanel {
 			new ui::Panel {
 				new ui::ButtonWithPanel {
@@ -57,7 +57,7 @@ int main() {
 			new ui::PointingDisplayPanelInteraction{},
 			new ui::FullColor{{78, 82, 84}}
 		},
-	};
+	};*/
 	
 	ui::Interface interface {
 		/*new ui::LayerWithConstBorder {
@@ -146,7 +146,7 @@ int main() {
 						},
 						new ui::FullColor{{22, 22, 22}}
 					},
-					{
+					std::vector<float> {
 						0.45,
 						0.55
 					}
@@ -157,7 +157,7 @@ int main() {
 						new ui::FullColor{{159, 110, 92}},
 						new ui::FullColor{{22, 22, 22}}
 					},
-					{
+					std::vector<float> {
 						0.45,
 						0.55
 					}
@@ -181,7 +181,7 @@ int main() {
 									new ui::FullColor{{159, 110, 92}},
 									new ui::Empty
 								},
-								{
+								std::vector<float> {
 									0.25,
 									0.75
 								}
@@ -237,6 +237,5 @@ int main() {
 		interface.update(wheel);
 		interface.draw();
 		window.display();
-        
 	}
 }

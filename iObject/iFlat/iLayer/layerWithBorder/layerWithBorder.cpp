@@ -17,6 +17,17 @@ namespace ui {
 		this->boundsVertical.insert(this->boundsVertical.begin(), 0.0f);
 		this->boundsVertical.push_back(1.0f);
 	}
+	
+	LayerWithBorder::LayerWithBorder(std::vector<std::vector<IFlat *>> objects, sf::Vector2f minSize) :
+		ILayer(minSize), objects(std::move(objects)), boundsHorizontal(this->objects.size() + 1, 1.0f), boundsVertical(this->objects[0].size() + 1, 1.0f) {
+		sf::Vector2u count = {static_cast<unsigned>(this->objects.size()), static_cast<unsigned>(this->objects[0].size())};
+		for(unsigned x = 0; x < count.x; ++x) {
+			boundsHorizontal[x] = static_cast<float>(x) / static_cast<float>(count.x);
+		}
+		for(unsigned y = 0; y < count.y; ++y) {
+			boundsVertical[y] = static_cast<float>(y) / static_cast<float>(count.y);
+		}
+	}
 
 	LayerWithBorder::~LayerWithBorder() {
 		for (auto& x : objects) {
@@ -63,66 +74,66 @@ namespace ui {
 	}
 	
 	sf::Vector2f LayerWithBorder::getMinSize() {
-		sf::Vector2f minimumSize {0, 0};
-		std::vector<std::vector<sf::Vector2f>> sizes(objects.size());
-		for(int x = 0; x < sizes.size(); ++x) {
-			for(int y = 0; y < sizes[x].size(); ++y) {
-				sizes[x][y] = objects[x][y]->getNormalSize();
+		sf::Vector2f minSize {0, 0};
+		std::vector<std::vector<sf::Vector2f>> objectMinSizes(objects.size());
+		for(int x = 0; x < objectMinSizes.size(); ++x) {
+			for(int y = 0; y < objectMinSizes[x].size(); ++y) {
+				objectMinSizes[x][y] = objects[x][y]->getMinSize();
 			}
 		}
-		for (auto& line : sizes) {
-			float verticalSize{0};
-			for (auto& size : line) {
-				if(verticalSize < size.x) {
-					verticalSize = size.x;
-				}
+		
+		sf::Vector2f lineMinSize{0, 0};
+		sf::Vector2f objectMinSize{0, 0};
+		for (auto & line : objectMinSizes) {
+			lineMinSize.y = 0;
+			for (int y = 0; y < line.size(); ++y) {
+				objectMinSize.y = line[y].y / (boundsVertical[y + 1] - boundsVertical[y]);
+				lineMinSize.y = std::max(objectMinSize.y, lineMinSize.y);
 			}
-			minimumSize.y += verticalSize;
+			minSize.y = std::max(lineMinSize.y, minSize.y);
 		}
-		for(int y = 0; y < sizes[0].size(); ++y) {
-			float horizontalSize{0};
-			for(int x = 0; x < sizes.size(); ++x) {
-				if(horizontalSize < sizes[x][y].y) {
-					horizontalSize = sizes[x][y].y;
-				}
+		
+		for (int y = 0; y < objectMinSizes[0].size(); ++y) {
+			lineMinSize.x = 0;
+			for (int x = 0; x < objectMinSizes.size(); ++x) {
+				objectMinSize.x = objectMinSizes[x][y].x / (boundsHorizontal[x + 1] - boundsHorizontal[x]);
+				lineMinSize.x = std::max(objectMinSize.x, lineMinSize.x);
 			}
-			minimumSize.x += horizontalSize;
+			minSize.x = std::max(lineMinSize.x, minSize.x);
 		}
-		if(minimumSize.x < this->minimumSize.x){
-			minimumSize.x = this->minimumSize.x;
-		}
-		if(minimumSize.y < this->minimumSize.y){
-			minimumSize.y = this->minimumSize.y;
-		}
-		return minimumSize;
+		
+		return {std::max(minSize.x, this->minimumSize.x), std::max(minSize.y, this->minimumSize.y)};
 	}
 	
 	sf::Vector2f LayerWithBorder::getNormalSize() {
 		sf::Vector2f normalSize {0, 0};
-		std::vector<std::vector<sf::Vector2f>> sizes(objects.size());
-		for(int x = 0; x < sizes.size(); ++x) {
-			for(int y = 0; y < sizes[x].size(); ++y) {
-				sizes[x][y] = objects[x][y]->getNormalSize();
+		std::vector<std::vector<sf::Vector2f>> objectNormalSizes(objects.size());
+		for(int x = 0; x < objectNormalSizes.size(); ++x) {
+			for(int y = 0; y < objectNormalSizes[x].size(); ++y) {
+				objectNormalSizes[x][y] = objects[x][y]->getNormalSize();
 			}
 		}
-		for (auto& line : sizes) {
-			float verticalSize{0};
-			for (auto& size : line) {
-				if(verticalSize < size.x) {
-					verticalSize = size.x;
-				}
+		
+		sf::Vector2f lineNormalSize{0, 0};
+		sf::Vector2f objectNormalSize{0, 0};
+		for (auto & line : objectNormalSizes) {
+			lineNormalSize.y = 0;
+			for (int y = 0; y < line.size(); ++y) {
+				objectNormalSize.y = line[y].y / (boundsVertical[y + 1] - boundsVertical[y]);
+				lineNormalSize.y = std::max(objectNormalSize.y, lineNormalSize.y);
 			}
-			normalSize.y += verticalSize;
+			normalSize.y = std::max(lineNormalSize.y, normalSize.y);
 		}
-		for(int y = 0; y < sizes[0].size(); ++y) {
-			float horizontalSize{0};
-			for(int x = 0; x < sizes.size(); ++x) {
-				if(horizontalSize < sizes[x][y].y) {
-					horizontalSize = sizes[x][y].y;
-				}
+		
+		for (int y = 0; y < objectNormalSizes[0].size(); ++y) {
+			lineNormalSize.x = 0;
+			for (int x = 0; x < objectNormalSizes.size(); ++x) {
+				objectNormalSize.x = objectNormalSizes[x][y].x / (boundsHorizontal[x + 1] - boundsHorizontal[x]);
+				lineNormalSize.x = std::max(objectNormalSize.x, lineNormalSize.x);
 			}
-			normalSize.x += horizontalSize;
+			normalSize.x = std::max(lineNormalSize.x, normalSize.x);
 		}
+		
 		return normalSize;
 	}
 	

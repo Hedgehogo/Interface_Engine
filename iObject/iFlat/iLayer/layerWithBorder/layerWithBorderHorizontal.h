@@ -15,6 +15,10 @@ namespace ui {
 	public:
 		LayerWithBorderHorizontal(std::vector<IFlat *> objects, std::vector<float> bounds, sf::Vector2f minSize = {0, 0});
 		
+		LayerWithBorderHorizontal(std::vector<IFlat *> objects, sf::Vector2f minSize = {0, 0});
+		
+		LayerWithBorderHorizontal(IFlat *first, IFlat *second, float bound = 0.5f, sf::Vector2f minSize = {0, 0});
+		
 		~LayerWithBorderHorizontal() override;
 		
 		void draw() override;
