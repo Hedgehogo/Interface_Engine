@@ -7,8 +7,8 @@ namespace ui {
 		static sf::Color defaultColor;
 		static int defaultSize;
 		
-		std::wstring str;
 		sf::Text text;
+		std::wstring str;
 		IDrawn* background;
 		sf::Vector2f minimumSize;
 		
@@ -27,8 +27,18 @@ namespace ui {
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
+		sf::Vector2f getPosition() override;
+		
+		sf::Vector2f getSize() override;
+		
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
+		
+	protected:
+		Caption(sf::Text text, IDrawn* background, std::wstring str, sf::Vector2f minimumSize);
+		
+	public:
+		Caption* copy() override;
 	};
 }

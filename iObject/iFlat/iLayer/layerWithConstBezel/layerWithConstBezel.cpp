@@ -28,8 +28,7 @@ namespace ui {
 	}
 	
 	void LayerWithConstBezel::resize(sf::Vector2f size, sf::Vector2f position) {
-		this->size = size;
-		this->position = position;
+		ILayer::resize(size, position);
 		bezel->resize(size, position);
 		object->resize(size - sf::Vector2f(thickness * 2.0f, thickness * 2.0f), position + sf::Vector2f(thickness, thickness));
 	}

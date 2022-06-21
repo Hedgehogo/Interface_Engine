@@ -3,7 +3,7 @@
 #include "../iObject.h"
 
 namespace ui {
-	class IFlat : public IObject {
+	class IFlat : public virtual IObject {
 	public:
 		IFlat* copy() override = 0;
 	};
