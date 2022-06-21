@@ -21,6 +21,14 @@ namespace ui {
 		background->resize(size, position);
 	}
 	
+	sf::Vector2f Button::getPosition() {
+		return background->getPosition();
+	}
+	
+	sf::Vector2f Button::getSize() {
+		return background->getSize();
+	}
+	
 	sf::Vector2f Button::getMinSize() {
 		return background->getMinSize();
 	}

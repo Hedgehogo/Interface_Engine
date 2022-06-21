@@ -165,6 +165,14 @@ void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
     lineSize = 0;
 }
 
+sf::Vector2f ui::Text::getPosition() {
+	return startRender;
+}
+
+sf::Vector2f ui::Text::getSize() {
+	return endRender - startRender;
+}
+
 sf::Vector2f ui::Text::getMinSize() {
     return minSize;
 }

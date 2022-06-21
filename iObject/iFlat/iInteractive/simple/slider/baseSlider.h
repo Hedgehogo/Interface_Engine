@@ -38,9 +38,13 @@ namespace ui {
 		
 		void move(sf::Vector2i mouseOffset);
 		
-		sf::Vector2f getNormalSize() override;
+		sf::Vector2f getPosition() override;
+		
+		sf::Vector2f getSize() override;
 		
 		sf::Vector2f getMinSize() override;
+		
+		sf::Vector2f getNormalSize() override;
 		
 		void draw() override;
 		

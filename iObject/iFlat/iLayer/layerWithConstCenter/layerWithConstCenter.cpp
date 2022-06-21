@@ -25,8 +25,7 @@ namespace ui {
 	}
 	
 	void LayerWithConstCenter::resize(sf::Vector2f size, sf::Vector2f position) {
-		this->size = size;
-		this->position = position;
+		ILayer::resize(size, position);
 		background->resize(size, position);
 		float sizeAspectRatio = size.x / size.y;
 		if(sizeAspectRatio > aspectRatio) {

@@ -17,6 +17,12 @@ namespace ui {
 	public:
 		virtual ~IObject() = default;
 		
+		virtual void setPosition(sf::Vector2f position);
+		
+		virtual void move(sf::Vector2f position);
+		
+		virtual void setSize(sf::Vector2f size);
+		
 		virtual void draw() = 0;
 		
 		virtual void resize(sf::Vector2f size, sf::Vector2f position) = 0;
@@ -24,6 +30,10 @@ namespace ui {
 		virtual void update() = 0;
 		
 		virtual bool updateInteractions(sf::Vector2f mousePosition) = 0;
+		
+		virtual sf::Vector2f getPosition() = 0;
+		
+		virtual sf::Vector2f getSize() = 0;
 		
 		virtual sf::Vector2f getMinSize() = 0;
 		

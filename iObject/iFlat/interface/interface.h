@@ -34,15 +34,19 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
+		sf::Vector2f getPosition() override;
+		
+		sf::Vector2f getSize() override;
+		
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
 		
+		void updateCluster(sf::Vector2f mousePosition);
+		
 		void update() override;
 		
 		void update(int wheel);
-		
-		void updateCluster(sf::Vector2f mousePosition);
 		
 		Interface* copy() override;
 	};

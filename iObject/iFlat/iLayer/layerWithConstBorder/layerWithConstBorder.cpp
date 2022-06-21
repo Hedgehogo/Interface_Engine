@@ -19,8 +19,7 @@ namespace ui {
 	}
 	
 	void LayerWithConstBorder::resize(sf::Vector2f size, sf::Vector2f position) {
-		this->size = size;
-		this->position = position;
+		ILayer::resize(size, position);
 		
 		switch(side) {
 			case Side::Up :

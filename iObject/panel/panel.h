@@ -1,14 +1,13 @@
 #pragma once
 #include "../../enums/enums.h"
 #include "../iFlat/iFlat.h"
+#include "../layout/layout.h"
 
 namespace ui {
 	class HidePanelInteraction;
-	class Panel : public IObject {
+	class Panel : public Layout {
 	protected:
-		sf::Vector2f position;
 		sf::Vector2f offset;
-		sf::Vector2f size;
 		Size verticalSize;
 		Size horizontalSize;
 		IFlat *object;
@@ -52,9 +51,9 @@ namespace ui {
 		
 		virtual bool updateInteractions(bool active, sf::Vector2f mousePosition);
 		
-		sf::Vector2f getNormalSize() override;
-		
 		sf::Vector2f getMinSize() override;
+		
+		sf::Vector2f getNormalSize() override;
 		
 		Panel* copy() override;
 	};

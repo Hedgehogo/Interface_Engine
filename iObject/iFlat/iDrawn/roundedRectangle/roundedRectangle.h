@@ -1,14 +1,13 @@
 #pragma once
 #include "../iDrawn.h"
+#include "../../../layout/layout.h"
 
 namespace ui {
-	class RoundedRectangle : public IDrawn {
+	class RoundedRectangle : public IDrawn, public Layout {
 	protected:
 		sf::RectangleShape horizontalRectangle;
 		sf::RectangleShape verticalRectangle;
 		sf::CircleShape circle;
-		sf::Vector2f position;
-		sf::Vector2f size;
 		float radius;
 		
 	public:

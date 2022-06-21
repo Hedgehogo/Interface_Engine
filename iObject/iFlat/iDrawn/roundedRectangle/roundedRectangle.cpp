@@ -21,8 +21,7 @@ void ui::RoundedRectangle::draw() {
 }
 
 void ui::RoundedRectangle::resize(sf::Vector2f size, sf::Vector2f position) {
-	this->size = size;
-	this->position = position;
+	Layout::resize(size, position);
 	verticalRectangle.setSize({size.x - radius * 2, size.y});
 	verticalRectangle.setPosition(position + sf::Vector2f{radius, 0});
 	horizontalRectangle.setSize({size.x, size.y - radius * 2});
@@ -40,6 +39,7 @@ sf::Vector2f ui::RoundedRectangle::getNormalSize() {
 ui::RoundedRectangle *ui::RoundedRectangle::copy() {
 	RoundedRectangle* rectangle{new RoundedRectangle{circle.getFillColor(), radius}};
 	IDrawn::copy(rectangle);
+	Layout::copy(rectangle);
 	rectangle->resize(size, position);
 	return rectangle;
 }
