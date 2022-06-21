@@ -206,7 +206,13 @@ int main() {
 	
 	interface.init();
     //window.setFramerateLimit(5);
+	sf::Clock clock;
 	while(window.isOpen()) {
+		
+		float currentTime = clock.restart().asSeconds();
+        	float fps = 1.f / currentTime;
+        	window.setTitle(std::to_string(static_cast<int>(fps)));
+		
 		sf::Event event{};
 		int wheel = 0;
 		while(window.pollEvent(event)) {
