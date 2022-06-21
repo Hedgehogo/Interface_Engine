@@ -4,7 +4,7 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	window.setFramerateLimit(60);
+	//window.setFramerateLimit(60);
 	
 	sf::Texture texture;
 	texture.loadFromFile("image.png");
@@ -205,8 +205,14 @@ int main() {
 	};
 	
 	interface.init();
-    //window.setFramerateLimit(5);
+	
+	sf::Clock clock;
 	while(window.isOpen()) {
+		
+		float currentTime = clock.restart().asSeconds();
+        float fps = 1.f / currentTime;
+        window.setTitle(std::to_string(static_cast<int>(fps)));
+		
 		sf::Event event{};
 		int wheel = 0;
 		while(window.pollEvent(event)) {
