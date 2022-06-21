@@ -154,7 +154,21 @@ int main() {
 				new ui::LayerWithBorderHorizontal{
 					{
 						new ui::FullColor{{22, 22, 22}},
-						new ui::FullColor{{159, 110, 92}},
+                        new ui::Text{
+                            {
+                                new ui::TextBlock{
+                                    L"Box2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects move in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation.\nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine."
+                                }
+                            },
+                            new ui::FullColor{{159, 110, 92}},
+                            14,
+                            1.15,
+                            &font,
+                            sf::Color{10, 10, 0},
+                            sf::Color{200, 200, 200},
+                            sf::Color{200, 200, 200},
+                            ui::Text::Align::center
+                        },
 						new ui::FullColor{{22, 22, 22}}
 					},
 					{
