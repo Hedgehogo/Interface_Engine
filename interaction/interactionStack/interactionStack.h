@@ -6,12 +6,12 @@ namespace ui {
     protected:
         std::vector<ui::IInteraction *> interactionStack;
     public:
-        InteractionStack(std::vector<ui::IInteraction *> &&interactionStack);
+        explicit InteractionStack(std::vector<ui::IInteraction *> &&interactionStack);
+		
+		virtual ~InteractionStack();
 
         ui::IInteraction *at(unsigned index);
 
         void add(ui::IInteraction *element);
-
-        ~InteractionStack();
     };
 }

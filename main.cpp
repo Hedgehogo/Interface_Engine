@@ -112,22 +112,79 @@ int main() {
 			},
 			ui::Side::Right, 10
 		},*/
-		new ui::LayerWithConstBorder{
-            new ui::LayerWithConstCenter{
-                new ui::LayerWithBorderHorizontal{
-                    {
-                        new ui::Capsule{sf::Color::Yellow},
-                        new ui::Capsule{sf::Color::Yellow}
-                    },
-                    {0.5}
-                },
-                new ui::FullColor(sf::Color::Red),
-                2,
-            },
-            new ui::FullColor(sf::Color::Red),
-            ui::Side::Down, 50
+		new  ui::LayerWithMovableBorder{
+			new ui::LayerWithMovableBorder{
+				new ui::LayerWithBorderHorizontal{
+					{
+						new ui::FullColor{{22, 22, 22}},
+						new ui::LayerWithConstRatio{
+							new ui::LayerWithAlternativeObject{
+								new ui::Capsule{{255, 0, 0}},
+								new ui::LayerWithBorderVertical{
+									{
+										new ui::Empty,
+										new ui::FullColor{{255, 0, 0}}
+									}
+								},
+							},
+							new ui::FullColor{{22, 22, 22}},
+							new ui::FullColor{{22, 22, 22}},
+							1,
+							ui::Corner::DownLeft
+						},
+						new ui::FullColor{{22, 22, 22}}
+					},
+					{
+						0.45,
+						0.55
+					}
+				},
+				new ui::LayerWithBorderHorizontal{
+					{
+						new ui::FullColor{{22, 22, 22}},
+						new ui::FullColor{{255, 0, 0}},
+						new ui::FullColor{{22, 22, 22}}
+					},
+					{
+						0.45,
+						0.55
+					}
+				},
+				false
+			},
+			new ui::LayerWithConstCenter{
+				new ui::LayerWithAlternativeObject{
+					new ui::LayerWithBorderHorizontal{
+						{
+							new ui::Capsule{{255, 0, 0}},
+							new ui::Capsule{{255, 0, 0}}
+						},
+						{0.5}
+					},
+					new ui::LayerWithBorderVertical{
+						{
+							new ui::LayerWithBorderHorizontal{
+								{
+									new ui::Empty,
+									new ui::FullColor{{255, 0, 0}},
+									new ui::Empty
+								},
+								{
+									0.25,
+									0.75
+								}
+							},
+							new ui::Empty
+						}
+					}
+				},
+				new ui::FullColor{{22, 22, 22}},
+				2
+			},
+			false,
+			0.75
 		},
-		ui::InteractionStack {
+		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
 				ui::MouseLambdaInteraction::debug.copy()
 			}

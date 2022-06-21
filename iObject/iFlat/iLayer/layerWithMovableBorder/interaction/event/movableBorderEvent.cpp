@@ -11,7 +11,7 @@ void ui::MovableBorderEvent::setLayer(ui::LayerWithMovableBorder &layer) {
 void ui::MovableBorderEvent::startPressed(sf::Vector2i mousePosition) {
     this->active = layer->isInBorder(static_cast<sf::Vector2f>(mousePosition));
     if (this->active){
-        std::cout << "Start\n";
+        //std::cout << "Start\n";
         startMousePosition = mousePosition;
         startBorderValue = layer->getBorderValueNow();
     }

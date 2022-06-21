@@ -5,7 +5,7 @@
 namespace ui {
 	void Interface::init(sf::RenderWindow &, InteractionStack &, InteractionManager &, PanelManager &) {
 		if(!initialized) {
-			initObject(object, this->window, this->interactionStack, this->interactionManager, this->panelManager);
+			initObject(object, this->window, *this->interactionStack, this->interactionManager, this->panelManager);
 			initialized = true;
 		}
 	}
@@ -13,7 +13,7 @@ namespace ui {
 	void Interface::init() {
 		if(!initialized) {
             sf::Vector2f windowSize = static_cast<sf::Vector2f>(window.getSize());
-			initObject(object, window, interactionStack, interactionManager, panelManager);
+			initObject(object, window, *interactionStack, interactionManager, panelManager);
             sf::Vector2f minSize = object->getMinSize();
             sf::Vector2f size (std::max(windowSize.x,minSize.x), std::max(windowSize.y,minSize.y));
 			resize(size,sf::Vector2f(0, 0));
@@ -22,8 +22,8 @@ namespace ui {
 		}
 	}
 	
-	Interface::Interface(IFlat* object, InteractionStack interactionStack, sf::RenderWindow &window) :
-		object(object), interactionStack(std::move(interactionStack)), window(window), interactionManager(window), panelManager(), initialized(false) {}
+	Interface::Interface(IFlat* object, InteractionStack *interactionStack, sf::RenderWindow &window) :
+		object(object), interactionStack(interactionStack), window(window), interactionManager(window), panelManager(), initialized(false) {}
 	
 	Interface::~Interface() {
 		delete object;

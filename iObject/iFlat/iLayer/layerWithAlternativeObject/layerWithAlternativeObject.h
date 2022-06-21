@@ -10,7 +10,7 @@ namespace ui {
 		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 	
 	public:
-		LayerWithAlternativeObject(IFlat* topObject, IFlat* bottomObject, sf::Vector2f minimumSize);
+		LayerWithAlternativeObject(IFlat* topObject, IFlat* bottomObject, sf::Vector2f minimumSize = {});
 		
 		~LayerWithAlternativeObject() override;
 		

@@ -11,7 +11,7 @@ namespace ui {
 	class Interface : public IFlat {
 	protected:
 		sf::RenderWindow &window;
-		InteractionStack *interactionStack;
+		InteractionStack* interactionStack;
 		InteractionManager interactionManager;
 		PanelManager panelManager;
 		IFlat *object;
