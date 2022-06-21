@@ -107,9 +107,8 @@ sf::Vector2f ui::LayerWithMovableBorder::getMinSize() {
     sf::Vector2f firstMinSize = firstObject->getMinSize();
     sf::Vector2f secondMinSize = secondObject->getMinSize();
     if (this->isHorizontalBorder)
-        return {std::max(firstMinSize.x + secondMinSize.x,this->minimumSize.x), std::max({firstMinSize.y, secondMinSize.y,this->minimumSize.y})};
-    auto vvv =std::max(firstMinSize.y + secondMinSize.y,this->minimumSize.y);
-    return {std::max(firstMinSize.x, secondMinSize.x), vvv};
+        return {firstMinSize.x + secondMinSize.x, std::max(firstMinSize.y, secondMinSize.y)};
+    return {std::max(firstMinSize.x, secondMinSize.x), std::max(firstMinSize.y + secondMinSize.y,this->minimumSize.y)};
 }
 
 sf::Vector2f ui::LayerWithMovableBorder::getNormalSize() {
