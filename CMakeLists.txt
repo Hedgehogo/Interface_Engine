@@ -3,7 +3,7 @@ project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(${PROJECT_NAME} STATIC
+add_library(${PROJECT_NAME}
         enums/corner/corner.h
         enums/side/side.h
         enums/size/size.h
@@ -85,19 +85,21 @@ add_library(${PROJECT_NAME} STATIC
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
         UI.h)
 
-set(SFML_STATIC_LIBRARIES TRUE)
-
-set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")
 set(SFML_PATH_2 "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
 set(SFML_PATH_3 "~\\SFML-2.5.1\\lib\\cmake\\SFML")
 
+if(EXISTS ${SFML_PATH_1} OR EXISTS ${SFML_PATH_2})
+    set(SFML_STATIC_LIBRARIES TRUE)
+    set(CMAKE_EXE_LINKER_FLAGS "-static")
+endif()
+
 if(EXISTS ${SFML_PATH_1})
     set(SFML_DIR ${SFML_PATH_1})
 elseif(EXISTS ${SFML_PATH_2})
     set(SFML_DIR ${SFML_PATH_2})
-elseif(EXISTS ${SFML_PATH_3})
+else()
     set(SFML_DIR ${SFML_PATH_3})
 endif()
 
@@ -113,8 +115,6 @@ export(TARGETS Interface_Engine FILE Interface_Engine-config.cmake)
 
 install(TARGETS Interface_Engine ARCHIVE DESTINATION ${PROJECT_BINARY_DIR}/lib
         PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}/public_headers")]]
-
-#-------------------------------
 
 add_executable(${PROJECT_NAME}_ex main.cpp)
 

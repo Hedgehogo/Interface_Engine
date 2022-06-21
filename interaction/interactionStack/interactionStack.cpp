@@ -15,3 +15,4 @@ ui::IInteraction *ui::InteractionStack::at(unsigned index) {
 void ui::InteractionStack::add(ui::IInteraction *element) {
 	interactionStack.push_back(element);
 }
+

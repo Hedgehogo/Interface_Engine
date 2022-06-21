@@ -9,9 +9,7 @@ namespace ui {
 		
 	public:
 		MouseInteraction(ButtonEvent* leftMouseButton, ButtonEvent* rightMouseButton);
-		
-		~MouseInteraction() override;
-		
+
 		void setLeftButtonEvent(ButtonEvent* leftMouseButton);
 		
 		void setRightButtonEvent(ButtonEvent* rightMouseButton);

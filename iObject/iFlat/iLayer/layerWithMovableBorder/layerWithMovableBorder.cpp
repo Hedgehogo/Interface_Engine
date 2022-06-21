@@ -1,9 +1,5 @@
 #include "layerWithMovableBorder.h"
-#include "../../../../interaction/iInteraction/oneButton/oneButtonInteraction.h"
-#include "../../../../interaction/iInteraction/block/pressed/pressedInteraction.h"
 #include "../../../../interaction/event/button/addInteraction/addInteractionEvent.h"
-#include "../../../../interaction/event/button/addInteraction/blockInteraction/addBlockInteractionEvent.h"
-#include <iostream>
 #include <algorithm>
 
 ui::LayerWithMovableBorder::LayerWithMovableBorder(ui::IFlat *firstObject, ui::IFlat *secondObject, bool isHorizontalBorder,
@@ -107,9 +103,8 @@ sf::Vector2f ui::LayerWithMovableBorder::getMinSize() {
     sf::Vector2f firstMinSize = firstObject->getMinSize();
     sf::Vector2f secondMinSize = secondObject->getMinSize();
     if (this->isHorizontalBorder)
-        return {std::max(firstMinSize.x + secondMinSize.x,this->minimumSize.x), std::max({firstMinSize.y, secondMinSize.y,this->minimumSize.y})};
-    auto vvv =std::max(firstMinSize.y + secondMinSize.y,this->minimumSize.y);
-    return {std::max(firstMinSize.x, secondMinSize.x), vvv};
+        return {firstMinSize.x + secondMinSize.x, std::max(firstMinSize.y, secondMinSize.y)};
+    return {std::max(firstMinSize.x, secondMinSize.x), std::max(firstMinSize.y + secondMinSize.y,this->minimumSize.y)};
 }
 
 sf::Vector2f ui::LayerWithMovableBorder::getNormalSize() {
