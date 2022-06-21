@@ -23,6 +23,9 @@ namespace ui {
 		}
 	}
 	
+	LayerWithBorderVertical::LayerWithBorderVertical(IFlat *first, IFlat *second, float bound, sf::Vector2f minSize) :
+		ILayer(minSize), objects({first, second}), boundsVertical({0.f, bound, 1.f}) {}
+	
 	LayerWithBorderVertical::~LayerWithBorderVertical() {
 		for (auto& y : objects) {
 			delete y;
@@ -58,36 +61,34 @@ namespace ui {
 	}
 	
 	sf::Vector2f LayerWithBorderVertical::getMinSize() {
-		sf::Vector2f minimumSize {0, 0};
-		std::vector<sf::Vector2f> sizes(objects.size());
-		for(int i = 0; i < sizes.size(); ++i) {
-			sizes[i] = objects[i]->getMinSize();
+		sf::Vector2f minSize {0, 0};
+		std::vector<sf::Vector2f> objectMinSizes(objects.size());
+		for(int i = 0; i < objectMinSizes.size(); ++i) {
+			objectMinSizes[i] = objects[i]->getMinSize();
 		}
-		for (auto& size : sizes) {
-			minimumSize.y += size.y;
+		
+		sf::Vector2f objectMinSize;
+		for (int i = 0; i < objectMinSizes.size(); ++i) {
+			objectMinSize = {objectMinSizes[i].x, objectMinSizes[i].y / (boundsVertical[i + 1] - boundsVertical[i])};
+			minSize = {std::max(objectMinSize.x, minSize.x), std::max(objectMinSize.y, minSize.y)};
 		}
-		for (auto& size : sizes) {
-			if(minimumSize.x < size.x) {
-				minimumSize.x = size.x;
-			}
-		}
-		return {std::max(minimumSize.x, this->minimumSize.x), std::max(minimumSize.y, this->minimumSize.y)};
+		
+		return {std::max(minSize.x, this->minimumSize.x), std::max(minSize.y, this->minimumSize.y)};
 	}
 	
 	sf::Vector2f LayerWithBorderVertical::getNormalSize() {
 		sf::Vector2f normalSize {0, 0};
-		std::vector<sf::Vector2f> sizes(objects.size());
-		for(int i = 0; i < sizes.size(); ++i) {
-			sizes[i] = objects[i]->getNormalSize();
+		std::vector<sf::Vector2f> objectNormalSizes(objects.size());
+		for(int i = 0; i < objectNormalSizes.size(); ++i) {
+			objectNormalSizes[i] = objects[i]->getNormalSize();
 		}
-		for (auto& size : sizes) {
-			normalSize.y += size.y;
+		
+		sf::Vector2f objectNormalSize;
+		for (int i = 0; i < objectNormalSizes.size(); ++i) {
+			objectNormalSize = {objectNormalSizes[i].x, objectNormalSizes[i].y / (boundsVertical[i + 1] - boundsVertical[i])};
+			normalSize = {std::max(objectNormalSize.x, normalSize.x), std::max(objectNormalSize.y, normalSize.y)};
 		}
-		for (auto& size : sizes) {
-			if(normalSize.x < size.x) {
-				normalSize.x = size.x;
-			}
-		}
+		
 		return normalSize;
 	}
 	

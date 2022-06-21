@@ -15,6 +15,8 @@ namespace ui {
 	public:
 		LayerWithBorder(std::vector<std::vector<IFlat *>> objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize = {0, 0});
 		
+		LayerWithBorder(std::vector<std::vector<IFlat *>> objects, sf::Vector2f minSize = {0, 0});
+		
 		~LayerWithBorder() override;
 		
 		void draw() override;
