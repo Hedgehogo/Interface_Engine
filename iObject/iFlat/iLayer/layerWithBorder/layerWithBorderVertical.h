@@ -18,6 +18,8 @@ namespace ui {
 		
 		LayerWithBorderVertical(std::vector<IFlat *> objects, sf::Vector2f minSize = {0, 0});
 		
+		LayerWithBorderVertical(IFlat *first, IFlat *second, float bound = 0.5f, sf::Vector2f minSize = {0, 0});
+		
 		~LayerWithBorderVertical() override;
 		
 		void draw() override;

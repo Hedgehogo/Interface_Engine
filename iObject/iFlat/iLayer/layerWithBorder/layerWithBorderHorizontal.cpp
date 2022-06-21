@@ -1,6 +1,4 @@
 #include "layerWithBorderHorizontal.h"
-#include "../../../../interaction/interactionStack/interactionStack.h"
-#include "../../../../interaction/interactionManager/interactionManager.h"
 #include <vector>
 
 namespace ui {
@@ -15,6 +13,17 @@ namespace ui {
 		this->boundsHorizontal.insert(this->boundsHorizontal.begin(), 0.0f);
 		this->boundsHorizontal.push_back(1.0f);
 	}
+	
+	LayerWithBorderHorizontal::LayerWithBorderHorizontal(std::vector<IFlat *> objects, sf::Vector2f minSize) :
+	ILayer(minSize), objects(std::move(objects)), boundsHorizontal(this->objects.size() + 1, 1.0f) {
+		int count = this->objects.size();
+		for(int i = 0; i < count; ++i) {
+			boundsHorizontal[i] = static_cast<float>(i) / static_cast<float>(count);
+		}
+	}
+	
+	LayerWithBorderHorizontal::LayerWithBorderHorizontal(IFlat *first, IFlat *second, float bound, sf::Vector2f minSize) :
+		ILayer(minSize), objects({first, second}), boundsHorizontal({0.f, bound, 1.f}) {}
 	
 	LayerWithBorderHorizontal::~LayerWithBorderHorizontal() {
 		for (auto& i : objects) {
@@ -51,42 +60,34 @@ namespace ui {
 	}
 	
 	sf::Vector2f LayerWithBorderHorizontal::getMinSize() {
-		sf::Vector2f minimumSize {0, 0};
-		std::vector<sf::Vector2f> sizes(objects.size());
-		for(int i = 0; i < sizes.size(); ++i) {
-			sizes[i] = objects[i]->getMinSize();
+		sf::Vector2f minSize {0, 0};
+		std::vector<sf::Vector2f> objectMinSizes(objects.size());
+		for(int i = 0; i < objectMinSizes.size(); ++i) {
+			objectMinSizes[i] = objects[i]->getMinSize();
 		}
-		for (auto& size : sizes) {
-			minimumSize.x += size.x;
+		
+		sf::Vector2f objectMinSize;
+		for (int i = 0; i < objectMinSizes.size(); ++i) {
+			objectMinSize = {objectMinSizes[i].x / (boundsHorizontal[i + 1] - boundsHorizontal[i]), objectMinSizes[i].y};
+			minSize = {std::max(objectMinSize.x, minSize.x), std::max(objectMinSize.y, minSize.y)};
 		}
-		for (auto& size : sizes) {
-			if(minimumSize.y < size.y) {
-				minimumSize.y = size.y;
-			}
-		}
-		if(minimumSize.x < this->minimumSize.x){
-			minimumSize.x = this->minimumSize.x;
-		}
-		if(minimumSize.y < this->minimumSize.y){
-			minimumSize.y = this->minimumSize.y;
-		}
-		return minimumSize;
+		
+		return {std::max(minSize.x, this->minimumSize.x), std::max(minSize.y, this->minimumSize.y)};
 	}
 	
 	sf::Vector2f LayerWithBorderHorizontal::getNormalSize() {
 		sf::Vector2f normalSize {0, 0};
-		std::vector<sf::Vector2f> sizes(objects.size());
-		for(int i = 0; i < sizes.size(); ++i) {
-			sizes[i] = objects[i]->getNormalSize();
+		std::vector<sf::Vector2f> objectNormalSizes(objects.size());
+		for(int i = 0; i < objectNormalSizes.size(); ++i) {
+			objectNormalSizes[i] = objects[i]->getNormalSize();
 		}
-		for (auto& size : sizes) {
-			normalSize.x += size.x;
+		
+		sf::Vector2f objectNormalSize;
+		for (int i = 0; i < objectNormalSizes.size(); ++i) {
+			objectNormalSize = {objectNormalSizes[i].x / (boundsHorizontal[i + 1] - boundsHorizontal[i]), objectNormalSizes[i].y};
+			normalSize = {std::max(objectNormalSize.x, normalSize.x), std::max(objectNormalSize.y, normalSize.y)};
 		}
-		for (auto& size : sizes) {
-			if(normalSize.y < size.y) {
-				normalSize.y = size.y;
-			}
-		}
+		
 		return normalSize;
 	}
 	
