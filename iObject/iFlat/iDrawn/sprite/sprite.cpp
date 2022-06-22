@@ -1,15 +1,16 @@
 #include "sprite.h"
+#include <algorithm>
 #include <SFML/Graphics.hpp>
 
 
 namespace ui {
 	Sprite::Sprite(sf::Texture &texture, sf::IntRect rect, sf::Vector2f minSize) :
-		IDrawn(), sprite(texture, rect), minimumSize(minSize) {
+		IDrawn(), sprite(texture, rect), minimumSize(std::max(minimumSize.x, 1.f), std::max(minimumSize.y, 1.f)) {
 		sprite.setTextureRect(rect);
 	}
 	
 	Sprite::Sprite(sf::Texture &texture, sf::Vector2f minSize) :
-		IDrawn(), sprite(texture), minimumSize(minSize) {
+		IDrawn(), sprite(texture), minimumSize(std::max(minimumSize.x, 1.f), std::max(minimumSize.y, 1.f)) {
 	}
 
 	void Sprite::draw() {
