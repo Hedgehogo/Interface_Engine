@@ -144,8 +144,8 @@ int main() {
 						new ui::FullColor{{22, 22, 22}}
 					},
 					std::vector<float> {
-						0.45,
-						0.55
+						0.4,
+						0.6
 					}
 				},
 				new ui::LayerWithBorderHorizontal{
@@ -169,8 +169,8 @@ int main() {
 						new ui::FullColor{{22, 22, 22}}
 					},
 					std::vector<float> {
-						0.45,
-						0.55
+						0.4,
+						0.6
 					}
 				},
 				false
