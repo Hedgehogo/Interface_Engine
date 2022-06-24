@@ -16,7 +16,7 @@ namespace ui{
         float borderValueNow;
         int borderInteractionSize;
 
-        void init(sf::RenderWindow &window, PanelManager &panelManager) override;
+        void init(sf::RenderTarget &renderTarget, PanelManager &panelManager) override;
 
     public:
         LayerWithMovableBorder(IFlat *firstObject, IFlat *secondObject, bool isHorizontalBorder , float borderValue = 0.5,int borderInteractionSize = 5, sf::Vector2f minSize = {0, 0});

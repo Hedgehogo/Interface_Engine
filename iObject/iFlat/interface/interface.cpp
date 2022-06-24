@@ -3,9 +3,10 @@
 #include <iostream>
 
 namespace ui {
-	void Interface::init(sf::RenderWindow &, InteractionStack &, InteractionManager &, PanelManager &) {
+	void Interface::init(sf::RenderTarget &renderTarget, InteractionStack &, InteractionManager &, PanelManager &) {
 		if(!initialized) {
-			initObject(object, this->window, *this->interactionStack, this->interactionManager, this->panelManager);
+			this->renderTarget = &renderTarget;
+			initObject(object, renderTarget, *this->interactionStack, this->interactionManager, this->panelManager);
 			initialized = true;
 		}
 	}
@@ -23,14 +24,14 @@ namespace ui {
 	}
 	
 	Interface::Interface(IFlat* object, InteractionStack *interactionStack, sf::RenderWindow &window) :
-		object(object), interactionStack(interactionStack), window(window), interactionManager(window), panelManager(), initialized(false) {}
+		object(object), interactionStack(interactionStack), renderTarget(&window), window(window), interactionManager(), panelManager(), initialized(false) {}
 	
 	Interface::~Interface() {
 		delete object;
 	}
 	
 	bool Interface::isInWindow(sf::Vector2f position) {
-		return position.x > 0 && position.x < static_cast<float>(window.getSize().x) && position.y > 0 && position.y < static_cast<float>(window.getSize().y);
+		return position.x > 0 && position.x < static_cast<float>(renderTarget->getSize().x) && position.y > 0 && position.y < static_cast<float>(renderTarget->getSize().y);
 	}
 	
 	void Interface::draw() {

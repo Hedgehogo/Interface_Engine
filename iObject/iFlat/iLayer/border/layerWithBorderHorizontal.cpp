@@ -2,9 +2,9 @@
 #include <vector>
 
 namespace ui {
-	void LayerWithBorderHorizontal::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
+	void LayerWithBorderHorizontal::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 		for (auto& object : objects) {
-			initObject(object, window, interactionStack, interactionManager, panelManager);
+			initObject(object, renderTarget, interactionStack, interactionManager, panelManager);
 		}
 	}
 	

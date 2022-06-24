@@ -2,8 +2,8 @@
 #include "button.h"
 
 namespace ui {
-	void Button::init(sf::RenderWindow &window, PanelManager &panelManager) {
-		initObject(background, window, *interactionStack, *interactionManager, panelManager);
+	void Button::init(sf::RenderTarget &renderTarget, PanelManager &panelManager) {
+		initObject(background, renderTarget, *interactionStack, *interactionManager, panelManager);
 	}
 	
 	Button::Button(IFlat *background, IInteraction* interaction) :

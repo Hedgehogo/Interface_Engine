@@ -2,10 +2,10 @@
 #include <vector>
 
 namespace ui {
-	void LayerWithBorder::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
+	void LayerWithBorder::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 		for (auto& line : objects) {
 			for (auto& object : line) {
-				initObject(object, window, interactionStack, interactionManager, panelManager);
+				initObject(object, renderTarget, interactionStack, interactionManager, panelManager);
 			}
 		}
 	}

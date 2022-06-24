@@ -14,7 +14,7 @@ namespace ui {
 	}
 
 	void Sprite::draw() {
-		window->draw(sprite);
+		renderTarget->draw(sprite);
 	}
 
 	void Sprite::resize(sf::Vector2f size, sf::Vector2f position) {

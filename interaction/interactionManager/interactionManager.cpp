@@ -1,11 +1,10 @@
 #include <iostream>
 #include "interactionManager.h"
 
-ui::InteractionManager::InteractionManager(sf::RenderWindow &window) :
-	window(window), interactions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {}
+ui::InteractionManager::InteractionManager() :
+	interactions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {}
 
 void ui::InteractionManager::addInteraction(IInteraction &interaction) {
-
 	addInteractions.push_back(&interaction);
 }
 

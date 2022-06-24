@@ -6,7 +6,7 @@ namespace ui {
     }
 
     void FullColor::draw() {
-        window->draw(rectangle);
+        renderTarget->draw(rectangle);
     }
 
     void FullColor::resize(sf::Vector2f size, sf::Vector2f position) {

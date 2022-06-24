@@ -1,9 +1,9 @@
 #include "layerWithConstBezel.h"
 
 namespace ui {
-	void LayerWithConstBezel::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		initObject(object, window, interactionStack, interactionManager, panelManager);
-		initObject(bezel, window, interactionStack, interactionManager, panelManager);
+	void LayerWithConstBezel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
+		initObject(object, renderTarget, interactionStack, interactionManager, panelManager);
+		initObject(bezel, renderTarget, interactionStack, interactionManager, panelManager);
 	}
 	
 	LayerWithConstBezel::LayerWithConstBezel(IFlat *object, IDrawn *bezel, float thickness, sf::Vector2f minSize) :

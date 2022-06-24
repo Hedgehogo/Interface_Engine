@@ -7,9 +7,9 @@
 namespace ui {
 	class IDrawn : public IFlat {
 	protected:
-		sf::RenderWindow *window;
+		sf::RenderTarget *renderTarget;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
 		void copy(IDrawn* iDrawn);
 		

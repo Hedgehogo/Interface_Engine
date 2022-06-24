@@ -35,15 +35,15 @@ ui::Text::~Text() {
     delete background;
 }
 
-void ui::Text::init(sf::RenderWindow &window, ui::PanelManager &overlayStack) {
-    this->window = &window;
+void ui::Text::init(sf::RenderTarget &renderTarget, ui::PanelManager &overlayStack) {
+    this->renderTarget = &renderTarget;
     for (ui::BaseCharacter* character : textCharacters) {
-        character->init(window);
+        character->init(renderTarget);
     }
     for (BaseTextBlock * textBlock : textBocks) {
         textBlock->init(*interactionManager, *interactionStack);
     }
-    IObject::initObject(background, window, *interactionStack, *interactionManager, overlayStack);
+    IObject::initObject(background, renderTarget, *interactionStack, *interactionManager, overlayStack);
 }
 
 void ui::Text::update() {

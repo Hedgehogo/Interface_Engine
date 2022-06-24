@@ -8,16 +8,16 @@ ui::RoundedRectangle::RoundedRectangle(sf::Color color, float radius) : radius(r
 }
 
 void ui::RoundedRectangle::draw() {
-	window->draw(horizontalRectangle);
-	window->draw(verticalRectangle);
+	renderTarget->draw(horizontalRectangle);
+	renderTarget->draw(verticalRectangle);
 	circle.setPosition(position);
-	window->draw(circle);
+	renderTarget->draw(circle);
 	circle.setPosition(position.x + size.x - radius * 2, position.y);
-	window->draw(circle);
+	renderTarget->draw(circle);
 	circle.setPosition(position.x, position.y + size.y - radius * 2);
-	window->draw(circle);
+	renderTarget->draw(circle);
 	circle.setPosition(position.x + size.x - radius * 2, position.y + size.y - radius * 2);
-	window->draw(circle);
+	renderTarget->draw(circle);
 }
 
 void ui::RoundedRectangle::resize(sf::Vector2f size, sf::Vector2f position) {

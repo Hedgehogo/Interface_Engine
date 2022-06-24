@@ -7,7 +7,7 @@ namespace ui {
 	protected:
 		ui::IFlat *background;
 		
-		void init(sf::RenderWindow &window, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, PanelManager &panelManager) override;
 		
 		void copy(Button* button);
 		
