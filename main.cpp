@@ -4,7 +4,7 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	//renderTarget.setFramerateLimit(60);
+	//window.setFramerateLimit(60);
 	
 	sf::Texture texture;
 	texture.loadFromFile("image.png");
@@ -123,7 +123,7 @@ int main() {
 			},
 			ui::Side::Right, 10
 		}*/
-		new  ui::LayerWithMovableBorder{
+		/*new  ui::LayerWithMovableBorder{
 			new ui::LayerWithMovableBorder{
 				new ui::LayerWithBorderHorizontal{
 					{
@@ -154,17 +154,17 @@ int main() {
 						new ui::Text{
 							{
 								new ui::TextBlock{
-									L"Box2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects move in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation. \nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine."
+									L" \n \n \n \n \nBox2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects move in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation. \nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine."
 								}
 							},
 							new ui::FullColor{sf::Color(0x9f6e5cff)},
 							14,
 							1.15,
 							&font,
-							sf::Color{10, 10, 0},
+							sf::Color{255, 255, 0},
 							sf::Color{200, 200, 200},
 							sf::Color{200, 200, 200},
-							ui::Text::Align::center
+							ui::Text::Align::right
 						},
 						new ui::FullColor{{22, 22, 22}}
 					},
@@ -206,7 +206,70 @@ int main() {
 			},
 			false,
 			0.75
-		},
+		}*/
+        new ui::LayerWithAlternativeObject{
+            new ui::LayerWithBorderHorizontal{
+                {
+                    new ui::Empty,
+                    new ui::LayerWithBorderVertical{
+                        {
+                            new ui::Text{
+                                {
+                                    new ui::TextBlock{
+                                        L"In games, it is not uncommon to have levels which are much bigger than the window itself. You only see is a small part of them. This is typically the case in RPGs, platform games, and many other genres. What developers might tend to forget is that they define entities in a 2D world, not directly in the window. The window is just a view, it shows a specific area of the whole world. It is perfectly fine to draw several views of the same world in parallel, or draw the world to a texture rather than to a window. The world itself remains unchanged, what changes is just the way it is seen.\n\nSince what is seen in the window is just a small part of the entire 2D world, you need a way to specify which part of the world is shown in the window. Additionally, you may also want to define where/how this area will be shown within the window. These are the two main features of SFML views.\n\nTo summarize, views are what you need if you want to scroll, rotate or zoom your world. They are also the key to creating split screens and mini-maps.\n"
+                                    }
+                                },
+                                new ui::FullColor{{255, 255, 255}},
+                                14,
+                                1.15,
+                                &font,
+                                sf::Color{0, 0, 0},
+                                sf::Color{200, 200, 200},
+                                sf::Color{200, 200, 200},
+                                ui::Text::Align::left
+                            },
+                            new ui::Text{
+                                {
+                                    new ui::TextBlock{
+                                        L"Copies the elements in the range, defined by [first, last), to another range beginning at d_first.\n\n1) Copies all elements in the range [first, last) starting from first and proceeding to last - 1. The behavior is undefined if d_first is within the range [first, last). In this case, std::copy_backward may be used instead.\n3) Only copies the elements for which the predicate pred returns true. The relative order of the elements that are copied is preserved. The behavior is undefined if the source and the destination ranges overlap.\n2,4) Same as (1,3), but executed according to policy. These overloads do not participate in overload resolution unless std::is_execution_policy_v<std::decay_t<ExecutionPolicy>> (until C++20) std::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> (since C++20) is true."
+                                    }
+                                },
+                                new ui::FullColor{{0, 0, 0}},
+                                14,
+                                1.15,
+                                &font,
+                                sf::Color{255, 255, 255},
+                                sf::Color{200, 200, 200},
+                                sf::Color{200, 200, 200},
+                                ui::Text::Align::center,
+
+                            },
+                            new ui::Text{
+                                {
+                                    new ui::TextBlock{
+                                        L"Все начинается с загрузки с сайта. Линк на загрузку найти не так просто - все спрятано за предложением shareware версий, попыток заставить пройти регистрацию, анкетирование и черт знает еще чего. Все-же найдя мааленькую кнопку на скачивание и вытянув гигабайт фреймворка, внезапно, он отказывается ставиться и требует скачать онлайн версию.\n\nМэйнтейн ниже плинтуса. Qt Creator в windows xp запускается после кучи сообщений о несуществующей функции в dll. Предыдущая версия запускалась нормально, но пока проект не открыт, background не перерисовывался. Прогресс. Попытка собрать пустой проект приводит к крашу в отладке. К счастью, релиз кое-как работает.\n\nQSerialPort в windows работает через задницу. Если раньше известной багой было дублирование данных после flush и это обходилось костылями, то сейчас не работает и без flush. Не очень понятно, зачем такой глючный пакет нужно было включать в основную сборку?"
+                                    }
+                                },
+                                new ui::FullColor{{255, 255, 255}},
+                                14,
+                                1.15,
+                                &font,
+                                sf::Color{0, 0, 0},
+                                sf::Color{200, 200, 200},
+                                sf::Color{200, 200, 200},
+                                ui::Text::Align::right
+                            }
+                        }
+                    },
+                    new ui::Empty
+                },
+                std::vector<float>{
+                    0.2,
+                    0.8
+                }
+            },
+            new ui::FullColor{{255, 0, 0}}
+        },
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
 				ui::MouseLambdaInteraction::debug.copy()
@@ -219,40 +282,40 @@ int main() {
 	
 	sf::Clock clock;
 	while(window.isOpen()) {
-
-        float currentTime = clock.restart().asSeconds();
+		
+		float currentTime = clock.restart().asSeconds();
         float fps = 1.f / currentTime;
         window.setTitle(std::to_string(static_cast<int>(fps)));
-
-        sf::Event event{};
-        int wheel = 0;
-        while(window.pollEvent(event)) {
-            if(event.type == sf::Event::Closed) {
-                window.close();
-            }
-            if(event.type == sf::Event::Resized) {
-                view.reset(sf::FloatRect(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize())));
-                sf::Vector2f minSize = interface.getMinSize();
-                sf::Vector2f windowSize{static_cast<float>(event.size.width), static_cast<float>(event.size.height)};
-                if(windowSize.x < minSize.x || windowSize.y < minSize.y) {
-                    if(windowSize.x < minSize.x) {
-                        windowSize.x = minSize.x;
-                    }
-                    if(windowSize.y < minSize.y) {
-                        windowSize.y = minSize.y;
-                    }
-                    window.setSize(static_cast<sf::Vector2u>(windowSize));
-                }
-                window.setView(view);
-                interface.resize(windowSize,sf::Vector2f(0, 0));
-            }
-            if(event.type == sf::Event::MouseWheelMoved) {
-                wheel = event.mouseWheel.delta;
-            }
-        }
-        window.clear();
-        interface.update(wheel);
-        interface.draw();
-        window.display();
+		
+		sf::Event event{};
+		int wheel = 0;
+		while(window.pollEvent(event)) {
+			if(event.type == sf::Event::Closed) {
+				window.close();
+			}
+			if(event.type == sf::Event::Resized) {
+				view.reset(sf::FloatRect(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize())));
+				sf::Vector2f minSize = interface.getMinSize();
+				sf::Vector2f windowSize{static_cast<float>(event.size.width), static_cast<float>(event.size.height)};
+				if(windowSize.x < minSize.x || windowSize.y < minSize.y) {
+					if(windowSize.x < minSize.x) {
+						windowSize.x = minSize.x;
+					}
+					if(windowSize.y < minSize.y) {
+						windowSize.y = minSize.y;
+					}
+					window.setSize(static_cast<sf::Vector2u>(windowSize));
+				}
+				window.setView(view);
+				interface.resize(windowSize,sf::Vector2f(0, 0));
+			}
+			if(event.type == sf::Event::MouseWheelMoved) {
+				wheel = event.mouseWheel.delta;
+			}
+		}
+		window.clear();
+		interface.update(wheel);
+		interface.draw();
+		window.display();
 	}
 }

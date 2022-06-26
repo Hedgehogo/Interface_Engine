@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include "text.h"
 
 ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::IDrawn *background, int size, float lineSpacing, sf::Font *font
@@ -78,7 +79,9 @@ void ui::Text::printCharacter(ui::BaseCharacter* character) {
 }
 
 void ui::Text::equalize(uint i) {
-    sf::Vector2f offset{endRender.x - (textCharacters[i - 1]->getPosition().x + textCharacters[i - 1]->getAdvance()), lineSize};
+    sf::Vector2f offset{endRender.x - (textCharacters[i - 1]->getPosition().x), lineSize};
+    if (textCharacters[i - 1]->isSpecial() != BaseCharacter::Special::space)
+        offset.x -= textCharacters[i - 1]->getAdvance();
 
     switch (align) {
         case Align::left:
@@ -94,9 +97,19 @@ void ui::Text::equalize(uint i) {
     }
 }
 
+void ui::Text::porting(int i) {
+    equalize(i);
+    nextPosition.y += lineSize * lineSpacing;
+    nextPosition.x = startRender.x;
+
+    distanceEnter = 0;
+    lineSize = 0;
+}
+
 void ui::Text::autoPorting(int i) {
 
-    porting(i);
+    distanceEnter -= distanceSpace;
+    porting(i - distanceSpace);
 
     for (uint j = i - distanceSpace; j < i; ++j) {
         printCharacter(textCharacters[j]);
@@ -104,16 +117,6 @@ void ui::Text::autoPorting(int i) {
 
     distanceEnter = distanceSpace;
     distanceSpace = 0;
-}
-
-void ui::Text::porting(int i) {
-    distanceEnter -= distanceSpace + 1;
-    equalize(i - (distanceSpace + 1));
-    nextPosition.y += lineSize * lineSpacing;
-    nextPosition.x = startRender.x;
-
-    distanceEnter = 0;
-    lineSize = 0;
 }
 
 void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -126,9 +129,11 @@ void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
     for (int i = 0; i < textCharacters.size(); i++) {
         ui::BaseCharacter* character = textCharacters[i];
 
+/*
         float kerning = 0;
         if (i < textCharacters.size() - 1)
             kerning = character->getKerning(textCharacters[i + 1]->getChar());
+*/
 
         ui::BaseCharacter::Special specialText = character->isSpecial();
 
@@ -142,15 +147,18 @@ void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
                     printCharacter(character);
                     distanceSpace = 0;
                 } else{
-                    distanceEnter++;
-                    distanceSpace++;
-                    autoPorting(i + 1);
+                    autoPorting(i);
+                    printCharacter(character);
                 }
                 break;
             case BaseCharacter::Special::enter:
-                distanceSpace = 0;
-                distanceEnter++;
-                porting(i + 1);
+
+                if (lineSize < character->getHeight())
+                    lineSize = character->getHeight();
+
+                if (this->nextPosition.x >= endRender.x)
+                    autoPorting(i);
+                porting(i);
                 break;
         }
     }
