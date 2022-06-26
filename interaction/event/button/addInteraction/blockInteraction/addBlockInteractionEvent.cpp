@@ -1,6 +1,6 @@
 #include "addBlockInteractionEvent.h"
 
-void ui::AddBlockInteractionEvent::stopPressed(sf::Vector2i windowPosition) {}
+void ui::AddBlockInteractionEvent::stopPressed(sf::Vector2i mousePosition) {}
 
 ui::AddBlockInteractionEvent::AddBlockInteractionEvent(IInteraction &interaction) : AddInteractionEvent(interaction) {}
 

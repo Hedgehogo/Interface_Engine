@@ -1,25 +1,24 @@
 #include "capsule.h"
 
-ui::Capsule::Capsule(sf::Color color) {
+ui::Capsule::Capsule(sf::Color color) : Layout() {
 	rectangle.setFillColor(color);
 	circle.setFillColor(color);
 }
 
 void ui::Capsule::draw() {
-	window->draw(rectangle);
+	renderTarget->draw(rectangle);
 	circle.setPosition(position);
-	window->draw(circle);
+	renderTarget->draw(circle);
 	if(size.x > size.y) {
 		circle.setPosition({position.x + size.x - size.y, position.y});
 	} else {
 		circle.setPosition({position.x, position.y + size.y - size.x});
 	}
-	window->draw(circle);
+	renderTarget->draw(circle);
 }
 
 void ui::Capsule::resize(sf::Vector2f size, sf::Vector2f position) {
-	this->size = size;
-	this->position = position;
+	Layout::resize(size, position);
 	if(size.x > size.y) {
 		rectangle.setSize({size.x - size.y, size.y});
 		rectangle.setPosition(position + sf::Vector2f{size.y / 2, 0});
@@ -42,6 +41,7 @@ sf::Vector2f ui::Capsule::getNormalSize() {
 ui::Capsule *ui::Capsule::copy() {
 	Capsule* capsule{new Capsule{circle.getFillColor()}};
 	IDrawn::copy(capsule);
+	Layout::copy(capsule);
 	capsule->resize(size, position);
 	return capsule;
 }

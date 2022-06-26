@@ -3,9 +3,10 @@
 #include <iostream>
 
 namespace ui {
-	void Interface::init(sf::RenderWindow &, InteractionStack &, InteractionManager &, PanelManager &) {
+	void Interface::init(sf::RenderTarget &renderTarget, InteractionStack &, InteractionManager &, PanelManager &) {
 		if(!initialized) {
-			initObject(object, this->window, *this->interactionStack, this->interactionManager, this->panelManager);
+			this->renderTarget = &renderTarget;
+			initObject(object, renderTarget, *this->interactionStack, this->interactionManager, this->panelManager);
 			initialized = true;
 		}
 	}
@@ -16,21 +17,21 @@ namespace ui {
 			initObject(object, window, *interactionStack, interactionManager, panelManager);
             sf::Vector2f minSize = object->getMinSize();
             sf::Vector2f size (std::max(windowSize.x,minSize.x), std::max(windowSize.y,minSize.y));
+			window.setSize(static_cast<sf::Vector2u>(size));
 			resize(size,sf::Vector2f(0, 0));
-            window.setSize(static_cast<sf::Vector2u>(size));
 			initialized = true;
 		}
 	}
 	
 	Interface::Interface(IFlat* object, InteractionStack *interactionStack, sf::RenderWindow &window) :
-		object(object), interactionStack(interactionStack), window(window), interactionManager(window), panelManager(), initialized(false) {}
+		object(object), interactionStack(interactionStack), renderTarget(&window), window(window), interactionManager(), panelManager(), initialized(false) {}
 	
 	Interface::~Interface() {
 		delete object;
 	}
 	
 	bool Interface::isInWindow(sf::Vector2f position) {
-		return position.x > 0 && position.x < static_cast<float>(window.getSize().x) && position.y > 0 && position.y < static_cast<float>(window.getSize().y);
+		return position.x > 0 && position.x < static_cast<float>(renderTarget->getSize().x) && position.y > 0 && position.y < static_cast<float>(renderTarget->getSize().y);
 	}
 	
 	void Interface::draw() {
@@ -44,6 +45,14 @@ namespace ui {
 	
 	bool Interface::updateInteractions(sf::Vector2f) {
 		return false;
+	}
+	
+	sf::Vector2f Interface::getPosition() {
+		return object->getPosition();
+	}
+	
+	sf::Vector2f Interface::getSize() {
+		return object->getSize();
 	}
 	
 	sf::Vector2f Interface::getMinSize() {

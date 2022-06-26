@@ -1,13 +1,12 @@
 #pragma once
 #include "../iDrawn.h"
+#include "../../../layout/layout.h"
 
 namespace ui {
-	class Capsule : public IDrawn {
+	class Capsule : public IDrawn, public Layout {
 	protected:
 		sf::RectangleShape rectangle;
 		sf::CircleShape circle;
-		sf::Vector2f position;
-		sf::Vector2f size;
 		
 	public:
 		Capsule(sf::Color color);

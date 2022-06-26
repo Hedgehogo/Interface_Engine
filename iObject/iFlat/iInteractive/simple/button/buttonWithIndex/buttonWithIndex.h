@@ -6,7 +6,7 @@ namespace ui {
 	protected:
 		uint16_t interactionIndex;
 		
-		void init(sf::RenderWindow &window, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, PanelManager &panelManager) override;
 	
 	public:
 		ButtonWithIndex(ui::IDrawn *background, uint16_t interaction);

@@ -8,7 +8,7 @@ add_library(${PROJECT_NAME}
         enums/side/side.h
         enums/size/size.h
         enums/enums.h
-        interaction/event/button/buttonEvent.h interaction/event/button/buttonEvent.cpp
+        interaction/event/button/buttonEvent.cpp interaction/event/button/buttonEvent.h
         interaction/event/button/empty/emptyEvent.cpp interaction/event/button/empty/emptyEvent.h
         interaction/event/button/simple/buttonEventSimple.cpp interaction/event/button/simple/buttonEventSimple.h
         interaction/event/button/lambdaSimple/buttonEvent_LambdaSimple.cpp interaction/event/button/lambdaSimple/buttonEvent_LambdaSimple.h
@@ -27,7 +27,8 @@ add_library(${PROJECT_NAME}
         interaction/iInteraction/block/pressed/pressedInteraction.cpp interaction/iInteraction/block/pressed/pressedInteraction.h
         interaction/interactionManager/interactionManager.cpp interaction/interactionManager/interactionManager.h
         interaction/interactionStack/interactionStack.cpp interaction/interactionStack/interactionStack.h
-        iObject/iObject.h iObject/iObject.cpp
+        iObject/iObject.cpp iObject/iObject.h
+        iObject/layout/layout.cpp iObject/layout/layout.h
         iObject/iFlat/iFlat.h
         iObject/iFlat/iDrawn/iDrawn.cpp iObject/iFlat/iDrawn/iDrawn.h
         iObject/iFlat/iLayer/iLayer.cpp iObject/iFlat/iLayer/iLayer.h
@@ -38,20 +39,16 @@ add_library(${PROJECT_NAME}
         iObject/iFlat/iDrawn/sprite/sprite.cpp iObject/iFlat/iDrawn/sprite/sprite.h
         iObject/iFlat/iDrawn/empty/empty.cpp iObject/iFlat/iDrawn/empty/empty.h
         iObject/iFlat/iDrawn/bar/bar.cpp iObject/iFlat/iDrawn/bar/bar.h
-        iObject/iFlat/iLayer/layerWithBorder/layerWithBorder.cpp iObject/iFlat/iLayer/layerWithBorder/layerWithBorder.h
-        iObject/iFlat/iLayer/layerWithBorder/layerWithBorderHorizontal.cpp iObject/iFlat/iLayer/layerWithBorder/layerWithBorderHorizontal.h
-        iObject/iFlat/iLayer/layerWithBorder/layerWithBorderVertical.cpp iObject/iFlat/iLayer/layerWithBorder/layerWithBorderVertical.h
-        iObject/iFlat/iLayer/layerWithConstRatio/layerWithConstRatio.cpp iObject/iFlat/iLayer/layerWithConstRatio/layerWithConstRatio.h
-        iObject/iFlat/iLayer/layerWithConstBezel/layerWithConstBezel.cpp iObject/iFlat/iLayer/layerWithConstBezel/layerWithConstBezel.h
-        iObject/iFlat/iLayer/layerWithConstBorder/layerWithConstBorder.cpp iObject/iFlat/iLayer/layerWithConstBorder/layerWithConstBorder.h
-        iObject/iFlat/iLayer/layerWithConstCenter/layerWithConstCenter.cpp iObject/iFlat/iLayer/layerWithConstCenter/layerWithConstCenter.h
-        iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.cpp iObject/iFlat/iLayer/layerWithAlternativeObject/layerWithAlternativeObject.h
-        iObject/iFlat/iLayer/layerWithMovableBorder/layerWithMovableBorder.h
-        iObject/iFlat/iLayer/layerWithMovableBorder/layerWithMovableBorder.cpp
-        iObject/iFlat/iLayer/layerWithMovableBorder/interaction/event/movableBorderEvent.h
-        iObject/iFlat/iLayer/layerWithMovableBorder/interaction/event/movableBorderEvent.cpp
-        iObject/iFlat/iLayer/layerWithMovableBorder/interaction/interaction/movableBorderInteraction.h
-        iObject/iFlat/iLayer/layerWithMovableBorder/interaction/interaction/movableBorderInteraction.cpp
+        iObject/iFlat/iLayer/border/layerWithBorder.cpp iObject/iFlat/iLayer/border/layerWithBorder.h
+        iObject/iFlat/iLayer/border/layerWithBorderHorizontal.cpp iObject/iFlat/iLayer/border/layerWithBorderHorizontal.h
+        iObject/iFlat/iLayer/border/layerWithBorderVertical.cpp iObject/iFlat/iLayer/border/layerWithBorderVertical.h
+        iObject/iFlat/iLayer/constRatio/layerWithConstRatio.cpp iObject/iFlat/iLayer/constRatio/layerWithConstRatio.h
+        iObject/iFlat/iLayer/constBezel/layerWithConstBezel.cpp iObject/iFlat/iLayer/constBezel/layerWithConstBezel.h
+        iObject/iFlat/iLayer/constBorder/layerWithConstBorder.cpp iObject/iFlat/iLayer/constBorder/layerWithConstBorder.h
+        iObject/iFlat/iLayer/constCenter/layerWithConstCenter.cpp iObject/iFlat/iLayer/constCenter/layerWithConstCenter.h
+        iObject/iFlat/iLayer/alternativeObject/layerWithAlternativeObject.cpp iObject/iFlat/iLayer/alternativeObject/layerWithAlternativeObject.h
+        iObject/iFlat/iLayer/movableBorder/layerWithMovableBorder.cpp iObject/iFlat/iLayer/movableBorder/layerWithMovableBorder.h
+        iObject/iFlat/iLayer/movableBorder/interaction/event/movableBorderEvent.cpp iObject/iFlat/iLayer/movableBorder/interaction/event/movableBorderEvent.h
         iObject/iFlat/iInteractive/iInteractive.cpp iObject/iFlat/iInteractive/iInteractive.h
         iObject/iFlat/iInteractive/simple/interactiveSimple.cpp iObject/iFlat/iInteractive/simple/interactiveSimple.h
         iObject/iFlat/iInteractive/simple/button/button.cpp iObject/iFlat/iInteractive/simple/button/button.h

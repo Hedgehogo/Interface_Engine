@@ -3,18 +3,16 @@
 #include "../empty/empty.h"
 
 namespace ui {
-	class Bar : public IDrawn {
+	class Bar : public IDrawn, public Layout {
 	protected:
 		IDrawn* strip;
 		IDrawn* background;
-		sf::Vector2f position;
-		sf::Vector2f size;
 		bool horizontal;
 		float offset;
 		int division;
 		float value;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
 	public:
 		explicit Bar(IDrawn* background, IDrawn* strip, float offset = 0, bool horizontal = true);

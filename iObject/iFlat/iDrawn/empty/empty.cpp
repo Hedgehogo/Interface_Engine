@@ -2,7 +2,9 @@
 
 void ui::Empty::draw() {}
 
-void ui::Empty::resize(sf::Vector2f, sf::Vector2f) {}
+void ui::Empty::resize(sf::Vector2f size, sf::Vector2f position) {
+	Layout::resize(size, position);
+}
 
 bool ui::Empty::updateInteractions(sf::Vector2f) {
 	return false;
@@ -17,5 +19,7 @@ sf::Vector2f ui::Empty::getNormalSize() {
 }
 
 ui::Empty *ui::Empty::copy() {
-	return new Empty{};
+	Empty* empty{new Empty{}};
+	Layout::copy(empty);
+	return empty;
 }

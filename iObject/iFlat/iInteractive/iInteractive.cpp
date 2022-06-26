@@ -2,10 +2,10 @@
 #include "../../../interaction/interactionStack/interactionStack.h"
 
 namespace ui {
-	void IInteractive::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
+	void IInteractive::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 		this->interactionStack = &interactionStack;
 		this->interactionManager = &interactionManager;
-		init(window, panelManager);
+		init(renderTarget, panelManager);
 	}
 	
 	IInteractive::IInteractive() : interactionStack(nullptr) {}

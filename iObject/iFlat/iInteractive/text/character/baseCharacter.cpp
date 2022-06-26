@@ -3,8 +3,8 @@
 
 ui::BaseCharacter::BaseCharacter(BaseTextBlock *parent, IInteraction *interaction) : parent(parent) {}
 
-void ui::BaseCharacter::init(sf::RenderWindow &window) {
-    this->window = &window;
+void ui::BaseCharacter::init(sf::RenderTarget &renderTarget) {
+    this->renderTarget = &renderTarget;
 }
 
 void ui::BaseCharacter::setPosition(const sf::Vector2f position) {

@@ -35,15 +35,15 @@ ui::Text::~Text() {
     delete background;
 }
 
-void ui::Text::init(sf::RenderWindow &window, ui::PanelManager &overlayStack) {
-    this->window = &window;
+void ui::Text::init(sf::RenderTarget &renderTarget, ui::PanelManager &overlayStack) {
+    this->renderTarget = &renderTarget;
     for (ui::BaseCharacter* character : textCharacters) {
-        character->init(window);
+        character->init(renderTarget);
     }
     for (BaseTextBlock * textBlock : textBocks) {
         textBlock->init(*interactionManager, *interactionStack);
     }
-    IObject::initObject(background, window, *interactionStack, *interactionManager, overlayStack);
+    IObject::initObject(background, renderTarget, *interactionStack, *interactionManager, overlayStack);
 }
 
 void ui::Text::update() {
@@ -163,6 +163,14 @@ void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
     distanceEnter = 0;
     distanceSpace = 0;
     lineSize = 0;
+}
+
+sf::Vector2f ui::Text::getPosition() {
+	return startRender;
+}
+
+sf::Vector2f ui::Text::getSize() {
+	return endRender - startRender;
 }
 
 sf::Vector2f ui::Text::getMinSize() {

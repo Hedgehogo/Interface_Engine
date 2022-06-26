@@ -13,7 +13,7 @@ namespace ui {
 		sf::Vector2f sliderSize;
 		sf::Vector2f moveZoneSize;
 		
-		void init(sf::RenderWindow &window, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, PanelManager &panelManager) override;
 		
 		void cutBackValue();
 		
@@ -38,9 +38,13 @@ namespace ui {
 		
 		void move(sf::Vector2i mouseOffset);
 		
-		sf::Vector2f getNormalSize() override;
+		sf::Vector2f getPosition() override;
+		
+		sf::Vector2f getSize() override;
 		
 		sf::Vector2f getMinSize() override;
+		
+		sf::Vector2f getNormalSize() override;
 		
 		void draw() override;
 		

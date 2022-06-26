@@ -1,9 +1,9 @@
 #include <cmath>
 #include "bar.h"
 
-void ui::Bar::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-	initObject(background, window, interactionStack, interactionManager, panelManager);
-	initObject(strip, window, interactionStack, interactionManager, panelManager);
+void ui::Bar::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
+	initObject(background, renderTarget, interactionStack, interactionManager, panelManager);
+	initObject(strip, renderTarget, interactionStack, interactionManager, panelManager);
 }
 
 ui::Bar::Bar(IDrawn *background, IDrawn *strip, float offset, bool horizontal) :
@@ -38,8 +38,7 @@ void ui::Bar::draw() {
 }
 
 void ui::Bar::resize(sf::Vector2f size, sf::Vector2f position) {
-	this->position = position;
-	this->size = size;
+	Layout::resize(size, position);
 	background->resize(size, position);
 	setValue(value);
 }
@@ -53,8 +52,9 @@ sf::Vector2f ui::Bar::getNormalSize() {
 }
 
 ui::Bar *ui::Bar::copy() {
-	Bar* bar {new Bar{background, strip, division, offset, horizontal}};
+	Bar* bar {new Bar{background->copy(), strip->copy(), division, offset, horizontal}};
 	IDrawn::copy(bar);
+	Layout::copy(bar);
 	bar->value = this->value;
 	bar->resize(size, position);
 	return bar;
