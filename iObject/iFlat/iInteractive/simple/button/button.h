@@ -22,7 +22,7 @@ namespace ui {
 		
 		sf::Vector2f getPosition() override;
 		
-		sf::Vector2f getSize() override;
+		sf::Vector2f getAreaSize() override;
 		
 		sf::Vector2f getMinSize() override;
 		

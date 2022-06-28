@@ -33,7 +33,9 @@ namespace ui {
 		
 		virtual sf::Vector2f getPosition() = 0;
 		
-		virtual sf::Vector2f getSize() = 0;
+		virtual sf::Vector2f getAreaSize() = 0;
+		
+		virtual sf::Vector2f getSize();
 		
 		virtual sf::Vector2f getMinSize() = 0;
 		

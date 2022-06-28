@@ -15,10 +15,6 @@ void ui::BaseSlider::cutBackValue() {
     value.y = std::max(0.f,std::min(1.f,value.y));
 }
 
-sf::Vector2f ui::BaseSlider::getAreaSize() {
-	return sliderSize + moveZoneSize;
-}
-
 sf::Vector2f ui::BaseSlider::getSliderSize() {
 	return sliderSize;
 }
@@ -71,7 +67,7 @@ sf::Vector2f ui::BaseSlider::getPosition() {
 	return position;
 }
 
-sf::Vector2f ui::BaseSlider::getSize() {
+sf::Vector2f ui::BaseSlider::getAreaSize() {
 	return sliderSize + moveZoneSize;
 }
 

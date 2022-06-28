@@ -61,8 +61,8 @@ namespace ui {
 		return background->getPosition();
 	}
 	
-	sf::Vector2f Caption::getSize() {
-		return background->getSize();
+	sf::Vector2f Caption::getAreaSize() {
+		return background->getAreaSize();
 	}
 	
 	sf::Vector2f Caption::getMinSize() {

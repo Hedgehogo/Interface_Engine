@@ -25,8 +25,8 @@ namespace ui {
 		return background->getPosition();
 	}
 	
-	sf::Vector2f Button::getSize() {
-		return background->getSize();
+	sf::Vector2f Button::getAreaSize() {
+		return background->getAreaSize();
 	}
 	
 	sf::Vector2f Button::getMinSize() {

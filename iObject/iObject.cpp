@@ -7,13 +7,17 @@ void ui::IObject::initObject(IObject *object, sf::RenderTarget &renderTarget, In
 }
 
 void ui::IObject::setPosition(sf::Vector2f position) {
-	resize(getSize(), position);
+	resize(getAreaSize(), position);
 }
 
 void ui::IObject::move(sf::Vector2f position) {
-	resize(getSize(), getPosition() + position);
+	resize(getAreaSize(), getPosition() + position);
 }
 
 void ui::IObject::setSize(sf::Vector2f size) {
 	resize(size, getPosition());
+}
+
+sf::Vector2f ui::IObject::getSize() {
+	return getAreaSize();
 }

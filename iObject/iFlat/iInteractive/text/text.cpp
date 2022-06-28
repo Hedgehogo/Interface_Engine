@@ -177,7 +177,7 @@ sf::Vector2f ui::Text::getPosition() {
 	return startRender;
 }
 
-sf::Vector2f ui::Text::getSize() {
+sf::Vector2f ui::Text::getAreaSize() {
 	return endRender - startRender;
 }
 

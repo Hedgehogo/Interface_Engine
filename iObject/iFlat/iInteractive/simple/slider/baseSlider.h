@@ -22,8 +22,6 @@ namespace ui {
 	public:
 		BaseSlider(ui::IDrawn *slider, ui::IDrawn *background, SliderInteraction* interaction);
 		
-		sf::Vector2f getAreaSize();
-		
 		sf::Vector2f getSliderSize();
 		
 		const sf::Vector2f& getValue();
@@ -40,7 +38,7 @@ namespace ui {
 		
 		sf::Vector2f getPosition() override;
 		
-		sf::Vector2f getSize() override;
+		sf::Vector2f getAreaSize() override;
 		
 		sf::Vector2f getMinSize() override;
 		

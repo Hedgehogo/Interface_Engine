@@ -27,7 +27,7 @@ namespace ui {
 		return sprite.getPosition();
 	}
 	
-	sf::Vector2f Sprite::getSize() {
+	sf::Vector2f Sprite::getAreaSize() {
 		return {sprite.getGlobalBounds().width, sprite.getGlobalBounds().height};
 	}
 

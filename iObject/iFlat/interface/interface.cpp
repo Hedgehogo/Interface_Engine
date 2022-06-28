@@ -51,8 +51,8 @@ namespace ui {
 		return object->getPosition();
 	}
 	
-	sf::Vector2f Interface::getSize() {
-		return object->getSize();
+	sf::Vector2f Interface::getAreaSize() {
+		return object->getAreaSize();
 	}
 	
 	sf::Vector2f Interface::getMinSize() {
