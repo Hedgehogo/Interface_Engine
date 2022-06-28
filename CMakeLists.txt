@@ -85,7 +85,7 @@ add_library(${PROJECT_NAME}
 
 set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")
 set(SFML_PATH_2 "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
-set(SFML_PATH_3 "~\\SFML-2.5.1\\lib\\cmake\\SFML")
+set(SFML_PATH_3 "\\home\\andrewkoro105\\SFML-2.5.1\\lib\\cmake\\SFML")
 
 if(EXISTS ${SFML_PATH_1} OR EXISTS ${SFML_PATH_2})
     set(SFML_STATIC_LIBRARIES TRUE)
@@ -117,3 +117,6 @@ add_executable(${PROJECT_NAME}_ex main.cpp)
 
 #find_library(`Yes_Science` Interface_Engine)
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
