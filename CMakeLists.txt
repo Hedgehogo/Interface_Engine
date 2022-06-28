@@ -80,7 +80,7 @@ add_library(${PROJECT_NAME}
         iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.cpp iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.h
         iObject/panel/panelManager/panelManager.cpp iObject/panel/panelManager/panelManager.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
-        UI.h)
+        UI.h iObject/iFlat/iLayer/renderTexture/layerWithRenderTexture.cpp iObject/iFlat/iLayer/renderTexture/layerWithRenderTexture.h)
 
 
 set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")
