@@ -131,7 +131,7 @@ void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
 
 /*
         float kerning = 0;
-        if (i < textCharacters.size() - 1)
+        if (i < textCharacters.createSize() - 1)
             kerning = character->getKerning(textCharacters[i + 1]->getChar());
 */
 

@@ -16,48 +16,6 @@ int main() {
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
 	
-	/*ui::ButtonWithPanel* buttonWithPanel {
-		new ui::ButtonWithPanel {
-			new ui::Panel {
-				new ui::ButtonWithPanel {
-					new ui::Panel {
-						new ui::LayerWithConstBezel {
-							new ui::Text{
-                                {
-                                    new ui::InteractiveTextBlock{
-                                        0,
-                                        L"соси жопу грёбаный убюдок мать твою, иди сюда блять"
-                                    }
-                                },
-                                new ui::FullColor{{60, 63, 65}},
-                                14,
-                                1.15,
-                                &font,
-                                sf::Color::Green
-                            },
-							new ui::FullColor{{81, 81, 81}},
-							1
-						},
-						new ui::PointingHidePanelInteraction{},
-						ui::Corner::DownLeft, ui::Corner::UpLeft, {0, -1},
-						ui::Size::constant, ui::Size::regardingParent, sf::Vector2f{0, 100}
-					},
-					new ui::PointingDisplayPanelInteraction{},
-					new ui::LayerWithConstBezel {
-						new ui::FullColor{{60, 63, 65}},
-						new ui::FullColor{{81, 81, 81}},
-						1
-					},
-				},
-				new ui::ClickHidePanelInteraction{sf::Mouse::Left},
-				ui::Corner::UpRight, ui::Corner::UpLeft, {-5, 5},
-				ui::Size::regardingParent, ui::Size::regardingParent,sf::Vector2f{50, 50},
-			},
-			new ui::PointingDisplayPanelInteraction{},
-			new ui::FullColor{{78, 82, 84}}
-		},
-	};*/
-	
 	ui::Interface interface {
 		/*new ui::LayerWithConstBorder {
 			new ui::FullColor{sf::Color::Cyan},
@@ -95,33 +53,6 @@ int main() {
 				{0, 0}
 			},
 			ui::LayerWithConstBorder::Side::Left, 20, {50, 50}
-		}*/
-		/*new ui::LayerWithConstBorder {
-			new ui::Slider {
-				new ui::Capsule({78, 78, 78}),
-				new ui::FullColor({43, 43, 43}),
-				sf::Vector2f{1.0f, 0.5f}
-			},
-			new ui::LayerWithConstRatio {
-				new ui::LayerWithConstBezel {
-					new ui::LayerWithConstBorder {
-						new ui::LayerWithBorderVertical {
-							{
-								buttonWithPanel,
-								new ui::FullColor{{60, 63, 65}},
-								buttonWithPanel->copy()
-							}
-						},
-						new ui::FullColor{{60, 63, 65}},
-						ui::Side::Up, 81
-					},
-					new ui::FullColor{{50, 50, 50}}, 1
-				},
-				new ui::FullColor{{43, 43, 43}},
-				new ui::FullColor{{43, 43, 43}},
-				1.f / 3.f, ui::Corner::UpLeft
-			},
-			ui::Side::Right, 10
 		}*/
 		new ui::LayerWithRenderTexture{
 			new ui::LayerWithMovableBorder{

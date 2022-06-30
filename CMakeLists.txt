@@ -7,7 +7,18 @@ add_library(${PROJECT_NAME}
         enums/corner/corner.h
         enums/side/side.h
         enums/size/size.h
+        enums/location/location.h
         enums/enums.h
+        sizingAndPositioning/sizingAndPositioning.h
+        sizingAndPositioning/sizing/sizing.cpp sizingAndPositioning/sizing/sizing.h
+        sizingAndPositioning/sizing/const/constSizing.cpp sizingAndPositioning/sizing/const/constSizing.h
+        sizingAndPositioning/sizing/relativeParent/relativeParentSizing.cpp sizingAndPositioning/sizing/relativeParent/relativeParentSizing.h
+        sizingAndPositioning/sizing/parentCoefficient/parentCoefficientSizing.cpp sizingAndPositioning/sizing/parentCoefficient/parentCoefficientSizing.h
+        sizingAndPositioning/sizing/normalSize/normalSizeSizing.cpp sizingAndPositioning/sizing/normalSize/normalSizeSizing.h
+        sizingAndPositioning/positioning/positioning.cpp sizingAndPositioning/positioning/positioning.h
+        sizingAndPositioning/positioning/internal/internalPositioning.cpp sizingAndPositioning/positioning/internal/internalPositioning.h
+        sizingAndPositioning/positioning/match/matchPositioning.cpp sizingAndPositioning/positioning/match/matchPositioning.h
+        sizingAndPositioning/positioning/match/sides/matchSidesPositioning.cpp sizingAndPositioning/positioning/match/sides/matchSidesPositioning.h
         interaction/event/button/buttonEvent.cpp interaction/event/button/buttonEvent.h
         interaction/event/button/empty/emptyEvent.cpp interaction/event/button/empty/emptyEvent.h
         interaction/event/button/simple/buttonEventSimple.cpp interaction/event/button/simple/buttonEventSimple.h
@@ -49,6 +60,7 @@ add_library(${PROJECT_NAME}
         iObject/iFlat/iLayer/alternativeObject/layerWithAlternativeObject.cpp iObject/iFlat/iLayer/alternativeObject/layerWithAlternativeObject.h
         iObject/iFlat/iLayer/movableBorder/layerWithMovableBorder.cpp iObject/iFlat/iLayer/movableBorder/layerWithMovableBorder.h
         iObject/iFlat/iLayer/movableBorder/interaction/event/movableBorderEvent.cpp iObject/iFlat/iLayer/movableBorder/interaction/event/movableBorderEvent.h
+        iObject/iFlat/iLayer/renderTexture/layerWithRenderTexture.cpp iObject/iFlat/iLayer/renderTexture/layerWithRenderTexture.h
         iObject/iFlat/iInteractive/iInteractive.cpp iObject/iFlat/iInteractive/iInteractive.h
         iObject/iFlat/iInteractive/simple/interactiveSimple.cpp iObject/iFlat/iInteractive/simple/interactiveSimple.h
         iObject/iFlat/iInteractive/simple/button/button.cpp iObject/iFlat/iInteractive/simple/button/button.h
@@ -80,7 +92,7 @@ add_library(${PROJECT_NAME}
         iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.cpp iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.h
         iObject/panel/panelManager/panelManager.cpp iObject/panel/panelManager/panelManager.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
-        UI.h iObject/iFlat/iLayer/renderTexture/layerWithRenderTexture.cpp iObject/iFlat/iLayer/renderTexture/layerWithRenderTexture.h)
+        UI.h)
 
 
 set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")
