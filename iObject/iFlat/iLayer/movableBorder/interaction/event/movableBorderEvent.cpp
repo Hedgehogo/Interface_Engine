@@ -26,12 +26,12 @@ void ui::MovableBorderEvent::whilePressed(sf::Vector2i mousePosition) {
         sf::Vector2f mouseOffset = static_cast<sf::Vector2f>(mousePosition - this->startMousePosition);
         float valueOffset = 0;
         if (layer->getIsHorizontalBorder()) {
-            valueOffset = mouseOffset.x / layer->getSize().x;
+            valueOffset = mouseOffset.x / layer->getAreaSize().x;
         } else {
-            valueOffset = mouseOffset.y / layer->getSize().y;
+            valueOffset = mouseOffset.y / layer->getAreaSize().y;
         }
         layer->setBorderValue(this->startBorderValue + valueOffset);
-        layer->resize(layer->getSize(),layer->getPosition());
+        layer->resize(layer->getAreaSize(), layer->getPosition());
         layer->setBorderValue(layer->getBorderValueNow());
     }
 }

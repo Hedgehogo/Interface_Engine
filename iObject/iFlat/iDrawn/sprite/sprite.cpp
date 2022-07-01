@@ -14,7 +14,7 @@ namespace ui {
 	}
 
 	void Sprite::draw() {
-		window->draw(sprite);
+		renderTarget->draw(sprite);
 	}
 
 	void Sprite::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -27,7 +27,7 @@ namespace ui {
 		return sprite.getPosition();
 	}
 	
-	sf::Vector2f Sprite::getSize() {
+	sf::Vector2f Sprite::getAreaSize() {
 		return {sprite.getGlobalBounds().width, sprite.getGlobalBounds().height};
 	}
 

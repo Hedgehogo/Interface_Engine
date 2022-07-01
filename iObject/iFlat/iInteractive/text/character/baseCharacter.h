@@ -9,7 +9,7 @@ namespace ui{
     class BaseTextBlock;
     class BaseCharacter {
     protected:
-        sf::RenderWindow *window;
+        sf::RenderTarget *renderTarget;
         BaseTextBlock* parent;
         sf::Vector2f position;
         IInteraction *interaction;
@@ -23,7 +23,7 @@ namespace ui{
 
         BaseCharacter(BaseTextBlock *parent, IInteraction *interaction);
 
-        void init(sf::RenderWindow &window);
+        void init(sf::RenderTarget &renderTarget);
 
         virtual bool in(sf::Vector2f mousePosition);
 

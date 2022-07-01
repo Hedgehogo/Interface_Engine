@@ -16,8 +16,8 @@ ui::Panel::Panel(IFlat *object, HidePanelInteraction *interaction, sf::Vector2f 
 	Layout(size), object(object), verticalSize(Size::constant), horizontalSize(Size::constant), parentCorner(parentCorner), panelCorner(panelCorner), offset(offset),
 	interaction(interaction), displayed(displayed), oldDisplayed(false), active(false), parentProcessed(false), interactionManager(nullptr) {}
 
-void ui::Panel::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-	initObject(object, window, interactionStack, interactionManager, panelManager);
+void ui::Panel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
+	initObject(object, renderTarget, interactionStack, interactionManager, panelManager);
 	this->interactionManager = &interactionManager;
 	interaction->init(*this, panelManager);
 	panelManager.addPanel(this);

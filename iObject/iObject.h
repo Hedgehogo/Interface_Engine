@@ -10,9 +10,9 @@ namespace ui {
 	
 	class IObject {
 	protected:
-		virtual void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) = 0;
+		virtual void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) = 0;
 		
-		void initObject(IObject *object, sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager);
+		void initObject(IObject *object, sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager);
 		
 	public:
 		virtual ~IObject() = default;
@@ -33,7 +33,9 @@ namespace ui {
 		
 		virtual sf::Vector2f getPosition() = 0;
 		
-		virtual sf::Vector2f getSize() = 0;
+		virtual sf::Vector2f getAreaSize() = 0;
+		
+		virtual sf::Vector2f getSize();
 		
 		virtual sf::Vector2f getMinSize() = 0;
 		

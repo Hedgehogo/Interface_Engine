@@ -1,4 +1,5 @@
-﻿#include "UI.h"
+﻿#include <iostream>
+#include "UI.h"
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
@@ -58,43 +59,6 @@ int main() {
 	};
 	
 	ui::Interface interface {
-		/*new ui::LayerWithConstBorder {
-			new ui::FullColor{sf::Color::Cyan},
-			new ui::LayerWithConstRatio {
-				new ui::LayerWithConstRatio {
-					new ui::Sprite{sprite, sf::Vector2f(0, 0), texture},
-					new ui::FullColor{sf::Color::Red},
-					new ui::FullColor{sf::Color::Yellow},
-					0.8f,
-					ui::LayerWithConstRatio::UpLeft,
-					{0, 0}
-				},
-				new ui::LayerWithBorder {
-					{
-						{
-							new ui::FullColor{sf::Color::Green},
-							new ui::FullColor{sf::Color::Yellow},
-							new ui::FullColor{sf::Color::Red}
-						},
-						{
-							new ui::FullColor{sf::Color::Blue},
-							new ui::Sprite{sprite, sf::Vector2f(0, 0), texture_2},
-							new ui::Button {
-								new ui::FullColor{sf::Color::Blue}, 0, sf::Vector2f(0, 0)
-							}
-						}
-					},
-					{0.5f},
-					{0.3f, 0.8f},
-					{0, 0}
-				},
-				new ui::FullColor{sf::Color::Magenta},
-				0.5f,
-				ui::LayerWithConstRatio::UpRight,
-				{0, 0}
-			},
-			ui::LayerWithConstBorder::Side::Left, 20, {50, 50}
-		}*/
 		new ui::LayerWithConstBorder {
 			new ui::Slider {
 				new ui::Capsule({78, 78, 78}),

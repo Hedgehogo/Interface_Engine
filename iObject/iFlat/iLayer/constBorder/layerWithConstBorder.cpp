@@ -1,8 +1,8 @@
 #include "layerWithConstBorder.h"
 namespace ui {
-	void LayerWithConstBorder::init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		initObject(secondObject, window, interactionStack, interactionManager, panelManager);
-		initObject(constObject, window, interactionStack, interactionManager, panelManager);
+	void LayerWithConstBorder::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
+		initObject(secondObject, renderTarget, interactionStack, interactionManager, panelManager);
+		initObject(constObject, renderTarget, interactionStack, interactionManager, panelManager);
 	}
 	
 	LayerWithConstBorder::LayerWithConstBorder(IFlat *constObject, IFlat *secondObject, Side side, float borderDistance, sf::Vector2f minSize) :

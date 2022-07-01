@@ -8,9 +8,9 @@ ui::LayerWithMovableBorder::LayerWithMovableBorder(ui::IFlat *firstObject, ui::I
 	Interactive_Simple(new OneButtonInteraction{new AddInteractionEvent {pressedInteraction},sf::Mouse::Button::Left}),
 	isHorizontalBorder(isHorizontalBorder), borderValue(borderValue), borderValueNow(borderValue), borderInteractionSize(borderInteractionSize) {}
 
-void ui::LayerWithMovableBorder::init(sf::RenderWindow &window, PanelManager &panelManager) {
-    initObject(secondObject, window, *interactionStack, *interactionManager, panelManager);
-    initObject(firstObject, window, *interactionStack, *interactionManager, panelManager);
+void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, PanelManager &panelManager) {
+    initObject(secondObject, renderTarget, *interactionStack, *interactionManager, panelManager);
+    initObject(firstObject, renderTarget, *interactionStack, *interactionManager, panelManager);
     pressedInteraction.init(*interactionManager);
     dynamic_cast<AddInteractionEvent*>(dynamic_cast<OneButtonInteraction*>(Interactive_Simple::interaction)->getEvent())->init(*interactionManager);
 }

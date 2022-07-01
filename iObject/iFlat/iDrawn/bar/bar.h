@@ -12,7 +12,7 @@ namespace ui {
 		int division;
 		float value;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
 	public:
 		explicit Bar(IDrawn* background, IDrawn* strip, float offset = 0, bool horizontal = true);

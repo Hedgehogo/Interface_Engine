@@ -11,13 +11,14 @@ namespace ui {
 	class Interface : public IFlat {
 	protected:
 		sf::RenderWindow &window;
+		sf::RenderTarget *renderTarget;
 		InteractionStack* interactionStack;
 		InteractionManager interactionManager;
 		PanelManager panelManager;
 		IFlat *object;
 		bool initialized;
 		
-		void init(sf::RenderWindow &window, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
 		bool isInWindow(sf::Vector2f position);
 		
@@ -36,7 +37,7 @@ namespace ui {
 		
 		sf::Vector2f getPosition() override;
 		
-		sf::Vector2f getSize() override;
+		sf::Vector2f getAreaSize() override;
 		
 		sf::Vector2f getMinSize() override;
 		

@@ -13,7 +13,7 @@ namespace ui {
 		sf::Vector2f sliderSize;
 		sf::Vector2f moveZoneSize;
 		
-		void init(sf::RenderWindow &window, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, PanelManager &panelManager) override;
 		
 		void cutBackValue();
 		
@@ -21,8 +21,6 @@ namespace ui {
 		
 	public:
 		BaseSlider(ui::IDrawn *slider, ui::IDrawn *background, SliderInteraction* interaction);
-		
-		sf::Vector2f getAreaSize();
 		
 		sf::Vector2f getSliderSize();
 		
@@ -40,7 +38,7 @@ namespace ui {
 		
 		sf::Vector2f getPosition() override;
 		
-		sf::Vector2f getSize() override;
+		sf::Vector2f getAreaSize() override;
 		
 		sf::Vector2f getMinSize() override;
 		

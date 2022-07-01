@@ -7,7 +7,7 @@ namespace ui {
 	protected:
 		ui::IFlat *background;
 		
-		void init(sf::RenderWindow &window, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, PanelManager &panelManager) override;
 		
 		void copy(Button* button);
 		
@@ -22,7 +22,7 @@ namespace ui {
 		
 		sf::Vector2f getPosition() override;
 		
-		sf::Vector2f getSize() override;
+		sf::Vector2f getAreaSize() override;
 		
 		sf::Vector2f getMinSize() override;
 		

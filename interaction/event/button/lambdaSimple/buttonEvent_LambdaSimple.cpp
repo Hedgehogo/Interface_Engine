@@ -1,7 +1,7 @@
 #include "buttonEvent_LambdaSimple.h"
 
 namespace ui {
-	ButtonEvent_LambdaSimple::ButtonEvent_LambdaSimple(void (*startPressed)(sf::Vector2i windowPosition), void (*whilePressed )(sf::Vector2i windowPosition), void (*stopPressed)(sf::Vector2i windowPosition), void (*whileNotPressed  )(sf::Vector2i windowPosition)) :
+	ButtonEvent_LambdaSimple::ButtonEvent_LambdaSimple(void (*startPressed)(sf::Vector2i mousePosition), void (*whilePressed )(sf::Vector2i mousePosition), void (*stopPressed)(sf::Vector2i mousePosition), void (*whileNotPressed  )(sf::Vector2i mousePosition)) :
 		ButtonEvent(), startPressed(startPressed), whilePressed(whilePressed), stopPressed(stopPressed), whileNotPressed(whileNotPressed) {}
 	
 	void ButtonEvent_LambdaSimple::update(sf::Vector2i mousePosition, bool press) {

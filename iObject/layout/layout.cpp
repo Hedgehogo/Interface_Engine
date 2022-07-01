@@ -12,7 +12,7 @@ namespace ui {
 		return position;
 	}
 	
-	sf::Vector2f Layout::getSize() {
+	sf::Vector2f Layout::getAreaSize() {
 		return size;
 	}
 	

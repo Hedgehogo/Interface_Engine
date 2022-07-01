@@ -6,15 +6,15 @@ ui::Capsule::Capsule(sf::Color color) : Layout() {
 }
 
 void ui::Capsule::draw() {
-	window->draw(rectangle);
+	renderTarget->draw(rectangle);
 	circle.setPosition(position);
-	window->draw(circle);
+	renderTarget->draw(circle);
 	if(size.x > size.y) {
 		circle.setPosition({position.x + size.x - size.y, position.y});
 	} else {
 		circle.setPosition({position.x, position.y + size.y - size.x});
 	}
-	window->draw(circle);
+	renderTarget->draw(circle);
 }
 
 void ui::Capsule::resize(sf::Vector2f size, sf::Vector2f position) {

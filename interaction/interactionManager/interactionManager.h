@@ -5,7 +5,6 @@
 namespace ui {
 	class InteractionManager {
 	protected:
-		sf::RenderWindow &window;
 		std::vector<IInteraction *> interactions;
 		std::vector<IInteraction *> addInteractions;
 		std::vector<IInteraction *> deleteInteractions;
@@ -13,7 +12,7 @@ namespace ui {
 		bool block;
 	
 	public:
-		explicit InteractionManager(sf::RenderWindow &window);
+		explicit InteractionManager();
 		
 		void addInteraction(IInteraction &interaction);
 		

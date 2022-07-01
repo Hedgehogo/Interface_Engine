@@ -12,7 +12,7 @@ ui::Character::Character(wchar_t character, TextVariables &textVariables, BaseTe
 
 void ui::Character::draw() {
     if(isSpecial() != BaseCharacter::Special::enter){
-        window->draw(sprite);
+        renderTarget->draw(sprite);
     }
 }
 

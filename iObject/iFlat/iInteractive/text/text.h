@@ -18,7 +18,7 @@ namespace ui {
         };
 		
     protected:
-        sf::RenderWindow *window;
+        sf::RenderTarget *renderTarget;
 
         sf::Vector2f minSize{0, 0};
 
@@ -33,7 +33,7 @@ namespace ui {
         std::vector<BaseTextBlock*> textBocks;
 
         ui::IDrawn *background;
-        void init(sf::RenderWindow &window, PanelManager &overlayStack);
+        void init(sf::RenderTarget &renderTarget, PanelManager &overlayStack);
 		
     public:
         Text(std::vector<ui::BaseTextBlock *> textBlocks, IDrawn *background = new ui::FullColor(sf::Color::White),
@@ -72,7 +72,7 @@ namespace ui {
 		
 		sf::Vector2f getPosition() override;
 		
-		sf::Vector2f getSize() override;
+		sf::Vector2f getAreaSize() override;
 
         sf::Vector2f getMinSize() override;
 
