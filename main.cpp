@@ -39,8 +39,8 @@ int main() {
 							1
 						},
 						new ui::PointingHidePanelInteraction{},
-						ui::Corner::DownLeft, ui::Corner::UpLeft, {0, -1},
-						ui::Size::constant, ui::Size::regardingParent, sf::Vector2f{0, 100}
+						new ui::Sizing2{new ui::RelativeParentSizing{}, new ui::ConstSizing{100}},
+						new ui::Positioning2{ui::Location2::downLeft, ui::Location2::upLeft, {0, -1}}
 					},
 					new ui::PointingDisplayPanelInteraction{},
 					new ui::LayerWithConstBezel {
@@ -50,8 +50,8 @@ int main() {
 					},
 				},
 				new ui::ClickHidePanelInteraction{sf::Mouse::Left},
-				ui::Corner::UpRight, ui::Corner::UpLeft, {-5, 5},
-				ui::Size::regardingParent, ui::Size::regardingParent,sf::Vector2f{50, 50},
+				new ui::Sizing2{new ui::RelativeParentSizing{}, new ui::RelativeParentSizing{}},
+				new ui::Positioning2{ui::Location2::upRight, ui::Location2::upLeft, {0, -1}}
 			},
 			new ui::PointingDisplayPanelInteraction{},
 			new ui::FullColor{{78, 82, 84}}

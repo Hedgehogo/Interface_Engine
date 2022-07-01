@@ -2,19 +2,18 @@
 #include "../../enums/enums.h"
 #include "../iFlat/iFlat.h"
 #include "../layout/layout.h"
+#include "../../sizingAndPositioning/sizing2/sizing2.h"
+#include "../../sizingAndPositioning/positioning2/positioning2.h"
 
 namespace ui {
 	class HidePanelInteraction;
 	class Panel : public Layout {
 	protected:
-		sf::Vector2f offset;
-		Size verticalSize;
-		Size horizontalSize;
 		IFlat *object;
 		InteractionManager* interactionManager;
 		HidePanelInteraction* interaction;
-		Corner parentCorner;
-		Corner panelCorner;
+		Sizing2* sizing;
+		Positioning2* positioning;
 		bool parentProcessed;
 		bool oldDisplayed;
 		bool displayed;
@@ -22,16 +21,12 @@ namespace ui {
 		
 		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
-		static sf::Vector2f cornerToPositionOffset(Corner corner, sf::Vector2f size);
-		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
 		void copy(Panel* panel);
 	
 	public:
-		Panel(IFlat *object, HidePanelInteraction *interaction, Corner parentCorner, Corner panelCorner, sf::Vector2f offset, Size verticalSize, Size horizontalSize, sf::Vector2f size = sf::Vector2f{}, bool displayed = false);
-		
-		Panel(IFlat *object, HidePanelInteraction *interaction, sf::Vector2f size, Corner parentCorner = Corner::DownLeft, Corner panelCorner = Corner::UpLeft, sf::Vector2f offset = sf::Vector2f{}, bool displayed = false);
+		Panel(IFlat *object, HidePanelInteraction *interaction, Sizing2* sizing, Positioning2* positioning, bool displayed = false);
 		
 		~Panel() override;
 		
