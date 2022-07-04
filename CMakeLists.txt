@@ -10,17 +10,29 @@ add_library(${PROJECT_NAME}
         enums/location/location.h
         enums/location2/location2.cpp enums/location2/location2.h
         enums/enums.h
+
         sizingAndPositioning/sizing/sizing.cpp sizingAndPositioning/sizing/sizing.h
         sizingAndPositioning/sizing/const/constSizing.cpp sizingAndPositioning/sizing/const/constSizing.h
-        sizingAndPositioning/sizing/relativeParent/relativeParentSizing.cpp sizingAndPositioning/sizing/relativeParent/relativeParentSizing.h
-        sizingAndPositioning/sizing/coefficient/parentCoefficient/parentCoefficientSizing.cpp sizingAndPositioning/sizing/coefficient/parentCoefficient/parentCoefficientSizing.h
-        sizingAndPositioning/sizing/normalSize/normalSizeSizing.cpp sizingAndPositioning/sizing/normalSize/normalSizeSizing.h
+        sizingAndPositioning/sizing/relative/parent/relativeParentSizing.cpp sizingAndPositioning/sizing/relative/parent/relativeParentSizing.h
+        sizingAndPositioning/sizing/relative/normal/relativeNormalSizing.cpp sizingAndPositioning/sizing/relative/normal/relativeNormalSizing.h
+        sizingAndPositioning/sizing/coefficient/parent/parentCoefficientSizing.cpp sizingAndPositioning/sizing/coefficient/parent/parentCoefficientSizing.h
+        sizingAndPositioning/sizing/coefficient/target/targetCoefficientSizing.cpp sizingAndPositioning/sizing/coefficient/target/targetCoefficientSizing.h
+        sizingAndPositioning/sizing/smart/smartSizing.cpp sizingAndPositioning/sizing/smart/smartSizing.h
+        sizingAndPositioning/sizing/lambda/lambdaSizing.cpp sizingAndPositioning/sizing/lambda/lambdaSizing.h
+        sizingAndPositioning/sizing2/baseSizing2.cpp sizingAndPositioning/sizing2/baseSizing2.h
         sizingAndPositioning/sizing2/general/sizing2.cpp sizingAndPositioning/sizing2/general/sizing2.h
+        sizingAndPositioning/sizing2/lambda/lambdaSizing2.cpp sizingAndPositioning/sizing2/lambda/lambdaSizing2.h
+        sizingAndPositioning/sizing2/constRatio/constRatioSizing2.cpp sizingAndPositioning/sizing2/constRatio/constRatioSizing2.h
         sizingAndPositioning/positioning/positioning.cpp sizingAndPositioning/positioning/positioning.h
         sizingAndPositioning/positioning/internal/internalPositioning.cpp sizingAndPositioning/positioning/internal/internalPositioning.h
+        sizingAndPositioning/positioning/internal/target/internalTargetPositioning.cpp sizingAndPositioning/positioning/internal/target/internalTargetPositioning.h
         sizingAndPositioning/positioning/match/matchPositioning.cpp sizingAndPositioning/positioning/match/matchPositioning.h
         sizingAndPositioning/positioning/match/sides/matchSidesPositioning.cpp sizingAndPositioning/positioning/match/sides/matchSidesPositioning.h
+        sizingAndPositioning/positioning/match/target/matchTargetPositioning.cpp sizingAndPositioning/positioning/match/target/matchTargetPositioning.h
+        sizingAndPositioning/positioning/lambda/lambdaPositioning.cpp sizingAndPositioning/positioning/lambda/lambdaPositioning.h
+        sizingAndPositioning/positioning2/basePositioning2.cpp sizingAndPositioning/positioning2/basePositioning2.h
         sizingAndPositioning/positioning2/general/positioning2.cpp sizingAndPositioning/positioning2/general/positioning2.h
+        sizingAndPositioning/positioning2/lambda/lambdaPositioning2.cpp sizingAndPositioning/positioning2/lambda/lambdaPositioning2.h
         sizingAndPositioning/sizingAndPositioning.h
         interaction/event/button/buttonEvent.cpp interaction/event/button/buttonEvent.h
         interaction/event/button/empty/emptyEvent.cpp interaction/event/button/empty/emptyEvent.h
@@ -95,7 +107,7 @@ add_library(${PROJECT_NAME}
         iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.cpp iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.h
         iObject/panel/panelManager/panelManager.cpp iObject/panel/panelManager/panelManager.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
-        UI.h sizingAndPositioning/sizing/coefficient/targetCoefficient/targetCoefficientSizing.cpp sizingAndPositioning/sizing/coefficient/targetCoefficient/targetCoefficientSizing.h sizingAndPositioning/sizing/smart/smartSizing.cpp sizingAndPositioning/sizing/smart/smartSizing.h sizingAndPositioning/positioning/match/target/matchTargetPositioning.cpp sizingAndPositioning/positioning/match/target/matchTargetPositioning.h sizingAndPositioning/positioning/internal/target/internalTargetPositioning.cpp sizingAndPositioning/positioning/internal/target/internalTargetPositioning.h sizingAndPositioning/positioning/lambda/lambdaPositioning.cpp sizingAndPositioning/positioning/lambda/lambdaPositioning.h sizingAndPositioning/sizing/lambda/lambdaSizing.cpp sizingAndPositioning/sizing/lambda/lambdaSizing.h sizingAndPositioning/sizing2/constRatio/constRatioSizing2.cpp sizingAndPositioning/sizing2/constRatio/constRatioSizing2.h sizingAndPositioning/sizing2/baseSizing2.cpp sizingAndPositioning/sizing2/baseSizing2.h sizingAndPositioning/positioning2/basePositioning2.cpp sizingAndPositioning/positioning2/basePositioning2.h sizingAndPositioning/sizing2/lambda/lambdaSizing2.cpp sizingAndPositioning/sizing2/lambda/lambdaSizing2.h sizingAndPositioning/positioning2/lambda/lambdaPositioning2.cpp sizingAndPositioning/positioning2/lambda/lambdaPositioning2.h)
+        UI.h)
 
 
 set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")

@@ -1,10 +1,10 @@
 #pragma once
 #include "../sizing/sizing.h"
 #include "../sizing/const/constSizing.h"
-#include "../sizing/normalSize/normalSizeSizing.h"
-#include "../sizing/relativeParent/relativeParentSizing.h"
-#include "../sizing/coefficient/parentCoefficient/parentCoefficientSizing.h"
-#include "../sizing/coefficient/targetCoefficient/targetCoefficientSizing.h"
+#include "../sizing/relative/normal/relativeNormalSizing.h"
+#include "../sizing/relative/parent/relativeParentSizing.h"
+#include "../sizing/coefficient/parent/parentCoefficientSizing.h"
+#include "../sizing/coefficient/target/targetCoefficientSizing.h"
 #include "../sizing/smart/smartSizing.h"
 #include "../sizing/lambda/lambdaSizing.h"
 
@@ -21,6 +21,8 @@ namespace ui {
 		
 		virtual BaseSizing2* copy() = 0;
 	};
+	
+	Sizing* createSize(bool relativeParent);
 	
 	Sizing* createSize(float coefficient, float addition, bool relativeTarget);
 }

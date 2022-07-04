@@ -13,7 +13,7 @@ namespace ui {
 	public:
 		Sizing2(Sizing* horizontal, Sizing* vertical);
 		
-		Sizing2();
+		Sizing2(bool relativeParent);
 		
 		Sizing2(sf::Vector2f constSize);
 		

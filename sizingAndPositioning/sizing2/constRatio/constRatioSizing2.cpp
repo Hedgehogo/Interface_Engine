@@ -7,7 +7,7 @@
 namespace ui {
 	ConstRatioSizing2::ConstRatioSizing2(Sizing *sizing, float ratio, bool horizontal) : sizing(sizing), ratio(ratio), horizontal(horizontal) {}
 	
-	ConstRatioSizing2::ConstRatioSizing2(float ratio, bool horizontal) : sizing(new NormalSizeSizing{}), ratio(ratio), horizontal(horizontal) {}
+	ConstRatioSizing2::ConstRatioSizing2(float ratio, bool horizontal) : sizing(new RelativeNormalSizing{}), ratio(ratio), horizontal(horizontal) {}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float constSize, float ratio, bool horizontal) :
 		sizing(new ConstSizing{constSize}), ratio(ratio), horizontal(horizontal) {}
