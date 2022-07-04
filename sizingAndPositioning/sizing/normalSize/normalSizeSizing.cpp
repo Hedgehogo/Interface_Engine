@@ -3,11 +3,11 @@
 namespace ui {
 	NormalSizeSizing::NormalSizeSizing() : size(0) {}
 	
-	void NormalSizeSizing::init(sf::RenderTarget &, float normalSize) {
+	void NormalSizeSizing::init(float normalSize) {
 		this->size = normalSize;
 	}
 	
-	float NormalSizeSizing::findSize(float) {
+	float NormalSizeSizing::findSize(float, float) {
 		return this->size;
 	}
 	

@@ -2,8 +2,8 @@
 #include "../../enums/enums.h"
 #include "../iFlat/iFlat.h"
 #include "../layout/layout.h"
-#include "../../sizingAndPositioning/sizing2/sizing2.h"
-#include "../../sizingAndPositioning/positioning2/positioning2.h"
+#include "../../sizingAndPositioning/sizing2/general/sizing2.h"
+#include "../../sizingAndPositioning/positioning2/general/positioning2.h"
 
 namespace ui {
 	class HidePanelInteraction;

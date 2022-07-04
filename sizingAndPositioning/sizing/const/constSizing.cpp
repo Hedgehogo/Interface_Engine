@@ -3,9 +3,9 @@
 namespace ui {
 	ConstSizing::ConstSizing(float size) : size(size) {}
 	
-	void ConstSizing::init(sf::RenderTarget &, float) {}
+	void ConstSizing::init(float) {}
 	
-	float ConstSizing::findSize(float) {
+	float ConstSizing::findSize(float, float) {
 		return this->size;
 	}
 	

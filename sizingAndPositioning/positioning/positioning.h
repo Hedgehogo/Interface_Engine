@@ -8,11 +8,9 @@ namespace ui {
 		
 		virtual ~Positioning() = default;
 		
-		virtual void init(sf::RenderTarget& renderTarget) = 0;
+		virtual float findPosition(float parentPosition, float objectSize, float parentSize, float targetSize) = 0;
 		
-		virtual float findPosition(float parentPosition, float parentSize, float objectSize) = 0;
-		
-		float operator()(float parentPosition, float parentSize, float objectSize);
+		float operator()(float parentPosition, float objectSize, float parentSize, float targetSize);
 		
 		virtual Positioning* copy() = 0;
 	};

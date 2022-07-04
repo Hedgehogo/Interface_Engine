@@ -7,9 +7,9 @@
 namespace ui {
 	RelativeParentSizing::RelativeParentSizing(float addition) : addition(addition) {}
 	
-	void RelativeParentSizing::init(sf::RenderTarget &, float) {}
+	void RelativeParentSizing::init(float) {}
 	
-	float RelativeParentSizing::findSize(float parentSize) {
+	float RelativeParentSizing::findSize(float parentSize, float) {
 		return parentSize + addition;
 	}
 	

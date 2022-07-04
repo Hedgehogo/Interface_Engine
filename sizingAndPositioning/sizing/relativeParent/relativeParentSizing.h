@@ -7,11 +7,11 @@ namespace ui {
 		float addition;
 		
 	public:
-		RelativeParentSizing(float addition = 0);
+		explicit RelativeParentSizing(float addition = 0);
 		
-		void init(sf::RenderTarget &, float) override;
+		void init(float) override;
 		
-		float findSize(float parentSize) override;
+		float findSize(float parentSize, float) override;
 		
 		RelativeParentSizing* copy() override;
 	};

@@ -12,9 +12,7 @@ namespace ui {
 	public:
 		MatchSidesPositioning(Location parentSide, Location objectSide, float offset = 0);
 		
-		void init(sf::RenderTarget &) override;
-		
-		float findPosition(float parentPosition, float parentSize, float objectSize) override;
+		float findPosition(float parentPosition, float objectSize, float parentSize, float) override;
 		
 		MatchSidesPositioning* copy() override;
 	};

@@ -8,14 +8,10 @@ namespace ui {
 		float offset;
 	
 	public:
-		InternalPositioning(float coefficient, float offset = 0);
+		explicit InternalPositioning(float coefficient, float offset = 0);
 		
-		void init(sf::RenderTarget &) override;
-		
-		float findPosition(float parentPosition, float parentSize, float objectSize) override;
+		float findPosition(float parentPosition, float objectSize, float parentSize, float) override;
 		
 		InternalPositioning* copy() override;
 	};
-	
-	Positioning* createPosition(float coefficient, float offset);
 }

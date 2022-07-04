@@ -9,9 +9,9 @@ namespace ui {
 	public:
 		ConstSizing(float size);
 		
-		void init(sf::RenderTarget&, float) override;
+		void init(float) override;
 		
-		float findSize(float) override;
+		float findSize(float, float) override;
 		
 		ConstSizing* copy() override;
 	};

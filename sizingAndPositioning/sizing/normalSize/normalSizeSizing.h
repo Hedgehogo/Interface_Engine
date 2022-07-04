@@ -11,9 +11,9 @@ namespace ui {
 	public:
 		NormalSizeSizing();
 		
-		void init(sf::RenderTarget &, float normalSize) override;
+		void init(float normalSize) override;
 		
-		float findSize(float) override;
+		float findSize(float, float) override;
 		
 		NormalSizeSizing* copy() override;
 	};

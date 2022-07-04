@@ -8,11 +8,11 @@ namespace ui {
 		
 		virtual ~Sizing() = default;
 		
-		virtual void init(sf::RenderTarget& renderTarget, float normalSize) = 0;
+		virtual void init(float normalSize) = 0;
 		
-		virtual float findSize(float parentSize) = 0;
+		virtual float findSize(float parentSize, float targetSize) = 0;
 		
-		float operator()(float parentSize);
+		float operator()(float parentSize, float targetSize);
 		
 		virtual Sizing* copy() = 0;
 	};

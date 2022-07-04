@@ -4,9 +4,7 @@ namespace ui {
 	
 	MatchSidesPositioning::MatchSidesPositioning(Location parentSide, Location objectSide, float offset) : parentSide(parentSide), objectSide(objectSide), offset(offset) {}
 	
-	void MatchSidesPositioning::init(sf::RenderTarget &) {}
-	
-	float MatchSidesPositioning::findPosition(float parentPosition, float parentSize, float objectSize) {
+	float MatchSidesPositioning::findPosition(float parentPosition, float objectSize, float parentSize, float) {
 		float position{parentPosition + offset};
 		switch(parentSide) {
 			case Location::origin: break;
