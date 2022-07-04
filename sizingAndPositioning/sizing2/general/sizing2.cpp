@@ -4,8 +4,8 @@ namespace ui {
 	Sizing2::Sizing2(Sizing *horizontal, Sizing *vertical) :
 		horizontal(horizontal), vertical(vertical), renderTarget(nullptr) {}
 	
-	Sizing2::Sizing2() :
-		horizontal(new NormalSizeSizing{}), vertical(new NormalSizeSizing{}), renderTarget(nullptr) {}
+	Sizing2::Sizing2(bool relativeParent) :
+		horizontal(createSize(relativeParent)), vertical(createSize(relativeParent)), renderTarget(nullptr) {}
 	
 	Sizing2::Sizing2(sf::Vector2f constSize) :
 		horizontal(new ConstSizing{constSize.x}), vertical(new ConstSizing{constSize.y}), renderTarget(nullptr) {}

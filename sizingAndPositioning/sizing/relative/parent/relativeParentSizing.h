@@ -1,5 +1,5 @@
 #pragma once
-#include "../sizing.h"
+#include "../../sizing.h"
 
 namespace ui {
 	class RelativeParentSizing : public Sizing {
