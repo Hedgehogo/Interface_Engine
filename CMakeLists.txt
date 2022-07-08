@@ -72,6 +72,7 @@ add_library(${PROJECT_NAME}
         iObject/iFlat/iLayer/constBezel/layerWithConstBezel.cpp iObject/iFlat/iLayer/constBezel/layerWithConstBezel.h
         iObject/iFlat/iLayer/constBorder/layerWithConstBorder.cpp iObject/iFlat/iLayer/constBorder/layerWithConstBorder.h
         iObject/iFlat/iLayer/constCenter/layerWithConstCenter.cpp iObject/iFlat/iLayer/constCenter/layerWithConstCenter.h
+        iObject/iFlat/iLayer/panel/layerWithPanel.cpp iObject/iFlat/iLayer/panel/layerWithPanel.h
         iObject/iFlat/iLayer/alternativeObject/layerWithAlternativeObject.cpp iObject/iFlat/iLayer/alternativeObject/layerWithAlternativeObject.h
         iObject/iFlat/iLayer/movableBorder/layerWithMovableBorder.cpp iObject/iFlat/iLayer/movableBorder/layerWithMovableBorder.h
         iObject/iFlat/iLayer/movableBorder/interaction/event/movableBorderEvent.cpp iObject/iFlat/iLayer/movableBorder/interaction/event/movableBorderEvent.h
@@ -94,20 +95,22 @@ add_library(${PROJECT_NAME}
         iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.h
         iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.cpp iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.h
         iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.h
-        iObject/panel/panel.cpp iObject/panel/panel.h
-        iObject/panel/interaction/event/panelEvent.cpp iObject/panel/interaction/event/panelEvent.h
-        iObject/panel/interaction/event/hide/hidePanelEvent.cpp iObject/panel/interaction/event/hide/hidePanelEvent.h
-        iObject/panel/interaction/basePanelInteraction.cpp iObject/panel/interaction/basePanelInteraction.h
-        iObject/panel/interaction/panelInteraction/panelInteraction.cpp iObject/panel/interaction/panelInteraction/panelInteraction.h
-        iObject/panel/interaction/click/clickPanelInteraction.cpp iObject/panel/interaction/click/clickPanelInteraction.h
-        iObject/panel/interaction/display/displayPanelInteraction.h
-        iObject/panel/interaction/display/pointing/pointingDisplayPanelInteraction.h iObject/panel/interaction/display/pointing/pointingDisplayPanelInteraction.cpp
-        iObject/panel/interaction/hide/hidePanelInteraction.cpp iObject/panel/interaction/hide/hidePanelInteraction.h
-        iObject/panel/interaction/hide/click/clickHidePanelInteraction.cpp iObject/panel/interaction/hide/click/clickHidePanelInteraction.h
-        iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.cpp iObject/panel/interaction/hide/pointing/pointingHidePanelInteraction.h
+        iObject/panel/panel/basePanel.cpp iObject/panel/panel/basePanel.h
+        iObject/panel/panel/const/constPanel.cpp iObject/panel/panel/const/constPanel.h
+        iObject/panel/panel/general/panel.cpp iObject/panel/panel/general/panel.h
+        iObject/panel/panel/interaction/event/panelEvent.cpp iObject/panel/panel/interaction/event/panelEvent.h
+        iObject/panel/panel/interaction/event/hide/hidePanelEvent.cpp iObject/panel/panel/interaction/event/hide/hidePanelEvent.h
+        iObject/panel/panel/interaction/basePanelInteraction.cpp iObject/panel/panel/interaction/basePanelInteraction.h
+        iObject/panel/panel/interaction/panelInteraction/panelInteraction.cpp iObject/panel/panel/interaction/panelInteraction/panelInteraction.h
+        iObject/panel/panel/interaction/click/clickPanelInteraction.cpp iObject/panel/panel/interaction/click/clickPanelInteraction.h
+        iObject/panel/panel/interaction/display/displayPanelInteraction.h
+        iObject/panel/panel/interaction/display/pointing/pointingDisplayPanelInteraction.h iObject/panel/panel/interaction/display/pointing/pointingDisplayPanelInteraction.cpp
+        iObject/panel/panel/interaction/hide/hidePanelInteraction.cpp iObject/panel/panel/interaction/hide/hidePanelInteraction.h
+        iObject/panel/panel/interaction/hide/click/clickHidePanelInteraction.cpp iObject/panel/panel/interaction/hide/click/clickHidePanelInteraction.h
+        iObject/panel/panel/interaction/hide/pointing/pointingHidePanelInteraction.cpp iObject/panel/panel/interaction/hide/pointing/pointingHidePanelInteraction.h
         iObject/panel/panelManager/panelManager.cpp iObject/panel/panelManager/panelManager.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
-        UI.h)
+        UI.h )
 
 
 set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")

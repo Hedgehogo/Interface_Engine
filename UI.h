@@ -13,6 +13,7 @@
 #include "iObject/iFlat/iLayer/constBezel/layerWithConstBezel.h"
 #include "iObject/iFlat/iLayer/constCenter/layerWithConstCenter.h"
 #include "iObject/iFlat/iLayer/constBorder/layerWithConstBorder.h"
+#include "iObject/iFlat/iLayer/panel/layerWithPanel.h"
 #include "iObject/iFlat/iLayer/alternativeObject/layerWithAlternativeObject.h"
 #include "iObject/iFlat/iLayer/renderTexture/layerWithRenderTexture.h"
 #include "iObject/iFlat/iLayer/movableBorder/layerWithMovableBorder.h"

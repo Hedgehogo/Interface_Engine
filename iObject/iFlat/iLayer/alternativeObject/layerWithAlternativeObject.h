@@ -16,11 +16,11 @@ namespace ui {
 		
 		void draw() override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
-		
 		void update() override;
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
+		
+		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		sf::Vector2f getMinSize() override;
 		

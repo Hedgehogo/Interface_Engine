@@ -1,44 +1,66 @@
 #include "panelManager.h"
 #include <utility>
-#include <iostream>
 
 namespace ui {
-	PanelManager::PanelManager(std::vector<Panel *> panels) : panels(std::move(panels)), activePanels() {}
+	PanelManager::PanelManager(std::vector<BasePanel *> panels) : panels(std::move(panels)), activePanels() {}
 	
-	void PanelManager::addPanel(Panel *panel) {
-		panels.push_back(panel);
+	void PanelManager::print() {
+		for(const auto &panel: panels) {
+			std::cout << panel << ", ";
+		}
+		if(!panels.empty()) {
+			std::cout << std::endl;
+		}
 	}
 	
-	void PanelManager::displayPanel(Panel *panel) {
+	void PanelManager::printActive() {
+		for(const auto &panel: activePanels) {
+			std::cout << panel << ", ";
+		}
+		if(!activePanels.empty()) {
+			std::cout << std::endl;
+		}
+	}
+	
+	bool PanelManager::isFree() {
+		return std::all_of(activePanels.begin(), activePanels.end(), [](BasePanel* panel) { return !panel->isIndependent(); });
+	}
+	
+	void PanelManager::addPanel(BasePanel *panel) {
+		panels.insert(panels.begin(), panel);
+	}
+	
+	void PanelManager::displayPanel(BasePanel *panel) {
 		if(std::find(activePanels.begin(), activePanels.end(), panel) == activePanels.end())
-			activePanels.push_back(panel);
+			activePanels.insert(activePanels.begin(), panel);
 	}
 	
-	void PanelManager::hidePanel(Panel *panel) {
-		for(unsigned i = 0; i < activePanels.size(); ++i) {
-			if(activePanels[i] == panel) {
-				activePanels.erase(activePanels.cbegin() + i, activePanels.cend());
-				break;
-			}
+	void PanelManager::hidePanel(BasePanel *panel) {
+		if(auto iterator = std::find(activePanels.begin(), activePanels.end(), panel); iterator != activePanels.end())
+			activePanels.erase(iterator);
+	}
+	
+	void PanelManager::draw() {
+		for(auto panel = activePanels.rbegin(); panel != activePanels.rend(); ++panel) {
+			(*panel)->draw();
 		}
 	}
 	
 	void PanelManager::update() {
-		for(int i = panels.size() - 1; i >= 0; --i) {
-			panels[i]->update();
+		for(auto &panel: activePanels) {
+			panel->update();
 		}
 	}
 	
-	void PanelManager::draw() {
-		for(const auto &panel: activePanels) {
-			panel->draw();
+	bool PanelManager::updateInteractions(sf::Vector2f mousePosition) {
+		for(auto iterator= activePanels.begin(); iterator != activePanels.end(); ++iterator) {
+			if((*iterator)->updateInteractions(mousePosition)) {
+				BasePanel* panel = *iterator;
+				activePanels.erase(iterator);
+				activePanels.insert(activePanels.begin(), panel);
+				return true;
+			}
 		}
-	}
-	
-	void PanelManager::updateInteractions(sf::Vector2f mousePosition) {
-		bool active = true;
-		for(long long i = static_cast<long long>(activePanels.size()) - 1; i >= 0; --i) {
-			active = active && !activePanels[i]->updateInteractions(active, mousePosition);
-		}
+		return false;
 	}
 }

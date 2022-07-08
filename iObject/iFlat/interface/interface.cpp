@@ -70,8 +70,8 @@ namespace ui {
 	void Interface::update() {
 		sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 		if(isInWindow(mousePosition) && !interactionManager.isBlocked()) {
-			panelManager.updateInteractions(mousePosition);
-			object->updateInteractions(mousePosition);
+			if(!panelManager.updateInteractions(mousePosition))
+				object->updateInteractions(mousePosition);
 		}
 		panelManager.update();
 		object->update();

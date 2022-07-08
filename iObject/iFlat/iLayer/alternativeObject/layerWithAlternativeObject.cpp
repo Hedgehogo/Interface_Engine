@@ -2,7 +2,7 @@
 #include <algorithm>
 
 ui::LayerWithAlternativeObject::LayerWithAlternativeObject(ui::IFlat *topObject, ui::IFlat *bottomObject, sf::Vector2f minimumSize) :
-	ILayer({0, 0}), topObject(topObject), bottomObject(bottomObject) {}
+	ILayer(minimumSize), topObject(topObject), bottomObject(bottomObject) {}
 
 void ui::LayerWithAlternativeObject::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 	initObject(topObject, renderTarget, interactionStack, interactionManager, panelManager);
@@ -19,27 +19,27 @@ void ui::LayerWithAlternativeObject::draw() {
 	topObject->draw();
 }
 
-void ui::LayerWithAlternativeObject::resize(sf::Vector2f size, sf::Vector2f position) {
-	this->size = size;
-	this->position = position;
-	topObject->resize(size, position);
-	bottomObject->resize(size, position);
-}
-
 void ui::LayerWithAlternativeObject::update() {
 	topObject->update();
 	bottomObject->update();
 }
 
 bool ui::LayerWithAlternativeObject::updateInteractions(sf::Vector2f mousePosition) {
-    return topObject->updateInteractions(mousePosition) || bottomObject->updateInteractions(mousePosition);
-    
-    /*  //same as on top
-    if(!topObject->updateInteractions(mousePosition)) {
-        return bottomObject->updateInteractions(mousePosition);
-    }
-    return true;
-    */
+	return topObject->updateInteractions(mousePosition) || bottomObject->updateInteractions(mousePosition);
+	
+	/*  //same as on top
+	if(!topObject->updateInteractions(mousePosition)) {
+		return bottomObject->updateInteractions(mousePosition);
+	}
+	return true;
+	*/
+}
+
+void ui::LayerWithAlternativeObject::resize(sf::Vector2f size, sf::Vector2f position) {
+	this->size = size;
+	this->position = position;
+	topObject->resize(size, position);
+	bottomObject->resize(size, position);
 }
 
 sf::Vector2f ui::LayerWithAlternativeObject::getMinSize() {

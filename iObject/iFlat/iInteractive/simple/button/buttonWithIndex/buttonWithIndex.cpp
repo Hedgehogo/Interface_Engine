@@ -10,7 +10,7 @@ namespace ui {
 		Button(background, nullptr), interactionIndex(interaction) {}
 	
 	ButtonWithIndex *ButtonWithIndex::copy() {
-		ButtonWithIndex* buttonWithIndex{new ButtonWithIndex{dynamic_cast<IDrawn*>(background), interactionIndex}};
+		ButtonWithIndex* buttonWithIndex{new ButtonWithIndex{dynamic_cast<IDrawn*>(background->copy()), interactionIndex}};
 		Button::copy(buttonWithIndex);
 		buttonWithIndex->interaction = this->interaction;
 		return buttonWithIndex;

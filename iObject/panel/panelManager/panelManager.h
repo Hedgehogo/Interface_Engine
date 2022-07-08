@@ -1,27 +1,33 @@
 #pragma once
 #include <vector>
 #include "../../iFlat/iFlat.h"
-#include "../panel.h"
+#include "../panel/basePanel.h"
 
 namespace ui {
 	class PanelManager {
 	protected:
-		std::vector<Panel *> panels;
-		std::vector<Panel *> activePanels;
+		std::vector<BasePanel *> panels;
+		std::vector<BasePanel *> activePanels;
+		
+		void print();
+		
+		void printActive();
 	
 	public:
-		explicit PanelManager(std::vector<Panel *> panels = std::vector<Panel *>{});
+		explicit PanelManager(std::vector<BasePanel *> panels = std::vector<BasePanel *>{});
 		
-		void addPanel(Panel *panel);
+		bool isFree();
 		
-		void displayPanel(Panel *panel);
+		void addPanel(BasePanel *panel);
 		
-		void hidePanel(Panel *panel);
+		void displayPanel(BasePanel *panel);
 		
-		void update();
+		void hidePanel(BasePanel *panel);
 		
 		void draw();
 		
-		void updateInteractions(sf::Vector2f mousePosition);
+		void update();
+		
+		bool updateInteractions(sf::Vector2f mousePosition);
 	};
 }
