@@ -109,4 +109,11 @@ namespace ui {
 		ILayer::copy(layerWithBorderHorizontal);
 		return layerWithBorderHorizontal;
 	}
+	
+	void LayerWithBorderHorizontal::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+		IObject::drawDebug(renderTarget, indent, indentAddition);
+		for(auto &object: objects) {
+			object->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+		}
+	}
 }

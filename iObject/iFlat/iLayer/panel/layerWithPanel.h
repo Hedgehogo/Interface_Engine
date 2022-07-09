@@ -28,6 +28,8 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		LayerWithPanel* copy() override;
+		
+		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) override;
 	};
 	
 	typedef LayerWithPanel LayerWPanel;

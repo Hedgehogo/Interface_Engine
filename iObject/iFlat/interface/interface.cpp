@@ -70,8 +70,9 @@ namespace ui {
 	void Interface::update() {
 		sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 		if(isInWindow(mousePosition) && !interactionManager.isBlocked()) {
-			if(!panelManager.updateInteractions(mousePosition))
+			if(!panelManager.updateInteractions(mousePosition)) {
 				object->updateInteractions(mousePosition);
+			}
 		}
 		panelManager.update();
 		object->update();
@@ -87,5 +88,9 @@ namespace ui {
 		Interface* interface {new Interface{object->copy(), interactionStack, window}};
 		interface->init();
 		return interface;
+	}
+	
+	void Interface::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+		object->drawDebug(renderTarget, indent, indentAddition);
 	}
 }

@@ -42,5 +42,7 @@ namespace ui {
 		virtual sf::Vector2f getNormalSize() = 0;
 		
 		virtual IObject* copy() = 0;
+		
+		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition);
 	};
 }

@@ -160,6 +160,12 @@ ui::LayerWithMovableBorder *ui::LayerWithMovableBorder::copy() {
     return layerWithMovableBorder;
 }
 
+void ui::LayerWithMovableBorder::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+	IObject::drawDebug(renderTarget, indent, indentAddition);
+	firstObject->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+	secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+}
+
 
 
 

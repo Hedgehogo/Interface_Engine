@@ -81,4 +81,8 @@ namespace ui {
 		IDrawn::copy(caption);
 		return caption;
 	}
+	
+	void Caption::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+		background->drawDebug(renderTarget, indent, indentAddition);
+	}
 }

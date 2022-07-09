@@ -35,6 +35,8 @@ namespace ui {
 		void update() override;
 		
 		LayerWithBorderVertical* copy() override;
+		
+		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) override;
 	};
 	
 	typedef LayerWithBorderVertical LayerWBoundV;

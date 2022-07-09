@@ -40,4 +40,8 @@ namespace ui {
 	void Button::copy(Button *button) {
 		Interactive_Simple::copy(button);
 	}
+	
+	void Button::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+		background->drawDebug(renderTarget, indent, indentAddition);
+	}
 }

@@ -16,5 +16,7 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		Empty* copy() override;
+		
+		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition);
 	};
 }

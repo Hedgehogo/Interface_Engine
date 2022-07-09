@@ -94,4 +94,10 @@ namespace ui {
 		LayerWithConstBorder::copy(layerWithConstBorder);
 		return layerWithConstBorder;
 	}
+	
+	void LayerWithConstBorder::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+		IObject::drawDebug(renderTarget, indent, indentAddition);
+		constObject->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+	}
 }

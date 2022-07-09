@@ -32,6 +32,8 @@ namespace ui {
 		void update() override;
 		
 		LayerWithBorder* copy() override;
+		
+		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) override;
 	};
 	
 	typedef LayerWithBorder LayerWBorder;

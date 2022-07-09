@@ -23,3 +23,5 @@ ui::Empty *ui::Empty::copy() {
 	Layout::copy(empty);
 	return empty;
 }
+
+void ui::Empty::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {}

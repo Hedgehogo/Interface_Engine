@@ -27,3 +27,8 @@ ui::ButtonWithPanel *ui::ButtonWithPanel::copy() {
 	Button::copy(buttonWithPanel);
 	return buttonWithPanel;
 }
+
+void ui::ButtonWithPanel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+	Button::drawDebug(renderTarget, indent, indentAddition);
+	panel->drawDebug(renderTarget, 0, indentAddition);
+}

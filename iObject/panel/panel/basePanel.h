@@ -47,5 +47,7 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		BasePanel* copy() override = 0;
+		
+		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) override;
 	};
 }

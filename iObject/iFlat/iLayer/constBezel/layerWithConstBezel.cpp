@@ -60,4 +60,10 @@ namespace ui {
 	LayerWithConstBezel *LayerWithConstBezel::copy() {
 		return new LayerWithConstBezel{object->copy(), bezel->copy(), thickness};
 	}
+	
+	void LayerWithConstBezel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+		IObject::drawDebug(renderTarget, indent, indentAddition);
+		bezel->drawDebug(renderTarget, indent, indentAddition);
+		object->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+	}
 }

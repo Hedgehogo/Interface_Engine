@@ -59,3 +59,8 @@ ui::Bar *ui::Bar::copy() {
 	bar->resize(size, position);
 	return bar;
 }
+
+void ui::Bar::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+	background->drawDebug(renderTarget, indent, indentAddition);
+	strip->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+}

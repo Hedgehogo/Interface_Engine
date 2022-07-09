@@ -46,4 +46,9 @@ namespace ui {
 	LayerWithPanel *LayerWithPanel::copy() {
 		return new LayerWithPanel{object->copy(), panel->copy(), minimumSize};
 	}
+	
+	void LayerWithPanel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+		object->drawDebug(renderTarget, indent, indentAddition);
+		panel->drawDebug(renderTarget, 0, indentAddition);
+	}
 }

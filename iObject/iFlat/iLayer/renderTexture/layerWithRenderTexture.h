@@ -5,16 +5,19 @@ namespace ui {
 	class LayerWithRenderTexture : public ILayer {
 	protected:
 		IFlat* object;
+		InteractionManager* interactionManager;
 		sf::RenderTarget* renderTarget;
 		sf::RenderTexture renderTexture;
 		sf::Sprite sprite;
+		bool optimize;
+		bool active;
 		
 		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
 		void copy(LayerWithRenderTexture* layerWithRenderTexture);
 		
 	public:
-		LayerWithRenderTexture(IFlat* object, sf::Vector2f minSize = {});
+		LayerWithRenderTexture(IFlat* object, bool optimize = true, sf::Vector2f minSize = {});
 	
 		~LayerWithRenderTexture() override;
 		
@@ -31,5 +34,7 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		LayerWithRenderTexture* copy() override;
+		
+		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) override;
 	};
 }

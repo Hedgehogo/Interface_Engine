@@ -73,4 +73,9 @@ namespace ui {
 		LayerWithConstCenter::copy(layerWithConstCenter);
 		return layerWithConstCenter;
 	}
+	
+	void LayerWithConstCenter::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+		background->drawDebug(renderTarget, indent, indentAddition);
+		object->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+	}
 }

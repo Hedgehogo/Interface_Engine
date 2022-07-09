@@ -27,6 +27,8 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		LayerWithAlternativeObject* copy() override;
+		
+		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) override;
 	};
 	
 	typedef LayerWithAlternativeObject LayerWAObject;

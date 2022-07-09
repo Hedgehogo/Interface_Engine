@@ -34,6 +34,8 @@ namespace ui {
 		void update() override;
 		
 		LayerWithBorderHorizontal* copy() override;
+		
+		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) override;
 	};
 	
 	typedef LayerWithBorderHorizontal LayerWBoundH;

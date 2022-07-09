@@ -68,4 +68,8 @@ namespace ui {
 		panel->oldDisplayed = this->oldDisplayed;
 		panel->parentProcessed = this->parentProcessed;
 	}
+	
+	void BasePanel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+		object->drawDebug(renderTarget, indent, indentAddition);
+	}
 }

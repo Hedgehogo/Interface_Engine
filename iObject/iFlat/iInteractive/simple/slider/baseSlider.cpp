@@ -86,3 +86,8 @@ void ui::BaseSlider::copy(ui::BaseSlider *baseSlider) {
 	baseSlider->sliderSize = this->sliderSize;
 	baseSlider->moveZoneSize = this->moveZoneSize;
 }
+
+void ui::BaseSlider::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+	background->drawDebug(renderTarget, indent, indentAddition);
+	slider->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+}

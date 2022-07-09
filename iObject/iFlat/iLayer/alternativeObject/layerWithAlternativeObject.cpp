@@ -59,3 +59,9 @@ ui::LayerWithAlternativeObject *ui::LayerWithAlternativeObject::copy() {
 	ILayer::copy(layerWithAlternativeObject);
 	return layerWithAlternativeObject;
 }
+
+void ui::LayerWithAlternativeObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
+	IObject::drawDebug(renderTarget, indent, indentAddition);
+	topObject->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+	bottomObject->drawDebug(renderTarget, indent + indentAddition * 2, indentAddition);
+}
