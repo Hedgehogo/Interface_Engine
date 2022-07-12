@@ -68,8 +68,12 @@ namespace ui {
 		} else {
 			constPosition = (this->size - constSize) / 2.0f;
 		}
-		constObject->resize(constSize, constPosition + position);
-		secondObject->resize(secondSize, secondPosition + position);
+
+        constPosition += position;
+        secondPosition += position;
+
+		constObject->resize(constSize, constPosition);
+		secondObject->resize(secondSize, secondPosition);
 		background->resize(size, position);
 	}
 	
