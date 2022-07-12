@@ -53,4 +53,7 @@ namespace ui{
 	
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
     };
+	
+	typedef LayerWithMovableBorder LayerWMovableB;
+	typedef LayerWithMovableBorder LWMB;
 }

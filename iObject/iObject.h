@@ -4,6 +4,8 @@
 #include "../interaction/interactionStack/interactionStack.h"
 #include "../interaction/interactionManager/interactionManager.h"
 
+typedef unsigned uint;
+
 namespace ui {
 	class Panel;
 	class PanelManager;
