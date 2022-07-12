@@ -9,7 +9,7 @@ void ui::HidePanelEvent::whilePressed(sf::Vector2i) {}
 void ui::HidePanelEvent::stopPressed(sf::Vector2i mousePosition) {
 	//std::cout << "click" << std::endl;
 	sf::Vector2f pointPosition {static_cast<sf::Vector2f>(mousePosition)};
-	if(!panel->inPanel(pointPosition) && !panel->inConstPanels(pointPosition))
+	if(!panel->inPanel(pointPosition) && !panel->inConstPanels(pointPosition) && panel->isFree())
 		panelManager->hidePanel(panel);
 }
 
