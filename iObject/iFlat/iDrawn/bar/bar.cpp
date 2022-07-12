@@ -60,7 +60,7 @@ ui::Bar *ui::Bar::copy() {
 	return bar;
 }
 
-void ui::Bar::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
-	background->drawDebug(renderTarget, indent, indentAddition);
-	strip->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+void ui::Bar::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+    background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+    strip->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue, hueOffset);
 }

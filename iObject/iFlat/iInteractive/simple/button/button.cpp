@@ -41,7 +41,7 @@ namespace ui {
 		Interactive_Simple::copy(button);
 	}
 	
-	void Button::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
-		background->drawDebug(renderTarget, indent, indentAddition);
+	void Button::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+        background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
 }

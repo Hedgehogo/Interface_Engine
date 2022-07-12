@@ -70,7 +70,7 @@ namespace ui {
 		return layerWithRenderTexture;
 	}
 	
-	void LayerWithRenderTexture::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
-		object->drawDebug(renderTarget, indent, indentAddition);
+	void LayerWithRenderTexture::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+        object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
 }

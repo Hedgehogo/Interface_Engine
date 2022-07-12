@@ -87,7 +87,7 @@ void ui::BaseSlider::copy(ui::BaseSlider *baseSlider) {
 	baseSlider->moveZoneSize = this->moveZoneSize;
 }
 
-void ui::BaseSlider::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
-	background->drawDebug(renderTarget, indent, indentAddition);
-	slider->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+void ui::BaseSlider::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+    background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+    slider->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 }

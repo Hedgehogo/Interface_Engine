@@ -17,6 +17,6 @@ namespace ui {
 		
 		Empty* copy() override;
 		
-		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition);
+		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
 	};
 }

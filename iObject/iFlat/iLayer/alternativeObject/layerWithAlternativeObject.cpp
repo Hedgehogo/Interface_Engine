@@ -60,8 +60,8 @@ ui::LayerWithAlternativeObject *ui::LayerWithAlternativeObject::copy() {
 	return layerWithAlternativeObject;
 }
 
-void ui::LayerWithAlternativeObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
-	IObject::drawDebug(renderTarget, indent, indentAddition);
-	topObject->drawDebug(renderTarget, indent + indentAddition, indentAddition);
-	bottomObject->drawDebug(renderTarget, indent + indentAddition * 2, indentAddition);
+void ui::LayerWithAlternativeObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+    IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+    topObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+    bottomObject->drawDebug(renderTarget, indent + indentAddition * 2, indentAddition, hue + hueOffset, hueOffset);
 }

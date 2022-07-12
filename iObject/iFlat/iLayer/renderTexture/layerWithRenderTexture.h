@@ -35,6 +35,6 @@ namespace ui {
 		
 		LayerWithRenderTexture* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) override;
+		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 }

@@ -24,4 +24,4 @@ ui::Empty *ui::Empty::copy() {
 	return empty;
 }
 
-void ui::Empty::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {}
+void ui::Empty::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {}

@@ -42,7 +42,9 @@ namespace ui {
 		virtual sf::Vector2f getNormalSize() = 0;
 		
 		virtual IObject* copy() = 0;
+
+        virtual sf::Color HSVtoRGB(float H, float S = 1, float V = 1);
 		
-		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition);
+		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue = 0, uint hueOffset = 36);
 	};
 }

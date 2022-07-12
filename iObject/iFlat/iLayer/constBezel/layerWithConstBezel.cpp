@@ -61,9 +61,8 @@ namespace ui {
 		return new LayerWithConstBezel{object->copy(), bezel->copy(), thickness};
 	}
 	
-	void LayerWithConstBezel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
-		IObject::drawDebug(renderTarget, indent, indentAddition);
-		bezel->drawDebug(renderTarget, indent, indentAddition);
-		object->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+	void LayerWithConstBezel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+        bezel->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+        object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
 }

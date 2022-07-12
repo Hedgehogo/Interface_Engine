@@ -82,7 +82,7 @@ namespace ui {
 		return caption;
 	}
 	
-	void Caption::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
-		background->drawDebug(renderTarget, indent, indentAddition);
+	void Caption::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+        background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
 }
