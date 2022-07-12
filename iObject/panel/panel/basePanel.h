@@ -28,6 +28,8 @@ namespace ui {
 		
 		virtual bool isFree() = 0;
 		
+		virtual void setDisplayed();
+		
 		void setParentProcessed(bool parentProcessed);
 		
 		bool getParentProcessed();

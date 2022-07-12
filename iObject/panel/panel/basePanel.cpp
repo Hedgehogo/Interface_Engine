@@ -19,6 +19,8 @@ namespace ui {
 		delete positioning;
 	}
 	
+	void BasePanel::setDisplayed() {}
+	
 	void BasePanel::setParentProcessed(bool parentProcessed) {
 		this->parentProcessed = parentProcessed;
 	}

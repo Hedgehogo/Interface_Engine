@@ -15,10 +15,14 @@ ui::Panel::~Panel() {
 	delete interaction;
 }
 
+void ui::Panel::setDisplayed() { displayed = true; }
+
 bool ui::Panel::isIndependent() { return true; }
 
-bool ui::Panel::isFree() {
-	return panelManager.isFree();
+bool ui::Panel::isFree() { return panelManager.isFree(); }
+
+bool ui::Panel::inConstPanels(sf::Vector2f pointPosition) {
+	return panelManager.inConstPanels(pointPosition);
 }
 
 void ui::Panel::draw() {

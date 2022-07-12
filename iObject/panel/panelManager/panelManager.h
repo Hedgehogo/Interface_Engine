@@ -18,6 +18,8 @@ namespace ui {
 		
 		bool isFree();
 		
+		bool inConstPanels(sf::Vector2f pointPosition);
+		
 		void addPanel(BasePanel *panel);
 		
 		void displayPanel(BasePanel *panel);

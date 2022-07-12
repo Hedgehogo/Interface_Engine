@@ -23,7 +23,15 @@ namespace ui {
 	}
 	
 	bool PanelManager::isFree() {
-		return std::all_of(activePanels.begin(), activePanels.end(), [](BasePanel* panel) { return !panel->isIndependent(); });
+		return std::all_of(activePanels.begin(), activePanels.end(), [](BasePanel* panel) {
+			return !panel->isIndependent();
+		});
+	}
+	
+	bool PanelManager::inConstPanels(sf::Vector2f pointPosition) {
+		return std::any_of(activePanels.begin(), activePanels.end(), [&pointPosition](BasePanel* panel) {
+			return !panel->isIndependent() && panel->inPanel(pointPosition);
+		});
 	}
 	
 	void PanelManager::addPanel(BasePanel *panel) {
@@ -53,14 +61,19 @@ namespace ui {
 	}
 	
 	bool PanelManager::updateInteractions(sf::Vector2f mousePosition) {
+		bool active {false};
 		for(auto iterator= activePanels.begin(); iterator != activePanels.end(); ++iterator) {
-			if((*iterator)->updateInteractions(mousePosition)) {
-				BasePanel* panel = *iterator;
-				activePanels.erase(iterator);
-				activePanels.insert(activePanels.begin(), panel);
-				return true;
+			if(!active) {
+				if((*iterator)->updateInteractions(mousePosition)) {
+					BasePanel *panel = *iterator;
+					activePanels.erase(iterator);
+					activePanels.insert(activePanels.begin(), panel);
+					active = true;
+				}
+			} else {
+				(*iterator)->setDisplayed();
 			}
 		}
-		return false;
+		return active;
 	}
 }

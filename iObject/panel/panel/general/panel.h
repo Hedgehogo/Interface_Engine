@@ -19,9 +19,13 @@ namespace ui {
 		
 		~Panel() override;
 		
+		virtual void setDisplayed();
+		
 		bool isIndependent() override;
 		
 		bool isFree() override;
+		
+		bool inConstPanels(sf::Vector2f pointPosition);
 		
 		void draw() override;
 		
