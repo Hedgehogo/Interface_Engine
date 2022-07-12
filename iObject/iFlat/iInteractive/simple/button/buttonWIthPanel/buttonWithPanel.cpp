@@ -19,6 +19,12 @@ void ui::ButtonWithPanel::resize(sf::Vector2f size, sf::Vector2f position) {
 	panel->resize(size, position);
 }
 
+sf::Vector2f ui::ButtonWithPanel::getMinSize() {
+	sf::Vector2f backgroundMinSize {background->getMinSize()};
+	sf::Vector2f panelMinSize {panel->getMinSize()};
+	return {std::max(backgroundMinSize.x, panelMinSize.x), std::max(backgroundMinSize.y, panelMinSize.y)};
+}
+
 ui::ButtonWithPanel *ui::ButtonWithPanel::copy() {
 	Panel* panel1{panel->copy()};
 	DisplayPanelInteraction* displayPanelInteraction{dynamic_cast<ui::DisplayPanelInteraction*>(interaction)->copy()};

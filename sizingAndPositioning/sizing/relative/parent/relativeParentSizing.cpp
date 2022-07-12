@@ -13,6 +13,10 @@ namespace ui {
 		return parentSize + addition;
 	}
 	
+	float RelativeParentSizing::getParentMinSize(float objectMinSize) {
+		return objectMinSize - addition;
+	}
+	
 	RelativeParentSizing *RelativeParentSizing::copy() {
 		return new RelativeParentSizing{addition};
 	}

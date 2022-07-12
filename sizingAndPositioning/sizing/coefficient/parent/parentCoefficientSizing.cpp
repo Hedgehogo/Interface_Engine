@@ -13,4 +13,8 @@ namespace ui {
 	ParentCoefficientSizing *ParentCoefficientSizing::copy() {
 		return new ParentCoefficientSizing{coefficient, addition};
 	}
+	
+	float ParentCoefficientSizing::getParentMinSize(float objectMinSize) {
+		return (objectMinSize - addition) / coefficient;
+	}
 }

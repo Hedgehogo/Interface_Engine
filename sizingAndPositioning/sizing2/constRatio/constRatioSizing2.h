@@ -28,6 +28,8 @@ namespace ui {
 		
 		sf::Vector2f findSize(sf::Vector2f parentSize) override;
 		
+		sf::Vector2f getParentMinSize(sf::Vector2f objectMinSize) override;
+		
 		ConstRatioSizing2* copy() override;
 	};
 }

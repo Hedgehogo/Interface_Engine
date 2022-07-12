@@ -14,6 +14,10 @@ namespace ui {
 		return new SmartSizing{targetCoefficient, parentCoefficient, addition};
 	}
 	
+	float SmartSizing::getParentMinSize(float objectMinSize) {
+		return (objectMinSize - addition) / parentCoefficient;
+	}
+	
 	Sizing *createSizing(float targetCoefficient, float parentCoefficient, float addition) {
 		return new SmartSizing{targetCoefficient, parentCoefficient, addition};
 	}

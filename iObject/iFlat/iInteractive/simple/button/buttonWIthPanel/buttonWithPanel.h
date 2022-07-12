@@ -19,6 +19,8 @@ namespace ui {
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
+		sf::Vector2f getMinSize() override;
+		
 		ButtonWithPanel* copy() override;
 		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;

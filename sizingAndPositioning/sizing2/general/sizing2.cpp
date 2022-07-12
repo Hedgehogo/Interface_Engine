@@ -36,6 +36,10 @@ namespace ui {
 		return {horizontal->findSize(parentSize.x, targetSize.x), vertical->findSize(parentSize.y, targetSize.y)};
 	}
 	
+	sf::Vector2f Sizing2::getParentMinSize(sf::Vector2f objectMinSize) {
+		return {horizontal->getParentMinSize(objectMinSize.x), vertical->getParentMinSize(objectMinSize.y)};
+	}
+	
 	void Sizing2::copy(Sizing2 *sizing2) {
 		sizing2->renderTarget = this->renderTarget;
 	}

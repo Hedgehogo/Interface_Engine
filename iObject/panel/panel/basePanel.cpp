@@ -57,7 +57,7 @@ namespace ui {
 	}
 	
 	sf::Vector2f BasePanel::getMinSize() {
-		return {};
+		return sizing->getParentMinSize(object->getMinSize());
 	}
 	
 	sf::Vector2f BasePanel::getNormalSize() {
