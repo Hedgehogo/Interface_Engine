@@ -168,11 +168,11 @@ namespace ui {
 		return layerWithBorder;
 	}
 	
-	void LayerWithBorder::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
-		IObject::drawDebug(renderTarget, indent, indentAddition);
+	void LayerWithBorder::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+        IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		for(auto &line: objects) {
 			for(auto &object: line) {
-				object->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+                object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 			}
 		}
 	}

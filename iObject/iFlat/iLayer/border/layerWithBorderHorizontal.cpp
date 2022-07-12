@@ -110,10 +110,10 @@ namespace ui {
 		return layerWithBorderHorizontal;
 	}
 	
-	void LayerWithBorderHorizontal::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
-		IObject::drawDebug(renderTarget, indent, indentAddition);
+	void LayerWithBorderHorizontal::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+        IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		for(auto &object: objects) {
-			object->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+            object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		}
 	}
 }

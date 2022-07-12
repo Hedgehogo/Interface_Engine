@@ -111,10 +111,10 @@ namespace ui {
 		return layerWithBorderVertical;
 	}
 	
-	void LayerWithBorderVertical::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
-		IObject::drawDebug(renderTarget, indent, indentAddition);
+	void LayerWithBorderVertical::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+        IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		for(auto &object: objects) {
-			object->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+            object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		}
 	}
 }

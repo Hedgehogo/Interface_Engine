@@ -95,9 +95,9 @@ namespace ui {
 		return layerWithConstBorder;
 	}
 	
-	void LayerWithConstBorder::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition) {
-		IObject::drawDebug(renderTarget, indent, indentAddition);
-		constObject->drawDebug(renderTarget, indent + indentAddition, indentAddition);
-		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition);
+	void LayerWithConstBorder::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+        IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+        constObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+        secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
 }
