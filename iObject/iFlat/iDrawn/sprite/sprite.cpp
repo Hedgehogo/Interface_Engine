@@ -5,12 +5,12 @@
 
 namespace ui {
 	Sprite::Sprite(sf::Texture &texture, sf::IntRect rect, sf::Vector2f minSize) :
-		IDrawn(), sprite(texture, rect), minimumSize(std::max(minimumSize.x, 1.f), std::max(minimumSize.y, 1.f)) {
+		IDrawn(), sprite(texture, rect), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
 		sprite.setTextureRect(rect);
 	}
 	
 	Sprite::Sprite(sf::Texture &texture, sf::Vector2f minSize) :
-		IDrawn(), sprite(texture), minimumSize(std::max(minimumSize.x, 1.f), std::max(minimumSize.y, 1.f)) {
+		IDrawn(), sprite(texture), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
 	}
 
 	void Sprite::draw() {

@@ -10,6 +10,8 @@ int main() {
 	texture.loadFromFile("image.png");
 	sf::Texture texture_2;
 	texture_2.loadFromFile("image_2.png");
+    sf::Texture texture_3;
+    texture_3.loadFromFile("image_3.png");
 	sf::Font font;
 	font.loadFromFile("segoeui.ttf");
 	
@@ -105,8 +107,14 @@ int main() {
 				new ui::LayerWithAlternativeObject{
 					new ui::LayerWithBorderHorizontal{
 						{
-							new ui::Capsule{sf::Color(0x9f6e5cff)},
-							new ui::Capsule{sf::Color(0x9f6e5cff)}
+                            new ui::LayerWithAlternativeObject{
+                                new ui::Sprite{texture_3},
+                                new ui::Capsule{sf::Color(0x9f6e5cff)}
+                            },
+                            new ui::LayerWithAlternativeObject{
+                                new ui::Sprite{texture_3},
+                                new ui::Capsule{sf::Color(0x9f6e5cff)}
+                            }
 						},
 						{   0.5}
 					},
