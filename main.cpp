@@ -20,10 +20,10 @@ int main() {
 	
 	ui::Interface interface {
 		new ui::LayerWithMovableBorder{
-			new ui::LayerWithMovableBorder{
-				new ui::LayerWithBorderHorizontal{
-					{
-						new ui::FullColor{{22, 22, 22}},
+			new ui::LayerWithBorderHorizontal{
+				{
+					new ui::FullColor{{22, 22, 22}},
+					new ui::LayerWithMovableBorder{
 						new ui::LayerWithConstRatio{
 							new ui::LayerWithAlternativeObject{
 								new ui::ButtonWithPanel{
@@ -42,8 +42,7 @@ int main() {
 											sf::Color{200, 200, 200},
 											sf::Color{200, 200, 200},
 											ui::Text::Align::center
-										}
-										/*new ui::FullColor{sf::Color(0xffffffff)}*/,
+										},
 										new ui::PointingHidePanelInteraction,
 										new ui::Sizing2{
 											sf::Vector2f{1, 0.5},
@@ -69,16 +68,6 @@ int main() {
 							1,
 							ui::Corner::DownLeft
 						},
-						new ui::FullColor{{22, 22, 22}}
-					},
-					std::vector<float>{
-						0.4,
-						0.6
-					}
-				},
-				new ui::LayerWithBorderHorizontal{
-					{
-						new ui::FullColor{{22, 22, 22}},
 						new ui::Text{
 							{
 								new ui::TextBlock{
@@ -94,14 +83,14 @@ int main() {
 							sf::Color{200, 200, 200},
 							ui::Text::Align::center
 						},
-						new ui::FullColor{{22, 22, 22}}
+						false
 					},
-					std::vector<float>{
-						0.4,
-						0.6
-					}
+					new ui::FullColor{{22, 22, 22}}
 				},
-				false
+				std::vector<float>{
+					0.4,
+					0.6
+				}
 			},
 			new ui::LayerWithConstCenter{
 				new ui::LayerWithAlternativeObject{
@@ -187,7 +176,7 @@ int main() {
 		window.clear();
 		interface.update(wheel);
 		interface.draw();
-		interface.drawDebug(window, 0, 1, 0, 120);
+		interface.drawDebug(window, 0, 2, 0, 90);
 		window.display();
 	}
 }
