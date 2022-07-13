@@ -4,7 +4,7 @@
 namespace ui {
 	BasePanel::BasePanel(IFlat *object, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
 		Layout(), object(object), sizing(sizing), positioning(positioning),
-		displayed(displayed), oldDisplayed(false), parentProcessed(false) {}
+		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {}
 	
 	void BasePanel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 		panelManager.addPanel(this);
@@ -30,7 +30,8 @@ namespace ui {
 	}
 	
 	bool BasePanel::inPanel(sf::Vector2f pointPosition) {
-		return pointPosition.x >= this->position.x && pointPosition.x <= this->position.x + this->size.x &&
+		return active &&
+			   pointPosition.x >= this->position.x && pointPosition.x <= this->position.x + this->size.x &&
 			   pointPosition.y >= this->position.y && pointPosition.y <= this->position.y + this->size.y;
 	}
 	
@@ -52,8 +53,13 @@ namespace ui {
 	}
 	
 	bool BasePanel::updateInteractions(sf::Vector2f mousePosition) {
-		displayed = true;
 		return inPanel(mousePosition) && object->updateInteractions(mousePosition);
+	}
+	
+	bool BasePanel::updateInteractions(sf::Vector2f mousePosition, bool active) {
+		displayed = true;
+		this->active = active;
+		return updateInteractions(mousePosition);
 	}
 	
 	sf::Vector2f BasePanel::getMinSize() {
@@ -71,7 +77,15 @@ namespace ui {
 		panel->parentProcessed = this->parentProcessed;
 	}
 	
+	bool BasePanel::fullDebug = false;
+	
+	void BasePanel::setFullDebug(bool fullDebug) {
+		BasePanel::fullDebug = fullDebug;
+	}
+	
 	void BasePanel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-        object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+		if(fullDebug || oldDisplayed) {
+			object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+		}
 	}
 }

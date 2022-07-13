@@ -60,20 +60,15 @@ namespace ui {
 		}
 	}
 	
-	bool PanelManager::updateInteractions(sf::Vector2f mousePosition) {
-		bool active {false};
+	bool PanelManager::updateInteractions(sf::Vector2f mousePosition, bool active) {
 		for(auto iterator= activePanels.begin(); iterator != activePanels.end(); ++iterator) {
-			if(!active) {
-				if((*iterator)->updateInteractions(mousePosition)) {
-					BasePanel *panel = *iterator;
-					activePanels.erase(iterator);
-					activePanels.insert(activePanels.begin(), panel);
-					active = true;
-				}
-			} else {
-				(*iterator)->setDisplayed();
+			if((*iterator)->updateInteractions(mousePosition, active) && active) {
+				BasePanel *panel = *iterator;
+				activePanels.erase(iterator);
+				activePanels.insert(activePanels.begin(), panel);
+				active = false;
 			}
 		}
-		return active;
+		return !active;
 	}
 }

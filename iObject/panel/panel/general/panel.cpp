@@ -42,10 +42,11 @@ void ui::Panel::update() {
 	BasePanel::update();
 }
 
-bool ui::Panel::updateInteractions(sf::Vector2f mousePosition) {
+bool ui::Panel::updateInteractions(sf::Vector2f mousePosition, bool active) {
 	displayed = true;
-	if(panelManager.updateInteractions(mousePosition)) return true;
-	return inPanel(mousePosition) && object->updateInteractions(mousePosition);
+	this->active = active;
+	if(panelManager.updateInteractions(mousePosition, active)) return true;
+	return BasePanel::updateInteractions(mousePosition);
 }
 
 void ui::Panel::copy(ui::Panel *panel) {

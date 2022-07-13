@@ -30,6 +30,6 @@ namespace ui {
 		
 		void update();
 		
-		bool updateInteractions(sf::Vector2f mousePosition);
+		bool updateInteractions(sf::Vector2f mousePosition, bool active);
 	};
 }

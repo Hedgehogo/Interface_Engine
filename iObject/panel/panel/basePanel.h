@@ -14,6 +14,7 @@ namespace ui {
 		bool parentProcessed;
 		bool oldDisplayed;
 		bool displayed;
+		bool active;
 		
 		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
@@ -44,11 +45,19 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
+		virtual bool updateInteractions(sf::Vector2f mousePosition, bool active);
+		
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
 		
 		BasePanel* copy() override = 0;
+		
+	private:
+		static bool fullDebug;
+		
+	public:
+		static void setFullDebug(bool fullDebug);
 		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
