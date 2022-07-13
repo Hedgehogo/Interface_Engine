@@ -187,7 +187,7 @@ int main() {
 		window.clear();
 		interface.update(wheel);
 		interface.draw();
-		interface.drawDebug(window, 0, 1, 0, 60);
+		interface.drawDebug(window, 0, 1, 0, 120);
 		window.display();
 	}
 }

@@ -55,7 +55,7 @@ namespace ui {
 	}
 	
 	void PanelManager::update() {
-		for(auto &panel: activePanels) {
+		for(auto &panel: panels) {
 			panel->update();
 		}
 	}
