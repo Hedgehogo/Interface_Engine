@@ -1,5 +1,5 @@
 #pragma once
-#include "../../event/hide/hidePanelEvent.h"
+#include "../../click/event/hide/hidePanelEvent.h"
 #include "../../click/clickPanelInteraction.h"
 
 namespace ui {

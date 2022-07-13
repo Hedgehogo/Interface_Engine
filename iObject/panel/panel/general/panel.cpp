@@ -1,18 +1,23 @@
 #include "panel.h"
 #include "../interaction/hide/hidePanelInteraction.h"
+#include "../interaction/move/dont/dontMovePanelInteraction.h"
 
-ui::Panel::Panel(IFlat *object, HidePanelInteraction *interaction, Sizing2* sizing, Positioning2* positioning, bool displayed) :
-	BasePanel(object, sizing, positioning, displayed), interaction(interaction), interactionManager(nullptr) {}
+ui::Panel::Panel(IFlat *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
+	BasePanel(object, sizing, positioning, displayed), hideInteraction(hideInteraction), moveInteraction(moveInteraction), interactionManager(nullptr) {}
+
+ui::Panel::Panel(ui::IFlat *object, ui::HidePanelInteraction *hideInteraction, ui::Sizing2 *sizing, ui::Positioning2 *positioning, bool displayed) :
+	Panel(object, hideInteraction, new DontMovePanelInteraction{}, sizing, positioning, displayed) {}
 
 void ui::Panel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 	BasePanel::init(renderTarget, interactionStack, interactionManager, panelManager);
 	initObject(object, renderTarget, interactionStack, interactionManager, this->panelManager);
 	this->interactionManager = &interactionManager;
-	interaction->init(*this, panelManager);
+	hideInteraction->init(*this, panelManager);
+	moveInteraction->init(*this, panelManager);
 }
 
 ui::Panel::~Panel() {
-	delete interaction;
+	delete hideInteraction;
 }
 
 void ui::Panel::setDisplayed() { displayed = true; }
@@ -34,9 +39,11 @@ void ui::Panel::update() {
 	panelManager.update();
 	if(oldDisplayed != displayed) {
 		if(displayed) {
-			interactionManager->addInteraction(*interaction);
+			interactionManager->addInteraction(*hideInteraction);
+			interactionManager->addInteraction(*moveInteraction);
 		} else {
-			interactionManager->deleteInteraction(*interaction);
+			interactionManager->deleteInteraction(*hideInteraction);
+			interactionManager->deleteInteraction(*moveInteraction);
 		}
 	}
 	BasePanel::update();
@@ -55,8 +62,8 @@ void ui::Panel::copy(ui::Panel *panel) {
 }
 
 ui::Panel *ui::Panel::copy() {
-	Panel* panel {new Panel(object->copy(), interaction->copy(), sizing->copy(), positioning->copy(), displayed)};
-	panel->interaction->setPanel(*panel);
+	Panel* panel {new Panel(object->copy(), hideInteraction->copy(), moveInteraction->copy(), sizing->copy(), positioning->copy(), displayed)};
+	panel->hideInteraction->setPanel(*panel);
 	Panel::copy(panel);
 	return panel;
 }

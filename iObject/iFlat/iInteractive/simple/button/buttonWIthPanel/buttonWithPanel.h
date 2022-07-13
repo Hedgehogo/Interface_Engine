@@ -4,6 +4,9 @@
 #include "../../../../../panel/panel/interaction/display/pointing/pointingDisplayPanelInteraction.h"
 #include "../../../../../panel/panel/interaction/hide/pointing/pointingHidePanelInteraction.h"
 #include "../../../../../panel/panel/interaction/hide/click/clickHidePanelInteraction.h"
+#include "../../../../../panel/panel/interaction/move/dont/dontMovePanelInteraction.h"
+#include "../../../../../panel/panel/interaction/move/coefficient/coefficientMovePanelInteraction.h"
+#include "../../../../../panel/panel/interaction/move/side/sideMovePanelInteraction.h"
 
 namespace ui {
 	class ButtonWithPanel : public Button {

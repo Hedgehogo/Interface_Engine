@@ -37,6 +37,8 @@ namespace ui {
 		
 		bool inPanel(sf::Vector2f pointPosition);
 		
+		void setPosition(sf::Vector2f position) override;
+		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;

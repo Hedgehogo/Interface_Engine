@@ -35,6 +35,11 @@ namespace ui {
 			   pointPosition.y >= this->position.y && pointPosition.y <= this->position.y + this->size.y;
 	}
 	
+	void BasePanel::setPosition(sf::Vector2f position) {
+		Layout::resize(size, position);
+		object->resize(size, position);
+	}
+	
 	void BasePanel::draw() {
 		object->draw();
 	}

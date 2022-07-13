@@ -1,6 +1,6 @@
 #pragma once
 #include "../hidePanelInteraction.h"
-#include "../../panelInteraction/panelInteraction.h"
+#include "../../general/panelInteraction.h"
 
 namespace ui {
 	class PointingHidePanelInteraction : public HidePanelInteraction, public PanelInteraction {
