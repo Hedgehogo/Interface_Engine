@@ -116,9 +116,6 @@ void ui::LayerWithMovableBorder::update() {
 }
 
 bool ui::LayerWithMovableBorder::updateInteractions(sf::Vector2f mousePosition) {
-    //return Interactive_Simple::updateInteractions(mousePosition);
-    Interactive_Simple::updateInteractions(mousePosition);
-
     if (!this->isInBorder(mousePosition)) {
         if (this->isHorizontalBorder){
             float splitPosition = this->position.x + this->size.x * this->borderValueNow;
@@ -134,7 +131,9 @@ bool ui::LayerWithMovableBorder::updateInteractions(sf::Vector2f mousePosition) 
             }
             return secondObject->updateInteractions(mousePosition);
         }
-    }
+    } else {
+		Interactive_Simple::updateInteractions(mousePosition);
+	}
     return true;
 }
 
