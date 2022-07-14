@@ -47,8 +47,8 @@ namespace ui {
 		return false;
 	}
 	
-	sf::Vector2f Interface::getPosition() {
-		return object->getPosition();
+	sf::Vector2f Interface::getAreaPosition() {
+		return object->getAreaPosition();
 	}
 	
 	sf::Vector2f Interface::getAreaSize() {

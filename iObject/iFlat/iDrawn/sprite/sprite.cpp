@@ -23,7 +23,7 @@ namespace ui {
 		sprite.setPosition(position);
 	}
 	
-	sf::Vector2f Sprite::getPosition() {
+	sf::Vector2f Sprite::getAreaPosition() {
 		return sprite.getPosition();
 	}
 	

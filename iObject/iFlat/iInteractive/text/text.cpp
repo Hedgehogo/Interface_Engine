@@ -173,7 +173,7 @@ void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
     lineSize = 0;
 }
 
-sf::Vector2f ui::Text::getPosition() {
+sf::Vector2f ui::Text::getAreaPosition() {
 	return startRender;
 }
 

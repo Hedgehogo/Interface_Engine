@@ -11,24 +11,42 @@ void ui::IObject::setPosition(sf::Vector2f position) {
 	resize(getAreaSize(), position);
 }
 
+sf::Vector2f ui::IObject::getPosition() {
+	return getAreaPosition();
+}
+
 void ui::IObject::move(sf::Vector2f position) {
-	resize(getAreaSize(), getPosition() + position);
+	resize(getAreaSize(), getAreaPosition() + position);
 }
 
 void ui::IObject::setSize(sf::Vector2f size) {
-	resize(size, getPosition());
+	resize(size, getAreaPosition());
 }
 
 sf::Vector2f ui::IObject::getSize() {
 	return getAreaSize();
 }
 
+bool ui::IObject::inArea(sf::Vector2f pointPosition) {
+	sf::Vector2f size {getAreaSize()};
+	sf::Vector2f position {getAreaPosition()};
+	return pointPosition.x > position.x && pointPosition.x < position.x + size.x &&
+		   pointPosition.y > position.y && pointPosition.y < position.y + size.y;
+}
+
+bool ui::IObject::in(sf::Vector2f pointPosition) {
+	sf::Vector2f size {getSize()};
+	sf::Vector2f position {getPosition()};
+	return pointPosition.x > position.x && pointPosition.x < position.x + size.x &&
+		   pointPosition.y > position.y && pointPosition.y < position.y + size.y;
+}
+
 void ui::IObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 	sf::Vector2f size{this->getAreaSize() - static_cast<sf::Vector2f>(sf::Vector2i{indent, indent} * 2)};
-	sf::Vector2f position{this->getPosition() + static_cast<sf::Vector2f>(sf::Vector2i{indent, indent})};
+	sf::Vector2f position{this->getAreaPosition() + static_cast<sf::Vector2f>(sf::Vector2i{indent, indent})};
     if (size.x > 0 && size.y > 0){
         sf::RectangleShape rectangle;
-        rectangle.setFillColor(HSVtoRGB(hue % 360));
+        rectangle.setFillColor(HSVtoRGB(static_cast<float>(hue % 360)));
 
         rectangle.setPosition(position);
         rectangle.setSize({1.0f, size.y});

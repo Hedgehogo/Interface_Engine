@@ -63,7 +63,7 @@ void ui::BaseSlider::draw() {
 	slider->draw();
 }
 
-sf::Vector2f ui::BaseSlider::getPosition() {
+sf::Vector2f ui::BaseSlider::getAreaPosition() {
 	return position;
 }
 

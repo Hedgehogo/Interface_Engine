@@ -57,8 +57,8 @@ namespace ui {
 		text.setPosition(position - sf::Vector2f(text.getGlobalBounds().left - text.getPosition().x, text.getGlobalBounds().top - text.getPosition().y));
 	}
 	
-	sf::Vector2f Caption::getPosition() {
-		return background->getPosition();
+	sf::Vector2f Caption::getAreaPosition() {
+		return background->getAreaPosition();
 	}
 	
 	sf::Vector2f Caption::getAreaSize() {

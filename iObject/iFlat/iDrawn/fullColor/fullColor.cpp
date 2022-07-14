@@ -14,7 +14,7 @@ namespace ui {
         rectangle.setPosition(position);
     }
 	
-	sf::Vector2f FullColor::getPosition() {
+	sf::Vector2f FullColor::getAreaPosition() {
 		return rectangle.getPosition();
 	}
 	

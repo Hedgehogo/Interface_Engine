@@ -36,7 +36,7 @@ namespace ui {
 		
 		void move(sf::Vector2i mouseOffset);
 		
-		sf::Vector2f getPosition() override;
+		sf::Vector2f getAreaPosition() override;
 		
 		sf::Vector2f getAreaSize() override;
 		

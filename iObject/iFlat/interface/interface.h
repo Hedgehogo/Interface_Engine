@@ -35,7 +35,7 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
-		sf::Vector2f getPosition() override;
+		sf::Vector2f getAreaPosition() override;
 		
 		sf::Vector2f getAreaSize() override;
 		

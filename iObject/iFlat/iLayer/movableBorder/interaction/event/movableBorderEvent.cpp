@@ -31,7 +31,7 @@ void ui::MovableBorderEvent::whilePressed(sf::Vector2i mousePosition) {
             valueOffset = mouseOffset.y / layer->getAreaSize().y;
         }
         layer->setBorderValue(this->startBorderValue + valueOffset);
-        layer->resize(layer->getAreaSize(), layer->getPosition());
+        layer->resize(layer->getAreaSize(), layer->getAreaPosition());
         layer->setBorderValue(layer->getBorderValueNow());
     }
 }

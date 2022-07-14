@@ -24,15 +24,9 @@ namespace ui {
 		
 		virtual void setSize(sf::Vector2f size);
 		
-		virtual void draw() = 0;
+		virtual sf::Vector2f getAreaPosition() = 0;
 		
-		virtual void resize(sf::Vector2f size, sf::Vector2f position) = 0;
-		
-		virtual void update() = 0;
-		
-		virtual bool updateInteractions(sf::Vector2f mousePosition) = 0;
-		
-		virtual sf::Vector2f getPosition() = 0;
+		virtual sf::Vector2f getPosition();
 		
 		virtual sf::Vector2f getAreaSize() = 0;
 		
@@ -42,10 +36,22 @@ namespace ui {
 		
 		virtual sf::Vector2f getNormalSize() = 0;
 		
+		virtual bool inArea(sf::Vector2f pointPosition);
+		
+		virtual bool in(sf::Vector2f pointPosition);
+		
+		virtual void draw() = 0;
+		
+		virtual void resize(sf::Vector2f size, sf::Vector2f position) = 0;
+		
+		virtual void update() = 0;
+		
+		virtual bool updateInteractions(sf::Vector2f mousePosition) = 0;
+		
 		virtual IObject* copy() = 0;
 
         sf::Color HSVtoRGB(float H, float S = 1, float V = 1);
 		
-		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue = 0, uint hueOffset = 36);
+		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
 	};
 }

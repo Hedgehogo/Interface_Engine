@@ -70,7 +70,7 @@ namespace ui {
     public:
         void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		sf::Vector2f getPosition() override;
+		sf::Vector2f getAreaPosition() override;
 		
 		sf::Vector2f getAreaSize() override;
 

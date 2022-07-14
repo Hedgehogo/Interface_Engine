@@ -36,8 +36,18 @@ namespace ui {
 	}
 	
 	void BasePanel::setPosition(sf::Vector2f position) {
+		object->move(position - this->position);
 		Layout::resize(size, position);
-		object->resize(size, position);
+	}
+	
+	void BasePanel::move(sf::Vector2f position) {
+		Layout::resize(size, position);
+		object->move(position);
+	}
+	
+	void BasePanel::setSize(sf::Vector2f size) {
+		Layout::resize(size, position);
+		object->setSize(size);
 	}
 	
 	void BasePanel::draw() {

@@ -45,7 +45,7 @@ int main() {
 											ui::Text::Align::center
 										},
 										new ui::PointingHidePanelInteraction,
-										new ui::SideMovePanelInteraction{0.5f, 0.f, false, false},
+										new ui::SideMovePanelInteraction{0.5f, 0.f, false},
 										new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
 										new ui::Positioning2{ui::Location2::right, ui::Location2::left},
 									},
