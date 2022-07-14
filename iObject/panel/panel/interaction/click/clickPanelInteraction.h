@@ -1,6 +1,7 @@
 #pragma once
 #include "event/panelEvent.h"
 #include "../hide/hidePanelInteraction.h"
+#include "../display/displayPanelInteraction.h"
 #include "../../../../../interaction/iInteraction/oneButton/oneButtonInteraction.h"
 
 namespace ui {

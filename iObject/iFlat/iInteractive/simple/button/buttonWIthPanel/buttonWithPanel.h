@@ -2,6 +2,7 @@
 #include "../button.h"
 #include "../../../../../panel/panel/general/panel.h"
 #include "../../../../../panel/panel/interaction/display/pointing/pointingDisplayPanelInteraction.h"
+#include "../../../../../panel/panel/interaction/display/click/clickDisplayPanelInteraction.h"
 #include "../../../../../panel/panel/interaction/hide/pointing/pointingHidePanelInteraction.h"
 #include "../../../../../panel/panel/interaction/hide/click/clickHidePanelInteraction.h"
 #include "../../../../../panel/panel/interaction/move/dont/dontMovePanelInteraction.h"

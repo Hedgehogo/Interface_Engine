@@ -18,6 +18,8 @@ namespace ui {
 		
 		void setPanel(Panel& panel);
 		
+		Panel* getPanel();
+		
 		PanelEvent* copy() override = 0;
 	};
 }

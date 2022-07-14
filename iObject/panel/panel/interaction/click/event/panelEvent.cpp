@@ -15,3 +15,7 @@ void ui::PanelEvent::copy(ui::PanelEvent *panelEvent) {
 	panelEvent->panel = this->panel;
 	panelEvent->panelManager = this->panelManager;
 }
+
+ui::Panel *ui::PanelEvent::getPanel() {
+	return panel;
+}
