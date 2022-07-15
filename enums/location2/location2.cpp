@@ -19,6 +19,7 @@ namespace ui {
 				return Location::end;
 				break;
 		}
+        return Location::center;
 	}
 	
 	Location getHorizontalLocation(Location2 location2) {
@@ -39,5 +40,6 @@ namespace ui {
 				return Location::end;
 				break;
 		}
+        return Location::center;
 	}
 }
