@@ -1,8 +1,7 @@
 #include "character.h"
-#include <iostream>
 
-ui::Character::Character(wchar_t character, TextVariables &textVariables, BaseTextBlock *parent, IInteraction *interaction)
-        : character(character), BaseCharacter(parent, interaction), textVariables(textVariables){
+ui::Character::Character(wchar_t character, TextVariables &textVariables)
+        : character(character), textVariables(textVariables){
     glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style);
     sprite.setTexture(textVariables.font->getTexture(textVariables.size));
     sprite.setTextureRect(glyph.textureRect);
@@ -41,7 +40,7 @@ float ui::Character::getHeight() {
 }
 
 void ui::Character::move(sf::Vector2f position) {
-    this->position += position;
+    BaseCharacter::move(position);
     sprite.setPosition(this->position);
 }
 

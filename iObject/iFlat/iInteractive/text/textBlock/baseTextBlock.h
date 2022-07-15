@@ -11,7 +11,7 @@ namespace ui {
 	protected:
         ui::InteractionManager *interactionManager;
         ui::InteractionStack *interactionStack;
-
+        std::vector<ui::BaseCharacter*> textCharacters;
         TextVariables textVariables;
 	public:
         struct Edge{
@@ -21,8 +21,10 @@ namespace ui {
 
         BaseTextBlock(TextVariables textVariables);
 
+        virtual ~BaseTextBlock() = default;
+
         void setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Font *font , uint size);
-        virtual void init(ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack);
+        virtual void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager);
 
         virtual bool in(sf::Vector2f mousePosition) = 0;
 

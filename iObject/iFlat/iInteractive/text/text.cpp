@@ -27,24 +27,21 @@ ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::IDrawn *backgrou
 }
 
 ui::Text::~Text() {
-    for (ui::BaseCharacter* textCharacter : textCharacters) {
+    for (ui::BaseCharacter*& textCharacter : textCharacters) {
         delete textCharacter;
     }
-    for (ui::BaseTextBlock* textBlock : textBocks) {
+    for (ui::BaseTextBlock*& textBlock : textBocks) {
         delete textBlock;
     }
     delete background;
 }
 
-void ui::Text::init(sf::RenderTarget &renderTarget, ui::PanelManager &overlayStack) {
+void ui::Text::init(sf::RenderTarget &renderTarget, ui::PanelManager &panelManager) {
     this->renderTarget = &renderTarget;
-    for (ui::BaseCharacter* character : textCharacters) {
-        character->init(renderTarget);
-    }
     for (BaseTextBlock * textBlock : textBocks) {
-        textBlock->init(*interactionManager, *interactionStack);
+        textBlock->init(renderTarget, *interactionStack, *interactionManager, panelManager);
     }
-    IObject::initObject(background, renderTarget, *interactionStack, *interactionManager, overlayStack);
+    IObject::initObject(background, renderTarget, *interactionStack, *interactionManager, panelManager);
 }
 
 void ui::Text::update() {
@@ -65,20 +62,31 @@ bool ui::Text::updateInteractions(sf::Vector2f mousePosition) {
 
 void ui::Text::draw() {
     background->draw();
-    for (ui::BaseCharacter *indivisible : textCharacters) {
-        indivisible->draw();
+    for (ui::BaseCharacter *character : textCharacters) {
+        character->draw();
     }
 }
 
-void ui::Text::printCharacter(ui::BaseCharacter* character) {
+void ui::Text::move(sf::Vector2f position) {
+    background->move(position);
+    for (BaseCharacter*& character : textCharacters) {
+        character->move(position);
+    }
+}
+
+void ui::Text::printCharacter(ui::BaseCharacter *character, float kerning) {
     character->setPosition(nextPosition);
-    nextPosition.x += character->getAdvance();
-    if (lineSize < character->getHeight())
-        lineSize = character->getHeight();
+    nextPosition.x += character->getAdvance() + kerning;
     distanceEnter++;
 }
 
-void ui::Text::equalize(uint i) {
+float ui::Text::equalize(uint i) {
+    float lineSize = 0;
+    for (int j = i - distanceEnter; j < i; ++j) {
+        float characterSize = textCharacters[j]->getHeight();
+        if(lineSize < characterSize)
+            lineSize = characterSize;
+    }
     sf::Vector2f offset{endRender.x - (textCharacters[i - 1]->getPosition().x), lineSize};
     if (textCharacters[i - 1]->isSpecial() != BaseCharacter::Special::space)
         offset.x -= textCharacters[i - 1]->getAdvance();
@@ -95,15 +103,15 @@ void ui::Text::equalize(uint i) {
     for (uint j = i - distanceEnter; j < i; ++j) {
         textCharacters[j]->move(offset);
     }
+    return lineSize;
 }
 
 void ui::Text::porting(int i) {
-    equalize(i);
+    float lineSize = equalize(i);
     nextPosition.y += lineSize * lineSpacing;
     nextPosition.x = startRender.x;
 
     distanceEnter = 0;
-    lineSize = 0;
 }
 
 void ui::Text::autoPorting(int i) {
@@ -112,14 +120,27 @@ void ui::Text::autoPorting(int i) {
     porting(i - distanceSpace);
 
     for (uint j = i - distanceSpace; j < i; ++j) {
-        printCharacter(textCharacters[j]);
+        float kerning;
+        if (j < i - 1)
+            kerning = textCharacters[j]->getKerning(textCharacters[j + 1]->getChar());
+        printCharacter(textCharacters[j], kerning);
     }
 
     distanceEnter = distanceSpace;
     distanceSpace = 0;
 }
 
+void ui::Text::setPosition(sf::Vector2f position) {
+    background->setPosition(position);
+    for (BaseCharacter*& character : textCharacters) {
+        character->setPosition(position);
+    }
+}
+
 void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
+    if(size.x == endRender.x - startRender.x){
+        setPosition(position);
+    }
     background->resize(size, position);
 
     startRender = position;
@@ -129,34 +150,26 @@ void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
     for (int i = 0; i < textCharacters.size(); i++) {
         ui::BaseCharacter* character = textCharacters[i];
 
-/*
         float kerning = 0;
-        if (i < textCharacters.createSize() - 1)
-            kerning = character->getKerning(textCharacters[i + 1]->getChar());
-*/
 
         ui::BaseCharacter::Special specialText = character->isSpecial();
 
         switch (specialText) {
             case BaseCharacter::Special::no:
-                printCharacter(character);
+                printCharacter(character, kerning);
                 distanceSpace++;
                 break;
             case BaseCharacter::Special::space:
-                if (this->nextPosition.x < endRender.x){
-                    printCharacter(character);
+                if (this->nextPosition.x <= endRender.x){
+                    printCharacter(character, kerning);
                     distanceSpace = 0;
                 } else{
                     autoPorting(i);
-                    printCharacter(character);
+                    printCharacter(character, kerning);
                 }
                 break;
             case BaseCharacter::Special::enter:
-
-                if (lineSize < character->getHeight())
-                    lineSize = character->getHeight();
-
-                if (this->nextPosition.x >= endRender.x)
+                if (this->nextPosition.x > endRender.x)
                     autoPorting(i);
                 porting(i);
                 break;
@@ -170,7 +183,6 @@ void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
 
     distanceEnter = 0;
     distanceSpace = 0;
-    lineSize = 0;
 }
 
 sf::Vector2f ui::Text::getAreaPosition() {
@@ -182,7 +194,8 @@ sf::Vector2f ui::Text::getAreaSize() {
 }
 
 sf::Vector2f ui::Text::getMinSize() {
-    return minSize;
+    sf::Vector2f backgroundMinSize{background->getMinSize()};
+    return sf::Vector2f{std::max(minSize.x, backgroundMinSize.x), std::max(minSize.y, backgroundMinSize.y)};
 }
 
 sf::Vector2f ui::Text::getNormalSize() {
@@ -205,3 +218,4 @@ ui::Text *ui::Text::copy() {
 
     return new Text{copyTextBlocks, background->copy(), size, lineSpacing, align};
 }
+

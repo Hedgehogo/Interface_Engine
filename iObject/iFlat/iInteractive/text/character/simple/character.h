@@ -13,12 +13,10 @@ namespace ui{
         wchar_t character;
 
         sf::Glyph glyph;
-
         TextVariables &textVariables;
-
         sf::Sprite sprite;
     public:
-        Character(wchar_t character, TextVariables &textVariables, BaseTextBlock *parent, IInteraction *interaction);
+        Character(wchar_t character, TextVariables &textVariables);
 
         void draw() override;
 

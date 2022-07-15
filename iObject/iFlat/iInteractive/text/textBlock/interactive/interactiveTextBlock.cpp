@@ -8,7 +8,8 @@ ui::InteractiveTextBlock::InteractiveTextBlock(int indexInteraction, std::wstrin
                                                sf::Color backgroundSelectionColor) :
     indexInteraction(indexInteraction), TextBlock(text, textColor, font, style, size, textSelectionColor, backgroundSelectionColor), interact(false), oldInteract(false) {}
 
-void ui::InteractiveTextBlock::init(ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack) {
+void ui::InteractiveTextBlock::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
+    BaseTextBlock::init(renderTarget, interactionStack, interactionManager, panelManager);
     this->interactionManager = &interactionManager;
     this->interactionStack = &interactionStack;
 
@@ -34,7 +35,7 @@ bool ui::InteractiveTextBlock::updateInteractions(sf::Vector2f mousePosition) {
 
 std::vector<ui::BaseCharacter *> ui::InteractiveTextBlock::character() {
     for (wchar_t character : str) {
-        textCharacters.push_back(new ui::Character(character, textVariables, this, interaction));
+        textCharacters.push_back(new ui::Character(character, textVariables));
     }
     return textCharacters;
 }
