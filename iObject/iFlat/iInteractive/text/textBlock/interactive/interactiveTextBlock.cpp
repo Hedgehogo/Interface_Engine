@@ -62,3 +62,8 @@ ui::InteractiveTextBlock *ui::InteractiveTextBlock::copy() {
         return new InteractiveTextBlock(str, textVariables, indexInteraction);
 }
 
+ui::InteractiveTextBlock::~InteractiveTextBlock() {
+    if (interaction != nullptr)
+        delete interaction;
+}
+

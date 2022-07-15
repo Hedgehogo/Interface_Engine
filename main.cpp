@@ -36,7 +36,8 @@ int main() {
 												},
                                                 new ui::ObjectTextBlock{
                                                     new ui::FullColor{{255, 0, 0}},
-                                                    {111, 111}
+                                                    {111, 111},
+                                                    false
                                                 }
 											},
 											new ui::RoundedRectangle{sf::Color(0xffffffff), 10},

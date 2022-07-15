@@ -2,11 +2,13 @@
 
 ui::Character::Character(wchar_t character, TextVariables &textVariables)
         : character(character), textVariables(textVariables){
-    glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style);
-    sprite.setTexture(textVariables.font->getTexture(textVariables.size));
-    sprite.setTextureRect(glyph.textureRect);
-    sprite.setOrigin(-glyph.bounds.left, -glyph.bounds.top);
-    sprite.setColor(textVariables.TextColor);
+    if(isSpecial() != BaseCharacter::Special::enter){
+        glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style);
+        sprite.setTexture(textVariables.font->getTexture(textVariables.size));
+        sprite.setTextureRect(glyph.textureRect);
+        sprite.setOrigin(-glyph.bounds.left, -glyph.bounds.top);
+        sprite.setColor(textVariables.TextColor);
+    }
 }
 
 void ui::Character::draw() {

@@ -22,6 +22,8 @@ namespace ui {
                              sf::Color textSelectionColor = sf::Color(255, 255, 255, 0),
                              sf::Color backgroundSelectionColor = sf::Color(255, 255, 255, 0));
 
+        ~InteractiveTextBlock();
+
         void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager);
 
         std::vector<BaseCharacter*> getCharacters() override;

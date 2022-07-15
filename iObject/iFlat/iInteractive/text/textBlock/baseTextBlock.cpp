@@ -22,4 +22,3 @@ void ui::BaseTextBlock::setTextVariables(sf::Color TextColor, sf::Color textSele
     if (textVariables.size == 0)
         textVariables.size = size;
 }
-

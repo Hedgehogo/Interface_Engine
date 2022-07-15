@@ -38,5 +38,5 @@ bool ui::ObjectTextBlock::updateInteractions(sf::Vector2f mousePosition) {
 }
 
 ui::BaseTextBlock *ui::ObjectTextBlock::copy() {
-    return new ObjectTextBlock{object, object->getSize(), isCharacter};
+    return new ObjectTextBlock{object->copy(), object->getAreaSize(), isCharacter};
 }
