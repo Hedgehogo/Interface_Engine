@@ -32,13 +32,38 @@ int main() {
 											{
 												new ui::TextBlock{
 													L"это собственность Артёма"
-												}
+												},
+                                                new ui::ObjectTextBlock{
+                                                    /*new ui::LayerWithBorderHorizontal{
+                                                        {
+                                                            new ui::Sprite{texture_2},
+                                                            new ui::Text{
+                                                                {
+                                                                    new ui::TextBlock{
+                                                                        L"А ты уверен что не Михаила?"
+                                                                    }
+                                                                },
+                                                                new ui::RoundedRectangle{{255, 0, 0}, 20},
+                                                                14,
+                                                                1.15,
+                                                                &font,
+                                                                sf::Color{10, 255, 10},
+                                                                sf::Color{200, 200, 200},
+                                                                sf::Color{200, 200, 200},
+                                                                ui::Text::Align::center
+                                                            },
+                                                            new ui::Sprite{texture}
+                                                        }
+                                                    }*/new ui::Sprite{texture},
+                                                    {200, 200},
+                                                    false
+                                                }
 											},
-											new ui::RoundedRectangle{sf::Color(0xffffffff), 10},
+											new ui::RoundedRectangle{sf::Color(0xffffffff),30},
 											14,
 											1.15,
 											&font,
-											sf::Color{10, 10, 0},
+											sf::Color{10, 255, 10},
 											sf::Color{200, 200, 200},
 											sf::Color{200, 200, 200},
 											ui::Text::Align::center
@@ -82,7 +107,7 @@ int main() {
 						new ui::Text{
 							{
 								new ui::TextBlock{
-									L"Box2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects move in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation. \nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine."
+									L"Box2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects move in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation. \nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine.",
 								}
 							},
 							new ui::FullColor{sf::Color(0x9f6e5cff)},
@@ -187,7 +212,7 @@ int main() {
 		window.clear();
 		interface.update(wheel);
 		interface.draw();
-		interface.drawDebug(window, 0, 1, 0, 120);
+		interface.drawDebug(window, 0, 1, 0, 90);
 		window.display();
 	}
 }

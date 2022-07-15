@@ -1,7 +1,7 @@
 #include "baseCharacter.h"
 #include "../textBlock/baseTextBlock.h"
 
-ui::BaseCharacter::BaseCharacter(BaseTextBlock *parent, IInteraction *interaction) : parent(parent) {}
+ui::BaseCharacter::BaseCharacter() : renderTarget(nullptr) {}
 
 void ui::BaseCharacter::init(sf::RenderTarget &renderTarget) {
     this->renderTarget = &renderTarget;
@@ -18,4 +18,8 @@ bool ui::BaseCharacter::in(sf::Vector2f mousePosition) {
 
 const sf::Vector2f &ui::BaseCharacter::getPosition() const {
     return position;
+}
+
+void ui::BaseCharacter::move(sf::Vector2f position) {
+    this->position += position;
 }

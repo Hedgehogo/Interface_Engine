@@ -33,7 +33,7 @@ namespace ui {
         std::vector<BaseTextBlock*> textBocks;
 
         ui::IDrawn *background;
-        void init(sf::RenderTarget &renderTarget, PanelManager &overlayStack);
+        void init(sf::RenderTarget &renderTarget, PanelManager &panelManager);
 		
     public:
         Text(std::vector<ui::BaseTextBlock *> textBlocks, IDrawn *background = new ui::FullColor(sf::Color::White),
@@ -49,23 +49,25 @@ namespace ui {
 
         void draw() override;
 
+        void move(sf::Vector2f position);
+
+        void setPosition(sf::Vector2f position);
+
     private:
         uint distanceEnter = 0;
         uint distanceSpace = 0;
-
-        float lineSize = 0;
 
         sf::Vector2f nextPosition;
 
         sf::Vector2f startRender;
         sf::Vector2f endRender;
 
-        void printCharacter(ui::BaseCharacter* character);
+        void printCharacter(ui::BaseCharacter *character, float kerning);
 
         void porting(int i);
         void autoPorting(int i);
 
-        void equalize(uint i);
+        float equalize(uint i);
 
     public:
         void resize(sf::Vector2f size, sf::Vector2f position) override;

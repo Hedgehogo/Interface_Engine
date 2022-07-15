@@ -11,12 +11,11 @@ namespace ui {
 	class PanelManager;
 	
 	class IObject {
-	protected:
+    public:
 		virtual void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) = 0;
 		
 		void initObject(IObject *object, sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager);
-		
-	public:
+
 		virtual ~IObject() = default;
 		
 		virtual void setPosition(sf::Vector2f position);
@@ -45,7 +44,7 @@ namespace ui {
 		
 		virtual IObject* copy() = 0;
 
-        virtual sf::Color HSVtoRGB(float H, float S = 1, float V = 1);
+        sf::Color HSVtoRGB(float H, float S = 1, float V = 1);
 		
 		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue = 0, uint hueOffset = 36);
 	};

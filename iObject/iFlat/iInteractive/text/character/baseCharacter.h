@@ -10,18 +10,14 @@ namespace ui{
     class BaseCharacter {
     protected:
         sf::RenderTarget *renderTarget;
-        BaseTextBlock* parent;
         sf::Vector2f position;
-        IInteraction *interaction;
     public:
         enum class Special{
             space,
             enter,
             no
         };
-
-
-        BaseCharacter(BaseTextBlock *parent, IInteraction *interaction);
+        BaseCharacter();
 
         void init(sf::RenderTarget &renderTarget);
 
@@ -29,7 +25,7 @@ namespace ui{
 
         virtual void setPosition(const sf::Vector2f position);
 
-        virtual void move(sf::Vector2f position) = 0;
+        virtual void move(sf::Vector2f position);
 
         const sf::Vector2f &getPosition() const;
 
@@ -44,5 +40,7 @@ namespace ui{
         virtual void draw() = 0;
 
         virtual wchar_t getChar() = 0;
+
+        virtual ~BaseCharacter() = default;
     };
 }

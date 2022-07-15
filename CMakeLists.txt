@@ -92,9 +92,13 @@ add_library(${PROJECT_NAME}
         iObject/iFlat/iInteractive/text/textVariables.h
         iObject/iFlat/iInteractive/text/character/baseCharacter.cpp iObject/iFlat/iInteractive/text/character/baseCharacter.h
         iObject/iFlat/iInteractive/text/character/simple/character.cpp iObject/iFlat/iInteractive/text/character/simple/character.h
+        iObject/iFlat/iInteractive/text/character/object/objectCharacter.cpp
+        iObject/iFlat/iInteractive/text/character/object/objectCharacter.h
         iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.h
         iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.cpp iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.h
         iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.h
+        iObject/iFlat/iInteractive/text/textBlock/object/objectTextBlock.cpp
+        iObject/iFlat/iInteractive/text/textBlock/object/objectTextBlock.h
         iObject/panel/panel/basePanel.cpp iObject/panel/panel/basePanel.h
         iObject/panel/panel/const/constPanel.cpp iObject/panel/panel/const/constPanel.h
         iObject/panel/panel/general/panel.cpp iObject/panel/panel/general/panel.h
