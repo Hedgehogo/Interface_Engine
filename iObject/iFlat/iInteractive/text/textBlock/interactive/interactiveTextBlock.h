@@ -24,7 +24,7 @@ namespace ui {
 
         void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager);
 
-        std::vector<BaseCharacter*> character() override;
+        std::vector<BaseCharacter*> getCharacters() override;
 
         bool in(sf::Vector2f mousePosition);
 

@@ -28,7 +28,7 @@ namespace ui {
 
         virtual bool in(sf::Vector2f mousePosition) = 0;
 
-        virtual std::vector<BaseCharacter*> character() = 0;
+        virtual std::vector<BaseCharacter*> getCharacters() = 0;
 
         virtual void update() = 0;
 

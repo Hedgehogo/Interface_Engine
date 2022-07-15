@@ -1,11 +1,9 @@
 #include "baseCharacter.h"
 #include "../textBlock/baseTextBlock.h"
 
-ui::BaseCharacter::BaseCharacter() : renderTarget(nullptr) {}
+ui::BaseCharacter::BaseCharacter() {}
 
-void ui::BaseCharacter::init(sf::RenderTarget &renderTarget) {
-    this->renderTarget = &renderTarget;
-}
+void ui::BaseCharacter::init(sf::RenderTarget &renderTarget) {}
 
 void ui::BaseCharacter::setPosition(const sf::Vector2f position) {
     BaseCharacter::position = position;
@@ -23,3 +21,4 @@ const sf::Vector2f &ui::BaseCharacter::getPosition() const {
 void ui::BaseCharacter::move(sf::Vector2f position) {
     this->position += position;
 }
+

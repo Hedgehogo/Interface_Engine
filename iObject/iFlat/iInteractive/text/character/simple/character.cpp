@@ -54,3 +54,7 @@ bool ui::Character::in(sf::Vector2f mousePosition) {
     return  position.x < mousePosition.x && position.x + getAdvance() > mousePosition.x &&
             position.y - getHeight() < mousePosition.y && position.y > mousePosition.y;
 }
+
+void ui::Character::init(sf::RenderTarget &renderTarget) {
+    this->renderTarget = &renderTarget;
+}

@@ -10,7 +10,7 @@ namespace ui {
     public:
         ObjectCharacter(ui::IObject* object);
 
-        void setPosition(const sf::Vector2f position);
+        void setPosition( sf::Vector2f position);
 
         void move(sf::Vector2f position);
 

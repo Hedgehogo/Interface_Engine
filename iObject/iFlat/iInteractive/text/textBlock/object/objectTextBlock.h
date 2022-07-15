@@ -14,7 +14,7 @@ namespace ui{
 
         bool in(sf::Vector2f mousePosition);
 
-        std::vector<BaseCharacter*> character();
+        std::vector<BaseCharacter*> getCharacters();
 
         void update();
 

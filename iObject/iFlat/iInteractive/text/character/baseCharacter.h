@@ -9,7 +9,6 @@ namespace ui{
     class BaseTextBlock;
     class BaseCharacter {
     protected:
-        sf::RenderTarget *renderTarget;
         sf::Vector2f position;
     public:
         enum class Special{
@@ -19,7 +18,7 @@ namespace ui{
         };
         BaseCharacter();
 
-        void init(sf::RenderTarget &renderTarget);
+        virtual void init(sf::RenderTarget &renderTarget);
 
         virtual bool in(sf::Vector2f mousePosition);
 

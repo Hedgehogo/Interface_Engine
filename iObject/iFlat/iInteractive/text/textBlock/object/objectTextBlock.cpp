@@ -14,7 +14,7 @@ bool ui::ObjectTextBlock::in(sf::Vector2f mousePosition) {
     return objectCharacter.in(mousePosition);
 }
 
-std::vector<ui::BaseCharacter*> ui::ObjectTextBlock::character() {
+std::vector<ui::BaseCharacter*> ui::ObjectTextBlock::getCharacters() {
     std::vector<ui::BaseCharacter*> result;
     if(!isCharacter){
         result.push_back(new Character{L'\n', textVariables});

@@ -13,7 +13,7 @@ ui::TextBlock::TextBlock(std::wstring text, sf::Color textColor, sf::Font *font,
 
 ui::TextBlock::TextBlock(std::wstring str, ui::TextVariables textVariables) : str(str), BaseTextBlock(textVariables) {}
 
-std::vector<ui::BaseCharacter*> ui::TextBlock::character() {
+std::vector<ui::BaseCharacter*> ui::TextBlock::getCharacters() {
     for (wchar_t character : str) {
         textCharacters.push_back(new ui::Character(character, textVariables));
     }

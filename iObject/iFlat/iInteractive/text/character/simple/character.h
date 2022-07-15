@@ -10,6 +10,8 @@
 namespace ui{
     class Character : public BaseCharacter{
     protected:
+        sf::RenderTarget* renderTarget;
+
         wchar_t character;
 
         sf::Glyph glyph;
@@ -17,6 +19,8 @@ namespace ui{
         sf::Sprite sprite;
     public:
         Character(wchar_t character, TextVariables &textVariables);
+
+        void init(sf::RenderTarget &renderTarget) override;
 
         void draw() override;
 

@@ -14,7 +14,7 @@ namespace ui {
                   sf::Font *font = nullptr, sf::Text::Style style = {}, int size = 0,
                   sf::Color textSelectionColor = sf::Color(255, 255, 255, 0),
                   sf::Color backgroundSelectionColor = sf::Color(255, 255, 255, 0));
-        std::vector<BaseCharacter*> character() override;
+        std::vector<BaseCharacter*> getCharacters() override;
 
         bool in(sf::Vector2f mousePosition);
 

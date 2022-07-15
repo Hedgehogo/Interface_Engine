@@ -1,4 +1,5 @@
 #include "objectCharacter.h"
+#include "iostream"
 
 namespace ui {
     ObjectCharacter::ObjectCharacter(ui::IObject* object) : object(object){}
@@ -7,13 +8,13 @@ namespace ui {
         return '\0';
     }
 
-    void ObjectCharacter::setPosition(const sf::Vector2f position) {
+    void ObjectCharacter::setPosition( sf::Vector2f position) {
+        position.y -= getHeight();
         BaseCharacter::setPosition(position);
         object->setPosition(position);
     }
 
     void ObjectCharacter::move(sf::Vector2f position) {
-        position.y -= getHeight();
         BaseCharacter::move(position);
         object->move(position);
     }

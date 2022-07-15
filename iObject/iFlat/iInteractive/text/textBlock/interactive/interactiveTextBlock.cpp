@@ -33,7 +33,7 @@ bool ui::InteractiveTextBlock::updateInteractions(sf::Vector2f mousePosition) {
     return true;
 }
 
-std::vector<ui::BaseCharacter *> ui::InteractiveTextBlock::character() {
+std::vector<ui::BaseCharacter *> ui::InteractiveTextBlock::getCharacters() {
     for (wchar_t character : str) {
         textCharacters.push_back(new ui::Character(character, textVariables));
     }

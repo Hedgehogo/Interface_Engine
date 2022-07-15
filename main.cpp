@@ -33,7 +33,11 @@ int main() {
 											{
 												new ui::TextBlock{
 													L"это собственность Артёма"
-												}
+												},
+                                                new ui::ObjectTextBlock{
+                                                    new ui::FullColor{{255, 0, 0}},
+                                                    {111, 111}
+                                                }
 											},
 											new ui::RoundedRectangle{sf::Color(0xffffffff), 10},
 											14,
@@ -172,7 +176,7 @@ int main() {
 		window.clear();
 		interface.update(wheel);
 		interface.draw();
-		interface.drawDebug(window, 0, 2, 0, 90);
+		//interface.drawDebug(window, 0, 2, 0, 90);
 		window.display();
 	}
 }

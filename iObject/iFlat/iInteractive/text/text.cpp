@@ -7,7 +7,7 @@ ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::IDrawn *backgrou
     background(background), align(align), size(size), lineSpacing(lineSpacing), textBocks(textBlocks), startRender({0, 0}), endRender(0, 0){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
         textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, font, size);
-        std::vector<ui::BaseCharacter*> characters = textBlock->character();
+        std::vector<ui::BaseCharacter*> characters = textBlock->getCharacters();
         textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
     }
 
@@ -215,7 +215,7 @@ sf::Vector2f ui::Text::getNormalSize() {
 ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::IDrawn *background, uint size, float lineSpacing, ui::Text::Align align) :
     textBocks(textBlocks), background(background), size(size), lineSpacing(lineSpacing), align(align){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
-        std::vector<ui::BaseCharacter*> characters = textBlock->character();
+        std::vector<ui::BaseCharacter*> characters = textBlock->getCharacters();
         textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
     }
 }
