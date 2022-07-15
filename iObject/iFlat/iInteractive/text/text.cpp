@@ -4,7 +4,7 @@
 
 ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::IDrawn *background, int size, float lineSpacing, sf::Font *font
     , sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, ui::Text::Align align) :
-    background(background), align(align), size(size), lineSpacing(lineSpacing), textBocks(textBlocks){
+    background(background), align(align), size(size), lineSpacing(lineSpacing), textBocks(textBlocks), startRender({0, 0}), endRender(0, 0){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
         textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, font, size);
         std::vector<ui::BaseCharacter*> characters = textBlock->character();
@@ -68,10 +68,23 @@ void ui::Text::draw() {
 }
 
 void ui::Text::move(sf::Vector2f position) {
+    startRender += position;
+    endRender += position;
+
     background->move(position);
     for (BaseCharacter*& character : textCharacters) {
         character->move(position);
     }
+}
+
+void ui::Text::setPosition(sf::Vector2f position) {
+    background->setPosition(position);
+    for (BaseCharacter*& character : textCharacters) {
+        character->move({position - startRender});
+    }
+
+    endRender += position - startRender;
+    startRender = position;
 }
 
 void ui::Text::printCharacter(ui::BaseCharacter *character, float kerning) {
@@ -129,20 +142,16 @@ void ui::Text::autoPorting(int i) {
     distanceEnter = distanceSpace;
     distanceSpace = 0;
 }
-
-void ui::Text::setPosition(sf::Vector2f position) {
-    background->setPosition(position);
-    for (BaseCharacter*& character : textCharacters) {
-        character->setPosition(position);
-    }
-}
-
 void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
-    if(size.x == endRender.x - startRender.x){
-        setPosition(position);
-    }
     background->resize(size, position);
-
+    if(size.x == endRender.x - startRender.x){
+        for (BaseCharacter*& character : textCharacters) {
+            character->move({position - startRender});
+        }
+        startRender = position;
+        endRender = position + size;
+        return;
+    }
     startRender = position;
     endRender = position + size;
     this->nextPosition = startRender;
@@ -199,7 +208,8 @@ sf::Vector2f ui::Text::getMinSize() {
 }
 
 sf::Vector2f ui::Text::getNormalSize() {
-    return sf::Vector2f();
+    sf::Vector2f normalSize = background->getNormalSize();
+    return {std::max(normalSize.x, minSize.x), std::max(normalSize.y, minSize.y)};
 }
 
 ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::IDrawn *background, uint size, float lineSpacing, ui::Text::Align align) :
@@ -217,5 +227,10 @@ ui::Text *ui::Text::copy() {
     }
 
     return new Text{copyTextBlocks, background->copy(), size, lineSpacing, align};
+}
+
+void ui::Text::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+    IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+    background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 }
 

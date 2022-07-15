@@ -10,7 +10,7 @@ namespace ui {
 	
 	void Layout::move(sf::Vector2f position) {
 		this->position += position;
-		resize(size, this->position + position);
+		resize(size, this->position);
 	}
 	
 	void Layout::setSize(sf::Vector2f size) {

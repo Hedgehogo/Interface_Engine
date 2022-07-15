@@ -36,7 +36,7 @@ namespace ui {
 	}
 	
 	void BasePanel::setPosition(sf::Vector2f position) {
-		object->move(position - this->position);
+		object->setPosition(position);
 		Layout::resize(size, position);
 	}
 	

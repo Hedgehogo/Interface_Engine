@@ -85,5 +85,7 @@ namespace ui {
 		
     public:
         Text *copy() override;
+
+        void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
     };
 }
