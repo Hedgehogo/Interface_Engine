@@ -31,8 +31,8 @@ bool ui::Panel::inConstPanels(sf::Vector2f pointPosition) {
 }
 
 void ui::Panel::draw() {
+    BasePanel::draw();
 	panelManager.draw();
-	BasePanel::draw();
 }
 
 void ui::Panel::update() {

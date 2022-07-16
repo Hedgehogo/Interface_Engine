@@ -230,7 +230,10 @@ ui::Text *ui::Text::copy() {
 }
 
 void ui::Text::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-    IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-    background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+    for (BaseCharacter*& character : textCharacters) {
+        character->drawDebug(renderTarget, indentAddition, hue + hueOffset, hueOffset);
+    }
+
+    background->drawDebug(renderTarget, indent, indentAddition, hue + hueOffset, hueOffset);
 }
 

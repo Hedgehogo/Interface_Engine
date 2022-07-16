@@ -42,4 +42,8 @@ namespace ui {
     ObjectCharacter::~ObjectCharacter() {
         delete object;
     }
+
+    void ObjectCharacter::drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) {
+        object->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
+    }
 }

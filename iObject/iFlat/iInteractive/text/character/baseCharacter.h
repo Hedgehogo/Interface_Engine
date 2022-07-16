@@ -40,6 +40,8 @@ namespace ui{
 
         virtual wchar_t getChar() = 0;
 
+        virtual void drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) = 0;
+
         virtual ~BaseCharacter() = default;
     };
 }

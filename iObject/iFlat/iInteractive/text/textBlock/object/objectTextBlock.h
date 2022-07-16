@@ -4,6 +4,7 @@
 #include "../../character/object/objectCharacter.h"
 namespace ui{
     class ObjectTextBlock  : public BaseTextBlock{
+        sf::Vector2f size;
         ObjectCharacter* objectCharacter;
         bool isCharacter;
         IObject* object;

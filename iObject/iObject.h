@@ -50,7 +50,7 @@ namespace ui {
 		
 		virtual IObject* copy() = 0;
 
-        sf::Color HSVtoRGB(float H, float S = 1, float V = 1);
+        static sf::Color HSVtoRGB(float H, float S = 1, float V = 1);
 		
 		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
 	};

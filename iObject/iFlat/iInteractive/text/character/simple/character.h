@@ -39,5 +39,7 @@ namespace ui{
         wchar_t getChar() override;
 
         void setPosition(const sf::Vector2f position);
+
+        void drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) override;
     };
 }

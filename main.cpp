@@ -23,9 +23,7 @@ int main() {
 		new ui::LayerWithMovableBorder{
 			new ui::LayerWithBorderHorizontal{
 				{
-					new ui::DebugLayer{
-						new ui::Sprite{texture_2}
-					},
+					new ui::FullColor{{22, 22, 22}},
 					new ui::LayerWithMovableBorder{
 						new ui::LayerWithConstRatio{
 							new ui::LayerWithAlternativeObject{
@@ -40,15 +38,32 @@ int main() {
                                                     new ui::Text{
                                                         {
                                                             new ui::TextBlock{
-                                                                L"fack\n\n"
+                                                                L"fack\n"
                                                             },
                                                             new ui::InteractiveTextBlock{
                                                                 0,
                                                                 L"you"
+                                                            },
+                                                            new ui::ObjectTextBlock{
+                                                                new ui::ButtonWithPanel{
+                                                                    new ui::Panel{
+                                                                        new ui::DebugLayer{
+                                                                            /*new ui::FullColor {{0, 0, 255}}*/
+                                                                            new ui::Sprite{texture}
+                                                                        },
+                                                                        new ui::PointingHidePanelInteraction,
+                                                                        new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
+                                                                        new ui::Positioning2{ui::Location2::right, ui::Location2::left},
+                                                                    },
+                                                                    new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::Left},
+                                                                    new ui::Sprite{texture_2}
+                                                                },
+                                                                {50, 50},
+                                                                false
                                                             }
                                                         },
                                                         new ui::FullColor{{255, 0, 0}},
-                                                        14,
+                                                        30,
                                                         1.15,
                                                         &font,
                                                         sf::Color{255, 255, 0},
@@ -115,14 +130,17 @@ int main() {
 			new ui::LayerWithConstCenter{
 				new ui::LayerWithAlternativeObject{
 					new ui::LayerWithBorderHorizontal{
-						new ui::LayerWithAlternativeObject{
-							new ui::Sprite{texture_3},
-							new ui::Capsule{sf::Color(0x9f6e5cff)}
+						{
+							new ui::LayerWithAlternativeObject{
+								new ui::Sprite{texture_3},
+								new ui::Capsule{sf::Color(0x9f6e5cff)}
+							},
+							new ui::LayerWithAlternativeObject{
+								new ui::Sprite{texture_3},
+								new ui::Capsule{sf::Color(0x9f6e5cff)}
+							}
 						},
-						new ui::LayerWithAlternativeObject{
-							new ui::Sprite{texture_3},
-							new ui::Capsule{sf::Color(0x9f6e5cff)}
-						}
+						{   0.5}
 					},
 					new ui::LayerWithBorderVertical{
 						{
@@ -193,7 +211,7 @@ int main() {
 		window.clear();
 		interface.update(wheel);
 		interface.draw();
-		//interface.drawDebug(window, 0, 2, 0, 72);
+		interface.drawDebug(window, 0, 2, 0, 90);
 		window.display();
 	}
 }
