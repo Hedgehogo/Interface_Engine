@@ -5,6 +5,8 @@
 #include "../../../../../interaction/interactionStack/interactionStack.h"
 #include "../../../../../interaction/iInteraction/iInteraction.h"
 
+typedef unsigned uint;
+
 namespace ui{
     class BaseTextBlock;
     class BaseCharacter {

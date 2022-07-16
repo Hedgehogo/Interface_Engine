@@ -63,21 +63,30 @@ bool ui::Character::in(sf::Vector2f mousePosition) {
             position.y - getHeight() < mousePosition.y && position.y > mousePosition.y;
 }
 
-void ui::Character::drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) {
-    sf::Vector2f size{getAdvance(), getHeight()};
-    size = {size.x - 1.0f, size.y - 1.0f};
-    sf::Vector2f position{this->getPosition() - sf::Vector2f{0.f, getHeight()}};
-    position = {position.x + 1.0f, position.y};
-    if (size.x > 0 && size.y > 0){
-        sf::Color color{ui::IObject::HSVtoRGB(static_cast<float>(hue % 360))};
-        sf::Vertex frame[] {
-            {position, color},
-            {{position.x + size.x, position.y}, color},
-            {position + size, color},
-            {{position.x, position.y + size.y}, color},
-            {position, color},
-        };
+bool ui::Character::debug = false;
 
-        renderTarget.draw(frame, 5, sf::LinesStrip);
+void ui::Character::setDebug(bool debug) {
+    ui::Character::debug = debug;
+}
+
+void ui::Character::drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) {
+    if (debug){
+        sf::Vector2f size{getAdvance(), getHeight()};
+        size = {size.x - 1.0f, size.y - 1.0f};
+        sf::Vector2f position{this->getPosition() - sf::Vector2f{0.f, getHeight()}};
+        position = {position.x + 1.0f, position.y};
+        if (size.x > 0 && size.y > 0){
+            sf::Color color{ui::IObject::HSVtoRGB(static_cast<float>(hue % 360))};
+            sf::Vertex frame[] {
+                {position, color},
+                {{position.x + size.x, position.y}, color},
+                {position + size, color},
+                {{position.x, position.y + size.y}, color},
+                {position, color},
+            };
+
+            renderTarget.draw(frame, 5, sf::LinesStrip);
+        }
     }
 }
+

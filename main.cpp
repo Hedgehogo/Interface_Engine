@@ -17,8 +17,9 @@ int main() {
 	
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
-	ui::BasePanel::setFullDebug(false);
-	
+	ui::BasePanel::setFullDebug(true);
+	ui::Character::setDebug(true);
+
 	ui::Interface interface {
 		new ui::LayerWithMovableBorder{
 			new ui::LayerWithBorderHorizontal{

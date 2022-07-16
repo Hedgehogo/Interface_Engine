@@ -10,6 +10,7 @@
 namespace ui{
     class Character : public BaseCharacter{
     protected:
+
         sf::RenderTarget* renderTarget;
 
         wchar_t character;
@@ -40,6 +41,10 @@ namespace ui{
 
         void setPosition(const sf::Vector2f position);
 
+    private:
+        static bool debug;
+    public:
+        static void setDebug(bool debug);
         void drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) override;
     };
 }
