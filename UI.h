@@ -27,3 +27,4 @@
 #include "iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.h"
 #include "iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.h"
 #include "iObject/iFlat/iInteractive/text/textBlock/object/objectTextBlock.h"
+#include "debug/debugLayer.h"

@@ -23,7 +23,9 @@ int main() {
 		new ui::LayerWithMovableBorder{
 			new ui::LayerWithBorderHorizontal{
 				{
-					new ui::FullColor{{22, 22, 22}},
+					new ui::DebugLayer{
+						new ui::Sprite{texture_2}
+					},
 					new ui::LayerWithMovableBorder{
 						new ui::LayerWithConstRatio{
 							new ui::LayerWithAlternativeObject{
@@ -113,17 +115,14 @@ int main() {
 			new ui::LayerWithConstCenter{
 				new ui::LayerWithAlternativeObject{
 					new ui::LayerWithBorderHorizontal{
-						{
-							new ui::LayerWithAlternativeObject{
-								new ui::Sprite{texture_3},
-								new ui::Capsule{sf::Color(0x9f6e5cff)}
-							},
-							new ui::LayerWithAlternativeObject{
-								new ui::Sprite{texture_3},
-								new ui::Capsule{sf::Color(0x9f6e5cff)}
-							}
+						new ui::LayerWithAlternativeObject{
+							new ui::Sprite{texture_3},
+							new ui::Capsule{sf::Color(0x9f6e5cff)}
 						},
-						{   0.5}
+						new ui::LayerWithAlternativeObject{
+							new ui::Sprite{texture_3},
+							new ui::Capsule{sf::Color(0x9f6e5cff)}
+						}
 					},
 					new ui::LayerWithBorderVertical{
 						{
@@ -194,7 +193,7 @@ int main() {
 		window.clear();
 		interface.update(wheel);
 		interface.draw();
-		//interface.drawDebug(window, 0, 2, 0, 90);
+		//interface.drawDebug(window, 0, 2, 0, 72);
 		window.display();
 	}
 }

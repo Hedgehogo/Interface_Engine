@@ -41,26 +41,28 @@ bool ui::IObject::in(sf::Vector2f pointPosition) {
 		   pointPosition.y > position.y && pointPosition.y < position.y + size.y;
 }
 
-void ui::IObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-	sf::Vector2f size{this->getAreaSize() - static_cast<sf::Vector2f>(sf::Vector2i{indent, indent} * 2)};
+void ui::IObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int, uint hue, uint) {
+	sf::Vector2f size{this->getAreaSize() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2, indent * 2})};
+	size = {std::round(size.x - 1.0f), std::round(size.y - 1.0f)};
 	sf::Vector2f position{this->getAreaPosition() + static_cast<sf::Vector2f>(sf::Vector2i{indent, indent})};
+	position = {std::round(position.x + 1.0f), std::round(position.y)};
     if (size.x > 0 && size.y > 0){
-        sf::RectangleShape rectangle;
-        rectangle.setFillColor(HSVtoRGB(static_cast<float>(hue % 360)));
-
-        rectangle.setPosition(position);
-        rectangle.setSize({1.0f, size.y});
-        renderTarget.draw(rectangle);
-
-        rectangle.setPosition({position.x + size.x - 1.0f, position.y});
-        renderTarget.draw(rectangle);
-
-        rectangle.setPosition(position);
-        rectangle.setSize({size.x, 1.0f});
-        renderTarget.draw(rectangle);
-
-        rectangle.setPosition({position.x, position.y + size.y - 1.0f});
-        renderTarget.draw(rectangle);
+		sf::Color color{HSVtoRGB(static_cast<float>(hue % 360))};
+		sf::Vertex frame[] {
+			{position, color},
+			{{position.x + size.x, position.y}, color},
+			{position + size, color},
+			{{position.x, position.y + size.y}, color},
+			{position, color},
+		};
+		
+		sf::CircleShape circle{2, 4};
+		circle.setPosition(position + size * 0.5f - sf::Vector2f{2.0f, 2.0f});
+		circle.setFillColor(color);
+		
+		renderTarget.draw(frame, 5, sf::LinesStrip);
+		
+		renderTarget.draw(circle);
     }
 }
 

@@ -114,7 +114,14 @@ add_library(${PROJECT_NAME}
         iObject/panel/panel/interaction/hide/pointing/pointingHidePanelInteraction.cpp iObject/panel/panel/interaction/hide/pointing/pointingHidePanelInteraction.h
         iObject/panel/panelManager/panelManager.cpp iObject/panel/panelManager/panelManager.h
         iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
-        UI.h iObject/panel/panel/interaction/move/movePanelInteraction.cpp iObject/panel/panel/interaction/move/movePanelInteraction.h iObject/panel/panel/interaction/move/coefficient/coefficientMovePanelInteraction.cpp iObject/panel/panel/interaction/move/coefficient/coefficientMovePanelInteraction.h iObject/panel/panel/interaction/move/dont/dontMovePanelInteraction.cpp iObject/panel/panel/interaction/move/dont/dontMovePanelInteraction.h iObject/panel/panel/interaction/move/side/sideMovePanelInteraction.cpp iObject/panel/panel/interaction/move/side/sideMovePanelInteraction.h iObject/panel/panel/interaction/display/click/event/displayPanelEvent.cpp iObject/panel/panel/interaction/display/click/event/displayPanelEvent.h iObject/panel/panel/interaction/display/click/clickDisplayPanelInteraction.cpp iObject/panel/panel/interaction/display/click/clickDisplayPanelInteraction.h)
+        UI.h
+        iObject/panel/panel/interaction/move/movePanelInteraction.cpp iObject/panel/panel/interaction/move/movePanelInteraction.h
+        iObject/panel/panel/interaction/move/coefficient/coefficientMovePanelInteraction.cpp iObject/panel/panel/interaction/move/coefficient/coefficientMovePanelInteraction.h
+        iObject/panel/panel/interaction/move/dont/dontMovePanelInteraction.cpp iObject/panel/panel/interaction/move/dont/dontMovePanelInteraction.h
+        iObject/panel/panel/interaction/move/side/sideMovePanelInteraction.cpp iObject/panel/panel/interaction/move/side/sideMovePanelInteraction.h
+        iObject/panel/panel/interaction/display/click/event/displayPanelEvent.cpp iObject/panel/panel/interaction/display/click/event/displayPanelEvent.h
+        iObject/panel/panel/interaction/display/click/clickDisplayPanelInteraction.cpp iObject/panel/panel/interaction/display/click/clickDisplayPanelInteraction.h
+        debug/debugLayer.cpp debug/debugLayer.h)
 
 
 set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")
