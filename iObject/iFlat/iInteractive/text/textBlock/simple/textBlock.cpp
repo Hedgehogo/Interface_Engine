@@ -13,6 +13,12 @@ ui::TextBlock::TextBlock(std::wstring text, sf::Color textColor, sf::Font *font,
 
 ui::TextBlock::TextBlock(std::wstring str, ui::TextVariables textVariables) : str(str), BaseTextBlock(textVariables) {}
 
+void ui::TextBlock::init(sf::RenderTarget &renderTarget, ui::InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::PanelManager &panelManager) {
+    for (BaseCharacter*& character : textCharacters) {
+        character->init(renderTarget);
+    }
+}
+
 std::vector<ui::BaseCharacter*> ui::TextBlock::getCharacters() {
     for (wchar_t character : str) {
         textCharacters.push_back(new ui::Character(character, textVariables));
@@ -21,12 +27,19 @@ std::vector<ui::BaseCharacter*> ui::TextBlock::getCharacters() {
 }
 
 void ui::TextBlock::update() {}
+
 bool ui::TextBlock::updateInteractions(sf::Vector2f mousePosition) {
     return false;
 }
 
 bool ui::TextBlock::in(sf::Vector2f mousePosition) {
-    return false;
+    bool result = true;
+    for (BaseCharacter*& character : textCharacters) {
+        bool buf = character->in(mousePosition);
+        if (!buf)
+            result = false;
+    }
+    return result;
 }
 
 ui::TextBlock *ui::TextBlock::copy() {

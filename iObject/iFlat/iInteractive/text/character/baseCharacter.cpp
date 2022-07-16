@@ -5,8 +5,8 @@ ui::BaseCharacter::BaseCharacter() {}
 
 void ui::BaseCharacter::init(sf::RenderTarget &renderTarget) {}
 
-void ui::BaseCharacter::setPosition(const sf::Vector2f position) {
-    BaseCharacter::position = position;
+void ui::BaseCharacter::setPosition(sf::Vector2f position) {
+    this->position = position;
 }
 
 bool ui::BaseCharacter::in(sf::Vector2f mousePosition) {

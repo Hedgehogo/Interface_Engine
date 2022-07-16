@@ -6,14 +6,13 @@ ui::InteractiveTextBlock::InteractiveTextBlock(ui::IInteraction *interaction, st
 
 ui::InteractiveTextBlock::InteractiveTextBlock(int indexInteraction, std::wstring text, sf::Color textColor, sf::Font *font, sf::Text::Style style, int size, sf::Color textSelectionColor,
                                                sf::Color backgroundSelectionColor) :
-    indexInteraction(indexInteraction), TextBlock(text, textColor, font, style, size, textSelectionColor, backgroundSelectionColor), interact(false), oldInteract(false) {}
+    indexInteraction(indexInteraction), interaction(nullptr), TextBlock(text, textColor, font, style, size, textSelectionColor, backgroundSelectionColor), interact(false), oldInteract(false) {}
 
 void ui::InteractiveTextBlock::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-    BaseTextBlock::init(renderTarget, interactionStack, interactionManager, panelManager);
+    TextBlock::init(renderTarget, interactionStack, interactionManager, panelManager);
     this->interactionManager = &interactionManager;
-    this->interactionStack = &interactionStack;
-
-    interaction = interactionStack.at(indexInteraction);
+    if (!interaction)
+        interaction = interactionStack.at(indexInteraction);
 }
 
 void ui::InteractiveTextBlock::update() {

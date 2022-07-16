@@ -7,6 +7,8 @@ namespace ui {
 	class TextBlock : public BaseTextBlock {
     protected:
         std::wstring str;
+        std::vector<BaseCharacter*> textCharacters;
+
 	public:
         TextBlock(std::wstring str, TextVariables textVariables);
 
@@ -17,6 +19,8 @@ namespace ui {
         std::vector<BaseCharacter*> getCharacters() override;
 
         bool in(sf::Vector2f mousePosition);
+
+        void init(sf::RenderTarget &renderTarget, ui::InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::PanelManager &panelManager) override;
 
         void update() override;
         bool updateInteractions(sf::Vector2f mousePosition) override;

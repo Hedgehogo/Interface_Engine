@@ -6,10 +6,11 @@
 namespace ui {
     class InteractiveTextBlock : public TextBlock {
     protected:
+        InteractionManager* interactionManager;
+
         bool interact;
         bool oldInteract;
 
-        std::vector<ui::BaseCharacter*> textCharacters;
         int indexInteraction;
         IInteraction* interaction;
     public:

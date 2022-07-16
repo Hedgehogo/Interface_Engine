@@ -10,21 +10,21 @@ namespace ui {
     public:
         ObjectCharacter(ui::IObject* object);
 
-        void setPosition( sf::Vector2f position);
+        void setPosition( sf::Vector2f position) override;
 
-        void move(sf::Vector2f position);
+        void move(sf::Vector2f position) override;
 
-        float getHeight();
+        float getHeight() override;
 
-        float getAdvance();
+        float getAdvance() override;
 
-        float getKerning(wchar_t character);
+        float getKerning(wchar_t character) override;
 
-        Special isSpecial();
+        Special isSpecial() override;
 
-        void draw();
+        void draw() override;
 
-        wchar_t getChar();
+        wchar_t getChar() override;
 
         ~ObjectCharacter() override;
     };

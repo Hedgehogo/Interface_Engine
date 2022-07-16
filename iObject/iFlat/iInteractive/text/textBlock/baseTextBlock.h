@@ -9,9 +9,6 @@
 namespace ui {
 	class BaseTextBlock{
 	protected:
-        ui::InteractionManager *interactionManager;
-        ui::InteractionStack *interactionStack;
-        std::vector<ui::BaseCharacter*> textCharacters;
         TextVariables textVariables;
 	public:
         struct Edge{
@@ -24,7 +21,8 @@ namespace ui {
         virtual ~BaseTextBlock() = default;
 
         void setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Font *font , uint size);
-        virtual void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager);
+
+        virtual void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) = 0;
 
         virtual bool in(sf::Vector2f mousePosition) = 0;
 

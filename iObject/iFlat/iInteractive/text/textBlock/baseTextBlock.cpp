@@ -4,12 +4,6 @@ ui::BaseTextBlock::BaseTextBlock() {}
 
 ui::BaseTextBlock::BaseTextBlock(ui::TextVariables textVariables) : textVariables(textVariables) {}
 
-void ui::BaseTextBlock::init(sf::RenderTarget &renderTarget, ui::InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::PanelManager &panelManager) {
-    for (auto character : textCharacters) {
-        character->init(renderTarget);
-    }
-}
-
 void ui::BaseTextBlock::setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Font *font , uint size) {
     if (textVariables.TextColor == sf::Color(255, 255, 255, 0))
         textVariables.TextColor = TextColor;

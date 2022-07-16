@@ -11,6 +11,10 @@ ui::Character::Character(wchar_t character, TextVariables &textVariables)
     }
 }
 
+void ui::Character::init(sf::RenderTarget &renderTarget) {
+    this->renderTarget = &renderTarget;
+}
+
 void ui::Character::draw() {
     if(isSpecial() != BaseCharacter::Special::enter){
         renderTarget->draw(sprite);
@@ -55,8 +59,4 @@ bool ui::Character::in(sf::Vector2f mousePosition) {
 
     return  position.x < mousePosition.x && position.x + getAdvance() > mousePosition.x &&
             position.y - getHeight() < mousePosition.y && position.y > mousePosition.y;
-}
-
-void ui::Character::init(sf::RenderTarget &renderTarget) {
-    this->renderTarget = &renderTarget;
 }

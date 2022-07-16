@@ -35,7 +35,25 @@ int main() {
 													L"это собственность Артёма"
 												},
                                                 new ui::ObjectTextBlock{
-                                                    new ui::FullColor{{255, 0, 0}},
+                                                    new ui::Text{
+                                                        {
+                                                            new ui::TextBlock{
+                                                                L"fack\n\n"
+                                                            },
+                                                            new ui::InteractiveTextBlock{
+                                                                0,
+                                                                L"you"
+                                                            }
+                                                        },
+                                                        new ui::FullColor{{255, 0, 0}},
+                                                        14,
+                                                        1.15,
+                                                        &font,
+                                                        sf::Color{255, 255, 0},
+                                                        sf::Color{200, 200, 200},
+                                                        sf::Color{200, 200, 200},
+                                                        ui::Text::Align::center
+                                                    },
                                                     {111, 111},
                                                     false
                                                 }
@@ -50,7 +68,6 @@ int main() {
 											ui::Text::Align::center
 										},
 										new ui::PointingHidePanelInteraction,
-										new ui::CoefficientMovePanelInteraction{{-0.5, 0.5}, {0, 0}},
 										new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
 										new ui::Positioning2{ui::Location2::right, ui::Location2::left},
 									},

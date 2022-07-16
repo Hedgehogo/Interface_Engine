@@ -22,7 +22,7 @@ namespace ui{
 
         virtual bool in(sf::Vector2f mousePosition);
 
-        virtual void setPosition(const sf::Vector2f position);
+        virtual void setPosition(sf::Vector2f position);
 
         virtual void move(sf::Vector2f position);
 

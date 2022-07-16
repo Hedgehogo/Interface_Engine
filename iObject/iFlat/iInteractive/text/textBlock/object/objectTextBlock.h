@@ -4,22 +4,22 @@
 #include "../../character/object/objectCharacter.h"
 namespace ui{
     class ObjectTextBlock  : public BaseTextBlock{
-        ObjectCharacter objectCharacter;
+        ObjectCharacter* objectCharacter;
         bool isCharacter;
         IObject* object;
     public:
         ObjectTextBlock(ui::IObject* object, sf::Vector2f size = {0, 0}, bool isCharacter = true);
 
-        void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager);
+        void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 
-        bool in(sf::Vector2f mousePosition);
+        bool in(sf::Vector2f mousePosition) override;
 
-        std::vector<BaseCharacter*> getCharacters();
+        std::vector<BaseCharacter*> getCharacters() override;
 
-        void update();
+        void update() override;
 
-        bool updateInteractions(sf::Vector2f mousePosition);
+        bool updateInteractions(sf::Vector2f mousePosition) override;
 
-        BaseTextBlock *copy();
+        BaseTextBlock *copy() override;
     };
 }
