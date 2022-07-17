@@ -4,6 +4,12 @@
 #include "../event/button/lambdaSimple/buttonEvent_LambdaSimple.h"
 
 namespace ui {
+	enum class InteractionType {
+		general,
+		hidePanel,
+		displayPanel
+	};
+	
 	class IInteraction {
 	private:
 		bool blocked;
@@ -14,6 +20,8 @@ namespace ui {
 		virtual ~IInteraction() = default;
 		
 		bool isBlocked() const;
+		
+		virtual InteractionType getType() const;
 		
 		virtual void start(sf::Vector2i mousePosition) = 0;
 		

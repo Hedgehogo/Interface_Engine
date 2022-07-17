@@ -71,21 +71,18 @@ void ui::Character::setDebug(bool debug) {
 
 void ui::Character::drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) {
     if (debug){
-        sf::Vector2f size{getAdvance(), getHeight()};
-        size = {size.x - 1.0f, size.y - 1.0f};
-        sf::Vector2f position{this->getPosition() - sf::Vector2f{0.f, getHeight()}};
-        position = {position.x + 1.0f, position.y};
+        sf::Vector2f size{getAdvance() - 2.0f, getHeight() - 2.0f};
+        sf::Vector2f position{this->getPosition() + sf::Vector2f{1.0f, 1.0f - getHeight()}};
         if (size.x > 0 && size.y > 0){
-            sf::Color color{ui::IObject::HSVtoRGB(static_cast<float>(hue % 360))};
-            sf::Vertex frame[] {
-                {position, color},
-                {{position.x + size.x, position.y}, color},
-                {position + size, color},
-                {{position.x, position.y + size.y}, color},
-                {position, color},
-            };
-
-            renderTarget.draw(frame, 5, sf::LinesStrip);
+			sf::Color color{ui::IObject::HSVtoRGB(static_cast<float>(hue % 360))};
+			
+			sf::RectangleShape rectangle{size};
+			rectangle.setPosition(position);
+			rectangle.setFillColor(sf::Color::Transparent);
+			rectangle.setOutlineThickness(1);
+			rectangle.setOutlineColor(color);
+			
+			renderTarget.draw(rectangle);
         }
     }
 }

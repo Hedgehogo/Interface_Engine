@@ -85,7 +85,7 @@ int main() {
 											sf::Color{200, 200, 200},
 											ui::Text::Align::center
 										},
-										new ui::PointingHidePanelInteraction,
+										new ui::ClickHidePanelInteraction{sf::Mouse::Button::Left},
 										new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
 										new ui::Positioning2{ui::Location2::right, ui::Location2::left},
 									},

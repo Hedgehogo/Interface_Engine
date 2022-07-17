@@ -107,7 +107,7 @@ add_library(${PROJECT_NAME}
         iObject/panel/panel/interaction/basePanelInteraction.cpp iObject/panel/panel/interaction/basePanelInteraction.h
         iObject/panel/panel/interaction/general/panelInteraction.cpp iObject/panel/panel/interaction/general/panelInteraction.h
         iObject/panel/panel/interaction/click/clickPanelInteraction.cpp iObject/panel/panel/interaction/click/clickPanelInteraction.h
-        iObject/panel/panel/interaction/display/displayPanelInteraction.h
+        iObject/panel/panel/interaction/display/displayPanelInteraction.cpp iObject/panel/panel/interaction/display/displayPanelInteraction.h
         iObject/panel/panel/interaction/display/pointing/pointingDisplayPanelInteraction.h iObject/panel/panel/interaction/display/pointing/pointingDisplayPanelInteraction.cpp
         iObject/panel/panel/interaction/hide/hidePanelInteraction.cpp iObject/panel/panel/interaction/hide/hidePanelInteraction.h
         iObject/panel/panel/interaction/hide/click/clickHidePanelInteraction.cpp iObject/panel/panel/interaction/hide/click/clickHidePanelInteraction.h

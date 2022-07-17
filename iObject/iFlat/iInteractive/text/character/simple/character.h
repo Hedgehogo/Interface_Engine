@@ -43,8 +43,10 @@ namespace ui{
 
     private:
         static bool debug;
+		
     public:
         static void setDebug(bool debug);
+		
         void drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) override;
     };
 }

@@ -42,25 +42,22 @@ bool ui::IObject::in(sf::Vector2f pointPosition) {
 }
 
 void ui::IObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int, uint hue, uint) {
-	sf::Vector2f size{this->getAreaSize() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2, indent * 2})};
-	size = {std::round(size.x - 1.0f), std::round(size.y - 1.0f)};
-	sf::Vector2f position{this->getAreaPosition() + static_cast<sf::Vector2f>(sf::Vector2i{indent, indent})};
-	position = {std::round(position.x + 1.0f), std::round(position.y)};
+	sf::Vector2f size{this->getAreaSize() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2 + 2, indent * 2 + 2})};
+	sf::Vector2f position{this->getAreaPosition() + static_cast<sf::Vector2f>(sf::Vector2i{indent + 1, indent + 1})};
     if (size.x > 0 && size.y > 0){
 		sf::Color color{HSVtoRGB(static_cast<float>(hue % 360))};
-		sf::Vertex frame[] {
-			{position, color},
-			{{position.x + size.x, position.y}, color},
-			{position + size, color},
-			{{position.x, position.y + size.y}, color},
-			{position, color},
-		};
+		
+		sf::RectangleShape rectangle{size};
+		rectangle.setPosition(position);
+		rectangle.setFillColor(sf::Color::Transparent);
+		rectangle.setOutlineThickness(1);
+		rectangle.setOutlineColor(color);
+	
+		renderTarget.draw(rectangle);
 		
 		sf::CircleShape circle{2, 4};
 		circle.setPosition(position + size * 0.5f - sf::Vector2f{2.0f, 2.0f});
 		circle.setFillColor(color);
-		
-		renderTarget.draw(frame, 5, sf::LinesStrip);
 		
 		renderTarget.draw(circle);
     }
