@@ -8,15 +8,15 @@ namespace ui {
 	class IDrawn : public IFlat {
 	protected:
 		sf::RenderTarget *renderTarget;
-		
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
-		
+
 		void copy(IDrawn* iDrawn);
 		
 	public:
 		IDrawn();
-		
-		void update() override;
+
+        void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+
+        void update() override;
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		

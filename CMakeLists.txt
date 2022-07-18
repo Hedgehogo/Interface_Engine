@@ -77,6 +77,8 @@ add_library(${PROJECT_NAME}
         iObject/iFlat/iLayer/movableBorder/layerWithMovableBorder.cpp iObject/iFlat/iLayer/movableBorder/layerWithMovableBorder.h
         iObject/iFlat/iLayer/movableBorder/interaction/event/movableBorderEvent.cpp iObject/iFlat/iLayer/movableBorder/interaction/event/movableBorderEvent.h
         iObject/iFlat/iLayer/renderTexture/layerWithRenderTexture.cpp iObject/iFlat/iLayer/renderTexture/layerWithRenderTexture.h
+        iObject/iFlat/iLayer/background/layerWithBackground.cpp
+        iObject/iFlat/iLayer/background/layerWithBackground.h
         iObject/iFlat/iInteractive/iInteractive.cpp iObject/iFlat/iInteractive/iInteractive.h
         iObject/iFlat/iInteractive/simple/interactiveSimple.cpp iObject/iFlat/iInteractive/simple/interactiveSimple.h
         iObject/iFlat/iInteractive/simple/button/button.cpp iObject/iFlat/iInteractive/simple/button/button.h

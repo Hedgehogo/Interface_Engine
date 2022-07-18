@@ -5,7 +5,10 @@ int main() {
 	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
 	//window.setFramerateLimit(60);
-	
+
+
+    sf::Texture textureGigachad;
+    textureGigachad.loadFromFile("gigachad.jpg");
 	sf::Texture texture;
 	texture.loadFromFile("image.png");
 	sf::Texture texture_2;
@@ -21,151 +24,153 @@ int main() {
 	ui::Character::setDebug(true);
 
 	ui::Interface interface {
-		new ui::LayerWithMovableBorder{
-			new ui::LayerWithBorderHorizontal{
-				{
-					new ui::FullColor{{22, 22, 22}},
-					new ui::LayerWithMovableBorder{
-						new ui::LayerWithConstRatio{
-							new ui::LayerWithAlternativeObject{
-								new ui::ButtonWithPanel{
-									new ui::Panel{
-										new ui::Text{
-											{
-												new ui::TextBlock{
-													L"это собственность Артёма"
-												},
-                                                new ui::ObjectTextBlock{
-                                                    new ui::Text{
-                                                        {
-                                                            new ui::TextBlock{
-                                                                L"fack\n"
-                                                            },
-                                                            new ui::InteractiveTextBlock{
-                                                                0,
-                                                                L"you"
-                                                            },
-                                                            new ui::ObjectTextBlock{
-                                                                new ui::ButtonWithPanel{
-                                                                    new ui::Panel{
-                                                                        new ui::DebugLayer{
-                                                                            /*new ui::FullColor {{0, 0, 255}}*/
-                                                                            new ui::Sprite{texture}
-                                                                        },
-                                                                        new ui::PointingHidePanelInteraction,
-                                                                        new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
-                                                                        new ui::Positioning2{ui::Location2::right, ui::Location2::left},
-                                                                    },
-                                                                    new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::Left},
-                                                                    new ui::Sprite{texture_2}
-                                                                },
-                                                                {50, 50},
-                                                                false
-                                                            }
-                                                        },
-                                                        new ui::FullColor{{255, 0, 0}},
-                                                        30,
-                                                        1.15,
-                                                        &font,
-                                                        sf::Color{255, 255, 0},
-                                                        sf::Color{200, 200, 200},
-                                                        sf::Color{200, 200, 200},
-                                                        ui::Text::Align::center
+        new ui::LayerWithBackground{
+            new ui::LayerWithMovableBorder{
+                new ui::LayerWithBorderHorizontal{
+                    {
+                        new ui::Empty,
+                        new ui::LayerWithMovableBorder{
+                            new ui::LayerWithConstRatio{
+                                new ui::LayerWithAlternativeObject{
+                                    new ui::ButtonWithPanel{
+                                        new ui::Panel{
+                                            new ui::Text{
+                                                {
+                                                    new ui::TextBlock{
+                                                        L"это собственность Артёма"
                                                     },
-                                                    {111, 111},
-                                                    false
-                                                }
-											},
-											new ui::RoundedRectangle{sf::Color(0xffffffff), 10},
-											14,
-											1.15,
-											&font,
-											sf::Color{10, 255, 0},
-											sf::Color{200, 200, 200},
-											sf::Color{200, 200, 200},
-											ui::Text::Align::center
-										},
-										new ui::ClickHidePanelInteraction{sf::Mouse::Button::Left},
-										new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
-										new ui::Positioning2{ui::Location2::right, ui::Location2::left},
-									},
-									new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::Left},
-									new ui::LayerWithRenderTexture{
-										new ui::Sprite{texture_2}
-									}
-								},
-								new ui::LayerWithBorderVertical{
-									new ui::Empty,
-									new ui::FullColor{sf::Color(0x9f6e5cff)}
-								},
-							},
-							new ui::FullColor{{22, 22, 22}},
-							new ui::FullColor{{22, 22, 22}},
-							1,
-							ui::Corner::DownLeft
-						},
-						new ui::Text{
-							{
-								new ui::TextBlock{
-									L"Box2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects move in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation. \nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine."
-								}
-							},
-							new ui::FullColor{sf::Color(0x9f6e5cff)},
-							14,
-							1.15,
-							&font,
-							sf::Color{10, 10, 0},
-							sf::Color{200, 200, 200},
-							sf::Color{200, 200, 200},
-							ui::Text::Align::center
-						},
-						false
-					},
-					new ui::FullColor{{22, 22, 22}}
-				},
-				std::vector<float>{
-					0.4,
-					0.6
-				}
-			},
-			new ui::LayerWithConstCenter{
-				new ui::LayerWithAlternativeObject{
-					new ui::LayerWithBorderHorizontal{
-						{
-							new ui::LayerWithAlternativeObject{
-								new ui::Sprite{texture_3},
-								new ui::Capsule{sf::Color(0x9f6e5cff)}
-							},
-							new ui::LayerWithAlternativeObject{
-								new ui::Sprite{texture_3},
-								new ui::Capsule{sf::Color(0x9f6e5cff)}
-							}
-						},
-						{   0.5}
-					},
-					new ui::LayerWithBorderVertical{
-						{
-							new ui::LayerWithBorderHorizontal{
-								{
-									new ui::Empty,
-									new ui::FullColor{sf::Color(0x9f6e5cff)},
-									new ui::Empty
-								},
-								std::vector<float>{
-									0.25,
-									0.75
-								}
-							},
-							new ui::Empty
-						}
-					}
-				},
-				new ui::FullColor{{22, 22, 22}},
-				2
-			},
-			false,
-			0.75
-		},
+                                                    new ui::ObjectTextBlock{
+                                                        new ui::Text{
+                                                            {
+                                                                new ui::TextBlock{
+                                                                    L"fack\n"
+                                                                },
+                                                                new ui::InteractiveTextBlock{
+                                                                    0,
+                                                                    L"you"
+                                                                },
+                                                                new ui::ObjectTextBlock{
+                                                                    new ui::ButtonWithPanel{
+                                                                        new ui::Panel{
+                                                                            new ui::DebugLayer{
+                                                                                new ui::Sprite{texture}
+                                                                            },
+                                                                            new ui::PointingHidePanelInteraction,
+                                                                            new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
+                                                                            new ui::Positioning2{ui::Location2::right, ui::Location2::left},
+                                                                        },
+                                                                        new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::Left},
+                                                                        new ui::Sprite{texture_2}
+                                                                    },
+                                                                    {50, 50},
+                                                                    false
+                                                                }
+                                                            },
+                                                            new ui::FullColor{{255, 0, 0}},
+                                                            30,
+                                                            1.15,
+                                                            &font,
+                                                            sf::Color{255, 255, 0},
+                                                            sf::Color{200, 200, 200},
+                                                            sf::Color{200, 200, 200},
+                                                            ui::Text::Align::center
+                                                        },
+                                                        {111, 111},
+                                                        false
+                                                    }
+                                                },
+                                                new ui::RoundedRectangle{sf::Color(0xffffffff), 10},
+                                                14,
+                                                1.15,
+                                                &font,
+                                                sf::Color{10, 255, 0},
+                                                sf::Color{200, 200, 200},
+                                                sf::Color{200, 200, 200},
+                                                ui::Text::Align::center
+                                            },
+                                            new ui::ClickHidePanelInteraction{sf::Mouse::Button::Left},
+                                            new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
+                                            new ui::Positioning2{ui::Location2::right, ui::Location2::left},
+                                        },
+                                        new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::Left},
+                                        new ui::LayerWithRenderTexture{
+                                            new ui::Sprite{texture_2}
+                                        }
+                                    },
+                                    new ui::LayerWithBorderVertical{
+                                        new ui::Empty,
+                                        new ui::FullColor{sf::Color(0x9f6e5cff)}
+                                    },
+                                },
+                                new ui::Empty,
+                                new ui::Empty,
+                                1,
+                                ui::Corner::DownLeft
+                            },
+                            new ui::Text{
+                                {
+                                    new ui::TextBlock{
+                                        L"Box2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects move in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation. \nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine."
+                                    }
+                                },
+                                new ui::FullColor{sf::Color(0x9f6e5cff)},
+                                14,
+                                1.15,
+                                &font,
+                                sf::Color{10, 10, 0},
+                                sf::Color{200, 200, 200},
+                                sf::Color{200, 200, 200},
+                                ui::Text::Align::center
+                            },
+                            false
+                        },
+                        new ui::Empty
+                    },
+                    std::vector<float>{
+                        0.4,
+                        0.6
+                    }
+                },
+                new ui::LayerWithConstCenter{
+                    new ui::LayerWithAlternativeObject{
+                        new ui::LayerWithBorderHorizontal{
+                            {
+                                new ui::LayerWithAlternativeObject{
+                                    new ui::Sprite{texture_3},
+                                    new ui::Capsule{sf::Color(0x9f6e5cff)}
+                                },
+                                new ui::LayerWithAlternativeObject{
+                                    new ui::Sprite{texture_3},
+                                    new ui::Capsule{sf::Color(0x9f6e5cff)}
+                                }
+                            },
+                            {   0.5}
+                        },
+                        new ui::LayerWithBorderVertical{
+                            {
+                                new ui::LayerWithBorderHorizontal{
+                                    {
+                                        new ui::Empty,
+                                        new ui::FullColor{sf::Color(0x9f6e5cff)},
+                                        new ui::Empty
+                                    },
+                                    std::vector<float>{
+                                        0.25,
+                                        0.75
+                                    }
+                                },
+                                new ui::Empty
+                            }
+                        }
+                    },
+                    new ui::Empty,
+                    2
+                },
+                false,
+                0.75
+            },
+            new ui::Sprite{textureGigachad}
+        },
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
 				ui::MouseLambdaInteraction::debug.copy()
@@ -175,7 +180,9 @@ int main() {
 	};
 	
 	interface.init();
-	
+    window.setSize(sf::Vector2u(interface.getNormalSize()));
+    interface.setSize(interface.getNormalSize());
+
 	sf::Clock clock;
 	while(window.isOpen()) {
 		
@@ -212,7 +219,7 @@ int main() {
 		window.clear();
 		interface.update(wheel);
 		interface.draw();
-		interface.drawDebug(window, 0, 2, 0, 90);
+		//interface.drawDebug(window, 0, 2, 0, 90);
 		window.display();
 	}
 }
