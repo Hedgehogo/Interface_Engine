@@ -2,19 +2,21 @@
 #include "interactionManager.h"
 
 ui::InteractionManager::InteractionManager() :
-	interactions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {}
+	interactions(), hidePanelInteractions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {}
 
 void ui::InteractionManager::addInteraction(IInteraction &interaction) {
-	addInteractions.push_back(&interaction);
+	if(interaction.getType() != InteractionType::hidePanel) {
+		addInteractions.push_back(&interaction);
+	} else {
+		hidePanelInteractions.push_back(&interaction);
+	}
 }
 
 void ui::InteractionManager::deleteInteraction(IInteraction &interaction) {
-	for(unsigned i = 0; i < interactions.size(); ++i) {
-		if(interactions[i] == &interaction) {
-			interactions.erase(interactions.cbegin() + i);
-			break;
-		}
-	}
+	if(auto iterator = std::find(interactions.begin(), interactions.end(), &interaction); iterator != interactions.end())
+		interactions.erase(iterator);
+	if(auto iterator = std::find(hidePanelInteractions.begin(), hidePanelInteractions.end(), &interaction); iterator != hidePanelInteractions.end())
+		hidePanelInteractions.erase(iterator);
 	deleteInteractions.push_back(&interaction);
 }
 
@@ -46,6 +48,9 @@ void ui::InteractionManager::update(sf::Vector2i mousePosition) {
 	}
 	addInteractions.clear();
 	for(auto interaction : interactions) {
+		interaction->update(mousePosition);
+	}
+	for(auto interaction : hidePanelInteractions) {
 		interaction->update(mousePosition);
 	}
 }

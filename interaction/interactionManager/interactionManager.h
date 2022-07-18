@@ -6,6 +6,7 @@ namespace ui {
 	class InteractionManager {
 	protected:
 		std::vector<IInteraction *> interactions;
+		std::vector<IInteraction *> hidePanelInteractions;
 		std::vector<IInteraction *> addInteractions;
 		std::vector<IInteraction *> deleteInteractions;
 		sf::Vector2i position;
