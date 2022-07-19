@@ -73,7 +73,7 @@ int main() {
                                                             sf::Color{255, 255, 0},
                                                             sf::Color{200, 200, 200},
                                                             sf::Color{200, 200, 200},
-                                                            ui::Text::Align::center
+                                                            ui::Text::Align::right
                                                         },
                                                         {111, 111},
                                                         false
@@ -86,7 +86,7 @@ int main() {
                                                 sf::Color{10, 255, 0},
                                                 sf::Color{200, 200, 200},
                                                 sf::Color{200, 200, 200},
-                                                ui::Text::Align::center
+                                                ui::Text::Align::left
                                             },
                                             new ui::ClickHidePanelInteraction{sf::Mouse::Button::Left},
                                             new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
@@ -169,7 +169,8 @@ int main() {
                 false,
                 0.75
             },
-            new ui::Sprite{textureGigachad}
+            new ui::Sprite{textureGigachad},
+            {100.f, 100.f}
         },
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
