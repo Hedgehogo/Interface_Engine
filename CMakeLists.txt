@@ -55,52 +55,52 @@ add_library(${PROJECT_NAME}
         interaction/interactionStack/interactionStack.cpp interaction/interactionStack/interactionStack.h
         iObject/iObject.cpp iObject/iObject.h
         iObject/layout/layout.cpp iObject/layout/layout.h
-        iObject/iFlat/iFlat.h
-        iObject/iFlat/iDrawn/iDrawn.cpp iObject/iFlat/iDrawn/iDrawn.h
-        iObject/iFlat/iLayer/iLayer.cpp iObject/iFlat/iLayer/iLayer.h
-        iObject/iFlat/iDrawn/fullColor/fullColor.cpp iObject/iFlat/iDrawn/fullColor/fullColor.h
-        iObject/iFlat/iDrawn/roundedRectangle/roundedRectangle.cpp iObject/iFlat/iDrawn/roundedRectangle/roundedRectangle.h
-        iObject/iFlat/iDrawn/capsule/capsule.cpp iObject/iFlat/iDrawn/capsule/capsule.h
-        iObject/iFlat/iDrawn/caption/caption.cpp iObject/iFlat/iDrawn/caption/caption.h
-        iObject/iFlat/iDrawn/sprite/sprite.cpp iObject/iFlat/iDrawn/sprite/sprite.h
-        iObject/iFlat/iDrawn/empty/empty.cpp iObject/iFlat/iDrawn/empty/empty.h
-        iObject/iFlat/iDrawn/bar/bar.cpp iObject/iFlat/iDrawn/bar/bar.h
-        iObject/iFlat/iLayer/border/layerWithBorder.cpp iObject/iFlat/iLayer/border/layerWithBorder.h
-        iObject/iFlat/iLayer/border/layerWithBorderHorizontal.cpp iObject/iFlat/iLayer/border/layerWithBorderHorizontal.h
-        iObject/iFlat/iLayer/border/layerWithBorderVertical.cpp iObject/iFlat/iLayer/border/layerWithBorderVertical.h
-        iObject/iFlat/iLayer/constRatio/layerWithConstRatio.cpp iObject/iFlat/iLayer/constRatio/layerWithConstRatio.h
-        iObject/iFlat/iLayer/constBezel/layerWithConstBezel.cpp iObject/iFlat/iLayer/constBezel/layerWithConstBezel.h
-        iObject/iFlat/iLayer/constBorder/layerWithConstBorder.cpp iObject/iFlat/iLayer/constBorder/layerWithConstBorder.h
-        iObject/iFlat/iLayer/constCenter/layerWithConstCenter.cpp iObject/iFlat/iLayer/constCenter/layerWithConstCenter.h
-        iObject/iFlat/iLayer/panel/layerWithPanel.cpp iObject/iFlat/iLayer/panel/layerWithPanel.h
-        iObject/iFlat/iLayer/alternativeObject/layerWithAlternativeObject.cpp iObject/iFlat/iLayer/alternativeObject/layerWithAlternativeObject.h
-        iObject/iFlat/iLayer/movableBorder/layerWithMovableBorder.cpp iObject/iFlat/iLayer/movableBorder/layerWithMovableBorder.h
-        iObject/iFlat/iLayer/movableBorder/interaction/event/movableBorderEvent.cpp iObject/iFlat/iLayer/movableBorder/interaction/event/movableBorderEvent.h
-        iObject/iFlat/iLayer/renderTexture/layerWithRenderTexture.cpp iObject/iFlat/iLayer/renderTexture/layerWithRenderTexture.h
-        iObject/iFlat/iLayer/background/layerWithBackground.cpp
-        iObject/iFlat/iLayer/background/layerWithBackground.h
-        iObject/iFlat/iInteractive/iInteractive.cpp iObject/iFlat/iInteractive/iInteractive.h
-        iObject/iFlat/iInteractive/simple/interactiveSimple.cpp iObject/iFlat/iInteractive/simple/interactiveSimple.h
-        iObject/iFlat/iInteractive/simple/button/button.cpp iObject/iFlat/iInteractive/simple/button/button.h
-        iObject/iFlat/iInteractive/simple/button/buttonWithIndex/buttonWithIndex.cpp iObject/iFlat/iInteractive/simple/button/buttonWithIndex/buttonWithIndex.h
-        iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/buttonWithPanel.cpp iObject/iFlat/iInteractive/simple/button/buttonWIthPanel/buttonWithPanel.h
-        iObject/iFlat/iInteractive/simple/slider/baseSlider.cpp iObject/iFlat/iInteractive/simple/slider/baseSlider.h
-        iObject/iFlat/iInteractive/simple/slider/slider/slider.cpp iObject/iFlat/iInteractive/simple/slider/slider/slider.h
-        iObject/iFlat/iInteractive/simple/slider/const/constSlider.cpp iObject/iFlat/iInteractive/simple/slider/const/constSlider.h
-        iObject/iFlat/iInteractive/simple/slider/interaction/slideEvent/sliderEvent.cpp iObject/iFlat/iInteractive/simple/slider/interaction/slideEvent/sliderEvent.h
-        iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.cpp iObject/iFlat/iInteractive/simple/slider/interaction/wheelEvent/sliderWheelEvent.h
-        iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.cpp iObject/iFlat/iInteractive/simple/slider/interaction/interaction/sliderInteraction.h
-        iObject/iFlat/iInteractive/text/text.cpp iObject/iFlat/iInteractive/text/text.h
-        iObject/iFlat/iInteractive/text/textVariables.h
-        iObject/iFlat/iInteractive/text/character/baseCharacter.cpp iObject/iFlat/iInteractive/text/character/baseCharacter.h
-        iObject/iFlat/iInteractive/text/character/simple/character.cpp iObject/iFlat/iInteractive/text/character/simple/character.h
-        iObject/iFlat/iInteractive/text/character/object/objectCharacter.cpp
-        iObject/iFlat/iInteractive/text/character/object/objectCharacter.h
-        iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/baseTextBlock.h
-        iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.cpp iObject/iFlat/iInteractive/text/textBlock/simple/textBlock.h
-        iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.cpp iObject/iFlat/iInteractive/text/textBlock/interactive/interactiveTextBlock.h
-        iObject/iFlat/iInteractive/text/textBlock/object/objectTextBlock.cpp
-        iObject/iFlat/iInteractive/text/textBlock/object/objectTextBlock.h
+        iObject/iUnscalable/iScalable/iScalable.h
+        iObject/iUnscalable/iScalable/iDrawable/iDrawable.cpp iObject/iUnscalable/iScalable/iDrawable/iDrawable.h
+        iObject/iUnscalable/iScalable/iLayer/iLayer.cpp iObject/iUnscalable/iScalable/iLayer/iLayer.h
+        iObject/iUnscalable/iScalable/iDrawable/fullColor/fullColor.cpp iObject/iUnscalable/iScalable/iDrawable/fullColor/fullColor.h
+        iObject/iUnscalable/iScalable/iDrawable/roundedRectangle/roundedRectangle.cpp iObject/iUnscalable/iScalable/iDrawable/roundedRectangle/roundedRectangle.h
+        iObject/iUnscalable/iScalable/iDrawable/capsule/capsule.cpp iObject/iUnscalable/iScalable/iDrawable/capsule/capsule.h
+        iObject/iUnscalable/iScalable/iDrawable/caption/caption.cpp iObject/iUnscalable/iScalable/iDrawable/caption/caption.h
+        iObject/iUnscalable/iScalable/iDrawable/sprite/sprite.cpp iObject/iUnscalable/iScalable/iDrawable/sprite/sprite.h
+        iObject/iUnscalable/iScalable/iDrawable/empty/empty.cpp iObject/iUnscalable/iScalable/iDrawable/empty/empty.h
+        iObject/iUnscalable/iScalable/iDrawable/bar/bar.cpp iObject/iUnscalable/iScalable/iDrawable/bar/bar.h
+        iObject/iUnscalable/iScalable/iLayer/border/layerWithBorder.cpp iObject/iUnscalable/iScalable/iLayer/border/layerWithBorder.h
+        iObject/iUnscalable/iScalable/iLayer/border/layerWithBorderHorizontal.cpp iObject/iUnscalable/iScalable/iLayer/border/layerWithBorderHorizontal.h
+        iObject/iUnscalable/iScalable/iLayer/border/layerWithBorderVertical.cpp iObject/iUnscalable/iScalable/iLayer/border/layerWithBorderVertical.h
+        iObject/iUnscalable/iScalable/iLayer/constRatio/layerWithConstRatio.cpp iObject/iUnscalable/iScalable/iLayer/constRatio/layerWithConstRatio.h
+        iObject/iUnscalable/iScalable/iLayer/constBezel/layerWithConstBezel.cpp iObject/iUnscalable/iScalable/iLayer/constBezel/layerWithConstBezel.h
+        iObject/iUnscalable/iScalable/iLayer/constBorder/layerWithConstBorder.cpp iObject/iUnscalable/iScalable/iLayer/constBorder/layerWithConstBorder.h
+        iObject/iUnscalable/iScalable/iLayer/constCenter/layerWithConstCenter.cpp iObject/iUnscalable/iScalable/iLayer/constCenter/layerWithConstCenter.h
+        iObject/iUnscalable/iScalable/iLayer/panel/layerWithPanel.cpp iObject/iUnscalable/iScalable/iLayer/panel/layerWithPanel.h
+        iObject/iUnscalable/iScalable/iLayer/alternativeObject/layerWithAlternativeObject.cpp iObject/iUnscalable/iScalable/iLayer/alternativeObject/layerWithAlternativeObject.h
+        iObject/iUnscalable/iScalable/iLayer/movableBorder/layerWithMovableBorder.cpp iObject/iUnscalable/iScalable/iLayer/movableBorder/layerWithMovableBorder.h
+        iObject/iUnscalable/iScalable/iLayer/movableBorder/interaction/event/movableBorderEvent.cpp iObject/iUnscalable/iScalable/iLayer/movableBorder/interaction/event/movableBorderEvent.h
+        iObject/iUnscalable/iScalable/iLayer/renderTexture/layerWithRenderTexture.cpp iObject/iUnscalable/iScalable/iLayer/renderTexture/layerWithRenderTexture.h
+        iObject/iUnscalable/iScalable/iLayer/background/layerWithBackground.cpp
+        iObject/iUnscalable/iScalable/iLayer/background/layerWithBackground.h
+        iObject/iUnscalable/iInteractive/iInteractive.cpp iObject/iUnscalable/iInteractive/iInteractive.h
+        iObject/iUnscalable/iScalable/interactiveSimple/interactiveSimple.cpp iObject/iUnscalable/iScalable/interactiveSimple/interactiveSimple.h
+        iObject/iUnscalable/iScalable/interactiveSimple/button/button.cpp iObject/iUnscalable/iScalable/interactiveSimple/button/button.h
+        iObject/iUnscalable/iScalable/interactiveSimple/button/buttonWithIndex/buttonWithIndex.cpp iObject/iUnscalable/iScalable/interactiveSimple/button/buttonWithIndex/buttonWithIndex.h
+        iObject/iUnscalable/iScalable/interactiveSimple/button/buttonWIthPanel/buttonWithPanel.cpp iObject/iUnscalable/iScalable/interactiveSimple/button/buttonWIthPanel/buttonWithPanel.h
+        iObject/iUnscalable/iScalable/interactiveSimple/slider/baseSlider.cpp iObject/iUnscalable/iScalable/interactiveSimple/slider/baseSlider.h
+        iObject/iUnscalable/iScalable/interactiveSimple/slider/slider/slider.cpp iObject/iUnscalable/iScalable/interactiveSimple/slider/slider/slider.h
+        iObject/iUnscalable/iScalable/interactiveSimple/slider/const/constSlider.cpp iObject/iUnscalable/iScalable/interactiveSimple/slider/const/constSlider.h
+        iObject/iUnscalable/iScalable/interactiveSimple/slider/interaction/slideEvent/sliderEvent.cpp iObject/iUnscalable/iScalable/interactiveSimple/slider/interaction/slideEvent/sliderEvent.h
+        iObject/iUnscalable/iScalable/interactiveSimple/slider/interaction/wheelEvent/sliderWheelEvent.cpp iObject/iUnscalable/iScalable/interactiveSimple/slider/interaction/wheelEvent/sliderWheelEvent.h
+        iObject/iUnscalable/iScalable/interactiveSimple/slider/interaction/interaction/sliderInteraction.cpp iObject/iUnscalable/iScalable/interactiveSimple/slider/interaction/interaction/sliderInteraction.h
+        iObject/iUnscalable/iInteractive/text/text.cpp iObject/iUnscalable/iInteractive/text/text.h
+        iObject/iUnscalable/iInteractive/text/textVariables.h
+        iObject/iUnscalable/iInteractive/text/character/baseCharacter.cpp iObject/iUnscalable/iInteractive/text/character/baseCharacter.h
+        iObject/iUnscalable/iInteractive/text/character/simple/character.cpp iObject/iUnscalable/iInteractive/text/character/simple/character.h
+        iObject/iUnscalable/iInteractive/text/character/object/objectCharacter.cpp
+        iObject/iUnscalable/iInteractive/text/character/object/objectCharacter.h
+        iObject/iUnscalable/iInteractive/text/textBlock/baseTextBlock.cpp iObject/iUnscalable/iInteractive/text/textBlock/baseTextBlock.h
+        iObject/iUnscalable/iInteractive/text/textBlock/simple/textBlock.cpp iObject/iUnscalable/iInteractive/text/textBlock/simple/textBlock.h
+        iObject/iUnscalable/iInteractive/text/textBlock/interactive/interactiveTextBlock.cpp iObject/iUnscalable/iInteractive/text/textBlock/interactive/interactiveTextBlock.h
+        iObject/iUnscalable/iInteractive/text/textBlock/object/objectTextBlock.cpp
+        iObject/iUnscalable/iInteractive/text/textBlock/object/objectTextBlock.h
         iObject/panel/panel/basePanel.cpp iObject/panel/panel/basePanel.h
         iObject/panel/panel/const/constPanel.cpp iObject/panel/panel/const/constPanel.h
         iObject/panel/panel/general/panel.cpp iObject/panel/panel/general/panel.h
@@ -115,7 +115,7 @@ add_library(${PROJECT_NAME}
         iObject/panel/panel/interaction/hide/click/clickHidePanelInteraction.cpp iObject/panel/panel/interaction/hide/click/clickHidePanelInteraction.h
         iObject/panel/panel/interaction/hide/pointing/pointingHidePanelInteraction.cpp iObject/panel/panel/interaction/hide/pointing/pointingHidePanelInteraction.h
         iObject/panel/panelManager/panelManager.cpp iObject/panel/panelManager/panelManager.h
-        iObject/iFlat/interface/interface.cpp iObject/iFlat/interface/interface.h
+        iObject/iUnscalable/iScalable/interface/interface.cpp iObject/iUnscalable/iScalable/interface/interface.h
         UI.h
         iObject/panel/panel/interaction/move/movePanelInteraction.cpp iObject/panel/panel/interaction/move/movePanelInteraction.h
         iObject/panel/panel/interaction/move/coefficient/coefficientMovePanelInteraction.cpp iObject/panel/panel/interaction/move/coefficient/coefficientMovePanelInteraction.h
@@ -123,7 +123,7 @@ add_library(${PROJECT_NAME}
         iObject/panel/panel/interaction/move/side/sideMovePanelInteraction.cpp iObject/panel/panel/interaction/move/side/sideMovePanelInteraction.h
         iObject/panel/panel/interaction/display/click/event/displayPanelEvent.cpp iObject/panel/panel/interaction/display/click/event/displayPanelEvent.h
         iObject/panel/panel/interaction/display/click/clickDisplayPanelInteraction.cpp iObject/panel/panel/interaction/display/click/clickDisplayPanelInteraction.h
-        debug/debugLayer.cpp debug/debugLayer.h)
+        debug/debugLayer.cpp debug/debugLayer.h iObject/iUnscalable/iUnscalable.h)
 
 
 set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")

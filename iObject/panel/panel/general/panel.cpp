@@ -2,10 +2,10 @@
 #include "../interaction/hide/hidePanelInteraction.h"
 #include "../interaction/move/dont/dontMovePanelInteraction.h"
 
-ui::Panel::Panel(IFlat *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
+ui::Panel::Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
 	BasePanel(object, sizing, positioning, displayed), hideInteraction(hideInteraction), moveInteraction(moveInteraction), interactionManager(nullptr) {}
 
-ui::Panel::Panel(ui::IFlat *object, ui::HidePanelInteraction *hideInteraction, ui::Sizing2 *sizing, ui::Positioning2 *positioning, bool displayed) :
+ui::Panel::Panel(ui::IScalable *object, ui::HidePanelInteraction *hideInteraction, ui::Sizing2 *sizing, ui::Positioning2 *positioning, bool displayed) :
 	Panel(object, hideInteraction, new DontMovePanelInteraction{}, sizing, positioning, displayed) {}
 
 void ui::Panel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {

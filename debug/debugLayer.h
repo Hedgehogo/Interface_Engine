@@ -1,10 +1,10 @@
 #pragma once
-#include "../iObject/iFlat/iLayer/iLayer.h"
+#include "../iObject/iUnscalable/iScalable/iLayer/iLayer.h"
 
 namespace ui {
 	class DebugLayer : public ILayer {
 	protected:
-		IFlat* object;
+		IScalable* object;
 		sf::RenderTarget* renderTarget;
 		bool active;
 		bool drawn;
@@ -12,7 +12,7 @@ namespace ui {
 		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
 	public:
-		DebugLayer(IFlat* object);
+		DebugLayer(IScalable* object);
 		
 		~DebugLayer() override;
 		

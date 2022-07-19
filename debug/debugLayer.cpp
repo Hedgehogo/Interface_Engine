@@ -2,7 +2,7 @@
 #include <cmath>
 
 namespace ui {
-	DebugLayer::DebugLayer(IFlat *object) :
+	DebugLayer::DebugLayer(IScalable *object) :
 		ILayer({}), object(object), renderTarget(nullptr), active(false), drawn(false) {}
 	
 	void DebugLayer::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {

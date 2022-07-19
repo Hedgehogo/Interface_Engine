@@ -17,9 +17,9 @@ namespace ui {
 		void copy(Panel* panel);
 		
 	public:
-		Panel(IFlat *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, Sizing2 *sizing, Positioning2 *positioning, bool displayed = false);
+		Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, Sizing2 *sizing, Positioning2 *positioning, bool displayed = false);
 		
-		Panel(IFlat *object, HidePanelInteraction *hideInteraction, Sizing2 *sizing, Positioning2 *positioning, bool displayed = false);
+		Panel(IScalable *object, HidePanelInteraction *hideInteraction, Sizing2 *sizing, Positioning2 *positioning, bool displayed = false);
 		
 		~Panel() override;
 		

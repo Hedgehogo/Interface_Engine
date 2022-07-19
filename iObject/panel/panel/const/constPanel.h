@@ -7,7 +7,7 @@ namespace ui {
 		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 	
 	public:
-		ConstPanel(IFlat *object, Sizing2* sizing, Positioning2* positioning, bool displayed = false);
+		ConstPanel(IScalable *object, Sizing2* sizing, Positioning2* positioning, bool displayed = false);
 		
 		bool isIndependent() override;
 		

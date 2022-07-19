@@ -2,7 +2,7 @@
 #include "../../panelManager/panelManager.h"
 
 namespace ui {
-	ConstPanel::ConstPanel(IFlat *object, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
+	ConstPanel::ConstPanel(IScalable *object, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
 		BasePanel(object, sizing, positioning, displayed) {}
 	
 	void ConstPanel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {

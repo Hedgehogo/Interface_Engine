@@ -2,7 +2,7 @@
 #include "../panelManager/panelManager.h"
 
 namespace ui {
-	BasePanel::BasePanel(IFlat *object, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
+	BasePanel::BasePanel(IScalable *object, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
 		Layout(), object(object), sizing(sizing), positioning(positioning),
 		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {}
 	

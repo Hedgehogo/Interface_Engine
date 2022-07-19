@@ -1,5 +1,5 @@
 #pragma once
-#include "../../iFlat/iFlat.h"
+#include "../../iUnscalable/iScalable/iScalable.h"
 #include "../../layout/layout.h"
 #include "../../../enums/enums.h"
 #include "../../../sizingAndPositioning/sizing2/general/sizing2.h"
@@ -8,7 +8,7 @@
 namespace ui {
 	class BasePanel : public Layout {
 	protected:
-		IFlat *object;
+		IScalable *object;
 		Sizing2* sizing;
 		Positioning2* positioning;
 		bool parentProcessed;
@@ -21,7 +21,7 @@ namespace ui {
 		void copy(BasePanel* panel);
 	
 	public:
-		BasePanel(IFlat *object, Sizing2* sizing, Positioning2* positioning, bool displayed = false);
+		BasePanel(IScalable *object, Sizing2* sizing, Positioning2* positioning, bool displayed = false);
 		
 		~BasePanel() override;
 		
