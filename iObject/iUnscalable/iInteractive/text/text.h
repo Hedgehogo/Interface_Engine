@@ -20,8 +20,6 @@ namespace ui {
     protected:
         sf::RenderTarget *renderTarget;
 
-        sf::Vector2f minSize{0, 0};
-
         Align align;
 
         uint size;

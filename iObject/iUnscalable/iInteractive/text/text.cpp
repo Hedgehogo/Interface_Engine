@@ -11,19 +11,7 @@ ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::IDrawable *backg
         textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
     }
 
-    float wordSizeX = 0;
 
-    for (ui::BaseCharacter *character : textCharacters) {
-        if (character->isSpecial() == BaseCharacter::Special::no){
-            wordSizeX += character->getAdvance();
-        }else{
-            if (minSize.x < wordSizeX)
-                minSize.x = wordSizeX;
-            wordSizeX = 0;
-        }
-    }
-    if (minSize.x < wordSizeX)
-        minSize.x = wordSizeX;
 }
 
 ui::Text::~Text() {
@@ -203,12 +191,29 @@ sf::Vector2f ui::Text::getAreaSize() {
 }
 
 sf::Vector2f ui::Text::getMinSize() {
+
+    sf::Vector2f minSize = {0, 0};
+    float wordSizeX = 0;
+
+    for (ui::BaseCharacter *character : textCharacters) {
+        if (character->isSpecial() == BaseCharacter::Special::no){
+            wordSizeX += character->getAdvance();
+        }else{
+            if (minSize.x < wordSizeX)
+                minSize.x = wordSizeX;
+            wordSizeX = 0;
+        }
+    }
+    if (minSize.x < wordSizeX)
+        minSize.x = wordSizeX;
+
     sf::Vector2f backgroundMinSize{background->getMinSize()};
     return sf::Vector2f{std::max(minSize.x, backgroundMinSize.x), std::max(minSize.y, backgroundMinSize.y)};
 }
 
 sf::Vector2f ui::Text::getNormalSize() {
     sf::Vector2f normalSize = background->getNormalSize();
+    sf::Vector2f minSize = getMinSize();
     return {std::max(normalSize.x, minSize.x), std::max(normalSize.y, minSize.y)};
 }
 

@@ -10,8 +10,10 @@ namespace ui {
     private:
         IObject* object;
         IDrawable* background;
+        sf::Vector2f offset;
+		
     public:
-        LayerWithBackground(IObject* object, IDrawable* background, sf::Vector2f minSize = {0, 0});
+        LayerWithBackground(IObject* object, IDrawable* background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
 
         void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 

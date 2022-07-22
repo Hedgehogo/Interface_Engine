@@ -1,7 +1,8 @@
 #include "layerWithBackground.h"
 
 namespace ui {
-    LayerWithBackground::LayerWithBackground(IObject *object, IDrawable *background, sf::Vector2f minSize) : ILayer(minSize), object(object), background(background) {}
+    LayerWithBackground::LayerWithBackground(IObject *object, IDrawable *background, sf::Vector2f offset, sf::Vector2f minSize) :
+		ILayer(minSize), object(object), background(background), offset(offset) {}
 
     void LayerWithBackground::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
         background->init(renderTarget, interactionStack, interactionManager, panelManager);
@@ -45,7 +46,7 @@ namespace ui {
         ILayer::resize(size, position);
 
         background->resize(size, position);
-        object->resize(size, position);
+        object->resize(size - offset * 2.f, position + offset);
     }
 
     void LayerWithBackground::update() {
@@ -58,7 +59,7 @@ namespace ui {
     }
 
     LayerWithBackground *LayerWithBackground::copy() {
-        return new LayerWithBackground(object->copy(), background->copy(), minimumSize);
+        return new LayerWithBackground(object->copy(), background->copy(), offset, minimumSize);
     }
 
     void LayerWithBackground::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
