@@ -3,6 +3,8 @@ project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
+add_definitions(-O2)
+
 file(GLOB_RECURSE src "lib/*.cpp" "lib/*.h")
 
 add_library(${PROJECT_NAME} ${src})
