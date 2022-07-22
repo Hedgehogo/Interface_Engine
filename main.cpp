@@ -1,9 +1,8 @@
 ﻿#include <iostream>
+#include <array>
 #include "UI.h"
 
-typedef unsigned long long ullint;
-
-template<ullint T>
+template<typename I, I T>
 float calculateMediumFPS(std::array<float, T> lastFPS) {
 	float sum = 0.0f;
 	for(const auto &fps: lastFPS) {
