@@ -7,7 +7,7 @@ void ui::BaseSlider::init(sf::RenderTarget &renderTarget, PanelManager &panelMan
 	dynamic_cast<SliderInteraction*>(interaction)->init(*interactionManager);
 }
 
-ui::BaseSlider::BaseSlider(ui::IDrawable *slider, ui::IDrawable *background, SliderInteraction* interaction) :
+ui::BaseSlider::BaseSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, SliderInteraction* interaction) :
 	Interactive_Simple(interaction), slider(slider), background(background), value(), position(), sliderSize(), moveZoneSize() {}
 
 void ui::BaseSlider::cutBackValue() {

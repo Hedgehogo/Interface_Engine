@@ -1,16 +1,16 @@
 #pragma once
 #include "../layout.h"
-#include "../../iUnscalable/iScalable/iDrawable/iDrawable.h"
+#include "../../iUnscalable/iScalable/onlyDrawable/onlyDrawable.h"
 
 namespace ui {
 	class LayoutWithBackground : public virtual Layout {
 	protected:
-		IDrawable* background;
+		OnlyDrawable* background;
 		
 	public:
 		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
-		explicit LayoutWithBackground(IDrawable* background);
+		explicit LayoutWithBackground(OnlyDrawable* background);
 		
 		~LayoutWithBackground() override;
 		

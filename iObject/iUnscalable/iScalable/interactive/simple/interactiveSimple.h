@@ -1,8 +1,8 @@
 #pragma once
-#include "../../../iInteractive/iInteractive.h"
+#include "../../../interactive/interactive.h"
 
 namespace ui {
-	class Interactive_Simple : public virtual IScalable, public IInteractive {
+	class Interactive_Simple : public virtual IScalable, public Interactive {
 	private:
 		bool interact;
 		bool oldInteract;

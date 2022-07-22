@@ -1,6 +1,6 @@
 #pragma once
 #include "../interactiveSimple.h"
-#include "../../../iDrawable/iDrawable.h"
+#include "../../../onlyDrawable/onlyDrawable.h"
 
 namespace ui {
 	class Button : public Interactive_Simple {

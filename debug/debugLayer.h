@@ -1,8 +1,8 @@
 #pragma once
-#include "../iObject/iUnscalable/iScalable/iLayer/iLayer.h"
+#include "../iObject/iUnscalable/iScalable/layer/layer.h"
 
 namespace ui {
-	class DebugLayer : public ILayer {
+	class DebugLayer : public Layer {
 	protected:
 		IScalable* object;
 		sf::RenderTarget* renderTarget;

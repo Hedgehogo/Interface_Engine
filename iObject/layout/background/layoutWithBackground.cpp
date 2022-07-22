@@ -1,7 +1,7 @@
 #include "layoutWithBackground.h"
 
 namespace ui {
-	LayoutWithBackground::LayoutWithBackground(IDrawable *background) : background(background) {}
+	LayoutWithBackground::LayoutWithBackground(OnlyDrawable *background) : background(background) {}
 	
 	void LayoutWithBackground::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 		background->init(renderTarget, interactionStack, interactionManager, panelManager);

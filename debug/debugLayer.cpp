@@ -3,7 +3,7 @@
 
 namespace ui {
 	DebugLayer::DebugLayer(IScalable *object) :
-		ILayer({}), object(object), renderTarget(nullptr), active(false), drawn(false) {}
+		Layer({}), object(object), renderTarget(nullptr), active(false), drawn(false) {}
 	
 	void DebugLayer::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 		object->init(renderTarget, interactionStack, interactionManager, panelManager);
@@ -21,7 +21,7 @@ namespace ui {
 	}
 	
 	void DebugLayer::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayer::resize(size, position);
+		Layer::resize(size, position);
 		object->resize(size, position);
 	}
 	

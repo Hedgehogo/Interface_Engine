@@ -1,9 +1,9 @@
 #include "slider.h"
 
-ui::Slider::Slider(ui::IDrawable *slider, ui::IDrawable *background, sf::Vector2f sliderScale, sf::Mouse::Button button, bool wheelHorizontal, ui::SliderWheelEvent::Sensitivity wheelRelativity, sf::Vector2f wheelSensitivity) :
+ui::Slider::Slider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, sf::Vector2f sliderScale, sf::Mouse::Button button, bool wheelHorizontal, ui::SliderWheelEvent::Sensitivity wheelRelativity, sf::Vector2f wheelSensitivity) :
 	BaseSlider(slider, background, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), scale(sliderScale) {}
 
-ui::Slider::Slider(ui::IDrawable *slider, ui::IDrawable *background, sf::Vector2i division, sf::Vector2f sliderScale, sf::Mouse::Button button, bool wheelHorizontal) :
+ui::Slider::Slider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, sf::Vector2i division, sf::Vector2f sliderScale, sf::Mouse::Button button, bool wheelHorizontal) :
 	BaseSlider(slider, background, new SliderInteraction{*this, button, division, wheelHorizontal}), scale(sliderScale) {}
 
 void ui::Slider::setScale(sf::Vector2f scale) {
@@ -23,7 +23,7 @@ sf::Vector2f ui::Slider::getMinSize() {
 	return minSize;
 }
 
-ui::Slider::Slider(ui::IDrawable *slider, ui::IDrawable *background, SliderInteraction *interaction, sf::Vector2f sliderScale) :
+ui::Slider::Slider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, SliderInteraction *interaction, sf::Vector2f sliderScale) :
 	BaseSlider(slider, background, interaction), scale(sliderScale) {}
 
 ui::Slider *ui::Slider::copy() {
