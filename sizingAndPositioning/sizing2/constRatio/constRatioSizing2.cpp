@@ -33,8 +33,8 @@ namespace ui {
 		return (horizontal ? sf::Vector2f{size, size / ratio} : sf::Vector2f{size * ratio, size});
 	}
 	
-	sf::Vector2f ConstRatioSizing2::getParentMinSize(sf::Vector2f objectMinSize) {
-		float size = (horizontal ? sizing->getParentMinSize(objectMinSize.x) : sizing->getParentMinSize(objectMinSize.y));
+	sf::Vector2f ConstRatioSizing2::getParentSize(sf::Vector2f objectSize) {
+		float size = (horizontal ? sizing->getParentSize(objectSize.x) : sizing->getParentSize(objectSize.y));
 		return (horizontal ? sf::Vector2f{size, size / ratio} : sf::Vector2f{size * ratio, size});
 	}
 	

@@ -5,22 +5,12 @@ namespace ui {
 	void LayerWithRenderTexture::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 		this->renderTarget = &renderTarget;
 		this->interactionManager = &interactionManager;
-		initObject(object, renderTexture, interactionStack, interactionManager, panelManager);
-	}
-	
-	void LayerWithRenderTexture::copy(LayerWithRenderTexture *layerWithRenderTexture) {
-		layerWithRenderTexture->renderTarget = this->renderTarget;
-		sf::Vector2u size = this->renderTexture.getSize();
-		layerWithRenderTexture->renderTexture.create(size.x, size.y);
+		object->init(renderTexture, interactionStack, interactionManager, panelManager);
 	}
 	
 	LayerWithRenderTexture::LayerWithRenderTexture(IScalable *object, bool optimize, sf::Vector2f minSize) :
-		ILayer(minSize), object(object), optimize(optimize), active(true), renderTarget(nullptr), interactionManager(nullptr) {
+		ILayer(minSize), LayoutWithObject(object), optimize(optimize), active(true), renderTarget(nullptr), interactionManager(nullptr) {
 		sprite.setScale({1, -1});
-	}
-	
-	LayerWithRenderTexture::~LayerWithRenderTexture() {
-		delete object;
 	}
 	
 	void LayerWithRenderTexture::draw() {
@@ -46,26 +36,23 @@ namespace ui {
 		object->resize(size, position);
 	}
 	
-	void LayerWithRenderTexture::update() {
-		object->update();
-	}
-	
 	bool LayerWithRenderTexture::updateInteractions(sf::Vector2f mousePosition) {
 		active = true;
 		return object->updateInteractions(mousePosition);
 	}
 	
 	sf::Vector2f LayerWithRenderTexture::getMinSize() {
-		sf::Vector2f objectMinSize{object->getMinSize()};
-		return {std::max(objectMinSize.x, minimumSize.x), std::max(objectMinSize.y, minimumSize.y)};
+		return max(object->getMinSize(), minimumSize);
 	}
 	
-	sf::Vector2f LayerWithRenderTexture::getNormalSize() {
-		return object->getNormalSize();
+	void LayerWithRenderTexture::copy(LayerWithRenderTexture *layerWithRenderTexture) {
+		layerWithRenderTexture->renderTarget = this->renderTarget;
+		sf::Vector2u size = this->renderTexture.getSize();
+		layerWithRenderTexture->renderTexture.create(size.x, size.y);
 	}
 	
 	LayerWithRenderTexture *LayerWithRenderTexture::copy() {
-		LayerWithRenderTexture* layerWithRenderTexture{new LayerWithRenderTexture{object->copy()}};
+		LayerWithRenderTexture* layerWithRenderTexture{new LayerWithRenderTexture{object->copy(), optimize}};
 		LayerWithRenderTexture::copy(layerWithRenderTexture);
 		return layerWithRenderTexture;
 	}

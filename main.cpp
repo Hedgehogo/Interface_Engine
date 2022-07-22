@@ -1,6 +1,17 @@
 ﻿#include <iostream>
 #include "UI.h"
 
+typedef unsigned long long ullint;
+
+template<ullint T>
+float calculateMediumFPS(std::array<float, T> lastFPS) {
+	float sum = 0.0f;
+	for(const auto &fps: lastFPS) {
+		sum += fps;
+	}
+	return sum / static_cast<float>(lastFPS.size());
+}
+
 int main() {
 	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
@@ -50,16 +61,18 @@ int main() {
                                                                     L"you"
                                                                 },
                                                                 new ui::ObjectTextBlock{
-                                                                    new ui::ButtonWithPanel{
-                                                                        new ui::Panel{
+                                                                    //new ui::ButtonWithPanel{
+																	new ui::LayerWithPanel{
+                                                                        //new ui::Panel{
+																		new ui::ConstPanel{
                                                                             new ui::DebugLayer{
                                                                                 new ui::Sprite{texture}
                                                                             },
-                                                                            new ui::PointingHidePanelInteraction,
+                                                                            //new ui::PointingHidePanelInteraction,
                                                                             new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
                                                                             new ui::Positioning2{ui::Location2::right, ui::Location2::left},
                                                                         },
-                                                                        new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::Left},
+                                                                        //new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::left},
                                                                         new ui::Sprite{texture_2}
                                                                     },
                                                                     {50, 50},
@@ -110,7 +123,7 @@ int main() {
                             new ui::Text{
                                 {
                                     new ui::TextBlock{
-                                        L"Box2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects move in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation. \nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine."
+                                        L"Box2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects moveSlider in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation. \nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine."
                                     }
                                 },
                                 new ui::FullColor{sf::Color(0x9f6e5cff)},
@@ -185,11 +198,15 @@ int main() {
     interface.setSize(interface.getNormalSize());
 
 	sf::Clock clock;
+	std::array<float, 500> lastFPS{};
+	
 	while(window.isOpen()) {
 		
-		float currentTime = clock.restart().asSeconds();
-        float fps = 1.f / currentTime;
-        window.setTitle(std::to_string(static_cast<int>(fps)));
+		lastFPS[0] = 1.f / clock.restart().asSeconds();
+		std::rotate(lastFPS.begin(), lastFPS.begin() + 1, lastFPS.end());
+		float mediumFPS = calculateMediumFPS(lastFPS);
+        window.setTitle(std::to_string(static_cast<int>(mediumFPS)));
+		clock.restart();
 		
 		sf::Event event{};
 		int wheel = 0;

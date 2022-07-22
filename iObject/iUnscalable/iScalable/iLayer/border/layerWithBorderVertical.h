@@ -2,16 +2,14 @@
 #include <vector>
 
 #include "../iLayer.h"
+#include "../../../../layout/objectsArray/layoutWithObjectsArray.h"
 #include "../../../../../interaction/interactionStack/interactionStack.h"
 #include "../../../../../interaction/interactionManager/interactionManager.h"
 
 namespace ui {
-	class LayerWithBorderVertical : public ILayer {
+	class LayerWithBorderVertical : public ILayer, public LayoutWithObjectsArray {
 	protected:
-		std::vector<IScalable *> objects;
 		std::vector<float> boundsVertical;
-		
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
 	public:
 		LayerWithBorderVertical(std::vector<IScalable *> objects, std::vector<float> boundsVertical, sf::Vector2f minSize = {0, 0});
@@ -20,10 +18,6 @@ namespace ui {
 		
 		LayerWithBorderVertical(IScalable *first, IScalable *second, float bound = 0.5f, sf::Vector2f minSize = {0, 0});
 		
-		~LayerWithBorderVertical() override;
-		
-		void draw() override;
-		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
@@ -31,8 +25,6 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
-		
-		void update() override;
 		
 		LayerWithBorderVertical* copy() override;
 		

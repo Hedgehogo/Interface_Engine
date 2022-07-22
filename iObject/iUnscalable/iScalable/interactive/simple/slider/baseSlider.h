@@ -1,5 +1,5 @@
 #pragma once
-#include "../../iDrawable/iDrawable.h"
+#include "../../../iDrawable/iDrawable.h"
 #include "../interactiveSimple.h"
 #include "interaction/interaction/sliderInteraction.h"
 
@@ -34,7 +34,7 @@ namespace ui {
 		
 		bool onSlider(sf::Vector2i mousePosition);
 		
-		void move(sf::Vector2i mouseOffset);
+		void moveSlider(sf::Vector2i mouseOffset);
 		
 		sf::Vector2f getAreaPosition() override;
 		

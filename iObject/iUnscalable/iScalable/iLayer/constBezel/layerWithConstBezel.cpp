@@ -1,13 +1,8 @@
 #include "layerWithConstBezel.h"
 
 namespace ui {
-	void LayerWithConstBezel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		initObject(object, renderTarget, interactionStack, interactionManager, panelManager);
-		initObject(bezel, renderTarget, interactionStack, interactionManager, panelManager);
-	}
-	
 	LayerWithConstBezel::LayerWithConstBezel(IScalable *object, IDrawable *bezel, float thickness, sf::Vector2f minSize) :
-		ILayer(minSize), object(object), bezel(bezel), thickness(thickness) {
+		ILayer(minSize), LayoutWithObject(object), bezel(bezel), thickness(thickness) {
 		sf::Vector2f minimumSize{object->getMinSize() + sf::Vector2f(thickness * 2.0f, thickness * 2.0f)};
 		if(this->minimumSize.x < minimumSize.x) {
 			this->minimumSize.x = minimumSize.x;
@@ -17,8 +12,12 @@ namespace ui {
 		}
 	}
 	
+	void LayerWithConstBezel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
+		bezel->init(renderTarget, interactionStack, interactionManager, panelManager);
+		object->init(renderTarget, interactionStack, interactionManager, panelManager);
+	}
+	
 	LayerWithConstBezel::~LayerWithConstBezel() {
-		delete object;
 		delete bezel;
 	}
 	
@@ -34,35 +33,28 @@ namespace ui {
 	}
 	
 	bool LayerWithConstBezel::updateInteractions(sf::Vector2f mousePosition) {
-		if((mousePosition.x >= position.x + thickness) && (mousePosition.x <= position.x + size.x - thickness) &&
-			(mousePosition.y >= position.y + thickness) && (mousePosition.y <= position.y + size.y - thickness)) {
+		if(object->inArea(mousePosition)) {
 			return object->updateInteractions(mousePosition);
 		}
-		return bezel->updateInteractions(mousePosition);
+		return false;
 	}
 	
 	sf::Vector2f LayerWithConstBezel::getMinSize() {
-		sf::Vector2f objectMinSize {object->getMinSize()};
-		sf::Vector2f bezelMinSize {bezel->getMinSize()};
-		return {std::max({objectMinSize.x + thickness * 2, bezelMinSize.x, minimumSize.x}), std::max({objectMinSize.y + thickness * 2, bezelMinSize.y, minimumSize.y})};
+		return max(object->getMinSize() + sf::Vector2f{thickness * 2, thickness * 2}, bezel->getMinSize(), minimumSize);
 	}
 	
 	sf::Vector2f LayerWithConstBezel::getNormalSize() {
-		sf::Vector2f objectNormalSize {object->getNormalSize()};
-		sf::Vector2f bezelMinSize {bezel->getMinSize()};
-		return {std::max(objectNormalSize.x + thickness * 2, bezelMinSize.x), std::max(objectNormalSize.y + thickness * 2, bezelMinSize.y)};
-	}
-	
-	void LayerWithConstBezel::update() {
-		object->update();
+		return max(object->getNormalSize() + sf::Vector2f{thickness * 2, thickness * 2}, bezel->getNormalSize());
 	}
 	
 	LayerWithConstBezel *LayerWithConstBezel::copy() {
-		return new LayerWithConstBezel{object->copy(), bezel->copy(), thickness};
+		LayerWithConstBezel* layerWithConstBezel{new LayerWithConstBezel{object->copy(), bezel->copy(), thickness}};
+		ILayer::copy(layerWithConstBezel);
+		return layerWithConstBezel;
 	}
 	
 	void LayerWithConstBezel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
         bezel->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-        object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+        object->drawDebug(renderTarget, indent, indentAddition, hue + hueOffset, hueOffset);
 	}
 }

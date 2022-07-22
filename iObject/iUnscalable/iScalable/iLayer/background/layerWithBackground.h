@@ -4,16 +4,16 @@
 
 #include "../iLayer.h"
 #include "../../iDrawable/iDrawable.h"
+#include "../../../../layout/object/layoutWithObject.h"
+#include "../../../../layout/background/layoutWithBackground.h"
 
 namespace ui {
-    class LayerWithBackground : public ILayer {
-    private:
-        IObject* object;
-        IDrawable* background;
+    class LayerWithBackground : public ILayer, public LayoutWithBackground, public LayoutWithObject {
+    protected:
         sf::Vector2f offset;
 		
     public:
-        LayerWithBackground(IObject* object, IDrawable* background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
+        LayerWithBackground(IScalable *object, IDrawable* background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
 
         void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 

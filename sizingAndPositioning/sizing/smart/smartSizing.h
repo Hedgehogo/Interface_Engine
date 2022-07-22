@@ -15,7 +15,7 @@ namespace ui {
 		
 		float findSize(float parentSize, float targetSize) override;
 		
-		float getParentMinSize(float objectMinSize) override;
+		float getParentSize(float objectSize) override;
 		
 		SmartSizing* copy() override;
 	};

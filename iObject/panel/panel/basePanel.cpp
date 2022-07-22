@@ -3,7 +3,7 @@
 
 namespace ui {
 	BasePanel::BasePanel(IScalable *object, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
-		Layout(), object(object), sizing(sizing), positioning(positioning),
+		LayoutWithObject(object), sizing(sizing), positioning(positioning),
 		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {}
 	
 	void BasePanel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
@@ -14,7 +14,6 @@ namespace ui {
 	}
 	
 	BasePanel::~BasePanel() {
-		delete object;
 		delete sizing;
 		delete positioning;
 	}
@@ -30,35 +29,28 @@ namespace ui {
 	}
 	
 	bool BasePanel::inPanel(sf::Vector2f pointPosition) {
-		return active &&
-			   pointPosition.x >= this->position.x && pointPosition.x <= this->position.x + this->size.x &&
-			   pointPosition.y >= this->position.y && pointPosition.y <= this->position.y + this->size.y;
+		return active && Layout::inArea(pointPosition);
 	}
 	
 	void BasePanel::setPosition(sf::Vector2f position) {
+		Layout::resize(this->size, position);
 		object->setPosition(position);
-		Layout::resize(size, position);
 	}
 	
 	void BasePanel::move(sf::Vector2f position) {
-		Layout::resize(size, position);
+		Layout::resize(this->size, this->position + position);
 		object->move(position);
 	}
 	
 	void BasePanel::setSize(sf::Vector2f size) {
-		Layout::resize(size, position);
+		Layout::resize(size, this->position);
 		object->setSize(size);
-	}
-	
-	void BasePanel::draw() {
-		object->draw();
 	}
 	
 	void BasePanel::resize(sf::Vector2f size, sf::Vector2f position) {
 		sf::Vector2f panelSize = (*sizing)(size);
 		sf::Vector2f panelPosition = (*positioning)(position, size, panelSize);
-		Layout::resize(panelSize, panelPosition);
-		object->resize(panelSize, panelPosition);
+		LayoutWithObject::resize(panelSize, panelPosition);
 	}
 	
 	void BasePanel::update() {
@@ -78,11 +70,11 @@ namespace ui {
 	}
 	
 	sf::Vector2f BasePanel::getMinSize() {
-		return sizing->getParentMinSize(object->getMinSize());
+		return sizing->getParentSize(object->getMinSize());
 	}
 	
 	sf::Vector2f BasePanel::getNormalSize() {
-		return object->getNormalSize();
+		return sizing->getParentSize(object->getNormalSize());
 	}
 	
 	void BasePanel::copy(BasePanel *panel) {

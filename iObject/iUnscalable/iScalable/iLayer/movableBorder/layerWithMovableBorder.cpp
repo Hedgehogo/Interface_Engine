@@ -3,21 +3,19 @@
 #include <algorithm>
 
 ui::LayerWithMovableBorder::LayerWithMovableBorder(ui::IScalable *firstObject, ui::IScalable *secondObject, bool isHorizontalBorder, float borderValue, int borderInteractionSize, sf::Vector2f minSize) :
-	ILayer(minSize), firstObject(firstObject), secondObject(secondObject),
+	ILayer(minSize), LayoutWithTwoObjects(firstObject, secondObject),
 	pressedInteraction(new MovableBorderEvent{*this},sf::Mouse::Button::Left),
 	Interactive_Simple(new OneButtonInteraction{new AddInteractionEvent {pressedInteraction},sf::Mouse::Button::Left}),
 	isHorizontalBorder(isHorizontalBorder), borderValue(borderValue), borderValueNow(borderValue), borderInteractionSize(borderInteractionSize) {}
 
-void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, PanelManager &panelManager) {
-    initObject(secondObject, renderTarget, *interactionStack, *interactionManager, panelManager);
-    initObject(firstObject, renderTarget, *interactionStack, *interactionManager, panelManager);
-    pressedInteraction.init(*interactionManager);
-    dynamic_cast<AddInteractionEvent*>(dynamic_cast<OneButtonInteraction*>(Interactive_Simple::interaction)->getEvent())->init(*interactionManager);
+void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, ui::InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::PanelManager &panelManager) {
+	IInteractive::init(renderTarget, interactionStack, interactionManager, panelManager);
+	LayoutWithTwoObjects::init(renderTarget, interactionStack, interactionManager, panelManager);
 }
 
-ui::LayerWithMovableBorder::~LayerWithMovableBorder() {
-    delete firstObject;
-    delete secondObject;
+void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, PanelManager &panelManager) {
+    pressedInteraction.init(*interactionManager);
+    dynamic_cast<AddInteractionEvent*>(dynamic_cast<OneButtonInteraction*>(Interactive_Simple::interaction)->getEvent())->init(*interactionManager);
 }
 
 float ui::LayerWithMovableBorder::getBorderValue() {
@@ -56,9 +54,31 @@ bool ui::LayerWithMovableBorder::getIsHorizontalBorder() {
 	return this->isHorizontalBorder;
 }
 
-void ui::LayerWithMovableBorder::draw() {
-    firstObject->draw();
-    secondObject->draw();
+void ui::LayerWithMovableBorder::update() {
+	Interactive_Simple::update();
+	LayoutWithTwoObjects::update();
+}
+
+bool ui::LayerWithMovableBorder::updateInteractions(sf::Vector2f mousePosition) {
+	if (!this->isInBorder(mousePosition)) {
+		if (this->isHorizontalBorder){
+			float splitPosition = this->position.x + this->size.x * this->borderValueNow;
+			if (splitPosition > mousePosition.x){
+				return firstObject->updateInteractions(mousePosition);
+			}
+			return secondObject->updateInteractions(mousePosition);
+		}
+		else{
+			float splitPosition = this->position.y + this->size.y * this->borderValueNow;
+			if (splitPosition > mousePosition.y){
+				return firstObject->updateInteractions(mousePosition);
+			}
+			return secondObject->updateInteractions(mousePosition);
+		}
+	} else {
+		Interactive_Simple::updateInteractions(mousePosition);
+	}
+	return true;
 }
 
 void ui::LayerWithMovableBorder::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -107,34 +127,6 @@ void ui::LayerWithMovableBorder::resize(sf::Vector2f size, sf::Vector2f position
     }
     firstObject->resize(firstObjectSize,position);
     secondObject->resize(secondObjectSize,secondPosition);
-}
-
-void ui::LayerWithMovableBorder::update() {
-	Interactive_Simple::update();
-	firstObject->update();
-	secondObject->update();
-}
-
-bool ui::LayerWithMovableBorder::updateInteractions(sf::Vector2f mousePosition) {
-    if (!this->isInBorder(mousePosition)) {
-        if (this->isHorizontalBorder){
-            float splitPosition = this->position.x + this->size.x * this->borderValueNow;
-            if (splitPosition > mousePosition.x){
-                return firstObject->updateInteractions(mousePosition);
-            }
-            return secondObject->updateInteractions(mousePosition);
-        }
-        else{
-            float splitPosition = this->position.y + this->size.y * this->borderValueNow;
-            if (splitPosition > mousePosition.y){
-                return firstObject->updateInteractions(mousePosition);
-            }
-            return secondObject->updateInteractions(mousePosition);
-        }
-    } else {
-		Interactive_Simple::updateInteractions(mousePosition);
-	}
-    return true;
 }
 
 sf::Vector2f ui::LayerWithMovableBorder::getMinSize() {

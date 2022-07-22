@@ -18,7 +18,7 @@ void ui::SliderEvent::stopPressed(sf::Vector2i) {}
 void ui::SliderEvent::whilePressed(sf::Vector2i mousePosition) {
 	sf::Vector2i mouseOffset{mousePosition.x - startMousePosition.x, mousePosition.y - startMousePosition.y};
 	slider->setValue(startValue);
-	slider->move(mouseOffset);
+	slider->moveSlider(mouseOffset);
 	slider->roundValueToDivision(division);
 }
 

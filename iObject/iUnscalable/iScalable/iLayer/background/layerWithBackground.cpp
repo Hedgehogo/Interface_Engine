@@ -1,8 +1,8 @@
 #include "layerWithBackground.h"
 
 namespace ui {
-    LayerWithBackground::LayerWithBackground(IObject *object, IDrawable *background, sf::Vector2f offset, sf::Vector2f minSize) :
-		ILayer(minSize), object(object), background(background), offset(offset) {}
+    LayerWithBackground::LayerWithBackground(IScalable *object, IDrawable *background, sf::Vector2f offset, sf::Vector2f minSize) :
+		ILayer(minSize), LayoutWithObject(object), LayoutWithBackground(background), offset(offset) {}
 
     void LayerWithBackground::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
         background->init(renderTarget, interactionStack, interactionManager, panelManager);
@@ -25,16 +25,11 @@ namespace ui {
     }
 
     sf::Vector2f LayerWithBackground::getMinSize() {
-        sf::Vector2f minSizeObject = object->getMinSize();
-        sf::Vector2f minSizeBackground = background->getMinSize();
-
-        return {std::max(minimumSize.x, std::max(minSizeObject.x, minSizeBackground.x)), std::max(minimumSize.y, std::max(minSizeObject.y, minSizeBackground.y))};
+        return max(object->getMinSize() + offset * 2.f, background->getMinSize(), minimumSize);
     }
 
     sf::Vector2f LayerWithBackground::getNormalSize() {
-        sf::Vector2f normalSizeObject = object->getNormalSize();
-        sf::Vector2f normalSizeBackground = background->getNormalSize();
-        return {std::max(normalSizeObject.x, normalSizeBackground.x), std::max(normalSizeObject.y, normalSizeBackground.y)};
+        return max(object->getNormalSize() + offset * 2.f, background->getNormalSize());
     }
 
     void LayerWithBackground::draw() {

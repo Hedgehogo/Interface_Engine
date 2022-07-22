@@ -1,25 +1,19 @@
 #pragma once
 #include "../iLayer.h"
 #include "../../../../panel/panel/const/constPanel.h"
+#include "../../../../layout/object/layoutWithObject.h"
 
 namespace ui {
-	class LayerWithPanel : public ILayer {
+	class LayerWithPanel : public ILayer, public LayoutWithObject {
 	protected:
-		IScalable* object;
 		ConstPanel* panel;
 		
+	public:
 		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
 		
-	public:
-		LayerWithPanel(IScalable* object, ConstPanel* panel, sf::Vector2f minSize = {});
+		LayerWithPanel(ConstPanel* panel, IScalable* object, sf::Vector2f minSize = {});
 		
 		~LayerWithPanel() override;
-		
-		void draw() override;
-		
-		void update() override;
-		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		

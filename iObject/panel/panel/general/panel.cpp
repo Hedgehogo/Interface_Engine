@@ -10,10 +10,10 @@ ui::Panel::Panel(ui::IScalable *object, ui::HidePanelInteraction *hideInteractio
 
 void ui::Panel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 	BasePanel::init(renderTarget, interactionStack, interactionManager, panelManager);
-	initObject(object, renderTarget, interactionStack, interactionManager, this->panelManager);
-	this->interactionManager = &interactionManager;
+	object->init(renderTarget, interactionStack, interactionManager, this->panelManager);
 	hideInteraction->init(*this, panelManager);
 	moveInteraction->init(*this, panelManager);
+	this->interactionManager = &interactionManager;
 }
 
 ui::Panel::~Panel() {

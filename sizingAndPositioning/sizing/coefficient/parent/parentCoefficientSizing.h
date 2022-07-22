@@ -14,7 +14,7 @@ namespace ui {
 		
 		float findSize(float parentSize, float) override;
 		
-		float getParentMinSize(float objectMinSize) override;
+		float getParentSize(float objectSize) override;
 		
 		ParentCoefficientSizing* copy() override;
 	};

@@ -27,7 +27,7 @@ namespace ui {
 		
 		sf::Vector2f findSize(sf::Vector2f parentSize) override;
 		
-		sf::Vector2f getParentMinSize(sf::Vector2f objectMinSize) override;
+		sf::Vector2f getParentSize(sf::Vector2f objectSize) override;
 		
 		Sizing2* copy() override;
 	};

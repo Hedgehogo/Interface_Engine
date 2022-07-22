@@ -2,9 +2,9 @@
 
 namespace ui {
 	enum class Side {
-		Up,
-		Down,
-		Right,
-		Left
+		up,
+		down,
+		right,
+		left
 	};
 }

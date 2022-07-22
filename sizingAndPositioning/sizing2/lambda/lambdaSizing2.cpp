@@ -14,8 +14,8 @@ namespace ui {
 		return sizing(parentSize, targetSize, normalSize);
 	}
 	
-	sf::Vector2f LambdaSizing2::getParentMinSize(sf::Vector2f objectMinSize) {
-		return minSize(objectMinSize);
+	sf::Vector2f LambdaSizing2::getParentSize(sf::Vector2f objectSize) {
+		return minSize(objectSize);
 	}
 	
 	void LambdaSizing2::copy(LambdaSizing2 *sizing2) {

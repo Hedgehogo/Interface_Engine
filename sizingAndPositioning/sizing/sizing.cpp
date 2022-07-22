@@ -1,6 +1,6 @@
 #include "sizing.h"
 
-float ui::Sizing::getParentMinSize(float) {
+float ui::Sizing::getParentSize(float objectSize) {
 	return 0;
 }
 

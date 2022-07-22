@@ -1,14 +1,13 @@
 #pragma once
+#include "../../layout/object/layoutWithObject.h"
 #include "../../iUnscalable/iScalable/iScalable.h"
-#include "../../layout/layout.h"
-#include "../../../enums/enums.h"
 #include "../../../sizingAndPositioning/sizing2/general/sizing2.h"
 #include "../../../sizingAndPositioning/positioning2/general/positioning2.h"
+#include "../../../enums/enums.h"
 
 namespace ui {
-	class BasePanel : public Layout {
+	class BasePanel : public LayoutWithObject {
 	protected:
-		IScalable *object;
 		Sizing2* sizing;
 		Positioning2* positioning;
 		bool parentProcessed;
@@ -16,11 +15,11 @@ namespace ui {
 		bool displayed;
 		bool active;
 		
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
-		
 		void copy(BasePanel* panel);
 	
 	public:
+		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		
 		BasePanel(IScalable *object, Sizing2* sizing, Positioning2* positioning, bool displayed = false);
 		
 		~BasePanel() override;
@@ -42,8 +41,6 @@ namespace ui {
 		void move(sf::Vector2f position) override;
 		
 		void setSize(sf::Vector2f size) override;
-		
-		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		

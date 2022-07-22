@@ -3,46 +3,28 @@
 #include <vector>
 
 namespace ui {
-	void LayerWithBorderVertical::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		for (auto& object : objects) {
-			initObject(object, renderTarget, interactionStack, interactionManager, panelManager);
-		}
-	}
-	
 	LayerWithBorderVertical::LayerWithBorderVertical(std::vector<IScalable *> objects, std::vector<float> boundsVertical, sf::Vector2f minSize) :
-		ILayer(minSize), objects(std::move(objects)), boundsVertical(std::move(boundsVertical))  {
+		ILayer(minSize), LayoutWithObjectsArray(std::move(objects)), boundsVertical(std::move(boundsVertical))  {
 		this->boundsVertical.insert(this->boundsVertical.begin(), 0.0f);
 		this->boundsVertical.push_back(1.0f);
 	}
 	
 	LayerWithBorderVertical::LayerWithBorderVertical(std::vector<IScalable *> objects, sf::Vector2f minSize) :
-		ILayer(minSize), objects(std::move(objects)), boundsVertical(this->objects.size() + 1, 1.0f) {
-		int count = this->objects.size();
-		for(int i = 0; i < count; ++i) {
+		ILayer(minSize), LayoutWithObjectsArray(std::move(objects)), boundsVertical(this->objects.size() + 1, 1.0f) {
+		auto count = this->objects.size();
+		for(unsigned long long i = 0; i < count; ++i) {
 			boundsVertical[i] = static_cast<float>(i) / static_cast<float>(count);
 		}
 	}
 	
 	LayerWithBorderVertical::LayerWithBorderVertical(IScalable *first, IScalable *second, float bound, sf::Vector2f minSize) :
-		ILayer(minSize), objects({first, second}), boundsVertical({0.f, bound, 1.f}) {}
-	
-	LayerWithBorderVertical::~LayerWithBorderVertical() {
-		for (auto& y : objects) {
-			delete y;
-		}
-	}
-	
-	void LayerWithBorderVertical::draw() {
-		for (auto& y : objects) {
-			y->draw();
-		}
-	}
+		ILayer(minSize), LayoutWithObjectsArray({first, second}), boundsVertical({0.f, bound, 1.f}) {}
 	
 	void LayerWithBorderVertical::resize(sf::Vector2f size, sf::Vector2f position) {
 		ILayer::resize(size, position);
 		sf::Vector2f coordinate{ 0, 0 };
 		sf::Vector2f objectSize{ size };
-		for (unsigned y = 0; y < objects.size(); ++y) {
+		for(unsigned y = 0; y < objects.size(); ++y) {
 			objectSize.y = size.y * (boundsVertical[y + 1] - boundsVertical[y]);
 			objects[y]->resize(objectSize, position + coordinate);
 			coordinate.y += objectSize.y;
@@ -54,9 +36,9 @@ namespace ui {
 		if(position.x < 0.0f || position.x > size.x || position.y < 0.0f || position.y > size.y) return false;
 		position.y = position.y / size.y;
 		
-		unsigned object{1};
-		while(position.y > boundsVertical[object]) ++object;
-		return objects[object - 1]->updateInteractions(mousePosition);
+		unsigned long long i{1};
+		while(position.y > boundsVertical[i]) ++i;
+		return objects[i - 1]->updateInteractions(mousePosition);
 	}
 	
 	sf::Vector2f LayerWithBorderVertical::getMinSize() {
@@ -69,10 +51,10 @@ namespace ui {
 		sf::Vector2f objectMinSize;
 		for (int i = 0; i < objectMinSizes.size(); ++i) {
 			objectMinSize = {objectMinSizes[i].x, objectMinSizes[i].y / (boundsVertical[i + 1] - boundsVertical[i])};
-			minSize = {std::max(objectMinSize.x, minSize.x), std::max(objectMinSize.y, minSize.y)};
+			minSize = max(objectMinSize, minSize);
 		}
 		
-		return {std::max(minSize.x, this->minimumSize.x), std::max(minSize.y, this->minimumSize.y)};
+		return max(minSize, this->minimumSize);
 	}
 	
 	sf::Vector2f LayerWithBorderVertical::getNormalSize() {
@@ -85,16 +67,10 @@ namespace ui {
 		sf::Vector2f objectNormalSize;
 		for (int i = 0; i < objectNormalSizes.size(); ++i) {
 			objectNormalSize = {objectNormalSizes[i].x, objectNormalSizes[i].y / (boundsVertical[i + 1] - boundsVertical[i])};
-			normalSize = {std::max(objectNormalSize.x, normalSize.x), std::max(objectNormalSize.y, normalSize.y)};
+			normalSize = max(objectNormalSize, normalSize);
 		}
 		
 		return normalSize;
-	}
-	
-	void LayerWithBorderVertical::update() {
-		for(IScalable* object : objects) {
-			object->update();
-		}
 	}
 	
 	LayerWithBorderVertical *LayerWithBorderVertical::copy() {

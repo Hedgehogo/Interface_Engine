@@ -7,7 +7,7 @@ namespace ui {
 	
 	void ConstPanel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
 		BasePanel::init(renderTarget, interactionStack, interactionManager, panelManager);
-		initObject(object, renderTarget, interactionStack, interactionManager, panelManager);
+		object->init(renderTarget, interactionStack, interactionManager, panelManager);
 		panelManager.displayPanel(this);
 	}
 	

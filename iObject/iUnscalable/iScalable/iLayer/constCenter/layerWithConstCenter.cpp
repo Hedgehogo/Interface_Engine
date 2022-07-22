@@ -2,17 +2,12 @@
 
 namespace ui {
 	void LayerWithConstCenter::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		initObject(object, renderTarget, interactionStack, interactionManager, panelManager);
-		initObject(background, renderTarget, interactionStack, interactionManager, panelManager);
+		object->init(renderTarget, interactionStack, interactionManager, panelManager);
+		background->init(renderTarget, interactionStack, interactionManager, panelManager);
 	}
 	
 	LayerWithConstCenter::LayerWithConstCenter(IScalable* object, IDrawable* background, float aspectRatio, sf::Vector2f minSize) :
-		ILayer(minSize), object(object), background(background), aspectRatio(aspectRatio), sizeOffset(0, 0) {}
-	
-	LayerWithConstCenter::~LayerWithConstCenter() {
-		delete object;
-		delete background;
-	}
+		ILayer(minSize), LayoutWithObject(object), LayoutWithBackground(background), aspectRatio(aspectRatio) {}
 	
 	void LayerWithConstCenter::setAspectRatio(float aspectRatio) {
 		this->aspectRatio = aspectRatio;
@@ -33,13 +28,11 @@ namespace ui {
 		} else {
 			size.y = size.x / aspectRatio;
 		}
-		sizeOffset = (this->size - size) / 2.0f;
-		object->resize(size, position + sizeOffset);
+		object->resize(size, position + (this->size - size) / 2.0f);
 	}
 	
 	bool LayerWithConstCenter::updateInteractions(sf::Vector2f mousePosition) {
-		if((mousePosition.x > position.x + sizeOffset.x) && (mousePosition.x < position.x + size.x - sizeOffset.x) &&
-			(mousePosition.y > position.y + sizeOffset.y) && (mousePosition.y < position.y + size.y - sizeOffset.y)) {
+		if(object->inArea(mousePosition)) {
 			return object->updateInteractions(mousePosition);
 		}
 		return background->updateInteractions(mousePosition);
@@ -47,30 +40,19 @@ namespace ui {
 	
 	sf::Vector2f LayerWithConstCenter::getMinSize() {
 		sf::Vector2f objectMinSize {object->getMinSize()};
-		sf::Vector2f backgroundMinSize {background->getMinSize()};
 		objectMinSize = sf::Vector2f{std::max(objectMinSize.x, objectMinSize.y * aspectRatio), std::max(objectMinSize.y, objectMinSize.x / aspectRatio)};
-		return {std::max({objectMinSize.x, backgroundMinSize.x, minimumSize.x}), std::max({objectMinSize.y, backgroundMinSize.y, minimumSize.y})};
+		return max(objectMinSize, background->getMinSize(), minimumSize);
 	}
 	
 	sf::Vector2f LayerWithConstCenter::getNormalSize() {
 		sf::Vector2f objectNormalSize {object->getNormalSize()};
-		sf::Vector2f backgroundNormalSize {background->getNormalSize()};
 		objectNormalSize = sf::Vector2f{std::max(objectNormalSize.x, objectNormalSize.y * aspectRatio), std::max(objectNormalSize.y, objectNormalSize.x / aspectRatio)};
-		return {std::max(objectNormalSize.x, backgroundNormalSize.x), std::max(objectNormalSize.y, backgroundNormalSize.y)};
-	}
-	
-	void LayerWithConstCenter::update() {
-		object->update();
-	}
-	
-	void LayerWithConstCenter::copy(LayerWithConstCenter *layerWithConstCenter) {
-		ILayer::copy(layerWithConstCenter);
-		layerWithConstCenter->sizeOffset = this->sizeOffset;
+		return max(objectNormalSize, background->getNormalSize());
 	}
 	
 	LayerWithConstCenter *LayerWithConstCenter::copy() {
 		LayerWithConstCenter* layerWithConstCenter{new LayerWithConstCenter{object->copy(), background->copy(), aspectRatio, minimumSize}};
-		LayerWithConstCenter::copy(layerWithConstCenter);
+		ILayer::copy(layerWithConstCenter);
 		return layerWithConstCenter;
 	}
 	

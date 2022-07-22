@@ -49,7 +49,7 @@ bool ui::BaseSlider::onSlider(sf::Vector2i mousePosition) {
 		   mouse.y > sliderPosition.y && mouse.y < sliderPosition.y + sliderSize.y;
 }
 
-void ui::BaseSlider::move(sf::Vector2i mouseOffset) {
+void ui::BaseSlider::moveSlider(sf::Vector2i mouseOffset) {
 	if(moveZoneSize.x != 0)
 		value.x += static_cast<float>(mouseOffset.x) / moveZoneSize.x;
 	if(moveZoneSize.y != 0)

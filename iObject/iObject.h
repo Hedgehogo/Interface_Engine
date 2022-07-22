@@ -54,4 +54,14 @@ namespace ui {
 		
 		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
 	};
+	
+	template<typename T>
+	sf::Vector2<T> max(const sf::Vector2<T>& first, const sf::Vector2<T>& second) {
+		return {std::max(first.x, second.x), std::max(first.y, second.y)};
+	}
+	
+	template<typename T>
+	sf::Vector2<T> max(const sf::Vector2<T>& first, const sf::Vector2<T>& second, const sf::Vector2f& third) {
+		return {std::max({first.x, second.x, third.x}), std::max({first.y, second.y, third.y})};
+	}
 }

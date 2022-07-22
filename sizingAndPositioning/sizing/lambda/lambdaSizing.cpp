@@ -11,8 +11,8 @@ namespace ui {
 		return sizing(parentSize, targetSize, normalSize);
 	}
 	
-	float LambdaSizing::getParentMinSize(float objectMinSize) {
-		return minSize(objectMinSize);
+	float LambdaSizing::getParentSize(float objectSize) {
+		return minSize(objectSize);
 	}
 	
 	void LambdaSizing::copy(LambdaSizing *lambdaSizing) {

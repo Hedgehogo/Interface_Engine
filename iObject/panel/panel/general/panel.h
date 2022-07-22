@@ -12,11 +12,11 @@ namespace ui {
 		HidePanelInteraction* hideInteraction;
 		MovePanelInteraction* moveInteraction;
 		
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
-		
 		void copy(Panel* panel);
 		
 	public:
+		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		
 		Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, Sizing2 *sizing, Positioning2 *positioning, bool displayed = false);
 		
 		Panel(IScalable *object, HidePanelInteraction *hideInteraction, Sizing2 *sizing, Positioning2 *positioning, bool displayed = false);

@@ -2,7 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "../textVariables.h"
 #include "../character/baseCharacter.h"
-#include "../../../iScalable/interactiveSimple/interactiveSimple.h"
+#include "../../../iScalable/interactive/simple/interactiveSimple.h"
 #include "../../../../../interaction/interactionStack/interactionStack.h"
 
 namespace ui {

@@ -2,15 +2,19 @@
 #include "bar.h"
 
 void ui::Bar::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-	initObject(background, renderTarget, interactionStack, interactionManager, panelManager);
-	initObject(strip, renderTarget, interactionStack, interactionManager, panelManager);
+	background->init(renderTarget, interactionStack, interactionManager, panelManager);
+	strip->init(renderTarget, interactionStack, interactionManager, panelManager);
 }
 
 ui::Bar::Bar(IDrawable *background, IDrawable *strip, float offset, bool horizontal) :
-	background(background), strip(strip), horizontal(horizontal), offset(offset), division(1.0f), value(0) {}
+	LayoutWithBackground(background), strip(strip), horizontal(horizontal), offset(offset), division(1.0f), value(0) {}
 
 ui::Bar::Bar(IDrawable *background, IDrawable *strip, int division, float offset, bool horizontal) :
-	background(background), strip(strip), horizontal(horizontal), offset(offset), division(division), value(0) {}
+	LayoutWithBackground(background), strip(strip), horizontal(horizontal), offset(offset), division(division), value(0) {}
+
+ui::Bar::~Bar() {
+	delete strip;
+}
 
 float ui::Bar::getValue() {
 	return value;
@@ -38,25 +42,31 @@ void ui::Bar::draw() {
 }
 
 void ui::Bar::resize(sf::Vector2f size, sf::Vector2f position) {
-	Layout::resize(size, position);
-	background->resize(size, position);
+	LayoutWithBackground::resize(size, position);
 	setValue(value);
 }
 
 sf::Vector2f ui::Bar::getMinSize() {
-	return strip->getMinSize();
+	sf::Vector2f stripMinSize{strip->getMinSize()};
+	(horizontal ? stripMinSize.x : stripMinSize.y) *= value;
+	return max(stripMinSize, background->getMinSize());
 }
 
 sf::Vector2f ui::Bar::getNormalSize() {
-	return strip->getNormalSize();
+	sf::Vector2f stripNormalSize{strip->getNormalSize()};
+	(horizontal ? stripNormalSize.x : stripNormalSize.y) *= value;
+	return max(stripNormalSize, background->getNormalSize());
+}
+
+void ui::Bar::copy(ui::Bar *bar) {
+	IDrawable::copy(bar);
+	Layout::copy(bar);
+	bar->value = this->value;
 }
 
 ui::Bar *ui::Bar::copy() {
 	Bar* bar {new Bar{background->copy(), strip->copy(), division, offset, horizontal}};
-	IDrawable::copy(bar);
-	Layout::copy(bar);
-	bar->value = this->value;
-	bar->resize(size, position);
+	Bar::copy(bar);
 	return bar;
 }
 

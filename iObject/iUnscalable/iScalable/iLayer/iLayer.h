@@ -1,11 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../../../../enums/enums.h"
 #include "../iScalable.h"
 #include "../../../layout/layout.h"
+#include "../../../../enums/enums.h"
 
 namespace ui {
-	class ILayer : public virtual IScalable, public Layout {
+	class ILayer : public virtual IScalable, public virtual Layout {
 	protected:
 		sf::Vector2f minimumSize;
 		

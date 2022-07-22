@@ -17,7 +17,7 @@ namespace ui {
 		
 		virtual sf::Vector2f findSize(sf::Vector2f parentSize) = 0;
 		
-		virtual sf::Vector2f getParentMinSize(sf::Vector2f objectMinSize) = 0;
+		virtual sf::Vector2f getParentSize(sf::Vector2f objectSize) = 0;
 		
 		virtual sf::Vector2f operator()(sf::Vector2f parentSize);
 		
