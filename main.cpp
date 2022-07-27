@@ -106,7 +106,10 @@ int main() {
                                         },
                                         new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::Left},
                                         new ui::LayerWithRenderTexture{
-                                            new ui::Sprite{texture_2}
+                                            new ui::Switch{
+                                                new ui::Sprite{texture_2},
+                                                new ui::Sprite{texture}
+                                            }
                                         }
                                     },
                                     new ui::LayerWithBorderVertical{

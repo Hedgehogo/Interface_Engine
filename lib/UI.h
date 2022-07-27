@@ -23,6 +23,7 @@
 #include "iObject/iUnscalable/iScalable/interactive/simple/button/button.h"
 #include "iObject/iUnscalable/iScalable/interactive/simple/button/buttonWithIndex/buttonWithIndex.h"
 #include "iObject/iUnscalable/iScalable/interactive/simple/button/buttonWIthPanel/buttonWithPanel.h"
+#include "iObject/iUnscalable/iScalable/interactive/simple/switch/switch.h"
 #include "iObject/iUnscalable/interactive/text/text.h"
 #include "iObject/iUnscalable/interactive/text/textBlock/simple/textBlock.h"
 #include "iObject/iUnscalable/interactive/text/textBlock/interactive/interactiveTextBlock.h"

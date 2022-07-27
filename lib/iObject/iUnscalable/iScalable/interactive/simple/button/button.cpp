@@ -32,12 +32,23 @@ namespace ui {
 	sf::Vector2f Button::getNormalSize() {
 		return background->getNormalSize();
 	}
-	
+
+    void Button::update() {
+        Interactive_Simple::update();
+        background->update();
+    }
+
+    bool Button::updateInteractions(sf::Vector2f mousePosition) {
+        bool backgroundUpdate = background->updateInteractions(mousePosition);
+        return Interactive_Simple::updateInteractions(mousePosition) || backgroundUpdate;
+    }
+
 	void Button::copy(Button *button) {
 		Interactive_Simple::copy(button);
 	}
-	
+
 	void Button::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
         background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
+
 }

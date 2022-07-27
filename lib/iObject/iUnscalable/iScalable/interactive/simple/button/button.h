@@ -10,12 +10,12 @@ namespace ui {
 		void copy(Button* button);
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) override;
-		
 		Button(IScalable *background, IInteraction* interaction);
-		
+
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) override;
+
 		~Button() override;
-		
+
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		sf::Vector2f getAreaPosition() override;
@@ -25,7 +25,11 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
-		
+
+        void update() override;
+
+        bool updateInteractions(sf::Vector2f mousePosition) override;
+
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 }
