@@ -1,6 +1,7 @@
 #pragma once
 #include "../layout.h"
 #include "../../iUnscalable/iScalable/onlyDrawable/onlyDrawable.h"
+#include "../../drawable/manager/drawManager.h"
 
 namespace ui {
 	class LayoutWithBackground : public virtual Layout {
@@ -8,13 +9,11 @@ namespace ui {
 		OnlyDrawable* background;
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		explicit LayoutWithBackground(OnlyDrawable* background);
 		
 		~LayoutWithBackground() override;
-		
-		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		

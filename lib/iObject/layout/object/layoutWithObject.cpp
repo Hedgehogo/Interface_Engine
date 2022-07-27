@@ -1,18 +1,15 @@
 #include "layoutWithObject.h"
+#include "../../drawable/manager/drawManager.h"
 
 namespace ui {
 	LayoutWithObject::LayoutWithObject(IScalable *object) : object(object) {}
 	
-	void LayoutWithObject::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		object->init(renderTarget, interactionStack, interactionManager, panelManager);
+	void LayoutWithObject::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayoutWithObject::~LayoutWithObject() {
 		delete object;
-	}
-	
-	void LayoutWithObject::draw() {
-		object->draw();
 	}
 	
 	void LayoutWithObject::resize(sf::Vector2f size, sf::Vector2f position) {

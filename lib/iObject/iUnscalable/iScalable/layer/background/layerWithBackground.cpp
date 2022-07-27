@@ -4,9 +4,9 @@ namespace ui {
     LayerWithBackground::LayerWithBackground(IScalable *object, OnlyDrawable *background, sf::Vector2f offset, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithObject(object), LayoutWithBackground(background), offset(offset) {}
 
-    void LayerWithBackground::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-        background->init(renderTarget, interactionStack, interactionManager, panelManager);
-        object->init(renderTarget, interactionStack, interactionManager, panelManager);
+    void LayerWithBackground::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		background->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+		object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
     }
 
     void LayerWithBackground::setPosition(sf::Vector2f position) {
@@ -30,11 +30,6 @@ namespace ui {
 
     sf::Vector2f LayerWithBackground::getNormalSize() {
         return max(object->getNormalSize() + offset * 2.f, background->getNormalSize());
-    }
-
-    void LayerWithBackground::draw() {
-        background->draw();
-        object->draw();
     }
 
     void LayerWithBackground::resize(sf::Vector2f size, sf::Vector2f position) {

@@ -1,9 +1,9 @@
 #include "layerWithConstCenter.h"
 
 namespace ui {
-	void LayerWithConstCenter::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		object->init(renderTarget, interactionStack, interactionManager, panelManager);
-		background->init(renderTarget, interactionStack, interactionManager, panelManager);
+	void LayerWithConstCenter::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+		background->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayerWithConstCenter::LayerWithConstCenter(IScalable* object, OnlyDrawable* background, float aspectRatio, sf::Vector2f minSize) :
@@ -12,11 +12,6 @@ namespace ui {
 	void LayerWithConstCenter::setAspectRatio(float aspectRatio) {
 		this->aspectRatio = aspectRatio;
 		this->resize(size, position);
-	}
-	
-	void LayerWithConstCenter::draw() {
-		background->draw();
-		object->draw();
 	}
 	
 	void LayerWithConstCenter::resize(sf::Vector2f size, sf::Vector2f position) {

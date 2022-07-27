@@ -1,21 +1,17 @@
 #include "layoutWithTwoObjects.h"
+#include "../../drawable/manager/drawManager.h"
 
 namespace ui {
 	LayoutWithTwoObjects::LayoutWithTwoObjects(IScalable *firstObject, IScalable *secondObject) : firstObject(firstObject), secondObject(secondObject) {}
 	
-	void LayoutWithTwoObjects::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		firstObject->init(renderTarget, interactionStack, interactionManager, panelManager);
-		secondObject->init(renderTarget, interactionStack, interactionManager, panelManager);
+	void LayoutWithTwoObjects::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		secondObject->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+		firstObject->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayoutWithTwoObjects::~LayoutWithTwoObjects() {
 		delete firstObject;
 		delete secondObject;
-	}
-	
-	void LayoutWithTwoObjects::draw() {
-		secondObject->draw();
-		firstObject->draw();
 	}
 	
 	void LayoutWithTwoObjects::update() {

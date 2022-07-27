@@ -2,7 +2,8 @@
 #include <SFML/Graphics.hpp>
 
 namespace ui {
-	void OnlyDrawable::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
+	void OnlyDrawable::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		drawManager.add(*this);
 		this->renderTarget = &renderTarget;
 	}
 	

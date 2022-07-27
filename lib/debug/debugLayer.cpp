@@ -1,12 +1,14 @@
 #include "debugLayer.h"
+#include "../iObject/drawable/manager/drawManager.h"
 #include <cmath>
 
 namespace ui {
 	DebugLayer::DebugLayer(IScalable *object) :
 		Layer({}), object(object), renderTarget(nullptr), active(false), drawn(false) {}
 	
-	void DebugLayer::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		object->init(renderTarget, interactionStack, interactionManager, panelManager);
+	void DebugLayer::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+		drawManager.add(*this);
 		this->renderTarget = &renderTarget;
 	}
 	
@@ -16,7 +18,6 @@ namespace ui {
 	
 	void DebugLayer::draw() {
 		drawn = true;
-		object->draw();
 		object->drawDebug(*renderTarget, 0, 2, 0, 72);
 	}
 	

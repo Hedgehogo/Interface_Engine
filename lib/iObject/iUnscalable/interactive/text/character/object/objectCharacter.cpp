@@ -35,9 +35,7 @@ namespace ui {
         return BaseCharacter::Special::no;
     }
 
-    void ObjectCharacter::draw() {
-        object->draw();
-    }
+    void ObjectCharacter::draw() {}
 
     ObjectCharacter::~ObjectCharacter() {
         delete object;

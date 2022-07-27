@@ -2,14 +2,14 @@
 #include "../iObject/iUnscalable/iScalable/layer/layer.h"
 
 namespace ui {
-	class DebugLayer : public Layer {
+	class DebugLayer : public Layer, public IDrawable {
 	protected:
 		IScalable* object;
 		sf::RenderTarget* renderTarget;
 		bool active;
 		bool drawn;
 		
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 	public:
 		DebugLayer(IScalable* object);

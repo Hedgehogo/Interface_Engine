@@ -3,9 +3,10 @@
 #include "../../../../layout/object/layoutWithObject.h"
 
 namespace ui {
-	class LayerWithRenderTexture : public Layer, public LayoutWithObject {
+	class LayerWithRenderTexture : public Layer, public LayoutWithObject, public IDrawable {
 	protected:
 		InteractionManager* interactionManager;
+		DrawManager drawManager;
 		sf::RenderTarget* renderTarget;
 		sf::RenderTexture renderTexture;
 		sf::Sprite sprite;
@@ -15,7 +16,7 @@ namespace ui {
 		void copy(LayerWithRenderTexture* layerWithRenderTexture);
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		LayerWithRenderTexture(IScalable* object, bool optimize = true, sf::Vector2f minSize = {});
 		

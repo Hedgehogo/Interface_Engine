@@ -3,16 +3,12 @@
 namespace ui {
 	LayoutWithBackground::LayoutWithBackground(OnlyDrawable *background) : background(background) {}
 	
-	void LayoutWithBackground::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		background->init(renderTarget, interactionStack, interactionManager, panelManager);
+	void LayoutWithBackground::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		background->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayoutWithBackground::~LayoutWithBackground() {
 		delete background;
-	}
-	
-	void LayoutWithBackground::draw() {
-		background->draw();
 	}
 	
 	void LayoutWithBackground::resize(sf::Vector2f size, sf::Vector2f position) {

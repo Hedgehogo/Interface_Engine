@@ -1,12 +1,13 @@
 #include "basePanel.h"
-#include "../panelManager/panelManager.h"
+#include "../manager/panelManager.h"
+#include "../../drawable/manager/drawManager.h"
 
 namespace ui {
 	BasePanel::BasePanel(IScalable *object, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
 		LayoutWithObject(object), sizing(sizing), positioning(positioning),
 		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {}
 	
-	void BasePanel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
+	void BasePanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
 		panelManager.addPanel(this);
 		sf::Vector2f objectNormalSize = object->getNormalSize();
 		sizing->init(renderTarget, objectNormalSize);
@@ -45,6 +46,10 @@ namespace ui {
 	void BasePanel::setSize(sf::Vector2f size) {
 		Layout::resize(size, this->position);
 		object->setSize(size);
+	}
+	
+	void BasePanel::draw() {
+		drawManager.draw();
 	}
 	
 	void BasePanel::resize(sf::Vector2f size, sf::Vector2f position) {

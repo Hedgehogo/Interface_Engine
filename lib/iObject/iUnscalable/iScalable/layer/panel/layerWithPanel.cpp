@@ -4,9 +4,9 @@ namespace ui {
 	LayerWithPanel::LayerWithPanel(ConstPanel* panel, IScalable* object, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithObject(object), panel(panel) {}
 	
-	void LayerWithPanel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		object->init(renderTarget, interactionStack, interactionManager, panelManager);
-		panel->init(renderTarget, interactionStack, interactionManager, panelManager);
+	void LayerWithPanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+		panel->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayerWithPanel::~LayerWithPanel() {

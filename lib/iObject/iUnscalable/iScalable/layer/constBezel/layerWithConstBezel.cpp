@@ -1,4 +1,5 @@
 #include "layerWithConstBezel.h"
+#include "../../../../drawable/manager/drawManager.h"
 
 namespace ui {
 	LayerWithConstBezel::LayerWithConstBezel(IScalable *object, OnlyDrawable *bezel, float thickness, sf::Vector2f minSize) :
@@ -12,24 +13,24 @@ namespace ui {
 		}
 	}
 	
-	void LayerWithConstBezel::init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-		bezel->init(renderTarget, interactionStack, interactionManager, panelManager);
-		object->init(renderTarget, interactionStack, interactionManager, panelManager);
+	void LayerWithConstBezel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		bezel->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+		object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayerWithConstBezel::~LayerWithConstBezel() {
 		delete bezel;
 	}
 	
-	void LayerWithConstBezel::draw() {
-		bezel->draw();
-		object->draw();
-	}
-	
 	void LayerWithConstBezel::resize(sf::Vector2f size, sf::Vector2f position) {
 		Layer::resize(size, position);
 		bezel->resize(size, position);
 		object->resize(size - sf::Vector2f(thickness * 2.0f, thickness * 2.0f), position + sf::Vector2f(thickness, thickness));
+	}
+	
+	void LayerWithConstBezel::update() {
+		object->update();
+		bezel->update();
 	}
 	
 	bool LayerWithConstBezel::updateInteractions(sf::Vector2f mousePosition) {

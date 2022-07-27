@@ -9,7 +9,7 @@
 #include "../../iScalable/onlyDrawable/fullColor/fullColor.h"
 
 namespace ui {
-	class Text : public Interactive, public IScalable {
+	class Text : public Interactive, public IScalable, public IDrawable {
     public:
         enum class Align{
             left,
@@ -31,7 +31,7 @@ namespace ui {
         std::vector<BaseTextBlock*> textBocks;
 
         ui::OnlyDrawable *background;
-        void init(sf::RenderTarget &renderTarget, PanelManager &panelManager);
+        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager);
 		
     public:
         Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background = new ui::FullColor(sf::Color::White),

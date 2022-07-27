@@ -1,12 +1,6 @@
 #include <cmath>
 #include "iObject.h"
 
-void ui::IObject::initObject(IObject *object, sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) {
-	if(object != nullptr) {
-		object->init(renderTarget, interactionStack, interactionManager, panelManager);
-	}
-}
-
 void ui::IObject::setPosition(sf::Vector2f position) {
 	resize(getAreaSize(), position);
 }

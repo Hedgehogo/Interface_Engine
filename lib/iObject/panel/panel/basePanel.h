@@ -6,10 +6,11 @@
 #include "../../../enums/enums.h"
 
 namespace ui {
-	class BasePanel : public LayoutWithObject {
+	class BasePanel : public LayoutWithObject, public IDrawable {
 	protected:
 		Sizing2* sizing;
 		Positioning2* positioning;
+		DrawManager drawManager;
 		bool parentProcessed;
 		bool oldDisplayed;
 		bool displayed;
@@ -18,7 +19,7 @@ namespace ui {
 		void copy(BasePanel* panel);
 	
 	public:
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		BasePanel(IScalable *object, Sizing2* sizing, Positioning2* positioning, bool displayed = false);
 		
@@ -41,6 +42,8 @@ namespace ui {
 		void move(sf::Vector2f position) override;
 		
 		void setSize(sf::Vector2f size) override;
+		
+		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		

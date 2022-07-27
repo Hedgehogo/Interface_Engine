@@ -1,6 +1,7 @@
 #pragma once
 #include "../basePanel.h"
-#include "../../panelManager/panelManager.h"
+#include "../../manager/panelManager.h"
+#include "../../../drawable/manager/drawManager.h"
 
 namespace ui {
 	class HidePanelInteraction;
@@ -15,7 +16,7 @@ namespace ui {
 		void copy(Panel* panel);
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, Sizing2 *sizing, Positioning2 *positioning, bool displayed = false);
 		

@@ -2,23 +2,24 @@
 
 #include <vector>
 #include "../iScalable.h"
-#include "../../../panel/panelManager/panelManager.h"
+#include "../../../panel/manager/panelManager.h"
 #include "../../../../interaction/interactionManager/interactionManager.h"
 #include "../../../../interaction/interactionStack/interactionStack.h"
 #include "../../../../interaction/event/wheel/wheelEvent.h"
 
 namespace ui {
-	class Interface : public IScalable {
+	class Interface : public IScalable, IDrawable {
 	protected:
 		sf::RenderWindow &window;
 		sf::RenderTarget *renderTarget;
-		InteractionStack* interactionStack;
+		DrawManager drawManager;
 		InteractionManager interactionManager;
+		InteractionStack* interactionStack;
 		PanelManager panelManager;
 		IScalable *object;
 		bool initialized;
 		
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		bool isInWindow(sf::Vector2f position);
 		

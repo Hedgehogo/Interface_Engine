@@ -1,12 +1,13 @@
 #include "interface.h"
+#include "../../../drawable/manager/drawManager.h"
 #include <utility>
 #include <iostream>
 
 namespace ui {
-	void Interface::init(sf::RenderTarget &renderTarget, InteractionStack &, InteractionManager &, PanelManager &) {
+	void Interface::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &, InteractionStack &, PanelManager &) {
 		if(!initialized) {
 			this->renderTarget = &renderTarget;
-			initObject(object, renderTarget, *this->interactionStack, this->interactionManager, this->panelManager);
+			object->init(renderTarget, this->drawManager, this->interactionManager, *this->interactionStack, this->panelManager);
 			initialized = true;
 		}
 	}
@@ -14,7 +15,7 @@ namespace ui {
 	void Interface::init() {
 		if(!initialized) {
             sf::Vector2f windowSize = static_cast<sf::Vector2f>(window.getSize());
-			initObject(object, window, *interactionStack, interactionManager, panelManager);
+			object->init(window, drawManager, interactionManager, *interactionStack, panelManager);
             sf::Vector2f minSize = object->getMinSize();
             sf::Vector2f size (std::max(windowSize.x,minSize.x), std::max(windowSize.y,minSize.y));
 			window.setSize(static_cast<sf::Vector2u>(size));
@@ -35,7 +36,7 @@ namespace ui {
 	}
 	
 	void Interface::draw() {
-		object->draw();
+		drawManager.draw();
 		panelManager.draw();
 	}
 	

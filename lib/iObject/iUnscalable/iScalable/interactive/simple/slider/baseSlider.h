@@ -4,7 +4,7 @@
 #include "interaction/interaction/sliderInteraction.h"
 
 namespace ui {
-	class BaseSlider : public Interactive_Simple {
+	class BaseSlider : public Interactive_Simple, public IDrawable {
 	protected:
 		OnlyDrawable* slider;
 		OnlyDrawable* background;
@@ -13,7 +13,7 @@ namespace ui {
 		sf::Vector2f sliderSize;
 		sf::Vector2f moveZoneSize;
 		
-		void init(sf::RenderTarget &renderTarget, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) override;
 		
 		void cutBackValue();
 		

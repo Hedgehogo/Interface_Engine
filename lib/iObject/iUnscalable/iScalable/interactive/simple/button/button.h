@@ -10,13 +10,11 @@ namespace ui {
 		void copy(Button* button);
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) override;
 		
 		Button(IScalable *background, IInteraction* interaction);
 		
 		~Button() override;
-		
-		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		

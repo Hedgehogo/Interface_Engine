@@ -14,7 +14,7 @@ namespace ui {
 	protected:
 		Panel *panel;
 		
-		void init(sf::RenderTarget &renderTarget, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) override;
 		
 	public:
 		ButtonWithPanel(Panel *panel, DisplayPanelInteraction* interaction, IScalable *background);

@@ -3,8 +3,8 @@
 ui::ObjectTextBlock::ObjectTextBlock(ui::IObject* object, sf::Vector2f size, bool isCharacter) : BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), object(object), isCharacter(isCharacter) {
 }
 
-void ui::ObjectTextBlock::init(sf::RenderTarget &renderTarget, ui::InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::PanelManager &panelManager) {
-    object->init(renderTarget, interactionStack, interactionManager, panelManager);
+void ui::ObjectTextBlock::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
     sf::Vector2f minSize{object->getMinSize()};
     object->setSize({std::max(size.x, minSize.x), std::max(size.y, minSize.y)});
 }

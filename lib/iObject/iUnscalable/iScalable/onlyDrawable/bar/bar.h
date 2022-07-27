@@ -2,6 +2,7 @@
 #include "../onlyDrawable.h"
 #include "../empty/empty.h"
 #include "../../../../layout/background/layoutWithBackground.h"
+#include "../../../../drawable/manager/drawManager.h"
 
 namespace ui {
 	class Bar : public OnlyDrawable, public LayoutWithBackground {
@@ -15,7 +16,7 @@ namespace ui {
 		void copy(Bar* bar);
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		explicit Bar(OnlyDrawable* background, OnlyDrawable* strip, float offset = 0, bool horizontal = true);
 		

@@ -1,9 +1,15 @@
 #include "baseSlider.h"
 #include <cmath>
 
-void ui::BaseSlider::init(sf::RenderTarget &renderTarget, PanelManager &panelManager) {
-	initObject(background, renderTarget, *interactionStack, *interactionManager, panelManager);
-	initObject(slider, renderTarget, *interactionStack, *interactionManager, panelManager);
+void ui::BaseSlider::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) {
+	
+	background->draw();
+	slider->resize(sliderSize, position + sf::Vector2f(moveZoneSize.x * value.x, moveZoneSize.y * value.y));
+	slider->draw();
+	
+	background->init(renderTarget, drawManager, *interactionManager, *interactionStack, panelManager);
+	drawManager.add(*this);
+	slider->init(renderTarget, drawManager, *interactionManager, *interactionStack, panelManager);
 	dynamic_cast<SliderInteraction*>(interaction)->init(*interactionManager);
 }
 
@@ -58,9 +64,7 @@ void ui::BaseSlider::moveSlider(sf::Vector2i mouseOffset) {
 }
 
 void ui::BaseSlider::draw() {
-	background->draw();
 	slider->resize(sliderSize, position + sf::Vector2f(moveZoneSize.x * value.x, moveZoneSize.y * value.y));
-	slider->draw();
 }
 
 sf::Vector2f ui::BaseSlider::getAreaPosition() {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "drawable/manager/drawManager.h"
 #include "../interaction/interactionStack/interactionStack.h"
 #include "../interaction/interactionManager/interactionManager.h"
 
@@ -12,9 +13,7 @@ namespace ui {
 	
 	class IObject {
 	public:
-		virtual void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) = 0;
-		
-		void initObject(IObject *object, sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager);
+		virtual void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) = 0;
 		
 		virtual ~IObject() = default;
 		
@@ -39,8 +38,6 @@ namespace ui {
 		virtual bool inArea(sf::Vector2f pointPosition);
 		
 		virtual bool in(sf::Vector2f pointPosition);
-		
-		virtual void draw() = 0;
 		
 		virtual void resize(sf::Vector2f size, sf::Vector2f position) = 0;
 		

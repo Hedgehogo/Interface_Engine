@@ -2,8 +2,8 @@
 #include "button.h"
 
 namespace ui {
-	void Button::init(sf::RenderTarget &renderTarget, PanelManager &panelManager) {
-		initObject(background, renderTarget, *interactionStack, *interactionManager, panelManager);
+	void Button::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) {
+		background->init(renderTarget, drawManager, *interactionManager, *interactionStack, panelManager);
 	}
 	
 	Button::Button(IScalable *background, IInteraction* interaction) :
@@ -11,10 +11,6 @@ namespace ui {
 	
 	Button::~Button() {
 		delete background;
-	}
-	
-	void Button::draw() {
-		background->draw();
 	}
 	
 	void Button::resize(sf::Vector2f size, sf::Vector2f position) {

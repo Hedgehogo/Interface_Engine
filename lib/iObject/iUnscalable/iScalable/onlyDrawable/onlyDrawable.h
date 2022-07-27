@@ -2,10 +2,11 @@
 #include <SFML/Graphics.hpp>
 
 #include "../iScalable.h"
+#include "../../../drawable/drawable.h"
 #include "../../../../interaction/interactionStack/interactionStack.h"
 
 namespace ui {
-	class OnlyDrawable : public IScalable {
+	class OnlyDrawable : public IScalable, public IDrawable {
 	protected:
 		sf::RenderTarget *renderTarget;
 
@@ -14,7 +15,7 @@ namespace ui {
 	public:
 		OnlyDrawable();
 
-        void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 
         void update() override;
 		

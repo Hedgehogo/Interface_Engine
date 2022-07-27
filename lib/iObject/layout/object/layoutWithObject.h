@@ -8,13 +8,11 @@ namespace ui {
 		IScalable* object;
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, InteractionStack &interactionStack, InteractionManager &interactionManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		explicit LayoutWithObject(IScalable* object);
 		
 		~LayoutWithObject() override;
-		
-		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		

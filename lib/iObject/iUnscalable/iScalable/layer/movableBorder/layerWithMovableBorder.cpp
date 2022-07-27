@@ -1,5 +1,6 @@
 #include "layerWithMovableBorder.h"
 #include "../../../../../interaction/event/button/addInteraction/addInteractionEvent.h"
+#include "../../../../drawable/manager/drawManager.h"
 #include <algorithm>
 
 ui::LayerWithMovableBorder::LayerWithMovableBorder(ui::IScalable *firstObject, ui::IScalable *secondObject, bool isHorizontalBorder, float borderValue, int borderInteractionSize, sf::Vector2f minSize) :
@@ -8,12 +9,12 @@ ui::LayerWithMovableBorder::LayerWithMovableBorder(ui::IScalable *firstObject, u
 	Interactive_Simple(new OneButtonInteraction{new AddInteractionEvent {pressedInteraction},sf::Mouse::Button::Left}),
 	isHorizontalBorder(isHorizontalBorder), borderValue(borderValue), borderValueNow(borderValue), borderInteractionSize(borderInteractionSize) {}
 
-void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, ui::InteractionStack &interactionStack, ui::InteractionManager &interactionManager, ui::PanelManager &panelManager) {
-	Interactive::init(renderTarget, interactionStack, interactionManager, panelManager);
-	LayoutWithTwoObjects::init(renderTarget, interactionStack, interactionManager, panelManager);
+void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	Interactive::init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+	LayoutWithTwoObjects::init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
 }
 
-void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, PanelManager &panelManager) {
+void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) {
     pressedInteraction.init(*interactionManager);
     dynamic_cast<AddInteractionEvent*>(dynamic_cast<OneButtonInteraction*>(Interactive_Simple::interaction)->getEvent())->init(*interactionManager);
 }

@@ -24,12 +24,13 @@ ui::Text::~Text() {
     delete background;
 }
 
-void ui::Text::init(sf::RenderTarget &renderTarget, ui::PanelManager &panelManager) {
+void ui::Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) {
     this->renderTarget = &renderTarget;
+	background->init(renderTarget, drawManager, *interactionManager, *interactionStack, panelManager);
     for (BaseTextBlock * textBlock : textBocks) {
-        textBlock->init(renderTarget, *interactionStack, *interactionManager, panelManager);
+		textBlock->init(renderTarget, drawManager, *interactionManager, *interactionStack, panelManager);
     }
-    IObject::initObject(background, renderTarget, *interactionStack, *interactionManager, panelManager);
+	drawManager.add(*this);
 }
 
 void ui::Text::update() {
@@ -49,7 +50,6 @@ bool ui::Text::updateInteractions(sf::Vector2f mousePosition) {
 }
 
 void ui::Text::draw() {
-    background->draw();
     for (ui::BaseCharacter *character : textCharacters) {
         character->draw();
     }
