@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "drawable/manager/drawManager.h"
+#include "../drawable/manager/drawManager.h"
 #include "../interaction/interactionStack/interactionStack.h"
 #include "../interaction/interactionManager/interactionManager.h"
 

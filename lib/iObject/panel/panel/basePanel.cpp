@@ -1,6 +1,6 @@
 #include "basePanel.h"
 #include "../manager/panelManager.h"
-#include "../../drawable/manager/drawManager.h"
+#include "../../../drawable/manager/drawManager.h"
 
 namespace ui {
 	BasePanel::BasePanel(IScalable *object, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :

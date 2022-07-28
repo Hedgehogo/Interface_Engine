@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../iScalable.h"
-#include "../../../drawable/drawable.h"
+#include "../../../../drawable/iDrawable/iDrawable.h"
 #include "../../../../interaction/interactionStack/interactionStack.h"
 
 namespace ui {

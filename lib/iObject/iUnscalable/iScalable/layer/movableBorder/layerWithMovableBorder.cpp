@@ -1,6 +1,6 @@
 #include "layerWithMovableBorder.h"
 #include "../../../../../interaction/event/button/addInteraction/addInteractionEvent.h"
-#include "../../../../drawable/manager/drawManager.h"
+#include "../../../../../drawable/manager/drawManager.h"
 #include <algorithm>
 
 ui::LayerWithMovableBorder::LayerWithMovableBorder(ui::IScalable *firstObject, ui::IScalable *secondObject, bool isHorizontalBorder, float borderValue, int borderInteractionSize, sf::Vector2f minSize) :

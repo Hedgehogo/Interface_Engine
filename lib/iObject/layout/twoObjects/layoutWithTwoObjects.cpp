@@ -1,5 +1,5 @@
 #include "layoutWithTwoObjects.h"
-#include "../../drawable/manager/drawManager.h"
+#include "../../../drawable/manager/drawManager.h"
 
 namespace ui {
 	LayoutWithTwoObjects::LayoutWithTwoObjects(IScalable *firstObject, IScalable *secondObject) : firstObject(firstObject), secondObject(secondObject) {}

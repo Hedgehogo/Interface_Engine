@@ -9,7 +9,6 @@ file(GLOB_RECURSE src "lib/*.cpp" "lib/*.h")
 
 add_library(${PROJECT_NAME} ${src})
 
-
 set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")
 set(SFML_PATH_2 "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
 set(SFML_PATH_3 "\\home\\andrewkoro105\\SFML-2.5.1\\lib\\cmake\\SFML")
