@@ -9,12 +9,13 @@ ui::LayerWithMovableBorder::LayerWithMovableBorder(ui::IScalable *firstObject, u
 	Interactive_Simple(new OneButtonInteraction{new AddInteractionEvent {pressedInteraction},sf::Mouse::Button::Left}),
 	isHorizontalBorder(isHorizontalBorder), borderValue(borderValue), borderValueNow(borderValue), borderInteractionSize(borderInteractionSize) {}
 
-void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
-	Interactive::init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
-	LayoutWithTwoObjects::init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	Interactive::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+	LayoutWithTwoObjects::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 }
 
-void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) {
+void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
+	Interactive_Simple::init(renderTarget, drawManager, updateManager, panelManager);
     pressedInteraction.init(*interactionManager);
     dynamic_cast<AddInteractionEvent*>(dynamic_cast<OneButtonInteraction*>(Interactive_Simple::interaction)->getEvent())->init(*interactionManager);
 }
@@ -57,7 +58,6 @@ bool ui::LayerWithMovableBorder::getIsHorizontalBorder() {
 
 void ui::LayerWithMovableBorder::update() {
 	Interactive_Simple::update();
-	LayoutWithTwoObjects::update();
 }
 
 bool ui::LayerWithMovableBorder::updateInteractions(sf::Vector2f mousePosition) {

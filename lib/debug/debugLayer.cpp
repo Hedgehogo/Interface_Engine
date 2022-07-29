@@ -6,8 +6,8 @@ namespace ui {
 	DebugLayer::DebugLayer(IScalable *object) :
 		Layer({}), object(object), renderTarget(nullptr), active(false), drawn(false) {}
 	
-	void DebugLayer::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
-		object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+	void DebugLayer::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		drawManager.add(*this);
 		this->renderTarget = &renderTarget;
 	}
@@ -24,10 +24,6 @@ namespace ui {
 	void DebugLayer::resize(sf::Vector2f size, sf::Vector2f position) {
 		Layer::resize(size, position);
 		object->resize(size, position);
-	}
-	
-	void DebugLayer::update() {
-		object->update();
 	}
 	
 	bool DebugLayer::updateInteractions(sf::Vector2f mousePosition) {

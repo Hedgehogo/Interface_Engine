@@ -1,10 +1,10 @@
 #include "layerWithConstRatio.h"
 
 namespace ui {
-	void LayerWithConstRatio::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
-		background->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
-		firstObject->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
-		secondObject->init(renderTarget, secondDrawManager, interactionManager, interactionStack, panelManager);
+	void LayerWithConstRatio::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+		firstObject->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+		secondObject->init(renderTarget, secondDrawManager, updateManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayerWithConstRatio::LayerWithConstRatio(IScalable *constObject, IScalable *secondObject, OnlyDrawable* background, float aspectRatio, Corner corner, sf::Vector2f minSize) :

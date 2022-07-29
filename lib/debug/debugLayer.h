@@ -9,7 +9,7 @@ namespace ui {
 		bool active;
 		bool drawn;
 		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 	public:
 		DebugLayer(IScalable* object);
@@ -19,8 +19,6 @@ namespace ui {
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
-		
-		void update() override;
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		

@@ -1,9 +1,9 @@
 #include <cmath>
 #include "bar.h"
 
-void ui::Bar::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
-	background->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
-	strip->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+void ui::Bar::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+	strip->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 }
 
 ui::Bar::Bar(OnlyDrawable *background, OnlyDrawable *strip, float offset, bool horizontal) :

@@ -11,7 +11,7 @@ namespace ui {
 		float aspectRatio;
 	
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		LayerWithConstCenter(IScalable *object, OnlyDrawable *background, float aspectRatio, sf::Vector2f minSize = sf::Vector2f());
 		

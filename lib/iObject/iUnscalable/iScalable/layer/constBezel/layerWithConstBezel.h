@@ -13,7 +13,7 @@ namespace ui {
 		float thickness;
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		LayerWithConstBezel(IScalable *object, OnlyDrawable *bezel, float thickness, sf::Vector2f minSize = {0, 0});
 		
@@ -26,8 +26,6 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
-		
-		void update() override;
 		
 		LayerWithConstBezel* copy() override;
 		

@@ -12,7 +12,7 @@ namespace ui {
 		OnlyDrawable* background;
 		sf::Vector2f minimumSize;
 		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 	
 	public:
 		static void setDefaultColor(sf::Color color = sf::Color::White);

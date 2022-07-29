@@ -7,10 +7,11 @@ namespace ui{
     Switch::Switch(OnlyDrawable *inactiveBackground, OnlyDrawable *activeBackground, sf::Mouse::Button button, bool startActive) :
         Interactive_Simple(new OneButtonInteraction{new SwitchEvent{*this}, button}), activeBackground(activeBackground), inactiveBackground(inactiveBackground), active(startActive){}
 
-    void Switch::init(sf::RenderTarget &renderTarget, DrawManager& drawManager, PanelManager &panelManager) {
+    void Switch::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
+		Interactive_Simple::init(renderTarget, drawManager, updateManager, panelManager);
         drawManager.add(*this);
-        activeBackground->init(renderTarget, activeDrawManager, *interactionManager, *interactionStack, panelManager);
-        inactiveBackground->init(renderTarget, inactiveDrawManager, *interactionManager, *interactionStack, panelManager);
+		activeBackground->init(renderTarget, activeDrawManager, updateManager, *interactionManager, *interactionStack, panelManager);
+		inactiveBackground->init(renderTarget, inactiveDrawManager, updateManager, *interactionManager, *interactionStack, panelManager);
     }
 
     void Switch::switchValue() {

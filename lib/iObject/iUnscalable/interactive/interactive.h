@@ -9,12 +9,12 @@ namespace ui {
 		InteractionStack* interactionStack;
 		InteractionManager* interactionManager;
 		
-		virtual void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) = 0;
-		
 		void copy(Interactive* interactive);
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		
+		virtual void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) = 0;
 		
 		explicit Interactive();
 	};

@@ -12,7 +12,7 @@ namespace ui {
 	public:
 		Button(IScalable *background, IInteraction* interaction);
 
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) override;
 
 		~Button() override;
 
@@ -25,8 +25,6 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
-
-        void update() override;
 
         bool updateInteractions(sf::Vector2f mousePosition) override;
 

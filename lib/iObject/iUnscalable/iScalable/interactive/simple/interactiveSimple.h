@@ -2,7 +2,7 @@
 #include "../../../interactive/interactive.h"
 
 namespace ui {
-	class Interactive_Simple : public virtual IScalable, public Interactive {
+	class Interactive_Simple : public virtual IScalable, public Interactive, public IUpdatable {
 	private:
 		bool interact;
 		bool oldInteract;
@@ -14,6 +14,8 @@ namespace ui {
 		
 	public:
 		explicit Interactive_Simple(IInteraction* interaction);
+		
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) override;
 		
 		void update() override;
 		

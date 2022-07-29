@@ -149,17 +149,14 @@ int main() {
                 new ui::LayerWithConstCenter{
                     new ui::LayerWithAlternativeObject{
                         new ui::LayerWithBorderHorizontal{
-                            {
-                                new ui::LayerWithAlternativeObject{
-                                    new ui::Sprite{texture_3},
-                                    new ui::Capsule{sf::Color(0x9f6e5cff)}
-                                },
-                                new ui::LayerWithAlternativeObject{
-                                    new ui::Sprite{texture_3},
-                                    new ui::Capsule{sf::Color(0x9f6e5cff)}
-                                }
+                            new ui::LayerWithAlternativeObject{
+                                new ui::Sprite{texture_3},
+                                new ui::Capsule{sf::Color(0x9f6e5cff)}
                             },
-                            {   0.5}
+                            new ui::LayerWithAlternativeObject{
+                                new ui::Sprite{texture_3},
+                                new ui::Capsule{sf::Color(0x9f6e5cff)}
+                            }
                         },
                         new ui::LayerWithBorderVertical{
                             {
@@ -217,20 +214,15 @@ int main() {
 				window.close();
 			}
 			if(event.type == sf::Event::Resized) {
-				view.reset(sf::FloatRect(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize())));
 				sf::Vector2f minSize = interface.getMinSize();
 				sf::Vector2f windowSize{static_cast<float>(event.size.width), static_cast<float>(event.size.height)};
 				if(windowSize.x < minSize.x || windowSize.y < minSize.y) {
-					if(windowSize.x < minSize.x) {
-						windowSize.x = minSize.x;
-					}
-					if(windowSize.y < minSize.y) {
-						windowSize.y = minSize.y;
-					}
+					windowSize = ui::max(windowSize, minSize);
 					window.setSize(static_cast<sf::Vector2u>(windowSize));
 				}
+				view.reset({{}, windowSize});
 				window.setView(view);
-				interface.resize(windowSize,sf::Vector2f(0, 0));
+				interface.resize(windowSize, {});
 			}
 			if(event.type == sf::Event::MouseWheelMoved) {
 				wheel = event.mouseWheel.delta;

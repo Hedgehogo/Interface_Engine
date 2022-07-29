@@ -2,10 +2,10 @@
 #include <vector>
 
 namespace ui {
-	void LayerWithBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void LayerWithBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
 		for (auto& line : objects) {
 			for (auto& object : line) {
-				object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+				object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 			}
 		}
 	}
@@ -126,14 +126,6 @@ namespace ui {
 		}
 		
 		return normalSize;
-	}
-	
-	void LayerWithBorder::update() {
-		for(std::vector<IScalable*>& line : objects) {
-			for(IScalable* object : line) {
-				object->update();
-			}
-		}
 	}
 	
 	LayerWithBorder *LayerWithBorder::copy() {

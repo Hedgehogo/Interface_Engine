@@ -6,9 +6,9 @@ namespace ui {
 	ConstPanel::ConstPanel(IScalable *object, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
 		BasePanel(object, sizing, positioning, displayed) {}
 	
-	void ConstPanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
-		BasePanel::init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
-		object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+	void ConstPanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		BasePanel::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+		object->init(renderTarget, this->drawManager, this->updateManager, interactionManager, interactionStack, panelManager);
 		panelManager.displayPanel(this);
 	}
 	

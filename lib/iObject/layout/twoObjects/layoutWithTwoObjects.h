@@ -9,13 +9,11 @@ namespace ui {
 		IScalable* secondObject;
 	
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		explicit LayoutWithTwoObjects(IScalable* firstObject, IScalable* secondObject);
 		
 		~LayoutWithTwoObjects() override;
-		
-		void update() override;
 		
 		sf::Vector2f getMinSize() override;
 		

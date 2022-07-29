@@ -8,18 +8,19 @@
 #include "../../../../interaction/event/wheel/wheelEvent.h"
 
 namespace ui {
-	class Interface : public IScalable, IDrawable {
+	class Interface : public IScalable, public IDrawable, public IUpdatable {
 	protected:
 		sf::RenderWindow &window;
 		sf::RenderTarget *renderTarget;
 		DrawManager drawManager;
+		UpdateManager updateManager;
 		InteractionManager interactionManager;
 		InteractionStack* interactionStack;
 		PanelManager panelManager;
 		IScalable *object;
 		bool initialized;
 		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		bool isInWindow(sf::Vector2f position);
 		

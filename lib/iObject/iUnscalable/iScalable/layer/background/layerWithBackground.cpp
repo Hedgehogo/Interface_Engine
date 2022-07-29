@@ -4,9 +4,9 @@ namespace ui {
     LayerWithBackground::LayerWithBackground(IScalable *object, OnlyDrawable *background, sf::Vector2f offset, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithObject(object), LayoutWithBackground(background), offset(offset) {}
 
-    void LayerWithBackground::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
-		background->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
-		object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+    void LayerWithBackground::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
     }
 
     void LayerWithBackground::setPosition(sf::Vector2f position) {
@@ -37,11 +37,6 @@ namespace ui {
 
         background->resize(size, position);
         object->resize(size - offset * 2.f, position + offset);
-    }
-
-    void LayerWithBackground::update() {
-        background->update();
-        object->update();
     }
 
     bool LayerWithBackground::updateInteractions(sf::Vector2f mousePosition) {

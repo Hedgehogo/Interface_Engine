@@ -13,7 +13,7 @@ namespace ui {
 		bool renderSecond;
 		float aspectRatio;
 		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
 		void copy(LayerWithConstRatio* layerWithConstRatio);
 		

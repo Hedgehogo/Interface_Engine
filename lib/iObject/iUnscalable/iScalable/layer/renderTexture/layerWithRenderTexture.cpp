@@ -2,11 +2,11 @@
 #include <cmath>
 
 namespace ui {
-	void LayerWithRenderTexture::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void LayerWithRenderTexture::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
 		this->renderTarget = &renderTarget;
 		this->interactionManager = &interactionManager;
 		drawManager.add(*this);
-		object->init(renderTexture, this->drawManager, interactionManager, interactionStack, panelManager);
+		object->init(renderTexture, this->drawManager, updateManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayerWithRenderTexture::LayerWithRenderTexture(IScalable *object, bool optimize, sf::Vector2f minSize) :

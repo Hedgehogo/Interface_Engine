@@ -15,7 +15,7 @@ namespace ui {
     public:
         LayerWithBackground(IScalable *object, OnlyDrawable* background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
 
-        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 
         void setPosition(sf::Vector2f position);
 
@@ -28,8 +28,6 @@ namespace ui {
         sf::Vector2f getNormalSize() override;
 
         void resize(sf::Vector2f size, sf::Vector2f position) override;
-
-        void update() override;
 
         bool updateInteractions(sf::Vector2f mousePosition) override;
 

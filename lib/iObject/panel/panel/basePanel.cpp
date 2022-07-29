@@ -7,7 +7,7 @@ namespace ui {
 		LayoutWithObject(object), sizing(sizing), positioning(positioning),
 		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {}
 	
-	void BasePanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void BasePanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
 		panelManager.addPanel(this);
 		sf::Vector2f objectNormalSize = object->getNormalSize();
 		sizing->init(renderTarget, objectNormalSize);
@@ -61,7 +61,7 @@ namespace ui {
 	void BasePanel::update() {
 		oldDisplayed = displayed;
 		displayed = false;
-		object->update();
+		updateManager.update();
 	}
 	
 	bool BasePanel::updateInteractions(sf::Vector2f mousePosition) {

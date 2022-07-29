@@ -4,10 +4,12 @@
 #include <iostream>
 
 namespace ui {
-	void Interface::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &, InteractionStack &, PanelManager &) {
+	void Interface::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &, InteractionStack &, PanelManager &) {
 		if(!initialized) {
 			this->renderTarget = &renderTarget;
-			object->init(renderTarget, this->drawManager, this->interactionManager, *this->interactionStack, this->panelManager);
+			drawManager.add(*this);
+			updateManager.add(*this);
+			object->init(renderTarget, this->drawManager, this->updateManager, this->interactionManager, *this->interactionStack, this->panelManager);
 			initialized = true;
 		}
 	}
@@ -15,7 +17,7 @@ namespace ui {
 	void Interface::init() {
 		if(!initialized) {
             sf::Vector2f windowSize = static_cast<sf::Vector2f>(window.getSize());
-			object->init(window, drawManager, interactionManager, *interactionStack, panelManager);
+			object->init(window, drawManager, updateManager, interactionManager, *interactionStack, panelManager);
             sf::Vector2f minSize = object->getMinSize();
             sf::Vector2f size (std::max(windowSize.x,minSize.x), std::max(windowSize.y,minSize.y));
 			window.setSize(static_cast<sf::Vector2u>(size));
@@ -76,7 +78,7 @@ namespace ui {
 			}
 		}
 		panelManager.update();
-		object->update();
+		updateManager.update();
 		updateCluster(mousePosition);
 	}
 	

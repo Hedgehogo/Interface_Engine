@@ -24,11 +24,12 @@ ui::Text::~Text() {
     delete background;
 }
 
-void ui::Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) {
+void ui::Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
+	updateManager.add(*this);
     this->renderTarget = &renderTarget;
-	background->init(renderTarget, drawManager, *interactionManager, *interactionStack, panelManager);
+	background->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
     for (BaseTextBlock * textBlock : textBocks) {
-		textBlock->init(renderTarget, drawManager, *interactionManager, *interactionStack, panelManager);
+		textBlock->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
     }
 	drawManager.add(*this);
 }

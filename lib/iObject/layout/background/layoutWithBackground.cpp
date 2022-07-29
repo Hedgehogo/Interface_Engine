@@ -3,8 +3,8 @@
 namespace ui {
 	LayoutWithBackground::LayoutWithBackground(OnlyDrawable *background) : background(background) {}
 	
-	void LayoutWithBackground::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
-		background->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+	void LayoutWithBackground::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayoutWithBackground::~LayoutWithBackground() {

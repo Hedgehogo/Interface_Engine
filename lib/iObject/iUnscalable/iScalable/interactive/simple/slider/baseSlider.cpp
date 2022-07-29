@@ -1,15 +1,11 @@
 #include "baseSlider.h"
 #include <cmath>
 
-void ui::BaseSlider::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) {
-	
-	background->draw();
-	slider->resize(sliderSize, position + sf::Vector2f(moveZoneSize.x * value.x, moveZoneSize.y * value.y));
-	slider->draw();
-	
-	background->init(renderTarget, drawManager, *interactionManager, *interactionStack, panelManager);
+void ui::BaseSlider::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
+	Interactive_Simple::init(renderTarget, drawManager, updateManager, panelManager);
 	drawManager.add(*this);
-	slider->init(renderTarget, drawManager, *interactionManager, *interactionStack, panelManager);
+	background->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
+	slider->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
 	dynamic_cast<SliderInteraction*>(interaction)->init(*interactionManager);
 }
 

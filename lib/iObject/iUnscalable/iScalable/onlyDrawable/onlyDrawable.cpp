@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 namespace ui {
-	void OnlyDrawable::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void OnlyDrawable::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
 		drawManager.add(*this);
 		this->renderTarget = &renderTarget;
 	}
@@ -12,8 +12,6 @@ namespace ui {
 	bool OnlyDrawable::updateInteractions(sf::Vector2f) {
 		return true;
 	}
-	
-	void OnlyDrawable::update() {}
 	
 	void OnlyDrawable::copy(OnlyDrawable *onlyDrawable) {
 		onlyDrawable->renderTarget = this->renderTarget;

@@ -19,7 +19,7 @@ namespace ui{
     public:
         Switch(OnlyDrawable *inactiveBackground, OnlyDrawable *activeBackground, sf::Mouse::Button button = sf::Mouse::Button::Left, bool startActive = false);
 
-        void init(sf::RenderTarget &renderTarget, DrawManager& drawManager, PanelManager &panelManager) override;
+        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) override;
 
         void switchValue();
 

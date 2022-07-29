@@ -2,8 +2,9 @@
 #include "button.h"
 
 namespace ui {
-	void Button::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, PanelManager &panelManager) {
-		background->init(renderTarget, drawManager, *interactionManager, *interactionStack, panelManager);
+	void Button::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
+		Interactive_Simple::init(renderTarget, drawManager, updateManager, panelManager);
+		background->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
 	}
 	
 	Button::Button(IScalable *background, IInteraction* interaction) :
@@ -32,11 +33,6 @@ namespace ui {
 	sf::Vector2f Button::getNormalSize() {
 		return background->getNormalSize();
 	}
-
-    void Button::update() {
-        Interactive_Simple::update();
-        background->update();
-    }
 
     bool Button::updateInteractions(sf::Vector2f mousePosition) {
         bool backgroundUpdate = background->updateInteractions(mousePosition);

@@ -4,19 +4,14 @@
 namespace ui {
 	LayoutWithTwoObjects::LayoutWithTwoObjects(IScalable *firstObject, IScalable *secondObject) : firstObject(firstObject), secondObject(secondObject) {}
 	
-	void LayoutWithTwoObjects::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
-		secondObject->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
-		firstObject->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+	void LayoutWithTwoObjects::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		secondObject->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+		firstObject->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayoutWithTwoObjects::~LayoutWithTwoObjects() {
 		delete firstObject;
 		delete secondObject;
-	}
-	
-	void LayoutWithTwoObjects::update() {
-		firstObject->update();
-		secondObject->update();
 	}
 	
 	sf::Vector2f LayoutWithTwoObjects::getMinSize() {

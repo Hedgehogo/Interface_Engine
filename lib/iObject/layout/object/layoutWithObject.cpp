@@ -4,8 +4,8 @@
 namespace ui {
 	LayoutWithObject::LayoutWithObject(IScalable *object) : object(object) {}
 	
-	void LayoutWithObject::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
-		object->init(renderTarget, drawManager, interactionManager, interactionStack, panelManager);
+	void LayoutWithObject::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayoutWithObject::~LayoutWithObject() {
@@ -15,10 +15,6 @@ namespace ui {
 	void LayoutWithObject::resize(sf::Vector2f size, sf::Vector2f position) {
 		Layout::resize(size, position);
 		object->resize(size, position);
-	}
-	
-	void LayoutWithObject::update() {
-		object->update();
 	}
 	
 	bool LayoutWithObject::updateInteractions(sf::Vector2f mousePosition) {

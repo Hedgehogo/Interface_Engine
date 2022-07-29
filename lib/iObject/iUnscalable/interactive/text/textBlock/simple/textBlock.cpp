@@ -13,7 +13,7 @@ ui::TextBlock::TextBlock(std::wstring text, sf::Color textColor, sf::Font *font,
 
 ui::TextBlock::TextBlock(std::wstring str, ui::TextVariables textVariables) : str(str), BaseTextBlock(textVariables) {}
 
-void ui::TextBlock::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+void ui::TextBlock::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
     for (BaseCharacter*& character : textCharacters) {
         character->init(renderTarget);
     }
