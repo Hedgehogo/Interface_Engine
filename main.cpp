@@ -188,11 +188,10 @@ int main() {
 			std::vector<ui::IInteraction *> {
 				ui::MouseLambdaInteraction::debug.copy()
 			}
-		},
-		window
+		}
 	};
 	
-	interface.init();
+	interface.init(window);
     window.setSize(sf::Vector2u(interface.getNormalSize()));
     interface.setSize(interface.getNormalSize());
 
@@ -208,7 +207,6 @@ int main() {
 		clock.restart();
 		
 		sf::Event event{};
-		int wheel = 0;
 		while(window.pollEvent(event)) {
 			if(event.type == sf::Event::Closed) {
 				window.close();
@@ -225,11 +223,11 @@ int main() {
 				interface.resize(windowSize, {});
 			}
 			if(event.type == sf::Event::MouseWheelMoved) {
-				wheel = event.mouseWheel.delta;
+				sf::Wheel::value = event.mouseWheel.delta;
 			}
 		}
 		window.clear();
-		interface.update(wheel);
+		interface.update(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window.getSystemHandle());
 		interface.draw();
 		//interface.drawDebug(window, 0, 2, 0, 90);
 		window.display();

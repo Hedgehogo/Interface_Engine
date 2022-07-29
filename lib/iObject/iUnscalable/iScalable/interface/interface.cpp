@@ -14,20 +14,18 @@ namespace ui {
 		}
 	}
 	
-	void Interface::init() {
+	void Interface::init(sf::RenderTarget &renderTarget) {
 		if(!initialized) {
-            sf::Vector2f windowSize = static_cast<sf::Vector2f>(window.getSize());
-			object->init(window, drawManager, updateManager, interactionManager, *interactionStack, panelManager);
-            sf::Vector2f minSize = object->getMinSize();
-            sf::Vector2f size (std::max(windowSize.x,minSize.x), std::max(windowSize.y,minSize.y));
-			window.setSize(static_cast<sf::Vector2u>(size));
+			this->renderTarget = &renderTarget;
+			object->init(renderTarget, drawManager, updateManager, interactionManager, *interactionStack, panelManager);
+            sf::Vector2f size (max(static_cast<sf::Vector2f>(renderTarget.getSize()), object->getMinSize()));
 			resize(size,sf::Vector2f(0, 0));
 			initialized = true;
 		}
 	}
 	
-	Interface::Interface(IScalable* object, InteractionStack *interactionStack, sf::RenderWindow &window) :
-		object(object), interactionStack(interactionStack), renderTarget(&window), window(window), interactionManager(), panelManager(), initialized(false) {}
+	Interface::Interface(IScalable* object, InteractionStack *interactionStack) :
+		object(object), interactionStack(interactionStack), renderTarget(nullptr), interactionManager(), panelManager(), initialized(false), active(true) {}
 	
 	Interface::~Interface() {
 		delete object;
@@ -44,10 +42,6 @@ namespace ui {
 	
 	void Interface::resize(sf::Vector2f size, sf::Vector2f position) {
 		object->resize(size, position);
-	}
-	
-	bool Interface::updateInteractions(sf::Vector2f) {
-		return false;
 	}
 	
 	sf::Vector2f Interface::getAreaPosition() {
@@ -71,25 +65,35 @@ namespace ui {
 	}
 	
 	void Interface::update() {
-		sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
-		if(isInWindow(mousePosition) && window.getSystemHandle() && !interactionManager.isBlocked()) {
+		panelManager.update();
+		updateManager.update();
+		updateCluster(mousePosition);
+		active = false;
+	}
+	
+	void Interface::update(sf::Vector2f mousePosition, bool active) {
+		if(active) {
+			this->updateInteractions(mousePosition);
+		} else {
+			this->mousePosition = mousePosition;
+		}
+		this->update();
+	}
+	
+	bool Interface::updateInteractions(sf::Vector2f mousePosition) {
+		active = true;
+		this->mousePosition = mousePosition;
+		if(isInWindow(mousePosition) && !interactionManager.isBlocked()) {
 			if(!panelManager.updateInteractions(mousePosition, true)) {
 				object->updateInteractions(mousePosition);
 			}
 		}
-		panelManager.update();
-		updateManager.update();
-		updateCluster(mousePosition);
-	}
-	
-	void Interface::update(int wheel) {
-		sf::Wheel::value = wheel;
-		update();
+		return true;
 	}
 	
 	Interface *Interface::copy() {
-		Interface* interface {new Interface{object->copy(), interactionStack, window}};
-		interface->init();
+		Interface* interface {new Interface{object->copy(), interactionStack}};
+		interface->init(*renderTarget);
 		return interface;
 	}
 	
