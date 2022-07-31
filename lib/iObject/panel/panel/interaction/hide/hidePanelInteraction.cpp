@@ -2,7 +2,7 @@
 
 ui::HidePanelInteraction::HidePanelInteraction() : BasePanelInteraction() {}
 
-ui::InteractionType ui::HidePanelInteraction::getType() const {
-	return ui::InteractionType::hidePanel;
+ui::IInteraction::Priority ui::HidePanelInteraction::getPriority() const {
+	return Priority::lowest;
 }
 

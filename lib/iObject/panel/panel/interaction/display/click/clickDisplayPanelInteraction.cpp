@@ -13,6 +13,7 @@ namespace ui {
 	}
 	
 	void ClickDisplayPanelInteraction::finish(sf::Vector2i mousePosition) {
+		OneButtonInteraction::finish(mousePosition);
 		dynamic_cast<PanelEvent*>(event)->getPanel()->setParentProcessed(false);
 	}
 	

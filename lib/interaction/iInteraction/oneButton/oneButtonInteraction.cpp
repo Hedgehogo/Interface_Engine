@@ -26,7 +26,9 @@ bool ui::OneButtonInteraction::update(sf::Vector2i mousePosition) {
 	return false;
 }
 
-void ui::OneButtonInteraction::finish(sf::Vector2i) {}
+void ui::OneButtonInteraction::finish(sf::Vector2i) {
+	event->setPressed(false);
+}
 
 ui::OneButtonInteraction *ui::OneButtonInteraction::copy() {
 	return new OneButtonInteraction{event->copy(), button};

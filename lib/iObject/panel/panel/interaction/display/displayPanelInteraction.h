@@ -5,7 +5,5 @@ namespace ui {
 	class DisplayPanelInteraction : public virtual BasePanelInteraction {
 	public:
 		DisplayPanelInteraction* copy() override = 0;
-		
-		InteractionType getType() const override;
 	};
 }

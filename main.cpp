@@ -14,9 +14,8 @@ float calculateMediumFPS(std::array<float, T> lastFPS) {
 int main() {
 	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	//window.setFramerateLimit(60);
-
-
+	window.setFramerateLimit(60);
+	
     sf::Texture textureGigachad;
     textureGigachad.loadFromFile("gigachad.jpg");
 	sf::Texture texture;

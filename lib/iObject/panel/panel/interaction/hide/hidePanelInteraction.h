@@ -6,7 +6,7 @@ namespace ui {
 	public:
 		HidePanelInteraction();
 		
-		InteractionType getType() const override;
+		Priority getPriority() const override;
 		
 		HidePanelInteraction* copy() override = 0;
 	};

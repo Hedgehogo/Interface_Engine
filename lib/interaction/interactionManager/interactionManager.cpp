@@ -1,22 +1,17 @@
 #include <iostream>
+#include <algorithm>
 #include "interactionManager.h"
 
 ui::InteractionManager::InteractionManager() :
-	interactions(), hidePanelInteractions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {}
+	interactions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {}
 
 void ui::InteractionManager::addInteraction(IInteraction &interaction) {
-	if(interaction.getType() != InteractionType::hidePanel) {
-		addInteractions.push_back(&interaction);
-	} else {
-		hidePanelInteractions.push_back(&interaction);
-	}
+	addInteractions.push_back(&interaction);
 }
 
 void ui::InteractionManager::deleteInteraction(IInteraction &interaction) {
 	if(auto iterator = std::find(interactions.begin(), interactions.end(), &interaction); iterator != interactions.end())
 		interactions.erase(iterator);
-	if(auto iterator = std::find(hidePanelInteractions.begin(), hidePanelInteractions.end(), &interaction); iterator != hidePanelInteractions.end())
-		hidePanelInteractions.erase(iterator);
 	deleteInteractions.push_back(&interaction);
 }
 
@@ -38,19 +33,29 @@ bool ui::InteractionManager::isBlocked() {
 
 void ui::InteractionManager::update(sf::Vector2i mousePosition) {
 	position = mousePosition;
-	for(auto& interaction : deleteInteractions) {
-		interaction->finish(mousePosition);
+	
+	if(!deleteInteractions.empty()) {
+		ptrSort(deleteInteractions);
+		for(auto& interaction : deleteInteractions) {
+			interaction->finish(mousePosition);
+		}
+		deleteInteractions.clear();
 	}
-	deleteInteractions.clear();
-	for(auto& interaction : addInteractions) {
-		interaction->start(mousePosition);
-        interactions.push_back(interaction);
+	
+	if(!addInteractions.empty()) {
+		ptrSort(addInteractions);
+		for(auto& interaction : addInteractions) {
+			interaction->start(mousePosition);
+			interactions.push_back(interaction);
+		}
 	}
-	addInteractions.clear();
+	
+	if(!addInteractions.empty()) {
+		ptrSort(interactions);
+		addInteractions.clear();
+	}
+	
 	for(auto interaction : interactions) {
-		interaction->update(mousePosition);
-	}
-	for(auto interaction : hidePanelInteractions) {
 		interaction->update(mousePosition);
 	}
 }
