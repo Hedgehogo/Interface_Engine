@@ -1,15 +1,41 @@
-#include <cmath>
 #include "character.h"
 #include "../../../../../iObject.h"
 
 ui::Character::Character(wchar_t character, TextVariables &textVariables)
-        : character(character), textVariables(textVariables){
+        : character(character), textVariables(textVariables), vertexArray(sf::Quads, 4){
     if(isSpecial() != BaseCharacter::Special::enter){
-        glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style);
-        sprite.setTexture(textVariables.font->getTexture(textVariables.size));
-        sprite.setTextureRect(glyph.textureRect);
-        sprite.setOrigin(-glyph.bounds.left, -glyph.bounds.top);
-        sprite.setColor(textVariables.TextColor);
+        glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style & sf::Text::Style::Bold);
+
+        texture = textVariables.font->getTexture(textVariables.size);
+
+        vertexArray[0].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left, glyph.textureRect.top});
+        vertexArray[1].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left + glyph.textureRect.width, glyph.textureRect.top});
+        vertexArray[2].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left + glyph.textureRect.width, glyph.textureRect.top + glyph.textureRect.height});
+        vertexArray[3].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left, glyph.textureRect.top + glyph.textureRect.height});
+
+        vertexArray[0].color = textVariables.TextColor;
+        vertexArray[1].color = textVariables.TextColor;
+        vertexArray[2].color = textVariables.TextColor;
+        vertexArray[3].color = textVariables.TextColor;
+
+        vertexArray[0].position = {0, 0};
+        vertexArray[1].position = sf::Vector2f{sf::Vector2i{glyph.textureRect.width, 0}};
+        vertexArray[2].position = sf::Vector2f{sf::Vector2i{glyph.textureRect.width, glyph.textureRect.height}};
+        vertexArray[3].position = sf::Vector2f{sf::Vector2i{0, glyph.textureRect.height}};
+
+
+        if (textVariables.style & sf::Text::Style::Italic){
+            float italicShear = -0.26794;
+            vertexArray[0].position.x += (vertexArray[0].position.y + glyph.bounds.top) * italicShear;
+            vertexArray[1].position.x += (vertexArray[1].position.y + glyph.bounds.top) * italicShear;
+            vertexArray[2].position.x += (vertexArray[2].position.y + glyph.bounds.top) * italicShear;
+            vertexArray[3].position.x += (vertexArray[3].position.y + glyph.bounds.top) * italicShear;
+        }
+
+        vertexArray[0].position.y += glyph.bounds.top;
+        vertexArray[1].position.y += glyph.bounds.top;
+        vertexArray[2].position.y += glyph.bounds.top;
+        vertexArray[3].position.y += glyph.bounds.top;
     }
 }
 
@@ -19,7 +45,7 @@ void ui::Character::init(sf::RenderTarget &renderTarget) {
 
 void ui::Character::draw() {
     if(isSpecial() != BaseCharacter::Special::enter){
-        renderTarget->draw(sprite);
+        renderTarget->draw(vertexArray, &texture);
     }
 }
 
@@ -49,12 +75,15 @@ float ui::Character::getHeight() {
 
 void ui::Character::move(sf::Vector2f position) {
     BaseCharacter::move(position);
-    sprite.setPosition(this->position);
+    vertexArray[0].position += position;
+    vertexArray[1].position += position;
+    vertexArray[2].position += position;
+    vertexArray[3].position += position;
 }
 
 void ui::Character::setPosition(const sf::Vector2f position) {
+    move(position - this->position);
     BaseCharacter::setPosition(position);
-    sprite.setPosition(position);
 }
 
 bool ui::Character::in(sf::Vector2f mousePosition) {
