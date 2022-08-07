@@ -1,8 +1,8 @@
 #include "character.h"
 #include "../../../../../iObject.h"
 
-ui::Character::Character(wchar_t character, TextVariables &textVariables)
-        : character(character), textVariables(textVariables), vertexArray(sf::Quads, 4){
+ui::Character::Character(wchar_t character, TextVariables &textVariables, std::vector<BaseLine *>& lines)
+        : character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), lines(lines){
     if(isSpecial() != BaseCharacter::Special::enter){
         glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style & sf::Text::Style::Bold);
 
@@ -73,6 +73,11 @@ float ui::Character::getHeight() {
     return textVariables.size;
 }
 
+void ui::Character::setPosition(const sf::Vector2f position) {
+    move(position - this->position);
+    BaseCharacter::setPosition(position);
+}
+
 void ui::Character::move(sf::Vector2f position) {
     BaseCharacter::move(position);
     vertexArray[0].position += position;
@@ -81,9 +86,8 @@ void ui::Character::move(sf::Vector2f position) {
     vertexArray[3].position += position;
 }
 
-void ui::Character::setPosition(const sf::Vector2f position) {
-    move(position - this->position);
-    BaseCharacter::setPosition(position);
+std::vector<ui::BaseLine *> & ui::Character::getLine() {
+    return lines;
 }
 
 bool ui::Character::in(sf::Vector2f mousePosition) {
@@ -115,4 +119,3 @@ void ui::Character::drawDebug(sf::RenderTarget &renderTarget, int indentAddition
         }
     }
 }
-

@@ -12,9 +12,13 @@ float calculateMediumFPS(std::array<float, T> lastFPS) {
 }
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!");
+
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 1;
+
+	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	window.setFramerateLimit(60);
+	//window.setFramerateLimit(60);
 	
     sf::Texture textureGigachad;
     textureGigachad.loadFromFile("gigachad.jpg");
@@ -32,7 +36,7 @@ int main() {
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
 
-	ui::Interface interface {
+	ui::Interface interface{
         new ui::LayerWithBackground{
             new ui::LayerWithMovableBorder{
                 new ui::LayerWithBorderHorizontal{
@@ -46,26 +50,54 @@ int main() {
                                             new ui::Text{
                                                 {
                                                     new ui::TextBlock{
-                                                        L"это собственность Артёма"
+                                                        L"это ",
+                                                        {255, 255, 255, 0},
+                                                        &font,
+                                                        {},
+                                                        {
+                                                            new ui::StrikeThrough{{0, 0, 255}}
+                                                        }
+                                                    },
+                                                    new ui::TextBlock{
+                                                        L"собственность",
+                                                        {255, 255, 255, 0},
+                                                        &font,
+                                                        {},
+                                                        {
+                                                            new ui::Underline{{255, 0, 0}},
+                                                            new ui::StrikeThrough{{0, 0, 255}},
+                                                        }
+                                                    },
+                                                    new ui::TextBlock{
+                                                        L" Артёма",
+                                                        {255, 255, 255, 0},
+                                                        &font,
+                                                        {},
+                                                        {
+                                                            new ui::Underline{{255, 0, 0}}
+                                                        }
                                                     },
                                                     new ui::ObjectTextBlock{
                                                         new ui::Text{
                                                             {
                                                                 new ui::TextBlock{
                                                                     L"fack\n",
-                                                                    sf::Color{255, 255, 0},
+                                                                    {255, 255, 255, 0},
                                                                     &font,
                                                                     sf::Text::Style::Italic
                                                                 },
                                                                 new ui::InteractiveTextBlock{
                                                                     0,
-                                                                    L"you"
+                                                                    L"you",
+                                                                    {255, 255, 255, 0},
+                                                                    &font,
+                                                                    sf::Text::Style::Bold
                                                                 },
                                                                 new ui::ObjectTextBlock{
                                                                     //new ui::ButtonWithPanel{
-																	new ui::LayerWithPanel{
+                                                                    new ui::LayerWithPanel{
                                                                         //new ui::Panel{
-																		new ui::ConstPanel{
+                                                                        new ui::ConstPanel{
                                                                             new ui::DebugLayer{
                                                                                 new ui::Sprite{texture}
                                                                             },
@@ -82,12 +114,11 @@ int main() {
                                                             },
                                                             new ui::FullColor{{255, 0, 0}},
                                                             30,
-                                                            1.15,
                                                             &font,
                                                             sf::Color{255, 255, 0},
                                                             sf::Color{200, 200, 200},
                                                             sf::Color{200, 200, 200},
-                                                            ui::Text::Align::right
+                                                            new ui::Resizer
                                                         },
                                                         {111, 111},
                                                         false
@@ -95,12 +126,11 @@ int main() {
                                                 },
                                                 new ui::RoundedRectangle{sf::Color(0xffffffff), 10},
                                                 14,
-                                                1.15,
                                                 &font,
                                                 sf::Color{10, 255, 0},
                                                 sf::Color{200, 200, 200},
                                                 sf::Color{200, 200, 200},
-                                                ui::Text::Align::left
+                                                new ui::Resizer
                                             },
                                             new ui::ClickHidePanelInteraction{sf::Mouse::Button::Left},
                                             new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
@@ -132,12 +162,11 @@ int main() {
                                 },
                                 new ui::FullColor{sf::Color(0x9f6e5cff)},
                                 14,
-                                1.15,
                                 &font,
                                 sf::Color{10, 10, 0},
                                 sf::Color{200, 200, 200},
                                 sf::Color{200, 200, 200},
-                                ui::Text::Align::center
+                                new ui::Resizer
                             },
                             false
                         },
@@ -186,16 +215,18 @@ int main() {
             new ui::Sprite{textureGigachad},
             {100.f, 100.f}
         },
-		new ui::InteractionStack {
-			std::vector<ui::IInteraction *> {
-				ui::MouseLambdaInteraction::debug.copy()
-			}
-		}
-	};
+        new ui::InteractionStack{
+            std::vector<ui::IInteraction *>{
+                ui::MouseLambdaInteraction::debug.copy()
+            }
+        }
+    };
 	
 	interface.init(window);
-    window.setSize(sf::Vector2u(interface.getNormalSize()));
-    interface.setSize(interface.getNormalSize());
+    if (sf::Vector2f normalSize = interface.getNormalSize(); normalSize == sf::Vector2f{0, 0}){
+        window.setSize(sf::Vector2u(normalSize));
+        interface.setSize(normalSize);
+    }
 
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};
@@ -222,7 +253,7 @@ int main() {
 				}
 				view.reset({{}, windowSize});
 				window.setView(view);
-				interface.resize(windowSize, {});
+				interface.setSize(windowSize);
 			}
 			if(event.type == sf::Event::MouseWheelMoved) {
 				sf::Wheel::value = event.mouseWheel.delta;

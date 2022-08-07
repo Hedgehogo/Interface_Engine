@@ -5,7 +5,6 @@
 typedef unsigned uint;
 
 namespace ui {
-
     struct TextVariables {
         sf::Color TextColor, textSelectionColor, backgroundSelectionColor;
         sf::Font *font;

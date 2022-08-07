@@ -4,6 +4,7 @@
 #include "../../character/object/objectCharacter.h"
 namespace ui{
     class ObjectTextBlock  : public BaseTextBlock {
+        std::vector<BaseLine *> lines;
         sf::Vector2f size;
         ObjectCharacter* objectCharacter;
         bool isCharacter;

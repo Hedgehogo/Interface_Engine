@@ -15,11 +15,11 @@ namespace ui {
         IInteraction* interaction;
     public:
         InteractiveTextBlock(IInteraction* interaction, std::wstring text, sf::Color textColor = sf::Color(255, 255, 255, 0),
-                             sf::Font *font = nullptr, sf::Text::Style style = {}, int size = 0,
+                             sf::Font *font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0,
                              sf::Color textSelectionColor = sf::Color(255, 255, 255, 0),
                              sf::Color backgroundSelectionColor = sf::Color(255, 255, 255, 0));
         InteractiveTextBlock(int indexInteraction, std::wstring text, sf::Color textColor = sf::Color(255, 255, 255, 0),
-                             sf::Font *font = nullptr, sf::Text::Style style = {}, int size = 0,
+                             sf::Font *font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0,
                              sf::Color textSelectionColor = sf::Color(255, 255, 255, 0),
                              sf::Color backgroundSelectionColor = sf::Color(255, 255, 255, 0));
 

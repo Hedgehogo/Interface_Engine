@@ -44,4 +44,8 @@ namespace ui {
     void ObjectCharacter::drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) {
         object->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
     }
+
+    std::vector<BaseLine *> & ObjectCharacter::getLine() {
+        return lines;
+    }
 }

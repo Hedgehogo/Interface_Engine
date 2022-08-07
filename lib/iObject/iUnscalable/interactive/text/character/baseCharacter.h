@@ -4,6 +4,7 @@
 #include "../../../../../interaction/interactionManager/interactionManager.h"
 #include "../../../../../interaction/interactionStack/interactionStack.h"
 #include "../../../../../interaction/iInteraction/iInteraction.h"
+#include "../line/baseLine.h"
 
 typedef unsigned uint;
 
@@ -28,6 +29,8 @@ namespace ui{
 
         virtual void move(sf::Vector2f position);
 
+        virtual std::vector<BaseLine *> & getLine() = 0;
+
         const sf::Vector2f &getPosition() const;
 
         virtual float getHeight() = 0;
@@ -35,6 +38,8 @@ namespace ui{
         virtual float getAdvance() = 0;
 
         virtual float getKerning(wchar_t character) = 0;
+
+        virtual bool isEnter();
 
         virtual Special isSpecial() = 0;
 

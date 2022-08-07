@@ -16,13 +16,13 @@ bool ui::ObjectTextBlock::in(sf::Vector2f mousePosition) {
 std::vector<ui::BaseCharacter*> ui::ObjectTextBlock::getCharacters() {
     std::vector<ui::BaseCharacter*> result;
     if(!isCharacter){
-        result.push_back(new Character{L'\n', textVariables});
+        result.push_back(new Character{L'\n', textVariables, lines});
     }
 
     result.push_back(objectCharacter);
 
     if(!isCharacter){
-        result.push_back(new Character{L'\n', textVariables});
+        result.push_back(new Character{L'\n', textVariables, lines});
     }
 
     return result;

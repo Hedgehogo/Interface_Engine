@@ -28,5 +28,7 @@
 #include "iObject/iUnscalable/interactive/text/textBlock/simple/textBlock.h"
 #include "iObject/iUnscalable/interactive/text/textBlock/interactive/interactiveTextBlock.h"
 #include "iObject/iUnscalable/interactive/text/textBlock/object/objectTextBlock.h"
+#include "iObject/iUnscalable/interactive/text/line/underline/underline.h"
+#include "iObject/iUnscalable/interactive/text/line/strikeThrough/strikeThrough.h"
 #include "iObject/iUnscalable/iScalable/interface/interface.h"
 #include "debug/debugLayer.h"

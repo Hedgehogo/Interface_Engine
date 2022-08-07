@@ -1,20 +1,20 @@
 #include <iostream>
-#include <cmath>
 #include "text.h"
 
-ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::OnlyDrawable *background, int size, float lineSpacing, sf::Font *font
-    , sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, ui::Text::Align align) :
-    background(background), align(align), size(size), lineSpacing(lineSpacing), textBocks(textBlocks), startRender({0, 0}), endRender(0, 0){
+ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, BaseResizer *resizer) :
+    background(background), size(size), textBocks(textBlocks), resizer(resizer){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
         textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, font, size);
         std::vector<ui::BaseCharacter*> characters = textBlock->getCharacters();
         textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
     }
-
-
+    resizer->init(textCharacters, lines);
 }
 
 ui::Text::~Text() {
+    for (ui::BaseLine*& line : lines) {
+        delete line;
+    }
     for (ui::BaseCharacter*& textCharacter : textCharacters) {
         delete textCharacter;
     }
@@ -25,7 +25,7 @@ ui::Text::~Text() {
 }
 
 void ui::Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
-	updateManager.add(*this);
+    updateManager.add(*this);
     this->renderTarget = &renderTarget;
 	background->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
     for (BaseTextBlock * textBlock : textBocks) {
@@ -54,172 +54,46 @@ void ui::Text::draw() {
     for (ui::BaseCharacter *character : textCharacters) {
         character->draw();
     }
+
+    for (BaseLine*& line : lines) {
+        line->draw();
+    }
 }
 
 void ui::Text::move(sf::Vector2f position) {
-    startRender += position;
-    endRender += position;
-
     background->move(position);
-    for (BaseCharacter*& character : textCharacters) {
-        character->move(position);
-    }
+    resizer->move(position);
 }
 
 void ui::Text::setPosition(sf::Vector2f position) {
     background->setPosition(position);
-    for (BaseCharacter*& character : textCharacters) {
-        character->move({position - startRender});
-    }
-
-    endRender += position - startRender;
-    startRender = position;
+    resizer->setPosition(position);
 }
 
-void ui::Text::printCharacter(ui::BaseCharacter *character, float kerning) {
-    character->setPosition(nextPosition);
-    nextPosition.x += character->getAdvance() + kerning;
-    distanceEnter++;
-}
-
-float ui::Text::equalize(uint i) {
-    float lineSize = 0;
-    for (int j = i - distanceEnter; j < i; ++j) {
-        float characterSize = textCharacters[j]->getHeight();
-        if(lineSize < characterSize)
-            lineSize = characterSize;
-    }
-    sf::Vector2f offset{endRender.x - (textCharacters[i - 1]->getPosition().x), lineSize};
-    if (textCharacters[i - 1]->isSpecial() != BaseCharacter::Special::space)
-        offset.x -= textCharacters[i - 1]->getAdvance();
-
-    switch (align) {
-        case Align::left:
-            offset.x = 0;
-            break;
-        case Align::center:
-            offset.x /= 2;
-            break;
-    }
-
-    for (uint j = i - distanceEnter; j < i; ++j) {
-        textCharacters[j]->move(offset);
-    }
-    return lineSize;
-}
-
-void ui::Text::porting(int i) {
-    float lineSize = equalize(i);
-    nextPosition.y += lineSize * lineSpacing;
-    nextPosition.x = startRender.x;
-
-    distanceEnter = 0;
-}
-
-void ui::Text::autoPorting(int i) {
-
-    distanceEnter -= distanceSpace;
-    porting(i - distanceSpace);
-
-    for (uint j = i - distanceSpace; j < i; ++j) {
-        float kerning;
-        if (j < i - 1)
-            kerning = textCharacters[j]->getKerning(textCharacters[j + 1]->getChar());
-        printCharacter(textCharacters[j], kerning);
-    }
-
-    distanceEnter = distanceSpace;
-    distanceSpace = 0;
-}
 void ui::Text::resize(sf::Vector2f size, sf::Vector2f position) {
     background->resize(size, position);
-    if(size.x == endRender.x - startRender.x){
-        for (BaseCharacter*& character : textCharacters) {
-            character->move({position - startRender});
-        }
-        startRender = position;
-        endRender = position + size;
-        return;
-    }
-    startRender = position;
-    endRender = position + size;
-    this->nextPosition = startRender;
 
-    for (int i = 0; i < textCharacters.size(); i++) {
-        ui::BaseCharacter* character = textCharacters[i];
-
-        float kerning = 0;
-
-        ui::BaseCharacter::Special specialText = character->isSpecial();
-
-        switch (specialText) {
-            case BaseCharacter::Special::no:
-                printCharacter(character, kerning);
-                distanceSpace++;
-                break;
-            case BaseCharacter::Special::space:
-                if (this->nextPosition.x <= endRender.x){
-                    printCharacter(character, kerning);
-                    distanceSpace = 0;
-                } else{
-                    autoPorting(i);
-                    printCharacter(character, kerning);
-                }
-                break;
-            case BaseCharacter::Special::enter:
-                if (this->nextPosition.x > endRender.x)
-                    autoPorting(i);
-                porting(i);
-                break;
-        }
-    }
-
-    if (endRender.x < this->nextPosition.x){
-        autoPorting(textCharacters.size());
-    }
-    equalize(textCharacters.size());
-
-    distanceEnter = 0;
-    distanceSpace = 0;
+    resizer->resize(size, position);
 }
 
 sf::Vector2f ui::Text::getAreaPosition() {
-	return startRender;
+	return background->getAreaPosition();
 }
 
 sf::Vector2f ui::Text::getAreaSize() {
-	return endRender - startRender;
+	return background->getAreaSize();
 }
 
 sf::Vector2f ui::Text::getMinSize() {
-
-    sf::Vector2f minSize = {0, 0};
-    float wordSizeX = 0;
-
-    for (ui::BaseCharacter *character : textCharacters) {
-        if (character->isSpecial() == BaseCharacter::Special::no){
-            wordSizeX += character->getAdvance();
-        }else{
-            if (minSize.x < wordSizeX)
-                minSize.x = wordSizeX;
-            wordSizeX = 0;
-        }
-    }
-    if (minSize.x < wordSizeX)
-        minSize.x = wordSizeX;
-
-    sf::Vector2f backgroundMinSize{background->getMinSize()};
-    return sf::Vector2f{std::max(minSize.x, backgroundMinSize.x), std::max(minSize.y, backgroundMinSize.y)};
+    return max(resizer->getMinSize(), background->getMinSize());
 }
 
 sf::Vector2f ui::Text::getNormalSize() {
-    sf::Vector2f normalSize = background->getNormalSize();
-    sf::Vector2f minSize = getMinSize();
-    return {std::max(normalSize.x, minSize.x), std::max(normalSize.y, minSize.y)};
+    return max(resizer->getNormalSize(), background->getNormalSize());
 }
 
-ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, ui::OnlyDrawable *background, uint size, float lineSpacing, ui::Text::Align align) :
-    textBocks(textBlocks), background(background), size(size), lineSpacing(lineSpacing), align(align){
+ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background, uint size, BaseResizer *resizer) :
+    textBocks(textBlocks), background(background), size(size), resizer(resizer){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
         std::vector<ui::BaseCharacter*> characters = textBlock->getCharacters();
         textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
@@ -232,7 +106,7 @@ ui::Text *ui::Text::copy() {
         copyTextBlocks.push_back(textBlock->copy());
     }
 
-    return new Text{copyTextBlocks, background->copy(), size, lineSpacing, align};
+    return new Text{copyTextBlocks, background->copy(), size, resizer->copy()};
 }
 
 void ui::Text::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

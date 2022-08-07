@@ -46,7 +46,7 @@ namespace ui {
 			coordinate.y = 0;
 			for (unsigned y = 0; y < objects[0].size(); ++y) {
 				objectSize.y = size.y * (boundsVertical[y + 1] - boundsVertical[y]);
-				objects[x][y]->resize(objectSize, position + coordinate);
+                objects[x][y]->resize(objectSize, position + coordinate);
 				coordinate.y += objectSize.y;
 			}
 			coordinate.x += objectSize.x;

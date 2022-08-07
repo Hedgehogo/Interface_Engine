@@ -20,14 +20,19 @@ namespace ui{
         sf::VertexArray vertexArray;
         sf::Texture texture;
         sf::Vector2f origin;
+
+
+        std::vector<BaseLine*>& lines;
     public:
-        Character(wchar_t character, TextVariables &textVariables);
+        Character(wchar_t character, TextVariables &textVariables, std::vector<BaseLine *>& lines);
 
         void init(sf::RenderTarget &renderTarget) override;
 
         void draw() override;
 
         void move(sf::Vector2f position);
+
+        std::vector<BaseLine *> & getLine();
 
         bool in(sf::Vector2f mousePosition) override;
 

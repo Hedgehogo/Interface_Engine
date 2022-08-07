@@ -22,3 +22,7 @@ void ui::BaseCharacter::move(sf::Vector2f position) {
     this->position += position;
 }
 
+bool ui::BaseCharacter::isEnter() {
+    return isSpecial() == Special::enter;
+}
+

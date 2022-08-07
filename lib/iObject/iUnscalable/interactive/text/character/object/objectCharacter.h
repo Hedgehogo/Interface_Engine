@@ -7,12 +7,15 @@
 namespace ui {
     class ObjectCharacter : public BaseCharacter{
         ui::IObject* object;
+        std::vector<BaseLine *> lines;
     public:
         ObjectCharacter(ui::IObject* object);
 
         void setPosition( sf::Vector2f position) override;
 
         void move(sf::Vector2f position) override;
+
+        std::vector<BaseLine *> & getLine();
 
         float getHeight() override;
 
