@@ -17,7 +17,9 @@ namespace ui{
 
         sf::Glyph glyph;
         TextVariables &textVariables;
-        sf::Sprite sprite;
+        sf::VertexArray vertexArray;
+        sf::Texture texture;
+        sf::Vector2f origin;
     public:
         Character(wchar_t character, TextVariables &textVariables);
 

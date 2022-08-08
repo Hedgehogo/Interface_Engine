@@ -54,7 +54,10 @@ int main() {
                                                         new ui::Text{
                                                             {
                                                                 new ui::TextBlock{
-                                                                    L"fack\n"
+                                                                    L"fack\n",
+                                                                    sf::Color{255, 255, 0},
+                                                                    &font,
+                                                                    sf::Text::Style::Italic
                                                                 },
                                                                 new ui::InteractiveTextBlock{
                                                                     0,
