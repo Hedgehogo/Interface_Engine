@@ -3,6 +3,7 @@ layers.md
 /cmake-build-debug/.cmake/
 /cmake-build-debug/CMakeFiles/
 /cmake-build-debug/Testing/
+/cmake-build-debug/lib/
 /cmake-build-debug/.ninja_deps
 /cmake-build-debug/.ninja_log
 /cmake-build-debug/build.ninja
@@ -15,6 +16,7 @@ layers.md
 /cmake-build-release/.cmake/
 /cmake-build-release/CMakeFiles/
 /cmake-build-release/Testing/
+/cmake-build-release/lib/
 /cmake-build-release/.ninja_deps
 /cmake-build-release/.ninja_log
 /cmake-build-release/build.ninja
@@ -23,5 +25,4 @@ layers.md
 /cmake-build-release/CMakeCache.txt
 /cmake-build-release/Interface_Engine-config.cmake
 *.swp
-/test.yaml
 /ass.md
