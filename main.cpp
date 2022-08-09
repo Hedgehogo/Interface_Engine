@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include <array>
-#include "lib/UI.h"
+#include "lib/ui/UI.h"
 
 template<typename I, I T>
 float calculateMediumFPS(std::array<float, T> lastFPS) {
@@ -12,13 +12,15 @@ float calculateMediumFPS(std::array<float, T> lastFPS) {
 }
 
 int main() {
+	ui::yamlBuilderInit();
 
     sf::ContextSettings settings;
     settings.antialiasingLevel = 1;
 
-	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
+    sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
 	//window.setFramerateLimit(60);
+
 	
     sf::Texture textureGigachad;
     textureGigachad.loadFromFile("gigachad.jpg");
@@ -35,9 +37,8 @@ int main() {
 	ui::Caption::setDefaultSize(15);
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
-
-	ui::Interface interface{
-        new ui::LayerWithBackground{
+	ui::Interface interface {
+        /*new ui::LayerWithBackground{
             new ui::LayerWithMovableBorder{
                 new ui::LayerWithBorderHorizontal{
                     {
@@ -214,13 +215,14 @@ int main() {
             },
             new ui::Sprite{textureGigachad},
             {100.f, 100.f}
-        },
-        new ui::InteractionStack{
-            std::vector<ui::IInteraction *>{
-                ui::MouseLambdaInteraction::debug.copy()
-            }
-        }
-    };
+        }*/
+		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
+		new ui::InteractionStack {
+			std::vector<ui::IInteraction *> {
+				ui::MouseLambdaInteraction::debug.copy()
+			}
+		}
+	};
 	
 	interface.init(window);
     if (sf::Vector2f normalSize = interface.getNormalSize(); normalSize == sf::Vector2f{0, 0}){

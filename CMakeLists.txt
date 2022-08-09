@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 add_definitions(-O2)
 ]]
 
-file(GLOB_RECURSE src "lib/*.cpp" "lib/*.h")
+file(GLOB_RECURSE src "lib/ui/*.cpp" "lib/ui/*.h" "lib/ui/*.hpp" "lib/yaml/yamlWithSfml/*.hpp" "lib/yaml/yamlWithSfml/*.cpp")
+
+add_subdirectory(lib/yaml/yaml-cpp)
 
 add_library(${PROJECT_NAME} ${src})
 
@@ -31,7 +33,7 @@ set(CMAKE_MODULE_PATH "${cmaKE_CURRENT_LIST_DIR}/cmake_modules")
 
 find_package(SFML 2.5 REQUIRED graphics network audio window system)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system)
+target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system yaml-cpp)
 
 #[[set_target_properties(Interface_Engine PROPERTIES PUBLIC_HEADER "UI.h")
 
