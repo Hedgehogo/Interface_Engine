@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+typedef unsigned uint;
+
 namespace ui {
     class BaseLine {
     protected:
