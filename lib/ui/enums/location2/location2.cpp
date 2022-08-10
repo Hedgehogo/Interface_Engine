@@ -85,6 +85,7 @@ namespace ui {
 				}
 				break;
 		}
+        return Location2::center;
 	}
 	
 	Location2 createLocation2FromYaml(const YAML::Node &node) {
