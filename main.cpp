@@ -20,7 +20,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
 	window.setFramerateLimit(60);
-	
+
     sf::Texture textureGigachad;
     textureGigachad.loadFromFile("gigachad.jpg");
 	sf::Texture texture;
@@ -31,12 +31,12 @@ int main() {
     texture_3.loadFromFile("image_3.png");
 	sf::Font font;
 	font.loadFromFile("segoeui.ttf");
-	
+
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
-	
+
 	ui::Interface interface {
         /*new ui::LayerWithBackground{
             new ui::LayerWithMovableBorder{
@@ -224,10 +224,10 @@ int main() {
 			}
 		}
 	};
-	
+
 	interface.init(window);
-    window.setSize(sf::Vector2u(interface.getNormalSize()));
-    interface.setSize(interface.getNormalSize());
+    window.setSize(sf::Vector2u(ui::max(interface.getNormalSize(), {1, 1})));
+    interface.setSize(ui::max(interface.getNormalSize(), {1, 1}));
 
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};
