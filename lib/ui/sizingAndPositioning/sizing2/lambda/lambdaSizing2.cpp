@@ -1,4 +1,4 @@
-#include "lambdaSizing2.h"
+#include "lambdaSizing2.hpp"
 
 namespace ui {
 	LambdaSizing2::LambdaSizing2(sf::Vector2f (*findSize)(sf::Vector2f parentSize, sf::Vector2f targetSize, sf::Vector2f normalSize), sf::Vector2f (*getParentMinSize)(sf::Vector2f objectMinSize)) :

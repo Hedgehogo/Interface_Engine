@@ -1,8 +1,8 @@
 #pragma once
-#include "../baseSizing2.h"
+#include "../baseSizing2.hpp"
 
 namespace ui {
-	class ConstRatioSizing2 : BaseSizing2 {
+	class ConstRatioSizing2 : public BaseSizing2 {
 	protected:
 		sf::RenderTarget* renderTarget;
 		Sizing* sizing;
@@ -14,7 +14,7 @@ namespace ui {
 	public:
 		explicit ConstRatioSizing2(Sizing* sizing, float ratio = 1.0f, bool horizontal = true);
 		
-		explicit ConstRatioSizing2(float ratio = 1.0f, bool horizontal = true);
+		explicit ConstRatioSizing2(float ratio = 1.0f, bool horizontal = true, bool relativeParent = true);
 		
 		ConstRatioSizing2(float constSize, float ratio, bool horizontal = true);
 		
@@ -31,5 +31,7 @@ namespace ui {
 		sf::Vector2f getParentSize(sf::Vector2f objectSize) override;
 		
 		ConstRatioSizing2* copy() override;
+		
+		static ConstRatioSizing2* createFromYaml(const YAML::Node &node);
 	};
 }

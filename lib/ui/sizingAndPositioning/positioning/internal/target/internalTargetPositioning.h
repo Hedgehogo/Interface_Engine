@@ -1,5 +1,5 @@
 #pragma once
-#include "../../positioning.h"
+#include "../../positioning.hpp"
 
 namespace ui {
 	class InternalTargetPositioning : public Positioning {

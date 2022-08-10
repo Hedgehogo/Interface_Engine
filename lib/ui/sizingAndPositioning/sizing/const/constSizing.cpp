@@ -1,4 +1,4 @@
-#include "constSizing.h"
+#include "constSizing.hpp"
 
 namespace ui {
 	ConstSizing::ConstSizing(float size) : size(size) {}
@@ -11,6 +11,12 @@ namespace ui {
 	
 	ConstSizing *ConstSizing::copy() {
 		return new ConstSizing(size);
+	}
+	
+	ConstSizing *ConstSizing::createFromYaml(const YAML::Node &node) {
+		float size;
+		node["size"] >> size;
+		return new ConstSizing{size};
 	}
 	
 	Sizing *size(float constSize) {

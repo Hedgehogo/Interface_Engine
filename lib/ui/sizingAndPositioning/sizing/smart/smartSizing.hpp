@@ -1,5 +1,5 @@
 #pragma once
-#include "../sizing.h"
+#include "../sizing.hpp"
 
 namespace ui {
 	class SmartSizing : public Sizing {
@@ -9,7 +9,7 @@ namespace ui {
 		float addition;
 	
 	public:
-		explicit SmartSizing(float parentCoefficient = 1, float targetCoefficient = 0, float addition = 0);
+		explicit SmartSizing(float targetCoefficient = 1, float parentCoefficient = 0, float addition = 0);
 		
 		void init(float) override;
 		
@@ -18,6 +18,8 @@ namespace ui {
 		float getParentSize(float objectSize) override;
 		
 		SmartSizing* copy() override;
+		
+		static SmartSizing* createFromYaml(const YAML::Node &node);
 	};
 	
 	Sizing* createSizing(float targetCoefficient, float parentCoefficient, float addition);

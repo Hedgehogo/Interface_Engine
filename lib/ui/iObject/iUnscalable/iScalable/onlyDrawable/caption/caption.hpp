@@ -1,7 +1,7 @@
 #pragma once
 #include "../onlyDrawable.hpp"
 #include "../../../../../../yaml/yamlWithSfml/buffer/buffer.hpp"
-#include "../../../../../sizingAndPositioning/positioning2/internal/internalPositioning2.h"
+#include "../../../../../sizingAndPositioning/positioning2/internal/internalPositioning2.hpp"
 
 namespace ui {
 	class Caption : public OnlyDrawable {

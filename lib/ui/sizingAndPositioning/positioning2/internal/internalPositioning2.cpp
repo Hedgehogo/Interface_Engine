@@ -1,4 +1,4 @@
-#include "internalPositioning2.h"
+#include "internalPositioning2.hpp"
 
 namespace ui {
     InternalPositioning2::InternalPositioning2(sf::Vector2f coefficient) :

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../basePositioning2.h"
+#include "../basePositioning2.hpp"
 #include "../../positioning/internal/internalPositioning.h"
 
 namespace ui {

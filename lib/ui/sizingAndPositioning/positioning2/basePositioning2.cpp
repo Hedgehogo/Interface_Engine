@@ -1,8 +1,12 @@
-#include "basePositioning2.h"
+#include "basePositioning2.hpp"
 
 namespace ui {
 	sf::Vector2f BasePositioning2::operator()(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize) {
 		return this->findPosition(parentPosition, parentSize, objectSize);
+	}
+	
+	BasePositioning2 *BasePositioning2::createFromYaml(const YAML::Node &node) {
+		return nullptr;
 	}
 	
 	Positioning *createPosition(float coefficient, float offset, bool relativeTarget) {

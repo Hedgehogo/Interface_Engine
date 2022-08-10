@@ -1,5 +1,5 @@
 #pragma once
-#include "../../sizing.h"
+#include "../../sizing.hpp"
 
 namespace ui {
 	class RelativeNormalSizing : public Sizing {
@@ -16,6 +16,8 @@ namespace ui {
 		float findSize(float,float) override;
 		
 		RelativeNormalSizing* copy() override;
+		
+		static RelativeNormalSizing* createFromYaml(const YAML::Node &);
 	};
 	
 	Sizing* createSize();

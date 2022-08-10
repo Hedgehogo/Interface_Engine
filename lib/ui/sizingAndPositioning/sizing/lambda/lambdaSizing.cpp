@@ -1,4 +1,4 @@
-#include "lambdaSizing.h"
+#include "lambdaSizing.hpp"
 
 namespace ui {
 	LambdaSizing::LambdaSizing(float (*findSize)(float parentSize, float targetSize, float normalSize), float (*getParentMinSize)(float objectMinSize)) : sizing(findSize), minSize(getParentMinSize) {}

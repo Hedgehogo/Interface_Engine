@@ -1,4 +1,4 @@
-#include "relativeNormalSizing.h"
+#include "relativeNormalSizing.hpp"
 
 namespace ui {
 	RelativeNormalSizing::RelativeNormalSizing() : normalSize(0) {}
@@ -19,6 +19,10 @@ namespace ui {
 		RelativeNormalSizing* normalSizeSizing{new RelativeNormalSizing{}};
 		RelativeNormalSizing::copy(normalSizeSizing);
 		return normalSizeSizing;
+	}
+	
+	RelativeNormalSizing *RelativeNormalSizing::createFromYaml(const YAML::Node &) {
+		return new RelativeNormalSizing{};
 	}
 	
 	Sizing *createSize() {

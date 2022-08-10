@@ -1,15 +1,21 @@
 #pragma once
 #include "../../layout/object/layoutWithObject.h"
 #include "../../iUnscalable/iScalable/iScalable.hpp"
-#include "../../../sizingAndPositioning/sizing2/general/sizing2.h"
-#include "../../../sizingAndPositioning/positioning2/general/positioning2.h"
+#include "../../../sizingAndPositioning/sizing2/baseSizing2.hpp"
+#include "../../../sizingAndPositioning/sizing2/general/Sizing2.hpp"
+#include "../../../sizingAndPositioning/sizing2/constRatio/constRatioSizing2.hpp"
+#include "../../../sizingAndPositioning/sizing2/lambda/lambdaSizing2.hpp"
+#include "../../../sizingAndPositioning/positioning2/basePositioning2.hpp"
+#include "../../../sizingAndPositioning/positioning2/general/positioning2.hpp"
+#include "../../../sizingAndPositioning/positioning2/internal/internalPositioning2.hpp"
+#include "../../../sizingAndPositioning/positioning2/lambda/lambdaPositioning2.hpp"
 #include "../../../enums/enums.hpp"
 
 namespace ui {
 	class BasePanel : public LayoutWithObject, public IDrawable, public IUpdatable {
 	protected:
-		Sizing2* sizing;
-		Positioning2* positioning;
+		BaseSizing2* sizing;
+		BasePositioning2* positioning;
 		DrawManager drawManager;
 		UpdateManager updateManager;
 		bool parentProcessed;
@@ -22,7 +28,7 @@ namespace ui {
 	public:
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
-		BasePanel(IScalable *object, Sizing2* sizing, Positioning2* positioning, bool displayed = false);
+		BasePanel(IScalable *object, BaseSizing2* sizing, BasePositioning2* positioning, bool displayed = false);
 		
 		~BasePanel() override;
 		

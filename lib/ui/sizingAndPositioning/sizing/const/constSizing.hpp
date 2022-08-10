@@ -1,5 +1,5 @@
 #pragma once
-#include "../sizing.h"
+#include "../sizing.hpp"
 
 namespace ui {
 	class ConstSizing : public Sizing {
@@ -14,6 +14,8 @@ namespace ui {
 		float findSize(float, float) override;
 		
 		ConstSizing* copy() override;
+		
+		static ConstSizing* createFromYaml(const YAML::Node &node);
 	};
 	
 	Sizing* createSize(float constSize);

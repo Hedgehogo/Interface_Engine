@@ -3,7 +3,7 @@
 #include "../../../drawable/manager/drawManager.h"
 
 namespace ui {
-	BasePanel::BasePanel(IScalable *object, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
+	BasePanel::BasePanel(IScalable *object, BaseSizing2 *sizing, BasePositioning2 *positioning, bool displayed) :
 		LayoutWithObject(object), sizing(sizing), positioning(positioning),
 		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {}
 	

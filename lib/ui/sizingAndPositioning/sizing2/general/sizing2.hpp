@@ -1,5 +1,5 @@
 #pragma once
-#include "../baseSizing2.h"
+#include "../baseSizing2.hpp"
 
 namespace ui {
 	class Sizing2 : public BaseSizing2 {
@@ -30,5 +30,7 @@ namespace ui {
 		sf::Vector2f getParentSize(sf::Vector2f objectSize) override;
 		
 		Sizing2* copy() override;
+		
+		static Sizing2* createFromYaml(const YAML::Node &node);
 	};
 }

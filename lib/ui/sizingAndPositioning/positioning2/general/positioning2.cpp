@@ -1,4 +1,4 @@
-#include "positioning2.h"
+#include "positioning2.hpp"
 
 namespace ui {
 	Positioning2::Positioning2(Positioning *horizontal, Positioning *vertical) :

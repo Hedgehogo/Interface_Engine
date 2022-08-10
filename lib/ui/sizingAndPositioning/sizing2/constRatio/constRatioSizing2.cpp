@@ -2,12 +2,12 @@
 // Created by Professional on 04.07.2022.
 //
 
-#include "constRatioSizing2.h"
+#include "constRatioSizing2.hpp"
 
 namespace ui {
 	ConstRatioSizing2::ConstRatioSizing2(Sizing *sizing, float ratio, bool horizontal) : sizing(sizing), ratio(ratio), horizontal(horizontal) {}
 	
-	ConstRatioSizing2::ConstRatioSizing2(float ratio, bool horizontal) : sizing(new RelativeNormalSizing{}), ratio(ratio), horizontal(horizontal) {}
+	ConstRatioSizing2::ConstRatioSizing2(float ratio, bool horizontal, bool relativeParent) : sizing(createSize(relativeParent)), ratio(ratio), horizontal(horizontal) {}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float constSize, float ratio, bool horizontal) :
 		sizing(new ConstSizing{constSize}), ratio(ratio), horizontal(horizontal) {}
@@ -46,5 +46,84 @@ namespace ui {
 		ConstRatioSizing2* constRatioSizing2{new ConstRatioSizing2{sizing->copy(), ratio, horizontal}};
 		ConstRatioSizing2::copy(constRatioSizing2);
 		return constRatioSizing2;
+	}
+	
+	ConstRatioSizing2 *ConstRatioSizing2::createFromYaml(const YAML::Node &node) {
+		float ratio{1.0f};
+		bool horizontal{true};
+		
+		if(node["ratio"])
+			node["ratio"] >> ratio;
+		if(node["direction"]) {
+			std::string direction;
+			
+			node["direction"] >> direction;
+			
+			if(direction == "vertical") {
+				horizontal = false;
+			} else if(direction != "horizontal") {
+				throw YAML::BadConversion{node["direction"].Mark()};
+			}
+		}
+		
+		if(node["sizing"]) {
+			Sizing* sizing;
+			
+			node["sizing"] >> sizing;
+			
+			return new ConstRatioSizing2{sizing};
+		} else if(node["relative"]) {
+			std::string relative;
+			
+			node["relative"] >> relative;
+			
+			if(relative == "parent") {
+				return new ConstRatioSizing2{ratio, horizontal, true};
+			} else if(relative == "normal") {
+				return new ConstRatioSizing2{ratio, horizontal, false};
+			} else {
+				throw YAML::BadConversion{node["relative"].Mark()};
+			}
+		} else if(node["const-size"]) {
+			float constSize;
+			
+			node["const-size"] >> constSize;
+			
+			return new ConstRatioSizing2{constSize, ratio, horizontal};
+		} else if(node["coefficient"]) {
+			float coefficient;
+			float addition{};
+			bool relativeTarget{false};
+			
+			node["coefficient"] >> coefficient;
+			if(node["addition"])
+				node["addition"] >>  addition;
+			if(node["relative"]) {
+				std::string relative;
+				
+				node["relative"] >> relative;
+				
+				if(relative == "target") {
+					relativeTarget = true;
+				} else if(relative != "parent") {
+					throw YAML::BadConversion{node["relative"].Mark()};
+				}
+			}
+			
+			return new ConstRatioSizing2{coefficient, addition, ratio, horizontal, relativeTarget};
+		} else if(node["target-coefficient"] && node["parent-coefficient"]) {
+			float targetCoefficient;
+			float parentCoefficient;
+			float addition{};
+			
+			node["target-coefficient"] >> targetCoefficient;
+			node["parent-coefficient"] >> parentCoefficient;
+			if(node["addition"])
+				node["addition"] >> addition;
+			
+			return new ConstRatioSizing2{targetCoefficient, parentCoefficient, addition, ratio, horizontal};
+		} else {
+			throw YAML::BadConversion{node.Mark()};
+		}
 	}
 }

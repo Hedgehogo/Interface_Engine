@@ -1,5 +1,5 @@
 #pragma once
-#include "../../sizing.h"
+#include "../../sizing.hpp"
 
 namespace ui {
 	class TargetCoefficientSizing : public Sizing {
@@ -15,5 +15,7 @@ namespace ui {
 		float findSize(float, float targetSize) override;
 		
 		TargetCoefficientSizing* copy() override;
+		
+		static TargetCoefficientSizing* createFromYaml(const YAML::Node &node);
 	};
 }

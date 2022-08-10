@@ -2,7 +2,7 @@
 // Created by Professional on 04.07.2022.
 //
 
-#include "lambdaPositioning2.h"
+#include "lambdaPositioning2.hpp"
 
 namespace ui {
 	LambdaPositioning2::LambdaPositioning2(sf::Vector2f (*findPosition)(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize, sf::Vector2f targetSize)) : positioning(findPosition), renderTarget(nullptr) {}

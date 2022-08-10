@@ -1,5 +1,5 @@
 #pragma once
-#include "../basePositioning2.h"
+#include "../basePositioning2.hpp"
 
 namespace ui {
 	class Positioning2 : public BasePositioning2 {

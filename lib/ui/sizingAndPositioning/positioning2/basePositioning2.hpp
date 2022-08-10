@@ -1,6 +1,6 @@
 #pragma once
 #include "../../enums/location2/location2.hpp"
-#include "../positioning/positioning.h"
+#include "../positioning/positioning.hpp"
 #include "../positioning/internal/internalPositioning.h"
 #include "../positioning/internal/target/internalTargetPositioning.h"
 #include "../positioning/match/matchPositioning.h"
@@ -20,6 +20,8 @@ namespace ui {
 		virtual sf::Vector2f operator()(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize);
 		
 		virtual BasePositioning2* copy() = 0;
+		
+		static BasePositioning2* createFromYaml(const YAML::Node &node);
 	};
 	
 	Positioning* createPosition(float coefficient, float offset, bool relativeTarget = false);

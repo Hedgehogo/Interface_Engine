@@ -1,4 +1,4 @@
-#include "parentCoefficientSizing.h"
+#include "parentCoefficientSizing.hpp"
 
 namespace ui {
 	
@@ -16,5 +16,16 @@ namespace ui {
 	
 	float ParentCoefficientSizing::getParentSize(float objectSize) {
 		return (objectSize - addition) / coefficient;
+	}
+	
+	ParentCoefficientSizing *ParentCoefficientSizing::createFromYaml(const YAML::Node &node) {
+		float coefficient;
+		float addition{0.f};
+		
+		node["coefficient"] >> coefficient;
+		if(node["addition"])
+			node["addition"] >> addition;
+		
+		return new ParentCoefficientSizing{coefficient, addition};
 	}
 }

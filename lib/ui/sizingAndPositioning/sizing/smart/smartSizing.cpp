@@ -1,4 +1,4 @@
-#include "smartSizing.h"
+#include "smartSizing.hpp"
 
 namespace ui {
 	SmartSizing::SmartSizing(float targetCoefficient, float parentCoefficient, float addition) :
@@ -16,6 +16,21 @@ namespace ui {
 	
 	float SmartSizing::getParentSize(float objectSize) {
 		return (objectSize - addition) / parentCoefficient;
+	}
+	
+	SmartSizing *SmartSizing::createFromYaml(const YAML::Node &node) {
+		float targetCoefficient{1.f};
+		float parentCoefficient{0.f};
+		float addition{0.f};
+		
+		if(node["target-coefficient"])
+			node["target-coefficient"] >> targetCoefficient;
+		if(node["parent-coefficient"])
+			node["parent-coefficient"] >> parentCoefficient;
+		if(node["addition"])
+			node["addition"] >> addition;
+		
+		return new SmartSizing{targetCoefficient, parentCoefficient, addition};
 	}
 	
 	Sizing *createSizing(float targetCoefficient, float parentCoefficient, float addition) {

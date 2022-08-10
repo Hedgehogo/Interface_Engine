@@ -1,8 +1,12 @@
-#include "baseSizing2.h"
+#include "baseSizing2.hpp"
 
 namespace ui {
 	sf::Vector2f BaseSizing2::operator()(sf::Vector2f parentSize) {
 		return this->findSize(parentSize);
+	}
+	
+	BaseSizing2 *BaseSizing2::createFromYaml(const YAML::Node &node) {
+		return nullptr;
 	}
 	
 	Sizing *createSize(bool relativeParent) {

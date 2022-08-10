@@ -2,7 +2,7 @@
 // Created by Professional on 30.06.2022.
 //
 
-#include "relativeParentSizing.h"
+#include "relativeParentSizing.hpp"
 
 namespace ui {
 	RelativeParentSizing::RelativeParentSizing(float addition) : addition(addition) {}
@@ -18,6 +18,12 @@ namespace ui {
 	}
 	
 	RelativeParentSizing *RelativeParentSizing::copy() {
+		return new RelativeParentSizing{addition};
+	}
+	
+	RelativeParentSizing *RelativeParentSizing::createFromYaml(const YAML::Node &node) {
+		float addition;
+		node["addition"] >> addition;
 		return new RelativeParentSizing{addition};
 	}
 }
