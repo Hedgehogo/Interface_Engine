@@ -3,7 +3,7 @@
 #include "../../../../drawable/manager/drawManager.h"
 
 namespace ui {
-	ConstPanel::ConstPanel(IScalable *object, Sizing2 *sizing, Positioning2 *positioning, bool displayed) :
+	ConstPanel::ConstPanel(IScalable *object, BaseSizing2 *sizing, BasePositioning2 *positioning, bool displayed) :
 		BasePanel(object, sizing, positioning, displayed) {}
 	
 	void ConstPanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
