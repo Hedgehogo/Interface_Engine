@@ -19,8 +19,7 @@ int main() {
 
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	//window.setFramerateLimit(60);
-
+	window.setFramerateLimit(60);
 	
     sf::Texture textureGigachad;
     textureGigachad.loadFromFile("gigachad.jpg");
@@ -37,6 +36,7 @@ int main() {
 	ui::Caption::setDefaultSize(15);
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
+	
 	ui::Interface interface {
         /*new ui::LayerWithBackground{
             new ui::LayerWithMovableBorder{
@@ -163,6 +163,7 @@ int main() {
                                 },
                                 new ui::FullColor{sf::Color(0x9f6e5cff)},
                                 14,
+                                1.15,
                                 &font,
                                 sf::Color{10, 10, 0},
                                 sf::Color{200, 200, 200},
@@ -225,10 +226,8 @@ int main() {
 	};
 	
 	interface.init(window);
-    if (sf::Vector2f normalSize = interface.getNormalSize(); normalSize == sf::Vector2f{0, 0}){
-        window.setSize(sf::Vector2u(normalSize));
-        interface.setSize(normalSize);
-    }
+    window.setSize(sf::Vector2u(interface.getNormalSize()));
+    interface.setSize(interface.getNormalSize());
 
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};

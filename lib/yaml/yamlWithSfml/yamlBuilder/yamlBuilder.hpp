@@ -18,8 +18,11 @@ namespace ui {
 	public:
 		YamlBuilder() = default;
 		
-		static void add(std::string type, makeObject function) {
+		static void add(std::string type, makeObject function, std::vector<std::string> aliases = {}) {
 			typeMap[type] = function;
+			for(const auto &alias: aliases) {
+				addAlias(type, alias);
+			}
 		}
 		
 		static void addSubtype(makeSubobject function) {
@@ -34,7 +37,7 @@ namespace ui {
 			for(const auto &subtype: subtypeMap) {
 				try {
 					return subtype(node, type);
-				} catch (std::out_of_range&) {}
+				} catch (ui::NonexistentTypeYamlException&) {}
 			}
 			try {
 				return typeMap.at(type)(node);

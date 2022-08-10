@@ -1,4 +1,4 @@
-#include "layerWithConstBorder.h"
+#include "layerWithConstBorder.hpp"
 namespace ui {
 	void LayerWithConstBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
 		LayoutWithTwoObjects::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
@@ -67,5 +67,22 @@ namespace ui {
         IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		firstObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
         secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+	}
+	
+	LayerWithConstBorder *LayerWithConstBorder::createFromYaml(const YAML::Node &node) {
+		IScalable *constObject;
+		IScalable *secondObject;
+		Side side;
+		float borderDistance;
+		sf::Vector2f minSize{};
+		
+		node["const-object"] >> constObject;
+		node["second-object"] >> secondObject;
+		side = createSideFromYaml(node["side"]);
+		node["border-distance"] >> borderDistance;
+		if(node["min-size"])
+			node["min-size"] >> minSize;
+		
+		return new LayerWithConstBorder{constObject, secondObject, side, borderDistance, minSize};
 	}
 }

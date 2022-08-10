@@ -1,4 +1,4 @@
-#include "layerWithConstBezel.h"
+#include "layerWithConstBezel.hpp"
 #include "../../../../../drawable/manager/drawManager.h"
 
 namespace ui {
@@ -47,6 +47,21 @@ namespace ui {
 		LayerWithConstBezel* layerWithConstBezel{new LayerWithConstBezel{object->copy(), bezel->copy(), thickness}};
 		Layer::copy(layerWithConstBezel);
 		return layerWithConstBezel;
+	}
+	
+	LayerWithConstBezel *LayerWithConstBezel::createFromYaml(const YAML::Node &node) {
+		IScalable *object;
+		OnlyDrawable *bezel;
+		float thickness;
+		sf::Vector2f minSize{};
+		
+		node["object"] >> object;
+		node["bezel"] >> bezel;
+		node["thickness"] >> thickness;
+		if(node["min-size"])
+			node["min-size"] >> minSize;
+		
+		return new LayerWithConstBezel{object, bezel, thickness, minSize};
 	}
 	
 	void LayerWithConstBezel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

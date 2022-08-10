@@ -1,7 +1,8 @@
-#include "layerWithConstRatio.h"
+#include "layerWithConstRatio.hpp"
 
 namespace ui {
 	void LayerWithConstRatio::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+		drawManager.add(*this);
 		background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		firstObject->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		secondObject->init(renderTarget, secondDrawManager, updateManager, interactionManager, interactionStack, panelManager);
@@ -9,20 +10,20 @@ namespace ui {
 	
 	LayerWithConstRatio::LayerWithConstRatio(IScalable *constObject, IScalable *secondObject, OnlyDrawable* background, float aspectRatio, Corner corner, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithTwoObjects(constObject, secondObject), LayoutWithBackground(background),
-		verticalSide(corner == Corner::UpLeft || corner == Corner::UpRight), horizontalSide(corner == Corner::UpLeft || corner == Corner::DownLeft), aspectRatio(aspectRatio), renderSecond(true) {}
+		verticalSide(corner == Corner::upLeft || corner == Corner::upRight), horizontalSide(corner == Corner::upLeft || corner == Corner::downLeft), aspectRatio(aspectRatio), renderSecond(true) {}
 
     Corner LayerWithConstRatio::getCorner() {
             if (verticalSide){
                 if (horizontalSide){
-                    return Corner::UpLeft;
+                    return Corner::upLeft;
                 }
-                return Corner::UpRight;
+                return Corner::upRight;
             }
             else{
                 if (horizontalSide){
-                    return Corner::DownLeft;
+                    return Corner::downLeft;
                 }
-                return Corner::DownRight;
+                return Corner::downRight;
             }
 	}
 	
@@ -102,6 +103,30 @@ namespace ui {
 		LayerWithConstRatio* layerWithConstRatio{new LayerWithConstRatio{firstObject->copy(), secondObject->copy(), background->copy(), aspectRatio, getCorner(), minimumSize}};
 		LayerWithConstRatio::copy(layerWithConstRatio);
 		return layerWithConstRatio;
+	}
+	
+	LayerWithConstRatio *LayerWithConstRatio::createFromYaml(const YAML::Node &node) {
+		IScalable *constObject;
+		IScalable *secondObject;
+		float aspectRatio;
+		OnlyDrawable* background{};
+		Corner corner{Corner::upLeft};
+		sf::Vector2f minSize{};
+		
+		node["const-object"] >> constObject;
+		node["second-object"] >> secondObject;
+		node["aspect-ratio"] >> aspectRatio;
+		if(node["background"]) {
+			node["background"] >> background;
+		} else {
+			background = new Empty{};
+		}
+		if(node["corner"])
+			corner = createCornerFromYaml(node["corner"]);
+		if(node["min-size"])
+			node["min-size"] >> minSize;
+		
+		return new LayerWithConstRatio{constObject, secondObject, background, aspectRatio, corner, minSize};
 	}
 	
 	void LayerWithConstRatio::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

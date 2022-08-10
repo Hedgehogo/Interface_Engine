@@ -1,13 +1,10 @@
-type: Caption
-text:
-  filename: text.txt
-  first-symbol:
-    line: &first-line 2
-  last-symbol:
-    line: *first-line
-    line-offset: 2
-    number: end
-font: msyh.ttc
-background:
-  type: Sprite
-  texture: gigachad.jpg
+type: LayerWBorder
+objects:
+  - - type: FullColor
+      color: Red
+    - type: FullColor
+      color: Blue
+  - - type: FullColor
+      color: Green
+    - type: FullColor
+      color: Yellow

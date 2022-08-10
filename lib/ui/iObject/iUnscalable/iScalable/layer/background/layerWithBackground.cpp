@@ -1,4 +1,4 @@
-#include "layerWithBackground.h"
+#include "layerWithBackground.hpp"
 
 namespace ui {
     LayerWithBackground::LayerWithBackground(IScalable *object, OnlyDrawable *background, sf::Vector2f offset, sf::Vector2f minSize) :
@@ -52,5 +52,20 @@ namespace ui {
         object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 
     }
-
+    
+    LayerWithBackground *LayerWithBackground::createFromYaml(const YAML::Node &node) {
+		IScalable *object;
+		OnlyDrawable* background;
+		sf::Vector2f offset{};
+		sf::Vector2f minSize{};
+		
+		node["object"] >> object;
+		node["background"] >> background;
+		if(node["offset"])
+			node["offset"] >> offset;
+		if(node["min-size"])
+			node["min-size"] >> minSize;
+		
+        return new LayerWithBackground{object, background, offset, minSize};
+    }
 }

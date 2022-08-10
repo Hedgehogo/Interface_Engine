@@ -1,9 +1,9 @@
-#include "layerWithConstCenter.h"
+#include "layerWithConstCenter.hpp"
 
 namespace ui {
 	void LayerWithConstCenter::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
-		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 	}
 	
 	LayerWithConstCenter::LayerWithConstCenter(IScalable* object, OnlyDrawable* background, float aspectRatio, sf::Vector2f minSize) :
@@ -11,7 +11,7 @@ namespace ui {
 	
 	void LayerWithConstCenter::setAspectRatio(float aspectRatio) {
 		this->aspectRatio = aspectRatio;
-		this->resize(size, position);
+		this->setPosition(position);
 	}
 	
 	void LayerWithConstCenter::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -49,6 +49,25 @@ namespace ui {
 		LayerWithConstCenter* layerWithConstCenter{new LayerWithConstCenter{object->copy(), background->copy(), aspectRatio, minimumSize}};
 		Layer::copy(layerWithConstCenter);
 		return layerWithConstCenter;
+	}
+	
+	LayerWithConstCenter *LayerWithConstCenter::createFromYaml(const YAML::Node &node) {
+		IScalable *object;
+		float aspectRatio;
+		OnlyDrawable *background{};
+		sf::Vector2f minSize{};
+		
+		node["object"] >> object;
+		node["aspect-ratio"] >> aspectRatio;
+		if(node["background"]) {
+			node["background"] >> background;
+		} else {
+			background = new Empty{};
+		}
+		if(node["min-size"])
+			node["min-size"] >> minSize;
+		
+		return new LayerWithConstCenter{object, background, aspectRatio, minSize};
 	}
 	
 	void LayerWithConstCenter::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

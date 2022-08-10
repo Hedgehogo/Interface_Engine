@@ -3,7 +3,7 @@
 #include "../../iUnscalable/iScalable/iScalable.hpp"
 #include "../../../sizingAndPositioning/sizing2/general/sizing2.h"
 #include "../../../sizingAndPositioning/positioning2/general/positioning2.h"
-#include "../../../enums/enums.h"
+#include "../../../enums/enums.hpp"
 
 namespace ui {
 	class BasePanel : public LayoutWithObject, public IDrawable, public IUpdatable {

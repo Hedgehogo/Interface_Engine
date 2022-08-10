@@ -1,4 +1,4 @@
-#include "layer.h"
+#include "layer.hpp"
 
 ui::Layer::Layer(sf::Vector2f minSize, sf::Vector2f size) :
 	Layout(size), minimumSize(minSize) {}

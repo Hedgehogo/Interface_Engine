@@ -5,7 +5,7 @@
 #include "../interactive.h"
 #include "character/baseCharacter.h"
 #include "textBlock/baseTextBlock.h"
-#include "../../iScalable/onlyDrawable/onlyDrawable.h"
+#include "../../iScalable/onlyDrawable/onlyDrawable.hpp"
 #include "resizer/baseResizer.h"
 #include "resizer/simple/resizer.h"
 #include "../../iScalable/onlyDrawable/fullColor/fullColor.hpp"

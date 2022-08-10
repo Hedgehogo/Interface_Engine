@@ -1,4 +1,4 @@
-#include "layerWithPanel.h"
+#include "layerWithPanel.hpp"
 
 namespace ui {
 	LayerWithPanel::LayerWithPanel(ConstPanel* panel, IScalable* object, sf::Vector2f minSize) :
@@ -35,5 +35,18 @@ namespace ui {
 	void LayerWithPanel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
         object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
         panel->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
+	}
+	
+	LayerWithPanel *LayerWithPanel::createFromYaml(const YAML::Node &node) {
+		ConstPanel* panel;
+		IScalable* object;
+		sf::Vector2f minSize{};
+		
+		node["panel"] >> panel;
+		node["object"] >> object;
+		if(node["min-size"])
+			node["min-size"] >> minSize;
+		
+		return new LayerWithPanel{panel, object, minSize};
 	}
 }

@@ -1,4 +1,4 @@
-#include "layerWithMovableBorder.h"
+#include "layerWithMovableBorder.hpp"
 #include "../../../../../interaction/event/button/addInteraction/addInteractionEvent.h"
 #include "../../../../../drawable/manager/drawManager.h"
 #include <algorithm>
@@ -156,6 +156,32 @@ void ui::LayerWithMovableBorder::drawDebug(sf::RenderTarget &renderTarget, int i
     IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
     firstObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
     secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+}
+
+ui::LayerWithMovableBorder *ui::LayerWithMovableBorder::createFromYaml(const YAML::Node &node) {
+	ui::IScalable *firstObject;
+	ui::IScalable *secondObject;
+	bool isHorizontalBorder{false};
+	float borderValue{0.5f};
+	int borderInteractionSize{5};
+	sf::Vector2f minSize{};
+	node["first-object"] >> firstObject;
+	node["second-object"] >> secondObject;
+	std::string borderDirection;
+	node["border-direction"] >> borderDirection;
+	if(borderDirection == "horizontal") {
+		isHorizontalBorder = true;
+	} else if(borderDirection != "vertical") {
+		throw YAML::BadConversion{node.Mark()};
+	}
+	if(node["border-value"])
+		node["border-value"] >> borderValue;
+	if(node["border-interaction-size"])
+		node["border-interaction-size"] >> borderInteractionSize;
+	if(node["min-size"])
+		node["min-size"] >> minSize;
+	
+	return new LayerWithMovableBorder{firstObject, secondObject, isHorizontalBorder, borderValue, borderInteractionSize};
 }
 
 

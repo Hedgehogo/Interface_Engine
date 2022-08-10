@@ -1,6 +1,6 @@
 #include <iostream>
 #include "movableBorderEvent.h"
-#include "../../layerWithMovableBorder.h"
+#include "../../layerWithMovableBorder.hpp"
 
 ui::MovableBorderEvent::MovableBorderEvent(ui::LayerWithMovableBorder &layer) : layer(&layer) {}
 

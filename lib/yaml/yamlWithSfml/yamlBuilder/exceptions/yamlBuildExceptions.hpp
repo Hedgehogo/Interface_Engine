@@ -11,7 +11,7 @@ namespace ui {
 	
 	class NonexistentTypeYamlException : public std::exception {
 	protected:
-		std::string type;
+		std::string str;
 		
 	public:
 		NonexistentTypeYamlException(std::string type);

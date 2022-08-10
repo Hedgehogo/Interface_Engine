@@ -1,6 +1,6 @@
 #pragma once
 #include "../../positioning.h"
-#include "../../../../enums/location/location.h"
+#include "../../../../enums/location/location.hpp"
 
 namespace ui {
 	class MatchSidesPositioning : public Positioning {

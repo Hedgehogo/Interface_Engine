@@ -1,4 +1,4 @@
-#include "layerWithRenderTexture.h"
+#include "layerWithRenderTexture.hpp"
 #include <cmath>
 
 namespace ui {
@@ -60,5 +60,15 @@ namespace ui {
 	
 	void LayerWithRenderTexture::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
         object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+	}
+	
+	LayerWithRenderTexture *LayerWithRenderTexture::createFromYaml(const YAML::Node &node) {
+		IScalable* object;
+		bool optimize;
+		sf::Vector2f minSize;
+		node["object"] >> object;
+		node["optimize"] >> optimize;
+		node["min-size"] >> minSize;
+		return new LayerWithRenderTexture{object, optimize, minSize};
 	}
 }

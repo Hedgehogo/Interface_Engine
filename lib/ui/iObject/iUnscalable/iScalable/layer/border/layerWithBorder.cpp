@@ -1,4 +1,4 @@
-#include "layerWithBorder.h"
+#include "layerWithBorder.hpp"
 #include <vector>
 
 namespace ui {
@@ -130,9 +130,7 @@ namespace ui {
 	
 	LayerWithBorder *LayerWithBorder::copy() {
 		sf::Vector2u count(objects.size(), 0);
-		if(count.x != 0) {
-			count.y = objects[0].size();
-		}
+		if(count.x != 0) count.y = objects[0].size();
 		std::vector<std::vector<IScalable *>> newObjects(count.x, std::vector<IScalable *>(count.y, nullptr));
 		for(int x = 0; x < count.x; ++x) {
 			for(int y = 0; y < count.y; ++y) {
@@ -150,6 +148,38 @@ namespace ui {
 		LayerWithBorder* layerWithBorder{new LayerWithBorder{newObjects, newBoundsHorizontal, newBoundsVertical, minimumSize}};
 		Layer::copy(layerWithBorder);
 		return layerWithBorder;
+	}
+	
+	LayerWithBorder *LayerWithBorder::createFromYaml(const YAML::Node &node) {
+		sf::Vector2f minSize{};
+		sf::Vector2u count(node["objects"].size(), 0);
+		if(count.x != 0) count.y = node["objects"][0].size();
+		std::vector<std::vector<IScalable *>> objects(count.x, std::vector<IScalable *>(count.y, nullptr));
+		
+		if(node["min-size"])
+			node["min-size"] >> minSize;
+		
+		for(ullint x = 0; x < count.x; ++x) {
+			for(int y = 0; y < count.y; ++y) {
+				node["objects"][x][y] >> objects[x][y];
+			}
+		}
+		
+		if(node["bounds-vertical"] && node["bounds-horizontal"]) {
+			std::vector<float> boundsVertical(count.y - 1, 0.f);
+			std::vector<float> boundsHorizontal(count.x - 1, 0.f);
+			
+			for(ullint i = 0; i < count.y; ++i) {
+				node["bounds-vertical"][i] >> boundsVertical[i];
+			}
+			for(ullint i = 0; i < count.x; ++i) {
+				node["bounds-horizontal"][i] >> boundsHorizontal[i];
+			}
+			
+			return new LayerWithBorder{objects, boundsHorizontal, boundsVertical, minSize};
+		} else {
+			return new LayerWithBorder{objects, minSize};
+		}
 	}
 	
 	void LayerWithBorder::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

@@ -1,5 +1,5 @@
 #pragma once
-#include "../../enums/location2/location2.h"
+#include "../../enums/location2/location2.hpp"
 #include "../positioning/positioning.h"
 #include "../positioning/internal/internalPositioning.h"
 #include "../positioning/internal/target/internalTargetPositioning.h"
