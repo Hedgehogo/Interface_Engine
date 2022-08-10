@@ -1,5 +1,5 @@
 #pragma once
-#include "../buttonEvent.h"
+#include "../buttonEvent.hpp"
 
 namespace ui {
 	class EmptyEvent : public ButtonEvent {

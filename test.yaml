@@ -6,5 +6,8 @@ objects:
       color: Blue
   - - type: FullColor
       color: Green
-    - type: FullColor
-      color: Yellow
+    - type: Button
+      background:
+        type: Sprite
+        texture: gigachad.jpg
+      interaction: 0

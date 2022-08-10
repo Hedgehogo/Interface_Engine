@@ -23,11 +23,19 @@ namespace ui {
 		YamlBuilder<Layer>::add("LayerWithPanel", LayerWithPanel::createFromYaml, {"LayerWPanel", "LWP"});
 		YamlBuilder<Layer>::add("LayerWithRenderTexture", LayerWithRenderTexture::createFromYaml, {"LayerWRTexture", "LWRT"});
 		YamlBuilder<IScalable>::addSubtype(YamlBuilder<Layer>::build);
+        YamlBuilder<IScalable>::add("Button", Button::createFromYaml);
 		YamlBuilder<IUnscalable>::addSubtype(YamlBuilder<IScalable>::build);
 		//YamlBuilder<BasePanel>::add("ConstPanel", ConstPanel::createFromYaml);
 		//YamlBuilder<BasePanel>::add("Panel", Panel::createFromYaml);
 		YamlBuilder<IObject>::addSubtype(YamlBuilder<BasePanel>::build);
 		YamlBuilder<IObject>::addSubtype(YamlBuilder<IUnscalable>::build);
+        YamlBuilder<HidePanelInteraction>::add("ClickHidePanelInteraction", ClickHidePanelInteraction::createFromYaml, {"ClickHidePI", "ClickHPI", "CHPI"});
+        YamlBuilder<HidePanelInteraction>::add("PointingHidePanelInteraction", PointingHidePanelInteraction::createFromYaml, {"PointingHidePI", "PointingHPI", "PHPI"});
+        YamlBuilder<DisplayPanelInteraction>::add("ClickDisplayPanelInteraction", ClickDisplayPanelInteraction::createFromYaml, {"ClickDisplayPI", "ClickDPI", "CDPI"});
+        YamlBuilder<DisplayPanelInteraction>::add("PointingDisplayPanelInteraction", PointingDisplayPanelInteraction::createFromYaml, {"PointingDisplayPI", "PointingDPI", "PDPI"});
+        YamlBuilder<MovePanelInteraction>::add("CoefficientMovePanelInteraction", CoefficientMovePanelInteraction::createFromYaml, {"CoefficientMovePI", "CoefficientMPI", "CMPI"});
+        YamlBuilder<MovePanelInteraction>::add("DontMovePanelInteraction", DontMovePanelInteraction::createFromYaml, {"DontMovePI", "DontMPI", "DMPI"});
+        YamlBuilder<MovePanelInteraction>::add("SideMovePanelInteraction", SideMovePanelInteraction::createFromYaml, {"SideMovePI", "SideMPI", "SMPI"});
 	}
 	
 	YamlBuilderInitializer::YamlBuilderInitializer() {

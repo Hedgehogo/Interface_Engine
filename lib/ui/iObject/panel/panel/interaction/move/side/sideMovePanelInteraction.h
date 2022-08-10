@@ -14,5 +14,7 @@ namespace ui {
 		void move(sf::Vector2i mousePosition) override;
 		
 		SideMovePanelInteraction* copy() override;
+
+        static SideMovePanelInteraction* createFromYaml(const YAML::Node &node);
 	};
 }

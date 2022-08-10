@@ -13,6 +13,6 @@ namespace ui {
 		
 		void setPanel(Panel& panel) override;
 		
-		ClickPanelInteraction* copy() override;
+		ClickPanelInteraction* copy() override = 0;
 	};
 }

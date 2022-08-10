@@ -5,7 +5,7 @@
 #include "../../../panel/manager/panelManager.h"
 #include "../../../../interaction/interactionManager/interactionManager.h"
 #include "../../../../interaction/interactionStack/interactionStack.h"
-#include "../../../../interaction/event/wheel/wheelEvent.h"
+#include "../../../../interaction/event/wheel/wheelEvent.hpp"
 
 namespace ui {
 	class Interface : public IScalable, public IDrawable, public IUpdatable {

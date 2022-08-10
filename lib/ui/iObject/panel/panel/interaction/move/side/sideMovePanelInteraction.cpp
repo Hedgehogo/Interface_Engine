@@ -18,4 +18,18 @@ namespace ui {
 		PanelInteraction::copy(sideMovePanelInteraction);
 		return sideMovePanelInteraction;
 	}
+
+    SideMovePanelInteraction *SideMovePanelInteraction::createFromYaml(const YAML::Node &node) {
+        float coefficient;
+        float offset;
+        bool horizontal;
+        bool atStart = false;
+
+        node["coefficient"] >> coefficient;
+        node["offset"] >> offset;
+        node["horizontal"] >> horizontal;
+        if (node["at-start"]) node["at-start"] >> atStart;
+
+        return new SideMovePanelInteraction{coefficient, offset, horizontal, atStart};
+    }
 }

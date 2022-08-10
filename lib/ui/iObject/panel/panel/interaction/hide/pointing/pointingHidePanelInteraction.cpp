@@ -37,3 +37,7 @@ ui::PointingHidePanelInteraction *ui::PointingHidePanelInteraction::copy() {
 	pointingHidePanelInteraction->panelManager = this->panelManager;
 	return pointingHidePanelInteraction;
 }
+
+ui::PointingHidePanelInteraction *ui::PointingHidePanelInteraction::createFromYaml(const YAML::Node &node) {
+    return new PointingHidePanelInteraction{};
+}

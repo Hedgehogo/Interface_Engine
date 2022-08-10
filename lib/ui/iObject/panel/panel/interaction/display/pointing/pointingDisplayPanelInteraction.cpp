@@ -20,3 +20,7 @@ ui::PointingDisplayPanelInteraction *ui::PointingDisplayPanelInteraction::copy()
 	return pointingDisplayPanelInteraction;
 }
 
+ui::PointingDisplayPanelInteraction *ui::PointingDisplayPanelInteraction::createFromYaml(const YAML::Node &node) {
+    return new PointingDisplayPanelInteraction{};
+}
+

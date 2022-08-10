@@ -21,4 +21,10 @@ namespace ui {
 		ClickDisplayPanelInteraction* clickDisplayPanelInteraction{new ClickDisplayPanelInteraction(dynamic_cast<DisplayPanelEvent*>(event->copy()), button)};
 		return clickDisplayPanelInteraction;
 	}
+
+    ClickDisplayPanelInteraction *ClickDisplayPanelInteraction::createFromYaml(const YAML::Node &node) {
+        sf::Mouse::Button button;
+        node["button"] >> button;
+        return new ClickDisplayPanelInteraction{button};
+    }
 }

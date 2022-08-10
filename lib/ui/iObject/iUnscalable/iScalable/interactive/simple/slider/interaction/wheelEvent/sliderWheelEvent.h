@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../../../../../../interaction/event/wheel/simple/wheelEventSimple.h"
+#include "../../../../../../../../interaction/event/wheel/simple/wheelEventSimple.hpp"
 
 namespace ui {
 	class BaseSlider;

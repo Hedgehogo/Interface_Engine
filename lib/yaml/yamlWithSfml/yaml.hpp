@@ -48,3 +48,5 @@ void operator>>(const YAML::Node &node, sf::Rect<T> &rect) {
 void operator >>(const YAML::Node& node, sf::Color& color);
 
 void operator >>(const YAML::Node& node, sf::Text::Style& style);
+
+void operator >>(const YAML::Node& node, sf::Mouse::Button& button);

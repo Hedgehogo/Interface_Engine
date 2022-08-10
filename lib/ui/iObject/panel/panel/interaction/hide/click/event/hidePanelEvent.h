@@ -14,5 +14,7 @@ namespace ui {
 		
 	public:
 		HidePanelEvent* copy() override;
+
+        static HidePanelEvent* createFromYaml(const YAML::Node &node);
 	};
 }

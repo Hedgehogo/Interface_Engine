@@ -16,4 +16,16 @@ namespace ui {
 		PanelInteraction::copy(positioningMovePanelInteraction);
 		return positioningMovePanelInteraction;
 	}
+
+    CoefficientMovePanelInteraction *CoefficientMovePanelInteraction::createFromYaml(const YAML::Node &node) {
+        sf::Vector2f coefficient;
+        sf::Vector2f offset;
+        bool atStart{false};
+
+        node["coefficient"] >> coefficient;
+        node["offset"] >> offset;
+        if (node["at-start"]) node["at-start"] >> atStart;
+
+        return new CoefficientMovePanelInteraction{coefficient, offset, atStart};
+    }
 }

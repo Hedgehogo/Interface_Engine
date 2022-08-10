@@ -28,8 +28,8 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		LayerWithBorder* copy() override;
-		
-		static LayerWithBorder* createFromYaml(const YAML::Node &node);
+
+        static LayerWithBorder* createFromYaml(const YAML::Node &node);
 		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};

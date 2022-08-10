@@ -14,5 +14,7 @@ namespace ui {
 	
 	public:
 		DisplayPanelEvent* copy() override;
+
+        static DisplayPanelEvent* createFromYaml(const YAML::Node &node);
 	};
 }

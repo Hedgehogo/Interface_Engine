@@ -93,3 +93,13 @@ void operator>>(const YAML::Node &node, sf::Text::Style& style) {
 		}
 	}
 }
+
+void operator >>(const YAML::Node& node, sf::Mouse::Button& button){
+    if (node.as<std::string>() == "right") button = sf::Mouse::Button::Right;
+    else if (node.as<std::string>() == "left") button = sf::Mouse::Button::Left;
+    else if (node.as<std::string>() == "middle") button = sf::Mouse::Button::Middle;
+    else if (node.as<std::string>() == "button-count") button = sf::Mouse::Button::ButtonCount;
+    else if (node.as<std::string>() == "x-button-1") button = sf::Mouse::Button::XButton1;
+    else if (node.as<std::string>() == "x-button-2") button = sf::Mouse::Button::XButton2;
+    else throw YAML::BadConversion{node.Mark()};
+}

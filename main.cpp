@@ -106,7 +106,7 @@ int main() {
                                                                             new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
                                                                             new ui::Positioning2{ui::Location2::right, ui::Location2::left},
                                                                         },
-                                                                        //new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::left},
+                                                                        //new ui::ClickDisplayPanelInteraction{sf::Mouse::BaseButton::left},
                                                                         new ui::Sprite{texture_2}
                                                                     },
                                                                     {50, 50},
@@ -133,11 +133,11 @@ int main() {
                                                 sf::Color{200, 200, 200},
                                                 new ui::Resizer
                                             },
-                                            new ui::ClickHidePanelInteraction{sf::Mouse::Button::Left},
+                                            new ui::ClickHidePanelInteraction{sf::Mouse::BaseButton::Left},
                                             new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
                                             new ui::Positioning2{ui::Location2::right, ui::Location2::left},
                                         },
-                                        new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::Left},
+                                        new ui::ClickDisplayPanelInteraction{sf::Mouse::BaseButton::Left},
                                         new ui::LayerWithRenderTexture{
                                             new ui::Switch{
                                                 new ui::Sprite{texture_2},

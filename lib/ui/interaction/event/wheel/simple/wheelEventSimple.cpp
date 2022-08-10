@@ -1,4 +1,4 @@
-#include "wheelEventSimple.h"
+#include "wheelEventSimple.hpp"
 
 ui::WheelEvent_Simple::WheelEvent_Simple() : WheelEvent() {}
 

@@ -9,7 +9,3 @@ void ui::ClickPanelInteraction::init(ui::Panel &panel, ui::PanelManager &panelMa
 void ui::ClickPanelInteraction::setPanel(ui::Panel &panel) {
 	dynamic_cast<ui::PanelEvent*>(event)->setPanel(panel);
 }
-
-ui::ClickPanelInteraction *ui::ClickPanelInteraction::copy() {
-	return new ClickPanelInteraction{dynamic_cast<ui::PanelEvent*>(event->copy()), button};
-}

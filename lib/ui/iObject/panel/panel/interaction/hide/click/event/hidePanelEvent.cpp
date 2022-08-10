@@ -19,3 +19,7 @@ ui::HidePanelEvent *ui::HidePanelEvent::copy() {
 	hidePanelEvent->init(*panel, *panelManager);
 	return hidePanelEvent;
 }
+
+ui::HidePanelEvent *ui::HidePanelEvent::createFromYaml(const YAML::Node &node) {
+    return new HidePanelEvent{};
+}

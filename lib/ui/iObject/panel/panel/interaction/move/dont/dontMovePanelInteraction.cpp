@@ -1,7 +1,3 @@
-//
-// Created by Professional on 13.07.2022.
-//
-
 #include "dontMovePanelInteraction.h"
 
 namespace ui {
@@ -20,4 +16,8 @@ namespace ui {
 	DontMovePanelInteraction *DontMovePanelInteraction::copy() {
 		return new DontMovePanelInteraction{};
 	}
+
+    DontMovePanelInteraction *DontMovePanelInteraction::createFromYaml(const YAML::Node &node) {
+        return new DontMovePanelInteraction{};
+    }
 }

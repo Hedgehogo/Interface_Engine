@@ -1,5 +1,5 @@
 #pragma once
-#include "../button.h"
+#include "../baseButton.hpp"
 #include "../../../../../../panel/panel/general/panel.h"
 #include "../../../../../../panel/panel/interaction/display/pointing/pointingDisplayPanelInteraction.h"
 #include "../../../../../../panel/panel/interaction/display/click/clickDisplayPanelInteraction.h"
@@ -10,7 +10,7 @@
 #include "../../../../../../panel/panel/interaction/move/side/sideMovePanelInteraction.h"
 
 namespace ui {
-	class ButtonWithPanel : public Button {
+	class ButtonWithPanel : public BaseButton {
 	protected:
 		Panel *panel;
 		

@@ -17,4 +17,8 @@ namespace ui {
 		displayPanelEvent->init(*panel, *panelManager);
 		return displayPanelEvent;
 	}
+
+    DisplayPanelEvent *DisplayPanelEvent::createFromYaml(const YAML::Node &node) {
+        return new DisplayPanelEvent{};
+    }
 }
