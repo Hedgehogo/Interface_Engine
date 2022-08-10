@@ -11,3 +11,5 @@ font: msyh.ttc
 background:
   type: Sprite
   texture: gigachad.jpg
+rotation: 45
+cut-back: no
