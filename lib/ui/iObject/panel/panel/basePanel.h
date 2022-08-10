@@ -2,7 +2,7 @@
 #include "../../layout/object/layoutWithObject.h"
 #include "../../iUnscalable/iScalable/iScalable.hpp"
 #include "../../../sizingAndPositioning/sizing2/baseSizing2.hpp"
-#include "../../../sizingAndPositioning/sizing2/general/Sizing2.hpp"
+#include "../../../sizingAndPositioning/sizing2/general/sizing2.hpp"
 #include "../../../sizingAndPositioning/sizing2/constRatio/constRatioSizing2.hpp"
 #include "../../../sizingAndPositioning/sizing2/lambda/lambdaSizing2.hpp"
 #include "../../../sizingAndPositioning/positioning2/basePositioning2.hpp"
