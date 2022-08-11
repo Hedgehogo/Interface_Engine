@@ -56,7 +56,7 @@ namespace ui {
         sf::Vector2f getNormalSize() override;
 		
     protected:
-        Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background = new ui::FullColor(sf::Color::White), uint size = 14, BaseResizer *resizer = new Resizer(1.15, Resizer::Align::left));
+        Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background, uint size, BaseResizer *resizer, sf::RenderTarget *renderTarget);
 		
     public:
         Text *copy() override;
