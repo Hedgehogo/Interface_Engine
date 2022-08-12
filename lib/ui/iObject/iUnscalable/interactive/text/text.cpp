@@ -26,12 +26,12 @@ ui::Text::~Text() {
 
 void ui::Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
     updateManager.add(*this);
+    drawManager.add(*this);
     this->renderTarget = &renderTarget;
 	background->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
     for (BaseTextBlock * textBlock : textBocks) {
 		textBlock->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
     }
-	drawManager.add(*this);
 }
 
 void ui::Text::update() {
@@ -92,8 +92,8 @@ sf::Vector2f ui::Text::getNormalSize() {
     return max(resizer->getNormalSize(), background->getNormalSize());
 }
 
-ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background, uint size, BaseResizer *resizer) :
-    textBocks(textBlocks), background(background), size(size), resizer(resizer){
+ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background, uint size, BaseResizer *resizer, sf::RenderTarget *renderTarget) :
+    textBocks(textBlocks), background(background), size(size), resizer(resizer), renderTarget(renderTarget){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
         std::vector<ui::BaseCharacter*> characters = textBlock->getCharacters();
         textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
@@ -106,7 +106,7 @@ ui::Text *ui::Text::copy() {
         copyTextBlocks.push_back(textBlock->copy());
     }
 
-    return new Text{copyTextBlocks, background->copy(), size, resizer->copy()};
+    return new Text{copyTextBlocks, background->copy(), size, resizer->copy(), renderTarget};
 }
 
 void ui::Text::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
