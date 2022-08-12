@@ -15,4 +15,12 @@ namespace ui {
     InternalPositioning2 *InternalPositioning2::copy() {
         return new InternalPositioning2{*horizontal.copy(), *vertical.copy()};
     }
+	
+	InternalPositioning2 *InternalPositioning2::createFromYaml(const YAML::Node &node) {
+		sf::Vector2f coefficient;
+		
+		node["coefficient"] >> coefficient;
+		
+		return new InternalPositioning2{coefficient};
+	}
 }

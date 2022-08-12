@@ -1,4 +1,4 @@
-#include "yamlBuilderInitializer.h"
+#include "yamlBuilderInitializer.hpp"
 
 namespace ui {
 	void yamlBuilderInit() {
@@ -9,8 +9,25 @@ namespace ui {
 		YamlBuilder<Sizing>::add("TargetCoefficientSizing", TargetCoefficientSizing::createFromYaml, {"TargetCSizing", "TCS"});
 		YamlBuilder<Sizing>::add("SmartSizing", SmartSizing::createFromYaml, {"SS"});
 		
-		YamlBuilder<BaseSizing2>::add("Sizing2", Sizing2::createFromYaml);
+		YamlBuilder<BaseSizing2>::add("Sizing2", Sizing2::createFromYaml, {"S2"});
 		YamlBuilder<BaseSizing2>::add("ConstRatioSizing2", ConstRatioSizing2::createFromYaml, {"CRatioS2", "CRS2"});
+		
+		YamlBuilder<Positioning>::add("InternalPositioning", InternalPositioning::createFromYaml, {"IPos", "IP"});
+		YamlBuilder<Positioning>::add("InternalTargetPositioning", InternalTargetPositioning::createFromYaml, {"ITargetPos", "ITP"});
+		YamlBuilder<Positioning>::add("MatchPositioning", MatchPositioning::createFromYaml, {"MPos", "MP"});
+		YamlBuilder<Positioning>::add("MatchTargetPositioning", MatchTargetPositioning::createFromYaml, {"MTargetPos", "MTP"});
+		YamlBuilder<Positioning>::add("MatchSidesPositioning", MatchTargetPositioning::createFromYaml, {"MSidesPos", "MSP"});
+		
+		YamlBuilder<BasePositioning2>::add("Positioning2", Positioning2::createFromYaml, {"Pos2", "P2"});
+		YamlBuilder<BasePositioning2>::add("InternalPositioning2", Positioning2::createFromYaml, {"InternalPos2", "IP2"});
+		
+		YamlBuilder<HidePanelInteraction>::add("ClickHidePanelInteraction", ClickHidePanelInteraction::createFromYaml, {"ClickHidePI", "ClickHPI", "CHPI"});
+		YamlBuilder<HidePanelInteraction>::add("PointingHidePanelInteraction", PointingHidePanelInteraction::createFromYaml, {"PointingHidePI", "PointingHPI", "PHPI"});
+		YamlBuilder<DisplayPanelInteraction>::add("ClickDisplayPanelInteraction", ClickDisplayPanelInteraction::createFromYaml, {"ClickDisplayPI", "ClickDPI", "CDPI"});
+		YamlBuilder<DisplayPanelInteraction>::add("PointingDisplayPanelInteraction", PointingDisplayPanelInteraction::createFromYaml, {"PointingDisplayPI", "PointingDPI", "PDPI"});
+		YamlBuilder<MovePanelInteraction>::add("CoefficientMovePanelInteraction", CoefficientMovePanelInteraction::createFromYaml, {"CoefficientMovePI", "CoefficientMPI", "CMPI"});
+		YamlBuilder<MovePanelInteraction>::add("DontMovePanelInteraction", DontMovePanelInteraction::createFromYaml, {"DontMovePI", "DontMPI", "DMPI"});
+		YamlBuilder<MovePanelInteraction>::add("SideMovePanelInteraction", SideMovePanelInteraction::createFromYaml, {"SideMovePI", "SideMPI", "SMPI"});
 		
 		YamlBuilder<OnlyDrawable>::add("Empty", Empty::createFromYaml);
 		YamlBuilder<OnlyDrawable>::add("FullColor", FullColor::createFromYaml);
@@ -39,14 +56,6 @@ namespace ui {
 		//YamlBuilder<BasePanel>::add("Panel", Panel::createFromYaml);
 		YamlBuilder<IObject>::addSubtype(YamlBuilder<BasePanel>::build);
 		YamlBuilder<IObject>::addSubtype(YamlBuilder<IUnscalable>::build);
-		
-        YamlBuilder<HidePanelInteraction>::add("ClickHidePanelInteraction", ClickHidePanelInteraction::createFromYaml, {"ClickHidePI", "ClickHPI", "CHPI"});
-        YamlBuilder<HidePanelInteraction>::add("PointingHidePanelInteraction", PointingHidePanelInteraction::createFromYaml, {"PointingHidePI", "PointingHPI", "PHPI"});
-        YamlBuilder<DisplayPanelInteraction>::add("ClickDisplayPanelInteraction", ClickDisplayPanelInteraction::createFromYaml, {"ClickDisplayPI", "ClickDPI", "CDPI"});
-        YamlBuilder<DisplayPanelInteraction>::add("PointingDisplayPanelInteraction", PointingDisplayPanelInteraction::createFromYaml, {"PointingDisplayPI", "PointingDPI", "PDPI"});
-        YamlBuilder<MovePanelInteraction>::add("CoefficientMovePanelInteraction", CoefficientMovePanelInteraction::createFromYaml, {"CoefficientMovePI", "CoefficientMPI", "CMPI"});
-        YamlBuilder<MovePanelInteraction>::add("DontMovePanelInteraction", DontMovePanelInteraction::createFromYaml, {"DontMovePI", "DontMPI", "DMPI"});
-        YamlBuilder<MovePanelInteraction>::add("SideMovePanelInteraction", SideMovePanelInteraction::createFromYaml, {"SideMovePI", "SideMPI", "SMPI"});
 	}
 	
 	YamlBuilderInitializer::YamlBuilderInitializer() {

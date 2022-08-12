@@ -1,4 +1,4 @@
-#include "internalPositioning.h"
+#include "internalPositioning.hpp"
 
 namespace ui {
 	InternalPositioning::InternalPositioning(float coefficient, float offset) : coefficient(coefficient), offset(offset) {}
@@ -8,6 +8,17 @@ namespace ui {
 	}
 	
 	InternalPositioning *InternalPositioning::copy() {
+		return new InternalPositioning{coefficient, offset};
+	}
+	
+	InternalPositioning * InternalPositioning::createFromYaml(const YAML::Node &node) {
+		float coefficient;
+		float offset{0.f};
+		
+		node["coefficient"] >> coefficient;
+		if(node["offset"])
+			node["offset"] >> offset;
+		
 		return new InternalPositioning{coefficient, offset};
 	}
 }

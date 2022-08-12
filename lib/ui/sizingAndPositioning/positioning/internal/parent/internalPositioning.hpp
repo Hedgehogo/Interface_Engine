@@ -1,5 +1,5 @@
 #pragma once
-#include "../positioning.hpp"
+#include "../../positioning.hpp"
 
 namespace ui {
 	class InternalPositioning : public Positioning {
@@ -13,5 +13,7 @@ namespace ui {
 		float findPosition(float parentPosition, float objectSize, float parentSize, float) override;
 		
 		InternalPositioning* copy() override;
+		
+		static InternalPositioning * createFromYaml(const YAML::Node &node);
 	};
 }

@@ -1,12 +1,12 @@
 #pragma once
 #include "../../enums/location2/location2.hpp"
 #include "../positioning/positioning.hpp"
-#include "../positioning/internal/internalPositioning.h"
-#include "../positioning/internal/target/internalTargetPositioning.h"
-#include "../positioning/match/matchPositioning.h"
-#include "../positioning/match/sides/matchSidesPositioning.h"
-#include "../positioning/match/target/matchTargetPositioning.h"
-#include "../positioning/lambda/lambdaPositioning.h"
+#include "../positioning/internal/parent/internalPositioning.hpp"
+#include "../positioning/internal/target/internalTargetPositioning.hpp"
+#include "../positioning/match/parent/matchPositioning.hpp"
+#include "../positioning/match/sides/matchSidesPositioning.hpp"
+#include "../positioning/match/target/matchTargetPositioning.hpp"
+#include "../positioning/lambda/lambdaPositioning.hpp"
 
 namespace ui {
 	class BasePositioning2 {

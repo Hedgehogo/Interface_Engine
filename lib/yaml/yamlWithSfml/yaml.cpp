@@ -103,3 +103,11 @@ void operator >>(const YAML::Node& node, sf::Mouse::Button& button){
     else if (node.as<std::string>() == "x-button-2") button = sf::Mouse::Button::XButton2;
     else throw YAML::BadConversion{node.Mark()};
 }
+
+bool createBoolFromYaml(const YAML::Node &node, std::string trueValue, std::string falseValue) {
+	std::string parameter{node.as<std::string>()};
+	
+	if(parameter == trueValue) return true;
+	else if(parameter == falseValue) return false;
+	else throw YAML::BadConversion{node["relative"].Mark()};
+}

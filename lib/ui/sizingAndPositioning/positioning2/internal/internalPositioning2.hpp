@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../basePositioning2.hpp"
-#include "../../positioning/internal/internalPositioning.h"
+#include "../../positioning/internal/parent/internalPositioning.hpp"
 
 namespace ui {
     class InternalPositioning2 : public BasePositioning2{
@@ -11,7 +11,9 @@ namespace ui {
 
     public:
         InternalPositioning2(sf::Vector2f coefficient);
+		
         void init(sf::RenderTarget& renderTarget);
+		
         sf::Vector2f findPosition(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize);
 
     private:
@@ -19,5 +21,7 @@ namespace ui {
 
     public:
         InternalPositioning2* copy();
+	
+		static InternalPositioning2* createFromYaml(const YAML::Node &node);
     };
 }

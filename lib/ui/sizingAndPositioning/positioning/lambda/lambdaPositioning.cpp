@@ -1,4 +1,4 @@
-#include "lambdaPositioning.h"
+#include "lambdaPositioning.hpp"
 
 namespace ui {
 	LambdaPositioning::LambdaPositioning(float (*findPosition)(float, float, float, float)) : positioning(findPosition) {}

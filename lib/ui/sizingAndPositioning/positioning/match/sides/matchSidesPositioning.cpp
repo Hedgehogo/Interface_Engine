@@ -1,4 +1,4 @@
-#include "matchSidesPositioning.h"
+#include "matchSidesPositioning.hpp"
 
 namespace ui {
 	
@@ -20,6 +20,19 @@ namespace ui {
 	}
 	
 	MatchSidesPositioning *MatchSidesPositioning::copy() {
+		return new MatchSidesPositioning{parentSide, objectSide, offset};
+	}
+	
+	MatchSidesPositioning *MatchSidesPositioning::createFromYaml(const YAML::Node &node) {
+		Location parentSide;
+		Location objectSide;
+		float offset{0.f};
+		
+		parentSide = createLocationFromYaml(node["parent-side"]);
+		objectSide = createLocationFromYaml(node["object-side"]);
+		if(node["offset"])
+			node["offset"] >> offset;
+		
 		return new MatchSidesPositioning{parentSide, objectSide, offset};
 	}
 	
