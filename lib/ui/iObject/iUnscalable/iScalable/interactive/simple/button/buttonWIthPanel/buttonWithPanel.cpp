@@ -38,3 +38,15 @@ void ui::ButtonWithPanel::drawDebug(sf::RenderTarget &renderTarget, int indent, 
     BaseButton::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
     panel->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
 }
+
+ui::ButtonWithPanel *ui::ButtonWithPanel::createFromYaml(const YAML::Node &node) {
+	Panel *panel;
+	DisplayPanelInteraction* interaction;
+	IScalable *background;
+	
+	node["panel"] >> panel;
+	node["display-interaction"] >> interaction;
+	node["background"] >> background;
+	
+	return new ButtonWithPanel{panel, interaction, background};
+}

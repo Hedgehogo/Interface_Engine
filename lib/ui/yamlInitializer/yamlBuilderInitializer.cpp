@@ -16,10 +16,10 @@ namespace ui {
 		YamlBuilder<Positioning>::add("InternalTargetPositioning", InternalTargetPositioning::createFromYaml, {"ITargetPos", "ITP"});
 		YamlBuilder<Positioning>::add("MatchPositioning", MatchPositioning::createFromYaml, {"MPos", "MP"});
 		YamlBuilder<Positioning>::add("MatchTargetPositioning", MatchTargetPositioning::createFromYaml, {"MTargetPos", "MTP"});
-		YamlBuilder<Positioning>::add("MatchSidesPositioning", MatchTargetPositioning::createFromYaml, {"MSidesPos", "MSP"});
+		YamlBuilder<Positioning>::add("MatchSidesPositioning", MatchSidesPositioning::createFromYaml, {"MSidesPos", "MSP"});
 		
 		YamlBuilder<BasePositioning2>::add("Positioning2", Positioning2::createFromYaml, {"Pos2", "P2"});
-		YamlBuilder<BasePositioning2>::add("InternalPositioning2", Positioning2::createFromYaml, {"InternalPos2", "IP2"});
+		YamlBuilder<BasePositioning2>::add("InternalPositioning2", InternalPositioning2::createFromYaml, {"InternalPos2", "IP2"});
 		
 		YamlBuilder<HidePanelInteraction>::add("ClickHidePanelInteraction", ClickHidePanelInteraction::createFromYaml, {"ClickHidePI", "ClickHPI", "CHPI"});
 		YamlBuilder<HidePanelInteraction>::add("PointingHidePanelInteraction", PointingHidePanelInteraction::createFromYaml, {"PointingHidePI", "PointingHPI", "PHPI"});
@@ -50,10 +50,11 @@ namespace ui {
 		YamlBuilder<Layer>::add("LayerWithPanel", LayerWithPanel::createFromYaml, {"LayerWPanel", "LWP"});
 		YamlBuilder<Layer>::add("LayerWithRenderTexture", LayerWithRenderTexture::createFromYaml, {"LayerWRTexture", "LWRT"});
 		YamlBuilder<IScalable>::addSubtype(YamlBuilder<Layer>::build);
+		YamlBuilder<IScalable>::add("ButtonWithPanel", ButtonWithPanel::createFromYaml, {"ButtonWPanel"});
         YamlBuilder<IScalable>::add("Button", Button::createFromYaml);
 		YamlBuilder<IUnscalable>::addSubtype(YamlBuilder<IScalable>::build);
-		//YamlBuilder<BasePanel>::add("ConstPanel", ConstPanel::createFromYaml);
-		//YamlBuilder<BasePanel>::add("Panel", Panel::createFromYaml);
+		YamlBuilder<BasePanel>::add("ConstPanel", ConstPanel::createFromYaml);
+		YamlBuilder<BasePanel>::add("Panel", Panel::createFromYaml);
 		YamlBuilder<IObject>::addSubtype(YamlBuilder<BasePanel>::build);
 		YamlBuilder<IObject>::addSubtype(YamlBuilder<IUnscalable>::build);
 	}

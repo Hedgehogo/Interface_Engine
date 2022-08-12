@@ -1,6 +1,6 @@
 #pragma once
 #include "../layer.hpp"
-#include "../../../../panel/panel/const/constPanel.h"
+#include "../../../../panel/panel/const/constPanel.hpp"
 #include "../../../../layout/object/layoutWithObject.h"
 
 namespace ui {

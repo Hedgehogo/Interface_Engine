@@ -39,5 +39,7 @@ namespace ui {
 		bool updateInteractions(sf::Vector2f mousePosition, bool active) override;
 		
 		Panel* copy() override;
+		
+		static Panel* createFromYaml(const YAML::Node &node);
 	};
 }

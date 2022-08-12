@@ -27,6 +27,8 @@ namespace ui {
 		
 		ButtonWithPanel* copy() override;
 		
+		static ButtonWithPanel* createFromYaml(const YAML::Node &node);
+		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 }

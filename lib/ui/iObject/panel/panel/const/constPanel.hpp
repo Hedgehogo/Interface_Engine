@@ -13,5 +13,7 @@ namespace ui {
 		bool isFree() override;
 		
 		ConstPanel* copy() override;
+		
+		static ConstPanel* createFromYaml(const YAML::Node &node);
 	};
 }

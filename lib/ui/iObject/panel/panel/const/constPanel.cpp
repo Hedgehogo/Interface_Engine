@@ -1,4 +1,4 @@
-#include "constPanel.h"
+#include "constPanel.hpp"
 #include "../../manager/panelManager.h"
 #include "../../../../drawable/manager/drawManager.h"
 
@@ -20,5 +20,20 @@ namespace ui {
 		ConstPanel* constPanel {new ConstPanel(object->copy(), sizing->copy(), positioning->copy(), displayed)};
 		BasePanel::copy(constPanel);
 		return constPanel;
+	}
+	
+	ConstPanel *ConstPanel::createFromYaml(const YAML::Node &node) {
+		IScalable *object;
+		BaseSizing2 *sizing;
+		BasePositioning2 *positioning;
+		bool displayed{false};
+		
+		node["object"] >> object;
+		node["sizing"] >> sizing;
+		node["positioning"] >> positioning;
+		if(node["displayed"])
+			node["displayed"] >> displayed;
+		
+		return new ConstPanel{object, sizing, positioning, displayed};
 	}
 }

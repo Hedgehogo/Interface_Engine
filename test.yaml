@@ -1,13 +1,20 @@
-type: LayerWBorder
-objects:
-  - - type: FullColor
-      color: Red
-    - type: FullColor
-      color: Blue
-  - - type: FullColor
-      color: Green
-    - type: Button
-      background:
-        type: Sprite
-        texture: gigachad.jpg
-      interaction: 0
+type: ButtonWithPanel
+panel:
+  object:
+    type: FullColor
+    color: Red
+  sizing:
+    type: Sizing2
+    const-size: 10, 20
+  positioning:
+    type: Positioning2
+    coefficient: 0.5, 0.5
+  hide-interaction:
+    type: ClickHidePI
+    button: left
+display-interaction:
+  type: ClickDisplayPI
+  button: left
+background:
+  type: FullColor
+  color: Blue

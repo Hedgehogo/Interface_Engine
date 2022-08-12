@@ -3,6 +3,7 @@
 #include <functional>
 #include "../yaml.hpp"
 #include "exceptions/yamlBuildExceptions.hpp"
+#define UI_GET_TYPE_NAME(TYPE) (#TYPE)
 
 namespace ui {
 	template<typename T>
@@ -31,6 +32,21 @@ namespace ui {
 		
 		static void addAlias(std::string type, std::string alias) {
 			typeMap[alias] = typeMap.at(type);
+		}
+		
+		template<typename C>
+		static void add(std::vector<std::string> aliases = {}) {
+			add(UI_GET_TYPE_NAME(C), C::createFromYaml, aliases);
+		}
+		
+		template<typename C>
+		static void addSubtype() {
+			addSubtype(YamlBuilder<C>::build);
+		}
+		
+		template<typename C>
+		static void addAlias(std::string alias) {
+			addAlias(UI_GET_TYPE_NAME(C), alias);
 		}
 		
 		static T* build(const YAML::Node& node, std::string type) {

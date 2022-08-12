@@ -67,3 +67,28 @@ ui::Panel *ui::Panel::copy() {
 	Panel::copy(panel);
 	return panel;
 }
+
+ui::Panel *ui::Panel::createFromYaml(const YAML::Node &node) {
+	IScalable *object;
+	HidePanelInteraction *hideInteraction;
+	BaseSizing2 *sizing;
+	BasePositioning2 *positioning;
+	bool displayed{false};
+	
+	node["object"] >> object;
+	node["hide-interaction"] >> hideInteraction;
+	node["sizing"] >> sizing;
+	node["positioning"] >> positioning;
+	if(node["displayed"])
+		node["displayed"] >> displayed;
+	
+	if(node["move-interaction"]) {
+		MovePanelInteraction *moveInteraction;
+		
+		node["move-interaction"] >> moveInteraction;
+		
+		return new Panel{object, hideInteraction, moveInteraction, sizing, positioning, displayed};
+	} else {
+		return new Panel{object, hideInteraction, sizing, positioning, displayed};
+	}
+}
