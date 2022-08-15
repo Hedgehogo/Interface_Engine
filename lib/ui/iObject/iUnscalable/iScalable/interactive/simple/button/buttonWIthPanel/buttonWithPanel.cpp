@@ -1,4 +1,4 @@
-#include "buttonWithPanel.h"
+#include "buttonWithPanel.hpp"
 
 ui::ButtonWithPanel::ButtonWithPanel(ui::Panel *panel, ui::DisplayPanelInteraction *interaction, ui::IScalable *background) :
     BaseButton(background, interaction), panel(panel) {}

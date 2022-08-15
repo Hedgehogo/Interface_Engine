@@ -1,6 +1,6 @@
 #pragma once
 #include "../layer.hpp"
-#include "../../interactive/simple/interactiveSimple.h"
+#include "../../interactive/simple/interactiveSimple.hpp"
 #include "../../../../layout/twoObjects/layoutWithTwoObjects.h"
 #include "../../../../../interaction/iInteraction/block/pressed/pressedInteraction.h"
 #include "interaction/event/movableBorderEvent.h"

@@ -1,7 +1,7 @@
 #pragma once
 #include "../../../onlyDrawable/onlyDrawable.hpp"
-#include "../interactiveSimple.h"
-#include "interaction/interaction/sliderInteraction.h"
+#include "../interactiveSimple.hpp"
+#include "interaction/interaction/sliderInteraction.hpp"
 
 namespace ui {
 	class BaseSlider : public Interactive_Simple, public IDrawable {

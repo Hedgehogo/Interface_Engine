@@ -34,6 +34,12 @@ namespace ui {
 			typeMap[alias] = typeMap.at(type);
 		}
 		
+		static void addAliases(std::string type, std::vector<std::string> aliases) {
+			for(const auto &alias: aliases) {
+				addAlias(type, alias);
+			}
+		}
+		
 		template<typename C>
 		static void add(std::vector<std::string> aliases = {}) {
 			add(UI_GET_TYPE_NAME(C), C::createFromYaml, aliases);
@@ -47,6 +53,11 @@ namespace ui {
 		template<typename C>
 		static void addAlias(std::string alias) {
 			addAlias(UI_GET_TYPE_NAME(C), alias);
+		}
+		
+		template<typename C>
+		static void addAliases(std::vector<std::string> aliases) {
+			addAliases(UI_GET_TYPE_NAME(C), aliases);
 		}
 		
 		static T* build(const YAML::Node& node, std::string type) {
@@ -70,7 +81,7 @@ namespace ui {
 	std::vector<typename YamlBuilder<T>::makeSubobject> YamlBuilder<T>::subtypeMap = {};
 }
 
-template<typename T>
+template<typename T, typename R = decltype(T::createFromYaml(YAML::Node{}))>
 void operator>>(const YAML::Node &node, T*& object) {
 	if(node["type"]) {
 		std::string type;

@@ -1,6 +1,6 @@
-#include "switchEvent.h"
+#include "switchEvent.hpp"
 
-#include "../switch.h"
+#include "../switch.hpp"
 
 namespace ui {
     SwitchEvent::SwitchEvent(Switch &switcher) : switcher(&switcher) {}

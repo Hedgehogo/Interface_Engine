@@ -1,4 +1,4 @@
-#include "interactiveSimple.h"
+#include "interactiveSimple.hpp"
 
 ui::Interactive_Simple::Interactive_Simple(ui::IInteraction *interaction) : interaction(interaction), interact(false), oldInteract(false) {}
 

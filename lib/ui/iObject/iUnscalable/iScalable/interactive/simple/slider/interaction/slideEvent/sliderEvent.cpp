@@ -1,5 +1,5 @@
-#include "sliderEvent.h"
-#include "../../baseSlider.h"
+#include "sliderEvent.hpp"
+#include "../../baseSlider.hpp"
 #include <cmath>
 
 ui::SliderEvent::SliderEvent(BaseSlider &slider, sf::Vector2i division) :

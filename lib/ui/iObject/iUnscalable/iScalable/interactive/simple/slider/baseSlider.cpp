@@ -1,4 +1,4 @@
-#include "baseSlider.h"
+#include "baseSlider.hpp"
 #include <cmath>
 
 void ui::BaseSlider::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {

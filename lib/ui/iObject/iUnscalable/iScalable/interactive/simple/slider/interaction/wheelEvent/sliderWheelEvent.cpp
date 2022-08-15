@@ -1,8 +1,16 @@
-#include "sliderWheelEvent.h"
-#include "../../baseSlider.h"
+#include "sliderWheelEvent.hpp"
+#include "../../baseSlider.hpp"
 
-ui::SliderWheelEvent::SliderWheelEvent(BaseSlider &slider, bool horizontal, Sensitivity relativity, sf::Vector2f sensitivity) :
-	slider(&slider), sensitivity(sensitivity), horizontal(horizontal), relativity(relativity == Sensitivity::relationSlider) {}
+ui::SliderWheelEvent::Relativity ui::SliderWheelEvent::createRelativityFromYaml(const YAML::Node &node) {
+	if(createBoolFromYaml(node, "relationArea", "relationSlider")) {
+		return ui::SliderWheelEvent::Relativity::relationArea;
+	} else {
+		return ui::SliderWheelEvent::Relativity::relationSlider;
+	}
+}
+
+ui::SliderWheelEvent::SliderWheelEvent(BaseSlider &slider, bool horizontal, Relativity relativity, sf::Vector2f sensitivity) :
+	slider(&slider), sensitivity(sensitivity), horizontal(horizontal), relativity(relativity == Relativity::relationSlider) {}
 
 void ui::SliderWheelEvent::startPressed(sf::Vector2i, int) {}
 
@@ -31,7 +39,7 @@ void ui::SliderWheelEvent::setSlider(ui::BaseSlider &slider) {
 }
 
 ui::SliderWheelEvent *ui::SliderWheelEvent::copy() {
-	SliderWheelEvent* sliderWheelEvent{new SliderWheelEvent{*slider, horizontal, (relativity ? Sensitivity::relationSlider : Sensitivity::relationArea), sensitivity}};
+	SliderWheelEvent* sliderWheelEvent{new SliderWheelEvent{*slider, horizontal, (relativity ? Relativity::relationSlider : Relativity::relationArea), sensitivity}};
 	WheelEvent::copy(sliderWheelEvent);
 	return sliderWheelEvent;
 }

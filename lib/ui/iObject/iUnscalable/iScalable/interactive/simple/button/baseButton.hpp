@@ -1,5 +1,5 @@
 #pragma once
-#include "../interactiveSimple.h"
+#include "../interactiveSimple.hpp"
 #include "../../../onlyDrawable/onlyDrawable.hpp"
 
 namespace ui {

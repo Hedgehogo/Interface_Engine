@@ -1,5 +1,5 @@
 #pragma once
-#include "../baseSlider.h"
+#include "../baseSlider.hpp"
 
 namespace ui {
 	class Slider : public BaseSlider {
@@ -10,7 +10,7 @@ namespace ui {
 	
 	public:
 		Slider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, sf::Vector2f sliderScale = {1.0f, 0.5f}, sf::Mouse::Button button = sf::Mouse::Left,
-			   bool wheelHorizontal = false, SliderWheelEvent::Sensitivity wheelRelativity = SliderWheelEvent::Sensitivity::relationArea, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
+			   bool wheelHorizontal = false, SliderWheelEvent::Relativity wheelRelativity = SliderWheelEvent::Relativity::relationArea, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
 		
 		Slider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, sf::Vector2i division, sf::Vector2f sliderScale = {1.0f, 0.5f}, sf::Mouse::Button button = sf::Mouse::Left, bool wheelHorizontal = false);
 		
@@ -21,5 +21,7 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		Slider* copy() override;
+		
+		static Slider* createFromYaml(const YAML::Node &node);
 	};
 }

@@ -50,8 +50,12 @@ namespace ui {
 		YamlBuilder<Layer>::add("LayerWithPanel", LayerWithPanel::createFromYaml, {"LayerWPanel", "LWP"});
 		YamlBuilder<Layer>::add("LayerWithRenderTexture", LayerWithRenderTexture::createFromYaml, {"LayerWRTexture", "LWRT"});
 		YamlBuilder<IScalable>::addSubtype(YamlBuilder<Layer>::build);
+		YamlBuilder<BaseSlider>::add("Slider", Slider::createFromYaml);
+		YamlBuilder<BaseSlider>::add("ConstSlider", ConstSlider::createFromYaml);
+		YamlBuilder<IScalable>::addSubtype(YamlBuilder<BaseSlider>::build);
 		YamlBuilder<IScalable>::add("ButtonWithPanel", ButtonWithPanel::createFromYaml, {"ButtonWPanel"});
         YamlBuilder<IScalable>::add("Button", Button::createFromYaml);
+		YamlBuilder<IScalable>::add("Switch", Switch::createFromYaml);
 		YamlBuilder<IUnscalable>::addSubtype(YamlBuilder<IScalable>::build);
 		YamlBuilder<BasePanel>::add("ConstPanel", ConstPanel::createFromYaml);
 		YamlBuilder<BasePanel>::add("Panel", Panel::createFromYaml);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../interactiveSimple.h"
+#include "../interactiveSimple.hpp"
 #include "../../../../../layout/layout.h"
 #include "../../../../../../drawable/iDrawable/iDrawable.h"
 
@@ -38,6 +38,8 @@ namespace ui{
         void resize(sf::Vector2f size, sf::Vector2f position) override;
 
         Switch* copy() override;
+	
+		static Switch* createFromYaml(const YAML::Node &node);
 
         void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 

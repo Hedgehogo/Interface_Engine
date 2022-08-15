@@ -21,7 +21,7 @@ int main() {
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
 	window.setFramerateLimit(60);
 
-    sf::Texture textureGigachad;
+    /*sf::Texture textureGigachad;
     textureGigachad.loadFromFile("gigachad.jpg");
 	sf::Texture texture;
 	texture.loadFromFile("image.png");
@@ -30,7 +30,7 @@ int main() {
     sf::Texture texture_3;
     texture_3.loadFromFile("image_3.png");
 	sf::Font font;
-	font.loadFromFile("segoeui.ttf");
+	font.loadFromFile("segoeui.ttf");*/
 
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
@@ -234,7 +234,7 @@ int main() {
 	
 	while(window.isOpen()) {
 		
-		lastFPS[0] = 1.f / clock.restart().asSeconds();
+		1.f / clock.restart().asSeconds();
 		std::rotate(lastFPS.begin(), lastFPS.begin() + 1, lastFPS.end());
 		float mediumFPS = calculateMediumFPS(lastFPS);
         window.setTitle(std::to_string(static_cast<int>(mediumFPS)));

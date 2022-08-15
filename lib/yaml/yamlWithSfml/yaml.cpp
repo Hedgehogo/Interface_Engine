@@ -109,5 +109,5 @@ bool createBoolFromYaml(const YAML::Node &node, std::string trueValue, std::stri
 	
 	if(parameter == trueValue) return true;
 	else if(parameter == falseValue) return false;
-	else throw YAML::BadConversion{node["relative"].Mark()};
+	else throw YAML::BadConversion{node.Mark()};
 }

@@ -1,6 +1,6 @@
-#include "switch.h"
+#include "switch.hpp"
 #include "../../../../../../interaction/iInteraction/oneButton/oneButtonInteraction.h"
-#include "event/switchEvent.h"
+#include "event/switchEvent.hpp"
 
 namespace ui{
 
@@ -61,6 +61,25 @@ namespace ui{
         Layout::copy(switcher);
         return switcher;
     }
+	
+	Switch *Switch::createFromYaml(const YAML::Node &node) {
+		OnlyDrawable *inactiveBackground;
+		OnlyDrawable *activeBackground;
+		sf::Mouse::Button button{sf::Mouse::Button::Left};
+		bool startActive{false};
+		
+		node["inactive-background"] >> inactiveBackground;
+		node["active-background"] >> activeBackground;
+		if(node["button"])
+			node["button"] >> button;
+		if(node["state"]) {
+			startActive = createBoolFromYaml(node["state"], "active", "inactive");
+		} else if(node["start-active"]) {
+			node["start-active"] >> startActive;
+		}
+		
+		return new Switch{inactiveBackground, activeBackground, button, startActive};
+	}
 
     void Switch::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
         if(active)
@@ -73,6 +92,4 @@ namespace ui{
         delete activeBackground;
         delete inactiveBackground;
     }
-
-
 }

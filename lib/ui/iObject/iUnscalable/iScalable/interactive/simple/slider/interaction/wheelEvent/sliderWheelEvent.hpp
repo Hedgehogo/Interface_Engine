@@ -5,10 +5,13 @@ namespace ui {
 	class BaseSlider;
 	class SliderWheelEvent : public WheelEvent_Simple {
 	public:
-		enum class Sensitivity {
+		enum class Relativity {
 			relationArea,
 			relationSlider
 		};
+		
+		static Relativity createRelativityFromYaml(const YAML::Node &node);
+		
 	protected:
 		BaseSlider* slider;
 		sf::Vector2f sensitivity;
@@ -24,7 +27,7 @@ namespace ui {
 		void whileNotPressed(sf::Vector2i mousePosition, int value) override;
 		
 	public:
-		explicit SliderWheelEvent(BaseSlider &slider, bool horizontal = false, Sensitivity relativity = Sensitivity::relationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
+		explicit SliderWheelEvent(BaseSlider &slider, bool horizontal = false, Relativity relativity = Relativity::relationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
 		
 		void setSlider(BaseSlider& slider);
 		
