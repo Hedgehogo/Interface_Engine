@@ -1,7 +1,14 @@
-type: Slider
-slider:
-  type: Capsule
-  color: Red
-background:
+type: LWMB
+first-object:
+  type: LWRT
+  object:
+    type: Sprite
+    texture: gigachad.jpg
+second-object:
   type: FullColor
-  color: Blue
+  color: Red
+border-direction: vertical
+#type: LWRT
+#object:
+#  type: Sprite
+#  texture: gigachad.jpg
