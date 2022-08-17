@@ -1,14 +1,18 @@
 type: LWMB
 first-object:
-  type: LWRT
+  type: LWS
   object:
     type: Sprite
     texture: gigachad.jpg
+  shader:
+    frag: ../testShader.glsl
+  transmission: [aspectRatio, mousePosition, texture, size]
 second-object:
-  type: FullColor
-  color: Red
+  type: LWS
+  object:
+    type: Sprite
+    texture: gigachad.jpg
+  shader:
+    frag: ../fire.glsl
+  transmission: [ time, mousePosition, size ]
 border-direction: vertical
-#type: LWRT
-#object:
-#  type: Sprite
-#  texture: gigachad.jpg

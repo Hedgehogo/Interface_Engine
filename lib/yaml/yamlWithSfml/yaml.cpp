@@ -104,6 +104,24 @@ void operator >>(const YAML::Node& node, sf::Mouse::Button& button){
     else throw YAML::BadConversion{node.Mark()};
 }
 
+void operator >>(const YAML::Node& node, sf::Shader& shader){
+    std::string vert;
+    std::string frag;
+    if (node["vert"] && node["frag"]){
+        node["vert"] >> vert;
+        node["frag"] >> frag;
+        shader.loadFromFile(vert, frag);
+    } else {
+        if (node["vert"]){
+            node["vert"] >> vert;
+            shader.loadFromFile(vert, sf::Shader::Vertex);
+        } else if (node["frag"]){
+            node["frag"] >> frag;
+            shader.loadFromFile(frag, sf::Shader::Fragment);
+        }
+    }
+}
+
 bool createBoolFromYaml(const YAML::Node &node, std::string trueValue, std::string falseValue) {
 	std::string parameter{node.as<std::string>()};
 	

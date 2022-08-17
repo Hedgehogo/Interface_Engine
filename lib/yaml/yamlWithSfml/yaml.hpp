@@ -51,4 +51,6 @@ void operator >>(const YAML::Node& node, sf::Text::Style& style);
 
 void operator >>(const YAML::Node& node, sf::Mouse::Button& button);
 
+void operator >>(const YAML::Node& node, sf::Shader& shader);
+
 bool createBoolFromYaml(const YAML::Node& node, std::string trueValue, std::string falseValue);
