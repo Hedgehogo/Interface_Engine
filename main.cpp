@@ -233,8 +233,8 @@ int main() {
 	std::array<float, 500> lastFPS{};
 	
 	while(window.isOpen()) {
-		
-		1.f / clock.restart().asSeconds();
+
+        lastFPS[0] = 1.f / clock.restart().asSeconds();
 		std::rotate(lastFPS.begin(), lastFPS.begin() + 1, lastFPS.end());
 		float mediumFPS = calculateMediumFPS(lastFPS);
         window.setTitle(std::to_string(static_cast<int>(mediumFPS)));
@@ -260,6 +260,7 @@ int main() {
 				sf::Wheel::value = event.mouseWheel.delta;
 			}
 		}
+        interface.setSize(sf::Vector2f{window.getSize()});
 		window.clear();
 		interface.update(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window.getSystemHandle());
 		interface.draw();

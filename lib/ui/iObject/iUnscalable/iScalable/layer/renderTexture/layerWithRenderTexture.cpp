@@ -1,5 +1,4 @@
 #include "layerWithRenderTexture.hpp"
-#include <cmath>
 
 namespace ui {
 	void LayerWithRenderTexture::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
@@ -10,30 +9,36 @@ namespace ui {
 	}
 	
 	LayerWithRenderTexture::LayerWithRenderTexture(IScalable *object, bool optimize, sf::Vector2f minSize) :
-		Layer(minSize), LayoutWithObject(object), optimize(optimize), active(true), renderTarget(nullptr), interactionManager(nullptr) {
-		sprite.setScale({1, -1});
-	}
+		Layer(minSize), LayoutWithObject(object), optimize(optimize), active(true), renderTarget(nullptr), interactionManager(nullptr){}
 	
 	void LayerWithRenderTexture::draw() {
 		if(!optimize || active || interactionManager->isBlocked()) {
 			renderTexture.clear(sf::Color(0, 0, 0, 0));
 			drawManager.draw();
+            sprite.setTexture(renderTexture.getTexture());
 			active = false;
 		}
 		renderTarget->draw(sprite);
 	}
 	
 	void LayerWithRenderTexture::resize(sf::Vector2f size, sf::Vector2f position) {
-		active = true;
-		sf::Vector2i start {static_cast<int>(std::floor(position.x)), static_cast<int>(std::ceil(position.y))};
-		sf::Vector2i end {static_cast<int>(std::floor(position.x + size.x)), static_cast<int>(std::ceil(position.y + size.y))};
-		Layer::resize(static_cast<sf::Vector2f>(end - start), static_cast<sf::Vector2f>(start));
-		renderTexture.create(static_cast<unsigned>(end.x), static_cast<unsigned>(end.y));
-		
-		sprite.setTextureRect(sf::IntRect({start.x, 0}, end - start));
+        Layout::resize(size, position);
+        active = true;
+
+        sf::Vector2i start {static_cast<int>(std::floor(position.x)), static_cast<int>(std::ceil(position.y))};
+        sf::Vector2i end {static_cast<int>(std::floor(position.x + size.x)), static_cast<int>(std::ceil(position.y + size.y))};
+        
+        sf::Vector2i textureSize{end - start};
+
+        view.reset({sf::Vector2f{sf::Vector2i{start.x, start.y + textureSize.y}}, sf::Vector2f{sf::Vector2i{textureSize.x, -textureSize.y}}});
+
+        renderTexture.create(textureSize.x, textureSize.y);
+        renderTexture.setView(view);
+
 		sprite.setTexture(renderTexture.getTexture());
-		sprite.setPosition(static_cast<sf::Vector2f>(sf::Vector2i{start.x, end.y}));
-		
+        sprite.setTextureRect({{0, 0}, textureSize});
+		sprite.setPosition(sf::Vector2f{start});
+
 		object->resize(size, position);
 	}
 	
@@ -43,7 +48,7 @@ namespace ui {
 	}
 	
 	sf::Vector2f LayerWithRenderTexture::getMinSize() {
-		return max(object->getMinSize(), minimumSize);
+		return max(object->getMinSize(), minimumSize, {1, 1});
 	}
 	
 	void LayerWithRenderTexture::copy(LayerWithRenderTexture *layerWithRenderTexture) {
@@ -64,11 +69,11 @@ namespace ui {
 	
 	LayerWithRenderTexture *LayerWithRenderTexture::createFromYaml(const YAML::Node &node) {
 		IScalable* object;
-		bool optimize;
-		sf::Vector2f minSize;
+		bool optimize{true};
+		sf::Vector2f minSize{0, 0};
 		node["object"] >> object;
-		node["optimize"] >> optimize;
-		node["min-size"] >> minSize;
+        if (node["optimize"]) node["optimize"] >> optimize;
+        if (node["min-size"]) node["min-size"] >> minSize;
 		return new LayerWithRenderTexture{object, optimize, minSize};
 	}
 }

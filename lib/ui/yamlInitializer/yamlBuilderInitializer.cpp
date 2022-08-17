@@ -54,6 +54,7 @@ namespace ui {
 		YamlBuilder<Layer>::add(LayerWithMovableBorder::createFromYaml, "LayerWithMovableBorder", {"LayerWMBorder", "LWMB"});
 		YamlBuilder<Layer>::add(LayerWithPanel::createFromYaml, "LayerWithPanel", {"LayerWPanel", "LWP"});
 		YamlBuilder<Layer>::add(LayerWithRenderTexture::createFromYaml, "LayerWithRenderTexture", {"LayerWRTexture", "LWRT"});
+        YamlBuilder<Layer>::add(LayerWithShader::createFromYaml, "LayerWithShader", {"LWS"});
 		YamlBuilder<IScalable>::addSubtype(YamlBuilder<Layer>::build);
 		YamlBuilder<BaseSlider>::add(Slider::createFromYaml, "Slider");
 		YamlBuilder<BaseSlider>::add(ConstSlider::createFromYaml, "ConstSlider");

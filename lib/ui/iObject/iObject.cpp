@@ -40,6 +40,26 @@ ui::IObject *ui::IObject::createFromYaml(const YAML::Node &node) {
 	return nullptr;
 }
 
+void ui::IObject::drawDebug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget &renderTarget, uint hue) {
+    if (size.x > 0 && size.y > 0){
+        sf::Color color{HSVtoRGB(static_cast<float>(hue % 360))};
+
+        sf::RectangleShape rectangle{size};
+        rectangle.setPosition(position);
+        rectangle.setFillColor(sf::Color::Transparent);
+        rectangle.setOutlineThickness(1);
+        rectangle.setOutlineColor(color);
+
+        renderTarget.draw(rectangle);
+
+        sf::CircleShape circle{2, 4};
+        circle.setPosition(position + size * 0.5f - sf::Vector2f{2.0f, 2.0f});
+        circle.setFillColor(color);
+
+        renderTarget.draw(circle);
+    }
+}
+
 void ui::IObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int, uint hue, uint) {
 	sf::Vector2f size{this->getAreaSize() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2 + 2, indent * 2 + 2})};
 	sf::Vector2f position{this->getAreaPosition() + static_cast<sf::Vector2f>(sf::Vector2i{indent + 1, indent + 1})};

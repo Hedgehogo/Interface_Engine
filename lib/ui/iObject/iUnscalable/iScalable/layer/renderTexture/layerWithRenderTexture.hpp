@@ -9,6 +9,7 @@ namespace ui {
 		DrawManager drawManager;
 		sf::RenderTarget* renderTarget;
 		sf::RenderTexture renderTexture;
+        sf::View view;
 		sf::Sprite sprite;
 		bool optimize;
 		bool active;
@@ -18,7 +19,7 @@ namespace ui {
 	public:
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
-		LayerWithRenderTexture(IScalable* object, bool optimize = true, sf::Vector2f minSize = {});
+		LayerWithRenderTexture(IScalable *object, bool optimize = true, sf::Vector2f minSize = {});
 		
 		void draw() override;
 		
