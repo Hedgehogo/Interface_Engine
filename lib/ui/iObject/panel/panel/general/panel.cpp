@@ -1,5 +1,5 @@
 #include "panel.h"
-#include "../interaction/hide/hidePanelInteraction.h"
+#include "../interaction/hide/hidePanelInteraction.hpp"
 #include "../interaction/move/dont/dontMovePanelInteraction.h"
 
 ui::Panel::Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, BaseSizing2 *sizing, BasePositioning2 *positioning, bool displayed) :

@@ -1,5 +1,5 @@
 #pragma once
-#include "../basePanel.h"
+#include "../basePanel.hpp"
 
 namespace ui {
 	class ConstPanel : public BasePanel {

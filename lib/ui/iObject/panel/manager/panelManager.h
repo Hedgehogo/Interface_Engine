@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "../../iUnscalable/iScalable/iScalable.hpp"
-#include "../panel/basePanel.h"
+#include "../panel/basePanel.hpp"
 
 namespace ui {
 	class PanelManager {

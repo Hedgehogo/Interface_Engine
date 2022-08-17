@@ -1,4 +1,4 @@
-#include "basePanel.h"
+#include "basePanel.hpp"
 #include "../manager/panelManager.h"
 #include "../../../drawable/manager/drawManager.h"
 

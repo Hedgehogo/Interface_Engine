@@ -1,4 +1,4 @@
-#include "hidePanelInteraction.h"
+#include "hidePanelInteraction.hpp"
 
 ui::HidePanelInteraction::HidePanelInteraction() : BasePanelInteraction() {}
 

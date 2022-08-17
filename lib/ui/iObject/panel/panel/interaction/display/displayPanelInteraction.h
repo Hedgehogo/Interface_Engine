@@ -1,5 +1,5 @@
 #pragma once
-#include "../basePanelInteraction.h"
+#include "../basePanelInteraction.hpp"
 
 namespace ui {
 	class DisplayPanelInteraction : public virtual BasePanelInteraction {

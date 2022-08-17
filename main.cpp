@@ -263,7 +263,7 @@ int main() {
 		window.clear();
 		interface.update(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window.getSystemHandle());
 		interface.draw();
-		interface.drawDebug(window, 0, 2, 0, 90);
+		interface.drawDebug(window, 0, 2, 90, 90);
 		window.display();
 	}
 }

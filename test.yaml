@@ -1,7 +1,27 @@
-type: Slider
-slider:
-  type: Capsule
-  color: Red
-background:
+type: LayerWithConstBorder
+const-object:
+  type: ButtonWithPanel
+  panel:
+    object:
+      type: FullColor
+      color: Blue
+    sizing:
+      type: Sizing2
+      const-size: 30, 40
+    positioning:
+      type: Positioning2
+      coefficient: 0.5, 0.5
+    hide-interaction:
+      type: PointingHidePI
+      only-on-parent: yes
+  display-interaction:
+    type: ClickDisplayPI
+    button: left
+  background:
+    type: FullColor
+    color: Red
+second-object:
   type: FullColor
-  color: Blue
+  color: Green
+side: left
+border-distance: 100

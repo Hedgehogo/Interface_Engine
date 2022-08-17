@@ -1,14 +1,15 @@
-#include "hidePanelEvent.h"
+#include "hidePanelEvent.hpp"
 #include "../../../../general/panel.h"
+
+ui::HidePanelEvent::HidePanelEvent(bool onlyOnParent) : onlyOnParent(onlyOnParent) {}
 
 void ui::HidePanelEvent::startPressed(sf::Vector2i) {}
 
 void ui::HidePanelEvent::whilePressed(sf::Vector2i) {}
 
 void ui::HidePanelEvent::stopPressed(sf::Vector2i mousePosition) {
-	//std::cout << "click" << std::endl;
 	sf::Vector2f pointPosition {static_cast<sf::Vector2f>(mousePosition)};
-	if(!panel->inPanel(pointPosition) && !panel->inConstPanels(pointPosition) && panel->isFree())
+	if(onlyOnParent ? panel->getParentProcessed() : !panel->inPanel(pointPosition) && !panel->inConstPanels(pointPosition) && panel->isFree())
 		panelManager->hidePanel(panel);
 }
 
@@ -21,5 +22,9 @@ ui::HidePanelEvent *ui::HidePanelEvent::copy() {
 }
 
 ui::HidePanelEvent *ui::HidePanelEvent::createFromYaml(const YAML::Node &node) {
-    return new HidePanelEvent{};
+	bool onlyOnParent{false};
+	
+	if(node["only-on-parent"]) node["only-on-parent"] >> onlyOnParent;
+	
+    return new HidePanelEvent{onlyOnParent};
 }

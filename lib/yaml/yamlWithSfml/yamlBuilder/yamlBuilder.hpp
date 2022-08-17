@@ -19,11 +19,9 @@ namespace ui {
 	public:
 		YamlBuilder() = default;
 		
-		static void add(std::string type, makeObject function, std::vector<std::string> aliases = {}) {
+		static void add(makeObject function, std::string type, std::vector<std::string> aliases = {}) {
 			typeMap[type] = function;
-			for(const auto &alias: aliases) {
-				addAlias(type, alias);
-			}
+			addAliases(type, aliases);
 		}
 		
 		static void addSubtype(makeSubobject function) {
@@ -42,7 +40,7 @@ namespace ui {
 		
 		template<typename C>
 		static void add(std::vector<std::string> aliases = {}) {
-			add(UI_GET_TYPE_NAME(C), C::createFromYaml, aliases);
+			add(C::createFromYaml, UI_GET_TYPE_NAME(C), aliases);
 		}
 		
 		template<typename C>

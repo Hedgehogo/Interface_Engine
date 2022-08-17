@@ -1,6 +1,6 @@
 #pragma once
 #include "event/panelEvent.h"
-#include "../hide/hidePanelInteraction.h"
+#include "../hide/hidePanelInteraction.hpp"
 #include "../display/displayPanelInteraction.h"
 #include "../../../../../interaction/iInteraction/oneButton/oneButtonInteraction.h"
 
