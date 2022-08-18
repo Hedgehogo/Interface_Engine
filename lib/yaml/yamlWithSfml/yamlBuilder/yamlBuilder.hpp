@@ -81,8 +81,9 @@ namespace ui {
 	std::vector<typename YamlBuilder<T>::makeSubobject> YamlBuilder<T>::subtypeMap = {};
 }
 
-template<typename T, typename R = decltype(T::createFromYaml(YAML::Node{}))>
-void operator>>(const YAML::Node &node, T*& object) {
+template<typename T>
+std::void_t<decltype(T::createFromYaml(std::declval<YAML::Node>()))>
+operator>>(const YAML::Node &node, T*& object) {
 	if(node["type"]) {
 		std::string type;
 		node["type"] >> type;
