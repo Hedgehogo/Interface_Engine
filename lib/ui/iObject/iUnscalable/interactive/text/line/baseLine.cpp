@@ -23,4 +23,8 @@ namespace ui {
         for (int i = 0; i < vertexArray.getVertexCount(); ++i)
             vertexArray[i].position += position;
     }
+
+    BaseLine *BaseLine::createFromYaml(const YAML::Node &node) {
+        return nullptr;
+    }
 }

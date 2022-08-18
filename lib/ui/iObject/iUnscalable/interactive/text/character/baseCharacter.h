@@ -37,7 +37,7 @@ namespace ui{
 
         virtual float getAdvance() = 0;
 
-        virtual float getKerning(wchar_t character) = 0;
+        virtual float getKerning(char32_t character) = 0;
 
         virtual bool isEnter();
 
@@ -45,7 +45,7 @@ namespace ui{
 
         virtual void draw() = 0;
 
-        virtual wchar_t getChar() = 0;
+        virtual char32_t getChar() = 0;
 
         virtual void drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) = 0;
 

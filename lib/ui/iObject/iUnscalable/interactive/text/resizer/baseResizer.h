@@ -9,7 +9,7 @@
 namespace ui {
     class BaseResizer {
     public:
-        enum class Align{
+        enum Align{
             left,
             right,
             center
@@ -37,6 +37,11 @@ namespace ui {
 
         virtual BaseResizer * copy() = 0;
 
+        static BaseResizer* createFromYaml(const YAML::Node &node);
+
         virtual ~BaseResizer() = default;
     };
+
 }
+
+void operator >> (const YAML::Node& node, ui::BaseResizer::Align& align);

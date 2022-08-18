@@ -33,7 +33,14 @@ namespace ui {
 		YamlBuilder<MovePanelInteraction>::add(SideMovePanelInteraction::createFromYaml, "SideMovePanelInteraction", {"SideMovePI", "SideMPI", "SMPI"});
 		YamlBuilder<BasePanelInteraction>::addSubtype(YamlBuilder<MovePanelInteraction>::build);
 		YamlBuilder<IInteraction>::addSubtype(YamlBuilder<BasePanelInteraction>::build);
-		
+
+        YamlBuilder<BaseLine>::add(Underline::createFromYaml, "Underline", {"U"});
+        YamlBuilder<BaseLine>::add(StrikeThrough::createFromYaml, "StrikeThrough", {"ST"});
+        YamlBuilder<BaseTextBlock>::add(TextBlock::createFromYaml, "TextBlock", {"TB"});
+        YamlBuilder<BaseTextBlock>::add(InteractiveTextBlock::createFromYaml, "InteractiveTextBlock", {"ITB"});
+        YamlBuilder<BaseTextBlock>::add(ObjectTextBlock::createFromYaml, "ObjectTextBlock", {"OBT"});
+        YamlBuilder<BaseResizer>::add(Resizer::createFromYaml, "Resizer", {"R"});
+
 		YamlBuilder<OnlyDrawable>::add(Empty::createFromYaml, "Empty");
 		YamlBuilder<OnlyDrawable>::add(FullColor::createFromYaml, "FullColor");
 		YamlBuilder<OnlyDrawable>::add(RoundedRectangle::createFromYaml, "RoundedRectangle");
@@ -63,7 +70,8 @@ namespace ui {
 		YamlBuilder<IScalable>::add(Button::createFromYaml, "Button");
 		YamlBuilder<IScalable>::add(Switch::createFromYaml, "Switch");
 		YamlBuilder<IUnscalable>::addSubtype(YamlBuilder<IScalable>::build);
-		YamlBuilder<BasePanel>::add(ConstPanel::createFromYaml, "ConstPanel");
+		YamlBuilder<IScalable>::add(Text::createFromYaml, "Text", {});
+        YamlBuilder<BasePanel>::add(ConstPanel::createFromYaml, "ConstPanel");
 		YamlBuilder<BasePanel>::add(Panel::createFromYaml, "Panel");
 		YamlBuilder<IObject>::addSubtype(YamlBuilder<BasePanel>::build);
 		YamlBuilder<IObject>::addSubtype(YamlBuilder<IUnscalable>::build);

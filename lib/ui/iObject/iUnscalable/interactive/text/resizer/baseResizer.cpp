@@ -7,6 +7,10 @@ namespace ui {
         this->characters = &characters;
         this->lines = &lines;
     }
+
+    BaseResizer *BaseResizer::createFromYaml(const YAML::Node &node) {
+        return nullptr;
+    }
 /*
     void BaseResizer::addLines(std::vector<BaseLine *> *lines, float startLine, sf::Vector2f endCharacterPos) {
         if (lines) {
@@ -55,4 +59,12 @@ namespace ui {
         }
     }
 */
+}
+
+void operator >> (const YAML::Node& node, ui::BaseResizer::Align& align){
+
+    if (node.as<std::string>() == "left") align = ui::BaseResizer::Align::left;
+    else if (node.as<std::string>() == "right") align = ui::BaseResizer::Align::right;
+    else if (node.as<std::string>() == "center") align = ui::BaseResizer::Align::center;
+    else throw YAML::BadConversion{node.Mark()};
 }

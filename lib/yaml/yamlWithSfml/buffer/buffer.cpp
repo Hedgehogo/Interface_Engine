@@ -94,38 +94,46 @@ namespace ui {
 }
 
 void operator>>(const YAML::Node &node, std::basic_string<char32_t>& string32) {
-	std::string filename;
-	node["filename"] >> filename;
-	std::basic_ifstream<char32_t> fin(filename);
-	std::basic_string<char32_t> str{};
-	if(node["line"]) {
-		ullint line{node["line"].as<ullint>() + 1};
-		for(ullint i = 0; i < line; ++i)
-			std::getline(fin, str, U'\n');
-	} else if(node["first-symbol"]) {
-		ui::SymbolPosition start{ui::readCharacterIndex(node["first-symbol"], fin)};
-		if(node["last-symbol"]) {
-			const YAML::Node& secondNode = node["last-symbol"];
-			ui::SymbolPosition end{ui::readCharacterIndex(secondNode, fin)};
-			std::basic_string<char32_t> line;
-			for(ullint i = 0; i < start.line; ++i)
-				std::getline(fin, line, U'\n');
-			for(ullint i = 0; i < end.line - start.line; ++i) {
-				std::getline(fin, line, U'\n');
-				str += line + U"\n";
-			}
-			std::getline(fin, line, U'\n');
-			str += line.substr(0, end.number + 1);
-		} else {
-			for(ullint i = 0; i < start.line; ++i)
-				std::getline(fin, str, U'\n');
-			std::getline(fin, str, U'\0');
-		}
-		str = str.substr(start.number + (str[0] == 65279));
-	} else {
-		std::getline(fin, str, U'\0');
-	}
-	string32 = str;
+    if (node.IsScalar()) {
+        std::string str = node.as<std::string>();
+        string32.resize(str.size());
+        for (int i = 0; i < str.size(); ++i) {
+            string32[i] = str[i];
+        }
+    } else {
+        std::string filename;
+        node["filename"] >> filename;
+        std::basic_ifstream<char32_t> fin(filename);
+        std::basic_string<char32_t> str{};
+        if (node["line"]) {
+            ullint line{node["line"].as<ullint>() + 1};
+            for (ullint i = 0; i < line; ++i)
+                std::getline(fin, str, U'\n');
+        } else if (node["first-symbol"]) {
+            ui::SymbolPosition start{ui::readCharacterIndex(node["first-symbol"], fin)};
+            if (node["last-symbol"]) {
+                const YAML::Node &secondNode = node["last-symbol"];
+                ui::SymbolPosition end{ui::readCharacterIndex(secondNode, fin)};
+                std::basic_string<char32_t> line;
+                for (ullint i = 0; i < start.line; ++i)
+                    std::getline(fin, line, U'\n');
+                for (ullint i = 0; i < end.line - start.line; ++i) {
+                    std::getline(fin, line, U'\n');
+                    str += line + U"\n";
+                }
+                std::getline(fin, line, U'\n');
+                str += line.substr(0, end.number + 1);
+            } else {
+                for (ullint i = 0; i < start.line; ++i)
+                    std::getline(fin, str, U'\n');
+                std::getline(fin, str, U'\0');
+            }
+            str = str.substr(start.number + (str[0] == 65279));
+        } else {
+            std::getline(fin, str, U'\0');
+        }
+        string32 = str;
+    }
 }
 
 void operator>>(const YAML::Node &node, sf::String &sfString) {

@@ -21,13 +21,13 @@ namespace ui {
 
         float getAdvance() override;
 
-        float getKerning(wchar_t character) override;
+        float getKerning(char32_t character) override;
 
         Special isSpecial() override;
 
         void draw() override;
 
-        wchar_t getChar() override;
+        char32_t getChar() override;
 
         void drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) override;
 

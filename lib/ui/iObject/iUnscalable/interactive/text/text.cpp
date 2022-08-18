@@ -1,5 +1,6 @@
 #include <iostream>
 #include "text.h"
+#include "../../../../../yaml/yamlWithSfml/buffer/buffer.hpp"
 
 ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, BaseResizer *resizer) :
     background(background), size(size), textBocks(textBlocks), resizer(resizer){
@@ -26,12 +27,12 @@ ui::Text::~Text() {
 
 void ui::Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
     updateManager.add(*this);
-    drawManager.add(*this);
     this->renderTarget = &renderTarget;
 	background->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
     for (BaseTextBlock * textBlock : textBocks) {
 		textBlock->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
     }
+    drawManager.add(*this);
 }
 
 void ui::Text::update() {
@@ -109,6 +110,45 @@ ui::Text *ui::Text::copy() {
     return new Text{copyTextBlocks, background->copy(), size, resizer->copy(), renderTarget};
 }
 
+ui::Text *ui::Text::createFromYaml(const YAML::Node &node) {
+    std::vector<ui::BaseTextBlock *> textBlocks;
+    OnlyDrawable *background;
+    int size{14};
+    sf::Font *font{nullptr};
+    sf::Color textColor{sf::Color::Black};
+    sf::Color textSelectionColor{sf::Color::Black};
+    sf::Color backgroundSelectionColor{sf::Color::Black};
+    BaseResizer *resizer;
+
+    if (node["text-block"]){
+        BaseTextBlock* textBlock;
+        node["text-block"] >> textBlock;
+        textBlocks.push_back(textBlock);
+    } else if (node["text-blocks"]){
+        for (const YAML::Node& textBlockNode : node["text-blocks"]) {
+            BaseTextBlock* textBlock;
+            node["text-block"] >> textBlock;
+            textBlocks.push_back(textBlock);
+        }
+    } else {
+        throw YAML::BadConversion{node["text-blocks"].Mark()};
+    }
+
+    if (node["background"]) node["background"] >> background;
+    else background = new ui::FullColor(sf::Color::White);
+
+    if (node["resizer"]) node["resizer"] >> resizer;
+    else resizer = new Resizer{1.15, BaseResizer::Align::left};
+
+    if (node["size"]) node["size"] >> size;
+    if (node["font"]) node["font"] >> font;
+    if (node["text-color"]) node["text-color"] >> textColor;
+    if (node["text-selection-color"]) node["text-selection-color"] >> textSelectionColor;
+    if (node["background-selection-color"]) node["background-selection-color"] >> backgroundSelectionColor;
+
+    return new Text{textBlocks, background, size, font, textColor, textSelectionColor, backgroundSelectionColor, resizer};
+}
+
 void ui::Text::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
     for (BaseCharacter*& character : textCharacters) {
         character->drawDebug(renderTarget, indentAddition, hue + hueOffset, hueOffset);
@@ -116,4 +156,3 @@ void ui::Text::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentA
 
     background->drawDebug(renderTarget, indent, indentAddition, hue + hueOffset, hueOffset);
 }
-

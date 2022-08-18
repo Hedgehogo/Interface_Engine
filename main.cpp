@@ -21,7 +21,8 @@ int main() {
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
 	window.setFramerateLimit(60);
 
-    /*sf::Texture textureGigachad;
+/*
+    sf::Texture textureGigachad;
     textureGigachad.loadFromFile("gigachad.jpg");
 	sf::Texture texture;
 	texture.loadFromFile("image.png");
@@ -30,7 +31,8 @@ int main() {
     sf::Texture texture_3;
     texture_3.loadFromFile("image_3.png");
 	sf::Font font;
-	font.loadFromFile("segoeui.ttf");*/
+	font.loadFromFile("segoeui.ttf");
+*/
 
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
@@ -38,7 +40,8 @@ int main() {
 	ui::Character::setDebug(true);
 
 	ui::Interface interface {
-        /*new ui::LayerWithBackground{
+/*
+        new ui::LayerWithBackground{
             new ui::LayerWithMovableBorder{
                 new ui::LayerWithBorderHorizontal{
                     {
@@ -51,7 +54,7 @@ int main() {
                                             new ui::Text{
                                                 {
                                                     new ui::TextBlock{
-                                                        L"это ",
+                                                        U"это ",
                                                         {255, 255, 255, 0},
                                                         &font,
                                                         {},
@@ -60,7 +63,7 @@ int main() {
                                                         }
                                                     },
                                                     new ui::TextBlock{
-                                                        L"собственность",
+                                                        U"собственность",
                                                         {255, 255, 255, 0},
                                                         &font,
                                                         {},
@@ -70,7 +73,7 @@ int main() {
                                                         }
                                                     },
                                                     new ui::TextBlock{
-                                                        L" Артёма",
+                                                        U" Артёма",
                                                         {255, 255, 255, 0},
                                                         &font,
                                                         {},
@@ -82,14 +85,14 @@ int main() {
                                                         new ui::Text{
                                                             {
                                                                 new ui::TextBlock{
-                                                                    L"fack\n",
+                                                                    U"fack\n",
                                                                     {255, 255, 255, 0},
                                                                     &font,
                                                                     sf::Text::Style::Italic
                                                                 },
                                                                 new ui::InteractiveTextBlock{
                                                                     0,
-                                                                    L"you",
+                                                                    U"you",
                                                                     {255, 255, 255, 0},
                                                                     &font,
                                                                     sf::Text::Style::Bold
@@ -133,11 +136,11 @@ int main() {
                                                 sf::Color{200, 200, 200},
                                                 new ui::Resizer
                                             },
-                                            new ui::ClickHidePanelInteraction{sf::Mouse::BaseButton::Left},
+                                            new ui::ClickHidePanelInteraction{sf::Mouse::Button::Left},
                                             new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
                                             new ui::Positioning2{ui::Location2::right, ui::Location2::left},
                                         },
-                                        new ui::ClickDisplayPanelInteraction{sf::Mouse::BaseButton::Left},
+                                        new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::Left},
                                         new ui::LayerWithRenderTexture{
                                             new ui::Switch{
                                                 new ui::Sprite{texture_2},
@@ -153,17 +156,16 @@ int main() {
                                 new ui::Empty,
                                 new ui::Empty,
                                 1,
-                                ui::Corner::DownLeft
+                                ui::Corner::downLeft
                             },
                             new ui::Text{
                                 {
                                     new ui::TextBlock{
-                                        L"Box2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects moveSlider in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation. \nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine."
+                                        U"Box2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects moveSlider in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation. \nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine."
                                     }
                                 },
                                 new ui::FullColor{sf::Color(0x9f6e5cff)},
                                 14,
-                                1.15,
                                 &font,
                                 sf::Color{10, 10, 0},
                                 sf::Color{200, 200, 200},
@@ -216,7 +218,8 @@ int main() {
             },
             new ui::Sprite{textureGigachad},
             {100.f, 100.f}
-        }*/
+        }
+*/
 		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {

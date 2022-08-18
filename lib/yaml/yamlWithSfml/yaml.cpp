@@ -54,7 +54,8 @@ void operator>>(const YAML::Node &node, sf::Color &color) {
 			{"Yellow", sf::Color::Yellow},
 			{"Magenta", sf::Color::Magenta},
 			{"Cyan", sf::Color::Cyan},
-			{"Transparent", sf::Color::Transparent}
+			{"Transparent", sf::Color::Transparent},
+            {"NullColor", {255, 255, 255, 0}}
 		};
 		
 		if(colorMap.find(strColor) != colorMap.end()) {
@@ -63,11 +64,13 @@ void operator>>(const YAML::Node &node, sf::Color &color) {
 		}
 		
 		uint r{0}, g{0}, b{0}, a{255};
-		if(strColor.size() == 8) {
+		if (strColor.size() == 8) {
 			sscanf(strColor.c_str(), "%02x%02x%02x%02x", &r, &g, &b, &a);
-		} else if(strColor.size() == 6) {
+		} else if (strColor.size() == 6) {
 			sscanf(strColor.c_str(), "%02x%02x%02x", &r, &g, &b);
-		}
+		} else {
+            throw YAML::BadConversion{node.Mark()};
+        }
 		color = {sf::Uint8(r), sf::Uint8(g), sf::Uint8(b), sf::Uint8(a)};
 	}
 }
@@ -84,14 +87,16 @@ void operator>>(const YAML::Node &node, sf::Text::Style& style) {
 	if(node.IsScalar()) {
 		std::string strStyle = node.as<std::string>();
 		style = styleMap[strStyle];
-	} else if(node.IsSequence()) {
+	} else if (node.IsSequence()) {
 		style = sf::Text::Style::Regular;
 		std::string strStyle;
 		for(const auto &item: node) {
 			strStyle = item.as<std::string>();
 			style = static_cast<sf::Text::Style>(style | styleMap[strStyle]);
 		}
-	}
+	} else {
+        throw YAML::BadConversion{node.Mark()};
+    }
 }
 
 void operator >>(const YAML::Node& node, sf::Mouse::Button& button){

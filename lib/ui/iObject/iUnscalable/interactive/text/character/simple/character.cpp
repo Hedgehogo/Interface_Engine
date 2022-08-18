@@ -1,7 +1,7 @@
 #include "character.h"
 #include "../../../../../iObject.hpp"
 
-ui::Character::Character(wchar_t character, TextVariables &textVariables, std::vector<BaseLine *>& lines)
+ui::Character::Character(char32_t character, TextVariables &textVariables, std::vector<BaseLine *>& lines)
         : character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), lines(lines){
     if(isSpecial() != BaseCharacter::Special::enter){
         glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style & sf::Text::Style::Bold);
@@ -57,11 +57,11 @@ ui::BaseCharacter::Special ui::Character::isSpecial() {
     return BaseCharacter::Special::no;
 }
 
-wchar_t ui::Character::getChar() {
+char32_t ui::Character::getChar() {
     return character;
 }
 
-float ui::Character::getKerning(wchar_t character) {
+float ui::Character::getKerning(char32_t character) {
     return textVariables.font->getKerning(this->character, character, textVariables.size);
 }
 

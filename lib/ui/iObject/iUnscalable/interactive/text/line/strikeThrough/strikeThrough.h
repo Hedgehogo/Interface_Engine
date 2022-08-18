@@ -15,5 +15,7 @@ namespace ui {
         void init(float strikeThroughOffset, float underlineThickness, sf::VertexArray vertexArray, sf::RenderTarget &renderTarget);
     public:
         StrikeThrough* copy();
+
+        static StrikeThrough* createFromYaml(const YAML::Node &node);
     };
 }

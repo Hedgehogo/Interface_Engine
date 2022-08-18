@@ -2,11 +2,19 @@ type: LWMB
 first-object:
   type: LWS
   object:
-    type: Sprite
-    texture: gigachad.jpg
+    type: Text
+    size: 100
+    text-color: Black
+    text-block:
+      type: TB
+      text: The difficulty with the programmer is that you can't understand what he's doing until it's too late.
+    font: msyh.ttc
+    background:
+      type: Sprite
+      texture: gigachad.jpg
   shader:
     frag: ../testShader.glsl
-  transmission: [aspectRatio, mousePosition, texture, size]
+  transmission: [ aspectRatio, mousePosition, texture, size ]
 second-object:
   type: LWS
   object:

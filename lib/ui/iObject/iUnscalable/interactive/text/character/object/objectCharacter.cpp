@@ -4,7 +4,7 @@
 namespace ui {
     ObjectCharacter::ObjectCharacter(ui::IObject* object) : object(object){}
 
-    wchar_t ObjectCharacter::getChar() {
+    char32_t ObjectCharacter::getChar() {
         return '\0';
     }
 
@@ -27,7 +27,7 @@ namespace ui {
         return object->getAreaSize().x;
     }
 
-    float ObjectCharacter::getKerning(wchar_t character) {
+    float ObjectCharacter::getKerning(char32_t character) {
         return 0;
     }
 

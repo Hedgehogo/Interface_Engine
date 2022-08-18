@@ -14,11 +14,11 @@ namespace ui {
         int indexInteraction;
         IInteraction* interaction;
     public:
-        InteractiveTextBlock(IInteraction* interaction, std::wstring text, sf::Color textColor = sf::Color(255, 255, 255, 0),
+        InteractiveTextBlock(IInteraction* interaction, std::u32string  text, sf::Color textColor = sf::Color(255, 255, 255, 0),
                              sf::Font *font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0,
                              sf::Color textSelectionColor = sf::Color(255, 255, 255, 0),
                              sf::Color backgroundSelectionColor = sf::Color(255, 255, 255, 0));
-        InteractiveTextBlock(int indexInteraction, std::wstring text, sf::Color textColor = sf::Color(255, 255, 255, 0),
+        InteractiveTextBlock(int indexInteraction, std::u32string  text, sf::Color textColor = sf::Color(255, 255, 255, 0),
                              sf::Font *font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0,
                              sf::Color textSelectionColor = sf::Color(255, 255, 255, 0),
                              sf::Color backgroundSelectionColor = sf::Color(255, 255, 255, 0));
@@ -35,10 +35,12 @@ namespace ui {
         bool updateInteractions(sf::Vector2f mousePosition) override;
 
     protected:
-        InteractiveTextBlock(std::wstring str, TextVariables textVariables, ui::IInteraction *interaction);
-        InteractiveTextBlock(std::wstring str, TextVariables textVariables, int indexInteraction);
+        InteractiveTextBlock(std::u32string  str, TextVariables textVariables, ui::IInteraction *interaction);
+        InteractiveTextBlock(std::u32string  str, TextVariables textVariables, int indexInteraction);
     public:
 
         InteractiveTextBlock * copy() override;
+
+        static InteractiveTextBlock* createFromYaml(const YAML::Node &node);
     };
 }

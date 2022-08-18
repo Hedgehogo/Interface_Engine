@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "../../../../../../yaml/yamlWithSfml/yamlBuilder/yamlBuilder.hpp"
 
 typedef unsigned uint;
 
@@ -19,6 +20,8 @@ namespace ui {
         virtual void resize(float start, float end, float height) = 0;
 
         virtual BaseLine* copy() = 0;
+
+        static BaseLine* createFromYaml(const YAML::Node &node);
 
         virtual ~BaseLine() = default;
     };

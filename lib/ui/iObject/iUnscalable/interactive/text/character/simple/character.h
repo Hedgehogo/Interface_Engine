@@ -13,7 +13,7 @@ namespace ui{
 
         sf::RenderTarget* renderTarget;
 
-        wchar_t character;
+        char32_t character;
 
         sf::Glyph glyph;
         TextVariables &textVariables;
@@ -24,7 +24,7 @@ namespace ui{
 
         std::vector<BaseLine*>& lines;
     public:
-        Character(wchar_t character, TextVariables &textVariables, std::vector<BaseLine *>& lines);
+        Character(char32_t character, TextVariables &textVariables, std::vector<BaseLine *>& lines);
 
         void init(sf::RenderTarget &renderTarget) override;
 
@@ -40,11 +40,11 @@ namespace ui{
 
         float getAdvance() override;
 
-        float getKerning(wchar_t character) override;
+        float getKerning(char32_t character) override;
 
         Special isSpecial() override;
 
-        wchar_t getChar() override;
+        char32_t getChar() override;
 
         void setPosition(const sf::Vector2f position);
 

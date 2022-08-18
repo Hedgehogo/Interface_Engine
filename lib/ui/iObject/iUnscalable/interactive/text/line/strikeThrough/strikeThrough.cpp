@@ -1,4 +1,3 @@
-
 #include "strikeThrough.h"
 
 namespace ui {
@@ -29,5 +28,13 @@ namespace ui {
         StrikeThrough* underline = new StrikeThrough(sf::Color(), 0);
         underline->init(strikeThroughOffset, underlineThickness, vertexArray, *renderTarget);
         return underline;
+    }
+
+    StrikeThrough *StrikeThrough::createFromYaml(const YAML::Node &node) {
+        sf::Color color{nullColor};
+        float strikeThroughOffset = 0.3;
+        if (node["color"]) node["color"] >> color;
+        if (node["strike-through-offset"]) node["strike-through-offset"] >> strikeThroughOffset;
+        return new StrikeThrough{color, strikeThroughOffset};
     }
 }

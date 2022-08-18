@@ -215,4 +215,14 @@ namespace ui {
     Resizer *Resizer::copy() {
         return new Resizer(lineSpacing, align);
     }
+
+    Resizer *Resizer::createFromYaml(const YAML::Node &node) {
+        float lineSpacing{1.15};
+        Align align{Align::left};
+
+        if (node["line-spacing"]) node["line-spacing"] >> lineSpacing;
+        if (node["align"]) node["align"] >> align;
+
+        return new Resizer{lineSpacing, align};
+    }
 }

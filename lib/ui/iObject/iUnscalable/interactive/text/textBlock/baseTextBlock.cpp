@@ -16,3 +16,7 @@ void ui::BaseTextBlock::setTextVariables(sf::Color TextColor, sf::Color textSele
     if (textVariables.size == 0)
         textVariables.size = size;
 }
+
+ui::BaseTextBlock *ui::BaseTextBlock::createFromYaml(const YAML::Node &node) {
+    return nullptr;
+}

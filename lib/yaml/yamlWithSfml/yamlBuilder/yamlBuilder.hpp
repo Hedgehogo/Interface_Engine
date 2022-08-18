@@ -6,6 +6,8 @@
 #define UI_GET_TYPE_NAME(TYPE) (#TYPE)
 
 namespace ui {
+    const sf::Color nullColor{255, 255, 255, 0};
+
 	template<typename T>
 	class YamlBuilder {
 	public:

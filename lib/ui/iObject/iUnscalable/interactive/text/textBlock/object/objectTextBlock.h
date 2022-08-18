@@ -8,9 +8,9 @@ namespace ui{
         sf::Vector2f size;
         ObjectCharacter* objectCharacter;
         bool isCharacter;
-        IObject* object;
+        IScalable* object;
     public:
-        ObjectTextBlock(ui::IObject* object, sf::Vector2f size = {0, 0}, bool isCharacter = true);
+        ObjectTextBlock(ui::IScalable* object, sf::Vector2f size = {0, 0}, bool isCharacter = true);
 
         void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 
@@ -23,5 +23,7 @@ namespace ui{
         bool updateInteractions(sf::Vector2f mousePosition) override;
 
         BaseTextBlock *copy() override;
+
+        static ObjectTextBlock* createFromYaml(const YAML::Node &node);
     };
 }

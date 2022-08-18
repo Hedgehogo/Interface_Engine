@@ -1,6 +1,6 @@
 #include "objectTextBlock.h"
 #include "../../character/simple/character.h"
-ui::ObjectTextBlock::ObjectTextBlock(ui::IObject* object, sf::Vector2f size, bool isCharacter) : BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), object(object), isCharacter(isCharacter) {
+ui::ObjectTextBlock::ObjectTextBlock(ui::IScalable* object, sf::Vector2f size, bool isCharacter) : BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), object(object), isCharacter(isCharacter) {
 }
 
 void ui::ObjectTextBlock::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
@@ -36,4 +36,15 @@ bool ui::ObjectTextBlock::updateInteractions(sf::Vector2f mousePosition) {
 
 ui::BaseTextBlock *ui::ObjectTextBlock::copy() {
     return new ObjectTextBlock{object->copy(), object->getAreaSize(), isCharacter};
+}
+
+ui::ObjectTextBlock *ui::ObjectTextBlock::createFromYaml(const YAML::Node &node) {
+    ui::IScalable* object;
+    sf::Vector2f size{0, 0};
+    bool isCharacter{true};
+
+    node["object"] >> object;
+    if (node["size"]) node["size"] >> size;
+    if (node["is-character"]) node["is-character"] >> isCharacter;
+    return new ObjectTextBlock{object, size, isCharacter};
 }

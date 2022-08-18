@@ -41,5 +41,7 @@ namespace ui {
         sf::Vector2f getNormalSize() override;
 
         Resizer * copy();
+
+        static Resizer* createFromYaml(const YAML::Node &node);
     };
 }

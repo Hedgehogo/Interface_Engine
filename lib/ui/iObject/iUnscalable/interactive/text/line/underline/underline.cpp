@@ -31,4 +31,10 @@ namespace ui {
         underline->init(underlineOffset, underlineThickness, vertexArray, *renderTarget);
         return underline;
     }
+
+    Underline *Underline::createFromYaml(const YAML::Node &node) {
+        sf::Color color{nullColor};
+        if (node["color"]) node["color"] >> color;
+        return new Underline{color};
+    }
 }
