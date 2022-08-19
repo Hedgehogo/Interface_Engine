@@ -1,7 +1,7 @@
 #pragma once
 #include "../onlyDrawable.hpp"
-#include "../../../../../../yaml/yamlWithSfml/buffer/buffer.hpp"
-#include "../../../../../sizingAndPositioning/positioning2/internal/internalPositioning2.hpp"
+#include "../../../../../../../yaml/yamlWithSfml/buffer/buffer.hpp"
+#include "../../../../../../sizingAndPositioning/positioning2/internal/internalPositioning2.hpp"
 
 namespace ui {
 	class Caption : public OnlyDrawable {
@@ -13,7 +13,7 @@ namespace ui {
 		
 		sf::Text text;
 		sf::String str;
-		OnlyDrawable* background;
+		IUninteractive* background;
 		sf::Vector2f minimumSize;
 		DrawManager drawManager;
         InternalPositioning2 internalPositioning2;
@@ -25,10 +25,10 @@ namespace ui {
 		
 		static void setDefaultSize(int size);
 		
-		Caption(sf::String text, OnlyDrawable *background, sf::Font &font, sf::Vector2f minSize, int fontSize = defaultSize, sf::Color color = defaultColor, sf::Text::Style style = {}, float rotation = 0,
+		Caption(sf::String text, IUninteractive *background, sf::Font &font, sf::Vector2f minSize, int fontSize = defaultSize, sf::Color color = defaultColor, sf::Text::Style style = {}, float rotation = 0,
                 InternalPositioning2 internalPositioning2 = {{0, 0}}, bool cutBack = true);
 		
-		Caption(sf::String text, OnlyDrawable *background, sf::Font &font, int fontSize = defaultSize, sf::Color color = defaultColor, sf::Text::Style style = {}, float rotation = 0,
+		Caption(sf::String text, IUninteractive *background, sf::Font &font, int fontSize = defaultSize, sf::Color color = defaultColor, sf::Text::Style style = {}, float rotation = 0,
                 InternalPositioning2 internalPositioning2 = {{0, 0}}, bool cutBack = true);
 		
 		void draw() override;
@@ -48,7 +48,7 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 	protected:
-		Caption(sf::Text text, OnlyDrawable *background, sf::String str, sf::Vector2f minimumSize, InternalPositioning2 internalPositioning2, bool cutBack);
+		Caption(sf::Text text, IUninteractive *background, sf::String str, sf::Vector2f minimumSize, InternalPositioning2 internalPositioning2, bool cutBack);
 		
 	public:
 		Caption* copy() override;

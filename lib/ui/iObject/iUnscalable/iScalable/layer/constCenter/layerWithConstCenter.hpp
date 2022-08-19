@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../layer.hpp"
-#include "../../onlyDrawable/onlyDrawable.hpp"
-#include "../../onlyDrawable/empty/empty.hpp"
+#include "../../uninteractive/unIteractive.hpp"
+#include "../../uninteractive/onlyDrawable/empty/empty.hpp"
 #include "../../../../layout/object/layoutWithObject.h"
 #include "../../../../layout/background/layoutWithBackground.h"
 
@@ -14,7 +14,7 @@ namespace ui {
 	public:
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
-		LayerWithConstCenter(IScalable *object, OnlyDrawable *background, float aspectRatio, sf::Vector2f minSize = {});
+		LayerWithConstCenter(IScalable *object, IUninteractive *background, float aspectRatio, sf::Vector2f minSize = {});
 		
 		void setAspectRatio(float aspectRatio);
 		

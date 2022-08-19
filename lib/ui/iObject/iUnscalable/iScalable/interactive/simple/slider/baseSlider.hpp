@@ -1,13 +1,13 @@
 #pragma once
-#include "../../../onlyDrawable/onlyDrawable.hpp"
+#include "../../../uninteractive/unIteractive.hpp"
 #include "../interactiveSimple.hpp"
 #include "interaction/interaction/sliderInteraction.hpp"
 
 namespace ui {
 	class BaseSlider : public Interactive_Simple, public IDrawable {
 	protected:
-		OnlyDrawable* slider;
-		OnlyDrawable* background;
+		IUninteractive* slider;
+		IUninteractive* background;
 		sf::Vector2f value;
 		sf::Vector2f position;
 		sf::Vector2f sliderSize;
@@ -20,7 +20,7 @@ namespace ui {
 		void copy(BaseSlider* baseSlider);
 		
 	public:
-		BaseSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, SliderInteraction* interaction);
+		BaseSlider(ui::IUninteractive *slider, ui::IUninteractive *background, SliderInteraction* interaction);
 		
 		sf::Vector2f getSliderSize();
 		

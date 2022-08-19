@@ -4,7 +4,7 @@
 #include "../../../../../layout/layout.h"
 #include "../../../../../../drawable/iDrawable/iDrawable.h"
 
-#include "../../../onlyDrawable/onlyDrawable.hpp"
+#include "../../../uninteractive/unIteractive.hpp"
 
 namespace ui{
     class Switch : public Interactive_Simple, public Layout, public IDrawable{
@@ -12,12 +12,12 @@ namespace ui{
         DrawManager activeDrawManager;
         DrawManager inactiveDrawManager;
 
-        OnlyDrawable* activeBackground;
-        OnlyDrawable* inactiveBackground;
+        IUninteractive* activeBackground;
+        IUninteractive* inactiveBackground;
         bool active;
 
     public:
-        Switch(OnlyDrawable *inactiveBackground, OnlyDrawable *activeBackground, sf::Mouse::Button button = sf::Mouse::Button::Left, bool startActive = false);
+        Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, sf::Mouse::Button button = sf::Mouse::Button::Left, bool startActive = false);
 
         void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) override;
 

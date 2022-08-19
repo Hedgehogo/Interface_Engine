@@ -1,9 +1,9 @@
 #include "slider.hpp"
 
-ui::Slider::Slider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, sf::Vector2f sliderScale, sf::Mouse::Button button, bool wheelHorizontal, ui::SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
+ui::Slider::Slider(ui::IUninteractive *slider, ui::IUninteractive *background, sf::Vector2f sliderScale, sf::Mouse::Button button, bool wheelHorizontal, ui::SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
 	BaseSlider(slider, background, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), scale(sliderScale) {}
 
-ui::Slider::Slider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, sf::Vector2i division, sf::Vector2f sliderScale, sf::Mouse::Button button, bool wheelHorizontal) :
+ui::Slider::Slider(ui::IUninteractive *slider, ui::IUninteractive *background, sf::Vector2i division, sf::Vector2f sliderScale, sf::Mouse::Button button, bool wheelHorizontal) :
 	BaseSlider(slider, background, new SliderInteraction{*this, button, division, wheelHorizontal}), scale(sliderScale) {}
 
 void ui::Slider::setScale(sf::Vector2f scale) {
@@ -23,7 +23,7 @@ sf::Vector2f ui::Slider::getMinSize() {
 	return minSize;
 }
 
-ui::Slider::Slider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, SliderInteraction *interaction, sf::Vector2f sliderScale) :
+ui::Slider::Slider(ui::IUninteractive *slider, ui::IUninteractive *background, SliderInteraction *interaction, sf::Vector2f sliderScale) :
 	BaseSlider(slider, background, interaction), scale(sliderScale) {}
 
 ui::Slider *ui::Slider::copy() {
@@ -34,8 +34,8 @@ ui::Slider *ui::Slider::copy() {
 }
 
 ui::Slider *ui::Slider::createFromYaml(const YAML::Node &node) {
-	ui::OnlyDrawable *slider;
-	ui::OnlyDrawable *background;
+	ui::IUninteractive *slider;
+	ui::IUninteractive *background;
 	sf::Vector2f sliderScale{1.0f, 0.5f};
 	sf::Mouse::Button button{sf::Mouse::Left};
 	bool wheelHorizontal{false};

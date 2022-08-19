@@ -1,8 +1,8 @@
 #pragma once
 #include "../layer.hpp"
 #include "../../iScalable.hpp"
-#include "../../onlyDrawable/onlyDrawable.hpp"
-#include "../../onlyDrawable/empty/empty.hpp"
+#include "../../uninteractive/unIteractive.hpp"
+#include "../../uninteractive/onlyDrawable/empty/empty.hpp"
 #include "../../../../layout/background/layoutWithBackground.h"
 #include "../../../../layout/twoObjects/layoutWithTwoObjects.h"
 
@@ -19,7 +19,7 @@ namespace ui {
 		void copy(LayerWithConstRatio* layerWithConstRatio);
 		
 	public:
-		LayerWithConstRatio(IScalable *constObject, IScalable *secondObject, OnlyDrawable *background, float aspectRatio, Corner corner = Corner::upLeft, sf::Vector2f minSize = {0, 0});
+		LayerWithConstRatio(IScalable *constObject, IScalable *secondObject, IUninteractive *background, float aspectRatio, Corner corner = Corner::upLeft, sf::Vector2f minSize = {0, 0});
 
 		Corner getCorner();
 		

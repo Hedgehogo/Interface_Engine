@@ -3,7 +3,7 @@
 #include "SFML/Graphics.hpp"
 
 #include "../layer.hpp"
-#include "../../onlyDrawable/onlyDrawable.hpp"
+#include "../../uninteractive/unIteractive.hpp"
 #include "../../../../layout/object/layoutWithObject.h"
 #include "../../../../layout/background/layoutWithBackground.h"
 
@@ -13,7 +13,7 @@ namespace ui {
         sf::Vector2f offset;
 		
     public:
-        LayerWithBackground(IScalable *object, OnlyDrawable* background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
+        LayerWithBackground(IScalable *object, IUninteractive* background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
 
         void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 

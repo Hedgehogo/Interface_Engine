@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../onlyDrawable.hpp"
-#include "../../../../../../yaml/yamlWithSfml/buffer/buffer.hpp"
+#include "../../../../../../../yaml/yamlWithSfml/buffer/buffer.hpp"
 
 namespace ui {
 	class Sprite : public OnlyDrawable {

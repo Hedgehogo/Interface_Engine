@@ -6,13 +6,13 @@ namespace ui {
 	protected:
 		sf::Vector2f scale;
 		
-		Slider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, SliderInteraction *interaction, sf::Vector2f sliderScale);
+		Slider(ui::IUninteractive *slider, ui::IUninteractive *background, SliderInteraction *interaction, sf::Vector2f sliderScale);
 	
 	public:
-		Slider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, sf::Vector2f sliderScale = {1.0f, 0.5f}, sf::Mouse::Button button = sf::Mouse::Left,
-			   bool wheelHorizontal = false, SliderWheelEvent::Relativity wheelRelativity = SliderWheelEvent::Relativity::relationArea, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
+		Slider(ui::IUninteractive *slider, ui::IUninteractive *background, sf::Vector2f sliderScale = {1.0f, 0.5f}, sf::Mouse::Button button = sf::Mouse::Left,
+               bool wheelHorizontal = false, SliderWheelEvent::Relativity wheelRelativity = SliderWheelEvent::Relativity::relationArea, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
 		
-		Slider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, sf::Vector2i division, sf::Vector2f sliderScale = {1.0f, 0.5f}, sf::Mouse::Button button = sf::Mouse::Left, bool wheelHorizontal = false);
+		Slider(ui::IUninteractive *slider, ui::IUninteractive *background, sf::Vector2i division, sf::Vector2f sliderScale = {1.0f, 0.5f}, sf::Mouse::Button button = sf::Mouse::Left, bool wheelHorizontal = false);
 		
 		void setScale(sf::Vector2f scale);
 		

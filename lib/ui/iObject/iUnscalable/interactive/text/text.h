@@ -5,10 +5,10 @@
 #include "../interactive.h"
 #include "character/baseCharacter.h"
 #include "textBlock/baseTextBlock.h"
-#include "../../iScalable/onlyDrawable/onlyDrawable.hpp"
+#include "../../iScalable/uninteractive/unIteractive.hpp"
 #include "resizer/baseResizer.h"
 #include "resizer/simple/resizer.h"
-#include "../../iScalable/onlyDrawable/fullColor/fullColor.hpp"
+#include "../../iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp"
 
 namespace ui {
 	class Text : public Interactive, public IScalable, public IDrawable, public IUpdatable {
@@ -26,11 +26,11 @@ namespace ui {
         BaseResizer* resizer;
 
 
-        ui::OnlyDrawable *background;
+        ui::IUninteractive *background;
         void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager);
 		
     public:
-        Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background = new ui::FullColor(sf::Color::White), int size = 14, sf::Font *font = nullptr, sf::Color textColor = sf::Color(0, 0, 0),
+        Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background = new ui::FullColor(sf::Color::White), int size = 14, sf::Font *font = nullptr, sf::Color textColor = sf::Color(0, 0, 0),
              sf::Color textSelectionColor = sf::Color(0, 0, 0), sf::Color backgroundSelectionColor = sf::Color(0, 0, 0), BaseResizer *resizer = new Resizer{1.15, BaseResizer::Align::left});
 
         ~Text();
@@ -56,7 +56,7 @@ namespace ui {
         sf::Vector2f getNormalSize() override;
 		
     protected:
-        Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background, uint size, BaseResizer *resizer, sf::RenderTarget *renderTarget);
+        Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background, uint size, BaseResizer *resizer, sf::RenderTarget *renderTarget);
 		
     public:
         Text *copy() override;

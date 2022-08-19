@@ -8,7 +8,7 @@ namespace ui {
 		secondObject->init(renderTarget, secondDrawManager, updateManager, interactionManager, interactionStack, panelManager);
 	}
 	
-	LayerWithConstRatio::LayerWithConstRatio(IScalable *constObject, IScalable *secondObject, OnlyDrawable* background, float aspectRatio, Corner corner, sf::Vector2f minSize) :
+	LayerWithConstRatio::LayerWithConstRatio(IScalable *constObject, IScalable *secondObject, IUninteractive* background, float aspectRatio, Corner corner, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithTwoObjects(constObject, secondObject), LayoutWithBackground(background),
 		verticalSide(corner == Corner::upLeft || corner == Corner::upRight), horizontalSide(corner == Corner::upLeft || corner == Corner::downLeft), aspectRatio(aspectRatio), renderSecond(true) {}
 
@@ -109,7 +109,7 @@ namespace ui {
 		IScalable *constObject;
 		IScalable *secondObject;
 		float aspectRatio;
-		OnlyDrawable* background{};
+		IUninteractive* background{};
 		Corner corner{Corner::upLeft};
 		sf::Vector2f minSize{};
 		

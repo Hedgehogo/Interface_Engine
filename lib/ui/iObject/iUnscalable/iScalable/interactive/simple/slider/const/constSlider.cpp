@@ -1,15 +1,15 @@
 #include <iostream>
 #include "constSlider.hpp"
 
-ui::ConstSlider::ConstSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, float sliderScale, sf::Mouse::Button button, bool wheelHorizontal,
-							 ui::SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
+ui::ConstSlider::ConstSlider(ui::IUninteractive *slider, ui::IUninteractive *background, float sliderScale, sf::Mouse::Button button, bool wheelHorizontal,
+                             ui::SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
 	BaseSlider(slider, background, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
 	
 	sliderSize = slider->getNormalSize();
 	aspectRatio = sliderSize.x / sliderSize.y;
 }
 
-ui::ConstSlider::ConstSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, sf::Vector2i division, float sliderScale, sf::Mouse::Button button, bool wheelHorizontal) :
+ui::ConstSlider::ConstSlider(ui::IUninteractive *slider, ui::IUninteractive *background, sf::Vector2i division, float sliderScale, sf::Mouse::Button button, bool wheelHorizontal) :
 	BaseSlider(slider, background, new SliderInteraction{*this, button, division, wheelHorizontal}), sliderScale(sliderScale) {
 	
 	sliderSize = slider->getNormalSize();
@@ -27,7 +27,7 @@ void ui::ConstSlider::resize(sf::Vector2f size, sf::Vector2f position) {
 	background->resize(size, position);
 }
 
-ui::ConstSlider::ConstSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, ui::SliderInteraction *interaction) :
+ui::ConstSlider::ConstSlider(ui::IUninteractive *slider, ui::IUninteractive *background, ui::SliderInteraction *interaction) :
 	BaseSlider(slider, background, interaction) {}
 
 ui::ConstSlider* ui::ConstSlider::copy() {
@@ -38,8 +38,8 @@ ui::ConstSlider* ui::ConstSlider::copy() {
 }
 
 ui::ConstSlider *ui::ConstSlider::createFromYaml(const YAML::Node &node) {
-	ui::OnlyDrawable *slider;
-	ui::OnlyDrawable *background;
+	ui::IUninteractive *slider;
+	ui::IUninteractive *background;
 	float sliderScale{1.0f};
 	sf::Mouse::Button button{sf::Mouse::Left};
 	bool wheelHorizontal{false};

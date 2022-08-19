@@ -16,11 +16,11 @@ namespace ui {
 	}
 	
 	void Caption::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
-		OnlyDrawable::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+        OnlyDrawable::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		background->init(renderTarget, this->drawManager, updateManager, interactionManager, interactionStack, panelManager);
 	}
 	
-	Caption::Caption(sf::String text, OnlyDrawable *background, sf::Font &font, sf::Vector2f minSize, int fontSize, sf::Color color, sf::Text::Style style, float rotation, InternalPositioning2 internalPositioning2,
+	Caption::Caption(sf::String text, IUninteractive *background, sf::Font &font, sf::Vector2f minSize, int fontSize, sf::Color color, sf::Text::Style style, float rotation, InternalPositioning2 internalPositioning2,
                      bool cutBack) :
 		str(text), background(background), minimumSize(minSize), internalPositioning2(internalPositioning2), cutBack(cutBack){
 		this->text.setString(text);
@@ -31,7 +31,7 @@ namespace ui {
 		this->text.setRotation(rotation);
 	}
 	
-	Caption::Caption(sf::String text, OnlyDrawable *background, sf::Font &font, int fontSize, sf::Color color, sf::Text::Style style, float rotation, InternalPositioning2 internalPositioning2, bool cutBack) :
+	Caption::Caption(sf::String text, IUninteractive *background, sf::Font &font, int fontSize, sf::Color color, sf::Text::Style style, float rotation, InternalPositioning2 internalPositioning2, bool cutBack) :
 		str(text), background(background), minimumSize(), internalPositioning2(internalPositioning2), cutBack(cutBack){
 		this->text.setString(text);
 		this->text.setFont(font);
@@ -97,7 +97,7 @@ namespace ui {
 		return max({rect.width, rect.height}, background->getNormalSize());
 	}
 	
-	Caption::Caption(sf::Text text, OnlyDrawable *background, sf::String str, sf::Vector2f minimumSize, InternalPositioning2 internalPositioning2, bool cutBack) :
+	Caption::Caption(sf::Text text, IUninteractive *background, sf::String str, sf::Vector2f minimumSize, InternalPositioning2 internalPositioning2, bool cutBack) :
         text(text), background(background), str(str), minimumSize(minimumSize), internalPositioning2(internalPositioning2), cutBack(cutBack) {}
 	
 	Caption *Caption::copy() {
@@ -155,7 +155,7 @@ namespace ui {
 	
 	Caption *Caption::createFromYaml(const YAML::Node &node) {
 		sf::String text;
-		OnlyDrawable *background;
+		IUninteractive *background;
 		sf::Font *font;
 		int fontSize{defaultSize};
 		sf::Color color{defaultColor};

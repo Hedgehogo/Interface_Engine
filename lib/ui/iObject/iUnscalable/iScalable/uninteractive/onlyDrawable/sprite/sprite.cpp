@@ -5,12 +5,12 @@
 
 namespace ui {
 	Sprite::Sprite(sf::Texture &texture, sf::IntRect rect, sf::Vector2f minSize) :
-		OnlyDrawable(), sprite(texture, rect), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
+            OnlyDrawable(), sprite(texture, rect), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
 		sprite.setTextureRect(rect);
 	}
 	
 	Sprite::Sprite(sf::Texture &texture, sf::Vector2f minSize) :
-		OnlyDrawable(), sprite(texture), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
+            OnlyDrawable(), sprite(texture), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
 	}
 
 	void Sprite::draw() {
@@ -43,7 +43,7 @@ namespace ui {
 	
 	Sprite *Sprite::copy() {
 		Sprite* sprite1 {new Sprite{sprite, minimumSize}};
-		OnlyDrawable::copy(sprite1);
+        OnlyDrawable::copy(sprite1);
 		return sprite1;
 	}
 	

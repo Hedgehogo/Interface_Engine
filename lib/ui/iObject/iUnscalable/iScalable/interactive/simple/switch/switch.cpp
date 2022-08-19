@@ -4,7 +4,7 @@
 
 namespace ui{
 
-    Switch::Switch(OnlyDrawable *inactiveBackground, OnlyDrawable *activeBackground, sf::Mouse::Button button, bool startActive) :
+    Switch::Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, sf::Mouse::Button button, bool startActive) :
         Interactive_Simple(new OneButtonInteraction{new SwitchEvent{*this}, button}), activeBackground(activeBackground), inactiveBackground(inactiveBackground), active(startActive){}
 
     void Switch::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
@@ -63,8 +63,8 @@ namespace ui{
     }
 	
 	Switch *Switch::createFromYaml(const YAML::Node &node) {
-		OnlyDrawable *inactiveBackground;
-		OnlyDrawable *activeBackground;
+		IUninteractive *inactiveBackground;
+		IUninteractive *activeBackground;
 		sf::Mouse::Button button{sf::Mouse::Button::Left};
 		bool startActive{false};
 		

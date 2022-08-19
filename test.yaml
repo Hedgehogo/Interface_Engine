@@ -1,25 +1,35 @@
 type: LWMB
 first-object:
-  type: LWS
+  type: LWUI
   object:
-    type: Text
-    size: 100
-    text-color: Black
-    text-block:
-      type: TB
-      text: The difficulty with the programmer is that you can't understand what he's doing until it's too late.
-    font: msyh.ttc
-    background:
-      type: Sprite
-      texture: gigachad.jpg
-  shader:
-    frag: ../testShader.glsl
-  transmission: [ aspectRatio, mousePosition, texture, size ]
+    type: LWS
+    object:
+      type: Text
+      size: 100
+      text-color: Black
+      text-block:
+        type: TB
+        text: The difficulty with the programmer is that you can't understand what he's doing until it's too late.
+      font: msyh.ttc
+      background:
+        type: LWUI
+        object:
+          type: LWCB
+          side: down
+          border-distance: 30
+          second-object:
+            type: FullColor
+            color: Black
+          const-object:
+            type: FullColor
+            color: [255, 255, 255]
+    shader:
+      frag: ../testShader.glsl
+    transmission: [ aspectRatio, mousePosition, texture, size ]
 second-object:
   type: LWS
   object:
-    type: Sprite
-    texture: gigachad.jpg
+    type: Empty
   shader:
     frag: ../fire.glsl
   transmission: [ time, mousePosition, size ]
