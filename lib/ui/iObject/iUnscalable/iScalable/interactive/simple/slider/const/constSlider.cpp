@@ -1,16 +1,15 @@
 #include <iostream>
 #include "constSlider.hpp"
 
-ui::ConstSlider::ConstSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, float sliderScale, sf::Mouse::Button button, bool wheelHorizontal,
-							 ui::SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
-	BaseSlider(slider, background, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
+ui::ConstSlider::ConstSlider(OnlyDrawable *slider, OnlyDrawable *background, WithCoefficientVec2 &value, float sliderScale, sf::Mouse::Button button, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
+	BaseSlider(slider, background, value, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
 	
 	sliderSize = slider->getNormalSize();
 	aspectRatio = sliderSize.x / sliderSize.y;
 }
 
-ui::ConstSlider::ConstSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, sf::Vector2i division, float sliderScale, sf::Mouse::Button button, bool wheelHorizontal) :
-	BaseSlider(slider, background, new SliderInteraction{*this, button, division, wheelHorizontal}), sliderScale(sliderScale) {
+ui::ConstSlider::ConstSlider(OnlyDrawable *slider, OnlyDrawable *background, WithCoefficientVec2 &value, sf::Vector2i division, float sliderScale, sf::Mouse::Button button, bool wheelHorizontal) :
+	BaseSlider(slider, background, value, new SliderInteraction{*this, button, division, wheelHorizontal}), sliderScale(sliderScale) {
 	
 	sliderSize = slider->getNormalSize();
 	aspectRatio = sliderSize.x / sliderSize.y;
@@ -27,11 +26,11 @@ void ui::ConstSlider::resize(sf::Vector2f size, sf::Vector2f position) {
 	background->resize(size, position);
 }
 
-ui::ConstSlider::ConstSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, ui::SliderInteraction *interaction) :
-	BaseSlider(slider, background, interaction) {}
+ui::ConstSlider::ConstSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, WithCoefficientVec2 &value, SliderInteraction *interaction) :
+	BaseSlider(slider, background, value, interaction) {}
 
 ui::ConstSlider* ui::ConstSlider::copy() {
-	ConstSlider* constSlider {new ConstSlider{slider->copy(), background->copy(), dynamic_cast<SliderInteraction*>(interaction->copy())}};
+	ConstSlider* constSlider {new ConstSlider{slider->copy(), background->copy(), *value, dynamic_cast<SliderInteraction *>(interaction->copy())}};
 	dynamic_cast<SliderInteraction*>(constSlider->interaction)->setSlider(*constSlider);
 	BaseSlider::copy(constSlider);
 	return constSlider;
@@ -40,6 +39,7 @@ ui::ConstSlider* ui::ConstSlider::copy() {
 ui::ConstSlider *ui::ConstSlider::createFromYaml(const YAML::Node &node) {
 	ui::OnlyDrawable *slider;
 	ui::OnlyDrawable *background;
+	WithCoefficientVec2 &value{ui::Buffer<WithCoefficientVec2>::getObjectReference(node["value"])};
 	float sliderScale{1.0f};
 	sf::Mouse::Button button{sf::Mouse::Left};
 	bool wheelHorizontal{false};
@@ -63,12 +63,14 @@ ui::ConstSlider *ui::ConstSlider::createFromYaml(const YAML::Node &node) {
 		if(node["wheel-sensitivity"])
 			node["wheel-sensitivity"] >> wheelSensitivity;
 		
-		return new ConstSlider{slider, background, sliderScale, button, wheelHorizontal, wheelRelativity, wheelSensitivity};
+		return new ConstSlider{slider, background, value, sliderScale, button, wheelHorizontal, wheelRelativity, wheelSensitivity};
+		return nullptr;
 	} else {
 		sf::Vector2i division;
 		
 		node["division"] >> division;
 		
-		return new ConstSlider{slider, background, division, sliderScale, button, wheelHorizontal};
+		return new ConstSlider{slider, background, value, division, sliderScale, button, wheelHorizontal};
+		return nullptr;
 	}
 }

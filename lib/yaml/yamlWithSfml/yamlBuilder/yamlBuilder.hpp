@@ -41,23 +41,8 @@ namespace ui {
 		}
 		
 		template<typename C>
-		static void add(std::vector<std::string> aliases = {}) {
-			add(C::createFromYaml, UI_GET_TYPE_NAME(C), aliases);
-		}
-		
-		template<typename C>
 		static void addSubtype() {
 			addSubtype(YamlBuilder<C>::build);
-		}
-		
-		template<typename C>
-		static void addAlias(std::string alias) {
-			addAlias(UI_GET_TYPE_NAME(C), alias);
-		}
-		
-		template<typename C>
-		static void addAliases(std::vector<std::string> aliases) {
-			addAliases(UI_GET_TYPE_NAME(C), aliases);
 		}
 		
 		static T* build(const YAML::Node& node, std::string type) {

@@ -2,13 +2,14 @@
 #include "../../../onlyDrawable/onlyDrawable.hpp"
 #include "../interactiveSimple.hpp"
 #include "interaction/interaction/sliderInteraction.hpp"
+#include "../../../../../../with/vector/general/withVector2.hpp"
 
 namespace ui {
 	class BaseSlider : public Interactive_Simple, public IDrawable {
 	protected:
 		OnlyDrawable* slider;
 		OnlyDrawable* background;
-		sf::Vector2f value;
+		WithCoefficientVec2* value;
 		sf::Vector2f position;
 		sf::Vector2f sliderSize;
 		sf::Vector2f moveZoneSize;
@@ -20,13 +21,13 @@ namespace ui {
 		void copy(BaseSlider* baseSlider);
 		
 	public:
-		BaseSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, SliderInteraction* interaction);
+		BaseSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, WithCoefficientVec2 &value, SliderInteraction *interaction);
 		
 		sf::Vector2f getSliderSize();
 		
-		const sf::Vector2f& getValue();
+		sf::Vector2f getValue();
 		
-		void setValue(sf::Vector2f newValue);
+		void setValue(sf::Vector2f value);
 		
 		void setValueByMouse(sf::Vector2i mousePosition);
 		

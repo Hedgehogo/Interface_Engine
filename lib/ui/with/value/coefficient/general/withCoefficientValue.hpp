@@ -3,7 +3,7 @@
 #include "../../general/withValue.hpp"
 
 namespace ui {
-	class WithCoefficientValue : public IWithCoefficientValue, public WithValue<float> {
+	class WithCoefficientValue : public WithValue<float>, public IWithCoefficientValue {
 	public:
 		explicit WithCoefficientValue(float value = 0.f);
 		

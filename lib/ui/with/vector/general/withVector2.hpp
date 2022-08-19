@@ -2,16 +2,29 @@
 #include "../iWithVector2.hpp"
 
 namespace ui {
+	template<typename T>
+	using remove_all_extents = typename std::remove_all_extents<T>::type;
+	
+	template<typename T>
+	using to_auto = std::remove_const_t<std::remove_reference_t<T>>;
+	
 	template<typename V>
-	class WithVector2 : public IWithVector2<decltype(std::declval<V>().getValue())> {
+	class WithVector2 : public IWithVector2<to_auto<decltype(std::declval<V>().getValue())>> {
 	private:
-		typedef decltype(std::declval<V>().getValue()) T;
+		typedef to_auto<decltype(std::declval<V>().getValue())> T;
 		
 	protected:
 		V x, y;
-	
+		
 	public:
 		WithVector2(const sf::Vector2<T>& vector = {}) : x(vector.x), y(vector.y) {}
+		
+		WithVector2(const YAML::Node& node) : x(T{}), y(T{}) {
+			sf::Vector2<T> vector{};
+			if(node["vector"])
+				node["vector"] >> vector;
+			setValue(vector);
+		}
 		
 		const T& getX() const override { return x.getValue(); }
 		

@@ -12,8 +12,15 @@ typedef unsigned int uint;
 typedef unsigned long long ullint;
 
 template<typename T>
-void operator >>(const YAML::Node& node, T& value) {
+std::enable_if_t<!std::is_constructible_v<T, const YAML::Node&>, void>
+operator >>(const YAML::Node& node, T& value) {
 	value = node.as<T>();
+}
+
+template<typename T>
+std::enable_if_t<std::is_constructible_v<T, const YAML::Node&>, void>
+operator >>(const YAML::Node& node, T& value) {
+	value = T{node};
 }
 
 template<typename T>

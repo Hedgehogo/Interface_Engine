@@ -1,6 +1,6 @@
 #include <iostream>
 #include "text.h"
-#include "../../../../../yaml/yamlWithSfml/buffer/buffer.hpp"
+#include "../../../../../yaml/yamlWithSfml/fileBuffer/fileBuffer.hpp"
 
 ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, BaseResizer *resizer) :
     background(background), size(size), textBocks(textBlocks), resizer(resizer){

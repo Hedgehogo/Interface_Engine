@@ -2,7 +2,7 @@
 
 #include "../../line/underline/underline.h"
 #include "../../line/strikeThrough/strikeThrough.h"
-#include "../../../../../../../yaml/yamlWithSfml/buffer/buffer.hpp"
+#include "../../../../../../../yaml/yamlWithSfml/fileBuffer/fileBuffer.hpp"
 
 std::vector<ui::BaseLine* > generateLines(std::vector<ui::BaseLine* > lines, sf::Text::Style style){
     if (style & sf::Text::Underlined)

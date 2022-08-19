@@ -1,4 +1,5 @@
 #pragma once
+#include "../../../yaml/yamlWithSfml/buffer/buffer.hpp"
 
 namespace ui {
 	template<typename T>

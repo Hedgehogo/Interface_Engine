@@ -21,8 +21,8 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
 	window.setFramerateLimit(60);
-
-/*
+	
+	/*
     sf::Texture textureGigachad;
     textureGigachad.loadFromFile("gigachad.jpg");
 	sf::Texture texture;
@@ -33,7 +33,9 @@ int main() {
     texture_3.loadFromFile("image_3.png");
 	sf::Font font;
 	font.loadFromFile("segoeui.ttf");
-*/
+	*/
+	
+	ui::WithCoefficientVec2 vec{{0, 0}};
 
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
@@ -41,7 +43,7 @@ int main() {
 	ui::Character::setDebug(true);
 
 	ui::Interface interface {
-/*
+		/*
         new ui::LayerWithBackground{
             new ui::LayerWithMovableBorder{
                 new ui::LayerWithBorderHorizontal{
@@ -220,7 +222,7 @@ int main() {
             new ui::Sprite{textureGigachad},
             {100.f, 100.f}
         }
-*/
+		*/
 		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
@@ -268,7 +270,7 @@ int main() {
 		window.clear();
 		interface.update(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window.getSystemHandle());
 		interface.draw();
-		interface.drawDebug(window, 0, 2, 90, 90);
+		//interface.drawDebug(window, 0, 2, 90, 90);
 		window.display();
 	}
 }

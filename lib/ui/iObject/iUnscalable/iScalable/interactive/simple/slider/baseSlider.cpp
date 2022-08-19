@@ -9,58 +9,58 @@ void ui::BaseSlider::init(sf::RenderTarget &renderTarget, DrawManager &drawManag
 	dynamic_cast<SliderInteraction*>(interaction)->init(*interactionManager);
 }
 
-ui::BaseSlider::BaseSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, SliderInteraction* interaction) :
-	Interactive_Simple(interaction), slider(slider), background(background), value(), position(), sliderSize(), moveZoneSize() {}
+ui::BaseSlider::BaseSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, WithCoefficientVec2 &value, SliderInteraction *interaction) :
+	Interactive_Simple(interaction), slider(slider), background(background), value(&value), position(), sliderSize(), moveZoneSize() {}
 
 void ui::BaseSlider::cutBackValue() {
-    value.x = std::max(0.f,std::min(1.f,value.x));
-    value.y = std::max(0.f,std::min(1.f,value.y));
+    //value.x = std::max(0.f,std::min(1.f,value.x));
+    //value.y = std::max(0.f,std::min(1.f,value.y));
 }
 
 sf::Vector2f ui::BaseSlider::getSliderSize() {
 	return sliderSize;
 }
 
-const sf::Vector2f &ui::BaseSlider::getValue() {
-	return value;
+sf::Vector2f ui::BaseSlider::getValue() {
+	return value->getValue();
 }
 
-void ui::BaseSlider::setValue(sf::Vector2f newValue) {
-	value = newValue;
-	cutBackValue();
+void ui::BaseSlider::setValue(sf::Vector2f value) {
+	this->value->setValue(value);
+	//cutBackValue();
 }
 
 void ui::BaseSlider::setValueByMouse(sf::Vector2i mousePosition) {
 	sf::Vector2f mouseOffset {static_cast<sf::Vector2f>(mousePosition) - position - sliderSize / 2.0f};
-	value = {(moveZoneSize.x != 0 ? mouseOffset.x / moveZoneSize.x : 0), (moveZoneSize.y != 0 ? mouseOffset.y / moveZoneSize.y : 0)};
-	cutBackValue();
+	value->setValue({(moveZoneSize.x != 0 ? mouseOffset.x / moveZoneSize.x : 0), (moveZoneSize.y != 0 ? mouseOffset.y / moveZoneSize.y : 0)});
+	//cutBackValue();
 }
 
 void ui::BaseSlider::roundValueToDivision(sf::Vector2i division) {
 	sf::Vector2f divisions{static_cast<sf::Vector2f>(division)};
 	if(division.x != 0)
-		value.x = std::round(value.x * divisions.x) / divisions.x;
+		value->setX(std::round(value->getX() * divisions.x) / divisions.x);
 	if(division.y != 0)
-		value.y = std::round(value.y * divisions.y) / divisions.y;
+		value->setY(std::round(value->getY() * divisions.y) / divisions.y);
 }
 
 bool ui::BaseSlider::onSlider(sf::Vector2i mousePosition) {
 	sf::Vector2f mouse {static_cast<sf::Vector2f>(mousePosition)};
-	sf::Vector2f sliderPosition {position.x + value.x * moveZoneSize.x, position.y + value.y * moveZoneSize.y};
+	sf::Vector2f sliderPosition {position.x + value->getX() * moveZoneSize.x, position.y + value->getY() * moveZoneSize.y};
 	return mouse.x > sliderPosition.x && mouse.x < sliderPosition.x + sliderSize.x &&
 		   mouse.y > sliderPosition.y && mouse.y < sliderPosition.y + sliderSize.y;
 }
 
 void ui::BaseSlider::moveSlider(sf::Vector2i mouseOffset) {
 	if(moveZoneSize.x != 0)
-		value.x += static_cast<float>(mouseOffset.x) / moveZoneSize.x;
+		value->setX(value->getX() + static_cast<float>(mouseOffset.x) / moveZoneSize.x);
 	if(moveZoneSize.y != 0)
-		value.y += static_cast<float>(mouseOffset.y) / moveZoneSize.y;
-	cutBackValue();
+		value->setY(value->getY() + static_cast<float>(mouseOffset.y) / moveZoneSize.y);
+	//cutBackValue();
 }
 
 void ui::BaseSlider::draw() {
-	slider->resize(sliderSize, position + sf::Vector2f(moveZoneSize.x * value.x, moveZoneSize.y * value.y));
+	slider->resize(sliderSize, position + sf::Vector2f(moveZoneSize.x * value->getX(), moveZoneSize.y * value->getY()));
 }
 
 sf::Vector2f ui::BaseSlider::getAreaPosition() {

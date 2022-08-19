@@ -1,26 +1,44 @@
-type: LWMB
-first-object:
-  type: LWS
-  object:
-    type: Text
-    size: 100
-    text-color: Black
-    text-block:
-      type: TB
-      text: The difficulty with the programmer is that you can't understand what he's doing until it's too late.
-    font: msyh.ttc
+type: LWCB
+const-object:
+  type: LWCB
+  second-object:
+    type: Slider
+    slider:
+      type: Capsule
+      color: &bright 525252
     background:
-      type: Sprite
-      texture: gigachad.jpg
-  shader:
-    frag: ../testShader.glsl
-  transmission: [ aspectRatio, mousePosition, texture, size ]
+      type: FullColor
+      color: &dark 37383A
+    value:
+      name: vec
+  const-object:
+    type: FullColor
+    color: *dark
+  side: down
+  border-distance: 10
 second-object:
-  type: LWS
-  object:
-    type: Sprite
-    texture: gigachad.jpg
-  shader:
-    frag: ../fire.glsl
-  transmission: [ time, mousePosition, size ]
-border-direction: vertical
+  type: LWCB
+  const-object:
+    type: Slider
+    slider:
+      type: Capsule
+      color: *bright
+    background:
+      type: FullColor
+      color: *dark
+    value: vec
+    slider-scale: 0.5, 1
+  second-object:
+    type: ConstSlider
+    slider:
+      type: Capsule
+      color: *bright
+    background:
+      type: FullColor
+      color: *dark
+    value: vec
+    slider-scale: 0.5
+  side: down
+  border-distance: 10
+side: right
+border-distance: 10
