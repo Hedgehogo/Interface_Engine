@@ -4,9 +4,6 @@
 namespace ui {
 	template<typename T>
 	class Buffer {
-	public:
-		typedef std::function<T*(const YAML::Node &node)> makeSubobject;
-		
 	protected:
 		static std::map<std::string, T> objects;
 	

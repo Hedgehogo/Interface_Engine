@@ -1,43 +1,33 @@
-type: LWCB
+type: LayerWCBorder
 const-object:
-  type: LWCB
+  type: LayerWCBorder
   second-object:
     type: Slider
-    slider:
+    slider: &slider
       type: Capsule
-      color: &bright 525252
-    background:
+      color: 525252
+    background: &background
       type: FullColor
-      color: &dark 37383A
+      color: 37383A
     value:
-      name: vec
-  const-object:
-    type: FullColor
-    color: *dark
+      name: mouse-position
+  const-object: *background
   side: down
   border-distance: 10
 second-object:
-  type: LWCB
+  type: LayerWCBorder
   const-object:
     type: Slider
-    slider:
-      type: Capsule
-      color: *bright
-    background:
-      type: FullColor
-      color: *dark
-    value: vec
+    slider: *slider
+    background: *background
+    value: mouse-position
     slider-scale: 0.5, 1
   second-object:
-    type: ConstSlider
-    slider:
-      type: Capsule
-      color: *bright
-    background:
-      type: FullColor
-      color: *dark
-    value: vec
-    slider-scale: 0.5
+    type: Slider
+    slider: *slider
+    background: *background
+    value: mouse-position
+    slider-scale: 0.5, 0.5
   side: down
   border-distance: 10
 side: right
