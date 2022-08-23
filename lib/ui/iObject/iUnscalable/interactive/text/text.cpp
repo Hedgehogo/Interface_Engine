@@ -2,7 +2,7 @@
 #include "text.h"
 #include "../../../../../yaml/yamlWithSfml/fileBuffer/fileBuffer.hpp"
 
-ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, BaseResizer *resizer) :
+ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, BaseResizer *resizer) :
     background(background), size(size), textBocks(textBlocks), resizer(resizer){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
         textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, font, size);
@@ -93,7 +93,7 @@ sf::Vector2f ui::Text::getNormalSize() {
     return max(resizer->getNormalSize(), background->getNormalSize());
 }
 
-ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, OnlyDrawable *background, uint size, BaseResizer *resizer, sf::RenderTarget *renderTarget) :
+ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background, uint size, BaseResizer *resizer, sf::RenderTarget *renderTarget) :
     textBocks(textBlocks), background(background), size(size), resizer(resizer), renderTarget(renderTarget){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
         std::vector<ui::BaseCharacter*> characters = textBlock->getCharacters();
@@ -112,7 +112,7 @@ ui::Text *ui::Text::copy() {
 
 ui::Text *ui::Text::createFromYaml(const YAML::Node &node) {
     std::vector<ui::BaseTextBlock *> textBlocks;
-    OnlyDrawable *background;
+    IUninteractive *background;
     int size{14};
     sf::Font *font{nullptr};
     sf::Color textColor{sf::Color::Black};

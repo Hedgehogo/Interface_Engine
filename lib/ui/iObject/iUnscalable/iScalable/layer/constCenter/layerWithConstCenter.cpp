@@ -6,7 +6,7 @@ namespace ui {
 		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 	}
 	
-	LayerWithConstCenter::LayerWithConstCenter(IScalable* object, OnlyDrawable* background, float aspectRatio, sf::Vector2f minSize) :
+	LayerWithConstCenter::LayerWithConstCenter(IScalable* object, IUninteractive* background, float aspectRatio, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithObject(object), LayoutWithBackground(background), aspectRatio(aspectRatio) {}
 	
 	void LayerWithConstCenter::setAspectRatio(float aspectRatio) {
@@ -54,7 +54,7 @@ namespace ui {
 	LayerWithConstCenter *LayerWithConstCenter::createFromYaml(const YAML::Node &node) {
 		IScalable *object;
 		float aspectRatio;
-		OnlyDrawable *background{};
+		IUninteractive *background{};
 		sf::Vector2f minSize{};
 		
 		node["object"] >> object;

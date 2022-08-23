@@ -2,7 +2,7 @@
 #include "../../../../../drawable/manager/drawManager.h"
 
 namespace ui {
-	LayerWithConstBezel::LayerWithConstBezel(IScalable *object, OnlyDrawable *bezel, float thickness, sf::Vector2f minSize) :
+	LayerWithConstBezel::LayerWithConstBezel(IScalable *object, IUninteractive *bezel, float thickness, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithObject(object), bezel(bezel), thickness(thickness) {
 		sf::Vector2f minimumSize{object->getMinSize() + sf::Vector2f(thickness * 2.0f, thickness * 2.0f)};
 		if(this->minimumSize.x < minimumSize.x) {
@@ -51,7 +51,7 @@ namespace ui {
 	
 	LayerWithConstBezel *LayerWithConstBezel::createFromYaml(const YAML::Node &node) {
 		IScalable *object;
-		OnlyDrawable *bezel;
+		IUninteractive *bezel;
 		float thickness;
 		sf::Vector2f minSize{};
 		

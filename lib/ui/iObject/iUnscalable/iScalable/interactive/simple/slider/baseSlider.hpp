@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../onlyDrawable/onlyDrawable.hpp"
+#include "../../../uninteractive/unIteractive.hpp"
 #include "../interactiveSimple.hpp"
 #include "interaction/interaction/sliderInteraction.hpp"
 #include "../../../../../../with/vector/general/withVector2.hpp"
@@ -7,8 +7,8 @@
 namespace ui {
 	class BaseSlider : public Interactive_Simple, public IDrawable {
 	protected:
-		OnlyDrawable* slider;
-		OnlyDrawable* background;
+		IUninteractive* slider;
+		IUninteractive* background;
 		WithCoefficientVec2* value;
 		sf::Vector2f position;
 		sf::Vector2f sliderSize;
@@ -21,7 +21,7 @@ namespace ui {
 		void copy(BaseSlider* baseSlider);
 		
 	public:
-		BaseSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, WithCoefficientVec2 &value, SliderInteraction *interaction);
+		BaseSlider(ui::IUninteractive *slider, ui::IUninteractive *background, WithCoefficientVec2 &valu, SliderInteraction* interaction);
 		
 		sf::Vector2f getSliderSize();
 		

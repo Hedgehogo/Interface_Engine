@@ -1,7 +1,7 @@
 #include "button.hpp"
 
 namespace ui {
-    Button::Button(ui::OnlyDrawable *background, uint16_t interaction) :
+    Button::Button(ui::IUninteractive *background, uint16_t interaction) :
         BaseButton(background, nullptr), interactionIndex(interaction) {}
 
     void Button::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
@@ -10,7 +10,7 @@ namespace ui {
 	}
 
 	Button *Button::copy() {
-		Button* buttonWithIndex{new Button{dynamic_cast<OnlyDrawable*>(background->copy()), interactionIndex}};
+		Button* buttonWithIndex{new Button{dynamic_cast<IUninteractive*>(background->copy()), interactionIndex}};
 		BaseButton::copy(buttonWithIndex);
 		buttonWithIndex->interaction = this->interaction;
 		return buttonWithIndex;
@@ -18,7 +18,7 @@ namespace ui {
 
     Button *Button::createFromYaml(const YAML::Node &node) {
 
-        ui::OnlyDrawable *background;
+        ui::IUninteractive *background;
         uint16_t interaction;
 
         node["background"] >> background;

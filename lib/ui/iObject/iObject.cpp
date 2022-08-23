@@ -1,6 +1,5 @@
 #include <cmath>
 #include "iObject.hpp"
-#include "iUnscalable/iScalable/onlyDrawable/fullColor/fullColor.hpp"
 
 void ui::IObject::setPosition(sf::Vector2f position) {
 	resize(getAreaSize(), position);

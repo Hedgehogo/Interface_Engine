@@ -9,7 +9,7 @@ namespace ui {
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) override;
 	
 	public:
-		Button(ui::OnlyDrawable *background, uint16_t interaction);
+		Button(ui::IUninteractive *background, uint16_t interaction);
 		
 		Button* copy() override;
 

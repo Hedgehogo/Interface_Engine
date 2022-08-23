@@ -1,13 +1,13 @@
 #pragma once
 #include "../onlyDrawable.hpp"
 #include "../empty/empty.hpp"
-#include "../../../../layout/background/layoutWithBackground.h"
-#include "../../../../../drawable/manager/drawManager.h"
+#include "../../../../../layout/background/layoutWithBackground.h"
+#include "../../../../../../drawable/manager/drawManager.h"
 
 namespace ui {
 	class Bar : public OnlyDrawable, public LayoutWithBackground {
 	protected:
-		OnlyDrawable* strip;
+		IUninteractive* strip;
 		bool horizontal;
 		float offset;
 		int division;
@@ -18,9 +18,9 @@ namespace ui {
 	public:
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 		
-		explicit Bar(OnlyDrawable* background, OnlyDrawable* strip, float offset = 0, bool horizontal = true);
+		explicit Bar(IUninteractive* background, IUninteractive* strip, float offset = 0, bool horizontal = true);
 		
-		explicit Bar(OnlyDrawable *background, OnlyDrawable *strip, int division, float offset = 0, bool horizontal = true);
+		explicit Bar(IUninteractive *background, IUninteractive *strip, int division, float offset = 0, bool horizontal = true);
 		
 		~Bar() override;
 		

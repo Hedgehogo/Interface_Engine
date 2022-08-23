@@ -6,10 +6,10 @@ void ui::Bar::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, Upd
 	strip->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 }
 
-ui::Bar::Bar(OnlyDrawable *background, OnlyDrawable *strip, float offset, bool horizontal) :
+ui::Bar::Bar(IUninteractive *background, IUninteractive *strip, float offset, bool horizontal) :
 	LayoutWithBackground(background), strip(strip), horizontal(horizontal), offset(offset), division(1), value(0) {}
 
-ui::Bar::Bar(OnlyDrawable *background, OnlyDrawable *strip, int division, float offset, bool horizontal) :
+ui::Bar::Bar(IUninteractive *background, IUninteractive *strip, int division, float offset, bool horizontal) :
 	LayoutWithBackground(background), strip(strip), horizontal(horizontal), offset(offset), division(division), value(0) {}
 
 ui::Bar::~Bar() {
@@ -73,8 +73,8 @@ void ui::Bar::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAd
 }
 
 ui::Bar *ui::Bar::createFromYaml(const YAML::Node &node) {
-	OnlyDrawable *background;
-	OnlyDrawable *strip;
+	IUninteractive *background;
+	IUninteractive *strip;
 	int division{1};
 	float offset{0.0f};
 	bool horizontal{true};

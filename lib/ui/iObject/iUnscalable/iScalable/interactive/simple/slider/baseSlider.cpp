@@ -9,7 +9,7 @@ void ui::BaseSlider::init(sf::RenderTarget &renderTarget, DrawManager &drawManag
 	dynamic_cast<SliderInteraction*>(interaction)->init(*interactionManager);
 }
 
-ui::BaseSlider::BaseSlider(ui::OnlyDrawable *slider, ui::OnlyDrawable *background, WithCoefficientVec2 &value, SliderInteraction *interaction) :
+ui::BaseSlider::BaseSlider(ui::IUninteractive *slider, ui::IUninteractive *background, WithCoefficientVec2 &value, SliderInteraction *interaction) :
 	Interactive_Simple(interaction), slider(slider), background(background), value(&value), position(), sliderSize(), moveZoneSize() {}
 
 void ui::BaseSlider::cutBackValue() {

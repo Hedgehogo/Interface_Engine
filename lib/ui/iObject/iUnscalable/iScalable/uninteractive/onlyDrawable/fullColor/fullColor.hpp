@@ -1,6 +1,6 @@
 #pragma once
 #include "../onlyDrawable.hpp"
-#include "../../../../../../yaml/yamlWithSfml/yamlBuilder/yamlBuilder.hpp"
+#include "../../../../../../../yaml/yamlWithSfml/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
     class FullColor : public OnlyDrawable {
