@@ -2,6 +2,7 @@
 
 #include <functional>
 #include "../yaml.hpp"
+#include "../buffer/buffer.hpp"
 #include "exceptions/yamlBuildExceptions.hpp"
 #define UI_GET_TYPE_NAME(TYPE) (#TYPE)
 

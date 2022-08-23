@@ -54,7 +54,9 @@ namespace ui {
 	T *loadFromYaml(std::string filename) {
 		YAML::Node node = YAML::LoadFile(filename);
 		T* object;
-		node >> object;
+		Buffer::readLevel([&](){
+			node >> object;
+		});
 		return object;
 	}
 }

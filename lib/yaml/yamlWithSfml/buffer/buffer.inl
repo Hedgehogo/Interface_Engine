@@ -2,15 +2,15 @@
 
 namespace ui {
 	template <typename T, typename... A>
-	void Buffer::addObject(const std::string name, A &&... args) {
-		objects.try_emplace(name, std::make_shared<T>(args...));
+	void Buffer::addObject(const std::string& name, A &&... args) {
+		getObjects().try_emplace(name, std::make_shared<T>(args...));
 	}
 	
 	template <typename T>
 	void Buffer::addObject(const std::string &name, const YAML::Node &node) {
 		T* ptr;
 		node >> ptr;
-		objects.try_emplace(name, ptr);
+		getObjects().try_emplace(name, ptr);
 	}
 	
 	template <typename T>
@@ -26,10 +26,15 @@ namespace ui {
 	
 	template <typename T>
 	std::shared_ptr<T> Buffer::getObject(const std::string &name) {
-		auto ptr = std::dynamic_pointer_cast<T>(objects[name]);
-		if(ptr.get() == NULL)
-			throw BufferBadCastException{name, typeid(T)};
-		return ptr;
+		std::shared_ptr<T> ptr;
+		for(auto level = objectsLevels.rbegin(); level != objectsLevels.rend(); ++level) {
+			try {
+				ptr = std::dynamic_pointer_cast<T>(level->at(name));
+				if(ptr.get() != NULL)
+					return ptr;
+			} catch(std::out_of_range&) {}
+		}
+		throw BufferBadCastException{name, typeid(T)};
 	}
 	
 	template <typename T>

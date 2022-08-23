@@ -4,12 +4,6 @@
 #include "exception/bufferException.hpp"
 
 namespace ui {
-	template <typename Type, typename Return = Type>
-	using if_pointer = std::enable_if_t<std::is_pointer_v<Type>, Return>;
-	
-	template <typename Type, typename Return = Type>
-	using if_no_pointer = std::enable_if_t<!std::is_pointer_v<Type>, Return>;
-	
 	template <bool Condition, typename TrueType, typename FalseType>
 	struct select_if_ { using type = TrueType; };
 	template <typename TrueType, typename FalseType>
@@ -22,15 +16,23 @@ namespace ui {
 namespace ui {
 	class Buffer {
 	protected:
-		static std::map<std::string, std::shared_ptr<IWith>> objects;
+		static std::vector<std::map<std::string, std::shared_ptr<IWith>>> objectsLevels;
+		
+		static std::map<std::string, std::shared_ptr<IWith>>& getObjects();
 	
 	public:
 		Buffer() = default;
 		
 		static bool existObject(const std::string& name);
 		
+		static void raiseNestingLevel();
+		
+		static void lowerNestingLevel();
+		
+		static void readLevel(std::function<void()> function);
+		
 		template<typename T, typename... A>
-		static void addObject(const std::string name, A&&... args);
+		static void addObject(const std::string& name, A&&... args);
 		
 		template<typename T>
 		static void addObject(const std::string& name, const YAML::Node &node);
