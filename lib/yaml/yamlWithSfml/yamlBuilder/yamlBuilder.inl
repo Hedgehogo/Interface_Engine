@@ -2,6 +2,13 @@
 
 namespace ui {
 	template <typename T>
+	T *loadFromYamlFile(const YAML::Node &node) {
+		std::string filename;
+		node["filename"] >> filename;
+		return loadFromYaml<T>(filename);
+	}
+	
+	template <typename T>
 	void YamlBuilder<T>::add(YamlBuilder::makeObject function, std::string type, std::vector<std::string> aliases) {
 		typeMap[type] = function;
 		addAliases(type, aliases);
@@ -45,7 +52,9 @@ namespace ui {
 	}
 	
 	template<typename T>
-	std::map<std::string, typename YamlBuilder<T>::makeObject> YamlBuilder<T>::typeMap = {};
+	std::map<std::string, typename YamlBuilder<T>::makeObject> YamlBuilder<T>::typeMap = {
+		std::make_pair("File", loadFromYamlFile<T>)
+	};
 	
 	template<typename T>
 	std::vector<typename YamlBuilder<T>::makeSubobject> YamlBuilder<T>::subtypeMap = {};

@@ -8,6 +8,9 @@
 
 namespace ui {
     const sf::Color nullColor{255, 255, 255, 0};
+	
+	template<typename T>
+	T* loadFromYamlFile(const YAML::Node &node);
 
 	template<typename T>
 	class YamlBuilder {
