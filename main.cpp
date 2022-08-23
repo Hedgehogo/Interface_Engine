@@ -34,8 +34,6 @@ int main() {
 	sf::Font font;
 	font.loadFromFile("segoeui.ttf");
 	*/
-	
-	ui::WithCoefficientVec2 vec{{0, 0}};
 
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);

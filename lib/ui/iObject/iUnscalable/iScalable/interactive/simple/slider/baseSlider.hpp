@@ -9,7 +9,7 @@ namespace ui {
 	protected:
 		IUninteractive* slider;
 		IUninteractive* background;
-		WithCoefficientVec2* value;
+		std::shared_ptr<WithCoefficientVec2> value;
 		sf::Vector2f position;
 		sf::Vector2f sliderSize;
 		sf::Vector2f moveZoneSize;
@@ -21,7 +21,7 @@ namespace ui {
 		void copy(BaseSlider* baseSlider);
 		
 	public:
-		BaseSlider(ui::IUninteractive *slider, ui::IUninteractive *background, WithCoefficientVec2 &valu, SliderInteraction* interaction);
+		BaseSlider(ui::IUninteractive *slider, ui::IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, SliderInteraction* interaction);
 		
 		sf::Vector2f getSliderSize();
 		

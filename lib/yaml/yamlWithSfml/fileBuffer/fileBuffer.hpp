@@ -11,31 +11,15 @@ namespace ui {
 	public:
 		FileBuffer() = default;
 		
-		static T &getObjectReference(const std::string& name) {
-			if(aliases.find(name) != aliases.end()) {
-				return *aliases[name];
-			}
-			if(objects.find(name) == objects.end()) {
-				objects[name].loadFromFile(name);
-			}
-			return objects[name];
-		}
+		static T &getObjectReference(const std::string& name);
 		
-		static void setObject(const std::string &name, const std::string &filename) {
-			objects[name].loadFromFile(filename);
-		}
+		static void setObject(const std::string &name, const std::string &filename);
 		
-		static void addAlias(const std::string& name, const std::string& alias) {
-			aliases[alias] = &getObjectReference(name);
-		}
+		static void addAlias(const std::string& name, const std::string& alias);
 	};
-	
-	template<typename T>
-	std::map<std::string, T> FileBuffer<T>::objects = {};
-	
-	template<typename T>
-	std::map<std::string, T*> FileBuffer<T>::aliases = {};
 }
+
+#include "fileBuffer.inl"
 
 void operator >>(const YAML::Node& node, sf::Texture*& texture);
 

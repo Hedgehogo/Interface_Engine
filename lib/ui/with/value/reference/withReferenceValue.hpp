@@ -8,18 +8,14 @@ namespace ui {
 		T* valueReference;
 		
 	public:
-		explicit WithReferenceValue(T& valueReference) : valueReference(&valueReference) {};
+		explicit WithReferenceValue(T& valueReference);;
 		
-		const T& getValue() const override {
-			return *valueReference;
-		}
+		const T& getValue() const override;
 		
-		void setValue(const T& value) override {
-			*this->valueReference = value;
-		}
+		void setValue(const T& value) override;
 		
-		virtual void setReference(T& valueReference) {
-			this->valueReference = &valueReference;
-		}
+		virtual void setReference(T& valueReference);
 	};
 }
+
+#include "withReferenceValue.inl"

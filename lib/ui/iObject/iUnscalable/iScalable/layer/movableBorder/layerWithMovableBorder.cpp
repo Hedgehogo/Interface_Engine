@@ -94,14 +94,13 @@ void ui::LayerWithMovableBorder::resize(sf::Vector2f size, sf::Vector2f position
     sf::Vector2f secondPosition = position;
 
     if (this->isHorizontalBorder) {
-        float diff  = size.x - getMinSize().x;
         float c =  secondObjectMinSize.x/firstObjectMinSize.x;
         float minSizeBorder = 1-c/(c+1);
 
         if (minSizeBorder > borderValue){
             borderValueNow =  std::max({firstObjectMinSize.x / size.x, borderValue});
-        }
-        else{
+        } else {
+			float diff  = size.x - getMinSize().x;
             borderValueNow =  std::min({(diff + firstObjectMinSize.x) / size.x, borderValue});
         }
 
@@ -110,15 +109,13 @@ void ui::LayerWithMovableBorder::resize(sf::Vector2f size, sf::Vector2f position
         secondPosition.x += firstObjectSize.x;
 
     }else {
-        float diff  = size.y - getMinSize().y;
         float c =  secondObjectMinSize.y/firstObjectMinSize.y;
         float minSizeBorder = 1-c/(c+1);
 
-
         if (minSizeBorder > borderValue){
             borderValueNow =  std::max({firstObjectMinSize.y / size.y, borderValue});
-        }
-        else{
+        } else {
+			float diff  = size.y - getMinSize().y;
             borderValueNow =  std::min({(diff + firstObjectMinSize.y) / size.y, borderValue});
         }
 

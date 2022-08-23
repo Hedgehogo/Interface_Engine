@@ -123,7 +123,9 @@ void operator >>(const YAML::Node& node, sf::Shader& shader){
         } else if (node["frag"]){
             node["frag"] >> frag;
             shader.loadFromFile(frag, sf::Shader::Fragment);
-        }
+        } else {
+			throw YAML::BadConversion{node.Mark()};
+		}
     }
 }
 

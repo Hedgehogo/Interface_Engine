@@ -6,36 +6,25 @@
 #include "yaml-cpp/yaml.h"
 
 typedef long long llint;
-
 typedef unsigned int uint;
-
 typedef unsigned long long ullint;
 
 template<typename T>
 std::enable_if_t<!std::is_constructible_v<T, const YAML::Node&>, void>
-operator >>(const YAML::Node& node, T& value) {
-	value = node.as<T>();
-}
+operator >>(const YAML::Node& node, T& value);
 
 template<typename T>
 std::enable_if_t<std::is_constructible_v<T, const YAML::Node&>, void>
-operator >>(const YAML::Node& node, T& value) {
-	value = T{node};
-}
+operator >>(const YAML::Node& node, T& value);
 
 template<typename T>
-void operator >>(const YAML::Node& node, std::vector<T>& vector) {
-	for(const auto &item : node) {
-		vector.resize(vector.size() + 1);
-		item >> vector[vector.size() - 1];
-	}
-}
+sf::Vector2<T> operator*(const sf::Vector2<T>& first, const sf::Vector2<T>& second);
 
 template<typename T>
-void operator >>(const YAML::Node& node, sf::Vector2<T>& vector) {
-	vector.x = node[0].as<T>();
-	vector.y = node[1].as<T>();
-}
+sf::Vector2<T> operator/(const sf::Vector2<T>& first, const sf::Vector2<T>& second);
+
+template<typename T>
+void operator >>(const YAML::Node& node, std::vector<T>& vector);
 
 void operator >>(const YAML::Node& node, sf::Vector2<float>& vector);
 
@@ -44,13 +33,7 @@ void operator >>(const YAML::Node& node, sf::Vector2<int>& vector);
 void operator >>(const YAML::Node& node, sf::Vector2<uint>& vector);
 
 template <typename T>
-void operator>>(const YAML::Node &node, sf::Rect<T> &rect) {
-	sf::Vector2<T> position;
-	sf::Vector2<T> size;
-	node["position"] >> position;
-	node["size"] >> size;
-	rect = sf::Rect<T>{position, size};
-}
+void operator>>(const YAML::Node &node, sf::Rect<T> &rect);
 
 void operator >>(const YAML::Node& node, sf::Color& color);
 
@@ -61,3 +44,5 @@ void operator >>(const YAML::Node& node, sf::Mouse::Button& button);
 void operator >>(const YAML::Node& node, sf::Shader& shader);
 
 bool createBoolFromYaml(const YAML::Node& node, std::string trueValue, std::string falseValue);
+
+#include "yaml.inl"

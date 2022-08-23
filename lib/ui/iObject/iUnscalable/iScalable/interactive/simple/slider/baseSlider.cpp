@@ -9,8 +9,8 @@ void ui::BaseSlider::init(sf::RenderTarget &renderTarget, DrawManager &drawManag
 	dynamic_cast<SliderInteraction*>(interaction)->init(*interactionManager);
 }
 
-ui::BaseSlider::BaseSlider(ui::IUninteractive *slider, ui::IUninteractive *background, WithCoefficientVec2 &value, SliderInteraction *interaction) :
-	Interactive_Simple(interaction), slider(slider), background(background), value(&value), position(), sliderSize(), moveZoneSize() {}
+ui::BaseSlider::BaseSlider(ui::IUninteractive *slider, ui::IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, SliderInteraction *interaction) :
+	Interactive_Simple(interaction), slider(slider), background(background), value(value), position(), sliderSize(), moveZoneSize() {}
 
 void ui::BaseSlider::cutBackValue() {
     //value.x = std::max(0.f,std::min(1.f,value.x));
