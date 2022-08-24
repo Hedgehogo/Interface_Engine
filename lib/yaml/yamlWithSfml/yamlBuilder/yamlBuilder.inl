@@ -9,6 +9,18 @@ namespace ui {
 	}
 	
 	template<typename T>
+	T* loadFromYamlIf(const YAML::Node &node) {
+		T* object;
+		if(Buffer::existObject(node["condition"])) {
+			node["first"] >> object;
+		} else {
+			Buffer::addObject<WithValue<bool>>(node["condition"]);
+			node["second"] >> object;
+		}
+		return object;
+	}
+	
+	template<typename T>
 	std::map<std::string, typename YamlBuilder<T>::makeObject> YamlBuilder<T>::typeMap = {
 		std::make_pair("file", loadFromYamlFile<T>),
 		std::make_pair("if", loadFromYamlIf<T>),
