@@ -27,7 +27,7 @@ second-object:
     slider: *slider
     background:
       type: File
-      filename: ../subobject.yaml
+      file-path: ../subobject.yaml
     value: vec
     slider-scale: 0.5, 0.5
   side: down

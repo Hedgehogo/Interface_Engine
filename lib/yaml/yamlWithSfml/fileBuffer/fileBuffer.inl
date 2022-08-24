@@ -19,8 +19,8 @@ namespace ui {
 	}
 	
 	template <typename T>
-	void FileBuffer<T>::setObject(const std::string &name, const std::string &filename) {
-		objects[name].loadFromFile(filename);
+	void FileBuffer<T>::setObject(const std::string &name, const std::string &filePath) {
+		objects[name].loadFromFile(filePath);
 	}
 	
 	template <typename T>

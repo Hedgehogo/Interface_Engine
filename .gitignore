@@ -13,6 +13,9 @@ layers.md
 /cmake-build-debug/CMakeCache.txt.tmp587b9
 /cmake-build-debug/hellolib-config.cmake
 /cmake-build-debug/Interface_Engine-config.cmake
+/cmake-build-debug/Interface_Engine_ex
+/cmake-build-debug/Interface_Engine_ex.exe
+/cmake-build-debug/libInterface_Engine.a
 /cmake-build-release/.cmake/
 /cmake-build-release/CMakeFiles/
 /cmake-build-release/Testing/
@@ -24,4 +27,7 @@ layers.md
 /cmake-build-release/cmake_install.cmake
 /cmake-build-release/CMakeCache.txt
 /cmake-build-release/Interface_Engine-config.cmake
+/cmake-build-release/Interface_Engine_ex
+/cmake-build-release/Interface_Engine_ex.exe
+/cmake-build-release/libInterface_Engine.a
 *.swp

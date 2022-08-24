@@ -3,10 +3,18 @@
 namespace ui {
 	template <typename T>
 	T *loadFromYamlFile(const YAML::Node &node) {
-		std::string filename;
-		node["filename"] >> filename;
-		return loadFromYaml<T>(filename);
+		std::string filePath;
+		node["file-path"] >> filePath;
+		return loadFromYaml<T>(filePath);
 	}
+	
+	template<typename T>
+	std::map<std::string, typename YamlBuilder<T>::makeObject> YamlBuilder<T>::typeMap = {
+		std::make_pair("File", loadFromYamlFile<T>)
+	};
+	
+	template<typename T>
+	std::vector<typename YamlBuilder<T>::makeSubobject> YamlBuilder<T>::subtypeMap = {};
 	
 	template <typename T>
 	void YamlBuilder<T>::add(YamlBuilder::makeObject function, std::string type, std::vector<std::string> aliases) {
@@ -51,17 +59,9 @@ namespace ui {
 		}
 	}
 	
-	template<typename T>
-	std::map<std::string, typename YamlBuilder<T>::makeObject> YamlBuilder<T>::typeMap = {
-		std::make_pair("File", loadFromYamlFile<T>)
-	};
-	
-	template<typename T>
-	std::vector<typename YamlBuilder<T>::makeSubobject> YamlBuilder<T>::subtypeMap = {};
-	
 	template <typename T>
-	T *loadFromYaml(std::string filename) {
-		YAML::Node node = YAML::LoadFile(filename);
+	T *loadFromYaml(std::string filePath) {
+		YAML::Node node = YAML::LoadFile(filePath);
 		T* object;
 		Buffer::readLevel([&](){
 			node >> object;

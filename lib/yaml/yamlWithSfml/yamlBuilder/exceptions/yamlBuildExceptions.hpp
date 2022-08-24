@@ -6,7 +6,7 @@
 namespace ui {
 	class AbstractTypeYamlException : public std::exception {
 	public:
-		virtual const char* what() const throw();
+		const char* what() const noexcept override;
 	};
 	
 	class NonexistentTypeYamlException : public std::exception {
@@ -16,6 +16,6 @@ namespace ui {
 	public:
 		NonexistentTypeYamlException(std::string type);
 		
-		virtual const char* what() const throw();
+		const char* what() const noexcept override;
 	};
 }

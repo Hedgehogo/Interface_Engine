@@ -19,6 +19,9 @@ namespace ui {
 		static std::vector<std::map<std::string, std::shared_ptr<IWith>>> objectsLevels;
 		
 		static std::map<std::string, std::shared_ptr<IWith>>& getObjects();
+		
+		template<typename T>
+		static void addObject(const std::string& name, const YAML::Node &node);
 	
 	public:
 		Buffer() = default;
@@ -35,9 +38,6 @@ namespace ui {
 		static void addObject(const std::string& name, A&&... args);
 		
 		template<typename T>
-		static void addObject(const std::string& name, const YAML::Node &node);
-		
-		template<typename T>
 		static void addObject(const YAML::Node &node);
 		
 		template<typename T>
@@ -51,7 +51,7 @@ namespace ui {
 	std::shared_ptr<T> getRef(std::string name);
 	
 	template<typename T, typename... A>
-	void add(const std::string name, A&&... args);
+	void add(const std::string& name, A&&... args);
 }
 
 #include "buffer.inl"

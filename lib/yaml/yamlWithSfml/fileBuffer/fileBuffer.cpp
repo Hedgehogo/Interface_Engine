@@ -101,9 +101,9 @@ void operator>>(const YAML::Node &node, std::basic_string<char32_t>& string32) {
             string32[i] = str[i];
         }
     } else {
-        std::string filename;
-        node["filename"] >> filename;
-        std::basic_ifstream<char32_t> fin(filename);
+        std::string filePath;
+        node["file-path"] >> filePath;
+        std::basic_ifstream<char32_t> fin(filePath);
         std::basic_string<char32_t> str{};
         if (node["line"]) {
             ullint line{node["line"].as<ullint>() + 1};

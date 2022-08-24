@@ -3,14 +3,34 @@
 namespace ui {
 	template <typename T, typename... A>
 	void Buffer::addObject(const std::string& name, A &&... args) {
-		getObjects().try_emplace(name, std::make_shared<T>(args...));
+		objectsLevels[objectsLevels.size() - 1].try_emplace(name, std::make_shared<T>(args...));
 	}
 	
 	template <typename T>
 	void Buffer::addObject(const std::string &name, const YAML::Node &node) {
 		T* ptr;
+		long long level{static_cast<long long>(objectsLevels.size()) - 1};
+		
 		node >> ptr;
-		getObjects().try_emplace(name, ptr);
+		if(node["level"]) {
+			if(node["relative"]) {
+				long long relative;
+				node["relative"] >> relative;
+				level -= relative;
+			} else {
+				if(node.IsScalar()) {
+					node >> level;
+				} else {
+					node["absolute"] >> level;
+				}
+			}
+		}
+		
+		if(level >= 0) {
+			objectsLevels[level].try_emplace(name, ptr);
+		} else {
+			throw BufferNonExistentNestingLevelException{name, level};
+		}
 	}
 	
 	template <typename T>
@@ -34,7 +54,7 @@ namespace ui {
 					return ptr;
 			} catch(std::out_of_range&) {}
 		}
-		throw BufferBadCastException{name, typeid(T)};
+		throw BufferVariableNotFoundException{name, typeid(T)};
 	}
 	
 	template <typename T>
@@ -57,7 +77,7 @@ namespace ui {
 	}
 	
 	template <typename T, typename... A>
-	void add(const std::string name, A &&... args) {
+	void add(const std::string& name, A &&... args) {
 		Buffer::addObject<T>(name, args...);
 	}
 }

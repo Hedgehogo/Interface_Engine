@@ -13,7 +13,7 @@ namespace ui {
 		
 		static T &getObjectReference(const std::string& name);
 		
-		static void setObject(const std::string &name, const std::string &filename);
+		static void setObject(const std::string &name, const std::string &filePath);
 		
 		static void addAlias(const std::string& name, const std::string& alias);
 	};

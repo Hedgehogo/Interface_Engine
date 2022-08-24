@@ -40,7 +40,7 @@ namespace ui {
 	};
 	
 	template<typename T>
-	T* loadFromYaml(std::string filename);
+	T* loadFromYaml(std::string filePath);
 }
 
 template<typename T>

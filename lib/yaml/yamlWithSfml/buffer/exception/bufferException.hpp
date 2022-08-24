@@ -3,13 +3,23 @@
 #include <exception>
 
 namespace ui {
-	class BufferBadCastException : public std::exception {
+	class BufferVariableNotFoundException : public std::exception {
 	protected:
 		std::string str;
 	
 	public:
-		BufferBadCastException(std::string name, const std::type_info& type);
+		BufferVariableNotFoundException(std::string name, const std::type_info& type);
 		
-		virtual const char* what() const throw();
+		const char* what() const noexcept override;
+	};
+	
+	class BufferNonExistentNestingLevelException : public std::exception {
+	protected:
+		std::string str;
+	
+	public:
+		BufferNonExistentNestingLevelException(std::string name, long long level);
+		
+		const char* what() const noexcept override;
 	};
 }

@@ -46,16 +46,16 @@ void operator>>(const YAML::Node &node, sf::Color &color) {
 		std::string strColor = node.as<std::string>();
 		
 		std::map<std::string, sf::Color> colorMap {
-			{"Black", sf::Color::Black},
-			{"White", sf::Color::White},
-			{"Red", sf::Color::Red},
-			{"Green", sf::Color::Green},
-			{"Blue", sf::Color::Blue},
-			{"Yellow", sf::Color::Yellow},
-			{"Magenta", sf::Color::Magenta},
-			{"Cyan", sf::Color::Cyan},
-			{"Transparent", sf::Color::Transparent},
-            {"NullColor", {255, 255, 255, 0}}
+			{"black", sf::Color::Black},
+			{"white", sf::Color::White},
+			{"red", sf::Color::Red},
+			{"green", sf::Color::Green},
+			{"blue", sf::Color::Blue},
+			{"yellow", sf::Color::Yellow},
+			{"magenta", sf::Color::Magenta},
+			{"cyan", sf::Color::Cyan},
+			{"transparent", sf::Color::Transparent},
+            {"null-color", {255, 255, 255, 0}}
 		};
 		
 		if(colorMap.find(strColor) != colorMap.end()) {
