@@ -71,7 +71,8 @@ namespace ui {
 }
 
 template <typename T>
-void operator>>(const YAML::Node &node, T *&object) {
+std::void_t<decltype(T::createFromYaml(std::declval<YAML::Node>()))>
+operator>>(const YAML::Node &node, T *&object) {
 	if(node["type"]) {
 		std::string type;
 		node["type"] >> type;

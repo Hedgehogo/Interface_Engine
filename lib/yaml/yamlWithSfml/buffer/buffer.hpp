@@ -1,5 +1,6 @@
 #pragma once
 #include <any>
+#include <functional>
 #include "../../../ui/with/iWith.hpp"
 #include "exception/bufferException.hpp"
 
