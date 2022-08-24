@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 3.21)
 project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
-
-add_definitions(-O2)
+if (${CMAKE_BUILD_TYPE} STREQUAL Release)
+    add_definitions(-O2)
+endif ()
 
 file(GLOB_RECURSE src "lib/ui/*.cpp" "lib/ui/*.h" "lib/ui/*.hpp" "lib/yaml/yamlWithSfml/*.hpp" "lib/yaml/yamlWithSfml/*.cpp")
 

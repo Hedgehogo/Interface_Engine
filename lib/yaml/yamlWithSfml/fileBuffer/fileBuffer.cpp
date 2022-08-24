@@ -1,6 +1,9 @@
 #include "fileBuffer.hpp"
+
 #include <fstream>
 #include <iostream>
+
+#include "../../../ui/localizationSystem/localizationSystem.hpp"
 
 void operator>>(const YAML::Node &node, sf::Texture *&texture) {
 	texture = &ui::FileBuffer<sf::Texture>::getObjectReference(node.as<std::string>());
@@ -101,38 +104,44 @@ void operator>>(const YAML::Node &node, std::basic_string<char32_t>& string32) {
             string32[i] = str[i];
         }
     } else {
-        std::string filename;
-        node["filename"] >> filename;
-        std::basic_ifstream<char32_t> fin(filename);
-        std::basic_string<char32_t> str{};
-        if (node["line"]) {
-            ullint line{node["line"].as<ullint>() + 1};
-            for (ullint i = 0; i < line; ++i)
-                std::getline(fin, str, U'\n');
-        } else if (node["first-symbol"]) {
-            ui::SymbolPosition start{ui::readCharacterIndex(node["first-symbol"], fin)};
-            if (node["last-symbol"]) {
-                const YAML::Node &secondNode = node["last-symbol"];
-                ui::SymbolPosition end{ui::readCharacterIndex(secondNode, fin)};
-                std::basic_string<char32_t> line;
-                for (ullint i = 0; i < start.line; ++i)
-                    std::getline(fin, line, U'\n');
-                for (ullint i = 0; i < end.line - start.line; ++i) {
-                    std::getline(fin, line, U'\n');
-                    str += line + U"\n";
-                }
-                std::getline(fin, line, U'\n');
-                str += line.substr(0, end.number + 1);
-            } else {
-                for (ullint i = 0; i < start.line; ++i)
+        if (node["key"]){
+            if (node["directory"]) ui::LocalizationSystem::loadFromDirectory(node["directory"].as<std::string>());
+            if (node["language"]) ui::LocalizationSystem::setNowLanguage(node["language"].as<std::string>());
+            string32 = ui::LocalizationSystem::getText(node["key"].as<std::string>());
+        } else {
+            std::string filename;
+            node["filename"] >> filename;
+            std::basic_ifstream<char32_t> fin(filename);
+            std::basic_string<char32_t> str{};
+            if (node["line"]) {
+                ullint line{node["line"].as<ullint>() + 1};
+                for (ullint i = 0; i < line; ++i)
                     std::getline(fin, str, U'\n');
+            } else if (node["first-symbol"]) {
+                ui::SymbolPosition start{ui::readCharacterIndex(node["first-symbol"], fin)};
+                if (node["last-symbol"]) {
+                    const YAML::Node &secondNode = node["last-symbol"];
+                    ui::SymbolPosition end{ui::readCharacterIndex(secondNode, fin)};
+                    std::basic_string<char32_t> line;
+                    for (ullint i = 0; i < start.line; ++i)
+                        std::getline(fin, line, U'\n');
+                    for (ullint i = 0; i < end.line - start.line; ++i) {
+                        std::getline(fin, line, U'\n');
+                        str += line + U"\n";
+                    }
+                    std::getline(fin, line, U'\n');
+                    str += line.substr(0, end.number + 1);
+                } else {
+                    for (ullint i = 0; i < start.line; ++i)
+                        std::getline(fin, str, U'\n');
+                    std::getline(fin, str, U'\0');
+                }
+                str = str.substr(start.number + (str[0] == 65279));
+            } else {
                 std::getline(fin, str, U'\0');
             }
-            str = str.substr(start.number + (str[0] == 65279));
-        } else {
-            std::getline(fin, str, U'\0');
+            string32 = str;
         }
-        string32 = str;
     }
 }
 

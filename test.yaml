@@ -1,34 +1,43 @@
-type: LayerWCBorder
-const-object:
-  type: LayerWCBorder
-  second-object:
-    type: Slider
-    slider: &slider
-      type: Capsule
-      color: 525252
-    background: &background
-      type: FullColor
-      color: 37383A
-    value:
-      name: mouse-position
-  const-object: *background
-  side: down
-  border-distance: 10
-second-object:
-  type: LayerWCBorder
-  const-object:
-    type: Slider
-    slider: *slider
-    background: *background
-    value: mouse-position
-    slider-scale: 0.5, 1
-  second-object:
-    type: Slider
-    slider: *slider
-    background: *background
-    value: mouse-position
-    slider-scale: 0.5, 0.5
-  side: down
-  border-distance: 10
-side: right
-border-distance: 10
+type: Text
+text-block:
+  type: TB
+  text:
+    key: knife
+    directory: ../
+    language: jp
+font: msyh.ttc
+
+#type: LayerWCBorder
+#const-object:
+#  type: LayerWCBorder
+#  second-object:
+#    type: Slider
+#    slider: &slider
+#      type: Capsule
+#      color: 525252
+#    background: &background
+#      type: FullColor
+#      color: 37383A
+#    value:
+#      name: mouse-position
+#  const-object: *background
+#  side: down
+#  border-distance: 10
+#second-object:
+#  type: LayerWCBorder
+#  const-object:
+#    type: Slider
+#    slider: *slider
+#    background: *background
+#    value: mouse-position
+#    slider-scale: 0.5, 1
+#  second-object:
+#    type: Slider
+#    slider: *slider
+#    background: *background
+#    value: mouse-position
+#    slider-scale: 0.5, 0.5
+#  side: down
+#  border-distance: 10
+#side: right
+#border-distance: 10

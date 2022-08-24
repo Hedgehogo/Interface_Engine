@@ -32,7 +32,7 @@ int main() {
     sf::Texture texture_3;
     texture_3.loadFromFile("image_3.png");
 	sf::Font font;
-	font.loadFromFile("segoeui.ttf");
+	font.loadFromDirectory("segoeui.ttf");
 	*/
 	
 	ui::WithCoefficientVec2 vec{{0, 0}};
