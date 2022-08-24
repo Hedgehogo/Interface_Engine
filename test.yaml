@@ -1,17 +1,19 @@
 type: LayerWCBorder
 const-object:
   type: LayerWCBorder
+  const-object: &background
+    type: FullColor
+    color: 37383A88
   second-object:
     type: Slider
     slider: &slider
       type: Capsule
       color: 525252
-    background: &background
-      type: FullColor
-      color: 37383A
+    background: *background
     value:
       name: vec
-  const-object: *background
+      level:
+        absolute: 0
   side: down
   border-distance: 10
 second-object:
@@ -23,13 +25,18 @@ second-object:
     value: vec
     slider-scale: 0.5, 1
   second-object:
-    type: Slider
-    slider: *slider
-    background:
-      type: File
-      file-path: ../subobject.yaml
-    value: vec
-    slider-scale: 0.5, 0.5
+    type: if
+    condition:
+      name: bool
+    first:
+      type: Slider
+      slider: *slider
+      background: *background
+      value: vec
+      slider-scale: 0.5, 0.5
+    second:
+      type: file
+      file-path: ../test.yaml
   side: down
   border-distance: 10
 side: right

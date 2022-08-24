@@ -24,4 +24,18 @@ namespace ui {
 	bool Buffer::existObject(const std::string &name) {
 		return getObjects().find(name) != getObjects().end();
 	}
+	
+	bool Buffer::existObject(const YAML::Node &node) {
+		std::string name;
+		if(node.IsScalar()) {
+			node >> name;
+		} else {
+			node["name"] >> name;
+		}
+		for(auto& level: objectsLevels) {
+			if(level.find(name) != level.end())
+				return true;
+		}
+		return false;
+	}
 }

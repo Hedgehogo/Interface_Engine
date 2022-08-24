@@ -1,6 +1,6 @@
 #pragma once
 #include <any>
-#include "../../../ui/with/iWith.hpp"
+#include "../with/vector/general/withVector2.hpp"
 #include "exception/bufferException.hpp"
 
 namespace ui {
@@ -27,6 +27,8 @@ namespace ui {
 		Buffer() = default;
 		
 		static bool existObject(const std::string& name);
+		
+		static bool existObject(const YAML::Node &node);
 		
 		static void raiseNestingLevel();
 		

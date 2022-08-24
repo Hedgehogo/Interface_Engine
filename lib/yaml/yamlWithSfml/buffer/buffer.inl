@@ -13,20 +13,20 @@ namespace ui {
 		
 		node >> ptr;
 		if(node["level"]) {
-			if(node["relative"]) {
+			if(node["level"]["relative"]) {
 				long long relative;
-				node["relative"] >> relative;
+				node["level"]["relative"] >> relative;
 				level -= relative;
 			} else {
 				if(node.IsScalar()) {
-					node >> level;
+					node["level"] >> level;
 				} else {
-					node["absolute"] >> level;
+					node["level"]["absolute"] >> level;
 				}
 			}
 		}
 		
-		if(level >= 0) {
+		if(level >= 0 && level < objectsLevels.size()) {
 			objectsLevels[level].try_emplace(name, ptr);
 		} else {
 			throw BufferNonExistentNestingLevelException{name, level};

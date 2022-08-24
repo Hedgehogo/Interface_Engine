@@ -10,7 +10,8 @@ namespace ui {
 	
 	template<typename T>
 	std::map<std::string, typename YamlBuilder<T>::makeObject> YamlBuilder<T>::typeMap = {
-		std::make_pair("File", loadFromYamlFile<T>)
+		std::make_pair("file", loadFromYamlFile<T>),
+		std::make_pair("if", loadFromYamlIf<T>),
 	};
 	
 	template<typename T>
@@ -47,14 +48,14 @@ namespace ui {
 	
 	template <typename T>
 	T *YamlBuilder<T>::build(const YAML::Node &node, std::string type) {
-		for(const auto &subtype: subtypeMap) {
-			try {
-				return subtype(node, type);
-			} catch (ui::NonexistentTypeYamlException&) {}
-		}
 		try {
 			return typeMap.at(type)(node);
 		} catch (std::out_of_range&) {
+			for(const auto &subtype: subtypeMap) {
+				try {
+					return subtype(node, type);
+				} catch (ui::NonexistentTypeYamlException&) {}
+			}
 			throw ui::NonexistentTypeYamlException{type};
 		}
 	}
@@ -63,22 +64,23 @@ namespace ui {
 	T *loadFromYaml(std::string filePath) {
 		YAML::Node node = YAML::LoadFile(filePath);
 		T* object;
-		Buffer::readLevel([&](){
-			node >> object;
-		});
+		Buffer::raiseNestingLevel();
+		node >> object;
+		Buffer::lowerNestingLevel();
 		return object;
 	}
 }
 
-template <typename T>
-void operator>>(const YAML::Node &node, T *&object) {
+template<typename T>
+std::void_t<decltype(T::createFromYaml(std::declval<YAML::Node>()))>
+operator>>(const YAML::Node &node, T*& object) {
 	if(node["type"]) {
 		std::string type;
 		node["type"] >> type;
 		object = ui::YamlBuilder<T>::build(node, type);
 	} else {
 		T* result = dynamic_cast<T*>(T::createFromYaml(node));
-		if(!result) throw ui::AbstractTypeYamlException{};
+		if(!result) throw ui::AbstractTypeYamlException{typeid(T)};
 		object = result;
 	}
 }

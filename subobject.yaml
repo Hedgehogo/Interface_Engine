@@ -1,2 +1,7 @@
-type: Sprite
-texture: gigachad.jpg
+type: LayerWBackground
+object:
+  type: file
+  file-path: ../test.yaml
+background:
+  type: Sprite
+  texture: gigachad.jpg

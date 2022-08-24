@@ -1,13 +1,8 @@
 //included into yaml.hpp
 
 template <typename T>
-std::enable_if_t<!std::is_constructible_v<T, const YAML::Node &>, void> operator>>(const YAML::Node &node, T &value) {
+void operator>>(const YAML::Node &node, T &value) {
 	value = node.as<T>();
-}
-
-template <typename T>
-std::enable_if_t<std::is_constructible_v<T, const YAML::Node &>, void> operator>>(const YAML::Node &node, T &value) {
-	value = T{node};
 }
 
 template <typename T>

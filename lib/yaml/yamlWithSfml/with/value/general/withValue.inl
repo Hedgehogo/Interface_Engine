@@ -16,9 +16,9 @@ namespace ui {
 	
 	template <typename T>
 	WithValue<T> *WithValue<T>::createFromYaml(const YAML::Node &node) {
-		T value;
+		T value{};
 		
-		node["value"] >> value;
+		if(node["value"]) node["value"] >> value;
 		
 		return new WithValue<T>{value};
 	}

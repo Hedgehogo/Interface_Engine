@@ -10,12 +10,11 @@ typedef unsigned int uint;
 typedef unsigned long long ullint;
 
 template<typename T>
-std::enable_if_t<!std::is_constructible_v<T, const YAML::Node&>, void>
-operator >>(const YAML::Node& node, T& value);
+std::void_t<decltype(T::createFromYaml(std::declval<YAML::Node>()))>
+operator>>(const YAML::Node &node, T*& object);
 
 template<typename T>
-std::enable_if_t<std::is_constructible_v<T, const YAML::Node&>, void>
-operator >>(const YAML::Node& node, T& value);
+void operator >>(const YAML::Node& node, T& value);
 
 template<typename T>
 sf::Vector2<T> operator*(const sf::Vector2<T>& first, const sf::Vector2<T>& second);

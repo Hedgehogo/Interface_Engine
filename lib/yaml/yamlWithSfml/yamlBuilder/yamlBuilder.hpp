@@ -4,6 +4,8 @@
 #include "../yaml.hpp"
 #include "../buffer/buffer.hpp"
 #include "exceptions/yamlBuildExceptions.hpp"
+#include <iostream>
+#include <bitset>
 #define UI_GET_TYPE_NAME(TYPE) (#TYPE)
 
 namespace ui {
@@ -11,6 +13,25 @@ namespace ui {
 	
 	template<typename T>
 	T* loadFromYamlFile(const YAML::Node &node);
+	
+	template<typename T>
+	T* loadFromYamlIf(const YAML::Node &node) {
+		T* object;
+		bool condition{Buffer::existObject(node["condition"])};
+		std::cout << std::bitset<8>(condition) << " ";
+		if(condition) {
+			std::cout << "1 ";
+			node["first"] >> object;
+			std::cout << "1. ";
+		} else {
+			std::cout << "0 ";
+			Buffer::addObject<WithValue<bool>>(node["condition"]);
+			node["second"] >> object;
+			std::cout << "0. ";
+		}
+		std::cout << "n" << "\n";
+		return object;
+	}
 
 	template<typename T>
 	class YamlBuilder {
@@ -42,9 +63,5 @@ namespace ui {
 	template<typename T>
 	T* loadFromYaml(std::string filePath);
 }
-
-template<typename T>
-std::void_t<decltype(T::createFromYaml(std::declval<YAML::Node>()))>
-operator>>(const YAML::Node &node, T*& object);
 
 #include "yamlBuilder.inl"
