@@ -1,0 +1,8 @@
+knife:
+  -jp : "ナイフ"
+  -ru : "нож"
+  -en : "knife"
+
+-jp:
+  plug : "フォーク"
+  spoon: "スプーン"

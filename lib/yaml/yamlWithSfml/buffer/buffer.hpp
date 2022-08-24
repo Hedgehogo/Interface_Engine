@@ -1,5 +1,6 @@
 #pragma once
 #include <any>
+#include <functional>
 #include "../with/vector/general/withVector2.hpp"
 #include "exception/bufferException.hpp"
 
