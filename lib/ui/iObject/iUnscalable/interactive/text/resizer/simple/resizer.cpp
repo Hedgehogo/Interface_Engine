@@ -84,7 +84,7 @@ namespace ui {
             }
 
             if (oldLine) {
-                BaseCharacter* character = (*characters)[i - ((characters->size() == i || (*characters)[i]->isEnter()) ? 1 : 2)];
+                BaseCharacter* character = (*characters)[i - ((characters->size() == i || (*characters)[i]->isEnter() || i == 1) ? 1 : 2)];
                 sf::Vector2f characterPos = character->getPosition();
                 characterPos.x += character->getAdvance();
 
@@ -208,8 +208,7 @@ namespace ui {
     }
 
     sf::Vector2f Resizer::getNormalSize() {
-        sf::Vector2f minSize = getMinSize();
-        return minSize;
+        return getMinSize();
     }
 
     Resizer *Resizer::copy() {
