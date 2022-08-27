@@ -2,118 +2,97 @@
 
 #include <fstream>
 #include <filesystem>
+#include <algorithm>
 #include <iostream>
 
 typedef unsigned uint;
 
 namespace ui {
+    bool findNotSpace(const char32_t &a) {
+        bool r = a != U' ' && a != U'\n' && a != U'\t' && a != U':';
+        return r;
+    }
+
+    bool findSpace(const char32_t &a) {
+        return a == U' ' || a == U'\n' || a == U'\t' || a == U':';
+    }
+
+    bool findQuoteMarks(const char32_t &a){
+        return a == U'"';
+    }
+
+    std::u32string::iterator searchQuoteMark(std::u32string::iterator first, std::u32string::iterator last){
+        std::u32string::iterator result;
+        while ((result = std::find_if(first, last, findQuoteMarks)) != last && *(result - 1) == U'\\');
+        return result;
+    }
+
+    LocalizationNonexistentKeyException::LocalizationNonexistentKeyException(std::string nowLanguage, std::string defaultLanguage, std::string key) :
+        nowLanguage(nowLanguage), defaultLanguage(defaultLanguage), key(key),
+        str(std::string{"could not find the key '"} + key + std::string{"' in either the specified language '"} + nowLanguage + std::string{"' or the standard '"} + defaultLanguage + std::string{"'"}){}
+
+    const char *LocalizationNonexistentKeyException::what() const noexcept {
+        return str.c_str();
+    }
+
     std::map<std::string, std::map<std::string, std::u32string>> LocalizationSystem::text{};
-    std::map<std::string, std::u32string>* LocalizationSystem::nowLanguage{NULL};
+    std::string LocalizationSystem::strNowLanguage;
+    std::map<std::string, std::u32string>* LocalizationSystem::nowLanguage{nullptr};
+    std::string LocalizationSystem::strDefaultLanguage;
+    std::map<std::string, std::u32string>* LocalizationSystem::defaultLanguage{nullptr};
 
     void LocalizationSystem::loadFromDirectory(std::string path) {
 
         std::u32string files{};
 
-        std::u32string str{};
-        for (auto& languageFile : std::filesystem::directory_iterator(path)) {
-            if (languageFile.path().extension() == ".loc") {
-                std::basic_ifstream<char32_t> fin(languageFile.path());
-                std::getline(fin, str, U'\0');
-                files += str + U'\n';
+        {
+            std::u32string str{};
+            for (auto &languageFile: std::filesystem::directory_iterator(path)) {
+                if (languageFile.path().extension() == ".loc") {
+                    std::basic_ifstream<char32_t> fin(languageFile.path());
+                    std::getline(fin, str, U'\0');
+                    files += str + U'\n';
+                }
             }
         }
 
-        uint cursor = 0;
         std::string key;
-        while (files.find(':', cursor + 1) != files.npos){
 
-            cursor = files.find(':', cursor + 1);
-            char32_t character{'\0'};
-
-            bool skip = false;
-
-            // read name
-            for (uint i = cursor - 1; i > 0; --i) {
-                character = files[i];
-                if (character != U' '){
-
-                    if (character == '"'){
-                        skip = true;
-                        break;
-                    }
-
-                    std::string name{};
-                    for (int j = i; j >= -1; --j) {
-                        if (j == -1){
-                            key = name;
-                            break;
-                        }
-                        character = files[j];
-                        if (character != U'-' && character != U' ' && character != U'\n' && character != U'\t'){
-                            name.insert(name.begin(), character);
-                        } else if(character == U'-'){
-                            nowLanguage = &LocalizationSystem::text[name];
-                            break;
-                        } else{
-                            key = name;
-                            break;
-                        }
-                    }
-                    break;
+        std::u32string::iterator cursor = files.begin();
+        while ((cursor = std::find_if(cursor, files.end(), findNotSpace)) != files.end()){
+            if (*cursor == U'"'){
+                std::u32string::iterator endText{searchQuoteMark(cursor + 1, files.end())};
+                (*nowLanguage)[key] = {cursor + 1, endText};
+                cursor = endText + 1;
+            } else{
+                std::u32string::iterator endName{std::find_if(cursor, files.end(), findSpace)};
+                if (*cursor == U'-'){
+                    nowLanguage = &text[{cursor + 1, endName}];
+                } else{
+                    key = {cursor, endName};
                 }
-            }
-
-            if (skip) continue;
-
-            //read files
-
-            std::u32string text{};
-
-            for (int i = cursor + 1; i < files.size(); ++i) {
-                character = files[i];
-                if (character != U' ' && character != U'\n' && character != U'\t'){
-                    if (character == U'"'){
-                        bool spec = false;
-                        for (int j = i + 1; j < files.size(); ++j) {
-                            character  = files[j];
-                            if (character == '\\'){
-                                spec = true;
-                            } else if (spec){
-                                switch (character) {
-                                    case U'"':
-                                        text += character;
-                                        break;
-                                    case U'n':
-                                        text += U'\n';
-                                        break;
-                                    case U't':
-                                        text += U'\t';
-                                        break;
-                                }
-                                spec = false;
-                            } else{
-                                if (character == '"'){
-                                    (*nowLanguage)[key] = text;
-                                    break;
-                                } else{
-                                    text += character;
-                                }
-                            }
-                        }
-                    } else{
-                        break;
-                    }
-                }
+                cursor = endName;
             }
         }
     }
 
-    void LocalizationSystem::setNowLanguage(std::string nowLanguage) {
-        LocalizationSystem::nowLanguage = &text[nowLanguage];
+    void LocalizationSystem::setNowLanguage(std::string language) {
+        strNowLanguage = language;
+        nowLanguage = &text[language];
+    }
+
+    void LocalizationSystem::setDefaultLanguage(std::string language) {
+        strDefaultLanguage = language;
+        defaultLanguage = &text[language];
     }
 
     std::u32string LocalizationSystem::getText(std::string key) {
-        return (*LocalizationSystem::nowLanguage)[key];
+        if (nowLanguage && nowLanguage->find(key) != nowLanguage->end())
+            return (*nowLanguage)[key];
+        else if (defaultLanguage && defaultLanguage->find(key) != defaultLanguage->end())
+            return (*defaultLanguage)[key];
+        else
+            throw LocalizationNonexistentKeyException{strNowLanguage, strDefaultLanguage, key};
     }
 
     std::u32string LocalizationSystem::getText(std::string language, std::string key) {

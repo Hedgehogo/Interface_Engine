@@ -1,8 +1,15 @@
-knife:
-  -jp : "ナイフ"
-  -ru : "нож"
-  -en : "knife"
+knife
+  -jp  :::::::  "ナイフ"
+  -ru  :::::::  "нож"
+  -en  :::::::  "knife"
 
--jp:
-  plug : "フォーク"
-  spoon: "スプーン"
+-jp
+  plug   "フォーク"
+  spoon  "スプーン"
+
+
+plate
+  -ru "тарелка"
+  -en "plate"
+
+-ru cookware "посуда"

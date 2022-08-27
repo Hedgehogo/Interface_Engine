@@ -1,8 +1,23 @@
-type: Text
-text-block:
-  type: TB
-  text:
-    key: knife
-    directory: ../
-    language: jp
-font: msyh.ttc
+type: LWBV
+first-object:
+  type: Text
+  text-block:
+    type: TB
+    text:
+      key: plug
+      directory: ../
+      language: jp
+      default-language: en
+    line:
+      type: U
+  font: msyh.ttc
+second-object:
+  type: Text
+  text-block:
+    type: TB
+    text:
+      key: plate
+      language: jp
+    line:
+      type: U
+  font: msyh.ttc

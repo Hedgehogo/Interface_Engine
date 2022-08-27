@@ -106,6 +106,7 @@ void operator>>(const YAML::Node &node, std::basic_string<char32_t>& string32) {
     } else {
         if (node["key"]){
             if (node["directory"]) ui::LocalizationSystem::loadFromDirectory(node["directory"].as<std::string>());
+            if (node["default-language"]) ui::LocalizationSystem::setDefaultLanguage(node["default-language"].as<std::string>());
             if (node["language"]) ui::LocalizationSystem::setNowLanguage(node["language"].as<std::string>());
             string32 = ui::LocalizationSystem::getText(node["key"].as<std::string>());
         } else {
