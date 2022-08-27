@@ -1,54 +1,47 @@
-type: LayerWCBorder
-const-object:
-  type: LayerWCBorder
-  const-object: &background
-    type: FullColor
-    color: 37383A88
-  second-object:
-    type: Slider
-    slider: &slider
-      type: Capsule
-      color: 525252
-    background: *background
-    value:
-      name: vec
-      level:
-        absolute: 0
-  side: down
-  border-distance: 10
-second-object:
-  type: LayerWCBorder
-  const-object:
-    type: Slider
-    slider: *slider
-    background: *background
-    value: vec
-    slider-scale: 0.5, 1
-  second-object:
-    type: if
-    condition:
-      name: bool
-    first:
-      type: LayerWithAlternativeObject
-      top-object:
-        type: Slider
+type: LWAO
+top-object:
+  type: LWB
+  objects:
+    - - type: Slider
+        slider: &slider
+          type: Capsule
+          color: 525252
+        background: &background
+          type: FullColor
+          color: 37383A88
+        slider-scale: 0.5, 0.5
+        value:
+          name: vec
+      - type: Slider
         slider: *slider
         background: *background
-        value: vec
         slider-scale: 0.5, 0.5
-      bottom-object:
-        type: Text
-        text-block:
-          type: TB
-          text:
-            key: knife
-            directory: ../
-            language: jp
-        font: msyh.ttc
-    second:
-      type: file
-      file-path: ../test.yaml
-  side: down
-  border-distance: 10
-side: right
-border-distance: 10
+        value:
+          name: re-vec
+    - - type: Slider
+        slider: *slider
+        background: *background
+        slider-scale: 0.5, 0.5
+        value:
+          name: y-vec
+          x: vec.x
+          y: re-vec.y
+      - type: Slider
+        slider: *slider
+        background: *background
+        slider-scale: 0.5, 0.5
+        value:
+          name: x-vec
+          x: re-vec.x
+          y: vec.y
+bottom-object:
+  type: LWUI
+  object:
+    type: Text
+    text-block:
+      type: TB
+      text:
+        key: knife
+        directory: ../
+        language: jp
+    font: msyh.ttc

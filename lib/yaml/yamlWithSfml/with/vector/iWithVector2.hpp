@@ -8,27 +8,16 @@
 #include "../value/coefficient/reference/withReferenceCoefficientValue.hpp"
 
 namespace ui {
-	template<typename T>
 	class IWithVector2 : public IWith {
 	public:
-		virtual const T& getX() const = 0;
+		IWithVector2() = default;
 		
-		virtual void setX(const T& value);
+		virtual std::shared_ptr<IWith> getXPtr() const = 0;
 		
-		virtual const T& getY() const = 0;
+		virtual void setXPtr(std::shared_ptr<IWith> value) = 0;
 		
-		virtual void setY(const T& value);
+		virtual std::shared_ptr<IWith> getYPtr() const = 0;
 		
-		virtual sf::Vector2<T> getValue() const;
-		
-		virtual void setValue(const sf::Vector2<T>& vector);
-		
-		static IWithVector2<T> *createFromYaml(const YAML::Node &node);
+		virtual void setYPtr(std::shared_ptr<IWith> value) = 0;
 	};
-	
-	typedef IWithVector2<float> IWithVec2f;
-	typedef IWithVector2<int> IWithVec2i;
-	typedef IWithVector2<unsigned> IWithVec2u;
 }
-
-#include "iWithVector2.inl"

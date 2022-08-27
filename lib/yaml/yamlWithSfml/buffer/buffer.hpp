@@ -1,5 +1,6 @@
 #pragma once
 #include <any>
+#include <iostream>
 #include <functional>
 #include "../with/vector/general/withVector2.hpp"
 #include "exception/bufferException.hpp"
@@ -15,6 +16,8 @@ namespace ui {
 }
 
 namespace ui {
+	std::vector<std::string> splitByDelimiter(const std::string& str, char delimiter);
+	
 	class Buffer {
 	protected:
 		static std::vector<std::map<std::string, std::shared_ptr<IWith>>> objectsLevels;
@@ -23,6 +26,10 @@ namespace ui {
 		
 		template<typename T>
 		static void addObject(const std::string& name, const YAML::Node &node);
+		
+		static std::shared_ptr<IWith> getAxis(const std::shared_ptr<IWith>& vector, const std::string& name);
+		
+		static std::shared_ptr<IWith> getVariable(const std::shared_ptr<IWith>& var, std::vector<std::string>& names);
 	
 	public:
 		Buffer() = default;
@@ -47,7 +54,7 @@ namespace ui {
 		static std::shared_ptr<T> getObject(const std::string& name);
 		
 		template<typename T>
-		static std::shared_ptr<T> getObject(const YAML::Node &node);
+		static std::shared_ptr<T> getObject(const YAML::Node &node, bool createIfNotExist = true);
 	};
 	
 	template<typename T>
