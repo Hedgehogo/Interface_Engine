@@ -1,12 +1,12 @@
 //included into yaml.hpp
 
 template <class T>
-std::string get_type(const T& type) {
+std::string type_name(const T& type) {
 	return demangle(typeid(type).name());
 }
 
 template <class T>
-std::string get_type() {
+std::string type_name() {
 	return demangle(typeid(T).name());
 }
 

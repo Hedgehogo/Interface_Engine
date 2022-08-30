@@ -11,29 +11,33 @@ top-object:
           color: 37383A88
         slider-scale: 0.5, 0.5
         value:
-          name: vec
+          var: vec
       - type: Slider
         slider: *slider
         background: *background
-        slider-scale: 0.5, 0.5
+        slider-scale: 0.25, 0.5
         value:
-          name: re-vec
+          var: y-vec
+          x: vec.x
+          y:
+            var: y-2
     - - type: Slider
         slider: *slider
         background: *background
-        slider-scale: 0.5, 0.5
+        slider-scale: 0.5, 0.25
         value:
-          name: y-vec
-          x: vec.x
-          y: re-vec.y
+          var: x-vec
+          x:
+            var: x-2
+          y: vec.y
       - type: Slider
         slider: *slider
         background: *background
-        slider-scale: 0.5, 0.5
+        slider-scale: 0.25, 0.25
         value:
-          name: x-vec
-          x: re-vec.x
-          y: vec.y
+          var: re-vec
+          x: x-2
+          y: y-2
 bottom-object:
   type: LWUI
   object:

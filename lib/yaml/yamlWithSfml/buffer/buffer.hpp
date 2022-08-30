@@ -22,21 +22,21 @@ namespace ui {
 	protected:
 		static std::vector<std::map<std::string, std::shared_ptr<IWith>>> objectsLevels;
 		
-		static std::map<std::string, std::shared_ptr<IWith>>& getObjects();
+		static std::map<std::string, std::shared_ptr<IWith>>& getLevel();
 		
 		template<typename T>
-		static void addObject(const std::string& name, const YAML::Node &node);
+		static void insert(const std::string& name, const YAML::Node &node);
 		
 		static std::shared_ptr<IWith> getAxis(const std::shared_ptr<IWith>& vector, const std::string& name);
 		
 		static std::shared_ptr<IWith> getVariable(const std::shared_ptr<IWith>& var, std::vector<std::string>& names);
-	
+		
 	public:
 		Buffer() = default;
 		
-		static bool existObject(const std::string& name);
+		static bool existAtLevel(const std::string& name);
 		
-		static bool existObject(const YAML::Node &node);
+		static bool exist(const YAML::Node &node);
 		
 		static void raiseNestingLevel();
 		
@@ -45,23 +45,23 @@ namespace ui {
 		static void readLevel(std::function<void()> function);
 		
 		template<typename T, typename... A>
-		static void addObject(const std::string& name, A&&... args);
+		static void emplace(const std::string& name, A&&... args);
 		
 		template<typename T>
-		static void addObject(const YAML::Node &node);
+		static void insert(const YAML::Node &node);
 		
 		template<typename T>
-		static std::shared_ptr<T> getObject(const std::string& name);
+		static std::shared_ptr<T> at(const std::string& fullName);
 		
 		template<typename T>
-		static std::shared_ptr<T> getObject(const YAML::Node &node, bool createIfNotExist = true);
+		static std::shared_ptr<T> get(const YAML::Node &node, bool createIfNotExist = true);
 	};
 	
 	template<typename T>
-	std::shared_ptr<T> getRef(std::string name);
+	std::shared_ptr<T> atYaml(std::string name);
 	
 	template<typename T, typename... A>
-	void add(const std::string& name, A&&... args);
+	void insertYaml(const std::string& name, A&&... args);
 }
 
 #include "buffer.inl"

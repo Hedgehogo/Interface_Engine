@@ -14,10 +14,10 @@ typedef unsigned long long ullint;
 std::string demangle(const char* name);
 
 template <class T>
-std::string get_type(const T& type);
+std::string type_name(const T& type);
 
 template <class T>
-std::string get_type();
+std::string type_name();
 
 template<typename T>
 std::void_t<decltype(T::createFromYaml(std::declval<YAML::Node>()))>

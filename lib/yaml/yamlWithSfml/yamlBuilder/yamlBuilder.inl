@@ -11,10 +11,10 @@ namespace ui {
 	template<typename T>
 	T* loadFromYamlIf(const YAML::Node &node) {
 		T* object;
-		if(Buffer::existObject(node["condition"])) {
+		if(Buffer::exist(node["condition"])) {
 			node["first"] >> object;
 		} else {
-			Buffer::addObject<WithValue<bool>>(node["condition"]);
+			Buffer::insert<WithValue<bool>>(node["condition"]);
 			node["second"] >> object;
 		}
 		return object;
@@ -54,8 +54,26 @@ namespace ui {
 	
 	template <typename T>
 	template <typename Subtype>
+	void YamlBuilder<T>::add(std::vector<std::string> aliases) {
+		add(Subtype::createFromYaml, removeNamespace(type_name<Subtype>(), "ui"), aliases);
+	}
+	
+	template <typename T>
+	template <typename Subtype>
 	void YamlBuilder<T>::addSubtype() {
 		addSubtype(YamlBuilder<Subtype>::build);
+	}
+	
+	template <typename T>
+	template <typename Subtype>
+	void YamlBuilder<T>::addAlias(std::string alias) {
+		addAlias(removeNamespace(type_name<Subtype>()), alias);
+	}
+	
+	template <typename T>
+	template <typename Subtype>
+	void YamlBuilder<T>::addAliases(std::vector<std::string> aliases) {
+		addAliases(removeNamespace(type_name<Subtype>()), aliases);
 	}
 	
 	template <typename T>

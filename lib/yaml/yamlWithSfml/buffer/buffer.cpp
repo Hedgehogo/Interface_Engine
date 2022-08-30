@@ -6,14 +6,14 @@ namespace ui {
 	std::shared_ptr<IWith> Buffer::getAxis(const std::shared_ptr<IWith> &vector, const std::string &name) {
 		std::shared_ptr<IWithVector2> vec{std::dynamic_pointer_cast<IWithVector2>(vector)};
 		if(vec == nullptr) {
-			throw BufferVariableNotFoundException{name, get_type<IWith>()};
+			throw BufferVariableNotFoundException{name, type_name<IWith>()};
 		}
 		if(name == "x") {
 			return vec->getXPtr();
 		} else if(name == "y") {
 			return vec->getYPtr();
 		}
-		throw BufferVariableNotFoundException{name, get_type<IWith>()};
+		throw BufferVariableNotFoundException{name, type_name<IWith>()};
 	}
 	
 	std::shared_ptr<IWith> Buffer::getVariable(const std::shared_ptr<IWith> &var, std::vector<std::string> &names) {
@@ -23,13 +23,13 @@ namespace ui {
 			if(name == "x" || name == "y") {
 				return getAxis(getVariable(var,names), name);
 			} else {
-				throw BufferVariableNotFoundException{name, get_type<IWith>()};
+				throw BufferVariableNotFoundException{name, type_name<IWith>()};
 			}
 		}
 		return var;
 	}
 	
-	std::map<std::string, std::shared_ptr<IWith>>& Buffer::getObjects() {
+	std::map<std::string, std::shared_ptr<IWith>>& Buffer::getLevel() {
 		return objectsLevels[objectsLevels.size() - 1];
 	}
 	
@@ -57,17 +57,17 @@ namespace ui {
 		return result;
 	}
 	
-	bool Buffer::existObject(const std::string &name) {
+	bool Buffer::existAtLevel(const std::string &name) {
 		std::vector<std::string> names = splitByDelimiter(name, '.');
-		return getObjects().find(names[0]) != getObjects().end();
+		return getLevel().find(names[0]) != getLevel().end();
 	}
 	
-	bool Buffer::existObject(const YAML::Node &node) {
+	bool Buffer::exist(const YAML::Node &node) {
 		std::string name;
 		if(node.IsScalar()) {
 			node >> name;
 		} else {
-			node["name"] >> name;
+			node["var"] >> name;
 		}
 		for(auto& level: objectsLevels) {
 			if(level.find(name) != level.end())

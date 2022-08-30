@@ -40,8 +40,9 @@ namespace ui {
         YamlBuilder<BaseTextBlock>::add(InteractiveTextBlock::createFromYaml, "InteractiveTextBlock", {"ITB"});
         YamlBuilder<BaseTextBlock>::add(ObjectTextBlock::createFromYaml, "ObjectTextBlock", {"OBT"});
         YamlBuilder<BaseResizer>::add(Resizer::createFromYaml, "Resizer", {"R"});
-
-		YamlBuilder<IUninteractive>::add(Empty::createFromYaml, "Empty");
+		
+		YamlBuilder<IUninteractive>::add<Empty>();
+		//YamlBuilder<IUninteractive>::add(Empty::createFromYaml, "Empty");
 		YamlBuilder<IUninteractive>::add(FullColor::createFromYaml, "FullColor");
 		YamlBuilder<IUninteractive>::add(RoundedRectangle::createFromYaml, "RoundedRectangle");
 		YamlBuilder<IUninteractive>::add(Capsule::createFromYaml, "Capsule");
