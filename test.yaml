@@ -42,6 +42,8 @@ bottom-object:
   type: LWUI
   object:
     type: Text
+    background:
+      type: Empty
     text-block:
       type: TB
       text:

@@ -1,5 +1,5 @@
-#include "clickDisplayPanelInteraction.h"
-#include "../../../general/panel.h"
+#include "clickDisplayPanelInteraction.hpp"
+#include "../../../general/panel.hpp"
 
 namespace ui {
 	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(sf::Mouse::Button button) :

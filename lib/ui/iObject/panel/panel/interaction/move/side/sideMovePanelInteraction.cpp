@@ -1,5 +1,5 @@
-#include "sideMovePanelInteraction.h"
-#include "../../../general/panel.h"
+#include "sideMovePanelInteraction.hpp"
+#include "../../../general/panel.hpp"
 
 namespace ui {
 	SideMovePanelInteraction::SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool atStart) :

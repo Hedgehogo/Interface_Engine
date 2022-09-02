@@ -1,7 +1,7 @@
 #pragma once
-#include "../../../../../../../../interaction/iInteraction/oneButton/oneButtonInteraction.h"
-#include "../../../../../../../../interaction/iInteraction/block/pressed/pressedInteraction.h"
-#include "../../../../../../../../interaction/event/button/addInteraction/addInteractionEvent.h"
+#include "../../../../../../../../interaction/iInteraction/oneButton/oneButtonInteraction.hpp"
+#include "../../../../../../../../interaction/iInteraction/block/pressed/pressedInteraction.hpp"
+#include "../../../../../../../../interaction/event/button/addInteraction/addInteractionEvent.hpp"
 #include "../slideEvent/sliderEvent.hpp"
 #include "../wheelEvent/sliderWheelEvent.hpp"
 

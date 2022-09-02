@@ -6,7 +6,7 @@ if (${CMAKE_BUILD_TYPE} STREQUAL Release)
     add_definitions(-O2)
 endif ()
 
-file(GLOB_RECURSE src "lib/ui/*.cpp" "lib/ui/*.h" "lib/ui/*.hpp" "lib/yaml/yamlWithSfml/*.hpp" "lib/yaml/yamlWithSfml/*.cpp")
+file(GLOB_RECURSE src "lib/ui/*.cpp" "lib/ui/*.h" "lib/ui/*.hpp" "lib/yaml/yamlWithSfml/*.inl" "lib/yaml/yamlWithSfml/*.hpp" "lib/yaml/yamlWithSfml/*.cpp" "lib/yaml/yamlWithSfml/*.inl")
 
 add_subdirectory(lib/yaml/yaml-cpp)
 

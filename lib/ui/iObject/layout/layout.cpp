@@ -1,4 +1,4 @@
-#include "layout.h"
+#include "layout.hpp"
 
 namespace ui {
 	Layout::Layout(sf::Vector2f size) : size(size), position({0, 0}) {}

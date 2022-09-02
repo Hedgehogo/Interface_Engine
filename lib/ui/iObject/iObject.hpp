@@ -1,10 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "../drawable/manager/drawManager.h"
-#include "../updatable/manager/updateManager.h"
-#include "../interaction/interactionStack/interactionStack.h"
-#include "../interaction/interactionManager/interactionManager.h"
+#include "../drawable/manager/drawManager.hpp"
+#include "../updatable/manager/updateManager.hpp"
+#include "../interaction/interactionStack/interactionStack.hpp"
+#include "../interaction/interactionManager/interactionManager.hpp"
 #include "../../yaml/yamlWithSfml/yamlBuilder/yamlBuilder.hpp"
 
 typedef unsigned uint;

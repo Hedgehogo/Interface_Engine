@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../layer.hpp"
-#include "../../uninteractive/unIteractive.hpp"
-#include "../../../../layout/object/layoutWithObject.h"
-#include "../../../../../interaction/interactionStack/interactionStack.h"
-#include "../../../../../interaction/interactionManager/interactionManager.h"
+#include "../../uninteractive/uninteractive.hpp"
+#include "../../../../layout/object/layoutWithObject.hpp"
+#include "../../../../../interaction/interactionStack/interactionStack.hpp"
+#include "../../../../../interaction/interactionManager/interactionManager.hpp"
 
 namespace ui {
 	class LayerWithConstBezel : public Layer, public LayoutWithObject {

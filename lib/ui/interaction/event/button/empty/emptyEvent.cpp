@@ -1,4 +1,4 @@
-#include "emptyEvent.h"
+#include "emptyEvent.hpp"
 
 ui::EmptyEvent::EmptyEvent() : ButtonEvent() {}
 

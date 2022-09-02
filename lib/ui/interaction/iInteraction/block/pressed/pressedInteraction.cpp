@@ -1,5 +1,5 @@
 #include <iostream>
-#include "pressedInteraction.h"
+#include "pressedInteraction.hpp"
 
 ui::PressedInteraction::PressedInteraction(ui::ButtonEvent *event, sf::Mouse::Button button) : IInteraction(true), OneButtonInteraction(event, button), interactionManager(nullptr) {
 	//std::cout << isBlocked();

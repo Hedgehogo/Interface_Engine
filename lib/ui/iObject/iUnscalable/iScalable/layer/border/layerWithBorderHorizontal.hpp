@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include "../layer.hpp"
-#include "../../../../layout/objectsArray/layoutWithObjectsArray.h"
-#include "../../../../../interaction/interactionStack/interactionStack.h"
+#include "../../../../layout/objectsArray/layoutWithObjectsArray.hpp"
+#include "../../../../../interaction/interactionStack/interactionStack.hpp"
 
 namespace ui {
 	class LayerWithBorderHorizontal : public Layer, public LayoutWithObjectsArray {

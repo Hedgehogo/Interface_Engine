@@ -1,6 +1,6 @@
 #include <iostream>
 #include <algorithm>
-#include "interactionManager.h"
+#include "interactionManager.hpp"
 
 ui::InteractionManager::InteractionManager() :
 	interactions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {}

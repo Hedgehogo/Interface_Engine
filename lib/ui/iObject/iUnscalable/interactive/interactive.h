@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../iScalable/iScalable.hpp"
-#include "../../../interaction/interactionStack/interactionStack.h"
+#include "../../../interaction/interactionStack/interactionStack.hpp"
 
 namespace ui {
 	class Interactive : public virtual IUnscalable {

@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include <array>
-#include "lib/ui/UI.h"
+#include "lib/ui/UI.hpp"
 
 template<typename I, I T>
 float calculateMediumFPS(std::array<float, T> lastFPS) {
@@ -33,12 +33,12 @@ int main() {
 	sf::Font font;
 	font.loadFromDirectory("segoeui.ttf");
 	*/
-
+	
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
-
+	
 	ui::Interface interface {
 		/*
         new ui::LayerWithBackground{
@@ -227,7 +227,7 @@ int main() {
 			}
 		}
 	};
-
+	
 	interface.init(window);
     window.setSize(sf::Vector2u(ui::max(interface.getNormalSize(), {1, 1})));
     interface.setSize(ui::max(interface.getNormalSize(), {1, 1}));

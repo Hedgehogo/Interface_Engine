@@ -89,6 +89,23 @@ namespace ui {
 	}
 	
 	template <typename T>
+	WithList<T> *WithList<T>::createFromYaml(const YAML::Node &node) {
+		if(node["list"]) {
+			std::vector<typename WithList<T>::V> list{node["list"].size()};
+			for(int i = 0; i < list.size(); ++i) {
+				node["list"][i] >> list[i];
+			}
+			return new WithList<T>{list};
+		} else {
+			std::vector<std::shared_ptr<T>> list{node["vars"].size()};
+			for(int i = 0; i < list.size(); ++i) {
+				list[i] = Buffer::get<T>(node["vars"][i]);
+			}
+			return new WithList<T>{list};
+		}
+	}
+	
+	template <typename T>
 	std::shared_ptr<T> atYaml(std::string name) {
 		return Buffer::at<T>(name);
 	}

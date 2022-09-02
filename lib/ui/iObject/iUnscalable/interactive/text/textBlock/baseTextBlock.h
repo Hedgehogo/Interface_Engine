@@ -3,7 +3,7 @@
 #include "../textVariables.h"
 #include "../character/baseCharacter.h"
 #include "../../../iScalable/interactive/simple/interactiveSimple.hpp"
-#include "../../../../../interaction/interactionStack/interactionStack.h"
+#include "../../../../../interaction/interactionStack/interactionStack.hpp"
 
 namespace ui {
 	class BaseTextBlock{

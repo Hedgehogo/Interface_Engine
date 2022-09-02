@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../../interaction/iInteraction/iInteraction.h"
+#include "../../../../interaction/iInteraction/iInteraction.hpp"
 
 namespace ui {
 	class Panel;

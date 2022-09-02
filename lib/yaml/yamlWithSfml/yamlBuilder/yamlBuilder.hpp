@@ -27,9 +27,15 @@ namespace ui {
 	protected:
 		static std::map<std::string, makeObject> typeMap;
 		static std::vector<makeSubobject> subtypeMap;
+		static std::string deleteNamespace;
+		static std::string suffixType;
 		
 	public:
 		YamlBuilder() = default;
+		
+		static void setDeleteNamespace(std::string deleteNamespace);
+		
+		static void setSuffixType(std::string suffixType);
 		
 		static void add(makeObject function, std::string type, std::vector<std::string> aliases = {});
 		

@@ -5,7 +5,7 @@
 #include "../interactive.h"
 #include "character/baseCharacter.h"
 #include "textBlock/baseTextBlock.h"
-#include "../../iScalable/uninteractive/unIteractive.hpp"
+#include "../../iScalable/uninteractive/uninteractive.hpp"
 #include "resizer/baseResizer.h"
 #include "resizer/simple/resizer.h"
 #include "../../iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp"

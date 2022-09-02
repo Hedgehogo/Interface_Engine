@@ -1,4 +1,4 @@
-#include "panelManager.h"
+#include "panelManager.hpp"
 #include <utility>
 
 namespace ui {

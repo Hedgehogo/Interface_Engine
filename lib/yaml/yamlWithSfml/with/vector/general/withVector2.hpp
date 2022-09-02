@@ -2,9 +2,6 @@
 #include "../iWithVector2.hpp"
 
 namespace ui {
-	template <typename T>
-	using to_auto = std::remove_const_t<std::remove_reference_t<T>>;
-	
 	template<typename T>
 	class WithVector2 : public IWithVector2 {
 	private:

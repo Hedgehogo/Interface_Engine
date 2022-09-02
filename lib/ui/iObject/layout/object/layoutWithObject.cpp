@@ -1,5 +1,5 @@
-#include "layoutWithObject.h"
-#include "../../../drawable/manager/drawManager.h"
+#include "layoutWithObject.hpp"
+#include "../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
 	LayoutWithObject::LayoutWithObject(IScalable *object) : object(object) {}

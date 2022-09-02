@@ -1,4 +1,4 @@
-#include "panelInteraction.h"
+#include "panelInteraction.hpp"
 
 ui::PanelInteraction::PanelInteraction() : panel(nullptr), panelManager(nullptr) {}
 

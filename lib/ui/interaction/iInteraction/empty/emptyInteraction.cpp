@@ -1,4 +1,4 @@
-#include "emptyInteraction.h"
+#include "emptyInteraction.hpp"
 
 void ui::EmptyInteraction::start(sf::Vector2i mousePosition) {}
 

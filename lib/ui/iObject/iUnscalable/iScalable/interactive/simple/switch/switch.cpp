@@ -1,5 +1,5 @@
 #include "switch.hpp"
-#include "../../../../../../interaction/iInteraction/oneButton/oneButtonInteraction.h"
+#include "../../../../../../interaction/iInteraction/oneButton/oneButtonInteraction.hpp"
 #include "event/switchEvent.hpp"
 
 namespace ui{

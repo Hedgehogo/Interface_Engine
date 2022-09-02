@@ -1,6 +1,6 @@
 #pragma once
 #include "../hidePanelInteraction.hpp"
-#include "../../../../../../interaction/iInteraction/empty/emptyInteraction.h"
+#include "../../../../../../interaction/iInteraction/empty/emptyInteraction.hpp"
 
 namespace ui {
 	class DontHidePanelInteraction : public HidePanelInteraction, public EmptyInteraction {

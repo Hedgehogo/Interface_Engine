@@ -1,5 +1,5 @@
-#include "debugLayer.h"
-#include "../iObject/../drawable/manager/drawManager.h"
+#include "debugLayer.hpp"
+#include "../iObject/../drawable/manager/drawManager.hpp"
 #include <cmath>
 
 namespace ui {

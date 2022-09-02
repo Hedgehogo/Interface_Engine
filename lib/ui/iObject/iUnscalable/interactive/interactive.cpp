@@ -1,5 +1,5 @@
 #include "interactive.h"
-#include "../../../interaction/interactionStack/interactionStack.h"
+#include "../../../interaction/interactionStack/interactionStack.hpp"
 
 namespace ui {
 	Interactive::Interactive() : interactionStack(nullptr) {}

@@ -1,4 +1,4 @@
-#include "iInteraction.h"
+#include "iInteraction.hpp"
 
 namespace ui {
 	IInteraction::IInteraction(bool blocked) : blocked(blocked) {}

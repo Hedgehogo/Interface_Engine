@@ -1,5 +1,5 @@
 #include "displayPanelEvent.h"
-#include "../../../../general/panel.h"
+#include "../../../../general/panel.hpp"
 
 namespace ui {
 	void DisplayPanelEvent::startPressed(sf::Vector2i) {}

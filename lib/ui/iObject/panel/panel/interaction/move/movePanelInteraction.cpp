@@ -1,4 +1,4 @@
-#include "movePanelInteraction.h"
+#include "movePanelInteraction.hpp"
 
 namespace ui {
 	ui::MovePanelInteraction::MovePanelInteraction(bool atStart) : atStart(atStart) {}

@@ -1,6 +1,6 @@
 #pragma once
 #include "../interactiveSimple.hpp"
-#include "../../../uninteractive/unIteractive.hpp"
+#include "../../../uninteractive/uninteractive.hpp"
 
 namespace ui {
 	class BaseButton : public Interactive_Simple {

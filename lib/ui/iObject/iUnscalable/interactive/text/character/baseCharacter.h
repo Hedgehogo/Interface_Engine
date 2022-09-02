@@ -1,9 +1,9 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
-#include "../../../../../interaction/interactionManager/interactionManager.h"
-#include "../../../../../interaction/interactionStack/interactionStack.h"
-#include "../../../../../interaction/iInteraction/iInteraction.h"
+#include "../../../../../interaction/interactionManager/interactionManager.hpp"
+#include "../../../../../interaction/interactionStack/interactionStack.hpp"
+#include "../../../../../interaction/iInteraction/iInteraction.hpp"
 #include "../line/baseLine.h"
 
 typedef unsigned uint;

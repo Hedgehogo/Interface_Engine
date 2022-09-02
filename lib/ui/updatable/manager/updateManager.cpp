@@ -1,4 +1,4 @@
-#include "updateManager.h"
+#include "updateManager.hpp"
 
 namespace ui {
 	void UpdateManager::add(IUpdatable &updatable) {

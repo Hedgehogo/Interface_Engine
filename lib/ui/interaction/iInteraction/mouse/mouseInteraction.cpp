@@ -1,4 +1,4 @@
-#include "mouseInteraction.h"
+#include "mouseInteraction.hpp"
 
 namespace ui {
 	MouseInteraction::MouseInteraction(ButtonEvent* leftMouseButton, ButtonEvent* rightMouseButton) :

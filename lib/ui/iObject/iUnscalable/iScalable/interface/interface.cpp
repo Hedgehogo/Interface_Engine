@@ -1,5 +1,5 @@
-#include "interface.h"
-#include "../../../../drawable/manager/drawManager.h"
+#include "interface.hpp"
+#include "../../../../drawable/manager/drawManager.hpp"
 #include <utility>
 #include <iostream>
 

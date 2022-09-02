@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../iScalable.hpp"
-#include "../../../layout/layout.h"
+#include "../../../layout/layout.hpp"
 #include "../../../../enums/enums.hpp"
 
 namespace ui {

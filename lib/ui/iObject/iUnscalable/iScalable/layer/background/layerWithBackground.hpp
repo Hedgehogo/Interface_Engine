@@ -3,9 +3,9 @@
 #include "SFML/Graphics.hpp"
 
 #include "../layer.hpp"
-#include "../../uninteractive/unIteractive.hpp"
-#include "../../../../layout/object/layoutWithObject.h"
-#include "../../../../layout/background/layoutWithBackground.h"
+#include "../../uninteractive/uninteractive.hpp"
+#include "../../../../layout/object/layoutWithObject.hpp"
+#include "../../../../layout/background/layoutWithBackground.hpp"
 
 namespace ui {
     class LayerWithBackground : public Layer, public LayoutWithBackground, public LayoutWithObject {

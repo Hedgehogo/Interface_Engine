@@ -2,8 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include "../layer.hpp"
 #include "../../iScalable.hpp"
-#include "../../../../layout/twoObjects/layoutWithTwoObjects.h"
-#include "../../../../../interaction/interactionStack/interactionStack.h"
+#include "../../../../layout/twoObjects/layoutWithTwoObjects.hpp"
+#include "../../../../../interaction/interactionStack/interactionStack.hpp"
 
 namespace ui {
 	class LayerWithConstBorder : public Layer, public LayoutWithTwoObjects {

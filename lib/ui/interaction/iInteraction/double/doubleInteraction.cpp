@@ -2,7 +2,7 @@
 // Created by Professional on 31.03.2022.
 //
 
-#include "doubleInteraction.h"
+#include "doubleInteraction.hpp"
 
 ui::DoubleInteraction::DoubleInteraction(ui::IInteraction *first, ui::IInteraction *second) :
 	first(first), second(second) {}

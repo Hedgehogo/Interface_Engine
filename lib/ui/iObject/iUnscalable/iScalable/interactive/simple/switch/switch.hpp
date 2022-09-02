@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../interactiveSimple.hpp"
-#include "../../../../../layout/layout.h"
-#include "../../../../../../drawable/iDrawable/iDrawable.h"
+#include "../../../../../layout/layout.hpp"
+#include "../../../../../../drawable/iDrawable/iDrawable.hpp"
 
-#include "../../../uninteractive/unIteractive.hpp"
+#include "../../../uninteractive/uninteractive.hpp"
 
 namespace ui{
     class Switch : public Interactive_Simple, public Layout, public IDrawable{

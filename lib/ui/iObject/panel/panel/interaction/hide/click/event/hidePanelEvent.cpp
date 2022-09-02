@@ -1,5 +1,5 @@
 #include "hidePanelEvent.hpp"
-#include "../../../../general/panel.h"
+#include "../../../../general/panel.hpp"
 
 ui::HidePanelEvent::HidePanelEvent(bool onlyOnParent) : onlyOnParent(onlyOnParent) {}
 

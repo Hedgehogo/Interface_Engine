@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../layer.hpp"
-#include "../../uninteractive/unIteractive.hpp"
+#include "../../uninteractive/uninteractive.hpp"
 #include "../../uninteractive/onlyDrawable/empty/empty.hpp"
-#include "../../../../layout/object/layoutWithObject.h"
-#include "../../../../layout/background/layoutWithBackground.h"
+#include "../../../../layout/object/layoutWithObject.hpp"
+#include "../../../../layout/background/layoutWithBackground.hpp"
 
 namespace ui {
 	class LayerWithConstCenter : public Layer, public LayoutWithObject, public LayoutWithBackground {
