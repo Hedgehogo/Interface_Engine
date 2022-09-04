@@ -1,5 +1,5 @@
-#include "pointingDisplayPanelInteraction.h"
-#include "../../../general/panel.h"
+#include "pointingDisplayPanelInteraction.hpp"
+#include "../../../general/panel.hpp"
 
 ui::PointingDisplayPanelInteraction::PointingDisplayPanelInteraction() : DisplayPanelInteraction() {}
 

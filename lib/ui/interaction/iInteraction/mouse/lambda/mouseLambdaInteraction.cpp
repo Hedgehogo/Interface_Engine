@@ -1,4 +1,4 @@
-#include "mouseLambdaInteraction.h"
+#include "mouseLambdaInteraction.hpp"
 
 #include <iostream>
 ui::MouseLambdaInteraction ui::MouseLambdaInteraction::debug {

@@ -1,4 +1,4 @@
-#include "layoutWithObjectsArray.h"
+#include "layoutWithObjectsArray.hpp"
 
 namespace ui {
 	LayoutWithObjectsArray::LayoutWithObjectsArray(std::vector<IScalable *> objects) : objects(objects) {}

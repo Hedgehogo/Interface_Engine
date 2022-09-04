@@ -1,9 +1,9 @@
 #pragma once
 #include "../layer.hpp"
 #include "../../interactive/simple/interactiveSimple.hpp"
-#include "../../../../layout/twoObjects/layoutWithTwoObjects.h"
-#include "../../../../../interaction/iInteraction/block/pressed/pressedInteraction.h"
-#include "interaction/event/movableBorderEvent.h"
+#include "../../../../layout/twoObjects/layoutWithTwoObjects.hpp"
+#include "../../../../../interaction/iInteraction/block/pressed/pressedInteraction.hpp"
+#include "interaction/event/movableBorderEvent.hpp"
 
 namespace ui{
     class LayerWithMovableBorder : public Layer, public LayoutWithTwoObjects, public Interactive_Simple {

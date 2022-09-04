@@ -1,4 +1,4 @@
-#include "addInteractionEvent.h"
+#include "addInteractionEvent.hpp"
 
 void ui::AddInteractionEvent::startPressed(sf::Vector2i	) {
 	interactionManager->addInteraction(*interaction);

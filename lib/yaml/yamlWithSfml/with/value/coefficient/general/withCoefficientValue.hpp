@@ -8,6 +8,8 @@ namespace ui {
 		explicit WithCoefficientValue(float value = 0.f);
 		
 		void setValue(const float& value) override;
+		
+		static WithCoefficientValue *createFromYaml(const YAML::Node &node);
 	};
 	
 	typedef WithCoefficientValue WithCoefficient;

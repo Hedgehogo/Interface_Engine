@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../uninteractive/unIteractive.hpp"
+#include "../../../uninteractive/uninteractive.hpp"
 #include "../interactiveSimple.hpp"
 #include "interaction/interaction/sliderInteraction.hpp"
 #include "../../../../../../../yaml/yamlWithSfml/with//vector/general/withVector2.hpp"

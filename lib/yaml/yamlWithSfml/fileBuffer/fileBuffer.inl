@@ -8,7 +8,7 @@ namespace ui {
 	std::map<std::string, T*> FileBuffer<T>::aliases = {};
 	
 	template <typename T>
-	T &FileBuffer<T>::getObjectReference(const std::string &name) {
+	T &FileBuffer<T>::get(const std::string &name) {
 		if(aliases.find(name) != aliases.end()) {
 			return *aliases[name];
 		}
@@ -25,6 +25,6 @@ namespace ui {
 	
 	template <typename T>
 	void FileBuffer<T>::addAlias(const std::string &name, const std::string &alias) {
-		aliases[alias] = &getObjectReference(name);
+		aliases[alias] = &get(name);
 	}
 }

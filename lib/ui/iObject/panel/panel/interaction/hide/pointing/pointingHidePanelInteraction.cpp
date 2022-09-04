@@ -1,6 +1,6 @@
 #include <iostream>
 #include "pointingHidePanelInteraction.hpp"
-#include "../../../general/panel.h"
+#include "../../../general/panel.hpp"
 
 ui::PointingHidePanelInteraction::PointingHidePanelInteraction(bool onlyOnParent) : onlyOnParent(onlyOnParent) {}
 

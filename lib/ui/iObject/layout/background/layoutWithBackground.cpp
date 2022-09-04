@@ -1,4 +1,4 @@
-#include "layoutWithBackground.h"
+#include "layoutWithBackground.hpp"
 
 namespace ui {
 	LayoutWithBackground::LayoutWithBackground(IUninteractive *background) : background(background) {}

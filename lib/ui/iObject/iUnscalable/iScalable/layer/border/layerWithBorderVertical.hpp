@@ -2,9 +2,9 @@
 #include <vector>
 
 #include "../layer.hpp"
-#include "../../../../layout/objectsArray/layoutWithObjectsArray.h"
-#include "../../../../../interaction/interactionStack/interactionStack.h"
-#include "../../../../../interaction/interactionManager/interactionManager.h"
+#include "../../../../layout/objectsArray/layoutWithObjectsArray.hpp"
+#include "../../../../../interaction/interactionStack/interactionStack.hpp"
+#include "../../../../../interaction/interactionManager/interactionManager.hpp"
 
 namespace ui {
 	class LayerWithBorderVertical : public Layer, public LayoutWithObjectsArray {

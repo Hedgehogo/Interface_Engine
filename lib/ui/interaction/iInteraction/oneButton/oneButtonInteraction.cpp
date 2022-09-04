@@ -1,4 +1,4 @@
-#include "oneButtonInteraction.h"
+#include "oneButtonInteraction.hpp"
 
 ui::OneButtonInteraction::OneButtonInteraction(ButtonEvent *event, sf::Mouse::Button button) : event(event), button(button) {}
 

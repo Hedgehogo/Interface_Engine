@@ -1,10 +1,10 @@
 #pragma once
 #include "../layer.hpp"
 #include "../../iScalable.hpp"
-#include "../../uninteractive/unIteractive.hpp"
+#include "../../uninteractive/uninteractive.hpp"
 #include "../../uninteractive/onlyDrawable/empty/empty.hpp"
-#include "../../../../layout/background/layoutWithBackground.h"
-#include "../../../../layout/twoObjects/layoutWithTwoObjects.h"
+#include "../../../../layout/background/layoutWithBackground.hpp"
+#include "../../../../layout/twoObjects/layoutWithTwoObjects.hpp"
 
 namespace ui {
 	class LayerWithConstRatio : public Layer, public LayoutWithBackground, public LayoutWithTwoObjects, public IDrawable {

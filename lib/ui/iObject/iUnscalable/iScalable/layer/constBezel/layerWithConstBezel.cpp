@@ -1,5 +1,5 @@
 #include "layerWithConstBezel.hpp"
-#include "../../../../../drawable/manager/drawManager.h"
+#include "../../../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
 	LayerWithConstBezel::LayerWithConstBezel(IScalable *object, IUninteractive *bezel, float thickness, sf::Vector2f minSize) :

@@ -1,7 +1,7 @@
 #pragma once
 #include "../layer.hpp"
 #include "../../../../panel/panel/const/constPanel.hpp"
-#include "../../../../layout/object/layoutWithObject.h"
+#include "../../../../layout/object/layoutWithObject.hpp"
 
 namespace ui {
 	class LayerWithPanel : public Layer, public LayoutWithObject {

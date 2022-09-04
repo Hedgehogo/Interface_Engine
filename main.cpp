@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include <array>
-#include "lib/ui/UI.h"
+#include "lib/ui/UI.hpp"
 
 template<typename I, I T>
 float calculateMediumFPS(std::array<float, T> lastFPS) {

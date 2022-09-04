@@ -1,5 +1,5 @@
-#include "coefficientMovePanelInteraction.h"
-#include "../../../general/panel.h"
+#include "coefficientMovePanelInteraction.hpp"
+#include "../../../general/panel.hpp"
 
 namespace ui {
 	CoefficientMovePanelInteraction::CoefficientMovePanelInteraction(sf::Vector2f coefficient, sf::Vector2f offset, bool atStart) :

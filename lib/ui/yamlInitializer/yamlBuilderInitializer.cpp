@@ -40,15 +40,16 @@ namespace ui {
         YamlBuilder<BaseTextBlock>::add(InteractiveTextBlock::createFromYaml, "InteractiveTextBlock", {"ITB"});
         YamlBuilder<BaseTextBlock>::add(ObjectTextBlock::createFromYaml, "ObjectTextBlock", {"OTB"});
         YamlBuilder<BaseResizer>::add(Resizer::createFromYaml, "Resizer", {"R"});
-
-		YamlBuilder<IUninteractive>::add(Empty::createFromYaml, "Empty");
-		YamlBuilder<IUninteractive>::add(FullColor::createFromYaml, "FullColor");
-		YamlBuilder<IUninteractive>::add(RoundedRectangle::createFromYaml, "RoundedRectangle");
-		YamlBuilder<IUninteractive>::add(Capsule::createFromYaml, "Capsule");
-		YamlBuilder<IUninteractive>::add(Caption::createFromYaml, "Caption");
-		YamlBuilder<IUninteractive>::add(Sprite::createFromYaml, "Sprite");
+		
+		YamlBuilder<OnlyDrawable>::add(Empty::createFromYaml, "Empty");
+		YamlBuilder<OnlyDrawable>::add(FullColor::createFromYaml, "FullColor");
+		YamlBuilder<OnlyDrawable>::add(RoundedRectangle::createFromYaml, "RoundedRectangle");
+		YamlBuilder<OnlyDrawable>::add(Capsule::createFromYaml, "Capsule");
+		YamlBuilder<OnlyDrawable>::add(Sprite::createFromYaml, "Sprite");
+		YamlBuilder<IUninteractive>::addSubtype(YamlBuilder<OnlyDrawable>::build);
 		YamlBuilder<IUninteractive>::add(Bar::createFromYaml, "Bar");
-        YamlBuilder<IUninteractive>::add(LayerWithUnInteractive::createFromYaml, "LayerWithUnInteractive", {"LWUnInteractive", "LWUI"});
+		YamlBuilder<IUninteractive>::add(Caption::createFromYaml, "Caption");
+		YamlBuilder<IUninteractive>::add(UninteractiveLayer::createFromYaml, "LayerWithUnInteractive", {"LWUnInteractive", "LWUI"});
 		YamlBuilder<IScalable>::addSubtype(YamlBuilder<IUninteractive>::build);
 		YamlBuilder<Layer>::add(LayerWithBackground::createFromYaml, "LayerWithBackground", {"LayerWBackground", "LWBa"});
 		YamlBuilder<Layer>::add(LayerWithAlternativeObject::createFromYaml, "LayerWithAlternativeObject", {"LayerWAObject", "LWAO"});
@@ -63,7 +64,7 @@ namespace ui {
 		YamlBuilder<Layer>::add(LayerWithPanel::createFromYaml, "LayerWithPanel", {"LayerWPanel", "LWP"});
 		YamlBuilder<Layer>::add(LayerWithRenderTexture::createFromYaml, "LayerWithRenderTexture", {"LayerWRTexture", "LWRT"});
         YamlBuilder<Layer>::add(LayerWithShader::createFromYaml, "LayerWithShader", {"LWS"});
-        YamlBuilder<Layer>::add(LayerWithUnInteractive::createFromYaml, "LayerWithUnInteractive", {"LWUnInteractive", "LWUI"});
+        YamlBuilder<Layer>::add(UninteractiveLayer::createFromYaml, "UninteractiveLayer", {"UninteractiveL", "UL"});
 		YamlBuilder<IScalable>::addSubtype(YamlBuilder<Layer>::build);
 		YamlBuilder<BaseSlider>::add(Slider::createFromYaml, "Slider");
 		YamlBuilder<BaseSlider>::add(ConstSlider::createFromYaml, "ConstSlider");

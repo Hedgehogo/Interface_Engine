@@ -1,13 +1,13 @@
 #pragma once
 #include "../../yaml/yamlWithSfml/yamlBuilder/yamlBuilder.hpp"
 
-#include "../interaction/interactionManager/interactionManager.h"
+#include "../interaction/interactionManager/interactionManager.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp"
-#include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/bar/bar.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/sprite/sprite.hpp"
-#include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/caption/caption.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/capsule/capsule.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/roundedRectangle/roundedRectangle.hpp"
+#include "../iObject/iUnscalable/iScalable/uninteractive/caption/caption.hpp"
+#include "../iObject/iUnscalable/iScalable/uninteractive/bar/bar.hpp"
 #include "../iObject/iUnscalable/iScalable/layer/border/layerWithBorderHorizontal.hpp"
 #include "../iObject/iUnscalable/iScalable/layer/border/layerWithBorderVertical.hpp"
 #include "../iObject/iUnscalable/iScalable/layer/border/layerWithBorder.hpp"
@@ -21,7 +21,7 @@
 #include "../iObject/iUnscalable/iScalable/layer/movableBorder/layerWithMovableBorder.hpp"
 #include "../iObject/iUnscalable/iScalable/layer/background/layerWithBackground.hpp"
 #include "../iObject/iUnscalable/iScalable/layer/shader/layerWithShader.hpp"
-#include "../iObject/iUnscalable/iScalable/layer/layerWithUnInteractive/layerWithUnInteractive.hpp"
+#include "../iObject/iUnscalable/iScalable/layer/uninteractive/uninteractiveLayer.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/slider/const/constSlider.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/slider/slider/slider.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/button/baseButton.hpp"
@@ -34,8 +34,8 @@
 #include "../iObject/iUnscalable/interactive/text/textBlock/object/objectTextBlock.h"
 #include "../iObject/iUnscalable/interactive/text/line/underline/underline.h"
 #include "../iObject/iUnscalable/interactive/text/line/strikeThrough/strikeThrough.h"
-#include "../iObject/iUnscalable/iScalable/interface/interface.h"
-#include "../debug/debugLayer.h"
+#include "../iObject/iUnscalable/iScalable/interface/interface.hpp"
+#include "../debug/debugLayer.hpp"
 
 namespace ui {
 	void yamlBuilderInit();

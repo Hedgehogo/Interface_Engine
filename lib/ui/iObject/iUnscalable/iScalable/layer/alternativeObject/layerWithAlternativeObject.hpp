@@ -1,6 +1,6 @@
 #pragma once
 #include "../layer.hpp"
-#include "../../../../layout/twoObjects/layoutWithTwoObjects.h"
+#include "../../../../layout/twoObjects/layoutWithTwoObjects.hpp"
 
 namespace ui {
 	class LayerWithAlternativeObject : public Layer, public LayoutWithTwoObjects {

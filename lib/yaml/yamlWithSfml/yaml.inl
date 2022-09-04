@@ -1,5 +1,15 @@
 //included into yaml.hpp
 
+template <class T>
+std::string type_name(const T& type) {
+	return demangle(typeid(type).name());
+}
+
+template <class T>
+std::string type_name() {
+	return demangle(typeid(T).name());
+}
+
 template <typename T>
 void operator>>(const YAML::Node &node, T &value) {
 	value = node.as<T>();

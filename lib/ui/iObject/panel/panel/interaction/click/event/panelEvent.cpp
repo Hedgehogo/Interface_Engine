@@ -1,4 +1,4 @@
-#include "panelEvent.h"
+#include "panelEvent.hpp"
 
 ui::PanelEvent::PanelEvent() : panel(nullptr), panelManager(nullptr) {}
 

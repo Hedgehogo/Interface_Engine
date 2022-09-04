@@ -6,11 +6,11 @@
 #include "../../../ui/localizationSystem/localizationSystem.hpp"
 
 void operator>>(const YAML::Node &node, sf::Texture *&texture) {
-	texture = &ui::FileBuffer<sf::Texture>::getObjectReference(node.as<std::string>());
+	texture = &ui::FileBuffer<sf::Texture>::get(node.as<std::string>());
 }
 
 void operator>>(const YAML::Node &node, sf::Font *&font) {
-	font = &ui::FileBuffer<sf::Font>::getObjectReference(node.as<std::string>());
+	font = &ui::FileBuffer<sf::Font>::get(node.as<std::string>());
 }
 
 namespace ui {

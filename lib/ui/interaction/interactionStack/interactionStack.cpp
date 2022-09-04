@@ -1,4 +1,4 @@
-#include "interactionStack.h"
+#include "interactionStack.hpp"
 
 ui::InteractionStack::InteractionStack(std::vector<ui::IInteraction *> &&interactionStack) : interactionStack(std::move(interactionStack)){}
 

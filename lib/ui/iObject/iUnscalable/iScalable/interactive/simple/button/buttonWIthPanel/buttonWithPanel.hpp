@@ -1,14 +1,14 @@
 #pragma once
 #include "../baseButton.hpp"
-#include "../../../../../../panel/panel/general/panel.h"
-#include "../../../../../../panel/panel/interaction/display/pointing/pointingDisplayPanelInteraction.h"
-#include "../../../../../../panel/panel/interaction/display/click/clickDisplayPanelInteraction.h"
+#include "../../../../../../panel/panel/general/panel.hpp"
+#include "../../../../../../panel/panel/interaction/display/pointing/pointingDisplayPanelInteraction.hpp"
+#include "../../../../../../panel/panel/interaction/display/click/clickDisplayPanelInteraction.hpp"
 #include "../../../../../../panel/panel/interaction/hide/pointing/pointingHidePanelInteraction.hpp"
 #include "../../../../../../panel/panel/interaction/hide/click/clickHidePanelInteraction.hpp"
 #include "../../../../../../panel/panel/interaction/hide/dont/dontHidePanelInteraction.hpp"
-#include "../../../../../../panel/panel/interaction/move/dont/dontMovePanelInteraction.h"
-#include "../../../../../../panel/panel/interaction/move/coefficient/coefficientMovePanelInteraction.h"
-#include "../../../../../../panel/panel/interaction/move/side/sideMovePanelInteraction.h"
+#include "../../../../../../panel/panel/interaction/move/dont/dontMovePanelInteraction.hpp"
+#include "../../../../../../panel/panel/interaction/move/coefficient/coefficientMovePanelInteraction.hpp"
+#include "../../../../../../panel/panel/interaction/move/side/sideMovePanelInteraction.hpp"
 
 namespace ui {
 	class ButtonWithPanel : public BaseButton {

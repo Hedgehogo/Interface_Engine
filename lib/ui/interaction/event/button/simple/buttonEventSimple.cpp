@@ -1,4 +1,4 @@
-#include "buttonEventSimple.h"
+#include "buttonEventSimple.hpp"
 
 ui::ButtonEvent_Simple::ButtonEvent_Simple() : ButtonEvent() {}
 

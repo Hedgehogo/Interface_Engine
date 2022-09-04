@@ -8,7 +8,7 @@ namespace ui {
 		std::string str;
 	
 	public:
-		BufferVariableNotFoundException(std::string name, const std::type_info& type);
+		BufferVariableNotFoundException(std::string name, const std::string& type);
 		
 		const char* what() const noexcept override;
 	};
@@ -19,6 +19,16 @@ namespace ui {
 	
 	public:
 		BufferNonExistentNestingLevelException(std::string name, long long level);
+		
+		const char* what() const noexcept override;
+	};
+	
+	class BufferRecursionDepthViolationException : public std::exception {
+	protected:
+		std::string str;
+	
+	public:
+		BufferRecursionDepthViolationException(const std::string& type);
 		
 		const char* what() const noexcept override;
 	};

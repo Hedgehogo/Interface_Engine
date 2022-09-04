@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../click/event/panelEvent.h"
+#include "../../../click/event/panelEvent.hpp"
 
 namespace ui {
 	class DisplayPanelEvent : public PanelEvent {

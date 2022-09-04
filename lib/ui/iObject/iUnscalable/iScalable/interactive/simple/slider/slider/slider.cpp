@@ -43,7 +43,7 @@ ui::Slider *ui::Slider::createFromYaml(const YAML::Node &node) {
 	
 	node["slider"] >> slider;
 	node["background"] >> background;
-	value = ui::Buffer::getObject<WithCoefficientVec2>(node["value"]);
+	value = ui::Buffer::get<WithCoefficientVec2>(node["value"]);
 	if(node["slider-scale"])
 		node["slider-scale"] >> sliderScale;
 	if(node["button"])

@@ -1,4 +1,4 @@
-#include "buttonEvent_LambdaSimple.h"
+#include "buttonEvent_LambdaSimple.hpp"
 
 namespace ui {
 	ButtonEvent_LambdaSimple::ButtonEvent_LambdaSimple(void (*startPressed)(sf::Vector2i mousePosition), void (*whilePressed )(sf::Vector2i mousePosition), void (*stopPressed)(sf::Vector2i mousePosition), void (*whileNotPressed  )(sf::Vector2i mousePosition)) :

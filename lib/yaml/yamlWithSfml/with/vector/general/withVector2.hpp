@@ -2,39 +2,40 @@
 #include "../iWithVector2.hpp"
 
 namespace ui {
-	template <typename T>
-	using to_auto = std::remove_const_t<std::remove_reference_t<T>>;
-	
-	template <typename V>
-	class WithVector2 : public IWithVector2<to_auto<decltype(std::declval<V>().getValue())>> {
+	template<typename T>
+	class WithVector2 : public IWithVector2 {
 	private:
-		typedef to_auto<decltype(std::declval<V>().getValue())> T;
+		typedef to_auto<decltype(std::declval<T>().getValue())> V;
 	
 	protected:
-		V x, y;
+		std::shared_ptr<T> x, y;
 	
 	public:
-		WithVector2(const sf::Vector2<T> &vector = {});
+		WithVector2(const sf::Vector2<V> &vector = {});
 		
-		WithVector2(const YAML::Node &node);
+		WithVector2(std::shared_ptr<T> x, std::shared_ptr<T> y);
 		
-		const T &getX() const override;
+		std::shared_ptr<IWith> getXPtr() const override;
 		
-		void setX(const T &value) override;
+		void setXPtr(std::shared_ptr<IWith> value) override;
 		
-		const T &getY() const override;
+		std::shared_ptr<IWith> getYPtr() const override;
 		
-		void setY(const T &value) override;
+		void setYPtr(std::shared_ptr<IWith> value) override;
 		
-		sf::Vector2<T> getValue() const override;
+		V getX() const;
 		
-		void setValue(const sf::Vector2<T> &vector) override;
+		void setX(const V &value);
 		
-		static WithVector2<V> *createFromYaml(const YAML::Node &node);
+		V getY() const;
 		
-		V &getXReference();
+		void setY(const V &value);
 		
-		V &getYReference();
+		sf::Vector2<V> getValue() const;
+		
+		void setValue(const sf::Vector2<V> &vector);
+		
+		static WithVector2 *createFromYaml(const YAML::Node &node);
 	};
 	
 	template <typename T>

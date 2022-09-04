@@ -11,7 +11,7 @@ namespace ui {
 	public:
 		FileBuffer() = default;
 		
-		static T &getObjectReference(const std::string& name);
+		static T &get(const std::string& name);
 		
 		static void setObject(const std::string &name, const std::string &filePath);
 		

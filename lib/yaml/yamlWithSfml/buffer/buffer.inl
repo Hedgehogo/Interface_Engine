@@ -2,12 +2,12 @@
 
 namespace ui {
 	template <typename T, typename... A>
-	void Buffer::addObject(const std::string& name, A &&... args) {
+	void Buffer::emplace(const std::string& name, A &&... args) {
 		objectsLevels[objectsLevels.size() - 1].try_emplace(name, std::make_shared<T>(args...));
 	}
 	
 	template <typename T>
-	void Buffer::addObject(const std::string &name, const YAML::Node &node) {
+	void Buffer::insert(const std::string &name, const YAML::Node &node) {
 		T* ptr;
 		long long level{static_cast<long long>(objectsLevels.size()) - 1};
 		
@@ -34,50 +34,84 @@ namespace ui {
 	}
 	
 	template <typename T>
-	void Buffer::addObject(const YAML::Node &node) {
+	void Buffer::insert(const YAML::Node &node) {
 		std::string name;
-		node["name"] >> name;
-		if(!existObject(name)) {
-			addObject<T>(name, node);
+		node["var"] >> name;
+		if(!existAtLevel(name)) {
+			insert<T>(name, node);
 		} else {
 			throw YAML::BadConversion{node.Mark()};
 		}
 	}
 	
 	template <typename T>
-	std::shared_ptr<T> Buffer::getObject(const std::string &name) {
+	std::shared_ptr<T> Buffer::at(const std::string &fullName) {
 		std::shared_ptr<T> ptr;
+		std::vector<std::string> names{splitByDelimiter(fullName, '.')};
+		std::string name{names[0]};
+		names.erase(names.begin());
 		for(auto level = objectsLevels.rbegin(); level != objectsLevels.rend(); ++level) {
-			try {
-				ptr = std::dynamic_pointer_cast<T>(level->at(name));
-				if(ptr.get() != NULL)
+			if(auto object = level->find(name); object != level->end()) {
+				ptr = std::dynamic_pointer_cast<T>(getVariable(object->second, names));
+				if(ptr.get() != nullptr) {
 					return ptr;
-			} catch(std::out_of_range&) {}
+				}
+			}
 		}
-		throw BufferVariableNotFoundException{name, typeid(T)};
+		throw BufferVariableNotFoundException{fullName, type_name<T>()};
 	}
 	
 	template <typename T>
-	std::shared_ptr<T> Buffer::getObject(const YAML::Node &node) {
+	std::shared_ptr<T> Buffer::get(const YAML::Node &node, bool createIfNotExist) {
 		std::string name;
 		if(node.IsScalar()) {
 			node >> name;
 		} else {
-			node["name"] >> name;
-			if(!existObject(name)) {
-				addObject<T>(name, node);
+			node["var"] >> name;
+			if(createIfNotExist && !existAtLevel(name)) {
+				insert<T>(name, node);
 			}
 		}
-		return getObject<T>(name);
+		return at<T>(name);
+	}
+	
+	template<typename T>
+	WithVector2<T> *WithVector2<T>::createFromYaml(const YAML::Node &node) {
+		if(node["x"] && node["y"]) {
+			return new WithVector2<T>(Buffer::get<T>(node["x"]), Buffer::get<T>(node["y"]));
+		} else {
+			sf::Vector2<typename WithVector2<T>::V> vector;
+			
+			if(node["vector"]) node["vector"] >> vector;
+			
+			return new WithVector2<T>(vector);
+		}
 	}
 	
 	template <typename T>
-	std::shared_ptr<T> getRef(std::string name) {
-		return Buffer::getObject<T>(name);
+	WithList<T> *WithList<T>::createFromYaml(const YAML::Node &node) {
+		if(node["list"]) {
+			std::vector<typename WithList<T>::V> list{node["list"].size()};
+			for(int i = 0; i < list.size(); ++i) {
+				node["list"][i] >> list[i];
+			}
+			return new WithList<T>{list};
+		} else {
+			std::vector<std::shared_ptr<T>> list{node["vars"].size()};
+			for(int i = 0; i < list.size(); ++i) {
+				list[i] = Buffer::get<T>(node["vars"][i]);
+			}
+			return new WithList<T>{list};
+		}
+	}
+	
+	template <typename T>
+	std::shared_ptr<T> atYaml(std::string name) {
+		return Buffer::at<T>(name);
 	}
 	
 	template <typename T, typename... A>
-	void add(const std::string& name, A &&... args) {
-		Buffer::addObject<T>(name, args...);
+	void insertYaml(const std::string& name, A &&... args) {
+		Buffer::insert<T>(name, args...);
 	}
 }

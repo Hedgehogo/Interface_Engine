@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "../layer.hpp"
-#include "../../../../../interaction/interactionStack/interactionStack.h"
+#include "../../../../../interaction/interactionStack/interactionStack.hpp"
 
 namespace ui {
 	class LayerWithBorder : public Layer {

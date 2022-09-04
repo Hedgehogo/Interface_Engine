@@ -1,4 +1,4 @@
-#include "dontMovePanelInteraction.h"
+#include "dontMovePanelInteraction.hpp"
 
 namespace ui {
 	DontMovePanelInteraction::DontMovePanelInteraction() : MovePanelInteraction() {}

@@ -1,6 +1,6 @@
 #pragma once
 #include "event/hidePanelEvent.hpp"
-#include "../../click/clickPanelInteraction.h"
+#include "../../click/clickPanelInteraction.hpp"
 
 namespace ui {
 	class ClickHidePanelInteraction : public ClickPanelInteraction, public HidePanelInteraction {

@@ -1,4 +1,4 @@
-#include "clickPanelInteraction.h"
+#include "clickPanelInteraction.hpp"
 
 ui::ClickPanelInteraction::ClickPanelInteraction(ui::PanelEvent *event, sf::Mouse::Button button) : OneButtonInteraction(event, button), BasePanelInteraction() {}
 

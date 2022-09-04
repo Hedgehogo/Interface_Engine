@@ -1,5 +1,5 @@
 #include "layerWithBorderVertical.hpp"
-#include "../../../../../interaction/interactionManager/interactionManager.h"
+#include "../../../../../interaction/interactionManager/interactionManager.hpp"
 #include <vector>
 
 namespace ui {
