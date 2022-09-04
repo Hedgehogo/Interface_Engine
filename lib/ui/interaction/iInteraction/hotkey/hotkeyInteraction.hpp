@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../iInteraction.h"
+#include "../iInteraction.hpp"
 #include <SFML/Graphics.hpp>
 
 namespace ui {

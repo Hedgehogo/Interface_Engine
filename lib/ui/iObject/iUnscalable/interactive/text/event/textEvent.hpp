@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../../../interaction/event/button/simple/buttonEventSimple.h"
+#include "../../../../../interaction/event/button/simple/buttonEventSimple.hpp"
 
 namespace ui {
     class Text;

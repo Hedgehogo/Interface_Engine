@@ -4,7 +4,7 @@
 #include "text.h"
 
 #include "../../../../../yaml/yamlWithSfml/fileBuffer/fileBuffer.hpp"
-#include "../../../../interaction/iInteraction/oneButton/oneButtonInteraction.h"
+#include "../../../../interaction/iInteraction/oneButton/oneButtonInteraction.hpp"
 
 ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
                sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer *resizer, sf::Mouse::Button button) :
