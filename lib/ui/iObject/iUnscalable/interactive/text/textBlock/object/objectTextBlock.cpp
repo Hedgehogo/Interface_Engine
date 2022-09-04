@@ -44,7 +44,7 @@ ui::ObjectTextBlock *ui::ObjectTextBlock::createFromYaml(const YAML::Node &node)
     bool isCharacter{true};
 
     node["object"] >> object;
-    if (node["size"]) node["size"] >> size;
+    node["size"] >> size;
     if (node["is-character"]) node["is-character"] >> isCharacter;
     return new ObjectTextBlock{object, size, isCharacter};
 }

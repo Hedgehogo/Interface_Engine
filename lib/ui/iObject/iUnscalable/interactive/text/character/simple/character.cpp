@@ -2,7 +2,7 @@
 #include "../../../../../iObject.hpp"
 
 ui::Character::Character(char32_t character, TextVariables &textVariables, std::vector<BaseLine *>& lines)
-        : character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), lines(lines){
+        : character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), lines(lines), selectionVertexArray(sf::Quads, 4){
     if(isSpecial() != BaseCharacter::Special::enter){
         glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style & sf::Text::Style::Bold);
 
@@ -23,6 +23,15 @@ ui::Character::Character(char32_t character, TextVariables &textVariables, std::
         vertexArray[2].position = sf::Vector2f{sf::Vector2i{glyph.textureRect.width, glyph.textureRect.height}};
         vertexArray[3].position = sf::Vector2f{sf::Vector2i{0, glyph.textureRect.height}};
 
+        selectionVertexArray[0].position = {0,            0};
+        selectionVertexArray[1].position = {getAdvance(), 0};
+        selectionVertexArray[2].position = {getAdvance(), getHeight()};
+        selectionVertexArray[3].position = {0,            getHeight()};
+
+        selectionVertexArray[0].color = textVariables.backgroundSelectionColor;
+        selectionVertexArray[1].color = textVariables.backgroundSelectionColor;
+        selectionVertexArray[2].color = textVariables.backgroundSelectionColor;
+        selectionVertexArray[3].color = textVariables.backgroundSelectionColor;
 
         if (textVariables.style & sf::Text::Style::Italic){
             float italicShear = -0.26794;
@@ -36,6 +45,11 @@ ui::Character::Character(char32_t character, TextVariables &textVariables, std::
         vertexArray[1].position.y += glyph.bounds.top;
         vertexArray[2].position.y += glyph.bounds.top;
         vertexArray[3].position.y += glyph.bounds.top;
+
+        selectionVertexArray[0].position.y -= getHeight();
+        selectionVertexArray[1].position.y -= getHeight();
+        selectionVertexArray[2].position.y -= getHeight();
+        selectionVertexArray[3].position.y -= getHeight();
     }
 }
 
@@ -43,8 +57,46 @@ void ui::Character::init(sf::RenderTarget &renderTarget) {
     this->renderTarget = &renderTarget;
 }
 
+void ui::Character::setActive(bool active) {
+    BaseCharacter::setActive(active);
+    if (active){
+        for (int i = 0; i < 4; ++i) {
+            vertexArray[i].color = textVariables.textSelectionColor;
+            selectionVertexArray[i].color = textVariables.backgroundSelectionColor;
+        }
+    } else{
+        for (int i = 0; i < 4; ++i) {
+            vertexArray[i].color = textVariables.inactiveTextSelectionColor;
+            selectionVertexArray[i].color = textVariables.inactiveBackgroundSelectionColor;
+        }
+    }
+}
+
+sf::Vector2i ui::Character::getSizeTexture() {
+    if (getChar() == U' ')
+        return {static_cast<int>(getAdvance()), static_cast<int>(getHeight())};
+    return {glyph.textureRect.width, glyph.textureRect.height};
+}
+
+void ui::Character::setSelection(bool selection) {
+    BaseCharacter::setSelection(selection);
+    if (selection){
+        vertexArray[0].color = textVariables.textSelectionColor;
+        vertexArray[1].color = textVariables.textSelectionColor;
+        vertexArray[2].color = textVariables.textSelectionColor;
+        vertexArray[3].color = textVariables.textSelectionColor;
+    } else{
+        vertexArray[0].color = textVariables.TextColor;
+        vertexArray[1].color = textVariables.TextColor;
+        vertexArray[2].color = textVariables.TextColor;
+        vertexArray[3].color = textVariables.TextColor;
+    }
+}
+
 void ui::Character::draw() {
     if(isSpecial() != BaseCharacter::Special::enter){
+        if (selection)
+            renderTarget->draw(selectionVertexArray);
         renderTarget->draw(vertexArray, &texture);
     }
 }
@@ -84,6 +136,11 @@ void ui::Character::move(sf::Vector2f position) {
     vertexArray[1].position += position;
     vertexArray[2].position += position;
     vertexArray[3].position += position;
+
+    selectionVertexArray[0].position += position;
+    selectionVertexArray[1].position += position;
+    selectionVertexArray[2].position += position;
+    selectionVertexArray[3].position += position;
 }
 
 std::vector<ui::BaseLine *> & ui::Character::getLine() {

@@ -1,23 +1,19 @@
-type: LWBV
-first-object:
-  type: Text
-  text-block:
-    type: TB
+type: Text
+text-blocks:
+  - type: TB
     text:
-      key: plug
+      key: text
       directory: ../
       language: jp
       default-language: en
     line:
       type: U
-  font: msyh.ttc
-second-object:
-  type: Text
-  text-block:
-    type: TB
-    text:
-      key: plate
-      language: jp
-    line:
-      type: U
-  font: msyh.ttc
+  - type: OTB
+    object:
+      type: Sprite
+      texture: gigachad.jpg
+    size: [100, 100]
+font: msyh.ttc
+size: 100
+background-selection-color: 0000ff
+text-selection-color: ffffff

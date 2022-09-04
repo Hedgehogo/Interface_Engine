@@ -2,12 +2,12 @@
 #include "../../../../../../../yaml/yamlWithSfml/fileBuffer/fileBuffer.hpp"
 
 ui::InteractiveTextBlock::InteractiveTextBlock(ui::IInteraction *interaction, std::u32string  text, sf::Color textColor, sf::Font *font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
-                                               sf::Color backgroundSelectionColor) :
-    interaction(interaction), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor), interact(false), oldInteract(false), indexInteraction(-1) {}
+                                               sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor,sf::Color inactiveBackgroundSelectionColor) :
+    interaction(interaction), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor), interact(false), oldInteract(false), indexInteraction(-1) {}
 
 ui::InteractiveTextBlock::InteractiveTextBlock(int indexInteraction, std::u32string  text, sf::Color textColor, sf::Font *font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
-                                               sf::Color backgroundSelectionColor) :
-    indexInteraction(indexInteraction), interaction(nullptr), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor), interact(false), oldInteract(false) {}
+                                               sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor,sf::Color inactiveBackgroundSelectionColor) :
+    indexInteraction(indexInteraction), interaction(nullptr), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor), interact(false), oldInteract(false) {}
 
 void ui::InteractiveTextBlock::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
 	TextBlock::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
@@ -76,6 +76,8 @@ ui::InteractiveTextBlock *ui::InteractiveTextBlock::createFromYaml(const YAML::N
     int size = 0;
     sf::Color textSelectionColor = nullColor;
     sf::Color backgroundSelectionColor = nullColor;
+    sf::Color inactiveTextSelectionColor = nullColor;
+    sf::Color inactiveBackgroundSelectionColor = nullColor;
 
     node["text"] >> text;
     if (node["text-color"]) node["text-color"] >> textColor;
@@ -85,6 +87,8 @@ ui::InteractiveTextBlock *ui::InteractiveTextBlock::createFromYaml(const YAML::N
     if (node["size"]) node["size"] >> size;
     if (node["text-selection-color"]) node["text-selection-color"] >> textSelectionColor;
     if (node["background-selection-color"]) node["background-selection-color"] >> backgroundSelectionColor;
+    if (node["inactive-text-selection-color"]) node["inactive-text-selection-color"] >> inactiveTextSelectionColor;
+    if (node["inactive-background-selection-color"]) node["inactive-background-selection-color"] >> inactiveBackgroundSelectionColor;
 
     if (node["line"]){
         BaseLine* line;
@@ -102,11 +106,11 @@ ui::InteractiveTextBlock *ui::InteractiveTextBlock::createFromYaml(const YAML::N
     if (node["interaction"].IsScalar()){
         ui::IInteraction *indexInteraction;
         node["interaction"] >> indexInteraction;
-        return new InteractiveTextBlock{indexInteraction, text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor};
+        return new InteractiveTextBlock{indexInteraction, text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
     } else{
         int indexInteraction;
         node["interaction"] >> indexInteraction;
-        return new InteractiveTextBlock{indexInteraction, text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor};
+        return new InteractiveTextBlock{indexInteraction, text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
     }
 
 }

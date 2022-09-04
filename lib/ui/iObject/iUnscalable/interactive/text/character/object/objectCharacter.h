@@ -17,6 +17,8 @@ namespace ui {
 
         std::vector<BaseLine *> & getLine();
 
+        sf::Vector2i getSizeTexture() override;
+
         float getHeight() override;
 
         float getAdvance() override;

@@ -1,7 +1,7 @@
 #include "baseCharacter.h"
 #include "../textBlock/baseTextBlock.h"
 
-ui::BaseCharacter::BaseCharacter() {}
+ui::BaseCharacter::BaseCharacter() : selection(false) {}
 
 void ui::BaseCharacter::init(sf::RenderTarget &renderTarget) {}
 
@@ -26,3 +26,10 @@ bool ui::BaseCharacter::isEnter() {
     return isSpecial() == Special::enter;
 }
 
+void ui::BaseCharacter::setSelection(bool selection) {
+    this->selection = selection;
+}
+
+void ui::BaseCharacter::setActive(bool active) {
+    this->active = active;
+}

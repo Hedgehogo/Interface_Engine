@@ -1,5 +1,6 @@
 #pragma once
 #include "../iInteraction.h"
+#include "../../../enums/enums.hpp"
 
 namespace ui {
 	class OneButtonInteraction : public virtual IInteraction {
@@ -13,7 +14,7 @@ namespace ui {
 		~OneButtonInteraction() override;
 		
 		sf::Mouse::Button getButton();
-		
+
 		ButtonEvent* getEvent();
 		
 		void setEvent(ButtonEvent *event);

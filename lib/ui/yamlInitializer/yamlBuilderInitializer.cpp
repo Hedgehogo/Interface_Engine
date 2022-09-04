@@ -38,7 +38,7 @@ namespace ui {
         YamlBuilder<BaseLine>::add(StrikeThrough::createFromYaml, "StrikeThrough", {"ST"});
         YamlBuilder<BaseTextBlock>::add(TextBlock::createFromYaml, "TextBlock", {"TB"});
         YamlBuilder<BaseTextBlock>::add(InteractiveTextBlock::createFromYaml, "InteractiveTextBlock", {"ITB"});
-        YamlBuilder<BaseTextBlock>::add(ObjectTextBlock::createFromYaml, "ObjectTextBlock", {"OBT"});
+        YamlBuilder<BaseTextBlock>::add(ObjectTextBlock::createFromYaml, "ObjectTextBlock", {"OTB"});
         YamlBuilder<BaseResizer>::add(Resizer::createFromYaml, "Resizer", {"R"});
 
 		YamlBuilder<IUninteractive>::add(Empty::createFromYaml, "Empty");

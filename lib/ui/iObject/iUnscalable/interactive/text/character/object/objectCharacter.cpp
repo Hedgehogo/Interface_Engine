@@ -9,9 +9,8 @@ namespace ui {
     }
 
     void ObjectCharacter::setPosition( sf::Vector2f position) {
-        position.y -= getHeight();
         BaseCharacter::setPosition(position);
-        object->setPosition(position);
+        object->setPosition({position.x, position.y - getHeight()});
     }
 
     void ObjectCharacter::move(sf::Vector2f position) {
@@ -47,5 +46,9 @@ namespace ui {
 
     std::vector<BaseLine *> & ObjectCharacter::getLine() {
         return lines;
+    }
+
+    sf::Vector2i ObjectCharacter::getSizeTexture() {
+        return sf::Vector2i{object->getAreaSize()};
     }
 }

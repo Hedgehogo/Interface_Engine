@@ -1,11 +1,16 @@
 #include <iostream>
-#include "text.h"
-#include "../../../../../yaml/yamlWithSfml/fileBuffer/fileBuffer.hpp"
+#include <cmath>
 
-ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, BaseResizer *resizer) :
-    background(background), size(size), textBocks(textBlocks), resizer(resizer){
+#include "text.h"
+
+#include "../../../../../yaml/yamlWithSfml/fileBuffer/fileBuffer.hpp"
+#include "../../../../interaction/iInteraction/oneButton/oneButtonInteraction.h"
+
+ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
+               sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer *resizer, sf::Mouse::Button button) :
+    background(background), size(size), textBocks(textBlocks), resizer(resizer), textEvent(*this), interaction(new OneButtonInteraction{&textEvent, button}){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
-        textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, font, size);
+        textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, (inactiveTextSelectionColor == nullColor ? textColor : inactiveTextSelectionColor), inactiveBackgroundSelectionColor, font, size);
         std::vector<ui::BaseCharacter*> characters = textBlock->getCharacters();
         textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
     }
@@ -35,13 +40,98 @@ void ui::Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, Up
     drawManager.add(*this);
 }
 
+std::u32string ui::Text::getSelectionText() {
+    return textEvent.getSelectionText();
+}
+
+float getDistanceY(std::vector<ui::BaseCharacter *>::iterator iterator, float mousePositionY){
+    return std::min(std::abs(mousePositionY - (*iterator)->getPosition().y), std::abs(mousePositionY - ((*iterator)->getPosition().y - (*iterator)->getHeight())));
+}
+
+bool minDistanceX(std::vector<ui::BaseCharacter *>::iterator& a, std::vector<ui::BaseCharacter *>::iterator& b, float find){
+    float distanceToA{std::abs((*a)->getPosition().x - find)},
+          distanceToA1{std::abs((*a)->getPosition().x + (*a)->getAdvance() - find)},
+          distanceToB{std::abs((*b)->getPosition().x - find)},
+          distanceToB1{std::abs((*b)->getPosition().x + (*b)->getAdvance() - find)};
+    if (distanceToA > distanceToA1)
+        std::swap(distanceToA, distanceToA1);
+    if (distanceToB > distanceToB1)
+        std::swap(distanceToB, distanceToB1);
+
+    if (distanceToA == distanceToB)
+        return distanceToA1 < distanceToB1;
+    else
+        return distanceToA < distanceToB;
+}
+
+std::vector<ui::BaseCharacter *>::iterator nullBaseCharacterIterator{nullptr};
+
+std::vector<ui::BaseCharacter *>::iterator ui::Text::getCharacter(sf::Vector2f mousePosition) {
+    std::vector<ui::BaseCharacter *>::iterator result{nullptr};
+
+    for (auto iterator = textCharacters.begin(); iterator != textCharacters.end(); ++iterator) {
+        if (result != nullBaseCharacterIterator) {
+            float DistanceYToIterator{getDistanceY(iterator, mousePosition.y)};
+            float DistanceYToResult{getDistanceY(result, mousePosition.y)};
+            if (DistanceYToIterator <= DistanceYToResult) {
+                if (DistanceYToIterator < DistanceYToResult) {
+                    result = iterator;
+                }
+                if (minDistanceX(iterator, result, mousePosition.x)) {
+                    result = iterator;
+                }
+            }
+        } else {
+            result = iterator;
+        }
+    }
+
+    if(mousePosition.x > (*result)->getPosition().x + (static_cast<float>((*result)->getSizeTexture().x) / 2.f)){
+        ++result;
+    }
+
+    return result;
+}
+
 void ui::Text::update() {
-    for (ui::BaseTextBlock* textBlock : textBocks) {
+    if (interact != oldInteract) {
+        oldInteract = interact;
+        auto start = textEvent.getStart();
+        auto end = textEvent.getEnd();
+        bool unNull = start != nullBaseCharacterIterator && end != nullBaseCharacterIterator;
+        if (unNull && std::distance(start, end) < 0) {
+            std::swap(start, end);
+        }
+
+        if (interact) {
+            interactionManager->addInteraction(*interaction);
+
+            if (unNull) {
+                for (auto item = start; item != end; ++item) {
+                    (*item)->setActive(true);
+                }
+            }
+        } else {
+            interactionManager->deleteInteraction(*interaction);
+
+            if (unNull) {
+                for (auto item = start; item != end; ++item) {
+                    (*item)->setActive(false);
+                }
+            }
+        }
+    }
+    interact = false;
+
+
+    for (ui::BaseTextBlock *textBlock: textBocks) {
         textBlock->update();
     }
 }
 
 bool ui::Text::updateInteractions(sf::Vector2f mousePosition) {
+    interact = true;
+
     for (ui::BaseTextBlock* textBock : textBocks) {
 
         if (textBock->in(mousePosition))
@@ -52,6 +142,10 @@ bool ui::Text::updateInteractions(sf::Vector2f mousePosition) {
 }
 
 void ui::Text::draw() {
+    for (char32_t ch : getSelectionText() ) {
+        std::cout << static_cast<char>(ch);
+    }
+    std::cout << std::endl;
     for (ui::BaseCharacter *character : textCharacters) {
         character->draw();
     }
@@ -94,7 +188,7 @@ sf::Vector2f ui::Text::getNormalSize() {
 }
 
 ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background, uint size, BaseResizer *resizer, sf::RenderTarget *renderTarget) :
-    textBocks(textBlocks), background(background), size(size), resizer(resizer), renderTarget(renderTarget){
+    textBocks(textBlocks), background(background), size(size), resizer(resizer), renderTarget(renderTarget), textEvent(*this){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
         std::vector<ui::BaseCharacter*> characters = textBlock->getCharacters();
         textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
@@ -118,6 +212,8 @@ ui::Text *ui::Text::createFromYaml(const YAML::Node &node) {
     sf::Color textColor{sf::Color::Black};
     sf::Color textSelectionColor{sf::Color::Black};
     sf::Color backgroundSelectionColor{sf::Color::Black};
+    sf::Color inactiveTextSelectionColor = nullColor;
+    sf::Color inactiveBackgroundSelectionColor = {150, 150, 150};
     BaseResizer *resizer;
 
     if (node["text-block"]){
@@ -127,7 +223,7 @@ ui::Text *ui::Text::createFromYaml(const YAML::Node &node) {
     } else if (node["text-blocks"]){
         for (const YAML::Node& textBlockNode : node["text-blocks"]) {
             BaseTextBlock* textBlock;
-            node["text-block"] >> textBlock;
+            textBlockNode >> textBlock;
             textBlocks.push_back(textBlock);
         }
     } else {
@@ -145,8 +241,10 @@ ui::Text *ui::Text::createFromYaml(const YAML::Node &node) {
     if (node["text-color"]) node["text-color"] >> textColor;
     if (node["text-selection-color"]) node["text-selection-color"] >> textSelectionColor;
     if (node["background-selection-color"]) node["background-selection-color"] >> backgroundSelectionColor;
+    if (node["inactive-text-selection-color"]) node["inactive-text-selection-color"] >> inactiveTextSelectionColor;
+    if (node["inactive-background-selection-color"]) node["inactive-background-selection-color"] >> inactiveBackgroundSelectionColor;
 
-    return new Text{textBlocks, background, size, font, textColor, textSelectionColor, backgroundSelectionColor, resizer};
+    return new Text{textBlocks, background, size, font, textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor, resizer};
 }
 
 void ui::Text::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

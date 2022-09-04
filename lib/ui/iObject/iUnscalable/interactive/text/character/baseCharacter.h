@@ -13,6 +13,9 @@ namespace ui{
     class BaseCharacter {
     protected:
         sf::Vector2f position;
+        bool selection;
+        bool active;
+
     public:
         enum class Special{
             space,
@@ -21,9 +24,15 @@ namespace ui{
         };
         BaseCharacter();
 
+        virtual void setActive(bool active);
+
+        virtual sf::Vector2i getSizeTexture() = 0;
+
         virtual void init(sf::RenderTarget &renderTarget);
 
         virtual bool in(sf::Vector2f mousePosition);
+
+        virtual void setSelection(bool selection);
 
         virtual void setPosition(sf::Vector2f position);
 

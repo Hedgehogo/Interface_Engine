@@ -19,20 +19,7 @@ int main() {
 
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	window.setFramerateLimit(60);
-	
-	/*
-    sf::Texture textureGigachad;
-    textureGigachad.loadFromFile("gigachad.jpg");
-	sf::Texture texture;
-	texture.loadFromFile("image.png");
-	sf::Texture texture_2;
-	texture_2.loadFromFile("image_2.png");
-    sf::Texture texture_3;
-    texture_3.loadFromFile("image_3.png");
-	sf::Font font;
-	font.loadFromDirectory("segoeui.ttf");
-	*/
+	//window.setFramerateLimit(60);
 
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
@@ -40,186 +27,6 @@ int main() {
 	ui::Character::setDebug(true);
 
 	ui::Interface interface {
-		/*
-        new ui::LayerWithBackground{
-            new ui::LayerWithMovableBorder{
-                new ui::LayerWithBorderHorizontal{
-                    {
-                        new ui::Empty,
-                        new ui::LayerWithMovableBorder{
-                            new ui::LayerWithConstRatio{
-                                new ui::LayerWithAlternativeObject{
-                                    new ui::ButtonWithPanel{
-                                        new ui::Panel{
-                                            new ui::Text{
-                                                {
-                                                    new ui::TextBlock{
-                                                        U"это ",
-                                                        {255, 255, 255, 0},
-                                                        &font,
-                                                        {},
-                                                        {
-                                                            new ui::StrikeThrough{{0, 0, 255}}
-                                                        }
-                                                    },
-                                                    new ui::TextBlock{
-                                                        U"собственность",
-                                                        {255, 255, 255, 0},
-                                                        &font,
-                                                        {},
-                                                        {
-                                                            new ui::Underline{{255, 0, 0}},
-                                                            new ui::StrikeThrough{{0, 0, 255}},
-                                                        }
-                                                    },
-                                                    new ui::TextBlock{
-                                                        U" Артёма",
-                                                        {255, 255, 255, 0},
-                                                        &font,
-                                                        {},
-                                                        {
-                                                            new ui::Underline{{255, 0, 0}}
-                                                        }
-                                                    },
-                                                    new ui::ObjectTextBlock{
-                                                        new ui::Text{
-                                                            {
-                                                                new ui::TextBlock{
-                                                                    U"fack\n",
-                                                                    {255, 255, 255, 0},
-                                                                    &font,
-                                                                    sf::Text::Style::Italic
-                                                                },
-                                                                new ui::InteractiveTextBlock{
-                                                                    0,
-                                                                    U"you",
-                                                                    {255, 255, 255, 0},
-                                                                    &font,
-                                                                    sf::Text::Style::Bold
-                                                                },
-                                                                new ui::ObjectTextBlock{
-                                                                    //new ui::ButtonWithPanel{
-                                                                    new ui::LayerWithPanel{
-                                                                        //new ui::Panel{
-                                                                        new ui::ConstPanel{
-                                                                            new ui::DebugLayer{
-                                                                                new ui::Sprite{texture}
-                                                                            },
-                                                                            //new ui::PointingHidePanelInteraction,
-                                                                            new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
-                                                                            new ui::Positioning2{ui::Location2::right, ui::Location2::left},
-                                                                        },
-                                                                        //new ui::ClickDisplayPanelInteraction{sf::Mouse::BaseButton::left},
-                                                                        new ui::Sprite{texture_2}
-                                                                    },
-                                                                    {50, 50},
-                                                                    false
-                                                                }
-                                                            },
-                                                            new ui::FullColor{{255, 0, 0}},
-                                                            30,
-                                                            &font,
-                                                            sf::Color{255, 255, 0},
-                                                            sf::Color{200, 200, 200},
-                                                            sf::Color{200, 200, 200},
-                                                            new ui::Resizer
-                                                        },
-                                                        {111, 111},
-                                                        false
-                                                    }
-                                                },
-                                                new ui::RoundedRectangle{sf::Color(0xffffffff), 10},
-                                                14,
-                                                &font,
-                                                sf::Color{10, 255, 0},
-                                                sf::Color{200, 200, 200},
-                                                sf::Color{200, 200, 200},
-                                                new ui::Resizer
-                                            },
-                                            new ui::ClickHidePanelInteraction{sf::Mouse::Button::Left},
-                                            new ui::Sizing2{sf::Vector2f{1, 0.5}, sf::Vector2f{}},
-                                            new ui::Positioning2{ui::Location2::right, ui::Location2::left},
-                                        },
-                                        new ui::ClickDisplayPanelInteraction{sf::Mouse::Button::Left},
-                                        new ui::LayerWithRenderTexture{
-                                            new ui::Switch{
-                                                new ui::Sprite{texture_2},
-                                                new ui::Sprite{texture}
-                                            }
-                                        }
-                                    },
-                                    new ui::LayerWithBorderVertical{
-                                        new ui::Empty,
-                                        new ui::FullColor{sf::Color(0x9f6e5cff)}
-                                    },
-                                },
-                                new ui::Empty,
-                                new ui::Empty,
-                                1,
-                                ui::Corner::downLeft
-                            },
-                            new ui::Text{
-                                {
-                                    new ui::TextBlock{
-                                        U"Box2D is a 2D rigid body simulation library for games. Programmers can use it in their games to make objects moveSlider in realistic ways and make the game world more interactive. From the game engine's point of view, a physics engine is just a system for procedural animation. \nBox2D is written in portable C++. Most of the types defined in the engine begin with the b2 prefix. Hopefully this is sufficient to avoid name clashing with your game engine."
-                                    }
-                                },
-                                new ui::FullColor{sf::Color(0x9f6e5cff)},
-                                14,
-                                &font,
-                                sf::Color{10, 10, 0},
-                                sf::Color{200, 200, 200},
-                                sf::Color{200, 200, 200},
-                                new ui::Resizer
-                            },
-                            false
-                        },
-                        new ui::Empty
-                    },
-                    std::vector<float>{
-                        0.4,
-                        0.6
-                    }
-                },
-                new ui::LayerWithConstCenter{
-                    new ui::LayerWithAlternativeObject{
-                        new ui::LayerWithBorderHorizontal{
-                            new ui::LayerWithAlternativeObject{
-                                new ui::Sprite{texture_3},
-                                new ui::Capsule{sf::Color(0x9f6e5cff)}
-                            },
-                            new ui::LayerWithAlternativeObject{
-                                new ui::Sprite{texture_3},
-                                new ui::Capsule{sf::Color(0x9f6e5cff)}
-                            }
-                        },
-                        new ui::LayerWithBorderVertical{
-                            {
-                                new ui::LayerWithBorderHorizontal{
-                                    {
-                                        new ui::Empty,
-                                        new ui::FullColor{sf::Color(0x9f6e5cff)},
-                                        new ui::Empty
-                                    },
-                                    std::vector<float>{
-                                        0.25,
-                                        0.75
-                                    }
-                                },
-                                new ui::Empty
-                            }
-                        }
-                    },
-                    new ui::Empty,
-                    2
-                },
-                false,
-                0.75
-            },
-            new ui::Sprite{textureGigachad},
-            {100.f, 100.f}
-        }
-		*/
 		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
@@ -245,6 +52,8 @@ int main() {
 		
 		sf::Event event{};
 		while(window.pollEvent(event)) {
+            ui::handleEvent(event);
+
 			if(event.type == sf::Event::Closed) {
 				window.close();
 			}
@@ -267,7 +76,8 @@ int main() {
 		window.clear();
 		interface.update(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window.getSystemHandle());
 		interface.draw();
-		//interface.drawDebug(window, 0, 2, 90, 90);
+		interface.drawDebug(window, 0, 2, 90, 90);
 		window.display();
+        ui::clearEvent();
 	}
 }

@@ -18,6 +18,7 @@ namespace ui{
         sf::Glyph glyph;
         TextVariables &textVariables;
         sf::VertexArray vertexArray;
+        sf::VertexArray selectionVertexArray;
         sf::Texture texture;
         sf::Vector2f origin;
 
@@ -28,9 +29,15 @@ namespace ui{
 
         void init(sf::RenderTarget &renderTarget) override;
 
+        void setActive(bool active) override;
+
+        sf::Vector2i getSizeTexture() override;
+
+        void setSelection(bool selection) override;
+
         void draw() override;
 
-        void move(sf::Vector2f position);
+        void move(sf::Vector2f position) override;
 
         std::vector<BaseLine *> & getLine();
 
@@ -46,7 +53,7 @@ namespace ui{
 
         char32_t getChar() override;
 
-        void setPosition(const sf::Vector2f position);
+        void setPosition(const sf::Vector2f position) override;
 
     private:
         static bool debug;

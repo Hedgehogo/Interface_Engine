@@ -12,7 +12,8 @@ std::vector<ui::BaseLine* > generateLines(std::vector<ui::BaseLine* > lines, sf:
     return lines;
 }
 
-ui::TextBlock::TextBlock(std::u32string  text, sf::Color textColor, sf::Font *font, sf::Text::Style style,std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor, sf::Color backgroundSelectionColor) :
+ui::TextBlock::TextBlock(std::u32string text, sf::Color textColor, sf::Font *font, sf::Text::Style style, std::vector<BaseLine *> lines, int size, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
+                         sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor) :
     str(text), lines(generateLines(lines, style)){
 
     textVariables.TextColor = textColor;
@@ -21,6 +22,8 @@ ui::TextBlock::TextBlock(std::u32string  text, sf::Color textColor, sf::Font *fo
     textVariables.size = size;
     textVariables.textSelectionColor = textSelectionColor;
     textVariables.backgroundSelectionColor = backgroundSelectionColor;
+    textVariables.inactiveTextSelectionColor = inactiveTextSelectionColor;
+    textVariables.inactiveBackgroundSelectionColor = inactiveBackgroundSelectionColor;
 }
 
 ui::TextBlock::TextBlock(std::u32string  str, ui::TextVariables textVariables, std::vector<BaseLine*> lines) : str(str), BaseTextBlock(textVariables), lines(lines) {}
@@ -81,6 +84,8 @@ ui::TextBlock *ui::TextBlock::createFromYaml(const YAML::Node &node) {
     int size = 0;
     sf::Color textSelectionColor = nullColor;
     sf::Color backgroundSelectionColor = nullColor;
+    sf::Color inactiveTextSelectionColor = nullColor;
+    sf::Color inactiveBackgroundSelectionColor = nullColor;
 
     node["text"] >> text;
     if (node["text-color"]) node["text-color"] >> textColor;
@@ -90,6 +95,8 @@ ui::TextBlock *ui::TextBlock::createFromYaml(const YAML::Node &node) {
     if (node["size"]) node["size"] >> size;
     if (node["text-selection-color"]) node["text-selection-color"] >> textSelectionColor;
     if (node["background-selection-color"]) node["background-selection-color"] >> backgroundSelectionColor;
+    if (node["inactive-text-selection-color"]) node["inactive-text-selection-color"] >> inactiveTextSelectionColor;
+    if (node["inactive-background-selection-color"]) node["inactive-background-selection-color"] >> inactiveBackgroundSelectionColor;
 
     if (node["line"]){
         BaseLine* line;
@@ -104,5 +111,5 @@ ui::TextBlock *ui::TextBlock::createFromYaml(const YAML::Node &node) {
         }
     }
 
-    return new TextBlock{text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor};
+    return new TextBlock{text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
 }
