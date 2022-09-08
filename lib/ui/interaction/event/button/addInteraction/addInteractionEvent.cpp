@@ -1,16 +1,16 @@
 #include "addInteractionEvent.hpp"
 
-void ui::AddInteractionEvent::startPressed(sf::Vector2i	) {
+void ui::AddInteractionEvent::startPressed() {
 	interactionManager->addInteraction(*interaction);
 }
 
-void ui::AddInteractionEvent::stopPressed(sf::Vector2i mousePosition) {
+void ui::AddInteractionEvent::stopPressed() {
 	interactionManager->deleteInteraction(*interaction);
 }
 
-void ui::AddInteractionEvent::whilePressed(sf::Vector2i mousePosition) {}
+void ui::AddInteractionEvent::whilePressed() {}
 
-void ui::AddInteractionEvent::whileNotPressed(sf::Vector2i mousePosition) {}
+void ui::AddInteractionEvent::whileNotPressed() {}
 
 ui::AddInteractionEvent::AddInteractionEvent(ui::IInteraction &interaction) : ButtonEvent_Simple(), interactionManager(nullptr), interaction(&interaction) {}
 

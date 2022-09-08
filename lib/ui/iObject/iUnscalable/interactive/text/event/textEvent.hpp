@@ -12,13 +12,13 @@ namespace ui {
         std::vector<BaseCharacter*>::iterator start;
         std::vector<BaseCharacter*>::iterator end;
 
-        void startPressed(sf::Vector2i mousePosition) override;
+        void startPressed() override;
 
-        void stopPressed (sf::Vector2i mousePosition) override;
+        void stopPressed() override;
 
-        void whilePressed(sf::Vector2i mousePosition) override;
+        void whilePressed() override;
 
-        void whileNotPressed  (sf::Vector2i mousePosition) override;
+        void whileNotPressed() override;
 
     public:
         TextEvent(Text &text);

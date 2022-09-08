@@ -1,6 +1,7 @@
 #include "layerWithAlternativeObject.hpp"
 #include <algorithm>
 
+
 namespace ui {
 	LayerWithAlternativeObject::LayerWithAlternativeObject(ui::IScalable *topObject, ui::IScalable *bottomObject, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithTwoObjects(topObject, bottomObject) {

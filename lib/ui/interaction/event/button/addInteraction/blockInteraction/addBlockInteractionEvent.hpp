@@ -5,7 +5,7 @@
 namespace ui {
 	class AddBlockInteractionEvent : public AddInteractionEvent {
 	protected:
-		void stopPressed (sf::Vector2i mousePosition) override;
+		void stopPressed() override;
 		
 	public:
 		explicit AddBlockInteractionEvent(IInteraction &interaction);

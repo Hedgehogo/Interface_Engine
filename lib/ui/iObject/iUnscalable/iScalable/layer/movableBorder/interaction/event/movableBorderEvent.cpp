@@ -8,7 +8,7 @@ void ui::MovableBorderEvent::setLayer(ui::LayerWithMovableBorder &layer) {
     this->layer = &layer;
 }
 
-void ui::MovableBorderEvent::startPressed(sf::Vector2i mousePosition) {
+void ui::MovableBorderEvent::startPressed() {
     this->active = layer->isInBorder(static_cast<sf::Vector2f>(mousePosition));
     if (this->active){
         //std::cout << "Start\n";
@@ -17,11 +17,11 @@ void ui::MovableBorderEvent::startPressed(sf::Vector2i mousePosition) {
     }
 }
 
-void ui::MovableBorderEvent::stopPressed(sf::Vector2i mousePosition) {
+void ui::MovableBorderEvent::stopPressed() {
     this->active = false;
 }
 
-void ui::MovableBorderEvent::whilePressed(sf::Vector2i mousePosition) {
+void ui::MovableBorderEvent::whilePressed() {
     if (this->active){
         sf::Vector2f mouseOffset = static_cast<sf::Vector2f>(mousePosition - this->startMousePosition);
         float valueOffset = 0;
@@ -36,7 +36,7 @@ void ui::MovableBorderEvent::whilePressed(sf::Vector2i mousePosition) {
     }
 }
 
-void ui::MovableBorderEvent::whileNotPressed(sf::Vector2i mousePosition) {}
+void ui::MovableBorderEvent::whileNotPressed() {}
 
 void ui::MovableBorderEvent::copy(ui::MovableBorderEvent *event) {
     event->startMousePosition = this->startMousePosition;

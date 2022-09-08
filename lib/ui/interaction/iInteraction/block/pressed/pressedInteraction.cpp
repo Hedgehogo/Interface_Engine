@@ -1,7 +1,7 @@
 #include <iostream>
 #include "pressedInteraction.hpp"
 
-ui::PressedInteraction::PressedInteraction(ui::ButtonEvent *event, sf::Mouse::Button button) : IInteraction(true), OneButtonInteraction(event, button), interactionManager(nullptr) {
+ui::PressedInteraction::PressedInteraction(ui::ButtonEvent *event, Key button) : IInteraction(true), OneButtonInteraction(event, button), interactionManager(nullptr) {
 	//std::cout << isBlocked();
 }
 
@@ -10,7 +10,7 @@ void ui::PressedInteraction::init(InteractionManager &interactionManager) {
 }
 
 bool ui::PressedInteraction::update(sf::Vector2i mousePosition) {
-	if(sf::Mouse::isButtonPressed(button)) {
+	if(isKeyPressed(button)) {
 		event->update(mousePosition, true);
 	} else {
 		event->update(mousePosition, false);

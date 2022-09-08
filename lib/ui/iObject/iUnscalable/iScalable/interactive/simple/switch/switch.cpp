@@ -4,7 +4,7 @@
 
 namespace ui{
 
-    Switch::Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, sf::Mouse::Button button, bool startActive) :
+    Switch::Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, Key button, bool startActive) :
         Interactive_Simple(new OneButtonInteraction{new SwitchEvent{*this}, button}), activeBackground(activeBackground), inactiveBackground(inactiveBackground), active(startActive){}
 
     void Switch::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
@@ -57,7 +57,7 @@ namespace ui{
     }
 
     Switch *Switch::copy() {
-        Switch* switcher{new Switch(inactiveBackground->copy(), activeBackground->copy(), sf::Mouse::ButtonCount, active)};
+        Switch* switcher{new Switch(inactiveBackground->copy(), activeBackground->copy(), dynamic_cast<OneButtonInteraction*>(interaction)->getButton(), active)};
         Layout::copy(switcher);
         return switcher;
     }
@@ -65,13 +65,13 @@ namespace ui{
 	Switch *Switch::createFromYaml(const YAML::Node &node) {
 		IUninteractive *inactiveBackground;
 		IUninteractive *activeBackground;
-		sf::Mouse::Button button{sf::Mouse::Button::Left};
+		Key button{Key::mouseLeft};
 		bool startActive{false};
 		
 		node["inactive-background"] >> inactiveBackground;
 		node["active-background"] >> activeBackground;
 		if(node["button"])
-			node["button"] >> button;
+			button = createKeyFromYaml(node["button"]);
 		if(node["state"]) {
 			startActive = createBoolFromYaml(node["state"], "active", "inactive");
 		} else if(node["start-active"]) {

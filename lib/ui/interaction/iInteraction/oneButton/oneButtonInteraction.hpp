@@ -6,14 +6,14 @@ namespace ui {
 	class OneButtonInteraction : public virtual IInteraction {
 	protected:
 		ButtonEvent *event;
-		sf::Mouse::Button button;
+		Key button;
 	
 	public:
-		OneButtonInteraction(ButtonEvent *event, sf::Mouse::Button button);
+		OneButtonInteraction(ButtonEvent *event, Key button);
 		
 		~OneButtonInteraction() override;
 		
-		sf::Mouse::Button getButton();
+		Key getButton();
 
 		ButtonEvent* getEvent();
 		

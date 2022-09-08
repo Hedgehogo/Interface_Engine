@@ -4,7 +4,7 @@
 #include <yaml-cpp/yaml.h>
 
 namespace ui {
-    enum class Button : int{
+    enum class Key : int{
         unknown = -1, ///< Unhandled key
         a = 0,        ///< The A key
         b,            ///< The B key
@@ -125,10 +125,9 @@ namespace ui {
         mouseWheelRight, ///< The scroll the mouse wheel right
     };
 
-    Button createButtonFromYaml(YAML::Node node);
+    Key createKeyFromYaml(YAML::Node node);
 
+    std::string toString(Key key);
 
-    void operator >>(const YAML::Node& node, Button& button);
-
-    bool isButtonPressed(Button button);
+    bool isKeyPressed(Key key);
 }

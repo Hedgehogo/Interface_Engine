@@ -1,7 +1,7 @@
 #include <iostream>
 #include "constSlider.hpp"
 
-ui::ConstSlider::ConstSlider(ui::IUninteractive *slider, ui::IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, float sliderScale, sf::Mouse::Button button, bool wheelHorizontal,
+ui::ConstSlider::ConstSlider(ui::IUninteractive *slider, ui::IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, float sliderScale, Key button, bool wheelHorizontal,
                              ui::SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
 	BaseSlider(slider, background, value, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
 	
@@ -9,7 +9,7 @@ ui::ConstSlider::ConstSlider(ui::IUninteractive *slider, ui::IUninteractive *bac
 	aspectRatio = sliderSize.x / sliderSize.y;
 }
 
-ui::ConstSlider::ConstSlider(ui::IUninteractive *slider, ui::IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, sf::Vector2i division, float sliderScale, sf::Mouse::Button button, bool wheelHorizontal) :
+ui::ConstSlider::ConstSlider(ui::IUninteractive *slider, ui::IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, sf::Vector2i division, float sliderScale, Key button, bool wheelHorizontal) :
 	BaseSlider(slider, background, value, new SliderInteraction{*this, button, division, wheelHorizontal}), sliderScale(sliderScale) {
 	
 	sliderSize = slider->getNormalSize();
@@ -42,7 +42,7 @@ ui::ConstSlider *ui::ConstSlider::createFromYaml(const YAML::Node &node) {
 	ui::IUninteractive *background;
 	std::shared_ptr<WithCoefficientVec2> value;
 	float sliderScale{1.0f};
-	sf::Mouse::Button button{sf::Mouse::Left};
+	Key button{sf::Mouse::Left};
 	bool wheelHorizontal{false};
 	
 	node["slider"] >> slider;
@@ -51,7 +51,7 @@ ui::ConstSlider *ui::ConstSlider::createFromYaml(const YAML::Node &node) {
 	if(node["slider-scale"])
 		node["slider-scale"] >> sliderScale;
 	if(node["button"])
-		node["button"] >> button;
+		button = createKeyFromYaml(node["button"]);
 	if(node["default-wheel"]) {
 		wheelHorizontal = createBoolFromYaml(node["default-wheel"], "horizontal", "vertical");
 	}

@@ -6,13 +6,13 @@ namespace ui {
 	protected:
 		bool onlyOnParent;
 		
-		void startPressed   (sf::Vector2i mousePosition) override;
+		void startPressed() override;
 		
-		void whilePressed   (sf::Vector2i mousePosition) override;
+		void whilePressed() override;
 		
-		void stopPressed    (sf::Vector2i mousePosition) override;
+		void stopPressed() override;
 		
-		void whileNotPressed(sf::Vector2i mousePosition) override;
+		void whileNotPressed() override;
 		
 	public:
 		HidePanelEvent(bool onlyOnParent = false);

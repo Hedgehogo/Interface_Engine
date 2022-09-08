@@ -11,7 +11,7 @@ namespace ui {
 		void copy(PressedInteraction* pressedInteraction);
 	
 	public:
-		PressedInteraction(ButtonEvent *event, sf::Mouse::Button button);
+		PressedInteraction(ButtonEvent *event, Key button);
 		
 		void init(InteractionManager &interactionManager);
 		

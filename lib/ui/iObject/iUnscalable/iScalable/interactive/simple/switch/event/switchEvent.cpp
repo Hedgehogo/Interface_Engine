@@ -5,15 +5,15 @@
 namespace ui {
     SwitchEvent::SwitchEvent(Switch &switcher) : switcher(&switcher) {}
 
-    void SwitchEvent::startPressed(sf::Vector2i mousePosition) {}
+    void SwitchEvent::startPressed() {}
 
-    void SwitchEvent::stopPressed(sf::Vector2i mousePosition) {
+    void SwitchEvent::stopPressed() {
         switcher->switchValue();
     }
 
-    void SwitchEvent::whilePressed(sf::Vector2i mousePosition) {}
+    void SwitchEvent::whilePressed() {}
 
-    void SwitchEvent::whileNotPressed(sf::Vector2i mousePosition) {}
+    void SwitchEvent::whileNotPressed() {}
 
     void SwitchEvent::setSwitcher(Switch &switcher) {
         this->switcher = &switcher;

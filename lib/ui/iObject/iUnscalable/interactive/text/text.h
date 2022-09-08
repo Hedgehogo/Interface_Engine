@@ -10,6 +10,7 @@
 #include "resizer/simple/resizer.h"
 #include "../../iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp"
 #include "event/textEvent.hpp"
+#include "../../../../enums/button/button.hpp"
 
 namespace ui {
 	class Text : public Interactive, public IScalable, public IDrawable, public IUpdatable {
@@ -39,7 +40,7 @@ namespace ui {
     public:
         Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background = new ui::FullColor(sf::Color::White), int size = 14, sf::Font *font = nullptr, sf::Color textColor = sf::Color::Black,
              sf::Color textSelectionColor = sf::Color::White, sf::Color backgroundSelectionColor = sf::Color::Blue, sf::Color inactiveTextSelectionColor = nullColor, sf::Color inactiveBackgroundSelectionColor = {150, 150, 150},
-             BaseResizer *resizer = new Resizer{1.15, BaseResizer::Align::left}, sf::Mouse::Button button = sf::Mouse::Button::Left);
+             BaseResizer *resizer = new Resizer{1.15, BaseResizer::Align::left}, Key button = Key::mouseLeft);
 
         ~Text();
 

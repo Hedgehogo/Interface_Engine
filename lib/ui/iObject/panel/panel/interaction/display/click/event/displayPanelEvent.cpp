@@ -2,15 +2,15 @@
 #include "../../../../general/panel.hpp"
 
 namespace ui {
-	void DisplayPanelEvent::startPressed(sf::Vector2i) {}
+	void DisplayPanelEvent::startPressed() {}
 	
-	void DisplayPanelEvent::whilePressed(sf::Vector2i) {}
+	void DisplayPanelEvent::whilePressed() {}
 	
-	void DisplayPanelEvent::stopPressed(sf::Vector2i) {
+	void DisplayPanelEvent::stopPressed() {
 		panelManager->displayPanel(panel);
 	}
 	
-	void DisplayPanelEvent::whileNotPressed(sf::Vector2i) {}
+	void DisplayPanelEvent::whileNotPressed() {}
 	
 	DisplayPanelEvent *DisplayPanelEvent::copy() {
 		DisplayPanelEvent* displayPanelEvent{new DisplayPanelEvent{}};

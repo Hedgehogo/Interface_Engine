@@ -1,5 +1,5 @@
 #include "mouseInteraction.hpp"
-
+#include "../../../enums/button/button.hpp"
 namespace ui {
 	MouseInteraction::MouseInteraction(ButtonEvent* leftMouseButton, ButtonEvent* rightMouseButton) :
 		leftMouseButton(leftMouseButton), rightMouseButton(rightMouseButton) {}
@@ -15,8 +15,8 @@ namespace ui {
 	}
 	
 	bool MouseInteraction::update(sf::Vector2i mousePosition) {
-		leftMouseButton->update(mousePosition, sf::Mouse::isButtonPressed(sf::Mouse::Left));
-		rightMouseButton->update(mousePosition, sf::Mouse::isButtonPressed(sf::Mouse::Right));
+		leftMouseButton->update(mousePosition, isKeyPressed(Key::mouseLeft));
+		rightMouseButton->update(mousePosition, isKeyPressed(Key::mouseRight));
 		return false;
 	}
 }

@@ -5,8 +5,8 @@
 
 ui::LayerWithMovableBorder::LayerWithMovableBorder(ui::IScalable *firstObject, ui::IScalable *secondObject, bool isHorizontalBorder, float borderValue, int borderInteractionSize, sf::Vector2f minSize) :
 	Layer(minSize), LayoutWithTwoObjects(firstObject, secondObject),
-	pressedInteraction(new MovableBorderEvent{*this},sf::Mouse::Button::Left),
-	Interactive_Simple(new OneButtonInteraction{new AddInteractionEvent {pressedInteraction},sf::Mouse::Button::Left}),
+	pressedInteraction(new MovableBorderEvent{*this}, Key::mouseLeft),
+	Interactive_Simple(new OneButtonInteraction{new AddInteractionEvent {pressedInteraction}, Key::mouseLeft}),
 	isHorizontalBorder(isHorizontalBorder), borderValue(borderValue), borderValueNow(borderValue), borderInteractionSize(borderInteractionSize) {}
 
 void ui::LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {

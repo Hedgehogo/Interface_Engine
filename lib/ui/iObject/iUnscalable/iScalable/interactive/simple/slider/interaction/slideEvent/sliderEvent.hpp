@@ -13,13 +13,13 @@ namespace ui {
 		
 		void copy(SliderEvent* sliderEvent);
 		
-		void startPressed(sf::Vector2i mousePosition) override;
+		void startPressed() override;
 		
-		void stopPressed (sf::Vector2i mousePosition) override;
+		void stopPressed() override;
 		
-		void whilePressed(sf::Vector2i mousePosition) override;
+		void whilePressed() override;
 		
-		void whileNotPressed  (sf::Vector2i mousePosition) override;
+		void whileNotPressed() override;
 		
 	public:
 		explicit SliderEvent(BaseSlider &slider, sf::Vector2i division = {0, 0});

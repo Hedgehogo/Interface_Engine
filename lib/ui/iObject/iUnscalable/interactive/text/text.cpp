@@ -7,7 +7,7 @@
 #include "../../../../interaction/iInteraction/oneButton/oneButtonInteraction.hpp"
 
 ui::Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
-               sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer *resizer, sf::Mouse::Button button) :
+               sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer *resizer, Key button) :
     background(background), size(size), textBocks(textBlocks), resizer(resizer), textEvent(*this), interaction(new OneButtonInteraction{&textEvent, button}){
     for (ui::BaseTextBlock* textBlock : textBlocks) {
         textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, (inactiveTextSelectionColor == nullColor ? textColor : inactiveTextSelectionColor), inactiveBackgroundSelectionColor, font, size);
@@ -210,11 +210,12 @@ ui::Text *ui::Text::createFromYaml(const YAML::Node &node) {
     int size{14};
     sf::Font *font{nullptr};
     sf::Color textColor{sf::Color::Black};
-    sf::Color textSelectionColor{sf::Color::Black};
-    sf::Color backgroundSelectionColor{sf::Color::Black};
+    sf::Color textSelectionColor{sf::Color::White};
+    sf::Color backgroundSelectionColor{sf::Color::Blue};
     sf::Color inactiveTextSelectionColor = nullColor;
     sf::Color inactiveBackgroundSelectionColor = {150, 150, 150};
     BaseResizer *resizer;
+    Key key = Key::mouseLeft;
 
     if (node["text-block"]){
         BaseTextBlock* textBlock;
@@ -243,8 +244,9 @@ ui::Text *ui::Text::createFromYaml(const YAML::Node &node) {
     if (node["background-selection-color"]) node["background-selection-color"] >> backgroundSelectionColor;
     if (node["inactive-text-selection-color"]) node["inactive-text-selection-color"] >> inactiveTextSelectionColor;
     if (node["inactive-background-selection-color"]) node["inactive-background-selection-color"] >> inactiveBackgroundSelectionColor;
+    if (node["key"]) key = createKeyFromYaml(node["key"]);
 
-    return new Text{textBlocks, background, size, font, textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor, resizer};
+    return new Text{textBlocks, background, size, font, textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor, resizer, key};
 }
 
 void ui::Text::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

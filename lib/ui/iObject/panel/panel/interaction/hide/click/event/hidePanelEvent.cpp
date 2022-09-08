@@ -3,17 +3,17 @@
 
 ui::HidePanelEvent::HidePanelEvent(bool onlyOnParent) : onlyOnParent(onlyOnParent) {}
 
-void ui::HidePanelEvent::startPressed(sf::Vector2i) {}
+void ui::HidePanelEvent::startPressed() {}
 
-void ui::HidePanelEvent::whilePressed(sf::Vector2i) {}
+void ui::HidePanelEvent::whilePressed() {}
 
-void ui::HidePanelEvent::stopPressed(sf::Vector2i mousePosition) {
+void ui::HidePanelEvent::stopPressed() {
 	sf::Vector2f pointPosition {static_cast<sf::Vector2f>(mousePosition)};
 	if(onlyOnParent ? panel->getParentProcessed() : !panel->inPanel(pointPosition) && !panel->inConstPanels(pointPosition) && panel->isFree())
 		panelManager->hidePanel(panel);
 }
 
-void ui::HidePanelEvent::whileNotPressed(sf::Vector2i) {}
+void ui::HidePanelEvent::whileNotPressed() {}
 
 ui::HidePanelEvent *ui::HidePanelEvent::copy() {
 	HidePanelEvent* hidePanelEvent{new HidePanelEvent()};

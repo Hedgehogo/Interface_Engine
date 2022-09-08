@@ -1,19 +1,25 @@
 #include "buttonEventSimple.hpp"
 
-ui::ButtonEvent_Simple::ButtonEvent_Simple() : ButtonEvent() {}
+ui::ButtonEvent_Simple::ButtonEvent_Simple() : ButtonEvent(), mousePosition({0, 0}) {}
+
+void ui::ButtonEvent_Simple::setPressed(bool pressed) {
+    if(this->pressed != pressed) {
+        this->pressed = pressed;
+        if(this->pressed) {
+            startPressed();
+        } else {
+            stopPressed();
+        }
+    }
+    ButtonEvent::setPressed(pressed);
+}
 
 void ui::ButtonEvent_Simple::update(sf::Vector2i mousePosition, bool press) {
-	if(this->pressed != press) {
-		this->pressed = press;
-		if(this->pressed) {
-			startPressed(mousePosition);
-		} else {
-			stopPressed(mousePosition);
-		}
-	}
+    this->mousePosition = mousePosition;
+    setPressed(press);
 	if(this->pressed) {
-		whilePressed(mousePosition);
+        whilePressed();
 	} else {
-		whileNotPressed(mousePosition);
+        whileNotPressed();
 	}
 }

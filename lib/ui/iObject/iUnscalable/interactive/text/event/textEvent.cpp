@@ -9,15 +9,15 @@ namespace ui {
 
     TextEvent::TextEvent(Text &text) : text(&text), start(nullptr), end(nullptr) {}
 
-    void TextEvent::startPressed(sf::Vector2i mousePosition) {
+    void TextEvent::startPressed() {
         start = text->getCharacter(sf::Vector2f(mousePosition));
     }
 
-    void TextEvent::stopPressed(sf::Vector2i mousePosition) {
+    void TextEvent::stopPressed() {
 
     }
 
-    void TextEvent::whilePressed(sf::Vector2i mousePosition) {
+    void TextEvent::whilePressed() {
         end = text->getCharacter(sf::Vector2f(mousePosition));
 
         if (start != nullBaseCharacterIterator && end != nullBaseCharacterIterator){
@@ -36,7 +36,7 @@ namespace ui {
         }
     }
 
-    void TextEvent::whileNotPressed(sf::Vector2i mousePosition) {
+    void TextEvent::whileNotPressed() {
 
     }
 

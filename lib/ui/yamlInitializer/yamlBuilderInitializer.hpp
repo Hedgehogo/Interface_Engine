@@ -2,6 +2,7 @@
 #include "../../yaml/yamlWithSfml/yamlBuilder/yamlBuilder.hpp"
 
 #include "../interaction/interactionManager/interactionManager.hpp"
+#include "../interaction/iInteraction/hotkey/hotkeyInteraction.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/sprite/sprite.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/capsule/capsule.hpp"

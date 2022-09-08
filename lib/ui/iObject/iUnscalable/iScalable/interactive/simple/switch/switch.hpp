@@ -5,6 +5,8 @@
 #include "../../../../../../drawable/iDrawable/iDrawable.hpp"
 
 #include "../../../uninteractive/uninteractive.hpp"
+#include "../../../../../../enums/button/button.hpp"
+
 
 namespace ui{
     class Switch : public Interactive_Simple, public Layout, public IDrawable{
@@ -17,7 +19,7 @@ namespace ui{
         bool active;
 
     public:
-        Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, sf::Mouse::Button button = sf::Mouse::Button::Left, bool startActive = false);
+        Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, Key button = Key::mouseLeft, bool startActive = false);
 
         void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) override;
 

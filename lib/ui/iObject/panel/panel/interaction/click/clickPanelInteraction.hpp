@@ -7,7 +7,7 @@
 namespace ui {
 	class ClickPanelInteraction : public virtual BasePanelInteraction, public OneButtonInteraction {
 	public:
-		ClickPanelInteraction(PanelEvent *event, sf::Mouse::Button button);
+		ClickPanelInteraction(PanelEvent *event, Key button);
 		
 		void init(Panel& panel, PanelManager& panelManager) override;
 		
