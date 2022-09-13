@@ -12,11 +12,11 @@ add_subdirectory(lib/yaml/yaml-cpp)
 
 add_library(${PROJECT_NAME} ${src})
 
-set(SFML_PATH_1 "E:\\SFML-2.5.1\\lib\\cmake\\SFML")
+set(SFML_PATH_1 "\\usr\\lib\\cmake\\SFML")
 set(SFML_PATH_2 "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
 set(SFML_PATH_3 "\\home\\andrewkoro105\\SFML-2.5.1\\lib\\cmake\\SFML")
 
-if(EXISTS ${SFML_PATH_1} OR EXISTS ${SFML_PATH_2})
+if(EXISTS ${SFML_PATH_2})
     set(SFML_STATIC_LIBRARIES TRUE)
     set(CMAKE_EXE_LINKER_FLAGS "-static")
 endif()
