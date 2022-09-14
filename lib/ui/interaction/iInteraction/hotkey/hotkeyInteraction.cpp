@@ -10,28 +10,28 @@ namespace ui {
             delete interaction;
     }
 
-    HotkeyInteraction::HotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint state) : hotkeys(hotkeys), nowHotkeys(nullptr){
-        if (this->hotkeys.size() <= state){
-            this->hotkeys.resize(state, {});
+    HotkeyInteraction::HotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint state) : hotkeyStates(hotkeys), nowHotkeys(nullptr){
+        if (this->hotkeyStates.size() <= state){
+            this->hotkeyStates.resize(state, {});
         }
-        nowHotkeys = &this->hotkeys[state];
+        nowHotkeys = &this->hotkeyStates[state];
     }
 
     HotkeyInteraction::HotkeyInteraction(std::string str) {}
 
     void HotkeyInteraction::setHotkeyEvent(uint state, HotkeyInteraction::Hotkey* hotkeyEvent) {
-        if (hotkeys.size() <= state){
-            hotkeys.resize(state, {});
+        if (hotkeyStates.size() <= state){
+            hotkeyStates.resize(state, {});
         }
-        hotkeys[state].push_back(hotkeyEvent);
+        hotkeyStates[state].push_back(hotkeyEvent);
     }
 
     std::vector<HotkeyInteraction::Hotkey*> HotkeyInteraction::getHotkeys(int state) {
-        return hotkeys[state];
+        return hotkeyStates[state];
     }
 
     HotkeyInteraction::Hotkey* HotkeyInteraction::getHotkey(int state, int i) {
-        return hotkeys[state][i];
+        return hotkeyStates[state][i];
     }
 
     void HotkeyInteraction::start(sf::Vector2i mousePosition) {
@@ -45,7 +45,7 @@ namespace ui {
             hotkey->interaction->update(mousePosition);
             if (hotkey->interaction->isPress() && hotkey->state != UINT32_MAX){
                 finish(mousePosition);
-                nowHotkeys = &hotkeys[hotkey->state];
+                nowHotkeys = &hotkeyStates[hotkey->state];
                 start(mousePosition);
             }
         }
@@ -59,11 +59,11 @@ namespace ui {
     }
 
     HotkeyInteraction *HotkeyInteraction::copy() {
-        return new HotkeyInteraction{hotkeys, static_cast<uint>(std::distance(hotkeys.begin(), std::vector<std::vector<Hotkey*>>::iterator(nowHotkeys)))};
+        return new HotkeyInteraction{hotkeyStates, static_cast<uint>(std::distance(hotkeyStates.begin(), std::vector<std::vector<Hotkey*>>::iterator(nowHotkeys)))};
     }
 
     HotkeyInteraction::~HotkeyInteraction() {
-        for (auto& hotkeyInteractions : hotkeys) {
+        for (auto& hotkeyInteractions : hotkeyStates) {
             for (auto& hotkey : hotkeyInteractions) {
                 delete hotkey;
             }

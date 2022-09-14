@@ -1,15 +1,18 @@
-type: LayerWithConstCenter
-aspect-ratio: 0.5
-object:
-  type: Sprite
-  texture: gigachad.jpg
-first-object:
-  type: copy
-  name: object
-  object:
-    type: RoundedRectangle
-    color: FF0000
-    radius: 50
-second-object:
-  type: copy
-  name: object
+type: Text
+text-blocks:
+  - type: TB
+    text:
+      key: text
+      directory: ../
+      language: jp
+      default-language: en
+    line:
+      type: U
+      color: red
+  - type: OTB
+    object:
+      type: Sprite
+      texture: gigachad.jpg
+    size: [100, 100]
+font: msyh.ttc
+size: 100

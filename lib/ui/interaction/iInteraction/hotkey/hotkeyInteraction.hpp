@@ -6,7 +6,7 @@
 
 namespace ui {
 
-    class HotkeyInteraction : public IInteraction{
+    class HotkeyInteraction : public virtual IInteraction{
     public:
         struct Hotkey{
             uint state{UINT32_MAX};
@@ -16,7 +16,7 @@ namespace ui {
             ~Hotkey();
         };
     protected:
-        std::vector<std::vector<Hotkey*>> hotkeys;
+        std::vector<std::vector<Hotkey*>> hotkeyStates;
         std::vector<Hotkey*> *nowHotkeys;
     public:
         HotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint state = 0);

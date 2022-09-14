@@ -5,7 +5,7 @@
 
 namespace ui {
 
-    class ButtonsInteraction : public IInteraction{
+    class ButtonsInteraction : public virtual IInteraction{
     protected:
         bool press;
 
