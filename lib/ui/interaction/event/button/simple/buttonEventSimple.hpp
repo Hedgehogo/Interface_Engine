@@ -2,7 +2,7 @@
 #include "../buttonEvent.hpp"
 
 namespace ui {
-	class ButtonEvent_Simple : public ButtonEvent {
+	class ButtonEvent_Simple : public virtual ButtonEvent {
 	protected:
         sf::Vector2i mousePosition;
 

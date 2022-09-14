@@ -1,37 +1,19 @@
 #pragma once
 
-#include "../../../../../interaction/event/button/simple/buttonEventSimple.hpp"
+#include "../../../../../interaction/event/button/buttonEvent.hpp"
 
 namespace ui {
     class Text;
-    class BaseCharacter;
-    class TextEvent : public ButtonEvent_Simple {
+
+    class TextEvent : public virtual ButtonEvent{
     protected:
-        Text* text;
-
-        std::vector<BaseCharacter*>::iterator start;
-        std::vector<BaseCharacter*>::iterator end;
-
-        void startPressed() override;
-
-        void stopPressed() override;
-
-        void whilePressed() override;
-
-        void whileNotPressed() override;
-
+        Text* text = nullptr;
     public:
-        TextEvent(Text &text);
+        virtual void init(Text *text);
 
-        std::vector<BaseCharacter*>::iterator getStart();
-        std::vector<BaseCharacter*>::iterator getEnd();
+        virtual void setText(Text *text);
 
-        std::u32string getSelectionText();
-
-        void setText(Text &text);
-
-        void update(sf::Vector2i mousePosition, bool press) override;
-
-        TextEvent* copy();
+        virtual Text *getText() const;
     };
-}
+
+} // ui
