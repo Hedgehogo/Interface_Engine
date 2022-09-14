@@ -1,15 +1,13 @@
-type: LWAO
-top-object:
-  type: MP
-  object:
-    type: RoundedRectangle
-    color: 13131388
-    radius: 10
-bottom-object:
-  type: Switch
-  inactive-background:
-    type: Capsule
-    color: 202020
-  active-background:
-    type: Capsule
-    color: FFFF00
+type: LWCC
+aspect-ratio: 0.5
+object:
+  type: Sprite
+  texture: gigachad.jpg
+first-object:
+  type: RoundedRectangle
+  color: FF0000
+  radius: 50
+second-object:
+  type: RoundedRectangle
+  color: 0000FF
+  radius: 50
