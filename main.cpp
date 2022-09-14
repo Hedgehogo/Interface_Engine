@@ -27,8 +27,6 @@ int main() {
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
 
-	ui::ObjectBuffer::add("eblan", new ui::Capsule{ sf::Color::Black });
-
 	ui::Interface interface {
 		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
 		new ui::InteractionStack {

@@ -5,11 +5,11 @@ object:
   texture: gigachad.jpg
 first-object:
   type: copy
-  name: Eblan
+  name: object
   object:
     type: RoundedRectangle
     color: FF0000
     radius: 50
 second-object:
   type: copy
-  name: Eblan
+  name: object
