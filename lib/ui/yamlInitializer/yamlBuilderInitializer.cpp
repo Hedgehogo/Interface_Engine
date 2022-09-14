@@ -65,6 +65,7 @@ namespace ui {
 		YamlBuilder<Layer>::add(LayerWithRenderTexture::createFromYaml, "LayerWithRenderTexture", {"LayerWRTexture", "LWRT"});
         YamlBuilder<Layer>::add(LayerWithShader::createFromYaml, "LayerWithShader", {"LWS"});
         YamlBuilder<Layer>::add(UninteractiveLayer::createFromYaml, "UninteractiveLayer", {"UninteractiveL", "UL"});
+		YamlBuilder<Layer>::add(MakePermeable::createFromYaml, "MakePermeable", {"MakePerm", "MP"});
 		YamlBuilder<IScalable>::addSubtype(YamlBuilder<Layer>::build);
 		YamlBuilder<BaseSlider>::add(Slider::createFromYaml, "Slider");
 		YamlBuilder<BaseSlider>::add(ConstSlider::createFromYaml, "ConstSlider");

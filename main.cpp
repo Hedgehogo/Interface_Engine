@@ -19,7 +19,7 @@ int main() {
 
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	//window.setFramerateLimit(1);
+	window.setFramerateLimit(60);
 
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
@@ -151,7 +151,7 @@ int main() {
 		window.clear();
 		interface.update(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window.getSystemHandle());
 		interface.draw();
-		interface.drawDebug(window, 0, 2, 90, 90);
+//		interface.drawDebug(window, 0, 2, 90, 90);
 		window.display();
         ui::clearEvent();
 	}

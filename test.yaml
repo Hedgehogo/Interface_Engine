@@ -1,24 +1,15 @@
-#type: Text
-#text-blocks:
-#  - type: TB
-#    text:
-#      key: text
-#      directory: ../
-#      language: jp
-#      default-language: en
-#    line:
-#      type: U
-#  - type: OTB
-#    object:
-#      type: Sprite
-#      texture: gigachad.jpg
-#    size: [100, 100]
-#font: msyh.ttc
-#size: 100
-#key: mouse-middle
-
-type: Button
-background:
-  type: FullColor
-  color: red
-interaction: 1
+type: LWAO
+top-object:
+  type: MP
+  object:
+    type: RoundedRectangle
+    color: 13131388
+    radius: 10
+bottom-object:
+  type: Switch
+  inactive-background:
+    type: Capsule
+    color: 202020
+  active-background:
+    type: Capsule
+    color: FFFF00

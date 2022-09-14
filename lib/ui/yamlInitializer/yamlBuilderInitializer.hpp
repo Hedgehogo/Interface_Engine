@@ -23,6 +23,7 @@
 #include "../iObject/iUnscalable/iScalable/layer/background/layerWithBackground.hpp"
 #include "../iObject/iUnscalable/iScalable/layer/shader/layerWithShader.hpp"
 #include "../iObject/iUnscalable/iScalable/layer/uninteractive/uninteractiveLayer.hpp"
+#include "../iObject/iUnscalable/iScalable/layer/makePermeable/makePermeable.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/slider/const/constSlider.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/slider/slider/slider.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/button/baseButton.hpp"
