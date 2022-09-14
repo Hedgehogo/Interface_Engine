@@ -58,6 +58,12 @@ namespace ui {
 		if(object->inArea(mousePosition)) {
 			return object->updateInteractions(mousePosition);
 		}
+		if (renderFirst && firstObject->inArea(mousePosition)) {
+			return firstObject->updateInteractions(mousePosition);
+		}
+		if (renderSecond && secondObject->inArea(mousePosition)) {
+			return secondObject->updateInteractions(mousePosition);
+		}
 		return background->updateInteractions(mousePosition);
 	}
 	

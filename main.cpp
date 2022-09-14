@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <array>
 #include "lib/ui/UI.hpp"
+#include "lib/yaml/yamlWithSfml/objectBuffer/objectBuffer.hpp"
 
 template<typename I, I T>
 float calculateMediumFPS(std::array<float, T> lastFPS) {
@@ -26,86 +27,13 @@ int main() {
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
 
+	ui::ObjectBuffer::add("eblan", new ui::Capsule{ sf::Color::Black });
+
 	ui::Interface interface {
 		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
-				ui::MouseLambdaInteraction::debug.copy(),
-                new ui::HotkeyInteraction{
-                    {
-                        {
-                            new ui::HotkeyInteraction::Hotkey{
-                                new ui::ButtonsInteraction{
-                                    new ui::ButtonEvent_LambdaSimple{
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "start-[c]" << std::endl;
-                                        },
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "while-[c]" << std::endl;
-                                        },
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "stop-[c]" << std::endl;
-                                        }
-                                    },
-                                    {ui::Key::lControl, ui::Key::c}
-                                }
-                            },
-                            new ui::HotkeyInteraction::Hotkey{
-                                new ui::ButtonsInteraction{
-                                    new ui::ButtonEvent_LambdaSimple{
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "start-[z]" << std::endl;
-                                        },
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "while-[z]" << std::endl;
-                                        },
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "stop-[z]" << std::endl;
-                                        }
-                                    },
-                                    {ui::Key::lControl, ui::Key::z},
-                                    {ui::Key::lShift}
-                                },
-                                1
-                            }
-                        },
-                        {
-                            new ui::HotkeyInteraction::Hotkey{
-                                new ui::ButtonsInteraction{
-                                    new ui::ButtonEvent_LambdaSimple{
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "start-[s]" << std::endl;
-                                        },
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "while-[s]" << std::endl;
-                                        },
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "stop-[s]" << std::endl;
-                                        }
-                                    },
-                                    {ui::Key::lControl, ui::Key::s}
-                                }
-                            },
-                            new ui::HotkeyInteraction::Hotkey{
-                                new ui::ButtonsInteraction{
-                                    new ui::ButtonEvent_LambdaSimple{
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "start-[^z]" << std::endl;
-                                        },
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "while-[^z]" << std::endl;
-                                        },
-                                        [](sf::Vector2i vec) {
-                                            std::cout << "stop-[^z]" << std::endl;
-                                        }
-                                    },
-                                    {ui::Key::lControl, ui::Key::z, ui::Key::lShift}
-                                },
-                                0
-                            }
-                        }
-                    }
-                }
+				ui::MouseLambdaInteraction::debug.copy()
 			}
 		}
 	};

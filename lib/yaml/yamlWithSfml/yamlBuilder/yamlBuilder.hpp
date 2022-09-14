@@ -6,6 +6,7 @@
 #include "exceptions/yamlBuildExceptions.hpp"
 #include <iostream>
 #include <bitset>
+#include "../objectBuffer/objectBuffer.hpp"
 
 namespace ui {
     const sf::Color nullColor{255, 255, 255, 0};
@@ -17,6 +18,9 @@ namespace ui {
 	
 	template<typename T>
 	T* loadFromYamlIf(const YAML::Node &node);
+
+	template<typename T>
+	T* loadFromYamlObject(const YAML::Node &node);
 	
 	template<typename T>
 	class YamlBuilder {

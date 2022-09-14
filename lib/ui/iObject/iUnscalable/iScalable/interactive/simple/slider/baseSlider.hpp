@@ -48,6 +48,8 @@ namespace ui {
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override = 0;
+
+		BaseSlider *copy() override = 0;
 		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};

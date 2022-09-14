@@ -20,6 +20,23 @@ namespace ui {
 		}
 		return object;
 	}
+
+	template<typename T>
+	T *loadFromYamlObject(const YAML::Node &node)
+	{
+		std::string name { node["name"].as<std::string>() };
+
+		if (node["object"]) {
+			T* object;
+			node["object"] >> object;
+			ObjectBuffer::add(name, object);
+			return object;
+		}
+		if (ObjectBuffer::has(name)) {
+			return ObjectBuffer::get<T>(name)->copy();
+		}
+		throw YAML::BadConversion(node.Mark());
+	}
 	
 	template<typename T>
 	std::map<std::string, typename YamlBuilder<T>::makeObject> YamlBuilder<T>::typeMap = {
