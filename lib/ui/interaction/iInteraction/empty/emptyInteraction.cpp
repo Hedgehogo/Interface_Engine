@@ -9,3 +9,7 @@ void ui::EmptyInteraction::finish(sf::Vector2i mousePosition) {}
 ui::EmptyInteraction *ui::EmptyInteraction::copy() {
 	return new EmptyInteraction{};
 }
+
+ui::EmptyInteraction *ui::EmptyInteraction::createFromYaml(const YAML::Node &node) {
+    return new EmptyInteraction{};
+}

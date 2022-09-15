@@ -297,10 +297,10 @@ namespace ui {
         else background = new FullColor(sf::Color::White);
 
         if (node["selection-interaction"]) node["selection-interaction"] >> selectionInteraction;
-        else selectionInteraction = new TextButtonsInteractions{new TextSelectionEvent{},{Key::mouseLeft}};
+        else selectionInteraction = new TextButtonsInteraction{new TextSelectionEvent{}, {Key::mouseLeft}};
 
         if (node["copy-interaction"]) node["copy-interaction"] >> copyInteraction;
-        else copyInteraction = new TextButtonsInteractions{new TextCopyEvent{}, {Key::lControl, Key::c}};
+        else copyInteraction = new TextButtonsInteraction{new TextCopyEvent{}, {Key::lControl, Key::c}};
 
         if (node["text-interaction"]) node["text-interaction"] >> textInteraction;
         else textInteraction = new TextEmptyInteraction{};

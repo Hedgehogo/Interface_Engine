@@ -16,3 +16,9 @@ text-blocks:
     size: [100, 100]
 font: msyh.ttc
 size: 100
+selection-interaction:
+  type: TBI
+  keys:
+    - mouse-left
+  event:
+    type: TSE
