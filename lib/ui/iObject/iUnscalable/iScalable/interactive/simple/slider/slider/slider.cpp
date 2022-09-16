@@ -38,7 +38,7 @@ ui::Slider *ui::Slider::createFromYaml(const YAML::Node &node) {
 	ui::IUninteractive *background;
 	std::shared_ptr<WithCoefficientVec2> value;
 	sf::Vector2f sliderScale{1.0f, 0.5f};
-	Key button{sf::Mouse::Left};
+	Key button{ui::Key::mouseLeft};
 	bool wheelHorizontal{false};
 	
 	node["slider"] >> slider;
