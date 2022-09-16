@@ -17,6 +17,8 @@ namespace ui {
     public:
         TextCopyEvent* copy() override;
 
+        static TextCopyEvent* createFromYaml(const YAML::Node &node);
+
         ~TextCopyEvent() = default;
     };
 

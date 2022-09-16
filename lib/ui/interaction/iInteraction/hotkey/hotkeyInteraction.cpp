@@ -69,4 +69,36 @@ namespace ui {
             }
         }
     }
+
+    HotkeyInteraction *HotkeyInteraction::createFromYaml(const YAML::Node &node) {
+        std::vector<std::vector<Hotkey *>> hotkeys;
+        uint startState{0};
+
+        if (node["start-state"]) node["start-state"] >> startState;
+
+        if (node["hotkeys"]){
+            hotkeys.resize(node["hotkeys"].size());
+            uint i{0};
+            for (auto& state : node["hotkeys"]) {
+                hotkeys.resize(state.size());
+                uint j{0};
+                for (auto& hotkey : state) {
+                    hotkeys[i][j] = createHotkeyFromYaml(hotkey);
+                    ++j;
+                }
+                ++i;
+            }
+        }
+
+        return new HotkeyInteraction{hotkeys, startState};
+    }
 } // ui
+
+ui::HotkeyInteraction::Hotkey* createHotkeyFromYaml(const YAML::Node& node){
+    ui::HotkeyInteraction::Hotkey *hotkey{new ui::HotkeyInteraction::Hotkey{nullptr}};
+
+    if (node["state"]) node["state"] >> hotkey->state;
+    if (node["interaction"]) node["interaction"] >> hotkey->interaction;
+
+    return hotkey;
+}

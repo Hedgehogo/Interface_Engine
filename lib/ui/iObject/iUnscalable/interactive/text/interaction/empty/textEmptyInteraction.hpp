@@ -8,6 +8,8 @@ namespace ui {
     class TextEmptyInteraction : public EmptyInteraction, public TextInteraction{
     public:
         TextEmptyInteraction * copy() override;
+
+        static TextEmptyInteraction* createFromYaml(const YAML::Node &node);
     };
 
 } // ui

@@ -36,7 +36,11 @@ namespace ui {
 
         HotkeyInteraction* copy() override;
 
+        static HotkeyInteraction* createFromYaml(const YAML::Node &node);
+
         ~HotkeyInteraction() override;
     };
 
-} // ui
+}
+
+ui::HotkeyInteraction::Hotkey* createHotkeyFromYaml(const YAML::Node& node);

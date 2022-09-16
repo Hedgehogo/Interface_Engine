@@ -20,7 +20,20 @@ namespace ui {
 		
 		YamlBuilder<BasePositioning2>::add(Positioning2::createFromYaml, "Positioning2", {"Pos2", "P2"});
 		YamlBuilder<BasePositioning2>::add(InternalPositioning2::createFromYaml, "InternalPositioning2", {"InternalPos2", "IP2"});
-		
+
+        YamlBuilder<IInteraction>::add(ButtonsInteraction::createFromYaml, "ButtonsInteraction", {"BI"});
+        YamlBuilder<IInteraction>::add(HotkeyInteraction::createFromYaml, "HotkeyInteraction", {"HI"});
+        YamlBuilder<IInteraction>::add(EmptyInteraction::createFromYaml, "EmptyInteraction", {"EI"});
+
+        YamlBuilder<IInteraction>::addSubtype(YamlBuilder<TextInteraction>::build);
+        YamlBuilder<TextInteraction>::add(TextButtonsInteraction::createFromYaml, "TextButtonsInteraction", {"TBI"});
+        YamlBuilder<TextInteraction>::add(TextHotkeyInteraction::createFromYaml, "TextHotkeyInteraction", {"THI"});
+        YamlBuilder<TextInteraction>::add(TextEmptyInteraction::createFromYaml, "TextEmptyInteraction", {"TEI"});
+
+        YamlBuilder<ButtonEvent>::addSubtype(YamlBuilder<TextEvent>::build);
+        YamlBuilder<TextEvent>::add(TextCopyEvent::createFromYaml, "TextCopyEvent", {"TCE"});
+        YamlBuilder<TextEvent>::add(TextSelectionEvent::createFromYaml, "TextSelectionEvent", {"TSE"});
+
 		YamlBuilder<HidePanelInteraction>::add(DontHidePanelInteraction::createFromYaml, "DontHidePanelInteraction", {"DontHidePI", "DontHPI", "DHPI"});
 		YamlBuilder<HidePanelInteraction>::add(ClickHidePanelInteraction::createFromYaml, "ClickHidePanelInteraction", {"ClickHidePI", "ClickHPI", "CHPI"});
 		YamlBuilder<HidePanelInteraction>::add(PointingHidePanelInteraction::createFromYaml, "PointingHidePanelInteraction", {"PointingHidePI", "PointingHPI", "PHPI"});

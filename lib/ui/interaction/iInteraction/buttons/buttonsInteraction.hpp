@@ -32,6 +32,8 @@ namespace ui {
 
         ButtonsInteraction* copy() override;
 
+        static ButtonsInteraction* createFromYaml(const YAML::Node &node);
+
         ~ButtonsInteraction() override;
 
     };

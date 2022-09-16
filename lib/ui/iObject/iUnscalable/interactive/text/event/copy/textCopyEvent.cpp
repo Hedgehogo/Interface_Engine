@@ -18,4 +18,8 @@ namespace ui {
     TextCopyEvent *TextCopyEvent::copy() {
         return new TextCopyEvent{};
     }
+
+    TextCopyEvent *TextCopyEvent::createFromYaml(const YAML::Node &node) {
+        return new TextCopyEvent;
+    }
 } // ui

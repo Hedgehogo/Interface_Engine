@@ -55,4 +55,29 @@ namespace ui {
     bool ButtonsInteraction::isPress() {
         return press;
     }
+
+    ButtonsInteraction *ButtonsInteraction::createFromYaml(const YAML::Node &node) {
+        ButtonEvent *event;
+        std::vector<Key> keys;
+        std::vector<Key> blackListKeys{};
+
+        node["event"] >> event;
+
+        keys.resize(node["keys"].size());
+        uint i{0};
+        for (auto &key: node["keys"]) {
+            keys[i] = createKeyFromYaml(key);
+            ++i;
+        }
+
+        if (node["black-listKeys"]){
+            i = 0;
+            for (auto& key : node["black-listKeys"]) {
+                blackListKeys[i] = createKeyFromYaml(key);
+                ++i;
+            }
+        }
+
+        return new ButtonsInteraction{event, keys, blackListKeys};
+    }
 } // ui

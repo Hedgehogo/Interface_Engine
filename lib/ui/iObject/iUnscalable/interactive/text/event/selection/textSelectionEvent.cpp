@@ -63,4 +63,8 @@ namespace ui {
     TextSelectionEvent *TextSelectionEvent::copy() {
         return new TextSelectionEvent{};
     }
+
+    TextSelectionEvent *TextSelectionEvent::createFromYaml(const YAML::Node &node) {
+        return new TextSelectionEvent{};
+    }
 }
