@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 #include <array>
 #include "lib/ui/UI.hpp"
-#include "lib/yaml/yamlWithSfml/objectBuffer/objectBuffer.hpp"
 
 template<typename I, I T>
 float calculateMediumFPS(std::array<float, T> lastFPS) {
@@ -27,13 +26,25 @@ int main() {
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
 
-	ui::ObjectBuffer::add("eblan", new ui::Capsule{ sf::Color::Black });
+	ui::LayerWithChangeableObjects *testVariable = new ui::LayerWithChangeableObjects {
+		{
+			new ui::FullColor(sf::Color::Red),
+			new ui::FullColor(sf::Color::Yellow),
+			new ui::FullColor(sf::Color::Blue)
+		}
+	};
 
 	ui::Interface interface {
-		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
+		new ui::LayerWithBorderVertical {
+			{
+				testVariable,
+				new ui::Button {new ui::FullColor(sf::Color::Green), 1}
+			}
+		},
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
-				ui::MouseLambdaInteraction::debug.copy()
+				ui::MouseLambdaInteraction::debug.copy(),
+				new ui::OneButtonInteraction( new ui::WhileChangingObjectsEvent { testVariable, -100 }, ui::Key::mouseLeft)
 			}
 		}
 	};

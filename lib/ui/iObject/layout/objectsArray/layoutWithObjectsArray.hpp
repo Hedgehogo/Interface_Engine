@@ -17,7 +17,9 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
-		
+
+		virtual uint getArraySize();
+
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 }

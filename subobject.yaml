@@ -1,7 +1,6 @@
-type: LayerWBackground
-object:
-  type: file
-  file-path: ../test.yaml
-background:
-  type: Sprite
-  texture: gigachad.jpg
+type: LWCO
+objects:
+  - type: FullColor
+    color: ff0000
+  - type: FullColor
+    color: 0000ff

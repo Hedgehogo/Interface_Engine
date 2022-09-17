@@ -30,7 +30,12 @@ namespace ui {
 		}
 		return normalSize;
 	}
-	
+
+	uint LayoutWithObjectsArray::getArraySize()
+	{
+		return objects.size();
+	}
+
 	void LayoutWithObjectsArray::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		for(auto object: objects) {

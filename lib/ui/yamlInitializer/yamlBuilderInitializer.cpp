@@ -20,7 +20,10 @@ namespace ui {
 		
 		YamlBuilder<BasePositioning2>::add(Positioning2::createFromYaml, "Positioning2", {"Pos2", "P2"});
 		YamlBuilder<BasePositioning2>::add(InternalPositioning2::createFromYaml, "InternalPositioning2", {"InternalPos2", "IP2"});
-		
+
+		YamlBuilder<ButtonEvent>::add( ChangeObjectsEvent::createFromYaml, "ChangeObjectsEvent", { "COE", "ChangeObjectE"});
+		YamlBuilder<ButtonEvent>::add( WhileChangingObjectsEvent::createFromYaml, "WhileChangingObjectsEvent", { "WhileChangingO", "WCO"});
+
 		YamlBuilder<HidePanelInteraction>::add(DontHidePanelInteraction::createFromYaml, "DontHidePanelInteraction", {"DontHidePI", "DontHPI", "DHPI"});
 		YamlBuilder<HidePanelInteraction>::add(ClickHidePanelInteraction::createFromYaml, "ClickHidePanelInteraction", {"ClickHidePI", "ClickHPI", "CHPI"});
 		YamlBuilder<HidePanelInteraction>::add(PointingHidePanelInteraction::createFromYaml, "PointingHidePanelInteraction", {"PointingHidePI", "PointingHPI", "PHPI"});
@@ -68,6 +71,7 @@ namespace ui {
         YamlBuilder<Layer>::add(LayerWithShader::createFromYaml, "LayerWithShader", {"LWS"});
         YamlBuilder<Layer>::add(UninteractiveLayer::createFromYaml, "UninteractiveLayer", {"UninteractiveL", "UL"});
 		YamlBuilder<Layer>::add(MakePermeable::createFromYaml, "MakePermeable", {"MakePerm", "MP"});
+		YamlBuilder<Layer>::add(LayerWithChangeableObjects::createFromYaml, "LayerWithChangeableObjects", {"LWChangeableObjects", "LWCO"});
 		YamlBuilder<IScalable>::addSubtype(YamlBuilder<Layer>::build);
 		YamlBuilder<BaseSlider>::add(loadFromYamlObject<BaseSlider>, "copy");
 		YamlBuilder<BaseSlider>::add(Slider::createFromYaml, "Slider");

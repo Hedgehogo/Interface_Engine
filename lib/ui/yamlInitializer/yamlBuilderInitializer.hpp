@@ -24,6 +24,7 @@
 #include "../iObject/iUnscalable/iScalable/layer/shader/layerWithShader.hpp"
 #include "../iObject/iUnscalable/iScalable/layer/uninteractive/uninteractiveLayer.hpp"
 #include "../iObject/iUnscalable/iScalable/layer/makePermeable/makePermeable.hpp"
+#include "../iObject/iUnscalable/iScalable/layer/changeableObjects/LayerWithChangeableObjects.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/slider/const/constSlider.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/slider/slider/slider.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/button/baseButton.hpp"
@@ -37,6 +38,8 @@
 #include "../iObject/iUnscalable/interactive/text/line/underline/underline.h"
 #include "../iObject/iUnscalable/interactive/text/line/strikeThrough/strikeThrough.h"
 #include "../iObject/iUnscalable/iScalable/interface/interface.hpp"
+#include "../iObject/iUnscalable/iScalable/layer/changeableObjects/event/changeObjects/changeObjectsEvents.hpp"
+#include "../iObject/iUnscalable/iScalable/layer/changeableObjects/event/whileChangingObjects/whileChangingObjectsEvent.hpp"
 #include "../debug/debugLayer.hpp"
 
 namespace ui {
