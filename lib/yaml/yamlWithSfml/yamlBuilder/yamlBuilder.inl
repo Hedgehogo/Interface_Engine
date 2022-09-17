@@ -22,18 +22,17 @@ namespace ui {
 	}
 
 	template<typename T>
-	T *loadFromYamlObject(const YAML::Node &node)
-	{
-		std::string name { node["name"].as<std::string>() };
+	T *loadFromYamlObject(const YAML::Node &node) {
+		std::string name {node["name"].as<std::string>()};
 
 		if (node["object"]) {
-			T* object;
-			node["object"] >> object;
-			ObjectBuffer::add(name, object);
-			return object;
+			ObjectBuffer::add(name, node["object"]);
 		}
 		if (ObjectBuffer::has(name)) {
-			return ObjectBuffer::get<T>(name)->copy();
+			YAML::Node objectNode{ObjectBuffer::get(name)};
+			T* object;
+			objectNode >> object;
+			return object;
 		}
 		throw YAML::BadConversion(node.Mark());
 	}
@@ -42,6 +41,7 @@ namespace ui {
 	std::map<std::string, typename YamlBuilder<T>::makeObject> YamlBuilder<T>::typeMap = {
 		std::make_pair("file", loadFromYamlFile<T>),
 		std::make_pair("if", loadFromYamlIf<T>),
+		std::make_pair("copy", loadFromYamlObject<T>),
 	};
 	
 	template<typename T>

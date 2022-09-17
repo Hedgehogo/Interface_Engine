@@ -5,7 +5,7 @@
 
 namespace ui {
 
-    class ButtonsInteraction : public IInteraction{
+    class ButtonsInteraction : public virtual IInteraction{
     protected:
         bool press;
 
@@ -31,6 +31,8 @@ namespace ui {
         void finish(sf::Vector2i mousePosition) override;
 
         ButtonsInteraction* copy() override;
+
+        static ButtonsInteraction* createFromYaml(const YAML::Node &node);
 
         ~ButtonsInteraction() override;
 

@@ -83,7 +83,7 @@ namespace ui {
 		return SymbolPosition{line, number};
 	}
 	
-	std::basic_string<Uint32> char32_tStringToUint32String(std::basic_string<char32_t> str) {
+	std::basic_string<Uint32> u32stringToUint32String(std::basic_string<char32_t> str) {
 		if(!str.empty()) {
 			bool bom{str[0] == 65279}; //In the code it is used as value 0 or 1
 			std::basic_string<Uint32> result(str.size() - bom, L' ');
@@ -152,6 +152,6 @@ void operator>>(const YAML::Node &node, sf::String &sfString) {
 	} else {
 		std::basic_string<char32_t> str;
 		node >> str;
-		sfString = {ui::char32_tStringToUint32String(str)};
+		sfString = {ui::u32stringToUint32String(str)};
 	}
 }

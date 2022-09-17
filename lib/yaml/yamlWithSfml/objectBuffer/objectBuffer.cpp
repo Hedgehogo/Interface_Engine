@@ -1,19 +1,18 @@
-//
-// Created by r1n0ku on 9/14/22.
-//
-
 #include "objectBuffer.hpp"
 
 namespace ui
 {
-	std::map<std::string, IObject*> ObjectBuffer::objects = {};
-	void ObjectBuffer::add(std::string name, IObject *object)
-	{
-		objects[name] = object;
+	std::map<std::string, const YAML::Node> ObjectBuffer::nodes = {};
+	
+	void ObjectBuffer::add(const std::string& name, const YAML::Node& node) {
+		nodes.emplace(name, node);
 	}
 
-	bool ObjectBuffer::has(std::string name)
-	{
-		return objects.find( name ) != objects.end();
+	bool ObjectBuffer::has(const std::string& name) {
+		return nodes.find( name ) != nodes.end();
 	}
-} // ui
+	
+	const YAML::Node& ObjectBuffer::get(std::string name) {
+		return nodes[name];
+	}
+}

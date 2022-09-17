@@ -35,7 +35,7 @@ namespace ui {
 	
 	SymbolPosition readCharacterIndex(const YAML::Node &node, std::basic_ifstream<char32_t> &fin);
 	
-	std::basic_string<Uint32> char32_tStringToUint32String(std::basic_string<char32_t> str);
+	std::basic_string<Uint32> u32stringToUint32String(std::basic_string<char32_t> str);
 }
 
 void operator >>(const YAML::Node& node, std::basic_string<char32_t>& string32);

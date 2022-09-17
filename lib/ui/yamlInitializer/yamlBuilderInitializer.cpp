@@ -24,6 +24,20 @@ namespace ui {
 		YamlBuilder<ButtonEvent>::add( ChangeObjectsEvent::createFromYaml, "ChangeObjectsEvent", { "COE", "ChangeObjectE"});
 		YamlBuilder<ButtonEvent>::add( WhileChangingObjectsEvent::createFromYaml, "WhileChangingObjectsEvent", { "WhileChangingO", "WCO"});
 
+
+        YamlBuilder<IInteraction>::add(ButtonsInteraction::createFromYaml, "ButtonsInteraction", {"BI"});
+        YamlBuilder<IInteraction>::add(HotkeyInteraction::createFromYaml, "HotkeyInteraction", {"HI"});
+        YamlBuilder<IInteraction>::add(EmptyInteraction::createFromYaml, "EmptyInteraction", {"EI"});
+
+        YamlBuilder<IInteraction>::addSubtype(YamlBuilder<TextInteraction>::build);
+        YamlBuilder<TextInteraction>::add(TextButtonsInteraction::createFromYaml, "TextButtonsInteraction", {"TBI"});
+        YamlBuilder<TextInteraction>::add(TextHotkeyInteraction::createFromYaml, "TextHotkeyInteraction", {"THI"});
+        YamlBuilder<TextInteraction>::add(TextEmptyInteraction::createFromYaml, "TextEmptyInteraction", {"TEI"});
+
+        YamlBuilder<ButtonEvent>::addSubtype(YamlBuilder<TextEvent>::build);
+        YamlBuilder<TextEvent>::add(TextCopyEvent::createFromYaml, "TextCopyEvent", {"TCE"});
+        YamlBuilder<TextEvent>::add(TextSelectionEvent::createFromYaml, "TextSelectionEvent", {"TSE"});
+
 		YamlBuilder<HidePanelInteraction>::add(DontHidePanelInteraction::createFromYaml, "DontHidePanelInteraction", {"DontHidePI", "DontHPI", "DHPI"});
 		YamlBuilder<HidePanelInteraction>::add(ClickHidePanelInteraction::createFromYaml, "ClickHidePanelInteraction", {"ClickHidePI", "ClickHPI", "CHPI"});
 		YamlBuilder<HidePanelInteraction>::add(PointingHidePanelInteraction::createFromYaml, "PointingHidePanelInteraction", {"PointingHidePI", "PointingHPI", "PHPI"});
@@ -44,7 +58,6 @@ namespace ui {
         YamlBuilder<BaseTextBlock>::add(ObjectTextBlock::createFromYaml, "ObjectTextBlock", {"OTB"});
         YamlBuilder<BaseResizer>::add(Resizer::createFromYaml, "Resizer", {"R"});
 
-		YamlBuilder<OnlyDrawable>::add(loadFromYamlObject<OnlyDrawable>, "copy");
 		YamlBuilder<OnlyDrawable>::add(Empty::createFromYaml, "Empty");
 		YamlBuilder<OnlyDrawable>::add(FullColor::createFromYaml, "FullColor");
 		YamlBuilder<OnlyDrawable>::add(RoundedRectangle::createFromYaml, "RoundedRectangle");
@@ -55,7 +68,6 @@ namespace ui {
 		YamlBuilder<IUninteractive>::add(Caption::createFromYaml, "Caption");
 		YamlBuilder<IUninteractive>::add(UninteractiveLayer::createFromYaml, "LayerWithUnInteractive", {"LWUnInteractive", "LWUI"});
 		YamlBuilder<IScalable>::addSubtype(YamlBuilder<IUninteractive>::build);
-		YamlBuilder<Layer>::add(loadFromYamlObject<Layer>, "copy");
 		YamlBuilder<Layer>::add(LayerWithBackground::createFromYaml, "LayerWithBackground", {"LayerWBackground", "LWBa"});
 		YamlBuilder<Layer>::add(LayerWithAlternativeObject::createFromYaml, "LayerWithAlternativeObject", {"LayerWAObject", "LWAO"});
 		YamlBuilder<Layer>::add(LayerWithBorder::createFromYaml, "LayerWithBorder", {"LayerWBorder", "LWB"});
@@ -73,7 +85,6 @@ namespace ui {
 		YamlBuilder<Layer>::add(MakePermeable::createFromYaml, "MakePermeable", {"MakePerm", "MP"});
 		YamlBuilder<Layer>::add(LayerWithChangeableObjects::createFromYaml, "LayerWithChangeableObjects", {"LWChangeableObjects", "LWCO"});
 		YamlBuilder<IScalable>::addSubtype(YamlBuilder<Layer>::build);
-		YamlBuilder<BaseSlider>::add(loadFromYamlObject<BaseSlider>, "copy");
 		YamlBuilder<BaseSlider>::add(Slider::createFromYaml, "Slider");
 		YamlBuilder<BaseSlider>::add(ConstSlider::createFromYaml, "ConstSlider");
 		YamlBuilder<IScalable>::addSubtype(YamlBuilder<BaseSlider>::build);
@@ -82,7 +93,6 @@ namespace ui {
 		YamlBuilder<IScalable>::add(Switch::createFromYaml, "Switch");
 		YamlBuilder<IUnscalable>::addSubtype(YamlBuilder<IScalable>::build);
 		YamlBuilder<IScalable>::add(Text::createFromYaml, "Text", {});
-		YamlBuilder<BasePanel>::add(loadFromYamlObject<BasePanel>, "copy");
         YamlBuilder<BasePanel>::add(ConstPanel::createFromYaml, "ConstPanel");
 		YamlBuilder<BasePanel>::add(Panel::createFromYaml, "Panel");
 		YamlBuilder<IObject>::addSubtype(YamlBuilder<BasePanel>::build);
