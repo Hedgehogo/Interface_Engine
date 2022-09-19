@@ -6,30 +6,33 @@
 namespace ui
 {
 
-	class LayerWithChangeableObjects : public Layer, public LayoutWithObjectsArray, public IUpdatable, public IDrawable
+	class LayerWithChangeableObjects : public Layer, public LayoutWithObjectsArray, public IDrawable
 	{
 	protected:
-		uint current;
+		std::shared_ptr<WithValue<uint>> value;
+		std::vector<IScalable *> objects;
 
-		std::vector<DrawManager*> drawManagers;
-		std::vector<UpdateManager*> updateManagers;
-
+		std::vector<DrawManager> drawManagers;
 	public:
-		LayerWithChangeableObjects(std::vector<IScalable*> objects, uint current = 0, sf::Vector2f minSize = { 0, 0});
+		LayerWithChangeableObjects(std::vector<IScalable*> objects, std::shared_ptr<WithValue<uint>> value, sf::Vector2f minSize = { 0, 0});
+
+		LayerWithChangeableObjects(std::vector<IScalable*> objects, uint index = 0, sf::Vector2f minSize = { 0, 0});
 
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
 
-		void setCurrent(uint index);
+		void setValue(std::shared_ptr<WithValue<uint>> index);
 
-		IScalable* getObject();
+		std::shared_ptr<WithValue<uint>> getValue();
+
+		void setIndex(uint index);
 
 		uint getIndex();
+
+		IScalable* getObject();
 
 		void draw() override;
 
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
-
-		void update() override;
 
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 

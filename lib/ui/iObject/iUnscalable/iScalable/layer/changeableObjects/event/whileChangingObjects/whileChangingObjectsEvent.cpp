@@ -2,21 +2,21 @@
 
 namespace ui
 {
-	void WhileChangingObjectsEvent::startPressed()
-	{
-		index += offset;
-		if (index >= objectsSize) index = (index - objectsSize) % objectsSize;
-		else if (index < 0) index = (objectsSize - ((-index) % objectsSize)) - 1;
-		object->setCurrent(index);
-	}
+	void WhileChangingObjectsEvent::startPressed() {}
 
-	void WhileChangingObjectsEvent::stopPressed() {}
+	void WhileChangingObjectsEvent::stopPressed() {
+		int indexValue = index->getValue();
+		indexValue += offset;
+		indexValue = (((indexValue % objectsSize) + objectsSize) % objectsSize);
+		index->setValue(indexValue);
+	}
 
 	void WhileChangingObjectsEvent::whilePressed() {}
 
 	void WhileChangingObjectsEvent::whileNotPressed() {}
 
-	WhileChangingObjectsEvent::WhileChangingObjectsEvent(LayerWithChangeableObjects *objects, int offset ) : index( object->getIndex()), objectsSize( objects->getArraySize()), ChangeableObjectsEvent( objects ), offset( offset) {}
+	WhileChangingObjectsEvent::WhileChangingObjectsEvent(LayerWithChangeableObjects *objects, int offset ) :
+	index(object->getValue()), objectsSize( objects->getArraySize()), ChangeableObjectsEvent( objects ), offset( offset) {}
 
 	WhileChangingObjectsEvent *WhileChangingObjectsEvent::copy()
 	{
@@ -25,9 +25,7 @@ namespace ui
 
 	WhileChangingObjectsEvent *WhileChangingObjectsEvent::createFromYaml(const YAML::Node &node)
 	{
-		uint index;
 		LayerWithChangeableObjects *object = nullptr;
-		node["index"] >> index;
 
 		if (node["object"]) node["object"] >> object;
 

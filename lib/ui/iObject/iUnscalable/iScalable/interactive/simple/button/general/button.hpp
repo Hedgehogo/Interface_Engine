@@ -4,13 +4,15 @@
 namespace ui {
 	class Button : public BaseButton {
 	protected:
-		uint16_t interactionIndex;
-		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) override;
+		int interactionIndex;
 	
 	public:
-		Button(ui::IUninteractive *background, uint16_t interaction);
-		
+		Button(ui::IUninteractive *background, int interaction);
+
+		Button(ui::IUninteractive *background, IInteraction *interaction);
+
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) override;
+
 		Button* copy() override;
 
         static Button* createFromYaml(const YAML::Node &node);

@@ -5,20 +5,21 @@
 
 namespace ui
 {
-	class ChangeObjectsEvent : public ChangeableObjectsEvent
+	class ChangeObjectEvent : public ChangeableObjectsEvent
 	{
 	protected:
 		uint index;
+		std::shared_ptr<WithValue<uint>> value;
 
 		void startPressed() override;
 		void stopPressed() override;
 		void whilePressed() override;
 		void whileNotPressed() override;
 	public:
-		ChangeObjectsEvent(uint index, LayerWithChangeableObjects *objects = nullptr );
+		ChangeObjectEvent(std::shared_ptr<WithValue<uint>> value, uint index);
 
-		ChangeObjectsEvent* copy() override;
+		ChangeObjectEvent* copy() override;
 
-		static ChangeObjectsEvent* createFromYaml(const YAML::Node &node);
+		static ChangeObjectEvent* createFromYaml(const YAML::Node &node);
 	};
 } // ui

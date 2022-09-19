@@ -33,3 +33,14 @@ void ui::OneButtonInteraction::finish(sf::Vector2i mousePosition) {
 ui::OneButtonInteraction *ui::OneButtonInteraction::copy() {
 	return new OneButtonInteraction{event->copy(), button};
 }
+
+ui::OneButtonInteraction *ui::OneButtonInteraction::createFromYaml(const YAML::Node &node)
+{
+	ButtonEvent *event;
+	Key button { ui::Key::mouseLeft };
+
+	node["event"] >> event;
+	if (node["button"]) button = createKeyFromYaml(node["button"]);
+
+	return new OneButtonInteraction {event, button};
+}

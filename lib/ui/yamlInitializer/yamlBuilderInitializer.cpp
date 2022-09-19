@@ -21,11 +21,12 @@ namespace ui {
 		YamlBuilder<BasePositioning2>::add(Positioning2::createFromYaml, "Positioning2", {"Pos2", "P2"});
 		YamlBuilder<BasePositioning2>::add(InternalPositioning2::createFromYaml, "InternalPositioning2", {"InternalPos2", "IP2"});
 
-		YamlBuilder<ButtonEvent>::add( ChangeObjectsEvent::createFromYaml, "ChangeObjectsEvent", { "COE", "ChangeObjectE"});
+		YamlBuilder<ButtonEvent>::add( ChangeObjectEvent::createFromYaml, "ChangeObjectEvent", { "COE", "ChangeObjectE"});
 		YamlBuilder<ButtonEvent>::add( WhileChangingObjectsEvent::createFromYaml, "WhileChangingObjectsEvent", { "WhileChangingO", "WCO"});
 
 
         YamlBuilder<IInteraction>::add(ButtonsInteraction::createFromYaml, "ButtonsInteraction", {"BI"});
+        YamlBuilder<IInteraction>::add(OneButtonInteraction::createFromYaml, "OneButtonInteraction", {"OBI"});
         YamlBuilder<IInteraction>::add(HotkeyInteraction::createFromYaml, "HotkeyInteraction", {"HI"});
         YamlBuilder<IInteraction>::add(EmptyInteraction::createFromYaml, "EmptyInteraction", {"EI"});
 

@@ -1,6 +1,22 @@
-type: LWCO
-objects:
-  - type: FullColor
-    color: ff0000
-  - type: FullColor
-    color: 0000ff
+{
+  "objects": [
+    {
+      "type": "FullColor",
+      "color": "FF0000"
+    },
+    {
+      "type": "FullColor",
+      "color": "00FFD3"
+    },
+    {
+      "type": "FullColor",
+      "color": "AFDFC3"
+    }
+  ],
+  "value": {
+    "var": "freeEj",
+    "level": {
+      "absolute": 0
+    }
+  }
+}

@@ -26,5 +26,7 @@ namespace ui {
 		void finish(sf::Vector2i mousePosition) override;
 		
 		OneButtonInteraction* copy() override;
+
+		static OneButtonInteraction* createFromYaml(const YAML::Node &node);
 	};
 }

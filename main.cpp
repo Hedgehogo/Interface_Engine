@@ -26,25 +26,16 @@ int main() {
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
 
-	ui::LayerWithChangeableObjects *testVariable = new ui::LayerWithChangeableObjects {
-		{
-			new ui::FullColor(sf::Color::Red),
-			new ui::FullColor(sf::Color::Yellow),
-			new ui::FullColor(sf::Color::Blue)
-		}
-	};
+	ui::LayerWithChangeableObjects *huita { ui::loadFromYaml<ui::LayerWithChangeableObjects>("../test.yaml") };
+	ui::Button *zalupa { ui::loadFromYaml<ui::Button>("../subobject.yaml") };
 
 	ui::Interface interface {
-		new ui::LayerWithBorderVertical {
-			{
-				testVariable,
-				new ui::Button {new ui::FullColor(sf::Color::Green), 1}
-			}
-		},
+//		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
+		new ui::LayerWithBorderVertical {huita, zalupa},
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
 				ui::MouseLambdaInteraction::debug.copy(),
-				new ui::OneButtonInteraction( new ui::WhileChangingObjectsEvent { testVariable, -100 }, ui::Key::mouseLeft)
+//				new ui::OneButtonInteraction( new ui::ChangeObjectEvent { testVariable->getValue(), 1 }, ui::Key::mouseLeft)
 			}
 		}
 	};

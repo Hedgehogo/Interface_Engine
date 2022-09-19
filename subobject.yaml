@@ -1,6 +1,14 @@
-type: LWCO
-objects:
-  - type: FullColor
-    color: ff0000
-  - type: FullColor
-    color: 0000ff
+{
+  "background": {
+    "type": "FullColor",
+    "color": "FFFF88"
+  },
+  "interaction": {
+    "type": "OBI",
+    "event": {
+      "type": "ChangeObjectEvent",
+      "value": "freeEj",
+      "index": 1
+    }
+  }
+}
