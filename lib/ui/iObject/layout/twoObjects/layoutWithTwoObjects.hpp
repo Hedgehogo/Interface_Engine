@@ -9,7 +9,7 @@ namespace ui {
 		IScalable* secondObject;
 	
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 		
 		explicit LayoutWithTwoObjects(IScalable* firstObject, IScalable* secondObject);
 		

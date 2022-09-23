@@ -7,7 +7,7 @@ namespace ui {
 	public:
 		DontHidePanelInteraction() = default;
 		
-		void init(Panel& panel, PanelManager& panelManager) override;
+		void init(Panel& panel, IPanelManager &panelManager) override;
 		
 		void setPanel(Panel& panel) override;
 		

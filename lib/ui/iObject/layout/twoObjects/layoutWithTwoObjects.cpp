@@ -4,7 +4,7 @@
 namespace ui {
 	LayoutWithTwoObjects::LayoutWithTwoObjects(IScalable *firstObject, IScalable *secondObject) : firstObject(firstObject), secondObject(secondObject) {}
 	
-	void LayoutWithTwoObjects::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void LayoutWithTwoObjects::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 		secondObject->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		firstObject->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 	}

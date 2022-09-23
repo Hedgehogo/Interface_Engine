@@ -3,18 +3,18 @@
 
 namespace ui {
 	class Panel;
-	class PanelManager;
+	class IPanelManager;
 	class PanelEvent : public ButtonEvent_Simple {
 	protected:
 		Panel* panel;
-		PanelManager* panelManager;
+		IPanelManager* panelManager;
 		
 		void copy(PanelEvent* panelEvent);
 		
 	public:
 		PanelEvent();
 		
-		virtual void init(Panel& panel, PanelManager& panelManager);
+		virtual void init(Panel& panel, ui::IPanelManager &panelManager);
 		
 		void setPanel(Panel& panel);
 		

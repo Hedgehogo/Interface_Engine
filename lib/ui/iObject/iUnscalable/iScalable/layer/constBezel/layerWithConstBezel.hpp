@@ -13,7 +13,7 @@ namespace ui {
 		float thickness;
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 		
 		LayerWithConstBezel(IScalable *object, IUninteractive *bezel, float thickness, sf::Vector2f minSize = {0, 0});
 		

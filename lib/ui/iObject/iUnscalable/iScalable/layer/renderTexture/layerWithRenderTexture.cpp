@@ -1,7 +1,7 @@
 #include "layerWithRenderTexture.hpp"
 
 namespace ui {
-	void LayerWithRenderTexture::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void LayerWithRenderTexture::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 		this->renderTarget = &renderTarget;
 		this->interactionManager = &interactionManager;
 		drawManager.add(*this);

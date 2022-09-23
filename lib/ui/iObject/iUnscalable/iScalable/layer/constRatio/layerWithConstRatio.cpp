@@ -1,7 +1,7 @@
 #include "layerWithConstRatio.hpp"
 
 namespace ui {
-	void LayerWithConstRatio::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void LayerWithConstRatio::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 		drawManager.add(*this);
 		background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		firstObject->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);

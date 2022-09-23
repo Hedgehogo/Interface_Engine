@@ -21,7 +21,7 @@ namespace ui{
     public:
         Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, Key button = Key::mouseLeft, bool startActive = false);
 
-        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) override;
+        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
 
         void switchValue();
 

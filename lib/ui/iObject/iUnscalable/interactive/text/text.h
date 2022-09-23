@@ -44,7 +44,7 @@ namespace ui {
 
 
         ui::IUninteractive *background;
-        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager);
+        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager);
 
     public:
         Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background = new ui::FullColor(sf::Color::White), int size = 14, sf::Font *font = nullptr, sf::Color textColor = sf::Color::Black,

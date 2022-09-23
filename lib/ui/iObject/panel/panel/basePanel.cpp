@@ -1,5 +1,5 @@
 #include "basePanel.hpp"
-#include "../manager/panelManager.hpp"
+#include "../manager/general/panelManager.hpp"
 #include "../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
@@ -7,7 +7,7 @@ namespace ui {
 		LayoutWithObject(object), sizing(sizing), positioning(positioning),
 		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {}
 	
-	void BasePanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void BasePanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 		panelManager.addPanel(this);
 		sf::Vector2f objectNormalSize = object->getNormalSize();
 		sizing->init(renderTarget, objectNormalSize);

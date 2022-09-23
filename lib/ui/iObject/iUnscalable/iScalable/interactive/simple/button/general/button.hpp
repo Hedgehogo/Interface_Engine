@@ -11,7 +11,7 @@ namespace ui {
 
 		Button(ui::IUninteractive *background, IInteraction *interaction);
 
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
 
 		Button* copy() override;
 

@@ -28,7 +28,7 @@ ui::TextBlock::TextBlock(std::u32string text, sf::Color textColor, sf::Font *fon
 
 ui::TextBlock::TextBlock(std::u32string  str, ui::TextVariables textVariables, std::vector<BaseLine*> lines) : str(str), BaseTextBlock(textVariables), lines(lines) {}
 
-void ui::TextBlock::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+void ui::TextBlock::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
     for (BaseCharacter*& character : textCharacters) {
         character->init(renderTarget);
     }

@@ -1,7 +1,7 @@
 #include "onlyDrawable.hpp"
 
 namespace ui {
-    void OnlyDrawable::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+    void OnlyDrawable::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
         drawManager.add(*this);
         this->renderTarget = &renderTarget;
     }

@@ -44,7 +44,7 @@ namespace ui {
         delete selectionInteraction;
     }
 
-    void Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
+    void Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
         updateManager.add(*this);
         this->renderTarget = &renderTarget;
         background->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);

@@ -37,6 +37,12 @@ namespace ui {
 	void PanelManager::addPanel(BasePanel *panel) {
 		panels.insert(panels.begin(), panel);
 	}
+
+	void PanelManager::removePanel(BasePanel *panel)
+	{
+		if (auto elem = std::find( panels.begin(), panels.end(), panel); elem != panels.end())
+			panels.erase( elem);
+	}
 	
 	void PanelManager::displayPanel(BasePanel *panel) {
 		if(std::find(activePanels.begin(), activePanels.end(), panel) == activePanels.end())

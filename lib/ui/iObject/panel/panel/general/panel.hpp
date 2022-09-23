@@ -1,6 +1,6 @@
 #pragma once
 #include "../basePanel.hpp"
-#include "../../manager/panelManager.hpp"
+#include "../../manager/general/panelManager.hpp"
 #include "../../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
@@ -16,7 +16,7 @@ namespace ui {
 		void copy(Panel* panel);
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 		
 		Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, BaseSizing2 *sizing, BasePositioning2 *positioning, bool displayed = false);
 		

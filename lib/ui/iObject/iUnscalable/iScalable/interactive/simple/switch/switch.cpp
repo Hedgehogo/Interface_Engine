@@ -7,7 +7,7 @@ namespace ui{
     Switch::Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, Key button, bool startActive) :
         Interactive_Simple(new OneButtonInteraction{new SwitchEvent{*this}, button}), activeBackground(activeBackground), inactiveBackground(inactiveBackground), active(startActive){}
 
-    void Switch::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
+    void Switch::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
 		Interactive_Simple::init(renderTarget, drawManager, updateManager, panelManager);
         drawManager.add(*this);
 		activeBackground->init(renderTarget, activeDrawManager, updateManager, *interactionManager, *interactionStack, panelManager);

@@ -1,7 +1,7 @@
 #include "layerWithConstCenter.hpp"
 
 namespace ui {
-	void LayerWithConstCenter::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void LayerWithConstCenter::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 		background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		drawManager.add(*this);

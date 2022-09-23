@@ -1,4 +1,5 @@
 #include "dontMovePanelInteraction.hpp"
+#include "../../../../manager/iPanelManager.hpp"
 
 namespace ui {
 	DontMovePanelInteraction::DontMovePanelInteraction() : MovePanelInteraction() {}
@@ -9,7 +10,7 @@ namespace ui {
 	
 	bool DontMovePanelInteraction::update(sf::Vector2i mousePosition) { return false; }
 	
-	void DontMovePanelInteraction::init(Panel &panel, PanelManager &panelManager) {}
+	void DontMovePanelInteraction::init(Panel &panel, ui::IPanelManager &panelManager) {}
 	
 	void DontMovePanelInteraction::setPanel(Panel &panel) {}
 	

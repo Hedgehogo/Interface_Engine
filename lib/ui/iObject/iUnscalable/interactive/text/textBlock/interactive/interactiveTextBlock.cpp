@@ -9,7 +9,7 @@ ui::InteractiveTextBlock::InteractiveTextBlock(int indexInteraction, std::u32str
                                                sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor,sf::Color inactiveBackgroundSelectionColor) :
     indexInteraction(indexInteraction), interaction(nullptr), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor), interact(false), oldInteract(false) {}
 
-void ui::InteractiveTextBlock::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+void ui::InteractiveTextBlock::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 	TextBlock::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
     this->interactionManager = &interactionManager;
     if (!interaction)

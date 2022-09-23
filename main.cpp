@@ -26,12 +26,12 @@ int main() {
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
 
-	ui::LayerWithChangeableObjects *huita { ui::loadFromYaml<ui::LayerWithChangeableObjects>("../test.yaml") };
-	ui::Button *zalupa { ui::loadFromYaml<ui::Button>("../subobject.yaml") };
+	ui::LayerWithChangeableObjects *first { ui::loadFromYaml<ui::LayerWithChangeableObjects>("../test.yaml") };
+	ui::Button *second { ui::loadFromYaml<ui::Button>("../subobject.yaml") };
 
 	ui::Interface interface {
 //		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
-		new ui::LayerWithBorderVertical {huita, zalupa},
+		new ui::LayerWithBorderVertical {first, second},
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
 				ui::MouseLambdaInteraction::debug.copy(),

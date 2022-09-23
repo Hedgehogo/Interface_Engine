@@ -8,7 +8,7 @@ namespace ui
 	LayerWithChangeableObjects::LayerWithChangeableObjects(std::vector<IScalable *> objects, uint index, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithObjectsArray(objects), objects(std::move(objects)), value( std::make_shared<WithValue<uint>>( index)), drawManagers( this->objects.size()) {}
 
-	void LayerWithChangeableObjects::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager)
+	void LayerWithChangeableObjects::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager)
 	{
 		drawManager.add(*this);
 

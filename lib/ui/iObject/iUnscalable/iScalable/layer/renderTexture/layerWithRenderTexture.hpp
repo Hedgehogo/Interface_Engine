@@ -17,7 +17,7 @@ namespace ui {
 		void copy(LayerWithRenderTexture* layerWithRenderTexture);
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 		
 		LayerWithRenderTexture(IScalable *object, bool optimize = true, sf::Vector2f minSize = {});
 		

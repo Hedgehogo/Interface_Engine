@@ -1,7 +1,7 @@
 #include "baseSlider.hpp"
 #include <cmath>
 
-void ui::BaseSlider::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
+void ui::BaseSlider::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
 	Interactive_Simple::init(renderTarget, drawManager, updateManager, panelManager);
 	drawManager.add(*this);
 	background->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);

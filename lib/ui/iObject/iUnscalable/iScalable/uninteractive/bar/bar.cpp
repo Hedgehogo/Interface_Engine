@@ -1,7 +1,7 @@
 #include <cmath>
 #include "bar.hpp"
 
-void ui::Bar::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+void ui::Bar::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 	background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 	strip->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 }

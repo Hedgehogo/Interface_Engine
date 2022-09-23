@@ -4,7 +4,7 @@
 namespace ui {
 	Interactive::Interactive() : interactionStack(nullptr) {}
 	
-	void Interactive::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void Interactive::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 		this->interactionStack = &interactionStack;
 		this->interactionManager = &interactionManager;
 		

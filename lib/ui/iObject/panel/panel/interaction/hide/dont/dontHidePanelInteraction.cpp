@@ -1,7 +1,8 @@
 #include "dontHidePanelInteraction.hpp"
+#include "../../../../manager/iPanelManager.hpp"
 
 namespace ui {
-	void DontHidePanelInteraction::init(Panel &panel, PanelManager &panelManager) {}
+	void DontHidePanelInteraction::init(Panel &panel, ui::IPanelManager &panelManager) {}
 	
 	void DontHidePanelInteraction::setPanel(Panel &panel) {}
 	

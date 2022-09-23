@@ -2,7 +2,7 @@
 #include "baseButton.hpp"
 
 namespace ui {
-	void BaseButton::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
+	void BaseButton::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
 		Interactive_Simple::init(renderTarget, drawManager, updateManager, panelManager);
 		background->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
 	}

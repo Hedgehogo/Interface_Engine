@@ -5,14 +5,14 @@ namespace ui {
 	class PanelInteraction : public virtual BasePanelInteraction {
 	protected:
 		Panel* panel;
-		PanelManager* panelManager;
+		IPanelManager* panelManager;
 		
 		void copy(PanelInteraction* panelInteraction);
 	
 	public:
 		PanelInteraction();
 		
-		void init(Panel& panel, PanelManager& panelManager) override;
+		void init(Panel& panel, IPanelManager &panelManager) override;
 		
 		void setPanel(Panel& panel) override;
 		

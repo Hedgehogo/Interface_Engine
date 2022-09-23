@@ -29,7 +29,7 @@ namespace ui {
 
         ~InteractiveTextBlock();
 
-        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager);
+        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager);
 
         std::vector<BaseCharacter*> getCharacters() override;
 

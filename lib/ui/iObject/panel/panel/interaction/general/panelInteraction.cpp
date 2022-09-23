@@ -1,8 +1,9 @@
 #include "panelInteraction.hpp"
+#include "../../../manager/iPanelManager.hpp"
 
 ui::PanelInteraction::PanelInteraction() : panel(nullptr), panelManager(nullptr) {}
 
-void ui::PanelInteraction::init(ui::Panel &panel, ui::PanelManager &panelManager) {
+void ui::PanelInteraction::init(ui::Panel &panel, ui::IPanelManager &panelManager) {
 	this->panel = &panel;
 	this->panelManager = &panelManager;
 }

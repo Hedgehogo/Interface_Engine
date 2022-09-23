@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "../iScalable.hpp"
-#include "../../../panel/manager/panelManager.hpp"
+#include "../../../panel/manager/general/panelManager.hpp"
 #include "../../../../interaction/interactionManager/interactionManager.hpp"
 #include "../../../../interaction/interactionStack/interactionStack.hpp"
 #include "../../../../interaction/event/wheel/wheelEvent.hpp"
@@ -21,7 +21,7 @@ namespace ui {
 		bool initialized;
 		bool active;
 		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 		
 		bool isInWindow(sf::Vector2f position);
 		

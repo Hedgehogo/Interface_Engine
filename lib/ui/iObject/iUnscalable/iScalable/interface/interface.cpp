@@ -4,7 +4,7 @@
 #include <iostream>
 
 namespace ui {
-	void Interface::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &, InteractionStack &, PanelManager &) {
+	void Interface::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &, InteractionStack &, IPanelManager &) {
 		if(!initialized) {
 			this->renderTarget = &renderTarget;
 			drawManager.add(*this);

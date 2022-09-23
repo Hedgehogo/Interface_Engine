@@ -12,10 +12,11 @@ typedef unsigned uint;
 namespace ui {
 	class Panel;
 	class PanelManager;
+	class IPanelManager;
 	
 	class IObject {
 	public:
-		virtual void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) = 0;
+		virtual void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) = 0;
 		
 		virtual ~IObject() = default;
 		

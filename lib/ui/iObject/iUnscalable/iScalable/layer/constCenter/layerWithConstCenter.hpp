@@ -18,7 +18,7 @@ namespace ui {
 		DrawManager secondDrawManager;
 	
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 
 		LayerWithConstCenter(IScalable *object, IUninteractive *background, float aspectRatio, sf::Vector2f minSize = {});
 

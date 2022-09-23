@@ -4,7 +4,7 @@ namespace ui {
     LayerWithBackground::LayerWithBackground(IScalable *object, IUninteractive *background, sf::Vector2f offset, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithObject(object), LayoutWithBackground(background), offset(offset) {}
 
-    void LayerWithBackground::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+    void LayerWithBackground::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 		background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
     }

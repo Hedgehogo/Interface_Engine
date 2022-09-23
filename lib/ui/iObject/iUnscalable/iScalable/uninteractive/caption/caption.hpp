@@ -18,7 +18,7 @@ namespace ui {
 		DrawManager drawManager;
         InternalPositioning2 internalPositioning2;
 		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) override;
+		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 	
 	public:
 		static void setDefaultColor(sf::Color color = sf::Color::White);

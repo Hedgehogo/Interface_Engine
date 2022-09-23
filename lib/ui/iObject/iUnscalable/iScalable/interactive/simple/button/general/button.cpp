@@ -6,7 +6,7 @@ namespace ui {
 
 	Button::Button(ui::IUninteractive *background, IInteraction *interaction) : BaseButton(background, interaction), interactionIndex(-1) {}
 
-    void Button::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, PanelManager &panelManager) {
+    void Button::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
 	    if (interactionIndex >= 0)
 		    interaction = interactionStack->at(interactionIndex);
 		BaseButton::init(renderTarget, drawManager, updateManager, panelManager);

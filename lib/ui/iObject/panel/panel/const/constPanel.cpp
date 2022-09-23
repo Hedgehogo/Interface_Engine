@@ -1,12 +1,12 @@
 #include "constPanel.hpp"
-#include "../../manager/panelManager.hpp"
+#include "../../manager/general/panelManager.hpp"
 #include "../../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
 	ConstPanel::ConstPanel(IScalable *object, BaseSizing2 *sizing, BasePositioning2 *positioning, bool displayed) :
 		BasePanel(object, sizing, positioning, displayed) {}
 	
-	void ConstPanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void ConstPanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 		BasePanel::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		object->init(renderTarget, this->drawManager, this->updateManager, interactionManager, interactionStack, panelManager);
 		panelManager.displayPanel(this);

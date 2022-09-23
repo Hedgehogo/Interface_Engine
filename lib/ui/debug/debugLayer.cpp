@@ -6,7 +6,7 @@ namespace ui {
 	DebugLayer::DebugLayer(IScalable *object) :
 		Layer({}), object(object), renderTarget(nullptr), active(false), drawn(false) {}
 	
-	void DebugLayer::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, PanelManager &panelManager) {
+	void DebugLayer::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		drawManager.add(*this);
 		this->renderTarget = &renderTarget;

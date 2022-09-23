@@ -1,8 +1,9 @@
 #include "panelEvent.hpp"
+#include "../../../../manager/iPanelManager.hpp"
 
 ui::PanelEvent::PanelEvent() : panel(nullptr), panelManager(nullptr) {}
 
-void ui::PanelEvent::init(ui::Panel &panel, ui::PanelManager &panelManager) {
+void ui::PanelEvent::init(ui::Panel &panel, ui::IPanelManager &panelManager) {
 	this->panel = &panel;
 	this->panelManager = &panelManager;
 }
