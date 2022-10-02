@@ -88,33 +88,37 @@ namespace ui {
         return Location2::center;
 	}
 	
-	Location2 createLocation2FromYaml(const YAML::Node &node) {
-		try{
-			std::string str{node.as<std::string>()};
-			
-			if(str == "up-left") {
-				return Location2::upLeft;
-			} else if(str == "up") {
-				return Location2::up;
-			} else if(str == "up-right") {
-				return Location2::upRight;
-			} else if(str == "left") {
-				return Location2::left;
-			} else if(str == "center") {
-				return Location2::center;
-			} else if(str == "right") {
-				return Location2::right;
-			} else if(str == "down-left") {
-				return Location2::downLeft;
-			} else if(str == "down") {
-				return Location2::down;
-			} else if(str == "down-right") {
-				return Location2::downRight;
-			} else {
-				throw YAML::BadConversion{node.Mark()};
-			}
-		} catch(YAML::BadConversion& e) {
-			return createLocation2(createLocationFromYaml(node["vertical"]), createLocationFromYaml(node["horizontal"]));
+	template<>
+	bool convert(const YAML::Node &node, Location2 &location2) {
+		std::string str{node.as<std::string>()};
+		
+		if(str == "up-left") {
+			location2 = Location2::upLeft;
+		} else if(str == "up") {
+			location2 = Location2::up;
+		} else if(str == "up-right") {
+			location2 = Location2::upRight;
+		} else if(str == "left") {
+			location2 = Location2::left;
+		} else if(str == "center") {
+			location2 = Location2::center;
+		} else if(str == "right") {
+			location2 = Location2::right;
+		} else if(str == "down-left") {
+			location2 = Location2::downLeft;
+		} else if(str == "down") {
+			location2 = Location2::down;
+		} else if(str == "down-right") {
+			location2 = Location2::downRight;
+		} else {
+			location2 = createLocation2(node["vertical"].as<Location>(), node["horizontal"].as<Location>());
 		}
+		return true;
+	}
+	
+	Location2 createLocation2FromYaml(const YAML::Node &node) {
+		Location2 location2;
+		convert(node, location2);
+		return location2;
 	}
 }

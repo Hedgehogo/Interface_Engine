@@ -7,64 +7,13 @@ namespace ui {
         this->characters = &characters;
         this->lines = &lines;
     }
-
-    BaseResizer *BaseResizer::createFromYaml(const YAML::Node &node) {
-        return nullptr;
-    }
-/*
-    void BaseResizer::addLines(std::vector<BaseLine *> *lines, float startLine, sf::Vector2f endCharacterPos) {
-        if (lines) {
-            for (BaseLine *&line: *lines) {
-                BaseLine *copyLine = line->copy();
-                copyLine->resize(startLine, endCharacterPos.x, endCharacterPos.y);
-                this->lines->push_back(copyLine);
-            }
-        }
-    }
-
-
-    void BaseResizer::lineResize() {
-        for (BaseLine*& line : *lines) {
-            delete line;
-        }
-        lines->clear();
-
-        std::vector<BaseLine *> *oldLine = nullptr;
-        float startLine = 0;
-        float oldYPositionCharacter = 0;
-        for (int i = 0; i < characters->size(); ++i){
-            BaseCharacter* character = (*characters)[i];
-            std::vector<BaseLine *> &characterLine = character->getLine();
-            sf::Vector2f characterPos = character->getPosition();
-
-            if (oldYPositionCharacter != characterPos.y) {
-                if (i != 0)
-                    addLines(oldLine, startLine, {(*characters)[i - 1]->getPosition().x, oldYPositionCharacter});
-
-                oldLine = &characterLine;
-                startLine = characterPos.x;
-                oldYPositionCharacter = characterPos.y;
-            } else if (oldLine != &characterLine) {
-                addLines(oldLine, startLine, characterPos);
-
-                oldLine = &characterLine;
-                startLine = characterPos.x;
-            }
-        }
-        if (characters->size() != 0){
-            BaseCharacter* lastCharacter = (*characters)[characters->size() - 1];
-            sf::Vector2f lastCharacterPosition = lastCharacter->getPosition();
-
-            addLines(oldLine, startLine, {lastCharacterPosition.x + lastCharacter->getAdvance(), lastCharacterPosition.y});
-        }
-    }
-*/
-}
-
-void operator >> (const YAML::Node& node, ui::BaseResizer::Align& align){
-
-    if (node.as<std::string>() == "left") align = ui::BaseResizer::Align::left;
-    else if (node.as<std::string>() == "right") align = ui::BaseResizer::Align::right;
-    else if (node.as<std::string>() == "center") align = ui::BaseResizer::Align::center;
-    else throw YAML::BadConversion{node.Mark()};
+	
+	template<>
+	bool convert(const YAML::Node& node, BaseResizer::Align& align){
+		if (node.as<std::string>() == "left") align = ui::BaseResizer::Align::left;
+		else if (node.as<std::string>() == "right") align = ui::BaseResizer::Align::right;
+		else if (node.as<std::string>() == "center") align = ui::BaseResizer::Align::center;
+		else throw YAML::BadConversion{node.Mark()};
+		return true;
+	}
 }

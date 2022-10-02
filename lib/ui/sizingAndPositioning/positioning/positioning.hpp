@@ -14,7 +14,5 @@ namespace ui {
 		float operator()(float parentPosition, float objectSize, float parentSize, float targetSize);
 		
 		virtual Positioning* copy() = 0;
-		
-		static Positioning* createFromYaml(const YAML::Node &node);
 	};
 }

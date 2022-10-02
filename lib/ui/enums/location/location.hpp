@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../yaml/yamlWithSfml/yamlBuilder/yamlBuilder.hpp"
+#include "../../../yaml/yamlWithSfml/yaml.hpp"
 
 namespace ui {
 	enum class Location {
@@ -7,6 +7,9 @@ namespace ui {
 		center,
 		end
 	};
+	
+	template<>
+	bool convert(const YAML::Node &node, Location &location);
 	
 	Location createLocationFromYaml(const YAML::Node &node);
 }

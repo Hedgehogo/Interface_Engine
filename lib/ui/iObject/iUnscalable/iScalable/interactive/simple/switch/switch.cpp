@@ -73,7 +73,7 @@ namespace ui{
 		if(node["button"])
 			button = createKeyFromYaml(node["button"]);
 		if(node["state"]) {
-			startActive = createBoolFromYaml(node["state"], "active", "inactive");
+			startActive = convertBool(node["state"], "active", "inactive");
 		} else if(node["start-active"]) {
 			node["start-active"] >> startActive;
 		}

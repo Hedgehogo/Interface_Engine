@@ -21,8 +21,6 @@ namespace ui {
 
         virtual BaseLine* copy() = 0;
 
-        static BaseLine* createFromYaml(const YAML::Node &node);
-
         virtual ~BaseLine() = default;
     };
 }

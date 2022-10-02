@@ -18,7 +18,5 @@ namespace ui {
 		virtual float getParentSize(float objectSize);
 		
 		virtual Sizing* copy() = 0;
-		
-		static Sizing* createFromYaml(const YAML::Node &node);
 	};
 }

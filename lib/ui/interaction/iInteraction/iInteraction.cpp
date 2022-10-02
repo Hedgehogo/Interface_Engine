@@ -14,8 +14,4 @@ namespace ui {
 	bool IInteraction::operator<(ui::IInteraction &interaction) {
 		return getPriority() < interaction.getPriority();
 	}
-
-    IInteraction *IInteraction::createFromYaml(const YAML::Node &node) {
-        return nullptr;
-    }
 }

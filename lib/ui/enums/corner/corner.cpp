@@ -1,18 +1,26 @@
 #include "corner.hpp"
 
 namespace ui {
-	Corner createCornerFromYaml(const YAML::Node &node) {
+	template<>
+	bool convert(const YAML::Node &node, Corner &corner) {
 		std::string str{node.as<std::string>()};
 		if(str == "up-right") {
-			return Corner::upRight;
+			corner = Corner::upRight;
 		} else if(str == "up-left") {
-			return Corner::upLeft;
+			corner = Corner::upLeft;
 		} else if(str == "down-right") {
-			return Corner::downRight;
+			corner = Corner::downRight;
 		} else if(str == "down-left") {
-			return Corner::downLeft;
+			corner = Corner::downLeft;
 		} else {
 			throw YAML::BadConversion(node.Mark());
 		}
+		return true;
+	}
+	
+	Corner createCornerFromYaml(const YAML::Node &node) {
+		Corner corner;
+		convert(node, corner);
+		return corner;
 	}
 }

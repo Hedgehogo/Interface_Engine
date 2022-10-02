@@ -48,8 +48,6 @@ namespace ui {
 		
 		virtual IObject* copy() = 0;
 		
-		static IObject* createFromYaml(const YAML::Node &node);
-		
         static sf::Color HSVtoRGB(float H, float S = 1, float V = 1);
 
         static void drawDebug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget &renderTarget, uint hue);

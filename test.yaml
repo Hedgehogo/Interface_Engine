@@ -1,22 +1,23 @@
-{
-  "objects": [
-    {
-      "type": "FullColor",
-      "color": "FF0000"
-    },
-    {
-      "type": "FullColor",
-      "color": "00FFD3"
-    },
-    {
-      "type": "FullColor",
-      "color": "AFDFC3"
-    }
-  ],
-  "value": {
-    "var": "freeEj",
-    "level": {
-      "absolute": 0
-    }
-  }
-}
+type: LWBV
+first-object:
+  type: LWCO
+  objects:
+    - type: FullColor
+      color: FF0000
+    - type: FullColor
+      color: 00FFD3
+    - type: FullColor
+      color: AFDFC3
+  value:
+    var: index
+second-object:
+  type: Button
+  background:
+    type: FullColor
+    color: FFFF88
+  interaction:
+    type: OBI
+    event:
+      type: ChangeObjectEvent
+      value: index
+      index: 1

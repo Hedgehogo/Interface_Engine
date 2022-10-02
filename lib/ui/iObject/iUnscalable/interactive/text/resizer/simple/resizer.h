@@ -20,12 +20,6 @@ namespace ui {
         sf::Vector2f startRender;
         sf::Vector2f endRender;
 
-/*
-        float startLine;
-        std::vector<BaseLine*>* oldLines;
-        std::vector<BaseLine*> lineInNowLine;
-*/
-
         virtual void printCharacter(ui::BaseCharacter *character, float kerning);
 
         virtual void porting(int i);

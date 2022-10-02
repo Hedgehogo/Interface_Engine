@@ -20,8 +20,6 @@ namespace ui {
 		virtual sf::Vector2f operator()(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize);
 		
 		virtual BasePositioning2* copy() = 0;
-		
-		static BasePositioning2* createFromYaml(const YAML::Node &node);
 	};
 	
 	Positioning* createPosition(float coefficient, float offset, bool relativeTarget = false);

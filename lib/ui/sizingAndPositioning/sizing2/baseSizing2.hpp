@@ -22,8 +22,6 @@ namespace ui {
 		virtual sf::Vector2f operator()(sf::Vector2f parentSize);
 		
 		virtual BaseSizing2* copy() = 0;
-		
-		static BaseSizing2* createFromYaml(const YAML::Node &node);
 	};
 	
 	Sizing* createSize(bool relativeParent);

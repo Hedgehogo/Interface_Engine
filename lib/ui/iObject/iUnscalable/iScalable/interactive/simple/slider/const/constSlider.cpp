@@ -1,78 +1,79 @@
 #include <iostream>
 #include "constSlider.hpp"
 
-ui::ConstSlider::ConstSlider(ui::IUninteractive *slider, ui::IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, float sliderScale, Key button, bool wheelHorizontal,
-                             ui::SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
-	BaseSlider(slider, background, value, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
-	
-	sliderSize = slider->getNormalSize();
-	aspectRatio = sliderSize.x / sliderSize.y;
-}
-
-ui::ConstSlider::ConstSlider(ui::IUninteractive *slider, ui::IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, sf::Vector2i division, float sliderScale, Key button, bool wheelHorizontal) :
-	BaseSlider(slider, background, value, new SliderInteraction{*this, button, division, wheelHorizontal}), sliderScale(sliderScale) {
-	
-	sliderSize = slider->getNormalSize();
-	aspectRatio = sliderSize.x / sliderSize.y;
-}
-
-void ui::ConstSlider::resize(sf::Vector2f size, sf::Vector2f position) {
-	this->position = position;
-	if(size.x / aspectRatio < size.y) {
-		sliderSize = sf::Vector2f{size.x, size.x / aspectRatio} * sliderScale;
-	} else {
-		sliderSize = sf::Vector2f{size.y * aspectRatio, size.y} * sliderScale;
-	}
-	moveZoneSize = size - sliderSize;
-	background->resize(size, position);
-}
-
-ui::ConstSlider::ConstSlider(ui::IUninteractive *slider, ui::IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, ui::SliderInteraction *interaction) :
-	BaseSlider(slider, background, value, interaction) {}
-
-ui::ConstSlider* ui::ConstSlider::copy() {
-	ConstSlider* constSlider {new ConstSlider{slider->copy(), background->copy(), value, dynamic_cast<SliderInteraction*>(interaction->copy())}};
-	dynamic_cast<SliderInteraction*>(constSlider->interaction)->setSlider(*constSlider);
-	BaseSlider::copy(constSlider);
-	return constSlider;
-}
-
-ui::ConstSlider *ui::ConstSlider::createFromYaml(const YAML::Node &node) {
-	ui::IUninteractive *slider;
-	ui::IUninteractive *background;
-	std::shared_ptr<WithCoefficientVec2> value;
-	float sliderScale{1.0f};
-	Key button{ui::Key::mouseLeft};
-	bool wheelHorizontal{false};
-	
-	node["slider"] >> slider;
-	node["background"] >> background;
-	value = ui::Buffer::get<WithCoefficientVec2>(node["value"]);
-	if(node["slider-scale"])
-		node["slider-scale"] >> sliderScale;
-	if(node["button"])
-		button = createKeyFromYaml(node["button"]);
-	if(node["default-wheel"]) {
-		wheelHorizontal = createBoolFromYaml(node["default-wheel"], "horizontal", "vertical");
+namespace ui {
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2> &value, float sliderScale, Key button, bool wheelHorizontal,
+							 SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
+		BaseSlider(slider, background, value, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
+		
+		sliderSize = slider->getNormalSize();
+		aspectRatio = sliderSize.x / sliderSize.y;
 	}
 	
-	if(!node["division"]) {
-		SliderWheelEvent::Relativity wheelRelativity{SliderWheelEvent::Relativity::relationArea};
-		sf::Vector2f wheelSensitivity{0.2f, 0.2f};
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2> &value, sf::Vector2i division, float sliderScale, Key button, bool wheelHorizontal) :
+		BaseSlider(slider, background, value, new SliderInteraction{*this, button, division, wheelHorizontal}), sliderScale(sliderScale) {
 		
-		if(node["wheel-relativity"])
-			wheelRelativity = SliderWheelEvent::createRelativityFromYaml(node["wheel-relativity"]);
-		if(node["wheel-sensitivity"])
-			node["wheel-sensitivity"] >> wheelSensitivity;
+		sliderSize = slider->getNormalSize();
+		aspectRatio = sliderSize.x / sliderSize.y;
+	}
+	
+	void ConstSlider::resize(sf::Vector2f size, sf::Vector2f position) {
+		this->position = position;
+		if(size.x / aspectRatio < size.y) {
+			sliderSize = sf::Vector2f{size.x, size.x / aspectRatio} * sliderScale;
+		} else {
+			sliderSize = sf::Vector2f{size.y * aspectRatio, size.y} * sliderScale;
+		}
+		moveZoneSize = size - sliderSize;
+		background->resize(size, position);
+	}
+	
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2> &value, SliderInteraction *interaction) :
+		BaseSlider(slider, background, value, interaction) {
+	}
+	
+	ConstSlider *ConstSlider::copy() {
+		ConstSlider *constSlider{new ConstSlider{slider->copy(), background->copy(), value, dynamic_cast<SliderInteraction *>(interaction->copy())}};
+		dynamic_cast<SliderInteraction *>(constSlider->interaction)->setSlider(*constSlider);
+		BaseSlider::copy(constSlider);
+		return constSlider;
+	}
+	
+	ConstSlider *ConstSlider::createFromYaml(const YAML::Node &node) {
+		IUninteractive *slider;
+		IUninteractive *background;
+		std::shared_ptr<WithCoefficientVec2> value;
+		float sliderScale{1.0f};
+		Key button{Key::mouseLeft};
+		bool wheelHorizontal{false};
 		
-		return new ConstSlider{slider, background, value, sliderScale, button, wheelHorizontal, wheelRelativity, wheelSensitivity};
-		return nullptr;
-	} else {
-		sf::Vector2i division;
+		node["slider"] >> slider;
+		node["background"] >> background;
+		value = Buffer::get<WithCoefficientVec2>(node["value"]);
+		if(node["slider-scale"])
+			node["slider-scale"] >> sliderScale;
+		if(node["button"])
+			button = createKeyFromYaml(node["button"]);
+		if(node["default-wheel"]) {
+			wheelHorizontal = convertBool(node["default-wheel"], "horizontal", "vertical");
+		}
 		
-		node["division"] >> division;
-		
-		return new ConstSlider{slider, background, value, division, sliderScale, button, wheelHorizontal};
-		return nullptr;
+		if(!node["division"]) {
+			SliderWheelEvent::Relativity wheelRelativity{SliderWheelEvent::Relativity::relationArea};
+			sf::Vector2f wheelSensitivity{0.2f, 0.2f};
+			
+			if(node["wheel-relativity"])
+				wheelRelativity = SliderWheelEvent::createRelativityFromYaml(node["wheel-relativity"]);
+			if(node["wheel-sensitivity"])
+				node["wheel-sensitivity"] >> wheelSensitivity;
+			
+			return new ConstSlider{slider, background, value, sliderScale, button, wheelHorizontal, wheelRelativity, wheelSensitivity};
+		} else {
+			sf::Vector2i division;
+			
+			node["division"] >> division;
+			
+			return new ConstSlider{slider, background, value, division, sliderScale, button, wheelHorizontal};
+		}
 	}
 }

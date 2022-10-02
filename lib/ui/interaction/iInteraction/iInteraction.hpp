@@ -32,7 +32,5 @@ namespace ui {
 		bool operator<(IInteraction& interaction);
 		
 		virtual IInteraction* copy() = 0;
-
-        static IInteraction* createFromYaml(const YAML::Node &node);
 	};
 }

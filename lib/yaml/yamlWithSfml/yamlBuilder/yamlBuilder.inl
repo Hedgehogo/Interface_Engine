@@ -126,23 +126,40 @@ namespace ui {
 	T *loadFromYaml(std::string filePath) {
 		YAML::Node node = YAML::LoadFile(filePath);
 		T* object;
-		Buffer::readLevel([&](){
+		Buffer::readLevel([&node, &object](){
 			node >> object;
 		});
 		return object;
 	}
-}
-
-template<typename T>
-std::void_t<decltype(T::createFromYaml(std::declval<YAML::Node>()))>
-operator>>(const YAML::Node &node, T*& object) {
-	if(node["type"]) {
+	
+	template <typename T>
+	std::enable_if_t<std::is_class_v<T>, YAML::Node>
+	convert(const T *&object) {
+		YAML::Node node;
+		return node;
+	}
+	
+	template <typename T>
+	std::enable_if_t<std::is_class_v<T> && std::is_abstract_v<T>, bool>
+	convert(const YAML::Node &node, T *&object) {
 		std::string type;
 		node["type"] >> type;
 		object = ui::YamlBuilder<T>::build(node, type);
-	} else {
-		T* result = dynamic_cast<T*>(T::createFromYaml(node));
-		if(!result) throw ui::AbstractTypeYamlException{typeid(T)};
-		object = result;
+		return true;
+	}
+	
+	template <typename T>
+	std::enable_if_t<std::is_class_v<T> && !std::is_abstract_v<T>, bool>
+	convert(const YAML::Node &node, T *&object) {
+		if(node["type"]) {
+			std::string type;
+			node["type"] >> type;
+			object = ui::YamlBuilder<T>::build(node, type);
+		} else {
+			T* result = dynamic_cast<T*>(T::createFromYaml(node));
+			if(!result) throw ui::AbstractTypeYamlException{typeid(T)};
+			object = result;
+		}
+		return true;
 	}
 }

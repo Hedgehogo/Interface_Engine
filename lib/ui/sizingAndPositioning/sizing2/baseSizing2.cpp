@@ -5,10 +5,6 @@ namespace ui {
 		return this->findSize(parentSize);
 	}
 	
-	BaseSizing2 *BaseSizing2::createFromYaml(const YAML::Node &node) {
-		return nullptr;
-	}
-	
 	Sizing *createSize(bool relativeParent) {
 		if(!relativeParent) {
 			return new RelativeNormalSizing{};

@@ -13,25 +13,21 @@ float calculateMediumFPS(std::array<float, T> lastFPS) {
 
 int main() {
 	ui::yamlBuilderInit();
-
+	
     sf::ContextSettings settings;
     settings.antialiasingLevel = 1;
-
+	
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
 	window.setFramerateLimit(60);
-
+	
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
-
-	ui::LayerWithChangeableObjects *first { ui::loadFromYaml<ui::LayerWithChangeableObjects>("../test.yaml") };
-	ui::Button *second { ui::loadFromYaml<ui::Button>("../subobject.yaml") };
-
+	
 	ui::Interface interface {
-//		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
-		new ui::LayerWithBorderVertical {first, second},
+		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
 				ui::MouseLambdaInteraction::debug.copy(),
@@ -39,16 +35,15 @@ int main() {
 			}
 		}
 	};
-
+	
 	interface.init(window);
     window.setSize(sf::Vector2u(ui::max(interface.getNormalSize(), {1, 1})));
     interface.setSize(ui::max(interface.getNormalSize(), {1, 1}));
-
+	
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};
-	
 	while(window.isOpen()) {
-
+		
         lastFPS[0] = 1.f / clock.restart().asSeconds();
 		std::rotate(lastFPS.begin(), lastFPS.begin() + 1, lastFPS.end());
 		float mediumFPS = calculateMediumFPS(lastFPS);
@@ -58,7 +53,7 @@ int main() {
 		sf::Event event{};
 		while(window.pollEvent(event)) {
             ui::handleEvent(event);
-
+			
 			if(event.type == sf::Event::Closed) {
 				window.close();
 			}

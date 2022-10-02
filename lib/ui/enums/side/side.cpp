@@ -1,18 +1,26 @@
 #include "side.hpp"
 
 namespace ui {
-	Side createSideFromYaml(const YAML::Node &node) {
+	template<>
+	bool convert(const YAML::Node &node, Side &side) {
 		std::string str{node.as<std::string>()};
 		if(str == "up") {
-			return Side::up;
+			side = Side::up;
 		} else if(str == "down") {
-			return Side::down;
+			side = Side::down;
 		} else if(str == "right") {
-			return Side::right;
+			side = Side::right;
 		} else if(str == "left") {
-			return Side::left;
+			side = Side::left;
 		} else {
 			throw YAML::BadConversion(node.Mark());
 		}
+		return true;
+	}
+	
+	Side createSideFromYaml(const YAML::Node &node) {
+		Side side;
+		convert(node, side);
+		return side;
 	}
 }

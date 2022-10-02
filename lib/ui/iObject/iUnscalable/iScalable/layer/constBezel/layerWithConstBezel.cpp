@@ -69,3 +69,9 @@ namespace ui {
         object->drawDebug(renderTarget, indent, indentAddition, hue + hueOffset, hueOffset);
 	}
 }
+
+namespace YAML {
+	using namespace ui;
+	typedef LayerWithConstBezel geh;
+}
+

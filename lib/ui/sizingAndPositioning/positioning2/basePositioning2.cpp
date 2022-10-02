@@ -5,10 +5,6 @@ namespace ui {
 		return this->findPosition(parentPosition, parentSize, objectSize);
 	}
 	
-	BasePositioning2 *BasePositioning2::createFromYaml(const YAML::Node &node) {
-		return nullptr;
-	}
-	
 	Positioning *createPosition(float coefficient, float offset, bool relativeTarget) {
 		if(!relativeTarget) {
 			return new InternalPositioning{coefficient, offset};

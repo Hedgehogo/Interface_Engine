@@ -1,16 +1,24 @@
 #include "location.hpp"
 
 namespace ui {
-	Location createLocationFromYaml(const YAML::Node &node) {
+	template<>
+	bool convert(const YAML::Node &node, Location &location) {
 		std::string str{node.as<std::string>()};
 		if(str == "origin") {
-			return Location::origin;
+			location = Location::origin;
 		} else if(str == "center") {
-			return Location::center;
+			location = Location::center;
 		} else if(str == "end") {
-			return Location::end;
+			location = Location::end;
 		} else {
 			throw YAML::BadConversion{node.Mark()};
 		}
+		return true;
+	}
+	
+	Location createLocationFromYaml(const YAML::Node &node) {
+		Location location;
+		convert(node, location);
+		return location;
 	}
 }

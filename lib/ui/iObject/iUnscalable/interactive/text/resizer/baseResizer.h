@@ -37,11 +37,9 @@ namespace ui {
 
         virtual BaseResizer * copy() = 0;
 
-        static BaseResizer* createFromYaml(const YAML::Node &node);
-
         virtual ~BaseResizer() = default;
     };
-
+	
+	template<>
+	bool convert(const YAML::Node &node, BaseResizer::Align &align);
 }
-
-void operator >> (const YAML::Node& node, ui::BaseResizer::Align& align);
