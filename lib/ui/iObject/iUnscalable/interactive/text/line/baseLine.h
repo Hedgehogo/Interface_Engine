@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "../../../../../../yaml/yamlWithSfml/yamlBuilder/yamlBuilder.hpp"
+#include "../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 typedef unsigned uint;
 

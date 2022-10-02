@@ -1,5 +1,5 @@
 #include "interactiveTextBlock.h"
-#include "../../../../../../../yaml/yamlWithSfml/fileBuffer/fileBuffer.hpp"
+#include "../../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 ui::InteractiveTextBlock::InteractiveTextBlock(ui::IInteraction *interaction, std::u32string  text, sf::Color textColor, sf::Font *font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
                                                sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor,sf::Color inactiveBackgroundSelectionColor) :

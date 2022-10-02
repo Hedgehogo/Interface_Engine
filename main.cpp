@@ -27,7 +27,7 @@ int main() {
 	ui::Character::setDebug(true);
 	
 	ui::Interface interface {
-		ui::loadFromYaml<ui::IScalable>("../test.yaml"),
+		ui::loadFromYaml<ui::IScalable>("../example-resources/test.yaml"),
 		new ui::InteractionStack {
 			std::vector<ui::IInteraction *> {
 				ui::MouseLambdaInteraction::debug.copy(),

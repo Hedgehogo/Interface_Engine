@@ -1,5 +1,5 @@
 #pragma once
-#include "../../yaml/yamlWithSfml/yamlBuilder/yamlBuilder.hpp"
+#include "../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 #include "../interaction/interactionManager/interactionManager.hpp"
 #include "../interaction/iInteraction/hotkey/hotkeyInteraction.hpp"

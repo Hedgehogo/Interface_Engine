@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "../../../yaml/yamlWithSfml/yaml.hpp"
+#include "../../../modules/appendix/yaml-cpp/yaml.hpp"
 
 namespace ui {
     enum class Key : int {

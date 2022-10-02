@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../yaml/yamlWithSfml/yaml.hpp"
+#include "../../../modules/appendix/yaml-cpp/yaml.hpp"
 
 namespace ui {
 	enum class Location {

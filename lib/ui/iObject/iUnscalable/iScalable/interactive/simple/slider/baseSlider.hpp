@@ -2,7 +2,7 @@
 #include "../../../uninteractive/uninteractive.hpp"
 #include "../interactiveSimple.hpp"
 #include "interaction/interaction/sliderInteraction.hpp"
-#include "../../../../../../../yaml/yamlWithSfml/with//vector/general/withVector2.hpp"
+#include "../../../../../../../modules/appendix/yaml-cpp/with//vector/general/withVector2.hpp"
 
 namespace ui {
 	class BaseSlider : public Interactive_Simple, public IDrawable {
