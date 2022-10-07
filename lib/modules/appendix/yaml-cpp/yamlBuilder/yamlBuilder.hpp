@@ -14,36 +14,34 @@ namespace ui {
 	std::string removeNamespace(std::string typeName, std::string nameSpace);
 	
 	template<typename T>
-	T* loadFromYamlFile(const YAML::Node &node);
+	T* loadFromYamlFile(const YAML::Node &node, bool &correctly);
 	
 	template<typename T>
-	T* loadFromYamlIf(const YAML::Node &node);
+	T* loadFromYamlIf(const YAML::Node &node, bool &correctly);
 
 	template<typename T>
-	T* loadFromYamlObject(const YAML::Node &node);
+	T* loadFromYamlObject(const YAML::Node &node, bool &correctly);
 	
 	template<typename T>
 	class YamlBuilder {
 	public:
-		typedef std::function<T*(const YAML::Node& node)> makeObject;
-		typedef std::function<T*(const YAML::Node& node, std::string type)> makeSubobject;
+		typedef std::function<T*(const YAML::Node& node, bool &correctly)> MakeObject;
+		typedef std::function<T*(const YAML::Node& node, std::string type, bool &correctly)> MakeSubobject;
+		typedef std::function<std::string(std::string typeName)> TypeNameDeformer;
 		
 	protected:
-		static std::map<std::string, makeObject> typeMap;
-		static std::vector<makeSubobject> subtypeMap;
-		static std::string deleteNamespace;
-		static std::string suffixType;
+		static std::map<std::string, MakeObject> typeMap;
+		static std::vector<MakeSubobject> subtypeMap;
+		static TypeNameDeformer typeNameDeform;
 		
 	public:
 		YamlBuilder() = default;
 		
-		static void setDeleteNamespace(std::string deleteNamespace);
+		static void setTypeNameDeformer(TypeNameDeformer typeNameDeform);
 		
-		static void setSuffixType(std::string suffixType);
+		static void add(MakeObject function, std::string type, std::vector<std::string> aliases = {});
 		
-		static void add(makeObject function, std::string type, std::vector<std::string> aliases = {});
-		
-		static void addSubtype(makeSubobject function);
+		static void addSubtype(MakeSubobject function);
 		
 		static void addAlias(std::string type, std::string alias);
 		
@@ -61,7 +59,7 @@ namespace ui {
 		template <typename Subtype>
 		static void addAliases(std::vector<std::string> aliases);
 		
-		static T* build(const YAML::Node& node, std::string type);
+		static T* build(const YAML::Node& node, std::string type, bool &correctly);
 	};
 	
 	template<typename T>

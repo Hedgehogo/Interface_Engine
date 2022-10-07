@@ -27,13 +27,13 @@ namespace ui {
 	using type = T;
 	
 	template <typename T>
-	T* pointerConvert(const YAML::Node& node) { return nullptr; }
-	
-	template <typename T>
 	YAML::Node convert(const T &rhs);
 	
 	template <typename T>
 	bool convert(const YAML::Node &node, T &object);
+	
+	template <typename T>
+	T* createPointer(const YAML::Node& node, bool &correctly);
 	
 	
 	

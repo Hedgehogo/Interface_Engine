@@ -22,6 +22,14 @@ namespace ui {
 	}
 	
 	template <typename T>
+	T* createPointer(const YAML::Node& node, bool &correctly) {
+		correctly = true;
+		return T::createFromYaml(node);
+	}
+	
+	
+	
+	template <typename T>
 	T convertDefault(const YAML::Node &node, const T &defaultValue) {
 		return (node.IsDefined() ? node.as<T>() : defaultValue);
 	}

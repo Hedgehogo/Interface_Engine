@@ -2,25 +2,39 @@
 #include <string>
 #include <exception>
 #include <utility>
+#include "../../yaml.hpp"
 
 namespace ui {
-	class AbstractTypeYamlException : public std::exception {
+	class BaseException : public std::exception {
 	protected:
-		std::string str;
+		std::string description;
 	
 	public:
-		AbstractTypeYamlException(const std::type_info& type);
-		
+		BaseException(std::string description);
+	
 		const char* what() const noexcept override;
 	};
 	
-	class NonexistentTypeYamlException : public std::exception {
+	class BaseYamlException : public BaseException {
 	protected:
-		std::string str;
+		YAML::Mark mark;
+	
+	public:
+		BaseYamlException(YAML::Mark mark, const std::string& description);
+		
+		YAML::Mark getMark();
+	};
+	
+	class NonexistentTypeYamlException : public BaseYamlException {
+	protected:
+		std::string type;
+		std::string base;
 		
 	public:
-		NonexistentTypeYamlException(std::string type);
+		NonexistentTypeYamlException(YAML::Mark mark, const std::string& type, const std::string &base);
 		
-		const char* what() const noexcept override;
+		std::string getType();
+		
+		std::string getBase();
 	};
 }

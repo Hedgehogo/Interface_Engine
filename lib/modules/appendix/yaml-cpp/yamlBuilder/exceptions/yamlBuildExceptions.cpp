@@ -1,17 +1,20 @@
 #include "yamlBuildExceptions.hpp"
 
 namespace ui {
-	AbstractTypeYamlException::AbstractTypeYamlException(const std::type_info &type) :
-		str(std::string("The 'createFromYaml' function returned 'nullptr', maybe you tried to yaml to create an instance of an abstract class\ntype: ") + std::string(type.name())) {}
+	BaseException::BaseException(std::string description) : description(std::move(description)) {}
 	
-	const char *AbstractTypeYamlException::what() const noexcept {
-		return str.c_str();
-	}
+	const char* BaseException::what() const noexcept { return description.c_str();}
 	
-	NonexistentTypeYamlException::NonexistentTypeYamlException(std::string type) :
-		str(std::string("A type '") + type + std::string("' was requested, but it is not in the list, perhaps it is not a descendant of a readable type or, if it is your own type, you may have forgotten to add it to the list")) {}
+	BaseYamlException::BaseYamlException(YAML::Mark mark, const std::string& description) :
+		BaseException(std::to_string(mark.line) + std::string(", ") + std::to_string(mark.column) + description), mark(mark) {}
 	
-	const char *NonexistentTypeYamlException::what() const noexcept {
-		return str.c_str();
-	}
+	YAML::Mark BaseYamlException::getMark() { return mark; }
+	
+	NonexistentTypeYamlException::NonexistentTypeYamlException(YAML::Mark mark, const std::string& type, const std::string &base) :
+		BaseYamlException(mark, std::string("Type '") + type + std::string("' is not type '") + base + std::string("', maybe you forgot to add type '") + base + std::string("' to the list of child types of '") + type + std::string("'")),
+		type(type), base(base) {}
+	
+	std::string NonexistentTypeYamlException::getType() { return type; }
+	
+	std::string NonexistentTypeYamlException::getBase() { return base; }
 }
