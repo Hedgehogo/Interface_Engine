@@ -15,10 +15,4 @@ namespace ui {
 		}
 		return true;
 	}
-	
-	Location createLocationFromYaml(const YAML::Node &node) {
-		Location location;
-		convert(node, location);
-		return location;
-	}
 }

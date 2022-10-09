@@ -22,14 +22,14 @@ namespace ui {
         keys.resize(node["keys"].size());
         uint i{0};
         for (auto &key: node["keys"]) {
-            keys[i] = createKeyFromYaml(key);
+            key >> keys[i];
             ++i;
         }
 
         if (node["black-listKeys"]){
             i = 0;
             for (auto& key : node["black-listKeys"]) {
-                blackListKeys[i] = createKeyFromYaml(key);
+                key >> blackListKeys[i];
                 ++i;
             }
         }

@@ -71,7 +71,7 @@ namespace ui{
 		node["inactive-background"] >> inactiveBackground;
 		node["active-background"] >> activeBackground;
 		if(node["button"])
-			button = createKeyFromYaml(node["button"]);
+			node["button"] >> button;
 		if(node["state"]) {
 			startActive = convertBool(node["state"], "active", "inactive");
 		} else if(node["start-active"]) {

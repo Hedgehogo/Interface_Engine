@@ -17,10 +17,4 @@ namespace ui {
 		}
 		return true;
 	}
-	
-	Side createSideFromYaml(const YAML::Node &node) {
-		Side side;
-		convert(node, side);
-		return side;
-	}
 }

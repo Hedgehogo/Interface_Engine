@@ -48,6 +48,4 @@ namespace ui {
 	
 	template<>
 	bool convert<HotkeyInteraction::Hotkey>(const YAML::Node& node, HotkeyInteraction::Hotkey *&hotkey);
-	
-	HotkeyInteraction::Hotkey* createHotkeyFromYaml(const YAML::Node& node);
 }

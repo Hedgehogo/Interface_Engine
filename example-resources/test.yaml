@@ -1,16 +1,7 @@
-type: LWBV
-first-object:
-  type: LWCO
-  objects:
-    - type: FullColor
-      color: FF0000
-    - type: FullColor
-      color: 00FFD3
-    - type: FullColor
-      color: AFDFC3
-  value:
-    var: index
-second-object:
+type: LWCB
+side: down
+border-distance: 50
+const-object:
   type: Button
   background:
     type: FullColor
@@ -19,5 +10,16 @@ second-object:
     type: OBI
     event:
       type: ChangeObjectEvent
-      value: index
+      value:
+        var: index
       index: 1
+second-object:
+  type: LWCO
+  objects:
+    - type: FullColor
+      color: FF0000
+    - type: FullColor
+      color: 00FFD3
+    - type: FullColor
+      color: AFDFC3
+  value: index

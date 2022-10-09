@@ -29,7 +29,7 @@ namespace ui {
                 hotkeys.resize(state.size());
                 uint j{0};
                 for (auto& hotkey : state) {
-                    hotkeys[i][j] = createHotkeyFromYaml(hotkey);
+                    hotkey >> hotkeys[i][j];
                     ++j;
                 }
                 ++i;

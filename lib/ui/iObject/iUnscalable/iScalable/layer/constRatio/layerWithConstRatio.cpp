@@ -122,7 +122,7 @@ namespace ui {
 			background = new Empty{};
 		}
 		if(node["corner"])
-			corner = createCornerFromYaml(node["corner"]);
+			node["corner"] >> corner;
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		

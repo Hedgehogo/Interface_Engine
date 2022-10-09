@@ -81,8 +81,8 @@ namespace ui {
 					return new Positioning2{coefficient, offset, relativeTarget};
 				}
 			} else if(node["parent-location"] && node["object-location"]) {
-				Location2 parentLocation{createLocation2FromYaml(node["parent-location"])};
-				Location2 objectLocation{createLocation2FromYaml(node["object-location"])};
+				Location2 parentLocation{node["parent-location"].as<Location2>()};
+				Location2 objectLocation{node["object-location"].as<Location2>()};
 				
 				return new Positioning2{parentLocation, objectLocation, offset};
 			}

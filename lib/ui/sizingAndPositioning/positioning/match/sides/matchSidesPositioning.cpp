@@ -28,8 +28,8 @@ namespace ui {
 		Location objectSide;
 		float offset{0.f};
 		
-		parentSide = createLocationFromYaml(node["parent-side"]);
-		objectSide = createLocationFromYaml(node["object-side"]);
+		node["parent-side"] >> parentSide;
+		node["object-side"] >> objectSide;
 		if(node["offset"])
 			node["offset"] >> offset;
 		

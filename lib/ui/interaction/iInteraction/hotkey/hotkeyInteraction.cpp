@@ -106,10 +106,4 @@ namespace ui {
 		hotkey = new HotkeyInteraction::Hotkey{interaction, state};
 		return true;
 	}
-	
-	HotkeyInteraction::Hotkey* createHotkeyFromYaml(const YAML::Node& node){
-		HotkeyInteraction::Hotkey *hotkey;
-		node >> hotkey;
-		return hotkey;
-	}
 }

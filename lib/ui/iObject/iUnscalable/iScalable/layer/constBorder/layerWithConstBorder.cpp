@@ -78,7 +78,7 @@ namespace ui {
 		
 		node["const-object"] >> constObject;
 		node["second-object"] >> secondObject;
-		side = createSideFromYaml(node["side"]);
+		node["side"] >> side;
 		node["border-distance"] >> borderDistance;
 		if(node["min-size"])
 			node["min-size"] >> minSize;

@@ -18,7 +18,7 @@ namespace ui {
 		Key button;
 		bool onlyOnParent{false};
 		
-		button = createKeyFromYaml(node["button"]);
+		node["button"] >> button;
 		if(node["only-on-parent"])
 			node["only-on-parent"] >> onlyOnParent;
 		

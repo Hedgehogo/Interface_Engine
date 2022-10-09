@@ -10,8 +10,6 @@ namespace ui {
 			relationSlider
 		};
 		
-		static Relativity createRelativityFromYaml(const YAML::Node &node);
-		
 	protected:
 		BaseSlider* slider;
 		sf::Vector2f sensitivity;

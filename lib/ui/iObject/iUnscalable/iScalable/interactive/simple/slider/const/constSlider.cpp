@@ -53,7 +53,7 @@ namespace ui {
 		if(node["slider-scale"])
 			node["slider-scale"] >> sliderScale;
 		if(node["button"])
-			button = createKeyFromYaml(node["button"]);
+			node["button"] >> button;
 		if(node["default-wheel"]) {
 			wheelHorizontal = convertBool(node["default-wheel"], "horizontal", "vertical");
 		}
@@ -63,7 +63,7 @@ namespace ui {
 			sf::Vector2f wheelSensitivity{0.2f, 0.2f};
 			
 			if(node["wheel-relativity"])
-				wheelRelativity = SliderWheelEvent::createRelativityFromYaml(node["wheel-relativity"]);
+				node["wheel-relativity"] >> wheelRelativity;
 			if(node["wheel-sensitivity"])
 				node["wheel-sensitivity"] >> wheelSensitivity;
 			

@@ -17,10 +17,4 @@ namespace ui {
 		}
 		return true;
 	}
-	
-	Corner createCornerFromYaml(const YAML::Node &node) {
-		Corner corner;
-		convert(node, corner);
-		return corner;
-	}
 }

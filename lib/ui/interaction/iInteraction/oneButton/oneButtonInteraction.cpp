@@ -42,7 +42,7 @@ namespace ui {
 		
 		node["event"] >> event;
 		if(node["button"])
-			button = createKeyFromYaml(node["button"]);
+			node["button"] >> button;
 		
 		return new OneButtonInteraction{event, button};
 	}

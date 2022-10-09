@@ -16,6 +16,4 @@ namespace ui {
 	
 	template<>
 	bool convert(const YAML::Node &node, Location2 &location2);
-	
-	Location2 createLocation2FromYaml(const YAML::Node &node);
 }

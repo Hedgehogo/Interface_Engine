@@ -24,7 +24,7 @@ namespace ui {
 
     ClickDisplayPanelInteraction *ClickDisplayPanelInteraction::createFromYaml(const YAML::Node &node) {
         Key button;
-        button = createKeyFromYaml(node["button"]);
+        node["button"] >> button;
         return new ClickDisplayPanelInteraction{button};
     }
 }

@@ -11,6 +11,4 @@ namespace ui {
 	
 	template<>
 	bool convert(const YAML::Node &node, Corner &corner);
-	
-	Corner createCornerFromYaml(const YAML::Node &node);
 }

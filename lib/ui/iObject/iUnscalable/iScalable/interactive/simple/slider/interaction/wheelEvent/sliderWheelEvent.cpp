@@ -2,12 +2,6 @@
 #include "../../baseSlider.hpp"
 
 namespace ui {
-	SliderWheelEvent::Relativity SliderWheelEvent::createRelativityFromYaml(const YAML::Node &node) {
-		Relativity relativity;
-		convert(node, relativity);
-		return relativity;
-	}
-	
 	SliderWheelEvent::SliderWheelEvent(BaseSlider &slider, bool horizontal, Relativity relativity, sf::Vector2f sensitivity) :
 		slider(&slider), sensitivity(sensitivity), horizontal(horizontal), relativity(relativity == Relativity::relationSlider) {
 	}

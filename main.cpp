@@ -57,6 +57,7 @@ int main() {
 			if(event.type == sf::Event::Closed) {
 				window.close();
 			}
+			
 			if(event.type == sf::Event::Resized) {
 				sf::Vector2f minSize = interface.getMinSize();
 				sf::Vector2f windowSize{static_cast<float>(event.size.width), static_cast<float>(event.size.height)};
