@@ -87,5 +87,5 @@ operator>>(const YAML::Node &node, T &value) {
 template <typename T>
 std::enable_if_t<!std::is_copy_constructible_v<T>, void>
 operator>>(const YAML::Node &node, T &value) {
-	ui::convert(node, value);
+	YAML::convert<T>::decode(node, value);
 }

@@ -28,7 +28,7 @@ namespace ui {
         TextInteraction* copyInteraction;
         TextInteraction* textInteraction;
 
-        struct Selection{
+        struct Selection {
             std::vector<BaseCharacter*>::iterator start;
             std::vector<BaseCharacter*>::iterator end;
         } selection;
@@ -41,9 +41,9 @@ namespace ui {
         std::vector<BaseLine* > lines;
 
         BaseResizer* resizer;
-
-
+		
         ui::IUninteractive *background;
+		
         void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager);
 
     public:
@@ -57,12 +57,16 @@ namespace ui {
         ~Text();
 
         void setSelection(Selection selection);
+		
         void setSelectionStart(std::vector<BaseCharacter*>::iterator start);
+		
         void setSelectionEnd(std::vector<BaseCharacter*>::iterator end);
+		
         Selection getSelection() const;
+		
         std::vector<BaseCharacter *>::iterator getSelectionStart() const;
+		
         std::vector<BaseCharacter *>::iterator getSelectionEnd() const;
-
 
         std::u32string getSelectionText();
 
