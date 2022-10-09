@@ -10,7 +10,7 @@ namespace ui {
 	
 	bool DontMovePanelInteraction::update(sf::Vector2i mousePosition) { return false; }
 	
-	void DontMovePanelInteraction::init(Panel &panel, ui::IPanelManager &panelManager) {}
+	void DontMovePanelInteraction::init(Panel &panel, IPanelManager &panelManager) {}
 	
 	void DontMovePanelInteraction::setPanel(Panel &panel) {}
 	

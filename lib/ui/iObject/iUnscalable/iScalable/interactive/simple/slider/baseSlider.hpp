@@ -21,7 +21,7 @@ namespace ui {
 		void copy(BaseSlider* baseSlider);
 		
 	public:
-		BaseSlider(ui::IUninteractive *slider, ui::IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, SliderInteraction* interaction);
+		BaseSlider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, SliderInteraction* interaction);
 		
 		sf::Vector2f getSliderSize();
 		

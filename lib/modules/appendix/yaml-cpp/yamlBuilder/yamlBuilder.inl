@@ -114,9 +114,9 @@ namespace ui {
 			for(const auto &subtype: subtypeMap) {
 				try {
 					return subtype(node, type, correctly);
-				} catch (ui::NonexistentTypeYamlException&) {}
+				} catch (NonexistentTypeYamlException&) {}
 			}
-			throw ui::NonexistentTypeYamlException{node.Mark(), type, typeNameDeform(type_name<T>())};
+			throw NonexistentTypeYamlException{node.Mark(), type, typeNameDeform(type_name<T>())};
 		}
 	}
 	
@@ -143,7 +143,7 @@ namespace ui {
 		bool correctly{true};
 		std::string type;
 		node["type"] >> type;
-		object = ui::YamlBuilder<T>::build(node, type, correctly);
+		object = YamlBuilder<T>::build(node, type, correctly);
 		return correctly;
 	}
 	
@@ -154,7 +154,7 @@ namespace ui {
 		if(node["type"]) {
 			std::string type;
 			node["type"] >> type;
-			object = ui::YamlBuilder<T>::build(node, type, correctly);
+			object = YamlBuilder<T>::build(node, type, correctly);
 		} else {
 			T* result = dynamic_cast<T*>(createPointer<T>(node, correctly));
 			object = result;

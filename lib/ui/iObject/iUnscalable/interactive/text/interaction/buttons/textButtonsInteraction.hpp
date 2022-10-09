@@ -9,7 +9,7 @@ namespace ui {
     public:
         TextButtonsInteraction(ButtonEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 
-        void init(ui::Text *text) override;
+        void init(Text *text) override;
 
         TextButtonsInteraction * copy() override;
 

@@ -9,7 +9,7 @@ namespace ui {
     class TextHotkeyInteraction : public TextInteraction, public HotkeyInteraction{
     public:
         TextHotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint startState = 0);
-        void init(ui::Text *text) override;
+        void init(Text *text) override;
         TextHotkeyInteraction * copy() override;
 
         static TextHotkeyInteraction* createFromYaml(const YAML::Node &node);

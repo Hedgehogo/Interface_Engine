@@ -42,6 +42,6 @@ namespace ui {
 		node["color"] >> color;
 		if(node["normal-size"])
 			node["normal-size"] >> normalSize;
-		return new ui::FullColor{color, normalSize};
+		return new FullColor{color, normalSize};
 	}
 }

@@ -7,10 +7,9 @@
 #include "../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
-
     std::vector<BaseCharacter *>::iterator nullBaseCharacterIterator{nullptr};
 
-    Text::Text(std::vector<ui::BaseTextBlock *> textBlocks, IUninteractive *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
+    Text::Text(std::vector<BaseTextBlock *> textBlocks, IUninteractive *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
                sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer *resizer, TextInteraction *textInteraction, TextInteraction *selectionInteraction,
                TextInteraction *copyInteraction) :
         background(background), size(size), textBocks(textBlocks), resizer(resizer),

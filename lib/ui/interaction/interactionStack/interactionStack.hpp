@@ -5,15 +5,15 @@
 namespace ui {
 	class InteractionStack {
 	protected:
-		std::vector<ui::IInteraction *> interactionStack;
+		std::vector<IInteraction *> interactionStack;
 		
 	public:
-		explicit InteractionStack(std::vector<ui::IInteraction *> &&interactionStack);
+		explicit InteractionStack(std::vector<IInteraction *> &&interactionStack);
 		
 		virtual ~InteractionStack();
 		
-		ui::IInteraction *at(unsigned index);
+		IInteraction *at(unsigned index);
 		
-		void add(ui::IInteraction *element);
+		void add(IInteraction *element);
 	};
 }

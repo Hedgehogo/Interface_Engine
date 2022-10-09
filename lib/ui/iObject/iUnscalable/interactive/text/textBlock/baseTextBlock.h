@@ -32,7 +32,5 @@ namespace ui {
         virtual bool updateInteractions(sf::Vector2f mousePosition) = 0;
 
         virtual BaseTextBlock *copy() = 0;
-
-        static BaseTextBlock* createFromYaml(const YAML::Node &node);
     };
 }

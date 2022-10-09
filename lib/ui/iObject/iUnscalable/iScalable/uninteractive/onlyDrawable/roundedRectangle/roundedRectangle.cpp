@@ -50,6 +50,6 @@ namespace ui {
 		float radius{};
 		node["color"] >> color;
 		node["radius"] >> radius;
-		return new ui::RoundedRectangle{color, radius};
+		return new RoundedRectangle{color, radius};
 	}
 }

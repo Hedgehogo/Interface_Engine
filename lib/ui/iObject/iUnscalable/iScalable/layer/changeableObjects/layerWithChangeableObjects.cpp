@@ -79,7 +79,7 @@ namespace ui
 
 		if (node["value"]) {
 			std::shared_ptr<WithValue<uint>> value;
-			value = ui::Buffer::get<WithValue<uint>>(node["value"]);
+			value = Buffer::get<WithValue<uint>>(node["value"]);
 			return new LayerWithChangeableObjects { objects, value, minSize };
 		}
 

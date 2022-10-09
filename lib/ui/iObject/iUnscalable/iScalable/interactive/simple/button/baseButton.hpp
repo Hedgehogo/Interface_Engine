@@ -5,7 +5,7 @@
 namespace ui {
 	class BaseButton : public Interactive_Simple {
 	protected:
-		ui::IScalable *background;
+		IScalable *background;
 		
 		void copy(BaseButton* button);
 		

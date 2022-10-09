@@ -7,9 +7,9 @@ namespace ui {
 		int interactionIndex;
 	
 	public:
-		Button(ui::IUninteractive *background, int interaction);
+		Button(IUninteractive *background, int interaction);
 
-		Button(ui::IUninteractive *background, IInteraction *interaction);
+		Button(IUninteractive *background, IInteraction *interaction);
 
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
 

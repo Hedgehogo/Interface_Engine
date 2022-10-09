@@ -2,12 +2,12 @@
 
 namespace ui {
 	void convertTransmission(const YAML::Node& node, uint &transmission) {
-		std::map<std::string, ui::LayerWithShader::Transmission> transmissionMap {
-			{"size", ui::LayerWithShader::Transmission::size},
-			{"texture", ui::LayerWithShader::Transmission::texture},
-			{"aspectRatio", ui::LayerWithShader::Transmission::aspectRatio},
-			{"mousePosition", ui::LayerWithShader::Transmission::mousePosition},
-			{"time", ui::LayerWithShader::Transmission::time},
+		std::map<std::string, LayerWithShader::Transmission> transmissionMap {
+			{"size", LayerWithShader::Transmission::size},
+			{"texture", LayerWithShader::Transmission::texture},
+			{"aspectRatio", LayerWithShader::Transmission::aspectRatio},
+			{"mousePosition", LayerWithShader::Transmission::mousePosition},
+			{"time", LayerWithShader::Transmission::time},
 		};
 		
 		if(node.IsScalar()) {
@@ -17,7 +17,7 @@ namespace ui {
 			std::string strTransmission;
 			for(const auto &item: node) {
 				strTransmission = item.as<std::string>();
-				transmission = static_cast<ui::LayerWithShader::Transmission>(transmission | transmissionMap[strTransmission]);
+				transmission = static_cast<LayerWithShader::Transmission>(transmission | transmissionMap[strTransmission]);
 			}
 		}
 	}

@@ -22,7 +22,7 @@ namespace ui
 	ChangeObjectEvent *ChangeObjectEvent::createFromYaml(const YAML::Node &node)
 	{
 		uint index {0};
-		std::shared_ptr<WithValue<uint>> value = ui::Buffer::get<WithValue<uint>>(node["value"]);
+		std::shared_ptr<WithValue<uint>> value = Buffer::get<WithValue<uint>>(node["value"]);
 
 		if (node["index"]) node["index"] >> index;
 

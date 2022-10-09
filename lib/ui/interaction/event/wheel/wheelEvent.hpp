@@ -21,7 +21,5 @@ namespace ui {
 		virtual void update(sf::Vector2i mousePosition, int value) = 0;
 		
 		virtual WheelEvent* copy() = 0;
-
-        static WheelEvent* createFromYaml(const YAML::Node &node);
 	};
 }

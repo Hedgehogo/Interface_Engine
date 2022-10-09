@@ -11,7 +11,7 @@ namespace ui {
 		return Priority::medium;
 	}
 	
-	bool IInteraction::operator<(ui::IInteraction &interaction) {
+	bool IInteraction::operator<(IInteraction &interaction) {
 		return getPriority() < interaction.getPriority();
 	}
 }

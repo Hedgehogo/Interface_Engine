@@ -19,7 +19,5 @@ namespace ui {
 		virtual void update(sf::Vector2i mousePosition, bool press) = 0;
 
 		virtual ButtonEvent* copy() = 0;
-
-        static ButtonEvent* createFromYaml(const YAML::Node &node);
 	};
 }

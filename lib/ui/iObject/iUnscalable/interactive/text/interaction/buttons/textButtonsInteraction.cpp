@@ -3,7 +3,7 @@
 namespace ui {
     TextButtonsInteraction::TextButtonsInteraction(ButtonEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys) : ButtonsInteraction(event, keys, blackListKeys) {}
 
-    void TextButtonsInteraction::init(ui::Text *text) {
+    void TextButtonsInteraction::init(Text *text) {
         TextInteraction::init(text);
         dynamic_cast<TextEvent *>(event)->init(text);
     }

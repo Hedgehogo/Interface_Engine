@@ -1,9 +1,8 @@
 #include "layerWithAlternativeObject.hpp"
 #include <algorithm>
 
-
 namespace ui {
-	LayerWithAlternativeObject::LayerWithAlternativeObject(ui::IScalable *topObject, ui::IScalable *bottomObject, sf::Vector2f minSize) :
+	LayerWithAlternativeObject::LayerWithAlternativeObject(IScalable *topObject, IScalable *bottomObject, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithTwoObjects(topObject, bottomObject) {
 	}
 	
@@ -17,13 +16,13 @@ namespace ui {
 		secondObject->resize(size, position);
 	}
 	
-	LayerWithAlternativeObject *ui::LayerWithAlternativeObject::copy() {
+	LayerWithAlternativeObject *LayerWithAlternativeObject::copy() {
 		LayerWithAlternativeObject *layerWithAlternativeObject{new LayerWithAlternativeObject{firstObject->copy(), secondObject->copy(), minimumSize}};
 		Layer::copy(layerWithAlternativeObject);
 		return layerWithAlternativeObject;
 	}
 	
-	LayerWithAlternativeObject *ui::LayerWithAlternativeObject::createFromYaml(const YAML::Node &node) {
+	LayerWithAlternativeObject *LayerWithAlternativeObject::createFromYaml(const YAML::Node &node) {
 		IScalable *topObject;
 		IScalable *bottomObject;
 		sf::Vector2f minSize{};

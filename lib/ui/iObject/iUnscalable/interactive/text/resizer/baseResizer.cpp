@@ -10,9 +10,9 @@ namespace ui {
 	
 	template<>
 	bool convert(const YAML::Node& node, BaseResizer::Align& align){
-		if (node.as<std::string>() == "left") align = ui::BaseResizer::Align::left;
-		else if (node.as<std::string>() == "right") align = ui::BaseResizer::Align::right;
-		else if (node.as<std::string>() == "center") align = ui::BaseResizer::Align::center;
+		if (node.as<std::string>() == "left") align = BaseResizer::Align::left;
+		else if (node.as<std::string>() == "right") align = BaseResizer::Align::right;
+		else if (node.as<std::string>() == "center") align = BaseResizer::Align::center;
 		else throw YAML::BadConversion{node.Mark()};
 		return true;
 	}

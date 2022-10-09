@@ -1,5 +1,7 @@
 #include "iBlockInteraction.hpp"
 
-bool ui::IBlockInteraction::update(sf::Vector2i mousePosition) {
-	return true;
+namespace ui {
+	bool IBlockInteraction::update(sf::Vector2i mousePosition) {
+		return true;
+	}
 }

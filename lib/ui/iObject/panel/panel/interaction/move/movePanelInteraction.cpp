@@ -1,7 +1,7 @@
 #include "movePanelInteraction.hpp"
 
 namespace ui {
-	ui::MovePanelInteraction::MovePanelInteraction(bool atStart) : atStart(atStart) {}
+	MovePanelInteraction::MovePanelInteraction(bool atStart) : atStart(atStart) {}
 	
 	void MovePanelInteraction::start(sf::Vector2i mousePosition) {
 		if(atStart)

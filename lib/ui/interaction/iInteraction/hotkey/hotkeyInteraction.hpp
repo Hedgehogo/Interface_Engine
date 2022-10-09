@@ -5,21 +5,26 @@
 #include <SFML/Graphics.hpp>
 
 namespace ui {
-
     class HotkeyInteraction : public virtual IInteraction{
     public:
-        struct Hotkey{
+        struct Hotkey {
             uint state{UINT32_MAX};
             ButtonsInteraction *interaction{nullptr};
+			
             Hotkey(ButtonsInteraction *interaction, int state = UINT32_MAX);
+			
             Hotkey(uint state);
+			
             ~Hotkey();
         };
+		
     protected:
         std::vector<std::vector<Hotkey*>> hotkeyStates;
         std::vector<Hotkey*> *nowHotkeys;
+		
     public:
         HotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint state = 0);
+		
         HotkeyInteraction(std::string str);
 
         void setHotkeyEvent(uint state, Hotkey* hotkeyEvent);
@@ -40,7 +45,9 @@ namespace ui {
 
         ~HotkeyInteraction() override;
     };
-
+	
+	template<>
+	bool convert<HotkeyInteraction::Hotkey>(const YAML::Node& node, HotkeyInteraction::Hotkey *&hotkey);
+	
+	HotkeyInteraction::Hotkey* createHotkeyFromYaml(const YAML::Node& node);
 }
-
-ui::HotkeyInteraction::Hotkey* createHotkeyFromYaml(const YAML::Node& node);

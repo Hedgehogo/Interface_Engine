@@ -20,7 +20,7 @@ namespace ui {
         sf::Vector2f startRender;
         sf::Vector2f endRender;
 
-        virtual void printCharacter(ui::BaseCharacter *character, float kerning);
+        virtual void printCharacter(BaseCharacter *character, float kerning);
 
         virtual void porting(int i);
         virtual void autoPorting(int i);

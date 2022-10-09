@@ -1,15 +1,9 @@
 #include "textHotkeyInteraction.hpp"
 
-void operator >> (const YAML::Node& node, ui::HotkeyInteraction::Hotkey& hotkey){
-    uint state = UINT32_MAX;
-    ui::ButtonsInteraction *interaction{nullptr};
-    
-}
-
 namespace ui {
     TextHotkeyInteraction::TextHotkeyInteraction(std::vector<std::vector<Hotkey *>> hotkeys, uint startState) : HotkeyInteraction(hotkeys, startState) {}
 
-    void TextHotkeyInteraction::init(ui::Text *text) {
+    void TextHotkeyInteraction::init(Text *text) {
         TextInteraction::init(text);
         for (auto hotkeys : hotkeyStates) {
             for (auto hotkey : hotkeys) {

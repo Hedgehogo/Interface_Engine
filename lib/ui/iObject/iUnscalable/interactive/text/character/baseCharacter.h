@@ -11,17 +11,19 @@ typedef unsigned uint;
 namespace ui{
     class BaseTextBlock;
     class BaseCharacter {
+	public:
+		enum class Special {
+			space,
+			enter,
+			no
+		};
+		
     protected:
         sf::Vector2f position;
         bool selection;
         bool active;
 
     public:
-        enum class Special{
-            space,
-            enter,
-            no
-        };
         BaseCharacter();
 
         virtual void setActive(bool active);

@@ -14,7 +14,7 @@ namespace ui {
 	public:
 		PanelEvent();
 		
-		virtual void init(Panel& panel, ui::IPanelManager &panelManager);
+		virtual void init(Panel& panel, IPanelManager &panelManager);
 		
 		void setPanel(Panel& panel);
 		

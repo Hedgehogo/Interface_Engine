@@ -1,15 +1,19 @@
 #include "emptyInteraction.hpp"
 
-void ui::EmptyInteraction::start(sf::Vector2i mousePosition) {}
-
-bool ui::EmptyInteraction::update(sf::Vector2i mousePosition) { return false; }
-
-void ui::EmptyInteraction::finish(sf::Vector2i mousePosition) {}
-
-ui::EmptyInteraction *ui::EmptyInteraction::copy() {
-	return new EmptyInteraction{};
-}
-
-ui::EmptyInteraction *ui::EmptyInteraction::createFromYaml(const YAML::Node &node) {
-    return new EmptyInteraction{};
+namespace ui {
+	void EmptyInteraction::start(sf::Vector2i mousePosition) {}
+	
+	bool EmptyInteraction::update(sf::Vector2i mousePosition) {
+		return false;
+	}
+	
+	void EmptyInteraction::finish(sf::Vector2i mousePosition) {}
+	
+	EmptyInteraction *EmptyInteraction::copy() {
+		return new EmptyInteraction{};
+	}
+	
+	EmptyInteraction *EmptyInteraction::createFromYaml(const YAML::Node &node) {
+		return new EmptyInteraction{};
+	}
 }

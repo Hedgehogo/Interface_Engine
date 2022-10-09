@@ -76,14 +76,14 @@ namespace ui {
 
         if (node["start-state"]) node["start-state"] >> startState;
 
-        if (node["hotkeys"]){
+        if (node["hotkeys"]) {
             hotkeys.resize(node["hotkeys"].size());
             uint i{0};
             for (auto& state : node["hotkeys"]) {
                 hotkeys.resize(state.size());
                 uint j{0};
-                for (auto& hotkey : state) {
-                    hotkeys[i][j] = createHotkeyFromYaml(hotkey);
+                for (auto& hotkeyNode : state) {
+					hotkeyNode >> hotkeys[i][j];
                     ++j;
                 }
                 ++i;
@@ -92,13 +92,24 @@ namespace ui {
 
         return new HotkeyInteraction{hotkeys, startState};
     }
-} // ui
-
-ui::HotkeyInteraction::Hotkey* createHotkeyFromYaml(const YAML::Node& node){
-    ui::HotkeyInteraction::Hotkey *hotkey{new ui::HotkeyInteraction::Hotkey{nullptr}};
-
-    if (node["state"]) node["state"] >> hotkey->state;
-    if (node["interaction"]) node["interaction"] >> hotkey->interaction;
-
-    return hotkey;
+	
+	template<>
+	bool convert<HotkeyInteraction::Hotkey>(const YAML::Node& node, HotkeyInteraction::Hotkey *&hotkey) {
+		ButtonsInteraction *interaction{nullptr};
+		int state{INT32_MAX};
+		
+		if (node["state"])
+			node["state"] >> state;
+		if (node["interaction"])
+			node["interaction"] >> interaction;
+		
+		hotkey = new HotkeyInteraction::Hotkey{interaction, state};
+		return true;
+	}
+	
+	HotkeyInteraction::Hotkey* createHotkeyFromYaml(const YAML::Node& node){
+		HotkeyInteraction::Hotkey *hotkey;
+		node >> hotkey;
+		return hotkey;
+	}
 }

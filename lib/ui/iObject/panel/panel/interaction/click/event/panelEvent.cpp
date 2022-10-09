@@ -1,22 +1,25 @@
 #include "panelEvent.hpp"
 #include "../../../../manager/iPanelManager.hpp"
 
-ui::PanelEvent::PanelEvent() : panel(nullptr), panelManager(nullptr) {}
-
-void ui::PanelEvent::init(ui::Panel &panel, ui::IPanelManager &panelManager) {
-	this->panel = &panel;
-	this->panelManager = &panelManager;
-}
-
-void ui::PanelEvent::setPanel(ui::Panel &panel) {
-	this->panel = &panel;
-}
-
-void ui::PanelEvent::copy(ui::PanelEvent *panelEvent) {
-	panelEvent->panel = this->panel;
-	panelEvent->panelManager = this->panelManager;
-}
-
-ui::Panel *ui::PanelEvent::getPanel() {
-	return panel;
+namespace ui {
+	PanelEvent::PanelEvent() : panel(nullptr), panelManager(nullptr) {
+	}
+	
+	void PanelEvent::init(Panel &panel, IPanelManager &panelManager) {
+		this->panel = &panel;
+		this->panelManager = &panelManager;
+	}
+	
+	void PanelEvent::setPanel(Panel &panel) {
+		this->panel = &panel;
+	}
+	
+	void PanelEvent::copy(PanelEvent *panelEvent) {
+		panelEvent->panel = this->panel;
+		panelEvent->panelManager = this->panelManager;
+	}
+	
+	Panel *PanelEvent::getPanel() {
+		return panel;
+	}
 }

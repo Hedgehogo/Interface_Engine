@@ -30,7 +30,7 @@ namespace ui {
         startRender = position;
     }
 
-    void Resizer::printCharacter(ui::BaseCharacter *character, float kerning) {
+    void Resizer::printCharacter(BaseCharacter *character, float kerning) {
         character->setPosition(nextPosition);
         nextPosition.x += character->getAdvance() + kerning;
         distanceEnter++;
@@ -150,11 +150,11 @@ namespace ui {
 
 
         for (int i = 0; i < (*characters).size(); i++) {
-            ui::BaseCharacter* character = (*characters)[i];
+            BaseCharacter* character = (*characters)[i];
 
             float kerning = 0;
 
-            ui::BaseCharacter::Special specialText = character->isSpecial();
+            BaseCharacter::Special specialText = character->isSpecial();
 
             switch (specialText) {
                 case BaseCharacter::Special::no:
@@ -192,7 +192,7 @@ namespace ui {
         sf::Vector2f minSize = {0, 0};
         float wordSizeX = 0;
 
-        for (ui::BaseCharacter *character : *characters) {
+        for (BaseCharacter *character : *characters) {
             if (character->isSpecial() == BaseCharacter::Special::no){
                 wordSizeX += character->getAdvance();
             }else{

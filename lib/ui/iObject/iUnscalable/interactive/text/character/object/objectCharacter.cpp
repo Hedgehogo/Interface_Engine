@@ -2,7 +2,7 @@
 #include "iostream"
 
 namespace ui {
-    ObjectCharacter::ObjectCharacter(ui::IObject* object) : object(object){}
+    ObjectCharacter::ObjectCharacter(IObject* object) : object(object){}
 
     char32_t ObjectCharacter::getChar() {
         return '\0';

@@ -6,10 +6,10 @@
 
 namespace ui {
     class ObjectCharacter : public BaseCharacter{
-        ui::IObject* object;
+        IObject* object;
         std::vector<BaseLine *> lines;
     public:
-        ObjectCharacter(ui::IObject* object);
+        ObjectCharacter(IObject* object);
 
         void setPosition( sf::Vector2f position) override;
 

@@ -10,7 +10,7 @@ namespace ui{
         bool isCharacter;
         IScalable* object;
     public:
-        ObjectTextBlock(ui::IScalable* object, sf::Vector2f size = {0, 0}, bool isCharacter = true);
+        ObjectTextBlock(IScalable* object, sf::Vector2f size = {0, 0}, bool isCharacter = true);
 
         void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 

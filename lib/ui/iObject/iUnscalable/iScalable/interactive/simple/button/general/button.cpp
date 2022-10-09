@@ -1,10 +1,10 @@
 #include "button.hpp"
 
 namespace ui {
-    Button::Button(ui::IUninteractive *background, int interaction) :
+    Button::Button(IUninteractive *background, int interaction) :
         BaseButton(background, nullptr), interactionIndex(interaction) {}
 
-	Button::Button(ui::IUninteractive *background, IInteraction *interaction) : BaseButton(background, interaction), interactionIndex(-1) {}
+	Button::Button(IUninteractive *background, IInteraction *interaction) : BaseButton(background, interaction), interactionIndex(-1) {}
 
     void Button::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
 	    if (interactionIndex >= 0)
@@ -21,7 +21,7 @@ namespace ui {
 
     Button *Button::createFromYaml(const YAML::Node &node) {
 
-        ui::IUninteractive *background;
+        IUninteractive *background;
 
         node["background"] >> background;
 
