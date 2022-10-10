@@ -14,7 +14,7 @@ namespace ui
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 
 		MakePermeable *copy();
-
-		static MakePermeable *createFromYaml(const YAML::Node& node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, MakePermeable *&makePermeable);
 }

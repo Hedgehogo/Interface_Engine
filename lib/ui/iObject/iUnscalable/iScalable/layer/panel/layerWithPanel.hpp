@@ -23,10 +23,10 @@ namespace ui {
 		
 		LayerWithPanel* copy() override;
 		
-		static LayerWithPanel* createFromYaml(const YAML::Node &node);
-		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, LayerWithPanel *&layerWithPanel);
 	
 	typedef LayerWithPanel LayerWPanel;
 	typedef LayerWithPanel LWP;

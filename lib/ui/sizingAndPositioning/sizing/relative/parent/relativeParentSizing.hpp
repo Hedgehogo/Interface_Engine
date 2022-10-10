@@ -16,7 +16,7 @@ namespace ui {
 		float getParentSize(float objectSize) override;
 		
 		RelativeParentSizing* copy() override;
-		
-		static RelativeParentSizing* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, RelativeParentSizing *&relativeParentSizing);
 }

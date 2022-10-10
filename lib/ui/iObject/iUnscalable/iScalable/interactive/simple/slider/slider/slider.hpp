@@ -21,7 +21,7 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		Slider* copy() override;
-		
-		static Slider* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, Slider *&slider);
 }

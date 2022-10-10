@@ -10,7 +10,7 @@ namespace ui {
 		return new DontHidePanelInteraction{};
 	}
 	
-	DontHidePanelInteraction *DontHidePanelInteraction::createFromYaml(const YAML::Node &node) {
-		return new DontHidePanelInteraction{};
+	bool convertPointer(const YAML::Node &node, DontHidePanelInteraction *&dontHidePanelInteraction) {
+		{ dontHidePanelInteraction = new DontHidePanelInteraction{}; return true; }
 	}
 }

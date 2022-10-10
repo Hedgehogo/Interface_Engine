@@ -44,7 +44,7 @@ namespace ui {
 		return positioning2;
 	}
 	
-	Positioning2 *Positioning2::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, Positioning2 *&positioning2) {
 		if(node["horizontal"] && node["vertical"]) {
 			Positioning* horizontal;
 			Positioning* vertical;
@@ -52,7 +52,7 @@ namespace ui {
 			node["horizontal"] >> horizontal;
 			node["vertical"] >> vertical;
 			
-			return new Positioning2{horizontal, vertical};
+			{ positioning2 = new Positioning2{horizontal, vertical}; return true; }
 		} else {
 			sf::Vector2f offset{};
 			
@@ -76,15 +76,15 @@ namespace ui {
 					
 					node["object-coefficient"] >> objectCoefficient;
 					
-					return new Positioning2{coefficient, objectCoefficient, offset, relativeTarget};
+					{ positioning2 = new Positioning2{coefficient, objectCoefficient, offset, relativeTarget}; return true; }
 				} else {
-					return new Positioning2{coefficient, offset, relativeTarget};
+					{ positioning2 = new Positioning2{coefficient, offset, relativeTarget}; return true; }
 				}
 			} else if(node["parent-location"] && node["object-location"]) {
 				Location2 parentLocation{node["parent-location"].as<Location2>()};
 				Location2 objectLocation{node["object-location"].as<Location2>()};
 				
-				return new Positioning2{parentLocation, objectLocation, offset};
+				{ positioning2 = new Positioning2{parentLocation, objectLocation, offset}; return true; }
 			}
 		}
 		throw YAML::BadConversion{node.Mark()};

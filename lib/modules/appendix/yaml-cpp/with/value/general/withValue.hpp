@@ -13,9 +13,10 @@ namespace ui {
 		const T &getValue() const override;
 		
 		void setValue(const T &value) override;
-		
-		static WithValue<T> *createFromYaml(const YAML::Node &node);
 	};
+	
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, WithValue<T> *&withValue);
 	
 	typedef WithValue<bool> WithB;
 	typedef WithValue<float> WithF;

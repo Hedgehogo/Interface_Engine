@@ -23,12 +23,12 @@ namespace ui {
 		return pointingHidePanelInteraction;
 	}
 	
-	PointingHidePanelInteraction *PointingHidePanelInteraction::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, PointingHidePanelInteraction *&pointingHidePanelInteraction) {
 		bool onlyOnParent{false};
 		
 		if(node["only-on-parent"])
 			node["only-on-parent"] >> onlyOnParent;
 		
-		return new PointingHidePanelInteraction{onlyOnParent};
+		{ pointingHidePanelInteraction = new PointingHidePanelInteraction{onlyOnParent}; return true; }
 	}
 }

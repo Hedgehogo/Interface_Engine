@@ -38,9 +38,9 @@ namespace ui
 
 		LayerWithChangeableObjects * copy() override;
 
-		static LayerWithChangeableObjects* createFromYaml(const YAML::Node &node);
-
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, LayerWithChangeableObjects *&layerWithChangeableObjects);
 
 } // ui

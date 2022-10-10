@@ -76,7 +76,7 @@ namespace ui {
 		strip->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue, hueOffset);
 	}
 	
-	Bar *Bar::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, Bar *&bar) {
 		IUninteractive *background;
 		IUninteractive *strip;
 		int division{1};
@@ -92,6 +92,6 @@ namespace ui {
 		if(node["horizontal"])
 			node["horizontal"] >> horizontal;
 		
-		return new Bar{background, strip, division, offset, horizontal};
+		{ bar = new Bar{background, strip, division, offset, horizontal}; return true; }
 	}
 }

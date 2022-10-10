@@ -67,13 +67,13 @@ namespace ui {
         object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
 	
-	LayerWithRenderTexture *LayerWithRenderTexture::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, LayerWithRenderTexture *&layerWithRenderTexture) {
 		IScalable* object;
 		bool optimize{true};
 		sf::Vector2f minSize{0, 0};
 		node["object"] >> object;
         if (node["optimize"]) node["optimize"] >> optimize;
         if (node["min-size"]) node["min-size"] >> minSize;
-		return new LayerWithRenderTexture{object, optimize, minSize};
+		{ layerWithRenderTexture = new LayerWithRenderTexture{object, optimize, minSize}; return true; }
 	}
 }

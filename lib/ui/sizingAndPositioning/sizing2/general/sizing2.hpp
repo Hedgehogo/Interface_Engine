@@ -30,7 +30,7 @@ namespace ui {
 		sf::Vector2f getParentSize(sf::Vector2f objectSize) override;
 		
 		Sizing2* copy() override;
-		
-		static Sizing2* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, Sizing2 *&sizing2);
 }

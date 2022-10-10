@@ -13,7 +13,7 @@ namespace ui {
 		return new EmptyInteraction{};
 	}
 	
-	EmptyInteraction *EmptyInteraction::createFromYaml(const YAML::Node &node) {
-		return new EmptyInteraction{};
+	bool convertPointer(const YAML::Node &node, EmptyInteraction *&emptyInteraction) {
+		{ emptyInteraction = new EmptyInteraction{}; return true; }
 	}
 }

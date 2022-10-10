@@ -31,7 +31,7 @@ namespace ui {
 		
 	public:
 		Sprite* copy() override;
-		
-		static Sprite* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, Sprite *&sprite);
 }

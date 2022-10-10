@@ -11,12 +11,12 @@ namespace ui {
         return IUninteractive::updateInteractions(mousePosition);
     }
 
-    UninteractiveLayer *UninteractiveLayer::createFromYaml(const YAML::Node &node) {
+    bool convertPointer(const YAML::Node &node, UninteractiveLayer *&uninteractiveLayer) {
         IScalable* object;
         sf::Vector2f minSize;
         node["object"] >> object;
         if (node["min-size"]) node["min-size"] >> minSize;
-        return new UninteractiveLayer{object, minSize};
+        { uninteractiveLayer = new UninteractiveLayer{object, minSize}; return true; }
     }
 
     UninteractiveLayer *UninteractiveLayer::copy() {

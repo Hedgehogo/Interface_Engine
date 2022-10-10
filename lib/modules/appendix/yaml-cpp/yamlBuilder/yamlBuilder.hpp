@@ -3,7 +3,7 @@
 #include <functional>
 #include "../yaml.hpp"
 #include "../buffer/buffer.hpp"
-#include "exceptions/yamlBuildExceptions.hpp"
+#include "exception/yamlBuildExceptions.hpp"
 #include <iostream>
 #include <bitset>
 #include "../objectBuffer/objectBuffer.hpp"

@@ -16,9 +16,9 @@ namespace ui {
 		float findSize(float,float) override;
 		
 		RelativeNormalSizing* copy() override;
-		
-		static RelativeNormalSizing* createFromYaml(const YAML::Node &);
 	};
+	
+	bool convertPointer(const YAML::Node &node, RelativeNormalSizing *&relativeNormalSizing);
 	
 	Sizing* createSize();
 }

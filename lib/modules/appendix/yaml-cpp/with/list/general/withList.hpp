@@ -26,9 +26,10 @@ namespace ui {
 		std::vector<V> getValue() const;
 		
 		void setValue(const std::vector<V> &list);
-		
-		static WithList<T> *createFromYaml(const YAML::Node &node);
 	};
+	
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, WithList<T> *&withList);
 }
 
 #include "withList.inl"

@@ -23,8 +23,8 @@ namespace ui {
 		return pointingDisplayPanelInteraction;
 	}
 	
-	PointingDisplayPanelInteraction *PointingDisplayPanelInteraction::createFromYaml(const YAML::Node &node) {
-		return new PointingDisplayPanelInteraction{};
+	bool convertPointer(const YAML::Node &node, PointingDisplayPanelInteraction *&pointingDisplayPanelInteraction) {
+		{ pointingDisplayPanelInteraction = new PointingDisplayPanelInteraction{}; return true; }
 	}
 }
 

@@ -50,7 +50,7 @@ namespace ui {
 		return sizing2;
 	}
 	
-	Sizing2 *Sizing2::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, Sizing2 *&sizing2) {
 		if(node["horizontal"] && node["vertical"]) {
 			Sizing* horizontal;
 			Sizing* vertical;
@@ -58,16 +58,16 @@ namespace ui {
 			node["horizontal"] >> horizontal;
 			node["vertical"] >> vertical;
 			
-			return new Sizing2{horizontal, vertical};
+			{ sizing2 = new Sizing2{horizontal, vertical}; return true; }
 		} else if(node["relative"]) {
 			std::string relative;
 			
 			node["relative"] >> relative;
 			
 			if(relative == "parent") {
-				return new Sizing2{true};
+				{ sizing2 = new Sizing2{true}; return true; }
 			} else if(relative == "normal") {
-				return new Sizing2{false};
+				{ sizing2 = new Sizing2{false}; return true; }
 			} else {
 				throw YAML::BadConversion{node["relative"].Mark()};
 			}
@@ -76,7 +76,7 @@ namespace ui {
 			
 			node["const-size"] >> constSize;
 			
-			return new Sizing2{constSize};
+			{ sizing2 = new Sizing2{constSize}; return true; }
 		} else if(node["coefficient"]) {
 			sf::Vector2f coefficient;
 			sf::Vector2f addition{};
@@ -97,7 +97,7 @@ namespace ui {
 				}
 			}
 			
-			return new Sizing2{coefficient, addition, relativeTarget};
+			{ sizing2 = new Sizing2{coefficient, addition, relativeTarget}; return true; }
 		} else if(node["target-coefficient"] && node["parent-coefficient"]) {
 			sf::Vector2f targetCoefficient;
 			sf::Vector2f parentCoefficient;
@@ -108,7 +108,7 @@ namespace ui {
 			if(node["addition"])
 				node["addition"] >> addition;
 			
-			return new Sizing2{targetCoefficient, parentCoefficient, addition};
+			{ sizing2 = new Sizing2{targetCoefficient, parentCoefficient, addition}; return true; }
 		} else {
 			throw YAML::BadConversion{node.Mark()};
 		}

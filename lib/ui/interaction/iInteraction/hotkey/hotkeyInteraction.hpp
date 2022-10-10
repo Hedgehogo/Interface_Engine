@@ -41,10 +41,10 @@ namespace ui {
 
         HotkeyInteraction* copy() override;
 
-        static HotkeyInteraction* createFromYaml(const YAML::Node &node);
-
         ~HotkeyInteraction() override;
     };
+	
+	bool convertPointer(const YAML::Node &node, HotkeyInteraction *&hotkeyInteraction);
 	
 	template<>
 	bool convert<HotkeyInteraction::Hotkey>(const YAML::Node& node, HotkeyInteraction::Hotkey *&hotkey);

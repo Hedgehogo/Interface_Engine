@@ -62,7 +62,7 @@ namespace ui{
         return switcher;
     }
 	
-	Switch *Switch::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, Switch *&switcher) {
 		IUninteractive *inactiveBackground;
 		IUninteractive *activeBackground;
 		Key button{Key::mouseLeft};
@@ -78,7 +78,7 @@ namespace ui{
 			node["start-active"] >> startActive;
 		}
 		
-		return new Switch{inactiveBackground, activeBackground, button, startActive};
+		{ switcher = new Switch{inactiveBackground, activeBackground, button, startActive}; return true; }
 	}
 
     void Switch::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

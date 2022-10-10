@@ -4,7 +4,7 @@
 namespace ui {
 	template<typename T>
 	class WithVector2 : public IWithVector2 {
-	private:
+	public:
 		typedef to_auto<decltype(std::declval<T>().getValue())> V;
 	
 	protected:
@@ -34,9 +34,10 @@ namespace ui {
 		sf::Vector2<V> getValue() const;
 		
 		void setValue(const sf::Vector2<V> &vector);
-		
-		static WithVector2 *createFromYaml(const YAML::Node &node);
 	};
+	
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, WithVector2<T> *&withVector2);
 	
 	template <typename T>
 	using WithVec2 = WithVector2<T>;

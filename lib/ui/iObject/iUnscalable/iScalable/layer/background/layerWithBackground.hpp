@@ -32,9 +32,9 @@ namespace ui {
         bool updateInteractions(sf::Vector2f mousePosition) override;
 
         LayerWithBackground* copy() override;
-	
-		static LayerWithBackground* createFromYaml(const YAML::Node &node);
 
         void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
     };
+	
+	bool convertPointer(const YAML::Node &node, LayerWithBackground *&layerWithBackground);
 }

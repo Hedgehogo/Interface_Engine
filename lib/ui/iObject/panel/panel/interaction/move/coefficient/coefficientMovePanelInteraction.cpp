@@ -17,7 +17,7 @@ namespace ui {
 		return positioningMovePanelInteraction;
 	}
 
-    CoefficientMovePanelInteraction *CoefficientMovePanelInteraction::createFromYaml(const YAML::Node &node) {
+    bool convertPointer(const YAML::Node &node, CoefficientMovePanelInteraction *&coefficientMovePanelInteraction) {
         sf::Vector2f coefficient;
         sf::Vector2f offset;
         bool atStart{false};
@@ -26,6 +26,6 @@ namespace ui {
         node["offset"] >> offset;
         if (node["at-start"]) node["at-start"] >> atStart;
 
-        return new CoefficientMovePanelInteraction{coefficient, offset, atStart};
+        { coefficientMovePanelInteraction = new CoefficientMovePanelInteraction{coefficient, offset, atStart}; return true; }
     }
 }

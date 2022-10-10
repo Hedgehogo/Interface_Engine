@@ -21,9 +21,10 @@ namespace ui {
 		const sf::Vector2<T> &getValue() const override;
 		
 		void setValue(const sf::Vector2<T>& vector) override;
-		
-		static WithValue<sf::Vector2<T>> *createFromYaml(const YAML::Node &node);
 	};
+	
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, WithValue<sf::Vector2<T>> *&withValueVector2);
 	
 	typedef WithValue<sf::Vector2f> WithSfVec2f;
 	typedef WithValue<sf::Vector2i> WithSfVec2i;

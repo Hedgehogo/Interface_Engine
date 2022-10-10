@@ -64,15 +64,15 @@ namespace ui
 		return new LayerWithChangeableObjects{ objects, value, minimumSize};
 	}
 
-	LayerWithChangeableObjects *LayerWithChangeableObjects::createFromYaml(const YAML::Node &node)
+	bool convertPointer(const YAML::Node &node, LayerWithChangeableObjects *&layerWithChangeableObjects)
 	{
 		std::vector<IScalable *> objects;
 		sf::Vector2f minSize {0,0};
 
-		for ( auto &object : node["objects"] ) {
-			IScalable* newObject;
-			object >> newObject;
-			objects.push_back(newObject);
+		for ( auto &objectNode : node["objects"] ) {
+			IScalable* object;
+			objectNode >> object;
+			objects.push_back(object);
 		}
 
 		if (node["minSize"]) node["minSize"] >> minSize;
@@ -80,12 +80,12 @@ namespace ui
 		if (node["value"]) {
 			std::shared_ptr<WithValue<uint>> value;
 			value = Buffer::get<WithValue<uint>>(node["value"]);
-			return new LayerWithChangeableObjects { objects, value, minSize };
+			layerWithChangeableObjects = new LayerWithChangeableObjects{ objects, value, minSize }; return true;
 		}
 
 		uint index {0};
 		if (node["index"]) node["index"] >> index;
-		return new LayerWithChangeableObjects { objects, index, minSize };
+		layerWithChangeableObjects = new LayerWithChangeableObjects{ objects, index, minSize }; return true;
 	}
 
 	void LayerWithChangeableObjects::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset)

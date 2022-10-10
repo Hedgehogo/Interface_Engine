@@ -31,7 +31,7 @@ namespace ui {
 		sf::Vector2f getParentSize(sf::Vector2f objectSize) override;
 		
 		ConstRatioSizing2* copy() override;
-		
-		static ConstRatioSizing2* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, ConstRatioSizing2 *&constRatioSizing2);
 }

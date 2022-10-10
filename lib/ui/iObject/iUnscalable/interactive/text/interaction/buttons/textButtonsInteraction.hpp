@@ -13,10 +13,10 @@ namespace ui {
 
         TextButtonsInteraction * copy() override;
 
-        static TextButtonsInteraction* createFromYaml(const YAML::Node &node);
-
         ~TextButtonsInteraction() = default;
 
     };
+	
+	bool convertPointer(const YAML::Node &node, TextButtonsInteraction *&textButtonsInteraction);
 
 } // ui

@@ -18,9 +18,9 @@ namespace ui {
 		float getParentSize(float objectSize) override;
 		
 		SmartSizing* copy() override;
-		
-		static SmartSizing* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, SmartSizing *&smartSizing);
 	
 	Sizing* createSizing(float targetCoefficient, float parentCoefficient, float addition);
 }

@@ -18,7 +18,7 @@ namespace ui {
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		ConstSlider* copy() override;
-		
-		static ConstSlider* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, ConstSlider *&constSlider);
 }

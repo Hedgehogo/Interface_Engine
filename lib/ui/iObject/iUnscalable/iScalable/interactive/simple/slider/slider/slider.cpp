@@ -38,7 +38,7 @@ namespace ui {
 		return slider1;
 	}
 	
-	Slider *Slider::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, Slider *&sliderZone) {
 		IUninteractive *slider;
 		IUninteractive *background;
 		std::shared_ptr<WithCoefficientVec2> value;
@@ -66,13 +66,13 @@ namespace ui {
 			if(node["wheel-sensitivity"])
 				node["wheel-sensitivity"] >> wheelSensitivity;
 			
-			return new Slider{slider, background, value, sliderScale, button, wheelHorizontal, wheelRelativity, wheelSensitivity};
+			{ sliderZone = new Slider{slider, background, value, sliderScale, button, wheelHorizontal, wheelRelativity, wheelSensitivity}; return true; }
 		} else {
 			sf::Vector2i division;
 			
 			node["division"] >> division;
 			
-			return new Slider{slider, background, value, division, sliderScale, button, wheelHorizontal};
+			{ sliderZone = new Slider{slider, background, value, division, sliderScale, button, wheelHorizontal}; return true; }
 		}
 	}
 }

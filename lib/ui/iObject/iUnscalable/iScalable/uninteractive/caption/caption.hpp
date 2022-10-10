@@ -25,6 +25,10 @@ namespace ui {
 		
 		static void setDefaultSize(int size);
 		
+		static sf::Color getDefaultColor();
+		
+		static int getDefaultSize();
+		
 		Caption(sf::String text, IUninteractive *background, sf::Font &font, sf::Vector2f minSize, int fontSize = defaultSize, sf::Color color = defaultColor, sf::Text::Style style = {}, float rotation = 0,
                 InternalPositioning2 internalPositioning2 = {{0, 0}}, bool cutBack = true);
 		
@@ -53,8 +57,8 @@ namespace ui {
 	public:
 		Caption* copy() override;
 		
-		static Caption* createFromYaml(const YAML::Node &node);
-		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, Caption *&caption);
 }

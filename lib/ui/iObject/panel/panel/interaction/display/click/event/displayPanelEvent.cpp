@@ -18,7 +18,7 @@ namespace ui {
 		return displayPanelEvent;
 	}
 
-    DisplayPanelEvent *DisplayPanelEvent::createFromYaml(const YAML::Node &node) {
-        return new DisplayPanelEvent{};
+    bool convertPointer(const YAML::Node &node, DisplayPanelEvent *&displayPanelEvent) {
+        { displayPanelEvent = new DisplayPanelEvent{}; return true; }
     }
 }

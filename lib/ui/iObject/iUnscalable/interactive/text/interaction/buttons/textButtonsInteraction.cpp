@@ -12,7 +12,7 @@ namespace ui {
         return new TextButtonsInteraction{event, keys, blackListKeys};
     }
 
-    TextButtonsInteraction* TextButtonsInteraction::createFromYaml(const YAML::Node &node){
+    bool convertPointer(const YAML::Node &node, TextButtonsInteraction *&textButtonsInteraction){
         ButtonEvent *event;
         std::vector<Key> keys;
         std::vector<Key> blackListKeys{};
@@ -34,6 +34,6 @@ namespace ui {
             }
         }
 
-        return new TextButtonsInteraction{event, keys, blackListKeys};
+        { textButtonsInteraction = new TextButtonsInteraction{event, keys, blackListKeys}; return true; }
     }
 } // ui

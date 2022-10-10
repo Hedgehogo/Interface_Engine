@@ -5,7 +5,7 @@ namespace ui {
         return new TextEmptyInteraction{};
     }
 
-    TextEmptyInteraction *TextEmptyInteraction::createFromYaml(const YAML::Node &node) {
-        return new TextEmptyInteraction{};
+    bool convertPointer(const YAML::Node &node, TextEmptyInteraction *&textEmptyInteraction) {
+        { textEmptyInteraction = new TextEmptyInteraction{}; return true; }
     }
 } // ui

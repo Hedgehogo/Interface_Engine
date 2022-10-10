@@ -21,8 +21,8 @@ namespace ui {
 		return normalSizeSizing;
 	}
 	
-	RelativeNormalSizing *RelativeNormalSizing::createFromYaml(const YAML::Node &) {
-		return new RelativeNormalSizing{};
+	bool convertPointer(const YAML::Node &node, RelativeNormalSizing *&relativeNormalSizing) {
+		{ relativeNormalSizing = new RelativeNormalSizing{}; return true; }
 	}
 	
 	Sizing *createSize() {

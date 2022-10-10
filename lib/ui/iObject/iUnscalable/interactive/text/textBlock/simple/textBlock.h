@@ -28,8 +28,8 @@ namespace ui {
 
         TextBlock * copy() override;
 
-        static TextBlock* createFromYaml(const YAML::Node &node);
-
         ~TextBlock() override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, TextBlock *&textBlock);
 }

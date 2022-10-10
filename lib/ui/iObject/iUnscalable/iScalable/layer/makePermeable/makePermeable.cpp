@@ -21,7 +21,7 @@ namespace ui {
 		return makePermeable;
 	}
 
-	MakePermeable *MakePermeable::createFromYaml(const YAML::Node &node)
+	bool convertPointer(const YAML::Node &node, MakePermeable *&makePermeable)
 	{
 		IScalable *object;
 		sf::Vector2f minSize {};

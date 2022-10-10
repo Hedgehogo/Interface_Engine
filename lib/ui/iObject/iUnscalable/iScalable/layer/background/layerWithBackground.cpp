@@ -53,7 +53,7 @@ namespace ui {
 
     }
     
-    LayerWithBackground *LayerWithBackground::createFromYaml(const YAML::Node &node) {
+    bool convertPointer(const YAML::Node &node, LayerWithBackground *&layerWithBackground) {
 		IScalable *object;
 		IUninteractive* background;
 		sf::Vector2f offset{};
@@ -66,6 +66,6 @@ namespace ui {
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		
-        return new LayerWithBackground{object, background, offset, minSize};
+        { layerWithBackground = new LayerWithBackground{object, background, offset, minSize}; return true; }
     }
 }

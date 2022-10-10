@@ -18,7 +18,7 @@ namespace ui {
 		void setPanel(Panel& panel) override;
 		
 		DontMovePanelInteraction* copy() override;
-
-        static DontMovePanelInteraction* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, DontMovePanelInteraction *&dontMovePanelInteraction);
 }

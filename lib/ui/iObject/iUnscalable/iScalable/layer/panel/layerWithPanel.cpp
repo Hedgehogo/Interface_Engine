@@ -37,7 +37,7 @@ namespace ui {
         panel->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
 	}
 	
-	LayerWithPanel *LayerWithPanel::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, LayerWithPanel *&layerWithPanel) {
 		ConstPanel* panel;
 		IScalable* object;
 		sf::Vector2f minSize{};
@@ -47,6 +47,6 @@ namespace ui {
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		
-		return new LayerWithPanel{panel, object, minSize};
+		{ layerWithPanel = new LayerWithPanel{panel, object, minSize}; return true; }
 	}
 }

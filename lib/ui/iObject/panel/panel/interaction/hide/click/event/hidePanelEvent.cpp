@@ -22,12 +22,12 @@ namespace ui {
 		return hidePanelEvent;
 	}
 	
-	HidePanelEvent *HidePanelEvent::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, HidePanelEvent *&hidePanelEvent) {
 		bool onlyOnParent{false};
 		
 		if(node["only-on-parent"])
 			node["only-on-parent"] >> onlyOnParent;
 		
-		return new HidePanelEvent{onlyOnParent};
+		{ hidePanelEvent = new HidePanelEvent{onlyOnParent}; return true; }
 	}
 }

@@ -14,7 +14,7 @@ namespace ui {
 		void finish(sf::Vector2i mousePosition) override;
 		
 		PointingDisplayPanelInteraction* copy() override;
-
-        static PointingDisplayPanelInteraction* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, PointingDisplayPanelInteraction *&pointingDisplayPanelInteraction);
 }

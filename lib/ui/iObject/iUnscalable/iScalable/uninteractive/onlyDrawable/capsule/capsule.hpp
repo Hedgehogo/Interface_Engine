@@ -20,7 +20,7 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		Capsule* copy() override;
-		
-		static Capsule* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, Capsule *&capsule);
 }

@@ -27,7 +27,7 @@ namespace ui {
         void resize(sf::Vector2f size, sf::Vector2f position) override;
 
         bool updateInteractions(sf::Vector2f mousePosition) override;
-
-        static LayerWithShader* createFromYaml(const YAML::Node &node);
     };
+	
+	bool convertPointer(const YAML::Node &node, LayerWithShader *&layerWithShader);
 }

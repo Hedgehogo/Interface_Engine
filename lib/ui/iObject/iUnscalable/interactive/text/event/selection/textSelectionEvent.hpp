@@ -27,7 +27,7 @@ namespace ui {
         void update(sf::Vector2i mousePosition, bool press) override;
 
         TextSelectionEvent* copy();
-
-        static TextSelectionEvent* createFromYaml(const YAML::Node &node);
     };
+	
+	bool convertPointer(const YAML::Node &node, TextSelectionEvent *&textSelectionEvent);
 }

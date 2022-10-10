@@ -18,7 +18,7 @@ namespace ui {
 		HidePanelEvent(bool onlyOnParent = false);
 		
 		HidePanelEvent* copy() override;
-
-        static HidePanelEvent* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, HidePanelEvent *&hidePanelEvent);
 }

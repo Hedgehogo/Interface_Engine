@@ -18,7 +18,7 @@ namespace ui {
 		return (objectSize - addition) / coefficient;
 	}
 	
-	ParentCoefficientSizing *ParentCoefficientSizing::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, ParentCoefficientSizing *&parentCoefficientSizing) {
 		float coefficient;
 		float addition{0.f};
 		
@@ -26,6 +26,6 @@ namespace ui {
 		if(node["addition"])
 			node["addition"] >> addition;
 		
-		return new ParentCoefficientSizing{coefficient, addition};
+		{ parentCoefficientSizing = new ParentCoefficientSizing{coefficient, addition}; return true; }
 	}
 }

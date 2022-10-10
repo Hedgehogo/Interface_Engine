@@ -19,7 +19,7 @@ namespace ui {
         return new TextCopyEvent{};
     }
 
-    TextCopyEvent *TextCopyEvent::createFromYaml(const YAML::Node &node) {
+    bool convertPointer(const YAML::Node &node, TextCopyEvent *&textCopyEvent) {
         return new TextCopyEvent;
     }
 } // ui

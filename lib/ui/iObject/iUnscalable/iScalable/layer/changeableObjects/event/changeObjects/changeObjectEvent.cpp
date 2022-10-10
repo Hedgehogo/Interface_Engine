@@ -19,13 +19,13 @@ namespace ui
 		return new ChangeObjectEvent { value, index };
 	}
 
-	ChangeObjectEvent *ChangeObjectEvent::createFromYaml(const YAML::Node &node)
+	bool convertPointer(const YAML::Node &node, ChangeObjectEvent *&changeObjectEvent)
 	{
 		uint index {0};
 		std::shared_ptr<WithValue<uint>> value = Buffer::get<WithValue<uint>>(node["value"]);
 
 		if (node["index"]) node["index"] >> index;
 
-		return new ChangeObjectEvent { value, index };
+		{ changeObjectEvent = new ChangeObjectEvent{ value, index }; return true; }
 	}
 } // ui

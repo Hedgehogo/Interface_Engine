@@ -263,7 +263,7 @@ namespace ui {
         return new Text{copyTextBlocks, background->copy(), size, resizer->copy(), renderTarget, textInteraction->copy(), copyInteraction->copy(), selectionInteraction->copy()};
     }
 
-    Text *Text::createFromYaml(const YAML::Node &node) {
+    bool convertPointer(const YAML::Node &node, Text *&text) {
         std::vector<BaseTextBlock *> textBlocks;
         IUninteractive *background;
         int size{14};
@@ -315,8 +315,8 @@ namespace ui {
         if (node["inactive-text-selection-color"]) node["inactive-text-selection-color"] >> inactiveTextSelectionColor;
         if (node["inactive-background-selection-color"]) node["inactive-background-selection-color"] >> inactiveBackgroundSelectionColor;
 
-        return new Text{textBlocks, background, size, font, textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor, resizer,
-                        textInteraction, selectionInteraction, copyInteraction};
+        text = new Text{textBlocks, background, size, font, textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor, resizer, textInteraction, selectionInteraction, copyInteraction};
+		return true;
     }
 
     void Text::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

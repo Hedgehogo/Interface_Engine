@@ -19,7 +19,7 @@ namespace ui
 		ChangeObjectEvent(std::shared_ptr<WithValue<uint>> value, uint index);
 
 		ChangeObjectEvent* copy() override;
-
-		static ChangeObjectEvent* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, ChangeObjectEvent *&changeObjectEvent);
 } // ui

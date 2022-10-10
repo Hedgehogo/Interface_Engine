@@ -35,10 +35,10 @@ namespace ui {
 		
 		LayerWithConstRatio* copy() override;
 		
-		static LayerWithConstRatio* createFromYaml(const YAML::Node &node);
-		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, LayerWithConstRatio *&layerWithConstRatio);
 	
 	typedef LayerWithConstRatio LayerWCRatio;
 	typedef LayerWithConstRatio LWCR;

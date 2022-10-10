@@ -12,7 +12,7 @@ namespace ui {
 		
 	public:
 		ClickHidePanelInteraction* copy() override;
-
-        static ClickHidePanelInteraction* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, ClickHidePanelInteraction *&clickHidePanelInteraction);
 }

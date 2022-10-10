@@ -56,7 +56,7 @@ namespace ui {
         return press;
     }
 
-    ButtonsInteraction *ButtonsInteraction::createFromYaml(const YAML::Node &node) {
+    bool convertPointer(const YAML::Node &node, ButtonsInteraction *&buttonsInteraction) {
         ButtonEvent *event;
         std::vector<Key> keys;
         std::vector<Key> blackListKeys{};
@@ -78,6 +78,6 @@ namespace ui {
             }
         }
 
-        return new ButtonsInteraction{event, keys, blackListKeys};
+        { buttonsInteraction = new ButtonsInteraction{event, keys, blackListKeys}; return true; }
     }
 } // ui

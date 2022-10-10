@@ -39,7 +39,7 @@ namespace ui {
 		return new ObjectTextBlock{object->copy(), object->getAreaSize(), isCharacter};
 	}
 	
-	ObjectTextBlock *ObjectTextBlock::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, ObjectTextBlock *&objectTextBlock) {
 		IScalable *object;
 		sf::Vector2f size{0, 0};
 		bool isCharacter{true};
@@ -48,6 +48,6 @@ namespace ui {
 		node["size"] >> size;
 		if(node["is-character"])
 			node["is-character"] >> isCharacter;
-		return new ObjectTextBlock{object, size, isCharacter};
+		{ objectTextBlock = new ObjectTextBlock{object, size, isCharacter}; return true; }
 	}
 }

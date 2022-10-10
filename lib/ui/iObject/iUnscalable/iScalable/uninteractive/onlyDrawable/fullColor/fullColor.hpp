@@ -24,8 +24,8 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 	
 		FullColor* copy() override;
-	
-		static FullColor* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, FullColor *&fullColor);
 }
 

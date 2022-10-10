@@ -70,8 +70,8 @@ namespace ui {
         }
     }
 
-    HotkeyInteraction *HotkeyInteraction::createFromYaml(const YAML::Node &node) {
-        std::vector<std::vector<Hotkey *>> hotkeys;
+    bool convertPointer(const YAML::Node &node, HotkeyInteraction *&hotkeyInteraction) {
+        std::vector<std::vector<HotkeyInteraction::Hotkey *>> hotkeys;
         uint startState{0};
 
         if (node["start-state"]) node["start-state"] >> startState;
@@ -90,7 +90,7 @@ namespace ui {
             }
         }
 
-        return new HotkeyInteraction{hotkeys, startState};
+        { hotkeyInteraction = new HotkeyInteraction{hotkeys, startState}; return true; }
     }
 	
 	template<>

@@ -28,10 +28,10 @@ namespace ui {
 		
 		LayerWithBorderVertical* copy() override;
 		
-		static LayerWithBorderVertical* createFromYaml(const YAML::Node &node);
-		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, LayerWithBorderVertical *&layerWithBorderVertical);
 	
 	typedef LayerWithBorderVertical LayerWBorderV;
 	typedef LayerWithBorderVertical LWBV;

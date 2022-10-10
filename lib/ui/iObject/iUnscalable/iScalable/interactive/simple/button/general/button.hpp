@@ -14,7 +14,7 @@ namespace ui {
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
 
 		Button* copy() override;
-
-        static Button* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, Button *&button);
 }

@@ -22,7 +22,7 @@ namespace ui {
 		return layerWithAlternativeObject;
 	}
 	
-	LayerWithAlternativeObject *LayerWithAlternativeObject::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, LayerWithAlternativeObject *&layerWithAlternativeObject) {
 		IScalable *topObject;
 		IScalable *bottomObject;
 		sf::Vector2f minSize{};
@@ -32,6 +32,6 @@ namespace ui {
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		
-		return new LayerWithAlternativeObject{topObject, bottomObject, minSize};
+		{ layerWithAlternativeObject = new LayerWithAlternativeObject{topObject, bottomObject, minSize}; return true; }
 	}
 }

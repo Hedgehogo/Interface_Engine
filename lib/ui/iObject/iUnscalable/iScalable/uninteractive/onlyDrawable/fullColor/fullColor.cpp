@@ -36,12 +36,12 @@ namespace ui {
 		return fullColor;
 	}
 	
-	FullColor *FullColor::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, FullColor *&fullColor) {
 		sf::Color color;
 		sf::Vector2f normalSize{};
 		node["color"] >> color;
 		if(node["normal-size"])
 			node["normal-size"] >> normalSize;
-		return new FullColor{color, normalSize};
+		{ fullColor = new FullColor{color, normalSize}; return true; }
 	}
 }

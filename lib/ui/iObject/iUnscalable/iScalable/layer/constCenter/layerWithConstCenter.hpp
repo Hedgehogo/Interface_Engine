@@ -35,13 +35,13 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		LayerWithConstCenter* copy() override;
-		
-		static LayerWithConstCenter* createFromYaml(const YAML::Node &node);
 
 		void draw() override;
 		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, LayerWithConstCenter *&layerWithConstCenter);
 	
 	typedef LayerWithConstCenter LayerWCCenter;
 	typedef LayerWithConstCenter LWCC;

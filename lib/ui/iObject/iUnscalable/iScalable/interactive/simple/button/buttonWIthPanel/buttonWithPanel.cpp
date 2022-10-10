@@ -40,7 +40,7 @@ namespace ui {
 		panel->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
 	}
 	
-	ButtonWithPanel *ButtonWithPanel::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, ButtonWithPanel *&buttonWithPanel) {
 		Panel *panel;
 		DisplayPanelInteraction *interaction;
 		IScalable *background;
@@ -49,6 +49,6 @@ namespace ui {
 		node["display-interaction"] >> interaction;
 		node["background"] >> background;
 		
-		return new ButtonWithPanel{panel, interaction, background};
+		{ buttonWithPanel = new ButtonWithPanel{panel, interaction, background}; return true; }
 	}
 }

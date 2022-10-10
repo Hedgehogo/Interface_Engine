@@ -105,7 +105,7 @@ namespace ui {
 		return layerWithConstRatio;
 	}
 	
-	LayerWithConstRatio *LayerWithConstRatio::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, LayerWithConstRatio *&layerWithConstRatio) {
 		IScalable *constObject;
 		IScalable *secondObject;
 		float aspectRatio;
@@ -126,7 +126,7 @@ namespace ui {
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		
-		return new LayerWithConstRatio{constObject, secondObject, background, aspectRatio, corner, minSize};
+		{ layerWithConstRatio = new LayerWithConstRatio{constObject, secondObject, background, aspectRatio, corner, minSize}; return true; }
 	}
 	
 	void LayerWithConstRatio::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

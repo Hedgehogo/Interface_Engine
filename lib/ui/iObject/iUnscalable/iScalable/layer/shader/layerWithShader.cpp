@@ -57,7 +57,7 @@ namespace ui {
         return LayerWithRenderTexture::updateInteractions(mousePosition);
     }
 
-    LayerWithShader *LayerWithShader::createFromYaml(const YAML::Node &node) {
+    bool convertPointer(const YAML::Node &node, LayerWithShader *&layerWithShader) {
         IScalable* object;
         sf::Shader* shader = new sf::Shader{};
         uint transmission{};
@@ -68,6 +68,6 @@ namespace ui {
         if (node["shader"]) node["shader"] >> *shader;
         if (node["optimize"]) node["optimize"] >> optimize;
         if (node["min-size"]) node["min-size"] >> minSize;
-        return new LayerWithShader{object, shader, transmission, optimize, minSize};
+        { layerWithShader = new LayerWithShader{object, shader, transmission, optimize, minSize}; return true; }
     }
 }

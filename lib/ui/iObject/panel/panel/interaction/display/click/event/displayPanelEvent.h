@@ -14,7 +14,7 @@ namespace ui {
 	
 	public:
 		DisplayPanelEvent* copy() override;
-
-        static DisplayPanelEvent* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, DisplayPanelEvent *&displayPanelEvent);
 }

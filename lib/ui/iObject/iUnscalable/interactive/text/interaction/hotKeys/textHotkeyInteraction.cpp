@@ -16,8 +16,8 @@ namespace ui {
         return new TextHotkeyInteraction{hotkeyStates, static_cast<uint>(std::distance(hotkeyStates.begin(), std::vector<std::vector<Hotkey*>>::iterator(nowHotkeys)))};
     }
 
-    TextHotkeyInteraction *TextHotkeyInteraction::createFromYaml(const YAML::Node &node) {
-        std::vector<std::vector<Hotkey *>> hotkeys;
+    bool convertPointer(const YAML::Node &node, TextHotkeyInteraction *&textHotkeyInteraction) {
+        std::vector<std::vector<HotkeyInteraction::Hotkey *>> hotkeys;
         uint startState{0};
 
         if (node["start-state"]) node["start-state"] >> startState;
@@ -35,7 +35,8 @@ namespace ui {
                 ++i;
             }
         }
-
-        return new TextHotkeyInteraction{hotkeys, startState};
+	
+		textHotkeyInteraction = new TextHotkeyInteraction{hotkeys, startState};
+		return true;
     }
-} // ui
+}

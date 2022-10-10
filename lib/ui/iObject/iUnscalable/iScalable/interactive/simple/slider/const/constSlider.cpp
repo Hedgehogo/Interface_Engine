@@ -39,7 +39,7 @@ namespace ui {
 		return constSlider;
 	}
 	
-	ConstSlider *ConstSlider::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, ConstSlider *&constSlider) {
 		IUninteractive *slider;
 		IUninteractive *background;
 		std::shared_ptr<WithCoefficientVec2> value;
@@ -67,13 +67,13 @@ namespace ui {
 			if(node["wheel-sensitivity"])
 				node["wheel-sensitivity"] >> wheelSensitivity;
 			
-			return new ConstSlider{slider, background, value, sliderScale, button, wheelHorizontal, wheelRelativity, wheelSensitivity};
+			{ constSlider = new ConstSlider{slider, background, value, sliderScale, button, wheelHorizontal, wheelRelativity, wheelSensitivity}; return true; }
 		} else {
 			sf::Vector2i division;
 			
 			node["division"] >> division;
 			
-			return new ConstSlider{slider, background, value, division, sliderScale, button, wheelHorizontal};
+			{ constSlider = new ConstSlider{slider, background, value, division, sliderScale, button, wheelHorizontal}; return true; }
 		}
 	}
 }

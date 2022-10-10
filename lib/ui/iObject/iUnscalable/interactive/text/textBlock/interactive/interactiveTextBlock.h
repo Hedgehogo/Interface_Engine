@@ -47,7 +47,7 @@ namespace ui {
 		
     public:
         InteractiveTextBlock * copy() override;
-
-        static InteractiveTextBlock* createFromYaml(const YAML::Node &node);
     };
+	
+	bool convertPointer(const YAML::Node &node, InteractiveTextBlock *&interactiveTextBlock);
 }

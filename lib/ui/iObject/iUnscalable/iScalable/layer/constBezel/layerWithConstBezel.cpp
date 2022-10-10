@@ -49,7 +49,7 @@ namespace ui {
 		return layerWithConstBezel;
 	}
 	
-	LayerWithConstBezel *LayerWithConstBezel::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, LayerWithConstBezel *&layerWithConstBezel) {
 		IScalable *object;
 		IUninteractive *bezel;
 		float thickness;
@@ -61,7 +61,7 @@ namespace ui {
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		
-		return new LayerWithConstBezel{object, bezel, thickness, minSize};
+		{ layerWithConstBezel = new LayerWithConstBezel{object, bezel, thickness, minSize}; return true; }
 	}
 	
 	void LayerWithConstBezel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

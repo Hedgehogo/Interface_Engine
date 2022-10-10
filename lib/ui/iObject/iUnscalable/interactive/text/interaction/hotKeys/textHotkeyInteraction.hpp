@@ -12,9 +12,9 @@ namespace ui {
         void init(Text *text) override;
         TextHotkeyInteraction * copy() override;
 
-        static TextHotkeyInteraction* createFromYaml(const YAML::Node &node);
-
         ~TextHotkeyInteraction() = default;
     };
+	
+	bool convertPointer(const YAML::Node &node, TextHotkeyInteraction *&textHotkeyInteraction);
 
 } // ui

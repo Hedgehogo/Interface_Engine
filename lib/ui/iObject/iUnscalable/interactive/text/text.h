@@ -99,10 +99,10 @@ namespace ui {
     public:
         Text *copy() override;
 
-        static Text* createFromYaml(const YAML::Node &node);
-
         void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
     };
+	
+	bool convertPointer(const YAML::Node &node, Text *&text);
 
     extern std::vector<BaseCharacter *>::iterator nullBaseCharacterIterator;
 }

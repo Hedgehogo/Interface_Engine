@@ -26,7 +26,7 @@ namespace ui {
 		sf::Vector2f findPosition(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize) override;
 		
 		Positioning2* copy() override;
-		
-		static Positioning2* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, Positioning2 *&positioning2);
 }

@@ -17,8 +17,8 @@ namespace ui {
 		
 		Empty* copy() override;
 		
-		static Empty* createFromYaml(const YAML::Node &node);
-		
 		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
 	};
+	
+	bool convertPointer(const YAML::Node &node, Empty *&empty);
 }

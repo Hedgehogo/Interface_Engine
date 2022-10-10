@@ -1,35 +1,48 @@
 #pragma once
 #include <string>
 #include <exception>
+#include "../../exception/baseYamlException.hpp"
 
 namespace ui {
-	class BufferVariableNotFoundException : public std::exception {
+	class BufferNonExistentNestingLevelException : public BaseYamlException {
 	protected:
-		std::string str;
+		using lSize = long long;
+		
+		std::string name;
+		lSize level;
 	
 	public:
-		BufferVariableNotFoundException(std::string name, const std::string& type);
+		BufferNonExistentNestingLevelException(YAML::Mark mark, const std::string& name, lSize level);
 		
-		const char* what() const noexcept override;
+		std::string getName() const;
+		
+		lSize getLevel() const;
 	};
 	
-	class BufferNonExistentNestingLevelException : public std::exception {
+	class BufferVariableNotFoundException : public BaseException {
 	protected:
-		std::string str;
+		std::string name;
+		std::string type;
 	
 	public:
-		BufferNonExistentNestingLevelException(std::string name, long long level);
+		BufferVariableNotFoundException(const std::string& name, const std::string &type);
 		
-		const char* what() const noexcept override;
+		std::string getName() const;
+		
+		std::string getType() const;
 	};
 	
-	class BufferRecursionDepthViolationException : public std::exception {
+	class YamlBufferVariableNotFoundException : public BaseYamlException {
 	protected:
-		std::string str;
-	
-	public:
-		BufferRecursionDepthViolationException(const std::string& type);
+		BufferVariableNotFoundException exception;
 		
-		const char* what() const noexcept override;
+	public:
+		YamlBufferVariableNotFoundException(YAML::Mark mark, const BufferVariableNotFoundException& exception);
+		
+		BufferVariableNotFoundException getException() const;
+		
+		std::string getName() const;
+		
+		std::string getType() const;
 	};
 }

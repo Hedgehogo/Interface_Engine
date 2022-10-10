@@ -23,7 +23,7 @@ namespace ui{
         bool updateInteractions(sf::Vector2f mousePosition) override;
 
         BaseTextBlock *copy() override;
-
-        static ObjectTextBlock* createFromYaml(const YAML::Node &node);
     };
+	
+	bool convertPointer(const YAML::Node &node, ObjectTextBlock *&objectTextBlock);
 }

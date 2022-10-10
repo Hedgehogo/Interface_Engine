@@ -26,10 +26,10 @@ namespace ui {
 		
 		LayerWithBorderHorizontal* copy() override;
 		
-		static LayerWithBorderHorizontal* createFromYaml(const YAML::Node &node);
-		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, LayerWithBorderHorizontal *&layerWithBorderHorizontal);
 	
 	typedef LayerWithBorderHorizontal LayerWBorderH;
 	typedef LayerWithBorderHorizontal LWBH;

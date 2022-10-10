@@ -8,12 +8,12 @@ namespace ui {
 		this->value = std::min(std::max(value, 0.f), 1.f);
 	}
 	
-	WithCoefficientValue *WithCoefficientValue::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, WithCoefficientValue *&withCoefficientValue) {
 		float value{0.f};
 		
 		if(node["value"])
 			node["value"] >> value;
 		
-		return new WithCoefficientValue{value};
+		{ withCoefficientValue = new WithCoefficientValue{value}; return true; }
 	}
 }

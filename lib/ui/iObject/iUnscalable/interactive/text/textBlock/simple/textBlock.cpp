@@ -77,7 +77,7 @@ namespace ui {
 		}
 	}
 	
-	TextBlock *TextBlock::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, TextBlock *&textBlock) {
 		std::u32string text;
 		sf::Color textColor = nullColor;
 		sf::Font *font = nullptr;
@@ -121,6 +121,6 @@ namespace ui {
 			}
 		}
 		
-		return new TextBlock{text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
+		{ textBlock = new TextBlock{text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor}; return true; }
 	}
 }

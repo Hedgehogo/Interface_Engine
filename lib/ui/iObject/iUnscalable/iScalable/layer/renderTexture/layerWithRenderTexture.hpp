@@ -31,10 +31,10 @@ namespace ui {
 		
 		LayerWithRenderTexture* copy() override;
 		
-		static LayerWithRenderTexture* createFromYaml(const YAML::Node &node);
-		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, LayerWithRenderTexture *&layerWithRenderTexture);
 	
 	typedef LayerWithRenderTexture LayerWRTexture;
 	typedef LayerWithRenderTexture LWRT;

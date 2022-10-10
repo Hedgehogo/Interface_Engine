@@ -150,7 +150,7 @@ namespace ui {
 		return layerWithBorder;
 	}
 	
-	LayerWithBorder *LayerWithBorder::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, LayerWithBorder *&layerWithBorder) {
 		sf::Vector2f minSize{};
 		sf::Vector2u count(node["objects"].size(), 0);
 		if(count.x != 0) count.y = node["objects"][0].size();
@@ -176,9 +176,9 @@ namespace ui {
 				node["bounds-horizontal"][i] >> boundsHorizontal[i];
 			}
 			
-			return new LayerWithBorder{objects, boundsHorizontal, boundsVertical, minSize};
+			{ layerWithBorder = new LayerWithBorder{objects, boundsHorizontal, boundsVertical, minSize}; return true; }
 		} else {
-			return new LayerWithBorder{objects, minSize};
+			{ layerWithBorder = new LayerWithBorder{objects, minSize}; return true; }
 		}
 	}
 	

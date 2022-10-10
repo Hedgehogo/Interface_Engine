@@ -36,7 +36,7 @@ namespace ui {
 		return new OneButtonInteraction{event->copy(), button};
 	}
 	
-	OneButtonInteraction *OneButtonInteraction::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, OneButtonInteraction *&oneButtonInteraction) {
 		ButtonEvent *event;
 		Key button{Key::mouseLeft};
 		
@@ -44,6 +44,6 @@ namespace ui {
 		if(node["button"])
 			node["button"] >> button;
 		
-		return new OneButtonInteraction{event, button};
+		{ oneButtonInteraction = new OneButtonInteraction{event, button}; return true; }
 	}
 }

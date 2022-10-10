@@ -72,7 +72,7 @@ namespace ui {
 			delete interaction;
 	}
 	
-	InteractiveTextBlock *InteractiveTextBlock::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, InteractiveTextBlock *&interactiveTextBlock) {
 		std::u32string text;
 		sf::Color textColor = nullColor;
 		sf::Font *font = nullptr;
@@ -119,11 +119,11 @@ namespace ui {
 		if(node["interaction"].IsScalar()) {
 			IInteraction *indexInteraction;
 			node["interaction"] >> indexInteraction;
-			return new InteractiveTextBlock{indexInteraction, text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
+			{ interactiveTextBlock = new InteractiveTextBlock{indexInteraction, text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor}; return true; }
 		} else {
 			int indexInteraction;
 			node["interaction"] >> indexInteraction;
-			return new InteractiveTextBlock{indexInteraction, text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
+			{ interactiveTextBlock = new InteractiveTextBlock{indexInteraction, text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor}; return true; }
 		}
 	}
 }

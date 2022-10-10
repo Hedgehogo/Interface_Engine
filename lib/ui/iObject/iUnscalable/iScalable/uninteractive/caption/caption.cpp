@@ -15,6 +15,14 @@ namespace ui {
 		defaultSize = size;
 	}
 	
+	sf::Color Caption::getDefaultColor() {
+		return defaultColor;
+	}
+	
+	int Caption::getDefaultSize() {
+		return defaultSize;
+	}
+	
 	void Caption::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
         OnlyDrawable::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 		background->init(renderTarget, this->drawManager, updateManager, interactionManager, interactionStack, panelManager);
@@ -154,12 +162,12 @@ namespace ui {
         }
 	}
 	
-	Caption *Caption::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, Caption *&caption) {
 		sf::String text;
 		IUninteractive *background;
 		sf::Font *font;
-		int fontSize{defaultSize};
-		sf::Color color{defaultColor};
+		int fontSize{Caption::getDefaultSize()};
+		sf::Color color{Caption::getDefaultColor()};
 		sf::Text::Style style{};
 		float rotation{0};
 		sf::Vector2f minSize{};
@@ -176,7 +184,7 @@ namespace ui {
 		if(node["rotation"]) node["rotation"] >> rotation;
         if(node["cut-back"]) node["cut-back"] >> cutBack;
 		
-		return new Caption{text, background, *font, minSize, fontSize, color, style, rotation, internalPositioning2, cutBack};
+		{ caption = new Caption{text, background, *font, minSize, fontSize, color, style, rotation, internalPositioning2, cutBack}; return true; }
 	}
 
 }

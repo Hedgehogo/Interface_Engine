@@ -34,12 +34,13 @@ namespace ui {
 		this->value = value;
 	}
 	
-	template <typename T>
-	WithValue<sf::Vector2<T>> *WithValue<sf::Vector2<T>>::createFromYaml(const YAML::Node &node) {
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, WithValue<sf::Vector2<T>> *&withValueVector2) {
 		sf::Vector2<T> value{};
 		
 		if(node["value"]) node["value"] >> value;
 		
-		return new WithValue<sf::Vector2<T>>(value);
+		withValueVector2 = new WithValue<sf::Vector2<T>>(value);
+		return true;
 	}
 }

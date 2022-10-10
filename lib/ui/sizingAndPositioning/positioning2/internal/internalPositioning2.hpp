@@ -21,7 +21,7 @@ namespace ui {
 
     public:
         InternalPositioning2* copy();
-	
-		static InternalPositioning2* createFromYaml(const YAML::Node &node);
     };
+	
+	bool convertPointer(const YAML::Node &node, InternalPositioning2 *&internalPositioning2);
 }

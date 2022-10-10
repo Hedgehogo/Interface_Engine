@@ -22,9 +22,9 @@ namespace ui {
 		return clickDisplayPanelInteraction;
 	}
 
-    ClickDisplayPanelInteraction *ClickDisplayPanelInteraction::createFromYaml(const YAML::Node &node) {
+    bool convertPointer(const YAML::Node &node, ClickDisplayPanelInteraction *&clickDisplayPanelInteraction) {
         Key button;
         node["button"] >> button;
-        return new ClickDisplayPanelInteraction{button};
+        { clickDisplayPanelInteraction = new ClickDisplayPanelInteraction{button}; return true; }
     }
 }

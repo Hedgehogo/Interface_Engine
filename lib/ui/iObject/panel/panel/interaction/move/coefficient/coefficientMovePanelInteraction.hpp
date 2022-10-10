@@ -13,7 +13,7 @@ namespace ui {
 		void move(sf::Vector2i mousePosition) override;
 		
 		CoefficientMovePanelInteraction* copy() override;
-
-        static CoefficientMovePanelInteraction* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, CoefficientMovePanelInteraction *&coefficientMovePanelInteraction);
 }

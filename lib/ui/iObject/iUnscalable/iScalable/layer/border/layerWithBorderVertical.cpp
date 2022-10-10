@@ -87,7 +87,7 @@ namespace ui {
 		return layerWithBorderVertical;
 	}
 	
-	LayerWithBorderVertical *LayerWithBorderVertical::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, LayerWithBorderVertical *&layerWithBorderVertical) {
 		sf::Vector2f minSize{};
 		
 		if(node["min-size"])
@@ -105,9 +105,9 @@ namespace ui {
 					node["bounds"][i] >> bounds[i];
 				}
 				
-				return new LayerWithBorderVertical{objects, bounds, minSize};
+				{ layerWithBorderVertical = new LayerWithBorderVertical{objects, bounds, minSize}; return true; }
 			} else {
-				return new LayerWithBorderVertical{objects, minSize};
+				{ layerWithBorderVertical = new LayerWithBorderVertical{objects, minSize}; return true; }
 			}
 		} else {
 			IScalable *firstObject;
@@ -119,7 +119,7 @@ namespace ui {
 			if(node["bound"])
 				node["bound"] >> bound;
 			
-			return new LayerWithBorderVertical{firstObject, secondObject, bound, minSize};
+			{ layerWithBorderVertical = new LayerWithBorderVertical{firstObject, secondObject, bound, minSize}; return true; }
 		}
 	}
 	

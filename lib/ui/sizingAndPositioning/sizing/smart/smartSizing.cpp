@@ -18,7 +18,7 @@ namespace ui {
 		return (objectSize - addition) / parentCoefficient;
 	}
 	
-	SmartSizing *SmartSizing::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, SmartSizing *&smartSizing) {
 		float targetCoefficient{1.f};
 		float parentCoefficient{0.f};
 		float addition{0.f};
@@ -30,7 +30,7 @@ namespace ui {
 		if(node["addition"])
 			node["addition"] >> addition;
 		
-		return new SmartSizing{targetCoefficient, parentCoefficient, addition};
+		{ smartSizing = new SmartSizing{targetCoefficient, parentCoefficient, addition}; return true; }
 	}
 	
 	Sizing *createSizing(float targetCoefficient, float parentCoefficient, float addition) {

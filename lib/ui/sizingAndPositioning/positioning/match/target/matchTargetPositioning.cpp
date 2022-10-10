@@ -11,7 +11,7 @@ namespace ui {
 		return new MatchTargetPositioning{targetCoefficient, objectCoefficient, offset};
 	}
 	
-	MatchTargetPositioning *MatchTargetPositioning::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, MatchTargetPositioning *&matchTargetPositioning) {
 		float targetCoefficient;
 		float objectCoefficient;
 		float offset{0.f};
@@ -21,6 +21,6 @@ namespace ui {
 		if(node["offset"])
 			node["offset"] >> offset;
 		
-		return new MatchTargetPositioning{targetCoefficient, objectCoefficient, offset};
+		{ matchTargetPositioning = new MatchTargetPositioning{targetCoefficient, objectCoefficient, offset}; return true; }
 	}
 }

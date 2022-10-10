@@ -22,7 +22,7 @@ namespace ui {
 		return constPanel;
 	}
 	
-	ConstPanel *ConstPanel::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, ConstPanel *&constPanel) {
 		IScalable *object;
 		BaseSizing2 *sizing;
 		BasePositioning2 *positioning;
@@ -34,6 +34,6 @@ namespace ui {
 		if(node["displayed"])
 			node["displayed"] >> displayed;
 		
-		return new ConstPanel{object, sizing, positioning, displayed};
+		{ constPanel = new ConstPanel{object, sizing, positioning, displayed}; return true; }
 	}
 }

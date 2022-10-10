@@ -13,10 +13,10 @@ namespace ui {
 		return new ConstSizing(size);
 	}
 	
-	ConstSizing *ConstSizing::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, ConstSizing *&constSizing) {
 		float size;
 		node["size"] >> size;
-		return new ConstSizing{size};
+		{ constSizing = new ConstSizing{size}; return true; }
 	}
 	
 	Sizing *size(float constSize) {

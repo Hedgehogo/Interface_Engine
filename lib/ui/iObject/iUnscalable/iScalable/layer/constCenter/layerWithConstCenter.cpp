@@ -85,7 +85,7 @@ namespace ui {
 		return layerWithConstCenter;
 	}
 	
-	LayerWithConstCenter *LayerWithConstCenter::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, LayerWithConstCenter *&layerWithConstCenter) {
 		IScalable *object;
 		IScalable *firstObject;
 		IScalable *secondObject;
@@ -113,7 +113,7 @@ namespace ui {
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		
-		return new LayerWithConstCenter{object, firstObject, secondObject, background, aspectRatio, minSize};
+		{ layerWithConstCenter = new LayerWithConstCenter{object, firstObject, secondObject, background, aspectRatio, minSize}; return true; }
 	}
 	
 	void LayerWithConstCenter::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

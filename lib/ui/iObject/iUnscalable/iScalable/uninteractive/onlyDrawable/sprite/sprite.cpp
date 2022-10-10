@@ -47,7 +47,7 @@ namespace ui {
 		return sprite1;
 	}
 	
-	Sprite *Sprite::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, Sprite *&sprite) {
 		sf::Texture* texture;
 		sf::Vector2f minSize{};
 		
@@ -56,8 +56,8 @@ namespace ui {
 		if(node["rect"]) {
 			sf::IntRect rect;
 			node["rect"] >> rect;
-			return new Sprite{*texture, rect, minSize};
+			{ sprite = new Sprite{*texture, rect, minSize}; return true; }
 		}
-		return new Sprite{*texture, minSize};
+		{ sprite = new Sprite{*texture, minSize}; return true; }
 	}
 }

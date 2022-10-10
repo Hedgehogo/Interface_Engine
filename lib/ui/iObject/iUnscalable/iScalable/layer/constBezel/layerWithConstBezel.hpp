@@ -29,10 +29,10 @@ namespace ui {
 		
 		LayerWithConstBezel* copy() override;
 		
-		static LayerWithConstBezel* createFromYaml(const YAML::Node &node);
-		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, LayerWithConstBezel *&layerWithConstBezel);
 	
 	typedef LayerWithConstBezel LayerWCBezel;
 	typedef LayerWithConstBezel LWCBe;

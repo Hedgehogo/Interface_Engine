@@ -23,7 +23,7 @@ namespace ui {
 		return new MatchSidesPositioning{parentSide, objectSide, offset};
 	}
 	
-	MatchSidesPositioning *MatchSidesPositioning::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, MatchSidesPositioning *&matchSidesPositioning) {
 		Location parentSide;
 		Location objectSide;
 		float offset{0.f};
@@ -33,7 +33,7 @@ namespace ui {
 		if(node["offset"])
 			node["offset"] >> offset;
 		
-		return new MatchSidesPositioning{parentSide, objectSide, offset};
+		{ matchSidesPositioning = new MatchSidesPositioning{parentSide, objectSide, offset}; return true; }
 	}
 	
 	Positioning *createPosition(Location parentSide, Location objectSide, float offset) {

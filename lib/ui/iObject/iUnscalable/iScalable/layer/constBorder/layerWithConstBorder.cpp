@@ -69,9 +69,9 @@ namespace ui {
         secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
 	
-	LayerWithConstBorder *LayerWithConstBorder::createFromYaml(const YAML::Node &node) {
-		IScalable *constObject;
-		IScalable *secondObject;
+	bool convertPointer(const YAML::Node &node, LayerWithConstBorder *&layerWithConstBorder) {
+		IScalable *constObject{nullptr};
+		IScalable *secondObject{nullptr};
 		Side side;
 		float borderDistance;
 		sf::Vector2f minSize{};
@@ -83,6 +83,6 @@ namespace ui {
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		
-		return new LayerWithConstBorder{constObject, secondObject, side, borderDistance, minSize};
+		{ layerWithConstBorder = new LayerWithConstBorder{constObject, secondObject, side, borderDistance, minSize}; return true; }
 	}
 }

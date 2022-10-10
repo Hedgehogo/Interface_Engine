@@ -13,7 +13,7 @@ namespace ui {
 		return new TargetCoefficientSizing{coefficient, addition};
 	}
 	
-	TargetCoefficientSizing *TargetCoefficientSizing::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, TargetCoefficientSizing *&targetCoefficientSizing) {
 		float coefficient;
 		float addition{0.f};
 		
@@ -21,6 +21,6 @@ namespace ui {
 		if(node["addition"])
 			node["addition"] >> addition;
 		
-		return new TargetCoefficientSizing{coefficient, addition};
+		{ targetCoefficientSizing = new TargetCoefficientSizing{coefficient, addition}; return true; }
 	}
 }

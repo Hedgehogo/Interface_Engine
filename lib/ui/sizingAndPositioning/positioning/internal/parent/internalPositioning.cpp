@@ -11,7 +11,7 @@ namespace ui {
 		return new InternalPositioning{coefficient, offset};
 	}
 	
-	InternalPositioning * InternalPositioning::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, InternalPositioning *&internalPositioning) {
 		float coefficient;
 		float offset{0.f};
 		
@@ -19,6 +19,6 @@ namespace ui {
 		if(node["offset"])
 			node["offset"] >> offset;
 		
-		return new InternalPositioning{coefficient, offset};
+		{ internalPositioning = new InternalPositioning{coefficient, offset}; return true; }
 	}
 }

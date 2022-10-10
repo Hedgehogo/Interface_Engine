@@ -48,7 +48,7 @@ namespace ui {
 		return constRatioSizing2;
 	}
 	
-	ConstRatioSizing2 *ConstRatioSizing2::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, ConstRatioSizing2 *&constRatioSizing2) {
 		float ratio{1.0f};
 		bool horizontal{true};
 		
@@ -71,16 +71,16 @@ namespace ui {
 			
 			node["sizing"] >> sizing;
 			
-			return new ConstRatioSizing2{sizing};
+			{ constRatioSizing2 = new ConstRatioSizing2{sizing}; return true; }
 		} else if(node["relative"]) {
 			std::string relative;
 			
 			node["relative"] >> relative;
 			
 			if(relative == "parent") {
-				return new ConstRatioSizing2{ratio, horizontal, true};
+				{ constRatioSizing2 = new ConstRatioSizing2{ratio, horizontal, true}; return true; }
 			} else if(relative == "normal") {
-				return new ConstRatioSizing2{ratio, horizontal, false};
+				{ constRatioSizing2 = new ConstRatioSizing2{ratio, horizontal, false}; return true; }
 			} else {
 				throw YAML::BadConversion{node["relative"].Mark()};
 			}
@@ -89,7 +89,7 @@ namespace ui {
 			
 			node["const-size"] >> constSize;
 			
-			return new ConstRatioSizing2{constSize, ratio, horizontal};
+			{ constRatioSizing2 = new ConstRatioSizing2{constSize, ratio, horizontal}; return true; }
 		} else if(node["coefficient"]) {
 			float coefficient;
 			float addition{};
@@ -110,7 +110,7 @@ namespace ui {
 				}
 			}
 			
-			return new ConstRatioSizing2{coefficient, addition, ratio, horizontal, relativeTarget};
+			{ constRatioSizing2 = new ConstRatioSizing2{coefficient, addition, ratio, horizontal, relativeTarget}; return true; }
 		} else if(node["target-coefficient"] && node["parent-coefficient"]) {
 			float targetCoefficient;
 			float parentCoefficient;
@@ -121,7 +121,7 @@ namespace ui {
 			if(node["addition"])
 				node["addition"] >> addition;
 			
-			return new ConstRatioSizing2{targetCoefficient, parentCoefficient, addition, ratio, horizontal};
+			{ constRatioSizing2 = new ConstRatioSizing2{targetCoefficient, parentCoefficient, addition, ratio, horizontal}; return true; }
 		} else {
 			throw YAML::BadConversion{node.Mark()};
 		}

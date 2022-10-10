@@ -47,9 +47,9 @@ namespace ui {
 		return capsule;
 	}
 	
-	Capsule *Capsule::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, Capsule *&capsule) {
 		sf::Color color;
 		node["color"] >> color;
-		return new Capsule{color};
+		{ capsule = new Capsule{color}; return true; }
 	}
 }

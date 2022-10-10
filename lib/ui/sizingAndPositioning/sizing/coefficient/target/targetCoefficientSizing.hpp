@@ -15,7 +15,7 @@ namespace ui {
 		float findSize(float, float targetSize) override;
 		
 		TargetCoefficientSizing* copy() override;
-		
-		static TargetCoefficientSizing* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, TargetCoefficientSizing *&targetCoefficientSizing);
 }

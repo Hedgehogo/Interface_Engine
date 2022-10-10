@@ -14,7 +14,7 @@ namespace ui {
 		return clickHidePanelInteraction;
 	}
 	
-	ClickHidePanelInteraction *ClickHidePanelInteraction::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, ClickHidePanelInteraction *&clickHidePanelInteraction) {
 		Key button;
 		bool onlyOnParent{false};
 		
@@ -22,6 +22,6 @@ namespace ui {
 		if(node["only-on-parent"])
 			node["only-on-parent"] >> onlyOnParent;
 		
-		return new ClickHidePanelInteraction{button, onlyOnParent};
+		{ clickHidePanelInteraction = new ClickHidePanelInteraction{button, onlyOnParent}; return true; }
 	}
 }

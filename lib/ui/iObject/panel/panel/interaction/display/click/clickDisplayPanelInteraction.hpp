@@ -16,7 +16,7 @@ namespace ui {
 	
 	public:
 		ClickDisplayPanelInteraction* copy() override;
-
-        static ClickDisplayPanelInteraction* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, ClickDisplayPanelInteraction *&clickDisplayPanelInteraction);
 }

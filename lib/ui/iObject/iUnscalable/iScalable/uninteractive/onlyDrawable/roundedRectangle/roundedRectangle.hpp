@@ -22,7 +22,7 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		RoundedRectangle* copy() override;
-		
-		static RoundedRectangle* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, RoundedRectangle *&roundedRectangle);
 }

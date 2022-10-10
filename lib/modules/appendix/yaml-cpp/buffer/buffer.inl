@@ -29,7 +29,7 @@ namespace ui {
 		if(level >= 0 && level < objectsLevels.size()) {
 			objectsLevels[level].try_emplace(name, ptr);
 		} else {
-			throw BufferNonExistentNestingLevelException{name, level};
+			throw BufferNonExistentNestingLevelException{node.Mark(), name, level};
 		}
 	}
 	
@@ -72,37 +72,43 @@ namespace ui {
 				insert<T>(name, node);
 			}
 		}
-		return at<T>(name);
+		try {
+			return at<T>(name);
+		} catch (BufferVariableNotFoundException &exception) {
+			throw YamlBufferVariableNotFoundException{node.Mark(), exception};
+		}
 	}
 	
 	template<typename T>
-	WithVector2<T> *WithVector2<T>::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, WithVector2<T> *&withVector2) {
 		if(node["x"] && node["y"]) {
-			return new WithVector2<T>(Buffer::get<T>(node["x"]), Buffer::get<T>(node["y"]));
+			withVector2 = new WithVector2<T>(Buffer::get<T>(node["x"]), Buffer::get<T>(node["y"]));
 		} else {
 			sf::Vector2<typename WithVector2<T>::V> vector;
 			
 			if(node["vector"]) node["vector"] >> vector;
 			
-			return new WithVector2<T>(vector);
+			withVector2 = new WithVector2<T>(vector);
 		}
+		return true;
 	}
 	
-	template <typename T>
-	WithList<T> *WithList<T>::createFromYaml(const YAML::Node &node) {
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, WithList<T> *&withList) {
 		if(node["list"]) {
 			std::vector<typename WithList<T>::V> list{node["list"].size()};
 			for(int i = 0; i < list.size(); ++i) {
 				node["list"][i] >> list[i];
 			}
-			return new WithList<T>{list};
+			withList = new WithList<T>{list};
 		} else {
 			std::vector<std::shared_ptr<T>> list{node["vars"].size()};
 			for(int i = 0; i < list.size(); ++i) {
 				list[i] = Buffer::get<T>(node["vars"][i]);
 			}
-			return new WithList<T>{list};
+			withList = new WithList<T>{list};
 		}
+		return true;
 	}
 	
 	template <typename T>

@@ -156,7 +156,7 @@ namespace ui {
 		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
 	
-	LayerWithMovableBorder *LayerWithMovableBorder::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, LayerWithMovableBorder *&layerWithMovableBorder) {
 		IScalable *firstObject;
 		IScalable *secondObject;
 		bool isHorizontalBorder{false};
@@ -179,7 +179,7 @@ namespace ui {
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		
-		return new LayerWithMovableBorder{firstObject, secondObject, isHorizontalBorder, borderValue, borderInteractionSize};
+		{ layerWithMovableBorder = new LayerWithMovableBorder{firstObject, secondObject, isHorizontalBorder, borderValue, borderInteractionSize}; return true; }
 	}
 }
 

@@ -38,8 +38,8 @@ namespace ui {
 		
 		Bar* copy() override;
 		
-		static Bar* createFromYaml(const YAML::Node &node);
-		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, Bar *&bar);
 }

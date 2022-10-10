@@ -64,7 +64,7 @@ namespace ui {
         return new TextSelectionEvent{};
     }
 
-    TextSelectionEvent *TextSelectionEvent::createFromYaml(const YAML::Node &node) {
-        return new TextSelectionEvent{};
+    bool convertPointer(const YAML::Node &node, TextSelectionEvent *&textSelectionEvent) {
+        { textSelectionEvent = new TextSelectionEvent{}; return true; }
     }
 }

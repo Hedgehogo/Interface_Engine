@@ -16,11 +16,11 @@ namespace ui {
         return new InternalPositioning2{*horizontal.copy(), *vertical.copy()};
     }
 	
-	InternalPositioning2 *InternalPositioning2::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, InternalPositioning2 *&internalPositioning2) {
 		sf::Vector2f coefficient;
 		
 		node["coefficient"] >> coefficient;
 		
-		return new InternalPositioning2{coefficient};
+		{ internalPositioning2 = new InternalPositioning2{coefficient}; return true; }
 	}
 }

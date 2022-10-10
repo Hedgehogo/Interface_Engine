@@ -14,9 +14,9 @@ namespace ui {
 		float findSize(float, float) override;
 		
 		ConstSizing* copy() override;
-		
-		static ConstSizing* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, ConstSizing *&constSizing);
 	
 	Sizing* createSize(float constSize);
 }

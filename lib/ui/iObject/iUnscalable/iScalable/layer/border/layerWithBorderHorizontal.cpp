@@ -86,7 +86,7 @@ namespace ui {
 		return layerWithBorderHorizontal;
 	}
 	
-	LayerWithBorderHorizontal *LayerWithBorderHorizontal::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, LayerWithBorderHorizontal *&layerWithBorderHorizontal) {
 		sf::Vector2f minSize{};
 		
 		if(node["min-size"])
@@ -104,9 +104,9 @@ namespace ui {
 					node["bounds"][i] >> bounds[i];
 				}
 				
-				return new LayerWithBorderHorizontal{objects, bounds, minSize};
+				{ layerWithBorderHorizontal = new LayerWithBorderHorizontal{objects, bounds, minSize}; return true; }
 			} else {
-				return new LayerWithBorderHorizontal{objects, minSize};
+				{ layerWithBorderHorizontal = new LayerWithBorderHorizontal{objects, minSize}; return true; }
 			}
 		} else {
 			IScalable *firstObject;
@@ -118,7 +118,7 @@ namespace ui {
 			if(node["bound"])
 				node["bound"] >> bound;
 			
-			return new LayerWithBorderHorizontal{firstObject, secondObject, bound, minSize};
+			{ layerWithBorderHorizontal = new LayerWithBorderHorizontal{firstObject, secondObject, bound, minSize}; return true; }
 		}
 	}
 	

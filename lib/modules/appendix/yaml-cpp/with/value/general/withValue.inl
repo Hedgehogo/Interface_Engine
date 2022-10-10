@@ -14,12 +14,13 @@ namespace ui {
 		this->value = value;
 	}
 	
-	template <typename T>
-	WithValue<T> *WithValue<T>::createFromYaml(const YAML::Node &node) {
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, WithValue<T> *&withValue) {
 		T value{};
 		
 		if(node["value"]) node["value"] >> value;
 		
-		return new WithValue<T>{value};
+		withValue = new WithValue<T>{value};
+		return true;
 	}
 }

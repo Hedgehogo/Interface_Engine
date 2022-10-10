@@ -21,9 +21,9 @@ namespace ui {
 		return new RelativeParentSizing{addition};
 	}
 	
-	RelativeParentSizing *RelativeParentSizing::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, RelativeParentSizing *&relativeParentSizing) {
 		float addition;
 		node["addition"] >> addition;
-		return new RelativeParentSizing{addition};
+		{ relativeParentSizing = new RelativeParentSizing{addition}; return true; }
 	}
 }

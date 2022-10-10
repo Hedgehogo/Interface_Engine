@@ -20,7 +20,7 @@ namespace ui
 		WhileChangingObjectsEvent(LayerWithChangeableObjects *objects = nullptr, int offset = 1 );
 
 		WhileChangingObjectsEvent* copy() override;
-
-		static WhileChangingObjectsEvent* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, WhileChangingObjectsEvent *&whileChangingObjectsEvent);
 } // ui

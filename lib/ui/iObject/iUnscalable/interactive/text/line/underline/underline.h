@@ -15,7 +15,7 @@ namespace ui {
         void init(float underlineOffset, float underlineThickness, sf::VertexArray vertexArray, sf::RenderTarget &renderTarget);
     public:
         Underline* copy();
-
-        static Underline* createFromYaml(const YAML::Node &node);
     };
+	
+	bool convertPointer(const YAML::Node &node, Underline *&underline);
 }

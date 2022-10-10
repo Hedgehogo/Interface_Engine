@@ -14,7 +14,7 @@ namespace ui {
 		float findPosition(float parentPosition, float objectSize, float, float targetSize) override;
 		
 		MatchTargetPositioning* copy() override;
-		
-		static MatchTargetPositioning* createFromYaml(const YAML::Node &node);
 	};
+	
+	bool convertPointer(const YAML::Node &node, MatchTargetPositioning *&matchTargetPositioning);
 }

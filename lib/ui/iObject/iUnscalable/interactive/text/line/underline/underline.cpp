@@ -32,9 +32,9 @@ namespace ui {
         return underline;
     }
 
-    Underline *Underline::createFromYaml(const YAML::Node &node) {
+    bool convertPointer(const YAML::Node &node, Underline *&underline) {
         sf::Color color{nullColor};
         if (node["color"]) node["color"] >> color;
-        return new Underline{color};
+        { underline = new Underline{color}; return true; }
     }
 }

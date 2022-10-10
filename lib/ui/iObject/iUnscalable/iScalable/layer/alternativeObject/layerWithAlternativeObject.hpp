@@ -11,10 +11,10 @@ namespace ui {
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		static LayerWithAlternativeObject* createFromYaml(const YAML::Node &node);
-		
 		LayerWithAlternativeObject* copy() override;
 	};
+	
+	bool convertPointer(const YAML::Node &node, LayerWithAlternativeObject *&layerWithAlternativeObject);
 	
 	typedef LayerWithAlternativeObject LayerWAObject;
 	typedef LayerWithAlternativeObject LWAO;

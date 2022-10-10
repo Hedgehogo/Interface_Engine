@@ -19,8 +19,7 @@ namespace ui {
 		return buttonWithIndex;
 	}
 
-    Button *Button::createFromYaml(const YAML::Node &node) {
-
+    bool convertPointer(const YAML::Node &node, Button *&button) {
         IUninteractive *background;
 
         node["background"] >> background;
@@ -28,12 +27,12 @@ namespace ui {
 		if (node["interaction"]) {
 			IInteraction *interaction;
 			node["interaction"] >> interaction;
-			return new Button{background, interaction};
+			{ button = new Button{background, interaction}; return true; }
 		}
 
 		int index;
 		node["index"] >> index;
-
-        return new Button{background, index};
+	
+		{ button = new Button{background, index}; return true; }
     }
 }

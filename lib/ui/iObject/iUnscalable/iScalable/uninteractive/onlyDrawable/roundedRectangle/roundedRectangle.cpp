@@ -45,11 +45,11 @@ namespace ui {
 		return rectangle;
 	}
 	
-	RoundedRectangle *RoundedRectangle::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, RoundedRectangle *&roundedRectangle) {
 		sf::Color color;
 		float radius{};
 		node["color"] >> color;
 		node["radius"] >> radius;
-		return new RoundedRectangle{color, radius};
+		{ roundedRectangle = new RoundedRectangle{color, radius}; return true; }
 	}
 }

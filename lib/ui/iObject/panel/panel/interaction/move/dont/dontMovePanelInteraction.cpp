@@ -18,7 +18,7 @@ namespace ui {
 		return new DontMovePanelInteraction{};
 	}
 
-    DontMovePanelInteraction *DontMovePanelInteraction::createFromYaml(const YAML::Node &node) {
-        return new DontMovePanelInteraction{};
+    bool convertPointer(const YAML::Node &node, DontMovePanelInteraction *&dontMovePanelInteraction) {
+        { dontMovePanelInteraction = new DontMovePanelInteraction{}; return true; }
     }
 }

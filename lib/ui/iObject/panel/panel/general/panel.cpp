@@ -78,7 +78,7 @@ namespace ui {
 		return panel;
 	}
 	
-	Panel *Panel::createFromYaml(const YAML::Node &node) {
+	bool convertPointer(const YAML::Node &node, Panel *&panel) {
 		IScalable *object;
 		HidePanelInteraction *hideInteraction;
 		BaseSizing2 *sizing;
@@ -97,9 +97,9 @@ namespace ui {
 			
 			node["move-interaction"] >> moveInteraction;
 			
-			return new Panel{object, hideInteraction, moveInteraction, sizing, positioning, displayed};
+			{ panel = new Panel{object, hideInteraction, moveInteraction, sizing, positioning, displayed}; return true; }
 		} else {
-			return new Panel{object, hideInteraction, sizing, positioning, displayed};
+			{ panel = new Panel{object, hideInteraction, sizing, positioning, displayed}; return true; }
 		}
 	}
 }

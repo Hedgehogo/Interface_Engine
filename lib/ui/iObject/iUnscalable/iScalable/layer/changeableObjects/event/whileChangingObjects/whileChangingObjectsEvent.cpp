@@ -23,12 +23,12 @@ namespace ui
 		return new WhileChangingObjectsEvent { object };
 	}
 
-	WhileChangingObjectsEvent *WhileChangingObjectsEvent::createFromYaml(const YAML::Node &node)
+	bool convertPointer(const YAML::Node &node, WhileChangingObjectsEvent *&whileChangingObjectsEvent)
 	{
 		LayerWithChangeableObjects *object = nullptr;
 
 		if (node["object"]) node["object"] >> object;
 
-		return new WhileChangingObjectsEvent { object };
+		{ whileChangingObjectsEvent = new WhileChangingObjectsEvent{ object }; return true; }
 	}
 } // ui
