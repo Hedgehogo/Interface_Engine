@@ -1,12 +1,12 @@
 #include "slider.hpp"
 
 namespace ui {
-	Slider::Slider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2> &value, sf::Vector2f sliderScale, Key button, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity,
+	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2f sliderScale, Key button, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity,
 				   sf::Vector2f wheelSensitivity) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), scale(sliderScale) {
 	}
 	
-	Slider::Slider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2> &value, sf::Vector2i division, sf::Vector2f sliderScale, Key button, bool wheelHorizontal) :
+	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2i division, sf::Vector2f sliderScale, Key button, bool wheelHorizontal) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, button, division, wheelHorizontal}), scale(sliderScale) {
 	}
 	
@@ -27,7 +27,7 @@ namespace ui {
 		return minSize;
 	}
 	
-	Slider::Slider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2> &value, SliderInteraction *interaction, sf::Vector2f sliderScale) :
+	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, SliderInteraction *interaction, sf::Vector2f sliderScale) :
 		BaseSlider(slider, background, value, interaction), scale(sliderScale) {
 	}
 	
@@ -41,14 +41,14 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, Slider *&sliderZone) {
 		IUninteractive *slider;
 		IUninteractive *background;
-		std::shared_ptr<WithCoefficientVec2> value;
+		PSCoefficientVec2 value;
 		sf::Vector2f sliderScale{1.0f, 0.5f};
 		Key button{Key::mouseLeft};
 		bool wheelHorizontal{false};
 		
 		node["slider"] >> slider;
 		node["background"] >> background;
-		value = Buffer::get<WithCoefficientVec2>(node["value"]);
+		value = Buffer::get<SCoefficientVec2>(node["value"]);
 		if(node["slider-scale"])
 			node["slider-scale"] >> sliderScale;
 		if(node["button"])

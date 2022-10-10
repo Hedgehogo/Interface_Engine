@@ -16,7 +16,7 @@ namespace ui {
 		if(Buffer::exist(node["condition"])) {
 			node["first"] >> object;
 		} else {
-			Buffer::insert<WithValue<bool>>(node["condition"]);
+			Buffer::insert<Sbool>(node["condition"]);
 			node["second"] >> object;
 		}
 		correctly = true;

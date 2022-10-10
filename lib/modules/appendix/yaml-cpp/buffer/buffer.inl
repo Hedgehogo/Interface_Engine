@@ -80,33 +80,33 @@ namespace ui {
 	}
 	
 	template<typename T>
-	bool convertPointer(const YAML::Node &node, WithVector2<T> *&withVector2) {
+	bool convertPointer(const YAML::Node &node, SVector2<T> *&withVector2) {
 		if(node["x"] && node["y"]) {
-			withVector2 = new WithVector2<T>(Buffer::get<T>(node["x"]), Buffer::get<T>(node["y"]));
+			withVector2 = new SVector2<T>(Buffer::get<T>(node["x"]), Buffer::get<T>(node["y"]));
 		} else {
-			sf::Vector2<typename WithVector2<T>::V> vector;
+			sf::Vector2<typename SVector2<T>::V> vector;
 			
 			if(node["vector"]) node["vector"] >> vector;
 			
-			withVector2 = new WithVector2<T>(vector);
+			withVector2 = new SVector2<T>(vector);
 		}
 		return true;
 	}
 	
 	template<typename T>
-	bool convertPointer(const YAML::Node &node, WithList<T> *&withList) {
+	bool convertPointer(const YAML::Node &node, SList<T> *&withList) {
 		if(node["list"]) {
-			std::vector<typename WithList<T>::V> list{node["list"].size()};
+			std::vector<typename SList<T>::V> list{node["list"].size()};
 			for(int i = 0; i < list.size(); ++i) {
 				node["list"][i] >> list[i];
 			}
-			withList = new WithList<T>{list};
+			withList = new SList<T>{list};
 		} else {
 			std::vector<std::shared_ptr<T>> list{node["vars"].size()};
 			for(int i = 0; i < list.size(); ++i) {
 				list[i] = Buffer::get<T>(node["vars"][i]);
 			}
-			withList = new WithList<T>{list};
+			withList = new SList<T>{list};
 		}
 		return true;
 	}

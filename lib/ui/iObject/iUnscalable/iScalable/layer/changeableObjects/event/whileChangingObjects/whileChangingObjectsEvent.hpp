@@ -9,7 +9,7 @@ namespace ui
 	{
 	protected:
 		int objectsSize;
-		std::shared_ptr<WithValue<uint>> index;
+		std::shared_ptr<SValue<uint>> index;
 		int offset;
 
 		void startPressed() override;

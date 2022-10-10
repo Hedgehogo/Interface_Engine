@@ -9,20 +9,20 @@ namespace ui
 	class LayerWithChangeableObjects : public Layer, public LayoutWithObjectsArray, public IDrawable
 	{
 	protected:
-		std::shared_ptr<WithValue<uint>> value;
+		std::shared_ptr<SValue<uint>> value;
 		std::vector<IScalable *> objects;
 
 		std::vector<DrawManager> drawManagers;
 	public:
-		LayerWithChangeableObjects(std::vector<IScalable*> objects, std::shared_ptr<WithValue<uint>> value, sf::Vector2f minSize = { 0, 0});
+		LayerWithChangeableObjects(std::vector<IScalable*> objects, std::shared_ptr<SValue<uint>> value, sf::Vector2f minSize = { 0, 0});
 
 		LayerWithChangeableObjects(std::vector<IScalable*> objects, uint index = 0, sf::Vector2f minSize = { 0, 0});
 
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 
-		void setValue(std::shared_ptr<WithValue<uint>> index);
+		void setValue(std::shared_ptr<SValue<uint>> index);
 
-		std::shared_ptr<WithValue<uint>> getValue();
+		std::shared_ptr<SValue<uint>> getValue();
 
 		void setIndex(uint index);
 

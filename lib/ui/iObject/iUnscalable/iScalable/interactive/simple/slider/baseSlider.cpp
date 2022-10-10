@@ -10,7 +10,7 @@ namespace ui {
 		dynamic_cast<SliderInteraction *>(interaction)->init(*interactionManager);
 	}
 	
-	BaseSlider::BaseSlider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2> &value, SliderInteraction *interaction) :
+	BaseSlider::BaseSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, SliderInteraction *interaction) :
 		Interactive_Simple(interaction), slider(slider), background(background), value(value), position(), sliderSize(), moveZoneSize() {
 	}
 	

@@ -2,11 +2,11 @@
 
 namespace ui
 {
-	LayerWithChangeableObjects::LayerWithChangeableObjects(std::vector<IScalable *> objects, std::shared_ptr<WithValue<uint>> value, sf::Vector2f minSize) :
+	LayerWithChangeableObjects::LayerWithChangeableObjects(std::vector<IScalable *> objects, std::shared_ptr<SValue<uint>> value, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithObjectsArray(objects), objects(std::move(objects)), value( value), drawManagers( this->objects.size()) {}
 
 	LayerWithChangeableObjects::LayerWithChangeableObjects(std::vector<IScalable *> objects, uint index, sf::Vector2f minSize) :
-		Layer(minSize), LayoutWithObjectsArray(objects), objects(std::move(objects)), value( std::make_shared<WithValue<uint>>( index)), drawManagers( this->objects.size()) {}
+		Layer(minSize), LayoutWithObjectsArray(objects), objects(std::move(objects)), value( std::make_shared<SValue<uint>>( index)), drawManagers( this->objects.size()) {}
 
 	void LayerWithChangeableObjects::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager)
 	{
@@ -18,12 +18,12 @@ namespace ui
 	}
 
 
-	void LayerWithChangeableObjects::setValue(std::shared_ptr<WithValue<uint>> index)
+	void LayerWithChangeableObjects::setValue(std::shared_ptr<SValue<uint>> index)
 	{
 		value = index;
 	}
 
-	std::shared_ptr<WithValue<uint>> LayerWithChangeableObjects::getValue()
+	std::shared_ptr<SValue<uint>> LayerWithChangeableObjects::getValue()
 	{
 		return value;
 	}
@@ -78,8 +78,8 @@ namespace ui
 		if (node["minSize"]) node["minSize"] >> minSize;
 
 		if (node["value"]) {
-			std::shared_ptr<WithValue<uint>> value;
-			value = Buffer::get<WithValue<uint>>(node["value"]);
+			std::shared_ptr<SValue<uint>> value;
+			value = Buffer::get<SValue<uint>>(node["value"]);
 			layerWithChangeableObjects = new LayerWithChangeableObjects{ objects, value, minSize }; return true;
 		}
 

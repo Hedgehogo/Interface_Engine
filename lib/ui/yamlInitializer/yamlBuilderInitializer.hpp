@@ -29,7 +29,7 @@
 #include "../iObject/iUnscalable/iScalable/interactive/simple/slider/slider/slider.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/button/baseButton.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/button/general/button.hpp"
-#include "../iObject/iUnscalable/iScalable/interactive/simple/button/buttonWIthPanel/buttonWithPanel.hpp"
+#include "../iObject/iUnscalable/iScalable/interactive/simple/button/buttonWithPanel/buttonWithPanel.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/switch/switch.hpp"
 #include "../iObject/iUnscalable/interactive/text/text.h"
 #include "../iObject/iUnscalable/interactive/text/textBlock/simple/textBlock.h"

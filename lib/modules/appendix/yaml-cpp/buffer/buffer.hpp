@@ -3,8 +3,8 @@
 #include <iostream>
 #include <functional>
 #include <regex>
-#include "../with/list/general/withList.hpp"
-#include "../with/vector/general/withVector2.hpp"
+#include "../shared/list/general/sList.hpp"
+#include "../shared/vector/general/sVector2.hpp"
 #include "exception/bufferException.hpp"
 
 namespace ui {
@@ -20,22 +20,22 @@ namespace ui {
 namespace ui {
 	std::vector<std::string> splitByDelimiter(const std::string& str, char delimiter);
 	
-	std::shared_ptr<IWith> getVectorAxis(const std::shared_ptr<IWith>& vector, const std::string& name);
+	PIShared getVectorAxis(const PIShared& vector, const std::string& name);
 	
 	class Buffer {
 	public:
-		typedef std::function<std::shared_ptr<IWith>(const std::shared_ptr<IWith>&, const std::string&)> getOption;
+		typedef std::function<PIShared(const PIShared&, const std::string&)> getOption;
 	
 	protected:
-		static std::vector<std::map<std::string, std::shared_ptr<IWith>>> objectsLevels;
+		static std::vector<std::map<std::string, PIShared>> objectsLevels;
 		static std::vector<std::pair<std::regex, getOption>> options;
 		
-		static std::map<std::string, std::shared_ptr<IWith>>& getLevel();
+		static std::map<std::string, PIShared>& getLevel();
 		
 		template<typename T>
 		static void insert(const std::string& name, const YAML::Node &node);
 		
-		static std::shared_ptr<IWith> getVariable(const std::shared_ptr<IWith>& var, std::vector<std::string>& names);
+		static PIShared getVariable(const PIShared& var, std::vector<std::string>& names);
 		
 	public:
 		Buffer() = default;

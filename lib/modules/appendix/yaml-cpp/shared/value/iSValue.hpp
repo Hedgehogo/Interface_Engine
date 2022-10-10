@@ -1,0 +1,22 @@
+#pragma once
+#include "../iShared.hpp"
+
+namespace ui {
+	template<typename T>
+	class ISValue : public IShared {
+	public:
+		virtual const T& getValue() const = 0;
+		
+		virtual void setValue(const T& value) = 0;
+	};
+	
+	typedef ISValue<bool> ISbool;
+	typedef ISValue<float> ISfloat;
+	typedef ISValue<int> ISint;
+	typedef ISValue<unsigned> ISuint;
+	
+	typedef std::shared_ptr<ISbool> PISbool;
+	typedef std::shared_ptr<ISfloat> PISfloat;
+	typedef std::shared_ptr<ISint> PISint;
+	typedef std::shared_ptr<unsigned> PISuint;
+}

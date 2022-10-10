@@ -12,7 +12,7 @@ namespace ui
 
 	void ChangeObjectEvent::whileNotPressed() {}
 
-	ChangeObjectEvent::ChangeObjectEvent(std::shared_ptr<WithValue<uint>> value, uint index) : value( value), index( index) {}
+	ChangeObjectEvent::ChangeObjectEvent(std::shared_ptr<SValue<uint>> value, uint index) : value( value), index( index) {}
 
 	ChangeObjectEvent *ChangeObjectEvent::copy()
 	{
@@ -22,7 +22,7 @@ namespace ui
 	bool convertPointer(const YAML::Node &node, ChangeObjectEvent *&changeObjectEvent)
 	{
 		uint index {0};
-		std::shared_ptr<WithValue<uint>> value = Buffer::get<WithValue<uint>>(node["value"]);
+		std::shared_ptr<SValue<uint>> value = Buffer::get<SValue<uint>>(node["value"]);
 
 		if (node["index"]) node["index"] >> index;
 

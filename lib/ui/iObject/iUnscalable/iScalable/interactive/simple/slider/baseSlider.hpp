@@ -2,14 +2,14 @@
 #include "../../../uninteractive/uninteractive.hpp"
 #include "../interactiveSimple.hpp"
 #include "interaction/interaction/sliderInteraction.hpp"
-#include "../../../../../../../modules/appendix/yaml-cpp/with//vector/general/withVector2.hpp"
+#include "../../../../../../../modules/appendix/yaml-cpp/shared/shared.hpp"
 
 namespace ui {
 	class BaseSlider : public Interactive_Simple, public IDrawable {
 	protected:
 		IUninteractive* slider;
 		IUninteractive* background;
-		std::shared_ptr<WithCoefficientVec2> value;
+		PSCoefficientVec2 value;
 		sf::Vector2f position;
 		sf::Vector2f sliderSize;
 		sf::Vector2f moveZoneSize;
@@ -21,7 +21,7 @@ namespace ui {
 		void copy(BaseSlider* baseSlider);
 		
 	public:
-		BaseSlider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2>& value, SliderInteraction* interaction);
+		BaseSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2& value, SliderInteraction* interaction);
 		
 		sf::Vector2f getSliderSize();
 		

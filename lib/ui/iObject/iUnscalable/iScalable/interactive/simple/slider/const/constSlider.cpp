@@ -2,7 +2,7 @@
 #include "constSlider.hpp"
 
 namespace ui {
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2> &value, float sliderScale, Key button, bool wheelHorizontal,
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, float sliderScale, Key button, bool wheelHorizontal,
 							 SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
 		
@@ -10,7 +10,7 @@ namespace ui {
 		aspectRatio = sliderSize.x / sliderSize.y;
 	}
 	
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2> &value, sf::Vector2i division, float sliderScale, Key button, bool wheelHorizontal) :
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2i division, float sliderScale, Key button, bool wheelHorizontal) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, button, division, wheelHorizontal}), sliderScale(sliderScale) {
 		
 		sliderSize = slider->getNormalSize();
@@ -28,7 +28,7 @@ namespace ui {
 		background->resize(size, position);
 	}
 	
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const std::shared_ptr<WithCoefficientVec2> &value, SliderInteraction *interaction) :
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, SliderInteraction *interaction) :
 		BaseSlider(slider, background, value, interaction) {
 	}
 	
@@ -42,14 +42,14 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, ConstSlider *&constSlider) {
 		IUninteractive *slider;
 		IUninteractive *background;
-		std::shared_ptr<WithCoefficientVec2> value;
+		PSCoefficientVec2 value;
 		float sliderScale{1.0f};
 		Key button{Key::mouseLeft};
 		bool wheelHorizontal{false};
 		
 		node["slider"] >> slider;
 		node["background"] >> background;
-		value = Buffer::get<WithCoefficientVec2>(node["value"]);
+		value = Buffer::get<SCoefficientVec2>(node["value"]);
 		if(node["slider-scale"])
 			node["slider-scale"] >> sliderScale;
 		if(node["button"])
