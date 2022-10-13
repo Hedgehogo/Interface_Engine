@@ -1,5 +1,6 @@
 #include "panelManager.hpp"
 #include <utility>
+#include <iostream>
 
 namespace ui {
 	PanelManager::PanelManager(std::vector<BasePanel *> panels) : panels(std::move(panels)), activePanels() {}

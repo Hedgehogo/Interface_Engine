@@ -2,7 +2,7 @@
 
 #include "../../lambda/lambdaInteraction.hpp"
 #include "../mouseInteraction.hpp"
-#include <iostream>
+
 
 namespace ui {
 	class MouseLambdaInteraction : public MouseInteraction, public LambdaInteraction {

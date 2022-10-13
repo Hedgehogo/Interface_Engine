@@ -1,4 +1,4 @@
-#include <iostream>
+
 #include <algorithm>
 #include "interactionManager.hpp"
 

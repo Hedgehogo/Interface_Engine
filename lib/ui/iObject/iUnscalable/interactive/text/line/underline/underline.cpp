@@ -1,6 +1,6 @@
 #include "underline.h"
 
-#include <iostream>
+
 
 namespace ui {
     Underline::Underline(sf::Color color) : BaseLine(sf::TriangleStrip, 4, color) {}

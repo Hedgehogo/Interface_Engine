@@ -1,4 +1,4 @@
-#include <iostream>
+
 #include "pointingHidePanelInteraction.hpp"
 #include "../../../general/panel.hpp"
 

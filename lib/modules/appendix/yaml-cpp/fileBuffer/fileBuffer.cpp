@@ -1,9 +1,8 @@
 #include "fileBuffer.hpp"
 
 #include <fstream>
-#include <iostream>
 
-#include "../../../../ui/localizationSystem/localizationSystem.hpp"
+#include "../../../modules/localization_System/lib/loc/system.hpp"
 
 namespace ui {
 	SymbolPosition readCharacterIndex(const YAML::Node &node, std::basic_ifstream<char32_t> &fin) {
@@ -97,10 +96,11 @@ namespace ui {
 			}
 		} else {
 			if (node["key"]){
-				if (node["directory"]) LocalizationSystem::loadFromDirectory(node["directory"].as<std::string>());
-				if (node["default-language"]) LocalizationSystem::setDefaultLanguage(node["default-language"].as<std::string>());
-				if (node["language"]) LocalizationSystem::setNowLanguage(node["language"].as<std::string>());
-				string32 = LocalizationSystem::getText(node["key"].as<std::string>());
+				if (node["directory"])
+                    loc::system.loadFromDirectory(node["directory"].as<std::string>());
+				if (node["default-language"]) loc::system.setDefaultLanguage(node["default-language"].as<std::string>());
+				if (node["language"]) loc::system.setNowLanguage(node["language"].as<std::string>());
+				string32 = loc::system.getText(node["key"].as<std::string>());
 			} else {
 				std::string filePath;
 				node["filePath"] >> filePath;

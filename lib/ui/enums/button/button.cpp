@@ -1,6 +1,6 @@
 #include "button.hpp"
 
-#include <iostream>
+
 #include "../../sfmlEvents/mouseWheel/mouseWheel.hpp"
 
 namespace ui {

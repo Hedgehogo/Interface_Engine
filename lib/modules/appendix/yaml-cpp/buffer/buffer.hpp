@@ -1,6 +1,6 @@
 #pragma once
 #include <any>
-#include <iostream>
+
 #include <functional>
 #include <regex>
 #include "../shared/list/general/sList.hpp"

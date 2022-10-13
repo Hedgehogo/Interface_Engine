@@ -9,6 +9,7 @@ endif ()
 file(GLOB_RECURSE src "lib/ui/*.h" "lib/ui/*.hpp" "lib/ui/*.cpp" "lib/modules/appendix/*.hpp" "lib/modules/appendix/*.cpp" "lib/modules/appendix/*.inl")
 
 add_subdirectory(lib/modules/modules/yaml-cpp)
+add_subdirectory(lib/modules/modules/localization_System)
 
 add_library(${PROJECT_NAME} ${src})
 
@@ -33,11 +34,8 @@ set(CMAKE_MODULE_PATH "${cmaKE_CURRENT_LIST_DIR}/cmake_modules")
 
 find_package(SFML 2.5 REQUIRED graphics network audio window system)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system yaml-cpp)
+target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system yaml-cpp localisation)
 
 add_executable(${PROJECT_NAME}_ex main.cpp)
 
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})
-
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")

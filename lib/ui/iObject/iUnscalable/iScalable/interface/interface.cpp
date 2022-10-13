@@ -1,7 +1,7 @@
 #include "interface.hpp"
 #include "../../../../drawable/manager/drawManager.hpp"
 #include <utility>
-#include <iostream>
+
 
 namespace ui {
 	void Interface::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &, InteractionStack &, IPanelManager &) {

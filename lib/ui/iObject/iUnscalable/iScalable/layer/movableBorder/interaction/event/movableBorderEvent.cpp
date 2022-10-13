@@ -1,4 +1,4 @@
-#include <iostream>
+
 #include "movableBorderEvent.hpp"
 #include "../../layerWithMovableBorder.hpp"
 
