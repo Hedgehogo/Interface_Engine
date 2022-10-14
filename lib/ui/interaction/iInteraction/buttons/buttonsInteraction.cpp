@@ -1,7 +1,7 @@
 #include "buttonsInteraction.hpp"
 
 namespace ui {
-    ButtonsInteraction::ButtonsInteraction(ButtonEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys) : event(event), keys(keys), blackListKeys(blackListKeys), press(false) {
+    ButtonsInteraction::ButtonsInteraction(ButtonEvent *event, std::vector<KeyHandler::Key> keys, std::vector<KeyHandler::Key> blackListKeys) : event(event), keys(keys), blackListKeys(blackListKeys), press(false) {
         std::sort(this->keys.begin(), this->keys.end());
     }
 
@@ -9,7 +9,7 @@ namespace ui {
         delete event;
     }
 
-    std::vector<Key> ButtonsInteraction::getKeys() {
+    std::vector<KeyHandler::Key> ButtonsInteraction::getKeys() {
         return keys;
     }
 
@@ -27,14 +27,14 @@ namespace ui {
     bool ButtonsInteraction::update(sf::Vector2i mousePosition) {
         press = true;
         for (auto& key : keys) {
-            if (!isKeyPressed(key)) {
+            if (!KeyHandler::isKeyPressed(key)) {
                 press = false;
                 break;
             }
         }
         if (press){
             for (auto& key : blackListKeys) {
-                if (isKeyPressed(key)) {
+                if (KeyHandler::isKeyPressed(key)) {
                     press = false;
                     break;
                 }
@@ -58,8 +58,8 @@ namespace ui {
 
     bool convertPointer(const YAML::Node &node, ButtonsInteraction *&buttonsInteraction) {
         ButtonEvent *event;
-        std::vector<Key> keys;
-        std::vector<Key> blackListKeys{};
+        std::vector<KeyHandler::Key> keys;
+        std::vector<KeyHandler::Key> blackListKeys{};
 
         node["event"] >> event;
 

@@ -10,7 +10,7 @@
 #include "resizer/simple/resizer.h"
 #include "../../iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp"
 #include "event/selection/textSelectionEvent.hpp"
-#include "../../../../enums/button/button.hpp"
+#include "../../../../enums/keyHandler/keyHandler.hpp"
 #include "interaction/buttons/textButtonsInteraction.hpp"
 #include "event/copy/textCopyEvent.hpp"
 #include "interaction/buttons/textButtonsInteraction.hpp"
@@ -51,8 +51,8 @@ namespace ui {
              sf::Color textSelectionColor = sf::Color::White, sf::Color backgroundSelectionColor = sf::Color::Blue, sf::Color inactiveTextSelectionColor = nullColor,
              sf::Color inactiveBackgroundSelectionColor = {150, 150, 150}, BaseResizer *resizer = new Resizer{1.15, BaseResizer::Align::left},
              TextInteraction *textInteraction = new TextEmptyInteraction{},
-             TextInteraction *selectionInteraction = new TextButtonsInteraction{new TextSelectionEvent{}, {Key::mouseLeft}},
-             TextInteraction *copyInteraction = new TextButtonsInteraction{new TextCopyEvent{}, {Key::lControl, Key::c}});
+             TextInteraction *selectionInteraction = new TextButtonsInteraction{new TextSelectionEvent{}, {KeyHandler::Key::mouseLeft}},
+             TextInteraction *copyInteraction = new TextButtonsInteraction{new TextCopyEvent{}, {KeyHandler::Key::lControl, KeyHandler::Key::c}});
 
         ~Text();
 

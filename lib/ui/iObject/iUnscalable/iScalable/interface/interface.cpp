@@ -1,6 +1,4 @@
 #include "interface.hpp"
-#include "../../../../drawable/manager/drawManager.hpp"
-#include <utility>
 
 
 namespace ui {

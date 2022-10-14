@@ -1,11 +1,11 @@
 #include "clickHidePanelInteraction.hpp"
 
 namespace ui {
-	ClickHidePanelInteraction::ClickHidePanelInteraction(Key button, bool onlyOnParent) :
+	ClickHidePanelInteraction::ClickHidePanelInteraction(KeyHandler::Key button, bool onlyOnParent) :
 		ClickPanelInteraction(new HidePanelEvent{onlyOnParent}, button), HidePanelInteraction() {
 	}
 	
-	ClickHidePanelInteraction::ClickHidePanelInteraction(HidePanelEvent *hidePanelEvent, Key button) :
+	ClickHidePanelInteraction::ClickHidePanelInteraction(HidePanelEvent *hidePanelEvent, KeyHandler::Key button) :
 		ClickPanelInteraction(hidePanelEvent, button), HidePanelInteraction() {
 	}
 	
@@ -15,7 +15,7 @@ namespace ui {
 	}
 	
 	bool convertPointer(const YAML::Node &node, ClickHidePanelInteraction *&clickHidePanelInteraction) {
-		Key button;
+		KeyHandler::Key button;
 		bool onlyOnParent{false};
 		
 		node["button"] >> button;

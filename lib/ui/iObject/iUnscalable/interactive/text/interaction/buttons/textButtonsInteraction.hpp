@@ -7,7 +7,7 @@ namespace ui {
 
     class TextButtonsInteraction : public TextInteraction, public ButtonsInteraction{
     public:
-        TextButtonsInteraction(ButtonEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+        TextButtonsInteraction(ButtonEvent *event, std::vector<KeyHandler::Key> keys, std::vector<KeyHandler::Key> blackListKeys = {});
 
         void init(Text *text) override;
 

@@ -2,7 +2,7 @@
 #include "../../../manager/iPanelManager.hpp"
 
 namespace ui {
-	ClickPanelInteraction::ClickPanelInteraction(PanelEvent *event, Key button) : OneButtonInteraction(event, button), BasePanelInteraction() {}
+	ClickPanelInteraction::ClickPanelInteraction(PanelEvent *event, KeyHandler::Key button) : OneButtonInteraction(event, button), BasePanelInteraction() {}
 	
 	void ClickPanelInteraction::init(Panel &panel, IPanelManager &panelManager) {
 		dynamic_cast<PanelEvent *>(event)->init(panel, panelManager);

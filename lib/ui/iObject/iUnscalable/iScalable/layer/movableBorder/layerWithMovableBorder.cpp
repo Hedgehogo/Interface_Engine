@@ -6,8 +6,8 @@
 namespace ui {
 	LayerWithMovableBorder::LayerWithMovableBorder(IScalable *firstObject, IScalable *secondObject, bool isHorizontalBorder, float borderValue, int borderInteractionSize, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithTwoObjects(firstObject, secondObject),
-		pressedInteraction(new MovableBorderEvent{*this}, Key::mouseLeft),
-		Interactive_Simple(new OneButtonInteraction{new AddInteractionEvent{pressedInteraction}, Key::mouseLeft}),
+		pressedInteraction(new MovableBorderEvent{*this}, KeyHandler::Key::mouseLeft),
+		Interactive_Simple(new OneButtonInteraction{new AddInteractionEvent{pressedInteraction}, KeyHandler::Key::mouseLeft}),
 		isHorizontalBorder(isHorizontalBorder), borderValue(borderValue), borderValueNow(borderValue), borderInteractionSize(borderInteractionSize) {
 	}
 	

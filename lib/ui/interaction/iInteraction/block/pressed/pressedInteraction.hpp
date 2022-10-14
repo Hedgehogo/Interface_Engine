@@ -11,7 +11,7 @@ namespace ui {
 		void copy(PressedInteraction* pressedInteraction);
 	
 	public:
-		PressedInteraction(ButtonEvent *event, Key button);
+		PressedInteraction(ButtonEvent *event, KeyHandler::Key button);
 		
 		void init(InteractionManager &interactionManager);
 		

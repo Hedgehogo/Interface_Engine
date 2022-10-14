@@ -2,15 +2,15 @@
 #include "constSlider.hpp"
 
 namespace ui {
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, float sliderScale, Key button, bool wheelHorizontal,
-							 SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, float sliderScale, KeyHandler::Key button, bool wheelHorizontal,
+                             SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
 		
 		sliderSize = slider->getNormalSize();
 		aspectRatio = sliderSize.x / sliderSize.y;
 	}
 	
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2i division, float sliderScale, Key button, bool wheelHorizontal) :
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2i division, float sliderScale, KeyHandler::Key button, bool wheelHorizontal) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, button, division, wheelHorizontal}), sliderScale(sliderScale) {
 		
 		sliderSize = slider->getNormalSize();
@@ -44,7 +44,7 @@ namespace ui {
 		IUninteractive *background;
 		PSCoefficientVec2 value;
 		float sliderScale{1.0f};
-		Key button{Key::mouseLeft};
+		KeyHandler::Key button{KeyHandler::Key::mouseLeft};
 		bool wheelHorizontal{false};
 		
 		node["slider"] >> slider;

@@ -5,10 +5,10 @@
 namespace ui {
 	class ClickDisplayPanelInteraction : public ClickPanelInteraction, public DisplayPanelInteraction {
 	public:
-		explicit ClickDisplayPanelInteraction(Key button);
+		explicit ClickDisplayPanelInteraction(KeyHandler::Key button);
 	
 	protected:
-		ClickDisplayPanelInteraction(DisplayPanelEvent* displayPanelEvent, Key button);
+		ClickDisplayPanelInteraction(DisplayPanelEvent* displayPanelEvent, KeyHandler::Key button);
 		
 		void start(sf::Vector2i mousePosition) override;
 		

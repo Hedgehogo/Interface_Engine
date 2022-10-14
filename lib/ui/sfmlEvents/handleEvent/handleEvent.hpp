@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../mouseWheel/mouseWheel.hpp"
+#include "SFML/Graphics.hpp"
 
 namespace ui {
     void handleEvent(sf::Event event);

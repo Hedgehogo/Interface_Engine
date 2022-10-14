@@ -4,7 +4,7 @@
 
 namespace ui{
 
-    Switch::Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, Key button, bool startActive) :
+    Switch::Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, KeyHandler::Key button, bool startActive) :
         Interactive_Simple(new OneButtonInteraction{new SwitchEvent{*this}, button}), activeBackground(activeBackground), inactiveBackground(inactiveBackground), active(startActive){}
 
     void Switch::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
@@ -65,7 +65,7 @@ namespace ui{
 	bool convertPointer(const YAML::Node &node, Switch *&switcher) {
 		IUninteractive *inactiveBackground;
 		IUninteractive *activeBackground;
-		Key button{Key::mouseLeft};
+		KeyHandler::Key button{KeyHandler::Key::mouseLeft};
 		bool startActive{false};
 		
 		node["inactive-background"] >> inactiveBackground;
