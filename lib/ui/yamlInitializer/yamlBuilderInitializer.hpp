@@ -45,10 +45,4 @@
 
 namespace ui {
 	void yamlBuilderInit();
-	
-	class YamlBuilderInitializer {
-	public:
-		YamlBuilderInitializer();
-	};
-	//static YamlBuilderInitializer _YamlBuilderInitializer;
 }

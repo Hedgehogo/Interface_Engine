@@ -8,7 +8,7 @@ namespace ui {
 		std::vector<IInteraction *> interactionStack;
 		
 	public:
-		explicit InteractionStack(std::vector<IInteraction *> &&interactionStack);
+		explicit InteractionStack(std::vector<IInteraction *> &&interactionStack = {});
 		
 		virtual ~InteractionStack();
 		

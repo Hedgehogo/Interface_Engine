@@ -28,9 +28,23 @@ namespace ui {
 	public:
 		void init(sf::RenderTarget &renderTarget);
 		
-		Interface(IScalable *object, InteractionStack *interactionStack);
+		explicit Interface(IScalable *object, InteractionStack *interactionStack = new InteractionStack{});
 		
 		~Interface() override;
+
+		[[nodiscard]] sf::RenderTarget *getRenderTarget();
+
+		[[nodiscard]] DrawManager *getDrawManager();
+
+		[[nodiscard]] UpdateManager *getUpdateManager();
+
+		[[nodiscard]] InteractionManager *getInteractionManager();
+
+		[[nodiscard]] InteractionStack *getInteractionStack();
+
+		[[nodiscard]] PanelManager *getPanelManager();
+
+		[[nodiscard]] IScalable *getObject();
 		
 		void draw() override;
 		
@@ -48,10 +62,10 @@ namespace ui {
 		
 	protected:
 		void updateCluster(sf::Vector2f mousePosition);
-		
-		void update() override;
-		
+
 	public:
+		void update() override;
+
 		void update(sf::Vector2f mousePosition, bool active);
 		
 		Interface* copy() override;

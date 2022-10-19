@@ -95,8 +95,4 @@ namespace ui {
 		YamlBuilder<IObject>::addSubtype(YamlBuilder<BasePanel>::build);
 		YamlBuilder<IObject>::addSubtype(YamlBuilder<IUnscalable>::build);
 	}
-	
-	YamlBuilderInitializer::YamlBuilderInitializer() {
-		yamlBuilderInit();
-	}
 }

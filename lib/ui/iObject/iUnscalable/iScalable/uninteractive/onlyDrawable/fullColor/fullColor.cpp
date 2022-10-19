@@ -40,8 +40,7 @@ namespace ui {
 		sf::Color color;
 		sf::Vector2f normalSize{};
 		node["color"] >> color;
-		if(node["normal-size"])
-			node["normal-size"] >> normalSize;
+		if(node["normal-size"]) node["normal-size"] >> normalSize;
 		{ fullColor = new FullColor{color, normalSize}; return true; }
 	}
 }

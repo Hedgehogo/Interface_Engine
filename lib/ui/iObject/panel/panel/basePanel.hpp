@@ -38,11 +38,11 @@ namespace ui {
 		
 		virtual void setDisplayed();
 		
-		void setParentProcessed(bool parentProcessed);
+		virtual void setParentProcessed(bool parentProcessed);
 		
-		bool getParentProcessed();
+		virtual bool getParentProcessed();
 		
-		bool inPanel(sf::Vector2f pointPosition);
+		virtual bool inPanel(sf::Vector2f pointPosition);
 		
 		void setPosition(sf::Vector2f position) override;
 		
@@ -65,8 +65,8 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		BasePanel* copy() override = 0;
-		
-	private:
+
+	protected:
 		static bool fullDebug;
 		
 	public:

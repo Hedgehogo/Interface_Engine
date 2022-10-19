@@ -39,3 +39,9 @@ target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system yaml-cpp 
 add_executable(${PROJECT_NAME}_ex main.cpp)
 
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})
+
+file(GLOB_RECURSE srcUnitTest "test/*.cpp" "test/*.hpp")
+
+add_executable(unit_tests ${srcUnitTest})
+
+target_link_libraries(unit_tests PUBLIC gtest gtest_main ${PROJECT_NAME})

@@ -59,9 +59,9 @@ namespace ui {
 	}
 	
 	void Interface::updateCluster(sf::Vector2f mousePosition) {
-		interactionManager.update(static_cast<sf::Vector2i>(mousePosition));
+		interactionManager.update(sf::Vector2i(mousePosition));
 	}
-	
+
 	void Interface::update() {
 		panelManager.update();
 		updateManager.update();
@@ -97,5 +97,33 @@ namespace ui {
 	
 	void Interface::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
         object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+	}
+
+	sf::RenderTarget *Interface::getRenderTarget() {
+		return renderTarget;
+	}
+
+	DrawManager *Interface::getDrawManager() {
+		return &drawManager;
+	}
+
+	UpdateManager *Interface::getUpdateManager() {
+		return &updateManager;
+	}
+
+	InteractionManager *Interface::getInteractionManager() {
+		return &interactionManager;
+	}
+
+	InteractionStack *Interface::getInteractionStack() {
+		return interactionStack;
+	}
+
+	PanelManager *Interface::getPanelManager() {
+		return &panelManager;
+	}
+
+	IScalable *Interface::getObject() {
+		return object;
 	}
 }
