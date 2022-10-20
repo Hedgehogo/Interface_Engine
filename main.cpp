@@ -19,7 +19,7 @@ int main() {
 	
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	window.setFramerateLimit(60);
+	//window.setFramerateLimit(60);
 	
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);

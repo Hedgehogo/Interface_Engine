@@ -9,10 +9,10 @@ namespace ui {
 		Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2& value, SliderInteraction *interaction, sf::Vector2f sliderScale);
 	
 	public:
-		Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2& value, sf::Vector2f sliderScale = {1.0f, 0.5f}, KeyHandler::Key button = KeyHandler::Key::mouseLeft,
+		Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2& value, sf::Vector2f sliderScale = {1.0f, 0.5f}, Key button = Key::mouseLeft,
                bool wheelHorizontal = false, SliderWheelEvent::Relativity wheelRelativity = SliderWheelEvent::Relativity::relationArea, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
 		
-		Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2& value, sf::Vector2i division, sf::Vector2f sliderScale = {1.0f, 0.5f}, KeyHandler::Key button = KeyHandler::Key::mouseLeft, bool wheelHorizontal = false);
+		Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2& value, sf::Vector2i division, sf::Vector2f sliderScale = {1.0f, 0.5f}, Key button = Key::mouseLeft, bool wheelHorizontal = false);
 		
 		void setScale(sf::Vector2f scale);
 		

@@ -1,6 +1,16 @@
 #include "buffer.hpp"
 
 namespace ui {
+	std::vector<std::string> splitByDelimiter(const std::string& str, char delimiter) {
+		std::stringstream strStream{str};
+		std::vector<std::string> result;
+		std::string substr;
+		while(std::getline(strStream, substr, delimiter)) {
+			result.push_back(substr);
+		}
+		return result;
+	}
+	
 	PIShared getVectorAxis(const PIShared &vector, const std::string &name) {
 		std::shared_ptr<ISVector2> vec{std::dynamic_pointer_cast<ISVector2>(vector)};
 		if(vec == nullptr) {
@@ -60,16 +70,6 @@ namespace ui {
 		objectsLevels.emplace_back();
 		function();
 		objectsLevels.pop_back();
-	}
-	
-	std::vector<std::string> splitByDelimiter(const std::string& str, char delimiter) {
-		std::stringstream strStream{str};
-		std::vector<std::string> result;
-		std::string substr;
-		while(std::getline(strStream, substr, delimiter)) {
-			result.push_back(substr);
-		}
-		return result;
 	}
 	
 	bool Buffer::existAtLevel(const std::string &name) {

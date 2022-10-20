@@ -2,13 +2,13 @@
 #include <utility>
 
 namespace ui {
-	SliderInteraction::SliderInteraction(BaseSlider &slider, KeyHandler::Key button, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
+	SliderInteraction::SliderInteraction(BaseSlider &slider, Key button, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
 		slideInteraction(new SliderEvent{slider, {0, 0}}, button),
 		OneButtonInteraction(new AddInteractionEvent{slideInteraction}, button),
 		wheelEvent(slider, wheelHorizontal, wheelRelativity, wheelSensitivity) {
 	}
 	
-	SliderInteraction::SliderInteraction(BaseSlider &slider, KeyHandler::Key button, sf::Vector2i division, bool wheelHorizontal) :
+	SliderInteraction::SliderInteraction(BaseSlider &slider, Key button, sf::Vector2i division, bool wheelHorizontal) :
 		slideInteraction(new SliderEvent{slider, division}, button),
 		OneButtonInteraction(new AddInteractionEvent{slideInteraction}, button),
 		wheelEvent(slider, wheelHorizontal, SliderWheelEvent::Relativity::relationArea, {1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}) {

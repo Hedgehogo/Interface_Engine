@@ -14,9 +14,9 @@ namespace ui {
 		SliderInteraction(SliderWheelEvent wheelEvent, PressedInteraction slideInteraction);
 	
 	public:
-		SliderInteraction(BaseSlider &slider, KeyHandler::Key button, bool wheelHorizontal = false, SliderWheelEvent::Relativity wheelRelativity = SliderWheelEvent::Relativity::relationSlider, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
+		SliderInteraction(BaseSlider &slider, Key button, bool wheelHorizontal = false, SliderWheelEvent::Relativity wheelRelativity = SliderWheelEvent::Relativity::relationSlider, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
 		
-		SliderInteraction(BaseSlider &slider, KeyHandler::Key button, sf::Vector2i division = {10, 10}, bool wheelHorizontal = false);
+		SliderInteraction(BaseSlider &slider, Key button, sf::Vector2i division = {10, 10}, bool wheelHorizontal = false);
 		
 		void init(InteractionManager &interactionManager);
 		

@@ -1,7 +1,7 @@
 #include "buttonsInteraction.hpp"
 
 namespace ui {
-    ButtonsInteraction::ButtonsInteraction(ButtonEvent *event, std::vector<KeyHandler::Key> keys, std::vector<KeyHandler::Key> blackListKeys) : event(event), keys(keys), blackListKeys(blackListKeys), press(false) {
+    ButtonsInteraction::ButtonsInteraction(ButtonEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys) : event(event), keys(keys), blackListKeys(blackListKeys), press(false) {
         std::sort(this->keys.begin(), this->keys.end());
     }
 
@@ -9,7 +9,7 @@ namespace ui {
         delete event;
     }
 
-    std::vector<KeyHandler::Key> ButtonsInteraction::getKeys() {
+    std::vector<Key> ButtonsInteraction::getKeys() {
         return keys;
     }
 
@@ -58,8 +58,8 @@ namespace ui {
 
     bool convertPointer(const YAML::Node &node, ButtonsInteraction *&buttonsInteraction) {
         ButtonEvent *event;
-        std::vector<KeyHandler::Key> keys;
-        std::vector<KeyHandler::Key> blackListKeys{};
+        std::vector<Key> keys;
+        std::vector<Key> blackListKeys{};
 
         node["event"] >> event;
 

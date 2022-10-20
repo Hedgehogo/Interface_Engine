@@ -10,15 +10,15 @@ namespace ui {
         bool press;
 
         ButtonEvent *event;
-        std::vector<KeyHandler::Key> keys;
-        std::vector<KeyHandler::Key> blackListKeys;
+        std::vector<Key> keys;
+        std::vector<Key> blackListKeys;
 
     public:
-        ButtonsInteraction(ButtonEvent *event, std::vector<KeyHandler::Key> keys, std::vector<KeyHandler::Key> blackListKeys = {});
+        ButtonsInteraction(ButtonEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 
         bool isPress();
 
-        std::vector<KeyHandler::Key> getKeys();
+        std::vector<Key> getKeys();
 
         ButtonEvent* getEvent();
 

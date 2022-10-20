@@ -18,7 +18,7 @@ namespace ui {
 			move = {sliderSize.x / areaSize.x * move.x, sliderSize.y / areaSize.y * move.y};
 		}
 		move *= -static_cast<float>(value);
-		if((sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) != horizontal) {
+		if((isKeyPressed(Key::lShift) || isKeyPressed(Key::rShift)) != horizontal) {
 			move.y = 0;
 		} else {
 			move.x = 0;

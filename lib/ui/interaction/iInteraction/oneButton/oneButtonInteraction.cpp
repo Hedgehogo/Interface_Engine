@@ -1,13 +1,13 @@
 #include "oneButtonInteraction.hpp"
 
 namespace ui {
-	OneButtonInteraction::OneButtonInteraction(ButtonEvent *event, KeyHandler::Key button) : event(event), button(button) {}
+	OneButtonInteraction::OneButtonInteraction(ButtonEvent *event, Key button) : event(event), button(button) {}
 	
 	OneButtonInteraction::~OneButtonInteraction() {
 		delete event;
 	}
 	
-	KeyHandler::Key OneButtonInteraction::getButton() {
+	Key OneButtonInteraction::getButton() {
 		return button;
 	}
 	
@@ -38,7 +38,7 @@ namespace ui {
 	
 	bool convertPointer(const YAML::Node &node, OneButtonInteraction *&oneButtonInteraction) {
 		ButtonEvent *event;
-		KeyHandler::Key button{KeyHandler::Key::mouseLeft};
+		Key button{Key::mouseLeft};
 		
 		node["event"] >> event;
 		if(node["button"])

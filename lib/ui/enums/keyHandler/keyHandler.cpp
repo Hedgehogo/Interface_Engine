@@ -3,9 +3,9 @@
 #include "../../sfmlEvents/mouseWheel/mouseWheel.hpp"
 
 namespace ui {
-    std::vector<KeyHandler::Key> KeyHandler::keysPressed{};
+    std::vector<Key> KeyHandler::keysPressed{};
 
-    std::vector<KeyHandler::Key> KeyHandler::getKeysPressed() {
+    std::vector<Key> KeyHandler::getKeysPressed() {
         return keysPressed;
     }
 
@@ -13,14 +13,14 @@ namespace ui {
         KeyHandler::keysPressed = keysPressed;
     }
 
-    void KeyHandler::addKey(KeyHandler::Key key) {
+    void KeyHandler::addKey(Key key) {
 
         if (std::find(keysPressed.begin(), keysPressed.end(), key) == keysPressed.end()){
             keysPressed.push_back(key);
         }
     }
 
-    void KeyHandler::deleteKey(KeyHandler::Key key) {
+    void KeyHandler::deleteKey(Key key) {
         auto element = std::find(keysPressed.begin(), keysPressed.end(), key);
         if (element != keysPressed.end()){
             keysPressed.erase(element);
@@ -31,8 +31,8 @@ namespace ui {
         keysPressed.clear();
     }
 
-    std::string KeyHandler::toString(KeyHandler::Key key){
-        if (key == KeyHandler::Key::a) return "a";
+    std::string KeyHandler::toString(Key key){
+        if (key == Key::a) return "a";
         else if (key == Key::b) return "b";
         else if (key == Key::c) return "c";
         else if (key == Key::d) return "d";
@@ -169,129 +169,137 @@ namespace ui {
     }
 
     template<>
-    bool convert(const YAML::Node &node, KeyHandler::Key &key) {
+    bool convert(const YAML::Node &node, Key &key) {
         std::string str = node.as<std::string>();
-        if (str == "a") key = KeyHandler::Key::a;
-        else if(str == "b") key = KeyHandler::Key::b;
-        else if(str == "c") key = KeyHandler::Key::c;
-        else if(str == "d") key = KeyHandler::Key::d;
-        else if(str == "e") key = KeyHandler::Key::e;
-        else if(str == "f") key = KeyHandler::Key::f;
-        else if(str == "g") key = KeyHandler::Key::g;
-        else if(str == "h") key = KeyHandler::Key::h;
-        else if(str == "i") key = KeyHandler::Key::i;
-        else if(str == "j") key = KeyHandler::Key::j;
-        else if(str == "k") key = KeyHandler::Key::k;
-        else if(str == "l") key = KeyHandler::Key::l;
-        else if(str == "m") key = KeyHandler::Key::m;
-        else if(str == "n") key = KeyHandler::Key::n;
-        else if(str == "o") key = KeyHandler::Key::o;
-        else if(str == "p") key = KeyHandler::Key::p;
-        else if(str == "q") key = KeyHandler::Key::q;
-        else if(str == "r") key = KeyHandler::Key::r;
-        else if(str == "s") key = KeyHandler::Key::s;
-        else if(str == "t") key = KeyHandler::Key::t;
-        else if(str == "u") key = KeyHandler::Key::u;
-        else if(str == "v") key = KeyHandler::Key::v;
-        else if(str == "w") key = KeyHandler::Key::w;
-        else if(str == "x") key = KeyHandler::Key::x;
-        else if(str == "y") key = KeyHandler::Key::y;
-        else if(str == "z") key = KeyHandler::Key::z;
-        else if(str == "num0") key = KeyHandler::Key::num0;
-        else if(str == "num1") key = KeyHandler::Key::num1;
-        else if(str == "num2") key = KeyHandler::Key::num2;
-        else if(str == "num3") key = KeyHandler::Key::num3;
-        else if(str == "num4") key = KeyHandler::Key::num4;
-        else if(str == "num5") key = KeyHandler::Key::num5;
-        else if(str == "num6") key = KeyHandler::Key::num6;
-        else if(str == "num7") key = KeyHandler::Key::num7;
-        else if(str == "num8") key = KeyHandler::Key::num8;
-        else if(str == "num9") key = KeyHandler::Key::num9;
-        else if(str == "escape") key = KeyHandler::Key::escape;
-        else if(str == "l-control") key = KeyHandler::Key::lControl;
-        else if(str == "l-shift") key = KeyHandler::Key::lShift;
-        else if(str == "l-alt") key = KeyHandler::Key::lAlt;
-        else if(str == "l-system") key = KeyHandler::Key::lSystem;
-        else if(str == "r-control") key = KeyHandler::Key::rControl;
-        else if(str == "r-shift") key = KeyHandler::Key::rShift;
-        else if(str == "r-alt") key = KeyHandler::Key::rAlt;
-        else if(str == "r-system") key = KeyHandler::Key::rSystem;
-        else if(str == "menu") key = KeyHandler::Key::menu;
-        else if(str == "l-bracket") key = KeyHandler::Key::lBracket;
-        else if(str == "r-bracket") key = KeyHandler::Key::rBracket;
-        else if(str == "semicolon") key = KeyHandler::Key::semicolon;
-        else if(str == "comma") key = KeyHandler::Key::comma;
-        else if(str == "period") key = KeyHandler::Key::period;
-        else if(str == "quote") key = KeyHandler::Key::quote;
-        else if(str == "slash") key = KeyHandler::Key::slash;
-        else if(str == "backslash") key = KeyHandler::Key::backslash;
-        else if(str == "tilde") key = KeyHandler::Key::tilde;
-        else if(str == "equal") key = KeyHandler::Key::equal;
-        else if(str == "hyphen") key = KeyHandler::Key::hyphen;
-        else if(str == "space") key = KeyHandler::Key::space;
-        else if(str == "enter") key = KeyHandler::Key::enter;
-        else if(str == "backspace") key = KeyHandler::Key::backspace;
-        else if(str == "tab") key = KeyHandler::Key::tab;
-        else if(str == "page-up") key = KeyHandler::Key::pageUp;
-        else if(str == "page-down") key = KeyHandler::Key::pageDown;
-        else if(str == "end") key = KeyHandler::Key::end;
-        else if(str == "home") key = KeyHandler::Key::home;
-        else if(str == "insert") key = KeyHandler::Key::insert;
-        else if(str == "del") key = KeyHandler::Key::del;
-        else if(str == "add") key = KeyHandler::Key::add;
-        else if(str == "subtract") key = KeyHandler::Key::subtract;
-        else if(str == "multiply") key = KeyHandler::Key::multiply;
-        else if(str == "divide") key = KeyHandler::Key::divide;
-        else if(str == "left") key = KeyHandler::Key::left;
-        else if(str == "right") key = KeyHandler::Key::right;
-        else if(str == "up") key = KeyHandler::Key::up;
-        else if(str == "down") key = KeyHandler::Key::down;
-        else if(str == "numpad0") key = KeyHandler::Key::numpad0;
-        else if(str == "numpad1") key = KeyHandler::Key::numpad1;
-        else if(str == "numpad2") key = KeyHandler::Key::numpad2;
-        else if(str == "numpad3") key = KeyHandler::Key::numpad3;
-        else if(str == "numpad4") key = KeyHandler::Key::numpad4;
-        else if(str == "numpad5") key = KeyHandler::Key::numpad5;
-        else if(str == "numpad6") key = KeyHandler::Key::numpad6;
-        else if(str == "numpad7") key = KeyHandler::Key::numpad7;
-        else if(str == "numpad8") key = KeyHandler::Key::numpad8;
-        else if(str == "numpad9") key = KeyHandler::Key::numpad9;
-        else if(str == "f1") key = KeyHandler::Key::f1;
-        else if(str == "f2") key = KeyHandler::Key::f2;
-        else if(str == "f3") key = KeyHandler::Key::f3;
-        else if(str == "f4") key = KeyHandler::Key::f4;
-        else if(str == "f5") key = KeyHandler::Key::f5;
-        else if(str == "f6") key = KeyHandler::Key::f6;
-        else if(str == "f7") key = KeyHandler::Key::f7;
-        else if(str == "f8") key = KeyHandler::Key::f8;
-        else if(str == "f9") key = KeyHandler::Key::f9;
-        else if(str == "f10") key = KeyHandler::Key::f10;
-        else if(str == "f11") key = KeyHandler::Key::f11;
-        else if(str == "f12") key = KeyHandler::Key::f12;
-        else if(str == "f13") key = KeyHandler::Key::f13;
-        else if(str == "f14") key = KeyHandler::Key::f14;
-        else if(str == "f15") key = KeyHandler::Key::f15;
-        else if(str == "pause") key = KeyHandler::Key::pause;
-        else if(str == "dash") key = KeyHandler::Key::dash;
-        else if(str == "back-space") key = KeyHandler::Key::backSpace;
-        else if(str == "back-slash") key = KeyHandler::Key::backSlash;
-        else if(str == "semi-colon") key = KeyHandler::Key::semiColon;
-        else if(str == "mouse-left") key = KeyHandler::Key::mouseLeft;
-        else if(str == "mouse-right") key = KeyHandler::Key::mouseRight;
-        else if(str == "mouse-middle") key = KeyHandler::Key::mouseMiddle;
-        else if(str == "mouse-x-button1") key = KeyHandler::Key::mouseXButton1;
-        else if(str == "mouse-x-button2") key = KeyHandler::Key::mouseXButton2;
-        else if(str == "mouse-wheel-up") key = KeyHandler::Key::mouseWheelUp;
-        else if(str == "mouse-wheel-down") key = KeyHandler::Key::mouseWheelDown;
-        else if(str == "mouse-wheel-left") key = KeyHandler::Key::mouseWheelLeft;
-        else if(str == "mouse-wheel-right") key = KeyHandler::Key::mouseWheelRight;
-        else key = KeyHandler::Key::unknown;
+        if (str == "a") key = Key::a;
+        else if(str == "b") key = Key::b;
+        else if(str == "c") key = Key::c;
+        else if(str == "d") key = Key::d;
+        else if(str == "e") key = Key::e;
+        else if(str == "f") key = Key::f;
+        else if(str == "g") key = Key::g;
+        else if(str == "h") key = Key::h;
+        else if(str == "i") key = Key::i;
+        else if(str == "j") key = Key::j;
+        else if(str == "k") key = Key::k;
+        else if(str == "l") key = Key::l;
+        else if(str == "m") key = Key::m;
+        else if(str == "n") key = Key::n;
+        else if(str == "o") key = Key::o;
+        else if(str == "p") key = Key::p;
+        else if(str == "q") key = Key::q;
+        else if(str == "r") key = Key::r;
+        else if(str == "s") key = Key::s;
+        else if(str == "t") key = Key::t;
+        else if(str == "u") key = Key::u;
+        else if(str == "v") key = Key::v;
+        else if(str == "w") key = Key::w;
+        else if(str == "x") key = Key::x;
+        else if(str == "y") key = Key::y;
+        else if(str == "z") key = Key::z;
+        else if(str == "num0") key = Key::num0;
+        else if(str == "num1") key = Key::num1;
+        else if(str == "num2") key = Key::num2;
+        else if(str == "num3") key = Key::num3;
+        else if(str == "num4") key = Key::num4;
+        else if(str == "num5") key = Key::num5;
+        else if(str == "num6") key = Key::num6;
+        else if(str == "num7") key = Key::num7;
+        else if(str == "num8") key = Key::num8;
+        else if(str == "num9") key = Key::num9;
+        else if(str == "escape") key = Key::escape;
+        else if(str == "l-control") key = Key::lControl;
+        else if(str == "l-shift") key = Key::lShift;
+        else if(str == "l-alt") key = Key::lAlt;
+        else if(str == "l-system") key = Key::lSystem;
+        else if(str == "r-control") key = Key::rControl;
+        else if(str == "r-shift") key = Key::rShift;
+        else if(str == "r-alt") key = Key::rAlt;
+        else if(str == "r-system") key = Key::rSystem;
+        else if(str == "menu") key = Key::menu;
+        else if(str == "l-bracket") key = Key::lBracket;
+        else if(str == "r-bracket") key = Key::rBracket;
+        else if(str == "semicolon") key = Key::semicolon;
+        else if(str == "comma") key = Key::comma;
+        else if(str == "period") key = Key::period;
+        else if(str == "quote") key = Key::quote;
+        else if(str == "slash") key = Key::slash;
+        else if(str == "backslash") key = Key::backslash;
+        else if(str == "tilde") key = Key::tilde;
+        else if(str == "equal") key = Key::equal;
+        else if(str == "hyphen") key = Key::hyphen;
+        else if(str == "space") key = Key::space;
+        else if(str == "enter") key = Key::enter;
+        else if(str == "backspace") key = Key::backspace;
+        else if(str == "tab") key = Key::tab;
+        else if(str == "page-up") key = Key::pageUp;
+        else if(str == "page-down") key = Key::pageDown;
+        else if(str == "end") key = Key::end;
+        else if(str == "home") key = Key::home;
+        else if(str == "insert") key = Key::insert;
+        else if(str == "del") key = Key::del;
+        else if(str == "add") key = Key::add;
+        else if(str == "subtract") key = Key::subtract;
+        else if(str == "multiply") key = Key::multiply;
+        else if(str == "divide") key = Key::divide;
+        else if(str == "left") key = Key::left;
+        else if(str == "right") key = Key::right;
+        else if(str == "up") key = Key::up;
+        else if(str == "down") key = Key::down;
+        else if(str == "numpad0") key = Key::numpad0;
+        else if(str == "numpad1") key = Key::numpad1;
+        else if(str == "numpad2") key = Key::numpad2;
+        else if(str == "numpad3") key = Key::numpad3;
+        else if(str == "numpad4") key = Key::numpad4;
+        else if(str == "numpad5") key = Key::numpad5;
+        else if(str == "numpad6") key = Key::numpad6;
+        else if(str == "numpad7") key = Key::numpad7;
+        else if(str == "numpad8") key = Key::numpad8;
+        else if(str == "numpad9") key = Key::numpad9;
+        else if(str == "f1") key = Key::f1;
+        else if(str == "f2") key = Key::f2;
+        else if(str == "f3") key = Key::f3;
+        else if(str == "f4") key = Key::f4;
+        else if(str == "f5") key = Key::f5;
+        else if(str == "f6") key = Key::f6;
+        else if(str == "f7") key = Key::f7;
+        else if(str == "f8") key = Key::f8;
+        else if(str == "f9") key = Key::f9;
+        else if(str == "f10") key = Key::f10;
+        else if(str == "f11") key = Key::f11;
+        else if(str == "f12") key = Key::f12;
+        else if(str == "f13") key = Key::f13;
+        else if(str == "f14") key = Key::f14;
+        else if(str == "f15") key = Key::f15;
+        else if(str == "pause") key = Key::pause;
+        else if(str == "dash") key = Key::dash;
+        else if(str == "back-space") key = Key::backSpace;
+        else if(str == "back-slash") key = Key::backSlash;
+        else if(str == "semi-colon") key = Key::semiColon;
+        else if(str == "mouse-left") key = Key::mouseLeft;
+        else if(str == "mouse-right") key = Key::mouseRight;
+        else if(str == "mouse-middle") key = Key::mouseMiddle;
+        else if(str == "mouse-x-button1") key = Key::mouseXButton1;
+        else if(str == "mouse-x-button2") key = Key::mouseXButton2;
+        else if(str == "mouse-wheel-up") key = Key::mouseWheelUp;
+        else if(str == "mouse-wheel-down") key = Key::mouseWheelDown;
+        else if(str == "mouse-wheel-left") key = Key::mouseWheelLeft;
+        else if(str == "mouse-wheel-right") key = Key::mouseWheelRight;
+        else key = Key::unknown;
         return true;
     }
+	
+	std::string toString(Key key) {
+		return KeyHandler::toString(key);
+	}
+	
+	bool isKeyPressed(Key key) {
+		return KeyHandler::isKeyPressed(key);
+	}
 
-    KeyHandler::Key createKeyFromYaml(YAML::Node node){
-        KeyHandler::Key key;
+    Key createKeyFromYaml(YAML::Node node){
+        Key key;
         convert(node, key);
         return key;
     }
-} // ui
+}
