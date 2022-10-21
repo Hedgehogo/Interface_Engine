@@ -1,12 +1,12 @@
 #include "slider.hpp"
 
 namespace ui {
-	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2f sliderScale, KeyHandler::Key button, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity,
+	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2f sliderScale, Key button, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity,
                    sf::Vector2f wheelSensitivity) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), scale(sliderScale) {
 	}
 	
-	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2i division, sf::Vector2f sliderScale, KeyHandler::Key button, bool wheelHorizontal) :
+	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2i division, sf::Vector2f sliderScale, Key button, bool wheelHorizontal) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, button, division, wheelHorizontal}), scale(sliderScale) {
 	}
 	
@@ -43,7 +43,7 @@ namespace ui {
 		IUninteractive *background;
 		PSCoefficientVec2 value;
 		sf::Vector2f sliderScale{1.0f, 0.5f};
-		KeyHandler::Key button{KeyHandler::Key::mouseLeft};
+		Key button{Key::mouseLeft};
 		bool wheelHorizontal{false};
 		
 		node["slider"] >> slider;

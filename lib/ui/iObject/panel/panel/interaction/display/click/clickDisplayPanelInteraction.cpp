@@ -2,10 +2,10 @@
 #include "../../../general/panel.hpp"
 
 namespace ui {
-	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(KeyHandler::Key button) :
+	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Key button) :
 		ClickPanelInteraction(new DisplayPanelEvent{}, button), DisplayPanelInteraction() {}
 	
-	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(DisplayPanelEvent *displayPanelEvent, KeyHandler::Key button) :
+	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(DisplayPanelEvent *displayPanelEvent, Key button) :
 		ClickPanelInteraction(displayPanelEvent, button), DisplayPanelInteraction() {}
 	
 	void ClickDisplayPanelInteraction::start(sf::Vector2i mousePosition) {
@@ -23,7 +23,7 @@ namespace ui {
 	}
 
     bool convertPointer(const YAML::Node &node, ClickDisplayPanelInteraction *&clickDisplayPanelInteraction) {
-        KeyHandler::Key button;
+        Key button;
         node["button"] >> button;
         { clickDisplayPanelInteraction = new ClickDisplayPanelInteraction{button}; return true; }
     }

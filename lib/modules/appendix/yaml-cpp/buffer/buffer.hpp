@@ -20,6 +20,8 @@ namespace ui {
 namespace ui {
 	std::vector<std::string> splitByDelimiter(const std::string& str, char delimiter);
 	
+	std::vector<std::string> splitString(const std::string& str, const std::function<bool(char, size_t)>& divider);
+	
 	PIShared getVectorAxis(const PIShared& vector, const std::string& name);
 	
 	class Buffer {

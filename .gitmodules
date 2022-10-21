@@ -3,4 +3,4 @@
 	url = https://github.com/jbeder/yaml-cpp
 [submodule "lib/modules/modules/localization_System"]
 	path = lib/modules/modules/localization_System
-	url = git@github.com:Andrewkoro105/Localisation_System.git
+	url = https://github.com/Andrewkoro105/Localisation_System.git

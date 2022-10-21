@@ -2,7 +2,7 @@
 #include "pressedInteraction.hpp"
 
 namespace ui {
-	PressedInteraction::PressedInteraction(ButtonEvent *event, KeyHandler::Key button) : IInteraction(true), OneButtonInteraction(event, button), interactionManager(nullptr) {}
+	PressedInteraction::PressedInteraction(ButtonEvent *event, Key button) : IInteraction(true), OneButtonInteraction(event, button), interactionManager(nullptr) {}
 	
 	void PressedInteraction::init(InteractionManager &interactionManager) {
 		this->interactionManager = &interactionManager;

@@ -11,8 +11,7 @@ namespace ui {
 	}
 	
 	BaseSlider::BaseSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, SliderInteraction *interaction) :
-		Interactive_Simple(interaction), slider(slider), background(background), value(value), position(), sliderSize(), moveZoneSize() {
-	}
+		Interactive_Simple(interaction), slider(slider), background(background), value(value), position(), sliderSize(), moveZoneSize() {}
 	
 	void BaseSlider::cutBackValue() {
 		//value.x = std::max(0.f,std::min(1.f,value.x));

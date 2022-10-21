@@ -1,7 +1,7 @@
 #include "textButtonsInteraction.hpp"
 #include "../../text.h"
 namespace ui {
-    TextButtonsInteraction::TextButtonsInteraction(ButtonEvent *event, std::vector<KeyHandler::Key> keys, std::vector<KeyHandler::Key> blackListKeys) : ButtonsInteraction(event, keys, blackListKeys) {}
+    TextButtonsInteraction::TextButtonsInteraction(ButtonEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys) : ButtonsInteraction(event, keys, blackListKeys) {}
 
     void TextButtonsInteraction::init(Text *text) {
         TextInteraction::init(text);
@@ -14,8 +14,8 @@ namespace ui {
 
     bool convertPointer(const YAML::Node &node, TextButtonsInteraction *&textButtonsInteraction){
         ButtonEvent *event;
-        std::vector<KeyHandler::Key> keys;
-        std::vector<KeyHandler::Key> blackListKeys{};
+        std::vector<Key> keys;
+        std::vector<Key> blackListKeys{};
 
         node["event"] >> event;
 

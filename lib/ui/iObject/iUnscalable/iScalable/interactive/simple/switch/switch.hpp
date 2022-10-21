@@ -19,7 +19,7 @@ namespace ui{
         bool active;
 
     public:
-        Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, KeyHandler::Key button = KeyHandler::Key::mouseLeft, bool startActive = false);
+        Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, Key button = Key::mouseLeft, bool startActive = false);
 
         void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
 
