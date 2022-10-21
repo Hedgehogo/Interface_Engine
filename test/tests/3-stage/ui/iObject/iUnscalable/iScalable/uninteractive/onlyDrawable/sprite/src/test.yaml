@@ -1,6 +1,0 @@
-type: Sprite
-texture: ../test/tests/3-stage/ui/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/sprite/src/gigachad.jpg
-min-size: 5, 5
-rect:
-  position: 0, 0
-  size: 10, 10

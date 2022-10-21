@@ -10,7 +10,15 @@ namespace ui {
 	InternalTargetPositioning *InternalTargetPositioning::copy() {
 		return new InternalTargetPositioning{coefficient, offset};
 	}
-	
+
+	float InternalTargetPositioning::getCoefficient() const {
+		return coefficient;
+	}
+
+	float InternalTargetPositioning::getOffset() const {
+		return offset;
+	}
+
 	bool convertPointer(const YAML::Node &node, InternalTargetPositioning *&internalTargetPositioning) {
 		float coefficient;
 		float offset{0.f};

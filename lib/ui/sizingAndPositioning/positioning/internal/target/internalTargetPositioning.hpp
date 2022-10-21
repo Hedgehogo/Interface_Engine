@@ -9,7 +9,11 @@ namespace ui {
 	
 	public:
 		explicit InternalTargetPositioning(float coefficient, float offset = 0);
-		
+
+		[[nodiscard]] float getCoefficient() const;
+
+		[[nodiscard]] float getOffset() const;
+
 		float findPosition(float parentPosition, float objectSize, float, float targetSize) override;
 		
 		InternalTargetPositioning* copy() override;

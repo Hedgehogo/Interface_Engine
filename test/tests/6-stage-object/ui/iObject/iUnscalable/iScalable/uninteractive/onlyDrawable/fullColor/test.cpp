@@ -20,7 +20,7 @@ TEST(FullColor, draw) {
 TEST(FullColor, YAML) {
     Program testProgram{
         new ui::Interface{
-            ui::loadFromYaml<ui::IScalable>("../test/tests/3-stage/ui/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/fullColor/src/test.yaml")
+            ui::loadFromYaml<ui::IScalable>("../test/tests/6-stage-object/ui/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/fullColor/src/test.yaml")
         }
     };
 

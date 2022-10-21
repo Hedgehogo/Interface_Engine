@@ -12,7 +12,7 @@ namespace ui {
 		MatchPositioning(float parentCoefficient, float objectCoefficient, float offset = 0);
 		
 		float findPosition(float parentPosition, float objectSize, float parentSize, float targetSize) override;
-		
+
 		MatchPositioning* copy() override;
 	};
 	

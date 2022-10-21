@@ -5,7 +5,7 @@
 
 namespace ui {
 	class IInteraction {
-	private:
+	protected:
 		bool blocked;
 		
 	public:
@@ -19,7 +19,7 @@ namespace ui {
 		
 		virtual ~IInteraction() = default;
 		
-		bool isBlocked() const;
+		virtual bool isBlocked() const;
 		
 		virtual Priority getPriority() const;
 		

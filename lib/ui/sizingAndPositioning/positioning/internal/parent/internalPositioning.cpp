@@ -10,7 +10,15 @@ namespace ui {
 	InternalPositioning *InternalPositioning::copy() {
 		return new InternalPositioning{coefficient, offset};
 	}
-	
+
+	float InternalPositioning::getCoefficient() const {
+		return coefficient;
+	}
+
+	float InternalPositioning::getOffset() const {
+		return offset;
+	}
+
 	bool convertPointer(const YAML::Node &node, InternalPositioning *&internalPositioning) {
 		float coefficient;
 		float offset{0.f};
