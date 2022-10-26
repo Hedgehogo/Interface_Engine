@@ -1,9 +1,6 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
-
 #include "../layer.hpp"
-#include "../../uninteractive/uninteractive.hpp"
 #include "../../../../layout/object/layoutWithObject.hpp"
 #include "../../../../layout/background/layoutWithBackground.hpp"
 

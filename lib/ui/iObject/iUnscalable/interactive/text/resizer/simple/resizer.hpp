@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../baseResizer.h"
+#include "../baseResizer.hpp"
 
 namespace ui {
     class Resizer : public BaseResizer{

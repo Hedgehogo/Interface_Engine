@@ -1,7 +1,5 @@
 #include "sprite.hpp"
 #include <algorithm>
-#include <SFML/Graphics.hpp>
-
 
 namespace ui {
 	Sprite::Sprite(sf::Texture &texture, sf::IntRect rect, sf::Vector2f minSize) :

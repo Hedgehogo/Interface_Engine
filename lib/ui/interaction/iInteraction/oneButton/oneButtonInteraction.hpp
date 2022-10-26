@@ -1,6 +1,7 @@
 #pragma once
 #include "../iInteraction.hpp"
-#include "../../../enums/enums.hpp"
+#include "../../../enums/keyHandler/keyHandler.hpp"
+#include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
 	class OneButtonInteraction : public virtual IInteraction {

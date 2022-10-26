@@ -1,7 +1,5 @@
 #pragma once
-#include <any>
 
-#include <functional>
 #include <regex>
 #include "../shared/list/general/sList.hpp"
 #include "../shared/vector/general/sVector2.hpp"

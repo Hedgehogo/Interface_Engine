@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+
 #include "../layer.hpp"
 #include "../../../../../interaction/interactionStack/interactionStack.hpp"
 

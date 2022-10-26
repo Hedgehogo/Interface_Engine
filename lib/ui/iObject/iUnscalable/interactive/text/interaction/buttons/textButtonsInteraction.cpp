@@ -1,5 +1,5 @@
 #include "textButtonsInteraction.hpp"
-#include "../../text.h"
+#include "../../text.hpp"
 namespace ui {
     TextButtonsInteraction::TextButtonsInteraction(ButtonEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys) : ButtonsInteraction(event, keys, blackListKeys) {}
 

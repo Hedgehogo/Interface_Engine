@@ -1,10 +1,7 @@
 #pragma once
-#include "../baseCharacter.h"
 
 #include <string>
-
-#include "SFML/Graphics.hpp"
-
+#include "../baseCharacter.hpp"
 #include "../../textVariables.h"
 
 namespace ui{

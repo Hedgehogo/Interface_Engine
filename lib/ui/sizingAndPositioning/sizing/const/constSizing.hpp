@@ -17,6 +17,4 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, ConstSizing *&constSizing);
-	
-	Sizing* createSize(float constSize);
 }

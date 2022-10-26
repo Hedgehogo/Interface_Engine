@@ -1,6 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+
+#include <SFML/System/Vector2.hpp>
 
 namespace ui {
 	class ButtonEvent {

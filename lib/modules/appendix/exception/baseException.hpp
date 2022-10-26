@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <exception>
-#include <utility>
 
 namespace ui {
 	class BaseException : public std::exception {

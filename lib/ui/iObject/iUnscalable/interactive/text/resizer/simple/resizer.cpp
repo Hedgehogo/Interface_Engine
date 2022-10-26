@@ -1,4 +1,4 @@
-#include "resizer.h"
+#include "resizer.hpp"
 
 namespace ui {
     Resizer::Resizer(float lineSpacing, Align align) : BaseResizer{lineSpacing, align}{}

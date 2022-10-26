@@ -1,4 +1,5 @@
 #include "positioning2.hpp"
+#include "../../positioning/create/CreatePositioning.hpp"
 
 namespace ui {
 	Positioning2::Positioning2(Positioning *horizontal, Positioning *vertical) :

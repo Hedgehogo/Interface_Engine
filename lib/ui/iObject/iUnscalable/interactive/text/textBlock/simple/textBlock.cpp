@@ -1,7 +1,7 @@
-#include "textBlock.h"
+#include "textBlock.hpp"
 
-#include "../../line/underline/underline.h"
-#include "../../line/strikeThrough/strikeThrough.h"
+#include "../../line/underline/underline.hpp"
+#include "../../line/strikeThrough/strikeThrough.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {

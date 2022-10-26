@@ -1,7 +1,6 @@
 #pragma once
 #include "../layout.hpp"
 #include "../../iUnscalable/iScalable/uninteractive/uninteractive.hpp"
-#include "../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
 	class LayoutWithBackground : public virtual Layout {

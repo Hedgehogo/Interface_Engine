@@ -3,25 +3,26 @@
 #include "../../../lib/ui/interaction/iInteraction/iInteraction.hpp"
 #include "../../../lib/ui/interaction/interactionManager/interactionManager.hpp"
 
+
 class TestInteraction : public ui::IInteraction{
 public:
 	struct Processed{
 		struct Start{
-			uint64_t time{0};
+			unsigned long long time{0};
 			sf::Vector2i mousePosition;
 		};
 		struct Update{
-			uint64_t time{0};
+			unsigned long long time{0};
 			sf::Vector2i mousePosition;
 		};
 		struct Finish{
-			uint64_t time{0};
+			unsigned long long time{0};
 			sf::Vector2i mousePosition;
 		};
 		std::vector<Start> start;
 		std::vector<Update> update;
 		std::vector<Finish> finish;
-		std::vector<uint64_t> copy;
+		std::vector<unsigned long long> copy;
 	};
 
 	enum class Function{

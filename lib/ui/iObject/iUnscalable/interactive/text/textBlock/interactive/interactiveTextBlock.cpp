@@ -1,4 +1,4 @@
-#include "interactiveTextBlock.h"
+#include "interactiveTextBlock.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {

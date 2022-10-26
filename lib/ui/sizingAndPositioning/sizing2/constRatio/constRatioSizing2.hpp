@@ -1,5 +1,6 @@
 #pragma once
 #include "../baseSizing2.hpp"
+#include "../../sizing/sizing.hpp"
 
 namespace ui {
 	class ConstRatioSizing2 : public BaseSizing2 {

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include "../iScalable.hpp"
 #include "../../../panel/manager/general/panelManager.hpp"
 #include "../../../../interaction/interactionManager/interactionManager.hpp"

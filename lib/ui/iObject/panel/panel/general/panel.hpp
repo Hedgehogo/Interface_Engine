@@ -1,7 +1,6 @@
 #pragma once
-#include "../basePanel.hpp"
+
 #include "../../manager/general/panelManager.hpp"
-#include "../../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
 	class HidePanelInteraction;

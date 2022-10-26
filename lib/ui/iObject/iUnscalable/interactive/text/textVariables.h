@@ -1,6 +1,8 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
 
 typedef unsigned uint;
 

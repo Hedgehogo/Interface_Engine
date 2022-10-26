@@ -1,9 +1,9 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "../layer.hpp"
 #include "../../iScalable.hpp"
 #include "../../../../layout/twoObjects/layoutWithTwoObjects.hpp"
 #include "../../../../../interaction/interactionStack/interactionStack.hpp"
+#include "../../../../../enums/side/side.hpp"
 
 namespace ui {
 	class LayerWithConstBorder : public Layer, public LayoutWithTwoObjects {

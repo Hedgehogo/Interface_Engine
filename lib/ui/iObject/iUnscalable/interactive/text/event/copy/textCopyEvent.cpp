@@ -1,6 +1,6 @@
 #include <codecvt>
 #include "textCopyEvent.hpp"
-#include "../../text.h"
+#include "../../text.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {

@@ -19,5 +19,5 @@ namespace ui {
 	
 	bool convertPointer(const YAML::Node &node, MatchSidesPositioning *&matchSidesPositioning);
 	
-	Positioning* createPosition(Location parentSide, Location objectSide, float offset);
+	//Positioning* createPosition(Location parentSide, Location objectSide, float offset);
 }

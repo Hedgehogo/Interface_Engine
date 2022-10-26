@@ -1,14 +1,14 @@
 #pragma once
-#include "SFML/Graphics.hpp"
+
 #include "../textVariables.h"
-#include "../character/baseCharacter.h"
+#include "../character/baseCharacter.hpp"
 #include "../../../iScalable/interactive/simple/interactiveSimple.hpp"
-#include "../../../../../interaction/interactionStack/interactionStack.hpp"
 
 namespace ui {
 	class BaseTextBlock{
 	protected:
         TextVariables textVariables;
+
 	public:
         struct Edge{
             int start, end;

@@ -1,5 +1,5 @@
-#include "objectTextBlock.h"
-#include "../../character/simple/character.h"
+#include "objectTextBlock.hpp"
+#include "../../character/simple/character.hpp"
 
 namespace ui {
 	ObjectTextBlock::ObjectTextBlock(IScalable *object, sf::Vector2f size, bool isCharacter) : BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), object(object), isCharacter(isCharacter) {}

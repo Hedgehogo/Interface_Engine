@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../../lib/ui/iObject/panel/panel/basePanel.hpp"
+#include "../../../lib/ui/sizingAndPositioning/sizing/const/constSizing.hpp"
 #include <ctime>
 
 class TestPanel : public ui::BasePanel{

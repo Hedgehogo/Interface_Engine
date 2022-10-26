@@ -1,6 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include "../drawable/manager/drawManager.hpp"
 #include "../updatable/manager/updateManager.hpp"
 #include "../interaction/interactionStack/interactionStack.hpp"
@@ -47,8 +46,6 @@ namespace ui {
 		virtual bool updateInteractions(sf::Vector2f mousePosition) = 0;
 		
 		virtual IObject* copy() = 0;
-		
-        static sf::Color HSVtoRGB(float H, float S = 1, float V = 1);
 
         static void drawDebug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget &renderTarget, uint hue);
 

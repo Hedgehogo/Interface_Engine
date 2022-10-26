@@ -1,9 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 
 #include "../iScalable.hpp"
-#include "../../../../drawable/iDrawable/iDrawable.hpp"
-#include "../../../../interaction/interactionStack/interactionStack.hpp"
 
 namespace ui {
 	class IUninteractive : public virtual IScalable {

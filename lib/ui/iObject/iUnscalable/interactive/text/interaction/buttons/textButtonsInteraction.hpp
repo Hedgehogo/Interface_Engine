@@ -2,6 +2,7 @@
 
 #include "../textInteraction.hpp"
 #include "../../../../../../interaction/iInteraction/buttons/buttonsInteraction.hpp"
+#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
 

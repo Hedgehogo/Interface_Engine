@@ -1,4 +1,4 @@
-#include "interactive.h"
+#include "interactive.hpp"
 #include "../../../interaction/interactionStack/interactionStack.hpp"
 
 namespace ui {

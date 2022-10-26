@@ -1,6 +1,5 @@
 #pragma once
 #include "../event/button/empty/emptyEvent.hpp"
-#include "../event/button/simple/buttonEventSimple.hpp"
 #include "../event/button/lambdaSimple/buttonEvent_LambdaSimple.hpp"
 
 namespace ui {

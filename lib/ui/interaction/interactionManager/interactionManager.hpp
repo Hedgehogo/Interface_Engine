@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../iInteraction/iInteraction.hpp"
+#include <algorithm>
+#include <vector>
 
 typedef unsigned long long ullint;
 
@@ -32,8 +34,3 @@ namespace ui {
 		virtual void update(sf::Vector2i mousePosition);
 	};
 }
-
-#include "../iInteraction/empty/emptyInteraction.hpp"
-#include "../iInteraction/lambda/lambdaInteraction.hpp"
-#include "../iInteraction/mouse/mouseInteraction.hpp"
-#include "../iInteraction/mouse/lambda/mouseLambdaInteraction.hpp"

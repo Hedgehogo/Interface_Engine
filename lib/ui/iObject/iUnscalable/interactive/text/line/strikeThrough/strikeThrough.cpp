@@ -1,4 +1,4 @@
-#include "strikeThrough.h"
+#include "strikeThrough.hpp"
 
 namespace ui {
     StrikeThrough::StrikeThrough(sf::Color color, float strikeThroughOffset) : BaseLine(sf::TriangleStrip, 4, color), strikeThroughOffset(strikeThroughOffset) {}

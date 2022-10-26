@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../simple/textBlock.h"
+#include "../simple/textBlock.hpp"
 #include "../../../../../../interaction/iInteraction/iInteraction.hpp"
 
 namespace ui {

@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../interactive/interactive.h"
+#include "../../../interactive/interactive.hpp"
 
 namespace ui {
 	class Interactive_Simple : public virtual IScalable, public Interactive, public IUpdatable {

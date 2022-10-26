@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.21)
 project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
+
 if (${CMAKE_BUILD_TYPE} STREQUAL Release)
     add_definitions(-O2)
 endif ()

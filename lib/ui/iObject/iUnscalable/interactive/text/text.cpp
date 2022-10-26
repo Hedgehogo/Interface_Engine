@@ -2,7 +2,7 @@
 #include <cmath>
 #include <vector>
 
-#include "text.h"
+#include "text.hpp"
 
 #include "../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 

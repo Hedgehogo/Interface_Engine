@@ -1,6 +1,7 @@
 #pragma once
 #include "../../layout/object/layoutWithObject.hpp"
-#include "../../iUnscalable/iScalable/iScalable.hpp"
+#include "../../../sizingAndPositioning/sizing/create/CreateSize.hpp"
+#include "../../../sizingAndPositioning/positioning/create/CreatePositioning.hpp"
 #include "../../../sizingAndPositioning/sizing2/baseSizing2.hpp"
 #include "../../../sizingAndPositioning/sizing2/general/sizing2.hpp"
 #include "../../../sizingAndPositioning/sizing2/constRatio/constRatioSizing2.hpp"
@@ -9,7 +10,7 @@
 #include "../../../sizingAndPositioning/positioning2/general/positioning2.hpp"
 #include "../../../sizingAndPositioning/positioning2/internal/internalPositioning2.hpp"
 #include "../../../sizingAndPositioning/positioning2/lambda/lambdaPositioning2.hpp"
-#include "../../../enums/enums.hpp"
+#include "../../../enums/keyHandler/keyHandler.hpp"
 
 namespace ui {
 	class BasePanel : public LayoutWithObject, public IDrawable, public IUpdatable {

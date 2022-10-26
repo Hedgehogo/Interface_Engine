@@ -2,7 +2,7 @@
 
 #include "../iInteraction.hpp"
 #include "../buttons/buttonsInteraction.hpp"
-#include <SFML/Graphics.hpp>
+#include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
     class HotkeyInteraction : public virtual IInteraction{

@@ -1,7 +1,6 @@
 #pragma once
-#include "../baseTextBlock.h"
-#include "SFML/Graphics.hpp"
-#include "../../character/object/objectCharacter.h"
+#include "../baseTextBlock.hpp"
+#include "../../character/object/objectCharacter.hpp"
 namespace ui{
     class ObjectTextBlock  : public BaseTextBlock {
         std::vector<BaseLine *> lines;

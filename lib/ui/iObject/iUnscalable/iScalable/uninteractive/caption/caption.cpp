@@ -1,5 +1,6 @@
 #include "caption.hpp"
 #include <algorithm>
+#include "../../../../../../modules/appendix/HSVtoRGB/HsVtoRgb.hpp"
 
 typedef unsigned uint;
 

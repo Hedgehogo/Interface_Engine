@@ -1,15 +1,14 @@
 #pragma once
 
-#include "../baseCharacter.h"
-#include "SFML/Graphics.hpp"
-#include "../../../../../iObject.hpp"
+#include "../baseCharacter.hpp"
+#include "../../../../iScalable/iScalable.hpp"
 
 namespace ui {
     class ObjectCharacter : public BaseCharacter{
-        IObject* object;
+        IScalable* object;
         std::vector<BaseLine *> lines;
     public:
-        ObjectCharacter(IObject* object);
+        ObjectCharacter(IScalable* object);
 
         void setPosition( sf::Vector2f position) override;
 

@@ -1,8 +1,7 @@
-#include "objectCharacter.h"
-#include "iostream"
+#include "objectCharacter.hpp"
 
 namespace ui {
-    ObjectCharacter::ObjectCharacter(IObject* object) : object(object){}
+    ObjectCharacter::ObjectCharacter(IScalable* object) : object(object){}
 
     char32_t ObjectCharacter::getChar() {
         return '\0';

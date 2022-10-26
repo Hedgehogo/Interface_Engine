@@ -1,5 +1,5 @@
-#include "baseCharacter.h"
-#include "../textBlock/baseTextBlock.h"
+#include "baseCharacter.hpp"
+#include "../textBlock/baseTextBlock.hpp"
 
 namespace ui {
 	BaseCharacter::BaseCharacter() : selection(false) {}

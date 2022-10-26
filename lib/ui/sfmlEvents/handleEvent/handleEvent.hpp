@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
+#include <SFML/Window/Event.hpp>
 
 namespace ui {
     void handleEvent(sf::Event event);

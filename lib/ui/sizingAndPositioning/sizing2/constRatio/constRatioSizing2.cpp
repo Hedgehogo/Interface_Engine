@@ -1,8 +1,5 @@
-//
-// Created by Professional on 04.07.2022.
-//
-
 #include "constRatioSizing2.hpp"
+#include "../../sizing/create/CreateSize.hpp"
 
 namespace ui {
 	ConstRatioSizing2::ConstRatioSizing2(Sizing *sizing, float ratio, bool horizontal) : sizing(sizing), ratio(ratio), horizontal(horizontal) {}

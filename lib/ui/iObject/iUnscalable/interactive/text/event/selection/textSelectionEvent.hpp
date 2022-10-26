@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../../../../../interaction/event/button/simple/buttonEventSimple.hpp"
+#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../textEvent.hpp"
 
 namespace ui {

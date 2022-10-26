@@ -2,6 +2,7 @@
 
 #include "../../LayerWithChangeableObjects.hpp"
 #include "../changeableObjectsEvent.hpp"
+#include <yaml.h>
 
 namespace ui
 {

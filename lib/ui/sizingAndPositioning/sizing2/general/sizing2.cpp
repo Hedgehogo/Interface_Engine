@@ -1,4 +1,5 @@
 #include "sizing2.hpp"
+#include "../../sizing/create/CreateSize.hpp"
 
 namespace ui {
 	Sizing2::Sizing2(Sizing *horizontal, Sizing *vertical) :

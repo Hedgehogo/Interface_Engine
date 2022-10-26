@@ -1,6 +1,7 @@
 #pragma once
-#include <vector>
+
 #include "../iInteraction/iInteraction.hpp"
+#include <vector>
 
 namespace ui {
 	class InteractionStack {

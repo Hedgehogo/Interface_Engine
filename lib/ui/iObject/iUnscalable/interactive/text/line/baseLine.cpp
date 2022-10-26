@@ -1,5 +1,5 @@
 
-#include "baseLine.h"
+#include "baseLine.hpp"
 
 namespace ui {
     BaseLine::BaseLine(sf::PrimitiveType type, std::size_t vertexCount, sf::Color color) :vertexArray(type, vertexCount) {

@@ -1,6 +1,7 @@
 #pragma once
 #include "../displayPanelInteraction.hpp"
 #include "../../general/panelInteraction.hpp"
+#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
 	class PointingDisplayPanelInteraction : public DisplayPanelInteraction, public PanelInteraction {

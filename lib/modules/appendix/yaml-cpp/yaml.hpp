@@ -1,8 +1,7 @@
 #pragma once
-#include <string>
-#include <typeinfo>
+
 #include <SFML/Graphics.hpp>
-#include "yaml-cpp/yaml.h"
+#include <yaml-cpp/yaml.h>
 
 typedef long long llint;
 typedef unsigned int uint;

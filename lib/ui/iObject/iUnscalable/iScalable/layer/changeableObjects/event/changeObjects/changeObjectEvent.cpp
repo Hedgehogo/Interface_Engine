@@ -1,4 +1,5 @@
 #include "changeObjectEvent.hpp"
+#include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui
 {

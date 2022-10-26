@@ -1,6 +1,6 @@
 #include "textSelectionEvent.hpp"
 
-#include "../../text.h"
+#include "../../text.hpp"
 
 #include <cmath>
 

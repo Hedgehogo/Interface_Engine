@@ -1,10 +1,9 @@
 #pragma once
 #include "../layer.hpp"
-#include "../../iScalable.hpp"
-#include "../../uninteractive/uninteractive.hpp"
 #include "../../uninteractive/onlyDrawable/empty/empty.hpp"
 #include "../../../../layout/background/layoutWithBackground.hpp"
 #include "../../../../layout/twoObjects/layoutWithTwoObjects.hpp"
+#include "../../../../../enums/corner/corner.hpp"
 
 namespace ui {
 	class LayerWithConstRatio : public Layer, public LayoutWithBackground, public LayoutWithTwoObjects, public IDrawable {

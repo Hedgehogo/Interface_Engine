@@ -1,6 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include "../../../modules/appendix/yaml-cpp/yaml.hpp"
 
 namespace ui {

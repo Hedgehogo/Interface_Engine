@@ -1,10 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <vector>
-
-#include "../character/baseCharacter.h"
-#include "../line/baseLine.h"
+#include "../character/baseCharacter.hpp"
 
 namespace ui {
     class BaseResizer {

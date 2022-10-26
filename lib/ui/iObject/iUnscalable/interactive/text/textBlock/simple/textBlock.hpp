@@ -1,7 +1,7 @@
 #pragma once
-#include "../baseTextBlock.h"
+#include "../baseTextBlock.hpp"
 
-#include "../../character/simple/character.h"
+#include "../../character/simple/character.hpp"
 
 namespace ui {
 	class TextBlock : public BaseTextBlock {

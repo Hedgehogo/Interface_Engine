@@ -1,8 +1,6 @@
 #pragma once
 
 #include "../uninteractive.hpp"
-#include "../../../../../drawable/iDrawable/iDrawable.hpp"
-#include "../../../../../interaction/interactionStack/interactionStack.hpp"
 
 namespace ui {
     class OnlyDrawable : public IUninteractive, public IDrawable{

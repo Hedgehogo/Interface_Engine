@@ -1,6 +1,7 @@
 #pragma once
 #include "../hidePanelInteraction.hpp"
 #include "../../general/panelInteraction.hpp"
+#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
 	class PointingHidePanelInteraction : public HidePanelInteraction, public PanelInteraction {

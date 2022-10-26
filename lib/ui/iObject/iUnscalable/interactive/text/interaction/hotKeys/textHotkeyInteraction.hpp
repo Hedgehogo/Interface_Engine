@@ -3,6 +3,7 @@
 #include "../textInteraction.hpp"
 #include "../../../../../../interaction/iInteraction/hotkey/hotkeyInteraction.hpp"
 #include "../buttons/textButtonsInteraction.hpp"
+#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
 

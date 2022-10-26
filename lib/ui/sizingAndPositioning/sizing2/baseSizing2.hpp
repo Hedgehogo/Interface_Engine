@@ -1,12 +1,5 @@
 #pragma once
-#include "../sizing/sizing.hpp"
-#include "../sizing/const/constSizing.hpp"
-#include "../sizing/relative/normal/relativeNormalSizing.hpp"
-#include "../sizing/relative/parent/relativeParentSizing.hpp"
-#include "../sizing/coefficient/parent/parentCoefficientSizing.hpp"
-#include "../sizing/coefficient/target/targetCoefficientSizing.hpp"
-#include "../sizing/smart/smartSizing.hpp"
-#include "../sizing/lambda/lambdaSizing.hpp"
+#include <SFML/Graphics/RenderTarget.hpp>
 
 namespace ui {
 	class BaseSizing2 {
@@ -23,8 +16,4 @@ namespace ui {
 		
 		virtual BaseSizing2* copy() = 0;
 	};
-	
-	Sizing* createSize(bool relativeParent);
-	
-	Sizing* createSize(float coefficient, float addition, bool relativeTarget);
 }

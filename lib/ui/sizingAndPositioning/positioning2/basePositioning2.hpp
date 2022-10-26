@@ -21,8 +21,10 @@ namespace ui {
 		
 		virtual BasePositioning2* copy() = 0;
 	};
-	
+/*
+
 	Positioning* createPosition(float coefficient, float offset, bool relativeTarget = false);
 	
 	Positioning* createPosition(float coefficient, float objectCoefficient, float offset, bool relativeTarget = false);
+*/
 }

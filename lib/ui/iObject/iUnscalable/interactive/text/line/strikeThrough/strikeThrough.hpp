@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../baseLine.h"
+#include "../baseLine.hpp"
 
 namespace ui {
     class StrikeThrough : public BaseLine{
