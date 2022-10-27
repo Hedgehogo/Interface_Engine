@@ -174,6 +174,12 @@ namespace ui {
 		porting(i);
 	}
 
+	void Resizer::fullObjectResize(BaseCharacter *character, int i) {
+		enterResize(i);
+		character->resize(nextPosition, endRender.x);
+		nextPosition.y += lineSpacing;
+	}
+
 	void Resizer::deleteCash() {
 		distanceEnter = 0;
 		distanceSpace = 0;
@@ -206,6 +212,9 @@ namespace ui {
                 case BaseCharacter::Special::enter:
 	                enterResize(i);
                     break;
+	            case BaseCharacter::Special::fullLine:
+		            fullObjectResize(character, i);
+		            break;
             }
         }
 
@@ -215,7 +224,6 @@ namespace ui {
     }
 
     sf::Vector2f Resizer::getMinSize() {
-
         sf::Vector2f minSize = {0, 0};
         float wordSizeX = 0;
 

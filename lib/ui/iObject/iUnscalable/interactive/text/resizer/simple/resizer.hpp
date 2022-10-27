@@ -37,6 +37,8 @@ namespace ui {
 
 		virtual void spaceResize(BaseCharacter *character, float kerning, int i);
 
+		virtual void fullObjectResize(BaseCharacter *character, int i);
+
 		virtual void enterResize(int i);
 
 		virtual void endLineEqualize();

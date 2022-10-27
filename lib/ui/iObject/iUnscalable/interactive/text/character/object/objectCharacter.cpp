@@ -1,7 +1,7 @@
 #include "objectCharacter.hpp"
 
 namespace ui {
-    ObjectCharacter::ObjectCharacter(IScalable* object) : object(object){}
+    ObjectCharacter::ObjectCharacter(IScalable* object, bool fullLine) : object(object), special(fullLine ? BaseCharacter::Special::fullLine : BaseCharacter::Special::no){}
 
     char32_t ObjectCharacter::getChar() {
         return '\0';
@@ -11,6 +11,11 @@ namespace ui {
         BaseCharacter::setPosition(position);
         object->setPosition({position.x, position.y - getHeight()});
     }
+
+	void ObjectCharacter::resize(sf::Vector2f position, float endPosition) {
+		BaseCharacter::setPosition(position);
+		object->resize({endPosition - position.x, object->getSize().y}, position);
+	}
 
     void ObjectCharacter::move(sf::Vector2f position) {
         BaseCharacter::move(position);
@@ -30,7 +35,7 @@ namespace ui {
     }
 
     BaseCharacter::Special ObjectCharacter::isSpecial() {
-        return BaseCharacter::Special::no;
+        return special;
     }
 
     void ObjectCharacter::draw() {}

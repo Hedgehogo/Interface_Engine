@@ -2,7 +2,9 @@
 #include "../../character/simple/character.hpp"
 
 namespace ui {
-	ObjectTextBlock::ObjectTextBlock(IScalable *object, sf::Vector2f size, bool isCharacter) : BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), object(object), isCharacter(isCharacter) {}
+	ObjectTextBlock::ObjectTextBlock(IScalable *object, sf::Vector2f size, bool isCharacter) : BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), object(object), isCharacter(isCharacter), fullLine(false) {}
+
+	ObjectTextBlock::ObjectTextBlock(IScalable *object, float height) : size(0, height), fullLine(true), isCharacter(false), object(object), objectCharacter(new ObjectCharacter{object, true}) {}
 	
 	void ObjectTextBlock::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
@@ -16,13 +18,13 @@ namespace ui {
 	
 	std::vector<BaseCharacter *> ObjectTextBlock::getCharacters() {
 		std::vector<BaseCharacter *> result;
-		if(!isCharacter) {
+		if(!isCharacter && !fullLine) {
 			result.push_back(new Character{L'\n', textVariables, lines});
 		}
 		
 		result.push_back(objectCharacter);
 		
-		if(!isCharacter) {
+		if(!isCharacter && !fullLine) {
 			result.push_back(new Character{L'\n', textVariables, lines});
 		}
 		
@@ -38,16 +40,24 @@ namespace ui {
 	BaseTextBlock *ObjectTextBlock::copy() {
 		return new ObjectTextBlock{object->copy(), object->getAreaSize(), isCharacter};
 	}
-	
+
 	bool convertPointer(const YAML::Node &node, ObjectTextBlock *&objectTextBlock) {
 		IScalable *object;
-		sf::Vector2f size{0, 0};
-		bool isCharacter{true};
 		
 		node["object"] >> object;
-		node["size"] >> size;
-		if(node["is-character"])
-			node["is-character"] >> isCharacter;
-		{ objectTextBlock = new ObjectTextBlock{object, size, isCharacter}; return true; }
+
+		if(node["size"]){
+			sf::Vector2f size{0, 0};
+			bool isCharacter{true};
+
+			node["size"] >> size;
+			if(node["is-character"]) node["is-character"] >> isCharacter;
+			{ objectTextBlock = new ObjectTextBlock{object, size, isCharacter}; return true; }
+		} else {
+			float height{0};
+
+			node["height"] >> height;
+			{ objectTextBlock = new ObjectTextBlock{object, height}; return true; }
+		}
 	}
 }

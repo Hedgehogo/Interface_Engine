@@ -3,12 +3,34 @@ first-object:
   type: FullColor
   color: red
 second-object:
-  type: Text
-  text-block:
-    type: TB
-    text:
-      key: text
-      directory: ../example-resources/
-      language: en
-  font: ../example-resources/msyh.ttc
+  type: LWCBe
+  thickness: 10
+  bezel:
+    type: FullColor
+    color: 000000
+  object:
+    type: Text
+    text-blocks:
+      - type: TB
+        text:
+          key: text
+          directory: ../example-resources/
+          language: en
+      - type: OTB
+        object:
+          type: FullColor
+          color: red
+        size: 100, 100
+      - type: OTB
+        object:
+          type: FullColor
+          color: green
+        size: 100, 100
+        is-character: false
+      - type: OTB
+        object:
+          type: FullColor
+          color: blue
+        height: 100
+    font: ../example-resources/msyh.ttc
 border-direction: horizontal
