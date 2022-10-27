@@ -7,10 +7,13 @@ namespace ui {
     class ObjectCharacter : public BaseCharacter{
         IScalable* object;
         std::vector<BaseLine *> lines;
+		BaseCharacter::Special special;
     public:
-        ObjectCharacter(IScalable* object);
+        ObjectCharacter(IScalable* object, bool fullLine = false);
 
         void setPosition( sf::Vector2f position) override;
+
+        void resize( sf::Vector2f position, float endPosition) override;
 
         void move(sf::Vector2f position) override;
 

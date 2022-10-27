@@ -1,51 +1,36 @@
-type: LWAO
-top-object:
-  type: LWB
-  objects:
-    - - type: Slider
-        slider: &slider
-          type: Capsule
-          color: 525252
-        background: &background
-          type: FullColor
-          color: 37383A88
-        slider-scale: 0.5, 0.5
-        value:
-          var: vec
-      - type: Slider
-        slider: *slider
-        background: *background
-        slider-scale: 0.25, 0.5
-        value:
-          var: y-vec
-          x: vec.x
-          y:
-            var: y-2
-    - - type: Slider
-        slider: *slider
-        background: *background
-        slider-scale: 0.5, 0.25
-        value:
-          var: x-vec
-          x:
-            var: x-2
-          y: vec.y
-      - type: Slider
-        slider: *slider
-        background: *background
-        slider-scale: 0.25, 0.25
-        value:
-          var: re-vec
-          x: x-2
-          y: y-2
-bottom-object:
-  type: LWUI
+type: LWMB
+first-object:
+  type: FullColor
+  color: red
+second-object:
+  type: LWCBe
+  thickness: 10
+  bezel:
+    type: FullColor
+    color: 000000
   object:
     type: Text
-    text-block:
-      type: TB
-      text:
-        key: knife
-        directory: ../example-resources/
-        language: jp
+    text-blocks:
+      - type: TB
+        text:
+          key: text
+          directory: ../example-resources/
+          language: en
+      - type: OTB
+        object:
+          type: FullColor
+          color: red
+        size: 100, 100
+      - type: OTB
+        object:
+          type: FullColor
+          color: green
+        size: 100, 100
+        is-character: false
+      - type: OTB
+        object:
+          type: FullColor
+          color: blue
+        height: 100
     font: ../example-resources/msyh.ttc
+border-direction: horizontal
