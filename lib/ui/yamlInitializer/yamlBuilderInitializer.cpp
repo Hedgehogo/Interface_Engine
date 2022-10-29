@@ -44,8 +44,9 @@ namespace ui {
         addType<TextEvent, TextSelectionEvent>({"TSE"});
 		addSubtype<ButtonEvent, TextEvent>();
 		addType<ButtonEvent, ChangeObjectEvent>({ "COE", "ChangeObjectE"});
-		addType<ButtonEvent, WhileChangingObjectsEvent>({ "WhileChangingO", "WCO"});
-		
+		addType<ButtonEvent, WhileChangingObjectsEvent>({ "WhileChangingOE", "WCO"});
+		addType<ButtonEvent, OpenUrlEvent>({"UrlE", "Url", "OUE"});
+
 		addType<HidePanelInteraction, DontHidePanelInteraction>({"DontHidePI", "DontHPI", "DHPI"});
 		addType<HidePanelInteraction, ClickHidePanelInteraction>({"ClickHidePI", "ClickHPI", "CHPI"});
 		addType<HidePanelInteraction, PointingHidePanelInteraction>({"PointingHidePI", "PointingHPI", "PHPI"});

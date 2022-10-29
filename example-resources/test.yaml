@@ -32,5 +32,12 @@ second-object:
           type: FullColor
           color: blue
         height: 100
+      - type: ITB
+        interaction:
+          type: OBI
+          event:
+            type: Url
+            url: "https://www.youtube.com"
+        text: "youtube"
     font: ../example-resources/msyh.ttc
 border-direction: horizontal

@@ -177,7 +177,7 @@ namespace ui {
 	void Resizer::fullObjectResize(BaseCharacter *character, int i) {
 		enterResize(i);
 		character->resize(nextPosition, endRender.x);
-		nextPosition.y += lineSpacing;
+		nextPosition.y += lineSpacing + character->getHeight();
 	}
 
 	void Resizer::deleteCash() {
