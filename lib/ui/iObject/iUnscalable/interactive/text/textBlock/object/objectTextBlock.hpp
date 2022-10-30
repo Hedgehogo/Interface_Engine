@@ -7,9 +7,12 @@ namespace ui{
         sf::Vector2f size;
         ObjectCharacter* objectCharacter;
         bool isCharacter;
+        bool fullLine;
         IScalable* object;
     public:
         ObjectTextBlock(IScalable* object, sf::Vector2f size = {0, 0}, bool isCharacter = true);
+
+	    ObjectTextBlock(IScalable* object, float height);
 
         void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 

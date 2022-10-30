@@ -13,7 +13,8 @@ namespace ui{
 		enum class Special {
 			space,
 			enter,
-			no
+			no,
+			fullLine,
 		};
 		
     protected:
@@ -35,6 +36,8 @@ namespace ui{
         virtual void setSelection(bool selection);
 
         virtual void setPosition(sf::Vector2f position);
+
+        virtual void resize(sf::Vector2f position, float endRender);
 
         virtual void move(sf::Vector2f position);
 

@@ -116,7 +116,7 @@ namespace ui {
 			}
 		}
 		
-		if(node["interaction"].IsScalar()) {
+		if(!node["interaction"].IsScalar()) {
 			IInteraction *indexInteraction;
 			node["interaction"] >> indexInteraction;
 			{ interactiveTextBlock = new InteractiveTextBlock{indexInteraction, text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor}; return true; }

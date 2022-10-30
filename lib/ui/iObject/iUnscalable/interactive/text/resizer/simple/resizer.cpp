@@ -122,73 +122,108 @@ namespace ui {
         distanceEnter = distanceSpace;
         distanceSpace = 0;
     }
-    
+
+	bool Resizer::isOnlyMove(sf::Vector2f size, sf::Vector2f position) {
+		if(size.x == endRender.x - startRender.x){
+			sf::Vector2f offset{position - startRender};
+			for (BaseCharacter*& character : (*characters)) {
+				character->move(offset);
+			}
+
+			for (BaseLine*& line : *lines) {
+				line->move(offset);
+			}
+
+			startRender = position;
+			endRender = position + size;
+			return true;
+		}
+
+		return false;
+	}
+
+	void Resizer::deleteOldCash(sf::Vector2f size, sf::Vector2f position) {
+		for (BaseLine*& line : *lines) {
+			delete line;
+		}
+		lines->clear();
+
+		startRender = position;
+		endRender = position + size;
+		this->nextPosition = startRender;
+	}
+
+	void Resizer::characterResize(BaseCharacter *character, float kerning) {
+		printCharacter(character, kerning);
+		distanceSpace++;
+	}
+
+	void Resizer::spaceResize(BaseCharacter *character, float kerning, int i) {
+		if (this->nextPosition.x <= endRender.x){
+			printCharacter(character, kerning);
+			distanceSpace = 0;
+		} else{
+			autoPorting(i);
+			printCharacter(character, kerning);
+		}
+	}
+
+	void Resizer::enterResize(int i) {
+		if (this->nextPosition.x > endRender.x)
+			autoPorting(i);
+		porting(i);
+	}
+
+	void Resizer::fullObjectResize(BaseCharacter *character, int i) {
+		enterResize(i);
+		character->resize(nextPosition, endRender.x);
+		nextPosition.y += lineSpacing + character->getHeight();
+	}
+
+	void Resizer::deleteCash() {
+		distanceEnter = 0;
+		distanceSpace = 0;
+	}
+
+	void Resizer::endLineEqualize() {
+		if (endRender.x < this->nextPosition.x){
+			autoPorting(characters->size());
+		}
+		equalize((*characters).size());
+	}
+
     void Resizer::resize(sf::Vector2f size, sf::Vector2f position) {
-        if(size.x == endRender.x - startRender.x){
-            sf::Vector2f offset{position - startRender};
-            for (BaseCharacter*& character : (*characters)) {
-                character->move(offset);
-            }
+        if(isOnlyMove(size, position)) return;
 
-            for (BaseLine*& line : *lines) {
-                line->move(offset);
-            }
-
-            startRender = position;
-            endRender = position + size;
-            return;
-        }
-
-        for (BaseLine*& line : *lines) {
-            delete line;
-        }
-        lines->clear();
-
-        startRender = position;
-        endRender = position + size;
-        this->nextPosition = startRender;
-
+		deleteOldCash(size, position);
 
         for (int i = 0; i < (*characters).size(); i++) {
             BaseCharacter* character = (*characters)[i];
 
-            float kerning = 0;
+            float kerning{0};
 
-            BaseCharacter::Special specialText = character->isSpecial();
-
-            switch (specialText) {
+            switch (character->isSpecial()) {
                 case BaseCharacter::Special::no:
-                    printCharacter(character, kerning);
-                    distanceSpace++;
+	                characterResize(character, kerning);
                     break;
                 case BaseCharacter::Special::space:
-                    if (this->nextPosition.x <= endRender.x){
-                        printCharacter(character, kerning);
-                        distanceSpace = 0;
-                    } else{
-                        autoPorting(i);
-                        printCharacter(character, kerning);
-                    }
+	                spaceResize(character, kerning, i);
                     break;
                 case BaseCharacter::Special::enter:
-                    if (this->nextPosition.x > endRender.x)
-                        autoPorting(i);
-                    porting(i);
+	                enterResize(i);
                     break;
+	            case BaseCharacter::Special::fullLine:
+		            fullObjectResize(character, i);
+		            break;
             }
         }
 
-        if (endRender.x < this->nextPosition.x){
-            autoPorting(characters->size());
-        }
-        equalize((*characters).size());
+	    endLineEqualize();
 
-        distanceEnter = 0;
-        distanceSpace = 0;
+        deleteCash();
     }
 
     sf::Vector2f Resizer::getMinSize() {
-
         sf::Vector2f minSize = {0, 0};
         float wordSizeX = 0;
 
@@ -215,7 +250,7 @@ namespace ui {
         return new Resizer(lineSpacing, align);
     }
 
-    bool convertPointer(const YAML::Node &node, Resizer *&resizer) {
+	bool convertPointer(const YAML::Node &node, Resizer *&resizer) {
         float lineSpacing{1.15};
         BaseResizer::Align align{BaseResizer::Align::left};
 

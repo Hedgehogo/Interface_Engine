@@ -9,6 +9,10 @@ namespace ui {
 	void BaseCharacter::setPosition(sf::Vector2f position) {
 		this->position = position;
 	}
+
+	void BaseCharacter::resize(sf::Vector2f position, float endRender) {
+		setPosition(position);
+	}
 	
 	bool BaseCharacter::in(sf::Vector2f mousePosition) {
 		return position.x < mousePosition.x && position.x + getAdvance() > mousePosition.x &&

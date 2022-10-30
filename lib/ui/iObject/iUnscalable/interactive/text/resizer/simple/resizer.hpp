@@ -27,6 +27,21 @@ namespace ui {
 
         virtual float equalize(uint i);
 
+		virtual bool isOnlyMove(sf::Vector2f size, sf::Vector2f position);
+
+		virtual void deleteOldCash(sf::Vector2f size, sf::Vector2f position);
+
+		virtual void deleteCash();
+
+		virtual void characterResize(BaseCharacter* character, float kerning);
+
+		virtual void spaceResize(BaseCharacter *character, float kerning, int i);
+
+		virtual void fullObjectResize(BaseCharacter *character, int i);
+
+		virtual void enterResize(int i);
+
+		virtual void endLineEqualize();
     public:
         void resize(sf::Vector2f size, sf::Vector2f position) override;
 
