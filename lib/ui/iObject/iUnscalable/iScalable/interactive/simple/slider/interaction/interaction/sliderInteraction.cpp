@@ -24,7 +24,7 @@ namespace ui {
 		wheelEvent.setSlider(slider);
 	}
 	
-	bool SliderInteraction::update(sf::Vector2i mousePosition) {
+	void SliderInteraction::update(sf::Vector2i mousePosition) {
 		wheelEvent.update(mousePosition, sf::Wheel::value);
 		return OneButtonInteraction::update(mousePosition);
 	}

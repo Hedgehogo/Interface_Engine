@@ -7,12 +7,11 @@ namespace ui {
 	
 	void PointingHidePanelInteraction::start(sf::Vector2i) {}
 	
-	bool PointingHidePanelInteraction::update(sf::Vector2i mousePosition) {
+	void PointingHidePanelInteraction::update(sf::Vector2i mousePosition) {
 		sf::Vector2f pointPosition{static_cast<sf::Vector2f>(mousePosition)};
 		if(!panel->getParentProcessed() && (onlyOnParent || (!panel->inPanel(pointPosition) && panel->isFree() && !panel->inConstPanels(pointPosition)))) {
 			panelManager->hidePanel(panel);
 		}
-		return false;
 	}
 	
 	void PointingHidePanelInteraction::finish(sf::Vector2i) {}

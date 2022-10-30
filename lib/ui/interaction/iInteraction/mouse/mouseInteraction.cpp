@@ -14,9 +14,8 @@ namespace ui {
 		this->rightMouseButton = rightMouseButton->copy();
 	}
 	
-	bool MouseInteraction::update(sf::Vector2i mousePosition) {
+	void MouseInteraction::update(sf::Vector2i mousePosition) {
 		leftMouseButton->update(mousePosition, KeyHandler::isKeyPressed(Key::mouseLeft));
 		rightMouseButton->update(mousePosition, KeyHandler::isKeyPressed(Key::mouseRight));
-		return false;
 	}
 }

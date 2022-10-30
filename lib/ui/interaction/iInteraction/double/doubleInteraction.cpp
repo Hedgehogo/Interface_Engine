@@ -37,14 +37,13 @@ namespace ui {
 		}
 	}
 	
-	bool DoubleInteraction::update(sf::Vector2i mousePosition) {
+	void DoubleInteraction::update(sf::Vector2i mousePosition) {
 		if(first != nullptr) {
 			first->update(mousePosition);
 		}
 		if(second != nullptr) {
 			second->update(mousePosition);
 		}
-		return false;
 	}
 	
 	void DoubleInteraction::finish(sf::Vector2i mousePosition) {

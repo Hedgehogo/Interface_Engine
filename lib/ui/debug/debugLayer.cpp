@@ -70,4 +70,9 @@ namespace ui {
 		
 		object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
+	
+	bool convertPointer(const YAML::Node &node, DebugLayer *&debugLayer) {
+		debugLayer = new DebugLayer{node["object"].as<IScalable *>()};
+		return true;
+	}
 }

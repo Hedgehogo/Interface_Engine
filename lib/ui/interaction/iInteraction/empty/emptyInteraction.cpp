@@ -3,9 +3,7 @@
 namespace ui {
 	void EmptyInteraction::start(sf::Vector2i mousePosition) {}
 	
-	bool EmptyInteraction::update(sf::Vector2i mousePosition) {
-		return false;
-	}
+	void EmptyInteraction::update(sf::Vector2i mousePosition) {}
 	
 	void EmptyInteraction::finish(sf::Vector2i mousePosition) {}
 	

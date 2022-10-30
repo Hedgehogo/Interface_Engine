@@ -15,7 +15,7 @@ namespace ui {
 		
 		void init(InteractionManager &interactionManager);
 		
-		bool update(sf::Vector2i mousePosition) override;
+		void update(sf::Vector2i mousePosition) override;
 		
 		PressedInteraction* copy();
 	};

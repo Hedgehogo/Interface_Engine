@@ -7,7 +7,7 @@
 #endif
 
 TestInteraction::TestInteraction(Priority priority, bool blocked) :
-	ui::IInteraction(blocked), priority(priority), testInteraction(testInteraction){}
+	ui::IInteraction(), priority(priority), testInteraction(testInteraction), IInteraction() {}
 
 TestInteraction::Processed TestInteraction::getProcessed() {
 	return processed;
@@ -17,7 +17,7 @@ void TestInteraction::start(sf::Vector2i mousePosition) {
 	processed.start.push_back({__rdtsc(), mousePosition});
 }
 
-bool TestInteraction::update(sf::Vector2i mousePosition) {
+void TestInteraction::update(sf::Vector2i mousePosition) {
 	processed.update.push_back({__rdtsc(), mousePosition});
 	return updateResult;
 }

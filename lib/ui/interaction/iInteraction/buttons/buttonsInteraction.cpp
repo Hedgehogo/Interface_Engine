@@ -24,7 +24,7 @@ namespace ui {
 
     void ButtonsInteraction::start(sf::Vector2i) {}
 
-    bool ButtonsInteraction::update(sf::Vector2i mousePosition) {
+    void ButtonsInteraction::update(sf::Vector2i mousePosition) {
         press = true;
         for (auto& key : keys) {
             if (!KeyHandler::isKeyPressed(key)) {
@@ -41,7 +41,6 @@ namespace ui {
             }
         }
         event->update(mousePosition, press);
-        return false;
     }
 
     void ButtonsInteraction::finish(sf::Vector2i mousePosition) {

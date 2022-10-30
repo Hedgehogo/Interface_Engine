@@ -23,9 +23,8 @@ namespace ui {
 	void OneButtonInteraction::start(sf::Vector2i) {
 	}
 	
-	bool OneButtonInteraction::update(sf::Vector2i mousePosition) {
+	void OneButtonInteraction::update(sf::Vector2i mousePosition) {
 		event->update(mousePosition, KeyHandler::isKeyPressed(button));
-		return false;
 	}
 	
 	void OneButtonInteraction::finish(sf::Vector2i mousePosition) {

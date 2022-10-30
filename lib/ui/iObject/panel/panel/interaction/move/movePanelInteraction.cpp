@@ -8,10 +8,8 @@ namespace ui {
 			move(mousePosition);
 	}
 	
-	bool MovePanelInteraction::update(sf::Vector2i mousePosition) {
-		if(!atStart)
-			move(mousePosition);
-		return false;
+	void MovePanelInteraction::update(sf::Vector2i mousePosition) {
+		if(!atStart) move(mousePosition);
 	}
 	
 	void MovePanelInteraction::finish(sf::Vector2i mousePosition) {}

@@ -2,20 +2,19 @@
 #include "pressedInteraction.hpp"
 
 namespace ui {
-	PressedInteraction::PressedInteraction(ButtonEvent *event, Key button) : IInteraction(true), OneButtonInteraction(event, button), interactionManager(nullptr) {}
+	PressedInteraction::PressedInteraction(ButtonEvent *event, Key button) : OneButtonInteraction(event, button), interactionManager(nullptr) {}
 	
 	void PressedInteraction::init(InteractionManager &interactionManager) {
 		this->interactionManager = &interactionManager;
 	}
 	
-	bool PressedInteraction::update(sf::Vector2i mousePosition) {
+	void PressedInteraction::update(sf::Vector2i mousePosition) {
 		if(KeyHandler::isKeyPressed(button)) {
 			event->update(mousePosition, true);
 		} else {
 			event->update(mousePosition, false);
 			interactionManager->deleteInteraction(*this);
 		}
-		return IBlockInteraction::update(mousePosition);
 	}
 	
 	void PressedInteraction::copy(PressedInteraction *pressedInteraction) {

@@ -1,8 +1,8 @@
-type: LWAO
-top-object:
-  type: LWB
-  objects:
-    - - type: Slider
+type: LWB
+objects:
+  - - type: Debug
+      object:
+        type: Slider
         slider: &slider
           type: Capsule
           color: 525252
@@ -11,41 +11,28 @@ top-object:
           color: 37383A88
         slider-scale: 0.5, 0.5
         value:
-          var: vec
-      - type: Slider
+          var: 1-vec
+    - type: Debug
+      object:
+        type: Slider
         slider: *slider
         background: *background
         slider-scale: 0.25, 0.5
         value:
-          var: y-vec
-          x: vec.x
-          y:
-            var: y-2
-    - - type: Slider
+          var: 2-vec
+  - - type: Debug
+      object:
+        type: Slider
         slider: *slider
         background: *background
         slider-scale: 0.5, 0.25
         value:
-          var: x-vec
-          x:
-            var: x-2
-          y: vec.y
-      - type: Slider
+          var: 3-vec
+    - type: Debug
+      object:
+        type: Slider
         slider: *slider
         background: *background
         slider-scale: 0.25, 0.25
         value:
-          var: re-vec
-          x: x-2
-          y: y-2
-bottom-object:
-  type: LWUI
-  object:
-    type: Text
-    text-block:
-      type: TB
-      text:
-        key: knife
-        directory: ../example-resources/
-        language: jp
-    font: ../example-resources/msyh.ttc
+          var: 4-vec

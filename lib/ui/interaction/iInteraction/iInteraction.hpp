@@ -4,9 +4,6 @@
 
 namespace ui {
 	class IInteraction {
-	protected:
-		bool blocked;
-		
 	public:
 		enum class Priority {
 			highest,
@@ -14,8 +11,7 @@ namespace ui {
 			lowest,
 		};
 		
-		explicit IInteraction(bool blocked = false);
-		
+	public:
 		virtual ~IInteraction() = default;
 		
 		virtual bool isBlocked() const;
@@ -24,11 +20,11 @@ namespace ui {
 		
 		virtual void start(sf::Vector2i mousePosition) = 0;
 		
-		virtual bool update(sf::Vector2i mousePosition) = 0;
+		virtual void update(sf::Vector2i mousePosition) = 0;
 		
 		virtual void finish(sf::Vector2i mousePosition) = 0;
 		
-		bool operator<(IInteraction& interaction);
+		bool operator<(IInteraction& interaction) const;
 		
 		virtual IInteraction* copy() = 0;
 	};

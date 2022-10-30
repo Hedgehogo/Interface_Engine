@@ -9,9 +9,7 @@ namespace ui {
 		panel->setParentProcessed(true);
 	}
 	
-	bool PointingDisplayPanelInteraction::update(sf::Vector2i) {
-		return false;
-	}
+	void PointingDisplayPanelInteraction::update(sf::Vector2i) {}
 	
 	void PointingDisplayPanelInteraction::finish(sf::Vector2i) {
 		panel->setParentProcessed(false);

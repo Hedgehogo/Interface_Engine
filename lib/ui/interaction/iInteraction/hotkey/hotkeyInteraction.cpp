@@ -10,7 +10,7 @@ namespace ui {
             delete interaction;
     }
 
-    HotkeyInteraction::HotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint state) : hotkeyStates(hotkeys), nowHotkeys(nullptr){
+    HotkeyInteraction::HotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint state) : hotkeyStates(hotkeys), nowHotkeys(nullptr) {
         if (this->hotkeyStates.size() <= state){
             this->hotkeyStates.resize(state, {});
         }
@@ -40,7 +40,7 @@ namespace ui {
         }
     }
 
-    bool HotkeyInteraction::update(sf::Vector2i mousePosition) {
+    void HotkeyInteraction::update(sf::Vector2i mousePosition) {
         for (auto& hotkey : *nowHotkeys) {
             hotkey->interaction->update(mousePosition);
             if (hotkey->interaction->isPress() && hotkey->state != UINT32_MAX){
@@ -49,7 +49,6 @@ namespace ui {
                 start(mousePosition);
             }
         }
-        return false;
     }
 
     void HotkeyInteraction::finish(sf::Vector2i mousePosition) {

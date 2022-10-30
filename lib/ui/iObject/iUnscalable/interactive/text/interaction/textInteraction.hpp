@@ -6,7 +6,10 @@ namespace ui {
     class Text;
     class TextInteraction : public virtual IInteraction{
     protected:
-        Text* text = nullptr;
+		TextInteraction() {
+		}
+	
+		Text* text = nullptr;
     public:
         virtual void init(Text* text);
         virtual void setText(Text* text);

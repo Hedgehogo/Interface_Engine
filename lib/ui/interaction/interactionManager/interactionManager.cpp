@@ -24,13 +24,10 @@ namespace ui {
 		interactions.clear();
 	}
 	
-	bool InteractionManager::isBlocked() {
-		for(auto &interaction: interactions) {
-			if(interaction->isBlocked()) {
-				return true;
-			}
-		}
-		return false;
+	bool InteractionManager::isBlocked() const {
+		return std::any_of(this->interactions.begin(), this->interactions.end(), [](IInteraction *interaction) {
+			return interaction->isBlocked();
+		});
 	}
 	
 	void InteractionManager::update(sf::Vector2i mousePosition) {

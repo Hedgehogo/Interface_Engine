@@ -1,7 +1,7 @@
 #include "iBlockInteraction.hpp"
 
 namespace ui {
-	bool IBlockInteraction::update(sf::Vector2i mousePosition) {
+	bool IBlockInteraction::isBlocked() const {
 		return true;
 	}
 }

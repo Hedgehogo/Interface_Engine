@@ -77,6 +77,7 @@ namespace ui {
 		addType<IUninteractive, Caption>();
 		addType<IUninteractive, UninteractiveLayer>({"UninteractiveL", "LWUI"});
 		addSubtype<IScalable, IUninteractive>();
+		addType<Layer, DebugLayer>({"Debug", "DL"});
 		addType<Layer, LayerWithBackground>({"LayerWBackground", "LWBa"});
 		addType<Layer, LayerWithAlternativeObject>({"LayerWAObject", "LWAO"});
 		addType<Layer, LayerWithBorder>({"LayerWBorder", "LWB"});

@@ -22,7 +22,7 @@ namespace ui {
 		
 		void setSlider(BaseSlider &slider);
 		
-		bool update(sf::Vector2i mousePosition) override;
+		void update(sf::Vector2i mousePosition) override;
 		
 		SliderInteraction* copy() override;
 	};
