@@ -4,15 +4,15 @@
 namespace ui {
 	class MouseInteraction : public virtual IInteraction {
 	protected:
-		ButtonEvent* leftMouseButton;
-		ButtonEvent* rightMouseButton;
+		KeyEvent* leftMouseButton;
+		KeyEvent* rightMouseButton;
 		
 	public:
-		MouseInteraction(ButtonEvent* leftMouseButton, ButtonEvent* rightMouseButton);
+		MouseInteraction(KeyEvent* leftMouseButton, KeyEvent* rightMouseButton);
 
-		void setLeftButtonEvent(ButtonEvent* leftMouseButton);
+		void setLeftButtonEvent(KeyEvent* leftMouseButton);
 		
-		void setRightButtonEvent(ButtonEvent* rightMouseButton);
+		void setRightButtonEvent(KeyEvent* rightMouseButton);
 		
 		void update(sf::Vector2i mousePosition) override;
 	};

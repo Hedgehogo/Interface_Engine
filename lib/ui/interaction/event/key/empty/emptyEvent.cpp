@@ -1,13 +1,13 @@
 #include "emptyEvent.hpp"
 
 namespace ui {
-	EmptyEvent::EmptyEvent() : ButtonEvent() {}
+	EmptyEvent::EmptyEvent() : KeyEvent() {}
 	
 	void EmptyEvent::update(sf::Vector2i mousePosition, bool press) {}
 	
 	EmptyEvent *EmptyEvent::copy() {
 		EmptyEvent *emptyEvent{new EmptyEvent{}};
-		ButtonEvent::copy(emptyEvent);
+		KeyEvent::copy(emptyEvent);
 		return emptyEvent;
 	}
 }

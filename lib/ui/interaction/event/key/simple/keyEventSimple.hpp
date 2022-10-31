@@ -1,8 +1,8 @@
 #pragma once
-#include "../buttonEvent.hpp"
+#include "../keyEvent.hpp"
 
 namespace ui {
-	class ButtonEvent_Simple : public virtual ButtonEvent {
+	class KeyEvent_Simple : public virtual KeyEvent {
 	protected:
         sf::Vector2i mousePosition;
 
@@ -15,7 +15,7 @@ namespace ui {
 		virtual void whileNotPressed() = 0;
 
 	public:
-		ButtonEvent_Simple();
+		KeyEvent_Simple();
 
         void setPressed(bool pressed) override;
 

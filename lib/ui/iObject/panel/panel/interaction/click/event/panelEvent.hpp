@@ -1,10 +1,10 @@
 #pragma once
-#include "../../../../../../interaction/event/button/simple/buttonEventSimple.hpp"
+#include "../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
 
 namespace ui {
 	class Panel;
 	class IPanelManager;
-	class PanelEvent : public ButtonEvent_Simple {
+	class PanelEvent : public KeyEvent_Simple {
 	protected:
 		Panel* panel;
 		IPanelManager* panelManager;

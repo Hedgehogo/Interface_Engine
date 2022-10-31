@@ -42,7 +42,7 @@
 #include "../sizingAndPositioning/sizing/lambda/lambdaSizing.hpp"
 #include "../interaction/iInteraction/empty/emptyInteraction.hpp"
 #include "../interaction/iInteraction/mouse/lambda/mouseLambdaInteraction.hpp"
-#include "../interaction/event/button/openUrl/openUrlEvent.hpp"
+#include "../interaction/event/key/openUrl/openUrlEvent.hpp"
 #include "../debug/debugLayer.hpp"
 
 namespace ui {

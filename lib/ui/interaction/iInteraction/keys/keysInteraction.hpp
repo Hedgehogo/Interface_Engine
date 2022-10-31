@@ -5,25 +5,24 @@
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-
-    class ButtonsInteraction : public virtual IInteraction{
+    class KeysInteraction : public virtual IInteraction{
     protected:
         bool press;
 
-        ButtonEvent *event;
+        KeyEvent *event;
         std::vector<Key> keys;
         std::vector<Key> blackListKeys;
 
     public:
-        ButtonsInteraction(ButtonEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+        KeysInteraction(KeyEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 
         bool isPress();
 
         std::vector<Key> getKeys();
 
-        ButtonEvent* getEvent();
+        KeyEvent* getEvent();
 
-        void setEvent(ButtonEvent *event);
+        void setEvent(KeyEvent *event);
 
         void start(sf::Vector2i mousePosition) override;
 
@@ -31,12 +30,12 @@ namespace ui {
 
         void finish(sf::Vector2i mousePosition) override;
 
-        ButtonsInteraction* copy() override;
+        KeysInteraction* copy() override;
 
-        ~ButtonsInteraction() override;
+        ~KeysInteraction() override;
 
     };
 	
-	bool convertPointer(const YAML::Node &node, ButtonsInteraction *&buttonsInteraction);
+	bool convertPointer(const YAML::Node &node, KeysInteraction *&keysInteraction);
 
 } // ui

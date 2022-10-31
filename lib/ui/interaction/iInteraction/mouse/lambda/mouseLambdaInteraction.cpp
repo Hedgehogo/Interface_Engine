@@ -4,7 +4,7 @@
 
 namespace ui {
 	MouseLambdaInteraction MouseLambdaInteraction::debug{
-		new ButtonEvent_LambdaSimple{
+		new KeyEvent_LambdaSimple{
 			[](sf::Vector2i) {
 				std::cout << "sl";
 			},
@@ -18,7 +18,7 @@ namespace ui {
 				std::cout << "nl";
 			}
 		},
-		new ButtonEvent_LambdaSimple{
+		new KeyEvent_LambdaSimple{
 			[](sf::Vector2i) {
 				std::cout << "sr" << std::endl;
 			},
@@ -40,7 +40,7 @@ namespace ui {
 		}
 	};
 	
-	MouseLambdaInteraction::MouseLambdaInteraction(ButtonEvent *leftMouseButton, ButtonEvent *rightMouseButton, void ( *startPointing)(sf::Vector2i mousePosition), void (*finishPointing)(sf::Vector2i mousePosition)) :
+	MouseLambdaInteraction::MouseLambdaInteraction(KeyEvent *leftMouseButton, KeyEvent *rightMouseButton, void ( *startPointing)(sf::Vector2i mousePosition), void (*finishPointing)(sf::Vector2i mousePosition)) :
 		MouseInteraction(leftMouseButton, rightMouseButton), LambdaInteraction(startPointing, finishPointing) {
 	}
 	

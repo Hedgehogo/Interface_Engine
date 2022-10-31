@@ -1,11 +1,11 @@
 #pragma once
 
 #include "../LayerWithChangeableObjects.hpp"
-#include "../../../../../../interaction/event/button/simple/buttonEventSimple.hpp"
+#include "../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
 
 namespace ui
 {
-	class ChangeableObjectsEvent : public ButtonEvent_Simple
+	class ChangeableObjectsEvent : public KeyEvent_Simple
 	{
 	protected:
 		LayerWithChangeableObjects *object;

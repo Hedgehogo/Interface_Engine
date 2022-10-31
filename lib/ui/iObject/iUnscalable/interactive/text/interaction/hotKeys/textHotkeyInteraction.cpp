@@ -7,7 +7,7 @@ namespace ui {
         TextInteraction::init(text);
         for (auto hotkeys : hotkeyStates) {
             for (auto hotkey : hotkeys) {
-                dynamic_cast<TextButtonsInteraction *>(hotkey->interaction)->init(text);
+                dynamic_cast<TextKeysInteraction *>(hotkey->interaction)->init(text);
             }
         }
     }

@@ -1,9 +1,9 @@
-#include "buttonEventSimple.hpp"
+#include "keyEventSimple.hpp"
 
 namespace ui {
-	ButtonEvent_Simple::ButtonEvent_Simple() : ButtonEvent(), mousePosition({0, 0}) {}
+	KeyEvent_Simple::KeyEvent_Simple() : KeyEvent(), mousePosition({0, 0}) {}
 	
-	void ButtonEvent_Simple::setPressed(bool pressed) {
+	void KeyEvent_Simple::setPressed(bool pressed) {
 		if(this->pressed != pressed) {
 			this->pressed = pressed;
 			if(this->pressed) {
@@ -12,10 +12,10 @@ namespace ui {
 				stopPressed();
 			}
 		}
-		ButtonEvent::setPressed(pressed);
+		KeyEvent::setPressed(pressed);
 	}
 	
-	void ButtonEvent_Simple::update(sf::Vector2i mousePosition, bool press) {
+	void KeyEvent_Simple::update(sf::Vector2i mousePosition, bool press) {
 		this->mousePosition = mousePosition;
 		setPressed(press);
 		if(this->pressed) {

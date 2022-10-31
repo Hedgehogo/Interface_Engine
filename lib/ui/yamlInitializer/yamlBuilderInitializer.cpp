@@ -42,10 +42,10 @@ namespace ui {
 		
         addType<TextEvent, TextCopyEvent>({"TCE"});
         addType<TextEvent, TextSelectionEvent>({"TSE"});
-		addSubtype<ButtonEvent, TextEvent>();
-		addType<ButtonEvent, ChangeObjectEvent>({ "COE", "ChangeObjectE"});
-		addType<ButtonEvent, WhileChangingObjectsEvent>({ "WhileChangingOE", "WCO"});
-		addType<ButtonEvent, OpenUrlEvent>({"UrlE", "Url", "OUE"});
+		addSubtype<KeyEvent, TextEvent>();
+		addType<KeyEvent, ChangeObjectEvent>({"COE", "ChangeObjectE"});
+		addType<KeyEvent, WhileChangingObjectsEvent>({"WhileChangingOE", "WCO"});
+		addType<KeyEvent, OpenUrlEvent>({"UrlE", "Url", "OUE"});
 
 		addType<HidePanelInteraction, DontHidePanelInteraction>({"DontHidePI", "DontHPI", "DHPI"});
 		addType<HidePanelInteraction, ClickHidePanelInteraction>({"ClickHidePI", "ClickHPI", "CHPI"});
@@ -59,12 +59,12 @@ namespace ui {
 		addType<MovePanelInteraction, SideMovePanelInteraction>({"SideMovePI", "SideMPI", "SMPI"});
 		addSubtype<BasePanelInteraction, MovePanelInteraction>();
 		addSubtype<IInteraction, BasePanelInteraction>();
-		addType<TextInteraction, TextButtonsInteraction>({"TBI"});
+		addType<TextInteraction, TextKeysInteraction>({"TBI"});
 		addType<TextInteraction, TextHotkeyInteraction>({"THI"});
 		addType<TextInteraction, TextEmptyInteraction>({"TEI"});
 		addSubtype<IInteraction, TextInteraction>();
-		addType<IInteraction, ButtonsInteraction>({"BI"});
-		addType<IInteraction, OneButtonInteraction>({"OBI"});
+		addType<IInteraction, KeysInteraction>({"BI"});
+		addType<IInteraction, OneKeyInteraction>({"OBI"});
 		addType<IInteraction, HotkeyInteraction>({"HI"});
 		addType<IInteraction, EmptyInteraction>({"EI"});
 		

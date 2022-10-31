@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../simple/buttonEventSimple.hpp"
+#include "../simple/keyEventSimple.hpp"
 #include <string>
 #include "../../../../../modules/appendix/yaml-cpp/yaml.hpp"
 
 namespace ui {
 
-	class OpenUrlEvent : public ButtonEvent_Simple{
+	class OpenUrlEvent : public KeyEvent_Simple{
 	protected:
 		std::string url;
 

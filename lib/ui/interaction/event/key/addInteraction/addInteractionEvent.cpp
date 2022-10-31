@@ -13,7 +13,7 @@ namespace ui {
 	
 	void AddInteractionEvent::whileNotPressed() {}
 	
-	AddInteractionEvent::AddInteractionEvent(IInteraction &interaction) : ButtonEvent_Simple(), interactionManager(nullptr), interaction(&interaction) {}
+	AddInteractionEvent::AddInteractionEvent(IInteraction &interaction) : KeyEvent_Simple(), interactionManager(nullptr), interaction(&interaction) {}
 	
 	void AddInteractionEvent::init(InteractionManager &interactionManager) {
 		this->interactionManager = &interactionManager;

@@ -5,10 +5,10 @@
 namespace ui {
 	class ClickHidePanelInteraction : public ClickPanelInteraction, public HidePanelInteraction {
 	public:
-		explicit ClickHidePanelInteraction(Key button, bool onlyOnParent = false);
+		explicit ClickHidePanelInteraction(Key key, bool onlyOnParent = false);
 		
 	protected:
-		ClickHidePanelInteraction(HidePanelEvent* hidePanelEvent, Key button);
+		ClickHidePanelInteraction(HidePanelEvent* hidePanelEvent, Key key);
 		
 	public:
 		ClickHidePanelInteraction* copy() override;

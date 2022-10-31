@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../../../../../../interaction/event/button/simple/buttonEventSimple.hpp"
+#include "../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../textEvent.hpp"
 
 namespace ui {
     class BaseCharacter;
-    class TextSelectionEvent : public ButtonEvent_Simple, public TextEvent{
+    class TextSelectionEvent : public KeyEvent_Simple, public TextEvent{
     protected:
         std::vector<BaseCharacter*>::iterator start;
         std::vector<BaseCharacter*>::iterator end;

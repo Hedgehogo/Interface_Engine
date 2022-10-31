@@ -1,8 +1,8 @@
 #pragma once
-#include "../buttonEvent.hpp"
+#include "../keyEvent.hpp"
 
 namespace ui {
-	class EmptyEvent : public ButtonEvent {
+	class EmptyEvent : public KeyEvent {
 	public:
 		EmptyEvent();
 		

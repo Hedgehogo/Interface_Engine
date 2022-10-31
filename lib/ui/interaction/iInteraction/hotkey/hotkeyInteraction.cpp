@@ -1,7 +1,7 @@
 #include "hotkeyInteraction.hpp"
 
 namespace ui {
-    HotkeyInteraction::Hotkey::Hotkey(ButtonsInteraction *interaction, int state)  : interaction(interaction), state(state)  {}
+    HotkeyInteraction::Hotkey::Hotkey(KeysInteraction *interaction, int state)  : interaction(interaction), state(state)  {}
 
     HotkeyInteraction::Hotkey::Hotkey(uint state) : state(state), interaction(nullptr) {}
 
@@ -94,7 +94,7 @@ namespace ui {
 	
 	template<>
 	bool convert<HotkeyInteraction::Hotkey>(const YAML::Node& node, HotkeyInteraction::Hotkey *&hotkey) {
-		ButtonsInteraction *interaction{nullptr};
+		KeysInteraction *interaction{nullptr};
 		int state{INT32_MAX};
 		
 		if (node["state"])

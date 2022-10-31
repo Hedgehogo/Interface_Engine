@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../iInteraction.hpp"
-#include "../buttons/buttonsInteraction.hpp"
+#include "../keys/keysInteraction.hpp"
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
@@ -9,9 +9,9 @@ namespace ui {
     public:
         struct Hotkey {
             uint state{UINT32_MAX};
-            ButtonsInteraction *interaction{nullptr};
+            KeysInteraction *interaction{nullptr};
 			
-            Hotkey(ButtonsInteraction *interaction, int state = UINT32_MAX);
+            Hotkey(KeysInteraction *interaction, int state = UINT32_MAX);
 			
             Hotkey(uint state);
 			

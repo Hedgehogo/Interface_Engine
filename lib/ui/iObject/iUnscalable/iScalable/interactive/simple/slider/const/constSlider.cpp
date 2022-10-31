@@ -2,16 +2,16 @@
 #include "constSlider.hpp"
 
 namespace ui {
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, float sliderScale, Key button, bool wheelHorizontal,
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, float sliderScale, Key key, bool wheelHorizontal,
                              SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
-		BaseSlider(slider, background, value, new SliderInteraction{*this, button, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
+		BaseSlider(slider, background, value, new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
 		
 		sliderSize = slider->getNormalSize();
 		aspectRatio = sliderSize.x / sliderSize.y;
 	}
 	
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2i division, float sliderScale, Key button, bool wheelHorizontal) :
-		BaseSlider(slider, background, value, new SliderInteraction{*this, button, division, wheelHorizontal}), sliderScale(sliderScale) {
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2i division, float sliderScale, Key key, bool wheelHorizontal) :
+		BaseSlider(slider, background, value, new SliderInteraction{*this, key, division, wheelHorizontal}), sliderScale(sliderScale) {
 		
 		sliderSize = slider->getNormalSize();
 		aspectRatio = sliderSize.x / sliderSize.y;
@@ -44,7 +44,7 @@ namespace ui {
 		IUninteractive *background;
 		PSCoefficientVec2 value;
 		float sliderScale{1.0f};
-		Key button{Key::mouseLeft};
+		Key key{Key::mouseLeft};
 		bool wheelHorizontal{false};
 		
 		node["slider"] >> slider;
@@ -52,8 +52,8 @@ namespace ui {
 		value = Buffer::get<SCoefficientVec2>(node["value"]);
 		if(node["slider-scale"])
 			node["slider-scale"] >> sliderScale;
-		if(node["button"])
-			node["button"] >> button;
+		if(node["key"])
+			node["key"] >> key;
 		if(node["default-wheel"]) {
 			wheelHorizontal = convertBool(node["default-wheel"], "horizontal", "vertical");
 		}
@@ -67,13 +67,13 @@ namespace ui {
 			if(node["wheel-sensitivity"])
 				node["wheel-sensitivity"] >> wheelSensitivity;
 			
-			{ constSlider = new ConstSlider{slider, background, value, sliderScale, button, wheelHorizontal, wheelRelativity, wheelSensitivity}; return true; }
+			{ constSlider = new ConstSlider{slider, background, value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity}; return true; }
 		} else {
 			sf::Vector2i division;
 			
 			node["division"] >> division;
 			
-			{ constSlider = new ConstSlider{slider, background, value, division, sliderScale, button, wheelHorizontal}; return true; }
+			{ constSlider = new ConstSlider{slider, background, value, division, sliderScale, key, wheelHorizontal}; return true; }
 		}
 	}
 }

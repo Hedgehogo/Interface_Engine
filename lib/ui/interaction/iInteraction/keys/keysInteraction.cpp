@@ -1,30 +1,30 @@
-#include "buttonsInteraction.hpp"
+#include "keysInteraction.hpp"
 
 namespace ui {
-    ButtonsInteraction::ButtonsInteraction(ButtonEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys) : event(event), keys(keys), blackListKeys(blackListKeys), press(false) {
+    KeysInteraction::KeysInteraction(KeyEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys) : event(event), keys(keys), blackListKeys(blackListKeys), press(false) {
         std::sort(this->keys.begin(), this->keys.end());
     }
 
-    ButtonsInteraction::~ButtonsInteraction() {
+    KeysInteraction::~KeysInteraction() {
         delete event;
     }
 
-    std::vector<Key> ButtonsInteraction::getKeys() {
+    std::vector<Key> KeysInteraction::getKeys() {
         return keys;
     }
 
-    ButtonEvent *ButtonsInteraction::getEvent() {
+    KeyEvent *KeysInteraction::getEvent() {
         return event;
     }
 
-    void ButtonsInteraction::setEvent(ButtonEvent *event) {
+    void KeysInteraction::setEvent(KeyEvent *event) {
         delete this->event;
         this->event = event;
     }
 
-    void ButtonsInteraction::start(sf::Vector2i) {}
+    void KeysInteraction::start(sf::Vector2i) {}
 
-    void ButtonsInteraction::update(sf::Vector2i mousePosition) {
+    void KeysInteraction::update(sf::Vector2i mousePosition) {
         press = true;
         for (auto& key : keys) {
             if (!KeyHandler::isKeyPressed(key)) {
@@ -43,20 +43,20 @@ namespace ui {
         event->update(mousePosition, press);
     }
 
-    void ButtonsInteraction::finish(sf::Vector2i mousePosition) {
+    void KeysInteraction::finish(sf::Vector2i mousePosition) {
         event->setPressed(false);
     }
 
-    ButtonsInteraction *ButtonsInteraction::copy() {
-        return new ButtonsInteraction{event->copy(), keys, blackListKeys};
+    KeysInteraction *KeysInteraction::copy() {
+        return new KeysInteraction{event->copy(), keys, blackListKeys};
     }
 
-    bool ButtonsInteraction::isPress() {
+    bool KeysInteraction::isPress() {
         return press;
     }
 
-    bool convertPointer(const YAML::Node &node, ButtonsInteraction *&buttonsInteraction) {
-        ButtonEvent *event;
+    bool convertPointer(const YAML::Node &node, KeysInteraction *&keysInteraction) {
+        KeyEvent *event;
         std::vector<Key> keys;
         std::vector<Key> blackListKeys{};
 
@@ -77,6 +77,6 @@ namespace ui {
             }
         }
 
-        { buttonsInteraction = new ButtonsInteraction{event, keys, blackListKeys}; return true; }
+        { keysInteraction = new KeysInteraction{event, keys, blackListKeys}; return true; }
     }
 } // ui

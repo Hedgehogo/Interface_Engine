@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../../../../../interaction/event/button/buttonEvent.hpp"
+#include "../../../../../interaction/event/key/keyEvent.hpp"
 
 namespace ui {
     class Text;
 
-    class TextEvent : public virtual ButtonEvent{
+    class TextEvent : public virtual KeyEvent{
     protected:
         Text* text = nullptr;
     public:
@@ -15,5 +15,4 @@ namespace ui {
 
         virtual Text *getText() const;
     };
-
-} // ui
+}

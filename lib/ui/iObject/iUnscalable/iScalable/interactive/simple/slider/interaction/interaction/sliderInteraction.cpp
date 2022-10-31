@@ -2,15 +2,15 @@
 #include <utility>
 
 namespace ui {
-	SliderInteraction::SliderInteraction(BaseSlider &slider, Key button, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
-		slideInteraction(new SliderEvent{slider, {0, 0}}, button),
-		OneButtonInteraction(new AddInteractionEvent{slideInteraction}, button),
+	SliderInteraction::SliderInteraction(BaseSlider &slider, Key key, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
+		slideInteraction(new SliderEvent{slider, {0, 0}}, key),
+		OneKeyInteraction(new AddInteractionEvent{slideInteraction}, key),
 		wheelEvent(slider, wheelHorizontal, wheelRelativity, wheelSensitivity) {
 	}
 	
-	SliderInteraction::SliderInteraction(BaseSlider &slider, Key button, sf::Vector2i division, bool wheelHorizontal) :
-		slideInteraction(new SliderEvent{slider, division}, button),
-		OneButtonInteraction(new AddInteractionEvent{slideInteraction}, button),
+	SliderInteraction::SliderInteraction(BaseSlider &slider, Key key, sf::Vector2i division, bool wheelHorizontal) :
+		slideInteraction(new SliderEvent{slider, division}, key),
+		OneKeyInteraction(new AddInteractionEvent{slideInteraction}, key),
 		wheelEvent(slider, wheelHorizontal, SliderWheelEvent::Relativity::relationArea, {1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}) {
 	}
 	
@@ -26,11 +26,11 @@ namespace ui {
 	
 	void SliderInteraction::update(sf::Vector2i mousePosition) {
 		wheelEvent.update(mousePosition, sf::Wheel::value);
-		return OneButtonInteraction::update(mousePosition);
+		return OneKeyInteraction::update(mousePosition);
 	}
 	
 	SliderInteraction::SliderInteraction(SliderWheelEvent wheelEvent, PressedInteraction slideInteraction) :
-		OneButtonInteraction(nullptr, slideInteraction.getButton()),
+		OneKeyInteraction(nullptr, slideInteraction.getKey()),
 		wheelEvent(std::move(wheelEvent)),
 		slideInteraction(slideInteraction) {
 		event = new AddInteractionEvent{this->slideInteraction};

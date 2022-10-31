@@ -1,6 +1,6 @@
 #pragma once
-#include "../event/button/empty/emptyEvent.hpp"
-#include "../event/button/lambdaSimple/buttonEvent_LambdaSimple.hpp"
+#include "../event/key/empty/emptyEvent.hpp"
+#include "../event/key/lambdaSimple/keyEvent_LambdaSimple.hpp"
 
 namespace ui {
 	class IInteraction {

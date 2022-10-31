@@ -1,27 +1,27 @@
 #include "clickHidePanelInteraction.hpp"
 
 namespace ui {
-	ClickHidePanelInteraction::ClickHidePanelInteraction(Key button, bool onlyOnParent) :
-		ClickPanelInteraction(new HidePanelEvent{onlyOnParent}, button), HidePanelInteraction() {
+	ClickHidePanelInteraction::ClickHidePanelInteraction(Key key, bool onlyOnParent) :
+		ClickPanelInteraction(new HidePanelEvent{onlyOnParent}, key), HidePanelInteraction() {
 	}
 	
-	ClickHidePanelInteraction::ClickHidePanelInteraction(HidePanelEvent *hidePanelEvent, Key button) :
-		ClickPanelInteraction(hidePanelEvent, button), HidePanelInteraction() {
+	ClickHidePanelInteraction::ClickHidePanelInteraction(HidePanelEvent *hidePanelEvent, Key key) :
+		ClickPanelInteraction(hidePanelEvent, key), HidePanelInteraction() {
 	}
 	
 	ClickHidePanelInteraction *ClickHidePanelInteraction::copy() {
-		ClickHidePanelInteraction *clickHidePanelInteraction{new ClickHidePanelInteraction(dynamic_cast<HidePanelEvent *>(event->copy()), button)};
+		ClickHidePanelInteraction *clickHidePanelInteraction{new ClickHidePanelInteraction(dynamic_cast<HidePanelEvent *>(event->copy()), key)};
 		return clickHidePanelInteraction;
 	}
 	
 	bool convertPointer(const YAML::Node &node, ClickHidePanelInteraction *&clickHidePanelInteraction) {
-		Key button;
+		Key key;
 		bool onlyOnParent{false};
 		
-		node["button"] >> button;
+		node["key"] >> key;
 		if(node["only-on-parent"])
 			node["only-on-parent"] >> onlyOnParent;
 		
-		{ clickHidePanelInteraction = new ClickHidePanelInteraction{button, onlyOnParent}; return true; }
+		{ clickHidePanelInteraction = new ClickHidePanelInteraction{key, onlyOnParent}; return true; }
 	}
 }

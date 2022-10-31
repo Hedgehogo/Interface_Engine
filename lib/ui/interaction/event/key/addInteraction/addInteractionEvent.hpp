@@ -1,9 +1,9 @@
 #pragma once
-#include "../simple/buttonEventSimple.hpp"
+#include "../simple/keyEventSimple.hpp"
 #include "../../../interactionManager/interactionManager.hpp"
 
 namespace ui {
-	class AddInteractionEvent : public ButtonEvent_Simple {
+	class AddInteractionEvent : public KeyEvent_Simple {
 	protected:
 		IInteraction* interaction;
 		InteractionManager* interactionManager;

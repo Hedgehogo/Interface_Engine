@@ -3,21 +3,21 @@
 #include <SFML/System/Vector2.hpp>
 
 namespace ui {
-	class ButtonEvent {
+	class KeyEvent {
 	protected:
 		bool pressed;
 		
-		void copy(ButtonEvent* buttonEvent);
+		void copy(KeyEvent* keyEvent);
 		
 	public:
-		explicit ButtonEvent();
+		explicit KeyEvent();
 		
-		virtual ~ButtonEvent() = default;
+		virtual ~KeyEvent() = default;
 		
 		virtual void setPressed(bool pressed);
 
 		virtual void update(sf::Vector2i mousePosition, bool press) = 0;
 
-		virtual ButtonEvent* copy() = 0;
+		virtual KeyEvent* copy() = 0;
 	};
 }

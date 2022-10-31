@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../../../../../../../../interaction/event/button/simple/buttonEventSimple.hpp"
+#include "../../../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
 
 namespace ui {
 	class BaseSlider;
-	class SliderEvent : public ButtonEvent_Simple {
+	class SliderEvent : public KeyEvent_Simple {
 	protected:
 		BaseSlider* slider;
 		sf::Vector2i startMousePosition;

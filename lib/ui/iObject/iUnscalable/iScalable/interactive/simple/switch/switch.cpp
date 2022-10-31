@@ -1,11 +1,11 @@
 #include "switch.hpp"
-#include "../../../../../../interaction/iInteraction/oneButton/oneButtonInteraction.hpp"
+#include "../../../../../../interaction/iInteraction/oneKey/oneKeyInteraction.hpp"
 #include "event/switchEvent.hpp"
 
 namespace ui{
 
-    Switch::Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, Key button, bool startActive) :
-        Interactive_Simple(new OneButtonInteraction{new SwitchEvent{*this}, button}), activeBackground(activeBackground), inactiveBackground(inactiveBackground), active(startActive){}
+    Switch::Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, Key key, bool startActive) :
+		Interactive_Simple(new OneKeyInteraction{new SwitchEvent{*this}, key}), activeBackground(activeBackground), inactiveBackground(inactiveBackground), active(startActive){}
 
     void Switch::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
 		Interactive_Simple::init(renderTarget, drawManager, updateManager, panelManager);
@@ -57,7 +57,7 @@ namespace ui{
     }
 
     Switch *Switch::copy() {
-        Switch* switcher{new Switch(inactiveBackground->copy(), activeBackground->copy(), dynamic_cast<OneButtonInteraction*>(interaction)->getButton(), active)};
+        Switch* switcher{new Switch(inactiveBackground->copy(), activeBackground->copy(), dynamic_cast<OneKeyInteraction*>(interaction)->getKey(), active)};
         Layout::copy(switcher);
         return switcher;
     }
@@ -65,20 +65,20 @@ namespace ui{
 	bool convertPointer(const YAML::Node &node, Switch *&switcher) {
 		IUninteractive *inactiveBackground;
 		IUninteractive *activeBackground;
-		Key button{Key::mouseLeft};
+		Key key{Key::mouseLeft};
 		bool startActive{false};
 		
 		node["inactive-background"] >> inactiveBackground;
 		node["active-background"] >> activeBackground;
-		if(node["button"])
-			node["button"] >> button;
+		if(node["key"])
+			node["key"] >> key;
 		if(node["state"]) {
 			startActive = convertBool(node["state"], "active", "inactive");
 		} else if(node["start-active"]) {
 			node["start-active"] >> startActive;
 		}
 		
-		{ switcher = new Switch{inactiveBackground, activeBackground, button, startActive}; return true; }
+		{ switcher = new Switch{inactiveBackground, activeBackground, key, startActive}; return true; }
 	}
 
     void Switch::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

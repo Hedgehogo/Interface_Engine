@@ -1,5 +1,5 @@
 #include "layerWithMovableBorder.hpp"
-#include "../../../../../interaction/event/button/addInteraction/addInteractionEvent.hpp"
+#include "../../../../../interaction/event/key/addInteraction/addInteractionEvent.hpp"
 #include "../../../../../drawable/manager/drawManager.hpp"
 #include <algorithm>
 
@@ -7,7 +7,7 @@ namespace ui {
 	LayerWithMovableBorder::LayerWithMovableBorder(IScalable *firstObject, IScalable *secondObject, bool isHorizontalBorder, float borderValue, int borderInteractionSize, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithTwoObjects(firstObject, secondObject),
 		pressedInteraction(new MovableBorderEvent{*this}, Key::mouseLeft),
-		Interactive_Simple(new OneButtonInteraction{new AddInteractionEvent{pressedInteraction}, Key::mouseLeft}),
+		Interactive_Simple(new OneKeyInteraction{new AddInteractionEvent{pressedInteraction}, Key::mouseLeft}),
 		isHorizontalBorder(isHorizontalBorder), borderValue(borderValue), borderValueNow(borderValue), borderInteractionSize(borderInteractionSize) {
 	}
 	
@@ -19,7 +19,7 @@ namespace ui {
 	void LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
 		Interactive_Simple::init(renderTarget, drawManager, updateManager, panelManager);
 		pressedInteraction.init(*interactionManager);
-		dynamic_cast<AddInteractionEvent *>(dynamic_cast<OneButtonInteraction *>(Interactive_Simple::interaction)->getEvent())->init(*interactionManager);
+		dynamic_cast<AddInteractionEvent *>(dynamic_cast<OneKeyInteraction *>(Interactive_Simple::interaction)->getEvent())->init(*interactionManager);
 	}
 	
 	float LayerWithMovableBorder::getBorderValue() {

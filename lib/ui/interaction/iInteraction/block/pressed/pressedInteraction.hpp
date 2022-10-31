@@ -1,17 +1,17 @@
 #pragma once
 #include "../iBlockInteraction.hpp"
-#include "../../oneButton/oneButtonInteraction.hpp"
+#include "../../oneKey/oneKeyInteraction.hpp"
 #include "../../../interactionManager/interactionManager.hpp"
 
 namespace ui {
-	class PressedInteraction : public OneButtonInteraction, public IBlockInteraction {
+	class PressedInteraction : public OneKeyInteraction, public IBlockInteraction {
 	protected:
 		InteractionManager* interactionManager;
 		
 		void copy(PressedInteraction* pressedInteraction);
 	
 	public:
-		PressedInteraction(ButtonEvent *event, Key button);
+		PressedInteraction(KeyEvent *event, Key key);
 		
 		void init(InteractionManager &interactionManager);
 		

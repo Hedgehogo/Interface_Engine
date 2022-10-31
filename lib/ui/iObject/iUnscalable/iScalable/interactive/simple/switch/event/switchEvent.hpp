@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../../../../../../../interaction/event/button/simple/buttonEventSimple.hpp"
+#include "../../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
 
 namespace ui {
     class Switch;
-    class SwitchEvent : public ButtonEvent_Simple{
+    class SwitchEvent : public KeyEvent_Simple{
     protected:
         Switch* switcher;
 

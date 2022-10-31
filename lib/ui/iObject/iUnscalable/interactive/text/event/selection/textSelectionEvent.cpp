@@ -57,7 +57,7 @@ namespace ui {
                 (*iterator)->setSelection(false);
             }
         }
-        ButtonEvent_Simple::update(mousePosition, press);
+        KeyEvent_Simple::update(mousePosition, press);
     }
 
     TextSelectionEvent *TextSelectionEvent::copy() {
