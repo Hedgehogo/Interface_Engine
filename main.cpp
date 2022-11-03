@@ -19,7 +19,7 @@ int main() {
 	
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
-	window.setFramerateLimit(5);
+	window.setFramerateLimit(60);
 	
 	ui::Caption::setDefaultColor(sf::Color::White);
 	ui::Caption::setDefaultSize(15);
@@ -42,6 +42,9 @@ int main() {
 	
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};
+#ifndef WIN32
+	system("i3 floating toggle");
+#endif
 	while(window.isOpen()) {
 		
         lastFPS[0] = 1.f / clock.restart().asSeconds();
@@ -68,9 +71,6 @@ int main() {
 				view.reset({{}, windowSize});
 				window.setView(view);
 				interface.setSize(windowSize);
-			}
-			if(event.type == sf::Event::MouseWheelMoved) {
-				sf::Wheel::value = event.mouseWheel.delta;
 			}
 		}
         interface.setSize(sf::Vector2f{window.getSize()});

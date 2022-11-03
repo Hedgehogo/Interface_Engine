@@ -1,10 +1,7 @@
 #pragma once
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../iEvent.hpp"
-
-namespace sf::Wheel {
-	extern int value;
-}
+#include "../../../sfmlEvents/mouseWheel/mouseWheel.hpp"
 
 namespace ui {
 	class WheelEvent : public IEvent {

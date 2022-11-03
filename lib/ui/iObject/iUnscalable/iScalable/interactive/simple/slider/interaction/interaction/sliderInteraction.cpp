@@ -26,7 +26,7 @@ namespace ui {
 	}
 	
 	void SliderInteraction::update(sf::Vector2i mousePosition) {
-		wheelEvent.update(mousePosition, sf::Wheel::value);
+		wheelEvent.update(mousePosition, MouseWheel::getDelta().y);
 		return OneKeyInteraction::update(mousePosition);
 	}
 	

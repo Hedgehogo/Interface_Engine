@@ -4,14 +4,17 @@
 #include <SFML/Window/Event.hpp>
 
 namespace ui {
-
     class MouseWheel {
     protected:
         static sf::Vector2f delta;
+
     public:
         static void setDelta(sf::Event::MouseWheelScrollEvent event);
-        static void clear();
-        static sf::Vector2f getDelta();
-    };
 
+        static void setDelta(sf::Vector2f delta);
+
+	    static sf::Vector2f getDelta();
+
+        static void clear();
+    };
 } // ui
