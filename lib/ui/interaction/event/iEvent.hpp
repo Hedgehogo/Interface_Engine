@@ -3,9 +3,9 @@
 namespace ui {
 	class IEvent {
 	public:
-		void start() {}
+		virtual void start() {}
 		
-		void finish() {}
+		virtual void finish() {}
 		
 		virtual ~IEvent() = default;
 	};
