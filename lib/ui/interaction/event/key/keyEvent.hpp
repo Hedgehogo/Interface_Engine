@@ -1,9 +1,10 @@
 #pragma once
 
 #include <SFML/System/Vector2.hpp>
+#include "../event.hpp"
 
 namespace ui {
-	class KeyEvent {
+	class KeyEvent : public Event {
 	protected:
 		bool pressed;
 		

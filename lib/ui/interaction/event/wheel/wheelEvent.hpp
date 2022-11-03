@@ -1,12 +1,13 @@
 #pragma once
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "../event.hpp"
 
 namespace sf::Wheel {
 	extern int value;
 }
 
 namespace ui {
-	class WheelEvent {
+	class WheelEvent : public Event {
 	protected:
 		bool active;
 		
