@@ -1,13 +1,13 @@
 #pragma once
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
-#include "../event.hpp"
+#include "../iEvent.hpp"
 
 namespace sf::Wheel {
 	extern int value;
 }
 
 namespace ui {
-	class WheelEvent : public Event {
+	class WheelEvent : public IEvent {
 	protected:
 		bool active;
 		
@@ -15,8 +15,6 @@ namespace ui {
 	
 	public:
 		explicit WheelEvent();
-		
-		virtual ~WheelEvent() = default;
 		
 		virtual void update(sf::Vector2i mousePosition, int value) = 0;
 		

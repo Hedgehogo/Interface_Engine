@@ -1,10 +1,10 @@
 #pragma once
 
 #include <SFML/System/Vector2.hpp>
-#include "../event.hpp"
+#include "../iEvent.hpp"
 
 namespace ui {
-	class KeyEvent : public Event {
+	class KeyEvent : public IEvent {
 	protected:
 		bool pressed;
 		
@@ -12,8 +12,6 @@ namespace ui {
 		
 	public:
 		explicit KeyEvent();
-		
-		virtual ~KeyEvent() = default;
 		
 		virtual void setPressed(bool pressed);
 
