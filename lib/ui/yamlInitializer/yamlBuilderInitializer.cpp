@@ -1,16 +1,6 @@
 #include "yamlBuilderInitializer.hpp"
 
 namespace ui {
-	template<typename Base, typename Type>
-	void addType(std::vector<std::string> aliases = {}) {
-		YamlBuilder<Base>::template add<Type>(aliases);
-	}
-	
-	template<typename Base, typename Type>
-	void addSubtype() {
-		YamlBuilder<Base>::template addSubtype<Type>();
-	}
-	
 	void yamlBuilderInit() {
 		addType<Sizing, ConstSizing>({"CS"});
 		addType<Sizing, RelativeNormalSizing>({"RNormalSizing", "RNS"});
@@ -76,7 +66,6 @@ namespace ui {
 		addSubtype<IUninteractive, OnlyDrawable>();
 		addType<IUninteractive, Bar>();
 		addType<IUninteractive, Caption>();
-		addType<IUninteractive, UninteractiveLayer>({"UninteractiveL", "LWUI"});
 		addSubtype<IScalable, IUninteractive>();
 		addType<Layer, DebugLayer>({"Debug", "DL"});
 		addType<Layer, LayerWithBackground>({"LayerWBackground", "LWBa"});
@@ -92,7 +81,7 @@ namespace ui {
 		addType<Layer, LayerWithPanel>({"LayerWPanel", "LWP"});
 		addType<Layer, LayerWithRenderTexture>({"LayerWRTexture", "LWRT"});
         addType<Layer, LayerWithShader>({"LWS"});
-        addType<Layer, UninteractiveLayer>({"UninteractiveL", "UL"});
+		addBase<UninteractiveLayer, IUninteractive, Layer>({"UninteractiveL", "UL"});
 		addType<Layer, MakePermeable>({"MakePerm", "MP"});
 		addType<Layer, LayerWithChangeableObjects>({"LWChangeableObjects", "LWCO"});
 		addSubtype<IScalable, Layer>();

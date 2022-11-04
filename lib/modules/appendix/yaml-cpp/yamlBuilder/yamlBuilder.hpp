@@ -59,6 +59,31 @@ namespace ui {
 		static T* build(const YAML::Node& node, std::string type, bool &correctly);
 	};
 	
+	template<typename Base, typename Type>
+	void addType(std::vector<std::string> aliases = {});
+	
+	template<typename Type>
+	void addBase(const std::vector<std::string>& aliases = {});
+	
+	template<typename Type, typename BaseType, typename... BaseTypes>
+	void addBase(const std::vector<std::string>& aliases = {});
+	
+	template<typename Base, typename Type>
+	void addSubtype();
+	
+	template<typename Subtype>
+	void addBaseSub();
+	
+	template<typename Subtype, typename BaseType, typename... BaseTypes>
+	void addBaseSub();
+	
+	template<typename Type, typename... Base>
+	std::enable_if_t<!std::is_abstract_v<Type>, void>
+	inherit(const std::vector<std::string> &aliases = {});
+	
+	template<typename Type, typename... Base>
+	std::enable_if_t<std::is_abstract_v<Type>, void> inherit();
+	
 	template<typename T>
 	T* loadFromYaml(std::string filePath);
 }
