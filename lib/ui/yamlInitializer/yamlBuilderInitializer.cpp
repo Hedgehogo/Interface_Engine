@@ -60,6 +60,7 @@ namespace ui {
 		
 		addType<OnlyDrawable, Empty>();
 		addType<OnlyDrawable, FullColor>();
+		addDetermine<FullColor, OnlyDrawable>();
 		addType<OnlyDrawable, RoundedRectangle>();
 		addType<OnlyDrawable, Capsule>();
 		addType<OnlyDrawable, Sprite>();

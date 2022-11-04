@@ -50,6 +50,8 @@ namespace ui {
 	template<typename T>
 	std::vector<typename YamlBuilder<T>::MakeSubobject> YamlBuilder<T>::subtypeMap = {};
 	template<typename T>
+	std::vector<typename YamlBuilder<T>::DetermineType> YamlBuilder<T>::autoMap = {};
+	template<typename T>
 	typename YamlBuilder<T>::TypeNameDeformer YamlBuilder<T>::typeNameDeform = [](std::string typeName)->std::string {
 		return removeNamespace(typeName, "ui");
 	};
@@ -68,6 +70,19 @@ namespace ui {
 	template <typename T>
 	void YamlBuilder<T>::addSubtype(YamlBuilder::MakeSubobject function) {
 		subtypeMap.push_back(function);
+	}
+	
+	template <typename T>
+	void YamlBuilder<T>::addDetermine(const YamlBuilder::DetermineType& function) {
+		autoMap.push_back(function);
+	}
+	
+	template <typename T>
+	void YamlBuilder<T>::addDetermine(SimpleDetermineType function, std::string type) {
+		autoMap.emplace_back([function, type](const YAML::Node& node, std::string &typeRef) {
+			typeRef = type;
+			return function(node);
+		});
 	}
 	
 	template <typename T>
@@ -96,6 +111,12 @@ namespace ui {
 	
 	template <typename T>
 	template <typename Subtype>
+	void YamlBuilder<T>::addDetermine(YamlBuilder::SimpleDetermineType function) {
+		addDetermine(function, typeNameDeform(type_name<Subtype>()));
+	}
+	
+	template <typename T>
+	template <typename Subtype>
 	void YamlBuilder<T>::addAlias(std::string alias) {
 		addAlias(removeNamespace(type_name<Subtype>()), alias);
 	}
@@ -107,16 +128,36 @@ namespace ui {
 	}
 	
 	template <typename T>
+	bool YamlBuilder<T>::determine(const YAML::Node &node, std::string &type) {
+		return std::any_of(autoMap.begin(), autoMap.end(), [&node, &type](DetermineType& determiner) {
+			return determiner(node, type);
+		});
+	}
+	
+	template <typename T>
 	T *YamlBuilder<T>::build(const YAML::Node &node, std::string type, bool &correctly) {
-		if(auto objectType = typeMap.find(type); objectType != typeMap.end()) {
-			return objectType->second(node, correctly);
-		} else {
-			for(const auto &subtype: subtypeMap) {
-				try {
-					return subtype(node, type, correctly);
-				} catch (NonexistentTypeYamlException&) {}
+		if(!type.empty()) {
+			if(auto objectType = typeMap.find(type); objectType != typeMap.end()) {
+				return objectType->second(node, correctly);
+			} else {
+				for(const auto &subtype: subtypeMap) {
+					try {
+						return subtype(node, type, correctly);
+					} catch(NonexistentTypeYamlException &) {}
+				}
+				throw NonexistentTypeYamlException{node.Mark(), type, typeNameDeform(type_name<T>())};
 			}
-			throw NonexistentTypeYamlException{node.Mark(), type, typeNameDeform(type_name<T>())};
+		} else {
+			if(std::string foundedType; determine(node, foundedType)) {
+				return build(node, foundedType, correctly);
+			} else {
+				for(const auto &subtype: subtypeMap) {
+					try {
+						return subtype(node, type, correctly);
+					} catch(NonexistentTypeYamlException &) {}
+				}
+				throw NonexistentTypeYamlException{node.Mark(), type, typeNameDeform(type_name<T>())};
+			}
 		}
 	}
 	
@@ -146,6 +187,26 @@ namespace ui {
 	void addBaseSub() {
 		YamlBuilder<BaseType>::template addSubtype<Subtype>();
 		addBaseSub<Subtype, BaseTypes...>();
+	}
+	
+	template<typename Type>
+	void addDetermine(const std::function<bool(const YAML::Node& node, std::string &type)> &function) {
+		YamlBuilder<Type>::addDetermine(function);
+	}
+	
+	template<typename FirstType, typename SecondType, typename... BaseTypes>
+	void addDetermine(const std::function<bool(const YAML::Node& node, std::string &type)> &function) {
+		YamlBuilder<FirstType>::addDetermine(function);
+		addDetermine<SecondType, BaseTypes...>(function);
+	}
+	
+	template<typename Type>
+	void addDetermine(const std::function<bool(const YAML::Node& node)> &) {}
+	
+	template<typename Type, typename BaseType, typename... BaseTypes>
+	void addDetermine(const std::function<bool(const YAML::Node& node)> &function) {
+		YamlBuilder<BaseType>::template addDetermine<Type>(function);
+		addDetermine<Type, BaseTypes...>(function);
 	}
 	
 	template<typename Type, typename... Base>
@@ -181,8 +242,8 @@ namespace ui {
 	std::enable_if_t<std::is_class_v<T> && std::is_abstract_v<T>, bool>
 	convert(const YAML::Node &node, T *&object) {
 		bool correctly{true};
-		std::string type;
-		node["type"] >> type;
+		std::string type{};
+		if(node.IsMap() && node["type"]) node["type"] >> type;
 		object = YamlBuilder<T>::build(node, type, correctly);
 		return correctly;
 	}
