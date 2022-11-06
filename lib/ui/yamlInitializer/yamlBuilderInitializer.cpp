@@ -1,4 +1,5 @@
 #include "yamlBuilderInitializer.hpp"
+#include "../../modules/appendix/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp"
 
 namespace ui {
 	void yamlBuilderInit() {
@@ -60,7 +61,6 @@ namespace ui {
 		
 		addType<OnlyDrawable, Empty>();
 		addType<OnlyDrawable, FullColor>();
-		addDetermine<FullColor, OnlyDrawable>();
 		addType<OnlyDrawable, RoundedRectangle>();
 		addType<OnlyDrawable, Capsule>();
 		addType<OnlyDrawable, Sprite>();
@@ -82,9 +82,9 @@ namespace ui {
 		addType<Layer, LayerWithPanel>({"LayerWPanel", "LWP"});
 		addType<Layer, LayerWithRenderTexture>({"LayerWRTexture", "LWRT"});
         addType<Layer, LayerWithShader>({"LWS"});
-		addBase<UninteractiveLayer, IUninteractive, Layer>({"UninteractiveL", "UL"});
 		addType<Layer, MakePermeable>({"MakePerm", "MP"});
 		addType<Layer, LayerWithChangeableObjects>({"LWChangeableObjects", "LWCO"});
+		addBase<UninteractiveLayer, IUninteractive, Layer>({"UninteractiveL", "UL"});
 		addSubtype<IScalable, Layer>();
 		addType<BaseSlider, Slider>();
 		addType<BaseSlider, ConstSlider>();
@@ -98,5 +98,9 @@ namespace ui {
 		addType<BasePanel, Panel>();
 		addSubtype<IObject, BasePanel>();
 		addSubtype<IObject, IUnscalable>();
+		
+		addDetermine<FullColor, OnlyDrawable>();
+		addDetermine<RoundedRectangle, OnlyDrawable>();
+		addDetermine<Sprite, OnlyDrawable>();
 	}
 }

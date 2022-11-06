@@ -25,4 +25,7 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, RoundedRectangle *&roundedRectangle);
+	
+	template<>
+	bool determine<RoundedRectangle>(const YAML::Node &node);
 }

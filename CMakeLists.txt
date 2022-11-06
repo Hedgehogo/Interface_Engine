@@ -37,7 +37,11 @@ find_package(SFML 2.5 REQUIRED graphics network audio window system)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system yaml-cpp localisation)
 
-add_executable(${PROJECT_NAME}_ex main.cpp)
+if(WIN32)
+    add_executable(${PROJECT_NAME}_ex WIN32 main.cpp)
+else()
+    add_executable(${PROJECT_NAME}_ex main.cpp)
+endif()
 
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})
 

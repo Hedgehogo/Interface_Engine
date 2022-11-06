@@ -1,8 +1,6 @@
 #pragma once
-
 #include "../buffer/buffer.hpp"
 #include "exception/yamlBuildExceptions.hpp"
-
 #include "../objectBuffer/objectBuffer.hpp"
 
 namespace ui {
@@ -22,13 +20,18 @@ namespace ui {
 	template<typename T>
 	bool determine(const YAML::Node& node);
 	
+	namespace detail {
+		using DetermineTypeFunc = std::function<bool(const YAML::Node& node, std::string &type)>;
+		using SimpleDetermineTypeFunc = std::function<bool(const YAML::Node& node)>;
+	}
+	
 	template<typename T>
 	class YamlBuilder {
 	public:
 		typedef std::function<T*(const YAML::Node& node, bool &correctly)> MakeObject;
 		typedef std::function<T*(const YAML::Node& node, std::string type, bool &correctly)> MakeSubobject;
-		typedef std::function<bool(const YAML::Node& node, std::string &type)> DetermineType;
-		typedef std::function<bool(const YAML::Node& node)> SimpleDetermineType;
+		typedef detail::DetermineTypeFunc DetermineType;
+		typedef detail::SimpleDetermineTypeFunc SimpleDetermineType;
 		typedef std::function<std::string(std::string typeName)> TypeNameDeformer;
 		
 	protected:
@@ -46,7 +49,7 @@ namespace ui {
 		
 		static void addSubtype(MakeSubobject function);
 		
-		static void addDetermine(const DetermineType& function);
+		static void addDetermine(DetermineType function);
 		
 		static void addDetermine(SimpleDetermineType function, std::string type);
 		
@@ -73,43 +76,6 @@ namespace ui {
 		
 		static T* build(const YAML::Node& node, std::string type, bool &correctly);
 	};
-	
-	template<typename Base, typename Type>
-	void addType(std::vector<std::string> aliases = {});
-	
-	template<typename Type>
-	void addBase(const std::vector<std::string>& aliases = {});
-	
-	template<typename Type, typename BaseType, typename... BaseTypes>
-	void addBase(const std::vector<std::string>& aliases = {});
-	
-	template<typename Base, typename Type>
-	void addSubtype();
-	
-	template<typename Subtype>
-	void addBaseSub();
-	
-	template<typename Subtype, typename BaseType, typename... BaseTypes>
-	void addBaseSub();
-	
-	template<typename Type>
-	void addDetermine(const std::function<bool(const YAML::Node& node, std::string &type)> &function);
-	
-	template<typename FirstType, typename SecondType, typename... BaseTypes>
-	void addDetermine(const std::function<bool(const YAML::Node& node, std::string &type)> &function);
-	
-	template<typename Type>
-	void addDetermine(const std::function<bool(const YAML::Node& node)> &);
-	
-	template<typename Type, typename BaseType, typename... BaseTypes>
-	void addDetermine(const std::function<bool(const YAML::Node& node)> &function = determine<Type>);
-	
-	template<typename Type, typename... Base>
-	std::enable_if_t<!std::is_abstract_v<Type>, void>
-	inherit(const std::vector<std::string> &aliases = {});
-	
-	template<typename Type, typename... Base>
-	std::enable_if_t<std::is_abstract_v<Type>, void> inherit();
 	
 	template<typename T>
 	T* loadFromYaml(std::string filePath);
