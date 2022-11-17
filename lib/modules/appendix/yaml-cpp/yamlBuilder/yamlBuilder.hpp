@@ -1,8 +1,6 @@
 #pragma once
-
 #include "../buffer/buffer.hpp"
 #include "exception/yamlBuildExceptions.hpp"
-
 #include "../objectBuffer/objectBuffer.hpp"
 
 namespace ui {
@@ -20,15 +18,26 @@ namespace ui {
 	T* loadFromYamlObject(const YAML::Node &node, bool &correctly);
 	
 	template<typename T>
+	bool determine(const YAML::Node& node);
+	
+	namespace detail {
+		using DetermineTypeFunc = std::function<bool(const YAML::Node& node, std::string &type)>;
+		using SimpleDetermineTypeFunc = std::function<bool(const YAML::Node& node)>;
+	}
+	
+	template<typename T>
 	class YamlBuilder {
 	public:
 		typedef std::function<T*(const YAML::Node& node, bool &correctly)> MakeObject;
 		typedef std::function<T*(const YAML::Node& node, std::string type, bool &correctly)> MakeSubobject;
+		typedef detail::DetermineTypeFunc DetermineType;
+		typedef detail::SimpleDetermineTypeFunc SimpleDetermineType;
 		typedef std::function<std::string(std::string typeName)> TypeNameDeformer;
 		
 	protected:
 		static std::map<std::string, MakeObject> typeMap;
 		static std::vector<MakeSubobject> subtypeMap;
+		static std::vector<DetermineType> autoMap;
 		static TypeNameDeformer typeNameDeform;
 		
 	public:
@@ -40,6 +49,10 @@ namespace ui {
 		
 		static void addSubtype(MakeSubobject function);
 		
+		static void addDetermine(DetermineType function);
+		
+		static void addDetermine(SimpleDetermineType function, std::string type);
+		
 		static void addAlias(std::string type, std::string alias);
 		
 		static void addAliases(std::string type, std::vector<std::string> aliases);
@@ -50,11 +63,16 @@ namespace ui {
 		template<typename Subtype>
 		static void addSubtype();
 		
+		template<typename Subtype>
+		static void addDetermine(SimpleDetermineType function = ui::determine<Subtype>);
+		
 		template <typename Subtype>
 		static void addAlias(std::string alias);
 		
 		template <typename Subtype>
 		static void addAliases(std::vector<std::string> aliases);
+		
+		static bool determine(const YAML::Node& node, std::string &type);
 		
 		static T* build(const YAML::Node& node, std::string type, bool &correctly);
 	};

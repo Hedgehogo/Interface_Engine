@@ -1,4 +1,5 @@
 #include "roundedRectangle.hpp"
+#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
 	RoundedRectangle::RoundedRectangle(sf::Color color, float radius) : radius(radius) {
@@ -46,10 +47,12 @@ namespace ui {
 	}
 	
 	bool convertPointer(const YAML::Node &node, RoundedRectangle *&roundedRectangle) {
-		sf::Color color;
-		float radius{};
-		node["color"] >> color;
-		node["radius"] >> radius;
-		{ roundedRectangle = new RoundedRectangle{color, radius}; return true; }
+		roundedRectangle = new RoundedRectangle{node["color"].as<sf::Color>(), node["radius"].as<float>()};
+		return true;
+	}
+	
+	template<>
+	bool determine<RoundedRectangle>(const YAML::Node &node) {
+		return determine(node, {{"color", YAML::NodeType::Scalar}, {"radius", YAML::NodeType::Scalar}});
 	}
 }

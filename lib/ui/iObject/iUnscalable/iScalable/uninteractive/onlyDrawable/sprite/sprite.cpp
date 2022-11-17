@@ -1,5 +1,6 @@
 #include "sprite.hpp"
 #include <algorithm>
+#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
 	Sprite::Sprite(sf::Texture &texture, sf::IntRect rect, sf::Vector2f minSize) :
@@ -8,8 +9,7 @@ namespace ui {
 	}
 	
 	Sprite::Sprite(sf::Texture &texture, sf::Vector2f minSize) :
-            OnlyDrawable(), sprite(texture), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
-	}
+            OnlyDrawable(), sprite(texture), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {}
 
 	void Sprite::draw() {
 		renderTarget->draw(sprite);
@@ -46,16 +46,16 @@ namespace ui {
 	}
 	
 	bool convertPointer(const YAML::Node &node, Sprite *&sprite) {
-		sf::Texture* texture;
-		sf::Vector2f minSize{};
-		
-		node["texture"] >> texture;
-		if(node["min-size"]) node["min-size"] >> minSize;
 		if(node["rect"]) {
-			sf::IntRect rect;
-			node["rect"] >> rect;
-			{ sprite = new Sprite{*texture, rect, minSize}; return true; }
+			sprite = new Sprite{*node["texture"].as<sf::Texture*>(), node["rect"].as<sf::IntRect>(), convDef(node["min-size"], sf::Vector2f{})};
+		} else {
+			sprite = new Sprite{*node["texture"].as<sf::Texture*>(), convDef(node["min-size"], sf::Vector2f{})};
 		}
-		{ sprite = new Sprite{*texture, minSize}; return true; }
+		return true;
+	}
+	
+	template<>
+	bool determine<Sprite>(const YAML::Node &node) {
+		return determine(node, {{"texture"}}, {{"rect"}, {"min-size"}});
 	}
 }

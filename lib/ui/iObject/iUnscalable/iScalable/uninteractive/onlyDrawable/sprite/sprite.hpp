@@ -1,6 +1,7 @@
 #pragma once
 #include "../onlyDrawable.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
 	class Sprite : public OnlyDrawable {
@@ -33,4 +34,7 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, Sprite *&sprite);
+	
+	template<>
+	bool determine<Sprite>(const YAML::Node &node);
 }
