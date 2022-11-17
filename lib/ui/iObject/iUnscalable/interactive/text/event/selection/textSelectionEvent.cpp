@@ -18,17 +18,13 @@ namespace ui {
 
 
         if (start != nullBaseCharacterIterator && end != nullBaseCharacterIterator){
-            std::vector<BaseCharacter*>::iterator localStart;
-            std::vector<BaseCharacter*>::iterator localEnd;
-            if (std::distance(start, end) < 0){
-                localStart = end;
-                localEnd = start;
-            } else{
-                localStart = start;
-                localEnd = end;
-            }
+            auto localStart = start,  localEnd = end;
+
+            if (start > end) std::swap(localStart, localEnd);
+
             for (auto iterator = localStart; iterator != localEnd; ++iterator) {
                 (*iterator)->setSelection(true);
+	            (*iterator)->setActive(true);
             }
         }
     }
@@ -42,17 +38,13 @@ namespace ui {
     std::vector<BaseCharacter *>::iterator TextSelectionEvent::getEnd() {
         return end;
     }
+
     void TextSelectionEvent::update(sf::Vector2i mousePosition, bool press) {
         if (press && start != nullBaseCharacterIterator && end != nullBaseCharacterIterator){
-            std::vector<BaseCharacter*>::iterator localStart;
-            std::vector<BaseCharacter*>::iterator localEnd;
-            if (std::distance(start, end) < 0){
-                localStart = end;
-                localEnd = start;
-            } else{
-                localStart = start;
-                localEnd = end;
-            }
+	        auto localStart = start,  localEnd = end;
+
+	        if (start > end) std::swap(localStart, localEnd);
+
             for (auto iterator = localStart; iterator != localEnd; ++iterator) {
                 (*iterator)->setSelection(false);
             }

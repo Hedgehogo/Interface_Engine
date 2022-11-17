@@ -7,8 +7,13 @@
 #include "interaction/keys/textKeysInteraction.hpp"
 #include "event/copy/textCopyEvent.hpp"
 #include "interaction/empty/textEmptyInteraction.hpp"
+#include "event/addBlockInteraction/textAddBlockInteractionEvent.hpp"
+#include "interaction/block/pressed/textPressedInteraction.hpp"
+#include "interaction/selectionAndCopy/textSelectionAndCopyInteraction.hpp"
 
 namespace ui {
+
+	extern TextPressedInteraction interaction;
 
 	class Text : public Interactive, public IScalable, public IDrawable, public IUpdatable {
     protected:
@@ -17,8 +22,6 @@ namespace ui {
         bool interact;
         bool oldInteract;
 
-        TextInteraction* selectionInteraction;
-        TextInteraction* copyInteraction;
         TextInteraction* textInteraction;
 
         struct Selection {
@@ -43,9 +46,25 @@ namespace ui {
         explicit Text(std::vector<BaseTextBlock *> textBlocks, IUninteractive *background = new FullColor(sf::Color::White), int size = 14, sf::Font *font = nullptr, sf::Color textColor = sf::Color::Black,
              sf::Color textSelectionColor = sf::Color::White, sf::Color backgroundSelectionColor = sf::Color::Blue, sf::Color inactiveTextSelectionColor = nullColor,
              sf::Color inactiveBackgroundSelectionColor = {150, 150, 150}, BaseResizer *resizer = new Resizer{1.15, BaseResizer::Align::left},
-             TextInteraction *textInteraction = new TextEmptyInteraction{},
-             TextInteraction *selectionInteraction = new TextKeysInteraction{new TextSelectionEvent{}, {Key::mouseLeft}},
-             TextInteraction *copyInteraction = new TextKeysInteraction{new TextCopyEvent{}, {Key::lControl, Key::c}});
+             TextInteraction *textInteraction =
+				 new TextSelectionAndCopyInteraction{
+					{
+						{
+							new TextPressedInteraction{
+								new TextSelectionEvent{},
+								{Key::mouseLeft}
+							},
+							{Key::mouseLeft}
+						}
+					},
+					{
+						new TextKeysInteraction{
+							new TextCopyEvent{},
+							{Key::c, Key::lControl}
+						}
+					}
+				}
+		);
 
         ~Text() override;
 
@@ -87,7 +106,7 @@ namespace ui {
 		
     protected:
         Text(std::vector<BaseTextBlock *> textBlocks, IUninteractive *background, uint size, BaseResizer *resizer, sf::RenderTarget *renderTarget,
-             TextInteraction* textInteraction, TextInteraction *copyInteraction, TextInteraction *selectionInteraction);
+             TextInteraction* textInteraction);
 		
     public:
         Text *copy() override;

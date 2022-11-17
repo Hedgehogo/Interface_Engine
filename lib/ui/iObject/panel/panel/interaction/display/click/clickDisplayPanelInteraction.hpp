@@ -1,5 +1,5 @@
 #pragma once
-#include "event/displayPanelEvent.h"
+#include "event/displayPanelEvent.hpp"
 #include "../../click/clickPanelInteraction.hpp"
 
 namespace ui {

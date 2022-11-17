@@ -2,7 +2,7 @@
 
 #include <string>
 #include "../baseCharacter.hpp"
-#include "../../textVariables.h"
+#include "../../variables/textVariables.hpp"
 
 namespace ui{
     class Character : public BaseCharacter{

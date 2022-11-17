@@ -3,8 +3,8 @@
 namespace ui {
     TextKeysInteraction::TextKeysInteraction(KeyEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys) : KeysInteraction(event, keys, blackListKeys) {}
 
-    void TextKeysInteraction::init(Text *text) {
-        TextInteraction::init(text);
+    void TextKeysInteraction::init(Text *text, InteractionManager &interactionManager) {
+	    TextInteraction::init(text, interactionManager);
         dynamic_cast<TextEvent *>(event)->init(text);
     }
 

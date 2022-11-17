@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../textVariables.h"
+#include "../variables/textVariables.hpp"
 #include "../character/baseCharacter.hpp"
 #include "../../../iScalable/interactive/simple/interactiveSimple.hpp"
 

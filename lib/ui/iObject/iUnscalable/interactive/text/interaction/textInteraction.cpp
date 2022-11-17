@@ -1,7 +1,9 @@
 #include "textInteraction.hpp"
 
 namespace ui {
-    void TextInteraction::init(Text *text) {
+	TextInteraction::TextInteraction() : text(nullptr){}
+
+    void TextInteraction::init(Text *text, InteractionManager &interactionManager) {
         this->text = text;
     }
 

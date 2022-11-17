@@ -10,7 +10,7 @@ namespace ui {
     public:
         TextHotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint startState = 0);
 		
-        void init(Text *text) override;
+        void init(Text *text, InteractionManager &interactionManager) override;
 		
         TextHotkeyInteraction * copy() override;
 

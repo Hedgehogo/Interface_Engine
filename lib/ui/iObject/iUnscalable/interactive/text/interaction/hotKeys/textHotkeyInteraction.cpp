@@ -3,11 +3,11 @@
 namespace ui {
     TextHotkeyInteraction::TextHotkeyInteraction(std::vector<std::vector<Hotkey *>> hotkeys, uint startState) : HotkeyInteraction(hotkeys, startState) {}
 
-    void TextHotkeyInteraction::init(Text *text) {
-        TextInteraction::init(text);
+    void TextHotkeyInteraction::init(Text *text, InteractionManager &interactionManager) {
+	    TextInteraction::init(text, interactionManager);
         for (auto hotkeys : hotkeyStates) {
             for (auto hotkey : hotkeys) {
-                dynamic_cast<TextKeysInteraction *>(hotkey->interaction)->init(text);
+	            dynamic_cast<TextKeysInteraction *>(hotkey->interaction)->init(text, interactionManager);
             }
         }
     }

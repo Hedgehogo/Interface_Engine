@@ -1,4 +1,4 @@
-#include "displayPanelEvent.h"
+#include "displayPanelEvent.hpp"
 #include "../../../../general/panel.hpp"
 
 namespace ui {

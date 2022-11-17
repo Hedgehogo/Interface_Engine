@@ -47,12 +47,12 @@ namespace ui {
         event->setPressed(false);
     }
 
+	bool KeysInteraction::isPress() {
+		return press;
+	}
+
     KeysInteraction *KeysInteraction::copy() {
         return new KeysInteraction{event->copy(), keys, blackListKeys};
-    }
-
-    bool KeysInteraction::isPress() {
-        return press;
     }
 
     bool convertPointer(const YAML::Node &node, KeysInteraction *&keysInteraction) {

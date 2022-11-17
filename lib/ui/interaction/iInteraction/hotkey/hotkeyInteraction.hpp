@@ -27,6 +27,8 @@ namespace ui {
 		
         HotkeyInteraction(std::string str);
 
+		void init(ui::InteractionManager &interactionManager) override;
+
         void setHotkeyEvent(uint state, Hotkey* hotkeyEvent);
 
         std::vector<Hotkey*> getHotkeys(int state);

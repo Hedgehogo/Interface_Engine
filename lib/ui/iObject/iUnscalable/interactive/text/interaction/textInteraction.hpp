@@ -6,12 +6,11 @@ namespace ui {
     class Text;
     class TextInteraction : public virtual IInteraction{
     protected:
-		TextInteraction() {
-		}
+		TextInteraction();
 	
-		Text* text = nullptr;
+		Text* text;
     public:
-        virtual void init(Text* text);
+        virtual void init(Text *text, InteractionManager &interactionManager);
         virtual void setText(Text* text);
         virtual Text* getText();
 

@@ -5,10 +5,10 @@ namespace ui {
 
     HotkeyInteraction::Hotkey::Hotkey(uint state) : state(state), interaction(nullptr) {}
 
-    HotkeyInteraction::Hotkey::~Hotkey() {
-        if (interaction)
-            delete interaction;
-    }
+	HotkeyInteraction::Hotkey::~Hotkey() {
+		if (interaction)
+			delete interaction;
+	}
 
     HotkeyInteraction::HotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint state) : hotkeyStates(hotkeys), nowHotkeys(nullptr) {
         if (this->hotkeyStates.size() <= state){
@@ -16,6 +16,14 @@ namespace ui {
         }
         nowHotkeys = &this->hotkeyStates[state];
     }
+
+	void HotkeyInteraction::init(InteractionManager &interactionManager) {
+		for (const auto& hotkeyState : hotkeyStates) {
+			for (auto& hotkey : hotkeyState) {
+				hotkey->interaction->init(interactionManager);
+			}
+		}
+	}
 
     HotkeyInteraction::HotkeyInteraction(std::string str) {}
 
@@ -69,7 +77,7 @@ namespace ui {
         }
     }
 
-    bool convertPointer(const YAML::Node &node, HotkeyInteraction *&hotkeyInteraction) {
+	bool convertPointer(const YAML::Node &node, HotkeyInteraction *&hotkeyInteraction) {
         std::vector<std::vector<HotkeyInteraction::Hotkey *>> hotkeys;
         uint startState{0};
 
@@ -91,17 +99,17 @@ namespace ui {
 
         { hotkeyInteraction = new HotkeyInteraction{hotkeys, startState}; return true; }
     }
-	
+
 	template<>
 	bool convert<HotkeyInteraction::Hotkey>(const YAML::Node& node, HotkeyInteraction::Hotkey *&hotkey) {
 		KeysInteraction *interaction{nullptr};
 		int state{INT32_MAX};
-		
+
 		if (node["state"])
 			node["state"] >> state;
 		if (node["interaction"])
 			node["interaction"] >> interaction;
-		
+
 		hotkey = new HotkeyInteraction::Hotkey{interaction, state};
 		return true;
 	}

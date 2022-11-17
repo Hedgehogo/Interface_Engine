@@ -16,7 +16,6 @@ add_library(${PROJECT_NAME} ${src})
 
 set(SFML_PATH_1 "\\usr\\lib\\cmake\\SFML")
 set(SFML_PATH_2 "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
-set(SFML_PATH_3 "\\home\\andrewkoro105\\SFML-2.5.1\\lib\\cmake\\SFML")
 
 if(EXISTS ${SFML_PATH_2})
     set(SFML_STATIC_LIBRARIES TRUE)
@@ -27,8 +26,6 @@ if(EXISTS ${SFML_PATH_1})
     set(SFML_DIR ${SFML_PATH_1})
 elseif(EXISTS ${SFML_PATH_2})
     set(SFML_DIR ${SFML_PATH_2})
-else()
-    set(SFML_DIR ${SFML_PATH_3})
 endif()
 
 set(CMAKE_MODULE_PATH "${cmaKE_CURRENT_LIST_DIR}/cmake_modules")

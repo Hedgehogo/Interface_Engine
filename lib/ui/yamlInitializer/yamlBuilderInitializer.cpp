@@ -42,6 +42,7 @@ namespace ui {
 		
         addType<TextEvent, TextCopyEvent>({"TCE"});
         addType<TextEvent, TextSelectionEvent>({"TSE"});
+        addType<TextEvent, TextAddBlockInteractionEvent>({"TABIE"});
 		addSubtype<KeyEvent, TextEvent>();
 		addType<KeyEvent, ChangeObjectEvent>({"COE", "ChangeObjectE"});
 		addType<KeyEvent, WhileChangingObjectsEvent>({"WhileChangingOE", "WCO"});
@@ -59,12 +60,12 @@ namespace ui {
 		addType<MovePanelInteraction, SideMovePanelInteraction>({"SideMovePI", "SideMPI", "SMPI"});
 		addSubtype<BasePanelInteraction, MovePanelInteraction>();
 		addSubtype<IInteraction, BasePanelInteraction>();
-		addType<TextInteraction, TextKeysInteraction>({"TBI"});
+		addType<TextInteraction, TextKeysInteraction>({"TKI"});
 		addType<TextInteraction, TextHotkeyInteraction>({"THI"});
 		addType<TextInteraction, TextEmptyInteraction>({"TEI"});
 		addSubtype<IInteraction, TextInteraction>();
-		addType<IInteraction, KeysInteraction>({"BI"});
-		addType<IInteraction, OneKeyInteraction>({"OBI"});
+		addType<IInteraction, KeysInteraction>({"KI"});
+		addType<IInteraction, OneKeyInteraction>({"OKI"});
 		addType<IInteraction, HotkeyInteraction>({"HI"});
 		addType<IInteraction, EmptyInteraction>({"EI"});
 		

@@ -7,13 +7,14 @@
 #include "../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
-    std::vector<BaseCharacter *>::iterator nullBaseCharacterIterator{nullptr};
+
+	TextPressedInteraction interaction{new TextSelectionEvent{}, {Key::mouseLeft}};
+
+	std::vector<BaseCharacter *>::iterator nullBaseCharacterIterator{nullptr};
 
     Text::Text(std::vector<BaseTextBlock *> textBlocks, IUninteractive *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
-               sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer *resizer, TextInteraction *textInteraction, TextInteraction *selectionInteraction,
-               TextInteraction *copyInteraction) :
-        background(background), size(size), textBocks(textBlocks), resizer(resizer),
-        selectionInteraction(selectionInteraction), copyInteraction(copyInteraction), textInteraction(textInteraction) {
+               sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer *resizer, TextInteraction *textInteraction) :
+        background(background), size(size), textBocks(textBlocks), resizer(resizer), textInteraction(textInteraction){
         for (BaseTextBlock *textBlock: textBlocks) {
             textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, (inactiveTextSelectionColor == nullColor ? textColor : inactiveTextSelectionColor), inactiveBackgroundSelectionColor, font,
                                         size);
@@ -21,9 +22,7 @@ namespace ui {
             textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
         }
         resizer->init(textCharacters, lines);
-        copyInteraction->init(this);
-        selectionInteraction->init(this);
-        textInteraction->init(this);
+
     }
 
     Text::~Text() {
@@ -39,8 +38,6 @@ namespace ui {
         delete background;
         delete resizer;
         delete textInteraction;
-        delete copyInteraction;
-        delete selectionInteraction;
     }
 
     void Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
@@ -51,6 +48,8 @@ namespace ui {
             textBlock->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
         }
         drawManager.add(*this);
+
+	    textInteraction->init(this, *interactionManager);
     }
 
     void Text::setSelection(Text::Selection selection) {
@@ -65,7 +64,7 @@ namespace ui {
         selection.end = end;
     }
 
-    Text::Selection Text::getSelection() const {
+    Text::Selection Text::getSelection() const{
         return selection;
     }
 
@@ -152,35 +151,14 @@ namespace ui {
     void Text::update() {
         if (interact != oldInteract) {
             oldInteract = interact;
-            bool unNull = selection.start != nullBaseCharacterIterator && selection.end != nullBaseCharacterIterator;
-            if (unNull && std::distance(selection.start, selection.end) < 0) {
-                std::swap(selection.start, selection.end);
-            }
 
             if (interact) {
-                interactionManager->addInteraction(*selectionInteraction);
-                interactionManager->addInteraction(*copyInteraction);
                 interactionManager->addInteraction(*textInteraction);
-
-                if (unNull) {
-                    for (auto item = selection.start; item != selection.end; ++item) {
-                        (*item)->setActive(true);
-                    }
-                }
             } else {
                 interactionManager->deleteInteraction(*textInteraction);
-                interactionManager->deleteInteraction(*copyInteraction);
-                interactionManager->deleteInteraction(*selectionInteraction);
-
-                if (unNull) {
-                    for (auto item = selection.start; item != selection.end; ++item) {
-                        (*item)->setActive(false);
-                    }
-                }
             }
         }
         interact = false;
-
 
         for (BaseTextBlock *textBlock: textBocks) {
             textBlock->update();
@@ -241,17 +219,13 @@ namespace ui {
         return max(resizer->getNormalSize(), background->getNormalSize());
     }
 
-    Text::Text(std::vector<BaseTextBlock *> textBlocks, IUninteractive *background, uint size, BaseResizer *resizer, sf::RenderTarget *renderTarget, TextInteraction *textInteraction, TextInteraction *copyInteraction, TextInteraction *selectionInteractio) :
-        textBocks(textBlocks), background(background), size(size), resizer(resizer), renderTarget(renderTarget),
-        selectionInteraction(selectionInteraction), copyInteraction(copyInteraction), textInteraction(textInteraction){
+    Text::Text(std::vector<BaseTextBlock *> textBlocks, IUninteractive *background, uint size, BaseResizer *resizer, sf::RenderTarget *renderTarget, TextInteraction *textInteraction) :
+        textBocks(textBlocks), background(background), size(size), resizer(resizer), renderTarget(renderTarget), textInteraction(textInteraction){
         for (BaseTextBlock *textBlock: textBlocks) {
             std::vector<BaseCharacter *> characters = textBlock->getCharacters();
             textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
         }
         resizer->init(textCharacters, lines);
-        copyInteraction->init(this);
-        selectionInteraction->init(this);
-        textInteraction->init(this);
     }
 
     Text *Text::copy() {
@@ -260,7 +234,7 @@ namespace ui {
             copyTextBlocks.push_back(textBlock->copy());
         }
 
-        return new Text{copyTextBlocks, background->copy(), size, resizer->copy(), renderTarget, textInteraction->copy(), copyInteraction->copy(), selectionInteraction->copy()};
+        return new Text{copyTextBlocks, background->copy(), size, resizer->copy(), renderTarget, textInteraction->copy()};
     }
 
     bool convertPointer(const YAML::Node &node, Text *&text) {
@@ -274,8 +248,6 @@ namespace ui {
         sf::Color inactiveTextSelectionColor = nullColor;
         sf::Color inactiveBackgroundSelectionColor = {150, 150, 150};
         BaseResizer *resizer;
-        TextInteraction* selectionInteraction;
-        TextInteraction* copyInteraction;
         TextInteraction* textInteraction;
 
         if (node["text-block"]) {
@@ -295,14 +267,19 @@ namespace ui {
         if (node["background"]) node["background"] >> background;
         else background = new FullColor(sf::Color::White);
 
-        if (node["selection-interaction"]) node["selection-interaction"] >> selectionInteraction;
-        else selectionInteraction = new TextKeysInteraction{new TextSelectionEvent{}, {Key::mouseLeft}};
-
-        if (node["copy-interaction"]) node["copy-interaction"] >> copyInteraction;
-        else copyInteraction = new TextKeysInteraction{new TextCopyEvent{}, {Key::lControl, Key::c}};
-
         if (node["text-interaction"]) node["text-interaction"] >> textInteraction;
-        else textInteraction = new TextEmptyInteraction{};
+        else textInteraction = new TextSelectionAndCopyInteraction{
+		        {
+			        {
+				        new TextPressedInteraction{
+					        new TextSelectionEvent{},
+					        {Key::mouseLeft}
+				        },
+				        {Key::mouseLeft}
+			        }
+		        },
+
+	        };
 
         if (node["resizer"]) node["resizer"] >> resizer;
         else resizer = new Resizer{1.15, BaseResizer::Align::left};
@@ -315,7 +292,7 @@ namespace ui {
         if (node["inactive-text-selection-color"]) node["inactive-text-selection-color"] >> inactiveTextSelectionColor;
         if (node["inactive-background-selection-color"]) node["inactive-background-selection-color"] >> inactiveBackgroundSelectionColor;
 
-        text = new Text{textBlocks, background, size, font, textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor, resizer, textInteraction, selectionInteraction, copyInteraction};
+        text = new Text{textBlocks, background, size, font, textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor, resizer, textInteraction};
 		return true;
     }
 
