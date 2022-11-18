@@ -1,7 +1,7 @@
 #pragma once
 #include "../baseTextBlock.hpp"
-
 #include "../../character/simple/character.hpp"
+#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
 	class TextBlock : public BaseTextBlock {
@@ -32,4 +32,7 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, TextBlock *&textBlock);
+
+	template<>
+	bool determine<TextBlock>(const YAML::Node &node);
 }

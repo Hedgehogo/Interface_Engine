@@ -103,5 +103,9 @@ namespace ui {
 		addDetermine<FullColor, OnlyDrawable>();
 		addDetermine<RoundedRectangle, OnlyDrawable>();
 		addDetermine<Sprite, OnlyDrawable>();
+		addDetermine<TextBlock, BaseTextBlock>();
+		addDetermine<OpenUrlEvent, KeyEvent>(determineUrl);
+		addDetermine<KeysInteraction, IInteraction>(determineUrl);
+		addDetermine<TextKeysInteraction, TextInteraction>(determineUrl);
 	}
 }

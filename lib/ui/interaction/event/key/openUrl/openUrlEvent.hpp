@@ -3,6 +3,7 @@
 #include "../simple/keyEventSimple.hpp"
 #include <string>
 #include "../../../../../modules/appendix/yaml-cpp/yaml.hpp"
+#include "../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
 
@@ -25,4 +26,7 @@ namespace ui {
 	};
 
 	bool convertPointer(const YAML::Node &node, OpenUrlEvent *&openUrlInteraction);
+
+
+	bool determineUrl(const YAML::Node &node);
 } // ui

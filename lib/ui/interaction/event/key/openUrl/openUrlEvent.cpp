@@ -20,8 +20,16 @@ namespace ui {
 
 	bool convertPointer(const YAML::Node &node, OpenUrlEvent *&openUrlInteraction) {
 		openUrlInteraction = new OpenUrlEvent{
-			node["url"].as<std::string>()
+			(node.IsScalar() ? node : node["url"]).as<std::string>()
 		};
 		return true;
+	}
+
+	bool determineUrl(const YAML::Node &node){
+		if (node.IsScalar()){
+			std::string url{node.as<std::string>()};
+			return url.substr(0, 7) == "file://" || url.substr(0, 7) == "http://" || url.substr(0, 8) == "https://";
+		}
+		return false;
 	}
 } // ui

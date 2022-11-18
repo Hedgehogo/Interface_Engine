@@ -116,15 +116,12 @@ namespace ui {
 			}
 		}
 		
-		if(!node["interaction"].IsScalar()) {
-			IInteraction *indexInteraction;
-			node["interaction"] >> indexInteraction;
-			{ interactiveTextBlock = new InteractiveTextBlock{indexInteraction, text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor}; return true; }
+		if (node["interaction"]) {
+			interactiveTextBlock = new InteractiveTextBlock{node["interaction"].as<IInteraction*>(), text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
 		} else {
-			int indexInteraction;
-			node["interaction"] >> indexInteraction;
-			{ interactiveTextBlock = new InteractiveTextBlock{indexInteraction, text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor}; return true; }
+			interactiveTextBlock = new InteractiveTextBlock{node["index"].as<int>(), text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
 		}
+		return true;
 	}
 }
 

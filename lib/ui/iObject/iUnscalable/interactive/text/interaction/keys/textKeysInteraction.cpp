@@ -1,7 +1,10 @@
 #include "textKeysInteraction.hpp"
 #include "../../text.hpp"
+#include "../../../../../../interaction/event/key/openUrl/openUrlEvent.hpp"
+
 namespace ui {
-    TextKeysInteraction::TextKeysInteraction(KeyEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys) : KeysInteraction(event, keys, blackListKeys) {}
+    TextKeysInteraction::TextKeysInteraction(KeyEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys) :
+	KeysInteraction(event, keys, blackListKeys){}
 
     void TextKeysInteraction::init(Text *text, InteractionManager &interactionManager) {
 	    TextInteraction::init(text, interactionManager);
@@ -13,6 +16,11 @@ namespace ui {
     }
 
 	bool convertPointer(const YAML::Node &node, TextKeysInteraction *&textKeysInteraction){
+		if (node.IsScalar()){
+			textKeysInteraction = new TextKeysInteraction{new OpenUrlEvent{node.as<std::string>()}, {Key::mouseLeft}};
+			return true;
+		}
+
 		KeyEvent *event;
 		std::vector<Key> keys;
 		std::vector<Key> blackListKeys{};

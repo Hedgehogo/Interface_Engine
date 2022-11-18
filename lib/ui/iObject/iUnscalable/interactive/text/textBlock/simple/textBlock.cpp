@@ -78,6 +78,11 @@ namespace ui {
 	}
 	
 	bool convertPointer(const YAML::Node &node, TextBlock *&textBlock) {
+		if (node.IsScalar()) {
+			textBlock = new TextBlock{node.as<std::u32string>()};
+			return true;
+		}
+
 		std::u32string text;
 		sf::Color textColor = nullColor;
 		sf::Font *font = nullptr;
@@ -88,6 +93,8 @@ namespace ui {
 		sf::Color backgroundSelectionColor = nullColor;
 		sf::Color inactiveTextSelectionColor = nullColor;
 		sf::Color inactiveBackgroundSelectionColor = nullColor;
+
+
 		
 		node["text"] >> text;
 		if(node["text-color"])
@@ -122,5 +129,10 @@ namespace ui {
 		}
 		
 		{ textBlock = new TextBlock{text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor}; return true; }
+	}
+
+	template<>
+	bool determine<TextBlock>(const YAML::Node &node) {
+		return node.IsScalar();
 	}
 }

@@ -1,4 +1,5 @@
 #include "keysInteraction.hpp"
+#include "../../event/key/openUrl/openUrlEvent.hpp"
 
 namespace ui {
     KeysInteraction::KeysInteraction(KeyEvent *event, std::vector<Key> keys, std::vector<Key> blackListKeys) : event(event), keys(keys), blackListKeys(blackListKeys), press(false) {
@@ -56,6 +57,11 @@ namespace ui {
     }
 
     bool convertPointer(const YAML::Node &node, KeysInteraction *&keysInteraction) {
+	    if (node.IsScalar()){
+		    keysInteraction = new KeysInteraction{new OpenUrlEvent{node.as<std::string>()}, {Key::mouseLeft}};
+		    return true;
+	    }
+
         KeyEvent *event;
         std::vector<Key> keys;
         std::vector<Key> blackListKeys{};

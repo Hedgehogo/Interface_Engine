@@ -1,31 +1,6 @@
-type: LWBV
-objects:
-  - type: LWCBe
-    thickness: 10
-    bezel:
-      type: FullColor
-      color: 000000
-    object:
-      type: Text
-      text-blocks:
-        - type: TB
-          text:
-            key: text
-            directory: ../example-resources/
-            language: en
-        - type: TB
-          text: " "
-        - type: ITB
-          interaction:
-            type: OKI
-            event:
-              type: Url
-              url: "https://www.youtube.com"
-          text: "youtube"
-          text-color: red
-      font: ../example-resources/msyh.ttc
-  - type: Button
-    background:
-      type: FullColor
-      color: red
-    index: 0
+type: Text
+text-blocks:
+  - type: ITB
+    text: youtube
+    interaction: https://www.youtube.com
+font: ../example-resources/msyh.ttc
