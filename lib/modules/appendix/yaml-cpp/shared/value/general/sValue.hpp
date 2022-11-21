@@ -6,9 +6,12 @@ namespace ui {
 	class SValue : public virtual ISValue<T> {
 	protected:
 		T value;
+		std::vector<typename ISValue<T>::SetterFunc> setters;
 	
 	public:
 		explicit SValue(T value = T{});
+		
+		void addSetter(const typename ISValue<T>::SetterFunc& setter) override;
 		
 		const T &getValue() const override;
 		
@@ -29,4 +32,4 @@ namespace ui {
 	typedef std::shared_ptr<Suint> PSuint;
 }
 
-#include "withValue.inl"
+#include "sValue.inl"

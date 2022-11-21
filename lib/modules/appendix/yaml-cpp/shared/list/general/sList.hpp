@@ -6,9 +6,13 @@ namespace ui {
 	class SList : public ISList {
 	private:
 		typedef to_auto<decltype(std::declval<T>().getValue())> V;
+		using SetterFunc = std::function<void(const std::vector<V>&)>;
 	
 	protected:
 		std::vector<std::shared_ptr<T>> list;
+		std::vector<SetterFunc> setters;
+		
+		void set();
 	
 	public:
 		SList(const std::vector<V> &list = {});

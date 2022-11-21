@@ -6,6 +6,7 @@ namespace ui {
 	
 	void SCoefficientValue::setValue(const float &value) {
 		this->value = std::min(std::max(value, 0.f), 1.f);
+		for(const auto &set: setters) set(this->value);
 	}
 	
 	bool convertPointer(const YAML::Node &node, SCoefficientValue *&sCoefficientValue) {

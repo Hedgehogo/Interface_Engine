@@ -1,6 +1,6 @@
 #pragma once
 #include "../iSCoefficientValue.hpp"
-#include "../../general/withValue.hpp"
+#include "../../general/sValue.hpp"
 
 namespace ui {
 	class SCoefficientValue : public SValue<float>, public ISCoefficientValue {

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../value/general/sf_Vector2/withValue_sf_Vector2.hpp"
 #include "../value/coefficient/general/sCoefficientValue.hpp"
 #include "../value/coefficient/reference/sReferenceCoefficientValue.hpp"
 

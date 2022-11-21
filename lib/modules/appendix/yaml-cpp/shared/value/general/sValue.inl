@@ -2,7 +2,12 @@
 
 namespace ui {
 	template <typename T>
-	SValue<T>::SValue(T value) : value(value) {}
+	SValue<T>::SValue(T value) : value(value), setters() {}
+	
+	template <typename T>
+	void SValue<T>::addSetter(const typename ISValue<T>::SetterFunc& setter) {
+		setters.push_back(setter);
+	}
 	
 	template <typename T>
 	const T &SValue<T>::getValue() const {
@@ -12,6 +17,7 @@ namespace ui {
 	template <typename T>
 	void SValue<T>::setValue(const T &value) {
 		this->value = value;
+		for(const auto &set: setters) set(value);
 	}
 	
 	template<typename T>

@@ -6,14 +6,20 @@ namespace ui {
 	class SVector2 : public ISVector2 {
 	public:
 		typedef to_auto<decltype(std::declval<T>().getValue())> V;
+		using SetterFunc = std::function<void(const sf::Vector2<V>&)>;
 	
 	protected:
 		std::shared_ptr<T> x, y;
+		std::vector<SetterFunc> setters;
+		
+		void set();
 	
 	public:
 		SVector2(const sf::Vector2<V> &vector = {});
 		
 		SVector2(std::shared_ptr<T> x, std::shared_ptr<T> y);
+		
+		virtual void addSetter(const SetterFunc& setter);
 		
 		PIShared getXPtr() const override;
 		

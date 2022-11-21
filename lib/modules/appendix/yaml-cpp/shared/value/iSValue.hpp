@@ -5,6 +5,10 @@ namespace ui {
 	template<typename T>
 	class ISValue : public IShared {
 	public:
+		using SetterFunc = std::function<void(const T&)>;
+		
+		virtual void addSetter(const SetterFunc& setter) = 0;
+		
 		virtual const T& getValue() const = 0;
 		
 		virtual void setValue(const T& value) = 0;
