@@ -13,11 +13,6 @@ namespace ui {
 	BaseSlider::BaseSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, SliderInteraction *interaction) :
 		Interactive_Simple(interaction), slider(slider), background(background), value(value), position(), sliderSize(), moveZoneSize() {}
 	
-	void BaseSlider::cutBackValue() {
-		//value.x = std::max(0.f,std::min(1.f,value.x));
-		//value.y = std::max(0.f,std::min(1.f,value.y));
-	}
-	
 	sf::Vector2f BaseSlider::getSliderSize() {
 		return sliderSize;
 	}
@@ -28,13 +23,11 @@ namespace ui {
 	
 	void BaseSlider::setValue(sf::Vector2f value) {
 		this->value->setValue(value);
-		//cutBackValue();
 	}
 	
 	void BaseSlider::setValueByMouse(sf::Vector2i mousePosition) {
 		sf::Vector2f mouseOffset{static_cast<sf::Vector2f>(mousePosition) - position - sliderSize / 2.0f};
 		value->setValue({(moveZoneSize.x != 0 ? mouseOffset.x / moveZoneSize.x : 0), (moveZoneSize.y != 0 ? mouseOffset.y / moveZoneSize.y : 0)});
-		//cutBackValue();
 	}
 	
 	void BaseSlider::roundValueToDivision(sf::Vector2i division) {
@@ -57,7 +50,6 @@ namespace ui {
 			value->setX(value->getX() + static_cast<float>(mouseOffset.x) / moveZoneSize.x);
 		if(moveZoneSize.y != 0)
 			value->setY(value->getY() + static_cast<float>(mouseOffset.y) / moveZoneSize.y);
-		//cutBackValue();
 	}
 	
 	void BaseSlider::draw() {

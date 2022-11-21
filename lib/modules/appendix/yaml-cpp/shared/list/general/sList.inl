@@ -2,7 +2,7 @@
 
 namespace ui {
 	template <typename T>
-	SList<T>::SList(const std::vector<typename SList<T>::V> &list) {
+	SList<T>::SList(const std::vector<typename SList<T>::V> &list) : setters() {
 		this->list.resize(list.size());
 		for(int i = 0; i < list.size(); ++i) {
 			this->list[i] = std::make_shared<T>(list[i]);
@@ -10,7 +10,12 @@ namespace ui {
 	}
 	
 	template <typename T>
-	SList<T>::SList(std::vector<std::shared_ptr<T>> list) : list(list) {}
+	SList<T>::SList(std::vector<std::shared_ptr<T>> list) : list(list), setters() {}
+	
+	template <typename T>
+	void SList<T>::set() {
+		for(const auto &setter: setters) setter(getValue());
+	}
 	
 	template <typename T>
 	PIShared SList<T>::getElementPtr(std::size_t index) const {
@@ -20,6 +25,7 @@ namespace ui {
 	template <typename T>
 	void SList<T>::setElementPtr(std::size_t index, PIShared value) {
 		list[index] = std::dynamic_pointer_cast<T>(value);
+		set();
 	}
 	
 	template <typename T>
@@ -30,6 +36,7 @@ namespace ui {
 	template <typename T>
 	void SList<T>::setElement(std::size_t index, const typename SList<T>::V &value) {
 		list[index]->setValue(value);
+		set();
 	}
 	
 	template <typename T>
@@ -47,5 +54,6 @@ namespace ui {
 		for(int i = 0; i < list.size(); ++i) {
 			this->list[i] = std::make_shared<T>(list[i]);
 		}
+		set();
 	}
 }

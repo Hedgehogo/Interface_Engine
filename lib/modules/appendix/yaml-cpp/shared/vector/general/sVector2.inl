@@ -3,11 +3,22 @@
 
 namespace ui {
 	template <typename T>
-	SVector2<T>::SVector2(const sf::Vector2<typename SVector2<T>::V> &vector) : x(std::make_shared<T>(vector.x)), y(std::make_shared<T>(vector.y)) {}
+	SVector2<T>::SVector2(const sf::Vector2<typename SVector2<T>::V> &vector) :
+		x(std::make_shared<T>(vector.x)), y(std::make_shared<T>(vector.y)), setters() {}
 	
 	template <typename T>
 	SVector2<T>::SVector2(std::shared_ptr<T> x, std::shared_ptr<T> y) :
-		x(x), y(y) {}
+		x(x), y(y), setters() {}
+	
+	template <typename T>
+	void SVector2<T>::set() {
+		for(const auto &setter: setters) setter(getValue());
+	}
+	
+	template <typename T>
+	void SVector2<T>::addSetter(const typename SVector2<T>::SetterFunc &setter) {
+		setters.push_back(setter);
+	}
 	
 	template <typename T>
 	PIShared SVector2<T>::getXPtr() const {
@@ -17,6 +28,7 @@ namespace ui {
 	template <typename T>
 	void SVector2<T>::setXPtr(PIShared value) {
 		x = std::dynamic_pointer_cast<T>(value);
+		set();
 	}
 	
 	template <typename T>
@@ -27,6 +39,7 @@ namespace ui {
 	template <typename T>
 	void SVector2<T>::setYPtr(PIShared value) {
 		y = std::dynamic_pointer_cast<T>(value);
+		set();
 	}
 	
 	template <typename T>
@@ -37,6 +50,7 @@ namespace ui {
 	template <typename T>
 	void SVector2<T>::setX(const typename SVector2<T>::V &value) {
 		x->setValue(value);
+		set();
 	}
 	
 	template <typename T>
@@ -47,6 +61,7 @@ namespace ui {
 	template <typename T>
 	void SVector2<T>::setY(const typename SVector2<T>::V &value) {
 		y->setValue(value);
+		set();
 	}
 	
 	template <typename T>
@@ -58,5 +73,6 @@ namespace ui {
 	void SVector2<T>::setValue(const sf::Vector2<typename SVector2<T>::V> &vector) {
 		setX(vector.x);
 		setY(vector.y);
+		set();
 	}
 }

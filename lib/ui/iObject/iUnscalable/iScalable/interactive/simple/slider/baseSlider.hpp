@@ -16,12 +16,10 @@ namespace ui {
 		
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
 		
-		void cutBackValue();
-		
 		void copy(BaseSlider* baseSlider);
 		
 	public:
-		BaseSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2& value, SliderInteraction* interaction);
+		BaseSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, SliderInteraction* interaction);
 		
 		sf::Vector2f getSliderSize();
 		
