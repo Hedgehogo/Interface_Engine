@@ -2,42 +2,38 @@
 #include "../yamlBuilder.hpp"
 
 namespace ui {
-	template<typename Base, typename Type>
-	void addType(std::vector<std::string> aliases = {});
+	template <typename Base, typename Type>
+	void inherit(const std::vector<std::string> &aliases = {});
 	
-	template<typename Type>
-	void addBase(const std::vector<std::string>& aliases = {});
+	template <typename Base>
+	constexpr void addType() noexcept {}
 	
-	template<typename Type, typename BaseType, typename... BaseTypes>
-	void addBase(const std::vector<std::string>& aliases = {});
+	template <typename Base, typename Type, typename... Types>
+	void addType();
 	
-	template<typename Base, typename Type>
-	void addSubtype();
+	template <typename Base, typename... Types>
+	void addType(const std::vector<std::string> &aliases);
 	
-	template<typename Subtype>
-	void addBaseSub();
+	template <typename Type>
+	constexpr void addBase() noexcept {}
 	
-	template<typename Subtype, typename BaseType, typename... BaseTypes>
-	void addBaseSub();
+	template <typename Type, typename Base, typename... Bases>
+	void addBase();
 	
-	template<typename Type>
+	template <typename Type, typename... Bases>
+	void addBase(const std::vector<std::string> &aliases);
+	
+	template <typename Type>
+	void addAliases(const std::vector<std::string> &aliases);
+	
+	template <typename Type>
 	void addDetermine(const detail::DetermineTypeFunc &function);
 	
-	template<typename FirstType, typename SecondType, typename... BaseTypes>
-	void addDetermine(const detail::DetermineTypeFunc &function);
-	
-	template<typename Type>
-	void addDetermine(const detail::SimpleDetermineTypeFunc &);
-	
-	template<typename Type, typename BaseType, typename... BaseTypes>
+	template <typename Type>
 	void addDetermine(const detail::SimpleDetermineTypeFunc &function = determine<Type>);
 	
-	template<typename Type, typename... Base>
-	std::enable_if_t<!std::is_abstract_v<Type>, void>
-	inherit(const std::vector<std::string> &aliases = {});
-	
-	template<typename Type, typename... Base>
-	std::enable_if_t<std::is_abstract_v<Type>, void> inherit();
+	template <typename Base>
+	void addFunc(typename detail::FuncYamlBuilder::BuildFunc<Base> function, std::vector<std::string> names = {});
 }
 
 #include "shortcut.inl"

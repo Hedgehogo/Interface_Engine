@@ -15,4 +15,24 @@ namespace ui {
 		
 		std::string getBase();
 	};
+	
+	class AbstractTypeYamlException : public BaseYamlException {
+	protected:
+		std::string type;
+	
+	public:
+		AbstractTypeYamlException(YAML::Mark mark, const std::string& type);
+		
+		std::string getType();
+	};
+	
+	class FailedDetermineTypeYamlException : public BaseYamlException {
+	protected:
+		std::string type;
+	
+	public:
+		FailedDetermineTypeYamlException(YAML::Mark mark, const std::string& type);
+		
+		std::string getType();
+	};
 }
