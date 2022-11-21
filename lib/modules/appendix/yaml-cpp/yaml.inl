@@ -22,10 +22,8 @@ namespace ui {
 	}
 	
 	template <typename T>
-	T* createPointer(const YAML::Node& node, bool &correctly) {
-		T* object{nullptr};
-		correctly = convertPointer(node, object);
-		return object;
+	bool createPointer(const YAML::Node& node, T* &object) {
+		return convertPointer(node, object);
 	}
 	
 	

@@ -2,62 +2,52 @@
 
 namespace ui {
 	template<typename Base, typename Type>
-	void addType(std::vector<std::string> aliases) {
-		YamlBuilder<Base>::template add<Type>(aliases);
+	void inherit(const std::vector<std::string>& aliases) {
+		YamlBuilder<Type>::addAliases(aliases);
+		YamlBuilder<Base>::template addType<Type>();
+	}
+	
+	template <typename Base, typename Type, typename... Types>
+	void addType() {
+		YamlBuilder<Base>::template addType<Type>();
+		addType<Base, Types...>();
+	}
+	
+	template <typename Base, typename... Types>
+	void addType(const std::vector<std::string> &aliases) {
+		YamlBuilder<Base>::addAliases(aliases);
+		addType<Base, Types...>();
+	}
+	
+	template<typename Type, typename Base, typename... Bases>
+	void addBase() {
+		YamlBuilder<Base>::template addType<Type>();
+		addBase<Type, Bases...>();
+	}
+	
+	template<typename Type, typename... Bases>
+	void addBase(const std::vector<std::string>& aliases) {
+		YamlBuilder<Type>::addAliases(aliases);
+		addBase<Type, Bases...>();
 	}
 	
 	template<typename Type>
-	void addBase(const std::vector<std::string> &aliases) {}
-	
-	template<typename Type, typename BaseType, typename... BaseTypes>
-	void addBase(const std::vector<std::string> &aliases) {
-		YamlBuilder<BaseType>::template add<Type>(aliases);
-		addBase<Type, BaseTypes...>(aliases);
+	void addAliases(const std::vector<std::string>& aliases) {
+		YamlBuilder<Type>::addAliases(aliases);
 	}
 	
-	template<typename Base, typename Type>
-	void addSubtype() {
-		YamlBuilder<Base>::template addSubtype<Type>();
-	}
-	
-	template<typename Subtype>
-	void addBaseSub() {}
-	
-	template<typename Subtype, typename BaseType, typename... BaseTypes>
-	void addBaseSub() {
-		YamlBuilder<BaseType>::template addSubtype<Subtype>();
-		addBaseSub<Subtype, BaseTypes...>();
-	}
-	
-	template<typename Type>
+	template <typename Type>
 	void addDetermine(const detail::DetermineTypeFunc &function) {
 		YamlBuilder<Type>::addDetermine(function);
 	}
 	
-	template<typename FirstType, typename SecondType, typename... BaseTypes>
-	void addDetermine(const detail::DetermineTypeFunc &function) {
-		YamlBuilder<FirstType>::addDetermine(function);
-		addDetermine<SecondType, BaseTypes...>(function);
-	}
-	
-	template<typename Type>
-	void addDetermine(const detail::SimpleDetermineTypeFunc &) {}
-	
-	template<typename Type, typename BaseType, typename... BaseTypes>
+	template <typename Type>
 	void addDetermine(const detail::SimpleDetermineTypeFunc &function) {
-		YamlBuilder<BaseType>::template addDetermine<Type>(function);
-		addDetermine<Type, BaseTypes...>(function);
+		YamlBuilder<Type>::addDetermine(function);
 	}
 	
-	template<typename Type, typename... Base>
-	std::enable_if_t<!std::is_abstract_v<Type>, void>
-	inherit(const std::vector<std::string> &aliases) {
-		addBase<Type, Base...>(aliases);
-		addBaseSub<Type, Base...>();
-	}
-	
-	template<typename Type, typename... Base>
-	std::enable_if_t<std::is_abstract_v<Type>, void> inherit() {
-		addBaseSub<Type, Base...>();
+	template <typename Base>
+	void addFunc(detail::FuncYamlBuilder::BuildFunc<Base> function, std::vector<std::string> names) {
+		YamlBuilder<Base>::addType(function, names);
 	}
 }

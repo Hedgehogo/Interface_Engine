@@ -32,7 +32,7 @@ namespace ui {
 	bool convert(const YAML::Node &node, T &object);
 	
 	template <typename T>
-	T* createPointer(const YAML::Node& node, bool &correctly);
+	bool createPointer(const YAML::Node& node, T* &object);
 	
 	
 	
