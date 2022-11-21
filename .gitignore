@@ -3,3 +3,4 @@ layers.md
 /cmake-build-debug/
 /cmake-build-release/
 *.swp
+Doxyfile
