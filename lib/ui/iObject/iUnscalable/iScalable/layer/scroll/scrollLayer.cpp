@@ -2,7 +2,12 @@
 #include <iostream>
 
 namespace ui {
-	ScrollLayer::ScrollLayer(IUnscalable *object, const PSCoefficientVec2 &normalObjectPosition, const sf::Vector2f &minSize) : ILayerWithView(minSize), object(object), normalObjectPosition(normalObjectPosition), oldNormalObjectPosition(normalObjectPosition->getValue())  {}
+	ScrollLayer::ScrollLayer(IUnscalable *object, const PSCoefficientVec2 &normalObjectPosition, const sf::Vector2f &minSize) :
+		ILayerWithView(minSize), object(object), normalObjectPosition(normalObjectPosition){
+		normalObjectPosition->addSetter([&](sf::Vector2f vec){
+			this->object->setPosition(getNewObjectPosition(vec));
+		});
+	}
 
 	void ScrollLayer::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
 		ILayerWithView::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
@@ -17,18 +22,10 @@ namespace ui {
 		return object->getNormalSize();
 	}
 
-	sf::Vector2f ScrollLayer::getNewObjectPosition(){
+	sf::Vector2f ScrollLayer::getNewObjectPosition(sf::Vector2f normalObjectPosition) {
 		sf::Vector2f maxOffset{object->getSize() - size};
-		sf::Vector2f offset{maxOffset * normalObjectPosition->getValue()};
+		sf::Vector2f offset{maxOffset * normalObjectPosition};
 		return position - offset;
-	}
-
-	void ScrollLayer::draw() {
-		if (oldNormalObjectPosition != normalObjectPosition->getValue()){
-			object->setPosition(getNewObjectPosition());
-			oldNormalObjectPosition = normalObjectPosition->getValue();
-		}
-		ILayerWithView::draw();
 	}
 
 	void ScrollLayer::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -39,7 +36,7 @@ namespace ui {
 		sf::Vector2f objectSize{object->getSize()};
 		if (objectSize.x == size.x && objectSize.y == size.y)
 			return object->setPosition(position);
-		object->setPosition(getNewObjectPosition());
+		object->setPosition(getNewObjectPosition(normalObjectPosition->getValue()));
 	}
 
 	bool ScrollLayer::updateInteractions(sf::Vector2f mousePosition) {
