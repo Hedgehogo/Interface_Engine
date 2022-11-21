@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <yaml-cpp/yaml.h>
+#include <functional>
 
 typedef long long llint;
 typedef unsigned int uint;
