@@ -223,6 +223,22 @@ namespace ui {
         deleteCash();
     }
 
+	sf::Vector2f Resizer::getPosition() {
+		return startRender;
+	}
+
+	sf::Vector2f Resizer::getSize() {
+		std::vector<BaseCharacter *>::iterator maxX{
+			std::max_element(characters->begin(), characters->end(), [](BaseCharacter* elem,  BaseCharacter* elem2){return elem->getPosition().x < elem2->getPosition().x;})
+		};
+
+		std::vector<BaseCharacter *>::iterator maxY{
+			std::max_element(characters->begin(), characters->end(), [](BaseCharacter* elem,  BaseCharacter* elem2){return elem->getPosition().y < elem2->getPosition().y;})
+		};
+
+		return sf::Vector2f{(*maxX)->getPosition().x, (*maxY)->getPosition().y + (*maxY)->getHeight()} - getPosition();
+	}
+
     sf::Vector2f Resizer::getMinSize() {
         sf::Vector2f minSize = {0, 0};
         float wordSizeX = 0;

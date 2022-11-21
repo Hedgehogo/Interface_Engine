@@ -27,6 +27,10 @@ namespace ui {
 
         virtual void resize(sf::Vector2f size, sf::Vector2f position) = 0;
 
+		virtual sf::Vector2f getPosition() = 0;
+
+		virtual sf::Vector2f getSize() = 0;
+
         virtual sf::Vector2f getMinSize() = 0;
 
         virtual sf::Vector2f getNormalSize() = 0;

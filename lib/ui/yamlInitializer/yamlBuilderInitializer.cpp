@@ -85,6 +85,7 @@ namespace ui {
         addType<Layer, LayerWithShader>({"LWS"});
 		addType<Layer, MakePermeable>({"MakePerm", "MP"});
 		addType<Layer, LayerWithChangeableObjects>({"LWChangeableObjects", "LWCO"});
+		addType<Layer, ScrollLayer>({"ScrollL", "SL"});
 		addBase<UninteractiveLayer, IUninteractive, Layer>({"UninteractiveL", "UL"});
 		addSubtype<IScalable, Layer>();
 		addType<BaseSlider, Slider>();

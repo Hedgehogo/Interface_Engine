@@ -198,9 +198,9 @@ namespace ui {
     }
 
     void Text::resize(sf::Vector2f size, sf::Vector2f position) {
-        background->resize(size, position);
-
         resizer->resize(size, position);
+
+	    background->resize(max(resizer->getSize(), size), resizer->getSize());
     }
 
     sf::Vector2f Text::getAreaPosition() {
@@ -208,7 +208,7 @@ namespace ui {
     }
 
     sf::Vector2f Text::getAreaSize() {
-        return background->getAreaSize();
+        return max(background->getAreaSize(), resizer->getSize());
     }
 
     sf::Vector2f Text::getMinSize() {
