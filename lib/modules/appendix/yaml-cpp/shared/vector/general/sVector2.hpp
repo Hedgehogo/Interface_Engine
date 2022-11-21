@@ -51,15 +51,21 @@ namespace ui {
 	template <typename T>
 	using PSVec2 = std::shared_ptr<SVec2<T>>;
 	
-	typedef SVec2<Sfloat> SVec2f;
-	typedef SVec2<Sint> SVec2i;
-	typedef SVec2<Suint> SVec2u;
-	typedef SVec2<SCoefficientValue> SCoefficientVec2;
+	using SVec2f = SVec2<Sfloat>;
+	using SVec2i = SVec2<Sint>;
+	using SVec2u = SVec2<Suint>;
+	using SRVec2f = SVec2<SRfloat>;
+	using SRVec2i = SVec2<SRint>;
+	using SRVec2u = SVec2<SRuint>;
+	using SCoefficientVec2 = SVec2<SCoefficientValue>;
 	
-	typedef std::shared_ptr<SVec2f> PSVec2f;
-	typedef std::shared_ptr<SVec2i> PSVec2i;
-	typedef std::shared_ptr<SVec2u> PSVec2u;
-	typedef std::shared_ptr<SCoefficientVec2> PSCoefficientVec2;
+	using PSVec2f = std::shared_ptr<SVec2f>;
+	using PSVec2i = std::shared_ptr<SVec2i>;
+	using PSVec2u = std::shared_ptr<SVec2u>;
+	using PSRVec2f = std::shared_ptr<SRVec2f>;
+	using PSRVec2i = std::shared_ptr<SRVec2i>;
+	using PSRVec2u = std::shared_ptr<SRVec2u>;
+	using PSCoefficientVec2 = std::shared_ptr<SCoefficientVec2>;
 }
 
 #include "sVector2.inl"

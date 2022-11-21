@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../value/range/sRangeValue.hpp"
 #include "../value/coefficient/general/sCoefficientValue.hpp"
 #include "../value/coefficient/reference/sReferenceCoefficientValue.hpp"
 
