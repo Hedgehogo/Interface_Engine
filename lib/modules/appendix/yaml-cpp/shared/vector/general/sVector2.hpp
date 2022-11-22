@@ -1,4 +1,5 @@
 #pragma once
+#include "../../value/range/sRangeValue.hpp"
 #include "../iSVector2.hpp"
 
 namespace ui {
