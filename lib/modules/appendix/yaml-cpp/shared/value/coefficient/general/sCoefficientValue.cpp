@@ -10,11 +10,7 @@ namespace ui {
 	}
 	
 	bool convertPointer(const YAML::Node &node, SCoefficientValue *&sCoefficientValue) {
-		float value{0.f};
-		
-		if(node["value"])
-			node["value"] >> value;
-		
-		{ sCoefficientValue = new SCoefficientValue{value}; return true; }
+		sCoefficientValue = new SCoefficientValue{convDef(node["value"], 0.f)};
+		return true;
 	}
 }
