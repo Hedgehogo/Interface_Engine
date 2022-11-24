@@ -2,15 +2,15 @@
 #include "constSlider.hpp"
 
 namespace ui {
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, float sliderScale, Key key, bool wheelHorizontal,
-                             SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, float sliderScale, Key key, bool wheelHorizontal,
+							 SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
 		
 		sliderSize = slider->getNormalSize();
 		aspectRatio = sliderSize.x / sliderSize.y;
 	}
 	
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2i division, float sliderScale, Key key, bool wheelHorizontal) :
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, sf::Vector2i division, float sliderScale, Key key, bool wheelHorizontal) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, key, division, wheelHorizontal}), sliderScale(sliderScale) {
 		
 		sliderSize = slider->getNormalSize();
@@ -26,9 +26,10 @@ namespace ui {
 		}
 		moveZoneSize = size - sliderSize;
 		background->resize(size, position);
+		resizeSlider(value->getValue());
 	}
 	
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, SliderInteraction *interaction) :
+	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, SliderInteraction *interaction) :
 		BaseSlider(slider, background, value, interaction) {
 	}
 	
@@ -42,14 +43,16 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, ConstSlider *&constSlider) {
 		IUninteractive *slider;
 		IUninteractive *background;
-		PSCoefficientVec2 value;
+		PSRVec2f value;
 		float sliderScale{1.0f};
 		Key key{Key::mouseLeft};
 		bool wheelHorizontal{false};
 		
 		node["slider"] >> slider;
 		node["background"] >> background;
-		value = Buffer::get<SCoefficientVec2>(node["value"]);
+		value = Buffer::get<SRVec2f>(node["value"]);
+		//sliderScale = convDef(node["slider-scale"], 1.0f);
+		//key = convDef(node["slider-scale"], Key::mouseLeft);
 		if(node["slider-scale"])
 			node["slider-scale"] >> sliderScale;
 		if(node["key"])
@@ -67,13 +70,14 @@ namespace ui {
 			if(node["wheel-sensitivity"])
 				node["wheel-sensitivity"] >> wheelSensitivity;
 			
-			{ constSlider = new ConstSlider{slider, background, value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity}; return true; }
+			constSlider = new ConstSlider{slider, background, value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity};
 		} else {
 			sf::Vector2i division;
 			
 			node["division"] >> division;
 			
-			{ constSlider = new ConstSlider{slider, background, value, division, sliderScale, key, wheelHorizontal}; return true; }
+			constSlider = new ConstSlider{slider, background, value, division, sliderScale, key, wheelHorizontal};
 		}
+		return true;
 	}
 }

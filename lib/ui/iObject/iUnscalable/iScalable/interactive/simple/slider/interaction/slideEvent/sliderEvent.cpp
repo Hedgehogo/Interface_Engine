@@ -7,6 +7,10 @@ namespace ui {
 		slider(&slider), division(division), startMousePosition(), startValue() {
 	}
 	
+	sf::Vector2f SliderEvent::getMousePosition() {
+		return sf::Vector2f{mousePosition};
+	}
+	
 	void SliderEvent::startPressed() {
 		if(!slider->onSlider(mousePosition)) {
 			slider->setValueByMouse(mousePosition);
@@ -15,14 +19,14 @@ namespace ui {
 		startMousePosition = mousePosition;
 	}
 	
-	void SliderEvent::stopPressed() {
-	}
+	void SliderEvent::stopPressed() {}
 	
 	void SliderEvent::whilePressed() {
-		sf::Vector2i mouseOffset{mousePosition.x - startMousePosition.x, mousePosition.y - startMousePosition.y};
-		slider->setValue(startValue);
-		slider->moveSlider(mouseOffset);
-		slider->roundValueToDivision(division);
+		sf::Vector2f mouseOffset{sf::Vector2i{mousePosition.x - startMousePosition.x, mousePosition.y - startMousePosition.y}};
+		sf::Vector2f newValue;
+		newValue = slider->moveSlider(startValue, mouseOffset);
+		newValue = BaseSlider::roundValueToDivision(newValue, division);
+		slider->setValue(newValue);
 	}
 	
 	void SliderEvent::whileNotPressed() {

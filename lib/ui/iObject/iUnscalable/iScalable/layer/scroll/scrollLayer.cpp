@@ -2,11 +2,12 @@
 #include <iostream>
 
 namespace ui {
-	ScrollLayer::ScrollLayer(IUnscalable *object, const PSCoefficientVec2 &normalObjectPosition, const sf::Vector2f &minSize) :
+	ScrollLayer::ScrollLayer(IUnscalable *object, const PSRVec2f &normalObjectPosition, const sf::Vector2f &minSize) :
 		ILayerWithView(minSize), object(object), normalObjectPosition(normalObjectPosition){
 		normalObjectPosition->addSetter([&](sf::Vector2f vec){
 			this->object->setPosition(getNewObjectPosition(vec));
 		});
+		setRangeBounds(normalObjectPosition, {0, 0}, {1, 1});
 	}
 
 	void ScrollLayer::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
@@ -54,7 +55,7 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, ScrollLayer *&scrollLayer){
 		scrollLayer = new ScrollLayer{
 			node["object"].as<IUnscalable*>(),
-			Buffer::get<SCoefficientVec2>(node["normal-object-position"]),
+			Buffer::get<SRVec2f>(node["normal-object-position"]),
 			(node["min-size"] ? node["min-size"].as<sf::Vector2f>() : sf::Vector2f{0, 0})
 		};
 		return true;

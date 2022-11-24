@@ -11,6 +11,8 @@ namespace ui {
 		sf::Vector2f startValue;
 		sf::Vector2i division;
 		
+		sf::Vector2f getMousePosition();
+		
 		void copy(SliderEvent* sliderEvent);
 		
 		void startPressed() override;

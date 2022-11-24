@@ -6,9 +6,10 @@ namespace ui {
 	class ScrollLayer : public ILayerWithView{
 	protected:
 		IUnscalable* object;
-		PSCoefficientVec2 normalObjectPosition;
+		PSRVec2f normalObjectPosition;
+		
 	public:
-		ScrollLayer(IUnscalable *object, const PSCoefficientVec2 &normalObjectPosition, const sf::Vector2f &minSize);
+		ScrollLayer(IUnscalable *object, const PSRVec2f &normalObjectPosition, const sf::Vector2f &minSize);
 
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 
@@ -20,7 +21,6 @@ namespace ui {
 		sf::Vector2f getNewObjectPosition(sf::Vector2f normalObjectPosition);
 
 	public:
-
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 
 		bool updateInteractions(sf::Vector2f mousePosition) override;

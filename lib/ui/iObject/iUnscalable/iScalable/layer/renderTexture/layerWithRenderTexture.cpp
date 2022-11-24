@@ -9,37 +9,36 @@ namespace ui {
 	}
 	
 	LayerWithRenderTexture::LayerWithRenderTexture(IScalable *object, bool optimize, sf::Vector2f minSize) :
-		Layer(minSize), LayoutWithObject(object), optimize(optimize), active(true), renderTarget(nullptr), interactionManager(nullptr){}
+		Layer(minSize), LayoutWithObject(object), optimize(optimize), active(true), renderTarget(nullptr), interactionManager(nullptr) {
+		sprite.setTexture(renderTexture.getTexture());
+	}
 	
 	void LayerWithRenderTexture::draw() {
 		if(!optimize || active || interactionManager->isBlocked()) {
 			renderTexture.clear(sf::Color(0, 0, 0, 0));
 			drawManager.draw();
-            sprite.setTexture(renderTexture.getTexture());
+			renderTexture.display();
 			active = false;
 		}
 		renderTarget->draw(sprite);
 	}
 	
 	void LayerWithRenderTexture::resize(sf::Vector2f size, sf::Vector2f position) {
-        Layout::resize(size, position);
-        active = true;
-
-        sf::Vector2i start {static_cast<int>(std::floor(position.x)), static_cast<int>(std::ceil(position.y))};
-        sf::Vector2i end {static_cast<int>(std::floor(position.x + size.x)), static_cast<int>(std::ceil(position.y + size.y))};
-        
+		LayoutWithObject::resize(size, position);
+        sf::Vector2f start {std::floor(position.x), std::ceil(position.y)};
+        sf::Vector2f end {std::floor(position.x + size.x), std::ceil(position.y + size.y)};
         sf::Vector2i textureSize{end - start};
-
-        view.reset({sf::Vector2f{sf::Vector2i{start.x, start.y + textureSize.y}}, sf::Vector2f{sf::Vector2i{textureSize.x, -textureSize.y}}});
-
+		
+		view.reset({start, end - start});
+		
         renderTexture.create(textureSize.x, textureSize.y);
         renderTexture.setView(view);
-
+		
 		sprite.setTexture(renderTexture.getTexture());
         sprite.setTextureRect({{0, 0}, textureSize});
-		sprite.setPosition(sf::Vector2f{start});
-
-		object->resize(size, position);
+		sprite.setPosition(start);
+		
+		active = true;
 	}
 	
 	bool LayerWithRenderTexture::updateInteractions(sf::Vector2f mousePosition) {
@@ -68,12 +67,11 @@ namespace ui {
 	}
 	
 	bool convertPointer(const YAML::Node &node, LayerWithRenderTexture *&layerWithRenderTexture) {
-		IScalable* object;
-		bool optimize{true};
-		sf::Vector2f minSize{0, 0};
-		node["object"] >> object;
-        if (node["optimize"]) node["optimize"] >> optimize;
-        if (node["min-size"]) node["min-size"] >> minSize;
-		{ layerWithRenderTexture = new LayerWithRenderTexture{object, optimize, minSize}; return true; }
+		layerWithRenderTexture = new LayerWithRenderTexture{
+			node["object"].as<IScalable*>(),
+			convDef(node["optimize"], true),
+			convDef(node["min-size"], sf::Vector2f{})
+		};
+		return true;
 	}
 }

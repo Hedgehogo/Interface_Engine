@@ -5,11 +5,11 @@
 #include "../../../../../../../modules/appendix/yaml-cpp/shared/shared.hpp"
 
 namespace ui {
-	class BaseSlider : public Interactive_Simple, public IDrawable {
+	class BaseSlider : public Interactive_Simple {
 	protected:
 		IUninteractive* slider;
 		IUninteractive* background;
-		PSCoefficientVec2 value;
+		PSRVec2f value;
 		sf::Vector2f position;
 		sf::Vector2f sliderSize;
 		sf::Vector2f moveZoneSize;
@@ -18,22 +18,26 @@ namespace ui {
 		
 		void copy(BaseSlider* baseSlider);
 		
+		virtual void resizeSlider(sf::Vector2f newValue);
+		
 	public:
-		BaseSlider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, SliderInteraction* interaction);
+		BaseSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, SliderInteraction* interaction);
+		
+		bool onSlider(sf::Vector2i mousePosition);
 		
 		sf::Vector2f getSliderSize();
 		
 		sf::Vector2f getValue();
 		
+		PSRVec2f getValuePtr();
+		
 		void setValue(sf::Vector2f value);
 		
 		void setValueByMouse(sf::Vector2i mousePosition);
 		
-		void roundValueToDivision(sf::Vector2i division);
+		sf::Vector2f moveSlider(sf::Vector2f value, sf::Vector2f offset) const;
 		
-		bool onSlider(sf::Vector2i mousePosition);
-		
-		void moveSlider(sf::Vector2i mouseOffset);
+		static sf::Vector2f roundValueToDivision(sf::Vector2f value, sf::Vector2i division);
 		
 		sf::Vector2f getAreaPosition() override;
 		
@@ -42,8 +46,6 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
-		
-		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override = 0;
 

@@ -6,12 +6,20 @@ namespace ui {
 	class SRangeValue : public SValue<T> {
 	protected:
 		T upper;
-		T bottom;
+		T lower;
 	
 	public:
 		explicit SRangeValue(T value = {});
 		
-		void setBounds(T upper, T bottom);
+		T getUpper();
+		
+		T getLower();
+		
+		void setUpper(const T &upper);
+		
+		void setLower(const T &lower);
+		
+		void setBounds(T lower, T upper);
 		
 		void setValue(const float &value) override;
 	};
@@ -21,6 +29,9 @@ namespace ui {
 	
 	template <typename T>
 	using SRange = SRangeValue<T>;
+	
+	template <typename T>
+	using PSRange = std::shared_ptr<SRange<T>>;
 	
 	using SRbool = SRange<bool>;
 	using SRfloat = SRange<float>;

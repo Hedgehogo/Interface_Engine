@@ -75,4 +75,22 @@ namespace ui {
 		setY(vector.y);
 		set();
 	}
+	
+	template<typename T>
+	void setRangeUpper(PSVec2<SRange<T>> value, sf::Vector2<T> upper) {
+		std::dynamic_pointer_cast<SRange<T>>(value->getXPtr())->setUpper(upper.x);
+		std::dynamic_pointer_cast<SRange<T>>(value->getYPtr())->setUpper(upper.y);
+	}
+	
+	template<typename T>
+	void setRangeLower(PSVec2<SRange<T>> value, sf::Vector2<T> lower) {
+		std::dynamic_pointer_cast<SRange<T>>(value->getXPtr())->setLower(lower.x);
+		std::dynamic_pointer_cast<SRange<T>>(value->getYPtr())->setLower(lower.y);
+	}
+	
+	template <typename T>
+	void setRangeBounds(PSVec2 <SRange<T>> value, sf::Vector2<T> lower, sf::Vector2<T> upper) {
+		std::dynamic_pointer_cast<SRange<T>>(value->getXPtr())->setBounds(lower.x, upper.x);
+		std::dynamic_pointer_cast<SRange<T>>(value->getYPtr())->setBounds(lower.y, upper.y);
+	}
 }

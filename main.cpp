@@ -16,7 +16,6 @@ int main() {
 	
     sf::ContextSettings settings;
     settings.antialiasingLevel = 1;
-	
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
 	//window.setFramerateLimit(60);

@@ -52,6 +52,15 @@ namespace ui {
 	template <typename T>
 	using PSVec2 = std::shared_ptr<SVec2<T>>;
 	
+	template<typename T>
+	void setRangeUpper(PSVec2<SRange<T>> value, sf::Vector2<T> upper);
+	
+	template<typename T>
+	void setRangeLower(PSVec2<SRange<T>> value, sf::Vector2<T> lower);
+	
+	template<typename T>
+	void setRangeBounds(PSVec2<SRange<T>> value, sf::Vector2<T> lower, sf::Vector2<T> upper);
+	
 	using SVec2f = SVec2<Sfloat>;
 	using SVec2i = SVec2<Sint>;
 	using SVec2u = SVec2<Suint>;

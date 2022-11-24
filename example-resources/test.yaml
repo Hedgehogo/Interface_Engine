@@ -5,6 +5,7 @@ const-object:
   type: Slider
   slider: 525252
   background: 37383A88
+  #wheel-relativity: relation-slider
   value:
     var: a
 second-object:

@@ -12,17 +12,14 @@ namespace ui {
 	
 	void SliderWheelEvent::whilePressed(sf::Vector2i, int value) {
 		sf::Vector2f move{sensitivity};
+		bool reverse{(isKeyPressed(Key::lShift) || isKeyPressed(Key::rShift)) != horizontal};
 		if(relativity) {
 			sf::Vector2f sliderSize{slider->getSliderSize()};
-			sf::Vector2f areaSize{slider->getSliderSize()};
+			sf::Vector2f areaSize{slider->getAreaSize()};
 			move = {sliderSize.x / areaSize.x * move.x, sliderSize.y / areaSize.y * move.y};
 		}
 		move *= -static_cast<float>(value);
-		if((isKeyPressed(Key::lShift) || isKeyPressed(Key::rShift)) != horizontal) {
-			move.y = 0;
-		} else {
-			move.x = 0;
-		}
+		(reverse ? move.y : move.x) = 0;
 		slider->setValue(slider->getValue() + move);
 	}
 	
@@ -40,7 +37,7 @@ namespace ui {
 	
 	template <>
 	bool convert(const YAML::Node &node, SliderWheelEvent::Relativity &relativity) {
-		if(convertBool(node, "relationArea", "relationSlider")) {
+		if(convertBool(node, "relation-area", "relation-slider")) {
 			relativity = SliderWheelEvent::Relativity::relationArea;
 		} else {
 			relativity = SliderWheelEvent::Relativity::relationSlider;

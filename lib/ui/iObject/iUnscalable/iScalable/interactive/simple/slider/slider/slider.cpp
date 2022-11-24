@@ -1,12 +1,12 @@
 #include "slider.hpp"
 
 namespace ui {
-	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2f sliderScale, Key key, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity,
-                   sf::Vector2f wheelSensitivity) :
+	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, sf::Vector2f sliderScale, Key key, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity,
+				   sf::Vector2f wheelSensitivity) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}), scale(sliderScale) {
 	}
 	
-	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, sf::Vector2i division, sf::Vector2f sliderScale, Key key, bool wheelHorizontal) :
+	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, sf::Vector2i division, sf::Vector2f sliderScale, Key key, bool wheelHorizontal) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, key, division, wheelHorizontal}), scale(sliderScale) {
 	}
 	
@@ -19,6 +19,7 @@ namespace ui {
 		sliderSize = {size.x * scale.x, size.y * scale.y};
 		moveZoneSize = size - sliderSize;
 		background->resize(size, position);
+		resizeSlider(value->getValue());
 	}
 	
 	sf::Vector2f Slider::getMinSize() {
@@ -27,7 +28,7 @@ namespace ui {
 		return minSize;
 	}
 	
-	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSCoefficientVec2 &value, SliderInteraction *interaction, sf::Vector2f sliderScale) :
+	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, SliderInteraction *interaction, sf::Vector2f sliderScale) :
 		BaseSlider(slider, background, value, interaction), scale(sliderScale) {
 	}
 	
@@ -41,14 +42,14 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, Slider *&sliderZone) {
 		IUninteractive *slider;
 		IUninteractive *background;
-		PSCoefficientVec2 value;
+		PSRVec2f value;
 		sf::Vector2f sliderScale{1.0f, 0.5f};
 		Key key{Key::mouseLeft};
 		bool wheelHorizontal{false};
 		
 		node["slider"] >> slider;
 		node["background"] >> background;
-		value = Buffer::get<SCoefficientVec2>(node["value"]);
+		value = Buffer::get<SRVec2f>(node["value"]);
 		if(node["slider-scale"])
 			node["slider-scale"] >> sliderScale;
 		if(node["key"])
