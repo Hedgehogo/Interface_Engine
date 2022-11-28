@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../basePositioning2.hpp"
+#include "../iPositioning2.hpp"
 #include "../../positioning/internal/parent/internalPositioning.hpp"
 
 namespace ui {
-    class InternalPositioning2 : public BasePositioning2{
+    class InternalPositioning2 : public IPositioning2{
     protected:
         InternalPositioning vertical;
         InternalPositioning horizontal;

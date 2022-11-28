@@ -297,7 +297,7 @@ namespace ui {
 		return KeyHandler::isKeyPressed(key);
 	}
 
-    Key createKeyFromYaml(YAML::Node node){
+    Key makeKeyFromYaml(YAML::Node node){
         Key key;
         convert(node, key);
         return key;

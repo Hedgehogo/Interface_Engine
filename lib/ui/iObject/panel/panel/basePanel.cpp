@@ -2,7 +2,7 @@
 #include "../manager/general/panelManager.hpp"
 
 namespace ui {
-	BasePanel::BasePanel(IScalable *object, BaseSizing2 *sizing, BasePositioning2 *positioning, bool displayed) :
+	BasePanel::BasePanel(IScalable *object, ISizing2 *sizing, IPositioning2 *positioning, bool displayed) :
 		LayoutWithObject(object), sizing(sizing), positioning(positioning),
 		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {}
 	

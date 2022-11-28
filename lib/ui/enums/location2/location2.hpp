@@ -12,7 +12,7 @@ namespace ui {
 	
 	Location getHorizontalLocation(Location2 location2);
 	
-	Location2 createLocation2(Location vertical, Location horizontal);
+	Location2 makeLocation2(Location vertical, Location horizontal);
 	
 	template<>
 	bool convert(const YAML::Node &node, Location2 &location2);

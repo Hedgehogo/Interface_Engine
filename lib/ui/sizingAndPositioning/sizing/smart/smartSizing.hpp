@@ -1,8 +1,8 @@
 #pragma once
-#include "../sizing.hpp"
+#include "../iSizing.hpp"
 
 namespace ui {
-	class SmartSizing : public Sizing {
+	class SmartSizing : public ISizing {
 	protected:
 		float targetCoefficient;
 		float parentCoefficient;
@@ -21,6 +21,4 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, SmartSizing *&smartSizing);
-	
-	Sizing* createSizing(float targetCoefficient, float parentCoefficient, float addition);
 }

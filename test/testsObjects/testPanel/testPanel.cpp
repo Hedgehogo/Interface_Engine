@@ -7,8 +7,8 @@
 #include <x86intrin.h>
 #endif
 
-TestPanel::TestPanel(bool displayed, const sf::Vector2f &minSize, const sf::Vector2f &normalSize, bool isIndependentResult, bool isFreeResult, bool inPanelResult, bool updateInteractionsResult, ui::BaseSizing2 *sizing,
-                     ui::BasePositioning2 *positioning) :
+TestPanel::TestPanel(bool displayed, const sf::Vector2f &minSize, const sf::Vector2f &normalSize, bool isIndependentResult, bool isFreeResult, bool inPanelResult, bool updateInteractionsResult, ui::ISizing2 *sizing,
+                     ui::IPositioning2 *positioning) :
 					 BasePanel(new ui::Empty{}, sizing, positioning, displayed), minSize(minSize), normalSize(normalSize),
                      isIndependentResult(isIndependentResult), isFreeResult(isFreeResult), inPanelResult(inPanelResult),updateInteractionsResult(updateInteractionsResult) {}
 

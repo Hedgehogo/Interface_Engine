@@ -1,9 +1,9 @@
 #pragma once
-#include "../../positioning.hpp"
+#include "../../iPositioning.hpp"
 #include "../../../../enums/location/location.hpp"
 
 namespace ui {
-	class MatchSidesPositioning : public Positioning {
+	class MatchSidesPositioning : public IPositioning {
 	protected:
 		Location parentSide;
 		Location objectSide;
@@ -19,5 +19,5 @@ namespace ui {
 	
 	bool convertPointer(const YAML::Node &node, MatchSidesPositioning *&matchSidesPositioning);
 	
-	//Positioning* createPosition(Location parentSide, Location objectSide, float offset);
+	//Positioning* makePosition(Location parentSide, Location objectSide, float offset);
 }

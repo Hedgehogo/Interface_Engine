@@ -1,8 +1,8 @@
 #pragma once
-#include "../../positioning.hpp"
+#include "../../iPositioning.hpp"
 
 namespace ui {
-	class MatchPositioning : public Positioning {
+	class MatchPositioning : public IPositioning {
 	protected:
 		float parentCoefficient;
 		float objectCoefficient;

@@ -1,26 +1,30 @@
 #include "yamlBuilderInitializer.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp"
+#include "../sizingAndPositioning/sizing/determine/determineSizing.hpp"
+#include "../sizingAndPositioning/sizing2/determine/determineSizing2.hpp"
+#include "../sizingAndPositioning/positioning/determine/determinePositioning.hpp"
+#include "../sizingAndPositioning/positioning2/determine/determinePositioning2.hpp"
 
 namespace ui {
 	void yamlBuilderInit() {
-		inherit<Sizing, ConstSizing>({"CS"});
-		inherit<Sizing, RelativeNormalSizing>({"RNormalSizing", "RNS"});
-		inherit<Sizing, RelativeParentSizing>({"RParentSizing", "RPS"});
-		inherit<Sizing, ParentCoefficientSizing>({"ParentCSizing", "PCS"});
-		inherit<Sizing, TargetCoefficientSizing>({"TargetCSizing", "TCS"});
-		inherit<Sizing, SmartSizing>({"SS"});
+		inherit<ISizing, ConstSizing>({"CS"});
+		inherit<ISizing, RelativeNormalSizing>({"RNormalSizing", "RNS"});
+		inherit<ISizing, RelativeParentSizing>({"RParentSizing", "RPS"});
+		inherit<ISizing, ParentCoefficientSizing>({"ParentCSizing", "PCS"});
+		inherit<ISizing, TargetCoefficientSizing>({"TargetCSizing", "TCS"});
+		inherit<ISizing, SmartSizing>({"SS"});
 		
-		inherit<BaseSizing2, Sizing2>({"S2"});
-		inherit<BaseSizing2, ConstRatioSizing2>({"CRatioS2", "CRS2"});
+		inherit<ISizing2, Sizing2>({"S2"});
+		inherit<ISizing2, ConstRatioSizing2>({"CRatioS2", "CRS2"});
 		
-		inherit<Positioning, InternalPositioning>({"IPos", "IP"});
-		inherit<Positioning, InternalTargetPositioning>({"ITargetPos", "ITP"});
-		inherit<Positioning, MatchPositioning>({"MPos", "MP"});
-		inherit<Positioning, MatchTargetPositioning>({"MTargetPos", "MTP"});
-		inherit<Positioning, MatchSidesPositioning>({"MSidesPos", "MSP"});
+		inherit<IPositioning, InternalPositioning>({"IPos", "IP"});
+		inherit<IPositioning, InternalTargetPositioning>({"ITargetPos", "ITP"});
+		inherit<IPositioning, MatchPositioning>({"MPos", "MP"});
+		inherit<IPositioning, MatchTargetPositioning>({"MTargetPos", "MTP"});
+		inherit<IPositioning, MatchSidesPositioning>({"MSidesPos", "MSP"});
 		
-		inherit<BasePositioning2, Positioning2>({"Pos2", "P2"});
-		inherit<BasePositioning2, InternalPositioning2>({"InternalPos2", "IP2"});
+		inherit<IPositioning2, Positioning2>({"Pos2", "P2"});
+		inherit<IPositioning2, InternalPositioning2>({"InternalPos2", "IP2"});
 		
 		inherit<BaseLine, Underline>({"U"});
 		inherit<BaseLine, StrikeThrough>({"ST"});
@@ -105,6 +109,10 @@ namespace ui {
 		addDetermine<RoundedRectangle>();
 		addDetermine<Sprite>();
 		addDetermine<TextBlock>();
+		addDetermine<ISizing>(determineSizing);
+		addDetermine<ISizing2>(determineSizing2);
+		addDetermine<IPositioning>(determinePositioning);
+		addDetermine<IPositioning2>(determinePositioning2);
 		addDetermine<OpenUrlEvent>(determineUrl);
 		addDetermine<KeysInteraction>(determineUrl);
 		addDetermine<TextKeysInteraction>(determineUrl);

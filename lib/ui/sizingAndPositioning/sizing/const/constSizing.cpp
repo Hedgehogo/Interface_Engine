@@ -14,12 +14,11 @@ namespace ui {
 	}
 	
 	bool convertPointer(const YAML::Node &node, ConstSizing *&constSizing) {
-		float size;
-		node["size"] >> size;
-		{ constSizing = new ConstSizing{size}; return true; }
-	}
-	
-	Sizing *size(float constSize) {
-		return new ConstSizing{constSize};
+		if(node.IsScalar()) {
+			constSizing = new ConstSizing{node.as<float>()};
+		} else {
+			constSizing = new ConstSizing{node["size"].as<float>()};
+		}
+		return true;
 	}
 }

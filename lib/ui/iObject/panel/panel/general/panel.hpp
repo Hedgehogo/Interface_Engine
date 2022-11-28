@@ -17,9 +17,9 @@ namespace ui {
 	public:
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 		
-		Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, BaseSizing2 *sizing, BasePositioning2 *positioning, bool displayed = false);
+		Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, ISizing2 *sizing, IPositioning2 *positioning, bool displayed = false);
 		
-		Panel(IScalable *object, HidePanelInteraction *hideInteraction, BaseSizing2 *sizing, BasePositioning2 *positioning, bool displayed = false);
+		Panel(IScalable *object, HidePanelInteraction *hideInteraction, ISizing2 *sizing, IPositioning2 *positioning, bool displayed = false);
 		
 		~Panel() override;
 		

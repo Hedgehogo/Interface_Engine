@@ -43,8 +43,8 @@ protected:
 	bool updateInteractionsResult;
 public:
 	TestPanel(bool displayed = false, const sf::Vector2f &minSize = {0, 0}, const sf::Vector2f &normalSize = {100, 100}, bool isIndependentResult = true, bool isFreeResult = true, bool inPanelResult = true, bool updateInteractionsResult = true,
-			  ui::BaseSizing2 *sizing = new ui::Sizing2{new ui::ConstSizing{0.5f}, new ui::ConstSizing{0.5f}},
-	          ui::BasePositioning2 *positioning = new ui::Positioning2{new ui::InternalPositioning{0, 0}, new ui::InternalPositioning{0, 0}});
+			  ui::ISizing2 *sizing = new ui::Sizing2{new ui::ConstSizing{0.5f}, new ui::ConstSizing{0.5f}},
+	          ui::IPositioning2 *positioning = new ui::Positioning2{new ui::InternalPositioning{0, 0}, new ui::InternalPositioning{0, 0}});
 
 	const Processed &getProcessed() const;
 

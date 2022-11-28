@@ -1,8 +1,8 @@
 #pragma once
-#include "../sizing.hpp"
+#include "../iSizing.hpp"
 
 namespace ui {
-	class ConstSizing : public Sizing {
+	class ConstSizing : public ISizing {
 	protected:
 		float size;
 		

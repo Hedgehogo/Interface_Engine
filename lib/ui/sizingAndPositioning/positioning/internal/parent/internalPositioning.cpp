@@ -20,13 +20,16 @@ namespace ui {
 	}
 
 	bool convertPointer(const YAML::Node &node, InternalPositioning *&internalPositioning) {
-		float coefficient;
-		float offset{0.f};
-		
-		node["coefficient"] >> coefficient;
-		if(node["offset"])
-			node["offset"] >> offset;
-		
-		{ internalPositioning = new InternalPositioning{coefficient, offset}; return true; }
+		if(node.IsScalar()) {
+			internalPositioning = new InternalPositioning{
+				node.as<float>()
+			};
+		} else {
+			internalPositioning = new InternalPositioning{
+				node["coefficient"].as<float>(),
+				convDef(node["offset"], 0.f)
+			};
+		}
+		return true;
 	}
 }

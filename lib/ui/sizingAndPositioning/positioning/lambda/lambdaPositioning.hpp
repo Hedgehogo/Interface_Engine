@@ -1,13 +1,16 @@
 #pragma once
-#include "../positioning.hpp"
+#include "../iPositioning.hpp"
 
 namespace ui {
-	class LambdaPositioning : public Positioning {
+	class LambdaPositioning : public IPositioning {
+	public:
+		using FindPositionFunc = std::function<float(float parentPosition, float objectSize, float parentSize, float targetSize)>;
+	
 	protected:
-		float (*positioning)(float parentPosition, float objectSize, float parentSize, float targetSize);
+		FindPositionFunc findPositionFunc;
 		
 	public:
-		explicit LambdaPositioning(float (*findPosition)(float parentPosition, float objectSize, float parentSize, float targetSize));
+		explicit LambdaPositioning(FindPositionFunc findPositionFunc);
 		
 		float findPosition(float parentPosition, float objectSize, float parentSize, float targetSize) override;
 		

@@ -3,11 +3,11 @@
 #include "../interaction/move/dont/dontMovePanelInteraction.hpp"
 
 namespace ui {
-	Panel::Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, BaseSizing2 *sizing, BasePositioning2 *positioning, bool displayed) :
+	Panel::Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, ISizing2 *sizing, IPositioning2 *positioning, bool displayed) :
 		BasePanel(object, sizing, positioning, displayed), hideInteraction(hideInteraction), moveInteraction(moveInteraction), interactionManager(nullptr) {
 	}
 	
-	Panel::Panel(IScalable *object, HidePanelInteraction *hideInteraction, BaseSizing2 *sizing, BasePositioning2 *positioning, bool displayed) :
+	Panel::Panel(IScalable *object, HidePanelInteraction *hideInteraction, ISizing2 *sizing, IPositioning2 *positioning, bool displayed) :
 		Panel(object, hideInteraction, new DontMovePanelInteraction{}, sizing, positioning, displayed) {
 	}
 	
@@ -81,8 +81,8 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, Panel *&panel) {
 		IScalable *object;
 		HidePanelInteraction *hideInteraction;
-		BaseSizing2 *sizing;
-		BasePositioning2 *positioning;
+		ISizing2 *sizing;
+		IPositioning2 *positioning;
 		bool displayed{false};
 		
 		node["object"] >> object;

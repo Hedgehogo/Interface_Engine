@@ -126,10 +126,10 @@ namespace ui {
 	
 	template <typename Type>
 	void YamlBuilder<Type>::addDetermine(const YamlBuilder::SimpleDetermineType& function) {
-		determiners.emplace_back([function](const YAML::Node& node, std::string &type) {
+		determiners.push_back(DetermineType{[function](const YAML::Node& node, std::string &type) {
 			type = names[0];
 			return function(node);
-		});
+		}});
 	}
 	
 	template <typename Type>

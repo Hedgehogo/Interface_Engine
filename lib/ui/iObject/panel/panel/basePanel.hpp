@@ -1,12 +1,12 @@
 #pragma once
 #include "../../layout/object/layoutWithObject.hpp"
-#include "../../../sizingAndPositioning/sizing/create/CreateSize.hpp"
-#include "../../../sizingAndPositioning/positioning/create/CreatePositioning.hpp"
-#include "../../../sizingAndPositioning/sizing2/baseSizing2.hpp"
+#include "../../../sizingAndPositioning/sizing/make/makeSize.hpp"
+#include "../../../sizingAndPositioning/positioning/make/makePositioning.hpp"
+#include "../../../sizingAndPositioning/sizing2/iSizing2.hpp"
 #include "../../../sizingAndPositioning/sizing2/general/sizing2.hpp"
 #include "../../../sizingAndPositioning/sizing2/constRatio/constRatioSizing2.hpp"
 #include "../../../sizingAndPositioning/sizing2/lambda/lambdaSizing2.hpp"
-#include "../../../sizingAndPositioning/positioning2/basePositioning2.hpp"
+#include "../../../sizingAndPositioning/positioning2/iPositioning2.hpp"
 #include "../../../sizingAndPositioning/positioning2/general/positioning2.hpp"
 #include "../../../sizingAndPositioning/positioning2/internal/internalPositioning2.hpp"
 #include "../../../sizingAndPositioning/positioning2/lambda/lambdaPositioning2.hpp"
@@ -15,8 +15,8 @@
 namespace ui {
 	class BasePanel : public LayoutWithObject, public IDrawable, public IUpdatable {
 	protected:
-		BaseSizing2* sizing;
-		BasePositioning2* positioning;
+		ISizing2* sizing;
+		IPositioning2* positioning;
 		DrawManager drawManager;
 		UpdateManager updateManager;
 		bool parentProcessed;
@@ -29,7 +29,7 @@ namespace ui {
 	public:
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
 		
-		BasePanel(IScalable *object, BaseSizing2* sizing, BasePositioning2* positioning, bool displayed = false);
+		BasePanel(IScalable *object, ISizing2* sizing, IPositioning2* positioning, bool displayed = false);
 		
 		~BasePanel() override;
 		

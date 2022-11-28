@@ -57,6 +57,10 @@ namespace ui {
 	template<typename T>
 	T convDef(const YAML::Node &node, const T &defaultValue);
 	
+	bool convertBoolDefault(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue = false);
+	
+	bool convBoolDef(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue = false);
+	
 	template<typename T>
 	bool convert(const YAML::Node &node, std::vector<T> &vector);
 	

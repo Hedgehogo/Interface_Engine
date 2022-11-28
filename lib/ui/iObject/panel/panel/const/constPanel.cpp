@@ -3,7 +3,7 @@
 #include "../../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
-	ConstPanel::ConstPanel(IScalable *object, BaseSizing2 *sizing, BasePositioning2 *positioning, bool displayed) :
+	ConstPanel::ConstPanel(IScalable *object, ISizing2 *sizing, IPositioning2 *positioning, bool displayed) :
 		BasePanel(object, sizing, positioning, displayed) {}
 	
 	void ConstPanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
@@ -24,8 +24,8 @@ namespace ui {
 	
 	bool convertPointer(const YAML::Node &node, ConstPanel *&constPanel) {
 		IScalable *object;
-		BaseSizing2 *sizing;
-		BasePositioning2 *positioning;
+		ISizing2 *sizing;
+		IPositioning2 *positioning;
 		bool displayed{false};
 		
 		node["object"] >> object;

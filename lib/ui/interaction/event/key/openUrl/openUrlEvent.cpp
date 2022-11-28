@@ -32,4 +32,4 @@ namespace ui {
 		}
 		return false;
 	}
-} // ui
+}

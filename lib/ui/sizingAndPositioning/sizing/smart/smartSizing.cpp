@@ -32,8 +32,4 @@ namespace ui {
 		
 		{ smartSizing = new SmartSizing{targetCoefficient, parentCoefficient, addition}; return true; }
 	}
-	
-	Sizing *createSizing(float targetCoefficient, float parentCoefficient, float addition) {
-		return new SmartSizing{targetCoefficient, parentCoefficient, addition};
-	}
 }

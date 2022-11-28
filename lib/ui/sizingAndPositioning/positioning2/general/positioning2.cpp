@@ -1,13 +1,13 @@
 #include "positioning2.hpp"
-#include "../../positioning/create/CreatePositioning.hpp"
+#include "../../positioning/make/makePositioning.hpp"
 
 namespace ui {
-	Positioning2::Positioning2(Positioning *horizontal, Positioning *vertical) :
+	Positioning2::Positioning2(IPositioning *horizontal, IPositioning *vertical) :
 		horizontal(horizontal), vertical(vertical), renderTarget(nullptr) {}
 	
 	Positioning2::Positioning2(sf::Vector2f coefficient, sf::Vector2f offset, bool relativeTarget) :
-		horizontal(createPosition(coefficient.x, offset.x, relativeTarget)),
-		vertical(createPosition(coefficient.y, offset.y, relativeTarget)),
+		horizontal(makePosition(coefficient.x, offset.x, relativeTarget)),
+		vertical(makePosition(coefficient.y, offset.y, relativeTarget)),
 		renderTarget(nullptr) {}
 	
 	Positioning2::Positioning2(Location2 parentLocation, Location2 objectLocation, sf::Vector2f offset) :
@@ -16,8 +16,8 @@ namespace ui {
 		renderTarget(nullptr) {}
 	
 	Positioning2::Positioning2(sf::Vector2f coefficient, sf::Vector2f objectCoefficient, sf::Vector2f offset, bool relativeTarget) :
-		horizontal(createPosition(coefficient.x, objectCoefficient.x, offset.x, relativeTarget)),
-		vertical(createPosition(coefficient.y, objectCoefficient.y, offset.y, relativeTarget)),
+		horizontal(makePosition(coefficient.x, objectCoefficient.x, offset.x, relativeTarget)),
+		vertical(makePosition(coefficient.y, objectCoefficient.y, offset.y, relativeTarget)),
 		renderTarget(nullptr) {}
 	
 	Positioning2::~Positioning2() {
@@ -46,48 +46,50 @@ namespace ui {
 	}
 	
 	bool convertPointer(const YAML::Node &node, Positioning2 *&positioning2) {
-		if(node["horizontal"] && node["vertical"]) {
-			Positioning* horizontal;
-			Positioning* vertical;
-			
-			node["horizontal"] >> horizontal;
-			node["vertical"] >> vertical;
-			
-			{ positioning2 = new Positioning2{horizontal, vertical}; return true; }
+		if(node.IsScalar()) {
+			positioning2 = new Positioning2{node.as<sf::Vector2f>()};
 		} else {
-			sf::Vector2f offset{};
-			
-			if(node["offset"]) node["offset"] >> offset;
-			
-			if(node["coefficient"] || node["parent-coefficient"] || node["target-coefficient"]) {
-				sf::Vector2f coefficient;
-				bool relativeTarget{false};
+			if(node["horizontal"] && node["vertical"]) {
+				positioning2 = new Positioning2{
+					node["horizontal"].as<IPositioning *>(),
+					node["vertical"].as<IPositioning *>()
+				};
+			} else {
+				auto offset{convDef(node["offset"], sf::Vector2f{})};
 				
 				if(node["coefficient"]) {
-					node["coefficient"] >> coefficient;
-				} else if(node["parent-coefficient"]) {
-					node["parent-coefficient"] >> coefficient;
-				} else {
-					node["target-coefficient"] >> coefficient;
-					relativeTarget = true;
-				}
-				
-				if(node["object-coefficient"]) {
-					sf::Vector2f objectCoefficient;
+					positioning2 = new Positioning2{
+						node["coefficient"].as<sf::Vector2f>(),
+						offset,
+						convBoolDef(node["relative"], "target", "parent")
+					};
+				} else if(node["object-coefficient"]) {
+					auto objectCoefficient{node["object-coefficient"].as<sf::Vector2f>()};
 					
-					node["object-coefficient"] >> objectCoefficient;
-					
-					{ positioning2 = new Positioning2{coefficient, objectCoefficient, offset, relativeTarget}; return true; }
+					if(node["parent-coefficient"]) {
+						positioning2 = new Positioning2{
+							node["parent-coefficient"].as<sf::Vector2f>(),
+							objectCoefficient, offset, false
+						};
+					} else if(node["target-coefficient"]) {
+						positioning2 = new Positioning2{
+							node["target-coefficient"].as<sf::Vector2f>(),
+							objectCoefficient, offset, true
+						};
+					} else {
+						throw YAML::BadConversion{node.Mark()};
+					}
+				} else if(node["parent-location"] && node["object-location"]) {
+					positioning2 = new Positioning2{
+						node["parent-location"].as<Location2>(),
+						node["object-location"].as<Location2>(),
+						offset
+					};
 				} else {
-					{ positioning2 = new Positioning2{coefficient, offset, relativeTarget}; return true; }
+					throw YAML::BadConversion{node.Mark()};
 				}
-			} else if(node["parent-location"] && node["object-location"]) {
-				Location2 parentLocation{node["parent-location"].as<Location2>()};
-				Location2 objectLocation{node["object-location"].as<Location2>()};
-				
-				{ positioning2 = new Positioning2{parentLocation, objectLocation, offset}; return true; }
 			}
 		}
-		throw YAML::BadConversion{node.Mark()};
+		return true;
 	}
 }

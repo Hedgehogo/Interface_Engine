@@ -43,7 +43,7 @@ namespace ui {
         return Location::center;
 	}
 	
-	Location2 createLocation2(Location vertical, Location horizontal) {
+	Location2 makeLocation2(Location vertical, Location horizontal) {
 		switch(vertical) {
 			case Location::origin:
 				switch(horizontal) {
@@ -111,7 +111,7 @@ namespace ui {
 		} else if(str == "down-right") {
 			location2 = Location2::downRight;
 		} else {
-			location2 = createLocation2(node["vertical"].as<Location>(), node["horizontal"].as<Location>());
+			location2 = makeLocation2(node["vertical"].as<Location>(), node["horizontal"].as<Location>());
 		}
 		return true;
 	}

@@ -1,17 +1,17 @@
 #pragma once
-#include "../basePositioning2.hpp"
+#include "../iPositioning2.hpp"
 
 namespace ui {
-	class Positioning2 : public BasePositioning2 {
+	class Positioning2 : public IPositioning2 {
 	protected:
 		sf::RenderTarget* renderTarget;
-		Positioning* horizontal;
-		Positioning* vertical;
+		IPositioning* horizontal;
+		IPositioning* vertical;
 		
 		void copy(Positioning2* positioning2);
 	
 	public:
-		Positioning2(Positioning* horizontal, Positioning* vertical);
+		Positioning2(IPositioning* horizontal, IPositioning* vertical);
 		
 		Positioning2(sf::Vector2f coefficient, sf::Vector2f offset = {}, bool relativeTarget = false);
 		

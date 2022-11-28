@@ -1,19 +1,19 @@
 #pragma once
-#include "../baseSizing2.hpp"
-#include "../../sizing/sizing.hpp"
+#include "../iSizing2.hpp"
+#include "../../sizing/iSizing.hpp"
 
 namespace ui {
-	class ConstRatioSizing2 : public BaseSizing2 {
+	class ConstRatioSizing2 : public ISizing2 {
 	protected:
 		sf::RenderTarget* renderTarget;
-		Sizing* sizing;
+		ISizing* sizing;
 		float ratio;
 		bool horizontal;
 		
 		void copy(ConstRatioSizing2* constRatioSizing2);
 	
 	public:
-		explicit ConstRatioSizing2(Sizing* sizing, float ratio = 1.0f, bool horizontal = true);
+		explicit ConstRatioSizing2(ISizing* sizing, float ratio = 1.0f, bool horizontal = true);
 		
 		explicit ConstRatioSizing2(float ratio = 1.0f, bool horizontal = true, bool relativeParent = true);
 		

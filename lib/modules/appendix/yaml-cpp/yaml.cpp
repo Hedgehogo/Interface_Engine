@@ -3,6 +3,7 @@
 #ifdef __GNUG__
 	#include <cstdlib>
 	#include <memory>
+#include <utility>
 	#include <cxxabi.h>
 	namespace ui {
 		std::string demangle(const char *name) {
@@ -36,6 +37,18 @@ namespace ui {
 			return false;
 		else
 			throw YAML::BadConversion{node.Mark()};
+	}
+	
+	bool convertBoolDefault(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue) {
+		if(node.IsDefined()) {
+			return convertBool(node, std::move(trueValue), std::move(falseValue));
+		} else {
+			return defaultValue;
+		}
+	}
+	
+	bool convBoolDef(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue) {
+		return convertBoolDefault(node, std::move(trueValue), std::move(falseValue), defaultValue);
 	}
 	
 	template<>

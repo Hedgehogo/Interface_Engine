@@ -1,18 +1,18 @@
 #pragma once
-#include "../baseSizing2.hpp"
-#include "../../sizing/sizing.hpp"
+#include "../iSizing2.hpp"
+#include "../../sizing/iSizing.hpp"
 
 namespace ui {
-	class Sizing2 : public BaseSizing2 {
+	class Sizing2 : public ISizing2 {
 	protected:
 		sf::RenderTarget* renderTarget;
-		Sizing* horizontal;
-		Sizing* vertical;
+		ISizing* horizontal;
+		ISizing* vertical;
 		
 		void copy(Sizing2* sizing2);
 		
 	public:
-		Sizing2(Sizing* horizontal, Sizing* vertical);
+		Sizing2(ISizing* horizontal, ISizing* vertical);
 		
 		Sizing2(bool relativeParent);
 		

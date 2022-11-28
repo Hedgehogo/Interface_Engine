@@ -3,11 +3,11 @@
 #include "../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-	class Sizing {
+	class ISizing {
 	public:
-		Sizing() = default;
+		ISizing() = default;
 		
-		virtual ~Sizing() = default;
+		virtual ~ISizing() = default;
 		
 		virtual void init(float normalSize) = 0;
 		
@@ -17,6 +17,6 @@ namespace ui {
 		
 		virtual float getParentSize(float objectSize);
 		
-		virtual Sizing* copy() = 0;
+		virtual ISizing* copy() = 0;
 	};
 }

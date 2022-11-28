@@ -1,8 +1,8 @@
 #pragma once
-#include "../baseSizing2.hpp"
+#include "../iSizing2.hpp"
 
 namespace ui {
-	class LambdaSizing2 : public BaseSizing2 {
+	class LambdaSizing2 : public ISizing2 {
 	protected:
 		sf::Vector2f (*sizing)(sf::Vector2f parentSize, sf::Vector2f targetSize, sf::Vector2f normalSize);
 		sf::Vector2f (*minSize)(sf::Vector2f objectMinSize);

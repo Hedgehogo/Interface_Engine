@@ -1,24 +1,24 @@
 #include "sizing2.hpp"
-#include "../../sizing/create/CreateSize.hpp"
+#include "../../sizing/make/makeSize.hpp"
 
 namespace ui {
-	Sizing2::Sizing2(Sizing *horizontal, Sizing *vertical) :
+	Sizing2::Sizing2(ISizing *horizontal, ISizing *vertical) :
 		horizontal(horizontal), vertical(vertical), renderTarget(nullptr) {}
 	
 	Sizing2::Sizing2(bool relativeParent) :
-		horizontal(createSize(relativeParent)), vertical(createSize(relativeParent)), renderTarget(nullptr) {}
+		horizontal(makeSize(relativeParent)), vertical(makeSize(relativeParent)), renderTarget(nullptr) {}
 	
 	Sizing2::Sizing2(sf::Vector2f constSize) :
-		horizontal(new ConstSizing{constSize.x}), vertical(new ConstSizing{constSize.y}), renderTarget(nullptr) {}
+		horizontal(makeSize(constSize.x)), vertical(makeSize(constSize.y)), renderTarget(nullptr) {}
 	
 	Sizing2::Sizing2(sf::Vector2f coefficient, sf::Vector2f addition, bool relativeTarget) :
-		horizontal(createSize(coefficient.x, addition.x, relativeTarget)),
-		vertical(createSize(coefficient.y, addition.y, relativeTarget)),
+		horizontal(makeSize(coefficient.x, addition.x, relativeTarget)),
+		vertical(makeSize(coefficient.y, addition.y, relativeTarget)),
 		renderTarget(nullptr) {}
 	
 	Sizing2::Sizing2(sf::Vector2f targetCoefficient, sf::Vector2f parentCoefficient, sf::Vector2f addition) :
-		horizontal(new SmartSizing{targetCoefficient.x, parentCoefficient.x, addition.x}),
-		vertical(new SmartSizing{targetCoefficient.y, parentCoefficient.y, addition.y}),
+		horizontal(makeSize(targetCoefficient.x, parentCoefficient.x, addition.x)),
+		vertical(makeSize(targetCoefficient.y, parentCoefficient.y, addition.y)),
 		renderTarget(nullptr) {}
 	
 	Sizing2::~Sizing2() {
@@ -33,7 +33,7 @@ namespace ui {
 	}
 	
 	sf::Vector2f Sizing2::findSize(sf::Vector2f parentSize) {
-		sf::Vector2f targetSize{static_cast<sf::Vector2f>(renderTarget->getSize())};
+		sf::Vector2f targetSize{renderTarget->getSize()};
 		return {horizontal->findSize(parentSize.x, targetSize.x), vertical->findSize(parentSize.y, targetSize.y)};
 	}
 	
@@ -52,66 +52,38 @@ namespace ui {
 	}
 	
 	bool convertPointer(const YAML::Node &node, Sizing2 *&sizing2) {
-		if(node["horizontal"] && node["vertical"]) {
-			Sizing* horizontal;
-			Sizing* vertical;
-			
-			node["horizontal"] >> horizontal;
-			node["vertical"] >> vertical;
-			
-			{ sizing2 = new Sizing2{horizontal, vertical}; return true; }
-		} else if(node["relative"]) {
-			std::string relative;
-			
-			node["relative"] >> relative;
-			
-			if(relative == "parent") {
-				{ sizing2 = new Sizing2{true}; return true; }
-			} else if(relative == "normal") {
-				{ sizing2 = new Sizing2{false}; return true; }
-			} else {
-				throw YAML::BadConversion{node["relative"].Mark()};
-			}
-		} else if(node["const-size"]) {
-			sf::Vector2f constSize;
-			
-			node["const-size"] >> constSize;
-			
-			{ sizing2 = new Sizing2{constSize}; return true; }
-		} else if(node["coefficient"]) {
-			sf::Vector2f coefficient;
-			sf::Vector2f addition{};
-			bool relativeTarget{false};
-			
-			node["coefficient"] >> coefficient;
-			if(node["addition"])
-				node["addition"] >>  addition;
-			if(node["relative"]) {
-				std::string relative;
-				
-				node["relative"] >> relative;
-				
-				if(relative == "target") {
-					relativeTarget = true;
-				} else if(relative != "parent") {
-					throw YAML::BadConversion{node["relative"].Mark()};
-				}
-			}
-			
-			{ sizing2 = new Sizing2{coefficient, addition, relativeTarget}; return true; }
-		} else if(node["target-coefficient"] && node["parent-coefficient"]) {
-			sf::Vector2f targetCoefficient;
-			sf::Vector2f parentCoefficient;
-			sf::Vector2f addition{};
-			
-			node["target-coefficient"] >> targetCoefficient;
-			node["parent-coefficient"] >> parentCoefficient;
-			if(node["addition"])
-				node["addition"] >> addition;
-			
-			{ sizing2 = new Sizing2{targetCoefficient, parentCoefficient, addition}; return true; }
+		if(node.IsScalar()) {
+			sizing2 = new Sizing2{node.as<sf::Vector2f>()};
 		} else {
-			throw YAML::BadConversion{node.Mark()};
+			if(node["horizontal"] && node["vertical"]) {
+				sizing2 = new Sizing2{
+					node["horizontal"].as<ISizing *>(),
+					node["vertical"].as<ISizing *>()
+				};
+			} else if(node["relative"]) {
+				sizing2 = new Sizing2{
+					convertBool(node["relative"], "parent", "normal")
+				};
+			} else if(node["const-size"]) {
+				sizing2 = new Sizing2{
+					node["const-size"].as<sf::Vector2f>()
+				};
+			} else if(node["coefficient"]) {
+				sizing2 = new Sizing2{
+					node["coefficient"].as<sf::Vector2f>(),
+					convDef(node["addition"], sf::Vector2f{}),
+					convBoolDef(node["relative"], "target", "parent")
+				};
+			} else if(node["target-coefficient"] && node["parent-coefficient"]) {
+				sizing2 = new Sizing2{
+					node["target-coefficient"].as<sf::Vector2f>(),
+					node["parent-coefficient"].as<sf::Vector2f>(),
+					convDef(node["addition"], sf::Vector2f{})
+				};
+			} else {
+				throw YAML::BadConversion{node.Mark()};
+			}
 		}
+		return true;
 	}
 }

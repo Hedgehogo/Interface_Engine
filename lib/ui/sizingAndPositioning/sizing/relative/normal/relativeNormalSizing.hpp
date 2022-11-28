@@ -1,8 +1,8 @@
 #pragma once
-#include "../../sizing.hpp"
+#include "../../iSizing.hpp"
 
 namespace ui {
-	class RelativeNormalSizing : public Sizing {
+	class RelativeNormalSizing : public ISizing {
 	protected:
 		float normalSize;
 		
@@ -19,6 +19,4 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, RelativeNormalSizing *&relativeNormalSizing);
-	
-	Sizing* createSize();
 }

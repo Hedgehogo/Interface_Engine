@@ -1,8 +1,8 @@
 #pragma once
-#include "../../sizing.hpp"
+#include "../../iSizing.hpp"
 
 namespace ui {
-	class RelativeParentSizing : public Sizing {
+	class RelativeParentSizing : public ISizing {
 	protected:
 		float addition;
 		

@@ -3,16 +3,16 @@
 #include "../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-	class Positioning {
+	class IPositioning {
 	public:
-		Positioning() = default;
+		IPositioning() = default;
 		
-		virtual ~Positioning() = default;
+		virtual ~IPositioning() = default;
 		
 		virtual float findPosition(float parentPosition, float objectSize, float parentSize, float targetSize) = 0;
 		
 		float operator()(float parentPosition, float objectSize, float parentSize, float targetSize);
 		
-		virtual Positioning* copy() = 0;
+		virtual IPositioning* copy() = 0;
 	};
 }

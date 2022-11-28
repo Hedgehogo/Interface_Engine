@@ -36,7 +36,7 @@ namespace ui {
 		{ matchSidesPositioning = new MatchSidesPositioning{parentSide, objectSide, offset}; return true; }
 	}
 	
-	/*Positioning *createPosition(Location parentSide, Location objectSide, float offset) {
+	/*Positioning *makePosition(Location parentSide, Location objectSide, float offset) {
 		return new MatchSidesPositioning{parentSide, objectSide, offset};
 	}*/
 }

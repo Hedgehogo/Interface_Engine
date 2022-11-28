@@ -1,8 +1,8 @@
 #pragma once
-#include "../../sizing.hpp"
+#include "../../iSizing.hpp"
 
 namespace ui {
-	class TargetCoefficientSizing : public Sizing {
+	class TargetCoefficientSizing : public ISizing {
 	protected:
 		float coefficient;
 		float addition;

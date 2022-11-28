@@ -2,9 +2,9 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 
 namespace ui {
-	class BaseSizing2 {
+	class ISizing2 {
 	public:
-		virtual ~BaseSizing2() = default;
+		virtual ~ISizing2() = default;
 		
 		virtual void init(sf::RenderTarget& renderTarget, sf::Vector2f normalSize) = 0;
 		
@@ -14,6 +14,6 @@ namespace ui {
 		
 		virtual sf::Vector2f operator()(sf::Vector2f parentSize);
 		
-		virtual BaseSizing2* copy() = 0;
+		virtual ISizing2* copy() = 0;
 	};
 }

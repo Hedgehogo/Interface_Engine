@@ -24,7 +24,7 @@ int main() {
 	ui::Caption::setDefaultSize(15);
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
-
+	
 	ui::Interface interface {
 		ui::loadFromYaml<ui::IScalable>("../example-resources/test.yaml"),
 		new ui::InteractionStack {

@@ -1,8 +1,8 @@
 #pragma once
-#include "../../positioning.hpp"
+#include "../../iPositioning.hpp"
 
 namespace ui {
-	class InternalTargetPositioning : public Positioning {
+	class InternalTargetPositioning : public IPositioning {
 	protected:
 		float coefficient;
 		float offset;
