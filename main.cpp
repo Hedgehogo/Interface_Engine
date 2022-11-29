@@ -17,27 +17,11 @@ int main() {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 1;
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
-	sf::View view(sf::Vector2f(0, 0), static_cast<sf::Vector2f>(window.getSize()));
+	sf::View view(sf::Vector2f(0, 0), sf::Vector2f(window.getSize()));
 	//window.setFramerateLimit(60);
 	
-	ui::Caption::setDefaultColor(sf::Color::White);
-	ui::Caption::setDefaultSize(15);
-	ui::BasePanel::setFullDebug(true);
-	ui::Character::setDebug(true);
-	
-	ui::Interface interface {
-		ui::loadFromYaml<ui::IScalable>("../example-resources/test.yaml"),
-		new ui::InteractionStack {
-			std::vector<ui::IInteraction *> {
-				ui::MouseLambdaInteraction::debug.copy(),
-//				new ui::OneButtonInteraction( new ui::ChangeObjectEvent { testVariable->getValue(), 1 }, ui::Key::mouseLeft)
-			}
-		}
-	};
-	
-	interface.init(window);
-    window.setSize(sf::Vector2u(ui::max(interface.getNormalSize(), {1, 1})));
-    interface.setSize(ui::max(interface.getNormalSize(), {1, 1}));
+	ui::Interface interface {window, "../example-resources/test.yaml"};
+	interface.setRenderWindowSize(window);
 	
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};
@@ -45,7 +29,6 @@ int main() {
 	system("i3 floating toggle");
 #endif
 	while(window.isOpen()) {
-		
         lastFPS[0] = 1.f / clock.restart().asSeconds();
 		std::rotate(lastFPS.begin(), lastFPS.begin() + 1, lastFPS.end());
 		float mediumFPS = calculateMediumFPS(lastFPS);

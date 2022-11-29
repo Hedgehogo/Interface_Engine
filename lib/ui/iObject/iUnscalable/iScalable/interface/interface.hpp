@@ -29,6 +29,12 @@ namespace ui {
 		
 		explicit Interface(IScalable *object, InteractionStack *interactionStack = new InteractionStack{});
 		
+		explicit Interface(const std::string &filePath, InteractionStack *interactionStack = new InteractionStack{});
+		
+		explicit Interface(sf::RenderTarget &renderTarget, IScalable *object, InteractionStack *interactionStack = new InteractionStack{});
+		
+		explicit Interface(sf::RenderTarget &renderTarget, const std::string &filePath, InteractionStack *interactionStack = new InteractionStack{});
+		
 		~Interface() override;
 
 		[[nodiscard]] sf::RenderTarget *getRenderTarget();
@@ -44,6 +50,8 @@ namespace ui {
 		[[nodiscard]] PanelManager *getPanelManager();
 
 		[[nodiscard]] IScalable *getObject();
+		
+		void setRenderWindowSize(sf::RenderWindow& window);
 		
 		void draw() override;
 		

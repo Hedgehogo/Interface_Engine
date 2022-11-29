@@ -25,6 +25,17 @@ namespace ui {
 	Interface::Interface(IScalable* object, InteractionStack *interactionStack) :
 		object(object), interactionStack(interactionStack), renderTarget(nullptr), interactionManager(), panelManager(), initialized(false), active(true) {}
 	
+	Interface::Interface(const std::string &filePath, InteractionStack *interactionStack) :
+		Interface(ui::loadFromYaml<ui::IScalable>(filePath), interactionStack) {}
+	
+	Interface::Interface(sf::RenderTarget &renderTarget, IScalable *object, InteractionStack *interactionStack) :
+		Interface(object, interactionStack) {
+		init(renderTarget);
+	}
+	
+	Interface::Interface(sf::RenderTarget &renderTarget, const std::string &filePath, InteractionStack *interactionStack) :
+		Interface(renderTarget, ui::loadFromYaml<ui::IScalable>(filePath), interactionStack) {}
+	
 	Interface::~Interface() {
 		delete object;
 	}
@@ -125,5 +136,10 @@ namespace ui {
 
 	IScalable *Interface::getObject() {
 		return object;
+	}
+	
+	void Interface::setRenderWindowSize(sf::RenderWindow &window) {
+		window.setSize(sf::Vector2u(ui::max(getNormalSize(), sf::Vector2f(window.getSize()))));
+		setSize(sf::Vector2f(window.getSize()));
 	}
 }
