@@ -25,6 +25,7 @@ namespace ui
 		InteractionStack *interactionStack;
 
 		PanelManagerInterceptor panelManagerInterceptor;
+
 	public:
 		LayerWithSetableObject(sf::Vector2f minSize, IScalable* object);
 

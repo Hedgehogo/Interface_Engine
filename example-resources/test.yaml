@@ -1,27 +1,4 @@
-type: LWCB
-side: right
-border-distance: 30
-const-object:
-  type: Slider
-  slider: 525252
-  background: 37383A88
-  value:
-    var: a
-second-object:
-  type: LWCBe
-  bezel: red
-  thickness: 10
-  object:
-    type: SL
-    object:
-      type: Text
-      text-blocks:
-        - type: TB
-          text:
-            directory: ../example-resources
-            default-language: en
-            language: ru
-            key: Install
-      font: ../example-resources/msyh.ttc
-    normal-object-position:
-      var: a
+type: LWMB
+first-object: red
+second-object: blue
+border-direction: horizontal

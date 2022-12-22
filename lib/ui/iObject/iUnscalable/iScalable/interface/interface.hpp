@@ -15,6 +15,7 @@ namespace ui {
 		InteractionManager interactionManager;
 		InteractionStack* interactionStack;
 		PanelManager panelManager;
+		AnimationManager animationManager;
 		IScalable *object;
 		sf::Vector2f mousePosition;
 		bool initialized;
@@ -27,7 +28,7 @@ namespace ui {
 	public:
 		void init(sf::RenderTarget &renderTarget);
 		
-		explicit Interface(IScalable *object, InteractionStack *interactionStack = new InteractionStack{});
+		explicit Interface(IScalable *object, AnimationManager animationManager = AnimationManager{{}}, InteractionStack *interactionStack = new InteractionStack{});
 		
 		~Interface() override;
 

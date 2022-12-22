@@ -22,8 +22,8 @@ namespace ui {
 		}
 	}
 	
-	Interface::Interface(IScalable* object, InteractionStack *interactionStack) :
-		object(object), interactionStack(interactionStack), renderTarget(nullptr), interactionManager(), panelManager(), initialized(false), active(true) {}
+	Interface::Interface(IScalable *object, AnimationManager animationManager, InteractionStack *interactionStack) :
+		object(object), animationManager(std::move(animationManager)), interactionStack(interactionStack), renderTarget(nullptr), interactionManager(), panelManager(), initialized(false), active(true) {}
 	
 	Interface::~Interface() {
 		delete object;
@@ -63,6 +63,7 @@ namespace ui {
 	}
 
 	void Interface::update() {
+		animationManager.update();
 		panelManager.update();
 		updateManager.update();
 		updateCluster(mousePosition);
@@ -88,9 +89,9 @@ namespace ui {
 		}
 		return true;
 	}
-	
+
 	Interface *Interface::copy() {
-		Interface* interface {new Interface{object->copy(), interactionStack}};
+		Interface* interface {new Interface{object->copy(), *animationManager.copy(), interactionStack}};
 		interface->init(*renderTarget);
 		return interface;
 	}

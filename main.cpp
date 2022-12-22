@@ -26,16 +26,60 @@ int main() {
 	ui::BasePanel::setFullDebug(true);
 	ui::Character::setDebug(true);
 
-	ui::Interface interface {
-		ui::loadFromYaml<ui::IScalable>("../example-resources/test.yaml"),
-		new ui::InteractionStack {
-			std::vector<ui::IInteraction *> {
-				ui::MouseLambdaInteraction::debug.copy(),
-//				new ui::OneButtonInteraction( new ui::ChangeObjectEvent { testVariable->getValue(), 1 }, ui::Key::mouseLeft)
+	ui::AnimationVariable<float> border{0.5, new ui::ConvertToUseCoefficientWithRange<float>{}};
+
+	ui::ChangeVariableByStraightLine changer = ui::makeChangeVariableByStraightLine(0, 1, 1);
+	ui::ChangeVariableByStraightLine changer2 = ui::makeChangeVariableByStraightLine(1, 0, 1);
+
+	ui::AnimationUnit* animationUnit1 = new ui::AnimationUnit{
+		{
+			ui::AnimationUnit::AnimationVariable{
+				&border,
+				{
+					&changer2
+				}
+			}
+		},
+		nullptr
+	};
+
+	ui::AnimationUnit* animationUnit = new ui::AnimationUnit{
+		{
+			ui::AnimationUnit::AnimationVariable{
+				&border,
+				{
+					&changer,
+					&changer2
+				}
 			}
 		}
 	};
-	
+
+	animationUnit1->setNextUnit(animationUnit);
+
+	ui::AnimationManager animManager{
+		{
+			new ui::Animator{
+				animationUnit
+			}
+		}
+	};
+
+	//ui::Interface interface{ui::loadFromYaml<ui::IScalable>("../example-resources/test.yaml")};
+	ui::Interface interface{
+		new ui::LayerWithMovableBorder{
+			new ui::FullColor{
+				sf::Color::Red,
+			},
+			new ui::FullColor{
+				sf::Color::Blue,
+			},
+			true,
+			border
+		},
+		animManager
+	};
+
 	interface.init(window);
     window.setSize(sf::Vector2u(ui::max(interface.getNormalSize(), {1, 1})));
     interface.setSize(ui::max(interface.getNormalSize(), {1, 1}));
