@@ -30,11 +30,11 @@ namespace ui {
 		
 		explicit Interface(IScalable *object, AnimationManager animationManager = AnimationManager{{}}, InteractionStack *interactionStack = new InteractionStack{});
 		
-		explicit Interface(const std::string &filePath, InteractionStack *interactionStack = new InteractionStack{});
+		explicit Interface(const std::string &filePath, AnimationManager animationManager = AnimationManager{{}}, InteractionStack *interactionStack = new InteractionStack{});
 		
-		explicit Interface(sf::RenderTarget &renderTarget, IScalable *object, InteractionStack *interactionStack = new InteractionStack{});
+		explicit Interface(sf::RenderTarget &renderTarget, IScalable *object, AnimationManager animationManager = AnimationManager{{}}, InteractionStack *interactionStack = new InteractionStack{});
 		
-		explicit Interface(sf::RenderTarget &renderTarget, const std::string &filePath, InteractionStack *interactionStack = new InteractionStack{});
+		explicit Interface(sf::RenderTarget &renderTarget, const std::string &filePath, AnimationManager animationManager = AnimationManager{{}}, InteractionStack *interactionStack = new InteractionStack{});
 		
 		~Interface() override;
 
