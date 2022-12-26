@@ -164,7 +164,7 @@ namespace ui {
 		IScalable *firstObject;
 		IScalable *secondObject;
 		bool isHorizontalBorder{false};
-		AnimationVariable<float> borderValue = AnimationVariable<float>{0.5, new ConvertToUseCoefficientWithRange<float>{}};
+		AnimationVariable<float> *borderValue;
 		int borderInteractionSize{5};
 		sf::Vector2f minSize{};
 		node["first-object"] >> firstObject;
@@ -176,15 +176,15 @@ namespace ui {
 		} else if(borderDirection != "vertical") {
 			throw YAML::BadConversion{node.Mark()};
 		}
-/*
 		if(node["border-value"])
 			node["border-value"] >> borderValue;
-*/
+		else
+			borderValue = new AnimationVariable<float>{0.5, new ConvertToUseCoefficientWithRange<float>{}};
 		if(node["border-interaction-size"])
 			node["border-interaction-size"] >> borderInteractionSize;
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		
-		{ layerWithMovableBorder = new LayerWithMovableBorder{firstObject, secondObject, isHorizontalBorder, borderValue, borderInteractionSize}; return true; }
+		{ layerWithMovableBorder = new LayerWithMovableBorder{firstObject, secondObject, isHorizontalBorder, (*borderValue), borderInteractionSize}; return true; }
 	}
 }

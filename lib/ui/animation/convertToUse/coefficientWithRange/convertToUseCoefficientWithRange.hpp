@@ -11,7 +11,12 @@ namespace ui {
 
 	public:
 		ConvertToUseCoefficientWithRange(float coefficient = 1, float max = 1, float min = 0);
+
+
     };
+
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, ConvertToUseCoefficientWithRange<T>*& convertToUseCoefficientWithRange);
 }
 
 #include "convertToUseCoefficientWithRange.inl"

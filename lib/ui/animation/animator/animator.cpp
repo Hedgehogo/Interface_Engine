@@ -14,4 +14,11 @@ namespace ui {
 	Animator::~Animator() {
 		delete unit;
 	}
+
+	bool convertPointer(const YAML::Node &node, Animator*& animator){
+		animator = new Animator{
+			node["unit"].as<IAnimatorUnit*>()
+		};
+		return true;
+	}
 } // ui

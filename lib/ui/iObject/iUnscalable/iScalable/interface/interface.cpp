@@ -127,4 +127,13 @@ namespace ui {
 	IScalable *Interface::getObject() {
 		return object;
 	}
+
+	bool convertPointer(const YAML::Node &node, Interface*& interface){
+		interface = new Interface{
+			node["object"].as<IScalable*>(),
+			convDef(node["animation-manager"], AnimationManager{}),
+			convDef(node["interaction-stack"], new InteractionStack{}),
+		};
+		return true;
+	}
 }

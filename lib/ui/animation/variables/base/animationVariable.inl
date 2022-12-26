@@ -50,4 +50,15 @@ namespace ui {
 		return value;
 	}
 
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, AnimationVariable<T>*& animationVariable){
+		animationVariable = new AnimationVariable<T>{
+			node["var"].as<T>(),
+			node["convert-to-use"].as<IConvertToUse<T> *>(),
+			convDef(node["auto-set"], true)
+		};
+
+		if(node["name"]) animationVariablesBuffer[node["name"].as<std::string>()] = animationVariable;
+		return true;
+	}
 }

@@ -12,7 +12,24 @@ namespace ui {
 		return (k * x) + b;
 	}
 
-	ChangeVariableByStraightLine makeChangeVariableByStraightLine(float start, float end, float length) {
-		return ChangeVariableByStraightLine((end-start) / length, length, start);
+	ChangeVariableByStraightLine* makeChangeVariableByStraightLine(float start, float end, float length) {
+		return new ChangeVariableByStraightLine((end-start) / length, length, start);
+	}
+
+	bool convertPointer(const YAML::Node &node, ChangeVariableByStraightLine*& changeVariableByStraightLine){
+		if (node["k"]){
+			changeVariableByStraightLine = new ChangeVariableByStraightLine{
+				node["k"].as<float>(),
+				node["length"].as<float>(),
+				convDef(node["b"], 0.f)
+			};
+		}else{
+			changeVariableByStraightLine = makeChangeVariableByStraightLine(
+				node["start"].as<float>(),
+				node["end"].as<float>(),
+				node["length"].as<float>()
+			);
+		}
+		return true;
 	}
 }

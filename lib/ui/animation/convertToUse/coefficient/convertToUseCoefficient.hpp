@@ -11,8 +11,11 @@ namespace ui {
 		T convert(float value) override;
 
 	public:
-		explicit ConvertToUseCoefficient(float coefficient);
+		explicit ConvertToUseCoefficient(float coefficient = 1);
 	};
+
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, ConvertToUseCoefficient<T>*& convertToUseCoefficient);
 }
 
 #include "convertToUseCoefficient.inl"

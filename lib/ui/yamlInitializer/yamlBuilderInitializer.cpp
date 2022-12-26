@@ -59,7 +59,12 @@ namespace ui {
 		inherit<IInteraction, OneKeyInteraction>({"OKI"});
 		inherit<IInteraction, HotkeyInteraction>({"HI"});
 		inherit<IInteraction, EmptyInteraction>({"EI"});
-		
+
+		inherit<IAnimatorUnit, AnimationUnit>({"Animation", "AU"});
+		inherit<BaseChangeVariable, ChangeVariableByStraightLine>({"CVByStraightLine", "CVBSL"});
+		inherit<IConvertToUse<float>, ConvertToUseCoefficient<float>>({"CTUCoefficientf", "CTUCf"});
+		inherit<IConvertToUse<float>, ConvertToUseCoefficientWithRange<float>>({"CTUCoefficientWithRangef", "CTUCWRf"});
+
 		inherit<OnlyDrawable, Empty>();
 		inherit<OnlyDrawable, FullColor>();
 		inherit<OnlyDrawable, RoundedRectangle>();

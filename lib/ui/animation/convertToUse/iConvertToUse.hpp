@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+
 namespace ui {
 	template<typename T>
 	class IConvertToUse {

@@ -11,7 +11,7 @@ namespace ui {
 		std::vector<Animator*> animators;
 
 	public:
-		explicit AnimationManager(std::vector<Animator*> animators);
+		explicit AnimationManager(std::vector<Animator*> animators = {});
 
 		virtual void update();
 
@@ -19,4 +19,7 @@ namespace ui {
 
 		virtual ~AnimationManager();
 	};
+
+	template<>
+	bool convert(const YAML::Node &node, AnimationManager& animationManager);
 } // ui

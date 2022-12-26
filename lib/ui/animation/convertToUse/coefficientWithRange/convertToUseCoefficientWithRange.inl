@@ -12,4 +12,15 @@ namespace ui {
 	T ConvertToUseCoefficientWithRange<T>::convert(float value) {
 		return std::max(min, std::min(max, ConvertToUseCoefficient<T>::convert(value)));
 	}
+
+
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, ConvertToUseCoefficientWithRange<T>*& convertToUseCoefficientWithRange){
+		convertToUseCoefficientWithRange = new ConvertToUseCoefficientWithRange<T>{
+			convDef(node["coefficient"], 1.f),
+			convDef(node["max"], 1.f),
+			convDef(node["min"], 0.f)
+		};
+		return true;
+	}
 }

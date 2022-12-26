@@ -40,6 +40,9 @@ namespace ui {
 	typedef AnimationVariable<float> AVariablef;
 	typedef AnimationVariable<int> AnimationVariablei;
 	typedef AnimationVariable<int> AVariablei;
+
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, AnimationVariable<T>*& animationUnit);
 }
 
 #include "animationVariable.inl"

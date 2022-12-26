@@ -8,5 +8,7 @@ namespace ui {
 		void restart() override;
 
 		IAnimatorUnit *update(float time) override;
+
+		void setNextUnit(IAnimatorUnit *nextUnit) override;
 	};
 } // ui

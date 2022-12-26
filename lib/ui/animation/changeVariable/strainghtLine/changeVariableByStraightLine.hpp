@@ -17,5 +17,8 @@ namespace ui {
 		float operator()(float x) override;
 	};
 
-	ChangeVariableByStraightLine makeChangeVariableByStraightLine(float start, float end, float length);
+	ChangeVariableByStraightLine* makeChangeVariableByStraightLine(float start, float end, float length);
+
+
+	bool convertPointer(const YAML::Node &node, ChangeVariableByStraightLine*& changeVariableByStraightLine);
 }

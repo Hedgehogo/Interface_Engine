@@ -9,29 +9,35 @@
 namespace ui {
 	class AnimationUnit : public IAnimatorUnit{
 	public:
-		struct AnimationVariable{
+		struct Variable{
 			IAnimationVariable* animationVariable;
 			std::vector<BaseChangeVariable*> changeVariables;
-			float speed = 1;
 			unsigned int activeChanger = 0;
 			float timeStartChanger = 0;
+
+			Variable(IAnimationVariable *animationVariable = nullptr, std::vector<BaseChangeVariable *> changeVariables = {});
 		};
 
 	protected:
 		IAnimatorUnit* nextUnit;
 		float startAnimation;
-		std::vector<AnimationVariable> animationVariables;
-		std::vector<AnimationVariable*> animationUpdatableVariables;
+		std::vector<Variable> animationVariables;
+		std::vector<Variable*> animationUpdatableVariables;
 	public:
 
-		explicit AnimationUnit(std::vector<AnimationVariable> animationVariables, IAnimatorUnit *nextUnit = new EmptyAnimatorUnit());
+		explicit AnimationUnit(std::vector<Variable> animationVariables, IAnimatorUnit *nextUnit = new EmptyAnimatorUnit());
 
 		void restart() override;
 
 		IAnimatorUnit* update(float time) override;
 
-		void setNextUnit(IAnimatorUnit *nextUnit);
+		void setNextUnit(IAnimatorUnit *nextUnit) override;
 
 		~AnimationUnit();
 	};
+
+	template<>
+	bool convert(const YAML::Node &node, AnimationUnit::Variable& animationUnit);
+
+	bool convertPointer(const YAML::Node &node, AnimationUnit*& animationUnit);
 } // ui
