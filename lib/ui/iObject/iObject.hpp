@@ -5,6 +5,7 @@
 #include "../interaction/interactionStack/interactionStack.hpp"
 #include "../interaction/interactionManager/interactionManager.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "../animation/manager/animationManager.hpp"
 
 typedef unsigned uint;
 

@@ -20,8 +20,17 @@ int main() {
 	sf::View view(sf::Vector2f(0, 0), sf::Vector2f(window.getSize()));
 	//window.setFramerateLimit(60);
 	
-	ui::Interface interface {window, "../example-resources/test.yaml"};
-	interface.setRenderWindowSize(window);
+	ui::Caption::setDefaultColor(sf::Color::White);
+	ui::Caption::setDefaultSize(15);
+	ui::BasePanel::setFullDebug(true);
+	ui::Character::setDebug(true);
+
+	ui::Interface interface = (*ui::loadFromYaml<ui::Interface>("../example-resources/test.yaml"));
+	//ui::Interface interface{ui::loadFromYaml<ui::IScalable>("../example-resources/test.yaml")};
+
+	interface.init(window);
+    window.setSize(sf::Vector2u(ui::max(interface.getNormalSize(), {1, 1})));
+    interface.setSize(ui::max(interface.getNormalSize(), {1, 1}));
 	
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};

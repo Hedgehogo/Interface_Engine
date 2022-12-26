@@ -16,5 +16,12 @@ namespace ui {
 	void InteractionStack::add(IInteraction *element) {
 		interactionStack.push_back(element);
 	}
+
+	bool convertPointer(const YAML::Node &node, InteractionStack*& interactionStack){
+		interactionStack = new InteractionStack{
+			node["interaction"] ? std::vector<IInteraction *>{node["interaction"].as<IInteraction*>()} : node["interaction"].as<std::vector<IInteraction*>>()
+		};
+		return true;
+	}
 }
 

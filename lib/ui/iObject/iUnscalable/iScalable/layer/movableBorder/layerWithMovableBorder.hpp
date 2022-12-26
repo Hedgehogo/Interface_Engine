@@ -4,11 +4,14 @@
 #include "../../../../layout/twoObjects/layoutWithTwoObjects.hpp"
 #include "../../../../../interaction/iInteraction/block/pressed/pressedInteraction.hpp"
 #include "interaction/event/movableBorderEvent.hpp"
+#include "../../../../../animation/variables/base/animationVariable.hpp"
+#include "../../../../../animation/convertToUse/coefficientWithRange/convertToUseCoefficientWithRange.hpp"
 
 namespace ui{
     class LayerWithMovableBorder : public Layer, public LayoutWithTwoObjects, public Interactive_Simple {
         PressedInteraction pressedInteraction;
-        float borderValue, borderValueNow;
+        float borderValueNow;
+	    AnimationVariable<float>& borderValue;
         int borderInteractionSize;
 		bool isHorizontalBorder;
 		
@@ -17,7 +20,9 @@ namespace ui{
 		
 		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
 	
-		LayerWithMovableBorder(IScalable *firstObject, IScalable *secondObject, bool isHorizontalBorder , float borderValue = 0.5, int borderInteractionSize = 5, sf::Vector2f minSize = {0, 0});
+		LayerWithMovableBorder(IScalable *firstObject, IScalable *secondObject, bool isHorizontalBorder ,
+		                       AnimationVariable<float>& borderValue = *(new AnimationVariable<float>{0.5, new ConvertToUseCoefficientWithRange<float>{}}),
+		                       int borderInteractionSize = 5, sf::Vector2f minSize = {0, 0});
 
         float getBorderValue();
 

@@ -1,7 +1,97 @@
-type: LayerWithPanel
-object: blue
-panel:
-  object: red
-  sizing:
-    coefficient: 0.5, 0.5
-  positioning: 0.5, 0.5
+animation-manager:
+  animator:
+    unit:
+      type: AU
+      name: anim
+      next:
+        type: AU
+        next: anim
+        var:
+          var: b
+          change-variables:
+            - type: CVBSL
+              start: 0
+              end: 1
+              length: 1
+      vars:
+        - var: a
+          change-variables:
+            - type: CVBSL
+              start: 0
+              end: 1
+              length: 1
+            - type: CVBSL
+              start: 1
+              end: 0
+              length: 1
+        - var: b
+          change-variables:
+            - type: CVBSL
+              start: 1
+              end: 0
+              length: 1
+            - type: CVBSL
+              start: 0
+              end: 1
+              length: 3
+        - var: c
+          change-variables:
+            - type: CVBSL
+              start: 1
+              end: 0
+              length: 2
+            - type: CVBSL
+              start: 0
+              end: 1
+              length: 3
+        - var: d
+          change-variables:
+            - type: CVBSL
+              start: 1
+              end: 0
+              length: 2
+            - type: CVBSL
+              start: 0
+              end: 1
+              length: 3
+object:
+  type: LWBV
+  border-direction: horizontal
+  first-object:
+    type: LWMB
+    border-direction: horizontal
+    first-object:
+      type: LWMB
+      border-direction: horizontal
+      first-object: cyan
+      second-object: magenta
+      border-value:
+        name: c
+        var: 0.5
+        convert-to-use:
+          type: CTUCWRf
+    second-object:
+      type: LWMB
+      border-direction: horizontal
+      first-object: green
+      second-object: yellow
+      border-value:
+        name: d
+        var: 0.5
+        convert-to-use:
+          type: CTUCWRf
+    border-value:
+      name: a
+      var: 0.5
+      convert-to-use:
+        type: CTUCWRf
+  second-object:
+    type: LWMB
+    border-direction: horizontal
+    first-object: red
+    second-object: blue
+    border-value:
+      name: b
+      var: 0.5
+      convert-to-use:
+        type: CTUCWRf

@@ -22,20 +22,20 @@ namespace ui {
 		}
 	}
 	
-	Interface::Interface(IScalable* object, InteractionStack *interactionStack) :
-		object(object), interactionStack(interactionStack), renderTarget(nullptr), interactionManager(), panelManager(), initialized(false), active(true) {}
+	Interface::Interface(IScalable *object, AnimationManager animationManager, InteractionStack *interactionStack) :
+		object(object), animationManager(std::move(animationManager)), interactionStack(interactionStack), renderTarget(nullptr), interactionManager(), panelManager(), initialized(false), active(true) {}
 	
-	Interface::Interface(const std::string &filePath, InteractionStack *interactionStack) :
-		Interface(ui::loadFromYaml<ui::IScalable>(filePath), interactionStack) {}
-	
-	Interface::Interface(sf::RenderTarget &renderTarget, IScalable *object, InteractionStack *interactionStack) :
-		Interface(object, interactionStack) {
+	Interface::Interface(const std::string &filePath, AnimationManager animationManager, InteractionStack *interactionStack) :
+		Interface(ui::loadFromYaml<ui::IScalable>(filePath), animationManager, interactionStack) {}
+
+	Interface::Interface(sf::RenderTarget &renderTarget, IScalable *object, AnimationManager animationManager, InteractionStack *interactionStack) :
+		Interface(object, animationManager, interactionStack) {
 		init(renderTarget);
 	}
-	
-	Interface::Interface(sf::RenderTarget &renderTarget, const std::string &filePath, InteractionStack *interactionStack) :
-		Interface(renderTarget, ui::loadFromYaml<ui::IScalable>(filePath), interactionStack) {}
-	
+
+	Interface::Interface(sf::RenderTarget &renderTarget, const std::string &filePath, AnimationManager animationManager, InteractionStack *interactionStack) :
+		Interface(renderTarget, ui::loadFromYaml<ui::IScalable>(filePath), animationManager, interactionStack) {}
+
 	Interface::~Interface() {
 		delete object;
 	}
@@ -74,6 +74,7 @@ namespace ui {
 	}
 
 	void Interface::update() {
+		animationManager.update();
 		panelManager.update();
 		updateManager.update();
 		updateCluster(mousePosition);
@@ -99,9 +100,9 @@ namespace ui {
 		}
 		return true;
 	}
-	
+
 	Interface *Interface::copy() {
-		Interface* interface {new Interface{object->copy(), interactionStack}};
+		Interface* interface {new Interface{object->copy(), *animationManager.copy(), interactionStack}};
 		interface->init(*renderTarget);
 		return interface;
 	}
@@ -137,9 +138,18 @@ namespace ui {
 	IScalable *Interface::getObject() {
 		return object;
 	}
-	
+
 	void Interface::setRenderWindowSize(sf::RenderWindow &window) {
 		window.setSize(sf::Vector2u(ui::max(getNormalSize(), sf::Vector2f(window.getSize()))));
 		setSize(sf::Vector2f(window.getSize()));
+	}
+
+	bool convertPointer(const YAML::Node &node, Interface*& interface){
+		interface = new Interface{
+			node["object"].as<IScalable*>(),
+			convDef(node["animation-manager"], AnimationManager{}),
+			convDef(node["interaction-stack"], new InteractionStack{}),
+		};
+		return true;
 	}
 }

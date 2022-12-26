@@ -15,6 +15,7 @@ namespace ui {
 		InteractionManager interactionManager;
 		InteractionStack* interactionStack;
 		PanelManager panelManager;
+		AnimationManager animationManager;
 		IScalable *object;
 		sf::Vector2f mousePosition;
 		bool initialized;
@@ -27,7 +28,7 @@ namespace ui {
 	public:
 		void init(sf::RenderTarget &renderTarget);
 		
-		explicit Interface(IScalable *object, InteractionStack *interactionStack = new InteractionStack{});
+		explicit Interface(IScalable *object, AnimationManager animationManager = AnimationManager{{}}, InteractionStack *interactionStack = new InteractionStack{});
 		
 		explicit Interface(const std::string &filePath, InteractionStack *interactionStack = new InteractionStack{});
 		
@@ -79,4 +80,6 @@ namespace ui {
 		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue = 0, uint hueOffset = 36) override;
 	};
+
+	bool convertPointer(const YAML::Node &node, Interface*& interface);
 }
