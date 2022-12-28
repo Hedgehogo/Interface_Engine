@@ -63,8 +63,16 @@ namespace ui {
 
 	template<>
 	bool convert(const YAML::Node &node, AnimationUnit::Variable& animationVar){
+		IAnimationVariable *animationVariable;
+
+		if (node["var"].IsScalar()){
+			animationVariable = animationVariablesBuffer[node["var"].as<std::string>()];
+		}else{
+			animationVariable = node["var"].as<IAnimationVariable*>();
+		}
+
 		animationVar = AnimationUnit::Variable{
-			animationVariablesBuffer[node["var"].as<std::string>()],
+			animationVariable,
 			node["change-variable"] ? std::vector<BaseChangeVariable*>{node["change-variable"].as<BaseChangeVariable*>()} : node["change-variables"].as<std::vector<BaseChangeVariable*>>()
 		};
 		return true;
