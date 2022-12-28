@@ -1,4 +1,5 @@
 #include "animationUnit.hpp"
+#include "../../../exception/notExistAnimationVariable.hpp"
 
 namespace ui {
 	AnimationUnit::Variable::Variable(IAnimationVariable *animationVariable, std::vector<BaseChangeVariable *> changeVariables) : animationVariable(animationVariable), changeVariables(changeVariables) {}
@@ -66,7 +67,10 @@ namespace ui {
 		IAnimationVariable *animationVariable;
 
 		if (node["var"].IsScalar()){
-			animationVariable = animationVariablesBuffer[node["var"].as<std::string>()];
+			auto nameVar = node["var"].as<std::string>();
+			if (animationVariablesBuffer.find(nameVar) == animationVariablesBuffer.end())
+				throw NotExistAnimationVariable(nameVar);
+			animationVariable = animationVariablesBuffer[nameVar];
 		}else{
 			animationVariable = node["var"].as<IAnimationVariable*>();
 		}
