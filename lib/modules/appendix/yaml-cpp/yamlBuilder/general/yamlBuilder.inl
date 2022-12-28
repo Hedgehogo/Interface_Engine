@@ -99,6 +99,7 @@ namespace ui {
 	template <typename Type>
 	template <typename Derived>
 	typename YamlBuilder<Type>::template is_derived<Derived, void> YamlBuilder<Type>::addType() {
+		if(names.empty()) names.push_back(typeNameDeform(type_name<Type>()));
 		types.push_back(&YamlBuilder<Derived>::builder);
 	}
 	
