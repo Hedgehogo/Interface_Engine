@@ -148,8 +148,19 @@ namespace ui {
 		interface = new Interface{
 			node["object"].as<IScalable*>(),
 			convDef(node["animation-manager"], AnimationManager{}),
-			convDef(node["interaction-stack"], new InteractionStack{}),
+			convDef(node["interaction-stack"], new InteractionStack{})
 		};
 		return true;
+	}
+
+	Interface makeInterface(sf::RenderTarget &renderTarget, const std::string &filePath) {
+		YAML::Node node{YAML::LoadFile(filePath)};
+
+		return Interface{
+			renderTarget,
+		    node["object"].as<IScalable*>(),
+		    convDef(node["animation-manager"], AnimationManager{}),
+		    convDef(node["interaction-stack"], new InteractionStack{})
+		};
 	}
 }
