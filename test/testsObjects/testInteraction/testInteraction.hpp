@@ -32,16 +32,18 @@ public:
 	};
 
 protected:
-	Priority priority;
 	Processed processed;
-	bool updateResult;
-
-	TestInteraction* testInteraction;
+	Priority priority;
+	bool blocked;
 
 public:
 	TestInteraction(Priority priority = Priority::medium, bool blocked = false);
 
 	Processed getProcessed();
+
+	bool isBlocked() const override;
+
+	Priority getPriority() const override;
 
 	void start(sf::Vector2i mousePosition) override;
 

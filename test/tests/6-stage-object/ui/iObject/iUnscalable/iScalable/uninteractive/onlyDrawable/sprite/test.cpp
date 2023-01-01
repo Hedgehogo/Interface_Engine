@@ -8,11 +8,6 @@ TEST(Sprite, draw) {
         new ui::Interface{
             new ui::Sprite{
                 testTexture
-            },
-            new ui::InteractionStack {
-                std::vector<ui::IInteraction *> {
-                    ui::MouseLambdaInteraction::debug.copy(),
-                }
             }
         }
     };
