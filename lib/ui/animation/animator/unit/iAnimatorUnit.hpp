@@ -7,10 +7,12 @@ namespace ui {
 	public:
 		virtual void restart() = 0;
 
-		virtual IAnimatorUnit* update(float time) = 0;
+		virtual std::vector<IAnimatorUnit*> update(float time) = 0;
 
-		virtual void setNextUnit(IAnimatorUnit *nextUnit) = 0;
-		
+		virtual void setNextUnits(std::vector<IAnimatorUnit*> nextUnits) = 0;
+
+		virtual void addNextUnits(IAnimatorUnit* nextUnit) = 0;
+
 		virtual ~IAnimatorUnit() = default; 
 	};
 } // ui

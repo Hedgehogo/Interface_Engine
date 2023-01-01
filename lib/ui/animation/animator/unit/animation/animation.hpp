@@ -7,7 +7,7 @@
 #include "../empty/emptyAnimatorUnit.hpp"
 
 namespace ui {
-	class AnimationUnit : public IAnimatorUnit{
+	class Animation : public IAnimatorUnit{
 	public:
 		struct Variable{
 			IAnimationVariable* animationVariable;
@@ -19,25 +19,27 @@ namespace ui {
 		};
 
 	protected:
-		IAnimatorUnit* nextUnit;
-		float startAnimation;
+		std::vector<IAnimatorUnit*> nextUnits;
+		std::vector<IAnimatorUnit*> nextUnitsBuff;
 		std::vector<Variable> animationVariables;
 		std::vector<Variable*> animationUpdatableVariables;
 	public:
 
-		explicit AnimationUnit(std::vector<Variable> animationVariables, IAnimatorUnit *nextUnit = new EmptyAnimatorUnit());
+		explicit Animation(std::vector<Variable> animationVariables, std::vector<IAnimatorUnit*> nextUnits = {});
 
 		void restart() override;
 
-		IAnimatorUnit* update(float time) override;
+		std::vector<IAnimatorUnit*> update(float time) override;
 
-		void setNextUnit(IAnimatorUnit *nextUnit) override;
+		void setNextUnits(std::vector<IAnimatorUnit*> nextUnit) override;
 
-		~AnimationUnit();
+		void addNextUnits(IAnimatorUnit* nextUnit) override;
+
+		~Animation();
 	};
 
 	template<>
-	bool convert(const YAML::Node &node, AnimationUnit::Variable& animationUnit);
+	bool convert(const YAML::Node &node, Animation::Variable& animationUnit);
 
-	bool convertPointer(const YAML::Node &node, AnimationUnit*& animationUnit);
+	bool convertPointer(const YAML::Node &node, Animation*& animation);
 } // ui

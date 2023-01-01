@@ -3,9 +3,11 @@
 namespace ui {
 	void EmptyAnimatorUnit::restart() {}
 
-	IAnimatorUnit *EmptyAnimatorUnit::update(float time) {
-		return this;
+	std::vector<IAnimatorUnit*> EmptyAnimatorUnit::update(float time) {
+		return {this};
 	}
 
-	void EmptyAnimatorUnit::setNextUnit(IAnimatorUnit *nextUnit) {}
+	void EmptyAnimatorUnit::setNextUnits(std::vector<IAnimatorUnit*> nextUnits) {}
+
+	void EmptyAnimatorUnit::addNextUnits(IAnimatorUnit *nextUnit) {}
 } // ui

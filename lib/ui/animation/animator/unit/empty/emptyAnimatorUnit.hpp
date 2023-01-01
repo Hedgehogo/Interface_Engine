@@ -7,8 +7,10 @@ namespace ui {
 	public:
 		void restart() override;
 
-		IAnimatorUnit *update(float time) override;
+		std::vector<IAnimatorUnit*> update(float time) override;
 
-		void setNextUnit(IAnimatorUnit *nextUnit) override;
+		void setNextUnits(std::vector<IAnimatorUnit*> nextUnits) override;
+
+		void addNextUnits(IAnimatorUnit* nextUnit) override;
 	};
 } // ui

@@ -1,7 +1,6 @@
 #include "../../../ui/animation/animator/unit/iAnimatorUnit.hpp"
 #include "buffer.hpp"
 
-
 namespace ui{
 
 	std::map<std::string, IAnimationVariable*> animationVariablesBuffer;
@@ -11,7 +10,7 @@ namespace ui{
 	void animatorUnitRequestUpdate(){
 		for (auto& requesters : animatorUnitRequest) {
 			for (auto& requester : requesters.second){
-				requester->setNextUnit(animatorUnitBuffer[requesters.first]);
+				requester->addNextUnits(animatorUnitBuffer[requesters.first]);
 			}
 		}
 	}

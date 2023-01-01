@@ -5,10 +5,11 @@
 namespace ui {
 	class Animator {
 	protected:
-		IAnimatorUnit* unit;
+		std::vector<IAnimatorUnit*> units;
+		std::vector<IAnimatorUnit*> unitsBuff;
 
 	public:
-		explicit Animator(IAnimatorUnit *unit);
+		explicit Animator(std::vector<IAnimatorUnit*> units);
 
 		void update(float time);
 

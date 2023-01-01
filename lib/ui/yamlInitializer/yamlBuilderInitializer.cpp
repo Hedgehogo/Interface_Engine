@@ -64,7 +64,7 @@ namespace ui {
 		inherit<IInteraction, HotkeyInteraction>({"HI"});
 		inherit<IInteraction, EmptyInteraction>({"EI"});
 
-		inherit<IAnimatorUnit, AnimationUnit>({"Animation", "AU"});
+		inherit<IAnimatorUnit, Animation>({"Animation", "A"});
 		inherit<IAnimationVariable, SharedAnimationVariable<float>>({"SharedAV", "SAV"});
 		inherit<BaseChangeVariable, ChangeVariableByStraightLine>({"CVByStraightLine", "CVBSL"});
 		inherit<IConvertToUse<float>, ConvertToUseCoefficient<float>>({"CTUCoefficientf", "CTUCf"});
