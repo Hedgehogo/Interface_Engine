@@ -4,8 +4,8 @@
 namespace ui {
 	Animation::Variable::Variable(IAnimationVariable *animationVariable, std::vector<BaseChangeVariable *> changeVariables) : animationVariable(animationVariable), changeVariables(changeVariables) {}
 
-	Animation::Animation(std::vector<Variable> animationVariables, std::vector<IAnimatorUnit*> nextUnits) :
-		animationVariables(animationVariables), nextUnits(nextUnits), nextUnitsBuff(nextUnits){
+	Animation::Animation(std::vector<Variable> animationVariables, std::vector<IAnimatorUnit *> nextUnits, float speed) :
+		animationVariables(animationVariables), nextUnits(nextUnits), nextUnitsBuff(nextUnits), speed(speed){
 		for (auto &unit: this->nextUnits){
 			if(!unit) unit = this;
 		}
@@ -31,6 +31,7 @@ namespace ui {
 	}
 
 	std::vector<IAnimatorUnit*> Animation::update(float time) {
+		time *= speed;
 		for (int i = 0; i < animationUpdatableVariables.size(); ++i){
 			Variable*& animationVariable = animationUpdatableVariables[i];
 
@@ -113,9 +114,9 @@ namespace ui {
 		}
 
 		animation = new Animation{
-			node["var"] ? std::vector<Animation::Variable>{node["var"].as<Animation::Variable>()} : node["vars"].as<std::vector<Animation::Variable>>(),
-			nextUnits
-		};
+			node["var"] ? std::vector<Animation::Variable>{node["var"].as<Animation::Variable>()} : node["vars"].as<std::vector<Animation::Variable>>(), nextUnits,
+			convDef(node["speed"], 1.f)
+			};
 
 		if (node["next"] && node["next"].IsScalar() && node["next"].as<std::string>() != "this") {
 			animatorUnitRequest[node["next"].as<std::string>()].push_back(animation);

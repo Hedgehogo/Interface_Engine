@@ -10,7 +10,7 @@ namespace ui {
 		float speed;
 
 	public:
-		explicit Animator(std::vector<IAnimatorUnit *> units, float speed);
+		explicit Animator(std::vector<IAnimatorUnit *> units, float speed = 1);
 
 		void update(float time);
 

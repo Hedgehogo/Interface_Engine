@@ -23,9 +23,10 @@ namespace ui {
 		std::vector<IAnimatorUnit*> nextUnitsBuff;
 		std::vector<Variable> animationVariables;
 		std::vector<Variable*> animationUpdatableVariables;
-	public:
+		float speed;
 
-		explicit Animation(std::vector<Variable> animationVariables, std::vector<IAnimatorUnit*> nextUnits = {});
+	public:
+		explicit Animation(std::vector<Variable> animationVariables, std::vector<IAnimatorUnit *> nextUnits = {}, float speed = 1);
 
 		void restart() override;
 

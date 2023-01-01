@@ -1,6 +1,6 @@
 animation-manager:
   animator:
-    speed: 0.1
+    speed: 0.5
     unit:
       type: A
       name: anim
@@ -26,6 +26,7 @@ animation-manager:
                 length: 1
           next: anim
         - type: A
+          speed: 10
           var:
             var: b1
             change-variables:
@@ -37,7 +38,7 @@ animation-manager:
                 start: 1
                 end: 0
                 length: 1
-          next: this
+          next: anim
 object:
   type: LWBH
   first-object:
