@@ -1,5 +1,6 @@
 animation-manager:
   animator:
+    speed: 0.1
     unit:
       type: A
       name: anim

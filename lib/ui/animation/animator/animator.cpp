@@ -1,7 +1,7 @@
 #include "animator.hpp"
 
 namespace ui {
-	Animator::Animator(std::vector<IAnimatorUnit*> units) : units(units), unitsBuff(units) {}
+	Animator::Animator(std::vector<IAnimatorUnit *> units, float speed) : units(units), unitsBuff(units), speed(speed) {}
 
 	void replace(std::vector<IAnimatorUnit*>& mainVec, std::vector<IAnimatorUnit*>::iterator iter, std::vector<IAnimatorUnit*> vec){
 		if (vec.empty()){
@@ -17,6 +17,7 @@ namespace ui {
 	}
 
 	void Animator::update(float time) {
+		time *= speed;
 		for (size_t i = 0; i != units.size(); ++i) {
 			std::vector<IAnimatorUnit*> addUnits{units[i]->update(time)};
 			replace(units, units.begin() + i, addUnits);
@@ -33,7 +34,7 @@ namespace ui {
 	}
 
 	Animator *Animator::copy() {
-		return new Animator{units};
+		return new Animator{units, 0};
 	}
 
 	Animator::~Animator() {
@@ -44,7 +45,8 @@ namespace ui {
 
 	bool convertPointer(const YAML::Node &node, Animator*& animator){
 		animator = new Animator{
-			node["unit"] ? std::vector<IAnimatorUnit*> {node["unit"].as<IAnimatorUnit *>()} : node["units"].as<std::vector<IAnimatorUnit*>>()
+			node["unit"] ? std::vector<IAnimatorUnit *>{node["unit"].as<IAnimatorUnit *>()} : node["units"].as<std::vector<IAnimatorUnit *>>(),
+			convDef(node["speed"], 1.f)
 		};
 		return true;
 	}

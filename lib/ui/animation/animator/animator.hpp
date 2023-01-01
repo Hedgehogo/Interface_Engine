@@ -7,9 +7,10 @@ namespace ui {
 	protected:
 		std::vector<IAnimatorUnit*> units;
 		std::vector<IAnimatorUnit*> unitsBuff;
+		float speed;
 
 	public:
-		explicit Animator(std::vector<IAnimatorUnit*> units);
+		explicit Animator(std::vector<IAnimatorUnit *> units, float speed);
 
 		void update(float time);
 
