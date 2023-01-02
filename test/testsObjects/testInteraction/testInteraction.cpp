@@ -1,10 +1,6 @@
 #include "testInteraction.hpp"
 
-#ifdef _WIN32
-#include <intrin.h>
-#else
-#include <x86intrin.h>
-#endif
+#include "../processorTime.hpp"
 
 TestInteraction::TestInteraction(Priority priority, bool blocked) :
 	priority(priority), IInteraction(), blocked(blocked) {}
@@ -22,18 +18,18 @@ bool TestInteraction::isBlocked() const {
 }
 
 void TestInteraction::start(sf::Vector2i mousePosition) {
-	processed.start.push_back({__rdtsc(), mousePosition});
+	processed.start.push_back({getProcessorTime(), mousePosition});
 }
 
 void TestInteraction::update(sf::Vector2i mousePosition) {
-	processed.update.push_back({__rdtsc(), mousePosition});
+	processed.update.push_back({getProcessorTime(), mousePosition});
 }
 
 void TestInteraction::finish(sf::Vector2i mousePosition) {
-	processed.finish.push_back({__rdtsc(), mousePosition});
+	processed.finish.push_back({getProcessorTime(), mousePosition});
 }
 
 ui::IInteraction *TestInteraction::copy() {
-	processed.copy.push_back(__rdtsc());
+	processed.copy.push_back(getProcessorTime());
 	return new TestInteraction{priority, blocked};
 }

@@ -66,7 +66,7 @@ namespace ui {
 
 		inherit<IAnimatorUnit, Animation>({"Animation", "A"});
 		inherit<IAnimationVariable, SharedAnimationVariable<float>>({"SharedAV", "SAV"});
-		inherit<BaseChangeVariable, ChangeVariableByStraightLine>({"CVByStraightLine", "CVBSL"});
+		inherit<IChangeVariable, ChangeVariableByStraightLine>({"CVByStraightLine", "CVBSL"});
 		inherit<IConvertToUse<float>, ConvertToUseCoefficient<float>>({"CTUCoefficientf", "CTUCf"});
 		inherit<IConvertToUse<float>, ConvertToUseCoefficientWithRange<float>>({"CTUCoefficientWithRangef", "CTUCWRf"});
 

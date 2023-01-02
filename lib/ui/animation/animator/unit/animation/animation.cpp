@@ -2,16 +2,22 @@
 #include "../../../exception/notExistAnimationVariable.hpp"
 
 namespace ui {
-	Animation::Variable::Variable(IAnimationVariable *animationVariable, std::vector<BaseChangeVariable *> changeVariables) : animationVariable(animationVariable), changeVariables(changeVariables) {}
+	Animation::Variable::Variable(IAnimationVariable *animationVariable, std::vector<IChangeVariable *> changeVariables) : animationVariable(animationVariable), changeVariables(changeVariables) {}
+
+	Animation::Variable Animation::Variable::copy() {
+		std::vector<IChangeVariable *> copyChangeVariables{changeVariables.size()};
+
+		for (size_t i = 0; i < copyChangeVariables.size(); ++i) {
+			copyChangeVariables[i] = changeVariables[i]->copy();
+		}
+
+		return {animationVariable, copyChangeVariables};
+	}
 
 	Animation::Animation(std::vector<Variable> animationVariables, std::vector<IAnimatorUnit *> nextUnits, float speed) :
 		animationVariables(animationVariables), nextUnits(nextUnits), nextUnitsBuff(nextUnits), speed(speed){
 		for (auto &unit: this->nextUnits){
 			if(!unit) unit = this;
-		}
-
-		for (auto unit = std::find(nextUnitsBuff.begin(), nextUnitsBuff.end(), nullptr); unit != nextUnitsBuff.end(); unit = std::find(nextUnitsBuff.begin(), nextUnitsBuff.end(), nullptr)){
-			nextUnitsBuff.erase(unit);
 		}
 
 		restart();
@@ -38,7 +44,7 @@ namespace ui {
 			if (animationVariable->timeStartChanger == 0) animationVariable->timeStartChanger = time;
 
 			float timeFromChanger = time - (animationVariable->timeStartChanger);
-			BaseChangeVariable * changeVariable = animationVariable->changeVariables[animationVariable->activeChanger];
+			IChangeVariable * changeVariable = animationVariable->changeVariables[animationVariable->activeChanger];
 
 			if (changeVariable->getSize() < timeFromChanger){
 				animationVariable->activeChanger++;
@@ -62,17 +68,27 @@ namespace ui {
 		return {this};
 	}
 
-	Animation::~Animation() {
-		for (auto &item: nextUnitsBuff){
-			delete item;
-		}
-	}
 	void Animation::setNextUnits(std::vector<IAnimatorUnit*> nextUnits) {
 		this->nextUnits = nextUnits;
 	}
-
 	void Animation::addNextUnits(IAnimatorUnit *nextUnit) {
 		nextUnits.push_back(nextUnit);
+	}
+
+	Animation* Animation::copy() {
+		std::vector<Variable> copyVariable{animationVariables.size()};
+
+		for (size_t i = 0; i < copyVariable.size(); ++i) {
+			copyVariable[i] = animationVariables[i].copy();
+		}
+
+		return new Animation{copyVariable, nextUnitsBuff, speed};
+	}
+
+	Animation::~Animation() {
+		for (auto &item: nextUnitsBuff){
+			if (item) delete item;
+		}
 	}
 
 	template<>
@@ -90,7 +106,7 @@ namespace ui {
 
 		animationVar = Animation::Variable{
 			animationVariable,
-			node["change-variable"] ? std::vector<BaseChangeVariable*>{node["change-variable"].as<BaseChangeVariable*>()} : node["change-variables"].as<std::vector<BaseChangeVariable*>>()
+			node["change-variable"] ? std::vector<IChangeVariable*>{node["change-variable"].as<IChangeVariable*>()} : node["change-variables"].as<std::vector<IChangeVariable*>>()
 		};
 		return true;
 	}

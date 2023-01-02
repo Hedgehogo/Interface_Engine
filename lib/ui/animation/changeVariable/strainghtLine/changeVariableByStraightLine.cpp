@@ -12,6 +12,10 @@ namespace ui {
 		return (k * x) + b;
 	}
 
+	IChangeVariable *ChangeVariableByStraightLine::copy() {
+		return new ChangeVariableByStraightLine{k, length, b};
+	}
+
 	ChangeVariableByStraightLine* makeChangeVariableByStraightLine(float start, float end, float length) {
 		return new ChangeVariableByStraightLine((end-start) / length, length, start);
 	}

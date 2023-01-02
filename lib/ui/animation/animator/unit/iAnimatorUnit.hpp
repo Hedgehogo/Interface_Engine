@@ -13,6 +13,8 @@ namespace ui {
 
 		virtual void addNextUnits(IAnimatorUnit* nextUnit) = 0;
 
+		virtual IAnimatorUnit* copy() = 0;
+
 		virtual ~IAnimatorUnit() = default; 
 	};
 } // ui

@@ -3,19 +3,20 @@
 #include <vector>
 #include "../iAnimatorUnit.hpp"
 #include "../../../variables/iAnimationVariable.hpp"
-#include "../../../changeVariable/baseChangeVariable.hpp"
-#include "../empty/emptyAnimatorUnit.hpp"
+#include "../../../changeVariable/iChangeVariable.hpp"
 
 namespace ui {
 	class Animation : public IAnimatorUnit{
 	public:
 		struct Variable{
 			IAnimationVariable* animationVariable;
-			std::vector<BaseChangeVariable*> changeVariables;
+			std::vector<IChangeVariable*> changeVariables;
 			unsigned int activeChanger = 0;
 			float timeStartChanger = 0;
 
-			Variable(IAnimationVariable *animationVariable = nullptr, std::vector<BaseChangeVariable *> changeVariables = {});
+			Variable(IAnimationVariable *animationVariable = nullptr, std::vector<IChangeVariable *> changeVariables = {});
+
+			Variable copy();
 		};
 
 	protected:
@@ -35,6 +36,8 @@ namespace ui {
 		void setNextUnits(std::vector<IAnimatorUnit*> nextUnit) override;
 
 		void addNextUnits(IAnimatorUnit* nextUnit) override;
+
+		Animation* copy() override;
 
 		~Animation();
 	};

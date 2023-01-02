@@ -1,11 +1,7 @@
 #include "testPanel.hpp"
 #include "../../../lib/ui/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/empty/empty.hpp"
 
-#ifdef _WIN32
-#include <intrin.h>
-#else
-#include <x86intrin.h>
-#endif
+#include "../processorTime.hpp"
 
 TestPanel::TestPanel(bool displayed, const sf::Vector2f &minSize, const sf::Vector2f &normalSize, bool isIndependentResult, bool isFreeResult, bool inPanelResult, bool updateInteractionsResult, ui::ISizing2 *sizing,
                      ui::IPositioning2 *positioning) :
@@ -19,7 +15,7 @@ const TestPanel::Processed &TestPanel::getProcessed() const {
 void TestPanel::init(sf::RenderTarget &renderTarget, ui::DrawManager &drawManager, ui::UpdateManager &updateManager, ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack, ui::IPanelManager &panelManager) {
 	BasePanel::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 
-	processed.init.time = __rdtsc();
+	processed.init.time = getProcessorTime();
 	processed.init.renderTarget = &renderTarget;
 	processed.init.drawManager = &drawManager;
 	processed.init.updateManager = &updateManager;
@@ -38,7 +34,7 @@ bool TestPanel::isFree() {
 
 void TestPanel::setDisplayed() {
 	BasePanel::setDisplayed();
-	processed.setDisplayed = __rdtsc();
+	processed.setDisplayed = getProcessorTime();
 }
 
 void TestPanel::setParentProcessed(bool parentProcessed) {
@@ -66,7 +62,7 @@ void TestPanel::setSize(sf::Vector2f size) {
 }
 
 void TestPanel::draw() {
-	processed.draw = __rdtsc();
+	processed.draw = getProcessorTime();
 }
 
 void TestPanel::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -74,19 +70,19 @@ void TestPanel::resize(sf::Vector2f size, sf::Vector2f position) {
 }
 
 void TestPanel::update() {
-	processed.update = __rdtsc();
+	processed.update = getProcessorTime();
 }
 
 bool TestPanel::updateInteractions(sf::Vector2f mousePosition) {
 	BasePanel::updateInteractions(mousePosition);
-	processed.updateInteractions.time = __rdtsc();
+	processed.updateInteractions.time = getProcessorTime();
 	processed.updateInteractions.mousePosition = mousePosition;
 	return updateInteractionsResult;
 }
 
 bool TestPanel::updateInteractions(sf::Vector2f mousePosition, bool active) {
 	BasePanel::updateInteractions(mousePosition, active);
-	processed.updateInteractionsWithActive.time = __rdtsc();
+	processed.updateInteractionsWithActive.time = getProcessorTime();
 	processed.updateInteractionsWithActive.mousePosition = mousePosition;
 	processed.updateInteractionsWithActive.active = active;
 	return updateInteractionsResult;

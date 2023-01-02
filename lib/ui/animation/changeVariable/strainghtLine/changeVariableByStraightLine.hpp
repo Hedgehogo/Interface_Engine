@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../baseChangeVariable.hpp"
+#include "../iChangeVariable.hpp"
 
 namespace ui {
-	class ChangeVariableByStraightLine : public BaseChangeVariable{
+	class ChangeVariableByStraightLine : public IChangeVariable{
 		float length;
 
 		float k, b;
@@ -15,6 +15,8 @@ namespace ui {
 		float getSize() override;
 
 		float operator()(float x) override;
+
+		IChangeVariable * copy() override;
 	};
 
 	ChangeVariableByStraightLine* makeChangeVariableByStraightLine(float start, float end, float length);

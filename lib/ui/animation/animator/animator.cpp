@@ -34,7 +34,11 @@ namespace ui {
 	}
 
 	Animator *Animator::copy() {
-		return new Animator{units, 0};
+		std::vector<IAnimatorUnit*> copyUnits{unitsBuff.size()};
+		for (size_t i = 0; i < unitsBuff.size(); ++i) {
+			copyUnits[i] = unitsBuff[i]->copy();
+		}
+		return new Animator{copyUnits, 0};
 	}
 
 	Animator::~Animator() {
