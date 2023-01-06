@@ -31,9 +31,9 @@ namespace ui {
         if(!optimize || active || interactionManager->isBlocked()) {
             renderTexture.clear(sf::Color(0, 0, 0, 0));
             drawManager.draw();
+			renderTexture.display();
             sprite.setTexture(renderTexture.getTexture());
             active = false;
-
         }
         if (transmission & Transmission::time) shader->setUniform("time", clock.getElapsedTime().asSeconds());
         if (transmission & Transmission::texture) shader->setUniform("texture", renderTexture.getTexture());
