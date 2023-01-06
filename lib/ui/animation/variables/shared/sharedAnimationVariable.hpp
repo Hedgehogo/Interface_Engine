@@ -3,6 +3,7 @@
 #include "../iAnimationVariable.hpp"
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../../convertToUse/iConvertToUse.hpp"
+#include <iostream>
 
 namespace ui {
 	template<typename T>

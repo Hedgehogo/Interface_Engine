@@ -84,4 +84,6 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, Interface*& interface);
 
 	Interface makeInterface(sf::RenderTarget &renderTarget, const std::string& filePath);
+
+	Interface* makePrtInterface(sf::RenderTarget &renderTarget, const std::string& filePath);
 }

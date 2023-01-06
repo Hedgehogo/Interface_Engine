@@ -3,7 +3,7 @@
 #include "../../testsObjects/testPanel/testPanel.hpp"
 
 TEST(Interface, draw) {
-	auto testObject = new TestObject;
+	auto testObject = new TestObject{};
 	auto testPanel = new TestPanel{};
 	auto testInterface = new ui::Interface{testObject};
 

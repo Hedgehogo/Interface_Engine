@@ -16,9 +16,9 @@ protected:
 	Processed processed;
 
 public:
-	Processed getProcessed() const;
+	explicit TestAnimationVariable();
 
-	explicit TestAnimationVariable(Processed processed);
+	Processed getProcessed() const;
 
 	void valueFromAnimation(float newValue) override;
 };

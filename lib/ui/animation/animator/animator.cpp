@@ -30,7 +30,7 @@ namespace ui {
 				buf.push_back(*unit);
 		}
 
-		units = buf;
+		units = {buf.rbegin(), buf.rend()};
 	}
 
 	Animator *Animator::copy() {

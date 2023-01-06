@@ -1,7 +1,11 @@
 #include "testAnimatorUnit.hpp"
 #include "../processorTime.hpp"
 
-TestAnimatorUnit::TestAnimatorUnit(std::vector<IAnimatorUnit *> updateResult) : updateResult(updateResult) {}
+TestAnimatorUnit::TestAnimatorUnit(std::vector<IAnimatorUnit *> updateResult) : updateResult(updateResult) {
+	for (size_t i = 0; i < updateResult.size(); ++i) {
+		if (!this->updateResult[i]) this->updateResult[i] = this;
+	}
+}
 
 TestAnimatorUnit::Processed TestAnimatorUnit::getProcessed() {
 	return processed;

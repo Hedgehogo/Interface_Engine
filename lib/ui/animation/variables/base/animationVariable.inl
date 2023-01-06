@@ -1,4 +1,5 @@
 //included into BaseVariable.hpp
+#include "modules/appendix/yaml-animation/buffer.hpp"
 
 namespace ui {
 	template<typename T>
@@ -10,7 +11,7 @@ namespace ui {
 	}
 
 	template<typename T>
-	void AnimationVariable<T>::set(T &newValue) {
+	void AnimationVariable<T>::set(const T &newValue) {
 		value = newValue;
 	}
 

@@ -163,4 +163,15 @@ namespace ui {
 		    convDef(node["interaction-stack"], new InteractionStack{})
 		};
 	}
+
+	Interface* makePrtInterface(sf::RenderTarget &renderTarget, const std::string &filePath) {
+		YAML::Node node{YAML::LoadFile(filePath)};
+
+		return new Interface{
+			renderTarget,
+			node["object"].as<IScalable*>(),
+			convDef(node["animation-manager"], AnimationManager{}),
+			convDef(node["interaction-stack"], new InteractionStack{})
+		};
+	}
 }

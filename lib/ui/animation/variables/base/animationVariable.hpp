@@ -24,7 +24,7 @@ namespace ui {
 
 		T get();
 
-		void set(T& newValue);
+		void set(const T &newValue);
 
 		void valueFromAnimation(float newValue) override;
 

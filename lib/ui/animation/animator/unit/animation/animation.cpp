@@ -82,7 +82,13 @@ namespace ui {
 			copyVariable[i] = animationVariables[i].copy();
 		}
 
-		return new Animation{copyVariable, nextUnitsBuff, speed};
+		std::vector<IAnimatorUnit*> copyNextUnits{nextUnitsBuff.size()};
+
+		for (size_t i = 0; i < nextUnitsBuff.size(); ++i) {
+			copyNextUnits[i] = nextUnitsBuff[i]->copy();
+		}
+
+		return new Animation{copyVariable, copyNextUnits, speed};
 	}
 
 	Animation::~Animation() {
