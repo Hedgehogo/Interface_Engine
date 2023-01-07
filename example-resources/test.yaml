@@ -1,6 +1,27 @@
 object:
-  type: LWS
-  frag: ../example-resources/testShader.glsl
-  object:
-    type: Sprite
-    texture: ../example-resources/gigachad.jpg
+  type: LWBH
+  bound: 0.4
+  second-object:
+    type: LWS
+    shader:
+      frag: ../example-resources/testShader.glsl
+    object:
+      type: Sprite
+      texture: ../example-resources/gigachad.jpg
+    transmission: [texture]
+    #sharedValuesf:
+    #  red: vec.x
+    #  blue: vec.y
+    sharedValuesv:
+      vec: vec
+  first-object:
+    type: Slider
+    slider:
+      type: Capsule
+      color: 525252
+    background:
+      type: FullColor
+      color: 37383A88
+    slider-scale: 0.2, 0.2
+    value:
+      var: vec

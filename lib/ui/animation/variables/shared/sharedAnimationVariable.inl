@@ -2,7 +2,7 @@
 
 namespace ui {
 	template<typename T>
-	SharedAnimationVariable<T>::SharedAnimationVariable(ISValue <T> *value, IConvertToUse <T> *convertToUse) : value(value), convertToUse(convertToUse) {}
+	SharedAnimationVariable<T>::SharedAnimationVariable(std::shared_ptr<ISValue<T>> value, IConvertToUse <T> *convertToUse) : value(value), convertToUse(convertToUse) {}
 
 	template<typename T>
 	void SharedAnimationVariable<T>::valueFromAnimation(float newValue) {
@@ -12,7 +12,9 @@ namespace ui {
 	template<typename T>
 	bool convertPointer(const YAML::Node &node, SharedAnimationVariable<T>*& sharedAnimationVariable){
 		sharedAnimationVariable = new SharedAnimationVariable<T>{
-
+			Buffer::get<ISValue<T>>(node["value"]),
+			node["convert-to-use"].as<IConvertToUse<T>*>()
 		};
+		return true;
 	}
 }
