@@ -1,6 +1,7 @@
 #include "caption.hpp"
 #include <algorithm>
 #include "../../../../../../modules/appendix/HSVtoRGB/HsVtoRgb.hpp"
+#include <iostream>
 
 typedef unsigned uint;
 
@@ -56,17 +57,15 @@ namespace ui {
 	}
 
     sf::FloatRect Caption::getBounds() {
-
         sf::FloatRect localBounds = text.getLocalBounds();
-        sf::Vector2f position = getPosition();
 
         float countEnter{(static_cast<float>(std::count(text.getString().begin(), text.getString().end(), '\n')))};
         float characterSize{static_cast<float>(text.getFont()->getLineSpacing(text.getCharacterSize()))};
 
         sf::FloatRect bounds{
-            position,
+	        {0, 0},
             {
-                localBounds.left + localBounds.width - position.x,
+                localBounds.left + localBounds.width,
                 text.getCharacterSize() + (countEnter * text.getLineSpacing() * characterSize)
             }
         };
@@ -98,7 +97,11 @@ namespace ui {
 	}
 	
 	sf::Vector2f Caption::getMinSize() {
-		return max((minimumSize, (cutBack ? sf::Vector2f {0.f, 0.f} : sf::Vector2f {getBounds().width, getBounds().height})), background->getMinSize());
+		sf::String str{text.getString()};
+		text.setString("...");
+		sf::FloatRect bounds{getBounds()};
+		text.setString(str);
+		return max(max(minimumSize, (cutBack ? sf::Vector2f{bounds.width, bounds.height} : sf::Vector2f{0.f, 0.f})), background->getMinSize());
 	}
 	
 	sf::Vector2f Caption::getNormalSize() {
@@ -119,8 +122,8 @@ namespace ui {
         background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
         {
             sf::FloatRect bounds{text.getGlobalBounds()};
-            sf::Vector2f size{sf::Vector2f{bounds.width, bounds.height} - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2 + 2, indent * 2 + 2})};
-            sf::Vector2f position{sf::Vector2f{bounds.left, bounds.top} + static_cast<sf::Vector2f>(sf::Vector2i{indent + 1, indent + 1})};
+            sf::Vector2f size{bounds.width, bounds.height};
+            sf::Vector2f position{bounds.left, bounds.top};
             if (size.x > 0 && size.y > 0) {
                 sf::Color color{HSVtoRGB(static_cast<float>(hue + hueOffset*2 % 360))};
 
@@ -141,8 +144,8 @@ namespace ui {
         }
         {
             sf::FloatRect bounds{getBounds()};
-            sf::Vector2f size{sf::Vector2f{bounds.width, bounds.height} - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2 + 2, indent * 2 + 2})};
-            sf::Vector2f position{sf::Vector2f{bounds.left, bounds.top} + static_cast<sf::Vector2f>(sf::Vector2i{indent + 1, indent + 1})};
+            sf::Vector2f size{bounds.width, bounds.height};
+            sf::Vector2f position{bounds.left, bounds.top};
             if (size.x > 0 && size.y > 0) {
                 sf::Color color{HSVtoRGB(static_cast<float>(hue + hueOffset % 360))};
 

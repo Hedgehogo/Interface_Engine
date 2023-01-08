@@ -1,27 +1,18 @@
 object:
-  type: LWBH
-  bound: 0.4
+  type: LWMB
+  border-direction: vertical
+  border-value:
+    var: 0.2
+  first-object: red
   second-object:
-    type: LWS
-    shader:
-      frag: ../example-resources/testShader.glsl
-    object:
-      type: Sprite
-      texture: ../example-resources/gigachad.jpg
-    transmission: [texture]
-    #sharedValuesf:
-    #  red: vec.x
-    #  blue: vec.y
-    sharedValuesv:
-      vec: vec
-  first-object:
-    type: Slider
-    slider:
-      type: Capsule
-      color: 525252
-    background:
-      type: FullColor
-      color: 37383A88
-    slider-scale: 0.2, 0.2
-    value:
-      var: vec
+    type: LWMB
+    border-direction: horizontal
+    border-value:
+      var: 0.2
+    first-object: red
+    second-object:
+      type: Caption
+      text: aboba
+      font: ../example-resources/segoeui.ttf
+      font-size: 50
+      background: blue

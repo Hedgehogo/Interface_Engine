@@ -1,5 +1,6 @@
 //included into BaseVariable.hpp
 #include "modules/appendix/yaml-animation/buffer.hpp"
+#include "../../convertToUse/coefficient/convertToUseCoefficient.hpp"
 
 namespace ui {
 	template<typename T>
@@ -55,7 +56,7 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, AnimationVariable<T>*& animationVariable){
 		animationVariable = new AnimationVariable<T>{
 			node["var"].as<T>(),
-			node["convert-to-use"].as<IConvertToUse<T> *>(),
+			convDef<IConvertToUse<T> *>(node["convert-to-use"], new ConvertToUseCoefficient<T>{}),
 			convDef(node["auto-set"], true)
 		};
 
