@@ -64,11 +64,19 @@ namespace ui {
 		inherit<IInteraction, HotkeyInteraction>({"HI"});
 		inherit<IInteraction, EmptyInteraction>({"EI"});
 
-		inherit<IAnimatorUnit, Animation>({"Animation", "A"});
+		inherit<ISbool, SConvertFloatToBoolEquals>({"ConvertFloatToBoolEquals", "SCFTBE"});
+		inherit<ISbool, SConvertFloatToBoolGreater>({"ConvertFloatToBoolGreater", "SCFTBG"});
+		inherit<ISbool, SConvertFloatToBoolGreaterOrEquals>({"ConvertFloatToBoolGreaterOrEquals", "SCFTBGOE", "SCFTBGE"});
+		inherit<ISbool, SConvertFloatToBoolLess>({"ConvertFloatToBoolLess", "SCFTBL"});
+		inherit<ISbool, SConvertFloatToBoolLessOrEquals>({"ConvertFloatToBoolLessOrEquals", "SCFTBLOE", "SCFTBLE"});
+
+		inherit<IAnimatorUnit, Animation>({"A"});
+		inherit<IAnimatorUnit, Prerequisite>({"P"});
 		inherit<IAnimationVariable, SharedAnimationVariable<float>>({"SharedAV", "SAV"});
 		inherit<IChangeVariable, ChangeVariableByStraightLine>({"CVByStraightLine", "CVBSL"});
 		inherit<IConvertToUse<float>, ConvertToUseCoefficient<float>>({"CTUCoefficientf", "CTUCf"});
 		inherit<IConvertToUse<float>, ConvertToUseCoefficientWithRange<float>>({"CTUCoefficientWithRangef", "CTUCWRf"});
+		inherit<IValve, ValveWithISbool>({"VWISbool", "VIWISB"});
 
 		inherit<OnlyDrawable, Empty>();
 		inherit<OnlyDrawable, FullColor>();

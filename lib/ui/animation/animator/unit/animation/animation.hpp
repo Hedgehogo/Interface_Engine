@@ -33,9 +33,9 @@ namespace ui {
 
 		std::vector<IAnimatorUnit*> update(float time) override;
 
-		void setNextUnits(std::vector<IAnimatorUnit*> nextUnit) override;
+		void setNextUnits(std::vector<IAnimatorUnit*> nextUnit);
 
-		void addNextUnits(IAnimatorUnit* nextUnit) override;
+		void addNextUnits(IAnimatorUnit* nextUnit);
 
 		Animation* copy() override;
 

@@ -16,8 +16,8 @@ TEST(yamlAnimationBuffer, animatorUnitRequestUpdate) {
 	};
 
 	ui::animatorUnitRequest = {
-		{"a", {testRequest1, testRequest2}},
-		{"b", {testRequest3, testRequest4}}
+		{"a", {[&](ui::IAnimatorUnit *unit){testRequest1->addNextUnits(unit);}, [&](ui::IAnimatorUnit *unit){testRequest2->addNextUnits(unit);}}},
+		{"b", {[&](ui::IAnimatorUnit *unit){testRequest3->addNextUnits(unit);}, [&](ui::IAnimatorUnit *unit){testRequest4->addNextUnits(unit);}}}
 	};
 
 	ui::animatorUnitRequestUpdate();

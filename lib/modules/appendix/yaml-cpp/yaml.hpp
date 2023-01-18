@@ -90,6 +90,9 @@ namespace ui {
 	
 	template<>
 	bool convert(const YAML::Node &node, sf::Shader &shader);
+
+	template<typename T>
+	std::shared_ptr<T> getSValue(const YAML::Node &node, bool createIfNotExist = true);
 }
 
 namespace YAML {

@@ -37,9 +37,9 @@ public:
 
 	std::vector<IAnimatorUnit *> update(float time) override;
 
-	void setNextUnits(std::vector<IAnimatorUnit *> nextUnits) override;
+	void setNextUnits(std::vector<IAnimatorUnit *> nextUnits);
 
-	void addNextUnits(IAnimatorUnit *nextUnit) override;
+	void addNextUnits(IAnimatorUnit *nextUnit);
 
 	TestAnimatorUnit * copy() override;
 };

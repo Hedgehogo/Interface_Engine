@@ -9,10 +9,6 @@ namespace ui {
 
 		virtual std::vector<IAnimatorUnit*> update(float time) = 0;
 
-		virtual void setNextUnits(std::vector<IAnimatorUnit*> nextUnits) = 0;
-
-		virtual void addNextUnits(IAnimatorUnit* nextUnit) = 0;
-
 		virtual IAnimatorUnit* copy() = 0;
 
 		virtual ~IAnimatorUnit() = default; 

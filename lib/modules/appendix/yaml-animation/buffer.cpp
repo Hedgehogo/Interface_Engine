@@ -4,13 +4,13 @@
 namespace ui{
 
 	std::map<std::string, IAnimationVariable*> animationVariablesBuffer;
-	std::map<std::string, std::vector<IAnimatorUnit*>> animatorUnitRequest;
+	std::map<std::string, std::vector<std::function<void(IAnimatorUnit*)>>> animatorUnitRequest;
 	std::map<std::string, IAnimatorUnit*> animatorUnitBuffer;
 
 	void animatorUnitRequestUpdate(){
 		for (auto& requesters : animatorUnitRequest) {
 			for (auto& requester : requesters.second){
-				requester->addNextUnits(animatorUnitBuffer[requesters.first]);
+				requester(animatorUnitBuffer[requesters.first]);
 			}
 		}
 	}

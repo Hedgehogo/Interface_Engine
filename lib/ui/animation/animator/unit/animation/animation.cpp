@@ -136,16 +136,17 @@ namespace ui {
 		}
 
 		animation = new Animation{
-			node["var"] ? std::vector<Animation::Variable>{node["var"].as<Animation::Variable>()} : node["vars"].as<std::vector<Animation::Variable>>(), nextUnits,
+			node["var"] ? std::vector<Animation::Variable>{node["var"].as<Animation::Variable>()} : node["vars"].as<std::vector<Animation::Variable>>(),
+			nextUnits,
 			convDef(node["speed"], 1.f)
-			};
+		};
 
 		if (node["next"] && node["next"].IsScalar() && node["next"].as<std::string>() != "this") {
-			animatorUnitRequest[node["next"].as<std::string>()].push_back(animation);
+			animatorUnitRequest[node["next"].as<std::string>()].push_back([=](IAnimatorUnit *unit){animation->addNextUnits(unit);});
 		} else if(node["nexts"]){
 			for (auto& unit : node["nexts"]){
 				if(unit.IsScalar() && unit.as<std::string>() != "this")
-					animatorUnitRequest[unit.as<std::string>()].push_back(animation);
+					animatorUnitRequest[unit.as<std::string>()].push_back([=](IAnimatorUnit *unit){animation->addNextUnits(unit);});
 			}
 		}
 

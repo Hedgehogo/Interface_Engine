@@ -64,10 +64,10 @@ namespace ui {
 	};
 	
 	template<typename T>
-	std::shared_ptr<T> atYaml(std::string name);
+	std::shared_ptr<T> atSValue(std::string name);
 	
 	template<typename T, typename... A>
-	void insertYaml(const std::string& name, A&&... args);
+	void emplaceSValue(const std::string& name, A&&... args);
 }
 
 #include "buffer.inl"
