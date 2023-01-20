@@ -55,7 +55,6 @@ int main() {
 				interface.setSize(windowSize);
 			}
 		}
-        interface.setSize(sf::Vector2f{window.getSize()});
 		window.clear();
 		interface.update(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window.getSystemHandle());
 		interface.draw();

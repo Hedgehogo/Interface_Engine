@@ -22,8 +22,14 @@ namespace ui{
         bool selection;
         bool active;
 
+		bool rerender;
+
     public:
         BaseCharacter();
+
+		virtual bool getRerender() const;
+
+		virtual void setRerender(bool rerender);
 
         virtual void setActive(bool active);
 

@@ -221,6 +221,8 @@ namespace ui {
 	    endLineEqualize();
 
         deleteCash();
+
+		rerender = true;
     }
 
 	sf::Vector2f Resizer::getPosition() {
@@ -265,6 +267,14 @@ namespace ui {
     Resizer *Resizer::copy() {
         return new Resizer(lineSpacing, align);
     }
+
+	bool Resizer::getRerender() const {
+		return rerender;
+	}
+
+	void Resizer::setRerender(bool rerender) {
+		this->rerender = rerender;
+	}
 
 	bool convertPointer(const YAML::Node &node, Resizer *&resizer) {
         float lineSpacing{1.15};

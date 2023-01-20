@@ -35,6 +35,10 @@ namespace ui {
 
         virtual sf::Vector2f getNormalSize() = 0;
 
+		virtual bool getRerender() const = 0;
+
+		virtual void setRerender(bool rerender) = 0;
+
         virtual BaseResizer * copy() = 0;
 
         virtual ~BaseResizer() = default;

@@ -4,6 +4,8 @@
 
 namespace ui {
     class Resizer : public BaseResizer{
+    protected:
+		bool rerender;
     public:
         Resizer(float lineSpacing = 1.15, Align align = Align::left);
 
@@ -23,6 +25,7 @@ namespace ui {
         virtual void printCharacter(BaseCharacter *character, float kerning);
 
         virtual void porting(int i);
+
         virtual void autoPorting(int i);
 
         virtual float equalize(uint i);
@@ -42,6 +45,7 @@ namespace ui {
 		virtual void enterResize(int i);
 
 		virtual void endLineEqualize();
+
     public:
         void resize(sf::Vector2f size, sf::Vector2f position) override;
 
@@ -53,7 +57,11 @@ namespace ui {
 
         sf::Vector2f getNormalSize() override;
 
-        Resizer * copy();
+	    bool getRerender() const override;
+
+	    void setRerender(bool rerender) override;
+
+	    Resizer * copy();
     };
 	
 	bool convertPointer(const YAML::Node &node, Resizer *&resizer);

@@ -1,6 +1,5 @@
 
 #include <cmath>
-#include <vector>
 
 #include "text.hpp"
 
@@ -14,7 +13,7 @@ namespace ui {
 
     Text::Text(std::vector<BaseTextBlock *> textBlocks, IUninteractive *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
                sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer *resizer, TextInteraction *textInteraction) :
-        background(background), size(size), textBocks(textBlocks), resizer(resizer), textInteraction(textInteraction){
+        background(background), size(size), textBocks(textBlocks), resizer(resizer), textInteraction(textInteraction), rerender(false){
         for (BaseTextBlock *textBlock: textBlocks) {
             textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, (inactiveTextSelectionColor == nullColor ? textColor : inactiveTextSelectionColor), inactiveBackgroundSelectionColor, font,
                                         size);
@@ -43,9 +42,9 @@ namespace ui {
     void Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
         updateManager.add(*this);
         this->renderTarget = &renderTarget;
-        background->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
+        background->init(renderTexture, this->drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
         for (BaseTextBlock *textBlock: textBocks) {
-            textBlock->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
+            textBlock->init(renderTexture, this->drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
         }
         drawManager.add(*this);
 
@@ -123,7 +122,6 @@ namespace ui {
     std::vector<BaseCharacter *>::iterator Text::getCharacter(sf::Vector2f mousePosition) {
         std::vector<BaseCharacter *>::iterator result{nullptr};
 
-
         for (auto iterator = textCharacters.begin(); iterator != textCharacters.end(); ++iterator) {
             if (result != nullBaseCharacterIterator) {
                 float DistanceYToIterator{getDistanceY(iterator, mousePosition.y)};
@@ -178,30 +176,65 @@ namespace ui {
     }
 
     void Text::draw() {
-        for (BaseCharacter *character: textCharacters) {
-            character->draw();
-        }
 
-        for (BaseLine *&line: lines) {
-            line->draw();
-        }
+		bool rerender{false};
+		int i = 0;
+		for (auto& character : textCharacters){
+			if (character->getRerender()) {
+				rerender = true;
+				character->setRerender(false);
+			}
+			i++;
+		}
+
+	    if (rerender) {
+			resizer->setRerender(false);
+			renderTexture.clear();
+
+		    drawManager.draw();
+
+		    for (BaseCharacter *character: textCharacters) {
+			    character->draw();
+		    }
+
+		    for (BaseLine *&line: lines) {
+			    line->draw();
+		    }
+		    renderTexture.display();
+			texture = renderTexture.getTexture();
+		    sprite.setTexture(texture);
+		}
+
+	    renderTarget->draw(sprite);
     }
 
     void Text::move(sf::Vector2f position) {
+	    view.reset({getPosition() + position, view.getSize()});
+	    renderTexture.setView(view);
+		sprite.move(position);
         background->move(position);
         resizer->move(position);
     }
 
     void Text::setPosition(sf::Vector2f position) {
+	    view.reset({position, view.getSize()});
+	    renderTexture.setView(view);
+	    sprite.setPosition(position);
         background->setPosition(position);
         resizer->setPosition(position);
     }
 
-    void Text::resize(sf::Vector2f size, sf::Vector2f position) {
-        resizer->resize(size, position);
+	void Text::resize(sf::Vector2f size, sf::Vector2f position) {
+		resizer->resize(size, position);
 
-	    background->resize(max(resizer->getSize(), size), resizer->getSize());
-    }
+		size = max(resizer->getSize(), size);
+		background->resize(size, position);
+
+		view.reset({position, size});
+		renderTexture.create(size.x, size.y);
+		renderTexture.setView(view);
+		sprite.setTextureRect({{0, 0}, sf::Vector2i(size)});
+	}
 
     sf::Vector2f Text::getAreaPosition() {
         return background->getAreaPosition();
