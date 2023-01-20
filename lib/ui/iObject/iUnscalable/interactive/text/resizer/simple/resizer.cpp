@@ -200,7 +200,7 @@ namespace ui {
         for (int i = 0; i < (*characters).size(); i++) {
             BaseCharacter* character = (*characters)[i];
 
-            float kerning{0};
+            float kerning{(i != (*characters).size() - 1) ? character->getKerning((*characters)[i + 1]->getChar()) : 0};
 
             switch (character->isSpecial()) {
                 case BaseCharacter::Special::no:
