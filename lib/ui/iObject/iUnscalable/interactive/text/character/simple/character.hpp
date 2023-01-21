@@ -32,7 +32,7 @@ namespace ui{
 
         void setSelection(bool selection) override;
 
-        void draw() override;
+        void draw(bool selection) override;
 
         void move(sf::Vector2f position) override;
 

@@ -8,17 +8,12 @@ namespace ui {
 			glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style & sf::Text::Style::Bold);
 			
 			texture = textVariables.font->getTexture(textVariables.size);
-			
+
 			vertexArray[0].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left, glyph.textureRect.top});
 			vertexArray[1].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left + glyph.textureRect.width, glyph.textureRect.top});
 			vertexArray[2].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left + glyph.textureRect.width, glyph.textureRect.top + glyph.textureRect.height});
 			vertexArray[3].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left, glyph.textureRect.top + glyph.textureRect.height});
-			
-			vertexArray[0].color = textVariables.TextColor;
-			vertexArray[1].color = textVariables.TextColor;
-			vertexArray[2].color = textVariables.TextColor;
-			vertexArray[3].color = textVariables.TextColor;
-			
+
 			vertexArray[0].position = {0, 0};
 			vertexArray[1].position = sf::Vector2f{sf::Vector2i{glyph.textureRect.width, 0}};
 			vertexArray[2].position = sf::Vector2f{sf::Vector2i{glyph.textureRect.width, glyph.textureRect.height}};
@@ -29,28 +24,21 @@ namespace ui {
 			selectionVertexArray[2].position = {getAdvance(), getHeight()};
 			selectionVertexArray[3].position = {0, getHeight()};
 			
-			selectionVertexArray[0].color = textVariables.backgroundSelectionColor;
-			selectionVertexArray[1].color = textVariables.backgroundSelectionColor;
-			selectionVertexArray[2].color = textVariables.backgroundSelectionColor;
-			selectionVertexArray[3].color = textVariables.backgroundSelectionColor;
-			
 			if(textVariables.style & sf::Text::Style::Italic) {
 				float italicShear = -0.26794;
-				vertexArray[0].position.x += (vertexArray[0].position.y + glyph.bounds.top) * italicShear;
-				vertexArray[1].position.x += (vertexArray[1].position.y + glyph.bounds.top) * italicShear;
-				vertexArray[2].position.x += (vertexArray[2].position.y + glyph.bounds.top) * italicShear;
-				vertexArray[3].position.x += (vertexArray[3].position.y + glyph.bounds.top) * italicShear;
+
+				for (size_t i = 0; i < 4; ++i) {
+					vertexArray[i].position.x += (vertexArray[i].position.y + glyph.bounds.top) * italicShear;
+				}
 			}
-			
-			vertexArray[0].position.y += glyph.bounds.top;
-			vertexArray[1].position.y += glyph.bounds.top;
-			vertexArray[2].position.y += glyph.bounds.top;
-			vertexArray[3].position.y += glyph.bounds.top;
-			
-			selectionVertexArray[0].position.y -= getHeight();
-			selectionVertexArray[1].position.y -= getHeight();
-			selectionVertexArray[2].position.y -= getHeight();
-			selectionVertexArray[3].position.y -= getHeight();
+
+			for (size_t i = 0; i < 4; ++i) {
+				vertexArray[i].position += {glyph.bounds.left, glyph.bounds.top};
+				selectionVertexArray[i].position.y -= getHeight();
+
+				vertexArray[i].color = textVariables.TextColor;
+				selectionVertexArray[i].color = textVariables.backgroundSelectionColor;
+			}
 		}
 	}
 	
@@ -94,9 +82,9 @@ namespace ui {
 		}
 	}
 	
-	void Character::draw() {
+	void Character::draw(bool selection) {
 		if(isSpecial() != BaseCharacter::Special::enter) {
-			if(selection)
+			if(this->selection && selection)
 				renderTarget->draw(selectionVertexArray);
 			renderTarget->draw(vertexArray, &texture);
 		}

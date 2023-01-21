@@ -38,7 +38,7 @@ namespace ui {
         return special;
     }
 
-    void ObjectCharacter::draw() {}
+    void ObjectCharacter::draw(bool selection) {}
 
     ObjectCharacter::~ObjectCharacter() {
         delete object;

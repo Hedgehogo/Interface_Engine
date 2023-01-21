@@ -193,7 +193,11 @@ namespace ui {
 		    drawManager.draw();
 
 		    for (BaseCharacter *character: textCharacters) {
-			    character->draw();
+			    character->draw(true);
+		    }
+
+		    for (BaseCharacter *character: textCharacters) {
+			    character->draw(false);
 		    }
 
 		    for (BaseLine *&line: lines) {

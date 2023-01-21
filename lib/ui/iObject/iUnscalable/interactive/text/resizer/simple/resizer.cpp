@@ -32,7 +32,6 @@ namespace ui {
 
     void Resizer::printCharacter(BaseCharacter *character, float kerning) {
         character->setPosition(nextPosition);
-        /* It's a function that returns the value of the `ad` variable. */
         nextPosition.x += character->getAdvance() + kerning;
         distanceEnter++;
     }
@@ -141,7 +140,7 @@ namespace ui {
 	}
 
 	void Resizer::spaceResize(BaseCharacter *character, float kerning, int i) {
-		if (this->nextPosition.x <= endRender.x){
+		if (this->nextPosition.x + (algorithm == BaseResizer::Algorithm::console ? character->getAdvance() : 0) <= endRender.x){
 			printCharacter(character, kerning);
 			distanceSpace = 0;
 		} else{

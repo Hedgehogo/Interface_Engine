@@ -61,7 +61,7 @@ namespace ui{
 
         virtual Special isSpecial() = 0;
 
-        virtual void draw() = 0;
+        virtual void draw(bool selection) = 0;
 
         virtual char32_t getChar() = 0;
 
