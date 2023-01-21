@@ -188,7 +188,6 @@ namespace ui {
 		}
 
 	    if (rerender) {
-			resizer->setRerender(false);
 			renderTexture.clear();
 
 		    drawManager.draw();

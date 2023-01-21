@@ -4,10 +4,8 @@
 
 namespace ui {
     class Resizer : public BaseResizer{
-    protected:
-		bool rerender;
     public:
-        Resizer(float lineSpacing = 1.15, Align align = Align::left);
+        Resizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);
 
         void move(sf::Vector2f position) override;
 
@@ -29,8 +27,6 @@ namespace ui {
         virtual void autoPorting(int i);
 
         virtual float equalize(uint i);
-
-		virtual bool isOnlyMove(sf::Vector2f size, sf::Vector2f position);
 
 		virtual void deleteOldCash(sf::Vector2f size, sf::Vector2f position);
 
@@ -56,10 +52,6 @@ namespace ui {
         sf::Vector2f getMinSize() override;
 
         sf::Vector2f getNormalSize() override;
-
-	    bool getRerender() const override;
-
-	    void setRerender(bool rerender) override;
 
 	    Resizer * copy();
     };

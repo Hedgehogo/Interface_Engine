@@ -10,14 +10,22 @@ namespace ui {
             right,
             center
         };
+
+	    enum class Algorithm{
+		    base,
+		    console,
+		    absolute
+	    };
+
     protected:
         std::vector<BaseCharacter*>* characters;
         std::vector<BaseLine*>* lines;
 
-        float lineSpacing;
-        Align align;
+        const float lineSpacing;
+        const Align align;
+		const Algorithm algorithm;
     public:
-        BaseResizer(float lineSpacing = 1.15, Align align = Align::left);
+        BaseResizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);
 
         void init(std::vector<BaseCharacter*>& characters, std::vector<BaseLine* >& lines);
 
@@ -35,15 +43,14 @@ namespace ui {
 
         virtual sf::Vector2f getNormalSize() = 0;
 
-		virtual bool getRerender() const = 0;
-
-		virtual void setRerender(bool rerender) = 0;
-
         virtual BaseResizer * copy() = 0;
 
         virtual ~BaseResizer() = default;
     };
-	
+
 	template<>
 	bool convert(const YAML::Node &node, BaseResizer::Align &align);
+
+	template<>
+	bool convert(const YAML::Node &node, BaseResizer::Algorithm &align);
 }

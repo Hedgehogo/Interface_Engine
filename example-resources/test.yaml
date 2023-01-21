@@ -16,6 +16,11 @@ object:
       type: SL
       object:
         type: Text
+        text-color: green
+        background: black
+        resizer:
+          type: Resizer
+          algorithm: absolute
         text-blocks:
           - type: TB
             text:
@@ -24,6 +29,6 @@ object:
               language: ru
               key: Install
         font: ../example-resources/msyh.ttc
-        size: 30
+        size: 12
       normal-object-position:
         var: a
