@@ -48,7 +48,7 @@ int main() {
 				sf::Vector2f windowSize{static_cast<float>(event.size.width), static_cast<float>(event.size.height)};
 				if(windowSize.x < minSize.x || windowSize.y < minSize.y) {
 					windowSize = ui::max(windowSize, minSize);
-					window.setSize(static_cast<sf::Vector2u>(windowSize));
+					window.setSize(sf::Vector2u{windowSize});
 				}
 				view.reset({{}, windowSize});
 				window.setView(view);
@@ -57,7 +57,7 @@ int main() {
 		}
         interface.setSize(sf::Vector2f{window.getSize()});
 		window.clear();
-		interface.update(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window.getSystemHandle());
+		interface.update(sf::Vector2f{(sf::Mouse::getPosition(window))}, window.getSystemHandle());
 		interface.draw();
 		//interface.drawDebug(window, 0, 2, 90, 90);
 		window.display();

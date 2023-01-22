@@ -24,7 +24,6 @@ namespace ui {
 			virtual bool isExists();
 			
 			explicit operator bool();
-			
 		};
 	}
 	

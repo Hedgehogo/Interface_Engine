@@ -7,9 +7,6 @@
 #include "../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
-
-	TextPressedInteraction interaction{new TextSelectionEvent{}, {Key::mouseLeft}};
-
 	std::vector<BaseCharacter *>::iterator nullBaseCharacterIterator{nullptr};
 
     Text::Text(std::vector<BaseTextBlock *> textBlocks, IUninteractive *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
@@ -22,7 +19,6 @@ namespace ui {
             textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
         }
         resizer->init(textCharacters, lines);
-
     }
 
     Text::~Text() {

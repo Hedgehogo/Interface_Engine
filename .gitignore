@@ -2,5 +2,7 @@ layers.md
 .idea
 /cmake-build-debug/
 /cmake-build-release/
+/cmake-build-debug-msvc/
+/cmake-build-release-msvc/
 *.swp
 Doxyfile

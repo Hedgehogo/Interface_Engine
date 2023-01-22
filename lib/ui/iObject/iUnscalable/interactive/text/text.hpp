@@ -12,10 +12,7 @@
 #include "interaction/selectionAndCopy/textSelectionAndCopyInteraction.hpp"
 
 namespace ui {
-
-	extern TextPressedInteraction interaction;
-
-	class Text : public Interactive, public IScalable, public IDrawable, public IUpdatable {
+	class Text : public Interactive, public IDrawable, public IUpdatable {
     protected:
         sf::RenderTarget *renderTarget;
 

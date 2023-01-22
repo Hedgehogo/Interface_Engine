@@ -99,7 +99,8 @@ namespace ui {
 		inherit<IScalable, Button>();
 		inherit<IScalable, Switch>();
 		inherit<IUnscalable, IScalable>();
-		inherit<IScalable, Text>();
+		inherit<Interactive, Text>();
+		inherit<IUnscalable, Interactive>();
         inherit<BasePanel, ConstPanel>();
 		inherit<BasePanel, Panel>();
 		inherit<IObject, BasePanel>();

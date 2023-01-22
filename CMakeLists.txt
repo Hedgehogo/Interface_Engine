@@ -15,7 +15,12 @@ add_subdirectory(lib/modules/modules/localization_System)
 add_library(${PROJECT_NAME} ${src})
 
 set(SFML_PATH_1 "\\usr\\lib\\cmake\\SFML")
-set(SFML_PATH_2 "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
+
+if(${CMAKE_CXX_COMPILER} MATCHES "Visual Studio")
+    set(SFML_PATH_2 "C:\\SFML-2.5.1\\lib\\cmake\\SFML")
+else()
+    set(SFML_PATH_2 "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
+endif()
 
 if(EXISTS ${SFML_PATH_2})
     set(SFML_STATIC_LIBRARIES TRUE)
