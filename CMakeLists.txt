@@ -10,7 +10,7 @@ endif ()
 file(GLOB_RECURSE src "lib/ui/*.hpp" "lib/ui/*.cpp" "lib/modules/appendix/*.hpp" "lib/modules/appendix/*.cpp")
 
 add_subdirectory(lib/modules/modules/yaml-cpp)
-add_subdirectory(lib/modules/modules/localization_System)
+add_subdirectory(lib/modules/modules/Localisation_System)
 
 add_library(${PROJECT_NAME} ${src})
 
