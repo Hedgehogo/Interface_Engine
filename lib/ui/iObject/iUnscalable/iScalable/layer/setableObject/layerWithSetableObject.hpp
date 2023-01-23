@@ -29,7 +29,7 @@ namespace ui
 	public:
 		LayerWithSetableObject(sf::Vector2f minSize, IScalable* object);
 
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
+		void init(InitInfo initInfo) override;
 
 		void setObject(IScalable* newObject, bool deleteOld);
 

@@ -14,7 +14,7 @@ namespace ui {
 		sf::Vector2f sliderSize;
 		sf::Vector2f moveZoneSize;
 		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
+		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
 		void copy(BaseSlider* baseSlider);
 		

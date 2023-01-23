@@ -15,7 +15,7 @@ namespace ui {
 	public:
 		explicit Interactive_Simple(IInteraction* interaction);
 		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
+		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
 		void update() override;
 		

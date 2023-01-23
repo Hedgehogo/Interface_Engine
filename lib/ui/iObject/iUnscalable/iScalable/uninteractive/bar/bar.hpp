@@ -16,7 +16,7 @@ namespace ui {
 		void copy(Bar* bar);
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
+		void init(InitInfo initInfo) override;
 		
 		explicit Bar(IUninteractive* background, IUninteractive* strip, float offset = 0, bool horizontal = true);
 		

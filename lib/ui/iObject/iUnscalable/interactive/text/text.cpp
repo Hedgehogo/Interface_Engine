@@ -35,14 +35,15 @@ namespace ui {
         delete textInteraction;
     }
 
-    void Text::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
-        updateManager.add(*this);
-        this->renderTarget = &renderTarget;
-        background->init(renderTexture, this->drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
+    void Text::init(InteractiveInitInfo interactiveInitInfo) {
+		interactiveInitInfo.updateManager.add(*this);
+        this->renderTarget = &interactiveInitInfo.renderTarget;
+		InitInfo initInfo{renderTexture, this->drawManager, interactiveInitInfo.updateManager, *interactionManager, *interactionStack, interactiveInitInfo.panelManager};
+		background->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
         for (BaseTextBlock *textBlock: textBocks) {
-            textBlock->init(renderTexture, this->drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
+			textBlock->init(initInfo);
         }
-        drawManager.add(*this);
+		interactiveInitInfo.drawManager.add(*this);
 
 	    textInteraction->init(this, *interactionManager);
     }

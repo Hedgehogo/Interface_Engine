@@ -27,7 +27,7 @@ namespace ui {
 		void copy(BasePanel* panel);
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
+		void init(InitInfo initInfo) override;
 		
 		BasePanel(IScalable *object, ISizing2* sizing, IPositioning2* positioning, bool displayed = false);
 		

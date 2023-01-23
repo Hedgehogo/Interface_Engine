@@ -18,7 +18,7 @@ namespace ui {
 	public:
 		ButtonWithPanel(Panel *panel, DisplayPanelInteraction* interaction, IScalable *background);
 		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
+		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
 		~ButtonWithPanel() override;
 		

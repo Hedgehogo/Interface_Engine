@@ -12,7 +12,7 @@ namespace ui {
     public:
         LayerWithBackground(IScalable *object, IUninteractive* background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
 
-        void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
+        void init(InitInfo initInfo) override;
 
         void setPosition(sf::Vector2f position);
 

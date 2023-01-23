@@ -13,9 +13,9 @@ namespace ui {
 		}
 	}
 	
-	void LayerWithConstBezel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-		bezel->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
-		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+	void LayerWithConstBezel::init(InitInfo initInfo) {
+		bezel->init(initInfo);
+		object->init(initInfo);
 	}
 	
 	LayerWithConstBezel::~LayerWithConstBezel() {

@@ -11,7 +11,7 @@ namespace ui {
 	public:
 		ScrollLayer(IUnscalable *object, const PSRVec2f &normalObjectPosition, const sf::Vector2f &minSize);
 
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
+		void init(InitInfo initInfo) override;
 
 		sf::Vector2f getMinSize() override;
 

@@ -6,6 +6,7 @@
 #include "../interaction/interactionManager/interactionManager.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../animation/manager/animationManager.hpp"
+#include "initInfo/initInfo.hpp"
 
 typedef unsigned uint;
 
@@ -16,7 +17,7 @@ namespace ui {
 	
 	class IObject {
 	public:
-		virtual void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) = 0;
+		virtual void init(InitInfo initInfo) = 0;
 		
 		virtual ~IObject() = default;
 		

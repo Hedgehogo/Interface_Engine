@@ -10,7 +10,7 @@ namespace ui {
 		std::vector<float> boundsVertical;
 		std::vector<float> boundsHorizontal;
 		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
+		void init(InitInfo initInfo) override;
 	
 	public:
 		LayerWithBorder(std::vector<std::vector<IScalable *>> objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize = {0, 0});

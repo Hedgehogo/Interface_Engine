@@ -16,9 +16,9 @@ namespace ui{
 		bool isHorizontalBorder;
 		
     public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
+		void init(InitInfo initInfo) override;
 		
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
+		void init(InteractiveInitInfo interactiveInitInfo) override;
 	
 		LayerWithMovableBorder(IScalable *firstObject, IScalable *secondObject, bool isHorizontalBorder ,
 		                       AnimationVariable<float>& borderValue = *(new AnimationVariable<float>{0.5, new ConvertToUseCoefficientWithRange<float>{}}),

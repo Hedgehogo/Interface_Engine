@@ -11,12 +11,13 @@ namespace ui {
 		Panel(object, hideInteraction, new DontMovePanelInteraction{}, sizing, positioning, displayed) {
 	}
 	
-	void Panel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-		BasePanel::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
-		object->init(renderTarget, this->drawManager, this->updateManager, interactionManager, interactionStack, this->panelManager);
-		hideInteraction->init(*this, panelManager);
-		moveInteraction->init(*this, panelManager);
-		this->interactionManager = &interactionManager;
+	void Panel::init(InitInfo initInfo) {
+		BasePanel::init(initInfo);
+		InitInfo newInitInfo{initInfo.renderTarget, this->drawManager, this->updateManager, initInfo.interactionManager, initInfo.interactionStack, this->panelManager};
+		object->init(newInitInfo);
+		hideInteraction->init(*this, initInfo.panelManager);
+		moveInteraction->init(*this, initInfo.panelManager);
+		this->interactionManager = &initInfo.interactionManager;
 	}
 	
 	Panel::~Panel() {

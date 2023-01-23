@@ -1,11 +1,11 @@
 #include "layerWithRenderTexture.hpp"
 
 namespace ui {
-	void LayerWithRenderTexture::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-		this->renderTarget = &renderTarget;
-		this->interactionManager = &interactionManager;
-		drawManager.add(*this);
-		object->init(renderTexture, this->drawManager, updateManager, interactionManager, interactionStack, panelManager);
+	void LayerWithRenderTexture::init(InitInfo initInfo) {
+		this->renderTarget = &initInfo.renderTarget;
+		this->interactionManager = &initInfo.interactionManager;
+		initInfo.drawManager.add(*this);
+		object->init(initInfo.copy(renderTexture).copy(this->drawManager));
 	}
 	
 	LayerWithRenderTexture::LayerWithRenderTexture(IScalable *object, bool optimize, sf::Vector2f minSize) :
@@ -25,17 +25,17 @@ namespace ui {
 	
 	void LayerWithRenderTexture::resize(sf::Vector2f size, sf::Vector2f position) {
 		LayoutWithObject::resize(size, position);
-        sf::Vector2f start {std::floor(position.x), std::ceil(position.y)};
-        sf::Vector2f end {std::floor(position.x + size.x), std::ceil(position.y + size.y)};
-        sf::Vector2i textureSize{end - start};
+		sf::Vector2f start{std::floor(position.x), std::ceil(position.y)};
+		sf::Vector2f end{std::floor(position.x + size.x), std::ceil(position.y + size.y)};
+		sf::Vector2i textureSize{end - start};
 		
 		view.reset({start, end - start});
 		
-        renderTexture.create(textureSize.x, textureSize.y);
-        renderTexture.setView(view);
+		renderTexture.create(textureSize.x, textureSize.y);
+		renderTexture.setView(view);
 		
 		sprite.setTexture(renderTexture.getTexture());
-        sprite.setTextureRect({{0, 0}, textureSize});
+		sprite.setTextureRect({{0, 0}, textureSize});
 		sprite.setPosition(start);
 		
 		active = true;
@@ -57,18 +57,18 @@ namespace ui {
 	}
 	
 	LayerWithRenderTexture *LayerWithRenderTexture::copy() {
-		LayerWithRenderTexture* layerWithRenderTexture{new LayerWithRenderTexture{object->copy(), optimize}};
+		LayerWithRenderTexture *layerWithRenderTexture{new LayerWithRenderTexture{object->copy(), optimize}};
 		LayerWithRenderTexture::copy(layerWithRenderTexture);
 		return layerWithRenderTexture;
 	}
 	
 	void LayerWithRenderTexture::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-        object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+		object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
 	
 	bool convertPointer(const YAML::Node &node, LayerWithRenderTexture *&layerWithRenderTexture) {
 		layerWithRenderTexture = new LayerWithRenderTexture{
-			node["object"].as<IScalable*>(),
+			node["object"].as<IScalable *>(),
 			convDef(node["optimize"], true),
 			convDef(node["min-size"], sf::Vector2f{})
 		};

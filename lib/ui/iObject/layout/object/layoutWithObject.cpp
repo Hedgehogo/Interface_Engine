@@ -4,8 +4,8 @@
 namespace ui {
 	LayoutWithObject::LayoutWithObject(IScalable *object) : object(object) {}
 	
-	void LayoutWithObject::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+	void LayoutWithObject::init(InitInfo initInfo) {
+		object->init(initInfo);
 	}
 	
 	LayoutWithObject::~LayoutWithObject() {

@@ -10,9 +10,9 @@ namespace ui {
 		setRangeBounds(normalObjectPosition, {0, 0}, {1, 1});
 	}
 
-	void ScrollLayer::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-		ILayerWithView::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
-		object->init(renderTarget, this->drawManager, updateManager, interactionManager, interactionStack, panelManager);
+	void ScrollLayer::init(InitInfo initInfo) {
+		ILayerWithView::init(initInfo);
+		object->init(initInfo.copy(this->drawManager));
 	}
 
 	sf::Vector2f ScrollLayer::getMinSize() {

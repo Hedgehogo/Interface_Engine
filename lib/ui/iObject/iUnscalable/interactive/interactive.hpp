@@ -2,6 +2,7 @@
 
 #include "../iScalable/iScalable.hpp"
 #include "../../../interaction/interactionStack/interactionStack.hpp"
+#include "initInfo/interactiveInitInfo.hpp"
 
 namespace ui {
 	class Interactive : public virtual IUnscalable {
@@ -12,9 +13,9 @@ namespace ui {
 		void copy(Interactive* interactive);
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
+		void init(InitInfo initInfo) override;
 		
-		virtual void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) = 0;
+		virtual void init(InteractiveInitInfo interactiveInitInfo) = 0;
 		
 		explicit Interactive();
 	};

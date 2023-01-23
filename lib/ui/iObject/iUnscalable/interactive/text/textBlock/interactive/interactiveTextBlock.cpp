@@ -12,11 +12,11 @@ namespace ui {
 		indexInteraction(indexInteraction), interaction(nullptr), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor), interact(false),
 		oldInteract(false) {}
 	
-	void InteractiveTextBlock::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-		TextBlock::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
-		this->interactionManager = &interactionManager;
+	void InteractiveTextBlock::init(InitInfo initInfo) {
+		TextBlock::init(initInfo);
+		this->interactionManager = &initInfo.interactionManager;
 		if(!interaction)
-			interaction = interactionStack.at(indexInteraction);
+			interaction = initInfo.interactionStack.at(indexInteraction);
 	}
 	
 	void InteractiveTextBlock::update() {

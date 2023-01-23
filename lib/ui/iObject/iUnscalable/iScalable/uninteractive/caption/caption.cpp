@@ -25,9 +25,9 @@ namespace ui {
 		return defaultSize;
 	}
 	
-	void Caption::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-        OnlyDrawable::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
-		background->init(renderTarget, this->drawManager, updateManager, interactionManager, interactionStack, panelManager);
+	void Caption::init(InitInfo initInfo) {
+		OnlyDrawable::init(initInfo);
+		background->init(initInfo.copy(this->drawManager));
 	}
 	
 	Caption::Caption(sf::String text, IUninteractive *background, sf::Font &font, sf::Vector2f minSize, int fontSize, sf::Color color, sf::Text::Style style, float rotation, InternalPositioning2 internalPositioning2,

@@ -1,7 +1,7 @@
 #include "layerWithConstBorder.hpp"
 namespace ui {
-	void LayerWithConstBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-		LayoutWithTwoObjects::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+	void LayerWithConstBorder::init(InitInfo initInfo) {
+		LayoutWithTwoObjects::init(initInfo);
 	}
 	
 	LayerWithConstBorder::LayerWithConstBorder(IScalable *constObject, IScalable *secondObject, Side side, float borderDistance, sf::Vector2f minSize) :

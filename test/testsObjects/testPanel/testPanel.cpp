@@ -12,8 +12,8 @@ const TestPanel::Processed &TestPanel::getProcessed() const {
 	return processed;
 }
 
-void TestPanel::init(sf::RenderTarget &renderTarget, ui::DrawManager &drawManager, ui::UpdateManager &updateManager, ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack, ui::IPanelManager &panelManager) {
-	BasePanel::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+void TestPanel::init(ui::InitInfo initInfo) {
+	BasePanel::init(initInfo);
 
 	processed.init.time = getProcessorTime();
 	processed.init.renderTarget = &renderTarget;

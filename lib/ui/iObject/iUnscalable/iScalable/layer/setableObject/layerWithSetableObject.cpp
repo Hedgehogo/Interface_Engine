@@ -4,14 +4,15 @@ namespace ui
 {
 	LayerWithSetableObject::LayerWithSetableObject(sf::Vector2f minSize, IScalable* object) : LayoutWithObject(object) {}
 
-	void LayerWithSetableObject::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
+	void
+	LayerWithSetableObject::init(InitInfo initInfo) {
 		drawManager.add(this->drawManager);
 		updateManager.add(this->updateManager);
 
-		this->panelManagerInterceptor.init(panelManager);
+		this->panelManagerInterceptor.init(initInfo.panelManager);
 
-		this->renderTarget = &renderTarget;
-		this->interactionStack = &interactionStack;
+		this->renderTarget = &initInfo.renderTarget;
+		this->interactionStack = &initInfo.interactionStack;
 	}
 
 	void LayerWithSetableObject::setObject(IScalable* newObject, bool deleteOld)
@@ -21,7 +22,8 @@ namespace ui
 		updateManager.clear();
 		interactionManager.clear();
 		panelManagerInterceptor.clear();
-		newObject->init(*renderTarget, drawManager, updateManager, interactionManager, *interactionStack, panelManagerInterceptor);
+		InitInfo initInfo{*renderTarget, drawManager, updateManager, interactionManager, *interactionStack, panelManagerInterceptor};
+		newObject->init(initInfo);
 		object = newObject;
 	}
 

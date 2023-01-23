@@ -6,10 +6,10 @@ namespace ui {
 
 	Button::Button(IUninteractive *background, IInteraction *interaction) : BaseButton(background, interaction), interactionIndex(-1) {}
 
-    void Button::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
+    void Button::init(InteractiveInitInfo interactiveInitInfo) {
 	    if (interactionIndex >= 0)
 		    interaction = interactionStack->at(interactionIndex);
-		BaseButton::init(renderTarget, drawManager, updateManager, panelManager);
+		BaseButton::init(interactiveInitInfo);
 	}
 
 	Button *Button::copy() {

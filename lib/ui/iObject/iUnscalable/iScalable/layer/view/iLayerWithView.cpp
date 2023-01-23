@@ -3,9 +3,9 @@
 namespace ui {
 	ILayerWithView::ILayerWithView(sf::Vector2f minSize) : Layer(minSize) {}
 
-	void ILayerWithView::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-		this->renderTarget = &renderTarget;
-		drawManager.add(*this);
+	void ILayerWithView::init(InitInfo initInfo) {
+		this->renderTarget = &initInfo.renderTarget;
+		initInfo.drawManager.add(*this);
 	}
 
 	void ILayerWithView::draw() {

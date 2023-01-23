@@ -4,10 +4,10 @@ namespace ui {
 	ButtonWithPanel::ButtonWithPanel(Panel *panel, DisplayPanelInteraction *interaction, IScalable *background) :
 		BaseButton(background, interaction), panel(panel) {}
 	
-	void ButtonWithPanel::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
-		BaseButton::init(renderTarget, drawManager, updateManager, panelManager);
-		panel->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
-		dynamic_cast<DisplayPanelInteraction *>(interaction)->init(*panel, panelManager);
+	void ButtonWithPanel::init(InteractiveInitInfo interactiveInitInfo) {
+		BaseButton::init(interactiveInitInfo);
+		panel->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
+		dynamic_cast<DisplayPanelInteraction *>(interaction)->init(*panel, interactiveInitInfo.panelManager);
 	}
 	
 	ButtonWithPanel::~ButtonWithPanel() {

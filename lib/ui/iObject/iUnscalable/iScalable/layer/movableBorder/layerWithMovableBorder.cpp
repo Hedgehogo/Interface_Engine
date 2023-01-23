@@ -15,13 +15,14 @@ namespace ui {
 		});
 	}
 	
-	void LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-		Interactive::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
-		LayoutWithTwoObjects::init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+	void
+	LayerWithMovableBorder::init(InitInfo initInfo) {
+		Interactive::init(initInfo);
+		LayoutWithTwoObjects::init(initInfo);
 	}
 	
-	void LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
-		Interactive_Simple::init(renderTarget, drawManager, updateManager, panelManager);
+	void LayerWithMovableBorder::init(InteractiveInitInfo interactiveInitInfo) {
+		Interactive_Simple::init(interactiveInitInfo);
 		pressedInteraction.init(*interactionManager);
 		dynamic_cast<AddBlockInteractionEvent *>(dynamic_cast<OneKeyInteraction *>(Interactive_Simple::interaction)->getEvent())->init(*interactionManager);
 	}

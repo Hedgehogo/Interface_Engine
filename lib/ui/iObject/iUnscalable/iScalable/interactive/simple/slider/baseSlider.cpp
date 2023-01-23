@@ -2,10 +2,10 @@
 #include <cmath>
 
 namespace ui {
-	void BaseSlider::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) {
-		Interactive_Simple::init(renderTarget, drawManager, updateManager, panelManager);
-		background->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
-		slider->init(renderTarget, drawManager, updateManager, *interactionManager, *interactionStack, panelManager);
+	void BaseSlider::init(InteractiveInitInfo interactiveInitInfo) {
+		Interactive_Simple::init(interactiveInitInfo);
+		background->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
+		slider->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
 		dynamic_cast<SliderInteraction *>(interaction)->init(*interactionManager);
 	}
 	

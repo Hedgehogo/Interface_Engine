@@ -2,12 +2,13 @@
 
 
 namespace ui {
-	void Interface::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &, InteractionStack &, IPanelManager &) {
+	void Interface::init(InitInfo initInfo) {
 		if(!initialized) {
-			this->renderTarget = &renderTarget;
-			drawManager.add(*this);
-			updateManager.add(*this);
-			object->init(renderTarget, this->drawManager, this->updateManager, this->interactionManager, *this->interactionStack, this->panelManager);
+			this->renderTarget = &initInfo.renderTarget;
+			initInfo.drawManager.add(*this);
+			initInfo.updateManager.add(*this);
+			InitInfo newInitInfo{initInfo.renderTarget, this->drawManager, this->updateManager, this->interactionManager, *this->interactionStack, this->panelManager};
+			object->init(newInitInfo);
 			initialized = true;
 		}
 	}
@@ -15,7 +16,8 @@ namespace ui {
 	void Interface::init(sf::RenderTarget &renderTarget) {
 		if(!initialized) {
 			this->renderTarget = &renderTarget;
-			object->init(renderTarget, drawManager, updateManager, interactionManager, *interactionStack, panelManager);
+			InitInfo initInfo{renderTarget, drawManager, updateManager, interactionManager, *interactionStack, panelManager};
+			object->init(initInfo);
             sf::Vector2f size (max(static_cast<sf::Vector2f>(renderTarget.getSize()), object->getMinSize()));
 			resize(size,sf::Vector2f(0, 0));
 			initialized = true;

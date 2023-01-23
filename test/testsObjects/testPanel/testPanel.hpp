@@ -56,7 +56,7 @@ public:
 
 	void setUpdateInteractionsResult(bool updateInteractionsResult);
 
-	void init(sf::RenderTarget &renderTarget, ui::DrawManager &drawManager, ui::UpdateManager &updateManager, ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack, ui::IPanelManager &panelManager) override;
+	void init(ui::InitInfo initInfo) override;
 
 	bool isIndependent() override;
 

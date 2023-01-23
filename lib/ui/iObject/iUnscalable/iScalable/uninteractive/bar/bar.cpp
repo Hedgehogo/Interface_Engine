@@ -2,9 +2,9 @@
 #include "bar.hpp"
 
 namespace ui {
-	void Bar::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-		background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
-		strip->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+	void Bar::init(InitInfo initInfo) {
+		background->init(initInfo);
+		strip->init(initInfo);
 	}
 	
 	Bar::Bar(IUninteractive *background, IUninteractive *strip, float offset, bool horizontal) :

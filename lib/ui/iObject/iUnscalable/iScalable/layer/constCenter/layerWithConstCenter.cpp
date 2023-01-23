@@ -1,12 +1,12 @@
 #include "layerWithConstCenter.hpp"
 
 namespace ui {
-	void LayerWithConstCenter::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
-		background->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
-		object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
-		drawManager.add(*this);
-		firstObject->init(renderTarget, this->firstDrawManager, updateManager, interactionManager, interactionStack, panelManager);
-		secondObject->init(renderTarget, this->secondDrawManager, updateManager, interactionManager, interactionStack, panelManager);
+	void LayerWithConstCenter::init(InitInfo initInfo) {
+		background->init(initInfo);
+		object->init(initInfo);
+		initInfo.drawManager.add(*this);
+		firstObject->init(initInfo.copy(this->firstDrawManager));
+		secondObject->init(initInfo.copy(this->secondDrawManager));
 	}
 	
 	LayerWithConstCenter::LayerWithConstCenter(IScalable* object, IUninteractive* background, float aspectRatio, sf::Vector2f minSize) :

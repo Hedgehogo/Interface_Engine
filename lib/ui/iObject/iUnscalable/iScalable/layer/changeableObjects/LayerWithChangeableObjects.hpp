@@ -18,7 +18,7 @@ namespace ui
 
 		LayerWithChangeableObjects(std::vector<IScalable*> objects, uint index = 0, sf::Vector2f minSize = { 0, 0});
 
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
+		void init(InitInfo initInfo) override;
 
 		void setValue(std::shared_ptr<SValue<uint>> index);
 

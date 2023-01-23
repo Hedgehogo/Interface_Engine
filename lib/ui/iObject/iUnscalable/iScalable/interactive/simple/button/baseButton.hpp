@@ -12,7 +12,7 @@ namespace ui {
 	public:
 		BaseButton(IScalable *background, IInteraction* interaction);
 
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, IPanelManager &panelManager) override;
+		void init(InteractiveInitInfo interactiveInitInfo) override;
 
 		~BaseButton() override;
 

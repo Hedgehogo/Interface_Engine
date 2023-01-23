@@ -3,9 +3,10 @@
 namespace ui {
 	LayoutWithObjectsArray::LayoutWithObjectsArray(std::vector<IScalable *> objects) : objects(objects) {}
 	
-	void LayoutWithObjectsArray::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
+	void
+	LayoutWithObjectsArray::init(InitInfo initInfo) {
 		for(auto object: objects) {
-			object->init(renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
+			object->init(initInfo);
 		}
 	}
 	

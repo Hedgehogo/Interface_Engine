@@ -9,7 +9,7 @@ namespace ui {
 		ConstPanel* panel;
 		
 	public:
-		void init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) override;
+		void init(InitInfo initInfo) override;
 		
 		LayerWithPanel(ConstPanel* panel, IScalable* object, sf::Vector2f minSize = {});
 		

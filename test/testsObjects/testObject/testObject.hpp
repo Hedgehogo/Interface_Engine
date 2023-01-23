@@ -34,7 +34,7 @@ protected:
 public:
 	TestObject(sf::Vector2f minSize = {0, 0}, sf::Vector2f normalSize = {100, 100}, bool updateInteractionsResult = true);
 
-	void init(sf::RenderTarget &renderTarget, ui::DrawManager &drawManager, ui::UpdateManager &updateManager, ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack, ui::IPanelManager &panelManager) override;
+	void init(ui::InitInfo initInfo) override;
 
 	Processed getProcessed();
 

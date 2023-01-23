@@ -4,7 +4,7 @@
 
 TestObject::TestObject(sf::Vector2f minSize, sf::Vector2f normalSize, bool updateInteractionsResult) : minSize(minSize), normalSize(normalSize), updateInteractionsResult(updateInteractionsResult) {}
 
-void TestObject::init(sf::RenderTarget &renderTarget, ui::DrawManager &drawManager, ui::UpdateManager &updateManager, ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack, ui::IPanelManager &panelManager) {
+void TestObject::init(ui::InitInfo initInfo) {
 	processed.init.time = getProcessorTime();
 	processed.init.renderTarget = &renderTarget;
 	processed.init.drawManager = &drawManager;
