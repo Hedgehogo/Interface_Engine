@@ -18,7 +18,23 @@ namespace ui {
 
         sf::Clock clock;
     public:
-        LayerWithShader(IScalable *object, sf::Shader *shader, uint transmission, bool optimize = true, sf::Vector2f minSize = {});
+        LayerWithShader(IScalable *var, sf::Shader *shader, uint transmission,
+                        std::map<std::string, PISfloat> sharedValuesf = {},
+                        std::map<std::string, PISint> sharedValuesi = {},
+                        std::map<std::string, PISbool> sharedValuesb = {},
+                        std::map<std::string, PISValue<sf::Color>> sharedValuesc = {},
+                        std::map<std::string, PSRVec2f> sharedValuesv = {},
+                        bool optimize = true, sf::Vector2f minSize = {});
+
+		void setUniform(std::string name, float var);
+
+		void setUniform(std::string name, int var);
+
+		void setUniform(std::string name, bool var);
+
+		void setUniform(std::string name, sf::Color var);
+
+		void setUniform(std::string name, sf::Vector2f var);
 
         void setSize(sf::Vector2f size) override;
 

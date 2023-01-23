@@ -1,15 +1,11 @@
 #include "testObject.hpp"
 
-#ifdef _WIN32
-#include <intrin.h>
-#else
-#include <x86intrin.h>
-#endif
+#include "../processorTime.hpp"
 
 TestObject::TestObject(sf::Vector2f minSize, sf::Vector2f normalSize, bool updateInteractionsResult) : minSize(minSize), normalSize(normalSize), updateInteractionsResult(updateInteractionsResult) {}
 
 void TestObject::init(sf::RenderTarget &renderTarget, ui::DrawManager &drawManager, ui::UpdateManager &updateManager, ui::InteractionManager &interactionManager, ui::InteractionStack &interactionStack, ui::IPanelManager &panelManager) {
-	processed.init.time = __rdtsc();
+	processed.init.time = getProcessorTime();
 	processed.init.renderTarget = &renderTarget;
 	processed.init.drawManager = &drawManager;
 	processed.init.updateManager = &updateManager;
@@ -34,24 +30,24 @@ sf::Vector2f TestObject::getNormalSize() {
 }
 
 bool TestObject::updateInteractions(sf::Vector2f mousePosition) {
-	processed.updateInteractions.time = __rdtsc();
+	processed.updateInteractions.time = getProcessorTime();
 	processed.updateInteractions.mousePosition = mousePosition;
 	return updateInteractionsResult;
 }
 
 void TestObject::draw() {
-	processed.draw = __rdtsc();
+	processed.draw = getProcessorTime();
 }
 
 void TestObject::update() {
-	processed.update = __rdtsc();
+	processed.update = getProcessorTime();
 }
 
 TestObject *TestObject::copy() {
-	processed.copy = __rdtsc();
+	processed.copy = getProcessorTime();
 	return new TestObject{minSize, normalSize, updateInteractionsResult};
 }
 
 void TestObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-	processed.drawDebug = __rdtsc();
+	processed.drawDebug = getProcessorTime();
 }

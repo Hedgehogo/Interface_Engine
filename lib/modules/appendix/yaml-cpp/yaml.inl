@@ -1,5 +1,7 @@
 //included into yaml.hpp
 
+#include "yaml.hpp"
+
 template <typename T>
 sf::Vector2<T> operator*(const sf::Vector2<T> &first, const sf::Vector2<T> &second) {
 	return {first.x * second.x, first.y * second.y};

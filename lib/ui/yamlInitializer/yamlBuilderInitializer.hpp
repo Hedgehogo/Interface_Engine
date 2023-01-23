@@ -44,6 +44,16 @@
 #include "../interaction/iInteraction/empty/emptyInteraction.hpp"
 #include "../interaction/iInteraction/mouse/lambda/mouseLambdaInteraction.hpp"
 #include "../interaction/event/key/openUrl/openUrlEvent.hpp"
+#include "../../modules/appendix/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"
+#include "../../modules/appendix/yaml-cpp/shared/value/converts/toBool/greater/sConvertToBoolGreater.hpp"
+#include "../../modules/appendix/yaml-cpp/shared/value/converts/toBool/less/sConvertToBoolLess.hpp"
+#include "../../modules/appendix/yaml-cpp/shared/value/converts/toBool/lessOrEquals/sConvertToBoolLessOrEquals.hpp"
+#include "../../modules/appendix/yaml-cpp/shared/value/converts/toBool/greaterOrEquals/sConvertToBoolGreaterOrEquals.hpp"
+#include "../animation/animator/unit/animation/animation.hpp"
+#include "../animation/animator/unit/prerequisite/prerequisite.hpp"
+#include "../animation/animator/unit/prerequisite/velves/withISbool/valveWithISbool.hpp"
+#include "../animation/changeVariable/strainghtLine/changeVariableByStraightLine.hpp"
+#include "../animation/variables/shared/sharedAnimationVariable.hpp"
 #include "../debug/debugLayer.hpp"
 
 namespace ui {

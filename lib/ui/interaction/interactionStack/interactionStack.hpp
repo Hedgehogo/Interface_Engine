@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../iInteraction/iInteraction.hpp"
+#include "../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include <vector>
 
 namespace ui {
@@ -17,4 +18,6 @@ namespace ui {
 		
 		void add(IInteraction *element);
 	};
+
+	bool convertPointer(const YAML::Node &node, InteractionStack*& interactionStack);
 }

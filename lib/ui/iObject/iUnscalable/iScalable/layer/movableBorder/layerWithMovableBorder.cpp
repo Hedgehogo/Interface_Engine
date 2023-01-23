@@ -1,14 +1,18 @@
 #include "layerWithMovableBorder.hpp"
 #include "../../../../../interaction/event/key/addInteraction/blockInteraction/addBlockInteractionEvent.hpp"
-#include "../../../../../drawable/manager/drawManager.hpp"
 #include <algorithm>
 
 namespace ui {
-	LayerWithMovableBorder::LayerWithMovableBorder(IScalable *firstObject, IScalable *secondObject, bool isHorizontalBorder, float borderValue, int borderInteractionSize, sf::Vector2f minSize) :
+	LayerWithMovableBorder::LayerWithMovableBorder(IScalable *firstObject, IScalable *secondObject, bool isHorizontalBorder, AnimationVariable<float>& borderValue, int borderInteractionSize, sf::Vector2f minSize) :
 		Layer(minSize), LayoutWithTwoObjects(firstObject, secondObject),
 		pressedInteraction(new MovableBorderEvent{*this}, Key::mouseLeft),
 		Interactive_Simple(new OneKeyInteraction{new AddBlockInteractionEvent{pressedInteraction}, Key::mouseLeft}),
 		isHorizontalBorder(isHorizontalBorder), borderValue(borderValue), borderValueNow(borderValue), borderInteractionSize(borderInteractionSize) {
+
+		borderValue.addAnimationSetter([&](float value){
+			this->resize(this->size, this->position);
+			this->setBorderValue(this->getBorderValueNow());
+		});
 	}
 	
 	void LayerWithMovableBorder::init(sf::RenderTarget &renderTarget, DrawManager &drawManager, UpdateManager &updateManager, InteractionManager &interactionManager, InteractionStack &interactionStack, IPanelManager &panelManager) {
@@ -23,7 +27,7 @@ namespace ui {
 	}
 	
 	float LayerWithMovableBorder::getBorderValue() {
-		return this->borderValue;
+		return (float)borderValue;
 	}
 	
 	void LayerWithMovableBorder::setBorderValue(float borderValue) {
@@ -98,11 +102,11 @@ namespace ui {
 			float c = secondObjectMinSize.x / firstObjectMinSize.x;
 			float minSizeBorder = 1 - c / (c + 1);
 			
-			if(minSizeBorder > borderValue) {
-				borderValueNow = std::max({firstObjectMinSize.x / size.x, borderValue});
+			if(minSizeBorder > (float)borderValue) {
+				borderValueNow = std::max({firstObjectMinSize.x / size.x, (float)borderValue});
 			} else {
 				float diff = size.x - getMinSize().x;
-				borderValueNow = std::min({(diff + firstObjectMinSize.x) / size.x, borderValue});
+				borderValueNow = std::min({(diff + firstObjectMinSize.x) / size.x, (float)borderValue});
 			}
 			
 			firstObjectSize = {size.x * borderValueNow, size.y};
@@ -113,11 +117,11 @@ namespace ui {
 			float c = secondObjectMinSize.y / firstObjectMinSize.y;
 			float minSizeBorder = 1 - c / (c + 1);
 			
-			if(minSizeBorder > borderValue) {
-				borderValueNow = std::max({firstObjectMinSize.y / size.y, borderValue});
+			if(minSizeBorder > (float)borderValue) {
+				borderValueNow = std::max({firstObjectMinSize.y / size.y, (float)borderValue});
 			} else {
 				float diff = size.y - getMinSize().y;
-				borderValueNow = std::min({(diff + firstObjectMinSize.y) / size.y, borderValue});
+				borderValueNow = std::min({(diff + firstObjectMinSize.y) / size.y, (float)borderValue});
 			}
 			
 			firstObjectSize = {size.x, size.y * borderValueNow};
@@ -160,7 +164,7 @@ namespace ui {
 		IScalable *firstObject;
 		IScalable *secondObject;
 		bool isHorizontalBorder{false};
-		float borderValue{0.5f};
+		AnimationVariable<float> *borderValue;
 		int borderInteractionSize{5};
 		sf::Vector2f minSize{};
 		node["first-object"] >> firstObject;
@@ -174,15 +178,13 @@ namespace ui {
 		}
 		if(node["border-value"])
 			node["border-value"] >> borderValue;
+		else
+			borderValue = new AnimationVariable<float>{0.5, new ConvertToUseCoefficientWithRange<float>{}};
 		if(node["border-interaction-size"])
 			node["border-interaction-size"] >> borderInteractionSize;
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		
-		{ layerWithMovableBorder = new LayerWithMovableBorder{firstObject, secondObject, isHorizontalBorder, borderValue, borderInteractionSize}; return true; }
+		{ layerWithMovableBorder = new LayerWithMovableBorder{firstObject, secondObject, isHorizontalBorder, (*borderValue), borderInteractionSize}; return true; }
 	}
 }
-
-
-
-

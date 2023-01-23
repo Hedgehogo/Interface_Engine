@@ -18,6 +18,9 @@ namespace ui {
 	typedef ISValue<float> ISfloat;
 	typedef ISValue<int> ISint;
 	typedef ISValue<unsigned> ISuint;
+
+	template<typename T>
+	using PISValue = std::shared_ptr<ISValue<T>>;
 	
 	typedef std::shared_ptr<ISbool> PISbool;
 	typedef std::shared_ptr<ISfloat> PISfloat;

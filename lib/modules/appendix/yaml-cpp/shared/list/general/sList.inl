@@ -56,4 +56,22 @@ namespace ui {
 		}
 		set();
 	}
+
+	template<typename T>
+	bool convertPointer(const YAML::Node &node, SList<T> *&withList) {
+		if(node["list"]) {
+			std::vector<typename SList<T>::V> list{node["list"].size()};
+			for(int i = 0; i < list.size(); ++i) {
+				node["list"][i] >> list[i];
+			}
+			withList = new SList<T>{list};
+		} else {
+			std::vector<std::shared_ptr<T>> list{node["vars"].size()};
+			for(int i = 0; i < list.size(); ++i) {
+				list[i] = getSValue<T>(node["vars"][i]);
+			}
+			withList = new SList<T>{list};
+		}
+		return true;
+	}
 }

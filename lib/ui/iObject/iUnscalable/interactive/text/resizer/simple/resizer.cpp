@@ -1,7 +1,7 @@
 #include "resizer.hpp"
 
 namespace ui {
-    Resizer::Resizer(float lineSpacing, Align align) : BaseResizer{lineSpacing, align}{}
+    Resizer::Resizer(float lineSpacing, Align align, Algorithm algorithm) : BaseResizer{lineSpacing, align, algorithm}{}
 
     void Resizer::move(sf::Vector2f position) {
         startRender += position;
@@ -123,25 +123,6 @@ namespace ui {
         distanceSpace = 0;
     }
 
-	bool Resizer::isOnlyMove(sf::Vector2f size, sf::Vector2f position) {
-		if(size.x == endRender.x - startRender.x){
-			sf::Vector2f offset{position - startRender};
-			for (BaseCharacter*& character : (*characters)) {
-				character->move(offset);
-			}
-
-			for (BaseLine*& line : *lines) {
-				line->move(offset);
-			}
-
-			startRender = position;
-			endRender = position + size;
-			return true;
-		}
-
-		return false;
-	}
-
 	void Resizer::deleteOldCash(sf::Vector2f size, sf::Vector2f position) {
 		for (BaseLine*& line : *lines) {
 			delete line;
@@ -159,7 +140,7 @@ namespace ui {
 	}
 
 	void Resizer::spaceResize(BaseCharacter *character, float kerning, int i) {
-		if (this->nextPosition.x <= endRender.x){
+		if (this->nextPosition.x + (algorithm == BaseResizer::Algorithm::console ? character->getAdvance() : 0) <= endRender.x){
 			printCharacter(character, kerning);
 			distanceSpace = 0;
 		} else{
@@ -193,21 +174,30 @@ namespace ui {
 	}
 
     void Resizer::resize(sf::Vector2f size, sf::Vector2f position) {
-        if(isOnlyMove(size, position)) return;
+	    if(size.x == endRender.x - startRender.x){
+		    setPosition(position);
+		    return;
+	    }
 
 		deleteOldCash(size, position);
 
         for (int i = 0; i < (*characters).size(); i++) {
             BaseCharacter* character = (*characters)[i];
 
-            float kerning{0};
+            float kerning{(i != (*characters).size() - 1) ? character->getKerning((*characters)[i + 1]->getChar()) : 0};
 
             switch (character->isSpecial()) {
                 case BaseCharacter::Special::no:
-	                characterResize(character, kerning);
+					if (algorithm == BaseResizer::Algorithm::console)
+						spaceResize(character, kerning, i);
+					else
+	                    characterResize(character, kerning);
                     break;
                 case BaseCharacter::Special::space:
-	                spaceResize(character, kerning, i);
+	                if (algorithm == BaseResizer::Algorithm::absolute)
+		                characterResize(character, kerning);
+	                else
+		                spaceResize(character, kerning, i);
                     break;
                 case BaseCharacter::Special::enter:
 	                enterResize(i);
@@ -240,11 +230,22 @@ namespace ui {
 	}
 
     sf::Vector2f Resizer::getMinSize() {
-        sf::Vector2f minSize = {0, 0};
+	    sf::Vector2f minSize = {0, 0};
+
+	    if (algorithm == BaseResizer::Algorithm::console){
+			float advance = 0;
+		    for (BaseCharacter *character : *characters) {
+				advance = character->getAdvance();
+				if (advance > minSize.x) minSize.x = advance;
+			}
+		    return minSize;
+		}
+
         float wordSizeX = 0;
 
         for (BaseCharacter *character : *characters) {
-            if (character->isSpecial() == BaseCharacter::Special::no){
+            if ((algorithm == BaseResizer::Algorithm::base     && (character->isSpecial() == BaseCharacter::Special::no)) ||
+	            (algorithm == BaseResizer::Algorithm::absolute && (character->isSpecial() != BaseCharacter::Special::enter))){
                 wordSizeX += character->getAdvance();
             }else{
                 if (minSize.x < wordSizeX)
@@ -267,12 +268,11 @@ namespace ui {
     }
 
 	bool convertPointer(const YAML::Node &node, Resizer *&resizer) {
-        float lineSpacing{1.15};
-        BaseResizer::Align align{BaseResizer::Align::left};
-
-        if (node["line-spacing"]) node["line-spacing"] >> lineSpacing;
-        if (node["align"]) node["align"] >> align;
-
-        { resizer = new Resizer{lineSpacing, align}; return true; }
+        resizer = new Resizer{
+			convDef(node["line-spacing"], 1.15f),
+			convDef(node["align"], BaseResizer::Align::left),
+			convDef(node["algorithm"], BaseResizer::Algorithm::base)
+		};
+		return true;
     }
 }

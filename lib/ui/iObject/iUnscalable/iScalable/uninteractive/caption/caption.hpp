@@ -37,9 +37,7 @@ namespace ui {
 		
 		void draw() override;
 
-    protected:
         sf::FloatRect getBounds();
-    public:
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		

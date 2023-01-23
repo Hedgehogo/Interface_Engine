@@ -1,7 +1,43 @@
-type: LayerWithPanel
-object: blue
-panel:
-  object: red
-  sizing:
-    coefficient: 0.5, 0.5
-  positioning: 0.5, 0.5
+object:
+  type: LWBV
+  first-object:
+    type: LWCB
+    side: right
+    border-distance: 30
+    const-object:
+      type: Slider
+      slider: 525252
+      background: 37383A88
+      value:
+        var: a
+    second-object:
+      type: LWCBe
+      bezel: red
+      thickness: 10
+      object:
+        type: SL
+        object:
+          type: Text
+          text-color: green
+          background: black
+          resizer:
+            type: Resizer
+            algorithm: console
+          text-blocks:
+            - type: TB
+              text:
+                directory: ../example-resources
+                default-language: en
+                language: ru
+                key: test
+          font: ../example-resources/FrenchKissscript.ttf
+          size: 100
+        normal-object-position:
+          var: a
+  second-object:
+    type: Caption
+    text:
+      key: test
+    font: ../example-resources/FrenchKissscript.ttf
+    font-size: 100
+    background: white

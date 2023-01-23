@@ -29,7 +29,7 @@ namespace ui {
 
         Special isSpecial() override;
 
-        void draw() override;
+        void draw(bool selection) override;
 
         char32_t getChar() override;
 

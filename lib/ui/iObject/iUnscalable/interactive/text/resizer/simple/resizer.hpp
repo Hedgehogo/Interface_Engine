@@ -3,32 +3,31 @@
 #include "../baseResizer.hpp"
 
 namespace ui {
-    class Resizer : public BaseResizer {
-    public:
-        Resizer(float lineSpacing = 1.15, Align align = Align::left);
+	class Resizer : public BaseResizer {
+	protected:
+		uint distanceEnter = 0;
+		uint distanceSpace = 0;
 		
-        void move(sf::Vector2f position) override;
+		sf::Vector2f nextPosition;
 		
-        void setPosition(sf::Vector2f position) override;
+		sf::Vector2f startRender;
+		sf::Vector2f endRender;
 		
-    protected:
-        uint distanceEnter = 0;
-        uint distanceSpace = 0;
+	public:
+		Resizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);
 		
-        sf::Vector2f nextPosition;
+		void move(sf::Vector2f position) override;
 		
-        sf::Vector2f startRender;
-        sf::Vector2f endRender;
+		void setPosition(sf::Vector2f position) override;
 		
-        virtual void printCharacter(BaseCharacter *character, float kerning);
+	protected:
+		virtual void printCharacter(BaseCharacter *character, float kerning);
 		
-        virtual void porting(int i);
+		virtual void porting(int i);
 		
-        virtual void autoPorting(int i);
+		virtual void autoPorting(int i);
 		
-        virtual float equalize(uint i);
-		
-		virtual bool isOnlyMove(sf::Vector2f size, sf::Vector2f position);
+		virtual float equalize(uint i);
 		
 		virtual void deleteOldCash(sf::Vector2f size, sf::Vector2f position);
 		
@@ -44,19 +43,19 @@ namespace ui {
 		
 		virtual void endLineEqualize();
 		
-    public:
-        void resize(sf::Vector2f size, sf::Vector2f position) override;
+	public:
+		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-	    sf::Vector2f getPosition() override;
+		sf::Vector2f getPosition() override;
 		
-	    sf::Vector2f getSize() override;
+		sf::Vector2f getSize() override;
 		
-        sf::Vector2f getMinSize() override;
+		sf::Vector2f getMinSize() override;
 		
-        sf::Vector2f getNormalSize() override;
+		sf::Vector2f getNormalSize() override;
 		
-        Resizer * copy() override;
-    };
+		Resizer * copy();
+	};
 	
 	bool convertPointer(const YAML::Node &node, Resizer *&resizer);
 }

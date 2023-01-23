@@ -118,6 +118,6 @@ TEST(InteractionManager, priority) {
 
 	interactionManager.update({3, 3});
 
-	ASSERT_GT(testInteraction.getProcessed().update[0].time, testInteraction1.getProcessed().update[0].time);
-	ASSERT_GT(testInteraction1.getProcessed().update[0].time, testInteraction2.getProcessed().update[0].time);
+	ASSERT_LT(testInteraction.getProcessed().update[0].time, testInteraction1.getProcessed().update[0].time);
+	ASSERT_LT(testInteraction1.getProcessed().update[0].time, testInteraction2.getProcessed().update[0].time);
 }

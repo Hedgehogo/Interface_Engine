@@ -16,6 +16,13 @@ namespace ui {
     protected:
         sf::RenderTarget *renderTarget;
 
+		bool rerender;
+		sf::RenderTexture renderTexture;
+		sf::View view;
+		sf::Texture texture;
+		sf::Sprite sprite;
+		DrawManager drawManager;
+
         bool interact;
         bool oldInteract;
 

@@ -19,10 +19,10 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), sf::Vector2f(window.getSize()));
 	//window.setFramerateLimit(60);
-	
-	ui::Interface interface {window, "../example-resources/test.yaml"};
+
+	auto interface{ui::makeInterface(window, "../example-resources/test.yaml")};
 	interface.setRenderWindowSize(window);
-	
+
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};
 #ifndef WIN32
@@ -55,7 +55,6 @@ int main() {
 				interface.setSize(windowSize);
 			}
 		}
-        interface.setSize(sf::Vector2f{window.getSize()});
 		window.clear();
 		interface.update(sf::Vector2f{(sf::Mouse::getPosition(window))}, window.getSystemHandle());
 		interface.draw();

@@ -78,46 +78,19 @@ namespace ui {
 			throw YamlBufferVariableNotFoundException{node.Mark(), exception};
 		}
 	}
-	
-	template<typename T>
-	bool convertPointer(const YAML::Node &node, SVector2<T> *&withVector2) {
-		if(node["x"] && node["y"]) {
-			withVector2 = new SVector2<T>(Buffer::get<T>(node["x"]), Buffer::get<T>(node["y"]));
-		} else {
-			sf::Vector2<typename SVector2<T>::V> vector;
-			
-			if(node["vector"]) node["vector"] >> vector;
-			
-			withVector2 = new SVector2<T>(vector);
-		}
-		return true;
-	}
-	
-	template<typename T>
-	bool convertPointer(const YAML::Node &node, SList<T> *&withList) {
-		if(node["list"]) {
-			std::vector<typename SList<T>::V> list{node["list"].size()};
-			for(int i = 0; i < list.size(); ++i) {
-				node["list"][i] >> list[i];
-			}
-			withList = new SList<T>{list};
-		} else {
-			std::vector<std::shared_ptr<T>> list{node["vars"].size()};
-			for(int i = 0; i < list.size(); ++i) {
-				list[i] = Buffer::get<T>(node["vars"][i]);
-			}
-			withList = new SList<T>{list};
-		}
-		return true;
-	}
-	
+
 	template <typename T>
-	std::shared_ptr<T> atYaml(std::string name) {
+	std::shared_ptr<T> atSValue(std::string name) {
 		return Buffer::at<T>(name);
 	}
 	
 	template <typename T, typename... A>
-	void insertYaml(const std::string& name, A &&... args) {
+	void emplaceSValue(const std::string& name, A &&... args) {
 		Buffer::insert<T>(name, args...);
+	}
+
+	template<typename T>
+	std::shared_ptr<T> getSValue(const YAML::Node &node, bool createIfNotExist){
+		return Buffer::get<T>(node, createIfNotExist);
 	}
 }

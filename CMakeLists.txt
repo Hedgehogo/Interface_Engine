@@ -47,7 +47,9 @@ endif()
 
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})
 
-file(GLOB_RECURSE srcUnitTest "test/*.cpp" "test/*.hpp")
+file(GLOB_RECURSE srcUnitTest "test/*.cpp")
+
+include_directories(lib)
 
 add_executable(unit_tests ${srcUnitTest})
 
