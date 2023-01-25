@@ -33,7 +33,9 @@ namespace ui {
 
         char32_t getChar() override;
 
-        void drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) override;
+		float getMinAdvance() override;
+
+		void drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) override;
 
         ~ObjectCharacter() override;
     };

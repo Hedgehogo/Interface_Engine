@@ -2,9 +2,7 @@
 
 namespace ui {
 	InteractiveInitInfo::InteractiveInitInfo(sf::RenderTarget &renderTarget_, DrawManager &drawManager_, UpdateManager &updateManager_, IPanelManager &panelManager_) :
-		renderTarget(renderTarget_), drawManager(drawManager_), updateManager(updateManager_), panelManager(panelManager_) {
-		
-	}
+		renderTarget(renderTarget_), drawManager(drawManager_), updateManager(updateManager_), panelManager(panelManager_) {}
 	
 	InteractiveInitInfo InteractiveInitInfo::copy(sf::RenderTarget &renderTarget_) const {
 		return InteractiveInitInfo(renderTarget_, drawManager, updateManager, panelManager);

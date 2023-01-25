@@ -50,4 +50,8 @@ namespace ui {
 		rerender = true;
 		this->active = active;
 	}
+
+	float BaseCharacter::getMinAdvance() {
+		return getAdvance();
+	}
 }

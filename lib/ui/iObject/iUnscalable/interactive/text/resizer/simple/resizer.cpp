@@ -235,7 +235,7 @@ namespace ui {
 	    if (algorithm == BaseResizer::Algorithm::console){
 			float advance = 0;
 		    for (BaseCharacter *character : *characters) {
-				advance = character->getAdvance();
+				advance = character->getMinAdvance();
 				if (advance > minSize.x) minSize.x = advance;
 			}
 		    return minSize;
@@ -246,7 +246,7 @@ namespace ui {
         for (BaseCharacter *character : *characters) {
             if ((algorithm == BaseResizer::Algorithm::base     && (character->isSpecial() == BaseCharacter::Special::no)) ||
 	            (algorithm == BaseResizer::Algorithm::absolute && (character->isSpecial() != BaseCharacter::Special::enter))){
-                wordSizeX += character->getAdvance();
+                wordSizeX += character->getMinAdvance();
             }else{
                 if (minSize.x < wordSizeX)
                     minSize.x = wordSizeX;

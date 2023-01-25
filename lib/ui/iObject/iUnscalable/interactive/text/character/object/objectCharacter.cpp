@@ -55,4 +55,8 @@ namespace ui {
     sf::Vector2i ObjectCharacter::getSizeTexture() {
         return sf::Vector2i{object->getAreaSize()};
     }
+
+	float ObjectCharacter::getMinAdvance() {
+		return object->getMinSize().x;
+	}
 }

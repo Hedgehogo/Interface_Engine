@@ -10,7 +10,7 @@ namespace ui {
 
     Text::Text(std::vector<BaseTextBlock *> textBlocks, IUninteractive *background, int size, sf::Font *font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
                sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer *resizer, TextInteraction *textInteraction) :
-        background(background), size(size), textBocks(textBlocks), resizer(resizer), textInteraction(textInteraction), rerender(false){
+        background(background), size(size), textBocks(textBlocks), resizer(resizer), textInteraction(textInteraction){
         for (BaseTextBlock *textBlock: textBlocks) {
             textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, (inactiveTextSelectionColor == nullColor ? textColor : inactiveTextSelectionColor), inactiveBackgroundSelectionColor, font,
                                         size);
@@ -32,18 +32,18 @@ namespace ui {
         }
         delete background;
         delete resizer;
-        delete textInteraction;
+        delete textInteraction;                                                                                     
     }
 
     void Text::init(InteractiveInitInfo interactiveInitInfo) {
 		interactiveInitInfo.updateManager.add(*this);
         this->renderTarget = &interactiveInitInfo.renderTarget;
-		InitInfo initInfo{renderTexture, this->drawManager, interactiveInitInfo.updateManager, *interactionManager, *interactionStack, interactiveInitInfo.panelManager};
+		InitInfo initInfo{renderTexture, drawManager, interactiveInitInfo.updateManager, *interactionManager, *interactionStack, interactiveInitInfo.panelManager};
 		background->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
-        for (BaseTextBlock *textBlock: textBocks) {
-			textBlock->init(initInfo);
-        }
 		interactiveInitInfo.drawManager.add(*this);
+        for (BaseTextBlock *textBlock: textBocks) {
+			textBlock->init(initInfo, interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
+        }
 
 	    textInteraction->init(this, *interactionManager);
     }
@@ -185,7 +185,7 @@ namespace ui {
 		}
 
 	    if (rerender) {
-			renderTexture.clear();
+			renderTexture.clear(sf::Color{0, 0, 0, 0});
 
 		    drawManager.draw();
 
