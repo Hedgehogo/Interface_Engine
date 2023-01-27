@@ -30,7 +30,7 @@ namespace ui {
 
         ~InteractiveTextBlock();
 
-        void init(InitInfo initInfo);
+        void init(InitInfo textInitInfo, InitInfo initInfo);
 
         std::vector<BaseCharacter*> getCharacters() override;
 

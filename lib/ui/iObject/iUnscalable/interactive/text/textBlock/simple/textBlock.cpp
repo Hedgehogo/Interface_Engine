@@ -30,13 +30,13 @@ namespace ui {
 	TextBlock::TextBlock(std::u32string str, TextVariables textVariables, std::vector<BaseLine *> lines) : str(str), BaseTextBlock(textVariables), lines(lines) {
 	}
 	
-	void TextBlock::init(InitInfo initInfo) {
+	void TextBlock::init(InitInfo textInitInfo, InitInfo initInfo) {
 		for(BaseCharacter *&character: textCharacters) {
-			character->init(initInfo.renderTarget);
+			character->init(textInitInfo.renderTarget);
 		}
 		
 		for(BaseLine *&line: lines) {
-			line->init(textVariables.size, *textVariables.font, textVariables.TextColor, initInfo.renderTarget);
+			line->init(textVariables.size, *textVariables.font, textVariables.TextColor, textInitInfo.renderTarget);
 		}
 	}
 	

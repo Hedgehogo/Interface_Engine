@@ -17,7 +17,7 @@ namespace ui{
 
 	    ObjectTextBlock(IScalable* object, float height);
 
-        void init(InitInfo initInfo) override;
+        void init(InitInfo textInitInfo, InitInfo initInfo) override;
 
         bool in(sf::Vector2f mousePosition) override;
 

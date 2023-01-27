@@ -20,7 +20,7 @@ namespace ui {
 
         bool in(sf::Vector2f mousePosition);
 
-        void init(InitInfo initInfo) override;
+        void init(InitInfo textInitInfo, InitInfo initInfo) override;
 
         void update() override;
 

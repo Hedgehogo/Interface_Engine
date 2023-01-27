@@ -65,6 +65,8 @@ namespace ui{
 
         virtual char32_t getChar() = 0;
 
+		virtual float getMinAdvance();
+
         virtual void drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) = 0;
 
         virtual ~BaseCharacter() = default;

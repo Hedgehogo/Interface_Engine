@@ -6,7 +6,7 @@ namespace ui {
 
 	ObjectTextBlock::ObjectTextBlock(IScalable *object, float height) : size(0, height), fullLine(true), isCharacter(false), object(object), objectCharacter(new ObjectCharacter{object, true}) {}
 	
-	void ObjectTextBlock::init(InitInfo initInfo) {
+	void ObjectTextBlock::init(InitInfo textInitInfo, InitInfo initInfo) {
 		object->init(initInfo);
 		sf::Vector2f minSize{object->getMinSize()};
 		object->setSize({std::max(size.x, minSize.x), std::max(size.y, minSize.y)});
