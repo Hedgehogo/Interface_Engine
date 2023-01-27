@@ -25,4 +25,4 @@ namespace ui {
 
 		~TextSelectionAndCopyInteraction();
 	};
-} // ui
+}

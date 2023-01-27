@@ -25,4 +25,4 @@ namespace ui
 
 		virtual bool updateInteractions(sf::Vector2f mousePosition, bool active) = 0;
 	};
-} // ui
+}

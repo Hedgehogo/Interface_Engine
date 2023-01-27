@@ -21,4 +21,4 @@ namespace ui {
 		textAddBlockInteractionEvent = new TextAddBlockInteractionEvent{*node["interaction"].as<TextInteraction*>()};
 		return true;
 	}
-} // ui
+}

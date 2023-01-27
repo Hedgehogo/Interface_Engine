@@ -29,4 +29,4 @@ namespace ui {
 
 
 	bool determineUrl(const YAML::Node &node);
-} // ui
+}

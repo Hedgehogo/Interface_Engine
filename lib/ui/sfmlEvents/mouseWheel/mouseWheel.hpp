@@ -17,4 +17,4 @@ namespace ui {
 
         static void clear();
     };
-} // ui
+}

@@ -4,7 +4,7 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
 
-typedef unsigned uint;
+using uint = unsigned;
 
 namespace ui {
     struct TextVariables {

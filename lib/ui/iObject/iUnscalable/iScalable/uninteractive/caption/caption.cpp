@@ -3,7 +3,7 @@
 #include "../../../../../../modules/appendix/HSVtoRGB/HsVtoRgb.hpp"
 #include <iostream>
 
-typedef unsigned uint;
+using uint = unsigned;
 
 namespace ui {
 	sf::Color Caption::defaultColor = sf::Color::Black;

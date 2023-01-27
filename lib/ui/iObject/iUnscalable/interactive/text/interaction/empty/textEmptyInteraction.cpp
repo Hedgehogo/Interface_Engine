@@ -8,4 +8,4 @@ namespace ui {
     bool convertPointer(const YAML::Node &node, TextEmptyInteraction *&textEmptyInteraction) {
         { textEmptyInteraction = new TextEmptyInteraction{}; return true; }
     }
-} // ui
+}

@@ -1,7 +1,7 @@
 object:
-  type: LWBV
+  type: BWBV
   first-object:
-    type: LWCB
+    type: BWCB
     side: right
     border-distance: 30
     const-object:
@@ -11,11 +11,11 @@ object:
       value:
         var: a
     second-object:
-      type: LWCBe
+      type: BWCBe
       bezel: red
       thickness: 10
       object:
-        type: SL
+        type: BS
         object:
           type: Text
           text-color: green
@@ -28,9 +28,8 @@ object:
               text:
                 directory: ../example-resources
                 default-language: en
-                language: ru
                 key: test
-          font: ../example-resources/FrenchKissscript.ttf
+          font: ../example-resources/segoeui.ttf
           size: 100
         normal-object-position:
           var: a
@@ -38,6 +37,6 @@ object:
     type: Caption
     text:
       key: test
-    font: ../example-resources/FrenchKissscript.ttf
+    font: ../example-resources/segoeui.ttf
     font-size: 100
     background: white
