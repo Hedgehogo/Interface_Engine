@@ -60,7 +60,12 @@ object:
               object:
                 type: BWMB
                 border-direction: horizontal
-                first-object: red
+                first-object:
+                  type: Switch
+                  inactive-background: green
+                  active-background: red
+                  value:
+                    var: switch
                 second-object: blue
                 value:
                   var: a
@@ -69,9 +74,22 @@ object:
         normal-object-position:
           var: a
   second-object:
-    type: Caption
-    text:
-      key: test
-    font: ../example-resources/segoeui.ttf
-    font-size: 100
-    background: white
+    type: BWAO
+    top-object:
+      type: Switch
+      inactive-background:
+        type: Caption
+        text:
+          key: test
+        font: ../example-resources/segoeui.ttf
+        font-size: 100
+        background: white
+      active-background: green
+      value: switch
+    bottom-object:
+      type: Caption
+      text:
+        key: test
+      font: ../example-resources/segoeui.ttf
+      font-size: 100
+      background: white
