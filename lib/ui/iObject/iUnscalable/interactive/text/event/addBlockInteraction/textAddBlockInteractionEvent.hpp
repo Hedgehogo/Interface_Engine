@@ -18,4 +18,4 @@ namespace ui {
 	};
 
 	bool convertPointer(const YAML::Node &node, TextAddBlockInteractionEvent *& textAddBlockInteractionEvent);
-} // ui
+}

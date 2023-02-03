@@ -46,4 +46,4 @@ namespace ui {
 	bool convert(const YAML::Node &node, Animation::Variable& animationUnit);
 
 	bool convertPointer(const YAML::Node &node, Animation*& animation);
-} // ui
+}

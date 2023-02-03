@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <vector>
 
-typedef unsigned long long ullint;
+using ullint = unsigned long long;
 
 namespace ui {
 	template<typename T>

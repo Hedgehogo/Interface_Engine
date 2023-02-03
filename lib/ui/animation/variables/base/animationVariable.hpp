@@ -36,10 +36,10 @@ namespace ui {
 
 		explicit operator T ();
 	};
-	typedef AnimationVariable<float> AnimationVariablef;
-	typedef AnimationVariable<float> AVariablef;
-	typedef AnimationVariable<int> AnimationVariablei;
-	typedef AnimationVariable<int> AVariablei;
+	using AnimationVariablef = AnimationVariable<float>;
+	using AVariablef = AnimationVariable<float>;
+	using AnimationVariablei = AnimationVariable<int>;
+	using AVariablei = AnimationVariable<int>;
 
 	template<typename T>
 	bool convertPointer(const YAML::Node &node, AnimationVariable<T>*& animationUnit);

@@ -5,4 +5,4 @@ namespace ui {
 	public:
 		virtual void valueFromAnimation(float newValue) = 0;
 	};
-} // ui
+}

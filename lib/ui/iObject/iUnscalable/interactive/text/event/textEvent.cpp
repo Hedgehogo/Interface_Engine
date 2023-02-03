@@ -12,4 +12,4 @@ namespace ui {
     void TextEvent::setText(Text *text) {
         TextEvent::text = text;
     }
-} // ui
+}

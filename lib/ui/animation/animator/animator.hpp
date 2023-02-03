@@ -20,4 +20,4 @@ namespace ui {
 	};
 
 	bool convertPointer(const YAML::Node &node, Animator*& animator);
-} // ui
+}

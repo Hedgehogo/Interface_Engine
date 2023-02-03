@@ -2,7 +2,7 @@
 
 #include "../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-typedef unsigned uint;
+using uint = unsigned;
 
 namespace ui {
 	class BaseLine {

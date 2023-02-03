@@ -64,4 +64,4 @@ namespace ui
 		return panelManager->updateInteractions(mousePosition, active);
 	}
 
-} // ui
+}

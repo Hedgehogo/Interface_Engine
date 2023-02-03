@@ -81,4 +81,4 @@ namespace ui {
 			delete item;
 		}
 	}
-} // ui
+}

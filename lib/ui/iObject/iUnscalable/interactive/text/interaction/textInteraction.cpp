@@ -14,4 +14,4 @@ namespace ui {
     void TextInteraction::setText(Text *text) {
         this->text = text;
     }
-} // ui
+}

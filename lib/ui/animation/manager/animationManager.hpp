@@ -22,4 +22,4 @@ namespace ui {
 
 	template<>
 	bool convert(const YAML::Node &node, AnimationManager& animationManager);
-} // ui
+}

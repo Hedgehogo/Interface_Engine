@@ -8,7 +8,7 @@
 #include "../animation/manager/animationManager.hpp"
 #include "initInfo/initInfo.hpp"
 
-typedef unsigned uint;
+using uint = unsigned;
 
 namespace ui {
 	class Panel;

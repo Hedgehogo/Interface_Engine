@@ -4,7 +4,7 @@
 #include "../../../../../interaction/interactionStack/interactionStack.hpp"
 #include "../line/baseLine.hpp"
 
-typedef unsigned uint;
+using uint = unsigned;
 
 namespace ui{
     class BaseTextBlock;

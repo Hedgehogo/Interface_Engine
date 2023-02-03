@@ -7,4 +7,4 @@ namespace ui {
 	public:
 		NotExistAnimationVariable(std::string name);
 	};
-} // ui
+}

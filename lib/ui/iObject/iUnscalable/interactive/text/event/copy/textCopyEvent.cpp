@@ -22,4 +22,4 @@ namespace ui {
     bool convertPointer(const YAML::Node &node, TextCopyEvent *&textCopyEvent) {
         return new TextCopyEvent;
     }
-} // ui
+}
