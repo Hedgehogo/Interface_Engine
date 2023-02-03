@@ -39,7 +39,16 @@ namespace ui {
 
 		virtual sf::Vector2f getSize() = 0;
 
-        virtual sf::Vector2f getMinSize() = 0;
+	protected:
+		virtual sf::Vector2f getMinSizeBase() = 0;
+
+		virtual sf::Vector2f getMinSizeConsole() = 0;
+
+		virtual sf::Vector2f getMinSizeAbsolute() = 0;
+
+	public:
+
+        virtual sf::Vector2f getMinSize();
 
         virtual sf::Vector2f getNormalSize() = 0;
 

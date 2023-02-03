@@ -30,97 +30,91 @@ namespace ui {
         startRender = position;
     }
 
-    void Resizer::printCharacter(BaseCharacter *character, float kerning) {
-        character->setPosition(nextPosition);
-        nextPosition.x += character->getAdvance() + kerning;
-        distanceEnter++;
+    void Resizer::printCharacter(std::vector<BaseCharacter *>::iterator character, float kerning) {
+		(*character)->setPosition(nextPosition);
+        nextPosition.x += (*character)->getAdvance() + kerning;
     }
 
-    float Resizer::equalize(uint i) {
-        if (i > 0){
-            float lineSize = 0;
-            for (int j = i - distanceEnter; j < i; ++j) {
-                float characterSize = (*characters)[j]->getHeight();
-                if (lineSize < characterSize)
-                    lineSize = characterSize;
-            }
-            sf::Vector2f offset{endRender.x - ((*characters)[i - 1]->getPosition().x), lineSize};
-/*
-            if ((*characters)[i - 1]->isSpecial() != BaseCharacter::Special::space)
-                offset.x -= (*characters)[i - 1]->getAdvance();
-*/
+    float Resizer::equalize(std::vector<BaseCharacter *>::iterator endCharacter) {
+		float lineSize{0};
+		float characterSize;
+		for (auto character = afterEnter; character != endCharacter; ++character) {
+			characterSize = (*character)->getHeight();
+			if (lineSize < characterSize)
+				lineSize = characterSize;
+		}
 
-            switch (align) {
-                case Align::left:
-                    offset.x = 0;
-                    break;
-                case Align::center:
-                    offset.x /= 2;
-                    break;
-            }
+		sf::Vector2f offset{endRender.x - ((*(endCharacter - 1))->getPosition().x), lineSize};
 
-            for (uint j = i - distanceEnter; j < i; ++j) {
-                (*characters)[j]->move(offset);
-            }
+		switch (align) {
+			case Align::left:
+				offset.x = 0;
+				break;
+			case Align::center:
+				offset.x /= 2;
+				break;
+		}
 
-            std::vector<BaseLine *> *oldLine = nullptr;
-            float startLine = 0;
-            for (uint j = i - distanceEnter; j < i; ++j) {
-                BaseCharacter* character = (*characters)[j];
-                std::vector<BaseLine *> &characterLine = character->getLine();
-                sf::Vector2f characterPos = character->getPosition();
-                if (oldLine != &characterLine) {
-                    if (oldLine) {
-                        for (BaseLine *&line: *oldLine) {
-                            BaseLine *copyLine = line->copy();
-                            copyLine->resize(startLine, characterPos.x, characterPos.y);
-                            this->lines->push_back(copyLine);
-                        }
-                    }
+		for (auto character = afterEnter; character != endCharacter; ++character) {
+			(*character)->move(offset);
+		}
 
-                    oldLine = &characterLine;
-                    startLine = characterPos.x;
-                }
-            }
+		std::vector<BaseLine *> *oldLine = nullptr;
+		float startLine = 0;
 
-            if (oldLine) {
-                BaseCharacter* character = (*characters)[i - ((characters->size() == i || (*characters)[i]->isEnter() || i == 1) ? 1 : 2)];
-                sf::Vector2f characterPos = character->getPosition();
-                characterPos.x += character->getAdvance();
+		for (auto character = afterEnter; character != endCharacter; ++character) {
+			std::vector<BaseLine *> &characterLine = (*character)->getLine();
+			if (oldLine != &characterLine) {
+				sf::Vector2f characterPos = (*character)->getPosition();
+				if (oldLine) {
+					for (BaseLine *&line: *oldLine) {
+						BaseLine *copyLine = line->copy();
+						copyLine->resize(startLine, characterPos.x, characterPos.y);
+						this->lines->push_back(copyLine);
+					}
+				}
 
-                for (BaseLine *&line: *oldLine) {
-                    BaseLine *copyLine = line->copy();
-                    copyLine->resize(startLine, characterPos.x, characterPos.y);
-                    this->lines->push_back(copyLine);
-                }
-            }
-            return lineSize;
-        }
-        return 0;
-    }
+				oldLine = &characterLine;
+				startLine = characterPos.x;
+			}
+		}
 
-    void Resizer::porting(int i) {
-        float lineSize = equalize(i);
+		if (oldLine) {
+			BaseCharacter *character = *(endCharacter - ((endCharacter != characters->begin() + 1 && (*(endCharacter - 1))->isSpecial() != BaseCharacter::Special::no) ? 2 : 1));
+			sf::Vector2f lineEnd = character->getPosition();
+			lineEnd.x += character->getAdvance();
+
+			for (BaseLine *&line: *oldLine) {
+				BaseLine *copyLine = line->copy();
+				copyLine->resize(startLine, lineEnd.x, lineEnd.y);
+				this->lines->push_back(copyLine);
+			}
+		}
+		return lineSize;
+	}
+
+    void Resizer::porting(std::vector<BaseCharacter *>::iterator endCharacter) {
+        float lineSize = equalize(endCharacter);
         nextPosition.y += lineSize * lineSpacing;
         nextPosition.x = startRender.x;
 
-        distanceEnter = 0;
+        afterEnter = endCharacter;
     }
 
-    void Resizer::autoPorting(int i) {
+    void Resizer::autoPorting(std::vector<BaseCharacter *>::iterator endCharacter) {
+		float lineSize = equalize(afterSpace);
+		nextPosition.y += lineSize * lineSpacing;
+		nextPosition.x = startRender.x;
 
-        distanceEnter -= distanceSpace;
-        porting(i - distanceSpace);
+		float kerning{0};
+        for (auto character = afterSpace; character != endCharacter; ++character) {
+			kerning = (character + 1 != characters->end()) ? ((*character)->getKerning((*(character + 1))->getChar())) : 0;
 
-        for (uint j = i - distanceSpace; j < i; ++j) {
-            float kerning;
-            if (j < i - 1)
-                kerning = (*characters)[j]->getKerning((*characters)[j + 1]->getChar());
-            printCharacter((*characters)[j], kerning);
+			printCharacter(character, kerning);
         }
 
-        distanceEnter = distanceSpace;
-        distanceSpace = 0;
+        afterEnter = afterSpace;
+        afterSpace = endCharacter;
     }
 
 	void Resizer::deleteOldCash(sf::Vector2f size, sf::Vector2f position) {
@@ -132,48 +126,61 @@ namespace ui {
 		startRender = position;
 		endRender = position + size;
 		this->nextPosition = startRender;
+
+		afterEnter = characters->begin();
+		afterSpace = characters->begin();
 	}
 
-	void Resizer::characterResize(BaseCharacter *character, float kerning) {
-		printCharacter(character, kerning);
-		distanceSpace++;
+	void Resizer::characterResize(float kerning) {
+		if (algorithm == BaseResizer::Algorithm::console)
+			return spaceResize(kerning);
+
+		printCharacter(currentCharacter, kerning);
 	}
 
-	void Resizer::spaceResize(BaseCharacter *character, float kerning, int i) {
-		if (this->nextPosition.x + (algorithm == BaseResizer::Algorithm::console ? character->getAdvance() : 0) <= endRender.x){
-			printCharacter(character, kerning);
-			distanceSpace = 0;
+	void Resizer::spaceResize(float kerning) {
+		if (algorithm == BaseResizer::Algorithm::absolute)
+			return characterResize(kerning);
+
+		if (this->nextPosition.x + (algorithm == BaseResizer::Algorithm::console ? (*currentCharacter)->getAdvance() : 0) <= endRender.x){
+			printCharacter(currentCharacter, kerning);
+			afterSpace = currentCharacter + 1;
 		} else{
-			autoPorting(i);
-			printCharacter(character, kerning);
+			autoPorting(currentCharacter + 1);
 		}
 	}
 
-	void Resizer::enterResize(int i) {
+	void Resizer::enterResize() {
+		(*currentCharacter)->setPosition(nextPosition);
 		if (this->nextPosition.x > endRender.x)
-			autoPorting(i);
-		porting(i);
+			autoPorting(currentCharacter + 1);
+		porting(currentCharacter + 1);
 	}
 
-	void Resizer::fullObjectResize(BaseCharacter *character, int i) {
-		enterResize(i);
-		character->resize(nextPosition, endRender.x);
-		nextPosition.y += lineSpacing + character->getHeight();
-	}
-
-	void Resizer::deleteCash() {
-		distanceEnter = 0;
-		distanceSpace = 0;
+	void Resizer::fullObjectResize() {
+		if (nextPosition.x != startRender.x){
+			(*currentCharacter)->setPosition(nextPosition);
+			if (this->nextPosition.x > endRender.x)
+				autoPorting(currentCharacter);
+			porting(currentCharacter);
+		}
+		(*currentCharacter)->resize(nextPosition, endRender.x);
+		nextPosition.y += lineSpacing * (*currentCharacter)->getHeight();
 	}
 
 	void Resizer::endLineEqualize() {
 		if (endRender.x < this->nextPosition.x){
-			autoPorting(characters->size());
+			autoPorting(characters->end());
 		}
-		equalize((*characters).size());
+		equalize(characters->end());
 	}
 
     void Resizer::resize(sf::Vector2f size, sf::Vector2f position) {
+		if (characters->empty()){
+			startRender = position;
+			endRender = position + size;
+			return;
+		}
 	    if(size.x == endRender.x - startRender.x){
 		    setPosition(position);
 		    return;
@@ -181,36 +188,28 @@ namespace ui {
 
 		deleteOldCash(size, position);
 
-        for (int i = 0; i < (*characters).size(); i++) {
-            BaseCharacter* character = (*characters)[i];
+		float kerning{0};
 
-            float kerning{(i != (*characters).size() - 1) ? character->getKerning((*characters)[i + 1]->getChar()) : 0};
+		for (currentCharacter = characters->begin(); currentCharacter != characters->end(); ++currentCharacter) {
+			kerning = (currentCharacter + 1 != characters->end()) ? (*currentCharacter)->getKerning((*(currentCharacter + 1))->getChar()) : 0;
 
-            switch (character->isSpecial()) {
-                case BaseCharacter::Special::no:
-					if (algorithm == BaseResizer::Algorithm::console)
-						spaceResize(character, kerning, i);
-					else
-	                    characterResize(character, kerning);
-                    break;
-                case BaseCharacter::Special::space:
-	                if (algorithm == BaseResizer::Algorithm::absolute)
-		                characterResize(character, kerning);
-	                else
-		                spaceResize(character, kerning, i);
-                    break;
-                case BaseCharacter::Special::enter:
-	                enterResize(i);
-                    break;
-	            case BaseCharacter::Special::fullLine:
-		            fullObjectResize(character, i);
-		            break;
-            }
-        }
+			switch ((*currentCharacter)->isSpecial()) {
+				case BaseCharacter::Special::no:
+					characterResize(kerning);
+					break;
+				case BaseCharacter::Special::space:
+					spaceResize(kerning);
+					break;
+				case BaseCharacter::Special::enter:
+					enterResize();
+					break;
+				case BaseCharacter::Special::fullLine:
+					fullObjectResize();
+					break;
+			}
+		}
 
 	    endLineEqualize();
-
-        deleteCash();
     }
 
 	sf::Vector2f Resizer::getPosition() {
@@ -218,6 +217,7 @@ namespace ui {
 	}
 
 	sf::Vector2f Resizer::getSize() {
+		if (characters->empty()) return {0, 0};
 		std::vector<BaseCharacter *>::iterator maxX{
 			std::max_element(characters->begin(), characters->end(), [](BaseCharacter* elem,  BaseCharacter* elem2){return elem->getPosition().x < elem2->getPosition().x;})
 		};
@@ -225,39 +225,57 @@ namespace ui {
 		std::vector<BaseCharacter *>::iterator maxY{
 			std::max_element(characters->begin(), characters->end(), [](BaseCharacter* elem,  BaseCharacter* elem2){return elem->getPosition().y < elem2->getPosition().y;})
 		};
-
-		return sf::Vector2f{(*maxX)->getPosition().x, (*maxY)->getPosition().y + (*maxY)->getHeight()} - getPosition();
+		return sf::Vector2f{(*maxX)->getPosition().x, (*maxY)->getPosition().y} - getPosition();
 	}
 
-    sf::Vector2f Resizer::getMinSize() {
-	    sf::Vector2f minSize = {0, 0};
+	sf::Vector2f Resizer::getMinSizeBase() {
+		sf::Vector2f minSize = {0, 0};
+		float wordSizeX = 0;
 
-	    if (algorithm == BaseResizer::Algorithm::console){
-			float advance = 0;
-		    for (BaseCharacter *character : *characters) {
-				advance = character->getMinAdvance();
-				if (advance > minSize.x) minSize.x = advance;
+		for (BaseCharacter *character : *characters) {
+			if (character->isSpecial() == BaseCharacter::Special::no){
+				wordSizeX += character->getMinAdvance();
+			}else{
+				if (minSize.x < wordSizeX)
+					minSize.x = wordSizeX;
+				wordSizeX = 0;
 			}
-		    return minSize;
 		}
+		if (minSize.x < wordSizeX)
+			minSize.x = wordSizeX;
 
-        float wordSizeX = 0;
+		return minSize;
+	}
 
-        for (BaseCharacter *character : *characters) {
-            if ((algorithm == BaseResizer::Algorithm::base     && (character->isSpecial() == BaseCharacter::Special::no)) ||
-	            (algorithm == BaseResizer::Algorithm::absolute && (character->isSpecial() != BaseCharacter::Special::enter))){
-                wordSizeX += character->getMinAdvance();
-            }else{
-                if (minSize.x < wordSizeX)
-                    minSize.x = wordSizeX;
-                wordSizeX = 0;
-            }
-        }
-        if (minSize.x < wordSizeX)
-            minSize.x = wordSizeX;
+	sf::Vector2f Resizer::getMinSizeConsole() {
+		sf::Vector2f minSize = {0, 0};
 
-        return minSize;
-    }
+		float advance = 0;
+		for (BaseCharacter *character : *characters) {
+			advance = character->getMinAdvance();
+			if (advance > minSize.x) minSize.x = advance;
+		}
+		return minSize;
+	}
+
+	sf::Vector2f Resizer::getMinSizeAbsolute() {
+		sf::Vector2f minSize = {0, 0};
+		float wordSizeX = 0;
+
+		for (BaseCharacter *character : *characters) {
+			if (character->isSpecial() != BaseCharacter::Special::enter){
+				wordSizeX += character->getMinAdvance();
+			}else{
+				if (minSize.x < wordSizeX)
+					minSize.x = wordSizeX;
+				wordSizeX = 0;
+			}
+		}
+		if (minSize.x < wordSizeX)
+			minSize.x = wordSizeX;
+
+		return minSize;
+	}
 
     sf::Vector2f Resizer::getNormalSize() {
         return getMinSize();

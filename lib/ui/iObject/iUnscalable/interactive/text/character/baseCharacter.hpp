@@ -49,9 +49,9 @@ namespace ui{
 
         virtual std::vector<BaseLine *> & getLine() = 0;
 
-        const sf::Vector2f &getPosition() const;
+        virtual sf::Vector2f getPosition() const;
 
-        virtual float getHeight() = 0;
+        virtual float getHeight() const = 0;
 
         virtual float getAdvance() = 0;
 

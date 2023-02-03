@@ -40,7 +40,7 @@ namespace ui{
 
         bool in(sf::Vector2f mousePosition) override;
 
-        float getHeight() override;
+        float getHeight() const override;
 
         float getAdvance() override;
 

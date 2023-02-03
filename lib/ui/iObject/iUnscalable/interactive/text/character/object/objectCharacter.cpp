@@ -8,11 +8,13 @@ namespace ui {
     }
 
     void ObjectCharacter::setPosition( sf::Vector2f position) {
+		position.y -= getHeight();
         BaseCharacter::setPosition(position);
-        object->setPosition({position.x, position.y - getHeight()});
+        object->setPosition(position);
     }
 
 	void ObjectCharacter::resize(sf::Vector2f position, float endPosition) {
+		position.y -= getHeight();
 		BaseCharacter::setPosition(position);
 		object->resize({endPosition - position.x, object->getSize().y}, position);
 	}
@@ -22,7 +24,7 @@ namespace ui {
         object->move(position);
     }
 
-    float ObjectCharacter::getHeight() {
+    float ObjectCharacter::getHeight() const {
         return object->getAreaSize().y;
     }
 
@@ -57,6 +59,10 @@ namespace ui {
     }
 
 	float ObjectCharacter::getMinAdvance() {
-		return object->getMinSize().x;
+		return special == BaseCharacter::Special::fullLine ? object->getMinSize().x : object->getSize().x;
+	}
+
+	sf::Vector2f ObjectCharacter::getPosition() const {
+		return BaseCharacter::getPosition() + sf::Vector2f{0, getHeight()};
 	}
 }

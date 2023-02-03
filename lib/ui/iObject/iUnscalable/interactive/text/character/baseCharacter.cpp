@@ -28,7 +28,7 @@ namespace ui {
 			   position.y < mousePosition.y && position.y + getHeight() > mousePosition.y;
 	}
 
-	const sf::Vector2f &BaseCharacter::getPosition() const {
+	sf::Vector2f BaseCharacter::getPosition() const {
 		return position;
 	}
 

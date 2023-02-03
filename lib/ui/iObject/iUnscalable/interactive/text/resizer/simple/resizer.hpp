@@ -5,9 +5,10 @@
 namespace ui {
 	class Resizer : public BaseResizer {
 	protected:
-		uint distanceEnter = 0;
-		uint distanceSpace = 0;
-		
+		std::vector<BaseCharacter*>::iterator afterEnter;
+		std::vector<BaseCharacter*>::iterator afterSpace;
+		std::vector<BaseCharacter*>::iterator currentCharacter;
+
 		sf::Vector2f nextPosition;
 		
 		sf::Vector2f startRender;
@@ -21,25 +22,23 @@ namespace ui {
 		void setPosition(sf::Vector2f position) override;
 		
 	protected:
-		virtual void printCharacter(BaseCharacter *character, float kerning);
+		virtual void printCharacter(std::vector<BaseCharacter *>::iterator character, float kerning);
 		
-		virtual void porting(int i);
+		virtual void porting(std::vector<BaseCharacter *>::iterator endCharacter);
 		
-		virtual void autoPorting(int i);
+		virtual void autoPorting(std::vector<BaseCharacter *>::iterator endCharacter);
 		
-		virtual float equalize(uint i);
+		virtual float equalize(std::vector<BaseCharacter *>::iterator endCharacter);
 		
 		virtual void deleteOldCash(sf::Vector2f size, sf::Vector2f position);
 		
-		virtual void deleteCash();
+		virtual void characterResize(float kerning);
 		
-		virtual void characterResize(BaseCharacter* character, float kerning);
+		virtual void spaceResize(float kerning);
 		
-		virtual void spaceResize(BaseCharacter *character, float kerning, int i);
+		virtual void fullObjectResize();
 		
-		virtual void fullObjectResize(BaseCharacter *character, int i);
-		
-		virtual void enterResize(int i);
+		virtual void enterResize();
 		
 		virtual void endLineEqualize();
 		
@@ -49,9 +48,15 @@ namespace ui {
 		sf::Vector2f getPosition() override;
 		
 		sf::Vector2f getSize() override;
-		
-		sf::Vector2f getMinSize() override;
-		
+
+	protected:
+		sf::Vector2f getMinSizeBase() override;
+
+		sf::Vector2f getMinSizeConsole() override;
+
+		sf::Vector2f getMinSizeAbsolute() override;
+
+	public:
 		sf::Vector2f getNormalSize() override;
 		
 		Resizer * copy();

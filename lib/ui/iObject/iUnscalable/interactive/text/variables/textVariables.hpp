@@ -12,5 +12,10 @@ namespace ui {
         sf::Font *font;
         sf::Text::Style style;
         uint size;
-    };
+		float fontLineSpace;
+
+		TextVariables(sf::Color textColor = sf::Color{}, sf::Color textSelectionColor = sf::Color{}, sf::Color backgroundSelectionColor = sf::Color{},
+					  sf::Color inactiveTextSelectionColor = sf::Color{}, sf::Color inactiveBackgroundSelectionColor = sf::Color{},
+					  sf::Font *font = nullptr, sf::Text::Style style = {}, uint size = 0);
+	};
 }

@@ -7,7 +7,13 @@ namespace ui {
         this->characters = &characters;
         this->lines = &lines;
     }
-	
+
+	sf::Vector2f BaseResizer::getMinSize() {
+		if (algorithm == Algorithm::console) return getMinSizeConsole();
+		else if (algorithm == Algorithm::absolute) return getMinSizeAbsolute();
+		return getMinSizeBase();
+	}
+
 	template<>
 	bool convert(const YAML::Node& node, BaseResizer::Align& align){
 		if (node.as<std::string>() == "left") align = BaseResizer::Align::left;

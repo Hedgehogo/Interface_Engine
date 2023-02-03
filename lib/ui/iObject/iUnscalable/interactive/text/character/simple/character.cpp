@@ -110,7 +110,7 @@ namespace ui {
 		return glyph.advance;
 	}
 	
-	float Character::getHeight() {
+	float Character::getHeight() const {
 		return textVariables.size;
 	}
 	
