@@ -61,7 +61,7 @@ object:
                 type: BWMB
                 border-direction: horizontal
                 first-object:
-                  type: Switch
+                  type: SimpleSwitcher
                   inactive-background: green
                   active-background: red
                   value:
@@ -76,7 +76,7 @@ object:
   second-object:
     type: BWAO
     top-object:
-      type: Switch
+      type: SimpleSwitcher
       inactive-background:
         type: Caption
         text:
