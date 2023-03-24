@@ -8,7 +8,7 @@
 #include "../../../../../../enums/keyHandler/keyHandler.hpp"
 
 namespace ui {
-	class Switch : public Interactive_Simple, public Layout, public IDrawable {
+	class SimpleSwitcher : public Interactive_Simple, public Layout, public IDrawable {
 	protected:
 		IUninteractive *activeBackground;
 		IUninteractive *inactiveBackground;
@@ -17,9 +17,9 @@ namespace ui {
 		PSbool active;
 	
 	public:
-		Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, PSbool value, Key key = Key::mouseLeft);
+		SimpleSwitcher(IUninteractive *inactiveBackground, IUninteractive *activeBackground, PSbool value, Key key = Key::mouseLeft);
 		
-		Switch(IUninteractive *inactiveBackground, IUninteractive *activeBackground, Key key = Key::mouseLeft, bool startActive = false);
+		SimpleSwitcher(IUninteractive *inactiveBackground, IUninteractive *activeBackground, Key key = Key::mouseLeft, bool startActive = false);
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
@@ -39,12 +39,12 @@ namespace ui {
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		Switch *copy() override;
+		SimpleSwitcher *copy() override;
 		
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 		
-		~Switch();
+		~SimpleSwitcher();
 	};
 	
-	bool convertPointer(const YAML::Node &node, Switch *&switcher);
+	bool convertPointer(const YAML::Node &node, SimpleSwitcher *&simpleSwitcher);
 }

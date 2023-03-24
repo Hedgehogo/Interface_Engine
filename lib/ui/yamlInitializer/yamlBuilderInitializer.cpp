@@ -111,7 +111,7 @@ namespace ui {
 		inherit<IScalable, BaseSlider>();
 		inherit<IScalable, ButtonWithPanel>({"ButtonWPanel"});
 		inherit<IScalable, Button>();
-		inherit<IScalable, Switch>();
+		inherit<IScalable, SimpleSwitcher>();
 		inherit<IUnscalable, IScalable>();
 		inherit<Interactive, Text>();
 		inherit<IUnscalable, Interactive>();
