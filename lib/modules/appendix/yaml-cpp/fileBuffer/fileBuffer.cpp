@@ -1,8 +1,7 @@
 #include "fileBuffer.hpp"
 
 #include <fstream>
-
-#include "../../../modules/Localisation_System/lib/system.hpp"
+#include <localisation/system.hpp>
 
 namespace ui {
 	SymbolPosition readCharacterIndex(const YAML::Node &node, std::basic_ifstream<char32_t> &fin) {

@@ -1,6 +1,0 @@
-[submodule "lib/modules/modules/yaml-cpp"]
-	path = lib/modules/modules/yaml-cpp
-	url = https://github.com/jbeder/yaml-cpp
-[submodule "lib/modules/modules/Localisation_System"]
-	path = lib/modules/modules/Localisation_System
-	url = https://github.com/Andrewkoro105/Localisation_System

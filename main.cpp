@@ -18,16 +18,14 @@ int main() {
     settings.antialiasingLevel = 1;
     sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), sf::Vector2f(window.getSize()));
-	//window.setFramerateLimit(60);
+	window.setFramerateLimit(60);
 
 	auto interface{ui::makeInterface(window, "../example-resources/test.yaml")};
 	interface.setRenderWindowSize(window);
 
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};
-#ifndef WIN32
-	system("i3 floating toggle");
-#endif
+
 	while(window.isOpen()) {
         lastFPS[0] = 1.f / clock.restart().asSeconds();
 		std::rotate(lastFPS.begin(), lastFPS.begin() + 1, lastFPS.end());

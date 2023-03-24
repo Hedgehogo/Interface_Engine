@@ -2,8 +2,8 @@
 
 #include "../simple/keyEventSimple.hpp"
 #include <string>
-#include "../../../../../modules/appendix/yaml-cpp/yaml.hpp"
-#include "../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
+#include "modules/appendix/yaml-cpp/yaml.hpp"
+#include "modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
 

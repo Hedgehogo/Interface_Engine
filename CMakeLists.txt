@@ -3,54 +3,42 @@ project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-if (${CMAKE_BUILD_TYPE} STREQUAL Release)
-    add_definitions(-O2)
-endif ()
+include_directories(lib)
 
-file(GLOB_RECURSE src "lib/ui/*.hpp" "lib/ui/*.cpp" "lib/modules/appendix/*.hpp" "lib/modules/appendix/*.cpp")
+file(GLOB_RECURSE src "lib/*.cpp")
+file(GLOB_RECURSE headers "lib/*.hpp")
+add_library(${PROJECT_NAME} ${src} ${headers})
+set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${headers}")
 
-add_subdirectory(lib/modules/modules/yaml-cpp)
-add_subdirectory(lib/modules/modules/Localisation_System)
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+find_package(SFML 2.5 REQUIRED graphics network audio window system REQUIRED)
+find_package(yaml-cpp REQUIRED)
+find_package(ImageMagick COMPONENTS Magick++ REQUIRED)
+include_directories(${ImageMagick_INCLUDE_DIRS})
+find_package(localisation REQUIRED)
+include_directories(${localisation_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PUBLIC
+        sfml-graphics sfml-system
+        yaml-cpp
+        localisation
+        ${ImageMagick_LIBRARIES}
+)
 
-add_library(${PROJECT_NAME} ${src})
-
-set(SFML_PATH_1 "\\usr\\lib\\cmake\\SFML")
-
-if(${CMAKE_CXX_COMPILER} MATCHES "Visual Studio")
-    set(SFML_PATH_2 "C:\\SFML-2.5.1\\lib\\cmake\\SFML")
-else()
-    set(SFML_PATH_2 "C:\\SFML-2.5.1-clion\\lib\\cmake\\SFML")
-endif()
-
-if(EXISTS ${SFML_PATH_2})
-    set(SFML_STATIC_LIBRARIES TRUE)
-    set(CMAKE_EXE_LINKER_FLAGS "-static")
-endif()
-
-if(EXISTS ${SFML_PATH_1})
-    set(SFML_DIR ${SFML_PATH_1})
-elseif(EXISTS ${SFML_PATH_2})
-    set(SFML_DIR ${SFML_PATH_2})
-endif()
-
-set(CMAKE_MODULE_PATH "${cmaKE_CURRENT_LIST_DIR}/cmake_modules")
-
-find_package(SFML 2.5 REQUIRED graphics network audio window system)
-
-target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system yaml-cpp localisation)
-
-if(WIN32)
-    add_executable(${PROJECT_NAME}_ex WIN32 main.cpp)
-else()
-    add_executable(${PROJECT_NAME}_ex main.cpp)
-endif()
-
+add_executable(${PROJECT_NAME}_ex main.cpp)
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})
 
 file(GLOB_RECURSE srcUnitTest "test/*.cpp")
-
-include_directories(lib)
-
 add_executable(unit_tests ${srcUnitTest})
-
 target_link_libraries(unit_tests PUBLIC gtest gtest_main ${PROJECT_NAME})
+
+install(TARGETS ${PROJECT_NAME}
+        EXPORT ${PROJECT_NAME}
+        LIBRARY DESTINATION lib
+        PUBLIC_HEADER DESTINATION include/${PROJECT_NAME}
+        )
+
+install(EXPORT ${PROJECT_NAME}
+        FILE ${PROJECT_NAME}-config.cmake
+        NAMESPACE ${PROJECT_NAME}::
+        DESTINATION lib/cmake/${PROJECT_NAME}
+        )
