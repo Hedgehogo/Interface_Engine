@@ -3,6 +3,8 @@ project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
+include(FetchContent)
+
 include_directories(lib)
 
 file(GLOB_RECURSE src "lib/*.cpp")
@@ -11,12 +13,32 @@ add_library(${PROJECT_NAME} ${src} ${headers})
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${headers}")
 
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
-find_package(SFML 2.5 REQUIRED graphics network audio window system REQUIRED)
-find_package(yaml-cpp REQUIRED)
+
+FetchContent_Declare(
+        SFML
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG 2.5.1
+        FIND_PACKAGE_ARGS NAMES SFML COMPONENTS graphics network audio window system
+)
+FetchContent_Declare(
+        yaml-cpp
+        GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
+        GIT_TAG yaml-cpp-0.7.0
+        FIND_PACKAGE_ARGS NAMES yaml-cpp
+)
+FetchContent_Declare(
+        localisation
+        GIT_REPOSITORY https://github.com/Andrewkoro105/Localisation_System.git
+        GIT_TAG master
+        FIND_PACKAGE_ARGS NAMES localisation
+)
+FetchContent_MakeAvailable(SFML yaml-cpp localisation)
+
 find_package(ImageMagick COMPONENTS Magick++ MagickCore REQUIRED)
+
 include_directories(${ImageMagick_INCLUDE_DIRS})
-find_package(localisation REQUIRED)
 include_directories(${localisation_INCLUDE_DIRS})
+
 target_link_libraries(${PROJECT_NAME} PUBLIC
         sfml-graphics sfml-system
         yaml-cpp

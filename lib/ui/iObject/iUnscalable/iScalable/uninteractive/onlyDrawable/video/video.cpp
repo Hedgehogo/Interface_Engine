@@ -1,6 +1,5 @@
 #include "video.h"
 #include <Magick++.h>
-#include <iostream>
 
 namespace ui {
 
@@ -25,9 +24,7 @@ namespace ui {
 
             sf::Image sfImage;
             sfImage.create(rect.width, rect.height);
-            std::cout << "Frame: " << i << "; Width: " << frame.baseColumns() << "; Height: " << frame.baseRows() << std::endl;
             for (int x = rect.left; x < rect.left + rect.width; ++x) {
-                std::cout << x << (x - 10 < 0 ? " " : "") << " > ";
                 for (int y = rect.top; y < rect.top + rect.height; ++y) {
                     Magick::Color pixel = frame.pixelColor(x, y);
                     sfImage.setPixel(x, y, {
@@ -37,13 +34,7 @@ namespace ui {
                             static_cast<sf::Uint8>(QuantumScale * pixel.quantumAlpha() * 255),
                         }
                     );
-
-                    printf(" [ %02x ", static_cast<sf::Uint8>(QuantumScale * pixel.quantumRed()   * 255));
-                    printf("%02x ",    static_cast<sf::Uint8>(QuantumScale * pixel.quantumGreen() * 255));
-                    printf("%02x ",    static_cast<sf::Uint8>(QuantumScale * pixel.quantumBlue()  * 255));
-                    printf("%02x ]",   static_cast<sf::Uint8>(QuantumScale * pixel.quantumAlpha() * 255));
                 }
-                std::cout << std::endl;
             }
             bufferTexture[i].loadFromImage(sfImage);
             ++i;
