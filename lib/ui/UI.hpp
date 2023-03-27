@@ -1,3 +1,3 @@
 #pragma once
-#include "yamlInitializer/yamlBuilderInitializer.hpp"
+#include "init/init.hpp"
 #include "sfmlEvents/handleEvent/handleEvent.hpp"

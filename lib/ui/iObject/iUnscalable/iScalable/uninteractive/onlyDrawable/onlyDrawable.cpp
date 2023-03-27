@@ -8,9 +8,6 @@ namespace ui {
 
     OnlyDrawable::OnlyDrawable() : renderTarget(nullptr) {}
 
-    bool OnlyDrawable::updateInteractions(sf::Vector2f mousePosition) {
-        return IUninteractive::updateInteractions(mousePosition);
-    }
 
     void OnlyDrawable::copy(OnlyDrawable *onlyDrawable) {
         onlyDrawable->renderTarget = this->renderTarget;

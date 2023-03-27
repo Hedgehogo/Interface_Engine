@@ -12,7 +12,7 @@ float calculateMediumFPS(std::array<float, T> lastFPS) {
 }
 
 int main() {
-	ui::yamlBuilderInit();
+	ui::init();
 	
     sf::ContextSettings settings;
     settings.antialiasingLevel = 1;

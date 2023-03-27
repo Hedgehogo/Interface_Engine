@@ -1,11 +1,17 @@
-#include "yamlBuilderInitializer.hpp"
+#include "init.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp"
 #include "../sizingAndPositioning/sizing/determine/determineSizing.hpp"
 #include "../sizingAndPositioning/sizing2/determine/determineSizing2.hpp"
 #include "../sizingAndPositioning/positioning/determine/determinePositioning.hpp"
 #include "../sizingAndPositioning/positioning2/determine/determinePositioning2.hpp"
+#include <Magick++.h>
 
 namespace ui {
+	void init(const char *path_){
+		Magick::InitializeMagick(path_);
+		yamlBuilderInit();
+	}
+
 	void yamlBuilderInit() {
 		inherit<ISizing, ConstSizing>({"CS"});
 		inherit<ISizing, RelativeNormalSizing>({"RNormalSizing", "RNS"});
@@ -83,6 +89,7 @@ namespace ui {
 		inherit<OnlyDrawable, RoundedRectangle>();
 		inherit<OnlyDrawable, Capsule>();
 		inherit<OnlyDrawable, Sprite>();
+        inherit<OnlyDrawable, Video>();
 		inherit<IUninteractive, OnlyDrawable>();
 		inherit<IUninteractive, Bar>();
 		inherit<IUninteractive, Caption>();

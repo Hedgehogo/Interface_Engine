@@ -13,17 +13,5 @@ namespace ui {
         OnlyDrawable();
 
         void init(InitInfo initInfo) override;
-
-        bool updateInteractions(sf::Vector2f mousePosition) override;
-
-        void draw() override = 0;
-
-        void resize(sf::Vector2f size, sf::Vector2f position) override = 0;
-
-        sf::Vector2f getMinSize() override = 0;
-
-        sf::Vector2f getNormalSize() override = 0;
-
-        OnlyDrawable* copy() override = 0;
     };
 }

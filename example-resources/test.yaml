@@ -1,95 +1,26 @@
 animation-manager:
-  animator:
-    unit:
-      type: A
-      next: this
-      var:
-        var: b
-        change-variables:
-          - type: CVBSL
+  animators:
+    - unit:
+        type: A
+        name: startSlider
+        var:
+          var:
+            type: SAV
+            value: a
+            convert-to-use:
+              type: CTUCWRf
+          change-variable:
+            type: CVBSL
             start: 0
             end: 1
-            length: 0.5
-          - type: CVBSL
-            start: 1
-            end: 0
-            length: 0.5
+            length: 1
+        next: this
 object:
-  type: BWBV
-  first-object:
-    type: BWCB
-    side: right
-    border-distance: 30
-    const-object:
-      type: Slider
-      slider: 525252
-      background: 37383A88
-      value:
-        var: a
-    second-object:
-      type: BWCBe
-      bezel: red
-      thickness: 10
-      object:
-        type: BS
-        object:
-          type: Text
-          background:
-            type: BU
-            object:
-              type: BWMB
-              border-direction: horizontal
-              first-object: magenta
-              second-object: cyan
-              border-value:
-                name: b
-                var: 1
-                convert-to-use:
-                  type: CTUCWRf
-          resizer:
-            type: Resizer
-            algorithm: base
-          text-blocks:
-            - type: TB
-              text:
-                directory: ../example-resources
-                default-language: en
-                key: test
-            - type: OTB
-              height: 100
-              object:
-                type: BWMB
-                border-direction: horizontal
-                first-object:
-                  type: SimpleSwitcher
-                  inactive-background: green
-                  active-background: red
-                  value:
-                    var: switch
-                second-object: blue
-                value:
-                  var: a
-          font: ../example-resources/segoeui.ttf
-          size: 100
-        normal-object-position:
-          var: a
-  second-object:
-    type: BWAO
-    top-object:
-      type: SimpleSwitcher
-      inactive-background:
-        type: Caption
-        text:
-          key: test
-        font: ../example-resources/segoeui.ttf
-        font-size: 100
-        background: white
-      active-background: green
-      value: switch
-    bottom-object:
-      type: Caption
-      text:
-        key: test
-      font: ../example-resources/segoeui.ttf
-      font-size: 100
-      background: white
+  type: BoxWithConstRatio
+  const-object:
+    type: Video
+    path: ../example-resources/gif-animation.gif
+    viewing-progress:
+      var: a
+  second-object: green
+  aspect-ratio: 1

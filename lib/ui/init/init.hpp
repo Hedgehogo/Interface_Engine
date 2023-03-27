@@ -3,6 +3,7 @@
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/sprite/sprite.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/capsule/capsule.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/roundedRectangle/roundedRectangle.hpp"
+#include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/video/video.h"
 #include "../iObject/iUnscalable/iScalable/uninteractive/caption/caption.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/bar/bar.hpp"
 #include "../iObject/iUnscalable/iScalable/box/border/boxWithBorderHorizontal.hpp"
@@ -57,5 +58,7 @@
 #include "../debug/boxDebug.hpp"
 
 namespace ui {
+	void init(const char *path_ = "");
+
 	void yamlBuilderInit();
 }
