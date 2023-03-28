@@ -1,9 +1,9 @@
-#include "video.h"
+#include "videoFromFile.hpp"
 #include <Magick++.h>
 
 namespace ui {
 
-    Video::Video(std::string path, PSCoefficient viewingProgress, sf::IntRect rect) :
+    VideoFromFile::VideoFromFile(std::string path, PSCoefficient viewingProgress, sf::IntRect rect) :
             path(path), viewingProgress(viewingProgress){
         viewingProgress->addSetter([=](float viewingProgress){ setCurrentFrame(viewingProgress);});
 
@@ -42,7 +42,7 @@ namespace ui {
         sprite.setTexture(bufferTexture[0]);
     }
 
-    void Video::setCurrentFrame(float viewingProgress) {
+    void VideoFromFile::setCurrentFrame(float viewingProgress) {
         if (viewingProgress >= 1) {
             sprite.setTexture(bufferTexture[bufferTexture.size()]);
             return;
@@ -54,46 +54,37 @@ namespace ui {
         sprite.setTexture(bufferTexture[bufferTexture.size() * viewingProgress]);
     }
 
-    void Video::draw() {
+    void VideoFromFile::draw() {
 		renderTarget->draw(sprite);
     }
 
-    void Video::resize(sf::Vector2f size, sf::Vector2f position) {
+    void VideoFromFile::resize(sf::Vector2f size, sf::Vector2f position) {
         this->size = size;
         sprite.setPosition(position);
         sprite.setScale(size / sf::Vector2f{sizeVideo});
     }
 
-    sf::Vector2f Video::getAreaPosition() {
+    sf::Vector2f VideoFromFile::getAreaPosition() {
         return sprite.getPosition();
     }
 
-    sf::Vector2f Video::getAreaSize() {
+    sf::Vector2f VideoFromFile::getAreaSize() {
         return size;
     }
 
-    sf::Vector2f Video::getMinSize() {
+    sf::Vector2f VideoFromFile::getMinSize() {
         return {0, 0};
     }
 
-    sf::Vector2f Video::getNormalSize() {
+    sf::Vector2f VideoFromFile::getNormalSize() {
         return sf::Vector2f{sizeVideo};
     }
 
-    Video::Video(std::vector<sf::Texture> bufferTexture, PSCoefficient viewingProgress) : bufferTexture(bufferTexture), viewingProgress(viewingProgress) {}
+    VideoFromFile::VideoFromFile(std::vector<sf::Texture> bufferTexture, PSCoefficient viewingProgress) : bufferTexture(bufferTexture), viewingProgress(viewingProgress) {}
 
-    Video *Video::copy() {
-        Video* video{new Video{bufferTexture, viewingProgress}};
+    VideoFromFile *VideoFromFile::copy() {
+        VideoFromFile* video{new VideoFromFile{bufferTexture, viewingProgress}};
         OnlyDrawable::copy(video);
         return video;
-    }
-
-    bool convertPointer(const YAML::Node &node, Video *&video){
-        video = new Video{
-            node["path"].as<std::string>(),
-            Buffer::get<SCoefficientValue>(node["viewing-progress"]),
-            convDef(node["rect"], sf::IntRect{0, 0, 0, 0})
-        };
-        return true;
     }
 }

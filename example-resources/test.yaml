@@ -18,9 +18,22 @@ animation-manager:
 object:
   type: BoxWithConstRatio
   const-object:
+    type: BWBV
+    objects:
+      - type: Video
+        path: ../example-resources/rect-animation.png
+        viewing-progress:
+          var: a
+      - type: Video
+        path: ../example-resources/gif-animation.gif
+        viewing-progress:
+          var: a
+  second-object:
     type: Video
-    path: ../example-resources/gif-animation.gif
+    path: ../example-resources/gigachad.jpg
     viewing-progress:
       var: a
-  second-object: green
-  aspect-ratio: 1
+    rect:
+      size: 100 100
+      position: 0 100
+  aspect-ratio: 0.5

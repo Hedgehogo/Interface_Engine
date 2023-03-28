@@ -84,12 +84,13 @@ namespace ui {
 		inherit<IConvertToUse<float>, ConvertToUseCoefficientWithRange<float>>({"CTUCoefficientWithRangef", "CTUCWRf"});
 		inherit<IValve, ValveWithISbool>({"VWISbool", "VIWISB"});
 
+		addFunc<OnlyDrawable>(videoConvert, {"Video"});
+
 		inherit<OnlyDrawable, Empty>();
 		inherit<OnlyDrawable, FullColor>();
 		inherit<OnlyDrawable, RoundedRectangle>();
 		inherit<OnlyDrawable, Capsule>();
 		inherit<OnlyDrawable, Sprite>();
-        inherit<OnlyDrawable, Video>();
 		inherit<IUninteractive, OnlyDrawable>();
 		inherit<IUninteractive, Bar>();
 		inherit<IUninteractive, Caption>();
