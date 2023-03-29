@@ -3,6 +3,8 @@
 #include "ui/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/onlyDrawable.hpp"
 #include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 #include "ui/updatable/iUpdatable/iUpdatable.hpp"
+#include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include <Magick++.h>
 
 namespace ui {
 	class VideoFromFile : public OnlyDrawable{
@@ -14,9 +16,9 @@ namespace ui {
 		std::vector<sf::Texture> bufferTexture;
 		sf::Sprite sprite;
 		PSCoefficient viewingProgress;
-    public:
 
-		VideoFromFile(std::string path, PSCoefficient viewingProgress, sf::IntRect rect = {0, 0, 0, 0});
+    public:
+		VideoFromFile(std::vector<sf::Texture> video, PSCoefficient viewingProgress);
 
         void setCurrentFrame(float viewingProgress);
 
@@ -32,11 +34,7 @@ namespace ui {
 
         void resize(sf::Vector2f size, sf::Vector2f position) override;
 
-    protected:
-        VideoFromFile(std::vector<sf::Texture> bufferTexture, PSCoefficient viewingProgress);
-
     public:
-
         VideoFromFile *copy() override;
     };
 }

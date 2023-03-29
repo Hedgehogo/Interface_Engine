@@ -11,12 +11,8 @@ namespace ui {
 	}
 
 	bool videoConvert(const YAML::Node &node, OnlyDrawable *&video) {
-		if (std::string path{node["path"].as<std::string>()};!node["offset"] && isVideo(path)){
-			video = new VideoFromFile{
-				path,
-				Buffer::get<SCoefficientValue>(node["viewing-progress"]),
-				convDef(node["rect"], sf::IntRect{0, 0, 0, 0})
-			};
+		if (!node["offset"] && isVideo(node["path"].as<std::string>())){
+			video = new VideoFromFile{*node["path"].as<std::vector<sf::Texture>*>(), Buffer::get<SCoefficientValue>(node["viewing-progress"])};
 		} else{
 			video = new VideoFromTexture{
 				*node["path"].as<sf::Texture *>(),

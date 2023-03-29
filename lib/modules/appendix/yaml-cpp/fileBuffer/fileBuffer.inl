@@ -2,6 +2,11 @@
 
 namespace ui {
 	template<typename T>
+	void LoadFromFile<T>::load(T &object, std::string name) {
+		object.loadFromFile(name);
+	}
+
+	template<typename T>
 	std::map<std::string, T> FileBuffer<T>::objects = {};
 	
 	template<typename T>
@@ -13,14 +18,14 @@ namespace ui {
 			return *aliases[name];
 		}
 		if(objects.find(name) == objects.end()) {
-			objects[name].loadFromFile(name);
+			LoadFromFile<T>::load(objects[name], name);
 		}
 		return objects[name];
 	}
 	
 	template <typename T>
 	void FileBuffer<T>::setObject(const std::string &name, const std::string &filePath) {
-		objects[name].loadFromFile(filePath);
+		LoadFromFile<T>::load(objects[name], filePath);
 	}
 	
 	template <typename T>

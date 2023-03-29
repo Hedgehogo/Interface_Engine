@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <localisation/system.hpp>
+#include <Magick++.h>
 
 namespace ui {
 	SymbolPosition readCharacterIndex(const YAML::Node &node, std::basic_ifstream<char32_t> &fin) {
@@ -161,5 +162,46 @@ namespace ui {
 		font = &FileBuffer<sf::Font>::get(node.as<std::string>());
 		return true;
 	}
-}
 
+	void LoadFromFile<std::vector<sf::Texture>>::load(std::vector<sf::Texture> &object, std::string name) {
+		std::list<Magick::Image> images;
+		Magick::readImages(&images, name);
+
+		object.resize(images.size());
+
+		sf::Vector2<size_t> sizeVideo{images.begin()->baseColumns(), images.begin()->baseRows()};
+
+		int i = 0;
+		for (auto &frame : images) {
+			frame.magick("RGBA");
+			frame.backgroundColor(Magick::Color("transparent"));
+			frame.extent({static_cast<size_t>(sizeVideo.x), static_cast<size_t>(sizeVideo.y)}, Magick::CenterGravity);
+
+			sf::Image sfImage;
+			sfImage.create(sizeVideo.x, sizeVideo.y);
+			for (int x = 0; x < sizeVideo.x; ++x) {
+				for (int y = 0; y <  sizeVideo.y; ++y) {
+					Magick::Color pixel = frame.pixelColor(x, y);
+					sfImage.setPixel(x, y, {
+						    static_cast<sf::Uint8>(QuantumScale * pixel.quantumRed() * 255),
+						    static_cast<sf::Uint8>(QuantumScale * pixel.quantumGreen() * 255),
+						    static_cast<sf::Uint8>(QuantumScale * pixel.quantumBlue() * 255),
+						    static_cast<sf::Uint8>(QuantumScale * pixel.quantumAlpha() * 255),
+					    }
+					);
+				}
+			}
+			object[i].loadFromImage(sfImage);
+			++i;
+		}
+
+	}
+
+
+	template<>
+	bool convert<std::vector<sf::Texture>>(const YAML::Node &node, std::vector<sf::Texture> *&video){
+		video = &FileBuffer<std::vector<sf::Texture>>::get(node.as<std::string>());
+		return true;
+	}
+
+}

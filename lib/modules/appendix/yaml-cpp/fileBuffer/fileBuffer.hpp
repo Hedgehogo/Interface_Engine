@@ -1,7 +1,12 @@
 #pragma once
 #include "../yaml.hpp"
-
+#include <Magick++.h>
 namespace ui {
+	template<typename T>
+	struct LoadFromFile {
+		static void load(T& object, std::string name);
+	};
+
 	template<typename T>
 	class FileBuffer {
 	protected:
@@ -17,12 +22,8 @@ namespace ui {
 		
 		static void addAlias(const std::string& name, const std::string& alias);
 	};
-}
 
-#include "fileBuffer.inl"
-
-namespace ui {
-	typedef sf::Uint32 Uint32;
+	using Uint32 = sf::Uint32;
 	
 	struct SymbolPosition {
 		ullint line;
@@ -44,4 +45,15 @@ namespace ui {
 	
 	template<>
 	bool convert<sf::Font>(const YAML::Node& node, sf::Font*& font);
+
+	template<>
+	struct LoadFromFile<std::vector<sf::Texture>> {
+		static void load(std::vector<sf::Texture>& object, std::string name);
+	};
+
+	template<>
+	bool convert<std::vector<sf::Texture>>(const YAML::Node &node, std::vector<sf::Texture> *&video);
+
 }
+
+#include "fileBuffer.inl"
