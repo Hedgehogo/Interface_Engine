@@ -84,6 +84,7 @@ namespace ui {
 		inherit<IChangeVariable, ChangeVariableByStraightLine>({"CVByStraightLine", "CVByStraightL", "CVBSL"});
 		inherit<IChangeVariable, ChangeVariableByBrokenLine>({"CVByBrokenLine", "CVByBrokenL", "CVBBL"});
 		inherit<IChangeVariable, ChangeVariableBySteppedLine>({"CVBySteppedLine", "CVBySteppedL", "CVBStepL"});
+		inherit<IChangeVariable, ChangeVariableBySinusoid>({"CVBySinusoid", "CVBySin", "CVBS"});
 		inherit<IConvertToUse<float>, ConvertToUseCoefficient<float>>({"CTUCoefficientf", "CTUCf"});
 		inherit<IConvertToUse<float>, ConvertToUseCoefficientWithRange<float>>({"CTUCoefficientWithRangef", "CTUCWRf"});
 		inherit<IValve, ValveWithISbool>({"VWISbool", "VIWISB"});

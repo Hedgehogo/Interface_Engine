@@ -8,11 +8,13 @@ animation-manager:
             value: a
             convert-to-use:
               type: CTUCWRf
-          change-variables:
-            - type: CVBSL
-              start: 0
-              end: 1
-              length: 6
+          change-variable:
+            type: CVBS
+            size: 3.14159265359
+            offset-OY: 0.5
+            amplitude: 0.5
+            frequency: 2
+            offset-OX: 1.57079632679
         next: this
     - unit:
         type: A
