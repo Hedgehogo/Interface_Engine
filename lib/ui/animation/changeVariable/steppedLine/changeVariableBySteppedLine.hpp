@@ -1,0 +1,31 @@
+#pragma once
+
+#include "../iChangeVariable.hpp"
+
+namespace ui {
+	class ChangeVariableBySteppedLine : public IChangeVariable{
+	public:
+		struct Value{
+			float value;
+			float size = 0;
+		};
+
+	protected:
+		std::vector<Value> values;
+		float size;
+
+	public:
+		ChangeVariableBySteppedLine(std::vector<Value> values);
+
+		float getSize() override;
+
+		float operator()(float frame) override;
+
+		IChangeVariable *copy() override;
+	};
+
+	template<>
+	bool convert(const YAML::Node &node, ChangeVariableBySteppedLine::Value& value);
+
+	bool convertPointer(const YAML::Node &node, ChangeVariableBySteppedLine*& brokenLine);
+}

@@ -23,7 +23,7 @@ animation-manager:
             convert-to-use:
               type: CTUCWRf
           change-variable:
-            type: CVBBL
+            type: CVBStepL
             values:
               - value: 0
                 size: 3
