@@ -4,6 +4,8 @@
 #include "../sizingAndPositioning/sizing2/determine/determineSizing2.hpp"
 #include "../sizingAndPositioning/positioning/determine/determinePositioning.hpp"
 #include "../sizingAndPositioning/positioning2/determine/determinePositioning2.hpp"
+#define MAGICKCORE_QUANTUM_DEPTH 16
+# define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
 #include <Magick++.h>
 
 namespace ui {

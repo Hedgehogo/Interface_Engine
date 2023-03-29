@@ -1,6 +1,5 @@
 #pragma once
 #include "../yaml.hpp"
-#include <Magick++.h>
 namespace ui {
 	template<typename T>
 	struct LoadFromFile {

@@ -2,6 +2,8 @@
 
 #include <fstream>
 #include <localisation/system.hpp>
+#define MAGICKCORE_QUANTUM_DEPTH 16
+# define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
 #include <Magick++.h>
 
 namespace ui {

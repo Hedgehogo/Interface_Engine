@@ -4,7 +4,6 @@
 #include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 #include "ui/updatable/iUpdatable/iUpdatable.hpp"
 #include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
-#include <Magick++.h>
 
 namespace ui {
 	class VideoFromFile : public OnlyDrawable{

@@ -1,5 +1,4 @@
 #include "videoFromFile.hpp"
-#include <Magick++.h>
 
 namespace ui {
     VideoFromFile::VideoFromFile(std::vector<sf::Texture> video, PSCoefficient viewingProgress) :
