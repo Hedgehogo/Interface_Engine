@@ -82,6 +82,7 @@ namespace ui {
 		inherit<IAnimatorUnit, Prerequisite>({"P"});
 		inherit<IAnimationVariable, SharedAnimationVariable<float>>({"SharedAV", "SAV"});
 		inherit<IChangeVariable, ChangeVariableByStraightLine>({"CVByStraightLine", "CVBSL"});
+		inherit<IChangeVariable, ChangeVariableByBrokenLine>({"CVByBrokenLine", "CVBBL"});
 		inherit<IConvertToUse<float>, ConvertToUseCoefficient<float>>({"CTUCoefficientf", "CTUCf"});
 		inherit<IConvertToUse<float>, ConvertToUseCoefficientWithRange<float>>({"CTUCoefficientWithRangef", "CTUCWRf"});
 		inherit<IValve, ValveWithISbool>({"VWISbool", "VIWISB"});

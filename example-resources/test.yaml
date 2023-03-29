@@ -2,32 +2,49 @@ animation-manager:
   animators:
     - unit:
         type: A
-        name: startSlider
         var:
           var:
             type: SAV
             value: a
             convert-to-use:
               type: CTUCWRf
-          change-variable:
-            type: CVBSL
-            start: 0
-            end: 1
-            length: 1
+          change-variables:
+            - type: CVBSL
+              start: 0
+              end: 1
+              length: 6
         next: this
+    - unit:
+        type: A
+        var:
+          var:
+            type: SAV
+            value: b
+            convert-to-use:
+              type: CTUCWRf
+          change-variable:
+            type: CVBBL
+            values:
+              - value: 0
+                size: 3
+              - value: 0.5
+                size: 2
+              - value: 0
+                size: 1
+              - value: 1
 object:
   type: BoxWithConstRatio
   const-object:
     type: BWBV
     objects:
       - type: Video
-        path: ../example-resources/rect-animation.png
+        path: ../example-resources/rect-animation-0,5.png
         viewing-progress:
           var: a
       - type: Video
-        path: ../example-resources/gif-animation.gif
+        path: ../example-resources/gif-animation-0,5.gif
         viewing-progress:
-          var: a
+          var: b
   second-object:
     type: Video
     path: ../example-resources/gigachad.jpg

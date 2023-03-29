@@ -54,7 +54,8 @@
 #include "../animation/animator/unit/animation/animation.hpp"
 #include "../animation/animator/unit/prerequisite/prerequisite.hpp"
 #include "../animation/animator/unit/prerequisite/velves/withISbool/valveWithISbool.hpp"
-#include "../animation/changeVariable/strainghtLine/changeVariableByStraightLine.hpp"
+#include "../animation/changeVariable/straightLine/changeVariableByStraightLine.hpp"
+#include "../animation/changeVariable/brokenLine/changeVariableByBrokenLine.hpp"
 #include "../animation/variables/shared/sharedAnimationVariable.hpp"
 #include "../debug/boxDebug.hpp"
 
