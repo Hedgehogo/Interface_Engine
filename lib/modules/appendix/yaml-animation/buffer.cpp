@@ -3,7 +3,6 @@
 
 namespace ui{
 
-	std::map<std::string, IAnimationVariable*> animationVariablesBuffer;
 	std::map<std::string, std::vector<std::function<void(IAnimatorUnit*)>>> animatorUnitRequest;
 	std::map<std::string, IAnimatorUnit*> animatorUnitBuffer;
 

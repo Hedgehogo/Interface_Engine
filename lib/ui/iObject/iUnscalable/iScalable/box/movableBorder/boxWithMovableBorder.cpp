@@ -3,15 +3,14 @@
 #include <algorithm>
 
 namespace ui {
-	BoxWithMovableBorder::BoxWithMovableBorder(IScalable *firstObject, IScalable *secondObject, bool isHorizontalBorder, AnimationVariable<float> &borderValue, int borderInteractionSize, sf::Vector2f minSize) :
+	BoxWithMovableBorder::BoxWithMovableBorder(IScalable *firstObject, IScalable *secondObject, bool isHorizontalBorder, PSCoefficient borderValue, int borderInteractionSize, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithTwoObjects(firstObject, secondObject),
 		pressedInteraction(new MovableBorderEvent{*this}, Key::mouseLeft),
 		Interactive_Simple(new OneKeyInteraction{new AddBlockInteractionEvent{pressedInteraction}, Key::mouseLeft}),
-		isHorizontalBorder(isHorizontalBorder), borderValue(borderValue), borderValueNow(borderValue), borderInteractionSize(borderInteractionSize) {
+		isHorizontalBorder(isHorizontalBorder), borderValue(borderValue), borderValueNow(borderValue->getValue()), borderInteractionSize(borderInteractionSize) {
 		
-		borderValue.addAnimationSetter([&](float value) {
+		borderValue->addSetter([&](float value) {
 			this->resize(this->size, this->position);
-			this->setBorderValue(this->getBorderValueNow());
 		});
 	}
 	
@@ -28,11 +27,11 @@ namespace ui {
 	}
 	
 	float BoxWithMovableBorder::getBorderValue() {
-		return (float)borderValue;
+		return borderValue->getValue();
 	}
 	
 	void BoxWithMovableBorder::setBorderValue(float borderValue) {
-		this->borderValue = std::max(0.f, std::min(borderValue, 1.f));
+		this->borderValue->setValue(borderValue);
 	}
 	
 	float BoxWithMovableBorder::getBorderValueNow() {
@@ -103,11 +102,11 @@ namespace ui {
 			float c = secondObjectMinSize.x / firstObjectMinSize.x;
 			float minSizeBorder = 1 - c / (c + 1);
 			
-			if(minSizeBorder > (float)borderValue) {
-				borderValueNow = std::max({firstObjectMinSize.x / size.x, (float)borderValue});
+			if(minSizeBorder > borderValue->getValue()) {
+				borderValueNow = std::max({firstObjectMinSize.x / size.x, borderValue->getValue()});
 			} else {
 				float diff = size.x - getMinSize().x;
-				borderValueNow = std::min({(diff + firstObjectMinSize.x) / size.x, (float)borderValue});
+				borderValueNow = std::min({(diff + firstObjectMinSize.x) / size.x, borderValue->getValue()});
 			}
 			
 			firstObjectSize = {size.x * borderValueNow, size.y};
@@ -118,11 +117,11 @@ namespace ui {
 			float c = secondObjectMinSize.y / firstObjectMinSize.y;
 			float minSizeBorder = 1 - c / (c + 1);
 			
-			if(minSizeBorder > (float)borderValue) {
-				borderValueNow = std::max({firstObjectMinSize.y / size.y, (float)borderValue});
+			if(minSizeBorder > borderValue->getValue()) {
+				borderValueNow = std::max({firstObjectMinSize.y / size.y, borderValue->getValue()});
 			} else {
 				float diff = size.y - getMinSize().y;
-				borderValueNow = std::min({(diff + firstObjectMinSize.y) / size.y, (float)borderValue});
+				borderValueNow = std::min({(diff + firstObjectMinSize.y) / size.y, borderValue->getValue()});
 			}
 			
 			firstObjectSize = {size.x, size.y * borderValueNow};
@@ -165,29 +164,25 @@ namespace ui {
 		IScalable *firstObject;
 		IScalable *secondObject;
 		bool isHorizontalBorder{false};
-		AnimationVariable<float> *borderValue;
+		PSCoefficient borderValue;
 		int borderInteractionSize{5};
 		sf::Vector2f minSize{};
 		node["first-object"] >> firstObject;
 		node["second-object"] >> secondObject;
 		std::string borderDirection;
 		node["border-direction"] >> borderDirection;
+		borderValue = Buffer::get<SCoefficientValue>(node["border-value"]);
 		if(borderDirection == "horizontal") {
 			isHorizontalBorder = true;
 		} else if(borderDirection != "vertical") {
 			throw YAML::BadConversion{node.Mark()};
-		}
-		if(node["border-value"]) {
-			node["border-value"] >> borderValue;
-		} else {
-			borderValue = new AnimationVariable<float>{0.5, new ConvertToUseCoefficientWithRange<float>{}};
 		}
 		if(node["border-interaction-size"])
 			node["border-interaction-size"] >> borderInteractionSize;
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		
-		boxWithMovableBorder = new BoxWithMovableBorder{firstObject, secondObject, isHorizontalBorder, (*borderValue), borderInteractionSize};
+		boxWithMovableBorder = new BoxWithMovableBorder{firstObject, secondObject, isHorizontalBorder, borderValue, borderInteractionSize};
 		return true;
 	}
 }

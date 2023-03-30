@@ -2,19 +2,19 @@
 
 #include <vector>
 #include "../iAnimatorUnit.hpp"
-#include "../../../variables/iAnimationVariable.hpp"
 #include "../../../changeVariable/iChangeVariable.hpp"
+#include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
 	class Animation : public IAnimatorUnit{
 	public:
 		struct Variable{
-			IAnimationVariable* animationVariable;
+			PSfloat animationVariable;
 			std::vector<IChangeVariable*> changeVariables;
 			unsigned int activeChanger = 0;
 			float timeStartChanger = 0;
 
-			Variable(IAnimationVariable *animationVariable = nullptr, std::vector<IChangeVariable *> changeVariables = {});
+			 Variable(PSfloat animationVariable = {}, std::vector<IChangeVariable *> changeVariables = {});
 
 			Variable copy();
 		};

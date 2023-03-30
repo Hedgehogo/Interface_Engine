@@ -58,7 +58,6 @@
 #include "../animation/changeVariable/brokenLine/changeVariableByBrokenLine.hpp"
 #include "../animation/changeVariable/steppedLine/changeVariableBySteppedLine.hpp"
 #include "../animation/changeVariable/sinusoid/changeVariableBySinusoid.hpp"
-#include "../animation/variables/shared/sharedAnimationVariable.hpp"
 #include "../debug/boxDebug.hpp"
 
 namespace ui {
