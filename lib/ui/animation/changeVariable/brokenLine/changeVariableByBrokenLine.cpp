@@ -1,4 +1,3 @@
-#include <iostream>
 #include "changeVariableByBrokenLine.hpp"
 
 namespace ui {

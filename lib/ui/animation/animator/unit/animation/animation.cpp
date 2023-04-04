@@ -1,12 +1,10 @@
 #include "animation.hpp"
 
 #include <utility>
-#include "../../../exception/notExistAnimationVariable.hpp"
-
 
 namespace ui {
 	Animation::Variable::Variable(PSfloat animationVariable, std::vector<IChangeVariable *> changeVariables) : animationVariable(std::move(animationVariable)), changeVariables(std::move(changeVariables)) {}
-
+	
 	Animation::Variable Animation::Variable::copy() {
 		std::vector<IChangeVariable *> copyChangeVariables{changeVariables.size()};
 
@@ -16,16 +14,24 @@ namespace ui {
 
 		return {animationVariable, copyChangeVariables};
 	}
-
-	Animation::Animation(std::vector<Variable> animationVariables, std::vector<IAnimatorUnit *> nextUnits, float speed) :
-		animationVariables(std::move(animationVariables)), nextUnits(nextUnits), nextUnitsBuff(nextUnits), speed(speed){
+	
+	Animation::Animation(std::vector<Variable> animationVariables, PSfloat speed, std::vector<IAnimatorUnit *> nextUnits) :
+		animationVariables(std::move(animationVariables)), nextUnits(nextUnits), nextUnitsBuff(nextUnits), speed(std::move(speed)){
 		for (auto &unit: this->nextUnits){
 			if(!unit) unit = this;
 		}
 
 		restart();
 	}
-
+	
+	void Animation::setSpeed(PSfloat speed) {
+		if (!this->speed) this->speed = speed;
+		
+		for(auto& unit : nextUnits) {
+			if (unit != this) unit->setSpeed(speed);
+		}
+	}
+	
 	void Animation::restart() {
 		animationUpdatableVariables.resize(animationVariables.size());
 
@@ -38,13 +44,12 @@ namespace ui {
 			animationVariable.timeStartChanger = 0;
 		}
 	}
-
+	
 	std::vector<IAnimatorUnit*> Animation::update(float time) {
-		time *= speed;
 		for (int i = 0; i < animationUpdatableVariables.size(); ++i){
 			Variable*& animationVariable = animationUpdatableVariables[i];
 
-			if (animationVariable->timeStartChanger == 0) animationVariable->timeStartChanger = time;
+			if (animationVariable->timeStartChanger == 0 || time < animationVariable->timeStartChanger) animationVariable->timeStartChanger = time;
 
 			float timeFromChanger = time - (animationVariable->timeStartChanger);
 			IChangeVariable * changeVariable = animationVariable->changeVariables[animationVariable->activeChanger];
@@ -53,13 +58,14 @@ namespace ui {
 				animationVariable->activeChanger++;
 				if (animationVariable->activeChanger == animationVariable->changeVariables.size()){
 					animationUpdatableVariables.erase(std::vector<Variable*>::iterator{&animationVariable});
-					i--;
+					--i;
 					continue;
 				}
 				animationVariable->timeStartChanger = time;
 				changeVariable = animationVariable->changeVariables[animationVariable->activeChanger];
 			}
-
+			
+			timeFromChanger *= speed->getValue();
 			animationVariable->animationVariable->setValue((*changeVariable)(timeFromChanger));
 		}
 
@@ -70,14 +76,15 @@ namespace ui {
 
 		return {this};
 	}
-
+	
 	void Animation::setNextUnits(std::vector<IAnimatorUnit*> nextUnits) {
 		this->nextUnits = nextUnits;
 	}
+	
 	void Animation::addNextUnits(IAnimatorUnit *nextUnit) {
 		nextUnits.push_back(nextUnit);
 	}
-
+	
 	Animation* Animation::copy() {
 		std::vector<IAnimatorUnit*> copyNextUnits{nextUnitsBuff.size()};
 
@@ -85,15 +92,15 @@ namespace ui {
 			copyNextUnits[i] = nextUnitsBuff[i]->copy();
 		}
 
-		return new Animation{animationVariables, copyNextUnits, speed};
+		return new Animation{animationVariables, speed, copyNextUnits};
 	}
-
+	
 	Animation::~Animation() {
 		for (auto &item: nextUnitsBuff){
 			if (item) delete item;
 		}
 	}
-
+	
 	template<>
 	bool convert(const YAML::Node &node, Animation::Variable& animationVar){
 		animationVar = Animation::Variable{
@@ -123,8 +130,8 @@ namespace ui {
 
 		animation = new Animation{
 			node["var"] ? std::vector<Animation::Variable>{node["var"].as<Animation::Variable>()} : node["vars"].as<std::vector<Animation::Variable>>(),
-			nextUnits,
-			convDef(node["speed"], 1.f)
+			(node["speed"] ? Buffer::get<Sfloat>(node["speed"]) : PSfloat{nullptr}),
+			nextUnits
 		};
 
 		if (node["next"] && node["next"].IsScalar() && node["next"].as<std::string>() != "this") {

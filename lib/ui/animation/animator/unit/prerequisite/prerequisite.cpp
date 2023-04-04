@@ -11,21 +11,31 @@ namespace ui {
 			if(!unit) unit = this;
 		}
 	}
-
+	
+	void Prerequisite::setSpeed(PSfloat speed) {
+		for (auto &unit: this->nextTrue){
+			if (unit != this)  unit->setSpeed(speed);
+		}
+		
+		for (auto &unit: this->nextFalse){
+			if (unit != this)  unit->setSpeed(speed);
+		}
+	}
+	
 	void Prerequisite::restart() {}
-
+	
 	std::vector<IAnimatorUnit *> Prerequisite::update(float time) {
 		return (*valve)() ? nextTrue : nextFalse;
 	}
-
+	
 	void Prerequisite::addNextTrue(IAnimatorUnit *unit) {
 		nextTrue.push_back(unit);
 	}
-
+	
 	void Prerequisite::addNextFalse(IAnimatorUnit *unit) {
 		nextFalse.push_back(unit);
 	}
-
+	
 	IAnimatorUnit *Prerequisite::copy() {
 
 		std::vector<IAnimatorUnit*> copyNextTrue{nextTrueBuf.size()};
@@ -42,7 +52,7 @@ namespace ui {
 
 		return new Prerequisite{valve->copy(), copyNextTrue, copyNextFalse};
 	}
-
+	
 	Prerequisite::~Prerequisite() {
 		for (auto item: nextTrueBuf){
 			if (item) delete item;
@@ -54,8 +64,8 @@ namespace ui {
 
 		delete valve;
 	}
-
-
+	
+	
 	bool convertPointer(const YAML::Node &node, Prerequisite *&prerequisite){
 		std::vector<IAnimatorUnit*> nextTrue{};
 

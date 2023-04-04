@@ -1,5 +1,4 @@
 #include "boxScroll.hpp"
-#include <iostream>
 
 namespace ui {
 	BoxScroll::BoxScroll(IUnscalable *object, const PSRVec2f &normalObjectPosition, const sf::Vector2f &minSize) :

@@ -12,8 +12,9 @@ namespace ui {
 		IValve *valve;
 	public:
 		Prerequisite(IValve *valve, std::vector<IAnimatorUnit *> nextTrue, std::vector<IAnimatorUnit *> nextFalse);
-
-	public:
+		
+		void setSpeed(PSfloat speed) override;
+		
 		void restart() override;
 
 		std::vector<IAnimatorUnit *> update(float time) override;
