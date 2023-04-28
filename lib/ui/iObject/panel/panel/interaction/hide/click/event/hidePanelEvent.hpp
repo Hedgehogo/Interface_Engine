@@ -22,4 +22,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, HidePanelEvent *&hidePanelEvent);
+	
+	template<>
+	struct DecodePointer<HidePanelEvent> {
+		static bool decodePointer(const YAML::Node &node, HidePanelEvent *&hidePanelEvent);
+	};
 }

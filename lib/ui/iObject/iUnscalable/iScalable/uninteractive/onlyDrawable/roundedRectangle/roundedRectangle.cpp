@@ -51,6 +51,11 @@ namespace ui {
 		return true;
 	}
 	
+	bool DecodePointer<RoundedRectangle>::decodePointer(const YAML::Node &node, RoundedRectangle *&roundedRectangle) {
+		roundedRectangle = new RoundedRectangle{node["color"].as<sf::Color>(), node["radius"].as<float>()};
+		return true;
+	}
+	
 	template<>
 	bool determine<RoundedRectangle>(const YAML::Node &node) {
 		return determine(node, {{"color", YAML::NodeType::Scalar}, {"radius", YAML::NodeType::Scalar}});

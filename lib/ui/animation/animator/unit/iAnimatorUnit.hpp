@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../../../modules/appendix/yaml-animation/buffer.hpp"
+#include "modules/appendix/yaml-cpp/shared/value/general/sValue.hpp"
 
 namespace ui {
 	class IAnimatorUnit {
@@ -15,4 +16,6 @@ namespace ui {
 
 		virtual ~IAnimatorUnit() = default; 
 	};
+	
+	std::vector<IAnimatorUnit*> getAnimatorUnits(const YAML::Node& node, std::string nameNextNode = "next");
 }

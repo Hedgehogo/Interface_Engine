@@ -19,5 +19,10 @@ namespace ui {
 		void add(IInteraction *element);
 	};
 
-	bool convertPointer(const YAML::Node &node, InteractionStack*& interactionStack);
+	bool convertPointer(const YAML::Node &node, InteractionStack *&interactionStack);
+	
+	template<>
+	struct DecodePointer<InteractionStack> {
+		static bool decodePointer(const YAML::Node &node, InteractionStack *&interactionStack);
+	};
 }

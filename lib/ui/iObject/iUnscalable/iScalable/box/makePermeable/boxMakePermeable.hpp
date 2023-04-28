@@ -16,4 +16,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, BoxMakePermeable *&boxMakePermeable);
+	
+	template<>
+	struct DecodePointer<BoxMakePermeable> {
+		static bool decodePointer(const YAML::Node &node, BoxMakePermeable *&boxMakePermeable);
+	};
 }

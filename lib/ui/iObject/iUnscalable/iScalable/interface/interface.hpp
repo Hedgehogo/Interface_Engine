@@ -81,7 +81,12 @@ namespace ui {
 		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue = 0, uint hueOffset = 36) override;
 	};
 
-	bool convertPointer(const YAML::Node &node, Interface*& interface);
+	bool convertPointer(const YAML::Node &node, Interface *&interface);
+	
+	template<>
+	struct DecodePointer<Interface> {
+		static bool decodePointer(const YAML::Node &node, Interface *&interface);
+	};
 
 	Interface makeInterface(sf::RenderTarget &renderTarget, const std::string& filePath);
 

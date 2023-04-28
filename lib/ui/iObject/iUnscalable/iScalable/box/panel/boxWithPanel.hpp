@@ -29,6 +29,11 @@ namespace ui {
 	
 	bool convertPointer(const YAML::Node &node, BoxWithPanel *&boxWithPanel);
 	
+	template<>
+	struct DecodePointer<BoxWithPanel> {
+		static bool decodePointer(const YAML::Node &node, BoxWithPanel *&boxWithPanel);
+	};
+	
 	using BoxWPanel = BoxWithPanel;
 	using BWP = BoxWithPanel;
 }

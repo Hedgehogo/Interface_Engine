@@ -26,4 +26,10 @@ namespace ui {
 		node["addition"] >> addition;
 		{ relativeParentSizing = new RelativeParentSizing{addition}; return true; }
 	}
+	
+	bool DecodePointer<RelativeParentSizing>::decodePointer(const YAML::Node &node, RelativeParentSizing *&relativeParentSizing) {
+		float addition;
+		node["addition"] >> addition;
+		{ relativeParentSizing = new RelativeParentSizing{addition}; return true; }
+	}
 }

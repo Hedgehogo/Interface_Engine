@@ -29,6 +29,11 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, FullColor *&fullColor);
 	
 	template<>
+	struct DecodePointer<FullColor> {
+		static bool decodePointer(const YAML::Node &node, FullColor *&fullColor);
+	};
+	
+	template<>
 	bool determine<FullColor>(const YAML::Node& node);
 }
 

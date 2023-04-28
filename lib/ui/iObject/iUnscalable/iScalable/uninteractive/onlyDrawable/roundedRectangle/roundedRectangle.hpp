@@ -27,5 +27,10 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, RoundedRectangle *&roundedRectangle);
 	
 	template<>
+	struct DecodePointer<RoundedRectangle> {
+		static bool decodePointer(const YAML::Node &node, RoundedRectangle *&roundedRectangle);
+	};
+	
+	template<>
 	bool determine<RoundedRectangle>(const YAML::Node &node);
 }

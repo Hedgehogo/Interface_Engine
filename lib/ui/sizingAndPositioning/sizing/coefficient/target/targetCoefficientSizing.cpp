@@ -23,4 +23,15 @@ namespace ui {
 		
 		{ targetCoefficientSizing = new TargetCoefficientSizing{coefficient, addition}; return true; }
 	}
+	
+	bool DecodePointer<TargetCoefficientSizing>::decodePointer(const YAML::Node &node, TargetCoefficientSizing *&targetCoefficientSizing) {
+		float coefficient;
+		float addition{0.f};
+		
+		node["coefficient"] >> coefficient;
+		if(node["addition"])
+			node["addition"] >> addition;
+		
+		{ targetCoefficientSizing = new TargetCoefficientSizing{coefficient, addition}; return true; }
+	}
 }

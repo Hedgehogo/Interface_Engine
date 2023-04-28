@@ -21,5 +21,10 @@ namespace ui {
 	};
 
 	template<>
-	bool convert(const YAML::Node &node, AnimationManager& animationManager);
+	bool convert(const YAML::Node &node, AnimationManager &animationManager);
+	
+	template<>
+	struct Decode<AnimationManager> {
+		static bool decode(const YAML::Node &node, AnimationManager &animationManager);
+	};
 }

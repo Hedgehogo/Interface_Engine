@@ -21,4 +21,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, SmartSizing *&smartSizing);
+	
+	template<>
+	struct DecodePointer<SmartSizing> {
+		static bool decodePointer(const YAML::Node &node, SmartSizing *&smartSizing);
+	};
 }

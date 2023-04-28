@@ -1,5 +1,4 @@
 #pragma once
-#include "../../buffer/buffer.hpp"
 #include "../exception/yamlBuildExceptions.hpp"
 #include "../../objectBuffer/objectBuffer.hpp"
 #include "../function/funcYamlBuilder.hpp"
@@ -8,15 +7,6 @@ namespace ui {
     const sf::Color nullColor{255, 255, 255, 0};
 	
 	std::string removeNamespace(std::string typeName, std::string nameSpace);
-	
-	template<typename T>
-	bool loadFromYamlFile(const YAML::Node &node, T *&object);
-	
-	template<typename T>
-	bool loadFromYamlIf(const YAML::Node &node, T *&object);
-	
-	template<typename T>
-	bool loadFromYamlObject(const YAML::Node &node, T *&object);
 	
 	template<typename T>
 	bool determine(const YAML::Node& node);
@@ -68,12 +58,6 @@ namespace ui {
 		
 		static bool build(const YAML::Node &node, const std::string &type, Type *&object);
 	};
-	
-	template<typename Type>
-	bool buildOrProcess(const YAML::Node& node, Type *&object);
-	
-	template<typename T>
-	T* loadFromYaml(std::string filePath);
 }
 
 #include "yamlBuilder.inl"

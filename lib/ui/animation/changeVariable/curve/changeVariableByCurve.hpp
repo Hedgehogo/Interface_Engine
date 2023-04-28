@@ -19,5 +19,10 @@ namespace ui {
 		ChangeVariableByCurve* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, ChangeVariableByCurve*& changeVariableByCurve);
+	bool convertPointer(const YAML::Node &node, ChangeVariableByCurve *&changeVariableByCurve);
+	
+	template<>
+	struct DecodePointer<ChangeVariableByCurve> {
+		static bool decodePointer(const YAML::Node &node, ChangeVariableByCurve *&changeVariableByCurve);
+	};
 } // ui

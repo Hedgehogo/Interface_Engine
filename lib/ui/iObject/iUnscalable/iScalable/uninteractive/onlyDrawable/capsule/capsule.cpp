@@ -52,4 +52,10 @@ namespace ui {
 		node["color"] >> color;
 		{ capsule = new Capsule{color}; return true; }
 	}
+	
+	bool DecodePointer<Capsule>::decodePointer(const YAML::Node &node, Capsule *&capsule) {
+		sf::Color color;
+		node["color"] >> color;
+		{ capsule = new Capsule{color}; return true; }
+	}
 }

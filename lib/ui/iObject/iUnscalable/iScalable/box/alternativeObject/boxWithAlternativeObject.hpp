@@ -17,6 +17,11 @@ namespace ui {
 	
 	bool convertPointer(const YAML::Node &node, BoxWithAlternativeObject *&boxWithAlternativeObject);
 	
+	template<>
+	struct DecodePointer<BoxWithAlternativeObject> {
+		static bool decodePointer(const YAML::Node &node, BoxWithAlternativeObject *&boxWithAlternativeObject);
+	};
+	
 	using BoxWAObject = BoxWithAlternativeObject;
 	using BWAO = BoxWithAlternativeObject;
 }

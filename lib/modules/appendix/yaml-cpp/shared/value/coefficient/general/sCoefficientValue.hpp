@@ -19,6 +19,11 @@ namespace ui {
 	
 	bool convertPointer(const YAML::Node &node, SCoefficientValue *&sCoefficientValue);
 	
+	template<>
+	struct DecodePointer<SCoefficientValue> {
+		static bool decodePointer(const YAML::Node &node, SCoefficientValue *&sCoefficientValue);
+	};
+	
 	typedef SCoefficientValue SCoefficient;
 	
 	typedef std::shared_ptr<SCoefficient> PSCoefficient;

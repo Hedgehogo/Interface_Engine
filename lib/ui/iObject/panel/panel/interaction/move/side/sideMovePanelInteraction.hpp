@@ -18,4 +18,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, SideMovePanelInteraction *&sideMovePanelInteraction);
+	
+	template<>
+	struct DecodePointer<SideMovePanelInteraction> {
+		static bool decodePointer(const YAML::Node &node, SideMovePanelInteraction *&sideMovePanelInteraction);
+	};
 }

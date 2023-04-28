@@ -94,4 +94,23 @@ namespace ui {
 		
 		{ bar = new Bar{background, strip, division, offset, horizontal}; return true; }
 	}
+	
+	bool DecodePointer<Bar>::decodePointer(const YAML::Node &node, Bar *&bar) {
+		IUninteractive *background;
+		IUninteractive *strip;
+		int division{1};
+		float offset{0.0f};
+		bool horizontal{true};
+		
+		node["background"] >> background;
+		node["strip"] >> strip;
+		if(node["division"])
+			node["division"] >> division;
+		if(node["offset"])
+			node["offset"] >> offset;
+		if(node["horizontal"])
+			node["horizontal"] >> horizontal;
+		
+		{ bar = new Bar{background, strip, division, offset, horizontal}; return true; }
+	}
 }

@@ -24,5 +24,9 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, PointingDisplayPanelInteraction *&pointingDisplayPanelInteraction) {
 		{ pointingDisplayPanelInteraction = new PointingDisplayPanelInteraction{}; return true; }
 	}
+	
+	bool DecodePointer<PointingDisplayPanelInteraction>::decodePointer(const YAML::Node &node, PointingDisplayPanelInteraction *&pointingDisplayPanelInteraction) {
+		{ pointingDisplayPanelInteraction = new PointingDisplayPanelInteraction{}; return true; }
+	}
 }
 

@@ -50,4 +50,4 @@ namespace ui {
 	VideoFromTexture *VideoFromTexture::copy() {
 		return nullptr;
 	}
-} // ui
+}

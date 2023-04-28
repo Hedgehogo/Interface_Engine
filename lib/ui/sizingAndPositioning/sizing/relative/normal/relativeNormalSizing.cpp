@@ -24,4 +24,8 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, RelativeNormalSizing *&relativeNormalSizing) {
 		{ relativeNormalSizing = new RelativeNormalSizing{}; return true; }
 	}
+	
+	bool DecodePointer<RelativeNormalSizing>::decodePointer(const YAML::Node &node, RelativeNormalSizing *&relativeNormalSizing) {
+		{ relativeNormalSizing = new RelativeNormalSizing{}; return true; }
+	}
 }

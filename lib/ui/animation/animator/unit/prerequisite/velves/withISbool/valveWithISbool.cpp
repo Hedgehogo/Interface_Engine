@@ -1,21 +1,30 @@
 #include "valveWithISbool.hpp"
 
 namespace ui {
-	ValveWithISbool::ValveWithISbool(PISbool value) : value(value) {}
-
+	ValveWithISbool::ValveWithISbool(PISbool value) : value(value) {
+	}
+	
 	bool ValveWithISbool::operator()() {
 		return value->getValue();
 	}
-
-	ValveWithISbool *ValveWithISbool::copy() {
+	
+	ValveWithISbool* ValveWithISbool::copy() {
 		return new ValveWithISbool{value};
 	}
-
+	
 	bool convertPointer(const YAML::Node &node, ValveWithISbool *&valveWithISbool) {
 		valveWithISbool = new ValveWithISbool{
 			Buffer::get<ISbool>(node["value"])
 		};
-
+		
+		return true;
+	}
+	
+	bool DecodePointer<ValveWithISbool>::decodePointer(const YAML::Node &node, ValveWithISbool *&valveWithISbool) {
+		valveWithISbool = new ValveWithISbool{
+			Buffer::get<ISbool>(node["value"])
+		};
+		
 		return true;
 	}
 }

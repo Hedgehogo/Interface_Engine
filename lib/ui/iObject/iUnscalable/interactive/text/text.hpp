@@ -118,6 +118,11 @@ namespace ui {
     };
 	
 	bool convertPointer(const YAML::Node &node, Text *&text);
+	
+	template<>
+	struct DecodePointer<Text> {
+		static bool decodePointer(const YAML::Node &node, Text *&text);
+	};
 
     extern std::vector<BaseCharacter *>::iterator nullBaseCharacterIterator;
 }

@@ -1,5 +1,7 @@
 //included into buffer.hpp
 
+#include "modules/appendix/yaml-cpp/shared/value/general/sValue.hpp"
+
 namespace ui {
 	template <typename T, typename... A>
 	void Buffer::emplace(const std::string& name, A &&... args) {

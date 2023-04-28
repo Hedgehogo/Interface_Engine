@@ -19,5 +19,10 @@ namespace ui {
 		~Animator();
 	};
 
-	bool convertPointer(const YAML::Node &node, Animator*& animator);
+	bool convertPointer(const YAML::Node &node, Animator *&animator);
+	
+	template<>
+	struct DecodePointer<Animator> {
+		static bool decodePointer(const YAML::Node &node, Animator *&animator);
+	};
 }

@@ -32,4 +32,19 @@ namespace ui {
 		
 		{ smartSizing = new SmartSizing{targetCoefficient, parentCoefficient, addition}; return true; }
 	}
+	
+	bool DecodePointer<SmartSizing>::decodePointer(const YAML::Node &node, SmartSizing *&smartSizing) {
+		float targetCoefficient{1.f};
+		float parentCoefficient{0.f};
+		float addition{0.f};
+		
+		if(node["target-coefficient"])
+			node["target-coefficient"] >> targetCoefficient;
+		if(node["parent-coefficient"])
+			node["parent-coefficient"] >> parentCoefficient;
+		if(node["addition"])
+			node["addition"] >> addition;
+		
+		{ smartSizing = new SmartSizing{targetCoefficient, parentCoefficient, addition}; return true; }
+	}
 }

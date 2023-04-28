@@ -26,6 +26,11 @@ namespace ui {
 	};
 
 	bool convertPointer(const YAML::Node &node, OpenUrlEvent *&openUrlInteraction);
+	
+	template<>
+	struct DecodePointer<OpenUrlEvent> {
+		static bool decodePointer(const YAML::Node &node, OpenUrlEvent *&openUrlInteraction);
+	};
 
 
 	bool determineUrl(const YAML::Node &node);

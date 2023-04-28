@@ -81,6 +81,7 @@ namespace ui {
 
 		inherit<IAnimatorUnit, Animation>({"A"});
 		inherit<IAnimatorUnit, Prerequisite>({"P"});
+		inherit<IAnimatorUnit, AnimatorUnitMatchFloat>({"M", "Mf", "AUMf", "AUM"});
 		inherit<IChangeVariable, ChangeVariableByStraightLine>({"CVByStraightLine", "CVByStraightL", "CVBSL"});
 		inherit<IChangeVariable, ChangeVariableByBrokenLine>({"CVByBrokenLine", "CVByBrokenL", "CVBBL"});
 		inherit<IChangeVariable, ChangeVariableBySteppedLine>({"CVBySteppedLine", "CVBySteppedL", "CVBStepL"});

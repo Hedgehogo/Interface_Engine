@@ -26,4 +26,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, WhileChangingObjectsEvent *&whileChangingObjectsEvent);
+	
+	template<>
+	struct DecodePointer<WhileChangingObjectsEvent> {
+		static bool decodePointer(const YAML::Node &node, WhileChangingObjectsEvent *&whileChangingObjectsEvent);
+	};
 }

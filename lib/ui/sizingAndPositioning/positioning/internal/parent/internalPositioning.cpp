@@ -32,4 +32,18 @@ namespace ui {
 		}
 		return true;
 	}
+	
+	bool DecodePointer<InternalPositioning>::decodePointer(const YAML::Node &node, InternalPositioning *&internalPositioning) {
+		if(node.IsScalar()) {
+			internalPositioning = new InternalPositioning{
+				node.as<float>()
+			};
+		} else {
+			internalPositioning = new InternalPositioning{
+				node["coefficient"].as<float>(),
+				convDef(node["offset"], 0.f)
+			};
+		}
+		return true;
+	}
 }

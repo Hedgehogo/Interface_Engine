@@ -6,7 +6,7 @@
 #include "../../../../../interaction/iInteraction/block/pressed/pressedInteraction.hpp"
 #include "interaction/event/movableBorderEvent.hpp"
 #include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
-
+#include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 namespace ui {
 	class BoxWithMovableBorder : public Box, public LayoutWithTwoObjects, public Interactive_Simple {
 	protected:
@@ -54,6 +54,11 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, BoxWithMovableBorder *&boxWithMovableBorder);
+	
+	template<>
+	struct DecodePointer<BoxWithMovableBorder> {
+		static bool decodePointer(const YAML::Node &node, BoxWithMovableBorder *&boxWithMovableBorder);
+	};
 	
 	using BoxWMovableB = BoxWithMovableBorder;
 	using BWMB = BoxWithMovableBorder;

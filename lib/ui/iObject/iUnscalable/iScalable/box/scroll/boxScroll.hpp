@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../view/iBoxWithView.hpp"
+#include "modules/appendix/yaml-cpp/shared/vector/general/sVector2.hpp"
 
 namespace ui {
 	class BoxScroll : public IBoxWithView {
@@ -31,4 +32,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, BoxScroll *&boxScroll);
+	
+	template<>
+	struct DecodePointer<BoxScroll> {
+		static bool decodePointer(const YAML::Node &node, BoxScroll *&boxScroll);
+	};
 }

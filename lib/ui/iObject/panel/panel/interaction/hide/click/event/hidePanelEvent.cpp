@@ -30,4 +30,13 @@ namespace ui {
 		
 		{ hidePanelEvent = new HidePanelEvent{onlyOnParent}; return true; }
 	}
+	
+	bool DecodePointer<HidePanelEvent>::decodePointer(const YAML::Node &node, HidePanelEvent *&hidePanelEvent) {
+		bool onlyOnParent{false};
+		
+		if(node["only-on-parent"])
+			node["only-on-parent"] >> onlyOnParent;
+		
+		{ hidePanelEvent = new HidePanelEvent{onlyOnParent}; return true; }
+	}
 }

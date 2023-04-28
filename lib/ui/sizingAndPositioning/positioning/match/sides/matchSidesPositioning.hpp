@@ -19,5 +19,10 @@ namespace ui {
 	
 	bool convertPointer(const YAML::Node &node, MatchSidesPositioning *&matchSidesPositioning);
 	
+	template<>
+	struct DecodePointer<MatchSidesPositioning> {
+		static bool decodePointer(const YAML::Node &node, MatchSidesPositioning *&matchSidesPositioning);
+	};
+	
 	//Positioning* makePosition(Location parentSide, Location objectSide, float offset);
 }

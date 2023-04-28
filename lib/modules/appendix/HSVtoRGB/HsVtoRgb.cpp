@@ -51,4 +51,4 @@ namespace ui {
 		return color;
 	}
 
-} // ui
+}

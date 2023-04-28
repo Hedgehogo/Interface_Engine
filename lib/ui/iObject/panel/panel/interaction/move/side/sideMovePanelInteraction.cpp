@@ -3,7 +3,8 @@
 
 namespace ui {
 	SideMovePanelInteraction::SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool atStart) :
-		MovePanelInteraction(atStart), coefficient(coefficient), offset(offset), horizontal(horizontal) {}
+		MovePanelInteraction(atStart), coefficient(coefficient), offset(offset), horizontal(horizontal) {
+	}
 	
 	void SideMovePanelInteraction::move(sf::Vector2i mousePosition) {
 		sf::Vector2f panelSize{panel->getSize()};
@@ -13,23 +14,45 @@ namespace ui {
 		panel->setPosition((horizontal ? sf::Vector2f{position, panelPosition.y} : sf::Vector2f{panelPosition.x, position}));
 	}
 	
-	SideMovePanelInteraction *SideMovePanelInteraction::copy() {
+	SideMovePanelInteraction* SideMovePanelInteraction::copy() {
 		SideMovePanelInteraction* sideMovePanelInteraction{new SideMovePanelInteraction{coefficient, offset, horizontal, false}};
 		PanelInteraction::copy(sideMovePanelInteraction);
 		return sideMovePanelInteraction;
 	}
-
-    bool convertPointer(const YAML::Node &node, SideMovePanelInteraction *&sideMovePanelInteraction) {
-        float coefficient;
-        float offset;
-        bool horizontal;
-        bool atStart = false;
-
-        node["coefficient"] >> coefficient;
-        node["offset"] >> offset;
-        node["horizontal"] >> horizontal;
-        if (node["at-start"]) node["at-start"] >> atStart;
-
-        { sideMovePanelInteraction = new SideMovePanelInteraction{coefficient, offset, horizontal, atStart}; return true; }
-    }
+	
+	bool convertPointer(const YAML::Node &node, SideMovePanelInteraction *&sideMovePanelInteraction) {
+		float coefficient;
+		float offset;
+		bool horizontal;
+		bool atStart = false;
+		
+		node["coefficient"] >> coefficient;
+		node["offset"] >> offset;
+		node["horizontal"] >> horizontal;
+		if(node["at-start"])
+			node["at-start"] >> atStart;
+		
+		{
+			sideMovePanelInteraction = new SideMovePanelInteraction{coefficient, offset, horizontal, atStart};
+			return true;
+		}
+	}
+	
+	bool DecodePointer<SideMovePanelInteraction>::decodePointer(const YAML::Node &node, SideMovePanelInteraction *&sideMovePanelInteraction) {
+		float coefficient;
+		float offset;
+		bool horizontal;
+		bool atStart = false;
+		
+		node["coefficient"] >> coefficient;
+		node["offset"] >> offset;
+		node["horizontal"] >> horizontal;
+		if(node["at-start"])
+			node["at-start"] >> atStart;
+		
+		{
+			sideMovePanelInteraction = new SideMovePanelInteraction{coefficient, offset, horizontal, atStart};
+			return true;
+		}
+	}
 }

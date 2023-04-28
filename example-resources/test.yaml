@@ -1,20 +1,224 @@
 animation-manager:
   animator:
     unit:
-      type: A
-      var:
-        var:
-          var: a
-        change-variable:
-          type: CVBCurve
-          k1: 5
-          k2: 5
-          size: 3
-      next: this
+      type: M
+      name: &name-for-match match
+      value:  vec.y
+      options:
+        - condition: less
+          example: 0.25
+          next:
+            type: A
+            name: anim_A
+            var:
+              var: a
+              change-variables: &change-variables
+                - type: CVBSL
+                  start: 0
+                  end: 1
+                  length: 1
+                - type: CVBSL
+                  start: 1
+                  end: 0
+                  length: 1
+            next:
+              type: P
+              valve: &valve
+                type: VWISbool
+                value:
+                  var: convert
+                  type: SCFTBLE
+                  value: vec1.y
+                  compared: 0.5
+              next-true:
+                type: A
+                var:
+                  var: a1
+                  change-variables: *change-variables
+                next: *name-for-match
+              next-false:
+                type: A
+                var:
+                  var: b1
+                  change-variables: *change-variables
+                next: *name-for-match
+        - condition: less
+          example: 0.5
+          nexts:
+            - anim_A
+            - type: A
+              name: anim_B
+              var:
+                var: b
+                change-variables: *change-variables
+              next:
+                type: P
+                valve: *valve
+                next-true:
+                  type: A
+                  var:
+                    var: c1
+                    change-variables: *change-variables
+                  next: *name-for-match
+                next-false:
+                  type: A
+                  var:
+                    var: d1
+                    change-variables: *change-variables
+                  next: *name-for-match
+        - condition: less
+          example: 0.75
+          nexts:
+            - anim_A
+            - anim_B
+            - type: A
+              name: anim_C
+              var:
+                var: c
+                change-variables: *change-variables
+              next:
+                type: P
+                valve: *valve
+                next-true:
+                  type: A
+                  var:
+                    var: e1
+                    change-variables: *change-variables
+                  next: *name-for-match
+                next-false:
+                  type: A
+                  var:
+                    var: f1
+                    change-variables: *change-variables
+                  next: *name-for-match
+        - condition: less
+          example: 1
+          nexts:
+            - anim_A
+            - anim_B
+            - anim_C
+            - type: A
+              name: anim_D
+              var:
+                var: d
+                change-variables: *change-variables
+              next:
+                type: P
+                valve: *valve
+                next-true:
+                  type: A
+                  var:
+                    var: g1
+                    change-variables: *change-variables
+                  next: *name-for-match
+                next-false:
+                  type: A
+                  var:
+                    var: h1
+                    change-variables: *change-variables
+                  next: *name-for-match
 object:
-  type: BWMB
-  first-object: red
-  second-object: blue
-  border-direction: horizontal
-  border-value:
-    var: a
+  type: BWCR
+  aspect-ratio: 0.1
+  const-object:
+    type: Slider
+    slider:
+      type: Capsule
+      color: 525252
+    background:
+      type: FullColor
+      color: 37383A88
+    value:
+      var: vec
+  second-object:
+    type: BWCR
+    aspect-ratio: 0.1
+    const-object:
+      type: Slider
+      slider:
+        type: Capsule
+        color: 525252
+      background:
+        type: FullColor
+        color: 37383A88
+      value:
+        var: vec1
+    second-object:
+      type: BWBH
+      objects:
+        - type: BWBV
+          objects:
+            - type: BWMB
+              first-object: black
+              second-object: white
+              border-direction: horizontal
+              border-value:
+                var: a
+            - type: BWMB
+              first-object: red
+              second-object: green
+              border-direction: horizontal
+              border-value:
+                var: b
+            - type: BWMB
+              first-object: blue
+              second-object: yellow
+              border-direction: horizontal
+              border-value:
+                var: c
+            - type: BWMB
+              first-object: magenta
+              second-object: cyan
+              border-direction: horizontal
+              border-value:
+                var: d
+        - type: BWBV
+          objects:
+            - type: BWMB
+              first-object: black
+              second-object: white
+              border-direction: horizontal
+              border-value:
+                var: a1
+            - type: BWMB
+              first-object: red
+              second-object: green
+              border-direction: horizontal
+              border-value:
+                var: b1
+            - type: BWMB
+              first-object: blue
+              second-object: yellow
+              border-direction: horizontal
+              border-value:
+                var: c1
+            - type: BWMB
+              first-object: magenta
+              second-object: cyan
+              border-direction: horizontal
+              border-value:
+                var: d1
+            - type: BWMB
+              first-object: black
+              second-object: white
+              border-direction: horizontal
+              border-value:
+                var: e1
+            - type: BWMB
+              first-object: red
+              second-object: green
+              border-direction: horizontal
+              border-value:
+                var: f1
+            - type: BWMB
+              first-object: blue
+              second-object: yellow
+              border-direction: horizontal
+              border-value:
+                var: g1
+            - type: BWMB
+              first-object: magenta
+              second-object: cyan
+              border-direction: horizontal
+              border-value:
+                var: h1

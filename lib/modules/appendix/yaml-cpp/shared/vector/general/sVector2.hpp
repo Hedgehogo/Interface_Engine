@@ -46,6 +46,11 @@ namespace ui {
 	template<typename T>
 	bool convertPointer(const YAML::Node &node, SVector2<T> *&withVector2);
 	
+	template<typename T>
+	struct DecodePointer<SVector2<T>> {
+		static bool decodePointer(const YAML::Node &node, SVector2<T> *&withVector2);
+	};
+	
 	template <typename T>
 	using SVec2 = SVector2<T>;
 	

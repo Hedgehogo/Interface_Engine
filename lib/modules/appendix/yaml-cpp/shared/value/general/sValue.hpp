@@ -21,10 +21,18 @@ namespace ui {
 	template<typename T>
 	bool convertPointer(const YAML::Node &node, SValue<T> *&sValue);
 	
+	template<typename T>
+	struct DecodePointer<SValue<T>> {
+		static bool decodePointer(const YAML::Node &node, SValue<T> *&sValue);
+	};
+	
 	typedef SValue<bool> Sbool;
 	typedef SValue<float> Sfloat;
 	typedef SValue<int> Sint;
 	typedef SValue<unsigned> Suint;
+	
+	template<typename T>
+	using PSValue =  std::shared_ptr<SValue<T>>;
 	
 	typedef std::shared_ptr<Sbool> PSbool;
 	typedef std::shared_ptr<Sfloat> PSfloat;

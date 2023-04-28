@@ -29,4 +29,15 @@ namespace ui {
 		boxMakePermeable = new BoxMakePermeable{object, minSize};
 		return true;
 	}
+	
+	bool DecodePointer<BoxMakePermeable>::decodePointer(const YAML::Node &node, BoxMakePermeable *&boxMakePermeable) {
+		IScalable *object;
+		sf::Vector2f minSize{};
+		node["object"] >> object;
+		if(node["min-size"])
+			node["min-size"] >> minSize;
+		
+		boxMakePermeable = new BoxMakePermeable{object, minSize};
+		return true;
+	}
 }

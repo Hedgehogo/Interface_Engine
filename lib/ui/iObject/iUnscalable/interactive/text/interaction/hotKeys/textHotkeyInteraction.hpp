@@ -18,4 +18,9 @@ namespace ui {
     };
 	
 	bool convertPointer(const YAML::Node &node, TextHotkeyInteraction *&textHotkeyInteraction);
+	
+	template<>
+	struct DecodePointer<TextHotkeyInteraction> {
+		static bool decodePointer(const YAML::Node &node, TextHotkeyInteraction *&textHotkeyInteraction);
+	};
 }

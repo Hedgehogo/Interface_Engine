@@ -18,4 +18,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, TargetCoefficientSizing *&targetCoefficientSizing);
+	
+	template<>
+	struct DecodePointer<TargetCoefficientSizing> {
+		static bool decodePointer(const YAML::Node &node, TargetCoefficientSizing *&targetCoefficientSizing);
+	};
 }

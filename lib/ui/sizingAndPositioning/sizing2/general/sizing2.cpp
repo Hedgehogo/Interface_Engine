@@ -86,4 +86,40 @@ namespace ui {
 		}
 		return true;
 	}
+	
+	bool DecodePointer<Sizing2>::decodePointer(const YAML::Node &node, Sizing2 *&sizing2) {
+		if(node.IsScalar()) {
+			sizing2 = new Sizing2{node.as<sf::Vector2f>()};
+		} else {
+			if(node["horizontal"] && node["vertical"]) {
+				sizing2 = new Sizing2{
+					node["horizontal"].as<ISizing *>(),
+					node["vertical"].as<ISizing *>()
+				};
+			} else if(node["relative"]) {
+				sizing2 = new Sizing2{
+					convertBool(node["relative"], "parent", "normal")
+				};
+			} else if(node["const-size"]) {
+				sizing2 = new Sizing2{
+					node["const-size"].as<sf::Vector2f>()
+				};
+			} else if(node["coefficient"]) {
+				sizing2 = new Sizing2{
+					node["coefficient"].as<sf::Vector2f>(),
+					convDef(node["addition"], sf::Vector2f{}),
+					convBoolDef(node["relative"], "target", "parent")
+				};
+			} else if(node["target-coefficient"] && node["parent-coefficient"]) {
+				sizing2 = new Sizing2{
+					node["target-coefficient"].as<sf::Vector2f>(),
+					node["parent-coefficient"].as<sf::Vector2f>(),
+					convDef(node["addition"], sf::Vector2f{})
+				};
+			} else {
+				throw YAML::BadConversion{node.Mark()};
+			}
+		}
+		return true;
+	}
 }

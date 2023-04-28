@@ -17,4 +17,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, ConstSizing *&constSizing);
+	
+	template<>
+	struct DecodePointer<ConstSizing> {
+		static bool decodePointer(const YAML::Node &node, ConstSizing *&constSizing);
+	};
 }

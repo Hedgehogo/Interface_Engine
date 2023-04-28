@@ -34,6 +34,11 @@ namespace ui {
 	
 	bool convertPointer(const YAML::Node &node, BoxWithBorder *&boxWithBorder);
 	
+	template<>
+	struct DecodePointer<BoxWithBorder> {
+		static bool decodePointer(const YAML::Node &node, BoxWithBorder *&boxWithBorder);
+	};
+	
 	using BoxWBorder = BoxWithBorder;
 	using BWB = BoxWithBorder;
 }

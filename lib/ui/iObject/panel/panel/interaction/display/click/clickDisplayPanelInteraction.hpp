@@ -19,4 +19,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, ClickDisplayPanelInteraction *&clickDisplayPanelInteraction);
+	
+	template<>
+	struct DecodePointer<ClickDisplayPanelInteraction> {
+		static bool decodePointer(const YAML::Node &node, ClickDisplayPanelInteraction *&clickDisplayPanelInteraction);
+	};
 }

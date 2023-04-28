@@ -16,4 +16,9 @@ namespace ui {
 	
 	template<>
 	bool convert(const YAML::Node &node, Location2 &location2);
+	
+	template<>
+	struct Decode<Location2> {
+		static bool decode(const YAML::Node &node, Location2 &location2);
+	};
 }

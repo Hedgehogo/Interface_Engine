@@ -34,4 +34,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, BoxWithBackground *&boxWithBackground);
+	
+	template<>
+	struct DecodePointer<BoxWithBackground> {
+		static bool decodePointer(const YAML::Node &node, BoxWithBackground *&boxWithBackground);
+	};
 }

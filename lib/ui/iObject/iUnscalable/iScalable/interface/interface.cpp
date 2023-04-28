@@ -146,7 +146,16 @@ namespace ui {
 		setSize(sf::Vector2f(window.getSize()));
 	}
 
-	bool convertPointer(const YAML::Node &node, Interface*& interface){
+	bool convertPointer(const YAML::Node &node, Interface *&interface) {
+		interface = new Interface{
+			node["object"].as<IScalable*>(),
+			convDef(node["animation-manager"], AnimationManager{}),
+			convDef(node["interaction-stack"], new InteractionStack{})
+		};
+		return true;
+	}
+	
+	bool DecodePointer<Interface>::decodePointer(const YAML::Node &node, Interface *&interface) {
 		interface = new Interface{
 			node["object"].as<IScalable*>(),
 			convDef(node["animation-manager"], AnimationManager{}),

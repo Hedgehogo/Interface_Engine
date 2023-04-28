@@ -37,6 +37,11 @@ namespace ui {
 	
 	bool convertPointer(const YAML::Node &node, BoxWithRenderTexture *&boxWithRenderTexture);
 	
+	template<>
+	struct DecodePointer<BoxWithRenderTexture> {
+		static bool decodePointer(const YAML::Node &node, BoxWithRenderTexture *&boxWithRenderTexture);
+	};
+	
 	using BoxWRTexture = BoxWithRenderTexture;
 	using BWRT = BoxWithRenderTexture;
 }

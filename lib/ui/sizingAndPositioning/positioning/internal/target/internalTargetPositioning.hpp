@@ -20,4 +20,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, InternalTargetPositioning *&internalTargetPositioning);
+	
+	template<>
+	struct DecodePointer<InternalTargetPositioning> {
+		static bool decodePointer(const YAML::Node &node, InternalTargetPositioning *&internalTargetPositioning);
+	};
 }

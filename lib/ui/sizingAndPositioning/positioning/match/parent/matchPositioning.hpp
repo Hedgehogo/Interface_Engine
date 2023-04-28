@@ -17,4 +17,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, MatchPositioning *&matchPositioning);
+	
+	template<>
+	struct DecodePointer<MatchPositioning> {
+		static bool decodePointer(const YAML::Node &node, MatchPositioning *&matchPositioning);
+	};
 }

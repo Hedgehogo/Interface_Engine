@@ -12,4 +12,8 @@ namespace ui{
 	extern std::map<std::string, IAnimatorUnit*> animatorUnitBuffer;
 
 	void animatorUnitRequestUpdate();
+	
+	void addNextAnimatorUnit(const YAML::Node& node, std::function<void(IAnimatorUnit*)> fun, std::string nameNextNode = "next");
+	
+	void addUnitInBuffer(const YAML::Node& node, IAnimatorUnit* unit, std::string name = "name");
 }

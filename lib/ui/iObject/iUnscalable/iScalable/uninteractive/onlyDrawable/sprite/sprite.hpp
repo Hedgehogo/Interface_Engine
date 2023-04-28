@@ -36,5 +36,10 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, Sprite *&sprite);
 	
 	template<>
+	struct DecodePointer<Sprite> {
+		static bool decodePointer(const YAML::Node &node, Sprite *&sprite);
+	};
+	
+	template<>
 	bool determine<Sprite>(const YAML::Node &node);
 }

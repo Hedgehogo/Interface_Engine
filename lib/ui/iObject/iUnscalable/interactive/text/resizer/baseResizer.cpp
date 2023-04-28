@@ -15,7 +15,15 @@ namespace ui {
 	}
 
 	template<>
-	bool convert(const YAML::Node& node, BaseResizer::Align& align){
+	bool convert(const YAML::Node &node, BaseResizer::Align &align) {
+		if (node.as<std::string>() == "left") align = BaseResizer::Align::left;
+		else if (node.as<std::string>() == "right") align = BaseResizer::Align::right;
+		else if (node.as<std::string>() == "center") align = BaseResizer::Align::center;
+		else throw YAML::BadConversion{node.Mark()};
+		return true;
+	}
+	
+	bool Decode<BaseResizer::Align>::decode(const YAML::Node &node, BaseResizer::Align &align) {
 		if (node.as<std::string>() == "left") align = BaseResizer::Align::left;
 		else if (node.as<std::string>() == "right") align = BaseResizer::Align::right;
 		else if (node.as<std::string>() == "center") align = BaseResizer::Align::center;
@@ -24,7 +32,15 @@ namespace ui {
 	}
 
 	template<>
-	bool convert(const YAML::Node& node, BaseResizer::Algorithm& align){
+	bool convert(const YAML::Node &node, BaseResizer::Algorithm &align) {
+		if (node.as<std::string>() == "base") align = BaseResizer::Algorithm::base;
+		else if (node.as<std::string>() == "console") align = BaseResizer::Algorithm::console;
+		else if (node.as<std::string>() == "absolute") align = BaseResizer::Algorithm::absolute;
+		else throw YAML::BadConversion{node.Mark()};
+		return true;
+	}
+	
+	bool Decode<BaseResizer::Algorithm>::decode(const YAML::Node &node, BaseResizer::Algorithm &align) {
 		if (node.as<std::string>() == "base") align = BaseResizer::Algorithm::base;
 		else if (node.as<std::string>() == "console") align = BaseResizer::Algorithm::console;
 		else if (node.as<std::string>() == "absolute") align = BaseResizer::Algorithm::absolute;

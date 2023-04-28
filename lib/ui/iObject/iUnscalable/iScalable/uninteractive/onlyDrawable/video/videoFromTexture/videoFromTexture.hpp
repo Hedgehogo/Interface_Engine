@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../onlyDrawable.hpp"
+#include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 
 namespace ui {
 	class VideoFromTexture : public OnlyDrawable{

@@ -23,4 +23,12 @@ namespace ui {
 		
 		{ internalPositioning2 = new InternalPositioning2{coefficient}; return true; }
 	}
+	
+	bool DecodePointer<InternalPositioning2>::decodePointer(const YAML::Node &node, InternalPositioning2 *&internalPositioning2) {
+		sf::Vector2f coefficient;
+		
+		node["coefficient"] >> coefficient;
+		
+		{ internalPositioning2 = new InternalPositioning2{coefficient}; return true; }
+	}
 }

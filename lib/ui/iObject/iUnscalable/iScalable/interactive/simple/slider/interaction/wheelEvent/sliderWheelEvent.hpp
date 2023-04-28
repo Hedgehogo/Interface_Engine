@@ -34,4 +34,9 @@ namespace ui {
 	
 	template<>
 	bool convert(const YAML::Node &node, SliderWheelEvent::Relativity &relativity);
+	
+	template<>
+	struct Decode<SliderWheelEvent::Relativity> {
+		static bool decode(const YAML::Node &node, SliderWheelEvent::Relativity &relativity);
+	};
 }

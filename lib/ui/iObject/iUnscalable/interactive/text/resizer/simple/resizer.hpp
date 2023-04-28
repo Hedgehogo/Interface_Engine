@@ -63,4 +63,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, Resizer *&resizer);
+	
+	template<>
+	struct DecodePointer<Resizer> {
+		static bool decodePointer(const YAML::Node &node, Resizer *&resizer);
+	};
 }

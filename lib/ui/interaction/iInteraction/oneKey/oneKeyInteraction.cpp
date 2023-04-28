@@ -45,4 +45,15 @@ namespace ui {
 		
 		{ oneKeyInteraction = new OneKeyInteraction{event, key}; return true; }
 	}
+	
+	bool DecodePointer<OneKeyInteraction>::decodePointer(const YAML::Node &node, OneKeyInteraction *&oneKeyInteraction) {
+		KeyEvent *event;
+		Key key{Key::mouseLeft};
+		
+		node["event"] >> event;
+		if(node["key"])
+			node["key"] >> key;
+		
+		{ oneKeyInteraction = new OneKeyInteraction{event, key}; return true; }
+	}
 }

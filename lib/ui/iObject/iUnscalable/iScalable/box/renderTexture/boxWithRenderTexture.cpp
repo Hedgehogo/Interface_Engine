@@ -74,4 +74,13 @@ namespace ui {
 		};
 		return true;
 	}
+	
+	bool DecodePointer<BoxWithRenderTexture>::decodePointer(const YAML::Node &node, BoxWithRenderTexture *&boxWithRenderTexture) {
+		boxWithRenderTexture = new BoxWithRenderTexture{
+			node["object"].as<IScalable *>(),
+			convDef(node["optimize"], true),
+			convDef(node["min-size"], sf::Vector2f{})
+		};
+		return true;
+	}
 }

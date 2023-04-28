@@ -29,4 +29,15 @@ namespace ui {
 		
 		{ internalTargetPositioning = new InternalTargetPositioning{coefficient, offset}; return true; }
 	}
+	
+	bool DecodePointer<InternalTargetPositioning>::decodePointer(const YAML::Node &node, InternalTargetPositioning *&internalTargetPositioning) {
+		float coefficient;
+		float offset{0.f};
+		
+		node["coefficient"] >> coefficient;
+		if(node["offset"])
+			node["offset"] >> offset;
+		
+		{ internalTargetPositioning = new InternalTargetPositioning{coefficient, offset}; return true; }
+	}
 }

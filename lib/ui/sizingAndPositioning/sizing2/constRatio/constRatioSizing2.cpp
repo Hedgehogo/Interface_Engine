@@ -88,4 +88,48 @@ namespace ui {
 		}
 		return true;
 	}
+	
+	bool DecodePointer<ConstRatioSizing2>::decodePointer(const YAML::Node &node, ConstRatioSizing2 *&constRatioSizing2) {
+		float ratio{convDef(node["ratio"], 1.f)};
+		bool horizontal{convBoolDef(node["direction"], "horizontal", "vertical", true)};
+		
+		if(node["sizing"]) {
+			constRatioSizing2 = new ConstRatioSizing2{
+				node["sizing"].as<ISizing*>(),
+				ratio,
+				horizontal
+			};
+		} else if(node["relative"]) {
+			constRatioSizing2 = new ConstRatioSizing2{
+				ratio,
+				horizontal,
+				convertBool(node["relative"], "parent", "normal")
+			};
+		} else if(node["const-size"]) {
+			constRatioSizing2 = new ConstRatioSizing2{
+				node["const-size"].as<float>(),
+				ratio,
+				horizontal
+			};
+		} else if(node["coefficient"]) {
+			constRatioSizing2 = new ConstRatioSizing2{
+				node["coefficient"].as<float>(),
+				convDef(node["addition"], 0.f),
+				ratio,
+				horizontal,
+				convBoolDef(node["relative"], "target", "parent")
+			};
+		} else if(node["target-coefficient"] && node["parent-coefficient"]) {
+			constRatioSizing2 = new ConstRatioSizing2{
+				node["target-coefficient"].as<float>(),
+				node["parent-coefficient"].as<float>(),
+				convDef(node["addition"], 0.f),
+				ratio,
+				horizontal
+			};
+		} else {
+			throw YAML::BadConversion{node.Mark()};
+		}
+		return true;
+	}
 }

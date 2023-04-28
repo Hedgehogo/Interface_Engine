@@ -1,9 +1,9 @@
 #pragma once
 
 #include <regex>
-#include "../shared/list/general/sList.hpp"
-#include "../shared/vector/general/sVector2.hpp"
 #include "exception/bufferException.hpp"
+#include "modules/appendix/yaml-cpp/shared/iShared.hpp"
+#include "../yamlBuilder/general/yamlBuilder.hpp"
 
 namespace ui {
 	template <bool Condition, typename TrueType, typename FalseType>

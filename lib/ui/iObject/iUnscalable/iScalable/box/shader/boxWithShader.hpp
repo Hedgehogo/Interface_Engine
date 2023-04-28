@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../renderTexture/boxWithRenderTexture.hpp"
+#include "modules/appendix/yaml-cpp/shared/vector/general/sVector2.hpp"
 
 namespace ui {
 	class BoxWithShader : public BoxWithRenderTexture {
@@ -48,4 +49,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, BoxWithShader *&boxWithShader);
+	
+	template<>
+	struct DecodePointer<BoxWithShader> {
+		static bool decodePointer(const YAML::Node &node, BoxWithShader *&boxWithShader);
+	};
 }

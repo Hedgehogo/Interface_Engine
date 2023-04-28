@@ -6,3 +6,4 @@ layers.md
 /cmake-build-release-msvc/
 *.swp
 Doxyfile
+doxygen

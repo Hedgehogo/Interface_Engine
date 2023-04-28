@@ -31,4 +31,9 @@ namespace ui {
     };
 	
 	bool convertPointer(const YAML::Node &node, TextSelectionEvent *&textSelectionEvent);
+	
+	template<>
+	struct DecodePointer<TextSelectionEvent> {
+		static bool decodePointer(const YAML::Node &node, TextSelectionEvent *&textSelectionEvent);
+	};
 }

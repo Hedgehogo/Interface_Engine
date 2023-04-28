@@ -30,4 +30,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, OneKeyInteraction *&oneKeyInteraction);
+	
+	template<>
+	struct DecodePointer<OneKeyInteraction> {
+		static bool decodePointer(const YAML::Node &node, OneKeyInteraction *&oneKeyInteraction);
+	};
 }

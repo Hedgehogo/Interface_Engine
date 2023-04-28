@@ -24,6 +24,13 @@ namespace ui {
 		};
 		return true;
 	}
+	
+	bool DecodePointer<OpenUrlEvent>::decodePointer(const YAML::Node &node, OpenUrlEvent *&openUrlInteraction) {
+		openUrlInteraction = new OpenUrlEvent{
+			(node.IsScalar() ? node : node["url"]).as<std::string>()
+		};
+		return true;
+	}
 
 	bool determineUrl(const YAML::Node &node){
 		if (node.IsScalar()){

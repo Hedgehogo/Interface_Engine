@@ -18,4 +18,9 @@ namespace ui {
     };
 	
 	bool convertPointer(const YAML::Node &node, StrikeThrough *&strikeThrough);
+	
+	template<>
+	struct DecodePointer<StrikeThrough> {
+		static bool decodePointer(const YAML::Node &node, StrikeThrough *&strikeThrough);
+	};
 }

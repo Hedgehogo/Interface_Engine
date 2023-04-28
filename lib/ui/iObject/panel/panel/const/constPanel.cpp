@@ -36,4 +36,19 @@ namespace ui {
 		
 		{ constPanel = new ConstPanel{object, sizing, positioning, displayed}; return true; }
 	}
+	
+	bool DecodePointer<ConstPanel>::decodePointer(const YAML::Node &node, ConstPanel *&constPanel) {
+		IScalable *object;
+		ISizing2 *sizing;
+		IPositioning2 *positioning;
+		bool displayed{false};
+		
+		node["object"] >> object;
+		node["sizing"] >> sizing;
+		node["positioning"] >> positioning;
+		if(node["displayed"])
+			node["displayed"] >> displayed;
+		
+		{ constPanel = new ConstPanel{object, sizing, positioning, displayed}; return true; }
+	}
 }

@@ -22,5 +22,10 @@ namespace ui {
     };
 	
 	bool convertPointer(const YAML::Node &node, TextCopyEvent *&textCopyEvent);
+	
+	template<>
+	struct DecodePointer<TextCopyEvent> {
+		static bool decodePointer(const YAML::Node &node, TextCopyEvent *&textCopyEvent);
+	};
 
 }

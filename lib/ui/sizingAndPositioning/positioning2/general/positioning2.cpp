@@ -92,4 +92,52 @@ namespace ui {
 		}
 		return true;
 	}
+	
+	bool DecodePointer<Positioning2>::decodePointer(const YAML::Node &node, Positioning2 *&positioning2) {
+		if(node.IsScalar()) {
+			positioning2 = new Positioning2{node.as<sf::Vector2f>()};
+		} else {
+			if(node["horizontal"] && node["vertical"]) {
+				positioning2 = new Positioning2{
+					node["horizontal"].as<IPositioning *>(),
+					node["vertical"].as<IPositioning *>()
+				};
+			} else {
+				auto offset{convDef(node["offset"], sf::Vector2f{})};
+				
+				if(node["coefficient"]) {
+					positioning2 = new Positioning2{
+						node["coefficient"].as<sf::Vector2f>(),
+						offset,
+						convBoolDef(node["relative"], "target", "parent")
+					};
+				} else if(node["object-coefficient"]) {
+					auto objectCoefficient{node["object-coefficient"].as<sf::Vector2f>()};
+					
+					if(node["parent-coefficient"]) {
+						positioning2 = new Positioning2{
+							node["parent-coefficient"].as<sf::Vector2f>(),
+							objectCoefficient, offset, false
+						};
+					} else if(node["target-coefficient"]) {
+						positioning2 = new Positioning2{
+							node["target-coefficient"].as<sf::Vector2f>(),
+							objectCoefficient, offset, true
+						};
+					} else {
+						throw YAML::BadConversion{node.Mark()};
+					}
+				} else if(node["parent-location"] && node["object-location"]) {
+					positioning2 = new Positioning2{
+						node["parent-location"].as<Location2>(),
+						node["object-location"].as<Location2>(),
+						offset
+					};
+				} else {
+					throw YAML::BadConversion{node.Mark()};
+				}
+			}
+		}
+		return true;
+	}
 }

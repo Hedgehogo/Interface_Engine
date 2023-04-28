@@ -14,4 +14,8 @@ namespace ui {
 	bool convertPointer(const YAML::Node &node, EmptyInteraction *&emptyInteraction) {
 		{ emptyInteraction = new EmptyInteraction{}; return true; }
 	}
+	
+	bool DecodePointer<EmptyInteraction>::decodePointer(const YAML::Node &node, EmptyInteraction *&emptyInteraction) {
+		{ emptyInteraction = new EmptyInteraction{}; return true; }
+	}
 }

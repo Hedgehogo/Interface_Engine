@@ -12,5 +12,10 @@ namespace ui {
     };
 	
 	bool convertPointer(const YAML::Node &node, TextEmptyInteraction *&textEmptyInteraction);
+	
+	template<>
+	struct DecodePointer<TextEmptyInteraction> {
+		static bool decodePointer(const YAML::Node &node, TextEmptyInteraction *&textEmptyInteraction);
+	};
 
 }

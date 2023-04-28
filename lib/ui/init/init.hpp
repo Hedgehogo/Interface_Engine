@@ -53,6 +53,7 @@
 #include "../../modules/appendix/yaml-cpp/shared/value/converts/toBool/greaterOrEquals/sConvertToBoolGreaterOrEquals.hpp"
 #include "../animation/animator/unit/animation/animation.hpp"
 #include "../animation/animator/unit/prerequisite/prerequisite.hpp"
+#include "../animation/animator/unit/match/animatorUnitMatch.hpp"
 #include "../animation/animator/unit/prerequisite/velves/withISbool/valveWithISbool.hpp"
 #include "../animation/changeVariable/straightLine/changeVariableByStraightLine.hpp"
 #include "../animation/changeVariable/brokenLine/changeVariableByBrokenLine.hpp"

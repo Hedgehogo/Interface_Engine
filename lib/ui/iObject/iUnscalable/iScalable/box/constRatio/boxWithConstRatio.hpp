@@ -40,6 +40,11 @@ namespace ui {
 	
 	bool convertPointer(const YAML::Node &node, BoxWithConstRatio *&boxWithConstRatio);
 	
+	template<>
+	struct DecodePointer<BoxWithConstRatio> {
+		static bool decodePointer(const YAML::Node &node, BoxWithConstRatio *&boxWithConstRatio);
+	};
+	
 	using BoxWCRatio = BoxWithConstRatio;
 	using BWCR = BoxWithConstRatio;
 }

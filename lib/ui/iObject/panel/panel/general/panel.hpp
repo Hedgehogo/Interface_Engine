@@ -41,4 +41,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, Panel *&panel);
+	
+	template<>
+	struct DecodePointer<Panel> {
+		static bool decodePointer(const YAML::Node &node, Panel *&panel);
+	};
 }

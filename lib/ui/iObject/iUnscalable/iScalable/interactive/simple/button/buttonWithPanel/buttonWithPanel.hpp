@@ -32,4 +32,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, ButtonWithPanel *&buttonWithPanel);
+	
+	template<>
+	struct DecodePointer<ButtonWithPanel> {
+		static bool decodePointer(const YAML::Node &node, ButtonWithPanel *&buttonWithPanel);
+	};
 }

@@ -65,6 +65,22 @@ namespace ui {
 		return true;
 	}
 	
+	bool DecodePointer<BoxWithConstBezel>::decodePointer(const YAML::Node &node, BoxWithConstBezel *&boxWithConstBezel) {
+		IScalable *object;
+		IUninteractive *bezel;
+		float thickness;
+		sf::Vector2f minSize{};
+		
+		node["object"] >> object;
+		node["bezel"] >> bezel;
+		node["thickness"] >> thickness;
+		if(node["min-size"])
+			node["min-size"] >> minSize;
+		
+		boxWithConstBezel = new BoxWithConstBezel{object, bezel, thickness, minSize};
+		return true;
+	}
+	
 	void BoxWithConstBezel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		bezel->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		object->drawDebug(renderTarget, indent, indentAddition, hue + hueOffset, hueOffset);

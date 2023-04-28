@@ -30,4 +30,13 @@ namespace ui {
 		
 		{ pointingHidePanelInteraction = new PointingHidePanelInteraction{onlyOnParent}; return true; }
 	}
+	
+	bool DecodePointer<PointingHidePanelInteraction>::decodePointer(const YAML::Node &node, PointingHidePanelInteraction *&pointingHidePanelInteraction) {
+		bool onlyOnParent{false};
+		
+		if(node["only-on-parent"])
+			node["only-on-parent"] >> onlyOnParent;
+		
+		{ pointingHidePanelInteraction = new PointingHidePanelInteraction{onlyOnParent}; return true; }
+	}
 }

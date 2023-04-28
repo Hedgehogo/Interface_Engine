@@ -1,8 +1,9 @@
 #pragma once
+
 #include "../general/sValue.hpp"
 
 namespace ui {
-	template <typename T>
+	template<typename T>
 	class SRangeValue : public SValue<T> {
 	protected:
 		T upper;
@@ -15,22 +16,27 @@ namespace ui {
 		
 		T getLower();
 		
-		void setUpper(const T &upper);
+		void setUpper(const T& upper);
 		
-		void setLower(const T &lower);
+		void setLower(const T& lower);
 		
 		void setBounds(T lower, T upper);
 		
-		void setValue(const float &value) override;
+		void setValue(const float& value) override;
 	};
 	
-	template <typename T>
+	template<typename T>
 	bool convertPointer(const YAML::Node &node, SRangeValue<T> *&sRangeValue);
 	
-	template <typename T>
+	template<typename T>
+	struct DecodePointer<SRangeValue<T>> {
+		static bool decodePointer(const YAML::Node &node, SRangeValue<T> *&sRangeValue);
+	};
+	
+	template<typename T>
 	using SRange = SRangeValue<T>;
 	
-	template <typename T>
+	template<typename T>
 	using PSRange = std::shared_ptr<SRange<T>>;
 	
 	using SRbool = SRange<bool>;

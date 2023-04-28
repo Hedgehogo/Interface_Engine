@@ -17,7 +17,12 @@ namespace ui {
 		return nullptr;
 	}
 
-	bool convertPointer(const YAML::Node &node, TextAddBlockInteractionEvent *& textAddBlockInteractionEvent){
+	bool convertPointer(const YAML::Node &node, TextAddBlockInteractionEvent *&textAddBlockInteractionEvent) {
+		textAddBlockInteractionEvent = new TextAddBlockInteractionEvent{*node["interaction"].as<TextInteraction*>()};
+		return true;
+	}
+	
+	bool DecodePointer<TextAddBlockInteractionEvent>::decodePointer(const YAML::Node &node, TextAddBlockInteractionEvent *&textAddBlockInteractionEvent) {
 		textAddBlockInteractionEvent = new TextAddBlockInteractionEvent{*node["interaction"].as<TextInteraction*>()};
 		return true;
 	}

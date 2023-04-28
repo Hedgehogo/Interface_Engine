@@ -126,6 +126,43 @@ namespace ui {
 		return true;
 	}
 	
+	bool DecodePointer<BoxWithBorderHorizontal>::decodePointer(const YAML::Node &node, BoxWithBorderHorizontal *&boxWithBorderHorizontal) {
+		sf::Vector2f minSize{};
+		
+		if(node["min-size"])
+			node["min-size"] >> minSize;
+		if(node["objects"]) {
+			std::vector<IScalable *> objects(node["objects"].size());
+			
+			for(ullint i = 0; i < node["objects"].size(); ++i) {
+				node["objects"][i] >> objects[i];
+			}
+			if(node["bounds"]) {
+				std::vector<float> bounds(node["bounds"].size());
+				
+				for(ullint i = 0; i < node["bounds"].size(); ++i) {
+					node["bounds"][i] >> bounds[i];
+				}
+				
+				boxWithBorderHorizontal = new BoxWithBorderHorizontal{objects, bounds, minSize};
+			} else {
+				boxWithBorderHorizontal = new BoxWithBorderHorizontal{objects, minSize};
+			}
+		} else {
+			IScalable *firstObject;
+			IScalable *secondObject;
+			float bound{0.5f};
+			
+			node["first-object"] >> firstObject;
+			node["second-object"] >> secondObject;
+			if(node["bound"])
+				node["bound"] >> bound;
+			
+			boxWithBorderHorizontal = new BoxWithBorderHorizontal{firstObject, secondObject, bound, minSize};
+		}
+		return true;
+	}
+	
 	void BoxWithBorderHorizontal::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		for(auto &object: objects) {

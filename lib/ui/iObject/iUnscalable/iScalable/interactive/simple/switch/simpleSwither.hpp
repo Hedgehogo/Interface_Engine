@@ -47,4 +47,9 @@ namespace ui {
 	};
 	
 	bool convertPointer(const YAML::Node &node, SimpleSwitcher *&simpleSwitcher);
+	
+	template<>
+	struct DecodePointer<SimpleSwitcher> {
+		static bool decodePointer(const YAML::Node &node, SimpleSwitcher *&simpleSwitcher);
+	};
 }
