@@ -16,7 +16,6 @@ namespace ui {
 		ConstSizing* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, ConstSizing *&constSizing);
 	
 	template<>
 	struct DecodePointer<ConstSizing> {

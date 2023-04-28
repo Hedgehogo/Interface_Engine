@@ -8,8 +8,7 @@ namespace ui {
 		end
 	};
 	
-	template<>
-	bool convert(const YAML::Node &node, Location &location);
+	
 	
 	template<>
 	struct Decode<Location> {

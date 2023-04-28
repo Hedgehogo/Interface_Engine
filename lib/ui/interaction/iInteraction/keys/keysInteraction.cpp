@@ -57,38 +57,6 @@ namespace ui {
 		return new KeysInteraction{event->copy(), keys, blackListKeys};
 	}
 	
-	bool convertPointer(const YAML::Node &node, KeysInteraction *&keysInteraction) {
-		if(node.IsScalar()) {
-			keysInteraction = new KeysInteraction{new OpenUrlEvent{node.as<std::string>()}, {Key::mouseLeft}};
-			return true;
-		}
-		
-		KeyEvent* event;
-		std::vector<Key> keys;
-		std::vector<Key> blackListKeys{};
-		
-		node["event"] >> event;
-		
-		keys.resize(node["keys"].size());
-		uint i{0};
-		for(auto& key: node["keys"]) {
-			key >> keys[i];
-			++i;
-		}
-		
-		if(node["black-listKeys"]) {
-			i = 0;
-			for(auto& key: node["black-listKeys"]) {
-				key >> blackListKeys[i];
-				++i;
-			}
-		}
-		
-		{
-			keysInteraction = new KeysInteraction{event, keys, blackListKeys};
-			return true;
-		}
-	}
 	
 	bool DecodePointer<KeysInteraction>::decodePointer(const YAML::Node &node, KeysInteraction *&keysInteraction) {
 		if(node.IsScalar()) {

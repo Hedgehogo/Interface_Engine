@@ -166,39 +166,6 @@ namespace ui {
 		}
 	}
 	
-	bool convertPointer(const YAML::Node &node, Caption *&caption) {
-		sf::String text;
-		IUninteractive* background;
-		sf::Font* font;
-		int fontSize{Caption::getDefaultSize()};
-		sf::Color color{Caption::getDefaultColor()};
-		sf::Text::Style style{};
-		float rotation{0};
-		sf::Vector2f minSize{};
-		InternalPositioning2 internalPositioning2{{0.5, 0.5}};
-		bool cutBack = true;
-		
-		node["text"] >> text;
-		node["background"] >> background;
-		node["font"] >> font;
-		if(node["font-size"])
-			node["font-size"] >> fontSize;
-		if(node["color"])
-			node["color"] >> color;
-		if(node["style"])
-			node["style"] >> style;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		if(node["rotation"])
-			node["rotation"] >> rotation;
-		if(node["cut-back"])
-			node["cut-back"] >> cutBack;
-		
-		{
-			caption = new Caption{text, background, *font, minSize, fontSize, color, style, rotation, internalPositioning2, cutBack};
-			return true;
-		}
-	}
 	
 	bool DecodePointer<Caption>::decodePointer(const YAML::Node &node, Caption *&caption) {
 		sf::String text;

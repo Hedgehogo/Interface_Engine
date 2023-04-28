@@ -49,21 +49,6 @@ namespace ui {
 		return boxWithConstBezel;
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxWithConstBezel *&boxWithConstBezel) {
-		IScalable *object;
-		IUninteractive *bezel;
-		float thickness;
-		sf::Vector2f minSize{};
-		
-		node["object"] >> object;
-		node["bezel"] >> bezel;
-		node["thickness"] >> thickness;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		boxWithConstBezel = new BoxWithConstBezel{object, bezel, thickness, minSize};
-		return true;
-	}
 	
 	bool DecodePointer<BoxWithConstBezel>::decodePointer(const YAML::Node &node, BoxWithConstBezel *&boxWithConstBezel) {
 		IScalable *object;

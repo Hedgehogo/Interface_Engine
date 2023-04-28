@@ -24,15 +24,13 @@ namespace ui {
 		IChangeVariable *copy() override;
 	};
 
-	template<>
-	bool convert(const YAML::Node &node, ChangeVariableByBrokenLine::Value &value);
+	
 	
 	template<>
 	struct Decode<ChangeVariableByBrokenLine::Value> {
 		static bool decode(const YAML::Node &node, ChangeVariableByBrokenLine::Value &value);
 	};
 
-	bool convertPointer(const YAML::Node &node, ChangeVariableByBrokenLine *&brokenLine);
 	
 	template<>
 	struct DecodePointer<ChangeVariableByBrokenLine> {

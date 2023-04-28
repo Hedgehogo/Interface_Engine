@@ -10,9 +10,6 @@ namespace ui {
 		return new DontHidePanelInteraction{};
 	}
 	
-	bool convertPointer(const YAML::Node &node, DontHidePanelInteraction *&dontHidePanelInteraction) {
-		{ dontHidePanelInteraction = new DontHidePanelInteraction{}; return true; }
-	}
 	
 	bool DecodePointer<DontHidePanelInteraction>::decodePointer(const YAML::Node &node, DontHidePanelInteraction *&dontHidePanelInteraction) {
 		{ dontHidePanelInteraction = new DontHidePanelInteraction{}; return true; }

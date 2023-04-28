@@ -48,7 +48,6 @@ namespace ui {
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, BoxWithShader *&boxWithShader);
 	
 	template<>
 	struct DecodePointer<BoxWithShader> {

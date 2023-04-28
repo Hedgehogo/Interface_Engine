@@ -19,7 +19,6 @@ namespace ui {
 		InternalTargetPositioning* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, InternalTargetPositioning *&internalTargetPositioning);
 	
 	template<>
 	struct DecodePointer<InternalTargetPositioning> {

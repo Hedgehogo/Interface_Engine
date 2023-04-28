@@ -21,7 +21,6 @@ namespace ui
 		ChangeObjectEvent* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, ChangeObjectEvent *&changeObjectEvent);
 	
 	template<>
 	struct DecodePointer<ChangeObjectEvent> {

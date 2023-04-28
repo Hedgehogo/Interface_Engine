@@ -20,7 +20,6 @@ namespace ui {
 		ConstSlider* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, ConstSlider *&constSlider);
 	
 	template<>
 	struct DecodePointer<ConstSlider> {

@@ -17,7 +17,6 @@ namespace ui {
 		void setValue(const float& value) override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, SCoefficientValue *&sCoefficientValue);
 	
 	template<>
 	struct DecodePointer<SCoefficientValue> {

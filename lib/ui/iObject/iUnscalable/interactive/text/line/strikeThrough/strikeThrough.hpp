@@ -17,7 +17,6 @@ namespace ui {
         StrikeThrough* copy();
     };
 	
-	bool convertPointer(const YAML::Node &node, StrikeThrough *&strikeThrough);
 	
 	template<>
 	struct DecodePointer<StrikeThrough> {

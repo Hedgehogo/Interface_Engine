@@ -30,7 +30,6 @@ namespace ui{
         BaseTextBlock *copy() override;
     };
 	
-	bool convertPointer(const YAML::Node &node, ObjectTextBlock *&objectTextBlock);
 	
 	template<>
 	struct DecodePointer<ObjectTextBlock> {

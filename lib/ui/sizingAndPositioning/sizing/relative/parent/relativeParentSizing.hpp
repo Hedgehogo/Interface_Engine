@@ -18,7 +18,6 @@ namespace ui {
 		RelativeParentSizing* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, RelativeParentSizing *&relativeParentSizing);
 	
 	template<>
 	struct DecodePointer<RelativeParentSizing> {

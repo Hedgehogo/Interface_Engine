@@ -16,7 +16,6 @@ namespace ui {
         ~TextKeysInteraction() = default;
     };
 
-	bool convertPointer(const YAML::Node &node, TextKeysInteraction *&textKeysInteraction);
 	
 	template<>
 	struct DecodePointer<TextKeysInteraction> {

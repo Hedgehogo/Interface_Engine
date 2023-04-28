@@ -61,12 +61,6 @@ namespace ui {
 		return new TextSelectionEvent{};
 	}
 	
-	bool convertPointer(const YAML::Node &node, TextSelectionEvent *&textSelectionEvent) {
-		{
-			textSelectionEvent = new TextSelectionEvent{};
-			return true;
-		}
-	}
 	
 	bool DecodePointer<TextSelectionEvent>::decodePointer(const YAML::Node &node, TextSelectionEvent *&textSelectionEvent) {
 		{

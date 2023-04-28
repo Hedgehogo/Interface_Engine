@@ -14,8 +14,7 @@ namespace ui {
 	
 	Location2 makeLocation2(Location vertical, Location horizontal);
 	
-	template<>
-	bool convert(const YAML::Node &node, Location2 &location2);
+	
 	
 	template<>
 	struct Decode<Location2> {

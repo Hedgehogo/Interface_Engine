@@ -90,37 +90,6 @@ namespace ui {
 		return boxWithConstRatioCenter;
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxWithConstRatioCenter *&boxWithConstRatioCenter) {
-		IScalable *object;
-		IScalable *firstObject;
-		IScalable *secondObject;
-		float aspectRatio;
-		IUninteractive *background{};
-		sf::Vector2f minSize{};
-		
-		node["object"] >> object;
-		if(node["first-object"]) {
-			node["first-object"] >> firstObject;
-		} else {
-			firstObject = new Empty{};
-		}
-		if(node["second-object"]) {
-			node["second-object"] >> secondObject;
-		} else {
-			secondObject = new Empty{};
-		}
-		node["aspect-ratio"] >> aspectRatio;
-		if(node["background"]) {
-			node["background"] >> background;
-		} else {
-			background = new Empty{};
-		}
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		boxWithConstRatioCenter = new BoxWithConstRatioCenter{object, firstObject, secondObject, background, aspectRatio, minSize};
-		return true;
-	}
 	
 	bool DecodePointer<BoxWithConstRatioCenter>::decodePointer(const YAML::Node &node, BoxWithConstRatioCenter *&boxWithConstRatioCenter) {
 		IScalable *object;

@@ -22,19 +22,6 @@ namespace ui {
 		return boxWithAlternativeObject;
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxWithAlternativeObject *&boxWithAlternativeObject) {
-		IScalable *topObject;
-		IScalable *bottomObject;
-		sf::Vector2f minSize{};
-		
-		node["top-object"] >> topObject;
-		node["bottom-object"] >> bottomObject;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		boxWithAlternativeObject = new BoxWithAlternativeObject{topObject, bottomObject, minSize};
-		return true;
-	}
 	
 	bool DecodePointer<BoxWithAlternativeObject>::decodePointer(const YAML::Node &node, BoxWithAlternativeObject *&boxWithAlternativeObject) {
 		IScalable *topObject;

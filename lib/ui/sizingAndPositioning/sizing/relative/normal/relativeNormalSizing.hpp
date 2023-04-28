@@ -18,7 +18,6 @@ namespace ui {
 		RelativeNormalSizing* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, RelativeNormalSizing *&relativeNormalSizing);
 	
 	template<>
 	struct DecodePointer<RelativeNormalSizing> {

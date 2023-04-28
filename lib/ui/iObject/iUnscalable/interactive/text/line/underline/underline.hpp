@@ -17,7 +17,6 @@ namespace ui {
         Underline* copy();
     };
 	
-	bool convertPointer(const YAML::Node &node, Underline *&underline);
 	
 	template<>
 	struct DecodePointer<Underline> {

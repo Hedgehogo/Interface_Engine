@@ -18,8 +18,7 @@ namespace ui {
 		void setValue(const T &value) override;
 	};
 	
-	template<typename T>
-	bool convertPointer(const YAML::Node &node, SValue<T> *&sValue);
+	
 	
 	template<typename T>
 	struct DecodePointer<SValue<T>> {

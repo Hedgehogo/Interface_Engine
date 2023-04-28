@@ -70,10 +70,6 @@ namespace ui {
 		object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxDebug *&boxDebug) {
-		boxDebug = new BoxDebug{node["object"].as<IScalable *>()};
-		return true;
-	}
 	
 	bool DecodePointer<BoxDebug>::decodePointer(const YAML::Node &node, BoxDebug *&boxDebug) {
 		boxDebug = new BoxDebug{node["object"].as<IScalable *>()};

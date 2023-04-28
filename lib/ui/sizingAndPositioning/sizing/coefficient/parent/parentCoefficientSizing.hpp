@@ -19,7 +19,6 @@ namespace ui {
 		ParentCoefficientSizing* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, ParentCoefficientSizing *&parentCoefficientSizing);
 	
 	template<>
 	struct DecodePointer<ParentCoefficientSizing> {

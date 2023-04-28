@@ -22,16 +22,7 @@ namespace ui {
 			set(value);
 	}
 	
-	template<typename T>
-	bool convertPointer(const YAML::Node &node, SValue<T> *&sValue) {
-		T value{};
-		
-		if(node["value"])
-			node["value"] >> value;
-		
-		sValue = new SValue<T>{value};
-		return true;
-	}
+
 	
 	template<typename T>
 	bool DecodePointer<SValue<T>>::decodePointer(const YAML::Node &node, SValue<T> *&sValue) {

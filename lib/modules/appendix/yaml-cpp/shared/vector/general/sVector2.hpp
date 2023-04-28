@@ -43,8 +43,7 @@ namespace ui {
 		void setValue(const sf::Vector2<V> &vector);
 	};
 	
-	template<typename T>
-	bool convertPointer(const YAML::Node &node, SVector2<T> *&withVector2);
+	
 	
 	template<typename T>
 	struct DecodePointer<SVector2<T>> {

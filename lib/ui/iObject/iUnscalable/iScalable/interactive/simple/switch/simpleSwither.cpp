@@ -69,30 +69,6 @@ namespace ui {
 		return switcher;
 	}
 	
-	bool convertPointer(const YAML::Node &node, SimpleSwitcher *&simpleSwitcher) {
-		auto inactiveBackground{node["inactive-background"].as<IUninteractive*>()};
-		auto activeBackground{node["active-background"].as<IUninteractive*>()};
-		Key key{convDef<Key>(node["key"], Key::mouseLeft)};
-		
-		if(node["value"]) {
-			simpleSwitcher = new SimpleSwitcher{
-				inactiveBackground, activeBackground,
-				Buffer::get<Sbool>(node["value"]),
-				key
-			};
-		} else if(node["state"]) {
-			simpleSwitcher = new SimpleSwitcher{
-				inactiveBackground, activeBackground, key,
-				convertBool(node["state"], "active", "inactive")
-			};
-		} else {
-			simpleSwitcher = new SimpleSwitcher{
-				inactiveBackground, activeBackground, key,
-				convDef(node["start-active"], false)
-			};
-		}
-		return true;
-	}
 	
 	bool DecodePointer<SimpleSwitcher>::decodePointer(const YAML::Node &node, SimpleSwitcher *&simpleSwitcher) {
 		auto inactiveBackground{node["inactive-background"].as<IUninteractive*>()};

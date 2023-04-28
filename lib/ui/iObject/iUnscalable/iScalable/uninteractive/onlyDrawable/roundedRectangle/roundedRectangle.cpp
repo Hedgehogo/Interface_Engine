@@ -46,10 +46,6 @@ namespace ui {
 		return rectangle;
 	}
 	
-	bool convertPointer(const YAML::Node &node, RoundedRectangle *&roundedRectangle) {
-		roundedRectangle = new RoundedRectangle{node["color"].as<sf::Color>(), node["radius"].as<float>()};
-		return true;
-	}
 	
 	bool DecodePointer<RoundedRectangle>::decodePointer(const YAML::Node &node, RoundedRectangle *&roundedRectangle) {
 		roundedRectangle = new RoundedRectangle{node["color"].as<sf::Color>(), node["radius"].as<float>()};

@@ -71,23 +71,6 @@ namespace ui {
 		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxWithConstBorder *&boxWithConstBorder) {
-		IScalable *constObject{nullptr};
-		IScalable *secondObject{nullptr};
-		Side side;
-		float borderDistance;
-		sf::Vector2f minSize{};
-		
-		node["const-object"] >> constObject;
-		node["second-object"] >> secondObject;
-		node["side"] >> side;
-		node["border-distance"] >> borderDistance;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		boxWithConstBorder = new BoxWithConstBorder{constObject, secondObject, side, borderDistance, minSize};
-		return true;
-	}
 	
 	bool DecodePointer<BoxWithConstBorder>::decodePointer(const YAML::Node &node, BoxWithConstBorder *&boxWithConstBorder) {
 		IScalable *constObject{nullptr};

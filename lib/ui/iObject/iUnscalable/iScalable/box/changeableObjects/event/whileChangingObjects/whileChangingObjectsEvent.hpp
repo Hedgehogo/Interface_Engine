@@ -25,7 +25,6 @@ namespace ui {
 		WhileChangingObjectsEvent* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, WhileChangingObjectsEvent *&whileChangingObjectsEvent);
 	
 	template<>
 	struct DecodePointer<WhileChangingObjectsEvent> {

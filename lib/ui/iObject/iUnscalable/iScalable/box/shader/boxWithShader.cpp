@@ -125,39 +125,6 @@ namespace ui {
 		return result;
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxWithShader *&boxWithShader) {
-		IScalable *object;
-		sf::Shader *shader = new sf::Shader{};
-		uint transmission{};
-		std::map<std::string, PISfloat> valuesF;
-		std::map<std::string, PISint> valuesI;
-		std::map<std::string, PISbool> valuesB;
-		std::map<std::string, PISValue<sf::Color>> valuesC;
-		std::map<std::string, PSRVec2f> valuesV;
-		bool optimize{true};
-		sf::Vector2f minSize{0, 0};
-		node["object"] >> object;
-		if(node["transmission"])
-			convertTransmission(node["transmission"], transmission);
-		if(node["shader"])
-			node["shader"] >> *shader;
-		if(node["values-f"])
-			valuesF = getSValues<ISfloat>(node["values-f"]);
-		if(node["values-i"])
-			valuesI = getSValues<ISint>(node["values-i"]);
-		if(node["values-b"])
-			valuesB = getSValues<ISbool>(node["values-b"]);
-		if(node["values-c"])
-			valuesC = getSValues<ISValue<sf::Color>>(node["values-c"]);
-		if(node["values-v"])
-			valuesV = getSValues<SRVec2f>(node["values-v"]);
-		if(node["optimize"])
-			node["optimize"] >> optimize;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		boxWithShader = new BoxWithShader{object, shader, transmission, valuesF, valuesI, valuesB, valuesC, valuesV, optimize, minSize};
-		return true;
-	}
 	
 	bool DecodePointer<BoxWithShader>::decodePointer(const YAML::Node &node, BoxWithShader *&boxWithShader) {
 		IScalable *object;

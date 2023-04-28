@@ -14,7 +14,6 @@ namespace ui {
 		DontHidePanelInteraction* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, DontHidePanelInteraction *&dontHidePanelInteraction);
 	
 	template<>
 	struct DecodePointer<DontHidePanelInteraction> {

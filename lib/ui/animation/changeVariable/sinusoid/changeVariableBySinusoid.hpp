@@ -18,7 +18,6 @@ namespace ui {
 	};
 
 
-	bool convertPointer(const YAML::Node &node, ChangeVariableBySinusoid *&changeVariableBySinusoid);
 	
 	template<>
 	struct DecodePointer<ChangeVariableBySinusoid> {

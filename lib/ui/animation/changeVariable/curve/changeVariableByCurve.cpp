@@ -24,17 +24,6 @@ namespace ui {
 		return new ChangeVariableByCurve{k1, k2, size, start, end};
 	}
 	
-	bool convertPointer(const YAML::Node &node, ChangeVariableByCurve *&changeVariableByCurve) {
-		changeVariableByCurve = new ChangeVariableByCurve{
-			node["k1"].as<float>(),
-			node["k2"].as<float>(),
-			convDef(node["size"], 1.f),
-			convDef(node["start"], sf::Vector2f{0, 0}),
-			convDef(node["end"], sf::Vector2f{1, 1})
-		};
-		
-		return true;
-	}
 	
 	bool DecodePointer<ChangeVariableByCurve>::decodePointer(const YAML::Node &node, ChangeVariableByCurve *&changeVariableByCurve) {
 		changeVariableByCurve = new ChangeVariableByCurve{

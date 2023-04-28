@@ -32,8 +32,7 @@ namespace ui {
 		SliderWheelEvent* copy() override;
 	};
 	
-	template<>
-	bool convert(const YAML::Node &node, SliderWheelEvent::Relativity &relativity);
+	
 	
 	template<>
 	struct Decode<SliderWheelEvent::Relativity> {

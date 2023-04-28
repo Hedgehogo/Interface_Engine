@@ -13,8 +13,7 @@ namespace ui {
 		SConvertToBoolEquals(PISValue<T> fromValue, T compared);
 	};
 
-	template<typename T>
-	bool convertPointer(const YAML::Node &node, SConvertToBoolEquals<T> *&sConvertToBoolEquals);
+	
 	
 	template<typename T>
 	struct DecodePointer<SConvertToBoolEquals<T>> {

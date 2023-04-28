@@ -79,25 +79,6 @@ namespace ui {
 	}
 	
 	
-	bool convertPointer(const YAML::Node &node, Prerequisite *&prerequisite) {
-		prerequisite = new Prerequisite{
-			node["valve"].as<IValve*>(),
-			getAnimatorUnits(node, "next-true"),
-			getAnimatorUnits(node, "next-false")
-		};
-		
-		addNextAnimatorUnit(node, [=](IAnimatorUnit* unit) {
-			prerequisite->addNextTrue(unit);
-		}, "next-true");
-		
-		addNextAnimatorUnit(node, [=](IAnimatorUnit* unit) {
-			prerequisite->addNextFalse(unit);
-		}, "next-false");
-		
-		if(node["name"])
-			animatorUnitBuffer[node["name"].as<std::string>()] = prerequisite;
-		return true;
-	}
 	
 	bool DecodePointer<Prerequisite>::decodePointer(const YAML::Node &node, Prerequisite *&prerequisite) {
 		prerequisite = new Prerequisite{

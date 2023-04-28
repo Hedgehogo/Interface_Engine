@@ -20,7 +20,6 @@ namespace ui {
 		PointingHidePanelInteraction* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, PointingHidePanelInteraction *&pointingHidePanelInteraction);
 	
 	template<>
 	struct DecodePointer<PointingHidePanelInteraction> {

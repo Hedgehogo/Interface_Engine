@@ -39,43 +39,6 @@ namespace ui {
 		return slider1;
 	}
 	
-	bool convertPointer(const YAML::Node &node, Slider *&sliderZone) {
-		IUninteractive *slider;
-		IUninteractive *background;
-		PSRVec2f value;
-		sf::Vector2f sliderScale{1.0f, 0.5f};
-		Key key{Key::mouseLeft};
-		bool wheelHorizontal{false};
-		
-		node["slider"] >> slider;
-		node["background"] >> background;
-		value = Buffer::get<SRVec2f>(node["value"]);
-		if(node["slider-scale"])
-			node["slider-scale"] >> sliderScale;
-		if(node["key"])
-			node["key"] >> key;
-		if(node["default-wheel"]) {
-			wheelHorizontal = convertBool(node["default-wheel"], "horizontal", "vertical");
-		}
-		
-		if(!node["division"]) {
-			SliderWheelEvent::Relativity wheelRelativity{SliderWheelEvent::Relativity::relationArea};
-			sf::Vector2f wheelSensitivity{0.2f, 0.2f};
-			
-			if(node["wheel-relativity"])
-				node["wheel-relativity"] >> wheelRelativity;
-			if(node["wheel-sensitivity"])
-				node["wheel-sensitivity"] >> wheelSensitivity;
-			
-			{ sliderZone = new Slider{slider, background, value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity}; return true; }
-		} else {
-			sf::Vector2i division;
-			
-			node["division"] >> division;
-			
-			{ sliderZone = new Slider{slider, background, value, division, sliderScale, key, wheelHorizontal}; return true; }
-		}
-	}
 	
 	bool DecodePointer<Slider>::decodePointer(const YAML::Node &node, Slider *&sliderZone) {
 		IUninteractive *slider;

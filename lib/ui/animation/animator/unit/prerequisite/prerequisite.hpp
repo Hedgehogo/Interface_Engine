@@ -28,7 +28,6 @@ namespace ui {
 		~Prerequisite();
 	};
 
-	bool convertPointer(const YAML::Node &node, Prerequisite *&prerequisite);
 	
 	template<>
 	struct DecodePointer<Prerequisite> {

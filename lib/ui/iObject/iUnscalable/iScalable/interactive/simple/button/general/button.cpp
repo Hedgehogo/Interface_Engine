@@ -21,24 +21,6 @@ namespace ui {
 		return buttonWithIndex;
 	}
 	
-	bool convertPointer(const YAML::Node &node, Button *&button) {
-		IUninteractive* background;
-		
-		node["background"] >> background;
-		
-		if(node["interaction"]) {
-			IInteraction* interaction;
-			node["interaction"] >> interaction;
-			button = new Button{background, interaction};
-			return true;
-		}
-		
-		int index;
-		node["index"] >> index;
-		
-		button = new Button{background, index};
-		return true;
-	}
 	
 	bool DecodePointer<Button>::decodePointer(const YAML::Node &node, Button *&button) {
 		IUninteractive* background;

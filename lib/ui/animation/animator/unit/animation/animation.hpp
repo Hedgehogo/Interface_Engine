@@ -44,15 +44,13 @@ namespace ui {
 		~Animation();
 	};
 
-	template<>
-	bool convert(const YAML::Node &node, Animation::Variable &animationUnit);
+	
 	
 	template<>
 	struct Decode<Animation::Variable> {
 		static bool decode(const YAML::Node &node, Animation::Variable &animationUnit);
 	};
 
-	bool convertPointer(const YAML::Node &node, Animation *&animation);
 	
 	template<>
 	struct DecodePointer<Animation> {

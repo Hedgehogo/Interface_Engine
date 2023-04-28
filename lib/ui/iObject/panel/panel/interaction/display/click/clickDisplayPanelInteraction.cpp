@@ -24,14 +24,6 @@ namespace ui {
 		return clickDisplayPanelInteraction;
 	}
 	
-	bool convertPointer(const YAML::Node &node, ClickDisplayPanelInteraction *&clickDisplayPanelInteraction) {
-		Key key;
-		node["key"] >> key;
-		{
-			clickDisplayPanelInteraction = new ClickDisplayPanelInteraction{key};
-			return true;
-		}
-	}
 	
 	bool DecodePointer<ClickDisplayPanelInteraction>::decodePointer(const YAML::Node &node, ClickDisplayPanelInteraction *&clickDisplayPanelInteraction) {
 		Key key;

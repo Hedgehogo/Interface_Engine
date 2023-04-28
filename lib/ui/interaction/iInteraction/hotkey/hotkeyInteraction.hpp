@@ -46,15 +46,13 @@ namespace ui {
 		~HotkeyInteraction() override;
 	};
 	
-	bool convertPointer(const YAML::Node& node, HotkeyInteraction*& hotkeyInteraction);
 	
 	template<>
 	struct DecodePointer<HotkeyInteraction> {
 		static bool decodePointer(const YAML::Node& node, HotkeyInteraction*& hotkeyInteraction);
 	};
 	
-	template<>
-	bool convert<HotkeyInteraction::Hotkey>(const YAML::Node& node, HotkeyInteraction::Hotkey*& hotkey);
+	
 	
 	template<>
 	struct Decode<HotkeyInteraction::Hotkey*> {

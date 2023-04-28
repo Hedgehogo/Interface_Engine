@@ -25,7 +25,6 @@ namespace ui {
 		OpenUrlEvent *copy() override;
 	};
 
-	bool convertPointer(const YAML::Node &node, OpenUrlEvent *&openUrlInteraction);
 	
 	template<>
 	struct DecodePointer<OpenUrlEvent> {

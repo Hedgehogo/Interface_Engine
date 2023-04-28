@@ -88,33 +88,7 @@ namespace ui {
         return Location2::center;
 	}
 	
-	template<>
-	bool convert(const YAML::Node &node, Location2 &location2) {
-		std::string str{node.as<std::string>()};
-		
-		if(str == "up-left") {
-			location2 = Location2::upLeft;
-		} else if(str == "up") {
-			location2 = Location2::up;
-		} else if(str == "up-right") {
-			location2 = Location2::upRight;
-		} else if(str == "left") {
-			location2 = Location2::left;
-		} else if(str == "center") {
-			location2 = Location2::center;
-		} else if(str == "right") {
-			location2 = Location2::right;
-		} else if(str == "down-left") {
-			location2 = Location2::downLeft;
-		} else if(str == "down") {
-			location2 = Location2::down;
-		} else if(str == "down-right") {
-			location2 = Location2::downRight;
-		} else {
-			location2 = makeLocation2(node["vertical"].as<Location>(), node["horizontal"].as<Location>());
-		}
-		return true;
-	}
+
 	
 	bool Decode<Location2>::decode(const YAML::Node &node, Location2 &location2) {
 		std::string str{node.as<std::string>()};

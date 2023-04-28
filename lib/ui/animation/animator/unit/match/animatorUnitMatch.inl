@@ -68,60 +68,7 @@ namespace ui {
 		return new AnimatorUnitMatch<T>{copyOptions, value};
 	}
 	
-	template<typename T>
-	bool convert(const YAML::Node& node, detail::AnimatorUnitMatch::Option<T>& option) {
-		std::vector<IAnimatorUnit*> nexts;
-		
-		if(node["next"]) {
-			if(!node["next"].IsScalar())
-				nexts = {node["next"].as<IAnimatorUnit*>()};
-			else if(node["next"].as<std::string>() == "this")
-				nexts = {nullptr};
-		} else if(node["nexts"]) {
-			for(auto& unit: node["nexts"]) {
-				if(!unit.IsScalar())
-					nexts.push_back(unit.as<IAnimatorUnit*>());
-				else if(unit.as<std::string>() == "this")
-					nexts.push_back(nullptr);
-			}
-		}
-		
-		std::function<bool(T, T)> condition;
-		auto conditionStr{node["condition"].as<std::string>()};
-		
-		if(conditionStr == "equals")
-			condition = [](T a, T b) {
-				return a == b;
-			};
-		else if(conditionStr == "not-equals")
-			condition = [](T a, T b) {
-				return a != b;
-			};
-		else if(conditionStr == "greater")
-			condition = [](T a, T b) {
-				return a > b;
-			};
-		else if(conditionStr == "less")
-			condition = [](T a, T b) {
-				return a < b;
-			};
-		else if(conditionStr == "greater-or-equals")
-			condition = [](T a, T b) {
-				return a >= b;
-			};
-		else if(conditionStr == "less-or-equals")
-			condition = [](T a, T b) {
-				return a <= b;
-			};
-		
-		option = typename AnimatorUnitMatch<T>::Option{
-			node["example"].as<T>(),
-			condition,
-			nexts
-		};
-		
-		return true;
-	}
+
 	
 	template<typename T>
 	bool Decode<detail::AnimatorUnitMatch::Option<T>>::decode(const YAML::Node& node, detail::AnimatorUnitMatch::Option<T>& option) {
@@ -177,55 +124,7 @@ namespace ui {
 		return true;
 	}
 	
-	template<typename T>
-	bool convertPointer(const YAML::Node& node, AnimatorUnitMatch<T>*& animatorUnitMatch) {
-		std::vector<typename AnimatorUnitMatch<T>::Option> options;
-		
-		if(node["options"])
-			options = node["options"].as<std::vector<typename AnimatorUnitMatch<T>::Option>>();
-		else
-			options = std::vector{node["option"].as<typename AnimatorUnitMatch<T>::Option>()};
-		
-		animatorUnitMatch = new AnimatorUnitMatch<T>{
-			options,
-			Buffer::get<SValue<T>>(node["value"])
-		};
-		
-		
-		if(node["options"]) {
-			for(int i = 0; i < node["options"].size(); ++i) {
-				if(node["next"] && node["next"].IsScalar() && node["next"].as<std::string>() != "this") {
-					animatorUnitRequest[node["next"].as<std::string>()].emplace_back([=](IAnimatorUnit* unit) {
-						animatorUnitMatch->addNext(i, unit);
-					});
-				} else if(node["nexts"]) {
-					for(auto& unit: node["nexts"]) {
-						if(unit.IsScalar() && unit.as<std::string>() != "this") {
-							animatorUnitRequest[unit.as<std::string>()].emplace_back([=](IAnimatorUnit* unit) {
-								animatorUnitMatch->addNext(i, unit);
-							});
-						}
-					}
-				}
-			}
-		} else {
-			if(node["next"] && node["next"].IsScalar() && node["next"].as<std::string>() != "this") {
-				animatorUnitRequest[node["next"].as<std::string>()].emplace_back([=](IAnimatorUnit* unit) {
-					animatorUnitMatch->addNext(0, unit);
-				});
-			} else if(node["nexts"]) {
-				for(auto& unit: node["nexts"]) {
-					if(unit.IsScalar() && unit.as<std::string>() != "this") {
-						animatorUnitRequest[unit.as<std::string>()].emplace_back([=](IAnimatorUnit* unit) {
-							animatorUnitMatch->addNext(0, unit);
-						});
-					}
-				}
-			}
-		}
-		
-		return true;
-	}
+
 	
 	template<typename T>
 	void addNextAnimatorUnitForMach(const YAML::Node& node, int i, AnimatorUnitMatch<T>*& animatorUnitMatch){

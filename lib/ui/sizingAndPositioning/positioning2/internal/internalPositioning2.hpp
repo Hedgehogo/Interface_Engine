@@ -23,7 +23,6 @@ namespace ui {
         InternalPositioning2* copy();
     };
 	
-	bool convertPointer(const YAML::Node &node, InternalPositioning2 *&internalPositioning2);
 	
 	template<>
 	struct DecodePointer<InternalPositioning2> {

@@ -54,33 +54,6 @@ namespace ui {
 		return new BoxWithChangeableObjects{objects, value, minimumSize};
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxWithChangeableObjects *&boxWithChangeableObjects) {
-		std::vector<IScalable *> objects;
-		sf::Vector2f minSize{0, 0};
-		
-		for(auto &objectNode: node["objects"]) {
-			IScalable *object;
-			objectNode >> object;
-			objects.push_back(object);
-		}
-		
-		if(node["minSize"])
-			node["minSize"] >> minSize;
-		
-		if(node["value"]) {
-			std::shared_ptr<SValue<uint>> value;
-			value = Buffer::get<SValue<uint>>(node["value"]);
-			boxWithChangeableObjects = new BoxWithChangeableObjects{objects, value, minSize};
-			return true;
-		}
-		
-		uint index{0};
-		if(node["index"])
-			node["index"] >> index;
-		
-		boxWithChangeableObjects = new BoxWithChangeableObjects{objects, index, minSize};
-		return true;
-	}
 	
 	bool DecodePointer<BoxWithChangeableObjects>::decodePointer(const YAML::Node &node, BoxWithChangeableObjects *&boxWithChangeableObjects) {
 		std::vector<IScalable *> objects;

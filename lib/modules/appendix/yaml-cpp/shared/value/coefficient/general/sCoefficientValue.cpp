@@ -9,10 +9,6 @@ namespace ui {
 		for(const auto &set: setters) set(this->value);
 	}
 	
-	bool convertPointer(const YAML::Node &node, SCoefficientValue *&sCoefficientValue) {
-		sCoefficientValue = new SCoefficientValue{convDef(node["value"], 0.f)};
-		return true;
-	}
 	
 	bool DecodePointer<SCoefficientValue>::decodePointer(const YAML::Node &node, SCoefficientValue *&sCoefficientValue) {
 		sCoefficientValue = new SCoefficientValue{convDef(node["value"], 0.f)};

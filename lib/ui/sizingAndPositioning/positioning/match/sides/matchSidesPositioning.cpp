@@ -23,18 +23,6 @@ namespace ui {
 		return new MatchSidesPositioning{parentSide, objectSide, offset};
 	}
 	
-	bool convertPointer(const YAML::Node &node, MatchSidesPositioning *&matchSidesPositioning) {
-		Location parentSide;
-		Location objectSide;
-		float offset{0.f};
-		
-		node["parent-side"] >> parentSide;
-		node["object-side"] >> objectSide;
-		if(node["offset"])
-			node["offset"] >> offset;
-		
-		{ matchSidesPositioning = new MatchSidesPositioning{parentSide, objectSide, offset}; return true; }
-	}
 	
 	bool DecodePointer<MatchSidesPositioning>::decodePointer(const YAML::Node &node, MatchSidesPositioning *&matchSidesPositioning) {
 		Location parentSide;

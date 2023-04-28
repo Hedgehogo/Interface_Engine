@@ -88,59 +88,6 @@ namespace ui {
 		return std::basic_string<Uint32>{};
 	}
 	
-	template<>
-	bool convert(const YAML::Node &node, std::basic_string<char32_t>& string32) {
-		if (node.IsScalar()) {
-			std::string str = node.as<std::string>();
-			string32.resize(str.size());
-			for (int i = 0; i < str.size(); ++i) {
-				string32[i] = str[i];
-			}
-		} else {
-			if (node["key"]){
-				if (node["directory"])
-                    loc::system.loadFromDirectory(node["directory"].as<std::string>());
-				if (node["default-language"]) loc::system.setDefaultLanguage(node["default-language"].as<std::string>());
-				if (node["language"]) loc::system.setNowLanguage(node["language"].as<std::string>());
-				string32 = loc::system.getText(node["key"].as<std::string>());
-			} else {
-				std::string filePath;
-				node["filePath"] >> filePath;
-				std::basic_ifstream<char32_t> fin(filePath);
-				std::basic_string<char32_t> str{};
-				if (node["line"]) {
-					ullint line{node["line"].as<ullint>() + 1};
-					for (ullint i = 0; i < line; ++i)
-						std::getline(fin, str, U'\n');
-				} else if (node["first-symbol"]) {
-					SymbolPosition start{readCharacterIndex(node["first-symbol"], fin)};
-					if (node["last-symbol"]) {
-						const YAML::Node &secondNode = node["last-symbol"];
-						SymbolPosition end{readCharacterIndex(secondNode, fin)};
-						std::basic_string<char32_t> line;
-						for (ullint i = 0; i < start.line; ++i)
-							std::getline(fin, line, U'\n');
-						for (ullint i = 0; i < end.line - start.line; ++i) {
-							std::getline(fin, line, U'\n');
-							str += line + U"\n";
-						}
-						std::getline(fin, line, U'\n');
-						str += line.substr(0, end.number + 1);
-					} else {
-						for (ullint i = 0; i < start.line; ++i)
-							std::getline(fin, str, U'\n');
-						std::getline(fin, str, U'\0');
-					}
-					str = str.substr(start.number + (str[0] == 65279));
-				} else {
-					std::getline(fin, str, U'\0');
-				}
-				string32 = str;
-			}
-		}
-		return true;
-	}
-	
 	bool Decode<std::basic_string<char32_t>>::decode(const YAML::Node& node, std::basic_string<char32_t>& string32) {
 		if (node.IsScalar()) {
 			std::string str = node.as<std::string>();
@@ -193,19 +140,6 @@ namespace ui {
 		return true;
 	}
 	
-	
-	template<>
-	bool convert(const YAML::Node &node, sf::String &sfString) {
-		if(node.IsScalar()) {
-			sfString = sf::String(node.as<std::string>());
-		} else {
-			std::basic_string<char32_t> str;
-			node >> str;
-			sfString = {u32stringToUint32String(str)};
-		}
-		return true;
-	}
-	
 	bool Decode<sf::String>::decode(const YAML::Node &node, sf::String &sfString) {
 		if(node.IsScalar()) {
 			sfString = sf::String(node.as<std::string>());
@@ -217,20 +151,8 @@ namespace ui {
 		return true;
 	}
 	
-	template<>
-	bool convert<sf::Texture>(const YAML::Node &node, sf::Texture *&texture) {
-		texture = &FileBuffer<sf::Texture>::get(node.as<std::string>());
-		return true;
-	}
-	
 	bool Decode<sf::Texture*>::decode(const YAML::Node &node, sf::Texture *&texture) {
 		texture = &FileBuffer<sf::Texture>::get(node.as<std::string>());
-		return true;
-	}
-	
-	template<>
-	bool convert<sf::Font>(const YAML::Node &node, sf::Font *&font) {
-		font = &FileBuffer<sf::Font>::get(node.as<std::string>());
 		return true;
 	}
 	
@@ -271,13 +193,6 @@ namespace ui {
 			++i;
 		}
 
-	}
-
-
-	template<>
-	bool convert<std::vector<sf::Texture>>(const YAML::Node &node, std::vector<sf::Texture> *&video) {
-		video = &FileBuffer<std::vector<sf::Texture>>::get(node.as<std::string>());
-		return true;
 	}
 	
 	bool Decode<std::vector<sf::Texture>*>::decode(const YAML::Node &node, std::vector<sf::Texture> *&video) {

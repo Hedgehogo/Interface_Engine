@@ -21,7 +21,6 @@ namespace ui {
         ~TextCopyEvent() = default;
     };
 	
-	bool convertPointer(const YAML::Node &node, TextCopyEvent *&textCopyEvent);
 	
 	template<>
 	struct DecodePointer<TextCopyEvent> {

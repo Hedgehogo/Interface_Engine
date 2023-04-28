@@ -160,31 +160,6 @@ namespace ui {
 		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxWithMovableBorder *&boxWithMovableBorder) {
-		IScalable *firstObject;
-		IScalable *secondObject;
-		bool isHorizontalBorder{false};
-		PSCoefficient borderValue;
-		int borderInteractionSize{5};
-		sf::Vector2f minSize{};
-		node["first-object"] >> firstObject;
-		node["second-object"] >> secondObject;
-		std::string borderDirection;
-		node["border-direction"] >> borderDirection;
-		borderValue = Buffer::get<SCoefficientValue>(node["border-value"]);
-		if(borderDirection == "horizontal") {
-			isHorizontalBorder = true;
-		} else if(borderDirection != "vertical") {
-			throw YAML::BadConversion{node.Mark()};
-		}
-		if(node["border-interaction-size"])
-			node["border-interaction-size"] >> borderInteractionSize;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		boxWithMovableBorder = new BoxWithMovableBorder{firstObject, secondObject, isHorizontalBorder, borderValue, borderInteractionSize};
-		return true;
-	}
 	
 	bool DecodePointer<BoxWithMovableBorder>::decodePointer(const YAML::Node &node, BoxWithMovableBorder *&boxWithMovableBorder) {
 		IScalable *firstObject;

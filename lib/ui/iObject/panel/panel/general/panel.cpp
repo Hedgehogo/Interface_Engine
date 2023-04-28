@@ -79,30 +79,6 @@ namespace ui {
 		return panel;
 	}
 	
-	bool convertPointer(const YAML::Node &node, Panel *&panel) {
-		IScalable *object;
-		HidePanelInteraction *hideInteraction;
-		ISizing2 *sizing;
-		IPositioning2 *positioning;
-		bool displayed{false};
-		
-		node["object"] >> object;
-		node["hide-interaction"] >> hideInteraction;
-		node["sizing"] >> sizing;
-		node["positioning"] >> positioning;
-		if(node["displayed"])
-			node["displayed"] >> displayed;
-		
-		if(node["move-interaction"]) {
-			MovePanelInteraction *moveInteraction;
-			
-			node["move-interaction"] >> moveInteraction;
-			
-			{ panel = new Panel{object, hideInteraction, moveInteraction, sizing, positioning, displayed}; return true; }
-		} else {
-			{ panel = new Panel{object, hideInteraction, sizing, positioning, displayed}; return true; }
-		}
-	}
 	
 	bool DecodePointer<Panel>::decodePointer(const YAML::Node &node, Panel *&panel) {
 		IScalable *object;

@@ -20,23 +20,6 @@ namespace ui {
 		return sideMovePanelInteraction;
 	}
 	
-	bool convertPointer(const YAML::Node &node, SideMovePanelInteraction *&sideMovePanelInteraction) {
-		float coefficient;
-		float offset;
-		bool horizontal;
-		bool atStart = false;
-		
-		node["coefficient"] >> coefficient;
-		node["offset"] >> offset;
-		node["horizontal"] >> horizontal;
-		if(node["at-start"])
-			node["at-start"] >> atStart;
-		
-		{
-			sideMovePanelInteraction = new SideMovePanelInteraction{coefficient, offset, horizontal, atStart};
-			return true;
-		}
-	}
 	
 	bool DecodePointer<SideMovePanelInteraction>::decodePointer(const YAML::Node &node, SideMovePanelInteraction *&sideMovePanelInteraction) {
 		float coefficient;

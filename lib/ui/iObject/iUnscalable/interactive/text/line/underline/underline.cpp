@@ -31,15 +31,6 @@ namespace ui {
 		return underline;
 	}
 	
-	bool convertPointer(const YAML::Node &node, Underline *&underline) {
-		sf::Color color{nullColor};
-		if(node["color"])
-			node["color"] >> color;
-		{
-			underline = new Underline{color};
-			return true;
-		}
-	}
 	
 	bool DecodePointer<Underline>::decodePointer(const YAML::Node &node, Underline *&underline) {
 		sf::Color color{nullColor};

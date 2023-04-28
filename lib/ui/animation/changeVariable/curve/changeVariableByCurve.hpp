@@ -19,7 +19,6 @@ namespace ui {
 		ChangeVariableByCurve* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, ChangeVariableByCurve *&changeVariableByCurve);
 	
 	template<>
 	struct DecodePointer<ChangeVariableByCurve> {

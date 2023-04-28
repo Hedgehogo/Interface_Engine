@@ -16,7 +16,6 @@ namespace ui {
 		BoxUninteractive *copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, BoxUninteractive *&boxUninteractive);
 	
 	template<>
 	struct DecodePointer<BoxUninteractive> {

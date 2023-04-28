@@ -40,17 +40,6 @@ namespace ui {
 		panel->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
 	}
 	
-	bool convertPointer(const YAML::Node &node, ButtonWithPanel *&buttonWithPanel) {
-		Panel *panel;
-		DisplayPanelInteraction *interaction;
-		IScalable *background;
-		
-		node["panel"] >> panel;
-		node["display-interaction"] >> interaction;
-		node["background"] >> background;
-		
-		{ buttonWithPanel = new ButtonWithPanel{panel, interaction, background}; return true; }
-	}
 	
 	bool DecodePointer<ButtonWithPanel>::decodePointer(const YAML::Node &node, ButtonWithPanel *&buttonWithPanel) {
 		Panel *panel;

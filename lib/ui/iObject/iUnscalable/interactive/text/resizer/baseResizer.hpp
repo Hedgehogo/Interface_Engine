@@ -57,16 +57,14 @@ namespace ui {
         virtual ~BaseResizer() = default;
     };
 
-	template<>
-	bool convert(const YAML::Node &node, BaseResizer::Align &align);
+	
 	
 	template<>
 	struct Decode<BaseResizer::Align> {
 		static bool decode(const YAML::Node &node, BaseResizer::Align &align);
 	};
 
-	template<>
-	bool convert(const YAML::Node &node, BaseResizer::Algorithm &align);
+	
 	
 	template<>
 	struct Decode<BaseResizer::Algorithm> {

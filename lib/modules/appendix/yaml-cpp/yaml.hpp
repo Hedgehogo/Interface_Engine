@@ -44,8 +44,7 @@ namespace ui {
 	template<typename T>
 	YAML::Node convert(const T& rhs);
 	
-	template<typename T>
-	bool convert(const YAML::Node& node, T& object);
+	
 	
 	template<typename T>
 	bool createPointer(const YAML::Node& node, T*& object);
@@ -75,80 +74,70 @@ namespace ui {
 	
 	bool convBoolDef(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue = false);
 	
-	template<typename T>
-	bool convert(const YAML::Node& node, std::vector<T>& vector);
+	
 	
 	template<typename T>
 	struct Decode<std::vector<T>> {
 		static bool decode(const YAML::Node& node, std::vector<T>& vector);
 	};
 	
-	template<typename T>
-	bool convert(const YAML::Node& node, sf::Vector2<T>& vector);
+	
 	
 	template<typename T>
 	struct Decode<sf::Vector2<T>> {
 		static bool decode(const YAML::Node& node, sf::Vector2<T>& vector);
 	};
 	
-	template<>
-	bool convert(const YAML::Node& node, sf::Vector2<float>& vector);
+	
 	
 	template<>
 	struct Decode<sf::Vector2<float>> {
 		static bool decode(const YAML::Node& node, sf::Vector2<float>& vector);
 	};
 	
-	template<>
-	bool convert(const YAML::Node& node, sf::Vector2<int>& vector);
+	
 	
 	template<>
 	struct Decode<sf::Vector2<int>> {
 		static bool decode(const YAML::Node& node, sf::Vector2<int>& vector);
 	};
 	
-	template<>
-	bool convert(const YAML::Node& node, sf::Vector2<uint>& vector);
+	
 	
 	template<>
 	struct Decode<sf::Vector2<uint>> {
 		static bool decode(const YAML::Node& node, sf::Vector2<uint>& vector);
 	};
 	
-	template<typename T>
-	bool convert(const YAML::Node& node, sf::Rect<T>& rect);
+	
 	
 	template<typename T>
 	struct Decode<sf::Rect<T>> {
 		static bool decode(const YAML::Node& node, sf::Rect<T>& rect);
 	};
 	
-	template<>
-	bool convert(const YAML::Node& node, sf::Color& color);
+	
 	
 	template<>
 	struct Decode<sf::Color> {
 		static bool decode(const YAML::Node& node, sf::Color& color);
 	};
 	
-	template<>
-	bool convert(const YAML::Node& node, sf::Text::Style& style);
+	
 	
 	template<>
 	struct Decode<sf::Text::Style> {
 		static bool decode(const YAML::Node& node, sf::Text::Style& style);
 	};
 	
-	template<>
-	bool convert(const YAML::Node& node, sf::Mouse::Button& button);
+	
 	
 	template<>
 	struct Decode<sf::Mouse::Button> {
 		static bool decode(const YAML::Node& node, sf::Mouse::Button& button);
 	};
 	
-	template<>
-	bool convert(const YAML::Node& node, sf::Shader& shader);
+	
 	
 	template<>
 	struct Decode<sf::Shader> {

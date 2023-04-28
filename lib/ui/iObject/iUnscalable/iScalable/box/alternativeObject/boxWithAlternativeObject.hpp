@@ -15,7 +15,6 @@ namespace ui {
 		BoxWithAlternativeObject *copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, BoxWithAlternativeObject *&boxWithAlternativeObject);
 	
 	template<>
 	struct DecodePointer<BoxWithAlternativeObject> {

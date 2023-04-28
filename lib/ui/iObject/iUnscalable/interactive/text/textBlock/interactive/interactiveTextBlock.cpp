@@ -72,57 +72,6 @@ namespace ui {
 			delete interaction;
 	}
 	
-	bool convertPointer(const YAML::Node &node, InteractiveTextBlock *&interactiveTextBlock) {
-		std::u32string text;
-		sf::Color textColor = nullColor;
-		sf::Font *font = nullptr;
-		sf::Text::Style style = {};
-		std::vector<BaseLine *> lines = {};
-		int size = 0;
-		sf::Color textSelectionColor = nullColor;
-		sf::Color backgroundSelectionColor = nullColor;
-		sf::Color inactiveTextSelectionColor = nullColor;
-		sf::Color inactiveBackgroundSelectionColor = nullColor;
-		
-		node["text"] >> text;
-		if(node["text-color"])
-			node["text-color"] >> textColor;
-		if(node["text-color"])
-			node["text-color"] >> textColor;
-		if(node["font"])
-			node["font"] >> font;
-		if(node["style"])
-			node["style"] >> style;
-		if(node["size"])
-			node["size"] >> size;
-		if(node["text-selection-color"])
-			node["text-selection-color"] >> textSelectionColor;
-		if(node["background-selection-color"])
-			node["background-selection-color"] >> backgroundSelectionColor;
-		if(node["inactive-text-selection-color"])
-			node["inactive-text-selection-color"] >> inactiveTextSelectionColor;
-		if(node["inactive-background-selection-color"])
-			node["inactive-background-selection-color"] >> inactiveBackgroundSelectionColor;
-		
-		if(node["line"]) {
-			BaseLine *line;
-			node["line"] >> line;
-			lines.push_back(line);
-		} else if(node["lines"]) {
-			for(const YAML::Node &nodeLine: node["lines"]) {
-				BaseLine *line;
-				nodeLine >> line;
-				lines.push_back(line);
-			}
-		}
-		
-		if (node["interaction"]) {
-			interactiveTextBlock = new InteractiveTextBlock{node["interaction"].as<IInteraction*>(), text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
-		} else {
-			interactiveTextBlock = new InteractiveTextBlock{node["index"].as<int>(), text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
-		}
-		return true;
-	}
 	
 	bool DecodePointer<InteractiveTextBlock>::decodePointer(const YAML::Node &node, InteractiveTextBlock *&interactiveTextBlock) {
 		std::u32string text;

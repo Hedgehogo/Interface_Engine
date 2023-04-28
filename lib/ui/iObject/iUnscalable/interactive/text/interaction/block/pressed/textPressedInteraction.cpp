@@ -25,25 +25,4 @@ namespace ui {
 		return new TextPressedInteraction{event->copy(), keys, blackListKeys};
 	}
 
-	bool convertPointer(const YAML::Node &node, TextPressedInteraction *&textPressedInteraction) {
-		std::vector<Key> keys;
-		std::vector<Key> blackListKeys{};
-
-		keys.resize(node["keys"].size());
-		uint i{0};
-		for (auto &key: node["keys"]) {
-			key >> keys[i];
-			++i;
-		}
-
-		if (node["black-listKeys"]){
-			i = 0;
-			for (auto& key : node["black-listKeys"]) {
-				key >> blackListKeys[i];
-				++i;
-			}
-		}
-
-		{ textPressedInteraction = new TextPressedInteraction{node["event"].as<KeyEvent*>(), keys, blackListKeys}; return true; }
-	}
 }

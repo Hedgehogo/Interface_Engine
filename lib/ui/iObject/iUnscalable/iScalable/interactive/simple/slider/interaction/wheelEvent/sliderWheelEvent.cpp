@@ -35,15 +35,7 @@ namespace ui {
 		return sliderWheelEvent;
 	}
 	
-	template<>
-	bool convert(const YAML::Node &node, SliderWheelEvent::Relativity &relativity) {
-		if(convertBool(node, "relation-area", "relation-slider")) {
-			relativity = SliderWheelEvent::Relativity::relationArea;
-		} else {
-			relativity = SliderWheelEvent::Relativity::relationSlider;
-		}
-		return true;
-	}
+
 	
 	bool Decode<SliderWheelEvent::Relativity>::decode(const YAML::Node &node, SliderWheelEvent::Relativity &relativity) {
 		if(convertBool(node, "relation-area", "relation-slider")) {

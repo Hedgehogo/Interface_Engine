@@ -21,7 +21,6 @@ namespace ui {
 		HidePanelEvent* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, HidePanelEvent *&hidePanelEvent);
 	
 	template<>
 	struct DecodePointer<HidePanelEvent> {

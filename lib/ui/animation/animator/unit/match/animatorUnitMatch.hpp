@@ -41,16 +41,14 @@ namespace ui {
 		AnimatorUnitMatch<T>* copy() override;
 	};
 	
-	template<typename T>
-	bool convert(const YAML::Node& node, detail::AnimatorUnitMatch::Option<T>& option);
+	
 	
 	template<typename T>
 	struct Decode<detail::AnimatorUnitMatch::Option<T>> {
 		static bool decode(const YAML::Node& node, detail::AnimatorUnitMatch::Option<T>& option);
 	};
 	
-	template<typename T>
-	bool convertPointer(const YAML::Node& node, AnimatorUnitMatch<T>*& animatorUnitMatch);
+	
 	
 	template<typename T>
 	struct DecodePointer<AnimatorUnitMatch<T>> {

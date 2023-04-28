@@ -10,15 +10,7 @@ namespace ui {
 		return fromValue == compared;
 	}
 	
-	template<typename T>
-	bool convertPointer(const YAML::Node &node, SConvertToBoolEquals<T> *&sConvertToBoolEquals) {
-		sConvertToBoolEquals = new SConvertToBoolEquals<T>{
-			getSValue<ISValue<T>>(node["value"]),
-			node["compared"].as<T>()
-		};
-		
-		return true;
-	}
+
 	
 	template<typename T>
 	bool DecodePointer<SConvertToBoolEquals<T>>::decodePointer(const YAML::Node &node, SConvertToBoolEquals<T> *&sConvertToBoolEquals) {

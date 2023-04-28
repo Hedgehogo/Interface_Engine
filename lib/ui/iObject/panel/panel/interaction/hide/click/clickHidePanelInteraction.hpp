@@ -14,7 +14,6 @@ namespace ui {
 		ClickHidePanelInteraction* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, ClickHidePanelInteraction *&clickHidePanelInteraction);
 	
 	template<>
 	struct DecodePointer<ClickHidePanelInteraction> {

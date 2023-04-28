@@ -38,19 +38,6 @@ namespace ui {
 		panel->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxWithPanel *&boxWithPanel) {
-		ConstPanel *panel;
-		IScalable *object;
-		sf::Vector2f minSize{};
-		
-		node["panel"] >> panel;
-		node["object"] >> object;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		boxWithPanel = new BoxWithPanel{panel, object, minSize};
-		return true;
-	}
 	
 	bool DecodePointer<BoxWithPanel>::decodePointer(const YAML::Node &node, BoxWithPanel *&boxWithPanel) {
 		ConstPanel *panel;

@@ -44,32 +44,6 @@ namespace ui {
 		return new ObjectTextBlock{object->copy(), object->getAreaSize(), isCharacter};
 	}
 	
-	bool convertPointer(const YAML::Node &node, ObjectTextBlock *&objectTextBlock) {
-		IScalable* object;
-		
-		node["object"] >> object;
-		
-		if(node["size"]) {
-			sf::Vector2f size{0, 0};
-			bool isCharacter{true};
-			
-			node["size"] >> size;
-			if(node["is-character"])
-				node["is-character"] >> isCharacter;
-			{
-				objectTextBlock = new ObjectTextBlock{object, size, isCharacter};
-				return true;
-			}
-		} else {
-			float height{0};
-			
-			node["height"] >> height;
-			{
-				objectTextBlock = new ObjectTextBlock{object, height};
-				return true;
-			}
-		}
-	}
 	
 	bool DecodePointer<ObjectTextBlock>::decodePointer(const YAML::Node &node, ObjectTextBlock *&objectTextBlock) {
 		IScalable* object;

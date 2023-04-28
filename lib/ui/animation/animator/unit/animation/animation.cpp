@@ -108,14 +108,7 @@ namespace ui {
 		}
 	}
 	
-	template<>
-	bool convert(const YAML::Node& node, Animation::Variable& animationVar) {
-		animationVar = Animation::Variable{
-			Buffer::get<Sfloat>(node["var"]),
-			node["change-variable"] ? std::vector<IChangeVariable*>{node["change-variable"].as<IChangeVariable*>()} : node["change-variables"].as<std::vector<IChangeVariable*>>()
-		};
-		return true;
-	}
+
 	
 	bool Decode<Animation::Variable>::decode(const YAML::Node& node, Animation::Variable& animationVar) {
 		animationVar = Animation::Variable{
@@ -125,48 +118,6 @@ namespace ui {
 		return true;
 	}
 	
-	bool convertPointer(const YAML::Node& node, Animation*& animation) {
-		
-		std::vector<IAnimatorUnit*> nextUnits{};
-		
-		if(node["next"]) {
-			if(!node["next"].IsScalar())
-				nextUnits = {node["next"].as<IAnimatorUnit*>()};
-			else if(node["next"].as<std::string>() == "this")
-				nextUnits = {nullptr};
-		} else if(node["nexts"]) {
-			for(auto& unit: node["nexts"]) {
-				if(!unit.IsScalar())
-					nextUnits.push_back(unit.as<IAnimatorUnit*>());
-				else if(unit.as<std::string>() == "this")
-					nextUnits.push_back(nullptr);
-			}
-		}
-		
-		animation = new Animation{
-			node["var"] ? std::vector<Animation::Variable>{node["var"].as<Animation::Variable>()} : node["vars"].as<std::vector<Animation::Variable>>(),
-			(node["speed"] ? Buffer::get<Sfloat>(node["speed"]) : PSfloat{nullptr}),
-			nextUnits
-		};
-		
-		if(node["next"] && node["next"].IsScalar() && node["next"].as<std::string>() != "this") {
-			animatorUnitRequest[node["next"].as<std::string>()].emplace_back([=](IAnimatorUnit* unit) {
-				animation->addNextUnits(unit);
-			});
-		} else if(node["nexts"]) {
-			for(auto& unit: node["nexts"]) {
-				if(unit.IsScalar() && unit.as<std::string>() != "this")
-					animatorUnitRequest[unit.as<std::string>()].emplace_back([=](IAnimatorUnit* unit) {
-						animation->addNextUnits(unit);
-					});
-			}
-		}
-		
-		if(node["name"])
-			animatorUnitBuffer[node["name"].as<std::string>()] = animation;
-		
-		return true;
-	}
 	
 	bool DecodePointer<Animation>::decodePointer(const YAML::Node& node, Animation*& animation) {
 		

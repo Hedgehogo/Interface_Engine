@@ -54,13 +54,6 @@ namespace ui {
 		}
 	}
 	
-	bool convertPointer(const YAML::Node &node, Animator *&animator) {
-		animator = new Animator{
-			node["unit"] ? std::vector<IAnimatorUnit*>{node["unit"].as<IAnimatorUnit*>()} : node["units"].as<std::vector<IAnimatorUnit*>>(),
-			(node["speed"] ? Buffer::get<Sfloat>(node["speed"]) : std::make_shared<Sfloat>(1))
-		};
-		return true;
-	}
 	
 	bool DecodePointer<Animator>::decodePointer(const YAML::Node &node, Animator *&animator) {
 		animator = new Animator{

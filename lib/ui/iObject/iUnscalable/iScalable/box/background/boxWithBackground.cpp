@@ -54,22 +54,6 @@ namespace ui {
 		
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxWithBackground *&boxWithBackground) {
-		IScalable *object;
-		IUninteractive *background;
-		sf::Vector2f offset{};
-		sf::Vector2f minSize{};
-		
-		node["object"] >> object;
-		node["background"] >> background;
-		if(node["offset"])
-			node["offset"] >> offset;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		boxWithBackground = new BoxWithBackground{object, background, offset, minSize};
-		return true;
-	}
 	
 	bool DecodePointer<BoxWithBackground>::decodePointer(const YAML::Node &node, BoxWithBackground *&boxWithBackground) {
 		IScalable *object;

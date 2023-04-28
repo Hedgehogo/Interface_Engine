@@ -292,14 +292,6 @@ namespace ui {
 		return new Resizer(lineSpacing, align);
 	}
 	
-	bool convertPointer(const YAML::Node &node, Resizer *&resizer) {
-		resizer = new Resizer{
-			convDef(node["line-spacing"], 1.15f),
-			convDef(node["align"], BaseResizer::Align::left),
-			convDef(node["algorithm"], BaseResizer::Algorithm::base)
-		};
-		return true;
-	}
 	
 	bool DecodePointer<Resizer>::decodePointer(const YAML::Node &node, Resizer *&resizer) {
 		resizer = new Resizer{

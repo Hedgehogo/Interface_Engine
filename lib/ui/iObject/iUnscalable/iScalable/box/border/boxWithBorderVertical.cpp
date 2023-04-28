@@ -87,41 +87,6 @@ namespace ui {
 		return boxWithBorderVertical;
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxWithBorderVertical *&boxWithBorderVertical) {
-		sf::Vector2f minSize{};
-		
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		if(node["objects"]) {
-			std::vector<IScalable *> objects(node["objects"].size());
-			
-			for(ullint i = 0; i < node["objects"].size(); ++i) {
-				node["objects"][i] >> objects[i];
-			}
-			if(node["bounds"]) {
-				std::vector<float> bounds(node["bounds"].size());
-				
-				for(ullint i = 0; i < node["bounds"].size(); ++i) {
-					node["bounds"][i] >> bounds[i];
-				}
-				
-				{ boxWithBorderVertical = new BoxWithBorderVertical{objects, bounds, minSize}; return true; }
-			} else {
-				{ boxWithBorderVertical = new BoxWithBorderVertical{objects, minSize}; return true; }
-			}
-		} else {
-			IScalable *firstObject;
-			IScalable *secondObject;
-			float bound{0.5f};
-			
-			node["first-object"] >> firstObject;
-			node["second-object"] >> secondObject;
-			if(node["bound"])
-				node["bound"] >> bound;
-			
-			{ boxWithBorderVertical = new BoxWithBorderVertical{firstObject, secondObject, bound, minSize}; return true; }
-		}
-	}
 	
 	bool DecodePointer<BoxWithBorderVertical>::decodePointer(const YAML::Node &node, BoxWithBorderVertical *&boxWithBorderVertical) {
 		sf::Vector2f minSize{};

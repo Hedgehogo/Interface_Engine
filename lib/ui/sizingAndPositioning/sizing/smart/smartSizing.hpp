@@ -20,7 +20,6 @@ namespace ui {
 		SmartSizing* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, SmartSizing *&smartSizing);
 	
 	template<>
 	struct DecodePointer<SmartSizing> {

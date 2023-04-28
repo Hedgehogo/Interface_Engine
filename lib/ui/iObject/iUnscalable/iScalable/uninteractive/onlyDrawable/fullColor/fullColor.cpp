@@ -37,14 +37,6 @@ namespace ui {
 		return fullColor;
 	}
 	
-	bool convertPointer(const YAML::Node &node, FullColor *&fullColor) {
-		if(node.IsScalar()) {
-			fullColor = new FullColor{node.as<sf::Color>(), {}};
-		} else {
-			fullColor = new FullColor{node["color"].as<sf::Color>(), convDef(node["normal-size"], sf::Vector2f{})};
-		}
-		return true;
-	}
 	
 	bool DecodePointer<FullColor>::decodePointer(const YAML::Node &node, FullColor *&fullColor) {
 		if(node.IsScalar()) {

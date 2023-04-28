@@ -49,7 +49,6 @@ namespace ui {
         InteractiveTextBlock * copy() override;
     };
 	
-	bool convertPointer(const YAML::Node &node, InteractiveTextBlock *&interactiveTextBlock);
 	
 	template<>
 	struct DecodePointer<InteractiveTextBlock> {

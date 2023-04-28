@@ -32,8 +32,7 @@ namespace ui {
 		void setValue(const std::vector<V> &list);
 	};
 	
-	template<typename T>
-	bool convertPointer(const YAML::Node &node, SList<T> *&withList);
+	
 	
 	template<typename T>
 	struct DecodePointer<SList<T>> {

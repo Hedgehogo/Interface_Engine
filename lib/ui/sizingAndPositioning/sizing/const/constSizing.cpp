@@ -13,14 +13,6 @@ namespace ui {
 		return new ConstSizing(size);
 	}
 	
-	bool convertPointer(const YAML::Node &node, ConstSizing *&constSizing) {
-		if(node.IsScalar()) {
-			constSizing = new ConstSizing{node.as<float>()};
-		} else {
-			constSizing = new ConstSizing{node["size"].as<float>()};
-		}
-		return true;
-	}
 	
 	bool DecodePointer<ConstSizing>::decodePointer(const YAML::Node &node, ConstSizing *&constSizing) {
 		if(node.IsScalar()) {

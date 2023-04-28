@@ -45,14 +45,6 @@ namespace ui {
 		return sprite1;
 	}
 	
-	bool convertPointer(const YAML::Node &node, Sprite *&sprite) {
-		if(node["rect"]) {
-			sprite = new Sprite{*node["texture"].as<sf::Texture*>(), node["rect"].as<sf::IntRect>(), convDef(node["min-size"], sf::Vector2f{})};
-		} else {
-			sprite = new Sprite{*node["texture"].as<sf::Texture*>(), convDef(node["min-size"], sf::Vector2f{})};
-		}
-		return true;
-	}
 	
 	bool DecodePointer<Sprite>::decodePointer(const YAML::Node &node, Sprite *&sprite) {
 		if(node["rect"]) {

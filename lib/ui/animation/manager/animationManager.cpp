@@ -31,16 +31,7 @@ namespace ui {
 	}
 	
 
-	template<>
-	bool convert(const YAML::Node &node, AnimationManager &animationManager) {
-		animationManager = AnimationManager{
-			node["animator"] ? std::vector<Animator*>{node["animator"].as<Animator*>()} : node["animators"].as<std::vector<Animator*>>()
-		};
-		
-		animatorUnitRequestUpdate();
-		
-		return true;
-	}
+
 	
 	bool Decode<AnimationManager>::decode(const YAML::Node &node, AnimationManager &animationManager) {
 		animationManager = AnimationManager{

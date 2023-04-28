@@ -22,7 +22,6 @@ namespace ui {
 		Capsule* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, Capsule *&capsule);
 	
 	template<>
 	struct DecodePointer<Capsule> {

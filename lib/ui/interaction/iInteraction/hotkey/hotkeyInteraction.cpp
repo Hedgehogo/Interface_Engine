@@ -80,32 +80,6 @@ namespace ui {
 		}
 	}
 	
-	bool convertPointer(const YAML::Node &node, HotkeyInteraction *&hotkeyInteraction) {
-		std::vector<std::vector<HotkeyInteraction::Hotkey*>> hotkeys;
-		uint startState{0};
-		
-		if(node["start-state"])
-			node["start-state"] >> startState;
-		
-		if(node["hotkeys"]) {
-			hotkeys.resize(node["hotkeys"].size());
-			uint i{0};
-			for(auto& state: node["hotkeys"]) {
-				hotkeys.resize(state.size());
-				uint j{0};
-				for(auto& hotkeyNode: state) {
-					hotkeyNode >> hotkeys[i][j];
-					++j;
-				}
-				++i;
-			}
-		}
-		
-		{
-			hotkeyInteraction = new HotkeyInteraction{hotkeys, startState};
-			return true;
-		}
-	}
 	
 	bool DecodePointer<HotkeyInteraction>::decodePointer(const YAML::Node &node, HotkeyInteraction *&hotkeyInteraction) {
 		std::vector<std::vector<HotkeyInteraction::Hotkey*>> hotkeys;
@@ -134,18 +108,6 @@ namespace ui {
 		}
 	}
 	
-	bool convert(const YAML::Node &node, HotkeyInteraction::Hotkey *&hotkey) {
-		KeysInteraction* interaction{nullptr};
-		int state{INT32_MAX};
-		
-		if(node["state"])
-			node["state"] >> state;
-		if(node["interaction"])
-			node["interaction"] >> interaction;
-		
-		hotkey = new HotkeyInteraction::Hotkey{interaction, state};
-		return true;
-	}
 	
 	bool Decode<HotkeyInteraction::Hotkey*>::decode(const YAML::Node &node, HotkeyInteraction::Hotkey *&hotkey) {
 		KeysInteraction* interaction{nullptr};

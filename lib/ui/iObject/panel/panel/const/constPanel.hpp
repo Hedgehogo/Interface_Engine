@@ -15,7 +15,6 @@ namespace ui {
 		ConstPanel* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, ConstPanel *&constPanel);
 	
 	template<>
 	struct DecodePointer<ConstPanel> {

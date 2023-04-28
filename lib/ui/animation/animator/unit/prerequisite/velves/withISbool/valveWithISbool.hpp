@@ -17,7 +17,6 @@ namespace ui {
 		ValveWithISbool *copy() override;
 	};
 
-	bool convertPointer(const YAML::Node &node, ValveWithISbool *&valveWithISbool);
 	
 	template<>
 	struct DecodePointer<ValveWithISbool> {

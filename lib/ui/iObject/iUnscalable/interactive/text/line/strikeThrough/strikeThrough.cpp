@@ -31,18 +31,6 @@ namespace ui {
 		return underline;
 	}
 	
-	bool convertPointer(const YAML::Node &node, StrikeThrough *&strikeThrough) {
-		sf::Color color{nullColor};
-		float strikeThroughOffset = 0.3;
-		if(node["color"])
-			node["color"] >> color;
-		if(node["strike-through-offset"])
-			node["strike-through-offset"] >> strikeThroughOffset;
-		{
-			strikeThrough = new StrikeThrough{color, strikeThroughOffset};
-			return true;
-		}
-	}
 	
 	bool DecodePointer<StrikeThrough>::decodePointer(const YAML::Node &node, StrikeThrough *&strikeThrough) {
 		sf::Color color{nullColor};

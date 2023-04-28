@@ -20,7 +20,6 @@ namespace ui {
 		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
 	};
 	
-	bool convertPointer(const YAML::Node &node, Empty *&empty);
 	
 	template<>
 	struct DecodePointer<Empty> {

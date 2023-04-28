@@ -51,14 +51,6 @@ namespace ui {
 		delete object;
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxScroll *&boxScroll) {
-		boxScroll = new BoxScroll{
-			node["object"].as<IUnscalable *>(),
-			Buffer::get<SRVec2f>(node["normal-object-position"]),
-			(node["min-size"] ? node["min-size"].as<sf::Vector2f>() : sf::Vector2f{0, 0})
-		};
-		return true;
-	}
 	
 	bool DecodePointer<BoxScroll>::decodePointer(const YAML::Node &node, BoxScroll *&boxScroll) {
 		boxScroll = new BoxScroll{

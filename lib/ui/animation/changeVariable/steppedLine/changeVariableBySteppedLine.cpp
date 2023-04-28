@@ -25,15 +25,7 @@ namespace ui {
 		return new ChangeVariableBySteppedLine{values};
 	}
 	
-	template<>
-	bool convert(const YAML::Node &node, ChangeVariableBySteppedLine::Value &value) {
-		value = ChangeVariableBySteppedLine::Value{
-			node["value"].as<float>(),
-			convDef(node["size"], 0.f),
-		};
-		
-		return true;
-	}
+
 	
 	bool Decode<ChangeVariableBySteppedLine::Value>::decode(const YAML::Node &node, ChangeVariableBySteppedLine::Value &value) {
 		value = ChangeVariableBySteppedLine::Value{
@@ -44,13 +36,6 @@ namespace ui {
 		return true;
 	}
 	
-	bool convertPointer(const YAML::Node &node, ChangeVariableBySteppedLine *&brokenLine) {
-		brokenLine = new ChangeVariableBySteppedLine{
-			node["values"].as<std::vector<ChangeVariableBySteppedLine::Value>>()
-		};
-		
-		return true;
-	}
 	
 	bool DecodePointer<ChangeVariableBySteppedLine>::decodePointer(const YAML::Node &node, ChangeVariableBySteppedLine *&brokenLine) {
 		brokenLine = new ChangeVariableBySteppedLine{

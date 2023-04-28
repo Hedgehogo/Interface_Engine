@@ -17,7 +17,6 @@ namespace ui {
 		EmptyInteraction* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, EmptyInteraction *&emptyInteraction);
 	
 	template<>
 	struct DecodePointer<EmptyInteraction> {

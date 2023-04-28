@@ -12,13 +12,6 @@ namespace ui {
 		return new ValveWithISbool{value};
 	}
 	
-	bool convertPointer(const YAML::Node &node, ValveWithISbool *&valveWithISbool) {
-		valveWithISbool = new ValveWithISbool{
-			Buffer::get<ISbool>(node["value"])
-		};
-		
-		return true;
-	}
 	
 	bool DecodePointer<ValveWithISbool>::decodePointer(const YAML::Node &node, ValveWithISbool *&valveWithISbool) {
 		valveWithISbool = new ValveWithISbool{

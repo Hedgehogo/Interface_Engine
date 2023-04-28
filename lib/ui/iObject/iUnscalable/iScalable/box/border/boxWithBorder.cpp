@@ -154,39 +154,6 @@ namespace ui {
 		return boxWithBorder;
 	}
 	
-	bool convertPointer(const YAML::Node &node, BoxWithBorder *&boxWithBorder) {
-		sf::Vector2f minSize{};
-		sf::Vector2u count(node["objects"].size(), 0);
-		if(count.x != 0)
-			count.y = node["objects"][0].size();
-		std::vector<std::vector<IScalable *>> objects(count.x, std::vector<IScalable *>(count.y, nullptr));
-		
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		for(ullint x = 0; x < count.x; ++x) {
-			for(int y = 0; y < count.y; ++y) {
-				node["objects"][x][y] >> objects[x][y];
-			}
-		}
-		
-		if(node["bounds-vertical"] && node["bounds-horizontal"]) {
-			std::vector<float> boundsVertical(count.y - 1, 0.f);
-			std::vector<float> boundsHorizontal(count.x - 1, 0.f);
-			
-			for(ullint i = 0; i < count.y; ++i) {
-				node["bounds-vertical"][i] >> boundsVertical[i];
-			}
-			for(ullint i = 0; i < count.x; ++i) {
-				node["bounds-horizontal"][i] >> boundsHorizontal[i];
-			}
-			
-			boxWithBorder = new BoxWithBorder{objects, boundsHorizontal, boundsVertical, minSize};
-		} else {
-			boxWithBorder = new BoxWithBorder{objects, minSize};
-		}
-		return true;
-	}
 	
 	bool DecodePointer<BoxWithBorder>::decodePointer(const YAML::Node &node, BoxWithBorder *&boxWithBorder) {
 		sf::Vector2f minSize{};

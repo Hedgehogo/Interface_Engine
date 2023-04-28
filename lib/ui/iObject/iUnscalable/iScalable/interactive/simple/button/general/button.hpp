@@ -16,7 +16,6 @@ namespace ui {
 		Button* copy() override;
 	};
 	
-	bool convertPointer(const YAML::Node &node, Button *&button);
 	
 	template<>
 	struct DecodePointer<Button> {
