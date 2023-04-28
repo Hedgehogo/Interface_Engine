@@ -60,6 +60,9 @@ namespace ui {
 			float timeFromChanger = time - (animationVariable->timeStartChanger);
 			IChangeVariable* changeVariable = animationVariable->changeVariables[animationVariable->activeChanger];
 			
+			timeFromChanger *= speed->getValue();
+			animationVariable->animationVariable->setValue((*changeVariable)(timeFromChanger));
+			
 			if(changeVariable->getSize() < timeFromChanger) {
 				animationVariable->activeChanger++;
 				if(animationVariable->activeChanger == animationVariable->changeVariables.size()) {
@@ -70,9 +73,6 @@ namespace ui {
 				animationVariable->timeStartChanger = time;
 				changeVariable = animationVariable->changeVariables[animationVariable->activeChanger];
 			}
-			
-			timeFromChanger *= speed->getValue();
-			animationVariable->animationVariable->setValue((*changeVariable)(timeFromChanger));
 		}
 		
 		if(animationUpdatableVariables.empty()) {
