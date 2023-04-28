@@ -7,13 +7,13 @@ namespace ui {
 	class BoxWithChangeableObjects : public Box, public LayoutWithObjectsArray, public IDrawable {
 	protected:
 		std::shared_ptr<SValue<uint>> value;
-		std::vector<IScalable *> objects;
+		std::vector<IScalable*> objects;
 		std::vector<DrawManager> drawManagers;
-		
+	
 	public:
-		BoxWithChangeableObjects(std::vector<IScalable *> objects, std::shared_ptr<SValue<uint>> value, sf::Vector2f minSize = {0, 0});
+		BoxWithChangeableObjects(std::vector<IScalable*> objects, std::shared_ptr<SValue<uint>> value, sf::Vector2f minSize = {0, 0});
 		
-		BoxWithChangeableObjects(std::vector<IScalable *> objects, uint index = 0, sf::Vector2f minSize = {0, 0});
+		BoxWithChangeableObjects(std::vector<IScalable*> objects, uint index = 0, sf::Vector2f minSize = {0, 0});
 		
 		void init(InitInfo initInfo) override;
 		
@@ -25,7 +25,7 @@ namespace ui {
 		
 		uint getIndex();
 		
-		IScalable *getObject();
+		IScalable* getObject();
 		
 		void draw() override;
 		
@@ -33,14 +33,14 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
-		BoxWithChangeableObjects *copy() override;
+		BoxWithChangeableObjects* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<BoxWithChangeableObjects> {
-		static bool decodePointer(const YAML::Node &node, BoxWithChangeableObjects *&boxWithChangeableObjects);
+		static bool decodePointer(const YAML::Node& node, BoxWithChangeableObjects*& boxWithChangeableObjects);
 	};
 }

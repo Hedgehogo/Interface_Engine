@@ -13,7 +13,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<ValveWithISbool>::decodePointer(const YAML::Node &node, ValveWithISbool *&valveWithISbool) {
+	bool DecodePointer<ValveWithISbool>::decodePointer(const YAML::Node& node, ValveWithISbool*& valveWithISbool) {
 		valveWithISbool = new ValveWithISbool{
 			Buffer::get<ISbool>(node["value"])
 		};

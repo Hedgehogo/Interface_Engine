@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../onlyDrawable.hpp"
 #include "../../../../../layout/layout.hpp"
 
@@ -9,7 +10,7 @@ namespace ui {
 		sf::RectangleShape verticalRectangle;
 		sf::CircleShape circle;
 		float radius;
-		
+	
 	public:
 		RoundedRectangle(sf::Color color, float radius);
 		
@@ -27,9 +28,9 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<RoundedRectangle> {
-		static bool decodePointer(const YAML::Node &node, RoundedRectangle *&roundedRectangle);
+		static bool decodePointer(const YAML::Node& node, RoundedRectangle*& roundedRectangle);
 	};
 	
 	template<>
-	bool determine<RoundedRectangle>(const YAML::Node &node);
+	bool determine<RoundedRectangle>(const YAML::Node& node);
 }

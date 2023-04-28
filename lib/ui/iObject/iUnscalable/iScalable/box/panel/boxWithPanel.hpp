@@ -7,12 +7,12 @@
 namespace ui {
 	class BoxWithPanel : public Box, public LayoutWithObject {
 	protected:
-		ConstPanel *panel;
+		ConstPanel* panel;
 	
 	public:
 		void init(InitInfo initInfo) override;
 		
-		BoxWithPanel(ConstPanel *panel, IScalable *object, sf::Vector2f minSize = {});
+		BoxWithPanel(ConstPanel* panel, IScalable* object, sf::Vector2f minSize = {});
 		
 		~BoxWithPanel() override;
 		
@@ -22,15 +22,15 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() override;
 		
-		BoxWithPanel *copy() override;
+		BoxWithPanel* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<BoxWithPanel> {
-		static bool decodePointer(const YAML::Node &node, BoxWithPanel *&boxWithPanel);
+		static bool decodePointer(const YAML::Node& node, BoxWithPanel*& boxWithPanel);
 	};
 	
 	using BoxWPanel = BoxWithPanel;

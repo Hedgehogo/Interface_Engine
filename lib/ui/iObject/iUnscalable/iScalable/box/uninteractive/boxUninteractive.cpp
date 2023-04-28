@@ -1,7 +1,7 @@
 #include "boxUninteractive.hpp"
 
 namespace ui {
-	BoxUninteractive::BoxUninteractive(IScalable *object, sf::Vector2f minSize) : LayoutWithObject(object), Box(minSize) {
+	BoxUninteractive::BoxUninteractive(IScalable* object, sf::Vector2f minSize) : LayoutWithObject(object), Box(minSize) {
 	}
 	
 	void BoxUninteractive::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -13,8 +13,8 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<BoxUninteractive>::decodePointer(const YAML::Node &node, BoxUninteractive *&boxUninteractive) {
-		IScalable *object;
+	bool DecodePointer<BoxUninteractive>::decodePointer(const YAML::Node& node, BoxUninteractive*& boxUninteractive) {
+		IScalable* object;
 		sf::Vector2f minSize;
 		node["object"] >> object;
 		if(node["min-size"])
@@ -23,7 +23,7 @@ namespace ui {
 		return true;
 	}
 	
-	BoxUninteractive *BoxUninteractive::copy() {
+	BoxUninteractive* BoxUninteractive::copy() {
 		return new BoxUninteractive{object->copy(), minimumSize};
 	}
 }

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../iSizing.hpp"
 
 namespace ui {
@@ -7,13 +8,13 @@ namespace ui {
 		float normalSize;
 		
 		void copy(RelativeNormalSizing* relativeNormalSizing);
-		
+	
 	public:
 		RelativeNormalSizing();
 		
 		void init(float normalSize) override;
 		
-		float findSize(float,float) override;
+		float findSize(float, float) override;
 		
 		RelativeNormalSizing* copy() override;
 	};
@@ -21,6 +22,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<RelativeNormalSizing> {
-		static bool decodePointer(const YAML::Node &node, RelativeNormalSizing *&relativeNormalSizing);
+		static bool decodePointer(const YAML::Node& node, RelativeNormalSizing*& relativeNormalSizing);
 	};
 }

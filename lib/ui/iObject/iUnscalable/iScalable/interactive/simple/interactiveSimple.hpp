@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../../interactive/interactive.hpp"
 
 namespace ui {
@@ -6,12 +7,12 @@ namespace ui {
 	private:
 		bool interact;
 		bool oldInteract;
-		
+	
 	protected:
 		IInteraction* interaction;
 		
 		void copy(Interactive_Simple* interactive_Simple);
-		
+	
 	public:
 		explicit Interactive_Simple(IInteraction* interaction);
 		

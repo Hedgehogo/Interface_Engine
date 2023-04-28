@@ -1,7 +1,8 @@
 #include "relativeNormalSizing.hpp"
 
 namespace ui {
-	RelativeNormalSizing::RelativeNormalSizing() : normalSize(0) {}
+	RelativeNormalSizing::RelativeNormalSizing() : normalSize(0) {
+	}
 	
 	void RelativeNormalSizing::init(float normalSize) {
 		this->normalSize = normalSize;
@@ -11,18 +12,21 @@ namespace ui {
 		return this->normalSize;
 	}
 	
-	void RelativeNormalSizing::copy(RelativeNormalSizing *relativeNormalSizing) {
+	void RelativeNormalSizing::copy(RelativeNormalSizing* relativeNormalSizing) {
 		relativeNormalSizing->normalSize = this->normalSize;
 	}
 	
-	RelativeNormalSizing *RelativeNormalSizing::copy() {
+	RelativeNormalSizing* RelativeNormalSizing::copy() {
 		RelativeNormalSizing* normalSizeSizing{new RelativeNormalSizing{}};
 		RelativeNormalSizing::copy(normalSizeSizing);
 		return normalSizeSizing;
 	}
 	
 	
-	bool DecodePointer<RelativeNormalSizing>::decodePointer(const YAML::Node &node, RelativeNormalSizing *&relativeNormalSizing) {
-		{ relativeNormalSizing = new RelativeNormalSizing{}; return true; }
+	bool DecodePointer<RelativeNormalSizing>::decodePointer(const YAML::Node& node, RelativeNormalSizing*& relativeNormalSizing) {
+		{
+			relativeNormalSizing = new RelativeNormalSizing{};
+			return true;
+		}
 	}
 }

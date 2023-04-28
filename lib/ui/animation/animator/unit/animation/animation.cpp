@@ -108,7 +108,6 @@ namespace ui {
 		}
 	}
 	
-
 	
 	bool Decode<Animation::Variable>::decode(const YAML::Node& node, Animation::Variable& animationVar) {
 		animationVar = Animation::Variable{

@@ -1,7 +1,8 @@
 #include "keyEventSimple.hpp"
 
 namespace ui {
-	KeyEvent_Simple::KeyEvent_Simple() : KeyEvent(), mousePosition({0, 0}) {}
+	KeyEvent_Simple::KeyEvent_Simple() : KeyEvent(), mousePosition({0, 0}) {
+	}
 	
 	void KeyEvent_Simple::setPressed(bool pressed) {
 		if(this->pressed != pressed) {

@@ -79,7 +79,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<TextBlock>::decodePointer(const YAML::Node &node, TextBlock *&textBlock) {
+	bool DecodePointer<TextBlock>::decodePointer(const YAML::Node& node, TextBlock*& textBlock) {
 		if(node.IsScalar()) {
 			textBlock = new TextBlock{node.as<std::u32string>()};
 			return true;

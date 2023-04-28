@@ -167,7 +167,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<Caption>::decodePointer(const YAML::Node &node, Caption *&caption) {
+	bool DecodePointer<Caption>::decodePointer(const YAML::Node& node, Caption*& caption) {
 		sf::String text;
 		IUninteractive* background;
 		sf::Font* font;

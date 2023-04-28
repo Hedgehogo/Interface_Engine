@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../layout.hpp"
 #include "../../iUnscalable/iScalable/iScalable.hpp"
 
@@ -17,9 +18,9 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
-
+		
 		virtual uint getArraySize();
-
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 }

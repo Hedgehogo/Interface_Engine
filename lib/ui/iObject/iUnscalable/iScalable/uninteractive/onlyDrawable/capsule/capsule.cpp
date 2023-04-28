@@ -39,8 +39,8 @@ namespace ui {
 		return {1, 1};
 	}
 	
-	Capsule *Capsule::copy() {
-		Capsule *capsule{new Capsule{circle.getFillColor()}};
+	Capsule* Capsule::copy() {
+		Capsule* capsule{new Capsule{circle.getFillColor()}};
 		OnlyDrawable::copy(capsule);
 		Layout::copy(capsule);
 		capsule->resize(size, position);
@@ -48,9 +48,12 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<Capsule>::decodePointer(const YAML::Node &node, Capsule *&capsule) {
+	bool DecodePointer<Capsule>::decodePointer(const YAML::Node& node, Capsule*& capsule) {
 		sf::Color color;
 		node["color"] >> color;
-		{ capsule = new Capsule{color}; return true; }
+		{
+			capsule = new Capsule{color};
+			return true;
+		}
 	}
 }

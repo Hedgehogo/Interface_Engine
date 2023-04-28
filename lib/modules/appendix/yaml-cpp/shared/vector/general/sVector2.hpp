@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../value/range/sRangeValue.hpp"
 #include "../iSVector2.hpp"
 
@@ -16,7 +17,7 @@ namespace ui {
 		void set();
 	
 	public:
-		SVector2(const sf::Vector2<V> &vector = {});
+		SVector2(const sf::Vector2<V>& vector = {});
 		
 		SVector2(std::shared_ptr<T> x, std::shared_ptr<T> y);
 		
@@ -32,28 +33,27 @@ namespace ui {
 		
 		V getX() const;
 		
-		void setX(const V &value);
+		void setX(const V& value);
 		
 		V getY() const;
 		
-		void setY(const V &value);
+		void setY(const V& value);
 		
 		sf::Vector2<V> getValue() const;
 		
-		void setValue(const sf::Vector2<V> &vector);
+		void setValue(const sf::Vector2<V>& vector);
 	};
-	
 	
 	
 	template<typename T>
 	struct DecodePointer<SVector2<T>> {
-		static bool decodePointer(const YAML::Node &node, SVector2<T> *&withVector2);
+		static bool decodePointer(const YAML::Node& node, SVector2<T>*& withVector2);
 	};
 	
-	template <typename T>
+	template<typename T>
 	using SVec2 = SVector2<T>;
 	
-	template <typename T>
+	template<typename T>
 	using PSVec2 = std::shared_ptr<SVec2<T>>;
 	
 	template<typename T>

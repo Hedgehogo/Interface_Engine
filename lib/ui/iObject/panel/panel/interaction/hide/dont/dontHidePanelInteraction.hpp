@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../hidePanelInteraction.hpp"
 #include "../../../../../../interaction/iInteraction/empty/emptyInteraction.hpp"
 
@@ -7,7 +8,7 @@ namespace ui {
 	public:
 		DontHidePanelInteraction() = default;
 		
-		void init(Panel& panel, IPanelManager &panelManager) override;
+		void init(Panel& panel, IPanelManager& panelManager) override;
 		
 		void setPanel(Panel& panel) override;
 		
@@ -17,6 +18,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<DontHidePanelInteraction> {
-		static bool decodePointer(const YAML::Node &node, DontHidePanelInteraction *&dontHidePanelInteraction);
+		static bool decodePointer(const YAML::Node& node, DontHidePanelInteraction*& dontHidePanelInteraction);
 	};
 }

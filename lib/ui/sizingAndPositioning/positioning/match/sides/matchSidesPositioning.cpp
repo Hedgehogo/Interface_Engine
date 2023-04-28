@@ -2,29 +2,40 @@
 
 namespace ui {
 	
-	MatchSidesPositioning::MatchSidesPositioning(Location parentSide, Location objectSide, float offset) : parentSide(parentSide), objectSide(objectSide), offset(offset) {}
+	MatchSidesPositioning::MatchSidesPositioning(Location parentSide, Location objectSide, float offset) : parentSide(parentSide), objectSide(objectSide), offset(offset) {
+	}
 	
 	float MatchSidesPositioning::findPosition(float parentPosition, float objectSize, float parentSize, float) {
 		float position{parentPosition + offset};
 		switch(parentSide) {
-			case Location::origin: break;
-			case Location::center: position += parentSize * 0.5f; break;
-			case Location::end: position += parentSize; break;
+			case Location::origin:
+				break;
+			case Location::center:
+				position += parentSize * 0.5f;
+				break;
+			case Location::end:
+				position += parentSize;
+				break;
 		}
 		switch(objectSide) {
-			case Location::origin: break;
-			case Location::center: position -= objectSize * 0.5f; break;
-			case Location::end: position -= objectSize; break;
+			case Location::origin:
+				break;
+			case Location::center:
+				position -= objectSize * 0.5f;
+				break;
+			case Location::end:
+				position -= objectSize;
+				break;
 		}
 		return position;
 	}
 	
-	MatchSidesPositioning *MatchSidesPositioning::copy() {
+	MatchSidesPositioning* MatchSidesPositioning::copy() {
 		return new MatchSidesPositioning{parentSide, objectSide, offset};
 	}
 	
 	
-	bool DecodePointer<MatchSidesPositioning>::decodePointer(const YAML::Node &node, MatchSidesPositioning *&matchSidesPositioning) {
+	bool DecodePointer<MatchSidesPositioning>::decodePointer(const YAML::Node& node, MatchSidesPositioning*& matchSidesPositioning) {
 		Location parentSide;
 		Location objectSide;
 		float offset{0.f};
@@ -34,7 +45,10 @@ namespace ui {
 		if(node["offset"])
 			node["offset"] >> offset;
 		
-		{ matchSidesPositioning = new MatchSidesPositioning{parentSide, objectSide, offset}; return true; }
+		{
+			matchSidesPositioning = new MatchSidesPositioning{parentSide, objectSide, offset};
+			return true;
+		}
 	}
 	
 	/*Positioning *makePosition(Location parentSide, Location objectSide, float offset) {

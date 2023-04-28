@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../../click/event/panelEvent.hpp"
 #include "../../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
@@ -20,6 +21,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<DisplayPanelEvent> {
-		static bool decodePointer(const YAML::Node &node, DisplayPanelEvent *&displayPanelEvent);
+		static bool decodePointer(const YAML::Node& node, DisplayPanelEvent*& displayPanelEvent);
 	};
 }

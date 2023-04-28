@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../baseSlider.hpp"
 
 namespace ui {
@@ -7,13 +8,13 @@ namespace ui {
 		float aspectRatio;
 		float sliderScale;
 		
-		ConstSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f& value, SliderInteraction *interaction);
-		
+		ConstSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, SliderInteraction* interaction);
+	
 	public:
-		ConstSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f& value, float sliderScale = 1.0f, Key key = Key::mouseLeft,
+		ConstSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, float sliderScale = 1.0f, Key key = Key::mouseLeft,
 					bool wheelHorizontal = false, SliderWheelEvent::Relativity wheelRelativity = SliderWheelEvent::Relativity::relationArea, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
 		
-		ConstSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f& value, sf::Vector2i division, float sliderScale = 1.0f, Key key = Key::mouseLeft, bool wheelHorizontal = false);
+		ConstSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, sf::Vector2i division, float sliderScale = 1.0f, Key key = Key::mouseLeft, bool wheelHorizontal = false);
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -23,6 +24,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<ConstSlider> {
-		static bool decodePointer(const YAML::Node &node, ConstSlider *&constSlider);
+		static bool decodePointer(const YAML::Node& node, ConstSlider*& constSlider);
 	};
 }

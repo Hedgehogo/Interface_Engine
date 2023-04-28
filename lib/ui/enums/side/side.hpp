@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
@@ -10,9 +11,8 @@ namespace ui {
 	};
 	
 	
-	
 	template<>
 	struct Decode<Side> {
-		static bool decode(const YAML::Node &node, Side &side);
+		static bool decode(const YAML::Node& node, Side& side);
 	};
 }

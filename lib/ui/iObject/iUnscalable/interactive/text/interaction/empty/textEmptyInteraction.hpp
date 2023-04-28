@@ -5,16 +5,16 @@
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-
-    class TextEmptyInteraction : public EmptyInteraction, public TextInteraction{
-    public:
-        TextEmptyInteraction * copy() override;
-    };
+	
+	class TextEmptyInteraction : public EmptyInteraction, public TextInteraction {
+	public:
+		TextEmptyInteraction* copy() override;
+	};
 	
 	
 	template<>
 	struct DecodePointer<TextEmptyInteraction> {
-		static bool decodePointer(const YAML::Node &node, TextEmptyInteraction *&textEmptyInteraction);
+		static bool decodePointer(const YAML::Node& node, TextEmptyInteraction*& textEmptyInteraction);
 	};
-
+	
 }

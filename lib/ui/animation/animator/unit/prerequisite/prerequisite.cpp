@@ -79,8 +79,7 @@ namespace ui {
 	}
 	
 	
-	
-	bool DecodePointer<Prerequisite>::decodePointer(const YAML::Node &node, Prerequisite *&prerequisite) {
+	bool DecodePointer<Prerequisite>::decodePointer(const YAML::Node& node, Prerequisite*& prerequisite) {
 		prerequisite = new Prerequisite{
 			node["valve"].as<IValve*>(),
 			getAnimatorUnits(node, "next-true"),

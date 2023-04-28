@@ -8,7 +8,7 @@
 namespace ui {
 	class BoxWithSetableObject : public IDrawable, public IUpdatable, public LayoutWithObject {
 	protected:
-		IScalable *object = nullptr;
+		IScalable* object = nullptr;
 		
 		sf::Vector2f minSize;
 		
@@ -16,22 +16,22 @@ namespace ui {
 		
 		UpdateManager updateManager;
 		
-		sf::RenderTarget *renderTarget;
+		sf::RenderTarget* renderTarget;
 		
 		InteractionManager interactionManager;
 		
-		InteractionStack *interactionStack;
+		InteractionStack* interactionStack;
 		
 		PanelManagerInterceptor panelManagerInterceptor;
 	
 	public:
-		BoxWithSetableObject(sf::Vector2f minSize, IScalable *object);
+		BoxWithSetableObject(sf::Vector2f minSize, IScalable* object);
 		
 		void init(InitInfo initInfo) override;
 		
-		void setObject(IScalable *newObject, bool deleteOld);
+		void setObject(IScalable* newObject, bool deleteOld);
 		
-		IScalable *getObject();
+		IScalable* getObject();
 		
 		void draw() override;
 		

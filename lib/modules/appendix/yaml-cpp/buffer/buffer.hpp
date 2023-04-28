@@ -6,12 +6,12 @@
 #include "../yamlBuilder/general/yamlBuilder.hpp"
 
 namespace ui {
-	template <bool Condition, typename TrueType, typename FalseType>
+	template<bool Condition, typename TrueType, typename FalseType>
 	struct select_if_ { using type = TrueType; };
-	template <typename TrueType, typename FalseType>
+	template<typename TrueType, typename FalseType>
 	struct select_if_<false, TrueType, FalseType> { using type = FalseType; };
 	
-	template <bool Condition, typename TrueType, typename FalseType>
+	template<bool Condition, typename TrueType, typename FalseType>
 	using select_if = typename select_if_<Condition, TrueType, FalseType>::type;
 }
 
@@ -33,16 +33,16 @@ namespace ui {
 		static std::map<std::string, PIShared>& getLevel();
 		
 		template<typename T>
-		static void insert(const std::string& name, const YAML::Node &node);
+		static void insert(const std::string& name, const YAML::Node& node);
 		
 		static PIShared getVariable(const PIShared& var, std::vector<std::string>& names);
-		
+	
 	public:
 		Buffer() = default;
 		
 		static bool existAtLevel(const std::string& name);
 		
-		static bool exist(const YAML::Node &node);
+		static bool exist(const YAML::Node& node);
 		
 		static void raiseNestingLevel();
 		
@@ -51,23 +51,23 @@ namespace ui {
 		static void readLevel(std::function<void()> function);
 		
 		template<typename T, typename... A>
-		static void emplace(const std::string& name, A&&... args);
+		static void emplace(const std::string& name, A&& ... args);
 		
 		template<typename T>
-		static void insert(const YAML::Node &node);
+		static void insert(const YAML::Node& node);
 		
 		template<typename T>
 		static std::shared_ptr<T> at(const std::string& fullName);
 		
 		template<typename T>
-		static std::shared_ptr<T> get(const YAML::Node &node, bool createIfNotExist = true);
+		static std::shared_ptr<T> get(const YAML::Node& node, bool createIfNotExist = true);
 	};
 	
 	template<typename T>
 	std::shared_ptr<T> atSValue(std::string name);
 	
 	template<typename T, typename... A>
-	void emplaceSValue(const std::string& name, A&&... args);
+	void emplaceSValue(const std::string& name, A&& ... args);
 }
 
 #include "buffer.inl"

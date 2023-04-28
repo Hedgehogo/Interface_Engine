@@ -1,7 +1,8 @@
 #include "layoutWithObjectsArray.hpp"
 
 namespace ui {
-	LayoutWithObjectsArray::LayoutWithObjectsArray(std::vector<IScalable *> objects) : objects(objects) {}
+	LayoutWithObjectsArray::LayoutWithObjectsArray(std::vector<IScalable*> objects) : objects(objects) {
+	}
 	
 	void
 	LayoutWithObjectsArray::init(InitInfo initInfo) {
@@ -31,13 +32,12 @@ namespace ui {
 		}
 		return normalSize;
 	}
-
-	uint LayoutWithObjectsArray::getArraySize()
-	{
+	
+	uint LayoutWithObjectsArray::getArraySize() {
 		return objects.size();
 	}
-
-	void LayoutWithObjectsArray::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	
+	void LayoutWithObjectsArray::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		for(auto object: objects) {
 			object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);;

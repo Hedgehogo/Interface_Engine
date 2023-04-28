@@ -10,7 +10,7 @@ namespace ui {
 		int objectsSize;
 		std::shared_ptr<SValue<uint>> index;
 		int offset;
-
+		
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -18,16 +18,16 @@ namespace ui {
 		void whilePressed() override;
 		
 		void whileNotPressed() override;
-		
+	
 	public:
-		WhileChangingObjectsEvent(BoxWithChangeableObjects *objects = nullptr, int offset = 1 );
-
+		WhileChangingObjectsEvent(BoxWithChangeableObjects* objects = nullptr, int offset = 1);
+		
 		WhileChangingObjectsEvent* copy() override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<WhileChangingObjectsEvent> {
-		static bool decodePointer(const YAML::Node &node, WhileChangingObjectsEvent *&whileChangingObjectsEvent);
+		static bool decodePointer(const YAML::Node& node, WhileChangingObjectsEvent*& whileChangingObjectsEvent);
 	};
 }

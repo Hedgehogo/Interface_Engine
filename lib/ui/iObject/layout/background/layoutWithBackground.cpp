@@ -1,7 +1,8 @@
 #include "layoutWithBackground.hpp"
 
 namespace ui {
-	LayoutWithBackground::LayoutWithBackground(IUninteractive *background) : background(background) {}
+	LayoutWithBackground::LayoutWithBackground(IUninteractive* background) : background(background) {
+	}
 	
 	void LayoutWithBackground::init(InitInfo initInfo) {
 		background->init(initInfo);
@@ -24,7 +25,7 @@ namespace ui {
 		return background->getNormalSize();
 	}
 	
-	void LayoutWithBackground::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void LayoutWithBackground::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
 }

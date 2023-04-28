@@ -1,7 +1,7 @@
 #include "boxScroll.hpp"
 
 namespace ui {
-	BoxScroll::BoxScroll(IUnscalable *object, const PSRVec2f &normalObjectPosition, const sf::Vector2f &minSize) :
+	BoxScroll::BoxScroll(IUnscalable* object, const PSRVec2f& normalObjectPosition, const sf::Vector2f& minSize) :
 		IBoxWithView(minSize), object(object), normalObjectPosition(normalObjectPosition) {
 		normalObjectPosition->addSetter([&](sf::Vector2f vec) {
 			this->object->setPosition(getNewObjectPosition(vec));
@@ -43,7 +43,7 @@ namespace ui {
 		return object->updateInteractions(mousePosition);
 	}
 	
-	BoxScroll *BoxScroll::copy() {
+	BoxScroll* BoxScroll::copy() {
 		return new BoxScroll{object->copy(), normalObjectPosition, minimumSize};
 	}
 	
@@ -52,9 +52,9 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<BoxScroll>::decodePointer(const YAML::Node &node, BoxScroll *&boxScroll) {
+	bool DecodePointer<BoxScroll>::decodePointer(const YAML::Node& node, BoxScroll*& boxScroll) {
 		boxScroll = new BoxScroll{
-			node["object"].as<IUnscalable *>(),
+			node["object"].as<IUnscalable*>(),
 			Buffer::get<SRVec2f>(node["normal-object-position"]),
 			(node["min-size"] ? node["min-size"].as<sf::Vector2f>() : sf::Vector2f{0, 0})
 		};

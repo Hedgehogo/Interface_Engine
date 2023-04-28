@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../onlyDrawable.hpp"
 #include "../../../../../layout/layout.hpp"
 
@@ -7,7 +8,7 @@ namespace ui {
 	protected:
 		sf::RectangleShape rectangle;
 		sf::CircleShape circle;
-		
+	
 	public:
 		Capsule(sf::Color color);
 		
@@ -25,6 +26,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<Capsule> {
-		static bool decodePointer(const YAML::Node &node, Capsule *&capsule);
+		static bool decodePointer(const YAML::Node& node, Capsule*& capsule);
 	};
 }

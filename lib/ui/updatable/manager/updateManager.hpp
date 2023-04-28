@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vector>
 #include "../iUpdatable/iUpdatable.hpp"
 
@@ -10,7 +11,7 @@ namespace ui {
 	public:
 		UpdateManager() = default;
 		
-		void add(IUpdatable &updatable);
+		void add(IUpdatable& updatable);
 		
 		void clear();
 		

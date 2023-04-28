@@ -1,7 +1,7 @@
 #include "updateManager.hpp"
 
 namespace ui {
-	void UpdateManager::add(IUpdatable &updatable) {
+	void UpdateManager::add(IUpdatable& updatable) {
 		updatables.push_back(&updatable);
 	}
 	
@@ -10,7 +10,7 @@ namespace ui {
 	}
 	
 	void UpdateManager::update() {
-		for(auto &updatable: updatables) {
+		for(auto& updatable: updatables) {
 			updatable->update();
 		}
 	}

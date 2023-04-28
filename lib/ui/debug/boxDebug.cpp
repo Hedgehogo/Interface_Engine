@@ -2,8 +2,9 @@
 #include <cmath>
 
 namespace ui {
-	BoxDebug::BoxDebug(IScalable *object) :
-		Box({}), object(object), renderTarget(nullptr), active(false), drawn(false) {}
+	BoxDebug::BoxDebug(IScalable* object) :
+		Box({}), object(object), renderTarget(nullptr), active(false), drawn(false) {
+	}
 	
 	void BoxDebug::init(InitInfo initInfo) {
 		object->init(initInfo);
@@ -38,12 +39,12 @@ namespace ui {
 		return object->getNormalSize();
 	}
 	
-	BoxDebug *BoxDebug::copy() {
+	BoxDebug* BoxDebug::copy() {
 		BoxDebug* boxDebug{new BoxDebug{object->copy()}};
 		return boxDebug;
 	}
 	
-	void BoxDebug::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BoxDebug::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		sf::Vector2f size{this->getAreaSize() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2, indent * 2})};
 		size = {std::round(size.x - 2.0f), std::round(size.y - 2.0f)};
 		sf::Vector2f position{this->getAreaPosition() + static_cast<sf::Vector2f>(sf::Vector2i{indent, indent})};
@@ -55,9 +56,9 @@ namespace ui {
 			
 			if(drawn && active) {
 				rectangle.setFillColor(sf::Color(0, 255, 0, 60));
-			} else if (drawn) {
+			} else if(drawn) {
 				rectangle.setFillColor(sf::Color(255, 255, 0, 60));
-			} else if (active) {
+			} else if(active) {
 				rectangle.setFillColor(sf::Color(255, 0, 0, 60));
 			}
 			
@@ -71,8 +72,8 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<BoxDebug>::decodePointer(const YAML::Node &node, BoxDebug *&boxDebug) {
-		boxDebug = new BoxDebug{node["object"].as<IScalable *>()};
+	bool DecodePointer<BoxDebug>::decodePointer(const YAML::Node& node, BoxDebug*& boxDebug) {
+		boxDebug = new BoxDebug{node["object"].as<IScalable*>()};
 		return true;
 	}
 }

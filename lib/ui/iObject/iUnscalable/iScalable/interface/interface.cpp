@@ -13,31 +13,34 @@ namespace ui {
 		}
 	}
 	
-	void Interface::init(sf::RenderTarget &renderTarget) {
+	void Interface::init(sf::RenderTarget& renderTarget) {
 		if(!initialized) {
 			this->renderTarget = &renderTarget;
 			InitInfo initInfo{renderTarget, drawManager, updateManager, interactionManager, *interactionStack, panelManager};
 			object->init(initInfo);
-            sf::Vector2f size (max(static_cast<sf::Vector2f>(renderTarget.getSize()), object->getMinSize()));
-			resize(size,sf::Vector2f(0, 0));
+			sf::Vector2f size(max(static_cast<sf::Vector2f>(renderTarget.getSize()), object->getMinSize()));
+			resize(size, sf::Vector2f(0, 0));
 			initialized = true;
 		}
 	}
 	
-	Interface::Interface(IScalable *object, AnimationManager animationManager, InteractionStack *interactionStack) :
-		object(object), animationManager(std::move(animationManager)), interactionStack(interactionStack), renderTarget(nullptr), interactionManager(), panelManager(), initialized(false), active(true) {}
+	Interface::Interface(IScalable* object, AnimationManager animationManager, InteractionStack* interactionStack) :
+		object(object), animationManager(std::move(animationManager)), interactionStack(interactionStack), renderTarget(nullptr), interactionManager(), panelManager(), initialized(false), active(true) {
+	}
 	
-	Interface::Interface(const std::string &filePath, AnimationManager animationManager, InteractionStack *interactionStack) :
-		Interface(ui::loadFromYaml<ui::IScalable>(filePath), animationManager, interactionStack) {}
-
-	Interface::Interface(sf::RenderTarget &renderTarget, IScalable *object, AnimationManager animationManager, InteractionStack *interactionStack) :
+	Interface::Interface(const std::string& filePath, AnimationManager animationManager, InteractionStack* interactionStack) :
+		Interface(ui::loadFromYaml<ui::IScalable>(filePath), animationManager, interactionStack) {
+	}
+	
+	Interface::Interface(sf::RenderTarget& renderTarget, IScalable* object, AnimationManager animationManager, InteractionStack* interactionStack) :
 		Interface(object, animationManager, interactionStack) {
 		init(renderTarget);
 	}
-
-	Interface::Interface(sf::RenderTarget &renderTarget, const std::string &filePath, AnimationManager animationManager, InteractionStack *interactionStack) :
-		Interface(renderTarget, ui::loadFromYaml<ui::IScalable>(filePath), animationManager, interactionStack) {}
-
+	
+	Interface::Interface(sf::RenderTarget& renderTarget, const std::string& filePath, AnimationManager animationManager, InteractionStack* interactionStack) :
+		Interface(renderTarget, ui::loadFromYaml<ui::IScalable>(filePath), animationManager, interactionStack) {
+	}
+	
 	Interface::~Interface() {
 		delete object;
 	}
@@ -74,7 +77,7 @@ namespace ui {
 	void Interface::updateCluster(sf::Vector2f mousePosition) {
 		interactionManager.update(sf::Vector2i(mousePosition));
 	}
-
+	
 	void Interface::update() {
 		animationManager.update();
 		panelManager.update();
@@ -102,52 +105,52 @@ namespace ui {
 		}
 		return true;
 	}
-
-	Interface *Interface::copy() {
-		Interface* interface {new Interface{object->copy(), *animationManager.copy(), interactionStack}};
+	
+	Interface* Interface::copy() {
+		Interface* interface{new Interface{object->copy(), *animationManager.copy(), interactionStack}};
 		interface->init(*renderTarget);
 		return interface;
 	}
 	
-	void Interface::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-        object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+	void Interface::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+		object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
-
-	sf::RenderTarget *Interface::getRenderTarget() {
+	
+	sf::RenderTarget* Interface::getRenderTarget() {
 		return renderTarget;
 	}
-
-	DrawManager *Interface::getDrawManager() {
+	
+	DrawManager* Interface::getDrawManager() {
 		return &drawManager;
 	}
-
-	UpdateManager *Interface::getUpdateManager() {
+	
+	UpdateManager* Interface::getUpdateManager() {
 		return &updateManager;
 	}
-
-	InteractionManager *Interface::getInteractionManager() {
+	
+	InteractionManager* Interface::getInteractionManager() {
 		return &interactionManager;
 	}
-
-	InteractionStack *Interface::getInteractionStack() {
+	
+	InteractionStack* Interface::getInteractionStack() {
 		return interactionStack;
 	}
-
-	PanelManager *Interface::getPanelManager() {
+	
+	PanelManager* Interface::getPanelManager() {
 		return &panelManager;
 	}
-
-	IScalable *Interface::getObject() {
+	
+	IScalable* Interface::getObject() {
 		return object;
 	}
-
-	void Interface::setRenderWindowSize(sf::RenderWindow &window) {
+	
+	void Interface::setRenderWindowSize(sf::RenderWindow& window) {
 		window.setSize(sf::Vector2u(ui::max(getNormalSize(), sf::Vector2f(window.getSize()))));
 		setSize(sf::Vector2f(window.getSize()));
 	}
-
 	
-	bool DecodePointer<Interface>::decodePointer(const YAML::Node &node, Interface *&interface) {
+	
+	bool DecodePointer<Interface>::decodePointer(const YAML::Node& node, Interface*& interface) {
 		interface = new Interface{
 			node["object"].as<IScalable*>(),
 			convDef(node["animation-manager"], AnimationManager{}),
@@ -155,21 +158,21 @@ namespace ui {
 		};
 		return true;
 	}
-
-	Interface makeInterface(sf::RenderTarget &renderTarget, const std::string &filePath) {
+	
+	Interface makeInterface(sf::RenderTarget& renderTarget, const std::string& filePath) {
 		YAML::Node node{YAML::LoadFile(filePath)};
-
+		
 		return Interface{
 			renderTarget,
-		    node["object"].as<IScalable*>(),
-		    convDef(node["animation-manager"], AnimationManager{}),
-		    convDef(node["interaction-stack"], new InteractionStack{})
+			node["object"].as<IScalable*>(),
+			convDef(node["animation-manager"], AnimationManager{}),
+			convDef(node["interaction-stack"], new InteractionStack{})
 		};
 	}
-
-	Interface* makePrtInterface(sf::RenderTarget &renderTarget, const std::string &filePath) {
+	
+	Interface* makePrtInterface(sf::RenderTarget& renderTarget, const std::string& filePath) {
 		YAML::Node node{YAML::LoadFile(filePath)};
-
+		
 		return new Interface{
 			renderTarget,
 			node["object"].as<IScalable*>(),

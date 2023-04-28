@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../layout.hpp"
 #include "../../iUnscalable/iScalable/uninteractive/uninteractive.hpp"
 
@@ -6,7 +7,7 @@ namespace ui {
 	class LayoutWithBackground : public virtual Layout {
 	protected:
 		IUninteractive* background;
-		
+	
 	public:
 		void init(InitInfo initInfo) override;
 		
@@ -20,6 +21,6 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 }

@@ -1,9 +1,9 @@
 #include "corner.hpp"
 
 namespace ui {
-
 	
-	bool Decode<Corner>::decode(const YAML::Node &node, Corner &corner) {
+	
+	bool Decode<Corner>::decode(const YAML::Node& node, Corner& corner) {
 		std::string str{node.as<std::string>()};
 		if(str == "up-right") {
 			corner = Corner::upRight;

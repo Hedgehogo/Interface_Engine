@@ -1,13 +1,14 @@
 #pragma once
+
 #include "../onlyDrawable.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-    class FullColor : public OnlyDrawable {
+	class FullColor : public OnlyDrawable {
 	protected:
 		sf::RectangleShape rectangle;
 		sf::Vector2f normalSize;
-		
+	
 	public:
 		explicit FullColor(sf::Color color, sf::Vector2f normalSize = {0, 0});
 		
@@ -29,7 +30,7 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<FullColor> {
-		static bool decodePointer(const YAML::Node &node, FullColor *&fullColor);
+		static bool decodePointer(const YAML::Node& node, FullColor*& fullColor);
 	};
 	
 	template<>

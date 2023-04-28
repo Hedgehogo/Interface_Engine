@@ -3,9 +3,11 @@
 #include "../../../general/panel.hpp"
 
 namespace ui {
-	PointingHidePanelInteraction::PointingHidePanelInteraction(bool onlyOnParent) : onlyOnParent(onlyOnParent) {}
+	PointingHidePanelInteraction::PointingHidePanelInteraction(bool onlyOnParent) : onlyOnParent(onlyOnParent) {
+	}
 	
-	void PointingHidePanelInteraction::start(sf::Vector2i) {}
+	void PointingHidePanelInteraction::start(sf::Vector2i) {
+	}
 	
 	void PointingHidePanelInteraction::update(sf::Vector2i mousePosition) {
 		sf::Vector2f pointPosition{static_cast<sf::Vector2f>(mousePosition)};
@@ -14,21 +16,25 @@ namespace ui {
 		}
 	}
 	
-	void PointingHidePanelInteraction::finish(sf::Vector2i) {}
+	void PointingHidePanelInteraction::finish(sf::Vector2i) {
+	}
 	
-	PointingHidePanelInteraction *PointingHidePanelInteraction::copy() {
-		PointingHidePanelInteraction *pointingHidePanelInteraction{new PointingHidePanelInteraction{}};
+	PointingHidePanelInteraction* PointingHidePanelInteraction::copy() {
+		PointingHidePanelInteraction* pointingHidePanelInteraction{new PointingHidePanelInteraction{}};
 		PanelInteraction::copy(pointingHidePanelInteraction);
 		return pointingHidePanelInteraction;
 	}
 	
 	
-	bool DecodePointer<PointingHidePanelInteraction>::decodePointer(const YAML::Node &node, PointingHidePanelInteraction *&pointingHidePanelInteraction) {
+	bool DecodePointer<PointingHidePanelInteraction>::decodePointer(const YAML::Node& node, PointingHidePanelInteraction*& pointingHidePanelInteraction) {
 		bool onlyOnParent{false};
 		
 		if(node["only-on-parent"])
 			node["only-on-parent"] >> onlyOnParent;
 		
-		{ pointingHidePanelInteraction = new PointingHidePanelInteraction{onlyOnParent}; return true; }
+		{
+			pointingHidePanelInteraction = new PointingHidePanelInteraction{onlyOnParent};
+			return true;
+		}
 	}
 }

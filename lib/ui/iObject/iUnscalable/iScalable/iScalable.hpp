@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iUnscalable.hpp"
 
 namespace ui {

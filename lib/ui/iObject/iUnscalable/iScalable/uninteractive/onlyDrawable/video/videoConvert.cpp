@@ -4,28 +4,28 @@
 #include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
-	bool isVideo(std::string path){
+	bool isVideo(std::string path) {
 		std::array<std::string, 8> arr{".bmp", ".png", ".jpg", ".tga", ".dds", ".psd", ".hdr", ".pic"};
 		std::string str{path.begin() + path.rfind('.'), path.end()};
 		return std::count(arr.begin(), arr.end(), str) == 0;
 	}
-
-	bool videoConvert(const YAML::Node &node, OnlyDrawable *&video) {
-		if (!node["offset"] && isVideo(node["path"].as<std::string>())){
+	
+	bool videoConvert(const YAML::Node& node, OnlyDrawable*& video) {
+		if(!node["offset"] && isVideo(node["path"].as<std::string>())) {
 			video = new VideoFromFile{
 				*node["path"].as<std::vector<sf::Texture>*>(),
 				Buffer::get<SCoefficientValue>(node["viewing-progress"])
 			};
-		} else{
+		} else {
 			video = new VideoFromTexture{
-				*node["path"].as<sf::Texture *>(),
+				*node["path"].as<sf::Texture*>(),
 				Buffer::get<SCoefficientValue>(node["viewing-progress"]),
 				convDef(node["rect"], sf::IntRect{0, 0, 0, 0}),
 				convDef(node["count-frame"], 0),
 				convDef(node["offset"], sf::Vector2i{0, 0}),
 			};
 		}
-
+		
 		return true;
 	}
 }

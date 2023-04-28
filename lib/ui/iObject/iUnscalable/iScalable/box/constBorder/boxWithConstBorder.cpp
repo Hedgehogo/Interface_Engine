@@ -5,7 +5,7 @@ namespace ui {
 		LayoutWithTwoObjects::init(initInfo);
 	}
 	
-	BoxWithConstBorder::BoxWithConstBorder(IScalable *constObject, IScalable *secondObject, Side side, float borderDistance, sf::Vector2f minSize) :
+	BoxWithConstBorder::BoxWithConstBorder(IScalable* constObject, IScalable* secondObject, Side side, float borderDistance, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithTwoObjects(constObject, secondObject), side(side), borderDistance(borderDistance) {
 	}
 	
@@ -59,22 +59,22 @@ namespace ui {
 		}
 	}
 	
-	BoxWithConstBorder *BoxWithConstBorder::copy() {
-		BoxWithConstBorder *boxWithConstBorder{new BoxWithConstBorder{firstObject->copy(), secondObject->copy(), side, borderDistance, minimumSize}};
+	BoxWithConstBorder* BoxWithConstBorder::copy() {
+		BoxWithConstBorder* boxWithConstBorder{new BoxWithConstBorder{firstObject->copy(), secondObject->copy(), side, borderDistance, minimumSize}};
 		Box::copy(boxWithConstBorder);
 		return boxWithConstBorder;
 	}
 	
-	void BoxWithConstBorder::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BoxWithConstBorder::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		firstObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
 	
 	
-	bool DecodePointer<BoxWithConstBorder>::decodePointer(const YAML::Node &node, BoxWithConstBorder *&boxWithConstBorder) {
-		IScalable *constObject{nullptr};
-		IScalable *secondObject{nullptr};
+	bool DecodePointer<BoxWithConstBorder>::decodePointer(const YAML::Node& node, BoxWithConstBorder*& boxWithConstBorder) {
+		IScalable* constObject{nullptr};
+		IScalable* secondObject{nullptr};
 		Side side;
 		float borderDistance;
 		sf::Vector2f minSize{};

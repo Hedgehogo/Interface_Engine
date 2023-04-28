@@ -2,7 +2,7 @@
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
-	bool determineSizing(const YAML::Node &node, std::string &type) {
+	bool determineSizing(const YAML::Node& node, std::string& type) {
 		if(node.IsScalar()) {
 			type = "ConstSizing";
 			return true;
@@ -23,7 +23,8 @@ namespace ui {
 				type = "ParentCoefficientSizing";
 				return true;
 			}
-			if(determine(node, {{"target-coefficient"}, {"parent-coefficient"}}, {{"addition"}})) {
+			if(determine(node, {{"target-coefficient"},
+								{"parent-coefficient"}}, {{"addition"}})) {
 				type = "SmartSizing";
 				return true;
 			}

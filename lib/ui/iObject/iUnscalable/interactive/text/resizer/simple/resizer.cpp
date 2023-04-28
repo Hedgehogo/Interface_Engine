@@ -293,7 +293,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<Resizer>::decodePointer(const YAML::Node &node, Resizer *&resizer) {
+	bool DecodePointer<Resizer>::decodePointer(const YAML::Node& node, Resizer*& resizer) {
 		resizer = new Resizer{
 			convDef(node["line-spacing"], 1.15f),
 			convDef(node["align"], BaseResizer::Align::left),

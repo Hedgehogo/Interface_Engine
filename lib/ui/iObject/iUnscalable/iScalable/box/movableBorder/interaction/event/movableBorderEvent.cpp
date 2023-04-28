@@ -3,9 +3,10 @@
 #include "../../boxWithMovableBorder.hpp"
 
 namespace ui {
-	MovableBorderEvent::MovableBorderEvent(BoxWithMovableBorder &box) : box(&box) {}
+	MovableBorderEvent::MovableBorderEvent(BoxWithMovableBorder& box) : box(&box) {
+	}
 	
-	void MovableBorderEvent::setBox(BoxWithMovableBorder &box) {
+	void MovableBorderEvent::setBox(BoxWithMovableBorder& box) {
 		this->box = &box;
 	}
 	
@@ -37,16 +38,17 @@ namespace ui {
 		}
 	}
 	
-	void MovableBorderEvent::whileNotPressed() {}
+	void MovableBorderEvent::whileNotPressed() {
+	}
 	
-	void MovableBorderEvent::copy(MovableBorderEvent *event) {
+	void MovableBorderEvent::copy(MovableBorderEvent* event) {
 		event->startMousePosition = this->startMousePosition;
 		event->startBorderValue = this->startBorderValue;
 		event->active = this->active;
 	}
 	
-	MovableBorderEvent *MovableBorderEvent::copy() {
-		MovableBorderEvent *event{new MovableBorderEvent{*box}};
+	MovableBorderEvent* MovableBorderEvent::copy() {
+		MovableBorderEvent* event{new MovableBorderEvent{*box}};
 		MovableBorderEvent::copy(event);
 		return event;
 	}

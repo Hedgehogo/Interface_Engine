@@ -2,7 +2,8 @@
 #include "../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
-	LayoutWithTwoObjects::LayoutWithTwoObjects(IScalable *firstObject, IScalable *secondObject) : firstObject(firstObject), secondObject(secondObject) {}
+	LayoutWithTwoObjects::LayoutWithTwoObjects(IScalable* firstObject, IScalable* secondObject) : firstObject(firstObject), secondObject(secondObject) {
+	}
 	
 	void LayoutWithTwoObjects::init(InitInfo initInfo) {
 		secondObject->init(initInfo);
@@ -22,7 +23,7 @@ namespace ui {
 		return max(firstObject->getNormalSize(), secondObject->getNormalSize());
 	}
 	
-	void LayoutWithTwoObjects::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void LayoutWithTwoObjects::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		firstObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);

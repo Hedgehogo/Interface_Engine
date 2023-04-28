@@ -18,9 +18,9 @@ namespace ui {
 		DrawManager secondDrawManager;
 	
 	public:
-		BoxWithConstRatioCenter(IScalable *object, IUninteractive *background, float aspectRatio, sf::Vector2f minSize = {});
+		BoxWithConstRatioCenter(IScalable* object, IUninteractive* background, float aspectRatio, sf::Vector2f minSize = {});
 		
-		BoxWithConstRatioCenter(IScalable *object, IScalable *firstObject, IScalable *secondObject, IUninteractive *background, float aspectRatio, sf::Vector2f minSize = {});
+		BoxWithConstRatioCenter(IScalable* object, IScalable* firstObject, IScalable* secondObject, IUninteractive* background, float aspectRatio, sf::Vector2f minSize = {});
 		
 		void init(InitInfo initInfo) override;
 		
@@ -34,17 +34,17 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() override;
 		
-		BoxWithConstRatioCenter *copy() override;
+		BoxWithConstRatioCenter* copy() override;
 		
 		void draw() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<BoxWithConstRatioCenter> {
-		static bool decodePointer(const YAML::Node &node, BoxWithConstRatioCenter *&boxWithConstRatioCenter);
+		static bool decodePointer(const YAML::Node& node, BoxWithConstRatioCenter*& boxWithConstRatioCenter);
 	};
 	
 	using BoxWCRCenter = BoxWithConstRatioCenter;

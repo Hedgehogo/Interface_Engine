@@ -1,18 +1,19 @@
 #include "changeVariableByCurve.hpp"
 
 namespace ui {
-	ChangeVariableByCurve::ChangeVariableByCurve(float k1, float k2, float size, sf::Vector2f start, sf::Vector2f end) : start(start), end(end), k1(k1), k2(k2), size(size){}
+	ChangeVariableByCurve::ChangeVariableByCurve(float k1, float k2, float size, sf::Vector2f start, sf::Vector2f end) : start(start), end(end), k1(k1), k2(k2), size(size) {
+	}
 	
 	float ChangeVariableByCurve::getSize() {
 		return size;
 	}
 	
-	float s(float x){
+	float s(float x) {
 		return 3 * std::pow(x, 2) - 2 * std::pow(x, 3);
 	}
 	
-	float d(float x, sf::Vector2f A, float a){
-		return (x - A.x)*a + A.y;
+	float d(float x, sf::Vector2f A, float a) {
+		return (x - A.x) * a + A.y;
 	}
 	
 	float ChangeVariableByCurve::operator()(float frame) {
@@ -25,7 +26,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<ChangeVariableByCurve>::decodePointer(const YAML::Node &node, ChangeVariableByCurve *&changeVariableByCurve) {
+	bool DecodePointer<ChangeVariableByCurve>::decodePointer(const YAML::Node& node, ChangeVariableByCurve*& changeVariableByCurve) {
 		changeVariableByCurve = new ChangeVariableByCurve{
 			node["k1"].as<float>(),
 			node["k2"].as<float>(),

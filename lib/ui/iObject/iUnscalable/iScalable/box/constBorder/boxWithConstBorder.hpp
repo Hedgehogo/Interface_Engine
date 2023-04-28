@@ -15,7 +15,7 @@ namespace ui {
 	public:
 		void init(InitInfo initInfo) override;
 		
-		BoxWithConstBorder(IScalable *constObject, IScalable *secondObject, Side side, float borderDistance, sf::Vector2f minSize = {0, 0});
+		BoxWithConstBorder(IScalable* constObject, IScalable* secondObject, Side side, float borderDistance, sf::Vector2f minSize = {0, 0});
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -25,15 +25,15 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() override;
 		
-		BoxWithConstBorder *copy() override;
+		BoxWithConstBorder* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<BoxWithConstBorder> {
-		static bool decodePointer(const YAML::Node &node, BoxWithConstBorder *&boxWithConstBorder);
+		static bool decodePointer(const YAML::Node& node, BoxWithConstBorder*& boxWithConstBorder);
 	};
 	
 	using BoxWCBorder = BoxWithConstBorder;

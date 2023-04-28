@@ -6,12 +6,14 @@ namespace ui {
 		Interactive_Simple::init(interactiveInitInfo);
 		background->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
 		slider->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
-		dynamic_cast<SliderInteraction *>(interaction)->init(*interactionManager);
+		dynamic_cast<SliderInteraction*>(interaction)->init(*interactionManager);
 	}
 	
-	BaseSlider::BaseSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, SliderInteraction *interaction) :
+	BaseSlider::BaseSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, SliderInteraction* interaction) :
 		Interactive_Simple(interaction), slider(slider), background(background), value(value), position(), sliderSize(), moveZoneSize() {
-		value->addSetter([&](sf::Vector2f newValue){ resizeSlider(newValue); });
+		value->addSetter([&](sf::Vector2f newValue) {
+			resizeSlider(newValue);
+		});
 		setRangeBounds(value, {0, 0}, {1, 1});
 	}
 	
@@ -42,14 +44,18 @@ namespace ui {
 	
 	sf::Vector2f BaseSlider::roundValueToDivision(sf::Vector2f value, sf::Vector2i division) {
 		sf::Vector2f divisions{division};
-		if(division.x != 0) value.x = std::round(value.x * divisions.x) / divisions.x;
-		if(division.y != 0) value.y = std::round(value.y * divisions.y) / divisions.y;
+		if(division.x != 0)
+			value.x = std::round(value.x * divisions.x) / divisions.x;
+		if(division.y != 0)
+			value.y = std::round(value.y * divisions.y) / divisions.y;
 		return value;
 	}
 	
 	sf::Vector2f BaseSlider::moveSlider(sf::Vector2f value, sf::Vector2f offset) const {
-		if(moveZoneSize.x != 0) value.x += offset.x / moveZoneSize.x;
-		if(moveZoneSize.y != 0) value.y += offset.y / moveZoneSize.y;
+		if(moveZoneSize.x != 0)
+			value.x += offset.x / moveZoneSize.x;
+		if(moveZoneSize.y != 0)
+			value.y += offset.y / moveZoneSize.y;
 		return value;
 	}
 	
@@ -76,7 +82,7 @@ namespace ui {
 		return background->getNormalSize();
 	}
 	
-	void BaseSlider::copy(BaseSlider *baseSlider) {
+	void BaseSlider::copy(BaseSlider* baseSlider) {
 		Interactive_Simple::copy(baseSlider);
 		baseSlider->value = this->value;
 		baseSlider->position = this->position;
@@ -84,7 +90,7 @@ namespace ui {
 		baseSlider->moveZoneSize = this->moveZoneSize;
 	}
 	
-	void BaseSlider::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BaseSlider::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		slider->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}

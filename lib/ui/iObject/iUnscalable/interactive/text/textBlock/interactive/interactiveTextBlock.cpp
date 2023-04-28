@@ -2,15 +2,17 @@
 #include "../../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
-	InteractiveTextBlock::InteractiveTextBlock(IInteraction *interaction, std::u32string text, sf::Color textColor, sf::Font *font, sf::Text::Style style, std::vector<BaseLine *> lines, int size, sf::Color textSelectionColor,
+	InteractiveTextBlock::InteractiveTextBlock(IInteraction* interaction, std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
 											   sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor) :
 		interaction(interaction), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor), interact(false), oldInteract(false),
-		indexInteraction(-1) {}
+		indexInteraction(-1) {
+	}
 	
-	InteractiveTextBlock::InteractiveTextBlock(int indexInteraction, std::u32string text, sf::Color textColor, sf::Font *font, sf::Text::Style style, std::vector<BaseLine *> lines, int size, sf::Color textSelectionColor,
+	InteractiveTextBlock::InteractiveTextBlock(int indexInteraction, std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
 											   sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor) :
 		indexInteraction(indexInteraction), interaction(nullptr), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor), interact(false),
-		oldInteract(false) {}
+		oldInteract(false) {
+	}
 	
 	void InteractiveTextBlock::init(InitInfo textInitInfo, InitInfo initInfo) {
 		TextBlock::init(textInitInfo, initInfo);
@@ -36,7 +38,7 @@ namespace ui {
 		return true;
 	}
 	
-	std::vector<BaseCharacter *> InteractiveTextBlock::getCharacters() {
+	std::vector<BaseCharacter*> InteractiveTextBlock::getCharacters() {
 		for(char32_t character: str) {
 			textCharacters.push_back(new Character(character, textVariables, lines));
 		}
@@ -44,7 +46,7 @@ namespace ui {
 	}
 	
 	bool InteractiveTextBlock::in(sf::Vector2f mousePosition) {
-		for(BaseCharacter *character: textCharacters) {
+		for(BaseCharacter* character: textCharacters) {
 			if(character->in(mousePosition)) {
 				return true;
 			}
@@ -52,7 +54,7 @@ namespace ui {
 		return false;
 	}
 	
-	InteractiveTextBlock::InteractiveTextBlock(std::u32string str, TextVariables textVariables, IInteraction *interaction) :
+	InteractiveTextBlock::InteractiveTextBlock(std::u32string str, TextVariables textVariables, IInteraction* interaction) :
 		TextBlock(str, textVariables, {}), interaction(interaction), interact(false), oldInteract(false) {
 	}
 	
@@ -60,7 +62,7 @@ namespace ui {
 		TextBlock(str, textVariables, {}), indexInteraction(indexInteraction), interact(false), oldInteract(false) {
 	}
 	
-	InteractiveTextBlock *InteractiveTextBlock::copy() {
+	InteractiveTextBlock* InteractiveTextBlock::copy() {
 		if(indexInteraction == -1)
 			return new InteractiveTextBlock(str, textVariables, interaction->copy());
 		else
@@ -73,12 +75,12 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<InteractiveTextBlock>::decodePointer(const YAML::Node &node, InteractiveTextBlock *&interactiveTextBlock) {
+	bool DecodePointer<InteractiveTextBlock>::decodePointer(const YAML::Node& node, InteractiveTextBlock*& interactiveTextBlock) {
 		std::u32string text;
 		sf::Color textColor = nullColor;
-		sf::Font *font = nullptr;
+		sf::Font* font = nullptr;
 		sf::Text::Style style = {};
-		std::vector<BaseLine *> lines = {};
+		std::vector<BaseLine*> lines = {};
 		int size = 0;
 		sf::Color textSelectionColor = nullColor;
 		sf::Color backgroundSelectionColor = nullColor;
@@ -106,19 +108,20 @@ namespace ui {
 			node["inactive-background-selection-color"] >> inactiveBackgroundSelectionColor;
 		
 		if(node["line"]) {
-			BaseLine *line;
+			BaseLine* line;
 			node["line"] >> line;
 			lines.push_back(line);
 		} else if(node["lines"]) {
-			for(const YAML::Node &nodeLine: node["lines"]) {
-				BaseLine *line;
+			for(const YAML::Node& nodeLine: node["lines"]) {
+				BaseLine* line;
 				nodeLine >> line;
 				lines.push_back(line);
 			}
 		}
 		
-		if (node["interaction"]) {
-			interactiveTextBlock = new InteractiveTextBlock{node["interaction"].as<IInteraction*>(), text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
+		if(node["interaction"]) {
+			interactiveTextBlock = new InteractiveTextBlock{node["interaction"].as<IInteraction*>(), text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor,
+															inactiveBackgroundSelectionColor};
 		} else {
 			interactiveTextBlock = new InteractiveTextBlock{node["index"].as<int>(), text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
 		}

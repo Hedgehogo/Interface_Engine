@@ -2,30 +2,34 @@
 #include "../../positioning/make/makePositioning.hpp"
 
 namespace ui {
-	Positioning2::Positioning2(IPositioning *horizontal, IPositioning *vertical) :
-		horizontal(horizontal), vertical(vertical), renderTarget(nullptr) {}
+	Positioning2::Positioning2(IPositioning* horizontal, IPositioning* vertical) :
+		horizontal(horizontal), vertical(vertical), renderTarget(nullptr) {
+	}
 	
 	Positioning2::Positioning2(sf::Vector2f coefficient, sf::Vector2f offset, bool relativeTarget) :
 		horizontal(makePosition(coefficient.x, offset.x, relativeTarget)),
 		vertical(makePosition(coefficient.y, offset.y, relativeTarget)),
-		renderTarget(nullptr) {}
+		renderTarget(nullptr) {
+	}
 	
 	Positioning2::Positioning2(Location2 parentLocation, Location2 objectLocation, sf::Vector2f offset) :
 		horizontal(new MatchSidesPositioning{getHorizontalLocation(parentLocation), getHorizontalLocation(objectLocation), offset.x}),
 		vertical(new MatchSidesPositioning{getVerticalLocation(parentLocation), getVerticalLocation(objectLocation), offset.y}),
-		renderTarget(nullptr) {}
+		renderTarget(nullptr) {
+	}
 	
 	Positioning2::Positioning2(sf::Vector2f coefficient, sf::Vector2f objectCoefficient, sf::Vector2f offset, bool relativeTarget) :
 		horizontal(makePosition(coefficient.x, objectCoefficient.x, offset.x, relativeTarget)),
 		vertical(makePosition(coefficient.y, objectCoefficient.y, offset.y, relativeTarget)),
-		renderTarget(nullptr) {}
+		renderTarget(nullptr) {
+	}
 	
 	Positioning2::~Positioning2() {
 		delete horizontal;
 		delete vertical;
 	}
 	
-	void Positioning2::init(sf::RenderTarget &renderTarget) {
+	void Positioning2::init(sf::RenderTarget& renderTarget) {
 		this->renderTarget = &renderTarget;
 	}
 	
@@ -35,25 +39,25 @@ namespace ui {
 				vertical->findPosition(parentPosition.y, objectSize.y, parentSize.y, targetSize.y)};
 	}
 	
-	void Positioning2::copy(Positioning2 *positioning2) {
+	void Positioning2::copy(Positioning2* positioning2) {
 		positioning2->renderTarget = this->renderTarget;
 	}
 	
-	Positioning2 *Positioning2::copy() {
+	Positioning2* Positioning2::copy() {
 		Positioning2* positioning2{new Positioning2{horizontal->copy(), vertical->copy()}};
 		Positioning2::copy(positioning2);
 		return positioning2;
 	}
 	
 	
-	bool DecodePointer<Positioning2>::decodePointer(const YAML::Node &node, Positioning2 *&positioning2) {
+	bool DecodePointer<Positioning2>::decodePointer(const YAML::Node& node, Positioning2*& positioning2) {
 		if(node.IsScalar()) {
 			positioning2 = new Positioning2{node.as<sf::Vector2f>()};
 		} else {
 			if(node["horizontal"] && node["vertical"]) {
 				positioning2 = new Positioning2{
-					node["horizontal"].as<IPositioning *>(),
-					node["vertical"].as<IPositioning *>()
+					node["horizontal"].as<IPositioning*>(),
+					node["vertical"].as<IPositioning*>()
 				};
 			} else {
 				auto offset{convDef(node["offset"], sf::Vector2f{})};

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../simple/keyEventSimple.hpp"
 #include "../../../interactionManager/interactionManager.hpp"
 
@@ -17,11 +18,11 @@ namespace ui {
 		void whileNotPressed() override;
 		
 		void copy(AddInteractionEvent* addInteractionEvent);
-		
+	
 	public:
 		explicit AddInteractionEvent(IInteraction& interaction);
 		
-		void init(InteractionManager &interactionManager);
+		void init(InteractionManager& interactionManager);
 		
 		void setInteraction(IInteraction& interaction);
 		

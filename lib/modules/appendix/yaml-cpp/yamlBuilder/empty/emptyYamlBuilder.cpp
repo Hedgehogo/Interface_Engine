@@ -3,11 +3,11 @@
 namespace ui::detail {
 	EmptyYamlBuilder EmptyYamlBuilder::builder = {};
 	
-	bool EmptyYamlBuilder::build(const YAML::Node &node, void *&object) const {
+	bool EmptyYamlBuilder::build(const YAML::Node& node, void*& object) const {
 		return false;
 	}
 	
-	IYamlBuilder *EmptyYamlBuilder::getBuilder(const std::string &type) {
+	IYamlBuilder* EmptyYamlBuilder::getBuilder(const std::string& type) {
 		return this;
 	}
 	
@@ -15,7 +15,7 @@ namespace ui::detail {
 		return false;
 	}
 	
-	bool EmptyYamlBuilder::determine(const YAML::Node &node, std::string &type) {
+	bool EmptyYamlBuilder::determine(const YAML::Node& node, std::string& type) {
 		return false;
 	}
 }

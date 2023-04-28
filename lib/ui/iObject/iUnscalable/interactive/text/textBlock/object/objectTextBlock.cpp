@@ -45,7 +45,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<ObjectTextBlock>::decodePointer(const YAML::Node &node, ObjectTextBlock *&objectTextBlock) {
+	bool DecodePointer<ObjectTextBlock>::decodePointer(const YAML::Node& node, ObjectTextBlock*& objectTextBlock) {
 		IScalable* object;
 		
 		node["object"] >> object;

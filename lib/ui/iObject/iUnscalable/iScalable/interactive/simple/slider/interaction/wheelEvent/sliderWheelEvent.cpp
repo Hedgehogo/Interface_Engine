@@ -2,13 +2,15 @@
 #include "../../baseSlider.hpp"
 
 namespace ui {
-	SliderWheelEvent::SliderWheelEvent(BaseSlider &slider, bool horizontal, Relativity relativity, sf::Vector2f sensitivity) :
+	SliderWheelEvent::SliderWheelEvent(BaseSlider& slider, bool horizontal, Relativity relativity, sf::Vector2f sensitivity) :
 		slider(&slider), sensitivity(sensitivity), horizontal(horizontal), relativity(relativity == Relativity::relationSlider) {
 	}
 	
-	void SliderWheelEvent::startPressed(sf::Vector2i, int) {}
+	void SliderWheelEvent::startPressed(sf::Vector2i, int) {
+	}
 	
-	void SliderWheelEvent::stopPressed(sf::Vector2i, int) {}
+	void SliderWheelEvent::stopPressed(sf::Vector2i, int) {
+	}
 	
 	void SliderWheelEvent::whilePressed(sf::Vector2i, int value) {
 		sf::Vector2f move{sensitivity};
@@ -23,21 +25,21 @@ namespace ui {
 		slider->setValue(slider->getValue() + move);
 	}
 	
-	void SliderWheelEvent::whileNotPressed(sf::Vector2i, int) {}
+	void SliderWheelEvent::whileNotPressed(sf::Vector2i, int) {
+	}
 	
-	void SliderWheelEvent::setSlider(BaseSlider &slider) {
+	void SliderWheelEvent::setSlider(BaseSlider& slider) {
 		this->slider = &slider;
 	}
 	
-	SliderWheelEvent *SliderWheelEvent::copy() {
-		SliderWheelEvent *sliderWheelEvent{new SliderWheelEvent{*slider, horizontal, (relativity ? Relativity::relationSlider : Relativity::relationArea), sensitivity}};
+	SliderWheelEvent* SliderWheelEvent::copy() {
+		SliderWheelEvent* sliderWheelEvent{new SliderWheelEvent{*slider, horizontal, (relativity ? Relativity::relationSlider : Relativity::relationArea), sensitivity}};
 		WheelEvent::copy(sliderWheelEvent);
 		return sliderWheelEvent;
 	}
 	
-
 	
-	bool Decode<SliderWheelEvent::Relativity>::decode(const YAML::Node &node, SliderWheelEvent::Relativity &relativity) {
+	bool Decode<SliderWheelEvent::Relativity>::decode(const YAML::Node& node, SliderWheelEvent::Relativity& relativity) {
 		if(convertBool(node, "relation-area", "relation-slider")) {
 			relativity = SliderWheelEvent::Relativity::relationArea;
 		} else {

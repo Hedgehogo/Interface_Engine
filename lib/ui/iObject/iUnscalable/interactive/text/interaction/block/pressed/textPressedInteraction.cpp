@@ -1,28 +1,30 @@
 #include "textPressedInteraction.hpp"
 #include "../../../../../../../interaction/interactionManager/interactionManager.hpp"
 #include "../../../event/textEvent.hpp"
-namespace ui {
-	TextPressedInteraction::TextPressedInteraction(KeyEvent *event, const std::vector<Key> keys, const std::vector<Key> blackListKeys) : TextKeysInteraction(event, keys, blackListKeys) {}
 
-	void TextPressedInteraction::init(Text* text, InteractionManager &interactionManager) {
+namespace ui {
+	TextPressedInteraction::TextPressedInteraction(KeyEvent* event, const std::vector<Key> keys, const std::vector<Key> blackListKeys) : TextKeysInteraction(event, keys, blackListKeys) {
+	}
+	
+	void TextPressedInteraction::init(Text* text, InteractionManager& interactionManager) {
 		this->interactionManager = &interactionManager;
 		this->text = text;
 		dynamic_cast<TextEvent*>(event)->init(text);
 	}
-
+	
 	bool TextPressedInteraction::isBlocked() const {
 		return true;
 	}
-
+	
 	void TextPressedInteraction::update(sf::Vector2i mousePosition) {
 		KeysInteraction::update(mousePosition);
-		if (!isPress()){
+		if(!isPress()) {
 			interactionManager->deleteInteraction(*this);
 		}
 	}
-
-	TextPressedInteraction *TextPressedInteraction::copy() {
+	
+	TextPressedInteraction* TextPressedInteraction::copy() {
 		return new TextPressedInteraction{event->copy(), keys, blackListKeys};
 	}
-
+	
 }

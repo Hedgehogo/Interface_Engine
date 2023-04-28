@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../iEvent.hpp"
 #include "../../../sfmlEvents/mouseWheel/mouseWheel.hpp"

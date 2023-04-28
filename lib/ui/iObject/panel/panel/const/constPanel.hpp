@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../basePanel.hpp"
 
 namespace ui {
@@ -6,7 +7,7 @@ namespace ui {
 	public:
 		void init(InitInfo initInfo) override;
 		
-		ConstPanel(IScalable *object, ISizing2 *sizing, IPositioning2 *positioning, bool displayed = false);
+		ConstPanel(IScalable* object, ISizing2* sizing, IPositioning2* positioning, bool displayed = false);
 		
 		bool isIndependent() override;
 		
@@ -18,6 +19,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<ConstPanel> {
-		static bool decodePointer(const YAML::Node &node, ConstPanel *&constPanel);
+		static bool decodePointer(const YAML::Node& node, ConstPanel*& constPanel);
 	};
 }

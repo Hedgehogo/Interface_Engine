@@ -7,25 +7,25 @@ namespace ui {
 		interactions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {
 	}
 	
-	void InteractionManager::addInteraction(IInteraction &interaction) {
+	void InteractionManager::addInteraction(IInteraction& interaction) {
 		addInteractions.push_back(&interaction);
 	}
 	
-	void InteractionManager::deleteInteraction(IInteraction &interaction) {
+	void InteractionManager::deleteInteraction(IInteraction& interaction) {
 		if(auto iterator = std::find(interactions.begin(), interactions.end(), &interaction); iterator != interactions.end())
 			interactions.erase(iterator);
 		deleteInteractions.push_back(&interaction);
 	}
 	
 	void InteractionManager::clear() {
-		for(auto &interaction: interactions) {
+		for(auto& interaction: interactions) {
 			interaction->finish(position);
 		}
 		interactions.clear();
 	}
 	
 	bool InteractionManager::isBlocked() const {
-		return std::any_of(this->interactions.begin(), this->interactions.end(), [](IInteraction *interaction) {
+		return std::any_of(this->interactions.begin(), this->interactions.end(), [](IInteraction* interaction) {
 			return interaction->isBlocked();
 		});
 	}
@@ -35,7 +35,7 @@ namespace ui {
 		
 		if(!deleteInteractions.empty()) {
 			ptrSort(deleteInteractions);
-			for(auto &interaction: deleteInteractions) {
+			for(auto& interaction: deleteInteractions) {
 				interaction->finish(mousePosition);
 			}
 			deleteInteractions.clear();
@@ -43,7 +43,7 @@ namespace ui {
 		
 		if(!addInteractions.empty()) {
 			ptrSort(addInteractions);
-			for(auto &interaction: addInteractions) {
+			for(auto& interaction: addInteractions) {
 				interaction->start(mousePosition);
 				interactions.push_back(interaction);
 			}

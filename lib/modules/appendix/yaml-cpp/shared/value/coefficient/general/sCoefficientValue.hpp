@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iSCoefficientValue.hpp"
 #include "../../general/sValue.hpp"
 
@@ -20,7 +21,7 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<SCoefficientValue> {
-		static bool decodePointer(const YAML::Node &node, SCoefficientValue *&sCoefficientValue);
+		static bool decodePointer(const YAML::Node& node, SCoefficientValue*& sCoefficientValue);
 	};
 	
 	typedef SCoefficientValue SCoefficient;

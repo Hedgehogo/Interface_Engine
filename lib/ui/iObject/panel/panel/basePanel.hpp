@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../layout/object/layoutWithObject.hpp"
 #include "../../../sizingAndPositioning/sizing/make/makeSize.hpp"
 #include "../../../sizingAndPositioning/positioning/make/makePositioning.hpp"
@@ -25,11 +26,11 @@ namespace ui {
 		bool active;
 		
 		void copy(BasePanel* panel);
-		
+	
 	public:
 		void init(InitInfo initInfo) override;
 		
-		BasePanel(IScalable *object, ISizing2* sizing, IPositioning2* positioning, bool displayed = false);
+		BasePanel(IScalable* object, ISizing2* sizing, IPositioning2* positioning, bool displayed = false);
 		
 		~BasePanel() override;
 		
@@ -66,13 +67,13 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		BasePanel* copy() override = 0;
-
+	
 	protected:
 		static bool fullDebug;
-		
+	
 	public:
 		static void setFullDebug(bool fullDebug);
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 }

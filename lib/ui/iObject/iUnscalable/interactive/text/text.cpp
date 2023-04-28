@@ -271,7 +271,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<Text>::decodePointer(const YAML::Node &node, Text *&text) {
+	bool DecodePointer<Text>::decodePointer(const YAML::Node& node, Text*& text) {
 		std::vector<BaseTextBlock*> textBlocks;
 		IUninteractive* background;
 		int size{14};

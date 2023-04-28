@@ -2,15 +2,17 @@
 
 namespace ui {
 	SmartSizing::SmartSizing(float targetCoefficient, float parentCoefficient, float addition) :
-		targetCoefficient(targetCoefficient), parentCoefficient(parentCoefficient), addition(addition) {}
+		targetCoefficient(targetCoefficient), parentCoefficient(parentCoefficient), addition(addition) {
+	}
 	
-	void SmartSizing::init(float) {}
+	void SmartSizing::init(float) {
+	}
 	
 	float SmartSizing::findSize(float parentSize, float targetSize) {
 		return parentSize * parentCoefficient + targetSize * targetCoefficient + addition;
 	}
 	
-	SmartSizing *SmartSizing::copy() {
+	SmartSizing* SmartSizing::copy() {
 		return new SmartSizing{targetCoefficient, parentCoefficient, addition};
 	}
 	
@@ -19,7 +21,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<SmartSizing>::decodePointer(const YAML::Node &node, SmartSizing *&smartSizing) {
+	bool DecodePointer<SmartSizing>::decodePointer(const YAML::Node& node, SmartSizing*& smartSizing) {
 		float targetCoefficient{1.f};
 		float parentCoefficient{0.f};
 		float addition{0.f};
@@ -31,6 +33,9 @@ namespace ui {
 		if(node["addition"])
 			node["addition"] >> addition;
 		
-		{ smartSizing = new SmartSizing{targetCoefficient, parentCoefficient, addition}; return true; }
+		{
+			smartSizing = new SmartSizing{targetCoefficient, parentCoefficient, addition};
+			return true;
+		}
 	}
 }

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../enums/location2/location2.hpp"
 #include "../positioning/iPositioning.hpp"
 #include "../positioning/internal/parent/internalPositioning.hpp"

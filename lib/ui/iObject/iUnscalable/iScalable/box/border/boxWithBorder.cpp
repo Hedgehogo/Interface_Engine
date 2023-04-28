@@ -3,14 +3,14 @@
 
 namespace ui {
 	void BoxWithBorder::init(InitInfo initInfo) {
-		for(auto &line: objects) {
-			for(auto &object: line) {
+		for(auto& line: objects) {
+			for(auto& object: line) {
 				object->init(initInfo);
 			}
 		}
 	}
 	
-	BoxWithBorder::BoxWithBorder(std::vector<std::vector<IScalable *>> objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize) :
+	BoxWithBorder::BoxWithBorder(std::vector<std::vector<IScalable*>> objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize) :
 		Box(minSize), objects(std::move(objects)), boundsVertical(std::move(boundsVertical)), boundsHorizontal(std::move(boundsHorizontal)) {
 		this->boundsHorizontal.insert(this->boundsHorizontal.begin(), 0.0f);
 		this->boundsHorizontal.push_back(1.0f);
@@ -18,7 +18,7 @@ namespace ui {
 		this->boundsVertical.push_back(1.0f);
 	}
 	
-	BoxWithBorder::BoxWithBorder(std::vector<std::vector<IScalable *>> objects, sf::Vector2f minSize) :
+	BoxWithBorder::BoxWithBorder(std::vector<std::vector<IScalable*>> objects, sf::Vector2f minSize) :
 		Box(minSize), objects(std::move(objects)), boundsHorizontal(this->objects.size() + 1, 1.0f), boundsVertical(this->objects[0].size() + 1, 1.0f) {
 		sf::Vector2u count = {static_cast<unsigned>(this->objects.size()), static_cast<unsigned>(this->objects[0].size())};
 		for(unsigned x = 0; x < count.x; ++x) {
@@ -30,8 +30,8 @@ namespace ui {
 	}
 	
 	BoxWithBorder::~BoxWithBorder() {
-		for(auto &x: objects) {
-			for(auto &j: x) {
+		for(auto& x: objects) {
+			for(auto& j: x) {
 				delete j;
 			}
 		}
@@ -78,7 +78,7 @@ namespace ui {
 		
 		sf::Vector2f lineMinSize{0, 0};
 		sf::Vector2f objectMinSize{0, 0};
-		for(auto &line: objectMinSizes) {
+		for(auto& line: objectMinSizes) {
 			lineMinSize.y = 0;
 			for(int y = 0; y < line.size(); ++y) {
 				objectMinSize.y = line[y].y / (boundsVertical[y + 1] - boundsVertical[y]);
@@ -110,7 +110,7 @@ namespace ui {
 		
 		sf::Vector2f lineNormalSize{0, 0};
 		sf::Vector2f objectNormalSize{0, 0};
-		for(auto &line: objectNormalSizes) {
+		for(auto& line: objectNormalSizes) {
 			lineNormalSize.y = 0;
 			for(int y = 0; y < line.size(); ++y) {
 				objectNormalSize.y = line[y].y / (boundsVertical[y + 1] - boundsVertical[y]);
@@ -131,11 +131,11 @@ namespace ui {
 		return normalSize;
 	}
 	
-	BoxWithBorder *BoxWithBorder::copy() {
+	BoxWithBorder* BoxWithBorder::copy() {
 		sf::Vector2u count(objects.size(), 0);
 		if(count.x != 0)
 			count.y = objects[0].size();
-		std::vector<std::vector<IScalable *>> newObjects(count.x, std::vector<IScalable *>(count.y, nullptr));
+		std::vector<std::vector<IScalable*>> newObjects(count.x, std::vector<IScalable*>(count.y, nullptr));
 		for(int x = 0; x < count.x; ++x) {
 			for(int y = 0; y < count.y; ++y) {
 				newObjects[x][y] = objects[x][y]->copy();
@@ -149,18 +149,18 @@ namespace ui {
 		for(int i = 0; i < newBoundsVertical.size(); ++i) {
 			newBoundsVertical[i] = boundsVertical[i + 1];
 		}
-		BoxWithBorder *boxWithBorder{new BoxWithBorder{newObjects, newBoundsHorizontal, newBoundsVertical, minimumSize}};
+		BoxWithBorder* boxWithBorder{new BoxWithBorder{newObjects, newBoundsHorizontal, newBoundsVertical, minimumSize}};
 		Box::copy(boxWithBorder);
 		return boxWithBorder;
 	}
 	
 	
-	bool DecodePointer<BoxWithBorder>::decodePointer(const YAML::Node &node, BoxWithBorder *&boxWithBorder) {
+	bool DecodePointer<BoxWithBorder>::decodePointer(const YAML::Node& node, BoxWithBorder*& boxWithBorder) {
 		sf::Vector2f minSize{};
 		sf::Vector2u count(node["objects"].size(), 0);
 		if(count.x != 0)
 			count.y = node["objects"][0].size();
-		std::vector<std::vector<IScalable *>> objects(count.x, std::vector<IScalable *>(count.y, nullptr));
+		std::vector<std::vector<IScalable*>> objects(count.x, std::vector<IScalable*>(count.y, nullptr));
 		
 		if(node["min-size"])
 			node["min-size"] >> minSize;
@@ -189,10 +189,10 @@ namespace ui {
 		return true;
 	}
 	
-	void BoxWithBorder::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BoxWithBorder::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		for(auto &line: objects) {
-			for(auto &object: line) {
+		for(auto& line: objects) {
+			for(auto& object: line) {
 				object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 			}
 		}

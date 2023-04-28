@@ -2,7 +2,7 @@
 #include "../../../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
-	BoxWithConstBezel::BoxWithConstBezel(IScalable *object, IUninteractive *bezel, float thickness, sf::Vector2f minSize) :
+	BoxWithConstBezel::BoxWithConstBezel(IScalable* object, IUninteractive* bezel, float thickness, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithObject(object), bezel(bezel), thickness(thickness) {
 		sf::Vector2f minimumSize{object->getMinSize() + sf::Vector2f(thickness * 2.0f, thickness * 2.0f)};
 		if(this->minimumSize.x < minimumSize.x) {
@@ -43,16 +43,16 @@ namespace ui {
 		return max(object->getNormalSize() + sf::Vector2f{thickness * 2, thickness * 2}, bezel->getNormalSize());
 	}
 	
-	BoxWithConstBezel *BoxWithConstBezel::copy() {
-		BoxWithConstBezel *boxWithConstBezel{new BoxWithConstBezel{object->copy(), bezel->copy(), thickness}};
+	BoxWithConstBezel* BoxWithConstBezel::copy() {
+		BoxWithConstBezel* boxWithConstBezel{new BoxWithConstBezel{object->copy(), bezel->copy(), thickness}};
 		Box::copy(boxWithConstBezel);
 		return boxWithConstBezel;
 	}
 	
 	
-	bool DecodePointer<BoxWithConstBezel>::decodePointer(const YAML::Node &node, BoxWithConstBezel *&boxWithConstBezel) {
-		IScalable *object;
-		IUninteractive *bezel;
+	bool DecodePointer<BoxWithConstBezel>::decodePointer(const YAML::Node& node, BoxWithConstBezel*& boxWithConstBezel) {
+		IScalable* object;
+		IUninteractive* bezel;
 		float thickness;
 		sf::Vector2f minSize{};
 		
@@ -66,7 +66,7 @@ namespace ui {
 		return true;
 	}
 	
-	void BoxWithConstBezel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BoxWithConstBezel::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		bezel->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		object->drawDebug(renderTarget, indent, indentAddition, hue + hueOffset, hueOffset);
 	}

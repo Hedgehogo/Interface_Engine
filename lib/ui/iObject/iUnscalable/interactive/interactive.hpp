@@ -11,7 +11,7 @@ namespace ui {
 		InteractionManager* interactionManager;
 		
 		void copy(Interactive* interactive);
-		
+	
 	public:
 		void init(InitInfo initInfo) override;
 		

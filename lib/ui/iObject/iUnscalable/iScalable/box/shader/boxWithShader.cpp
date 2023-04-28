@@ -1,7 +1,7 @@
 #include "boxWithShader.hpp"
 
 namespace ui {
-	void convertTransmission(const YAML::Node &node, uint &transmission) {
+	void convertTransmission(const YAML::Node& node, uint& transmission) {
 		std::map<std::string, BoxWithShader::Transmission> transmissionMap{
 			{"size",          BoxWithShader::Transmission::size},
 			{"texture",       BoxWithShader::Transmission::texture},
@@ -15,14 +15,14 @@ namespace ui {
 			transmission = transmissionMap[strTransmission];
 		} else if(node.IsSequence()) {
 			std::string strTransmission;
-			for(const auto &item: node) {
+			for(const auto& item: node) {
 				strTransmission = item.as<std::string>();
 				transmission = static_cast<BoxWithShader::Transmission>(transmission | transmissionMap[strTransmission]);
 			}
 		}
 	}
 	
-	BoxWithShader::BoxWithShader(IScalable *object, sf::Shader *shader, uint transmission,
+	BoxWithShader::BoxWithShader(IScalable* object, sf::Shader* shader, uint transmission,
 								 std::map<std::string, PISfloat> valuesF,
 								 std::map<std::string, PISint> valuesI,
 								 std::map<std::string, PISbool> valuesB,
@@ -32,27 +32,27 @@ namespace ui {
 		BoxWithRenderTexture(object, optimize, minSize), shader(shader), transmission(transmission) {
 		clock.restart();
 		
-		for(auto &[name, value]: valuesF) {
+		for(auto& [name, value]: valuesF) {
 			value->addSetter([&](float var) {
 				setUniform(name, var);
 			});
 		}
-		for(auto &[name, value]: valuesI) {
+		for(auto& [name, value]: valuesI) {
 			value->addSetter([&](int var) {
 				setUniform(name, var);
 			});
 		}
-		for(auto &[name, value]: valuesB) {
+		for(auto& [name, value]: valuesB) {
 			value->addSetter([&](bool var) {
 				setUniform(name, var);
 			});
 		}
-		for(auto &[name, value]: valuesC) {
+		for(auto& [name, value]: valuesC) {
 			value->addSetter([&](sf::Color var) {
 				setUniform(name, var);
 			});
 		}
-		for(auto &[name, value]: valuesV) {
+		for(auto& [name, value]: valuesV) {
 			value->addSetter([&](sf::Vector2f var) {
 				setUniform(name, var);
 			});
@@ -116,19 +116,19 @@ namespace ui {
 		return BoxWithRenderTexture::updateInteractions(mousePosition);
 	}
 	
-	template <typename T>
-	std::map<std::string, std::shared_ptr<T>> getSValues(const YAML::Node &node) {
+	template<typename T>
+	std::map<std::string, std::shared_ptr<T>> getSValues(const YAML::Node& node) {
 		std::map<std::string, std::shared_ptr<T>> result;
-		for(auto &[name, nodeValue]: node.as<std::map<std::string, YAML::Node>>()) {
+		for(auto& [name, nodeValue]: node.as<std::map<std::string, YAML::Node>>()) {
 			result[name] = Buffer::get<T>(nodeValue);
 		}
 		return result;
 	}
 	
 	
-	bool DecodePointer<BoxWithShader>::decodePointer(const YAML::Node &node, BoxWithShader *&boxWithShader) {
-		IScalable *object;
-		sf::Shader *shader = new sf::Shader{};
+	bool DecodePointer<BoxWithShader>::decodePointer(const YAML::Node& node, BoxWithShader*& boxWithShader) {
+		IScalable* object;
+		sf::Shader* shader = new sf::Shader{};
 		uint transmission{};
 		std::map<std::string, PISfloat> valuesF;
 		std::map<std::string, PISint> valuesI;

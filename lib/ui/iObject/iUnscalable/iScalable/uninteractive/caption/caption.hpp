@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../onlyDrawable/onlyDrawable.hpp"
 #include "../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 #include "../../../../../sizingAndPositioning/positioning2/internal/internalPositioning2.hpp"
@@ -8,15 +9,15 @@ namespace ui {
 	protected:
 		static sf::Color defaultColor;
 		static int defaultSize;
-
-        bool cutBack;
+		
+		bool cutBack;
 		
 		sf::Text text;
 		sf::String str;
 		IUninteractive* background;
 		sf::Vector2f minimumSize;
 		DrawManager drawManager;
-        InternalPositioning2 internalPositioning2;
+		InternalPositioning2 internalPositioning2;
 		
 		void init(InitInfo initInfo) override;
 	
@@ -29,15 +30,15 @@ namespace ui {
 		
 		static int getDefaultSize();
 		
-		Caption(sf::String text, IUninteractive *background, sf::Font &font, sf::Vector2f minSize, int fontSize = defaultSize, sf::Color color = defaultColor, sf::Text::Style style = {}, float rotation = 0,
-                InternalPositioning2 internalPositioning2 = {{0, 0}}, bool cutBack = true);
+		Caption(sf::String text, IUninteractive* background, sf::Font& font, sf::Vector2f minSize, int fontSize = defaultSize, sf::Color color = defaultColor, sf::Text::Style style = {}, float rotation = 0,
+				InternalPositioning2 internalPositioning2 = {{0, 0}}, bool cutBack = true);
 		
-		Caption(sf::String text, IUninteractive *background, sf::Font &font, int fontSize = defaultSize, sf::Color color = defaultColor, sf::Text::Style style = {}, float rotation = 0,
-                InternalPositioning2 internalPositioning2 = {{0, 0}}, bool cutBack = true);
+		Caption(sf::String text, IUninteractive* background, sf::Font& font, int fontSize = defaultSize, sf::Color color = defaultColor, sf::Text::Style style = {}, float rotation = 0,
+				InternalPositioning2 internalPositioning2 = {{0, 0}}, bool cutBack = true);
 		
 		void draw() override;
-
-        sf::FloatRect getBounds();
+		
+		sf::FloatRect getBounds();
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -48,19 +49,19 @@ namespace ui {
 		sf::Vector2f getMinSize() override;
 		
 		sf::Vector2f getNormalSize() override;
-		
+	
 	protected:
-		Caption(sf::Text text, IUninteractive *background, sf::String str, sf::Vector2f minimumSize, InternalPositioning2 internalPositioning2, bool cutBack);
-		
+		Caption(sf::Text text, IUninteractive* background, sf::String str, sf::Vector2f minimumSize, InternalPositioning2 internalPositioning2, bool cutBack);
+	
 	public:
 		Caption* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<Caption> {
-		static bool decodePointer(const YAML::Node &node, Caption *&caption);
+		static bool decodePointer(const YAML::Node& node, Caption*& caption);
 	};
 }

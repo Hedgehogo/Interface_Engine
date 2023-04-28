@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iObject.hpp"
 
 namespace ui {
@@ -8,7 +9,7 @@ namespace ui {
 		sf::Vector2f size;
 		
 		void copy(Layout* layout);
-		
+	
 	public:
 		explicit Layout(sf::Vector2f size = {});
 		

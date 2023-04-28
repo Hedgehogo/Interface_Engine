@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iSizing.hpp"
 #include <functional>
 
@@ -7,14 +8,14 @@ namespace ui {
 	public:
 		using FindSizeFunc = std::function<float(float parentSize, float targetSize, float normalSize)>;
 		using MinSizeFunc = std::function<float(float objectMinSize)>;
-		
+	
 	protected:
 		float normalSize;
 		FindSizeFunc findSizeFunc;
 		MinSizeFunc minSizeFunc;
 		
 		void copy(LambdaSizing* lambdaSizing);
-		
+	
 	public:
 		explicit LambdaSizing(FindSizeFunc findSizeFunc, MinSizeFunc minSizeFunc);
 		

@@ -6,20 +6,20 @@
 #include "../../interaction/textInteraction.hpp"
 
 namespace ui {
-	class TextAddBlockInteractionEvent : public TextEvent, public AddBlockInteractionEvent{
+	class TextAddBlockInteractionEvent : public TextEvent, public AddBlockInteractionEvent {
 	public:
-		explicit TextAddBlockInteractionEvent(TextInteraction &interaction);
-
-		void init(ui::Text *text, InteractionManager& interactionManager);
-
-		void setText(ui::Text *text) override;
-
-		TextAddBlockInteractionEvent *copy() override;
+		explicit TextAddBlockInteractionEvent(TextInteraction& interaction);
+		
+		void init(ui::Text* text, InteractionManager& interactionManager);
+		
+		void setText(ui::Text* text) override;
+		
+		TextAddBlockInteractionEvent* copy() override;
 	};
-
+	
 	
 	template<>
 	struct DecodePointer<TextAddBlockInteractionEvent> {
-		static bool decodePointer(const YAML::Node &node, TextAddBlockInteractionEvent *&textAddBlockInteractionEvent);
+		static bool decodePointer(const YAML::Node& node, TextAddBlockInteractionEvent*& textAddBlockInteractionEvent);
 	};
 }

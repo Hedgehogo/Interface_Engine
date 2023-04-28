@@ -7,6 +7,7 @@
 #include "interaction/event/movableBorderEvent.hpp"
 #include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 #include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
+
 namespace ui {
 	class BoxWithMovableBorder : public Box, public LayoutWithTwoObjects, public Interactive_Simple {
 	protected:
@@ -21,7 +22,7 @@ namespace ui {
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
-		BoxWithMovableBorder(IScalable *firstObject, IScalable *secondObject, bool isHorizontalBorder, PSCoefficient borderValue,
+		BoxWithMovableBorder(IScalable* firstObject, IScalable* secondObject, bool isHorizontalBorder, PSCoefficient borderValue,
 							 int borderInteractionSize = 5, sf::Vector2f minSize = {0, 0});
 		
 		float getBorderValue();
@@ -48,15 +49,15 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() override;
 		
-		BoxWithMovableBorder *copy() override;
+		BoxWithMovableBorder* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<BoxWithMovableBorder> {
-		static bool decodePointer(const YAML::Node &node, BoxWithMovableBorder *&boxWithMovableBorder);
+		static bool decodePointer(const YAML::Node& node, BoxWithMovableBorder*& boxWithMovableBorder);
 	};
 	
 	using BoxWMovableB = BoxWithMovableBorder;

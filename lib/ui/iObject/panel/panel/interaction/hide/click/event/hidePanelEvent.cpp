@@ -2,11 +2,14 @@
 #include "../../../../general/panel.hpp"
 
 namespace ui {
-	HidePanelEvent::HidePanelEvent(bool onlyOnParent) : onlyOnParent(onlyOnParent) {}
+	HidePanelEvent::HidePanelEvent(bool onlyOnParent) : onlyOnParent(onlyOnParent) {
+	}
 	
-	void HidePanelEvent::startPressed() {}
+	void HidePanelEvent::startPressed() {
+	}
 	
-	void HidePanelEvent::whilePressed() {}
+	void HidePanelEvent::whilePressed() {
+	}
 	
 	void HidePanelEvent::stopPressed() {
 		sf::Vector2f pointPosition{static_cast<sf::Vector2f>(mousePosition)};
@@ -14,21 +17,25 @@ namespace ui {
 			panelManager->hidePanel(panel);
 	}
 	
-	void HidePanelEvent::whileNotPressed() {}
+	void HidePanelEvent::whileNotPressed() {
+	}
 	
-	HidePanelEvent *HidePanelEvent::copy() {
-		HidePanelEvent *hidePanelEvent{new HidePanelEvent()};
+	HidePanelEvent* HidePanelEvent::copy() {
+		HidePanelEvent* hidePanelEvent{new HidePanelEvent()};
 		hidePanelEvent->init(*panel, *panelManager);
 		return hidePanelEvent;
 	}
 	
 	
-	bool DecodePointer<HidePanelEvent>::decodePointer(const YAML::Node &node, HidePanelEvent *&hidePanelEvent) {
+	bool DecodePointer<HidePanelEvent>::decodePointer(const YAML::Node& node, HidePanelEvent*& hidePanelEvent) {
 		bool onlyOnParent{false};
 		
 		if(node["only-on-parent"])
 			node["only-on-parent"] >> onlyOnParent;
 		
-		{ hidePanelEvent = new HidePanelEvent{onlyOnParent}; return true; }
+		{
+			hidePanelEvent = new HidePanelEvent{onlyOnParent};
+			return true;
+		}
 	}
 }

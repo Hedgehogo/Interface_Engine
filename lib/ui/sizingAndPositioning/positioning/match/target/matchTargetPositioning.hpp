@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../iPositioning.hpp"
 
 namespace ui {
@@ -19,6 +20,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<MatchTargetPositioning> {
-		static bool decodePointer(const YAML::Node &node, MatchTargetPositioning *&matchTargetPositioning);
+		static bool decodePointer(const YAML::Node& node, MatchTargetPositioning*& matchTargetPositioning);
 	};
 }

@@ -10,16 +10,16 @@
 namespace ui {
 	class SimpleSwitcher : public Interactive_Simple, public Layout, public IDrawable {
 	protected:
-		IUninteractive *activeBackground;
-		IUninteractive *inactiveBackground;
+		IUninteractive* activeBackground;
+		IUninteractive* inactiveBackground;
 		DrawManager activeDrawManager;
 		DrawManager inactiveDrawManager;
 		PSbool active;
 	
 	public:
-		SimpleSwitcher(IUninteractive *inactiveBackground, IUninteractive *activeBackground, PSbool value, Key key = Key::mouseLeft);
+		SimpleSwitcher(IUninteractive* inactiveBackground, IUninteractive* activeBackground, PSbool value, Key key = Key::mouseLeft);
 		
-		SimpleSwitcher(IUninteractive *inactiveBackground, IUninteractive *activeBackground, Key key = Key::mouseLeft, bool startActive = false);
+		SimpleSwitcher(IUninteractive* inactiveBackground, IUninteractive* activeBackground, Key key = Key::mouseLeft, bool startActive = false);
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
@@ -39,9 +39,9 @@ namespace ui {
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		SimpleSwitcher *copy() override;
+		SimpleSwitcher* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 		
 		~SimpleSwitcher();
 	};
@@ -49,6 +49,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<SimpleSwitcher> {
-		static bool decodePointer(const YAML::Node &node, SimpleSwitcher *&simpleSwitcher);
+		static bool decodePointer(const YAML::Node& node, SimpleSwitcher*& simpleSwitcher);
 	};
 }

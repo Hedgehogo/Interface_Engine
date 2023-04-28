@@ -14,10 +14,9 @@ namespace ui {
 	};
 	
 	
-	
 	template<typename T>
 	struct DecodePointer<SConvertToBoolLessOrEquals<T>> {
-		static bool decodePointer(const YAML::Node &node, SConvertToBoolLessOrEquals<T> *&sConvertToBoolLessOrEquals);
+		static bool decodePointer(const YAML::Node& node, SConvertToBoolLessOrEquals<T>*& sConvertToBoolLessOrEquals);
 	};
 	
 	using SConvertFloatToBoolLessOrEquals = SConvertToBoolLessOrEquals<float>;

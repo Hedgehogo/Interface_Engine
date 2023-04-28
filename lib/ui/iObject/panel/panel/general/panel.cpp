@@ -3,11 +3,11 @@
 #include "../interaction/move/dont/dontMovePanelInteraction.hpp"
 
 namespace ui {
-	Panel::Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, ISizing2 *sizing, IPositioning2 *positioning, bool displayed) :
+	Panel::Panel(IScalable* object, HidePanelInteraction* hideInteraction, MovePanelInteraction* moveInteraction, ISizing2* sizing, IPositioning2* positioning, bool displayed) :
 		BasePanel(object, sizing, positioning, displayed), hideInteraction(hideInteraction), moveInteraction(moveInteraction), interactionManager(nullptr) {
 	}
 	
-	Panel::Panel(IScalable *object, HidePanelInteraction *hideInteraction, ISizing2 *sizing, IPositioning2 *positioning, bool displayed) :
+	Panel::Panel(IScalable* object, HidePanelInteraction* hideInteraction, ISizing2* sizing, IPositioning2* positioning, bool displayed) :
 		Panel(object, hideInteraction, new DontMovePanelInteraction{}, sizing, positioning, displayed) {
 	}
 	
@@ -67,24 +67,24 @@ namespace ui {
 		return BasePanel::updateInteractions(mousePosition);
 	}
 	
-	void Panel::copy(Panel *panel) {
+	void Panel::copy(Panel* panel) {
 		BasePanel::copy(panel);
 		panel->interactionManager = this->interactionManager;
 	}
 	
-	Panel *Panel::copy() {
-		Panel *panel{new Panel(object->copy(), hideInteraction->copy(), moveInteraction->copy(), sizing->copy(), positioning->copy(), displayed)};
+	Panel* Panel::copy() {
+		Panel* panel{new Panel(object->copy(), hideInteraction->copy(), moveInteraction->copy(), sizing->copy(), positioning->copy(), displayed)};
 		panel->hideInteraction->setPanel(*panel);
 		Panel::copy(panel);
 		return panel;
 	}
 	
 	
-	bool DecodePointer<Panel>::decodePointer(const YAML::Node &node, Panel *&panel) {
-		IScalable *object;
-		HidePanelInteraction *hideInteraction;
-		ISizing2 *sizing;
-		IPositioning2 *positioning;
+	bool DecodePointer<Panel>::decodePointer(const YAML::Node& node, Panel*& panel) {
+		IScalable* object;
+		HidePanelInteraction* hideInteraction;
+		ISizing2* sizing;
+		IPositioning2* positioning;
 		bool displayed{false};
 		
 		node["object"] >> object;
@@ -95,13 +95,19 @@ namespace ui {
 			node["displayed"] >> displayed;
 		
 		if(node["move-interaction"]) {
-			MovePanelInteraction *moveInteraction;
+			MovePanelInteraction* moveInteraction;
 			
 			node["move-interaction"] >> moveInteraction;
 			
-			{ panel = new Panel{object, hideInteraction, moveInteraction, sizing, positioning, displayed}; return true; }
+			{
+				panel = new Panel{object, hideInteraction, moveInteraction, sizing, positioning, displayed};
+				return true;
+			}
 		} else {
-			{ panel = new Panel{object, hideInteraction, sizing, positioning, displayed}; return true; }
+			{
+				panel = new Panel{object, hideInteraction, sizing, positioning, displayed};
+				return true;
+			}
 		}
 	}
 }

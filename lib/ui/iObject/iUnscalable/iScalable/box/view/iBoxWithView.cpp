@@ -24,14 +24,14 @@ namespace ui {
 		
 		sf::Vector2f renderTargetSize{renderTarget->getSize()};
 		view.setViewport({
-			position.x / renderTargetSize.x,
-			position.y / renderTargetSize.y,
-			size.x / renderTargetSize.x,
-			size.y / renderTargetSize.y
-		});
+							 position.x / renderTargetSize.x,
+							 position.y / renderTargetSize.y,
+							 size.x / renderTargetSize.x,
+							 size.y / renderTargetSize.y
+						 });
 	}
 	
-	IBoxWithView *IBoxWithView::copy() {
+	IBoxWithView* IBoxWithView::copy() {
 		return nullptr;
 	}
 }

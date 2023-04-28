@@ -26,9 +26,8 @@ namespace ui {
 		return new ChangeVariableByBrokenLine{values};
 	}
 	
-
 	
-	bool Decode<ChangeVariableByBrokenLine::Value>::decode(const YAML::Node &node, ChangeVariableByBrokenLine::Value &value) {
+	bool Decode<ChangeVariableByBrokenLine::Value>::decode(const YAML::Node& node, ChangeVariableByBrokenLine::Value& value) {
 		value = ChangeVariableByBrokenLine::Value{
 			node["value"].as<float>(),
 			convDef(node["size"], 0.f),

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../yamlBuilder.hpp"
 
 namespace ui {
@@ -6,6 +7,7 @@ namespace ui {
 		struct YamlArg {
 			std::string name;
 			YAML::NodeType::value type{YAML::NodeType::Undefined};
+			
 			[[nodiscard]] bool present(const YAML::Node& node) const;
 		};
 	}

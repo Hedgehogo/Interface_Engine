@@ -6,11 +6,11 @@
 namespace ui {
 	class BoxScroll : public IBoxWithView {
 	protected:
-		IUnscalable *object;
+		IUnscalable* object;
 		PSRVec2f normalObjectPosition;
 	
 	public:
-		BoxScroll(IUnscalable *object, const PSRVec2f &normalObjectPosition, const sf::Vector2f &minSize);
+		BoxScroll(IUnscalable* object, const PSRVec2f& normalObjectPosition, const sf::Vector2f& minSize);
 		
 		void init(InitInfo initInfo) override;
 		
@@ -26,7 +26,7 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
-		BoxScroll *copy() override;
+		BoxScroll* copy() override;
 		
 		~BoxScroll() override;
 	};
@@ -34,6 +34,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<BoxScroll> {
-		static bool decodePointer(const YAML::Node &node, BoxScroll *&boxScroll);
+		static bool decodePointer(const YAML::Node& node, BoxScroll*& boxScroll);
 	};
 }

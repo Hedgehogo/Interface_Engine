@@ -1,7 +1,8 @@
 #include "oneKeyInteraction.hpp"
 
 namespace ui {
-	OneKeyInteraction::OneKeyInteraction(KeyEvent *event, Key key) : event(event), key(key) {}
+	OneKeyInteraction::OneKeyInteraction(KeyEvent* event, Key key) : event(event), key(key) {
+	}
 	
 	OneKeyInteraction::~OneKeyInteraction() {
 		delete event;
@@ -11,11 +12,11 @@ namespace ui {
 		return key;
 	}
 	
-	KeyEvent *OneKeyInteraction::getEvent() {
+	KeyEvent* OneKeyInteraction::getEvent() {
 		return event;
 	}
 	
-	void OneKeyInteraction::setEvent(KeyEvent *event) {
+	void OneKeyInteraction::setEvent(KeyEvent* event) {
 		delete this->event;
 		this->event = event;
 	}
@@ -31,19 +32,22 @@ namespace ui {
 		event->setPressed(false);
 	}
 	
-	OneKeyInteraction *OneKeyInteraction::copy() {
+	OneKeyInteraction* OneKeyInteraction::copy() {
 		return new OneKeyInteraction{event->copy(), key};
 	}
 	
 	
-	bool DecodePointer<OneKeyInteraction>::decodePointer(const YAML::Node &node, OneKeyInteraction *&oneKeyInteraction) {
-		KeyEvent *event;
+	bool DecodePointer<OneKeyInteraction>::decodePointer(const YAML::Node& node, OneKeyInteraction*& oneKeyInteraction) {
+		KeyEvent* event;
 		Key key{Key::mouseLeft};
 		
 		node["event"] >> event;
 		if(node["key"])
 			node["key"] >> key;
 		
-		{ oneKeyInteraction = new OneKeyInteraction{event, key}; return true; }
+		{
+			oneKeyInteraction = new OneKeyInteraction{event, key};
+			return true;
+		}
 	}
 }

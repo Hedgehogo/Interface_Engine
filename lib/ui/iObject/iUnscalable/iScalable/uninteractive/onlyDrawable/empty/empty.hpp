@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../onlyDrawable.hpp"
 #include "../../../../../layout/layout.hpp"
 
@@ -17,12 +18,12 @@ namespace ui {
 		
 		Empty* copy() override;
 		
-		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
+		virtual void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
 	};
 	
 	
 	template<>
 	struct DecodePointer<Empty> {
-		static bool decodePointer(const YAML::Node &node, Empty *&empty);
+		static bool decodePointer(const YAML::Node& node, Empty*& empty);
 	};
 }

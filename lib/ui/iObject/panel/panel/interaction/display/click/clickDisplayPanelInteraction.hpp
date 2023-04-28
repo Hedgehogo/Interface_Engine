@@ -1,4 +1,5 @@
 #pragma once
+
 #include "event/displayPanelEvent.hpp"
 #include "../../click/clickPanelInteraction.hpp"
 
@@ -21,6 +22,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<ClickDisplayPanelInteraction> {
-		static bool decodePointer(const YAML::Node &node, ClickDisplayPanelInteraction *&clickDisplayPanelInteraction);
+		static bool decodePointer(const YAML::Node& node, ClickDisplayPanelInteraction*& clickDisplayPanelInteraction);
 	};
 }

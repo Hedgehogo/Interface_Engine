@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../baseButton.hpp"
 #include "../../../../../../panel/panel/general/panel.hpp"
 #include "../../../../../../panel/panel/interaction/display/pointing/pointingDisplayPanelInteraction.hpp"
@@ -13,10 +14,10 @@
 namespace ui {
 	class ButtonWithPanel : public BaseButton {
 	protected:
-		Panel *panel;
-		
+		Panel* panel;
+	
 	public:
-		ButtonWithPanel(Panel *panel, DisplayPanelInteraction* interaction, IScalable *background);
+		ButtonWithPanel(Panel* panel, DisplayPanelInteraction* interaction, IScalable* background);
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
@@ -28,12 +29,12 @@ namespace ui {
 		
 		ButtonWithPanel* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<ButtonWithPanel> {
-		static bool decodePointer(const YAML::Node &node, ButtonWithPanel *&buttonWithPanel);
+		static bool decodePointer(const YAML::Node& node, ButtonWithPanel*& buttonWithPanel);
 	};
 }

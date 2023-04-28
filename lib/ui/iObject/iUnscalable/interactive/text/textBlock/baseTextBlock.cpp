@@ -1,11 +1,13 @@
 #include "baseTextBlock.hpp"
 
 namespace ui {
-	BaseTextBlock::BaseTextBlock() {}
+	BaseTextBlock::BaseTextBlock() {
+	}
 	
-	BaseTextBlock::BaseTextBlock(TextVariables textVariables) : textVariables(textVariables) {}
+	BaseTextBlock::BaseTextBlock(TextVariables textVariables) : textVariables(textVariables) {
+	}
 	
-	void BaseTextBlock::setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, sf::Font *font, uint size) {
+	void BaseTextBlock::setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, sf::Font* font, uint size) {
 		if(textVariables.TextColor == sf::Color(255, 255, 255, 0))
 			textVariables.TextColor = TextColor;
 		if(textVariables.textSelectionColor == sf::Color(255, 255, 255, 0))

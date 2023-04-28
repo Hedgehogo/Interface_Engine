@@ -3,7 +3,7 @@
 #include "../iChangeVariable.hpp"
 
 namespace ui {
-	class ChangeVariableByCurve : public IChangeVariable{
+	class ChangeVariableByCurve : public IChangeVariable {
 	protected:
 		sf::Vector2f start, end;
 		float k1, k2;
@@ -22,6 +22,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<ChangeVariableByCurve> {
-		static bool decodePointer(const YAML::Node &node, ChangeVariableByCurve *&changeVariableByCurve);
+		static bool decodePointer(const YAML::Node& node, ChangeVariableByCurve*& changeVariableByCurve);
 	};
 } // ui

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../basePanelInteraction.hpp"
 
 namespace ui {
@@ -12,7 +13,7 @@ namespace ui {
 	public:
 		PanelInteraction();
 		
-		void init(Panel& panel, IPanelManager &panelManager) override;
+		void init(Panel& panel, IPanelManager& panelManager) override;
 		
 		void setPanel(Panel& panel) override;
 		

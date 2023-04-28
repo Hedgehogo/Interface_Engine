@@ -97,10 +97,9 @@ namespace ui {
 		std::dynamic_pointer_cast<SRange<T>>(value->getYPtr())->setBounds(lower.y, upper.y);
 	}
 	
-
 	
 	template<typename T>
-	bool DecodePointer<SVector2<T>>::decodePointer(const YAML::Node &node, SVector2<T> *&withVector2) {
+	bool DecodePointer<SVector2<T>>::decodePointer(const YAML::Node& node, SVector2<T>*& withVector2) {
 		if(node["x"] && node["y"]) {
 			withVector2 = new SVector2<T>(getSValue<T>(node["x"]), getSValue<T>(node["y"]));
 		} else {

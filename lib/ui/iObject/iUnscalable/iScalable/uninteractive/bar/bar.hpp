@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../onlyDrawable/onlyDrawable.hpp"
 #include "../onlyDrawable/empty/empty.hpp"
 #include "../../../../layout/background/layoutWithBackground.hpp"
@@ -14,13 +15,13 @@ namespace ui {
 		float value;
 		
 		void copy(Bar* bar);
-		
+	
 	public:
 		void init(InitInfo initInfo) override;
 		
 		explicit Bar(IUninteractive* background, IUninteractive* strip, float offset = 0, bool horizontal = true);
 		
-		explicit Bar(IUninteractive *background, IUninteractive *strip, int division, float offset = 0, bool horizontal = true);
+		explicit Bar(IUninteractive* background, IUninteractive* strip, int division, float offset = 0, bool horizontal = true);
 		
 		~Bar() override;
 		
@@ -38,12 +39,12 @@ namespace ui {
 		
 		Bar* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<Bar> {
-		static bool decodePointer(const YAML::Node &node, Bar *&bar);
+		static bool decodePointer(const YAML::Node& node, Bar*& bar);
 	};
 }

@@ -26,7 +26,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<WhileChangingObjectsEvent>::decodePointer(const YAML::Node &node, WhileChangingObjectsEvent *&whileChangingObjectsEvent) {
+	bool DecodePointer<WhileChangingObjectsEvent>::decodePointer(const YAML::Node& node, WhileChangingObjectsEvent*& whileChangingObjectsEvent) {
 		BoxWithChangeableObjects* object = nullptr;
 		
 		if(node["object"])

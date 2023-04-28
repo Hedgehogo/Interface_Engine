@@ -2,9 +2,10 @@
 #include "../manager/general/panelManager.hpp"
 
 namespace ui {
-	BasePanel::BasePanel(IScalable *object, ISizing2 *sizing, IPositioning2 *positioning, bool displayed) :
+	BasePanel::BasePanel(IScalable* object, ISizing2* sizing, IPositioning2* positioning, bool displayed) :
 		LayoutWithObject(object), sizing(sizing), positioning(positioning),
-		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {}
+		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {
+	}
 	
 	void BasePanel::init(InitInfo initInfo) {
 		initInfo.panelManager.addPanel(this);
@@ -18,7 +19,8 @@ namespace ui {
 		delete positioning;
 	}
 	
-	void BasePanel::setDisplayed() {}
+	void BasePanel::setDisplayed() {
+	}
 	
 	void BasePanel::setParentProcessed(bool parentProcessed) {
 		this->parentProcessed = parentProcessed;
@@ -81,7 +83,7 @@ namespace ui {
 		return sizing->getParentSize(object->getNormalSize());
 	}
 	
-	void BasePanel::copy(BasePanel *panel) {
+	void BasePanel::copy(BasePanel* panel) {
 		Layout::copy(panel);
 		panel->displayed = this->displayed;
 		panel->oldDisplayed = this->oldDisplayed;
@@ -94,7 +96,7 @@ namespace ui {
 		BasePanel::fullDebug = fullDebug;
 	}
 	
-	void BasePanel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BasePanel::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		if(fullDebug || oldDisplayed) {
 			object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		}

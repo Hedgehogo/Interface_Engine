@@ -7,11 +7,11 @@ namespace ui {
 		strip->init(initInfo);
 	}
 	
-	Bar::Bar(IUninteractive *background, IUninteractive *strip, float offset, bool horizontal) :
+	Bar::Bar(IUninteractive* background, IUninteractive* strip, float offset, bool horizontal) :
 		LayoutWithBackground(background), strip(strip), horizontal(horizontal), offset(offset), division(1), value(0) {
 	}
 	
-	Bar::Bar(IUninteractive *background, IUninteractive *strip, int division, float offset, bool horizontal) :
+	Bar::Bar(IUninteractive* background, IUninteractive* strip, int division, float offset, bool horizontal) :
 		LayoutWithBackground(background), strip(strip), horizontal(horizontal), offset(offset), division(division), value(0) {
 	}
 	
@@ -59,27 +59,27 @@ namespace ui {
 		return max(stripNormalSize, background->getNormalSize());
 	}
 	
-	void Bar::copy(Bar *bar) {
+	void Bar::copy(Bar* bar) {
 		OnlyDrawable::copy(bar);
 		Layout::copy(bar);
 		bar->value = this->value;
 	}
 	
-	Bar *Bar::copy() {
-		Bar *bar{new Bar{background->copy(), strip->copy(), division, offset, horizontal}};
+	Bar* Bar::copy() {
+		Bar* bar{new Bar{background->copy(), strip->copy(), division, offset, horizontal}};
 		Bar::copy(bar);
 		return bar;
 	}
 	
-	void Bar::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void Bar::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		strip->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue, hueOffset);
 	}
 	
 	
-	bool DecodePointer<Bar>::decodePointer(const YAML::Node &node, Bar *&bar) {
-		IUninteractive *background;
-		IUninteractive *strip;
+	bool DecodePointer<Bar>::decodePointer(const YAML::Node& node, Bar*& bar) {
+		IUninteractive* background;
+		IUninteractive* strip;
 		int division{1};
 		float offset{0.0f};
 		bool horizontal{true};
@@ -93,6 +93,9 @@ namespace ui {
 		if(node["horizontal"])
 			node["horizontal"] >> horizontal;
 		
-		{ bar = new Bar{background, strip, division, offset, horizontal}; return true; }
+		{
+			bar = new Bar{background, strip, division, offset, horizontal};
+			return true;
+		}
 	}
 }

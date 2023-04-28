@@ -4,16 +4,18 @@
 #include "../sizingAndPositioning/sizing2/determine/determineSizing2.hpp"
 #include "../sizingAndPositioning/positioning/determine/determinePositioning.hpp"
 #include "../sizingAndPositioning/positioning2/determine/determinePositioning2.hpp"
+
 #define MAGICKCORE_QUANTUM_DEPTH 16
 # define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
+
 #include <Magick++.h>
 
 namespace ui {
-	void init(const char *path_){
+	void init(const char* path_) {
 		Magick::InitializeMagick(path_);
 		yamlBuilderInit();
 	}
-
+	
 	void yamlBuilderInit() {
 		inherit<ISizing, ConstSizing>({"CS"});
 		inherit<ISizing, RelativeNormalSizing>({"RNormalSizing", "RNS"});
@@ -43,14 +45,14 @@ namespace ui {
 		
 		inherit<BaseResizer, Resizer>({"R"});
 		
-        inherit<TextEvent, TextCopyEvent>({"TCE"});
-        inherit<TextEvent, TextSelectionEvent>({"TSE"});
-        inherit<TextEvent, TextAddBlockInteractionEvent>({"TABIE"});
+		inherit<TextEvent, TextCopyEvent>({"TCE"});
+		inherit<TextEvent, TextSelectionEvent>({"TSE"});
+		inherit<TextEvent, TextAddBlockInteractionEvent>({"TABIE"});
 		inherit<KeyEvent, TextEvent>();
 		inherit<KeyEvent, ChangeObjectEvent>({"COE", "ChangeObjectE"});
 		inherit<KeyEvent, WhileChangingObjectsEvent>({"WhileChangingOE", "WCO"});
 		inherit<KeyEvent, OpenUrlEvent>({"UrlE", "Url", "OUE"});
-
+		
 		inherit<HidePanelInteraction, DontHidePanelInteraction>({"DontHidePI", "DontHPI", "DHPI"});
 		inherit<HidePanelInteraction, ClickHidePanelInteraction>({"ClickHidePI", "ClickHPI", "CHPI"});
 		inherit<HidePanelInteraction, PointingHidePanelInteraction>({"PointingHidePI", "PointingHPI", "PHPI"});
@@ -71,14 +73,14 @@ namespace ui {
 		inherit<IInteraction, OneKeyInteraction>({"OKI"});
 		inherit<IInteraction, HotkeyInteraction>({"HI"});
 		inherit<IInteraction, EmptyInteraction>({"EI"});
-
+		
 		inherit<ISbool, SConvertFloatToBoolEquals>({"ConvertFloatToBoolEquals", "SCFTBE"});
 		inherit<ISbool, SConvertFloatToBoolEquals>({"ConvertFloatToBoolEquals", "SCFTBE"});
 		inherit<ISbool, SConvertFloatToBoolGreater>({"ConvertFloatToBoolGreater", "SCFTBG"});
 		inherit<ISbool, SConvertFloatToBoolGreaterOrEquals>({"ConvertFloatToBoolGreaterOrEquals", "SCFTBGOE", "SCFTBGE"});
 		inherit<ISbool, SConvertFloatToBoolLess>({"ConvertFloatToBoolLess", "SCFTBL"});
 		inherit<ISbool, SConvertFloatToBoolLessOrEquals>({"ConvertFloatToBoolLessOrEquals", "SCFTBLOE", "SCFTBLE"});
-
+		
 		inherit<IAnimatorUnit, Animation>({"A"});
 		inherit<IAnimatorUnit, Prerequisite>({"P"});
 		inherit<IAnimatorUnit, AnimatorUnitMatchFloat>({"M", "Mf", "AUMf", "AUM"});
@@ -88,9 +90,9 @@ namespace ui {
 		inherit<IChangeVariable, ChangeVariableBySinusoid>({"CVBySinusoid", "CVBySin", "CVBS"});
 		inherit<IChangeVariable, ChangeVariableByCurve>({"CVByCurve", "CVBCurve", "CVBC"});
 		inherit<IValve, ValveWithISbool>({"VWISbool", "VIWISB"});
-
+		
 		addFunc<OnlyDrawable>(videoConvert, {"Video"});
-
+		
 		inherit<OnlyDrawable, Empty>();
 		inherit<OnlyDrawable, FullColor>();
 		inherit<OnlyDrawable, RoundedRectangle>();
@@ -113,7 +115,7 @@ namespace ui {
 		inherit<Box, BoxWithMovableBorder>({"BoxWMBorder", "BWMB"});
 		inherit<Box, BoxWithPanel>({"BoxWPanel", "BWP"});
 		inherit<Box, BoxWithRenderTexture>({"BoxWRTexture", "BWRT"});
-        inherit<Box, BoxWithShader>({"BWS"});
+		inherit<Box, BoxWithShader>({"BWS"});
 		inherit<Box, BoxWithChangeableObjects>({"BWChangeableObjects", "BWCO"});
 		inherit<Box, BoxMakePermeable>({"BMakePerm", "BMP"});
 		inherit<Box, BoxScroll>({"BScroll", "BS"});
@@ -128,7 +130,7 @@ namespace ui {
 		inherit<IUnscalable, IScalable>();
 		inherit<Interactive, Text>();
 		inherit<IUnscalable, Interactive>();
-        inherit<BasePanel, ConstPanel>();
+		inherit<BasePanel, ConstPanel>();
 		inherit<BasePanel, Panel>();
 		inherit<IObject, BasePanel>();
 		inherit<IObject, IUnscalable>();

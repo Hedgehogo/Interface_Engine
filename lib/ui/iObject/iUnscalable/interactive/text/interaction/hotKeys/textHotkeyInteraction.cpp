@@ -18,7 +18,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<TextHotkeyInteraction>::decodePointer(const YAML::Node &node, TextHotkeyInteraction *&textHotkeyInteraction) {
+	bool DecodePointer<TextHotkeyInteraction>::decodePointer(const YAML::Node& node, TextHotkeyInteraction*& textHotkeyInteraction) {
 		std::vector<std::vector<HotkeyInteraction::Hotkey*>> hotkeys;
 		uint startState{0};
 		

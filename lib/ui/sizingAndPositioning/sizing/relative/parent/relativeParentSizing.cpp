@@ -5,9 +5,11 @@
 #include "relativeParentSizing.hpp"
 
 namespace ui {
-	RelativeParentSizing::RelativeParentSizing(float addition) : addition(addition) {}
+	RelativeParentSizing::RelativeParentSizing(float addition) : addition(addition) {
+	}
 	
-	void RelativeParentSizing::init(float) {}
+	void RelativeParentSizing::init(float) {
+	}
 	
 	float RelativeParentSizing::findSize(float parentSize, float) {
 		return parentSize + addition;
@@ -17,14 +19,17 @@ namespace ui {
 		return objectSize - addition;
 	}
 	
-	RelativeParentSizing *RelativeParentSizing::copy() {
+	RelativeParentSizing* RelativeParentSizing::copy() {
 		return new RelativeParentSizing{addition};
 	}
 	
 	
-	bool DecodePointer<RelativeParentSizing>::decodePointer(const YAML::Node &node, RelativeParentSizing *&relativeParentSizing) {
+	bool DecodePointer<RelativeParentSizing>::decodePointer(const YAML::Node& node, RelativeParentSizing*& relativeParentSizing) {
 		float addition;
 		node["addition"] >> addition;
-		{ relativeParentSizing = new RelativeParentSizing{addition}; return true; }
+		{
+			relativeParentSizing = new RelativeParentSizing{addition};
+			return true;
+		}
 	}
 }

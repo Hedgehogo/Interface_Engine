@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../iSizing.hpp"
 
 namespace ui {
@@ -6,7 +7,7 @@ namespace ui {
 	protected:
 		float coefficient;
 		float addition;
-		
+	
 	public:
 		explicit TargetCoefficientSizing(float coefficient = 1, float addition = 0);
 		
@@ -20,6 +21,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<TargetCoefficientSizing> {
-		static bool decodePointer(const YAML::Node &node, TargetCoefficientSizing *&targetCoefficientSizing);
+		static bool decodePointer(const YAML::Node& node, TargetCoefficientSizing*& targetCoefficientSizing);
 	};
 }

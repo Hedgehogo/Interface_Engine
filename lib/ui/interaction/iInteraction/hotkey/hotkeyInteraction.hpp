@@ -53,7 +53,6 @@ namespace ui {
 	};
 	
 	
-	
 	template<>
 	struct Decode<HotkeyInteraction::Hotkey*> {
 		static bool decode(const YAML::Node& node, HotkeyInteraction::Hotkey*& hotkey);

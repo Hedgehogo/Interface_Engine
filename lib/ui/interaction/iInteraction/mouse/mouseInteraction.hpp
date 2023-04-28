@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iInteraction.hpp"
 
 namespace ui {
@@ -6,10 +7,10 @@ namespace ui {
 	protected:
 		KeyEvent* leftMouseButton;
 		KeyEvent* rightMouseButton;
-		
+	
 	public:
 		MouseInteraction(KeyEvent* leftMouseButton, KeyEvent* rightMouseButton);
-
+		
 		void setLeftButtonEvent(KeyEvent* leftMouseButton);
 		
 		void setRightButtonEvent(KeyEvent* rightMouseButton);

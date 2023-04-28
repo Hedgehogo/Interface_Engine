@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iPositioning.hpp"
 
 namespace ui {
@@ -8,7 +9,7 @@ namespace ui {
 	
 	protected:
 		FindPositionFunc findPositionFunc;
-		
+	
 	public:
 		explicit LambdaPositioning(FindPositionFunc findPositionFunc);
 		

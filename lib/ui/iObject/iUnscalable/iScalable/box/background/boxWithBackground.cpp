@@ -1,7 +1,7 @@
 #include "boxWithBackground.hpp"
 
 namespace ui {
-	BoxWithBackground::BoxWithBackground(IScalable *object, IUninteractive *background, sf::Vector2f offset, sf::Vector2f minSize) :
+	BoxWithBackground::BoxWithBackground(IScalable* object, IUninteractive* background, sf::Vector2f offset, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithObject(object), LayoutWithBackground(background), offset(offset) {
 	}
 	
@@ -44,20 +44,20 @@ namespace ui {
 		return object->updateInteractions(mousePosition);
 	}
 	
-	BoxWithBackground *BoxWithBackground::copy() {
+	BoxWithBackground* BoxWithBackground::copy() {
 		return new BoxWithBackground(object->copy(), background->copy(), offset, minimumSize);
 	}
 	
-	void BoxWithBackground::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BoxWithBackground::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		
 	}
 	
 	
-	bool DecodePointer<BoxWithBackground>::decodePointer(const YAML::Node &node, BoxWithBackground *&boxWithBackground) {
-		IScalable *object;
-		IUninteractive *background;
+	bool DecodePointer<BoxWithBackground>::decodePointer(const YAML::Node& node, BoxWithBackground*& boxWithBackground) {
+		IScalable* object;
+		IUninteractive* background;
 		sf::Vector2f offset{};
 		sf::Vector2f minSize{};
 		

@@ -5,21 +5,21 @@
 #include "modules/appendix/yaml-cpp/buffer/buffer.hpp"
 
 namespace ui {
-	class ValveWithISbool : public IValve{
+	class ValveWithISbool : public IValve {
 	protected:
 		PISbool value;
-
+	
 	public:
 		explicit ValveWithISbool(PISbool value);
-
+		
 		bool operator()() override;
-
-		ValveWithISbool *copy() override;
+		
+		ValveWithISbool* copy() override;
 	};
-
+	
 	
 	template<>
 	struct DecodePointer<ValveWithISbool> {
-		static bool decodePointer(const YAML::Node &node, ValveWithISbool *&valveWithISbool);
+		static bool decodePointer(const YAML::Node& node, ValveWithISbool*& valveWithISbool);
 	};
 }

@@ -2,7 +2,7 @@
 #include "constSlider.hpp"
 
 namespace ui {
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, float sliderScale, Key key, bool wheelHorizontal,
+	ConstSlider::ConstSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, float sliderScale, Key key, bool wheelHorizontal,
 							 SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
 		
@@ -10,7 +10,7 @@ namespace ui {
 		aspectRatio = sliderSize.x / sliderSize.y;
 	}
 	
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, sf::Vector2i division, float sliderScale, Key key, bool wheelHorizontal) :
+	ConstSlider::ConstSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, sf::Vector2i division, float sliderScale, Key key, bool wheelHorizontal) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, key, division, wheelHorizontal}), sliderScale(sliderScale) {
 		
 		sliderSize = slider->getNormalSize();
@@ -29,21 +29,21 @@ namespace ui {
 		resizeSlider(value->getValue());
 	}
 	
-	ConstSlider::ConstSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, SliderInteraction *interaction) :
+	ConstSlider::ConstSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, SliderInteraction* interaction) :
 		BaseSlider(slider, background, value, interaction) {
 	}
 	
-	ConstSlider *ConstSlider::copy() {
-		ConstSlider *constSlider{new ConstSlider{slider->copy(), background->copy(), value, dynamic_cast<SliderInteraction *>(interaction->copy())}};
-		dynamic_cast<SliderInteraction *>(constSlider->interaction)->setSlider(*constSlider);
+	ConstSlider* ConstSlider::copy() {
+		ConstSlider* constSlider{new ConstSlider{slider->copy(), background->copy(), value, dynamic_cast<SliderInteraction*>(interaction->copy())}};
+		dynamic_cast<SliderInteraction*>(constSlider->interaction)->setSlider(*constSlider);
 		BaseSlider::copy(constSlider);
 		return constSlider;
 	}
 	
 	
-	bool DecodePointer<ConstSlider>::decodePointer(const YAML::Node &node, ConstSlider *&constSlider) {
-		IUninteractive *slider;
-		IUninteractive *background;
+	bool DecodePointer<ConstSlider>::decodePointer(const YAML::Node& node, ConstSlider*& constSlider) {
+		IUninteractive* slider;
+		IUninteractive* background;
 		PSRVec2f value;
 		float sliderScale{1.0f};
 		Key key{Key::mouseLeft};

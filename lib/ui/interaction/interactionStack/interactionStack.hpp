@@ -7,21 +7,21 @@
 namespace ui {
 	class InteractionStack {
 	protected:
-		std::vector<IInteraction *> interactionStack;
-		
+		std::vector<IInteraction*> interactionStack;
+	
 	public:
-		explicit InteractionStack(std::vector<IInteraction *> &&interactionStack = {});
+		explicit InteractionStack(std::vector<IInteraction*>&& interactionStack = {});
 		
 		virtual ~InteractionStack();
 		
-		IInteraction *at(unsigned index);
+		IInteraction* at(unsigned index);
 		
-		void add(IInteraction *element);
+		void add(IInteraction* element);
 	};
-
+	
 	
 	template<>
 	struct DecodePointer<InteractionStack> {
-		static bool decodePointer(const YAML::Node &node, InteractionStack *&interactionStack);
+		static bool decodePointer(const YAML::Node& node, InteractionStack*& interactionStack);
 	};
 }

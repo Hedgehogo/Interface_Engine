@@ -5,7 +5,7 @@
 template<typename I, I T>
 float calculateMediumFPS(std::array<float, T> lastFPS) {
 	float sum = 0.0f;
-	for(const auto &fps: lastFPS) {
+	for(const auto& fps: lastFPS) {
 		sum += fps;
 	}
 	return sum / static_cast<float>(lastFPS.size());
@@ -14,28 +14,28 @@ float calculateMediumFPS(std::array<float, T> lastFPS) {
 int main() {
 	ui::init();
 	
-    sf::ContextSettings settings;
-    settings.antialiasingLevel = 1;
-    sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
+	sf::ContextSettings settings;
+	settings.antialiasingLevel = 1;
+	sf::RenderWindow window(sf::VideoMode(400, 200), "IE works!", sf::Style::Default, settings);
 	sf::View view(sf::Vector2f(0, 0), sf::Vector2f(window.getSize()));
 	window.setFramerateLimit(60);
-
+	
 	auto interface{ui::makeInterface(window, "../example-resources/test.yaml")};
 	interface.setRenderWindowSize(window);
-
+	
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};
-
+	
 	while(window.isOpen()) {
-        lastFPS[0] = 1.f / clock.restart().asSeconds();
+		lastFPS[0] = 1.f / clock.restart().asSeconds();
 		std::rotate(lastFPS.begin(), lastFPS.begin() + 1, lastFPS.end());
 		float mediumFPS = calculateMediumFPS(lastFPS);
-        window.setTitle(std::to_string(static_cast<int>(mediumFPS)));
+		window.setTitle(std::to_string(static_cast<int>(mediumFPS)));
 		clock.restart();
 		
 		sf::Event event{};
 		while(window.pollEvent(event)) {
-            ui::handleEvent(event);
+			ui::handleEvent(event);
 			
 			if(event.type == sf::Event::Closed) {
 				window.close();
@@ -58,6 +58,6 @@ int main() {
 		interface.draw();
 		//interface.drawDebug(window, 0, 2, 90, 90);
 		window.display();
-        ui::clearEvent();
+		ui::clearEvent();
 	}
 }

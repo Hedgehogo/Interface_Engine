@@ -9,7 +9,7 @@ namespace ui {
 		Layout::resize(size, position);
 	}
 	
-	void Box::copy(Box *box) {
+	void Box::copy(Box* box) {
 		Layout::copy(box);
 	}
 }

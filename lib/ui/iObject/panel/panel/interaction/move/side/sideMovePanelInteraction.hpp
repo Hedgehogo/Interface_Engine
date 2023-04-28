@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../movePanelInteraction.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
@@ -20,6 +21,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<SideMovePanelInteraction> {
-		static bool decodePointer(const YAML::Node &node, SideMovePanelInteraction *&sideMovePanelInteraction);
+		static bool decodePointer(const YAML::Node& node, SideMovePanelInteraction*& sideMovePanelInteraction);
 	};
 }

@@ -3,10 +3,11 @@
 #include <iostream>
 
 namespace ui {
-	PanelManager::PanelManager(std::vector<BasePanel *> panels) : panels(std::move(panels)), activePanels() {}
+	PanelManager::PanelManager(std::vector<BasePanel*> panels) : panels(std::move(panels)), activePanels() {
+	}
 	
 	void PanelManager::print() {
-		for(const auto &panel: panels) {
+		for(const auto& panel: panels) {
 			std::cout << panel << ", ";
 		}
 		if(!panels.empty()) {
@@ -15,7 +16,7 @@ namespace ui {
 	}
 	
 	void PanelManager::printActive() {
-		for(const auto &panel: activePanels) {
+		for(const auto& panel: activePanels) {
 			std::cout << panel << ", ";
 		}
 		if(!activePanels.empty()) {
@@ -35,22 +36,21 @@ namespace ui {
 		});
 	}
 	
-	void PanelManager::addPanel(BasePanel *panel) {
+	void PanelManager::addPanel(BasePanel* panel) {
 		panels.insert(panels.begin(), panel);
 	}
-
-	void PanelManager::removePanel(BasePanel *panel)
-	{
-		if (auto elem = std::find( panels.begin(), panels.end(), panel); elem != panels.end())
-			panels.erase( elem);
+	
+	void PanelManager::removePanel(BasePanel* panel) {
+		if(auto elem = std::find(panels.begin(), panels.end(), panel); elem != panels.end())
+			panels.erase(elem);
 	}
 	
-	void PanelManager::displayPanel(BasePanel *panel) {
+	void PanelManager::displayPanel(BasePanel* panel) {
 		if(std::find(activePanels.begin(), activePanels.end(), panel) == activePanels.end())
 			activePanels.insert(activePanels.begin(), panel);
 	}
 	
-	void PanelManager::hidePanel(BasePanel *panel) {
+	void PanelManager::hidePanel(BasePanel* panel) {
 		if(auto iterator = std::find(activePanels.begin(), activePanels.end(), panel); iterator != activePanels.end())
 			activePanels.erase(iterator);
 	}
@@ -62,15 +62,15 @@ namespace ui {
 	}
 	
 	void PanelManager::update() {
-		for(auto &panel: panels) {
+		for(auto& panel: panels) {
 			panel->update();
 		}
 	}
 	
 	bool PanelManager::updateInteractions(sf::Vector2f mousePosition, bool active) {
-		for(auto iterator= activePanels.begin(); iterator != activePanels.end(); ++iterator) {
+		for(auto iterator = activePanels.begin(); iterator != activePanels.end(); ++iterator) {
 			if((*iterator)->updateInteractions(mousePosition, active) && active) {
-				BasePanel *panel = *iterator;
+				BasePanel* panel = *iterator;
 				activePanels.erase(iterator);
 				activePanels.insert(activePanels.begin(), panel);
 				active = false;

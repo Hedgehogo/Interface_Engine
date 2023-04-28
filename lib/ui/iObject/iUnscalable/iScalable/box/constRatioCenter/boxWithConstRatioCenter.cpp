@@ -1,11 +1,11 @@
 #include "boxWithConstRatioCenter.hpp"
 
 namespace ui {
-	BoxWithConstRatioCenter::BoxWithConstRatioCenter(IScalable *object, IUninteractive *background, float aspectRatio, sf::Vector2f minSize) :
+	BoxWithConstRatioCenter::BoxWithConstRatioCenter(IScalable* object, IUninteractive* background, float aspectRatio, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithObject(object), LayoutWithBackground(background), LayoutWithTwoObjects(new Empty, new Empty), aspectRatio(aspectRatio) {
 	}
 	
-	BoxWithConstRatioCenter::BoxWithConstRatioCenter(IScalable *object, IScalable *firstObject, IScalable *secondObject, IUninteractive *background, float aspectRatio, sf::Vector2f minSize) :
+	BoxWithConstRatioCenter::BoxWithConstRatioCenter(IScalable* object, IScalable* firstObject, IScalable* secondObject, IUninteractive* background, float aspectRatio, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithObject(object), LayoutWithBackground(background), LayoutWithTwoObjects(firstObject, secondObject), aspectRatio(aspectRatio) {
 	}
 	
@@ -84,19 +84,19 @@ namespace ui {
 		return max(objectNormalSize, background->getNormalSize());
 	}
 	
-	BoxWithConstRatioCenter *BoxWithConstRatioCenter::copy() {
-		BoxWithConstRatioCenter *boxWithConstRatioCenter{new BoxWithConstRatioCenter{object->copy(), firstObject->copy(), secondObject->copy(), background->copy(), aspectRatio, minimumSize}};
+	BoxWithConstRatioCenter* BoxWithConstRatioCenter::copy() {
+		BoxWithConstRatioCenter* boxWithConstRatioCenter{new BoxWithConstRatioCenter{object->copy(), firstObject->copy(), secondObject->copy(), background->copy(), aspectRatio, minimumSize}};
 		Box::copy(boxWithConstRatioCenter);
 		return boxWithConstRatioCenter;
 	}
 	
 	
-	bool DecodePointer<BoxWithConstRatioCenter>::decodePointer(const YAML::Node &node, BoxWithConstRatioCenter *&boxWithConstRatioCenter) {
-		IScalable *object;
-		IScalable *firstObject;
-		IScalable *secondObject;
+	bool DecodePointer<BoxWithConstRatioCenter>::decodePointer(const YAML::Node& node, BoxWithConstRatioCenter*& boxWithConstRatioCenter) {
+		IScalable* object;
+		IScalable* firstObject;
+		IScalable* secondObject;
 		float aspectRatio;
-		IUninteractive *background{};
+		IUninteractive* background{};
 		sf::Vector2f minSize{};
 		
 		node["object"] >> object;
@@ -123,7 +123,7 @@ namespace ui {
 		return true;
 	}
 	
-	void BoxWithConstRatioCenter::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BoxWithConstRatioCenter::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		firstObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);

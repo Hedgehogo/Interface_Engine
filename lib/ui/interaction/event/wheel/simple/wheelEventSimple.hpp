@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../wheelEvent.hpp"
 
 namespace ui {

@@ -7,9 +7,9 @@ namespace ui {
 	protected:
 		std::string type;
 		std::string base;
-		
+	
 	public:
-		NonexistentTypeYamlException(YAML::Mark mark, const std::string& type, const std::string &base);
+		NonexistentTypeYamlException(YAML::Mark mark, const std::string& type, const std::string& base);
 		
 		std::string getType();
 		

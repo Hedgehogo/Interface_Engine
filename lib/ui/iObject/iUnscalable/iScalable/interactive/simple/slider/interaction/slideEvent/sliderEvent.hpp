@@ -4,6 +4,7 @@
 
 namespace ui {
 	class BaseSlider;
+	
 	class SliderEvent : public KeyEvent_Simple {
 	protected:
 		BaseSlider* slider;
@@ -22,9 +23,9 @@ namespace ui {
 		void whilePressed() override;
 		
 		void whileNotPressed() override;
-		
+	
 	public:
-		explicit SliderEvent(BaseSlider &slider, sf::Vector2i division = {0, 0});
+		explicit SliderEvent(BaseSlider& slider, sf::Vector2i division = {0, 0});
 		
 		void setSlider(BaseSlider& slider);
 		

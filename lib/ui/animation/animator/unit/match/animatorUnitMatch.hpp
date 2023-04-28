@@ -21,7 +21,7 @@ namespace ui {
 	class AnimatorUnitMatch : public IAnimatorUnit {
 	public:
 		using Option = detail::AnimatorUnitMatch::Option<T>;
-		
+	
 	protected:
 		std::vector<Option> options;
 		PSValue<T> value;
@@ -42,12 +42,10 @@ namespace ui {
 	};
 	
 	
-	
 	template<typename T>
 	struct Decode<detail::AnimatorUnitMatch::Option<T>> {
 		static bool decode(const YAML::Node& node, detail::AnimatorUnitMatch::Option<T>& option);
 	};
-	
 	
 	
 	template<typename T>

@@ -2,18 +2,18 @@
 #include "../../../../../../../modules/appendix/HSVtoRGB/HsVtoRgb.hpp"
 
 namespace ui {
-	Character::Character(char32_t character, TextVariables &textVariables, std::vector<BaseLine *> &lines)
+	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BaseLine*>& lines)
 		: character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), lines(lines), selectionVertexArray(sf::Quads, 4) {
 		if(isSpecial() != BaseCharacter::Special::enter) {
 			glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style & sf::Text::Style::Bold);
 			
 			texture = textVariables.font->getTexture(textVariables.size);
-
+			
 			vertexArray[0].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left, glyph.textureRect.top});
 			vertexArray[1].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left + glyph.textureRect.width, glyph.textureRect.top});
 			vertexArray[2].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left + glyph.textureRect.width, glyph.textureRect.top + glyph.textureRect.height});
 			vertexArray[3].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left, glyph.textureRect.top + glyph.textureRect.height});
-
+			
 			vertexArray[0].position = {0, 0};
 			vertexArray[1].position = sf::Vector2f{sf::Vector2i{glyph.textureRect.width, 0}};
 			vertexArray[2].position = sf::Vector2f{sf::Vector2i{glyph.textureRect.width, glyph.textureRect.height}};
@@ -26,23 +26,23 @@ namespace ui {
 			
 			if(textVariables.style & sf::Text::Style::Italic) {
 				float italicShear = -0.26794;
-
-				for (size_t i = 0; i < 4; ++i) {
+				
+				for(size_t i = 0; i < 4; ++i) {
 					vertexArray[i].position.x += (vertexArray[i].position.y + glyph.bounds.top) * italicShear;
 				}
 			}
-
-			for (size_t i = 0; i < 4; ++i) {
+			
+			for(size_t i = 0; i < 4; ++i) {
 				vertexArray[i].position += {glyph.bounds.left, glyph.bounds.top};
 				selectionVertexArray[i].position.y -= getHeight();
-
+				
 				vertexArray[i].color = textVariables.TextColor;
 				selectionVertexArray[i].color = textVariables.backgroundSelectionColor;
 			}
 		}
 	}
 	
-	void Character::init(sf::RenderTarget &renderTarget) {
+	void Character::init(sf::RenderTarget& renderTarget) {
 		this->renderTarget = &renderTarget;
 	}
 	
@@ -132,7 +132,7 @@ namespace ui {
 		selectionVertexArray[3].position += position;
 	}
 	
-	std::vector<BaseLine *> &Character::getLine() {
+	std::vector<BaseLine*>& Character::getLine() {
 		return lines;
 	}
 	
@@ -148,7 +148,7 @@ namespace ui {
 		Character::debug = debug;
 	}
 	
-	void Character::drawDebug(sf::RenderTarget &renderTarget, int indentAddition, uint hue, uint hueOffset) {
+	void Character::drawDebug(sf::RenderTarget& renderTarget, int indentAddition, uint hue, uint hueOffset) {
 		if(debug) {
 			sf::Vector2f size{getAdvance() - 2.0f, getHeight() - 2.0f};
 			sf::Vector2f position{this->getPosition() + sf::Vector2f{1.0f, 1.0f - getHeight()}};

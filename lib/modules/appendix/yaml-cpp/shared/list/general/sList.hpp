@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iSList.hpp"
 
 namespace ui {
@@ -15,7 +16,7 @@ namespace ui {
 		void set();
 	
 	public:
-		SList(const std::vector<V> &list = {});
+		SList(const std::vector<V>& list = {});
 		
 		SList(std::vector<std::shared_ptr<T>> list);
 		
@@ -25,18 +26,17 @@ namespace ui {
 		
 		V getElement(std::size_t index) const;
 		
-		void setElement(std::size_t index, const V &value);
+		void setElement(std::size_t index, const V& value);
 		
 		std::vector<V> getValue() const;
 		
-		void setValue(const std::vector<V> &list);
+		void setValue(const std::vector<V>& list);
 	};
-	
 	
 	
 	template<typename T>
 	struct DecodePointer<SList<T>> {
-		static bool decodePointer(const YAML::Node &node, SList<T> *&withList);
+		static bool decodePointer(const YAML::Node& node, SList<T>*& withList);
 	};
 	
 	template<typename T>

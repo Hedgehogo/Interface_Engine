@@ -1,6 +1,6 @@
-namespace ui{
+namespace ui {
 	template<typename Type>
-	bool buildOrProcess(const YAML::Node& node, Type *&object) {
+	bool buildOrProcess(const YAML::Node& node, Type*& object) {
 		auto type{node["type"].as<std::string>()};
 		if(type == "file") {
 			return loadFromYamlFile(node, object);
@@ -13,8 +13,8 @@ namespace ui{
 		}
 	}
 	
-	template <typename T>
-	bool loadFromYamlFile(const YAML::Node &node, T *&object) {
+	template<typename T>
+	bool loadFromYamlFile(const YAML::Node& node, T*& object) {
 		std::string filePath;
 		node["file-path"] >> filePath;
 		object = loadFromYaml<T>(filePath);
@@ -22,7 +22,7 @@ namespace ui{
 	}
 	
 	template<typename T>
-	bool loadFromYamlIf(const YAML::Node &node, T *&object) {
+	bool loadFromYamlIf(const YAML::Node& node, T*& object) {
 		if(Buffer::exist(node["condition"])) {
 			node["first"] >> object;
 		} else {
@@ -33,13 +33,13 @@ namespace ui{
 	}
 	
 	template<typename T>
-	bool loadFromYamlObject(const YAML::Node &node, T *&object) {
-		std::string name {node["name"].as<std::string>()};
+	bool loadFromYamlObject(const YAML::Node& node, T*& object) {
+		std::string name{node["name"].as<std::string>()};
 		
-		if (node["object"]) {
+		if(node["object"]) {
 			ObjectBuffer::add(name, node["object"]);
 		}
-		if (ObjectBuffer::has(name)) {
+		if(ObjectBuffer::has(name)) {
 			YAML::Node objectNode{ObjectBuffer::get(name)};
 			objectNode >> object;
 			return true;
@@ -47,11 +47,11 @@ namespace ui{
 		throw YAML::BadConversion(node.Mark());
 	}
 	
-	template <typename T>
-	T *loadFromYaml(std::string filePath) {
+	template<typename T>
+	T* loadFromYaml(std::string filePath) {
 		YAML::Node node = YAML::LoadFile(filePath);
 		T* object;
-		Buffer::readLevel([&node, &object](){
+		Buffer::readLevel([&node, &object]() {
 			node >> object;
 		});
 		return object;
@@ -72,9 +72,9 @@ namespace ui{
 		}
 	}
 	
-	template <typename T>
+	template<typename T>
 	std::enable_if_t<std::is_class_v<T> && std::is_abstract_v<T>, bool>
-	convert(const YAML::Node &node, T *&object) {
+	convert(const YAML::Node& node, T*& object) {
 		if(node.IsMap() && node["type"]) {
 			return buildOrProcess<T>(node, object);
 		} else {
@@ -84,9 +84,9 @@ namespace ui{
 		}
 	}
 	
-	template <typename T>
+	template<typename T>
 	std::enable_if_t<std::is_class_v<T> && !std::is_abstract_v<T>, bool>
-	convert(const YAML::Node &node, T *&object) {
+	convert(const YAML::Node& node, T*& object) {
 		if(node.IsMap() && node["type"]) {
 			return buildOrProcess<T>(node, object);
 		} else {

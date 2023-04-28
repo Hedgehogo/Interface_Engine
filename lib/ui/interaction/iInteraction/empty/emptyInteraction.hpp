@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iInteraction.hpp"
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
@@ -20,6 +21,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<EmptyInteraction> {
-		static bool decodePointer(const YAML::Node &node, EmptyInteraction *&emptyInteraction);
+		static bool decodePointer(const YAML::Node& node, EmptyInteraction*& emptyInteraction);
 	};
 }

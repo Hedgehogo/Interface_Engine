@@ -10,7 +10,7 @@ namespace ui {
 		sf::Vector2f offset;
 	
 	public:
-		BoxWithBackground(IScalable *object, IUninteractive *background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
+		BoxWithBackground(IScalable* object, IUninteractive* background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
 		
 		void init(InitInfo initInfo) override;
 		
@@ -28,14 +28,14 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
-		BoxWithBackground *copy() override;
+		BoxWithBackground* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<BoxWithBackground> {
-		static bool decodePointer(const YAML::Node &node, BoxWithBackground *&boxWithBackground);
+		static bool decodePointer(const YAML::Node& node, BoxWithBackground*& boxWithBackground);
 	};
 }

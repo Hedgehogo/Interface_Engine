@@ -21,7 +21,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<SideMovePanelInteraction>::decodePointer(const YAML::Node &node, SideMovePanelInteraction *&sideMovePanelInteraction) {
+	bool DecodePointer<SideMovePanelInteraction>::decodePointer(const YAML::Node& node, SideMovePanelInteraction*& sideMovePanelInteraction) {
 		float coefficient;
 		float offset;
 		bool horizontal;

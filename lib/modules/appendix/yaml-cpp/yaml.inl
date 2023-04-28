@@ -37,10 +37,9 @@ namespace ui {
 		return convertDefault<T>(node, defaultValue);
 	}
 	
-
 	
 	template<typename T>
-	bool Decode<std::vector<T>>::decode(const YAML::Node &node, std::vector<T> &vector) {
+	bool Decode<std::vector<T>>::decode(const YAML::Node& node, std::vector<T>& vector) {
 		for(const auto& item: node) {
 			vector.resize(vector.size() + 1);
 			item >> vector[vector.size() - 1];
@@ -48,19 +47,17 @@ namespace ui {
 		return true;
 	}
 	
-
 	
 	template<typename T>
-	bool Decode<sf::Vector2<T>>::decode(const YAML::Node &node, sf::Vector2<T> &vector) {
+	bool Decode<sf::Vector2<T>>::decode(const YAML::Node& node, sf::Vector2<T>& vector) {
 		vector.x = node[0].as<T>();
 		vector.y = node[1].as<T>();
 		return true;
 	}
 	
-
 	
 	template<typename T>
-	bool Decode<sf::Rect<T>>::decode(const YAML::Node &node, sf::Rect<T> &rect) {
+	bool Decode<sf::Rect<T>>::decode(const YAML::Node& node, sf::Rect<T>& rect) {
 		sf::Vector2<T> position;
 		sf::Vector2<T> size;
 		node["position"] >> position;

@@ -24,7 +24,7 @@ namespace ui {
 		std::string type;
 	
 	public:
-		BufferVariableNotFoundException(const std::string& name, const std::string &type);
+		BufferVariableNotFoundException(const std::string& name, const std::string& type);
 		
 		std::string getName() const;
 		
@@ -34,7 +34,7 @@ namespace ui {
 	class YamlBufferVariableNotFoundException : public BaseYamlException {
 	protected:
 		BufferVariableNotFoundException exception;
-		
+	
 	public:
 		YamlBufferVariableNotFoundException(YAML::Mark mark, const BufferVariableNotFoundException& exception);
 		

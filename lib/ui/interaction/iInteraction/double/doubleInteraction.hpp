@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iInteraction.hpp"
 
 namespace ui {
@@ -6,7 +7,7 @@ namespace ui {
 	protected:
 		IInteraction* first;
 		IInteraction* second;
-		
+	
 	public:
 		DoubleInteraction(IInteraction* first, IInteraction* second);
 		

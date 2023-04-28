@@ -6,7 +6,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<TextEmptyInteraction>::decodePointer(const YAML::Node &node, TextEmptyInteraction *&textEmptyInteraction) {
+	bool DecodePointer<TextEmptyInteraction>::decodePointer(const YAML::Node& node, TextEmptyInteraction*& textEmptyInteraction) {
 		{
 			textEmptyInteraction = new TextEmptyInteraction{};
 			return true;

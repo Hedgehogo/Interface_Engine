@@ -7,14 +7,14 @@ namespace ui {
 		YamlBuilder<Base>::template addType<Type>();
 	}
 	
-	template <typename Base, typename Type, typename... Types>
+	template<typename Base, typename Type, typename... Types>
 	void addType() {
 		YamlBuilder<Base>::template addType<Type>();
 		addType<Base, Types...>();
 	}
 	
-	template <typename Base, typename... Types>
-	void addType(const std::vector<std::string> &aliases) {
+	template<typename Base, typename... Types>
+	void addType(const std::vector<std::string>& aliases) {
 		YamlBuilder<Base>::addAliases(aliases);
 		addType<Base, Types...>();
 	}
@@ -36,17 +36,17 @@ namespace ui {
 		YamlBuilder<Type>::addAliases(aliases);
 	}
 	
-	template <typename Type>
-	void addDetermine(const detail::DetermineTypeFunc &function) {
+	template<typename Type>
+	void addDetermine(const detail::DetermineTypeFunc& function) {
 		YamlBuilder<Type>::addDetermine(function);
 	}
 	
-	template <typename Type>
-	void addDetermine(const detail::SimpleDetermineTypeFunc &function) {
+	template<typename Type>
+	void addDetermine(const detail::SimpleDetermineTypeFunc& function) {
 		YamlBuilder<Type>::addDetermine(function);
 	}
 	
-	template <typename Base>
+	template<typename Base>
 	void addFunc(detail::FuncYamlBuilder::BuildFunc<Base> function, std::vector<std::string> names) {
 		YamlBuilder<Base>::addType(function, names);
 	}

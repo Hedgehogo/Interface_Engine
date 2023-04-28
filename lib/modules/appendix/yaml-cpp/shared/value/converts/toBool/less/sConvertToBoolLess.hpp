@@ -5,21 +5,20 @@
 
 namespace ui {
 	template<typename T>
-	class SConvertToBoolLess : public BaseSConvertToBoolComparison<T>{
+	class SConvertToBoolLess : public BaseSConvertToBoolComparison<T> {
 	protected:
 		bool convert(T fromValue, T compared) override;
-
+	
 	public:
 		SConvertToBoolLess(PISValue<T> fromValue, T compared);
 	};
-
 	
 	
 	template<typename T>
 	struct DecodePointer<SConvertToBoolLess<T>> {
-		static bool decodePointer(const YAML::Node &node, SConvertToBoolLess<T> *&sConvertToBoolGreater);
+		static bool decodePointer(const YAML::Node& node, SConvertToBoolLess<T>*& sConvertToBoolGreater);
 	};
-
+	
 	using SConvertFloatToBoolLess = SConvertToBoolLess<float>;
 	using SConvertIntToBoolLess = SConvertToBoolLess<int>;
 }

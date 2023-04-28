@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iSizing.hpp"
 
 namespace ui {
@@ -23,6 +24,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<SmartSizing> {
-		static bool decodePointer(const YAML::Node &node, SmartSizing *&smartSizing);
+		static bool decodePointer(const YAML::Node& node, SmartSizing*& smartSizing);
 	};
 }

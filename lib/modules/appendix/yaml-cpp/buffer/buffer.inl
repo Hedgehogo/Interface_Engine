@@ -3,13 +3,13 @@
 #include "modules/appendix/yaml-cpp/shared/value/general/sValue.hpp"
 
 namespace ui {
-	template <typename T, typename... A>
-	void Buffer::emplace(const std::string& name, A &&... args) {
+	template<typename T, typename... A>
+	void Buffer::emplace(const std::string& name, A&& ... args) {
 		objectsLevels[objectsLevels.size() - 1].try_emplace(name, std::make_shared<T>(args...));
 	}
 	
-	template <typename T>
-	void Buffer::insert(const std::string &name, const YAML::Node &node) {
+	template<typename T>
+	void Buffer::insert(const std::string& name, const YAML::Node& node) {
 		T* ptr;
 		long long level{static_cast<long long>(objectsLevels.size()) - 1};
 		
@@ -35,19 +35,19 @@ namespace ui {
 		}
 	}
 	
-	template <typename T>
-	void Buffer::insert(const YAML::Node &node) {
+	template<typename T>
+	void Buffer::insert(const YAML::Node& node) {
 		std::string name;
 		node["var"] >> name;
 		if(!existAtLevel(name)) {
-			insert<T>(name, node);
+			insert < T > (name, node);
 		} else {
 			throw YAML::BadConversion{node.Mark()};
 		}
 	}
 	
-	template <typename T>
-	std::shared_ptr<T> Buffer::at(const std::string &fullName) {
+	template<typename T>
+	std::shared_ptr<T> Buffer::at(const std::string& fullName) {
 		std::shared_ptr<T> ptr;
 		std::vector<std::string> names{splitByDelimiter(fullName, '.')};
 		std::string name{names[0]};
@@ -63,8 +63,8 @@ namespace ui {
 		throw BufferVariableNotFoundException{fullName, type_name<T>()};
 	}
 	
-	template <typename T>
-	std::shared_ptr<T> Buffer::get(const YAML::Node &node, bool createIfNotExist) {
+	template<typename T>
+	std::shared_ptr<T> Buffer::get(const YAML::Node& node, bool createIfNotExist) {
 		std::string name;
 		if(node.IsScalar()) {
 			node >> name;
@@ -76,23 +76,23 @@ namespace ui {
 		}
 		try {
 			return at<T>(name);
-		} catch (BufferVariableNotFoundException &exception) {
+		} catch(BufferVariableNotFoundException& exception) {
 			throw YamlBufferVariableNotFoundException{node.Mark(), exception};
 		}
 	}
-
-	template <typename T>
+	
+	template<typename T>
 	std::shared_ptr<T> atSValue(std::string name) {
 		return Buffer::at<T>(name);
 	}
 	
-	template <typename T, typename... A>
-	void emplaceSValue(const std::string& name, A &&... args) {
+	template<typename T, typename... A>
+	void emplaceSValue(const std::string& name, A&& ... args) {
 		Buffer::insert<T>(name, args...);
 	}
-
+	
 	template<typename T>
-	std::shared_ptr<T> getSValue(const YAML::Node &node, bool createIfNotExist){
+	std::shared_ptr<T> getSValue(const YAML::Node& node, bool createIfNotExist) {
 		return Buffer::get<T>(node, createIfNotExist);
 	}
 }

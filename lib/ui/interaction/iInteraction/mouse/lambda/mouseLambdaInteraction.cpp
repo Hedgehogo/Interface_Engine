@@ -40,11 +40,11 @@ namespace ui {
 		}
 	};
 	
-	MouseLambdaInteraction::MouseLambdaInteraction(KeyEvent *leftMouseButton, KeyEvent *rightMouseButton, void ( *startPointing)(sf::Vector2i mousePosition), void (*finishPointing)(sf::Vector2i mousePosition)) :
+	MouseLambdaInteraction::MouseLambdaInteraction(KeyEvent* leftMouseButton, KeyEvent* rightMouseButton, void ( * startPointing)(sf::Vector2i mousePosition), void (* finishPointing)(sf::Vector2i mousePosition)) :
 		MouseInteraction(leftMouseButton, rightMouseButton), LambdaInteraction(startPointing, finishPointing) {
 	}
 	
-	MouseLambdaInteraction *MouseLambdaInteraction::copy() {
+	MouseLambdaInteraction* MouseLambdaInteraction::copy() {
 		return new MouseLambdaInteraction{leftMouseButton->copy(), rightMouseButton->copy(), startPointing, finishPointing};
 	}
 }

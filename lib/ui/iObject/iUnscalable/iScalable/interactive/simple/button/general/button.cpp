@@ -22,7 +22,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<Button>::decodePointer(const YAML::Node &node, Button *&button) {
+	bool DecodePointer<Button>::decodePointer(const YAML::Node& node, Button*& button) {
 		IUninteractive* background;
 		
 		node["background"] >> background;

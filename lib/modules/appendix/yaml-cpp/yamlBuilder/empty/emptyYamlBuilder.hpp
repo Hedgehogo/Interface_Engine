@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iYamlBuilder.hpp"
 
 namespace ui::detail {
@@ -7,11 +8,11 @@ namespace ui::detail {
 		static EmptyYamlBuilder builder;
 	
 	public:
-		bool build(const YAML::Node &node, void *&object) const override;
+		bool build(const YAML::Node& node, void*& object) const override;
 		
-		IYamlBuilder *getBuilder(const std::string &type) override;
+		IYamlBuilder* getBuilder(const std::string& type) override;
 		
-		bool determine(const YAML::Node& node, std::string &type) override;
+		bool determine(const YAML::Node& node, std::string& type) override;
 		
 		bool isExists() override;
 	};

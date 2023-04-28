@@ -8,7 +8,7 @@ namespace ui {
 		object->init(initInfo.copy(renderTexture).copy(this->drawManager));
 	}
 	
-	BoxWithRenderTexture::BoxWithRenderTexture(IScalable *object, bool optimize, sf::Vector2f minSize) :
+	BoxWithRenderTexture::BoxWithRenderTexture(IScalable* object, bool optimize, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithObject(object), optimize(optimize), active(true), renderTarget(nullptr), interactionManager(nullptr) {
 		sprite.setTexture(renderTexture.getTexture());
 	}
@@ -50,26 +50,26 @@ namespace ui {
 		return max(object->getMinSize(), minimumSize, {1, 1});
 	}
 	
-	void BoxWithRenderTexture::copy(BoxWithRenderTexture *boxWithRenderTexture) {
+	void BoxWithRenderTexture::copy(BoxWithRenderTexture* boxWithRenderTexture) {
 		boxWithRenderTexture->renderTarget = this->renderTarget;
 		sf::Vector2u size = this->renderTexture.getSize();
 		boxWithRenderTexture->renderTexture.create(size.x, size.y);
 	}
 	
-	BoxWithRenderTexture *BoxWithRenderTexture::copy() {
-		BoxWithRenderTexture *boxWithRenderTexture{new BoxWithRenderTexture{object->copy(), optimize}};
+	BoxWithRenderTexture* BoxWithRenderTexture::copy() {
+		BoxWithRenderTexture* boxWithRenderTexture{new BoxWithRenderTexture{object->copy(), optimize}};
 		BoxWithRenderTexture::copy(boxWithRenderTexture);
 		return boxWithRenderTexture;
 	}
 	
-	void BoxWithRenderTexture::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BoxWithRenderTexture::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
 	
 	
-	bool DecodePointer<BoxWithRenderTexture>::decodePointer(const YAML::Node &node, BoxWithRenderTexture *&boxWithRenderTexture) {
+	bool DecodePointer<BoxWithRenderTexture>::decodePointer(const YAML::Node& node, BoxWithRenderTexture*& boxWithRenderTexture) {
 		boxWithRenderTexture = new BoxWithRenderTexture{
-			node["object"].as<IScalable *>(),
+			node["object"].as<IScalable*>(),
 			convDef(node["optimize"], true),
 			convDef(node["min-size"], sf::Vector2f{})
 		};

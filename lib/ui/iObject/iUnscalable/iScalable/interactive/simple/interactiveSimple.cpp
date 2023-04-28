@@ -1,7 +1,7 @@
 #include "interactiveSimple.hpp"
 
 namespace ui {
-	Interactive_Simple::Interactive_Simple(IInteraction *interaction) : interaction(interaction), interact(false), oldInteract(false) {
+	Interactive_Simple::Interactive_Simple(IInteraction* interaction) : interaction(interaction), interact(false), oldInteract(false) {
 	}
 	
 	void Interactive_Simple::init(InteractiveInitInfo interactiveInitInfo) {
@@ -25,7 +25,7 @@ namespace ui {
 		return true;
 	}
 	
-	void Interactive_Simple::copy(Interactive_Simple *interactive_Simple) {
+	void Interactive_Simple::copy(Interactive_Simple* interactive_Simple) {
 		Interactive::copy(interactive_Simple);
 		interactive_Simple->interact = this->interact;
 		interactive_Simple->oldInteract = this->oldInteract;

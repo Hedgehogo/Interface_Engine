@@ -2,18 +2,18 @@
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
-    FullColor::FullColor(sf::Color color, sf::Vector2f normalSize) : OnlyDrawable(), rectangle(), normalSize(normalSize) {
-        rectangle.setFillColor(color);
-    }
+	FullColor::FullColor(sf::Color color, sf::Vector2f normalSize) : OnlyDrawable(), rectangle(), normalSize(normalSize) {
+		rectangle.setFillColor(color);
+	}
 	
-    void FullColor::draw() {
-        renderTarget->draw(rectangle);
-    }
+	void FullColor::draw() {
+		renderTarget->draw(rectangle);
+	}
 	
-    void FullColor::resize(sf::Vector2f size, sf::Vector2f position) {
-        rectangle.setSize(size);
-        rectangle.setPosition(position);
-    }
+	void FullColor::resize(sf::Vector2f size, sf::Vector2f position) {
+		rectangle.setSize(size);
+		rectangle.setPosition(position);
+	}
 	
 	sf::Vector2f FullColor::getAreaPosition() {
 		return rectangle.getPosition();
@@ -23,22 +23,22 @@ namespace ui {
 		return rectangle.getSize();
 	}
 	
-    sf::Vector2f FullColor::getMinSize() {
-        return sf::Vector2f();
-    }
+	sf::Vector2f FullColor::getMinSize() {
+		return sf::Vector2f();
+	}
 	
-	sf::Vector2f FullColor::getNormalSize(){
+	sf::Vector2f FullColor::getNormalSize() {
 		return normalSize;
 	}
 	
-	FullColor *FullColor::copy() {
-		FullColor* fullColor {new FullColor{rectangle.getFillColor(), normalSize}};
+	FullColor* FullColor::copy() {
+		FullColor* fullColor{new FullColor{rectangle.getFillColor(), normalSize}};
 		OnlyDrawable::copy(fullColor);
 		return fullColor;
 	}
 	
 	
-	bool DecodePointer<FullColor>::decodePointer(const YAML::Node &node, FullColor *&fullColor) {
+	bool DecodePointer<FullColor>::decodePointer(const YAML::Node& node, FullColor*& fullColor) {
 		if(node.IsScalar()) {
 			fullColor = new FullColor{node.as<sf::Color>(), {}};
 		} else {
@@ -48,7 +48,7 @@ namespace ui {
 	}
 	
 	template<>
-	bool determine<FullColor>(const YAML::Node &node) {
+	bool determine<FullColor>(const YAML::Node& node) {
 		if(node.IsScalar()) {
 			return node.as<std::string>().size() <= 11;
 		} else {

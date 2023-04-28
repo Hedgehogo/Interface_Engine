@@ -68,7 +68,6 @@ namespace ui {
 		return new AnimatorUnitMatch<T>{copyOptions, value};
 	}
 	
-
 	
 	template<typename T>
 	bool Decode<detail::AnimatorUnitMatch::Option<T>>::decode(const YAML::Node& node, detail::AnimatorUnitMatch::Option<T>& option) {
@@ -124,14 +123,13 @@ namespace ui {
 		return true;
 	}
 	
-
 	
 	template<typename T>
-	void addNextAnimatorUnitForMach(const YAML::Node& node, int i, AnimatorUnitMatch<T>*& animatorUnitMatch){
+	void addNextAnimatorUnitForMach(const YAML::Node& node, int i, AnimatorUnitMatch<T>*& animatorUnitMatch) {
 		addNextAnimatorUnit(node, [=](IAnimatorUnit* unit) {
 			animatorUnitMatch->addNext(i, unit);
 		});
-
+		
 		addNextAnimatorUnit(node["options"][i], [=](IAnimatorUnit* unit) {
 			animatorUnitMatch->addNext(i, unit);
 		});

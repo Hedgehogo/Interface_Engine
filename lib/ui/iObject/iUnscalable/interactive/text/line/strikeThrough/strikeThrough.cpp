@@ -32,7 +32,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<StrikeThrough>::decodePointer(const YAML::Node &node, StrikeThrough *&strikeThrough) {
+	bool DecodePointer<StrikeThrough>::decodePointer(const YAML::Node& node, StrikeThrough*& strikeThrough) {
 		sf::Color color{nullColor};
 		float strikeThroughOffset = 0.3;
 		if(node["color"])

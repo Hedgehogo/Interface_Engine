@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iSValue.hpp"
 
 namespace ui {
@@ -7,7 +8,7 @@ namespace ui {
 	protected:
 		T* valueReference;
 		std::vector<typename ISValue<T>::SetterFunc> setters;
-		
+	
 	public:
 		explicit SReferenceValue(T& valueReference);
 		

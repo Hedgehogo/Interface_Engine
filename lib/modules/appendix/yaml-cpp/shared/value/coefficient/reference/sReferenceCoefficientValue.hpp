@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iSCoefficientValue.hpp"
 #include "../../reference/sReferenceValue.hpp"
 

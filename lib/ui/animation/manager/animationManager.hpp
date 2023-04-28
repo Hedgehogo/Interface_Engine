@@ -9,21 +9,20 @@ namespace ui {
 	protected:
 		uint64_t startManager;
 		std::vector<Animator*> animators;
-
+	
 	public:
 		explicit AnimationManager(std::vector<Animator*> animators = {});
-
+		
 		virtual void update();
-
+		
 		virtual AnimationManager* copy();
-
+		
 		virtual ~AnimationManager();
 	};
-
 	
 	
 	template<>
 	struct Decode<AnimationManager> {
-		static bool decode(const YAML::Node &node, AnimationManager &animationManager);
+		static bool decode(const YAML::Node& node, AnimationManager& animationManager);
 	};
 }

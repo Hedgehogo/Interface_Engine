@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iSizing2.hpp"
 #include "../../sizing/iSizing.hpp"
 
@@ -10,7 +11,7 @@ namespace ui {
 		ISizing* vertical;
 		
 		void copy(Sizing2* sizing2);
-		
+	
 	public:
 		Sizing2(ISizing* horizontal, ISizing* vertical);
 		
@@ -36,6 +37,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<Sizing2> {
-		static bool decodePointer(const YAML::Node &node, Sizing2 *&sizing2);
+		static bool decodePointer(const YAML::Node& node, Sizing2*& sizing2);
 	};
 }

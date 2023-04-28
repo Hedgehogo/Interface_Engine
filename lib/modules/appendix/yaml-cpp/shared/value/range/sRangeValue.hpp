@@ -26,10 +26,9 @@ namespace ui {
 	};
 	
 	
-	
 	template<typename T>
 	struct DecodePointer<SRangeValue<T>> {
-		static bool decodePointer(const YAML::Node &node, SRangeValue<T> *&sRangeValue);
+		static bool decodePointer(const YAML::Node& node, SRangeValue<T>*& sRangeValue);
 	};
 	
 	template<typename T>

@@ -1,11 +1,12 @@
 #pragma once
+
 #include "../../iSizing.hpp"
 
 namespace ui {
 	class RelativeParentSizing : public ISizing {
 	protected:
 		float addition;
-		
+	
 	public:
 		explicit RelativeParentSizing(float addition = 0);
 		
@@ -21,6 +22,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<RelativeParentSizing> {
-		static bool decodePointer(const YAML::Node &node, RelativeParentSizing *&relativeParentSizing);
+		static bool decodePointer(const YAML::Node& node, RelativeParentSizing*& relativeParentSizing);
 	};
 }

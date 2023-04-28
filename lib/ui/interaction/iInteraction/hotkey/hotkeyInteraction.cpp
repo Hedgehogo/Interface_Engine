@@ -81,7 +81,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<HotkeyInteraction>::decodePointer(const YAML::Node &node, HotkeyInteraction *&hotkeyInteraction) {
+	bool DecodePointer<HotkeyInteraction>::decodePointer(const YAML::Node& node, HotkeyInteraction*& hotkeyInteraction) {
 		std::vector<std::vector<HotkeyInteraction::Hotkey*>> hotkeys;
 		uint startState{0};
 		
@@ -109,7 +109,7 @@ namespace ui {
 	}
 	
 	
-	bool Decode<HotkeyInteraction::Hotkey*>::decode(const YAML::Node &node, HotkeyInteraction::Hotkey *&hotkey) {
+	bool Decode<HotkeyInteraction::Hotkey*>::decode(const YAML::Node& node, HotkeyInteraction::Hotkey*& hotkey) {
 		KeysInteraction* interaction{nullptr};
 		int state{INT32_MAX};
 		

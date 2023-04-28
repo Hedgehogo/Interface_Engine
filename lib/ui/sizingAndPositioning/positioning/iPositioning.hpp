@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SFML/Graphics/RenderTarget.hpp>
 #include "../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 

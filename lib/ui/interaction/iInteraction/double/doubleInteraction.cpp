@@ -1,7 +1,7 @@
 #include "doubleInteraction.hpp"
 
 namespace ui {
-	DoubleInteraction::DoubleInteraction(IInteraction *first, IInteraction *second) :
+	DoubleInteraction::DoubleInteraction(IInteraction* first, IInteraction* second) :
 		first(first), second(second) {
 	}
 	
@@ -10,21 +10,21 @@ namespace ui {
 		delete second;
 	}
 	
-	void DoubleInteraction::setFirst(IInteraction *first) {
+	void DoubleInteraction::setFirst(IInteraction* first) {
 		delete this->first;
 		this->first = first;
 	}
 	
-	void DoubleInteraction::setSecond(IInteraction *second) {
+	void DoubleInteraction::setSecond(IInteraction* second) {
 		delete this->second;
 		this->second = second;
 	}
 	
-	IInteraction *DoubleInteraction::getFirst() {
+	IInteraction* DoubleInteraction::getFirst() {
 		return first;
 	}
 	
-	IInteraction *DoubleInteraction::getSecond() {
+	IInteraction* DoubleInteraction::getSecond() {
 		return second;
 	}
 	
@@ -55,7 +55,7 @@ namespace ui {
 		}
 	}
 	
-	DoubleInteraction *DoubleInteraction::copy() {
+	DoubleInteraction* DoubleInteraction::copy() {
 		return new DoubleInteraction{first->copy(), second->copy()};
 	}
 }

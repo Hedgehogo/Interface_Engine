@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../basePanelInteraction.hpp"
 
 namespace ui {

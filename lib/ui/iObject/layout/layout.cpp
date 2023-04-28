@@ -1,7 +1,8 @@
 #include "layout.hpp"
 
 namespace ui {
-	Layout::Layout(sf::Vector2f size) : size(size), position({0, 0}) {}
+	Layout::Layout(sf::Vector2f size) : size(size), position({0, 0}) {
+	}
 	
 	void Layout::setPosition(sf::Vector2f position) {
 		this->position = position;
@@ -18,13 +19,21 @@ namespace ui {
 		resize(size, position);
 	}
 	
-	sf::Vector2f Layout::getAreaPosition() { return position; }
+	sf::Vector2f Layout::getAreaPosition() {
+		return position;
+	}
 	
-	sf::Vector2f Layout::getPosition() { return position; }
+	sf::Vector2f Layout::getPosition() {
+		return position;
+	}
 	
-	sf::Vector2f Layout::getAreaSize() { return size; }
+	sf::Vector2f Layout::getAreaSize() {
+		return size;
+	}
 	
-	sf::Vector2f Layout::getSize() { return size; }
+	sf::Vector2f Layout::getSize() {
+		return size;
+	}
 	
 	bool Layout::inArea(sf::Vector2f pointPosition) {
 		return pointPosition.x > position.x && pointPosition.x < position.x + size.x &&
@@ -41,7 +50,7 @@ namespace ui {
 		this->size = size;
 	}
 	
-	void Layout::copy(Layout *layout) {
+	void Layout::copy(Layout* layout) {
 		layout->size = this->size;
 		layout->position = this->position;
 	}

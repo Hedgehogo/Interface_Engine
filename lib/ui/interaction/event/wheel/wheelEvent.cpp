@@ -5,9 +5,10 @@ namespace sf::Wheel {
 }
 
 namespace ui {
-	WheelEvent::WheelEvent() : active(false) {}
+	WheelEvent::WheelEvent() : active(false) {
+	}
 	
-	void WheelEvent::copy(WheelEvent *wheelEvent) {
+	void WheelEvent::copy(WheelEvent* wheelEvent) {
 		wheelEvent->active = this->active;
 	}
 }

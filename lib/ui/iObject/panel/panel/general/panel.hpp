@@ -4,7 +4,9 @@
 
 namespace ui {
 	class HidePanelInteraction;
+	
 	class MovePanelInteraction;
+	
 	class Panel : public BasePanel {
 	protected:
 		PanelManager panelManager;
@@ -13,13 +15,13 @@ namespace ui {
 		MovePanelInteraction* moveInteraction;
 		
 		void copy(Panel* panel);
-		
+	
 	public:
 		void init(InitInfo initInfo) override;
 		
-		Panel(IScalable *object, HidePanelInteraction *hideInteraction, MovePanelInteraction *moveInteraction, ISizing2 *sizing, IPositioning2 *positioning, bool displayed = false);
+		Panel(IScalable* object, HidePanelInteraction* hideInteraction, MovePanelInteraction* moveInteraction, ISizing2* sizing, IPositioning2* positioning, bool displayed = false);
 		
-		Panel(IScalable *object, HidePanelInteraction *hideInteraction, ISizing2 *sizing, IPositioning2 *positioning, bool displayed = false);
+		Panel(IScalable* object, HidePanelInteraction* hideInteraction, ISizing2* sizing, IPositioning2* positioning, bool displayed = false);
 		
 		~Panel() override;
 		
@@ -43,6 +45,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<Panel> {
-		static bool decodePointer(const YAML::Node &node, Panel *&panel);
+		static bool decodePointer(const YAML::Node& node, Panel*& panel);
 	};
 }

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iInteraction.hpp"
 
 namespace ui {

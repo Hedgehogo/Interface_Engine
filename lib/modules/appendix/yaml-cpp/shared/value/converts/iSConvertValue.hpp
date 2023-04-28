@@ -4,7 +4,7 @@
 
 namespace ui {
 	template<typename FromType, typename ToType>
-	class ISConvertValue : virtual public ISValue<ToType>{
+	class ISConvertValue : virtual public ISValue<ToType> {
 	public:
 		using PFromType = PISValue<FromType>;
 	};

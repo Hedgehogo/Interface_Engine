@@ -32,7 +32,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<Underline>::decodePointer(const YAML::Node &node, Underline *&underline) {
+	bool DecodePointer<Underline>::decodePointer(const YAML::Node& node, Underline*& underline) {
 		sf::Color color{nullColor};
 		if(node["color"])
 			node["color"] >> color;

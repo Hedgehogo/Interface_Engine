@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../yaml.hpp"
 
 namespace ui {
@@ -13,13 +14,13 @@ namespace ui {
 			static TypeNameDeformer typeNameDeform;
 		
 		public:
-			static void setTypeNameDeformer(const TypeNameDeformer &typeNameDeform);
+			static void setTypeNameDeformer(const TypeNameDeformer& typeNameDeform);
 			
-			virtual bool build(const YAML::Node &node, void *&object) const = 0;
+			virtual bool build(const YAML::Node& node, void*& object) const = 0;
 			
-			virtual IYamlBuilder *getBuilder(const std::string &type) = 0;
+			virtual IYamlBuilder* getBuilder(const std::string& type) = 0;
 			
-			virtual bool determine(const YAML::Node& node, std::string &type) = 0;
+			virtual bool determine(const YAML::Node& node, std::string& type) = 0;
 			
 			virtual bool isExists();
 			
@@ -27,5 +28,5 @@ namespace ui {
 		};
 	}
 	
-	void setTypeNameDeformer(const detail::IYamlBuilder::TypeNameDeformer &typeNameDeform);
+	void setTypeNameDeformer(const detail::IYamlBuilder::TypeNameDeformer& typeNameDeform);
 }

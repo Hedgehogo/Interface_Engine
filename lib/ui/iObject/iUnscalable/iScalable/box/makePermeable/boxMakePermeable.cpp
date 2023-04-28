@@ -1,7 +1,7 @@
 #include "boxMakePermeable.hpp"
 
 namespace ui {
-	BoxMakePermeable::BoxMakePermeable(IScalable *object, sf::Vector2f minSize) : Box(minSize), LayoutWithObject(object) {
+	BoxMakePermeable::BoxMakePermeable(IScalable* object, sf::Vector2f minSize) : Box(minSize), LayoutWithObject(object) {
 	}
 	
 	void BoxMakePermeable::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -13,15 +13,15 @@ namespace ui {
 		return false;
 	}
 	
-	BoxMakePermeable *BoxMakePermeable::copy() {
-		BoxMakePermeable *boxMakePermeable{new BoxMakePermeable{object->copy(), minimumSize}};
+	BoxMakePermeable* BoxMakePermeable::copy() {
+		BoxMakePermeable* boxMakePermeable{new BoxMakePermeable{object->copy(), minimumSize}};
 		Box::copy(boxMakePermeable);
 		return boxMakePermeable;
 	}
 	
 	
-	bool DecodePointer<BoxMakePermeable>::decodePointer(const YAML::Node &node, BoxMakePermeable *&boxMakePermeable) {
-		IScalable *object;
+	bool DecodePointer<BoxMakePermeable>::decodePointer(const YAML::Node& node, BoxMakePermeable*& boxMakePermeable) {
+		IScalable* object;
 		sf::Vector2f minSize{};
 		node["object"] >> object;
 		if(node["min-size"])

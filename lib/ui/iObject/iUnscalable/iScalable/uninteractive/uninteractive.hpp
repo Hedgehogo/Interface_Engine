@@ -7,6 +7,6 @@ namespace ui {
 	public:
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
-        IUninteractive *copy() override = 0;
+		IUninteractive* copy() override = 0;
 	};
 }

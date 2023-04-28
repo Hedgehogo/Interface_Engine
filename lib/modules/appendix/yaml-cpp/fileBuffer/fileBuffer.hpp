@@ -36,12 +36,10 @@ namespace ui {
 	std::basic_string<Uint32> u32stringToUint32String(std::basic_string<char32_t> str);
 	
 	
-	
 	template<>
 	struct Decode<std::basic_string<char32_t>> {
 		static bool decode(const YAML::Node& node, std::basic_string<char32_t>& string32);
 	};
-	
 	
 	
 	template<>
@@ -50,17 +48,15 @@ namespace ui {
 	};
 	
 	
-	
 	template<>
 	struct Decode<sf::Texture*> {
-		static bool decode(const YAML::Node &node, sf::Texture*& texture);
+		static bool decode(const YAML::Node& node, sf::Texture*& texture);
 	};
-	
 	
 	
 	template<>
 	struct Decode<sf::Font*> {
-		static bool decode(const YAML::Node &node, sf::Font*& font);
+		static bool decode(const YAML::Node& node, sf::Font*& font);
 	};
 	
 	template<>
@@ -69,10 +65,9 @@ namespace ui {
 	};
 	
 	
-	
 	template<>
 	struct Decode<std::vector<sf::Texture>*> {
-		static bool decode(const YAML::Node &node, std::vector<sf::Texture>*& video);
+		static bool decode(const YAML::Node& node, std::vector<sf::Texture>*& video);
 	};
 	
 }

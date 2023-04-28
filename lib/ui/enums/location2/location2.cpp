@@ -19,7 +19,7 @@ namespace ui {
 				return Location::end;
 				break;
 		}
-        return Location::center;
+		return Location::center;
 	}
 	
 	Location getHorizontalLocation(Location2 location2) {
@@ -40,7 +40,7 @@ namespace ui {
 				return Location::end;
 				break;
 		}
-        return Location::center;
+		return Location::center;
 	}
 	
 	Location2 makeLocation2(Location vertical, Location horizontal) {
@@ -85,12 +85,11 @@ namespace ui {
 				}
 				break;
 		}
-        return Location2::center;
+		return Location2::center;
 	}
 	
-
 	
-	bool Decode<Location2>::decode(const YAML::Node &node, Location2 &location2) {
+	bool Decode<Location2>::decode(const YAML::Node& node, Location2& location2) {
 		std::string str{node.as<std::string>()};
 		
 		if(str == "up-left") {

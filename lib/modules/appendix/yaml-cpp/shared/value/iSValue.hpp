@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../iShared.hpp"
 
 namespace ui {
@@ -18,7 +19,7 @@ namespace ui {
 	typedef ISValue<float> ISfloat;
 	typedef ISValue<int> ISint;
 	typedef ISValue<unsigned> ISuint;
-
+	
 	template<typename T>
 	using PISValue = std::shared_ptr<ISValue<T>>;
 	

@@ -1,9 +1,11 @@
 #pragma once
+
 #include "../event/key/empty/emptyEvent.hpp"
 #include "../event/key/lambdaSimple/keyEvent_LambdaSimple.hpp"
 
 namespace ui {
 	class InteractionManager;
+	
 	class IInteraction {
 	public:
 		enum class Priority {
@@ -11,10 +13,10 @@ namespace ui {
 			medium,
 			lowest,
 		};
-		
+	
 	public:
 		virtual ~IInteraction() = default;
-
+		
 		virtual void init(InteractionManager& interactionManager);
 		
 		virtual bool isBlocked() const;

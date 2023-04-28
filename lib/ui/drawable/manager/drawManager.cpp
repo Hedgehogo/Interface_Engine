@@ -1,7 +1,7 @@
 #include "drawManager.hpp"
 
 namespace ui {
-	void DrawManager::add(IDrawable &drawable) {
+	void DrawManager::add(IDrawable& drawable) {
 		drawables.push_back(&drawable);
 	}
 	
@@ -10,7 +10,7 @@ namespace ui {
 	}
 	
 	void DrawManager::draw() {
-		for(auto &drawable: drawables) {
+		for(auto& drawable: drawables) {
 			drawable->draw();
 		}
 	}

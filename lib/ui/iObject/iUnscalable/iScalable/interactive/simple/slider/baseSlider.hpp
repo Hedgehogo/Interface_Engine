@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../../uninteractive/uninteractive.hpp"
 #include "../interactiveSimple.hpp"
 #include "interaction/interaction/sliderInteraction.hpp"
@@ -19,9 +20,9 @@ namespace ui {
 		void copy(BaseSlider* baseSlider);
 		
 		virtual void resizeSlider(sf::Vector2f newValue);
-		
+	
 	public:
-		BaseSlider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, SliderInteraction* interaction);
+		BaseSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, SliderInteraction* interaction);
 		
 		bool onSlider(sf::Vector2i mousePosition);
 		
@@ -48,9 +49,9 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override = 0;
-
-		BaseSlider *copy() override = 0;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		BaseSlider* copy() override = 0;
+		
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 }

@@ -38,8 +38,8 @@ namespace ui {
 		return sf::Vector2f(radius * 2, radius * 2);
 	}
 	
-	RoundedRectangle *RoundedRectangle::copy() {
-		RoundedRectangle *rectangle{new RoundedRectangle{circle.getFillColor(), radius}};
+	RoundedRectangle* RoundedRectangle::copy() {
+		RoundedRectangle* rectangle{new RoundedRectangle{circle.getFillColor(), radius}};
 		OnlyDrawable::copy(rectangle);
 		Layout::copy(rectangle);
 		rectangle->resize(size, position);
@@ -47,13 +47,14 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<RoundedRectangle>::decodePointer(const YAML::Node &node, RoundedRectangle *&roundedRectangle) {
+	bool DecodePointer<RoundedRectangle>::decodePointer(const YAML::Node& node, RoundedRectangle*& roundedRectangle) {
 		roundedRectangle = new RoundedRectangle{node["color"].as<sf::Color>(), node["radius"].as<float>()};
 		return true;
 	}
 	
 	template<>
-	bool determine<RoundedRectangle>(const YAML::Node &node) {
-		return determine(node, {{"color", YAML::NodeType::Scalar}, {"radius", YAML::NodeType::Scalar}});
+	bool determine<RoundedRectangle>(const YAML::Node& node) {
+		return determine(node, {{"color",  YAML::NodeType::Scalar},
+								{"radius", YAML::NodeType::Scalar}});
 	}
 }

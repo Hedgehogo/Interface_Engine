@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../baseButton.hpp"
 
 namespace ui {
@@ -7,18 +8,18 @@ namespace ui {
 		int interactionIndex;
 	
 	public:
-		Button(IUninteractive *background, int interaction);
-
-		Button(IUninteractive *background, IInteraction *interaction);
-
+		Button(IUninteractive* background, int interaction);
+		
+		Button(IUninteractive* background, IInteraction* interaction);
+		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
-
+		
 		Button* copy() override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<Button> {
-		static bool decodePointer(const YAML::Node &node, Button *&button);
+		static bool decodePointer(const YAML::Node& node, Button*& button);
 	};
 }

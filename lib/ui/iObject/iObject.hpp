@@ -12,7 +12,9 @@ using uint = unsigned;
 
 namespace ui {
 	class Panel;
+	
 	class PanelManager;
+	
 	class IPanelManager;
 	
 	class IObject {
@@ -48,10 +50,10 @@ namespace ui {
 		virtual bool updateInteractions(sf::Vector2f mousePosition) = 0;
 		
 		virtual IObject* copy() = 0;
-
-        static void drawDebug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget &renderTarget, uint hue);
-
-		virtual void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
+		
+		static void drawDebug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& renderTarget, uint hue);
+		
+		virtual void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
 	};
 	
 	template<typename T>

@@ -45,7 +45,6 @@ namespace ui {
 	YAML::Node convert(const T& rhs);
 	
 	
-	
 	template<typename T>
 	bool createPointer(const YAML::Node& node, T*& object);
 	
@@ -75,12 +74,10 @@ namespace ui {
 	bool convBoolDef(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue = false);
 	
 	
-	
 	template<typename T>
 	struct Decode<std::vector<T>> {
 		static bool decode(const YAML::Node& node, std::vector<T>& vector);
 	};
-	
 	
 	
 	template<typename T>
@@ -89,12 +86,10 @@ namespace ui {
 	};
 	
 	
-	
 	template<>
 	struct Decode<sf::Vector2<float>> {
 		static bool decode(const YAML::Node& node, sf::Vector2<float>& vector);
 	};
-	
 	
 	
 	template<>
@@ -103,12 +98,10 @@ namespace ui {
 	};
 	
 	
-	
 	template<>
 	struct Decode<sf::Vector2<uint>> {
 		static bool decode(const YAML::Node& node, sf::Vector2<uint>& vector);
 	};
-	
 	
 	
 	template<typename T>
@@ -117,12 +110,10 @@ namespace ui {
 	};
 	
 	
-	
 	template<>
 	struct Decode<sf::Color> {
 		static bool decode(const YAML::Node& node, sf::Color& color);
 	};
-	
 	
 	
 	template<>
@@ -131,12 +122,10 @@ namespace ui {
 	};
 	
 	
-	
 	template<>
 	struct Decode<sf::Mouse::Button> {
 		static bool decode(const YAML::Node& node, sf::Mouse::Button& button);
 	};
-	
 	
 	
 	template<>

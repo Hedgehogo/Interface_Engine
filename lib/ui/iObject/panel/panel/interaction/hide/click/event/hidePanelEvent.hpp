@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../../click/event/panelEvent.hpp"
 #include "../../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
@@ -14,7 +15,7 @@ namespace ui {
 		void stopPressed() override;
 		
 		void whileNotPressed() override;
-		
+	
 	public:
 		HidePanelEvent(bool onlyOnParent = false);
 		
@@ -24,6 +25,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<HidePanelEvent> {
-		static bool decodePointer(const YAML::Node &node, HidePanelEvent *&hidePanelEvent);
+		static bool decodePointer(const YAML::Node& node, HidePanelEvent*& hidePanelEvent);
 	};
 }

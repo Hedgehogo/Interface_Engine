@@ -36,7 +36,7 @@ namespace ui {
 			   pointPosition.y > position.y && pointPosition.y < position.y + size.y;
 	}
 	
-	void IObject::drawDebug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget &renderTarget, uint hue) {
+	void IObject::drawDebug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& renderTarget, uint hue) {
 		if(size.x > 0 && size.y > 0) {
 			sf::Color color{HSVtoRGB(static_cast<float>(hue % 360))};
 			
@@ -56,7 +56,7 @@ namespace ui {
 		}
 	}
 	
-	void IObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int, uint hue, uint) {
+	void IObject::drawDebug(sf::RenderTarget& renderTarget, int indent, int, uint hue, uint) {
 		sf::Vector2f size{this->getAreaSize() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2 + 2, indent * 2 + 2})};
 		sf::Vector2f position{this->getAreaPosition() + static_cast<sf::Vector2f>(sf::Vector2i{indent + 1, indent + 1})};
 		if(size.x > 0 && size.y > 0) {

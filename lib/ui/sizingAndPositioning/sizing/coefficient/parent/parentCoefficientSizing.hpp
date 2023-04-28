@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../iSizing.hpp"
 
 namespace ui {
@@ -22,6 +23,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<ParentCoefficientSizing> {
-		static bool decodePointer(const YAML::Node &node, ParentCoefficientSizing *&parentCoefficientSizing);
+		static bool decodePointer(const YAML::Node& node, ParentCoefficientSizing*& parentCoefficientSizing);
 	};
 }

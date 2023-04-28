@@ -17,7 +17,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<ChangeVariableBySinusoid>::decodePointer(const YAML::Node &node, ChangeVariableBySinusoid *&changeVariableBySinusoid) {
+	bool DecodePointer<ChangeVariableBySinusoid>::decodePointer(const YAML::Node& node, ChangeVariableBySinusoid*& changeVariableBySinusoid) {
 		changeVariableBySinusoid = new ChangeVariableBySinusoid{
 			node["size"].as<float>(),
 			convDef(node["a"], convDef(node["offset-OY"], 0.f)),

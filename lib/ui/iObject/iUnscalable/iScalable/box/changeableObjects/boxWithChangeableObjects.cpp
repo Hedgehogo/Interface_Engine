@@ -1,11 +1,11 @@
 #include "boxWithChangeableObjects.hpp"
 
 namespace ui {
-	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<IScalable *> objects, std::shared_ptr<SValue<uint>> value, sf::Vector2f minSize) :
+	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<IScalable*> objects, std::shared_ptr<SValue<uint>> value, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithObjectsArray(objects), objects(std::move(objects)), value(value), drawManagers(this->objects.size()) {
 	}
 	
-	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<IScalable *> objects, uint index, sf::Vector2f minSize) :
+	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<IScalable*> objects, uint index, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithObjectsArray(objects), objects(std::move(objects)), value(std::make_shared<SValue<uint>>(index)), drawManagers(this->objects.size()) {
 	}
 	
@@ -33,7 +33,7 @@ namespace ui {
 		return value->getValue();
 	}
 	
-	IScalable *BoxWithChangeableObjects::getObject() {
+	IScalable* BoxWithChangeableObjects::getObject() {
 		return objects[value->getValue()];
 	}
 	
@@ -50,17 +50,17 @@ namespace ui {
 		return objects[value->getValue()]->updateInteractions(mousePosition);
 	}
 	
-	BoxWithChangeableObjects *BoxWithChangeableObjects::copy() {
+	BoxWithChangeableObjects* BoxWithChangeableObjects::copy() {
 		return new BoxWithChangeableObjects{objects, value, minimumSize};
 	}
 	
 	
-	bool DecodePointer<BoxWithChangeableObjects>::decodePointer(const YAML::Node &node, BoxWithChangeableObjects *&boxWithChangeableObjects) {
-		std::vector<IScalable *> objects;
+	bool DecodePointer<BoxWithChangeableObjects>::decodePointer(const YAML::Node& node, BoxWithChangeableObjects*& boxWithChangeableObjects) {
+		std::vector<IScalable*> objects;
 		sf::Vector2f minSize{0, 0};
 		
-		for(auto &objectNode: node["objects"]) {
-			IScalable *object;
+		for(auto& objectNode: node["objects"]) {
+			IScalable* object;
 			objectNode >> object;
 			objects.push_back(object);
 		}
@@ -83,7 +83,7 @@ namespace ui {
 		return true;
 	}
 	
-	void BoxWithChangeableObjects::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BoxWithChangeableObjects::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		objects[value->getValue()]->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
 }

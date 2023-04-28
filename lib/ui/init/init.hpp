@@ -63,7 +63,7 @@
 #include "../debug/boxDebug.hpp"
 
 namespace ui {
-	void init(const char *path_ = "");
-
+	void init(const char* path_ = "");
+	
 	void yamlBuilderInit();
 }

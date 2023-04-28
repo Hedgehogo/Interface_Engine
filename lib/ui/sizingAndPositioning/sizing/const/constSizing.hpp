@@ -1,11 +1,12 @@
 #pragma once
+
 #include "../iSizing.hpp"
 
 namespace ui {
 	class ConstSizing : public ISizing {
 	protected:
 		float size;
-		
+	
 	public:
 		ConstSizing(float size);
 		
@@ -19,6 +20,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<ConstSizing> {
-		static bool decodePointer(const YAML::Node &node, ConstSizing *&constSizing);
+		static bool decodePointer(const YAML::Node& node, ConstSizing*& constSizing);
 	};
 }

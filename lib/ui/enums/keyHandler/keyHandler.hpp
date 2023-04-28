@@ -124,34 +124,33 @@ namespace ui {
 		mouseWheelRight,       ///< The scroll the mouse wheel right
 	};
 	
-    class KeyHandler {
-    protected:
-        static std::vector<Key> keysPressed;
+	class KeyHandler {
+	protected:
+		static std::vector<Key> keysPressed;
+	
+	public:
+		static std::vector<Key> getKeysPressed();
 		
-    public:
-        static std::vector<Key> getKeysPressed();
+		static void setKeysPressed(std::vector<Key> keysPressed);
 		
-        static void setKeysPressed(std::vector<Key> keysPressed);
+		static void addKey(Key key);
 		
-        static void addKey(Key key);
+		static void deleteKey(Key key);
 		
-        static void deleteKey(Key key);
+		static void clear();
 		
-        static void clear();
+		static std::string toString(Key key);
 		
-        static std::string toString(Key key);
-		
-        static bool isKeyPressed(Key key);
-    };
+		static bool isKeyPressed(Key key);
+	};
 	
 	std::string toString(Key key);
 	
 	bool isKeyPressed(Key key);
 	
- 
 	
 	template<>
 	struct Decode<Key> {
-		static bool decode(const YAML::Node &node, Key &key);
+		static bool decode(const YAML::Node& node, Key& key);
 	};
 }

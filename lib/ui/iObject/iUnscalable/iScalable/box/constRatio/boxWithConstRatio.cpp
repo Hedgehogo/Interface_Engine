@@ -1,7 +1,7 @@
 #include "boxWithConstRatio.hpp"
 
 namespace ui {
-	BoxWithConstRatio::BoxWithConstRatio(IScalable *constObject, IScalable *secondObject, IUninteractive *background, float aspectRatio, Corner corner, sf::Vector2f minSize) :
+	BoxWithConstRatio::BoxWithConstRatio(IScalable* constObject, IScalable* secondObject, IUninteractive* background, float aspectRatio, Corner corner, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithTwoObjects(constObject, secondObject), LayoutWithBackground(background),
 		verticalSide(corner == Corner::upLeft || corner == Corner::upRight), horizontalSide(corner == Corner::upLeft || corner == Corner::downLeft), aspectRatio(aspectRatio), renderSecond(true) {
 	}
@@ -94,23 +94,23 @@ namespace ui {
 		return max(normalSize, background->getNormalSize());
 	}
 	
-	void BoxWithConstRatio::copy(BoxWithConstRatio *boxWithConstRatio) {
+	void BoxWithConstRatio::copy(BoxWithConstRatio* boxWithConstRatio) {
 		Box::copy(boxWithConstRatio);
 		boxWithConstRatio->renderSecond = this->renderSecond;
 	}
 	
-	BoxWithConstRatio *BoxWithConstRatio::copy() {
-		BoxWithConstRatio *boxWithConstRatio{new BoxWithConstRatio{firstObject->copy(), secondObject->copy(), background->copy(), aspectRatio, getCorner(), minimumSize}};
+	BoxWithConstRatio* BoxWithConstRatio::copy() {
+		BoxWithConstRatio* boxWithConstRatio{new BoxWithConstRatio{firstObject->copy(), secondObject->copy(), background->copy(), aspectRatio, getCorner(), minimumSize}};
 		BoxWithConstRatio::copy(boxWithConstRatio);
 		return boxWithConstRatio;
 	}
 	
 	
-	bool DecodePointer<BoxWithConstRatio>::decodePointer(const YAML::Node &node, BoxWithConstRatio *&boxWithConstRatio) {
-		IScalable *constObject;
-		IScalable *secondObject;
+	bool DecodePointer<BoxWithConstRatio>::decodePointer(const YAML::Node& node, BoxWithConstRatio*& boxWithConstRatio) {
+		IScalable* constObject;
+		IScalable* secondObject;
 		float aspectRatio;
-		IUninteractive *background{};
+		IUninteractive* background{};
 		Corner corner{Corner::upLeft};
 		sf::Vector2f minSize{};
 		
@@ -131,7 +131,7 @@ namespace ui {
 		return true;
 	}
 	
-	void BoxWithConstRatio::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BoxWithConstRatio::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		firstObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);

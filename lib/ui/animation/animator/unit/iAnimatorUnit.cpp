@@ -2,7 +2,7 @@
 
 namespace ui {
 	std::vector<IAnimatorUnit*> getAnimatorUnits(const YAML::Node& node, std::string nameNextNode) {
-		std::vector<IAnimatorUnit*> result {};
+		std::vector<IAnimatorUnit*> result{};
 		
 		if(const YAML::Node& nextNode = node[nameNextNode]; nextNode) {
 			if(!nextNode.IsScalar())

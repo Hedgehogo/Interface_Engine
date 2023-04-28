@@ -1,13 +1,14 @@
 #include "buttonWithPanel.hpp"
 
 namespace ui {
-	ButtonWithPanel::ButtonWithPanel(Panel *panel, DisplayPanelInteraction *interaction, IScalable *background) :
-		BaseButton(background, interaction), panel(panel) {}
+	ButtonWithPanel::ButtonWithPanel(Panel* panel, DisplayPanelInteraction* interaction, IScalable* background) :
+		BaseButton(background, interaction), panel(panel) {
+	}
 	
 	void ButtonWithPanel::init(InteractiveInitInfo interactiveInitInfo) {
 		BaseButton::init(interactiveInitInfo);
 		panel->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
-		dynamic_cast<DisplayPanelInteraction *>(interaction)->init(*panel, interactiveInitInfo.panelManager);
+		dynamic_cast<DisplayPanelInteraction*>(interaction)->init(*panel, interactiveInitInfo.panelManager);
 	}
 	
 	ButtonWithPanel::~ButtonWithPanel() {
@@ -26,30 +27,33 @@ namespace ui {
 		return {std::max(backgroundMinSize.x, panelMinSize.x), std::max(backgroundMinSize.y, panelMinSize.y)};
 	}
 	
-	ButtonWithPanel *ButtonWithPanel::copy() {
-		Panel *panel1{panel->copy()};
-		DisplayPanelInteraction *displayPanelInteraction{dynamic_cast<DisplayPanelInteraction *>(interaction)->copy()};
+	ButtonWithPanel* ButtonWithPanel::copy() {
+		Panel* panel1{panel->copy()};
+		DisplayPanelInteraction* displayPanelInteraction{dynamic_cast<DisplayPanelInteraction*>(interaction)->copy()};
 		displayPanelInteraction->setPanel(*panel1);
-		ButtonWithPanel *buttonWithPanel{new ButtonWithPanel{panel1, displayPanelInteraction, background->copy()}};
+		ButtonWithPanel* buttonWithPanel{new ButtonWithPanel{panel1, displayPanelInteraction, background->copy()}};
 		BaseButton::copy(buttonWithPanel);
 		return buttonWithPanel;
 	}
 	
-	void ButtonWithPanel::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void ButtonWithPanel::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		BaseButton::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		panel->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
 	}
 	
 	
-	bool DecodePointer<ButtonWithPanel>::decodePointer(const YAML::Node &node, ButtonWithPanel *&buttonWithPanel) {
-		Panel *panel;
-		DisplayPanelInteraction *interaction;
-		IScalable *background;
+	bool DecodePointer<ButtonWithPanel>::decodePointer(const YAML::Node& node, ButtonWithPanel*& buttonWithPanel) {
+		Panel* panel;
+		DisplayPanelInteraction* interaction;
+		IScalable* background;
 		
 		node["panel"] >> panel;
 		node["display-interaction"] >> interaction;
 		node["background"] >> background;
 		
-		{ buttonWithPanel = new ButtonWithPanel{panel, interaction, background}; return true; }
+		{
+			buttonWithPanel = new ButtonWithPanel{panel, interaction, background};
+			return true;
+		}
 	}
 }

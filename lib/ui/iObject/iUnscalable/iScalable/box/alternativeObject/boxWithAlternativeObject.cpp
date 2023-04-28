@@ -2,7 +2,7 @@
 #include <algorithm>
 
 namespace ui {
-	BoxWithAlternativeObject::BoxWithAlternativeObject(IScalable *topObject, IScalable *bottomObject, sf::Vector2f minSize) :
+	BoxWithAlternativeObject::BoxWithAlternativeObject(IScalable* topObject, IScalable* bottomObject, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithTwoObjects(topObject, bottomObject) {
 	}
 	
@@ -16,16 +16,16 @@ namespace ui {
 		secondObject->resize(size, position);
 	}
 	
-	BoxWithAlternativeObject *BoxWithAlternativeObject::copy() {
-		BoxWithAlternativeObject *boxWithAlternativeObject{new BoxWithAlternativeObject{firstObject->copy(), secondObject->copy(), minimumSize}};
+	BoxWithAlternativeObject* BoxWithAlternativeObject::copy() {
+		BoxWithAlternativeObject* boxWithAlternativeObject{new BoxWithAlternativeObject{firstObject->copy(), secondObject->copy(), minimumSize}};
 		Box::copy(boxWithAlternativeObject);
 		return boxWithAlternativeObject;
 	}
 	
 	
-	bool DecodePointer<BoxWithAlternativeObject>::decodePointer(const YAML::Node &node, BoxWithAlternativeObject *&boxWithAlternativeObject) {
-		IScalable *topObject;
-		IScalable *bottomObject;
+	bool DecodePointer<BoxWithAlternativeObject>::decodePointer(const YAML::Node& node, BoxWithAlternativeObject*& boxWithAlternativeObject) {
+		IScalable* topObject;
+		IScalable* bottomObject;
 		sf::Vector2f minSize{};
 		
 		node["top-object"] >> topObject;

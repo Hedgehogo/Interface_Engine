@@ -13,115 +13,115 @@
 
 namespace ui {
 	class Text : public Interactive, public IDrawable, public IUpdatable {
-    protected:
-        sf::RenderTarget *renderTarget;
-
+	protected:
+		sf::RenderTarget* renderTarget;
+		
 		sf::RenderTexture renderTexture;
 		sf::View view;
 		sf::Texture texture;
 		sf::Sprite sprite;
 		DrawManager drawManager;
-
-        bool interact;
-        bool oldInteract;
-
-        TextInteraction* textInteraction;
-
-        struct Selection {
-            std::vector<BaseCharacter*>::iterator start;
-            std::vector<BaseCharacter*>::iterator end;
-        } selection;
-
-
-        uint size;
-
-        std::vector<BaseCharacter*> textCharacters;
-        std::vector<BaseTextBlock*> textBocks;
-        std::vector<BaseLine* > lines;
-
-        BaseResizer* resizer;
 		
-        IUninteractive *background;
+		bool interact;
+		bool oldInteract;
 		
-        void init(InteractiveInitInfo interactiveInitInfo) override;
-
-    public:
-        explicit Text(std::vector<BaseTextBlock *> textBlocks, IUninteractive *background = new FullColor(sf::Color::White), int size = 14, sf::Font *font = nullptr, sf::Color textColor = sf::Color::Black,
-             sf::Color textSelectionColor = sf::Color::White, sf::Color backgroundSelectionColor = sf::Color::Blue, sf::Color inactiveTextSelectionColor = nullColor,
-             sf::Color inactiveBackgroundSelectionColor = {150, 150, 150}, BaseResizer *resizer = new Resizer{1.15, BaseResizer::Align::left},
-             TextInteraction *textInteraction =
-				 new TextSelectionAndCopyInteraction{
-					{
-						{
-							new TextPressedInteraction{
-								new TextSelectionEvent{},
-								{Key::mouseLeft}
-							},
-							{Key::mouseLeft}
-						}
-					},
-					{
-						new TextKeysInteraction{
-							new TextCopyEvent{},
-							{Key::c, Key::lControl}
-						}
-					}
-				}
+		TextInteraction* textInteraction;
+		
+		struct Selection {
+			std::vector<BaseCharacter*>::iterator start;
+			std::vector<BaseCharacter*>::iterator end;
+		} selection;
+		
+		
+		uint size;
+		
+		std::vector<BaseCharacter*> textCharacters;
+		std::vector<BaseTextBlock*> textBocks;
+		std::vector<BaseLine*> lines;
+		
+		BaseResizer* resizer;
+		
+		IUninteractive* background;
+		
+		void init(InteractiveInitInfo interactiveInitInfo) override;
+	
+	public:
+		explicit Text(std::vector<BaseTextBlock*> textBlocks, IUninteractive* background = new FullColor(sf::Color::White), int size = 14, sf::Font* font = nullptr, sf::Color textColor = sf::Color::Black,
+					  sf::Color textSelectionColor = sf::Color::White, sf::Color backgroundSelectionColor = sf::Color::Blue, sf::Color inactiveTextSelectionColor = nullColor,
+					  sf::Color inactiveBackgroundSelectionColor = {150, 150, 150}, BaseResizer* resizer = new Resizer{1.15, BaseResizer::Align::left},
+					  TextInteraction* textInteraction =
+					  new TextSelectionAndCopyInteraction{
+						  {
+							  {
+								  new TextPressedInteraction{
+									  new TextSelectionEvent{},
+									  {Key::mouseLeft}
+								  },
+								  {Key::mouseLeft}
+							  }
+						  },
+						  {
+							  new TextKeysInteraction{
+								  new TextCopyEvent{},
+								  {Key::c, Key::lControl}
+							  }
+						  }
+					  }
 		);
-
-        ~Text() override;
-
-        void setSelection(Selection selection);
 		
-        void setSelectionStart(std::vector<BaseCharacter*>::iterator start);
+		~Text() override;
 		
-        void setSelectionEnd(std::vector<BaseCharacter*>::iterator end);
+		void setSelection(Selection selection);
 		
-        [[nodiscard]] Selection getSelection() const;
+		void setSelectionStart(std::vector<BaseCharacter*>::iterator start);
 		
-        [[nodiscard]] std::vector<BaseCharacter *>::iterator getSelectionStart() const;
+		void setSelectionEnd(std::vector<BaseCharacter*>::iterator end);
 		
-        [[nodiscard]] std::vector<BaseCharacter *>::iterator getSelectionEnd() const;
-
-        std::u32string getSelectionText();
-
-        std::vector<BaseCharacter *>::iterator getCharacter(sf::Vector2f mousePosition);
-
-        void update() override;
-
-        bool updateInteractions(sf::Vector2f mousePosition) override;
-
-        void draw() override;
-
-        void move(sf::Vector2f position) override;
-
-        void setPosition(sf::Vector2f position) override;
-
-        void resize(sf::Vector2f size, sf::Vector2f position) override;
+		[[nodiscard]] Selection getSelection() const;
+		
+		[[nodiscard]] std::vector<BaseCharacter*>::iterator getSelectionStart() const;
+		
+		[[nodiscard]] std::vector<BaseCharacter*>::iterator getSelectionEnd() const;
+		
+		std::u32string getSelectionText();
+		
+		std::vector<BaseCharacter*>::iterator getCharacter(sf::Vector2f mousePosition);
+		
+		void update() override;
+		
+		bool updateInteractions(sf::Vector2f mousePosition) override;
+		
+		void draw() override;
+		
+		void move(sf::Vector2f position) override;
+		
+		void setPosition(sf::Vector2f position) override;
+		
+		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		sf::Vector2f getAreaPosition() override;
 		
 		sf::Vector2f getAreaSize() override;
-
-        sf::Vector2f getMinSize() override;
-
-        sf::Vector2f getNormalSize() override;
 		
-    protected:
-        Text(std::vector<BaseTextBlock *> textBlocks, IUninteractive *background, uint size, BaseResizer *resizer, sf::RenderTarget *renderTarget,
-             TextInteraction* textInteraction);
+		sf::Vector2f getMinSize() override;
 		
-    public:
-        Text *copy() override;
-
-        void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
-    };
+		sf::Vector2f getNormalSize() override;
+	
+	protected:
+		Text(std::vector<BaseTextBlock*> textBlocks, IUninteractive* background, uint size, BaseResizer* resizer, sf::RenderTarget* renderTarget,
+			 TextInteraction* textInteraction);
+	
+	public:
+		Text* copy() override;
+		
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	};
 	
 	
 	template<>
 	struct DecodePointer<Text> {
-		static bool decodePointer(const YAML::Node &node, Text *&text);
+		static bool decodePointer(const YAML::Node& node, Text*& text);
 	};
-
-    extern std::vector<BaseCharacter *>::iterator nullBaseCharacterIterator;
+	
+	extern std::vector<BaseCharacter*>::iterator nullBaseCharacterIterator;
 }

@@ -3,8 +3,8 @@
 #include <memory>
 
 namespace ui {
-	Animator::Animator(std::vector<IAnimatorUnit*> units, PSfloat speed) : units(units), unitsBuff(units){
-		for(auto& unit : units) {
+	Animator::Animator(std::vector<IAnimatorUnit*> units, PSfloat speed) : units(units), unitsBuff(units) {
+		for(auto& unit: units) {
 			unit->setSpeed(speed);
 		}
 	}
@@ -55,7 +55,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<Animator>::decodePointer(const YAML::Node &node, Animator *&animator) {
+	bool DecodePointer<Animator>::decodePointer(const YAML::Node& node, Animator*& animator) {
 		animator = new Animator{
 			node["unit"] ? std::vector<IAnimatorUnit*>{node["unit"].as<IAnimatorUnit*>()} : node["units"].as<std::vector<IAnimatorUnit*>>(),
 			(node["speed"] ? Buffer::get<Sfloat>(node["speed"]) : std::make_shared<Sfloat>(1))

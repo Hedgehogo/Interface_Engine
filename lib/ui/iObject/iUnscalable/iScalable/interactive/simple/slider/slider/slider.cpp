@@ -1,12 +1,12 @@
 #include "slider.hpp"
 
 namespace ui {
-	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, sf::Vector2f sliderScale, Key key, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity,
+	Slider::Slider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, sf::Vector2f sliderScale, Key key, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity,
 				   sf::Vector2f wheelSensitivity) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}), scale(sliderScale) {
 	}
 	
-	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, sf::Vector2i division, sf::Vector2f sliderScale, Key key, bool wheelHorizontal) :
+	Slider::Slider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, sf::Vector2i division, sf::Vector2f sliderScale, Key key, bool wheelHorizontal) :
 		BaseSlider(slider, background, value, new SliderInteraction{*this, key, division, wheelHorizontal}), scale(sliderScale) {
 	}
 	
@@ -28,21 +28,21 @@ namespace ui {
 		return minSize;
 	}
 	
-	Slider::Slider(IUninteractive *slider, IUninteractive *background, const PSRVec2f &value, SliderInteraction *interaction, sf::Vector2f sliderScale) :
+	Slider::Slider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, SliderInteraction* interaction, sf::Vector2f sliderScale) :
 		BaseSlider(slider, background, value, interaction), scale(sliderScale) {
 	}
 	
-	Slider *Slider::copy() {
-		Slider *slider1{new Slider{slider->copy(), background->copy(), value, dynamic_cast<SliderInteraction *>(interaction->copy()), scale}};
-		dynamic_cast<SliderInteraction *>(slider1->interaction)->setSlider(*slider1);
+	Slider* Slider::copy() {
+		Slider* slider1{new Slider{slider->copy(), background->copy(), value, dynamic_cast<SliderInteraction*>(interaction->copy()), scale}};
+		dynamic_cast<SliderInteraction*>(slider1->interaction)->setSlider(*slider1);
 		BaseSlider::copy(slider1);
 		return slider1;
 	}
 	
 	
-	bool DecodePointer<Slider>::decodePointer(const YAML::Node &node, Slider *&sliderZone) {
-		IUninteractive *slider;
-		IUninteractive *background;
+	bool DecodePointer<Slider>::decodePointer(const YAML::Node& node, Slider*& sliderZone) {
+		IUninteractive* slider;
+		IUninteractive* background;
 		PSRVec2f value;
 		sf::Vector2f sliderScale{1.0f, 0.5f};
 		Key key{Key::mouseLeft};
@@ -68,13 +68,19 @@ namespace ui {
 			if(node["wheel-sensitivity"])
 				node["wheel-sensitivity"] >> wheelSensitivity;
 			
-			{ sliderZone = new Slider{slider, background, value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity}; return true; }
+			{
+				sliderZone = new Slider{slider, background, value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity};
+				return true;
+			}
 		} else {
 			sf::Vector2i division;
 			
 			node["division"] >> division;
 			
-			{ sliderZone = new Slider{slider, background, value, division, sliderScale, key, wheelHorizontal}; return true; }
+			{
+				sliderZone = new Slider{slider, background, value, division, sliderScale, key, wheelHorizontal};
+				return true;
+			}
 		}
 	}
 }

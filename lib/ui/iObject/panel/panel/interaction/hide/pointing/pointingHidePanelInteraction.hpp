@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../hidePanelInteraction.hpp"
 #include "../../general/panelInteraction.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
@@ -7,7 +8,7 @@ namespace ui {
 	class PointingHidePanelInteraction : public HidePanelInteraction, public PanelInteraction {
 	protected:
 		bool onlyOnParent;
-		
+	
 	public:
 		PointingHidePanelInteraction(bool onlyOnParent = false);
 		
@@ -23,6 +24,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<PointingHidePanelInteraction> {
-		static bool decodePointer(const YAML::Node &node, PointingHidePanelInteraction *&pointingHidePanelInteraction);
+		static bool decodePointer(const YAML::Node& node, PointingHidePanelInteraction*& pointingHidePanelInteraction);
 	};
 }

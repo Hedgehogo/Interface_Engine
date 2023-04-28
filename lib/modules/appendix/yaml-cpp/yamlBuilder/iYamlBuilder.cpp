@@ -10,11 +10,11 @@ namespace ui {
 	}
 	
 	namespace detail {
-		IYamlBuilder::TypeNameDeformer IYamlBuilder::typeNameDeform = [](std::string name)->std::string {
+		IYamlBuilder::TypeNameDeformer IYamlBuilder::typeNameDeform = [](std::string name) -> std::string {
 			return removeNamespace(std::move(name), "ui");
 		};
 		
-		void IYamlBuilder::setTypeNameDeformer(const TypeNameDeformer &typeNameDeform) {
+		void IYamlBuilder::setTypeNameDeformer(const TypeNameDeformer& typeNameDeform) {
 			IYamlBuilder::typeNameDeform = typeNameDeform;
 		}
 		
@@ -27,7 +27,7 @@ namespace ui {
 		}
 	}
 	
-	void setTypeNameDeformer(const detail::IYamlBuilder::TypeNameDeformer &typeNameDeform) {
+	void setTypeNameDeformer(const detail::IYamlBuilder::TypeNameDeformer& typeNameDeform) {
 		detail::IYamlBuilder::setTypeNameDeformer(typeNameDeform);
 	}
 }

@@ -8,14 +8,14 @@ namespace ui {
 	protected:
 		sf::Vector2f minimumSize;
 		
-		void copy(Box *box);
+		void copy(Box* box);
 	
 	public:
 		explicit Box(sf::Vector2f minSize, sf::Vector2f size = {0.0f, 0.0f});
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		Box *copy() override = 0;
+		Box* copy() override = 0;
 	};
 }
 

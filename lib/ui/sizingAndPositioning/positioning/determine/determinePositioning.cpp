@@ -2,7 +2,7 @@
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
-	bool determinePositioning(const YAML::Node &node, std::string &type) {
+	bool determinePositioning(const YAML::Node& node, std::string& type) {
 		if(node.IsScalar()) {
 			type = "InternalPositioning";
 			return true;
@@ -11,15 +11,18 @@ namespace ui {
 				type = "InternalPositioning";
 				return true;
 			}
-			if(determine(node, {{"parent-coefficient"}, {"object-coefficient"}}, {{"offset"}})) {
+			if(determine(node, {{"parent-coefficient"},
+								{"object-coefficient"}}, {{"offset"}})) {
 				type = "MatchPositioning";
 				return true;
 			}
-			if(determine(node, {{"target-coefficient"}, {"object-coefficient"}}, {{"offset"}})) {
+			if(determine(node, {{"target-coefficient"},
+								{"object-coefficient"}}, {{"offset"}})) {
 				type = "MatchTargetPositioning";
 				return true;
 			}
-			if(determine(node, {{"parent-side"}, {"object-side"}}, {{"offset"}})) {
+			if(determine(node, {{"parent-side"},
+								{"object-side"}}, {{"offset"}})) {
 				type = "MatchSidesPositioning";
 				return true;
 			}

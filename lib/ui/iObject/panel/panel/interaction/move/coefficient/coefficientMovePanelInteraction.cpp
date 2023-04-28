@@ -19,7 +19,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<CoefficientMovePanelInteraction>::decodePointer(const YAML::Node &node, CoefficientMovePanelInteraction *&coefficientMovePanelInteraction) {
+	bool DecodePointer<CoefficientMovePanelInteraction>::decodePointer(const YAML::Node& node, CoefficientMovePanelInteraction*& coefficientMovePanelInteraction) {
 		sf::Vector2f coefficient;
 		sf::Vector2f offset;
 		bool atStart{false};

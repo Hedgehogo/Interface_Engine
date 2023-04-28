@@ -13,15 +13,15 @@ namespace ui {
 			aspectRatio = 1 << 3,
 			time = 1 << 4,
 		};
-		
+	
 	protected:
-		sf::Shader *shader;
+		sf::Shader* shader;
 		uint transmission;
 		
 		sf::Clock clock;
-		
+	
 	public:
-		BoxWithShader(IScalable *var, sf::Shader *shader, uint transmission,
+		BoxWithShader(IScalable* var, sf::Shader* shader, uint transmission,
 					  std::map<std::string, PISfloat> valuesF = {},
 					  std::map<std::string, PISint> valuesI = {},
 					  std::map<std::string, PISbool> valuesB = {},
@@ -51,6 +51,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<BoxWithShader> {
-		static bool decodePointer(const YAML::Node &node, BoxWithShader *&boxWithShader);
+		static bool decodePointer(const YAML::Node& node, BoxWithShader*& boxWithShader);
 	};
 }

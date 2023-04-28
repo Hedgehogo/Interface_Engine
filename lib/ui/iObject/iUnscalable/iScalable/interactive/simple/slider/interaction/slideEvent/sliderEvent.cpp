@@ -3,7 +3,7 @@
 #include <cmath>
 
 namespace ui {
-	SliderEvent::SliderEvent(BaseSlider &slider, sf::Vector2i division) :
+	SliderEvent::SliderEvent(BaseSlider& slider, sf::Vector2i division) :
 		slider(&slider), division(division), startMousePosition(), startValue() {
 	}
 	
@@ -19,7 +19,8 @@ namespace ui {
 		startMousePosition = mousePosition;
 	}
 	
-	void SliderEvent::stopPressed() {}
+	void SliderEvent::stopPressed() {
+	}
 	
 	void SliderEvent::whilePressed() {
 		sf::Vector2f mouseOffset{sf::Vector2i{mousePosition.x - startMousePosition.x, mousePosition.y - startMousePosition.y}};
@@ -32,17 +33,17 @@ namespace ui {
 	void SliderEvent::whileNotPressed() {
 	}
 	
-	void SliderEvent::setSlider(BaseSlider &slider) {
+	void SliderEvent::setSlider(BaseSlider& slider) {
 		this->slider = &slider;
 	}
 	
-	void SliderEvent::copy(SliderEvent *sliderEvent) {
+	void SliderEvent::copy(SliderEvent* sliderEvent) {
 		sliderEvent->startMousePosition = this->startMousePosition;
 		sliderEvent->startValue = this->startValue;
 	}
 	
-	SliderEvent *SliderEvent::copy() {
-		SliderEvent *sliderEvent{new SliderEvent{*slider, division}};
+	SliderEvent* SliderEvent::copy() {
+		SliderEvent* sliderEvent{new SliderEvent{*slider, division}};
 		SliderEvent::copy(sliderEvent);
 		return sliderEvent;
 	}

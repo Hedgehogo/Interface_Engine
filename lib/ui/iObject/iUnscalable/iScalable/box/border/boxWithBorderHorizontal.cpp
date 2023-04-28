@@ -2,13 +2,13 @@
 #include <vector>
 
 namespace ui {
-	BoxWithBorderHorizontal::BoxWithBorderHorizontal(std::vector<IScalable *> objects, std::vector<float> bounds, sf::Vector2f minSize) :
+	BoxWithBorderHorizontal::BoxWithBorderHorizontal(std::vector<IScalable*> objects, std::vector<float> bounds, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithObjectsArray(std::move(objects)), bounds(std::move(bounds)) {
 		this->bounds.insert(this->bounds.begin(), 0.0f);
 		this->bounds.push_back(1.0f);
 	}
 	
-	BoxWithBorderHorizontal::BoxWithBorderHorizontal(std::vector<IScalable *> objects, sf::Vector2f minSize) :
+	BoxWithBorderHorizontal::BoxWithBorderHorizontal(std::vector<IScalable*> objects, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithObjectsArray(std::move(objects)), bounds(this->objects.size() + 1, 1.0f) {
 		auto count = this->objects.size();
 		for(unsigned long long i = 0; i < count; ++i) {
@@ -16,7 +16,7 @@ namespace ui {
 		}
 	}
 	
-	BoxWithBorderHorizontal::BoxWithBorderHorizontal(IScalable *firstObject, IScalable *secondObject, float bound, sf::Vector2f minSize) :
+	BoxWithBorderHorizontal::BoxWithBorderHorizontal(IScalable* firstObject, IScalable* secondObject, float bound, sf::Vector2f minSize) :
 		Box(minSize), LayoutWithObjectsArray({firstObject, secondObject}), bounds({0.f, bound, 1.f}) {
 	}
 	
@@ -75,8 +75,8 @@ namespace ui {
 		return normalSize;
 	}
 	
-	BoxWithBorderHorizontal *BoxWithBorderHorizontal::copy() {
-		std::vector<IScalable *> newObjects(objects.size());
+	BoxWithBorderHorizontal* BoxWithBorderHorizontal::copy() {
+		std::vector<IScalable*> newObjects(objects.size());
 		for(int i = 0; i < newObjects.size(); ++i) {
 			newObjects[i] = objects[i]->copy();
 		}
@@ -84,19 +84,19 @@ namespace ui {
 		for(int i = 0; i < newBounds.size(); ++i) {
 			newBounds[i] = bounds[i + 1];
 		}
-		BoxWithBorderHorizontal *boxWithBorderHorizontal{new BoxWithBorderHorizontal{newObjects, newBounds, minimumSize}};
+		BoxWithBorderHorizontal* boxWithBorderHorizontal{new BoxWithBorderHorizontal{newObjects, newBounds, minimumSize}};
 		Box::copy(boxWithBorderHorizontal);
 		return boxWithBorderHorizontal;
 	}
 	
 	
-	bool DecodePointer<BoxWithBorderHorizontal>::decodePointer(const YAML::Node &node, BoxWithBorderHorizontal *&boxWithBorderHorizontal) {
+	bool DecodePointer<BoxWithBorderHorizontal>::decodePointer(const YAML::Node& node, BoxWithBorderHorizontal*& boxWithBorderHorizontal) {
 		sf::Vector2f minSize{};
 		
 		if(node["min-size"])
 			node["min-size"] >> minSize;
 		if(node["objects"]) {
-			std::vector<IScalable *> objects(node["objects"].size());
+			std::vector<IScalable*> objects(node["objects"].size());
 			
 			for(ullint i = 0; i < node["objects"].size(); ++i) {
 				node["objects"][i] >> objects[i];
@@ -113,8 +113,8 @@ namespace ui {
 				boxWithBorderHorizontal = new BoxWithBorderHorizontal{objects, minSize};
 			}
 		} else {
-			IScalable *firstObject;
-			IScalable *secondObject;
+			IScalable* firstObject;
+			IScalable* secondObject;
 			float bound{0.5f};
 			
 			node["first-object"] >> firstObject;
@@ -127,9 +127,9 @@ namespace ui {
 		return true;
 	}
 	
-	void BoxWithBorderHorizontal::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void BoxWithBorderHorizontal::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		for(auto &object: objects) {
+		for(auto& object: objects) {
 			object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		}
 	}

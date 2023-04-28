@@ -25,7 +25,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<ClickDisplayPanelInteraction>::decodePointer(const YAML::Node &node, ClickDisplayPanelInteraction *&clickDisplayPanelInteraction) {
+	bool DecodePointer<ClickDisplayPanelInteraction>::decodePointer(const YAML::Node& node, ClickDisplayPanelInteraction*& clickDisplayPanelInteraction) {
 		Key key;
 		node["key"] >> key;
 		{

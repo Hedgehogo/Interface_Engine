@@ -14,10 +14,10 @@ namespace ui {
 		bool renderSecond;
 		float aspectRatio;
 		
-		void copy(BoxWithConstRatio *boxWithConstRatio);
+		void copy(BoxWithConstRatio* boxWithConstRatio);
 	
 	public:
-		BoxWithConstRatio(IScalable *constObject, IScalable *secondObject, IUninteractive *background, float aspectRatio, Corner corner = Corner::upLeft, sf::Vector2f minSize = {0, 0});
+		BoxWithConstRatio(IScalable* constObject, IScalable* secondObject, IUninteractive* background, float aspectRatio, Corner corner = Corner::upLeft, sf::Vector2f minSize = {0, 0});
 		
 		void init(InitInfo initInfo) override;
 		
@@ -33,15 +33,15 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() override;
 		
-		BoxWithConstRatio *copy() override;
+		BoxWithConstRatio* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<BoxWithConstRatio> {
-		static bool decodePointer(const YAML::Node &node, BoxWithConstRatio *&boxWithConstRatio);
+		static bool decodePointer(const YAML::Node& node, BoxWithConstRatio*& boxWithConstRatio);
 	};
 	
 	using BoxWCRatio = BoxWithConstRatio;

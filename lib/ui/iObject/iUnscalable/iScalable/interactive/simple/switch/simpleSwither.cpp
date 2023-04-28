@@ -70,7 +70,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<SimpleSwitcher>::decodePointer(const YAML::Node &node, SimpleSwitcher *&simpleSwitcher) {
+	bool DecodePointer<SimpleSwitcher>::decodePointer(const YAML::Node& node, SimpleSwitcher*& simpleSwitcher) {
 		auto inactiveBackground{node["inactive-background"].as<IUninteractive*>()};
 		auto activeBackground{node["active-background"].as<IUninteractive*>()};
 		Key key{convDef<Key>(node["key"], Key::mouseLeft)};

@@ -7,11 +7,11 @@ namespace ui {
 		float HPrime = std::fmod(H / 60, 6.f); // H'
 		float X = C * (1 - std::fabs(std::fmod(HPrime, 2.f) - 1));
 		float M = V - C;
-
+		
 		float R = 0.f;
 		float G = 0.f;
 		float B = 0.f;
-
+		
 		switch(static_cast<int>(HPrime)) {
 			case 0:
 				R = C;
@@ -38,17 +38,17 @@ namespace ui {
 				B = X;
 				break; // [5, 6)
 		}
-
+		
 		R += M;
 		G += M;
 		B += M;
-
+		
 		sf::Color color;
 		color.r = static_cast<sf::Uint8>(std::round(R * 255));
 		color.g = static_cast<sf::Uint8>(std::round(G * 255));
 		color.b = static_cast<sf::Uint8>(std::round(B * 255));
-
+		
 		return color;
 	}
-
+	
 }

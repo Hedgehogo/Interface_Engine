@@ -9,13 +9,13 @@
 namespace ui {
 	class BoxWithConstBezel : public Box, public LayoutWithObject {
 	protected:
-		IUninteractive *bezel;
+		IUninteractive* bezel;
 		float thickness;
 	
 	public:
 		void init(InitInfo initInfo) override;
 		
-		BoxWithConstBezel(IScalable *object, IUninteractive *bezel, float thickness, sf::Vector2f minSize = {0, 0});
+		BoxWithConstBezel(IScalable* object, IUninteractive* bezel, float thickness, sf::Vector2f minSize = {0, 0});
 		
 		~BoxWithConstBezel() override;
 		
@@ -27,15 +27,15 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() override;
 		
-		BoxWithConstBezel *copy() override;
+		BoxWithConstBezel* copy() override;
 		
-		void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
 	
 	template<>
 	struct DecodePointer<BoxWithConstBezel> {
-		static bool decodePointer(const YAML::Node &node, BoxWithConstBezel *&boxWithConstBezel);
+		static bool decodePointer(const YAML::Node& node, BoxWithConstBezel*& boxWithConstBezel);
 	};
 	
 	using BoxWCBezel = BoxWithConstBezel;
