@@ -1,13 +1,14 @@
 #pragma once
 
 #include "../../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
+#include "modules/appendix/yaml-cpp/shared/value/general/sValue.hpp"
 
 namespace ui {
-	class SimpleSwitcher;
+	class Switcher;
 	
-	class SimpleSwitcherEvent : public KeyEvent_Simple {
+	class SwitcherEvent : public KeyEvent_Simple {
 	protected:
-		SimpleSwitcher* switcher;
+		PSbool value;
 		
 		void startPressed() override;
 		
@@ -18,11 +19,9 @@ namespace ui {
 		void whileNotPressed() override;
 	
 	public:
-		SimpleSwitcherEvent(SimpleSwitcher& switcher);
+		SwitcherEvent(PSbool value);
 		
-		void setSwitcher(SimpleSwitcher& switcher);
-		
-		SimpleSwitcherEvent* copy() override;
+		SwitcherEvent* copy() override;
 	};
 	
 }

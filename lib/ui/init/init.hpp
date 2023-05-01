@@ -26,7 +26,7 @@
 #include "../iObject/iUnscalable/iScalable/interactive/simple/slider/slider/slider.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/button/general/button.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/button/buttonWithPanel/buttonWithPanel.hpp"
-#include "../iObject/iUnscalable/iScalable/interactive/simple/switch/simpleSwither.hpp"
+#include "../iObject/iUnscalable/iScalable/interactive/simple/switch/switcher.hpp"
 #include "../iObject/iUnscalable/interactive/text/text.hpp"
 #include "../iObject/iUnscalable/interactive/text/textBlock/interactive/interactiveTextBlock.hpp"
 #include "../iObject/iUnscalable/interactive/text/textBlock/object/objectTextBlock.hpp"
