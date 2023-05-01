@@ -119,7 +119,8 @@ namespace ui {
 		inherit<Box, BoxWithShader>({"BWS"});
 		inherit<Box, BoxWithChangeableObjects>({"BWChangeableObjects", "BWCO"});
 		inherit<Box, BoxMakePermeable>({"BMakePerm", "BMP"});
-		inherit<Box, BoxScroll>({"BScroll", "BS"});
+		inherit<Box, BoxScroll>({"BScroll", "BSc"});
+		inherit<Box, BoxSwitcher>({"BSwitcher", "BSw"});
 		addBase<BoxUninteractive, IUninteractive, Box>({"BUninteractive", "BU"});
 		inherit<IScalable, Box>();
 		inherit<BaseSlider, Slider>();

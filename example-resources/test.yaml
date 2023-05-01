@@ -90,12 +90,37 @@ object:
         border-direction: horizontal
         border-value:
           var: a2
-    - type: BWMB
-      first-object: blue
-      second-object: cyan
-      border-direction: horizontal
-      border-value:
-        var: b
+    - type: BWCR
+      aspect-ratio: 1
+      const-object:
+        type: Button
+        background:
+          type: FullColor
+          color: 444444
+        interaction:
+          type: OKI
+          event:
+            type: SE
+            value:
+              var: switch3
+      second-object:
+        type: BWCR
+        aspect-ratio: 1
+        corner: up-right
+        second-object:
+          type: BWMB
+          first-object: blue
+          second-object: cyan
+          border-direction: horizontal
+          border-value:
+            var: b
+        const-object:
+          type: BSw
+          first-object: red
+          second-object: green
+          value:
+            var: switch3
+
     - type: BWCR
       aspect-ratio: 1
       const-object:
