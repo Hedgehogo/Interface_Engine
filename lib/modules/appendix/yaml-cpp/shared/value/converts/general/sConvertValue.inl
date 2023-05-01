@@ -28,4 +28,13 @@ namespace ui {
 	const ToType& SConvertValue<FromType, ToType>::getValue() const {
 		return SValue<ToType>::getValue();
 	}
+	
+	template<typename FromType, typename ToType>
+	bool DecodePointer<SConvertValue<FromType, ToType>>::decodePointer(const YAML::Node& node, SConvertValue<FromType, ToType>*& sConvertValue) {
+		sConvertValue = new SConvertValue<FromType, ToType>{
+			Buffer::get<ISValue<FromType>>(node["value"]),
+			convDef(node["default-value"], ToType{})
+		};
+		return true;
+	}
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "modules/appendix/yaml-cpp/buffer/buffer.hpp"
 #include "../iSConvertValue.hpp"
 #include "../../general/sValue.hpp"
 
@@ -19,6 +20,12 @@ namespace ui {
 		const ToType& getValue() const override;
 		
 		void setValue(const ToType& value) override;
+	};
+	
+	
+	template<typename FromType, typename ToType>
+	struct DecodePointer<SConvertValue<FromType, ToType>> {
+		static bool decodePointer(const YAML::Node& node, SConvertValue<FromType, ToType>*& sConvertValue);
 	};
 	
 	template<typename T>

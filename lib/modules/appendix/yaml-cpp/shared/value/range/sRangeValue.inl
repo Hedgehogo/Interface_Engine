@@ -2,7 +2,7 @@
 
 namespace ui {
 	template<typename T>
-	SRangeValue<T>::SRangeValue(T value) : SValue<T>(value), upper(std::numeric_limits<float>::max()), lower(std::numeric_limits<float>::lowest()) {
+	SRangeValue<T>::SRangeValue(T value) : SValue<T>(value), upper(std::numeric_limits<T>::max()), lower(std::numeric_limits<T>::lowest()) {
 	}
 	
 	template<typename T>

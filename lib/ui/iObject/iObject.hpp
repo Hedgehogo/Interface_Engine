@@ -65,4 +65,13 @@ namespace ui {
 	sf::Vector2<T> max(const sf::Vector2<T>& first, const sf::Vector2<T>& second, const sf::Vector2f& third) {
 		return {std::max({first.x, second.x, third.x}), std::max({first.y, second.y, third.y})};
 	}
+	
+	template<typename T>
+	auto copy(const std::vector<T*>& vec) -> std::vector<T*>{
+		std::vector<T*> result(vec.size());
+		for(int i = 0; i < vec.size(); ++i) {
+			result[i] = vec[i]->copy();
+		}
+		return result;
+	}
 }

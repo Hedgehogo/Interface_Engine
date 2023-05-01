@@ -81,6 +81,8 @@ namespace ui {
 		inherit<ISbool, SConvertFloatToBoolGreaterOrEquals>({"ConvertFloatToBoolGreaterOrEquals", "SCFTBGOE", "SCFTBGE"});
 		inherit<ISbool, SConvertFloatToBoolLess>({"ConvertFloatToBoolLess", "SCFTBL"});
 		inherit<ISbool, SConvertFloatToBoolLessOrEquals>({"ConvertFloatToBoolLessOrEquals", "SCFTBLOE", "SCFTBLE"});
+		inherit<ISint, SConvertToInt<float>>({"SConvertFloatToInt", "SConvertFToI", "SCFToI", "SCFTI"});
+		addBase<SCRfloat, SRfloat, ISfloat>({"SCRfloat", "SCRf"});
 		
 		inherit<IAnimatorUnit, Animation>({"A"});
 		inherit<IAnimatorUnit, Prerequisite>({"P"});
@@ -121,6 +123,7 @@ namespace ui {
 		inherit<Box, BoxMakePermeable>({"BMakePerm", "BMP"});
 		inherit<Box, BoxScroll>({"BScroll", "BSc"});
 		inherit<Box, BoxSwitcher>({"BSwitcher", "BSw"});
+		inherit<Box, BoxWithTabs>({"BWTabs", "BWT"});
 		addBase<BoxUninteractive, IUninteractive, Box>({"BUninteractive", "BU"});
 		inherit<IScalable, Box>();
 		inherit<BaseSlider, Slider>();
