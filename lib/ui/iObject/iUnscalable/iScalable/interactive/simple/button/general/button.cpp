@@ -1,11 +1,11 @@
 #include "button.hpp"
 
 namespace ui {
-	Button::Button(IUninteractive* background, int interaction) :
+	Button::Button(IScalable* background, int interaction) :
 		BaseButton(background, nullptr), interactionIndex(interaction) {
 	}
 	
-	Button::Button(IUninteractive* background, IInteraction* interaction) : BaseButton(background, interaction), interactionIndex(-1) {
+	Button::Button(IScalable* background, IInteraction* interaction) : BaseButton(background, interaction), interactionIndex(-1) {
 	}
 	
 	void Button::init(InteractiveInitInfo interactiveInitInfo) {
@@ -23,7 +23,7 @@ namespace ui {
 	
 	
 	bool DecodePointer<Button>::decodePointer(const YAML::Node& node, Button*& button) {
-		IUninteractive* background;
+		IScalable* background;
 		
 		node["background"] >> background;
 		

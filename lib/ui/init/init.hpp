@@ -46,6 +46,7 @@
 #include "../interaction/iInteraction/empty/emptyInteraction.hpp"
 #include "../interaction/iInteraction/mouse/lambda/mouseLambdaInteraction.hpp"
 #include "../interaction/event/key/openUrl/openUrlEvent.hpp"
+#include "../iObject/iUnscalable/iScalable/interactive/simple/switch/event/switcherEvent.hpp"
 #include "../../modules/appendix/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"
 #include "../../modules/appendix/yaml-cpp/shared/value/converts/toBool/greater/sConvertToBoolGreater.hpp"
 #include "../../modules/appendix/yaml-cpp/shared/value/converts/toBool/less/sConvertToBoolLess.hpp"

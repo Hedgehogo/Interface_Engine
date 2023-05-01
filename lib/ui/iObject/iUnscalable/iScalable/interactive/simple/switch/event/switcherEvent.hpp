@@ -24,4 +24,9 @@ namespace ui {
 		SwitcherEvent* copy() override;
 	};
 	
+	template<>
+	struct DecodePointer<SwitcherEvent> {
+		static bool decodePointer(const YAML::Node& node, SwitcherEvent*& switcherEvent);
+	};
+	
 }

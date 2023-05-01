@@ -23,4 +23,10 @@ namespace ui {
 		return new SwitcherEvent(value);
 	}
 	
+	bool DecodePointer<SwitcherEvent>::decodePointer(const YAML::Node& node, SwitcherEvent*& switcherEvent) {
+		switcherEvent = new SwitcherEvent{
+			Buffer::get<Sbool>(node["value"])
+		};
+		return true;
+	}
 }

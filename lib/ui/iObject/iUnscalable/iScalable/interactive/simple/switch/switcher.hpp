@@ -46,7 +46,6 @@ namespace ui {
 		~Switcher();
 	};
 	
-	
 	template<>
 	struct DecodePointer<Switcher> {
 		static bool decodePointer(const YAML::Node& node, Switcher*& switcher);

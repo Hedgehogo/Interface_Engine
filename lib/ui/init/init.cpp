@@ -52,6 +52,7 @@ namespace ui {
 		inherit<KeyEvent, ChangeObjectEvent>({"COE", "ChangeObjectE"});
 		inherit<KeyEvent, WhileChangingObjectsEvent>({"WhileChangingOE", "WCO"});
 		inherit<KeyEvent, OpenUrlEvent>({"UrlE", "Url", "OUE"});
+		inherit<KeyEvent, SwitcherEvent>({"SwitcherEvent", "Switcher", "SE"});
 		
 		inherit<HidePanelInteraction, DontHidePanelInteraction>({"DontHidePI", "DontHPI", "DHPI"});
 		inherit<HidePanelInteraction, ClickHidePanelInteraction>({"ClickHidePI", "ClickHPI", "CHPI"});

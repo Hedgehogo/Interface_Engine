@@ -1,40 +1,95 @@
 animation-manager:
   animator:
-    unit:
-      type: P
-      name: anim_switcher
-      valve:
-        type: VWISbool
-        value: switch
-      next-true:
-        type: A
-        var:
-          var: a
-          change-variable:
-            type: CVBSL
-            start: 0
-            end: 1
-            length: 1
-        next:
-          type: P
-          valve:
-            type: VWISbool
-            value: switch
-          next-true: this
-          next-false:
-            type: A
-            var:
-              var: a
-              change-variable:
-                type: CVBSL
-                start: 1
-                end: 0
-                length: 1
-            next: anim_switcher
-      next-false: this
+    units:
+      - type: P
+        name: anim_switcher
+        valve:
+          type: VWISbool
+          value: switch
+        next-true:
+          type: A
+          var:
+            var: a
+            change-variable:
+              type: CVBSL
+              start: 0
+              end: 1
+              length: 1
+          next:
+            type: P
+            valve:
+              type: VWISbool
+              value: switch
+            next-true: this
+            next-false:
+              type: A
+              var:
+                var: a
+                change-variable:
+                  type: CVBSL
+                  start: 1
+                  end: 0
+                  length: 1
+              next: anim_switcher
+        next-false: this
+      - type: P
+        name: anim_switcher2
+        valve:
+          type: VWISbool
+          value: switch2
+        next-true:
+          type: A
+          var:
+            var: a2
+            change-variable:
+              type: CVBSL
+              start: 0
+              end: 1
+              length: 1
+          next:
+            type: P
+            valve:
+              type: VWISbool
+              value: switch2
+            next-true: this
+            next-false:
+              type: A
+              var:
+                var: a2
+                change-variable:
+                  type: CVBSL
+                  start: 1
+                  end: 0
+                  length: 1
+              next: anim_switcher2
+        next-false: this
 object:
   type: BWBV
   objects:
+    - type: BWCR
+      aspect-ratio: 1
+      const-object:
+        type: Button
+        background:
+          type: BWMB
+          first-object: yellow
+          second-object: magenta
+          border-direction: horizontal
+          border-value:
+            var: b
+        interaction:
+          type: OKI
+          event:
+            type: SE
+            value:
+              var: switch2
+      second-object:
+        type: BWMB
+        first-object: black
+        second-object: white
+        border-direction: horizontal
+        border-value:
+          var: a2
     - type: BWMB
       first-object: blue
       second-object: cyan

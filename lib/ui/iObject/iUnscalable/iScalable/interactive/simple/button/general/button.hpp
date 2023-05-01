@@ -8,9 +8,9 @@ namespace ui {
 		int interactionIndex;
 	
 	public:
-		Button(IUninteractive* background, int interaction);
+		Button(IScalable* background, int interaction);
 		
-		Button(IUninteractive* background, IInteraction* interaction);
+		Button(IScalable* background, IInteraction* interaction);
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
