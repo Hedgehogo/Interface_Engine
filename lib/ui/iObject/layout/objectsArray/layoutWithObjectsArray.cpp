@@ -17,6 +17,13 @@ namespace ui {
 		}
 	}
 	
+	void LayoutWithObjectsArray::move(sf::Vector2f position) {
+		Layout::move(position);
+		for(const auto& object: objects){
+			object->move(position);
+		}
+	}
+	
 	sf::Vector2f LayoutWithObjectsArray::getMinSize() {
 		sf::Vector2f minSize{0, 0};
 		for(auto object: objects) {

@@ -24,6 +24,7 @@
 #include "../iObject/iUnscalable/iScalable/box/scroll/boxScroll.hpp"
 #include "../iObject/iUnscalable/iScalable/box/switcher/boxSwitcher.hpp"
 #include "../iObject/iUnscalable/iScalable/box/tabs/boxWithTabs.hpp"
+#include "ui/iObject/iUnscalable/iScalable/box/switcherTabs/boxSwitcherTabs.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/slider/const/constSlider.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/slider/slider/slider.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/button/general/button.hpp"

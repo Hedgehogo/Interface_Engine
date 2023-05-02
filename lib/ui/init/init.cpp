@@ -126,6 +126,7 @@ namespace ui {
 		inherit<IValve, ValveWithISbool>({"VWISbool", "VIWISB"});
 		
 		addFunc<OnlyDrawable>(videoConvert, {"Video"});
+		//addFunc<Box>(switcherTabsDecodePointer, {"SwitcherTabs", "SwitcherT"});
 		
 		inherit<OnlyDrawable, Empty>();
 		inherit<OnlyDrawable, FullColor>();
@@ -155,6 +156,7 @@ namespace ui {
 		inherit<Box, BoxScroll>({"BScroll", "BSc"});
 		inherit<Box, BoxSwitcher>({"BSwitcher", "BSw"});
 		inherit<Box, BoxWithTabs>({"BWTabs", "BWT"});
+		inherit<Box, BoxSwitcherTabs>({"BSwitcherTabs"});
 		addBase<BoxUninteractive, IUninteractive, Box>({"BUninteractive", "BU"});
 		inherit<IScalable, Box>();
 		inherit<BaseSlider, Slider>();

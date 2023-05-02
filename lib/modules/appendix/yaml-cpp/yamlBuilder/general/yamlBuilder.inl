@@ -73,6 +73,8 @@ namespace ui {
 	
 	template<typename Type>
 	void YamlBuilder<Type>::addType(detail::FuncYamlBuilder::BuildFunc<Type> function, std::vector<std::string> aliases) {
+		if(names.empty())
+			names.push_back(typeNameDeform(type_name<Type>()));
 		types.push_back(&detail::FuncYamlBuilder::addBuilder<Type>(function, aliases));
 	}
 	
