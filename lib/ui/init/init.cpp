@@ -11,12 +11,43 @@
 #include <Magick++.h>
 
 namespace ui {
+	void sfloatBuilderInit(){
+		inherit<IShared, ISfloat>({"ISfloat"});
+		inherit<ISfloat, Sfloat>({"Sfloat"});
+		inherit<ISfloat, ISCoefficientValue>({"ISCoefficientValue"});
+		addBase<SCoefficientValue, Sfloat, ISCoefficientValue>({"SCoefficientValue"});
+		
+		inherit<Sfloat, SRfloat>({"SRfloat"});
+		inherit<SRfloat, SCRfloat>({"SCRfloat", "SCRf"});
+		inherit<Sfloat, SConvertToFloat<int>>({"SConvertIntToFloat", "SConvertIToF", "SCIToF", "SCITF"});
+		
+		inherit<IShared, ISVector2>({"ISVector2"});
+		inherit<ISVector2, SVec2f>({"SVec2f"});
+		inherit<ISVector2, SRVec2f>({"SRVec2f"});
+	}
+	
+	void sintBuilderInit(){
+		inherit<IShared, ISint>({"ISint"});
+		inherit<ISint, Sint>({"Sint"});
+		
+		inherit<Sint, SRint>({"SRint"});
+		inherit<SRint, SCRint>({"SCRfloat", "SCRf"});
+		inherit<ISint, SConvertToInt<float>>({"SConvertFloatToInt", "SConvertFToI", "SCFToI", "SCFTI"});
+		
+		inherit<IShared, ISVector2>({"ISVector2"});
+		inherit<ISVector2, SVec2i>({"SVec2i"});
+		inherit<ISVector2, SRVec2i>({"SRVec2i"});
+	}
+	
 	void init(const char* path_) {
 		Magick::InitializeMagick(path_);
 		yamlBuilderInit();
 	}
 	
 	void yamlBuilderInit() {
+		sintBuilderInit();
+		sfloatBuilderInit();
+		
 		inherit<ISizing, ConstSizing>({"CS"});
 		inherit<ISizing, RelativeNormalSizing>({"RNormalSizing", "RNS"});
 		inherit<ISizing, RelativeParentSizing>({"RParentSizing", "RPS"});
@@ -53,6 +84,8 @@ namespace ui {
 		inherit<KeyEvent, WhileChangingObjectsEvent>({"WhileChangingOE", "WCO"});
 		inherit<KeyEvent, OpenUrlEvent>({"UrlE", "Url", "OUE"});
 		inherit<KeyEvent, SwitcherEvent>({"SwitcherEvent", "Switcher", "SE"});
+		inherit<KeyEvent, SetSintEvent>({"SSintE", "SSiE"});
+		inherit<KeyEvent, SetSfloatEvent>({"SSfloatE", "SSfE"});
 		
 		inherit<HidePanelInteraction, DontHidePanelInteraction>({"DontHidePI", "DontHPI", "DHPI"});
 		inherit<HidePanelInteraction, ClickHidePanelInteraction>({"ClickHidePI", "ClickHPI", "CHPI"});
@@ -81,8 +114,6 @@ namespace ui {
 		inherit<ISbool, SConvertFloatToBoolGreaterOrEquals>({"ConvertFloatToBoolGreaterOrEquals", "SCFTBGOE", "SCFTBGE"});
 		inherit<ISbool, SConvertFloatToBoolLess>({"ConvertFloatToBoolLess", "SCFTBL"});
 		inherit<ISbool, SConvertFloatToBoolLessOrEquals>({"ConvertFloatToBoolLessOrEquals", "SCFTBLOE", "SCFTBLE"});
-		inherit<ISint, SConvertToInt<float>>({"SConvertFloatToInt", "SConvertFToI", "SCFToI", "SCFTI"});
-		addBase<SCRfloat, SRfloat, ISfloat>({"SCRfloat", "SCRf"});
 		
 		inherit<IAnimatorUnit, Animation>({"A"});
 		inherit<IAnimatorUnit, Prerequisite>({"P"});

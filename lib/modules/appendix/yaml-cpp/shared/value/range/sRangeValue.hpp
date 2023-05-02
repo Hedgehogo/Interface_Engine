@@ -22,7 +22,7 @@ namespace ui {
 		
 		void setBounds(T lower, T upper);
 		
-		void setValue(const float& value) override;
+		void setValue(const T& value) override;
 	};
 	
 	

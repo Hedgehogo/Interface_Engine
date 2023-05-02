@@ -32,7 +32,7 @@ namespace ui {
 	}
 	
 	template<typename T>
-	void SRangeValue<T>::setValue(const float& value) {
+	void SRangeValue<T>::setValue(const T& value) {
 		this->value = std::clamp(value, lower, upper);
 		for(const auto& set: this->setters)
 			set(this->value);

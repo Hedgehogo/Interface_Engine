@@ -67,16 +67,34 @@ object:
   type: BWBV
   bound: 0.1
   first-object:
-    type: Slider
-    slider-scale: 0.2, 1
-    slider:
-      type: Capsule
-      color: 525252
-    background:
-      type: FullColor
-      color: 37383A88
-    value:
-      var: activeTabSlider
+    type: BWCR
+    aspect-ratio: 1
+    const-object:
+      type: Button
+      background: yellow
+      interaction:
+        type: OKI
+        event:
+          type: SSfE
+          variable: 7
+          value:
+            var: activeTabSlider-x
+            type: SRfloat
+    second-object:
+      type: Slider
+      slider-scale: 0.2, 1
+      slider:
+        type: Capsule
+        color: 525252
+      background:
+        type: FullColor
+        color: 37383A88
+      value:
+        var: activeTabSlider
+        type: SRVec2f
+        x: activeTabSlider-x
+        y:
+          var: activeTabSlider-y
   second-object:
     type: BWT
     value:
