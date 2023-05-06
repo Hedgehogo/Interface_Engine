@@ -5,15 +5,20 @@ set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
 
-include_directories(lib)
-
 set(BUILD_SHARED_LIBS on)
 
 file(GLOB_RECURSE src "lib/*.cpp")
 file(GLOB_RECURSE headers "lib/*.hpp")
-add_library(${PROJECT_NAME} ${src} ${headers})
-set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${headers}")
 
+if (${CMAKE_BUILD_TYPE} STREQUAL Release)
+    file(COPY "${CMAKE_CURRENT_LIST_DIR}/lib/" DESTINATION "${CMAKE_CURRENT_LIST_DIR}/include/Interface_Engine/")
+    file(GLOB_RECURSE filesToRemove "include/*.cpp")
+    file(REMOVE ${filesToRemove})
+endif ()
+
+include_directories(lib)
+
+add_library(${PROJECT_NAME} ${src} ${headers})
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 FetchContent_Declare(
@@ -66,6 +71,8 @@ target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})
 file(GLOB_RECURSE srcUnitTest "test/*.cpp")
 add_executable(unit_tests ${srcUnitTest})
 target_link_libraries(unit_tests PUBLIC gtest gtest_main ${PROJECT_NAME})
+
+install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include DESTINATION ${CMAKE_INSTALL_PREFIX})
 
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}
