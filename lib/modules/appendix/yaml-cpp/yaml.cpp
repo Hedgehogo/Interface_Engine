@@ -53,6 +53,10 @@ namespace ui {
 		return convertBoolDefault(node, std::move(trueValue), std::move(falseValue), defaultValue);
 	}
 	
+	std::string type_name(const std::type_info& type_info) {
+		return demangle(type_info.name());
+	}
+	
 	
 	bool Decode<sf::Vector2<float>>::decode(const YAML::Node& node, sf::Vector2<float>& vector) {
 		if(node.IsSequence()) {

@@ -1,0 +1,3 @@
+CLib:
+  path:
+    - ../example-resources/buildModules/libtestModule

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.11)
 project(Interface_Engine CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 include(FetchContent)
 
 include_directories(lib)
+
+set(BUILD_SHARED_LIBS on)
 
 file(GLOB_RECURSE src "lib/*.cpp")
 file(GLOB_RECURSE headers "lib/*.hpp")
@@ -32,19 +34,31 @@ FetchContent_Declare(
         GIT_TAG master
         FIND_PACKAGE_ARGS NAMES localisation
 )
-FetchContent_MakeAvailable(SFML yaml-cpp localisation)
+FetchContent_Declare(
+        OpenLib
+        GIT_REPOSITORY https://github.com/Andrewkoro105/OpenLib.git
+        GIT_TAG master
+        FIND_PACKAGE_ARGS NAMES openLib
+)
+
+FetchContent_MakeAvailable(SFML yaml-cpp localisation OpenLib)
 
 find_package(ImageMagick COMPONENTS Magick++ MagickCore REQUIRED)
 
+include_directories(${typo_SOURCE_DIR}/stc/rttr)
 include_directories(${ImageMagick_INCLUDE_DIRS})
-include_directories(${localisation_INCLUDE_DIRS})
+include_directories(${localisation_SOURCE_DIR}/include)
+include_directories(${openlib_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
         sfml-graphics sfml-system
         yaml-cpp
         localisation
+        openLib
         ${ImageMagick_LIBRARIES}
 )
+
+add_subdirectory(example-resources/modules)
 
 add_executable(${PROJECT_NAME}_ex main.cpp)
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})

@@ -5,5 +5,7 @@ layers.md
 /cmake-build-debug-msvc/
 /cmake-build-release-msvc/
 *.swp
+*.so
+*.dll
 Doxyfile
 doxygen

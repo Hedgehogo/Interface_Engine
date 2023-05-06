@@ -3,6 +3,7 @@
 #include "../exception/yamlBuildExceptions.hpp"
 #include "../../objectBuffer/objectBuffer.hpp"
 #include "../function/funcYamlBuilder.hpp"
+#include "../base/baseYamlBuilder.hpp"
 
 namespace ui {
 	const sf::Color nullColor{255, 255, 255, 0};
@@ -18,7 +19,7 @@ namespace ui {
 	}
 	
 	template<typename Type>
-	class YamlBuilder : public detail::IYamlBuilder {
+	class YamlBuilder : public detail::BaseYamlBuilder {
 	public:
 		template<typename Derived, typename Return>
 		using is_derived = std::enable_if_t<std::is_base_of_v<Type, Derived>, Return>;
@@ -42,6 +43,9 @@ namespace ui {
 		bool build(const YAML::Node& node, const std::string& type, void*& object);
 	
 	public:
+		void addType(IYamlBuilder* builder) override;
+	
+	public:
 		template<typename Derived>
 		static is_derived<Derived, void> addType();
 		
@@ -59,6 +63,9 @@ namespace ui {
 		
 		static bool build(const YAML::Node& node, const std::string& type, Type*& object);
 	};
+	
+	template<typename T>
+	void addToYamlBuilders();
 }
 
 #include "yamlBuilder.inl"

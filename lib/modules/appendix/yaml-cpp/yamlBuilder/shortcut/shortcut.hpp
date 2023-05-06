@@ -6,6 +6,9 @@ namespace ui {
 	template<typename Base, typename Type>
 	void inherit(const std::vector<std::string>& aliases = {});
 	
+	template<typename T>
+	void inherit(std::string baseTypeName, const std::vector<std::string>& aliases = {});
+	
 	template<typename Base>
 	constexpr void addType() noexcept {
 	}

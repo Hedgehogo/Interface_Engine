@@ -1,5 +1,7 @@
 #pragma once
 
+#include <filesystem>
+
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/sprite/sprite.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/capsule/capsule.hpp"
 #include "../iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/roundedRectangle/roundedRectangle.hpp"
@@ -69,7 +71,7 @@
 #include "../debug/boxDebug.hpp"
 
 namespace ui {
-	void init(const char* path_ = "");
+	void init(std::filesystem::path modulesList = {}, int argc = 0, char *argv[] = {});
 	
 	void yamlBuilderInit();
 }

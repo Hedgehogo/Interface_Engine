@@ -1,15 +1,34 @@
 //included into shortcut.hpp
 
+#include "modules/appendix/yaml-cpp/modules/exception/yamlBuilderDoesTotExist/yamlBuilderDoesTotExistException.hpp"
+
 namespace ui {
 	template<typename Base, typename Type>
 	void inherit(const std::vector<std::string>& aliases) {
 		YamlBuilder<Type>::addAliases(aliases);
 		YamlBuilder<Base>::template addType<Type>();
+		
+		addToYamlBuilders<Base>();
+		addToYamlBuilders<Type>();
+	}
+	
+	template<typename T>
+	void inherit(std::string baseTypeName, const std::vector<std::string>& aliases){
+		YamlBuilder<T>::addAliases(aliases);
+		if (detail::BaseYamlBuilder* base = detail::yamlBuilders[baseTypeName]; base)
+			detail::yamlBuilders[baseTypeName]->addType(&YamlBuilder<T>::builder);
+		else
+			throw YamlBuilderDoesTotExistException{baseTypeName};
+		addToYamlBuilders<T>();
 	}
 	
 	template<typename Base, typename Type, typename... Types>
 	void addType() {
 		YamlBuilder<Base>::template addType<Type>();
+		
+		addToYamlBuilders<Base>();
+		addToYamlBuilders<Type>();
+		
 		addType<Base, Types...>();
 	}
 	
@@ -22,6 +41,10 @@ namespace ui {
 	template<typename Type, typename Base, typename... Bases>
 	void addBase() {
 		YamlBuilder<Base>::template addType<Type>();
+		
+		addToYamlBuilders<Base>();
+		addToYamlBuilders<Type>();
+		
 		addBase<Type, Bases...>();
 	}
 	

@@ -23,8 +23,82 @@ namespace ui {
 	template<class T>
 	std::string type_name();
 	
+	std::string type_name(const std::type_info& type_info);
+	
+	template<typename T>
+	struct SetTypeName{
+		static std::string get(){
+			return type_name<T>();
+		}
+	};
+	
+	namespace detail{
+		template<typename T>
+		std::string get_template_name(){
+			std::string typeName = type_name<T>();
+			typeName.resize(typeName.find('<'));
+			return typeName;
+		}
+	}
+	
+	template<template<typename...> typename Type, typename... Types>
+	struct SetTypeName<Type<Types...>>{
+		static std::string get(){
+			return detail::get_template_name<Type<Types...>>();
+		}
+	};
+	
+	template<>
+	struct SetTypeName<std::string>{
+		static std::string get(){
+			return "String";
+		}
+	};
+	
 	template<typename T, typename E>
 	using type = T;
+	
+	namespace detail{
+		template<typename T>
+		struct GetTypeName{
+			static std::string get(){
+				return SetTypeName<T>::get();
+			}
+		};
+		
+		template<typename... Ts>
+		struct GetTypeNames{
+			static std::string get(){
+				return {};
+			}
+		};
+		
+		template<typename T>
+		struct GetTypeNames<T>{
+			static std::string get(){
+				return GetTypeName<T>::get();
+			}
+		};
+		
+		template<typename F, typename... Types>
+		struct GetTypeNames<F, Types...>{
+			static std::string get() {
+				return GetTypeName<F>::get() + ", " + GetTypeNames<Types...>::get();
+			}
+		};
+		
+		template<template<typename...> typename Type, typename... Types>
+		struct GetTypeName<Type<Types...>>{
+			static std::string get(){
+				return SetTypeName<Type<Types...>>::get() +  "<" + GetTypeNames<Types...>::get() + ">";
+			}
+		};
+	}
+	
+	template<typename T>
+	std::string get_type_name(){
+		return detail::GetTypeName<T>::get();
+	}
 	
 	template<typename T>
 	struct Decode;

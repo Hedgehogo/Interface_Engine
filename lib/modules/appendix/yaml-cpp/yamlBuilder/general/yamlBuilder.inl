@@ -11,24 +11,17 @@ namespace ui {
 	template<typename T>
 	std::vector<detail::DetermineTypeFunc> YamlBuilder<T>::determiners = {};
 	
-	namespace detail {
-		template<typename Type>
-		std::enable_if_t<std::is_class_v<Type> && std::is_abstract_v<Type>, bool>
-		build(const YAML::Node& node, void*& object) {
-			throw AbstractTypeYamlException{node.Mark(), IYamlBuilder::typeNameDeform(type_name<Type>())};
-		}
-		
-		template<typename Type>
-		std::enable_if_t<std::is_class_v<Type> && !std::is_abstract_v<Type>, bool>
-		build(const YAML::Node& node, void*& object) {
-			//return convertPointer(node, reinterpret_cast<Type*&>(object));
-			return DecodePointer<Type>::decodePointer(node, reinterpret_cast<Type*&>(object));
-		}
-	}
-	
 	template<typename Type>
 	bool YamlBuilder<Type>::build(const YAML::Node& node, void*& object) const {
-		return detail::build<Type>(node, object);
+		if constexpr(std::is_class_v<Type>){
+			if constexpr(std::is_abstract_v<Type>){
+				throw AbstractTypeYamlException{node.Mark(), IYamlBuilder::typeNameDeform(type_name<Type>())};
+			} else {
+				return DecodePointer<Type>::decodePointer(node, reinterpret_cast<Type*&>(object));
+			}
+		} else {
+			static_assert("The YamlBuilder<Type>::build function was not requested by the class");
+		}
 	}
 	
 	template<typename Type>
@@ -61,6 +54,11 @@ namespace ui {
 		} else {
 			throw NonexistentTypeYamlException{node.Mark(), type, names[0]};
 		}
+	}
+	
+	template<typename Type>
+	void YamlBuilder<Type>::addType(detail::IYamlBuilder* builder) {
+		types.emplace_back(builder);
 	}
 	
 	template<typename Type>
@@ -122,5 +120,10 @@ namespace ui {
 	convert(const T*& object) {
 		YAML::Node node;
 		return node;
+	}
+	
+	template<typename T>
+	void addToYamlBuilders() {
+		detail::yamlBuilders.emplace(get_type_name<T>(), &YamlBuilder<T>::builder);
 	}
 }

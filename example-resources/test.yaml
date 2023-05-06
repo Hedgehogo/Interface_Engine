@@ -88,7 +88,13 @@ object:
       objects:
         - black
         - white
-        - red
+        - type: Button
+          background: red
+          interaction:
+            type: OKI
+            event:
+              type: ConsoleCommandE
+              command: "ls -la"
         - green
         - blue
         - yellow

@@ -4,7 +4,7 @@
 #include "../sizingAndPositioning/sizing2/determine/determineSizing2.hpp"
 #include "../sizingAndPositioning/positioning/determine/determinePositioning.hpp"
 #include "../sizingAndPositioning/positioning2/determine/determinePositioning2.hpp"
-
+#include "modules/appendix/yaml-cpp/modules/loadCModules/loadCModules.hpp"
 #define MAGICKCORE_QUANTUM_DEPTH 16
 # define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
 
@@ -12,36 +12,33 @@
 
 namespace ui {
 	void sfloatBuilderInit(){
-		inherit<IShared, ISfloat>({"ISfloat"});
 		inherit<ISfloat, Sfloat>({"Sfloat"});
 		inherit<ISfloat, ISCoefficientValue>({"ISCoefficientValue"});
-		addBase<SCoefficientValue, Sfloat, ISCoefficientValue>({"SCoefficientValue"});
+		addBase<SCoefficientValue, Sfloat, ISCoefficientValue>(std::vector<std::string>{"SCoefficientValue"});
 		
 		inherit<Sfloat, SRfloat>({"SRfloat"});
 		inherit<SRfloat, SCRfloat>({"SCRfloat", "SCRf"});
 		inherit<Sfloat, SConvertToFloat<int>>({"SConvertIntToFloat", "SConvertIToF", "SCIToF", "SCITF"});
 		
-		inherit<IShared, ISVector2>({"ISVector2"});
 		inherit<ISVector2, SVec2f>({"SVec2f"});
 		inherit<ISVector2, SRVec2f>({"SRVec2f"});
 	}
 	
 	void sintBuilderInit(){
-		inherit<IShared, ISint>({"ISint"});
 		inherit<ISint, Sint>({"Sint"});
 		
 		inherit<Sint, SRint>({"SRint"});
 		inherit<SRint, SCRint>({"SCRfloat", "SCRf"});
 		inherit<ISint, SConvertToInt<float>>({"SConvertFloatToInt", "SConvertFToI", "SCFToI", "SCFTI"});
 		
-		inherit<IShared, ISVector2>({"ISVector2"});
 		inherit<ISVector2, SVec2i>({"SVec2i"});
 		inherit<ISVector2, SRVec2i>({"SRVec2i"});
 	}
 	
-	void init(const char* path_) {
-		Magick::InitializeMagick(path_);
+	void init(std::filesystem::path modulesList, int argc, char *argv[]) {
+		Magick::InitializeMagick("");
 		yamlBuilderInit();
+		loadCModules(modulesList, argc, argv);
 	}
 	
 	void yamlBuilderInit() {
@@ -157,7 +154,7 @@ namespace ui {
 		inherit<Box, BoxSwitcher>({"BSwitcher", "BSw"});
 		inherit<Box, BoxWithTabs>({"BWTabs", "BWT"});
 		inherit<Box, BoxSwitcherTabs>({"BSwitcherTabs"});
-		addBase<BoxUninteractive, IUninteractive, Box>({"BUninteractive", "BU"});
+		addBase<BoxUninteractive, IUninteractive, Box>(std::vector<std::string>{"BUninteractive", "BU"});
 		inherit<IScalable, Box>();
 		inherit<BaseSlider, Slider>();
 		inherit<BaseSlider, ConstSlider>();
