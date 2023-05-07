@@ -45,8 +45,14 @@ FetchContent_Declare(
         GIT_TAG master
         FIND_PACKAGE_ARGS NAMES openLib
 )
+FetchContent_Declare(
+        curl
+        GIT_REPOSITORY https://github.com/curl/curl.git
+        GIT_TAG curl-8_0_1
+        FIND_PACKAGE_ARGS NAMES CURL
+)
 
-FetchContent_MakeAvailable(SFML yaml-cpp localisation OpenLib)
+FetchContent_MakeAvailable(SFML yaml-cpp localisation OpenLib curl)
 
 find_package(ImageMagick COMPONENTS Magick++ MagickCore REQUIRED)
 
@@ -54,12 +60,14 @@ include_directories(${typo_SOURCE_DIR}/stc/rttr)
 include_directories(${ImageMagick_INCLUDE_DIRS})
 include_directories(${localisation_SOURCE_DIR}/include)
 include_directories(${openlib_SOURCE_DIR}/include)
+include_directories(${curl_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
         sfml-graphics sfml-system
         yaml-cpp
         localisation
         openLib
+        libcurl
         ${ImageMagick_LIBRARIES}
 )
 
