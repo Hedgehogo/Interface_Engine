@@ -5,11 +5,23 @@ namespace ui {
 	template<typename T>
 	SVector2<T>::SVector2(const sf::Vector2<typename SVector2<T>::V>& vector) :
 		x(std::make_shared<T>(vector.x)), y(std::make_shared<T>(vector.y)), setters() {
+		x->addSetter([this](decltype(x->getValue()) value){
+			set();
+		});
+		y->addSetter([this](decltype(y->getValue()) value){
+			set();
+		});
 	}
 	
 	template<typename T>
 	SVector2<T>::SVector2(std::shared_ptr<T> x, std::shared_ptr<T> y) :
 		x(x), y(y), setters() {
+			x->addSetter([this](decltype(x->getValue()) value){
+				set();
+			});
+			y->addSetter([this](decltype(y->getValue()) value){
+				set();
+			});
 	}
 	
 	template<typename T>

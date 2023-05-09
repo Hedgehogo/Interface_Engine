@@ -64,116 +64,133 @@ animation-manager:
               next: anim_switcher2
         next-false: this
 object:
-  type: BWBH
-  bounds:
-    - 0.1
-  objects:
-    - type: BSwitcherTabs
+  type: BWBV
+  bound: 0.1
+  first-object:
+    type: BWCR
+    aspect-ratio: 1
+    const-object:
+      type: Button
+      background: yellow
+      interaction:
+        type: OKI
+        event:
+          type: SSfE
+          variable: 7
+          value:
+            var: activeTabSlider-x
+            type: SRfloat
+    second-object:
+      type: Slider
+      slider-scale: 0.2, 1
+      slider:
+        type: Capsule
+        color: 525252
+      background:
+        type: FullColor
+        color: 37383A88
       value:
-        var: activeTab
-      direction: vertical
-      objects:
-        - black
-        - white
-        - red
-        - green
-        - blue
-        - yellow
-        - magenta
-        - cyan
-        - black
-    - type: BWT
+        var: activeTabSlider
+        type: SRVec2f
+        x: activeTabSlider-x
+        y:
+          var: activeTabSlider-y
+  second-object:
+    type: BWT
+    value:
+      var: activeTab
+      type: SCFTI
       value:
-        var: activeTab
-      objects:
-        - black
-        - white
-        - type: Button
-          background: red
-          interaction:
-            type: OKI
-            event:
-              type: ConsoleCommandE
-              command: "ls -la"
-        - green
-        - blue
-        - yellow
-        - magenta
-        - cyan
-        - type: BWBV
-          objects:
-            - type: BWCR
-              aspect-ratio: 1
-              const-object:
-                type: Button
-                background:
-                  type: BWMB
-                  first-object: yellow
-                  second-object: magenta
-                  border-direction: horizontal
-                  border-value:
-                    var: b
-                interaction:
-                  type: OKI
-                  event:
-                    type: SE
-                    value:
-                      var: switch2
-              second-object:
+        var: activeTabF
+        type: SCRf
+        upper: 8
+        lower: 0
+        value:
+          var: activeTabSlider.x
+    objects:
+      - black
+      - white
+      - red
+      - green
+      - blue
+      - yellow
+      - magenta
+      - cyan
+      - type: BWBV
+        objects:
+          - type: BWCR
+            aspect-ratio: 1
+            const-object:
+              type: Button
+              background:
                 type: BWMB
-                first-object: black
-                second-object: white
+                first-object: yellow
+                second-object: magenta
                 border-direction: horizontal
                 border-value:
-                  var: a2
-            - type: BWCR
-              aspect-ratio: 1
-              const-object:
-                type: Button
-                background:
-                  type: FullColor
-                  color: 444444
-                interaction:
-                  type: OKI
-                  event:
-                    type: SE
-                    value:
-                      var: switch3
-              second-object:
-                type: BWCR
-                aspect-ratio: 1
-                corner: up-right
-                second-object:
-                  type: BWMB
-                  first-object: blue
-                  second-object: cyan
-                  border-direction: horizontal
-                  border-value:
-                    var: b
-                const-object:
-                  type: BSw
-                  first-object: red
-                  second-object: green
+                  var: b
+              interaction:
+                type: OKI
+                event:
+                  type: SE
+                  value:
+                    var: switch2
+            second-object:
+              type: BWMB
+              first-object: black
+              second-object: white
+              border-direction: horizontal
+              border-value:
+                var: a2
+          - type: BWCR
+            aspect-ratio: 1
+            const-object:
+              type: Button
+              background:
+                type: FullColor
+                color: 444444
+              interaction:
+                type: OKI
+                event:
+                  type: SE
                   value:
                     var: switch3
-            - type: BWCR
+            second-object:
+              type: BWCR
               aspect-ratio: 1
-              const-object:
-                type: Switcher
-                inactive-background: red
-                active-background:
-                  type: BWMB
-                  first-object: yellow
-                  second-object: magenta
-                  border-direction: horizontal
-                  border-value:
-                    var: b
-                value:
-                  var: switch
+              corner: up-right
               second-object:
                 type: BWMB
-                first-object: black
-                second-object: white
+                first-object: blue
+                second-object: cyan
                 border-direction: horizontal
                 border-value:
-                  var: a
+                  var: b
+              const-object:
+                type: BSw
+                first-object: red
+                second-object: green
+                value:
+                  var: switch3
+
+          - type: BWCR
+            aspect-ratio: 1
+            const-object:
+              type: Switcher
+              inactive-background: red
+              active-background:
+                type: BWMB
+                first-object: yellow
+                second-object: magenta
+                border-direction: horizontal
+                border-value:
+                  var: b
+              value:
+                var: switch
+            second-object:
+              type: BWMB
+              first-object: black
+              second-object: white
+              border-direction: horizontal
+              border-value:
+                var: a
