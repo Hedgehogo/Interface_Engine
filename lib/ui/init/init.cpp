@@ -154,6 +154,7 @@ namespace ui {
 		inherit<Box, BoxSwitcher>({"BSwitcher", "BSw"});
 		inherit<Box, BoxWithTabs>({"BWTabs", "BWT"});
 		inherit<Box, BoxSwitcherTabs>({"BSwitcherTabs"});
+		inherit<Box, BoxWithConstCenter>({"BWConstCenter", "BWCC"});
 		addBase<BoxUninteractive, IUninteractive, Box>(std::vector<std::string>{"BUninteractive", "BU"});
 		inherit<IScalable, Box>();
 		inherit<BaseSlider, Slider>();

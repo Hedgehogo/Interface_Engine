@@ -115,7 +115,10 @@ object:
       - blue
       - yellow
       - magenta
-      - cyan
+      - type: BWCC
+        const-object: red
+        background: cyan
+        const-size: 100, 100
       - type: BWBV
         objects:
           - type: BWCR
