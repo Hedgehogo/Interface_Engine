@@ -22,11 +22,11 @@ namespace ui {
 		return object->updateInteractions(mousePosition);
 	}
 	
-	sf::Vector2f LayoutWithObject::getMinSize() {
+	sf::Vector2f LayoutWithObject::getMinSize() const {
 		return object->getMinSize();
 	}
 	
-	sf::Vector2f LayoutWithObject::getNormalSize() {
+	sf::Vector2f LayoutWithObject::getNormalSize() const {
 		return object->getNormalSize();
 	}
 	

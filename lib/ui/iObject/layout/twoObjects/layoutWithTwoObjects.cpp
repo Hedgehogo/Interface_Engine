@@ -15,11 +15,11 @@ namespace ui {
 		delete secondObject;
 	}
 	
-	sf::Vector2f LayoutWithTwoObjects::getMinSize() {
+	sf::Vector2f LayoutWithTwoObjects::getMinSize() const {
 		return max(firstObject->getMinSize(), secondObject->getMinSize());
 	}
 	
-	sf::Vector2f LayoutWithTwoObjects::getNormalSize() {
+	sf::Vector2f LayoutWithTwoObjects::getNormalSize() const {
 		return max(firstObject->getNormalSize(), secondObject->getNormalSize());
 	}
 	

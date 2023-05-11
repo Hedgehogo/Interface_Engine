@@ -75,11 +75,11 @@ namespace ui {
 		return updateInteractions(mousePosition);
 	}
 	
-	sf::Vector2f BasePanel::getMinSize() {
+	sf::Vector2f BasePanel::getMinSize() const {
 		return sizing->getParentSize(object->getMinSize());
 	}
 	
-	sf::Vector2f BasePanel::getNormalSize() {
+	sf::Vector2f BasePanel::getNormalSize() const {
 		return sizing->getParentSize(object->getNormalSize());
 	}
 	

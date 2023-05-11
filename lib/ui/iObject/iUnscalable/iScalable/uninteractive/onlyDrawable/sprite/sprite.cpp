@@ -22,19 +22,19 @@ namespace ui {
 		sprite.setPosition(position);
 	}
 	
-	sf::Vector2f Sprite::getAreaPosition() {
+	sf::Vector2f Sprite::getAreaPosition() const {
 		return sprite.getPosition();
 	}
 	
-	sf::Vector2f Sprite::getAreaSize() {
+	sf::Vector2f Sprite::getAreaSize() const {
 		return {sprite.getGlobalBounds().width, sprite.getGlobalBounds().height};
 	}
 	
-	sf::Vector2f Sprite::getMinSize() {
+	sf::Vector2f Sprite::getMinSize() const {
 		return minimumSize;
 	}
 	
-	sf::Vector2f Sprite::getNormalSize() {
+	sf::Vector2f Sprite::getNormalSize() const {
 		return {static_cast<float>(sprite.getTextureRect().width), static_cast<float>(sprite.getTextureRect().height)};
 	}
 	

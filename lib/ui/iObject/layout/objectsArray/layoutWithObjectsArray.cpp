@@ -24,7 +24,7 @@ namespace ui {
 		}
 	}
 	
-	sf::Vector2f LayoutWithObjectsArray::getMinSize() {
+	sf::Vector2f LayoutWithObjectsArray::getMinSize() const {
 		sf::Vector2f minSize{0, 0};
 		for(auto object: objects) {
 			minSize = max(minSize, object->getMinSize());
@@ -32,7 +32,7 @@ namespace ui {
 		return minSize;
 	}
 	
-	sf::Vector2f LayoutWithObjectsArray::getNormalSize() {
+	sf::Vector2f LayoutWithObjectsArray::getNormalSize() const {
 		sf::Vector2f normalSize{0, 0};
 		for(auto object: objects) {
 			normalSize = max(normalSize, object->getNormalSize());

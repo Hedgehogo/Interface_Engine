@@ -32,19 +32,19 @@ namespace ui {
 		sprite.setScale(size / sf::Vector2f{sizeVideo});
 	}
 	
-	sf::Vector2f VideoFromFile::getAreaPosition() {
+	sf::Vector2f VideoFromFile::getAreaPosition() const {
 		return sprite.getPosition();
 	}
 	
-	sf::Vector2f VideoFromFile::getAreaSize() {
+	sf::Vector2f VideoFromFile::getAreaSize() const {
 		return size;
 	}
 	
-	sf::Vector2f VideoFromFile::getMinSize() {
+	sf::Vector2f VideoFromFile::getMinSize() const {
 		return {0, 0};
 	}
 	
-	sf::Vector2f VideoFromFile::getNormalSize() {
+	sf::Vector2f VideoFromFile::getNormalSize() const {
 		return sf::Vector2f{sizeVideo};
 	}
 	

@@ -14,11 +14,11 @@ namespace ui {
 		object->init(initInfo.copy(this->drawManager));
 	}
 	
-	sf::Vector2f BoxScroll::getMinSize() {
+	sf::Vector2f BoxScroll::getMinSize() const {
 		return max(minimumSize, object->getMinSize());
 	}
 	
-	sf::Vector2f BoxScroll::getNormalSize() {
+	sf::Vector2f BoxScroll::getNormalSize() const {
 		return object->getNormalSize();
 	}
 	

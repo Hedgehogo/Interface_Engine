@@ -14,9 +14,9 @@ namespace ui {
 		
 		void init(InitInfo initInfo) override;
 		
-		sf::Vector2f getMinSize() override;
+		sf::Vector2f getMinSize() const override;
 		
-		sf::Vector2f getNormalSize() override;
+		sf::Vector2f getNormalSize() const override;
 	
 	protected:
 		sf::Vector2f getNewObjectPosition(sf::Vector2f normalObjectPosition);

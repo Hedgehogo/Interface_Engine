@@ -21,11 +21,11 @@ TestObject::Processed TestObject::getProcessed() {
 	return processed;
 }
 
-sf::Vector2f TestObject::getMinSize() {
+sf::Vector2f TestObject::getMinSize() const {
 	return minSize;
 }
 
-sf::Vector2f TestObject::getNormalSize() {
+sf::Vector2f TestObject::getNormalSize() const {
 	return normalSize;
 }
 

@@ -15,19 +15,19 @@ namespace ui {
 		rectangle.setPosition(position);
 	}
 	
-	sf::Vector2f FullColor::getAreaPosition() {
+	sf::Vector2f FullColor::getAreaPosition() const {
 		return rectangle.getPosition();
 	}
 	
-	sf::Vector2f FullColor::getAreaSize() {
+	sf::Vector2f FullColor::getAreaSize() const {
 		return rectangle.getSize();
 	}
 	
-	sf::Vector2f FullColor::getMinSize() {
+	sf::Vector2f FullColor::getMinSize() const {
 		return sf::Vector2f();
 	}
 	
-	sf::Vector2f FullColor::getNormalSize() {
+	sf::Vector2f FullColor::getNormalSize() const {
 		return normalSize;
 	}
 	

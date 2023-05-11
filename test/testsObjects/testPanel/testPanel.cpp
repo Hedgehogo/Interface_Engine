@@ -88,11 +88,11 @@ bool TestPanel::updateInteractions(sf::Vector2f mousePosition, bool active) {
 	return updateInteractionsResult;
 }
 
-sf::Vector2f TestPanel::getMinSize() {
+sf::Vector2f TestPanel::getMinSize() const {
 	return minSize;
 }
 
-sf::Vector2f TestPanel::getNormalSize() {
+sf::Vector2f TestPanel::getNormalSize() const {
 	return normalSize;
 }
 

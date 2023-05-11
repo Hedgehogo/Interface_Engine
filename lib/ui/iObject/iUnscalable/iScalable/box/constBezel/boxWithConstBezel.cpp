@@ -35,11 +35,11 @@ namespace ui {
 		return false;
 	}
 	
-	sf::Vector2f BoxWithConstBezel::getMinSize() {
+	sf::Vector2f BoxWithConstBezel::getMinSize() const {
 		return max(object->getMinSize() + sf::Vector2f{thickness * 2, thickness * 2}, bezel->getMinSize(), minimumSize);
 	}
 	
-	sf::Vector2f BoxWithConstBezel::getNormalSize() {
+	sf::Vector2f BoxWithConstBezel::getNormalSize() const {
 		return max(object->getNormalSize() + sf::Vector2f{thickness * 2, thickness * 2}, bezel->getNormalSize());
 	}
 	

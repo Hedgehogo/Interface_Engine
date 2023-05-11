@@ -44,7 +44,7 @@ namespace ui {
 		return objects[i - 1]->updateInteractions(mousePosition);
 	}
 	
-	sf::Vector2f BoxWithBorderVertical::getMinSize() {
+	sf::Vector2f BoxWithBorderVertical::getMinSize() const {
 		sf::Vector2f minSize{0, 0};
 		std::vector<sf::Vector2f> objectMinSizes(objects.size());
 		for(int i = 0; i < objectMinSizes.size(); ++i) {
@@ -60,7 +60,7 @@ namespace ui {
 		return max(minSize, this->minimumSize);
 	}
 	
-	sf::Vector2f BoxWithBorderVertical::getNormalSize() {
+	sf::Vector2f BoxWithBorderVertical::getNormalSize() const {
 		sf::Vector2f normalSize{0, 0};
 		std::vector<sf::Vector2f> objectNormalSizes(objects.size());
 		for(int i = 0; i < objectNormalSizes.size(); ++i) {

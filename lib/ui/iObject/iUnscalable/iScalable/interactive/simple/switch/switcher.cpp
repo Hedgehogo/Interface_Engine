@@ -36,11 +36,11 @@ namespace ui {
 		inactiveBackground->setSize(size);
 	}
 	
-	sf::Vector2f Switcher::getMinSize() {
+	sf::Vector2f Switcher::getMinSize() const {
 		return max(activeBackground->getMinSize(), inactiveBackground->getMinSize());
 	}
 	
-	sf::Vector2f Switcher::getNormalSize() {
+	sf::Vector2f Switcher::getNormalSize() const {
 		return max(activeBackground->getNormalSize(), inactiveBackground->getNormalSize());
 	}
 	

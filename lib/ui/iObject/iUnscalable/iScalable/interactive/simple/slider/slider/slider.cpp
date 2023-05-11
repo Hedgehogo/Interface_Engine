@@ -22,7 +22,7 @@ namespace ui {
 		resizeSlider(value->getValue());
 	}
 	
-	sf::Vector2f Slider::getMinSize() {
+	sf::Vector2f Slider::getMinSize() const {
 		sf::Vector2f minSize{slider->getMinSize()};
 		minSize = {minSize.x / scale.x, minSize.y / scale.y};
 		return minSize;

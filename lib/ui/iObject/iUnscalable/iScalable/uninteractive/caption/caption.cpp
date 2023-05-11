@@ -55,7 +55,7 @@ namespace ui {
 		renderTarget->draw(text);
 	}
 	
-	sf::FloatRect Caption::getBounds() {
+	sf::FloatRect Caption::getBounds(const sf::Text& text) const {
 		sf::FloatRect localBounds = text.getLocalBounds();
 		
 		float countEnter{(static_cast<float>(std::count(text.getString().begin(), text.getString().end(), '\n')))};
@@ -75,35 +75,40 @@ namespace ui {
 		background->resize(size, position);
 		text.setString(str);
 		
-		sf::FloatRect bounds = getBounds();
+		sf::FloatRect bounds = getBounds(text);
 		if(cutBack) {
 			sf::String string = this->str + sf::String("...");
 			while(bounds.width > size.x || bounds.height > size.y) {
 				string.erase(string.getSize() - 4, 1);
 				text.setString(string);
-				bounds = getBounds();
+				bounds = getBounds(text);
 			}
 		}
-		text.setPosition(internalPositioning2.findPosition(position, size, {bounds.width, bounds.height}) - sf::Vector2f(getBounds().left - text.getPosition().x, getBounds().top - text.getPosition().y));
+		text.setPosition(internalPositioning2.findPosition(position, size, {bounds.width, bounds.height}) - sf::Vector2f(getBounds(text).left - text.getPosition().x, getBounds(text).top - text.getPosition().y));
 	}
 	
-	sf::Vector2f Caption::getAreaPosition() {
+	sf::Vector2f Caption::getAreaPosition() const {
 		return background->getAreaPosition();
 	}
 	
-	sf::Vector2f Caption::getAreaSize() {
+	sf::Vector2f Caption::getAreaSize() const {
 		return background->getAreaSize();
 	}
 	
-	sf::Vector2f Caption::getMinSize() {
-		sf::String str{text.getString()};
-		text.setString("...");
-		sf::FloatRect bounds{getBounds()};
-		text.setString(str);
-		return max(max(minimumSize, (cutBack ? sf::Vector2f{bounds.width, bounds.height} : sf::Vector2f{0.f, 0.f})), background->getMinSize());
+	sf::Vector2f Caption::getMinSize() const {
+		sf::FloatRect bounds{getBounds(sf::Text{"...", *text.getFont(), text.getCharacterSize()})};
+		return max(
+			max(
+				minimumSize,
+				(cutBack ?
+				sf::Vector2f{bounds.width, bounds.height} :
+				sf::Vector2f{})
+			),
+			background->getMinSize()
+		);
 	}
 	
-	sf::Vector2f Caption::getNormalSize() {
+	sf::Vector2f Caption::getNormalSize() const {
 		sf::FloatRect rect = text.getGlobalBounds();
 		return max({rect.width, rect.height}, background->getNormalSize());
 	}
@@ -143,7 +148,7 @@ namespace ui {
 			}
 		}
 		{
-			sf::FloatRect bounds{getBounds()};
+			sf::FloatRect bounds{getBounds(text)};
 			sf::Vector2f size{bounds.width, bounds.height};
 			sf::Vector2f position{bounds.left, bounds.top};
 			if(size.x > 0 && size.y > 0) {

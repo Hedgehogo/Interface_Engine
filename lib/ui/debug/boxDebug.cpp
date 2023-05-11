@@ -31,11 +31,11 @@ namespace ui {
 		return object->updateInteractions(mousePosition);
 	}
 	
-	sf::Vector2f BoxDebug::getMinSize() {
+	sf::Vector2f BoxDebug::getMinSize() const {
 		return object->getMinSize();
 	}
 	
-	sf::Vector2f BoxDebug::getNormalSize() {
+	sf::Vector2f BoxDebug::getNormalSize() const {
 		return object->getNormalSize();
 	}
 	

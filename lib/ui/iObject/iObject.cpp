@@ -6,7 +6,7 @@ namespace ui {
 		resize(getAreaSize(), position);
 	}
 	
-	sf::Vector2f IObject::getPosition() {
+	sf::Vector2f IObject::getPosition() const {
 		return getAreaPosition();
 	}
 	
@@ -18,7 +18,7 @@ namespace ui {
 		resize(size, getAreaPosition());
 	}
 	
-	sf::Vector2f IObject::getSize() {
+	sf::Vector2f IObject::getSize() const {
 		return getAreaSize();
 	}
 	

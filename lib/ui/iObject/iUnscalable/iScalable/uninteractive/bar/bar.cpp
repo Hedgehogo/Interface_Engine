@@ -47,13 +47,13 @@ namespace ui {
 		setValue(value);
 	}
 	
-	sf::Vector2f Bar::getMinSize() {
+	sf::Vector2f Bar::getMinSize() const {
 		sf::Vector2f stripMinSize{strip->getMinSize()};
 		(horizontal ? stripMinSize.x : stripMinSize.y) *= value;
 		return max(stripMinSize, background->getMinSize());
 	}
 	
-	sf::Vector2f Bar::getNormalSize() {
+	sf::Vector2f Bar::getNormalSize() const {
 		sf::Vector2f stripNormalSize{strip->getNormalSize()};
 		(horizontal ? stripNormalSize.x : stripNormalSize.y) *= value;
 		return max(stripNormalSize, background->getNormalSize());

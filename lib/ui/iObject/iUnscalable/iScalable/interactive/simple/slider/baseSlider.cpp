@@ -66,19 +66,19 @@ namespace ui {
 			   mouse.y > sliderPosition.y && mouse.y < sliderPosition.y + sliderSize.y;
 	}
 	
-	sf::Vector2f BaseSlider::getAreaPosition() {
+	sf::Vector2f BaseSlider::getAreaPosition() const {
 		return position;
 	}
 	
-	sf::Vector2f BaseSlider::getAreaSize() {
+	sf::Vector2f BaseSlider::getAreaSize() const {
 		return sliderSize + moveZoneSize;
 	}
 	
-	sf::Vector2f BaseSlider::getMinSize() {
+	sf::Vector2f BaseSlider::getMinSize() const {
 		return background->getMinSize();
 	}
 	
-	sf::Vector2f BaseSlider::getNormalSize() {
+	sf::Vector2f BaseSlider::getNormalSize() const {
 		return background->getNormalSize();
 	}
 	

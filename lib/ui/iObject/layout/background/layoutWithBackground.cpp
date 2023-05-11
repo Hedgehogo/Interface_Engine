@@ -17,11 +17,11 @@ namespace ui {
 		background->resize(size, position);
 	}
 	
-	sf::Vector2f LayoutWithBackground::getMinSize() {
+	sf::Vector2f LayoutWithBackground::getMinSize() const {
 		return background->getMinSize();
 	}
 	
-	sf::Vector2f LayoutWithBackground::getNormalSize() {
+	sf::Vector2f LayoutWithBackground::getNormalSize() const {
 		return background->getNormalSize();
 	}
 	

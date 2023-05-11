@@ -25,11 +25,11 @@ namespace ui {
 		object->setSize(size);
 	}
 	
-	sf::Vector2f BoxWithBackground::getMinSize() {
+	sf::Vector2f BoxWithBackground::getMinSize() const {
 		return max(object->getMinSize() + offset * 2.f, background->getMinSize(), minimumSize);
 	}
 	
-	sf::Vector2f BoxWithBackground::getNormalSize() {
+	sf::Vector2f BoxWithBackground::getNormalSize() const {
 		return max(object->getNormalSize() + offset * 2.f, background->getNormalSize());
 	}
 	

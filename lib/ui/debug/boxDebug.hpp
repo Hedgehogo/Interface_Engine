@@ -23,9 +23,9 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
-		sf::Vector2f getMinSize() override;
+		sf::Vector2f getMinSize() const override;
 		
-		sf::Vector2f getNormalSize() override;
+		sf::Vector2f getNormalSize() const override;
 		
 		BoxDebug* copy() override;
 		

@@ -60,13 +60,13 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
-		sf::Vector2f getAreaPosition() override;
+		sf::Vector2f getAreaPosition() const override;
 		
-		sf::Vector2f getAreaSize() override;
+		sf::Vector2f getAreaSize() const override;
 		
-		sf::Vector2f getMinSize() override;
+		sf::Vector2f getMinSize() const override;
 		
-		sf::Vector2f getNormalSize() override;
+		sf::Vector2f getNormalSize() const override;
 	
 	protected:
 		void updateCluster(sf::Vector2f mousePosition);

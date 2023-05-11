@@ -21,7 +21,7 @@ namespace ui {
 		panel->resize(size, position);
 	}
 	
-	sf::Vector2f ButtonWithPanel::getMinSize() {
+	sf::Vector2f ButtonWithPanel::getMinSize() const {
 		sf::Vector2f backgroundMinSize{background->getMinSize()};
 		sf::Vector2f panelMinSize{panel->getMinSize()};
 		return {std::max(backgroundMinSize.x, panelMinSize.x), std::max(backgroundMinSize.y, panelMinSize.y)};

@@ -33,11 +33,11 @@ namespace ui {
 		secondObject->resize(size, position);
 	}
 	
-	sf::Vector2f BoxWithConstCenter::getMinSize() {
+	sf::Vector2f BoxWithConstCenter::getMinSize() const {
 		return max(LayoutWithTwoObjects::getMinSize(), constSize);
 	}
 	
-	sf::Vector2f BoxWithConstCenter::getNormalSize() {
+	sf::Vector2f BoxWithConstCenter::getNormalSize() const {
 		return max(LayoutWithTwoObjects::getNormalSize(), constSize);
 	}
 	

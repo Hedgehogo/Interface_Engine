@@ -86,9 +86,9 @@ public:
 
 	bool updateInteractions(sf::Vector2f mousePosition, bool active) override;
 
-	sf::Vector2f getMinSize() override;
+	sf::Vector2f getMinSize() const override;
 
-	sf::Vector2f getNormalSize() override;
+	sf::Vector2f getNormalSize() const override;
 
 	TestPanel* copy() override;
 

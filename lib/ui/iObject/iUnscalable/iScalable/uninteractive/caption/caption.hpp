@@ -38,17 +38,17 @@ namespace ui {
 		
 		void draw() override;
 		
-		sf::FloatRect getBounds();
+		sf::FloatRect getBounds(const sf::Text& text) const;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		sf::Vector2f getAreaPosition() override;
+		sf::Vector2f getAreaPosition() const override;
 		
-		sf::Vector2f getAreaSize() override;
+		sf::Vector2f getAreaSize() const override;
 		
-		sf::Vector2f getMinSize() override;
+		sf::Vector2f getMinSize() const override;
 		
-		sf::Vector2f getNormalSize() override;
+		sf::Vector2f getNormalSize() const override;
 	
 	protected:
 		Caption(sf::Text text, IUninteractive* background, sf::String str, sf::Vector2f minimumSize, InternalPositioning2 internalPositioning2, bool cutBack);

@@ -12,9 +12,9 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f) override;
 		
-		sf::Vector2f getMinSize() override;
+		sf::Vector2f getMinSize() const override;
 		
-		sf::Vector2f getNormalSize() override;
+		sf::Vector2f getNormalSize() const override;
 		
 		Empty* copy() override;
 		

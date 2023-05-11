@@ -12,11 +12,11 @@ namespace ui {
 		return false;
 	}
 	
-	sf::Vector2f Empty::getMinSize() {
+	sf::Vector2f Empty::getMinSize() const {
 		return {};
 	}
 	
-	sf::Vector2f Empty::getNormalSize() {
+	sf::Vector2f Empty::getNormalSize() const {
 		return {};
 	}
 	

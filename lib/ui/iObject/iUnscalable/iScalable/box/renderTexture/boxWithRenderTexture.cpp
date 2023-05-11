@@ -46,7 +46,7 @@ namespace ui {
 		return object->updateInteractions(mousePosition);
 	}
 	
-	sf::Vector2f BoxWithRenderTexture::getMinSize() {
+	sf::Vector2f BoxWithRenderTexture::getMinSize() const {
 		return max(object->getMinSize(), minimumSize, {1, 1});
 	}
 	

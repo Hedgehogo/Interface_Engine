@@ -29,17 +29,17 @@ namespace ui {
 		
 		virtual void setSize(sf::Vector2f size);
 		
-		virtual sf::Vector2f getAreaPosition() = 0;
+		virtual sf::Vector2f getAreaPosition() const = 0;
 		
-		virtual sf::Vector2f getPosition();
+		virtual sf::Vector2f getPosition() const;
 		
-		virtual sf::Vector2f getAreaSize() = 0;
+		virtual sf::Vector2f getAreaSize() const = 0;
 		
-		virtual sf::Vector2f getSize();
+		virtual sf::Vector2f getSize() const;
 		
-		virtual sf::Vector2f getMinSize() = 0;
+		virtual sf::Vector2f getMinSize() const = 0;
 		
-		virtual sf::Vector2f getNormalSize() = 0;
+		virtual sf::Vector2f getNormalSize() const = 0;
 		
 		virtual bool inArea(sf::Vector2f pointPosition);
 		

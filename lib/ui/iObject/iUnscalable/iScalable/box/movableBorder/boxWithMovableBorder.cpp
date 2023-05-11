@@ -132,7 +132,7 @@ namespace ui {
 		secondObject->resize(secondObjectSize, secondPosition);
 	}
 	
-	sf::Vector2f BoxWithMovableBorder::getMinSize() {
+	sf::Vector2f BoxWithMovableBorder::getMinSize() const {
 		sf::Vector2f firstMinSize = firstObject->getMinSize();
 		sf::Vector2f secondMinSize = secondObject->getMinSize();
 		if(this->isHorizontalBorder)
@@ -140,7 +140,7 @@ namespace ui {
 		return {std::max(firstMinSize.x, secondMinSize.x), std::max(firstMinSize.y + secondMinSize.y, this->minimumSize.y)};
 	}
 	
-	sf::Vector2f BoxWithMovableBorder::getNormalSize() {
+	sf::Vector2f BoxWithMovableBorder::getNormalSize() const {
 		sf::Vector2f firstNormalSize = firstObject->getNormalSize();
 		sf::Vector2f secondNormalSize = secondObject->getNormalSize();
 		if(this->isHorizontalBorder)

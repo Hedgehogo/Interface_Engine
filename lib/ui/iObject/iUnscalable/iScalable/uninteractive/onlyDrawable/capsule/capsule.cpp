@@ -31,11 +31,11 @@ namespace ui {
 		}
 	}
 	
-	sf::Vector2f Capsule::getMinSize() {
+	sf::Vector2f Capsule::getMinSize() const {
 		return {0, 0};
 	}
 	
-	sf::Vector2f Capsule::getNormalSize() {
+	sf::Vector2f Capsule::getNormalSize() const {
 		return {1, 1};
 	}
 	

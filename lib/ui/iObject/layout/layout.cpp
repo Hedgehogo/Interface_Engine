@@ -19,19 +19,19 @@ namespace ui {
 		resize(size, position);
 	}
 	
-	sf::Vector2f Layout::getAreaPosition() {
+	sf::Vector2f Layout::getAreaPosition() const {
 		return position;
 	}
 	
-	sf::Vector2f Layout::getPosition() {
+	sf::Vector2f Layout::getPosition() const {
 		return position;
 	}
 	
-	sf::Vector2f Layout::getAreaSize() {
+	sf::Vector2f Layout::getAreaSize() const {
 		return size;
 	}
 	
-	sf::Vector2f Layout::getSize() {
+	sf::Vector2f Layout::getSize() const {
 		return size;
 	}
 	

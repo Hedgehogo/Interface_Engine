@@ -19,13 +19,13 @@ namespace ui {
 		
 		void setSize(sf::Vector2f size) override;
 		
-		sf::Vector2f getAreaPosition() override;
+		sf::Vector2f getAreaPosition() const override;
 		
-		sf::Vector2f getPosition() override;
+		sf::Vector2f getPosition() const override;
 		
-		sf::Vector2f getAreaSize() override;
+		sf::Vector2f getAreaSize() const override;
 		
-		sf::Vector2f getSize() override;
+		sf::Vector2f getSize() const override;
 		
 		bool inArea(sf::Vector2f pointPosition) override;
 		

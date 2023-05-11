@@ -19,19 +19,19 @@ namespace ui {
 		background->resize(size, position);
 	}
 	
-	sf::Vector2f BaseButton::getAreaPosition() {
+	sf::Vector2f BaseButton::getAreaPosition() const {
 		return background->getAreaPosition();
 	}
 	
-	sf::Vector2f BaseButton::getAreaSize() {
+	sf::Vector2f BaseButton::getAreaSize() const {
 		return background->getAreaSize();
 	}
 	
-	sf::Vector2f BaseButton::getMinSize() {
+	sf::Vector2f BaseButton::getMinSize() const {
 		return background->getMinSize();
 	}
 	
-	sf::Vector2f BaseButton::getNormalSize() {
+	sf::Vector2f BaseButton::getNormalSize() const {
 		return background->getNormalSize();
 	}
 	

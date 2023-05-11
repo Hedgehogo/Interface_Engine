@@ -58,19 +58,19 @@ namespace ui {
 		object->resize(size, position);
 	}
 	
-	sf::Vector2f Interface::getAreaPosition() {
+	sf::Vector2f Interface::getAreaPosition() const {
 		return object->getAreaPosition();
 	}
 	
-	sf::Vector2f Interface::getAreaSize() {
+	sf::Vector2f Interface::getAreaSize() const {
 		return object->getAreaSize();
 	}
 	
-	sf::Vector2f Interface::getMinSize() {
+	sf::Vector2f Interface::getMinSize() const {
 		return object->getMinSize();
 	}
 	
-	sf::Vector2f Interface::getNormalSize() {
+	sf::Vector2f Interface::getNormalSize() const {
 		return object->getNormalSize();
 	}
 	

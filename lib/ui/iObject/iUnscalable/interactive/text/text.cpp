@@ -236,19 +236,19 @@ namespace ui {
 		sprite.setTextureRect({{0, 0}, sf::Vector2i(size)});
 	}
 	
-	sf::Vector2f Text::getAreaPosition() {
+	sf::Vector2f Text::getAreaPosition() const {
 		return background->getAreaPosition();
 	}
 	
-	sf::Vector2f Text::getAreaSize() {
+	sf::Vector2f Text::getAreaSize() const {
 		return max(background->getAreaSize(), resizer->getSize());
 	}
 	
-	sf::Vector2f Text::getMinSize() {
+	sf::Vector2f Text::getMinSize() const {
 		return max(resizer->getMinSize(), background->getMinSize());
 	}
 	
-	sf::Vector2f Text::getNormalSize() {
+	sf::Vector2f Text::getNormalSize() const {
 		return max(resizer->getNormalSize(), background->getNormalSize());
 	}
 	

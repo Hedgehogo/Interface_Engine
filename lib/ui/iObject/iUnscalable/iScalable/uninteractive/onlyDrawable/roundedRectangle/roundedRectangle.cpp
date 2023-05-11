@@ -30,11 +30,11 @@ namespace ui {
 		horizontalRectangle.setPosition(position + sf::Vector2f{0, radius});
 	}
 	
-	sf::Vector2f RoundedRectangle::getMinSize() {
+	sf::Vector2f RoundedRectangle::getMinSize() const {
 		return sf::Vector2f(radius * 2, radius * 2);
 	}
 	
-	sf::Vector2f RoundedRectangle::getNormalSize() {
+	sf::Vector2f RoundedRectangle::getNormalSize() const {
 		return sf::Vector2f(radius * 2, radius * 2);
 	}
 	

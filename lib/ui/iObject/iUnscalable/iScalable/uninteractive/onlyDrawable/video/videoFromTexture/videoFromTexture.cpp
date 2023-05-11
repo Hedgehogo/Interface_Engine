@@ -30,19 +30,19 @@ namespace ui {
 		renderTarget->draw(sprite);
 	}
 	
-	sf::Vector2f VideoFromTexture::getAreaPosition() {
+	sf::Vector2f VideoFromTexture::getAreaPosition() const {
 		return sprite.getPosition();
 	}
 	
-	sf::Vector2f VideoFromTexture::getAreaSize() {
+	sf::Vector2f VideoFromTexture::getAreaSize() const {
 		return size;
 	}
 	
-	sf::Vector2f VideoFromTexture::getMinSize() {
+	sf::Vector2f VideoFromTexture::getMinSize() const {
 		return {0, 0};
 	}
 	
-	sf::Vector2f VideoFromTexture::getNormalSize() {
+	sf::Vector2f VideoFromTexture::getNormalSize() const {
 		return sf::Vector2f{sf::Vector2i{rect.width, rect.height}};
 	}
 	

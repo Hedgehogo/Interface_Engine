@@ -39,7 +39,7 @@ namespace ui {
 		return secondObject->updateInteractions(mousePosition);
 	}
 	
-	sf::Vector2f BoxWithConstBorder::getMinSize() {
+	sf::Vector2f BoxWithConstBorder::getMinSize() const {
 		sf::Vector2f constMinSize = firstObject->getMinSize();
 		sf::Vector2f secondMinSize = secondObject->getMinSize();
 		if(side == Side::down || side == Side::up) {
@@ -49,7 +49,7 @@ namespace ui {
 		}
 	}
 	
-	sf::Vector2f BoxWithConstBorder::getNormalSize() {
+	sf::Vector2f BoxWithConstBorder::getNormalSize() const {
 		sf::Vector2f constNormalSize = firstObject->getNormalSize();
 		sf::Vector2f secondNormalSize = secondObject->getNormalSize();
 		if(side == Side::down || side == Side::up) {

@@ -80,13 +80,13 @@ namespace ui {
 		return background->updateInteractions(mousePosition);
 	}
 	
-	sf::Vector2f BoxWithConstRatio::getMinSize() {
+	sf::Vector2f BoxWithConstRatio::getMinSize() const {
 		sf::Vector2f constMinSize{firstObject->getMinSize()};
 		constMinSize = sf::Vector2f{std::max(constMinSize.x, constMinSize.y * aspectRatio), std::max(constMinSize.y, constMinSize.x / aspectRatio)};
 		return max(constMinSize, background->getMinSize(), minimumSize);
 	}
 	
-	sf::Vector2f BoxWithConstRatio::getNormalSize() {
+	sf::Vector2f BoxWithConstRatio::getNormalSize() const {
 		sf::Vector2f constNormalSize{firstObject->getNormalSize()};
 		sf::Vector2f secondNormalSize{secondObject->getNormalSize()};
 		sf::Vector2f normalSize{std::max(constNormalSize.x, constNormalSize.y * aspectRatio), std::max(constNormalSize.y, constNormalSize.x / aspectRatio)};

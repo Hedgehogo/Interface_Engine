@@ -19,11 +19,11 @@ namespace ui {
 		panel->resize(size, position);
 	}
 	
-	sf::Vector2f BoxWithPanel::getMinSize() {
+	sf::Vector2f BoxWithPanel::getMinSize() const {
 		return max(object->getMinSize(), panel->getMinSize(), minimumSize);
 	}
 	
-	sf::Vector2f BoxWithPanel::getNormalSize() {
+	sf::Vector2f BoxWithPanel::getNormalSize() const {
 		return max(object->getNormalSize(), panel->getNormalSize());
 	}
 	
