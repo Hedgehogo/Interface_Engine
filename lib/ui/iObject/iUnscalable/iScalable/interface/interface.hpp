@@ -1,5 +1,7 @@
 #pragma once
 
+#include <filesystem>
+
 #include "../iScalable.hpp"
 #include "../../../panel/manager/general/panelManager.hpp"
 #include "../../../../interaction/interactionManager/interactionManager.hpp"
@@ -87,7 +89,9 @@ namespace ui {
 		static bool decodePointer(const YAML::Node& node, Interface*& interface);
 	};
 	
-	Interface makeInterface(sf::RenderTarget& renderTarget, const std::string& filePath);
+	Interface makeInterface(const std::filesystem::path& filePath, int argc = 0, char *argv[] = {});
 	
-	Interface* makePrtInterface(sf::RenderTarget& renderTarget, const std::string& filePath);
+	Interface makeInterface(sf::RenderTarget& renderTarget, const std::filesystem::path& filePath, int argc = 0, char *argv[] = {});
+	
+	Interface* makePrtInterface(sf::RenderTarget& renderTarget, const std::filesystem::path& filePath, int argc = 0, char *argv[] = {});
 }

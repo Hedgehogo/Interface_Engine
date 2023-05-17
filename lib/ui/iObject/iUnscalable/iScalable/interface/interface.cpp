@@ -1,5 +1,7 @@
 #include "interface.hpp"
 
+#include <cmath>
+#include "modules/appendix/yaml-cpp/modules/loadModules.hpp"
 
 namespace ui {
 	void Interface::init(InitInfo initInfo) {
@@ -145,8 +147,10 @@ namespace ui {
 	}
 	
 	void Interface::setRenderWindowSize(sf::RenderWindow& window) {
-		window.setSize(sf::Vector2u(ui::max(getNormalSize(), sf::Vector2f(window.getSize()))));
-		setSize(sf::Vector2f(window.getSize()));
+		auto newWindowSize{ui::max(getNormalSize(), sf::Vector2f(window.getSize()))};
+		sf::Vector2u windowSize = {static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))};
+		window.setSize(windowSize);
+		setSize(sf::Vector2f(windowSize));
 	}
 	
 	
@@ -159,7 +163,23 @@ namespace ui {
 		return true;
 	}
 	
-	Interface makeInterface(sf::RenderTarget& renderTarget, const std::string& filePath) {
+	Interface makeInterface(const std::filesystem::path& filePath, int argc, char *argv[]) {
+		if(auto modules =  std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
+			loadModules(argc, argv, modules);
+		
+		YAML::Node node{YAML::LoadFile(filePath)};
+		
+		return Interface{
+			node["object"].as<IScalable*>(),
+			convDef(node["animation-manager"], AnimationManager{}),
+			convDef(node["interaction-stack"], new InteractionStack{})
+		};
+	}
+	
+	Interface makeInterface(sf::RenderTarget& renderTarget, const std::filesystem::path& filePath, int argc, char *argv[]) {
+		if(auto modules =  std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
+			loadModules(argc, argv, modules);
+		
 		YAML::Node node{YAML::LoadFile(filePath)};
 		
 		return Interface{
@@ -170,7 +190,10 @@ namespace ui {
 		};
 	}
 	
-	Interface* makePrtInterface(sf::RenderTarget& renderTarget, const std::string& filePath) {
+	Interface* makePrtInterface(sf::RenderTarget& renderTarget, const std::filesystem::path& filePath, int argc, char *argv[]) {
+		if(auto modules =  std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
+			loadModules(argc, argv, modules);
+		
 		YAML::Node node{YAML::LoadFile(filePath)};
 		
 		return new Interface{

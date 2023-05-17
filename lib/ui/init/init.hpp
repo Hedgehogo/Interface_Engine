@@ -72,7 +72,7 @@
 #include "../debug/boxDebug.hpp"
 
 namespace ui {
-	void init(std::filesystem::path modulesList = {}, int argc = 0, char *argv[] = {});
+	void init(int argc = 0, char *argv[] = {}, std::filesystem::path modulesList = {});
 	
 	void yamlBuilderInit();
 }

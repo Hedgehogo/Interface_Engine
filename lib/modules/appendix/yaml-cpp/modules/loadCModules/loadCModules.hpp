@@ -1,9 +1,9 @@
 #pragma once
 
-#include <filesystem>
+#include <yaml-cpp/yaml.h>
 
 namespace ui {
 	
-	void loadCModules(std::filesystem::path modulesList = {}, int argc = 0, char* argv[] = {});
+	void loadCModules(const YAML::Node& libs, int argc = 0, char* argv[] = {});
 	
 }

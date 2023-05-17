@@ -40,12 +40,8 @@ namespace ui {
 		return 1;
 	}
 	
-	void loadCModules(std::filesystem::path modulesList, int argc, char* argv[]) {
-		if(modulesList.empty())
-			return;
-		
-		
-		YAML::Node libs{YAML::LoadFile(modulesList)};
+	void loadCModules(const YAML::Node& libs, int argc, char* argv[]) {
+
 		
 		std::string libDir = convDef<std::string>(libs["lib-dir"], "./");
 		

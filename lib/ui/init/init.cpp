@@ -4,7 +4,7 @@
 #include "../sizingAndPositioning/sizing2/determine/determineSizing2.hpp"
 #include "../sizingAndPositioning/positioning/determine/determinePositioning.hpp"
 #include "../sizingAndPositioning/positioning2/determine/determinePositioning2.hpp"
-#include "modules/appendix/yaml-cpp/modules/loadCModules/loadCModules.hpp"
+#include "modules/appendix/yaml-cpp/modules/loadModules.hpp"
 #define MAGICKCORE_QUANTUM_DEPTH 16
 # define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
 
@@ -35,10 +35,10 @@ namespace ui {
 		inherit<ISVector2, SRVec2i>({"SRVec2i"});
 	}
 	
-	void init(std::filesystem::path modulesList, int argc, char *argv[]) {
+	void init(int argc, char *argv[], std::filesystem::path modulesList) {
 		Magick::InitializeMagick("");
 		yamlBuilderInit();
-		loadCModules(modulesList, argc, argv);
+		loadModules(argc, argv, modulesList);
 	}
 	
 	void yamlBuilderInit() {
