@@ -3,17 +3,19 @@
 #include "../../window.hpp"
 
 namespace ui {
-	WindowResizer::WindowResizer(unsigned int borderSize, Key key) : borderSize(borderSize), key(key){
+	WindowResizer::WindowResizer(int internalBorderSize, int externalBorderSize, Key key) : internalBorderSize(internalBorderSize), externalBorderSize(externalBorderSize), key(key){
 	}
 	
 	void swapBorders(int*& currentBorder, int& border, int& border2, int& grip, int& size){
-		std::swap(border, border2);
-		grip = -grip;
-		size = -size;
-		if (currentBorder == &border){
-			currentBorder = &border2;
-		} else {
-			currentBorder = &border;
+		if (size < 0 && std::abs(size) > std::abs(grip)) {
+			std::swap(border, border2);
+			grip = -grip;
+			size = -size;
+			if(currentBorder == &border) {
+				currentBorder = &border2;
+			} else {
+				currentBorder = &border;
+			}
 		}
 	}
 	
@@ -30,13 +32,8 @@ namespace ui {
 	void WindowResizer::setSize() {
 		sf::Vector2i size{borders.right - borders.left, borders.down - borders.up};
 		
-		if (size.y < 0) {
-			swapBorders(currentBorder.y, borders.up, borders.down, grip.y, size.y);
-		}
-		
-		if (size.x < 0) {
-			swapBorders(currentBorder.x, borders.left, borders.right, grip.x, size.x);
-		}
+		swapBorders(currentBorder.y, borders.up, borders.down, grip.y, size.y);
+		swapBorders(currentBorder.x, borders.left, borders.right, grip.x, size.x);
 		
 		auto minSize{window->getMinSize()};
 		
@@ -45,7 +42,6 @@ namespace ui {
 		
 		window->setPosition({borders.left, borders.up});
 		window->setSize({static_cast<unsigned>(borders.right - borders.left), static_cast<unsigned>(borders.down - borders.up)});
-		
 	}
 	
 	void WindowResizer::setBorders() {
@@ -59,11 +55,11 @@ namespace ui {
 		};
 	}
 	
-	void WindowResizer::getCurrentBorder(int& grip, int*& currentBorder, int& border, int& border2,  unsigned& windowSize, int& mousePosition, int& absMousePosition) {
-		if(absMousePosition <= borderSize) {
+	void WindowResizer::getCurrentBorder(int& grip, int*& currentBorder, int& border, int& border2, int& windowSize, int& mousePosition) {
+		if(mousePosition <= internalBorderSize && mousePosition >= -externalBorderSize) {
 			currentBorder = &border;
 			grip = mousePosition;
-		} else if(windowSize - borderSize <= mousePosition && windowSize + borderSize >= mousePosition) {
+		} else if(windowSize - internalBorderSize <= mousePosition && windowSize + externalBorderSize >= mousePosition) {
 			currentBorder = &border2;
 			grip = mousePosition - windowSize;
 		} else {
@@ -74,8 +70,8 @@ namespace ui {
 	
 	bool WindowResizer::update(sf::Vector2i mousePosition) {
 		if(KeyHandler::isKeyPressed(key)) {
-			auto globalMousePosition = mousePosition + window->getPosition();
 			if(currentBorder.x || currentBorder.y) {
+				auto globalMousePosition = mousePosition + window->getPosition();
 				if(currentBorder.y)
 					(*currentBorder.y) = globalMousePosition.y - grip.y;
 				if(currentBorder.x)
@@ -85,18 +81,16 @@ namespace ui {
 				return true;
 				
 			} else if (!oldKeyPressed) {
-				sf::Vector2u windowSize{window->getSize()};
-				sf::Vector2i windowPosition{window->getPosition()};
-				sf::Vector2i absMousePosition{std::abs(globalMousePosition.x - windowPosition.x), std::abs(globalMousePosition.y - windowPosition.y)};
-				
+				sf::Vector2i windowSize{window->getSize()};
 				setBorders();
 				
-				getCurrentBorder(grip.y, currentBorder.y, borders.up,   borders.down,  windowSize.y, mousePosition.y, absMousePosition.y);
-				getCurrentBorder(grip.x, currentBorder.x, borders.left, borders.right, windowSize.x, mousePosition.x, absMousePosition.x);
-				
+				if(mousePosition.x >= -externalBorderSize && mousePosition.y >= -externalBorderSize && mousePosition.x <= windowSize.x + externalBorderSize && mousePosition.y <= windowSize.y + externalBorderSize) {
+					getCurrentBorder(grip.y, currentBorder.y, borders.up, borders.down, windowSize.y, mousePosition.y);
+					getCurrentBorder(grip.x, currentBorder.x, borders.left, borders.right, windowSize.x, mousePosition.x);
+				}
+				oldKeyPressed = true;
 				return currentBorder.x || currentBorder.y;
 			}
-			oldKeyPressed = true;
 		} else {
 			currentBorder = {};
 			oldKeyPressed = false;

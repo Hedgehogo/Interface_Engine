@@ -12,7 +12,8 @@ namespace ui {
 		};
 		
 	protected:
-		unsigned borderSize;
+		int internalBorderSize;
+		int externalBorderSize;
 		Key key;
 		
 		Borders borders;
@@ -22,10 +23,10 @@ namespace ui {
 		
 		virtual void setSize();
 		virtual void setBorders();
-		virtual void getCurrentBorder(int& grip, int*& currentBorder, int& border, int& border2,  unsigned& windowSize, int& mousePosition, int& absMousePosition);
+		virtual void getCurrentBorder(int& grip, int*& currentBorder, int& border, int& border2, int& windowSize, int& mousePosition);
 		
 	public:
-		WindowResizer(unsigned int borderSize = 10, Key key = Key::mouseLeft);
+		WindowResizer(int internalBorderSize = 10, int externalBorderSize = 10, Key key = Key::mouseLeft);
 		
 		bool update(sf::Vector2i mousePosition) override;
 	};
