@@ -4,12 +4,15 @@
 
 namespace ui {
 	struct InteractiveInitInfo {
+		Window& window;
 		sf::RenderTarget& renderTarget;
 		DrawManager& drawManager;
 		UpdateManager& updateManager;
 		IPanelManager& panelManager;
 		
-		InteractiveInitInfo(sf::RenderTarget& renderTarget_, DrawManager& drawManager_, UpdateManager& updateManager_, IPanelManager& panelManager_);
+		InteractiveInitInfo(Window& window_, sf::RenderTarget& renderTarget_, DrawManager& drawManager_, UpdateManager& updateManager_, IPanelManager& panelManager_);
+		
+		InteractiveInitInfo copy(Window& window_) const;
 		
 		InteractiveInitInfo copy(sf::RenderTarget& renderTarget_) const;
 		

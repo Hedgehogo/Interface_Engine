@@ -11,6 +11,7 @@
 namespace ui {
 	class Interface : public IScalable, public IDrawable, public IUpdatable {
 	protected:
+		Window* window;
 		sf::RenderTarget* renderTarget;
 		DrawManager drawManager;
 		UpdateManager updateManager;
@@ -28,15 +29,15 @@ namespace ui {
 		bool isInWindow(sf::Vector2f position);
 	
 	public:
-		void init(sf::RenderTarget& renderTarget);
+		void init(Window& window);
 		
 		explicit Interface(IScalable* object, AnimationManager animationManager = AnimationManager{{}}, InteractionStack* interactionStack = new InteractionStack{});
 		
 		explicit Interface(const std::string& filePath, AnimationManager animationManager = AnimationManager{{}}, InteractionStack* interactionStack = new InteractionStack{});
 		
-		explicit Interface(sf::RenderTarget& renderTarget, IScalable* object, AnimationManager animationManager = AnimationManager{{}}, InteractionStack* interactionStack = new InteractionStack{});
+		explicit Interface(Window& window, IScalable* object, AnimationManager animationManager = AnimationManager{{}}, InteractionStack* interactionStack = new InteractionStack{});
 		
-		explicit Interface(sf::RenderTarget& renderTarget, const std::string& filePath, AnimationManager animationManager = AnimationManager{{}}, InteractionStack* interactionStack = new InteractionStack{});
+		explicit Interface(Window& window, const std::string& filePath, AnimationManager animationManager = AnimationManager{{}}, InteractionStack* interactionStack = new InteractionStack{});
 		
 		~Interface() override;
 		
@@ -91,7 +92,7 @@ namespace ui {
 	
 	Interface makeInterface(const std::filesystem::path& filePath, int argc = 0, char *argv[] = {});
 	
-	Interface makeInterface(sf::RenderTarget& renderTarget, const std::filesystem::path& filePath, int argc = 0, char *argv[] = {});
+	Interface makeInterface(Window& window, const std::filesystem::path& filePath, int argc = 0, char *argv[] = {});
 	
-	Interface* makePrtInterface(sf::RenderTarget& renderTarget, const std::filesystem::path& filePath, int argc = 0, char *argv[] = {});
+	Interface* makePrtInterface(Window& window, const std::filesystem::path& filePath, int argc = 0, char *argv[] = {});
 }

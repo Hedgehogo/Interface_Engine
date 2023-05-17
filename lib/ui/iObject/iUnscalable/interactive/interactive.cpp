@@ -9,7 +9,7 @@ namespace ui {
 		this->interactionStack = &initInfo.interactionStack;
 		this->interactionManager = &initInfo.interactionManager;
 		
-		InteractiveInitInfo interactiveInitInfo{initInfo.renderTarget, initInfo.drawManager, initInfo.updateManager, initInfo.panelManager};
+		InteractiveInitInfo interactiveInitInfo{initInfo.window, initInfo.renderTarget, initInfo.drawManager, initInfo.updateManager, initInfo.panelManager};
 		init(interactiveInitInfo);
 	}
 	

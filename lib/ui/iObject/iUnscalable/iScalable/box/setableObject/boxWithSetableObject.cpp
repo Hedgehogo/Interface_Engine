@@ -10,6 +10,7 @@ namespace ui {
 		
 		this->panelManagerInterceptor.init(initInfo.panelManager);
 		
+		this->window = &initInfo.window;
 		this->renderTarget = &initInfo.renderTarget;
 		this->interactionStack = &initInfo.interactionStack;
 	}
@@ -21,7 +22,7 @@ namespace ui {
 		updateManager.clear();
 		interactionManager.clear();
 		panelManagerInterceptor.clear();
-		InitInfo initInfo{*renderTarget, drawManager, updateManager, interactionManager, *interactionStack, panelManagerInterceptor};
+		InitInfo initInfo{*window, *renderTarget, drawManager, updateManager, interactionManager, *interactionStack, panelManagerInterceptor};
 		newObject->init(initInfo);
 		object = newObject;
 	}

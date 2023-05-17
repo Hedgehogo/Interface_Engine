@@ -38,7 +38,7 @@ namespace ui {
 	void Text::init(InteractiveInitInfo interactiveInitInfo) {
 		interactiveInitInfo.updateManager.add(*this);
 		this->renderTarget = &interactiveInitInfo.renderTarget;
-		InitInfo initInfo{renderTexture, drawManager, interactiveInitInfo.updateManager, *interactionManager, *interactionStack, interactiveInitInfo.panelManager};
+		InitInfo initInfo{interactiveInitInfo.window, renderTexture, drawManager, interactiveInitInfo.updateManager, *interactionManager, *interactionStack, interactiveInitInfo.panelManager};
 		background->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
 		interactiveInitInfo.drawManager.add(*this);
 		for(BaseTextBlock* textBlock: textBocks) {

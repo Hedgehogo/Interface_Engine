@@ -16,6 +16,8 @@ namespace ui {
 		
 		UpdateManager updateManager;
 		
+		Window* window;
+		
 		sf::RenderTarget* renderTarget;
 		
 		InteractionManager interactionManager;

@@ -2,25 +2,28 @@
 
 #include <cmath>
 #include "modules/appendix/yaml-cpp/modules/loadModules.hpp"
+#include "ui/window/window.hpp"
 
 namespace ui {
 	void Interface::init(InitInfo initInfo) {
 		if(!initialized) {
+			this->window = &initInfo.window;
 			this->renderTarget = &initInfo.renderTarget;
 			initInfo.drawManager.add(*this);
 			initInfo.updateManager.add(*this);
-			InitInfo newInitInfo{initInfo.renderTarget, this->drawManager, this->updateManager, this->interactionManager, *this->interactionStack, this->panelManager};
+			InitInfo newInitInfo{initInfo.window, initInfo.renderTarget, this->drawManager, this->updateManager, this->interactionManager, *this->interactionStack, this->panelManager};
 			object->init(newInitInfo);
 			initialized = true;
 		}
 	}
 	
-	void Interface::init(sf::RenderTarget& renderTarget) {
+	void Interface::init(Window& window) {
 		if(!initialized) {
-			this->renderTarget = &renderTarget;
-			InitInfo initInfo{renderTarget, drawManager, updateManager, interactionManager, *interactionStack, panelManager};
+			this->window = &window;
+			this->renderTarget = &window;
+			InitInfo initInfo{window, window, drawManager, updateManager, interactionManager, *interactionStack, panelManager};
 			object->init(initInfo);
-			sf::Vector2f size(max(static_cast<sf::Vector2f>(renderTarget.getSize()), object->getMinSize()));
+			sf::Vector2f size(max(static_cast<sf::Vector2f>(window.getSize()), object->getMinSize()));
 			resize(size, sf::Vector2f(0, 0));
 			initialized = true;
 		}
@@ -34,13 +37,13 @@ namespace ui {
 		Interface(ui::loadFromYaml<ui::IScalable>(filePath), animationManager, interactionStack) {
 	}
 	
-	Interface::Interface(sf::RenderTarget& renderTarget, IScalable* object, AnimationManager animationManager, InteractionStack* interactionStack) :
+	Interface::Interface(Window& window, IScalable* object, AnimationManager animationManager, InteractionStack* interactionStack) :
 		Interface(object, animationManager, interactionStack) {
-		init(renderTarget);
+		init(window);
 	}
 	
-	Interface::Interface(sf::RenderTarget& renderTarget, const std::string& filePath, AnimationManager animationManager, InteractionStack* interactionStack) :
-		Interface(renderTarget, ui::loadFromYaml<ui::IScalable>(filePath), animationManager, interactionStack) {
+	Interface::Interface(Window& window, const std::string& filePath, AnimationManager animationManager, InteractionStack* interactionStack) :
+		Interface(window, ui::loadFromYaml<ui::IScalable>(filePath), animationManager, interactionStack) {
 	}
 	
 	Interface::~Interface() {
@@ -110,7 +113,7 @@ namespace ui {
 	
 	Interface* Interface::copy() {
 		Interface* interface{new Interface{object->copy(), *animationManager.copy(), interactionStack}};
-		interface->init(*renderTarget);
+		interface->init(*window);
 		return interface;
 	}
 	
@@ -176,28 +179,28 @@ namespace ui {
 		};
 	}
 	
-	Interface makeInterface(sf::RenderTarget& renderTarget, const std::filesystem::path& filePath, int argc, char *argv[]) {
+	Interface makeInterface(Window& window, const std::filesystem::path& filePath, int argc, char *argv[]) {
 		if(auto modules =  std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
 			loadModules(argc, argv, modules);
 		
 		YAML::Node node{YAML::LoadFile(filePath)};
 		
 		return Interface{
-			renderTarget,
+			window,
 			node["object"].as<IScalable*>(),
 			convDef(node["animation-manager"], AnimationManager{}),
 			convDef(node["interaction-stack"], new InteractionStack{})
 		};
 	}
 	
-	Interface* makePrtInterface(sf::RenderTarget& renderTarget, const std::filesystem::path& filePath, int argc, char *argv[]) {
+	Interface* makePrtInterface(Window& window, const std::filesystem::path& filePath, int argc, char *argv[]) {
 		if(auto modules =  std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
 			loadModules(argc, argv, modules);
 		
 		YAML::Node node{YAML::LoadFile(filePath)};
 		
 		return new Interface{
-			renderTarget,
+			window,
 			node["object"].as<IScalable*>(),
 			convDef(node["animation-manager"], AnimationManager{}),
 			convDef(node["interaction-stack"], new InteractionStack{})

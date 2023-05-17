@@ -3,6 +3,8 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 
 namespace ui {
+	class Window;
+	
 	class DrawManager;
 	
 	class UpdateManager;
@@ -14,6 +16,7 @@ namespace ui {
 	class IPanelManager;
 	
 	struct InitInfo {
+		Window& window;
 		sf::RenderTarget& renderTarget;
 		DrawManager& drawManager;
 		UpdateManager& updateManager;
@@ -21,7 +24,9 @@ namespace ui {
 		InteractionStack& interactionStack;
 		IPanelManager& panelManager;
 		
-		InitInfo(sf::RenderTarget& renderTarget_, DrawManager& drawManager_, UpdateManager& updateManager_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_);
+		InitInfo(Window& window_, sf::RenderTarget& renderTarget_, DrawManager& drawManager_, UpdateManager& updateManager_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_);
+		
+		InitInfo copy(Window& window_) const;
 		
 		InitInfo copy(sf::RenderTarget& renderTarget_) const;
 		

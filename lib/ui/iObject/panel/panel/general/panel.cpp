@@ -13,7 +13,7 @@ namespace ui {
 	
 	void Panel::init(InitInfo initInfo) {
 		BasePanel::init(initInfo);
-		InitInfo newInitInfo{initInfo.renderTarget, this->drawManager, this->updateManager, initInfo.interactionManager, initInfo.interactionStack, this->panelManager};
+		InitInfo newInitInfo{initInfo.window, initInfo.renderTarget, this->drawManager, this->updateManager, initInfo.interactionManager, initInfo.interactionStack, this->panelManager};
 		object->init(newInitInfo);
 		hideInteraction->init(*this, initInfo.panelManager);
 		moveInteraction->init(*this, initInfo.panelManager);
