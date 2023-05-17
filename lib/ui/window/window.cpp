@@ -85,6 +85,7 @@ namespace ui {
 	}
 	
 	void Window::update() {
+		KeyHandler::updateMouse();
 		sf::Vector2i mousePosition{sf::Mouse::getPosition(*this)};
 		
 		bool resizerUpdated =  resizer->update(mousePosition);
@@ -94,6 +95,8 @@ namespace ui {
 		interface.draw();
 		//interface.drawDebug(window, 0, 2, 90, 90);
 		display();
+		
+		KeyHandler::clearGlobalKeys();
 	}
 	
 	Interface& Window::getInterface() {

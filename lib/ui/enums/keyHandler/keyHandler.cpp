@@ -4,6 +4,7 @@
 
 namespace ui {
 	std::vector<Key> KeyHandler::keysPressed{};
+	std::vector<Key> KeyHandler::globalKeysPressed{};
 	
 	std::vector<Key> KeyHandler::getKeysPressed() {
 		return keysPressed;
@@ -13,8 +14,34 @@ namespace ui {
 		KeyHandler::keysPressed = keysPressed;
 	}
 	
+	void KeyHandler::update() {
+		updateKeyBoard();
+		updateMouse();
+	}
+	
+	void KeyHandler::updateKeyBoard() {
+		for(int i = 0; i < static_cast<int>(Key::mouseLeft); ++i) {
+			if(
+				sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(i)) &&
+				std::find(keysPressed.begin(), keysPressed.end(), static_cast<Key>(i)) == keysPressed.end()
+				) {
+				globalKeysPressed.push_back(static_cast<Key>(i));
+			}
+		}
+	}
+	
+	void KeyHandler::updateMouse() {
+		for(int i = static_cast<int>(Key::mouseLeft); i < static_cast<int>(Key::mouseWheelUp); ++i) {
+			if(
+				sf::Mouse::isButtonPressed(static_cast<sf::Mouse::Button>(i - static_cast<int>(Key::mouseLeft))) &&
+				std::find(keysPressed.begin(), keysPressed.end(), static_cast<Key>(i)) == keysPressed.end()
+				) {
+				globalKeysPressed.push_back(static_cast<Key>(i));
+			}
+		}
+	}
+	
 	void KeyHandler::addKey(Key key) {
-		
 		if(std::find(keysPressed.begin(), keysPressed.end(), key) == keysPressed.end()) {
 			keysPressed.push_back(key);
 		}
@@ -29,6 +56,10 @@ namespace ui {
 	
 	void KeyHandler::clear() {
 		keysPressed.clear();
+	}
+	
+	void KeyHandler::clearGlobalKeys() {
+		globalKeysPressed.clear();
 	}
 	
 	std::string KeyHandler::toString(Key key) {
@@ -258,9 +289,12 @@ namespace ui {
 	}
 	
 	bool KeyHandler::isKeyPressed(Key key) {
-		
-		if(std::find(keysPressed.begin(), keysPressed.end(), key) != keysPressed.end()) {
+		if(
+			std::find(keysPressed.begin(), keysPressed.end(), key) != keysPressed.end() ||
+			std::find(globalKeysPressed.begin(), globalKeysPressed.end(), key) != globalKeysPressed.end()
+		) {
 			return true;
+			
 		} else if(key <= Key::mouseWheelRight) {
 			sf::Vector2f delta = MouseWheel::getDelta();
 			switch(key) {
@@ -277,7 +311,6 @@ namespace ui {
 		
 		return false;
 	}
-	
 	
 	bool Decode<Key>::decode(const YAML::Node& node, Key& key) {
 		std::string str = node.as<std::string>();

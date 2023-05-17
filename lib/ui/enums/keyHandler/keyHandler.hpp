@@ -127,17 +127,26 @@ namespace ui {
 	class KeyHandler {
 	protected:
 		static std::vector<Key> keysPressed;
+		static std::vector<Key> globalKeysPressed;
 	
 	public:
 		static std::vector<Key> getKeysPressed();
 		
 		static void setKeysPressed(std::vector<Key> keysPressed);
 		
+		static void update();
+		
+		static void updateKeyBoard();
+		
+		static void updateMouse();
+		
 		static void addKey(Key key);
 		
 		static void deleteKey(Key key);
 		
 		static void clear();
+		
+		static void clearGlobalKeys();
 		
 		static std::string toString(Key key);
 		
