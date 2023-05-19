@@ -1,8 +1,6 @@
-
-#include <cmath>
-
 #include "text.hpp"
 
+#include <cmath>
 #include "../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
@@ -45,7 +43,7 @@ namespace ui {
 			textBlock->init(initInfo, interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
 		}
 		
-		textInteraction->init(this, *interactionManager);
+		textInteraction->init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack), *this});
 	}
 	
 	void Text::setSelection(Text::Selection selection) {

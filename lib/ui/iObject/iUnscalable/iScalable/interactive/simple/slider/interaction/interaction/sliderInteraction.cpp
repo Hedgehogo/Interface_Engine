@@ -15,9 +15,9 @@ namespace ui {
 		wheelEvent(slider, wheelHorizontal, SliderWheelEvent::Relativity::relationArea, {1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}) {
 	}
 	
-	void SliderInteraction::init(InteractionManager& interactionManager) {
-		slideInteraction.init(interactionManager);
-		dynamic_cast<AddBlockInteractionEvent*>(event)->init(interactionManager);
+	void SliderInteraction::init(InteractionInitInfo interactionInitInfo) {
+		slideInteraction.init(InteractionInitInfo{interactionInitInfo});
+		dynamic_cast<AddBlockInteractionEvent*>(event)->init(interactionInitInfo.interactionManager);
 	}
 	
 	void SliderInteraction::setSlider(BaseSlider& slider) {

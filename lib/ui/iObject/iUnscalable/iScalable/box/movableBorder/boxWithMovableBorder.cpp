@@ -22,7 +22,7 @@ namespace ui {
 	
 	void BoxWithMovableBorder::init(InteractiveInitInfo interactiveInitInfo) {
 		Interactive_Simple::init(interactiveInitInfo);
-		pressedInteraction.init(*interactionManager);
+		pressedInteraction.init(InteractionInitInfo{interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
 		dynamic_cast<AddBlockInteractionEvent*>(dynamic_cast<OneKeyInteraction*>(Interactive_Simple::interaction)->getEvent())->init(*interactionManager);
 	}
 	

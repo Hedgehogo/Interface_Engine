@@ -14,7 +14,7 @@ namespace ui {
 	public:
 		PressedInteraction(KeyEvent* event, Key key);
 		
-		void init(InteractionManager& interactionManager);
+		void init(InteractionInitInfo interactionInitInfo);
 		
 		void update(sf::Vector2i mousePosition) override;
 		

@@ -19,10 +19,10 @@ namespace ui {
 		nowHotkeys = &this->hotkeyStates[state];
 	}
 	
-	void HotkeyInteraction::init(InteractionManager& interactionManager) {
+	void HotkeyInteraction::init(InteractionInitInfo interactionInitInfo) {
 		for(const auto& hotkeyState: hotkeyStates) {
 			for(auto& hotkey: hotkeyState) {
-				hotkey->interaction->init(interactionManager);
+				hotkey->interaction->init(interactionInitInfo);
 			}
 		}
 	}

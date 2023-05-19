@@ -1,7 +1,7 @@
 #include <codecvt>
 #include "textCopyEvent.hpp"
-#include "../../text.hpp"
-#include "../../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "ui/iObject/iUnscalable/interactive/text/text.hpp"
+#include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
 	

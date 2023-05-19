@@ -10,7 +10,7 @@ namespace ui {
 	public:
 		ClickPanelInteraction(PanelEvent* event, Key key);
 		
-		void init(Panel& panel, IPanelManager& panelManager) override;
+		void init(PanelInteractionInitInfo panelInteractionInitInfo) override;
 		
 		void setPanel(Panel& panel) override;
 		

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../hotKeys/textHotkeyInteraction.hpp"
-#include "../../event/addBlockInteraction/textAddBlockInteractionEvent.hpp"
+#include "ui/iObject/iUnscalable/interactive/text/interaction/interaction/hotKeys/textHotkeyInteraction.hpp"
+#include "ui/iObject/iUnscalable/interactive/text/interaction/event/addBlockInteraction/textAddBlockInteractionEvent.hpp"
 #include <vector>
 
 namespace ui {
@@ -19,7 +19,7 @@ namespace ui {
 	public:
 		TextSelectionAndCopyInteraction(std::vector<AddInteraction> addInteraction, std::vector<TextKeysInteraction*> selectionInteraction = {});
 		
-		void init(Text* text, InteractionManager& interactionManager) override;
+		void init(TextInteractionInitInfo textInteractionInitInfo) override;
 		
 		TextSelectionAndCopyInteraction* copy() override;
 		

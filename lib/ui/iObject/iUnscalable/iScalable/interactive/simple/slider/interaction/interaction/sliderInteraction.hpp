@@ -18,7 +18,7 @@ namespace ui {
 		
 		SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division = {10, 10}, bool wheelHorizontal = false);
 		
-		void init(InteractionManager& interactionManager);
+		void init(InteractionInitInfo interactionInitInfo);
 		
 		void setSlider(BaseSlider& slider);
 		

@@ -5,9 +5,9 @@ namespace ui {
 	PanelInteraction::PanelInteraction() : panel(nullptr), panelManager(nullptr) {
 	}
 	
-	void PanelInteraction::init(Panel& panel, IPanelManager& panelManager) {
-		this->panel = &panel;
-		this->panelManager = &panelManager;
+	void PanelInteraction::init(PanelInteractionInitInfo panelInteractionInitInfo) {
+		this->panel = &panelInteractionInitInfo.panel;
+		this->panelManager = &panelInteractionInitInfo.panelManager;
 	}
 	
 	void PanelInteraction::setPanel(Panel& panel) {

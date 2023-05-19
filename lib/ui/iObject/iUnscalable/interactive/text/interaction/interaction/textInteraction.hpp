@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../../../../../interaction/iInteraction/iInteraction.hpp"
+#include "ui/interaction/iInteraction/iInteraction.hpp"
+#include "../initInfo/textInteractionInitInfo.hpp"
 
 namespace ui {
 	class Text;
@@ -11,7 +12,7 @@ namespace ui {
 		
 		Text* text;
 	public:
-		virtual void init(Text* text, InteractionManager& interactionManager);
+		virtual void init(TextInteractionInitInfo textInteractionInitInfo);
 		
 		virtual void setText(Text* text);
 		

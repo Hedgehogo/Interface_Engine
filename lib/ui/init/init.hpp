@@ -38,7 +38,7 @@
 #include "../iObject/iUnscalable/interactive/text/textBlock/object/objectTextBlock.hpp"
 #include "../iObject/iUnscalable/interactive/text/line/underline/underline.hpp"
 #include "../iObject/iUnscalable/interactive/text/line/strikeThrough/strikeThrough.hpp"
-#include "../iObject/iUnscalable/interactive/text/interaction/hotKeys/textHotkeyInteraction.hpp"
+#include "../iObject/iUnscalable/interactive/text/interaction/interaction/hotKeys/textHotkeyInteraction.hpp"
 #include "../iObject/iUnscalable/iScalable/interface/interface.hpp"
 #include "../iObject/iUnscalable/iScalable/box/changeableObjects/event/changeObjects/changeObjectEvent.hpp"
 #include "../iObject/iUnscalable/iScalable/box/changeableObjects/event/whileChangingObjects/whileChangingObjectsEvent.hpp"

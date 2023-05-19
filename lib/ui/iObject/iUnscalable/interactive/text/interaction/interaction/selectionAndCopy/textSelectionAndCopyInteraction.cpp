@@ -60,15 +60,15 @@ namespace ui {
 		
 	}
 	
-	void TextSelectionAndCopyInteraction::init(Text* text, InteractionManager& interactionManager) {
-		TextHotkeyInteraction::init(text, interactionManager);
+	void TextSelectionAndCopyInteraction::init(TextInteractionInitInfo textInteractionInitInfo) {
+		TextHotkeyInteraction::init(textInteractionInitInfo);
 		
 		for(auto& item: addEvents) {
-			item->init(text, interactionManager);
+			item->init(text, textInteractionInitInfo.interactionManager);
 		}
 		
 		for(const auto& pressedInteraction: pressedInteractions) {
-			pressedInteraction->init(text, interactionManager);
+			pressedInteraction->init(textInteractionInitInfo);
 		}
 	}
 	

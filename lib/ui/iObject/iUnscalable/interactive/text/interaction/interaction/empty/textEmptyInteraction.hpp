@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../../../../../interaction/iInteraction/empty/emptyInteraction.hpp"
-#include "../textInteraction.hpp"
-#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "ui/interaction/iInteraction/empty/emptyInteraction.hpp"
+#include "ui/iObject/iUnscalable/interactive/text/interaction/interaction/textInteraction.hpp"
+#include "modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
 	

@@ -13,7 +13,7 @@ namespace ui {
 	public:
 		PanelInteraction();
 		
-		void init(Panel& panel, IPanelManager& panelManager) override;
+		void init(PanelInteractionInitInfo panelInteractionInitInfo) override;
 		
 		void setPanel(Panel& panel) override;
 		

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../../../interaction/iInteraction/iInteraction.hpp"
+#include "initInfo/panelInteractionInitInfo.hpp"
 
 namespace ui {
 	class Panel;
@@ -11,7 +12,7 @@ namespace ui {
 	public:
 		BasePanelInteraction() = default;
 		
-		virtual void init(Panel& panel, IPanelManager& panelManager) = 0;
+		virtual void init(PanelInteractionInitInfo panelInteractionInitInfo) = 0;
 		
 		virtual void setPanel(Panel& panel) = 0;
 		

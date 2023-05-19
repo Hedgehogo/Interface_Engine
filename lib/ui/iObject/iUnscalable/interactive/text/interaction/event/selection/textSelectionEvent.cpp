@@ -1,6 +1,6 @@
 #include "textSelectionEvent.hpp"
 
-#include "../../text.hpp"
+#include "ui/iObject/iUnscalable/interactive/text/text.hpp"
 
 #include <cmath>
 

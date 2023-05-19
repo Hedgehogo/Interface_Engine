@@ -2,6 +2,7 @@
 
 #include "../event/key/empty/emptyEvent.hpp"
 #include "../event/key/lambdaSimple/keyEvent_LambdaSimple.hpp"
+#include "../initInfo/interactionInitInfo.hpp"
 
 namespace ui {
 	class InteractionManager;
@@ -17,7 +18,7 @@ namespace ui {
 	public:
 		virtual ~IInteraction() = default;
 		
-		virtual void init(InteractionManager& interactionManager);
+		virtual void init(InteractionInitInfo interactionInitInfo);
 		
 		virtual bool isBlocked() const;
 		

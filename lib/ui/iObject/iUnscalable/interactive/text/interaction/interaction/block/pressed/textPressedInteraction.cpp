@@ -1,13 +1,13 @@
 #include "textPressedInteraction.hpp"
-#include "../../../../../../../interaction/interactionManager/interactionManager.hpp"
-#include "../../../event/textEvent.hpp"
+#include "ui/interaction/interactionManager/interactionManager.hpp"
+#include "ui/iObject/iUnscalable/interactive/text/interaction/event/textEvent.hpp"
 
 namespace ui {
 	TextPressedInteraction::TextPressedInteraction(KeyEvent* event, const std::vector<Key> keys, const std::vector<Key> blackListKeys) : TextKeysInteraction(event, keys, blackListKeys) {
 	}
 	
-	void TextPressedInteraction::init(Text* text, InteractionManager& interactionManager) {
-		this->interactionManager = &interactionManager;
+	void TextPressedInteraction::init(TextInteractionInitInfo textInteractionInitInfo) {
+		this->interactionManager = &textInteractionInitInfo.interactionManager;
 		this->text = text;
 		dynamic_cast<TextEvent*>(event)->init(text);
 	}

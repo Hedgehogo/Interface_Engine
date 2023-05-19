@@ -5,8 +5,8 @@ namespace ui {
 	PressedInteraction::PressedInteraction(KeyEvent* event, Key key) : OneKeyInteraction(event, key), interactionManager(nullptr) {
 	}
 	
-	void PressedInteraction::init(InteractionManager& interactionManager) {
-		this->interactionManager = &interactionManager;
+	void PressedInteraction::init(InteractionInitInfo interactionInitInfo) {
+		this->interactionManager = &interactionInitInfo.interactionManager;
 	}
 	
 	void PressedInteraction::update(sf::Vector2i mousePosition) {

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../textEvent.hpp"
-#include "../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
-#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "ui/iObject/iUnscalable/interactive/text/interaction/event/textEvent.hpp"
+#include "ui/interaction/event/key/simple/keyEventSimple.hpp"
+#include "modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
 	

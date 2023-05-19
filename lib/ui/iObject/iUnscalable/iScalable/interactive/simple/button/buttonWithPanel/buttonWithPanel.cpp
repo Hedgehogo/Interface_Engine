@@ -8,7 +8,7 @@ namespace ui {
 	void ButtonWithPanel::init(InteractiveInitInfo interactiveInitInfo) {
 		BaseButton::init(interactiveInitInfo);
 		panel->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
-		dynamic_cast<DisplayPanelInteraction*>(interaction)->init(*panel, interactiveInitInfo.panelManager);
+		dynamic_cast<DisplayPanelInteraction*>(interaction)->init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack), *panel});
 	}
 	
 	ButtonWithPanel::~ButtonWithPanel() {

@@ -6,7 +6,7 @@ namespace ui {
 		Interactive_Simple::init(interactiveInitInfo);
 		background->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
 		slider->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
-		dynamic_cast<SliderInteraction*>(interaction)->init(*interactionManager);
+		dynamic_cast<SliderInteraction*>(interaction)->init(InteractionInitInfo{interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
 	}
 	
 	BaseSlider::BaseSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, SliderInteraction* interaction) :

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../../../interaction/event/key/keyEvent.hpp"
+#include "ui/interaction/event/key/keyEvent.hpp"
 
 namespace ui {
 	class Text;

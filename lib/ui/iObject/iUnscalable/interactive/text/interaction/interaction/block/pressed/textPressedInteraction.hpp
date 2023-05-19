@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../keys/textKeysInteraction.hpp"
+#include "ui/iObject/iUnscalable/interactive/text/interaction/interaction/keys/textKeysInteraction.hpp"
 
 namespace ui {
 	class TextPressedInteraction : public TextKeysInteraction {
@@ -9,7 +9,7 @@ namespace ui {
 	public:
 		TextPressedInteraction(KeyEvent* event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 		
-		void init(Text* text, InteractionManager& interactionManager) override;
+		void init(TextInteractionInitInfo textInteractionInitInfo) override;
 		
 		bool isBlocked() const override;
 		

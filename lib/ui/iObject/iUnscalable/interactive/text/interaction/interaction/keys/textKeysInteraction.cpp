@@ -1,14 +1,14 @@
 #include "textKeysInteraction.hpp"
-#include "../../text.hpp"
-#include "../../../../../../interaction/event/key/openUrl/openUrlEvent.hpp"
+#include "ui/iObject/iUnscalable/interactive/text/text.hpp"
+#include "ui/interaction/event/key/openUrl/openUrlEvent.hpp"
 
 namespace ui {
 	TextKeysInteraction::TextKeysInteraction(KeyEvent* event, std::vector<Key> keys, std::vector<Key> blackListKeys) :
 		KeysInteraction(event, keys, blackListKeys) {
 	}
 	
-	void TextKeysInteraction::init(Text* text, InteractionManager& interactionManager) {
-		TextInteraction::init(text, interactionManager);
+	void TextKeysInteraction::init(TextInteractionInitInfo textInteractionInitInfo) {
+		TextInteraction::init(textInteractionInitInfo);
 		dynamic_cast<TextEvent*>(event)->init(text);
 	}
 	

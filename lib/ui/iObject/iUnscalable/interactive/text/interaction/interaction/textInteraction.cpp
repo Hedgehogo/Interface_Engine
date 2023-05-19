@@ -4,8 +4,8 @@ namespace ui {
 	TextInteraction::TextInteraction() : text(nullptr) {
 	}
 	
-	void TextInteraction::init(Text* text, InteractionManager& interactionManager) {
-		this->text = text;
+	void TextInteraction::init(TextInteractionInitInfo textInteractionInitInfo) {
+		this->text = &textInteractionInitInfo.text;
 	}
 	
 	Text* TextInteraction::getText() {

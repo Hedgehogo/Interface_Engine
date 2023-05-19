@@ -14,7 +14,7 @@ namespace ui {
 	void DontMovePanelInteraction::update(sf::Vector2i mousePosition) {
 	}
 	
-	void DontMovePanelInteraction::init(Panel& panel, IPanelManager& panelManager) {
+	void DontMovePanelInteraction::init(PanelInteractionInitInfo panelInteractionInitInfo) {
 	}
 	
 	void DontMovePanelInteraction::setPanel(Panel& panel) {
