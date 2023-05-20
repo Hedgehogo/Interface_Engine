@@ -116,7 +116,13 @@ object:
       - yellow
       - magenta
       - type: BWCC
-        const-object: red
+        const-object:
+          type: Button
+          background: red
+          interaction:
+            type: OKI
+            event:
+              type: CWE
         background: cyan
         const-size: 100, 100
       - type: BWBV

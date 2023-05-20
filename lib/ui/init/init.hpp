@@ -52,6 +52,7 @@
 #include "../interaction/iInteraction/empty/emptyInteraction.hpp"
 #include "../interaction/iInteraction/mouse/lambda/mouseLambdaInteraction.hpp"
 #include "../interaction/event/key/openUrl/openUrlEvent.hpp"
+#include "ui/interaction/event/key/closeWindow/closeWindowEvent.hpp"
 #include "../iObject/iUnscalable/iScalable/interactive/simple/switch/event/switcherEvent.hpp"
 #include "modules/appendix/yaml-cpp/shared/value/event/set/setSValueEvent.hpp"
 #include "../../modules/appendix/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"

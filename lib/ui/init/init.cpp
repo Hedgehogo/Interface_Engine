@@ -80,6 +80,7 @@ namespace ui {
 		inherit<KeyEvent, ChangeObjectEvent>({"COE", "ChangeObjectE"});
 		inherit<KeyEvent, WhileChangingObjectsEvent>({"WhileChangingOE", "WCO"});
 		inherit<KeyEvent, OpenUrlEvent>({"UrlE", "Url", "OUE"});
+		inherit<KeyEvent, CloseWindowEvent>({"CloseWindowE", "CWE"});
 		inherit<KeyEvent, SwitcherEvent>({"SwitcherEvent", "Switcher", "SE"});
 		inherit<KeyEvent, SetSintEvent>({"SSintE", "SSiE"});
 		inherit<KeyEvent, SetSfloatEvent>({"SSfloatE", "SSfE"});
