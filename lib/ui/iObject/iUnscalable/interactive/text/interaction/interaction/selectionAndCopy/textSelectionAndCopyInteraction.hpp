@@ -21,6 +21,11 @@ namespace ui {
 		
 		void init(TextInteractionInitInfo textInteractionInitInfo) override;
 		
+	protected:
+		TextSelectionAndCopyInteraction(const std::vector<std::vector<Hotkey*>>& hotkeys, uint startState, const std::vector<ui::TextAddBlockInteractionEvent*>& addEvents, const std::vector<ui::TextInteraction*>& pressedInteractions);
+	
+	public:
+		
 		TextSelectionAndCopyInteraction* copy() override;
 		
 		~TextSelectionAndCopyInteraction();

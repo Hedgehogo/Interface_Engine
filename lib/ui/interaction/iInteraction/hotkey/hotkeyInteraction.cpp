@@ -1,7 +1,7 @@
 #include "hotkeyInteraction.hpp"
 
 namespace ui {
-	HotkeyInteraction::Hotkey::Hotkey(KeysInteraction* interaction, int state) : interaction(interaction), state(state) {
+	HotkeyInteraction::Hotkey::Hotkey(KeysInteraction* interaction, uint state) : interaction(interaction), state(state) {
 	}
 	
 	HotkeyInteraction::Hotkey::Hotkey(uint state) : state(state), interaction(nullptr) {

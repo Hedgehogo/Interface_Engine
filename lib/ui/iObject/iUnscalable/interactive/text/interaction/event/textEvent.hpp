@@ -9,6 +9,9 @@ namespace ui {
 	class TextEvent : public virtual KeyEvent {
 	protected:
 		Text* text = nullptr;
+		
+		void copy(TextEvent* textEvent);
+		
 	public:
 		virtual void init(TextInteractionInitInfo textInteractionInitInfo);
 		

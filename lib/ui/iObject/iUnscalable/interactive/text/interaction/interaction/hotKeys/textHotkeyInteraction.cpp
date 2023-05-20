@@ -14,7 +14,9 @@ namespace ui {
 	}
 	
 	TextHotkeyInteraction* TextHotkeyInteraction::copy() {
-		return new TextHotkeyInteraction{hotkeyStates, static_cast<uint>(std::distance(hotkeyStates.begin(), std::vector<std::vector<Hotkey*>>::iterator(nowHotkeys)))};
+		auto hotkeyInteraction = new TextHotkeyInteraction{hotkeyStates, static_cast<uint>(std::distance(hotkeyStates.begin(), std::vector<std::vector<Hotkey*>>::iterator(nowHotkeys)))};
+		TextInteraction::copy(hotkeyInteraction);
+		return hotkeyInteraction;
 	}
 	
 	

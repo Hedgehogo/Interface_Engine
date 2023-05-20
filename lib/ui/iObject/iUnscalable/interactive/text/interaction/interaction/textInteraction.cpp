@@ -15,4 +15,8 @@ namespace ui {
 	void TextInteraction::setText(Text* text) {
 		this->text = text;
 	}
+	
+	void TextInteraction::copy(TextInteraction* textInteraction) {
+		textInteraction->text = text;
+	}
 }

@@ -19,7 +19,7 @@ namespace ui {
 	
 	template<typename T>
 	SetSValueEvent<T>* SetSValueEvent<T>::copy() {
-		return nullptr;
+		return new SetSValueEvent<T>{value, variable};
 	}
 	
 	template<typename T>

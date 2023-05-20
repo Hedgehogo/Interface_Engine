@@ -14,7 +14,7 @@ namespace ui {
 		int countFrame;
 	
 	public:
-		VideoFromTexture(sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect = {0, 0, 0, 0}, int countFrame = 0, sf::Vector2i offset = {0, 0});
+		VideoFromTexture(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect = {0, 0, 0, 0}, int countFrame = 0, sf::Vector2i offset = {0, 0});
 		
 		void setCurrentFrame(float viewingProgress);
 		

@@ -1,7 +1,7 @@
 #include "videoFromTexture.hpp"
 
 namespace ui {
-	VideoFromTexture::VideoFromTexture(sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect, int countFrame, sf::Vector2i offset) :
+	VideoFromTexture::VideoFromTexture(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect, int countFrame, sf::Vector2i offset) :
 		viewingProgress(viewingProgress), rect(rect), countFrame(countFrame), offset(offset), textureSize(texture.getSize()) {
 		viewingProgress->addSetter([=](float viewingProgress) {
 			setCurrentFrame(viewingProgress);
@@ -53,6 +53,6 @@ namespace ui {
 	}
 	
 	VideoFromTexture* VideoFromTexture::copy() {
-		return nullptr;
+		return new VideoFromTexture{*sprite.getTexture(), viewingProgress, rect, countFrame, offset};
 	}
 }

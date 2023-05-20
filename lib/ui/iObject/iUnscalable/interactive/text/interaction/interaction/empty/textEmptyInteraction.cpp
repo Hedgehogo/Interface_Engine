@@ -2,7 +2,9 @@
 
 namespace ui {
 	TextEmptyInteraction* TextEmptyInteraction::copy() {
-		return new TextEmptyInteraction{};
+		auto textEmptyInteraction = new TextEmptyInteraction{};
+		TextInteraction::copy(textEmptyInteraction);
+		return textEmptyInteraction;
 	}
 	
 	

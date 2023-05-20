@@ -44,7 +44,9 @@ namespace ui {
 	}
 	
 	BoxScroll* BoxScroll::copy() {
-		return new BoxScroll{object->copy(), normalObjectPosition, minimumSize};
+		auto boxScroll = new BoxScroll{object->copy(), normalObjectPosition, minimumSize};
+		IBoxWithView::copy(boxScroll);
+		return boxScroll;
 	}
 	
 	BoxScroll::~BoxScroll() {

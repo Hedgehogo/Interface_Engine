@@ -9,6 +9,8 @@ namespace ui {
 		sf::RenderTarget* renderTarget;
 		DrawManager drawManager;
 		sf::View view;
+		
+		void copy(IBoxWithView* iBoxWithView);
 	
 	public:
 		IBoxWithView(sf::Vector2f minSize);
@@ -19,6 +21,6 @@ namespace ui {
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		IBoxWithView* copy() override;
+		IBoxWithView* copy() override = 0;
 	};
 }

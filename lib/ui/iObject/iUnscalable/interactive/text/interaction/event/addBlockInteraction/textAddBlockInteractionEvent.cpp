@@ -15,6 +15,9 @@ namespace ui {
 	}
 	
 	TextAddBlockInteractionEvent* TextAddBlockInteractionEvent::copy() {
+		auto textAddBlockInteractionEvent{new TextAddBlockInteractionEvent{*dynamic_cast<TextInteraction*>(interaction->copy())}};
+		AddInteractionEvent::copy(textAddBlockInteractionEvent);
+		TextEvent::copy(textAddBlockInteractionEvent);
 		return nullptr;
 	}
 	

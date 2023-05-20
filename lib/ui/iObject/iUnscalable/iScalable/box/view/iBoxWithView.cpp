@@ -31,7 +31,9 @@ namespace ui {
 						 });
 	}
 	
-	IBoxWithView* IBoxWithView::copy() {
-		return nullptr;
+	void IBoxWithView::copy(IBoxWithView* iBoxWithView) {
+		iBoxWithView->renderTarget = renderTarget;
+		iBoxWithView->drawManager = drawManager;
+		iBoxWithView->view = view;
 	}
 }

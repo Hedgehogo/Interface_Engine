@@ -1,4 +1,5 @@
 #include "textSelectionAndCopyInteraction.hpp"
+#include "ui/iObject/iObject.hpp"
 
 namespace ui {
 
@@ -72,8 +73,27 @@ namespace ui {
 		}
 	}
 	
+	TextSelectionAndCopyInteraction::TextSelectionAndCopyInteraction(const std::vector<std::vector<Hotkey*>>& hotkeys, uint startState, const std::vector<ui::TextAddBlockInteractionEvent*>& addEvents,
+																	 const std::vector<ui::TextInteraction*>& pressedInteractions) : TextHotkeyInteraction(hotkeys, startState), addEvents(addEvents), pressedInteractions(pressedInteractions) {
+	}
+	
 	TextSelectionAndCopyInteraction* TextSelectionAndCopyInteraction::copy() {
-		return nullptr;
+		std::vector<std::vector<Hotkey*>> hotkeysCopy(hotkeyStates.size());
+		for(int i = 0; i < hotkeysCopy.size(); ++i) {
+			hotkeysCopy[i].resize( hotkeyStates[i].size());
+			for(int j = 0; j < hotkeysCopy[i].size(); ++j) {
+				hotkeysCopy[i][j] = new Hotkey{hotkeyStates[i][j]->interaction->copy(), hotkeyStates[i][j]->state};
+			}
+		}
+		
+		uint startState = 0;
+		for(int i = 0; i < hotkeyStates.size(); ++i) {
+			if (&hotkeyStates[i] == nowHotkeys) startState = i;
+		}
+
+		auto textSelectionAndCopyInteraction{new TextSelectionAndCopyInteraction{hotkeysCopy, startState, ui::copy(addEvents), ui::copy(pressedInteractions)}};
+		TextInteraction::copy(textSelectionAndCopyInteraction);
+		return textSelectionAndCopyInteraction;
 	}
 	
 	TextSelectionAndCopyInteraction::~TextSelectionAndCopyInteraction() {

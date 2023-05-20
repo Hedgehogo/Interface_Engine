@@ -11,7 +11,7 @@ namespace ui {
 			uint state{UINT32_MAX};
 			KeysInteraction* interaction{nullptr};
 			
-			Hotkey(KeysInteraction* interaction, int state = UINT32_MAX);
+			Hotkey(KeysInteraction* interaction, uint state = UINT32_MAX);
 			
 			Hotkey(uint state);
 			

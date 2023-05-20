@@ -11,6 +11,9 @@ namespace ui {
 		TextInteraction();
 		
 		Text* text;
+		
+		void copy(TextInteraction* textInteraction);
+		
 	public:
 		virtual void init(TextInteractionInitInfo textInteractionInitInfo);
 		
