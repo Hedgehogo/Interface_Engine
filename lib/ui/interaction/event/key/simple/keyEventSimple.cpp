@@ -25,4 +25,8 @@ namespace ui {
 			whileNotPressed();
 		}
 	}
+	
+	void KeyEvent_Simple::init(InteractionInitInfo interactionInitInfo) {
+		KeyEvent::init(interactionInitInfo);
+	}
 }

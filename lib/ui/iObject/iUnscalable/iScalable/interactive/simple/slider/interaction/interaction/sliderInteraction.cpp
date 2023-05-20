@@ -17,7 +17,7 @@ namespace ui {
 	
 	void SliderInteraction::init(InteractionInitInfo interactionInitInfo) {
 		slideInteraction.init(InteractionInitInfo{interactionInitInfo});
-		dynamic_cast<AddBlockInteractionEvent*>(event)->init(interactionInitInfo.interactionManager);
+		event->init(interactionInitInfo);
 	}
 	
 	void SliderInteraction::setSlider(BaseSlider& slider) {

@@ -6,7 +6,7 @@ namespace ui {
 	}
 	
 	void ClickPanelInteraction::init(PanelInteractionInitInfo panelInteractionInitInfo) {
-		dynamic_cast<PanelEvent*>(event)->init(panelInteractionInitInfo.panel, panelInteractionInitInfo.panelManager);
+		dynamic_cast<PanelEvent*>(event)->init(panelInteractionInitInfo);
 	}
 	
 	void ClickPanelInteraction::setPanel(Panel& panel) {

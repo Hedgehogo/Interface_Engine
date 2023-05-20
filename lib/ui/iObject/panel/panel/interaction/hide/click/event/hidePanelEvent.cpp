@@ -22,7 +22,7 @@ namespace ui {
 	
 	HidePanelEvent* HidePanelEvent::copy() {
 		HidePanelEvent* hidePanelEvent{new HidePanelEvent()};
-		hidePanelEvent->init(*panel, *panelManager);
+		PanelEvent::copy(hidePanelEvent);
 		return hidePanelEvent;
 	}
 	

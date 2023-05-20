@@ -5,7 +5,7 @@ namespace ui {
 		return text;
 	}
 	
-	void TextEvent::init(Text* text) {
+	void TextEvent::init(TextInteractionInitInfo textInteractionInitInfo) {
 		TextEvent::text = text;
 	}
 	

@@ -4,9 +4,9 @@ namespace ui {
 	TextAddBlockInteractionEvent::TextAddBlockInteractionEvent(TextInteraction& interaction) : AddBlockInteractionEvent(interaction) {
 	}
 	
-	void TextAddBlockInteractionEvent::init(ui::Text* text, InteractionManager& interactionManager) {
-		TextEvent::init(text);
-		AddBlockInteractionEvent::init(interactionManager);
+	void TextAddBlockInteractionEvent::init(TextInteractionInitInfo textInteractionInitInfo) {
+		TextEvent::init(textInteractionInitInfo);
+		AddBlockInteractionEvent::init(textInteractionInitInfo.toGeneral());
 	}
 	
 	void TextAddBlockInteractionEvent::setText(ui::Text* text) {

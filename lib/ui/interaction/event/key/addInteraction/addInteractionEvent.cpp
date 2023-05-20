@@ -18,8 +18,8 @@ namespace ui {
 	AddInteractionEvent::AddInteractionEvent(IInteraction& interaction) : KeyEvent_Simple(), interactionManager(nullptr), interaction(&interaction) {
 	}
 	
-	void AddInteractionEvent::init(InteractionManager& interactionManager) {
-		this->interactionManager = &interactionManager;
+	void AddInteractionEvent::init(InteractionInitInfo interactionInitInfo) {
+		interactionManager = &interactionInitInfo.interactionManager;
 	}
 	
 	void AddInteractionEvent::setInteraction(IInteraction& interaction) {
@@ -32,7 +32,7 @@ namespace ui {
 	
 	AddInteractionEvent* AddInteractionEvent::copy() {
 		AddInteractionEvent* addInteractionEvent{new AddInteractionEvent{*interaction}};
-		addInteractionEvent->init(*this->interactionManager);
+		AddInteractionEvent::copy(this);
 		return addInteractionEvent;
 	}
 }

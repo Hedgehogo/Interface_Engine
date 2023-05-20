@@ -15,6 +15,8 @@ namespace ui {
 		
 		~OneKeyInteraction() override;
 		
+		void init(InteractionInitInfo interactionInitInfo) override;
+		
 		Key getKey();
 		
 		KeyEvent* getEvent();

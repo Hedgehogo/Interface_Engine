@@ -2,6 +2,7 @@
 
 #include <SFML/System/Vector2.hpp>
 #include "../iEvent.hpp"
+#include "../../initInfo/interactionInitInfo.hpp"
 
 namespace ui {
 	class KeyEvent : public IEvent {
@@ -12,6 +13,8 @@ namespace ui {
 	
 	public:
 		explicit KeyEvent();
+		
+		virtual void init(InteractionInitInfo interactionInitInfo);
 		
 		virtual void setPressed(bool pressed);
 		

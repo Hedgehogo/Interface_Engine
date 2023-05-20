@@ -9,7 +9,7 @@ namespace ui {
 	
 	void TextKeysInteraction::init(TextInteractionInitInfo textInteractionInitInfo) {
 		TextInteraction::init(textInteractionInitInfo);
-		dynamic_cast<TextEvent*>(event)->init(text);
+		dynamic_cast<TextEvent*>(event)->init(textInteractionInitInfo);
 	}
 	
 	TextKeysInteraction* TextKeysInteraction::copy() {

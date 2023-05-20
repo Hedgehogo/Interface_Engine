@@ -10,7 +10,7 @@ namespace ui {
 	public:
 		explicit TextAddBlockInteractionEvent(TextInteraction& interaction);
 		
-		void init(ui::Text* text, InteractionManager& interactionManager);
+		void init(TextInteractionInitInfo textInteractionInitInfo) override;
 		
 		void setText(ui::Text* text) override;
 		

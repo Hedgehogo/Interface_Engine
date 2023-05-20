@@ -22,7 +22,7 @@ namespace ui {
 	public:
 		explicit AddInteractionEvent(IInteraction& interaction);
 		
-		void init(InteractionManager& interactionManager);
+		void init(InteractionInitInfo interactionInitInfo) override;
 		
 		void setInteraction(IInteraction& interaction);
 		

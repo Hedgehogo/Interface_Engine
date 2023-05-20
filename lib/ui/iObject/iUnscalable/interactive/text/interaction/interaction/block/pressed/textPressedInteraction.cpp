@@ -9,7 +9,7 @@ namespace ui {
 	void TextPressedInteraction::init(TextInteractionInitInfo textInteractionInitInfo) {
 		this->interactionManager = &textInteractionInitInfo.interactionManager;
 		this->text = text;
-		dynamic_cast<TextEvent*>(event)->init(text);
+		dynamic_cast<TextEvent*>(event)->init(textInteractionInitInfo);
 	}
 	
 	bool TextPressedInteraction::isBlocked() const {

@@ -6,6 +6,7 @@ namespace ui {
 	
 	void Interactive_Simple::init(InteractiveInitInfo interactiveInitInfo) {
 		interactiveInitInfo.updateManager.add(*this);
+		interaction->init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
 	}
 	
 	void Interactive_Simple::update() {

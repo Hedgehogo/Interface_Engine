@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ui/interaction/event/key/keyEvent.hpp"
+#include "../initInfo/textInteractionInitInfo.hpp"
 
 namespace ui {
 	class Text;
@@ -9,7 +10,7 @@ namespace ui {
 	protected:
 		Text* text = nullptr;
 	public:
-		virtual void init(Text* text);
+		virtual void init(TextInteractionInitInfo textInteractionInitInfo);
 		
 		virtual void setText(Text* text);
 		

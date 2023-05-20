@@ -17,7 +17,7 @@ namespace ui {
 	
 	DisplayPanelEvent* DisplayPanelEvent::copy() {
 		DisplayPanelEvent* displayPanelEvent{new DisplayPanelEvent{}};
-		displayPanelEvent->init(*panel, *panelManager);
+		PanelEvent::copy(displayPanelEvent);
 		return displayPanelEvent;
 	}
 	

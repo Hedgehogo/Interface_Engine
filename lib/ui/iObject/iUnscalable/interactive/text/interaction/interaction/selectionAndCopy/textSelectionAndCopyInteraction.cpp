@@ -64,7 +64,7 @@ namespace ui {
 		TextHotkeyInteraction::init(textInteractionInitInfo);
 		
 		for(auto& item: addEvents) {
-			item->init(text, textInteractionInitInfo.interactionManager);
+			item->init(textInteractionInitInfo);
 		}
 		
 		for(const auto& pressedInteraction: pressedInteractions) {

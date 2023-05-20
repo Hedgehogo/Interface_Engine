@@ -36,6 +36,9 @@ namespace ui {
 		return new OneKeyInteraction{event->copy(), key};
 	}
 	
+	void OneKeyInteraction::init(InteractionInitInfo interactionInitInfo) {
+		event->init(interactionInitInfo);
+	}
 	
 	bool DecodePointer<OneKeyInteraction>::decodePointer(const YAML::Node& node, OneKeyInteraction*& oneKeyInteraction) {
 		KeyEvent* event;

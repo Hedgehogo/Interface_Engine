@@ -18,6 +18,8 @@ namespace ui {
 	public:
 		KeyEvent_Simple();
 		
+		void init(InteractionInitInfo interactionInitInfo) override;
+		
 		void setPressed(bool pressed) override;
 		
 		void update(sf::Vector2i mousePosition, bool press) override;

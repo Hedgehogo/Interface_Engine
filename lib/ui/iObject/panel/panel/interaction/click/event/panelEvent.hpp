@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
+#include "../../initInfo/panelInteractionInitInfo.hpp"
 
 namespace ui {
 	class Panel;
@@ -17,7 +18,7 @@ namespace ui {
 	public:
 		PanelEvent();
 		
-		virtual void init(Panel& panel, IPanelManager& panelManager);
+		virtual void init(PanelInteractionInitInfo panelInteractionInitInfo);
 		
 		void setPanel(Panel& panel);
 		
