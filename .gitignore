@@ -1,12 +1,8 @@
 layers.md
 .idea
-/cmake-build-debug/
-/cmake-build-release/
-/cmake-build-debug-msvc/
-/cmake-build-release-msvc/
+cmake-build*
 *.swp
 *.so
 *.dll
 Doxyfile
 doxygen
-include

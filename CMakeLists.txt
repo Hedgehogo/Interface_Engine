@@ -4,22 +4,10 @@ project(Interface_Engine CXX)
 set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
-
 set(BUILD_SHARED_LIBS on)
 
 file(GLOB_RECURSE src "lib/*.cpp")
 file(GLOB_RECURSE headers "lib/*.hpp")
-
-if (${CMAKE_BUILD_TYPE} STREQUAL Release)
-    file(COPY "${CMAKE_CURRENT_LIST_DIR}/lib/" DESTINATION "${CMAKE_CURRENT_LIST_DIR}/include/Interface_Engine/")
-    file(GLOB_RECURSE filesToRemove "include/*.cpp")
-    file(REMOVE ${filesToRemove})
-endif ()
-
-include_directories(lib)
-
-add_library(${PROJECT_NAME} ${src} ${headers})
-add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 FetchContent_Declare(
         SFML
@@ -40,33 +28,26 @@ FetchContent_Declare(
         FIND_PACKAGE_ARGS NAMES localisation
 )
 FetchContent_Declare(
-        OpenLib
-        GIT_REPOSITORY https://github.com/Andrewkoro105/OpenLib.git
-        GIT_TAG master
-        FIND_PACKAGE_ARGS NAMES openLib
-)
-FetchContent_Declare(
         curl
         GIT_REPOSITORY https://github.com/curl/curl.git
         GIT_TAG curl-8_0_1
         FIND_PACKAGE_ARGS NAMES CURL
 )
 
-FetchContent_MakeAvailable(SFML yaml-cpp localisation OpenLib curl)
+FetchContent_MakeAvailable(SFML yaml-cpp localisation curl)
 
 find_package(ImageMagick COMPONENTS Magick++ MagickCore REQUIRED)
 
-include_directories(${typo_SOURCE_DIR}/stc/rttr)
-include_directories(${ImageMagick_INCLUDE_DIRS})
-include_directories(${localisation_SOURCE_DIR}/include)
-include_directories(${openlib_SOURCE_DIR}/include)
-include_directories(${curl_SOURCE_DIR}/include)
-
+add_library(${PROJECT_NAME} ${src} ${headers})
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+target_include_directories(${PROJECT_NAME} PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib>
+        ${ImageMagick_INCLUDE_DIRS}
+        )
 target_link_libraries(${PROJECT_NAME} PUBLIC
         sfml-graphics sfml-system
         yaml-cpp
         localisation
-        openLib
         libcurl
         ${ImageMagick_LIBRARIES}
 )
@@ -80,7 +61,8 @@ file(GLOB_RECURSE srcUnitTest "test/*.cpp")
 add_executable(unit_tests ${srcUnitTest})
 target_link_libraries(unit_tests PUBLIC gtest gtest_main ${PROJECT_NAME})
 
-install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib/ui DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME} PATTERN "*.hpp")
+install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib/modules DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME} PATTERN "*.hpp")
 
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}

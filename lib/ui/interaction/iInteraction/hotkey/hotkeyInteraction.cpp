@@ -111,7 +111,7 @@ namespace ui {
 	
 	bool Decode<HotkeyInteraction::Hotkey*>::decode(const YAML::Node& node, HotkeyInteraction::Hotkey*& hotkey) {
 		KeysInteraction* interaction{nullptr};
-		int state{INT32_MAX};
+		uint32_t state{UINT32_MAX};
 		
 		if(node["state"])
 			node["state"] >> state;
