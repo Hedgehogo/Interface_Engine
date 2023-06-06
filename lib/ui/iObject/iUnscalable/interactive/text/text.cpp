@@ -270,74 +270,31 @@ namespace ui {
 	
 	
 	bool DecodePointer<Text>::decodePointer(const YAML::Node& node, Text*& text) {
-		std::vector<BaseTextBlock*> textBlocks;
-		IUninteractive* background;
-		int size{14};
-		sf::Font* font{nullptr};
-		sf::Color textColor{sf::Color::Black};
-		sf::Color textSelectionColor{sf::Color::White};
-		sf::Color backgroundSelectionColor{sf::Color::Blue};
-		sf::Color inactiveTextSelectionColor = nullColor;
-		sf::Color inactiveBackgroundSelectionColor = {150, 150, 150};
-		BaseResizer* resizer;
-		TextInteraction* textInteraction;
-		
-		if(node["text-block"]) {
-			BaseTextBlock* textBlock;
-			node["text-block"] >> textBlock;
-			textBlocks.push_back(textBlock);
-		} else if(node["text-blocks"]) {
-			for(const YAML::Node& textBlockNode: node["text-blocks"]) {
-				BaseTextBlock* textBlock;
-				textBlockNode >> textBlock;
-				textBlocks.push_back(textBlock);
-			}
-		} else {
-			throw YAML::BadConversion{node["text-blocks"].Mark()};
-		}
-		
-		if(node["background"])
-			node["background"] >> background;
-		else
-			background = new FullColor(sf::Color::White);
-		
-		if(node["text-interaction"])
-			node["text-interaction"] >> textInteraction;
-		else
-			textInteraction = new TextSelectionAndCopyInteraction{
-				{
+		text = new Text{
+			node["text-block"] ? std::vector{node["text-block"].as<BaseTextBlock*>()} : node["text-blocks"].as<std::vector<BaseTextBlock*>>(),
+			convDefPtr<IUninteractive, FullColor>(node["background"], sf::Color::White),
+			convDef(node["size"], 14),
+			convDef<sf::Font*>(node["font"],  nullptr),
+			convDef(node["text-color"], sf::Color::Black),
+			convDef(node["text-selection-color"], sf::Color::White),
+			convDef(node["background-selection-color"], sf::Color::Blue),
+			convDef(node["inactive-text-selection-color"], nullColor),
+			convDef(node["inactive-background-selection-color"], sf::Color{150, 150, 150}),
+			convDefPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::left),
+			node["text-interaction"] ? node["text-interaction"].as<TextInteraction*>() :
+				new TextSelectionAndCopyInteraction{
 					{
-						new TextPressedInteraction{
-							new TextSelectionEvent{},
+						{
+							new TextPressedInteraction{
+								new TextSelectionEvent{},
+								{Key::mouseLeft}
+							},
 							{Key::mouseLeft}
-						},
-						{Key::mouseLeft}
-					}
-				},
-				
-			};
-		
-		if(node["resizer"])
-			node["resizer"] >> resizer;
-		else
-			resizer = new Resizer{1.15, BaseResizer::Align::left};
-		
-		if(node["size"])
-			node["size"] >> size;
-		if(node["font"])
-			node["font"] >> font;
-		if(node["text-color"])
-			node["text-color"] >> textColor;
-		if(node["text-selection-color"])
-			node["text-selection-color"] >> textSelectionColor;
-		if(node["background-selection-color"])
-			node["background-selection-color"] >> backgroundSelectionColor;
-		if(node["inactive-text-selection-color"])
-			node["inactive-text-selection-color"] >> inactiveTextSelectionColor;
-		if(node["inactive-background-selection-color"])
-			node["inactive-background-selection-color"] >> inactiveBackgroundSelectionColor;
-		
-		text = new Text{textBlocks, background, size, font, textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor, resizer, textInteraction};
+						}
+					},
+					
+				}
+		};
 		return true;
 	}
 	

@@ -19,8 +19,8 @@ namespace ui {
 	}
 	
 	Window::Window(const Interface& interface) : resizer(getWindowResizer()), interface(interface) {
-		this->interface.setRenderWindowSize(*this);
 		construction();
+		this->interface.setRenderWindowSize(*this);
 	}
 	
 	Window::Window(const Interface& interface, const sf::String& title, const sf::VideoMode& mode, const sf::ContextSettings& settings) :
@@ -44,19 +44,19 @@ namespace ui {
 	}
 	
 	Window::Window(const Interface& interface, sf::WindowHandle handle, const sf::ContextSettings& settings) : RenderWindow(handle, settings), resizer(getWindowResizer()), interface(interface) {
-		this->interface.setRenderWindowSize(*this);
 		construction();
+		this->interface.setRenderWindowSize(*this);
 	}
 	
 	Window::Window(const std::filesystem::path& interface) : interface(makeInterface(interface)), resizer(getWindowResizer()) {
-		this->interface.setRenderWindowSize(*this);
 		construction();
+		this->interface.setRenderWindowSize(*this);
 	}
 	
 	Window::Window(const std::filesystem::path& interface, const sf::String& title, const sf::VideoMode& mode, const sf::ContextSettings& settings) :
 		RenderWindow(mode, title, sf::Style::None, settings), resizer(getWindowResizer()), interface(makeInterface(interface)) {
-		this->interface.setRenderWindowSize(*this);
 		construction();
+		this->interface.setRenderWindowSize(*this);
 	}
 	
 	Window::Window(const std::filesystem::path& interface, const sf::String& title, const sf::ContextSettings& settings) :

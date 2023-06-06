@@ -37,6 +37,15 @@ namespace ui {
 		return convertDefault<T>(node, defaultValue);
 	}
 	
+	template<typename B, typename T, typename ...Arg>
+	B* convertDefaultPtr(const YAML::Node& node, Arg&&... arg){
+		return node.IsDefined() ? node.as<T*>() : new T{arg...};
+	}
+	
+	template<typename B, typename T, typename ...Arg>
+	B* convDefPtr(const YAML::Node& node, Arg&&... arg){
+		return convertDefaultPtr<B, T>(node, arg...);
+	}
 	
 	template<typename T>
 	bool Decode<std::vector<T>>::decode(const YAML::Node& node, std::vector<T>& vector) {

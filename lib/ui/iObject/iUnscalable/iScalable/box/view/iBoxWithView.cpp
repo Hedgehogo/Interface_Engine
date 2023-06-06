@@ -1,7 +1,7 @@
 #include "iBoxWithView.hpp"
 
 namespace ui {
-	IBoxWithView::IBoxWithView(sf::Vector2f minSize) : Box(minSize) {
+	IBoxWithView::IBoxWithView(sf::Vector2f minSize) : Box(minSize), renderTarget(nullptr) {
 	}
 	
 	void IBoxWithView::init(InitInfo initInfo) {
