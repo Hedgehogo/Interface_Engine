@@ -1,6 +1,8 @@
 layers.md
 .idea
+.vscode
 cmake-build*
+build*
 *.swp
 *.so
 *.dll
