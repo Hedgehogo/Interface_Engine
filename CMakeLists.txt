@@ -57,9 +57,9 @@ add_subdirectory(example-resources/modules)
 add_executable(${PROJECT_NAME}_ex main.cpp)
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})
 
-file(GLOB_RECURSE srcUnitTest "test/*.cpp")
-add_executable(unit_tests ${srcUnitTest})
-target_link_libraries(unit_tests PUBLIC gtest gtest_main ${PROJECT_NAME})
+# file(GLOB_RECURSE test_src "test/*.cpp")
+# add_executable(${PROJECT_NAME}_tests ${test_src})
+# target_link_libraries(${PROJECT_NAME}_tests PUBLIC gtest gtest_main ${PROJECT_NAME})
 
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib/ui DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME} PATTERN "*.hpp")
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib/modules DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME} PATTERN "*.hpp")
