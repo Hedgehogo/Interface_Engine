@@ -54,7 +54,6 @@ namespace ui {
 		}
 	}
 	
-	
 	bool DecodePointer<Animator>::decodePointer(const YAML::Node& node, Animator*& animator) {
 		animator = new Animator{
 			node["unit"] ? std::vector<IAnimatorUnit*>{node["unit"].as<IAnimatorUnit*>()} : node["units"].as<std::vector<IAnimatorUnit*>>(),

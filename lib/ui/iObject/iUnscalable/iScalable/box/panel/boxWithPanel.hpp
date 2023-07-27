@@ -27,7 +27,6 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<BoxWithPanel> {
 		static bool decodePointer(const YAML::Node& node, BoxWithPanel*& boxWithPanel);

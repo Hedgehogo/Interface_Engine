@@ -21,7 +21,6 @@ namespace ui {
 		DontMovePanelInteraction* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<DontMovePanelInteraction> {
 		static bool decodePointer(const YAML::Node& node, DontMovePanelInteraction*& dontMovePanelInteraction);

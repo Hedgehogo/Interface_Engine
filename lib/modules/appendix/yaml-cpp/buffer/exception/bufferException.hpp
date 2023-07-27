@@ -5,17 +5,15 @@
 namespace ui {
 	class BufferNonExistentNestingLevelException : public BaseYamlException {
 	protected:
-		using lSize = long long;
-		
 		std::string name;
-		lSize level;
+		std::size_t level;
 	
 	public:
-		BufferNonExistentNestingLevelException(YAML::Mark mark, const std::string& name, lSize level);
+		BufferNonExistentNestingLevelException(YAML::Mark mark, const std::string& name, std::size_t level);
 		
 		std::string getName() const;
 		
-		lSize getLevel() const;
+		std::size_t getLevel() const;
 	};
 	
 	class BufferVariableNotFoundException : public BaseException {

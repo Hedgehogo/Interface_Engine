@@ -54,7 +54,6 @@ namespace ui {
 		
 	}
 	
-	
 	bool DecodePointer<BoxWithBackground>::decodePointer(const YAML::Node& node, BoxWithBackground*& boxWithBackground) {
 		IScalable* object;
 		IUninteractive* background;

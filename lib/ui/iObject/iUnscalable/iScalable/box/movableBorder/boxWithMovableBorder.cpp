@@ -3,7 +3,9 @@
 #include <algorithm>
 
 namespace ui {
-	BoxWithMovableBorder::BoxWithMovableBorder(IScalable* firstObject, IScalable* secondObject, bool isHorizontalBorder, PSCoefficient borderValue, int borderInteractionSize, sf::Vector2f minSize) :
+	BoxWithMovableBorder::BoxWithMovableBorder(
+		IScalable* firstObject, IScalable* secondObject, bool isHorizontalBorder, PSCoefficient borderValue, int borderInteractionSize, sf::Vector2f minSize
+	) :
 		Box(minSize), LayoutWithTwoObjects(firstObject, secondObject),
 		pressedInteraction(new MovableBorderEvent{*this}, Key::mouseLeft),
 		Interactive_Simple(new OneKeyInteraction{new AddBlockInteractionEvent{pressedInteraction}, Key::mouseLeft}),
@@ -14,8 +16,7 @@ namespace ui {
 		});
 	}
 	
-	void
-	BoxWithMovableBorder::init(InitInfo initInfo) {
+	void BoxWithMovableBorder::init(InitInfo initInfo) {
 		Interactive::init(initInfo);
 		LayoutWithTwoObjects::init(initInfo);
 	}
@@ -159,7 +160,6 @@ namespace ui {
 		firstObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
-	
 	
 	bool DecodePointer<BoxWithMovableBorder>::decodePointer(const YAML::Node& node, BoxWithMovableBorder*& boxWithMovableBorder) {
 		IScalable* firstObject;

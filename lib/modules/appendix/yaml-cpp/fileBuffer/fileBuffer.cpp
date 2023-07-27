@@ -2,18 +2,18 @@
 
 #include <fstream>
 #include <localisation/system.hpp>
-
 #include "config.h"
-#define MAGICKCORE_QUANTUM_DEPTH 16
-# define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
 
 #ifdef IE_ImageMagick_FOUND
+#define MAGICKCORE_QUANTUM_DEPTH 16
+#define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
 #include <Magick++.h>
 #endif
+
 namespace ui {
 	SymbolPosition readCharacterIndex(const YAML::Node& node, std::basic_ifstream<char32_t>& fin) {
-		ullint line{0};
-		ullint number{0};
+		std::size_t line{0};
+		std::size_t number{0};
 		std::basic_string<char32_t> str;
 		
 		if(node.IsScalar()) {
@@ -43,7 +43,7 @@ namespace ui {
 					node["line"] >> line;
 				if(node["line-offset"])
 					line += node["line-offset"].as<llint>();
-				for(ullint i = 0; i < line; ++i) {
+				for(std::size_t i = 0; i < line; ++i) {
 					std::getline(fin, str, U'\n');
 				}
 				if(node["number"]) {
@@ -115,8 +115,8 @@ namespace ui {
 				std::basic_ifstream<char32_t> fin(filePath);
 				std::basic_string<char32_t> str{};
 				if(node["line"]) {
-					ullint line{node["line"].as<ullint>() + 1};
-					for(ullint i = 0; i < line; ++i)
+					std::size_t line{node["line"].as<std::size_t>() + 1};
+					for(std::size_t i = 0; i < line; ++i)
 						std::getline(fin, str, U'\n');
 				} else if(node["first-symbol"]) {
 					SymbolPosition start{readCharacterIndex(node["first-symbol"], fin)};
@@ -124,16 +124,16 @@ namespace ui {
 						const YAML::Node& secondNode = node["last-symbol"];
 						SymbolPosition end{readCharacterIndex(secondNode, fin)};
 						std::basic_string<char32_t> line;
-						for(ullint i = 0; i < start.line; ++i)
+						for(std::size_t i = 0; i < start.line; ++i)
 							std::getline(fin, line, U'\n');
-						for(ullint i = 0; i < end.line - start.line; ++i) {
+						for(std::size_t i = 0; i < end.line - start.line; ++i) {
 							std::getline(fin, line, U'\n');
 							str += line + U"\n";
 						}
 						std::getline(fin, line, U'\n');
 						str += line.substr(0, end.number + 1);
 					} else {
-						for(ullint i = 0; i < start.line; ++i)
+						for(std::size_t i = 0; i < start.line; ++i)
 							std::getline(fin, str, U'\n');
 						std::getline(fin, str, U'\0');
 					}
@@ -167,7 +167,6 @@ namespace ui {
 		font = &FileBuffer<sf::Font>::get(node.as<std::string>());
 		return true;
 	}
-	
 	
 #ifdef IE_ImageMagick_FOUND
 	void LoadFromFile<std::vector<sf::Texture>>::load(std::vector<sf::Texture>& object, std::string name) {
@@ -209,5 +208,4 @@ namespace ui {
 		return true;
 	}
 #endif
-	
 }

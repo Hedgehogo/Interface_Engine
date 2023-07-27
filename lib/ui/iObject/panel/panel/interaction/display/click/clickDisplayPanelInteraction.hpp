@@ -19,7 +19,6 @@ namespace ui {
 		ClickDisplayPanelInteraction* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<ClickDisplayPanelInteraction> {
 		static bool decodePointer(const YAML::Node& node, ClickDisplayPanelInteraction*& clickDisplayPanelInteraction);

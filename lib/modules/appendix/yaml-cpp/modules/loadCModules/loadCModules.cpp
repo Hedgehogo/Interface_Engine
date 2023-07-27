@@ -7,8 +7,8 @@
 #include "modules/appendix/yaml-cpp/yaml.hpp"
 
 namespace ui {
-	size_t write_data(void* ptr, size_t size, size_t nmemb, void* stream) {
-		size_t written = fwrite(ptr, size, nmemb, (FILE*)stream);
+	size_t write_data(void* ptr, std::size_t size, std::size_t nMemB, void* stream) {
+		size_t written = fwrite(ptr, size, nMemB, (FILE*)stream);
 		return written;
 	}
 	
@@ -41,13 +41,9 @@ namespace ui {
 	}
 	
 	void loadCModules(const YAML::Node& libs, int argc, char* argv[]) {
-
-		
 		std::string libDir = convDef<std::string>(libs["lib-dir"], "./");
 		
-		
 		if(YAML::Node cLibs{libs["CLib"]}) {
-			
 			std::string cLibDir{libDir + convDef<std::string>(cLibs["lib-dir"], "./")};
 			
 			if(auto paths = cLibs["path"]; paths) {

@@ -21,7 +21,6 @@ namespace ui {
 	
 	ChangeVariableByStraightLine* makeChangeVariableByStraightLine(float start, float end, float length);
 	
-	
 	template<>
 	struct DecodePointer<ChangeVariableByStraightLine> {
 		static bool decodePointer(const YAML::Node& node, ChangeVariableByStraightLine*& changeVariableByStraightLine);

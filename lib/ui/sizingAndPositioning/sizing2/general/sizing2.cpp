@@ -56,7 +56,6 @@ namespace ui {
 		return sizing2;
 	}
 	
-	
 	bool DecodePointer<Sizing2>::decodePointer(const YAML::Node& node, Sizing2*& sizing2) {
 		if(node.IsScalar()) {
 			sizing2 = new Sizing2{node.as<sf::Vector2f>()};

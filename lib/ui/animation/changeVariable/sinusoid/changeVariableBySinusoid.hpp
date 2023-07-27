@@ -3,7 +3,6 @@
 #include "../iChangeVariable.hpp"
 
 namespace ui {
-	
 	class ChangeVariableBySinusoid : public IChangeVariable {
 	protected:
 		const float a, b, c, d, size;
@@ -16,7 +15,6 @@ namespace ui {
 		
 		IChangeVariable* copy() override;
 	};
-	
 	
 	template<>
 	struct DecodePointer<ChangeVariableBySinusoid> {

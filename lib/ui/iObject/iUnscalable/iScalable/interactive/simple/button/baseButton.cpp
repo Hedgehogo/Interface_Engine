@@ -47,5 +47,4 @@ namespace ui {
 	void BaseButton::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
-	
 }

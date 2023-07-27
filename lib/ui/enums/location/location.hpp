@@ -9,7 +9,6 @@ namespace ui {
 		end
 	};
 	
-	
 	template<>
 	struct Decode<Location> {
 		static bool decode(const YAML::Node& node, Location& location);

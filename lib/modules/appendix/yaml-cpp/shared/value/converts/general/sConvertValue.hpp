@@ -22,9 +22,8 @@ namespace ui {
 		void setValue(const ToType& value) override;
 	};
 	
-	
 	template<typename FromType, typename ToType>
-	struct DecodePointer<SConvertValue<FromType, ToType>> {
+	struct DecodePointer<SConvertValue<FromType, ToType> > {
 		static bool decodePointer(const YAML::Node& node, SConvertValue<FromType, ToType>*& sConvertValue);
 	};
 	

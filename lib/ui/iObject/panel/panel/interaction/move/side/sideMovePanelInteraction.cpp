@@ -20,7 +20,6 @@ namespace ui {
 		return sideMovePanelInteraction;
 	}
 	
-	
 	bool DecodePointer<SideMovePanelInteraction>::decodePointer(const YAML::Node& node, SideMovePanelInteraction*& sideMovePanelInteraction) {
 		float coefficient;
 		float offset;

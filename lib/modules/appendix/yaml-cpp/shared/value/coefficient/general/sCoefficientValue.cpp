@@ -11,7 +11,6 @@ namespace ui {
 			set(this->value);
 	}
 	
-	
 	bool DecodePointer<SCoefficientValue>::decodePointer(const YAML::Node& node, SCoefficientValue*& sCoefficientValue) {
 		sCoefficientValue = new SCoefficientValue{convDef(node["value"], 0.f)};
 		return true;

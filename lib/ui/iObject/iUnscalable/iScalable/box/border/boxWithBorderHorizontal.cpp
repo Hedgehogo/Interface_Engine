@@ -89,7 +89,6 @@ namespace ui {
 		return boxWithBorderHorizontal;
 	}
 	
-	
 	bool DecodePointer<BoxWithBorderHorizontal>::decodePointer(const YAML::Node& node, BoxWithBorderHorizontal*& boxWithBorderHorizontal) {
 		sf::Vector2f minSize{};
 		

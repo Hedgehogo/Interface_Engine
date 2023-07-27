@@ -15,5 +15,4 @@ namespace ui {
 	
 		virtual bool update(sf::Vector2i mousePosition) = 0;
 	};
-	
 }

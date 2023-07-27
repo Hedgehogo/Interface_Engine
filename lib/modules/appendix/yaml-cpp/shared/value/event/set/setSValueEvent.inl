@@ -1,7 +1,6 @@
 namespace ui {
-	
 	template<typename T>
-	SetSValueEvent<T>::SetSValueEvent(const PISValue<T>& value, T variable):value(value), variable(variable) {}
+	SetSValueEvent<T>::SetSValueEvent(const PISValue<T>& value, T variable) : value(value), variable(variable) {}
 	
 	template<typename T>
 	void SetSValueEvent<T>::startPressed() {}
@@ -25,7 +24,7 @@ namespace ui {
 	template<typename T>
 	bool DecodePointer<SetSValueEvent<T>>::decodePointer(const YAML::Node& node, SetSValueEvent<T>*& setSValueEvent) {
 		setSValueEvent = new SetSValueEvent<T>{
-			Buffer::get<ISValue<T>>(node["value"]),
+			Buffer::get<ISValue<T> >(node["value"]),
 			node["variable"].as<T>()
 		};
 		return true;

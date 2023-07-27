@@ -1,7 +1,6 @@
 #include "../boxSwitcherTabs.hpp"
 
 namespace ui {
-	
 	SwitcherTabsEvent::SwitcherTabsEvent(const PISint& value, BoxSwitcherTabs* switcherTabs) : value(value), switcherTabs(switcherTabs) {}
 	
 	void SwitcherTabsEvent::startPressed() {}

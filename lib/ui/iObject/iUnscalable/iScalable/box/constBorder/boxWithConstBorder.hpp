@@ -30,7 +30,6 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<BoxWithConstBorder> {
 		static bool decodePointer(const YAML::Node& node, BoxWithConstBorder*& boxWithConstBorder);

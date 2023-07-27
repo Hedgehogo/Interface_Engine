@@ -30,10 +30,9 @@ namespace ui {
 		std::destroy(animators.begin(), animators.end());
 	}
 	
-	
 	bool Decode<AnimationManager>::decode(const YAML::Node& node, AnimationManager& animationManager) {
 		animationManager = AnimationManager{
-			node["animator"] ? std::vector<Animator*>{node["animator"].as<Animator*>()} : node["animators"].as<std::vector<Animator*>>()
+			node["animator"] ? std::vector<Animator*>{node["animator"].as<Animator*>()} : node["animators"].as<std::vector<Animator*> >()
 		};
 		
 		animatorUnitRequestUpdate();

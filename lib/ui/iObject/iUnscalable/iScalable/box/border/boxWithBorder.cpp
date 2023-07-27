@@ -154,7 +154,6 @@ namespace ui {
 		return boxWithBorder;
 	}
 	
-	
 	bool DecodePointer<BoxWithBorder>::decodePointer(const YAML::Node& node, BoxWithBorder*& boxWithBorder) {
 		sf::Vector2f minSize{};
 		sf::Vector2u count(node["objects"].size(), 0);

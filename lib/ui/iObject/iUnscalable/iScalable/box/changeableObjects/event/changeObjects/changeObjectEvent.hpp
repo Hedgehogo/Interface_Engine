@@ -23,7 +23,6 @@ namespace ui {
 		ChangeObjectEvent* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<ChangeObjectEvent> {
 		static bool decodePointer(const YAML::Node& node, ChangeObjectEvent*& changeObjectEvent);

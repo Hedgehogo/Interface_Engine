@@ -1,7 +1,3 @@
-//
-// Created by Professional on 04.07.2022.
-//
-
 #include "lambdaPositioning2.hpp"
 
 namespace ui {

@@ -18,7 +18,6 @@ namespace ui {
 		TargetCoefficientSizing* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<TargetCoefficientSizing> {
 		static bool decodePointer(const YAML::Node& node, TargetCoefficientSizing*& targetCoefficientSizing);

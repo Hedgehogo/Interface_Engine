@@ -5,7 +5,7 @@ namespace ui {
 		return this->findPosition(parentPosition, parentSize, objectSize);
 	}
 
-/*	Positioning *makePosition(float coefficient, float offset, bool relativeTarget) {
+	/*Positioning *makePosition(float coefficient, float offset, bool relativeTarget) {
 		if(!relativeTarget) {
 			return new InternalPositioning{coefficient, offset};
 		}

@@ -7,6 +7,7 @@ namespace ui {
 	protected:
 		float underlineOffset;
 		float underlineThickness;
+		
 	public:
 		Underline(sf::Color color = nullColor);
 		
@@ -20,7 +21,6 @@ namespace ui {
 	public:
 		Underline* copy();
 	};
-	
 	
 	template<>
 	struct DecodePointer<Underline> {

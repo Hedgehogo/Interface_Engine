@@ -1,6 +1,6 @@
 //included into shortcut.hpp
 
-#include "modules/appendix/yaml-cpp/modules/exception/yamlBuilderDoesTotExist/yamlBuilderDoesTotExistException.hpp"
+#include "modules/appendix/yaml-cpp/modules/exception/yamlBuilderDoesNotExist/yamlBuilderDoesNotExistException.hpp"
 
 namespace ui {
 	template<typename Base, typename Type>
@@ -18,7 +18,7 @@ namespace ui {
 		if (detail::BaseYamlBuilder* base = detail::yamlBuilders[baseTypeName]; base)
 			detail::yamlBuilders[baseTypeName]->addType(&YamlBuilder<T>::builder);
 		else
-			throw YamlBuilderDoesTotExistException{baseTypeName};
+			throw YamlBuilderDoesNotExistException{baseTypeName};
 		addToYamlBuilders<T>();
 	}
 	

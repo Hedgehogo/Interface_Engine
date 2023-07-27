@@ -105,7 +105,6 @@ namespace ui {
 		return boxWithConstRatio;
 	}
 	
-	
 	bool DecodePointer<BoxWithConstRatio>::decodePointer(const YAML::Node& node, BoxWithConstRatio*& boxWithConstRatio) {
 		IScalable* constObject;
 		IScalable* secondObject;

@@ -30,4 +30,4 @@ namespace ui {
 		
 		bool update(sf::Vector2i mousePosition) override;
 	};
-} // ui
+}

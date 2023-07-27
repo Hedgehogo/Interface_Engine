@@ -2,7 +2,6 @@
 #include "ui/iObject/iObject.hpp"
 
 namespace ui {
-
 /*
 	std::vector<TextSelectionAndCopyInteraction::Hotkey *> TextSelectionAndCopyInteraction::generateHotkeys(std::vector<AddInteraction> addInteraction, std::vector<TextKeysInteraction *> selectionInteraction) {
 		std::vector<TextSelectionAndCopyInteraction::Hotkey *> result{addInteraction.size() + selectionInteraction.size()};
@@ -73,8 +72,9 @@ namespace ui {
 		}
 	}
 	
-	TextSelectionAndCopyInteraction::TextSelectionAndCopyInteraction(const std::vector<std::vector<Hotkey*>>& hotkeys, uint startState, const std::vector<ui::TextAddBlockInteractionEvent*>& addEvents,
-																	 const std::vector<ui::TextInteraction*>& pressedInteractions) : TextHotkeyInteraction(hotkeys, startState), addEvents(addEvents), pressedInteractions(pressedInteractions) {
+	TextSelectionAndCopyInteraction::TextSelectionAndCopyInteraction(
+		const std::vector<std::vector<Hotkey*>>& hotkeys, uint startState, const std::vector<ui::TextAddBlockInteractionEvent*>& addEvents,
+		const std::vector<ui::TextInteraction*>& pressedInteractions) : TextHotkeyInteraction(hotkeys, startState), addEvents(addEvents), pressedInteractions(pressedInteractions) {
 	}
 	
 	TextSelectionAndCopyInteraction* TextSelectionAndCopyInteraction::copy() {

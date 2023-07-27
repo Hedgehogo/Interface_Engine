@@ -2,14 +2,18 @@
 #include "../../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
-	InteractiveTextBlock::InteractiveTextBlock(IInteraction* interaction, std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
-											   sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor) :
+	InteractiveTextBlock::InteractiveTextBlock(
+		IInteraction* interaction, std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
+		sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor
+	) :
 		interaction(interaction), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor), interact(false), oldInteract(false),
 		indexInteraction(-1) {
 	}
 	
-	InteractiveTextBlock::InteractiveTextBlock(int indexInteraction, std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
-											   sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor) :
+	InteractiveTextBlock::InteractiveTextBlock(
+		int indexInteraction, std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
+		sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor
+	) :
 		indexInteraction(indexInteraction), interaction(nullptr), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor), interact(false),
 		oldInteract(false) {
 	}
@@ -120,10 +124,15 @@ namespace ui {
 		}
 		
 		if(node["interaction"]) {
-			interactiveTextBlock = new InteractiveTextBlock{node["interaction"].as<IInteraction*>(), text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor,
-															inactiveBackgroundSelectionColor};
+			interactiveTextBlock = new InteractiveTextBlock{
+				node["interaction"].as<IInteraction*>(), text, textColor, font, style, lines, size, textSelectionColor,
+				backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor
+			};
 		} else {
-			interactiveTextBlock = new InteractiveTextBlock{node["index"].as<int>(), text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
+			interactiveTextBlock = new InteractiveTextBlock{
+				node["index"].as<int>(), text, textColor, font, style, lines, size, textSelectionColor,
+				backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor
+			};
 		}
 		return true;
 	}

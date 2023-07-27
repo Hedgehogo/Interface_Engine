@@ -5,10 +5,10 @@ namespace ui {
 	template<typename T>
 	SVector2<T>::SVector2(const sf::Vector2<typename SVector2<T>::V>& vector) :
 		x(std::make_shared<T>(vector.x)), y(std::make_shared<T>(vector.y)), setters() {
-		x->addSetter([this](decltype(x->getValue()) value){
+		x->addSetter([this](auto value) {
 			set();
 		});
-		y->addSetter([this](decltype(y->getValue()) value){
+		y->addSetter([this](auto value) {
 			set();
 		});
 	}
@@ -16,10 +16,10 @@ namespace ui {
 	template<typename T>
 	SVector2<T>::SVector2(std::shared_ptr<T> x, std::shared_ptr<T> y) :
 		x(x), y(y), setters() {
-			x->addSetter([this](decltype(x->getValue()) value){
+			x->addSetter([this](auto value) {
 				set();
 			});
-			y->addSetter([this](decltype(y->getValue()) value){
+			y->addSetter([this](auto value) {
 				set();
 			});
 	}
@@ -109,9 +109,8 @@ namespace ui {
 		std::dynamic_pointer_cast<SRange<T>>(value->getYPtr())->setBounds(lower.y, upper.y);
 	}
 	
-	
 	template<typename T>
-	bool DecodePointer<SVector2<T>>::decodePointer(const YAML::Node& node, SVector2<T>*& withVector2) {
+	bool DecodePointer<SVector2<T> >::decodePointer(const YAML::Node& node, SVector2<T>*& withVector2) {
 		if(node["x"] && node["y"]) {
 			withVector2 = new SVector2<T>(getSValue<T>(node["x"]), getSValue<T>(node["y"]));
 		} else {

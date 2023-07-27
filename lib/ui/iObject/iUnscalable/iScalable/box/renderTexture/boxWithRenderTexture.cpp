@@ -66,7 +66,6 @@ namespace ui {
 		object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 	}
 	
-	
 	bool DecodePointer<BoxWithRenderTexture>::decodePointer(const YAML::Node& node, BoxWithRenderTexture*& boxWithRenderTexture) {
 		boxWithRenderTexture = new BoxWithRenderTexture{
 			node["object"].as<IScalable*>(),

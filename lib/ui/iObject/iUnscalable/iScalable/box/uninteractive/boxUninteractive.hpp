@@ -16,7 +16,6 @@ namespace ui {
 		BoxUninteractive* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<BoxUninteractive> {
 		static bool decodePointer(const YAML::Node& node, BoxUninteractive*& boxUninteractive);

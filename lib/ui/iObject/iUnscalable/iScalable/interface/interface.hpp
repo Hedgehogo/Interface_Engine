@@ -84,7 +84,6 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue = 0, uint hueOffset = 36) override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<Interface> {
 		static bool decodePointer(const YAML::Node& node, Interface*& interface);

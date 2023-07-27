@@ -1,7 +1,6 @@
 #include "boxSwitcher.hpp"
 
 namespace ui {
-	
 	BoxSwitcher::BoxSwitcher(IScalable* firstObject, IScalable* secondObject, PSbool value, const sf::Vector2f& minSize) :
 		Box(minSize, size), LayoutWithTwoObjects(firstObject, secondObject), value(value) {}
 	

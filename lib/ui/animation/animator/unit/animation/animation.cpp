@@ -108,7 +108,6 @@ namespace ui {
 		}
 	}
 	
-	
 	bool Decode<Animation::Variable>::decode(const YAML::Node& node, Animation::Variable& animationVar) {
 		animationVar = Animation::Variable{
 			Buffer::get<Sfloat>(node["var"]),
@@ -117,9 +116,7 @@ namespace ui {
 		return true;
 	}
 	
-	
 	bool DecodePointer<Animation>::decodePointer(const YAML::Node& node, Animation*& animation) {
-		
 		animation = new Animation{
 			node["var"] ? std::vector<Animation::Variable>{node["var"].as<Animation::Variable>()} : node["vars"].as<std::vector<Animation::Variable>>(),
 			(node["speed"] ? Buffer::get<Sfloat>(node["speed"]) : PSfloat{nullptr}),

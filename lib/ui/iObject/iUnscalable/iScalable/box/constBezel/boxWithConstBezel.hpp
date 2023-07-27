@@ -32,7 +32,6 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<BoxWithConstBezel> {
 		static bool decodePointer(const YAML::Node& node, BoxWithConstBezel*& boxWithConstBezel);

@@ -18,7 +18,6 @@ namespace ui {
 		DisplayPanelEvent* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<DisplayPanelEvent> {
 		static bool decodePointer(const YAML::Node& node, DisplayPanelEvent*& displayPanelEvent);

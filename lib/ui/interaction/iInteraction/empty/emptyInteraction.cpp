@@ -14,7 +14,6 @@ namespace ui {
 		return new EmptyInteraction{};
 	}
 	
-	
 	bool DecodePointer<EmptyInteraction>::decodePointer(const YAML::Node& node, EmptyInteraction*& emptyInteraction) {
 		{
 			emptyInteraction = new EmptyInteraction{};

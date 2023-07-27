@@ -6,7 +6,7 @@ namespace ui {
 	template<typename T>
 	class SList : public ISList {
 	private:
-		typedef to_auto<decltype(std::declval<T>().getValue())> V;
+		using V = to_auto<decltype(std::declval<T>().getValue())>;
 		using SetterFunc = std::function<void(const std::vector<V>&)>;
 	
 	protected:
@@ -32,7 +32,6 @@ namespace ui {
 		
 		void setValue(const std::vector<V>& list);
 	};
-	
 	
 	template<typename T>
 	struct DecodePointer<SList<T>> {

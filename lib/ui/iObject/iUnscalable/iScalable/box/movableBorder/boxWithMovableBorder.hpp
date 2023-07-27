@@ -22,8 +22,10 @@ namespace ui {
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
-		BoxWithMovableBorder(IScalable* firstObject, IScalable* secondObject, bool isHorizontalBorder, PSCoefficient borderValue,
-							 int borderInteractionSize = 5, sf::Vector2f minSize = {0, 0});
+		BoxWithMovableBorder(
+			IScalable* firstObject, IScalable* secondObject, bool isHorizontalBorder, PSCoefficient borderValue,
+			int borderInteractionSize = 5, sf::Vector2f minSize = {0, 0}
+		);
 		
 		float getBorderValue();
 		
@@ -53,7 +55,6 @@ namespace ui {
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
-	
 	
 	template<>
 	struct DecodePointer<BoxWithMovableBorder> {

@@ -42,7 +42,6 @@ namespace ui {
 		Panel* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<Panel> {
 		static bool decodePointer(const YAML::Node& node, Panel*& panel);

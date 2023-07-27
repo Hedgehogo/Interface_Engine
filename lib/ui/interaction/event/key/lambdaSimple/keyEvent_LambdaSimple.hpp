@@ -22,12 +22,16 @@ namespace ui {
 		void whileNotPressed() override;
 	
 	public:
-		explicit KeyEvent_LambdaSimple(void (* startPressedLambda)(sf::Vector2i mousePosition), void (* whilePressedLambda )(sf::Vector2i mousePosition) = [](sf::Vector2i) {
-		}, void (* stopPressedLambda)(sf::Vector2i mousePosition) = [](sf::Vector2i) {
-		}, void (* whileNotPressedLambda  )(sf::Vector2i mousePosition) = [](sf::Vector2i) {
-		});
+		explicit KeyEvent_LambdaSimple(
+			void (* startPressedLambda)(sf::Vector2i mousePosition),
+			void (* whilePressedLambda )(sf::Vector2i mousePosition) = [](sf::Vector2i) {
+			},
+			void (* stopPressedLambda)(sf::Vector2i mousePosition) = [](sf::Vector2i) {
+			},
+			void (* whileNotPressedLambda  )(sf::Vector2i mousePosition) = [](sf::Vector2i) {
+			}
+		);
 		
 		KeyEvent_LambdaSimple* copy() override;
 	};
-	
 }

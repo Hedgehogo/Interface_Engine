@@ -25,5 +25,4 @@ namespace ui {
 		
 		~TextInteraction() = default;
 	};
-	
 }

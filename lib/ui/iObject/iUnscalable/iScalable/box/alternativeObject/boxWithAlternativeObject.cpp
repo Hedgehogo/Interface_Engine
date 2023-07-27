@@ -22,7 +22,6 @@ namespace ui {
 		return boxWithAlternativeObject;
 	}
 	
-	
 	bool DecodePointer<BoxWithAlternativeObject>::decodePointer(const YAML::Node& node, BoxWithAlternativeObject*& boxWithAlternativeObject) {
 		IScalable* topObject;
 		IScalable* bottomObject;

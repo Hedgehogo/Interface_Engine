@@ -1,7 +1,6 @@
 #include "mouseLambdaInteraction.hpp"
 #include <iostream>
 
-
 namespace ui {
 	MouseLambdaInteraction MouseLambdaInteraction::debug{
 		new KeyEvent_LambdaSimple{

@@ -4,7 +4,6 @@ namespace ui {
 	ChangeVariableByStraightLine::ChangeVariableByStraightLine(float k, float length, float b) : length(length), k(k), b(b) {
 	}
 	
-	
 	float ChangeVariableByStraightLine::getSize() {
 		return length;
 	}
@@ -20,7 +19,6 @@ namespace ui {
 	ChangeVariableByStraightLine* makeChangeVariableByStraightLine(float start, float end, float length) {
 		return new ChangeVariableByStraightLine((end - start) / length, length, start);
 	}
-	
 	
 	bool DecodePointer<ChangeVariableByStraightLine>::decodePointer(const YAML::Node& node, ChangeVariableByStraightLine*& changeVariableByStraightLine) {
 		if(node["k"]) {

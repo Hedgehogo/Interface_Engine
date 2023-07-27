@@ -22,14 +22,15 @@ namespace ui {
 		}
 	}
 	
-	BoxWithShader::BoxWithShader(IScalable* object, sf::Shader* shader, uint transmission,
-								 std::map<std::string, PISfloat> valuesF,
-								 std::map<std::string, PISint> valuesI,
-								 std::map<std::string, PISbool> valuesB,
-								 std::map<std::string, PISValue<sf::Color>> valuesC,
-								 std::map<std::string, PSRVec2f> valuesV,
-								 bool optimize, sf::Vector2f minSize) :
-		BoxWithRenderTexture(object, optimize, minSize), shader(shader), transmission(transmission) {
+	BoxWithShader::BoxWithShader(
+		IScalable* object, sf::Shader* shader, uint transmission,
+		std::map<std::string, PISfloat> valuesF,
+		std::map<std::string, PISint> valuesI,
+		std::map<std::string, PISbool> valuesB,
+		std::map<std::string, PISValue<sf::Color>> valuesC,
+		std::map<std::string, PSRVec2f> valuesV,
+		bool optimize, sf::Vector2f minSize
+	) : BoxWithRenderTexture(object, optimize, minSize), shader(shader), transmission(transmission) {
 		clock.restart();
 		
 		for(auto& [name, value]: valuesF) {
@@ -124,7 +125,6 @@ namespace ui {
 		}
 		return result;
 	}
-	
 	
 	bool DecodePointer<BoxWithShader>::decodePointer(const YAML::Node& node, BoxWithShader*& boxWithShader) {
 		IScalable* object;

@@ -1,5 +1,5 @@
 #include "iObject.hpp"
-#include "../../modules/appendix/HSVtoRGB/HsVtoRgb.hpp"
+#include "../../modules/appendix/HSVtoRGB/hsvToRgb.hpp"
 
 namespace ui {
 	void IObject::setPosition(sf::Vector2f position) {
@@ -38,7 +38,7 @@ namespace ui {
 	
 	void IObject::drawDebug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& renderTarget, uint hue) {
 		if(size.x > 0 && size.y > 0) {
-			sf::Color color{HSVtoRGB(static_cast<float>(hue % 360))};
+			sf::Color color{hsvToRgb(static_cast<float>(hue % 360))};
 			
 			sf::RectangleShape rectangle{size};
 			rectangle.setPosition(position);
@@ -60,7 +60,7 @@ namespace ui {
 		sf::Vector2f size{this->getAreaSize() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2 + 2, indent * 2 + 2})};
 		sf::Vector2f position{this->getAreaPosition() + static_cast<sf::Vector2f>(sf::Vector2i{indent + 1, indent + 1})};
 		if(size.x > 0 && size.y > 0) {
-			sf::Color color{HSVtoRGB(static_cast<float>(hue % 360))};
+			sf::Color color{hsvToRgb(static_cast<float>(hue % 360))};
 			
 			sf::RectangleShape rectangle{size};
 			rectangle.setPosition(position);

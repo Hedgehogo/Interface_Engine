@@ -31,7 +31,6 @@ namespace ui {
 		BaseTextBlock* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<ObjectTextBlock> {
 		static bool decodePointer(const YAML::Node& node, ObjectTextBlock*& objectTextBlock);

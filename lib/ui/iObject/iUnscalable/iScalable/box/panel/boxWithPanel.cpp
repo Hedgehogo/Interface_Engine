@@ -38,7 +38,6 @@ namespace ui {
 		panel->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
 	}
 	
-	
 	bool DecodePointer<BoxWithPanel>::decodePointer(const YAML::Node& node, BoxWithPanel*& boxWithPanel) {
 		ConstPanel* panel;
 		IScalable* object;

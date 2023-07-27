@@ -3,7 +3,6 @@
 #include "../iAnimatorUnit.hpp"
 
 namespace ui {
-	
 	namespace detail::AnimatorUnitMatch {
 		template<typename T>
 		struct Option {
@@ -41,15 +40,13 @@ namespace ui {
 		AnimatorUnitMatch<T>* copy() override;
 	};
 	
-	
 	template<typename T>
-	struct Decode<detail::AnimatorUnitMatch::Option<T>> {
+	struct Decode<detail::AnimatorUnitMatch::Option<T> > {
 		static bool decode(const YAML::Node& node, detail::AnimatorUnitMatch::Option<T>& option);
 	};
 	
-	
 	template<typename T>
-	struct DecodePointer<AnimatorUnitMatch<T>> {
+	struct DecodePointer<AnimatorUnitMatch<T> > {
 		static bool decodePointer(const YAML::Node& node, AnimatorUnitMatch<T>*& animatorUnitMatch);
 	};
 	

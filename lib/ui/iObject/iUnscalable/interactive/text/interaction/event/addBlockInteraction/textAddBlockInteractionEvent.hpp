@@ -17,7 +17,6 @@ namespace ui {
 		TextAddBlockInteractionEvent* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<TextAddBlockInteractionEvent> {
 		static bool decodePointer(const YAML::Node& node, TextAddBlockInteractionEvent*& textAddBlockInteractionEvent);

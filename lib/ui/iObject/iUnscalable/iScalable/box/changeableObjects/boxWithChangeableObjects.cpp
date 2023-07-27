@@ -54,7 +54,6 @@ namespace ui {
 		return new BoxWithChangeableObjects{objects, value, minimumSize};
 	}
 	
-	
 	bool DecodePointer<BoxWithChangeableObjects>::decodePointer(const YAML::Node& node, BoxWithChangeableObjects*& boxWithChangeableObjects) {
 		std::vector<IScalable*> objects;
 		sf::Vector2f minSize{0, 0};

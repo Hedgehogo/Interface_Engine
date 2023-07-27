@@ -41,7 +41,6 @@ namespace ui {
 		panel->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
 	}
 	
-	
 	bool DecodePointer<ButtonWithPanel>::decodePointer(const YAML::Node& node, ButtonWithPanel*& buttonWithPanel) {
 		Panel* panel;
 		DisplayPanelInteraction* interaction;

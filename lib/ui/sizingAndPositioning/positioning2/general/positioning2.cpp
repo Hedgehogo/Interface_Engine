@@ -49,7 +49,6 @@ namespace ui {
 		return positioning2;
 	}
 	
-	
 	bool DecodePointer<Positioning2>::decodePointer(const YAML::Node& node, Positioning2*& positioning2) {
 		if(node.IsScalar()) {
 			positioning2 = new Positioning2{node.as<sf::Vector2f>()};

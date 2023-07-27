@@ -17,7 +17,6 @@ namespace ui {
 		CoefficientMovePanelInteraction* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<CoefficientMovePanelInteraction> {
 		static bool decodePointer(const YAML::Node& node, CoefficientMovePanelInteraction*& coefficientMovePanelInteraction);

@@ -1,7 +1,6 @@
 #include "matchSidesPositioning.hpp"
 
 namespace ui {
-	
 	MatchSidesPositioning::MatchSidesPositioning(Location parentSide, Location objectSide, float offset) : parentSide(parentSide), objectSide(objectSide), offset(offset) {
 	}
 	
@@ -33,7 +32,6 @@ namespace ui {
 	MatchSidesPositioning* MatchSidesPositioning::copy() {
 		return new MatchSidesPositioning{parentSide, objectSide, offset};
 	}
-	
 	
 	bool DecodePointer<MatchSidesPositioning>::decodePointer(const YAML::Node& node, MatchSidesPositioning*& matchSidesPositioning) {
 		Location parentSide;

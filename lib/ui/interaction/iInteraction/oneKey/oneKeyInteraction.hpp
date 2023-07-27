@@ -32,7 +32,6 @@ namespace ui {
 		OneKeyInteraction* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<OneKeyInteraction> {
 		static bool decodePointer(const YAML::Node& node, OneKeyInteraction*& oneKeyInteraction);

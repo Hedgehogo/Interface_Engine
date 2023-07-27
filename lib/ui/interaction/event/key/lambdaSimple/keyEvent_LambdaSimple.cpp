@@ -1,8 +1,12 @@
 #include "keyEvent_LambdaSimple.hpp"
 
 namespace ui {
-	KeyEvent_LambdaSimple::KeyEvent_LambdaSimple(void (* startPressedLambda)(sf::Vector2i), void (* whilePressedLambda)(sf::Vector2i),
-												 void (* stopPressedLambda)(sf::Vector2i), void (* whileNotPressedLambda)(sf::Vector2i)) :
+	KeyEvent_LambdaSimple::KeyEvent_LambdaSimple(
+		void (* startPressedLambda)(sf::Vector2i),
+		void (* whilePressedLambda)(sf::Vector2i),
+		void (* stopPressedLambda)(sf::Vector2i),
+		void (* whileNotPressedLambda)(sf::Vector2i)
+	) :
 		KeyEvent_Simple(), startPressedLambda(startPressedLambda), whilePressedLambda(whilePressedLambda), stopPressedLambda(stopPressedLambda), whileNotPressedLambda(whileNotPressedLambda) {
 	}
 	

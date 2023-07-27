@@ -17,7 +17,6 @@ namespace ui {
 		MatchTargetPositioning* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<MatchTargetPositioning> {
 		static bool decodePointer(const YAML::Node& node, MatchTargetPositioning*& matchTargetPositioning);

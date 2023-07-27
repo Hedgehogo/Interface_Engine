@@ -4,7 +4,6 @@
 #include <functional>
 
 namespace ui {
-	
 	class AnimationManager;
 	
 	class IAnimatorUnit;

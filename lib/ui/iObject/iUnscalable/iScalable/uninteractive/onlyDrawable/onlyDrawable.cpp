@@ -9,7 +9,6 @@ namespace ui {
 	OnlyDrawable::OnlyDrawable() : renderTarget(nullptr) {
 	}
 	
-	
 	void OnlyDrawable::copy(OnlyDrawable* onlyDrawable) {
 		onlyDrawable->renderTarget = this->renderTarget;
 	}

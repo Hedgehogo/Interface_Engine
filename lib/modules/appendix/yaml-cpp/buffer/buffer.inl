@@ -10,14 +10,20 @@ namespace ui {
 	
 	template<typename T>
 	void Buffer::insert(const std::string& name, const YAML::Node& node) {
-		T* ptr;
-		long long level{static_cast<long long>(objectsLevels.size()) - 1};
+		if(objectsLevels.empty()) {
+			throw BufferNonExistentNestingLevelException{node.Mark(), name, 0};
+		}
 		
-		node >> ptr;
+		std::size_t level{objectsLevels.size() - 1};
+		
 		if(node["level"]) {
 			if(node["level"]["relative"]) {
-				long long relative;
-				node["level"]["relative"] >> relative;
+				auto relative{node["level"]["relative"].as<std::size_t>()};
+				
+				if(level < relative) {
+					throw BufferNonExistentNestingLevelException{node.Mark(), name, 0};
+				}
+				
 				level -= relative;
 			} else {
 				if(node.IsScalar()) {
@@ -29,7 +35,7 @@ namespace ui {
 		}
 		
 		if(level >= 0 && level < objectsLevels.size()) {
-			objectsLevels[level].try_emplace(name, ptr);
+			objectsLevels[level].try_emplace(name, node.as<T*>());
 		} else {
 			throw BufferNonExistentNestingLevelException{node.Mark(), name, level};
 		}
@@ -40,7 +46,7 @@ namespace ui {
 		std::string name;
 		node["var"] >> name;
 		if(!existAtLevel(name)) {
-			insert < T > (name, node);
+			insert<T>(name, node);
 		} else {
 			throw YAML::BadConversion{node.Mark()};
 		}

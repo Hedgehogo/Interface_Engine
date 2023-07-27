@@ -31,7 +31,6 @@ namespace ui {
 		~BoxScroll() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<BoxScroll> {
 		static bool decodePointer(const YAML::Node& node, BoxScroll*& boxScroll);

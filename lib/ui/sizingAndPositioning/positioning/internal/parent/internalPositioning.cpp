@@ -20,7 +20,6 @@ namespace ui {
 		return offset;
 	}
 	
-	
 	bool DecodePointer<InternalPositioning>::decodePointer(const YAML::Node& node, InternalPositioning*& internalPositioning) {
 		if(node.IsScalar()) {
 			internalPositioning = new InternalPositioning{

@@ -38,9 +38,8 @@ namespace ui {
 			set(this->value);
 	}
 	
-	
 	template<typename T>
-	bool DecodePointer<SRangeValue<T>>::decodePointer(const YAML::Node& node, SRangeValue<T>*& sRangeValue) {
+	bool DecodePointer<SRangeValue<T> >::decodePointer(const YAML::Node& node, SRangeValue<T>*& sRangeValue) {
 		sRangeValue = new SRangeValue<T>{convDef<T>(node["value"], {})};
 		return true;
 	}

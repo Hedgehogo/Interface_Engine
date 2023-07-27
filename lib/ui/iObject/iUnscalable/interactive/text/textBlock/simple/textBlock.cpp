@@ -13,10 +13,10 @@ namespace ui {
 		return lines;
 	}
 	
-	TextBlock::TextBlock(std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
-						 sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor) :
-		str(text), lines(generateLines(lines, style)) {
-		
+	TextBlock::TextBlock(
+		std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
+		sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor
+	) : str(text), lines(generateLines(lines, style)) {
 		textVariables.TextColor = textColor;
 		textVariables.font = font;
 		textVariables.style = style;
@@ -78,7 +78,6 @@ namespace ui {
 		}
 	}
 	
-	
 	bool DecodePointer<TextBlock>::decodePointer(const YAML::Node& node, TextBlock*& textBlock) {
 		if(node.IsScalar()) {
 			textBlock = new TextBlock{node.as<std::u32string>()};
@@ -95,7 +94,6 @@ namespace ui {
 		sf::Color backgroundSelectionColor = nullColor;
 		sf::Color inactiveTextSelectionColor = nullColor;
 		sf::Color inactiveBackgroundSelectionColor = nullColor;
-		
 		
 		node["text"] >> text;
 		if(node["text-color"])

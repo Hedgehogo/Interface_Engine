@@ -1,9 +1,9 @@
 #include "character.hpp"
-#include "../../../../../../../modules/appendix/HSVtoRGB/HsVtoRgb.hpp"
+#include "../../../../../../../modules/appendix/HSVtoRGB/hsvToRgb.hpp"
 
 namespace ui {
-	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BaseLine*>& lines)
-		: character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), lines(lines), selectionVertexArray(sf::Quads, 4) {
+	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BaseLine*>& lines) :
+		character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), lines(lines), selectionVertexArray(sf::Quads, 4) {
 		if(isSpecial() != BaseCharacter::Special::enter) {
 			glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style & sf::Text::Style::Bold);
 			
@@ -153,7 +153,7 @@ namespace ui {
 			sf::Vector2f size{getAdvance() - 2.0f, getHeight() - 2.0f};
 			sf::Vector2f position{this->getPosition() + sf::Vector2f{1.0f, 1.0f - getHeight()}};
 			if(size.x > 0 && size.y > 0) {
-				sf::Color color{HSVtoRGB(static_cast<float>(hue % 360))};
+				sf::Color color{hsvToRgb(static_cast<float>(hue % 360))};
 				
 				sf::RectangleShape rectangle{size};
 				rectangle.setPosition(position);

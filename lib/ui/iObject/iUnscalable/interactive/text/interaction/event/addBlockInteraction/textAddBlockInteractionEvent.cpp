@@ -21,7 +21,6 @@ namespace ui {
 		return nullptr;
 	}
 	
-	
 	bool DecodePointer<TextAddBlockInteractionEvent>::decodePointer(const YAML::Node& node, TextAddBlockInteractionEvent*& textAddBlockInteractionEvent) {
 		textAddBlockInteractionEvent = new TextAddBlockInteractionEvent{*node["interaction"].as<TextInteraction*>()};
 		return true;

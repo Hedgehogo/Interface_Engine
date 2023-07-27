@@ -71,7 +71,6 @@ namespace ui {
 		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
 	
-	
 	bool DecodePointer<BoxWithConstBorder>::decodePointer(const YAML::Node& node, BoxWithConstBorder*& boxWithConstBorder) {
 		IScalable* constObject{nullptr};
 		IScalable* secondObject{nullptr};

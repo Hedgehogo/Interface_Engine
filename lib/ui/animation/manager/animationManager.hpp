@@ -20,7 +20,6 @@ namespace ui {
 		virtual ~AnimationManager();
 	};
 	
-	
 	template<>
 	struct Decode<AnimationManager> {
 		static bool decode(const YAML::Node& node, AnimationManager& animationManager);

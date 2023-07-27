@@ -15,19 +15,23 @@ namespace ui {
 		IInteraction* interaction;
 	
 	public:
-		InteractiveTextBlock(IInteraction* interaction, std::u32string text, sf::Color textColor = nullColor,
-							 sf::Font* font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0,
-							 sf::Color textSelectionColor = nullColor,
-							 sf::Color backgroundSelectionColor = nullColor,
-							 sf::Color inactiveTextSelectionColor = nullColor,
-							 sf::Color inactiveBackgroundSelectionColor = nullColor);
+		InteractiveTextBlock(
+			IInteraction* interaction, std::u32string text, sf::Color textColor = nullColor,
+			sf::Font* font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0,
+			sf::Color textSelectionColor = nullColor,
+			sf::Color backgroundSelectionColor = nullColor,
+			sf::Color inactiveTextSelectionColor = nullColor,
+			sf::Color inactiveBackgroundSelectionColor = nullColor
+		);
 		
-		InteractiveTextBlock(int indexInteraction, std::u32string text, sf::Color textColor = nullColor,
-							 sf::Font* font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0,
-							 sf::Color textSelectionColor = nullColor,
-							 sf::Color backgroundSelectionColor = nullColor,
-							 sf::Color inactiveTextSelectionColor = nullColor,
-							 sf::Color inactiveBackgroundSelectionColor = nullColor);
+		InteractiveTextBlock(
+			int indexInteraction, std::u32string text, sf::Color textColor = nullColor,
+			sf::Font* font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0,
+			sf::Color textSelectionColor = nullColor,
+			sf::Color backgroundSelectionColor = nullColor,
+			sf::Color inactiveTextSelectionColor = nullColor,
+			sf::Color inactiveBackgroundSelectionColor = nullColor
+		);
 		
 		~InteractiveTextBlock();
 		
@@ -49,7 +53,6 @@ namespace ui {
 	public:
 		InteractiveTextBlock* copy() override;
 	};
-	
 	
 	template<>
 	struct DecodePointer<InteractiveTextBlock> {

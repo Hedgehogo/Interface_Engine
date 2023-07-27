@@ -44,12 +44,10 @@ namespace ui {
 		~Animation();
 	};
 	
-	
 	template<>
 	struct Decode<Animation::Variable> {
 		static bool decode(const YAML::Node& node, Animation::Variable& animationUnit);
 	};
-	
 	
 	template<>
 	struct DecodePointer<Animation> {

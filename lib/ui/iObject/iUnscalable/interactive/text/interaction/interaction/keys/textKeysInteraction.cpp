@@ -16,7 +16,6 @@ namespace ui {
 		return new TextKeysInteraction{event, keys, blackListKeys};
 	}
 	
-	
 	bool DecodePointer<TextKeysInteraction>::decodePointer(const YAML::Node& node, TextKeysInteraction*& textKeysInteraction) {
 		if(node.IsScalar()) {
 			textKeysInteraction = new TextKeysInteraction{new OpenUrlEvent{node.as<std::string>()}, {Key::mouseLeft}};

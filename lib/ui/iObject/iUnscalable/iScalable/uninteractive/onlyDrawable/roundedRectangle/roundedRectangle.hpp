@@ -25,7 +25,6 @@ namespace ui {
 		RoundedRectangle* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<RoundedRectangle> {
 		static bool decodePointer(const YAML::Node& node, RoundedRectangle*& roundedRectangle);

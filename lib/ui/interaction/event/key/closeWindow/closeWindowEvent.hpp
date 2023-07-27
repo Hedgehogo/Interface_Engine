@@ -30,4 +30,4 @@ namespace ui {
 	struct DecodePointer<CloseWindowEvent> {
 		static bool decodePointer(const YAML::Node& node, CloseWindowEvent*& closeWindowEvent);
 	};
-} // ui
+}

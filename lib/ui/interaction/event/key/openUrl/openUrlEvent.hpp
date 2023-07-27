@@ -6,7 +6,6 @@
 #include "modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
-	
 	class OpenUrlEvent : public KeyEvent_Simple {
 	protected:
 		std::string url;
@@ -25,12 +24,10 @@ namespace ui {
 		OpenUrlEvent* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<OpenUrlEvent> {
 		static bool decodePointer(const YAML::Node& node, OpenUrlEvent*& openUrlInteraction);
 	};
-	
 	
 	bool determineUrl(const YAML::Node& node);
 }

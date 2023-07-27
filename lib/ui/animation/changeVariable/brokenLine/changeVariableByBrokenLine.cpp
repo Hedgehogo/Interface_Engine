@@ -26,7 +26,6 @@ namespace ui {
 		return new ChangeVariableByBrokenLine{values};
 	}
 	
-	
 	bool Decode<ChangeVariableByBrokenLine::Value>::decode(const YAML::Node& node, ChangeVariableByBrokenLine::Value& value) {
 		value = ChangeVariableByBrokenLine::Value{
 			node["value"].as<float>(),
@@ -35,7 +34,6 @@ namespace ui {
 		
 		return true;
 	}
-	
 	
 	bool DecodePointer<ChangeVariableByBrokenLine>::decodePointer(const YAML::Node& node, ChangeVariableByBrokenLine*& brokenLine) {
 		brokenLine = new ChangeVariableByBrokenLine{

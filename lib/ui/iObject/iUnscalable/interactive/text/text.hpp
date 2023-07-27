@@ -46,27 +46,28 @@ namespace ui {
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 	
 	public:
-		explicit Text(std::vector<BaseTextBlock*> textBlocks, IUninteractive* background = new FullColor(sf::Color::White), int size = 14, sf::Font* font = nullptr, sf::Color textColor = sf::Color::Black,
-					  sf::Color textSelectionColor = sf::Color::White, sf::Color backgroundSelectionColor = sf::Color::Blue, sf::Color inactiveTextSelectionColor = nullColor,
-					  sf::Color inactiveBackgroundSelectionColor = {150, 150, 150}, BaseResizer* resizer = new Resizer{1.15, BaseResizer::Align::left},
-					  TextInteraction* textInteraction =
-					  new TextSelectionAndCopyInteraction{
-						  {
-							  {
-								  new TextPressedInteraction{
-									  new TextSelectionEvent{},
-									  {Key::mouseLeft}
-								  },
-								  {Key::mouseLeft}
-							  }
-						  },
-						  {
-							  new TextKeysInteraction{
-								  new TextCopyEvent{},
-								  {Key::c, Key::lControl}
-							  }
-						  }
-					  }
+		explicit Text(
+			std::vector<BaseTextBlock*> textBlocks, IUninteractive* background = new FullColor(sf::Color::White), int size = 14, sf::Font* font = nullptr, sf::Color textColor = sf::Color::Black,
+			sf::Color textSelectionColor = sf::Color::White, sf::Color backgroundSelectionColor = sf::Color::Blue, sf::Color inactiveTextSelectionColor = nullColor,
+			sf::Color inactiveBackgroundSelectionColor = {150, 150, 150}, BaseResizer* resizer = new Resizer{1.15, BaseResizer::Align::left},
+			TextInteraction* textInteraction =
+			new TextSelectionAndCopyInteraction{
+				{
+					{
+						new TextPressedInteraction{
+							new TextSelectionEvent{},
+							{Key::mouseLeft}
+						},
+						{Key::mouseLeft}
+					}
+				},
+				{
+					new TextKeysInteraction{
+						new TextCopyEvent{},
+						{Key::c, Key::lControl}
+					}
+				}
+			}
 		);
 		
 		~Text() override;
@@ -108,15 +109,16 @@ namespace ui {
 		sf::Vector2f getNormalSize() const override;
 	
 	protected:
-		Text(std::vector<BaseTextBlock*> textBlocks, IUninteractive* background, uint size, BaseResizer* resizer, sf::RenderTarget* renderTarget,
-			 TextInteraction* textInteraction);
+		Text(
+			std::vector<BaseTextBlock*> textBlocks, IUninteractive* background, uint size, BaseResizer* resizer, sf::RenderTarget* renderTarget,
+			TextInteraction* textInteraction
+		);
 	
 	public:
 		Text* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};
-	
 	
 	template<>
 	struct DecodePointer<Text> {

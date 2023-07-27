@@ -6,16 +6,6 @@
 #include "../yamlBuilder/general/yamlBuilder.hpp"
 
 namespace ui {
-	template<bool Condition, typename TrueType, typename FalseType>
-	struct select_if_ { using type = TrueType; };
-	template<typename TrueType, typename FalseType>
-	struct select_if_<false, TrueType, FalseType> { using type = FalseType; };
-	
-	template<bool Condition, typename TrueType, typename FalseType>
-	using select_if = typename select_if_<Condition, TrueType, FalseType>::type;
-}
-
-namespace ui {
 	std::vector<std::string> splitByDelimiter(const std::string& str, char delimiter);
 	
 	std::vector<std::string> splitString(const std::string& str, const std::function<bool(char, size_t)>& divider);

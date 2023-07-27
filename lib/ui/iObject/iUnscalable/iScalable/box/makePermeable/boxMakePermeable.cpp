@@ -19,7 +19,6 @@ namespace ui {
 		return boxMakePermeable;
 	}
 	
-	
 	bool DecodePointer<BoxMakePermeable>::decodePointer(const YAML::Node& node, BoxMakePermeable*& boxMakePermeable) {
 		IScalable* object;
 		sf::Vector2f minSize{};

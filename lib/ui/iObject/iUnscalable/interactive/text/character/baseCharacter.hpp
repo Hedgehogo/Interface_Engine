@@ -22,7 +22,6 @@ namespace ui {
 		sf::Vector2f position;
 		bool selection;
 		bool active;
-		
 		bool rerender;
 	
 	public:

@@ -27,32 +27,28 @@ namespace ui {
 	using Uint32 = sf::Uint32;
 	
 	struct SymbolPosition {
-		ullint line;
-		ullint number;
+		std::size_t line;
+		std::size_t number;
 	};
 	
 	SymbolPosition readCharacterIndex(const YAML::Node& node, std::basic_ifstream<char32_t>& fin);
 	
 	std::basic_string<Uint32> u32stringToUint32String(std::basic_string<char32_t> str);
 	
-	
 	template<>
 	struct Decode<std::basic_string<char32_t>> {
 		static bool decode(const YAML::Node& node, std::basic_string<char32_t>& string32);
 	};
-	
 	
 	template<>
 	struct Decode<sf::String> {
 		static bool decode(const YAML::Node& node, sf::String& sfString);
 	};
 	
-	
 	template<>
 	struct Decode<sf::Texture*> {
 		static bool decode(const YAML::Node& node, sf::Texture*& texture);
 	};
-	
 	
 	template<>
 	struct Decode<sf::Font*> {
@@ -70,7 +66,6 @@ namespace ui {
 		static bool decode(const YAML::Node& node, std::vector<sf::Texture>*& video);
 	};
 #endif
-	
 }
 
 #include "fileBuffer.inl"

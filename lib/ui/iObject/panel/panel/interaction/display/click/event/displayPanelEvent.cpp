@@ -20,5 +20,4 @@ namespace ui {
 		PanelEvent::copy(displayPanelEvent);
 		return displayPanelEvent;
 	}
-	
 }

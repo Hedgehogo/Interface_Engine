@@ -49,7 +49,6 @@ namespace ui {
 		return boxWithConstBezel;
 	}
 	
-	
 	bool DecodePointer<BoxWithConstBezel>::decodePointer(const YAML::Node& node, BoxWithConstBezel*& boxWithConstBezel) {
 		IScalable* object;
 		IUninteractive* bezel;

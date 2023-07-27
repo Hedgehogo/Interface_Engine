@@ -25,7 +25,6 @@ namespace ui {
 		void setValue(const T& value) override;
 	};
 	
-	
 	template<typename T>
 	struct DecodePointer<SRangeValue<T>> {
 		static bool decodePointer(const YAML::Node& node, SRangeValue<T>*& sRangeValue);

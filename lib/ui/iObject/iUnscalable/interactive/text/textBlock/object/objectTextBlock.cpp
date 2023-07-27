@@ -2,10 +2,12 @@
 #include "../../character/simple/character.hpp"
 
 namespace ui {
-	ObjectTextBlock::ObjectTextBlock(IScalable* object, sf::Vector2f size, bool isCharacter) : BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), object(object), isCharacter(isCharacter), fullLine(false) {
+	ObjectTextBlock::ObjectTextBlock(IScalable* object, sf::Vector2f size, bool isCharacter) :
+		BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), object(object), isCharacter(isCharacter), fullLine(false) {
 	}
 	
-	ObjectTextBlock::ObjectTextBlock(IScalable* object, float height) : size(0, height), fullLine(true), isCharacter(false), object(object), objectCharacter(new ObjectCharacter{object, true}) {
+	ObjectTextBlock::ObjectTextBlock(IScalable* object, float height) :
+		size(0, height), fullLine(true), isCharacter(false), object(object), objectCharacter(new ObjectCharacter{object, true}) {
 	}
 	
 	void ObjectTextBlock::init(InitInfo textInitInfo, InitInfo initInfo) {
@@ -43,7 +45,6 @@ namespace ui {
 	BaseTextBlock* ObjectTextBlock::copy() {
 		return new ObjectTextBlock{object->copy(), object->getAreaSize(), isCharacter};
 	}
-	
 	
 	bool DecodePointer<ObjectTextBlock>::decodePointer(const YAML::Node& node, ObjectTextBlock*& objectTextBlock) {
 		IScalable* object;

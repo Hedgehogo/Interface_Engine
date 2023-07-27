@@ -27,7 +27,6 @@ namespace ui {
 		return constPanel;
 	}
 	
-	
 	bool DecodePointer<ConstPanel>::decodePointer(const YAML::Node& node, ConstPanel*& constPanel) {
 		IScalable* object;
 		ISizing2* sizing;

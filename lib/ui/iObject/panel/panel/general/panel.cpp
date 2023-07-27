@@ -79,7 +79,6 @@ namespace ui {
 		return panel;
 	}
 	
-	
 	bool DecodePointer<Panel>::decodePointer(const YAML::Node& node, Panel*& panel) {
 		IScalable* object;
 		HidePanelInteraction* hideInteraction;

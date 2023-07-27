@@ -25,7 +25,6 @@ namespace ui {
 		return pointingHidePanelInteraction;
 	}
 	
-	
 	bool DecodePointer<PointingHidePanelInteraction>::decodePointer(const YAML::Node& node, PointingHidePanelInteraction*& pointingHidePanelInteraction) {
 		bool onlyOnParent{false};
 		

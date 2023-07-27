@@ -15,7 +15,6 @@ namespace ui {
 		BoxMakePermeable* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<BoxMakePermeable> {
 		static bool decodePointer(const YAML::Node& node, BoxMakePermeable*& boxMakePermeable);

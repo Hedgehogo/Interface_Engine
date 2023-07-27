@@ -1,7 +1,6 @@
 //included into sConvertValue.hpp
 
 namespace ui {
-	
 	template<typename FromType, typename ToType>
 	SConvertValue<FromType, ToType>::SConvertValue(PISValue<FromType> fromValue, ToType defaultValue) : SValue<ToType>(defaultValue) {
 		fromValue->addSetter([this](const FromType& value) {
@@ -30,7 +29,7 @@ namespace ui {
 	}
 	
 	template<typename FromType, typename ToType>
-	bool DecodePointer<SConvertValue<FromType, ToType>>::decodePointer(const YAML::Node& node, SConvertValue<FromType, ToType>*& sConvertValue) {
+	bool DecodePointer<SConvertValue<FromType, ToType> >::decodePointer(const YAML::Node& node, SConvertValue<FromType, ToType>*& sConvertValue) {
 		sConvertValue = new SConvertValue<FromType, ToType>{
 			Buffer::get<ISValue<FromType>>(node["value"]),
 			convDef(node["default-value"], ToType{})

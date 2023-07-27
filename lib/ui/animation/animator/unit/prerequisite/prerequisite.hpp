@@ -10,6 +10,7 @@ namespace ui {
 		std::vector<IAnimatorUnit*> nextTrue;
 		std::vector<IAnimatorUnit*> nextFalse;
 		PISbool valve;
+		
 	public:
 		Prerequisite(PISbool valve, std::vector<IAnimatorUnit*> nextTrue, std::vector<IAnimatorUnit*> nextFalse);
 		
@@ -27,7 +28,6 @@ namespace ui {
 		
 		~Prerequisite();
 	};
-	
 	
 	template<>
 	struct DecodePointer<Prerequisite> {

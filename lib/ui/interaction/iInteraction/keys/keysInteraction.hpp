@@ -36,7 +36,6 @@ namespace ui {
 		
 	};
 	
-	
 	template<>
 	struct DecodePointer<KeysInteraction> {
 		static bool decodePointer(const YAML::Node& node, KeysInteraction*& keysInteraction);

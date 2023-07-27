@@ -76,7 +76,6 @@ namespace ui {
 		strip->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue, hueOffset);
 	}
 	
-	
 	bool DecodePointer<Bar>::decodePointer(const YAML::Node& node, Bar*& bar) {
 		IUninteractive* background;
 		IUninteractive* strip;

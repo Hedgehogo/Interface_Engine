@@ -1,7 +1,6 @@
 #include "parentCoefficientSizing.hpp"
 
 namespace ui {
-	
 	ParentCoefficientSizing::ParentCoefficientSizing(float coefficient, float addition) : coefficient(coefficient), addition(addition) {
 	}
 	
@@ -19,7 +18,6 @@ namespace ui {
 	float ParentCoefficientSizing::getParentSize(float objectSize) {
 		return (objectSize - addition) / coefficient;
 	}
-	
 	
 	bool DecodePointer<ParentCoefficientSizing>::decodePointer(const YAML::Node& node, ParentCoefficientSizing*& parentCoefficientSizing) {
 		float coefficient;

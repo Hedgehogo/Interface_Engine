@@ -24,6 +24,7 @@ namespace ui {
 		const float lineSpacing;
 		const Align align;
 		const Algorithm algorithm;
+		
 	public:
 		BaseResizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);
 		
@@ -47,7 +48,6 @@ namespace ui {
 		virtual sf::Vector2f getMinSizeAbsolute() = 0;
 	
 	public:
-		
 		virtual sf::Vector2f getMinSize();
 		
 		virtual sf::Vector2f getNormalSize() = 0;
@@ -57,12 +57,10 @@ namespace ui {
 		virtual ~BaseResizer() = default;
 	};
 	
-	
 	template<>
 	struct Decode<BaseResizer::Align> {
 		static bool decode(const YAML::Node& node, BaseResizer::Align& align);
 	};
-	
 	
 	template<>
 	struct Decode<BaseResizer::Algorithm> {

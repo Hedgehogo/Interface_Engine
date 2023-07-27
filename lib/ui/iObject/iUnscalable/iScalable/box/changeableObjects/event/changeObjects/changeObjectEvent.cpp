@@ -22,7 +22,6 @@ namespace ui {
 		return new ChangeObjectEvent{value, index};
 	}
 	
-	
 	bool DecodePointer<ChangeObjectEvent>::decodePointer(const YAML::Node& node, ChangeObjectEvent*& changeObjectEvent) {
 		uint index{0};
 		std::shared_ptr<SValue<uint>> value = Buffer::get<SValue<uint>>(node["value"]);

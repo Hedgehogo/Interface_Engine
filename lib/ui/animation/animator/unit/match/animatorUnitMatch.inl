@@ -90,30 +90,31 @@ namespace ui {
 		std::function<bool(T, T)> condition;
 		auto conditionStr{node["condition"].as<std::string>()};
 		
-		if(conditionStr == "equals")
+		if(conditionStr == "equals") {
 			condition = [](T a, T b) {
 				return a == b;
 			};
-		else if(conditionStr == "not-equals")
+		} else if(conditionStr == "not-equals") {
 			condition = [](T a, T b) {
 				return a != b;
 			};
-		else if(conditionStr == "greater")
+		} else if(conditionStr == "greater") {
 			condition = [](T a, T b) {
 				return a > b;
 			};
-		else if(conditionStr == "less")
+		} else if(conditionStr == "less") {
 			condition = [](T a, T b) {
 				return a < b;
 			};
-		else if(conditionStr == "greater-or-equals")
+		} else if(conditionStr == "greater-or-equals") {
 			condition = [](T a, T b) {
 				return a >= b;
 			};
-		else if(conditionStr == "less-or-equals")
+		} else if(conditionStr == "less-or-equals") {
 			condition = [](T a, T b) {
 				return a <= b;
 			};
+		}
 		
 		option = typename AnimatorUnitMatch<T>::Option{
 			node["example"].as<T>(),
@@ -122,7 +123,6 @@ namespace ui {
 		};
 		return true;
 	}
-	
 	
 	template<typename T>
 	void addNextAnimatorUnitForMach(const YAML::Node& node, int i, AnimatorUnitMatch<T>*& animatorUnitMatch) {
@@ -137,19 +137,18 @@ namespace ui {
 	
 	template<typename T>
 	bool DecodePointer<AnimatorUnitMatch<T>>::decodePointer(const YAML::Node& node, AnimatorUnitMatch<T>*& animatorUnitMatch) {
-		
 		std::vector<typename AnimatorUnitMatch<T>::Option> options;
 		
-		if(node["options"])
+		if(node["options"]) {
 			options = node["options"].as<std::vector<typename AnimatorUnitMatch<T>::Option>>();
-		else
+		} else {
 			options = std::vector{node["option"].as<typename AnimatorUnitMatch<T>::Option>()};
+		}
 		
 		animatorUnitMatch = new AnimatorUnitMatch<T>{
 			options,
 			Buffer::get<SValue<T>>(node["value"])
 		};
-		
 		
 		if(node["options"]) {
 			for(int i = 0; i < node["options"].size(); ++i) {

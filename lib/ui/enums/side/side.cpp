@@ -1,8 +1,6 @@
 #include "side.hpp"
 
 namespace ui {
-	
-	
 	bool Decode<Side>::decode(const YAML::Node& node, Side& side) {
 		std::string str{node.as<std::string>()};
 		if(str == "up") {

@@ -12,7 +12,6 @@ namespace ui {
 		return new MatchPositioning{parentCoefficient, objectCoefficient, offset};
 	}
 	
-	
 	bool DecodePointer<MatchPositioning>::decodePointer(const YAML::Node& node, MatchPositioning*& matchPositioning) {
 		float parentCoefficient;
 		float objectCoefficient;

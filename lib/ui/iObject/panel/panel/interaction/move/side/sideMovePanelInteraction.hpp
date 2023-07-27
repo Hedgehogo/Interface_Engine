@@ -18,7 +18,6 @@ namespace ui {
 		SideMovePanelInteraction* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<SideMovePanelInteraction> {
 		static bool decodePointer(const YAML::Node& node, SideMovePanelInteraction*& sideMovePanelInteraction);

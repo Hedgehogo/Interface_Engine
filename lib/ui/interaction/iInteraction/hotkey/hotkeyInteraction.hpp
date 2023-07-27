@@ -8,10 +8,10 @@ namespace ui {
 	class HotkeyInteraction : public virtual IInteraction {
 	public:
 		struct Hotkey {
-			uint state{UINT32_MAX};
+			uint state{std::numeric_limits<uint32_t>::max()};
 			KeysInteraction* interaction{nullptr};
 			
-			Hotkey(KeysInteraction* interaction, uint state = UINT32_MAX);
+			Hotkey(KeysInteraction* interaction, uint state = std::numeric_limits<uint32_t>::max());
 			
 			Hotkey(uint state);
 			
@@ -46,12 +46,10 @@ namespace ui {
 		~HotkeyInteraction() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<HotkeyInteraction> {
 		static bool decodePointer(const YAML::Node& node, HotkeyInteraction*& hotkeyInteraction);
 	};
-	
 	
 	template<>
 	struct Decode<HotkeyInteraction::Hotkey*> {

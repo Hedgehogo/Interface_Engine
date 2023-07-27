@@ -23,7 +23,6 @@ namespace ui {
 		Capsule* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<Capsule> {
 		static bool decodePointer(const YAML::Node& node, Capsule*& capsule);

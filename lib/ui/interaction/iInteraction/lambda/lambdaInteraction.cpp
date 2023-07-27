@@ -1,7 +1,7 @@
 #include "lambdaInteraction.hpp"
 
 namespace ui {
-	LambdaInteraction::LambdaInteraction(void ( * startPointing)(sf::Vector2i mousePosition), void (* finishPointing)(sf::Vector2i mousePosition)) :
+	LambdaInteraction::LambdaInteraction(void (* startPointing)(sf::Vector2i mousePosition), void (* finishPointing)(sf::Vector2i mousePosition)) :
 		startPointing(startPointing), finishPointing(finishPointing) {
 	}
 	

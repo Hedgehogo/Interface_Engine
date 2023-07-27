@@ -2,7 +2,6 @@
 #include "modules/appendix/yaml-cpp/shared/vector/iSVector2.hpp"
 #include "modules/appendix/yaml-cpp/shared/list/iSList.hpp"
 
-
 namespace ui {
 	std::vector<std::string> splitByDelimiter(const std::string& str, char delimiter) {
 		std::stringstream strStream{str};

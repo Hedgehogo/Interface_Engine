@@ -4,7 +4,8 @@
 #include "ui/iObject/layout/twoObjects/layoutWithTwoObjects.hpp"
 
 namespace ui {
-	class BoxSwitcher : public Box, public LayoutWithTwoObjects, public IDrawable{
+	class BoxSwitcher : public Box, public LayoutWithTwoObjects, public IDrawable {
+	protected:
 		DrawManager firstDrawManager;
 		DrawManager secondDrawManager;
 		PSbool value;

@@ -1,6 +1,6 @@
 #include "caption.hpp"
 #include <algorithm>
-#include "../../../../../../modules/appendix/HSVtoRGB/HsVtoRgb.hpp"
+#include "../../../../../../modules/appendix/HSVtoRGB/hsvToRgb.hpp"
 
 using uint = unsigned;
 
@@ -130,7 +130,7 @@ namespace ui {
 			sf::Vector2f size{bounds.width, bounds.height};
 			sf::Vector2f position{bounds.left, bounds.top};
 			if(size.x > 0 && size.y > 0) {
-				sf::Color color{HSVtoRGB(static_cast<float>(hue + hueOffset * 2 % 360))};
+				sf::Color color{hsvToRgb(static_cast<float>(hue + hueOffset * 2 % 360))};
 				
 				sf::RectangleShape rectangle{size};
 				rectangle.setPosition(position);
@@ -152,7 +152,7 @@ namespace ui {
 			sf::Vector2f size{bounds.width, bounds.height};
 			sf::Vector2f position{bounds.left, bounds.top};
 			if(size.x > 0 && size.y > 0) {
-				sf::Color color{HSVtoRGB(static_cast<float>(hue + hueOffset % 360))};
+				sf::Color color{hsvToRgb(static_cast<float>(hue + hueOffset % 360))};
 				
 				sf::RectangleShape rectangle{size};
 				rectangle.setPosition(position);
@@ -170,7 +170,6 @@ namespace ui {
 			}
 		}
 	}
-	
 	
 	bool DecodePointer<Caption>::decodePointer(const YAML::Node& node, Caption*& caption) {
 		sf::String text;

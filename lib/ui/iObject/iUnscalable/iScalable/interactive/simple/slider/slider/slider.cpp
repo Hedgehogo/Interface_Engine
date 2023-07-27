@@ -1,9 +1,10 @@
 #include "slider.hpp"
 
 namespace ui {
-	Slider::Slider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, sf::Vector2f sliderScale, Key key, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity,
-				   sf::Vector2f wheelSensitivity) :
-		BaseSlider(slider, background, value, new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}), scale(sliderScale) {
+	Slider::Slider(
+		IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, sf::Vector2f sliderScale, Key key, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity,
+		sf::Vector2f wheelSensitivity
+	) : BaseSlider(slider, background, value, new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}), scale(sliderScale) {
 	}
 	
 	Slider::Slider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, sf::Vector2i division, sf::Vector2f sliderScale, Key key, bool wheelHorizontal) :

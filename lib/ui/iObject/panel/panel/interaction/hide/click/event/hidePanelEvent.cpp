@@ -26,7 +26,6 @@ namespace ui {
 		return hidePanelEvent;
 	}
 	
-	
 	bool DecodePointer<HidePanelEvent>::decodePointer(const YAML::Node& node, HidePanelEvent*& hidePanelEvent) {
 		bool onlyOnParent{false};
 		

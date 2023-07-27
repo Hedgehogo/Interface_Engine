@@ -7,17 +7,14 @@ namespace ui {
 			case Location2::up:
 			case Location2::upRight:
 				return Location::origin;
-				break;
 			case Location2::left:
 			case Location2::center:
 			case Location2::right:
 				return Location::center;
-				break;
 			case Location2::downLeft:
 			case Location2::down:
 			case Location2::downRight:
 				return Location::end;
-				break;
 		}
 		return Location::center;
 	}
@@ -28,17 +25,14 @@ namespace ui {
 			case Location2::left:
 			case Location2::downLeft:
 				return Location::origin;
-				break;
 			case Location2::up:
 			case Location2::center:
 			case Location2::down:
 				return Location::center;
-				break;
 			case Location2::upRight:
 			case Location2::right:
 			case Location2::downRight:
 				return Location::end;
-				break;
 		}
 		return Location::center;
 	}
@@ -49,45 +43,35 @@ namespace ui {
 				switch(horizontal) {
 					case Location::origin:
 						return Location2::upLeft;
-						break;
 					case Location::center:
 						return Location2::up;
-						break;
 					case Location::end:
 						return Location2::upRight;
-						break;
 				}
 				break;
 			case Location::center:
 				switch(horizontal) {
 					case Location::origin:
 						return Location2::left;
-						break;
 					case Location::center:
 						return Location2::center;
-						break;
 					case Location::end:
 						return Location2::right;
-						break;
 				}
 				break;
 			case Location::end:
 				switch(horizontal) {
 					case Location::origin:
 						return Location2::downLeft;
-						break;
 					case Location::center:
 						return Location2::down;
-						break;
 					case Location::end:
 						return Location2::downRight;
-						break;
 				}
 				break;
 		}
 		return Location2::center;
 	}
-	
 	
 	bool Decode<Location2>::decode(const YAML::Node& node, Location2& location2) {
 		std::string str{node.as<std::string>()};

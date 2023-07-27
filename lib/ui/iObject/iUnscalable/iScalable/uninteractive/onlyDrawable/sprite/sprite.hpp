@@ -34,7 +34,6 @@ namespace ui {
 		Sprite* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<Sprite> {
 		static bool decodePointer(const YAML::Node& node, Sprite*& sprite);

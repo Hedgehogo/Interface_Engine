@@ -7,7 +7,7 @@ namespace ui {
 	template<typename T>
 	class SVector2 : public ISVector2 {
 	public:
-		typedef to_auto<decltype(std::declval<T>().getValue())> V;
+		using V = to_auto<decltype(std::declval<T>().getValue())>;
 		using SetterFunc = std::function<void(const sf::Vector2<V>&)>;
 	
 	protected:
@@ -44,9 +44,8 @@ namespace ui {
 		void setValue(const sf::Vector2<V>& vector);
 	};
 	
-	
 	template<typename T>
-	struct DecodePointer<SVector2<T>> {
+	struct DecodePointer<SVector2<T> > {
 		static bool decodePointer(const YAML::Node& node, SVector2<T>*& withVector2);
 	};
 	
@@ -54,16 +53,16 @@ namespace ui {
 	using SVec2 = SVector2<T>;
 	
 	template<typename T>
-	using PSVec2 = std::shared_ptr<SVec2<T>>;
+	using PSVec2 = std::shared_ptr<SVec2<T> >;
 	
 	template<typename T>
-	void setRangeUpper(PSVec2<SRange<T>> value, sf::Vector2<T> upper);
+	void setRangeUpper(PSVec2<SRange<T> > value, sf::Vector2<T> upper);
 	
 	template<typename T>
-	void setRangeLower(PSVec2<SRange<T>> value, sf::Vector2<T> lower);
+	void setRangeLower(PSVec2<SRange<T> > value, sf::Vector2<T> lower);
 	
 	template<typename T>
-	void setRangeBounds(PSVec2<SRange<T>> value, sf::Vector2<T> lower, sf::Vector2<T> upper);
+	void setRangeBounds(PSVec2<SRange<T> > value, sf::Vector2<T> lower, sf::Vector2<T> upper);
 	
 	using SVec2f = SVec2<Sfloat>;
 	using SVec2i = SVec2<Sint>;

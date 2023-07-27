@@ -12,6 +12,7 @@ namespace ui {
 			std::vector<Key> keys;
 			std::vector<Key> blackListKeys = {};
 		};
+		
 	protected:
 		std::vector<ui::TextAddBlockInteractionEvent*> addEvents;
 		std::vector<ui::TextInteraction*> pressedInteractions;
@@ -25,7 +26,6 @@ namespace ui {
 		TextSelectionAndCopyInteraction(const std::vector<std::vector<Hotkey*>>& hotkeys, uint startState, const std::vector<ui::TextAddBlockInteractionEvent*>& addEvents, const std::vector<ui::TextInteraction*>& pressedInteractions);
 	
 	public:
-		
 		TextSelectionAndCopyInteraction* copy() override;
 		
 		~TextSelectionAndCopyInteraction();

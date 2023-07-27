@@ -27,7 +27,6 @@ namespace ui {
 		FullColor* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<FullColor> {
 		static bool decodePointer(const YAML::Node& node, FullColor*& fullColor);

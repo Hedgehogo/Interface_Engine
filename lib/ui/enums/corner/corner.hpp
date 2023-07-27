@@ -10,7 +10,6 @@ namespace ui {
 		downLeft
 	};
 	
-	
 	template<>
 	struct Decode<Corner> {
 		static bool decode(const YAML::Node& node, Corner& corner);

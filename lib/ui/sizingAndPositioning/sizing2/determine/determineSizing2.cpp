@@ -8,31 +8,53 @@ namespace ui {
 			return true;
 		} else {
 			if(node["ratio"].IsDefined() || node["horizontal"].IsDefined()) {
-				if(determine(node, {}, {{"relative"},
-										{"ratio"},
-										{"horizontal"}}) ||
-				   determine(node, {{"const-size"}}, {{"ratio"},
-													  {"horizontal"}}) ||
-				   determine(node, {{"coefficient"}}, {{"addition"},
-													   {"relative"},
-													   {"ratio"},
-													   {"horizontal"}}) ||
-				   determine(node, {{"target-coefficient"},
-									{"parent-coefficient"}}, {{"addition"},
-															  {"ratio"},
-															  {"horizontal"}})) {
+				if(
+					determine(node, {}, {
+						{"relative"},
+						{"ratio"},
+						{"horizontal"}
+					}) ||
+					determine(node, {{"const-size"}}, {
+						{"ratio"},
+						{"horizontal"}
+					}) ||
+					determine(node, {{"coefficient"}}, {
+						{"addition"},
+						{"relative"},
+						{"ratio"},
+						{"horizontal"}
+					}) ||
+					determine(
+						node, {
+							{"target-coefficient"},
+							{"parent-coefficient"}
+						}, {
+							{"addition"},
+							{"ratio"},
+							{"horizontal"}
+						}
+					)
+					) {
 					type = "ConstRatioSizing2";
 					return true;
 				}
 			} else {
-				if(determine(node, {{"horizontal"},
-									{"vertical"}}) ||
-				   determine(node, {{"relative"}}) ||
-				   determine(node, {{"const-size"}}) ||
-				   determine(node, {{"coefficient"}}, {{"addition"},
-													   {"relative"}}) ||
-				   determine(node, {{"target-coefficient"},
-									{"parent-coefficient"}}, {{"addition"}})) {
+				if(
+					determine(node, {
+						{"horizontal"},
+						{"vertical"}
+					}) ||
+					determine(node, {{"relative"}}) ||
+					determine(node, {{"const-size"}}) ||
+					determine(node, {{"coefficient"}}, {
+						{"addition"},
+						{"relative"}
+					}) ||
+					determine(node, {
+						{"target-coefficient"},
+						{"parent-coefficient"}
+					}, {{"addition"}})
+					) {
 					type = "Sizing2";
 					return true;
 				}

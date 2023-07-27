@@ -6,9 +6,10 @@
 namespace ui {
 	std::vector<BaseCharacter*>::iterator nullBaseCharacterIterator{nullptr};
 	
-	Text::Text(std::vector<BaseTextBlock*> textBlocks, IUninteractive* background, int size, sf::Font* font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
-			   sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer* resizer, TextInteraction* textInteraction) :
-		background(background), size(size), textBocks(textBlocks), resizer(resizer), textInteraction(textInteraction) {
+	Text::Text(
+		std::vector<BaseTextBlock*> textBlocks, IUninteractive* background, int size, sf::Font* font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
+		sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer* resizer, TextInteraction* textInteraction
+	) : background(background), size(size), textBocks(textBlocks), resizer(resizer), textInteraction(textInteraction) {
 		for(BaseTextBlock* textBlock: textBlocks) {
 			textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, (inactiveTextSelectionColor == nullColor ? textColor : inactiveTextSelectionColor), inactiveBackgroundSelectionColor, font,
 										size);
@@ -107,10 +108,11 @@ namespace ui {
 		if(distanceToB > distanceToB1)
 			std::swap(distanceToB, distanceToB1);
 		
-		if(distanceToA == distanceToB)
+		if(distanceToA == distanceToB) {
 			return distanceToA1 < distanceToB1;
-		else
+		} else {
 			return distanceToA < distanceToB;
+		}
 	}
 	
 	
@@ -171,7 +173,6 @@ namespace ui {
 	}
 	
 	void Text::draw() {
-		
 		bool rerender{false};
 		int i = 0;
 		for(auto& character: textCharacters) {
@@ -268,13 +269,12 @@ namespace ui {
 		return new Text{copyTextBlocks, background->copy(), size, resizer->copy(), renderTarget, textInteraction->copy()};
 	}
 	
-	
 	bool DecodePointer<Text>::decodePointer(const YAML::Node& node, Text*& text) {
 		text = new Text{
 			node["text-block"] ? std::vector{node["text-block"].as<BaseTextBlock*>()} : node["text-blocks"].as<std::vector<BaseTextBlock*>>(),
 			convDefPtr<IUninteractive, FullColor>(node["background"], sf::Color::White),
 			convDef(node["size"], 14),
-			convDef<sf::Font*>(node["font"],  nullptr),
+			convDef<sf::Font*>(node["font"], nullptr),
 			convDef(node["text-color"], sf::Color::Black),
 			convDef(node["text-selection-color"], sf::Color::White),
 			convDef(node["background-selection-color"], sf::Color::Blue),
@@ -282,18 +282,18 @@ namespace ui {
 			convDef(node["inactive-background-selection-color"], sf::Color{150, 150, 150}),
 			convDefPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::left),
 			node["text-interaction"] ? node["text-interaction"].as<TextInteraction*>() :
-				new TextSelectionAndCopyInteraction{
+			new TextSelectionAndCopyInteraction{
+				{
 					{
-						{
-							new TextPressedInteraction{
-								new TextSelectionEvent{},
-								{Key::mouseLeft}
-							},
+						new TextPressedInteraction{
+							new TextSelectionEvent{},
 							{Key::mouseLeft}
-						}
-					},
-					
-				}
+						},
+						{Key::mouseLeft}
+					}
+				},
+				
+			}
 		};
 		return true;
 	}

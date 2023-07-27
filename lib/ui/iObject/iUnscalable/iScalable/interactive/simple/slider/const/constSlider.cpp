@@ -2,9 +2,10 @@
 #include "constSlider.hpp"
 
 namespace ui {
-	ConstSlider::ConstSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, float sliderScale, Key key, bool wheelHorizontal,
-							 SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
-		BaseSlider(slider, background, value, new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
+	ConstSlider::ConstSlider(
+		IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, float sliderScale, Key key, bool wheelHorizontal,
+		SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity
+	) : BaseSlider(slider, background, value, new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
 		
 		sliderSize = slider->getNormalSize();
 		aspectRatio = sliderSize.x / sliderSize.y;
@@ -39,7 +40,6 @@ namespace ui {
 		BaseSlider::copy(constSlider);
 		return constSlider;
 	}
-	
 	
 	bool DecodePointer<ConstSlider>::decodePointer(const YAML::Node& node, ConstSlider*& constSlider) {
 		IUninteractive* slider;

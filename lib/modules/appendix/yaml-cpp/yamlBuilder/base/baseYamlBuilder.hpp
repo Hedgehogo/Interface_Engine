@@ -3,7 +3,7 @@
 #include "../iYamlBuilder.hpp"
 
 namespace ui::detail {
-	class BaseYamlBuilder : public IYamlBuilder{
+	class BaseYamlBuilder : public IYamlBuilder {
 	public:
 		virtual void addType(IYamlBuilder* builder) = 0;
 	};

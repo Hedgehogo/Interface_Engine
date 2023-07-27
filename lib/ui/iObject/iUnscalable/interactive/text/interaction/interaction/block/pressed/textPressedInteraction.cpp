@@ -26,5 +26,4 @@ namespace ui {
 	TextPressedInteraction* TextPressedInteraction::copy() {
 		return new TextPressedInteraction{event->copy(), keys, blackListKeys};
 	}
-	
 }

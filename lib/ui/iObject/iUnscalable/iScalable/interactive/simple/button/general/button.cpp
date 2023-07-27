@@ -21,7 +21,6 @@ namespace ui {
 		return buttonWithIndex;
 	}
 	
-	
 	bool DecodePointer<Button>::decodePointer(const YAML::Node& node, Button*& button) {
 		IScalable* background;
 		

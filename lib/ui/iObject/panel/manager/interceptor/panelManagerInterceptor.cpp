@@ -52,5 +52,4 @@ namespace ui {
 	bool PanelManagerInterceptor::updateInteractions(sf::Vector2f mousePosition, bool active) {
 		return panelManager->updateInteractions(mousePosition, active);
 	}
-	
 }

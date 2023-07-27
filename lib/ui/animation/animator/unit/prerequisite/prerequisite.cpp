@@ -34,7 +34,6 @@ namespace ui {
 		for(auto& unit: this->nextFalse) {
 			unit->restart();
 		}
-		
 	}
 	
 	std::vector<IAnimatorUnit*> Prerequisite::update(float time) {
@@ -50,7 +49,6 @@ namespace ui {
 	}
 	
 	IAnimatorUnit* Prerequisite::copy() {
-		
 		std::vector<IAnimatorUnit*> copyNextTrue{nextTrueBuf.size()};
 		
 		for(size_t i = 0; i < nextTrueBuf.size(); ++i) {

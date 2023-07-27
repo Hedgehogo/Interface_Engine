@@ -4,7 +4,6 @@
 #include "../../enums/keyHandler/keyHandler.hpp"
 
 namespace ui {
-	
 	void handleEvent(sf::Event event) {
 		if(event.type == sf::Event::MouseWheelScrolled) {
 			MouseWheel::setDelta(event.mouseWheelScroll);

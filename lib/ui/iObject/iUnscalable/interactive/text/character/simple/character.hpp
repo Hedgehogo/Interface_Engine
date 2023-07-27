@@ -7,7 +7,6 @@
 namespace ui {
 	class Character : public BaseCharacter {
 	protected:
-		
 		sf::RenderTarget* renderTarget;
 		
 		char32_t character;
@@ -18,7 +17,6 @@ namespace ui {
 		sf::VertexArray selectionVertexArray;
 		sf::Texture texture;
 		sf::Vector2f origin;
-		
 		
 		std::vector<BaseLine*>& lines;
 	public:

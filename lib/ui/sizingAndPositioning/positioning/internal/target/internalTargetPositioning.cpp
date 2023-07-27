@@ -20,7 +20,6 @@ namespace ui {
 		return offset;
 	}
 	
-	
 	bool DecodePointer<InternalTargetPositioning>::decodePointer(const YAML::Node& node, InternalTargetPositioning*& internalTargetPositioning) {
 		float coefficient;
 		float offset{0.f};

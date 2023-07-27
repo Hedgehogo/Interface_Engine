@@ -50,7 +50,6 @@ namespace ui {
 		return constRatioSizing2;
 	}
 	
-	
 	bool DecodePointer<ConstRatioSizing2>::decodePointer(const YAML::Node& node, ConstRatioSizing2*& constRatioSizing2) {
 		float ratio{convDef(node["ratio"], 1.f)};
 		bool horizontal{convBoolDef(node["direction"], "horizontal", "vertical", true)};

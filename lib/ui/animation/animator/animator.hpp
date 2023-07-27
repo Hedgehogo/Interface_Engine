@@ -19,7 +19,6 @@ namespace ui {
 		~Animator();
 	};
 	
-	
 	template<>
 	struct DecodePointer<Animator> {
 		static bool decodePointer(const YAML::Node& node, Animator*& animator);

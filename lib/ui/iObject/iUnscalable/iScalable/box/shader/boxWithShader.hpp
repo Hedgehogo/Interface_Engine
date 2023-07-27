@@ -21,13 +21,15 @@ namespace ui {
 		sf::Clock clock;
 	
 	public:
-		BoxWithShader(IScalable* var, sf::Shader* shader, uint transmission,
-					  std::map<std::string, PISfloat> valuesF = {},
-					  std::map<std::string, PISint> valuesI = {},
-					  std::map<std::string, PISbool> valuesB = {},
-					  std::map<std::string, PISValue<sf::Color>> valuesC = {},
-					  std::map<std::string, PSRVec2f> valuesV = {},
-					  bool optimize = true, sf::Vector2f minSize = {});
+		BoxWithShader(
+			IScalable* var, sf::Shader* shader, uint transmission,
+			std::map<std::string, PISfloat> valuesF = {},
+			std::map<std::string, PISint> valuesI = {},
+			std::map<std::string, PISbool> valuesB = {},
+			std::map<std::string, PISValue<sf::Color>> valuesC = {},
+			std::map<std::string, PSRVec2f> valuesV = {},
+			bool optimize = true, sf::Vector2f minSize = {}
+		);
 		
 		void setUniform(std::string name, float var);
 		
@@ -47,7 +49,6 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 	};
-	
 	
 	template<>
 	struct DecodePointer<BoxWithShader> {

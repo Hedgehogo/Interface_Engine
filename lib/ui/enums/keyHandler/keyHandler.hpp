@@ -157,7 +157,6 @@ namespace ui {
 	
 	bool isKeyPressed(Key key);
 	
-	
 	template<>
 	struct Decode<Key> {
 		static bool decode(const YAML::Node& node, Key& key);
