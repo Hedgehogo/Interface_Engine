@@ -3,7 +3,7 @@ object:
   object:
     type: Text
     text-block: "AAA"
-    font: ../example-resources/segoeui.ttf
+    font: ../../example-resources/segoeui.ttf
     size: 30
   normal-object-position:
     var: a

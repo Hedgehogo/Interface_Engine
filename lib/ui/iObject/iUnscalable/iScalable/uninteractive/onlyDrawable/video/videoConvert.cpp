@@ -11,21 +11,24 @@ namespace ui {
 	}
 	
 	bool videoConvert(const YAML::Node& node, OnlyDrawable*& video) {
+#ifdef IE_ImageMagick_FOUND
 		if(!node["offset"] && isVideo(node["path"].as<std::string>())) {
 			video = new VideoFromFile{
 				*node["path"].as<std::vector<sf::Texture>*>(),
 				Buffer::get<SCoefficientValue>(node["viewing-progress"])
 			};
 		} else {
+#endif
 			video = new VideoFromTexture{
 				*node["path"].as<sf::Texture*>(),
 				Buffer::get<SCoefficientValue>(node["viewing-progress"]),
 				convDef(node["rect"], sf::IntRect{0, 0, 0, 0}),
 				convDef(node["count-frame"], 0),
 				convDef(node["offset"], sf::Vector2i{0, 0}),
-			};
+			};		
+#ifdef IE_ImageMagick_FOUND
 		}
-		
+#endif
 		return true;
 	}
 }

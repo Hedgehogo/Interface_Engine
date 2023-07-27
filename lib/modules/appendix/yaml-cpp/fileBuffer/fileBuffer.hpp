@@ -59,16 +59,17 @@ namespace ui {
 		static bool decode(const YAML::Node& node, sf::Font*& font);
 	};
 	
+#ifdef IE_ImageMagick_FOUND
 	template<>
 	struct LoadFromFile<std::vector<sf::Texture>> {
 		static void load(std::vector<sf::Texture>& object, std::string name);
 	};
 	
-	
 	template<>
 	struct Decode<std::vector<sf::Texture>*> {
 		static bool decode(const YAML::Node& node, std::vector<sf::Texture>*& video);
 	};
+#endif
 	
 }
 

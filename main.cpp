@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
 	ui::init();
 	
 	ui::Window window(
-		"../example-resources/test.yaml",
+		"../../example-resources/test.yaml",
 		"IE works!",
 		{200, 100},
 		sf::ContextSettings{

@@ -3,11 +3,13 @@
 #include <fstream>
 #include <localisation/system.hpp>
 
+#include "config.h"
 #define MAGICKCORE_QUANTUM_DEPTH 16
 # define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
 
+#ifdef IE_ImageMagick_FOUND
 #include <Magick++.h>
-
+#endif
 namespace ui {
 	SymbolPosition readCharacterIndex(const YAML::Node& node, std::basic_ifstream<char32_t>& fin) {
 		ullint line{0};
@@ -166,6 +168,8 @@ namespace ui {
 		return true;
 	}
 	
+	
+#ifdef IE_ImageMagick_FOUND
 	void LoadFromFile<std::vector<sf::Texture>>::load(std::vector<sf::Texture>& object, std::string name) {
 		std::list<Magick::Image> images;
 		Magick::readImages(&images, name);
@@ -204,5 +208,6 @@ namespace ui {
 		video = &FileBuffer<std::vector<sf::Texture>>::get(node.as<std::string>());
 		return true;
 	}
+#endif
 	
 }

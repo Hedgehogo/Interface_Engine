@@ -1,7 +1,7 @@
 #include "prerequisite.hpp"
 
 namespace ui {
-	Prerequisite::Prerequisite(IValve* valve, std::vector<IAnimatorUnit*> nextTrue, std::vector<IAnimatorUnit*> nextFalse) :
+	Prerequisite::Prerequisite(PISbool valve, std::vector<IAnimatorUnit*> nextTrue, std::vector<IAnimatorUnit*> nextFalse) :
 		nextTrue(nextTrue), nextFalse(nextFalse), valve(valve), nextTrueBuf(nextTrue), nextFalseBuf(nextFalse) {
 		for(auto& unit: this->nextTrue) {
 			if(!unit)
@@ -38,7 +38,7 @@ namespace ui {
 	}
 	
 	std::vector<IAnimatorUnit*> Prerequisite::update(float time) {
-		return (*valve)() ? nextTrue : nextFalse;
+		return valve->getValue() ? nextTrue : nextFalse;
 	}
 	
 	void Prerequisite::addNextTrue(IAnimatorUnit* unit) {
@@ -63,7 +63,7 @@ namespace ui {
 			copyNextFalse[i] = nextFalseBuf[i]->copy();
 		}
 		
-		return new Prerequisite{valve->copy(), copyNextTrue, copyNextFalse};
+		return new Prerequisite{valve, copyNextTrue, copyNextFalse};
 	}
 	
 	Prerequisite::~Prerequisite() {
@@ -74,14 +74,12 @@ namespace ui {
 		for(auto item: nextFalseBuf) {
 			delete item;
 		}
-		
-		delete valve;
 	}
 	
 	
 	bool DecodePointer<Prerequisite>::decodePointer(const YAML::Node& node, Prerequisite*& prerequisite) {
 		prerequisite = new Prerequisite{
-			node["valve"].as<IValve*>(),
+			Buffer::get<ISbool>(node["valve"]),
 			getAnimatorUnits(node, "next-true"),
 			getAnimatorUnits(node, "next-false")
 		};

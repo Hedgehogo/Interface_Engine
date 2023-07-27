@@ -5,10 +5,15 @@
 #include "../sizingAndPositioning/positioning/determine/determinePositioning.hpp"
 #include "../sizingAndPositioning/positioning2/determine/determinePositioning2.hpp"
 #include "modules/appendix/yaml-cpp/modules/loadModules.hpp"
+#include "config.h"
+
 #define MAGICKCORE_QUANTUM_DEPTH 16
 # define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
 
-#include <Magick++.h>
+
+#ifdef IE_ImageMagick_FOUND
+	#include <Magick++.h>
+#endif
 
 namespace ui {
 	void sfloatBuilderInit(){
@@ -36,7 +41,9 @@ namespace ui {
 	}
 	
 	void init(int argc, char *argv[], std::filesystem::path modulesList) {
+#ifdef IE_ImageMagick_FOUND
 		Magick::InitializeMagick("");
+#endif
 		yamlBuilderInit();
 		loadModules(argc, argv, modulesList);
 	}
@@ -121,7 +128,6 @@ namespace ui {
 		inherit<IChangeVariable, ChangeVariableBySteppedLine>({"CVBySteppedLine", "CVBySteppedL", "CVBStepL"});
 		inherit<IChangeVariable, ChangeVariableBySinusoid>({"CVBySinusoid", "CVBySin", "CVBS"});
 		inherit<IChangeVariable, ChangeVariableByCurve>({"CVByCurve", "CVBCurve", "CVBC"});
-		inherit<IValve, ValveWithISbool>({"VWISbool", "VIWISB"});
 		
 		addFunc<OnlyDrawable>(videoConvert, {"Video"});
 		//addFunc<Box>(switcherTabsDecodePointer, {"SwitcherTabs", "SwitcherT"});

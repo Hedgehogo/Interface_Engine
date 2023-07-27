@@ -170,7 +170,7 @@ namespace ui {
 		if(auto modules =  std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
 			loadModules(argc, argv, modules);
 		
-		YAML::Node node{YAML::LoadFile(filePath)};
+		YAML::Node node{YAML::LoadFile(filePath.string())};
 		
 		return Interface{
 			node["object"].as<IScalable*>(),
@@ -183,7 +183,7 @@ namespace ui {
 		if(auto modules =  std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
 			loadModules(argc, argv, modules);
 		
-		YAML::Node node{YAML::LoadFile(filePath)};
+		YAML::Node node{YAML::LoadFile(filePath.string())};
 		
 		return Interface{
 			window,
@@ -196,8 +196,8 @@ namespace ui {
 	Interface* makePrtInterface(Window& window, const std::filesystem::path& filePath, int argc, char *argv[]) {
 		if(auto modules =  std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
 			loadModules(argc, argv, modules);
-		
-		YAML::Node node{YAML::LoadFile(filePath)};
+		 
+		YAML::Node node{YAML::LoadFile(filePath.string())};
 		
 		return new Interface{
 			window,

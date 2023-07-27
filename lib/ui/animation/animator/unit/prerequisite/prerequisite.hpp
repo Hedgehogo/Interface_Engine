@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../iAnimatorUnit.hpp"
-#include "velves/iValve.hpp"
 
 namespace ui {
 	class Prerequisite : public IAnimatorUnit {
@@ -10,9 +9,9 @@ namespace ui {
 		std::vector<IAnimatorUnit*> nextFalseBuf;
 		std::vector<IAnimatorUnit*> nextTrue;
 		std::vector<IAnimatorUnit*> nextFalse;
-		IValve* valve;
+		PISbool valve;
 	public:
-		Prerequisite(IValve* valve, std::vector<IAnimatorUnit*> nextTrue, std::vector<IAnimatorUnit*> nextFalse);
+		Prerequisite(PISbool valve, std::vector<IAnimatorUnit*> nextTrue, std::vector<IAnimatorUnit*> nextFalse);
 		
 		void setSpeed(PSfloat speed) override;
 		
