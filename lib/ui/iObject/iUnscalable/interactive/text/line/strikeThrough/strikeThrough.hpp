@@ -4,10 +4,6 @@
 
 namespace ui {
 	class StrikeThrough : public BaseLine {
-	protected:
-		float strikeThroughOffset;
-		float underlineThickness;
-		
 	public:
 		StrikeThrough(sf::Color color = sf::Color{255, 255, 255, 0}, float strikeThroughOffset = 0.3);
 		
@@ -20,6 +16,10 @@ namespace ui {
 	
 	public:
 		StrikeThrough* copy();
+	
+	protected:
+		float strikeThroughOffset;
+		float underlineThickness;
 	};
 	
 	template<>

@@ -19,14 +19,6 @@ namespace ui {
 			Variable copy();
 		};
 	
-	protected:
-		std::vector<IAnimatorUnit*> nextUnits;
-		std::vector<IAnimatorUnit*> nextUnitsBuff;
-		std::vector<Variable> animationVariables;
-		std::vector<Variable*> animationUpdatableVariables;
-		PSfloat speed;
-	
-	public:
 		explicit Animation(std::vector<Variable> animationVariables, PSfloat speed = PSfloat{nullptr}, std::vector<IAnimatorUnit*> nextUnits = {});
 		
 		void setSpeed(PSfloat speed) override;
@@ -42,6 +34,13 @@ namespace ui {
 		Animation* copy() override;
 		
 		~Animation();
+	
+	protected:
+		std::vector<IAnimatorUnit*> nextUnits;
+		std::vector<IAnimatorUnit*> nextUnitsBuff;
+		std::vector<Variable> animationVariables;
+		std::vector<Variable*> animationUpdatableVariables;
+		PSfloat speed;
 	};
 	
 	template<>

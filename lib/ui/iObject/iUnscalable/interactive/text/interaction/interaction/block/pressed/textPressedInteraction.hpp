@@ -4,8 +4,6 @@
 
 namespace ui {
 	class TextPressedInteraction : public TextKeysInteraction {
-	protected:
-		InteractionManager* interactionManager;
 	public:
 		TextPressedInteraction(KeyEvent* event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 		
@@ -16,5 +14,8 @@ namespace ui {
 		void update(sf::Vector2i mousePosition) override;
 		
 		TextPressedInteraction* copy() override;
+	
+	protected:
+		InteractionManager* interactionManager;
 	};
 }

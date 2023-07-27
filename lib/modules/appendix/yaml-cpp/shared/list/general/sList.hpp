@@ -5,17 +5,13 @@
 namespace ui {
 	template<typename T>
 	class SList : public ISList {
-	private:
-		using V = to_auto<decltype(std::declval<T>().getValue())>;
-		using SetterFunc = std::function<void(const std::vector<V>&)>;
-	
 	protected:
-		std::vector<std::shared_ptr<T>> list;
-		std::vector<SetterFunc> setters;
-		
 		void set();
 	
 	public:
+		using V = to_auto<decltype(std::declval<T>().getValue())>;
+		using SetterFunc = std::function<void(const std::vector<V>&)>;
+		
 		SList(const std::vector<V>& list = {});
 		
 		SList(std::vector<std::shared_ptr<T>> list);
@@ -31,10 +27,14 @@ namespace ui {
 		std::vector<V> getValue() const;
 		
 		void setValue(const std::vector<V>& list);
+		
+	protected:
+		std::vector<std::shared_ptr<T>> list;
+		std::vector<SetterFunc> setters;
 	};
 	
 	template<typename T>
-	struct DecodePointer<SList<T>> {
+	struct DecodePointer<SList<T> > {
 		static bool decodePointer(const YAML::Node& node, SList<T>*& withList);
 	};
 	

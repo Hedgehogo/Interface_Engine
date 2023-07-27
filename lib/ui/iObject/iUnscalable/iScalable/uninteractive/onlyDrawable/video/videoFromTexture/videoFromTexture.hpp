@@ -5,14 +5,6 @@
 
 namespace ui {
 	class VideoFromTexture : public OnlyDrawable {
-		sf::IntRect rect;
-		sf::Vector2i offset;
-		PSCoefficient viewingProgress;
-		sf::Sprite sprite;
-		sf::Vector2i textureSize;
-		sf::Vector2f size;
-		int countFrame;
-	
 	public:
 		VideoFromTexture(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect = {0, 0, 0, 0}, int countFrame = 0, sf::Vector2i offset = {0, 0});
 		
@@ -31,5 +23,14 @@ namespace ui {
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		VideoFromTexture* copy() override;
+	
+	protected:
+		sf::IntRect rect;
+		sf::Vector2i offset;
+		PSCoefficient viewingProgress;
+		sf::Sprite sprite;
+		sf::Vector2i textureSize;
+		sf::Vector2f size;
+		int countFrame;
 	};
 }

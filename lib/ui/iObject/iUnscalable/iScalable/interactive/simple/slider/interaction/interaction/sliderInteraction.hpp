@@ -8,9 +8,6 @@
 namespace ui {
 	class SliderInteraction : public OneKeyInteraction {
 	protected:
-		SliderWheelEvent wheelEvent;
-		PressedInteraction slideInteraction;
-		
 		SliderInteraction(SliderWheelEvent wheelEvent, PressedInteraction slideInteraction);
 	
 	public:
@@ -25,5 +22,9 @@ namespace ui {
 		void update(sf::Vector2i mousePosition) override;
 		
 		SliderInteraction* copy() override;
+	
+	protected:
+		SliderWheelEvent wheelEvent;
+		PressedInteraction slideInteraction;
 	};
 }

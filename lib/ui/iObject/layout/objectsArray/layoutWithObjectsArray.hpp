@@ -5,9 +5,6 @@
 
 namespace ui {
 	class LayoutWithObjectsArray : public virtual Layout {
-	protected:
-		std::vector<IScalable*> objects;
-	
 	public:
 		void init(InitInfo initInfo) override;
 		
@@ -24,5 +21,8 @@ namespace ui {
 		virtual uint getArraySize();
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		std::vector<IScalable*> objects;
 	};
 }

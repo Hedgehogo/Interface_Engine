@@ -6,10 +6,6 @@
 
 namespace ui {
 	class AnimationManager {
-	protected:
-		uint64_t startManager;
-		std::vector<Animator*> animators;
-	
 	public:
 		explicit AnimationManager(std::vector<Animator*> animators = {});
 		
@@ -18,6 +14,10 @@ namespace ui {
 		virtual AnimationManager* copy();
 		
 		virtual ~AnimationManager();
+	
+	protected:
+		uint64_t startManager;
+		std::vector<Animator*> animators;
 	};
 	
 	template<>

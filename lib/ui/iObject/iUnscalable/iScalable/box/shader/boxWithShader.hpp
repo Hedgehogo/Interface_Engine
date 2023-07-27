@@ -14,13 +14,6 @@ namespace ui {
 			time = 1 << 4,
 		};
 	
-	protected:
-		sf::Shader* shader;
-		uint transmission;
-		
-		sf::Clock clock;
-	
-	public:
 		BoxWithShader(
 			IScalable* var, sf::Shader* shader, uint transmission,
 			std::map<std::string, PISfloat> valuesF = {},
@@ -48,6 +41,12 @@ namespace ui {
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
+	
+	protected:
+		sf::Shader* shader;
+		uint transmission;
+		
+		sf::Clock clock;
 	};
 	
 	template<>

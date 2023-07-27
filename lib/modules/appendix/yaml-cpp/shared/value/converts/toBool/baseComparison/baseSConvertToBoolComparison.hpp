@@ -10,10 +10,11 @@ namespace ui {
 		
 		bool convert(T fromValue) override;
 		
-		T compared;
-		
 	public:
 		BaseSConvertToBoolComparison(PISValue<T> fromValue, bool defaultValue, T compared);
+	
+	protected:
+		T compared;
 	};
 }
 

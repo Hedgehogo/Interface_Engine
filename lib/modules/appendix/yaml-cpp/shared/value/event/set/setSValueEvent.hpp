@@ -5,11 +5,8 @@
 
 namespace ui {
 	template<typename T>
-	class SetSValueEvent : public KeyEvent_Simple{
+	class SetSValueEvent : public KeyEvent_Simple {
 	protected:
-		PISValue<T> value;
-		T variable;
-		
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -22,10 +19,14 @@ namespace ui {
 		SetSValueEvent(const PISValue<T>& value, T variable);
 		
 		SetSValueEvent<T>* copy() override;
+	
+	protected:
+		PISValue<T> value;
+		T variable;
 	};
 	
 	template<typename T>
-	struct DecodePointer<SetSValueEvent<T>> {
+	struct DecodePointer<SetSValueEvent<T> > {
 		static bool decodePointer(const YAML::Node& node, SetSValueEvent<T>*& setSValueEvent);
 	};
 	

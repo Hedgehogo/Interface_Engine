@@ -12,10 +12,6 @@ namespace ui {
 			int start, end;
 		};
 	
-	protected:
-		TextVariables textVariables;
-	
-	public:
 		BaseTextBlock();
 		
 		BaseTextBlock(TextVariables textVariables);
@@ -35,5 +31,8 @@ namespace ui {
 		virtual bool updateInteractions(sf::Vector2f mousePosition) = 0;
 		
 		virtual BaseTextBlock* copy() = 0;
+	
+	protected:
+		TextVariables textVariables;
 	};
 }

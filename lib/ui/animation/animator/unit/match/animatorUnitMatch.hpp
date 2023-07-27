@@ -21,15 +21,9 @@ namespace ui {
 	public:
 		using Option = detail::AnimatorUnitMatch::Option<T>;
 	
-	protected:
-		std::vector<Option> options;
-		PSValue<T> value;
-	
-	public:
 		AnimatorUnitMatch(std::vector<Option> options, PSValue<T> value);
 		
 		void addNext(size_t i, IAnimatorUnit* unit);
-		
 		
 		void setSpeed(PSfloat speed) override;
 		
@@ -38,6 +32,10 @@ namespace ui {
 		std::vector<IAnimatorUnit*> update(float time) override;
 		
 		AnimatorUnitMatch<T>* copy() override;
+	
+	protected:
+		std::vector<Option> options;
+		PSValue<T> value;
 	};
 	
 	template<typename T>

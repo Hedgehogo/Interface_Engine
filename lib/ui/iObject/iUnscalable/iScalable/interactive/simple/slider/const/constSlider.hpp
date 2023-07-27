@@ -5,9 +5,6 @@
 namespace ui {
 	class ConstSlider : public BaseSlider {
 	protected:
-		float aspectRatio;
-		float sliderScale;
-		
 		ConstSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, SliderInteraction* interaction);
 	
 	public:
@@ -21,6 +18,10 @@ namespace ui {
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		ConstSlider* copy() override;
+	
+	protected:
+		float aspectRatio;
+		float sliderScale;
 	};
 	
 	template<>

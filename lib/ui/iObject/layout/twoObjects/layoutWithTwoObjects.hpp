@@ -5,10 +5,6 @@
 
 namespace ui {
 	class LayoutWithTwoObjects : public virtual Layout {
-	protected:
-		IScalable* firstObject;
-		IScalable* secondObject;
-	
 	public:
 		void init(InitInfo initInfo) override;
 		
@@ -21,5 +17,9 @@ namespace ui {
 		sf::Vector2f getNormalSize() const override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		IScalable* firstObject;
+		IScalable* secondObject;
 	};
 }

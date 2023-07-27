@@ -4,10 +4,7 @@
 #include "ui/iObject/layout/twoObjects/layoutWithTwoObjects.hpp"
 
 namespace ui {
-	class BoxWithConstCenter : public Box, public LayoutWithTwoObjects{
-	protected:
-		sf::Vector2f constSize;
-		
+	class BoxWithConstCenter : public Box, public LayoutWithTwoObjects {
 	public:
 		BoxWithConstCenter(IScalable* constObject, IScalable* background, const sf::Vector2f& constSize, const sf::Vector2f& minSize = {});
 		
@@ -26,6 +23,9 @@ namespace ui {
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
 		BoxWithConstCenter* copy() override;
+	
+	protected:
+		sf::Vector2f constSize;
 	};
 	
 	template<>

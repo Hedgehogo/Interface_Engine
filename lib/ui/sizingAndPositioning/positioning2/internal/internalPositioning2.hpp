@@ -5,10 +5,6 @@
 
 namespace ui {
 	class InternalPositioning2 : public IPositioning2 {
-	protected:
-		InternalPositioning vertical;
-		InternalPositioning horizontal;
-	
 	public:
 		InternalPositioning2(sf::Vector2f coefficient);
 		
@@ -21,6 +17,10 @@ namespace ui {
 	
 	public:
 		InternalPositioning2* copy();
+	
+	protected:
+		InternalPositioning vertical;
+		InternalPositioning horizontal;
 	};
 	
 	template<>

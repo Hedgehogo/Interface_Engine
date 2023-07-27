@@ -6,10 +6,6 @@
 
 namespace ui {
 	class Sprite : public OnlyDrawable {
-	protected:
-		sf::Sprite sprite;
-		sf::Vector2f minimumSize;
-	
 	public:
 		Sprite(sf::Texture& texture, sf::IntRect rect, sf::Vector2f minSize = {});
 		
@@ -32,6 +28,10 @@ namespace ui {
 	
 	public:
 		Sprite* copy() override;
+	
+	protected:
+		sf::Sprite sprite;
+		sf::Vector2f minimumSize;
 	};
 	
 	template<>

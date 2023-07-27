@@ -10,10 +10,6 @@ namespace ui {
 		public:
 			using TypeNameDeformer = std::function<std::string(std::string)>;
 		
-		public:
-			static TypeNameDeformer typeNameDeform;
-		
-		public:
 			static void setTypeNameDeformer(const TypeNameDeformer& typeNameDeform);
 			
 			virtual bool build(const YAML::Node& node, void*& object) const = 0;
@@ -25,6 +21,9 @@ namespace ui {
 			virtual bool isExists();
 			
 			explicit operator bool();
+		
+		public:
+			static TypeNameDeformer typeNameDeform;
 		};
 	}
 	

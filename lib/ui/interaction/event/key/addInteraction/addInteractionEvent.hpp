@@ -6,9 +6,6 @@
 namespace ui {
 	class AddInteractionEvent : public KeyEvent_Simple {
 	protected:
-		IInteraction* interaction;
-		InteractionManager* interactionManager;
-		
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -27,5 +24,9 @@ namespace ui {
 		void setInteraction(IInteraction& interaction);
 		
 		AddInteractionEvent* copy() override;
+	
+	protected:
+		IInteraction* interaction;
+		InteractionManager* interactionManager;
 	};
 }

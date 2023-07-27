@@ -13,9 +13,8 @@ namespace ui {
 		SConvertToBoolLess(PISValue<T> fromValue, T compared);
 	};
 	
-	
 	template<typename T>
-	struct DecodePointer<SConvertToBoolLess<T>> {
+	struct DecodePointer<SConvertToBoolLess<T> > {
 		static bool decodePointer(const YAML::Node& node, SConvertToBoolLess<T>*& sConvertToBoolGreater);
 	};
 	

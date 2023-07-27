@@ -5,9 +5,6 @@
 
 namespace ui {
 	class DrawManager : public IDrawable {
-	protected:
-		std::vector<IDrawable*> drawables;
-	
 	public:
 		DrawManager() = default;
 		
@@ -16,5 +13,8 @@ namespace ui {
 		void clear();
 		
 		void draw() override;
+	
+	protected:
+		std::vector<IDrawable*> drawables;
 	};
 }

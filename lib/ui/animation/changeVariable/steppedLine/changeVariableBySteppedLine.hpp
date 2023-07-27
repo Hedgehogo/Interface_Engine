@@ -10,11 +10,6 @@ namespace ui {
 			float size = 0;
 		};
 	
-	protected:
-		std::vector<Value> values;
-		float size;
-	
-	public:
 		ChangeVariableBySteppedLine(std::vector<Value> values);
 		
 		float getSize() override;
@@ -22,6 +17,10 @@ namespace ui {
 		float operator()(float frame) override;
 		
 		IChangeVariable* copy() override;
+	
+	protected:
+		std::vector<Value> values;
+		float size;
 	};
 	
 	template<>

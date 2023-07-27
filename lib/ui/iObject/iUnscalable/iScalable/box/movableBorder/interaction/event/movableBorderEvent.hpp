@@ -7,11 +7,6 @@ namespace ui {
 	
 	class MovableBorderEvent : public KeyEvent_Simple {
 	protected:
-		BoxWithMovableBorder* box;
-		sf::Vector2i startMousePosition;
-		float startBorderValue;
-		bool active;
-		
 		void copy(MovableBorderEvent* event);
 		
 		void startPressed() override;
@@ -28,6 +23,12 @@ namespace ui {
 		void setBox(BoxWithMovableBorder& box);
 		
 		MovableBorderEvent* copy() override;
+	
+	protected:
+		BoxWithMovableBorder* box;
+		sf::Vector2i startMousePosition;
+		float startBorderValue;
+		bool active;
 	};
 }
 

@@ -14,34 +14,10 @@
 namespace ui {
 	class Text : public Interactive, public IDrawable, public IUpdatable {
 	protected:
-		sf::RenderTarget* renderTarget;
-		
-		sf::RenderTexture renderTexture;
-		sf::View view;
-		sf::Texture texture;
-		sf::Sprite sprite;
-		DrawManager drawManager;
-		
-		bool interact;
-		bool oldInteract;
-		
-		TextInteraction* textInteraction;
-		
 		struct Selection {
 			std::vector<BaseCharacter*>::iterator start;
 			std::vector<BaseCharacter*>::iterator end;
-		} selection;
-		
-		
-		uint size;
-		
-		std::vector<BaseCharacter*> textCharacters;
-		std::vector<BaseTextBlock*> textBocks;
-		std::vector<BaseLine*> lines;
-		
-		BaseResizer* resizer;
-		
-		IUninteractive* background;
+		};
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 	
@@ -118,6 +94,32 @@ namespace ui {
 		Text* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		sf::RenderTarget* renderTarget;
+		
+		sf::RenderTexture renderTexture;
+		sf::View view;
+		sf::Texture texture;
+		sf::Sprite sprite;
+		DrawManager drawManager;
+		
+		bool interact;
+		bool oldInteract;
+		
+		TextInteraction* textInteraction;
+		
+		Selection selection;
+		
+		uint size;
+		
+		std::vector<BaseCharacter*> textCharacters;
+		std::vector<BaseTextBlock*> textBocks;
+		std::vector<BaseLine*> lines;
+		
+		BaseResizer* resizer;
+		
+		IUninteractive* background;
 	};
 	
 	template<>

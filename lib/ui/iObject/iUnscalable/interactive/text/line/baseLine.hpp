@@ -6,10 +6,6 @@ using uint = unsigned;
 
 namespace ui {
 	class BaseLine {
-	protected:
-		sf::RenderTarget* renderTarget;
-		sf::VertexArray vertexArray;
-	
 	public:
 		BaseLine(sf::PrimitiveType type, std::size_t vertexCount = 0, sf::Color color = sf::Color{255, 255, 255, 0});
 		
@@ -24,5 +20,9 @@ namespace ui {
 		virtual BaseLine* copy() = 0;
 		
 		virtual ~BaseLine() = default;
+	
+	protected:
+		sf::RenderTarget* renderTarget;
+		sf::VertexArray vertexArray;
 	};
 }

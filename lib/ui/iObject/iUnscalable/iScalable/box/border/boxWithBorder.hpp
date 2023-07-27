@@ -6,10 +6,6 @@
 namespace ui {
 	class BoxWithBorder : public Box {
 	protected:
-		std::vector<std::vector<IScalable*>> objects;
-		std::vector<float> boundsVertical;
-		std::vector<float> boundsHorizontal;
-		
 		void init(InitInfo initInfo) override;
 	
 	public:
@@ -30,6 +26,11 @@ namespace ui {
 		BoxWithBorder* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		std::vector<std::vector<IScalable*>> objects;
+		std::vector<float> boundsVertical;
+		std::vector<float> boundsHorizontal;
 	};
 	
 	template<>

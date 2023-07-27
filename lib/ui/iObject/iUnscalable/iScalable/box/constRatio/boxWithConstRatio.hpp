@@ -9,11 +9,6 @@
 namespace ui {
 	class BoxWithConstRatio : public Box, public LayoutWithBackground, public LayoutWithTwoObjects, public IDrawable {
 	protected:
-		DrawManager secondDrawManager;
-		bool verticalSide, horizontalSide;      //true = up   true = left
-		bool renderSecond;
-		float aspectRatio;
-		
 		void copy(BoxWithConstRatio* boxWithConstRatio);
 	
 	public:
@@ -36,6 +31,12 @@ namespace ui {
 		BoxWithConstRatio* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		DrawManager secondDrawManager;
+		bool verticalSide, horizontalSide;      //true = up   true = left
+		bool renderSecond;
+		float aspectRatio;
 	};
 	
 	template<>

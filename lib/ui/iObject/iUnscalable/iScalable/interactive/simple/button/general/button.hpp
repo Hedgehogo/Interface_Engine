@@ -4,9 +4,6 @@
 
 namespace ui {
 	class Button : public BaseButton {
-	protected:
-		int interactionIndex;
-	
 	public:
 		Button(IScalable* background, int interaction);
 		
@@ -15,6 +12,9 @@ namespace ui {
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
 		Button* copy() override;
+	
+	protected:
+		int interactionIndex;
 	};
 	
 	template<>

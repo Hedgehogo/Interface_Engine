@@ -13,11 +13,6 @@ namespace ui {
 		};
 	
 	protected:
-		BaseSlider* slider;
-		sf::Vector2f sensitivity;
-		bool horizontal;
-		bool relativity;
-		
 		void startPressed(sf::Vector2i mousePosition, int value) override;
 		
 		void stopPressed(sf::Vector2i mousePosition, int value) override;
@@ -32,6 +27,12 @@ namespace ui {
 		void setSlider(BaseSlider& slider);
 		
 		SliderWheelEvent* copy() override;
+		
+	protected:
+		BaseSlider* slider;
+		sf::Vector2f sensitivity;
+		bool horizontal;
+		bool relativity;
 	};
 	
 	template<>

@@ -7,11 +7,6 @@ namespace ui {
 	
 	class SliderEvent : public KeyEvent_Simple {
 	protected:
-		BaseSlider* slider;
-		sf::Vector2i startMousePosition;
-		sf::Vector2f startValue;
-		sf::Vector2i division;
-		
 		sf::Vector2f getMousePosition();
 		
 		void copy(SliderEvent* sliderEvent);
@@ -30,5 +25,11 @@ namespace ui {
 		void setSlider(BaseSlider& slider);
 		
 		SliderEvent* copy() override;
+	
+	protected:
+		BaseSlider* slider;
+		sf::Vector2i startMousePosition;
+		sf::Vector2f startValue;
+		sf::Vector2i division;
 	};
 }

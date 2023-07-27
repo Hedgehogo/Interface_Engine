@@ -15,13 +15,6 @@ namespace ui {
 	}
 	
 	class InteractionManager {
-	protected:
-		std::vector<IInteraction*> interactions;
-		std::vector<IInteraction*> addInteractions;
-		std::vector<IInteraction*> deleteInteractions;
-		sf::Vector2i position;
-		bool block;
-	
 	public:
 		explicit InteractionManager();
 		
@@ -34,5 +27,12 @@ namespace ui {
 		bool isBlocked() const;
 		
 		virtual void update(sf::Vector2i mousePosition);
+	
+	protected:
+		std::vector<IInteraction*> interactions;
+		std::vector<IInteraction*> addInteractions;
+		std::vector<IInteraction*> deleteInteractions;
+		sf::Vector2i position;
+		bool block;
 	};
 }

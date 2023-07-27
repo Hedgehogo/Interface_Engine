@@ -26,13 +26,6 @@ namespace ui {
 		using DetermineType = detail::DetermineTypeFunc;
 		using SimpleDetermineType = detail::SimpleDetermineTypeFunc;
 		
-		static YamlBuilder builder;
-	
-	protected:
-		static std::vector<std::string> names;
-		static std::vector<detail::IYamlBuilder*> types;
-		static std::vector<DetermineType> determiners;
-	
 	protected:
 		bool build(const YAML::Node& node, void*& object) const override;
 		
@@ -62,6 +55,14 @@ namespace ui {
 		static void determineType(const YAML::Node& node, std::string& type);
 		
 		static bool build(const YAML::Node& node, const std::string& type, Type*& object);
+		
+	public:
+		static YamlBuilder builder;
+	
+	protected:
+		static std::vector<std::string> names;
+		static std::vector<detail::IYamlBuilder*> types;
+		static std::vector<DetermineType> determiners;
 	};
 	
 	template<typename T>

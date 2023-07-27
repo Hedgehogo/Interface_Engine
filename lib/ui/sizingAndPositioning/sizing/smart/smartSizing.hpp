@@ -4,11 +4,6 @@
 
 namespace ui {
 	class SmartSizing : public ISizing {
-	protected:
-		float targetCoefficient;
-		float parentCoefficient;
-		float addition;
-	
 	public:
 		explicit SmartSizing(float targetCoefficient = 1, float parentCoefficient = 0, float addition = 0);
 		
@@ -19,6 +14,11 @@ namespace ui {
 		float getParentSize(float objectSize) override;
 		
 		SmartSizing* copy() override;
+	
+	protected:
+		float targetCoefficient;
+		float parentCoefficient;
+		float addition;
 	};
 	
 	template<>

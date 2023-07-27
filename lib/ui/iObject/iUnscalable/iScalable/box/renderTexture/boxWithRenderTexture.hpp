@@ -6,15 +6,6 @@
 namespace ui {
 	class BoxWithRenderTexture : public Box, public LayoutWithObject, public IDrawable {
 	protected:
-		InteractionManager* interactionManager;
-		DrawManager drawManager;
-		sf::RenderTarget* renderTarget;
-		sf::RenderTexture renderTexture;
-		sf::View view;
-		sf::Sprite sprite;
-		bool optimize;
-		bool active;
-		
 		void copy(BoxWithRenderTexture* boxWithRenderTexture);
 	
 	public:
@@ -33,6 +24,16 @@ namespace ui {
 		BoxWithRenderTexture* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		InteractionManager* interactionManager;
+		DrawManager drawManager;
+		sf::RenderTarget* renderTarget;
+		sf::RenderTexture renderTexture;
+		sf::View view;
+		sf::Sprite sprite;
+		bool optimize;
+		bool active;
 	};
 	
 	template<>

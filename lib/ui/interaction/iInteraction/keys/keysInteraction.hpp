@@ -6,13 +6,6 @@
 
 namespace ui {
 	class KeysInteraction : public virtual IInteraction {
-	protected:
-		bool press;
-		
-		KeyEvent* event;
-		std::vector<Key> keys;
-		std::vector<Key> blackListKeys;
-	
 	public:
 		KeysInteraction(KeyEvent* event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 		
@@ -34,6 +27,12 @@ namespace ui {
 		
 		~KeysInteraction() override;
 		
+	protected:
+		bool press;
+		
+		KeyEvent* event;
+		std::vector<Key> keys;
+		std::vector<Key> blackListKeys;
 	};
 	
 	template<>

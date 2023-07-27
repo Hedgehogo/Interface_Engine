@@ -8,8 +8,6 @@ namespace ui {
 	template<typename FromType, typename ToType>
 	class SConvertValue : public ISConvertValue<FromType, ToType>, public SValue<ToType> {
 	protected:
-		PISValue<FromType> fromValue;
-		
 		virtual ToType convert(FromType fromValue);
 	
 	public:
@@ -20,6 +18,9 @@ namespace ui {
 		const ToType& getValue() const override;
 		
 		void setValue(const ToType& value) override;
+	
+	protected:
+		PISValue<FromType> fromValue;
 	};
 	
 	template<typename FromType, typename ToType>

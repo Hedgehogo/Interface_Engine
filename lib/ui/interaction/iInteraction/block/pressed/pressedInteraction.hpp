@@ -7,8 +7,6 @@
 namespace ui {
 	class PressedInteraction : public OneKeyInteraction, public IBlockInteraction {
 	protected:
-		InteractionManager* interactionManager;
-		
 		void copy(PressedInteraction* pressedInteraction);
 	
 	public:
@@ -19,5 +17,8 @@ namespace ui {
 		void update(sf::Vector2i mousePosition) override;
 		
 		PressedInteraction* copy();
+	
+	protected:
+		InteractionManager* interactionManager;
 	};
 }

@@ -1,6 +1,9 @@
 #include "emptyInteraction.hpp"
 
 namespace ui {
+	EmptyInteraction::EmptyInteraction() {
+	}
+	
 	void EmptyInteraction::start(sf::Vector2i mousePosition) {
 	}
 	

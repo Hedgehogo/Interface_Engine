@@ -8,13 +8,11 @@ namespace ui {
 	
 	class TextInteraction : public virtual IInteraction {
 	protected:
-		TextInteraction();
-		
-		Text* text;
-		
 		void copy(TextInteraction* textInteraction);
 		
 	public:
+		TextInteraction();
+		
 		virtual void init(TextInteractionInitInfo textInteractionInitInfo);
 		
 		virtual void setText(Text* text);
@@ -24,5 +22,8 @@ namespace ui {
 		TextInteraction* copy() override = 0;
 		
 		~TextInteraction() = default;
+	
+	protected:
+		Text* text;
 	};
 }

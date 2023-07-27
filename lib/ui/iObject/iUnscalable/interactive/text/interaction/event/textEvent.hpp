@@ -8,8 +8,6 @@ namespace ui {
 	
 	class TextEvent : public virtual KeyEvent {
 	protected:
-		Text* text = nullptr;
-		
 		void copy(TextEvent* textEvent);
 		
 	public:
@@ -18,5 +16,8 @@ namespace ui {
 		virtual void setText(Text* text);
 		
 		virtual Text* getText() const;
+	
+	protected:
+		Text* text = nullptr;
 	};
 }

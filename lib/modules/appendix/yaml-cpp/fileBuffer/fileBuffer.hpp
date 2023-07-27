@@ -10,10 +10,6 @@ namespace ui {
 	
 	template<typename T>
 	class FileBuffer {
-	protected:
-		static std::map<std::string, T> objects;
-		static std::map<std::string, T*> aliases;
-	
 	public:
 		FileBuffer() = default;
 		
@@ -22,6 +18,10 @@ namespace ui {
 		static void setObject(const std::string& name, const std::string& filePath);
 		
 		static void addAlias(const std::string& name, const std::string& alias);
+	
+	protected:
+		static std::map<std::string, T> objects;
+		static std::map<std::string, T*> aliases;
 	};
 	
 	using Uint32 = sf::Uint32;

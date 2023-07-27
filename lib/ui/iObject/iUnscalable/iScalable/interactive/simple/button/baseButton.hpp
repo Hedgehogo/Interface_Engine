@@ -6,8 +6,6 @@
 namespace ui {
 	class BaseButton : public Interactive_Simple {
 	protected:
-		IScalable* background;
-		
 		void copy(BaseButton* button);
 	
 	public:
@@ -30,5 +28,8 @@ namespace ui {
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		IScalable* background;
 	};
 }

@@ -5,12 +5,6 @@
 
 namespace ui {
 	class RoundedRectangle : public OnlyDrawable, public Layout {
-	protected:
-		sf::RectangleShape horizontalRectangle;
-		sf::RectangleShape verticalRectangle;
-		sf::CircleShape circle;
-		float radius;
-	
 	public:
 		RoundedRectangle(sf::Color color, float radius);
 		
@@ -23,6 +17,12 @@ namespace ui {
 		sf::Vector2f getNormalSize() const override;
 		
 		RoundedRectangle* copy() override;
+	
+	protected:
+		sf::RectangleShape horizontalRectangle;
+		sf::RectangleShape verticalRectangle;
+		sf::CircleShape circle;
+		float radius;
 	};
 	
 	template<>

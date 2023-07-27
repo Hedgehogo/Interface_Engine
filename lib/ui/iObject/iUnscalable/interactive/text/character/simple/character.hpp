@@ -6,19 +6,6 @@
 
 namespace ui {
 	class Character : public BaseCharacter {
-	protected:
-		sf::RenderTarget* renderTarget;
-		
-		char32_t character;
-		
-		sf::Glyph glyph;
-		TextVariables& textVariables;
-		sf::VertexArray vertexArray;
-		sf::VertexArray selectionVertexArray;
-		sf::Texture texture;
-		sf::Vector2f origin;
-		
-		std::vector<BaseLine*>& lines;
 	public:
 		Character(char32_t character, TextVariables& textVariables, std::vector<BaseLine*>& lines);
 		
@@ -50,12 +37,25 @@ namespace ui {
 		
 		void setPosition(const sf::Vector2f position) override;
 	
-	private:
-		static bool debug;
-	
-	public:
 		static void setDebug(bool debug);
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indentAddition, uint hue, uint hueOffset) override;
+	
+	private:
+		static bool debug;
+	
+	protected:
+		sf::RenderTarget* renderTarget;
+		
+		char32_t character;
+		
+		sf::Glyph glyph;
+		TextVariables& textVariables;
+		sf::VertexArray vertexArray;
+		sf::VertexArray selectionVertexArray;
+		sf::Texture texture;
+		sf::Vector2f origin;
+		
+		std::vector<BaseLine*>& lines;
 	};
 }

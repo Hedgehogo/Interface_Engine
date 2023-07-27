@@ -5,10 +5,6 @@
 
 namespace ui {
 	class BoxScroll : public IBoxWithView {
-	protected:
-		IUnscalable* object;
-		PSRVec2f normalObjectPosition;
-	
 	public:
 		BoxScroll(IUnscalable* object, const PSRVec2f& normalObjectPosition, const sf::Vector2f& minSize);
 		
@@ -29,6 +25,10 @@ namespace ui {
 		BoxScroll* copy() override;
 		
 		~BoxScroll() override;
+	
+	protected:
+		IUnscalable* object;
+		PSRVec2f normalObjectPosition;
 	};
 	
 	template<>

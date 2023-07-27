@@ -5,9 +5,6 @@
 
 namespace ui {
 	class LayoutWithBackground : public virtual Layout {
-	protected:
-		IUninteractive* background;
-	
 	public:
 		void init(InitInfo initInfo) override;
 		
@@ -22,5 +19,8 @@ namespace ui {
 		sf::Vector2f getNormalSize() const override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		IUninteractive* background;
 	};
 }

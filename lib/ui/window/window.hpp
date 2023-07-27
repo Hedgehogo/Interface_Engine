@@ -8,13 +8,8 @@
 namespace ui {
 	IWindowResizer* getWindowResizer();
 	
-	class Window : public sf::RenderWindow{
+	class Window : public sf::RenderWindow {
 	protected:
-		Interface interface;
-		sf::Vector2f minSize;
-		
-		IWindowResizer* resizer;
-		
 		void construction();
 		
 	public:
@@ -47,5 +42,11 @@ namespace ui {
 		Interface& getInterface();
 		
 		const sf::Vector2f& getMinSize();
+	
+	protected:
+		Interface interface;
+		sf::Vector2f minSize;
+		
+		IWindowResizer* resizer;
 	};
 }

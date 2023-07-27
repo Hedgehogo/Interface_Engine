@@ -5,13 +5,6 @@
 namespace ui {
 	class LambdaSizing2 : public ISizing2 {
 	protected:
-		sf::Vector2f (* sizing)(sf::Vector2f parentSize, sf::Vector2f targetSize, sf::Vector2f normalSize);
-		
-		sf::Vector2f (* minSize)(sf::Vector2f objectMinSize);
-		
-		sf::RenderTarget* renderTarget;
-		sf::Vector2f normalSize;
-		
 		void copy(LambdaSizing2* sizing2);
 	
 	public:
@@ -24,5 +17,11 @@ namespace ui {
 		sf::Vector2f getParentSize(sf::Vector2f objectSize) override;
 		
 		LambdaSizing2* copy() override;
+	
+	protected:
+		sf::Vector2f (* sizing)(sf::Vector2f parentSize, sf::Vector2f targetSize, sf::Vector2f normalSize);
+		sf::Vector2f (* minSize)(sf::Vector2f objectMinSize);
+		sf::RenderTarget* renderTarget;
+		sf::Vector2f normalSize;
 	};
 }

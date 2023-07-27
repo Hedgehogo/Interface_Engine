@@ -5,11 +5,6 @@
 
 namespace ui {
 	class BoxSwitcher : public Box, public LayoutWithTwoObjects, public IDrawable {
-	protected:
-		DrawManager firstDrawManager;
-		DrawManager secondDrawManager;
-		PSbool value;
-		
 	public:
 		BoxSwitcher(IScalable* firstObject, IScalable* secondObject, PSbool value, const sf::Vector2f& minSize = {});
 		
@@ -28,6 +23,11 @@ namespace ui {
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
 		BoxSwitcher* copy() override;
+	
+	protected:
+		DrawManager firstDrawManager;
+		DrawManager secondDrawManager;
+		PSbool value;
 	};
 	
 	template<>

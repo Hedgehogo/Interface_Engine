@@ -6,13 +6,13 @@
 namespace ui {
 	class Window;
 	
-	class IWindowResizer{
-	protected:
-		Window* window;
-		
+	class IWindowResizer {
 	public:
 		virtual void setWindow(Window* window);
 	
 		virtual bool update(sf::Vector2i mousePosition) = 0;
+	
+	protected:
+		Window* window;
 	};
 }

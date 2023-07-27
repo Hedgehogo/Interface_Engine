@@ -10,13 +10,6 @@
 
 namespace ui {
 	class BoxWithMovableBorder : public Box, public LayoutWithTwoObjects, public Interactive_Simple {
-	protected:
-		PressedInteraction pressedInteraction;
-		float borderValueNow;
-		PSCoefficient borderValue;
-		int borderInteractionSize;
-		bool isHorizontalBorder;
-	
 	public:
 		void init(InitInfo initInfo) override;
 		
@@ -54,6 +47,13 @@ namespace ui {
 		BoxWithMovableBorder* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		PressedInteraction pressedInteraction;
+		float borderValueNow;
+		PSCoefficient borderValue;
+		int borderInteractionSize;
+		bool isHorizontalBorder;
 	};
 	
 	template<>

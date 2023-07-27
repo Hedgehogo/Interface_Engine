@@ -5,14 +5,14 @@
 
 namespace ui {
 	class ChangeableObjectsEvent : public KeyEvent_Simple {
-	protected:
-		BoxWithChangeableObjects* object;
-	
 	public:
 		ChangeableObjectsEvent(BoxWithChangeableObjects* objects = nullptr);
 		
 		virtual void setObject(BoxWithChangeableObjects* object);
 		
 		virtual BoxWithChangeableObjects* getObject();
+	
+	protected:
+		BoxWithChangeableObjects* object;
 	};
 }

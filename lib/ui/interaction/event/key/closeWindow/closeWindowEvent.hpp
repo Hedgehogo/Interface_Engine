@@ -4,10 +4,8 @@
 #include "modules/appendix/yaml-cpp/yaml.hpp"
 
 namespace ui {
-	class CloseWindowEvent : public KeyEvent_Simple{
+	class CloseWindowEvent : public KeyEvent_Simple {
 	protected:
-		Window* window;
-		
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -24,6 +22,9 @@ namespace ui {
 		void init(InteractionInitInfo interactionInitInfo) override;
 		
 		KeyEvent* copy() override;
+	
+	protected:
+		Window* window;
 	};
 	
 	template<>

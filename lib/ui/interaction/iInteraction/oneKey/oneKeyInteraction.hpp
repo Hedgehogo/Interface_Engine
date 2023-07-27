@@ -6,10 +6,6 @@
 
 namespace ui {
 	class OneKeyInteraction : public virtual IInteraction {
-	protected:
-		KeyEvent* event;
-		Key key;
-	
 	public:
 		OneKeyInteraction(KeyEvent* event, Key key);
 		
@@ -30,6 +26,10 @@ namespace ui {
 		void finish(sf::Vector2i mousePosition) override;
 		
 		OneKeyInteraction* copy() override;
+	
+	protected:
+		KeyEvent* event;
+		Key key;
 	};
 	
 	template<>

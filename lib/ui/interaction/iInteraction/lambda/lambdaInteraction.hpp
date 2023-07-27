@@ -6,7 +6,6 @@ namespace ui {
 	class LambdaInteraction : public virtual IInteraction {
 	protected:
 		void (* startPointing)(sf::Vector2i mousePosition);
-		
 		void (* finishPointing)(sf::Vector2i mousePosition);
 	
 	public:

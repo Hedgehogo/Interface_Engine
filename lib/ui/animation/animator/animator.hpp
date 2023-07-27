@@ -5,10 +5,6 @@
 
 namespace ui {
 	class Animator {
-	protected:
-		std::vector<IAnimatorUnit*> units;
-		std::vector<IAnimatorUnit*> unitsBuff;
-	
 	public:
 		explicit Animator(std::vector<IAnimatorUnit*> units, PSfloat speed = std::make_shared<Sfloat>(1));
 		
@@ -17,6 +13,10 @@ namespace ui {
 		virtual Animator* copy();
 		
 		~Animator();
+	
+	protected:
+		std::vector<IAnimatorUnit*> units;
+		std::vector<IAnimatorUnit*> unitsBuff;
 	};
 	
 	template<>

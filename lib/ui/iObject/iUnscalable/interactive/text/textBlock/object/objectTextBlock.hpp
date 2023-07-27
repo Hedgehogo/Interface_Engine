@@ -5,14 +5,6 @@
 
 namespace ui {
 	class ObjectTextBlock : public BaseTextBlock {
-	protected:
-		std::vector<BaseLine*> lines;
-		sf::Vector2f size;
-		ObjectCharacter* objectCharacter;
-		bool isCharacter;
-		bool fullLine;
-		IScalable* object;
-	
 	public:
 		ObjectTextBlock(IScalable* object, sf::Vector2f size = {0, 0}, bool isCharacter = true);
 		
@@ -29,6 +21,14 @@ namespace ui {
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
 		BaseTextBlock* copy() override;
+	
+	protected:
+		std::vector<BaseLine*> lines;
+		sf::Vector2f size;
+		ObjectCharacter* objectCharacter;
+		bool isCharacter;
+		bool fullLine;
+		IScalable* object;
 	};
 	
 	template<>

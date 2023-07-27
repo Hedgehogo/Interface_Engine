@@ -6,9 +6,6 @@
 
 namespace ui {
 	class PointingHidePanelInteraction : public HidePanelInteraction, public PanelInteraction {
-	protected:
-		bool onlyOnParent;
-	
 	public:
 		PointingHidePanelInteraction(bool onlyOnParent = false);
 		
@@ -19,6 +16,9 @@ namespace ui {
 		void finish(sf::Vector2i mousePosition) override;
 		
 		PointingHidePanelInteraction* copy() override;
+	
+	protected:
+		bool onlyOnParent;
 	};
 	
 	template<>

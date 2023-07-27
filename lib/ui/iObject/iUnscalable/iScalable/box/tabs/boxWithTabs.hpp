@@ -4,11 +4,7 @@
 #include "ui/iObject/layout/objectsArray/layoutWithObjectsArray.hpp"
 
 namespace ui {
-	class BoxWithTabs : public Box, public LayoutWithObjectsArray, public IDrawable{
-	protected:
-		PISint value;
-		std::vector<DrawManager> drawManagers;
-	
+	class BoxWithTabs : public Box, public LayoutWithObjectsArray, public IDrawable {
 	public:
 		BoxWithTabs(const std::vector<IScalable*>& objects, PISint  value, const sf::Vector2f& minSize = {});
 		
@@ -27,6 +23,10 @@ namespace ui {
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
 		BoxWithTabs* copy() override;
+	
+	protected:
+		PISint value;
+		std::vector<DrawManager> drawManagers;
 	};
 	
 	template<>

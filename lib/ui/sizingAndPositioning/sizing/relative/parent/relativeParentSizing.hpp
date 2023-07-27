@@ -4,9 +4,6 @@
 
 namespace ui {
 	class RelativeParentSizing : public ISizing {
-	protected:
-		float addition;
-	
 	public:
 		explicit RelativeParentSizing(float addition = 0);
 		
@@ -17,6 +14,9 @@ namespace ui {
 		float getParentSize(float objectSize) override;
 		
 		RelativeParentSizing* copy() override;
+	
+	protected:
+		float addition;
 	};
 	
 	template<>

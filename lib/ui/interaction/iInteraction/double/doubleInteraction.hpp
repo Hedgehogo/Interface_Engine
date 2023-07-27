@@ -4,10 +4,6 @@
 
 namespace ui {
 	class DoubleInteraction : public virtual IInteraction {
-	protected:
-		IInteraction* first;
-		IInteraction* second;
-	
 	public:
 		DoubleInteraction(IInteraction* first, IInteraction* second);
 		
@@ -28,5 +24,9 @@ namespace ui {
 		void finish(sf::Vector2i mousePosition) override;
 		
 		DoubleInteraction* copy() override;
+	
+	protected:
+		IInteraction* first;
+		IInteraction* second;
 	};
 }

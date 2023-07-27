@@ -6,9 +6,6 @@
 namespace ui {
 	class ChangeObjectEvent : public ChangeableObjectsEvent {
 	protected:
-		uint index;
-		std::shared_ptr<SValue<uint>> value;
-		
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -21,6 +18,10 @@ namespace ui {
 		ChangeObjectEvent(std::shared_ptr<SValue<uint>> value, uint index);
 		
 		ChangeObjectEvent* copy() override;
+	
+	protected:
+		uint index;
+		std::shared_ptr<SValue<uint>> value;
 	};
 	
 	template<>

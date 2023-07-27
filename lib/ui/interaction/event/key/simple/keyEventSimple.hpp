@@ -5,8 +5,6 @@
 namespace ui {
 	class KeyEvent_Simple : public virtual KeyEvent {
 	protected:
-		sf::Vector2i mousePosition;
-		
 		virtual void startPressed() = 0;
 		
 		virtual void stopPressed() = 0;
@@ -23,5 +21,8 @@ namespace ui {
 		void setPressed(bool pressed) override;
 		
 		void update(sf::Vector2i mousePosition, bool press) override;
+	
+	protected:
+		sf::Vector2i mousePosition;
 	};
 }

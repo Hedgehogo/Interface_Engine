@@ -10,13 +10,6 @@
 
 namespace ui {
 	class BoxWithConstRatioCenter : public Box, public LayoutWithObject, public LayoutWithBackground, public LayoutWithTwoObjects, public IDrawable {
-	protected:
-		float aspectRatio;
-		bool renderFirst;
-		bool renderSecond;
-		DrawManager firstDrawManager;
-		DrawManager secondDrawManager;
-	
 	public:
 		BoxWithConstRatioCenter(IScalable* object, IUninteractive* background, float aspectRatio, sf::Vector2f minSize = {});
 		
@@ -39,6 +32,13 @@ namespace ui {
 		void draw() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		float aspectRatio;
+		bool renderFirst;
+		bool renderSecond;
+		DrawManager firstDrawManager;
+		DrawManager secondDrawManager;
 	};
 	
 	template<>

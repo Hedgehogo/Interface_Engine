@@ -5,10 +5,6 @@
 
 namespace ui {
 	class FullColor : public OnlyDrawable {
-	protected:
-		sf::RectangleShape rectangle;
-		sf::Vector2f normalSize;
-	
 	public:
 		explicit FullColor(sf::Color color, sf::Vector2f normalSize = {0, 0});
 		
@@ -25,6 +21,10 @@ namespace ui {
 		sf::Vector2f getNormalSize() const override;
 		
 		FullColor* copy() override;
+	
+	protected:
+		sf::RectangleShape rectangle;
+		sf::Vector2f normalSize;
 	};
 	
 	template<>

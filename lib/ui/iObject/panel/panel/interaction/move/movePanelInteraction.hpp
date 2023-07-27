@@ -4,9 +4,6 @@
 
 namespace ui {
 	class MovePanelInteraction : public virtual BasePanelInteraction {
-	protected:
-		bool atStart;
-	
 	public:
 		explicit MovePanelInteraction(bool atStart = false);
 		
@@ -19,5 +16,8 @@ namespace ui {
 		void finish(sf::Vector2i mousePosition) override;
 		
 		MovePanelInteraction* copy() override = 0;
+	
+	protected:
+		bool atStart;
 	};
 }

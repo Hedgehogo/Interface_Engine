@@ -4,10 +4,6 @@
 
 namespace ui {
 	class ParentCoefficientSizing : public ISizing {
-	protected:
-		float coefficient;
-		float addition;
-	
 	public:
 		explicit ParentCoefficientSizing(float coefficient = 1, float addition = 0);
 		
@@ -18,6 +14,10 @@ namespace ui {
 		float getParentSize(float objectSize) override;
 		
 		ParentCoefficientSizing* copy() override;
+	
+	protected:
+		float coefficient;
+		float addition;
 	};
 	
 	template<>

@@ -2,15 +2,15 @@
 
 namespace ui {
 	void UpdateManager::add(IUpdatable& updatable) {
-		updatables.push_back(&updatable);
+		this->updatable.push_back(&updatable);
 	}
 	
 	void UpdateManager::clear() {
-		updatables.clear();
+		updatable.clear();
 	}
 	
 	void UpdateManager::update() {
-		for(auto& updatable: updatables) {
+		for(auto& updatable: updatable) {
 			updatable->update();
 		}
 	}

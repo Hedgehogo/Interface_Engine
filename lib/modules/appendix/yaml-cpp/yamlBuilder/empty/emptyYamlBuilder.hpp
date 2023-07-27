@@ -5,9 +5,6 @@
 namespace ui::detail {
 	class EmptyYamlBuilder : public IYamlBuilder {
 	public:
-		static EmptyYamlBuilder builder;
-	
-	public:
 		bool build(const YAML::Node& node, void*& object) const override;
 		
 		IYamlBuilder* getBuilder(const std::string& type) override;
@@ -15,5 +12,8 @@ namespace ui::detail {
 		bool determine(const YAML::Node& node, std::string& type) override;
 		
 		bool isExists() override;
+	
+	public:
+		static EmptyYamlBuilder builder;
 	};
 }

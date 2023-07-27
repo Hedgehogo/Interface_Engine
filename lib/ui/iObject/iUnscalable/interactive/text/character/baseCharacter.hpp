@@ -18,13 +18,6 @@ namespace ui {
 			fullLine,
 		};
 	
-	protected:
-		sf::Vector2f position;
-		bool selection;
-		bool active;
-		bool rerender;
-	
-	public:
 		BaseCharacter();
 		
 		virtual bool getRerender() const;
@@ -70,5 +63,11 @@ namespace ui {
 		virtual void drawDebug(sf::RenderTarget& renderTarget, int indentAddition, uint hue, uint hueOffset) = 0;
 		
 		virtual ~BaseCharacter() = default;
+	
+	protected:
+		sf::Vector2f position;
+		bool selection;
+		bool active;
+		bool rerender;
 	};
 }

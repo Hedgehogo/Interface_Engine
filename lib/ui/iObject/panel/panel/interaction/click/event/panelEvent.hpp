@@ -10,9 +10,6 @@ namespace ui {
 	
 	class PanelEvent : public KeyEvent_Simple {
 	protected:
-		Panel* panel;
-		IPanelManager* panelManager;
-		
 		void copy(PanelEvent* panelEvent);
 	
 	public:
@@ -25,5 +22,9 @@ namespace ui {
 		Panel* getPanel();
 		
 		PanelEvent* copy() override = 0;
+	
+	protected:
+		Panel* panel;
+		IPanelManager* panelManager;
 	};
 }

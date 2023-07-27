@@ -6,11 +6,8 @@
 namespace ui {
 	class BoxSwitcherTabs;
 	
-	class SwitcherTabsEvent : public KeyEvent_Simple{
+	class SwitcherTabsEvent : public KeyEvent_Simple {
 	protected:
-		PISint value;
-		BoxSwitcherTabs* switcherTabs;
-		
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -23,6 +20,10 @@ namespace ui {
 		SwitcherTabsEvent(const PISint& value, BoxSwitcherTabs* switcherTabs);
 		
 		SwitcherTabsEvent* copy() override;
+	
+	protected:
+		PISint value;
+		BoxSwitcherTabs* switcherTabs;
 	};
 }
 

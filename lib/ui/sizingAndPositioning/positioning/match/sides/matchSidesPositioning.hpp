@@ -5,17 +5,17 @@
 
 namespace ui {
 	class MatchSidesPositioning : public IPositioning {
-	protected:
-		Location parentSide;
-		Location objectSide;
-		float offset;
-	
 	public:
 		MatchSidesPositioning(Location parentSide, Location objectSide, float offset = 0);
 		
 		float findPosition(float parentPosition, float objectSize, float parentSize, float) override;
 		
 		MatchSidesPositioning* copy() override;
+	
+	protected:
+		Location parentSide;
+		Location objectSide;
+		float offset;
 	};
 	
 	template<>

@@ -4,13 +4,7 @@
 
 namespace ui {
 	class Interactive_Simple : public virtual IScalable, public Interactive, public IUpdatable {
-	private:
-		bool interact;
-		bool oldInteract;
-	
 	protected:
-		IInteraction* interaction;
-		
 		void copy(Interactive_Simple* interactive_Simple);
 	
 	public:
@@ -21,5 +15,12 @@ namespace ui {
 		void update() override;
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
+	
+	private:
+		bool interact;
+		bool oldInteract;
+	
+	protected:
+		IInteraction* interaction;
 	};
 }

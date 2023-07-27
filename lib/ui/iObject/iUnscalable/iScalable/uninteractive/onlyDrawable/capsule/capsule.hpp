@@ -5,10 +5,6 @@
 
 namespace ui {
 	class Capsule : public OnlyDrawable, public Layout {
-	protected:
-		sf::RectangleShape rectangle;
-		sf::CircleShape circle;
-	
 	public:
 		Capsule(sf::Color color);
 		
@@ -21,6 +17,10 @@ namespace ui {
 		sf::Vector2f getNormalSize() const override;
 		
 		Capsule* copy() override;
+	
+	protected:
+		sf::RectangleShape rectangle;
+		sf::CircleShape circle;
 	};
 	
 	template<>

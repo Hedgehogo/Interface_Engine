@@ -13,13 +13,7 @@ namespace ui {
 	PIShared getVectorAxis(const PIShared& vector, const std::string& name);
 	
 	class Buffer {
-	public:
-		typedef std::function<PIShared(const PIShared&, const std::string&)> getOption;
-	
 	protected:
-		static std::vector<std::map<std::string, PIShared>> objectsLevels;
-		static std::vector<std::pair<std::regex, getOption>> options;
-		
 		static std::map<std::string, PIShared>& getLevel();
 		
 		template<typename T>
@@ -28,6 +22,8 @@ namespace ui {
 		static PIShared getVariable(const PIShared& var, std::vector<std::string>& names);
 	
 	public:
+		using GetOption = std::function<PIShared(const PIShared&, const std::string&)>;
+		
 		Buffer() = default;
 		
 		static bool existAtLevel(const std::string& name);
@@ -51,6 +47,10 @@ namespace ui {
 		
 		template<typename T>
 		static std::shared_ptr<T> get(const YAML::Node& node, bool createIfNotExist = true);
+		
+	protected:
+		static std::vector<std::map<std::string, PIShared>> objectsLevels;
+		static std::vector<std::pair<std::regex, GetOption>> options;
 	};
 	
 	template<typename T>

@@ -18,11 +18,6 @@ namespace ui {
 			~Hotkey();
 		};
 	
-	protected:
-		std::vector<std::vector<Hotkey*>> hotkeyStates;
-		std::vector<Hotkey*>* nowHotkeys;
-	
-	public:
 		HotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint state = 0);
 		
 		HotkeyInteraction(std::string str);
@@ -44,6 +39,10 @@ namespace ui {
 		HotkeyInteraction* copy() override;
 		
 		~HotkeyInteraction() override;
+	
+	protected:
+		std::vector<std::vector<Hotkey*>> hotkeyStates;
+		std::vector<Hotkey*>* nowHotkeys;
 	};
 	
 	template<>

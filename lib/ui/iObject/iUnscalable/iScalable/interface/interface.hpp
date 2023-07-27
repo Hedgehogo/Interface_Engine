@@ -11,19 +11,6 @@
 namespace ui {
 	class Interface : public IScalable, public IDrawable, public IUpdatable {
 	protected:
-		Window* window;
-		sf::RenderTarget* renderTarget;
-		DrawManager drawManager;
-		UpdateManager updateManager;
-		InteractionManager interactionManager;
-		InteractionStack* interactionStack;
-		PanelManager panelManager;
-		AnimationManager animationManager;
-		IScalable* object;
-		sf::Vector2f mousePosition;
-		bool initialized;
-		bool active;
-		
 		void init(InitInfo initInfo) override;
 		
 		bool isInWindow(sf::Vector2f position);
@@ -82,6 +69,20 @@ namespace ui {
 		Interface* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue = 0, uint hueOffset = 36) override;
+	
+	protected:
+		Window* window;
+		sf::RenderTarget* renderTarget;
+		DrawManager drawManager;
+		UpdateManager updateManager;
+		InteractionManager interactionManager;
+		InteractionStack* interactionStack;
+		PanelManager panelManager;
+		AnimationManager animationManager;
+		IScalable* object;
+		sf::Vector2f mousePosition;
+		bool initialized;
+		bool active;
 	};
 	
 	template<>

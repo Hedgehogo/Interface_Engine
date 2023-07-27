@@ -8,10 +8,6 @@
 
 namespace ui {
 	class BoxWithConstBezel : public Box, public LayoutWithObject {
-	protected:
-		IUninteractive* bezel;
-		float thickness;
-	
 	public:
 		void init(InitInfo initInfo) override;
 		
@@ -30,6 +26,10 @@ namespace ui {
 		BoxWithConstBezel* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		IUninteractive* bezel;
+		float thickness;
 	};
 	
 	template<>

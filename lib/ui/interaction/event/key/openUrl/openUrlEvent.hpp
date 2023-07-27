@@ -8,8 +8,6 @@
 namespace ui {
 	class OpenUrlEvent : public KeyEvent_Simple {
 	protected:
-		std::string url;
-		
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -22,6 +20,9 @@ namespace ui {
 		explicit OpenUrlEvent(const std::string& url);
 		
 		OpenUrlEvent* copy() override;
+	
+	protected:
+		std::string url;
 	};
 	
 	template<>

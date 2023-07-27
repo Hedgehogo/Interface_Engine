@@ -5,10 +5,6 @@
 namespace ui {
 	template<typename T>
 	class SValue : public virtual ISValue<T> {
-	protected:
-		T value;
-		std::vector<typename ISValue<T>::SetterFunc> setters;
-	
 	public:
 		explicit SValue(T value = T{});
 		
@@ -17,6 +13,10 @@ namespace ui {
 		const T& getValue() const override;
 		
 		void setValue(const T& value) override;
+	
+	protected:
+		T value;
+		std::vector<typename ISValue<T>::SetterFunc> setters;
 	};
 	
 	template<typename T>

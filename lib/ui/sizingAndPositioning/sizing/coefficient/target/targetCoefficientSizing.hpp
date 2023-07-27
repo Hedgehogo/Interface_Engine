@@ -4,10 +4,6 @@
 
 namespace ui {
 	class TargetCoefficientSizing : public ISizing {
-	protected:
-		float coefficient;
-		float addition;
-	
 	public:
 		explicit TargetCoefficientSizing(float coefficient = 1, float addition = 0);
 		
@@ -16,6 +12,10 @@ namespace ui {
 		float findSize(float, float targetSize) override;
 		
 		TargetCoefficientSizing* copy() override;
+	
+	protected:
+		float coefficient;
+		float addition;
 	};
 	
 	template<>

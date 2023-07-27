@@ -17,15 +17,6 @@ namespace ui {
 			absolute
 		};
 	
-	protected:
-		std::vector<BaseCharacter*>* characters;
-		std::vector<BaseLine*>* lines;
-		
-		const float lineSpacing;
-		const Align align;
-		const Algorithm algorithm;
-		
-	public:
 		BaseResizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);
 		
 		void init(std::vector<BaseCharacter*>& characters, std::vector<BaseLine*>& lines);
@@ -55,6 +46,14 @@ namespace ui {
 		virtual BaseResizer* copy() = 0;
 		
 		virtual ~BaseResizer() = default;
+	
+	protected:
+		std::vector<BaseCharacter*>* characters;
+		std::vector<BaseLine*>* lines;
+		
+		const float lineSpacing;
+		const Align align;
+		const Algorithm algorithm;
 	};
 	
 	template<>

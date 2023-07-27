@@ -5,10 +5,6 @@
 namespace ui {
 	template<typename T>
 	class SRangeValue : public SValue<T> {
-	protected:
-		T upper;
-		T lower;
-	
 	public:
 		explicit SRangeValue(T value = {});
 		
@@ -23,6 +19,10 @@ namespace ui {
 		void setBounds(T lower, T upper);
 		
 		void setValue(const T& value) override;
+	
+	protected:
+		T upper;
+		T lower;
 	};
 	
 	template<typename T>

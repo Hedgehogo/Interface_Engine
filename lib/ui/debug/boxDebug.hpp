@@ -5,11 +5,6 @@
 namespace ui {
 	class BoxDebug : public Box, public IDrawable {
 	protected:
-		IScalable* object;
-		sf::RenderTarget* renderTarget;
-		bool active;
-		bool drawn;
-		
 		void init(InitInfo initInfo) override;
 	
 	public:
@@ -30,6 +25,12 @@ namespace ui {
 		BoxDebug* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		IScalable* object;
+		sf::RenderTarget* renderTarget;
+		bool active;
+		bool drawn;
 	};
 	
 	template<>

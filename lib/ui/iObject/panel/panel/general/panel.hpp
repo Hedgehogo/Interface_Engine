@@ -9,11 +9,6 @@ namespace ui {
 	
 	class Panel : public BasePanel {
 	protected:
-		PanelManager panelManager;
-		InteractionManager* interactionManager;
-		HidePanelInteraction* hideInteraction;
-		MovePanelInteraction* moveInteraction;
-		
 		void copy(Panel* panel);
 	
 	public:
@@ -40,6 +35,12 @@ namespace ui {
 		bool updateInteractions(sf::Vector2f mousePosition, bool active) override;
 		
 		Panel* copy() override;
+	
+	protected:
+		PanelManager panelManager;
+		InteractionManager* interactionManager;
+		HidePanelInteraction* hideInteraction;
+		MovePanelInteraction* moveInteraction;
 	};
 	
 	template<>

@@ -10,10 +10,6 @@ namespace ui {
 		using MinSizeFunc = std::function<float(float objectMinSize)>;
 	
 	protected:
-		float normalSize;
-		FindSizeFunc findSizeFunc;
-		MinSizeFunc minSizeFunc;
-		
 		void copy(LambdaSizing* lambdaSizing);
 	
 	public:
@@ -26,5 +22,10 @@ namespace ui {
 		float getParentSize(float objectMinSize) override;
 		
 		LambdaSizing* copy() override;
+	
+	protected:
+		float normalSize;
+		FindSizeFunc findSizeFunc;
+		MinSizeFunc minSizeFunc;
 	};
 }

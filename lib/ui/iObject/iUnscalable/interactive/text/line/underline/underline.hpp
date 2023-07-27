@@ -4,10 +4,6 @@
 
 namespace ui {
 	class Underline : public BaseLine {
-	protected:
-		float underlineOffset;
-		float underlineThickness;
-		
 	public:
 		Underline(sf::Color color = nullColor);
 		
@@ -20,6 +16,10 @@ namespace ui {
 	
 	public:
 		Underline* copy();
+	
+	protected:
+		float underlineOffset;
+		float underlineThickness;
 	};
 	
 	template<>

@@ -5,11 +5,6 @@
 
 namespace ui {
 	class BoxWithChangeableObjects : public Box, public LayoutWithObjectsArray, public IDrawable {
-	protected:
-		std::shared_ptr<SValue<uint>> value;
-		std::vector<IScalable*> objects;
-		std::vector<DrawManager> drawManagers;
-	
 	public:
 		BoxWithChangeableObjects(std::vector<IScalable*> objects, std::shared_ptr<SValue<uint>> value, sf::Vector2f minSize = {0, 0});
 		
@@ -36,6 +31,11 @@ namespace ui {
 		BoxWithChangeableObjects* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		std::shared_ptr<SValue<uint>> value;
+		std::vector<IScalable*> objects;
+		std::vector<DrawManager> drawManagers;
 	};
 	
 	template<>

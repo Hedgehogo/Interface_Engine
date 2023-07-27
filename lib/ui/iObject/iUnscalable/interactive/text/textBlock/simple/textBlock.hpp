@@ -6,12 +6,6 @@
 
 namespace ui {
 	class TextBlock : public BaseTextBlock {
-	protected:
-		std::u32string str;
-		
-		std::vector<BaseCharacter*> textCharacters;
-		std::vector<BaseLine*> lines;
-	
 	public:
 		TextBlock(std::u32string str, TextVariables textVariables, std::vector<BaseLine*> lines);
 		
@@ -33,6 +27,12 @@ namespace ui {
 		TextBlock* copy() override;
 		
 		~TextBlock() override;
+	
+	protected:
+		std::u32string str;
+		
+		std::vector<BaseCharacter*> textCharacters;
+		std::vector<BaseLine*> lines;
 	};
 	
 	

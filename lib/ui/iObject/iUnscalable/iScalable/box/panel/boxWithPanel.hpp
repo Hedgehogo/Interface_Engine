@@ -6,9 +6,6 @@
 
 namespace ui {
 	class BoxWithPanel : public Box, public LayoutWithObject {
-	protected:
-		ConstPanel* panel;
-	
 	public:
 		void init(InitInfo initInfo) override;
 		
@@ -25,6 +22,9 @@ namespace ui {
 		BoxWithPanel* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		ConstPanel* panel;
 	};
 	
 	template<>

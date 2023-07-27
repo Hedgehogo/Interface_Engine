@@ -7,18 +7,6 @@
 namespace ui {
 	class Caption : public OnlyDrawable {
 	protected:
-		static sf::Color defaultColor;
-		static int defaultSize;
-		
-		bool cutBack;
-		
-		sf::Text text;
-		sf::String str;
-		IUninteractive* background;
-		sf::Vector2f minimumSize;
-		DrawManager drawManager;
-		InternalPositioning2 internalPositioning2;
-		
 		void init(InitInfo initInfo) override;
 	
 	public:
@@ -57,6 +45,19 @@ namespace ui {
 		Caption* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		static sf::Color defaultColor;
+		static int defaultSize;
+		
+		bool cutBack;
+		
+		sf::Text text;
+		sf::String str;
+		IUninteractive* background;
+		sf::Vector2f minimumSize;
+		DrawManager drawManager;
+		InternalPositioning2 internalPositioning2;
 	};
 	
 	template<>

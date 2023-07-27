@@ -6,8 +6,7 @@
 namespace ui {
 	class EmptyInteraction : public virtual IInteraction {
 	public:
-		EmptyInteraction() {
-		}
+		EmptyInteraction();
 		
 		void start(sf::Vector2i mousePosition) override;
 		

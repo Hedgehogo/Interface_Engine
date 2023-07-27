@@ -7,15 +7,6 @@
 
 namespace ui {
 	class VideoFromFile : public OnlyDrawable {
-	protected:
-		sf::Vector2i sizeVideo;
-		sf::Vector2f size;
-		std::string path;
-		
-		std::vector<sf::Texture> bufferTexture;
-		sf::Sprite sprite;
-		PSCoefficient viewingProgress;
-	
 	public:
 		VideoFromFile(std::vector<sf::Texture> video, PSCoefficient viewingProgress);
 		
@@ -35,5 +26,14 @@ namespace ui {
 	
 	public:
 		VideoFromFile* copy() override;
+	
+	protected:
+		sf::Vector2i sizeVideo;
+		sf::Vector2f size;
+		std::string path;
+		
+		std::vector<sf::Texture> bufferTexture;
+		sf::Sprite sprite;
+		PSCoefficient viewingProgress;
 	};
 }

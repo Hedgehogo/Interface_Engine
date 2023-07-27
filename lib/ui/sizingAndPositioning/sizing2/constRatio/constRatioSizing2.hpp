@@ -6,11 +6,6 @@
 namespace ui {
 	class ConstRatioSizing2 : public ISizing2 {
 	protected:
-		sf::RenderTarget* renderTarget;
-		ISizing* sizing;
-		float ratio;
-		bool horizontal;
-		
 		void copy(ConstRatioSizing2* constRatioSizing2);
 	
 	public:
@@ -33,6 +28,12 @@ namespace ui {
 		sf::Vector2f getParentSize(sf::Vector2f objectSize) override;
 		
 		ConstRatioSizing2* copy() override;
+	
+	protected:
+		sf::RenderTarget* renderTarget;
+		ISizing* sizing;
+		float ratio;
+		bool horizontal;
 	};
 	
 	template<>

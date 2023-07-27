@@ -4,13 +4,6 @@
 
 namespace ui {
 	class Prerequisite : public IAnimatorUnit {
-	protected:
-		std::vector<IAnimatorUnit*> nextTrueBuf;
-		std::vector<IAnimatorUnit*> nextFalseBuf;
-		std::vector<IAnimatorUnit*> nextTrue;
-		std::vector<IAnimatorUnit*> nextFalse;
-		PISbool valve;
-		
 	public:
 		Prerequisite(PISbool valve, std::vector<IAnimatorUnit*> nextTrue, std::vector<IAnimatorUnit*> nextFalse);
 		
@@ -27,6 +20,13 @@ namespace ui {
 		IAnimatorUnit* copy() override;
 		
 		~Prerequisite();
+	
+	protected:
+		std::vector<IAnimatorUnit*> nextTrueBuf;
+		std::vector<IAnimatorUnit*> nextFalseBuf;
+		std::vector<IAnimatorUnit*> nextTrue;
+		std::vector<IAnimatorUnit*> nextFalse;
+		PISbool valve;
 	};
 	
 	template<>

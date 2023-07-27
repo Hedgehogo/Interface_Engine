@@ -4,35 +4,32 @@
 
 namespace ui {
 	class BufferNonExistentNestingLevelException : public BaseYamlException {
-	protected:
-		std::string name;
-		std::size_t level;
-	
 	public:
 		BufferNonExistentNestingLevelException(YAML::Mark mark, const std::string& name, std::size_t level);
 		
 		std::string getName() const;
 		
 		std::size_t getLevel() const;
+	
+	protected:
+		std::string name;
+		std::size_t level;
 	};
 	
 	class BufferVariableNotFoundException : public BaseException {
-	protected:
-		std::string name;
-		std::string type;
-	
 	public:
 		BufferVariableNotFoundException(const std::string& name, const std::string& type);
 		
 		std::string getName() const;
 		
 		std::string getType() const;
+	
+	protected:
+		std::string name;
+		std::string type;
 	};
 	
 	class YamlBufferVariableNotFoundException : public BaseYamlException {
-	protected:
-		BufferVariableNotFoundException exception;
-	
 	public:
 		YamlBufferVariableNotFoundException(YAML::Mark mark, const BufferVariableNotFoundException& exception);
 		
@@ -41,5 +38,8 @@ namespace ui {
 		std::string getName() const;
 		
 		std::string getType() const;
+	
+	protected:
+		BufferVariableNotFoundException exception;
 	};
 }

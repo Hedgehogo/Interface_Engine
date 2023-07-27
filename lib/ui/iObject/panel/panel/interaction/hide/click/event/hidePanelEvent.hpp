@@ -6,8 +6,6 @@
 namespace ui {
 	class HidePanelEvent : public PanelEvent {
 	protected:
-		bool onlyOnParent;
-		
 		void startPressed() override;
 		
 		void whilePressed() override;
@@ -20,6 +18,9 @@ namespace ui {
 		HidePanelEvent(bool onlyOnParent = false);
 		
 		HidePanelEvent* copy() override;
+	
+	protected:
+		bool onlyOnParent;
 	};
 	
 	template<>

@@ -6,10 +6,6 @@
 namespace ui {
 	class IBoxWithView : public Box, public IDrawable {
 	protected:
-		sf::RenderTarget* renderTarget;
-		DrawManager drawManager;
-		sf::View view;
-		
 		void copy(IBoxWithView* iBoxWithView);
 	
 	public:
@@ -22,5 +18,10 @@ namespace ui {
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		IBoxWithView* copy() override = 0;
+	
+	protected:
+		sf::RenderTarget* renderTarget;
+		DrawManager drawManager;
+		sf::View view;
 	};
 }

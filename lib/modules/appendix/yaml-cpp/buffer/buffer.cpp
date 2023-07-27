@@ -35,7 +35,7 @@ namespace ui {
 	}
 	
 	std::vector<std::map<std::string, PIShared>> Buffer::objectsLevels = {1, std::map<std::string, PIShared>{}};
-	std::vector<std::pair<std::regex, Buffer::getOption>> Buffer::options = {
+	std::vector<std::pair<std::regex, Buffer::GetOption>> Buffer::options = {
 		std::make_pair(std::regex{R"([xy])"}, getVectorAxis),
 		std::make_pair(std::regex{R"(\d+)"}, getListElement)
 	};
@@ -44,7 +44,7 @@ namespace ui {
 		if(!names.empty()) {
 			std::string name = names[names.size() - 1];
 			names.pop_back();
-			auto optionFunction = std::find_if(options.begin(), options.end(), [&](const std::pair<std::regex, getOption>& option) {
+			auto optionFunction = std::find_if(options.begin(), options.end(), [&](const std::pair<std::regex, GetOption>& option) {
 				return std::regex_match(name.cbegin(), name.cend(), option.first);
 			});
 			if(optionFunction != options.end()) {

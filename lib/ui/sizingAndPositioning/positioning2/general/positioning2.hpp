@@ -5,10 +5,6 @@
 namespace ui {
 	class Positioning2 : public IPositioning2 {
 	protected:
-		sf::RenderTarget* renderTarget;
-		IPositioning* horizontal;
-		IPositioning* vertical;
-		
 		void copy(Positioning2* positioning2);
 	
 	public:
@@ -27,6 +23,11 @@ namespace ui {
 		sf::Vector2f findPosition(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize) override;
 		
 		Positioning2* copy() override;
+	
+	protected:
+		sf::RenderTarget* renderTarget;
+		IPositioning* horizontal;
+		IPositioning* vertical;
 	};
 	
 	template<>

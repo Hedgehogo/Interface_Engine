@@ -6,9 +6,6 @@
 
 namespace ui {
 	class BoxWithBackground : public Box, public LayoutWithBackground, public LayoutWithObject {
-	protected:
-		sf::Vector2f offset;
-	
 	public:
 		BoxWithBackground(IScalable* object, IUninteractive* background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
 		
@@ -31,6 +28,9 @@ namespace ui {
 		BoxWithBackground* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		sf::Vector2f offset;
 	};
 	
 	template<>

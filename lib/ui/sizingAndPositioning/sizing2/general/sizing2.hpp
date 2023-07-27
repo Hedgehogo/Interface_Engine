@@ -6,10 +6,6 @@
 namespace ui {
 	class Sizing2 : public ISizing2 {
 	protected:
-		sf::RenderTarget* renderTarget;
-		ISizing* horizontal;
-		ISizing* vertical;
-		
 		void copy(Sizing2* sizing2);
 	
 	public:
@@ -32,6 +28,11 @@ namespace ui {
 		sf::Vector2f getParentSize(sf::Vector2f objectSize) override;
 		
 		Sizing2* copy() override;
+	
+	protected:
+		sf::RenderTarget* renderTarget;
+		ISizing* horizontal;
+		ISizing* vertical;
 	};
 	
 	template<>

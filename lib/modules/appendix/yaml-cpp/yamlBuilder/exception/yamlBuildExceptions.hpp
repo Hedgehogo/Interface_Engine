@@ -4,35 +4,35 @@
 
 namespace ui {
 	class NonexistentTypeYamlException : public BaseYamlException {
-	protected:
-		std::string type;
-		std::string base;
-	
 	public:
 		NonexistentTypeYamlException(YAML::Mark mark, const std::string& type, const std::string& base);
 		
 		std::string getType();
 		
 		std::string getBase();
+	
+	protected:
+		std::string type;
+		std::string base;
 	};
 	
 	class AbstractTypeYamlException : public BaseYamlException {
-	protected:
-		std::string type;
-	
 	public:
 		AbstractTypeYamlException(YAML::Mark mark, const std::string& type);
 		
 		std::string getType();
+	
+	protected:
+		std::string type;
 	};
 	
 	class FailedDetermineTypeYamlException : public BaseYamlException {
-	protected:
-		std::string type;
-	
 	public:
 		FailedDetermineTypeYamlException(YAML::Mark mark, const std::string& type);
 		
 		std::string getType();
+	
+	protected:
+		std::string type;
 	};
 }

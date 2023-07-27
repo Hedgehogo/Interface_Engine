@@ -5,8 +5,6 @@
 namespace ui {
 	class RelativeNormalSizing : public ISizing {
 	protected:
-		float normalSize;
-		
 		void copy(RelativeNormalSizing* relativeNormalSizing);
 	
 	public:
@@ -17,6 +15,9 @@ namespace ui {
 		float findSize(float, float) override;
 		
 		RelativeNormalSizing* copy() override;
+	
+	protected:
+		float normalSize;
 	};
 	
 	template<>

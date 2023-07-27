@@ -5,9 +5,6 @@
 namespace ui {
 	class PanelManager : public IPanelManager {
 	protected:
-		std::vector<BasePanel*> panels;
-		std::vector<BasePanel*> activePanels;
-		
 		void print();
 		
 		void printActive();
@@ -32,5 +29,9 @@ namespace ui {
 		void update() override;
 		
 		bool updateInteractions(sf::Vector2f mousePosition, bool active) override;
+	
+	protected:
+		std::vector<BasePanel*> panels;
+		std::vector<BasePanel*> activePanels;
 	};
 }

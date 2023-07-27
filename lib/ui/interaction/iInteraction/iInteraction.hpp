@@ -15,7 +15,6 @@ namespace ui {
 			lowest,
 		};
 	
-	public:
 		virtual ~IInteraction() = default;
 		
 		virtual void init(InteractionInitInfo interactionInitInfo);

@@ -6,8 +6,6 @@
 namespace ui {
 	class Box : public virtual IScalable, public virtual Layout {
 	protected:
-		sf::Vector2f minimumSize;
-		
 		void copy(Box* box);
 	
 	public:
@@ -16,6 +14,9 @@ namespace ui {
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		Box* copy() override = 0;
+	
+	protected:
+		sf::Vector2f minimumSize;
 	};
 }
 

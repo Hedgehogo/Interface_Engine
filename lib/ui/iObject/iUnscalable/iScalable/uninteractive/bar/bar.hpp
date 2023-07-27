@@ -8,12 +8,6 @@
 namespace ui {
 	class Bar : public OnlyDrawable, public LayoutWithBackground {
 	protected:
-		IUninteractive* strip;
-		bool horizontal;
-		float offset;
-		int division;
-		float value;
-		
 		void copy(Bar* bar);
 	
 	public:
@@ -40,6 +34,13 @@ namespace ui {
 		Bar* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		IUninteractive* strip;
+		bool horizontal;
+		float offset;
+		int division;
+		float value;
 	};
 	
 	template<>

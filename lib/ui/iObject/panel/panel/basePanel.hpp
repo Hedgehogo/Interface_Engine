@@ -16,15 +16,6 @@
 namespace ui {
 	class BasePanel : public LayoutWithObject, public IDrawable, public IUpdatable {
 	protected:
-		ISizing2* sizing;
-		IPositioning2* positioning;
-		DrawManager drawManager;
-		UpdateManager updateManager;
-		bool parentProcessed;
-		bool oldDisplayed;
-		bool displayed;
-		bool active;
-		
 		void copy(BasePanel* panel);
 	
 	public:
@@ -67,13 +58,21 @@ namespace ui {
 		sf::Vector2f getNormalSize() const override;
 		
 		BasePanel* copy() override = 0;
-	
-	protected:
-		static bool fullDebug;
-	
-	public:
+		
 		static void setFullDebug(bool fullDebug);
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		ISizing2* sizing;
+		IPositioning2* positioning;
+		DrawManager drawManager;
+		UpdateManager updateManager;
+		bool parentProcessed;
+		bool oldDisplayed;
+		bool displayed;
+		bool active;
+		
+		static bool fullDebug;
 	};
 }

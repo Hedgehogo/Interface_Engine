@@ -8,10 +8,6 @@
 
 namespace ui {
 	class BoxWithConstBorder : public Box, public LayoutWithTwoObjects {
-	protected:
-		float borderDistance;
-		Side side;
-	
 	public:
 		void init(InitInfo initInfo) override;
 		
@@ -28,6 +24,10 @@ namespace ui {
 		BoxWithConstBorder* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		float borderDistance;
+		Side side;
 	};
 	
 	template<>

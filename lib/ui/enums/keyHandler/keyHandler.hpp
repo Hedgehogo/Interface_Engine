@@ -125,10 +125,6 @@ namespace ui {
 	};
 	
 	class KeyHandler {
-	protected:
-		static std::vector<Key> keysPressed;
-		static std::vector<Key> globalKeysPressed;
-	
 	public:
 		static std::vector<Key> getKeysPressed();
 		
@@ -151,6 +147,10 @@ namespace ui {
 		static std::string toString(Key key);
 		
 		static bool isKeyPressed(Key key);
+	
+	protected:
+		static std::vector<Key> keysPressed;
+		static std::vector<Key> globalKeysPressed;
 	};
 	
 	std::string toString(Key key);

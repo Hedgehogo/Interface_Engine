@@ -5,11 +5,11 @@
 namespace ui {
 	template<typename T>
 	class SConvertRange : public SRangeValue<T> {
-	protected:
-		PSRange<T> sRangeValue;
-		
 	public:
 		explicit SConvertRange(PSRange<T> sRangeValue, T upper, T lower);
+	
+	protected:
+		PSRange<T> sRangeValue;
 	};
 	
 	template<typename T>

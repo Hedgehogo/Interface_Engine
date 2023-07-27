@@ -7,10 +7,6 @@
 
 namespace ui {
 	class BoxSwitcherTabs : public Box, public LayoutWithObjectsArray, public Interactive_Simple {
-	protected:
-		bool isHorizontal;
-		PSint value;
-	
 	public:
 		BoxSwitcherTabs(std::vector<IScalable*> objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize = {});
 		
@@ -23,6 +19,10 @@ namespace ui {
 		int getTab(sf::Vector2f position);
 		
 		BoxSwitcherTabs* copy() override;
+	
+	protected:
+		bool isHorizontal;
+		PSint value;
 	};
 	
 	template<>

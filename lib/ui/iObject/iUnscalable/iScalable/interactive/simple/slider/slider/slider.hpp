@@ -5,8 +5,6 @@
 namespace ui {
 	class Slider : public BaseSlider {
 	protected:
-		sf::Vector2f scale;
-		
 		Slider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, SliderInteraction* interaction, sf::Vector2f sliderScale);
 	
 	public:
@@ -24,6 +22,9 @@ namespace ui {
 		sf::Vector2f getMinSize() const override;
 		
 		Slider* copy() override;
+	
+	protected:
+		sf::Vector2f scale;
 	};
 	
 	template<>

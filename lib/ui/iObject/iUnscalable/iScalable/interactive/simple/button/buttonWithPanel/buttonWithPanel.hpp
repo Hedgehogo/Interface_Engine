@@ -13,9 +13,6 @@
 
 namespace ui {
 	class ButtonWithPanel : public BaseButton {
-	protected:
-		Panel* panel;
-	
 	public:
 		ButtonWithPanel(Panel* panel, DisplayPanelInteraction* interaction, IScalable* background);
 		
@@ -30,6 +27,9 @@ namespace ui {
 		ButtonWithPanel* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		Panel* panel;
 	};
 	
 	template<>

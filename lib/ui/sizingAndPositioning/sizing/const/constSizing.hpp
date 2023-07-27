@@ -4,9 +4,6 @@
 
 namespace ui {
 	class ConstSizing : public ISizing {
-	protected:
-		float size;
-	
 	public:
 		ConstSizing(float size);
 		
@@ -15,6 +12,9 @@ namespace ui {
 		float findSize(float, float) override;
 		
 		ConstSizing* copy() override;
+	
+	protected:
+		float size;
 	};
 	
 	template<>

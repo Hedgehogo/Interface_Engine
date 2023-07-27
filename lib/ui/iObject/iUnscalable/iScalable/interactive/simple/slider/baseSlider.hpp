@@ -8,13 +8,6 @@
 namespace ui {
 	class BaseSlider : public Interactive_Simple {
 	protected:
-		IUninteractive* slider;
-		IUninteractive* background;
-		PSRVec2f value;
-		sf::Vector2f position;
-		sf::Vector2f sliderSize;
-		sf::Vector2f moveZoneSize;
-		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
 		void copy(BaseSlider* baseSlider);
@@ -53,5 +46,13 @@ namespace ui {
 		BaseSlider* copy() override = 0;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		IUninteractive* slider;
+		IUninteractive* background;
+		PSRVec2f value;
+		sf::Vector2f position;
+		sf::Vector2f sliderSize;
+		sf::Vector2f moveZoneSize;
 	};
 }

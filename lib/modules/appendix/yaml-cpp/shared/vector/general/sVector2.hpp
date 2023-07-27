@@ -6,17 +6,13 @@
 namespace ui {
 	template<typename T>
 	class SVector2 : public ISVector2 {
-	public:
-		using V = to_auto<decltype(std::declval<T>().getValue())>;
-		using SetterFunc = std::function<void(const sf::Vector2<V>&)>;
-	
 	protected:
-		std::shared_ptr<T> x, y;
-		std::vector<SetterFunc> setters;
-		
 		void set();
 	
 	public:
+		using V = to_auto<decltype(std::declval<T>().getValue())>;
+		using SetterFunc = std::function<void(const sf::Vector2<V>&)>;
+		
 		SVector2(const sf::Vector2<V>& vector = {});
 		
 		SVector2(std::shared_ptr<T> x, std::shared_ptr<T> y);
@@ -42,6 +38,10 @@ namespace ui {
 		sf::Vector2<V> getValue() const;
 		
 		void setValue(const sf::Vector2<V>& vector);
+	
+	protected:
+		std::shared_ptr<T> x, y;
+		std::vector<SetterFunc> setters;
 	};
 	
 	template<typename T>

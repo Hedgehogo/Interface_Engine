@@ -6,9 +6,6 @@
 
 namespace ui {
 	class BoxWithBorderHorizontal : public Box, public LayoutWithObjectsArray {
-	protected:
-		std::vector<float> bounds;
-	
 	public:
 		BoxWithBorderHorizontal(std::vector<IScalable*> objects, std::vector<float> bounds, sf::Vector2f minSize = {0, 0});
 		
@@ -27,6 +24,9 @@ namespace ui {
 		BoxWithBorderHorizontal* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+	
+	protected:
+		std::vector<float> bounds;
 	};
 	
 	template<>

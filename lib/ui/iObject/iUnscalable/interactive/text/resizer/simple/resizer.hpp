@@ -4,16 +4,6 @@
 
 namespace ui {
 	class Resizer : public BaseResizer {
-	protected:
-		std::vector<BaseCharacter*>::iterator afterEnter;
-		std::vector<BaseCharacter*>::iterator afterSpace;
-		std::vector<BaseCharacter*>::iterator currentCharacter;
-		
-		sf::Vector2f nextPosition;
-		
-		sf::Vector2f startRender;
-		sf::Vector2f endRender;
-	
 	public:
 		Resizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);
 		
@@ -60,6 +50,16 @@ namespace ui {
 		sf::Vector2f getNormalSize() override;
 		
 		Resizer* copy();
+	
+	protected:
+		std::vector<BaseCharacter*>::iterator afterEnter;
+		std::vector<BaseCharacter*>::iterator afterSpace;
+		std::vector<BaseCharacter*>::iterator currentCharacter;
+		
+		sf::Vector2f nextPosition;
+		
+		sf::Vector2f startRender;
+		sf::Vector2f endRender;
 	};
 	
 	template<>

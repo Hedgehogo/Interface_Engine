@@ -5,9 +5,6 @@
 namespace ui {
 	class Layout : public virtual IObject {
 	protected:
-		sf::Vector2f position;
-		sf::Vector2f size;
-		
 		void copy(Layout* layout);
 	
 	public:
@@ -32,5 +29,9 @@ namespace ui {
 		bool in(sf::Vector2f pointPosition) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
+	
+	protected:
+		sf::Vector2f position;
+		sf::Vector2f size;
 	};
 }

@@ -4,10 +4,6 @@
 
 namespace ui {
 	class InternalTargetPositioning : public IPositioning {
-	protected:
-		float coefficient;
-		float offset;
-	
 	public:
 		explicit InternalTargetPositioning(float coefficient, float offset = 0);
 		
@@ -18,6 +14,10 @@ namespace ui {
 		float findPosition(float parentPosition, float objectSize, float, float targetSize) override;
 		
 		InternalTargetPositioning* copy() override;
+	
+	protected:
+		float coefficient;
+		float offset;
 	};
 	
 	template<>

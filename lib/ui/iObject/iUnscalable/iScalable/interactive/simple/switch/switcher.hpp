@@ -9,13 +9,6 @@
 
 namespace ui {
 	class Switcher : public Interactive_Simple, public Layout, public IDrawable {
-	protected:
-		IScalable* activeBackground;
-		IScalable* inactiveBackground;
-		DrawManager activeDrawManager;
-		DrawManager inactiveDrawManager;
-		PSbool active;
-	
 	public:
 		Switcher(IScalable* inactiveBackground, IScalable* activeBackground, PSbool value, Key key = Key::mouseLeft);
 		
@@ -44,6 +37,13 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 		
 		~Switcher();
+	
+	protected:
+		IScalable* activeBackground;
+		IScalable* inactiveBackground;
+		DrawManager activeDrawManager;
+		DrawManager inactiveDrawManager;
+		PSbool active;
 	};
 	
 	template<>

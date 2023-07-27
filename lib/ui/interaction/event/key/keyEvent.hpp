@@ -7,8 +7,6 @@
 namespace ui {
 	class KeyEvent : public IEvent {
 	protected:
-		bool pressed;
-		
 		void copy(KeyEvent* keyEvent);
 	
 	public:
@@ -21,5 +19,8 @@ namespace ui {
 		virtual void update(sf::Vector2i mousePosition, bool press) = 0;
 		
 		virtual KeyEvent* copy() = 0;
+	
+	protected:
+		bool pressed;
 	};
 }

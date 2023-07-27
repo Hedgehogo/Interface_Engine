@@ -5,9 +5,6 @@
 
 namespace ui {
 	class UpdateManager : public IUpdatable {
-	protected:
-		std::vector<IUpdatable*> updatables;
-	
 	public:
 		UpdateManager() = default;
 		
@@ -16,5 +13,8 @@ namespace ui {
 		void clear();
 		
 		void update() override;
+	
+	protected:
+		std::vector<IUpdatable*> updatable;
 	};
 }

@@ -7,10 +7,6 @@
 namespace ui {
 	class WhileChangingObjectsEvent : public ChangeableObjectsEvent {
 	protected:
-		int objectsSize;
-		std::shared_ptr<SValue<uint>> index;
-		int offset;
-		
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -23,6 +19,11 @@ namespace ui {
 		WhileChangingObjectsEvent(BoxWithChangeableObjects* objects = nullptr, int offset = 1);
 		
 		WhileChangingObjectsEvent* copy() override;
+	
+	protected:
+		int objectsSize;
+		std::shared_ptr<SValue<uint>> index;
+		int offset;
 	};
 	
 	template<>

@@ -5,10 +5,6 @@
 namespace ui {
 	template<typename T>
 	class SReferenceValue : public virtual ISValue<T> {
-	protected:
-		T* valueReference;
-		std::vector<typename ISValue<T>::SetterFunc> setters;
-	
 	public:
 		explicit SReferenceValue(T& valueReference);
 		
@@ -19,6 +15,10 @@ namespace ui {
 		void setValue(const T& value) override;
 		
 		virtual void setReference(T& valueReference);
+	
+	protected:
+		T* valueReference;
+		std::vector<typename ISValue<T>::SetterFunc> setters;
 	};
 }
 

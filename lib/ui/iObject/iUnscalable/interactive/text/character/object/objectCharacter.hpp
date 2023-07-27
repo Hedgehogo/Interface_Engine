@@ -5,9 +5,6 @@
 
 namespace ui {
 	class ObjectCharacter : public BaseCharacter {
-		IScalable* object;
-		std::vector<BaseLine*> lines;
-		BaseCharacter::Special special;
 	public:
 		ObjectCharacter(IScalable* object, bool fullLine = false);
 		
@@ -40,5 +37,10 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indentAddition, uint hue, uint hueOffset) override;
 		
 		~ObjectCharacter() override;
+	
+	protected:
+		IScalable* object;
+		std::vector<BaseLine*> lines;
+		BaseCharacter::Special special;
 	};
 }

@@ -5,15 +5,6 @@
 
 namespace ui {
 	class InteractiveTextBlock : public TextBlock {
-	protected:
-		InteractionManager* interactionManager;
-		
-		bool interact;
-		bool oldInteract;
-		
-		int indexInteraction;
-		IInteraction* interaction;
-	
 	public:
 		InteractiveTextBlock(
 			IInteraction* interaction, std::u32string text, sf::Color textColor = nullColor,
@@ -52,6 +43,15 @@ namespace ui {
 	
 	public:
 		InteractiveTextBlock* copy() override;
+	
+	protected:
+		InteractionManager* interactionManager;
+		
+		bool interact;
+		bool oldInteract;
+		
+		int indexInteraction;
+		IInteraction* interaction;
 	};
 	
 	template<>
