@@ -4,12 +4,11 @@
 #include "../../../../../drawable/iDrawable/iDrawable.hpp"
 
 namespace ui {
-	class IBoxWithView : public Box, public IDrawable {
-	protected:
-		void copy(IBoxWithView* iBoxWithView);
-	
+	class BoxWithView : public Box, public IDrawable {
 	public:
-		IBoxWithView(sf::Vector2f minSize);
+		BoxWithView(sf::Vector2f minSize);
+		
+		BoxWithView(const BoxWithView& other);
 		
 		void init(InitInfo initInfo) override;
 		
@@ -17,7 +16,7 @@ namespace ui {
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		IBoxWithView* copy() override = 0;
+		BoxWithView* copy() override = 0;
 	
 	protected:
 		sf::RenderTarget* renderTarget;

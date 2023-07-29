@@ -1,18 +1,22 @@
 #include "boxWithChangeableObjects.hpp"
 
 namespace ui {
-	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<IScalable*> objects, std::shared_ptr<SValue<uint>> value, sf::Vector2f minSize) :
-		Box(minSize), LayoutWithObjectsArray(objects), objects(std::move(objects)), value(value), drawManagers(this->objects.size()) {
+	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<BoxPtr<IScalable> >&& objects, PSValue<uint> value, sf::Vector2f minSize) :
+		Box(minSize), objects(objects), value(value), drawManagers(this->objects.size()) {
 	}
 	
-	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<IScalable*> objects, uint index, sf::Vector2f minSize) :
-		Box(minSize), LayoutWithObjectsArray(objects), objects(std::move(objects)), value(std::make_shared<SValue<uint>>(index)), drawManagers(this->objects.size()) {
+	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<BoxPtr<IScalable> >&& objects, uint index, sf::Vector2f minSize) :
+		Box(minSize), objects(objects), value(std::make_shared<SValue<uint>>(index)), drawManagers(this->objects.size()) {
+	}
+	
+	BoxWithChangeableObjects::BoxWithChangeableObjects(const BoxWithChangeableObjects& other) :
+		Box(other), objects(other.objects), value(other.value), drawManagers(this->objects.size()) {
 	}
 	
 	void BoxWithChangeableObjects::init(InitInfo initInfo) {
 		initInfo.drawManager.add(*this);
 		
-		for(int i = 0; i < objects.size(); ++i) {
+		for(std::size_t i = 0; i < objects.size(); ++i) {
 			objects[i]->init(initInfo.copy(drawManagers[i]));
 		}
 	}
@@ -33,10 +37,6 @@ namespace ui {
 		return value->getValue();
 	}
 	
-	IScalable* BoxWithChangeableObjects::getObject() {
-		return objects[value->getValue()];
-	}
-	
 	void BoxWithChangeableObjects::draw() {
 		drawManagers[value->getValue()].draw();
 	}
@@ -50,35 +50,39 @@ namespace ui {
 		return objects[value->getValue()]->updateInteractions(mousePosition);
 	}
 	
+	std::size_t BoxWithChangeableObjects::getArraySize() const {
+		return objects.size();
+	}
+	
+	IScalable& BoxWithChangeableObjects::getObjectAt(std::size_t index) {
+		return *objects.at(index);
+	}
+	
+	const IScalable& BoxWithChangeableObjects::getObjectAt(std::size_t index) const {
+		return *objects.at(index);
+	}
+	
 	BoxWithChangeableObjects* BoxWithChangeableObjects::copy() {
-		return new BoxWithChangeableObjects{objects, value, minimumSize};
+		return new BoxWithChangeableObjects{*this};
 	}
 	
 	bool DecodePointer<BoxWithChangeableObjects>::decodePointer(const YAML::Node& node, BoxWithChangeableObjects*& boxWithChangeableObjects) {
-		std::vector<IScalable*> objects;
-		sf::Vector2f minSize{0, 0};
-		
-		for(auto& objectNode: node["objects"]) {
-			IScalable* object;
-			objectNode >> object;
-			objects.push_back(object);
-		}
-		
-		if(node["minSize"])
-			node["minSize"] >> minSize;
+		auto objects{node["objects"].as<std::vector<BoxPtr<IScalable> > >()};
+		auto minSize{convDef(node["min-size"], sf::Vector2f{})};
 		
 		if(node["value"]) {
-			std::shared_ptr<SValue<uint>> value;
-			value = Buffer::get<SValue<uint>>(node["value"]);
-			boxWithChangeableObjects = new BoxWithChangeableObjects{objects, value, minSize};
-			return true;
+			boxWithChangeableObjects = new BoxWithChangeableObjects{
+				std::move(objects),
+				Buffer::get<SValue<uint>>(node["value"]),
+				minSize
+			};
+		} else {
+			boxWithChangeableObjects = new BoxWithChangeableObjects{
+				std::move(objects),
+				convDef(node["index"], 0u),
+				minSize
+			};
 		}
-		
-		uint index{0};
-		if(node["index"])
-			node["index"] >> index;
-		
-		boxWithChangeableObjects = new BoxWithChangeableObjects{objects, index, minSize};
 		return true;
 	}
 	

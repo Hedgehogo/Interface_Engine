@@ -2,8 +2,8 @@
 #include "../../../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
-	BoxWithConstBezel::BoxWithConstBezel(IScalable* object, IUninteractive* bezel, float thickness, sf::Vector2f minSize) :
-		Box(minSize), LayoutWithObject(object), bezel(bezel), thickness(thickness) {
+	BoxWithConstBezel::BoxWithConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f minSize) :
+		Box(minSize), object(object), bezel(bezel), thickness(thickness) {
 		sf::Vector2f minimumSize{object->getMinSize() + sf::Vector2f(thickness * 2.0f, thickness * 2.0f)};
 		if(this->minimumSize.x < minimumSize.x) {
 			this->minimumSize.x = minimumSize.x;
@@ -16,10 +16,6 @@ namespace ui {
 	void BoxWithConstBezel::init(InitInfo initInfo) {
 		bezel->init(initInfo);
 		object->init(initInfo);
-	}
-	
-	BoxWithConstBezel::~BoxWithConstBezel() {
-		delete bezel;
 	}
 	
 	void BoxWithConstBezel::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -43,25 +39,25 @@ namespace ui {
 		return max(object->getNormalSize() + sf::Vector2f{thickness * 2, thickness * 2}, bezel->getNormalSize());
 	}
 	
+	IScalable& BoxWithConstBezel::getObject() {
+		return *object;
+	}
+	
+	const IScalable& BoxWithConstBezel::getObject() const {
+		return *object;
+	}
+	
 	BoxWithConstBezel* BoxWithConstBezel::copy() {
-		BoxWithConstBezel* boxWithConstBezel{new BoxWithConstBezel{object->copy(), bezel->copy(), thickness}};
-		Box::copy(boxWithConstBezel);
-		return boxWithConstBezel;
+		return new BoxWithConstBezel{*this};
 	}
 	
 	bool DecodePointer<BoxWithConstBezel>::decodePointer(const YAML::Node& node, BoxWithConstBezel*& boxWithConstBezel) {
-		IScalable* object;
-		IUninteractive* bezel;
-		float thickness;
-		sf::Vector2f minSize{};
-		
-		node["object"] >> object;
-		node["bezel"] >> bezel;
-		node["thickness"] >> thickness;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		boxWithConstBezel = new BoxWithConstBezel{object, bezel, thickness, minSize};
+		boxWithConstBezel = new BoxWithConstBezel{
+			node["object"].as<BoxPtr<IScalable> >(),
+			node["bezel"].as<BoxPtr<IUninteractive> >(),
+			node["thickness"].as<float>(),
+			convDef(node["min-size"], sf::Vector2f{})
+		};
 		return true;
 	}
 	

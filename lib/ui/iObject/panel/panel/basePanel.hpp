@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../layout/object/layoutWithObject.hpp"
+#include "../../iLayout/object/iLayoutWithObject.hpp"
 #include "../../../sizingAndPositioning/sizing/make/makeSize.hpp"
 #include "../../../sizingAndPositioning/positioning/make/makePositioning.hpp"
 #include "../../../sizingAndPositioning/sizing2/iSizing2.hpp"
@@ -14,16 +14,13 @@
 #include "../../../enums/keyHandler/keyHandler.hpp"
 
 namespace ui {
-	class BasePanel : public LayoutWithObject, public IDrawable, public IUpdatable {
-	protected:
-		void copy(BasePanel* panel);
-	
+	class BasePanel : public ILayoutWithObject, public IDrawable, public IUpdatable {
 	public:
+		BasePanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed = false);
+		
+		BasePanel(const BasePanel& other);
+		
 		void init(InitInfo initInfo) override;
-		
-		BasePanel(IScalable* object, ISizing2* sizing, IPositioning2* positioning, bool displayed = false);
-		
-		~BasePanel() override;
 		
 		virtual bool isIndependent() = 0;
 		
@@ -57,6 +54,14 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		LayoutData& getLayoutData() override;
+		
+		const LayoutData& getLayoutData() const override;
+		
+		IScalable& getObject() override;
+		
+		const IScalable& getObject() const override;
+		
 		BasePanel* copy() override = 0;
 		
 		static void setFullDebug(bool fullDebug);
@@ -64,8 +69,10 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		ISizing2* sizing;
-		IPositioning2* positioning;
+		LayoutData layout;
+		BoxPtr<IScalable> object;
+		BoxPtr<ISizing2> sizing;
+		BoxPtr<IPositioning2> positioning;
 		DrawManager drawManager;
 		UpdateManager updateManager;
 		bool parentProcessed;

@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../onlyDrawable.hpp"
-#include "../../../../../layout/layout.hpp"
+#include "ui/iObject/iLayout/iLayout.hpp"
 
 namespace ui {
-	class Capsule : public OnlyDrawable, public Layout {
+	class Capsule : public OnlyDrawable, public ILayout {
 	public:
 		Capsule(sf::Color color);
 		
@@ -16,9 +16,14 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		LayoutData& getLayoutData() override;
+		
+		const LayoutData& getLayoutData() const override;
+		
 		Capsule* copy() override;
 	
 	protected:
+		LayoutData layout;
 		sf::RectangleShape rectangle;
 		sf::CircleShape circle;
 	};

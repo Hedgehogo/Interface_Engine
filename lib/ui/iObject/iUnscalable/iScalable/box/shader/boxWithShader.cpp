@@ -1,36 +1,40 @@
 #include "boxWithShader.hpp"
 
 namespace ui {
-	void convertTransmission(const YAML::Node& node, uint& transmission) {
-		std::map<std::string, BoxWithShader::Transmission> transmissionMap{
-			{"size",          BoxWithShader::Transmission::size},
-			{"texture",       BoxWithShader::Transmission::texture},
-			{"aspectRatio",   BoxWithShader::Transmission::aspectRatio},
-			{"mousePosition", BoxWithShader::Transmission::mousePosition},
-			{"time",          BoxWithShader::Transmission::time},
-		};
-		
-		if(node.IsScalar()) {
-			std::string strTransmission = node.as<std::string>();
-			transmission = transmissionMap[strTransmission];
-		} else if(node.IsSequence()) {
-			std::string strTransmission;
-			for(const auto& item: node) {
-				strTransmission = item.as<std::string>();
-				transmission = static_cast<BoxWithShader::Transmission>(transmission | transmissionMap[strTransmission]);
+	uint convertTransmissionDef(const YAML::Node& node) {
+		uint transmission{};
+		if(node) {
+			std::map<std::string, BoxWithShader::Transmission> transmissionMap{
+				{"size",          BoxWithShader::Transmission::size},
+				{"texture",       BoxWithShader::Transmission::texture},
+				{"aspectRatio",   BoxWithShader::Transmission::aspectRatio},
+				{"mousePosition", BoxWithShader::Transmission::mousePosition},
+				{"time",          BoxWithShader::Transmission::time},
+			};
+			
+			if(node.IsScalar()) {
+				std::string strTransmission = node.as<std::string>();
+				transmission = transmissionMap[strTransmission];
+			} else if(node.IsSequence()) {
+				std::string strTransmission;
+				for(const auto& item: node) {
+					strTransmission = item.as<std::string>();
+					transmission = static_cast<BoxWithShader::Transmission>(transmission | transmissionMap[strTransmission]);
+				}
 			}
 		}
+		return transmission;
 	}
 	
 	BoxWithShader::BoxWithShader(
-		IScalable* object, sf::Shader* shader, uint transmission,
+		BoxPtr<IScalable>&& object, sf::Shader* shader, uint transmission,
 		std::map<std::string, PISfloat> valuesF,
 		std::map<std::string, PISint> valuesI,
 		std::map<std::string, PISbool> valuesB,
 		std::map<std::string, PISValue<sf::Color>> valuesC,
 		std::map<std::string, PSRVec2f> valuesV,
 		bool optimize, sf::Vector2f minSize
-	) : BoxWithRenderTexture(object, optimize, minSize), shader(shader), transmission(transmission) {
+	) : BoxWithRenderTexture(std::forward<BoxPtr<IScalable> >(object), optimize, minSize), shader(shader), transmission(transmission) {
 		clock.restart();
 		
 		for(auto& [name, value]: valuesF) {
@@ -60,6 +64,10 @@ namespace ui {
 		}
 	}
 	
+	BoxWithShader::~BoxWithShader() {
+		delete shader;
+	}
+	
 	void BoxWithShader::setUniform(std::string name, float var) {
 		shader->setUniform(name, var);
 	}
@@ -85,7 +93,7 @@ namespace ui {
 			shader->setUniform("size", size);
 		if(transmission & Transmission::aspectRatio)
 			shader->setUniform("aspectRatio", size.x / size.y);
-		Layout::setSize(size);
+		ILayout::setSize(size);
 	}
 	
 	void BoxWithShader::draw() {
@@ -113,50 +121,38 @@ namespace ui {
 	
 	bool BoxWithShader::updateInteractions(sf::Vector2f mousePosition) {
 		if(transmission & Transmission::mousePosition)
-			shader->setUniform("mousePosition", mousePosition - position);
+			shader->setUniform("mousePosition", mousePosition - layout.position);
 		return BoxWithRenderTexture::updateInteractions(mousePosition);
 	}
 	
 	template<typename T>
-	std::map<std::string, std::shared_ptr<T>> getSValues(const YAML::Node& node) {
+	std::map<std::string, std::shared_ptr<T>> getSValuesDef(const YAML::Node& node) {
 		std::map<std::string, std::shared_ptr<T>> result;
-		for(auto& [name, nodeValue]: node.as<std::map<std::string, YAML::Node>>()) {
-			result[name] = Buffer::get<T>(nodeValue);
+		if(node) {
+			for(auto& [name, nodeValue]: node.as<std::map<std::string, YAML::Node>>()) {
+				result[name] = Buffer::get<T>(nodeValue);
+			}
 		}
 		return result;
 	}
 	
 	bool DecodePointer<BoxWithShader>::decodePointer(const YAML::Node& node, BoxWithShader*& boxWithShader) {
-		IScalable* object;
-		sf::Shader* shader = new sf::Shader{};
-		uint transmission{};
-		std::map<std::string, PISfloat> valuesF;
-		std::map<std::string, PISint> valuesI;
-		std::map<std::string, PISbool> valuesB;
-		std::map<std::string, PISValue<sf::Color>> valuesC;
-		std::map<std::string, PSRVec2f> valuesV;
-		bool optimize{true};
-		sf::Vector2f minSize{0, 0};
-		node["object"] >> object;
-		if(node["transmission"])
-			convertTransmission(node["transmission"], transmission);
-		if(node["shader"])
+		sf::Shader* shader{new sf::Shader{}};
+		if(node["shader"]) {
 			node["shader"] >> *shader;
-		if(node["values-f"])
-			valuesF = getSValues<ISfloat>(node["values-f"]);
-		if(node["values-i"])
-			valuesI = getSValues<ISint>(node["values-i"]);
-		if(node["values-b"])
-			valuesB = getSValues<ISbool>(node["values-b"]);
-		if(node["values-c"])
-			valuesC = getSValues<ISValue<sf::Color>>(node["values-c"]);
-		if(node["values-v"])
-			valuesV = getSValues<SRVec2f>(node["values-v"]);
-		if(node["optimize"])
-			node["optimize"] >> optimize;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		boxWithShader = new BoxWithShader{object, shader, transmission, valuesF, valuesI, valuesB, valuesC, valuesV, optimize, minSize};
+		}
+		boxWithShader = new BoxWithShader{
+			node["object"].as<BoxPtr<IScalable> >(),
+			shader,
+			convertTransmissionDef(node["transmission"]),
+			getSValuesDef<ISfloat>(node["values-f"]),
+			getSValuesDef<ISint>(node["values-i"]),
+			getSValuesDef<ISbool>(node["values-b"]),
+			getSValuesDef<ISValue<sf::Color> >(node["values-c"]),
+			getSValuesDef<SRVec2f>(node["values-v"]),
+			convDef(node["optimize"], true),
+			convDef(node["min-size"], sf::Vector2f{})
+		};
 		return true;
 	}
 }

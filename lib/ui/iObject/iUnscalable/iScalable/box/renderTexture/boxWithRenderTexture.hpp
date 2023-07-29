@@ -1,17 +1,19 @@
 #pragma once
 
 #include "../box.hpp"
-#include "../../../../layout/object/layoutWithObject.hpp"
+#include "../../../../iLayout/object/iLayoutWithObject.hpp"
 
 namespace ui {
-	class BoxWithRenderTexture : public Box, public LayoutWithObject, public IDrawable {
+	class BoxWithRenderTexture : public Box, public ILayoutWithObject, public IDrawable {
 	protected:
 		void copy(BoxWithRenderTexture* boxWithRenderTexture);
 	
 	public:
-		void init(InitInfo initInfo) override;
+		BoxWithRenderTexture(BoxPtr<IScalable>&& object, bool optimize = true, sf::Vector2f minSize = {});
 		
-		BoxWithRenderTexture(IScalable* object, bool optimize = true, sf::Vector2f minSize = {});
+		BoxWithRenderTexture(const BoxWithRenderTexture& other);
+		
+		void init(InitInfo initInfo) override;
 		
 		void draw() override;
 		
@@ -21,11 +23,16 @@ namespace ui {
 		
 		sf::Vector2f getMinSize() const override;
 		
+		IScalable& getObject() override;
+		
+		const IScalable& getObject() const override;
+		
 		BoxWithRenderTexture* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		BoxPtr<IScalable> object;
 		InteractionManager* interactionManager;
 		DrawManager drawManager;
 		sf::RenderTarget* renderTarget;

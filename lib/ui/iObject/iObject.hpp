@@ -11,6 +11,8 @@
 using uint = unsigned;
 
 namespace ui {
+	using namespace bp;
+	
 	class Panel;
 	
 	class PanelManager;

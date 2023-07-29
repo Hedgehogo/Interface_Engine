@@ -2,23 +2,27 @@
 
 #include "../box.hpp"
 #include "../../interactive/simple/interactiveSimple.hpp"
-#include "../../../../layout/twoObjects/layoutWithTwoObjects.hpp"
+#include "../../../../iLayout/twoObjects/iLayoutWithTwoObjects.hpp"
 #include "../../../../../interaction/iInteraction/block/pressed/pressedInteraction.hpp"
 #include "interaction/event/movableBorderEvent.hpp"
 #include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 #include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 
 namespace ui {
-	class BoxWithMovableBorder : public Box, public LayoutWithTwoObjects, public Interactive_Simple {
+	class BoxWithMovableBorder : public Box, public ILayoutWithTwoObjects, public Interactive_Simple {
 	public:
+		BoxWithMovableBorder(
+			BoxPtr<IScalable>&& firstObject,
+			BoxPtr<IScalable>&& secondObject,
+			bool isHorizontalBorder,
+			PSCoefficient borderValue,
+			int borderInteractionSize = 5,
+			sf::Vector2f minSize = {}
+		);
+		
 		void init(InitInfo initInfo) override;
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
-		
-		BoxWithMovableBorder(
-			IScalable* firstObject, IScalable* secondObject, bool isHorizontalBorder, PSCoefficient borderValue,
-			int borderInteractionSize = 5, sf::Vector2f minSize = {0, 0}
-		);
 		
 		float getBorderValue();
 		
@@ -44,11 +48,21 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		IScalable& getFirstObject() override;
+		
+		const IScalable& getFirstObject() const override;
+		
+		IScalable& getSecondObject() override;
+		
+		const IScalable& getSecondObject() const override;
+		
 		BoxWithMovableBorder* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		BoxPtr<IScalable> firstObject;
+		BoxPtr<IScalable> secondObject;
 		PressedInteraction pressedInteraction;
 		float borderValueNow;
 		PSCoefficient borderValue;

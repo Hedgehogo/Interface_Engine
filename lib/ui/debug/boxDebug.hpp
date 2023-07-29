@@ -1,16 +1,15 @@
 #pragma once
 
 #include "../iObject/iUnscalable/iScalable/box/box.hpp"
+#include "../iObject/iLayout/object/iLayoutWithObject.hpp"
 
 namespace ui {
-	class BoxDebug : public Box, public IDrawable {
+	class BoxDebug : public Box, public ILayoutWithObject, public IDrawable {
 	protected:
 		void init(InitInfo initInfo) override;
 	
 	public:
-		BoxDebug(IScalable* object);
-		
-		~BoxDebug() override;
+		BoxDebug(BoxPtr<IScalable>&& object);
 		
 		void draw() override;
 		
@@ -22,12 +21,16 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		IScalable& getObject() override;
+		
+		const IScalable& getObject() const override;
+		
 		BoxDebug* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		IScalable* object;
+		BoxPtr<IScalable> object;
 		sf::RenderTarget* renderTarget;
 		bool active;
 		bool drawn;

@@ -3,12 +3,30 @@
 #include "../interaction/move/dont/dontMovePanelInteraction.hpp"
 
 namespace ui {
-	Panel::Panel(IScalable* object, HidePanelInteraction* hideInteraction, MovePanelInteraction* moveInteraction, ISizing2* sizing, IPositioning2* positioning, bool displayed) :
-		BasePanel(object, sizing, positioning, displayed), hideInteraction(hideInteraction), moveInteraction(moveInteraction), interactionManager(nullptr) {
+	Panel::Panel(
+		BoxPtr<IScalable>&& object,
+		BoxPtr<HidePanelInteraction> hideInteraction,
+		BoxPtr<MovePanelInteraction> moveInteraction,
+		BoxPtr<ISizing2> sizing,
+		BoxPtr<IPositioning2> positioning,
+		bool displayed
+	) : BasePanel(std::forward<BoxPtr<IScalable> >(object), sizing, positioning, displayed),
+		hideInteraction(hideInteraction), moveInteraction(moveInteraction), interactionManager(nullptr) {
 	}
 	
-	Panel::Panel(IScalable* object, HidePanelInteraction* hideInteraction, ISizing2* sizing, IPositioning2* positioning, bool displayed) :
-		Panel(object, hideInteraction, new DontMovePanelInteraction{}, sizing, positioning, displayed) {
+	Panel::Panel(
+		BoxPtr<IScalable>&& object,
+		BoxPtr<HidePanelInteraction> hideInteraction,
+		BoxPtr<ISizing2> sizing,
+		BoxPtr<IPositioning2> positioning,
+		bool displayed
+	) : BasePanel(std::forward<BoxPtr<IScalable> >(object), sizing, positioning, displayed),
+		hideInteraction(hideInteraction), moveInteraction(new DontMovePanelInteraction{}), interactionManager(nullptr) {
+	}
+	
+	Panel::Panel(const Panel& other) :
+		BasePanel(other), hideInteraction(other.hideInteraction), moveInteraction(other.moveInteraction), interactionManager(other.interactionManager) {
+		hideInteraction->setPanel(*this);
 	}
 	
 	void Panel::init(InitInfo initInfo) {
@@ -18,10 +36,6 @@ namespace ui {
 		hideInteraction->init({initInfo, *this});
 		moveInteraction->init({initInfo, *this});
 		this->interactionManager = &initInfo.interactionManager;
-	}
-	
-	Panel::~Panel() {
-		delete hideInteraction;
 	}
 	
 	void Panel::setDisplayed() {
@@ -67,46 +81,19 @@ namespace ui {
 		return BasePanel::updateInteractions(mousePosition);
 	}
 	
-	void Panel::copy(Panel* panel) {
-		BasePanel::copy(panel);
-		panel->interactionManager = this->interactionManager;
-	}
-	
 	Panel* Panel::copy() {
-		Panel* panel{new Panel(object->copy(), hideInteraction->copy(), moveInteraction->copy(), sizing->copy(), positioning->copy(), displayed)};
-		panel->hideInteraction->setPanel(*panel);
-		Panel::copy(panel);
-		return panel;
+		return new Panel{*this};
 	}
 	
 	bool DecodePointer<Panel>::decodePointer(const YAML::Node& node, Panel*& panel) {
-		IScalable* object;
-		HidePanelInteraction* hideInteraction;
-		ISizing2* sizing;
-		IPositioning2* positioning;
-		bool displayed{false};
-		
-		node["object"] >> object;
-		node["hide-interaction"] >> hideInteraction;
-		node["sizing"] >> sizing;
-		node["positioning"] >> positioning;
-		if(node["displayed"])
-			node["displayed"] >> displayed;
-		
-		if(node["move-interaction"]) {
-			MovePanelInteraction* moveInteraction;
-			
-			node["move-interaction"] >> moveInteraction;
-			
-			{
-				panel = new Panel{object, hideInteraction, moveInteraction, sizing, positioning, displayed};
-				return true;
-			}
-		} else {
-			{
-				panel = new Panel{object, hideInteraction, sizing, positioning, displayed};
-				return true;
-			}
-		}
+		panel = new Panel{
+			node["object"].as<BoxPtr<IScalable> >(),
+			node["hide-interaction"].as<BoxPtr<HidePanelInteraction> >(),
+			BoxPtr{convDefPtr<MovePanelInteraction, DontMovePanelInteraction>(node["move-interaction"])},
+			node["sizing"].as<BoxPtr<ISizing2> >(),
+			node["positioning"].as<BoxPtr<IPositioning2> >(),
+			convDef(node["displayed"], false)
+		};
+		return true;
 	}
 }

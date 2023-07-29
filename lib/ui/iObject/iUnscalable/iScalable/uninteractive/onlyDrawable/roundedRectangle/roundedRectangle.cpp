@@ -12,18 +12,18 @@ namespace ui {
 	void RoundedRectangle::draw() {
 		renderTarget->draw(horizontalRectangle);
 		renderTarget->draw(verticalRectangle);
-		circle.setPosition(position);
+		circle.setPosition(layout.position);
 		renderTarget->draw(circle);
-		circle.setPosition(position.x + size.x - radius * 2, position.y);
+		circle.setPosition(layout.position.x + layout.size.x - radius * 2, layout.position.y);
 		renderTarget->draw(circle);
-		circle.setPosition(position.x, position.y + size.y - radius * 2);
+		circle.setPosition(layout.position.x, layout.position.y + layout.size.y - radius * 2);
 		renderTarget->draw(circle);
-		circle.setPosition(position.x + size.x - radius * 2, position.y + size.y - radius * 2);
+		circle.setPosition(layout.position.x + layout.size.x - radius * 2, layout.position.y + layout.size.y - radius * 2);
 		renderTarget->draw(circle);
 	}
 	
 	void RoundedRectangle::resize(sf::Vector2f size, sf::Vector2f position) {
-		Layout::resize(size, position);
+		ILayout::resize(size, position);
 		verticalRectangle.setSize({size.x - radius * 2, size.y});
 		verticalRectangle.setPosition(position + sf::Vector2f{radius, 0});
 		horizontalRectangle.setSize({size.x, size.y - radius * 2});
@@ -38,14 +38,17 @@ namespace ui {
 		return sf::Vector2f(radius * 2, radius * 2);
 	}
 	
-	RoundedRectangle* RoundedRectangle::copy() {
-		RoundedRectangle* rectangle{new RoundedRectangle{circle.getFillColor(), radius}};
-		OnlyDrawable::copy(rectangle);
-		Layout::copy(rectangle);
-		rectangle->resize(size, position);
-		return rectangle;
+	LayoutData& RoundedRectangle::getLayoutData() {
+		return layout;
 	}
 	
+	const LayoutData& RoundedRectangle::getLayoutData() const {
+		return layout;
+	}
+	
+	RoundedRectangle* RoundedRectangle::copy() {
+		return new RoundedRectangle{*this};
+	}
 	
 	bool DecodePointer<RoundedRectangle>::decodePointer(const YAML::Node& node, RoundedRectangle*& roundedRectangle) {
 		roundedRectangle = new RoundedRectangle{node["color"].as<sf::Color>(), node["radius"].as<float>()};
@@ -54,7 +57,9 @@ namespace ui {
 	
 	template<>
 	bool determine<RoundedRectangle>(const YAML::Node& node) {
-		return determine(node, {{"color",  YAML::NodeType::Scalar},
-								{"radius", YAML::NodeType::Scalar}});
+		return determine(node, {
+			{"color",  YAML::NodeType::Scalar},
+			{"radius", YAML::NodeType::Scalar}
+		});
 	}
 }

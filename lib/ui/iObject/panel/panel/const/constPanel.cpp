@@ -3,8 +3,8 @@
 #include "../../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
-	ConstPanel::ConstPanel(IScalable* object, ISizing2* sizing, IPositioning2* positioning, bool displayed) :
-		BasePanel(object, sizing, positioning, displayed) {
+	ConstPanel::ConstPanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :
+		BasePanel(std::forward<BoxPtr<IScalable> >(object), sizing, positioning, displayed) {
 	}
 	
 	void ConstPanel::init(InitInfo initInfo) {
@@ -22,26 +22,16 @@ namespace ui {
 	}
 	
 	ConstPanel* ConstPanel::copy() {
-		ConstPanel* constPanel{new ConstPanel(object->copy(), sizing->copy(), positioning->copy(), displayed)};
-		BasePanel::copy(constPanel);
-		return constPanel;
+		return new ConstPanel{*this};
 	}
 	
 	bool DecodePointer<ConstPanel>::decodePointer(const YAML::Node& node, ConstPanel*& constPanel) {
-		IScalable* object;
-		ISizing2* sizing;
-		IPositioning2* positioning;
-		bool displayed{false};
-		
-		node["object"] >> object;
-		node["sizing"] >> sizing;
-		node["positioning"] >> positioning;
-		if(node["displayed"])
-			node["displayed"] >> displayed;
-		
-		{
-			constPanel = new ConstPanel{object, sizing, positioning, displayed};
-			return true;
-		}
+		constPanel = new ConstPanel{
+			node["object"].as<BoxPtr<IScalable> >(),
+			node["sizing"].as<BoxPtr<ISizing2> >(),
+			node["positioning"].as<BoxPtr<IPositioning2> >(),
+			convDef(node["displayed"], false)
+		};
+		return true;
 	}
 }

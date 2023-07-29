@@ -3,25 +3,34 @@
 
 #include "../processorTime.hpp"
 
-TestPanel::TestPanel(bool displayed, const sf::Vector2f &minSize, const sf::Vector2f &normalSize, bool isIndependentResult, bool isFreeResult, bool inPanelResult, bool updateInteractionsResult, ui::ISizing2 *sizing,
-                     ui::IPositioning2 *positioning) :
-					 BasePanel(new ui::Empty{}, sizing, positioning, displayed), minSize(minSize), normalSize(normalSize),
-                     isIndependentResult(isIndependentResult), isFreeResult(isFreeResult), inPanelResult(inPanelResult),updateInteractionsResult(updateInteractionsResult) {}
+TestPanel::TestPanel(
+	bool displayed,
+	const sf::Vector2f& minSize,
+	const sf::Vector2f& normalSize,
+	bool isIndependentResult,
+	bool isFreeResult,
+	bool inPanelResult,
+	bool updateInteractionsResult,
+	ui::BoxPtr<ui::ISizing2> sizing,
+	ui::BoxPtr<ui::IPositioning2> positioning
+) : BasePanel(ui::BoxPtr<ui::IScalable>{new ui::Empty{}}, sizing, positioning, displayed), minSize(minSize), normalSize(normalSize),
+	isIndependentResult(isIndependentResult), isFreeResult(isFreeResult), inPanelResult(inPanelResult), updateInteractionsResult(updateInteractionsResult) {
+}
 
-const TestPanel::Processed &TestPanel::getProcessed() const {
+const TestPanel::Processed& TestPanel::getProcessed() const {
 	return processed;
 }
 
 void TestPanel::init(ui::InitInfo initInfo) {
 	BasePanel::init(initInfo);
-
+	
 	processed.init.time = getProcessorTime();
-	processed.init.renderTarget = &renderTarget;
-	processed.init.drawManager = &drawManager;
-	processed.init.updateManager = &updateManager;
-	processed.init.interactionManager = &interactionManager;
-	processed.init.interactionStack = &interactionStack;
-	processed.init.panelManager = &panelManager;
+	processed.init.renderTarget = &initInfo.renderTarget;
+	processed.init.drawManager = &initInfo.drawManager;
+	processed.init.updateManager = &initInfo.updateManager;
+	processed.init.interactionManager = &initInfo.interactionManager;
+	processed.init.interactionStack = &initInfo.interactionStack;
+	processed.init.panelManager = &initInfo.panelManager;
 }
 
 bool TestPanel::isIndependent() {
@@ -96,8 +105,8 @@ sf::Vector2f TestPanel::getNormalSize() const {
 	return normalSize;
 }
 
-TestPanel *TestPanel::copy() {
-	return new TestPanel{displayed, minSize, normalSize, isIndependentResult, isFreeResult, inPanelResult, updateInteractionsResult, sizing->copy(), positioning->copy()};
+TestPanel* TestPanel::copy() {
+	return new TestPanel{*this};
 }
 
 void TestPanel::setIsIndependentResult(bool isIndependentResult) {

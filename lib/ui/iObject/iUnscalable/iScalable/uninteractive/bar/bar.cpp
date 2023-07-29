@@ -7,16 +7,12 @@ namespace ui {
 		strip->init(initInfo);
 	}
 	
-	Bar::Bar(IUninteractive* background, IUninteractive* strip, float offset, bool horizontal) :
-		LayoutWithBackground(background), strip(strip), horizontal(horizontal), offset(offset), division(1), value(0) {
+	Bar::Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, float offset, bool horizontal) :
+		background(background), strip(strip), horizontal(horizontal), offset(offset), division(1), value(0) {
 	}
 	
-	Bar::Bar(IUninteractive* background, IUninteractive* strip, int division, float offset, bool horizontal) :
-		LayoutWithBackground(background), strip(strip), horizontal(horizontal), offset(offset), division(division), value(0) {
-	}
-	
-	Bar::~Bar() {
-		delete strip;
+	Bar::Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, int division, float offset, bool horizontal) :
+		background(background), strip(strip), horizontal(horizontal), offset(offset), division(division), value(0) {
 	}
 	
 	float Bar::getValue() {
@@ -28,22 +24,22 @@ namespace ui {
 		if(this->division > 1) {
 			this->value = std::round(this->value);
 		}
-		sf::Vector2f stripSize{size};
+		sf::Vector2f stripSize{layout.size};
 		if(horizontal) {
-			stripSize.x = offset * size.y;
-			stripSize.x += (size.x - stripSize.x) * this->value / static_cast<float>(division);
+			stripSize.x = offset * layout.size.y;
+			stripSize.x += (layout.size.x - stripSize.x) * this->value / static_cast<float>(division);
 		} else {
-			stripSize.y = offset * size.x;
-			stripSize.y += (size.y - stripSize.y) * this->value / static_cast<float>(division);
+			stripSize.y = offset * layout.size.x;
+			stripSize.y += (layout.size.y - stripSize.y) * this->value / static_cast<float>(division);
 		}
-		strip->resize(stripSize, position);
+		strip->resize(stripSize, layout.position);
 	}
 	
 	void Bar::draw() {
 	}
 	
 	void Bar::resize(sf::Vector2f size, sf::Vector2f position) {
-		LayoutWithBackground::resize(size, position);
+		ILayoutWithBackground::resize(size, position);
 		setValue(value);
 	}
 	
@@ -59,16 +55,24 @@ namespace ui {
 		return max(stripNormalSize, background->getNormalSize());
 	}
 	
-	void Bar::copy(Bar* bar) {
-		OnlyDrawable::copy(bar);
-		Layout::copy(bar);
-		bar->value = this->value;
+	LayoutData& Bar::getLayoutData() {
+		return layout;
+	}
+	
+	const LayoutData& Bar::getLayoutData() const {
+		return layout;
+	}
+	
+	IUninteractive& Bar::getBackground() {
+		return *background;
+	}
+	
+	const IUninteractive& Bar::getBackground() const {
+		return *background;
 	}
 	
 	Bar* Bar::copy() {
-		Bar* bar{new Bar{background->copy(), strip->copy(), division, offset, horizontal}};
-		Bar::copy(bar);
-		return bar;
+		return new Bar{*this};
 	}
 	
 	void Bar::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
@@ -77,24 +81,13 @@ namespace ui {
 	}
 	
 	bool DecodePointer<Bar>::decodePointer(const YAML::Node& node, Bar*& bar) {
-		IUninteractive* background;
-		IUninteractive* strip;
-		int division{1};
-		float offset{0.0f};
-		bool horizontal{true};
-		
-		node["background"] >> background;
-		node["strip"] >> strip;
-		if(node["division"])
-			node["division"] >> division;
-		if(node["offset"])
-			node["offset"] >> offset;
-		if(node["horizontal"])
-			node["horizontal"] >> horizontal;
-		
-		{
-			bar = new Bar{background, strip, division, offset, horizontal};
-			return true;
-		}
+		bar = new Bar{
+			node["background"].as<BoxPtr<IUninteractive> >(),
+			node["strip"].as<BoxPtr<IUninteractive> >(),
+			convDef(node["division"], 1),
+			convDef(node["offset"], 0.0f),
+			convDef(node["offset"], true)
+		};
+		return true;
 	}
 }

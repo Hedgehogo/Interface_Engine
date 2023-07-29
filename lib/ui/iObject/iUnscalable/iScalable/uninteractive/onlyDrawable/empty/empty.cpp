@@ -1,11 +1,14 @@
 #include "empty.hpp"
 
 namespace ui {
+	Empty::Empty() {
+	}
+	
 	void Empty::draw() {
 	}
 	
 	void Empty::resize(sf::Vector2f size, sf::Vector2f position) {
-		Layout::resize(size, position);
+		ILayout::resize(size, position);
 	}
 	
 	bool Empty::updateInteractions(sf::Vector2f) {
@@ -21,12 +24,18 @@ namespace ui {
 	}
 	
 	Empty* Empty::copy() {
-		Empty* empty{new Empty{}};
-		Layout::copy(empty);
-		return empty;
+		return new Empty{*this};
 	}
 	
 	void Empty::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	}
+	
+	LayoutData& Empty::getLayoutData() {
+		return layout;
+	}
+	
+	const LayoutData& Empty::getLayoutData() const {
+		return layout;
 	}
 	
 	bool DecodePointer<Empty>::decodePointer(const YAML::Node& node, Empty*& empty) {

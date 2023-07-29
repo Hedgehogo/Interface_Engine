@@ -1,8 +1,12 @@
 #include "boxSwitcher.hpp"
 
 namespace ui {
-	BoxSwitcher::BoxSwitcher(IScalable* firstObject, IScalable* secondObject, PSbool value, const sf::Vector2f& minSize) :
-		Box(minSize, size), LayoutWithTwoObjects(firstObject, secondObject), value(value) {}
+	BoxSwitcher::BoxSwitcher(BoxPtr<IScalable>&& firstObject, BoxPtr<IScalable>&& secondObject, PSbool value, const sf::Vector2f& minSize) :
+		Box(minSize), firstObject(firstObject), secondObject(secondObject), value(value) {}
+	
+	BoxSwitcher::BoxSwitcher(const BoxSwitcher& other) :
+		Box(other), firstObject(other.firstObject), secondObject(other.secondObject), value(other.value) {
+	}
 	
 	void BoxSwitcher::init(InitInfo initInfo) {
 		firstObject->init(initInfo.copy(firstDrawManager));
@@ -11,50 +15,65 @@ namespace ui {
 	}
 	
 	void BoxSwitcher::setPosition(sf::Vector2f position) {
-		Layout::setPosition(position);
+		ILayout::setPosition(position);
 		firstObject->setPosition(position);
 		secondObject->setPosition(position);
 	}
 	
 	void BoxSwitcher::move(sf::Vector2f position) {
-		Layout::move(position);
+		ILayout::move(position);
 		firstObject->move(position);
 		secondObject->move(position);
 	}
 	
 	void BoxSwitcher::setSize(sf::Vector2f size) {
-		Layout::setSize(size);
+		ILayout::setSize(size);
 		firstObject->setSize(size);
 		secondObject->setSize(size);
 	}
 	
 	void BoxSwitcher::resize(sf::Vector2f size, sf::Vector2f position) {
-		Layout::resize(size, position);
+		ILayout::resize(size, position);
 		firstObject->resize(size, position);
 		secondObject->resize(size, position);
 	}
 	
 	void BoxSwitcher::draw() {
-		if (value->getValue())
+		if (value->getValue()) {
 			firstDrawManager.draw();
-		else
+		} else {
 			secondDrawManager.draw();
+		}
 	}
 	
 	bool BoxSwitcher::updateInteractions(sf::Vector2f mousePosition) {
 		return value->getValue() ? firstObject->updateInteractions(mousePosition) : secondObject->updateInteractions(mousePosition);
 	}
 	
+	IScalable& BoxSwitcher::getFirstObject() {
+		return *firstObject;
+	}
+	
+	const IScalable& BoxSwitcher::getFirstObject() const {
+		return *firstObject;
+	}
+	
+	IScalable& BoxSwitcher::getSecondObject() {
+		return *secondObject;
+	}
+	
+	const IScalable& BoxSwitcher::getSecondObject() const {
+		return *secondObject;
+	}
+	
 	BoxSwitcher* BoxSwitcher::copy() {
-		auto boxSwitcherCopy{new BoxSwitcher{firstObject->copy(), secondObject->copy(), value, minimumSize}};
-		Layout::copy(boxSwitcherCopy);
-		return boxSwitcherCopy;
+		return new BoxSwitcher{*this};
 	}
 	
 	bool DecodePointer<BoxSwitcher>::decodePointer(const YAML::Node& node, BoxSwitcher*& boxSwitcher) {
 		boxSwitcher = new BoxSwitcher{
-			node["first-object"].as<IScalable*>(),
-			node["second-object"].as<IScalable*>(),
+			node["first-object"].as<BoxPtr<IScalable> >(),
+			node["second-object"].as<BoxPtr<IScalable>>(),
 			Buffer::get<Sbool>(node["value"]),
 			convDef(node["min-size"], sf::Vector2f{})
 		};

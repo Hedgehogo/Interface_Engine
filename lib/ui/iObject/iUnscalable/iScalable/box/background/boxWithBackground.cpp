@@ -1,8 +1,8 @@
 #include "boxWithBackground.hpp"
 
 namespace ui {
-	BoxWithBackground::BoxWithBackground(IScalable* object, IUninteractive* background, sf::Vector2f offset, sf::Vector2f minSize) :
-		Box(minSize), LayoutWithObject(object), LayoutWithBackground(background), offset(offset) {
+	BoxWithBackground::BoxWithBackground(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, sf::Vector2f offset, sf::Vector2f minSize) :
+		Box(minSize), object(object), background(background), offset(offset) {
 	}
 	
 	void BoxWithBackground::init(InitInfo initInfo) {
@@ -33,6 +33,22 @@ namespace ui {
 		return max(object->getNormalSize() + offset * 2.f, background->getNormalSize());
 	}
 	
+	IUninteractive& BoxWithBackground::getBackground() {
+		return *background;
+	}
+	
+	const IUninteractive& BoxWithBackground::getBackground() const {
+		return *background;
+	}
+	
+	IScalable& BoxWithBackground::getObject() {
+		return *object;
+	}
+	
+	const IScalable& BoxWithBackground::getObject() const {
+		return *object;
+	}
+	
 	void BoxWithBackground::resize(sf::Vector2f size, sf::Vector2f position) {
 		Box::resize(size, position);
 		
@@ -45,7 +61,7 @@ namespace ui {
 	}
 	
 	BoxWithBackground* BoxWithBackground::copy() {
-		return new BoxWithBackground(object->copy(), background->copy(), offset, minimumSize);
+		return new BoxWithBackground{*this};
 	}
 	
 	void BoxWithBackground::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
@@ -55,19 +71,12 @@ namespace ui {
 	}
 	
 	bool DecodePointer<BoxWithBackground>::decodePointer(const YAML::Node& node, BoxWithBackground*& boxWithBackground) {
-		IScalable* object;
-		IUninteractive* background;
-		sf::Vector2f offset{};
-		sf::Vector2f minSize{};
-		
-		node["object"] >> object;
-		node["background"] >> background;
-		if(node["offset"])
-			node["offset"] >> offset;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		boxWithBackground = new BoxWithBackground{object, background, offset, minSize};
+		boxWithBackground = new BoxWithBackground{
+			node["object"].as<BoxPtr<IScalable> >(),
+			node["background"].as<BoxPtr<IUninteractive> >(),
+			convDef(node["offset"], sf::Vector2f{}),
+			convDef(node["min-size"], sf::Vector2f{}),
+		};
 		return true;
 	}
 }

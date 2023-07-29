@@ -2,18 +2,16 @@
 
 #include "../box.hpp"
 #include "../../uninteractive/uninteractive.hpp"
-#include "../../../../layout/object/layoutWithObject.hpp"
+#include "../../../../iLayout/object/iLayoutWithObject.hpp"
 #include "../../../../../interaction/interactionStack/interactionStack.hpp"
 #include "../../../../../interaction/interactionManager/interactionManager.hpp"
 
 namespace ui {
-	class BoxWithConstBezel : public Box, public LayoutWithObject {
+	class BoxWithConstBezel : public Box, public ILayoutWithObject {
 	public:
+		BoxWithConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f minSize = {0, 0});
+		
 		void init(InitInfo initInfo) override;
-		
-		BoxWithConstBezel(IScalable* object, IUninteractive* bezel, float thickness, sf::Vector2f minSize = {0, 0});
-		
-		~BoxWithConstBezel() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -23,12 +21,17 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		IScalable& getObject() override;
+		
+		const IScalable& getObject() const override;
+		
 		BoxWithConstBezel* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		IUninteractive* bezel;
+		BoxPtr<IScalable> object;
+		BoxPtr<IUninteractive> bezel;
 		float thickness;
 	};
 	

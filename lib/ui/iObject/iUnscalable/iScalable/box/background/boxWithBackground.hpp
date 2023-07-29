@@ -1,13 +1,13 @@
 #pragma once
 
 #include "../box.hpp"
-#include "../../../../layout/object/layoutWithObject.hpp"
-#include "../../../../layout/background/layoutWithBackground.hpp"
+#include "../../../../iLayout/object/iLayoutWithObject.hpp"
+#include "../../../../iLayout/background/iLayoutWithBackground.hpp"
 
 namespace ui {
-	class BoxWithBackground : public Box, public LayoutWithBackground, public LayoutWithObject {
+	class BoxWithBackground : public Box, public ILayoutWithBackground, public ILayoutWithObject {
 	public:
-		BoxWithBackground(IScalable* object, IUninteractive* background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
+		BoxWithBackground(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
 		
 		void init(InitInfo initInfo) override;
 		
@@ -21,6 +21,14 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		IUninteractive& getBackground() override;
+		
+		const IUninteractive& getBackground() const override;
+		
+		IScalable& getObject() override;
+		
+		const IScalable& getObject() const override;
+		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
@@ -30,6 +38,8 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		BoxPtr<IUninteractive> background;
+		BoxPtr<IScalable> object;
 		sf::Vector2f offset;
 	};
 	

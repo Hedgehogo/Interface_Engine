@@ -4,8 +4,6 @@ project(Interface_Engine CXX)
 include(FetchContent)
 set(BUILD_SHARED_LIBS ON)
 
-
-
 FetchContent_Declare(
         SFML
         GIT_REPOSITORY https://github.com/SFML/SFML.git
@@ -19,27 +17,25 @@ FetchContent_Declare(
         FIND_PACKAGE_ARGS NAMES yaml-cpp
 )
 FetchContent_Declare(
+        curl
+        GIT_REPOSITORY https://github.com/curl/curl.git
+        GIT_TAG curl-8_0_1
+        FIND_PACKAGE_ARGS NAMES CURL
+)
+FetchContent_Declare(
         localisation
         GIT_REPOSITORY https://github.com/Andrewkoro105/Localisation_System.git
         GIT_TAG master
         FIND_PACKAGE_ARGS NAMES localisation
 )
 FetchContent_Declare(
-        curl
-        GIT_REPOSITORY https://github.com/curl/curl.git
-        GIT_TAG curl-8_0_1
-        FIND_PACKAGE_ARGS NAMES CURL
+        Box_Ptr
+        GIT_REPOSITORY https://github.com/Andrewkoro105/Box_Ptr.git
+        GIT_TAG master
+        FIND_PACKAGE_ARGS NAMES Box_Ptr
 )
-#[[
-FetchContent_Declare(
-        ImageMagick
-        GIT_REPOSITORY https://github.com/MarcoMartins86/ImageMagick.git
-        GIT_TAG CMake-support
-        FIND_PACKAGE_ARGS NAMES ImageMagick COMPONENTS Magick++ MagickCore
-)
-]]
 
-FetchContent_MakeAvailable(SFML yaml-cpp localisation curl #[[ImageMagick]])
+FetchContent_MakeAvailable(SFML yaml-cpp curl localisation Box_Ptr)
 
 find_package(ImageMagick COMPONENTS Magick++ MagickCore)
 
@@ -69,11 +65,12 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         ${ImageMagick_INCLUDE_DIRS}
 )
 
-set(libraries 
+set(libraries
         sfml-graphics sfml-system sfml-window
         yaml-cpp
-        localisation
         libcurl
+        localisation
+        Box_Ptr
 )
 
 foreach(lib IN LISTS libraries)

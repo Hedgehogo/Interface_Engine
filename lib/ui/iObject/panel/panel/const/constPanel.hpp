@@ -5,9 +5,9 @@
 namespace ui {
 	class ConstPanel : public BasePanel {
 	public:
-		void init(InitInfo initInfo) override;
+		ConstPanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed = false);
 		
-		ConstPanel(IScalable* object, ISizing2* sizing, IPositioning2* positioning, bool displayed = false);
+		void init(InitInfo initInfo) override;
 		
 		bool isIndependent() override;
 		

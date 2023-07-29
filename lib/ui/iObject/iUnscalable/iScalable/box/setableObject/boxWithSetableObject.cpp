@@ -1,7 +1,7 @@
 #include "boxWithSetableObject.hpp"
 
 namespace ui {
-	BoxWithSetableObject::BoxWithSetableObject(sf::Vector2f minSize, IScalable* object) : LayoutWithObject(object) {
+	BoxWithSetableObject::BoxWithSetableObject(BoxPtr<IScalable>&& object, sf::Vector2f minSize) : Box(minSize), object(object) {
 	}
 	
 	void BoxWithSetableObject::init(InitInfo initInfo) {
@@ -15,9 +15,7 @@ namespace ui {
 		this->interactionStack = &initInfo.interactionStack;
 	}
 	
-	void BoxWithSetableObject::setObject(IScalable* newObject, bool deleteOld) {
-		if(deleteOld)
-			delete object;
+	void BoxWithSetableObject::setObject(BoxPtr<IScalable>&& newObject, bool deleteOld) {
 		drawManager.clear();
 		updateManager.clear();
 		interactionManager.clear();
@@ -27,15 +25,23 @@ namespace ui {
 		object = newObject;
 	}
 	
-	IScalable* BoxWithSetableObject::getObject() {
-		return object;
-	}
-	
 	void BoxWithSetableObject::draw() {
 		this->drawManager.draw();
 	}
 	
+	void BoxWithSetableObject::resize(sf::Vector2f size, sf::Vector2f position) {
+		object->resize(size, position);
+	}
+	
 	void BoxWithSetableObject::update() {
 		this->updateManager.update();
+	}
+	
+	IScalable& BoxWithSetableObject::getObject() {
+		return *object;
+	}
+	
+	const IScalable& BoxWithSetableObject::getObject() const {
+		return *object;
 	}
 }

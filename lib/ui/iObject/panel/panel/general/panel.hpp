@@ -8,19 +8,29 @@ namespace ui {
 	class MovePanelInteraction;
 	
 	class Panel : public BasePanel {
-	protected:
-		void copy(Panel* panel);
-	
 	public:
 		void init(InitInfo initInfo) override;
 		
-		Panel(IScalable* object, HidePanelInteraction* hideInteraction, MovePanelInteraction* moveInteraction, ISizing2* sizing, IPositioning2* positioning, bool displayed = false);
+		Panel(
+			BoxPtr<IScalable>&& object,
+			BoxPtr<HidePanelInteraction> hideInteraction,
+			BoxPtr<MovePanelInteraction> moveInteraction,
+			BoxPtr<ISizing2> sizing,
+			BoxPtr<IPositioning2> positioning,
+			bool displayed = false
+		);
 		
-		Panel(IScalable* object, HidePanelInteraction* hideInteraction, ISizing2* sizing, IPositioning2* positioning, bool displayed = false);
+		Panel(
+			BoxPtr<IScalable>&& object,
+			BoxPtr<HidePanelInteraction> hideInteraction,
+			BoxPtr<ISizing2> sizing,
+			BoxPtr<IPositioning2> positioning,
+			bool displayed = false
+		);
 		
-		~Panel() override;
+		Panel(const Panel& other);
 		
-		virtual void setDisplayed();
+		void setDisplayed() override;
 		
 		bool isIndependent() override;
 		
@@ -39,8 +49,8 @@ namespace ui {
 	protected:
 		PanelManager panelManager;
 		InteractionManager* interactionManager;
-		HidePanelInteraction* hideInteraction;
-		MovePanelInteraction* moveInteraction;
+		BoxPtr<HidePanelInteraction> hideInteraction;
+		BoxPtr<MovePanelInteraction> moveInteraction;
 	};
 	
 	template<>

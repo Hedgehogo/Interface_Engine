@@ -1,18 +1,20 @@
 #pragma once
 
 #include "../box.hpp"
-#include "../../../../layout/objectsArray/layoutWithObjectsArray.hpp"
+#include "../../../../iLayout/objectsArray/iLayoutWithObjectsArray.hpp"
 #include "../../../../../interaction/interactionStack/interactionStack.hpp"
 #include "../../../../../interaction/interactionManager/interactionManager.hpp"
 
 namespace ui {
-	class BoxWithBorderVertical : public Box, public LayoutWithObjectsArray {
+	class BoxWithBorderVertical : public Box, public ILayoutWithObjectsArray {
 	public:
-		BoxWithBorderVertical(std::vector<IScalable*> objects, std::vector<float> bounds, sf::Vector2f minSize = {0, 0});
+		BoxWithBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, std::vector<float> bounds, sf::Vector2f minSize = {0, 0});
 		
-		BoxWithBorderVertical(std::vector<IScalable*> objects, sf::Vector2f minSize = {0, 0});
+		BoxWithBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, sf::Vector2f minSize = {0, 0});
 		
-		BoxWithBorderVertical(IScalable* firstObject, IScalable* secondObject, float bound = 0.5f, sf::Vector2f minSize = {0, 0});
+		BoxWithBorderVertical(BoxPtr<IScalable>&& firstObject, BoxPtr<IScalable>&& secondObject, float bound = 0.5f, sf::Vector2f minSize = {0, 0});
+		
+		void init(InitInfo initInfo) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -22,11 +24,18 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		std::size_t getArraySize() const override;
+		
+		IScalable& getObjectAt(std::size_t index) override;
+		
+		const IScalable& getObjectAt(std::size_t index) const override;
+		
 		BoxWithBorderVertical* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		std::vector<BoxPtr<IScalable> > objects;
 		std::vector<float> bounds;
 	};
 	

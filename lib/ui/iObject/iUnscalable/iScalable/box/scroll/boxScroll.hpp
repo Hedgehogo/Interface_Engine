@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../view/iBoxWithView.hpp"
+#include "../view/boxWithView.hpp"
 #include "modules/appendix/yaml-cpp/shared/vector/general/sVector2.hpp"
 
 namespace ui {
-	class BoxScroll : public IBoxWithView {
+	class BoxScroll : public BoxWithView {
 	public:
-		BoxScroll(IUnscalable* object, const PSRVec2f& normalObjectPosition, const sf::Vector2f& minSize);
+		BoxScroll(BoxPtr<IUnscalable>&& object, const PSRVec2f& normalObjectPosition, const sf::Vector2f& minSize);
 		
 		void init(InitInfo initInfo) override;
 		
@@ -23,11 +23,9 @@ namespace ui {
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
 		BoxScroll* copy() override;
-		
-		~BoxScroll() override;
 	
 	protected:
-		IUnscalable* object;
+		BoxPtr<IUnscalable> object;
 		PSRVec2f normalObjectPosition;
 	};
 	

@@ -2,14 +2,22 @@
 
 namespace ui {
 	Box::Box(sf::Vector2f minSize, sf::Vector2f size) :
-		Layout(size), minimumSize(minSize) {
+		layout({}, size), minimumSize(minSize) {
 	}
 	
 	void Box::resize(sf::Vector2f size, sf::Vector2f position) {
-		Layout::resize(size, position);
+		ILayout::resize(size, position);
 	}
 	
 	void Box::copy(Box* box) {
-		Layout::copy(box);
+		box->layout = this->layout;
+	}
+	
+	LayoutData& Box::getLayoutData() {
+		return layout;
+	}
+	
+	const LayoutData& Box::getLayoutData() const {
+		return layout;
 	}
 }

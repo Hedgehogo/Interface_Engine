@@ -4,21 +4,32 @@
 
 namespace ui {
 	BoxWithMovableBorder::BoxWithMovableBorder(
-		IScalable* firstObject, IScalable* secondObject, bool isHorizontalBorder, PSCoefficient borderValue, int borderInteractionSize, sf::Vector2f minSize
+		BoxPtr<IScalable>&& firstObject,
+		BoxPtr<IScalable>&& secondObject,
+		bool isHorizontalBorder,
+		PSCoefficient borderValue,
+		int borderInteractionSize,
+		sf::Vector2f minSize
 	) :
-		Box(minSize), LayoutWithTwoObjects(firstObject, secondObject),
+		Box(minSize),
+		firstObject(firstObject),
+		secondObject(secondObject),
 		pressedInteraction(new MovableBorderEvent{*this}, Key::mouseLeft),
 		Interactive_Simple(new OneKeyInteraction{new AddBlockInteractionEvent{pressedInteraction}, Key::mouseLeft}),
-		isHorizontalBorder(isHorizontalBorder), borderValue(borderValue), borderValueNow(borderValue->getValue()), borderInteractionSize(borderInteractionSize) {
+		isHorizontalBorder(isHorizontalBorder),
+		borderValue(borderValue),
+		borderValueNow(borderValue->getValue()),
+		borderInteractionSize(borderInteractionSize) {
 		
 		borderValue->addSetter([&](float value) {
-			this->resize(this->size, this->position);
+			this->resize(layout.size, layout.position);
 		});
 	}
 	
 	void BoxWithMovableBorder::init(InitInfo initInfo) {
 		Interactive::init(initInfo);
-		LayoutWithTwoObjects::init(initInfo);
+		firstObject->init(initInfo);
+		secondObject->init(initInfo);
 	}
 	
 	void BoxWithMovableBorder::init(InteractiveInitInfo interactiveInitInfo) {
@@ -48,14 +59,14 @@ namespace ui {
 	}
 	
 	bool BoxWithMovableBorder::isInBorder(sf::Vector2f pointPosition) {
-		if(pointPosition.x < this->position.x || pointPosition.x > this->position.x + this->size.x || pointPosition.y < this->position.y || pointPosition.y > this->position.y + this->size.y) {
+		if(pointPosition.x < layout.position.x || pointPosition.x > layout.position.x + layout.size.x || pointPosition.y < layout.position.y || pointPosition.y > layout.position.y + layout.size.y) {
 			return false;
 		}
 		if(this->isHorizontalBorder) {
-			int borderPosition = this->size.x * borderValueNow + this->position.x;
+			int borderPosition = layout.size.x * borderValueNow + layout.position.x;
 			return pointPosition.x > borderPosition - borderInteractionSize && pointPosition.x < borderPosition + borderInteractionSize;
 		}
-		int borderPosition = this->size.y * borderValueNow + this->position.y;
+		int borderPosition = layout.size.y * borderValueNow + layout.position.y;
 		return pointPosition.y > borderPosition - borderInteractionSize && pointPosition.y < borderPosition + borderInteractionSize;
 	}
 	
@@ -70,13 +81,13 @@ namespace ui {
 	bool BoxWithMovableBorder::updateInteractions(sf::Vector2f mousePosition) {
 		if(!this->isInBorder(mousePosition)) {
 			if(this->isHorizontalBorder) {
-				float splitPosition = this->position.x + this->size.x * this->borderValueNow;
+				float splitPosition = layout.position.x + layout.size.x * this->borderValueNow;
 				if(splitPosition > mousePosition.x) {
 					return firstObject->updateInteractions(mousePosition);
 				}
 				return secondObject->updateInteractions(mousePosition);
 			} else {
-				float splitPosition = this->position.y + this->size.y * this->borderValueNow;
+				float splitPosition = layout.position.y + layout.size.y * this->borderValueNow;
 				if(splitPosition > mousePosition.y) {
 					return firstObject->updateInteractions(mousePosition);
 				}
@@ -149,9 +160,25 @@ namespace ui {
 		return {std::max(firstNormalSize.x, secondNormalSize.x), firstNormalSize.y + secondNormalSize.y};
 	}
 	
+	IScalable& BoxWithMovableBorder::getFirstObject() {
+		return *firstObject;
+	}
+	
+	const IScalable& BoxWithMovableBorder::getFirstObject() const {
+		return *firstObject;
+	}
+	
+	IScalable& BoxWithMovableBorder::getSecondObject() {
+		return *secondObject;
+	}
+	
+	const IScalable& BoxWithMovableBorder::getSecondObject() const {
+		return *secondObject;
+	}
+	
 	BoxWithMovableBorder* BoxWithMovableBorder::copy() {
-		BoxWithMovableBorder* boxWithMovableBorder{new BoxWithMovableBorder{firstObject->copy(), secondObject->copy(), this->isHorizontalBorder, this->borderValue, this->borderInteractionSize, this->minimumSize}};
-		Box::copy(boxWithMovableBorder);
+		BoxWithMovableBorder* boxWithMovableBorder{new BoxWithMovableBorder{*this}};
+		Interactive_Simple::copy(boxWithMovableBorder);
 		return boxWithMovableBorder;
 	}
 	
@@ -162,28 +189,22 @@ namespace ui {
 	}
 	
 	bool DecodePointer<BoxWithMovableBorder>::decodePointer(const YAML::Node& node, BoxWithMovableBorder*& boxWithMovableBorder) {
-		IScalable* firstObject;
-		IScalable* secondObject;
+		auto& borderDirection{node["border-direction"].Scalar()};
 		bool isHorizontalBorder{false};
-		PSCoefficient borderValue;
-		int borderInteractionSize{5};
-		sf::Vector2f minSize{};
-		node["first-object"] >> firstObject;
-		node["second-object"] >> secondObject;
-		std::string borderDirection;
-		node["border-direction"] >> borderDirection;
-		borderValue = Buffer::get<SCoefficientValue>(node["border-value"]);
 		if(borderDirection == "horizontal") {
 			isHorizontalBorder = true;
 		} else if(borderDirection != "vertical") {
 			throw YAML::BadConversion{node.Mark()};
 		}
-		if(node["border-interaction-size"])
-			node["border-interaction-size"] >> borderInteractionSize;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
 		
-		boxWithMovableBorder = new BoxWithMovableBorder{firstObject, secondObject, isHorizontalBorder, borderValue, borderInteractionSize};
+		boxWithMovableBorder = new BoxWithMovableBorder{
+			node["first-object"].as<BoxPtr<IScalable> >(),
+			node["first-object"].as<BoxPtr<IScalable> >(),
+			isHorizontalBorder,
+			Buffer::get<SCoefficientValue>(node["border-value"]),
+			convDef(node["border-interaction-size"], 5),
+			convDef(node["min-size"], sf::Vector2f{})
+		};
 		return true;
 	}
 }

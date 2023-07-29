@@ -3,12 +3,12 @@
 #include "event/switcherEvent.hpp"
 
 namespace ui {
-	Switcher::Switcher(IScalable* inactiveBackground, IScalable* activeBackground, PSbool value, Key key) :
+	Switcher::Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key) :
 		Interactive_Simple(new OneKeyInteraction{new SwitcherEvent{value}, key}), activeBackground(activeBackground), inactiveBackground(inactiveBackground), active(value) {
 	}
 	
-	Switcher::Switcher(IScalable* inactiveBackground, IScalable* activeBackground, Key key, bool startActive) :
-		Switcher(inactiveBackground, activeBackground, std::make_shared<Sbool>(startActive), key) {
+	Switcher::Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, Key key, bool startActive) :
+		Switcher(std::forward<BoxPtr<IScalable> >(inactiveBackground), std::forward<BoxPtr<IScalable> >(activeBackground), std::make_shared<Sbool>(startActive), key) {
 	}
 	
 	void Switcher::init(InteractiveInitInfo interactiveInitInfo) {
@@ -19,19 +19,19 @@ namespace ui {
 	}
 	
 	void Switcher::setPosition(sf::Vector2f position) {
-		Layout::setPosition(position);
+		ILayout::setPosition(position);
 		activeBackground->setPosition(position);
 		inactiveBackground->setPosition(position);
 	}
 	
 	void Switcher::move(sf::Vector2f position) {
-		Layout::move(position);
+		ILayout::move(position);
 		activeBackground->move(position);
 		inactiveBackground->move(position);
 	}
 	
 	void Switcher::setSize(sf::Vector2f size) {
-		Layout::setSize(size);
+		ILayout::setSize(size);
 		activeBackground->setSize(size);
 		inactiveBackground->setSize(size);
 	}
@@ -44,6 +44,14 @@ namespace ui {
 		return max(activeBackground->getNormalSize(), inactiveBackground->getNormalSize());
 	}
 	
+	LayoutData& Switcher::getLayoutData() {
+		return layout;
+	}
+	
+	const LayoutData& Switcher::getLayoutData() const {
+		return layout;
+	}
+	
 	void Switcher::draw() {
 		if(active->getValue()) {
 			activeDrawManager.draw();
@@ -53,7 +61,7 @@ namespace ui {
 	}
 	
 	void Switcher::resize(sf::Vector2f size, sf::Vector2f position) {
-		Layout::resize(size, position);
+		ILayout::resize(size, position);
 		activeBackground->resize(size, position);
 		inactiveBackground->resize(size, position);
 	}
@@ -68,34 +76,32 @@ namespace ui {
 	}
 	
 	Switcher* Switcher::copy() {
-		Switcher* switcher{new Switcher(inactiveBackground->copy(), activeBackground->copy(), active, dynamic_cast<OneKeyInteraction*>(interaction)->getKey())};
-		Layout::copy(switcher);
-		return switcher;
+		return new Switcher{*this};
 	}
 	
 	bool DecodePointer<Switcher>::decodePointer(const YAML::Node& node, Switcher*& switcher) {
-		auto inactiveBackground{node["inactive-background"].as<IScalable*>()};
-		auto activeBackground{node["active-background"].as<IScalable*>()};
+		auto inactiveBackground{node["inactive-background"].as<BoxPtr<IScalable> >()};
+		auto activeBackground{node["active-background"].as<BoxPtr<IScalable> >()};
 		Key key{convDef<Key>(node["key"], Key::mouseLeft)};
 		
 		if(node["value"]) {
 			switcher = new Switcher{
-				inactiveBackground,
-				activeBackground,
+				std::move(inactiveBackground),
+				std::move(activeBackground),
 				Buffer::get<Sbool>(node["value"]),
 				key
 			};
 		} else if(node["state"]) {
 			switcher = new Switcher{
-				inactiveBackground,
-				activeBackground,
+				std::move(inactiveBackground),
+				std::move(activeBackground),
 				key,
 				convertBool(node["state"], "active", "inactive")
 			};
 		} else {
 			switcher = new Switcher{
-				inactiveBackground,
-				activeBackground,
+				std::move(inactiveBackground),
+				std::move(activeBackground),
 				key,
 				convDef(node["start-active"], false)
 			};
@@ -109,10 +115,5 @@ namespace ui {
 		} else {
 			inactiveBackground->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		}
-	}
-	
-	Switcher::~Switcher() {
-		delete activeBackground;
-		delete inactiveBackground;
 	}
 }

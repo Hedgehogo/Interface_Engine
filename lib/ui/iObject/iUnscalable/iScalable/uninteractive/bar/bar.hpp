@@ -2,22 +2,17 @@
 
 #include "../onlyDrawable/onlyDrawable.hpp"
 #include "../onlyDrawable/empty/empty.hpp"
-#include "../../../../layout/background/layoutWithBackground.hpp"
+#include "../../../../iLayout/background/iLayoutWithBackground.hpp"
 #include "../../../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
-	class Bar : public OnlyDrawable, public LayoutWithBackground {
-	protected:
-		void copy(Bar* bar);
-	
+	class Bar : public OnlyDrawable, public ILayoutWithBackground {
 	public:
 		void init(InitInfo initInfo) override;
 		
-		explicit Bar(IUninteractive* background, IUninteractive* strip, float offset = 0, bool horizontal = true);
+		explicit Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, float offset = 0, bool horizontal = true);
 		
-		explicit Bar(IUninteractive* background, IUninteractive* strip, int division, float offset = 0, bool horizontal = true);
-		
-		~Bar() override;
+		explicit Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, int division, float offset = 0, bool horizontal = true);
 		
 		float getValue();
 		
@@ -31,12 +26,22 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		LayoutData& getLayoutData() override;
+		
+		const LayoutData& getLayoutData() const override;
+		
+		IUninteractive& getBackground() override;
+		
+		const IUninteractive& getBackground() const override;
+		
 		Bar* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		IUninteractive* strip;
+		LayoutData layout;
+		BoxPtr<IUninteractive> background;
+		BoxPtr<IUninteractive> strip;
 		bool horizontal;
 		float offset;
 		int division;

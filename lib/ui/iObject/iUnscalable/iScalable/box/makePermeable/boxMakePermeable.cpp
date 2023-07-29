@@ -1,11 +1,15 @@
 #include "boxMakePermeable.hpp"
 
 namespace ui {
-	BoxMakePermeable::BoxMakePermeable(IScalable* object, sf::Vector2f minSize) : Box(minSize), LayoutWithObject(object) {
+	BoxMakePermeable::BoxMakePermeable(BoxPtr<IScalable>&& object, sf::Vector2f minSize) : Box(minSize), object(object) {
+	}
+	
+	void BoxMakePermeable::init(InitInfo initInfo) {
+		object->init(initInfo);
 	}
 	
 	void BoxMakePermeable::resize(sf::Vector2f size, sf::Vector2f position) {
-		LayoutWithObject::resize(size, position);
+		ILayoutWithObject::resize(size, position);
 	}
 	
 	bool BoxMakePermeable::updateInteractions(sf::Vector2f mousePosition) {
@@ -13,20 +17,23 @@ namespace ui {
 		return false;
 	}
 	
+	IScalable& BoxMakePermeable::getObject() {
+		return *object;
+	}
+	
+	const IScalable& BoxMakePermeable::getObject() const {
+		return *object;
+	}
+	
 	BoxMakePermeable* BoxMakePermeable::copy() {
-		BoxMakePermeable* boxMakePermeable{new BoxMakePermeable{object->copy(), minimumSize}};
-		Box::copy(boxMakePermeable);
-		return boxMakePermeable;
+		return new BoxMakePermeable{*this};
 	}
 	
 	bool DecodePointer<BoxMakePermeable>::decodePointer(const YAML::Node& node, BoxMakePermeable*& boxMakePermeable) {
-		IScalable* object;
-		sf::Vector2f minSize{};
-		node["object"] >> object;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		boxMakePermeable = new BoxMakePermeable{object, minSize};
+		boxMakePermeable = new BoxMakePermeable{
+			node["object"].as<BoxPtr<IScalable> >(),
+			convDef(node["min-size"], sf::Vector2f{})
+		};
 		return true;
 	}
 }

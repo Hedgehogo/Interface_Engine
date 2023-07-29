@@ -1,16 +1,22 @@
 #include "boxWithRenderTexture.hpp"
 
 namespace ui {
+	BoxWithRenderTexture::BoxWithRenderTexture(BoxPtr<IScalable>&& object, bool optimize, sf::Vector2f minSize) :
+		Box(minSize), object(object), optimize(optimize), active(true), renderTarget(nullptr), interactionManager(nullptr) {
+		sprite.setTexture(renderTexture.getTexture());
+	}
+	
+	BoxWithRenderTexture::BoxWithRenderTexture(const BoxWithRenderTexture& other) :
+		Box(other), object(other.object), optimize(other.optimize), active(true), renderTarget(other.renderTarget) {
+		sf::Vector2u size = this->renderTexture.getSize();
+		renderTexture.create(size.x, size.y);
+	}
+	
 	void BoxWithRenderTexture::init(InitInfo initInfo) {
 		this->renderTarget = &initInfo.renderTarget;
 		this->interactionManager = &initInfo.interactionManager;
 		initInfo.drawManager.add(*this);
 		object->init(initInfo.copy(renderTexture).copy(this->drawManager));
-	}
-	
-	BoxWithRenderTexture::BoxWithRenderTexture(IScalable* object, bool optimize, sf::Vector2f minSize) :
-		Box(minSize), LayoutWithObject(object), optimize(optimize), active(true), renderTarget(nullptr), interactionManager(nullptr) {
-		sprite.setTexture(renderTexture.getTexture());
 	}
 	
 	void BoxWithRenderTexture::draw() {
@@ -24,7 +30,7 @@ namespace ui {
 	}
 	
 	void BoxWithRenderTexture::resize(sf::Vector2f size, sf::Vector2f position) {
-		LayoutWithObject::resize(size, position);
+		ILayoutWithObject::resize(size, position);
 		sf::Vector2f start{std::floor(position.x), std::ceil(position.y)};
 		sf::Vector2f end{std::floor(position.x + size.x), std::ceil(position.y + size.y)};
 		sf::Vector2i textureSize{end - start};
@@ -50,6 +56,14 @@ namespace ui {
 		return max(object->getMinSize(), minimumSize, {1, 1});
 	}
 	
+	IScalable& BoxWithRenderTexture::getObject() {
+		return *object;
+	}
+	
+	const IScalable& BoxWithRenderTexture::getObject() const {
+		return *object;
+	}
+	
 	void BoxWithRenderTexture::copy(BoxWithRenderTexture* boxWithRenderTexture) {
 		boxWithRenderTexture->renderTarget = this->renderTarget;
 		sf::Vector2u size = this->renderTexture.getSize();
@@ -57,9 +71,7 @@ namespace ui {
 	}
 	
 	BoxWithRenderTexture* BoxWithRenderTexture::copy() {
-		BoxWithRenderTexture* boxWithRenderTexture{new BoxWithRenderTexture{object->copy(), optimize}};
-		BoxWithRenderTexture::copy(boxWithRenderTexture);
-		return boxWithRenderTexture;
+		return new BoxWithRenderTexture{*this};
 	}
 	
 	void BoxWithRenderTexture::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
@@ -68,7 +80,7 @@ namespace ui {
 	
 	bool DecodePointer<BoxWithRenderTexture>::decodePointer(const YAML::Node& node, BoxWithRenderTexture*& boxWithRenderTexture) {
 		boxWithRenderTexture = new BoxWithRenderTexture{
-			node["object"].as<IScalable*>(),
+			node["object"].as<BoxPtr<IScalable> >(),
 			convDef(node["optimize"], true),
 			convDef(node["min-size"], sf::Vector2f{})
 		};

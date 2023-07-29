@@ -7,22 +7,23 @@
 #include "event/switcherTabsEvent.hpp"
 
 namespace ui {
-	BoxSwitcherTabs::BoxSwitcherTabs(std::vector<IScalable*> objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
-		Box(minSize), LayoutWithObjectsArray(objects), Interactive_Simple(new OneKeyInteraction{new SwitcherTabsEvent{value, this}, key}), isHorizontal(isHorizontal), value(value) {
+	BoxSwitcherTabs::BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
+		Box(minSize), objects(objects), Interactive_Simple(new OneKeyInteraction{new SwitcherTabsEvent{value, this}, key}), isHorizontal(isHorizontal), value(value) {
 	}
 	
 	void BoxSwitcherTabs::init(InitInfo initInfo) {
-		LayoutWithObjectsArray::init(initInfo);
+		for(auto& object: objects) {
+			object->init(initInfo);
+		}
 		Interactive::init(initInfo);
 	}
 	
 	void BoxSwitcherTabs::setPosition(sf::Vector2f position) {
-		LayoutWithObjectsArray::setPosition(position);
-		LayoutWithObjectsArray::move(position - this->position);
+		ILayoutWithObjectsArray::setPosition(position);
 	}
 	
 	void BoxSwitcherTabs::resize(sf::Vector2f size, sf::Vector2f position) {
-		LayoutWithObjectsArray::resize(size, position);
+		Box::resize(size, position);
 		
 		if (isHorizontal){
 			sf::Vector2f objectSize{size.x / objects.size(), size.y};
@@ -39,29 +40,38 @@ namespace ui {
 				positionY += objectSize.y;
 			}
 		}
-		
+	}
+	
+	std::size_t BoxSwitcherTabs::getArraySize() const {
+		return objects.size();
+	}
+	
+	IScalable& BoxSwitcherTabs::getObjectAt(std::size_t index) {
+		return *objects.at(index);
+	}
+	
+	const IScalable& BoxSwitcherTabs::getObjectAt(std::size_t index) const {
+		return *objects.at(index);
 	}
 	
 	int BoxSwitcherTabs::getTab(sf::Vector2f position) {
-		return static_cast<int>(isHorizontal ? (position.x - this->position.x) / (size.x / objects.size()) : (position.y - this->position.y) / (size.y / objects.size()));
+		return static_cast<int>(isHorizontal ? (position.x - layout.position.x) / (layout.size.x / objects.size()) : (position.y - layout.position.y) / (layout.size.y / objects.size()));
 	}
 	
 	BoxSwitcherTabs* BoxSwitcherTabs::copy() {
-		BoxSwitcherTabs* switcherTabsCopy{new BoxSwitcherTabs{ui::copy(objects), value, dynamic_cast<OneKeyInteraction*>(interaction)->getKey(), isHorizontal, minimumSize}};
-		Interactive_Simple::copy(switcherTabsCopy);
-		Layout::copy(switcherTabsCopy);
-		return switcherTabsCopy;
+		BoxSwitcherTabs* switcherTabs{new BoxSwitcherTabs{*this}};
+		Interactive_Simple::copy(switcherTabs);
+		return switcherTabs;
 	}
 	
 	bool DecodePointer<BoxSwitcherTabs>::decodePointer(const YAML::Node& node, BoxSwitcherTabs*& switcherTabs) {
 		switcherTabs = new BoxSwitcherTabs {
-			node["objects"].as<std::vector<IScalable*>>(),
+			node["objects"].as<std::vector<BoxPtr<IScalable> > >(),
 			Buffer::get<Sint>(node["value"]),
 			convDef(node["key"], Key::mouseLeft),
 			convBoolDef(node["direction"], "horizontal", "vertical"),
 			convDef(node["min-size"], sf::Vector2f{})
 		};
-		
 		return true;
 	}
 }

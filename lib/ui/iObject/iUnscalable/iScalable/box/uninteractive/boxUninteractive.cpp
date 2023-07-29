@@ -1,29 +1,38 @@
 #include "boxUninteractive.hpp"
 
 namespace ui {
-	BoxUninteractive::BoxUninteractive(IScalable* object, sf::Vector2f minSize) : LayoutWithObject(object), Box(minSize) {
+	BoxUninteractive::BoxUninteractive(BoxPtr<IScalable>&& object, sf::Vector2f minSize) : object(object), Box(minSize) {
+	}
+	
+	void BoxUninteractive::init(InitInfo initInfo) {
+		object->init(initInfo);
 	}
 	
 	void BoxUninteractive::resize(sf::Vector2f size, sf::Vector2f position) {
-		LayoutWithObject::resize(size, position);
+		ILayoutWithObject::resize(size, position);
 	}
 	
 	bool BoxUninteractive::updateInteractions(sf::Vector2f mousePosition) {
 		return IUninteractive::updateInteractions(mousePosition);
 	}
 	
+	IScalable& BoxUninteractive::getObject() {
+		return *object;
+	}
+	
+	const IScalable& BoxUninteractive::getObject() const {
+		return *object;
+	}
 	
 	bool DecodePointer<BoxUninteractive>::decodePointer(const YAML::Node& node, BoxUninteractive*& boxUninteractive) {
-		IScalable* object;
-		sf::Vector2f minSize;
-		node["object"] >> object;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		boxUninteractive = new BoxUninteractive{object, minSize};
+		boxUninteractive = new BoxUninteractive{
+			node["object"].as<BoxPtr<IScalable> >(),
+			convDef(node["min-size"], sf::Vector2f{})
+		};
 		return true;
 	}
 	
 	BoxUninteractive* BoxUninteractive::copy() {
-		return new BoxUninteractive{object->copy(), minimumSize};
+		return new BoxUninteractive{*this};
 	}
 }

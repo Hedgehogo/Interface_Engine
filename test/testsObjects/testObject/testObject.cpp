@@ -6,15 +6,15 @@ TestObject::TestObject(sf::Vector2f minSize, sf::Vector2f normalSize, bool updat
 
 void TestObject::init(ui::InitInfo initInfo) {
 	processed.init.time = getProcessorTime();
-	processed.init.renderTarget = &renderTarget;
-	processed.init.drawManager = &drawManager;
-	processed.init.updateManager = &updateManager;
-	processed.init.interactionManager = &interactionManager;
-	processed.init.interactionStack = &interactionStack;
-	processed.init.panelManager = &panelManager;
-
-	drawManager.add(*this);
-	updateManager.add(*this);
+	processed.init.renderTarget = &initInfo.renderTarget;
+	processed.init.drawManager = &initInfo.drawManager;
+	processed.init.updateManager = &initInfo.updateManager;
+	processed.init.interactionManager = &initInfo.interactionManager;
+	processed.init.interactionStack = &initInfo.interactionStack;
+	processed.init.panelManager = &initInfo.panelManager;
+	
+	initInfo.drawManager.add(*this);
+	initInfo.updateManager.add(*this);
 }
 
 TestObject::Processed TestObject::getProcessed() {
@@ -27,6 +27,14 @@ sf::Vector2f TestObject::getMinSize() const {
 
 sf::Vector2f TestObject::getNormalSize() const {
 	return normalSize;
+}
+
+ui::LayoutData& TestObject::getLayoutData() {
+	return layoutData;
+}
+
+const ui::LayoutData& TestObject::getLayoutData() const {
+	return layoutData;
 }
 
 bool TestObject::updateInteractions(sf::Vector2f mousePosition) {
@@ -43,7 +51,7 @@ void TestObject::update() {
 	processed.update = getProcessorTime();
 }
 
-TestObject *TestObject::copy() {
+TestObject* TestObject::copy() {
 	processed.copy = getProcessorTime();
 	return new TestObject{minSize, normalSize, updateInteractionsResult};
 }

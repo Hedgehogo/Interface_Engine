@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <yaml-cpp/yaml.h>
 #include <functional>
+#include <Box_Ptr/boxPtr.hpp>
 
 typedef long long llint;
 typedef unsigned int uint;
@@ -15,6 +16,8 @@ template<typename T>
 sf::Vector2<T> operator/(const sf::Vector2<T>& first, const sf::Vector2<T>& second);
 
 namespace ui {
+	using namespace bp;
+	
 	std::string demangle(const char* name);
 	
 	template<class T>
@@ -155,37 +158,43 @@ namespace ui {
 	
 	
 	template<typename T>
-	struct Decode<std::vector<T>> {
+	struct Decode<BoxPtr<T> > {
+		static std::enable_if_t<std::is_class_v<T>, bool>
+		decode(const YAML::Node& node, BoxPtr<T>& object);
+	};
+	
+	template<typename T>
+	struct Decode<std::vector<T> > {
 		static bool decode(const YAML::Node& node, std::vector<T>& vector);
 	};
 	
 	
 	template<typename T>
-	struct Decode<sf::Vector2<T>> {
+	struct Decode<sf::Vector2<T> > {
 		static bool decode(const YAML::Node& node, sf::Vector2<T>& vector);
 	};
 	
 	
 	template<>
-	struct Decode<sf::Vector2<float>> {
+	struct Decode<sf::Vector2<float> > {
 		static bool decode(const YAML::Node& node, sf::Vector2<float>& vector);
 	};
 	
 	
 	template<>
-	struct Decode<sf::Vector2<int>> {
+	struct Decode<sf::Vector2<int> > {
 		static bool decode(const YAML::Node& node, sf::Vector2<int>& vector);
 	};
 	
 	
 	template<>
-	struct Decode<sf::Vector2<uint>> {
+	struct Decode<sf::Vector2<uint> > {
 		static bool decode(const YAML::Node& node, sf::Vector2<uint>& vector);
 	};
 	
 	
 	template<typename T>
-	struct Decode<sf::Rect<T>> {
+	struct Decode<sf::Rect<T> > {
 		static bool decode(const YAML::Node& node, sf::Rect<T>& rect);
 	};
 	

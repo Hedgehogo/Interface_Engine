@@ -1,8 +1,8 @@
 #include "boxWithPanel.hpp"
 
 namespace ui {
-	BoxWithPanel::BoxWithPanel(ConstPanel* panel, IScalable* object, sf::Vector2f minSize) :
-		Box(minSize), LayoutWithObject(object), panel(panel) {
+	BoxWithPanel::BoxWithPanel(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable>&& object, sf::Vector2f minSize) :
+		Box(minSize), object(object), panel(panel) {
 	}
 	
 	void BoxWithPanel::init(InitInfo initInfo) {
@@ -10,12 +10,8 @@ namespace ui {
 		panel->init(initInfo);
 	}
 	
-	BoxWithPanel::~BoxWithPanel() {
-		delete panel;
-	}
-	
 	void BoxWithPanel::resize(sf::Vector2f size, sf::Vector2f position) {
-		LayoutWithObject::resize(size, position);
+		ILayoutWithObject::resize(size, position);
 		panel->resize(size, position);
 	}
 	
@@ -27,10 +23,16 @@ namespace ui {
 		return max(object->getNormalSize(), panel->getNormalSize());
 	}
 	
+	IScalable& BoxWithPanel::getObject() {
+		return *object;
+	}
+	
+	const IScalable& BoxWithPanel::getObject() const {
+		return *object;
+	}
+	
 	BoxWithPanel* BoxWithPanel::copy() {
-		BoxWithPanel* boxWithPanel{new BoxWithPanel{panel->copy(), object->copy(), minimumSize}};
-		Box::copy(boxWithPanel);
-		return boxWithPanel;
+		return new BoxWithPanel{*this};
 	}
 	
 	void BoxWithPanel::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
@@ -39,16 +41,11 @@ namespace ui {
 	}
 	
 	bool DecodePointer<BoxWithPanel>::decodePointer(const YAML::Node& node, BoxWithPanel*& boxWithPanel) {
-		ConstPanel* panel;
-		IScalable* object;
-		sf::Vector2f minSize{};
-		
-		node["panel"] >> panel;
-		node["object"] >> object;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		
-		boxWithPanel = new BoxWithPanel{panel, object, minSize};
+		boxWithPanel = new BoxWithPanel{
+			node["panel"].as<BoxPtr<ConstPanel> >(),
+			node["panel"].as<BoxPtr<IScalable> >(),
+			convDef(node["min-size"], sf::Vector2f{}),
+		};
 		return true;
 	}
 }

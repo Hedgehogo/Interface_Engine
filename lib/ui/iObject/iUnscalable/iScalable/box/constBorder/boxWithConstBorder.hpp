@@ -2,16 +2,16 @@
 
 #include "../box.hpp"
 #include "../../iScalable.hpp"
-#include "../../../../layout/twoObjects/layoutWithTwoObjects.hpp"
+#include "../../../../iLayout/twoObjects/iLayoutWithTwoObjects.hpp"
 #include "../../../../../interaction/interactionStack/interactionStack.hpp"
 #include "../../../../../enums/side/side.hpp"
 
 namespace ui {
-	class BoxWithConstBorder : public Box, public LayoutWithTwoObjects {
+	class BoxWithConstBorder : public Box, public ILayoutWithTwoObjects {
 	public:
-		void init(InitInfo initInfo) override;
+		BoxWithConstBorder(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& secondObject, Side side, float borderDistance, sf::Vector2f minSize = {0, 0});
 		
-		BoxWithConstBorder(IScalable* constObject, IScalable* secondObject, Side side, float borderDistance, sf::Vector2f minSize = {0, 0});
+		void init(InitInfo initInfo) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -21,11 +21,21 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		IScalable& getFirstObject() override;
+		
+		const IScalable& getFirstObject() const override;
+		
+		IScalable& getSecondObject() override;
+		
+		const IScalable& getSecondObject() const override;
+		
 		BoxWithConstBorder* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		BoxPtr<IScalable> constObject;
+		BoxPtr<IScalable> secondObject;
 		float borderDistance;
 		Side side;
 	};

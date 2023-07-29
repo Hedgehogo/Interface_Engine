@@ -1,11 +1,13 @@
 #pragma once
 
 #include "../onlyDrawable.hpp"
-#include "../../../../../layout/layout.hpp"
+#include "ui/iObject/iLayout/iLayout.hpp"
 
 namespace ui {
-	class Empty : public OnlyDrawable, public Layout {
+	class Empty : public OnlyDrawable, public ILayout {
 	public:
+		Empty();
+		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
@@ -16,9 +18,16 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		LayoutData& getLayoutData() override;
+		
+		const LayoutData& getLayoutData() const override;
+		
 		Empty* copy() override;
 		
-		virtual void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		
+	protected:
+		LayoutData layout;
 	};
 	
 	template<>

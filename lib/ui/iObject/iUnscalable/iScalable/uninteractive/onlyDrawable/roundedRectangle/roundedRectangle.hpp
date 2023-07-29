@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../onlyDrawable.hpp"
-#include "../../../../../layout/layout.hpp"
+#include "ui/iObject/iLayout/iLayout.hpp"
 
 namespace ui {
-	class RoundedRectangle : public OnlyDrawable, public Layout {
+	class RoundedRectangle : public OnlyDrawable, public ILayout {
 	public:
 		RoundedRectangle(sf::Color color, float radius);
 		
@@ -16,9 +16,14 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		LayoutData& getLayoutData() override;
+		
+		const LayoutData& getLayoutData() const override;
+		
 		RoundedRectangle* copy() override;
 	
 	protected:
+		LayoutData layout;
 		sf::RectangleShape horizontalRectangle;
 		sf::RectangleShape verticalRectangle;
 		sf::CircleShape circle;

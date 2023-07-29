@@ -9,11 +9,9 @@ namespace ui {
 		void init(InitInfo initInfo) override;
 	
 	public:
-		BoxWithBorder(std::vector<std::vector<IScalable*>> objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize = {0, 0});
+		BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize = {0, 0});
 		
-		BoxWithBorder(std::vector<std::vector<IScalable*>> objects, sf::Vector2f minSize = {0, 0});
-		
-		~BoxWithBorder() override;
+		BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, sf::Vector2f minSize = {0, 0});
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -28,7 +26,7 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		std::vector<std::vector<IScalable*>> objects;
+		std::vector<std::vector<BoxPtr<IScalable> > > objects;
 		std::vector<float> boundsVertical;
 		std::vector<float> boundsHorizontal;
 	};

@@ -3,17 +3,26 @@
 #include "../box.hpp"
 #include "../../uninteractive/uninteractive.hpp"
 #include "../../uninteractive/onlyDrawable/empty/empty.hpp"
-#include "../../../../layout/object/layoutWithObject.hpp"
-#include "../../../../layout/background/layoutWithBackground.hpp"
-#include "../../../../layout/twoObjects/layoutWithTwoObjects.hpp"
+#include "../../../../iLayout/object/iLayoutWithObject.hpp"
+#include "../../../../iLayout/background/iLayoutWithBackground.hpp"
+#include "../../../../iLayout/twoObjects/iLayoutWithTwoObjects.hpp"
 #include "../../uninteractive/onlyDrawable/empty/empty.hpp"
 
 namespace ui {
-	class BoxWithConstRatioCenter : public Box, public LayoutWithObject, public LayoutWithBackground, public LayoutWithTwoObjects, public IDrawable {
+	class BoxWithConstRatioCenter : public Box, public ILayoutWithObject, public ILayoutWithBackground, public ILayoutWithTwoObjects, public IDrawable {
 	public:
-		BoxWithConstRatioCenter(IScalable* object, IUninteractive* background, float aspectRatio, sf::Vector2f minSize = {});
+		BoxWithConstRatioCenter(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, float aspectRatio, sf::Vector2f minSize = {});
 		
-		BoxWithConstRatioCenter(IScalable* object, IScalable* firstObject, IScalable* secondObject, IUninteractive* background, float aspectRatio, sf::Vector2f minSize = {});
+		BoxWithConstRatioCenter(
+			BoxPtr<IScalable>&& object,
+			BoxPtr<IScalable>&& firstObject,
+			BoxPtr<IScalable>&& secondObject,
+			BoxPtr<IUninteractive>&& background,
+			float aspectRatio,
+			sf::Vector2f minSize = {}
+		);
+		
+		BoxWithConstRatioCenter(const BoxWithConstRatioCenter& other);
 		
 		void init(InitInfo initInfo) override;
 		
@@ -27,6 +36,22 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		IUninteractive& getBackground() override;
+		
+		const IUninteractive& getBackground() const override;
+		
+		IScalable& getObject() override;
+		
+		const IScalable& getObject() const override;
+		
+		IScalable& getFirstObject() override;
+		
+		const IScalable& getFirstObject() const override;
+		
+		IScalable& getSecondObject() override;
+		
+		const IScalable& getSecondObject() const override;
+		
 		BoxWithConstRatioCenter* copy() override;
 		
 		void draw() override;
@@ -34,6 +59,10 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		BoxPtr<IUninteractive> background;
+		BoxPtr<IScalable> object;
+		BoxPtr<IScalable> firstObject;
+		BoxPtr<IScalable> secondObject;
 		float aspectRatio;
 		bool renderFirst;
 		bool renderSecond;

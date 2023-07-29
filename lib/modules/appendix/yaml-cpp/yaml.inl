@@ -48,6 +48,13 @@ namespace ui {
 	}
 	
 	template<typename T>
+	std::enable_if_t<std::is_class_v<T>, bool>
+	Decode<BoxPtr<T>>::decode(const YAML::Node& node, BoxPtr<T>& object) {
+		object = BoxPtr{node.as<T*>()};
+		return true;
+	}
+	
+	template<typename T>
 	bool Decode<std::vector<T>>::decode(const YAML::Node& node, std::vector<T>& vector) {
 		for(const auto& item: node) {
 			vector.resize(vector.size() + 1);

@@ -1,25 +1,25 @@
 #include "capsule.hpp"
 
 namespace ui {
-	Capsule::Capsule(sf::Color color) : Layout() {
+	Capsule::Capsule(sf::Color color) : ILayout() {
 		rectangle.setFillColor(color);
 		circle.setFillColor(color);
 	}
 	
 	void Capsule::draw() {
 		renderTarget->draw(rectangle);
-		circle.setPosition(position);
+		circle.setPosition(layout.position);
 		renderTarget->draw(circle);
-		if(size.x > size.y) {
-			circle.setPosition({position.x + size.x - size.y, position.y});
+		if(layout.size.x > layout.size.y) {
+			circle.setPosition({layout.position.x + layout.size.x - layout.size.y, layout.position.y});
 		} else {
-			circle.setPosition({position.x, position.y + size.y - size.x});
+			circle.setPosition({layout.position.x, layout.position.y + layout.size.y - layout.size.x});
 		}
 		renderTarget->draw(circle);
 	}
 	
 	void Capsule::resize(sf::Vector2f size, sf::Vector2f position) {
-		Layout::resize(size, position);
+		ILayout::resize(size, position);
 		if(size.x > size.y) {
 			rectangle.setSize({size.x - size.y, size.y});
 			rectangle.setPosition(position + sf::Vector2f{size.y / 2, 0});
@@ -39,12 +39,16 @@ namespace ui {
 		return {1, 1};
 	}
 	
+	LayoutData& Capsule::getLayoutData() {
+		return layout;
+	}
+	
+	const LayoutData& Capsule::getLayoutData() const {
+		return layout;
+	}
+	
 	Capsule* Capsule::copy() {
-		Capsule* capsule{new Capsule{circle.getFillColor()}};
-		OnlyDrawable::copy(capsule);
-		Layout::copy(capsule);
-		capsule->resize(size, position);
-		return capsule;
+		return new Capsule{*this};
 	}
 	
 	bool DecodePointer<Capsule>::decodePointer(const YAML::Node& node, Capsule*& capsule) {

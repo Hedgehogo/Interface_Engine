@@ -1,18 +1,18 @@
 #pragma once
 
 #include "../interactiveSimple.hpp"
-#include "../../../../../layout/layout.hpp"
+#include "ui/iObject/iLayout/iLayout.hpp"
 #include "../../../../../../drawable/iDrawable/iDrawable.hpp"
 
 #include "../../../uninteractive/uninteractive.hpp"
 #include "../../../../../../enums/keyHandler/keyHandler.hpp"
 
 namespace ui {
-	class Switcher : public Interactive_Simple, public Layout, public IDrawable {
+	class Switcher : public Interactive_Simple, public ILayout, public IDrawable {
 	public:
-		Switcher(IScalable* inactiveBackground, IScalable* activeBackground, PSbool value, Key key = Key::mouseLeft);
+		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key = Key::mouseLeft);
 		
-		Switcher(IScalable* inactiveBackground, IScalable* activeBackground, Key key = Key::mouseLeft, bool startActive = false);
+		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, Key key = Key::mouseLeft, bool startActive = false);
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
@@ -26,6 +26,10 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		LayoutData& getLayoutData() override;
+		
+		const LayoutData& getLayoutData() const override;
+		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
@@ -35,12 +39,11 @@ namespace ui {
 		Switcher* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
-		
-		~Switcher();
 	
 	protected:
-		IScalable* activeBackground;
-		IScalable* inactiveBackground;
+		LayoutData layout;
+		BoxPtr<IScalable> activeBackground;
+		BoxPtr<IScalable> inactiveBackground;
 		DrawManager activeDrawManager;
 		DrawManager inactiveDrawManager;
 		PSbool active;

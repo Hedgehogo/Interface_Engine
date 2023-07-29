@@ -1,27 +1,31 @@
 #pragma once
 
 #include "../box.hpp"
-#include "../../../../layout/object/layoutWithObject.hpp"
+#include "../../../../iLayout/object/iLayoutWithObject.hpp"
 #include "../../../../panel/manager/general/panelManager.hpp"
 #include "../../../../panel/manager/interceptor/panelManagerInterceptor.hpp"
 
 namespace ui {
-	class BoxWithSetableObject : public IDrawable, public IUpdatable, public LayoutWithObject {
+	class BoxWithSetableObject : public Box, public ILayoutWithObject, public IDrawable, public IUpdatable {
 	public:
-		BoxWithSetableObject(sf::Vector2f minSize, IScalable* object);
+		BoxWithSetableObject(BoxPtr<IScalable>&& object, sf::Vector2f minSize = {});
 		
 		void init(InitInfo initInfo) override;
 		
-		void setObject(IScalable* newObject, bool deleteOld);
-		
-		IScalable* getObject();
+		void setObject(BoxPtr<IScalable>&& newObject, bool deleteOld);
 		
 		void draw() override;
 		
+		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		
 		void update() override;
+		
+		IScalable& getObject() override;
+		
+		const IScalable& getObject() const override;
 	
 	protected:
-		IScalable* object = nullptr;
+		BoxPtr<IScalable> object;
 		sf::Vector2f minSize;
 		DrawManager drawManager;
 		UpdateManager updateManager;

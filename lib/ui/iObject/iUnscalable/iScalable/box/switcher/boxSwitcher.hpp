@@ -1,12 +1,14 @@
 #pragma once
 
 #include "ui/iObject/iUnscalable/iScalable/box/box.hpp"
-#include "ui/iObject/layout/twoObjects/layoutWithTwoObjects.hpp"
+#include "ui/iObject/iLayout/twoObjects/iLayoutWithTwoObjects.hpp"
 
 namespace ui {
-	class BoxSwitcher : public Box, public LayoutWithTwoObjects, public IDrawable {
+	class BoxSwitcher : public Box, public ILayoutWithTwoObjects, public IDrawable {
 	public:
-		BoxSwitcher(IScalable* firstObject, IScalable* secondObject, PSbool value, const sf::Vector2f& minSize = {});
+		BoxSwitcher(BoxPtr<IScalable>&& firstObject, BoxPtr<IScalable>&& secondObject, PSbool value, const sf::Vector2f& minSize = {});
+		
+		BoxSwitcher(const BoxSwitcher& other);
 		
 		void init(InitInfo initInfo) override;
 		
@@ -22,9 +24,19 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
+		IScalable& getFirstObject() override;
+		
+		const IScalable& getFirstObject() const override;
+		
+		IScalable& getSecondObject() override;
+		
+		const IScalable& getSecondObject() const override;
+		
 		BoxSwitcher* copy() override;
 	
 	protected:
+		BoxPtr<IScalable> firstObject;
+		BoxPtr<IScalable> secondObject;
 		DrawManager firstDrawManager;
 		DrawManager secondDrawManager;
 		PSbool value;

@@ -2,7 +2,7 @@
 #include <cmath>
 
 namespace ui {
-	BoxDebug::BoxDebug(IScalable* object) :
+	BoxDebug::BoxDebug(BoxPtr<IScalable>&& object) :
 		Box({}), object(object), renderTarget(nullptr), active(false), drawn(false) {
 	}
 	
@@ -10,10 +10,6 @@ namespace ui {
 		object->init(initInfo);
 		initInfo.drawManager.add(*this);
 		this->renderTarget = &initInfo.renderTarget;
-	}
-	
-	BoxDebug::~BoxDebug() {
-		delete object;
 	}
 	
 	void BoxDebug::draw() {
@@ -39,9 +35,16 @@ namespace ui {
 		return object->getNormalSize();
 	}
 	
+	IScalable& BoxDebug::getObject() {
+		return *object;
+	}
+	
+	const IScalable& BoxDebug::getObject() const {
+		return *object;
+	}
+	
 	BoxDebug* BoxDebug::copy() {
-		BoxDebug* boxDebug{new BoxDebug{object->copy()}};
-		return boxDebug;
+		return new BoxDebug{*this};
 	}
 	
 	void BoxDebug::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
@@ -72,7 +75,7 @@ namespace ui {
 	}
 	
 	bool DecodePointer<BoxDebug>::decodePointer(const YAML::Node& node, BoxDebug*& boxDebug) {
-		boxDebug = new BoxDebug{node["object"].as<IScalable*>()};
+		boxDebug = new BoxDebug{node["object"].as<BoxPtr<IScalable> >()};
 		return true;
 	}
 }

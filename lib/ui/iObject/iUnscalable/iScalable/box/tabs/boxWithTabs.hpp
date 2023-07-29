@@ -1,12 +1,14 @@
 #pragma once
 
 #include "ui/iObject/iUnscalable/iScalable/box/box.hpp"
-#include "ui/iObject/layout/objectsArray/layoutWithObjectsArray.hpp"
+#include "ui/iObject/iLayout/objectsArray/iLayoutWithObjectsArray.hpp"
 
 namespace ui {
-	class BoxWithTabs : public Box, public LayoutWithObjectsArray, public IDrawable {
+	class BoxWithTabs : public Box, public ILayoutWithObjectsArray, public IDrawable {
 	public:
-		BoxWithTabs(const std::vector<IScalable*>& objects, PISint  value, const sf::Vector2f& minSize = {});
+		BoxWithTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, const sf::Vector2f& minSize = {});
+		
+		BoxWithTabs(const BoxWithTabs& other);
 		
 		void init(InitInfo initInfo) override;
 		
@@ -22,11 +24,18 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
+		std::size_t getArraySize() const override;
+		
+		IScalable& getObjectAt(std::size_t index) override;
+		
+		const IScalable& getObjectAt(std::size_t index) const override;
+		
 		BoxWithTabs* copy() override;
 	
 	protected:
-		PISint value;
+		std::vector<BoxPtr<IScalable> > objects;
 		std::vector<DrawManager> drawManagers;
+		PISint value;
 	};
 	
 	template<>

@@ -1,13 +1,9 @@
 #include "iObject.hpp"
-#include "../../modules/appendix/HSVtoRGB/hsvToRgb.hpp"
+#include "../../modules/appendix/hsvToRgb/hsvToRgb.hpp"
 
 namespace ui {
 	void IObject::setPosition(sf::Vector2f position) {
 		resize(getAreaSize(), position);
-	}
-	
-	sf::Vector2f IObject::getPosition() const {
-		return getAreaPosition();
 	}
 	
 	void IObject::move(sf::Vector2f position) {
@@ -16,6 +12,10 @@ namespace ui {
 	
 	void IObject::setSize(sf::Vector2f size) {
 		resize(size, getAreaPosition());
+	}
+	
+	sf::Vector2f IObject::getPosition() const {
+		return getAreaPosition();
 	}
 	
 	sf::Vector2f IObject::getSize() const {
@@ -30,10 +30,7 @@ namespace ui {
 	}
 	
 	bool IObject::in(sf::Vector2f pointPosition) {
-		sf::Vector2f size{getSize()};
-		sf::Vector2f position{getPosition()};
-		return pointPosition.x > position.x && pointPosition.x < position.x + size.x &&
-			   pointPosition.y > position.y && pointPosition.y < position.y + size.y;
+		return inArea(pointPosition);
 	}
 	
 	void IObject::drawDebug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& renderTarget, uint hue) {

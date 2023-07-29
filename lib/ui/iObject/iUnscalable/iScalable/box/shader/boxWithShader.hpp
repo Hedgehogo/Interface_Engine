@@ -15,7 +15,7 @@ namespace ui {
 		};
 	
 		BoxWithShader(
-			IScalable* var, sf::Shader* shader, uint transmission,
+			BoxPtr<IScalable>&& object, sf::Shader* shader, uint transmission,
 			std::map<std::string, PISfloat> valuesF = {},
 			std::map<std::string, PISint> valuesI = {},
 			std::map<std::string, PISbool> valuesB = {},
@@ -23,6 +23,8 @@ namespace ui {
 			std::map<std::string, PSRVec2f> valuesV = {},
 			bool optimize = true, sf::Vector2f minSize = {}
 		);
+		
+		~BoxWithShader();
 		
 		void setUniform(std::string name, float var);
 		
