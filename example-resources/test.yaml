@@ -2,7 +2,7 @@ object:
   type: BSc
   object:
     type: Text
-    text-block: "AAA"
+    text-block: "AAAAAAAAAAAAAAAA"
     font: ../../example-resources/segoeui.ttf
     size: 30
   normal-object-position:

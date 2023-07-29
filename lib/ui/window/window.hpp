@@ -42,6 +42,8 @@ namespace ui {
 		Interface& getInterface();
 		
 		const sf::Vector2f& getMinSize();
+		
+		~Window();
 	
 	protected:
 		Interface interface;

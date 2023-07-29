@@ -11,7 +11,7 @@ namespace ui {
 		interface.init(*this);
 		reCreateMinSize();
 		
-		auto size{sf::RenderWindow::getSize()};
+		auto size{max(sf::Vector2u(minSize), getSize())};
 		
 		sf::View view{sf::Vector2f{size / 2u}, sf::Vector2f{size}};
 		setView(view);
@@ -113,5 +113,9 @@ namespace ui {
 		sf::View view{sf::Vector2f{size / 2u}, sf::Vector2f{size}};
 		setView(view);
 		interface.setSize(sf::Vector2f{size});
+	}
+	
+	Window::~Window() {
+		delete resizer;
 	}
 }

@@ -292,7 +292,6 @@ namespace ui {
 						{Key::mouseLeft}
 					}
 				},
-				
 			}
 		};
 		return true;
