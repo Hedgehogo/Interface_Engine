@@ -34,7 +34,7 @@ namespace ui {
 		std::map<std::string, PISValue<sf::Color>> valuesC,
 		std::map<std::string, PSRVec2f> valuesV,
 		bool optimize, sf::Vector2f minSize
-	) : BoxWithRenderTexture(std::forward<BoxPtr<IScalable> >(object), optimize, minSize), shader(shader), transmission(transmission) {
+	) : BoxWithRenderTexture(std::move(object), optimize, minSize), shader(shader), transmission(transmission) {
 		clock.restart();
 		
 		for(auto& [name, value]: valuesF) {

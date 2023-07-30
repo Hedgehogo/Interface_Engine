@@ -1,7 +1,8 @@
 #include "boxUninteractive.hpp"
 
 namespace ui {
-	BoxUninteractive::BoxUninteractive(BoxPtr<IScalable>&& object, sf::Vector2f minSize) : object(object), Box(minSize) {
+	BoxUninteractive::BoxUninteractive(BoxPtr<IScalable>&& object, sf::Vector2f minSize) :
+		object(std::move(object)), Box(minSize) {
 	}
 	
 	void BoxUninteractive::init(InitInfo initInfo) {

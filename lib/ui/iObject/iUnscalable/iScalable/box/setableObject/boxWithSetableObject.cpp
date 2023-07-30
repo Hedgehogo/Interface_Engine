@@ -1,7 +1,7 @@
 #include "boxWithSetableObject.hpp"
 
 namespace ui {
-	BoxWithSetableObject::BoxWithSetableObject(BoxPtr<IScalable>&& object, sf::Vector2f minSize) : Box(minSize), object(object) {
+	BoxWithSetableObject::BoxWithSetableObject(BoxPtr<IScalable>&& object, sf::Vector2f minSize) : Box(minSize), object(std::move(object)) {
 	}
 	
 	void BoxWithSetableObject::init(InitInfo initInfo) {

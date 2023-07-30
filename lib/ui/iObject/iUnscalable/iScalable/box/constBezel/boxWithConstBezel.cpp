@@ -3,7 +3,7 @@
 
 namespace ui {
 	BoxWithConstBezel::BoxWithConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f minSize) :
-		Box(minSize), object(object), bezel(bezel), thickness(thickness) {
+		Box(minSize), object(std::move(object)), bezel(std::move(bezel)), thickness(thickness) {
 		sf::Vector2f minimumSize{object->getMinSize() + sf::Vector2f(thickness * 2.0f, thickness * 2.0f)};
 		if(this->minimumSize.x < minimumSize.x) {
 			this->minimumSize.x = minimumSize.x;

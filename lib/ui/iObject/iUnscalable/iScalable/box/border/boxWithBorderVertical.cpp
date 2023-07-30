@@ -4,13 +4,13 @@
 
 namespace ui {
 	BoxWithBorderVertical::BoxWithBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, std::vector<float> bounds, sf::Vector2f minSize) :
-		Box(minSize), objects(objects), bounds(std::move(bounds)) {
+		Box(minSize), objects(std::move(objects)), bounds(std::move(bounds)) {
 		this->bounds.insert(this->bounds.begin(), 0.0f);
 		this->bounds.push_back(1.0f);
 	}
 	
 	BoxWithBorderVertical::BoxWithBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, sf::Vector2f minSize) :
-		Box(minSize), objects(objects), bounds(this->objects.size() + 1, 1.0f) {
+		Box(minSize), objects(std::move(objects)), bounds(this->objects.size() + 1, 1.0f) {
 		auto count = this->objects.size();
 		for(std::size_t i = 0; i < count; ++i) {
 			bounds[i] = static_cast<float>(i) / static_cast<float>(count);
@@ -18,7 +18,7 @@ namespace ui {
 	}
 	
 	BoxWithBorderVertical::BoxWithBorderVertical(BoxPtr<IScalable>&& firstObject, BoxPtr<IScalable>&& secondObject, float bound, sf::Vector2f minSize) :
-		Box(minSize), objects({firstObject, secondObject}), bounds({0.f, bound, 1.f}) {
+		Box(minSize), objects({std::move(firstObject), std::move(secondObject)}), bounds({0.f, bound, 1.f}) {
 	}
 	
 	void BoxWithBorderVertical::init(InitInfo initInfo) {

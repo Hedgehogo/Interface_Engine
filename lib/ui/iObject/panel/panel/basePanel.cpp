@@ -3,7 +3,7 @@
 
 namespace ui {
 	BasePanel::BasePanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :
-		object(object), sizing(sizing), positioning(positioning),
+		object(std::move(object)), sizing(std::move(sizing)), positioning(std::move(positioning)),
 		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {
 	}
 	

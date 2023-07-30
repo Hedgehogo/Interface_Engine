@@ -1,9 +1,27 @@
 object:
-  type: BSc
-  object:
-    type: Text
-    text-block: "AAAAAAAAAAAAAAAA"
-    font: ../../example-resources/segoeui.ttf
-    size: 30
-  normal-object-position:
-    var: a
+  type: BoxWithConstBorder
+  side: right
+  border-distance: 20
+  const-object:
+    type: BoxWithConstBorder
+    side: up
+    border-distance: 20
+    const-object:
+      type: Switcher
+      active-background: blue
+      inactive-background: yellow
+      value:
+        var: b-value
+    second-object:
+      type: Slider
+      slider:
+        type: Capsule
+        color: red
+      background: green
+      value:
+        var: c-value
+  second-object:
+    type: BoxSwitcher
+    first-object: blue
+    second-object: yellow
+    value: b-value

@@ -8,7 +8,8 @@
 
 namespace ui {
 	BoxSwitcherTabs::BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
-		Box(minSize), objects(objects), Interactive_Simple(new OneKeyInteraction{new SwitcherTabsEvent{value, this}, key}), isHorizontal(isHorizontal), value(value) {
+		Box(minSize), objects(std::move(objects)),
+		Interactive_Simple(new OneKeyInteraction{new SwitcherTabsEvent{value, this}, key}), isHorizontal(isHorizontal), value(value) {
 	}
 	
 	void BoxSwitcherTabs::init(InitInfo initInfo) {

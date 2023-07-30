@@ -6,7 +6,7 @@
 namespace ui {
 	class BoxWithConstCenter : public Box, public ILayoutWithTwoObjects {
 	public:
-		BoxWithConstCenter(BoxPtr<IScalable> constObject, BoxPtr<IScalable> background, const sf::Vector2f& constSize, const sf::Vector2f& minSize = {});
+		BoxWithConstCenter(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& background, const sf::Vector2f& constSize, const sf::Vector2f& minSize = {});
 		
 		void init(InitInfo initInfo) override;
 		

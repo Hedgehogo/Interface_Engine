@@ -6,7 +6,7 @@ namespace ui {
 		BoxPtr<IUninteractive>&& background,
 		float aspectRatio,
 		sf::Vector2f minSize
-	) : Box(minSize), object(object), background(background), firstObject(new Empty), secondObject(new Empty), aspectRatio(aspectRatio) {
+	) : Box(minSize), object(std::move(object)), background(std::move(background)), firstObject(new Empty), secondObject(new Empty), aspectRatio(aspectRatio) {
 	}
 	
 	BoxWithConstRatioCenter::BoxWithConstRatioCenter(
@@ -16,7 +16,7 @@ namespace ui {
 		BoxPtr<IUninteractive>&& background,
 		float aspectRatio,
 		sf::Vector2f minSize
-	) : Box(minSize), object(object), background(background), firstObject(firstObject), secondObject(secondObject), aspectRatio(aspectRatio) {
+	) : Box(minSize), object(std::move(object)), background(std::move(background)), firstObject(std::move(firstObject)), secondObject(std::move(secondObject)), aspectRatio(aspectRatio) {
 	}
 	
 	BoxWithConstRatioCenter::BoxWithConstRatioCenter(const BoxWithConstRatioCenter& other) :

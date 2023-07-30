@@ -3,7 +3,7 @@
 
 namespace ui {
 	BoxDebug::BoxDebug(BoxPtr<IScalable>&& object) :
-		Box({}), object(object), renderTarget(nullptr), active(false), drawn(false) {
+		Box({}), object(std::move(object)), renderTarget(nullptr), active(false), drawn(false) {
 	}
 	
 	void BoxDebug::init(InitInfo initInfo) {

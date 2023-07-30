@@ -2,7 +2,7 @@
 
 namespace ui {
 	BoxWithPanel::BoxWithPanel(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable>&& object, sf::Vector2f minSize) :
-		Box(minSize), object(object), panel(panel) {
+		Box(minSize), object(std::move(object)), panel(panel) {
 	}
 	
 	void BoxWithPanel::init(InitInfo initInfo) {

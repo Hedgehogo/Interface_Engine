@@ -2,7 +2,7 @@
 
 namespace ui {
 	BoxSwitcher::BoxSwitcher(BoxPtr<IScalable>&& firstObject, BoxPtr<IScalable>&& secondObject, PSbool value, const sf::Vector2f& minSize) :
-		Box(minSize), firstObject(firstObject), secondObject(secondObject), value(value) {}
+		Box(minSize), firstObject(std::move(firstObject)), secondObject(std::move(secondObject)), value(value) {}
 	
 	BoxSwitcher::BoxSwitcher(const BoxSwitcher& other) :
 		Box(other), firstObject(other.firstObject), secondObject(other.secondObject), value(other.value) {

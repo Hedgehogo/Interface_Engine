@@ -4,7 +4,7 @@
 
 namespace ui {
 	ConstPanel::ConstPanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :
-		BasePanel(std::forward<BoxPtr<IScalable> >(object), sizing, positioning, displayed) {
+		BasePanel(std::move(object), std::move(sizing), std::move(positioning), displayed) {
 	}
 	
 	void ConstPanel::init(InitInfo initInfo) {

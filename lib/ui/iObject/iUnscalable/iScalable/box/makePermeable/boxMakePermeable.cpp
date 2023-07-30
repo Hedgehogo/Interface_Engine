@@ -1,7 +1,8 @@
 #include "boxMakePermeable.hpp"
 
 namespace ui {
-	BoxMakePermeable::BoxMakePermeable(BoxPtr<IScalable>&& object, sf::Vector2f minSize) : Box(minSize), object(object) {
+	BoxMakePermeable::BoxMakePermeable(BoxPtr<IScalable>&& object, sf::Vector2f minSize) :
+		Box(minSize), object(std::move(object)) {
 	}
 	
 	void BoxMakePermeable::init(InitInfo initInfo) {

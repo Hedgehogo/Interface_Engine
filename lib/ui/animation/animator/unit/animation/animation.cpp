@@ -51,7 +51,7 @@ namespace ui {
 	}
 	
 	std::vector<IAnimatorUnit*> Animation::update(float time) {
-		for(int i = 0; i < animationUpdatableVariables.size(); ++i) {
+		for(std::size_t i = 0; i < animationUpdatableVariables.size(); ++i) {
 			Variable*& animationVariable = animationUpdatableVariables[i];
 			
 			if(animationVariable->timeStartChanger == 0 || time < animationVariable->timeStartChanger)

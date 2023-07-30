@@ -12,8 +12,8 @@ namespace ui {
 		sf::Vector2f minSize
 	) :
 		Box(minSize),
-		firstObject(firstObject),
-		secondObject(secondObject),
+		firstObject(std::move(firstObject)),
+		secondObject(std::move(secondObject)),
 		pressedInteraction(new MovableBorderEvent{*this}, Key::mouseLeft),
 		Interactive_Simple(new OneKeyInteraction{new AddBlockInteractionEvent{pressedInteraction}, Key::mouseLeft}),
 		isHorizontalBorder(isHorizontalBorder),

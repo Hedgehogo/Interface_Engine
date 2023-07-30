@@ -1,9 +1,21 @@
 #include "boxWithConstRatio.hpp"
 
 namespace ui {
-	BoxWithConstRatio::BoxWithConstRatio(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& secondObject, BoxPtr<IUninteractive>&& background, float aspectRatio, Corner corner, sf::Vector2f minSize) :
-		Box(minSize), background(background), constObject(constObject), secondObject(secondObject),
-		verticalSide(corner == Corner::upLeft || corner == Corner::upRight), horizontalSide(corner == Corner::upLeft || corner == Corner::downLeft), aspectRatio(aspectRatio), renderSecond(true) {
+	BoxWithConstRatio::BoxWithConstRatio(
+		BoxPtr<IScalable>&& constObject,
+		BoxPtr<IScalable>&& secondObject,
+		BoxPtr<IUninteractive>&& background,
+		float aspectRatio,
+		Corner corner,
+		sf::Vector2f minSize
+	) : Box(minSize),
+		background(std::move(background)),
+		constObject(std::move(constObject)),
+		secondObject(std::move(secondObject)),
+		verticalSide(corner == Corner::upLeft || corner == Corner::upRight),
+		horizontalSide(corner == Corner::upLeft || corner == Corner::downLeft),
+		aspectRatio(aspectRatio),
+		renderSecond(true) {
 	}
 	
 	BoxWithConstRatio::BoxWithConstRatio(const BoxWithConstRatio& other) :
@@ -129,8 +141,8 @@ namespace ui {
 	
 	bool DecodePointer<BoxWithConstRatio>::decodePointer(const YAML::Node& node, BoxWithConstRatio*& boxWithConstRatio) {
 		boxWithConstRatio = new BoxWithConstRatio{
-			node["const-object"].as<BoxPtr<IScalable> >(),
-			node["second-object"].as<BoxPtr<IScalable> >(),
+			node["const-object"].as < BoxPtr < IScalable > > (),
+			node["second-object"].as < BoxPtr < IScalable > > (),
 			BoxPtr{convDefPtr<IUninteractive, Empty>(node["background"])},
 			node["aspect-ratio"].as<float>(),
 			convDef(node["corner"], Corner::upLeft),

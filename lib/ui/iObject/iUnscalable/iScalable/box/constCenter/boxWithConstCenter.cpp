@@ -1,9 +1,8 @@
 #include "boxWithConstCenter.hpp"
 
 namespace ui {
-	
-	BoxWithConstCenter::BoxWithConstCenter(BoxPtr<IScalable> constObject, BoxPtr<IScalable> background, const sf::Vector2f& constSize, const sf::Vector2f& minSize) :
-		Box(minSize), constObject(constObject), background(background), constSize(constSize) {
+	BoxWithConstCenter::BoxWithConstCenter(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& background, const sf::Vector2f& constSize, const sf::Vector2f& minSize) :
+		Box(minSize), constObject(std::move(constObject)), background(std::move(background)), constSize(constSize) {
 		constObject->setSize(constSize);
 	}
 	

@@ -11,7 +11,7 @@ namespace ui {
 	}
 	
 	BoxWithBorder::BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize) :
-		Box(minSize), objects(objects), boundsVertical(std::move(boundsVertical)), boundsHorizontal(std::move(boundsHorizontal)) {
+		Box(minSize), objects(std::move(objects)), boundsVertical(std::move(boundsVertical)), boundsHorizontal(std::move(boundsHorizontal)) {
 		this->boundsHorizontal.insert(this->boundsHorizontal.begin(), 0.0f);
 		this->boundsHorizontal.push_back(1.0f);
 		this->boundsVertical.insert(this->boundsVertical.begin(), 0.0f);

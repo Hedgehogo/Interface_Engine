@@ -7,7 +7,7 @@ namespace ui {
 	}
 	
 	BoxWithConstBorder::BoxWithConstBorder(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& secondObject, Side side, float borderDistance, sf::Vector2f minSize) :
-		Box(minSize), constObject(constObject), secondObject(secondObject), side(side), borderDistance(borderDistance) {
+		Box(minSize), constObject(std::move(constObject)), secondObject(std::move(secondObject)), side(side), borderDistance(borderDistance) {
 	}
 	
 	void BoxWithConstBorder::resize(sf::Vector2f size, sf::Vector2f position) {

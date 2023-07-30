@@ -3,7 +3,7 @@
 
 namespace ui {
 	BoxWithAlternativeObject::BoxWithAlternativeObject(BoxPtr<IScalable>&& topObject, BoxPtr<IScalable>&& bottomObject, sf::Vector2f minSize) :
-		Box(minSize), topObject(topObject), bottomObject(bottomObject) {
+		Box(minSize), topObject(std::move(topObject)), bottomObject(std::move(bottomObject)) {
 	}
 	
 	void BoxWithAlternativeObject::init(InitInfo initInfo) {

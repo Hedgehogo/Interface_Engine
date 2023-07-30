@@ -13,7 +13,7 @@ TestPanel::TestPanel(
 	bool updateInteractionsResult,
 	ui::BoxPtr<ui::ISizing2> sizing,
 	ui::BoxPtr<ui::IPositioning2> positioning
-) : BasePanel(ui::BoxPtr<ui::IScalable>{new ui::Empty{}}, sizing, positioning, displayed), minSize(minSize), normalSize(normalSize),
+) : BasePanel(ui::BoxPtr<ui::IScalable>{new ui::Empty{}}, std::move(sizing), std::move(positioning), displayed), minSize(minSize), normalSize(normalSize),
 	isIndependentResult(isIndependentResult), isFreeResult(isFreeResult), inPanelResult(inPanelResult), updateInteractionsResult(updateInteractionsResult) {
 }
 

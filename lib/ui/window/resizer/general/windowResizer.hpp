@@ -19,7 +19,7 @@ namespace ui {
 		virtual void getCurrentBorder(int& grip, int*& currentBorder, int& border, int& border2, int& windowSize, int& mousePosition);
 	
 	public:
-		WindowResizer(int internalBorderSize = 10, int externalBorderSize = 10, Key key = Key::mouseLeft);
+		WindowResizer(int internalBorderSize = 5, int externalBorderSize = 5, Key key = Key::mouseLeft);
 		
 		bool update(sf::Vector2i mousePosition) override;
 	

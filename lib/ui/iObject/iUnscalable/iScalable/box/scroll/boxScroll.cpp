@@ -2,7 +2,7 @@
 
 namespace ui {
 	BoxScroll::BoxScroll(BoxPtr<IUnscalable>&& object, const PSRVec2f& normalObjectPosition, const sf::Vector2f& minSize) :
-		BoxWithView(minSize), object(object), normalObjectPosition(normalObjectPosition) {
+		BoxWithView(minSize), object(std::move(object)), normalObjectPosition(normalObjectPosition) {
 		normalObjectPosition->addSetter([&](sf::Vector2f vec) {
 			this->object->setPosition(getNewObjectPosition(vec));
 		});
