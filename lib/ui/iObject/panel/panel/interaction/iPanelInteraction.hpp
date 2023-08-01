@@ -8,14 +8,14 @@ namespace ui {
 	
 	class IPanelManager;
 	
-	class BasePanelInteraction : public virtual IInteraction {
+	class IPanelInteraction : public virtual IInteraction {
 	public:
-		BasePanelInteraction() = default;
+		IPanelInteraction() = default;
 		
 		virtual void init(PanelInteractionInitInfo panelInteractionInitInfo) = 0;
 		
 		virtual void setPanel(Panel& panel) = 0;
 		
-		BasePanelInteraction* copy() override = 0;
+		IPanelInteraction* copy() override = 0;
 	};
 }

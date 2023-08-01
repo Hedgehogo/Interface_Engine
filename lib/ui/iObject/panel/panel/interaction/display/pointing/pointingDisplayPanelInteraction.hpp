@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../displayPanelInteraction.hpp"
+#include "../iDisplayPanelInteraction.hpp"
 #include "../../general/panelInteraction.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-	class PointingDisplayPanelInteraction : public DisplayPanelInteraction, public PanelInteraction {
+	class PointingDisplayPanelInteraction : public PanelInteraction, public IDisplayPanelInteraction {
 	public:
 		PointingDisplayPanelInteraction();
 		

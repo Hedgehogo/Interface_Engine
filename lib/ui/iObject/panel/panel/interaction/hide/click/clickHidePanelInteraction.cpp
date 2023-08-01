@@ -2,11 +2,11 @@
 
 namespace ui {
 	ClickHidePanelInteraction::ClickHidePanelInteraction(Key key, bool onlyOnParent) :
-		ClickPanelInteraction(new HidePanelEvent{onlyOnParent}, key), HidePanelInteraction() {
+		ClickPanelInteraction(new HidePanelEvent{onlyOnParent}, key), IHidePanelInteraction() {
 	}
 	
 	ClickHidePanelInteraction::ClickHidePanelInteraction(HidePanelEvent* hidePanelEvent, Key key) :
-		ClickPanelInteraction(hidePanelEvent, key), HidePanelInteraction() {
+		ClickPanelInteraction(hidePanelEvent, key), IHidePanelInteraction() {
 	}
 	
 	ClickHidePanelInteraction* ClickHidePanelInteraction::copy() {

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../basePanelInteraction.hpp"
+#include "../iPanelInteraction.hpp"
 
 namespace ui {
-	class PanelInteraction : public virtual BasePanelInteraction {
+	class PanelInteraction : public virtual IPanelInteraction {
 	protected:
 		void copy(PanelInteraction* panelInteraction);
 	

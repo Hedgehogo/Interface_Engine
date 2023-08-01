@@ -2,7 +2,11 @@
 #include "../../../../manager/iPanelManager.hpp"
 
 namespace ui {
-	DontMovePanelInteraction::DontMovePanelInteraction() : MovePanelInteraction() {
+	DontMovePanelInteraction::DontMovePanelInteraction() : IMovePanelInteraction() {
+	}
+	
+	bool DontMovePanelInteraction::getAtStart() {
+		return false;
 	}
 	
 	void DontMovePanelInteraction::move(sf::Vector2i mousePosition) {

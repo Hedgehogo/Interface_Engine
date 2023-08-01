@@ -1,12 +1,14 @@
 #pragma once
 
-#include "../movePanelInteraction.hpp"
+#include "../iMovePanelInteraction.hpp"
 #include "../../../../../../interaction/iInteraction/empty/emptyInteraction.hpp"
 
 namespace ui {
-	class DontMovePanelInteraction : public MovePanelInteraction {
+	class DontMovePanelInteraction : public IMovePanelInteraction {
 	public:
 		DontMovePanelInteraction();
+		
+		bool getAtStart() override;
 		
 		void move(sf::Vector2i mousePosition) override;
 		

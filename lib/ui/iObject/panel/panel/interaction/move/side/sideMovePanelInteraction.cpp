@@ -3,7 +3,11 @@
 
 namespace ui {
 	SideMovePanelInteraction::SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool atStart) :
-		MovePanelInteraction(atStart), coefficient(coefficient), offset(offset), horizontal(horizontal) {
+		coefficient(coefficient), offset(offset), horizontal(horizontal), atStart(atStart) {
+	}
+	
+	bool SideMovePanelInteraction::getAtStart() {
+		return atStart;
 	}
 	
 	void SideMovePanelInteraction::move(sf::Vector2i mousePosition) {

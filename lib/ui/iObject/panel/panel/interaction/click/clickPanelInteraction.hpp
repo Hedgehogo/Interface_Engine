@@ -1,12 +1,12 @@
 #pragma once
 
 #include "event/panelEvent.hpp"
-#include "../hide/hidePanelInteraction.hpp"
-#include "../display/displayPanelInteraction.hpp"
+#include "../hide/iHidePanelInteraction.hpp"
+#include "../display/iDisplayPanelInteraction.hpp"
 #include "../../../../../interaction/iInteraction/oneKey/oneKeyInteraction.hpp"
 
 namespace ui {
-	class ClickPanelInteraction : public virtual BasePanelInteraction, public OneKeyInteraction {
+	class ClickPanelInteraction : public OneKeyInteraction, public virtual IPanelInteraction {
 	public:
 		ClickPanelInteraction(PanelEvent* event, Key key);
 		

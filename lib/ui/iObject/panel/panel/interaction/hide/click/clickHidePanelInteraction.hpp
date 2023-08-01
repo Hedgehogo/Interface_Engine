@@ -4,7 +4,7 @@
 #include "../../click/clickPanelInteraction.hpp"
 
 namespace ui {
-	class ClickHidePanelInteraction : public ClickPanelInteraction, public HidePanelInteraction {
+	class ClickHidePanelInteraction : public ClickPanelInteraction, public IHidePanelInteraction {
 	public:
 		explicit ClickHidePanelInteraction(Key key, bool onlyOnParent = false);
 	

@@ -2,7 +2,7 @@
 #include "../../../manager/iPanelManager.hpp"
 
 namespace ui {
-	ClickPanelInteraction::ClickPanelInteraction(PanelEvent* event, Key key) : OneKeyInteraction(event, key), BasePanelInteraction() {
+	ClickPanelInteraction::ClickPanelInteraction(PanelEvent* event, Key key) : OneKeyInteraction(event, key), IPanelInteraction() {
 	}
 	
 	void ClickPanelInteraction::init(PanelInteractionInitInfo panelInteractionInitInfo) {

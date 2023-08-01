@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../hidePanelInteraction.hpp"
+#include "../iHidePanelInteraction.hpp"
 #include "../../../../../../interaction/iInteraction/empty/emptyInteraction.hpp"
 
 namespace ui {
-	class DontHidePanelInteraction : public HidePanelInteraction, public EmptyInteraction {
+	class DontHidePanelInteraction : public IHidePanelInteraction, public EmptyInteraction {
 	public:
 		DontHidePanelInteraction() = default;
 		

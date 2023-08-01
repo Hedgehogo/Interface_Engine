@@ -4,7 +4,7 @@
 #include "../../click/clickPanelInteraction.hpp"
 
 namespace ui {
-	class ClickDisplayPanelInteraction : public ClickPanelInteraction, public DisplayPanelInteraction {
+	class ClickDisplayPanelInteraction : public ClickPanelInteraction, public IDisplayPanelInteraction {
 	public:
 		explicit ClickDisplayPanelInteraction(Key key);
 	

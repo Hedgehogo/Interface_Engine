@@ -2,7 +2,7 @@
 #include "../../../general/panel.hpp"
 
 namespace ui {
-	PointingDisplayPanelInteraction::PointingDisplayPanelInteraction() : DisplayPanelInteraction() {
+	PointingDisplayPanelInteraction::PointingDisplayPanelInteraction() : IDisplayPanelInteraction() {
 	}
 	
 	void PointingDisplayPanelInteraction::start(sf::Vector2i) {

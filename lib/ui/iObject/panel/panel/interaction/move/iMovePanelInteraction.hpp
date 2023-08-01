@@ -3,9 +3,11 @@
 #include "../general/panelInteraction.hpp"
 
 namespace ui {
-	class MovePanelInteraction : public virtual BasePanelInteraction {
+	class IMovePanelInteraction : public virtual IPanelInteraction {
 	public:
-		explicit MovePanelInteraction(bool atStart = false);
+		explicit IMovePanelInteraction();
+		
+		virtual bool getAtStart() = 0;
 		
 		virtual void move(sf::Vector2i mousePosition) = 0;
 		
@@ -15,9 +17,6 @@ namespace ui {
 		
 		void finish(sf::Vector2i mousePosition) override;
 		
-		MovePanelInteraction* copy() override = 0;
-	
-	protected:
-		bool atStart;
+		IMovePanelInteraction* copy() override = 0;
 	};
 }

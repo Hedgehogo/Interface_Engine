@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../hidePanelInteraction.hpp"
+#include "../iHidePanelInteraction.hpp"
 #include "../../general/panelInteraction.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-	class PointingHidePanelInteraction : public HidePanelInteraction, public PanelInteraction {
+	class PointingHidePanelInteraction : public PanelInteraction, public IHidePanelInteraction {
 	public:
 		PointingHidePanelInteraction(bool onlyOnParent = false);
 		

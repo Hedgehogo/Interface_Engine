@@ -1,12 +1,14 @@
 #pragma once
 
-#include "../movePanelInteraction.hpp"
+#include "../iMovePanelInteraction.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-	class SideMovePanelInteraction : public MovePanelInteraction, public PanelInteraction {
+	class SideMovePanelInteraction : public PanelInteraction, public IMovePanelInteraction {
 	public:
 		SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool atStart = false);
+		
+		bool getAtStart() override;
 		
 		void move(sf::Vector2i mousePosition) override;
 		
@@ -16,6 +18,7 @@ namespace ui {
 		float coefficient;
 		float offset;
 		bool horizontal;
+		bool atStart;
 	};
 	
 	template<>

@@ -14,7 +14,7 @@
 namespace ui {
 	class ButtonWithPanel : public BaseButton {
 	public:
-		ButtonWithPanel(Panel* panel, DisplayPanelInteraction* interaction, IScalable* background);
+		ButtonWithPanel(Panel* panel, IDisplayPanelInteraction* interaction, IScalable* background);
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 		

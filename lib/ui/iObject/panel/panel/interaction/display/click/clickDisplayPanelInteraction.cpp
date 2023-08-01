@@ -3,11 +3,11 @@
 
 namespace ui {
 	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Key key) :
-		ClickPanelInteraction(new DisplayPanelEvent{}, key), DisplayPanelInteraction() {
+		ClickPanelInteraction(new DisplayPanelEvent{}, key) {
 	}
 	
 	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(DisplayPanelEvent* displayPanelEvent, Key key) :
-		ClickPanelInteraction(displayPanelEvent, key), DisplayPanelInteraction() {
+		ClickPanelInteraction(displayPanelEvent, key) {
 	}
 	
 	void ClickDisplayPanelInteraction::start(sf::Vector2i mousePosition) {

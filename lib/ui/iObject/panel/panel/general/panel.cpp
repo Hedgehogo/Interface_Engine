@@ -1,12 +1,12 @@
 #include "panel.hpp"
-#include "../interaction/hide/hidePanelInteraction.hpp"
+#include "../interaction/hide/iHidePanelInteraction.hpp"
 #include "../interaction/move/dont/dontMovePanelInteraction.hpp"
 
 namespace ui {
 	Panel::Panel(
 		BoxPtr<IScalable>&& object,
-		BoxPtr<HidePanelInteraction> hideInteraction,
-		BoxPtr<MovePanelInteraction> moveInteraction,
+		BoxPtr<IHidePanelInteraction> hideInteraction,
+		BoxPtr<IMovePanelInteraction> moveInteraction,
 		BoxPtr<ISizing2> sizing,
 		BoxPtr<IPositioning2> positioning,
 		bool displayed
@@ -16,7 +16,7 @@ namespace ui {
 	
 	Panel::Panel(
 		BoxPtr<IScalable>&& object,
-		BoxPtr<HidePanelInteraction> hideInteraction,
+		BoxPtr<IHidePanelInteraction> hideInteraction,
 		BoxPtr<ISizing2> sizing,
 		BoxPtr<IPositioning2> positioning,
 		bool displayed
@@ -88,8 +88,8 @@ namespace ui {
 	bool DecodePointer<Panel>::decodePointer(const YAML::Node& node, Panel*& panel) {
 		panel = new Panel{
 			node["object"].as<BoxPtr<IScalable> >(),
-			node["hide-interaction"].as<BoxPtr<HidePanelInteraction> >(),
-			BoxPtr{convDefPtr<MovePanelInteraction, DontMovePanelInteraction>(node["move-interaction"])},
+			node["hide-interaction"].as<BoxPtr<IHidePanelInteraction> >(),
+			BoxPtr{convDefPtr<IMovePanelInteraction, DontMovePanelInteraction>(node["move-interaction"])},
 			node["sizing"].as<BoxPtr<ISizing2> >(),
 			node["positioning"].as<BoxPtr<IPositioning2> >(),
 			convDef(node["displayed"], false)

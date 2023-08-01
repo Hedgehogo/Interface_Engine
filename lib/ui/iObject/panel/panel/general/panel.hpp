@@ -3,9 +3,9 @@
 #include "../../manager/general/panelManager.hpp"
 
 namespace ui {
-	class HidePanelInteraction;
+	class IHidePanelInteraction;
 	
-	class MovePanelInteraction;
+	class IMovePanelInteraction;
 	
 	class Panel : public BasePanel {
 	public:
@@ -13,8 +13,8 @@ namespace ui {
 		
 		Panel(
 			BoxPtr<IScalable>&& object,
-			BoxPtr<HidePanelInteraction> hideInteraction,
-			BoxPtr<MovePanelInteraction> moveInteraction,
+			BoxPtr<IHidePanelInteraction> hideInteraction,
+			BoxPtr<IMovePanelInteraction> moveInteraction,
 			BoxPtr<ISizing2> sizing,
 			BoxPtr<IPositioning2> positioning,
 			bool displayed = false
@@ -22,7 +22,7 @@ namespace ui {
 		
 		Panel(
 			BoxPtr<IScalable>&& object,
-			BoxPtr<HidePanelInteraction> hideInteraction,
+			BoxPtr<IHidePanelInteraction> hideInteraction,
 			BoxPtr<ISizing2> sizing,
 			BoxPtr<IPositioning2> positioning,
 			bool displayed = false
@@ -49,8 +49,8 @@ namespace ui {
 	protected:
 		PanelManager panelManager;
 		InteractionManager* interactionManager;
-		BoxPtr<HidePanelInteraction> hideInteraction;
-		BoxPtr<MovePanelInteraction> moveInteraction;
+		BoxPtr<IHidePanelInteraction> hideInteraction;
+		BoxPtr<IMovePanelInteraction> moveInteraction;
 	};
 	
 	template<>

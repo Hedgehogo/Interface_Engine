@@ -3,7 +3,11 @@
 
 namespace ui {
 	CoefficientMovePanelInteraction::CoefficientMovePanelInteraction(sf::Vector2f coefficient, sf::Vector2f offset, bool atStart) :
-		MovePanelInteraction(atStart), coefficient(coefficient), offset(offset) {
+		coefficient(coefficient), offset(offset), atStart(atStart) {
+	}
+	
+	bool CoefficientMovePanelInteraction::getAtStart() {
+		return atStart;
 	}
 	
 	void CoefficientMovePanelInteraction::move(sf::Vector2i mousePosition) {
