@@ -1,24 +1,23 @@
 #include "oneKeyInteraction.hpp"
 
 namespace ui {
-	OneKeyInteraction::OneKeyInteraction(KeyEvent* event, Key key) : event(event), key(key) {
-	}
-	
-	OneKeyInteraction::~OneKeyInteraction() {
-		delete event;
+	OneKeyInteraction::OneKeyInteraction(BoxPtr<KeyEvent>&& event, Key key) : event(std::move(event)), key(key) {
 	}
 	
 	Key OneKeyInteraction::getKey() {
 		return key;
 	}
 	
-	KeyEvent* OneKeyInteraction::getEvent() {
-		return event;
+	KeyEvent& OneKeyInteraction::getEvent() {
+		return *event;
 	}
 	
-	void OneKeyInteraction::setEvent(KeyEvent* event) {
-		delete this->event;
-		this->event = event;
+	const KeyEvent& OneKeyInteraction::getEvent() const {
+		return *event;
+	}
+	
+	void OneKeyInteraction::setEvent(BoxPtr<KeyEvent>&& event) {
+		this->event = std::move(event);
 	}
 	
 	void OneKeyInteraction::start(sf::Vector2i) {
@@ -33,7 +32,7 @@ namespace ui {
 	}
 	
 	OneKeyInteraction* OneKeyInteraction::copy() {
-		return new OneKeyInteraction{event->copy(), key};
+		return new OneKeyInteraction{*this};
 	}
 	
 	void OneKeyInteraction::init(InteractionInitInfo interactionInitInfo) {
@@ -41,16 +40,10 @@ namespace ui {
 	}
 	
 	bool DecodePointer<OneKeyInteraction>::decodePointer(const YAML::Node& node, OneKeyInteraction*& oneKeyInteraction) {
-		KeyEvent* event;
-		Key key{Key::mouseLeft};
-		
-		node["event"] >> event;
-		if(node["key"])
-			node["key"] >> key;
-		
-		{
-			oneKeyInteraction = new OneKeyInteraction{event, key};
-			return true;
-		}
+		oneKeyInteraction = new OneKeyInteraction{
+			node["event"].as<BoxPtr<KeyEvent> >(),
+			convDef(node["key"], Key::mouseLeft)
+		};
+		return true;
 	}
 }

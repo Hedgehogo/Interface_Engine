@@ -3,33 +3,24 @@
 
 namespace ui {
 	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Key key) :
-		ClickPanelInteraction(new DisplayPanelEvent{}, key) {
-	}
-	
-	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(DisplayPanelEvent* displayPanelEvent, Key key) :
-		ClickPanelInteraction(displayPanelEvent, key) {
+		ClickPanelInteraction(makeBoxPtr<PanelEvent, DisplayPanelEvent>(), key) {
 	}
 	
 	void ClickDisplayPanelInteraction::start(sf::Vector2i mousePosition) {
-		dynamic_cast<PanelEvent*>(event)->getPanel()->setParentProcessed(true);
+		dynamic_cast<PanelEvent&>(*event).getPanel()->setParentProcessed(true);
 	}
 	
 	void ClickDisplayPanelInteraction::finish(sf::Vector2i mousePosition) {
 		OneKeyInteraction::finish(mousePosition);
-		dynamic_cast<PanelEvent*>(event)->getPanel()->setParentProcessed(false);
+		dynamic_cast<PanelEvent&>(*event).getPanel()->setParentProcessed(false);
 	}
 	
 	ClickDisplayPanelInteraction* ClickDisplayPanelInteraction::copy() {
-		ClickDisplayPanelInteraction* clickDisplayPanelInteraction{new ClickDisplayPanelInteraction(dynamic_cast<DisplayPanelEvent*>(event->copy()), key)};
-		return clickDisplayPanelInteraction;
+		return new ClickDisplayPanelInteraction{*this};
 	}
 	
 	bool DecodePointer<ClickDisplayPanelInteraction>::decodePointer(const YAML::Node& node, ClickDisplayPanelInteraction*& clickDisplayPanelInteraction) {
-		Key key;
-		node["key"] >> key;
-		{
-			clickDisplayPanelInteraction = new ClickDisplayPanelInteraction{key};
-			return true;
-		}
+		clickDisplayPanelInteraction = new ClickDisplayPanelInteraction{node["key"].as<Key>()};
+		return true;
 	}
 }

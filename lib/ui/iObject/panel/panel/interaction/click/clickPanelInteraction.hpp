@@ -8,7 +8,7 @@
 namespace ui {
 	class ClickPanelInteraction : public OneKeyInteraction, public virtual IPanelInteraction {
 	public:
-		ClickPanelInteraction(PanelEvent* event, Key key);
+		ClickPanelInteraction(BoxPtr<PanelEvent>&& event, Key key);
 		
 		void init(PanelInteractionInitInfo panelInteractionInitInfo) override;
 		

@@ -7,15 +7,14 @@
 
 namespace ui {
 	class SliderInteraction : public OneKeyInteraction {
-	protected:
-		SliderInteraction(SliderWheelEvent wheelEvent, PressedInteraction slideInteraction);
-	
 	public:
 		SliderInteraction(BaseSlider& slider, Key key, bool wheelHorizontal = false, SliderWheelEvent::Relativity wheelRelativity = SliderWheelEvent::Relativity::relationSlider, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
 		
 		SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division = {10, 10}, bool wheelHorizontal = false);
 		
-		void init(InteractionInitInfo interactionInitInfo);
+		SliderInteraction(const SliderInteraction& other);
+		
+		void init(InteractionInitInfo interactionInitInfo) override;
 		
 		void setSlider(BaseSlider& slider);
 		
@@ -24,7 +23,7 @@ namespace ui {
 		SliderInteraction* copy() override;
 	
 	protected:
-		SliderWheelEvent wheelEvent;
 		PressedInteraction slideInteraction;
+		SliderWheelEvent wheelEvent;
 	};
 }

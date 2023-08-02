@@ -40,48 +40,24 @@ namespace ui {
 		return slider1;
 	}
 	
-	
 	bool DecodePointer<Slider>::decodePointer(const YAML::Node& node, Slider*& sliderZone) {
-		IUninteractive* slider;
-		IUninteractive* background;
-		PSRVec2f value;
-		sf::Vector2f sliderScale{1.0f, 0.5f};
-		Key key{Key::mouseLeft};
-		bool wheelHorizontal{false};
-		
-		node["slider"] >> slider;
-		node["background"] >> background;
-		value = Buffer::get<SRVec2f>(node["value"]);
-		if(node["slider-scale"])
-			node["slider-scale"] >> sliderScale;
-		if(node["key"])
-			node["key"] >> key;
-		if(node["default-wheel"]) {
-			wheelHorizontal = convertBool(node["default-wheel"], "horizontal", "vertical");
-		}
+		auto slider{node["slider"].as<IUninteractive*>()};
+		auto background{node["background"].as<IUninteractive*>()};
+		auto value{Buffer::get<SRVec2f>(node["value"])};
+		auto sliderScale{convDef(node["slider-scale"], sf::Vector2f{1.0f, 0.5f})};
+		auto key{convDef(node["key"], Key::mouseLeft)};
+		auto wheelHorizontal{convBoolDef(node["default-wheel"], "horizontal", "vertical", false)};
 		
 		if(!node["division"]) {
-			SliderWheelEvent::Relativity wheelRelativity{SliderWheelEvent::Relativity::relationArea};
-			sf::Vector2f wheelSensitivity{0.2f, 0.2f};
+			auto wheelRelativity{convDef(node["wheel-relativity"], SliderWheelEvent::Relativity::relationArea)};
+			auto wheelSensitivity{convDef(node["wheel-sensitivity"], sf::Vector2f{0.2f, 0.2f})};
 			
-			if(node["wheel-relativity"])
-				node["wheel-relativity"] >> wheelRelativity;
-			if(node["wheel-sensitivity"])
-				node["wheel-sensitivity"] >> wheelSensitivity;
-			
-			{
-				sliderZone = new Slider{slider, background, value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity};
-				return true;
-			}
+			sliderZone = new Slider{slider, background, value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity};
 		} else {
-			sf::Vector2i division;
+			auto division{node["division"].as<sf::Vector2i>()};
 			
-			node["division"] >> division;
-			
-			{
-				sliderZone = new Slider{slider, background, value, division, sliderScale, key, wheelHorizontal};
-				return true;
-			}
+			sliderZone = new Slider{slider, background, value, division, sliderScale, key, wheelHorizontal};
 		}
+		return true;
 	}
 }

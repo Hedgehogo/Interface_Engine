@@ -3,8 +3,11 @@
 #include "../event/key/empty/emptyEvent.hpp"
 #include "../event/key/lambdaSimple/keyEvent_LambdaSimple.hpp"
 #include "../initInfo/interactionInitInfo.hpp"
+#include <Box_Ptr/boxPtr.hpp>
 
 namespace ui {
+	using namespace bp;
+	
 	class InteractionManager;
 	
 	class IInteraction {

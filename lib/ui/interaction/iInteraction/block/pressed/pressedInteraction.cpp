@@ -2,7 +2,7 @@
 #include "pressedInteraction.hpp"
 
 namespace ui {
-	PressedInteraction::PressedInteraction(KeyEvent* event, Key key) : OneKeyInteraction(event, key), interactionManager(nullptr) {
+	PressedInteraction::PressedInteraction(BoxPtr<KeyEvent>&& event, Key key) : OneKeyInteraction(std::move(event), key), interactionManager(nullptr) {
 	}
 	
 	void PressedInteraction::init(InteractionInitInfo interactionInitInfo) {
@@ -18,13 +18,7 @@ namespace ui {
 		}
 	}
 	
-	void PressedInteraction::copy(PressedInteraction* pressedInteraction) {
-		pressedInteraction->interactionManager = this->interactionManager;
-	}
-	
 	PressedInteraction* PressedInteraction::copy() {
-		PressedInteraction* pressedInteraction{new PressedInteraction{event->copy(), key}};
-		PressedInteraction::copy(pressedInteraction);
-		return pressedInteraction;
+		return new PressedInteraction{*this};
 	}
 }

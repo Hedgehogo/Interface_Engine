@@ -7,17 +7,17 @@
 namespace ui {
 	class OneKeyInteraction : public virtual IInteraction {
 	public:
-		OneKeyInteraction(KeyEvent* event, Key key);
-		
-		~OneKeyInteraction() override;
+		OneKeyInteraction(BoxPtr<KeyEvent>&& event, Key key);
 		
 		void init(InteractionInitInfo interactionInitInfo) override;
 		
 		Key getKey();
 		
-		KeyEvent* getEvent();
+		KeyEvent& getEvent();
 		
-		void setEvent(KeyEvent* event);
+		const KeyEvent& getEvent() const;
+		
+		void setEvent(BoxPtr<KeyEvent>&& event);
 		
 		void start(sf::Vector2i mousePosition) override;
 		
@@ -28,7 +28,7 @@ namespace ui {
 		OneKeyInteraction* copy() override;
 	
 	protected:
-		KeyEvent* event;
+		BoxPtr<KeyEvent> event;
 		Key key;
 	};
 	

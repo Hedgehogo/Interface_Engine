@@ -3,18 +3,18 @@
 #include "../iInteraction.hpp"
 
 namespace ui {
-	class MouseInteraction : public virtual IInteraction {
+	class IMouseInteraction : public virtual IInteraction {
 	public:
-		MouseInteraction(KeyEvent* leftMouseButton, KeyEvent* rightMouseButton);
+		IMouseInteraction();
 		
-		void setLeftButtonEvent(KeyEvent* leftMouseButton);
+		virtual KeyEvent& getLeftButtonEvent() = 0;
 		
-		void setRightButtonEvent(KeyEvent* rightMouseButton);
+		virtual const KeyEvent& getLeftButtonEvent() const = 0;
+		
+		virtual KeyEvent& getRightButtonEvent() = 0;
+		
+		virtual const KeyEvent& getRightButtonEvent() const = 0;
 		
 		void update(sf::Vector2i mousePosition) override;
-	
-	protected:
-		KeyEvent* leftMouseButton;
-		KeyEvent* rightMouseButton;
 	};
 }

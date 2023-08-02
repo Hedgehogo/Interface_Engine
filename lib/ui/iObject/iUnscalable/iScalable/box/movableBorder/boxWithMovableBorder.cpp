@@ -14,8 +14,8 @@ namespace ui {
 		Box(minSize),
 		firstObject(std::move(firstObject)),
 		secondObject(std::move(secondObject)),
-		pressedInteraction(new MovableBorderEvent{*this}, Key::mouseLeft),
-		Interactive_Simple(new OneKeyInteraction{new AddBlockInteractionEvent{pressedInteraction}, Key::mouseLeft}),
+		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, Key::mouseLeft),
+		Interactive_Simple(new OneKeyInteraction{BoxPtr<KeyEvent>(new AddBlockInteractionEvent{pressedInteraction}), Key::mouseLeft}),
 		isHorizontalBorder(isHorizontalBorder),
 		borderValue(borderValue),
 		borderValueNow(borderValue->getValue()),
@@ -35,7 +35,7 @@ namespace ui {
 	void BoxWithMovableBorder::init(InteractiveInitInfo interactiveInitInfo) {
 		Interactive_Simple::init(interactiveInitInfo);
 		pressedInteraction.init(InteractionInitInfo{interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
-		dynamic_cast<OneKeyInteraction*>(Interactive_Simple::interaction)->getEvent()->init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
+		dynamic_cast<OneKeyInteraction*>(Interactive_Simple::interaction)->getEvent().init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
 	}
 	
 	float BoxWithMovableBorder::getBorderValue() {

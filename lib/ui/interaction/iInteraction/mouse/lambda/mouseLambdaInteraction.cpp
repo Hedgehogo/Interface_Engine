@@ -3,7 +3,7 @@
 
 namespace ui {
 	MouseLambdaInteraction MouseLambdaInteraction::debug{
-		new KeyEvent_LambdaSimple{
+		makeBoxPtr<KeyEvent, KeyEvent_LambdaSimple>(
 			[](sf::Vector2i) {
 				std::cout << "sl";
 			},
@@ -16,21 +16,21 @@ namespace ui {
 			[](sf::Vector2i) {
 				std::cout << "nl";
 			}
-		},
-		new KeyEvent_LambdaSimple{
+		),
+		makeBoxPtr<KeyEvent, KeyEvent_LambdaSimple>(
 			[](sf::Vector2i) {
 				std::cout << "sr" << std::endl;
 			},
-			[](sf::Vector2i) {
-				std::cout << "wr" << std::endl;
-			},
-			[](sf::Vector2i) {
-				std::cout << "sr" << std::endl;
-			},
-			[](sf::Vector2i) {
-				std::cout << "nr" << std::endl;
-			}
-		},
+				[](sf::Vector2i) {
+					std::cout << "wr" << std::endl;
+				},
+				[](sf::Vector2i) {
+					std::cout << "sr" << std::endl;
+				},
+				[](sf::Vector2i) {
+					std::cout << "nr" << std::endl;
+				}
+		),
 		[](sf::Vector2i) {
 			std::cout << "sp" << std::endl;
 		},
@@ -39,11 +39,27 @@ namespace ui {
 		}
 	};
 	
-	MouseLambdaInteraction::MouseLambdaInteraction(KeyEvent* leftMouseButton, KeyEvent* rightMouseButton, void ( * startPointing)(sf::Vector2i mousePosition), void (* finishPointing)(sf::Vector2i mousePosition)) :
-		MouseInteraction(leftMouseButton, rightMouseButton), LambdaInteraction(startPointing, finishPointing) {
+	MouseLambdaInteraction::MouseLambdaInteraction(BoxPtr<KeyEvent>&& leftButtonEvent, BoxPtr<KeyEvent>&& rightButtonEvent, void (* startPointing)(sf::Vector2i mousePosition), void (* finishPointing)(sf::Vector2i mousePosition)) :
+		LambdaInteraction(startPointing, finishPointing), leftButtonEvent(std::move(leftButtonEvent)), rightButtonEvent(std::move(rightButtonEvent)) {
+	}
+	
+	KeyEvent& MouseLambdaInteraction::getLeftButtonEvent() {
+		return *leftButtonEvent;
+	}
+	
+	const KeyEvent& MouseLambdaInteraction::getLeftButtonEvent() const {
+		return *leftButtonEvent;
+	}
+	
+	KeyEvent& MouseLambdaInteraction::getRightButtonEvent() {
+		return *rightButtonEvent;
+	}
+	
+	const KeyEvent& MouseLambdaInteraction::getRightButtonEvent() const {
+		return *rightButtonEvent;
 	}
 	
 	MouseLambdaInteraction* MouseLambdaInteraction::copy() {
-		return new MouseLambdaInteraction{leftMouseButton->copy(), rightMouseButton->copy(), startPointing, finishPointing};
+		return new MouseLambdaInteraction{*this};
 	}
 }

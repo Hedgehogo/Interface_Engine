@@ -1,61 +1,50 @@
 #include "doubleInteraction.hpp"
 
 namespace ui {
-	DoubleInteraction::DoubleInteraction(IInteraction* first, IInteraction* second) :
-		first(first), second(second) {
+	DoubleInteraction::DoubleInteraction(BoxPtr<IInteraction>&& first, BoxPtr<IInteraction>&& second) :
+		first(std::move(first)), second(std::move(second)) {
 	}
 	
-	DoubleInteraction::~DoubleInteraction() {
-		delete first;
-		delete second;
+	void DoubleInteraction::setFirst(BoxPtr<IInteraction>&& first) {
+		this->first = std::move(first);
 	}
 	
-	void DoubleInteraction::setFirst(IInteraction* first) {
-		delete this->first;
-		this->first = first;
+	void DoubleInteraction::setSecond(BoxPtr<IInteraction>&& second) {
+		this->second = std::move(second);
 	}
 	
-	void DoubleInteraction::setSecond(IInteraction* second) {
-		delete this->second;
-		this->second = second;
+	IInteraction& DoubleInteraction::getFirst() {
+		return *first;
 	}
 	
-	IInteraction* DoubleInteraction::getFirst() {
-		return first;
+	const IInteraction& DoubleInteraction::getFirst() const {
+		return *first;
 	}
 	
-	IInteraction* DoubleInteraction::getSecond() {
-		return second;
+	IInteraction& DoubleInteraction::getSecond() {
+		return *second;
+	}
+	
+	const IInteraction& DoubleInteraction::getSecond() const {
+		return *second;
 	}
 	
 	void DoubleInteraction::start(sf::Vector2i mousePosition) {
-		if(first != nullptr) {
-			first->start(mousePosition);
-		}
-		if(second != nullptr) {
-			second->start(mousePosition);
-		}
+		first->start(mousePosition);
+		second->start(mousePosition);
 	}
 	
 	void DoubleInteraction::update(sf::Vector2i mousePosition) {
-		if(first != nullptr) {
-			first->update(mousePosition);
-		}
-		if(second != nullptr) {
-			second->update(mousePosition);
-		}
+		first->update(mousePosition);
+		second->update(mousePosition);
 	}
 	
 	void DoubleInteraction::finish(sf::Vector2i mousePosition) {
-		if(second != nullptr) {
-			second->finish(mousePosition);
-		}
-		if(first != nullptr) {
-			first->finish(mousePosition);
-		}
+		second->finish(mousePosition);
+		first->finish(mousePosition);
 	}
 	
 	DoubleInteraction* DoubleInteraction::copy() {
-		return new DoubleInteraction{first->copy(), second->copy()};
+		return new DoubleInteraction{*this};
 	}
 }

@@ -4,7 +4,7 @@
 #include "../../../../../../interaction/iInteraction/empty/emptyInteraction.hpp"
 
 namespace ui {
-	class DontHidePanelInteraction : public IHidePanelInteraction, public EmptyInteraction {
+	class DontHidePanelInteraction : public EmptyInteraction, public IHidePanelInteraction {
 	public:
 		DontHidePanelInteraction() = default;
 		

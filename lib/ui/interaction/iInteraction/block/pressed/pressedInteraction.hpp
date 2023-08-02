@@ -6,17 +6,14 @@
 
 namespace ui {
 	class PressedInteraction : public OneKeyInteraction, public IBlockInteraction {
-	protected:
-		void copy(PressedInteraction* pressedInteraction);
-	
 	public:
-		PressedInteraction(KeyEvent* event, Key key);
+		PressedInteraction(BoxPtr<KeyEvent>&& event, Key key);
 		
-		void init(InteractionInitInfo interactionInitInfo);
+		void init(InteractionInitInfo interactionInitInfo) override;
 		
 		void update(sf::Vector2i mousePosition) override;
 		
-		PressedInteraction* copy();
+		PressedInteraction* copy() override;
 	
 	protected:
 		InteractionManager* interactionManager;

@@ -5,17 +5,19 @@
 namespace ui {
 	class DoubleInteraction : public virtual IInteraction {
 	public:
-		DoubleInteraction(IInteraction* first, IInteraction* second);
+		DoubleInteraction(BoxPtr<IInteraction>&& first, BoxPtr<IInteraction>&& second);
 		
-		~DoubleInteraction() override;
+		void setFirst(BoxPtr<IInteraction>&& first);
 		
-		void setFirst(IInteraction* first);
+		void setSecond(BoxPtr<IInteraction>&& second);
 		
-		void setSecond(IInteraction* second);
+		IInteraction& getFirst();
 		
-		IInteraction* getFirst();
+		const IInteraction& getFirst() const;
 		
-		IInteraction* getSecond();
+		IInteraction& getSecond();
+		
+		const IInteraction& getSecond() const;
 		
 		void start(sf::Vector2i mousePosition) override;
 		
@@ -26,7 +28,7 @@ namespace ui {
 		DoubleInteraction* copy() override;
 	
 	protected:
-		IInteraction* first;
-		IInteraction* second;
+		BoxPtr<IInteraction> first;
+		BoxPtr<IInteraction> second;
 	};
 }

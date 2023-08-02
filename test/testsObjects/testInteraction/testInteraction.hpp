@@ -4,18 +4,18 @@
 #include "../../../lib/ui/interaction/interactionManager/interactionManager.hpp"
 
 
-class TestInteraction : public ui::IInteraction{
+class TestInteraction : public ui::IInteraction {
 public:
-	struct Processed{
-		struct Start{
+	struct Processed {
+		struct Start {
 			unsigned long long time{0};
 			sf::Vector2i mousePosition;
 		};
-		struct Update{
+		struct Update {
 			unsigned long long time{0};
 			sf::Vector2i mousePosition;
 		};
-		struct Finish{
+		struct Finish {
 			unsigned long long time{0};
 			sf::Vector2i mousePosition;
 		};
@@ -24,8 +24,8 @@ public:
 		std::vector<Finish> finish;
 		std::vector<unsigned long long> copy;
 	};
-
-	enum class Function{
+	
+	enum class Function {
 		start,
 		update,
 		finish
@@ -38,18 +38,18 @@ protected:
 
 public:
 	TestInteraction(Priority priority = Priority::medium, bool blocked = false);
-
+	
 	Processed getProcessed();
-
+	
 	bool isBlocked() const override;
-
+	
 	Priority getPriority() const override;
-
+	
 	void start(sf::Vector2i mousePosition) override;
-
+	
 	void update(sf::Vector2i mousePosition) override;
-
+	
 	void finish(sf::Vector2i mousePosition) override;
-
-	IInteraction *copy() override;
+	
+	IInteraction* copy() override;
 };
