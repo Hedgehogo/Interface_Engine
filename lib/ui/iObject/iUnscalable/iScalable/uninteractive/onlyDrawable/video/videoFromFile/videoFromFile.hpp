@@ -24,7 +24,6 @@ namespace ui {
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 	
-	public:
 		VideoFromFile* copy() override;
 	
 	protected:

@@ -11,36 +11,34 @@
 namespace ui {
 	class Interface : public IScalable, public IDrawable, public IUpdatable {
 	protected:
-		void init(InitInfo initInfo) override;
-		
 		bool isInWindow(sf::Vector2f position);
 	
 	public:
+		explicit Interface(BoxPtr<IScalable>&& object, AnimationManager animationManager = AnimationManager{{}}, BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>());
+		
+		explicit Interface(const std::string& filePath, AnimationManager animationManager = AnimationManager{{}}, BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>());
+		
+		explicit Interface(Window& window, BoxPtr<IScalable>&& object, AnimationManager animationManager = AnimationManager{{}}, BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>());
+		
+		explicit Interface(Window& window, const std::string& filePath, AnimationManager animationManager = AnimationManager{{}}, BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>());
+		
+		void init(InitInfo initInfo) override;
+		
 		void init(Window& window);
 		
-		explicit Interface(IScalable* object, AnimationManager animationManager = AnimationManager{{}}, InteractionStack* interactionStack = new InteractionStack{});
+		[[nodiscard]] sf::RenderTarget& getRenderTarget();
 		
-		explicit Interface(const std::string& filePath, AnimationManager animationManager = AnimationManager{{}}, InteractionStack* interactionStack = new InteractionStack{});
+		[[nodiscard]] DrawManager& getDrawManager();
 		
-		explicit Interface(Window& window, IScalable* object, AnimationManager animationManager = AnimationManager{{}}, InteractionStack* interactionStack = new InteractionStack{});
+		[[nodiscard]] UpdateManager& getUpdateManager();
 		
-		explicit Interface(Window& window, const std::string& filePath, AnimationManager animationManager = AnimationManager{{}}, InteractionStack* interactionStack = new InteractionStack{});
+		[[nodiscard]] InteractionManager& getInteractionManager();
 		
-		~Interface() override;
+		[[nodiscard]] InteractionStack& getInteractionStack();
 		
-		[[nodiscard]] sf::RenderTarget* getRenderTarget();
+		[[nodiscard]] PanelManager& getPanelManager();
 		
-		[[nodiscard]] DrawManager* getDrawManager();
-		
-		[[nodiscard]] UpdateManager* getUpdateManager();
-		
-		[[nodiscard]] InteractionManager* getInteractionManager();
-		
-		[[nodiscard]] InteractionStack* getInteractionStack();
-		
-		[[nodiscard]] PanelManager* getPanelManager();
-		
-		[[nodiscard]] IScalable* getObject();
+		[[nodiscard]] IScalable& getObject();
 		
 		void setRenderWindowSize(sf::RenderWindow& window);
 		
@@ -76,10 +74,10 @@ namespace ui {
 		DrawManager drawManager;
 		UpdateManager updateManager;
 		InteractionManager interactionManager;
-		InteractionStack* interactionStack;
+		BoxPtr<InteractionStack> interactionStack;
 		PanelManager panelManager;
 		AnimationManager animationManager;
-		IScalable* object;
+		BoxPtr<IScalable> object;
 		sf::Vector2f mousePosition;
 		bool initialized;
 		bool active;

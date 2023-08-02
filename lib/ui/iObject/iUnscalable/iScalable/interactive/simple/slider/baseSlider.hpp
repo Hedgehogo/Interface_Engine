@@ -8,14 +8,14 @@
 namespace ui {
 	class BaseSlider : public Interactive_Simple {
 	protected:
-		void init(InteractiveInitInfo interactiveInitInfo) override;
-		
-		void copy(BaseSlider* baseSlider);
-		
 		virtual void resizeSlider(sf::Vector2f newValue);
 	
 	public:
-		BaseSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, SliderInteraction* interaction);
+		BaseSlider(BoxPtr<IUninteractive>&& slider, BoxPtr<IUninteractive>&& background, const PSRVec2f& value, BoxPtr<SliderInteraction>&& interaction);
+		
+		BaseSlider(const BaseSlider& other);
+		
+		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
 		bool onSlider(sf::Vector2i mousePosition);
 		
@@ -48,8 +48,8 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		IUninteractive* slider;
-		IUninteractive* background;
+		BoxPtr<IUninteractive> slider;
+		BoxPtr<IUninteractive> background;
 		PSRVec2f value;
 		sf::Vector2f position;
 		sf::Vector2f sliderSize;

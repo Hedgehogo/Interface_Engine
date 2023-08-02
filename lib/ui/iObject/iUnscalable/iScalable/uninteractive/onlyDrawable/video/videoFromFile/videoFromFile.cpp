@@ -6,7 +6,6 @@ namespace ui {
 		viewingProgress->addSetter([=](float viewingProgress) {
 			setCurrentFrame(viewingProgress);
 		});
-		
 		sprite.setTexture(bufferTexture[0]);
 	}
 	
@@ -49,8 +48,6 @@ namespace ui {
 	}
 	
 	VideoFromFile* VideoFromFile::copy() {
-		VideoFromFile* video{new VideoFromFile{bufferTexture, viewingProgress}};
-		OnlyDrawable::copy(video);
-		return video;
+		return new VideoFromFile{*this};
 	}
 }

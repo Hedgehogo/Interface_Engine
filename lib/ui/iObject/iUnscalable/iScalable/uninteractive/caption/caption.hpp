@@ -18,11 +18,29 @@ namespace ui {
 		
 		static int getDefaultSize();
 		
-		Caption(sf::String text, IUninteractive* background, sf::Font& font, sf::Vector2f minSize, int fontSize = defaultSize, sf::Color color = defaultColor, sf::Text::Style style = {}, float rotation = 0,
-				InternalPositioning2 internalPositioning2 = {{0, 0}}, bool cutBack = true);
+		Caption(
+			sf::String text,
+			BoxPtr<IUninteractive>&& background,
+			sf::Font& font,
+			sf::Vector2f minSize,
+			int fontSize = defaultSize,
+			sf::Color color = defaultColor,
+			sf::Text::Style style = {}, float rotation = 0,
+			InternalPositioning2 internalPositioning2 = {{0, 0}},
+			bool cutBack = true
+		);
 		
-		Caption(sf::String text, IUninteractive* background, sf::Font& font, int fontSize = defaultSize, sf::Color color = defaultColor, sf::Text::Style style = {}, float rotation = 0,
-				InternalPositioning2 internalPositioning2 = {{0, 0}}, bool cutBack = true);
+		Caption(
+			sf::String text,
+			BoxPtr<IUninteractive>&& background,
+			sf::Font& font,
+			int fontSize = defaultSize,
+			sf::Color color = defaultColor,
+			sf::Text::Style style = {},
+			float rotation = 0,
+			InternalPositioning2 internalPositioning2 = {{0, 0}},
+			bool cutBack = true
+		);
 		
 		void draw() override;
 		
@@ -54,7 +72,7 @@ namespace ui {
 		
 		sf::Text text;
 		sf::String str;
-		IUninteractive* background;
+		BoxPtr<IUninteractive> background;
 		sf::Vector2f minimumSize;
 		DrawManager drawManager;
 		InternalPositioning2 internalPositioning2;

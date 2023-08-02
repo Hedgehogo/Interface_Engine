@@ -2,7 +2,7 @@
 #include "../../../interaction/interactionStack/interactionStack.hpp"
 
 namespace ui {
-	Interactive::Interactive() : interactionStack(nullptr) {
+	Interactive::Interactive() : interactionStack(nullptr), interactionManager(nullptr) {
 	}
 	
 	void Interactive::init(InitInfo initInfo) {
@@ -11,10 +11,5 @@ namespace ui {
 		
 		InteractiveInitInfo interactiveInitInfo{initInfo.window, initInfo.renderTarget, initInfo.drawManager, initInfo.updateManager, initInfo.panelManager};
 		init(interactiveInitInfo);
-	}
-	
-	void Interactive::copy(Interactive* interactive) {
-		interactive->interactionStack = this->interactionStack;
-		interactive->interactionManager = this->interactionManager;
 	}
 }

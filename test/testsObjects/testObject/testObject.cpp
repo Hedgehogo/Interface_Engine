@@ -53,7 +53,7 @@ void TestObject::update() {
 
 TestObject* TestObject::copy() {
 	processed.copy = getProcessorTime();
-	return new TestObject{minSize, normalSize, updateInteractionsResult};
+	return new TestObject{*this};
 }
 
 void TestObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

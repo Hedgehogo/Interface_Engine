@@ -52,11 +52,7 @@ namespace ui {
 	}
 	
 	bool DecodePointer<Capsule>::decodePointer(const YAML::Node& node, Capsule*& capsule) {
-		sf::Color color;
-		node["color"] >> color;
-		{
-			capsule = new Capsule{color};
-			return true;
-		}
+		capsule = new Capsule{node["color"].as<sf::Color>()};
+		return true;
 	}
 }

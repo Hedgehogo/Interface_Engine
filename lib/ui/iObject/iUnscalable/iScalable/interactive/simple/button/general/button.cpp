@@ -1,42 +1,45 @@
 #include "button.hpp"
 
 namespace ui {
-	Button::Button(IScalable* background, int interaction) :
-		BaseButton(background, nullptr), interactionIndex(interaction) {
+	Button::Button(BoxPtr<IScalable>&& background, std::size_t interaction) :
+		BaseButton(std::move(background), BoxPtr<IInteraction>{nullptr}), interactionIndex(interaction) {
 	}
 	
-	Button::Button(IScalable* background, IInteraction* interaction) : BaseButton(background, interaction), interactionIndex(-1) {
+	Button::Button(BoxPtr<IScalable>&& background, BoxPtr<IInteraction>&& interaction) :
+		BaseButton(std::move(background), std::move(interaction)), interactionIndex(std::numeric_limits<std::size_t>::max()) {
+	}
+	
+	Button::~Button() {
+		if(interactionIndex != std::numeric_limits<std::size_t>::max()) {
+			interaction.set(nullptr);
+		}
 	}
 	
 	void Button::init(InteractiveInitInfo interactiveInitInfo) {
-		if(interactionIndex >= 0)
-			interaction = interactionStack->at(interactionIndex);
+		if(interactionIndex != std::numeric_limits<std::size_t>::max()) {
+			interaction = BoxPtr{interactionStack->at(interactionIndex)};
+		}
 		BaseButton::init(interactiveInitInfo);
 	}
 	
 	Button* Button::copy() {
-		Button* buttonWithIndex{new Button{dynamic_cast<IUninteractive*>(background->copy()), interactionIndex}};
-		BaseButton::copy(buttonWithIndex);
-		buttonWithIndex->interaction = this->interaction;
-		return buttonWithIndex;
+		return new Button{*this};
 	}
 	
 	bool DecodePointer<Button>::decodePointer(const YAML::Node& node, Button*& button) {
-		IScalable* background;
-		
-		node["background"] >> background;
+		auto background{node["background"].as<BoxPtr<IScalable> >()};
 		
 		if(node["interaction"]) {
-			IInteraction* interaction;
-			node["interaction"] >> interaction;
-			button = new Button{background, interaction};
-			return true;
+			button = new Button{
+				std::move(background),
+				node["interaction"].as<BoxPtr<IInteraction> >()
+			};
+		} else {
+			button = new Button{
+				std::move(background),
+				node["index"].as<std::size_t>()
+			};
 		}
-		
-		int index;
-		node["index"] >> index;
-		
-		button = new Button{background, index};
 		return true;
 	}
 }

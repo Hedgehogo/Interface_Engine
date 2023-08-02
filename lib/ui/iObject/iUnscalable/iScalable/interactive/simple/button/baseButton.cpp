@@ -7,12 +7,8 @@ namespace ui {
 		background->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
 	}
 	
-	BaseButton::BaseButton(IScalable* background, IInteraction* interaction) :
-		Interactive_Simple(interaction), background(background) {
-	}
-	
-	BaseButton::~BaseButton() {
-		delete background;
+	BaseButton::BaseButton(BoxPtr<IScalable>&& background, BoxPtr<IInteraction>&& interaction) :
+		Interactive_Simple(std::move(interaction)), background(std::move(background)) {
 	}
 	
 	void BaseButton::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -38,10 +34,6 @@ namespace ui {
 	bool BaseButton::updateInteractions(sf::Vector2f mousePosition) {
 		bool backgroundUpdate = background->updateInteractions(mousePosition);
 		return Interactive_Simple::updateInteractions(mousePosition) || backgroundUpdate;
-	}
-	
-	void BaseButton::copy(BaseButton* button) {
-		Interactive_Simple::copy(button);
 	}
 	
 	void BaseButton::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {

@@ -9,13 +9,16 @@ namespace ui {
 		sprite.setTexture(texture);
 		sprite.setTextureRect(rect);
 		
-		if(rect.height == 0)
+		if(rect.height == 0) {
 			this->rect.height = textureSize.y - rect.top;
-		if(rect.width == 0)
+		}
+		if(rect.width == 0) {
 			this->rect.width = this->rect.height;
+		}
 		
-		if(countFrame == 0)
+		if(countFrame == 0) {
 			this->countFrame = this->textureSize.x / this->rect.width;
+		}
 		
 		if(offset.x == 0 && offset.y == 0) {
 			this->offset.x = this->rect.width;
@@ -53,6 +56,6 @@ namespace ui {
 	}
 	
 	VideoFromTexture* VideoFromTexture::copy() {
-		return new VideoFromTexture{*sprite.getTexture(), viewingProgress, rect, countFrame, offset};
+		return new VideoFromTexture{*this};
 	}
 }

@@ -5,16 +5,18 @@
 namespace ui {
 	class Button : public BaseButton {
 	public:
-		Button(IScalable* background, int interaction);
+		Button(BoxPtr<IScalable>&& background, std::size_t interaction);
 		
-		Button(IScalable* background, IInteraction* interaction);
+		Button(BoxPtr<IScalable>&& background, BoxPtr<IInteraction>&& interaction);
+		
+		~Button() override;
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
 		Button* copy() override;
 	
 	protected:
-		int interactionIndex;
+		std::size_t interactionIndex;
 	};
 	
 	template<>

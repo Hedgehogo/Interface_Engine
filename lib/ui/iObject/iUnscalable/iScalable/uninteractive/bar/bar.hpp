@@ -8,11 +8,11 @@
 namespace ui {
 	class Bar : public OnlyDrawable, public ILayoutWithBackground {
 	public:
-		void init(InitInfo initInfo) override;
-		
 		explicit Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, float offset = 0, bool horizontal = true);
 		
 		explicit Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, int division, float offset = 0, bool horizontal = true);
+		
+		void init(InitInfo initInfo) override;
 		
 		float getValue();
 		

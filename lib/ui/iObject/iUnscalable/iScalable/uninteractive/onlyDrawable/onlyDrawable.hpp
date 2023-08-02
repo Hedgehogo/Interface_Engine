@@ -4,9 +4,6 @@
 
 namespace ui {
 	class OnlyDrawable : public IUninteractive, public IDrawable {
-	protected:
-		void copy(OnlyDrawable* OnlyDrawable);
-	
 	public:
 		OnlyDrawable();
 		

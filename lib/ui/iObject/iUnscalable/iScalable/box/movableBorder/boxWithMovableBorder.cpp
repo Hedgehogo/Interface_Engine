@@ -15,12 +15,11 @@ namespace ui {
 		firstObject(std::move(firstObject)),
 		secondObject(std::move(secondObject)),
 		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, Key::mouseLeft),
-		Interactive_Simple(new OneKeyInteraction{BoxPtr<KeyEvent>(new AddBlockInteractionEvent{pressedInteraction}), Key::mouseLeft}),
+		Interactive_Simple(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>(new AddBlockInteractionEvent{pressedInteraction}), Key::mouseLeft)),
 		isHorizontalBorder(isHorizontalBorder),
 		borderValue(borderValue),
 		borderValueNow(borderValue->getValue()),
 		borderInteractionSize(borderInteractionSize) {
-		
 		borderValue->addSetter([&](float value) {
 			this->resize(layout.size, layout.position);
 		});
@@ -35,7 +34,7 @@ namespace ui {
 	void BoxWithMovableBorder::init(InteractiveInitInfo interactiveInitInfo) {
 		Interactive_Simple::init(interactiveInitInfo);
 		pressedInteraction.init(InteractionInitInfo{interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
-		dynamic_cast<OneKeyInteraction*>(Interactive_Simple::interaction)->getEvent().init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
+		dynamic_cast<OneKeyInteraction&>(*this->interaction).getEvent().init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
 	}
 	
 	float BoxWithMovableBorder::getBorderValue() {
@@ -177,9 +176,7 @@ namespace ui {
 	}
 	
 	BoxWithMovableBorder* BoxWithMovableBorder::copy() {
-		BoxWithMovableBorder* boxWithMovableBorder{new BoxWithMovableBorder{*this}};
-		Interactive_Simple::copy(boxWithMovableBorder);
-		return boxWithMovableBorder;
+		return new BoxWithMovableBorder{*this};
 	}
 	
 	void BoxWithMovableBorder::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
@@ -189,18 +186,10 @@ namespace ui {
 	}
 	
 	bool DecodePointer<BoxWithMovableBorder>::decodePointer(const YAML::Node& node, BoxWithMovableBorder*& boxWithMovableBorder) {
-		auto& borderDirection{node["border-direction"].Scalar()};
-		bool isHorizontalBorder{false};
-		if(borderDirection == "horizontal") {
-			isHorizontalBorder = true;
-		} else if(borderDirection != "vertical") {
-			throw YAML::BadConversion{node.Mark()};
-		}
-		
 		boxWithMovableBorder = new BoxWithMovableBorder{
 			node["first-object"].as<BoxPtr<IScalable> >(),
 			node["first-object"].as<BoxPtr<IScalable> >(),
-			isHorizontalBorder,
+			convBoolDef(node["border-direction"], "horizontal", "vertical", false),
 			Buffer::get<SCoefficientValue>(node["border-value"]),
 			convDef(node["border-interaction-size"], 5),
 			convDef(node["min-size"], sf::Vector2f{})

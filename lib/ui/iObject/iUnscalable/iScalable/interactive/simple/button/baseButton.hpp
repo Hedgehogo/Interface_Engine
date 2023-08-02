@@ -5,15 +5,10 @@
 
 namespace ui {
 	class BaseButton : public Interactive_Simple {
-	protected:
-		void copy(BaseButton* button);
-	
 	public:
-		BaseButton(IScalable* background, IInteraction* interaction);
+		BaseButton(BoxPtr<IScalable>&& background, BoxPtr<IInteraction>&& interaction);
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
-		
-		~BaseButton() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -30,6 +25,6 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		IScalable* background;
+		BoxPtr<IScalable> background;
 	};
 }

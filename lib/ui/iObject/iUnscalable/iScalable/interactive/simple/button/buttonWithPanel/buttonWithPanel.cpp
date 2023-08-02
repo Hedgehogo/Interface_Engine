@@ -1,19 +1,19 @@
 #include "buttonWithPanel.hpp"
 
 namespace ui {
-	ButtonWithPanel::ButtonWithPanel(Panel* panel, IDisplayPanelInteraction* interaction, IScalable* background) :
-		BaseButton(background, interaction), panel(panel) {
+	ButtonWithPanel::ButtonWithPanel(BoxPtr<Panel>&& panel, BoxPtr<IDisplayPanelInteraction>&& interaction, BoxPtr<IScalable>&& background) :
+		BaseButton(std::move(background), dynamicCast<IInteraction>(std::move(interaction))), panel(std::move(panel)) {
+	}
+	
+	ButtonWithPanel::ButtonWithPanel(const ButtonWithPanel& other) :
+		BaseButton(BoxPtr{other.background}, BoxPtr{other.interaction}), panel(BoxPtr{other.panel}) {
+		dynamic_cast<IDisplayPanelInteraction&>(*interaction).setPanel(*panel);
 	}
 	
 	void ButtonWithPanel::init(InteractiveInitInfo interactiveInitInfo) {
 		BaseButton::init(interactiveInitInfo);
 		panel->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
-		dynamic_cast<IDisplayPanelInteraction*>(interaction)->init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack), *panel});
-	}
-	
-	ButtonWithPanel::~ButtonWithPanel() {
-		delete panel;
-		delete interaction;
+		dynamic_cast<IDisplayPanelInteraction&>(*interaction).init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack), *panel});
 	}
 	
 	void ButtonWithPanel::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -28,12 +28,7 @@ namespace ui {
 	}
 	
 	ButtonWithPanel* ButtonWithPanel::copy() {
-		Panel* panel1{panel->copy()};
-		IDisplayPanelInteraction* displayPanelInteraction{dynamic_cast<IDisplayPanelInteraction*>(interaction)->copy()};
-		displayPanelInteraction->setPanel(*panel1);
-		ButtonWithPanel* buttonWithPanel{new ButtonWithPanel{panel1, displayPanelInteraction, background->copy()}};
-		BaseButton::copy(buttonWithPanel);
-		return buttonWithPanel;
+		return new ButtonWithPanel{*this};
 	}
 	
 	void ButtonWithPanel::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
@@ -42,17 +37,11 @@ namespace ui {
 	}
 	
 	bool DecodePointer<ButtonWithPanel>::decodePointer(const YAML::Node& node, ButtonWithPanel*& buttonWithPanel) {
-		Panel* panel;
-		IDisplayPanelInteraction* interaction;
-		IScalable* background;
-		
-		node["panel"] >> panel;
-		node["display-interaction"] >> interaction;
-		node["background"] >> background;
-		
-		{
-			buttonWithPanel = new ButtonWithPanel{panel, interaction, background};
-			return true;
-		}
+		buttonWithPanel = new ButtonWithPanel{
+			node["panel"].as<BoxPtr<Panel> >(),
+			node["display-interaction"].as<BoxPtr<IDisplayPanelInteraction> >(),
+			node["background"].as<BoxPtr<IScalable> >()
+		};
+		return true;
 	}
 }

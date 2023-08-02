@@ -39,9 +39,7 @@ namespace ui {
 	}
 	
 	bool DecodePointer<Empty>::decodePointer(const YAML::Node& node, Empty*& empty) {
-		{
-			empty = new Empty{};
-			return true;
-		}
+		empty = new Empty{};
+		return true;
 	}
 }

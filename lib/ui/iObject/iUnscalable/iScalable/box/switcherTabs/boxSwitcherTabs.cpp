@@ -9,7 +9,8 @@
 namespace ui {
 	BoxSwitcherTabs::BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
 		Box(minSize), objects(std::move(objects)),
-		Interactive_Simple(new OneKeyInteraction{BoxPtr<KeyEvent>{new SwitcherTabsEvent{value, this}}, key}), isHorizontal(isHorizontal), value(value) {
+		Interactive_Simple(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>{new SwitcherTabsEvent{value, this}}, key)),
+		isHorizontal(isHorizontal), value(value) {
 	}
 	
 	void BoxSwitcherTabs::init(InitInfo initInfo) {
@@ -26,10 +27,10 @@ namespace ui {
 	void BoxSwitcherTabs::resize(sf::Vector2f size, sf::Vector2f position) {
 		Box::resize(size, position);
 		
-		if (isHorizontal){
+		if(isHorizontal) {
 			sf::Vector2f objectSize{size.x / objects.size(), size.y};
 			float positionX = position.x;
-			for(const auto& object: objects){
+			for(const auto& object: objects) {
 				object->resize(objectSize, {positionX, position.y});
 				positionX += objectSize.x;
 			}
@@ -60,13 +61,11 @@ namespace ui {
 	}
 	
 	BoxSwitcherTabs* BoxSwitcherTabs::copy() {
-		BoxSwitcherTabs* switcherTabs{new BoxSwitcherTabs{*this}};
-		Interactive_Simple::copy(switcherTabs);
-		return switcherTabs;
+		return new BoxSwitcherTabs{*this};
 	}
 	
 	bool DecodePointer<BoxSwitcherTabs>::decodePointer(const YAML::Node& node, BoxSwitcherTabs*& switcherTabs) {
-		switcherTabs = new BoxSwitcherTabs {
+		switcherTabs = new BoxSwitcherTabs{
 			node["objects"].as<std::vector<BoxPtr<IScalable> > >(),
 			Buffer::get<Sint>(node["value"]),
 			convDef(node["key"], Key::mouseLeft),

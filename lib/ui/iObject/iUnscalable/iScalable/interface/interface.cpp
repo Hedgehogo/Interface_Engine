@@ -5,6 +5,27 @@
 #include "ui/window/window.hpp"
 
 namespace ui {
+	Interface::Interface(BoxPtr<IScalable>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
+		object(std::move(object)), animationManager(std::move(animationManager)), interactionStack(interactionStack), renderTarget(nullptr), interactionManager(), panelManager(), initialized(false), active(true) {
+	}
+	
+	Interface::Interface(const std::string& filePath, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
+		Interface(BoxPtr{ui::loadFromYaml<ui::IScalable>(filePath)}, animationManager, std::move(interactionStack)) {
+	}
+	
+	Interface::Interface(Window& window, BoxPtr<IScalable>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
+		Interface(std::move(object), animationManager, std::move(interactionStack)) {
+		init(window);
+	}
+	
+	Interface::Interface(Window& window, const std::string& filePath, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
+		Interface(window, BoxPtr{ui::loadFromYaml<ui::IScalable>(filePath)}, animationManager, std::move(interactionStack)) {
+	}
+	
+	bool Interface::isInWindow(sf::Vector2f position) {
+		return position.x > 0 && position.x < static_cast<float>(renderTarget->getSize().x) && position.y > 0 && position.y < static_cast<float>(renderTarget->getSize().y);
+	}
+	
 	void Interface::init(InitInfo initInfo) {
 		if(!initialized) {
 			this->window = &initInfo.window;
@@ -29,29 +50,32 @@ namespace ui {
 		}
 	}
 	
-	Interface::Interface(IScalable* object, AnimationManager animationManager, InteractionStack* interactionStack) :
-		object(object), animationManager(std::move(animationManager)), interactionStack(interactionStack), renderTarget(nullptr), interactionManager(), panelManager(), initialized(false), active(true) {
+	sf::RenderTarget& Interface::getRenderTarget() {
+		return *renderTarget;
 	}
 	
-	Interface::Interface(const std::string& filePath, AnimationManager animationManager, InteractionStack* interactionStack) :
-		Interface(ui::loadFromYaml<ui::IScalable>(filePath), animationManager, interactionStack) {
+	DrawManager& Interface::getDrawManager() {
+		return drawManager;
 	}
 	
-	Interface::Interface(Window& window, IScalable* object, AnimationManager animationManager, InteractionStack* interactionStack) :
-		Interface(object, animationManager, interactionStack) {
-		init(window);
+	UpdateManager& Interface::getUpdateManager() {
+		return updateManager;
 	}
 	
-	Interface::Interface(Window& window, const std::string& filePath, AnimationManager animationManager, InteractionStack* interactionStack) :
-		Interface(window, ui::loadFromYaml<ui::IScalable>(filePath), animationManager, interactionStack) {
+	InteractionManager& Interface::getInteractionManager() {
+		return interactionManager;
 	}
 	
-	Interface::~Interface() {
-		delete object;
+	InteractionStack& Interface::getInteractionStack() {
+		return *interactionStack;
 	}
 	
-	bool Interface::isInWindow(sf::Vector2f position) {
-		return position.x > 0 && position.x < static_cast<float>(renderTarget->getSize().x) && position.y > 0 && position.y < static_cast<float>(renderTarget->getSize().y);
+	PanelManager& Interface::getPanelManager() {
+		return panelManager;
+	}
+	
+	IScalable& Interface::getObject() {
+		return *object;
 	}
 	
 	void Interface::draw() {
@@ -112,41 +136,13 @@ namespace ui {
 	}
 	
 	Interface* Interface::copy() {
-		Interface* interface{new Interface{object->copy(), *animationManager.copy(), interactionStack}};
+		Interface* interface{new Interface{*this}};
 		interface->init(*window);
 		return interface;
 	}
 	
 	void Interface::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-	}
-	
-	sf::RenderTarget* Interface::getRenderTarget() {
-		return renderTarget;
-	}
-	
-	DrawManager* Interface::getDrawManager() {
-		return &drawManager;
-	}
-	
-	UpdateManager* Interface::getUpdateManager() {
-		return &updateManager;
-	}
-	
-	InteractionManager* Interface::getInteractionManager() {
-		return &interactionManager;
-	}
-	
-	InteractionStack* Interface::getInteractionStack() {
-		return interactionStack;
-	}
-	
-	PanelManager* Interface::getPanelManager() {
-		return &panelManager;
-	}
-	
-	IScalable* Interface::getObject() {
-		return object;
 	}
 	
 	void Interface::setRenderWindowSize(sf::RenderWindow& window) {
@@ -159,9 +155,9 @@ namespace ui {
 	
 	bool DecodePointer<Interface>::decodePointer(const YAML::Node& node, Interface*& interface) {
 		interface = new Interface{
-			node["object"].as<IScalable*>(),
+			node["object"].as<BoxPtr<IScalable> >(),
 			convDef(node["animation-manager"], AnimationManager{}),
-			convDef(node["interaction-stack"], new InteractionStack{})
+			BoxPtr{convDefPtr<InteractionStack, InteractionStack>(node["interaction-stack"])}
 		};
 		return true;
 	}
@@ -173,9 +169,9 @@ namespace ui {
 		YAML::Node node{YAML::LoadFile(filePath.string())};
 		
 		return Interface{
-			node["object"].as<IScalable*>(),
+			node["object"].as<BoxPtr<IScalable> >(),
 			convDef(node["animation-manager"], AnimationManager{}),
-			convDef(node["interaction-stack"], new InteractionStack{})
+			BoxPtr{convDefPtr<InteractionStack, InteractionStack>(node["interaction-stack"])}
 		};
 	}
 	
@@ -187,9 +183,9 @@ namespace ui {
 		
 		return Interface{
 			window,
-			node["object"].as<IScalable*>(),
+			node["object"].as<BoxPtr<IScalable> >(),
 			convDef(node["animation-manager"], AnimationManager{}),
-			convDef(node["interaction-stack"], new InteractionStack{})
+			BoxPtr{convDefPtr<InteractionStack, InteractionStack>(node["interaction-stack"])}
 		};
 	}
 	
@@ -201,9 +197,9 @@ namespace ui {
 		
 		return new Interface{
 			window,
-			node["object"].as<IScalable*>(),
+			node["object"].as<BoxPtr<IScalable> >(),
 			convDef(node["animation-manager"], AnimationManager{}),
-			convDef(node["interaction-stack"], new InteractionStack{})
+			BoxPtr{convDefPtr<InteractionStack, InteractionStack>(node["interaction-stack"])}
 		};
 	}
 }

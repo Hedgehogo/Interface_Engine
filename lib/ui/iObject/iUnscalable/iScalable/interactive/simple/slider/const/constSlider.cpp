@@ -1,19 +1,37 @@
-
 #include "constSlider.hpp"
 
 namespace ui {
 	ConstSlider::ConstSlider(
-		IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, float sliderScale, Key key, bool wheelHorizontal,
-		SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity
-	) : BaseSlider(slider, background, value, new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}), sliderScale(sliderScale) {
-		
+		BoxPtr<IUninteractive>&& slider,
+		BoxPtr<IUninteractive>&& background,
+		const PSRVec2f& value,
+		float sliderScale,
+		Key key,
+		bool wheelHorizontal,
+		SliderWheelEvent::Relativity wheelRelativity,
+		sf::Vector2f wheelSensitivity
+	) :
+		BaseSlider(
+			std::move(slider), std::move(background), value,
+			BoxPtr{new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}}
+		), sliderScale(sliderScale) {
 		sliderSize = slider->getNormalSize();
 		aspectRatio = sliderSize.x / sliderSize.y;
 	}
 	
-	ConstSlider::ConstSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, sf::Vector2i division, float sliderScale, Key key, bool wheelHorizontal) :
-		BaseSlider(slider, background, value, new SliderInteraction{*this, key, division, wheelHorizontal}), sliderScale(sliderScale) {
-		
+	ConstSlider::ConstSlider(
+		BoxPtr<IUninteractive>&& slider,
+		BoxPtr<IUninteractive>&& background,
+		const PSRVec2f& value,
+		sf::Vector2i division,
+		float sliderScale,
+		Key key,
+		bool wheelHorizontal
+	) :
+		BaseSlider(
+			std::move(slider), std::move(background), value,
+			BoxPtr{new SliderInteraction{*this, key, division, wheelHorizontal}}
+		), sliderScale(sliderScale) {
 		sliderSize = slider->getNormalSize();
 		aspectRatio = sliderSize.x / sliderSize.y;
 	}
@@ -30,54 +48,27 @@ namespace ui {
 		resizeSlider(value->getValue());
 	}
 	
-	ConstSlider::ConstSlider(IUninteractive* slider, IUninteractive* background, const PSRVec2f& value, SliderInteraction* interaction) :
-		BaseSlider(slider, background, value, interaction) {
-	}
-	
 	ConstSlider* ConstSlider::copy() {
-		ConstSlider* constSlider{new ConstSlider{slider->copy(), background->copy(), value, dynamic_cast<SliderInteraction*>(interaction->copy())}};
-		dynamic_cast<SliderInteraction*>(constSlider->interaction)->setSlider(*constSlider);
-		BaseSlider::copy(constSlider);
-		return constSlider;
+		return new ConstSlider{*this};
 	}
 	
 	bool DecodePointer<ConstSlider>::decodePointer(const YAML::Node& node, ConstSlider*& constSlider) {
-		IUninteractive* slider;
-		IUninteractive* background;
-		PSRVec2f value;
-		float sliderScale{1.0f};
-		Key key{Key::mouseLeft};
-		bool wheelHorizontal{false};
-		
-		node["slider"] >> slider;
-		node["background"] >> background;
-		value = Buffer::get<SRVec2f>(node["value"]);
-		//sliderScale = convDef(node["slider-scale"], 1.0f);
-		//key = convDef(node["slider-scale"], Key::mouseLeft);
-		if(node["slider-scale"])
-			node["slider-scale"] >> sliderScale;
-		if(node["key"])
-			node["key"] >> key;
-		if(node["default-wheel"]) {
-			wheelHorizontal = convertBool(node["default-wheel"], "horizontal", "vertical");
-		}
+		auto slider{node["slider"].as<BoxPtr<IUninteractive> >()};
+		auto background{node["background"].as<BoxPtr<IUninteractive> >()};
+		auto value{Buffer::get<SRVec2f>(node["value"])};
+		auto sliderScale{convDef(node["slider-scale"], 1.0f)};
+		auto key{convDef(node["key"], Key::mouseLeft)};
+		bool wheelHorizontal{convBoolDef(node["default-wheel"], "horizontal", "vertical", false)};
 		
 		if(!node["division"]) {
-			SliderWheelEvent::Relativity wheelRelativity{SliderWheelEvent::Relativity::relationArea};
-			sf::Vector2f wheelSensitivity{0.2f, 0.2f};
+			auto wheelRelativity{convDef(node["wheel-relativity"], SliderWheelEvent::Relativity::relationArea)};
+			auto wheelSensitivity{convDef(node["wheel-sensitivity"], sf::Vector2f{0.2f, 0.2f})};
 			
-			if(node["wheel-relativity"])
-				node["wheel-relativity"] >> wheelRelativity;
-			if(node["wheel-sensitivity"])
-				node["wheel-sensitivity"] >> wheelSensitivity;
-			
-			constSlider = new ConstSlider{slider, background, value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity};
+			constSlider = new ConstSlider{std::move(slider), std::move(background), value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity};
 		} else {
-			sf::Vector2i division;
+			auto division{node["division"].as<sf::Vector2i>()};
 			
-			node["division"] >> division;
-			
-			constSlider = new ConstSlider{slider, background, value, division, sliderScale, key, wheelHorizontal};
+			constSlider = new ConstSlider{std::move(slider), std::move(background), value, division, sliderScale, key, wheelHorizontal};
 		}
 		return true;
 	}

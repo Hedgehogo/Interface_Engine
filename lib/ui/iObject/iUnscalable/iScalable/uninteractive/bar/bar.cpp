@@ -2,17 +2,17 @@
 #include "bar.hpp"
 
 namespace ui {
-	void Bar::init(InitInfo initInfo) {
-		background->init(initInfo);
-		strip->init(initInfo);
-	}
-	
 	Bar::Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, float offset, bool horizontal) :
 		background(std::move(background)), strip(std::move(strip)), horizontal(horizontal), offset(offset), division(1), value(0) {
 	}
 	
 	Bar::Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, int division, float offset, bool horizontal) :
 		background(std::move(background)), strip(std::move(strip)), horizontal(horizontal), offset(offset), division(division), value(0) {
+	}
+	
+	void Bar::init(InitInfo initInfo) {
+		background->init(initInfo);
+		strip->init(initInfo);
 	}
 	
 	float Bar::getValue() {

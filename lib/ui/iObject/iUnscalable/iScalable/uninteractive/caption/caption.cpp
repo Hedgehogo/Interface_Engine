@@ -29,9 +29,18 @@ namespace ui {
 		background->init(initInfo.copy(this->drawManager));
 	}
 	
-	Caption::Caption(sf::String text, IUninteractive* background, sf::Font& font, sf::Vector2f minSize, int fontSize, sf::Color color, sf::Text::Style style, float rotation, InternalPositioning2 internalPositioning2,
-					 bool cutBack) :
-		str(text), background(background), minimumSize(minSize), internalPositioning2(internalPositioning2), cutBack(cutBack) {
+	Caption::Caption(
+		sf::String text,
+		BoxPtr<IUninteractive>&& background,
+		sf::Font& font,
+		sf::Vector2f minSize,
+		int fontSize,
+		sf::Color color,
+		sf::Text::Style style,
+		float rotation,
+		InternalPositioning2 internalPositioning2,
+		bool cutBack
+	) : str(text), background(std::move(background)), minimumSize(minSize), internalPositioning2(internalPositioning2), cutBack(cutBack) {
 		this->text.setString(text);
 		this->text.setFont(font);
 		this->text.setCharacterSize(fontSize);
@@ -40,8 +49,17 @@ namespace ui {
 		this->text.setRotation(rotation);
 	}
 	
-	Caption::Caption(sf::String text, IUninteractive* background, sf::Font& font, int fontSize, sf::Color color, sf::Text::Style style, float rotation, InternalPositioning2 internalPositioning2, bool cutBack) :
-		str(text), background(background), minimumSize(), internalPositioning2(internalPositioning2), cutBack(cutBack) {
+	Caption::Caption(
+		sf::String text,
+		BoxPtr<IUninteractive>&& background,
+		sf::Font& font,
+		int fontSize,
+		sf::Color color,
+		sf::Text::Style style,
+		float rotation,
+		InternalPositioning2 internalPositioning2,
+		bool cutBack
+	) : str(text), background(background), minimumSize(), internalPositioning2(internalPositioning2), cutBack(cutBack) {
 		this->text.setString(text);
 		this->text.setFont(font);
 		this->text.setCharacterSize(fontSize);
@@ -84,7 +102,8 @@ namespace ui {
 				bounds = getBounds(text);
 			}
 		}
-		text.setPosition(internalPositioning2.findPosition(position, size, {bounds.width, bounds.height}) - sf::Vector2f(getBounds(text).left - text.getPosition().x, getBounds(text).top - text.getPosition().y));
+		sf::Vector2f findPosition{internalPositioning2.findPosition(position, size, {bounds.width, bounds.height})};
+		text.setPosition(findPosition - sf::Vector2f(getBounds(text).left - text.getPosition().x, getBounds(text).top - text.getPosition().y));
 	}
 	
 	sf::Vector2f Caption::getAreaPosition() const {
@@ -101,8 +120,8 @@ namespace ui {
 			max(
 				minimumSize,
 				(cutBack ?
-				sf::Vector2f{bounds.width, bounds.height} :
-				sf::Vector2f{})
+				 sf::Vector2f{bounds.width, bounds.height} :
+				 sf::Vector2f{})
 			),
 			background->getMinSize()
 		);
@@ -118,9 +137,7 @@ namespace ui {
 	}
 	
 	Caption* Caption::copy() {
-		Caption* caption{new Caption{text, background, str, minimumSize, internalPositioning2, cutBack}};
-		OnlyDrawable::copy(caption);
-		return caption;
+		return new Caption{*this};
 	}
 	
 	void Caption::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
@@ -172,37 +189,19 @@ namespace ui {
 	}
 	
 	bool DecodePointer<Caption>::decodePointer(const YAML::Node& node, Caption*& caption) {
-		sf::String text;
-		IUninteractive* background;
-		sf::Font* font;
-		int fontSize{Caption::getDefaultSize()};
-		sf::Color color{Caption::getDefaultColor()};
-		sf::Text::Style style{};
-		float rotation{0};
-		sf::Vector2f minSize{};
-		InternalPositioning2 internalPositioning2{{0.5, 0.5}};
-		bool cutBack = true;
-		
-		node["text"] >> text;
-		node["background"] >> background;
-		node["font"] >> font;
-		if(node["font-size"])
-			node["font-size"] >> fontSize;
-		if(node["color"])
-			node["color"] >> color;
-		if(node["style"])
-			node["style"] >> style;
-		if(node["min-size"])
-			node["min-size"] >> minSize;
-		if(node["rotation"])
-			node["rotation"] >> rotation;
-		if(node["cut-back"])
-			node["cut-back"] >> cutBack;
-		
-		{
-			caption = new Caption{text, background, *font, minSize, fontSize, color, style, rotation, internalPositioning2, cutBack};
-			return true;
-		}
+		caption = new Caption{
+			node["text"].as<sf::String>(),
+			node["background"].as<BoxPtr<IUninteractive> >(),
+			*node["background"].as<sf::Font* >(),
+			convDef(node["min-size"], sf::Vector2f{}),
+			convDef(node["font-size"], Caption::getDefaultSize()),
+			convDef(node["color"], Caption::getDefaultColor()),
+			convDef(node["style"], sf::Text::Style{}),
+			convDef(node["rotation"], 0.f),
+			InternalPositioning2{{0.5, 0.5}},
+			convDef(node["cut-back"], true)
+		};
+		return true;
 	}
 	
 }

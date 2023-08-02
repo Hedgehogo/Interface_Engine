@@ -14,11 +14,11 @@
 namespace ui {
 	class ButtonWithPanel : public BaseButton {
 	public:
-		ButtonWithPanel(Panel* panel, IDisplayPanelInteraction* interaction, IScalable* background);
+		ButtonWithPanel(BoxPtr<Panel>&& panel, BoxPtr<IDisplayPanelInteraction>&& interaction, BoxPtr<IScalable>&& background);
+		
+		ButtonWithPanel(const ButtonWithPanel& other);
 		
 		void init(InteractiveInitInfo interactiveInitInfo) override;
-		
-		~ButtonWithPanel() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -29,7 +29,7 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		Panel* panel;
+		BoxPtr<Panel> panel;
 	};
 	
 	template<>

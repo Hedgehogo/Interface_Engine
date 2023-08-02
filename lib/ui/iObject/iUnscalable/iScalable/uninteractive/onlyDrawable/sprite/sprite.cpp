@@ -4,12 +4,12 @@
 
 namespace ui {
 	Sprite::Sprite(sf::Texture& texture, sf::IntRect rect, sf::Vector2f minSize) :
-		OnlyDrawable(), sprite(texture, rect), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
+		sprite(texture, rect), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
 		sprite.setTextureRect(rect);
 	}
 	
 	Sprite::Sprite(sf::Texture& texture, sf::Vector2f minSize) :
-		OnlyDrawable(), sprite(texture), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
+		sprite(texture), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
 	}
 	
 	void Sprite::draw() {
@@ -42,23 +42,30 @@ namespace ui {
 	}
 	
 	Sprite* Sprite::copy() {
-		Sprite* sprite1{new Sprite{sprite, minimumSize}};
-		OnlyDrawable::copy(sprite1);
-		return sprite1;
+		return new Sprite{*this};
 	}
 	
 	bool DecodePointer<Sprite>::decodePointer(const YAML::Node& node, Sprite*& sprite) {
 		if(node["rect"]) {
-			sprite = new Sprite{*node["texture"].as<sf::Texture*>(), node["rect"].as<sf::IntRect>(), convDef(node["min-size"], sf::Vector2f{})};
+			sprite = new Sprite{
+				*node["texture"].as<sf::Texture*>(),
+				node["rect"].as<sf::IntRect>(),
+				convDef(node["min-size"], sf::Vector2f{})
+			};
 		} else {
-			sprite = new Sprite{*node["texture"].as<sf::Texture*>(), convDef(node["min-size"], sf::Vector2f{})};
+			sprite = new Sprite{
+				*node["texture"].as<sf::Texture*>(),
+				convDef(node["min-size"], sf::Vector2f{})
+			};
 		}
 		return true;
 	}
 	
 	template<>
 	bool determine<Sprite>(const YAML::Node& node) {
-		return determine(node, {{"texture"}}, {{"rect"},
-											   {"min-size"}});
+		return determine(node, {{"texture"}}, {
+			{"rect"},
+			{"min-size"}
+		});
 	}
 }

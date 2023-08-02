@@ -4,7 +4,7 @@
 
 namespace ui {
 	Switcher::Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key) :
-		Interactive_Simple(new OneKeyInteraction{makeBoxPtr<KeyEvent, SwitcherEvent>(value), key}),
+		Interactive_Simple(makeBoxPtr<IInteraction, OneKeyInteraction>(makeBoxPtr<KeyEvent, SwitcherEvent>(value), key)),
 		activeBackground(std::move(activeBackground)), inactiveBackground(std::move(inactiveBackground)), active(value) {
 	}
 	

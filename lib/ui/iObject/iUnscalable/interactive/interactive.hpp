@@ -6,9 +6,6 @@
 
 namespace ui {
 	class Interactive : public virtual IUnscalable {
-	protected:
-		void copy(Interactive* interactive);
-	
 	public:
 		void init(InitInfo initInfo) override;
 		
