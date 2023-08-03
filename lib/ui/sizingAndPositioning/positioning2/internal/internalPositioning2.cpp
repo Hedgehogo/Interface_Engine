@@ -12,21 +12,12 @@ namespace ui {
 		return {horizontal.findPosition(parentPosition.x, objectSize.x, parentSize.x, 0), vertical.findPosition(parentPosition.y, objectSize.y, parentSize.y, 0)};
 	}
 	
-	InternalPositioning2::InternalPositioning2(InternalPositioning vertical, InternalPositioning horizontal) : vertical(vertical), horizontal(horizontal) {
-	}
-	
 	InternalPositioning2* InternalPositioning2::copy() {
-		return new InternalPositioning2{*horizontal.copy(), *vertical.copy()};
+		return new InternalPositioning2{*this};
 	}
 	
 	bool DecodePointer<InternalPositioning2>::decodePointer(const YAML::Node& node, InternalPositioning2*& internalPositioning2) {
-		sf::Vector2f coefficient;
-		
-		node["coefficient"] >> coefficient;
-		
-		{
-			internalPositioning2 = new InternalPositioning2{coefficient};
-			return true;
-		}
+		internalPositioning2 = new InternalPositioning2{node["coefficient"].as<sf::Vector2f>()};
+		return true;
 	}
 }

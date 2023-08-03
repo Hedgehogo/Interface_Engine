@@ -13,13 +13,7 @@ namespace ui {
 		return positioning(parentPosition, parentSize, objectSize, targetSize);
 	}
 	
-	void LambdaPositioning2::copy(LambdaPositioning2* lambdaPositioning2) {
-		lambdaPositioning2->renderTarget = this->renderTarget;
-	}
-	
 	LambdaPositioning2* LambdaPositioning2::copy() {
-		LambdaPositioning2* lambdaPositioning2{new LambdaPositioning2{positioning}};
-		LambdaPositioning2::copy(lambdaPositioning2);
-		return lambdaPositioning2;
+		return new LambdaPositioning2{*this};
 	}
 }

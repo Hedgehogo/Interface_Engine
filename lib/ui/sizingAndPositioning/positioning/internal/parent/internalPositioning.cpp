@@ -9,7 +9,7 @@ namespace ui {
 	}
 	
 	InternalPositioning* InternalPositioning::copy() {
-		return new InternalPositioning{coefficient, offset};
+		return new InternalPositioning{*this};
 	}
 	
 	float InternalPositioning::getCoefficient() const {

@@ -9,23 +9,15 @@ namespace ui {
 	}
 	
 	MatchTargetPositioning* MatchTargetPositioning::copy() {
-		return new MatchTargetPositioning{targetCoefficient, objectCoefficient, offset};
+		return new MatchTargetPositioning{*this};
 	}
 	
-	
 	bool DecodePointer<MatchTargetPositioning>::decodePointer(const YAML::Node& node, MatchTargetPositioning*& matchTargetPositioning) {
-		float targetCoefficient;
-		float objectCoefficient;
-		float offset{0.f};
-		
-		node["target-coefficient"] >> targetCoefficient;
-		node["object-coefficient"] >> objectCoefficient;
-		if(node["offset"])
-			node["offset"] >> offset;
-		
-		{
-			matchTargetPositioning = new MatchTargetPositioning{targetCoefficient, objectCoefficient, offset};
-			return true;
-		}
+		matchTargetPositioning = new MatchTargetPositioning{
+			node["target-coefficient"].as<float>(),
+			node["object-coefficient"].as<float>(),
+			convDef(node["offset"], 0.f)
+		};
+		return true;
 	}
 }

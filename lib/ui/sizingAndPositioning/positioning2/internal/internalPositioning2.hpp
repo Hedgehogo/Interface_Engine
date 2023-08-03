@@ -12,10 +12,6 @@ namespace ui {
 		
 		sf::Vector2f findPosition(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize);
 	
-	private:
-		InternalPositioning2(InternalPositioning vertical, InternalPositioning horizontal);
-	
-	public:
 		InternalPositioning2* copy();
 	
 	protected:

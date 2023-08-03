@@ -59,8 +59,10 @@ namespace ui {
 					return true;
 				}
 			}
-			if(determine(node, {{"sizing"}}, {{"ratio"},
-											  {"horizontal"}})) {
+			if(determine(node, {{"sizing"}}, {
+				{"ratio"},
+				{"horizontal"}
+			})) {
 				type = "ConstRatioSizing2";
 				return true;
 			}

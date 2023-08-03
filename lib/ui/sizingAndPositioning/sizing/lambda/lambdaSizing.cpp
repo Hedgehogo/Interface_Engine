@@ -19,13 +19,7 @@ namespace ui {
 		return minSizeFunc(objectMinSize);
 	}
 	
-	void LambdaSizing::copy(LambdaSizing* lambdaSizing) {
-		lambdaSizing->normalSize = this->normalSize;
-	}
-	
 	LambdaSizing* LambdaSizing::copy() {
-		LambdaSizing* lambdaSizing{new LambdaSizing{findSizeFunc, minSizeFunc}};
-		LambdaSizing::copy(lambdaSizing);
-		return lambdaSizing;
+		return new LambdaSizing{*this};
 	}
 }

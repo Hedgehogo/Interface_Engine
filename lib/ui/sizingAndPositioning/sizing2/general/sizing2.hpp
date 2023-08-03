@@ -5,11 +5,8 @@
 
 namespace ui {
 	class Sizing2 : public ISizing2 {
-	protected:
-		void copy(Sizing2* sizing2);
-	
 	public:
-		Sizing2(ISizing* horizontal, ISizing* vertical);
+		Sizing2(BoxPtr<ISizing>&& horizontal, BoxPtr<ISizing>&& vertical);
 		
 		Sizing2(bool relativeParent);
 		
@@ -18,8 +15,6 @@ namespace ui {
 		Sizing2(sf::Vector2f coefficient, sf::Vector2f addition, bool relativeTarget = false);
 		
 		Sizing2(sf::Vector2f targetCoefficient, sf::Vector2f parentCoefficient, sf::Vector2f addition);
-		
-		~Sizing2() override;
 		
 		void init(sf::RenderTarget& renderTarget, sf::Vector2f normalSize) override;
 		
@@ -30,8 +25,8 @@ namespace ui {
 		Sizing2* copy() override;
 	
 	protected:
-		ISizing* horizontal;
-		ISizing* vertical;
+		BoxPtr<ISizing> horizontal;
+		BoxPtr<ISizing> vertical;
 		sf::RenderTarget* renderTarget;
 	};
 	

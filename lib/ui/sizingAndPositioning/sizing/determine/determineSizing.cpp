@@ -23,8 +23,10 @@ namespace ui {
 				type = "ParentCoefficientSizing";
 				return true;
 			}
-			if(determine(node, {{"target-coefficient"},
-								{"parent-coefficient"}}, {{"addition"}})) {
+			if(determine(node, {
+				{"target-coefficient"},
+				{"parent-coefficient"}
+			}, {{"addition"}})) {
 				type = "SmartSizing";
 				return true;
 			}

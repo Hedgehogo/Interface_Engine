@@ -12,7 +12,7 @@ namespace ui {
 	}
 	
 	ParentCoefficientSizing* ParentCoefficientSizing::copy() {
-		return new ParentCoefficientSizing{coefficient, addition};
+		return new ParentCoefficientSizing{*this};
 	}
 	
 	float ParentCoefficientSizing::getParentSize(float objectSize) {
@@ -20,16 +20,10 @@ namespace ui {
 	}
 	
 	bool DecodePointer<ParentCoefficientSizing>::decodePointer(const YAML::Node& node, ParentCoefficientSizing*& parentCoefficientSizing) {
-		float coefficient;
-		float addition{0.f};
-		
-		node["coefficient"] >> coefficient;
-		if(node["addition"])
-			node["addition"] >> addition;
-		
-		{
-			parentCoefficientSizing = new ParentCoefficientSizing{coefficient, addition};
-			return true;
-		}
+		parentCoefficientSizing = new ParentCoefficientSizing{
+			node["coefficient"].as<float>(),
+			convDef(node["addition"], 0.f)
+		};
+		return true;
 	}
 }

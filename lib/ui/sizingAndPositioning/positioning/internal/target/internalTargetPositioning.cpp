@@ -9,7 +9,7 @@ namespace ui {
 	}
 	
 	InternalTargetPositioning* InternalTargetPositioning::copy() {
-		return new InternalTargetPositioning{coefficient, offset};
+		return new InternalTargetPositioning{*this};
 	}
 	
 	float InternalTargetPositioning::getCoefficient() const {
@@ -21,16 +21,10 @@ namespace ui {
 	}
 	
 	bool DecodePointer<InternalTargetPositioning>::decodePointer(const YAML::Node& node, InternalTargetPositioning*& internalTargetPositioning) {
-		float coefficient;
-		float offset{0.f};
-		
-		node["coefficient"] >> coefficient;
-		if(node["offset"])
-			node["offset"] >> offset;
-		
-		{
-			internalTargetPositioning = new InternalTargetPositioning{coefficient, offset};
-			return true;
-		}
+		internalTargetPositioning = new InternalTargetPositioning{
+			node["coefficient"].as<float>(),
+			convDef(node["offset"], 0.f)
+		};
+		return true;
 	}
 }

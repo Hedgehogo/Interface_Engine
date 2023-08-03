@@ -8,15 +8,13 @@ namespace ui {
 		void copy(Positioning2* positioning2);
 	
 	public:
-		Positioning2(IPositioning* horizontal, IPositioning* vertical);
+		Positioning2(BoxPtr<IPositioning>&& horizontal, BoxPtr<IPositioning>&& vertical);
 		
 		Positioning2(sf::Vector2f coefficient, sf::Vector2f offset = {}, bool relativeTarget = false);
 		
 		Positioning2(Location2 parentLocation, Location2 objectLocation, sf::Vector2f offset = {});
 		
 		Positioning2(sf::Vector2f coefficient, sf::Vector2f objectCoefficient, sf::Vector2f offset, bool relativeTarget = false);
-		
-		~Positioning2() override;
 		
 		void init(sf::RenderTarget& renderTarget) override;
 		
@@ -25,8 +23,8 @@ namespace ui {
 		Positioning2* copy() override;
 	
 	protected:
-		IPositioning* horizontal;
-		IPositioning* vertical;
+		BoxPtr<IPositioning> horizontal;
+		BoxPtr<IPositioning> vertical;
 		sf::RenderTarget* renderTarget;
 	};
 	

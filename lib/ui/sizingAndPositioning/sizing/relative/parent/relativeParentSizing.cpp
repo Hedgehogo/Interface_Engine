@@ -20,16 +20,11 @@ namespace ui {
 	}
 	
 	RelativeParentSizing* RelativeParentSizing::copy() {
-		return new RelativeParentSizing{addition};
+		return new RelativeParentSizing{*this};
 	}
 	
-	
 	bool DecodePointer<RelativeParentSizing>::decodePointer(const YAML::Node& node, RelativeParentSizing*& relativeParentSizing) {
-		float addition;
-		node["addition"] >> addition;
-		{
-			relativeParentSizing = new RelativeParentSizing{addition};
-			return true;
-		}
+		relativeParentSizing = new RelativeParentSizing{node["addition"].as<float>()};
+		return true;
 	}
 }

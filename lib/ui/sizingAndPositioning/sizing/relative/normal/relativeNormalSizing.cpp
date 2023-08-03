@@ -12,20 +12,12 @@ namespace ui {
 		return this->normalSize;
 	}
 	
-	void RelativeNormalSizing::copy(RelativeNormalSizing* relativeNormalSizing) {
-		relativeNormalSizing->normalSize = this->normalSize;
-	}
-	
 	RelativeNormalSizing* RelativeNormalSizing::copy() {
-		RelativeNormalSizing* normalSizeSizing{new RelativeNormalSizing{}};
-		RelativeNormalSizing::copy(normalSizeSizing);
-		return normalSizeSizing;
+		return new RelativeNormalSizing{*this};
 	}
 	
 	bool DecodePointer<RelativeNormalSizing>::decodePointer(const YAML::Node&, RelativeNormalSizing*& relativeNormalSizing) {
-		{
-			relativeNormalSizing = new RelativeNormalSizing{};
-			return true;
-		}
+		relativeNormalSizing = new RelativeNormalSizing{};
+		return true;
 	}
 }

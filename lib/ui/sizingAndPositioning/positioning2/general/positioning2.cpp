@@ -2,8 +2,8 @@
 #include "../../positioning/make/makePositioning.hpp"
 
 namespace ui {
-	Positioning2::Positioning2(IPositioning* horizontal, IPositioning* vertical) :
-		horizontal(horizontal), vertical(vertical), renderTarget(nullptr) {
+	Positioning2::Positioning2(BoxPtr<IPositioning>&& horizontal, BoxPtr<IPositioning>&& vertical) :
+		horizontal(std::move(horizontal)), vertical(std::move(vertical)), renderTarget(nullptr) {
 	}
 	
 	Positioning2::Positioning2(sf::Vector2f coefficient, sf::Vector2f offset, bool relativeTarget) :
@@ -24,11 +24,6 @@ namespace ui {
 		renderTarget(nullptr) {
 	}
 	
-	Positioning2::~Positioning2() {
-		delete horizontal;
-		delete vertical;
-	}
-	
 	void Positioning2::init(sf::RenderTarget& renderTarget) {
 		this->renderTarget = &renderTarget;
 	}
@@ -44,9 +39,7 @@ namespace ui {
 	}
 	
 	Positioning2* Positioning2::copy() {
-		Positioning2* positioning2{new Positioning2{horizontal->copy(), vertical->copy()}};
-		Positioning2::copy(positioning2);
-		return positioning2;
+		return new Positioning2{*this};
 	}
 	
 	bool DecodePointer<Positioning2>::decodePointer(const YAML::Node& node, Positioning2*& positioning2) {
@@ -55,8 +48,8 @@ namespace ui {
 		} else {
 			if(node["horizontal"] && node["vertical"]) {
 				positioning2 = new Positioning2{
-					node["horizontal"].as<IPositioning*>(),
-					node["vertical"].as<IPositioning*>()
+					node["horizontal"].as<BoxPtr<IPositioning> >(),
+					node["vertical"].as<BoxPtr<IPositioning> >()
 				};
 			} else {
 				auto offset{convDef(node["offset"], sf::Vector2f{})};

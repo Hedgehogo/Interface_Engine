@@ -12,7 +12,7 @@ namespace ui {
 	}
 	
 	ConstSizing* ConstSizing::copy() {
-		return new ConstSizing(size);
+		return new ConstSizing{*this};
 	}
 	
 	bool DecodePointer<ConstSizing>::decodePointer(const YAML::Node& node, ConstSizing*& constSizing) {

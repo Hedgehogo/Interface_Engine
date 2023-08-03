@@ -2,8 +2,8 @@
 #include "../../sizing/make/makeSize.hpp"
 
 namespace ui {
-	Sizing2::Sizing2(ISizing* horizontal, ISizing* vertical) :
-		horizontal(horizontal), vertical(vertical), renderTarget(nullptr) {
+	Sizing2::Sizing2(BoxPtr<ISizing>&& horizontal, BoxPtr<ISizing>&& vertical) :
+		horizontal(std::move(horizontal)), vertical(std::move(vertical)), renderTarget(nullptr) {
 	}
 	
 	Sizing2::Sizing2(bool relativeParent) :
@@ -26,11 +26,6 @@ namespace ui {
 		renderTarget(nullptr) {
 	}
 	
-	Sizing2::~Sizing2() {
-		delete horizontal;
-		delete vertical;
-	}
-	
 	void Sizing2::init(sf::RenderTarget& renderTarget, sf::Vector2f normalSize) {
 		this->renderTarget = &renderTarget;
 		horizontal->init(normalSize.x);
@@ -46,14 +41,8 @@ namespace ui {
 		return {horizontal->getParentSize(objectSize.x), vertical->getParentSize(objectSize.y)};
 	}
 	
-	void Sizing2::copy(Sizing2* sizing2) {
-		sizing2->renderTarget = this->renderTarget;
-	}
-	
 	Sizing2* Sizing2::copy() {
-		Sizing2* sizing2{new Sizing2{horizontal->copy(), vertical->copy()}};
-		Sizing2::copy(sizing2);
-		return sizing2;
+		return new Sizing2{*this};
 	}
 	
 	bool DecodePointer<Sizing2>::decodePointer(const YAML::Node& node, Sizing2*& sizing2) {
@@ -62,8 +51,8 @@ namespace ui {
 		} else {
 			if(node["horizontal"] && node["vertical"]) {
 				sizing2 = new Sizing2{
-					node["horizontal"].as<ISizing*>(),
-					node["vertical"].as<ISizing*>()
+					node["horizontal"].as<BoxPtr<ISizing> >(),
+					node["vertical"].as<BoxPtr<ISizing> >()
 				};
 			} else if(node["relative"]) {
 				sizing2 = new Sizing2{

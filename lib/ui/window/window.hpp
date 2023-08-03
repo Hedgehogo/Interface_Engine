@@ -29,7 +29,7 @@ namespace ui {
 		
 		Window(const std::filesystem::path& interface, sf::WindowHandle handle, const sf::ContextSettings& settings = sf::ContextSettings());
 		
-		void create(sf::VideoMode mode, const sf::String& title, sf::Uint32, const sf::ContextSettings& settings) override;
+		void create(sf::VideoMode mode, const sf::String& title, sf::Uint32, const sf::ContextSettings& settings);
 		
 		virtual void create(sf::VideoMode mode, const sf::String& title, const sf::ContextSettings& settings = sf::ContextSettings());
 		

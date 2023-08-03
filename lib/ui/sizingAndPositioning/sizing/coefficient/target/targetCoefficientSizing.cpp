@@ -12,20 +12,14 @@ namespace ui {
 	}
 	
 	TargetCoefficientSizing* TargetCoefficientSizing::copy() {
-		return new TargetCoefficientSizing{coefficient, addition};
+		return new TargetCoefficientSizing{*this};
 	}
 	
 	bool DecodePointer<TargetCoefficientSizing>::decodePointer(const YAML::Node& node, TargetCoefficientSizing*& targetCoefficientSizing) {
-		float coefficient;
-		float addition{0.f};
-		
-		node["coefficient"] >> coefficient;
-		if(node["addition"])
-			node["addition"] >> addition;
-		
-		{
-			targetCoefficientSizing = new TargetCoefficientSizing{coefficient, addition};
-			return true;
-		}
+		targetCoefficientSizing = new TargetCoefficientSizing{
+			node["coefficient"].as<float>(),
+			convDef(node["addition"], 0.f)
+		};
+		return true;
 	}
 }

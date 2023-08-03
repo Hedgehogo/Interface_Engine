@@ -9,22 +9,15 @@ namespace ui {
 	}
 	
 	MatchPositioning* MatchPositioning::copy() {
-		return new MatchPositioning{parentCoefficient, objectCoefficient, offset};
+		return new MatchPositioning{*this};
 	}
 	
 	bool DecodePointer<MatchPositioning>::decodePointer(const YAML::Node& node, MatchPositioning*& matchPositioning) {
-		float parentCoefficient;
-		float objectCoefficient;
-		float offset{0.f};
-		
-		node["parent-coefficient"] >> parentCoefficient;
-		node["object-coefficient"] >> objectCoefficient;
-		if(node["offset"])
-			node["offset"] >> offset;
-		
-		{
-			matchPositioning = new MatchPositioning{parentCoefficient, objectCoefficient, offset};
-			return true;
-		}
+		matchPositioning = new MatchPositioning{
+			node["parent-coefficient"].as<float>(),
+			node["object-coefficient"].as<float>(),
+			convDef(node["offset"], 0.f)
+		};
+		return true;
 	}
 }

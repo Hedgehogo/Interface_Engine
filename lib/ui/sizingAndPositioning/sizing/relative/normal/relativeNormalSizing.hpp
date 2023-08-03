@@ -4,9 +4,6 @@
 
 namespace ui {
 	class RelativeNormalSizing : public ISizing {
-	protected:
-		void copy(RelativeNormalSizing* relativeNormalSizing);
-	
 	public:
 		RelativeNormalSizing();
 		

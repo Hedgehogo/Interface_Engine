@@ -2,7 +2,7 @@
 #include "../../sizing/make/makeSize.hpp"
 
 namespace ui {
-	ConstRatioSizing2::ConstRatioSizing2(ISizing* sizing, float ratio, bool horizontal) : sizing(sizing), ratio(ratio), horizontal(horizontal) {
+	ConstRatioSizing2::ConstRatioSizing2(BoxPtr<ISizing>&& sizing, float ratio, bool horizontal) : sizing(std::move(sizing)), ratio(ratio), horizontal(horizontal) {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float ratio, bool horizontal, bool relativeParent) : sizing(makeSize(relativeParent)), ratio(ratio), horizontal(horizontal) {
@@ -18,10 +18,6 @@ namespace ui {
 	
 	ConstRatioSizing2::ConstRatioSizing2(float targetCoefficient, float parentCoefficient, float addition, float ratio, bool horizontal) :
 		sizing(new SmartSizing{targetCoefficient, parentCoefficient, addition}), ratio(ratio), horizontal(horizontal) {
-	}
-	
-	ConstRatioSizing2::~ConstRatioSizing2() {
-		delete sizing;
 	}
 	
 	void ConstRatioSizing2::init(sf::RenderTarget& renderTarget, sf::Vector2f normalSize) {
@@ -40,14 +36,8 @@ namespace ui {
 		return (horizontal ? sf::Vector2f{size, size / ratio} : sf::Vector2f{size * ratio, size});
 	}
 	
-	void ConstRatioSizing2::copy(ConstRatioSizing2* constRatioSizing2) {
-		constRatioSizing2->renderTarget = this->renderTarget;
-	}
-	
 	ConstRatioSizing2* ConstRatioSizing2::copy() {
-		ConstRatioSizing2* constRatioSizing2{new ConstRatioSizing2{sizing->copy(), ratio, horizontal}};
-		ConstRatioSizing2::copy(constRatioSizing2);
-		return constRatioSizing2;
+		return new ConstRatioSizing2{*this};
 	}
 	
 	bool DecodePointer<ConstRatioSizing2>::decodePointer(const YAML::Node& node, ConstRatioSizing2*& constRatioSizing2) {
@@ -56,7 +46,7 @@ namespace ui {
 		
 		if(node["sizing"]) {
 			constRatioSizing2 = new ConstRatioSizing2{
-				node["sizing"].as<ISizing*>(),
+				node["sizing"].as<BoxPtr<ISizing> >(),
 				ratio,
 				horizontal
 			};

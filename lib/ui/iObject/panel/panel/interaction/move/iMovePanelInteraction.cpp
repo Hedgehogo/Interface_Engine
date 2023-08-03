@@ -14,6 +14,6 @@ namespace ui {
 			move(mousePosition);
 	}
 	
-	void IMovePanelInteraction::finish(sf::Vector2i mousePosition) {
+	void IMovePanelInteraction::finish(sf::Vector2i) {
 	}
 }

@@ -2,7 +2,7 @@
 #include "ui/iObject/iObject.hpp"
 
 namespace ui {
-	TextSelectionAndCopyInteraction::TextSelectionAndCopyInteraction(std::vector<AddInteraction> addInteraction, std::vector<BoxPtr<TextKeysInteraction>> && selectionInteraction):
+	TextSelectionAndCopyInteraction::TextSelectionAndCopyInteraction(std::vector<AddInteraction> addInteraction, std::vector<BoxPtr<TextKeysInteraction>>&& selectionInteraction) :
 		TextHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >{{}}) {
 		this->hotkeyStates[0].resize(addInteraction.size() + selectionInteraction.size());
 		
@@ -10,7 +10,7 @@ namespace ui {
 		this->pressedInteractions.resize(addInteraction.size());
 		
 		for(size_t i = 0; i < addInteraction.size(); ++i) {
-			this->pressedInteractions[i] = BoxPtr<TextInteraction>{addInteraction[i].pressedInteraction};
+			this->pressedInteractions[i] = BoxPtr < TextInteraction > {addInteraction[i].pressedInteraction};
 			this->addEvents[i] = new TextAddBlockInteractionEvent{*addInteraction[i].pressedInteraction};
 			
 			this->hotkeyStates[0][i] = makeBoxPtr<Hotkey>(
@@ -24,7 +24,7 @@ namespace ui {
 		
 		for(size_t i = addInteraction.size(); i < addInteraction.size() + selectionInteraction.size(); ++i) {
 			this->hotkeyStates[0][i] = makeBoxPtr<Hotkey>(
-				std::move(selectionInteraction[i])
+				dynamicCast<ui::KeysInteraction>(std::move(selectionInteraction[i]))
 			);
 		}
 	}
