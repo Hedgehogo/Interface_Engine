@@ -24,22 +24,24 @@ namespace ui {
 	}
 	
 	Window::Window(const Interface& interface, const sf::String& title, const sf::VideoMode& mode, const sf::ContextSettings& settings) :
-		RenderWindow((mode == sf::VideoMode{} ?
-					  [&] {
-						  auto newWindowSize{interface.getNormalSize()};
-						  setSize({static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))});
-						  return sf::VideoMode{static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))};
-					  }() :
-					  mode), title, sf::Style::None, settings), resizer(getWindowResizer()), interface(interface) {
+		RenderWindow(
+			(mode == sf::VideoMode{} ? [&] {
+				auto newWindowSize{interface.getNormalSize()};
+				setSize({static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))});
+				return sf::VideoMode{static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))};
+			}() : mode), title, sf::Style::None, settings
+		), resizer(getWindowResizer()), interface(interface) {
 		construction();
 	}
 	
 	Window::Window(const Interface& interface, const sf::String& title, const sf::ContextSettings& settings) :
-		RenderWindow([&] {
-			auto newWindowSize{interface.getNormalSize()};
-			setSize({static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))});
-			return sf::VideoMode{static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))};
-		}(), title, sf::Style::None, settings), resizer(getWindowResizer()), interface(interface) {
+		RenderWindow(
+			[&] {
+				auto newWindowSize{interface.getNormalSize()};
+				setSize({static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))});
+				return sf::VideoMode{static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))};
+			}(), title, sf::Style::None, settings
+		), resizer(getWindowResizer()), interface(interface) {
 		construction();
 	}
 	
@@ -48,7 +50,7 @@ namespace ui {
 		this->interface.setRenderWindowSize(*this);
 	}
 	
-	Window::Window(const std::filesystem::path& interface) : resizer(getWindowResizer()), interface(makeInterface(interface)){
+	Window::Window(const std::filesystem::path& interface) : resizer(getWindowResizer()), interface(makeInterface(interface)) {
 		construction();
 		this->interface.setRenderWindowSize(*this);
 	}
@@ -88,7 +90,7 @@ namespace ui {
 		KeyHandler::updateMouse();
 		sf::Vector2i mousePosition{sf::Mouse::getPosition(*this)};
 		
-		bool resizerUpdated =  resizer->update(mousePosition);
+		bool resizerUpdated = resizer->update(mousePosition);
 		
 		clear();
 		interface.update(sf::Vector2f{(mousePosition)}, !resizerUpdated && hasFocus());
@@ -113,9 +115,5 @@ namespace ui {
 		sf::View view{sf::Vector2f{size / 2u}, sf::Vector2f{size}};
 		setView(view);
 		interface.setSize(sf::Vector2f{size});
-	}
-	
-	Window::~Window() {
-		delete resizer;
 	}
 }

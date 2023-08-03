@@ -42,11 +42,9 @@ namespace ui {
 		Interface& getInterface();
 		
 		const sf::Vector2f& getMinSize();
-		
-		~Window() override;
 	
 	protected:
-		IWindowResizer* resizer;
+		BoxPtr<IWindowResizer> resizer;
 		Interface interface;
 		sf::Vector2f minSize;
 	};
