@@ -24,7 +24,7 @@ namespace ui {
 		
 		Empty* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget&, int, int, uint, uint) override;
 		
 	protected:
 		LayoutData layout;
@@ -32,6 +32,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<Empty> {
-		static bool decodePointer(const YAML::Node& node, Empty*& empty);
+		static bool decodePointer(const YAML::Node&, Empty*& empty);
 	};
 }

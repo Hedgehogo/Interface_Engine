@@ -11,7 +11,7 @@ namespace ui {
 		
 		void restart() override;
 		
-		std::vector<IAnimatorUnit*> update(float time) override;
+		std::vector<IAnimatorUnit*> update(float) override;
 		
 		void addNextTrue(IAnimatorUnit* unit);
 		

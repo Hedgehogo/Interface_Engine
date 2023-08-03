@@ -3,14 +3,14 @@
 
 namespace ui {
 	ObjectTextBlock::ObjectTextBlock(IScalable* object, sf::Vector2f size, bool isCharacter) :
-		BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), object(object), isCharacter(isCharacter), fullLine(false) {
+		BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), isCharacter(isCharacter), fullLine(false), object(object) {
 	}
 	
 	ObjectTextBlock::ObjectTextBlock(IScalable* object, float height) :
-		size(0, height), fullLine(true), isCharacter(false), object(object), objectCharacter(new ObjectCharacter{object, true}) {
+		size(0, height), objectCharacter(new ObjectCharacter{object, true}), isCharacter(false), fullLine(true), object(object) {
 	}
 	
-	void ObjectTextBlock::init(InitInfo textInitInfo, InitInfo initInfo) {
+	void ObjectTextBlock::init(InitInfo, InitInfo initInfo) {
 		object->init(initInfo);
 		sf::Vector2f minSize{object->getMinSize()};
 		object->setSize({std::max(size.x, minSize.x), std::max(size.y, minSize.y)});

@@ -2,7 +2,7 @@
 
 namespace ui {
 	template<typename FromType, typename ToType>
-	SConvertValue<FromType, ToType>::SConvertValue(PISValue<FromType> fromValue, ToType defaultValue) : SValue<ToType>(defaultValue) {
+	SConvertValue<FromType, ToType>::SConvertValue(PISValue<FromType> fromValue, ToType defaultValue) : SValue<ToType>(defaultValue), fromValue(fromValue) {
 		fromValue->addSetter([this](const FromType& value) {
 			setValue(convert(value));
 		});

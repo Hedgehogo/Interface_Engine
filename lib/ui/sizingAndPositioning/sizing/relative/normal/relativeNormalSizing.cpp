@@ -22,7 +22,7 @@ namespace ui {
 		return normalSizeSizing;
 	}
 	
-	bool DecodePointer<RelativeNormalSizing>::decodePointer(const YAML::Node& node, RelativeNormalSizing*& relativeNormalSizing) {
+	bool DecodePointer<RelativeNormalSizing>::decodePointer(const YAML::Node&, RelativeNormalSizing*& relativeNormalSizing) {
 		{
 			relativeNormalSizing = new RelativeNormalSizing{};
 			return true;

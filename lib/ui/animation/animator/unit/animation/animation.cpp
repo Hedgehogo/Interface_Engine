@@ -18,7 +18,7 @@ namespace ui {
 	}
 	
 	Animation::Animation(std::vector<Variable> animationVariables, PSfloat speed, std::vector<IAnimatorUnit*> nextUnits) :
-		animationVariables(std::move(animationVariables)), nextUnits(nextUnits), nextUnitsBuff(nextUnits), speed(std::move(speed)) {
+		nextUnits(nextUnits), nextUnitsBuff(nextUnits), animationVariables(std::move(animationVariables)), speed(std::move(speed)) {
 		for(auto& unit: this->nextUnits) {
 			if(!unit)
 				unit = this;
@@ -40,7 +40,7 @@ namespace ui {
 	void Animation::restart() {
 		animationUpdatableVariables.resize(animationVariables.size());
 		
-		for(int i = 0; i < animationUpdatableVariables.size(); ++i) {
+		for(std::size_t i = 0; i < animationUpdatableVariables.size(); ++i) {
 			animationUpdatableVariables[i] = &animationVariables[i];
 		}
 		

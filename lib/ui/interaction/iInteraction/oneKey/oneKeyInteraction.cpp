@@ -27,7 +27,7 @@ namespace ui {
 		event->update(mousePosition, KeyHandler::isKeyPressed(key));
 	}
 	
-	void OneKeyInteraction::finish(sf::Vector2i mousePosition) {
+	void OneKeyInteraction::finish(sf::Vector2i) {
 		event->setPressed(false);
 	}
 	

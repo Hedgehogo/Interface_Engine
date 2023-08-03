@@ -9,7 +9,7 @@ namespace ui {
 	Text::Text(
 		std::vector<BaseTextBlock*> textBlocks, IUninteractive* background, int size, sf::Font* font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
 		sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer* resizer, TextInteraction* textInteraction
-	) : background(background), size(size), textBocks(textBlocks), resizer(resizer), textInteraction(textInteraction) {
+	) : textInteraction(textInteraction), size(size), textBocks(textBlocks), resizer(resizer), background(background) {
 		for(BaseTextBlock* textBlock: textBlocks) {
 			textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, (inactiveTextSelectionColor == nullColor ? textColor : inactiveTextSelectionColor), inactiveBackgroundSelectionColor, font,
 										size);
@@ -85,7 +85,7 @@ namespace ui {
 			}
 			SelectionText.resize(std::distance(localStart, localEnd));
 			
-			for(int i = 0; i < SelectionText.length(); ++i) {
+			for(std::size_t i = 0; i < SelectionText.length(); ++i) {
 				SelectionText[i] = (*(localStart + i))->getChar();
 			}
 			
@@ -252,7 +252,7 @@ namespace ui {
 	}
 	
 	Text::Text(std::vector<BaseTextBlock*> textBlocks, IUninteractive* background, uint size, BaseResizer* resizer, sf::RenderTarget* renderTarget, TextInteraction* textInteraction) :
-		textBocks(textBlocks), background(background), size(size), resizer(resizer), renderTarget(renderTarget), textInteraction(textInteraction) {
+		renderTarget(renderTarget), textInteraction(textInteraction), size(size), textBocks(textBlocks), resizer(resizer), background(background) {
 		for(BaseTextBlock* textBlock: textBlocks) {
 			std::vector<BaseCharacter*> characters = textBlock->getCharacters();
 			textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
@@ -281,18 +281,7 @@ namespace ui {
 			convDef(node["inactive-text-selection-color"], nullColor),
 			convDef(node["inactive-background-selection-color"], sf::Color{150, 150, 150}),
 			convDefPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::left),
-			node["text-interaction"] ? node["text-interaction"].as<TextInteraction*>() :
-			new TextSelectionAndCopyInteraction{
-				{
-					{
-						new TextPressedInteraction{
-							new TextSelectionEvent{},
-							{Key::mouseLeft}
-						},
-						{Key::mouseLeft}
-					}
-				},
-			}
+			node["text-interaction"] ? node["text-interaction"].as<TextInteraction*>() : new TextEmptyInteraction{}
 		};
 		return true;
 	}

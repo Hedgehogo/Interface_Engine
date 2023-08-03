@@ -3,7 +3,7 @@
 
 namespace ui {
 	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BaseLine*>& lines) :
-		character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), lines(lines), selectionVertexArray(sf::Quads, 4) {
+		character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), selectionVertexArray(sf::Quads, 4), lines(lines) {
 		if(isSpecial() != BaseCharacter::Special::enter) {
 			glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style & sf::Text::Style::Bold);
 			
@@ -148,7 +148,7 @@ namespace ui {
 		Character::debug = debug;
 	}
 	
-	void Character::drawDebug(sf::RenderTarget& renderTarget, int indentAddition, uint hue, uint hueOffset) {
+	void Character::drawDebug(sf::RenderTarget& renderTarget, int, uint hue, uint) {
 		if(debug) {
 			sf::Vector2f size{getAdvance() - 2.0f, getHeight() - 2.0f};
 			sf::Vector2f position{this->getPosition() + sf::Vector2f{1.0f, 1.0f - getHeight()}};

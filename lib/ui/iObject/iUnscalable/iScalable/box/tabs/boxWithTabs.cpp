@@ -4,11 +4,11 @@
 
 namespace ui {
 	BoxWithTabs::BoxWithTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, const sf::Vector2f& minSize) :
-		Box(minSize), objects(std::move(objects)), value(std::move(value)), drawManagers(this->objects.size()) {
+		Box(minSize), objects(std::move(objects)), drawManagers(this->objects.size()), value(std::move(value)) {
 	}
 	
 	BoxWithTabs::BoxWithTabs(const BoxWithTabs& other) :
-		Box(other), objects(other.objects), value(other.value), drawManagers(objects.size()) {
+		Box(other), objects(other.objects), drawManagers(objects.size()), value(other.value) {
 	}
 	
 	void BoxWithTabs::init(InitInfo initInfo) {

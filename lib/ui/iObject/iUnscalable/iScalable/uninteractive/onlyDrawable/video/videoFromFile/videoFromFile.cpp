@@ -2,7 +2,7 @@
 
 namespace ui {
 	VideoFromFile::VideoFromFile(std::vector<sf::Texture> video, PSCoefficient viewingProgress) :
-		bufferTexture(video), viewingProgress(viewingProgress), sizeVideo(video[0].getSize()) {
+		sizeVideo(video[0].getSize()), bufferTexture(video), viewingProgress(viewingProgress) {
 		viewingProgress->addSetter([=](float viewingProgress) {
 			setCurrentFrame(viewingProgress);
 		});

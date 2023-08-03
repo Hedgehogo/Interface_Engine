@@ -28,8 +28,8 @@ namespace ui {
 	
 	protected:
 		void (* startPressedLambda)(sf::Vector2i mousePosition);
-		void (* stopPressedLambda)(sf::Vector2i mousePosition);
 		void (* whilePressedLambda)(sf::Vector2i mousePosition);
+		void (* stopPressedLambda)(sf::Vector2i mousePosition);
 		void (* whileNotPressedLambda)(sf::Vector2i mousePosition);
 	};
 }

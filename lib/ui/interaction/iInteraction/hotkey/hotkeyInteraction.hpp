@@ -8,27 +8,25 @@ namespace ui {
 	class HotkeyInteraction : public virtual IInteraction {
 	public:
 		struct Hotkey {
+			BoxPtr<KeysInteraction> interaction{nullptr};
 			uint state{std::numeric_limits<uint32_t>::max()};
-			KeysInteraction* interaction{nullptr};
 			
-			Hotkey(KeysInteraction* interaction, uint state = std::numeric_limits<uint32_t>::max());
+			Hotkey(BoxPtr<KeysInteraction> && interaction, uint state = std::numeric_limits<uint32_t>::max());
 			
 			Hotkey(uint state);
-			
-			~Hotkey();
 		};
 	
-		HotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint state = 0);
+		HotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey>>> && hotkeys, uint state = 0);
 		
-		HotkeyInteraction(std::string str);
+		HotkeyInteraction(std::string);
 		
 		void init(InteractionInitInfo interactionInitInfo) override;
 		
 		void setHotkeyEvent(uint state, Hotkey* hotkeyEvent);
 		
-		std::vector<Hotkey*> getHotkeys(int state);
+		std::vector<BoxPtr<HotkeyInteraction::Hotkey>> getHotkeys(int state);
 		
-		Hotkey* getHotkey(int state, int i);
+		BoxPtr<HotkeyInteraction::Hotkey> getHotkey(int state, int i);
 		
 		void start(sf::Vector2i mousePosition) override;
 		
@@ -37,12 +35,10 @@ namespace ui {
 		void finish(sf::Vector2i mousePosition) override;
 		
 		HotkeyInteraction* copy() override;
-		
-		~HotkeyInteraction() override;
 	
 	protected:
-		std::vector<std::vector<Hotkey*>> hotkeyStates;
-		std::vector<Hotkey*>* nowHotkeys;
+		std::vector<std::vector<BoxPtr<Hotkey>>> hotkeyStates;
+		std::vector<BoxPtr<Hotkey>>* nowHotkeys;
 	};
 	
 	template<>

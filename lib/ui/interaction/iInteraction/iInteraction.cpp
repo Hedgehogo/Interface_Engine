@@ -1,7 +1,7 @@
 #include "iInteraction.hpp"
 
 namespace ui {
-	void IInteraction::init(InteractionInitInfo interactionInitInfo) {
+	void IInteraction::init(InteractionInitInfo) {
 	}
 	
 	bool IInteraction::isBlocked() const {

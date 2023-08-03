@@ -21,6 +21,8 @@ namespace ui {
 			virtual bool isExists();
 			
 			explicit operator bool();
+			
+			virtual ~IYamlBuilder() = default;
 		
 		public:
 			static TypeNameDeformer typeNameDeform;

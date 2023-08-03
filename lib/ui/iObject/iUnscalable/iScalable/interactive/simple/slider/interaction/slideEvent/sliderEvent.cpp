@@ -4,7 +4,7 @@
 
 namespace ui {
 	SliderEvent::SliderEvent(BaseSlider& slider, sf::Vector2i division) :
-		slider(&slider), division(division), startMousePosition(), startValue() {
+		slider(&slider), startMousePosition(), startValue(), division(division) {
 	}
 	
 	sf::Vector2f SliderEvent::getMousePosition() {

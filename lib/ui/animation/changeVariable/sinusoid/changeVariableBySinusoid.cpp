@@ -1,7 +1,7 @@
 #include "changeVariableBySinusoid.hpp"
 
 namespace ui {
-	ChangeVariableBySinusoid::ChangeVariableBySinusoid(float size, float a, float b, float c, float d) : size(size), a(a), b(b), c(c), d(d) {
+	ChangeVariableBySinusoid::ChangeVariableBySinusoid(float size, float a, float b, float c, float d) : a(a), b(b), c(c), d(d), size(size) {
 	}
 	
 	float ChangeVariableBySinusoid::getSize() {

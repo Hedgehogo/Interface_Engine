@@ -4,7 +4,7 @@
 namespace ui::detail {
 	std::vector<FuncYamlBuilder> FuncYamlBuilder::builders = {};
 	
-	FuncYamlBuilder::FuncYamlBuilder(FuncYamlBuilder::VoidBuildFunc function, std::vector<std::string> names) : function(std::move(function)), names(std::move(names)) {
+	FuncYamlBuilder::FuncYamlBuilder(FuncYamlBuilder::VoidBuildFunc function, std::vector<std::string> names) : names(std::move(names)), function(std::move(function)) {
 	}
 	
 	bool FuncYamlBuilder::build(const YAML::Node& node, void*& object) const {
@@ -19,7 +19,7 @@ namespace ui::detail {
 		}
 	}
 	
-	bool FuncYamlBuilder::determine(const YAML::Node& node, std::string& type) {
+	bool FuncYamlBuilder::determine(const YAML::Node&, std::string&) {
 		return false;
 	}
 }

@@ -29,7 +29,7 @@ namespace ui {
 		
 		void restart() override;
 		
-		std::vector<IAnimatorUnit*> update(float time) override;
+		std::vector<IAnimatorUnit*> update(float) override;
 		
 		AnimatorUnitMatch<T>* copy() override;
 	

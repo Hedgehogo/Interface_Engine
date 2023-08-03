@@ -22,6 +22,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<RelativeNormalSizing> {
-		static bool decodePointer(const YAML::Node& node, RelativeNormalSizing*& relativeNormalSizing);
+		static bool decodePointer(const YAML::Node&, RelativeNormalSizing*& relativeNormalSizing);
 	};
 }

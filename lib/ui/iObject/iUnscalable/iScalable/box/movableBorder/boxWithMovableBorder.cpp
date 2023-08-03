@@ -12,14 +12,14 @@ namespace ui {
 		sf::Vector2f minSize
 	) :
 		Box(minSize),
+		Interactive_Simple(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>(new AddBlockInteractionEvent{pressedInteraction}), Key::mouseLeft)),
 		firstObject(std::move(firstObject)),
 		secondObject(std::move(secondObject)),
 		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, Key::mouseLeft),
-		Interactive_Simple(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>(new AddBlockInteractionEvent{pressedInteraction}), Key::mouseLeft)),
-		isHorizontalBorder(isHorizontalBorder),
-		borderValue(borderValue),
 		borderValueNow(borderValue->getValue()),
-		borderInteractionSize(borderInteractionSize) {
+		borderValue(borderValue),
+		borderInteractionSize(borderInteractionSize),
+		isHorizontalBorder(isHorizontalBorder) {
 		borderValue->addSetter([&](float value) {
 			this->resize(layout.size, layout.position);
 		});

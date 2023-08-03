@@ -21,7 +21,8 @@ namespace ui {
 		return new TextCopyEvent{};
 	}
 	
-	bool DecodePointer<TextCopyEvent>::decodePointer(const YAML::Node& node, TextCopyEvent*& textCopyEvent) {
-		return new TextCopyEvent;
+	bool DecodePointer<TextCopyEvent>::decodePointer(const YAML::Node&, TextCopyEvent*& textCopyEvent) {
+		textCopyEvent = new TextCopyEvent;
+		return true;
 	}
 }

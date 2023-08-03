@@ -4,7 +4,7 @@ namespace ui {
 	InternalTargetPositioning::InternalTargetPositioning(float coefficient, float offset) : coefficient(coefficient), offset(offset) {
 	}
 	
-	float InternalTargetPositioning::findPosition(float parentPosition, float objectSize, float, float targetSize) {
+	float InternalTargetPositioning::findPosition(float, float objectSize, float, float targetSize) {
 		return (targetSize - objectSize) * coefficient + offset;
 	}
 	

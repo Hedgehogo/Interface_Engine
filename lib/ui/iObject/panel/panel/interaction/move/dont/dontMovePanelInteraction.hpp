@@ -10,21 +10,21 @@ namespace ui {
 		
 		bool getAtStart() override;
 		
-		void move(sf::Vector2i mousePosition) override;
+		void move(sf::Vector2i) override;
 		
-		void start(sf::Vector2i mousePosition) override;
+		void start(sf::Vector2i) override;
 		
-		void update(sf::Vector2i mousePosition) override;
+		void update(sf::Vector2i) override;
 		
-		void init(PanelInteractionInitInfo panelInteractionInitInfo) override;
+		void init(PanelInteractionInitInfo) override;
 		
-		void setPanel(Panel& panel) override;
+		void setPanel(Panel&) override;
 		
 		DontMovePanelInteraction* copy() override;
 	};
 	
 	template<>
 	struct DecodePointer<DontMovePanelInteraction> {
-		static bool decodePointer(const YAML::Node& node, DontMovePanelInteraction*& dontMovePanelInteraction);
+		static bool decodePointer(const YAML::Node&, DontMovePanelInteraction*& dontMovePanelInteraction);
 	};
 }

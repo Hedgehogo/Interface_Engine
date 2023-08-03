@@ -22,5 +22,7 @@ namespace ui {
 		void update() override = 0;
 		
 		virtual bool updateInteractions(sf::Vector2f mousePosition, bool active) = 0;
+		
+		virtual ~IPanelManager() = default;
 	};
 }

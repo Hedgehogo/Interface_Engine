@@ -5,17 +5,17 @@
 namespace ui {
 	SliderInteraction::SliderInteraction(BaseSlider& slider, Key key, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
 		OneKeyInteraction(BoxPtr<KeyEvent>{new AddBlockInteractionEvent{slideInteraction}}, key),
-		slideInteraction(BoxPtr<KeyEvent>{new SliderEvent{slider, {}}}, key),
-		wheelEvent(slider, wheelHorizontal, wheelRelativity, wheelSensitivity) {
+		wheelEvent(slider, wheelHorizontal, wheelRelativity, wheelSensitivity),
+		slideInteraction(BoxPtr<KeyEvent>{new SliderEvent{slider, {}}}, key) {
 	}
 	
 	SliderInteraction::SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division, bool wheelHorizontal) :
 		OneKeyInteraction(BoxPtr<KeyEvent>{new AddBlockInteractionEvent{slideInteraction}}, key),
-		slideInteraction(BoxPtr<KeyEvent>{new SliderEvent{slider, division}}, key),
 		wheelEvent(
 			slider, wheelHorizontal, SliderWheelEvent::Relativity::relationArea,
 			{1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}
-		) {
+		),
+		slideInteraction(BoxPtr<KeyEvent>{new SliderEvent{slider, division}}, key) {
 	}
 	
 	void SliderInteraction::init(InteractionInitInfo interactionInitInfo) {

@@ -18,7 +18,7 @@ namespace ui {
 	}
 	
 	WhileChangingObjectsEvent::WhileChangingObjectsEvent(BoxWithChangeableObjects* objects, int offset) :
-		index(object->getValue()), objectsSize(objects->getArraySize()), ChangeableObjectsEvent(objects), offset(offset) {
+		ChangeableObjectsEvent(objects), objectsSize(objects->getArraySize()), index(object->getValue()), offset(offset) {
 	}
 	
 	WhileChangingObjectsEvent* WhileChangingObjectsEvent::copy() {

@@ -5,7 +5,7 @@
 namespace ui {
 	class TextPressedInteraction : public TextKeysInteraction {
 	public:
-		TextPressedInteraction(KeyEvent* event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+		TextPressedInteraction(BoxPtr<KeyEvent> && event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 		
 		void init(TextInteractionInitInfo textInteractionInitInfo) override;
 		

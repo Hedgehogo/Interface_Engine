@@ -97,7 +97,7 @@ namespace ui {
 		if(node.IsScalar()) {
 			std::string str = node.as<std::string>();
 			string32.resize(str.size());
-			for(int i = 0; i < str.size(); ++i) {
+			for(std::size_t i = 0; i < str.size(); ++i) {
 				string32[i] = str[i];
 			}
 		} else {

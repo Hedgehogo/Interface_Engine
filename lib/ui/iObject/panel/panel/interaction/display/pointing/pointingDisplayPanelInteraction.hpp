@@ -20,6 +20,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<PointingDisplayPanelInteraction> {
-		static bool decodePointer(const YAML::Node& node, PointingDisplayPanelInteraction*& pointingDisplayPanelInteraction);
+		static bool decodePointer(const YAML::Node&, PointingDisplayPanelInteraction*& pointingDisplayPanelInteraction);
 	};
 }

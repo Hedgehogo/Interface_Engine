@@ -27,7 +27,7 @@ namespace ui {
 		return new Empty{*this};
 	}
 	
-	void Empty::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void Empty::drawDebug(sf::RenderTarget&, int, int, uint, uint) {
 	}
 	
 	LayoutData& Empty::getLayoutData() {
@@ -38,7 +38,7 @@ namespace ui {
 		return layout;
 	}
 	
-	bool DecodePointer<Empty>::decodePointer(const YAML::Node& node, Empty*& empty) {
+	bool DecodePointer<Empty>::decodePointer(const YAML::Node&, Empty*& empty) {
 		empty = new Empty{};
 		return true;
 	}

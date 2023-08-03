@@ -8,7 +8,7 @@ namespace ui {
 	public:
 		InternalPositioning2(sf::Vector2f coefficient);
 		
-		void init(sf::RenderTarget& renderTarget);
+		void init(sf::RenderTarget&);
 		
 		sf::Vector2f findPosition(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize);
 	

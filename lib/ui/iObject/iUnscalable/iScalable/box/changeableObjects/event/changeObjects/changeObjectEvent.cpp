@@ -15,7 +15,7 @@ namespace ui {
 	void ChangeObjectEvent::whileNotPressed() {
 	}
 	
-	ChangeObjectEvent::ChangeObjectEvent(std::shared_ptr<SValue<uint>> value, uint index) : value(value), index(index) {
+	ChangeObjectEvent::ChangeObjectEvent(std::shared_ptr<SValue<uint>> value, uint index) : index(index), value(value) {
 	}
 	
 	ChangeObjectEvent* ChangeObjectEvent::copy() {

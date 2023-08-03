@@ -12,6 +12,8 @@ namespace ui {
 	
 		virtual bool update(sf::Vector2i mousePosition) = 0;
 	
+		virtual ~IWindowResizer() = default;
+		
 	protected:
 		Window* window;
 	};

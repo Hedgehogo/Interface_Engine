@@ -1,13 +1,11 @@
 #include "keysInteraction.hpp"
+
+#include <utility>
 #include "../../event/key/openUrl/openUrlEvent.hpp"
 
 namespace ui {
-	KeysInteraction::KeysInteraction(KeyEvent* event, std::vector<Key> keys, std::vector<Key> blackListKeys) : event(event), keys(keys), blackListKeys(blackListKeys), press(false) {
+	KeysInteraction::KeysInteraction(BoxPtr<KeyEvent>&& event, std::vector<Key> keys, std::vector<Key> blackListKeys) : event(std::move(event)), keys(std::move(keys)), blackListKeys(std::move(blackListKeys)), press(false) {
 		std::sort(this->keys.begin(), this->keys.end());
-	}
-	
-	KeysInteraction::~KeysInteraction() {
-		delete event;
 	}
 	
 	std::vector<Key> KeysInteraction::getKeys() {
@@ -15,12 +13,11 @@ namespace ui {
 	}
 	
 	KeyEvent* KeysInteraction::getEvent() {
-		return event;
+		return event.get();
 	}
 	
 	void KeysInteraction::setEvent(KeyEvent* event) {
-		delete this->event;
-		this->event = event;
+		this->event.reset(event);
 	}
 	
 	void KeysInteraction::start(sf::Vector2i) {
@@ -45,48 +42,29 @@ namespace ui {
 		event->update(mousePosition, press);
 	}
 	
-	void KeysInteraction::finish(sf::Vector2i mousePosition) {
+	void KeysInteraction::finish(sf::Vector2i) {
 		event->setPressed(false);
 	}
 	
-	bool KeysInteraction::isPress() {
+	bool KeysInteraction::isPress() const {
 		return press;
 	}
 	
 	KeysInteraction* KeysInteraction::copy() {
-		return new KeysInteraction{event->copy(), keys, blackListKeys};
+		return new KeysInteraction{*this};
 	}
 	
 	bool DecodePointer<KeysInteraction>::decodePointer(const YAML::Node& node, KeysInteraction*& keysInteraction) {
 		if(node.IsScalar()) {
-			keysInteraction = new KeysInteraction{new OpenUrlEvent{node.as<std::string>()}, {Key::mouseLeft}};
+			keysInteraction = new KeysInteraction{makeBoxPtr<KeyEvent, OpenUrlEvent>(node.as<std::string>()), {Key::mouseLeft}};
 			return true;
 		}
 		
-		KeyEvent* event;
-		std::vector<Key> keys;
-		std::vector<Key> blackListKeys{};
-		
-		node["event"] >> event;
-		
-		keys.resize(node["keys"].size());
-		uint i{0};
-		for(auto& key: node["keys"]) {
-			key >> keys[i];
-			++i;
-		}
-		
-		if(node["black-listKeys"]) {
-			i = 0;
-			for(auto& key: node["black-listKeys"]) {
-				key >> blackListKeys[i];
-				++i;
-			}
-		}
-		
-		{
-			keysInteraction = new KeysInteraction{event, keys, blackListKeys};
-			return true;
-		}
+		keysInteraction = new KeysInteraction{
+			node["event"].as<BoxPtr<KeyEvent>>(),
+			node["keys"].as<std::vector<Key>>(),
+			convDef<std::vector<Key>>(node["black-listKeys"], {})
+		};
+		return true;
 	}
 }

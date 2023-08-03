@@ -37,7 +37,7 @@ namespace ui {
 		return closeWindow;
 	}
 	
-	bool DecodePointer<CloseWindowEvent>::decodePointer(const YAML::Node& node, CloseWindowEvent*& closeWindowEvent) {
+	bool DecodePointer<CloseWindowEvent>::decodePointer(const YAML::Node&, CloseWindowEvent*& closeWindowEvent) {
 		closeWindowEvent = new CloseWindowEvent {};
 		return true;
 	}

@@ -2,7 +2,7 @@
 
 namespace ui {
 	Prerequisite::Prerequisite(PISbool valve, std::vector<IAnimatorUnit*> nextTrue, std::vector<IAnimatorUnit*> nextFalse) :
-		nextTrue(nextTrue), nextFalse(nextFalse), valve(valve), nextTrueBuf(nextTrue), nextFalseBuf(nextFalse) {
+		nextTrueBuf(nextTrue), nextFalseBuf(nextFalse), nextTrue(nextTrue), nextFalse(nextFalse), valve(valve) {
 		for(auto& unit: this->nextTrue) {
 			if(!unit)
 				unit = this;
@@ -36,7 +36,7 @@ namespace ui {
 		}
 	}
 	
-	std::vector<IAnimatorUnit*> Prerequisite::update(float time) {
+	std::vector<IAnimatorUnit*> Prerequisite::update(float) {
 		return valve->getValue() ? nextTrue : nextFalse;
 	}
 	

@@ -7,9 +7,9 @@
 namespace ui {
 	class KeysInteraction : public virtual IInteraction {
 	public:
-		KeysInteraction(KeyEvent* event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+		KeysInteraction(BoxPtr<KeyEvent>&& event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 		
-		bool isPress();
+		bool isPress() const;
 		
 		std::vector<Key> getKeys();
 		
@@ -21,18 +21,15 @@ namespace ui {
 		
 		void update(sf::Vector2i mousePosition) override;
 		
-		void finish(sf::Vector2i mousePosition) override;
+		void finish(sf::Vector2i) override;
 		
 		KeysInteraction* copy() override;
 		
-		~KeysInteraction() override;
-		
 	protected:
-		bool press;
-		
-		KeyEvent* event;
+		BoxPtr<KeyEvent> event;
 		std::vector<Key> keys;
 		std::vector<Key> blackListKeys;
+		bool press;
 	};
 	
 	template<>

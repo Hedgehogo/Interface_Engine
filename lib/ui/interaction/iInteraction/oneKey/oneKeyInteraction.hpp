@@ -23,7 +23,7 @@ namespace ui {
 		
 		void update(sf::Vector2i mousePosition) override;
 		
-		void finish(sf::Vector2i mousePosition) override;
+		void finish(sf::Vector2i) override;
 		
 		OneKeyInteraction* copy() override;
 	

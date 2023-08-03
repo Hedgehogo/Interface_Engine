@@ -4,7 +4,7 @@ namespace ui {
 	EmptyEvent::EmptyEvent() : KeyEvent() {
 	}
 	
-	void EmptyEvent::update(sf::Vector2i mousePosition, bool press) {
+	void EmptyEvent::update(sf::Vector2i, bool) {
 	}
 	
 	EmptyEvent* EmptyEvent::copy() {

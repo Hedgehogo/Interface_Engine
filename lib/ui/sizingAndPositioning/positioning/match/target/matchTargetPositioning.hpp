@@ -7,7 +7,7 @@ namespace ui {
 	public:
 		MatchTargetPositioning(float targetCoefficient, float objectCoefficient, float offset = 0);
 		
-		float findPosition(float parentPosition, float objectSize, float, float targetSize) override;
+		float findPosition(float, float objectSize, float, float targetSize) override;
 		
 		MatchTargetPositioning* copy() override;
 	

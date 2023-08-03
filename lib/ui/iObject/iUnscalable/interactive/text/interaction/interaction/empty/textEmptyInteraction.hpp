@@ -12,6 +12,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<TextEmptyInteraction> {
-		static bool decodePointer(const YAML::Node& node, TextEmptyInteraction*& textEmptyInteraction);
+		static bool decodePointer(const YAML::Node&, TextEmptyInteraction*& textEmptyInteraction);
 	};
 }

@@ -12,7 +12,7 @@ namespace ui {
 	public:
 		explicit KeyEvent();
 		
-		virtual void init(InteractionInitInfo interactionInitInfo);
+		virtual void init(InteractionInitInfo);
 		
 		virtual void setPressed(bool pressed);
 		

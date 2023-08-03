@@ -6,7 +6,7 @@ namespace ui {
 		ClickPanelInteraction(makeBoxPtr<PanelEvent, DisplayPanelEvent>(), key) {
 	}
 	
-	void ClickDisplayPanelInteraction::start(sf::Vector2i mousePosition) {
+	void ClickDisplayPanelInteraction::start(sf::Vector2i) {
 		dynamic_cast<PanelEvent&>(*event).getPanel()->setParentProcessed(true);
 	}
 	

@@ -29,6 +29,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<CloseWindowEvent> {
-		static bool decodePointer(const YAML::Node& node, CloseWindowEvent*& closeWindowEvent);
+		static bool decodePointer(const YAML::Node&, CloseWindowEvent*& closeWindowEvent);
 	};
 }

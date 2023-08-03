@@ -5,7 +5,7 @@ namespace ui {
 	BaseCharacter::BaseCharacter() : selection(false), rerender(false) {
 	}
 	
-	void BaseCharacter::init(sf::RenderTarget& renderTarget) {
+	void BaseCharacter::init(sf::RenderTarget&) {
 	}
 	
 	bool BaseCharacter::getRerender() const {
@@ -22,7 +22,7 @@ namespace ui {
 		this->position = position;
 	}
 	
-	void BaseCharacter::resize(sf::Vector2f position, float endRender) {
+	void BaseCharacter::resize(sf::Vector2f position, float) {
 		setPosition(position);
 	}
 	

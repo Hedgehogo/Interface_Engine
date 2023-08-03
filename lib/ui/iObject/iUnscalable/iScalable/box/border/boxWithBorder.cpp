@@ -19,7 +19,7 @@ namespace ui {
 	}
 	
 	BoxWithBorder::BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, sf::Vector2f minSize) :
-		Box(minSize), objects(objects), boundsHorizontal(this->objects.size() + 1, 1.0f), boundsVertical(this->objects[0].size() + 1, 1.0f) {
+		Box(minSize), objects(objects), boundsVertical(this->objects[0].size() + 1, 1.0f), boundsHorizontal(this->objects.size() + 1, 1.0f) {
 		sf::Vector2u count = {static_cast<unsigned>(this->objects.size()), static_cast<unsigned>(this->objects[0].size())};
 		for(unsigned x = 0; x < count.x; ++x) {
 			boundsHorizontal[x] = static_cast<float>(x) / static_cast<float>(count.x);
@@ -65,7 +65,7 @@ namespace ui {
 	sf::Vector2f BoxWithBorder::getMinSize() const {
 		sf::Vector2f minSize{0, 0};
 		std::vector<std::vector<sf::Vector2f>> objectMinSizes(objects.size());
-		for(int x = 0; x < objectMinSizes.size(); ++x) {
+		for(std::size_t x = 0; x < objectMinSizes.size(); ++x) {
 			for(std::size_t y = 0; y < objectMinSizes[x].size(); ++y) {
 				objectMinSizes[x][y] = objects[x][y]->getMinSize();
 			}
@@ -116,7 +116,7 @@ namespace ui {
 		
 		for(std::size_t y = 0; y < objectNormalSizes[0].size(); ++y) {
 			lineNormalSize.x = 0;
-			for(int x = 0; x < objectNormalSizes.size(); ++x) {
+			for(std::size_t x = 0; x < objectNormalSizes.size(); ++x) {
 				objectNormalSize.x = objectNormalSizes[x][y].x / (boundsHorizontal[x + 1] - boundsHorizontal[x]);
 				lineNormalSize.x = std::max(objectNormalSize.x, lineNormalSize.x);
 			}

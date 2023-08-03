@@ -26,7 +26,7 @@ namespace ui {
 		AddInteractionEvent* copy() override;
 	
 	protected:
-		IInteraction* interaction;
 		InteractionManager* interactionManager;
+		IInteraction* interaction;
 	};
 }

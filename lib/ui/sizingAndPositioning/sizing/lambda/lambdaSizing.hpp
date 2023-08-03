@@ -24,8 +24,8 @@ namespace ui {
 		LambdaSizing* copy() override;
 	
 	protected:
-		float normalSize;
 		FindSizeFunc findSizeFunc;
 		MinSizeFunc minSizeFunc;
+		float normalSize;
 	};
 }

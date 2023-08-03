@@ -30,7 +30,7 @@ namespace ui {
 		
 		const IScalable& getSecondObject() const override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool updateInteractions(sf::Vector2f) override;
 		
 		BoxWithConstCenter* copy() override;
 	

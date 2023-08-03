@@ -4,7 +4,7 @@ namespace ui {
 	MatchPositioning::MatchPositioning(float parentCoefficient, float objectCoefficient, float offset) : parentCoefficient(parentCoefficient), objectCoefficient(objectCoefficient), offset(offset) {
 	}
 	
-	float MatchPositioning::findPosition(float parentPosition, float objectSize, float parentSize, float targetSize) {
+	float MatchPositioning::findPosition(float parentPosition, float objectSize, float parentSize, float) {
 		return parentPosition + parentSize * parentCoefficient - objectSize * objectCoefficient + offset;
 	}
 	

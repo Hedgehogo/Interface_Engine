@@ -71,7 +71,7 @@ namespace ui {
 	template<typename T>
 	auto copy(const std::vector<T*>& vec) -> std::vector<T*>{
 		std::vector<T*> result(vec.size());
-		for(int i = 0; i < vec.size(); ++i) {
+		for(std::size_t i = 0; i < vec.size(); ++i) {
 			result[i] = vec[i]->copy();
 		}
 		return result;

@@ -8,7 +8,7 @@ namespace ui {
 	public:
 		explicit ClickDisplayPanelInteraction(Key key);
 		
-		void start(sf::Vector2i mousePosition) override;
+		void start(sf::Vector2i) override;
 		
 		void finish(sf::Vector2i mousePosition) override;
 		

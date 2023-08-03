@@ -29,7 +29,7 @@ namespace ui {
 		
 		Window(const std::filesystem::path& interface, sf::WindowHandle handle, const sf::ContextSettings& settings = sf::ContextSettings());
 		
-		void create(sf::VideoMode mode, const sf::String& title, sf::Uint32 style, const sf::ContextSettings& settings = sf::ContextSettings());
+		void create(sf::VideoMode mode, const sf::String& title, sf::Uint32, const sf::ContextSettings& settings) override;
 		
 		virtual void create(sf::VideoMode mode, const sf::String& title, const sf::ContextSettings& settings = sf::ContextSettings());
 		
@@ -43,12 +43,11 @@ namespace ui {
 		
 		const sf::Vector2f& getMinSize();
 		
-		~Window();
+		~Window() override;
 	
 	protected:
+		IWindowResizer* resizer;
 		Interface interface;
 		sf::Vector2f minSize;
-		
-		IWindowResizer* resizer;
 	};
 }

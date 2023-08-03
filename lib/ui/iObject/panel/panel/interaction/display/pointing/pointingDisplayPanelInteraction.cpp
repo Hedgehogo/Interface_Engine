@@ -23,7 +23,7 @@ namespace ui {
 		return pointingDisplayPanelInteraction;
 	}
 	
-	bool DecodePointer<PointingDisplayPanelInteraction>::decodePointer(const YAML::Node& node, PointingDisplayPanelInteraction*& pointingDisplayPanelInteraction) {
+	bool DecodePointer<PointingDisplayPanelInteraction>::decodePointer(const YAML::Node&, PointingDisplayPanelInteraction*& pointingDisplayPanelInteraction) {
 		{
 			pointingDisplayPanelInteraction = new PointingDisplayPanelInteraction{};
 			return true;

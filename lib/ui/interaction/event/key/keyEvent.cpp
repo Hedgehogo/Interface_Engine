@@ -4,7 +4,7 @@ namespace ui {
 	KeyEvent::KeyEvent() : pressed(false) {
 	}
 	
-	void KeyEvent::init(InteractionInitInfo interactionInitInfo) {
+	void KeyEvent::init(InteractionInitInfo) {
 	}
 	
 	void KeyEvent::setPressed(bool pressed) {

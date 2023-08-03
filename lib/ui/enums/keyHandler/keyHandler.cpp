@@ -294,22 +294,21 @@ namespace ui {
 			std::find(globalKeysPressed.begin(), globalKeysPressed.end(), key) != globalKeysPressed.end()
 		) {
 			return true;
-			
-		} else if(key <= Key::mouseWheelRight) {
-			sf::Vector2f delta = MouseWheel::getDelta();
-			switch(key) {
-				case Key::mouseWheelUp:
-					return delta.y > 0;
-				case Key::mouseWheelDown:
-					return delta.y < 0;
-				case Key::mouseWheelRight:
-					return delta.x > 0;
-				case Key::mouseWheelLeft:
-					return delta.x < 0;
-			}
 		}
 		
-		return false;
+		sf::Vector2f delta = MouseWheel::getDelta();
+		switch(key) {
+			case Key::mouseWheelUp:
+				return delta.y > 0;
+			case Key::mouseWheelDown:
+				return delta.y < 0;
+			case Key::mouseWheelRight:
+				return delta.x > 0;
+			case Key::mouseWheelLeft:
+				return delta.x < 0;
+			default:
+				return false;
+		}
 	}
 	
 	bool Decode<Key>::decode(const YAML::Node& node, Key& key) {

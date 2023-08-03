@@ -15,7 +15,7 @@ namespace ui {
 		this->interactionStack = &initInfo.interactionStack;
 	}
 	
-	void BoxWithSetableObject::setObject(BoxPtr<IScalable>&& newObject, bool deleteOld) {
+	void BoxWithSetableObject::setObject(BoxPtr<IScalable>&& newObject, bool) {
 		drawManager.clear();
 		updateManager.clear();
 		interactionManager.clear();

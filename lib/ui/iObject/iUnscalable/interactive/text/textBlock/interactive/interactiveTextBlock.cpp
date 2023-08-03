@@ -6,16 +6,16 @@ namespace ui {
 		IInteraction* interaction, std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
 		sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor
 	) :
-		interaction(interaction), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor), interact(false), oldInteract(false),
-		indexInteraction(-1) {
+		TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor),
+		interact(false), oldInteract(false), indexInteraction(-1), interaction(interaction) {
 	}
 	
 	InteractiveTextBlock::InteractiveTextBlock(
 		int indexInteraction, std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
 		sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor
 	) :
-		indexInteraction(indexInteraction), interaction(nullptr), TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor), interact(false),
-		oldInteract(false) {
+		TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor),
+		interact(false), oldInteract(false), indexInteraction(indexInteraction),  interaction(nullptr) {
 	}
 	
 	void InteractiveTextBlock::init(InitInfo textInitInfo, InitInfo initInfo) {
@@ -37,7 +37,7 @@ namespace ui {
 		interact = false;
 	}
 	
-	bool InteractiveTextBlock::updateInteractions(sf::Vector2f mousePosition) {
+	bool InteractiveTextBlock::updateInteractions(sf::Vector2f) {
 		interact = true;
 		return true;
 	}
@@ -59,11 +59,11 @@ namespace ui {
 	}
 	
 	InteractiveTextBlock::InteractiveTextBlock(std::u32string str, TextVariables textVariables, IInteraction* interaction) :
-		TextBlock(str, textVariables, {}), interaction(interaction), interact(false), oldInteract(false) {
+		TextBlock(str, textVariables, {}), interact(false), oldInteract(false), interaction(interaction) {
 	}
 	
 	InteractiveTextBlock::InteractiveTextBlock(std::u32string str, TextVariables textVariables, int indexInteraction) :
-		TextBlock(str, textVariables, {}), indexInteraction(indexInteraction), interact(false), oldInteract(false) {
+		TextBlock(str, textVariables, {}), interact(false), oldInteract(false), indexInteraction(indexInteraction) {
 	}
 	
 	InteractiveTextBlock* InteractiveTextBlock::copy() {

@@ -24,11 +24,11 @@ namespace ui {
 		
 		float getAdvance() override;
 		
-		float getKerning(char32_t character) override;
+		float getKerning(char32_t) override;
 		
 		Special isSpecial() override;
 		
-		void draw(bool selection) override;
+		void draw(bool) override;
 		
 		char32_t getChar() override;
 		

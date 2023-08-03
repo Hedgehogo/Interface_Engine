@@ -2,15 +2,15 @@
 
 namespace ui {
 	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<BoxPtr<IScalable> >&& objects, PSValue<uint> value, sf::Vector2f minSize) :
-		Box(minSize), objects(std::move(objects)), value(value), drawManagers(this->objects.size()) {
+		Box(minSize), objects(std::move(objects)), drawManagers(this->objects.size()), value(value) {
 	}
 	
 	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<BoxPtr<IScalable> >&& objects, uint index, sf::Vector2f minSize) :
-		Box(minSize), objects(std::move(objects)), value(std::make_shared<SValue<uint>>(index)), drawManagers(this->objects.size()) {
+		Box(minSize), objects(std::move(objects)), drawManagers(this->objects.size()), value(std::make_shared<SValue<uint>>(index)) {
 	}
 	
 	BoxWithChangeableObjects::BoxWithChangeableObjects(const BoxWithChangeableObjects& other) :
-		Box(other), objects(other.objects), value(other.value), drawManagers(this->objects.size()) {
+		Box(other), objects(other.objects), drawManagers(this->objects.size()), value(other.value) {
 	}
 	
 	void BoxWithChangeableObjects::init(InitInfo initInfo) {

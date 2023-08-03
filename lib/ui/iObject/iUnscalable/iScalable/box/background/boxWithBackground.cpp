@@ -2,7 +2,7 @@
 
 namespace ui {
 	BoxWithBackground::BoxWithBackground(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, sf::Vector2f offset, sf::Vector2f minSize) :
-		Box(minSize), object(std::move(object)), background(std::move(background)), offset(offset) {
+		Box(minSize), background(std::move(background)), object(std::move(object)), offset(offset) {
 	}
 	
 	void BoxWithBackground::init(InitInfo initInfo) {

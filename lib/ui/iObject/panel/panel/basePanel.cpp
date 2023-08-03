@@ -4,12 +4,12 @@
 namespace ui {
 	BasePanel::BasePanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :
 		object(std::move(object)), sizing(std::move(sizing)), positioning(std::move(positioning)),
-		displayed(displayed), oldDisplayed(false), parentProcessed(false), active(false) {
+		parentProcessed(false), oldDisplayed(false), displayed(displayed), active(false) {
 	}
 	
 	BasePanel::BasePanel(const BasePanel& other) :
 		layout(other.layout), object(other.object), sizing(other.sizing), positioning(other.positioning),
-		displayed(other.displayed), oldDisplayed(other.oldDisplayed), parentProcessed(other.parentProcessed), active(false) {
+		parentProcessed(other.parentProcessed), oldDisplayed(other.oldDisplayed), displayed(other.displayed), active(false) {
 	}
 	
 	void BasePanel::init(InitInfo initInfo) {

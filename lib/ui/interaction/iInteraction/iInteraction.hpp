@@ -20,7 +20,7 @@ namespace ui {
 	
 		virtual ~IInteraction() = default;
 		
-		virtual void init(InteractionInitInfo interactionInitInfo);
+		virtual void init(InteractionInitInfo);
 		
 		virtual bool isBlocked() const;
 		

@@ -16,7 +16,7 @@ namespace ui {
 		
 		float operator()(float parentSize, float targetSize);
 		
-		virtual float getParentSize(float objectSize);
+		virtual float getParentSize(float);
 		
 		virtual ISizing* copy() = 0;
 	};

@@ -12,7 +12,7 @@ namespace ui {
 		
 		void init(InitInfo initInfo) override;
 		
-		void setObject(BoxPtr<IScalable>&& newObject, bool deleteOld);
+		void setObject(BoxPtr<IScalable>&& newObject, bool);
 		
 		void draw() override;
 		

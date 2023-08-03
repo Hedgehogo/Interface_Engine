@@ -34,7 +34,7 @@ namespace ui {
 			}
 		}
 		
-		if(level >= 0 && level < objectsLevels.size()) {
+		if(level < objectsLevels.size()) {
 			objectsLevels[level].try_emplace(name, node.as<T*>());
 		} else {
 			throw BufferNonExistentNestingLevelException{node.Mark(), name, level};

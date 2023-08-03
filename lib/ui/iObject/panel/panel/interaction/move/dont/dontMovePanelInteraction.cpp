@@ -9,26 +9,26 @@ namespace ui {
 		return false;
 	}
 	
-	void DontMovePanelInteraction::move(sf::Vector2i mousePosition) {
+	void DontMovePanelInteraction::move(sf::Vector2i) {
 	}
 	
-	void DontMovePanelInteraction::start(sf::Vector2i mousePosition) {
+	void DontMovePanelInteraction::start(sf::Vector2i) {
 	}
 	
-	void DontMovePanelInteraction::update(sf::Vector2i mousePosition) {
+	void DontMovePanelInteraction::update(sf::Vector2i) {
 	}
 	
-	void DontMovePanelInteraction::init(PanelInteractionInitInfo panelInteractionInitInfo) {
+	void DontMovePanelInteraction::init(PanelInteractionInitInfo) {
 	}
 	
-	void DontMovePanelInteraction::setPanel(Panel& panel) {
+	void DontMovePanelInteraction::setPanel(Panel&) {
 	}
 	
 	DontMovePanelInteraction* DontMovePanelInteraction::copy() {
 		return new DontMovePanelInteraction{};
 	}
 	
-	bool DecodePointer<DontMovePanelInteraction>::decodePointer(const YAML::Node& node, DontMovePanelInteraction*& dontMovePanelInteraction) {
+	bool DecodePointer<DontMovePanelInteraction>::decodePointer(const YAML::Node&, DontMovePanelInteraction*& dontMovePanelInteraction) {
 		{
 			dontMovePanelInteraction = new DontMovePanelInteraction{};
 			return true;

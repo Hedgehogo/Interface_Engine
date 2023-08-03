@@ -35,6 +35,6 @@ namespace ui {
 	
 	template<>
 	struct DecodePointer<TextSelectionEvent> {
-		static bool decodePointer(const YAML::Node& node, TextSelectionEvent*& textSelectionEvent);
+		static bool decodePointer(const YAML::Node&, TextSelectionEvent*& textSelectionEvent);
 	};
 }

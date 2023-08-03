@@ -5,11 +5,11 @@
 namespace ui::detail {
 	class EmptyYamlBuilder : public IYamlBuilder {
 	public:
-		bool build(const YAML::Node& node, void*& object) const override;
+		bool build(const YAML::Node&, void*&) const override;
 		
-		IYamlBuilder* getBuilder(const std::string& type) override;
+		IYamlBuilder* getBuilder(const std::string&) override;
 		
-		bool determine(const YAML::Node& node, std::string& type) override;
+		bool determine(const YAML::Node&, std::string&) override;
 		
 		bool isExists() override;
 	

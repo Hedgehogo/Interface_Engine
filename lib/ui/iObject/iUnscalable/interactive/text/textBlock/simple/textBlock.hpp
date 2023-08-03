@@ -18,11 +18,11 @@ namespace ui {
 		
 		bool in(sf::Vector2f mousePosition);
 		
-		void init(InitInfo textInitInfo, InitInfo initInfo) override;
+		void init(InitInfo textInitInfo, InitInfo) override;
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool updateInteractions(sf::Vector2f) override;
 		
 		TextBlock* copy() override;
 		

@@ -1,18 +1,13 @@
 #include "hotkeyInteraction.hpp"
 
 namespace ui {
-	HotkeyInteraction::Hotkey::Hotkey(KeysInteraction* interaction, uint state) : interaction(interaction), state(state) {
+	HotkeyInteraction::Hotkey::Hotkey(BoxPtr<KeysInteraction> && interaction, uint state) : interaction(std::move(interaction)), state(state) {
 	}
 	
-	HotkeyInteraction::Hotkey::Hotkey(uint state) : state(state), interaction(nullptr) {
+	HotkeyInteraction::Hotkey::Hotkey(uint state) : interaction(nullptr), state(state) {
 	}
 	
-	HotkeyInteraction::Hotkey::~Hotkey() {
-		if(interaction)
-			delete interaction;
-	}
-	
-	HotkeyInteraction::HotkeyInteraction(std::vector<std::vector<Hotkey*>> hotkeys, uint state) : hotkeyStates(hotkeys), nowHotkeys(nullptr) {
+	HotkeyInteraction::HotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey>>> && hotkeys, uint state) : hotkeyStates(std::move(hotkeys)), nowHotkeys(nullptr) {
 		if(this->hotkeyStates.size() <= state) {
 			this->hotkeyStates.resize(state, {});
 		}
@@ -27,21 +22,21 @@ namespace ui {
 		}
 	}
 	
-	HotkeyInteraction::HotkeyInteraction(std::string str) {
+	HotkeyInteraction::HotkeyInteraction(std::string) {
 	}
 	
 	void HotkeyInteraction::setHotkeyEvent(uint state, HotkeyInteraction::Hotkey* hotkeyEvent) {
 		if(hotkeyStates.size() <= state) {
 			hotkeyStates.resize(state, {});
 		}
-		hotkeyStates[state].push_back(hotkeyEvent);
+		hotkeyStates[state].emplace_back(hotkeyEvent);
 	}
 	
-	std::vector<HotkeyInteraction::Hotkey*> HotkeyInteraction::getHotkeys(int state) {
+	std::vector<BoxPtr<HotkeyInteraction::Hotkey>> HotkeyInteraction::getHotkeys(int state) {
 		return hotkeyStates[state];
 	}
 	
-	HotkeyInteraction::Hotkey* HotkeyInteraction::getHotkey(int state, int i) {
+	BoxPtr<HotkeyInteraction::Hotkey> HotkeyInteraction::getHotkey(int state, int i) {
 		return hotkeyStates[state][i];
 	}
 	
@@ -69,54 +64,22 @@ namespace ui {
 	}
 	
 	HotkeyInteraction* HotkeyInteraction::copy() {
-		return new HotkeyInteraction{hotkeyStates, static_cast<uint>(std::distance(hotkeyStates.begin(), std::vector<std::vector<Hotkey*>>::iterator(nowHotkeys)))};
-	}
-	
-	HotkeyInteraction::~HotkeyInteraction() {
-		for(auto& hotkeyInteractions: hotkeyStates) {
-			for(auto& hotkey: hotkeyInteractions) {
-				delete hotkey;
-			}
-		}
+		return new HotkeyInteraction{*this};
 	}
 	
 	bool DecodePointer<HotkeyInteraction>::decodePointer(const YAML::Node& node, HotkeyInteraction*& hotkeyInteraction) {
-		std::vector<std::vector<HotkeyInteraction::Hotkey*>> hotkeys;
-		uint startState{0};
-		
-		if(node["start-state"])
-			node["start-state"] >> startState;
-		
-		if(node["hotkeys"]) {
-			hotkeys.resize(node["hotkeys"].size());
-			uint i{0};
-			for(auto& state: node["hotkeys"]) {
-				hotkeys.resize(state.size());
-				uint j{0};
-				for(auto& hotkeyNode: state) {
-					hotkeyNode >> hotkeys[i][j];
-					++j;
-				}
-				++i;
-			}
-		}
-		
-		{
-			hotkeyInteraction = new HotkeyInteraction{hotkeys, startState};
-			return true;
-		}
+		hotkeyInteraction = new HotkeyInteraction{
+			convDef<std::vector<std::vector<BoxPtr<HotkeyInteraction::Hotkey>>>>(node["hotkeys"], {}),
+			convDef(node["start-state"], 0u)
+		};
+		return true;
 	}
 	
 	bool Decode<HotkeyInteraction::Hotkey*>::decode(const YAML::Node& node, HotkeyInteraction::Hotkey*& hotkey) {
-		KeysInteraction* interaction{nullptr};
-		uint32_t state{std::numeric_limits<uint32_t>::max()};
-		
-		if(node["state"])
-			node["state"] >> state;
-		if(node["interaction"])
-			node["interaction"] >> interaction;
-		
-		hotkey = new HotkeyInteraction::Hotkey{interaction, state};
+		hotkey = new HotkeyInteraction::Hotkey{
+			convDef(node["interaction"], BoxPtr<KeysInteraction>{}),
+			convDef(node["state"], std::numeric_limits<uint32_t>::max())
+		};
 		return true;
 	}
 }

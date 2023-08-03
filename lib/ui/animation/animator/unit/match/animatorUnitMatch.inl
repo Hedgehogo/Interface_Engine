@@ -9,7 +9,7 @@ namespace ui {
 	template<typename T>
 	detail::AnimatorUnitMatch::Option<T> detail::AnimatorUnitMatch::Option<T>::copy() {
 		std::vector<IAnimatorUnit*> copyNext{next.size()};
-		for(int i = 0; i < next.size(); ++i) {
+		for(std::size_t i = 0; i < next.size(); ++i) {
 			copyNext[i] = next[i]->copy();
 		}
 		return Option{example, comparison, copyNext};
@@ -49,7 +49,7 @@ namespace ui {
 	}
 	
 	template<typename T>
-	std::vector<IAnimatorUnit*> AnimatorUnitMatch<T>::update(float time) {
+	std::vector<IAnimatorUnit*> AnimatorUnitMatch<T>::update(float) {
 		for(auto& option: options) {
 			if(option.comparison(value->getValue(), option.example)) {
 				return option.next;
@@ -61,7 +61,7 @@ namespace ui {
 	template<typename T>
 	AnimatorUnitMatch<T>* AnimatorUnitMatch<T>::copy() {
 		std::vector<Option> copyOptions{options.size()};
-		for(int i = 0; i < options.size(); ++i) {
+		for(std::size_t i = 0; i < options.size(); ++i) {
 			copyOptions[i] = options[i].copy();
 		}
 		
@@ -151,7 +151,7 @@ namespace ui {
 		};
 		
 		if(node["options"]) {
-			for(int i = 0; i < node["options"].size(); ++i) {
+			for(std::size_t i = 0; i < node["options"].size(); ++i) {
 				addNextAnimatorUnitForMach(node, i, animatorUnitMatch);
 			}
 		} else {

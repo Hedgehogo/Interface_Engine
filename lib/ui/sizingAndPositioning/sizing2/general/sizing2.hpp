@@ -30,9 +30,9 @@ namespace ui {
 		Sizing2* copy() override;
 	
 	protected:
-		sf::RenderTarget* renderTarget;
 		ISizing* horizontal;
 		ISizing* vertical;
+		sf::RenderTarget* renderTarget;
 	};
 	
 	template<>

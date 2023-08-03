@@ -1,7 +1,7 @@
 #include "iSizing.hpp"
 
 namespace ui {
-	float ISizing::getParentSize(float objectSize) {
+	float ISizing::getParentSize(float) {
 		return 0;
 	}
 	

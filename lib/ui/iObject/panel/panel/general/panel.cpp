@@ -11,7 +11,7 @@ namespace ui {
 		BoxPtr<IPositioning2> positioning,
 		bool displayed
 	) : BasePanel(std::move(object), std::move(sizing), std::move(positioning), displayed),
-		hideInteraction(std::move(hideInteraction)), moveInteraction(std::move(moveInteraction)), interactionManager(nullptr) {
+		interactionManager(nullptr), hideInteraction(std::move(hideInteraction)), moveInteraction(std::move(moveInteraction)) {
 	}
 	
 	Panel::Panel(
@@ -21,11 +21,11 @@ namespace ui {
 		BoxPtr<IPositioning2> positioning,
 		bool displayed
 	) : BasePanel(std::move(object), std::move(sizing), std::move(positioning), displayed),
-		hideInteraction(std::move(hideInteraction)), moveInteraction(new DontMovePanelInteraction{}), interactionManager(nullptr) {
+		interactionManager(nullptr), hideInteraction(std::move(hideInteraction)), moveInteraction(new DontMovePanelInteraction{}) {
 	}
 	
 	Panel::Panel(const Panel& other) :
-		BasePanel(other), hideInteraction(other.hideInteraction), moveInteraction(other.moveInteraction), interactionManager(other.interactionManager) {
+		BasePanel(other), interactionManager(other.interactionManager), hideInteraction(other.hideInteraction), moveInteraction(other.moveInteraction) {
 		hideInteraction->setPanel(*this);
 	}
 	

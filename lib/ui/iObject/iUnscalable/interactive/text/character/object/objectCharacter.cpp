@@ -33,7 +33,7 @@ namespace ui {
 		return object->getAreaSize().x;
 	}
 	
-	float ObjectCharacter::getKerning(char32_t character) {
+	float ObjectCharacter::getKerning(char32_t) {
 		return 0;
 	}
 	
@@ -41,7 +41,7 @@ namespace ui {
 		return special;
 	}
 	
-	void ObjectCharacter::draw(bool selection) {
+	void ObjectCharacter::draw(bool) {
 	}
 	
 	ObjectCharacter::~ObjectCharacter() {

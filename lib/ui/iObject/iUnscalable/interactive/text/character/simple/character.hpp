@@ -39,7 +39,7 @@ namespace ui {
 	
 		static void setDebug(bool debug);
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int, uint hue, uint) override;
 	
 	private:
 		static bool debug;

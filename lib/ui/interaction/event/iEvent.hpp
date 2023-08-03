@@ -1,5 +1,9 @@
 #pragma once
 
+#include <Box_Ptr/boxPtr.hpp>
+
+using namespace bp;
+
 namespace ui {
 	class IEvent {
 	public:

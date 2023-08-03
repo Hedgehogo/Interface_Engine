@@ -25,9 +25,9 @@ namespace ui {
 		Positioning2* copy() override;
 	
 	protected:
-		sf::RenderTarget* renderTarget;
 		IPositioning* horizontal;
 		IPositioning* vertical;
+		sf::RenderTarget* renderTarget;
 	};
 	
 	template<>

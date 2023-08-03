@@ -36,7 +36,7 @@ namespace ui {
 		
 		virtual void setPosition(sf::Vector2f position);
 		
-		virtual void resize(sf::Vector2f position, float endRender);
+		virtual void resize(sf::Vector2f position, float);
 		
 		virtual void move(sf::Vector2f position);
 		
@@ -48,7 +48,7 @@ namespace ui {
 		
 		virtual float getAdvance() = 0;
 		
-		virtual float getKerning(char32_t character) = 0;
+		virtual float getKerning(char32_t) = 0;
 		
 		virtual bool isEnter();
 		

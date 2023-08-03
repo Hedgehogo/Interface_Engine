@@ -27,10 +27,10 @@ namespace ui {
 		textVariables.inactiveBackgroundSelectionColor = inactiveBackgroundSelectionColor;
 	}
 	
-	TextBlock::TextBlock(std::u32string str, TextVariables textVariables, std::vector<BaseLine*> lines) : str(str), BaseTextBlock(textVariables), lines(lines) {
+	TextBlock::TextBlock(std::u32string str, TextVariables textVariables, std::vector<BaseLine*> lines) : BaseTextBlock(textVariables), str(str), lines(lines) {
 	}
 	
-	void TextBlock::init(InitInfo textInitInfo, InitInfo initInfo) {
+	void TextBlock::init(InitInfo textInitInfo, InitInfo) {
 		for(BaseCharacter*& character: textCharacters) {
 			character->init(textInitInfo.renderTarget);
 		}
@@ -50,7 +50,7 @@ namespace ui {
 	void TextBlock::update() {
 	}
 	
-	bool TextBlock::updateInteractions(sf::Vector2f mousePosition) {
+	bool TextBlock::updateInteractions(sf::Vector2f) {
 		return false;
 	}
 	
@@ -66,7 +66,7 @@ namespace ui {
 	
 	TextBlock* TextBlock::copy() {
 		std::vector<BaseLine*> copyLines{lines.size()};
-		for(int i = 0; i < lines.size(); ++i) {
+		for(std::size_t i = 0; i < lines.size(); ++i) {
 			copyLines[i] = lines[i];
 		}
 		return new TextBlock(str, textVariables, copyLines);

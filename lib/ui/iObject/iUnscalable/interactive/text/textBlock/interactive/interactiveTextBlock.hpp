@@ -34,7 +34,7 @@ namespace ui {
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool updateInteractions(sf::Vector2f) override;
 	
 	protected:
 		InteractiveTextBlock(std::u32string str, TextVariables textVariables, IInteraction* interaction);

@@ -2,7 +2,7 @@
 
 namespace ui {
 	VideoFromTexture::VideoFromTexture(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect, int countFrame, sf::Vector2i offset) :
-		viewingProgress(viewingProgress), rect(rect), countFrame(countFrame), offset(offset), textureSize(texture.getSize()) {
+		rect(rect), offset(offset), viewingProgress(viewingProgress), textureSize(texture.getSize()), countFrame(countFrame) {
 		viewingProgress->addSetter([=](float viewingProgress) {
 			setCurrentFrame(viewingProgress);
 		});

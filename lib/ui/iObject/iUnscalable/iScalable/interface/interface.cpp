@@ -6,7 +6,7 @@
 
 namespace ui {
 	Interface::Interface(BoxPtr<IScalable>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
-		object(std::move(object)), animationManager(std::move(animationManager)), interactionStack(interactionStack), renderTarget(nullptr), interactionManager(), panelManager(), initialized(false), active(true) {
+		renderTarget(nullptr), interactionManager(), interactionStack(interactionStack), panelManager(), animationManager(std::move(animationManager)), object(std::move(object)), initialized(false), active(true) {
 	}
 	
 	Interface::Interface(const std::string& filePath, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :

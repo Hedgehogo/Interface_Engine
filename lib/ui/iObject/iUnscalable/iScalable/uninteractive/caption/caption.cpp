@@ -40,7 +40,7 @@ namespace ui {
 		float rotation,
 		InternalPositioning2 internalPositioning2,
 		bool cutBack
-	) : str(text), background(std::move(background)), minimumSize(minSize), internalPositioning2(internalPositioning2), cutBack(cutBack) {
+	) : cutBack(cutBack), str(text), background(std::move(background)), minimumSize(minSize), internalPositioning2(internalPositioning2) {
 		this->text.setString(text);
 		this->text.setFont(font);
 		this->text.setCharacterSize(fontSize);
@@ -59,7 +59,7 @@ namespace ui {
 		float rotation,
 		InternalPositioning2 internalPositioning2,
 		bool cutBack
-	) : str(text), background(background), minimumSize(), internalPositioning2(internalPositioning2), cutBack(cutBack) {
+	) : cutBack(cutBack), str(text), background(background), minimumSize(), internalPositioning2(internalPositioning2) {
 		this->text.setString(text);
 		this->text.setFont(font);
 		this->text.setCharacterSize(fontSize);
@@ -133,7 +133,7 @@ namespace ui {
 	}
 	
 	Caption::Caption(sf::Text text, IUninteractive* background, sf::String str, sf::Vector2f minimumSize, InternalPositioning2 internalPositioning2, bool cutBack) :
-		text(text), background(background), str(str), minimumSize(minimumSize), internalPositioning2(internalPositioning2), cutBack(cutBack) {
+		cutBack(cutBack), text(text), str(str), background(background), minimumSize(minimumSize), internalPositioning2(internalPositioning2) {
 	}
 	
 	Caption* Caption::copy() {

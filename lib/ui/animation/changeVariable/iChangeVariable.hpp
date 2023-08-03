@@ -10,5 +10,7 @@ namespace ui {
 		virtual float operator()(float frame) = 0;
 		
 		virtual IChangeVariable* copy() = 0;
+		
+		virtual ~IChangeVariable() = default;
 	};
 }

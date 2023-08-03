@@ -28,6 +28,8 @@ namespace ui {
 		
 		virtual void update(sf::Vector2i mousePosition);
 	
+		virtual ~InteractionManager() = default;
+		
 	protected:
 		std::vector<IInteraction*> interactions;
 		std::vector<IInteraction*> addInteractions;

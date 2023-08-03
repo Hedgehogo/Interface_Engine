@@ -54,6 +54,8 @@ namespace ui {
 			case Align::center:
 				offset.x /= 2;
 				break;
+			default:
+				break;
 		}
 		
 		for(auto character = afterEnter; character != endCharacter; ++character) {

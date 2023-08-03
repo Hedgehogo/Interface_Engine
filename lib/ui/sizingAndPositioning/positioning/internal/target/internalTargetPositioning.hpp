@@ -11,7 +11,7 @@ namespace ui {
 		
 		[[nodiscard]] float getOffset() const;
 		
-		float findPosition(float parentPosition, float objectSize, float, float targetSize) override;
+		float findPosition(float, float objectSize, float, float targetSize) override;
 		
 		InternalTargetPositioning* copy() override;
 	

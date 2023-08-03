@@ -1,15 +1,17 @@
 #include "textKeysInteraction.hpp"
+
+#include <utility>
 #include "ui/iObject/iUnscalable/interactive/text/text.hpp"
 #include "ui/interaction/event/key/openUrl/openUrlEvent.hpp"
 
 namespace ui {
-	TextKeysInteraction::TextKeysInteraction(KeyEvent* event, std::vector<Key> keys, std::vector<Key> blackListKeys) :
-		KeysInteraction(event, keys, blackListKeys) {
+	TextKeysInteraction::TextKeysInteraction(BoxPtr<KeyEvent> event, std::vector<Key> keys, std::vector<Key> blackListKeys) :
+		KeysInteraction(std::move(event), std::move(keys), std::move(blackListKeys)) {
 	}
 	
 	void TextKeysInteraction::init(TextInteractionInitInfo textInteractionInitInfo) {
 		TextInteraction::init(textInteractionInitInfo);
-		dynamic_cast<TextEvent*>(event)->init(textInteractionInitInfo);
+		dynamic_cast<TextEvent*>(event.get())->init(textInteractionInitInfo);
 	}
 	
 	TextKeysInteraction* TextKeysInteraction::copy() {
@@ -18,34 +20,14 @@ namespace ui {
 	
 	bool DecodePointer<TextKeysInteraction>::decodePointer(const YAML::Node& node, TextKeysInteraction*& textKeysInteraction) {
 		if(node.IsScalar()) {
-			textKeysInteraction = new TextKeysInteraction{new OpenUrlEvent{node.as<std::string>()}, {Key::mouseLeft}};
+			textKeysInteraction = new TextKeysInteraction{makeBoxPtr<KeyEvent, OpenUrlEvent>(node.as<std::string>()), {Key::mouseLeft}};
 			return true;
 		}
-		
-		KeyEvent* event;
-		std::vector<Key> keys;
-		std::vector<Key> blackListKeys{};
-		
-		node["event"] >> event;
-		
-		keys.resize(node["keys"].size());
-		uint i{0};
-		for(auto& key: node["keys"]) {
-			key >> keys[i];
-			++i;
-		}
-		
-		if(node["black-listKeys"]) {
-			i = 0;
-			for(auto& key: node["black-listKeys"]) {
-				key >> blackListKeys[i];
-				++i;
-			}
-		}
-		
-		{
-			textKeysInteraction = new TextKeysInteraction{event, keys, blackListKeys};
-			return true;
-		}
+		textKeysInteraction = new TextKeysInteraction{
+			node["event"].as<BoxPtr<KeyEvent>>(),
+			node["keys"].as<std::vector<Key>>(),
+			convDef<std::vector<Key>>(node["black-listKeys"], {})
+		};
+		return true;
 	}
 }

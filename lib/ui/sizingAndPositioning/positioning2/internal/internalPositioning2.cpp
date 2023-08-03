@@ -2,10 +2,10 @@
 
 namespace ui {
 	InternalPositioning2::InternalPositioning2(sf::Vector2f coefficient) :
-		horizontal(std::max(0.f, std::min(1.f, coefficient.x))), vertical(std::max(0.f, std::min(1.f, coefficient.y))) {
+		vertical(std::max(0.f, std::min(1.f, coefficient.y))), horizontal(std::max(0.f, std::min(1.f, coefficient.x))) {
 	}
 	
-	void InternalPositioning2::init(sf::RenderTarget& renderTarget) {
+	void InternalPositioning2::init(sf::RenderTarget&) {
 	}
 	
 	sf::Vector2f InternalPositioning2::findPosition(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize) {

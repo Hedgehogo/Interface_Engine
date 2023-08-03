@@ -5,10 +5,10 @@ namespace ui {
 	template<typename T>
 	SVector2<T>::SVector2(const sf::Vector2<typename SVector2<T>::V>& vector) :
 		x(std::make_shared<T>(vector.x)), y(std::make_shared<T>(vector.y)), setters() {
-		x->addSetter([this](auto value) {
+		x->addSetter([this](auto) {
 			set();
 		});
-		y->addSetter([this](auto value) {
+		y->addSetter([this](auto) {
 			set();
 		});
 	}
@@ -16,10 +16,10 @@ namespace ui {
 	template<typename T>
 	SVector2<T>::SVector2(std::shared_ptr<T> x, std::shared_ptr<T> y) :
 		x(x), y(y), setters() {
-			x->addSetter([this](auto value) {
+			x->addSetter([this](auto) {
 				set();
 			});
-			y->addSetter([this](auto value) {
+			y->addSetter([this](auto) {
 				set();
 			});
 	}

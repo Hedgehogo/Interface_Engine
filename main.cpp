@@ -11,7 +11,7 @@ float calculateMediumFPS(std::array<float, T> lastFPS) {
 	return sum / static_cast<float>(lastFPS.size());
 }
 
-int main(int argc, char *argv[]) {
+int main() {
 	ui::init();
 	
 	ui::Window window(

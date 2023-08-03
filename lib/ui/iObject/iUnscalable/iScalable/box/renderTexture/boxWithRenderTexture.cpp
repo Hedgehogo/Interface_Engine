@@ -2,12 +2,12 @@
 
 namespace ui {
 	BoxWithRenderTexture::BoxWithRenderTexture(BoxPtr<IScalable>&& object, bool optimize, sf::Vector2f minSize) :
-		Box(minSize), object(std::move(object)), optimize(optimize), active(true), renderTarget(nullptr), interactionManager(nullptr) {
+		Box(minSize), object(std::move(object)), interactionManager(nullptr), renderTarget(nullptr), optimize(optimize), active(true) {
 		sprite.setTexture(renderTexture.getTexture());
 	}
 	
 	BoxWithRenderTexture::BoxWithRenderTexture(const BoxWithRenderTexture& other) :
-		Box(other), object(other.object), optimize(other.optimize), active(true), renderTarget(other.renderTarget) {
+		Box(other), object(other.object), renderTarget(other.renderTarget), optimize(other.optimize), active(true) {
 		sf::Vector2u size = this->renderTexture.getSize();
 		renderTexture.create(size.x, size.y);
 	}

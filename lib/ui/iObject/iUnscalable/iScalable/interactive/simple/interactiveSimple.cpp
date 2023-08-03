@@ -2,7 +2,7 @@
 
 namespace ui {
 	Interactive_Simple::Interactive_Simple(BoxPtr<IInteraction>&& interaction) :
-		interaction(std::move(interaction)), interact(false), oldInteract(false) {
+		interact(false), oldInteract(false), interaction(std::move(interaction)){
 	}
 	
 	void Interactive_Simple::init(InteractiveInitInfo interactiveInitInfo) {

@@ -1,7 +1,7 @@
 #include "baseResizer.hpp"
 
 namespace ui {
-	BaseResizer::BaseResizer(float lineSpacing, Align align, Algorithm algorithm) : lineSpacing(lineSpacing), align(align), algorithm(algorithm), characters(nullptr), lines(nullptr) {
+	BaseResizer::BaseResizer(float lineSpacing, Align align, Algorithm algorithm) : characters(nullptr), lines(nullptr), lineSpacing(lineSpacing), align(align), algorithm(algorithm) {
 	}
 	
 	void BaseResizer::init(std::vector<BaseCharacter*>& characters, std::vector<BaseLine*>& lines) {

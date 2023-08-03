@@ -12,7 +12,7 @@ namespace ui {
 		
 		virtual Animator* copy();
 		
-		~Animator();
+		virtual ~Animator();
 	
 	protected:
 		std::vector<IAnimatorUnit*> units;

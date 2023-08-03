@@ -8,15 +8,15 @@ namespace ui {
 	public:
 		DontHidePanelInteraction() = default;
 		
-		void init(PanelInteractionInitInfo panelInteractionInitInfo) override;
+		void init(PanelInteractionInitInfo) override;
 		
-		void setPanel(Panel& panel) override;
+		void setPanel(Panel&) override;
 		
 		DontHidePanelInteraction* copy() override;
 	};
 	
 	template<>
 	struct DecodePointer<DontHidePanelInteraction> {
-		static bool decodePointer(const YAML::Node& node, DontHidePanelInteraction*& dontHidePanelInteraction);
+		static bool decodePointer(const YAML::Node&, DontHidePanelInteraction*& dontHidePanelInteraction);
 	};
 }

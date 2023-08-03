@@ -16,7 +16,7 @@ namespace ui::detail {
 		
 		IYamlBuilder* getBuilder(const std::string& type) override;
 		
-		bool determine(const YAML::Node& node, std::string& type) override;
+		bool determine(const YAML::Node&, std::string&) override;
 		
 		template<typename Type>
 		static FuncYamlBuilder& addBuilder(BuildFunc<Type> function, std::vector<std::string> aliases = {});

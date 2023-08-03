@@ -62,7 +62,7 @@ namespace ui {
 	}
 	
 	
-	bool DecodePointer<TextSelectionEvent>::decodePointer(const YAML::Node& node, TextSelectionEvent*& textSelectionEvent) {
+	bool DecodePointer<TextSelectionEvent>::decodePointer(const YAML::Node&, TextSelectionEvent*& textSelectionEvent) {
 		{
 			textSelectionEvent = new TextSelectionEvent{};
 			return true;

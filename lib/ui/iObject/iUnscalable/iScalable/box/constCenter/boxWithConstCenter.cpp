@@ -58,7 +58,7 @@ namespace ui {
 		return *background;
 	}
 	
-	bool BoxWithConstCenter::updateInteractions(sf::Vector2f mousePosition) {
+	bool BoxWithConstCenter::updateInteractions(sf::Vector2f) {
 		return background->in(layout.position) ? background->updateInteractions(layout.position) : constObject->updateInteractions(layout.position);
 	}
 	

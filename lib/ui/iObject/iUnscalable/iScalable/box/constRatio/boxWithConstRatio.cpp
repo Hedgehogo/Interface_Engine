@@ -14,13 +14,13 @@ namespace ui {
 		secondObject(std::move(secondObject)),
 		verticalSide(corner == Corner::upLeft || corner == Corner::upRight),
 		horizontalSide(corner == Corner::upLeft || corner == Corner::downLeft),
-		aspectRatio(aspectRatio),
-		renderSecond(true) {
+		renderSecond(true),
+		aspectRatio(aspectRatio) {
 	}
 	
 	BoxWithConstRatio::BoxWithConstRatio(const BoxWithConstRatio& other) :
 		Box(other), background(other.background), constObject(other.constObject), secondObject(other.secondObject),
-		verticalSide(other.verticalSide), horizontalSide(other.horizontalSide), aspectRatio(other.aspectRatio), renderSecond(other.renderSecond) {
+		verticalSide(other.verticalSide), horizontalSide(other.horizontalSide), renderSecond(other.renderSecond), aspectRatio(other.aspectRatio) {
 	}
 	
 	void BoxWithConstRatio::init(InitInfo initInfo) {
