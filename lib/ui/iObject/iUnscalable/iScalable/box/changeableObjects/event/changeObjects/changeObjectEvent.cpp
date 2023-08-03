@@ -19,19 +19,14 @@ namespace ui {
 	}
 	
 	ChangeObjectEvent* ChangeObjectEvent::copy() {
-		return new ChangeObjectEvent{value, index};
+		return new ChangeObjectEvent{*this};
 	}
 	
 	bool DecodePointer<ChangeObjectEvent>::decodePointer(const YAML::Node& node, ChangeObjectEvent*& changeObjectEvent) {
-		uint index{0};
-		std::shared_ptr<SValue<uint>> value = Buffer::get<SValue<uint>>(node["value"]);
-		
-		if(node["index"])
-			node["index"] >> index;
-		
-		{
-			changeObjectEvent = new ChangeObjectEvent{value, index};
-			return true;
-		}
+		changeObjectEvent = new ChangeObjectEvent{
+			Buffer::get<SValue<uint>>(node["value"]),
+			convDef(node["index"], 0u)
+		};
+		return true;
 	}
 }

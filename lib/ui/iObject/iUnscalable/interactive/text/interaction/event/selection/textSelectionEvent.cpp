@@ -18,7 +18,6 @@ namespace ui {
 	void TextSelectionEvent::whilePressed() {
 		text->setSelectionEnd(end = text->getCharacter(sf::Vector2f(mousePosition)));
 		
-		
 		if(start != nullBaseCharacterIterator && end != nullBaseCharacterIterator) {
 			auto localStart = start, localEnd = end;
 			
@@ -58,14 +57,11 @@ namespace ui {
 	}
 	
 	TextSelectionEvent* TextSelectionEvent::copy() {
-		return new TextSelectionEvent{};
+		return new TextSelectionEvent{*this};
 	}
 	
-	
 	bool DecodePointer<TextSelectionEvent>::decodePointer(const YAML::Node&, TextSelectionEvent*& textSelectionEvent) {
-		{
-			textSelectionEvent = new TextSelectionEvent{};
-			return true;
-		}
+		textSelectionEvent = new TextSelectionEvent{};
+		return true;
 	}
 }

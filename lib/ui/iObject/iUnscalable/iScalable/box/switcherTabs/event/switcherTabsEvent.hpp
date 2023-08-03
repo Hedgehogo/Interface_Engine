@@ -7,7 +7,9 @@ namespace ui {
 	class BoxSwitcherTabs;
 	
 	class SwitcherTabsEvent : public KeyEvent_Simple {
-	protected:
+	public:
+		SwitcherTabsEvent(const PISint& value, BoxSwitcherTabs* switcherTabs);
+		
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -15,9 +17,6 @@ namespace ui {
 		void whilePressed() override;
 		
 		void whileNotPressed() override;
-	
-	public:
-		SwitcherTabsEvent(const PISint& value, BoxSwitcherTabs* switcherTabs);
 		
 		SwitcherTabsEvent* copy() override;
 	

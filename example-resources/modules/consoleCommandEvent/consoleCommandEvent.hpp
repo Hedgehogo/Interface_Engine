@@ -6,7 +6,6 @@
 #include <modules/appendix/yaml-cpp/yamlBuilder/base/baseYamlBuilder.hpp>
 
 namespace ui {
-	
 	class ConsoleCommandEvent : public KeyEvent_Simple{
 	protected:
 		std::string command;
@@ -25,13 +24,12 @@ namespace ui {
 		ConsoleCommandEvent* copy() override;
 	};
 	
-	
 	template<>
 	struct DecodePointer<ConsoleCommandEvent> {
-		static bool decodePointer(const YAML::Node& node, ConsoleCommandEvent*& sConvertToBoolEquals);
+		static bool decodePointer(const YAML::Node& node, ConsoleCommandEvent*& consoleCommandEvent);
 	};
 	
-	extern "C"{
+	extern "C" {
 		void init(int argc, char *argv[]);
 	}
 }

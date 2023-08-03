@@ -1,7 +1,7 @@
 #include "wheelEventSimple.hpp"
 
 namespace ui {
-	WheelEvent_Simple::WheelEvent_Simple() : WheelEvent() {
+	WheelEvent_Simple::WheelEvent_Simple() {
 	}
 	
 	void WheelEvent_Simple::update(sf::Vector2i mousePosition, int value) {

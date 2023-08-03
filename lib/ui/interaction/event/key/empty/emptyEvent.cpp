@@ -8,8 +8,6 @@ namespace ui {
 	}
 	
 	EmptyEvent* EmptyEvent::copy() {
-		EmptyEvent* emptyEvent{new EmptyEvent{}};
-		KeyEvent::copy(emptyEvent);
-		return emptyEvent;
+		return new EmptyEvent{*this};
 	}
 }

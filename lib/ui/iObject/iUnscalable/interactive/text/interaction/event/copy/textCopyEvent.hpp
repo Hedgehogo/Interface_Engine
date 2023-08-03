@@ -6,7 +6,7 @@
 
 namespace ui {
 	class TextCopyEvent : public KeyEvent_Simple, public TextEvent {
-	protected:
+	public:
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -14,11 +14,8 @@ namespace ui {
 		void whilePressed() override;
 		
 		void whileNotPressed() override;
-	
-	public:
-		TextCopyEvent* copy() override;
 		
-		~TextCopyEvent() = default;
+		TextCopyEvent* copy() override;
 	};
 	
 	template<>

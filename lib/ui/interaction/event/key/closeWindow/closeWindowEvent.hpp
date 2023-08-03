@@ -14,8 +14,6 @@ namespace ui {
 		
 		void whileNotPressed() override;
 		
-		void copy(CloseWindowEvent* closeWindow);
-		
 	public:
 		CloseWindowEvent();
 		

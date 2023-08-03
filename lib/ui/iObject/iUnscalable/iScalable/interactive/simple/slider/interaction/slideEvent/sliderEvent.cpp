@@ -37,14 +37,7 @@ namespace ui {
 		this->slider = &slider;
 	}
 	
-	void SliderEvent::copy(SliderEvent* sliderEvent) {
-		sliderEvent->startMousePosition = this->startMousePosition;
-		sliderEvent->startValue = this->startValue;
-	}
-	
 	SliderEvent* SliderEvent::copy() {
-		SliderEvent* sliderEvent{new SliderEvent{*slider, division}};
-		SliderEvent::copy(sliderEvent);
-		return sliderEvent;
+		return new SliderEvent{*this};
 	}
 }

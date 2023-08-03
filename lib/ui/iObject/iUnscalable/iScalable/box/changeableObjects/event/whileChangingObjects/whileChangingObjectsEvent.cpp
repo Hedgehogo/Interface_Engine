@@ -22,18 +22,13 @@ namespace ui {
 	}
 	
 	WhileChangingObjectsEvent* WhileChangingObjectsEvent::copy() {
-		return new WhileChangingObjectsEvent{object};
+		return new WhileChangingObjectsEvent{*this};
 	}
 	
 	bool DecodePointer<WhileChangingObjectsEvent>::decodePointer(const YAML::Node& node, WhileChangingObjectsEvent*& whileChangingObjectsEvent) {
-		BoxWithChangeableObjects* object = nullptr;
-		
-		if(node["object"])
-			node["object"] >> object;
-		
-		{
-			whileChangingObjectsEvent = new WhileChangingObjectsEvent{object};
-			return true;
-		}
+		whileChangingObjectsEvent = new WhileChangingObjectsEvent{
+			convDef<BoxWithChangeableObjects*>(node["object"], nullptr)
+		};
+		return true;
 	}
 }

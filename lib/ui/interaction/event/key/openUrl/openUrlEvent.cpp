@@ -19,7 +19,7 @@ namespace ui {
 	}
 	
 	OpenUrlEvent* OpenUrlEvent::copy() {
-		return new OpenUrlEvent{url};
+		return new OpenUrlEvent{*this};
 	}
 	
 	bool DecodePointer<OpenUrlEvent>::decodePointer(const YAML::Node& node, OpenUrlEvent*& openUrlInteraction) {

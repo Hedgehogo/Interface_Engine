@@ -18,7 +18,7 @@ namespace ui {
 	
 	template<typename T>
 	SetSValueEvent<T>* SetSValueEvent<T>::copy() {
-		return new SetSValueEvent<T>{value, variable};
+		return new SetSValueEvent<T>{*this};
 	}
 	
 	template<typename T>

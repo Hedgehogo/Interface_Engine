@@ -12,7 +12,10 @@ namespace ui {
 			relationSlider
 		};
 	
-	protected:
+		explicit SliderWheelEvent(BaseSlider& slider, bool horizontal = false, Relativity relativity = Relativity::relationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
+		
+		void setSlider(BaseSlider& slider);
+		
 		void startPressed(sf::Vector2i mousePosition, int value) override;
 		
 		void stopPressed(sf::Vector2i mousePosition, int value) override;
@@ -20,11 +23,6 @@ namespace ui {
 		void whilePressed(sf::Vector2i mousePosition, int value) override;
 		
 		void whileNotPressed(sf::Vector2i mousePosition, int value) override;
-	
-	public:
-		explicit SliderWheelEvent(BaseSlider& slider, bool horizontal = false, Relativity relativity = Relativity::relationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
-		
-		void setSlider(BaseSlider& slider);
 		
 		SliderWheelEvent* copy() override;
 		

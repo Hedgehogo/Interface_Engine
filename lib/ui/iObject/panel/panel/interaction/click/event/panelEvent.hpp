@@ -9,9 +9,6 @@ namespace ui {
 	class IPanelManager;
 	
 	class PanelEvent : public KeyEvent_Simple {
-	protected:
-		void copy(PanelEvent* panelEvent);
-	
 	public:
 		PanelEvent();
 		

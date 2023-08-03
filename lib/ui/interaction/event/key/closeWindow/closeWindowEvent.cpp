@@ -7,7 +7,6 @@ namespace ui {
 	}
 	
 	void CloseWindowEvent::startPressed() {
-	
 	}
 	
 	void CloseWindowEvent::stopPressed() {
@@ -15,15 +14,9 @@ namespace ui {
 	}
 	
 	void CloseWindowEvent::whilePressed() {
-	
 	}
 	
 	void CloseWindowEvent::whileNotPressed() {
-	
-	}
-	
-	void CloseWindowEvent::copy(CloseWindowEvent* closeWindow) {
-		closeWindow->window = window;
 	}
 	
 	void CloseWindowEvent::init(InteractionInitInfo interactionInitInfo) {
@@ -32,13 +25,11 @@ namespace ui {
 	}
 	
 	KeyEvent* CloseWindowEvent::copy() {
-		auto closeWindow{new CloseWindowEvent{}};
-		copy(closeWindow);
-		return closeWindow;
+		return new CloseWindowEvent{*this};
 	}
 	
 	bool DecodePointer<CloseWindowEvent>::decodePointer(const YAML::Node&, CloseWindowEvent*& closeWindowEvent) {
-		closeWindowEvent = new CloseWindowEvent {};
+		closeWindowEvent = new CloseWindowEvent{};
 		return true;
 	}
 }

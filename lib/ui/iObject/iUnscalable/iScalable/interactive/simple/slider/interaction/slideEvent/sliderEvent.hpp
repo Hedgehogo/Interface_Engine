@@ -9,8 +9,6 @@ namespace ui {
 	protected:
 		sf::Vector2f getMousePosition();
 		
-		void copy(SliderEvent* sliderEvent);
-		
 		void startPressed() override;
 		
 		void stopPressed() override;

@@ -20,7 +20,7 @@ namespace ui {
 	}
 	
 	SwitcherEvent* SwitcherEvent::copy() {
-		return new SwitcherEvent(value);
+		return new SwitcherEvent{*this};
 	}
 	
 	bool DecodePointer<SwitcherEvent>::decodePointer(const YAML::Node& node, SwitcherEvent*& switcherEvent) {

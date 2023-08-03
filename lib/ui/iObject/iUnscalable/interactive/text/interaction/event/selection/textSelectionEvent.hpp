@@ -8,15 +8,6 @@ namespace ui {
 	class BaseCharacter;
 	
 	class TextSelectionEvent : public KeyEvent_Simple, public TextEvent {
-	protected:
-		void startPressed() override;
-		
-		void stopPressed() override;
-		
-		void whilePressed() override;
-		
-		void whileNotPressed() override;
-	
 	public:
 		TextSelectionEvent();
 		
@@ -24,9 +15,17 @@ namespace ui {
 		
 		std::vector<BaseCharacter*>::iterator getEnd();
 		
+		void startPressed() override;
+		
+		void stopPressed() override;
+		
+		void whilePressed() override;
+		
+		void whileNotPressed() override;
+		
 		void update(sf::Vector2i mousePosition, bool press) override;
 		
-		TextSelectionEvent* copy();
+		TextSelectionEvent* copy() override;
 	
 	protected:
 		std::vector<BaseCharacter*>::iterator start;

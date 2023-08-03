@@ -7,7 +7,10 @@ namespace ui {
 		void (* stopPressedLambda)(sf::Vector2i),
 		void (* whileNotPressedLambda)(sf::Vector2i)
 	) :
-		KeyEvent_Simple(), startPressedLambda(startPressedLambda), whilePressedLambda(whilePressedLambda), stopPressedLambda(stopPressedLambda), whileNotPressedLambda(whileNotPressedLambda) {
+		startPressedLambda(startPressedLambda),
+		whilePressedLambda(whilePressedLambda),
+		stopPressedLambda(stopPressedLambda),
+		whileNotPressedLambda(whileNotPressedLambda) {
 	}
 	
 	void KeyEvent_LambdaSimple::startPressed() {
@@ -27,10 +30,7 @@ namespace ui {
 	}
 	
 	KeyEvent_LambdaSimple* KeyEvent_LambdaSimple::copy() {
-		KeyEvent_LambdaSimple* keyEventLambdaSimple{new KeyEvent_LambdaSimple{startPressedLambda, whilePressedLambda, stopPressedLambda, whileNotPressedLambda}};
-		KeyEvent::copy(keyEventLambdaSimple);
-		return keyEventLambdaSimple;
+		return new KeyEvent_LambdaSimple{*this};
 	}
-	
 }
 

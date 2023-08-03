@@ -16,8 +16,11 @@ namespace ui {
 	}
 	
 	DisplayPanelEvent* DisplayPanelEvent::copy() {
-		DisplayPanelEvent* displayPanelEvent{new DisplayPanelEvent{}};
-		PanelEvent::copy(displayPanelEvent);
-		return displayPanelEvent;
+		return new DisplayPanelEvent{*this};
+	}
+	
+	bool DecodePointer<DisplayPanelEvent>::decodePointer(const YAML::Node&, DisplayPanelEvent*& displayPanelEvent) {
+		displayPanelEvent = new DisplayPanelEvent{};
+		return false;
 	}
 }

@@ -8,8 +8,6 @@ namespace ui {
 	}
 	
 	AddBlockInteractionEvent* AddBlockInteractionEvent::copy() {
-		AddBlockInteractionEvent* addBlockInteractionEvent{new AddBlockInteractionEvent{*interaction}};
-		AddInteractionEvent::copy(addBlockInteractionEvent);
-		return addBlockInteractionEvent;
+		return new AddBlockInteractionEvent{*this};
 	}
 }

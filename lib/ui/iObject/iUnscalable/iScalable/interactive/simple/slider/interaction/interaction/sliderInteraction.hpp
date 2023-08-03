@@ -23,7 +23,7 @@ namespace ui {
 		SliderInteraction* copy() override;
 	
 	protected:
-		PressedInteraction slideInteraction;
 		SliderWheelEvent wheelEvent;
+		PressedInteraction slideInteraction;
 	};
 }

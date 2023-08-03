@@ -15,11 +15,11 @@ namespace ui {
 	void ConsoleCommandEvent::whileNotPressed() {}
 	
 	ConsoleCommandEvent* ConsoleCommandEvent::copy() {
-		return new ConsoleCommandEvent{command};
+		return new ConsoleCommandEvent{*this};
 	}
 	
-	bool DecodePointer<ConsoleCommandEvent>::decodePointer(const YAML::Node& node, ConsoleCommandEvent*& sConvertToBoolEquals) {
-		sConvertToBoolEquals = new ConsoleCommandEvent{
+	bool DecodePointer<ConsoleCommandEvent>::decodePointer(const YAML::Node& node, ConsoleCommandEvent*& consoleCommandEvent) {
+		consoleCommandEvent = new ConsoleCommandEvent{
 			node["command"].as<std::string>()
 		};
 		return true;

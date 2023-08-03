@@ -22,7 +22,7 @@ namespace ui {
 	
 	protected:
 		int objectsSize;
-		std::shared_ptr<SValue<uint>> index;
+		PSValue<uint> index;
 		int offset;
 	};
 	

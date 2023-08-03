@@ -14,11 +14,6 @@ namespace ui {
 		this->panel = &panel;
 	}
 	
-	void PanelEvent::copy(PanelEvent* panelEvent) {
-		panelEvent->panel = this->panel;
-		panelEvent->panelManager = this->panelManager;
-	}
-	
 	Panel* PanelEvent::getPanel() {
 		return panel;
 	}

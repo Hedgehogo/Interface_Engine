@@ -7,8 +7,8 @@ namespace ui {
 	class Switcher;
 	
 	class SwitcherEvent : public KeyEvent_Simple {
-	protected:
-		PSbool value;
+	public:
+		SwitcherEvent(PSbool value);
 		
 		void startPressed() override;
 		
@@ -17,11 +17,11 @@ namespace ui {
 		void whilePressed() override;
 		
 		void whileNotPressed() override;
-	
-	public:
-		SwitcherEvent(PSbool value);
 		
 		SwitcherEvent* copy() override;
+		
+	protected:
+		PSbool value;
 	};
 	
 	template<>

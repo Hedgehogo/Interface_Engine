@@ -6,9 +6,6 @@
 
 namespace ui {
 	class WheelEvent : public IEvent {
-	protected:
-		void copy(WheelEvent* wheelEvent);
-	
 	public:
 		explicit WheelEvent();
 		

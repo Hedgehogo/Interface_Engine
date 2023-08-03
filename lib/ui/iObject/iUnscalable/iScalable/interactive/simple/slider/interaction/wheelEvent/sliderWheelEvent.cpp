@@ -33,11 +33,8 @@ namespace ui {
 	}
 	
 	SliderWheelEvent* SliderWheelEvent::copy() {
-		SliderWheelEvent* sliderWheelEvent{new SliderWheelEvent{*slider, horizontal, (relativity ? Relativity::relationSlider : Relativity::relationArea), sensitivity}};
-		WheelEvent::copy(sliderWheelEvent);
-		return sliderWheelEvent;
+		return new SliderWheelEvent{*this};
 	}
-	
 	
 	bool Decode<SliderWheelEvent::Relativity>::decode(const YAML::Node& node, SliderWheelEvent::Relativity& relativity) {
 		if(convertBool(node, "relation-area", "relation-slider")) {

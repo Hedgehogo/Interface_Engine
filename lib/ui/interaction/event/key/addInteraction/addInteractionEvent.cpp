@@ -26,13 +26,7 @@ namespace ui {
 		this->interaction = &interaction;
 	}
 	
-	void AddInteractionEvent::copy(AddInteractionEvent* addInteractionEvent) {
-		addInteractionEvent->interactionManager = this->interactionManager;
-	}
-	
 	AddInteractionEvent* AddInteractionEvent::copy() {
-		AddInteractionEvent* addInteractionEvent{new AddInteractionEvent{*interaction}};
-		AddInteractionEvent::copy(this);
-		return addInteractionEvent;
+		return new AddInteractionEvent{*this};
 	}
 }

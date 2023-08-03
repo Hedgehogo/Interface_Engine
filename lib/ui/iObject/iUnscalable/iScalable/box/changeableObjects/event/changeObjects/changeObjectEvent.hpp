@@ -21,7 +21,7 @@ namespace ui {
 	
 	protected:
 		uint index;
-		std::shared_ptr<SValue<uint>> value;
+		PSValue<uint> value;
 	};
 	
 	template<>

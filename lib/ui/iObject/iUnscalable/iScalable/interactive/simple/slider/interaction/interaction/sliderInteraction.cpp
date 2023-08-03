@@ -35,8 +35,8 @@ namespace ui {
 	
 	SliderInteraction::SliderInteraction(const SliderInteraction& other) :
 		OneKeyInteraction(BoxPtr<KeyEvent>{new AddBlockInteractionEvent{slideInteraction}}, other.key),
-		slideInteraction(other.slideInteraction),
-		wheelEvent(other.wheelEvent) {
+		wheelEvent(other.wheelEvent),
+		slideInteraction(other.slideInteraction) {
 	}
 	
 	SliderInteraction* SliderInteraction::copy() {

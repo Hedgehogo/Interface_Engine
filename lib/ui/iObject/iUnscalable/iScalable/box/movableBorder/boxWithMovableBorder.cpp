@@ -20,7 +20,7 @@ namespace ui {
 		borderValue(borderValue),
 		borderInteractionSize(borderInteractionSize),
 		isHorizontalBorder(isHorizontalBorder) {
-		borderValue->addSetter([&](float value) {
+		borderValue->addSetter([&](float) {
 			this->resize(layout.size, layout.position);
 		});
 	}

@@ -6,9 +6,6 @@
 
 namespace ui {
 	class KeyEvent : public IEvent {
-	protected:
-		void copy(KeyEvent* keyEvent);
-	
 	public:
 		explicit KeyEvent();
 		

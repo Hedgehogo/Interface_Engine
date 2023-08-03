@@ -14,8 +14,6 @@ namespace ui {
 		
 		void whileNotPressed() override;
 		
-		void copy(AddInteractionEvent* addInteractionEvent);
-	
 	public:
 		explicit AddInteractionEvent(IInteraction& interaction);
 		

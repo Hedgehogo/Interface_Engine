@@ -7,8 +7,6 @@ namespace ui {
 	
 	class MovableBorderEvent : public KeyEvent_Simple {
 	protected:
-		void copy(MovableBorderEvent* event);
-		
 		void startPressed() override;
 		
 		void stopPressed() override;

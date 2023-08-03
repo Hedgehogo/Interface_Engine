@@ -41,15 +41,7 @@ namespace ui {
 	void MovableBorderEvent::whileNotPressed() {
 	}
 	
-	void MovableBorderEvent::copy(MovableBorderEvent* event) {
-		event->startMousePosition = this->startMousePosition;
-		event->startBorderValue = this->startBorderValue;
-		event->active = this->active;
-	}
-	
 	MovableBorderEvent* MovableBorderEvent::copy() {
-		MovableBorderEvent* event{new MovableBorderEvent{*box}};
-		MovableBorderEvent::copy(event);
-		return event;
+		return new MovableBorderEvent{*this};
 	}
 }

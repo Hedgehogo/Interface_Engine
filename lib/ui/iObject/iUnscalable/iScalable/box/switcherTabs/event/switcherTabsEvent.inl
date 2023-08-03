@@ -14,6 +14,6 @@ namespace ui {
 	void SwitcherTabsEvent::whileNotPressed() {}
 	
 	SwitcherTabsEvent* SwitcherTabsEvent::copy() {
-		return new SwitcherTabsEvent{value, switcherTabs};
+		return new SwitcherTabsEvent{*this};
 	}
 }
