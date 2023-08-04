@@ -7,16 +7,14 @@
 namespace ui {
 	class InteractionStack {
 	protected:
-		std::vector<IInteraction*> interactionStack;
+		std::vector<BoxPtr<IInteraction> > interactionStack;
 	
 	public:
-		explicit InteractionStack(std::vector<IInteraction*>&& interactionStack = {});
+		explicit InteractionStack(std::vector<BoxPtr<IInteraction> >&& interactionStack = {});
 		
-		virtual ~InteractionStack();
+		IInteraction& at(std::size_t index);
 		
-		IInteraction* at(unsigned index);
-		
-		void add(IInteraction* element);
+		void add(BoxPtr<IInteraction>&& element);
 	};
 	
 	template<>

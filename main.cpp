@@ -14,14 +14,14 @@ float calculateMediumFPS(std::array<float, T> lastFPS) {
 int main() {
 	ui::init();
 	
-	ui::Window window(
+	ui::Window window{
 		"../../example-resources/test.yaml",
 		"IE works!",
 		{200, 100},
 		sf::ContextSettings{
 			0, 0, 1
 		}
-	);
+	};
 	
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};

@@ -17,7 +17,7 @@ namespace ui {
 	
 	void Button::init(InteractiveInitInfo interactiveInitInfo) {
 		if(interactionIndex != std::numeric_limits<std::size_t>::max()) {
-			interaction = BoxPtr{interactionStack->at(interactionIndex)};
+			interaction = BoxPtr{&interactionStack->at(interactionIndex)};
 		}
 		BaseButton::init(interactiveInitInfo);
 	}

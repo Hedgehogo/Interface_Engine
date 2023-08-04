@@ -22,7 +22,7 @@ namespace ui {
 		TextBlock::init(textInitInfo, initInfo);
 		this->interactionManager = &textInitInfo.interactionManager;
 		if(!interaction)
-			interaction = textInitInfo.interactionStack.at(indexInteraction);
+			interaction = &textInitInfo.interactionStack.at(indexInteraction);
 	}
 	
 	void InteractiveTextBlock::update() {
