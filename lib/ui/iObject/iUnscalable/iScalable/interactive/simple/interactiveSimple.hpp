@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../../interactive/interactive.hpp"
+#include "ui/iObject/iUnscalable/interactive/iInteractive.hpp"
 
 namespace ui {
-	class Interactive_Simple : public virtual IScalable, public Interactive, public IUpdatable {
+	class Interactive_Simple : public virtual IScalable, public IInteractive, public IUpdatable {
 	public:
 		explicit Interactive_Simple(BoxPtr<IInteraction>&& interaction);
 		
@@ -14,6 +14,8 @@ namespace ui {
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 	
 	protected:
+		InteractionStack* interactionStack;
+		InteractionManager* interactionManager;
 		BoxPtr<IInteraction> interaction;
 	
 	private:

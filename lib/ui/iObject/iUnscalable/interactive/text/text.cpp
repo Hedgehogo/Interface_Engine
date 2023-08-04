@@ -7,9 +7,18 @@ namespace ui {
 	std::vector<BaseCharacter*>::iterator nullBaseCharacterIterator{nullptr};
 	
 	Text::Text(
-		std::vector<BaseTextBlock*> textBlocks, IUninteractive* background, int size, sf::Font* font, sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
-		sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, BaseResizer* resizer, TextInteraction* textInteraction
-	) : textInteraction(textInteraction), size(size), textBocks(textBlocks), resizer(resizer), background(background) {
+		std::vector<BaseTextBlock*> textBlocks,
+		IUninteractive* background,
+		int size,
+		sf::Font* font,
+		sf::Color textColor,
+		sf::Color textSelectionColor,
+		sf::Color backgroundSelectionColor,
+		sf::Color inactiveTextSelectionColor,
+		sf::Color inactiveBackgroundSelectionColor,
+		BaseResizer* resizer,
+		TextInteraction* textInteraction
+	) : interactionStack(nullptr), interactionManager(nullptr), textInteraction(textInteraction), size(size), textBocks(textBlocks), resizer(resizer), background(background) {
 		for(BaseTextBlock* textBlock: textBlocks) {
 			textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, (inactiveTextSelectionColor == nullColor ? textColor : inactiveTextSelectionColor), inactiveBackgroundSelectionColor, font,
 										size);
@@ -35,6 +44,8 @@ namespace ui {
 	}
 	
 	void Text::init(InitInfo initInfo) {
+		this->interactionStack = &initInfo.interactionStack;
+		this->interactionManager = &initInfo.interactionManager;
 		initInfo.updateManager.add(*this);
 		this->renderTarget = &initInfo.renderTarget;
 		InitInfo textInitInfo{initInfo.window, renderTexture, drawManager, initInfo.updateManager, *interactionManager, *interactionStack, initInfo.panelManager};

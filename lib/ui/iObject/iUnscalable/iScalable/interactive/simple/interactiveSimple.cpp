@@ -2,11 +2,12 @@
 
 namespace ui {
 	Interactive_Simple::Interactive_Simple(BoxPtr<IInteraction>&& interaction) :
-		interaction(std::move(interaction)), interact(false), oldInteract(false) {
+		interactionStack(nullptr), interactionManager(nullptr), interaction(std::move(interaction)), interact(false), oldInteract(false) {
 	}
 	
 	void Interactive_Simple::init(InitInfo initInfo) {
-		Interactive::init(initInfo);
+		this->interactionStack = &initInfo.interactionStack;
+		this->interactionManager = &initInfo.interactionManager;
 		initInfo.updateManager.add(*this);
 		interaction->init({initInfo});
 	}

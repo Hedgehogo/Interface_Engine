@@ -12,7 +12,7 @@
 #include "interaction/interaction/selectionAndCopy/textSelectionAndCopyInteraction.hpp"
 
 namespace ui {
-	class Text : public Interactive, public IDrawable, public IUpdatable {
+	class Text : public IInteractive, public IDrawable, public IUpdatable {
 	protected:
 		struct Selection {
 			std::vector<BaseCharacter*>::iterator start;
@@ -23,9 +23,16 @@ namespace ui {
 	
 	public:
 		explicit Text(
-			std::vector<BaseTextBlock*> textBlocks, IUninteractive* background = new FullColor(sf::Color::White), int size = 14, sf::Font* font = nullptr, sf::Color textColor = sf::Color::Black,
-			sf::Color textSelectionColor = sf::Color::White, sf::Color backgroundSelectionColor = sf::Color::Blue, sf::Color inactiveTextSelectionColor = nullColor,
-			sf::Color inactiveBackgroundSelectionColor = {150, 150, 150}, BaseResizer* resizer = new Resizer{1.15, BaseResizer::Align::left},
+			std::vector<BaseTextBlock*> textBlocks,
+			IUninteractive* background = new FullColor(sf::Color::White),
+			int size = 14,
+			sf::Font* font = nullptr,
+			sf::Color textColor = sf::Color::Black,
+			sf::Color textSelectionColor = sf::Color::White,
+			sf::Color backgroundSelectionColor = sf::Color::Blue,
+			sf::Color inactiveTextSelectionColor = nullColor,
+			sf::Color inactiveBackgroundSelectionColor = {150, 150, 150},
+			BaseResizer* resizer = new Resizer{1.15, BaseResizer::Align::left},
 			TextInteraction* textInteraction = new TextEmptyInteraction{}
 		);
 		
@@ -79,6 +86,9 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		InteractionStack* interactionStack;
+		InteractionManager* interactionManager;
+		
 		sf::RenderTarget* renderTarget;
 		
 		sf::RenderTexture renderTexture;
