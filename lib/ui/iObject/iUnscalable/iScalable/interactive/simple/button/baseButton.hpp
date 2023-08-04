@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../interactiveSimple.hpp"
+#include "../baseInteractive.hpp"
 #include "../../../uninteractive/uninteractive.hpp"
 
 namespace ui {
-	class BaseButton : public Interactive_Simple {
+	class BaseButton : public BaseInteractive {
 	public:
 		BaseButton(BoxPtr<IScalable>&& background, BoxPtr<IInteraction>&& interaction);
 		

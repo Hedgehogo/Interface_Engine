@@ -11,14 +11,14 @@ namespace ui {
 	
 	Button::~Button() {
 		if(interactionIndex != std::numeric_limits<std::size_t>::max()) {
-			interaction.set(nullptr);
+			interactive.interaction.set(nullptr);
 		}
 	}
 	
 	void Button::init(InitInfo initInfo) {
 		BaseButton::init(initInfo);
 		if(interactionIndex != std::numeric_limits<std::size_t>::max()) {
-			interaction = BoxPtr{&interactionStack->at(interactionIndex)};
+			interactive.interaction = BoxPtr{&interactive.interactionStack->at(interactionIndex)};
 		}
 	}
 	

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../interactiveSimple.hpp"
+#include "../baseInteractive.hpp"
 #include "ui/iObject/iLayout/iLayout.hpp"
 #include "../../../../../../drawable/iDrawable/iDrawable.hpp"
 
@@ -8,7 +8,7 @@
 #include "../../../../../../enums/keyHandler/keyHandler.hpp"
 
 namespace ui {
-	class Switcher : public Interactive_Simple, public ILayout, public IDrawable {
+	class Switcher : public BaseInteractive, public ILayout, public IDrawable {
 	public:
 		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key = Key::mouseLeft);
 		

@@ -6,14 +6,14 @@ namespace ui {
 	}
 	
 	ButtonWithPanel::ButtonWithPanel(const ButtonWithPanel& other) :
-		BaseButton(BoxPtr{other.background}, BoxPtr{other.interaction}), panel(BoxPtr{other.panel}) {
-		dynamic_cast<IDisplayPanelInteraction&>(*interaction).setPanel(*panel);
+		BaseButton(BoxPtr{other.background}, BoxPtr{other.interactive.interaction}), panel(BoxPtr{other.panel}) {
+		dynamic_cast<IDisplayPanelInteraction&>(*interactive.interaction).setPanel(*panel);
 	}
 	
 	void ButtonWithPanel::init(InitInfo initInfo) {
 		BaseButton::init(initInfo);
 		panel->init(initInfo);
-		dynamic_cast<IDisplayPanelInteraction&>(*interaction).init({initInfo, *panel});
+		dynamic_cast<IDisplayPanelInteraction&>(*interactive.interaction).init({initInfo, *panel});
 	}
 	
 	void ButtonWithPanel::resize(sf::Vector2f size, sf::Vector2f position) {

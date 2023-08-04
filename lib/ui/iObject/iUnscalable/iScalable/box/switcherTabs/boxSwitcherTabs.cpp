@@ -8,15 +8,16 @@
 
 namespace ui {
 	BoxSwitcherTabs::BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
-		Box(minSize), Interactive_Simple(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>{new SwitcherTabsEvent{value, this}}, key)),
+		Box(minSize), interactive(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>{new SwitcherTabsEvent{value, this}}, key)),
 		objects(std::move(objects)), isHorizontal(isHorizontal), value(value) {
 	}
 	
 	void BoxSwitcherTabs::init(InitInfo initInfo) {
-		Interactive_Simple::init(initInfo);
+		interactive.init(initInfo);
 		for(auto& object: objects) {
 			object->init(initInfo);
 		}
+		initInfo.updateManager.add(*this);
 	}
 	
 	void BoxSwitcherTabs::setPosition(sf::Vector2f position) {
@@ -41,6 +42,15 @@ namespace ui {
 				positionY += objectSize.y;
 			}
 		}
+	}
+	
+	void BoxSwitcherTabs::update() {
+		interactive.update();
+	}
+	
+	bool BoxSwitcherTabs::updateInteractions(sf::Vector2f) {
+		interactive.updateInteractions();
+		return true;
 	}
 	
 	std::size_t BoxSwitcherTabs::getArraySize() const {

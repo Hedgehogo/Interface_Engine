@@ -4,7 +4,7 @@
 
 namespace ui {
 	Switcher::Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key) :
-		Interactive_Simple(makeBoxPtr<IInteraction, OneKeyInteraction>(makeBoxPtr<KeyEvent, SwitcherEvent>(value), key)),
+		BaseInteractive(makeBoxPtr<IInteraction, OneKeyInteraction>(makeBoxPtr<KeyEvent, SwitcherEvent>(value), key)),
 		activeBackground(std::move(activeBackground)), inactiveBackground(std::move(inactiveBackground)), active(value) {
 	}
 	
@@ -13,7 +13,7 @@ namespace ui {
 	}
 	
 	void Switcher::init(InitInfo initInfo) {
-		Interactive_Simple::init(initInfo);
+		BaseInteractive::init(initInfo);
 		initInfo.drawManager.add(*this);
 		activeBackground->init(initInfo.copy(activeDrawManager));
 		inactiveBackground->init(initInfo.copy(inactiveDrawManager));
@@ -73,7 +73,7 @@ namespace ui {
 			backgroundUpdate = activeBackground->updateInteractions(mousePosition);
 		else
 			backgroundUpdate = inactiveBackground->updateInteractions(mousePosition);
-		return Interactive_Simple::updateInteractions(mousePosition) || backgroundUpdate;
+		return BaseInteractive::updateInteractions(mousePosition) || backgroundUpdate;
 	}
 	
 	Switcher* Switcher::copy() {

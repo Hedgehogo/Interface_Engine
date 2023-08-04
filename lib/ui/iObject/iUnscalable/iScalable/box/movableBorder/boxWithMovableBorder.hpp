@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../box.hpp"
-#include "../../interactive/simple/interactiveSimple.hpp"
+#include "../../interactive/simple/baseInteractive.hpp"
 #include "../../../../iLayout/twoObjects/iLayoutWithTwoObjects.hpp"
 #include "../../../../../interaction/iInteraction/block/pressed/pressedInteraction.hpp"
 #include "interaction/event/movableBorderEvent.hpp"
@@ -9,7 +9,7 @@
 #include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 
 namespace ui {
-	class BoxWithMovableBorder : public Box, public Interactive_Simple, public ILayoutWithTwoObjects {
+	class BoxWithMovableBorder : public Box, public IInteractive, public IUpdatable, public ILayoutWithTwoObjects {
 	public:
 		BoxWithMovableBorder(
 			BoxPtr<IScalable>&& firstObject,
@@ -59,6 +59,7 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		BaseInteractiveData interactive;
 		BoxPtr<IScalable> firstObject;
 		BoxPtr<IScalable> secondObject;
 		PressedInteraction pressedInteraction;

@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../../../uninteractive/uninteractive.hpp"
-#include "../interactiveSimple.hpp"
+#include "../baseInteractive.hpp"
 #include "interaction/interaction/sliderInteraction.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/shared/shared.hpp"
 
 namespace ui {
-	class BaseSlider : public Interactive_Simple {
+	class BaseSlider : public BaseInteractive {
 	protected:
 		virtual void resizeSlider(sf::Vector2f newValue);
 	

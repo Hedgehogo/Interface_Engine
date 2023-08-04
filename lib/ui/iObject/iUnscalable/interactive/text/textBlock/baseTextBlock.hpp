@@ -2,7 +2,7 @@
 
 #include "../variables/textVariables.hpp"
 #include "../character/baseCharacter.hpp"
-#include "../../../iScalable/interactive/simple/interactiveSimple.hpp"
+#include "../../../iScalable/interactive/simple/baseInteractive.hpp"
 #include "../../../../initInfo/initInfo.hpp"
 
 namespace ui {

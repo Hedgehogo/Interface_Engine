@@ -12,7 +12,7 @@ namespace ui {
 		sf::Vector2f minSize
 	) :
 		Box(minSize),
-		Interactive_Simple(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>(new AddBlockInteractionEvent{pressedInteraction}), Key::mouseLeft)),
+		interactive(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>(new AddBlockInteractionEvent{pressedInteraction}), Key::mouseLeft)),
 		firstObject(std::move(firstObject)),
 		secondObject(std::move(secondObject)),
 		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, Key::mouseLeft),
@@ -26,11 +26,12 @@ namespace ui {
 	}
 	
 	void BoxWithMovableBorder::init(InitInfo initInfo) {
+		interactive.init(initInfo);
 		firstObject->init(initInfo);
 		secondObject->init(initInfo);
-		Interactive_Simple::init(initInfo);
+		initInfo.updateManager.add(*this);
 		pressedInteraction.init(InteractionInitInfo{initInfo});
-		dynamic_cast<OneKeyInteraction&>(*this->interaction).getEvent().init({initInfo});
+		dynamic_cast<OneKeyInteraction&>(*interactive.interaction).getEvent().init({initInfo});
 	}
 	
 	float BoxWithMovableBorder::getBorderValue() {
@@ -70,7 +71,7 @@ namespace ui {
 	}
 	
 	void BoxWithMovableBorder::update() {
-		Interactive_Simple::update();
+		interactive.update();
 	}
 	
 	bool BoxWithMovableBorder::updateInteractions(sf::Vector2f mousePosition) {
@@ -89,7 +90,7 @@ namespace ui {
 				return secondObject->updateInteractions(mousePosition);
 			}
 		} else {
-			Interactive_Simple::updateInteractions(mousePosition);
+			interactive.updateInteractions();
 		}
 		return true;
 	}

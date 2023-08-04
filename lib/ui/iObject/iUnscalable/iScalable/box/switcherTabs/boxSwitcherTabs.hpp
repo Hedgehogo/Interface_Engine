@@ -2,11 +2,11 @@
 
 #include "ui/iObject/iUnscalable/iScalable/box/box.hpp"
 #include "../../../../iLayout/objectsArray/iLayoutWithObjectsArray.hpp"
-#include "ui/iObject/iUnscalable/iScalable/interactive/simple/interactiveSimple.hpp"
+#include "ui/iObject/iUnscalable/iScalable/interactive/simple/baseInteractive.hpp"
 #include "ui/enums/keyHandler/keyHandler.hpp"
 
 namespace ui {
-	class BoxSwitcherTabs : public Box, public Interactive_Simple, public ILayoutWithObjectsArray {
+	class BoxSwitcherTabs : public Box, public IInteractive, public IUpdatable, public ILayoutWithObjectsArray {
 	public:
 		BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize = {});
 		
@@ -15,6 +15,10 @@ namespace ui {
 		void setPosition(sf::Vector2f position) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		
+		void update() override;
+		
+		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
 		std::size_t getArraySize() const override;
 		
@@ -27,6 +31,7 @@ namespace ui {
 		BoxSwitcherTabs* copy() override;
 	
 	protected:
+		BaseInteractiveData interactive;
 		std::vector<BoxPtr<IScalable> > objects;
 		bool isHorizontal;
 		PSint value;
