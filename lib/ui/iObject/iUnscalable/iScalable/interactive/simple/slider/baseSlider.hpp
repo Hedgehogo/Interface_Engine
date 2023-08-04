@@ -15,7 +15,7 @@ namespace ui {
 		
 		BaseSlider(const BaseSlider& other);
 		
-		void init(InteractiveInitInfo interactiveInitInfo) override;
+		void init(InitInfo initInfo) override;
 		
 		bool onSlider(sf::Vector2i mousePosition);
 		

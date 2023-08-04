@@ -5,9 +5,10 @@ namespace ui {
 		interaction(std::move(interaction)), interact(false), oldInteract(false) {
 	}
 	
-	void Interactive_Simple::init(InteractiveInitInfo interactiveInitInfo) {
-		interactiveInitInfo.updateManager.add(*this);
-		interaction->init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
+	void Interactive_Simple::init(InitInfo initInfo) {
+		Interactive::init(initInfo);
+		initInfo.updateManager.add(*this);
+		interaction->init({initInfo});
 	}
 	
 	void Interactive_Simple::update() {

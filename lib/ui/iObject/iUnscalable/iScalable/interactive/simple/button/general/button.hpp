@@ -11,7 +11,7 @@ namespace ui {
 		
 		~Button() override;
 		
-		void init(InteractiveInitInfo interactiveInitInfo) override;
+		void init(InitInfo initInfo) override;
 		
 		Button* copy() override;
 	

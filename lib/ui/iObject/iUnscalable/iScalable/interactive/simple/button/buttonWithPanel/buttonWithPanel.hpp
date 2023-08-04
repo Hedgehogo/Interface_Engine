@@ -18,7 +18,7 @@ namespace ui {
 		
 		ButtonWithPanel(const ButtonWithPanel& other);
 		
-		void init(InteractiveInitInfo interactiveInitInfo) override;
+		void init(InitInfo initInfo) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		

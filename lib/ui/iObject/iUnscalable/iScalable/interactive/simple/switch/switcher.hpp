@@ -14,7 +14,7 @@ namespace ui {
 		
 		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, Key key = Key::mouseLeft, bool startActive = false);
 		
-		void init(InteractiveInitInfo interactiveInitInfo) override;
+		void init(InitInfo initInfo) override;
 		
 		void setPosition(sf::Vector2f position) override;
 		

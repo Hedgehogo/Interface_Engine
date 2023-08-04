@@ -24,11 +24,11 @@ namespace ui {
 		dynamic_cast<SliderInteraction&>(*interaction).setSlider(*this);
 	}
 	
-	void BaseSlider::init(InteractiveInitInfo interactiveInitInfo) {
-		Interactive_Simple::init(interactiveInitInfo);
-		background->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
-		slider->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
-		dynamic_cast<SliderInteraction&>(*interaction).init(InteractionInitInfo{interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
+	void BaseSlider::init(InitInfo initInfo) {
+		Interactive_Simple::init(initInfo);
+		background->init(initInfo);
+		slider->init(initInfo);
+		dynamic_cast<SliderInteraction&>(*interaction).init(InteractionInitInfo{initInfo});
 	}
 	
 	void BaseSlider::resizeSlider(sf::Vector2f newValue) {

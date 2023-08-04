@@ -34,17 +34,17 @@ namespace ui {
 		delete textInteraction;
 	}
 	
-	void Text::init(InteractiveInitInfo interactiveInitInfo) {
-		interactiveInitInfo.updateManager.add(*this);
-		this->renderTarget = &interactiveInitInfo.renderTarget;
-		InitInfo initInfo{interactiveInitInfo.window, renderTexture, drawManager, interactiveInitInfo.updateManager, *interactionManager, *interactionStack, interactiveInitInfo.panelManager};
-		background->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
-		interactiveInitInfo.drawManager.add(*this);
+	void Text::init(InitInfo initInfo) {
+		initInfo.updateManager.add(*this);
+		this->renderTarget = &initInfo.renderTarget;
+		InitInfo textInitInfo{initInfo.window, renderTexture, drawManager, initInfo.updateManager, *interactionManager, *interactionStack, initInfo.panelManager};
+		background->init(initInfo);
+		initInfo.drawManager.add(*this);
 		for(BaseTextBlock* textBlock: textBocks) {
-			textBlock->init(initInfo, interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
+			textBlock->init(textInitInfo, initInfo);
 		}
 		
-		textInteraction->init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack), *this});
+		textInteraction->init({initInfo, *this});
 	}
 	
 	void Text::setSelection(Text::Selection selection) {

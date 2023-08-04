@@ -7,7 +7,7 @@ namespace ui {
 	public:
 		explicit Interactive_Simple(BoxPtr<IInteraction>&& interaction);
 		
-		void init(InteractiveInitInfo interactiveInitInfo) override;
+		void init(InitInfo initInfo) override;
 		
 		void update() override;
 		

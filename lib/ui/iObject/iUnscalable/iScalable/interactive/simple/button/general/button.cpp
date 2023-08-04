@@ -15,11 +15,11 @@ namespace ui {
 		}
 	}
 	
-	void Button::init(InteractiveInitInfo interactiveInitInfo) {
+	void Button::init(InitInfo initInfo) {
+		BaseButton::init(initInfo);
 		if(interactionIndex != std::numeric_limits<std::size_t>::max()) {
 			interaction = BoxPtr{&interactionStack->at(interactionIndex)};
 		}
-		BaseButton::init(interactiveInitInfo);
 	}
 	
 	Button* Button::copy() {

@@ -19,7 +19,7 @@ namespace ui {
 			std::vector<BaseCharacter*>::iterator end;
 		};
 		
-		void init(InteractiveInitInfo interactiveInitInfo) override;
+		void init(InitInfo initInfo) override;
 	
 	public:
 		explicit Text(

@@ -6,7 +6,7 @@
 #include "ui/enums/keyHandler/keyHandler.hpp"
 
 namespace ui {
-	class BoxSwitcherTabs : public Box, public ILayoutWithObjectsArray, public Interactive_Simple {
+	class BoxSwitcherTabs : public Box, public Interactive_Simple, public ILayoutWithObjectsArray {
 	public:
 		BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize = {});
 		

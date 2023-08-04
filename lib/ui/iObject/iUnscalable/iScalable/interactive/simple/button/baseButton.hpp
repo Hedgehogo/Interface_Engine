@@ -8,7 +8,7 @@ namespace ui {
 	public:
 		BaseButton(BoxPtr<IScalable>&& background, BoxPtr<IInteraction>&& interaction);
 		
-		void init(InteractiveInitInfo interactiveInitInfo) override;
+		void init(InitInfo initInfo) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		

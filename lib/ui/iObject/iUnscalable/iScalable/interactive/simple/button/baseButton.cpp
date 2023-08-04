@@ -2,9 +2,9 @@
 #include "baseButton.hpp"
 
 namespace ui {
-	void BaseButton::init(InteractiveInitInfo interactiveInitInfo) {
-		Interactive_Simple::init(interactiveInitInfo);
-		background->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
+	void BaseButton::init(InitInfo initInfo) {
+		Interactive_Simple::init(initInfo);
+		background->init(initInfo);
 	}
 	
 	BaseButton::BaseButton(BoxPtr<IScalable>&& background, BoxPtr<IInteraction>&& interaction) :

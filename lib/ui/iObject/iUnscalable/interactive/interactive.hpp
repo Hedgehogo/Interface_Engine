@@ -9,8 +9,6 @@ namespace ui {
 	public:
 		void init(InitInfo initInfo) override;
 		
-		virtual void init(InteractiveInitInfo interactiveInitInfo) = 0;
-		
 		explicit Interactive();
 	
 	protected:

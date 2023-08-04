@@ -12,11 +12,11 @@ namespace ui {
 		Switcher(std::move(inactiveBackground), std::move(activeBackground), std::make_shared<Sbool>(startActive), key) {
 	}
 	
-	void Switcher::init(InteractiveInitInfo interactiveInitInfo) {
-		Interactive_Simple::init(interactiveInitInfo);
-		interactiveInitInfo.drawManager.add(*this);
-		activeBackground->init(interactiveInitInfo.copy(activeDrawManager).toGeneral(*interactionManager, *interactionStack));
-		inactiveBackground->init(interactiveInitInfo.copy(inactiveDrawManager).toGeneral(*interactionManager, *interactionStack));
+	void Switcher::init(InitInfo initInfo) {
+		Interactive_Simple::init(initInfo);
+		initInfo.drawManager.add(*this);
+		activeBackground->init(initInfo.copy(activeDrawManager));
+		inactiveBackground->init(initInfo.copy(inactiveDrawManager));
 	}
 	
 	void Switcher::setPosition(sf::Vector2f position) {

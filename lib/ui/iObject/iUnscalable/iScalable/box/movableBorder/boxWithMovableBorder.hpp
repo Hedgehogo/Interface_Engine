@@ -9,7 +9,7 @@
 #include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 
 namespace ui {
-	class BoxWithMovableBorder : public Box, public ILayoutWithTwoObjects, public Interactive_Simple {
+	class BoxWithMovableBorder : public Box, public Interactive_Simple, public ILayoutWithTwoObjects {
 	public:
 		BoxWithMovableBorder(
 			BoxPtr<IScalable>&& firstObject,
@@ -21,8 +21,6 @@ namespace ui {
 		);
 		
 		void init(InitInfo initInfo) override;
-		
-		void init(InteractiveInitInfo interactiveInitInfo) override;
 		
 		float getBorderValue();
 		

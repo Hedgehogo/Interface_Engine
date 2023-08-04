@@ -10,10 +10,10 @@ namespace ui {
 		dynamic_cast<IDisplayPanelInteraction&>(*interaction).setPanel(*panel);
 	}
 	
-	void ButtonWithPanel::init(InteractiveInitInfo interactiveInitInfo) {
-		BaseButton::init(interactiveInitInfo);
-		panel->init(interactiveInitInfo.toGeneral(*interactionManager, *interactionStack));
-		dynamic_cast<IDisplayPanelInteraction&>(*interaction).init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack), *panel});
+	void ButtonWithPanel::init(InitInfo initInfo) {
+		BaseButton::init(initInfo);
+		panel->init(initInfo);
+		dynamic_cast<IDisplayPanelInteraction&>(*interaction).init({initInfo, *panel});
 	}
 	
 	void ButtonWithPanel::resize(sf::Vector2f size, sf::Vector2f position) {

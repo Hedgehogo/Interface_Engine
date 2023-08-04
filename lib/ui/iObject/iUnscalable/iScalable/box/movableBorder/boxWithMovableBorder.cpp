@@ -26,15 +26,11 @@ namespace ui {
 	}
 	
 	void BoxWithMovableBorder::init(InitInfo initInfo) {
-		Interactive::init(initInfo);
 		firstObject->init(initInfo);
 		secondObject->init(initInfo);
-	}
-	
-	void BoxWithMovableBorder::init(InteractiveInitInfo interactiveInitInfo) {
-		Interactive_Simple::init(interactiveInitInfo);
-		pressedInteraction.init(InteractionInitInfo{interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
-		dynamic_cast<OneKeyInteraction&>(*this->interaction).getEvent().init({interactiveInitInfo.toGeneral(*interactionManager, *interactionStack)});
+		Interactive_Simple::init(initInfo);
+		pressedInteraction.init(InteractionInitInfo{initInfo});
+		dynamic_cast<OneKeyInteraction&>(*this->interaction).getEvent().init({initInfo});
 	}
 	
 	float BoxWithMovableBorder::getBorderValue() {

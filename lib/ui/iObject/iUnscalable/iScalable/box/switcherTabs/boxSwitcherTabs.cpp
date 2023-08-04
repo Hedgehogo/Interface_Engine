@@ -13,10 +13,10 @@ namespace ui {
 	}
 	
 	void BoxSwitcherTabs::init(InitInfo initInfo) {
+		Interactive_Simple::init(initInfo);
 		for(auto& object: objects) {
 			object->init(initInfo);
 		}
-		Interactive::init(initInfo);
 	}
 	
 	void BoxSwitcherTabs::setPosition(sf::Vector2f position) {
