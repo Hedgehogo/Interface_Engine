@@ -6,6 +6,10 @@
 namespace ui {
 	class ILayoutWithBackground : public virtual ILayout {
 	public:
+		struct Make : public virtual ILayout::Make {
+			virtual ILayoutWithBackground* make(InitInfo initInfo) = 0;
+		};
+		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		sf::Vector2f getMinSize() const override;

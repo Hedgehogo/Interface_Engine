@@ -6,6 +6,7 @@
 #include "../interaction/interactionManager/interactionManager.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../animation/manager/animationManager.hpp"
+#include "../make/make.hpp"
 #include "initInfo/initInfo.hpp"
 
 using uint = unsigned;
@@ -21,9 +22,15 @@ namespace ui {
 	
 	class IObject {
 	public:
-		virtual void init(InitInfo initInfo) = 0;
+		struct Make {
+			virtual IObject* make(InitInfo initInfo) = 0;
+			
+			virtual ~Make() = default;
+		};
 		
 		virtual ~IObject() = default;
+		
+		virtual void init(InitInfo initInfo) = 0;
 		
 		virtual void setPosition(sf::Vector2f position);
 		
@@ -65,15 +72,6 @@ namespace ui {
 	
 	template<typename T>
 	sf::Vector2<T> max(const sf::Vector2<T>& first, const sf::Vector2<T>& second, const sf::Vector2f& third) {
-		return {std::max({first.x, second.x, third.x}), std::max({first.y, second.y, third.y})};
-	}
-	
-	template<typename T>
-	auto copy(const std::vector<T*>& vec) -> std::vector<T*>{
-		std::vector<T*> result(vec.size());
-		for(std::size_t i = 0; i < vec.size(); ++i) {
-			result[i] = vec[i]->copy();
-		}
-		return result;
+		return {std::max(first.x, std::max(second.x, third.x)), std::max(first.y, std::max(second.y, third.y))};
 	}
 }

@@ -1,6 +1,15 @@
 #include "baseInteractive.hpp"
 
 namespace ui {
+	BaseInteractiveData::BaseInteractiveData(BoxPtr<IInteraction>&& interaction, InitInfo initInfo) :
+		interactionStack(&initInfo.interactionStack),
+		interactionManager(&initInfo.interactionManager),
+		interaction(std::move(interaction)),
+		interact(false),
+		oldInteract(false) {
+		interaction->init({initInfo});
+	}
+	
 	BaseInteractiveData::BaseInteractiveData(BoxPtr<IInteraction>&& interaction) :
 		interactionStack(nullptr), interactionManager(nullptr), interaction(std::move(interaction)), interact(false), oldInteract(false) {
 	}

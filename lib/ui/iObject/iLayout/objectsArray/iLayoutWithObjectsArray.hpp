@@ -6,6 +6,10 @@
 namespace ui {
 	class ILayoutWithObjectsArray : public virtual ILayout {
 	public:
+		struct Make : public virtual ILayout::Make {
+			virtual ILayoutWithObjectsArray* make(InitInfo initInfo) = 0;
+		};
+		
 		void move(sf::Vector2f position) override;
 		
 		sf::Vector2f getMinSize() const override;

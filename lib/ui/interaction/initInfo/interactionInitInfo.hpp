@@ -5,17 +5,17 @@
 
 namespace ui {
 	struct InteractionInitInfo {
-		Window& window;
+		sf::RenderWindow& window;
 		sf::RenderTarget& renderTarget;
 		InteractionManager& interactionManager;
 		InteractionStack& interactionStack;
 		IPanelManager& panelManager;
 		
-		InteractionInitInfo(Window& window_, sf::RenderTarget& renderTarget_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_);
+		InteractionInitInfo(sf::RenderWindow& window_, sf::RenderTarget& renderTarget_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_);
 		
 		InteractionInitInfo(InitInfo initInfo);
 		
-		InteractionInitInfo copy(Window& window_) const;
+		InteractionInitInfo copy(sf::RenderWindow& window_) const;
 		
 		InteractionInitInfo copy(sf::RenderTarget& renderTarget_) const;
 		

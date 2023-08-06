@@ -8,6 +8,18 @@
 namespace ui {
 	class BoxSwitcherTabs : public Box, public IInteractive, public IUpdatable, public ILayoutWithObjectsArray {
 	public:
+		struct Make : public Box::Make, public ILayoutWithObjectsArray::Make {
+			std::vector<BoxPtr<IScalable::Make> > objects;
+			PSint value;
+			Key key;
+			bool isHorizontal;
+			sf::Vector2f minSize = {};
+			
+			BoxSwitcherTabs* make(InitInfo initInfo) override;
+		};
+		
+		BoxSwitcherTabs(Make&& make, InitInfo initInfo);
+		
 		BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize = {});
 		
 		void init(InitInfo initInfo) override;

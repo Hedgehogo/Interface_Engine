@@ -8,6 +8,17 @@
 namespace ui {
 	class VideoFromFile : public OnlyDrawable {
 	public:
+		struct Make : public IUninteractive::Make {
+			std::vector<sf::Texture> video;
+			PSCoefficient viewingProgress;
+			
+			Make(std::vector<sf::Texture> video, PSCoefficient viewingProgress);
+			
+			VideoFromFile* make(InitInfo initInfo) override;
+		};
+		
+		VideoFromFile(Make&& make, InitInfo initInfo);
+		
 		VideoFromFile(std::vector<sf::Texture> video, PSCoefficient viewingProgress);
 		
 		void setCurrentFrame(float viewingProgress);
@@ -23,7 +34,7 @@ namespace ui {
 		sf::Vector2f getNormalSize() const override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
-	
+		
 		VideoFromFile* copy() override;
 	
 	protected:

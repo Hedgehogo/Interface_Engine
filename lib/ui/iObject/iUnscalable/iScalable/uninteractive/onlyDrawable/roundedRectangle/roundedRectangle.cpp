@@ -2,6 +2,21 @@
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
+	RoundedRectangle::Make::Make(sf::Color color, float radius) : color(color), radius(radius) {
+	}
+	
+	RoundedRectangle* RoundedRectangle::Make::make(InitInfo initInfo) {
+		return new RoundedRectangle{std::move(*this), initInfo};
+	}
+	
+	RoundedRectangle::RoundedRectangle(RoundedRectangle::Make&& make, InitInfo initInfo) :
+		OnlyDrawable(initInfo), radius(make.radius) {
+		horizontalRectangle.setFillColor(make.color);
+		verticalRectangle.setFillColor(make.color);
+		circle.setFillColor(make.color);
+		circle.setRadius(radius);
+	}
+	
 	RoundedRectangle::RoundedRectangle(sf::Color color, float radius) : radius(radius) {
 		horizontalRectangle.setFillColor(color);
 		verticalRectangle.setFillColor(color);

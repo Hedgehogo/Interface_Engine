@@ -5,21 +5,75 @@
 #include "ui/window/window.hpp"
 
 namespace ui {
+	Interface::Make::Make(BoxPtr<IScalable::Make>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
+		object(std::move(object)), animationManager(std::move(animationManager)), interactionStack(std::move(interactionStack)) {
+	}
+	
+	Interface* Interface::Make::make(InitInfo initInfo) {
+		return new Interface{std::move(*this), initInfo};
+	}
+	
+	Interface::Interface(Make&& make, InitInfo initInfo) :
+		window(&initInfo.window),
+		renderTarget(&initInfo.renderTarget),
+		interactionStack(std::move(make.interactionStack)),
+		animationManager(std::move(make.animationManager)),
+		object(make.object->make(
+			{
+				initInfo.window,
+				initInfo.renderTarget,
+				this->drawManager,
+				this->updateManager,
+				this->interactionManager,
+				*this->interactionStack,
+				this->panelManager
+			}
+		)),
+		initialized(true),
+		active(true) {
+		initInfo.drawManager.add(*this);
+		initInfo.updateManager.add(*this);
+	}
+	
 	Interface::Interface(BoxPtr<IScalable>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
-		renderTarget(nullptr), interactionManager(), interactionStack(interactionStack), panelManager(), animationManager(std::move(animationManager)), object(std::move(object)), initialized(false), active(true) {
+		renderTarget(nullptr),
+		interactionStack(interactionStack),
+		animationManager(std::move(animationManager)),
+		object(std::move(object)),
+		initialized(false), active(true) {
 	}
 	
 	Interface::Interface(const std::string& filePath, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
 		Interface(BoxPtr{ui::loadFromYaml<ui::IScalable>(filePath)}, animationManager, std::move(interactionStack)) {
 	}
 	
-	Interface::Interface(Window& window, BoxPtr<IScalable>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
+	Interface::Interface(sf::RenderWindow& window, BoxPtr<IScalable>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
 		Interface(std::move(object), animationManager, std::move(interactionStack)) {
 		init(window);
 	}
 	
-	Interface::Interface(Window& window, const std::string& filePath, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
+	Interface::Interface(sf::RenderWindow& window, const std::string& filePath, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
 		Interface(window, BoxPtr{ui::loadFromYaml<ui::IScalable>(filePath)}, animationManager, std::move(interactionStack)) {
+	}
+	
+	Interface::Interface(sf::RenderWindow& window, BoxPtr<IScalable::Make>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
+		window(&window),
+		renderTarget(&window),
+		interactionStack(std::move(interactionStack)),
+		animationManager(std::move(animationManager)),
+		object(object->make(
+			{
+				window,
+				window,
+				this->drawManager,
+				this->updateManager,
+				this->interactionManager,
+				*this->interactionStack,
+				this->panelManager
+			}
+		)),
+		initialized(true),
+		active(true) {
 	}
 	
 	bool Interface::isInWindow(sf::Vector2f position) {
@@ -38,13 +92,13 @@ namespace ui {
 		}
 	}
 	
-	void Interface::init(Window& window) {
+	void Interface::init(sf::RenderWindow& window) {
 		if(!initialized) {
 			this->window = &window;
 			this->renderTarget = &window;
 			InitInfo initInfo{window, window, drawManager, updateManager, interactionManager, *interactionStack, panelManager};
 			object->init(initInfo);
-			sf::Vector2f size(max(static_cast<sf::Vector2f>(window.getSize()), object->getMinSize()));
+			sf::Vector2f size(max(static_cast<sf::Vector2f>(static_cast<sf::RenderWindow&>(window).getSize()), object->getMinSize()));
 			resize(size, sf::Vector2f(0, 0));
 			initialized = true;
 		}
@@ -152,7 +206,6 @@ namespace ui {
 		setSize(sf::Vector2f(windowSize));
 	}
 	
-	
 	bool DecodePointer<Interface>::decodePointer(const YAML::Node& node, Interface*& interface) {
 		interface = new Interface{
 			node["object"].as<BoxPtr<IScalable> >(),
@@ -162,8 +215,8 @@ namespace ui {
 		return true;
 	}
 	
-	Interface makeInterface(const std::filesystem::path& filePath, int argc, char *argv[]) {
-		if(auto modules =  std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
+	Interface makeInterface(const std::filesystem::path& filePath, int argc, char* argv[]) {
+		if(auto modules = std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
 			loadModules(argc, argv, modules);
 		
 		YAML::Node node{YAML::LoadFile(filePath.string())};
@@ -175,8 +228,8 @@ namespace ui {
 		};
 	}
 	
-	Interface makeInterface(Window& window, const std::filesystem::path& filePath, int argc, char *argv[]) {
-		if(auto modules =  std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
+	Interface makeInterface(sf::RenderWindow& window, const std::filesystem::path& filePath, int argc, char* argv[]) {
+		if(auto modules = std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
 			loadModules(argc, argv, modules);
 		
 		YAML::Node node{YAML::LoadFile(filePath.string())};
@@ -189,10 +242,10 @@ namespace ui {
 		};
 	}
 	
-	Interface* makePrtInterface(Window& window, const std::filesystem::path& filePath, int argc, char *argv[]) {
-		if(auto modules =  std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
+	Interface* makePrtInterface(sf::RenderWindow& window, const std::filesystem::path& filePath, int argc, char* argv[]) {
+		if(auto modules = std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
 			loadModules(argc, argv, modules);
-		 
+		
 		YAML::Node node{YAML::LoadFile(filePath.string())};
 		
 		return new Interface{

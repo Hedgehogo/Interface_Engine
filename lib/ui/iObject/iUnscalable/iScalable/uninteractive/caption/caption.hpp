@@ -7,8 +7,6 @@
 namespace ui {
 	class Caption : public OnlyDrawable {
 	protected:
-		void init(InitInfo initInfo) override;
-	
 	public:
 		static void setDefaultColor(sf::Color color = sf::Color::White);
 		
@@ -18,6 +16,48 @@ namespace ui {
 		
 		static int getDefaultSize();
 		
+		struct Make : public IUninteractive::Make {
+			sf::String text;
+			BoxPtr<IUninteractive::Make> background;
+			sf::Font& font;
+			int fontSize = defaultSize;
+			sf::Color color = defaultColor;
+			sf::Text::Style style = {};
+			float rotation = 0;
+			InternalPositioning2 positioning = {{0, 0}};
+			bool cutBack = true;
+			sf::Vector2f minSize = {};
+			
+			Make(
+				sf::String text,
+				BoxPtr<IUninteractive::Make>&& background,
+				sf::Font& font,
+				sf::Vector2f minSize,
+				int fontSize = defaultSize,
+				sf::Color color = defaultColor,
+				sf::Text::Style style = {},
+				float rotation = 0,
+				InternalPositioning2 positioning = {{0, 0}},
+				bool cutBack = true
+			);
+			
+			Make(
+				sf::String text,
+				BoxPtr<IUninteractive::Make>&& background,
+				sf::Font& font,
+				int fontSize = defaultSize,
+				sf::Color color = defaultColor,
+				sf::Text::Style style = {},
+				float rotation = 0,
+				InternalPositioning2 positioning = {{0, 0}},
+				bool cutBack = true
+			);
+			
+			Caption* make(InitInfo initInfo) override;
+		};
+		
+		Caption(Make&& make, InitInfo initInfo);
+		
 		Caption(
 			sf::String text,
 			BoxPtr<IUninteractive>&& background,
@@ -25,8 +65,9 @@ namespace ui {
 			sf::Vector2f minSize,
 			int fontSize = defaultSize,
 			sf::Color color = defaultColor,
-			sf::Text::Style style = {}, float rotation = 0,
-			InternalPositioning2 internalPositioning2 = {{0, 0}},
+			sf::Text::Style style = {},
+			float rotation = 0,
+			InternalPositioning2 positioning = {{0, 0}},
 			bool cutBack = true
 		);
 		
@@ -38,9 +79,11 @@ namespace ui {
 			sf::Color color = defaultColor,
 			sf::Text::Style style = {},
 			float rotation = 0,
-			InternalPositioning2 internalPositioning2 = {{0, 0}},
+			InternalPositioning2 positioning = {{0, 0}},
 			bool cutBack = true
 		);
+		
+		void init(InitInfo initInfo) override;
 		
 		void draw() override;
 		
@@ -55,11 +98,7 @@ namespace ui {
 		sf::Vector2f getMinSize() const override;
 		
 		sf::Vector2f getNormalSize() const override;
-	
-	protected:
-		Caption(sf::Text text, IUninteractive* background, sf::String str, sf::Vector2f minimumSize, InternalPositioning2 internalPositioning2, bool cutBack);
-	
-	public:
+		
 		Caption* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
@@ -75,7 +114,7 @@ namespace ui {
 		BoxPtr<IUninteractive> background;
 		sf::Vector2f minimumSize;
 		DrawManager drawManager;
-		InternalPositioning2 internalPositioning2;
+		InternalPositioning2 positioning;
 	};
 	
 	template<>

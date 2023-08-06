@@ -2,6 +2,18 @@
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
+	FullColor::Make::Make(sf::Color color, sf::Vector2f normalSize) : color(color), normalSize(normalSize) {
+	}
+	
+	FullColor* FullColor::Make::make(InitInfo initInfo) {
+		return new FullColor{std::move(*this), initInfo};
+	}
+	
+	FullColor::FullColor(FullColor::Make&& make, InitInfo initInfo) :
+		OnlyDrawable(initInfo), normalSize(make.normalSize) {
+		rectangle.setFillColor(make.color);
+	}
+	
 	FullColor::FullColor(sf::Color color, sf::Vector2f normalSize) : OnlyDrawable(), rectangle(), normalSize(normalSize) {
 		rectangle.setFillColor(color);
 	}

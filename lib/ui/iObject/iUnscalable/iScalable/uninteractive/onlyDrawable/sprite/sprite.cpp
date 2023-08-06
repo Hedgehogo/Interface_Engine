@@ -3,9 +3,26 @@
 #include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
+	Sprite::Make::Make(sf::Texture& texture, sf::IntRect rect, sf::Vector2f minSize) :
+		texture(texture), rect(rect), minSize(minSize) {
+	}
+	
+	Sprite::Make::Make(sf::Texture& texture, sf::Vector2f minSize) :
+		texture(texture), rect({}, sf::Vector2i{texture.getSize()}), minSize(minSize) {
+	}
+	
+	Sprite* Sprite::Make::make(InitInfo initInfo) {
+		return new Sprite{std::move(*this), initInfo};
+	}
+	
+	Sprite::Sprite(Make&& make, InitInfo initInfo) :
+		OnlyDrawable(initInfo),
+		sprite(make.texture, make.rect),
+		minimumSize(std::max(make.minSize.x, 1.f), std::max(make.minSize.y, 1.f)) {
+	}
+	
 	Sprite::Sprite(sf::Texture& texture, sf::IntRect rect, sf::Vector2f minSize) :
 		sprite(texture, rect), minimumSize(std::max(minSize.x, 1.f), std::max(minSize.y, 1.f)) {
-		sprite.setTextureRect(rect);
 	}
 	
 	Sprite::Sprite(sf::Texture& texture, sf::Vector2f minSize) :

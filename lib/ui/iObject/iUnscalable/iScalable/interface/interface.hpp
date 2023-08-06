@@ -14,17 +14,58 @@ namespace ui {
 		bool isInWindow(sf::Vector2f position);
 	
 	public:
-		explicit Interface(BoxPtr<IScalable>&& object, AnimationManager animationManager = AnimationManager{{}}, BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>());
+		struct Make : public IScalable::Make {
+			BoxPtr <IScalable::Make> object;
+			AnimationManager animationManager = AnimationManager{{}};
+			BoxPtr <InteractionStack> interactionStack = makeBoxPtr<InteractionStack>();
+			
+			Make(
+				BoxPtr<IScalable::Make>&& object,
+				AnimationManager animationManager = AnimationManager{{}},
+				BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+			);
+			
+			Interface* make(InitInfo initInfo) override;
+		};
 		
-		explicit Interface(const std::string& filePath, AnimationManager animationManager = AnimationManager{{}}, BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>());
+		Interface(Make&& make, InitInfo initInfo);
 		
-		explicit Interface(Window& window, BoxPtr<IScalable>&& object, AnimationManager animationManager = AnimationManager{{}}, BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>());
+		explicit Interface(
+			BoxPtr<IScalable>&& object,
+			AnimationManager animationManager = AnimationManager{{}},
+			BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+		);
 		
-		explicit Interface(Window& window, const std::string& filePath, AnimationManager animationManager = AnimationManager{{}}, BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>());
+		explicit Interface(
+			const std::string& filePath,
+			AnimationManager animationManager = AnimationManager{{}},
+			BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+		);
+		
+		explicit Interface(
+			sf::RenderWindow& window,
+			BoxPtr<IScalable>&& object,
+			AnimationManager animationManager = AnimationManager{{}},
+			BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+		);
+		
+		explicit Interface(
+			sf::RenderWindow& window,
+			const std::string& filePath,
+			AnimationManager animationManager = AnimationManager{{}},
+			BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+		);
+		
+		explicit Interface(
+			sf::RenderWindow& window,
+			BoxPtr<IScalable::Make>&& object,
+			AnimationManager animationManager = AnimationManager{{}},
+			BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+		);
 		
 		void init(InitInfo initInfo) override;
 		
-		void init(Window& window);
+		void init(sf::RenderWindow& window);
 		
 		[[nodiscard]] sf::RenderTarget& getRenderTarget();
 		
@@ -69,15 +110,15 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue = 0, uint hueOffset = 36) override;
 	
 	protected:
-		Window* window;
+		sf::RenderWindow* window;
 		sf::RenderTarget* renderTarget;
 		DrawManager drawManager;
 		UpdateManager updateManager;
 		InteractionManager interactionManager;
-		BoxPtr<InteractionStack> interactionStack;
+		BoxPtr <InteractionStack> interactionStack;
 		PanelManager panelManager;
 		AnimationManager animationManager;
-		BoxPtr<IScalable> object;
+		BoxPtr <IScalable> object;
 		sf::Vector2f mousePosition;
 		bool initialized;
 		bool active;
@@ -88,9 +129,9 @@ namespace ui {
 		static bool decodePointer(const YAML::Node& node, Interface*& interface);
 	};
 	
-	Interface makeInterface(const std::filesystem::path& filePath, int argc = 0, char *argv[] = {});
+	Interface makeInterface(const std::filesystem::path& filePath, int argc = 0, char* argv[] = {});
 	
-	Interface makeInterface(Window& window, const std::filesystem::path& filePath, int argc = 0, char *argv[] = {});
+	Interface makeInterface(sf::RenderWindow& window, const std::filesystem::path& filePath, int argc = 0, char* argv[] = {});
 	
-	Interface* makePrtInterface(Window& window, const std::filesystem::path& filePath, int argc = 0, char *argv[] = {});
+	Interface* makePrtInterface(sf::RenderWindow& window, const std::filesystem::path& filePath, int argc = 0, char* argv[] = {});
 }

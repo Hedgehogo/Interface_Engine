@@ -1,6 +1,25 @@
 #include "videoFromFile.hpp"
 
 namespace ui {
+	VideoFromFile::Make::Make(std::vector<sf::Texture> video, PSCoefficient viewingProgress) :
+		video(std::move(video)), viewingProgress(viewingProgress) {
+	}
+	
+	VideoFromFile* VideoFromFile::Make::make(InitInfo initInfo) {
+		return new VideoFromFile{std::move(*this), initInfo};
+	}
+	
+	VideoFromFile::VideoFromFile(Make&& make, InitInfo initInfo) :
+		OnlyDrawable(initInfo),
+		sizeVideo(make.video[0].getSize()),
+		bufferTexture(make.video),
+		viewingProgress(make.viewingProgress) {
+		viewingProgress->addSetter([=](float value) {
+			setCurrentFrame(value);
+		});
+		sprite.setTexture(bufferTexture[0]);
+	}
+	
 	VideoFromFile::VideoFromFile(std::vector<sf::Texture> video, PSCoefficient viewingProgress) :
 		sizeVideo(video[0].getSize()), bufferTexture(video), viewingProgress(viewingProgress) {
 		viewingProgress->addSetter([=](float viewingProgress) {

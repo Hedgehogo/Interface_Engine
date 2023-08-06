@@ -7,14 +7,14 @@ namespace ui {
 	class Text;
 	
 	struct TextInteractionInitInfo {
-		Window& window;
+		sf::RenderWindow& window;
 		sf::RenderTarget& renderTarget;
 		InteractionManager& interactionManager;
 		InteractionStack& interactionStack;
 		IPanelManager& panelManager;
 		Text& text;
 		
-		TextInteractionInitInfo(Window& window_, sf::RenderTarget& renderTarget_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_, Text& text_);
+		TextInteractionInitInfo(sf::RenderWindow& window_, sf::RenderTarget& renderTarget_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_, Text& text_);
 		
 		TextInteractionInitInfo(InteractionInitInfo interactionInitInfo, Text& text_);
 		
@@ -22,7 +22,7 @@ namespace ui {
 		
 		InteractionInitInfo toGeneral();
 		
-		TextInteractionInitInfo copy(Window& window_) const;
+		TextInteractionInitInfo copy(sf::RenderWindow& window_) const;
 		
 		TextInteractionInitInfo copy(sf::RenderTarget& renderTarget_) const;
 		

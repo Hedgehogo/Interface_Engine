@@ -22,7 +22,7 @@ namespace ui {
 		KeyEvent* copy() override;
 	
 	protected:
-		Window* window;
+		sf::RenderWindow* window;
 	};
 	
 	template<>

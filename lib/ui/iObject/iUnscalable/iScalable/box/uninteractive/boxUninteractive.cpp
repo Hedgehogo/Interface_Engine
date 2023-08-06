@@ -1,6 +1,14 @@
 #include "boxUninteractive.hpp"
 
 namespace ui {
+	BoxUninteractive* BoxUninteractive::Make::make(InitInfo initInfo) {
+		return new BoxUninteractive{std::move(*this), initInfo};
+	}
+	
+	BoxUninteractive::BoxUninteractive(Make&& make, InitInfo initInfo) :
+		Box(make.minSize), object(make.object->make(initInfo)) {
+	}
+	
 	BoxUninteractive::BoxUninteractive(BoxPtr<IScalable>&& object, sf::Vector2f minSize) : Box(minSize), object(std::move(object)) {
 	}
 	

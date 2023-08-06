@@ -6,6 +6,12 @@
 namespace ui {
 	class Empty : public OnlyDrawable, public ILayout {
 	public:
+		struct Make : public IUninteractive::Make, public ILayout::Make {
+			Empty* make(InitInfo initInfo) override;
+		};
+		
+		Empty(Make&& make, InitInfo initInfo);
+		
 		Empty();
 		
 		void draw() override;
@@ -25,7 +31,7 @@ namespace ui {
 		Empty* copy() override;
 		
 		void drawDebug(sf::RenderTarget&, int, int, uint, uint) override;
-		
+	
 	protected:
 		LayoutData layout;
 	};

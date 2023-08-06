@@ -40,13 +40,13 @@ namespace ui {
 		checkMinSize(size.y, minSize.y, currentBorder.y, borders.up, borders.down);
 		checkMinSize(size.x, minSize.x, currentBorder.x, borders.left, borders.right);
 		
-		window->setPosition({borders.left, borders.up});
+		window->getWindow().setPosition({borders.left, borders.up});
 		window->setSize({static_cast<unsigned>(borders.right - borders.left), static_cast<unsigned>(borders.down - borders.up)});
 	}
 	
 	void WindowResizer::setBorders() {
-		sf::Vector2i windowPosition{window->getPosition()};
-		sf::Vector2u windowSize{window->getSize()};
+		sf::Vector2i windowPosition{window->getWindow().getPosition()};
+		sf::Vector2u windowSize{window->getWindow().getSize()};
 		borders = {
 			windowPosition.y,
 			windowPosition.y + static_cast<int>(windowSize.y),
@@ -71,7 +71,7 @@ namespace ui {
 	bool WindowResizer::update(sf::Vector2i mousePosition) {
 		if(KeyHandler::isKeyPressed(key)) {
 			if(currentBorder.x || currentBorder.y) {
-				auto globalMousePosition = mousePosition + window->getPosition();
+				auto globalMousePosition = mousePosition + window->getWindow().getPosition();
 				if(currentBorder.y)
 					(*currentBorder.y) = globalMousePosition.y - grip.y;
 				if(currentBorder.x)
@@ -81,7 +81,7 @@ namespace ui {
 				return true;
 				
 			} else if (!oldKeyPressed) {
-				sf::Vector2i windowSize{window->getSize()};
+				sf::Vector2i windowSize{window->getWindow().getSize()};
 				setBorders();
 				
 				if(mousePosition.x >= -externalBorderSize && mousePosition.y >= -externalBorderSize && mousePosition.x <= windowSize.x + externalBorderSize && mousePosition.y <= windowSize.y + externalBorderSize) {

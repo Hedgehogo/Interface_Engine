@@ -6,6 +6,17 @@
 namespace ui {
 	class BoxSwitcher : public Box, public ILayoutWithTwoObjects, public IDrawable {
 	public:
+		struct Make : public Box::Make, public ILayoutWithTwoObjects::Make {
+			BoxPtr<IScalable::Make> firstObject;
+			BoxPtr<IScalable::Make> secondObject;
+			PSbool value;
+			sf::Vector2f minSize = {};
+			
+			BoxSwitcher* make(InitInfo initInfo) override;
+		};
+		
+		BoxSwitcher(Make&& make, InitInfo initInfo);
+		
 		BoxSwitcher(BoxPtr<IScalable>&& firstObject, BoxPtr<IScalable>&& secondObject, PSbool value, const sf::Vector2f& minSize = {});
 		
 		BoxSwitcher(const BoxSwitcher& other);

@@ -9,10 +9,6 @@ namespace ui {
 		ILayout::resize(size, position);
 	}
 	
-	void Box::copy(Box* box) {
-		box->layout = this->layout;
-	}
-	
 	LayoutData& Box::getLayoutData() {
 		return layout;
 	}

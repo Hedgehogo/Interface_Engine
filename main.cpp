@@ -15,7 +15,13 @@ int main() {
 	ui::init();
 	
 	ui::Window window{
-		"../../example-resources/test.yaml",
+		ui::Interface::Make{
+			makeBoxPtr<ui::IScalable::Make, ui::BoxDebug::Make>(
+				makeBoxPtr<ui::IScalable::Make, ui::Capsule::Make>(
+					sf::Color::Green
+				)
+			)
+		},
 		"IE works!",
 		{200, 100},
 		sf::ContextSettings{
@@ -26,19 +32,19 @@ int main() {
 	sf::Clock clock;
 	std::array<float, 500> lastFPS{};
 	
-	while(window.isOpen()) {
+	while(window.getWindow().isOpen()) {
 		lastFPS[0] = 1.f / clock.restart().asSeconds();
 		std::rotate(lastFPS.begin(), lastFPS.begin() + 1, lastFPS.end());
 		float mediumFPS = calculateMediumFPS(lastFPS);
-		window.setTitle(std::to_string(static_cast<int>(mediumFPS)));
+		window.getWindow().setTitle(std::to_string(static_cast<int>(mediumFPS)));
 		clock.restart();
 		
 		sf::Event event{};
-		while(window.pollEvent(event)) {
+		while(window.getWindow().pollEvent(event)) {
 			ui::handleEvent(event);
 			
 			if(event.type == sf::Event::Closed) {
-				window.close();
+				window.getWindow().close();
 			}
 		}
 		

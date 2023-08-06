@@ -6,7 +6,26 @@
 namespace ui {
 	class VideoFromTexture : public OnlyDrawable {
 	public:
-		VideoFromTexture(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect = {0, 0, 0, 0}, int countFrame = 0, sf::Vector2i offset = {0, 0});
+		struct Make : public IUninteractive::Make {
+			BoxPtr<IScalable::Make> object;
+			const sf::Texture& texture;
+			PSCoefficient viewingProgress;
+			sf::IntRect rect = {};
+			std::size_t countFrame = 0;
+			sf::Vector2i offset = {};
+			
+			Make(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect, std::size_t countFrame, sf::Vector2i offset);
+			
+			Make(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect, std::size_t countFrame);
+			
+			Make(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect);
+			
+			VideoFromTexture* make(InitInfo initInfo) override;
+		};
+		
+		VideoFromTexture(Make&& make, InitInfo initInfo);
+		
+		VideoFromTexture(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect = {}, std::size_t countFrame = 0, sf::Vector2i offset = {});
 		
 		void setCurrentFrame(float viewingProgress);
 		
@@ -31,6 +50,6 @@ namespace ui {
 		sf::Sprite sprite;
 		sf::Vector2i textureSize;
 		sf::Vector2f size;
-		int countFrame;
+		std::size_t countFrame;
 	};
 }

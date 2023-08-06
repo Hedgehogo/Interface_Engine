@@ -7,14 +7,14 @@ namespace ui {
 	class Panel;
 	
 	struct PanelInteractionInitInfo {
-		Window& window;
+		sf::RenderWindow& window;
 		sf::RenderTarget& renderTarget;
 		InteractionManager& interactionManager;
 		InteractionStack& interactionStack;
 		IPanelManager& panelManager;
 		Panel& panel;
 		
-		PanelInteractionInitInfo(Window& window_, sf::RenderTarget& renderTarget_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_, Panel& panel_);
+		PanelInteractionInitInfo(sf::RenderWindow& window_, sf::RenderTarget& renderTarget_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_, Panel& panel_);
 		
 		PanelInteractionInitInfo(InteractionInitInfo interactionInitInfo, Panel& panel_);
 		
@@ -22,7 +22,7 @@ namespace ui {
 		
 		InteractionInitInfo toGeneral();
 		
-		PanelInteractionInitInfo copy(Window& window_) const;
+		PanelInteractionInitInfo copy(sf::RenderWindow& window_) const;
 		
 		PanelInteractionInitInfo copy(sf::RenderTarget& renderTarget_) const;
 		

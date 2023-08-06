@@ -2,6 +2,23 @@
 #include <cmath>
 
 namespace ui {
+	BoxDebug::Make::Make(BoxPtr<IScalable::Make>&& object) :
+		object(std::move(object)) {
+	}
+	
+	BoxDebug* BoxDebug::Make::make(InitInfo initInfo) {
+		return new BoxDebug{std::move(*this), initInfo};
+	}
+	
+	BoxDebug::BoxDebug(Make&& make, InitInfo initInfo) :
+		Box({}),
+		object(make.object->make(initInfo)),
+		renderTarget(&initInfo.renderTarget),
+		active(false),
+		drawn(false) {
+		initInfo.drawManager.add(*this);
+	}
+	
 	BoxDebug::BoxDebug(BoxPtr<IScalable>&& object) :
 		Box({}), object(std::move(object)), renderTarget(nullptr), active(false), drawn(false) {
 	}

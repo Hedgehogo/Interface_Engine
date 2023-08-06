@@ -7,6 +7,19 @@
 #include "event/switcherTabsEvent.hpp"
 
 namespace ui {
+	BoxSwitcherTabs* BoxSwitcherTabs::Make::make(InitInfo initInfo) {
+		return new BoxSwitcherTabs{std::move(*this), initInfo};
+	}
+	
+	BoxSwitcherTabs::BoxSwitcherTabs(Make&& make, InitInfo initInfo) :
+		Box(make.minSize),
+		interactive(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>{new SwitcherTabsEvent{value, this}}, make.key), initInfo),
+		objects(make_map(std::move(make.objects), initInfo)),
+		isHorizontal(make.isHorizontal),
+		value(make.value) {
+		initInfo.updateManager.add(*this);
+	}
+	
 	BoxSwitcherTabs::BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
 		Box(minSize), interactive(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>{new SwitcherTabsEvent{value, this}}, key)),
 		objects(std::move(objects)), isHorizontal(isHorizontal), value(value) {

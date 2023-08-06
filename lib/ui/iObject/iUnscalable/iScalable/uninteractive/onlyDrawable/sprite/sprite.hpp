@@ -7,6 +7,20 @@
 namespace ui {
 	class Sprite : public OnlyDrawable {
 	public:
+		struct Make : public IUninteractive::Make {
+			sf::Texture& texture;
+			sf::IntRect rect;
+			sf::Vector2f minSize;
+			
+			Make(sf::Texture& texture, sf::IntRect rect, sf::Vector2f minSize = {});
+			
+			Make(sf::Texture& texture, sf::Vector2f minSize = {});
+			
+			Sprite* make(InitInfo initInfo) override;
+		};
+		
+		Sprite(Make&& make, InitInfo initInfo);
+		
 		Sprite(sf::Texture& texture, sf::IntRect rect, sf::Vector2f minSize = {});
 		
 		Sprite(sf::Texture& texture, sf::Vector2f minSize = {});

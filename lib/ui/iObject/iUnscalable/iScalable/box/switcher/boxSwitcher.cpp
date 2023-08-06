@@ -1,8 +1,20 @@
 #include "boxSwitcher.hpp"
 
 namespace ui {
+	BoxSwitcher* BoxSwitcher::Make::make(InitInfo initInfo) {
+		return new BoxSwitcher{std::move(*this), initInfo};
+	}
+	
+	BoxSwitcher::BoxSwitcher(Make&& make, InitInfo initInfo) :
+		Box(make.minSize),
+		firstObject(make.firstObject->make(initInfo)),
+		secondObject(make.secondObject->make(initInfo)),
+		value(make.value) {
+	}
+	
 	BoxSwitcher::BoxSwitcher(BoxPtr<IScalable>&& firstObject, BoxPtr<IScalable>&& secondObject, PSbool value, const sf::Vector2f& minSize) :
-		Box(minSize), firstObject(std::move(firstObject)), secondObject(std::move(secondObject)), value(value) {}
+		Box(minSize), firstObject(std::move(firstObject)), secondObject(std::move(secondObject)), value(value) {
+	}
 	
 	BoxSwitcher::BoxSwitcher(const BoxSwitcher& other) :
 		Box(other), firstObject(other.firstObject), secondObject(other.secondObject), value(other.value) {
@@ -39,7 +51,7 @@ namespace ui {
 	}
 	
 	void BoxSwitcher::draw() {
-		if (value->getValue()) {
+		if(value->getValue()) {
 			firstDrawManager.draw();
 		} else {
 			secondDrawManager.draw();

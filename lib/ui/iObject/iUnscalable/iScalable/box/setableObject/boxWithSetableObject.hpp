@@ -29,7 +29,7 @@ namespace ui {
 		sf::Vector2f minSize;
 		DrawManager drawManager;
 		UpdateManager updateManager;
-		Window* window;
+		sf::RenderWindow* window;
 		sf::RenderTarget* renderTarget;
 		InteractionManager interactionManager;
 		InteractionStack* interactionStack;

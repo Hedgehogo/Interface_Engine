@@ -1,6 +1,13 @@
 #include "empty.hpp"
 
 namespace ui {
+	Empty* Empty::Make::make(InitInfo initInfo) {
+		return new Empty{std::move(*this), initInfo};
+	}
+	
+	Empty::Empty(Empty::Make&&, InitInfo initInfo) : OnlyDrawable(initInfo) {
+	}
+	
 	Empty::Empty() {
 	}
 	

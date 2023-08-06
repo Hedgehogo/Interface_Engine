@@ -6,6 +6,17 @@
 namespace ui {
 	class FullColor : public OnlyDrawable {
 	public:
+		struct Make : public IUninteractive::Make {
+			sf::Color color;
+			sf::Vector2f normalSize = {};
+			
+			Make(sf::Color color, sf::Vector2f normalSize = {0, 0});
+			
+			FullColor* make(InitInfo initInfo) override;
+		};
+		
+		FullColor(Make&& make, InitInfo initInfo);
+		
 		explicit FullColor(sf::Color color, sf::Vector2f normalSize = {0, 0});
 		
 		void draw() override;

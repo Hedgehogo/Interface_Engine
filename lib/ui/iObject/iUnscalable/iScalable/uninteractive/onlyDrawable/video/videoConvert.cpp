@@ -19,13 +19,13 @@ namespace ui {
 			};
 		} else {
 #endif
-			video = new VideoFromTexture{
-				*node["path"].as<sf::Texture*>(),
-				Buffer::get<SCoefficientValue>(node["viewing-progress"]),
-				convDef(node["rect"], sf::IntRect{0, 0, 0, 0}),
-				convDef(node["count-frame"], 0),
-				convDef(node["offset"], sf::Vector2i{0, 0}),
-			};		
+		video = new VideoFromTexture{
+			*node["path"].as<sf::Texture*>(),
+			Buffer::get<SCoefficientValue>(node["viewing-progress"]),
+			convDef(node["rect"], sf::IntRect{0, 0, 0, 0}),
+			convDef(node["count-frame"], 0u),
+			convDef(node["offset"], sf::Vector2i{0, 0}),
+		};
 #ifdef IE_ImageMagick_FOUND
 		}
 #endif

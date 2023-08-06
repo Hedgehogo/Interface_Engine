@@ -5,6 +5,8 @@
 namespace ui {
 	class BaseInteractiveData {
 	public:
+		BaseInteractiveData(BoxPtr<IInteraction>&& interaction, InitInfo initInfo);
+		
 		explicit BaseInteractiveData(BoxPtr<IInteraction>&& interaction);
 		
 		void init(InitInfo initInfo);

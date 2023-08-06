@@ -1,7 +1,7 @@
 #include "panelInteractionInitInfo.hpp"
 
 namespace ui {
-	PanelInteractionInitInfo::PanelInteractionInitInfo(Window& window_, sf::RenderTarget& renderTarget_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_, Panel& panel_) :
+	PanelInteractionInitInfo::PanelInteractionInitInfo(sf::RenderWindow& window_, sf::RenderTarget& renderTarget_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_, Panel& panel_) :
 		window(window_), renderTarget(renderTarget_), interactionManager(interactionManager_), interactionStack(interactionStack_), panelManager(panelManager_), panel(panel_) {
 	}
 	
@@ -17,7 +17,7 @@ namespace ui {
 		return {window, renderTarget, interactionManager, interactionStack, panelManager};
 	}
 	
-	PanelInteractionInitInfo PanelInteractionInitInfo::copy(Window& window_) const {
+	PanelInteractionInitInfo PanelInteractionInitInfo::copy(sf::RenderWindow& window_) const {
 		return {window_, renderTarget, interactionManager, interactionStack, panelManager, panel};
 	}
 	

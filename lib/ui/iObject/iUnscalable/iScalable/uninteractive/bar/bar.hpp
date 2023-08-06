@@ -8,6 +8,22 @@
 namespace ui {
 	class Bar : public OnlyDrawable, public ILayoutWithBackground {
 	public:
+		struct Make : public IUninteractive::Make, public ILayoutWithBackground::Make {
+			BoxPtr<IUninteractive::Make> background;
+			BoxPtr<IUninteractive::Make> strip;
+			float offset = 0;
+			bool horizontal = true;
+			int division = 0;
+			
+			Make(BoxPtr<IUninteractive::Make>&& background, BoxPtr<IUninteractive::Make>&& strip, float offset = 0, bool horizontal = true);
+			
+			Make(BoxPtr<IUninteractive::Make>&& background, BoxPtr<IUninteractive::Make>&& strip, int division, float offset = 0, bool horizontal = true);
+			
+			Bar* make(InitInfo initInfo) override;
+		};
+		
+		Bar(Make&& make, InitInfo initInfo);
+		
 		explicit Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, float offset = 0, bool horizontal = true);
 		
 		explicit Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, int division, float offset = 0, bool horizontal = true);

@@ -1,7 +1,7 @@
 #include "interactionInitInfo.hpp"
 
 namespace ui {
-	InteractionInitInfo::InteractionInitInfo(Window& window_, sf::RenderTarget& renderTarget_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_) :
+	InteractionInitInfo::InteractionInitInfo(sf::RenderWindow& window_, sf::RenderTarget& renderTarget_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_) :
 		window(window_), renderTarget(renderTarget_), interactionManager(interactionManager_), interactionStack(interactionStack_), panelManager(panelManager_) {
 	}
 	
@@ -9,7 +9,7 @@ namespace ui {
 		InteractionInitInfo(initInfo.window, initInfo.renderTarget, initInfo.interactionManager, initInfo.interactionStack, initInfo.panelManager){
 	}
 	
-	InteractionInitInfo InteractionInitInfo::copy(Window& window_) const {
+	InteractionInitInfo InteractionInitInfo::copy(sf::RenderWindow& window_) const {
 		return {window_, renderTarget, interactionManager, interactionStack, panelManager};
 	}
 	

@@ -1,6 +1,18 @@
 #include "capsule.hpp"
 
 namespace ui {
+	Capsule::Make::Make(sf::Color color) : color(color) {
+	}
+	
+	Capsule* Capsule::Make::make(InitInfo initInfo) {
+		return new Capsule{std::move(*this), initInfo};
+	}
+	
+	Capsule::Capsule(Capsule::Make&& make, InitInfo initInfo) : OnlyDrawable(initInfo) {
+		rectangle.setFillColor(make.color);
+		circle.setFillColor(make.color);
+	}
+	
 	Capsule::Capsule(sf::Color color) : ILayout() {
 		rectangle.setFillColor(color);
 		circle.setFillColor(color);

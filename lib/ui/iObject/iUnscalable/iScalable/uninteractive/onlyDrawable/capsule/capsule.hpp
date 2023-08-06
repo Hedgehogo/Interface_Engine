@@ -6,6 +6,16 @@
 namespace ui {
 	class Capsule : public OnlyDrawable, public ILayout {
 	public:
+		struct Make : public IUninteractive::Make, public ILayout::Make {
+			sf::Color color;
+			
+			Make(sf::Color color);
+			
+			Capsule* make(InitInfo initInfo) override;
+		};
+		
+		Capsule(Make&& make, InitInfo initInfo);
+		
 		Capsule(sf::Color color);
 		
 		void draw() override;

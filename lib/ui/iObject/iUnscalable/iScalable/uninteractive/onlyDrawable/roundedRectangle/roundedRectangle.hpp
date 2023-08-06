@@ -6,6 +6,17 @@
 namespace ui {
 	class RoundedRectangle : public OnlyDrawable, public ILayout {
 	public:
+		struct Make : public IUninteractive::Make, public ILayout::Make {
+			sf::Color color;
+			float radius;
+			
+			Make(sf::Color color, float radius);
+			
+			RoundedRectangle* make(InitInfo initInfo) override;
+		};
+		
+		RoundedRectangle(Make&& make, InitInfo initInfo);
+		
 		RoundedRectangle(sf::Color color, float radius);
 		
 		void draw() override;

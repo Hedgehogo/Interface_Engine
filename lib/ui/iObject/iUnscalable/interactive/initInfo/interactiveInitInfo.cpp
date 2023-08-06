@@ -1,11 +1,11 @@
 #include "interactiveInitInfo.hpp"
 
 namespace ui {
-	InteractiveInitInfo::InteractiveInitInfo(Window& window_, sf::RenderTarget& renderTarget_, DrawManager& drawManager_, UpdateManager& updateManager_, IPanelManager& panelManager_) :
+	InteractiveInitInfo::InteractiveInitInfo(sf::RenderWindow& window_, sf::RenderTarget& renderTarget_, DrawManager& drawManager_, UpdateManager& updateManager_, IPanelManager& panelManager_) :
 		window(window_), renderTarget(renderTarget_), drawManager(drawManager_), updateManager(updateManager_), panelManager(panelManager_) {
 	}
 	
-	InteractiveInitInfo InteractiveInitInfo::copy(Window& window_) const {
+	InteractiveInitInfo InteractiveInitInfo::copy(sf::RenderWindow& window_) const {
 		return InteractiveInitInfo(window_, renderTarget, drawManager, updateManager, panelManager);
 	}
 	

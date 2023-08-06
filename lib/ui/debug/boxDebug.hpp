@@ -5,11 +5,20 @@
 
 namespace ui {
 	class BoxDebug : public Box, public ILayoutWithObject, public IDrawable {
-	protected:
-		void init(InitInfo initInfo) override;
-	
 	public:
+		struct Make : public Box::Make, public ILayoutWithObject::Make {
+			BoxPtr<IScalable::Make> object;
+			
+			Make(BoxPtr<IScalable::Make>&& object);
+			
+			BoxDebug* make(InitInfo initInfo) override;
+		};
+		
+		BoxDebug(Make&& make, InitInfo initInfo);
+		
 		BoxDebug(BoxPtr<IScalable>&& object);
+		
+		void init(InitInfo initInfo) override;
 		
 		void draw() override;
 		

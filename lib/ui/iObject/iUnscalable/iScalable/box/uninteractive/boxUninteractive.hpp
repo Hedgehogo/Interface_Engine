@@ -5,8 +5,17 @@
 #include "../box.hpp"
 
 namespace ui {
-	class BoxUninteractive : public IUninteractive, public ILayoutWithObject, public Box {
+	class BoxUninteractive : public Box, public IUninteractive, public ILayoutWithObject {
 	public:
+		struct Make : public Box::Make, public ILayoutWithObject::Make {
+			BoxPtr<IScalable::Make> object;
+			sf::Vector2f minSize = {};
+			
+			BoxUninteractive* make(InitInfo initInfo) override;
+		};
+		
+		BoxUninteractive(Make&& make, InitInfo initInfo);
+		
 		BoxUninteractive(BoxPtr<IScalable>&& object, sf::Vector2f minSize = {});
 		
 		void init(InitInfo initInfo) override;

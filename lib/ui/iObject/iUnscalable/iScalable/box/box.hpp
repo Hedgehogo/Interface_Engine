@@ -5,10 +5,11 @@
 
 namespace ui {
 	class Box : public virtual IScalable, public virtual ILayout {
-	protected:
-		void copy(Box* box);
-	
 	public:
+		struct Make : public virtual IScalable::Make, public virtual ILayout::Make {
+			virtual Box* make(InitInfo initInfo) = 0;
+		};
+		
 		explicit Box(sf::Vector2f minSize, sf::Vector2f size = {0.0f, 0.0f});
 		
 		LayoutData& getLayoutData() override;

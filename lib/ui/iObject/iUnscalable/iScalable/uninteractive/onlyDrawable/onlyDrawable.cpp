@@ -8,4 +8,8 @@ namespace ui {
 		initInfo.drawManager.add(*this);
 		this->renderTarget = &initInfo.renderTarget;
 	}
+	
+	OnlyDrawable::OnlyDrawable(InitInfo initInfo) : renderTarget(&initInfo.renderTarget) {
+		initInfo.drawManager.add(*this);
+	}
 }

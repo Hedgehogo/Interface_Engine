@@ -6,6 +6,10 @@
 namespace ui {
 	class ILayoutWithTwoObjects : public virtual ILayoutWithObjectsArray {
 	public:
+		struct Make : public virtual ILayoutWithObjectsArray::Make {
+			virtual ILayoutWithTwoObjects* make(InitInfo initInfo) = 0;
+		};
+		
 		sf::Vector2f getMinSize() const override;
 		
 		sf::Vector2f getNormalSize() const override;

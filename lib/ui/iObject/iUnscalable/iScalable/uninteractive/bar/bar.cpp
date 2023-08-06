@@ -2,6 +2,28 @@
 #include "bar.hpp"
 
 namespace ui {
+	Bar::Make::Make(BoxPtr<IUninteractive::Make>&& background, BoxPtr<IUninteractive::Make>&& strip, float offset, bool horizontal) :
+		background(std::move(background)), strip(std::move(strip)), offset(offset), horizontal(horizontal), division(1) {
+	}
+	
+	Bar::Make::Make(BoxPtr<IUninteractive::Make>&& background, BoxPtr<IUninteractive::Make>&& strip, int division, float offset, bool horizontal) :
+		background(std::move(background)), strip(std::move(strip)), offset(offset), horizontal(horizontal), division(division) {
+	}
+	
+	Bar* Bar::Make::make(InitInfo initInfo) {
+		return new Bar{std::move(*this), initInfo};
+	}
+	
+	Bar::Bar(Make&& make, InitInfo initInfo) :
+		OnlyDrawable(initInfo),
+		background(make.background->make(initInfo)),
+		strip(make.strip->make(initInfo)),
+		horizontal(make.horizontal),
+		offset(make.offset),
+		division(make.division),
+		value(0) {
+	}
+	
 	Bar::Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, float offset, bool horizontal) :
 		background(std::move(background)), strip(std::move(strip)), horizontal(horizontal), offset(offset), division(1), value(0) {
 	}

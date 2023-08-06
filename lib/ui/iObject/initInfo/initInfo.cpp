@@ -1,11 +1,11 @@
 #include "initInfo.hpp"
 
 namespace ui {
-	InitInfo::InitInfo(Window& window_, sf::RenderTarget& renderTarget_, DrawManager& drawManager_, UpdateManager& updateManager_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_) :
+	InitInfo::InitInfo(sf::RenderWindow& window_, sf::RenderTarget& renderTarget_, DrawManager& drawManager_, UpdateManager& updateManager_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_) :
 		window(window_), renderTarget(renderTarget_), drawManager(drawManager_), updateManager(updateManager_), interactionManager(interactionManager_), interactionStack(interactionStack_), panelManager(panelManager_) {
 	}
 	
-	InitInfo InitInfo::copy(Window& window_) const {
+	InitInfo InitInfo::copy(sf::RenderWindow& window_) const {
 		return InitInfo(window_, renderTarget, drawManager, updateManager, interactionManager, interactionStack, panelManager);
 	}
 	

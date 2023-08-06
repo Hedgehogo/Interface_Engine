@@ -14,6 +14,10 @@ namespace ui {
 	
 	class ILayout : public virtual IObject {
 	public:
+		struct Make : public virtual IObject::Make {
+			virtual ILayout* make(InitInfo initInfo) = 0;
+		};
+		
 		void setPosition(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;

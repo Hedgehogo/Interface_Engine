@@ -8,7 +8,7 @@
 namespace ui {
 	IWindowResizer* getWindowResizer();
 	
-	class Window : public sf::RenderWindow {
+	class Window {
 	protected:
 		void construction();
 		
@@ -29,6 +29,8 @@ namespace ui {
 		
 		Window(const std::filesystem::path& interface, sf::WindowHandle handle, const sf::ContextSettings& settings = sf::ContextSettings());
 		
+		Window(Interface::Make&& interface, const sf::String& title, const sf::VideoMode& mode = {1, 1}, const sf::ContextSettings& settings = sf::ContextSettings{});
+		
 		void create(sf::VideoMode mode, const sf::String& title, sf::Uint32, const sf::ContextSettings& settings);
 		
 		virtual void create(sf::VideoMode mode, const sf::String& title, const sf::ContextSettings& settings = sf::ContextSettings());
@@ -41,11 +43,14 @@ namespace ui {
 		
 		Interface& getInterface();
 		
+		sf::RenderWindow& getWindow();
+		
 		const sf::Vector2f& getMinSize();
 	
 	protected:
-		BoxPtr<IWindowResizer> resizer;
 		Interface interface;
+		sf::RenderWindow window;
+		BoxPtr<IWindowResizer> resizer;
 		sf::Vector2f minSize;
 	};
 }

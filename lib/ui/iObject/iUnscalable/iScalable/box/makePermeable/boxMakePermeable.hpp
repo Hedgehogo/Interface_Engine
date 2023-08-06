@@ -6,6 +6,15 @@
 namespace ui {
 	class BoxMakePermeable : public Box, public ILayoutWithObject {
 	public:
+		struct Make : public Box::Make, public ILayoutWithObject::Make {
+			BoxPtr<IScalable::Make> object;
+			sf::Vector2f minSize = {};
+			
+			BoxMakePermeable* make(InitInfo initInfo) override;
+		};
+		
+		BoxMakePermeable(Make&& make, InitInfo initInfo);
+		
 		BoxMakePermeable(BoxPtr<IScalable>&& object, sf::Vector2f minSize);
 		
 		void init(InitInfo initInfo) override;
