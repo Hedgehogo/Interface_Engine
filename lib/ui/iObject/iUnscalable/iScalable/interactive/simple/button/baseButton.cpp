@@ -2,13 +2,17 @@
 #include "baseButton.hpp"
 
 namespace ui {
-	void BaseButton::init(InitInfo initInfo) {
-		BaseInteractive::init(initInfo);
-		background->init(initInfo);
+	BaseButton::BaseButton(BoxPtr<IScalable::Make>&& background, BoxPtr<IInteraction>&& interaction, InitInfo initInfo) :
+		BaseInteractive(std::move(interaction), initInfo), background(background->make(initInfo)) {
 	}
 	
 	BaseButton::BaseButton(BoxPtr<IScalable>&& background, BoxPtr<IInteraction>&& interaction) :
 		BaseInteractive(std::move(interaction)), background(std::move(background)) {
+	}
+	
+	void BaseButton::init(InitInfo initInfo) {
+		BaseInteractive::init(initInfo);
+		background->init(initInfo);
 	}
 	
 	void BaseButton::resize(sf::Vector2f size, sf::Vector2f position) {

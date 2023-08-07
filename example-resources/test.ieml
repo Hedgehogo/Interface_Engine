@@ -1,0 +1,20 @@
+object: = BoxWithConstBorder:
+	border-distance: 20
+	side: right
+	const-object: = BoxWithConstBorder:
+		border-distance: 20
+		side: up
+		const-object: = Switcher:
+			inactive-background: yellow
+			active-background: blue
+			value:
+				var: > b-value
+		second-object: = Slider:
+			slider: = Capsule: red
+			background: green
+			value:
+				var: > c-value
+	second-object: = BoxSwitcher:
+		inactive-object: yellow
+		active-object: blue
+		value: > b-value

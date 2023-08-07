@@ -10,6 +10,21 @@
 namespace ui {
 	class Switcher : public BaseInteractive, public ILayout, public IDrawable {
 	public:
+		struct Make : public IScalable::Make, public ILayout::Make {
+			BoxPtr<IScalable::Make> inactiveBackground;
+			BoxPtr<IScalable::Make> activeBackground;
+			PSbool value;
+			Key key = Key::mouseLeft;
+			
+			Make(BoxPtr<IScalable::Make>&& inactiveBackground, BoxPtr<IScalable::Make>&& activeBackground, PSbool value, Key key = Key::mouseLeft);
+			
+			Make(BoxPtr<IScalable::Make>&& inactiveBackground, BoxPtr<IScalable::Make>&& activeBackground, Key key = Key::mouseLeft, bool startActive = false);
+			
+			Switcher* make(InitInfo initInfo) override;
+		};
+		
+		Switcher(Make&& make, InitInfo initInfo);
+		
 		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key = Key::mouseLeft);
 		
 		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, Key key = Key::mouseLeft, bool startActive = false);
@@ -42,10 +57,10 @@ namespace ui {
 	
 	protected:
 		LayoutData layout;
-		BoxPtr<IScalable> activeBackground;
-		BoxPtr<IScalable> inactiveBackground;
-		DrawManager activeDrawManager;
 		DrawManager inactiveDrawManager;
+		DrawManager activeDrawManager;
+		BoxPtr<IScalable> inactiveBackground;
+		BoxPtr<IScalable> activeBackground;
 		PSbool active;
 	};
 	

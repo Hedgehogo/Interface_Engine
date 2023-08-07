@@ -1,15 +1,15 @@
 object:
   type: BoxWithConstBorder
-  side: right
   border-distance: 20
+  side: right
   const-object:
     type: BoxWithConstBorder
-    side: up
     border-distance: 20
+    side: up
     const-object:
       type: Switcher
-      active-background: blue
       inactive-background: yellow
+      active-background: blue
       value:
         var: b-value
     second-object:
@@ -22,6 +22,6 @@ object:
         var: c-value
   second-object:
     type: BoxSwitcher
-    first-object: blue
-    second-object: yellow
+    inactive-object: yellow
+    active-object: blue
     value: b-value

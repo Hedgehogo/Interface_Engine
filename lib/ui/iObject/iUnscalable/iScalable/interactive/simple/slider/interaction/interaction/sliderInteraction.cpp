@@ -18,6 +18,12 @@ namespace ui {
 		slideInteraction(BoxPtr<KeyEvent>{new SliderEvent{slider, division}}, key) {
 	}
 	
+	SliderInteraction::SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
+		OneKeyInteraction(BoxPtr<KeyEvent>{new AddBlockInteractionEvent{slideInteraction}}, key),
+		wheelEvent(slider, wheelHorizontal, wheelRelativity, wheelSensitivity),
+		slideInteraction(BoxPtr<KeyEvent>{new SliderEvent{slider, division}}, key) {
+	}
+	
 	void SliderInteraction::init(InteractionInitInfo interactionInitInfo) {
 		slideInteraction.init(InteractionInitInfo{interactionInitInfo});
 		event->init(interactionInitInfo);

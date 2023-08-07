@@ -14,12 +14,30 @@ float calculateMediumFPS(std::array<float, T> lastFPS) {
 int main() {
 	ui::init();
 	
+	auto c_value{std::make_shared<ui::SRVec2f>()};
+	auto b_value{std::make_shared<ui::Sbool>(false)};
 	ui::Window window{
 		ui::Interface::Make{
-			makeBoxPtr<ui::IScalable::Make, ui::BoxDebug::Make>(
-				makeBoxPtr<ui::IScalable::Make, ui::Capsule::Make>(
-					sf::Color::Green
-				)
+			makeBoxPtr<ui::IScalable::Make, ui::BoxWithConstBorder::Make>(
+				makeBoxPtr<ui::IScalable::Make, ui::BoxWithConstBorder::Make>(
+					makeBoxPtr<ui::IScalable::Make, ui::Switcher::Make>(
+						makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Yellow),
+						makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Blue),
+						b_value
+					),
+					makeBoxPtr<ui::IScalable::Make, ui::Slider::Make>(
+						makeBoxPtr<ui::IUninteractive::Make, ui::Capsule::Make>(sf::Color::Red),
+						makeBoxPtr<ui::IUninteractive::Make, ui::FullColor::Make>(sf::Color::Green),
+						c_value
+					),
+					20.f, ui::Side::up
+				),
+				makeBoxPtr<ui::IScalable::Make, ui::BoxSwitcher::Make>(
+					makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Yellow),
+					makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Blue),
+					b_value
+				),
+				20.f, ui::Side::right
 			)
 		},
 		"IE works!",

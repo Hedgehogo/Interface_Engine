@@ -7,17 +7,19 @@ namespace ui {
 	class BoxSwitcher : public Box, public ILayoutWithTwoObjects, public IDrawable {
 	public:
 		struct Make : public Box::Make, public ILayoutWithTwoObjects::Make {
-			BoxPtr<IScalable::Make> firstObject;
-			BoxPtr<IScalable::Make> secondObject;
+			BoxPtr<IScalable::Make> inactiveObject;
+			BoxPtr<IScalable::Make> activeObject;
 			PSbool value;
 			sf::Vector2f minSize = {};
+			
+			Make(BoxPtr<IScalable::Make>&& inactiveObject, BoxPtr<IScalable::Make>&& activeObject, PSbool value, const sf::Vector2f& minSize = {});
 			
 			BoxSwitcher* make(InitInfo initInfo) override;
 		};
 		
 		BoxSwitcher(Make&& make, InitInfo initInfo);
 		
-		BoxSwitcher(BoxPtr<IScalable>&& firstObject, BoxPtr<IScalable>&& secondObject, PSbool value, const sf::Vector2f& minSize = {});
+		BoxSwitcher(BoxPtr<IScalable>&& inactiveObject, BoxPtr<IScalable>&& activeObject, PSbool value, const sf::Vector2f& minSize = {});
 		
 		BoxSwitcher(const BoxSwitcher& other);
 		
@@ -46,10 +48,10 @@ namespace ui {
 		BoxSwitcher* copy() override;
 	
 	protected:
-		BoxPtr<IScalable> firstObject;
-		BoxPtr<IScalable> secondObject;
-		DrawManager firstDrawManager;
-		DrawManager secondDrawManager;
+		DrawManager inactiveDrawManager;
+		DrawManager activeDrawManager;
+		BoxPtr<IScalable> inactiveObject;
+		BoxPtr<IScalable> activeObject;
 		PSbool value;
 	};
 	

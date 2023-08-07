@@ -1,13 +1,34 @@
 #include "boxWithConstBorder.hpp"
 
 namespace ui {
-	void BoxWithConstBorder::init(InitInfo initInfo) {
-		constObject->init(initInfo);
-		secondObject->init(initInfo);
+	BoxWithConstBorder::Make::Make(
+		BoxPtr<IScalable::Make>&& constObject,
+		BoxPtr<IScalable::Make>&& secondObject,
+		float borderDistance,
+		Side side,
+		sf::Vector2f minSize
+	) : constObject(std::move(constObject)), secondObject(std::move(secondObject)), borderDistance(borderDistance), side(side), minSize(minSize) {
+	}
+	
+	BoxWithConstBorder* BoxWithConstBorder::Make::make(InitInfo initInfo) {
+		return new BoxWithConstBorder{std::move(*this), initInfo};
+	}
+	
+	BoxWithConstBorder::BoxWithConstBorder(Make&& make, InitInfo initInfo) :
+		Box(make.minSize),
+		constObject(make.constObject->make(initInfo)),
+		secondObject(make.secondObject->make(initInfo)),
+		borderDistance(make.borderDistance),
+		side(make.side) {
 	}
 	
 	BoxWithConstBorder::BoxWithConstBorder(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& secondObject, Side side, float borderDistance, sf::Vector2f minSize) :
 		Box(minSize), constObject(std::move(constObject)), secondObject(std::move(secondObject)), borderDistance(borderDistance), side(side) {
+	}
+	
+	void BoxWithConstBorder::init(InitInfo initInfo) {
+		constObject->init(initInfo);
+		secondObject->init(initInfo);
 	}
 	
 	void BoxWithConstBorder::resize(sf::Vector2f size, sf::Vector2f position) {

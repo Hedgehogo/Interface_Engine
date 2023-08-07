@@ -15,9 +15,9 @@ namespace ui {
 	
 	public:
 		struct Make : public IScalable::Make {
-			BoxPtr <IScalable::Make> object;
+			BoxPtr<IScalable::Make> object;
 			AnimationManager animationManager = AnimationManager{{}};
-			BoxPtr <InteractionStack> interactionStack = makeBoxPtr<InteractionStack>();
+			BoxPtr<InteractionStack> interactionStack = makeBoxPtr<InteractionStack>();
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
@@ -115,10 +115,10 @@ namespace ui {
 		DrawManager drawManager;
 		UpdateManager updateManager;
 		InteractionManager interactionManager;
-		BoxPtr <InteractionStack> interactionStack;
+		BoxPtr<InteractionStack> interactionStack;
 		PanelManager panelManager;
 		AnimationManager animationManager;
-		BoxPtr <IScalable> object;
+		BoxPtr<IScalable> object;
 		sf::Vector2f mousePosition;
 		bool initialized;
 		bool active;

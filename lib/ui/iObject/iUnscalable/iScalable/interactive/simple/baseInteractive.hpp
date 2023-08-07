@@ -26,6 +26,8 @@ namespace ui {
 	
 	class BaseInteractive : public virtual IScalable, public IInteractive, public IUpdatable {
 	public:
+		BaseInteractive(BoxPtr<IInteraction>&& interaction, InitInfo initInfo);
+		
 		explicit BaseInteractive(BoxPtr<IInteraction>&& interaction);
 		
 		void init(InitInfo initInfo) override;

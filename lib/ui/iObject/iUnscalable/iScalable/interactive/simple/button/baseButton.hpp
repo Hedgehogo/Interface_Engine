@@ -6,6 +6,8 @@
 namespace ui {
 	class BaseButton : public BaseInteractive {
 	public:
+		BaseButton(BoxPtr<IScalable::Make>&& background, BoxPtr<IInteraction>&& interaction, InitInfo initInfo);
+		
 		BaseButton(BoxPtr<IScalable>&& background, BoxPtr<IInteraction>&& interaction);
 		
 		void init(InitInfo initInfo) override;

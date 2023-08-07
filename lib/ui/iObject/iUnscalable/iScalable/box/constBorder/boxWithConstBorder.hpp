@@ -9,7 +9,21 @@
 namespace ui {
 	class BoxWithConstBorder : public Box, public ILayoutWithTwoObjects {
 	public:
-		BoxWithConstBorder(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& secondObject, Side side, float borderDistance, sf::Vector2f minSize = {0, 0});
+		struct Make : public Box::Make, public ILayoutWithTwoObjects::Make {
+			BoxPtr<IScalable::Make> constObject;
+			BoxPtr<IScalable::Make> secondObject;
+			float borderDistance;
+			Side side;
+			sf::Vector2f minSize = {};
+			
+			Make(BoxPtr<IScalable::Make>&& constObject, BoxPtr<IScalable::Make>&& secondObject, float borderDistance, Side side, sf::Vector2f minSize = {});
+			
+			BoxWithConstBorder* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithConstBorder(Make&& make, InitInfo initInfo);
+		
+		BoxWithConstBorder(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& secondObject, Side side, float borderDistance, sf::Vector2f minSize = {});
 		
 		void init(InitInfo initInfo) override;
 		

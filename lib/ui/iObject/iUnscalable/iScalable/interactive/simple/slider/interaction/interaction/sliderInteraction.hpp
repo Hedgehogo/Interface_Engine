@@ -12,6 +12,8 @@ namespace ui {
 		
 		SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division = {10, 10}, bool wheelHorizontal = false);
 		
+		SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity);
+		
 		SliderInteraction(const SliderInteraction& other);
 		
 		void init(InteractionInitInfo interactionInitInfo) override;

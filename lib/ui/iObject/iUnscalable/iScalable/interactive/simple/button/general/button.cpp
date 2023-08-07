@@ -1,6 +1,19 @@
 #include "button.hpp"
 
 namespace ui {
+	Button::Make::Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IInteraction>&& interaction) :
+		background(std::move(background)), interaction(std::move(interaction)){
+	}
+	
+	Button* Button::Make::make(InitInfo initInfo) {
+		return new Button{std::move(*this), initInfo};
+	}
+	
+	Button::Button(Make&& make, InitInfo initInfo) :
+		BaseButton(std::move(make.background), std::move(make.interaction), initInfo),
+		interactionIndex(std::numeric_limits<std::size_t>::max()) {
+	}
+	
 	Button::Button(BoxPtr<IScalable>&& background, std::size_t interaction) :
 		BaseButton(std::move(background), BoxPtr<IInteraction>{nullptr}), interactionIndex(interaction) {
 	}

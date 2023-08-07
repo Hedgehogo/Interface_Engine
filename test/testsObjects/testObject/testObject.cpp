@@ -2,7 +2,38 @@
 
 #include "../processorTime.hpp"
 
-TestObject::TestObject(sf::Vector2f minSize, sf::Vector2f normalSize, bool updateInteractionsResult) : minSize(minSize), normalSize(normalSize), updateInteractionsResult(updateInteractionsResult) {}
+TestObject::Make::Make(sf::Vector2f minSize, sf::Vector2f normalSize, bool updateInteractionsResult) :
+	minSize(minSize), normalSize(normalSize), updateInteractionsResult(updateInteractionsResult) {
+}
+
+TestObject* TestObject::Make::make(ui::InitInfo initInfo) {
+	return new TestObject{std::move(*this), initInfo};
+}
+
+TestObject::TestObject(TestObject::Make&& make, ui::InitInfo initInfo) :
+	processed(
+		{
+			{
+				getProcessorTime(),
+				&initInfo.renderTarget,
+				&initInfo.drawManager,
+				&initInfo.updateManager,
+				&initInfo.interactionManager,
+				&initInfo.interactionStack,
+				&initInfo.panelManager
+			}
+		}
+	),
+	updateInteractionsResult(make.updateInteractionsResult),
+	minSize(make.minSize),
+	normalSize(make.normalSize) {
+	initInfo.drawManager.add(*this);
+	initInfo.updateManager.add(*this);
+}
+
+TestObject::TestObject(sf::Vector2f minSize, sf::Vector2f normalSize, bool updateInteractionsResult) :
+	updateInteractionsResult(updateInteractionsResult), minSize(minSize), normalSize(normalSize) {
+}
 
 void TestObject::init(ui::InitInfo initInfo) {
 	processed.init.time = getProcessorTime();
@@ -56,6 +87,6 @@ TestObject* TestObject::copy() {
 	return new TestObject{*this};
 }
 
-void TestObject::drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+void TestObject::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 	processed.drawDebug = getProcessorTime();
 }

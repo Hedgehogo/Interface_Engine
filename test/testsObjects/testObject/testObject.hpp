@@ -22,12 +22,24 @@ public:
 		struct UpdateInteractions {
 			uint64_t time{0};
 			sf::Vector2f mousePosition{0, 0};
-		} updateInteractions;
+		} updateInteractions{};
 		
 		uint64_t draw{0};
 		uint64_t copy{0};
 		uint64_t drawDebug{0};
 	};
+	
+	struct Make : public ui::IScalable::Make, public ui::ILayout::Make {
+		sf::Vector2f minSize = {};
+		sf::Vector2f normalSize = {100, 100};
+		bool updateInteractionsResult = true;
+		
+		Make(sf::Vector2f minSize = {}, sf::Vector2f normalSize = {100, 100}, bool updateInteractionsResult = true);
+		
+		TestObject* make(ui::InitInfo initInfo) override;
+	};
+	
+	TestObject(Make&& make, ui::InitInfo initInfo);
 	
 	TestObject(sf::Vector2f minSize = {0, 0}, sf::Vector2f normalSize = {100, 100}, bool updateInteractionsResult = true);
 

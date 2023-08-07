@@ -11,6 +11,30 @@
 namespace ui {
 	class BoxWithMovableBorder : public Box, public IInteractive, public IUpdatable, public ILayoutWithTwoObjects {
 	public:
+		struct Make : public Box::Make, public ILayoutWithTwoObjects::Make {
+			BoxPtr<IScalable::Make> firstObject;
+			BoxPtr<IScalable::Make> secondObject;
+			bool isHorizontalBorder;
+			PSCoefficient borderValue;
+			int borderInteractionSize = 5;
+			Key key = Key::mouseLeft;
+			sf::Vector2f minSize = {};
+			
+			Make(
+				BoxPtr<IScalable::Make>&& firstObject,
+				BoxPtr<IScalable::Make>&& secondObject,
+				bool isHorizontalBorder,
+				PSCoefficient borderValue,
+				int borderInteractionSize = 5,
+				Key key = Key::mouseLeft,
+				sf::Vector2f minSize = {}
+			);
+			
+			BoxWithMovableBorder* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithMovableBorder(Make&& make, InitInfo initInfo);
+		
 		BoxWithMovableBorder(
 			BoxPtr<IScalable>&& firstObject,
 			BoxPtr<IScalable>&& secondObject,
@@ -59,12 +83,12 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		PressedInteraction pressedInteraction;
 		BaseInteractiveData interactive;
 		BoxPtr<IScalable> firstObject;
 		BoxPtr<IScalable> secondObject;
-		PressedInteraction pressedInteraction;
-		float borderValueNow;
 		PSCoefficient borderValue;
+		float borderValueNow;
 		int borderInteractionSize;
 		bool isHorizontalBorder;
 	};

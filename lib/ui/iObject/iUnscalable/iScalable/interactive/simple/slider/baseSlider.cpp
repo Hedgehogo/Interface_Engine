@@ -2,10 +2,28 @@
 #include <cmath>
 
 namespace ui {
+	BaseSlider::BaseSlider(
+		BoxPtr<IUninteractive::Make>&& slider,
+		BoxPtr<IUninteractive::Make>&& background,
+		const PSRVec2f& value,
+		BoxPtr<SliderInteraction>&& interaction,
+		InitInfo initInfo
+	) :
+		BaseInteractive(dynamicCast<IInteraction>(std::move(interaction)), initInfo),
+		background(background->make(initInfo)),
+		slider(slider->make(initInfo)),
+		value(value) {
+		value->addSetter([&](sf::Vector2f newValue) {
+			resizeSlider(newValue);
+		});
+		setRangeBounds(value, {0, 0}, {1, 1});
+		dynamic_cast<SliderInteraction&>(*interactive.interaction).init(InteractionInitInfo{initInfo});
+	}
+	
 	BaseSlider::BaseSlider(BoxPtr<IUninteractive>&& slider, BoxPtr<IUninteractive>&& background, const PSRVec2f& value, BoxPtr<SliderInteraction>&& interaction) :
 		BaseInteractive(dynamicCast<IInteraction>(std::move(interaction))),
-		slider(std::move(slider)),
 		background(std::move(background)),
+		slider(std::move(slider)),
 		value(value) {
 		value->addSetter([&](sf::Vector2f newValue) {
 			resizeSlider(newValue);
@@ -15,8 +33,8 @@ namespace ui {
 	
 	BaseSlider::BaseSlider(const BaseSlider& other) :
 		BaseInteractive(BoxPtr{other.interactive.interaction}),
-		slider(BoxPtr{other.slider}),
 		background(BoxPtr{other.background}),
+		slider(BoxPtr{other.slider}),
 		value(other.value) {
 		value->addSetter([&](sf::Vector2f newValue) {
 			resizeSlider(newValue);

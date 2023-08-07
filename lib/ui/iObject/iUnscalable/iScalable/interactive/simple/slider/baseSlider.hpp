@@ -11,6 +11,14 @@ namespace ui {
 		virtual void resizeSlider(sf::Vector2f newValue);
 	
 	public:
+		BaseSlider(
+			BoxPtr<IUninteractive::Make>&& slider,
+			BoxPtr<IUninteractive::Make>&& background,
+			const PSRVec2f& value,
+			BoxPtr<SliderInteraction>&& interaction,
+			InitInfo initInfo
+		);
+		
 		BaseSlider(BoxPtr<IUninteractive>&& slider, BoxPtr<IUninteractive>&& background, const PSRVec2f& value, BoxPtr<SliderInteraction>&& interaction);
 		
 		BaseSlider(const BaseSlider& other);
@@ -48,8 +56,8 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		BoxPtr<IUninteractive> slider;
 		BoxPtr<IUninteractive> background;
+		BoxPtr<IUninteractive> slider;
 		PSRVec2f value;
 		sf::Vector2f position;
 		sf::Vector2f sliderSize;

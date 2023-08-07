@@ -3,6 +3,48 @@
 #include <algorithm>
 
 namespace ui {
+	BoxWithMovableBorder::Make::Make(
+		BoxPtr<IScalable::Make>&& firstObject,
+		BoxPtr<IScalable::Make>&& secondObject,
+		bool isHorizontalBorder,
+		PSCoefficient borderValue,
+		int borderInteractionSize,
+		Key key,
+		sf::Vector2f minSize
+	) :
+		firstObject(std::move(firstObject)),
+		secondObject(std::move(secondObject)),
+		isHorizontalBorder(isHorizontalBorder),
+		borderValue(borderValue),
+		borderInteractionSize(borderInteractionSize),
+		key(key),
+		minSize(minSize) {
+	}
+	
+	BoxWithMovableBorder* BoxWithMovableBorder::Make::make(InitInfo initInfo) {
+		return new BoxWithMovableBorder{std::move(*this), initInfo};
+	}
+	
+	BoxWithMovableBorder::BoxWithMovableBorder(BoxWithMovableBorder::Make&& make, InitInfo initInfo) :
+		Box(make.minSize),
+		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, make.key),
+		interactive(makeBoxPtr<IInteraction, OneKeyInteraction>(
+			BoxPtr<KeyEvent>(new AddBlockInteractionEvent{pressedInteraction}), make.key
+		), initInfo),
+		firstObject(make.firstObject->make(initInfo)),
+		secondObject(make.secondObject->make(initInfo)),
+		borderValue(make.borderValue),
+		borderValueNow(borderValue->getValue()),
+		borderInteractionSize(make.borderInteractionSize),
+		isHorizontalBorder(make.isHorizontalBorder) {
+		borderValue->addSetter([&](float) {
+			this->resize(layout.size, layout.position);
+		});
+		initInfo.updateManager.add(*this);
+		pressedInteraction.init({initInfo});
+		dynamic_cast<OneKeyInteraction&>(*interactive.interaction).getEvent().init({initInfo});
+	}
+	
 	BoxWithMovableBorder::BoxWithMovableBorder(
 		BoxPtr<IScalable>&& firstObject,
 		BoxPtr<IScalable>&& secondObject,
@@ -12,12 +54,12 @@ namespace ui {
 		sf::Vector2f minSize
 	) :
 		Box(minSize),
+		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, Key::mouseLeft),
 		interactive(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>(new AddBlockInteractionEvent{pressedInteraction}), Key::mouseLeft)),
 		firstObject(std::move(firstObject)),
 		secondObject(std::move(secondObject)),
-		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, Key::mouseLeft),
-		borderValueNow(borderValue->getValue()),
 		borderValue(borderValue),
+		borderValueNow(borderValue->getValue()),
 		borderInteractionSize(borderInteractionSize),
 		isHorizontalBorder(isHorizontalBorder) {
 		borderValue->addSetter([&](float) {

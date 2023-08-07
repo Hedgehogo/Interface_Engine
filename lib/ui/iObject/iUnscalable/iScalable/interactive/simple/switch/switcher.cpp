@@ -3,9 +3,29 @@
 #include "event/switcherEvent.hpp"
 
 namespace ui {
+	Switcher::Make::Make(BoxPtr<IScalable::Make>&& inactiveBackground, BoxPtr<IScalable::Make>&& activeBackground, PSbool value, Key key) :
+		inactiveBackground(std::move(inactiveBackground)), activeBackground(std::move(activeBackground)), value(value), key(key) {
+	}
+	
+	Switcher::Make::Make(BoxPtr<IScalable::Make>&& inactiveBackground, BoxPtr<IScalable::Make>&& activeBackground, Key key, bool startActive) :
+		inactiveBackground(std::move(inactiveBackground)), activeBackground(std::move(activeBackground)), value(std::make_shared<Sbool>(startActive)), key(key) {
+	}
+	
+	Switcher* Switcher::Make::make(InitInfo initInfo) {
+		return new Switcher{std::move(*this), initInfo};
+	}
+	
+	Switcher::Switcher(Switcher::Make&& make, InitInfo initInfo) :
+		BaseInteractive(makeBoxPtr<IInteraction, OneKeyInteraction>(makeBoxPtr<KeyEvent, SwitcherEvent>(make.value), make.key), initInfo),
+		inactiveBackground(make.inactiveBackground->make(initInfo.copy(inactiveDrawManager))),
+		activeBackground(make.activeBackground->make(initInfo.copy(activeDrawManager))),
+		active(make.value) {
+		initInfo.drawManager.add(*this);
+	}
+	
 	Switcher::Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key) :
 		BaseInteractive(makeBoxPtr<IInteraction, OneKeyInteraction>(makeBoxPtr<KeyEvent, SwitcherEvent>(value), key)),
-		activeBackground(std::move(activeBackground)), inactiveBackground(std::move(inactiveBackground)), active(value) {
+		inactiveBackground(std::move(inactiveBackground)), activeBackground(std::move(activeBackground)), active(value) {
 	}
 	
 	Switcher::Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, Key key, bool startActive) :
@@ -15,26 +35,26 @@ namespace ui {
 	void Switcher::init(InitInfo initInfo) {
 		BaseInteractive::init(initInfo);
 		initInfo.drawManager.add(*this);
-		activeBackground->init(initInfo.copy(activeDrawManager));
 		inactiveBackground->init(initInfo.copy(inactiveDrawManager));
+		activeBackground->init(initInfo.copy(activeDrawManager));
 	}
 	
 	void Switcher::setPosition(sf::Vector2f position) {
 		ILayout::setPosition(position);
-		activeBackground->setPosition(position);
 		inactiveBackground->setPosition(position);
+		activeBackground->setPosition(position);
 	}
 	
 	void Switcher::move(sf::Vector2f position) {
 		ILayout::move(position);
-		activeBackground->move(position);
 		inactiveBackground->move(position);
+		activeBackground->move(position);
 	}
 	
 	void Switcher::setSize(sf::Vector2f size) {
 		ILayout::setSize(size);
-		activeBackground->setSize(size);
 		inactiveBackground->setSize(size);
+		activeBackground->setSize(size);
 	}
 	
 	sf::Vector2f Switcher::getMinSize() const {
@@ -80,6 +100,14 @@ namespace ui {
 		return new Switcher{*this};
 	}
 	
+	void Switcher::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+		if(active->getValue()) {
+			activeBackground->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+		} else {
+			inactiveBackground->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+		}
+	}
+	
 	bool DecodePointer<Switcher>::decodePointer(const YAML::Node& node, Switcher*& switcher) {
 		auto inactiveBackground{node["inactive-background"].as<BoxPtr<IScalable> >()};
 		auto activeBackground{node["active-background"].as<BoxPtr<IScalable> >()};
@@ -108,13 +136,5 @@ namespace ui {
 			};
 		}
 		return true;
-	}
-	
-	void Switcher::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-		if(active->getValue()) {
-			activeBackground->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		} else {
-			inactiveBackground->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		}
 	}
 }

@@ -1,6 +1,56 @@
 #include "slider.hpp"
 
 namespace ui {
+	Slider::Make::Make(
+		BoxPtr<IUninteractive::Make>&& slider,
+		BoxPtr<IUninteractive::Make>&& background,
+		const PSRVec2f& value,
+		sf::Vector2f sliderScale,
+		Key key,
+		bool wheelHorizontal,
+		SliderWheelEvent::Relativity wheelRelativity,
+		sf::Vector2f wheelSensitivity
+	) :
+		slider(std::move(slider)),
+		background(std::move(background)),
+		value(value),
+		sliderScale(sliderScale),
+		key(key),
+		wheelHorizontal(wheelHorizontal),
+		wheelRelativity(wheelRelativity),
+		wheelSensitivity(wheelSensitivity) {
+	}
+	
+	Slider::Make::Make(
+		BoxPtr<IUninteractive::Make>&& slider,
+		BoxPtr<IUninteractive::Make>&& background,
+		const PSRVec2f& value,
+		sf::Vector2i division,
+		sf::Vector2f sliderScale,
+		Key key,
+		bool wheelHorizontal
+	) :
+		slider(std::move(slider)),
+		background(std::move(background)),
+		value(value),
+		division(division),
+		sliderScale(sliderScale),
+		key(key),
+		wheelHorizontal(wheelHorizontal),
+		wheelRelativity(SliderWheelEvent::Relativity::relationArea),
+		wheelSensitivity(1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)) {
+	}
+	
+	Slider* Slider::Make::make(InitInfo initInfo) {
+		return new Slider{std::move(*this), initInfo};
+	}
+	
+	Slider::Slider(Slider::Make&& make, InitInfo initInfo) :
+		BaseSlider(std::move(make.slider), std::move(make.background), make.value, BoxPtr{
+			new SliderInteraction{*this, make.key, make.division, make.wheelHorizontal, make.wheelRelativity, make.wheelSensitivity}
+		}, initInfo), scale(make.sliderScale) {
+	}
+	
 	Slider::Slider(
 		BoxPtr<IUninteractive>&& slider,
 		BoxPtr<IUninteractive>&& background,
@@ -11,10 +61,9 @@ namespace ui {
 		SliderWheelEvent::Relativity wheelRelativity,
 		sf::Vector2f wheelSensitivity
 	) :
-		BaseSlider(
-			std::move(slider), std::move(background), value,
-			BoxPtr{new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}}
-		), scale(sliderScale) {
+		BaseSlider(std::move(slider), std::move(background), value, BoxPtr{
+			new SliderInteraction{*this, key, wheelHorizontal, wheelRelativity, wheelSensitivity}
+		}), scale(sliderScale) {
 	}
 	
 	Slider::Slider(
@@ -26,10 +75,9 @@ namespace ui {
 		Key key,
 		bool wheelHorizontal
 	) :
-		BaseSlider(
-			std::move(slider), std::move(background), value,
-			BoxPtr{new SliderInteraction{*this, key, division, wheelHorizontal}}
-		), scale(sliderScale) {
+		BaseSlider(std::move(slider), std::move(background), value, BoxPtr{
+			new SliderInteraction{*this, key, division, wheelHorizontal}
+		}), scale(sliderScale) {
 	}
 	
 	void Slider::setScale(sf::Vector2f scale) {
@@ -47,7 +95,7 @@ namespace ui {
 	sf::Vector2f Slider::getMinSize() const {
 		sf::Vector2f minSize{slider->getMinSize()};
 		minSize = {minSize.x / scale.x, minSize.y / scale.y};
-		return minSize;
+		return max(minSize, background->getMinSize());
 	}
 	
 	Slider* Slider::copy() {

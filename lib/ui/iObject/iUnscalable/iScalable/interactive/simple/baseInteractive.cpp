@@ -7,7 +7,7 @@ namespace ui {
 		interaction(std::move(interaction)),
 		interact(false),
 		oldInteract(false) {
-		interaction->init({initInfo});
+		this->interaction->init({initInfo});
 	}
 	
 	BaseInteractiveData::BaseInteractiveData(BoxPtr<IInteraction>&& interaction) :
@@ -34,6 +34,11 @@ namespace ui {
 	
 	void BaseInteractiveData::updateInteractions() {
 		interact = true;
+	}
+	
+	BaseInteractive::BaseInteractive(BoxPtr<IInteraction>&& interaction, InitInfo initInfo) :
+		interactive(std::move(interaction), initInfo) {
+		initInfo.updateManager.add(*this);
 	}
 	
 	BaseInteractive::BaseInteractive(BoxPtr<IInteraction>&& interaction) :

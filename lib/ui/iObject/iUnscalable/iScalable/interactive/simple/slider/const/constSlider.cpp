@@ -1,6 +1,62 @@
 #include "constSlider.hpp"
 
 namespace ui {
+	ConstSlider::Make::Make(
+		BoxPtr<IUninteractive::Make>&& slider,
+		BoxPtr<IUninteractive::Make>&& background,
+		const PSRVec2f& value,
+		float sliderScale,
+		Key key,
+		bool wheelHorizontal,
+		SliderWheelEvent::Relativity wheelRelativity,
+		sf::Vector2f wheelSensitivity
+	) :
+		slider(std::move(slider)),
+		background(std::move(background)),
+		value(value),
+		sliderScale(sliderScale),
+		key(key),
+		wheelHorizontal(wheelHorizontal),
+		wheelRelativity(wheelRelativity),
+		wheelSensitivity(wheelSensitivity) {
+	}
+	
+	ConstSlider::Make::Make(
+		BoxPtr<IUninteractive::Make>&& slider,
+		BoxPtr<IUninteractive::Make>&& background,
+		const PSRVec2f& value,
+		sf::Vector2i division,
+		float sliderScale,
+		Key key,
+		bool wheelHorizontal
+	) :
+		slider(std::move(slider)),
+		background(std::move(background)),
+		value(value),
+		division(division),
+		sliderScale(sliderScale),
+		key(key),
+		wheelHorizontal(wheelHorizontal),
+		wheelRelativity(SliderWheelEvent::Relativity::relationArea),
+		wheelSensitivity(1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)) {
+	}
+	
+	ConstSlider* ConstSlider::Make::make(InitInfo initInfo) {
+		return new ConstSlider{std::move(*this), initInfo};
+	}
+	
+	float getAspectRatio(sf::Vector2f size) {
+		return size.x / size.y;
+	}
+	
+	ConstSlider::ConstSlider(Make&& make, InitInfo initInfo) :
+		BaseSlider(std::move(make.slider), std::move(make.background), make.value, BoxPtr{
+			new SliderInteraction{*this, make.key, make.division, make.wheelHorizontal, make.wheelRelativity, make.wheelSensitivity}
+		}, initInfo),
+		aspectRatio(getAspectRatio(slider->getNormalSize())),
+		sliderScale(make.sliderScale) {
+	}
+	
 	ConstSlider::ConstSlider(
 		BoxPtr<IUninteractive>&& slider,
 		BoxPtr<IUninteractive>&& background,
