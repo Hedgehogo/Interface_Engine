@@ -6,6 +6,18 @@
 namespace ui {
 	class BoxWithAlternativeObject : public Box, public ILayoutWithTwoObjects {
 	public:
+		struct Make : public Box::Make, public ILayoutWithTwoObjects::Make {
+			BoxPtr<IScalable::Make> topObject;
+			BoxPtr<IScalable::Make> bottomObject;
+			sf::Vector2f minSize = {};
+			
+			Make(BoxPtr<IScalable::Make>&& topObject, BoxPtr<IScalable::Make>&& bottomObject, sf::Vector2f minSize = {});
+			
+			BoxWithAlternativeObject* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithAlternativeObject(Make&& make, InitInfo initInfo);
+		
 		BoxWithAlternativeObject(BoxPtr<IScalable>&& topObject, BoxPtr<IScalable>&& bottomObject, sf::Vector2f minSize = {});
 		
 		void init(InitInfo initInfo) override;

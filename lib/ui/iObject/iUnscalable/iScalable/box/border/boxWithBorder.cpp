@@ -2,6 +2,33 @@
 #include <vector>
 
 namespace ui {
+	BoxWithBorder::Make::Make(std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize) :
+		objects(std::move(objects)), boundsHorizontal(std::move(addBounds(boundsHorizontal))), boundsVertical(std::move(addBounds(boundsVertical))), minSize(minSize) {
+	}
+	
+	BoxWithBorder::Make::Make(std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects, sf::Vector2f minSize) :
+		objects(std::move(objects)), boundsHorizontal(genBounds(this->objects.size())), boundsVertical(genBounds(y_size(this->objects))), minSize(minSize) {
+	}
+	
+	BoxWithBorder* BoxWithBorder::Make::make(InitInfo initInfo) {
+		return new BoxWithBorder{std::move(*this), initInfo};
+	}
+	
+	BoxWithBorder::BoxWithBorder(Make&& make, InitInfo initInfo) :
+		Box(make.minSize),
+		objects(mapMake(std::move(make.objects), initInfo)),
+		boundsHorizontal(std::move(make.boundsHorizontal)),
+		boundsVertical(std::move(make.boundsVertical)) {
+	}
+	
+	BoxWithBorder::BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize) :
+		Box(minSize), objects(std::move(objects)), boundsHorizontal(std::move(addBounds(boundsHorizontal))), boundsVertical(std::move(addBounds(boundsVertical))) {
+	}
+	
+	BoxWithBorder::BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, sf::Vector2f minSize) :
+		Box(minSize), objects(objects), boundsHorizontal(genBounds(this->objects.size())), boundsVertical(genBounds(y_size(this->objects))) {
+	}
+	
 	void BoxWithBorder::init(InitInfo initInfo) {
 		for(auto& line: objects) {
 			for(auto& object: line) {
@@ -10,33 +37,14 @@ namespace ui {
 		}
 	}
 	
-	BoxWithBorder::BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize) :
-		Box(minSize), objects(std::move(objects)), boundsVertical(std::move(boundsVertical)), boundsHorizontal(std::move(boundsHorizontal)) {
-		this->boundsHorizontal.insert(this->boundsHorizontal.begin(), 0.0f);
-		this->boundsHorizontal.push_back(1.0f);
-		this->boundsVertical.insert(this->boundsVertical.begin(), 0.0f);
-		this->boundsVertical.push_back(1.0f);
-	}
-	
-	BoxWithBorder::BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, sf::Vector2f minSize) :
-		Box(minSize), objects(objects), boundsVertical(this->objects[0].size() + 1, 1.0f), boundsHorizontal(this->objects.size() + 1, 1.0f) {
-		sf::Vector2u count = {static_cast<unsigned>(this->objects.size()), static_cast<unsigned>(this->objects[0].size())};
-		for(unsigned x = 0; x < count.x; ++x) {
-			boundsHorizontal[x] = static_cast<float>(x) / static_cast<float>(count.x);
-		}
-		for(unsigned y = 0; y < count.y; ++y) {
-			boundsVertical[y] = static_cast<float>(y) / static_cast<float>(count.y);
-		}
-	}
-	
 	void BoxWithBorder::resize(sf::Vector2f size, sf::Vector2f position) {
 		Box::resize(size, position);
 		sf::Vector2f coordinate{};
 		sf::Vector2f objectSize{size};
-		for(unsigned x = 0; x < objects.size(); ++x) {
+		for(std::size_t x = 0; x < objects.size(); ++x) {
 			objectSize.x = size.x * (boundsHorizontal[x + 1] - boundsHorizontal[x]);
 			coordinate.y = 0;
-			for(unsigned y = 0; y < objects[0].size(); ++y) {
+			for(std::size_t y = 0; y < objects[0].size(); ++y) {
 				objectSize.y = size.y * (boundsVertical[y + 1] - boundsVertical[y]);
 				objects[x][y]->resize(objectSize, position + coordinate);
 				coordinate.y += objectSize.y;
@@ -130,6 +138,15 @@ namespace ui {
 		return new BoxWithBorder{*this};
 	}
 	
+	void BoxWithBorder::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+		for(auto& line: objects) {
+			for(auto& object: line) {
+				object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+			}
+		}
+	}
+	
 	bool DecodePointer<BoxWithBorder>::decodePointer(const YAML::Node& node, BoxWithBorder*& boxWithBorder) {
 		auto objects(node["objects"].as<std::vector<std::vector<BoxPtr<IScalable> > > >());
 		auto minSize{convDef(node["min-size"], sf::Vector2f{})};
@@ -148,14 +165,5 @@ namespace ui {
 			};
 		}
 		return true;
-	}
-	
-	void BoxWithBorder::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		for(auto& line: objects) {
-			for(auto& object: line) {
-				object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
-			}
-		}
 	}
 }

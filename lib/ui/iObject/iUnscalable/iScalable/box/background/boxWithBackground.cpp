@@ -1,6 +1,18 @@
 #include "boxWithBackground.hpp"
 
 namespace ui {
+	BoxWithBackground::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& background, sf::Vector2f offset, sf::Vector2f minSize) :
+		object(std::move(object)), background(std::move(background)), offset(offset), minSize(minSize) {
+	}
+	
+	BoxWithBackground* BoxWithBackground::Make::make(InitInfo initInfo) {
+		return new BoxWithBackground{std::move(*this), initInfo};
+	}
+	
+	BoxWithBackground::BoxWithBackground(Make&& make, InitInfo initInfo) :
+		Box(make.minSize), background(make.background->make(initInfo)), object(make.object->make(initInfo)), offset(make.offset) {
+	}
+	
 	BoxWithBackground::BoxWithBackground(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, sf::Vector2f offset, sf::Vector2f minSize) :
 		Box(minSize), background(std::move(background)), object(std::move(object)), offset(offset) {
 	}

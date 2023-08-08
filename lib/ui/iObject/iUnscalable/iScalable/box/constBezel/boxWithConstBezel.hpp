@@ -9,7 +9,20 @@
 namespace ui {
 	class BoxWithConstBezel : public Box, public ILayoutWithObject {
 	public:
-		BoxWithConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f minSize = {0, 0});
+		struct Make : public Box::Make, public ILayoutWithObject::Make {
+			BoxPtr<IScalable::Make> object;
+			BoxPtr<IUninteractive::Make> bezel;
+			float thickness;
+			sf::Vector2f minSize = {};
+			
+			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& bezel, float thickness, sf::Vector2f minSize = {});
+			
+			BoxWithConstBezel* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithConstBezel(Make&& make, InitInfo initInfo);
+		
+		BoxWithConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f minSize = {});
 		
 		void init(InitInfo initInfo) override;
 		

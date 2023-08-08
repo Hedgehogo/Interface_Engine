@@ -11,6 +11,30 @@
 namespace ui {
 	class BoxWithConstRatioCenter : public Box, public ILayoutWithObject, public ILayoutWithBackground, public ILayoutWithTwoObjects, public IDrawable {
 	public:
+		struct Make : public Box::Make, public ILayoutWithObject::Make, public ILayoutWithBackground::Make, public ILayoutWithTwoObjects::Make {
+			BoxPtr<IScalable::Make> object;
+			BoxPtr<IScalable::Make> firstObject;
+			BoxPtr<IScalable::Make> secondObject;
+			BoxPtr<IUninteractive::Make> background;
+			float aspectRatio;
+			sf::Vector2f minSize = {};
+			
+			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& background, float aspectRatio, sf::Vector2f minSize = {});
+			
+			Make(
+				BoxPtr<IScalable::Make>&& object,
+				BoxPtr<IScalable::Make>&& firstObject,
+				BoxPtr<IScalable::Make>&& secondObject,
+				BoxPtr<IUninteractive::Make>&& background,
+				float aspectRatio,
+				sf::Vector2f minSize = {}
+			);
+			
+			BoxWithConstRatioCenter* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithConstRatioCenter(Make&& make, InitInfo initInfo);
+		
 		BoxWithConstRatioCenter(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, float aspectRatio, sf::Vector2f minSize = {});
 		
 		BoxWithConstRatioCenter(
@@ -59,6 +83,8 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		DrawManager firstDrawManager;
+		DrawManager secondDrawManager;
 		BoxPtr<IUninteractive> background;
 		BoxPtr<IScalable> object;
 		BoxPtr<IScalable> firstObject;
@@ -66,8 +92,6 @@ namespace ui {
 		float aspectRatio;
 		bool renderFirst;
 		bool renderSecond;
-		DrawManager firstDrawManager;
-		DrawManager secondDrawManager;
 	};
 	
 	template<>

@@ -7,7 +7,20 @@
 namespace ui {
 	class BoxWithBackground : public Box, public ILayoutWithBackground, public ILayoutWithObject {
 	public:
-		BoxWithBackground(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, sf::Vector2f offset = {0, 0}, sf::Vector2f minSize = {0, 0});
+		struct Make : public Box::Make, public ILayoutWithBackground::Make, public ILayoutWithBackground {
+			BoxPtr<IScalable::Make> object;
+			BoxPtr<IUninteractive::Make> background;
+			sf::Vector2f offset = {};
+			sf::Vector2f minSize = {};
+			
+			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& background, sf::Vector2f offset = {}, sf::Vector2f minSize = {});
+			
+			BoxWithBackground* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithBackground(Make&& make, InitInfo initInfo);
+		
+		BoxWithBackground(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, sf::Vector2f offset = {}, sf::Vector2f minSize = {});
 		
 		void init(InitInfo initInfo) override;
 		

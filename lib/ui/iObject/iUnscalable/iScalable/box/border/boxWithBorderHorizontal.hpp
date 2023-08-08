@@ -7,6 +7,22 @@
 namespace ui {
 	class BoxWithBorderHorizontal : public Box, public ILayoutWithObjectsArray {
 	public:
+		struct Make : public Box::Make, public ILayoutWithObjectsArray::Make {
+			std::vector<BoxPtr<IScalable::Make> > objects;
+			std::vector<float> bounds;
+			sf::Vector2f minSize = {};
+			
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, std::vector<float> bounds, sf::Vector2f minSize = {});
+			
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, sf::Vector2f minSize = {});
+			
+			Make(BoxPtr<IScalable::Make>&& firstObject, BoxPtr<IScalable::Make>&& secondObject, float bound = 0.5f, sf::Vector2f minSize = {});
+			
+			BoxWithBorderHorizontal* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithBorderHorizontal(Make&& make, InitInfo initInfo);
+		
 		BoxWithBorderHorizontal(std::vector<BoxPtr<IScalable> >&& objects, std::vector<float> bounds, sf::Vector2f minSize = {});
 		
 		BoxWithBorderHorizontal(std::vector<BoxPtr<IScalable> >&& objects, sf::Vector2f minSize = {});

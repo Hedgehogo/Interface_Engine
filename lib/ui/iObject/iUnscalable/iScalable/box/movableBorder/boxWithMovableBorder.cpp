@@ -25,7 +25,7 @@ namespace ui {
 		return new BoxWithMovableBorder{std::move(*this), initInfo};
 	}
 	
-	BoxWithMovableBorder::BoxWithMovableBorder(BoxWithMovableBorder::Make&& make, InitInfo initInfo) :
+	BoxWithMovableBorder::BoxWithMovableBorder(Make&& make, InitInfo initInfo) :
 		Box(make.minSize),
 		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, make.key),
 		interactive(makeBoxPtr<IInteraction, OneKeyInteraction>(

@@ -6,7 +6,19 @@
 namespace ui {
 	class BoxWithTabs : public Box, public ILayoutWithObjectsArray, public IDrawable {
 	public:
-		BoxWithTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, const sf::Vector2f& minSize = {});
+		struct Make : public Box::Make, public ILayoutWithObjectsArray::Make {
+			std::vector<BoxPtr<IScalable::Make> > objects;
+			PISint value;
+			sf::Vector2f minSize = {};
+			
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PISint value, sf::Vector2f minSize = {});
+			
+			BoxWithTabs* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithTabs(Make&& make, InitInfo initInfo);
+		
+		BoxWithTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, sf::Vector2f minSize = {});
 		
 		BoxWithTabs(const BoxWithTabs& other);
 		
@@ -33,8 +45,8 @@ namespace ui {
 		BoxWithTabs* copy() override;
 	
 	protected:
-		std::vector<BoxPtr<IScalable> > objects;
 		std::vector<DrawManager> drawManagers;
+		std::vector<BoxPtr<IScalable> > objects;
 		PISint value;
 	};
 	

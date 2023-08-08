@@ -9,13 +9,35 @@
 namespace ui {
 	class BoxWithConstRatio : public Box, public ILayoutWithBackground, public ILayoutWithTwoObjects, public IDrawable {
 	public:
+		struct Make : public Box::Make, public ILayoutWithBackground::Make, public ILayoutWithTwoObjects::Make {
+			BoxPtr<IScalable::Make> constObject;
+			BoxPtr<IScalable::Make> secondObject;
+			BoxPtr<IUninteractive::Make> background;
+			float aspectRatio;
+			Corner corner = Corner::upLeft;
+			sf::Vector2f minSize = {};
+			
+			Make(
+				BoxPtr<IScalable::Make>&& constObject,
+				BoxPtr<IScalable::Make>&& secondObject,
+				BoxPtr<IUninteractive::Make>&& background,
+				float aspectRatio,
+				Corner corner = Corner::upLeft,
+				sf::Vector2f minSize = {}
+			);
+			
+			BoxWithConstRatio* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithConstRatio(Make&& make, InitInfo initInfo);
+		
 		BoxWithConstRatio(
 			BoxPtr<IScalable>&& constObject,
 			BoxPtr<IScalable>&& secondObject,
 			BoxPtr<IUninteractive>&& background,
 			float aspectRatio,
 			Corner corner = Corner::upLeft,
-			sf::Vector2f minSize = {0, 0}
+			sf::Vector2f minSize = {}
 		);
 		
 		BoxWithConstRatio(const BoxWithConstRatio& other);
@@ -51,10 +73,10 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		DrawManager secondDrawManager;
 		BoxPtr<IUninteractive> background;
 		BoxPtr<IScalable> constObject;
 		BoxPtr<IScalable> secondObject;
-		DrawManager secondDrawManager;
 		bool verticalSide, horizontalSide;      //true = up   true = left
 		bool renderSecond;
 		float aspectRatio;

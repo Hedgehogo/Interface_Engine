@@ -9,7 +9,7 @@ namespace ui {
 		return new RoundedRectangle{std::move(*this), initInfo};
 	}
 	
-	RoundedRectangle::RoundedRectangle(RoundedRectangle::Make&& make, InitInfo initInfo) :
+	RoundedRectangle::RoundedRectangle(Make&& make, InitInfo initInfo) :
 		OnlyDrawable(initInfo), radius(make.radius) {
 		horizontalRectangle.setFillColor(make.color);
 		verticalRectangle.setFillColor(make.color);

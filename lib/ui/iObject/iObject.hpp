@@ -74,4 +74,36 @@ namespace ui {
 	sf::Vector2<T> max(const sf::Vector2<T>& first, const sf::Vector2<T>& second, const sf::Vector2f& third) {
 		return {std::max(first.x, std::max(second.x, third.x)), std::max(first.y, std::max(second.y, third.y))};
 	}
+	
+	std::vector<float>& addBounds(std::vector<float>& vector);
+	
+	std::vector<float> genBounds(std::size_t size);
+	
+	template<typename T>
+	std::size_t y_size(std::vector<std::vector<T> >& vector) {
+		if(vector.empty()) {
+			return 0;
+		}
+		return vector[0].size();
+	}
+	
+	namespace detail {
+		template<typename T>
+		void addItems(std::vector<T>&) {
+		}
+		
+		template<typename T, typename A, typename... As>
+		void addItems(std::vector<T>& vector, A&& arg, As&& ... args) {
+			vector.emplace_back(std::move(arg));
+			addItems<T, As...>(vector, std::move(args)...);
+		}
+	}
+	
+	template<typename T, typename... As>
+	std::vector<T> makeVector(As&&... args) {
+		std::vector<T> result;
+		result.reserve(sizeof...(As));
+		detail::addItems<T, As...>(result, std::move(args)...);
+		return result;
+	}
 }

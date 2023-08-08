@@ -9,8 +9,6 @@ namespace ui {
 	
 	class Panel : public BasePanel {
 	public:
-		void init(InitInfo initInfo) override;
-		
 		Panel(
 			BoxPtr<IScalable>&& object,
 			BoxPtr<IHidePanelInteraction> hideInteraction,
@@ -29,6 +27,8 @@ namespace ui {
 		);
 		
 		Panel(const Panel& other);
+		
+		void init(InitInfo initInfo) override;
 		
 		void setDisplayed() override;
 		

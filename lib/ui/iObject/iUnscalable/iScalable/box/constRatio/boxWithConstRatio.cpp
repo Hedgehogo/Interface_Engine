@@ -1,6 +1,38 @@
 #include "boxWithConstRatio.hpp"
 
 namespace ui {
+	BoxWithConstRatio::Make::Make(
+		BoxPtr<IScalable::Make>&& constObject,
+		BoxPtr<IScalable::Make>&& secondObject,
+		BoxPtr<IUninteractive::Make>&& background,
+		float aspectRatio,
+		Corner corner,
+		sf::Vector2f minSize
+	) :
+		constObject(std::move(constObject)),
+		secondObject(std::move(secondObject)),
+		background(std::move(background)),
+		aspectRatio(aspectRatio),
+		corner(corner),
+		minSize(minSize) {
+	}
+	
+	BoxWithConstRatio* BoxWithConstRatio::Make::make(InitInfo initInfo) {
+		return new BoxWithConstRatio{std::move(*this), initInfo};
+	}
+	
+	BoxWithConstRatio::BoxWithConstRatio(Make&& make, InitInfo initInfo) :
+		Box(make.minSize),
+		background(make.background->make(initInfo)),
+		constObject(make.constObject->make(initInfo)),
+		secondObject(make.secondObject->make(initInfo.copy(secondDrawManager))),
+		verticalSide(make.corner == Corner::upLeft || make.corner == Corner::upRight),
+		horizontalSide(make.corner == Corner::upLeft || make.corner == Corner::downLeft),
+		renderSecond(true),
+		aspectRatio(make.aspectRatio) {
+		initInfo.drawManager.add(*this);
+	}
+	
 	BoxWithConstRatio::BoxWithConstRatio(
 		BoxPtr<IScalable>&& constObject,
 		BoxPtr<IScalable>&& secondObject,
@@ -8,7 +40,8 @@ namespace ui {
 		float aspectRatio,
 		Corner corner,
 		sf::Vector2f minSize
-	) : Box(minSize),
+	) :
+		Box(minSize),
 		background(std::move(background)),
 		constObject(std::move(constObject)),
 		secondObject(std::move(secondObject)),
@@ -139,21 +172,21 @@ namespace ui {
 		return new BoxWithConstRatio{*this};
 	}
 	
+	void BoxWithConstRatio::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+		constObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+	}
+	
 	bool DecodePointer<BoxWithConstRatio>::decodePointer(const YAML::Node& node, BoxWithConstRatio*& boxWithConstRatio) {
 		boxWithConstRatio = new BoxWithConstRatio{
-			node["const-object"].as < BoxPtr < IScalable > > (),
-			node["second-object"].as < BoxPtr < IScalable > > (),
+			node["const-object"].as<BoxPtr<IScalable> >(),
+			node["second-object"].as<BoxPtr<IScalable> >(),
 			BoxPtr{convDefPtr<IUninteractive, Empty>(node["background"])},
 			node["aspect-ratio"].as<float>(),
 			convDef(node["corner"], Corner::upLeft),
 			convDef(node["min-size"], sf::Vector2f{})
 		};
 		return true;
-	}
-	
-	void BoxWithConstRatio::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		constObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
-		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
 }

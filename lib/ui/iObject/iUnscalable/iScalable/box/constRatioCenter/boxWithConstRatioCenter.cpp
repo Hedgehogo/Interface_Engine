@@ -1,6 +1,45 @@
 #include "boxWithConstRatioCenter.hpp"
 
 namespace ui {
+	BoxWithConstRatioCenter::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& background, float aspectRatio, sf::Vector2f minSize) :
+		object(std::move(object)),
+		firstObject(new Empty::Make),
+		secondObject(new Empty::Make),
+		background(std::move(background)),
+		aspectRatio(aspectRatio),
+		minSize(minSize) {
+	}
+	
+	BoxWithConstRatioCenter::Make::Make(
+		BoxPtr<IScalable::Make>&& object,
+		BoxPtr<IScalable::Make>&& firstObject,
+		BoxPtr<IScalable::Make>&& secondObject,
+		BoxPtr<IUninteractive::Make>&& background,
+		float aspectRatio,
+		sf::Vector2f minSize
+	) :
+		object(std::move(object)),
+		firstObject(std::move(firstObject)),
+		secondObject(std::move(secondObject)),
+		background(std::move(background)),
+		aspectRatio(aspectRatio),
+		minSize(minSize) {
+	}
+	
+	BoxWithConstRatioCenter* BoxWithConstRatioCenter::Make::make(InitInfo initInfo) {
+		return new BoxWithConstRatioCenter{std::move(*this), initInfo};
+	}
+	
+	BoxWithConstRatioCenter::BoxWithConstRatioCenter(Make&& make, InitInfo initInfo) :
+		Box(make.minSize),
+		background(make.background->make(initInfo)),
+		object(make.object->make(initInfo)),
+		firstObject(make.firstObject->make(initInfo.copy(firstDrawManager))),
+		secondObject(make.secondObject->make(initInfo.copy(secondDrawManager))),
+		aspectRatio(make.aspectRatio) {
+		initInfo.drawManager.add(*this);
+	}
+	
 	BoxWithConstRatioCenter::BoxWithConstRatioCenter(
 		BoxPtr<IScalable>&& object,
 		BoxPtr<IUninteractive>&& background,
@@ -134,6 +173,13 @@ namespace ui {
 		return new BoxWithConstRatioCenter{*this};
 	}
 	
+	void BoxWithConstRatioCenter::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+		background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+		object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+		firstObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+	}
+	
 	bool DecodePointer<BoxWithConstRatioCenter>::decodePointer(const YAML::Node& node, BoxWithConstRatioCenter*& boxWithConstRatioCenter) {
 		boxWithConstRatioCenter = new BoxWithConstRatioCenter{
 			node["object"].as<BoxPtr<IScalable> >(),
@@ -144,12 +190,5 @@ namespace ui {
 			node["min-size"].as<sf::Vector2f>(),
 		};
 		return true;
-	}
-	
-	void BoxWithConstRatioCenter::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-		background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
-		firstObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
-		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
 }

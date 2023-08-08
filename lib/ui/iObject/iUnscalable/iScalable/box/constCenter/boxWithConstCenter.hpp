@@ -6,6 +6,19 @@
 namespace ui {
 	class BoxWithConstCenter : public Box, public ILayoutWithTwoObjects {
 	public:
+		struct Make : public Box::Make, public ILayoutWithTwoObjects::Make {
+			BoxPtr<IScalable::Make> constObject;
+			BoxPtr<IScalable::Make> background;
+			sf::Vector2f constSize;
+			sf::Vector2f minSize = {};
+			
+			Make(BoxPtr<IScalable::Make>&& constObject, BoxPtr<IScalable::Make>&& background, sf::Vector2f constSize, sf::Vector2f minSize = {});
+			
+			BoxWithConstCenter* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithConstCenter(Make&& make, InitInfo initInfo);
+		
 		BoxWithConstCenter(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& background, const sf::Vector2f& constSize, const sf::Vector2f& minSize = {});
 		
 		void init(InitInfo initInfo) override;
@@ -38,6 +51,7 @@ namespace ui {
 		BoxPtr<IScalable> constObject;
 		BoxPtr<IScalable> background;
 		sf::Vector2f constSize;
+		bool resized;
 	};
 	
 	template<>

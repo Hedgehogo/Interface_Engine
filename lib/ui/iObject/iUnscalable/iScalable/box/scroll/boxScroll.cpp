@@ -1,6 +1,22 @@
 #include "boxScroll.hpp"
 
 namespace ui {
+	BoxScroll::Make::Make(BoxPtr<IUnscalable::Make>&& object, PSRVec2f normalObjectPosition, sf::Vector2f minSize) :
+		object(std::move(object)), normalObjectPosition(normalObjectPosition), minSize(minSize) {
+	}
+	
+	BoxScroll* BoxScroll::Make::make(InitInfo initInfo) {
+		return new BoxScroll{std::move(*this), initInfo};
+	}
+	
+	BoxScroll::BoxScroll(Make&& make, InitInfo initInfo) :
+		BoxWithView(make.minSize, initInfo), object(make.object->make(initInfo.copy(this->drawManager))), normalObjectPosition(make.normalObjectPosition) {
+		normalObjectPosition->addSetter([&](sf::Vector2f value) {
+			this->object->setPosition(getNewObjectPosition(value));
+		});
+		setRangeBounds(normalObjectPosition, {0, 0}, {1, 1});
+	}
+	
 	BoxScroll::BoxScroll(BoxPtr<IUnscalable>&& object, const PSRVec2f& normalObjectPosition, const sf::Vector2f& minSize) :
 		BoxWithView(minSize), object(std::move(object)), normalObjectPosition(normalObjectPosition) {
 		normalObjectPosition->addSetter([&](sf::Vector2f vec) {

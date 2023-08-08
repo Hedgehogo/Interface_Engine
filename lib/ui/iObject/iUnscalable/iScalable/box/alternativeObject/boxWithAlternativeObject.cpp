@@ -2,6 +2,18 @@
 #include <algorithm>
 
 namespace ui {
+	BoxWithAlternativeObject::Make::Make(BoxPtr<IScalable::Make>&& topObject, BoxPtr<IScalable::Make>&& bottomObject, sf::Vector2f minSize) :
+		topObject(std::move(topObject)), bottomObject(std::move(bottomObject)), minSize(minSize) {
+	}
+	
+	BoxWithAlternativeObject* BoxWithAlternativeObject::Make::make(InitInfo initInfo) {
+		return new BoxWithAlternativeObject{std::move(*this), initInfo};
+	}
+	
+	BoxWithAlternativeObject::BoxWithAlternativeObject(Make&& make, InitInfo initInfo) :
+		Box(make.minSize), topObject(make.topObject->make(initInfo)), bottomObject(make.bottomObject->make(initInfo)) {
+	}
+	
 	BoxWithAlternativeObject::BoxWithAlternativeObject(BoxPtr<IScalable>&& topObject, BoxPtr<IScalable>&& bottomObject, sf::Vector2f minSize) :
 		Box(minSize), topObject(std::move(topObject)), bottomObject(std::move(bottomObject)) {
 	}

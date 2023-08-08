@@ -1,16 +1,36 @@
 #include "boxWithChangeableObjects.hpp"
 
 namespace ui {
+	BoxWithChangeableObjects::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSValue<uint> value, sf::Vector2f minSize) :
+		objects(std::move(objects)), value(value), minSize(minSize) {
+	}
+	
+	BoxWithChangeableObjects::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, uint index, sf::Vector2f minSize) :
+		objects(std::move(objects)), value(std::make_shared<SValue<uint> >(index)), minSize(minSize) {
+	}
+	
+	BoxWithChangeableObjects* BoxWithChangeableObjects::Make::make(InitInfo initInfo) {
+		return new BoxWithChangeableObjects{std::move(*this), initInfo};
+	}
+	
+	BoxWithChangeableObjects::BoxWithChangeableObjects(Make&& make, InitInfo initInfo) :
+		Box(make.minSize), drawManagers(make.objects.size()),
+		objects(mapMake(std::move(make.objects), [&](std::size_t i) {
+			return initInfo.copy(drawManagers[i]);
+		})), value(make.value) {
+		initInfo.drawManager.add(*this);
+	}
+	
 	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<BoxPtr<IScalable> >&& objects, PSValue<uint> value, sf::Vector2f minSize) :
-		Box(minSize), objects(std::move(objects)), drawManagers(this->objects.size()), value(value) {
+		Box(minSize), drawManagers(objects.size()), objects(std::move(objects)), value(value) {
 	}
 	
 	BoxWithChangeableObjects::BoxWithChangeableObjects(std::vector<BoxPtr<IScalable> >&& objects, uint index, sf::Vector2f minSize) :
-		Box(minSize), objects(std::move(objects)), drawManagers(this->objects.size()), value(std::make_shared<SValue<uint>>(index)) {
+		Box(minSize), drawManagers(objects.size()), objects(std::move(objects)), value(std::make_shared<SValue<uint>>(index)) {
 	}
 	
 	BoxWithChangeableObjects::BoxWithChangeableObjects(const BoxWithChangeableObjects& other) :
-		Box(other), objects(other.objects), drawManagers(this->objects.size()), value(other.value) {
+		Box(other), drawManagers(other.objects.size()), objects(other.objects), value(other.value) {
 	}
 	
 	void BoxWithChangeableObjects::init(InitInfo initInfo) {

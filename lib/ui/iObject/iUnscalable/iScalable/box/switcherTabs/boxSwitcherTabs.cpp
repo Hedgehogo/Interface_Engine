@@ -14,7 +14,7 @@ namespace ui {
 	BoxSwitcherTabs::BoxSwitcherTabs(Make&& make, InitInfo initInfo) :
 		Box(make.minSize),
 		interactive(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>{new SwitcherTabsEvent{value, this}}, make.key), initInfo),
-		objects(make_map(std::move(make.objects), initInfo)),
+		objects(mapMake(std::move(make.objects), initInfo)),
 		isHorizontal(make.isHorizontal),
 		value(make.value) {
 		initInfo.updateManager.add(*this);

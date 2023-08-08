@@ -10,7 +10,7 @@ TestObject* TestObject::Make::make(ui::InitInfo initInfo) {
 	return new TestObject{std::move(*this), initInfo};
 }
 
-TestObject::TestObject(TestObject::Make&& make, ui::InitInfo initInfo) :
+TestObject::TestObject(Make&& make, ui::InitInfo initInfo) :
 	processed(
 		{
 			{

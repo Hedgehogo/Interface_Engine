@@ -5,10 +5,21 @@
 
 namespace ui {
 	class BoxWithRenderTexture : public Box, public ILayoutWithObject, public IDrawable {
-	protected:
-		void copy(BoxWithRenderTexture* boxWithRenderTexture);
-	
 	public:
+		struct Make : public Box::Make, public ILayoutWithObject::Make {
+			BoxPtr<IScalable::Make> object;
+			bool optimize = true;
+			sf::Vector2f minSize = {};
+			
+			Make(BoxPtr<IScalable::Make>&& object, bool optimize = true, sf::Vector2f minSize = {});
+			
+			BoxWithRenderTexture* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithRenderTexture(Make&& make, InitInfo initInfo);
+		
+		BoxWithRenderTexture(BoxPtr<IScalable::Make>&& object, bool optimize, sf::Vector2f minSize, InitInfo initInfo);
+		
 		BoxWithRenderTexture(BoxPtr<IScalable>&& object, bool optimize = true, sf::Vector2f minSize = {});
 		
 		BoxWithRenderTexture(const BoxWithRenderTexture& other);
@@ -32,13 +43,13 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		sf::RenderTexture renderTexture;
+		sf::Sprite sprite;
+		sf::View view;
+		DrawManager drawManager;
 		BoxPtr<IScalable> object;
 		InteractionManager* interactionManager;
-		DrawManager drawManager;
 		sf::RenderTarget* renderTarget;
-		sf::RenderTexture renderTexture;
-		sf::View view;
-		sf::Sprite sprite;
 		bool optimize;
 		bool active;
 	};

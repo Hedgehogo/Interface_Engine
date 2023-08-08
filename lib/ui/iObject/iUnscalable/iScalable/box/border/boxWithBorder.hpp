@@ -5,13 +5,27 @@
 
 namespace ui {
 	class BoxWithBorder : public Box {
-	protected:
-		void init(InitInfo initInfo) override;
-	
 	public:
-		BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize = {0, 0});
+		struct Make : public Box::Make {
+			std::vector<std::vector<BoxPtr<IScalable::Make> > > objects;
+			std::vector<float> boundsHorizontal;
+			std::vector<float> boundsVertical;
+			sf::Vector2f minSize = {};
+			
+			Make(std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize = {});
+			
+			Make(std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects, sf::Vector2f minSize = {});
+			
+			BoxWithBorder* make(InitInfo initInfo) override;
+		};
 		
-		BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, sf::Vector2f minSize = {0, 0});
+		BoxWithBorder(Make&& make, InitInfo initInfo);
+		
+		BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize = {});
+		
+		BoxWithBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, sf::Vector2f minSize = {});
+		
+		void init(InitInfo initInfo) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -27,8 +41,8 @@ namespace ui {
 	
 	protected:
 		std::vector<std::vector<BoxPtr<IScalable> > > objects;
-		std::vector<float> boundsVertical;
 		std::vector<float> boundsHorizontal;
+		std::vector<float> boundsVertical;
 	};
 	
 	template<>

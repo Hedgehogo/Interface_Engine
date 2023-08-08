@@ -1,6 +1,29 @@
 #include "boxWithRenderTexture.hpp"
 
 namespace ui {
+	BoxWithRenderTexture::Make::Make(BoxPtr<IScalable::Make>&& object, bool optimize, sf::Vector2f minSize) :
+		object(std::move(object)), optimize(optimize), minSize(minSize) {
+	}
+	
+	BoxWithRenderTexture* BoxWithRenderTexture::Make::make(InitInfo initInfo) {
+		return new BoxWithRenderTexture{std::move(*this), initInfo};
+	}
+	
+	BoxWithRenderTexture::BoxWithRenderTexture(Make&& make, InitInfo initInfo) :
+		BoxWithRenderTexture(std::move(make.object), make.optimize, make.minSize, initInfo) {
+	}
+	
+	BoxWithRenderTexture::BoxWithRenderTexture(BoxPtr<IScalable::Make>&& object, bool optimize, sf::Vector2f minSize, InitInfo initInfo) :
+		Box(minSize),
+		sprite(renderTexture.getTexture()),
+		object(object->make(initInfo.copy(renderTexture).copy(drawManager))),
+		interactionManager(&initInfo.interactionManager),
+		renderTarget(&initInfo.renderTarget),
+		optimize(optimize),
+		active(true) {
+		initInfo.drawManager.add(*this);
+	}
+	
 	BoxWithRenderTexture::BoxWithRenderTexture(BoxPtr<IScalable>&& object, bool optimize, sf::Vector2f minSize) :
 		Box(minSize), object(std::move(object)), interactionManager(nullptr), renderTarget(nullptr), optimize(optimize), active(true) {
 		sprite.setTexture(renderTexture.getTexture());
@@ -62,12 +85,6 @@ namespace ui {
 	
 	const IScalable& BoxWithRenderTexture::getObject() const {
 		return *object;
-	}
-	
-	void BoxWithRenderTexture::copy(BoxWithRenderTexture* boxWithRenderTexture) {
-		boxWithRenderTexture->renderTarget = this->renderTarget;
-		sf::Vector2u size = this->renderTexture.getSize();
-		boxWithRenderTexture->renderTexture.create(size.x, size.y);
 	}
 	
 	BoxWithRenderTexture* BoxWithRenderTexture::copy() {

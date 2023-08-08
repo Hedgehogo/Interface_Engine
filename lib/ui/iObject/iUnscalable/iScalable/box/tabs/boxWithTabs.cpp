@@ -3,12 +3,30 @@
 #include <utility>
 
 namespace ui {
-	BoxWithTabs::BoxWithTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, const sf::Vector2f& minSize) :
-		Box(minSize), objects(std::move(objects)), drawManagers(this->objects.size()), value(std::move(value)) {
+	BoxWithTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PISint value, sf::Vector2f minSize) :
+		objects(std::move(objects)), value(value), minSize(minSize) {
+	}
+	
+	BoxWithTabs* BoxWithTabs::Make::make(InitInfo initInfo) {
+		return new BoxWithTabs{std::move(*this), initInfo};
+	}
+	
+	BoxWithTabs::BoxWithTabs(Make&& make, InitInfo initInfo) :
+		Box(make.minSize),
+		drawManagers(make.objects.size()),
+		objects(mapMake(std::move(make.objects), [&](std::size_t i) {
+			return initInfo.copy(drawManagers[i]);
+		})),
+		value(make.value) {
+		initInfo.drawManager.add(*this);
+	}
+	
+	BoxWithTabs::BoxWithTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, sf::Vector2f minSize) :
+		Box(minSize), drawManagers(objects.size()), objects(std::move(objects)), value(std::move(value)) {
 	}
 	
 	BoxWithTabs::BoxWithTabs(const BoxWithTabs& other) :
-		Box(other), objects(other.objects), drawManagers(objects.size()), value(other.value) {
+		Box(other), drawManagers(other.objects.size()), objects(other.objects), value(other.value) {
 	}
 	
 	void BoxWithTabs::init(InitInfo initInfo) {

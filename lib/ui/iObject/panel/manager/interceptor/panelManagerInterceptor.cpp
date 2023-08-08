@@ -1,6 +1,9 @@
 #include "panelManagerInterceptor.hpp"
 
 namespace ui {
+	PanelManagerInterceptor::PanelManagerInterceptor(IPanelManager& panelManager) : panelManager(&panelManager) {
+	}
+	
 	PanelManagerInterceptor::PanelManagerInterceptor() : panelManager(nullptr) {
 	}
 	
@@ -52,4 +55,4 @@ namespace ui {
 	bool PanelManagerInterceptor::updateInteractions(sf::Vector2f mousePosition, bool active) {
 		return panelManager->updateInteractions(mousePosition, active);
 	}
-}
+	}

@@ -6,6 +6,8 @@
 namespace ui {
 	class BoxWithView : public Box, public IDrawable {
 	public:
+		BoxWithView(sf::Vector2f minSize, InitInfo initInfo);
+		
 		BoxWithView(sf::Vector2f minSize);
 		
 		BoxWithView(const BoxWithView& other);
@@ -19,8 +21,8 @@ namespace ui {
 		BoxWithView* copy() override = 0;
 	
 	protected:
-		sf::RenderTarget* renderTarget;
 		DrawManager drawManager;
+		sf::RenderTarget* renderTarget;
 		sf::View view;
 	};
 }

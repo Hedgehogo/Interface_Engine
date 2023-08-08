@@ -1,11 +1,16 @@
 #include "boxWithView.hpp"
 
 namespace ui {
+	BoxWithView::BoxWithView(sf::Vector2f minSize, InitInfo initInfo) :
+		Box(minSize), renderTarget(&initInfo.renderTarget) {
+		initInfo.drawManager.add(*this);
+	}
+	
 	BoxWithView::BoxWithView(sf::Vector2f minSize) : Box(minSize), renderTarget(nullptr) {
 	}
 	
 	BoxWithView::BoxWithView(const BoxWithView& other) :
-		Box(other), renderTarget(other.renderTarget), drawManager(other.drawManager), view(other.view) {
+		Box(other), renderTarget(other.renderTarget), view(other.view) {
 	}
 	
 	void BoxWithView::init(InitInfo initInfo) {

@@ -7,6 +7,18 @@
 namespace ui {
 	class BoxWithPanel : public Box, public ILayoutWithObject {
 	public:
+		struct Make : public Box::Make, public ILayoutWithObject::Make {
+			BoxPtr<ConstPanel> panel;
+			BoxPtr<IScalable::Make> object;
+			sf::Vector2f minSize = {};
+			
+			Make(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize = {});
+			
+			BoxWithPanel* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithPanel(Make&& make, InitInfo initInfo);
+		
 		BoxWithPanel(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable>&& object, sf::Vector2f minSize = {});
 		
 		void init(InitInfo initInfo) override;

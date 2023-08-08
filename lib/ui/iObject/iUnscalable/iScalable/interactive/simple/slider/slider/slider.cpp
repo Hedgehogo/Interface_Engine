@@ -45,7 +45,7 @@ namespace ui {
 		return new Slider{std::move(*this), initInfo};
 	}
 	
-	Slider::Slider(Slider::Make&& make, InitInfo initInfo) :
+	Slider::Slider(Make&& make, InitInfo initInfo) :
 		BaseSlider(std::move(make.slider), std::move(make.background), make.value, BoxPtr{
 			new SliderInteraction{*this, make.key, make.division, make.wheelHorizontal, make.wheelRelativity, make.wheelSensitivity}
 		}, initInfo), scale(make.sliderScale) {

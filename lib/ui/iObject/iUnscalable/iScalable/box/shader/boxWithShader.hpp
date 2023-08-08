@@ -13,7 +13,34 @@ namespace ui {
 			aspectRatio = 1 << 3,
 			time = 1 << 4,
 		};
-	
+		
+		struct Make : public BoxWithRenderTexture::Make {
+			sf::Shader* shader;
+			uint transmission;
+			std::map<std::string, PISfloat> valuesF = {};
+			std::map<std::string, PISint> valuesI = {};
+			std::map<std::string, PISbool> valuesB = {};
+			std::map<std::string, PISValue<sf::Color>> valuesC = {};
+			std::map<std::string, PSRVec2f> valuesV = {};
+			
+			Make(
+				BoxPtr<IScalable::Make>&& object,
+				sf::Shader* shader,
+				uint transmission,
+				std::map<std::string, PISfloat> valuesF = {},
+				std::map<std::string, PISint> valuesI = {},
+				std::map<std::string, PISbool> valuesB = {},
+				std::map<std::string, PISValue<sf::Color>> valuesC = {},
+				std::map<std::string, PSRVec2f> valuesV = {},
+				bool optimize = true,
+				sf::Vector2f minSize = {}
+			);
+			
+			BoxWithShader* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithShader(Make&& make, InitInfo initInfo);
+		
 		BoxWithShader(
 			BoxPtr<IScalable>&& object, sf::Shader* shader, uint transmission,
 			std::map<std::string, PISfloat> valuesF = {},
@@ -43,6 +70,8 @@ namespace ui {
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
+		
+		BoxWithShader* copy() override;
 	
 	protected:
 		sf::Shader* shader;

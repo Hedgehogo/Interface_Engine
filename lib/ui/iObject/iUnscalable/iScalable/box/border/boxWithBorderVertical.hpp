@@ -8,6 +8,22 @@
 namespace ui {
 	class BoxWithBorderVertical : public Box, public ILayoutWithObjectsArray {
 	public:
+		struct Make : public Box::Make, public ILayoutWithObjectsArray::Make {
+			std::vector<BoxPtr<IScalable::Make> > objects;
+			std::vector<float> bounds;
+			sf::Vector2f minSize = {};
+			
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, std::vector<float> bounds, sf::Vector2f minSize = {});
+			
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, sf::Vector2f minSize = {});
+			
+			Make(BoxPtr<IScalable::Make>&& firstObject, BoxPtr<IScalable::Make>&& secondObject, float bound = 0.5f, sf::Vector2f minSize = {});
+			
+			BoxWithBorderVertical* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithBorderVertical(Make&& make, InitInfo initInfo);
+		
 		BoxWithBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, std::vector<float> bounds, sf::Vector2f minSize = {0, 0});
 		
 		BoxWithBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, sf::Vector2f minSize = {0, 0});

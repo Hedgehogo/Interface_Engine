@@ -26,6 +26,51 @@ namespace ui {
 		return transmission;
 	}
 	
+	BoxWithShader::Make::Make(
+		BoxPtr<IScalable::Make>&& object,
+		sf::Shader* shader,
+		uint transmission,
+		std::map<std::string, PISfloat> valuesF,
+		std::map<std::string, PISint> valuesI,
+		std::map<std::string, PISbool> valuesB,
+		std::map<std::string, PISValue<sf::Color>> valuesC,
+		std::map<std::string, PSRVec2f> valuesV,
+		bool optimize,
+		sf::Vector2f minSize
+	) :
+		BoxWithRenderTexture::Make(std::move(object), optimize, minSize),
+		shader(shader),
+		transmission(transmission),
+		valuesF(valuesF),
+		valuesI(valuesI),
+		valuesB(valuesB),
+		valuesC(valuesC),
+		valuesV(valuesV) {
+	}
+	
+	BoxWithShader* BoxWithShader::Make::make(InitInfo initInfo) {
+		return new BoxWithShader{std::move(*this), initInfo};
+	}
+	
+	BoxWithShader::BoxWithShader(BoxWithShader::Make&& make, InitInfo initInfo) :
+		BoxWithRenderTexture(std::move(make.object), make.optimize, make.minSize, initInfo),
+		shader(make.shader),
+		transmission(make.transmission) {
+		auto addSetters = [&](auto& values) {
+			for(auto& pair: values) {
+				pair.second->addSetter([&](auto var) {
+					setUniform(pair.first, var);
+				});
+			}
+		};
+		
+		addSetters(make.valuesF);
+		addSetters(make.valuesI);
+		addSetters(make.valuesB);
+		addSetters(make.valuesC);
+		addSetters(make.valuesV);
+	}
+	
 	BoxWithShader::BoxWithShader(
 		BoxPtr<IScalable>&& object, sf::Shader* shader, uint transmission,
 		std::map<std::string, PISfloat> valuesF,
@@ -35,33 +80,19 @@ namespace ui {
 		std::map<std::string, PSRVec2f> valuesV,
 		bool optimize, sf::Vector2f minSize
 	) : BoxWithRenderTexture(std::move(object), optimize, minSize), shader(shader), transmission(transmission) {
-		clock.restart();
+		auto addSetters = [&](auto& values) {
+			for(auto& pair: values) {
+				pair.second->addSetter([&](auto var) {
+					setUniform(pair.first, var);
+				});
+			}
+		};
 		
-		for(auto& [name, value]: valuesF) {
-			value->addSetter([&](float var) {
-				setUniform(name, var);
-			});
-		}
-		for(auto& [name, value]: valuesI) {
-			value->addSetter([&](int var) {
-				setUniform(name, var);
-			});
-		}
-		for(auto& [name, value]: valuesB) {
-			value->addSetter([&](bool var) {
-				setUniform(name, var);
-			});
-		}
-		for(auto& [name, value]: valuesC) {
-			value->addSetter([&](sf::Color var) {
-				setUniform(name, var);
-			});
-		}
-		for(auto& [name, value]: valuesV) {
-			value->addSetter([&](sf::Vector2f var) {
-				setUniform(name, var);
-			});
-		}
+		addSetters(valuesF);
+		addSetters(valuesI);
+		addSetters(valuesB);
+		addSetters(valuesC);
+		addSetters(valuesV);
 	}
 	
 	BoxWithShader::~BoxWithShader() {
@@ -125,12 +156,16 @@ namespace ui {
 		return BoxWithRenderTexture::updateInteractions(mousePosition);
 	}
 	
+	BoxWithShader* BoxWithShader::copy() {
+		return new BoxWithShader{*this};
+	}
+	
 	template<typename T>
-	std::map<std::string, std::shared_ptr<T>> getSValuesDef(const YAML::Node& node) {
-		std::map<std::string, std::shared_ptr<T>> result;
+	auto getSValuesDef(const YAML::Node& node) {
+		std::map<std::string, std::shared_ptr<T> > result;
 		if(node) {
-			for(auto& [name, nodeValue]: node.as<std::map<std::string, YAML::Node>>()) {
-				result[name] = Buffer::get<T>(nodeValue);
+			for(auto& pair: node) {
+				result.insert(std::make_pair(pair.first.as<std::string>(), Buffer::get<T>(pair.second)));
 			}
 		}
 		return result;
@@ -142,7 +177,7 @@ namespace ui {
 			node["shader"] >> *shader;
 		}
 		boxWithShader = new BoxWithShader{
-			node["object"].as<BoxPtr<IScalable> >(),
+			node["object"].as < BoxPtr < IScalable > > (),
 			shader,
 			convertTransmissionDef(node["transmission"]),
 			getSValuesDef<ISfloat>(node["values-f"]),

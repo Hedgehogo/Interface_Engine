@@ -1,20 +1,33 @@
 #include "boxWithBorderVertical.hpp"
-#include "../../../../../interaction/interactionManager/interactionManager.hpp"
 #include <vector>
 
 namespace ui {
+	BoxWithBorderVertical::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, std::vector<float> bounds, sf::Vector2f minSize) :
+		objects(std::move(objects)), bounds(std::move(addBounds(bounds))), minSize(minSize) {
+	}
+	
+	BoxWithBorderVertical::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, sf::Vector2f minSize) :
+		objects(std::move(objects)), bounds(genBounds(this->objects.size())), minSize(minSize) {
+	}
+	
+	BoxWithBorderVertical::Make::Make(BoxPtr<IScalable::Make>&& firstObject, BoxPtr<IScalable::Make>&& secondObject, float bound, sf::Vector2f minSize) :
+		objects(makeVector<BoxPtr<IScalable::Make> >(std::move(firstObject), std::move(secondObject))), bounds({0.f, bound, 1.f}), minSize(minSize) {
+	}
+	
+	BoxWithBorderVertical* BoxWithBorderVertical::Make::make(InitInfo initInfo) {
+		return new BoxWithBorderVertical{std::move(*this), initInfo};
+	}
+	
+	BoxWithBorderVertical::BoxWithBorderVertical(Make&& make, InitInfo initInfo) :
+		Box(make.minSize), objects(mapMake(std::move(make.objects), initInfo)), bounds(std::move(make.bounds)) {
+	}
+	
 	BoxWithBorderVertical::BoxWithBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, std::vector<float> bounds, sf::Vector2f minSize) :
-		Box(minSize), objects(std::move(objects)), bounds(std::move(bounds)) {
-		this->bounds.insert(this->bounds.begin(), 0.0f);
-		this->bounds.push_back(1.0f);
+		Box(minSize), objects(std::move(objects)), bounds(std::move(addBounds(bounds))) {
 	}
 	
 	BoxWithBorderVertical::BoxWithBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, sf::Vector2f minSize) :
-		Box(minSize), objects(std::move(objects)), bounds(this->objects.size() + 1, 1.0f) {
-		auto count = this->objects.size();
-		for(std::size_t i = 0; i < count; ++i) {
-			bounds[i] = static_cast<float>(i) / static_cast<float>(count);
-		}
+		Box(minSize), objects(std::move(objects)), bounds(genBounds(this->objects.size())) {
 	}
 	
 	BoxWithBorderVertical::BoxWithBorderVertical(BoxPtr<IScalable>&& firstObject, BoxPtr<IScalable>&& secondObject, float bound, sf::Vector2f minSize) :

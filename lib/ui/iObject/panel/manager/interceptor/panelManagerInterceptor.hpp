@@ -5,6 +5,8 @@
 namespace ui {
 	class PanelManagerInterceptor : public IPanelManager {
 	public:
+		PanelManagerInterceptor(IPanelManager& panelManager);
+		
 		PanelManagerInterceptor();
 		
 		void init(IPanelManager& panelManager);

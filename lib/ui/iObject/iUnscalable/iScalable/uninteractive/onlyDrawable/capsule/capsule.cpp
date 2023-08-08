@@ -8,7 +8,7 @@ namespace ui {
 		return new Capsule{std::move(*this), initInfo};
 	}
 	
-	Capsule::Capsule(Capsule::Make&& make, InitInfo initInfo) : OnlyDrawable(initInfo) {
+	Capsule::Capsule(Make&& make, InitInfo initInfo) : OnlyDrawable(initInfo) {
 		rectangle.setFillColor(make.color);
 		circle.setFillColor(make.color);
 	}

@@ -9,7 +9,7 @@ namespace ui {
 		return new FullColor{std::move(*this), initInfo};
 	}
 	
-	FullColor::FullColor(FullColor::Make&& make, InitInfo initInfo) :
+	FullColor::FullColor(Make&& make, InitInfo initInfo) :
 		OnlyDrawable(initInfo), normalSize(make.normalSize) {
 		rectangle.setFillColor(make.color);
 	}

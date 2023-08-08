@@ -8,11 +8,26 @@
 namespace ui {
 	class BoxWithSetableObject : public Box, public ILayoutWithObject, public IDrawable, public IUpdatable {
 	public:
+		struct Make : public Box::Make, public ILayoutWithObject::Make {
+			BoxPtr<IScalable::Make> object;
+			sf::Vector2f minSize = {};
+			
+			Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize = {});
+			
+			BoxWithSetableObject* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithSetableObject(Make&& make, InitInfo initInfo);
+		
+		BoxWithSetableObject(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize, InitInfo initInfo);
+		
 		BoxWithSetableObject(BoxPtr<IScalable>&& object, sf::Vector2f minSize = {});
 		
 		void init(InitInfo initInfo) override;
 		
-		void setObject(BoxPtr<IScalable>&& newObject, bool);
+		void setObject(BoxPtr<IScalable>&& newObject);
+		
+		void setObject(BoxPtr<IScalable::Make>&& newObject);
 		
 		void draw() override;
 		
@@ -23,10 +38,10 @@ namespace ui {
 		IScalable& getObject() override;
 		
 		const IScalable& getObject() const override;
+		
+		BoxWithSetableObject* copy() override;
 	
 	protected:
-		BoxPtr<IScalable> object;
-		sf::Vector2f minSize;
 		DrawManager drawManager;
 		UpdateManager updateManager;
 		sf::RenderWindow* window;
@@ -34,5 +49,6 @@ namespace ui {
 		InteractionManager interactionManager;
 		InteractionStack* interactionStack;
 		PanelManagerInterceptor panelManagerInterceptor;
+		BoxPtr<IScalable> object;
 	};
 }

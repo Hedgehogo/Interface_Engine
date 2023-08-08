@@ -6,6 +6,20 @@
 namespace ui {
 	class BoxWithChangeableObjects : public Box, public ILayoutWithObjectsArray, public IDrawable {
 	public:
+		struct Make : public Box::Make, public ILayoutWithObjectsArray::Make {
+			std::vector<BoxPtr<IScalable::Make> > objects;
+			PSValue<uint> value;
+			sf::Vector2f minSize = {};
+			
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSValue<uint> value, sf::Vector2f minSize = {});
+			
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, uint index = 0, sf::Vector2f minSize = {});
+			
+			BoxWithChangeableObjects* make(InitInfo initInfo) override;
+		};
+		
+		BoxWithChangeableObjects(Make&& make, InitInfo initInfo);
+		
 		BoxWithChangeableObjects(std::vector<BoxPtr<IScalable> >&& objects, PSValue<uint> value, sf::Vector2f minSize = {});
 		
 		BoxWithChangeableObjects(std::vector<BoxPtr<IScalable> >&& objects, uint index = 0, sf::Vector2f minSize = {});
@@ -39,8 +53,8 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		std::vector<BoxPtr<IScalable> > objects;
 		std::vector<DrawManager> drawManagers;
+		std::vector<BoxPtr<IScalable> > objects;
 		PSValue<uint> value;
 	};
 	

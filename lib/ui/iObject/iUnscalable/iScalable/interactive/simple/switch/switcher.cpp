@@ -15,7 +15,7 @@ namespace ui {
 		return new Switcher{std::move(*this), initInfo};
 	}
 	
-	Switcher::Switcher(Switcher::Make&& make, InitInfo initInfo) :
+	Switcher::Switcher(Make&& make, InitInfo initInfo) :
 		BaseInteractive(makeBoxPtr<IInteraction, OneKeyInteraction>(makeBoxPtr<KeyEvent, SwitcherEvent>(make.value), make.key), initInfo),
 		inactiveBackground(make.inactiveBackground->make(initInfo.copy(inactiveDrawManager))),
 		activeBackground(make.activeBackground->make(initInfo.copy(activeDrawManager))),
