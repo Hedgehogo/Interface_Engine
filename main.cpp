@@ -2,14 +2,29 @@
 #include <iostream>
 #include <array>
 
-template<typename I, I T>
-float calculateMediumFPS(std::array<float, T> lastFPS) {
-	float sum = 0.0f;
-	for(const auto& fps: lastFPS) {
-		sum += fps;
+template<std::size_t N>
+class FpsCounter {
+public:
+	float medium() {
+		float sum = 0.0f;
+		for(const auto& fps: lastFPS) {
+			sum += fps;
+		}
+		return sum / static_cast<float>(lastFPS.size());
 	}
-	return sum / static_cast<float>(lastFPS.size());
-}
+	
+	float restart() {
+		lastFPS[0] = 1.f / clock.restart().asSeconds();
+		std::rotate(lastFPS.begin(), lastFPS.begin() + 1, lastFPS.end());
+		float result = medium();
+		clock.restart();
+		return result;
+	}
+	
+private:
+	sf::Clock clock;
+	std::array<float, N> lastFPS{};
+};
 
 int main() {
 	ui::init();
@@ -47,15 +62,10 @@ int main() {
 		}
 	};
 	
-	sf::Clock clock;
-	std::array<float, 500> lastFPS{};
+	FpsCounter<500> fps;
 	
 	while(window.getWindow().isOpen()) {
-		lastFPS[0] = 1.f / clock.restart().asSeconds();
-		std::rotate(lastFPS.begin(), lastFPS.begin() + 1, lastFPS.end());
-		float mediumFPS = calculateMediumFPS(lastFPS);
-		window.getWindow().setTitle(std::to_string(static_cast<int>(mediumFPS)));
-		clock.restart();
+		window.getWindow().setTitle(std::to_string(fps.restart()));
 		
 		sf::Event event{};
 		while(window.getWindow().pollEvent(event)) {
