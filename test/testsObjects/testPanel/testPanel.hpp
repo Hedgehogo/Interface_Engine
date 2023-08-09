@@ -22,31 +22,47 @@ public:
 		struct UpdateInteractions {
 			uint64_t time{0};
 			sf::Vector2f mousePosition{0, 0};
-		} updateInteractions;
+		} updateInteractions{};
 		struct UpdateInteractionsWithActive {
 			uint64_t time{0};
 			sf::Vector2f mousePosition{0, 0};
 			bool active{false};
-		} updateInteractionsWithActive;
+		} updateInteractionsWithActive{};
 		uint64_t copy{0};
 	};
-
-protected:
-	Processed processed;
 	
-	sf::Vector2f minSize;
-	sf::Vector2f normalSize;
+	struct Make : public ui::BasePanel::Make {
+		bool displayed = false;
+		sf::Vector2f minSize = {};
+		sf::Vector2f normalSize = {100, 100};
+		bool isIndependentResult = true;
+		bool isFreeResult = true;
+		bool inPanelResult = true;
+		bool updateInteractionsResult = true;
+		ui::BoxPtr<ui::ISizing2> sizing = ui::BoxPtr<ui::ISizing2>{new ui::Sizing2{sf::Vector2f{0.5f, 0.5f}}};
+		ui::BoxPtr<ui::IPositioning2> positioning = ui::BoxPtr<ui::IPositioning2>{new ui::Positioning2{sf::Vector2f{}, sf::Vector2f{}}};
+		
+		Make(
+			bool displayed = false,
+			sf::Vector2f minSize = {},
+			sf::Vector2f normalSize = {100, 100},
+			bool isIndependentResult = true,
+			bool isFreeResult = true,
+			bool inPanelResult = true,
+			bool updateInteractionsResult = true,
+			ui::BoxPtr<ui::ISizing2> sizing = ui::BoxPtr<ui::ISizing2>{new ui::Sizing2{sf::Vector2f{0.5f, 0.5f}}},
+			ui::BoxPtr<ui::IPositioning2> positioning = ui::BoxPtr<ui::IPositioning2>{new ui::Positioning2{sf::Vector2f{}, sf::Vector2f{}}}
+		);
+		
+		TestPanel* make(ui::InitInfo initInfo) override;
+	};
 	
-	bool isIndependentResult;
-	bool isFreeResult;
-	bool inPanelResult;
-	bool updateInteractionsResult;
-
-public:
+	TestPanel(Make&& make, ui::InitInfo initInfo);
+	
 	TestPanel(
 		bool displayed = false,
-		const sf::Vector2f& minSize = {},
-		const sf::Vector2f& normalSize = {100, 100},
+		sf::Vector2f minSize = {},
+		sf::Vector2f normalSize = {100, 100},
 		bool isIndependentResult = true,
 		bool isFreeResult = true,
 		bool inPanelResult = true,
@@ -100,4 +116,15 @@ public:
 	sf::Vector2f getNormalSize() const override;
 	
 	TestPanel* copy() override;
+
+protected:
+	Processed processed;
+	
+	sf::Vector2f minSize;
+	sf::Vector2f normalSize;
+	
+	bool isIndependentResult;
+	bool isFreeResult;
+	bool inPanelResult;
+	bool updateInteractionsResult;
 };

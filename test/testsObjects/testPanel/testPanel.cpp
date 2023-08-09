@@ -3,17 +3,73 @@
 
 #include "../processorTime.hpp"
 
-TestPanel::TestPanel(
+TestPanel::Make::Make(
 	bool displayed,
-	const sf::Vector2f& minSize,
-	const sf::Vector2f& normalSize,
+	sf::Vector2f minSize,
+	sf::Vector2f normalSize,
 	bool isIndependentResult,
 	bool isFreeResult,
 	bool inPanelResult,
 	bool updateInteractionsResult,
 	ui::BoxPtr<ui::ISizing2> sizing,
 	ui::BoxPtr<ui::IPositioning2> positioning
-) : BasePanel(ui::BoxPtr<ui::IScalable>{new ui::Empty{}}, std::move(sizing), std::move(positioning), displayed), minSize(minSize), normalSize(normalSize),
+) :
+	displayed(displayed),
+	minSize(minSize),
+	normalSize(normalSize),
+	isIndependentResult(isIndependentResult),
+	isFreeResult(isFreeResult),
+	inPanelResult(inPanelResult),
+	updateInteractionsResult(updateInteractionsResult),
+	sizing(std::move(sizing)),
+	positioning(std::move(positioning)) {
+}
+
+TestPanel* TestPanel::Make::make(ui::InitInfo initInfo) {
+	return new TestPanel{std::move(*this), initInfo};
+}
+
+TestPanel::TestPanel(Make&& make, ui::InitInfo initInfo) :
+	BasePanel(
+		ui::BoxPtr < ui::IScalable::Make > {new ui::Empty::Make{}},
+		std::move(make.sizing),
+		std::move(make.positioning),
+		make.displayed,
+		initInfo,
+		initInfo
+	),
+	processed(
+		{
+			{
+				getProcessorTime(),
+				&initInfo.renderTarget,
+				&initInfo.drawManager,
+				&initInfo.updateManager,
+				&initInfo.interactionManager,
+				&initInfo.interactionStack,
+				&initInfo.panelManager
+			}
+		}
+	),
+	minSize(make.minSize),
+	normalSize(make.normalSize),
+	isIndependentResult(make.isIndependentResult),
+	isFreeResult(make.isFreeResult),
+	inPanelResult(make.inPanelResult),
+	updateInteractionsResult(make.updateInteractionsResult) {
+}
+
+TestPanel::TestPanel(
+	bool displayed,
+	sf::Vector2f minSize,
+	sf::Vector2f normalSize,
+	bool isIndependentResult,
+	bool isFreeResult,
+	bool inPanelResult,
+	bool updateInteractionsResult,
+	ui::BoxPtr<ui::ISizing2> sizing,
+	ui::BoxPtr<ui::IPositioning2> positioning
+) : BasePanel(ui::BoxPtr < ui::IScalable > {new ui::Empty{}}, std::move(sizing), std::move(positioning), displayed), minSize(minSize), normalSize(normalSize),
 	isIndependentResult(isIndependentResult), isFreeResult(isFreeResult), inPanelResult(inPanelResult), updateInteractionsResult(updateInteractionsResult) {
 }
 
@@ -124,4 +180,3 @@ void TestPanel::setInPanelResult(bool inPanelResult) {
 void TestPanel::setUpdateInteractionsResult(bool updateInteractionsResult) {
 	TestPanel::updateInteractionsResult = updateInteractionsResult;
 }
-

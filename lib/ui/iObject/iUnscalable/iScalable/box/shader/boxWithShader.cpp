@@ -52,7 +52,7 @@ namespace ui {
 		return new BoxWithShader{std::move(*this), initInfo};
 	}
 	
-	BoxWithShader::BoxWithShader(BoxWithShader::Make&& make, InitInfo initInfo) :
+	BoxWithShader::BoxWithShader(Make&& make, InitInfo initInfo) :
 		BoxWithRenderTexture(std::move(make.object), make.optimize, make.minSize, initInfo),
 		shader(make.shader),
 		transmission(make.transmission) {

@@ -7,7 +7,7 @@
 namespace ui {
 	class BoxWithBackground : public Box, public ILayoutWithBackground, public ILayoutWithObject {
 	public:
-		struct Make : public Box::Make, public ILayoutWithBackground::Make, public ILayoutWithBackground {
+	struct Make : public Box::Make, public ILayoutWithBackground::Make, public ILayoutWithObject::Make {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<IUninteractive::Make> background;
 			sf::Vector2f offset = {};

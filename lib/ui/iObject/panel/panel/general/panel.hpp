@@ -9,6 +9,36 @@ namespace ui {
 	
 	class Panel : public BasePanel {
 	public:
+		struct Make : public BasePanel::Make {
+			BoxPtr<IScalable::Make> object;
+			BoxPtr<IHidePanelInteraction> hideInteraction;
+			BoxPtr<IMovePanelInteraction> moveInteraction;
+			BoxPtr<ISizing2> sizing;
+			BoxPtr<IPositioning2> positioning;
+			bool displayed = false;
+			
+			Make(
+				BoxPtr<IScalable::Make>&& object,
+				BoxPtr<IHidePanelInteraction> hideInteraction,
+				BoxPtr<IMovePanelInteraction> moveInteraction,
+				BoxPtr<ISizing2> sizing,
+				BoxPtr<IPositioning2> positioning,
+				bool displayed = false
+			);
+			
+			Make(
+				BoxPtr<IScalable::Make>&& object,
+				BoxPtr<IHidePanelInteraction> hideInteraction,
+				BoxPtr<ISizing2> sizing,
+				BoxPtr<IPositioning2> positioning,
+				bool displayed = false
+			);
+			
+			Panel* make(InitInfo initInfo) override;
+		};
+		
+		Panel(Make&& make, InitInfo initInfo);
+		
 		Panel(
 			BoxPtr<IScalable>&& object,
 			BoxPtr<IHidePanelInteraction> hideInteraction,

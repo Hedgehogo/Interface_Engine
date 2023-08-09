@@ -1,7 +1,7 @@
 #include "buttonWithPanel.hpp"
 
 namespace ui {
-	ButtonWithPanel::Make::Make(BoxPtr<Panel>&& panel, BoxPtr<IDisplayPanelInteraction>&& interaction, BoxPtr<IScalable::Make>&& background) :
+	ButtonWithPanel::Make::Make(BoxPtr<Panel::Make>&& panel, BoxPtr<IDisplayPanelInteraction>&& interaction, BoxPtr<IScalable::Make>&& background) :
 		panel(std::move(panel)), interaction(std::move(interaction)), background(std::move(background)) {
 	}
 	
@@ -11,8 +11,7 @@ namespace ui {
 	
 	ButtonWithPanel::ButtonWithPanel(Make&& make, InitInfo initInfo) :
 		BaseButton(std::move(make.background), dynamicCast<IInteraction>(std::move(make.interaction)), initInfo),
-		panel(std::move(make.panel)) {
-		panel->init(initInfo);
+		panel(make.panel->make(initInfo)) {
 		dynamic_cast<IDisplayPanelInteraction&>(*interactive.interaction).init({initInfo, *panel});
 	}
 	

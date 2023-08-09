@@ -1,7 +1,7 @@
 #include "boxWithPanel.hpp"
 
 namespace ui {
-	BoxWithPanel::Make::Make(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize) :
+	BoxWithPanel::Make::Make(BoxPtr<ConstPanel::Make>&& panel, BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize) :
 		panel(std::move(panel)), object(std::move(object)), minSize(minSize) {
 	}
 	
@@ -10,8 +10,7 @@ namespace ui {
 	}
 	
 	BoxWithPanel::BoxWithPanel(Make&& make, InitInfo initInfo) :
-		Box(make.minSize), object(make.object->make(initInfo)), panel(std::move(make.panel)) {
-		panel->init(initInfo);
+		Box(make.minSize), object(make.object->make(initInfo)), panel(make.panel->make(initInfo)) {
 	}
 	
 	BoxWithPanel::BoxWithPanel(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable>&& object, sf::Vector2f minSize) :

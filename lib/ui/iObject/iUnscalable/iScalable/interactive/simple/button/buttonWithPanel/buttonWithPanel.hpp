@@ -15,11 +15,11 @@ namespace ui {
 	class ButtonWithPanel : public BaseButton {
 	public:
 		struct Make : public IScalable::Make {
-			BoxPtr<Panel> panel;
+			BoxPtr<Panel::Make> panel;
 			BoxPtr<IDisplayPanelInteraction> interaction;
 			BoxPtr<IScalable::Make> background;
 			
-			Make(BoxPtr<Panel>&& panel, BoxPtr<IDisplayPanelInteraction>&& interaction, BoxPtr<IScalable::Make>&& background);
+			Make(BoxPtr<Panel::Make>&& panel, BoxPtr<IDisplayPanelInteraction>&& interaction, BoxPtr<IScalable::Make>&& background);
 			
 			ButtonWithPanel* make(InitInfo initInfo) override;
 		};

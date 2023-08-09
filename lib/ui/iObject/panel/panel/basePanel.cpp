@@ -2,6 +2,24 @@
 #include "../manager/general/panelManager.hpp"
 
 namespace ui {
+	BasePanel::BasePanel(
+		BoxPtr<IScalable::Make>&& object,
+		BoxPtr<ISizing2> sizing,
+		BoxPtr<IPositioning2> positioning,
+		bool displayed,
+		InitInfo objectInitInfo,
+		InitInfo initInfo
+	) :
+		object(object->make(objectInitInfo.copy(drawManager).copy(updateManager))),
+		sizing(std::move(sizing)),
+		positioning(std::move(positioning)),
+		displayed(displayed) {
+		sf::Vector2f objectNormalSize = this->object->getNormalSize();
+		this->sizing->init(initInfo.renderTarget, objectNormalSize);
+		this->positioning->init(initInfo.renderTarget);
+		initInfo.panelManager.addPanel(this);
+	}
+	
 	BasePanel::BasePanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :
 		object(std::move(object)), sizing(std::move(sizing)), positioning(std::move(positioning)),
 		parentProcessed(false), oldDisplayed(false), displayed(displayed), active(false) {

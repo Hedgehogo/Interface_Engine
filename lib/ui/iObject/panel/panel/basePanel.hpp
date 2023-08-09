@@ -16,6 +16,12 @@
 namespace ui {
 	class BasePanel : public ILayoutWithObject, public IDrawable, public IUpdatable {
 	public:
+		struct Make : public ILayoutWithObject::Make {
+			BasePanel* make(InitInfo initInfo) override = 0;
+		};
+		
+		BasePanel(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed, InitInfo objectInitInfo, InitInfo initInfo);
+		
 		BasePanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed = false);
 		
 		BasePanel(const BasePanel& other);
@@ -70,11 +76,11 @@ namespace ui {
 	
 	protected:
 		LayoutData layout;
+		DrawManager drawManager;
+		UpdateManager updateManager;
 		BoxPtr<IScalable> object;
 		BoxPtr<ISizing2> sizing;
 		BoxPtr<IPositioning2> positioning;
-		DrawManager drawManager;
-		UpdateManager updateManager;
 		bool parentProcessed;
 		bool oldDisplayed;
 		bool displayed;

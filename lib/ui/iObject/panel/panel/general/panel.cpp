@@ -3,6 +3,56 @@
 #include "../interaction/move/dont/dontMovePanelInteraction.hpp"
 
 namespace ui {
+	Panel::Make::Make(
+		BoxPtr<IScalable::Make>&& object,
+		BoxPtr<IHidePanelInteraction> hideInteraction,
+		BoxPtr<IMovePanelInteraction> moveInteraction,
+		BoxPtr<ISizing2> sizing,
+		BoxPtr<IPositioning2> positioning,
+		bool displayed
+	) :
+		object(std::move(object)),
+		hideInteraction(std::move(hideInteraction)),
+		moveInteraction(std::move(moveInteraction)),
+		sizing(std::move(sizing)),
+		positioning(std::move(positioning)),
+		displayed(displayed) {
+	}
+	
+	Panel::Make::Make(
+		BoxPtr<IScalable::Make>&& object,
+		BoxPtr<IHidePanelInteraction> hideInteraction,
+		BoxPtr<ISizing2> sizing,
+		BoxPtr<IPositioning2> positioning,
+		bool displayed
+	) :
+		object(std::move(object)),
+		hideInteraction(std::move(hideInteraction)),
+		sizing(std::move(sizing)),
+		positioning(std::move(positioning)),
+		displayed(displayed) {
+	}
+	
+	Panel* Panel::Make::make(InitInfo initInfo) {
+		return new Panel{std::move(*this), initInfo};
+	}
+	
+	Panel::Panel(Make&& make, InitInfo initInfo) :
+		BasePanel(
+			std::move(make.object),
+			std::move(make.sizing),
+			std::move(make.positioning),
+			make.displayed,
+			initInfo.copy(panelManager),
+			initInfo
+		),
+		interactionManager(&initInfo.interactionManager),
+		hideInteraction(std::move(make.hideInteraction)),
+		moveInteraction(std::move(make.moveInteraction)) {
+		hideInteraction->init({initInfo, *this});
+		moveInteraction->init({initInfo, *this});
+	}
+	
 	Panel::Panel(
 		BoxPtr<IScalable>&& object,
 		BoxPtr<IHidePanelInteraction> hideInteraction,

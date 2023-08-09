@@ -8,11 +8,11 @@ namespace ui {
 	class BoxWithPanel : public Box, public ILayoutWithObject {
 	public:
 		struct Make : public Box::Make, public ILayoutWithObject::Make {
-			BoxPtr<ConstPanel> panel;
+			BoxPtr<ConstPanel::Make> panel;
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f minSize = {};
 			
-			Make(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize = {});
+			Make(BoxPtr<ConstPanel::Make>&& panel, BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize = {});
 			
 			BoxWithPanel* make(InitInfo initInfo) override;
 		};
