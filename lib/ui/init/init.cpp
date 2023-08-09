@@ -170,10 +170,10 @@ namespace ui {
 		inherit<IScalable, Switcher>();
 		inherit<IUnscalable, IScalable>();
 		inherit<IUnscalable, Text>();
+		inherit<IObject, IUnscalable>();
 		inherit<BasePanel, ConstPanel>();
 		inherit<BasePanel, Panel>();
 		inherit<IObject, BasePanel>();
-		inherit<IObject, IUnscalable>();
 		
 		addDetermine<FullColor>();
 		addDetermine<RoundedRectangle>();

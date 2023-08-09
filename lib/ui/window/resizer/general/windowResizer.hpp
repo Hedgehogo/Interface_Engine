@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../iWindowResizer.hpp"
+#include "../baseWindowResizer.hpp"
 #include "ui/enums/keyHandler/keyHandler.hpp"
 #include <variant>
 
 namespace ui {
-	class WindowResizer : public IWindowResizer {
+	class WindowResizer : public BaseWindowResizer {
 	public:
 		struct Borders {
 			int up = 0, down = 0, left = 0, right = 0;

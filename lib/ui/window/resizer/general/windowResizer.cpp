@@ -35,7 +35,7 @@ namespace ui {
 		swapBorders(currentBorder.y, borders.up, borders.down, grip.y, size.y);
 		swapBorders(currentBorder.x, borders.left, borders.right, grip.x, size.x);
 		
-		auto minSize{window->getMinSize()};
+		sf::Vector2f minSize{window->getMinSize()};
 		
 		checkMinSize(size.y, minSize.y, currentBorder.y, borders.up, borders.down);
 		checkMinSize(size.x, minSize.x, currentBorder.x, borders.left, borders.right);

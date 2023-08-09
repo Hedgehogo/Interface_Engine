@@ -106,4 +106,9 @@ namespace ui {
 		detail::addItems<T, As...>(result, std::move(args)...);
 		return result;
 	}
+	
+	template<typename T, T (* f)(T)>
+	sf::Vector2<T> mapVector(sf::Vector2<T> value) {
+		return {f(value.x), f(value.y)};
+	}
 }
