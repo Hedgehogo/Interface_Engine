@@ -9,6 +9,8 @@ namespace ui {
 		
 		OnlyDrawable();
 		
+		sf::RenderTarget& getRenderTarget();
+		
 		void init(InitInfo initInfo) override;
 	
 	protected:

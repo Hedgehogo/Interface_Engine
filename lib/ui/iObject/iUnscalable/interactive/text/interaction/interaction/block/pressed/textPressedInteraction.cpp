@@ -1,7 +1,7 @@
 #include "textPressedInteraction.hpp"
 
 #include <utility>
-#include "ui/interaction/interactionManager/interactionManager.hpp"
+#include "ui/interaction/manager/interactionManager.hpp"
 #include "ui/iObject/iUnscalable/interactive/text/interaction/event/textEvent.hpp"
 
 namespace ui {

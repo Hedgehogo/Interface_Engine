@@ -8,6 +8,10 @@ namespace ui {
 	public:
 		UpdateManager() = default;
 		
+		std::size_t size();
+		
+		IUpdatable& get(std::size_t index);
+		
 		void add(IUpdatable& updatable);
 		
 		void clear();

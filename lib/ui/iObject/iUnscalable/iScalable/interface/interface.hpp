@@ -4,7 +4,7 @@
 
 #include "../iScalable.hpp"
 #include "../../../panel/manager/general/panelManager.hpp"
-#include "../../../../interaction/interactionManager/interactionManager.hpp"
+#include "../../../../interaction/manager/interactionManager.hpp"
 #include "../../../../interaction/interactionStack/interactionStack.hpp"
 #include "../../../../interaction/event/wheel/wheelEvent.hpp"
 

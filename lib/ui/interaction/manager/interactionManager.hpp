@@ -18,6 +18,10 @@ namespace ui {
 	public:
 		explicit InteractionManager();
 		
+		std::size_t size();
+		
+		IInteraction& get(std::size_t index);
+		
 		void addInteraction(IInteraction& interaction);
 		
 		void deleteInteraction(IInteraction& interaction);

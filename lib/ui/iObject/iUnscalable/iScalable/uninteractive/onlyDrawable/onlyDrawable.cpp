@@ -12,4 +12,8 @@ namespace ui {
 	OnlyDrawable::OnlyDrawable(InitInfo initInfo) : renderTarget(&initInfo.renderTarget) {
 		initInfo.drawManager.add(*this);
 	}
+	
+	sf::RenderTarget& OnlyDrawable::getRenderTarget() {
+		return *renderTarget;
+	}
 }

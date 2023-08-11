@@ -6,6 +6,14 @@ namespace ui {
 	PanelManager::PanelManager(std::vector<BasePanel*> panels) : panels(std::move(panels)), activePanels() {
 	}
 	
+	std::size_t PanelManager::size() {
+		return panels.size();
+	}
+	
+	BasePanel& PanelManager::get(std::size_t index) {
+		return *panels.at(index);
+	}
+	
 	void PanelManager::print() {
 		for(const auto& panel: panels) {
 			std::cout << panel << ", ";

@@ -14,4 +14,12 @@ namespace ui {
 			drawable->draw();
 		}
 	}
+	
+	std::size_t DrawManager::size() {
+		return drawables.size();
+	}
+	
+	IDrawable& DrawManager::get(std::size_t index) {
+		return *drawables.at(index);
+	}
 }

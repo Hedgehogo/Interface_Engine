@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "../../../testsObjects/testInteraction/testInteraction.hpp"
-#include "../../../../lib/ui/interaction/interactionManager/interactionManager.hpp"
+#include "../../../../lib/ui/interaction/manager/interactionManager.hpp"
 
 void testStart(TestInteraction& testInteraction, TestInteraction& testInteraction1, ui::InteractionManager& interactionManager){
 	ASSERT_EQ(testInteraction.getProcessed().start.size(), 1);

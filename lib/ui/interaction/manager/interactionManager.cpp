@@ -7,6 +7,14 @@ namespace ui {
 		interactions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {
 	}
 	
+	std::size_t InteractionManager::size() {
+		return interactions.size();
+	}
+	
+	IInteraction& InteractionManager::get(std::size_t index) {
+		return *interactions.at(index);
+	}
+	
 	void InteractionManager::addInteraction(IInteraction& interaction) {
 		addInteractions.push_back(&interaction);
 	}

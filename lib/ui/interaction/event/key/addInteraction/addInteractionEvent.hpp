@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../simple/keyEventSimple.hpp"
-#include "../../../interactionManager/interactionManager.hpp"
+#include "../../../manager/interactionManager.hpp"
 
 namespace ui {
 	class AddInteractionEvent : public KeyEvent_Simple {

@@ -8,6 +8,10 @@ namespace ui {
 	public:
 		DrawManager() = default;
 		
+		std::size_t size();
+		
+		IDrawable& get(std::size_t index);
+		
 		void add(IDrawable& drawable);
 		
 		void clear();

@@ -12,6 +12,10 @@ namespace ui {
 	public:
 		explicit PanelManager(std::vector<BasePanel*> panels = std::vector<BasePanel*>{});
 		
+		std::size_t size();
+		
+		BasePanel& get(std::size_t index);
+		
 		bool isFree() override;
 		
 		bool inConstPanels(sf::Vector2f pointPosition) override;

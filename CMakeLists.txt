@@ -57,6 +57,22 @@ message("<=================[ImageMagick]=================>")
 
 configure_file(lib/config.h.in lib/config.h)
 
+set(libraries
+        sfml-graphics sfml-system sfml-window
+        yaml-cpp
+        libcurl
+        localisation
+        Box_Ptr
+        )
+
+foreach(lib IN LISTS libraries)
+    set_target_properties(${lib} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+endforeach()
+set_target_properties(openLib PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+add_subdirectory(example-resources/modules)
+
+
 file(GLOB_RECURSE src "lib/*.cpp")
 file(GLOB_RECURSE headers "lib/*.hpp")
 
@@ -68,31 +84,29 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         ${ImageMagick_INCLUDE_DIRS}
 )
 
-set(libraries
-        sfml-graphics sfml-system sfml-window
-        yaml-cpp
-        libcurl
-        localisation
-        Box_Ptr
-)
-
 foreach(lib IN LISTS libraries)
-        target_link_libraries(${PROJECT_NAME} PUBLIC ${lib})
-        set_target_properties(${lib} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+    target_link_libraries(${PROJECT_NAME} PUBLIC ${lib})
 endforeach()
-set_target_properties(openLib PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_subdirectory(example-resources/modules)
 
 add_executable(${PROJECT_NAME}_ex main.cpp)
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})
-
 set_target_properties(${PROJECT_NAME}_ex PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-file(GLOB_RECURSE test_src "test/*.cpp")
+
+file(GLOB_RECURSE test_src "test/_test/*.cpp")
 add_executable(${PROJECT_NAME}_tests ${test_src})
 target_link_libraries(${PROJECT_NAME}_tests PUBLIC gtest gtest_main ${PROJECT_NAME})
+target_include_directories(${PROJECT_NAME}_tests PUBLIC test)
+set_target_properties(${PROJECT_NAME}_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+file(GLOB_RECURSE test_images "test/_test/*.png")
+foreach(test_image IN LISTS test_images)
+    get_filename_component(test_image_name ${test_image} NAME)
+    configure_file(${test_image} ${CMAKE_BINARY_DIR}/bin/images/${test_image_name} COPYONLY)
+endforeach()
+
 #[[
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib/ui DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME} PATTERN "*.hpp")
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib/modules DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME} PATTERN "*.hpp")

@@ -3,7 +3,7 @@
 #include "../drawable/manager/drawManager.hpp"
 #include "../updatable/manager/updateManager.hpp"
 #include "../interaction/interactionStack/interactionStack.hpp"
-#include "../interaction/interactionManager/interactionManager.hpp"
+#include "../interaction/manager/interactionManager.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../animation/manager/animationManager.hpp"
 #include "../make/make.hpp"

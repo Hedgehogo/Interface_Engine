@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../../lib/ui/interaction/iInteraction/iInteraction.hpp"
-#include "../../../lib/ui/interaction/interactionManager/interactionManager.hpp"
+#include "../../../lib/ui/interaction/manager/interactionManager.hpp"
 
 
 class TestInteraction : public ui::IInteraction {

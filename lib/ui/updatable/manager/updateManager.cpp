@@ -1,6 +1,14 @@
 #include "updateManager.hpp"
 
 namespace ui {
+	std::size_t UpdateManager::size() {
+		return updatable.size();
+	}
+	
+	IUpdatable& UpdateManager::get(std::size_t index) {
+		return *updatable.at(index);
+	}
+	
 	void UpdateManager::add(IUpdatable& updatable) {
 		this->updatable.push_back(&updatable);
 	}

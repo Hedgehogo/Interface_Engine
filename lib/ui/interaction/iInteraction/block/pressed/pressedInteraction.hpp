@@ -2,7 +2,7 @@
 
 #include "../iBlockInteraction.hpp"
 #include "../../oneKey/oneKeyInteraction.hpp"
-#include "../../../interactionManager/interactionManager.hpp"
+#include "../../../manager/interactionManager.hpp"
 
 namespace ui {
 	class PressedInteraction : public OneKeyInteraction, public IBlockInteraction {

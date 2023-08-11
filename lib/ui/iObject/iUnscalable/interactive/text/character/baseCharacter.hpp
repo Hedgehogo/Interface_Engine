@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../../../interaction/interactionManager/interactionManager.hpp"
+#include "../../../../../interaction/manager/interactionManager.hpp"
 #include "../../../../../interaction/interactionStack/interactionStack.hpp"
 #include "../line/baseLine.hpp"
 

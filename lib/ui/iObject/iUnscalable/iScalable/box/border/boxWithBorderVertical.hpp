@@ -3,7 +3,7 @@
 #include "../box.hpp"
 #include "../../../../iLayout/objectsArray/iLayoutWithObjectsArray.hpp"
 #include "../../../../../interaction/interactionStack/interactionStack.hpp"
-#include "../../../../../interaction/interactionManager/interactionManager.hpp"
+#include "../../../../../interaction/manager/interactionManager.hpp"
 
 namespace ui {
 	class BoxWithBorderVertical : public Box, public ILayoutWithObjectsArray {

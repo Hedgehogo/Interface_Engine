@@ -4,7 +4,7 @@
 #include "../../uninteractive/uninteractive.hpp"
 #include "../../../../iLayout/object/iLayoutWithObject.hpp"
 #include "../../../../../interaction/interactionStack/interactionStack.hpp"
-#include "../../../../../interaction/interactionManager/interactionManager.hpp"
+#include "../../../../../interaction/manager/interactionManager.hpp"
 
 namespace ui {
 	class BoxWithConstBezel : public Box, public ILayoutWithObject {
