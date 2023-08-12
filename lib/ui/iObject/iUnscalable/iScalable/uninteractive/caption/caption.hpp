@@ -6,7 +6,6 @@
 
 namespace ui {
 	class Caption : public OnlyDrawable {
-	protected:
 	public:
 		static void setDefaultColor(sf::Color color = sf::Color::White);
 		
@@ -111,9 +110,9 @@ namespace ui {
 		
 		sf::Text text;
 		sf::String str;
+		DrawManager drawManager;
 		BoxPtr<IUninteractive> background;
 		sf::Vector2f minimumSize;
-		DrawManager drawManager;
 		InternalPositioning2 positioning;
 	};
 	

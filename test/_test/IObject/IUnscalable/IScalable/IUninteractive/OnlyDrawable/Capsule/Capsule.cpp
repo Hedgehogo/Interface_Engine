@@ -5,7 +5,7 @@
 TEST(IObject, Capsule) {
 	InitInfoData data{{100, 100}};
 	
-	ui::Capsule capsule{ui::Capsule::Make{sf::Color::Red}, data.makeInitInfo()};
+	ui::Capsule capsule{{sf::Color::Red}, data.makeInitInfo()};
 	data.interactionManager.update({});
 	
 	ASSERT_EQ(data.drawManager.size(), 1);
@@ -41,6 +41,6 @@ TEST(IObject, Capsule) {
 	ASSERT_EQ(capsule.getPosition(), (sf::Vector2f{33, 46}));
 	ASSERT_EQ(capsule.getAreaPosition(), (sf::Vector2f{33, 46}));
 	
-	capsule.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("images/Capsule.png"));
+	data.drawManager.draw();
+	ASSERT_TRUE(data.renderEqualWithSave("test-src/Capsule.png"));
 }

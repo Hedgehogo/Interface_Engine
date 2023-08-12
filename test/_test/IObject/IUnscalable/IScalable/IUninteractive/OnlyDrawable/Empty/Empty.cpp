@@ -6,7 +6,7 @@
 TEST(IObject, Empty) {
 	InitInfoData data{{100, 100}};
 	
-	ui::Empty empty{ui::Empty::Make{}, data.makeInitInfo()};
+	ui::Empty empty{{}, data.makeInitInfo()};
 	data.interactionManager.update({});
 	
 	ASSERT_EQ(data.drawManager.size(), 1);
@@ -42,6 +42,6 @@ TEST(IObject, Empty) {
 	ASSERT_EQ(empty.getPosition(), (sf::Vector2f{33, 46}));
 	ASSERT_EQ(empty.getAreaPosition(), (sf::Vector2f{33, 46}));
 	
-	empty.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("images/Empty.png"));
+	data.drawManager.draw();
+	ASSERT_TRUE(data.renderEqualWithSave("test-src/Empty.png"));
 }

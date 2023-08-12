@@ -7,7 +7,7 @@ TEST(IObject, Sprite) {
 	
 	sf::Texture texture{};
 	texture.loadFromFile("../../example-resources/image.png");
-	ui::Sprite sprite{ui::Sprite::Make{texture}, data.makeInitInfo()};
+	ui::Sprite sprite{{texture}, data.makeInitInfo()};
 	data.interactionManager.update({});
 	
 	ASSERT_EQ(data.drawManager.size(), 1);
@@ -43,6 +43,6 @@ TEST(IObject, Sprite) {
 	ASSERT_EQ(sprite.getPosition(), (sf::Vector2f{33, 46}));
 	ASSERT_EQ(sprite.getAreaPosition(), (sf::Vector2f{33, 46}));
 	
-	sprite.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("images/Sprite.png"));
+	data.drawManager.draw();
+	ASSERT_TRUE(data.renderEqualWithSave("test-src/Sprite.png"));
 }

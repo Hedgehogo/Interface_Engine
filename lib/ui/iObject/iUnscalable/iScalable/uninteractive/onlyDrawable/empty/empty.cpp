@@ -5,7 +5,7 @@ namespace ui {
 		return new Empty{std::move(*this), initInfo};
 	}
 	
-	Empty::Empty(Empty::Make&&, InitInfo initInfo) : OnlyDrawable(initInfo) {
+	Empty::Empty(Make&&, InitInfo initInfo) : OnlyDrawable(initInfo) {
 	}
 	
 	Empty::Empty() {

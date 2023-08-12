@@ -5,7 +5,7 @@
 TEST(IObject, FullColor) {
 	InitInfoData data{{100, 100}};
 	
-	ui::FullColor fullColor{ui::FullColor::Make{sf::Color::Red}, data.makeInitInfo()};
+	ui::FullColor fullColor{{sf::Color::Red}, data.makeInitInfo()};
 	data.interactionManager.update({});
 	
 	ASSERT_EQ(data.drawManager.size(), 1);
@@ -41,6 +41,6 @@ TEST(IObject, FullColor) {
 	ASSERT_EQ(fullColor.getPosition(), (sf::Vector2f{33, 46}));
 	ASSERT_EQ(fullColor.getAreaPosition(), (sf::Vector2f{33, 46}));
 	
-	fullColor.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("images/FullColor.png"));
+	data.drawManager.draw();
+	ASSERT_TRUE(data.renderEqualWithSave("test-src/FullColor.png"));
 }

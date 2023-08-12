@@ -5,7 +5,7 @@
 TEST(IObject, RoundedRectangle) {
 	InitInfoData data{{100, 100}};
 	
-	ui::RoundedRectangle roundedRectangle{ui::RoundedRectangle::Make{sf::Color::Red, 2}, data.makeInitInfo()};
+	ui::RoundedRectangle roundedRectangle{{sf::Color::Red, 2}, data.makeInitInfo()};
 	data.interactionManager.update({});
 	
 	ASSERT_EQ(data.drawManager.size(), 1);
@@ -41,6 +41,6 @@ TEST(IObject, RoundedRectangle) {
 	ASSERT_EQ(roundedRectangle.getPosition(), (sf::Vector2f{33, 46}));
 	ASSERT_EQ(roundedRectangle.getAreaPosition(), (sf::Vector2f{33, 46}));
 	
-	roundedRectangle.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("images/RoundedRectangle.png"));
+	data.drawManager.draw();
+	ASSERT_TRUE(data.renderEqualWithSave("test-src/RoundedRectangle.png"));
 }
