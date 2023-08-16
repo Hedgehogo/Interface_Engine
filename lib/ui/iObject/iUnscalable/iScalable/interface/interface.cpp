@@ -12,7 +12,6 @@ namespace ui {
 	Interface* Interface::Make::make(InitInfo initInfo) {
 		return new Interface{std::move(*this), initInfo};
 	}
-	
 	Interface::Interface(Make&& make, InitInfo initInfo) :
 		window(&initInfo.window),
 		renderTarget(&initInfo.renderTarget),
