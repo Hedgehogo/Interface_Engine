@@ -37,28 +37,28 @@ namespace ui {
 	}
 	
 	void BoxWithTabs::setPosition(sf::Vector2f position) {
-		ILayout::setPosition(position);
+		layout.setPosition(position);
 		for(auto& object: objects) {
 			object->setPosition(position);
 		}
 	}
 	
 	void BoxWithTabs::move(sf::Vector2f position) {
-		ILayout::move(position);
+		layout.move(position);
 		for(auto& object: objects) {
 			object->move(position);
 		}
 	}
 	
 	void BoxWithTabs::setSize(sf::Vector2f size) {
-		ILayout::setSize(size);
+		layout.setSize(size);
 		for(auto& object: objects) {
 			object->setSize(size);
 		}
 	}
 	
 	void BoxWithTabs::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayout::resize(size, position);
+		layout.resize(size, position);
 		for(auto& object: objects) {
 			object->resize(size, position);
 		}

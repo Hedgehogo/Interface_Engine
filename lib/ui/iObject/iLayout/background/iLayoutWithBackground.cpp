@@ -2,7 +2,7 @@
 
 namespace ui {
 	void ILayoutWithBackground::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayout::resize(size, position);
+		layoutGetData().resize(size, position);
 		getBackground().resize(size, position);
 	}
 	

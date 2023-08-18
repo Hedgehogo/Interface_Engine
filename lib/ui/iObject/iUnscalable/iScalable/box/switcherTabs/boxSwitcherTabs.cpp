@@ -33,12 +33,8 @@ namespace ui {
 		initInfo.updateManager.add(*this);
 	}
 	
-	void BoxSwitcherTabs::setPosition(sf::Vector2f position) {
-		ILayoutWithObjectsArray::setPosition(position);
-	}
-	
 	void BoxSwitcherTabs::resize(sf::Vector2f size, sf::Vector2f position) {
-		Box::resize(size, position);
+		layout.resize(size, position);
 		
 		if(isHorizontal) {
 			sf::Vector2f objectSize{size.x / objects.size(), size.y};

@@ -124,7 +124,7 @@ namespace ui {
 			shader->setUniform("size", size);
 		if(transmission & Transmission::aspectRatio)
 			shader->setUniform("aspectRatio", size.x / size.y);
-		ILayout::setSize(size);
+		layout.setSize(size);
 	}
 	
 	void BoxWithShader::draw() {

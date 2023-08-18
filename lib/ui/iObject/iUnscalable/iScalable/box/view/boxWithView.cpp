@@ -26,7 +26,7 @@ namespace ui {
 	}
 	
 	void BoxWithView::resize(sf::Vector2f size, sf::Vector2f position) {
-		Box::resize(size, position);
+		layout.resize(size, position);
 		
 		view.setSize(size);
 		view.setCenter(position + (size / 2.f));

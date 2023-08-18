@@ -38,7 +38,7 @@ namespace ui {
 	}
 	
 	void RoundedRectangle::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayout::resize(size, position);
+		layout.resize(size, position);
 		verticalRectangle.setSize({size.x - radius * 2, size.y});
 		verticalRectangle.setPosition(position + sf::Vector2f{radius, 0});
 		horizontalRectangle.setSize({size.x, size.y - radius * 2});
@@ -53,16 +53,16 @@ namespace ui {
 		return sf::Vector2f(radius * 2, radius * 2);
 	}
 	
-	LayoutData& RoundedRectangle::getLayoutData() {
-		return layout;
-	}
-	
-	const LayoutData& RoundedRectangle::getLayoutData() const {
-		return layout;
-	}
-	
 	RoundedRectangle* RoundedRectangle::copy() {
 		return new RoundedRectangle{*this};
+	}
+	
+	LayoutData& RoundedRectangle::layoutGetData() {
+		return layout;
+	}
+	
+	const LayoutData& RoundedRectangle::layoutGetData() const {
+		return layout;
 	}
 	
 	bool DecodePointer<RoundedRectangle>::decodePointer(const YAML::Node& node, RoundedRectangle*& roundedRectangle) {

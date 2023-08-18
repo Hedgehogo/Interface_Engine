@@ -17,10 +17,6 @@ namespace ui {
 		object->init(initInfo);
 	}
 	
-	void BoxMakePermeable::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayoutWithObject::resize(size, position);
-	}
-	
 	bool BoxMakePermeable::updateInteractions(sf::Vector2f mousePosition) {
 		object->updateInteractions(mousePosition);
 		return false;

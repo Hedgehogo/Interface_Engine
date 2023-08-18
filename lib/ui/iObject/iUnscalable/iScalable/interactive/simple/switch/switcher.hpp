@@ -41,10 +41,6 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
-		LayoutData& getLayoutData() override;
-		
-		const LayoutData& getLayoutData() const override;
-		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
@@ -56,6 +52,10 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
+		LayoutData& layoutGetData() override;
+		
+		const LayoutData& layoutGetData() const override;
+		
 		LayoutData layout;
 		DrawManager inactiveDrawManager;
 		DrawManager activeDrawManager;

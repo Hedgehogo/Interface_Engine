@@ -24,8 +24,6 @@ namespace ui {
 		
 		void init(InitInfo initInfo) override;
 		
-		void setPosition(sf::Vector2f position) override;
-		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		void update() override;

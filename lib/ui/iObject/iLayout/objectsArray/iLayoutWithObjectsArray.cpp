@@ -1,8 +1,12 @@
 #include "iLayoutWithObjectsArray.hpp"
 
 namespace ui {
+	void ILayoutWithObjectsArray::setPosition(sf::Vector2f position) {
+		ILayoutWithObjectsArray::move(position - layoutGetData().position);
+	}
+	
 	void ILayoutWithObjectsArray::move(sf::Vector2f position) {
-		ILayout::move(position);
+		layoutGetData().move(position);
 		for(std::size_t i = 0; i < getArraySize(); ++i) {
 			getObjectAt(i).move(position);
 		}

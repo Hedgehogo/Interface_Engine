@@ -35,7 +35,7 @@ namespace ui {
 	}
 	
 	void BoxDebug::resize(sf::Vector2f size, sf::Vector2f position) {
-		Box::resize(size, position);
+		layout.resize(size, position);
 		object->resize(size, position);
 	}
 	

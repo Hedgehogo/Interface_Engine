@@ -15,7 +15,7 @@ namespace ui {
 	}
 	
 	void Empty::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayout::resize(size, position);
+		layout.resize(size, position);
 	}
 	
 	bool Empty::updateInteractions(sf::Vector2f) {
@@ -37,11 +37,11 @@ namespace ui {
 	void Empty::drawDebug(sf::RenderTarget&, int, int, uint, uint) {
 	}
 	
-	LayoutData& Empty::getLayoutData() {
+	LayoutData& Empty::layoutGetData() {
 		return layout;
 	}
 	
-	const LayoutData& Empty::getLayoutData() const {
+	const LayoutData& Empty::layoutGetData() const {
 		return layout;
 	}
 	

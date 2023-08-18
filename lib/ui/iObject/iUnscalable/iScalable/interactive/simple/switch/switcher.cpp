@@ -40,19 +40,19 @@ namespace ui {
 	}
 	
 	void Switcher::setPosition(sf::Vector2f position) {
-		ILayout::setPosition(position);
+		layout.setPosition(position);
 		inactiveBackground->setPosition(position);
 		activeBackground->setPosition(position);
 	}
 	
 	void Switcher::move(sf::Vector2f position) {
-		ILayout::move(position);
+		layout.move(position);
 		inactiveBackground->move(position);
 		activeBackground->move(position);
 	}
 	
 	void Switcher::setSize(sf::Vector2f size) {
-		ILayout::setSize(size);
+		layout.setSize(size);
 		inactiveBackground->setSize(size);
 		activeBackground->setSize(size);
 	}
@@ -65,14 +65,6 @@ namespace ui {
 		return max(activeBackground->getNormalSize(), inactiveBackground->getNormalSize());
 	}
 	
-	LayoutData& Switcher::getLayoutData() {
-		return layout;
-	}
-	
-	const LayoutData& Switcher::getLayoutData() const {
-		return layout;
-	}
-	
 	void Switcher::draw() {
 		if(active->getValue()) {
 			activeDrawManager.draw();
@@ -82,17 +74,18 @@ namespace ui {
 	}
 	
 	void Switcher::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayout::resize(size, position);
+		layout.resize(size, position);
 		activeBackground->resize(size, position);
 		inactiveBackground->resize(size, position);
 	}
 	
 	bool Switcher::updateInteractions(sf::Vector2f mousePosition) {
 		bool backgroundUpdate;
-		if(active->getValue())
+		if(active->getValue()) {
 			backgroundUpdate = activeBackground->updateInteractions(mousePosition);
-		else
+		} else {
 			backgroundUpdate = inactiveBackground->updateInteractions(mousePosition);
+		}
 		return BaseInteractive::updateInteractions(mousePosition) || backgroundUpdate;
 	}
 	
@@ -106,6 +99,14 @@ namespace ui {
 		} else {
 			inactiveBackground->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		}
+	}
+	
+	LayoutData& Switcher::layoutGetData() {
+		return layout;
+	}
+	
+	const LayoutData& Switcher::layoutGetData() const {
+		return layout;
 	}
 	
 	bool DecodePointer<Switcher>::decodePointer(const YAML::Node& node, Switcher*& switcher) {

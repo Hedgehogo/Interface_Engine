@@ -23,16 +23,19 @@ namespace ui {
 	}
 	
 	void BoxWithBackground::setPosition(sf::Vector2f position) {
+		layout.setPosition(position);
 		background->setPosition(position);
 		object->setPosition(position);
 	}
 	
 	void BoxWithBackground::move(sf::Vector2f position) {
+		layout.move(position);
 		background->move(position);
 		object->move(position);
 	}
 	
 	void BoxWithBackground::setSize(sf::Vector2f size) {
+		layout.setSize(size);
 		background->setSize(size);
 		object->setSize(size);
 	}
@@ -62,8 +65,7 @@ namespace ui {
 	}
 	
 	void BoxWithBackground::resize(sf::Vector2f size, sf::Vector2f position) {
-		Box::resize(size, position);
-		
+		layout.resize(size, position);
 		background->resize(size, position);
 		object->resize(size - offset * 2.f, position + offset);
 	}

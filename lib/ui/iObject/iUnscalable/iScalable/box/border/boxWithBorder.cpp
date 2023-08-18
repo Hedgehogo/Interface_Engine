@@ -38,7 +38,7 @@ namespace ui {
 	}
 	
 	void BoxWithBorder::resize(sf::Vector2f size, sf::Vector2f position) {
-		Box::resize(size, position);
+		layout.resize(size, position);
 		sf::Vector2f coordinate{};
 		sf::Vector2f objectSize{size};
 		for(std::size_t x = 0; x < objects.size(); ++x) {

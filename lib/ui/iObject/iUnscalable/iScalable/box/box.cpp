@@ -5,15 +5,11 @@ namespace ui {
 		layout({}, size), minimumSize(minSize) {
 	}
 	
-	void Box::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayout::resize(size, position);
-	}
-	
-	LayoutData& Box::getLayoutData() {
+	LayoutData& Box::layoutGetData() {
 		return layout;
 	}
 	
-	const LayoutData& Box::getLayoutData() const {
+	const LayoutData& Box::layoutGetData() const {
 		return layout;
 	}
 }

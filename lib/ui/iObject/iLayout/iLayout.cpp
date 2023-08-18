@@ -7,57 +7,49 @@ namespace ui {
 	LayoutData::LayoutData(sf::Vector2f position, sf::Vector2f size) : position(position), size(size) {
 	}
 	
+	void LayoutData::setPosition(sf::Vector2f position) {
+		this->position = position;
+	}
+	
+	void LayoutData::move(sf::Vector2f position) {
+		this->position += position;
+	}
+	
+	void LayoutData::setSize(sf::Vector2f size) {
+		this->size = size;
+	}
+	
+	void LayoutData::resize(sf::Vector2f size, sf::Vector2f position) {
+		this->size = size;
+		this->position = position;
+	}
+	
 	void ILayout::setPosition(sf::Vector2f position) {
-		auto& thisPosition{getLayoutPosition()};
-		thisPosition = position;
-		resize(getLayoutSize(), thisPosition);
+		auto& layout{layoutGetData()};
+		resize(layout.size, position);
 	}
 	
 	void ILayout::move(sf::Vector2f position) {
-		auto& thisPosition{getLayoutPosition()};
-		thisPosition += position;
-		resize(getLayoutSize(), thisPosition);
+		auto& layout{layoutGetData()};
+		resize(layout.size, layout.position + position);
 	}
 	
 	void ILayout::setSize(sf::Vector2f size) {
-		auto& thisSize{getLayoutSize()};
-		thisSize = size;
-		resize(size, getLayoutPosition());
+		auto& layout{layoutGetData()};
+		resize(size, layout.position);
 	}
 	
 	sf::Vector2f ILayout::getAreaPosition() const {
-		return getLayoutPosition();
+		return layoutGetData().position;
 	}
 	
 	sf::Vector2f ILayout::getAreaSize() const {
-		return getLayoutSize();
-	}
-	
-	sf::Vector2f& ILayout::getLayoutPosition() {
-		return getLayoutData().position;
-	}
-	
-	sf::Vector2f& ILayout::getLayoutSize() {
-		return getLayoutData().size;
-	}
-	
-	const sf::Vector2f& ILayout::getLayoutPosition() const {
-		return getLayoutData().position;
-	}
-	
-	const sf::Vector2f& ILayout::getLayoutSize() const {
-		return getLayoutData().size;
+		return layoutGetData().size;
 	}
 	
 	bool ILayout::inArea(sf::Vector2f pointPosition) {
-		auto& thisPosition{getLayoutPosition()};
-		auto& thisSize{getLayoutSize()};
-		return pointPosition.x > thisPosition.x && pointPosition.x < thisPosition.x + thisSize.x &&
-			   pointPosition.y > thisPosition.y && pointPosition.y < thisPosition.y + thisSize.y;
-	}
-	
-	void ILayout::resize(sf::Vector2f size, sf::Vector2f position) {
-		getLayoutPosition() = position;
-		getLayoutSize() = size;
+		auto& layout{layoutGetData()};
+		return pointPosition.x > layout.position.x && pointPosition.x < layout.position.x + layout.size.x &&
+			   pointPosition.y > layout.position.y && pointPosition.y < layout.position.y + layout.size.y;
 	}
 }

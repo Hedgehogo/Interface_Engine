@@ -27,13 +27,13 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
-		LayoutData& getLayoutData() override;
-		
-		const LayoutData& getLayoutData() const override;
-		
 		RoundedRectangle* copy() override;
 	
 	protected:
+		LayoutData& layoutGetData() override;
+		
+		const LayoutData& layoutGetData() const override;
+		
 		LayoutData layout;
 		sf::RectangleShape horizontalRectangle;
 		sf::RectangleShape verticalRectangle;

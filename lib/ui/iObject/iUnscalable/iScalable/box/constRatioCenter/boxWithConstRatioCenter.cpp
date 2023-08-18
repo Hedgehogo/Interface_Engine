@@ -83,7 +83,7 @@ namespace ui {
 	}
 	
 	void BoxWithConstRatioCenter::resize(sf::Vector2f size, sf::Vector2f position) {
-		Box::resize(size, position);
+		layout.resize(size, position);
 		
 		sf::Vector2f firstMinSize{firstObject->getMinSize()};
 		sf::Vector2f secondMinSize{secondObject->getMinSize()};

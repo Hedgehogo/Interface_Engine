@@ -28,7 +28,7 @@ namespace ui {
 	}
 	
 	void BoxWithAlternativeObject::resize(sf::Vector2f size, sf::Vector2f position) {
-		Box::resize(size, position);
+		layout.resize(size, position);
 		topObject->resize(size, position);
 		bottomObject->resize(size, position);
 	}

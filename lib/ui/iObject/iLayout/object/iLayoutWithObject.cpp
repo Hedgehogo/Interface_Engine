@@ -3,7 +3,7 @@
 
 namespace ui {
 	void ILayoutWithObject::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayout::resize(size, position);
+		layoutGetData().resize(size, position);
 		getObject().resize(size, position);
 	}
 	

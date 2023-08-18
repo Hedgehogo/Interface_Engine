@@ -31,7 +31,7 @@ namespace ui {
 	}
 	
 	void Capsule::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayout::resize(size, position);
+		layout.resize(size, position);
 		if(size.x > size.y) {
 			rectangle.setSize({size.x - size.y, size.y});
 			rectangle.setPosition(position + sf::Vector2f{size.y / 2, 0});
@@ -51,16 +51,16 @@ namespace ui {
 		return {1, 1};
 	}
 	
-	LayoutData& Capsule::getLayoutData() {
-		return layout;
-	}
-	
-	const LayoutData& Capsule::getLayoutData() const {
-		return layout;
-	}
-	
 	Capsule* Capsule::copy() {
 		return new Capsule{*this};
+	}
+	
+	LayoutData& Capsule::layoutGetData() {
+		return layout;
+	}
+	
+	const LayoutData& Capsule::layoutGetData() const {
+		return layout;
 	}
 	
 	bool DecodePointer<Capsule>::decodePointer(const YAML::Node& node, Capsule*& capsule) {

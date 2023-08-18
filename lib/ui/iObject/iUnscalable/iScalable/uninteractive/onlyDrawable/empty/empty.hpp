@@ -24,15 +24,15 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
-		LayoutData& getLayoutData() override;
-		
-		const LayoutData& getLayoutData() const override;
-		
 		Empty* copy() override;
 		
 		void drawDebug(sf::RenderTarget&, int, int, uint, uint) override;
 	
 	protected:
+		LayoutData& layoutGetData() override;
+		
+		const LayoutData& layoutGetData() const override;
+		
 		LayoutData layout;
 	};
 	

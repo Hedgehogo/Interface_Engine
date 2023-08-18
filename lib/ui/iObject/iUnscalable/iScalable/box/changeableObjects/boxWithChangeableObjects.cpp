@@ -62,7 +62,7 @@ namespace ui {
 	}
 	
 	void BoxWithChangeableObjects::resize(sf::Vector2f size, sf::Vector2f position) {
-		Box::resize(size, position);
+		layout.resize(size, position);
 		objects[value->getValue()]->resize(size, position);
 	}
 	

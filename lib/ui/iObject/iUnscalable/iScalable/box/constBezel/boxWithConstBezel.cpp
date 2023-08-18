@@ -23,7 +23,7 @@ namespace ui {
 	}
 	
 	void BoxWithConstBezel::resize(sf::Vector2f size, sf::Vector2f position) {
-		Box::resize(size, position);
+		layout.resize(size, position);
 		bezel->resize(size, position);
 		object->resize(size - sf::Vector2f(thickness * 2.0f, thickness * 2.0f), position + sf::Vector2f(thickness, thickness));
 	}

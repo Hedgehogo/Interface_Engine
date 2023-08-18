@@ -19,8 +19,6 @@ namespace ui {
 		
 		void init(InitInfo initInfo) override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
-		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
 		IScalable& getObject() override;

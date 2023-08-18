@@ -55,7 +55,7 @@ namespace ui {
 	}
 	
 	void BoxWithConstCenter::resize(sf::Vector2f size, sf::Vector2f position) {
-		Box::resize(size, position);
+		layout.resize(size, position);
 		if(resized) {
 			constObject->setPosition(position + (size / 2.f) - (constSize / 2.f));
 		} else {

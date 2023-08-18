@@ -26,13 +26,13 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
-		LayoutData& getLayoutData() override;
-		
-		const LayoutData& getLayoutData() const override;
-		
 		Capsule* copy() override;
 	
 	protected:
+		LayoutData& layoutGetData() override;
+		
+		const LayoutData& layoutGetData() const override;
+		
 		LayoutData layout;
 		sf::RectangleShape rectangle;
 		sf::CircleShape circle;

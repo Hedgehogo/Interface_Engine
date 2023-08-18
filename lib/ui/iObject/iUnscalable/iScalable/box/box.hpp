@@ -12,15 +12,13 @@ namespace ui {
 		
 		explicit Box(sf::Vector2f minSize, sf::Vector2f size = {0.0f, 0.0f});
 		
-		LayoutData& getLayoutData() override;
-		
-		const LayoutData& getLayoutData() const override;
-		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
-		
 		Box* copy() override = 0;
 	
 	protected:
+		LayoutData& layoutGetData() override;
+		
+		const LayoutData& layoutGetData() const override;
+		
 		LayoutData layout;
 		sf::Vector2f minimumSize;
 	};

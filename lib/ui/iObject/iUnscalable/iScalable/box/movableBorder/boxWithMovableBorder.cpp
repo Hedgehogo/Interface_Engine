@@ -138,7 +138,7 @@ namespace ui {
 	}
 	
 	void BoxWithMovableBorder::resize(sf::Vector2f size, sf::Vector2f position) {
-		Box::resize(size, position);
+		layout.resize(size, position);
 		
 		sf::Vector2f firstObjectSize;
 		sf::Vector2f secondObjectSize;

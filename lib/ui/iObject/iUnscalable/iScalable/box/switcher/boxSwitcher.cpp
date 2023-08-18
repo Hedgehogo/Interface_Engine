@@ -32,25 +32,25 @@ namespace ui {
 	}
 	
 	void BoxSwitcher::setPosition(sf::Vector2f position) {
-		ILayout::setPosition(position);
+		layout.setPosition(position);
 		inactiveObject->setPosition(position);
 		activeObject->setPosition(position);
 	}
 	
 	void BoxSwitcher::move(sf::Vector2f position) {
-		ILayout::move(position);
+		layout.move(position);
 		inactiveObject->move(position);
 		activeObject->move(position);
 	}
 	
 	void BoxSwitcher::setSize(sf::Vector2f size) {
-		ILayout::setSize(size);
+		layout.setSize(size);
 		inactiveObject->setSize(size);
 		activeObject->setSize(size);
 	}
 	
 	void BoxSwitcher::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayout::resize(size, position);
+		layout.resize(size, position);
 		inactiveObject->resize(size, position);
 		activeObject->resize(size, position);
 	}

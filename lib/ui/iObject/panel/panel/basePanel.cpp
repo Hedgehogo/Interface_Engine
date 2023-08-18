@@ -53,17 +53,17 @@ namespace ui {
 	}
 	
 	void BasePanel::setPosition(sf::Vector2f position) {
-		ILayout::resize(layout.size, position);
+		layout.setPosition(position);
 		object->setPosition(position);
 	}
 	
 	void BasePanel::move(sf::Vector2f position) {
-		ILayout::resize(layout.size, layout.position + position);
+		layout.move(position);
 		object->move(position);
 	}
 	
 	void BasePanel::setSize(sf::Vector2f size) {
-		ILayout::resize(size, layout.position);
+		layout.setSize(size);
 		object->setSize(size);
 	}
 	
@@ -101,14 +101,6 @@ namespace ui {
 		return sizing->getParentSize(object->getNormalSize());
 	}
 	
-	LayoutData& BasePanel::getLayoutData() {
-		return layout;
-	}
-	
-	const LayoutData& BasePanel::getLayoutData() const {
-		return layout;
-	}
-	
 	IScalable& BasePanel::getObject() {
 		return *object;
 	}
@@ -127,5 +119,13 @@ namespace ui {
 		if(fullDebug || oldDisplayed) {
 			object->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		}
+	}
+	
+	LayoutData& BasePanel::layoutGetData() {
+		return layout;
+	}
+	
+	const LayoutData& BasePanel::layoutGetData() const {
+		return layout;
 	}
 }

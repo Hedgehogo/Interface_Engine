@@ -4,12 +4,8 @@
 #include <_test/IObject/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 
-TEST(IObject, Inteface) {
+TEST(IObject, Interface) {
 	InitInfoData data{{100, 100}};
-	
-	// BoxPtr<IScalable::Make>&& object,
-	// AnimationManager animationManager = AnimationManager{{}},
-	// BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
 	
 	ui::Interface interface{
 		{

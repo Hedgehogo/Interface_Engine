@@ -10,6 +10,14 @@ namespace ui {
 		LayoutData();
 		
 		LayoutData(sf::Vector2f position, sf::Vector2f size);
+		
+		void setPosition(sf::Vector2f position);
+		
+		void move(sf::Vector2f position);
+		
+		void setSize(sf::Vector2f size);
+		
+		void resize(sf::Vector2f size, sf::Vector2f position);
 	};
 	
 	class ILayout : public virtual IObject {
@@ -28,20 +36,11 @@ namespace ui {
 		
 		sf::Vector2f getAreaSize() const override;
 		
-		virtual LayoutData& getLayoutData() = 0;
-		
-		virtual const LayoutData& getLayoutData() const = 0;
-		
-		sf::Vector2f& getLayoutPosition();
-		
-		sf::Vector2f& getLayoutSize();
-		
-		const sf::Vector2f& getLayoutPosition() const;
-		
-		const sf::Vector2f& getLayoutSize() const;
-		
 		bool inArea(sf::Vector2f pointPosition) override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+	protected:
+		virtual LayoutData& layoutGetData() = 0;
+		
+		virtual const LayoutData& layoutGetData() const = 0;
 	};
 }

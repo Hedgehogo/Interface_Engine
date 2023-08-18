@@ -77,14 +77,6 @@ namespace ui {
 		return max(stripNormalSize, background->getNormalSize());
 	}
 	
-	LayoutData& Bar::getLayoutData() {
-		return layout;
-	}
-	
-	const LayoutData& Bar::getLayoutData() const {
-		return layout;
-	}
-	
 	IUninteractive& Bar::getBackground() {
 		return *background;
 	}
@@ -100,6 +92,14 @@ namespace ui {
 	void Bar::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		strip->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue, hueOffset);
+	}
+	
+	LayoutData& Bar::layoutGetData() {
+		return layout;
+	}
+	
+	const LayoutData& Bar::layoutGetData() const {
+		return layout;
 	}
 	
 	bool DecodePointer<Bar>::decodePointer(const YAML::Node& node, Bar*& bar) {
