@@ -35,6 +35,10 @@ namespace ui {
 		return background->getNormalSize();
 	}
 	
+	const IScalable& BaseButton::getBackground() const {
+		return *background;
+	}
+	
 	bool BaseButton::updateInteractions(sf::Vector2f mousePosition) {
 		bool backgroundUpdate = background->updateInteractions(mousePosition);
 		return BaseInteractive::updateInteractions(mousePosition) || backgroundUpdate;

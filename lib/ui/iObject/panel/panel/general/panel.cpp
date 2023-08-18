@@ -28,6 +28,7 @@ namespace ui {
 	) :
 		object(std::move(object)),
 		hideInteraction(std::move(hideInteraction)),
+		moveInteraction(new DontMovePanelInteraction{}),
 		sizing(std::move(sizing)),
 		positioning(std::move(positioning)),
 		displayed(displayed) {

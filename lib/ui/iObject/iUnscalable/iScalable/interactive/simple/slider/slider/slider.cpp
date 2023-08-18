@@ -98,6 +98,14 @@ namespace ui {
 		return max(minSize, background->getMinSize());
 	}
 	
+	const IUninteractive& Slider::getBackground() const {
+		return *background;
+	}
+	
+	const IUninteractive& Slider::getSlider() const {
+		return *slider;
+	}
+	
 	Slider* Slider::copy() {
 		return new Slider{*this};
 	}

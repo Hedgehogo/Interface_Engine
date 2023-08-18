@@ -36,6 +36,8 @@ namespace ui {
 		
 		sf::Vector2f getMinSize() const override;
 		
+		const Panel& getPanel() const;
+		
 		ButtonWithPanel* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;

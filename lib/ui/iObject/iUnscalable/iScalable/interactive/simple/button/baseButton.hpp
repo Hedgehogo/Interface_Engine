@@ -22,6 +22,8 @@ namespace ui {
 		
 		sf::Vector2f getNormalSize() const override;
 		
+		const IScalable& getBackground() const;
+		
 		bool updateInteractions(sf::Vector2f mousePosition) override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;

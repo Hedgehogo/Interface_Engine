@@ -53,7 +53,7 @@ namespace ui {
 		BaseSlider(std::move(make.slider), std::move(make.background), make.value, BoxPtr{
 			new SliderInteraction{*this, make.key, make.division, make.wheelHorizontal, make.wheelRelativity, make.wheelSensitivity}
 		}, initInfo),
-		aspectRatio(getAspectRatio(slider->getNormalSize())),
+		aspectRatio(getAspectRatio(max(slider->getNormalSize(), {1, 1}))),
 		sliderScale(make.sliderScale) {
 	}
 	

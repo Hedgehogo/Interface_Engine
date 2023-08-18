@@ -69,6 +69,10 @@ namespace ui {
 		
 		sf::Vector2f getMinSize() const override;
 		
+		const IUninteractive& getBackground() const;
+		
+		const IUninteractive& getSlider() const;
+		
 		Slider* copy() override;
 	
 	protected:

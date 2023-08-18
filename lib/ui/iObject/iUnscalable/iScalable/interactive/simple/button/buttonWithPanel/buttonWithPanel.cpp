@@ -41,6 +41,10 @@ namespace ui {
 		return {std::max(backgroundMinSize.x, panelMinSize.x), std::max(backgroundMinSize.y, panelMinSize.y)};
 	}
 	
+	const Panel& ButtonWithPanel::getPanel() const {
+		return *panel;
+	}
+	
 	ButtonWithPanel* ButtonWithPanel::copy() {
 		return new ButtonWithPanel{*this};
 	}
