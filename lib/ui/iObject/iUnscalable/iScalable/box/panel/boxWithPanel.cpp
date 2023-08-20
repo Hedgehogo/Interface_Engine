@@ -43,6 +43,10 @@ namespace ui {
 		return *object;
 	}
 	
+	const ConstPanel& BoxWithPanel::getPanel() const {
+		return *panel;
+	}
+	
 	BoxWithPanel* BoxWithPanel::copy() {
 		return new BoxWithPanel{*this};
 	}

@@ -43,8 +43,8 @@ namespace ui {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		BoxPtr<IScalable> object;
 		BoxPtr<IUninteractive> bezel;
+		BoxPtr<IScalable> object;
 		float thickness;
 	};
 	

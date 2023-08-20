@@ -26,7 +26,7 @@ namespace ui {
 				BoxPtr<IScalable::Make>&& firstObject,
 				BoxPtr<IScalable::Make>&& secondObject,
 				BoxPtr<IUninteractive::Make>&& background,
-				float aspectRatio,
+				float aspectRatio = 1.f,
 				sf::Vector2f minSize = {}
 			);
 			
@@ -51,6 +51,12 @@ namespace ui {
 		void init(InitInfo initInfo) override;
 		
 		void setAspectRatio(float aspectRatio);
+		
+		void setPosition(sf::Vector2f position) override;
+		
+		void move(sf::Vector2f position) override;
+		
+		void setSize(sf::Vector2f size) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		

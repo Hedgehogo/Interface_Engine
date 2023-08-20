@@ -10,11 +10,11 @@ namespace ui {
 	}
 	
 	BoxWithConstBezel::BoxWithConstBezel(Make&& make, InitInfo initInfo) :
-		Box(make.minSize), object(make.object->make(initInfo)), bezel(make.bezel->make(initInfo)), thickness(make.thickness) {
+		Box(make.minSize), bezel(make.bezel->make(initInfo)), object(make.object->make(initInfo)), thickness(make.thickness) {
 	}
 	
 	BoxWithConstBezel::BoxWithConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f minSize) :
-		Box(minSize), object(std::move(object)), bezel(std::move(bezel)), thickness(thickness) {
+		Box(minSize), bezel(std::move(bezel)), object(std::move(object)), thickness(thickness) {
 	}
 	
 	void BoxWithConstBezel::init(InitInfo initInfo) {
@@ -32,7 +32,7 @@ namespace ui {
 		if(object->inArea(mousePosition)) {
 			return object->updateInteractions(mousePosition);
 		}
-		return false;
+		return bezel->updateInteractions(mousePosition);
 	}
 	
 	sf::Vector2f BoxWithConstBezel::getMinSize() const {

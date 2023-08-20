@@ -63,7 +63,9 @@ namespace ui {
 	
 	void BoxWithChangeableObjects::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout.resize(size, position);
-		objects[value->getValue()]->resize(size, position);
+		for(auto& object : objects) {
+			object->resize(size, position);
+		}
 	}
 	
 	bool BoxWithChangeableObjects::updateInteractions(sf::Vector2f mousePosition) {

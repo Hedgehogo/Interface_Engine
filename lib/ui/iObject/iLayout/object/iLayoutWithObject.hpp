@@ -10,6 +10,12 @@ namespace ui {
 			virtual ILayoutWithObject* make(InitInfo initInfo) = 0;
 		};
 		
+		void setPosition(sf::Vector2f position) override;
+		
+		void move(sf::Vector2f position) override;
+		
+		void setSize(sf::Vector2f size) override;
+		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		bool updateInteractions(sf::Vector2f mousePosition) override;

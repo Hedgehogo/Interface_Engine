@@ -11,7 +11,7 @@ namespace ui {
 	}
 	
 	BoxWithBorderVertical::Make::Make(BoxPtr<IScalable::Make>&& firstObject, BoxPtr<IScalable::Make>&& secondObject, float bound, sf::Vector2f minSize) :
-		objects(makeVector<BoxPtr<IScalable::Make> >(std::move(firstObject), std::move(secondObject))), bounds({0.f, bound, 1.f}), minSize(minSize) {
+		objects(makeVector(std::move(firstObject), std::move(secondObject))), bounds({0.f, bound, 1.f}), minSize(minSize) {
 	}
 	
 	BoxWithBorderVertical* BoxWithBorderVertical::Make::make(InitInfo initInfo) {

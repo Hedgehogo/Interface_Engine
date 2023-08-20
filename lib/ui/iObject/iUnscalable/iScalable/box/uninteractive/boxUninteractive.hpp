@@ -11,6 +11,8 @@ namespace ui {
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f minSize = {};
 			
+			Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize = {});
+			
 			BoxUninteractive* make(InitInfo initInfo) override;
 		};
 		

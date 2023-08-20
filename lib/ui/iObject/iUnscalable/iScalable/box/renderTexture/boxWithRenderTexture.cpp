@@ -79,6 +79,10 @@ namespace ui {
 		return max(object->getMinSize(), minimumSize, {1, 1});
 	}
 	
+	sf::Vector2f BoxWithRenderTexture::getNormalSize() const {
+		return max(object->getNormalSize(), minimumSize, {1, 1});
+	}
+	
 	IScalable& BoxWithRenderTexture::getObject() {
 		return *object;
 	}

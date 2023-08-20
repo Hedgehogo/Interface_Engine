@@ -5,6 +5,10 @@ namespace ui {
 		return new BoxUninteractive{std::move(*this), initInfo};
 	}
 	
+	BoxUninteractive::Make::Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize) :
+		object(std::move(object)), minSize(minSize) {
+	}
+	
 	BoxUninteractive::BoxUninteractive(Make&& make, InitInfo initInfo) :
 		Box(make.minSize), object(make.object->make(initInfo)) {
 	}

@@ -100,15 +100,15 @@ namespace ui {
 	}
 	
 	template<typename T, typename... As>
-	std::vector<T> makeVector(As&&... args) {
+	std::vector<T> makeVector(T&& arg, As&&... args) {
 		std::vector<T> result;
-		result.reserve(sizeof...(As));
-		detail::addItems<T, As...>(result, std::move(args)...);
+		result.reserve(sizeof...(As) + 1);
+		detail::addItems<T, As...>(result, std::move(arg), std::move(args)...);
 		return result;
 	}
 	
 	template<typename T, T (* f)(T)>
-	sf::Vector2<T> mapVector(sf::Vector2<T> value) {
+	sf::Vector2<T> mapVector2(sf::Vector2<T> value) {
 		return {f(value.x), f(value.y)};
 	}
 }

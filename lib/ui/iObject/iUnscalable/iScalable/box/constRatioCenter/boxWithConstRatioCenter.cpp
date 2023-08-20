@@ -75,11 +75,29 @@ namespace ui {
 		this->setPosition(layout.position);
 	}
 	
+	void BoxWithConstRatioCenter::setPosition(sf::Vector2f position) {
+		BoxWithConstRatioCenter::move(position - layout.position);
+	}
+	
+	void BoxWithConstRatioCenter::move(sf::Vector2f position) {
+		layout.move(position);
+		object->move(position);
+		background->move(position);
+		firstObject->move(position);
+		secondObject->move(position);
+	}
+	
+	void BoxWithConstRatioCenter::setSize(sf::Vector2f size) {
+		resize(size, layout.position);
+	}
+	
 	void BoxWithConstRatioCenter::draw() {
-		if(renderFirst)
+		if(renderFirst) {
 			firstDrawManager.draw();
-		if(renderSecond)
+		}
+		if(renderSecond) {
 			secondDrawManager.draw();
+		}
 	}
 	
 	void BoxWithConstRatioCenter::resize(sf::Vector2f size, sf::Vector2f position) {

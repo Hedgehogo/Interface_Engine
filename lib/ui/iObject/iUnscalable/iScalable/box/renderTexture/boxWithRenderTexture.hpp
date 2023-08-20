@@ -34,6 +34,8 @@ namespace ui {
 		
 		sf::Vector2f getMinSize() const override;
 		
+		sf::Vector2f getNormalSize() const override;
+		
 		IScalable& getObject() override;
 		
 		const IScalable& getObject() const override;

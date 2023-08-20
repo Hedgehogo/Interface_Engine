@@ -2,7 +2,7 @@
 
 namespace ui {
 	BoxScroll::Make::Make(BoxPtr<IUnscalable::Make>&& object, PSRVec2f normalObjectPosition, sf::Vector2f minSize) :
-		object(std::move(object)), normalObjectPosition(normalObjectPosition), minSize(minSize) {
+		object(std::move(object)), normalObjectPosition(std::move(normalObjectPosition)), minSize(minSize) {
 	}
 	
 	BoxScroll* BoxScroll::Make::make(InitInfo initInfo) {

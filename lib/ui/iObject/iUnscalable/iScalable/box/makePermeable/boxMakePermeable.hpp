@@ -10,6 +10,8 @@ namespace ui {
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f minSize = {};
 			
+			Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize = {});
+			
 			BoxMakePermeable* make(InitInfo initInfo) override;
 		};
 		

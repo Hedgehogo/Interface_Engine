@@ -14,6 +14,8 @@ namespace ui {
 		
 		void move(sf::Vector2f position) override;
 		
+		void setSize(sf::Vector2f size) override;
+		
 		sf::Vector2f getMinSize() const override;
 		
 		sf::Vector2f getNormalSize() const override;

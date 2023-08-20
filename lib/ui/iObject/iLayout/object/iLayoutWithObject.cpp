@@ -2,6 +2,18 @@
 #include "../../../drawable/manager/drawManager.hpp"
 
 namespace ui {
+	void ILayoutWithObject::setPosition(sf::Vector2f position) {
+		ILayout::setPosition(position);
+	}
+	
+	void ILayoutWithObject::move(sf::Vector2f position) {
+		ILayout::move(position);
+	}
+	
+	void ILayoutWithObject::setSize(sf::Vector2f size) {
+		ILayout::setSize(size);
+	}
+	
 	void ILayoutWithObject::resize(sf::Vector2f size, sf::Vector2f position) {
 		layoutGetData().resize(size, position);
 		getObject().resize(size, position);
@@ -23,4 +35,4 @@ namespace ui {
 		IObject::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		getObject().drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
-}
+	}

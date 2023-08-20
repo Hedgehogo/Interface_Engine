@@ -37,8 +37,8 @@ namespace ui {
 		BoxWithAlternativeObject* copy() override;
 		
 	protected:
-		BoxPtr<IScalable> topObject;
 		BoxPtr<IScalable> bottomObject;
+		BoxPtr<IScalable> topObject;
 	};
 	
 	template<>

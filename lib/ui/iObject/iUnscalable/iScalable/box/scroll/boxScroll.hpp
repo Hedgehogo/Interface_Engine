@@ -14,7 +14,7 @@ namespace ui {
 			PSRVec2f normalObjectPosition;
 			sf::Vector2f minSize;
 			
-			Make(BoxPtr<IUnscalable::Make>&& object, PSRVec2f normalObjectPosition, sf::Vector2f minSize);
+			Make(BoxPtr<IUnscalable::Make>&& object, PSRVec2f normalObjectPosition, sf::Vector2f minSize = {});
 			
 			BoxScroll* make(InitInfo initInfo) override;
 		};

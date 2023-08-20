@@ -66,14 +66,10 @@ namespace ui {
 						result.push_back(MapMake<T, MakeInitInfo<I> >::map(std::move(make[i]), initInfo(i)));
 					}
 				} else {
-					std::transform(
-						std::make_move_iterator(make.begin()),
-						std::make_move_iterator(make.end()),
-						result.begin(),
-						[&](auto&& item) {
-							return MapMake<T, MakeInitInfo<I> >::map(std::move(item), initInfo);
-						}
-					);
+					result.reserve(make.size());
+					for(auto& item : make) {
+						result.push_back(MapMake<T, MakeInitInfo<I> >::map(std::move(item), initInfo));
+					}
 				}
 				return result;
 			}

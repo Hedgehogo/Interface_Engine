@@ -5,6 +5,10 @@ namespace ui {
 		return new BoxMakePermeable{std::move(*this), initInfo};
 	}
 	
+	BoxMakePermeable::Make::Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize) :
+		object(std::move(object)), minSize(minSize) {
+	}
+	
 	BoxMakePermeable::BoxMakePermeable(Make&& make, InitInfo initInfo) :
 		Box(make.minSize), object(make.object->make(initInfo)) {
 	}

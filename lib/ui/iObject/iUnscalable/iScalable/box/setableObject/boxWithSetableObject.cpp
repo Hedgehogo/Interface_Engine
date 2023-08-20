@@ -30,8 +30,8 @@ namespace ui {
 				panelManagerInterceptor
 			}
 		)) {
-		drawManager.add(this->drawManager);
-		updateManager.add(this->updateManager);
+		initInfo.drawManager.add(*this);
+		initInfo.updateManager.add(*this);
 	}
 	
 	BoxWithSetableObject::BoxWithSetableObject(BoxPtr<IScalable>&& object, sf::Vector2f minSize) : Box(minSize), object(std::move(object)) {
@@ -72,6 +72,7 @@ namespace ui {
 	}
 	
 	void BoxWithSetableObject::resize(sf::Vector2f size, sf::Vector2f position) {
+		layout.resize(size, position);
 		object->resize(size, position);
 	}
 	

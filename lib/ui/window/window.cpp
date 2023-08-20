@@ -80,7 +80,7 @@ namespace ui {
 		
 		Window::reCalculateMinSize();
 		if(mode == sf::VideoMode{}) {
-			sf::Vector2u normalSize{mapVector<float, std::ceil>(this->interface.getNormalSize())};
+			sf::Vector2u normalSize{mapVector2<float, std::ceil>(this->interface.getNormalSize())};
 			sf::Vector2u size{max(sf::Vector2u(minSize), normalSize)};
 			mode = sf::VideoMode{size.x, size.y};
 		}
@@ -101,7 +101,7 @@ namespace ui {
 	}
 	
 	void Window::reCalculateMinSize() {
-		minSize = max(sf::Vector2u{mapVector<float, std::ceil>(this->interface.getMinSize())}, {1, 1});
+		minSize = max(sf::Vector2u{mapVector2<float, std::ceil>(this->interface.getMinSize())}, {1, 1});
 	}
 	
 	void Window::update() {

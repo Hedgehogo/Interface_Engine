@@ -83,6 +83,21 @@ namespace ui {
 		}
 	}
 	
+	void BoxWithConstRatio::setPosition(sf::Vector2f position) {
+		BoxWithConstRatio::move(position - layout.position);
+	}
+	
+	void BoxWithConstRatio::move(sf::Vector2f position) {
+		layout.move(position);
+		background->move(position);
+		constObject->move(position);
+		secondObject->move(position);
+	}
+	
+	void BoxWithConstRatio::setSize(sf::Vector2f size) {
+		resize(size, layout.position);
+	}
+	
 	void BoxWithConstRatio::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout.resize(size, position);
 		

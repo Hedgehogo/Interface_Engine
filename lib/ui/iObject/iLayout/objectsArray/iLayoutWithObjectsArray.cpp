@@ -12,6 +12,10 @@ namespace ui {
 		}
 	}
 	
+	void ILayoutWithObjectsArray::setSize(sf::Vector2f size) {
+		ILayout::setSize(size);
+	}
+	
 	sf::Vector2f ILayoutWithObjectsArray::getMinSize() const {
 		sf::Vector2f minSize{0, 0};
 		for(std::size_t i = 0; i < getArraySize(); ++i) {
@@ -34,4 +38,4 @@ namespace ui {
 			getObjectAt(i).drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		}
 	}
-}
+	}

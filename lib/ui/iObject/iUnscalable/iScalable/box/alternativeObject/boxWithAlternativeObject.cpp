@@ -11,11 +11,11 @@ namespace ui {
 	}
 	
 	BoxWithAlternativeObject::BoxWithAlternativeObject(Make&& make, InitInfo initInfo) :
-		Box(make.minSize), topObject(make.topObject->make(initInfo)), bottomObject(make.bottomObject->make(initInfo)) {
+		Box(make.minSize), bottomObject(make.bottomObject->make(initInfo)), topObject(make.topObject->make(initInfo)) {
 	}
 	
 	BoxWithAlternativeObject::BoxWithAlternativeObject(BoxPtr<IScalable>&& topObject, BoxPtr<IScalable>&& bottomObject, sf::Vector2f minSize) :
-		Box(minSize), topObject(std::move(topObject)), bottomObject(std::move(bottomObject)) {
+		Box(minSize), bottomObject(std::move(bottomObject)), topObject(std::move(topObject)) {
 	}
 	
 	void BoxWithAlternativeObject::init(InitInfo initInfo) {

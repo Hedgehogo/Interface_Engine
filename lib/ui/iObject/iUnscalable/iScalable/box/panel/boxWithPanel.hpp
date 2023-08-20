@@ -33,6 +33,8 @@ namespace ui {
 		
 		const IScalable& getObject() const override;
 		
+		const ConstPanel& getPanel() const;
+		
 		BoxWithPanel* copy() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;

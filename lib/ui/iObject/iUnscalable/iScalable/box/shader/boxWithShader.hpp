@@ -7,6 +7,7 @@ namespace ui {
 	class BoxWithShader : public BoxWithRenderTexture {
 	public:
 		enum Transmission {
+			none = 0,
 			texture = 1 << 0,
 			mousePosition = 1 << 1,
 			size = 1 << 2,

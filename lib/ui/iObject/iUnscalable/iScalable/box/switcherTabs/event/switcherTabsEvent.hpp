@@ -8,7 +8,7 @@ namespace ui {
 	
 	class SwitcherTabsEvent : public KeyEvent_Simple {
 	public:
-		SwitcherTabsEvent(const PISint& value, BoxSwitcherTabs* switcherTabs);
+		SwitcherTabsEvent(PISint value, BoxSwitcherTabs& switcherTabs);
 		
 		void startPressed() override;
 		
@@ -25,5 +25,3 @@ namespace ui {
 		BoxSwitcherTabs* switcherTabs;
 	};
 }
-
-#include "switcherTabsEvent.inl"
