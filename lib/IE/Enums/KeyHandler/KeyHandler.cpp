@@ -1,4 +1,4 @@
-#include "keyHandler.hpp"
+#include "KeyHandler.hpp"
 
 #include "../../sfmlEvents/mouseWheel/mouseWheel.hpp"
 

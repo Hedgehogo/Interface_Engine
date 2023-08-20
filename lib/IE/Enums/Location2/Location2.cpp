@@ -1,4 +1,4 @@
-#include "location2.hpp"
+#include "Location2.hpp"
 
 namespace ui {
 	Location getVerticalLocation(Location2 location2) {

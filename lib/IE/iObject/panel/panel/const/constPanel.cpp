@@ -1,6 +1,6 @@
 #include "constPanel.hpp"
 #include "../../manager/general/panelManager.hpp"
-#include "../../../../drawable/manager/drawManager.hpp"
+#include "../../../../IDrawable/DrawManager/DrawManager.hpp"
 
 namespace ui {
 	ConstPanel::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :

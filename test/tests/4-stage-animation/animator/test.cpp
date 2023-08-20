@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "IE/animation/animator/Animator.hpp"
+#include "IE/Animation/Animator/Animator.hpp"
 #include "../../../testsObjects/testAnimatorUnit/testAnimatorUnit.hpp"
 TEST(Animator, update) {
 	TestAnimatorUnit *test1_1 = new TestAnimatorUnit{},

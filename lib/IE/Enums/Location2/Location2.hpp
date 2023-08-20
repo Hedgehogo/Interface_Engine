@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../location/location.hpp"
+#include "../Location/Location.hpp"
 
 namespace ui {
 	enum class Location2 {

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include "../test/testsObjects/testConvertToUse/testConvertToUse.hpp"
-#include "IE/animation/variables/shared/sharedAnimationVariable.hpp"
+#include "IE/Animation/variables/shared/sharedAnimationVariable.hpp"
 #include "IE/../../test/testsObjects/testSValue/testSValue.hpp"
 
 TEST(SharedAnimationVariable, valueFromAnimation) {

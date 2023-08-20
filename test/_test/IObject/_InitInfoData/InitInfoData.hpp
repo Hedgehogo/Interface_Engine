@@ -2,7 +2,7 @@
 
 #include <SFML/Window.hpp>
 #include <_test/_imageEqual.hpp>
-#include <IE/drawable/manager/drawManager.hpp>
+#include <IE/IDrawable/DrawManager/DrawManager.hpp>
 #include <IE/updatable/manager/updateManager.hpp>
 #include <IE/interaction/manager/interactionManager.hpp>
 #include <IE/interaction/interactionStack/interactionStack.hpp>

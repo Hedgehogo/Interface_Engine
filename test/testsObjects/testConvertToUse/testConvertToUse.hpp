@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/animation/convertToUse/iConvertToUse.hpp"
+#include "IE/Animation/convertToUse/iConvertToUse.hpp"
 
 class TestConvertToUse : public ui::IConvertToUse<float>{
 public:

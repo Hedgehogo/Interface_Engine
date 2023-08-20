@@ -1,4 +1,4 @@
-#include "location.hpp"
+#include "Location.hpp"
 
 namespace ui {
 	bool Decode<Location>::decode(const YAML::Node& node, Location& location) {

@@ -1,4 +1,4 @@
-#include "drawManager.hpp"
+#include "DrawManager.hpp"
 
 namespace ui {
 	void DrawManager::add(IDrawable& drawable) {

@@ -4,7 +4,7 @@
 #include "../../iScalable.hpp"
 #include "../../../../iLayout/twoObjects/iLayoutWithTwoObjects.hpp"
 #include "../../../../../interaction/interactionStack/interactionStack.hpp"
-#include "../../../../../enums/side/side.hpp"
+#include "../../../../../Enums/Side/Side.hpp"
 
 namespace ui {
 	class BoxWithConstBorder : public Box, public ILayoutWithTwoObjects {

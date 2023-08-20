@@ -3,7 +3,7 @@
 #include "IE/iObject/iUnscalable/iScalable/box/box.hpp"
 #include "../../../../iLayout/objectsArray/iLayoutWithObjectsArray.hpp"
 #include "IE/iObject/iUnscalable/iScalable/interactive/simple/baseInteractive.hpp"
-#include "IE/enums/keyHandler/keyHandler.hpp"
+#include "IE/Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ui {
 	class BoxSwitcherTabs : public Box, public IInteractive, public IUpdatable, public ILayoutWithObjectsArray {

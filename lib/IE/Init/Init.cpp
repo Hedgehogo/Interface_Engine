@@ -1,4 +1,4 @@
-#include "init.hpp"
+#include "Init.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp"
 #include "../sizingAndPositioning/sizing/determine/determineSizing.hpp"
 #include "../sizingAndPositioning/sizing2/determine/determineSizing2.hpp"

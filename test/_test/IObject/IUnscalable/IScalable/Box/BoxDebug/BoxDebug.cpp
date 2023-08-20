@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/debug/boxDebug.hpp>
+#include <IE/debug/BoxDebug.hpp>
 #include <IE/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp>
 #include <_test/IObject/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>

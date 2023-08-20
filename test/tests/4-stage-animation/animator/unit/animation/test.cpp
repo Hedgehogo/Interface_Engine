@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "IE/animation/animator/IAnimatorUnit/animation/Animation.hpp"
+#include "IE/Animation/Animator/IAnimatorUnit/Animation/Animation.hpp"
 #include "../test/testsObjects/testAnimationVariable/testAnimationVariable.hpp"
 #include "../test/testsObjects/testChangeVariable/testChangeVariable.hpp"
 #include "../test/testsObjects/testAnimatorUnit/testAnimatorUnit.hpp"

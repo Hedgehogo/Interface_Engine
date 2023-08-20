@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../box.hpp"
-#include "../../../../../drawable/iDrawable/iDrawable.hpp"
+#include "../../../../../IDrawable/IDrawable/IDrawable.hpp"
 
 namespace ui {
 	class BoxWithView : public Box, public IDrawable {

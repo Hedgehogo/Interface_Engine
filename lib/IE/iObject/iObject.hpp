@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../drawable/manager/drawManager.hpp"
+#include "../IDrawable/DrawManager/DrawManager.hpp"
 #include "../updatable/manager/updateManager.hpp"
 #include "../interaction/interactionStack/interactionStack.hpp"
 #include "../interaction/manager/interactionManager.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
-#include "../animation/AnimationManager/AnimationManager.hpp"
+#include "../Animation/AnimationManager/AnimationManager.hpp"
 #include "../make/make.hpp"
 #include "initInfo/initInfo.hpp"
 

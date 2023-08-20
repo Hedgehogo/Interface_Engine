@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "IE/animation/IChangeVariable/strainghtLine/changeVariableByStraightLine.hpp"
+#include "IE/Animation/IChangeVariable/strainghtLine/changeVariableByStraightLine.hpp"
 
 TEST(ChangeVariableByStraightLine, operator) {
 	ui::ChangeVariableByStraightLine changeVariableByStraightLine{0.5, 6, 3};

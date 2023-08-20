@@ -2,7 +2,7 @@
 
 #include <chrono>
 #include <vector>
-#include "../animator/Animator.hpp"
+#include "../Animator/Animator.hpp"
 
 namespace ui {
 	class AnimationManager {

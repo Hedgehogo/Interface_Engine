@@ -1,5 +1,5 @@
 #include "iLayoutWithObject.hpp"
-#include "../../../drawable/manager/drawManager.hpp"
+#include "../../../IDrawable/DrawManager/DrawManager.hpp"
 
 namespace ui {
 	void ILayoutWithObject::setPosition(sf::Vector2f position) {

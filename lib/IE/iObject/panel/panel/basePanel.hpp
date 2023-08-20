@@ -11,7 +11,7 @@
 #include "../../../sizingAndPositioning/positioning2/general/positioning2.hpp"
 #include "../../../sizingAndPositioning/positioning2/internal/internalPositioning2.hpp"
 #include "../../../sizingAndPositioning/positioning2/lambda/lambdaPositioning2.hpp"
-#include "../../../enums/keyHandler/keyHandler.hpp"
+#include "../../../Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ui {
 	class BasePanel : public ILayoutWithObject, public IDrawable, public IUpdatable {

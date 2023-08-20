@@ -3,7 +3,7 @@
 #include "../onlyDrawable/onlyDrawable.hpp"
 #include "../onlyDrawable/empty/empty.hpp"
 #include "../../../../iLayout/background/iLayoutWithBackground.hpp"
-#include "../../../../../drawable/manager/drawManager.hpp"
+#include "../../../../../IDrawable/DrawManager/DrawManager.hpp"
 
 namespace ui {
 	class Bar : public OnlyDrawable, public ILayoutWithBackground {

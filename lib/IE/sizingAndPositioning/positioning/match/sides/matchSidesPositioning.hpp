@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../iPositioning.hpp"
-#include "../../../../enums/location/location.hpp"
+#include "../../../../Enums/Location/Location.hpp"
 
 namespace ui {
 	class MatchSidesPositioning : public IPositioning {

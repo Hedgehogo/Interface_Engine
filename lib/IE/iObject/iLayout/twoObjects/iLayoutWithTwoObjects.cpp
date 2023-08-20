@@ -1,5 +1,5 @@
 #include "iLayoutWithTwoObjects.hpp"
-#include "../../../drawable/manager/drawManager.hpp"
+#include "../../../IDrawable/DrawManager/DrawManager.hpp"
 
 namespace ui {
 	std::size_t ILayoutWithTwoObjects::getArraySize() const {

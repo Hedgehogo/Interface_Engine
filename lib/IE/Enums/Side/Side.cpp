@@ -1,4 +1,4 @@
-#include "side.hpp"
+#include "Side.hpp"
 
 namespace ui {
 	bool Decode<Side>::decode(const YAML::Node& node, Side& side) {

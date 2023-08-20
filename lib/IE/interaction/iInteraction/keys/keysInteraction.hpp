@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../iInteraction.hpp"
-#include "../../../enums/keyHandler/keyHandler.hpp"
+#include "../../../Enums/KeyHandler/KeyHandler.hpp"
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {

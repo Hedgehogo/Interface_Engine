@@ -2,10 +2,10 @@
 
 #include "../baseInteractive.hpp"
 #include "IE/iObject/iLayout/iLayout.hpp"
-#include "../../../../../../drawable/iDrawable/iDrawable.hpp"
+#include "../../../../../../IDrawable/IDrawable/IDrawable.hpp"
 
 #include "../../../uninteractive/uninteractive.hpp"
-#include "../../../../../../enums/keyHandler/keyHandler.hpp"
+#include "../../../../../../Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ui {
 	class Switcher : public BaseInteractive, public ILayout, public IDrawable {

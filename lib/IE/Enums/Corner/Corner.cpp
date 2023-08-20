@@ -1,4 +1,4 @@
-#include "corner.hpp"
+#include "Corner.hpp"
 
 namespace ui {
 	bool Decode<Corner>::decode(const YAML::Node& node, Corner& corner) {

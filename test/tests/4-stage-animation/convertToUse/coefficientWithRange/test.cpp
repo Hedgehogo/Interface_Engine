@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "IE/animation/convertToUse/coefficientWithRange/convertToUseCoefficientWithRange.hpp"
+#include "IE/Animation/convertToUse/coefficientWithRange/convertToUseCoefficientWithRange.hpp"
 
 TEST(ConvertToUseCoefficientWithRange, operatop){
 	ui::ConvertToUseCoefficientWithRange<float> coefficientWithRange1{0, 20, 3},

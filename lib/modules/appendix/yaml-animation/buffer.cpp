@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../../IE/animation/animator/IAnimatorUnit/IAnimatorUnit.hpp"
+#include "../../../IE/Animation/Animator/IAnimatorUnit/IAnimatorUnit.hpp"
 #include "buffer.hpp"
 
 namespace ui {

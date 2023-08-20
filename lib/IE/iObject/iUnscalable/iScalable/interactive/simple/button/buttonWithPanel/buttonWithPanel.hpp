@@ -9,7 +9,7 @@
 #include "../../../../../../panel/panel/interaction/hide/dont/dontHidePanelInteraction.hpp"
 #include "../../../../../../panel/panel/interaction/move/dont/dontMovePanelInteraction.hpp"
 #include "../../../../../../panel/panel/interaction/move/coefficient/coefficientMovePanelInteraction.hpp"
-#include "../../../../../../panel/panel/interaction/move/side/sideMovePanelInteraction.hpp"
+#include "../../../../../../panel/panel/interaction/move/Side/sideMovePanelInteraction.hpp"
 
 namespace ui {
 	class ButtonWithPanel : public BaseButton {

@@ -4,7 +4,7 @@
 #include "../../uninteractive/onlyDrawable/empty/empty.hpp"
 #include "../../../../iLayout/background/iLayoutWithBackground.hpp"
 #include "../../../../iLayout/twoObjects/iLayoutWithTwoObjects.hpp"
-#include "../../../../../enums/corner/corner.hpp"
+#include "../../../../../Enums/Corner/Corner.hpp"
 
 namespace ui {
 	class BoxWithConstRatio : public Box, public ILayoutWithBackground, public ILayoutWithTwoObjects, public IDrawable {

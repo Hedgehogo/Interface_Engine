@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/animation/animator/IAnimatorUnit/IAnimatorUnit.hpp"
+#include "IE/Animation/Animator/IAnimatorUnit/IAnimatorUnit.hpp"
 
 class TestAnimatorUnit : public ui::IAnimatorUnit{
 	struct Processed{

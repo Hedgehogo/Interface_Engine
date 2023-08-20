@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "IE/animation/variables/base/animationVariable.hpp"
+#include "IE/Animation/variables/base/animationVariable.hpp"
 #include "IE/../../test/testsObjects/testConvertToUse/testConvertToUse.hpp"
 
 TEST(AnimationVariable, get_set) {

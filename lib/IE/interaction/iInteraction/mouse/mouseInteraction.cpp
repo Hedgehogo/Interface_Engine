@@ -1,5 +1,5 @@
 #include "mouseInteraction.hpp"
-#include "../../../enums/keyHandler/keyHandler.hpp"
+#include "../../../Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ui {
 	IMouseInteraction::IMouseInteraction() {

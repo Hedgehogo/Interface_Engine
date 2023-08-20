@@ -1,5 +1,5 @@
 #pragma once
 
-#include "init/init.hpp"
+#include "Init/Init.hpp"
 #include "sfmlEvents/handleEvent/handleEvent.hpp"
 #include "window/window.hpp"

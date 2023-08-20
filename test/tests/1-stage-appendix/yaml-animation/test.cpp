@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "modules/appendix/yaml-animation/buffer.hpp"
+#include "modules/appendix/yaml-Animation/buffer.hpp"
 #include "../../../testsObjects/testAnimatorUnit/testAnimatorUnit.hpp"
 #include "../../../testsObjects/testAnimationVariable/testAnimationVariable.hpp"
 

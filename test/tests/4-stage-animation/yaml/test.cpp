@@ -10,7 +10,7 @@ TEST(Animation, yaml) {
 	ui::yamlBuilderInit();
 */
 	try {
-		Program testProgram{"../test/tests/4-stage-animation/yaml/src/test.yaml", {200, 200}};
+		Program testProgram{"../test/tests/4-stage-Animation/yaml/src/test.yaml", {200, 200}};
 	} catch (...){
 		ASSERT_TRUE(false);
 	}

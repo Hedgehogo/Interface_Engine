@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../baseWindowResizer.hpp"
-#include "IE/enums/keyHandler/keyHandler.hpp"
+#include "IE/Enums/KeyHandler/KeyHandler.hpp"
 #include <variant>
 
 namespace ui {
