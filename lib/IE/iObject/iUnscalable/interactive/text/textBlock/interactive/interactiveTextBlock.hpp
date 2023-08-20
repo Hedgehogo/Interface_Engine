@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../simple/textBlock.hpp"
-#include "../../../../../../interaction/iInteraction/iInteraction.hpp"
+#include "../../../../../../Interaction/IInteraction/IInteraction.hpp"
 
 namespace ui {
 	class InteractiveTextBlock : public TextBlock {

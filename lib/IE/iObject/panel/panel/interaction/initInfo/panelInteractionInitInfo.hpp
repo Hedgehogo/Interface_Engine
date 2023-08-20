@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics/RenderTarget.hpp>
-#include "IE/interaction/initInfo/interactionInitInfo.hpp"
+#include "IE/Interaction/InteractionInitInfo/InteractionInitInfo.hpp"
 
 namespace ui {
 	class Panel;

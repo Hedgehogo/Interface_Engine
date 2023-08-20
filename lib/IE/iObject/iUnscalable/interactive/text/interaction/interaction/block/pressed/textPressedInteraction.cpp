@@ -1,8 +1,8 @@
 #include "textPressedInteraction.hpp"
 
 #include <utility>
-#include "IE/interaction/manager/interactionManager.hpp"
-#include "IE/iObject/iUnscalable/interactive/text/interaction/event/textEvent.hpp"
+#include "IE/Interaction/InteractionManager/InteractionManager.hpp"
+#include "IE/iObject/iUnscalable/interactive/text/Interaction/event/textEvent.hpp"
 
 namespace ui {
 	TextPressedInteraction::TextPressedInteraction(BoxPtr<KeyEvent>&& event, std::vector<Key> keys, std::vector<Key> blackListKeys) : TextKeysInteraction(std::move(event), std::move(keys), std::move(blackListKeys)) {

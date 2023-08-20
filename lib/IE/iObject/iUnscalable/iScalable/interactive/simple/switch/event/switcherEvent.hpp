@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
+#include "../../../../../../../Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp"
 #include "modules/appendix/yaml-cpp/shared/value/general/sValue.hpp"
 
 namespace ui {
 	class Switcher;
 	
-	class SwitcherEvent : public KeyEvent_Simple {
+	class SwitcherEvent : public BaseKeyEvent {
 	public:
 		SwitcherEvent(PSbool value);
 		

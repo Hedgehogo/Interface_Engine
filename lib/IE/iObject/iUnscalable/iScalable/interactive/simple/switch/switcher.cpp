@@ -1,5 +1,5 @@
 #include "switcher.hpp"
-#include "../../../../../../interaction/iInteraction/oneKey/oneKeyInteraction.hpp"
+#include "../../../../../../Interaction/IInteraction/OneKeyInteraction/OneKeyInteraction.hpp"
 #include "event/switcherEvent.hpp"
 
 namespace ui {

@@ -53,7 +53,7 @@ namespace ui {
 				(*iterator)->setSelection(false);
 			}
 		}
-		KeyEvent_Simple::update(mousePosition, press);
+		BaseKeyEvent::update(mousePosition, press);
 	}
 	
 	TextSelectionEvent* TextSelectionEvent::copy() {

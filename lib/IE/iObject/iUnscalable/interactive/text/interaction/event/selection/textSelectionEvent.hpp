@@ -1,13 +1,13 @@
 #pragma once
 
-#include "IE/interaction/event/key/simple/keyEventSimple.hpp"
+#include "IE/Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp"
 #include "modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
-#include "IE/iObject/iUnscalable/interactive/text/interaction/event/textEvent.hpp"
+#include "IE/iObject/iUnscalable/interactive/text/Interaction/event/textEvent.hpp"
 
 namespace ui {
 	class BaseCharacter;
 	
-	class TextSelectionEvent : public KeyEvent_Simple, public TextEvent {
+	class TextSelectionEvent : public BaseKeyEvent, public TextEvent {
 	public:
 		TextSelectionEvent();
 		

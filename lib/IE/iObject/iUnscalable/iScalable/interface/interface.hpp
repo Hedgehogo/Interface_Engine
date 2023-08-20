@@ -4,9 +4,9 @@
 
 #include "../iScalable.hpp"
 #include "../../../panel/manager/general/panelManager.hpp"
-#include "../../../../interaction/manager/interactionManager.hpp"
-#include "../../../../interaction/interactionStack/interactionStack.hpp"
-#include "../../../../interaction/event/wheel/wheelEvent.hpp"
+#include "../../../../Interaction/InteractionManager/InteractionManager.hpp"
+#include "../../../../Interaction/InteractionStack/InteractionStack.hpp"
+#include "../../../../Interaction/IEvent/WheelEvent/WheelEvent.hpp"
 
 namespace ui {
 	class Interface : public IScalable, public IDrawable, public IUpdatable {

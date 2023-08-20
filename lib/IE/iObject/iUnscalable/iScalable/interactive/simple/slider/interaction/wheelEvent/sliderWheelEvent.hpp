@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../../../../../../interaction/event/wheel/simple/wheelEventSimple.hpp"
+#include "../../../../../../../../Interaction/IEvent/WheelEvent/BaseWheelEvent/BaseWheelEvent.hpp"
 
 namespace ui {
 	class BaseSlider;

@@ -2,7 +2,7 @@
 
 #include "../../../uninteractive/uninteractive.hpp"
 #include "../baseInteractive.hpp"
-#include "interaction/interaction/sliderInteraction.hpp"
+#include "Interaction/Interaction/sliderInteraction.hpp"
 #include "../../../../../../../modules/appendix/yaml-cpp/shared/shared.hpp"
 
 namespace ui {

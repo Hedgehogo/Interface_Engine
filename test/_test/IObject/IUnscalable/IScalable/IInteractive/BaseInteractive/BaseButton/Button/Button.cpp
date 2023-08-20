@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <IE/iObject/iUnscalable/iScalable/interactive/simple/button/general/button.hpp>
 #include <IE/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp>
-#include <IE/interaction/iInteraction/empty/emptyInteraction.hpp>
+#include <IE/Interaction/IInteraction/EmptyInteraction/EmptyInteraction.hpp>
 #include <_test/IObject/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 

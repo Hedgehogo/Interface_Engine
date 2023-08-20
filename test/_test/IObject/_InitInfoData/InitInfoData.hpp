@@ -4,8 +4,8 @@
 #include <_test/_imageEqual.hpp>
 #include <IE/IDrawable/DrawManager/DrawManager.hpp>
 #include <IE/updatable/manager/updateManager.hpp>
-#include <IE/interaction/manager/interactionManager.hpp>
-#include <IE/interaction/interactionStack/interactionStack.hpp>
+#include <IE/Interaction/InteractionManager/InteractionManager.hpp>
+#include <IE/Interaction/interactionStack/InteractionStack.hpp>
 #include <IE/iObject/panel/manager/general/panelManager.hpp>
 #include <IE/iObject/initInfo/initInfo.hpp>
 

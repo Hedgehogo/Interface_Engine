@@ -3,7 +3,7 @@
 #include "event/panelEvent.hpp"
 #include "../hide/iHidePanelInteraction.hpp"
 #include "../display/iDisplayPanelInteraction.hpp"
-#include "../../../../../interaction/iInteraction/oneKey/oneKeyInteraction.hpp"
+#include "../../../../../Interaction/IInteraction/OneKeyInteraction/OneKeyInteraction.hpp"
 
 namespace ui {
 	class ClickPanelInteraction : public OneKeyInteraction, public virtual IPanelInteraction {

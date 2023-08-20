@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IE/interaction/iInteraction/empty/emptyInteraction.hpp"
-#include "IE/iObject/iUnscalable/interactive/text/interaction/interaction/textInteraction.hpp"
+#include "IE/Interaction/IInteraction/EmptyInteraction/EmptyInteraction.hpp"
+#include "IE/iObject/iUnscalable/interactive/text/Interaction/Interaction/textInteraction.hpp"
 #include "modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../../../interaction/manager/interactionManager.hpp"
-#include "../../../../../interaction/interactionStack/interactionStack.hpp"
+#include "../../../../../Interaction/InteractionManager/InteractionManager.hpp"
+#include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 #include "../line/baseLine.hpp"
 
 using uint = unsigned;

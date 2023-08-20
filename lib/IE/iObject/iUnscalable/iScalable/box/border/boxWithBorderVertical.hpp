@@ -2,8 +2,8 @@
 
 #include "../box.hpp"
 #include "../../../../iLayout/objectsArray/iLayoutWithObjectsArray.hpp"
-#include "../../../../../interaction/interactionStack/interactionStack.hpp"
-#include "../../../../../interaction/manager/interactionManager.hpp"
+#include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
+#include "../../../../../Interaction/InteractionManager/InteractionManager.hpp"
 
 namespace ui {
 	class BoxWithBorderVertical : public Box, public ILayoutWithObjectsArray {

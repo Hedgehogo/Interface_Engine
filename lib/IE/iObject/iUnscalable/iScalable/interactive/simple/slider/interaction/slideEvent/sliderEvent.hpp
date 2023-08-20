@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../../../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
+#include "../../../../../../../../Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp"
 
 namespace ui {
 	class BaseSlider;
 	
-	class SliderEvent : public KeyEvent_Simple {
+	class SliderEvent : public BaseKeyEvent {
 	protected:
 		sf::Vector2f getMousePosition();
 		

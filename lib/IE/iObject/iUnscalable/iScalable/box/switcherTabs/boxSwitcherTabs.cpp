@@ -2,7 +2,7 @@
 
 #include "../switcher/boxSwitcher.hpp"
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
-#include "IE/interaction/iInteraction/oneKey/oneKeyInteraction.hpp"
+#include "IE/Interaction/IInteraction/OneKeyInteraction/OneKeyInteraction.hpp"
 #include "modules/appendix/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"
 #include "event/switcherTabsEvent.hpp"
 

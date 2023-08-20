@@ -3,8 +3,8 @@
 #include "../box.hpp"
 #include "../../interactive/simple/baseInteractive.hpp"
 #include "../../../../iLayout/twoObjects/iLayoutWithTwoObjects.hpp"
-#include "../../../../../interaction/iInteraction/block/pressed/pressedInteraction.hpp"
-#include "interaction/event/movableBorderEvent.hpp"
+#include "../../../../../Interaction/IInteraction/IBlockInteraction/PressedInteraction/PressedInteraction.hpp"
+#include "Interaction/event/movableBorderEvent.hpp"
 #include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 #include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 

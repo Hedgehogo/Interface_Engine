@@ -3,8 +3,8 @@
 #include "../box.hpp"
 #include "../../uninteractive/uninteractive.hpp"
 #include "../../../../iLayout/object/iLayoutWithObject.hpp"
-#include "../../../../../interaction/interactionStack/interactionStack.hpp"
-#include "../../../../../interaction/manager/interactionManager.hpp"
+#include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
+#include "../../../../../Interaction/InteractionManager/InteractionManager.hpp"
 
 namespace ui {
 	class BoxWithConstBezel : public Box, public ILayoutWithObject {

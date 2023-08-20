@@ -2,7 +2,7 @@
 
 #include <utility>
 #include "IE/iObject/iUnscalable/interactive/text/text.hpp"
-#include "IE/interaction/event/key/openUrl/openUrlEvent.hpp"
+#include "IE/Interaction/IEvent/KeyEvent/OpenUrlEvent/OpenUrlEvent.hpp"
 
 namespace ui {
 	TextKeysInteraction::TextKeysInteraction(BoxPtr<KeyEvent> event, std::vector<Key> keys, std::vector<Key> blackListKeys) :

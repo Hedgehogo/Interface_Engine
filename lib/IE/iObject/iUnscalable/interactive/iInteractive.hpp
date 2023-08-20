@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../iScalable/iScalable.hpp"
-#include "../../../interaction/interactionStack/interactionStack.hpp"
+#include "../../../Interaction/InteractionStack/InteractionStack.hpp"
 #include "initInfo/interactiveInitInfo.hpp"
 
 namespace ui {

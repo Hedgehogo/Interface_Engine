@@ -3,13 +3,13 @@
 #include "textBlock/baseTextBlock.hpp"
 #include "resizer/simple/resizer.hpp"
 #include "../../iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp"
-#include "interaction/event/selection/textSelectionEvent.hpp"
-#include "interaction/interaction/keys/textKeysInteraction.hpp"
-#include "interaction/event/copy/textCopyEvent.hpp"
-#include "interaction/interaction/empty/textEmptyInteraction.hpp"
-#include "interaction/event/addBlockInteraction/textAddBlockInteractionEvent.hpp"
-#include "interaction/interaction/block/pressed/textPressedInteraction.hpp"
-#include "interaction/interaction/selectionAndCopy/textSelectionAndCopyInteraction.hpp"
+#include "Interaction/event/selection/textSelectionEvent.hpp"
+#include "Interaction/Interaction/keys/textKeysInteraction.hpp"
+#include "Interaction/event/copy/textCopyEvent.hpp"
+#include "Interaction/Interaction/empty/textEmptyInteraction.hpp"
+#include "Interaction/event/addBlockInteraction/textAddBlockInteractionEvent.hpp"
+#include "Interaction/Interaction/block/pressed/textPressedInteraction.hpp"
+#include "Interaction/Interaction/selectionAndCopy/textSelectionAndCopyInteraction.hpp"
 
 namespace ui {
 	class Text : public IInteractive, public IDrawable, public IUpdatable {

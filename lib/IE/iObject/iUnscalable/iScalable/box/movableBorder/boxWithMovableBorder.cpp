@@ -1,5 +1,5 @@
 #include "boxWithMovableBorder.hpp"
-#include "../../../../../interaction/event/key/addInteraction/blockInteraction/addBlockInteractionEvent.hpp"
+#include "../../../../../Interaction/IEvent/KeyEvent/AddInteractionEvent/AddBlockInteractionEvent/AddBlockInteractionEvent.hpp"
 #include <algorithm>
 
 namespace ui {

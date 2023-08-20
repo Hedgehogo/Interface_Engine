@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
+#include "../../../../../../../Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp"
 
 namespace ui {
 	class BoxWithMovableBorder;
 	
-	class MovableBorderEvent : public KeyEvent_Simple {
+	class MovableBorderEvent : public BaseKeyEvent {
 	protected:
 		void startPressed() override;
 		

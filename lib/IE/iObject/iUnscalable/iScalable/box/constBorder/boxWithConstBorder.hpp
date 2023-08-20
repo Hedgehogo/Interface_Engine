@@ -3,7 +3,7 @@
 #include "../box.hpp"
 #include "../../iScalable.hpp"
 #include "../../../../iLayout/twoObjects/iLayoutWithTwoObjects.hpp"
-#include "../../../../../interaction/interactionStack/interactionStack.hpp"
+#include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 #include "../../../../../Enums/Side/Side.hpp"
 
 namespace ui {

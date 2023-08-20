@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../lib/IE/interaction/iInteraction/iInteraction.hpp"
-#include "../../../lib/IE/interaction/manager/interactionManager.hpp"
+#include "../../../lib/IE/Interaction/IInteraction/IInteraction.hpp"
+#include "../../../lib/IE/Interaction/InteractionManager/InteractionManager.hpp"
 
 
 class TestInteraction : public ui::IInteraction {

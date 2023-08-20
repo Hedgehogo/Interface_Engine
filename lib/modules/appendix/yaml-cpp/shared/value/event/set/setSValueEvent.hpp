@@ -1,11 +1,11 @@
 #pragma once
 
-#include "IE/interaction/event/key/simple/keyEventSimple.hpp"
+#include "IE/Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp"
 #include "../../iSValue.hpp"
 
 namespace ui {
 	template<typename T>
-	class SetSValueEvent : public KeyEvent_Simple {
+	class SetSValueEvent : public BaseKeyEvent {
 	protected:
 		void startPressed() override;
 		

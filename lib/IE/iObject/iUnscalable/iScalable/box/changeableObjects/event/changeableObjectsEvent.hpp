@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../boxWithChangeableObjects.hpp"
-#include "../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
+#include "../../../../../../Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp"
 
 namespace ui {
-	class ChangeableObjectsEvent : public KeyEvent_Simple {
+	class ChangeableObjectsEvent : public BaseKeyEvent {
 	public:
 		ChangeableObjectsEvent(BoxWithChangeableObjects* objects = nullptr);
 		

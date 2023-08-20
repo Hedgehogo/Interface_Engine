@@ -1,12 +1,12 @@
 #pragma once
 
-#include <IE/interaction/event/key/simple/keyEventSimple.hpp>
+#include <IE/Interaction/event/key/BaseKeyEvent/BaseKeyEvent.hpp>
 #include <modules/appendix/yaml-cpp/yaml.hpp>
 #include <string>
 #include <modules/appendix/yaml-cpp/yamlBuilder/base/baseYamlBuilder.hpp>
 
 namespace ui {
-	class ConsoleCommandEvent : public KeyEvent_Simple{
+	class ConsoleCommandEvent : public BaseKeyEvent{
 	protected:
 		std::string command;
 		

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/interaction/iInteraction/iInteraction.hpp"
+#include "IE/Interaction/IInteraction/IInteraction.hpp"
 #include "../initInfo/textInteractionInitInfo.hpp"
 
 namespace ui {

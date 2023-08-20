@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IE/iObject/iUnscalable/interactive/text/interaction/interaction/textInteraction.hpp"
-#include "IE/interaction/iInteraction/hotkey/hotkeyInteraction.hpp"
-#include "IE/iObject/iUnscalable/interactive/text/interaction/interaction/keys/textKeysInteraction.hpp"
+#include "IE/iObject/iUnscalable/interactive/text/Interaction/Interaction/textInteraction.hpp"
+#include "IE/Interaction/IInteraction/HotkeyInteraction/HotkeyInteraction.hpp"
+#include "IE/iObject/iUnscalable/interactive/text/Interaction/Interaction/keys/textKeysInteraction.hpp"
 #include "modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {

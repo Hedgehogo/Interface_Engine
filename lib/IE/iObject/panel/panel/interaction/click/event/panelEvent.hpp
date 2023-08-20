@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../../../../interaction/event/key/simple/keyEventSimple.hpp"
+#include "../../../../../../Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp"
 #include "../../initInfo/panelInteractionInitInfo.hpp"
 
 namespace ui {
@@ -8,7 +8,7 @@ namespace ui {
 	
 	class IPanelManager;
 	
-	class PanelEvent : public KeyEvent_Simple {
+	class PanelEvent : public BaseKeyEvent {
 	public:
 		PanelEvent();
 		

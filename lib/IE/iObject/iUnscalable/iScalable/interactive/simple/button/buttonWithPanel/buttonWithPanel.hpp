@@ -2,14 +2,14 @@
 
 #include "../baseButton.hpp"
 #include "../../../../../../panel/panel/general/panel.hpp"
-#include "../../../../../../panel/panel/interaction/display/pointing/pointingDisplayPanelInteraction.hpp"
-#include "../../../../../../panel/panel/interaction/display/click/clickDisplayPanelInteraction.hpp"
-#include "../../../../../../panel/panel/interaction/hide/pointing/pointingHidePanelInteraction.hpp"
-#include "../../../../../../panel/panel/interaction/hide/click/clickHidePanelInteraction.hpp"
-#include "../../../../../../panel/panel/interaction/hide/dont/dontHidePanelInteraction.hpp"
-#include "../../../../../../panel/panel/interaction/move/dont/dontMovePanelInteraction.hpp"
-#include "../../../../../../panel/panel/interaction/move/coefficient/coefficientMovePanelInteraction.hpp"
-#include "../../../../../../panel/panel/interaction/move/Side/sideMovePanelInteraction.hpp"
+#include "../../../../../../panel/panel/Interaction/display/pointing/pointingDisplayPanelInteraction.hpp"
+#include "../../../../../../panel/panel/Interaction/display/click/clickDisplayPanelInteraction.hpp"
+#include "../../../../../../panel/panel/Interaction/hide/pointing/pointingHidePanelInteraction.hpp"
+#include "../../../../../../panel/panel/Interaction/hide/click/clickHidePanelInteraction.hpp"
+#include "../../../../../../panel/panel/Interaction/hide/dont/dontHidePanelInteraction.hpp"
+#include "../../../../../../panel/panel/Interaction/move/dont/dontMovePanelInteraction.hpp"
+#include "../../../../../../panel/panel/Interaction/move/coefficient/coefficientMovePanelInteraction.hpp"
+#include "../../../../../../panel/panel/Interaction/move/Side/sideMovePanelInteraction.hpp"
 
 namespace ui {
 	class ButtonWithPanel : public BaseButton {

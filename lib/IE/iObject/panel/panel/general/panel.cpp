@@ -1,6 +1,6 @@
 #include "panel.hpp"
-#include "../interaction/hide/iHidePanelInteraction.hpp"
-#include "../interaction/move/dont/dontMovePanelInteraction.hpp"
+#include "../Interaction/hide/iHidePanelInteraction.hpp"
+#include "../Interaction/move/dont/dontMovePanelInteraction.hpp"
 
 namespace ui {
 	Panel::Make::Make(

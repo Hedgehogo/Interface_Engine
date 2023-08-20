@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/iObject/iUnscalable/interactive/text/interaction/interaction/keys/textKeysInteraction.hpp"
+#include "IE/iObject/iUnscalable/interactive/text/Interaction/Interaction/keys/textKeysInteraction.hpp"
 
 namespace ui {
 	class TextPressedInteraction : public TextKeysInteraction {

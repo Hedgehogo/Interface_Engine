@@ -2,7 +2,7 @@
 
 #include "../box.hpp"
 #include "../../../../iLayout/objectsArray/iLayoutWithObjectsArray.hpp"
-#include "../../../../../interaction/interactionStack/interactionStack.hpp"
+#include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 
 namespace ui {
 	class BoxWithBorderHorizontal : public Box, public ILayoutWithObjectsArray {

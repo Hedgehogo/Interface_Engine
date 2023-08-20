@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../../interaction/iInteraction/iInteraction.hpp"
+#include "../../../../Interaction/IInteraction/IInteraction.hpp"
 #include "initInfo/panelInteractionInitInfo.hpp"
 
 namespace ui {

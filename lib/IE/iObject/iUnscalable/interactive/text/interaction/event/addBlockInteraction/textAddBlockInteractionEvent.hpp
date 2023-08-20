@@ -1,9 +1,9 @@
 #pragma once
 
-#include "IE/iObject/iUnscalable/interactive/text/interaction/event/textEvent.hpp"
-#include "IE/interaction/event/key/addInteraction/blockInteraction/addBlockInteractionEvent.hpp"
+#include "IE/iObject/iUnscalable/interactive/text/Interaction/event/textEvent.hpp"
+#include "IE/Interaction/IEvent/KeyEvent/AddInteractionEvent/AddBlockInteractionEvent/AddBlockInteractionEvent.hpp"
 #include "modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
-#include "IE/iObject/iUnscalable/interactive/text/interaction/interaction/textInteraction.hpp"
+#include "IE/iObject/iUnscalable/interactive/text/Interaction/Interaction/textInteraction.hpp"
 
 namespace ui {
 	class TextAddBlockInteractionEvent : public TextEvent, public AddBlockInteractionEvent {

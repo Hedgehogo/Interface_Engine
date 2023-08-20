@@ -2,8 +2,8 @@
 
 #include "../IDrawable/DrawManager/DrawManager.hpp"
 #include "../updatable/manager/updateManager.hpp"
-#include "../interaction/interactionStack/interactionStack.hpp"
-#include "../interaction/manager/interactionManager.hpp"
+#include "../Interaction/InteractionStack/InteractionStack.hpp"
+#include "../Interaction/InteractionManager/InteractionManager.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../Animation/AnimationManager/AnimationManager.hpp"
 #include "../make/make.hpp"

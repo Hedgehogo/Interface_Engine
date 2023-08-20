@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IE/iObject/iUnscalable/interactive/text/interaction/interaction/hotKeys/textHotkeyInteraction.hpp"
-#include "IE/iObject/iUnscalable/interactive/text/interaction/event/addBlockInteraction/textAddBlockInteractionEvent.hpp"
+#include "IE/iObject/iUnscalable/interactive/text/Interaction/Interaction/hotKeys/textHotkeyInteraction.hpp"
+#include "IE/iObject/iUnscalable/interactive/text/Interaction/event/addBlockInteraction/textAddBlockInteractionEvent.hpp"
 #include <vector>
 
 namespace ui {

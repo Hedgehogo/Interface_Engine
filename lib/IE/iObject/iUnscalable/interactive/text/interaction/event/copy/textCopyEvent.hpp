@@ -1,11 +1,11 @@
 #pragma once
 
-#include "IE/iObject/iUnscalable/interactive/text/interaction/event/textEvent.hpp"
-#include "IE/interaction/event/key/simple/keyEventSimple.hpp"
+#include "IE/iObject/iUnscalable/interactive/text/Interaction/event/textEvent.hpp"
+#include "IE/Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp"
 #include "modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-	class TextCopyEvent : public KeyEvent_Simple, public TextEvent {
+	class TextCopyEvent : public BaseKeyEvent, public TextEvent {
 	public:
 		void startPressed() override;
 		

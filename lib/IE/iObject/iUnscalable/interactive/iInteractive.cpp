@@ -1,5 +1,5 @@
 #include "iInteractive.hpp"
-#include "../../../interaction/interactionStack/interactionStack.hpp"
+#include "../../../Interaction/InteractionStack/InteractionStack.hpp"
 
 namespace ui {
 }

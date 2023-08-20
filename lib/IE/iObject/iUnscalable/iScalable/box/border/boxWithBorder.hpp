@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../box.hpp"
-#include "../../../../../interaction/interactionStack/interactionStack.hpp"
+#include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 
 namespace ui {
 	class BoxWithBorder : public Box {
