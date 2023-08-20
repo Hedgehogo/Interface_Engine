@@ -1,5 +1,5 @@
 #pragma once
-#include "ui/animation/variables/iAnimationVariable.hpp"
+#include "IE/animation/variables/iAnimationVariable.hpp"
 #include <vector>
 
 class TestAnimationVariable : public ui::IAnimationVariable{

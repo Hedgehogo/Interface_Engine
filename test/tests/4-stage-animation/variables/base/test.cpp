@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include "ui/animation/variables/base/animationVariable.hpp"
-#include "ui/../../test/testsObjects/testConvertToUse/testConvertToUse.hpp"
+#include "IE/animation/variables/base/animationVariable.hpp"
+#include "IE/../../test/testsObjects/testConvertToUse/testConvertToUse.hpp"
 
 TEST(AnimationVariable, get_set) {
 	TestConvertToUse *testConvertToUse{new TestConvertToUse{5}};

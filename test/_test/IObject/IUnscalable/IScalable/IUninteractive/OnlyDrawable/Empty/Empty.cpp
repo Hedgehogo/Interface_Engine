@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <ui/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/empty/empty.hpp>
+#include <IE/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/empty/empty.hpp>
 #include <_test/IObject/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 

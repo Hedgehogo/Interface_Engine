@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "ui/animation/manager/animationManager.hpp"
+#include "IE/animation/manager/animationManager.hpp"
 #include "../../../testsObjects/testAnimatorUnit/testAnimatorUnit.hpp"
 
 TEST(AnimationManager, update) {

@@ -1,5 +1,5 @@
 #include "testPanel.hpp"
-#include "../../../lib/ui/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/empty/empty.hpp"
+#include "../../../lib/IE/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/empty/empty.hpp"
 
 #include "../processorTime.hpp"
 

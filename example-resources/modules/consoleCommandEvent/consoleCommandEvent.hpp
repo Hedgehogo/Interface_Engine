@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ui/interaction/event/key/simple/keyEventSimple.hpp>
+#include <IE/interaction/event/key/simple/keyEventSimple.hpp>
 #include <modules/appendix/yaml-cpp/yaml.hpp>
 #include <string>
 #include <modules/appendix/yaml-cpp/yamlBuilder/base/baseYamlBuilder.hpp>

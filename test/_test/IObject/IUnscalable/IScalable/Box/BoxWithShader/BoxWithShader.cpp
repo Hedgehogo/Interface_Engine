@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <ui/iObject/iUnscalable/iScalable/box/shader/boxWithShader.hpp>
-#include <ui/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/capsule/capsule.hpp>
+#include <IE/iObject/iUnscalable/iScalable/box/shader/boxWithShader.hpp>
+#include <IE/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/capsule/capsule.hpp>
 #include <_test/IObject/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "../test/testsObjects/testConvertToUse/testConvertToUse.hpp"
-#include "ui/animation/variables/shared/sharedAnimationVariable.hpp"
-#include "ui/../../test/testsObjects/testSValue/testSValue.hpp"
+#include "IE/animation/variables/shared/sharedAnimationVariable.hpp"
+#include "IE/../../test/testsObjects/testSValue/testSValue.hpp"
 
 TEST(SharedAnimationVariable, valueFromAnimation) {
 	TestConvertToUse *testConvertToUse{new TestConvertToUse{3}};

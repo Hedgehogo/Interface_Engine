@@ -1,7 +1,7 @@
 #pragma once
 
-#include <ui/iObject/iLayout/iLayout.hpp>
-#include <ui/iObject/iUnscalable/iScalable/uninteractive/uninteractive.hpp>
+#include <IE/iObject/iLayout/iLayout.hpp>
+#include <IE/iObject/iUnscalable/iScalable/uninteractive/uninteractive.hpp>
 
 template<typename T = ui::IUninteractive::Make>
 class TestObject : public ui::IUninteractive {

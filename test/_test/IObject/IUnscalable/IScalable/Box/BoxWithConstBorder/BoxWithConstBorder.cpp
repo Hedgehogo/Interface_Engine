@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <ui/iObject/iUnscalable/iScalable/box/constBorder/boxWithConstBorder.hpp>
-#include <ui/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp>
+#include <IE/iObject/iUnscalable/iScalable/box/constBorder/boxWithConstBorder.hpp>
+#include <IE/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp>
 #include <_test/IObject/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 

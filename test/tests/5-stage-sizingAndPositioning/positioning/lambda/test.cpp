@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <../../../../../lib/ui/sizingAndPositioning/positioning/lambda/lambdaPositioning.hpp>
+#include <../../../../../lib/IE/sizingAndPositioning/positioning/lambda/lambdaPositioning.hpp>
 
 TEST(LambdaPositioning, base) {
 	ui::LambdaPositioning lambdaPositioning{[](float, float, float, float) -> float {return 13;}};

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <gtest/gtest.h>
-#include "../../lib/ui/UI.hpp"
+#include "../../lib/IE/UI.hpp"
 
 struct Program{
     sf::RenderTexture renderTexture;

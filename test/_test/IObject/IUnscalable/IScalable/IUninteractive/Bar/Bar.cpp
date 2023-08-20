@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include <ui/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp>
-#include <ui/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/capsule/capsule.hpp>
-#include <ui/iObject/iUnscalable/iScalable/uninteractive/bar/bar.hpp>
+#include <IE/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/fullColor/fullColor.hpp>
+#include <IE/iObject/iUnscalable/iScalable/uninteractive/onlyDrawable/capsule/capsule.hpp>
+#include <IE/iObject/iUnscalable/iScalable/uninteractive/bar/bar.hpp>
 #include <_test/IObject/_InitInfoData/InitInfoData.hpp>
 
 TEST(IObject, Bar) {
