@@ -5,7 +5,7 @@
 #include "../interaction/interactionStack/interactionStack.hpp"
 #include "../interaction/manager/interactionManager.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
-#include "../animation/manager/animationManager.hpp"
+#include "../animation/AnimationManager/AnimationManager.hpp"
 #include "../make/make.hpp"
 #include "initInfo/initInfo.hpp"
 

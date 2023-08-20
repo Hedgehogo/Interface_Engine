@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/animation/changeVariable/iChangeVariable.hpp"
+#include "IE/animation/IChangeVariable/IChangeVariable.hpp"
 
 class TestChangeVariable : public ui::IChangeVariable{
 public:
