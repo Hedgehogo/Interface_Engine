@@ -1,5 +1,5 @@
 #include <iostream>
-#include "mouseWheel.hpp"
+#include "MouseWheel.hpp"
 
 namespace ui {
 	sf::Vector2f MouseWheel::delta{0, 0};

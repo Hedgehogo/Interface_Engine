@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../IDrawable/DrawManager/DrawManager.hpp"
-#include "../updatable/manager/updateManager.hpp"
+#include "../IUpdatable/UpdateManager/UpdateManager.hpp"
 #include "../Interaction/InteractionStack/InteractionStack.hpp"
 #include "../Interaction/InteractionManager/InteractionManager.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../Animation/AnimationManager/AnimationManager.hpp"
-#include "../make/make.hpp"
+#include "../Make/make.hpp"
 #include "InitInfo/InitInfo.hpp"
 
 using uint = unsigned;

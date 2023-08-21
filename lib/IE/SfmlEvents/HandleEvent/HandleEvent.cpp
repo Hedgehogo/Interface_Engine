@@ -1,6 +1,6 @@
-#include "handleEvent.hpp"
+#include "HandleEvent.hpp"
 
-#include "../mouseWheel/mouseWheel.hpp"
+#include "../MouseWheel/MouseWheel.hpp"
 #include "../../Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ui {

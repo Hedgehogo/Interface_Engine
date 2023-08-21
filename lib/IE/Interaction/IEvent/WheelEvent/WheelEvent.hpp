@@ -2,7 +2,7 @@
 
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../IEvent.hpp"
-#include "../../../sfmlEvents/mouseWheel/mouseWheel.hpp"
+#include "../../../SfmlEvents/MouseWheel/MouseWheel.hpp"
 
 namespace ui {
 	class WheelEvent : public IEvent {

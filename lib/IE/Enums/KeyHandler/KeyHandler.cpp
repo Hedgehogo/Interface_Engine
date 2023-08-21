@@ -1,6 +1,6 @@
 #include "KeyHandler.hpp"
 
-#include "../../sfmlEvents/mouseWheel/mouseWheel.hpp"
+#include "../../SfmlEvents/MouseWheel/MouseWheel.hpp"
 
 namespace ui {
 	std::vector<Key> KeyHandler::keysPressed{};

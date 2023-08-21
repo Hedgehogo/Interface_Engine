@@ -2,7 +2,7 @@
 
 #include "IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/OnlyDrawable.hpp"
 #include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
-#include "IE/updatable/iUpdatable/iUpdatable.hpp"
+#include "IE/IUpdatable/IUpdatable/IUpdatable.hpp"
 #include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {

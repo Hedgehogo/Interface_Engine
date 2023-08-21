@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "../iUpdatable/iUpdatable.hpp"
+#include "../IUpdatable/IUpdatable.hpp"
 
 namespace ui {
 	class UpdateManager : public IUpdatable {

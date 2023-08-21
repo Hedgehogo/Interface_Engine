@@ -1,4 +1,4 @@
-#include "updateManager.hpp"
+#include "UpdateManager.hpp"
 
 namespace ui {
 	std::size_t UpdateManager::size() {
