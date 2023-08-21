@@ -1,6 +1,6 @@
 #include "CloseWindowEvent.hpp"
 
-#include "IE/window/window.hpp"
+#include "IE/Window/Window.hpp"
 
 namespace ui {
 	CloseWindowEvent::CloseWindowEvent() : window{nullptr}{

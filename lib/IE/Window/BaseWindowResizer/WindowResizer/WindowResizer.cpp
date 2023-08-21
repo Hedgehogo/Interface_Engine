@@ -1,6 +1,6 @@
-#include "windowResizer.hpp"
+#include "WindowResizer.hpp"
 
-#include "../../window.hpp"
+#include "../../Window.hpp"
 
 namespace ui {
 	WindowResizer::WindowResizer(int internalBorderSize, int externalBorderSize, Key key) : internalBorderSize(internalBorderSize), externalBorderSize(externalBorderSize), key(key){

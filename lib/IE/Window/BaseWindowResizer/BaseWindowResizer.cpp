@@ -1,6 +1,6 @@
-#include "baseWindowResizer.hpp"
+#include "BaseWindowResizer.hpp"
 
-#include "../window.hpp"
+#include "../Window.hpp"
 
 namespace ui {
 	void BaseWindowResizer::setWindow(Window& window) {

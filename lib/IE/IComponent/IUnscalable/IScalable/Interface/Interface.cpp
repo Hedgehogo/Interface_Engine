@@ -2,7 +2,7 @@
 
 #include <cmath>
 #include "modules/appendix/yaml-cpp/modules/loadModules.hpp"
-#include "IE/window/window.hpp"
+#include "IE/Window/Window.hpp"
 
 namespace ui {
 	Interface::Make::Make(BoxPtr<IScalable::Make>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :

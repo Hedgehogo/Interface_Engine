@@ -1,4 +1,4 @@
-#include "window.hpp"
+#include "Window.hpp"
 #include "IE/SfmlEvents/HandleEvent/HandleEvent.hpp"
 
 namespace ui {

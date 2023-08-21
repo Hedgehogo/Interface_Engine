@@ -3,7 +3,7 @@
 #include <filesystem>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "../IComponent/IUnscalable/IScalable/Interface/Interface.hpp"
-#include "resizer/general/windowResizer.hpp"
+#include "BaseWindowResizer/WindowResizer/WindowResizer.hpp"
 
 namespace ui {
 	BaseWindowResizer* getWindowResizer();
