@@ -5,6 +5,12 @@
 namespace ui {
 	class RelativeNormalSizing : public ISizing {
 	public:
+		struct Make : public ISizing::Make {
+			RelativeNormalSizing* make(float normalSize) override;
+		};
+		
+		RelativeNormalSizing(Make&& make, float normalSize);
+		
 		RelativeNormalSizing();
 		
 		void init(float normalSize) override;

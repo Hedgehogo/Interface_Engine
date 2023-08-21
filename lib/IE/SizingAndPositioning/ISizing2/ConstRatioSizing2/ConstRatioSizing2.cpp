@@ -2,10 +2,42 @@
 #include "../../ISizing/Functions/makeSize/makeSize.hpp"
 
 namespace ui {
+	ConstRatioSizing2::Make::Make(BoxPtr<ISizing::Make>&& sizing, float ratio, bool horizontal) :
+		sizing(std::move(sizing)), ratio(ratio), horizontal(horizontal) {
+	}
+	
+	ConstRatioSizing2::Make::Make(float ratio, bool horizontal, bool relativeParent) :
+		sizing(makeSizeMake(relativeParent)), ratio(ratio), horizontal(horizontal) {
+	}
+	
+	ConstRatioSizing2::Make::Make(float constSize, float ratio, bool horizontal) :
+		sizing(new ConstSizing::Make{constSize}), ratio(ratio), horizontal(horizontal) {
+	}
+	
+	ConstRatioSizing2::Make::Make(float coefficient, float addition, float ratio, bool horizontal, bool relativeTarget) :
+		sizing(makeSizeMake(coefficient, addition, relativeTarget)), ratio(ratio), horizontal(horizontal) {
+	}
+	
+	ConstRatioSizing2::Make::Make(float targetCoefficient, float parentCoefficient, float addition, float ratio, bool horizontal) :
+		sizing(new SmartSizing::Make{targetCoefficient, parentCoefficient, addition}), ratio(ratio), horizontal(horizontal) {
+	}
+	
+	ConstRatioSizing2* ConstRatioSizing2::Make::make(Sizing2InitInfo initInfo) {
+		return new ConstRatioSizing2{std::move(*this), initInfo};
+	}
+	
+	ConstRatioSizing2::ConstRatioSizing2(Make&& make, Sizing2InitInfo initInfo) :
+		renderTarget(&initInfo.renderTarget),
+		sizing(make.sizing->make((make.horizontal ? initInfo.normalSize.x : initInfo.normalSize.y))),
+		ratio(make.ratio),
+		horizontal(make.horizontal) {
+	}
+	
 	ConstRatioSizing2::ConstRatioSizing2(BoxPtr<ISizing>&& sizing, float ratio, bool horizontal) : sizing(std::move(sizing)), ratio(ratio), horizontal(horizontal) {
 	}
 	
-	ConstRatioSizing2::ConstRatioSizing2(float ratio, bool horizontal, bool relativeParent) : sizing(makeSize(relativeParent)), ratio(ratio), horizontal(horizontal) {
+	ConstRatioSizing2::ConstRatioSizing2(float ratio, bool horizontal, bool relativeParent) :
+		sizing(BoxPtr{makeSizeMake(relativeParent)}->make(0)), ratio(ratio), horizontal(horizontal) {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float constSize, float ratio, bool horizontal) :
@@ -13,7 +45,7 @@ namespace ui {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float coefficient, float addition, float ratio, bool horizontal, bool relativeTarget) :
-		sizing(makeSize(coefficient, addition, relativeTarget)), ratio(ratio), horizontal(horizontal) {
+		sizing(BoxPtr{makeSizeMake(coefficient, addition, relativeTarget)}->make(0)), ratio(ratio), horizontal(horizontal) {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float targetCoefficient, float parentCoefficient, float addition, float ratio, bool horizontal) :

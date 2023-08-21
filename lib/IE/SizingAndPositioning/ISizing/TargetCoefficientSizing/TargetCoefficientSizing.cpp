@@ -1,6 +1,18 @@
 #include "TargetCoefficientSizing.hpp"
 
 namespace ui {
+	TargetCoefficientSizing::Make::Make(float coefficient, float addition) :
+		coefficient(coefficient), addition(addition) {
+	}
+	
+	TargetCoefficientSizing* TargetCoefficientSizing::Make::make(float normalSize) {
+		return new TargetCoefficientSizing{std::move(*this), normalSize};
+	}
+	
+	TargetCoefficientSizing::TargetCoefficientSizing(Make&& make, float) :
+		coefficient(make.coefficient), addition(make.addition) {
+	}
+	
 	TargetCoefficientSizing::TargetCoefficientSizing(float coefficient, float addition) : coefficient(coefficient), addition(addition) {
 	}
 	

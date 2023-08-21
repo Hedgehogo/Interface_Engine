@@ -1,6 +1,18 @@
 #include "ParentCoefficientSizing.hpp"
 
 namespace ui {
+	ParentCoefficientSizing::Make::Make(float coefficient, float addition) :
+		coefficient(coefficient), addition(addition) {
+	}
+	
+	ParentCoefficientSizing* ParentCoefficientSizing::Make::make(float normalSize) {
+		return new ParentCoefficientSizing{std::move(*this), normalSize};
+	}
+	
+	ParentCoefficientSizing::ParentCoefficientSizing(Make&& make, float) :
+		coefficient(make.coefficient), addition(make.addition) {
+	}
+	
 	ParentCoefficientSizing::ParentCoefficientSizing(float coefficient, float addition) : coefficient(coefficient), addition(addition) {
 	}
 	

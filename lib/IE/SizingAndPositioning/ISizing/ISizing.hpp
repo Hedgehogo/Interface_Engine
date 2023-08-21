@@ -6,6 +6,12 @@
 namespace ui {
 	class ISizing {
 	public:
+		struct Make {
+			virtual ISizing* make(float normalSize) = 0;
+			
+			virtual ~Make() = default;
+		};
+		
 		ISizing() = default;
 		
 		virtual ~ISizing() = default;

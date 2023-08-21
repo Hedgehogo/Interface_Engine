@@ -6,6 +6,26 @@
 namespace ui {
 	class ConstRatioSizing2 : public ISizing2 {
 	public:
+		struct Make : public ISizing2::Make {
+			BoxPtr<ISizing::Make> sizing;
+			float ratio;
+			bool horizontal;
+			
+			Make(BoxPtr<ISizing::Make>&& sizing, float ratio = 1.0f, bool horizontal = true);
+			
+			Make(float ratio = 1.0f, bool horizontal = true, bool relativeParent = true);
+			
+			Make(float constSize, float ratio, bool horizontal = true);
+			
+			Make(float coefficient, float addition, float ratio, bool horizontal = true, bool relativeTarget = false);
+			
+			Make(float targetCoefficient, float parentCoefficient, float addition, float ratio, bool horizontal = true);
+			
+			ConstRatioSizing2* make(Sizing2InitInfo initInfo) override;
+		};
+		
+		ConstRatioSizing2(Make&& make, Sizing2InitInfo initInfo);
+		
 		explicit ConstRatioSizing2(BoxPtr<ISizing>&& sizing, float ratio = 1.0f, bool horizontal = true);
 		
 		explicit ConstRatioSizing2(float ratio = 1.0f, bool horizontal = true, bool relativeParent = true);

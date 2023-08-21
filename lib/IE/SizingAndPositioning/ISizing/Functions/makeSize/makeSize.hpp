@@ -9,13 +9,13 @@
 #include "../../LambdaSizing/LambdaSizing.hpp"
 
 namespace ui {
-	ISizing* makeSize(bool relativeParent);
+	ISizing::Make* makeSizeMake(bool relativeParent);
 	
-	ISizing* makeSize(float constSize);
+	ISizing::Make* makeSizeMake(float constSize);
 	
-	ISizing* makeSize(float coefficient, float addition, bool relativeTarget);
+	ISizing::Make* makeSizeMake(float coefficient, float addition, bool relativeTarget);
 	
-	ISizing* makeSize(float targetCoefficient, float parentCoefficient, float addition);
+	ISizing::Make* makeSizeMake(float targetCoefficient, float parentCoefficient, float addition);
 	
-	ISizing* makeSize(LambdaSizing::FindSizeFunc findSizeFunc, LambdaSizing::MinSizeFunc minSizeFunc);
+	ISizing::Make* makeSizeMake(LambdaSizing::FindSizeFunc findSizeFunc, LambdaSizing::MinSizeFunc minSizeFunc);
 }

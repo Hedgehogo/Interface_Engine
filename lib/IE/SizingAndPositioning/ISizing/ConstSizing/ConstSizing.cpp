@@ -1,6 +1,16 @@
 #include "ConstSizing.hpp"
 
 namespace ui {
+	ConstSizing::Make::Make(float size) : size(size) {
+	}
+	
+	ConstSizing* ConstSizing::Make::make(float normalSize) {
+		return new ConstSizing{std::move(*this), normalSize};
+	}
+	
+	ConstSizing::ConstSizing(Make&& make, float) : size(make.size) {
+	}
+	
 	ConstSizing::ConstSizing(float size) : size(size) {
 	}
 	

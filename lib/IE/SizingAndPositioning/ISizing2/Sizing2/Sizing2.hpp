@@ -6,6 +6,25 @@
 namespace ui {
 	class Sizing2 : public ISizing2 {
 	public:
+		struct Make : public ISizing2::Make {
+			BoxPtr<ISizing::Make> horizontal;
+			BoxPtr<ISizing::Make> vertical;
+			
+			Make(BoxPtr<ISizing::Make>&& horizontal, BoxPtr<ISizing::Make>&& vertical);
+			
+			Make(bool relativeParent);
+			
+			Make(sf::Vector2f constSize);
+			
+			Make(sf::Vector2f coefficient, sf::Vector2f addition, bool relativeTarget = false);
+			
+			Make(sf::Vector2f targetCoefficient, sf::Vector2f parentCoefficient, sf::Vector2f addition);
+			
+			Sizing2* make(Sizing2InitInfo initInfo) override;
+		};
+		
+		Sizing2(Make&& make, Sizing2InitInfo initInfo);
+		
 		Sizing2(BoxPtr<ISizing>&& horizontal, BoxPtr<ISizing>&& vertical);
 		
 		Sizing2(bool relativeParent);

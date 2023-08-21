@@ -8,7 +8,18 @@ namespace ui {
 	public:
 		using FindSizeFunc = std::function<float(float parentSize, float targetSize, float normalSize)>;
 		using MinSizeFunc = std::function<float(float objectMinSize)>;
-	
+		
+		struct Make : public ISizing::Make {
+			FindSizeFunc findSizeFunc;
+			MinSizeFunc minSizeFunc;
+			
+			Make(FindSizeFunc findSizeFunc, MinSizeFunc minSizeFunc);
+			
+			LambdaSizing* make(float normalSize) override;
+		};
+		
+		LambdaSizing(Make&& make, float normalSize);
+		
 		explicit LambdaSizing(FindSizeFunc findSizeFunc, MinSizeFunc minSizeFunc);
 		
 		void init(float normalSize) override;

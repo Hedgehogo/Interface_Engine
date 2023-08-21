@@ -3,7 +3,7 @@
 #include "../../../../IDrawable/DrawManager/DrawManager.hpp"
 
 namespace ui {
-	ConstPanel::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :
+	ConstPanel::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2::Make> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :
 		object(std::move(object)), sizing(std::move(sizing)), positioning(std::move(positioning)), displayed(displayed) {
 	}
 	

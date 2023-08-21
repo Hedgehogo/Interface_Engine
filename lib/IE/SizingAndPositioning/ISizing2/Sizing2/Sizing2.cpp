@@ -2,27 +2,63 @@
 #include "../../ISizing/Functions/makeSize/makeSize.hpp"
 
 namespace ui {
+	Sizing2::Make::Make(BoxPtr<ISizing::Make>&& horizontal, BoxPtr<ISizing::Make>&& vertical) :
+		horizontal(std::move(horizontal)), vertical(std::move(vertical)) {
+	}
+	
+	Sizing2::Make::Make(bool relativeParent) :
+		horizontal(makeSizeMake(relativeParent)), vertical(makeSizeMake(relativeParent)) {
+	}
+	
+	Sizing2::Make::Make(sf::Vector2f constSize) :
+		horizontal(makeSizeMake(constSize.x)), vertical(makeSizeMake(constSize.y)) {
+	}
+	
+	Sizing2::Make::Make(sf::Vector2f coefficient, sf::Vector2f addition, bool relativeTarget) :
+		horizontal(makeSizeMake(coefficient.x, addition.x, relativeTarget)),
+		vertical(makeSizeMake(coefficient.y, addition.y, relativeTarget)) {
+	}
+	
+	Sizing2::Make::Make(sf::Vector2f targetCoefficient, sf::Vector2f parentCoefficient, sf::Vector2f addition) :
+		horizontal(makeSizeMake(targetCoefficient.x, parentCoefficient.x, addition.x)),
+		vertical(makeSizeMake(targetCoefficient.y, parentCoefficient.y, addition.y)) {
+	}
+	
+	Sizing2* Sizing2::Make::make(Sizing2InitInfo initInfo) {
+		return new Sizing2{std::move(*this), initInfo};
+	}
+	
+	Sizing2::Sizing2(Make&& make, Sizing2InitInfo initInfo) :
+		horizontal(make.horizontal->make(initInfo.normalSize.x)),
+		vertical(make.vertical->make(initInfo.normalSize.y)),
+		renderTarget(&initInfo.renderTarget) {
+	}
+	
 	Sizing2::Sizing2(BoxPtr<ISizing>&& horizontal, BoxPtr<ISizing>&& vertical) :
 		horizontal(std::move(horizontal)), vertical(std::move(vertical)), renderTarget(nullptr) {
 	}
 	
 	Sizing2::Sizing2(bool relativeParent) :
-		horizontal(makeSize(relativeParent)), vertical(makeSize(relativeParent)), renderTarget(nullptr) {
+		horizontal(BoxPtr{makeSizeMake(relativeParent)}->make(0)),
+		vertical(BoxPtr{makeSizeMake(relativeParent)}->make(0)),
+		renderTarget(nullptr) {
 	}
 	
 	Sizing2::Sizing2(sf::Vector2f constSize) :
-		horizontal(makeSize(constSize.x)), vertical(makeSize(constSize.y)), renderTarget(nullptr) {
+		horizontal(BoxPtr{makeSizeMake(constSize.x)}->make(0)),
+		vertical(BoxPtr{makeSizeMake(constSize.y)}->make(0)),
+		renderTarget(nullptr) {
 	}
 	
 	Sizing2::Sizing2(sf::Vector2f coefficient, sf::Vector2f addition, bool relativeTarget) :
-		horizontal(makeSize(coefficient.x, addition.x, relativeTarget)),
-		vertical(makeSize(coefficient.y, addition.y, relativeTarget)),
+		horizontal(BoxPtr{makeSizeMake(coefficient.x, addition.x, relativeTarget)}->make(0)),
+		vertical(BoxPtr{makeSizeMake(coefficient.y, addition.y, relativeTarget)}->make(0)),
 		renderTarget(nullptr) {
 	}
 	
 	Sizing2::Sizing2(sf::Vector2f targetCoefficient, sf::Vector2f parentCoefficient, sf::Vector2f addition) :
-		horizontal(makeSize(targetCoefficient.x, parentCoefficient.x, addition.x)),
-		vertical(makeSize(targetCoefficient.y, parentCoefficient.y, addition.y)),
+		horizontal(BoxPtr{makeSizeMake(targetCoefficient.x, parentCoefficient.x, addition.x)}->make(0)),
+		vertical(BoxPtr{makeSizeMake(targetCoefficient.y, parentCoefficient.y, addition.y)}->make(0)),
 		renderTarget(nullptr) {
 	}
 	

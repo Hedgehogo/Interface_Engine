@@ -5,6 +5,17 @@
 namespace ui {
 	class ParentCoefficientSizing : public ISizing {
 	public:
+		struct Make : public ISizing::Make {
+			float coefficient = 1;
+			float addition = 0;
+			
+			Make(float coefficient = 1, float addition = 0);
+			
+			ParentCoefficientSizing* make(float normalSize) override;
+		};
+		
+		ParentCoefficientSizing(Make&& make, float normalSize);
+		
 		explicit ParentCoefficientSizing(float coefficient = 1, float addition = 0);
 		
 		void init(float) override;

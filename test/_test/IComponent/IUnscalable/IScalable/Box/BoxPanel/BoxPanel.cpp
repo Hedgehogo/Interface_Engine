@@ -11,7 +11,7 @@ TEST(IObject, BoxPanel) {
 		{
 			ui::makeBoxPtr<ui::ConstPanel::Make>(
 				ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red),
-				ui::makeBoxPtr<ui::ISizing2, ui::Sizing2>(sf::Vector2f{10, 10}),
+				ui::makeBoxPtr<ui::ISizing2::Make, ui::Sizing2::Make>(sf::Vector2f{10, 10}),
 				ui::makeBoxPtr<ui::IPositioning2, ui::Positioning2>(sf::Vector2f{0.5f, 0.5f})
 			),
 			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),

@@ -5,6 +5,18 @@
 namespace ui {
 	class SmartSizing : public ISizing {
 	public:
+		struct Make : public ISizing::Make {
+			float targetCoefficient = 1;
+			float parentCoefficient = 0;
+			float addition = 0;
+			
+			Make(float targetCoefficient = 1, float parentCoefficient = 0, float addition = 0);
+			
+			SmartSizing* make(float normalSize) override;
+		};
+		
+		SmartSizing(Make&& make, float normalSize);
+		
 		explicit SmartSizing(float targetCoefficient = 1, float parentCoefficient = 0, float addition = 0);
 		
 		void init(float) override;

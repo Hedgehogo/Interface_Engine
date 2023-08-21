@@ -5,6 +5,17 @@
 namespace ui {
 	class TargetCoefficientSizing : public ISizing {
 	public:
+		struct Make : public ISizing::Make {
+			float coefficient = 1;
+			float addition = 0;
+			
+			Make(float coefficient = 1, float addition = 0);
+			
+			TargetCoefficientSizing* make(float normalSize) override;
+		};
+		
+		TargetCoefficientSizing(Make&& make, float normalSize);
+		
 		explicit TargetCoefficientSizing(float coefficient = 1, float addition = 0);
 		
 		void init(float) override;

@@ -1,10 +1,17 @@
 #pragma once
 
 #include <SFML/Graphics/RenderTarget.hpp>
+#include "Sizing2InitInfo/Sizing2InitInfo.hpp"
 
 namespace ui {
 	class ISizing2 {
 	public:
+		struct Make {
+			virtual ISizing2* make(Sizing2InitInfo initInfo) = 0;
+			
+			virtual ~Make() = default;
+		};
+		
 		virtual ~ISizing2() = default;
 		
 		virtual void init(sf::RenderTarget& renderTarget, sf::Vector2f normalSize) = 0;

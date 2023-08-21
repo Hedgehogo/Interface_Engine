@@ -1,6 +1,18 @@
 #include "SmartSizing.hpp"
 
 namespace ui {
+	SmartSizing::Make::Make(float targetCoefficient, float parentCoefficient, float addition) :
+		targetCoefficient(targetCoefficient), parentCoefficient(parentCoefficient), addition(addition) {
+	}
+	
+	SmartSizing* SmartSizing::Make::make(float normalSize) {
+		return new SmartSizing{std::move(*this), normalSize};
+	}
+	
+	SmartSizing::SmartSizing(SmartSizing::Make&& make, float) :
+		targetCoefficient(make.targetCoefficient), parentCoefficient(make.parentCoefficient), addition(make.addition) {
+	}
+	
 	SmartSizing::SmartSizing(float targetCoefficient, float parentCoefficient, float addition) :
 		targetCoefficient(targetCoefficient), parentCoefficient(parentCoefficient), addition(addition) {
 	}

@@ -1,6 +1,17 @@
 #include "RelativeParentSizing.hpp"
 
 namespace ui {
+	RelativeParentSizing::Make::Make(float addition) : addition(addition) {
+	}
+	
+	RelativeParentSizing* RelativeParentSizing::Make::make(float normalSize) {
+		return new RelativeParentSizing{std::move(*this), addition};
+	}
+	
+	RelativeParentSizing::RelativeParentSizing(Make&& make, float) :
+		addition(make.addition) {
+	}
+	
 	RelativeParentSizing::RelativeParentSizing(float addition) : addition(addition) {
 	}
 	

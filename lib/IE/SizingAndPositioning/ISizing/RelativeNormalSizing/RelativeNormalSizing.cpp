@@ -1,6 +1,14 @@
 #include "RelativeNormalSizing.hpp"
 
 namespace ui {
+	RelativeNormalSizing* RelativeNormalSizing::Make::make(float normalSize) {
+		return new RelativeNormalSizing{std::move(*this), normalSize};
+	}
+	
+	RelativeNormalSizing::RelativeNormalSizing(Make&&, float normalSize) :
+		normalSize(normalSize) {
+	}
+	
 	RelativeNormalSizing::RelativeNormalSizing() : normalSize(0) {
 	}
 	

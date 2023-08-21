@@ -7,11 +7,11 @@ namespace ui {
 	public:
 		struct Make : public BasePanel::Make {
 			BoxPtr<IScalable::Make> object;
-			BoxPtr<ISizing2> sizing;
+			BoxPtr<ISizing2::Make> sizing;
 			BoxPtr<IPositioning2> positioning;
 			bool displayed = false;
 			
-			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed = false);
+			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2::Make> sizing, BoxPtr<IPositioning2> positioning, bool displayed = false);
 			
 			ConstPanel* make(InitInfo initInfo) override;
 		};

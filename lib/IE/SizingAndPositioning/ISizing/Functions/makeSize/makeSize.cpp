@@ -3,29 +3,29 @@
 #include <utility>
 
 namespace ui {
-	ISizing* makeSize(bool relativeParent) {
+	ISizing::Make* makeSizeMake(bool relativeParent) {
 		if(!relativeParent) {
-			return new RelativeNormalSizing{};
+			return new RelativeNormalSizing::Make{};
 		}
-		return new RelativeParentSizing{};
+		return new RelativeParentSizing::Make{};
 	}
 	
-	ISizing* makeSize(float constSize) {
-		return new ConstSizing{constSize};
+	ISizing::Make* makeSizeMake(float constSize) {
+		return new ConstSizing::Make{constSize};
 	}
 	
-	ISizing* makeSize(float coefficient, float addition, bool relativeTarget) {
+	ISizing::Make* makeSizeMake(float coefficient, float addition, bool relativeTarget) {
 		if(!relativeTarget) {
-			return new ParentCoefficientSizing{coefficient, addition};
+			return new ParentCoefficientSizing::Make{coefficient, addition};
 		}
-		return new TargetCoefficientSizing{coefficient, addition};
+		return new TargetCoefficientSizing::Make{coefficient, addition};
 	}
 	
-	ISizing* makeSize(float targetCoefficient, float parentCoefficient, float addition) {
-		return new SmartSizing{targetCoefficient, parentCoefficient, addition};
+	ISizing::Make* makeSizeMake(float targetCoefficient, float parentCoefficient, float addition) {
+		return new SmartSizing::Make{targetCoefficient, parentCoefficient, addition};
 	}
 	
-	ISizing* makeSize(LambdaSizing::FindSizeFunc findSizeFunc, LambdaSizing::MinSizeFunc minSizeFunc) {
-		return new LambdaSizing{std::move(findSizeFunc), std::move(minSizeFunc)};
+	ISizing::Make* makeSizeMake(LambdaSizing::FindSizeFunc findSizeFunc, LambdaSizing::MinSizeFunc minSizeFunc) {
+		return new LambdaSizing::Make{std::move(findSizeFunc), std::move(minSizeFunc)};
 	}
 }

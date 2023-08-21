@@ -20,7 +20,14 @@ namespace ui {
 			BasePanel* make(InitInfo initInfo) override = 0;
 		};
 		
-		BasePanel(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed, InitInfo objectInitInfo, InitInfo initInfo);
+		BasePanel(
+			BoxPtr<IScalable::Make>&& object,
+			BoxPtr<ISizing2::Make> sizing,
+			BoxPtr<IPositioning2> positioning,
+			bool displayed,
+			InitInfo objectInitInfo,
+			InitInfo initInfo
+		);
 		
 		BasePanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed = false);
 		

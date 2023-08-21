@@ -3,6 +3,18 @@
 #include <utility>
 
 namespace ui {
+	LambdaSizing::Make::Make(LambdaSizing::FindSizeFunc findSizeFunc, LambdaSizing::MinSizeFunc minSizeFunc) :
+		findSizeFunc(std::move(findSizeFunc)), minSizeFunc(std::move(minSizeFunc)){
+	}
+	
+	LambdaSizing* LambdaSizing::Make::make(float normalSize) {
+		return new LambdaSizing{std::move(*this), normalSize};
+	}
+	
+	LambdaSizing::LambdaSizing(Make&& make, float normalSize) :
+		findSizeFunc(std::move(make.findSizeFunc)), minSizeFunc(std::move(make.minSizeFunc)), normalSize(normalSize) {
+	}
+	
 	LambdaSizing::LambdaSizing(FindSizeFunc findSizeFunc, MinSizeFunc minSizeFunc) :
 		findSizeFunc(std::move(findSizeFunc)), minSizeFunc(std::move(minSizeFunc)), normalSize() {
 	}
