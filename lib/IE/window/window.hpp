@@ -2,7 +2,7 @@
 
 #include <filesystem>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "../iObject/iUnscalable/iScalable/interface/interface.hpp"
+#include "../IComponent/IUnscalable/IScalable/Interface/Interface.hpp"
 #include "resizer/general/windowResizer.hpp"
 
 namespace ui {

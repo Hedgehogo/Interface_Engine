@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../iObject/iUnscalable/iScalable/box/box.hpp"
-#include "../iObject/iLayout/object/iLayoutWithObject.hpp"
+#include "../IComponent/IUnscalable/IScalable/Box/Box.hpp"
+#include "../IComponent/ILayout/ILayoutObject/ILayoutObject.hpp"
 
 namespace ui {
-	class BoxDebug : public Box, public ILayoutWithObject, public IDrawable {
+	class BoxDebug : public Box, public ILayoutObject, public IDrawable {
 	public:
-		struct Make : public Box::Make, public ILayoutWithObject::Make {
+		struct Make : public Box::Make, public ILayoutObject::Make {
 			BoxPtr<IScalable::Make> object;
 			
 			Make(BoxPtr<IScalable::Make>&& object);

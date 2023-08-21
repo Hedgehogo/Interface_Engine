@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics/RenderTarget.hpp>
-#include "IE/iObject/initInfo/initInfo.hpp"
+#include "IE/IComponent/InitInfo/InitInfo.hpp"
 
 namespace ui {
 	struct InteractionInitInfo {

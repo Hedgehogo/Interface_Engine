@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../lib/IE/iObject/panel/panel/basePanel.hpp"
+#include "../../../lib/IE/IComponent/Panel/BasePanel/BasePanel.hpp"
 #include "../../../lib/IE/sizingAndPositioning/sizing/const/constSizing.hpp"
 #include <ctime>
 

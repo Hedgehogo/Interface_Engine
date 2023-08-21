@@ -3,7 +3,7 @@
 #include "../yaml.hpp"
 
 namespace ui {
-	class IObject;
+	class IComponent;
 	
 	class ObjectBuffer {
 	public:

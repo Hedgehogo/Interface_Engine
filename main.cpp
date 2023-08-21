@@ -33,8 +33,8 @@ int main() {
 	auto b_value{std::make_shared<ui::Sbool>(false)};
 	ui::Window window{
 		ui::Interface::Make{
-			makeBoxPtr<ui::IScalable::Make, ui::BoxWithConstBorder::Make>(
-				makeBoxPtr<ui::IScalable::Make, ui::BoxWithConstBorder::Make>(
+			makeBoxPtr<ui::IScalable::Make, ui::BoxConstBorder::Make>(
+				makeBoxPtr<ui::IScalable::Make, ui::BoxConstBorder::Make>(
 					makeBoxPtr<ui::IScalable::Make, ui::Switcher::Make>(
 						makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Yellow),
 						makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Blue),
@@ -47,7 +47,7 @@ int main() {
 					),
 					20.f, ui::Side::up
 				),
-				makeBoxPtr<ui::IScalable::Make, ui::BoxSwitcher::Make>(
+				makeBoxPtr<ui::IScalable::Make, ui::BoxSwitch::Make>(
 					makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Yellow),
 					makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Blue),
 					b_value
