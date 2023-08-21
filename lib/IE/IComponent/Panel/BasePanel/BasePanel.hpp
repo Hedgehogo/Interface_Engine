@@ -1,16 +1,16 @@
 #pragma once
 
 #include "../../ILayout/ILayoutObject/ILayoutObject.hpp"
-#include "../../../sizingAndPositioning/sizing/make/makeSize.hpp"
-#include "../../../sizingAndPositioning/positioning/make/makePositioning.hpp"
-#include "../../../sizingAndPositioning/sizing2/iSizing2.hpp"
-#include "../../../sizingAndPositioning/sizing2/general/sizing2.hpp"
-#include "../../../sizingAndPositioning/sizing2/constRatio/constRatioSizing2.hpp"
-#include "../../../sizingAndPositioning/sizing2/lambda/lambdaSizing2.hpp"
-#include "../../../sizingAndPositioning/positioning2/iPositioning2.hpp"
-#include "../../../sizingAndPositioning/positioning2/general/positioning2.hpp"
-#include "../../../sizingAndPositioning/positioning2/internal/internalPositioning2.hpp"
-#include "../../../sizingAndPositioning/positioning2/lambda/lambdaPositioning2.hpp"
+#include "../../../SizingAndPositioning/IPositioning/Functions/makePositioning/makePositioning.hpp"
+#include "../../../SizingAndPositioning/ISizing/Functions/makeSize/makeSize.hpp"
+#include "../../../SizingAndPositioning/ISizing2/ISizing2.hpp"
+#include "../../../SizingAndPositioning/ISizing2/Sizing2/Sizing2.hpp"
+#include "../../../SizingAndPositioning/ISizing2/ConstRatioSizing2/ConstRatioSizing2.hpp"
+#include "../../../SizingAndPositioning/ISizing2/LambdaSizing2/LambdaSizing2.hpp"
+#include "../../../SizingAndPositioning/IPositioning2/IPositioning2.hpp"
+#include "../../../SizingAndPositioning/IPositioning2/Positioning2/Positioning2.hpp"
+#include "../../../SizingAndPositioning/IPositioning2/InternalPositioning2/InternalPositioning2.hpp"
+#include "../../../SizingAndPositioning/IPositioning2/LambdaPositioning2/LambdaPositioning2.hpp"
 #include "../../../Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ui {

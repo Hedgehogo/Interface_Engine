@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <../../../../../lib/IE/sizingAndPositioning/positioning/internal/parent/internalPositioning.hpp>
+#include <../../../../../lib/IE/SizingAndPositioning/positioning/internal/parent/internalPositioning.hpp>
 
 TEST(InternalPositioning, base) {
 	{

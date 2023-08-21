@@ -4,7 +4,7 @@
 #include "IE/IComponent/ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 
 namespace ui {
-	class BoxWithConstCenter : public Box, public ILayoutTwoObjects {
+	class BoxConstCenter : public Box, public ILayoutTwoObjects {
 	public:
 		struct Make : public Box::Make, public ILayoutTwoObjects::Make {
 			BoxPtr<IScalable::Make> constObject;
@@ -14,12 +14,12 @@ namespace ui {
 			
 			Make(BoxPtr<IScalable::Make>&& constObject, BoxPtr<IScalable::Make>&& background, sf::Vector2f constSize, sf::Vector2f minSize = {});
 			
-			BoxWithConstCenter* make(InitInfo initInfo) override;
+			BoxConstCenter* make(InitInfo initInfo) override;
 		};
 		
-		BoxWithConstCenter(Make&& make, InitInfo initInfo);
+		BoxConstCenter(Make&& make, InitInfo initInfo);
 		
-		BoxWithConstCenter(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& background, const sf::Vector2f& constSize, const sf::Vector2f& minSize = {});
+		BoxConstCenter(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& background, const sf::Vector2f& constSize, const sf::Vector2f& minSize = {});
 		
 		void init(InitInfo initInfo) override;
 		
@@ -45,7 +45,7 @@ namespace ui {
 		
 		bool updateInteractions(sf::Vector2f) override;
 		
-		BoxWithConstCenter* copy() override;
+		BoxConstCenter* copy() override;
 	
 	protected:
 		BoxPtr<IScalable> constObject;
@@ -55,7 +55,7 @@ namespace ui {
 	};
 	
 	template<>
-	struct DecodePointer<BoxWithConstCenter> {
-		static bool decodePointer(const YAML::Node& node, BoxWithConstCenter*& boxWithConstCenter);
+	struct DecodePointer<BoxConstCenter> {
+		static bool decodePointer(const YAML::Node& node, BoxConstCenter*& boxWithConstCenter);
 	};
 }

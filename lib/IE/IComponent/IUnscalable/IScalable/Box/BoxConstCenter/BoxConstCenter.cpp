@@ -1,28 +1,28 @@
 #include "BoxConstCenter.hpp"
 
 namespace ui {
-	BoxWithConstCenter::Make::Make(BoxPtr<IScalable::Make>&& constObject, BoxPtr<IScalable::Make>&& background, sf::Vector2f constSize, sf::Vector2f minSize) :
+	BoxConstCenter::Make::Make(BoxPtr<IScalable::Make>&& constObject, BoxPtr<IScalable::Make>&& background, sf::Vector2f constSize, sf::Vector2f minSize) :
 		constObject(std::move(constObject)), background(std::move(background)), constSize(constSize), minSize(minSize) {
 	}
 	
-	BoxWithConstCenter* BoxWithConstCenter::Make::make(InitInfo initInfo) {
-		return new BoxWithConstCenter{std::move(*this), initInfo};
+	BoxConstCenter* BoxConstCenter::Make::make(InitInfo initInfo) {
+		return new BoxConstCenter{std::move(*this), initInfo};
 	}
 	
-	BoxWithConstCenter::BoxWithConstCenter(Make&& make, InitInfo initInfo) :
+	BoxConstCenter::BoxConstCenter(Make&& make, InitInfo initInfo) :
 		Box(make.minSize), constObject(make.constObject->make(initInfo)), background(make.background->make(initInfo)), constSize(make.constSize) {
 	}
 	
-	BoxWithConstCenter::BoxWithConstCenter(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& background, const sf::Vector2f& constSize, const sf::Vector2f& minSize) :
+	BoxConstCenter::BoxConstCenter(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& background, const sf::Vector2f& constSize, const sf::Vector2f& minSize) :
 		Box(minSize), constObject(std::move(constObject)), background(std::move(background)), constSize(constSize) {
 	}
 	
-	void BoxWithConstCenter::init(InitInfo initInfo) {
+	void BoxConstCenter::init(InitInfo initInfo) {
 		constObject->init(initInfo);
 		background->init(initInfo);
 	}
 	
-	void BoxWithConstCenter::setPosition(sf::Vector2f position) {
+	void BoxConstCenter::setPosition(sf::Vector2f position) {
 		Box::setPosition(position);
 		if(resized) {
 			constObject->move(constSize);
@@ -34,7 +34,7 @@ namespace ui {
 		background->setPosition(position);
 	}
 	
-	void BoxWithConstCenter::move(sf::Vector2f position) {
+	void BoxConstCenter::move(sf::Vector2f position) {
 		Box::move(position);
 		if(resized) {
 			constObject->move(constSize);
@@ -45,7 +45,7 @@ namespace ui {
 		background->move(position);
 	}
 	
-	void BoxWithConstCenter::setSize(sf::Vector2f size) {
+	void BoxConstCenter::setSize(sf::Vector2f size) {
 		Box::setSize(size);
 		if(!resized) {
 			resized = true;
@@ -54,7 +54,7 @@ namespace ui {
 		background->setSize(size);
 	}
 	
-	void BoxWithConstCenter::resize(sf::Vector2f size, sf::Vector2f position) {
+	void BoxConstCenter::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout.resize(size, position);
 		if(resized) {
 			constObject->setPosition(position + (size / 2.f) - (constSize / 2.f));
@@ -65,40 +65,40 @@ namespace ui {
 		background->resize(size, position);
 	}
 	
-	sf::Vector2f BoxWithConstCenter::getMinSize() const {
+	sf::Vector2f BoxConstCenter::getMinSize() const {
 		return max(ILayoutTwoObjects::getMinSize(), constSize);
 	}
 	
-	sf::Vector2f BoxWithConstCenter::getNormalSize() const {
+	sf::Vector2f BoxConstCenter::getNormalSize() const {
 		return max(ILayoutTwoObjects::getNormalSize(), constSize);
 	}
 	
-	IScalable& BoxWithConstCenter::getFirstObject() {
+	IScalable& BoxConstCenter::getFirstObject() {
 		return *constObject;
 	}
 	
-	const IScalable& BoxWithConstCenter::getFirstObject() const {
+	const IScalable& BoxConstCenter::getFirstObject() const {
 		return *constObject;
 	}
 	
-	IScalable& BoxWithConstCenter::getSecondObject() {
+	IScalable& BoxConstCenter::getSecondObject() {
 		return *background;
 	}
 	
-	const IScalable& BoxWithConstCenter::getSecondObject() const {
+	const IScalable& BoxConstCenter::getSecondObject() const {
 		return *background;
 	}
 	
-	bool BoxWithConstCenter::updateInteractions(sf::Vector2f) {
+	bool BoxConstCenter::updateInteractions(sf::Vector2f) {
 		return background->in(layout.position) ? background->updateInteractions(layout.position) : constObject->updateInteractions(layout.position);
 	}
 	
-	BoxWithConstCenter* BoxWithConstCenter::copy() {
-		return new BoxWithConstCenter{*this};
+	BoxConstCenter* BoxConstCenter::copy() {
+		return new BoxConstCenter{*this};
 	}
 	
-	bool DecodePointer<BoxWithConstCenter>::decodePointer(const YAML::Node& node, BoxWithConstCenter*& boxWithConstCenter) {
-		boxWithConstCenter = new BoxWithConstCenter{
+	bool DecodePointer<BoxConstCenter>::decodePointer(const YAML::Node& node, BoxConstCenter*& boxWithConstCenter) {
+		boxWithConstCenter = new BoxConstCenter{
 			node["const-object"].as<BoxPtr<IScalable> >(),
 			node["background"].as<BoxPtr<IScalable> >(),
 			node["const-size"].as<sf::Vector2f>(),

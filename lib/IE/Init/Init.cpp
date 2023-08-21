@@ -1,9 +1,9 @@
 #include "Init.hpp"
 #include "../../modules/appendix/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp"
-#include "../sizingAndPositioning/sizing/determine/determineSizing.hpp"
-#include "../sizingAndPositioning/sizing2/determine/determineSizing2.hpp"
-#include "../sizingAndPositioning/positioning/determine/determinePositioning.hpp"
-#include "../sizingAndPositioning/positioning2/determine/determinePositioning2.hpp"
+#include "../SizingAndPositioning/ISizing/Functions/determineSizing/determineSizing.hpp"
+#include "../SizingAndPositioning/ISizing2/Functions/determineSizing2/determineSizing2.hpp"
+#include "../SizingAndPositioning/IPositioning/Functions/determinePositioning/determinePositioning.hpp"
+#include "../SizingAndPositioning/IPositioning2/Functions/determinePositioning2/determinePositioning2.hpp"
 #include "modules/appendix/yaml-cpp/modules/loadModules.hpp"
 #include "config.h"
 
@@ -14,28 +14,28 @@
 #endif
 
 namespace ui {
-	void sfloatBuilderInit(){
-		inherit<ISfloat, Sfloat>({"Sfloat"});
-		inherit<ISfloat, ISCoefficientValue>({"ISCoefficientValue"});
+	void yamlBuilderInitSfloat() {
+		inherit<ISfloat, Sfloat>({"Float"});
+		inherit<ISfloat, ISCoefficientValue>();
 		addBase<SCoefficientValue, Sfloat, ISCoefficientValue>(std::vector<std::string>{"SCoefficientValue"});
 		
-		inherit<Sfloat, SRfloat>({"SRfloat"});
-		inherit<SRfloat, SCRfloat>({"SCRfloat", "SCRf"});
-		inherit<Sfloat, SConvertToFloat<int>>({"SConvertIntToFloat", "SConvertIToF", "SCIToF", "SCITF"});
+		inherit<Sfloat, SRfloat>({"RFloat"});
+		inherit<SRfloat, SCRfloat>({"CRFloat"});
+		inherit<Sfloat, SConvertToFloat<int>>({"CIntToFloat"});
 		
-		inherit<ISVector2, SVec2f>({"SVec2f"});
-		inherit<ISVector2, SRVec2f>({"SRVec2f"});
+		inherit<ISVector2, SVec2f>({"Vec2F"});
+		inherit<ISVector2, SRVec2f>({"RVec2F"});
 	}
 	
-	void sintBuilderInit(){
-		inherit<ISint, Sint>({"Sint"});
+	void yamlBuilderInitSint(){
+		inherit<ISint, Sint>({"Int"});
 		
-		inherit<Sint, SRint>({"SRint"});
-		inherit<SRint, SCRint>({"SCRfloat", "SCRf"});
-		inherit<ISint, SConvertToInt<float>>({"SConvertFloatToInt", "SConvertFToI", "SCFToI", "SCFTI"});
+		inherit<Sint, SRint>({"RInt"});
+		inherit<SRint, SCRint>({"CRFloat"});
+		inherit<ISint, SConvertToInt<float>>({"CFloatToInt"});
 		
-		inherit<ISVector2, SVec2i>({"SVec2i"});
-		inherit<ISVector2, SRVec2i>({"SRVec2i"});
+		inherit<ISVector2, SVec2i>({"Vec2I"});
+		inherit<ISVector2, SRVec2i>({"RVec2I"});
 	}
 	
 	void init(int argc, char *argv[], std::filesystem::path modulesList) {
@@ -47,85 +47,84 @@ namespace ui {
 	}
 	
 	void yamlBuilderInit() {
-		sintBuilderInit();
-		sfloatBuilderInit();
+		yamlBuilderInitSint();
+		yamlBuilderInitSfloat();
 		
-		inherit<ISizing, ConstSizing>({"CS"});
-		inherit<ISizing, RelativeNormalSizing>({"RNormalSizing", "RNS"});
-		inherit<ISizing, RelativeParentSizing>({"RParentSizing", "RPS"});
-		inherit<ISizing, ParentCoefficientSizing>({"ParentCSizing", "PCS"});
-		inherit<ISizing, TargetCoefficientSizing>({"TargetCSizing", "TCS"});
-		inherit<ISizing, SmartSizing>({"SS"});
+		inherit<ISizing, ConstSizing>();
+		inherit<ISizing, RelativeNormalSizing>();
+		inherit<ISizing, RelativeParentSizing>();
+		inherit<ISizing, ParentCoefficientSizing>();
+		inherit<ISizing, TargetCoefficientSizing>();
+		inherit<ISizing, SmartSizing>();
 		
-		inherit<ISizing2, Sizing2>({"S2"});
-		inherit<ISizing2, ConstRatioSizing2>({"CRatioS2", "CRS2"});
+		inherit<ISizing2, Sizing2>();
+		inherit<ISizing2, ConstRatioSizing2>();
 		
-		inherit<IPositioning, InternalPositioning>({"IPos", "IP"});
-		inherit<IPositioning, InternalTargetPositioning>({"ITargetPos", "ITP"});
-		inherit<IPositioning, MatchPositioning>({"MPos", "MP"});
-		inherit<IPositioning, MatchTargetPositioning>({"MTargetPos", "MTP"});
-		inherit<IPositioning, MatchSidesPositioning>({"MSidesPos", "MSP"});
+		inherit<IPositioning, InternalPositioning>({"InternalPos"});
+		inherit<IPositioning, InternalTargetPositioning>({"InternalTargetPos"});
+		inherit<IPositioning, MatchPositioning>({"MatchPos"});
+		inherit<IPositioning, MatchTargetPositioning>({"MatchTargetPos"});
+		inherit<IPositioning, MatchSidesPositioning>({"MatchSidesPos"});
 		
-		inherit<IPositioning2, Positioning2>({"Pos2", "P2"});
-		inherit<IPositioning2, InternalPositioning2>({"InternalPos2", "IP2"});
+		inherit<IPositioning2, Positioning2>({"Pos2"});
+		inherit<IPositioning2, InternalPositioning2>({"InternalPos2"});
 		
-		inherit<BaseLine, Underline>({"U"});
-		inherit<BaseLine, StrikeThrough>({"ST"});
+		inherit<BaseLine, Underline>();
+		inherit<BaseLine, StrikeThrough>();
 		
-		inherit<BaseTextBlock, TextBlock>({"TB"});
-		inherit<BaseTextBlock, InteractiveTextBlock>({"ITB"});
-		inherit<BaseTextBlock, ObjectTextBlock>({"OTB"});
+		inherit<BaseTextBlock, TextBlock>();
+		inherit<BaseTextBlock, InteractiveTextBlock>();
+		inherit<BaseTextBlock, ObjectTextBlock>();
 		
-		inherit<BaseResizer, Resizer>({"R"});
+		inherit<BaseResizer, Resizer>();
 		
-		inherit<TextEvent, TextCopyEvent>({"TCE"});
-		inherit<TextEvent, TextSelectionEvent>({"TSE"});
-		inherit<TextEvent, TextAddBlockInteractionEvent>({"TABIE"});
+		inherit<TextEvent, TextCopyEvent>({"TextCopyE"});
+		inherit<TextEvent, TextSelectionEvent>({"TextSelectionE"});
+		inherit<TextEvent, TextAddBlockInteractionEvent>({"TextAddBlockIE"});
 		inherit<KeyEvent, TextEvent>();
-		inherit<KeyEvent, SwitchTabsEvent>({"COE", "ChangeObjectE"});
-		inherit<KeyEvent, WhileSwitchTabsEvent>({"WhileChangingOE", "WCO"});
-		inherit<KeyEvent, OpenUrlEvent>({"UrlE", "Url", "OUE"});
-		inherit<KeyEvent, CloseWindowEvent>({"CloseWindowE", "CWE"});
-		inherit<KeyEvent, SwitcherEvent>({"SwitcherEvent", "Switcher", "SE"});
-		inherit<KeyEvent, SetSintEvent>({"SSintE", "SSiE"});
-		inherit<KeyEvent, SetSfloatEvent>({"SSfloatE", "SSfE"});
+		inherit<KeyEvent, SwitchTabsEvent>({"SwitchTabsE"});
+		inherit<KeyEvent, WhileSwitchTabsEvent>({"WhileSwitchTabsE"});
+		inherit<KeyEvent, OpenUrlEvent>({"OpenUrlE"});
+		inherit<KeyEvent, CloseWindowEvent>({"CloseWindowE"});
+		inherit<KeyEvent, SwitcherEvent>({"SwitcherE", });
+		inherit<KeyEvent, SetSintEvent>({"SetSIntE"});
+		inherit<KeyEvent, SetSfloatEvent>({"SetSFloatE"});
 		
-		inherit<IHidePanelInteraction, DontHidePanelInteraction>({"DontHidePI", "DontHPI", "DHPI"});
-		inherit<IHidePanelInteraction, ClickHidePanelInteraction>({"ClickHidePI", "ClickHPI", "CHPI"});
-		inherit<IHidePanelInteraction, PointingHidePanelInteraction>({"PointingHidePI", "PointingHPI", "PHPI"});
+		inherit<IHidePanelInteraction, DontHidePanelInteraction>({"DontHidePI"});
+		inherit<IHidePanelInteraction, ClickHidePanelInteraction>({"ClickHidePI"});
+		inherit<IHidePanelInteraction, PointingHidePanelInteraction>({"PointingHidePI"});
 		inherit<IPanelInteraction, IHidePanelInteraction>();
-		inherit<IDisplayPanelInteraction, ClickDisplayPanelInteraction>({"ClickDisplayPI", "ClickDPI", "CDPI"});
-		inherit<IDisplayPanelInteraction, PointingDisplayPanelInteraction>({"PointingDisplayPI", "PointingDPI", "PDPI"});
+		inherit<IDisplayPanelInteraction, ClickDisplayPanelInteraction>({"ClickDisplayPI"});
+		inherit<IDisplayPanelInteraction, PointingDisplayPanelInteraction>({"PointingDisplayPI"});
 		inherit<IPanelInteraction, IDisplayPanelInteraction>();
-		inherit<IMovePanelInteraction, CoefficientMovePanelInteraction>({"CoefficientMovePI", "CoefficientMPI", "CMPI"});
-		inherit<IMovePanelInteraction, DontMovePanelInteraction>({"DontMovePI", "DontMPI", "DMPI"});
-		inherit<IMovePanelInteraction, SideMovePanelInteraction>({"SideMovePI", "SideMPI", "SMPI"});
+		inherit<IMovePanelInteraction, CoefficientMovePanelInteraction>({"CoefficientMovePI"});
+		inherit<IMovePanelInteraction, DontMovePanelInteraction>({"DontMovePI"});
+		inherit<IMovePanelInteraction, SideMovePanelInteraction>({"SideMovePI"});
 		inherit<IPanelInteraction, IMovePanelInteraction>();
 		inherit<IInteraction, IPanelInteraction>();
-		inherit<TextInteraction, TextKeysInteraction>({"TKI"});
-		inherit<TextInteraction, TextHotkeyInteraction>({"THI"});
-		inherit<TextInteraction, TextEmptyInteraction>({"TEI"});
+		inherit<TextInteraction, TextKeysInteraction>({"TextKeysI"});
+		inherit<TextInteraction, TextHotkeyInteraction>({"TextHotkeyI"});
+		inherit<TextInteraction, TextEmptyInteraction>({"TextEmptyI"});
 		inherit<IInteraction, TextInteraction>();
-		inherit<IInteraction, KeysInteraction>({"KI"});
-		inherit<IInteraction, OneKeyInteraction>({"OKI"});
-		inherit<IInteraction, HotkeyInteraction>({"HI"});
-		inherit<IInteraction, EmptyInteraction>({"EI"});
+		inherit<IInteraction, KeysInteraction>({"KeysI"});
+		inherit<IInteraction, OneKeyInteraction>({"OneKeyI"});
+		inherit<IInteraction, HotkeyInteraction>({"HotkeyI"});
+		inherit<IInteraction, EmptyInteraction>({"EmptyI"});
 		
-		inherit<ISbool, SConvertFloatToBoolEquals>({"ConvertFloatToBoolEquals", "SCFTBE"});
-		inherit<ISbool, SConvertFloatToBoolEquals>({"ConvertFloatToBoolEquals", "SCFTBE"});
-		inherit<ISbool, SConvertFloatToBoolGreater>({"ConvertFloatToBoolGreater", "SCFTBG"});
-		inherit<ISbool, SConvertFloatToBoolGreaterOrEquals>({"ConvertFloatToBoolGreaterOrEquals", "SCFTBGOE", "SCFTBGE"});
-		inherit<ISbool, SConvertFloatToBoolLess>({"ConvertFloatToBoolLess", "SCFTBL"});
-		inherit<ISbool, SConvertFloatToBoolLessOrEquals>({"ConvertFloatToBoolLessOrEquals", "SCFTBLOE", "SCFTBLE"});
+		inherit<ISbool, SConvertFloatToBoolEquals>({"ConvertFloatToBoolEquals", "CFloatToBoolE"});
+		inherit<ISbool, SConvertFloatToBoolGreater>({"ConvertFloatToBoolGreater", "CFloatToBoolG"});
+		inherit<ISbool, SConvertFloatToBoolGreaterOrEquals>({"ConvertFloatToBoolGreaterOrEquals", "CFloatToBoolGOE"});
+		inherit<ISbool, SConvertFloatToBoolLess>({"ConvertFloatToBoolLess", "CFloatToBoolL"});
+		inherit<ISbool, SConvertFloatToBoolLessOrEquals>({"ConvertFloatToBoolLessOrEquals", "CFloatToBoolLOE"});
 		
-		inherit<IAnimatorUnit, Animation>({"A"});
-		inherit<IAnimatorUnit, Prerequisite>({"P"});
-		inherit<IAnimatorUnit, AnimatorUnitMatchFloat>({"M", "Mf", "AUMf", "AUM"});
-		inherit<IChangeVariable, ChangeVariableByStraightLine>({"CVByStraightLine", "CVByStraightL", "CVBSL"});
-		inherit<IChangeVariable, ChangeVariableByBrokenLine>({"CVByBrokenLine", "CVByBrokenL", "CVBBL"});
-		inherit<IChangeVariable, ChangeVariableBySteppedLine>({"CVBySteppedLine", "CVBySteppedL", "CVBStepL"});
-		inherit<IChangeVariable, ChangeVariableBySinusoid>({"CVBySinusoid", "CVBySin", "CVBS"});
-		inherit<IChangeVariable, ChangeVariableByCurve>({"CVByCurve", "CVBCurve", "CVBC"});
+		inherit<IAnimatorUnit, Animation>();
+		inherit<IAnimatorUnit, Prerequisite>();
+		inherit<IAnimatorUnit, AnimatorUnitMatchFloat>({"AUnitMatchF"});
+		inherit<IChangeVariable, ChangeVariableByStraightLine>({"CVByStraightLine", "CVByStraightL"});
+		inherit<IChangeVariable, ChangeVariableByBrokenLine>({"CVByBrokenLine", "CVByBrokenL"});
+		inherit<IChangeVariable, ChangeVariableBySteppedLine>({"CVBySteppedLine", "CVBySteppedL"});
+		inherit<IChangeVariable, ChangeVariableBySinusoid>({"CVBySinusoid", "CVBySin"});
+		inherit<IChangeVariable, ChangeVariableByCurve>({"CVByCurve"});
 		
 		addFunc<OnlyDrawable>(videoConvert, {"Video"});
 		//addFunc<Box>(switcherTabsDecodePointer, {"SwitcherTabs", "SwitcherT"});
@@ -139,33 +138,33 @@ namespace ui {
 		inherit<IUninteractive, Bar>();
 		inherit<IUninteractive, Caption>();
 		inherit<IScalable, IUninteractive>();
-		inherit<Box, BoxDebug>({"BDebug", "BD"});
-		inherit<Box, BoxBackground>({"BoxWBackground", "BWBa"});
-		inherit<Box, BoxAlternative>({"BoxWAObject", "BWAO"});
-		inherit<Box, BoxBorder>({"BoxWBorder", "BWB"});
-		inherit<Box, BoxBorderVertical>({"BoxWBorderV", "BWBV"});
-		inherit<Box, BoxBorderHorizontal>({"BoxWBorderH", "BWBH"});
-		inherit<Box, BoxConstBorder>({"BoxWCBorder", "BWCB"});
-		inherit<Box, BoxConstBezel>({"BoxWCBezel", "BWCBe"});
-		inherit<Box, BoxConstRatio>({"BoxWCRatio", "BWCR"});
-		inherit<Box, BoxConstRatioCenter>({"BoxWCCenter", "BWCRC"});
-		inherit<Box, BoxMovableBorder>({"BoxWMBorder", "BWMB"});
-		inherit<Box, BoxPanel>({"BoxWPanel", "BWP"});
-		inherit<Box, BoxRenderTexture>({"BoxWRTexture", "BWRT"});
-		inherit<Box, BoxShader>({"BWS"});
-		inherit<Box, BoxSwitchTabs>({"BWChangeableObjects", "BWCO"});
-		inherit<Box, BoxMakePermeable>({"BMakePerm", "BMP"});
-		inherit<Box, BoxScroll>({"BScroll", "BSc"});
-		inherit<Box, BoxSwitch>({"BSwitcher", "BSw"});
-		inherit<Box, BoxTabs>({"BWTabs", "BWT"});
-		inherit<Box, BoxSwitcherTabs>({"BSwitcherTabs"});
-		inherit<Box, BoxWithConstCenter>({"BWConstCenter", "BWCC"});
-		addBase<BoxUninteractive, IUninteractive, Box>(std::vector<std::string>{"BUninteractive", "BU"});
+		inherit<Box, BoxDebug>();
+		inherit<Box, BoxBackground>();
+		inherit<Box, BoxAlternative>();
+		inherit<Box, BoxBorder>();
+		inherit<Box, BoxBorderVertical>();
+		inherit<Box, BoxBorderHorizontal>();
+		inherit<Box, BoxConstBorder>();
+		inherit<Box, BoxConstBezel>();
+		inherit<Box, BoxConstRatio>();
+		inherit<Box, BoxConstRatioCenter>();
+		inherit<Box, BoxMovableBorder>();
+		inherit<Box, BoxPanel>();
+		inherit<Box, BoxRenderTexture>();
+		inherit<Box, BoxShader>();
+		inherit<Box, BoxSwitchTabs>();
+		inherit<Box, BoxMakePermeable>();
+		inherit<Box, BoxScroll>();
+		inherit<Box, BoxSwitch>();
+		inherit<Box, BoxTabs>();
+		inherit<Box, BoxSwitcherTabs>();
+		inherit<Box, BoxConstCenter>();
+		addBase<BoxUninteractive, IUninteractive, Box>();
 		inherit<IScalable, Box>();
 		inherit<BaseSlider, Slider>();
 		inherit<BaseSlider, ConstSlider>();
 		inherit<IScalable, BaseSlider>();
-		inherit<IScalable, ButtonPanel>({"ButtonWPanel"});
+		inherit<IScalable, ButtonPanel>();
 		inherit<IScalable, Button>();
 		inherit<IScalable, Switcher>();
 		inherit<IUnscalable, IScalable>();

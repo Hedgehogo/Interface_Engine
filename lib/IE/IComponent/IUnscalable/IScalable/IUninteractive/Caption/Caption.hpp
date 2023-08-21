@@ -2,7 +2,7 @@
 
 #include "../OnlyDrawable/OnlyDrawable.hpp"
 #include "../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
-#include "../../../../../sizingAndPositioning/positioning2/internal/internalPositioning2.hpp"
+#include "../../../../../SizingAndPositioning/IPositioning2/InternalPositioning2/InternalPositioning2.hpp"
 
 namespace ui {
 	class Caption : public OnlyDrawable {
