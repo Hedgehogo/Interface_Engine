@@ -4,7 +4,7 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 
-TEST(IObject, BoxConstBezel) {
+TEST(IComponent, BoxConstBezel) {
 	InitInfoData data{{100, 100}};
 	
 	ui::BoxConstBezel boxConstBezel{

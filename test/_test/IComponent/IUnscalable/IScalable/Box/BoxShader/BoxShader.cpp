@@ -4,7 +4,7 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 
-TEST(IObject, BoxShader) {
+TEST(IComponent, BoxShader) {
 	InitInfoData data{{100, 100}};
 	
 	auto shader = new sf::Shader{};

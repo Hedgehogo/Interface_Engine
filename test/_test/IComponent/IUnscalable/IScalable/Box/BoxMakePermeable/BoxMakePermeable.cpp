@@ -4,7 +4,7 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 
-TEST(IObject, BoxMakePermeable) {
+TEST(IComponent, BoxMakePermeable) {
 	InitInfoData data{{100, 100}};
 	
 	ui::BoxMakePermeable boxMakePermeable{

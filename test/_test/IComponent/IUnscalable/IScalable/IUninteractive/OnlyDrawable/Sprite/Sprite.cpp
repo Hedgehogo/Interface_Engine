@@ -2,7 +2,7 @@
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/Sprite/Sprite.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 
-TEST(IObject, Sprite) {
+TEST(IComponent, Sprite) {
 	InitInfoData data{{100, 100}};
 	
 	sf::Texture texture{};

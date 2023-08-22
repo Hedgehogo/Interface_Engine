@@ -2,7 +2,7 @@
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/RoundedRectangle/RoundedRectangle.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 
-TEST(IObject, RoundedRectangle) {
+TEST(IComponent, RoundedRectangle) {
 	InitInfoData data{{100, 100}};
 	
 	ui::RoundedRectangle roundedRectangle{{sf::Color::Red, 2}, data.makeInitInfo()};

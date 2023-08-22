@@ -3,7 +3,7 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 
-TEST(IObject, Empty) {
+TEST(IComponent, Empty) {
 	InitInfoData data{{100, 100}};
 	
 	ui::Empty empty{{}, data.makeInitInfo()};

@@ -5,7 +5,7 @@ namespace ui {
 	}
 	
 	RelativeParentSizing* RelativeParentSizing::Make::make(float normalSize) {
-		return new RelativeParentSizing{std::move(*this), addition};
+		return new RelativeParentSizing{std::move(*this), normalSize};
 	}
 	
 	RelativeParentSizing::RelativeParentSizing(Make&& make, float) :

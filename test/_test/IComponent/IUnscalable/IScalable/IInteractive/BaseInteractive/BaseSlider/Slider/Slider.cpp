@@ -4,7 +4,7 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 
-TEST(IObject, Slider) {
+TEST(IComponent, Slider) {
 	InitInfoData data{{100, 100}};
 	
 	auto value = std::make_shared<ui::SRVec2f>(sf::Vector2f{0.f, 0.f});

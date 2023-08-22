@@ -4,7 +4,7 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 
-TEST(IObject, BoxSwitchTabs) {
+TEST(IComponent, BoxSwitchTabs) {
 	InitInfoData data{{100, 100}};
 	
 	auto value = std::make_shared<ui::Suint>(0);

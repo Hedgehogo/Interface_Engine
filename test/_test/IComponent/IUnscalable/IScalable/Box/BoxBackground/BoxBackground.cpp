@@ -5,7 +5,7 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 
-TEST(IObject, BoxBackground) {
+TEST(IComponent, BoxBackground) {
 	InitInfoData data{{100, 100}};
 	
 	ui::BoxBackground boxBackground{

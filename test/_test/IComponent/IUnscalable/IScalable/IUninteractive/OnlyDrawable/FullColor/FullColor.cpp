@@ -2,7 +2,7 @@
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 
-TEST(IObject, FullColor) {
+TEST(IComponent, FullColor) {
 	InitInfoData data{{100, 100}};
 	
 	ui::FullColor fullColor{{sf::Color::Red}, data.makeInitInfo()};

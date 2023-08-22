@@ -22,7 +22,7 @@ namespace ui {
 		
 		float operator()(float parentSize, float targetSize);
 		
-		virtual float getParentSize(float);
+		virtual float getParentSize(float objectMinSize);
 		
 		virtual ISizing* copy() = 0;
 	};

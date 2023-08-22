@@ -4,7 +4,7 @@
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/Bar/Bar.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 
-TEST(IObject, Bar) {
+TEST(IComponent, Bar) {
 	InitInfoData data{{100, 100}};
 	
 	ui::Bar bar{

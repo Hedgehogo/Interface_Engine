@@ -4,7 +4,7 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 
-TEST(IObject, BoxMovableBorder) {
+TEST(IComponent, BoxMovableBorder) {
 	InitInfoData data{{100, 100}};
 	
 	auto value = std::make_shared<ui::SCoefficient>(0.f);

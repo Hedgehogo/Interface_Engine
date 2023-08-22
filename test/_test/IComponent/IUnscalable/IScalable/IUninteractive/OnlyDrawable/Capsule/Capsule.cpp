@@ -2,7 +2,7 @@
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/Capsule/Capsule.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 
-TEST(IObject, Capsule) {
+TEST(IComponent, Capsule) {
 	InitInfoData data{{100, 100}};
 	
 	ui::Capsule capsule{{sf::Color::Red}, data.makeInitInfo()};

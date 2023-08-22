@@ -4,7 +4,7 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 
-TEST(IObject, BoxBorderHorizontal) {
+TEST(IComponent, BoxBorderHorizontal) {
 	InitInfoData data{{100, 100}};
 	
 	ui::BoxBorderHorizontal boxBorderHorizontal{
