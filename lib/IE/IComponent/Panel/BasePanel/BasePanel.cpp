@@ -5,14 +5,14 @@ namespace ui {
 	BasePanel::BasePanel(
 		BoxPtr<IScalable::Make>&& object,
 		BoxPtr<ISizing2::Make> sizing,
-		BoxPtr<IPositioning2> positioning,
+		BoxPtr<IPositioning2::Make> positioning,
 		bool displayed,
 		InitInfo objectInitInfo,
 		InitInfo initInfo
 	) :
 		object(object->make(objectInitInfo.copy(drawManager).copy(updateManager))),
 		sizing(sizing->make({initInfo.renderTarget, this->object->getNormalSize()})),
-		positioning(std::move(positioning)),
+		positioning(positioning->make({initInfo.renderTarget})),
 		displayed(displayed) {
 		this->positioning->init(initInfo.renderTarget);
 		initInfo.panelManager.addPanel(this);

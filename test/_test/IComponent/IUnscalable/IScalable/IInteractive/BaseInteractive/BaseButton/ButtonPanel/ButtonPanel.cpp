@@ -13,7 +13,7 @@ TEST(IObject, ButtonPanel) {
 				ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red),
 				ui::makeBoxPtr<ui::IHidePanelInteraction, ui::PointingHidePanelInteraction>(),
 				ui::makeBoxPtr<ui::ISizing2::Make, ui::Sizing2::Make>(sf::Vector2f{10, 10}),
-				ui::makeBoxPtr<ui::IPositioning2, ui::Positioning2>(sf::Vector2f{0.5f, 0.5f})
+				ui::makeBoxPtr<ui::IPositioning2::Make, ui::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
 			),
 			ui::makeBoxPtr<ui::IDisplayPanelInteraction, ui::PointingDisplayPanelInteraction>(),
 			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),

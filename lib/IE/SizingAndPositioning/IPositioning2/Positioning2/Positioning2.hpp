@@ -4,10 +4,24 @@
 
 namespace ui {
 	class Positioning2 : public IPositioning2 {
-	protected:
-		void copy(Positioning2* positioning2);
-	
 	public:
+		struct Make : public IPositioning2::Make {
+			BoxPtr<IPositioning> horizontal;
+			BoxPtr<IPositioning> vertical;
+			
+			Make(BoxPtr<IPositioning>&& horizontal, BoxPtr<IPositioning>&& vertical);
+			
+			Make(sf::Vector2f coefficient, sf::Vector2f offset = {}, bool relativeTarget = false);
+			
+			Make(Location2 parentLocation, Location2 objectLocation, sf::Vector2f offset = {});
+			
+			Make(sf::Vector2f coefficient, sf::Vector2f objectCoefficient, sf::Vector2f offset, bool relativeTarget = false);
+			
+			Positioning2* make(Positioning2InitInfo initInfo) override;
+		};
+		
+		Positioning2(Make&& make, Positioning2InitInfo initInfo);
+		
 		Positioning2(BoxPtr<IPositioning>&& horizontal, BoxPtr<IPositioning>&& vertical);
 		
 		Positioning2(sf::Vector2f coefficient, sf::Vector2f offset = {}, bool relativeTarget = false);

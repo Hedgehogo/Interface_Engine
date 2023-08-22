@@ -8,10 +8,17 @@
 #include "../IPositioning/MatchSidesPositioning/MatchSidesPositioning.hpp"
 #include "../IPositioning/MatchTargetPositioning/MatchTargetPositioning.hpp"
 #include "../IPositioning/LambdaPositioning/LambdaPositioning.hpp"
+#include "Positioning2initInfo/Positioning2InitInfo.hpp"
 
 namespace ui {
 	class IPositioning2 {
 	public:
+		struct Make {
+			virtual IPositioning2* make(Positioning2InitInfo initInfo) = 0;
+			
+			virtual ~Make() = default;
+		};
+		
 		virtual ~IPositioning2() = default;
 		
 		virtual void init(sf::RenderTarget& renderTarget) = 0;

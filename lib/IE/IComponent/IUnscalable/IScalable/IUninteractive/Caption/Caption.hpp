@@ -23,7 +23,7 @@ namespace ui {
 			sf::Color color = defaultColor;
 			sf::Text::Style style = {};
 			float rotation = 0;
-			InternalPositioning2 positioning = {{0, 0}};
+			InternalPositioning2::Make positioning = {{0, 0}};
 			bool cutBack = true;
 			sf::Vector2f minSize = {};
 			
@@ -36,7 +36,7 @@ namespace ui {
 				sf::Color color = defaultColor,
 				sf::Text::Style style = {},
 				float rotation = 0,
-				InternalPositioning2 positioning = {{0, 0}},
+				InternalPositioning2::Make positioning = {{0, 0}},
 				bool cutBack = true
 			);
 			
@@ -48,7 +48,7 @@ namespace ui {
 				sf::Color color = defaultColor,
 				sf::Text::Style style = {},
 				float rotation = 0,
-				InternalPositioning2 positioning = {{0, 0}},
+				InternalPositioning2::Make positioning = {{0, 0}},
 				bool cutBack = true
 			);
 			

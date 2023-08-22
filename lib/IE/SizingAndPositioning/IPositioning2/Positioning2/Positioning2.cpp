@@ -2,6 +2,41 @@
 #include "../../IPositioning/Functions/makePositioning/makePositioning.hpp"
 
 namespace ui {
+	Positioning2::Make::Make(BoxPtr<IPositioning>&& horizontal, BoxPtr<IPositioning>&& vertical) :
+		horizontal(std::move(horizontal)), vertical(std::move(vertical)) {
+	}
+	
+	Positioning2::Make::Make(sf::Vector2f coefficient, sf::Vector2f offset, bool relativeTarget) :
+		horizontal(makePosition(coefficient.x, offset.x, relativeTarget)),
+		vertical(makePosition(coefficient.y, offset.y, relativeTarget)) {
+	}
+	
+	Positioning2::Make::Make(Location2 parentLocation, Location2 objectLocation, sf::Vector2f offset) :
+		horizontal(new MatchSidesPositioning{
+			getHorizontalLocation(parentLocation),
+			getHorizontalLocation(objectLocation),
+			offset.x
+		}),
+		vertical(new MatchSidesPositioning{
+			getVerticalLocation(parentLocation),
+			getVerticalLocation(objectLocation),
+			offset.y
+		}) {
+	}
+	
+	Positioning2::Make::Make(sf::Vector2f coefficient, sf::Vector2f objectCoefficient, sf::Vector2f offset, bool relativeTarget) :
+		horizontal(makePosition(coefficient.x, objectCoefficient.x, offset.x, relativeTarget)),
+		vertical(makePosition(coefficient.y, objectCoefficient.y, offset.y, relativeTarget)) {
+	}
+	
+	Positioning2* Positioning2::Make::make(Positioning2InitInfo initInfo) {
+		return new Positioning2{std::move(*this), initInfo};
+	}
+	
+	Positioning2::Positioning2(Positioning2::Make&& make, Positioning2InitInfo initInfo) :
+		horizontal(std::move(make.horizontal)), vertical(std::move(make.vertical)), renderTarget(&initInfo.renderTarget) {
+	}
+	
 	Positioning2::Positioning2(BoxPtr<IPositioning>&& horizontal, BoxPtr<IPositioning>&& vertical) :
 		horizontal(std::move(horizontal)), vertical(std::move(vertical)), renderTarget(nullptr) {
 	}
@@ -34,10 +69,6 @@ namespace ui {
 				vertical->findPosition(parentPosition.y, objectSize.y, parentSize.y, targetSize.y)};
 	}
 	
-	void Positioning2::copy(Positioning2* positioning2) {
-		positioning2->renderTarget = this->renderTarget;
-	}
-	
 	Positioning2* Positioning2::copy() {
 		return new Positioning2{*this};
 	}
@@ -48,8 +79,8 @@ namespace ui {
 		} else {
 			if(node["horizontal"] && node["vertical"]) {
 				positioning2 = new Positioning2{
-					node["horizontal"].as<BoxPtr<IPositioning> >(),
-					node["vertical"].as<BoxPtr<IPositioning> >()
+					node["horizontal"].as < BoxPtr < IPositioning > > (),
+					node["vertical"].as < BoxPtr < IPositioning > > ()
 				};
 			} else {
 				auto offset{convDef(node["offset"], sf::Vector2f{})};

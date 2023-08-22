@@ -23,7 +23,7 @@ namespace ui {
 		BasePanel(
 			BoxPtr<IScalable::Make>&& object,
 			BoxPtr<ISizing2::Make> sizing,
-			BoxPtr<IPositioning2> positioning,
+			BoxPtr<IPositioning2::Make> positioning,
 			bool displayed,
 			InitInfo objectInitInfo,
 			InitInfo initInfo

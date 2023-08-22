@@ -6,6 +6,16 @@
 namespace ui {
 	class InternalPositioning2 : public IPositioning2 {
 	public:
+		struct Make : public IPositioning2::Make {
+			sf::Vector2f coefficient;
+			
+			Make(sf::Vector2f coefficient);
+		
+			InternalPositioning2* make(Positioning2InitInfo initInfo) override;
+		};
+		
+		InternalPositioning2(Make&& make, Positioning2InitInfo initInfo);
+		
 		InternalPositioning2(sf::Vector2f coefficient);
 		
 		void init(sf::RenderTarget&);

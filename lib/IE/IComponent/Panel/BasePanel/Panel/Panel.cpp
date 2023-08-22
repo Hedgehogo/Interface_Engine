@@ -8,7 +8,7 @@ namespace ui {
 		BoxPtr<IHidePanelInteraction> hideInteraction,
 		BoxPtr<IMovePanelInteraction> moveInteraction,
 		BoxPtr<ISizing2::Make> sizing,
-		BoxPtr<IPositioning2> positioning,
+		BoxPtr<IPositioning2::Make> positioning,
 		bool displayed
 	) :
 		object(std::move(object)),
@@ -23,7 +23,7 @@ namespace ui {
 		BoxPtr<IScalable::Make>&& object,
 		BoxPtr<IHidePanelInteraction> hideInteraction,
 		BoxPtr<ISizing2::Make> sizing,
-		BoxPtr<IPositioning2> positioning,
+		BoxPtr<IPositioning2::Make> positioning,
 		bool displayed
 	) :
 		object(std::move(object)),

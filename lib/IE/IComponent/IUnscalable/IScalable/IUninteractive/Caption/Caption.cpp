@@ -34,7 +34,7 @@ namespace ui {
 		sf::Color color,
 		sf::Text::Style style,
 		float rotation,
-		InternalPositioning2 positioning,
+		InternalPositioning2::Make positioning,
 		bool cutBack
 	) :
 		text(text),
@@ -57,7 +57,7 @@ namespace ui {
 		sf::Color color,
 		sf::Text::Style style,
 		float rotation,
-		InternalPositioning2 positioning,
+		InternalPositioning2::Make positioning,
 		bool cutBack
 	) :
 		text(text),
@@ -81,7 +81,7 @@ namespace ui {
 		str(make.text),
 		background(make.background->make(initInfo.copy(drawManager))),
 		minimumSize(make.minSize),
-		positioning(make.positioning) {
+		positioning(std::move(make.positioning), {initInfo.renderTarget}) {
 		this->text.setString(make.text);
 		this->text.setFont(make.font);
 		this->text.setCharacterSize(make.fontSize);

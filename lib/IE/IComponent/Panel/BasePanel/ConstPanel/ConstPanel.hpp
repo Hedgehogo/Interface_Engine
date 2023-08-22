@@ -8,10 +8,10 @@ namespace ui {
 		struct Make : public BasePanel::Make {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<ISizing2::Make> sizing;
-			BoxPtr<IPositioning2> positioning;
+			BoxPtr<IPositioning2::Make> positioning;
 			bool displayed = false;
 			
-			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2::Make> sizing, BoxPtr<IPositioning2> positioning, bool displayed = false);
+			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2::Make> sizing, BoxPtr<IPositioning2::Make> positioning, bool displayed = false);
 			
 			ConstPanel* make(InitInfo initInfo) override;
 		};
