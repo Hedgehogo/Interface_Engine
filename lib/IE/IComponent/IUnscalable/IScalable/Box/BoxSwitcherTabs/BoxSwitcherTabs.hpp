@@ -2,7 +2,7 @@
 
 #include "IE/IComponent/IUnscalable/IScalable/Box/Box.hpp"
 #include "../../../../ILayout/ILayoutObjectsArray/ILayoutObjectsArray.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/IInteractive/BaseInteractive/BaseInteractive.hpp"
+#include "IE/IComponent/IUnscalable/IScalable/IInteractive/BasicBaseInteractive/BasicBaseInteractive.hpp"
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ui {

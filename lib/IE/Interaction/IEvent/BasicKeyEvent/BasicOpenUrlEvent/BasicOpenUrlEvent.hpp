@@ -7,7 +7,7 @@
 
 namespace ui {
 	template<typename T = std::monostate>
-	class BasicOpenUrlEvent : public BaseKeyEvent {
+	class BasicOpenUrlEvent : public BasicBaseKeyEvent<T> {
 	public:
 		explicit BasicOpenUrlEvent(const std::string& url);
 		

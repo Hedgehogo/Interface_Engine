@@ -5,19 +5,20 @@
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-	class OneKeyInteraction : public virtual IBaseInteraction {
+	template<typename T = std::monostate>
+	class BasicOneKeyInteraction : public virtual IBasicInteraction<T> {
 	public:
-		OneKeyInteraction(BoxPtr<KeyEvent>&& event, Key key);
+		BasicOneKeyInteraction(BoxPtr<BasicKeyEvent<T> >&& event, Key key);
 		
-		void init(InteractionInitInfo interactionInitInfo) override;
+		void init(BasicInteractionInitInfo<T> initInfo) override;
 		
 		Key getKey();
 		
-		KeyEvent& getEvent();
+		BasicKeyEvent<T>& getEvent();
 		
-		const KeyEvent& getEvent() const;
+		const BasicKeyEvent<T>& getEvent() const;
 		
-		void setEvent(BoxPtr<KeyEvent>&& event);
+		void setEvent(BoxPtr<BasicKeyEvent<T> >&& event);
 		
 		void start(sf::Vector2i mousePosition) override;
 		
@@ -25,15 +26,19 @@ namespace ui {
 		
 		void finish(sf::Vector2i) override;
 		
-		OneKeyInteraction* copy() override;
+		BasicOneKeyInteraction<T>* copy() override;
 	
 	protected:
-		BoxPtr<KeyEvent> event;
+		BoxPtr<BasicKeyEvent<T> > event;
 		Key key;
 	};
 	
-	template<>
-	struct DecodePointer<OneKeyInteraction> {
-		static bool decodePointer(const YAML::Node& node, OneKeyInteraction*& oneKeyInteraction);
+	using OneKeyInteraction = BasicOneKeyInteraction<>;
+	
+	template<typename T>
+	struct DecodePointer<BasicOneKeyInteraction<T> > {
+		static bool decodePointer(const YAML::Node& node, BasicOneKeyInteraction<T>*& oneKeyInteraction);
 	};
 }
+
+#include "BasicOneKeyInteraction.inl"

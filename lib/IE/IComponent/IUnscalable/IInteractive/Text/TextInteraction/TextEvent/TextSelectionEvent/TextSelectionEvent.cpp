@@ -5,7 +5,11 @@
 #include <cmath>
 
 namespace ui {
-	TextSelectionEvent::TextSelectionEvent() : start(nullptr), end(nullptr) {
+	TextSelectionEvent::TextSelectionEvent() : text(nullptr), start(), end() {
+	}
+	
+	void TextSelectionEvent::init(TextInteractionInitInfo initInfo) {
+		text = &initInfo.additional;
 	}
 	
 	void TextSelectionEvent::startPressed() {
@@ -53,7 +57,7 @@ namespace ui {
 				(*iterator)->setSelection(false);
 			}
 		}
-		BaseKeyEvent::update(mousePosition, press);
+		BasicBaseKeyEvent<Text&>::update(mousePosition, press);
 	}
 	
 	TextSelectionEvent* TextSelectionEvent::copy() {

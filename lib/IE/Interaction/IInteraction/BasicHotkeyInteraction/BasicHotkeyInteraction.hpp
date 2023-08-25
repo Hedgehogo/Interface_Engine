@@ -5,28 +5,34 @@
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-	class HotkeyInteraction : public virtual IBaseInteraction {
-	public:
-		struct Hotkey {
-			BoxPtr<KeysInteraction> interaction{nullptr};
-			uint state{std::numeric_limits<uint32_t>::max()};
+	namespace detail {
+		template<typename T = std::monostate>
+		struct BasicHotkeyInteractionHotkey {
+			BoxPtr<BasicKeysInteraction<T> > interaction{nullptr};
+			uint state{std::numeric_limits<uint>::max()};
 			
-			Hotkey(BoxPtr<KeysInteraction> && interaction, uint state = std::numeric_limits<uint32_t>::max());
+			BasicHotkeyInteractionHotkey(BoxPtr<BasicKeysInteraction<T> >&& interaction, uint state = std::numeric_limits<uint>::max());
 			
-			Hotkey(uint state);
+			BasicHotkeyInteractionHotkey(uint state);
 		};
+	}
 	
-		HotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey>>> && hotkeys, uint state = 0);
+	template<typename T = std::monostate>
+	class BasicHotkeyInteraction : public virtual IBasicInteraction<T> {
+	public:
+		using Hotkey = detail::BasicHotkeyInteractionHotkey<T>;
 		
-		HotkeyInteraction(std::string);
+		BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, uint state = 0);
 		
-		void init(InteractionInitInfo interactionInitInfo) override;
+		BasicHotkeyInteraction(std::string);
+		
+		void init(BasicInteractionInitInfo<T> initInfo) override;
 		
 		void setHotkeyEvent(uint state, Hotkey* hotkeyEvent);
 		
-		std::vector<BoxPtr<HotkeyInteraction::Hotkey>> getHotkeys(int state);
+		std::vector<BoxPtr<Hotkey> > getHotkeys(int state);
 		
-		BoxPtr<HotkeyInteraction::Hotkey> getHotkey(int state, int i);
+		BoxPtr<Hotkey> getHotkey(int state, int i);
 		
 		void start(sf::Vector2i mousePosition) override;
 		
@@ -34,20 +40,19 @@ namespace ui {
 		
 		void finish(sf::Vector2i mousePosition) override;
 		
-		HotkeyInteraction* copy() override;
+		BasicHotkeyInteraction<T>* copy() override;
 	
 	protected:
-		std::vector<std::vector<BoxPtr<Hotkey>>> hotkeyStates;
-		std::vector<BoxPtr<Hotkey>>* nowHotkeys;
+		std::vector<std::vector<BoxPtr<Hotkey> > > hotkeyStates;
+		std::vector<BoxPtr<Hotkey> >* nowHotkeys;
 	};
 	
-	template<>
-	struct DecodePointer<HotkeyInteraction> {
-		static bool decodePointer(const YAML::Node& node, HotkeyInteraction*& hotkeyInteraction);
-	};
+	using HotkeyInteraction = BasicHotkeyInteraction<>;
 	
-	template<>
-	struct Decode<HotkeyInteraction::Hotkey*> {
-		static bool decode(const YAML::Node& node, HotkeyInteraction::Hotkey*& hotkey);
+	template<typename T>
+	struct Decode<detail::BasicHotkeyInteractionHotkey<T>*> {
+		static bool decode(const YAML::Node& node, detail::BasicHotkeyInteractionHotkey<T>*& hotkey);
 	};
 }
+
+#include "BasicHotkeyInteraction.inl"

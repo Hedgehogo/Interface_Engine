@@ -1,16 +1,16 @@
 namespace ui {
 	template<typename T>
-	BasicAddInteractionEvent<T>::BasicAddInteractionEvent(IBaseInteraction& interaction) :
+	BasicAddInteractionEvent<T>::BasicAddInteractionEvent(IBasicInteraction<T>& interaction) :
 		interactionManager(nullptr), interaction(&interaction) {
 	}
 	
 	template<typename T>
-	void BasicAddInteractionEvent<T>::init(BasicInteractionInitInfo<T> interactionInitInfo) {
-		interactionManager = &interactionInitInfo.interactionManager;
+	void BasicAddInteractionEvent<T>::init(BasicInteractionInitInfo<T> initInfo) {
+		interactionManager = &initInfo.interactionManager;
 	}
 	
 	template<typename T>
-	void BasicAddInteractionEvent<T>::setInteraction(IBaseInteraction& interaction) {
+	void BasicAddInteractionEvent<T>::setInteraction(IBasicInteraction<T>& interaction) {
 		this->interaction = &interaction;
 	}
 	

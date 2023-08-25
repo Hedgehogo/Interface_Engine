@@ -29,8 +29,8 @@ namespace ui {
 		Box(make.minSize),
 		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, make.key),
 		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(
-			BoxPtr<KeyEvent>(new AddBlockInteractionEvent{pressedInteraction}), make.key
-		), initInfo),
+			BoxPtr<KeyEvent>{new AddBlockInteractionEvent{pressedInteraction}}, make.key
+		), initInfo, {}),
 		firstObject(make.firstObject->make(initInfo)),
 		secondObject(make.secondObject->make(initInfo)),
 		borderValue(make.borderValue),
@@ -55,7 +55,9 @@ namespace ui {
 	) :
 		Box(minSize),
 		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, Key::mouseLeft),
-		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(BoxPtr < KeyEvent > (new AddBlockInteractionEvent{pressedInteraction}), Key::mouseLeft)),
+		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(
+			BoxPtr<KeyEvent>{new AddBlockInteractionEvent{pressedInteraction}}, Key::mouseLeft)
+		),
 		firstObject(std::move(firstObject)),
 		secondObject(std::move(secondObject)),
 		borderValue(borderValue),
@@ -68,7 +70,7 @@ namespace ui {
 	}
 	
 	void BoxMovableBorder::init(InitInfo initInfo) {
-		interactive.init(initInfo);
+		interactive.init(initInfo, {});
 		firstObject->init(initInfo);
 		secondObject->init(initInfo);
 		initInfo.updateManager.add(*this);

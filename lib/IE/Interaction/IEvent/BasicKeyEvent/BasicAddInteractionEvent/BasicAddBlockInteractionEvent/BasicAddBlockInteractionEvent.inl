@@ -4,7 +4,8 @@ namespace ui {
 	}
 	
 	template<typename T>
-	BasicAddBlockInteractionEvent<T>::BasicAddBlockInteractionEvent(IBaseInteraction& interaction) : BasicAddInteractionEvent<T>(interaction) {
+	BasicAddBlockInteractionEvent<T>::BasicAddBlockInteractionEvent(IBasicInteraction<T>& interaction) :
+		BasicAddInteractionEvent<T>(interaction) {
 	}
 	
 	template<typename T>

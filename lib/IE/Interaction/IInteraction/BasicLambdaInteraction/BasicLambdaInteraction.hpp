@@ -3,9 +3,10 @@
 #include "../IInteraction.hpp"
 
 namespace ui {
-	class LambdaInteraction : public virtual IBaseInteraction {
+	template<typename T = std::monostate>
+	class BasicLambdaInteraction : public virtual IBasicInteraction<T> {
 	public:
-		LambdaInteraction(void (* startPointing)(sf::Vector2i mousePosition), void (* finishPointing)(sf::Vector2i mousePosition));
+		BasicLambdaInteraction(void (* startPointing)(sf::Vector2i mousePosition), void (* finishPointing)(sf::Vector2i mousePosition));
 		
 		void start(sf::Vector2i mousePosition) override;
 		
@@ -15,4 +16,8 @@ namespace ui {
 		void (* startPointing)(sf::Vector2i mousePosition);
 		void (* finishPointing)(sf::Vector2i mousePosition);
 	};
+	
+	using LambdaInteraction = BasicLambdaInteraction<>;
 }
+
+#include "BasicLambdaInteraction.inl"

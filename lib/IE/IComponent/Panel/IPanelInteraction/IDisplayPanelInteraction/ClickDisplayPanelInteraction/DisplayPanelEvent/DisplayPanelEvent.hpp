@@ -5,6 +5,9 @@
 
 namespace ui {
 	class DisplayPanelEvent : public PanelEvent {
+	public:
+		DisplayPanelEvent* copy() override;
+	
 	protected:
 		void startPressed() override;
 		
@@ -13,9 +16,6 @@ namespace ui {
 		void stopPressed() override;
 		
 		void whileNotPressed() override;
-	
-	public:
-		DisplayPanelEvent* copy() override;
 	};
 	
 	template<>

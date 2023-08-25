@@ -7,7 +7,7 @@ namespace ui {
 	template<typename T = std::monostate>
 	class BasicAddBlockInteractionEvent : public BasicAddInteractionEvent<T> {
 	public:
-		explicit BasicAddBlockInteractionEvent(IBaseInteraction& interaction);
+		explicit BasicAddBlockInteractionEvent(IBasicInteraction<T>& interaction);
 		
 		BasicAddBlockInteractionEvent<T>* copy() override;
 	

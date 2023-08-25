@@ -5,17 +5,22 @@
 #include "../../InteractionManager/InteractionManager.hpp"
 
 namespace ui {
-	class PressedInteraction : public OneKeyInteraction, public IBlockInteraction {
+	template<typename T = std::monostate>
+	class BasicPressedInteraction : public BasicOneKeyInteraction<T>, public IBasicBlockInteraction<T> {
 	public:
-		PressedInteraction(BoxPtr<KeyEvent>&& event, Key key);
+		BasicPressedInteraction(BoxPtr<BasicKeyEvent<T> >&& event, Key key);
 		
-		void init(InteractionInitInfo interactionInitInfo) override;
+		void init(BasicInteractionInitInfo<T> initInfo) override;
 		
 		void update(sf::Vector2i mousePosition) override;
 		
-		PressedInteraction* copy() override;
+		BasicPressedInteraction<T>* copy() override;
 	
 	protected:
 		InteractionManager* interactionManager;
 	};
+	
+	using PressedInteraction = BasicPressedInteraction<>;
 }
+
+#include "BasicPressedInteraction.inl"

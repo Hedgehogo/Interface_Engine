@@ -78,15 +78,20 @@ namespace ui {
 		
 		inherit<BaseResizer, Resizer>();
 		
-		inherit<TextEvent, TextCopyEvent>({"TextCopyE"});
-		inherit<TextEvent, TextSelectionEvent>({"TextSelectionE"});
-		inherit<KeyEvent, SwitchTabsEvent>({"SwitchTabsE"});
-		inherit<KeyEvent, WhileSwitchTabsEvent>({"WhileSwitchTabsE"});
 		inherit<KeyEvent, OpenUrlEvent>({"OpenUrlE"});
 		inherit<KeyEvent, CloseWindowEvent>({"CloseWindowE"});
+		inherit<KeyEvent, SwitchTabsEvent>({"SwitchTabsE"});
+		inherit<KeyEvent, WhileSwitchTabsEvent>({"WhileSwitchTabsE"});
 		inherit<KeyEvent, SwitcherEvent>({"SwitcherE", });
 		inherit<KeyEvent, SetSintEvent>({"SetSIntE"});
 		inherit<KeyEvent, SetSfloatEvent>({"SetSFloatE"});
+		
+		inherit<TextEvent, TextCopyEvent>({"TextCopyE"});
+		inherit<TextEvent, TextSelectionEvent>({"TextSelectionE"});
+		
+		inherit<IBaseInteraction, OneKeyInteraction>({"OneKeyI"});
+		inherit<IBaseInteraction, KeysInteraction>({"KeysI"});
+		inherit<IBaseInteraction, EmptyInteraction>({"EmptyI"});
 		
 		inherit<IHidePanelInteraction, DontHidePanelInteraction>({"DontHidePI"});
 		inherit<IHidePanelInteraction, ClickHidePanelInteraction>({"ClickHidePI"});
@@ -99,15 +104,10 @@ namespace ui {
 		inherit<IMovePanelInteraction, DontMovePanelInteraction>({"DontMovePI"});
 		inherit<IMovePanelInteraction, SideMovePanelInteraction>({"SideMovePI"});
 		inherit<IPanelInteraction, IMovePanelInteraction>();
-		inherit<IBaseInteraction, IPanelInteraction>();
+		
 		inherit<TextInteraction, TextKeysInteraction>({"TextKeysI"});
 		inherit<TextInteraction, TextHotkeyInteraction>({"TextHotkeyI"});
 		inherit<TextInteraction, TextEmptyInteraction>({"TextEmptyI"});
-		inherit<IBaseInteraction, TextInteraction>();
-		inherit<IBaseInteraction, KeysInteraction>({"KeysI"});
-		inherit<IBaseInteraction, OneKeyInteraction>({"OneKeyI"});
-		inherit<IBaseInteraction, HotkeyInteraction>({"HotkeyI"});
-		inherit<IBaseInteraction, EmptyInteraction>({"EmptyI"});
 		
 		inherit<ISbool, SConvertFloatToBoolEquals>({"ConvertFloatToBoolEquals", "CFloatToBoolE"});
 		inherit<ISbool, SConvertFloatToBoolGreater>({"ConvertFloatToBoolGreater", "CFloatToBoolG"});

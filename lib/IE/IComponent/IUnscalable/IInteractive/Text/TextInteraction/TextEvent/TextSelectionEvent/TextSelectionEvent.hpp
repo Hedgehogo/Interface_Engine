@@ -1,20 +1,27 @@
 #pragma once
 
+#include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextEvent/TextEvent.hpp"
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 #include "modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
-#include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextEvent/TextEvent.hpp"
 
 namespace ui {
 	class BaseCharacter;
 	
-	class TextSelectionEvent : public BaseKeyEvent, public TextEvent {
+	class TextSelectionEvent : public BasicBaseKeyEvent<Text&> {
 	public:
 		TextSelectionEvent();
+		
+		void init(TextInteractionInitInfo initInfo) override;
 		
 		std::vector<BaseCharacter*>::iterator getStart();
 		
 		std::vector<BaseCharacter*>::iterator getEnd();
 		
+		void update(sf::Vector2i mousePosition, bool press) override;
+		
+		TextSelectionEvent* copy() override;
+	
+	protected:
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -23,11 +30,7 @@ namespace ui {
 		
 		void whileNotPressed() override;
 		
-		void update(sf::Vector2i mousePosition, bool press) override;
-		
-		TextSelectionEvent* copy() override;
-	
-	protected:
+		Text* text;
 		std::vector<BaseCharacter*>::iterator start;
 		std::vector<BaseCharacter*>::iterator end;
 	};

@@ -5,8 +5,15 @@
 #include "modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
-	class TextCopyEvent : public BaseKeyEvent, public TextEvent {
+	class TextCopyEvent : public BasicBaseKeyEvent<Text&> {
 	public:
+		TextCopyEvent();
+		
+		void init(TextInteractionInitInfo initInfo) override;
+		
+		TextCopyEvent* copy() override;
+		
+	protected:
 		void startPressed() override;
 		
 		void stopPressed() override;
@@ -15,7 +22,7 @@ namespace ui {
 		
 		void whileNotPressed() override;
 		
-		TextCopyEvent* copy() override;
+		Text* text;
 	};
 	
 	template<>

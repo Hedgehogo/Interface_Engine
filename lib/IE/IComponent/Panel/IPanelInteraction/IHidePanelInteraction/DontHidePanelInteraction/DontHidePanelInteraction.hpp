@@ -4,11 +4,11 @@
 #include "IE/Interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 
 namespace ui {
-	class DontHidePanelInteraction : public EmptyInteraction, public IHidePanelInteraction {
+	class DontHidePanelInteraction : public BasicEmptyInteraction<Panel&>, public IHidePanelInteraction {
 	public:
 		DontHidePanelInteraction() = default;
 		
-		void init(PanelInteractionInitInfo) override;
+		void init(PanelInteractionInitInfo initInfo) override;
 		
 		void setPanel(Panel&) override;
 		

@@ -6,11 +6,11 @@
 #include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 
 namespace ui {
-	class ClickPanelInteraction : public OneKeyInteraction, public virtual IPanelInteraction {
+	class ClickPanelInteraction : public BasicOneKeyInteraction<Panel&>, public virtual IPanelInteraction {
 	public:
 		ClickPanelInteraction(BoxPtr<PanelEvent>&& event, Key key);
 		
-		void init(PanelInteractionInitInfo panelInteractionInitInfo) override;
+		void init(PanelInteractionInitInfo initInfo) override;
 		
 		void setPanel(Panel& panel) override;
 		

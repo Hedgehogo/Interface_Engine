@@ -8,11 +8,9 @@ namespace ui {
 	
 	class IPanelManager;
 	
-	class IPanelInteraction : public virtual IBaseInteraction {
+	class IPanelInteraction : public virtual IBasicInteraction<Panel&> {
 	public:
 		IPanelInteraction() = default;
-		
-		virtual void init(PanelInteractionInitInfo panelInteractionInitInfo) = 0;
 		
 		virtual void setPanel(Panel& panel) = 0;
 		

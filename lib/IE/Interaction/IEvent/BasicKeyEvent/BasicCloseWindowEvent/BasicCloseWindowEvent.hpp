@@ -9,7 +9,7 @@ namespace ui {
 	public:
 		BasicCloseWindowEvent();
 		
-		void init(BasicInteractionInitInfo<T> interactionInitInfo) override;
+		void init(BasicInteractionInitInfo<T> initInfo) override;
 		
 		BasicCloseWindowEvent<T>* copy() override;
 	

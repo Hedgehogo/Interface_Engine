@@ -19,9 +19,7 @@ namespace ui {
 	}
 	
 	SideMovePanelInteraction* SideMovePanelInteraction::copy() {
-		SideMovePanelInteraction* sideMovePanelInteraction{new SideMovePanelInteraction{coefficient, offset, horizontal, false}};
-		BasePanelInteraction::copy(sideMovePanelInteraction);
-		return sideMovePanelInteraction;
+		return new SideMovePanelInteraction{*this};
 	}
 	
 	bool DecodePointer<SideMovePanelInteraction>::decodePointer(const YAML::Node& node, SideMovePanelInteraction*& sideMovePanelInteraction) {
@@ -36,9 +34,7 @@ namespace ui {
 		if(node["at-start"])
 			node["at-start"] >> atStart;
 		
-		{
-			sideMovePanelInteraction = new SideMovePanelInteraction{coefficient, offset, horizontal, atStart};
-			return true;
-		}
+		sideMovePanelInteraction = new SideMovePanelInteraction{coefficient, offset, horizontal, atStart};
+		return true;
 	}
 }

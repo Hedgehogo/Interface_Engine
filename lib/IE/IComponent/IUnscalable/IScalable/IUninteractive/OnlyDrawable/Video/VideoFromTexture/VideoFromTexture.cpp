@@ -91,4 +91,4 @@ namespace ui {
 	VideoFromTexture* VideoFromTexture::copy() {
 		return new VideoFromTexture{*this};
 	}
-	}
+}

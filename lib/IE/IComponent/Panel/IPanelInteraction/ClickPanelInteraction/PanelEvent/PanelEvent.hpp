@@ -8,11 +8,11 @@ namespace ui {
 	
 	class IPanelManager;
 	
-	class PanelEvent : public BaseKeyEvent {
+	class PanelEvent : public BasicBaseKeyEvent<Panel&> {
 	public:
 		PanelEvent();
 		
-		virtual void init(PanelInteractionInitInfo panelInteractionInitInfo);
+		void init(PanelInteractionInitInfo initInfo) override;
 		
 		void setPanel(Panel& panel);
 		

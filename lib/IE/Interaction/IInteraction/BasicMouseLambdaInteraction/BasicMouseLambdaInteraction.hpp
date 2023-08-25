@@ -4,24 +4,34 @@
 #include "../IBasicMouseInteraction/IBasicMouseInteraction.hpp"
 
 namespace ui {
-	class MouseLambdaInteraction : public LambdaInteraction, public IMouseInteraction {
+	template<typename T = std::monostate>
+	class BasicMouseLambdaInteraction : public BasicLambdaInteraction<T>, public IBasicMouseInteraction<T> {
 	public:
-		MouseLambdaInteraction(BoxPtr<KeyEvent>&& leftButtonEvent, BoxPtr<KeyEvent>&& rightButtonEvent, void (* startPointing)(sf::Vector2i mousePosition), void (* finishPointing)(sf::Vector2i mousePosition));
+		BasicMouseLambdaInteraction(
+			BoxPtr<BasicKeyEvent<T> >&& leftButtonEvent,
+			BoxPtr<BasicKeyEvent<T> >&& rightButtonEvent,
+			void (* startPointing)(sf::Vector2i mousePosition),
+			void (* finishPointing)(sf::Vector2i mousePosition)
+		);
 		
-		KeyEvent& getLeftButtonEvent() override;
+		BasicKeyEvent<T>& getLeftButtonEvent() override;
 		
-		const KeyEvent& getLeftButtonEvent() const override;
+		const BasicKeyEvent<T>& getLeftButtonEvent() const override;
 		
-		KeyEvent& getRightButtonEvent() override;
+		BasicKeyEvent<T>& getRightButtonEvent() override;
 		
-		const KeyEvent& getRightButtonEvent() const override;
+		const BasicKeyEvent<T>& getRightButtonEvent() const override;
 		
-		MouseLambdaInteraction* copy() override;
+		BasicMouseLambdaInteraction<T>* copy() override;
 	
-		static MouseLambdaInteraction debug;
+		static BasicMouseLambdaInteraction debug;
 		
 	protected:
-		BoxPtr<KeyEvent> leftButtonEvent;
-		BoxPtr<KeyEvent> rightButtonEvent;
+		BoxPtr<BasicKeyEvent<T> > leftButtonEvent;
+		BoxPtr<BasicKeyEvent<T> > rightButtonEvent;
 	};
+	
+	using MouseLambdaInteraction = BasicMouseLambdaInteraction<>;
 }
+
+#include "BasicMouseLambdaInteraction.inl"

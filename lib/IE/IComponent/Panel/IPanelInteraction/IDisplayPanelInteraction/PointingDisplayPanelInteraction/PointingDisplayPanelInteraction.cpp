@@ -2,9 +2,6 @@
 #include "../../../BasePanel/Panel/Panel.hpp"
 
 namespace ui {
-	PointingDisplayPanelInteraction::PointingDisplayPanelInteraction() : IDisplayPanelInteraction() {
-	}
-	
 	void PointingDisplayPanelInteraction::start(sf::Vector2i) {
 		panelManager->displayPanel(panel);
 		panel->setParentProcessed(true);
@@ -18,16 +15,12 @@ namespace ui {
 	}
 	
 	PointingDisplayPanelInteraction* PointingDisplayPanelInteraction::copy() {
-		PointingDisplayPanelInteraction* pointingDisplayPanelInteraction{new PointingDisplayPanelInteraction{}};
-		BasePanelInteraction::copy(pointingDisplayPanelInteraction);
-		return pointingDisplayPanelInteraction;
+		return new PointingDisplayPanelInteraction{*this};
 	}
 	
 	bool DecodePointer<PointingDisplayPanelInteraction>::decodePointer(const YAML::Node&, PointingDisplayPanelInteraction*& pointingDisplayPanelInteraction) {
-		{
-			pointingDisplayPanelInteraction = new PointingDisplayPanelInteraction{};
-			return true;
-		}
+		pointingDisplayPanelInteraction = new PointingDisplayPanelInteraction{};
+		return true;
 	}
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "../../IInteractive/BaseInteractive/BaseInteractive.hpp"
+#include "IE/IComponent/IUnscalable/IScalable/IInteractive/BasicBaseInteractive/BasicBaseInteractive.hpp"
 #include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 #include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
 #include "MovableBorderEvent/MovableBorderEvent.hpp"

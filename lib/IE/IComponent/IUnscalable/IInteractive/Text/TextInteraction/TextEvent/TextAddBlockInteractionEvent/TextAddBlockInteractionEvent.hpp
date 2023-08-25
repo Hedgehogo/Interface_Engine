@@ -6,19 +6,5 @@
 #include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextInteraction/TextInteraction.hpp"
 
 namespace ui {
-	class TextAddBlockInteractionEvent : public TextEvent, public AddBlockInteractionEvent {
-	public:
-		explicit TextAddBlockInteractionEvent(TextInteraction& interaction);
-		
-		void init(TextInteractionInitInfo textInteractionInitInfo) override;
-		
-		void setText(ui::Text* text) override;
-		
-		TextAddBlockInteractionEvent* copy() override;
-	};
-	
-	template<>
-	struct DecodePointer<TextAddBlockInteractionEvent> {
-		static bool decodePointer(const YAML::Node& node, TextAddBlockInteractionEvent*& textAddBlockInteractionEvent);
-	};
+	using TextAddBlockInteractionEvent = BasicAddBlockInteractionEvent<Text&>;
 }

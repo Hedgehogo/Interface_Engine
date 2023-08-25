@@ -22,9 +22,7 @@ namespace ui {
 	
 	template<typename T>
 	bool DecodePointer<BasicEmptyInteraction<T> >::decodePointer(const YAML::Node&, BasicEmptyInteraction<T>*& emptyInteraction) {
-		{
-			emptyInteraction = new BasicEmptyInteraction<T>{};
-			return true;
-		}
+		emptyInteraction = new BasicEmptyInteraction<T>{};
+		return true;
 	}
 }

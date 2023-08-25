@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IUnscalable/IScalable/IInteractive/BaseInteractive/BaseButton/Button/Button.hpp>
+#include <IE/IComponent/IUnscalable/IScalable/IInteractive/BasicBaseInteractive/BasicBaseButton/Button/Button.hpp>
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include "IE/Interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>

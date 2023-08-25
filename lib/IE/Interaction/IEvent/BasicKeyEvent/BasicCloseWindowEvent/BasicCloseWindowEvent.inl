@@ -23,9 +23,9 @@ namespace ui {
 	}
 	
 	template<typename T>
-	void BasicCloseWindowEvent<T>::init(BasicInteractionInitInfo<T> interactionInitInfo) {
-		BaseKeyEvent::init(interactionInitInfo);
-		window = &interactionInitInfo.window;
+	void BasicCloseWindowEvent<T>::init(BasicInteractionInitInfo<T> initInfo) {
+		BasicBaseKeyEvent<T>::init(initInfo);
+		window = &initInfo.window;
 	}
 	
 	template<typename T>

@@ -4,7 +4,7 @@
 #include "../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
-	std::vector<BaseCharacter*>::iterator nullBaseCharacterIterator{nullptr};
+	std::vector<BaseCharacter*>::iterator nullBaseCharacterIterator{};
 	
 	Text::Text(
 		std::vector<BaseTextBlock*> textBlocks,
@@ -128,7 +128,7 @@ namespace ui {
 	
 	
 	std::vector<BaseCharacter*>::iterator Text::getCharacter(sf::Vector2f mousePosition) {
-		std::vector<BaseCharacter*>::iterator result{nullptr};
+		std::vector<BaseCharacter*>::iterator result{};
 		
 		for(auto iterator = textCharacters.begin(); iterator != textCharacters.end(); ++iterator) {
 			if(result != nullBaseCharacterIterator) {

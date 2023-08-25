@@ -20,9 +20,7 @@ namespace ui {
 	}
 	
 	PointingHidePanelInteraction* PointingHidePanelInteraction::copy() {
-		PointingHidePanelInteraction* pointingHidePanelInteraction{new PointingHidePanelInteraction{}};
-		BasePanelInteraction::copy(pointingHidePanelInteraction);
-		return pointingHidePanelInteraction;
+		return new PointingHidePanelInteraction{*this};
 	}
 	
 	bool DecodePointer<PointingHidePanelInteraction>::decodePointer(const YAML::Node& node, PointingHidePanelInteraction*& pointingHidePanelInteraction) {
@@ -31,9 +29,7 @@ namespace ui {
 		if(node["only-on-parent"])
 			node["only-on-parent"] >> onlyOnParent;
 		
-		{
-			pointingHidePanelInteraction = new PointingHidePanelInteraction{onlyOnParent};
-			return true;
-		}
+		pointingHidePanelInteraction = new PointingHidePanelInteraction{onlyOnParent};
+		return true;
 	}
 }

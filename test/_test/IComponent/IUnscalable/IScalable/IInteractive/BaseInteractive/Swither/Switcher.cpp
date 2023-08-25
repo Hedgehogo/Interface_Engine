@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IUnscalable/IScalable/IInteractive/BaseInteractive/Switcher/Switcher.hpp>
+#include <IE/IComponent/IUnscalable/IScalable/IInteractive/BasicBaseInteractive/Switcher/Switcher.hpp>
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>

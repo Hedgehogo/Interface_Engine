@@ -17,9 +17,7 @@ namespace ui {
 	}
 	
 	CoefficientMovePanelInteraction* CoefficientMovePanelInteraction::copy() {
-		CoefficientMovePanelInteraction* positioningMovePanelInteraction{new CoefficientMovePanelInteraction{coefficient, offset, false}};
-		BasePanelInteraction::copy(positioningMovePanelInteraction);
-		return positioningMovePanelInteraction;
+		return new CoefficientMovePanelInteraction{*this};
 	}
 	
 	bool DecodePointer<CoefficientMovePanelInteraction>::decodePointer(const YAML::Node& node, CoefficientMovePanelInteraction*& coefficientMovePanelInteraction) {
@@ -32,9 +30,7 @@ namespace ui {
 		if(node["at-start"])
 			node["at-start"] >> atStart;
 		
-		{
-			coefficientMovePanelInteraction = new CoefficientMovePanelInteraction{coefficient, offset, atStart};
-			return true;
-		}
+		coefficientMovePanelInteraction = new CoefficientMovePanelInteraction{coefficient, offset, atStart};
+		return true;
 	}
 }

@@ -5,8 +5,6 @@
 namespace ui {
 	class IMovePanelInteraction : public virtual IPanelInteraction {
 	public:
-		explicit IMovePanelInteraction();
-		
 		virtual bool getAtStart() = 0;
 		
 		virtual void move(sf::Vector2i mousePosition) = 0;

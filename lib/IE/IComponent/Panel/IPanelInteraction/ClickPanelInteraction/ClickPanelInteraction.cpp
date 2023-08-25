@@ -3,11 +3,11 @@
 
 namespace ui {
 	ClickPanelInteraction::ClickPanelInteraction(BoxPtr<PanelEvent>&& event, Key key) :
-		OneKeyInteraction(dynamicCast<KeyEvent>(std::move(event)), key) {
+		BasicOneKeyInteraction<Panel&>(dynamicCast<BasicKeyEvent<Panel&> >(std::move(event)), key) {
 	}
 	
-	void ClickPanelInteraction::init(PanelInteractionInitInfo panelInteractionInitInfo) {
-		dynamic_cast<PanelEvent&>(*event).init(panelInteractionInitInfo);
+	void ClickPanelInteraction::init(PanelInteractionInitInfo initInfo) {
+		dynamic_cast<PanelEvent&>(*event).init(initInfo);
 	}
 	
 	void ClickPanelInteraction::setPanel(Panel& panel) {

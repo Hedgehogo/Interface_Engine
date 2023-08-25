@@ -4,6 +4,13 @@
 #include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
+	TextCopyEvent::TextCopyEvent() : text(nullptr) {
+	}
+	
+	void TextCopyEvent::init(TextInteractionInitInfo initInfo) {
+		text = &initInfo.additional;
+	}
+	
 	void TextCopyEvent::startPressed() {
 		sf::Clipboard::setString(u32stringToUint32String(text->getSelectionText()));
 	}
@@ -18,7 +25,7 @@ namespace ui {
 	}
 	
 	TextCopyEvent* TextCopyEvent::copy() {
-		return new TextCopyEvent{};
+		return new TextCopyEvent{*this};
 	}
 	
 	bool DecodePointer<TextCopyEvent>::decodePointer(const YAML::Node&, TextCopyEvent*& textCopyEvent) {

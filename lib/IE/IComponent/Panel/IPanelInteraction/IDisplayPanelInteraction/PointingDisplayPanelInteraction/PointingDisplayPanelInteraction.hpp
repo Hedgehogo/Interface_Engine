@@ -7,8 +7,6 @@
 namespace ui {
 	class PointingDisplayPanelInteraction : public BasePanelInteraction, public IDisplayPanelInteraction {
 	public:
-		PointingDisplayPanelInteraction();
-		
 		void start(sf::Vector2i mousePosition) override;
 		
 		void update(sf::Vector2i mousePosition) override;

@@ -8,8 +8,7 @@
 #include "TextInteraction/TextEvent/TextCopyEvent/TextCopyEvent.hpp"
 #include "TextInteraction/TextInteraction/TextEmptyInteraction/TextEmptyInteraction.hpp"
 #include "TextInteraction/TextEvent/TextAddBlockInteractionEvent/TextAddBlockInteractionEvent.hpp"
-#include "TextInteraction/TextInteraction/TextBlockInteraction/TextPressedInteraction/TextPressedInteraction.hpp"
-#include "TextInteraction/TextInteraction/TextSelectionAndCopyInteraction/TextSelectionAndCopyInteraction.hpp"
+#include "TextInteraction/TextInteraction/TextPressedInteraction/TextPressedInteraction.hpp"
 
 namespace ui {
 	class Text : public IInteractive, public IDrawable, public IUpdatable {

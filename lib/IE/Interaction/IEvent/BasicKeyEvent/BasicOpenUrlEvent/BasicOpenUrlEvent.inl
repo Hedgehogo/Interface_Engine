@@ -29,7 +29,7 @@ namespace ui {
 	
 	template<typename T>
 	bool DecodePointer<BasicOpenUrlEvent<T> >::decodePointer(const YAML::Node& node, BasicOpenUrlEvent<T>*& openUrlInteraction) {
-		openUrlInteraction = new OpenUrlEvent {
+		openUrlInteraction = new BasicOpenUrlEvent<T>{
 			(node.IsScalar() ? node : node["url"]).as<std::string>()
 		};
 		return true;

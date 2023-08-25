@@ -3,19 +3,21 @@
 #include "../IInteraction.hpp"
 #include "../../../Enums/KeyHandler/KeyHandler.hpp"
 #include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "../../IEvent/BasicKeyEvent/BasicOpenUrlEvent/BasicOpenUrlEvent.hpp"
 
 namespace ui {
-	class KeysInteraction : public virtual IBaseInteraction {
+	template<typename T = std::monostate>
+	class BasicKeysInteraction : public virtual IBasicInteraction<T> {
 	public:
-		KeysInteraction(BoxPtr<KeyEvent>&& event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+		BasicKeysInteraction(BoxPtr<BasicKeyEvent<T> >&& event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 		
 		bool isPress() const;
 		
 		std::vector<Key> getKeys();
 		
-		KeyEvent* getEvent();
+		BasicKeyEvent<T>* getEvent();
 		
-		void setEvent(KeyEvent* event);
+		void setEvent(BasicKeyEvent<T>* event);
 		
 		void start(sf::Vector2i mousePosition) override;
 		
@@ -23,18 +25,21 @@ namespace ui {
 		
 		void finish(sf::Vector2i) override;
 		
-		KeysInteraction* copy() override;
+		BasicKeysInteraction<T>* copy() override;
 		
 	protected:
-		BoxPtr<KeyEvent> event;
+		BoxPtr<BasicKeyEvent<T> > event;
 		std::vector<Key> keys;
 		std::vector<Key> blackListKeys;
 		bool press;
 	};
 	
-	template<>
-	struct DecodePointer<KeysInteraction> {
-		static bool decodePointer(const YAML::Node& node, KeysInteraction*& keysInteraction);
-	};
+	using KeysInteraction = BasicKeysInteraction<>;
 	
+	template<typename T>
+	struct DecodePointer<BasicKeysInteraction<T> > {
+		static bool decodePointer(const YAML::Node& node, BasicKeysInteraction<T>*& keysInteraction);
+	};
 }
+
+#include "BasicKeysInteraction.inl"

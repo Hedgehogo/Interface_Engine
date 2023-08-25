@@ -11,7 +11,7 @@ namespace ui {
 	}
 	
 	void ClickDisplayPanelInteraction::finish(sf::Vector2i mousePosition) {
-		OneKeyInteraction::finish(mousePosition);
+		BasicOneKeyInteraction<Panel&>::finish(mousePosition);
 		dynamic_cast<PanelEvent&>(*event).getPanel()->setParentProcessed(false);
 	}
 	

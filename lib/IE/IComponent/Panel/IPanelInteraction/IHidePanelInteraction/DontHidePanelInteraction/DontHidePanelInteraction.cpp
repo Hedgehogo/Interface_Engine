@@ -13,9 +13,7 @@ namespace ui {
 	}
 	
 	bool DecodePointer<DontHidePanelInteraction>::decodePointer(const YAML::Node&, DontHidePanelInteraction*& dontHidePanelInteraction) {
-		{
-			dontHidePanelInteraction = new DontHidePanelInteraction{};
-			return true;
-		}
+		dontHidePanelInteraction = new DontHidePanelInteraction{};
+		return true;
 	}
 }

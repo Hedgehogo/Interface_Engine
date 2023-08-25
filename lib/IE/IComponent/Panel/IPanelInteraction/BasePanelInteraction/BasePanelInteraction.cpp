@@ -5,17 +5,12 @@ namespace ui {
 	BasePanelInteraction::BasePanelInteraction() : panel(nullptr), panelManager(nullptr) {
 	}
 	
-	void BasePanelInteraction::init(PanelInteractionInitInfo panelInteractionInitInfo) {
-		this->panel = &panelInteractionInitInfo.additional;
-		this->panelManager = &panelInteractionInitInfo.panelManager;
+	void BasePanelInteraction::init(PanelInteractionInitInfo initInfo) {
+		this->panel = &initInfo.additional;
+		this->panelManager = &initInfo.panelManager;
 	}
 	
 	void BasePanelInteraction::setPanel(Panel& panel) {
 		this->panel = &panel;
-	}
-	
-	void BasePanelInteraction::copy(BasePanelInteraction* panelInteraction) {
-		panelInteraction->panel = this->panel;
-		panelInteraction->panelManager = this->panelManager;
 	}
 }
