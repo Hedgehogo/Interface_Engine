@@ -3,7 +3,7 @@
 #include "../Box.hpp"
 #include "../../IInteractive/BaseInteractive/BaseInteractive.hpp"
 #include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
-#include "../../../../../Interaction/IInteraction/IBlockInteraction/PressedInteraction/PressedInteraction.hpp"
+#include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
 #include "MovableBorderEvent/MovableBorderEvent.hpp"
 #include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
 #include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"

@@ -1,10 +1,10 @@
 #include "BaseWheelEvent.hpp"
 
 namespace ui {
-	WheelEvent_Simple::WheelEvent_Simple() {
+	BaseWheelEvent::BaseWheelEvent() {
 	}
 	
-	void WheelEvent_Simple::update(sf::Vector2i mousePosition, int value) {
+	void BaseWheelEvent::update(sf::Vector2i mousePosition, int value) {
 		if(this->active != (value != 0)) {
 			this->active = (value != 0);
 			if(this->active) {

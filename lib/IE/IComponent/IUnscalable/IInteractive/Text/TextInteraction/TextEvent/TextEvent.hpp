@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Interaction/IEvent/KeyEvent/KeyEvent.hpp"
+#include "IE/Interaction/IEvent/BasicKeyEvent/BasicKeyEvent.hpp"
 #include "../TextInteractionInitInfo/TextInteractionInitInfo.hpp"
 
 namespace ui {

@@ -7,7 +7,7 @@ namespace ui {
 	class InteractiveTextBlock : public TextBlock {
 	public:
 		InteractiveTextBlock(
-			IInteraction* interaction, std::u32string text, sf::Color textColor = nullColor,
+			IBaseInteraction* interaction, std::u32string text, sf::Color textColor = nullColor,
 			sf::Font* font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0,
 			sf::Color textSelectionColor = nullColor,
 			sf::Color backgroundSelectionColor = nullColor,
@@ -37,7 +37,7 @@ namespace ui {
 		bool updateInteractions(sf::Vector2f) override;
 	
 	protected:
-		InteractiveTextBlock(std::u32string str, TextVariables textVariables, IInteraction* interaction);
+		InteractiveTextBlock(std::u32string str, TextVariables textVariables, IBaseInteraction* interaction);
 		
 		InteractiveTextBlock(std::u32string str, TextVariables textVariables, int indexInteraction);
 	

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../IEvent/KeyEvent/EmptyEvent/EmptyEvent.hpp"
-#include "../IEvent/KeyEvent/LambdaKeyEvent/LambdaKeyEvent.hpp"
-#include "../InteractionInitInfo/InteractionInitInfo.hpp"
+#include "IE/Interaction/IEvent/BasicKeyEvent/BasicEmptyEvent/BasicEmptyEvent.hpp"
+#include "IE/Interaction/IEvent/BasicKeyEvent/BasicLambdaKeyEvent/BasicLambdaKeyEvent.hpp"
+#include "IE/Interaction/BasicInteractionInitInfo/BasicInteractionInitInfo.hpp"
 #include <Box_Ptr/boxPtr.hpp>
 
 namespace ui {
@@ -20,8 +20,6 @@ namespace ui {
 	
 		virtual ~IInteraction() = default;
 		
-		virtual void init(InteractionInitInfo);
-		
 		virtual bool isBlocked() const;
 		
 		virtual Priority getPriority() const;
@@ -36,4 +34,16 @@ namespace ui {
 		
 		virtual IInteraction* copy() = 0;
 	};
+	
+	template<typename T = std::monostate>
+	class IBasicInteraction : public IInteraction {
+	public:
+		virtual void init(BasicInteractionInitInfo<T> initInfo);
+		
+		virtual IBasicInteraction<T>* copy() = 0;
+	};
+	
+	using IBaseInteraction = IBasicInteraction<>;
 }
+
+#include "IInteraction.inl"

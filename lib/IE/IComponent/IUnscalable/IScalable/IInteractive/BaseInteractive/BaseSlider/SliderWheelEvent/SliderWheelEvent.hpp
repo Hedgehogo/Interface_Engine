@@ -5,7 +5,7 @@
 namespace ui {
 	class BaseSlider;
 	
-	class SliderWheelEvent : public WheelEvent_Simple {
+	class SliderWheelEvent : public BaseWheelEvent {
 	public:
 		enum class Relativity {
 			relationArea,

@@ -2,7 +2,7 @@
 
 #include "../BoxSwitch/BoxSwitch.hpp"
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
-#include "IE/Interaction/IInteraction/OneKeyInteraction/OneKeyInteraction.hpp"
+#include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 #include "modules/appendix/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"
 #include "SwitcherTabsEvent/SwitcherTabsEvent.hpp"
 
@@ -17,7 +17,7 @@ namespace ui {
 	
 	BoxSwitcherTabs::BoxSwitcherTabs(Make&& make, InitInfo initInfo) :
 		Box(make.minSize),
-		interactive(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>{new SwitcherTabsEvent{make.value, *this}}, make.key), initInfo),
+		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(BoxPtr < KeyEvent > {new SwitcherTabsEvent{make.value, *this}}, make.key), initInfo),
 		objects(mapMake(std::move(make.objects), initInfo)),
 		isHorizontal(make.isHorizontal),
 		value(make.value) {
@@ -25,7 +25,7 @@ namespace ui {
 	}
 	
 	BoxSwitcherTabs::BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
-		Box(minSize), interactive(makeBoxPtr<IInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>{new SwitcherTabsEvent{value, *this}}, key)),
+		Box(minSize), interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(BoxPtr < KeyEvent > {new SwitcherTabsEvent{value, *this}}, key)),
 		objects(std::move(objects)), isHorizontal(isHorizontal), value(value) {
 	}
 	

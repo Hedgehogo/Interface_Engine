@@ -1,5 +1,5 @@
 #include "Switcher.hpp"
-#include "../../../../../../Interaction/IInteraction/OneKeyInteraction/OneKeyInteraction.hpp"
+#include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 #include "SwitherEvent/SwitcherEvent.hpp"
 
 namespace ui {
@@ -16,7 +16,7 @@ namespace ui {
 	}
 	
 	Switcher::Switcher(Make&& make, InitInfo initInfo) :
-		BaseInteractive(makeBoxPtr<IInteraction, OneKeyInteraction>(makeBoxPtr<KeyEvent, SwitcherEvent>(make.value), make.key), initInfo),
+		BaseInteractive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(makeBoxPtr<KeyEvent, SwitcherEvent>(make.value), make.key), initInfo),
 		inactiveBackground(make.inactiveBackground->make(initInfo.copy(inactiveDrawManager))),
 		activeBackground(make.activeBackground->make(initInfo.copy(activeDrawManager))),
 		active(make.value) {
@@ -24,7 +24,7 @@ namespace ui {
 	}
 	
 	Switcher::Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key) :
-		BaseInteractive(makeBoxPtr<IInteraction, OneKeyInteraction>(makeBoxPtr<KeyEvent, SwitcherEvent>(value), key)),
+		BaseInteractive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(makeBoxPtr<KeyEvent, SwitcherEvent>(value), key)),
 		inactiveBackground(std::move(inactiveBackground)), activeBackground(std::move(activeBackground)), active(value) {
 	}
 	

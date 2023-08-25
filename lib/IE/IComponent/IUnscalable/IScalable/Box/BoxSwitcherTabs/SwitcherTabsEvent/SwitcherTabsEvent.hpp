@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp"
+#include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 #include "modules/appendix/yaml-cpp/shared/value/general/sValue.hpp"
 
 namespace ui {

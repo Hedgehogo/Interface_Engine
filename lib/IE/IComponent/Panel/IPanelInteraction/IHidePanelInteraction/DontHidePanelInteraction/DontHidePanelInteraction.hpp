@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IHidePanelInteraction.hpp"
-#include "../../../../../Interaction/IInteraction/EmptyInteraction/EmptyInteraction.hpp"
+#include "IE/Interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 
 namespace ui {
 	class DontHidePanelInteraction : public EmptyInteraction, public IHidePanelInteraction {

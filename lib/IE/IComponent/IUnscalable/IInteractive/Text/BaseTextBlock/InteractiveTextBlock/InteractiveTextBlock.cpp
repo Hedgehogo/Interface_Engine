@@ -3,7 +3,7 @@
 
 namespace ui {
 	InteractiveTextBlock::InteractiveTextBlock(
-		IInteraction* interaction, std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
+		IBaseInteraction* interaction, std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
 		sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor
 	) :
 		TextBlock(text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor),
@@ -58,7 +58,7 @@ namespace ui {
 		return false;
 	}
 	
-	InteractiveTextBlock::InteractiveTextBlock(std::u32string str, TextVariables textVariables, IInteraction* interaction) :
+	InteractiveTextBlock::InteractiveTextBlock(std::u32string str, TextVariables textVariables, IBaseInteraction* interaction) :
 		TextBlock(str, textVariables, {}), interact(false), oldInteract(false), interaction(interaction) {
 	}
 	
@@ -68,7 +68,7 @@ namespace ui {
 	
 	InteractiveTextBlock* InteractiveTextBlock::copy() {
 		if(indexInteraction == -1)
-			return new InteractiveTextBlock(str, textVariables, interaction->copy());
+			return new InteractiveTextBlock(str, textVariables, dynamic_cast<IBaseInteraction*>(interaction->copy()));
 		else
 			return new InteractiveTextBlock(str, textVariables, indexInteraction);
 	}
@@ -125,7 +125,7 @@ namespace ui {
 		
 		if(node["interaction"]) {
 			interactiveTextBlock = new InteractiveTextBlock{
-				node["interaction"].as<IInteraction*>(), text, textColor, font, style, lines, size, textSelectionColor,
+				node["interaction"].as<IBaseInteraction*>(), text, textColor, font, style, lines, size, textSelectionColor,
 				backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor
 			};
 		} else {

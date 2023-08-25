@@ -1,5 +1,5 @@
 #include "SliderInteraction.hpp"
-#include "IE/Interaction/IEvent/KeyEvent/AddInteractionEvent/AddBlockInteractionEvent/AddBlockInteractionEvent.hpp"
+#include "IE/Interaction/IEvent/BasicKeyEvent/BasicAddInteractionEvent/BasicAddBlockInteractionEvent/BasicAddBlockInteractionEvent.hpp"
 
 namespace ui {
 	SliderInteraction::SliderInteraction(BaseSlider& slider, Key key, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
@@ -24,7 +24,7 @@ namespace ui {
 	}
 	
 	void SliderInteraction::init(InteractionInitInfo interactionInitInfo) {
-		slideInteraction.init(InteractionInitInfo{interactionInitInfo});
+		slideInteraction.init(interactionInitInfo);
 		event->init(interactionInitInfo);
 	}
 	

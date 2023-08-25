@@ -1,23 +1,23 @@
 #include "BaseInteractive.hpp"
 
 namespace ui {
-	BaseInteractiveData::BaseInteractiveData(BoxPtr<IInteraction>&& interaction, InitInfo initInfo) :
+	BaseInteractiveData::BaseInteractiveData(BoxPtr<IBaseInteraction>&& interaction, InitInfo initInfo) :
 		interactionStack(&initInfo.interactionStack),
 		interactionManager(&initInfo.interactionManager),
 		interaction(std::move(interaction)),
 		interact(false),
 		oldInteract(false) {
-		this->interaction->init({initInfo});
+		this->interaction->init({initInfo, {}});
 	}
 	
-	BaseInteractiveData::BaseInteractiveData(BoxPtr<IInteraction>&& interaction) :
+	BaseInteractiveData::BaseInteractiveData(BoxPtr<IBaseInteraction>&& interaction) :
 		interactionStack(nullptr), interactionManager(nullptr), interaction(std::move(interaction)), interact(false), oldInteract(false) {
 	}
 	
 	void BaseInteractiveData::init(InitInfo initInfo) {
 		this->interactionStack = &initInfo.interactionStack;
 		this->interactionManager = &initInfo.interactionManager;
-		interaction->init({initInfo});
+		interaction->init({initInfo, {}});
 	}
 	
 	void BaseInteractiveData::update() {
@@ -36,12 +36,12 @@ namespace ui {
 		interact = true;
 	}
 	
-	BaseInteractive::BaseInteractive(BoxPtr<IInteraction>&& interaction, InitInfo initInfo) :
+	BaseInteractive::BaseInteractive(BoxPtr<IBaseInteraction>&& interaction, InitInfo initInfo) :
 		interactive(std::move(interaction), initInfo) {
 		initInfo.updateManager.add(*this);
 	}
 	
-	BaseInteractive::BaseInteractive(BoxPtr<IInteraction>&& interaction) :
+	BaseInteractive::BaseInteractive(BoxPtr<IBaseInteraction>&& interaction) :
 		interactive(std::move(interaction)) {
 	}
 	

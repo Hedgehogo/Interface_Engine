@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../../../../../Interaction/IInteraction/OneKeyInteraction/OneKeyInteraction.hpp"
-#include "../../../../../../../Interaction/IInteraction/IBlockInteraction/PressedInteraction/PressedInteraction.hpp"
+#include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
+#include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
 #include "../SliderEvent/SliderEvent.hpp"
 #include "../SliderWheelEvent/SliderWheelEvent.hpp"
 

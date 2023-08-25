@@ -8,7 +8,7 @@ namespace ui {
 	
 	class IPanelManager;
 	
-	class IPanelInteraction : public virtual IInteraction {
+	class IPanelInteraction : public virtual IBaseInteraction {
 	public:
 		IPanelInteraction() = default;
 		

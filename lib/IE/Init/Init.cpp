@@ -80,8 +80,6 @@ namespace ui {
 		
 		inherit<TextEvent, TextCopyEvent>({"TextCopyE"});
 		inherit<TextEvent, TextSelectionEvent>({"TextSelectionE"});
-		inherit<TextEvent, TextAddBlockInteractionEvent>({"TextAddBlockIE"});
-		inherit<KeyEvent, TextEvent>();
 		inherit<KeyEvent, SwitchTabsEvent>({"SwitchTabsE"});
 		inherit<KeyEvent, WhileSwitchTabsEvent>({"WhileSwitchTabsE"});
 		inherit<KeyEvent, OpenUrlEvent>({"OpenUrlE"});
@@ -101,15 +99,15 @@ namespace ui {
 		inherit<IMovePanelInteraction, DontMovePanelInteraction>({"DontMovePI"});
 		inherit<IMovePanelInteraction, SideMovePanelInteraction>({"SideMovePI"});
 		inherit<IPanelInteraction, IMovePanelInteraction>();
-		inherit<IInteraction, IPanelInteraction>();
+		inherit<IBaseInteraction, IPanelInteraction>();
 		inherit<TextInteraction, TextKeysInteraction>({"TextKeysI"});
 		inherit<TextInteraction, TextHotkeyInteraction>({"TextHotkeyI"});
 		inherit<TextInteraction, TextEmptyInteraction>({"TextEmptyI"});
-		inherit<IInteraction, TextInteraction>();
-		inherit<IInteraction, KeysInteraction>({"KeysI"});
-		inherit<IInteraction, OneKeyInteraction>({"OneKeyI"});
-		inherit<IInteraction, HotkeyInteraction>({"HotkeyI"});
-		inherit<IInteraction, EmptyInteraction>({"EmptyI"});
+		inherit<IBaseInteraction, TextInteraction>();
+		inherit<IBaseInteraction, KeysInteraction>({"KeysI"});
+		inherit<IBaseInteraction, OneKeyInteraction>({"OneKeyI"});
+		inherit<IBaseInteraction, HotkeyInteraction>({"HotkeyI"});
+		inherit<IBaseInteraction, EmptyInteraction>({"EmptyI"});
 		
 		inherit<ISbool, SConvertFloatToBoolEquals>({"ConvertFloatToBoolEquals", "CFloatToBoolE"});
 		inherit<ISbool, SConvertFloatToBoolGreater>({"ConvertFloatToBoolGreater", "CFloatToBoolG"});

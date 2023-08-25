@@ -5,7 +5,7 @@ namespace ui {
 	}
 	
 	void TextInteraction::init(TextInteractionInitInfo textInteractionInitInfo) {
-		this->text = &textInteractionInitInfo.text;
+		this->text = &textInteractionInitInfo.additional;
 	}
 	
 	Text* TextInteraction::getText() {

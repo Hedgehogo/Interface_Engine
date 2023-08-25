@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../../../../Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp"
+#include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 
 namespace ui {
 	class BoxMovableBorder;

@@ -6,7 +6,7 @@ namespace ui {
 	}
 	
 	void TextEvent::init(TextInteractionInitInfo textInteractionInitInfo) {
-		TextEvent::text = &textInteractionInitInfo.text;
+		TextEvent::text = &textInteractionInitInfo.additional;
 	}
 	
 	void TextEvent::setText(Text* text) {

@@ -6,7 +6,7 @@
 namespace ui {
 	class Text;
 	
-	class TextInteraction : public virtual IInteraction {
+	class TextInteraction : public virtual IBaseInteraction {
 	protected:
 		void copy(TextInteraction* textInteraction);
 		

@@ -3,9 +3,9 @@
 #include "../WheelEvent.hpp"
 
 namespace ui {
-	class WheelEvent_Simple : public WheelEvent {
+	class BaseWheelEvent : public WheelEvent {
 	public:
-		explicit WheelEvent_Simple();
+		explicit BaseWheelEvent();
 		
 		virtual void startPressed(sf::Vector2i mousePosition, int value) = 0;
 		

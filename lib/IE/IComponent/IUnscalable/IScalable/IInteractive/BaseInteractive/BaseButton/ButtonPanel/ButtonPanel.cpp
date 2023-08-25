@@ -10,13 +10,13 @@ namespace ui {
 	}
 	
 	ButtonPanel::ButtonPanel(Make&& make, InitInfo initInfo) :
-		BaseButton(std::move(make.background), dynamicCast<IInteraction>(std::move(make.interaction)), initInfo),
+		BaseButton(std::move(make.background), dynamicCast<IBaseInteraction>(std::move(make.interaction)), initInfo),
 		panel(make.panel->make(initInfo)) {
 		dynamic_cast<IDisplayPanelInteraction&>(*interactive.interaction).init({initInfo, *panel});
 	}
 	
 	ButtonPanel::ButtonPanel(BoxPtr<Panel>&& panel, BoxPtr<IDisplayPanelInteraction>&& interaction, BoxPtr<IScalable>&& background) :
-		BaseButton(std::move(background), dynamicCast<IInteraction>(std::move(interaction))), panel(std::move(panel)) {
+		BaseButton(std::move(background), dynamicCast<IBaseInteraction>(std::move(interaction))), panel(std::move(panel)) {
 	}
 	
 	ButtonPanel::ButtonPanel(const ButtonPanel& other) :

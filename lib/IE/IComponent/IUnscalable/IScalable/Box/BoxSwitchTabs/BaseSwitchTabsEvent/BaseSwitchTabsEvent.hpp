@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../BoxSwitchTabs.hpp"
-#include "../../../../../../Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp"
+#include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 
 namespace ui {
 	class BaseSwitchTabsEvent : public BaseKeyEvent {

@@ -2,11 +2,11 @@
 #include "BaseButton.hpp"
 
 namespace ui {
-	BaseButton::BaseButton(BoxPtr<IScalable::Make>&& background, BoxPtr<IInteraction>&& interaction, InitInfo initInfo) :
+	BaseButton::BaseButton(BoxPtr<IScalable::Make>&& background, BoxPtr<IBaseInteraction>&& interaction, InitInfo initInfo) :
 		BaseInteractive(std::move(interaction), initInfo), background(background->make(initInfo)) {
 	}
 	
-	BaseButton::BaseButton(BoxPtr<IScalable>&& background, BoxPtr<IInteraction>&& interaction) :
+	BaseButton::BaseButton(BoxPtr<IScalable>&& background, BoxPtr<IBaseInteraction>&& interaction) :
 		BaseInteractive(std::move(interaction)), background(std::move(background)) {
 	}
 	

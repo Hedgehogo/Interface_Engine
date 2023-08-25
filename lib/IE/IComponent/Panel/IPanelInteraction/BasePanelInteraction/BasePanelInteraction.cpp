@@ -6,7 +6,7 @@ namespace ui {
 	}
 	
 	void BasePanelInteraction::init(PanelInteractionInitInfo panelInteractionInitInfo) {
-		this->panel = &panelInteractionInitInfo.panel;
+		this->panel = &panelInteractionInitInfo.additional;
 		this->panelManager = &panelInteractionInitInfo.panelManager;
 	}
 	

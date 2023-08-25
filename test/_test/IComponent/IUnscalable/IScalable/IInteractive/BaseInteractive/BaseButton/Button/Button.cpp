@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <IE/IComponent/IUnscalable/IScalable/IInteractive/BaseInteractive/BaseButton/Button/Button.hpp>
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/Interaction/IInteraction/EmptyInteraction/EmptyInteraction.hpp>
+#include "IE/Interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
 
@@ -11,7 +11,7 @@ TEST(IComponent, Button) {
 	ui::Button button{
 		{
 			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
-			ui::makeBoxPtr<ui::IInteraction, ui::EmptyInteraction>(),
+			ui::makeBoxPtr<ui::IBaseInteraction, ui::EmptyInteraction>(),
 		}, data.makeInitInfo()
 	};
 	data.interactionManager.update({});

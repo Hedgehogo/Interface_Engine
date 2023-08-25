@@ -1,7 +1,7 @@
 #include "Button.hpp"
 
 namespace ui {
-	Button::Make::Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IInteraction>&& interaction) :
+	Button::Make::Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IBaseInteraction>&& interaction) :
 		background(std::move(background)), interaction(std::move(interaction)){
 	}
 	
@@ -14,25 +14,8 @@ namespace ui {
 		interactionIndex(std::numeric_limits<std::size_t>::max()) {
 	}
 	
-	Button::Button(BoxPtr<IScalable>&& background, std::size_t interaction) :
-		BaseButton(std::move(background), BoxPtr<IInteraction>{nullptr}), interactionIndex(interaction) {
-	}
-	
-	Button::Button(BoxPtr<IScalable>&& background, BoxPtr<IInteraction>&& interaction) :
+	Button::Button(BoxPtr<IScalable>&& background, BoxPtr<IBaseInteraction>&& interaction) :
 		BaseButton(std::move(background), std::move(interaction)), interactionIndex(std::numeric_limits<std::size_t>::max()) {
-	}
-	
-	Button::~Button() {
-		if(interactionIndex != std::numeric_limits<std::size_t>::max()) {
-			interactive.interaction.set(nullptr);
-		}
-	}
-	
-	void Button::init(InitInfo initInfo) {
-		BaseButton::init(initInfo);
-		if(interactionIndex != std::numeric_limits<std::size_t>::max()) {
-			interactive.interaction = BoxPtr{&interactive.interactionStack->at(interactionIndex)};
-		}
 	}
 	
 	Button* Button::copy() {
@@ -40,19 +23,10 @@ namespace ui {
 	}
 	
 	bool DecodePointer<Button>::decodePointer(const YAML::Node& node, Button*& button) {
-		auto background{node["background"].as<BoxPtr<IScalable> >()};
-		
-		if(node["interaction"]) {
-			button = new Button{
-				std::move(background),
-				node["interaction"].as<BoxPtr<IInteraction> >()
-			};
-		} else {
-			button = new Button{
-				std::move(background),
-				node["index"].as<std::size_t>()
-			};
-		}
+		button = new Button{
+			node["background"].as<BoxPtr<IScalable> >(),
+			node["interaction"].as<BoxPtr<IBaseInteraction> >()
+		};
 		return true;
 	}
 }

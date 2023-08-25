@@ -1,6 +1,6 @@
 #pragma once
 
-#include <IE/Interaction/IEvent/KeyEvent/BaseKeyEvent/BaseKeyEvent.hpp>
+#include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 #include <modules/appendix/yaml-cpp/yaml.hpp>
 #include <string>
 #include <modules/appendix/yaml-cpp/yamlBuilder/base/baseYamlBuilder.hpp>

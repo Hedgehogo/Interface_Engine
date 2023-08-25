@@ -9,7 +9,7 @@ namespace ui {
 		BoxPtr<SliderInteraction>&& interaction,
 		InitInfo initInfo
 	) :
-		BaseInteractive(dynamicCast<IInteraction>(std::move(interaction)), initInfo),
+		BaseInteractive(dynamicCast<IBaseInteraction>(std::move(interaction)), initInfo),
 		background(background->make(initInfo)),
 		slider(slider->make(initInfo)),
 		value(value) {
@@ -17,11 +17,11 @@ namespace ui {
 			resizeSlider(newValue);
 		});
 		setRangeBounds(value, {0, 0}, {1, 1});
-		dynamic_cast<SliderInteraction&>(*interactive.interaction).init(InteractionInitInfo{initInfo});
+		dynamic_cast<SliderInteraction&>(*interactive.interaction).init(InteractionInitInfo{initInfo, {}});
 	}
 	
 	BaseSlider::BaseSlider(BoxPtr<IUninteractive>&& slider, BoxPtr<IUninteractive>&& background, const PSRVec2f& value, BoxPtr<SliderInteraction>&& interaction) :
-		BaseInteractive(dynamicCast<IInteraction>(std::move(interaction))),
+		BaseInteractive(dynamicCast<IBaseInteraction>(std::move(interaction))),
 		background(std::move(background)),
 		slider(std::move(slider)),
 		value(value) {
@@ -46,7 +46,7 @@ namespace ui {
 		BaseInteractive::init(initInfo);
 		background->init(initInfo);
 		slider->init(initInfo);
-		dynamic_cast<SliderInteraction&>(*interactive.interaction).init(InteractionInitInfo{initInfo});
+		dynamic_cast<SliderInteraction&>(*interactive.interaction).init(InteractionInitInfo{initInfo, {}});
 	}
 	
 	void BaseSlider::resizeSlider(sf::Vector2f newValue) {

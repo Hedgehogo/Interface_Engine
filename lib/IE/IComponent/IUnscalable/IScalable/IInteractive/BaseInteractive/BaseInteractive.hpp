@@ -5,9 +5,9 @@
 namespace ui {
 	class BaseInteractiveData {
 	public:
-		BaseInteractiveData(BoxPtr<IInteraction>&& interaction, InitInfo initInfo);
+		BaseInteractiveData(BoxPtr<IBaseInteraction>&& interaction, InitInfo initInfo);
 		
-		explicit BaseInteractiveData(BoxPtr<IInteraction>&& interaction);
+		explicit BaseInteractiveData(BoxPtr<IBaseInteraction>&& interaction);
 		
 		void init(InitInfo initInfo);
 		
@@ -17,7 +17,7 @@ namespace ui {
 	
 		InteractionStack* interactionStack;
 		InteractionManager* interactionManager;
-		BoxPtr<IInteraction> interaction;
+		BoxPtr<IBaseInteraction> interaction;
 	
 	private:
 		bool interact;
@@ -26,9 +26,9 @@ namespace ui {
 	
 	class BaseInteractive : public virtual IScalable, public IInteractive, public IUpdatable {
 	public:
-		BaseInteractive(BoxPtr<IInteraction>&& interaction, InitInfo initInfo);
+		BaseInteractive(BoxPtr<IBaseInteraction>&& interaction, InitInfo initInfo);
 		
-		explicit BaseInteractive(BoxPtr<IInteraction>&& interaction);
+		explicit BaseInteractive(BoxPtr<IBaseInteraction>&& interaction);
 		
 		void init(InitInfo initInfo) override;
 		
