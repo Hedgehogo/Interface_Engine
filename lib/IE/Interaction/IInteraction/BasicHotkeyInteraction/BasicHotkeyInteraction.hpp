@@ -26,7 +26,7 @@ namespace ie {
 		
 		BasicHotkeyInteraction(std::string);
 		
-		void init(BasicInteractionInitInfo<T> initInfo) override;
+		void init(BasicActionInitInfo<T> initInfo) override;
 		
 		void setHotkeyAction(uint state, Hotkey* hotkeyAction);
 		

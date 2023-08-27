@@ -10,7 +10,7 @@ namespace ie {
 	public:
 		BasicPressedInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
 		
-		void init(BasicInteractionInitInfo<T> initInfo) override;
+		void init(BasicActionInitInfo<T> initInfo) override;
 		
 		void update(sf::Vector2i mousePosition) override;
 		

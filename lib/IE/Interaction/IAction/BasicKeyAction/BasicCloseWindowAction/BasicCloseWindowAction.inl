@@ -23,7 +23,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicCloseWindowAction<T>::init(BasicInteractionInitInfo<T> initInfo) {
+	void BasicCloseWindowAction<T>::init(BasicActionInitInfo<T> initInfo) {
 		BasicBaseKeyAction<T>::init(initInfo);
 		window = &initInfo.window;
 	}

@@ -5,7 +5,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicPressedInteraction<T>::init(BasicInteractionInitInfo<T> initInfo) {
+	void BasicPressedInteraction<T>::init(BasicActionInitInfo<T> initInfo) {
 		this->interactionManager = &initInfo.interactionManager;
 	}
 	

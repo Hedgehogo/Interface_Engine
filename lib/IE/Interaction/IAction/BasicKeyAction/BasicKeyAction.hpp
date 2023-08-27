@@ -2,7 +2,7 @@
 
 #include <SFML/System/Vector2.hpp>
 #include "../IAction.hpp"
-#include "IE/Interaction/BasicInteractionInitInfo/BasicInteractionInitInfo.hpp"
+#include "IE/Interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
 
 namespace ie {
 	template<typename T = std::monostate>
@@ -10,7 +10,7 @@ namespace ie {
 	public:
 		explicit BasicKeyAction();
 		
-		virtual void init(BasicInteractionInitInfo<T> initInfo);
+		virtual void init(BasicActionInitInfo<T> initInfo);
 		
 		virtual void setPressed(bool pressed);
 		

@@ -21,7 +21,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicHotkeyInteraction<T>::init(BasicInteractionInitInfo<T> initInfo) {
+	void BasicHotkeyInteraction<T>::init(BasicActionInitInfo<T> initInfo) {
 		for(const auto& hotkeyState: hotkeyStates) {
 			for(auto& hotkey: hotkeyState) {
 				hotkey->interaction->init(initInfo);

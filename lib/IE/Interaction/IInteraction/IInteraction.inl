@@ -1,5 +1,5 @@
 namespace ie {
 	template<typename T>
-	void IBasicInteraction<T>::init(BasicInteractionInitInfo<T>) {
+	void IBasicInteraction<T>::init(BasicActionInitInfo<T>) {
 	}
 }

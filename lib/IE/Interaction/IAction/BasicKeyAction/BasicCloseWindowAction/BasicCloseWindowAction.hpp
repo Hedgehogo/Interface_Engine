@@ -9,7 +9,7 @@ namespace ie {
 	public:
 		BasicCloseWindowAction();
 		
-		void init(BasicInteractionInitInfo<T> initInfo) override;
+		void init(BasicActionInitInfo<T> initInfo) override;
 		
 		BasicCloseWindowAction<T>* copy() override;
 	

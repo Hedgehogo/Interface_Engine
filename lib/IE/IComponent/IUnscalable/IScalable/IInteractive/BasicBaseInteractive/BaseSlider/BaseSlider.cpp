@@ -17,7 +17,7 @@ namespace ie {
 			resizeSlider(newValue);
 		});
 		setRangeBounds(value, {0, 0}, {1, 1});
-		dynamic_cast<SliderInteraction&>(*interactive.interaction).init(InteractionInitInfo{initInfo, {}});
+		dynamic_cast<SliderInteraction&>(*interactive.interaction).init(ActionInitInfo{initInfo, {}});
 	}
 	
 	BaseSlider::BaseSlider(BoxPtr<IUninteractive>&& slider, BoxPtr<IUninteractive>&& background, const PSRVec2f& value, BoxPtr<SliderInteraction>&& interaction) :
@@ -46,7 +46,7 @@ namespace ie {
 		BaseInteractive::init(initInfo, {});
 		background->init(initInfo);
 		slider->init(initInfo);
-		dynamic_cast<SliderInteraction&>(*interactive.interaction).init(InteractionInitInfo{initInfo, {}});
+		dynamic_cast<SliderInteraction&>(*interactive.interaction).init(ActionInitInfo{initInfo, {}});
 	}
 	
 	void BaseSlider::resizeSlider(sf::Vector2f newValue) {

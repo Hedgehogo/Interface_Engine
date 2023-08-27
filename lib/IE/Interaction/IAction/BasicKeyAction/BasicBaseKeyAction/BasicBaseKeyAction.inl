@@ -28,6 +28,6 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicBaseKeyAction<T>::init(BasicInteractionInitInfo<T>) {
+	void BasicBaseKeyAction<T>::init(BasicActionInitInfo<T>) {
 	}
 }

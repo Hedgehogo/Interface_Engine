@@ -2,7 +2,7 @@
 
 #include "IE/Interaction/IAction/BasicKeyAction/BasicEmptyAction/BasicEmptyAction.hpp"
 #include "IE/Interaction/IAction/BasicKeyAction/BasicLambdaKeyAction/BasicLambdaKeyAction.hpp"
-#include "IE/Interaction/BasicInteractionInitInfo/BasicInteractionInitInfo.hpp"
+#include "IE/Interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
 #include <Box_Ptr/boxPtr.hpp>
 
 namespace ie {
@@ -17,7 +17,7 @@ namespace ie {
 			medium,
 			lowest,
 		};
-	
+		
 		virtual ~IInteraction() = default;
 		
 		virtual bool isBlocked() const;
@@ -38,7 +38,13 @@ namespace ie {
 	template<typename T = std::monostate>
 	class IBasicInteraction : public IInteraction {
 	public:
-		virtual void init(BasicInteractionInitInfo<T> initInfo);
+		struct Make {
+			virtual IBasicInteraction<T>* make(BasicActionInitInfo<T> initInfo) = 0;
+			
+			virtual ~Make() = default;
+		};
+		
+		virtual void init(BasicActionInitInfo<T> initInfo);
 		
 		virtual IBasicInteraction<T>* copy() = 0;
 	};

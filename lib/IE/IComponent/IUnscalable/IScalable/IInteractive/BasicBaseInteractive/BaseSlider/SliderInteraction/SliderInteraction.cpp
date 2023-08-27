@@ -23,7 +23,7 @@ namespace ie {
 		slideInteraction(BoxPtr<KeyAction>{new SliderAction{slider, division}}, key) {
 	}
 	
-	void SliderInteraction::init(InteractionInitInfo initInfo) {
+	void SliderInteraction::init(ActionInitInfo initInfo) {
 		slideInteraction.init(initInfo);
 		action->init(initInfo);
 	}

@@ -74,7 +74,7 @@ namespace ie {
 		firstObject->init(initInfo);
 		secondObject->init(initInfo);
 		initInfo.updateManager.add(*this);
-		pressedInteraction.init(InteractionInitInfo{initInfo, {}});
+		pressedInteraction.init(ActionInitInfo{initInfo, {}});
 		dynamic_cast<OneKeyInteraction&>(*interactive.interaction).getAction().init({initInfo, {}});
 	}
 	

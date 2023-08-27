@@ -8,7 +8,7 @@ namespace ie {
 	public:
 		BasicBaseKeyAction();
 		
-		void init(BasicInteractionInitInfo<T> initInfo) override;
+		void init(BasicActionInitInfo<T> initInfo) override;
 		
 		void setPressed(bool pressed) override;
 		

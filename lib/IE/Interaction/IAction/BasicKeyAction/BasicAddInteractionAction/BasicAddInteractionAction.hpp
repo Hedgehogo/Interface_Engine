@@ -9,7 +9,7 @@ namespace ie {
 	public:
 		explicit BasicAddInteractionAction(IBasicInteraction<T>& interaction);
 		
-		void init(BasicInteractionInitInfo<T> initInfo) override;
+		void init(BasicActionInitInfo<T> initInfo) override;
 		
 		void setInteraction(IBasicInteraction<T>& interaction);
 		

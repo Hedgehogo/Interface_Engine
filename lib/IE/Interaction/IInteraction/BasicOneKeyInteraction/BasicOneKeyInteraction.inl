@@ -5,7 +5,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicOneKeyInteraction<T>::init(BasicInteractionInitInfo<T> initInfo) {
+	void BasicOneKeyInteraction<T>::init(BasicActionInitInfo<T> initInfo) {
 		action->init(initInfo);
 	}
 	

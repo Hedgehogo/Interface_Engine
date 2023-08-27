@@ -16,7 +16,7 @@ namespace ie {
 		
 		SliderInteraction(const SliderInteraction& other);
 		
-		void init(InteractionInitInfo initInfo) override;
+		void init(ActionInitInfo initInfo) override;
 		
 		void setSlider(BaseSlider& slider);
 		

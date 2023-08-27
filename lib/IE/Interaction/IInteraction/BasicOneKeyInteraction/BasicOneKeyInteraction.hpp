@@ -10,7 +10,7 @@ namespace ie {
 	public:
 		BasicOneKeyInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
 		
-		void init(BasicInteractionInitInfo<T> initInfo) override;
+		void init(BasicActionInitInfo<T> initInfo) override;
 		
 		Key getKey();
 		

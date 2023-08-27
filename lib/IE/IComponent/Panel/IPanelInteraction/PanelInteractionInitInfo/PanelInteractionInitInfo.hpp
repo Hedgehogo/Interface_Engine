@@ -1,10 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics/RenderTarget.hpp>
-#include "IE/Interaction/BasicInteractionInitInfo/BasicInteractionInitInfo.hpp"
+#include "IE/Interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
 
 namespace ie {
 	class Panel;
 	
-	using PanelInteractionInitInfo = BasicInteractionInitInfo<Panel&>;
+	using PanelInteractionInitInfo = BasicActionInitInfo<Panel&>;
 }
