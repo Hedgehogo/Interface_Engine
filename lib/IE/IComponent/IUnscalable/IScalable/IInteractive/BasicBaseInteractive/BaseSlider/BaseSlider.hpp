@@ -3,7 +3,7 @@
 #include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
 #include "../BasicBaseInteractive.hpp"
 #include "SliderInteraction/SliderInteraction.hpp"
-#include "../../../../../../../modules/appendix/yaml-cpp/shared/shared.hpp"
+#include "../../../../../../Modules/yaml-cpp/shared/shared.hpp"
 
 namespace ui {
 	class BaseSlider : public BaseInteractive {

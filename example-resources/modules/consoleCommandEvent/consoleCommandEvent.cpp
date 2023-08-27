@@ -1,5 +1,5 @@
 #include "consoleCommandEvent.hpp"
-#include <modules/appendix/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp>
+#include <IE/Modules/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp>
 
 namespace ui {
 	ConsoleCommandEvent::ConsoleCommandEvent(const std::string& command) : command(command) {}

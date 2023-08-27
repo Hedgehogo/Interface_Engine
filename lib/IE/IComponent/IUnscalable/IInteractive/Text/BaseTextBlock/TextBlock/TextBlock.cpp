@@ -2,7 +2,7 @@
 
 #include "../../BaseLine/Underline/Underline.hpp"
 #include "../../BaseLine/StrikeThrough/StrikeThrough.hpp"
-#include "../../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "../../../../../../Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
 	std::vector<BaseLine*> generateLines(std::vector<BaseLine*> lines, sf::Text::Style style) {

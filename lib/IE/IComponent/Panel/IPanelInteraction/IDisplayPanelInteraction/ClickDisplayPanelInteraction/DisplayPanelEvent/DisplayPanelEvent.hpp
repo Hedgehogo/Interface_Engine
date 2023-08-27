@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../../ClickPanelInteraction/PanelEvent/PanelEvent.hpp"
-#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "../../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
 	class DisplayPanelEvent : public PanelEvent {

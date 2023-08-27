@@ -3,7 +3,7 @@
 #include "../BoxSwitch/BoxSwitch.hpp"
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 #include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
-#include "modules/appendix/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"
+#include "IE/Modules/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"
 #include "SwitcherTabsEvent/SwitcherTabsEvent.hpp"
 
 namespace ui {

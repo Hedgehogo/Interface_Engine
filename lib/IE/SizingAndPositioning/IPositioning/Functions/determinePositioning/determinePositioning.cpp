@@ -1,5 +1,5 @@
 #include "determinePositioning.hpp"
-#include "../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
+#include "../../../../Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
 	bool determinePositioning(const YAML::Node& node, std::string& type) {

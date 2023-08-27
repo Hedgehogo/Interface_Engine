@@ -1,5 +1,5 @@
 #include "IComponent.hpp"
-#include "../../modules/appendix/hsvToRgb/hsvToRgb.hpp"
+#include "../Modules/hsvToRgb/hsvToRgb.hpp"
 
 namespace ui {
 	void IComponent::setPosition(sf::Vector2f position) {

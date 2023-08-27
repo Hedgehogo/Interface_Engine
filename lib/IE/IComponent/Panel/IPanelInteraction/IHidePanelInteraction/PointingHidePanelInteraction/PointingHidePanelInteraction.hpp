@@ -2,7 +2,7 @@
 
 #include "../IHidePanelInteraction.hpp"
 #include "../../BasePanelInteraction/BasePanelInteraction.hpp"
-#include "../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
 	class PointingHidePanelInteraction : public BasePanelInteraction, public IHidePanelInteraction {

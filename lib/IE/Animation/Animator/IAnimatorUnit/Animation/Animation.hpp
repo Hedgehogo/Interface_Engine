@@ -3,7 +3,7 @@
 #include <vector>
 #include "../IAnimatorUnit.hpp"
 #include "../../../IChangeVariable/IChangeVariable.hpp"
-#include "modules/appendix/yaml-cpp/buffer/buffer.hpp"
+#include "IE/Modules/yaml-cpp/buffer/buffer.hpp"
 
 namespace ui {
 	class Animation : public IAnimatorUnit {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IMovePanelInteraction.hpp"
-#include "../../../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
 	class CoefficientMovePanelInteraction : public BasePanelInteraction, public IMovePanelInteraction {

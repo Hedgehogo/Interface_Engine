@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../BoxRenderTexture/BoxRenderTexture.hpp"
-#include "modules/appendix/yaml-cpp/shared/vector/general/sVector2.hpp"
+#include "IE/Modules/yaml-cpp/shared/vector/general/sVector2.hpp"
 
 namespace ui {
 	class BoxShader : public BoxRenderTexture {

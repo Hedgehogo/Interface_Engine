@@ -2,7 +2,7 @@
 
 #include "../IInteraction.hpp"
 #include "../BasicKeysInteraction/BasicKeysInteraction.hpp"
-#include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ui {
 	namespace detail {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
-#include "modules/appendix/yaml-cpp/shared/value/general/sValue.hpp"
+#include "IE/Modules/yaml-cpp/shared/value/general/sValue.hpp"
 
 namespace ui {
 	class BoxSwitcherTabs;

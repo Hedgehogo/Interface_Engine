@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../modules/appendix/exception/baseException.hpp"
+#include "../../Modules/exception/baseException.hpp"
 
 namespace ui {
 	class NonexistentAnimationVariableException : public BaseException {

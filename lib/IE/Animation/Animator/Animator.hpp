@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IAnimatorUnit/IAnimatorUnit.hpp"
-#include "modules/appendix/yaml-cpp/buffer/buffer.hpp"
+#include "IE/Modules/yaml-cpp/buffer/buffer.hpp"
 
 namespace ui {
 	class Animator {

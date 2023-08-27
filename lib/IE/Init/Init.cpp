@@ -1,10 +1,10 @@
 #include "Init.hpp"
-#include "../../modules/appendix/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp"
+#include "../Modules/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp"
 #include "../SizingAndPositioning/ISizing/Functions/determineSizing/determineSizing.hpp"
 #include "../SizingAndPositioning/ISizing2/Functions/determineSizing2/determineSizing2.hpp"
 #include "../SizingAndPositioning/IPositioning/Functions/determinePositioning/determinePositioning.hpp"
 #include "../SizingAndPositioning/IPositioning2/Functions/determinePositioning2/determinePositioning2.hpp"
-#include "modules/appendix/yaml-cpp/modules/loadModules.hpp"
+#include "IE/Modules/yaml-cpp/modules/loadModules.hpp"
 #include "config.h"
 
 #ifdef IE_ImageMagick_FOUND

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../OnlyDrawable.hpp"
-#include "../../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
-#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
+#include "../../../../../../Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "../../../../../../Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
 	class Sprite : public OnlyDrawable {

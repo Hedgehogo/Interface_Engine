@@ -2,7 +2,7 @@
 
 #include "../BaseTextBlock.hpp"
 #include "../../BaseCharacter/Character/Character.hpp"
-#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
+#include "../../../../../../Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
 	class TextBlock : public BaseTextBlock {

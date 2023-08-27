@@ -1,5 +1,5 @@
 #include "Character.hpp"
-#include "../../../../../../../modules/appendix/hsvToRgb/hsvToRgb.hpp"
+#include "../../../../../../Modules/hsvToRgb/hsvToRgb.hpp"
 
 namespace ui {
 	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BaseLine*>& lines) :

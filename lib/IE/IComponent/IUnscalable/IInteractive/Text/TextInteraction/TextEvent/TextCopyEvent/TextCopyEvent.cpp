@@ -1,7 +1,7 @@
 #include <codecvt>
 #include "TextCopyEvent.hpp"
 #include "IE/IComponent/IUnscalable/IInteractive/Text/Text.hpp"
-#include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
 	TextCopyEvent::TextCopyEvent() : text(nullptr) {

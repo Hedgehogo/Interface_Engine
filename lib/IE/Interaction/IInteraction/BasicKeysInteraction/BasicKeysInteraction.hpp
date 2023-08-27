@@ -2,7 +2,7 @@
 
 #include "../IInteraction.hpp"
 #include "../../../Enums/KeyHandler/KeyHandler.hpp"
-#include "../../../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../../IEvent/BasicKeyEvent/BasicOpenUrlEvent/BasicOpenUrlEvent.hpp"
 
 namespace ui {

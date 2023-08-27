@@ -1,6 +1,6 @@
 #include "Caption.hpp"
 #include <algorithm>
-#include "../../../../../../modules/appendix/hsvToRgb/hsvToRgb.hpp"
+#include "../../../../../Modules/hsvToRgb/hsvToRgb.hpp"
 #include "../OnlyDrawable/Capsule/Capsule.hpp"
 
 using uint = unsigned;

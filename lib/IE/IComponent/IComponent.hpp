@@ -4,7 +4,7 @@
 #include "../IUpdatable/UpdateManager/UpdateManager.hpp"
 #include "../Interaction/InteractionStack/InteractionStack.hpp"
 #include "../Interaction/InteractionManager/InteractionManager.hpp"
-#include "../../modules/appendix/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../Animation/AnimationManager/AnimationManager.hpp"
 #include "../Make/make.hpp"
 #include "InitInfo/InitInfo.hpp"

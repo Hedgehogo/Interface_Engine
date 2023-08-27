@@ -1,7 +1,7 @@
 #include "Interface.hpp"
 
 #include <cmath>
-#include "modules/appendix/yaml-cpp/modules/loadModules.hpp"
+#include "IE/Modules/yaml-cpp/modules/loadModules.hpp"
 #include "IE/Window/Window.hpp"
 
 namespace ui {

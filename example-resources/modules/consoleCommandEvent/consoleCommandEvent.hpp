@@ -1,9 +1,9 @@
 #pragma once
 
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
-#include <modules/appendix/yaml-cpp/yaml.hpp>
+#include <IE/Modules/yaml-cpp/yaml.hpp>
 #include <string>
-#include <modules/appendix/yaml-cpp/yamlBuilder/base/baseYamlBuilder.hpp>
+#include <IE/Modules/yaml-cpp/yamlBuilder/base/baseYamlBuilder.hpp>
 
 namespace ui {
 	class ConsoleCommandEvent : public BaseKeyEvent{

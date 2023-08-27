@@ -1,5 +1,5 @@
 #include "InteractiveTextBlock.hpp"
-#include "../../../../../../../modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "../../../../../../Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ui {
 	InteractiveTextBlock::InteractiveTextBlock(

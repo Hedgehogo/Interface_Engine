@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../BoxView/BoxView.hpp"
-#include "modules/appendix/yaml-cpp/shared/vector/general/sVector2.hpp"
+#include "IE/Modules/yaml-cpp/shared/vector/general/sVector2.hpp"
 
 namespace ui {
 	class BoxScroll : public BoxWithView {

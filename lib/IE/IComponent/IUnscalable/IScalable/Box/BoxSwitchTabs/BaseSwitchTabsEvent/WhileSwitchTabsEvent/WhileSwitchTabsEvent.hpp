@@ -2,7 +2,7 @@
 
 #include "../../BoxSwitchTabs.hpp"
 #include "../BaseSwitchTabsEvent.hpp"
-#include "../../../../../../../../modules/appendix/yaml-cpp/yaml.hpp"
+#include "../../../../../../../Modules/yaml-cpp/yaml.hpp"
 
 namespace ui {
 	class WhileSwitchTabsEvent : public BaseSwitchTabsEvent {

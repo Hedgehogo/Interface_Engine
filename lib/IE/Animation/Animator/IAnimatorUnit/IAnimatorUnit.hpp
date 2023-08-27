@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../../modules/appendix/yaml-Animation/buffer.hpp"
-#include "modules/appendix/yaml-cpp/shared/value/general/sValue.hpp"
+#include "../../../Modules/yaml-Animation/buffer.hpp"
+#include "IE/Modules/yaml-cpp/shared/value/general/sValue.hpp"
 
 namespace ui {
 	class IAnimatorUnit {

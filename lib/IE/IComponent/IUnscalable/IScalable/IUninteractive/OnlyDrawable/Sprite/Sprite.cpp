@@ -1,6 +1,6 @@
 #include "Sprite.hpp"
 #include <algorithm>
-#include "../../../../../../../modules/appendix/yaml-cpp/yamlBuilder/determine/determine.hpp"
+#include "../../../../../../Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ui {
 	Sprite::Make::Make(sf::Texture& texture, sf::IntRect rect, sf::Vector2f minSize) :

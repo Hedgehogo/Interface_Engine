@@ -5,8 +5,8 @@
 #include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 #include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
 #include "MovableBorderEvent/MovableBorderEvent.hpp"
-#include "modules/appendix/yaml-cpp/fileBuffer/fileBuffer.hpp"
-#include "modules/appendix/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
+#include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "IE/Modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 
 namespace ui {
 	class BoxMovableBorder : public Box, public IInteractive, public IUpdatable, public ILayoutTwoObjects {
