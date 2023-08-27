@@ -2,6 +2,18 @@
 #include "../../../BasePanel/Panel/Panel.hpp"
 
 namespace ie {
+	CoefficientMovePanelInteraction::Make::Make(sf::Vector2f coefficient, sf::Vector2f offset, bool atStart) :
+		coefficient(coefficient), offset(offset), atStart(atStart) {
+	}
+	
+	CoefficientMovePanelInteraction* CoefficientMovePanelInteraction::Make::make(PanelActionInitInfo initInfo) {
+		return new CoefficientMovePanelInteraction{std::move(*this), initInfo};
+	}
+	
+	CoefficientMovePanelInteraction::CoefficientMovePanelInteraction(Make&& make, PanelActionInitInfo initInfo) :
+		BasePanelInteraction(initInfo), coefficient(make.coefficient), offset(make.offset), atStart(make.atStart) {
+	}
+	
 	CoefficientMovePanelInteraction::CoefficientMovePanelInteraction(sf::Vector2f coefficient, sf::Vector2f offset, bool atStart) :
 		coefficient(coefficient), offset(offset), atStart(atStart) {
 	}

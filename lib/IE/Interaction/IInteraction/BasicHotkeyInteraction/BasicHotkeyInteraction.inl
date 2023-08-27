@@ -1,6 +1,22 @@
 namespace ie {
 	namespace detail {
 		template<typename T>
+		BasicHotkeyInteractionHotkey<T>::Make::Make(
+			BoxPtr<typename BasicKeysInteraction<T>::Make>&& interaction, uint state
+		) : interaction(std::move(interaction)), state(state) {
+		}
+		
+		template<typename T>
+		BasicHotkeyInteractionHotkey<T>* BasicHotkeyInteractionHotkey<T>::Make::make(BasicActionInitInfo<T> initInfo) {
+			return new BasicHotkeyInteractionHotkey<T>{std::move(*this), initInfo};
+		}
+		
+		template<typename T>
+		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(Make&& make, BasicActionInitInfo<T> initInfo) :
+			interaction(make.interaction->make(initInfo)), state(state) {
+		}
+		
+		template<typename T>
 		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(BoxPtr<BasicKeysInteraction<T> >&& interaction, uint state) :
 			interaction(std::move(interaction)), state(state) {
 		}
@@ -9,6 +25,25 @@ namespace ie {
 		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(uint state) :
 			interaction(nullptr), state(state) {
 		}
+	}
+	
+	template<typename T>
+	BasicHotkeyInteraction<T>::Make::Make(std::vector<std::vector<BoxPtr<typename Hotkey::Make> > >&& hotkeys, uint state) :
+		hotkeys(std::move(hotkeys)), state(state) {
+	}
+	
+	template<typename T>
+	BasicHotkeyInteraction<T>* BasicHotkeyInteraction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
+		return new BasicHotkeyInteraction<T>{std::move(*this), initInfo};
+	}
+	
+	template<typename T>
+	BasicHotkeyInteraction<T>::BasicHotkeyInteraction(Make&& make, BasicActionInitInfo<T> initInfo) :
+		hotkeyStates(mapMake(std::move(make.hotkeys), initInfo)), nowHotkeys(nullptr) {
+		if(hotkeyStates.size() <= make.state) {
+			hotkeyStates.resize(make.state, {});
+		}
+		nowHotkeys = &hotkeyStates[make.state];
 	}
 	
 	template<typename T>

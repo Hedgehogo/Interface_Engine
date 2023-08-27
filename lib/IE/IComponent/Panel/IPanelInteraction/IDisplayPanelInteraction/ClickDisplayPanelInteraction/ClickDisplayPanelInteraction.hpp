@@ -6,6 +6,16 @@
 namespace ie {
 	class ClickDisplayPanelInteraction : public ClickPanelInteraction, public IDisplayPanelInteraction {
 	public:
+		struct Make : public IDisplayPanelInteraction::Make {
+			Key key;
+			
+			Make(Key key);
+			
+			ClickDisplayPanelInteraction* make(PanelActionInitInfo initInfo) override;
+		};
+		
+		ClickDisplayPanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		
 		explicit ClickDisplayPanelInteraction(Key key);
 		
 		void start(sf::Vector2i) override;

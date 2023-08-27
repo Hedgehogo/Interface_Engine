@@ -33,7 +33,13 @@ namespace ie {
 		using MakeType = std::remove_pointer_t<decltype(std::declval<T>().make(std::declval<I>()))>;
 		
 		template<typename T, typename I>
-		struct MapMake {};
+		struct MapMake {
+			using V = MakeType<T, I>;
+			
+			static V map(T&& make, const I& initInfo) {
+				return T{std::move(make), initInfo};
+			}
+		};
 		
 		template<typename T, typename I>
 		struct MapMake<T*, I> {

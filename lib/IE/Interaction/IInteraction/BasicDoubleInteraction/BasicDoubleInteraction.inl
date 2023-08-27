@@ -1,5 +1,22 @@
 namespace ie {
 	template<typename T>
+	BasicDoubleInteraction<T>::Make::Make(
+		BoxPtr<typename IBasicInteraction<T>::Make>&& first,
+		BoxPtr<typename IBasicInteraction<T>::Make>&& second
+	) : first(std::move(first)), second(std::move(second)) {
+	}
+	
+	template<typename T>
+	BasicDoubleInteraction<T>* BasicDoubleInteraction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
+		return new BasicDoubleInteraction<T>{std::move(*this), initInfo};
+	}
+	
+	template<typename T>
+	BasicDoubleInteraction<T>::BasicDoubleInteraction(Make&& make, BasicActionInitInfo<T> initInfo) :
+		first(make.first->make(initInfo)), second(make.second->make(initInfo)) {
+	}
+	
+	template<typename T>
 	BasicDoubleInteraction<T>::BasicDoubleInteraction(BoxPtr<IBasicInteraction<T> >&& first, BoxPtr<IBasicInteraction<T> >&& second) :
 		first(std::move(first)), second(std::move(second)) {
 	}

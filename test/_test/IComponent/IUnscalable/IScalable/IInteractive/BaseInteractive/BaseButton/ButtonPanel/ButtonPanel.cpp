@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "IE/IComponent/IUnscalable/IScalable/IInteractive/BasicBaseInteractive/BasicBaseButton/ButtonPanel/ButtonPanel.hpp"
+#include "IE/IComponent/IUnscalable/IScalable/BasicInteractiveData/BaseButton/ButtonPanel/ButtonPanel.hpp"
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_imageEqual.hpp>
@@ -10,13 +10,13 @@ TEST(IComponent, ButtonPanel) {
 	ie::ButtonPanel buttonPanel{
 		{
 			ie::makeBoxPtr<ie::Panel::Make>(
-				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
-				ie::makeBoxPtr<ie::IHidePanelInteraction, ie::PointingHidePanelInteraction>(),
-				ie::makeBoxPtr<ie::ISizing2::Make, ie::Sizing2::Make>(sf::Vector2f{10, 10}),
-				ie::makeBoxPtr<ie::IPositioning2::Make, ie::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
+				ie::makeBoxPtr<ie::FullColor::Make>(sf::Color::Red),
+				ie::makeBoxPtr<ie::PointingHidePanelInteraction::Make>(),
+				ie::makeBoxPtr<ie::Sizing2::Make>(sf::Vector2f{10, 10}),
+				ie::makeBoxPtr<ie::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
 			),
-			ie::makeBoxPtr<ie::IDisplayPanelInteraction, ie::PointingDisplayPanelInteraction>(),
-			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::makeBoxPtr<ie::PointingDisplayPanelInteraction::Make>(),
+			ie::makeBoxPtr<ie::FullColor::Make>(sf::Color::Green),
 		}, data.makeInitInfo()
 	};
 	data.interactionManager.update({});

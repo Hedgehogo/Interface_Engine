@@ -8,8 +8,22 @@ namespace ie {
 	namespace detail {
 		template<typename T = std::monostate>
 		struct BasicHotkeyInteractionHotkey {
-			BoxPtr<BasicKeysInteraction<T> > interaction{nullptr};
+			BoxPtr<BasicKeysInteraction<T> > interaction;
 			uint state{std::numeric_limits<uint>::max()};
+			
+			struct Make {
+				BoxPtr<typename BasicKeysInteraction<T>::Make> interaction;
+				uint state{std::numeric_limits<uint>::max()};
+				
+				Make(
+					BoxPtr<typename BasicKeysInteraction<T>::Make>&& interaction,
+					uint state = std::numeric_limits<uint>::max()
+				);
+				
+				BasicHotkeyInteractionHotkey<T>* make(BasicActionInitInfo<T> initInfo);
+			};
+			
+			BasicHotkeyInteractionHotkey(Make&& make, BasicActionInitInfo<T> initInfo);
 			
 			BasicHotkeyInteractionHotkey(BoxPtr<BasicKeysInteraction<T> >&& interaction, uint state = std::numeric_limits<uint>::max());
 			
@@ -21,6 +35,17 @@ namespace ie {
 	class BasicHotkeyInteraction : public virtual IBasicInteraction<T> {
 	public:
 		using Hotkey = detail::BasicHotkeyInteractionHotkey<T>;
+		
+		struct Make : public IBasicInteraction<T>::Make {
+			std::vector<std::vector<BoxPtr<typename Hotkey::Make> > >&& hotkeys;
+			uint state = 0;
+			
+			Make(std::vector<std::vector<BoxPtr<typename Hotkey::Make> > >&& hotkeys, uint state = 0);
+			
+			BasicHotkeyInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+		
+		BasicHotkeyInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
 		
 		BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, uint state = 0);
 		

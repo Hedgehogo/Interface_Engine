@@ -6,6 +6,20 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicDoubleInteraction : public virtual IBasicInteraction<T> {
 	public:
+		struct Make : public IBasicInteraction<T>::Make {
+			BoxPtr<typename IBasicInteraction<T>::Make> first;
+			BoxPtr<typename IBasicInteraction<T>::Make> second;
+			
+			Make(
+				BoxPtr<typename IBasicInteraction<T>::Make>&& first,
+				BoxPtr<typename IBasicInteraction<T>::Make>&& second
+			);
+			
+			BasicDoubleInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+		
+		BasicDoubleInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
+		
 		BasicDoubleInteraction(BoxPtr<IBasicInteraction<T> >&& first, BoxPtr<IBasicInteraction<T> >&& second);
 		
 		void setFirst(BoxPtr<IBasicInteraction<T> >&& first);

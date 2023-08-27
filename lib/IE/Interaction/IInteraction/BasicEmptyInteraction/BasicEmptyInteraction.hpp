@@ -7,6 +7,12 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicEmptyInteraction : public virtual IBasicInteraction<T> {
 	public:
+		struct Make : public IBasicInteraction<T> {
+			BasicEmptyInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+		
+		BasicEmptyInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
+		
 		BasicEmptyInteraction();
 		
 		void start(sf::Vector2i) override;

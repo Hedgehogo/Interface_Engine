@@ -4,6 +4,23 @@
 
 namespace ie {
 	template<typename T>
+	BasicKeysInteraction<T>::Make::Make(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys) :
+		action(std::move(action)), keys(std::move(keys)), blackListKeys(std::move(blackListKeys)) {
+	}
+	
+	template<typename T>
+	BasicKeysInteraction<T>* BasicKeysInteraction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
+		return new BasicKeysInteraction<T>{std::move(*this), initInfo};
+	}
+	
+	template<typename T>
+	BasicKeysInteraction<T>::BasicKeysInteraction(Make&& make, BasicActionInitInfo<T> initInfo) :
+		action(std::move(make.action)), keys(std::move(make.keys)), blackListKeys(std::move(make.blackListKeys)), press(false) {
+		action->init(initInfo);
+		std::sort(this->keys.begin(), this->keys.end());
+	}
+	
+	template<typename T>
 	BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys) :
 		action(std::move(action)), keys(std::move(keys)), blackListKeys(std::move(blackListKeys)), press(false) {
 		std::sort(this->keys.begin(), this->keys.end());

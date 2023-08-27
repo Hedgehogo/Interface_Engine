@@ -3,6 +3,18 @@
 #include "../../../BasePanel/Panel/Panel.hpp"
 
 namespace ie {
+	PointingHidePanelInteraction::Make::Make(bool onlyOnParent) :
+		onlyOnParent(onlyOnParent) {
+	}
+	
+	PointingHidePanelInteraction* PointingHidePanelInteraction::Make::make(PanelActionInitInfo initInfo) {
+		return new PointingHidePanelInteraction{std::move(*this), initInfo};
+	}
+	
+	PointingHidePanelInteraction::PointingHidePanelInteraction(Make&& make, PanelActionInitInfo initInfo) :
+		BasePanelInteraction(initInfo), onlyOnParent(make.onlyOnParent) {
+	}
+	
 	PointingHidePanelInteraction::PointingHidePanelInteraction(bool onlyOnParent) : onlyOnParent(onlyOnParent) {
 	}
 	

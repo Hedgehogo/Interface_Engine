@@ -2,7 +2,11 @@
 #include "../../../IPanelManager/IPanelManager.hpp"
 
 namespace ie {
-	DontMovePanelInteraction::DontMovePanelInteraction() : IMovePanelInteraction() {
+	DontMovePanelInteraction* DontMovePanelInteraction::Make::make(PanelActionInitInfo initInfo) {
+		return new DontMovePanelInteraction{std::move(*this), initInfo};
+	}
+	
+	DontMovePanelInteraction::DontMovePanelInteraction(Make&&, PanelActionInitInfo) {
 	}
 	
 	bool DontMovePanelInteraction::getAtStart() {
@@ -18,7 +22,7 @@ namespace ie {
 	void DontMovePanelInteraction::update(sf::Vector2i) {
 	}
 	
-	void DontMovePanelInteraction::init(PanelInteractionInitInfo) {
+	void DontMovePanelInteraction::init(PanelActionInitInfo) {
 	}
 	
 	void DontMovePanelInteraction::setPanel(Panel&) {

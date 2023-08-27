@@ -8,9 +8,11 @@
 namespace ie {
 	class ClickPanelInteraction : public BasicOneKeyInteraction<Panel&>, public virtual IPanelInteraction {
 	public:
+		ClickPanelInteraction(BoxPtr<PanelAction>&& action, Key key, PanelActionInitInfo initInfo);
+		
 		ClickPanelInteraction(BoxPtr<PanelAction>&& action, Key key);
 		
-		void init(PanelInteractionInitInfo initInfo) override;
+		void init(PanelActionInitInfo initInfo) override;
 		
 		void setPanel(Panel& panel) override;
 		

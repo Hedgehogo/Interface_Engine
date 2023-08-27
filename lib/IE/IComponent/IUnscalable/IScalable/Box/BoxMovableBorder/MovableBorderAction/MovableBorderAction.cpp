@@ -3,7 +3,11 @@
 #include "../BoxMovableBorder.hpp"
 
 namespace ie {
-	MovableBorderAction::MovableBorderAction(BoxMovableBorder& box) : box(&box) {
+	MovableBorderAction::MovableBorderAction() : box(nullptr) {
+	}
+	
+	void MovableBorderAction::init(BasicActionInitInfo<BoxMovableBorder&> initInfo) {
+		box = &initInfo.additional;
 	}
 	
 	void MovableBorderAction::setBox(BoxMovableBorder& box) {

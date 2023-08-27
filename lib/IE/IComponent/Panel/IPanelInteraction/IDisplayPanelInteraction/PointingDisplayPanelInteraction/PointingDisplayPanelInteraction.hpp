@@ -7,6 +7,14 @@
 namespace ie {
 	class PointingDisplayPanelInteraction : public BasePanelInteraction, public IDisplayPanelInteraction {
 	public:
+		struct Make : public IDisplayPanelInteraction::Make {
+			PointingDisplayPanelInteraction* make(PanelActionInitInfo initInfo) override;
+		};
+		
+		PointingDisplayPanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		
+		PointingDisplayPanelInteraction() = default;
+		
 		void start(sf::Vector2i mousePosition) override;
 		
 		void update(sf::Vector2i mousePosition) override;

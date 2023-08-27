@@ -6,9 +6,11 @@
 namespace ie {
 	class BoxSwitcherTabs;
 	
-	class SwitcherTabsAction : public BaseKeyAction {
+	class SwitcherTabsAction : public BasicBaseKeyAction<BoxSwitcherTabs&> {
 	public:
-		SwitcherTabsAction(PISint value, BoxSwitcherTabs& switcherTabs);
+		SwitcherTabsAction(PISint value);
+		
+		void init(BasicActionInitInfo<BoxSwitcherTabs&> initInfo) override;
 		
 		void startPressed() override;
 		

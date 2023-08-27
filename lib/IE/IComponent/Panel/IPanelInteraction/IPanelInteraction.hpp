@@ -10,7 +10,9 @@ namespace ie {
 	
 	class IPanelInteraction : public virtual IBasicInteraction<Panel&> {
 	public:
-		IPanelInteraction() = default;
+		struct Make : public virtual IBasicInteraction<Panel&>::Make {
+			IPanelInteraction* make(PanelActionInitInfo initInfo) override = 0;
+		};
 		
 		virtual void setPanel(Panel& panel) = 0;
 		

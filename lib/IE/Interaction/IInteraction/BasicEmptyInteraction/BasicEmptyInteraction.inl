@@ -1,5 +1,14 @@
 namespace ie {
 	template<typename T>
+	BasicEmptyInteraction<T>* BasicEmptyInteraction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
+		return new BasicEmptyInteraction<T>{std::move(*this), initInfo};
+	}
+	
+	template<typename T>
+	BasicEmptyInteraction<T>::BasicEmptyInteraction(Make&&, BasicActionInitInfo<T>) {
+	}
+	
+	template<typename T>
 	BasicEmptyInteraction<T>::BasicEmptyInteraction() {
 	}
 	

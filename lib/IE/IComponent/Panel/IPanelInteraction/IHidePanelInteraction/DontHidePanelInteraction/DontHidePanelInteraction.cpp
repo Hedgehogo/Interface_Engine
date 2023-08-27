@@ -2,7 +2,14 @@
 #include "../../../IPanelManager/IPanelManager.hpp"
 
 namespace ie {
-	void DontHidePanelInteraction::init(PanelInteractionInitInfo) {
+	DontHidePanelInteraction* DontHidePanelInteraction::Make::make(PanelActionInitInfo initInfo) {
+		return new DontHidePanelInteraction{std::move(*this), initInfo};
+	}
+	
+	DontHidePanelInteraction::DontHidePanelInteraction(Make&&, PanelActionInitInfo) {
+	}
+	
+	void DontHidePanelInteraction::init(PanelActionInitInfo) {
 	}
 	
 	void DontHidePanelInteraction::setPanel(Panel&) {

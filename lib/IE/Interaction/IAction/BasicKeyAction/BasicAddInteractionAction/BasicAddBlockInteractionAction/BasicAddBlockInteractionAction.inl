@@ -1,11 +1,11 @@
 namespace ie {
 	template<typename T>
-	void BasicAddBlockInteractionAction<T>::stopPressed() {
+	BasicAddBlockInteractionAction<T>::BasicAddBlockInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction) :
+		BasicAddInteractionAction<T>(std::move(interaction)) {
 	}
 	
 	template<typename T>
-	BasicAddBlockInteractionAction<T>::BasicAddBlockInteractionAction(IBasicInteraction<T>& interaction) :
-		BasicAddInteractionAction<T>(interaction) {
+	void BasicAddBlockInteractionAction<T>::stopPressed() {
 	}
 	
 	template<typename T>

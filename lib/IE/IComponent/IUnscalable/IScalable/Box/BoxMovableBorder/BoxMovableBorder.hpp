@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/IInteractive/BasicBaseInteractive/BasicBaseInteractive.hpp"
+#include "IE/IComponent/IUnscalable/IScalable/BasicInteractiveData/BasicInteractiveData.hpp"
 #include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 #include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
 #include "IE/IComponent/IUnscalable/IScalable/Box/BoxMovableBorder/MovableBorderAction/MovableBorderAction.hpp"
@@ -9,7 +9,7 @@
 #include "IE/Modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 
 namespace ie {
-	class BoxMovableBorder : public Box, public IInteractive, public IUpdatable, public ILayoutTwoObjects {
+	class BoxMovableBorder : public Box, public IUpdatable, public ILayoutTwoObjects {
 	public:
 		struct Make : public Box::Make, public ILayoutTwoObjects::Make {
 			BoxPtr<IScalable::Make> firstObject;
@@ -83,8 +83,7 @@ namespace ie {
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	
 	protected:
-		PressedInteraction pressedInteraction;
-		BaseInteractiveData interactive;
+		BasicInteractiveData<BoxMovableBorder&> interactive;
 		BoxPtr<IScalable> firstObject;
 		BoxPtr<IScalable> secondObject;
 		PSCoefficient borderValue;

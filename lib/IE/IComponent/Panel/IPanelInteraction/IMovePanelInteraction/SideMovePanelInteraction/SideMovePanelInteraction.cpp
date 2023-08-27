@@ -2,6 +2,18 @@
 #include "../../../BasePanel/Panel/Panel.hpp"
 
 namespace ie {
+	SideMovePanelInteraction::Make::Make(float coefficient, float offset, bool horizontal, bool atStart) :
+		coefficient(coefficient), offset(offset), horizontal(horizontal), atStart(atStart) {
+	}
+	
+	SideMovePanelInteraction* SideMovePanelInteraction::Make::make(PanelActionInitInfo initInfo) {
+		return new SideMovePanelInteraction{std::move(*this), initInfo};
+	}
+	
+	SideMovePanelInteraction::SideMovePanelInteraction(Make&& make, PanelActionInitInfo initInfo) :
+		BasePanelInteraction(initInfo), coefficient(make.coefficient), offset(make.offset), horizontal(make.horizontal), atStart(make.atStart) {
+	}
+	
 	SideMovePanelInteraction::SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool atStart) :
 		coefficient(coefficient), offset(offset), horizontal(horizontal), atStart(atStart) {
 	}

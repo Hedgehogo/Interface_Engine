@@ -8,6 +8,17 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicPressedInteraction : public BasicOneKeyInteraction<T>, public IBasicBlockInteraction<T> {
 	public:
+		struct Make : public IBasicBlockInteraction<T>::Make {
+			BoxPtr<BasicKeyAction<T> >&& action;
+			Key key;
+			
+			Make(BoxPtr<BasicKeyAction<T> >&& action, Key key);
+			
+			BasicPressedInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+		
+		BasicPressedInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
+		
 		BasicPressedInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
 		
 		void init(BasicActionInitInfo<T> initInfo) override;

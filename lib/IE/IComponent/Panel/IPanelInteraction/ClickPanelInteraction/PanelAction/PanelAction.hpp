@@ -12,7 +12,7 @@ namespace ie {
 	public:
 		PanelAction();
 		
-		void init(PanelInteractionInitInfo initInfo) override;
+		void init(PanelActionInitInfo initInfo) override;
 		
 		void setPanel(Panel& panel);
 		

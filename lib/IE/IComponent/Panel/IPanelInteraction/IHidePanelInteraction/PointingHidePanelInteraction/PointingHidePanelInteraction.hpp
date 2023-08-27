@@ -7,6 +7,16 @@
 namespace ie {
 	class PointingHidePanelInteraction : public BasePanelInteraction, public IHidePanelInteraction {
 	public:
+		struct Make : public IHidePanelInteraction::Make {
+			bool onlyOnParent = false;
+			
+			Make(bool onlyOnParent = false);
+			
+			PointingHidePanelInteraction* make(PanelActionInitInfo initInfo) override;
+		};
+		
+		PointingHidePanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		
 		PointingHidePanelInteraction(bool onlyOnParent = false);
 		
 		void start(sf::Vector2i mousePosition) override;

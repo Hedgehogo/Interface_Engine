@@ -1,12 +1,12 @@
 #pragma once
 
 #include "IE/IComponent/IUnscalable/IScalable/Box/Box.hpp"
-#include "../../../../ILayout/ILayoutObjectsArray/ILayoutObjectsArray.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/IInteractive/BasicBaseInteractive/BasicBaseInteractive.hpp"
+#include "IE/IComponent/ILayout/ILayoutObjectsArray/ILayoutObjectsArray.hpp"
+#include "IE/IComponent/IUnscalable/IScalable/BasicInteractiveData/BasicInteractiveData.hpp"
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	class BoxSwitcherTabs : public Box, public IInteractive, public IUpdatable, public ILayoutObjectsArray {
+	class BoxSwitcherTabs : public Box, public IUpdatable, public ILayoutObjectsArray {
 	public:
 		struct Make : public Box::Make, public ILayoutObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
@@ -43,7 +43,7 @@ namespace ie {
 		BoxSwitcherTabs* copy() override;
 	
 	protected:
-		BaseInteractiveData interactive;
+		BasicInteractiveData<BoxSwitcherTabs&> interactive;
 		std::vector<BoxPtr<IScalable> > objects;
 		bool isHorizontal;
 		PSint value;

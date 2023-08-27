@@ -5,7 +5,7 @@ namespace ie {
 	PanelAction::PanelAction() : panel(nullptr), panelManager(nullptr) {
 	}
 	
-	void PanelAction::init(PanelInteractionInitInfo initInfo) {
+	void PanelAction::init(PanelActionInitInfo initInfo) {
 		this->panel = &initInfo.additional;
 		this->panelManager = &initInfo.panelManager;
 	}

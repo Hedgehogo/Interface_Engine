@@ -1,8 +1,20 @@
 #include "ClickHidePanelInteraction.hpp"
 
 namespace ie {
+	ClickHidePanelInteraction::Make::Make(Key key, bool onlyOnParent) :
+		key(key), onlyOnParent(onlyOnParent) {
+	}
+	
+	ClickHidePanelInteraction* ClickHidePanelInteraction::Make::make(PanelActionInitInfo initInfo) {
+		return new ClickHidePanelInteraction{std::move(*this), initInfo};
+	}
+	
+	ClickHidePanelInteraction::ClickHidePanelInteraction(Make&& make, PanelActionInitInfo initInfo) :
+		ClickPanelInteraction(makeBoxPtr<HidePanelAction>(make.onlyOnParent), make.key, initInfo) {
+	}
+	
 	ClickHidePanelInteraction::ClickHidePanelInteraction(Key key, bool onlyOnParent) :
-		ClickPanelInteraction(makeBoxPtr<PanelAction, HidePanelAction>(onlyOnParent), key) {
+		ClickPanelInteraction(makeBoxPtr<HidePanelAction>(onlyOnParent), key) {
 	}
 	
 	ClickHidePanelInteraction* ClickHidePanelInteraction::copy() {

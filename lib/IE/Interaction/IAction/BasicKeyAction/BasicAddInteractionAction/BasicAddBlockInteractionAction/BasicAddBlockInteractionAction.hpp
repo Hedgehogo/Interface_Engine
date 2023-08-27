@@ -7,7 +7,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicAddBlockInteractionAction : public BasicAddInteractionAction<T> {
 	public:
-		explicit BasicAddBlockInteractionAction(IBasicInteraction<T>& interaction);
+		explicit BasicAddBlockInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
 		
 		BasicAddBlockInteractionAction<T>* copy() override;
 	

@@ -50,9 +50,9 @@ TEST(IComponent, BoxSwitch) {
 	ASSERT_EQ(boxSwitch.getAreaPosition(), (sf::Vector2f{33, 46}));
 	
 	data.drawManager.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("test-src/BoxSwitcher-false.png"));
+	ASSERT_TRUE(data.renderEqualWithSave("test-src/BoxSwitch-false.png"));
 	
 	value->setValue(true);
 	data.drawManager.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("test-src/BoxSwitcher-true.png"));
+	ASSERT_TRUE(data.renderEqualWithSave("test-src/BoxSwitch-true.png"));
 }

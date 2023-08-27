@@ -6,5 +6,5 @@
 namespace ie {
 	class Panel;
 	
-	using PanelInteractionInitInfo = BasicActionInitInfo<Panel&>;
+	using PanelActionInitInfo = BasicActionInitInfo<Panel&>;
 }

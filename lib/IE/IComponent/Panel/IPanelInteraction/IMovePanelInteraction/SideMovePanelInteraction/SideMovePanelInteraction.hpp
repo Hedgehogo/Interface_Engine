@@ -6,6 +6,19 @@
 namespace ie {
 	class SideMovePanelInteraction : public BasePanelInteraction, public IMovePanelInteraction {
 	public:
+		struct Make : public IMovePanelInteraction::Make {
+			float coefficient;
+			float offset;
+			bool horizontal;
+			bool atStart = false;
+			
+			Make(float coefficient, float offset, bool horizontal, bool atStart = false);
+			
+			SideMovePanelInteraction* make(PanelActionInitInfo initInfo) override;
+		};
+		
+		SideMovePanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		
 		SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool atStart = false);
 		
 		bool getAtStart() override;

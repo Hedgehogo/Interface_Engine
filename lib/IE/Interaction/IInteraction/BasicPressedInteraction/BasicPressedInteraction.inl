@@ -1,5 +1,20 @@
 namespace ie {
 	template<typename T>
+	BasicPressedInteraction<T>::Make::Make(BoxPtr<BasicKeyAction<T> >&& action, Key key) :
+		action(std::move(action)), key(key) {
+	}
+	
+	template<typename T>
+	BasicPressedInteraction<T>* BasicPressedInteraction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
+		return new BasicPressedInteraction<T>{std::move(*this), initInfo};
+	}
+	
+	template<typename T>
+	BasicPressedInteraction<T>::BasicPressedInteraction(Make&& make, BasicActionInitInfo<T> initInfo) :
+		BasicOneKeyInteraction<T>({std::move(make.action), make.key}, initInfo), interactionManager(&initInfo.interactionManager) {
+	}
+	
+	template<typename T>
 	BasicPressedInteraction<T>::BasicPressedInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key) :
 		BasicOneKeyInteraction<T>(std::move(action), key), interactionManager(nullptr) {
 	}

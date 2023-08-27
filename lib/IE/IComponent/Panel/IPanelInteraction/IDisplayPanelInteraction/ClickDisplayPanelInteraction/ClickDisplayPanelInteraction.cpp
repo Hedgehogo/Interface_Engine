@@ -2,6 +2,17 @@
 #include "../../../BasePanel/Panel/Panel.hpp"
 
 namespace ie {
+	ClickDisplayPanelInteraction::Make::Make(Key key) : key(key) {
+	}
+	
+	ClickDisplayPanelInteraction* ClickDisplayPanelInteraction::Make::make(PanelActionInitInfo initInfo) {
+		return new ClickDisplayPanelInteraction{std::move(*this), initInfo};
+	}
+	
+	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Make&& make, PanelActionInitInfo initInfo) :
+		ClickPanelInteraction(makeBoxPtr<PanelAction, DisplayPanelAction>(), make.key, initInfo) {
+	}
+	
 	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Key key) :
 		ClickPanelInteraction(makeBoxPtr<PanelAction, DisplayPanelAction>(), key) {
 	}

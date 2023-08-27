@@ -6,6 +6,17 @@
 namespace ie {
 	class ClickHidePanelInteraction : public ClickPanelInteraction, public IHidePanelInteraction {
 	public:
+		struct Make : public IHidePanelInteraction::Make {
+			Key key;
+			bool onlyOnParent = false;
+			
+			Make(Key key, bool onlyOnParent = false);
+			
+			ClickHidePanelInteraction* make(PanelActionInitInfo initInfo) override;
+		};
+		
+		ClickHidePanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		
 		explicit ClickHidePanelInteraction(Key key, bool onlyOnParent = false);
 		
 		ClickHidePanelInteraction* copy() override;

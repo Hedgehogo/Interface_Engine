@@ -5,7 +5,7 @@
 namespace ie {
 	class BoxMovableBorder;
 	
-	class MovableBorderAction : public BaseKeyAction {
+	class MovableBorderAction : public BasicBaseKeyAction<BoxMovableBorder&> {
 	protected:
 		void startPressed() override;
 		
@@ -16,7 +16,9 @@ namespace ie {
 		void whileNotPressed() override;
 	
 	public:
-		explicit MovableBorderAction(BoxMovableBorder& box);
+		explicit MovableBorderAction();
+		
+		void init(BasicActionInitInfo<BoxMovableBorder&> initInfo) override;
 		
 		void setBox(BoxMovableBorder& box);
 		

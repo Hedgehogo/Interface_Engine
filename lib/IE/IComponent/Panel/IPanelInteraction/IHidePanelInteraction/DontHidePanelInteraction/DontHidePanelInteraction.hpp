@@ -6,9 +6,15 @@
 namespace ie {
 	class DontHidePanelInteraction : public BasicEmptyInteraction<Panel&>, public IHidePanelInteraction {
 	public:
+		struct Make : public IHidePanelInteraction::Make {
+			DontHidePanelInteraction* make(PanelActionInitInfo initInfo) override;
+		};
+		
+		DontHidePanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		
 		DontHidePanelInteraction() = default;
 		
-		void init(PanelInteractionInitInfo initInfo) override;
+		void init(PanelActionInitInfo initInfo) override;
 		
 		void setPanel(Panel&) override;
 		

@@ -1,26 +1,24 @@
 #pragma once
 
 #include "../../IPanelManager/PanelManager/PanelManager.hpp"
+#include "../../IPanelInteraction/IHidePanelInteraction/IHidePanelInteraction.hpp"
+#include "../../IPanelInteraction/IMovePanelInteraction/IMovePanelInteraction.hpp"
 
 namespace ie {
-	class IHidePanelInteraction;
-	
-	class IMovePanelInteraction;
-	
 	class Panel : public BasePanel {
 	public:
 		struct Make : public BasePanel::Make {
 			BoxPtr<IScalable::Make> object;
-			BoxPtr<IHidePanelInteraction> hideInteraction;
-			BoxPtr<IMovePanelInteraction> moveInteraction;
+			BoxPtr<IHidePanelInteraction::Make> hideInteraction;
+			BoxPtr<IMovePanelInteraction::Make> moveInteraction;
 			BoxPtr<ISizing2::Make> sizing;
 			BoxPtr<IPositioning2::Make> positioning;
 			bool displayed = false;
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
-				BoxPtr<IHidePanelInteraction> hideInteraction,
-				BoxPtr<IMovePanelInteraction> moveInteraction,
+				BoxPtr<IHidePanelInteraction::Make> hideInteraction,
+				BoxPtr<IMovePanelInteraction::Make> moveInteraction,
 				BoxPtr<ISizing2::Make> sizing,
 				BoxPtr<IPositioning2::Make> positioning,
 				bool displayed = false
@@ -28,7 +26,7 @@ namespace ie {
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
-				BoxPtr<IHidePanelInteraction> hideInteraction,
+				BoxPtr<IHidePanelInteraction::Make> hideInteraction,
 				BoxPtr<ISizing2::Make> sizing,
 				BoxPtr<IPositioning2::Make> positioning,
 				bool displayed = false

@@ -6,7 +6,13 @@
 namespace ie {
 	class DontMovePanelInteraction : public IMovePanelInteraction {
 	public:
-		DontMovePanelInteraction();
+		struct Make : public IMovePanelInteraction::Make {
+			DontMovePanelInteraction* make(PanelActionInitInfo initInfo) override;
+		};
+		
+		DontMovePanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		
+		DontMovePanelInteraction() = default;
 		
 		bool getAtStart() override;
 		
@@ -16,7 +22,7 @@ namespace ie {
 		
 		void update(sf::Vector2i) override;
 		
-		void init(PanelInteractionInitInfo) override;
+		void init(PanelActionInitInfo) override;
 		
 		void setPanel(Panel&) override;
 		

@@ -27,10 +27,13 @@ namespace ie {
 	
 	BoxMovableBorder::BoxMovableBorder(Make&& make, InitInfo initInfo) :
 		Box(make.minSize),
-		pressedInteraction(BoxPtr<KeyAction>{new MovableBorderAction{*this}}, make.key),
-		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(
-			BoxPtr<KeyAction>{new AddBlockInteractionAction{pressedInteraction}}, make.key
-		), initInfo, {}),
+		interactive(makeBoxPtr<BasicOneKeyInteraction<BoxMovableBorder&>::Make>(
+			makeBoxPtr<BasicAddBlockInteractionAction<BoxMovableBorder&> >(
+				makeBoxPtr<BasicPressedInteraction<BoxMovableBorder&> >(
+					makeBoxPtr<MovableBorderAction>(), make.key
+				)
+			), make.key
+		), initInfo, *this),
 		firstObject(make.firstObject->make(initInfo)),
 		secondObject(make.secondObject->make(initInfo)),
 		borderValue(make.borderValue),
@@ -41,8 +44,6 @@ namespace ie {
 			this->resize(layout.size, layout.position);
 		});
 		initInfo.updateManager.add(*this);
-		pressedInteraction.init({initInfo, {}});
-		dynamic_cast<OneKeyInteraction&>(*interactive.interaction).getAction().init({initInfo, {}});
 	}
 	
 	BoxMovableBorder::BoxMovableBorder(
@@ -54,10 +55,13 @@ namespace ie {
 		sf::Vector2f minSize
 	) :
 		Box(minSize),
-		pressedInteraction(BoxPtr<KeyAction>{new MovableBorderAction{*this}}, Key::mouseLeft),
-		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(
-			BoxPtr<KeyAction>{new AddBlockInteractionAction{pressedInteraction}}, Key::mouseLeft)
-		),
+		interactive(makeBoxPtr<BasicOneKeyInteraction<BoxMovableBorder&> >(
+			makeBoxPtr<BasicAddBlockInteractionAction<BoxMovableBorder&> >(
+				makeBoxPtr<BasicPressedInteraction<BoxMovableBorder&> >(
+					makeBoxPtr<MovableBorderAction>(), Key::mouseLeft
+				)
+			), Key::mouseLeft
+		)),
 		firstObject(std::move(firstObject)),
 		secondObject(std::move(secondObject)),
 		borderValue(borderValue),
@@ -70,12 +74,10 @@ namespace ie {
 	}
 	
 	void BoxMovableBorder::init(InitInfo initInfo) {
-		interactive.init(initInfo, {});
+		interactive.init(initInfo, *this);
 		firstObject->init(initInfo);
 		secondObject->init(initInfo);
 		initInfo.updateManager.add(*this);
-		pressedInteraction.init(ActionInitInfo{initInfo, {}});
-		dynamic_cast<OneKeyInteraction&>(*interactive.interaction).getAction().init({initInfo, {}});
 	}
 	
 	float BoxMovableBorder::getBorderValue() {
@@ -99,7 +101,12 @@ namespace ie {
 	}
 	
 	bool BoxMovableBorder::isInBorder(sf::Vector2f pointPosition) {
-		if(pointPosition.x < layout.position.x || pointPosition.x > layout.position.x + layout.size.x || pointPosition.y < layout.position.y || pointPosition.y > layout.position.y + layout.size.y) {
+		if(
+			pointPosition.x < layout.position.x ||
+			pointPosition.x > layout.position.x + layout.size.x ||
+			pointPosition.y < layout.position.y ||
+			pointPosition.y > layout.position.y + layout.size.y
+			) {
 			return false;
 		}
 		if(this->isHorizontalBorder) {
@@ -228,8 +235,8 @@ namespace ie {
 	
 	bool DecodePointer<BoxMovableBorder>::decodePointer(const YAML::Node& node, BoxMovableBorder*& boxWithMovableBorder) {
 		boxWithMovableBorder = new BoxMovableBorder{
-			node["first-object"].as<BoxPtr<IScalable> >(),
-			node["first-object"].as<BoxPtr<IScalable> >(),
+			node["first-object"].as < BoxPtr < IScalable > > (),
+			node["first-object"].as < BoxPtr < IScalable > > (),
 			convBoolDef(node["border-direction"], "horizontal", "vertical", false),
 			Buffer::get<SCoefficientValue>(node["border-value"]),
 			convDef(node["border-interaction-size"], 5),

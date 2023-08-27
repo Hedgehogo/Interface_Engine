@@ -2,10 +2,14 @@
 #include "../../IPanelManager/IPanelManager.hpp"
 
 namespace ie {
+	BasePanelInteraction::BasePanelInteraction(PanelActionInitInfo initInfo) :
+		panel(&initInfo.additional), panelManager(&initInfo.panelManager) {
+	}
+	
 	BasePanelInteraction::BasePanelInteraction() : panel(nullptr), panelManager(nullptr) {
 	}
 	
-	void BasePanelInteraction::init(PanelInteractionInitInfo initInfo) {
+	void BasePanelInteraction::init(PanelActionInitInfo initInfo) {
 		this->panel = &initInfo.additional;
 		this->panelManager = &initInfo.panelManager;
 	}

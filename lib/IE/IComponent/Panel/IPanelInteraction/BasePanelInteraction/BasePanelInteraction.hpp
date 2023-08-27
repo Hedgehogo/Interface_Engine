@@ -5,9 +5,11 @@
 namespace ie {
 	class BasePanelInteraction : public virtual IPanelInteraction {
 	public:
+		BasePanelInteraction(PanelActionInitInfo initInfo);
+		
 		BasePanelInteraction();
 		
-		void init(PanelInteractionInitInfo initInfo) override;
+		void init(PanelActionInitInfo initInfo) override;
 		
 		void setPanel(Panel& panel) override;
 		

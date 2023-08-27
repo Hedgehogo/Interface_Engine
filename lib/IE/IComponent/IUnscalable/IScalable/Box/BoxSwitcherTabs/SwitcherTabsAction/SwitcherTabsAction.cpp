@@ -2,8 +2,12 @@
 #include "../BoxSwitcherTabs.hpp"
 
 namespace ie {
-	SwitcherTabsAction::SwitcherTabsAction(PISint value, BoxSwitcherTabs& switcherTabs) :
-		value(std::move(value)), switcherTabs(&switcherTabs) {}
+	SwitcherTabsAction::SwitcherTabsAction(PISint value) :
+		value(std::move(value)), switcherTabs(nullptr) {}
+	
+	void SwitcherTabsAction::init(BasicActionInitInfo<BoxSwitcherTabs&> initInfo) {
+		switcherTabs = &initInfo.additional;
+	}
 	
 	void SwitcherTabsAction::startPressed() {}
 	

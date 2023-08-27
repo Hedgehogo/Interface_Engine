@@ -2,11 +2,15 @@
 #include "../../IPanelManager/IPanelManager.hpp"
 
 namespace ie {
-	ClickPanelInteraction::ClickPanelInteraction(BoxPtr<PanelAction>&& action, Key key) :
-		BasicOneKeyInteraction<Panel&>(dynamicCast<BasicKeyAction<Panel&> >(std::move(action)), key) {
+	ClickPanelInteraction::ClickPanelInteraction(BoxPtr<PanelAction>&& action, Key key, PanelActionInitInfo initInfo) :
+		BasicOneKeyInteraction<Panel&>({std::move(action), key}, initInfo) {
 	}
 	
-	void ClickPanelInteraction::init(PanelInteractionInitInfo initInfo) {
+	ClickPanelInteraction::ClickPanelInteraction(BoxPtr<PanelAction>&& action, Key key) :
+		BasicOneKeyInteraction<Panel&>(std::move(action), key) {
+	}
+	
+	void ClickPanelInteraction::init(PanelActionInitInfo initInfo) {
 		dynamic_cast<PanelAction&>(*action).init(initInfo);
 	}
 	

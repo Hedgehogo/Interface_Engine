@@ -2,6 +2,14 @@
 #include "../../../BasePanel/Panel/Panel.hpp"
 
 namespace ie {
+	PointingDisplayPanelInteraction* PointingDisplayPanelInteraction::Make::make(PanelActionInitInfo initInfo) {
+		return new PointingDisplayPanelInteraction{std::move(*this), initInfo};
+	}
+	
+	PointingDisplayPanelInteraction::PointingDisplayPanelInteraction(Make&&, PanelActionInitInfo initInfo) :
+		BasePanelInteraction(initInfo) {
+	}
+	
 	void PointingDisplayPanelInteraction::start(sf::Vector2i) {
 		panelManager->displayPanel(panel);
 		panel->setParentProcessed(true);
