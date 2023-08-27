@@ -8,17 +8,17 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicOneKeyInteraction : public virtual IBasicInteraction<T> {
 	public:
-		BasicOneKeyInteraction(BoxPtr<BasicKeyEvent<T> >&& event, Key key);
+		BasicOneKeyInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
 		
 		void init(BasicInteractionInitInfo<T> initInfo) override;
 		
 		Key getKey();
 		
-		BasicKeyEvent<T>& getEvent();
+		BasicKeyAction<T>& getAction();
 		
-		const BasicKeyEvent<T>& getEvent() const;
+		const BasicKeyAction<T>& getAction() const;
 		
-		void setEvent(BoxPtr<BasicKeyEvent<T> >&& event);
+		void setAction(BoxPtr<BasicKeyAction<T> >&& action);
 		
 		void start(sf::Vector2i mousePosition) override;
 		
@@ -29,7 +29,7 @@ namespace ie {
 		BasicOneKeyInteraction<T>* copy() override;
 	
 	protected:
-		BoxPtr<BasicKeyEvent<T> > event;
+		BoxPtr<BasicKeyAction<T> > action;
 		Key key;
 	};
 	

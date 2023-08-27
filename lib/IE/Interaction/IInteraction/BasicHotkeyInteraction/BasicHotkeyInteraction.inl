@@ -34,11 +34,11 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicHotkeyInteraction<T>::setHotkeyEvent(uint state, typename BasicHotkeyInteraction<T>::Hotkey* hotkeyEvent) {
+	void BasicHotkeyInteraction<T>::setHotkeyAction(uint state, typename BasicHotkeyInteraction<T>::Hotkey* hotkeyAction) {
 		if(hotkeyStates.size() <= state) {
 			hotkeyStates.resize(state, {});
 		}
-		hotkeyStates[state].emplace_back(hotkeyEvent);
+		hotkeyStates[state].emplace_back(hotkeyAction);
 	}
 	
 	template<typename T>

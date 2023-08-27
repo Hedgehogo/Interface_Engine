@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DisplayPanelEvent/DisplayPanelEvent.hpp"
+#include "IE/IComponent/Panel/IPanelInteraction/IDisplayPanelInteraction/ClickDisplayPanelInteraction/DisplayPanelAction/DisplayPanelAction.hpp"
 #include "../../ClickPanelInteraction/ClickPanelInteraction.hpp"
 
 namespace ie {

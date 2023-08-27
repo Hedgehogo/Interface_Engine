@@ -4,7 +4,7 @@
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 #include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 #include "IE/Modules/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"
-#include "SwitcherTabsEvent/SwitcherTabsEvent.hpp"
+#include "IE/IComponent/IUnscalable/IScalable/Box/BoxSwitcherTabs/SwitcherTabsAction/SwitcherTabsAction.hpp"
 
 namespace ie {
 	BoxSwitcherTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
@@ -17,7 +17,7 @@ namespace ie {
 	
 	BoxSwitcherTabs::BoxSwitcherTabs(Make&& make, InitInfo initInfo) :
 		Box(make.minSize),
-		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>{new SwitcherTabsEvent{make.value, *this}}, make.key), initInfo, {}),
+		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(BoxPtr<KeyAction>{new SwitcherTabsAction{make.value, *this}}, make.key), initInfo, {}),
 		objects(mapMake(std::move(make.objects), initInfo)),
 		isHorizontal(make.isHorizontal),
 		value(make.value) {
@@ -25,7 +25,7 @@ namespace ie {
 	}
 	
 	BoxSwitcherTabs::BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
-		Box(minSize), interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(BoxPtr<KeyEvent>{new SwitcherTabsEvent{value, *this}}, key)),
+		Box(minSize), interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(BoxPtr<KeyAction>{new SwitcherTabsAction{value, *this}}, key)),
 		objects(std::move(objects)), isHorizontal(isHorizontal), value(value) {
 	}
 	

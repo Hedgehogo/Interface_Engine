@@ -6,13 +6,13 @@ namespace ie {
 	template<typename T = std::monostate>
 	class IBasicMouseInteraction : public virtual IBaseInteraction {
 	public:
-		virtual BasicKeyEvent<T>& getLeftButtonEvent() = 0;
+		virtual BasicKeyAction<T>& getLeftButtonAction() = 0;
 		
-		virtual const BasicKeyEvent<T>& getLeftButtonEvent() const = 0;
+		virtual const BasicKeyAction<T>& getLeftButtonAction() const = 0;
 		
-		virtual BasicKeyEvent<T>& getRightButtonEvent() = 0;
+		virtual BasicKeyAction<T>& getRightButtonAction() = 0;
 		
-		virtual const BasicKeyEvent<T>& getRightButtonEvent() const = 0;
+		virtual const BasicKeyAction<T>& getRightButtonAction() const = 0;
 		
 		void update(sf::Vector2i mousePosition) override;
 	};

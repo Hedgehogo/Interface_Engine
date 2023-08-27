@@ -1,12 +1,12 @@
 #pragma once
 
-#include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextEvent/TextEvent.hpp"
+#include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextAction/TextAction.hpp"
 #include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextInteraction/TextKeysInteraction/TextKeysInteraction.hpp"
 
 namespace ie {
 	class TextPressedInteraction : public TextKeysInteraction {
 	public:
-		TextPressedInteraction(BoxPtr<TextEvent>&& event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+		TextPressedInteraction(BoxPtr<TextAction>&& action, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 		
 		void init(TextInteractionInitInfo initInfo) override;
 		

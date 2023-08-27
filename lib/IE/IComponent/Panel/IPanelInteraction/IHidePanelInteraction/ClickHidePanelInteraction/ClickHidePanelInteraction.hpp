@@ -1,6 +1,6 @@
 #pragma once
 
-#include "HidePanelEvent/HidePanelEvent.hpp"
+#include "IE/IComponent/Panel/IPanelInteraction/IHidePanelInteraction/ClickHidePanelInteraction/HidePanelAction/HidePanelAction.hpp"
 #include "../../ClickPanelInteraction/ClickPanelInteraction.hpp"
 
 namespace ie {

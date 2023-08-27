@@ -3,21 +3,20 @@
 #include "../IInteraction.hpp"
 #include "../../../Enums/KeyHandler/KeyHandler.hpp"
 #include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
-#include "../../IEvent/BasicKeyEvent/BasicOpenUrlEvent/BasicOpenUrlEvent.hpp"
 
 namespace ie {
 	template<typename T = std::monostate>
 	class BasicKeysInteraction : public virtual IBasicInteraction<T> {
 	public:
-		BasicKeysInteraction(BoxPtr<BasicKeyEvent<T> >&& event, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+		BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 		
 		bool isPress() const;
 		
 		std::vector<Key> getKeys();
 		
-		BasicKeyEvent<T>* getEvent();
+		BasicKeyAction<T>* getAction();
 		
-		void setEvent(BasicKeyEvent<T>* event);
+		void setAction(BasicKeyAction<T>* action);
 		
 		void start(sf::Vector2i mousePosition) override;
 		
@@ -28,7 +27,7 @@ namespace ie {
 		BasicKeysInteraction<T>* copy() override;
 		
 	protected:
-		BoxPtr<BasicKeyEvent<T> > event;
+		BoxPtr<BasicKeyAction<T> > action;
 		std::vector<Key> keys;
 		std::vector<Key> blackListKeys;
 		bool press;

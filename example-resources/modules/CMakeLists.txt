@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21)
 project(modules)
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(testModule consoleCommandEvent/consoleCommandEvent.cpp)
+add_library(testModule ConsoleCommandAction/ConsoleCommandAction.cpp)
 target_include_directories(testModule PUBLIC lib)
 set_target_properties(testModule PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/example-resources/buildModules

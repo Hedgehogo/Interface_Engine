@@ -2,7 +2,7 @@
 
 namespace ie {
 	ClickHidePanelInteraction::ClickHidePanelInteraction(Key key, bool onlyOnParent) :
-		ClickPanelInteraction(makeBoxPtr<PanelEvent, HidePanelEvent>(onlyOnParent), key) {
+		ClickPanelInteraction(makeBoxPtr<PanelAction, HidePanelAction>(onlyOnParent), key) {
 	}
 	
 	ClickHidePanelInteraction* ClickHidePanelInteraction::copy() {

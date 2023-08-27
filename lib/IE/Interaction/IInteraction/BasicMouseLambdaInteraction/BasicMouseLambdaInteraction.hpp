@@ -8,27 +8,27 @@ namespace ie {
 	class BasicMouseLambdaInteraction : public BasicLambdaInteraction<T>, public IBasicMouseInteraction<T> {
 	public:
 		BasicMouseLambdaInteraction(
-			BoxPtr<BasicKeyEvent<T> >&& leftButtonEvent,
-			BoxPtr<BasicKeyEvent<T> >&& rightButtonEvent,
+			BoxPtr<BasicKeyAction<T> >&& leftButtonAction,
+			BoxPtr<BasicKeyAction<T> >&& rightButtonAction,
 			void (* startPointing)(sf::Vector2i mousePosition),
 			void (* finishPointing)(sf::Vector2i mousePosition)
 		);
 		
-		BasicKeyEvent<T>& getLeftButtonEvent() override;
+		BasicKeyAction<T>& getLeftButtonAction() override;
 		
-		const BasicKeyEvent<T>& getLeftButtonEvent() const override;
+		const BasicKeyAction<T>& getLeftButtonAction() const override;
 		
-		BasicKeyEvent<T>& getRightButtonEvent() override;
+		BasicKeyAction<T>& getRightButtonAction() override;
 		
-		const BasicKeyEvent<T>& getRightButtonEvent() const override;
+		const BasicKeyAction<T>& getRightButtonAction() const override;
 		
 		BasicMouseLambdaInteraction<T>* copy() override;
 	
 		static BasicMouseLambdaInteraction debug;
 		
 	protected:
-		BoxPtr<BasicKeyEvent<T> > leftButtonEvent;
-		BoxPtr<BasicKeyEvent<T> > rightButtonEvent;
+		BoxPtr<BasicKeyAction<T> > leftButtonAction;
+		BoxPtr<BasicKeyAction<T> > rightButtonAction;
 	};
 	
 	using MouseLambdaInteraction = BasicMouseLambdaInteraction<>;

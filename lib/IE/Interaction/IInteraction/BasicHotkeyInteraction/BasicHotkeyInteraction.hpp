@@ -28,7 +28,7 @@ namespace ie {
 		
 		void init(BasicInteractionInitInfo<T> initInfo) override;
 		
-		void setHotkeyEvent(uint state, Hotkey* hotkeyEvent);
+		void setHotkeyAction(uint state, Hotkey* hotkeyAction);
 		
 		std::vector<BoxPtr<Hotkey> > getHotkeys(int state);
 		

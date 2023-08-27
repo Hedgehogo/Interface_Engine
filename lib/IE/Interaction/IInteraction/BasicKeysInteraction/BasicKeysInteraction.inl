@@ -1,9 +1,11 @@
 #include <utility>
 
+#include "IE/Interaction/IAction/BasicKeyAction/BasicOpenUrlAction/BasicOpenUrlAction.hpp"
+
 namespace ie {
 	template<typename T>
-	BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<BasicKeyEvent<T> >&& event, std::vector<Key> keys, std::vector<Key> blackListKeys) :
-		event(std::move(event)), keys(std::move(keys)), blackListKeys(std::move(blackListKeys)), press(false) {
+	BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys) :
+		action(std::move(action)), keys(std::move(keys)), blackListKeys(std::move(blackListKeys)), press(false) {
 		std::sort(this->keys.begin(), this->keys.end());
 	}
 	
@@ -13,13 +15,13 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicKeyEvent<T>* BasicKeysInteraction<T>::getEvent() {
-		return event.get();
+	BasicKeyAction<T>* BasicKeysInteraction<T>::getAction() {
+		return action.get();
 	}
 	
 	template<typename T>
-	void BasicKeysInteraction<T>::setEvent(BasicKeyEvent<T>* event) {
-		this->event.reset(event);
+	void BasicKeysInteraction<T>::setAction(BasicKeyAction<T>* action) {
+		this->action.reset(action);
 	}
 	
 	template<typename T>
@@ -43,12 +45,12 @@ namespace ie {
 				}
 			}
 		}
-		event->update(mousePosition, press);
+		action->update(mousePosition, press);
 	}
 	
 	template<typename T>
 	void BasicKeysInteraction<T>::finish(sf::Vector2i) {
-		event->setPressed(false);
+		action->setPressed(false);
 	}
 	
 	template<typename T>
@@ -64,12 +66,12 @@ namespace ie {
 	template<typename T>
 	bool DecodePointer<BasicKeysInteraction<T> >::decodePointer(const YAML::Node& node, BasicKeysInteraction<T> *& keysInteraction) {
 		if(node.IsScalar()) {
-			keysInteraction = new BasicKeysInteraction<T>{makeBoxPtr<BasicKeyEvent<T>, BasicOpenUrlEvent<T> >(node.as<std::string>()), {Key::mouseLeft}};
+			keysInteraction = new BasicKeysInteraction<T>{makeBoxPtr<BasicKeyAction<T>, BasicOpenUrlAction<T> >(node.as<std::string>()), {Key::mouseLeft}};
 			return true;
 		}
 		
 		keysInteraction = new BasicKeysInteraction<T>{
-			node["event"].as<BoxPtr<BasicKeyEvent<T> > >(),
+			node["action"].as<BoxPtr<BasicKeyAction<T> > >(),
 			node["keys"].as<std::vector<Key> >(),
 			convDef<std::vector<Key> >(node["black-listKeys"], {})
 		};

@@ -1,5 +1,5 @@
 #include "BoxMovableBorder.hpp"
-#include "IE/Interaction/IEvent/BasicKeyEvent/BasicAddInteractionEvent/BasicAddBlockInteractionEvent/BasicAddBlockInteractionEvent.hpp"
+#include "IE/Interaction/IAction/BasicKeyAction/BasicAddInteractionAction/BasicAddBlockInteractionAction/BasicAddBlockInteractionAction.hpp"
 #include <algorithm>
 
 namespace ie {
@@ -27,9 +27,9 @@ namespace ie {
 	
 	BoxMovableBorder::BoxMovableBorder(Make&& make, InitInfo initInfo) :
 		Box(make.minSize),
-		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, make.key),
+		pressedInteraction(BoxPtr<KeyAction>{new MovableBorderAction{*this}}, make.key),
 		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(
-			BoxPtr<KeyEvent>{new AddBlockInteractionEvent{pressedInteraction}}, make.key
+			BoxPtr<KeyAction>{new AddBlockInteractionAction{pressedInteraction}}, make.key
 		), initInfo, {}),
 		firstObject(make.firstObject->make(initInfo)),
 		secondObject(make.secondObject->make(initInfo)),
@@ -42,7 +42,7 @@ namespace ie {
 		});
 		initInfo.updateManager.add(*this);
 		pressedInteraction.init({initInfo, {}});
-		dynamic_cast<OneKeyInteraction&>(*interactive.interaction).getEvent().init({initInfo, {}});
+		dynamic_cast<OneKeyInteraction&>(*interactive.interaction).getAction().init({initInfo, {}});
 	}
 	
 	BoxMovableBorder::BoxMovableBorder(
@@ -54,9 +54,9 @@ namespace ie {
 		sf::Vector2f minSize
 	) :
 		Box(minSize),
-		pressedInteraction(BoxPtr<KeyEvent>{new MovableBorderEvent{*this}}, Key::mouseLeft),
+		pressedInteraction(BoxPtr<KeyAction>{new MovableBorderAction{*this}}, Key::mouseLeft),
 		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(
-			BoxPtr<KeyEvent>{new AddBlockInteractionEvent{pressedInteraction}}, Key::mouseLeft)
+			BoxPtr<KeyAction>{new AddBlockInteractionAction{pressedInteraction}}, Key::mouseLeft)
 		),
 		firstObject(std::move(firstObject)),
 		secondObject(std::move(secondObject)),
@@ -75,7 +75,7 @@ namespace ie {
 		secondObject->init(initInfo);
 		initInfo.updateManager.add(*this);
 		pressedInteraction.init(InteractionInitInfo{initInfo, {}});
-		dynamic_cast<OneKeyInteraction&>(*interactive.interaction).getEvent().init({initInfo, {}});
+		dynamic_cast<OneKeyInteraction&>(*interactive.interaction).getAction().init({initInfo, {}});
 	}
 	
 	float BoxMovableBorder::getBorderValue() {

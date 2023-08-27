@@ -4,9 +4,9 @@
 
 #include "../IScalable.hpp"
 #include "../../../Panel/IPanelManager/PanelManager/PanelManager.hpp"
-#include "../../../../Interaction/InteractionManager/InteractionManager.hpp"
-#include "../../../../Interaction/InteractionStack/InteractionStack.hpp"
-#include "../../../../Interaction/IEvent/WheelEvent/WheelEvent.hpp"
+#include "IE/Interaction/InteractionManager/InteractionManager.hpp"
+#include "IE/Interaction/InteractionStack/InteractionStack.hpp"
+#include "IE/Interaction/IAction/WheelAction/WheelAction.hpp"
 
 namespace ie {
 	class Interface : public IScalable, public IDrawable, public IUpdatable {

@@ -2,16 +2,16 @@
 
 #include <utility>
 #include "IE/Interaction/InteractionManager/InteractionManager.hpp"
-#include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextEvent/TextEvent.hpp"
+#include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextAction/TextAction.hpp"
 
 namespace ie {
-	TextPressedInteraction::TextPressedInteraction(BoxPtr<TextEvent>&& event, std::vector<Key> keys, std::vector<Key> blackListKeys) :
-		TextKeysInteraction(std::move(event), std::move(keys), std::move(blackListKeys)) {
+	TextPressedInteraction::TextPressedInteraction(BoxPtr<TextAction>&& action, std::vector<Key> keys, std::vector<Key> blackListKeys) :
+		TextKeysInteraction(std::move(action), std::move(keys), std::move(blackListKeys)) {
 	}
 	
 	void TextPressedInteraction::init(TextInteractionInitInfo initInfo) {
 		this->interactionManager = &initInfo.interactionManager;
-		dynamic_cast<TextEvent&>(*event).init(initInfo);
+		dynamic_cast<TextAction&>(*action).init(initInfo);
 	}
 	
 	bool TextPressedInteraction::isBlocked() const {

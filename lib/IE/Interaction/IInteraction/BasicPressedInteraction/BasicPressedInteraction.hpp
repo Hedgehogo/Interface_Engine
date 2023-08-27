@@ -8,7 +8,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicPressedInteraction : public BasicOneKeyInteraction<T>, public IBasicBlockInteraction<T> {
 	public:
-		BasicPressedInteraction(BoxPtr<BasicKeyEvent<T> >&& event, Key key);
+		BasicPressedInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
 		
 		void init(BasicInteractionInitInfo<T> initInfo) override;
 		

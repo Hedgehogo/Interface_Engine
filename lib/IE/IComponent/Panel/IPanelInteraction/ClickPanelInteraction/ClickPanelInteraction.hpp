@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PanelEvent/PanelEvent.hpp"
+#include "IE/IComponent/Panel/IPanelInteraction/ClickPanelInteraction/PanelAction/PanelAction.hpp"
 #include "../IHidePanelInteraction/IHidePanelInteraction.hpp"
 #include "../IDisplayPanelInteraction/IDisplayPanelInteraction.hpp"
 #include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
@@ -8,7 +8,7 @@
 namespace ie {
 	class ClickPanelInteraction : public BasicOneKeyInteraction<Panel&>, public virtual IPanelInteraction {
 	public:
-		ClickPanelInteraction(BoxPtr<PanelEvent>&& event, Key key);
+		ClickPanelInteraction(BoxPtr<PanelAction>&& action, Key key);
 		
 		void init(PanelInteractionInitInfo initInfo) override;
 		

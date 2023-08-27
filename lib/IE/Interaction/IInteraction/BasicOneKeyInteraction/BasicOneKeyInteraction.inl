@@ -1,12 +1,12 @@
 namespace ie {
 	template<typename T>
-	BasicOneKeyInteraction<T>::BasicOneKeyInteraction(BoxPtr<BasicKeyEvent<T> >&& event, Key key) :
-		event(std::move(event)), key(key) {
+	BasicOneKeyInteraction<T>::BasicOneKeyInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key) :
+		action(std::move(action)), key(key) {
 	}
 	
 	template<typename T>
 	void BasicOneKeyInteraction<T>::init(BasicInteractionInitInfo<T> initInfo) {
-		event->init(initInfo);
+		action->init(initInfo);
 	}
 	
 	template<typename T>
@@ -15,18 +15,18 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicKeyEvent<T>& BasicOneKeyInteraction<T>::getEvent() {
-		return *event;
+	BasicKeyAction<T>& BasicOneKeyInteraction<T>::getAction() {
+		return *action;
 	}
 	
 	template<typename T>
-	const BasicKeyEvent<T>& BasicOneKeyInteraction<T>::getEvent() const {
-		return *event;
+	const BasicKeyAction<T>& BasicOneKeyInteraction<T>::getAction() const {
+		return *action;
 	}
 	
 	template<typename T>
-	void BasicOneKeyInteraction<T>::setEvent(BoxPtr<BasicKeyEvent<T> >&& event) {
-		this->event = std::move(event);
+	void BasicOneKeyInteraction<T>::setAction(BoxPtr<BasicKeyAction<T> >&& action) {
+		this->action = std::move(action);
 	}
 	
 	template<typename T>
@@ -35,12 +35,12 @@ namespace ie {
 	
 	template<typename T>
 	void BasicOneKeyInteraction<T>::update(sf::Vector2i mousePosition) {
-		event->update(mousePosition, KeyHandler::isKeyPressed(key));
+		action->update(mousePosition, KeyHandler::isKeyPressed(key));
 	}
 	
 	template<typename T>
 	void BasicOneKeyInteraction<T>::finish(sf::Vector2i) {
-		event->setPressed(false);
+		action->setPressed(false);
 	}
 	
 	template<typename T>
@@ -51,7 +51,7 @@ namespace ie {
 	template<typename T>
 	bool DecodePointer<BasicOneKeyInteraction<T> >::decodePointer(const YAML::Node& node, BasicOneKeyInteraction<T>*& oneKeyInteraction) {
 		oneKeyInteraction = new BasicOneKeyInteraction<T>{
-			node["event"].as<BoxPtr<BasicKeyEvent<T> > >(),
+			node["action"].as<BoxPtr<BasicKeyAction<T> > >(),
 			convDef(node["key"], Key::mouseLeft)
 		};
 		return true;

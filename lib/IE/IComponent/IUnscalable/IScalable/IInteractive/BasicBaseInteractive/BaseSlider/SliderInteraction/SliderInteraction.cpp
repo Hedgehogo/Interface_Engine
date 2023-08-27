@@ -1,46 +1,46 @@
 #include "SliderInteraction.hpp"
-#include "IE/Interaction/IEvent/BasicKeyEvent/BasicAddInteractionEvent/BasicAddBlockInteractionEvent/BasicAddBlockInteractionEvent.hpp"
+#include "IE/Interaction/IAction/BasicKeyAction/BasicAddInteractionAction/BasicAddBlockInteractionAction/BasicAddBlockInteractionAction.hpp"
 
 namespace ie {
-	SliderInteraction::SliderInteraction(BaseSlider& slider, Key key, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
-		OneKeyInteraction(BoxPtr<KeyEvent>{new AddBlockInteractionEvent{slideInteraction}}, key),
-		wheelEvent(slider, wheelHorizontal, wheelRelativity, wheelSensitivity),
-		slideInteraction(BoxPtr<KeyEvent>{new SliderEvent{slider, {}}}, key) {
+	SliderInteraction::SliderInteraction(BaseSlider& slider, Key key, bool wheelHorizontal, SliderWheelAction::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
+		OneKeyInteraction(BoxPtr<KeyAction>{new AddBlockInteractionAction{slideInteraction}}, key),
+		wheelAction(slider, wheelHorizontal, wheelRelativity, wheelSensitivity),
+		slideInteraction(BoxPtr<KeyAction>{new SliderAction{slider, {}}}, key) {
 	}
 	
 	SliderInteraction::SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division, bool wheelHorizontal) :
-		OneKeyInteraction(BoxPtr<KeyEvent>{new AddBlockInteractionEvent{slideInteraction}}, key),
-		wheelEvent(
-			slider, wheelHorizontal, SliderWheelEvent::Relativity::relationArea,
+		OneKeyInteraction(BoxPtr<KeyAction>{new AddBlockInteractionAction{slideInteraction}}, key),
+		wheelAction(
+			slider, wheelHorizontal, SliderWheelAction::Relativity::relationArea,
 			{1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}
 		),
-		slideInteraction(BoxPtr<KeyEvent>{new SliderEvent{slider, division}}, key) {
+		slideInteraction(BoxPtr<KeyAction>{new SliderAction{slider, division}}, key) {
 	}
 	
-	SliderInteraction::SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
-		OneKeyInteraction(BoxPtr<KeyEvent>{new AddBlockInteractionEvent{slideInteraction}}, key),
-		wheelEvent(slider, wheelHorizontal, wheelRelativity, wheelSensitivity),
-		slideInteraction(BoxPtr<KeyEvent>{new SliderEvent{slider, division}}, key) {
+	SliderInteraction::SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division, bool wheelHorizontal, SliderWheelAction::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
+		OneKeyInteraction(BoxPtr<KeyAction>{new AddBlockInteractionAction{slideInteraction}}, key),
+		wheelAction(slider, wheelHorizontal, wheelRelativity, wheelSensitivity),
+		slideInteraction(BoxPtr<KeyAction>{new SliderAction{slider, division}}, key) {
 	}
 	
 	void SliderInteraction::init(InteractionInitInfo initInfo) {
 		slideInteraction.init(initInfo);
-		event->init(initInfo);
+		action->init(initInfo);
 	}
 	
 	void SliderInteraction::setSlider(BaseSlider& slider) {
-		dynamic_cast<SliderEvent&>(slideInteraction.getEvent()).setSlider(slider);
-		wheelEvent.setSlider(slider);
+		dynamic_cast<SliderAction&>(slideInteraction.getAction()).setSlider(slider);
+		wheelAction.setSlider(slider);
 	}
 	
 	void SliderInteraction::update(sf::Vector2i mousePosition) {
-		wheelEvent.update(mousePosition, MouseWheel::getDelta().y);
+		wheelAction.update(mousePosition, MouseWheel::getDelta().y);
 		return OneKeyInteraction::update(mousePosition);
 	}
 	
 	SliderInteraction::SliderInteraction(const SliderInteraction& other) :
-		OneKeyInteraction(BoxPtr<KeyEvent>{new AddBlockInteractionEvent{slideInteraction}}, other.key),
-		wheelEvent(other.wheelEvent),
+		OneKeyInteraction(BoxPtr<KeyAction>{new AddBlockInteractionAction{slideInteraction}}, other.key),
+		wheelAction(other.wheelAction),
 		slideInteraction(other.slideInteraction) {
 	}
 	

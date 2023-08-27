@@ -8,7 +8,7 @@ namespace ie {
 		float sliderScale,
 		Key key,
 		bool wheelHorizontal,
-		SliderWheelEvent::Relativity wheelRelativity,
+		SliderWheelAction::Relativity wheelRelativity,
 		sf::Vector2f wheelSensitivity
 	) :
 		slider(std::move(slider)),
@@ -37,7 +37,7 @@ namespace ie {
 		sliderScale(sliderScale),
 		key(key),
 		wheelHorizontal(wheelHorizontal),
-		wheelRelativity(SliderWheelEvent::Relativity::relationArea),
+		wheelRelativity(SliderWheelAction::Relativity::relationArea),
 		wheelSensitivity(1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)) {
 	}
 	
@@ -64,7 +64,7 @@ namespace ie {
 		float sliderScale,
 		Key key,
 		bool wheelHorizontal,
-		SliderWheelEvent::Relativity wheelRelativity,
+		SliderWheelAction::Relativity wheelRelativity,
 		sf::Vector2f wheelSensitivity
 	) :
 		BaseSlider(
@@ -117,7 +117,7 @@ namespace ie {
 		bool wheelHorizontal{convBoolDef(node["default-wheel"], "horizontal", "vertical", false)};
 		
 		if(!node["division"]) {
-			auto wheelRelativity{convDef(node["wheel-relativity"], SliderWheelEvent::Relativity::relationArea)};
+			auto wheelRelativity{convDef(node["wheel-relativity"], SliderWheelAction::Relativity::relationArea)};
 			auto wheelSensitivity{convDef(node["wheel-sensitivity"], sf::Vector2f{0.2f, 0.2f})};
 			
 			constSlider = new ConstSlider{std::move(slider), std::move(background), value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity};

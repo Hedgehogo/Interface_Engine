@@ -2,17 +2,17 @@
 
 #include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 #include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
-#include "../SliderEvent/SliderEvent.hpp"
-#include "../SliderWheelEvent/SliderWheelEvent.hpp"
+#include "IE/IComponent/IUnscalable/IScalable/IInteractive/BasicBaseInteractive/BaseSlider/SliderAction/SliderAction.hpp"
+#include "../SliderWheelAction/SliderWheelAction.hpp"
 
 namespace ie {
 	class SliderInteraction : public OneKeyInteraction {
 	public:
-		SliderInteraction(BaseSlider& slider, Key key, bool wheelHorizontal = false, SliderWheelEvent::Relativity wheelRelativity = SliderWheelEvent::Relativity::relationSlider, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
+		SliderInteraction(BaseSlider& slider, Key key, bool wheelHorizontal = false, SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::relationSlider, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});
 		
 		SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division = {10, 10}, bool wheelHorizontal = false);
 		
-		SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity);
+		SliderInteraction(BaseSlider& slider, Key key, sf::Vector2i division, bool wheelHorizontal, SliderWheelAction::Relativity wheelRelativity, sf::Vector2f wheelSensitivity);
 		
 		SliderInteraction(const SliderInteraction& other);
 		
@@ -25,7 +25,7 @@ namespace ie {
 		SliderInteraction* copy() override;
 	
 	protected:
-		SliderWheelEvent wheelEvent;
+		SliderWheelAction wheelAction;
 		PressedInteraction slideInteraction;
 	};
 }

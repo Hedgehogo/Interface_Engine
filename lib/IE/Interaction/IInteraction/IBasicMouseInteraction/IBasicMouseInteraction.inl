@@ -3,7 +3,7 @@
 namespace ie {
 	template<typename T>
 	void IBasicMouseInteraction<T>::update(sf::Vector2i mousePosition) {
-		getLeftButtonEvent().update(mousePosition, KeyHandler::isKeyPressed(Key::mouseLeft));
-		getRightButtonEvent().update(mousePosition, KeyHandler::isKeyPressed(Key::mouseRight));
+		getLeftButtonAction().update(mousePosition, KeyHandler::isKeyPressed(Key::mouseLeft));
+		getRightButtonAction().update(mousePosition, KeyHandler::isKeyPressed(Key::mouseRight));
 	}
 }

@@ -32,7 +32,7 @@ namespace ie {
 		
 		inherit<Sint, SRint>({"RInt"});
 		inherit<SRint, SCRint>({"CRFloat"});
-		inherit<ISint, SConvertToInt<float>>({"CFloatToInt"});
+		inherit<ISint, SConvertToInt<float> >({"CFloatToInt"});
 		
 		inherit<ISVector2, SVec2i>({"Vec2I"});
 		inherit<ISVector2, SRVec2i>({"RVec2I"});
@@ -78,16 +78,16 @@ namespace ie {
 		
 		inherit<BaseResizer, Resizer>();
 		
-		inherit<KeyEvent, OpenUrlEvent>({"OpenUrlE"});
-		inherit<KeyEvent, CloseWindowEvent>({"CloseWindowE"});
-		inherit<KeyEvent, SwitchTabsEvent>({"SwitchTabsE"});
-		inherit<KeyEvent, WhileSwitchTabsEvent>({"WhileSwitchTabsE"});
-		inherit<KeyEvent, SwitcherEvent>({"SwitcherE", });
-		inherit<KeyEvent, SetSintEvent>({"SetSIntE"});
-		inherit<KeyEvent, SetSfloatEvent>({"SetSFloatE"});
+		inherit<KeyAction, OpenUrlAction>({"OpenUrlA"});
+		inherit<KeyAction, CloseWindowAction>({"CloseWindowA"});
+		inherit<KeyAction, SwitchTabsAction>({"SwitchTabsA"});
+		inherit<KeyAction, WhileSwitchTabsAction>({"WhileSwitchTabsA"});
+		inherit<KeyAction, SwitcherAction>({"SwitcherA", });
+		inherit<KeyAction, SetSIntAction>({"SetSIntA"});
+		inherit<KeyAction, SetSFloatAction>({"SetSFloatA"});
 		
-		inherit<TextEvent, TextCopyEvent>({"TextCopyE"});
-		inherit<TextEvent, TextSelectionEvent>({"TextSelectionE"});
+		inherit<TextAction, TextCopyAction>({"TextCopyA"});
+		inherit<TextAction, TextSelectionAction>({"TextSelectionA"});
 		
 		inherit<IBaseInteraction, OneKeyInteraction>({"OneKeyI"});
 		inherit<IBaseInteraction, KeysInteraction>({"KeysI"});
@@ -180,7 +180,7 @@ namespace ie {
 		addDetermine<ISizing2>(determineSizing2);
 		addDetermine<IPositioning>(determinePositioning);
 		addDetermine<IPositioning2>(determinePositioning2);
-		addDetermine<OpenUrlEvent>(determineUrl);
+		addDetermine<OpenUrlAction>(determineUrl);
 		addDetermine<KeysInteraction>(determineUrl);
 		addDetermine<TextKeysInteraction>(determineUrl);
 	}

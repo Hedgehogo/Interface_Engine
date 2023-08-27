@@ -3,16 +3,16 @@
 
 namespace ie {
 	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Key key) :
-		ClickPanelInteraction(makeBoxPtr<PanelEvent, DisplayPanelEvent>(), key) {
+		ClickPanelInteraction(makeBoxPtr<PanelAction, DisplayPanelAction>(), key) {
 	}
 	
 	void ClickDisplayPanelInteraction::start(sf::Vector2i) {
-		dynamic_cast<PanelEvent&>(*event).getPanel()->setParentProcessed(true);
+		dynamic_cast<PanelAction&>(*action).getPanel()->setParentProcessed(true);
 	}
 	
 	void ClickDisplayPanelInteraction::finish(sf::Vector2i mousePosition) {
 		BasicOneKeyInteraction<Panel&>::finish(mousePosition);
-		dynamic_cast<PanelEvent&>(*event).getPanel()->setParentProcessed(false);
+		dynamic_cast<PanelAction&>(*action).getPanel()->setParentProcessed(false);
 	}
 	
 	ClickDisplayPanelInteraction* ClickDisplayPanelInteraction::copy() {

@@ -3,11 +3,11 @@
 #include "BaseTextBlock/BaseTextBlock.hpp"
 #include "BaseResizer/Resizer/Resizer.hpp"
 #include "../../IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp"
-#include "TextInteraction/TextEvent/TextSelectionEvent/TextSelectionEvent.hpp"
+#include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextAction/TextSelectionAction/TextSelectionAction.hpp"
 #include "TextInteraction/TextInteraction/TextKeysInteraction/TextKeysInteraction.hpp"
-#include "TextInteraction/TextEvent/TextCopyEvent/TextCopyEvent.hpp"
+#include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextAction/TextCopyAction/TextCopyAction.hpp"
 #include "TextInteraction/TextInteraction/TextEmptyInteraction/TextEmptyInteraction.hpp"
-#include "TextInteraction/TextEvent/TextAddBlockInteractionEvent/TextAddBlockInteractionEvent.hpp"
+#include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextAction/TextAddBlockInteractionAction/TextAddBlockInteractionAction.hpp"
 #include "TextInteraction/TextInteraction/TextPressedInteraction/TextPressedInteraction.hpp"
 
 namespace ie {

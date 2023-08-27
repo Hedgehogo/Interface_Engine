@@ -4,7 +4,7 @@
 #include "IE/IComponent/IUnscalable/IScalable/IInteractive/BasicBaseInteractive/BasicBaseInteractive.hpp"
 #include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 #include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
-#include "MovableBorderEvent/MovableBorderEvent.hpp"
+#include "IE/IComponent/IUnscalable/IScalable/Box/BoxMovableBorder/MovableBorderAction/MovableBorderAction.hpp"
 #include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 #include "IE/Modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 

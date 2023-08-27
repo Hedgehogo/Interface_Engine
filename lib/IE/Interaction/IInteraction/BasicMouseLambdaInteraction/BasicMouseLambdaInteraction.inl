@@ -3,7 +3,7 @@
 namespace ie {
 	template<typename T>
 	BasicMouseLambdaInteraction<T> BasicMouseLambdaInteraction<T>::debug{
-		makeBoxPtr<BasicKeyEvent<T>, BasicLambdaKeyEvent<T> >(
+		makeBoxPtr<BasicKeyAction<T>, BasicLambdaKeyAction<T> >(
 			[](sf::Vector2i) {
 				std::cout << "sl";
 			},
@@ -17,7 +17,7 @@ namespace ie {
 				std::cout << "nl";
 			}
 		),
-		makeBoxPtr<BasicKeyEvent<T>, BasicLambdaKeyEvent<T> >(
+		makeBoxPtr<BasicKeyAction<T>, BasicLambdaKeyAction<T> >(
 			[](sf::Vector2i) {
 				std::cout << "sr" << std::endl;
 			},
@@ -41,34 +41,34 @@ namespace ie {
 	
 	template<typename T>
 	BasicMouseLambdaInteraction<T>::BasicMouseLambdaInteraction(
-		BoxPtr<BasicKeyEvent<T> >&& leftButtonEvent,
-		BoxPtr<BasicKeyEvent<T> >&& rightButtonEvent,
+		BoxPtr<BasicKeyAction<T> >&& leftButtonAction,
+		BoxPtr<BasicKeyAction<T> >&& rightButtonAction,
 		void (* startPointing)(sf::Vector2i mousePosition),
 		void (* finishPointing)(sf::Vector2i mousePosition)
 	) :
 		BasicLambdaInteraction<T>(startPointing, finishPointing),
-		leftButtonEvent(std::move(leftButtonEvent)),
-		rightButtonEvent(std::move(rightButtonEvent)) {
+		leftButtonAction(std::move(leftButtonAction)),
+		rightButtonAction(std::move(rightButtonAction)) {
 	}
 	
 	template<typename T>
-	BasicKeyEvent<T>& BasicMouseLambdaInteraction<T>::getLeftButtonEvent() {
-		return *leftButtonEvent;
+	BasicKeyAction<T>& BasicMouseLambdaInteraction<T>::getLeftButtonAction() {
+		return *leftButtonAction;
 	}
 	
 	template<typename T>
-	const BasicKeyEvent<T>& BasicMouseLambdaInteraction<T>::getLeftButtonEvent() const {
-		return *leftButtonEvent;
+	const BasicKeyAction<T>& BasicMouseLambdaInteraction<T>::getLeftButtonAction() const {
+		return *leftButtonAction;
 	}
 	
 	template<typename T>
-	BasicKeyEvent<T>& BasicMouseLambdaInteraction<T>::getRightButtonEvent() {
-		return *rightButtonEvent;
+	BasicKeyAction<T>& BasicMouseLambdaInteraction<T>::getRightButtonAction() {
+		return *rightButtonAction;
 	}
 	
 	template<typename T>
-	const BasicKeyEvent<T>& BasicMouseLambdaInteraction<T>::getRightButtonEvent() const {
-		return *rightButtonEvent;
+	const BasicKeyAction<T>& BasicMouseLambdaInteraction<T>::getRightButtonAction() const {
+		return *rightButtonAction;
 	}
 	
 	template<typename T>
