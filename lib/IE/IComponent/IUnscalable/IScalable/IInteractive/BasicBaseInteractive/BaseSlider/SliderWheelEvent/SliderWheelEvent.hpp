@@ -2,7 +2,7 @@
 
 #include "../../../../../../../Interaction/IEvent/WheelEvent/BaseWheelEvent/BaseWheelEvent.hpp"
 
-namespace ui {
+namespace ie {
 	class BaseSlider;
 	
 	class SliderWheelEvent : public BaseWheelEvent {

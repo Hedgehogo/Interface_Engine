@@ -15,7 +15,7 @@ void TestAnimatorUnit::restart() {
 	processed.restart.push_back(getProcessorTime());
 }
 
-std::vector<ui::IAnimatorUnit *> TestAnimatorUnit::update(float time) {
+std::vector<ie::IAnimatorUnit *> TestAnimatorUnit::update(float time) {
 	processed.update.push_back({getProcessorTime(), time});
 	return updateResult;
 }
@@ -24,7 +24,7 @@ void TestAnimatorUnit::setNextUnits(std::vector<IAnimatorUnit *> nextUnits) {
 	processed.setNextUnits.push_back({getProcessorTime(), nextUnits});
 }
 
-void TestAnimatorUnit::addNextUnits(ui::IAnimatorUnit *nextUnit) {
+void TestAnimatorUnit::addNextUnits(ie::IAnimatorUnit *nextUnit) {
 	processed.addNextUnits.push_back({getProcessorTime(), nextUnit});
 }
 

@@ -10,7 +10,7 @@
 #include "../IPositioning/LambdaPositioning/LambdaPositioning.hpp"
 #include "Positioning2initInfo/Positioning2InitInfo.hpp"
 
-namespace ui {
+namespace ie {
 	class IPositioning2 {
 	public:
 		struct Make {

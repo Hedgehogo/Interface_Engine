@@ -3,7 +3,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include "Sizing2InitInfo/Sizing2InitInfo.hpp"
 
-namespace ui {
+namespace ie {
 	class ISizing2 {
 	public:
 		struct Make {

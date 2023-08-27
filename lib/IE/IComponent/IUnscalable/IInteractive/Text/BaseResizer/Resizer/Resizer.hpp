@@ -2,7 +2,7 @@
 
 #include "../BaseResizer.hpp"
 
-namespace ui {
+namespace ie {
 	class Resizer : public BaseResizer {
 	public:
 		Resizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);

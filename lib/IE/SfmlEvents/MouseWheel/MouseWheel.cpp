@@ -1,7 +1,7 @@
 #include <iostream>
 #include "MouseWheel.hpp"
 
-namespace ui {
+namespace ie {
 	sf::Vector2f MouseWheel::delta{0, 0};
 	
 	void MouseWheel::setDelta(sf::Event::MouseWheelScrollEvent event) {

@@ -3,7 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include "IE/Interaction/IInteraction/IInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class Window;
 	
 	class BaseWindowResizer {

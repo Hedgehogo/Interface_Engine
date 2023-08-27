@@ -1,6 +1,6 @@
 #include "InitInfo.hpp"
 
-namespace ui {
+namespace ie {
 	InitInfo::InitInfo(sf::RenderWindow& window_, sf::RenderTarget& renderTarget_, DrawManager& drawManager_, UpdateManager& updateManager_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_) :
 		window(window_), renderTarget(renderTarget_), drawManager(drawManager_), updateManager(updateManager_), interactionManager(interactionManager_), interactionStack(interactionStack_), panelManager(panelManager_) {
 	}

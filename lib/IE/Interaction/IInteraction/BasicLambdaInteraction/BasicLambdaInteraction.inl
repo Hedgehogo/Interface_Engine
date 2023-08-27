@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicLambdaInteraction<T>::BasicLambdaInteraction(void (* startPointing)(sf::Vector2i mousePosition), void (* finishPointing)(sf::Vector2i mousePosition)) :
 		startPointing(startPointing), finishPointing(finishPointing) {

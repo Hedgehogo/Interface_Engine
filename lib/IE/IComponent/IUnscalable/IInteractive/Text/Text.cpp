@@ -3,7 +3,7 @@
 #include <cmath>
 #include "../../../../Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
-namespace ui {
+namespace ie {
 	std::vector<BaseCharacter*>::iterator nullBaseCharacterIterator{};
 	
 	Text::Text(

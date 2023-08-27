@@ -7,12 +7,12 @@
 TEST(IComponent, BoxSwitchTabs) {
 	InitInfoData data{{100, 100}};
 	
-	auto value = std::make_shared<ui::Suint>(0);
-	ui::BoxSwitchTabs boxSwitchTabs{
+	auto value = std::make_shared<ie::Suint>(0);
+	ie::BoxSwitchTabs boxSwitchTabs{
 		{
-			ui::makeVector(
-				ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
-				ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red)
+			ie::makeVector(
+				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
 			),
 			value
 		}, data.makeInitInfo()

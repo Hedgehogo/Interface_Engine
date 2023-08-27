@@ -1,6 +1,6 @@
 #include "BoxConstRatioCenter.hpp"
 
-namespace ui {
+namespace ie {
 	BoxConstRatioCenter::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& background, float aspectRatio, sf::Vector2f minSize) :
 		object(std::move(object)),
 		firstObject(new Empty::Make),

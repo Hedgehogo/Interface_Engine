@@ -2,7 +2,7 @@
 
 #include "../yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	namespace detail {
 		struct YamlArg {
 			std::string name;

@@ -1,7 +1,7 @@
 #include "LambdaPositioning.hpp"
 #include <utility>
 
-namespace ui {
+namespace ie {
 	LambdaPositioning::LambdaPositioning(FindPositionFunc findPositionFunc) : findPositionFunc(std::move(findPositionFunc)) {
 	}
 	

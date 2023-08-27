@@ -7,11 +7,11 @@
 TEST(IComponent, BoxConstRatio) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxConstRatio boxConstRatio{
+	ie::BoxConstRatio boxConstRatio{
 		{
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red),
-			ui::makeBoxPtr<ui::IUninteractive::Make, ui::FullColor::Make>(sf::Color::Blue)
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
+			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Blue)
 		},
 		data.makeInitInfo()
 	};

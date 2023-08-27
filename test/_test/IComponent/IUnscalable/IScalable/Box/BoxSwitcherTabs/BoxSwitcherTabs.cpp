@@ -7,13 +7,13 @@
 TEST(IComponent, BoxSwitcherTabs) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxSwitcherTabs boxSwitcherTabs{
+	ie::BoxSwitcherTabs boxSwitcherTabs{
 		{
-			ui::makeVector(
-				ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
-				ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red)
+			ie::makeVector(
+				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
 			),
-			std::make_shared<ui::Sint>(0)
+			std::make_shared<ie::Sint>(0)
 		}, data.makeInitInfo()
 	};
 	data.interactionManager.update({});

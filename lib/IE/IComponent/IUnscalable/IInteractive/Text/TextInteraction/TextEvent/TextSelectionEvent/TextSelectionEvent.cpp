@@ -4,7 +4,7 @@
 
 #include <cmath>
 
-namespace ui {
+namespace ie {
 	TextSelectionEvent::TextSelectionEvent() : text(nullptr), start(), end() {
 	}
 	

@@ -3,7 +3,7 @@
 #include "IAnimatorUnit/IAnimatorUnit.hpp"
 #include "IE/Modules/yaml-cpp/buffer/buffer.hpp"
 
-namespace ui {
+namespace ie {
 	class Animator {
 	public:
 		explicit Animator(std::vector<IAnimatorUnit*> units, PSfloat speed = std::make_shared<Sfloat>(1));

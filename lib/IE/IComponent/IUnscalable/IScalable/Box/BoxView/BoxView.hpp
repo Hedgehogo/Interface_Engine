@@ -3,7 +3,7 @@
 #include "../Box.hpp"
 #include "../../../../../IDrawable/IDrawable/IDrawable.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxWithView : public Box, public IDrawable {
 	public:
 		BoxWithView(sf::Vector2f minSize, InitInfo initInfo);

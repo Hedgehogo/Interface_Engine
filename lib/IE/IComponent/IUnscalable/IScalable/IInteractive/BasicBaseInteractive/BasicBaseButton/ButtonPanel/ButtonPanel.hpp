@@ -11,7 +11,7 @@
 #include "IE/IComponent/Panel/IPanelInteraction/IMovePanelInteraction/CoefficientMovePanelInteraction/CoefficientMovePanelInteraction.hpp"
 #include "IE/IComponent/Panel/IPanelInteraction/IMovePanelInteraction/SideMovePanelInteraction/SideMovePanelInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class ButtonPanel : public BasicBaseButton<Panel&> {
 	public:
 		struct Make : public IScalable::Make {

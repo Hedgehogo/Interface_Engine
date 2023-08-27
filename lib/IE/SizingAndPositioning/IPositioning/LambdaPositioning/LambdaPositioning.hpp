@@ -2,7 +2,7 @@
 
 #include "../IPositioning.hpp"
 
-namespace ui {
+namespace ie {
 	class LambdaPositioning : public IPositioning {
 	public:
 		using FindPositionFunc = std::function<float(float parentPosition, float objectSize, float parentSize, float targetSize)>;

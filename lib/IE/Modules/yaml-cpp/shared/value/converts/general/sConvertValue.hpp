@@ -4,7 +4,7 @@
 #include "../iSConvertValue.hpp"
 #include "../../general/sValue.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename FromType, typename ToType>
 	class SConvertValue : public ISConvertValue<FromType, ToType>, public SValue<ToType> {
 	protected:

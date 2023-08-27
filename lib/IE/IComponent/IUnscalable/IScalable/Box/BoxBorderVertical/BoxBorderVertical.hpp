@@ -5,7 +5,7 @@
 #include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 #include "../../../../../Interaction/InteractionManager/InteractionManager.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxBorderVertical : public Box, public ILayoutObjectsArray {
 	public:
 		struct Make : public Box::Make, public ILayoutObjectsArray::Make {

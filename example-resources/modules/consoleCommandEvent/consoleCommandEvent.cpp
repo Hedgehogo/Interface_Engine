@@ -1,7 +1,7 @@
 #include "consoleCommandEvent.hpp"
 #include <IE/Modules/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp>
 
-namespace ui {
+namespace ie {
 	ConsoleCommandEvent::ConsoleCommandEvent(const std::string& command) : command(command) {}
 	
 	void ConsoleCommandEvent::startPressed() {}
@@ -26,6 +26,6 @@ namespace ui {
 	}
 	
 	void init(int argc, char *argv[]){
-		inherit<ui::ConsoleCommandEvent>("ui::KeyEvent", {"ConsoleCommandE"});
+		inherit<ie::ConsoleCommandEvent>("ie::KeyEvent", {"ConsoleCommandE"});
 	}
 }

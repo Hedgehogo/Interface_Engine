@@ -1,6 +1,6 @@
 #include "IAnimatorUnit.hpp"
 
-namespace ui {
+namespace ie {
 	std::vector<IAnimatorUnit*> getAnimatorUnits(const YAML::Node& node, std::string nameNextNode) {
 		std::vector<IAnimatorUnit*> result{};
 		

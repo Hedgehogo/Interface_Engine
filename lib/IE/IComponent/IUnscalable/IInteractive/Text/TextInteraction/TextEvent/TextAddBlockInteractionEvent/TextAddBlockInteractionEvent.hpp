@@ -5,6 +5,6 @@
 #include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextInteraction/TextInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	using TextAddBlockInteractionEvent = BasicAddBlockInteractionEvent<Text&>;
 }

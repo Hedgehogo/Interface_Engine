@@ -5,7 +5,7 @@
 #include "IE/Modules/yaml-cpp/shared/iShared.hpp"
 #include "../yamlBuilder/general/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	std::vector<std::string> splitByDelimiter(const std::string& str, char delimiter);
 	
 	std::vector<std::string> splitString(const std::string& str, const std::function<bool(char, size_t)>& divider);

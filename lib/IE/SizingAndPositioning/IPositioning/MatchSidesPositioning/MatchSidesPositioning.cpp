@@ -1,6 +1,6 @@
 #include "MatchSidesPositioning.hpp"
 
-namespace ui {
+namespace ie {
 	MatchSidesPositioning::MatchSidesPositioning(Location parentSide, Location objectSide, float offset) : parentSide(parentSide), objectSide(objectSide), offset(offset) {
 	}
 	

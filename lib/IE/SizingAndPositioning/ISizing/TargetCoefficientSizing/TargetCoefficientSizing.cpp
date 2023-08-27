@@ -1,6 +1,6 @@
 #include "TargetCoefficientSizing.hpp"
 
-namespace ui {
+namespace ie {
 	TargetCoefficientSizing::Make::Make(float coefficient, float addition) :
 		coefficient(coefficient), addition(addition) {
 	}

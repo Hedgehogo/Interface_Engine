@@ -3,7 +3,7 @@
 #include "../IHidePanelInteraction.hpp"
 #include "IE/Interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class DontHidePanelInteraction : public BasicEmptyInteraction<Panel&>, public IHidePanelInteraction {
 	public:
 		DontHidePanelInteraction() = default;

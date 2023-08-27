@@ -1,6 +1,6 @@
 #include "baseException.hpp"
 
-namespace ui {
+namespace ie {
 	BaseException::BaseException(std::string description) : description(std::move(description)) {
 	}
 	

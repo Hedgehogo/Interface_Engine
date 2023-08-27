@@ -7,14 +7,14 @@
 TEST(IComponent, BoxPanel) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxPanel boxPanel{
+	ie::BoxPanel boxPanel{
 		{
-			ui::makeBoxPtr<ui::ConstPanel::Make>(
-				ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red),
-				ui::makeBoxPtr<ui::ISizing2::Make, ui::Sizing2::Make>(sf::Vector2f{10, 10}),
-				ui::makeBoxPtr<ui::IPositioning2::Make, ui::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
+			ie::makeBoxPtr<ie::ConstPanel::Make>(
+				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
+				ie::makeBoxPtr<ie::ISizing2::Make, ie::Sizing2::Make>(sf::Vector2f{10, 10}),
+				ie::makeBoxPtr<ie::IPositioning2::Make, ie::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
 			),
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 		}, data.makeInitInfo()
 	};
 	data.interactionManager.update({});

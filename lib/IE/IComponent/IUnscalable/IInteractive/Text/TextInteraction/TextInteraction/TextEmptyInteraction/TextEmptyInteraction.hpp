@@ -4,6 +4,6 @@
 #include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextInteraction/TextInteraction.hpp"
 #include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	using TextEmptyInteraction = BasicEmptyInteraction<Text&>;
 }

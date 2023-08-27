@@ -9,7 +9,7 @@ TestInteraction::Processed TestInteraction::getProcessed() {
 	return processed;
 }
 
-ui::IInteraction::Priority TestInteraction::getPriority() const {
+ie::IInteraction::Priority TestInteraction::getPriority() const {
 	return priority;
 }
 
@@ -29,7 +29,7 @@ void TestInteraction::finish(sf::Vector2i mousePosition) {
 	processed.finish.push_back({getProcessorTime(), mousePosition});
 }
 
-ui::IInteraction *TestInteraction::copy() {
+ie::IInteraction *TestInteraction::copy() {
 	processed.copy.push_back(getProcessorTime());
 	return new TestInteraction{priority, blocked};
 }

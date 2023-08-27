@@ -1,6 +1,6 @@
 #include "Corner.hpp"
 
-namespace ui {
+namespace ie {
 	bool Decode<Corner>::decode(const YAML::Node& node, Corner& corner) {
 		std::string str{node.as<std::string>()};
 		if(str == "up-right") {

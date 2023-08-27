@@ -3,20 +3,20 @@
 #include <IE/IComponent/iLayout/ILayout.hpp>
 #include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
 
-template<typename T = ui::IUninteractive::Make>
-class TestObject : public ui::IUninteractive {
+template<typename T = ie::IUninteractive::Make>
+class TestObject : public ie::IUninteractive {
 public:
-	struct Make : public ui::IUninteractive::Make {
+	struct Make : public ie::IUninteractive::Make {
 		std::shared_ptr<T> object;
 		
 		Make(std::shared_ptr<T> object);
 		
-		TestObject* make(ui::InitInfo initInfo) override;
+		TestObject* make(ie::InitInfo initInfo) override;
 	};
 	
-	TestObject(Make&& make, ui::InitInfo initInfo);
+	TestObject(Make&& make, ie::InitInfo initInfo);
 	
-	void init(ui::InitInfo initInfo) override;
+	void init(ie::InitInfo initInfo) override;
 	
 	void resize(sf::Vector2f size, sf::Vector2f position) override;
 	

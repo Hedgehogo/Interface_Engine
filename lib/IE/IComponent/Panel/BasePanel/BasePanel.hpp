@@ -13,7 +13,7 @@
 #include "../../../SizingAndPositioning/IPositioning2/LambdaPositioning2/LambdaPositioning2.hpp"
 #include "../../../Enums/KeyHandler/KeyHandler.hpp"
 
-namespace ui {
+namespace ie {
 	class BasePanel : public ILayoutObject, public IDrawable, public IUpdatable {
 	public:
 		struct Make : public ILayoutObject::Make {

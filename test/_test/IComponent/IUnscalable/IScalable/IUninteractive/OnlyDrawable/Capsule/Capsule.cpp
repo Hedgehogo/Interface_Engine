@@ -5,7 +5,7 @@
 TEST(IComponent, Capsule) {
 	InitInfoData data{{100, 100}};
 	
-	ui::Capsule capsule{{sf::Color::Red}, data.makeInitInfo()};
+	ie::Capsule capsule{{sf::Color::Red}, data.makeInitInfo()};
 	data.interactionManager.update({});
 	
 	ASSERT_EQ(data.drawManager.size(), 1);

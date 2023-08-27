@@ -2,7 +2,7 @@
 #include <IE/SizingAndPositioning/IPositioning/LambdaPositioning/LambdaPositioning.hpp>
 
 TEST(SizingAndPositioning, LambdaPositioning) {
-	ui::LambdaPositioning lambdaPositioning{
+	ie::LambdaPositioning lambdaPositioning{
 		[](float, float, float, float) {
 			return 15.f;
 		}

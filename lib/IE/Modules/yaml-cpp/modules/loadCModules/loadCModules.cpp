@@ -6,7 +6,7 @@
 #include <iostream>
 #include "IE/Modules/yaml-cpp/yaml.hpp"
 
-namespace ui {
+namespace ie {
 	size_t write_data(void* ptr, std::size_t size, std::size_t nMemB, void* stream) {
 		size_t written = fwrite(ptr, size, nMemB, (FILE*)stream);
 		return written;

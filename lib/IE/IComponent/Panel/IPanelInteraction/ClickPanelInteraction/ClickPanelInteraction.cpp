@@ -1,7 +1,7 @@
 #include "ClickPanelInteraction.hpp"
 #include "../../IPanelManager/IPanelManager.hpp"
 
-namespace ui {
+namespace ie {
 	ClickPanelInteraction::ClickPanelInteraction(BoxPtr<PanelEvent>&& event, Key key) :
 		BasicOneKeyInteraction<Panel&>(dynamicCast<BasicKeyEvent<Panel&> >(std::move(event)), key) {
 	}

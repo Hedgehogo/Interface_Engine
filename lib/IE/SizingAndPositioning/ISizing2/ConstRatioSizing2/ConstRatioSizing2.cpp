@@ -1,7 +1,7 @@
 #include "ConstRatioSizing2.hpp"
 #include "../../ISizing/Functions/makeSize/makeSize.hpp"
 
-namespace ui {
+namespace ie {
 	ConstRatioSizing2::Make::Make(BoxPtr<ISizing::Make>&& sizing, float ratio, bool horizontal) :
 		sizing(std::move(sizing)), ratio(ratio), horizontal(horizontal) {
 	}

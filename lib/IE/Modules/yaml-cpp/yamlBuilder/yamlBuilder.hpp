@@ -3,7 +3,7 @@
 #include "general/yamlBuilder.hpp"
 #include "../buffer/buffer.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename Type>
 	bool buildOrProcess(const YAML::Node& node, Type*& object);
 	

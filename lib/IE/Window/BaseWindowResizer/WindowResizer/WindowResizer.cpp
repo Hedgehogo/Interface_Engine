@@ -2,7 +2,7 @@
 
 #include "../../Window.hpp"
 
-namespace ui {
+namespace ie {
 	WindowResizer::WindowResizer(int internalBorderSize, int externalBorderSize, Key key) : internalBorderSize(internalBorderSize), externalBorderSize(externalBorderSize), key(key){
 	}
 	

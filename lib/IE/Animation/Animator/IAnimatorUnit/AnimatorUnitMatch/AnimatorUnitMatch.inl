@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	void detail::AnimatorUnitMatch::Option<T>::addNextUnit(IAnimatorUnit* unit) {
 		next.emplace_back(unit);

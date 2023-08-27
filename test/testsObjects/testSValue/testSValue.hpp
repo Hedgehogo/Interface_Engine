@@ -2,7 +2,7 @@
 
 #include "IE/Modules/yaml-cpp/shared/value/iSValue.hpp"
 
-class TestSValue : public ui::ISValue<float>{
+class TestSValue : public ie::ISValue<float>{
 public:
 	struct Processed{
 		struct AddSetter{

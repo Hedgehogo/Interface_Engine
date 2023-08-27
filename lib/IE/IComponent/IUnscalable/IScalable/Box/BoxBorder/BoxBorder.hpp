@@ -3,7 +3,7 @@
 #include "../Box.hpp"
 #include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxBorder : public Box {
 	public:
 		struct Make : public Box::Make {

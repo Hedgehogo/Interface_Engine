@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicLambdaKeyEvent<T>::BasicLambdaKeyEvent(
 		void (* startPressedLambda)(sf::Vector2i),

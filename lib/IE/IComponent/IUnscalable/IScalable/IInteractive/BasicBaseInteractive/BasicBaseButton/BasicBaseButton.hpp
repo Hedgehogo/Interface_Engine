@@ -3,7 +3,7 @@
 #include "../BasicBaseInteractive.hpp"
 #include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicBaseButton : public BasicBaseInteractive<T> {
 	public:

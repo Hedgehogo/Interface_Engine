@@ -1,7 +1,7 @@
 #include "ILayoutTwoObjects.hpp"
 #include "../../../IDrawable/DrawManager/DrawManager.hpp"
 
-namespace ui {
+namespace ie {
 	std::size_t ILayoutTwoObjects::getArraySize() const {
 		return 2;
 	}

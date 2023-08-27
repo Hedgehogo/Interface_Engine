@@ -1,7 +1,7 @@
 #include <cmath>
 #include "Bar.hpp"
 
-namespace ui {
+namespace ie {
 	Bar::Make::Make(BoxPtr<IUninteractive::Make>&& background, BoxPtr<IUninteractive::Make>&& strip, float offset, bool horizontal) :
 		background(std::move(background)), strip(std::move(strip)), offset(offset), horizontal(horizontal), division(1) {
 	}

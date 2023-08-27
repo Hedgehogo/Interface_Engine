@@ -1,6 +1,6 @@
 #include "BoxShader.hpp"
 
-namespace ui {
+namespace ie {
 	uint convertTransmissionDef(const YAML::Node& node) {
 		uint transmission{};
 		if(node) {

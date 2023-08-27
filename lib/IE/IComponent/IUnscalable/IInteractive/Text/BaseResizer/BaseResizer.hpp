@@ -2,7 +2,7 @@
 
 #include "../BaseCharacter/BaseCharacter.hpp"
 
-namespace ui {
+namespace ie {
 	class BaseResizer {
 	public:
 		enum Align {

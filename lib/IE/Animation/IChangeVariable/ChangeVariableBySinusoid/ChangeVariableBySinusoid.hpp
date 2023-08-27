@@ -2,7 +2,7 @@
 
 #include "../IChangeVariable.hpp"
 
-namespace ui {
+namespace ie {
 	class ChangeVariableBySinusoid : public IChangeVariable {
 	public:
 		ChangeVariableBySinusoid(float size, float a = 0, float b = 1, float= 1, float d = 0);

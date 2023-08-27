@@ -2,7 +2,7 @@
 
 #include "../IChangeVariable.hpp"
 
-namespace ui {
+namespace ie {
 	class ChangeVariableByBrokenLine : public IChangeVariable {
 	public:
 		struct Value {

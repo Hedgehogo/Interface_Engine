@@ -4,7 +4,7 @@
 TEST(SizingAndPositioning, Positioning2) {
 	sf::RenderTexture renderTexture;
 	
-	ui::Positioning2 internalPositioning2{
+	ie::Positioning2 internalPositioning2{
 		{{0.5, 0.5}, {0.5, 0.5}},
 		{renderTexture}
 	};

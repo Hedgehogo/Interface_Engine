@@ -3,7 +3,7 @@
 #include "../ISizing2.hpp"
 #include "../../ISizing/ISizing.hpp"
 
-namespace ui {
+namespace ie {
 	class ConstRatioSizing2 : public ISizing2 {
 	public:
 		struct Make : public ISizing2::Make {

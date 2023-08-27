@@ -3,7 +3,7 @@
 #include "../IScalable.hpp"
 #include "IE/IComponent/ILayout/ILayout.hpp"
 
-namespace ui {
+namespace ie {
 	class Box : public virtual IScalable, public virtual ILayout {
 	public:
 		struct Make : public virtual IScalable::Make, public virtual ILayout::Make {

@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicBaseButton<T>::BasicBaseButton(BoxPtr<IScalable::Make>&& background, BoxPtr<IBasicInteraction<T> >&& interaction, InitInfo initInfo, T additional) :
 		BasicBaseInteractive<T>(std::move(interaction), initInfo, additional), background(background->make(initInfo)) {

@@ -3,7 +3,7 @@
 #include "../OnlyDrawable.hpp"
 #include "IE/IComponent/ILayout/ILayout.hpp"
 
-namespace ui {
+namespace ie {
 	class Empty : public OnlyDrawable, public ILayout {
 	public:
 		struct Make : public IUninteractive::Make, public ILayout::Make {

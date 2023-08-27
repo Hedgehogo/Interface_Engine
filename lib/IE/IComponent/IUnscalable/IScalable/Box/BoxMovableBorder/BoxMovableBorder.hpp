@@ -8,7 +8,7 @@
 #include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 #include "IE/Modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxMovableBorder : public Box, public IInteractive, public IUpdatable, public ILayoutTwoObjects {
 	public:
 		struct Make : public Box::Make, public ILayoutTwoObjects::Make {

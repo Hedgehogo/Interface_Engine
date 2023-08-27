@@ -7,12 +7,12 @@
 TEST(IComponent, BoxTabs) {
 	InitInfoData data{{100, 100}};
 	
-	auto value{std::make_shared<ui::Sint>(0)};
-	ui::BoxTabs boxTabs{
+	auto value{std::make_shared<ie::Sint>(0)};
+	ie::BoxTabs boxTabs{
 		{
-			ui::makeVector(
-				ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
-				ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red)
+			ie::makeVector(
+				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
 			),
 			value
 		}, data.makeInitInfo()

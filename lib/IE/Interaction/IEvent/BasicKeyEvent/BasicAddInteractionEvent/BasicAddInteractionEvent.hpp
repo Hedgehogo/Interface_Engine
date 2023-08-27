@@ -3,7 +3,7 @@
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 #include "../../../InteractionManager/InteractionManager.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicAddInteractionEvent : public BasicBaseKeyEvent<T> {
 	public:

@@ -1,6 +1,6 @@
 #include "IE/Window/Window.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicCloseWindowEvent<T>::BasicCloseWindowEvent() : window{nullptr}{
 	}

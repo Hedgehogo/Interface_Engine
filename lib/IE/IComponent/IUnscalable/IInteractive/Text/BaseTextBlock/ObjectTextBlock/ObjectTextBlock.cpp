@@ -1,7 +1,7 @@
 #include "ObjectTextBlock.hpp"
 #include "../../BaseCharacter/Character/Character.hpp"
 
-namespace ui {
+namespace ie {
 	ObjectTextBlock::ObjectTextBlock(IScalable* object, sf::Vector2f size, bool isCharacter) :
 		BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), isCharacter(isCharacter), fullLine(false), object(object) {
 	}

@@ -6,7 +6,7 @@
 
 using ullint = unsigned long long;
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	void ptrSort(std::vector<T*>& vector) {
 		std::sort(vector.begin(), vector.end(), [](T* first, T* second) {

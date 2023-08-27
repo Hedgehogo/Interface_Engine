@@ -1,7 +1,7 @@
 #include"BaseCharacter.hpp"
 #include "../BaseTextBlock/BaseTextBlock.hpp"
 
-namespace ui {
+namespace ie {
 	BaseCharacter::BaseCharacter() : selection(false), rerender(false) {
 	}
 	

@@ -6,7 +6,7 @@
 #include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 #include "../../../../../Interaction/InteractionManager/InteractionManager.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxConstBezel : public Box, public ILayoutObject {
 	public:
 		struct Make : public Box::Make, public ILayoutObject::Make {

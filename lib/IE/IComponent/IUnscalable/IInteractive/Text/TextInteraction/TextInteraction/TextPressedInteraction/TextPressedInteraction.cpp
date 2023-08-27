@@ -4,7 +4,7 @@
 #include "IE/Interaction/InteractionManager/InteractionManager.hpp"
 #include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextEvent/TextEvent.hpp"
 
-namespace ui {
+namespace ie {
 	TextPressedInteraction::TextPressedInteraction(BoxPtr<TextEvent>&& event, std::vector<Key> keys, std::vector<Key> blackListKeys) :
 		TextKeysInteraction(std::move(event), std::move(keys), std::move(blackListKeys)) {
 	}

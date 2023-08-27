@@ -8,10 +8,10 @@
 TEST(IComponent, BoxAlternative) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxAlternative boxAlternative{
+	ie::BoxAlternative boxAlternative{
 		{
-			ui::makeBoxPtr<ui::IScalable::Make, ui::Capsule::Make>(sf::Color::Green),
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red)
+			ie::makeBoxPtr<ie::IScalable::Make, ie::Capsule::Make>(sf::Color::Green),
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
 		},
 		data.makeInitInfo()
 	};

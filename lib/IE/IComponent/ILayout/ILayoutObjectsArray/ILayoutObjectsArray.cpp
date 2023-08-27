@@ -1,6 +1,6 @@
 #include "ILayoutObjectsArray.hpp"
 
-namespace ui {
+namespace ie {
 	void ILayoutObjectsArray::setPosition(sf::Vector2f position) {
 		ILayoutObjectsArray::move(position - layoutGetData().position);
 	}

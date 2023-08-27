@@ -8,7 +8,7 @@
 #include "../../MatchTargetPositioning/MatchTargetPositioning.hpp"
 #include "../../LambdaPositioning/LambdaPositioning.hpp"
 
-namespace ui {
+namespace ie {
 	IPositioning* makePosition(float coefficient, float offset, bool relativeTarget = false);
 	
 	IPositioning* makePosition(float coefficient, float objectCoefficient, float offset, bool relativeTarget = false);

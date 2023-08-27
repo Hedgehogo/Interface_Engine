@@ -2,7 +2,7 @@
 
 #include "../IPanelManager.hpp"
 
-namespace ui {
+namespace ie {
 	class PanelManagerInterceptor : public IPanelManager {
 	public:
 		PanelManagerInterceptor(IPanelManager& panelManager);

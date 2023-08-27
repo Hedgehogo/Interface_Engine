@@ -1,6 +1,6 @@
 #include "ChangeVariableByBrokenLine.hpp"
 
-namespace ui {
+namespace ie {
 	ChangeVariableByBrokenLine::ChangeVariableByBrokenLine(std::vector<Value> values) : values(values) {
 		for(const auto& item: values) {
 			size += item.size;

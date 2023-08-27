@@ -6,7 +6,7 @@
 
 using uint = unsigned;
 
-namespace ui {
+namespace ie {
 	struct TextVariables {
 		sf::Color TextColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor;
 		sf::Font* font;

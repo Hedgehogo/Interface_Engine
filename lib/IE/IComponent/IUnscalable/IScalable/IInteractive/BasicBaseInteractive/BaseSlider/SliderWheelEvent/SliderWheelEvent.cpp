@@ -1,7 +1,7 @@
 #include "SliderWheelEvent.hpp"
 #include "../BaseSlider.hpp"
 
-namespace ui {
+namespace ie {
 	SliderWheelEvent::SliderWheelEvent(BaseSlider& slider, bool horizontal, Relativity relativity, sf::Vector2f sensitivity) :
 		slider(&slider), sensitivity(sensitivity), horizontal(horizontal), relativity(relativity == Relativity::relationSlider) {
 	}

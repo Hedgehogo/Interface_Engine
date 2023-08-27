@@ -1,6 +1,6 @@
 #include "ChangeVariableBySteppedLine.hpp"
 
-namespace ui {
+namespace ie {
 	ChangeVariableBySteppedLine::ChangeVariableBySteppedLine(std::vector<Value> values) : values(values) {
 		for(const auto& item: values) {
 			size += item.size;

@@ -5,7 +5,7 @@
 
 using uint = unsigned;
 
-namespace ui {
+namespace ie {
 	sf::Color Caption::defaultColor = sf::Color::Black;
 	int Caption::defaultSize = 10;
 	

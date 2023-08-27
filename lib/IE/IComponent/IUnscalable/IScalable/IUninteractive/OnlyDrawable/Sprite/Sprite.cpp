@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "../../../../../../Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
-namespace ui {
+namespace ie {
 	Sprite::Make::Make(sf::Texture& texture, sf::IntRect rect, sf::Vector2f minSize) :
 		texture(texture), rect(rect), minSize(minSize) {
 	}

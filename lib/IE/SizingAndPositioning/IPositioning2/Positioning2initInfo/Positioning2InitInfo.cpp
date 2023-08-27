@@ -1,4 +1,4 @@
 #include "Positioning2InitInfo.hpp"
 
-namespace ui {
+namespace ie {
 }

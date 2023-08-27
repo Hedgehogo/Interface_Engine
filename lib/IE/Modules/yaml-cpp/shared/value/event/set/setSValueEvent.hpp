@@ -3,7 +3,7 @@
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 #include "../../iSValue.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	class SetSValueEvent : public BaseKeyEvent {
 	protected:

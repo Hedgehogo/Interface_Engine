@@ -2,7 +2,7 @@
 
 #include "../iYamlBuilder.hpp"
 
-namespace ui::detail {
+namespace ie::detail {
 	class EmptyYamlBuilder : public IYamlBuilder {
 	public:
 		bool build(const YAML::Node&, void*&) const override;

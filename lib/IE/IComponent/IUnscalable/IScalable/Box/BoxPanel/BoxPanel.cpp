@@ -1,6 +1,6 @@
 #include "BoxPanel.hpp"
 
-namespace ui {
+namespace ie {
 	BoxPanel::Make::Make(BoxPtr<ConstPanel::Make>&& panel, BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize) :
 		panel(std::move(panel)), object(std::move(object)), minSize(minSize) {
 	}

@@ -2,7 +2,7 @@
 #include "../BaseSlider.hpp"
 #include <cmath>
 
-namespace ui {
+namespace ie {
 	SliderEvent::SliderEvent(BaseSlider& slider, sf::Vector2i division) :
 		slider(&slider), startMousePosition(), startValue(), division(division) {
 	}

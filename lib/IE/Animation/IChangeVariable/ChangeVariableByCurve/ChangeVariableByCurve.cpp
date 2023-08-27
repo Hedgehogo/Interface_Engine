@@ -1,6 +1,6 @@
 #include "ChangeVariableByCurve.hpp"
 
-namespace ui {
+namespace ie {
 	ChangeVariableByCurve::ChangeVariableByCurve(float k1, float k2, float size, sf::Vector2f start, sf::Vector2f end) : start(start), end(end), k1(k1), k2(k2), size(size) {
 	}
 	

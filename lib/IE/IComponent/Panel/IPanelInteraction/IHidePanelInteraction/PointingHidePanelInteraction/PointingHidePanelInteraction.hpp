@@ -4,7 +4,7 @@
 #include "../../BasePanelInteraction/BasePanelInteraction.hpp"
 #include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	class PointingHidePanelInteraction : public BasePanelInteraction, public IHidePanelInteraction {
 	public:
 		PointingHidePanelInteraction(bool onlyOnParent = false);

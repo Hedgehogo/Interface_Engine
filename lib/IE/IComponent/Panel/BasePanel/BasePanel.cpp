@@ -1,7 +1,7 @@
 #include "BasePanel.hpp"
 #include "../IPanelManager/PanelManager/PanelManager.hpp"
 
-namespace ui {
+namespace ie {
 	BasePanel::BasePanel(
 		BoxPtr<IScalable::Make>&& object,
 		BoxPtr<ISizing2::Make> sizing,

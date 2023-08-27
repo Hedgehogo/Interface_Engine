@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	SetSValueEvent<T>::SetSValueEvent(const PISValue<T>& value, T variable) : value(value), variable(variable) {}
 	

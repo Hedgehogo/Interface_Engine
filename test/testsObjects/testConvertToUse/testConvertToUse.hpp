@@ -2,7 +2,7 @@
 
 #include "IE/Animation/convertToUse/iConvertToUse.hpp"
 
-class TestConvertToUse : public ui::IConvertToUse<float>{
+class TestConvertToUse : public ie::IConvertToUse<float>{
 public:
 	struct Processed{
 		struct Convert{

@@ -3,7 +3,7 @@
 #include "../Box.hpp"
 #include "IE/IComponent/ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxConstCenter : public Box, public ILayoutTwoObjects {
 	public:
 		struct Make : public Box::Make, public ILayoutTwoObjects::Make {

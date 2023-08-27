@@ -2,7 +2,7 @@
 
 #include "../yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename Base, typename Type>
 	void inherit(const std::vector<std::string>& aliases = {});
 	

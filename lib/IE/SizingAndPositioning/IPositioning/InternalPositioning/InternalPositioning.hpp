@@ -2,7 +2,7 @@
 
 #include "../IPositioning.hpp"
 
-namespace ui {
+namespace ie {
 	class InternalPositioning : public IPositioning {
 	public:
 		explicit InternalPositioning(float coefficient, float offset = 0);

@@ -1,6 +1,6 @@
 #include "BoxBackground.hpp"
 
-namespace ui {
+namespace ie {
 	BoxBackground::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& background, sf::Vector2f offset, sf::Vector2f minSize) :
 		object(std::move(object)), background(std::move(background)), offset(offset), minSize(minSize) {
 	}

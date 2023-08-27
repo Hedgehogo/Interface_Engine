@@ -1,7 +1,7 @@
 #include "DisplayPanelEvent.hpp"
 #include "../../../../BasePanel/Panel/Panel.hpp"
 
-namespace ui {
+namespace ie {
 	void DisplayPanelEvent::startPressed() {
 	}
 	

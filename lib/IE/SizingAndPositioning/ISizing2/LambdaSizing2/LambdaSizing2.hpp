@@ -2,7 +2,7 @@
 
 #include "../ISizing2.hpp"
 
-namespace ui {
+namespace ie {
 	class LambdaSizing2 : public ISizing2 {
 	public:
 		struct Make : public ISizing2::Make {

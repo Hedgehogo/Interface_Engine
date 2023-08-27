@@ -5,7 +5,7 @@
 #include "../../../IChangeVariable/IChangeVariable.hpp"
 #include "IE/Modules/yaml-cpp/buffer/buffer.hpp"
 
-namespace ui {
+namespace ie {
 	class Animation : public IAnimatorUnit {
 	public:
 		struct Variable {

@@ -8,10 +8,10 @@
 TEST(IComponent, Button) {
 	InitInfoData data{{100, 100}};
 	
-	ui::Button button{
+	ie::Button button{
 		{
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
-			ui::makeBoxPtr<ui::IBaseInteraction, ui::EmptyInteraction>(),
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::makeBoxPtr<ie::IBaseInteraction, ie::EmptyInteraction>(),
 		}, data.makeInitInfo()
 	};
 	data.interactionManager.update({});

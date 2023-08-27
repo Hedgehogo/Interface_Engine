@@ -4,7 +4,7 @@
 #include "IE/Modules/yaml-cpp/modules/loadModules.hpp"
 #include "IE/Window/Window.hpp"
 
-namespace ui {
+namespace ie {
 	Interface::Make::Make(BoxPtr<IScalable::Make>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
 		object(std::move(object)), animationManager(std::move(animationManager)), interactionStack(std::move(interactionStack)) {
 	}
@@ -43,7 +43,7 @@ namespace ui {
 	}
 	
 	Interface::Interface(const std::string& filePath, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
-		Interface(BoxPtr{ui::loadFromYaml<ui::IScalable>(filePath)}, animationManager, std::move(interactionStack)) {
+		Interface(BoxPtr{ie::loadFromYaml<ie::IScalable>(filePath)}, animationManager, std::move(interactionStack)) {
 	}
 	
 	Interface::Interface(sf::RenderWindow& window, BoxPtr<IScalable>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
@@ -52,7 +52,7 @@ namespace ui {
 	}
 	
 	Interface::Interface(sf::RenderWindow& window, const std::string& filePath, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
-		Interface(window, BoxPtr{ui::loadFromYaml<ui::IScalable>(filePath)}, animationManager, std::move(interactionStack)) {
+		Interface(window, BoxPtr{ie::loadFromYaml<ie::IScalable>(filePath)}, animationManager, std::move(interactionStack)) {
 	}
 	
 	Interface::Interface(sf::RenderWindow& window, BoxPtr<IScalable::Make>&& object, AnimationManager animationManager, BoxPtr<InteractionStack>&& interactionStack) :
@@ -199,7 +199,7 @@ namespace ui {
 	}
 	
 	void Interface::setRenderWindowSize(sf::RenderWindow& window) {
-		auto newWindowSize{ui::max(getNormalSize(), sf::Vector2f(window.getSize()))};
+		auto newWindowSize{ie::max(getNormalSize(), sf::Vector2f(window.getSize()))};
 		sf::Vector2u windowSize = {static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))};
 		window.setSize(windowSize);
 		setSize(sf::Vector2f(windowSize));

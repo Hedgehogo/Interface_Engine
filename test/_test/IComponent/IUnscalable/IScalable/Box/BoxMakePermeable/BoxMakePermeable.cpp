@@ -7,9 +7,9 @@
 TEST(IComponent, BoxMakePermeable) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxMakePermeable boxMakePermeable{
+	ie::BoxMakePermeable boxMakePermeable{
 		{
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green)
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green)
 		},
 		data.makeInitInfo()
 	};

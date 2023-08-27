@@ -2,7 +2,7 @@
 
 #include "../yaml.hpp"
 
-namespace ui {
+namespace ie {
 	class IComponent;
 	
 	class ObjectBuffer {

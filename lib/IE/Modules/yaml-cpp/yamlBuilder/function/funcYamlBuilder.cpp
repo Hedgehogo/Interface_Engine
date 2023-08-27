@@ -1,7 +1,7 @@
 #include "funcYamlBuilder.hpp"
 #include <utility>
 
-namespace ui::detail {
+namespace ie::detail {
 	std::vector<FuncYamlBuilder> FuncYamlBuilder::builders = {};
 	
 	FuncYamlBuilder::FuncYamlBuilder(FuncYamlBuilder::VoidBuildFunc function, std::vector<std::string> names) : names(std::move(names)), function(std::move(function)) {

@@ -1,7 +1,7 @@
 #include "BoxBorder.hpp"
 #include <vector>
 
-namespace ui {
+namespace ie {
 	BoxBorder::Make::Make(std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize) :
 		objects(std::move(objects)), boundsHorizontal(std::move(addBounds(boundsHorizontal))), boundsVertical(std::move(addBounds(boundsVertical))), minSize(minSize) {
 	}

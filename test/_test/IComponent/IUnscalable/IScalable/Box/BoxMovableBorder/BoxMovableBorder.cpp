@@ -7,11 +7,11 @@
 TEST(IComponent, BoxMovableBorder) {
 	InitInfoData data{{100, 100}};
 	
-	auto value = std::make_shared<ui::SCoefficient>(0.f);
-	ui::BoxMovableBorder boxMovableBorder{
+	auto value = std::make_shared<ie::SCoefficient>(0.f);
+	ie::BoxMovableBorder boxMovableBorder{
 		{
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red),
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
 			false,
 			value
 		},

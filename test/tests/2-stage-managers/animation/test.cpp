@@ -5,14 +5,14 @@
 TEST(AnimationManager, update) {
 	TestAnimatorUnit *test1 = new TestAnimatorUnit{}, *test2 = new TestAnimatorUnit{};
 
-	ui::AnimationManager animationManager{
+	ie::AnimationManager animationManager{
 		{
-			new ui::Animator{
+			new ie::Animator{
 				{
 					test1
 				}
 			},
-			new ui::Animator{
+			new ie::Animator{
 				{
 				    test2
 			    }
@@ -29,14 +29,14 @@ TEST(AnimationManager, update) {
 TEST(AnimationManager, copy) {
 	TestAnimatorUnit *test1 = new TestAnimatorUnit{}, *test2 = new TestAnimatorUnit{};
 
-	ui::AnimationManager animationManager{
+	ie::AnimationManager animationManager{
 		{
-			new ui::Animator{
+			new ie::Animator{
 				{
 					test1
 				}
 			},
-			new ui::Animator{
+			new ie::Animator{
 				{
 					test2
 				}

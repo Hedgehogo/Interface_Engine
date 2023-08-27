@@ -1,6 +1,6 @@
 #include "InternalPositioning.hpp"
 
-namespace ui {
+namespace ie {
 	InternalPositioning::InternalPositioning(float coefficient, float offset) : coefficient(coefficient), offset(offset) {
 	}
 	

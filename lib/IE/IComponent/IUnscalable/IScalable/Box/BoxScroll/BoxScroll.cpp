@@ -1,6 +1,6 @@
 #include "BoxScroll.hpp"
 
-namespace ui {
+namespace ie {
 	BoxScroll::Make::Make(BoxPtr<IUnscalable::Make>&& object, PSRVec2f normalObjectPosition, sf::Vector2f minSize) :
 		object(std::move(object)), normalObjectPosition(std::move(normalObjectPosition)), minSize(minSize) {
 	}

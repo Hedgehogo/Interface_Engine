@@ -2,7 +2,7 @@
 
 #include "IE/IComponent/IUnscalable/IInteractive/IInteractive.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicBaseInteractiveData {
 	public:

@@ -2,7 +2,7 @@
 
 #include "../ISizing.hpp"
 
-namespace ui {
+namespace ie {
 	class ConstSizing : public ISizing {
 	public:
 		struct Make : public ISizing::Make {

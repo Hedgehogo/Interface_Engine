@@ -1,7 +1,7 @@
 #include "RoundedRectangle.hpp"
 #include "../../../../../../Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
-namespace ui {
+namespace ie {
 	RoundedRectangle::Make::Make(sf::Color color, float radius) : color(color), radius(radius) {
 	}
 	

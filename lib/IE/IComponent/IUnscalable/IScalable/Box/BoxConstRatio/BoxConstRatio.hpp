@@ -6,7 +6,7 @@
 #include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 #include "../../../../../Enums/Corner/Corner.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxConstRatio : public Box, public ILayoutBackground, public ILayoutTwoObjects, public IDrawable {
 	public:
 		struct Make : public Box::Make, public ILayoutBackground::Make, public ILayoutTwoObjects::Make {

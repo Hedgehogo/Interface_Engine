@@ -1,6 +1,6 @@
 #include "InternalTargetPositioning.hpp"
 
-namespace ui {
+namespace ie {
 	InternalTargetPositioning::InternalTargetPositioning(float coefficient, float offset) : coefficient(coefficient), offset(offset) {
 	}
 	

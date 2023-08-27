@@ -2,7 +2,7 @@
 
 #include "IE/Animation/IChangeVariable/IChangeVariable.hpp"
 
-class TestChangeVariable : public ui::IChangeVariable{
+class TestChangeVariable : public ie::IChangeVariable{
 public:
 	struct Processed{
 		struct Operat{

@@ -4,7 +4,7 @@
 #include "../BaseCharacter.hpp"
 #include "../../TextVariables/TextVariables.hpp"
 
-namespace ui {
+namespace ie {
 	class Character : public BaseCharacter {
 	public:
 		Character(char32_t character, TextVariables& textVariables, std::vector<BaseLine*>& lines);

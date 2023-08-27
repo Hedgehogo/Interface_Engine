@@ -1,7 +1,7 @@
 #include "DontMovePanelInteraction.hpp"
 #include "../../../IPanelManager/IPanelManager.hpp"
 
-namespace ui {
+namespace ie {
 	DontMovePanelInteraction::DontMovePanelInteraction() : IMovePanelInteraction() {
 	}
 	

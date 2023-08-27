@@ -3,7 +3,7 @@
 #include "IE/IComponent/IUnscalable/IInteractive/Text/Text.hpp"
 #include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
-namespace ui {
+namespace ie {
 	TextCopyEvent::TextCopyEvent() : text(nullptr) {
 	}
 	

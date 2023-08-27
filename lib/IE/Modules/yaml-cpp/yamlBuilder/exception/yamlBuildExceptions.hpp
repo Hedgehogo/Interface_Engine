@@ -2,7 +2,7 @@
 
 #include "../../exception/baseYamlException.hpp"
 
-namespace ui {
+namespace ie {
 	class NonexistentTypeYamlException : public BaseYamlException {
 	public:
 		NonexistentTypeYamlException(YAML::Mark mark, const std::string& type, const std::string& base);

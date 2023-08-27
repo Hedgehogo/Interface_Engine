@@ -2,7 +2,7 @@
 
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 
-namespace ui {
+namespace ie {
 	class BaseSlider;
 	
 	class SliderEvent : public BaseKeyEvent {

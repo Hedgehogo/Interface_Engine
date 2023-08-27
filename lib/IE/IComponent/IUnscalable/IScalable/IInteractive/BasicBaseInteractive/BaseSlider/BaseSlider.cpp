@@ -1,7 +1,7 @@
 #include "BaseSlider.hpp"
 #include <cmath>
 
-namespace ui {
+namespace ie {
 	BaseSlider::BaseSlider(
 		BoxPtr<IUninteractive::Make>&& slider,
 		BoxPtr<IUninteractive::Make>&& background,

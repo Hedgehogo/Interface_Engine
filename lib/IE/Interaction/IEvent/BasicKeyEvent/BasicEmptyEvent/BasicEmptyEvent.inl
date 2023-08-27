@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicEmptyEvent<T>::BasicEmptyEvent() : KeyEvent() {
 	}

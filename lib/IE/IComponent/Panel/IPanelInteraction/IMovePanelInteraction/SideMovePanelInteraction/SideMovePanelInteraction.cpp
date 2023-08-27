@@ -1,7 +1,7 @@
 #include "SideMovePanelInteraction.hpp"
 #include "../../../BasePanel/Panel/Panel.hpp"
 
-namespace ui {
+namespace ie {
 	SideMovePanelInteraction::SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool atStart) :
 		coefficient(coefficient), offset(offset), horizontal(horizontal), atStart(atStart) {
 	}

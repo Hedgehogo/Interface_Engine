@@ -1,6 +1,6 @@
 #include "IHidePanelInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	IBaseInteraction::Priority IHidePanelInteraction::getPriority() const {
 		return Priority::lowest;
 	}

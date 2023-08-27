@@ -2,7 +2,7 @@
 #include "IE/Animation/IChangeVariable/strainghtLine/changeVariableByStraightLine.hpp"
 
 TEST(ChangeVariableByStraightLine, operator) {
-	ui::ChangeVariableByStraightLine changeVariableByStraightLine{0.5, 6, 3};
+	ie::ChangeVariableByStraightLine changeVariableByStraightLine{0.5, 6, 3};
 
 	ASSERT_EQ(changeVariableByStraightLine(0), 3);
 	ASSERT_EQ(changeVariableByStraightLine(3), 4.5);
@@ -10,12 +10,12 @@ TEST(ChangeVariableByStraightLine, operator) {
 }
 
 TEST(ChangeVariableByStraightLine, getSize) {
-	ui::ChangeVariableByStraightLine changeVariableByStraightLine{1, 2};
+	ie::ChangeVariableByStraightLine changeVariableByStraightLine{1, 2};
 	ASSERT_EQ(changeVariableByStraightLine.getSize(), 2);
 }
 
 TEST(ChangeVariableByStraightLine, copy) {
-	ui::IChangeVariable *changeVariable{new ui::ChangeVariableByStraightLine{0.5, 6, 3}},
+	ie::IChangeVariable *changeVariable{new ie::ChangeVariableByStraightLine{0.5, 6, 3}},
       *copyChangeVariable{changeVariable->copy()};
 
 	ASSERT_EQ(copyChangeVariable->getSize(), 6);
@@ -28,7 +28,7 @@ TEST(ChangeVariableByStraightLine, copy) {
 }
 
 TEST(ChangeVariableByStraightLine, make) {
-	ui::IChangeVariable *changeVariable{ui::makeChangeVariableByStraightLine(3, 6, 6)};
+	ie::IChangeVariable *changeVariable{ie::makeChangeVariableByStraightLine(3, 6, 6)};
 
 	ASSERT_EQ(changeVariable->getSize(), 6);
 	ASSERT_EQ((*changeVariable)(0), 3);

@@ -1,6 +1,6 @@
 #include "BoxSettable.hpp"
 
-namespace ui {
+namespace ie {
 	BoxSettable::Make::Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize) :
 		object(std::move(object)), minSize(minSize) {
 	}

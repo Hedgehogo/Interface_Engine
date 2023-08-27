@@ -3,7 +3,7 @@
 #include "../iSCoefficientValue.hpp"
 #include "../../reference/sReferenceValue.hpp"
 
-namespace ui {
+namespace ie {
 	class SReferenceCoefficientValue : public ISCoefficientValue, public SReferenceValue<float> {
 	public:
 		explicit SReferenceCoefficientValue(float& value);

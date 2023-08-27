@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicBaseKeyEvent<T>::BasicBaseKeyEvent() : mousePosition({0, 0}) {
 	}

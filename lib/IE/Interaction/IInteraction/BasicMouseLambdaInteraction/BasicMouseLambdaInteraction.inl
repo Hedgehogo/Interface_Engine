@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicMouseLambdaInteraction<T> BasicMouseLambdaInteraction<T>::debug{
 		makeBoxPtr<BasicKeyEvent<T>, BasicLambdaKeyEvent<T> >(

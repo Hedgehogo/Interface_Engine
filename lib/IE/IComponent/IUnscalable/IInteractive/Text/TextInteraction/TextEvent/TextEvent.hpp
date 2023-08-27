@@ -3,7 +3,7 @@
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicKeyEvent.hpp"
 #include "../TextInteractionInitInfo/TextInteractionInitInfo.hpp"
 
-namespace ui {
+namespace ie {
 	class Text;
 	
 	using TextEvent = BasicKeyEvent<Text&>;

@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicOneKeyInteraction<T>::BasicOneKeyInteraction(BoxPtr<BasicKeyEvent<T> >&& event, Key key) :
 		event(std::move(event)), key(key) {

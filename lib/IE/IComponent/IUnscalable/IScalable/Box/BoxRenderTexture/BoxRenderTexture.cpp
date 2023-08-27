@@ -1,6 +1,6 @@
 #include "BoxRenderTexture.hpp"
 
-namespace ui {
+namespace ie {
 	BoxRenderTexture::Make::Make(BoxPtr<IScalable::Make>&& object, bool optimize, sf::Vector2f minSize) :
 		object(std::move(object)), optimize(optimize), minSize(minSize) {
 	}

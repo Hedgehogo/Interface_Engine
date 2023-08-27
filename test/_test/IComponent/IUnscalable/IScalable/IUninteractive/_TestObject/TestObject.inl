@@ -5,16 +5,16 @@ TestObject<T>::Make::Make(std::shared_ptr<T> object) : object(std::move(object))
 }
 
 template<typename T>
-TestObject<T>* TestObject<T>::Make::make(ui::InitInfo initInfo) {
+TestObject<T>* TestObject<T>::Make::make(ie::InitInfo initInfo) {
 	return new TestObject{std::move(*this), initInfo};
 }
 
 template<typename T>
-TestObject<T>::TestObject(Make&& make, ui::InitInfo initInfo) : object(make.object->make(initInfo)) {
+TestObject<T>::TestObject(Make&& make, ie::InitInfo initInfo) : object(make.object->make(initInfo)) {
 }
 
 template<typename T>
-void TestObject<T>::init(ui::InitInfo initInfo) {
+void TestObject<T>::init(ie::InitInfo initInfo) {
 	object->init(initInfo);
 }
 

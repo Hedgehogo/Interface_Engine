@@ -5,7 +5,7 @@
 TEST(IComponent, FullColor) {
 	InitInfoData data{{100, 100}};
 	
-	ui::FullColor fullColor{{sf::Color::Red}, data.makeInitInfo()};
+	ie::FullColor fullColor{{sf::Color::Red}, data.makeInitInfo()};
 	data.interactionManager.update({});
 	
 	ASSERT_EQ(data.drawManager.size(), 1);

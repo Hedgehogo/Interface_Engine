@@ -2,7 +2,7 @@
 
 #include "../IInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicLambdaInteraction : public virtual IBasicInteraction<T> {
 	public:

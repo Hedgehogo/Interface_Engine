@@ -2,7 +2,7 @@
 
 #include "../IPositioning.hpp"
 
-namespace ui {
+namespace ie {
 	class MatchTargetPositioning : public IPositioning {
 	public:
 		MatchTargetPositioning(float targetCoefficient, float objectCoefficient, float offset = 0);

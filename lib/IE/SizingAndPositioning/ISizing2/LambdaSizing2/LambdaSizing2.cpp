@@ -1,6 +1,6 @@
 #include "LambdaSizing2.hpp"
 
-namespace ui {
+namespace ie {
 	LambdaSizing2::Make::Make(
 		sf::Vector2f (* findSize)(sf::Vector2f, sf::Vector2f, sf::Vector2f),
 		sf::Vector2f (* getParentMinSize)(sf::Vector2f)

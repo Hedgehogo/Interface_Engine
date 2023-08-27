@@ -4,7 +4,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include "IE/IComponent/InitInfo/InitInfo.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	struct BasicInteractionInitInfo {
 		using AdditionalType = T;

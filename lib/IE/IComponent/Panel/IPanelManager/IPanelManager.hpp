@@ -2,7 +2,7 @@
 
 #include "../BasePanel/BasePanel.hpp"
 
-namespace ui {
+namespace ie {
 	class IPanelManager : public IUpdatable, public IDrawable {
 	public:
 		virtual bool isFree() = 0;

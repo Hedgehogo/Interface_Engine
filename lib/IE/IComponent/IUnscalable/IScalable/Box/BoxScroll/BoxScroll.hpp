@@ -3,7 +3,7 @@
 #include "../BoxView/BoxView.hpp"
 #include "IE/Modules/yaml-cpp/shared/vector/general/sVector2.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxScroll : public BoxWithView {
 	protected:
 		sf::Vector2f getNewObjectPosition(sf::Vector2f normalObjectPosition);

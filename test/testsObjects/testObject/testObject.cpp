@@ -6,11 +6,11 @@ TestObject::Make::Make(sf::Vector2f minSize, sf::Vector2f normalSize, bool updat
 	minSize(minSize), normalSize(normalSize), updateInteractionsResult(updateInteractionsResult) {
 }
 
-TestObject* TestObject::Make::make(ui::InitInfo initInfo) {
+TestObject* TestObject::Make::make(ie::InitInfo initInfo) {
 	return new TestObject{std::move(*this), initInfo};
 }
 
-TestObject::TestObject(Make&& make, ui::InitInfo initInfo) :
+TestObject::TestObject(Make&& make, ie::InitInfo initInfo) :
 	processed(
 		{
 			{
@@ -35,7 +35,7 @@ TestObject::TestObject(sf::Vector2f minSize, sf::Vector2f normalSize, bool updat
 	updateInteractionsResult(updateInteractionsResult), minSize(minSize), normalSize(normalSize) {
 }
 
-void TestObject::init(ui::InitInfo initInfo) {
+void TestObject::init(ie::InitInfo initInfo) {
 	processed.init.time = getProcessorTime();
 	processed.init.renderTarget = &initInfo.renderTarget;
 	processed.init.drawManager = &initInfo.drawManager;
@@ -60,11 +60,11 @@ sf::Vector2f TestObject::getNormalSize() const {
 	return normalSize;
 }
 
-ui::LayoutData& TestObject::getLayoutData() {
+ie::LayoutData& TestObject::getLayoutData() {
 	return layoutData;
 }
 
-const ui::LayoutData& TestObject::getLayoutData() const {
+const ie::LayoutData& TestObject::getLayoutData() const {
 	return layoutData;
 }
 

@@ -1,6 +1,6 @@
 #include "BoxConstBorder.hpp"
 
-namespace ui {
+namespace ie {
 	BoxConstBorder::Make::Make(
 		BoxPtr<IScalable::Make>&& constObject,
 		BoxPtr<IScalable::Make>&& secondObject,

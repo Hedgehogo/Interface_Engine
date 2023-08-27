@@ -1,7 +1,7 @@
 #include "CoefficientMovePanelInteraction.hpp"
 #include "../../../BasePanel/Panel/Panel.hpp"
 
-namespace ui {
+namespace ie {
 	CoefficientMovePanelInteraction::CoefficientMovePanelInteraction(sf::Vector2f coefficient, sf::Vector2f offset, bool atStart) :
 		coefficient(coefficient), offset(offset), atStart(atStart) {
 	}

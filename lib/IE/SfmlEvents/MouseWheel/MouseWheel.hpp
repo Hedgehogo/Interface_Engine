@@ -3,7 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 
-namespace ui {
+namespace ie {
 	class MouseWheel {
 	protected:
 		static sf::Vector2f delta;

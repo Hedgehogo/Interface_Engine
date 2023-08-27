@@ -3,7 +3,7 @@
 #include "../../../Modules/yaml-Animation/buffer.hpp"
 #include "IE/Modules/yaml-cpp/shared/value/general/sValue.hpp"
 
-namespace ui {
+namespace ie {
 	class IAnimatorUnit {
 	public:
 		virtual void setSpeed(PSfloat speed) = 0;

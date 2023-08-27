@@ -1,7 +1,7 @@
 #include "Window.hpp"
 #include "IE/SfmlEvents/HandleEvent/HandleEvent.hpp"
 
-namespace ui {
+namespace ie {
 	BaseWindowResizer* getWindowResizer() {
 		return new WindowResizer{};
 	}

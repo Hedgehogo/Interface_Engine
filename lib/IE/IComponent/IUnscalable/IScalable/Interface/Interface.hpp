@@ -8,7 +8,7 @@
 #include "../../../../Interaction/InteractionStack/InteractionStack.hpp"
 #include "../../../../Interaction/IEvent/WheelEvent/WheelEvent.hpp"
 
-namespace ui {
+namespace ie {
 	class Interface : public IScalable, public IDrawable, public IUpdatable {
 	protected:
 		bool isInWindow(sf::Vector2f position);

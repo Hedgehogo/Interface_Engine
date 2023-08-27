@@ -2,7 +2,7 @@
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicAddInteractionEvent/BasicAddBlockInteractionEvent/BasicAddBlockInteractionEvent.hpp"
 #include <algorithm>
 
-namespace ui {
+namespace ie {
 	BoxMovableBorder::Make::Make(
 		BoxPtr<IScalable::Make>&& firstObject,
 		BoxPtr<IScalable::Make>&& secondObject,

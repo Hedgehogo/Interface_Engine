@@ -1,7 +1,7 @@
 #include "ClickDisplayPanelInteraction.hpp"
 #include "../../../BasePanel/Panel/Panel.hpp"
 
-namespace ui {
+namespace ie {
 	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Key key) :
 		ClickPanelInteraction(makeBoxPtr<PanelEvent, DisplayPanelEvent>(), key) {
 	}

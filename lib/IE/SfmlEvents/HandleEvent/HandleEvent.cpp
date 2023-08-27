@@ -3,7 +3,7 @@
 #include "../MouseWheel/MouseWheel.hpp"
 #include "../../Enums/KeyHandler/KeyHandler.hpp"
 
-namespace ui {
+namespace ie {
 	void handleEvent(sf::Event event) {
 		if(event.type == sf::Event::MouseWheelScrolled) {
 			MouseWheel::setDelta(event.mouseWheelScroll);

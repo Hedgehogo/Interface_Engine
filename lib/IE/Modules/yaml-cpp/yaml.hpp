@@ -15,7 +15,7 @@ sf::Vector2<T> operator*(const sf::Vector2<T>& first, const sf::Vector2<T>& seco
 template<typename T>
 sf::Vector2<T> operator/(const sf::Vector2<T>& first, const sf::Vector2<T>& second);
 
-namespace ui {
+namespace ie {
 	using namespace bp;
 	
 	std::string demangle(const char* name);

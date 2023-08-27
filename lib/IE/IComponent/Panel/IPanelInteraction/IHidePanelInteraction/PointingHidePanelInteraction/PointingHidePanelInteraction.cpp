@@ -2,7 +2,7 @@
 #include "PointingHidePanelInteraction.hpp"
 #include "../../../BasePanel/Panel/Panel.hpp"
 
-namespace ui {
+namespace ie {
 	PointingHidePanelInteraction::PointingHidePanelInteraction(bool onlyOnParent) : onlyOnParent(onlyOnParent) {
 	}
 	

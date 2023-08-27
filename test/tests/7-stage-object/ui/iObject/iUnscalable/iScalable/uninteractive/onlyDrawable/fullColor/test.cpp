@@ -2,8 +2,8 @@
 
 TEST(FullColor, draw) {
     Program testProgram{
-	    new ui::Interface{
-            new ui::FullColor{
+	    new ie::Interface{
+            new ie::FullColor{
                 {255, 0, 0}
             }
         },
@@ -19,8 +19,8 @@ TEST(FullColor, draw) {
 
 TEST(FullColor, YAML) {
     Program testProgram{
-	    new ui::Interface{
-            ui::loadFromYaml<ui::IScalable>("../test/tests/7-stage-object/IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/src/test.yaml")
+	    new ie::Interface{
+            ie::loadFromYaml<ie::IScalable>("../test/tests/7-stage-object/IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/src/test.yaml")
         }
     };
 

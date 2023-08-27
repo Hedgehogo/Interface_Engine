@@ -5,7 +5,7 @@
 #include <string>
 #include <IE/Modules/yaml-cpp/yamlBuilder/base/baseYamlBuilder.hpp>
 
-namespace ui {
+namespace ie {
 	class ConsoleCommandEvent : public BaseKeyEvent{
 	protected:
 		std::string command;

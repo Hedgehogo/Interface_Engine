@@ -3,7 +3,7 @@
 #include "../../../testsObjects/testInteraction/testInteraction.hpp"
 #include "../../../../lib/IE/Interaction/InteractionManager/InteractionManager.hpp"
 
-void testStart(TestInteraction& testInteraction, TestInteraction& testInteraction1, ui::InteractionManager& interactionManager){
+void testStart(TestInteraction& testInteraction, TestInteraction& testInteraction1, ie::InteractionManager& interactionManager){
 	ASSERT_EQ(testInteraction.getProcessed().start.size(), 1);
 	ASSERT_TRUE(testInteraction.getProcessed().start[0].mousePosition == (sf::Vector2i{3, 3}));
 
@@ -20,7 +20,7 @@ void testStart(TestInteraction& testInteraction, TestInteraction& testInteractio
 	ASSERT_TRUE(testInteraction1.getProcessed().update[0].mousePosition == (sf::Vector2i{3, 3}));
 }
 
-void testUpdate(TestInteraction& testInteraction, TestInteraction& testInteraction1, ui::InteractionManager& interactionManager){
+void testUpdate(TestInteraction& testInteraction, TestInteraction& testInteraction1, ie::InteractionManager& interactionManager){
 	ASSERT_EQ(testInteraction.getProcessed().update.size(), 2);
 	ASSERT_GT(testInteraction.getProcessed().update[1].time, testInteraction.getProcessed().update[0].time);
 	ASSERT_TRUE(testInteraction.getProcessed().update[1].mousePosition == (sf::Vector2i{2, 2}));
@@ -34,7 +34,7 @@ TEST(InteractionManager, update_and_add) {
 	TestInteraction testInteraction{};
 	TestInteraction testInteraction1{};
 
-	ui::InteractionManager interactionManager{};
+	ie::InteractionManager interactionManager{};
 
 	interactionManager.addInteraction(testInteraction);
 	interactionManager.addInteraction(testInteraction1);
@@ -52,7 +52,7 @@ TEST(InteractionManager, add_delete) {
 	TestInteraction testInteraction{};
 	TestInteraction testInteraction1{};
 
-	ui::InteractionManager interactionManager{};
+	ie::InteractionManager interactionManager{};
 	interactionManager.addInteraction(testInteraction);
 	interactionManager.addInteraction(testInteraction1);
 
@@ -73,7 +73,7 @@ TEST(InteractionManager, clear) {
 	TestInteraction testInteraction{};
 	TestInteraction testInteraction1{};
 
-	ui::InteractionManager interactionManager{};
+	ie::InteractionManager interactionManager{};
 	interactionManager.addInteraction(testInteraction);
 	interactionManager.addInteraction(testInteraction1);
 
@@ -91,7 +91,7 @@ TEST(InteractionManager, isBlocked) {
 	TestInteraction testInteraction{};
 	TestInteraction testInteraction1{};
 
-	ui::InteractionManager interactionManager{};
+	ie::InteractionManager interactionManager{};
 	interactionManager.addInteraction(testInteraction);
 	interactionManager.addInteraction(testInteraction1);
 
@@ -99,7 +99,7 @@ TEST(InteractionManager, isBlocked) {
 
 	ASSERT_FALSE(interactionManager.isBlocked());
 
-	TestInteraction testInteraction2{ui::IInteraction::Priority::medium, true};
+	TestInteraction testInteraction2{ie::IInteraction::Priority::medium, true};
 	interactionManager.addInteraction(testInteraction2);
 	interactionManager.update({2, 2});
 
@@ -107,11 +107,11 @@ TEST(InteractionManager, isBlocked) {
 }
 
 TEST(InteractionManager, priority) {
-	TestInteraction testInteraction{ui::IInteraction::Priority::highest},
-					testInteraction1{ui::IInteraction::Priority::medium},
-					testInteraction2{ui::IInteraction::Priority::lowest};
+	TestInteraction testInteraction{ie::IInteraction::Priority::highest},
+					testInteraction1{ie::IInteraction::Priority::medium},
+					testInteraction2{ie::IInteraction::Priority::lowest};
 
-	ui::InteractionManager interactionManager{};
+	ie::InteractionManager interactionManager{};
 	interactionManager.addInteraction(testInteraction2);
 	interactionManager.addInteraction(testInteraction1);
 	interactionManager.addInteraction(testInteraction);

@@ -15,7 +15,7 @@ TEST(Animator, update) {
 					 *test6 = new TestAnimatorUnit{{test6and7_1}},
 					 *test7 = new TestAnimatorUnit{{test6and7_1}};
 
-	ui::Animator animator{{test1, test2, test3, test4, test5, test6, test7}};
+	ie::Animator animator{{test1, test2, test3, test4, test5, test6, test7}};
 
 	animator.update(3.f);
 
@@ -62,7 +62,7 @@ TEST(Animator, copy) {
 					 *test1 = new TestAnimatorUnit{{test1_1, test1_2}},
 					 *test2 = new TestAnimatorUnit{{test2_1, test2_2}};
 
-	ui::Animator animator{{test1, test2}};
+	ie::Animator animator{{test1, test2}};
 
 	delete animator.copy();
 

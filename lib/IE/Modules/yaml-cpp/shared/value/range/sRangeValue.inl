@@ -1,6 +1,6 @@
 //included into sRangeValue.hpp
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	SRangeValue<T>::SRangeValue(T value) : SValue<T>(value), upper(std::numeric_limits<T>::max()), lower(std::numeric_limits<T>::lowest()) {
 	}

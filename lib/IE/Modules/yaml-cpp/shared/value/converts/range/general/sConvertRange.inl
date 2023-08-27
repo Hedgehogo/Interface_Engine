@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	SConvertRange<T>::SConvertRange(PSRange<T> sRangeValue, T upper, T lower) : sRangeValue(sRangeValue) {
 		sRangeValue->addSetter([=](const T& value){

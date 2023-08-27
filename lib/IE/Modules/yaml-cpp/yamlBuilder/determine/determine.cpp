@@ -1,6 +1,6 @@
 #include "determine.hpp"
 
-namespace ui {
+namespace ie {
 	namespace detail {
 		bool YamlArg::present(const YAML::Node& node) const {
 			return node[name].IsDefined() && (type == YAML::NodeType::Undefined || type == node[name].Type());

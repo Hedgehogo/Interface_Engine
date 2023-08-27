@@ -4,7 +4,7 @@
 #include <windows.h>
 #endif
 
-namespace ui {
+namespace ie {
 	void openUrl(std::string url) {
 #ifdef WIN32
 		ShellExecute(nullptr, "open", url.c_str(), nullptr, nullptr, SW_HIDE);

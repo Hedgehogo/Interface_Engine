@@ -1,7 +1,7 @@
 #include "HidePanelEvent.hpp"
 #include "../../../../BasePanel/Panel/Panel.hpp"
 
-namespace ui {
+namespace ie {
 	HidePanelEvent::HidePanelEvent(bool onlyOnParent) : onlyOnParent(onlyOnParent) {
 	}
 	

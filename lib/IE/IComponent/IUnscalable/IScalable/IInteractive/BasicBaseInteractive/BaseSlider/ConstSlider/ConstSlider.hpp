@@ -2,7 +2,7 @@
 
 #include "../BaseSlider.hpp"
 
-namespace ui {
+namespace ie {
 	class ConstSlider : public BaseSlider {
 	public:
 		struct Make : public IScalable::Make {

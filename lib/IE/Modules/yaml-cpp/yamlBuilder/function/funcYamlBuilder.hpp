@@ -2,7 +2,7 @@
 
 #include "../Empty/emptyYamlBuilder.hpp"
 
-namespace ui::detail {
+namespace ie::detail {
 	class FuncYamlBuilder : public IYamlBuilder {
 	public:
 		template<typename Type>

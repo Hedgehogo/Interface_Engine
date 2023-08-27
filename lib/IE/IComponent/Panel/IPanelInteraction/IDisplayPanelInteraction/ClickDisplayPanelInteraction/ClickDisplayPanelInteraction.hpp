@@ -3,7 +3,7 @@
 #include "DisplayPanelEvent/DisplayPanelEvent.hpp"
 #include "../../ClickPanelInteraction/ClickPanelInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class ClickDisplayPanelInteraction : public ClickPanelInteraction, public IDisplayPanelInteraction {
 	public:
 		explicit ClickDisplayPanelInteraction(Key key);

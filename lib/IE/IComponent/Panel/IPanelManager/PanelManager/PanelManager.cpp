@@ -2,7 +2,7 @@
 #include <utility>
 #include <iostream>
 
-namespace ui {
+namespace ie {
 	PanelManager::PanelManager(std::vector<BasePanel*> panels) : panels(std::move(panels)), activePanels() {
 	}
 	

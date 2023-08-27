@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicBaseInteractiveData<T>::BasicBaseInteractiveData(BoxPtr<IBasicInteraction<T> >&& interaction, InitInfo initInfo, T additional) :
 		interactionStack(&initInfo.interactionStack),

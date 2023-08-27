@@ -1,6 +1,6 @@
 #include "ChangeVariableByStraightLine.hpp"
 
-namespace ui {
+namespace ie {
 	ChangeVariableByStraightLine::ChangeVariableByStraightLine(float k, float length, float b) : length(length), k(k), b(b) {
 	}
 	

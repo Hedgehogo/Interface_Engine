@@ -4,7 +4,7 @@
 #include "../../../Enums/KeyHandler/KeyHandler.hpp"
 #include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicOneKeyInteraction : public virtual IBasicInteraction<T> {
 	public:

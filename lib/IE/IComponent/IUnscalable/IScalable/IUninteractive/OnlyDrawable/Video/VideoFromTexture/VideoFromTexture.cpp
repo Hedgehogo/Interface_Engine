@@ -1,6 +1,6 @@
 #include "VideoFromTexture.hpp"
 
-namespace ui {
+namespace ie {
 	VideoFromTexture::Make::Make(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect, std::size_t countFrame, sf::Vector2i offset) :
 		texture(texture), viewingProgress(viewingProgress), rect(rect), countFrame(countFrame), offset(offset) {
 	}

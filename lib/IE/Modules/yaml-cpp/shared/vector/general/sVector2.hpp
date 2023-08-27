@@ -3,7 +3,7 @@
 #include "../../value/range/sRangeValue.hpp"
 #include "../iSVector2.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	class SVector2 : public ISVector2 {
 	protected:

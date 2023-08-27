@@ -1,6 +1,6 @@
 //included into withList.hpp
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	SList<T>::SList(const std::vector<typename SList<T>::V>& list) : setters() {
 		this->list.resize(list.size());

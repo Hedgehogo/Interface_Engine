@@ -2,7 +2,7 @@
 
 #include <memory>
 
-namespace ui {
+namespace ie {
 	Animator::Animator(std::vector<IAnimatorUnit*> units, PSfloat speed) : units(units), unitsBuff(units) {
 		for(auto& unit: units) {
 			unit->setSpeed(speed);

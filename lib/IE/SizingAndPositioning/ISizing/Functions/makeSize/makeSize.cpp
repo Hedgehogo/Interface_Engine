@@ -2,7 +2,7 @@
 
 #include <utility>
 
-namespace ui {
+namespace ie {
 	ISizing::Make* makeSizeMake(bool relativeParent) {
 		if(!relativeParent) {
 			return new RelativeNormalSizing::Make{};

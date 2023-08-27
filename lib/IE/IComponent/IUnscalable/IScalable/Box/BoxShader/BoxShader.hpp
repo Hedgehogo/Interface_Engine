@@ -3,7 +3,7 @@
 #include "../BoxRenderTexture/BoxRenderTexture.hpp"
 #include "IE/Modules/yaml-cpp/shared/vector/general/sVector2.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxShader : public BoxRenderTexture {
 	public:
 		enum Transmission {

@@ -1,7 +1,7 @@
 #include "sReferenceCoefficientValue.hpp"
 #include <algorithm>
 
-namespace ui {
+namespace ie {
 	SReferenceCoefficientValue::SReferenceCoefficientValue(float& value) : SReferenceValue(value) {
 	}
 	

@@ -1,6 +1,6 @@
 #include "PanelManagerInterceptor.hpp"
 
-namespace ui {
+namespace ie {
 	PanelManagerInterceptor::PanelManagerInterceptor(IPanelManager& panelManager) : panelManager(&panelManager) {
 	}
 	

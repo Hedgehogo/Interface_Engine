@@ -3,7 +3,7 @@
 #include "../../../ClickPanelInteraction/PanelEvent/PanelEvent.hpp"
 #include "../../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	class DisplayPanelEvent : public PanelEvent {
 	public:
 		DisplayPanelEvent* copy() override;

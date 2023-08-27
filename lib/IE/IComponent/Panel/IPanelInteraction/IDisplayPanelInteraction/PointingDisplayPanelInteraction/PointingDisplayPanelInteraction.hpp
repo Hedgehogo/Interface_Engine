@@ -4,7 +4,7 @@
 #include "../../BasePanelInteraction/BasePanelInteraction.hpp"
 #include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	class PointingDisplayPanelInteraction : public BasePanelInteraction, public IDisplayPanelInteraction {
 	public:
 		void start(sf::Vector2i mousePosition) override;

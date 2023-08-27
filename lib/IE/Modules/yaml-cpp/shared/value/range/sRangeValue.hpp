@@ -2,7 +2,7 @@
 
 #include "../general/sValue.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	class SRangeValue : public SValue<T> {
 	public:

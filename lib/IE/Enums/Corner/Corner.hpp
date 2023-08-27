@@ -2,7 +2,7 @@
 
 #include "../../Modules/yaml-cpp/yaml.hpp"
 
-namespace ui {
+namespace ie {
 	enum class Corner {
 		upRight,
 		upLeft,

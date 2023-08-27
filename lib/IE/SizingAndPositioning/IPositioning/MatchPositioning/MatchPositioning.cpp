@@ -1,6 +1,6 @@
 #include "MatchPositioning.hpp"
 
-namespace ui {
+namespace ie {
 	MatchPositioning::MatchPositioning(float parentCoefficient, float objectCoefficient, float offset) : parentCoefficient(parentCoefficient), objectCoefficient(objectCoefficient), offset(offset) {
 	}
 	

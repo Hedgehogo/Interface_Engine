@@ -2,7 +2,7 @@
 
 #include "../../Modules/yaml-cpp/yaml.hpp"
 
-namespace ui {
+namespace ie {
 	enum class Location {
 		origin,
 		center,

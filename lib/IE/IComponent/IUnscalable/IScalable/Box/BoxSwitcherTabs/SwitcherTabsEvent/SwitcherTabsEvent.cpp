@@ -1,7 +1,7 @@
 #include "SwitcherTabsEvent.hpp"
 #include "../BoxSwitcherTabs.hpp"
 
-namespace ui {
+namespace ie {
 	SwitcherTabsEvent::SwitcherTabsEvent(PISint value, BoxSwitcherTabs& switcherTabs) :
 		value(std::move(value)), switcherTabs(&switcherTabs) {}
 	

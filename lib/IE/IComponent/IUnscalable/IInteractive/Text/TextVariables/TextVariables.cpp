@@ -1,6 +1,6 @@
 #include "TextVariables.hpp"
 
-namespace ui {
+namespace ie {
 	TextVariables::TextVariables(
 		sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
 		sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor,

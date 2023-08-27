@@ -4,17 +4,17 @@
 #include "IE/IComponent/iLayout/ILayout.hpp"
 #include <ctime>
 
-class TestObject : public ui::IScalable, public ui::ILayout, public ui::IDrawable, public ui::IUpdatable {
+class TestObject : public ie::IScalable, public ie::ILayout, public ie::IDrawable, public ie::IUpdatable {
 public:
 	struct Processed {
 		struct Init {
 			uint64_t time{0};
 			sf::RenderTarget *renderTarget;
-			ui::DrawManager *drawManager;
-			ui::UpdateManager *updateManager;
-			ui::InteractionManager *interactionManager;
-			ui::InteractionStack *interactionStack;
-			ui::IPanelManager *panelManager;
+			ie::DrawManager *drawManager;
+			ie::UpdateManager *updateManager;
+			ie::InteractionManager *interactionManager;
+			ie::InteractionStack *interactionStack;
+			ie::IPanelManager *panelManager;
 		} init;
 		
 		uint64_t update{0};
@@ -29,21 +29,21 @@ public:
 		uint64_t drawDebug{0};
 	};
 	
-	struct Make : public ui::IScalable::Make, public ui::ILayout::Make {
+	struct Make : public ie::IScalable::Make, public ie::ILayout::Make {
 		sf::Vector2f minSize = {};
 		sf::Vector2f normalSize = {100, 100};
 		bool updateInteractionsResult = true;
 		
 		Make(sf::Vector2f minSize = {}, sf::Vector2f normalSize = {100, 100}, bool updateInteractionsResult = true);
 		
-		TestObject* make(ui::InitInfo initInfo) override;
+		TestObject* make(ie::InitInfo initInfo) override;
 	};
 	
-	TestObject(Make&& make, ui::InitInfo initInfo);
+	TestObject(Make&& make, ie::InitInfo initInfo);
 	
 	TestObject(sf::Vector2f minSize = {0, 0}, sf::Vector2f normalSize = {100, 100}, bool updateInteractionsResult = true);
 
-	void init(ui::InitInfo initInfo) override;
+	void init(ie::InitInfo initInfo) override;
 
 	Processed getProcessed();
 
@@ -51,9 +51,9 @@ public:
 
 	sf::Vector2f getNormalSize() const override;
 	
-	ui::LayoutData& getLayoutData() override;
+	ie::LayoutData& getLayoutData() override;
 	
-	const ui::LayoutData& getLayoutData() const override;
+	const ie::LayoutData& getLayoutData() const override;
 
 	bool updateInteractions(sf::Vector2f mousePosition) override;
 
@@ -66,7 +66,7 @@ public:
 	void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue = 0, uint hueOffset = 36) override;
 
 protected:
-	ui::LayoutData layoutData;
+	ie::LayoutData layoutData;
 	Processed processed;
 	bool updateInteractionsResult;
 	sf::Vector2f minSize = {0, 0};

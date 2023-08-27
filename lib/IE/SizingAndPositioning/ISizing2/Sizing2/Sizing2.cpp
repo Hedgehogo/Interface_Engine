@@ -1,7 +1,7 @@
 #include "Sizing2.hpp"
 #include "../../ISizing/Functions/makeSize/makeSize.hpp"
 
-namespace ui {
+namespace ie {
 	Sizing2::Make::Make(BoxPtr<ISizing::Make>&& horizontal, BoxPtr<ISizing::Make>&& vertical) :
 		horizontal(std::move(horizontal)), vertical(std::move(vertical)) {
 	}

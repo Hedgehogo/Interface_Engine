@@ -6,7 +6,7 @@
 #include "IE/Modules/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"
 #include "SwitcherTabsEvent/SwitcherTabsEvent.hpp"
 
-namespace ui {
+namespace ie {
 	BoxSwitcherTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
 		objects(std::move(objects)), value(std::move(value)), key(key), isHorizontal(isHorizontal), minSize(minSize) {
 	}

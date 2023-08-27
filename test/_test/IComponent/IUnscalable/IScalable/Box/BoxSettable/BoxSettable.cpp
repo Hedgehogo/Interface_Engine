@@ -7,8 +7,8 @@
 TEST(IComponent, BoxSettable) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxSettable boxSettable{
-		{ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green)},
+	ie::BoxSettable boxSettable{
+		{ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green)},
 		data.makeInitInfo()
 	};
 	data.interactionManager.update({});

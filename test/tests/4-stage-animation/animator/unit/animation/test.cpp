@@ -12,7 +12,7 @@ TEST(Animation, update) {
 	auto *testAnimationVariable1 = new TestAnimationVariable{},
 						  *testAnimationVariable2 = new TestAnimationVariable{};
 	auto *testAnimatorUnit = new TestAnimatorUnit{};
-	ui::Animation animation{
+	ie::Animation animation{
 		{
 			{
 				testAnimationVariable1,
@@ -70,7 +70,7 @@ TEST(Animation, update) {
 TEST(Animation, restart) {
 	auto *testChangeVariable = new TestChangeVariable{1, 2};
 	auto *testAnimationVariable = new TestAnimationVariable{};
-	ui::Animation animation{
+	ie::Animation animation{
 		{
 			{
 				testAnimationVariable,
@@ -101,7 +101,7 @@ TEST(Animation, setNextUnits) {
 	auto *testAnimatorUnit1 = new TestAnimatorUnit{},
 					 *testAnimatorUnit2 = new TestAnimatorUnit{},
 					 *testAnimatorUnit3 = new TestAnimatorUnit{};
-	ui::Animation animation{
+	ie::Animation animation{
 		{
 			{
 				testAnimationVariable,
@@ -135,7 +135,7 @@ TEST(Animation, addNextUnits) {
 	auto *testAnimationVariable = new TestAnimationVariable{};
 	auto *testAnimatorUnit1 = new TestAnimatorUnit{},
 					 *testAnimatorUnit2 = new TestAnimatorUnit{};
-	ui::Animation animation{
+	ie::Animation animation{
 		{
 			{
 				testAnimationVariable,
@@ -171,7 +171,7 @@ TEST(Animation, copy) {
 		 *testAnimatorUnit3 = new TestAnimatorUnit{},
 		 *testAnimatorUnit4 = new TestAnimatorUnit{},
 		 *testAnimatorUnit5 = new TestAnimatorUnit{};
-	ui::Animation animation1{
+	ie::Animation animation1{
 		{
 			{
 				testAnimationVariable,
@@ -191,7 +191,7 @@ TEST(Animation, copy) {
 	ASSERT_EQ(testAnimatorUnit2->getProcessed().copy.size(), 0);
 	ASSERT_EQ(testAnimatorUnit3->getProcessed().copy.size(), 0);
 
-	ui::Animation animation2{
+	ie::Animation animation2{
 		{
 			{
 				testAnimationVariable,

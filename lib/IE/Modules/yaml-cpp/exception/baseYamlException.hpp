@@ -3,7 +3,7 @@
 #include "../yaml.hpp"
 #include "../../exception/baseException.hpp"
 
-namespace ui {
+namespace ie {
 	class BaseYamlException : public BaseException {
 	public:
 		BaseYamlException(YAML::Mark mark, const std::string& description);

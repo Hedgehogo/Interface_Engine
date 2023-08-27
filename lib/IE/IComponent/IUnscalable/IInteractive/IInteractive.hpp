@@ -3,7 +3,7 @@
 #include "../IScalable/IScalable.hpp"
 #include "../../../Interaction/InteractionStack/InteractionStack.hpp"
 
-namespace ui {
+namespace ie {
 	class IInteractive : public virtual IUnscalable {
 	};
 }

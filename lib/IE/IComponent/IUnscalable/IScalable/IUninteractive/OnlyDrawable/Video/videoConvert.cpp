@@ -3,7 +3,7 @@
 #include "VideoFromTexture/VideoFromTexture.hpp"
 #include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
-namespace ui {
+namespace ie {
 	bool isVideo(std::string path) {
 		std::array<std::string, 8> arr{".bmp", ".png", ".jpg", ".tga", ".dds", ".psd", ".hdr", ".pic"};
 		std::string str{path.begin() + path.rfind('.'), path.end()};

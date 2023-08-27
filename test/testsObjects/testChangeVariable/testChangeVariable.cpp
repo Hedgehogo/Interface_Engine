@@ -18,7 +18,7 @@ float TestChangeVariable::operator()(float frame) {
 	return result;
 }
 
-ui::IChangeVariable *TestChangeVariable::copy() {
+ie::IChangeVariable *TestChangeVariable::copy() {
 	processed.copy.push_back(getProcessorTime());
 	return new TestChangeVariable{size, result};
 }

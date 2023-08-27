@@ -1,7 +1,7 @@
 #include "PanelEvent.hpp"
 #include "../../../IPanelManager/IPanelManager.hpp"
 
-namespace ui {
+namespace ie {
 	PanelEvent::PanelEvent() : panel(nullptr), panelManager(nullptr) {
 	}
 	

@@ -1,7 +1,7 @@
 
 #include "BaseLine.hpp"
 
-namespace ui {
+namespace ie {
 	BaseLine::BaseLine(sf::PrimitiveType type, std::size_t vertexCount, sf::Color color) : vertexArray(type, vertexCount) {
 		for(std::size_t i = 0; i < vertexArray.getVertexCount(); ++i)
 			vertexArray[i].color = color;

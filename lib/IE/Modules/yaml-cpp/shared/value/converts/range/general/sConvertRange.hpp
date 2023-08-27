@@ -2,7 +2,7 @@
 
 #include "../../../range/sRangeValue.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	class SConvertRange : public SRangeValue<T> {
 	public:

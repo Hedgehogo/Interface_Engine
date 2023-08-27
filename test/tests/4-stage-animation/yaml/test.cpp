@@ -7,7 +7,7 @@ uint64_t getTime(){
 
 TEST(Animation, yaml) {
 /*
-	ui::yamlBuilderInit();
+	ie::yamlBuilderInit();
 */
 	try {
 		Program testProgram{"../test/tests/4-stage-Animation/yaml/src/test.yaml", {200, 200}};

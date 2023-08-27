@@ -5,7 +5,7 @@
 #include "../SliderEvent/SliderEvent.hpp"
 #include "../SliderWheelEvent/SliderWheelEvent.hpp"
 
-namespace ui {
+namespace ie {
 	class SliderInteraction : public OneKeyInteraction {
 	public:
 		SliderInteraction(BaseSlider& slider, Key key, bool wheelHorizontal = false, SliderWheelEvent::Relativity wheelRelativity = SliderWheelEvent::Relativity::relationSlider, sf::Vector2f wheelSensitivity = {0.2f, 0.2f});

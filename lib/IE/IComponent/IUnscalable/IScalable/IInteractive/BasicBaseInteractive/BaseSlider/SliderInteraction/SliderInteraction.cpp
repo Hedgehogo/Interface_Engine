@@ -1,7 +1,7 @@
 #include "SliderInteraction.hpp"
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicAddInteractionEvent/BasicAddBlockInteractionEvent/BasicAddBlockInteractionEvent.hpp"
 
-namespace ui {
+namespace ie {
 	SliderInteraction::SliderInteraction(BaseSlider& slider, Key key, bool wheelHorizontal, SliderWheelEvent::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
 		OneKeyInteraction(BoxPtr<KeyEvent>{new AddBlockInteractionEvent{slideInteraction}}, key),
 		wheelEvent(slider, wheelHorizontal, wheelRelativity, wheelSensitivity),

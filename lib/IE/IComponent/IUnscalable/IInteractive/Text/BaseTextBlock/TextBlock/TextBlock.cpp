@@ -4,7 +4,7 @@
 #include "../../BaseLine/StrikeThrough/StrikeThrough.hpp"
 #include "../../../../../../Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
-namespace ui {
+namespace ie {
 	std::vector<BaseLine*> generateLines(std::vector<BaseLine*> lines, sf::Text::Style style) {
 		if(style & sf::Text::Underlined)
 			lines.push_back(new Underline);

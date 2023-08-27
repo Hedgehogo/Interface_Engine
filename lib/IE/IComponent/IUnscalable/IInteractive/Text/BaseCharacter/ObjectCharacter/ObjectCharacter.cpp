@@ -1,6 +1,6 @@
 #include "ObjectCharacter.hpp"
 
-namespace ui {
+namespace ie {
 	ObjectCharacter::ObjectCharacter(IScalable* object, bool fullLine) : object(object), special(fullLine ? BaseCharacter::Special::fullLine : BaseCharacter::Special::no) {
 	}
 	

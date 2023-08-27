@@ -2,7 +2,7 @@
 
 #include "../WheelEvent.hpp"
 
-namespace ui {
+namespace ie {
 	class BaseWheelEvent : public WheelEvent {
 	public:
 		explicit BaseWheelEvent();

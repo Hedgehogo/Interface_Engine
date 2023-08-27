@@ -1,6 +1,6 @@
 //included into withReferenceValue.hpp
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	SReferenceValue<T>::SReferenceValue(T& valueReference) : valueReference(&valueReference) {
 	}

@@ -3,7 +3,7 @@
 #include "../IPositioning.hpp"
 #include "../../../Enums/Location/Location.hpp"
 
-namespace ui {
+namespace ie {
 	class MatchSidesPositioning : public IPositioning {
 	public:
 		MatchSidesPositioning(Location parentSide, Location objectSide, float offset = 0);

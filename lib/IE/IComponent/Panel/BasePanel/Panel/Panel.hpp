@@ -2,7 +2,7 @@
 
 #include "../../IPanelManager/PanelManager/PanelManager.hpp"
 
-namespace ui {
+namespace ie {
 	class IHidePanelInteraction;
 	
 	class IMovePanelInteraction;

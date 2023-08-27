@@ -3,7 +3,7 @@
 #include "../IMovePanelInteraction.hpp"
 #include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	class SideMovePanelInteraction : public BasePanelInteraction, public IMovePanelInteraction {
 	public:
 		SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool atStart = false);

@@ -4,7 +4,7 @@
 
 TEST(UpdateManager, draw_and_add) {
 	TestObject testObject{};
-	ui::UpdateManager updateManager;
+	ie::UpdateManager updateManager;
 	updateManager.add(testObject);
 	updateManager.update();
 	ASSERT_GT(testObject.getProcessed().update, 0);
@@ -12,7 +12,7 @@ TEST(UpdateManager, draw_and_add) {
 
 TEST(UpdateManager, clear) {
 	TestObject testObject{};
-	ui::UpdateManager updateManager;
+	ie::UpdateManager updateManager;
 	updateManager.add(testObject);
 	updateManager.clear();
 	updateManager.update();

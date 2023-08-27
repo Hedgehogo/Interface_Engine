@@ -4,7 +4,7 @@
 TEST(SizingAndPositioning, ConstRatioSizing2) {
 	sf::RenderTexture renderTexture;
 	
-	ui::ConstRatioSizing2 constRatioSizing2{
+	ie::ConstRatioSizing2 constRatioSizing2{
 		{13.f, 1.f},
 		{renderTexture, sf::Vector2f{17, 29}}
 	};

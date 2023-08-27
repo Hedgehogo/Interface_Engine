@@ -2,7 +2,7 @@
 
 #include "../Location/Location.hpp"
 
-namespace ui {
+namespace ie {
 	enum class Location2 {
 		upLeft, up, upRight,
 		left, center, right,

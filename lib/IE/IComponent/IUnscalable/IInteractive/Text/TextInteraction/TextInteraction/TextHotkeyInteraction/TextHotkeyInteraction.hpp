@@ -5,7 +5,7 @@
 #include "IE/IComponent/IUnscalable/IInteractive/Text/TextInteraction/TextInteraction/TextKeysInteraction/TextKeysInteraction.hpp"
 #include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	using TextHotkeyInteraction = BasicHotkeyInteraction<Text&>;
 	
 	template<>

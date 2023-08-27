@@ -2,7 +2,7 @@
 
 #include "IE/Modules/yaml-cpp/shared/value/general/sValue.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T, typename... A>
 	void Buffer::emplace(const std::string& name, A&& ... args) {
 		objectsLevels[objectsLevels.size() - 1].try_emplace(name, std::make_shared<T>(args...));

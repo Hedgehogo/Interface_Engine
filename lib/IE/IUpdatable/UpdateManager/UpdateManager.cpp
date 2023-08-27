@@ -1,6 +1,6 @@
 #include "UpdateManager.hpp"
 
-namespace ui {
+namespace ie {
 	std::size_t UpdateManager::size() {
 		return updatable.size();
 	}

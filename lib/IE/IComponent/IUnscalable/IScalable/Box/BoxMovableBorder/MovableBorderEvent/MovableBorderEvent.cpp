@@ -2,7 +2,7 @@
 #include "MovableBorderEvent.hpp"
 #include "../BoxMovableBorder.hpp"
 
-namespace ui {
+namespace ie {
 	MovableBorderEvent::MovableBorderEvent(BoxMovableBorder& box) : box(&box) {
 	}
 	

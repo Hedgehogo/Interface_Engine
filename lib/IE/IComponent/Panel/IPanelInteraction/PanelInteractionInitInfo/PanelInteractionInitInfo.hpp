@@ -3,7 +3,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include "IE/Interaction/BasicInteractionInitInfo/BasicInteractionInitInfo.hpp"
 
-namespace ui {
+namespace ie {
 	class Panel;
 	
 	using PanelInteractionInitInfo = BasicInteractionInitInfo<Panel&>;

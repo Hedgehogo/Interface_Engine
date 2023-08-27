@@ -7,7 +7,7 @@
 #include <utility>
 #include <cxxabi.h>
 
-namespace ui {
+namespace ie {
 	std::string demangle(const char* name) {
 		int status = -4; // some arbitrary value to eliminate the compiler warning
 		
@@ -22,14 +22,14 @@ namespace ui {
 }
 #else
 // does nothing if not g++
-namespace ui {
+namespace ie {
 	std::string demangle(const char* name) {
 		return name;
 	}
 }
 #endif
 
-namespace ui {
+namespace ie {
 	bool convertBool(const YAML::Node& node, std::string trueValue, std::string falseValue) {
 		std::string parameter{node.as<std::string>()};
 		

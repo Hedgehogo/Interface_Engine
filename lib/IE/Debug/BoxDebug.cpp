@@ -1,7 +1,7 @@
 #include "BoxDebug.hpp"
 #include <cmath>
 
-namespace ui {
+namespace ie {
 	BoxDebug::Make::Make(BoxPtr<IScalable::Make>&& object) :
 		object(std::move(object)) {
 	}

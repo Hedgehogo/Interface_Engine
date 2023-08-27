@@ -1,6 +1,6 @@
 //include into functionBuilder.hpp
 
-namespace ui::detail {
+namespace ie::detail {
 	template<typename Type>
 	FuncYamlBuilder& FuncYamlBuilder::addBuilder(FuncYamlBuilder::BuildFunc<Type> function, std::vector<std::string> aliases) {
 		return builders.emplace_back([function](const YAML::Node& node, void*& object) {

@@ -1,6 +1,6 @@
 #include "Capsule.hpp"
 
-namespace ui {
+namespace ie {
 	Capsule::Make::Make(sf::Color color) : color(color) {
 	}
 	

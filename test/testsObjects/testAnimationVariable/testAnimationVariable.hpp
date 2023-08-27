@@ -2,7 +2,7 @@
 #include "IE/Animation/variables/iAnimationVariable.hpp"
 #include <vector>
 
-class TestAnimationVariable : public ui::IAnimationVariable{
+class TestAnimationVariable : public ie::IAnimationVariable{
 public:
 	struct Processed{
 		struct ValueFromAnimation{

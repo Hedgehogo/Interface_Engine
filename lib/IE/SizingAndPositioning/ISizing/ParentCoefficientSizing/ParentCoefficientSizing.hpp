@@ -2,7 +2,7 @@
 
 #include "../ISizing.hpp"
 
-namespace ui {
+namespace ie {
 	class ParentCoefficientSizing : public ISizing {
 	public:
 		struct Make : public ISizing::Make {

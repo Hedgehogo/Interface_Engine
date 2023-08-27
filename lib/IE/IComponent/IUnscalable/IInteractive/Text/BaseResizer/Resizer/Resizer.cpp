@@ -1,6 +1,6 @@
 #include "Resizer.hpp"
 
-namespace ui {
+namespace ie {
 	Resizer::Resizer(float lineSpacing, Align align, Algorithm algorithm) : BaseResizer{lineSpacing, align, algorithm} {
 	}
 	

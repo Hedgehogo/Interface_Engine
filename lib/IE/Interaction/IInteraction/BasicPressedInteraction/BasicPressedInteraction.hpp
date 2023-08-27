@@ -4,7 +4,7 @@
 #include "../BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 #include "../../InteractionManager/InteractionManager.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicPressedInteraction : public BasicOneKeyInteraction<T>, public IBasicBlockInteraction<T> {
 	public:

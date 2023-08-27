@@ -1,6 +1,6 @@
 #include "InternalPositioning2.hpp"
 
-namespace ui {
+namespace ie {
 	InternalPositioning2::Make::Make(sf::Vector2f coefficient) : coefficient(coefficient) {
 	}
 	

@@ -4,7 +4,7 @@
 TEST(SizingAndPositioning, Sizing2) {
 	sf::RenderTexture renderTexture;
 	
-	ui::Sizing2 sizing2{
+	ie::Sizing2 sizing2{
 		{sf::Vector2f{13, 19}},
 		{renderTexture, sf::Vector2f{17, 29}}
 	};

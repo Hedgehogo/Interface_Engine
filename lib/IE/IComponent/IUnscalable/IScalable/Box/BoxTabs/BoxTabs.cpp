@@ -2,7 +2,7 @@
 
 #include <utility>
 
-namespace ui {
+namespace ie {
 	BoxTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PISint value, sf::Vector2f minSize) :
 		objects(std::move(objects)), value(value), minSize(minSize) {
 	}

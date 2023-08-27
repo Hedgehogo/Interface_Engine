@@ -1,7 +1,7 @@
 #include "FullColor.hpp"
 #include "../../../../../../Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
-namespace ui {
+namespace ie {
 	FullColor::Make::Make(sf::Color color, sf::Vector2f normalSize) : color(color), normalSize(normalSize) {
 	}
 	

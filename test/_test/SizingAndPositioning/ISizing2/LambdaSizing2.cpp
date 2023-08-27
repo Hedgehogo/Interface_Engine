@@ -4,7 +4,7 @@
 TEST(SizingAndPositioning, LambdaSizing2) {
 	sf::RenderTexture renderTexture;
 	
-	ui::LambdaSizing2 lambdaSizing2{
+	ie::LambdaSizing2 lambdaSizing2{
 		{
 			[](sf::Vector2f, sf::Vector2f, sf::Vector2f) {
 				return sf::Vector2f{13.f, 19.f};

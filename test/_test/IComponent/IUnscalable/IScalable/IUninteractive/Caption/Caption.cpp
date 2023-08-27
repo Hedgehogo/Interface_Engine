@@ -13,10 +13,10 @@ TEST(IComponent, Caption) {
 	
 	sf::Font font{};
 	font.loadFromFile("../../example-resources/msyh.ttc");
-	ui::Caption caption{
+	ie::Caption caption{
 		{
-			sf::String{ui::u32stringToUint32String(str)},
-			ui::makeBoxPtr<ui::IUninteractive::Make, ui::FullColor::Make>(sf::Color::Green),
+			sf::String{ie::u32stringToUint32String(str)},
+			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Green),
 			font
 		}, data.makeInitInfo()
 	};

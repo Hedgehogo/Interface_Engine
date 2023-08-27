@@ -4,7 +4,7 @@
 #include "../../../../../../Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 #include "../../../../../../Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
-namespace ui {
+namespace ie {
 	class Sprite : public OnlyDrawable {
 	public:
 		struct Make : public IUninteractive::Make {

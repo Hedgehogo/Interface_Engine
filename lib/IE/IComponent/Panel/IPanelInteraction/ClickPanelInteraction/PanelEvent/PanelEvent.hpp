@@ -3,7 +3,7 @@
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 #include "../../PanelInteractionInitInfo/PanelInteractionInitInfo.hpp"
 
-namespace ui {
+namespace ie {
 	class Panel;
 	
 	class IPanelManager;

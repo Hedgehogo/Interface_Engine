@@ -3,7 +3,7 @@
 #include "../IInteraction.hpp"
 #include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicEmptyInteraction : public virtual IBasicInteraction<T> {
 	public:

@@ -3,7 +3,7 @@
 
 TEST(PanelManager, draw_and_displayPanel) {
 	TestPanel testPanel{};
-	ui::PanelManager panelManager{{&testPanel}};
+	ie::PanelManager panelManager{{&testPanel}};
 	panelManager.displayPanel(&testPanel);
 
 	panelManager.draw();
@@ -13,7 +13,7 @@ TEST(PanelManager, draw_and_displayPanel) {
 
 TEST(PanelManager, draw_and_hidePanel) {
 	TestPanel testPanel{};
-	ui::PanelManager panelManager{};
+	ie::PanelManager panelManager{};
 	panelManager.displayPanel(&testPanel);
 	panelManager.hidePanel(&testPanel);
 
@@ -24,7 +24,7 @@ TEST(PanelManager, draw_and_hidePanel) {
 
 TEST(PanelManager, update_and_addPanel) {
 	TestPanel testPanel{};
-	ui::PanelManager panelManager{};
+	ie::PanelManager panelManager{};
 	panelManager.addPanel(&testPanel);
 
 	panelManager.update();
@@ -34,7 +34,7 @@ TEST(PanelManager, update_and_addPanel) {
 
 TEST(PanelManager, update_and_removePanel) {
 	TestPanel testPanel{};
-	ui::PanelManager panelManager{};
+	ie::PanelManager panelManager{};
 	panelManager.addPanel(&testPanel);
 	panelManager.removePanel(&testPanel);
 
@@ -46,7 +46,7 @@ TEST(PanelManager, update_and_removePanel) {
 TEST(PanelManager, isFree) {
 	TestPanel testPanelNotFree{false, {0, 0}, {100, 100}, false};
 	TestPanel testPanelNotFree1{false, {0, 0}, {100, 100}, false};
-	ui::PanelManager panelManager{{&testPanelNotFree, &testPanelNotFree1}};
+	ie::PanelManager panelManager{{&testPanelNotFree, &testPanelNotFree1}};
 	panelManager.displayPanel(&testPanelNotFree);
 	panelManager.displayPanel(&testPanelNotFree1);
 	ASSERT_TRUE(panelManager.isFree());
@@ -61,7 +61,7 @@ TEST(PanelManager, isFree) {
 TEST(PanelManager, inConstPanels) {
 	TestPanel testPanelNotFree{};
 	TestPanel testPanelNotFree1{};
-	ui::PanelManager panelManager{{&testPanelNotFree, &testPanelNotFree1}};
+	ie::PanelManager panelManager{{&testPanelNotFree, &testPanelNotFree1}};
 	panelManager.displayPanel(&testPanelNotFree);
 	panelManager.displayPanel(&testPanelNotFree1);
 	ASSERT_FALSE(panelManager.inConstPanels({0, 0}));
@@ -76,7 +76,7 @@ TEST(PanelManager, inConstPanels) {
 TEST(PanelManager, updateInteractions) {
 	TestPanel testPanel{false, {0, 0}, {100, 100}, true, true, true, false};
 	TestPanel testPanel1{};
-	ui::PanelManager panelManager{};
+	ie::PanelManager panelManager{};
 	panelManager.displayPanel(&testPanel1);
 	panelManager.displayPanel(&testPanel);
 

@@ -1,6 +1,6 @@
 #include "ClickHidePanelInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	ClickHidePanelInteraction::ClickHidePanelInteraction(Key key, bool onlyOnParent) :
 		ClickPanelInteraction(makeBoxPtr<PanelEvent, HidePanelEvent>(onlyOnParent), key) {
 	}

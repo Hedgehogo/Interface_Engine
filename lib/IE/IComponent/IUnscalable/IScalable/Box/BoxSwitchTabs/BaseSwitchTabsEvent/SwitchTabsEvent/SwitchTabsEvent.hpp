@@ -3,7 +3,7 @@
 #include "../../BoxSwitchTabs.hpp"
 #include "../BaseSwitchTabsEvent.hpp"
 
-namespace ui {
+namespace ie {
 	class SwitchTabsEvent : public BaseSwitchTabsEvent {
 	protected:
 		void startPressed() override;

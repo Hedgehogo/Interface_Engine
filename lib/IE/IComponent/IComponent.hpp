@@ -11,7 +11,7 @@
 
 using uint = unsigned;
 
-namespace ui {
+namespace ie {
 	using namespace bp;
 	
 	class Panel;

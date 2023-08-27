@@ -3,7 +3,7 @@
 #include "../value/coefficient/general/sCoefficientValue.hpp"
 #include "../value/coefficient/reference/sReferenceCoefficientValue.hpp"
 
-namespace ui {
+namespace ie {
 	class ISVector2 : public IShared {
 	public:
 		ISVector2() = default;

@@ -1,6 +1,6 @@
 #include "BoxConstRatio.hpp"
 
-namespace ui {
+namespace ie {
 	BoxConstRatio::Make::Make(
 		BoxPtr<IScalable::Make>&& constObject,
 		BoxPtr<IScalable::Make>&& secondObject,

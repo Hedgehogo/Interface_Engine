@@ -10,7 +10,7 @@
 #include "TextInteraction/TextEvent/TextAddBlockInteractionEvent/TextAddBlockInteractionEvent.hpp"
 #include "TextInteraction/TextInteraction/TextPressedInteraction/TextPressedInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class Text : public IInteractive, public IDrawable, public IUpdatable {
 	protected:
 		struct Selection {

@@ -1,6 +1,6 @@
 //included into withValue.hpp
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	SValue<T>::SValue(T value) : value(value), setters() {
 	}

@@ -1,6 +1,6 @@
 #include "ConstSlider.hpp"
 
-namespace ui {
+namespace ie {
 	ConstSlider::Make::Make(
 		BoxPtr<IUninteractive::Make>&& slider,
 		BoxPtr<IUninteractive::Make>&& background,

@@ -1,7 +1,7 @@
 #include "PointingDisplayPanelInteraction.hpp"
 #include "../../../BasePanel/Panel/Panel.hpp"
 
-namespace ui {
+namespace ie {
 	void PointingDisplayPanelInteraction::start(sf::Vector2i) {
 		panelManager->displayPanel(panel);
 		panel->setParentProcessed(true);

@@ -1,6 +1,6 @@
 #include "RelativeParentSizing.hpp"
 
-namespace ui {
+namespace ie {
 	RelativeParentSizing::Make::Make(float addition) : addition(addition) {
 	}
 	

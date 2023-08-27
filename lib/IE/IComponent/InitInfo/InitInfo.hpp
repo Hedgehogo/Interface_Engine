@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-namespace ui {
+namespace ie {
 	class Window;
 	
 	class DrawManager;

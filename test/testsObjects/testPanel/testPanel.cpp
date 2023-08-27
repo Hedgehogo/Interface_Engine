@@ -11,8 +11,8 @@ TestPanel::Make::Make(
 	bool isFreeResult,
 	bool inPanelResult,
 	bool updateInteractionsResult,
-	ui::BoxPtr<ui::ISizing2> sizing,
-	ui::BoxPtr<ui::IPositioning2> positioning
+	ie::BoxPtr<ie::ISizing2> sizing,
+	ie::BoxPtr<ie::IPositioning2> positioning
 ) :
 	displayed(displayed),
 	minSize(minSize),
@@ -25,13 +25,13 @@ TestPanel::Make::Make(
 	positioning(std::move(positioning)) {
 }
 
-TestPanel* TestPanel::Make::make(ui::InitInfo initInfo) {
+TestPanel* TestPanel::Make::make(ie::InitInfo initInfo) {
 	return new TestPanel{std::move(*this), initInfo};
 }
 
-TestPanel::TestPanel(Make&& make, ui::InitInfo initInfo) :
+TestPanel::TestPanel(Make&& make, ie::InitInfo initInfo) :
 	BasePanel(
-		ui::BoxPtr < ui::IScalable::Make > {new ui::Empty::Make{}},
+		ie::BoxPtr < ie::IScalable::Make > {new ie::Empty::Make{}},
 		std::move(make.sizing),
 		std::move(make.positioning),
 		make.displayed,
@@ -67,9 +67,9 @@ TestPanel::TestPanel(
 	bool isFreeResult,
 	bool inPanelResult,
 	bool updateInteractionsResult,
-	ui::BoxPtr<ui::ISizing2> sizing,
-	ui::BoxPtr<ui::IPositioning2> positioning
-) : BasePanel(ui::BoxPtr < ui::IScalable > {new ui::Empty{}}, std::move(sizing), std::move(positioning), displayed), minSize(minSize), normalSize(normalSize),
+	ie::BoxPtr<ie::ISizing2> sizing,
+	ie::BoxPtr<ie::IPositioning2> positioning
+) : BasePanel(ie::BoxPtr < ie::IScalable > {new ie::Empty{}}, std::move(sizing), std::move(positioning), displayed), minSize(minSize), normalSize(normalSize),
 	isIndependentResult(isIndependentResult), isFreeResult(isFreeResult), inPanelResult(inPanelResult), updateInteractionsResult(updateInteractionsResult) {
 }
 
@@ -77,7 +77,7 @@ const TestPanel::Processed& TestPanel::getProcessed() const {
 	return processed;
 }
 
-void TestPanel::init(ui::InitInfo initInfo) {
+void TestPanel::init(ie::InitInfo initInfo) {
 	BasePanel::init(initInfo);
 	
 	processed.init.time = getProcessorTime();

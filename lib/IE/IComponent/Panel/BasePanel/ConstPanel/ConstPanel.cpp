@@ -2,7 +2,7 @@
 #include "../../IPanelManager/PanelManager/PanelManager.hpp"
 #include "../../../../IDrawable/DrawManager/DrawManager.hpp"
 
-namespace ui {
+namespace ie {
 	ConstPanel::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2::Make> sizing, BoxPtr<IPositioning2::Make> positioning, bool displayed) :
 		object(std::move(object)), sizing(std::move(sizing)), positioning(std::move(positioning)), displayed(displayed) {
 	}

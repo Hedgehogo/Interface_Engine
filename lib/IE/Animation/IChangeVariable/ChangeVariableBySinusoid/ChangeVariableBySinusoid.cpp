@@ -1,6 +1,6 @@
 #include "ChangeVariableBySinusoid.hpp"
 
-namespace ui {
+namespace ie {
 	ChangeVariableBySinusoid::ChangeVariableBySinusoid(float size, float a, float b, float c, float d) : a(a), b(b), c(c), d(d), size(size) {
 	}
 	

@@ -1,6 +1,6 @@
 #include <utility>
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<BasicKeyEvent<T> >&& event, std::vector<Key> keys, std::vector<Key> blackListKeys) :
 		event(std::move(event)), keys(std::move(keys)), blackListKeys(std::move(blackListKeys)), press(false) {

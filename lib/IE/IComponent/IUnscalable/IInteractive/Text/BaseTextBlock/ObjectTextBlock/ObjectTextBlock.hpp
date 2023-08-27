@@ -3,7 +3,7 @@
 #include "../BaseTextBlock.hpp"
 #include "../../BaseCharacter/ObjectCharacter/ObjectCharacter.hpp"
 
-namespace ui {
+namespace ie {
 	class ObjectTextBlock : public BaseTextBlock {
 	public:
 		ObjectTextBlock(IScalable* object, sf::Vector2f size = {0, 0}, bool isCharacter = true);

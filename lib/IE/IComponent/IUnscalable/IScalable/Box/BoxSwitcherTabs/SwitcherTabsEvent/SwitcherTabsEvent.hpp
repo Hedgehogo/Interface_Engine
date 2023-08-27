@@ -3,7 +3,7 @@
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 #include "IE/Modules/yaml-cpp/shared/value/general/sValue.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxSwitcherTabs;
 	
 	class SwitcherTabsEvent : public BaseKeyEvent {

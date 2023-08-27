@@ -1,6 +1,6 @@
 #include "DrawManager.hpp"
 
-namespace ui {
+namespace ie {
 	void DrawManager::add(IDrawable& drawable) {
 		drawables.push_back(&drawable);
 	}

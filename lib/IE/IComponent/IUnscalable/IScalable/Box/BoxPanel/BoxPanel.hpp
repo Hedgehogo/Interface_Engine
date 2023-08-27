@@ -4,7 +4,7 @@
 #include "../../../../Panel/BasePanel/ConstPanel/ConstPanel.hpp"
 #include "../../../../ILayout/ILayoutObject/ILayoutObject.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxPanel : public Box, public ILayoutObject {
 	public:
 		struct Make : public Box::Make, public ILayoutObject::Make {

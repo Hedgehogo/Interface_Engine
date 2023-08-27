@@ -2,7 +2,7 @@
 
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxMovableBorder;
 	
 	class MovableBorderEvent : public BaseKeyEvent {

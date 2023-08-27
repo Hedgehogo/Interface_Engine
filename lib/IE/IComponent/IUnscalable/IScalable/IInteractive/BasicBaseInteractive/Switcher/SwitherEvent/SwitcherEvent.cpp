@@ -2,7 +2,7 @@
 
 #include "../Switcher.hpp"
 
-namespace ui {
+namespace ie {
 	SwitcherEvent::SwitcherEvent(PSbool value) : value(value) {
 	}
 	

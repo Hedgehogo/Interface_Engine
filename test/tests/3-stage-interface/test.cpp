@@ -5,7 +5,7 @@
 TEST(Interface, draw) {
 	auto testObject = new TestObject{};
 	auto testPanel = new TestPanel{};
-	auto testInterface = new ui::Interface{testObject};
+	auto testInterface = new ie::Interface{testObject};
 
 
 	testInterface->getPanelManager()->displayPanel(testPanel);
@@ -25,7 +25,7 @@ TEST(Interface, draw) {
 TEST(Interface, init) {
 	auto testObject = new TestObject;
 	auto testPanel = new TestPanel{};
-	auto testInterface = new ui::Interface{testObject};
+	auto testInterface = new ie::Interface{testObject};
 
 
 	testInterface->getPanelManager()->displayPanel(testPanel);
@@ -46,8 +46,8 @@ TEST(Interface, init) {
 }
 
 TEST(Interface, resize) {
-    auto fullColor = new ui::FullColor{sf::Color::Red};
-    ui::Interface interface{fullColor};
+    auto fullColor = new ie::FullColor{sf::Color::Red};
+    ie::Interface interface{fullColor};
     interface.resize({10, 10}, {5, 5});
 
     ASSERT_TRUE((fullColor->getSize() == sf::Vector2f{10, 10}));
@@ -55,8 +55,8 @@ TEST(Interface, resize) {
 }
 
 TEST(Interface, setSize) {
-    auto fullColor = new ui::FullColor{sf::Color::Red};
-    ui::Interface interface{fullColor};
+    auto fullColor = new ie::FullColor{sf::Color::Red};
+    ie::Interface interface{fullColor};
     interface.setSize({10, 10});
 
     ASSERT_TRUE((fullColor->getSize() == sf::Vector2f{10, 10}));
@@ -64,8 +64,8 @@ TEST(Interface, setSize) {
 }
 
 TEST(Interface, setPosition) {
-    auto fullColor = new ui::FullColor{sf::Color::Red};
-    ui::Interface interface{fullColor};
+    auto fullColor = new ie::FullColor{sf::Color::Red};
+    ie::Interface interface{fullColor};
     interface.setPosition({5, 5});
 
     ASSERT_TRUE((fullColor->getPosition() == sf::Vector2f{5, 5}));
@@ -73,8 +73,8 @@ TEST(Interface, setPosition) {
 }
 
 TEST(Interface, move) {
-	auto fullColor = new ui::FullColor{sf::Color::Red};
-	ui::Interface interface{fullColor};
+	auto fullColor = new ie::FullColor{sf::Color::Red};
+	ie::Interface interface{fullColor};
 	interface.setPosition({5, 5});
 
 	ASSERT_TRUE((fullColor->getPosition() == sf::Vector2f{5, 5}));
@@ -83,12 +83,12 @@ TEST(Interface, move) {
 
 
 TEST(Interface, minSize) {
-	ui::Interface interface{new TestObject{{10, 10}}};
+	ie::Interface interface{new TestObject{{10, 10}}};
 	ASSERT_TRUE((interface.getMinSize() == sf::Vector2f{ 10, 10 }));
 }
 
 TEST(Interface, normalSize) {
-	ui::Interface interface{new TestObject{{10, 10}, {20, 20}}};
+	ie::Interface interface{new TestObject{{10, 10}, {20, 20}}};
 	ASSERT_TRUE((interface.getNormalSize() == sf::Vector2f{20, 20}));
 }
 
@@ -96,13 +96,13 @@ TEST(Interface, copy) {
 	auto testObject = new TestObject;
 
 	Program testProgram{
-		new ui::Interface{
+		new ie::Interface{
 			testObject
 		},
 		{1, 1}
 	};
 
-	ui::Interface interfaceCopy = *testProgram.interface->copy();
+	ie::Interface interfaceCopy = *testProgram.interface->copy();
 
 	ASSERT_GT(testObject->getProcessed().copy, 0);
 

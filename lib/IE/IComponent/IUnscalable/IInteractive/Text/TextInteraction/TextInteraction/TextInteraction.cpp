@@ -1,4 +1,4 @@
 #include "TextInteraction.hpp"
 
-namespace ui {
+namespace ie {
 }

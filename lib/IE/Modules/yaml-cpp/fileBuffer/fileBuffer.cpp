@@ -10,7 +10,7 @@
 #include <Magick++.h>
 #endif
 
-namespace ui {
+namespace ie {
 	SymbolPosition readCharacterIndex(const YAML::Node& node, std::basic_ifstream<char32_t>& fin) {
 		std::size_t line{0};
 		std::size_t number{0};

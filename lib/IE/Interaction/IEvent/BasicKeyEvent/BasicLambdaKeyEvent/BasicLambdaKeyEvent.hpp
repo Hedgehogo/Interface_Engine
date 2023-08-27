@@ -2,7 +2,7 @@
 
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicLambdaKeyEvent : public BasicBaseKeyEvent<T> {
 	public:

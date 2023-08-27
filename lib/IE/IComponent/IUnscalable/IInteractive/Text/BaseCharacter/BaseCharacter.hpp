@@ -6,7 +6,7 @@
 
 using uint = unsigned;
 
-namespace ui {
+namespace ie {
 	class BaseTextBlock;
 	
 	class BaseCharacter {

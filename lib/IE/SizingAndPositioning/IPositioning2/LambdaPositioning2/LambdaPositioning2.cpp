@@ -1,6 +1,6 @@
 #include "LambdaPositioning2.hpp"
 
-namespace ui {
+namespace ie {
 	LambdaPositioning2::Make::Make(sf::Vector2f (* findPosition)(sf::Vector2f, sf::Vector2f, sf::Vector2f, sf::Vector2f)) :
 		findPosition(findPosition) {
 	}

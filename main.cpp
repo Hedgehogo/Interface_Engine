@@ -27,32 +27,32 @@ private:
 };
 
 int main() {
-	ui::init();
+	ie::init();
 	
-	auto c_value{std::make_shared<ui::SRVec2f>()};
-	auto b_value{std::make_shared<ui::Sbool>(false)};
-	ui::Window window{
-		ui::Interface::Make{
-			makeBoxPtr<ui::IScalable::Make, ui::BoxConstBorder::Make>(
-				makeBoxPtr<ui::IScalable::Make, ui::BoxConstBorder::Make>(
-					makeBoxPtr<ui::IScalable::Make, ui::Switcher::Make>(
-						makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Yellow),
-						makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Blue),
+	auto c_value{std::make_shared<ie::SRVec2f>()};
+	auto b_value{std::make_shared<ie::Sbool>(false)};
+	ie::Window window{
+		ie::Interface::Make{
+			makeBoxPtr<ie::IScalable::Make, ie::BoxConstBorder::Make>(
+				makeBoxPtr<ie::IScalable::Make, ie::BoxConstBorder::Make>(
+					makeBoxPtr<ie::IScalable::Make, ie::Switcher::Make>(
+						makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Yellow),
+						makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Blue),
 						b_value
 					),
-					makeBoxPtr<ui::IScalable::Make, ui::Slider::Make>(
-						makeBoxPtr<ui::IUninteractive::Make, ui::Capsule::Make>(sf::Color::Red),
-						makeBoxPtr<ui::IUninteractive::Make, ui::FullColor::Make>(sf::Color::Green),
+					makeBoxPtr<ie::IScalable::Make, ie::Slider::Make>(
+						makeBoxPtr<ie::IUninteractive::Make, ie::Capsule::Make>(sf::Color::Red),
+						makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Green),
 						c_value
 					),
-					20.f, ui::Side::up
+					20.f, ie::Side::up
 				),
-				makeBoxPtr<ui::IScalable::Make, ui::BoxSwitch::Make>(
-					makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Yellow),
-					makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Blue),
+				makeBoxPtr<ie::IScalable::Make, ie::BoxSwitch::Make>(
+					makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Yellow),
+					makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Blue),
 					b_value
 				),
-				20.f, ui::Side::right
+				20.f, ie::Side::right
 			)
 		},
 		"IE works!",
@@ -69,7 +69,7 @@ int main() {
 		
 		sf::Event event{};
 		while(window.getWindow().pollEvent(event)) {
-			ui::handleEvent(event);
+			ie::handleEvent(event);
 			
 			if(event.type == sf::Event::Closed) {
 				window.getWindow().close();
@@ -77,6 +77,6 @@ int main() {
 		}
 		
 		window.update();
-		ui::clearEvent();
+		ie::clearEvent();
 	}
 }

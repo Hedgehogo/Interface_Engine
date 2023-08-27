@@ -7,11 +7,11 @@
 TEST(IComponent, BoxSwitch) {
 	InitInfoData data{{100, 100}};
 	
-	auto value = std::make_shared<ui::Sbool>(false);
-	ui::BoxSwitch boxSwitch{
+	auto value = std::make_shared<ie::Sbool>(false);
+	ie::BoxSwitch boxSwitch{
 		{
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red),
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
 			value
 		}, data.makeInitInfo()
 	};

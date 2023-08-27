@@ -2,7 +2,7 @@
 
 #include "../iSValue.hpp"
 
-namespace ui {
+namespace ie {
 	class ISCoefficientValue : public virtual ISValue<float> {
 	public:
 		ISCoefficientValue() {

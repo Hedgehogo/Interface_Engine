@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <Box_Ptr/boxPtr.hpp>
 
-namespace ui {
+namespace ie {
 	using namespace bp;
 	
 	namespace detail {

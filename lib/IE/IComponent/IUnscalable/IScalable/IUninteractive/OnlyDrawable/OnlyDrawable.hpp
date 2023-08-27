@@ -2,7 +2,7 @@
 
 #include "../IUninteractive.hpp"
 
-namespace ui {
+namespace ie {
 	class OnlyDrawable : public IUninteractive, public IDrawable {
 	public:
 		OnlyDrawable(InitInfo initInfo);

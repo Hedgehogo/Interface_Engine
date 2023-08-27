@@ -1,6 +1,6 @@
 #include "BoxSwitch.hpp"
 
-namespace ui {
+namespace ie {
 	BoxSwitch::Make::Make(BoxPtr<IScalable::Make>&& inactiveObject, BoxPtr<IScalable::Make>&& activeObject, PSbool value, const sf::Vector2f& minSize) :
 		inactiveObject(std::move(inactiveObject)), activeObject(std::move(activeObject)), value(value), minSize(minSize) {
 	}

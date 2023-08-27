@@ -1,6 +1,6 @@
 #include "BoxView.hpp"
 
-namespace ui {
+namespace ie {
 	BoxWithView::BoxWithView(sf::Vector2f minSize, InitInfo initInfo) :
 		Box(minSize), renderTarget(&initInfo.renderTarget) {
 		initInfo.drawManager.add(*this);

@@ -3,7 +3,7 @@
 #include "../IMovePanelInteraction.hpp"
 #include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	class CoefficientMovePanelInteraction : public BasePanelInteraction, public IMovePanelInteraction {
 	public:
 		CoefficientMovePanelInteraction(sf::Vector2f coefficient, sf::Vector2f offset, bool atStart = false);

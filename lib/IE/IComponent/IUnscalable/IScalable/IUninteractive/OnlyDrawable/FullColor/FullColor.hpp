@@ -3,7 +3,7 @@
 #include "../OnlyDrawable.hpp"
 #include "../../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	class FullColor : public OnlyDrawable {
 	public:
 		struct Make : public IUninteractive::Make {

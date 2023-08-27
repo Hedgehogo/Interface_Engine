@@ -2,7 +2,7 @@
 #include <IE/SizingAndPositioning/ISizing/LambdaSizing/LambdaSizing.hpp>
 
 TEST(SizingAndPositioning, LambdaSizing) {
-	ui::LambdaSizing lambdaSizing{
+	ie::LambdaSizing lambdaSizing{
 		{
 			[](float, float, float) {
 				return 13.f;

@@ -4,7 +4,7 @@
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 #include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	class TextCopyEvent : public BasicBaseKeyEvent<Text&> {
 	public:
 		TextCopyEvent();

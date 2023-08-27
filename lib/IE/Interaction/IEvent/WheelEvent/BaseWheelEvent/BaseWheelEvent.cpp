@@ -1,6 +1,6 @@
 #include "BaseWheelEvent.hpp"
 
-namespace ui {
+namespace ie {
 	BaseWheelEvent::BaseWheelEvent() {
 	}
 	

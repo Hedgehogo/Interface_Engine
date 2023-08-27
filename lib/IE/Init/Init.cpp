@@ -13,7 +13,7 @@
 	#include <Magick++.h>
 #endif
 
-namespace ui {
+namespace ie {
 	void yamlBuilderInitSfloat() {
 		inherit<ISfloat, Sfloat>({"Float"});
 		inherit<ISfloat, ISCoefficientValue>();

@@ -4,7 +4,7 @@
 #include "../IEvent.hpp"
 #include "../../../SfmlEvents/MouseWheel/MouseWheel.hpp"
 
-namespace ui {
+namespace ie {
 	class WheelEvent : public IEvent {
 	public:
 		explicit WheelEvent();

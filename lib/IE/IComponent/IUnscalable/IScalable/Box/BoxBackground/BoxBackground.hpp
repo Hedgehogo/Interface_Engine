@@ -4,7 +4,7 @@
 #include "../../../../ILayout/ILayoutObject/ILayoutObject.hpp"
 #include "../../../../ILayout/ILayoutBackground/ILayoutBackground.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxBackground : public Box, public ILayoutBackground, public ILayoutObject {
 	public:
 	struct Make : public Box::Make, public ILayoutBackground::Make, public ILayoutObject::Make {

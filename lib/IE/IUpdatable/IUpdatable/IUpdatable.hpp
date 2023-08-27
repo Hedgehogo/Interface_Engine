@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ui {
+namespace ie {
 	class IUpdatable {
 	public:
 		virtual void update() = 0;

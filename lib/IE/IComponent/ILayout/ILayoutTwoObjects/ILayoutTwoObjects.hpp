@@ -3,7 +3,7 @@
 #include "../ILayout.hpp"
 #include "../ILayoutObjectsArray/ILayoutObjectsArray.hpp"
 
-namespace ui {
+namespace ie {
 	class ILayoutTwoObjects : public virtual ILayoutObjectsArray {
 	public:
 		struct Make : public virtual ILayoutObjectsArray::Make {

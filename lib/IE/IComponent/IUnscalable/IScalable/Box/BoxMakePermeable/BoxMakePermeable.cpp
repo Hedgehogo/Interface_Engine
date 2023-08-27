@@ -1,6 +1,6 @@
 #include "BoxMakePermeable.hpp"
 
-namespace ui {
+namespace ie {
 	BoxMakePermeable* BoxMakePermeable::Make::make(InitInfo initInfo) {
 		return new BoxMakePermeable{std::move(*this), initInfo};
 	}

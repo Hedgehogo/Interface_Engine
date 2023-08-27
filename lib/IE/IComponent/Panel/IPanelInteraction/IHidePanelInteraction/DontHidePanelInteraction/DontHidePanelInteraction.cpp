@@ -1,7 +1,7 @@
 #include "DontHidePanelInteraction.hpp"
 #include "../../../IPanelManager/IPanelManager.hpp"
 
-namespace ui {
+namespace ie {
 	void DontHidePanelInteraction::init(PanelInteractionInitInfo) {
 	}
 	

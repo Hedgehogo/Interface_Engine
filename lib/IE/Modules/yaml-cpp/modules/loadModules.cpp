@@ -3,7 +3,7 @@
 
 #include "loadCModules/loadCModules.hpp"
 
-void ui::loadModules(int argc, char** argv, std::filesystem::path modulesList) {
+void ie::loadModules(int argc, char** argv, std::filesystem::path modulesList) {
 	if(modulesList.empty())
 		return;
 	

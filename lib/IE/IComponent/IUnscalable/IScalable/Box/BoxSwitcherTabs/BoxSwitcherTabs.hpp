@@ -5,7 +5,7 @@
 #include "IE/IComponent/IUnscalable/IScalable/IInteractive/BasicBaseInteractive/BasicBaseInteractive.hpp"
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxSwitcherTabs : public Box, public IInteractive, public IUpdatable, public ILayoutObjectsArray {
 	public:
 		struct Make : public Box::Make, public ILayoutObjectsArray::Make {

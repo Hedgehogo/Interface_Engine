@@ -1,6 +1,6 @@
 #include "BasicOpenUrlEvent.hpp"
 
-namespace ui {
+namespace ie {
 	bool determineUrl(const YAML::Node& node) {
 		if(node.IsScalar()) {
 			std::string url{node.as<std::string>()};

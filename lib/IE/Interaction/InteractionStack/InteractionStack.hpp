@@ -4,7 +4,7 @@
 #include "../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include <vector>
 
-namespace ui {
+namespace ie {
 	class InteractionStack {
 	protected:
 		std::vector<BoxPtr<IInteraction> > interactionStack;

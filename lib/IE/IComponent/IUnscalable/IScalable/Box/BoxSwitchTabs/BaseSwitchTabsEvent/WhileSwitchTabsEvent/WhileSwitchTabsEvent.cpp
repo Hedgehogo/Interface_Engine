@@ -1,6 +1,6 @@
 #include "WhileSwitchTabsEvent.hpp"
 
-namespace ui {
+namespace ie {
 	void WhileSwitchTabsEvent::startPressed() {
 	}
 	

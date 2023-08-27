@@ -3,7 +3,7 @@
 #include "../TextBlock/TextBlock.hpp"
 #include "../../../../../../Interaction/IInteraction/IInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class InteractiveTextBlock : public TextBlock {
 	public:
 		InteractiveTextBlock(

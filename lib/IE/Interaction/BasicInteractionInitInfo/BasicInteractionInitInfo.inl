@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicInteractionInitInfo<T>::BasicInteractionInitInfo(
 		sf::RenderWindow& window_,

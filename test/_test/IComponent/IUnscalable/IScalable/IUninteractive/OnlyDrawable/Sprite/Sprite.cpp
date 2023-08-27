@@ -7,7 +7,7 @@ TEST(IComponent, Sprite) {
 	
 	sf::Texture texture{};
 	texture.loadFromFile("../../example-resources/image.png");
-	ui::Sprite sprite{{texture}, data.makeInitInfo()};
+	ie::Sprite sprite{{texture}, data.makeInitInfo()};
 	data.interactionManager.update({});
 	
 	ASSERT_EQ(data.drawManager.size(), 1);

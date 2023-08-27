@@ -1,6 +1,6 @@
 //included into fileBuffer.hpp
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	void LoadFromFile<T>::load(T& object, std::string name) {
 		object.loadFromFile(name);

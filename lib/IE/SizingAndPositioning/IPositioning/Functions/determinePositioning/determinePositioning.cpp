@@ -1,7 +1,7 @@
 #include "determinePositioning.hpp"
 #include "../../../../Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
-namespace ui {
+namespace ie {
 	bool determinePositioning(const YAML::Node& node, std::string& type) {
 		if(node.IsScalar()) {
 			type = "InternalPositioning";

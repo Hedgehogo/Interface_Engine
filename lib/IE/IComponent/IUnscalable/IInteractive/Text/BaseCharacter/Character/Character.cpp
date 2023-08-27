@@ -1,7 +1,7 @@
 #include "Character.hpp"
 #include "../../../../../../Modules/hsvToRgb/hsvToRgb.hpp"
 
-namespace ui {
+namespace ie {
 	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BaseLine*>& lines) :
 		character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), selectionVertexArray(sf::Quads, 4), lines(lines) {
 		if(isSpecial() != BaseCharacter::Special::enter) {

@@ -1,6 +1,6 @@
 #include "Box.hpp"
 
-namespace ui {
+namespace ie {
 	Box::Box(sf::Vector2f minSize, sf::Vector2f size) :
 		layout({}, size), minimumSize(minSize) {
 	}

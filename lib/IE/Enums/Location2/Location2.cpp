@@ -1,6 +1,6 @@
 #include "Location2.hpp"
 
-namespace ui {
+namespace ie {
 	Location getVerticalLocation(Location2 location2) {
 		switch(location2) {
 			case Location2::upLeft:

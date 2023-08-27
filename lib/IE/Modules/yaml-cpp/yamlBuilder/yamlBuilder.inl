@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename Type>
 	bool buildOrProcess(const YAML::Node& node, Type*& object) {
 		auto type{node["type"].as<std::string>()};

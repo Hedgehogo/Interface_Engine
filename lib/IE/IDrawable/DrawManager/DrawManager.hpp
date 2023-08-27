@@ -3,7 +3,7 @@
 #include <vector>
 #include "../iDrawable/IDrawable.hpp"
 
-namespace ui {
+namespace ie {
 	class DrawManager : public IDrawable {
 	public:
 		DrawManager() = default;

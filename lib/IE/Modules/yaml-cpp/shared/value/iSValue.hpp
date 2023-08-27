@@ -2,7 +2,7 @@
 
 #include "../iShared.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	class ISValue : public IShared {
 	public:

@@ -2,7 +2,7 @@
 
 #include "../BasicKeyEvent.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicEmptyEvent : public BasicKeyEvent<T> {
 	public:

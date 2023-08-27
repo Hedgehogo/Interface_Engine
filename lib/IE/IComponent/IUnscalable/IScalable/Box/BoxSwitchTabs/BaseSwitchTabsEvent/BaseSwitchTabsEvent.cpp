@@ -1,6 +1,6 @@
 #include "BaseSwitchTabsEvent.hpp"
 
-namespace ui {
+namespace ie {
 	BaseSwitchTabsEvent::BaseSwitchTabsEvent(BoxSwitchTabs* objects) : object(objects) {
 	}
 	

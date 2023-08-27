@@ -1,6 +1,6 @@
 #include "Empty.hpp"
 
-namespace ui {
+namespace ie {
 	Empty* Empty::Make::make(InitInfo initInfo) {
 		return new Empty{std::move(*this), initInfo};
 	}

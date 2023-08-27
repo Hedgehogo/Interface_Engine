@@ -1,6 +1,6 @@
 #include "BoxConstCenter.hpp"
 
-namespace ui {
+namespace ie {
 	BoxConstCenter::Make::Make(BoxPtr<IScalable::Make>&& constObject, BoxPtr<IScalable::Make>&& background, sf::Vector2f constSize, sf::Vector2f minSize) :
 		constObject(std::move(constObject)), background(std::move(background)), constSize(constSize), minSize(minSize) {
 	}

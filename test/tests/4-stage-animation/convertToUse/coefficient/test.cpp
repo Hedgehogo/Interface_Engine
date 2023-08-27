@@ -2,7 +2,7 @@
 #include "IE/Animation/convertToUse/coefficient/convertToUseCoefficient.hpp"
 
 TEST(ConvertToUseCoefficient, operatop){
-	ui::ConvertToUseCoefficient<float> coefficient1{0},
+	ie::ConvertToUseCoefficient<float> coefficient1{0},
 									   coefficient2{0.5},
 									   coefficient3{1},
 									   coefficient4{11};

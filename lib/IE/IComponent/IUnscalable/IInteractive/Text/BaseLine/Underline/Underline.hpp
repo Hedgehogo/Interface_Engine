@@ -2,7 +2,7 @@
 
 #include "../BaseLine.hpp"
 
-namespace ui {
+namespace ie {
 	class Underline : public BaseLine {
 	public:
 		Underline(sf::Color color = nullColor);

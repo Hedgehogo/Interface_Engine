@@ -1,6 +1,6 @@
 //included into baseComparison.hpp
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	BaseSConvertToBoolComparison<T>::BaseSConvertToBoolComparison(PISValue<T> fromValue, bool defaultValue, T compared) : SConvertToBool<T>(fromValue, defaultValue), compared(compared) {
 	}

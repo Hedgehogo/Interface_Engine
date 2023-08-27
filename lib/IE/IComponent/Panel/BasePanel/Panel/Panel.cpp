@@ -2,7 +2,7 @@
 #include "../../IPanelInteraction/IHidePanelInteraction/IHidePanelInteraction.hpp"
 #include "../../IPanelInteraction/IMovePanelInteraction/DontMovePanelInteraction/DontMovePanelInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	Panel::Make::Make(
 		BoxPtr<IScalable::Make>&& object,
 		BoxPtr<IHidePanelInteraction> hideInteraction,

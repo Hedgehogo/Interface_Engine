@@ -2,7 +2,7 @@
 #include "../../../IE/Animation/Animator/IAnimatorUnit/IAnimatorUnit.hpp"
 #include "buffer.hpp"
 
-namespace ui {
+namespace ie {
 	std::map<std::string, std::vector<std::function<void(IAnimatorUnit*)>>> animatorUnitRequest;
 	std::map<std::string, IAnimatorUnit*> animatorUnitBuffer;
 	

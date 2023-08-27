@@ -1,6 +1,6 @@
 #include "createTestProgram.hpp"
 
-Program::Program(ui::Interface* interface, sf::Vector2u size, sf::Vector2f mousePosition) : interface(interface), renderTexture() {
+Program::Program(ie::Interface* interface, sf::Vector2u size, sf::Vector2f mousePosition) : interface(interface), renderTexture() {
 	if(size == sf::Vector2u{0, 0}) {
 		size = sf::Vector2u(this->interface->getNormalSize());
 		if(size == sf::Vector2u{0, 0})
@@ -15,10 +15,10 @@ Program::Program(ui::Interface* interface, sf::Vector2u size, sf::Vector2f mouse
 	renderTexture.display();
 }
 
-Program::Program(ui::IScalable* object, sf::Vector2u size, sf::Vector2f mousePosition) : Program(new ui::Interface{object}, size, mousePosition) {
+Program::Program(ie::IScalable* object, sf::Vector2u size, sf::Vector2f mousePosition) : Program(new ie::Interface{object}, size, mousePosition) {
 }
 
-Program::Program(std::string path, sf::Vector2u size, sf::Vector2f mousePosition) : renderTexture(), interface(ui::makePrtInterface(renderTexture, path)) {
+Program::Program(std::string path, sf::Vector2u size, sf::Vector2f mousePosition) : renderTexture(), interface(ie::makePrtInterface(renderTexture, path)) {
 	if(size == sf::Vector2u{0, 0}) {
 		size = sf::Vector2u(this->interface->getNormalSize());
 		if(size == sf::Vector2u{0, 0})

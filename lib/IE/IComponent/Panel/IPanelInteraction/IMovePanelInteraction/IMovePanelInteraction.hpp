@@ -2,7 +2,7 @@
 
 #include "../BasePanelInteraction/BasePanelInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class IMovePanelInteraction : public virtual IPanelInteraction {
 	public:
 		virtual bool getAtStart() = 0;

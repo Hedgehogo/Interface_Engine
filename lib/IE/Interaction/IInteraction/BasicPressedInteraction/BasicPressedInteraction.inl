@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicPressedInteraction<T>::BasicPressedInteraction(BoxPtr<BasicKeyEvent<T> >&& event, Key key) :
 		BasicOneKeyInteraction<T>(std::move(event), key), interactionManager(nullptr) {

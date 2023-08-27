@@ -2,7 +2,7 @@
 
 #include "../BaseLine.hpp"
 
-namespace ui {
+namespace ie {
 	class StrikeThrough : public BaseLine {
 	public:
 		StrikeThrough(sf::Color color = sf::Color{255, 255, 255, 0}, float strikeThroughOffset = 0.3);

@@ -1,6 +1,6 @@
 #include "ISizing.hpp"
 
-namespace ui {
+namespace ie {
 	float ISizing::getParentSize(float) {
 		return 0;
 	}

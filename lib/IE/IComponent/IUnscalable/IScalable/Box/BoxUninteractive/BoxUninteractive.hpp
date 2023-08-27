@@ -4,7 +4,7 @@
 #include "../../../../ILayout/ILayoutObject/ILayoutObject.hpp"
 #include "../Box.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxUninteractive : public Box, public IUninteractive, public ILayoutObject {
 	public:
 		struct Make : public Box::Make, public ILayoutObject::Make {

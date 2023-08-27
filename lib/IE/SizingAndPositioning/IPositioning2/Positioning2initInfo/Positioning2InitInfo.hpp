@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-namespace ui {
+namespace ie {
 	struct Positioning2InitInfo {
 		sf::RenderTarget& renderTarget;
 	};

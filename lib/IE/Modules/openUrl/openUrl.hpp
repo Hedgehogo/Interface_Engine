@@ -2,6 +2,6 @@
 
 #include <string>
 
-namespace ui {
+namespace ie {
 	void openUrl(std::string str);
 }

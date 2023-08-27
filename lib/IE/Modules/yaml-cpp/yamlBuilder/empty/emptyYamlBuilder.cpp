@@ -1,6 +1,6 @@
 #include "emptyYamlBuilder.hpp"
 
-namespace ui::detail {
+namespace ie::detail {
 	EmptyYamlBuilder EmptyYamlBuilder::builder = {};
 	
 	bool EmptyYamlBuilder::build(const YAML::Node&, void*&) const {

@@ -3,7 +3,7 @@
 #include "../IMovePanelInteraction.hpp"
 #include "IE/Interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class DontMovePanelInteraction : public IMovePanelInteraction {
 	public:
 		DontMovePanelInteraction();

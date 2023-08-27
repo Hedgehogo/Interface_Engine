@@ -1,6 +1,6 @@
 #include "BaseTextBlock.hpp"
 
-namespace ui {
+namespace ie {
 	BaseTextBlock::BaseTextBlock() {
 	}
 	

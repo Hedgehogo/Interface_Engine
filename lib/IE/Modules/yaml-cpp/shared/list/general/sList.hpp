@@ -2,7 +2,7 @@
 
 #include "../iSList.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	class SList : public ISList {
 	protected:

@@ -4,7 +4,7 @@
 
 TEST(AnimationVariable, get_set) {
 	TestConvertToUse *testConvertToUse{new TestConvertToUse{5}};
-	ui::AnimationVariable animationVariable{0.5f, testConvertToUse};
+	ie::AnimationVariable animationVariable{0.5f, testConvertToUse};
 
 	ASSERT_EQ(animationVariable.get(), 0.5);
 
@@ -17,7 +17,7 @@ TEST(AnimationVariable, get_set) {
 
 TEST(AnimationVariable, addAnimationSetter_valueFromAnimation) {
 	TestConvertToUse *testConvertToUse1{new TestConvertToUse{3}};
-	ui::AnimationVariable animationVariable1{0.5f, testConvertToUse1};
+	ie::AnimationVariable animationVariable1{0.5f, testConvertToUse1};
 
 	animationVariable1.addAnimationSetter([&](float value){
 		ASSERT_EQ(value, 3);
@@ -29,7 +29,7 @@ TEST(AnimationVariable, addAnimationSetter_valueFromAnimation) {
 
 
 	TestConvertToUse *testConvertToUse2{new TestConvertToUse{5}};
-	ui::AnimationVariable animationVariable2{0.5f, testConvertToUse2, false};
+	ie::AnimationVariable animationVariable2{0.5f, testConvertToUse2, false};
 
 	animationVariable2.addAnimationSetter([&](float value){
 		ASSERT_EQ(value, 5);

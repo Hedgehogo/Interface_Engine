@@ -5,7 +5,7 @@
 #include "IE/IComponent/IUnscalable/IScalable/IInteractive/BasicBaseInteractive/BasicBaseInteractive.hpp"
 #include "../../../../InitInfo/InitInfo.hpp"
 
-namespace ui {
+namespace ie {
 	class BaseTextBlock {
 	public:
 		struct Edge {

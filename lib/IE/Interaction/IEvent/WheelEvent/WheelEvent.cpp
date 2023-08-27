@@ -4,7 +4,7 @@ namespace sf::Wheel {
 	int value;
 }
 
-namespace ui {
+namespace ie {
 	WheelEvent::WheelEvent() : active(false) {
 	}
 }

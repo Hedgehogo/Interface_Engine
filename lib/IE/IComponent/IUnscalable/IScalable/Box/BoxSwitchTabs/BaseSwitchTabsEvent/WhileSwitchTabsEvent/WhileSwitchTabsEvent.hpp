@@ -4,7 +4,7 @@
 #include "../BaseSwitchTabsEvent.hpp"
 #include "../../../../../../../Modules/yaml-cpp/yaml.hpp"
 
-namespace ui {
+namespace ie {
 	class WhileSwitchTabsEvent : public BaseSwitchTabsEvent {
 	protected:
 		void startPressed() override;

@@ -1,6 +1,6 @@
 #include "OnlyDrawable.hpp"
 
-namespace ui {
+namespace ie {
 	OnlyDrawable::OnlyDrawable() : renderTarget(nullptr) {
 	}
 	

@@ -5,7 +5,7 @@
 #include "../../../../ILayout/ILayoutBackground/ILayoutBackground.hpp"
 #include "../../../../../IDrawable/DrawManager/DrawManager.hpp"
 
-namespace ui {
+namespace ie {
 	class Bar : public OnlyDrawable, public ILayoutBackground {
 	public:
 		struct Make : public IUninteractive::Make, public ILayoutBackground::Make {

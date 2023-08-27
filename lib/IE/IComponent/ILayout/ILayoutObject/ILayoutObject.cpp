@@ -1,7 +1,7 @@
 #include "ILayoutObject.hpp"
 #include "../../../IDrawable/DrawManager/DrawManager.hpp"
 
-namespace ui {
+namespace ie {
 	void ILayoutObject::setPosition(sf::Vector2f position) {
 		ILayout::setPosition(position);
 	}

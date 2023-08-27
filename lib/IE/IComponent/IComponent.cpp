@@ -1,7 +1,7 @@
 #include "IComponent.hpp"
 #include "../Modules/hsvToRgb/hsvToRgb.hpp"
 
-namespace ui {
+namespace ie {
 	void IComponent::setPosition(sf::Vector2f position) {
 		resize(getAreaSize(), position);
 	}

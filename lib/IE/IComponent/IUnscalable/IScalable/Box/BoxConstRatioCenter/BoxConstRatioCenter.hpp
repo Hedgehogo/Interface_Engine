@@ -8,7 +8,7 @@
 #include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 #include "../../IUninteractive/OnlyDrawable/Empty/Empty.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxConstRatioCenter : public Box, public ILayoutObject, public ILayoutBackground, public ILayoutTwoObjects, public IDrawable {
 	public:
 		struct Make : public Box::Make, public ILayoutObject::Make, public ILayoutBackground::Make, public ILayoutTwoObjects::Make {

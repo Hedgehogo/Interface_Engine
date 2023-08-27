@@ -8,7 +8,7 @@
 #include "../../SmartSizing/SmartSizing.hpp"
 #include "../../LambdaSizing/LambdaSizing.hpp"
 
-namespace ui {
+namespace ie {
 	ISizing::Make* makeSizeMake(bool relativeParent);
 	
 	ISizing::Make* makeSizeMake(float constSize);

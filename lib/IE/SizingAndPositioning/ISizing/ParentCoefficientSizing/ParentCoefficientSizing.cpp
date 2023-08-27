@@ -1,6 +1,6 @@
 #include "ParentCoefficientSizing.hpp"
 
-namespace ui {
+namespace ie {
 	ParentCoefficientSizing::Make::Make(float coefficient, float addition) :
 		coefficient(coefficient), addition(addition) {
 	}

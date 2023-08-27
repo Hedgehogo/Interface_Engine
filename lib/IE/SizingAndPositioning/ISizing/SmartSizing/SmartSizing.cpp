@@ -1,6 +1,6 @@
 #include "SmartSizing.hpp"
 
-namespace ui {
+namespace ie {
 	SmartSizing::Make::Make(float targetCoefficient, float parentCoefficient, float addition) :
 		targetCoefficient(targetCoefficient), parentCoefficient(parentCoefficient), addition(addition) {
 	}

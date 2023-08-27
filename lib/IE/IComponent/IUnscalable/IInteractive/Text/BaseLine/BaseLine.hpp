@@ -4,7 +4,7 @@
 
 using uint = unsigned;
 
-namespace ui {
+namespace ie {
 	class BaseLine {
 	public:
 		BaseLine(sf::PrimitiveType type, std::size_t vertexCount = 0, sf::Color color = sf::Color{255, 255, 255, 0});

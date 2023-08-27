@@ -2,7 +2,7 @@
 
 #include "../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	enum class Side {
 		up,
 		down,

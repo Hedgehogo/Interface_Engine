@@ -4,7 +4,7 @@
 #include "../../../../ILayout/ILayoutObjectsArray/ILayoutObjectsArray.hpp"
 #include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxBorderHorizontal : public Box, public ILayoutObjectsArray {
 	public:
 		struct Make : public Box::Make, public ILayoutObjectsArray::Make {

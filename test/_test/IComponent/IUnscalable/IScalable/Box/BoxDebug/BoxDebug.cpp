@@ -7,8 +7,8 @@
 TEST(IComponent, BoxDebug) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxDebug boxDebug{
-		{ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green)},
+	ie::BoxDebug boxDebug{
+		{ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green)},
 		data.makeInitInfo()
 	};
 	data.interactionManager.update({});

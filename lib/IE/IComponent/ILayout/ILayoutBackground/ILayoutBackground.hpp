@@ -3,7 +3,7 @@
 #include "../ILayout.hpp"
 #include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
 
-namespace ui {
+namespace ie {
 	class ILayoutBackground : public virtual ILayout {
 	public:
 		struct Make : public virtual ILayout::Make {

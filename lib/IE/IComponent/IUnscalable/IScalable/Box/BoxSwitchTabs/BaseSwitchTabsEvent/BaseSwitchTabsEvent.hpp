@@ -3,7 +3,7 @@
 #include "../BoxSwitchTabs.hpp"
 #include "IE/Interaction/IEvent/BasicKeyEvent/BasicBaseKeyEvent/BasicBaseKeyEvent.hpp"
 
-namespace ui {
+namespace ie {
 	class BaseSwitchTabsEvent : public BaseKeyEvent {
 	public:
 		BaseSwitchTabsEvent(BoxSwitchTabs* objects = nullptr);

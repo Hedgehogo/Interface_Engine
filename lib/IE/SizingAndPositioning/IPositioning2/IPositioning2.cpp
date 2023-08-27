@@ -1,6 +1,6 @@
 #include "IPositioning2.hpp"
 
-namespace ui {
+namespace ie {
 	sf::Vector2f IPositioning2::operator()(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize) {
 		return this->findPosition(parentPosition, parentSize, objectSize);
 	}

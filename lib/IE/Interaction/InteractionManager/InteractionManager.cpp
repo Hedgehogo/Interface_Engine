@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "InteractionManager.hpp"
 
-namespace ui {
+namespace ie {
 	InteractionManager::InteractionManager() :
 		interactions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {
 	}

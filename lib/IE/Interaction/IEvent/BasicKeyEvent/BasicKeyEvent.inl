@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicKeyEvent<T>::BasicKeyEvent() : pressed(false) {
 	}

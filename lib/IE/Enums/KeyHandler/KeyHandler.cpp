@@ -2,7 +2,7 @@
 
 #include "../../SfmlEvents/MouseWheel/MouseWheel.hpp"
 
-namespace ui {
+namespace ie {
 	std::vector<Key> KeyHandler::keysPressed{};
 	std::vector<Key> KeyHandler::globalKeysPressed{};
 	

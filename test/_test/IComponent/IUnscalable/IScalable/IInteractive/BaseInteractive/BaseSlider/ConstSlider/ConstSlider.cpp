@@ -7,11 +7,11 @@
 TEST(IComponent, ConstSlider) {
 	InitInfoData data{{100, 100}};
 	
-	auto value = std::make_shared<ui::SRVec2f>(sf::Vector2f{0.f, 0.f});
-	ui::ConstSlider constSlider{
+	auto value = std::make_shared<ie::SRVec2f>(sf::Vector2f{0.f, 0.f});
+	ie::ConstSlider constSlider{
 		{
-			ui::makeBoxPtr<ui::IUninteractive::Make, ui::FullColor::Make>(sf::Color::Green),
-			ui::makeBoxPtr<ui::IUninteractive::Make, ui::FullColor::Make>(sf::Color::Red),
+			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Red),
 			value
 		}, data.makeInitInfo()
 	};

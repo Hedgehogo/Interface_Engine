@@ -1,6 +1,6 @@
 #include "IMovePanelInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	void IMovePanelInteraction::start(sf::Vector2i mousePosition) {
 		if(getAtStart())
 			move(mousePosition);

@@ -4,6 +4,6 @@
 #include "IE/Interaction/IInteraction/BasicKeysInteraction/BasicKeysInteraction.hpp"
 #include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	using TextKeysInteraction = BasicKeysInteraction<Text&>;
 }

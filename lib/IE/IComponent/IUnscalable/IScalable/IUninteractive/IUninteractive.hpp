@@ -2,7 +2,7 @@
 
 #include "../IScalable.hpp"
 
-namespace ui {
+namespace ie {
 	class IUninteractive : public virtual IScalable {
 	public:
 		struct Make : public virtual IScalable::Make {

@@ -3,7 +3,7 @@
 #include "HidePanelEvent/HidePanelEvent.hpp"
 #include "../../ClickPanelInteraction/ClickPanelInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class ClickHidePanelInteraction : public ClickPanelInteraction, public IHidePanelInteraction {
 	public:
 		explicit ClickHidePanelInteraction(Key key, bool onlyOnParent = false);

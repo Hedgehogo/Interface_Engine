@@ -6,7 +6,7 @@
 #include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 #include "../../../../../Enums/Side/Side.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxConstBorder : public Box, public ILayoutTwoObjects {
 	public:
 		struct Make : public Box::Make, public ILayoutTwoObjects::Make {

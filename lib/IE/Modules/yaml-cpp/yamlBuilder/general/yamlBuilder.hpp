@@ -5,7 +5,7 @@
 #include "../function/funcYamlBuilder.hpp"
 #include "../base/baseYamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	const sf::Color nullColor{255, 255, 255, 0};
 	
 	std::string removeNamespace(std::string typeName, std::string nameSpace);
@@ -50,7 +50,7 @@ namespace ui {
 		
 		static void addDetermine(const DetermineType& function);
 		
-		static void addDetermine(const SimpleDetermineType& function = ui::determine<Type>);
+		static void addDetermine(const SimpleDetermineType& function = ie::determine<Type>);
 		
 		static void determineType(const YAML::Node& node, std::string& type);
 		

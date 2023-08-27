@@ -1,7 +1,7 @@
 //included into withVector2.hpp
 #include <utility>
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	SVector2<T>::SVector2(const sf::Vector2<typename SVector2<T>::V>& vector) :
 		x(std::make_shared<T>(vector.x)), y(std::make_shared<T>(vector.y)), setters() {

@@ -3,7 +3,7 @@
 #include "../yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include <functional>
 
-namespace ui {
+namespace ie {
 	class AnimationManager;
 	
 	class IAnimatorUnit;

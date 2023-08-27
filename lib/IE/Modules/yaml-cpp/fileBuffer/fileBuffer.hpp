@@ -2,7 +2,7 @@
 
 #include "../yaml.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	struct LoadFromFile {
 		static void load(T& object, std::string name);

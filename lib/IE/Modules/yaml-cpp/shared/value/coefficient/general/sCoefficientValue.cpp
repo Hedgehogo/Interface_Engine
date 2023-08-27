@@ -1,7 +1,7 @@
 #include "sCoefficientValue.hpp"
 #include <algorithm>
 
-namespace ui {
+namespace ie {
 	SCoefficientValue::SCoefficientValue(float value) : SValue(std::min(std::max(value, 0.f), 1.f)) {
 	}
 	

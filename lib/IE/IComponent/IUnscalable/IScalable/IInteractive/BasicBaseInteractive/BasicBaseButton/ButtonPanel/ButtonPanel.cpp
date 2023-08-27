@@ -1,6 +1,6 @@
 #include "ButtonPanel.hpp"
 
-namespace ui {
+namespace ie {
 	ButtonPanel::Make::Make(BoxPtr<Panel::Make>&& panel, BoxPtr<IDisplayPanelInteraction>&& interaction, BoxPtr<IScalable::Make>&& background) :
 		panel(std::move(panel)), interaction(std::move(interaction)), background(std::move(background)) {
 	}

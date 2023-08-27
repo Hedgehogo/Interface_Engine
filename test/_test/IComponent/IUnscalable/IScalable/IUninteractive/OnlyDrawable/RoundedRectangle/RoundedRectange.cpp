@@ -5,7 +5,7 @@
 TEST(IComponent, RoundedRectangle) {
 	InitInfoData data{{100, 100}};
 	
-	ui::RoundedRectangle roundedRectangle{{sf::Color::Red, 2}, data.makeInitInfo()};
+	ie::RoundedRectangle roundedRectangle{{sf::Color::Red, 2}, data.makeInitInfo()};
 	data.interactionManager.update({});
 	
 	ASSERT_EQ(data.drawManager.size(), 1);

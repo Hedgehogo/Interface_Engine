@@ -1,7 +1,7 @@
 #include "InteractiveTextBlock.hpp"
 #include "../../../../../../Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
-namespace ui {
+namespace ie {
 	InteractiveTextBlock::InteractiveTextBlock(
 		IBaseInteraction* interaction, std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor,
 		sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor

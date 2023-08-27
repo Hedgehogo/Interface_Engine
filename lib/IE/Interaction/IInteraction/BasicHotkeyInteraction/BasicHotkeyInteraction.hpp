@@ -4,7 +4,7 @@
 #include "../BasicKeysInteraction/BasicKeysInteraction.hpp"
 #include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	namespace detail {
 		template<typename T = std::monostate>
 		struct BasicHotkeyInteractionHotkey {

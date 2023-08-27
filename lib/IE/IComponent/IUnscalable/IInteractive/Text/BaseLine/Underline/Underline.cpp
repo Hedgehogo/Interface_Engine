@@ -1,6 +1,6 @@
 #include "Underline.hpp"
 
-namespace ui {
+namespace ie {
 	Underline::Underline(sf::Color color) : BaseLine(sf::TriangleStrip, 4, color) {
 	}
 	

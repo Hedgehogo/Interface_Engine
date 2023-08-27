@@ -2,7 +2,7 @@
 
 #include "../yaml.hpp"
 
-namespace ui {
+namespace ie {
 	std::string removeNamespace(std::string name, std::string nameSpace);
 	
 	namespace detail {

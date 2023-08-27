@@ -1,7 +1,7 @@
 #include "Positioning2.hpp"
 #include "../../IPositioning/Functions/makePositioning/makePositioning.hpp"
 
-namespace ui {
+namespace ie {
 	Positioning2::Make::Make(BoxPtr<IPositioning>&& horizontal, BoxPtr<IPositioning>&& vertical) :
 		horizontal(std::move(horizontal)), vertical(std::move(vertical)) {
 	}

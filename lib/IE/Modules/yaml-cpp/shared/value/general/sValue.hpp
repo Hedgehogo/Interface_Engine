@@ -2,7 +2,7 @@
 
 #include "../iSValue.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	class SValue : public virtual ISValue<T> {
 	public:

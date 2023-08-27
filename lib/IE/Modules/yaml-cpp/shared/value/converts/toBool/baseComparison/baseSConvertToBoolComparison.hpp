@@ -2,7 +2,7 @@
 
 #include "../../general/sConvertValue.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	class BaseSConvertToBoolComparison : public SConvertToBool<T> {
 	protected:

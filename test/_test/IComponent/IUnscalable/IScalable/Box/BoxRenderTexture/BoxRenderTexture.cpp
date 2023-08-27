@@ -7,8 +7,8 @@
 TEST(IComponent, BoxRenderTexture) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxRenderTexture boxRenderTexture{
-		{ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green)},
+	ie::BoxRenderTexture boxRenderTexture{
+		{ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green)},
 		data.makeInitInfo()
 	};
 	data.interactionManager.update({});

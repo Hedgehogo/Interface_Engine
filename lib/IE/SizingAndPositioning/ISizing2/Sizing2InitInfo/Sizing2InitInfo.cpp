@@ -1,4 +1,4 @@
 #include "Sizing2InitInfo.hpp"
 
-namespace ui {
+namespace ie {
 }

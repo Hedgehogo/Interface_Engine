@@ -5,7 +5,7 @@
 #include "IE/Modules/yaml-cpp/yaml.hpp"
 #include "IE/Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicOpenUrlEvent : public BasicBaseKeyEvent<T> {
 	public:

@@ -3,7 +3,7 @@
 #include "../Box.hpp"
 #include "../../../../ILayout/ILayoutObjectsArray/ILayoutObjectsArray.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxSwitchTabs : public Box, public ILayoutObjectsArray, public IDrawable {
 	public:
 		struct Make : public Box::Make, public ILayoutObjectsArray::Make {

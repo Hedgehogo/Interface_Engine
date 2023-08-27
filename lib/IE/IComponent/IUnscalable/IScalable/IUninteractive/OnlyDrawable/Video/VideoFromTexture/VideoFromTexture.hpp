@@ -3,7 +3,7 @@
 #include "../../OnlyDrawable.hpp"
 #include "IE/Modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 
-namespace ui {
+namespace ie {
 	class VideoFromTexture : public OnlyDrawable {
 	public:
 		struct Make : public IUninteractive::Make {

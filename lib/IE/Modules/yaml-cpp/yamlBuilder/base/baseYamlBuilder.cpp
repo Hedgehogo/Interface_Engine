@@ -1,5 +1,5 @@
 #include "baseYamlBuilder.hpp"
 
-namespace ui::detail {
+namespace ie::detail {
 	std::unordered_map<std::string, BaseYamlBuilder*> yamlBuilders;
 }

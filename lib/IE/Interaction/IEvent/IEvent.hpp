@@ -4,7 +4,7 @@
 
 using namespace bp;
 
-namespace ui {
+namespace ie {
 	class IEvent {
 	public:
 		virtual void start() {

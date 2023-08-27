@@ -2,7 +2,7 @@
 
 #include "../IPanelInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class IDisplayPanelInteraction : public virtual IPanelInteraction {
 	public:
 		IDisplayPanelInteraction* copy() override = 0;

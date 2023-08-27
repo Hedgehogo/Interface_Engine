@@ -3,7 +3,7 @@
 #include "../iSCoefficientValue.hpp"
 #include "../../general/sValue.hpp"
 
-namespace ui {
+namespace ie {
 	////////////////////////////////////////////////////////////
 	/// \brief Shared variable intended for values from 0 to 1.
 	///

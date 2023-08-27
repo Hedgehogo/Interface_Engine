@@ -2,6 +2,6 @@
 
 #include <filesystem>
 
-namespace ui {
+namespace ie {
 	void loadModules(int argc = 0, char *argv[] = {}, std::filesystem::path modulesList = {});
 }

@@ -1,6 +1,6 @@
 #include "MatchTargetPositioning.hpp"
 
-namespace ui {
+namespace ie {
 	MatchTargetPositioning::MatchTargetPositioning(float targetCoefficient, float objectCoefficient, float offset) : targetCoefficient(targetCoefficient), objectCoefficient(objectCoefficient), offset(offset) {
 	}
 	

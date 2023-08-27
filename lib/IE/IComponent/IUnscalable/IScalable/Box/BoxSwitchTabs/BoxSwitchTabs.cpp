@@ -1,6 +1,6 @@
 #include "BoxSwitchTabs.hpp"
 
-namespace ui {
+namespace ie {
 	BoxSwitchTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSValue<uint> value, sf::Vector2f minSize) :
 		objects(std::move(objects)), value(value), minSize(minSize) {
 	}

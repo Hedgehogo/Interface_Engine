@@ -5,7 +5,7 @@
 #include "SliderInteraction/SliderInteraction.hpp"
 #include "../../../../../../Modules/yaml-cpp/shared/shared.hpp"
 
-namespace ui {
+namespace ie {
 	class BaseSlider : public BaseInteractive {
 	protected:
 		virtual void resizeSlider(sf::Vector2f newValue);

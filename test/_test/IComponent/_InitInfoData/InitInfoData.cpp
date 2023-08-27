@@ -5,8 +5,8 @@ InitInfoData::InitInfoData(sf::Vector2u size) {
 	renderTarget.clear(sf::Color::Transparent);
 }
 
-ui::InitInfo InitInfoData::makeInitInfo() {
-	return ui::InitInfo{
+ie::InitInfo InitInfoData::makeInitInfo() {
+	return ie::InitInfo{
 		window,
 		renderTarget,
 		drawManager,

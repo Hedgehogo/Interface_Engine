@@ -2,7 +2,7 @@
 
 #include "../IPanelInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class BasePanelInteraction : public virtual IPanelInteraction {
 	public:
 		BasePanelInteraction();

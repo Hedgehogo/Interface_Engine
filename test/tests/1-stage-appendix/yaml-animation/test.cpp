@@ -10,23 +10,23 @@ TEST(yamlAnimationBuffer, animatorUnitRequestUpdate) {
 					 *testRequest2 = new TestAnimatorUnit{},
 					 *testRequest3 = new TestAnimatorUnit{},
 					 *testRequest4 = new TestAnimatorUnit{};
-	ui::animatorUnitBuffer = {
+	ie::animatorUnitBuffer = {
 		{"a", testBuffer1},
 		{"b", testBuffer2}
 	};
 
-	ui::animatorUnitRequest = {
-		{"a", {[&](ui::IAnimatorUnit *unit){testRequest1->addNextUnits(unit);}, [&](ui::IAnimatorUnit *unit){testRequest2->addNextUnits(unit);}}},
-		{"b", {[&](ui::IAnimatorUnit *unit){testRequest3->addNextUnits(unit);}, [&](ui::IAnimatorUnit *unit){testRequest4->addNextUnits(unit);}}}
+	ie::animatorUnitRequest = {
+		{"a", {[&](ie::IAnimatorUnit *unit){testRequest1->addNextUnits(unit);}, [&](ie::IAnimatorUnit *unit){testRequest2->addNextUnits(unit);}}},
+		{"b", {[&](ie::IAnimatorUnit *unit){testRequest3->addNextUnits(unit);}, [&](ie::IAnimatorUnit *unit){testRequest4->addNextUnits(unit);}}}
 	};
 
-	ui::animatorUnitRequestUpdate();
+	ie::animatorUnitRequestUpdate();
 
 	ASSERT_EQ(testRequest1->getProcessed().addNextUnits[0].nextUnit, testBuffer1);
 	ASSERT_EQ(testRequest2->getProcessed().addNextUnits[0].nextUnit, testBuffer1);
 	ASSERT_EQ(testRequest3->getProcessed().addNextUnits[0].nextUnit, testBuffer2);
 	ASSERT_EQ(testRequest4->getProcessed().addNextUnits[0].nextUnit, testBuffer2);
 
-	ui::animationVariablesBuffer = {};
-	ui::animatorUnitRequest = {};
+	ie::animationVariablesBuffer = {};
+	ie::animatorUnitRequest = {};
 }

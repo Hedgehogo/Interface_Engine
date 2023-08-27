@@ -1,6 +1,6 @@
 //included into sConvertToBoolEquals.hpp
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	SConvertToBoolLess<T>::SConvertToBoolLess(PISValue<T> fromValue, T compared) :
 		BaseSConvertToBoolComparison<T>(fromValue, convert(fromValue->getValue(), compared), compared) {

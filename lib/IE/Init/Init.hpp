@@ -71,7 +71,7 @@
 #include "IE/Animation/IChangeVariable/ChangeVariableByCurve//ChangeVariableByCurve.hpp"
 #include "IE/Debug/BoxDebug.hpp"
 
-namespace ui {
+namespace ie {
 	void init(int argc = 0, char *argv[] = {}, std::filesystem::path modulesList = {});
 	
 	void yamlBuilderInit();

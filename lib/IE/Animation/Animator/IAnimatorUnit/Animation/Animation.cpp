@@ -3,7 +3,7 @@
 #include <utility>
 #include <iostream>
 
-namespace ui {
+namespace ie {
 	Animation::Variable::Variable(PSfloat animationVariable, std::vector<IChangeVariable*> changeVariables) : animationVariable(std::move(animationVariable)), changeVariables(std::move(changeVariables)) {
 	}
 	

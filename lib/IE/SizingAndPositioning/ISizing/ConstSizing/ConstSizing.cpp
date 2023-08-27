@@ -1,6 +1,6 @@
 #include "ConstSizing.hpp"
 
-namespace ui {
+namespace ie {
 	ConstSizing::Make::Make(float size) : size(size) {
 	}
 	

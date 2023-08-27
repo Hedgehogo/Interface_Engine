@@ -2,7 +2,7 @@
 
 #include "../IPanelManager.hpp"
 
-namespace ui {
+namespace ie {
 	class PanelManager : public IPanelManager {
 	protected:
 		void print();

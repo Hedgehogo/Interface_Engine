@@ -3,7 +3,7 @@
 #include <string>
 #include <exception>
 
-namespace ui {
+namespace ie {
 	class BaseException : public std::exception {
 	public:
 		BaseException(std::string description);

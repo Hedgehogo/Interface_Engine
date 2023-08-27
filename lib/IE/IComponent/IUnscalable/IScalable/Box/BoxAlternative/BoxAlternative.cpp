@@ -1,7 +1,7 @@
 #include "BoxAlternative.hpp"
 #include <algorithm>
 
-namespace ui {
+namespace ie {
 	BoxAlternative::Make::Make(BoxPtr<IScalable::Make>&& topObject, BoxPtr<IScalable::Make>&& bottomObject, sf::Vector2f minSize) :
 		topObject(std::move(topObject)), bottomObject(std::move(bottomObject)), minSize(minSize) {
 	}

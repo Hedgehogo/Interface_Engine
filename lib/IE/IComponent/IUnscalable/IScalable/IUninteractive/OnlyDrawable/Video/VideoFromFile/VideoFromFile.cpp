@@ -1,6 +1,6 @@
 #include "VideoFromFile.hpp"
 
-namespace ui {
+namespace ie {
 	VideoFromFile::Make::Make(std::vector<sf::Texture> video, PSCoefficient viewingProgress) :
 		video(std::move(video)), viewingProgress(viewingProgress) {
 	}

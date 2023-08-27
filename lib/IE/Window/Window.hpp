@@ -5,7 +5,7 @@
 #include "../IComponent/IUnscalable/IScalable/Interface/Interface.hpp"
 #include "BaseWindowResizer/WindowResizer/WindowResizer.hpp"
 
-namespace ui {
+namespace ie {
 	BaseWindowResizer* getWindowResizer();
 	
 	class Window {

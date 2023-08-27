@@ -2,7 +2,7 @@
 
 #include "../BasicBaseButton.hpp"
 
-namespace ui {
+namespace ie {
 	class Button : public BaseButton {
 	public:
 		struct Make : public IScalable::Make {

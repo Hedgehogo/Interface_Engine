@@ -3,7 +3,7 @@
 #include "IE/IComponent/IUnscalable/IScalable/Box/Box.hpp"
 #include "IE/IComponent/ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxSwitch : public Box, public ILayoutTwoObjects, public IDrawable {
 	public:
 		struct Make : public Box::Make, public ILayoutTwoObjects::Make {

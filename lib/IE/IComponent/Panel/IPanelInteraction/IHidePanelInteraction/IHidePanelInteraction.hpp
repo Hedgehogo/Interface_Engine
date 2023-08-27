@@ -2,7 +2,7 @@
 
 #include "../IPanelInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class IHidePanelInteraction : public virtual IPanelInteraction {
 	public:
 		Priority getPriority() const override;

@@ -3,7 +3,7 @@
 #include "../BaseCharacter.hpp"
 #include "../../../../IScalable/IScalable.hpp"
 
-namespace ui {
+namespace ie {
 	class ObjectCharacter : public BaseCharacter {
 	public:
 		ObjectCharacter(IScalable* object, bool fullLine = false);

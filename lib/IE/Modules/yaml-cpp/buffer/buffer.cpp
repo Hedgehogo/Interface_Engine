@@ -2,7 +2,7 @@
 #include "IE/Modules/yaml-cpp/shared/vector/iSVector2.hpp"
 #include "IE/Modules/yaml-cpp/shared/list/iSList.hpp"
 
-namespace ui {
+namespace ie {
 	std::vector<std::string> splitByDelimiter(const std::string& str, char delimiter) {
 		std::stringstream strStream{str};
 		std::vector<std::string> result;

@@ -1,7 +1,7 @@
 #include "hsvToRgb.hpp"
 #include <cmath>
 
-namespace ui {
+namespace ie {
 	sf::Color hsvToRgb(float H, float S, float V) {
 		float C = S * V; // Chroma
 		float HPrime = std::fmod(H / 60, 6.f); // H'

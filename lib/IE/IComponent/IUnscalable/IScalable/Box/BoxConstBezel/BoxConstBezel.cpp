@@ -1,6 +1,6 @@
 #include "BoxConstBezel.hpp"
 
-namespace ui {
+namespace ie {
 	BoxConstBezel::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& bezel, float thickness, sf::Vector2f minSize) :
 		object(std::move(object)), bezel(std::move(bezel)), thickness(thickness), minSize(minSize) {
 	}

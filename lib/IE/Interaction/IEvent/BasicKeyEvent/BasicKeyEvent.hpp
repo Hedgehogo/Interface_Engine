@@ -4,7 +4,7 @@
 #include "../IEvent.hpp"
 #include "IE/Interaction/BasicInteractionInitInfo/BasicInteractionInitInfo.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicKeyEvent : public IEvent {
 	public:

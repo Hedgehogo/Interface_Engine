@@ -2,7 +2,7 @@
 
 #include "../../Modules/exception/baseException.hpp"
 
-namespace ui {
+namespace ie {
 	class NonexistentAnimationVariableException : public BaseException {
 	public:
 		NonexistentAnimationVariableException(std::string name);

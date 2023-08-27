@@ -12,15 +12,15 @@
 struct InitInfoData {
 	sf::RenderWindow window{};
 	sf::RenderTexture renderTarget{};
-	ui::DrawManager drawManager{};
-	ui::UpdateManager updateManager{};
-	ui::InteractionManager interactionManager{};
-	ui::InteractionStack interactionStack{};
-	ui::PanelManager panelManager{};
+	ie::DrawManager drawManager{};
+	ie::UpdateManager updateManager{};
+	ie::InteractionManager interactionManager{};
+	ie::InteractionStack interactionStack{};
+	ie::PanelManager panelManager{};
 	
 	InitInfoData(sf::Vector2u size = {1, 1});
 	
-	ui::InitInfo makeInitInfo();
+	ie::InitInfo makeInitInfo();
 	
 	void renderSave(std::filesystem::path path);
 	

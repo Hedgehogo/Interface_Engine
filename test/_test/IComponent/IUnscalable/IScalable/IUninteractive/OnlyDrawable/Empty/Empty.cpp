@@ -6,7 +6,7 @@
 TEST(IComponent, Empty) {
 	InitInfoData data{{100, 100}};
 	
-	ui::Empty empty{{}, data.makeInitInfo()};
+	ie::Empty empty{{}, data.makeInitInfo()};
 	data.interactionManager.update({});
 	
 	ASSERT_EQ(data.drawManager.size(), 1);

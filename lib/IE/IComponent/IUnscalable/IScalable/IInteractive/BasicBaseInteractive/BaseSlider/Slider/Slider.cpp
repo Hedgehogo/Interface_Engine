@@ -1,6 +1,6 @@
 #include "Slider.hpp"
 
-namespace ui {
+namespace ie {
 	Slider::Make::Make(
 		BoxPtr<IUninteractive::Make>&& slider,
 		BoxPtr<IUninteractive::Make>&& background,

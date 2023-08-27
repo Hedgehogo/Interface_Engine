@@ -3,7 +3,7 @@
 #include "../Box.hpp"
 #include "../../../../ILayout/ILayoutObject/ILayoutObject.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxMakePermeable : public Box, public ILayoutObject {
 	public:
 		struct Make : public Box::Make, public ILayoutObject::Make {

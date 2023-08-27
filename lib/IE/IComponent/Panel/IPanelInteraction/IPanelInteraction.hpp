@@ -3,7 +3,7 @@
 #include "../../../Interaction/IInteraction/IInteraction.hpp"
 #include "PanelInteractionInitInfo/PanelInteractionInitInfo.hpp"
 
-namespace ui {
+namespace ie {
 	class Panel;
 	
 	class IPanelManager;

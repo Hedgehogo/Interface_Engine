@@ -3,7 +3,7 @@
 #include "../BasicLambdaInteraction/BasicLambdaInteraction.hpp"
 #include "../IBasicMouseInteraction/IBasicMouseInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicMouseLambdaInteraction : public BasicLambdaInteraction<T>, public IBasicMouseInteraction<T> {
 	public:

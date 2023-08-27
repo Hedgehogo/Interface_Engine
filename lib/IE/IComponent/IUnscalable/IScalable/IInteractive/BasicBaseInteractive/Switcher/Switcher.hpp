@@ -7,7 +7,7 @@
 #include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
 #include "../../../../../../Enums/KeyHandler/KeyHandler.hpp"
 
-namespace ui {
+namespace ie {
 	class Switcher : public BaseInteractive, public ILayout, public IDrawable {
 	public:
 		struct Make : public IScalable::Make, public ILayout::Make {

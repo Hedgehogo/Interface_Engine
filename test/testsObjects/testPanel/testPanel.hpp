@@ -4,17 +4,17 @@
 #include "../../../lib/IE/SizingAndPositioning/sizing/const/ConstSizing.hpp"
 #include <ctime>
 
-class TestPanel : public ui::BasePanel {
+class TestPanel : public ie::BasePanel {
 public:
 	struct Processed {
 		struct Init {
 			uint64_t time{0};
 			sf::RenderTarget* renderTarget;
-			ui::DrawManager* drawManager;
-			ui::UpdateManager* updateManager;
-			ui::InteractionManager* interactionManager;
-			ui::InteractionStack* interactionStack;
-			ui::IPanelManager* panelManager;
+			ie::DrawManager* drawManager;
+			ie::UpdateManager* updateManager;
+			ie::InteractionManager* interactionManager;
+			ie::InteractionStack* interactionStack;
+			ie::IPanelManager* panelManager;
 		} init;
 		uint64_t setDisplayed{0};
 		uint64_t draw{0};
@@ -31,7 +31,7 @@ public:
 		uint64_t copy{0};
 	};
 	
-	struct Make : public ui::BasePanel::Make {
+	struct Make : public ie::BasePanel::Make {
 		bool displayed = false;
 		sf::Vector2f minSize = {};
 		sf::Vector2f normalSize = {100, 100};
@@ -39,8 +39,8 @@ public:
 		bool isFreeResult = true;
 		bool inPanelResult = true;
 		bool updateInteractionsResult = true;
-		ui::BoxPtr<ui::ISizing2> sizing = ui::BoxPtr<ui::ISizing2>{new ui::Sizing2{sf::Vector2f{0.5f, 0.5f}}};
-		ui::BoxPtr<ui::IPositioning2> positioning = ui::BoxPtr<ui::IPositioning2>{new ui::Positioning2{sf::Vector2f{}, sf::Vector2f{}}};
+		ie::BoxPtr<ie::ISizing2> sizing = ie::BoxPtr<ie::ISizing2>{new ie::Sizing2{sf::Vector2f{0.5f, 0.5f}}};
+		ie::BoxPtr<ie::IPositioning2> positioning = ie::BoxPtr<ie::IPositioning2>{new ie::Positioning2{sf::Vector2f{}, sf::Vector2f{}}};
 		
 		Make(
 			bool displayed = false,
@@ -50,14 +50,14 @@ public:
 			bool isFreeResult = true,
 			bool inPanelResult = true,
 			bool updateInteractionsResult = true,
-			ui::BoxPtr<ui::ISizing2> sizing = ui::BoxPtr<ui::ISizing2>{new ui::Sizing2{sf::Vector2f{0.5f, 0.5f}}},
-			ui::BoxPtr<ui::IPositioning2> positioning = ui::BoxPtr<ui::IPositioning2>{new ui::Positioning2{sf::Vector2f{}, sf::Vector2f{}}}
+			ie::BoxPtr<ie::ISizing2> sizing = ie::BoxPtr<ie::ISizing2>{new ie::Sizing2{sf::Vector2f{0.5f, 0.5f}}},
+			ie::BoxPtr<ie::IPositioning2> positioning = ie::BoxPtr<ie::IPositioning2>{new ie::Positioning2{sf::Vector2f{}, sf::Vector2f{}}}
 		);
 		
-		TestPanel* make(ui::InitInfo initInfo) override;
+		TestPanel* make(ie::InitInfo initInfo) override;
 	};
 	
-	TestPanel(Make&& make, ui::InitInfo initInfo);
+	TestPanel(Make&& make, ie::InitInfo initInfo);
 	
 	TestPanel(
 		bool displayed = false,
@@ -67,8 +67,8 @@ public:
 		bool isFreeResult = true,
 		bool inPanelResult = true,
 		bool updateInteractionsResult = true,
-		ui::BoxPtr<ui::ISizing2> sizing = ui::BoxPtr<ui::ISizing2>{new ui::Sizing2{sf::Vector2f{0.5f, 0.5f}}},
-		ui::BoxPtr<ui::IPositioning2> positioning = ui::BoxPtr<ui::IPositioning2>{new ui::Positioning2{sf::Vector2f{}, sf::Vector2f{}}}
+		ie::BoxPtr<ie::ISizing2> sizing = ie::BoxPtr<ie::ISizing2>{new ie::Sizing2{sf::Vector2f{0.5f, 0.5f}}},
+		ie::BoxPtr<ie::IPositioning2> positioning = ie::BoxPtr<ie::IPositioning2>{new ie::Positioning2{sf::Vector2f{}, sf::Vector2f{}}}
 	);
 	
 	const Processed& getProcessed() const;
@@ -81,7 +81,7 @@ public:
 	
 	void setUpdateInteractionsResult(bool updateInteractionsResult);
 	
-	void init(ui::InitInfo initInfo) override;
+	void init(ie::InitInfo initInfo) override;
 	
 	bool isIndependent() override;
 	

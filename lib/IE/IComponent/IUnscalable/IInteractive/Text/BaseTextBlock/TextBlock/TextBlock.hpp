@@ -4,7 +4,7 @@
 #include "../../BaseCharacter/Character/Character.hpp"
 #include "../../../../../../Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
-namespace ui {
+namespace ie {
 	class TextBlock : public BaseTextBlock {
 	public:
 		TextBlock(std::u32string str, TextVariables textVariables, std::vector<BaseLine*> lines);

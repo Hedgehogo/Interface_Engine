@@ -3,7 +3,7 @@
 #include "../baseComparison/baseSConvertToBoolComparison.hpp"
 #include "IE/Modules/yaml-cpp/buffer/buffer.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	class SConvertToBoolEquals : public BaseSConvertToBoolComparison<T> {
 	protected:

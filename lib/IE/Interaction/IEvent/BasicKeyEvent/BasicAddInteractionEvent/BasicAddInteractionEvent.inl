@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicAddInteractionEvent<T>::BasicAddInteractionEvent(IBasicInteraction<T>& interaction) :
 		interactionManager(nullptr), interaction(&interaction) {

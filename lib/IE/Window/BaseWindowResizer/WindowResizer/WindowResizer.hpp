@@ -4,7 +4,7 @@
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 #include <variant>
 
-namespace ui {
+namespace ie {
 	class WindowResizer : public BaseWindowResizer {
 	public:
 		struct Borders {

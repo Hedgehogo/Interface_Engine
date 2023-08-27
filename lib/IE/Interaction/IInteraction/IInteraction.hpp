@@ -5,7 +5,7 @@
 #include "IE/Interaction/BasicInteractionInitInfo/BasicInteractionInitInfo.hpp"
 #include <Box_Ptr/boxPtr.hpp>
 
-namespace ui {
+namespace ie {
 	using namespace bp;
 	
 	class InteractionManager;

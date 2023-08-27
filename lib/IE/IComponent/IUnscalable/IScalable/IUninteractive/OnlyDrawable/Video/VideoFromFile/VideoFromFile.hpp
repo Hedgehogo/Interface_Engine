@@ -5,7 +5,7 @@
 #include "IE/IUpdatable/IUpdatable/IUpdatable.hpp"
 #include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
-namespace ui {
+namespace ie {
 	class VideoFromFile : public OnlyDrawable {
 	public:
 		struct Make : public IUninteractive::Make {

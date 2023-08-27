@@ -1,6 +1,6 @@
 #include "BoxUninteractive.hpp"
 
-namespace ui {
+namespace ie {
 	BoxUninteractive* BoxUninteractive::Make::make(InitInfo initInfo) {
 		return new BoxUninteractive{std::move(*this), initInfo};
 	}

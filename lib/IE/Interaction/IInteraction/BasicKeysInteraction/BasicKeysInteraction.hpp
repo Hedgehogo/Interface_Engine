@@ -5,7 +5,7 @@
 #include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "../../IEvent/BasicKeyEvent/BasicOpenUrlEvent/BasicOpenUrlEvent.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicKeysInteraction : public virtual IBasicInteraction<T> {
 	public:

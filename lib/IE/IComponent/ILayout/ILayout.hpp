@@ -2,7 +2,7 @@
 
 #include "../IComponent.hpp"
 
-namespace ui {
+namespace ie {
 	struct LayoutData {
 		sf::Vector2f position{};
 		sf::Vector2f size{};

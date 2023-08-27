@@ -1,4 +1,4 @@
-namespace ui {
+namespace ie {
 	namespace detail {
 		template<typename T>
 		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(BoxPtr<BasicKeysInteraction<T> >&& interaction, uint state) :

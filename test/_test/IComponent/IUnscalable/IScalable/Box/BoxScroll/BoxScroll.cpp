@@ -7,10 +7,10 @@
 TEST(IComponent, BoxScroll) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxScroll boxScroll{
-		ui::BoxScroll::Make{
-			ui::makeBoxPtr<ui::IUnscalable::Make, ui::FullColor::Make>(sf::Color::Green),
-			std::make_shared<ui::SRVec2f>(sf::Vector2f{})
+	ie::BoxScroll boxScroll{
+		ie::BoxScroll::Make{
+			ie::makeBoxPtr<ie::IUnscalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			std::make_shared<ie::SRVec2f>(sf::Vector2f{})
 		},
 		data.makeInitInfo()
 	};

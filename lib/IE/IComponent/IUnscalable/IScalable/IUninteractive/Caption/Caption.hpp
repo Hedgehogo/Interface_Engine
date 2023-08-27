@@ -4,7 +4,7 @@
 #include "../../../../../Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 #include "../../../../../SizingAndPositioning/IPositioning2/InternalPositioning2/InternalPositioning2.hpp"
 
-namespace ui {
+namespace ie {
 	class Caption : public OnlyDrawable {
 	public:
 		static void setDefaultColor(sf::Color color = sf::Color::White);

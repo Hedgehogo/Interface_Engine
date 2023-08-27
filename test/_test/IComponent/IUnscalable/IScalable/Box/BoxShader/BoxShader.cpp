@@ -9,11 +9,11 @@ TEST(IComponent, BoxShader) {
 	
 	auto shader = new sf::Shader{};
 	shader->loadFromFile("test-src/BoxShader.glsl", sf::Shader::Type::Fragment);
-	ui::BoxShader boxShader{
+	ie::BoxShader boxShader{
 		{
-			ui::makeBoxPtr<ui::IScalable::Make, ui::Capsule::Make>(sf::Color::Green),
+			ie::makeBoxPtr<ie::IScalable::Make, ie::Capsule::Make>(sf::Color::Green),
 			new sf::Shader{},
-			ui::BoxShader::Transmission::texture
+			ie::BoxShader::Transmission::texture
 		},
 		data.makeInitInfo()
 	};

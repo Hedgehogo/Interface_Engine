@@ -5,8 +5,8 @@ TEST(Sprite, draw) {
     testTexture.loadFromFile("../test/tests/7-stage-object/IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/Sprite/src/gigachad.jpg");
 
     Program testProgram{
-        new ui::Interface{
-            new ui::Sprite{
+        new ie::Interface{
+            new ie::Sprite{
                 testTexture
             }
         }
@@ -17,8 +17,8 @@ TEST(Sprite, draw) {
 
 TEST(Sprite, YAML) {
     Program testProgram{
-	    new ui::Interface{
-            ui::loadFromYaml<ui::IScalable>("../test/tests/7-stage-object/IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/Sprite/src/test.yaml")
+	    new ie::Interface{
+            ie::loadFromYaml<ie::IScalable>("../test/tests/7-stage-object/IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/Sprite/src/test.yaml")
         }
     };
 

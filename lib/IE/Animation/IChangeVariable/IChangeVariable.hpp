@@ -2,7 +2,7 @@
 
 #include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	class IChangeVariable {
 	public:
 		virtual float getSize() = 0;

@@ -1,6 +1,6 @@
 #include "ILayout.hpp"
 
-namespace ui {
+namespace ie {
 	LayoutData::LayoutData() : position(), size() {
 	}
 	

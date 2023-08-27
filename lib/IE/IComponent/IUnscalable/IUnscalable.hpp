@@ -2,7 +2,7 @@
 
 #include "../IComponent.hpp"
 
-namespace ui {
+namespace ie {
 	class IUnscalable : public virtual IComponent {
 	public:
 		struct Make : public virtual IComponent::Make {

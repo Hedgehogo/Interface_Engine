@@ -2,7 +2,7 @@
 
 #include "IE/Animation/Animator/IAnimatorUnit/IAnimatorUnit.hpp"
 
-class TestAnimatorUnit : public ui::IAnimatorUnit{
+class TestAnimatorUnit : public ie::IAnimatorUnit{
 	struct Processed{
 		struct Update{
 			unsigned long long time{0};

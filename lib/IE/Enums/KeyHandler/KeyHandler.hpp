@@ -2,7 +2,7 @@
 
 #include "../../Modules/yaml-cpp/yaml.hpp"
 
-namespace ui {
+namespace ie {
 	enum class Key : int {
 		unknown = -1,          ///< Unhandled key
 		a = 0,                 ///< The A key

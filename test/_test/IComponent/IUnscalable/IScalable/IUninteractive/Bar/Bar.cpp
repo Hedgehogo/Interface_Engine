@@ -7,10 +7,10 @@
 TEST(IComponent, Bar) {
 	InitInfoData data{{100, 100}};
 	
-	ui::Bar bar{
+	ie::Bar bar{
 		{
-			ui::makeBoxPtr<ui::IUninteractive::Make, ui::FullColor::Make>(sf::Color::Yellow),
-			ui::makeBoxPtr<ui::IUninteractive::Make, ui::Capsule::Make>(sf::Color::Red),
+			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Yellow),
+			ie::makeBoxPtr<ie::IUninteractive::Make, ie::Capsule::Make>(sf::Color::Red),
 			0.2f
 		}, data.makeInitInfo()
 	};

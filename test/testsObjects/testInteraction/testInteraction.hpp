@@ -4,7 +4,7 @@
 #include "../../../lib/IE/Interaction/InteractionManager/InteractionManager.hpp"
 
 
-class TestInteraction : public ui::IInteraction {
+class TestInteraction : public ie::IInteraction {
 public:
 	struct Processed {
 		struct Start {

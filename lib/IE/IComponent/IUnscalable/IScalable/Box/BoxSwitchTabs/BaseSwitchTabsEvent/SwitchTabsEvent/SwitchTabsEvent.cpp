@@ -1,7 +1,7 @@
 #include "SwitchTabsEvent.hpp"
 #include "../../../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	void SwitchTabsEvent::startPressed() {
 	}
 	

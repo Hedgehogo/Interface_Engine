@@ -7,16 +7,16 @@
 TEST(IComponent, BoxBorder) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxBorder boxBorder{
+	ie::BoxBorder boxBorder{
 		{
-			ui::makeVector(
-				ui::makeVector(
-					ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
-					ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red)
+			ie::makeVector(
+				ie::makeVector(
+					ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+					ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
 				),
-				ui::makeVector(
-					ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Blue),
-					ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Yellow)
+				ie::makeVector(
+					ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Blue),
+					ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Yellow)
 				)
 			)
 		}, data.makeInitInfo()

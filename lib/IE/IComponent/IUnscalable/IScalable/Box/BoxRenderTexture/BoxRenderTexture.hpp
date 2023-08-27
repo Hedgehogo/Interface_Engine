@@ -3,7 +3,7 @@
 #include "../Box.hpp"
 #include "../../../../ILayout/ILayoutObject/ILayoutObject.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxRenderTexture : public Box, public ILayoutObject, public IDrawable {
 	public:
 		struct Make : public Box::Make, public ILayoutObject::Make {

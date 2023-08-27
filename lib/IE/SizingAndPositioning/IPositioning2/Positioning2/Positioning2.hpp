@@ -2,7 +2,7 @@
 
 #include "../IPositioning2.hpp"
 
-namespace ui {
+namespace ie {
 	class Positioning2 : public IPositioning2 {
 	public:
 		struct Make : public IPositioning2::Make {

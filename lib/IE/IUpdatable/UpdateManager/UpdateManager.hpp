@@ -3,7 +3,7 @@
 #include <vector>
 #include "../IUpdatable/IUpdatable.hpp"
 
-namespace ui {
+namespace ie {
 	class UpdateManager : public IUpdatable {
 	public:
 		UpdateManager() = default;

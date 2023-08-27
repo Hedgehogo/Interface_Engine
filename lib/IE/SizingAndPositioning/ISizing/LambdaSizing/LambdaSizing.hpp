@@ -3,7 +3,7 @@
 #include "../ISizing.hpp"
 #include <functional>
 
-namespace ui {
+namespace ie {
 	class LambdaSizing : public ISizing {
 	public:
 		using FindSizeFunc = std::function<float(float parentSize, float targetSize, float normalSize)>;

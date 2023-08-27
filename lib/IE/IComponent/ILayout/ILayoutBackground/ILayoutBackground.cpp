@@ -1,6 +1,6 @@
 #include "ILayoutBackground.hpp"
 
-namespace ui {
+namespace ie {
 	void ILayoutBackground::setPosition(sf::Vector2f position) {
 		ILayout::setPosition(position);
 	}

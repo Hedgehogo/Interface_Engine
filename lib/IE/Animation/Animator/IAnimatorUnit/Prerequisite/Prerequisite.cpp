@@ -1,6 +1,6 @@
 #include "Prerequisite.hpp"
 
-namespace ui {
+namespace ie {
 	Prerequisite::Prerequisite(PISbool valve, std::vector<IAnimatorUnit*> nextTrue, std::vector<IAnimatorUnit*> nextFalse) :
 		nextTrueBuf(nextTrue), nextFalseBuf(nextFalse), nextTrue(nextTrue), nextFalse(nextFalse), valve(valve) {
 		for(auto& unit: this->nextTrue) {

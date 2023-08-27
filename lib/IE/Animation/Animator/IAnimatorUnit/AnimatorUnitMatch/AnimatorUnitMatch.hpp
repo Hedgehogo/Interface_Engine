@@ -2,7 +2,7 @@
 
 #include "../IAnimatorUnit.hpp"
 
-namespace ui {
+namespace ie {
 	namespace detail::AnimatorUnitMatch {
 		template<typename T>
 		struct Option {

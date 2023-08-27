@@ -1,6 +1,6 @@
 #include "iYamlBuilder.hpp"
 
-namespace ui {
+namespace ie {
 	std::string removeNamespace(std::string name, std::string nameSpace) {
 		std::string nameSpaceName = nameSpace + std::string("::");
 		if(name.size() >= nameSpaceName.size() && name.substr(0, nameSpaceName.size()) == nameSpaceName) {

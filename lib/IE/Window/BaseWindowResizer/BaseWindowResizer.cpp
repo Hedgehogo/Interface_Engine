@@ -2,7 +2,7 @@
 
 #include "../Window.hpp"
 
-namespace ui {
+namespace ie {
 	void BaseWindowResizer::setWindow(Window& window) {
 		BaseWindowResizer::window = &window;
 	}

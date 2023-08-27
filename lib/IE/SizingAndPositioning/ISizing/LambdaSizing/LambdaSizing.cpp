@@ -2,7 +2,7 @@
 
 #include <utility>
 
-namespace ui {
+namespace ie {
 	LambdaSizing::Make::Make(LambdaSizing::FindSizeFunc findSizeFunc, LambdaSizing::MinSizeFunc minSizeFunc) :
 		findSizeFunc(std::move(findSizeFunc)), minSizeFunc(std::move(minSizeFunc)){
 	}

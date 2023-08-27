@@ -10,7 +10,7 @@ sf::Vector2<T> operator/(const sf::Vector2<T>& first, const sf::Vector2<T>& seco
 	return {first.x / second.x, first.y / second.y};
 }
 
-namespace ui {
+namespace ie {
 	template<class T>
 	std::string type_name(const T& type) {
 		return demangle(typeid(type).name());
@@ -86,12 +86,12 @@ namespace ui {
 namespace YAML {
 	template<typename T>
 	Node convert<T>::encode(const T& rhs) {
-		return ui::Encode<T>::encode(rhs);
+		return ie::Encode<T>::encode(rhs);
 	}
 	
 	template<typename T>
 	bool convert<T>::decode(const Node& node, T& rhs) {
-		return ui::Decode<T>::decode(node, rhs);
+		return ie::Decode<T>::decode(node, rhs);
 	}
 }
 

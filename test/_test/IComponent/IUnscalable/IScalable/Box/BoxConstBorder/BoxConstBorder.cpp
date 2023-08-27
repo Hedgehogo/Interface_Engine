@@ -7,12 +7,12 @@
 TEST(IComponent, BoxConstBorder) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxConstBorder boxConstBorder{
+	ie::BoxConstBorder boxConstBorder{
 		{
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
-			ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red),
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
 			2,
-			ui::Side::left
+			ie::Side::left
 		},
 		data.makeInitInfo()
 	};

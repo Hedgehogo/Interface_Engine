@@ -5,7 +5,7 @@
 #include "../IDisplayPanelInteraction/IDisplayPanelInteraction.hpp"
 #include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	class ClickPanelInteraction : public BasicOneKeyInteraction<Panel&>, public virtual IPanelInteraction {
 	public:
 		ClickPanelInteraction(BoxPtr<PanelEvent>&& event, Key key);

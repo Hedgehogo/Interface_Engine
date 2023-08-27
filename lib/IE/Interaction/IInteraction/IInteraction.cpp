@@ -1,6 +1,6 @@
 #include "IInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	bool IInteraction::isBlocked() const {
 		return false;
 	}

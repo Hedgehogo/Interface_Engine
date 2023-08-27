@@ -1,7 +1,7 @@
 #include "makePositioning.hpp"
 #include <utility>
 
-namespace ui {
+namespace ie {
 	IPositioning* makePosition(float coefficient, float offset, bool relativeTarget) {
 		if(!relativeTarget) {
 			return new InternalPositioning{coefficient, offset};

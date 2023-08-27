@@ -2,7 +2,7 @@
 #include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 #include "SwitherEvent/SwitcherEvent.hpp"
 
-namespace ui {
+namespace ie {
 	Switcher::Make::Make(BoxPtr<IScalable::Make>&& inactiveBackground, BoxPtr<IScalable::Make>&& activeBackground, PSbool value, Key key) :
 		inactiveBackground(std::move(inactiveBackground)), activeBackground(std::move(activeBackground)), value(value), key(key) {
 	}

@@ -1,6 +1,6 @@
 #include "InteractionStack.hpp"
 
-namespace ui {
+namespace ie {
 	InteractionStack::InteractionStack(std::vector<BoxPtr<IInteraction> >&& interactionStack) : interactionStack(std::move(interactionStack)) {
 	}
 	

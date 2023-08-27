@@ -2,6 +2,6 @@
 
 #include "../OnlyDrawable.hpp"
 
-namespace ui {
+namespace ie {
 	bool videoConvert(const YAML::Node& node, OnlyDrawable*& video);
 }

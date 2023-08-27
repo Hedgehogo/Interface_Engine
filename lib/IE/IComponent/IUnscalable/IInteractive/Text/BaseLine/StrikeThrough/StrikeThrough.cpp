@@ -1,6 +1,6 @@
 #include "StrikeThrough.hpp"
 
-namespace ui {
+namespace ie {
 	StrikeThrough::StrikeThrough(sf::Color color, float strikeThroughOffset) : BaseLine(sf::TriangleStrip, 4, color), strikeThroughOffset(strikeThroughOffset) {
 	}
 	

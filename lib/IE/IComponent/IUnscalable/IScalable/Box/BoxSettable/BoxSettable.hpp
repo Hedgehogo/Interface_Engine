@@ -5,7 +5,7 @@
 #include "../../../../Panel/IPanelManager/PanelManager/PanelManager.hpp"
 #include "../../../../Panel/IPanelManager/PanelManagerInterceptor/PanelManagerInterceptor.hpp"
 
-namespace ui {
+namespace ie {
 	class BoxSettable : public Box, public ILayoutObject, public IDrawable, public IUpdatable {
 	public:
 		struct Make : public Box::Make, public ILayoutObject::Make {

@@ -2,7 +2,7 @@
 
 #include "../iSValue.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename FromType, typename ToType>
 	class ISConvertValue : public virtual ISValue<ToType> {
 	public:

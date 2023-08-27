@@ -1,7 +1,7 @@
 //included into yamlBuilder.hpp
 #include <utility>
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	YamlBuilder<T> YamlBuilder<T>::builder = {};
 	template<typename T>

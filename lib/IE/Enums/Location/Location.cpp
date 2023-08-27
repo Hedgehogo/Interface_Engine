@@ -1,6 +1,6 @@
 #include "Location.hpp"
 
-namespace ui {
+namespace ie {
 	bool Decode<Location>::decode(const YAML::Node& node, Location& location) {
 		std::string str{node.as<std::string>()};
 		if(str == "origin") {

@@ -2,7 +2,7 @@
 
 #include "../../exception/baseYamlException.hpp"
 
-namespace ui {
+namespace ie {
 	class BufferNonExistentNestingLevelException : public BaseYamlException {
 	public:
 		BufferNonExistentNestingLevelException(YAML::Mark mark, const std::string& name, std::size_t level);

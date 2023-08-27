@@ -1,6 +1,6 @@
 #include "../../../../Modules/openUrl/openUrl.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T>
 	BasicOpenUrlEvent<T>::BasicOpenUrlEvent(const std::string& url) : url(url) {
 	}

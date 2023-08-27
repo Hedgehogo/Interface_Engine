@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ui {
+namespace ie {
 	class IDrawable {
 	public:
 		virtual void draw() = 0;

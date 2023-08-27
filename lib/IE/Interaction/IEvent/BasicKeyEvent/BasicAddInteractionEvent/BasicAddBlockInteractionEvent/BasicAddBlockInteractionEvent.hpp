@@ -3,7 +3,7 @@
 #include "../BasicAddInteractionEvent.hpp"
 #include "IE/Interaction/IInteraction/IBasicBlockInteraction/IBasicBlockInteraction.hpp"
 
-namespace ui {
+namespace ie {
 	template<typename T = std::monostate>
 	class BasicAddBlockInteractionEvent : public BasicAddInteractionEvent<T> {
 	public:

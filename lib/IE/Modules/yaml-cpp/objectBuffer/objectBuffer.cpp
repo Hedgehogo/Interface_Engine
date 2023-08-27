@@ -1,6 +1,6 @@
 #include "objectBuffer.hpp"
 
-namespace ui {
+namespace ie {
 	std::map<std::string, const YAML::Node> ObjectBuffer::nodes = {};
 	
 	void ObjectBuffer::add(const std::string& name, const YAML::Node& node) {

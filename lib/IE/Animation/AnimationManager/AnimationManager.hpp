@@ -4,7 +4,7 @@
 #include <vector>
 #include "../Animator/Animator.hpp"
 
-namespace ui {
+namespace ie {
 	class AnimationManager {
 	public:
 		explicit AnimationManager(std::vector<Animator*> animators = {});

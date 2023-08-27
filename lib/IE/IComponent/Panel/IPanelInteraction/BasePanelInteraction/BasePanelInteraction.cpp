@@ -1,7 +1,7 @@
 #include "BasePanelInteraction.hpp"
 #include "../../IPanelManager/IPanelManager.hpp"
 
-namespace ui {
+namespace ie {
 	BasePanelInteraction::BasePanelInteraction() : panel(nullptr), panelManager(nullptr) {
 	}
 	

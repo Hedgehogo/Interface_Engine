@@ -7,11 +7,11 @@
 TEST(IComponent, BoxBorderHorizontal) {
 	InitInfoData data{{100, 100}};
 	
-	ui::BoxBorderHorizontal boxBorderHorizontal{
+	ie::BoxBorderHorizontal boxBorderHorizontal{
 		{
-			ui::makeVector(
-				ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Green),
-				ui::makeBoxPtr<ui::IScalable::Make, ui::FullColor::Make>(sf::Color::Red)
+			ie::makeVector(
+				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
 			),
 		}, data.makeInitInfo()
 	};

@@ -2,7 +2,7 @@
 
 #include "../BasePanel.hpp"
 
-namespace ui {
+namespace ie {
 	class ConstPanel : public BasePanel {
 	public:
 		struct Make : public BasePanel::Make {

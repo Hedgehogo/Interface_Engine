@@ -3,7 +3,7 @@
 #include "../IPositioning2.hpp"
 #include "../../IPositioning/InternalPositioning/InternalPositioning.hpp"
 
-namespace ui {
+namespace ie {
 	class InternalPositioning2 : public IPositioning2 {
 	public:
 		struct Make : public IPositioning2::Make {
