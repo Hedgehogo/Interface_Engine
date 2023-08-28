@@ -1,0 +1,13 @@
+function(create_tests)
+    file(GLOB_RECURSE test_src "test/_test/*.cpp")
+    add_executable(${PROJECT_NAME}_tests ${test_src})
+    target_link_libraries(${PROJECT_NAME}_tests PUBLIC gtest gtest_main ${PROJECT_NAME})
+    target_include_directories(${PROJECT_NAME}_tests PUBLIC test)
+    set_target_properties(${PROJECT_NAME}_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+    file(GLOB_RECURSE test_images "test/_test/*.png" "test/_test/*.txt" "test/_test/*.glsl")
+    foreach(test_image IN LISTS test_images)
+        get_filename_component(test_image_name ${test_image} NAME)
+        configure_file(${test_image} ${CMAKE_BINARY_DIR}/bin/test-src/${test_image_name} COPYONLY)
+    endforeach()
+endfunction()
