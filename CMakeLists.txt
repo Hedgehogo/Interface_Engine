@@ -36,6 +36,20 @@ FetchContent_Declare(
         FIND_PACKAGE_ARGS NAMES Box_Ptr
 )
 
+FetchContent_Populate(yaml-cpp)
+
+file(READ "${yaml-cpp_SOURCE_DIR}/CMakeLists.txt" yaml-cpp_CMAKE)
+
+string(REGEX REPLACE
+        "cmake_dependent_option\\(YAML_CPP_INSTALL[^\\)]+\\)"
+        "set(YAML_CPP_INSTALL ON)"
+        yaml-cpp_CMAKE_UPDATED
+        "${yaml-cpp_CMAKE}")
+
+file(WRITE "${yaml-cpp_SOURCE_DIR}/CMakeLists.txt" "${yaml-cpp_CMAKE_UPDATED}")
+
+add_subdirectory(${yaml-cpp_SOURCE_DIR})
+
 FetchContent_MakeAvailable(SFML yaml-cpp curl localisation Box_Ptr)
 
 find_package(ImageMagick COMPONENTS Magick++ MagickCore)
@@ -105,7 +119,6 @@ foreach(test_image IN LISTS test_images)
     configure_file(${test_image} ${CMAKE_BINARY_DIR}/bin/test-src/${test_image_name} COPYONLY)
 endforeach()
 
-#[[
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib/ui DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME} PATTERN "*.hpp")
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib/modules DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME} PATTERN "*.hpp")
 
@@ -120,4 +133,3 @@ install(EXPORT ${PROJECT_NAME}
         NAMESPACE ${PROJECT_NAME}::
         DESTINATION lib/cmake/${PROJECT_NAME}
         )
-]]
