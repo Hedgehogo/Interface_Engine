@@ -33,23 +33,23 @@ int main() {
 	auto b_value{std::make_shared<ie::Sbool>(false)};
 	ie::Window window{
 		ie::Interface::Make{
-			makeBoxPtr<ie::IScalable::Make, ie::BoxConstBorder::Make>(
-				makeBoxPtr<ie::IScalable::Make, ie::BoxConstBorder::Make>(
-					makeBoxPtr<ie::IScalable::Make, ie::Switcher::Make>(
-						makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Yellow),
-						makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Blue),
+			makeBoxPtr<ie::BoxConstBorder::Make>(
+				makeBoxPtr<ie::BoxConstBorder::Make>(
+					makeBoxPtr<ie::Switcher::Make>(
+						makeBoxPtr<ie::FullColor::Make>(sf::Color::Yellow),
+						makeBoxPtr<ie::FullColor::Make>(sf::Color::Blue),
 						b_value
 					),
-					makeBoxPtr<ie::IScalable::Make, ie::Slider::Make>(
-						makeBoxPtr<ie::IUninteractive::Make, ie::Capsule::Make>(sf::Color::Red),
-						makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Green),
+					makeBoxPtr<ie::Slider::Make>(
+						makeBoxPtr<ie::Capsule::Make>(sf::Color::Red),
+						makeBoxPtr<ie::FullColor::Make>(sf::Color::Green),
 						c_value
 					),
 					20.f, ie::Side::up
 				),
-				makeBoxPtr<ie::IScalable::Make, ie::BoxSwitch::Make>(
-					makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Yellow),
-					makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Blue),
+				makeBoxPtr<ie::BoxSwitch::Make>(
+					makeBoxPtr<ie::FullColor::Make>(sf::Color::Yellow),
+					makeBoxPtr<ie::FullColor::Make>(sf::Color::Blue),
 					b_value
 				),
 				20.f, ie::Side::right
