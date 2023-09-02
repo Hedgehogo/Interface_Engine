@@ -4,7 +4,7 @@
 
 namespace ie {
 	SliderAction::SliderAction(sf::Vector2i division) :
-		startMousePosition(), startValue(), division(division) {
+		slider(nullptr), startMousePosition(), startValue(), division(division) {
 	}
 	
 	void SliderAction::init(BasicActionInitInfo<BaseSlider&> initInfo) {
