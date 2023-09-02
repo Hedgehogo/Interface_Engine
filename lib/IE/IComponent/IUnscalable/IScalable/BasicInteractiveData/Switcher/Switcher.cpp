@@ -16,7 +16,7 @@ namespace ie {
 	}
 	
 	Switcher::Switcher(Make&& make, InitInfo initInfo) :
-		interactive(makeBoxPtr<OneKeyInteraction::Make>(makeBoxPtr<SwitcherAction>(make.value), make.key), initInfo, {}),
+		interactive(makeBoxPtr<OneKeyInteraction::Make>(makeBoxPtr<SwitcherAction::Make>(make.value), make.key), initInfo, {}),
 		inactiveBackground(make.inactiveBackground->make(initInfo.copy(inactiveDrawManager))),
 		activeBackground(make.activeBackground->make(initInfo.copy(activeDrawManager))),
 		active(make.value) {
@@ -25,7 +25,7 @@ namespace ie {
 	}
 	
 	Switcher::Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key) :
-		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(makeBoxPtr<KeyAction, SwitcherAction>(value), key)),
+		interactive(makeBoxPtr<OneKeyInteraction>(makeBoxPtr<SwitcherAction>(value), key)),
 		inactiveBackground(std::move(inactiveBackground)), activeBackground(std::move(activeBackground)), active(value) {
 	}
 	

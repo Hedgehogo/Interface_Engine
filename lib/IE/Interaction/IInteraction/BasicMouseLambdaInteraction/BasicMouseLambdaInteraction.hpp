@@ -7,13 +7,13 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicMouseLambdaInteraction : public BasicLambdaInteraction<T>, public IBasicMouseInteraction<T> {
 	public:
-	struct Make : public BasicLambdaInteraction<T>::Make, public IBasicInteraction<T>::Make {
-			BoxPtr<BasicKeyAction<T> >&& leftButtonAction;
-			BoxPtr<BasicKeyAction<T> >&& rightButtonAction;
+		struct Make : public BasicLambdaInteraction<T>::Make, public IBasicInteraction<T>::Make {
+			BoxPtr<typename BasicKeyAction<T>::Make> leftButtonAction;
+			BoxPtr<typename BasicKeyAction<T>::Make> rightButtonAction;
 			
 			Make(
-				BoxPtr<BasicKeyAction<T> >&& leftButtonAction,
-				BoxPtr<BasicKeyAction<T> >&& rightButtonAction,
+				BoxPtr<typename BasicKeyAction<T>::Make>&& leftButtonAction,
+				BoxPtr<typename BasicKeyAction<T>::Make>&& rightButtonAction,
 				void (* startPointing)(sf::Vector2i mousePosition),
 				void (* finishPointing)(sf::Vector2i mousePosition)
 			);

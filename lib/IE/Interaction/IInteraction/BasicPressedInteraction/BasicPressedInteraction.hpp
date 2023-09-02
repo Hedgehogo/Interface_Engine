@@ -6,10 +6,10 @@
 
 namespace ie {
 	template<typename T = std::monostate>
-	class BasicPressedInteraction : public BasicOneKeyInteraction<T>, public IBasicBlockInteraction<T> {
+	class BasicPressedInteraction : public BasicOneKeyInteraction<T>, public virtual IBasicBlockInteraction<T> {
 	public:
-		struct Make : public BasicOneKeyInteraction<T>::Make, public IBasicBlockInteraction<T> {
-			Make(BoxPtr<BasicKeyAction<T> >&& action, Key key);
+		struct Make : public BasicOneKeyInteraction<T>::Make, public virtual IBasicBlockInteraction<T>::Make {
+			Make(BoxPtr<typename BasicKeyAction<T>::Make>&& action, Key key);
 			
 			BasicPressedInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
 		};

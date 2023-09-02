@@ -8,7 +8,7 @@ namespace ie {
 	namespace detail {
 		template<typename T = std::monostate>
 		struct BasicHotkeyInteractionHotkey {
-			BoxPtr<BasicKeysInteraction<T> > interaction;
+			BoxPtr<BasicKeysInteraction<T>> interaction;
 			uint state{std::numeric_limits<uint>::max()};
 			
 			struct Make {

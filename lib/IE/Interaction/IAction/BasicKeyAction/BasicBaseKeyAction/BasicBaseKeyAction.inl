@@ -1,9 +1,5 @@
 namespace ie {
 	template<typename T>
-	BasicBaseKeyAction<T>::BasicBaseKeyAction() : mousePosition({0, 0}) {
-	}
-	
-	template<typename T>
 	void BasicBaseKeyAction<T>::setPressed(bool pressed) {
 		if(this->pressed != pressed) {
 			this->pressed = pressed;

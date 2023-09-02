@@ -6,6 +6,16 @@
 namespace ie {
 	class HidePanelAction : public PanelAction {
 	public:
+		struct Make : public PanelAction::Make {
+			bool onlyOnParent = false;
+			
+			Make(bool onlyOnParent = false);
+			
+			HidePanelAction* make(PanelActionInitInfo initInfo) override;
+		};
+		
+		HidePanelAction(Make&& make, PanelActionInitInfo initInfo);
+		
 		HidePanelAction(bool onlyOnParent = false);
 		
 		HidePanelAction* copy() override;

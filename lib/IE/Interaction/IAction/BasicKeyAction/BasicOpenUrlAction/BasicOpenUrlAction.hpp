@@ -9,6 +9,16 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicOpenUrlAction : public BasicBaseKeyAction<T> {
 	public:
+		struct Make : public BasicKeyAction<T>::Make {
+			std::string url;
+			
+			Make(const std::string& url);
+			
+			BasicOpenUrlAction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+		
+		BasicOpenUrlAction(Make&& make, BasicActionInitInfo<T> initInfo);
+		
 		explicit BasicOpenUrlAction(const std::string& url);
 		
 		BasicOpenUrlAction<T>* copy() override;

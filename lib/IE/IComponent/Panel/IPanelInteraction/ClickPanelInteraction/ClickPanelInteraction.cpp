@@ -2,7 +2,7 @@
 #include "../../IPanelManager/IPanelManager.hpp"
 
 namespace ie {
-	ClickPanelInteraction::ClickPanelInteraction(BoxPtr<PanelAction>&& action, Key key, PanelActionInitInfo initInfo) :
+	ClickPanelInteraction::ClickPanelInteraction(BoxPtr<PanelAction::Make>&& action, Key key, PanelActionInitInfo initInfo) :
 		BasicOneKeyInteraction<Panel&>({std::move(action), key}, initInfo) {
 	}
 	

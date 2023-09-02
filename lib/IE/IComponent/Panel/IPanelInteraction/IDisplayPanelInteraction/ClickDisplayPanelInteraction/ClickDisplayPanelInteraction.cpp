@@ -10,11 +10,11 @@ namespace ie {
 	}
 	
 	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Make&& make, PanelActionInitInfo initInfo) :
-		ClickPanelInteraction(makeBoxPtr<PanelAction, DisplayPanelAction>(), make.key, initInfo) {
+		ClickPanelInteraction(makeBoxPtr<DisplayPanelAction::Make>(), make.key, initInfo) {
 	}
 	
 	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Key key) :
-		ClickPanelInteraction(makeBoxPtr<PanelAction, DisplayPanelAction>(), key) {
+		ClickPanelInteraction(makeBoxPtr<DisplayPanelAction>(), key) {
 	}
 	
 	void ClickDisplayPanelInteraction::start(sf::Vector2i) {

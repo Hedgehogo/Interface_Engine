@@ -2,6 +2,16 @@
 
 namespace ie {
 	template<typename T>
+	BasicCloseWindowAction<T>* BasicCloseWindowAction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
+		return new BasicCloseWindowAction<T>{std::move(*this), initInfo};
+	}
+	
+	template<typename T>
+	BasicCloseWindowAction<T>::BasicCloseWindowAction(Make&&, BasicActionInitInfo<T> initInfo) :
+		window(&initInfo.window) {
+	}
+	
+	template<typename T>
 	BasicCloseWindowAction<T>::BasicCloseWindowAction() : window{nullptr}{
 	}
 	
@@ -11,7 +21,8 @@ namespace ie {
 	
 	template<typename T>
 	void BasicCloseWindowAction<T>::stopPressed() {
-		window->close();
+		if(window->isOpen())
+			window->close();
 	}
 	
 	template<typename T>

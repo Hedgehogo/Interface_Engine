@@ -6,16 +6,13 @@ namespace ie {
 	class BoxMovableBorder;
 	
 	class MovableBorderAction : public BasicBaseKeyAction<BoxMovableBorder&> {
-	protected:
-		void startPressed() override;
-		
-		void stopPressed() override;
-		
-		void whilePressed() override;
-		
-		void whileNotPressed() override;
-	
 	public:
+		struct Make : public BasicKeyAction<BoxMovableBorder&>::Make {
+			MovableBorderAction* make(BasicActionInitInfo<BoxMovableBorder&> initInfo) override;
+		};
+		
+		MovableBorderAction(Make&& make, BasicActionInitInfo<BoxMovableBorder&> initInfo);
+		
 		explicit MovableBorderAction();
 		
 		void init(BasicActionInitInfo<BoxMovableBorder&> initInfo) override;
@@ -25,6 +22,14 @@ namespace ie {
 		MovableBorderAction* copy() override;
 	
 	protected:
+		void startPressed() override;
+		
+		void stopPressed() override;
+		
+		void whilePressed() override;
+		
+		void whileNotPressed() override;
+		
 		BoxMovableBorder* box;
 		sf::Vector2i startMousePosition;
 		float startBorderValue;

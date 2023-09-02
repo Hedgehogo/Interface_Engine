@@ -28,9 +28,9 @@ namespace ie {
 	BoxMovableBorder::BoxMovableBorder(Make&& make, InitInfo initInfo) :
 		Box(make.minSize),
 		interactive(makeBoxPtr<BasicOneKeyInteraction<BoxMovableBorder&>::Make>(
-			makeBoxPtr<BasicAddBlockInteractionAction<BoxMovableBorder&> >(
-				makeBoxPtr<BasicPressedInteraction<BoxMovableBorder&> >(
-					makeBoxPtr<MovableBorderAction>(), make.key
+			makeBoxPtr<BasicAddBlockInteractionAction<BoxMovableBorder&>::Make>(
+				makeBoxPtr<BasicOneKeyInteraction<BoxMovableBorder&>::Make, BasicPressedInteraction<BoxMovableBorder&>::Make>(
+					makeBoxPtr<MovableBorderAction::Make>(), make.key
 				)
 			), make.key
 		), initInfo, *this),

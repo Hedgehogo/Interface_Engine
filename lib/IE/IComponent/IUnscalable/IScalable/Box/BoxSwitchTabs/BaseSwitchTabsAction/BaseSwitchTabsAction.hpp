@@ -4,15 +4,23 @@
 #include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 
 namespace ie {
-	class BaseSwitchTabsAction : public BaseKeyAction {
+	class BaseSwitchTabsAction : public BasicBaseKeyAction<BoxSwitchTabs&> {
 	public:
-		BaseSwitchTabsAction(BoxSwitchTabs* objects = nullptr);
+		struct Make : public BasicBaseKeyAction<BoxSwitchTabs&>::Make {
+			BaseSwitchTabsAction* make(BasicActionInitInfo<BoxSwitchTabs&> initInfo) override = 0;
+		};
 		
-		virtual void setObject(BoxSwitchTabs* object);
+		BaseSwitchTabsAction(BasicActionInitInfo<BoxSwitchTabs&> initInfo);
 		
-		virtual BoxSwitchTabs* getObject();
+		BaseSwitchTabsAction();
+		
+		void init(BasicActionInitInfo<BoxSwitchTabs&> initInfo) override;
+		
+		virtual void setBox(BoxSwitchTabs& box);
+		
+		virtual BoxSwitchTabs& getBox();
 	
 	protected:
-		BoxSwitchTabs* object;
+		BoxSwitchTabs* box;
 	};
 }

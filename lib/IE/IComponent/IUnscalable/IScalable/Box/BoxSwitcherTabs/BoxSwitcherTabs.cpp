@@ -18,7 +18,7 @@ namespace ie {
 	BoxSwitcherTabs::BoxSwitcherTabs(Make&& make, InitInfo initInfo) :
 		Box(make.minSize),
 		interactive(makeBoxPtr<BasicOneKeyInteraction<BoxSwitcherTabs&>::Make>(
-			makeBoxPtr<SwitcherTabsAction>(make.value), make.key
+			makeBoxPtr<SwitcherTabsAction::Make>(make.value), make.key
 		), initInfo, *this),
 		objects(mapMake(std::move(make.objects), initInfo)),
 		isHorizontal(make.isHorizontal),

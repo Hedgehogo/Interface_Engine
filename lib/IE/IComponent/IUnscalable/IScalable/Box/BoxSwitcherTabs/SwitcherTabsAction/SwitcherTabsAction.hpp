@@ -8,6 +8,16 @@ namespace ie {
 	
 	class SwitcherTabsAction : public BasicBaseKeyAction<BoxSwitcherTabs&> {
 	public:
+		struct Make : public BasicKeyAction<BoxSwitcherTabs&>::Make {
+			PISint value;
+			
+			Make(PISint value);
+			
+			SwitcherTabsAction* make(BasicActionInitInfo<BoxSwitcherTabs&> initInfo) override;
+		};
+		
+		SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> initInfo);
+		
 		SwitcherTabsAction(PISint value);
 		
 		void init(BasicActionInitInfo<BoxSwitcherTabs&> initInfo) override;

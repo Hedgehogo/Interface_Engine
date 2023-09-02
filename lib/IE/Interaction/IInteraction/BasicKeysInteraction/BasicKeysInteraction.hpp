@@ -9,11 +9,11 @@ namespace ie {
 	class BasicKeysInteraction : public virtual IBasicInteraction<T> {
 	public:
 		struct Make : public IBasicInteraction<T>::Make {
-			BoxPtr<BasicKeyAction<T> >&& action;
+			BoxPtr<typename BasicKeyAction<T>::Make>&& action;
 			std::vector<Key> keys;
 			std::vector<Key> blackListKeys = {};
 			
-			Make(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+			Make(BoxPtr<typename BasicKeyAction<T>::Make>&& action, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 			
 			BasicKeysInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
 		};

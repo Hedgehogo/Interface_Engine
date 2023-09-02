@@ -7,6 +7,12 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicCloseWindowAction : public BasicBaseKeyAction<T> {
 	public:
+		struct Make : public BasicKeyAction<T>::Make {
+			BasicCloseWindowAction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+		
+		BasicCloseWindowAction(Make&& make, BasicActionInitInfo<T> initInfo);
+		
 		BasicCloseWindowAction();
 		
 		void init(BasicActionInitInfo<T> initInfo) override;

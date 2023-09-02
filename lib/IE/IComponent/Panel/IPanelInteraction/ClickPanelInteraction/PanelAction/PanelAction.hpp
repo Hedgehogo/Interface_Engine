@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
-#include "../../PanelInteractionInitInfo/PanelInteractionInitInfo.hpp"
+#include "../../PanelActionInitInfo/PanelActionInitInfo.hpp"
 
 namespace ie {
 	class Panel;
@@ -10,6 +10,12 @@ namespace ie {
 	
 	class PanelAction : public BasicBaseKeyAction<Panel&> {
 	public:
+		struct Make : public BasicBaseKeyAction<Panel&>::Make {
+			PanelAction* make(PanelActionInitInfo initInfo) override = 0;
+		};
+		
+		PanelAction(PanelActionInitInfo initInfo);
+		
 		PanelAction();
 		
 		void init(PanelActionInitInfo initInfo) override;

@@ -31,9 +31,9 @@ namespace ie {
 	SliderInteraction::SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> initInfo) :
 		BasicOneKeyInteraction<BaseSlider&>(
 			{
-				makeBoxPtr<BasicKeyAction<BaseSlider&>, BasicAddBlockInteractionAction<BaseSlider&> >(
-					makeBoxPtr<IBasicInteraction<BaseSlider&>, BasicPressedInteraction<BaseSlider&> >(
-						makeBoxPtr<BasicKeyAction<BaseSlider&>, SliderAction>(make.division), make.key
+				makeBoxPtr<BasicAddBlockInteractionAction<BaseSlider&>::Make>(
+					makeBoxPtr<BasicOneKeyInteraction<BaseSlider&>::Make, BasicPressedInteraction<BaseSlider&>::Make>(
+						makeBoxPtr<SliderAction::Make>(make.division), make.key
 					)
 				), make.key
 			}, initInfo

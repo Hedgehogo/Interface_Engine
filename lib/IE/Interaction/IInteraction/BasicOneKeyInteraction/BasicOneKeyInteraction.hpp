@@ -9,10 +9,10 @@ namespace ie {
 	class BasicOneKeyInteraction : public virtual IBasicInteraction<T> {
 	public:
 		struct Make : public IBasicInteraction<T>::Make {
-			BoxPtr<BasicKeyAction<T> > action;
+			BoxPtr<typename BasicKeyAction<T>::Make> action;
 			Key key;
 			
-			Make(BoxPtr<BasicKeyAction<T> >&& action, Key key);
+			Make(BoxPtr<typename BasicKeyAction<T>::Make>&& action, Key key);
 			
 			BasicOneKeyInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
 		};

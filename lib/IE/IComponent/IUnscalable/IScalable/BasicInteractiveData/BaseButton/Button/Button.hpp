@@ -7,9 +7,9 @@ namespace ie {
 	public:
 		struct Make : public IScalable::Make {
 			BoxPtr<IScalable::Make> background;
-			BoxPtr<IBaseInteraction> interaction;
+			BoxPtr<IBaseInteraction::Make> interaction;
 			
-			Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IBaseInteraction>&& interaction);
+			Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IBaseInteraction::Make>&& interaction);
 			
 			Button* make(InitInfo initInfo) override;
 		};

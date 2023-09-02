@@ -2,6 +2,17 @@
 #include "../../../../BasePanel/Panel/Panel.hpp"
 
 namespace ie {
+	HidePanelAction::Make::Make(bool onlyOnParent) : onlyOnParent(onlyOnParent) {
+	}
+	
+	HidePanelAction* HidePanelAction::Make::make(PanelActionInitInfo initInfo) {
+		return new HidePanelAction{std::move(*this), initInfo};
+	}
+	
+	HidePanelAction::HidePanelAction(Make&& make, PanelActionInitInfo initInfo) :
+		PanelAction(initInfo), onlyOnParent(make.onlyOnParent) {
+	}
+	
 	HidePanelAction::HidePanelAction(bool onlyOnParent) : onlyOnParent(onlyOnParent) {
 	}
 	

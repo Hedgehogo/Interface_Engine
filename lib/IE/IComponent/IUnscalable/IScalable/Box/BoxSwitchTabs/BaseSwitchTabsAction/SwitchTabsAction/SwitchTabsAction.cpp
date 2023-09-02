@@ -2,6 +2,25 @@
 #include "../../../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
+	SwitchTabsAction::Make::Make(uint index) : index(index) {
+	}
+	
+	SwitchTabsAction* SwitchTabsAction::Make::make(BasicActionInitInfo<BoxSwitchTabs&> initInfo) {
+		return new SwitchTabsAction{std::move(*this), initInfo};
+	}
+	
+	SwitchTabsAction::SwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> initInfo) :
+		BaseSwitchTabsAction(initInfo), index(make.index), value(box->getValue()) {
+	}
+	
+	SwitchTabsAction::SwitchTabsAction(uint index) : index(index), value(nullptr) {
+	}
+	
+	void SwitchTabsAction::init(BasicActionInitInfo<BoxSwitchTabs&> initInfo) {
+		BaseSwitchTabsAction::init(initInfo);
+		value = box->getValue();
+	}
+	
 	void SwitchTabsAction::startPressed() {
 	}
 	
@@ -15,18 +34,12 @@ namespace ie {
 	void SwitchTabsAction::whileNotPressed() {
 	}
 	
-	SwitchTabsAction::SwitchTabsAction(std::shared_ptr<SValue<uint>> value, uint index) : index(index), value(value) {
-	}
-	
 	SwitchTabsAction* SwitchTabsAction::copy() {
 		return new SwitchTabsAction{*this};
 	}
 	
 	bool DecodePointer<SwitchTabsAction>::decodePointer(const YAML::Node& node, SwitchTabsAction*& changeObjectAction) {
-		changeObjectAction = new SwitchTabsAction{
-			Buffer::get<SValue<uint>>(node["value"]),
-			convDef(node["index"], 0u)
-		};
+		changeObjectAction = new SwitchTabsAction{convDef(node["index"], 0u)};
 		return true;
 	}
 }

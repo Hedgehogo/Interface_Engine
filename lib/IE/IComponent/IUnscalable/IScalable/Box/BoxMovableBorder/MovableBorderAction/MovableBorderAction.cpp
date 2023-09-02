@@ -3,6 +3,14 @@
 #include "../BoxMovableBorder.hpp"
 
 namespace ie {
+	MovableBorderAction* MovableBorderAction::Make::make(BasicActionInitInfo<BoxMovableBorder&> initInfo) {
+		return new MovableBorderAction{std::move(*this), initInfo};
+	}
+	
+	MovableBorderAction::MovableBorderAction(Make&&, BasicActionInitInfo<BoxMovableBorder&> initInfo) :
+		box(&initInfo.additional) {
+	}
+	
 	MovableBorderAction::MovableBorderAction() : box(nullptr) {
 	}
 	
@@ -17,7 +25,6 @@ namespace ie {
 	void MovableBorderAction::startPressed() {
 		this->active = box->isInBorder(static_cast<sf::Vector2f>(mousePosition));
 		if(this->active) {
-			//std::cout << "Start\n";
 			startMousePosition = mousePosition;
 			startBorderValue = box->getBorderValueNow();
 		}
@@ -47,5 +54,4 @@ namespace ie {
 	
 	MovableBorderAction* MovableBorderAction::copy() {
 		return new MovableBorderAction{*this};
-	}
-}
+	}}

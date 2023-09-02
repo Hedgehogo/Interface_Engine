@@ -1,7 +1,7 @@
 #include "Button.hpp"
 
 namespace ie {
-	Button::Make::Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IBaseInteraction>&& interaction) :
+	Button::Make::Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IBaseInteraction::Make>&& interaction) :
 		background(std::move(background)), interaction(std::move(interaction)) {
 	}
 	

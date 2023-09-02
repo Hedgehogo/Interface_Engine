@@ -7,6 +7,14 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicAddBlockInteractionAction : public BasicAddInteractionAction<T> {
 	public:
+		struct Make : public BasicAddInteractionAction<T>::Make {
+			Make(BoxPtr<typename IBasicInteraction<T>::Make>&& interaction);
+			
+			BasicAddBlockInteractionAction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+		
+		BasicAddBlockInteractionAction(Make&& make, BasicActionInitInfo<T> initInfo);
+		
 		explicit BasicAddBlockInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
 		
 		BasicAddBlockInteractionAction<T>* copy() override;

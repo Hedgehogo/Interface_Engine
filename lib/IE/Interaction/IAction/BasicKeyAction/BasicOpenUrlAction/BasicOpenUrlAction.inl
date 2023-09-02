@@ -2,6 +2,20 @@
 
 namespace ie {
 	template<typename T>
+	BasicOpenUrlAction<T>::Make::Make(const std::string& url) : url(url) {
+	}
+	
+	template<typename T>
+	BasicOpenUrlAction<T>* BasicOpenUrlAction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
+		return new BasicOpenUrlAction<T>{std::move(*this), initInfo};
+	}
+	
+	template<typename T>
+	BasicOpenUrlAction<T>::BasicOpenUrlAction(Make&& make, BasicActionInitInfo<T>) :
+		url(std::move(make.url)) {
+	}
+	
+	template<typename T>
 	BasicOpenUrlAction<T>::BasicOpenUrlAction(const std::string& url) : url(url) {
 	}
 	

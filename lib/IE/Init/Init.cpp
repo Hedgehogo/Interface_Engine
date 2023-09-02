@@ -80,11 +80,12 @@ namespace ie {
 		
 		inherit<KeyAction, OpenUrlAction>({"OpenUrlA"});
 		inherit<KeyAction, CloseWindowAction>({"CloseWindowA"});
-		inherit<KeyAction, SwitchTabsAction>({"SwitchTabsA"});
-		inherit<KeyAction, WhileSwitchTabsAction>({"WhileSwitchTabsA"});
 		inherit<KeyAction, SwitcherAction>({"SwitcherA", });
 		inherit<KeyAction, SetSIntAction>({"SetSIntA"});
 		inherit<KeyAction, SetSFloatAction>({"SetSFloatA"});
+		
+		inherit<BaseSwitchTabsAction, SwitchTabsAction>({"SwitchTabsA"});
+		inherit<BaseSwitchTabsAction, WhileSwitchTabsAction>({"WhileSwitchTabsA"});
 		
 		inherit<TextAction, TextCopyAction>({"TextCopyA"});
 		inherit<TextAction, TextSelectionAction>({"TextSelectionA"});
