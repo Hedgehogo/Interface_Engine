@@ -2,6 +2,21 @@
 #include "../BaseSlider.hpp"
 
 namespace ie {
+	SliderWheelAction::Make::Make(bool horizontal, SliderWheelAction::Relativity relativity, sf::Vector2f sensitivity) :
+		horizontal(horizontal), relativity(relativity), sensitivity(sensitivity) {
+	}
+	
+	SliderWheelAction* SliderWheelAction::Make::make(BasicActionInitInfo<BaseSlider&> initInfo) {
+		return new SliderWheelAction{std::move(*this), initInfo};
+	}
+	
+	SliderWheelAction::SliderWheelAction(Make&& make, BasicActionInitInfo<BaseSlider&> initInfo) :
+		slider(&initInfo.additional),
+		sensitivity(make.sensitivity),
+		horizontal(make.horizontal),
+		relativity(make.relativity == Relativity::relationSlider) {
+	}
+	
 	SliderWheelAction::SliderWheelAction(bool horizontal, Relativity relativity, sf::Vector2f sensitivity) :
 		sensitivity(sensitivity), horizontal(horizontal), relativity(relativity == Relativity::relationSlider) {
 	}

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/Interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
 #include "IE/Interaction/IAction/WheelAction/BaseWheelAction/BaseWheelAction.hpp"
 
 namespace ie {
@@ -12,6 +13,18 @@ namespace ie {
 			relationSlider
 		};
 	
+		struct Make {
+			bool horizontal = false;
+			Relativity relativity = Relativity::relationSlider;
+			sf::Vector2f sensitivity = {0.2f, 0.2f};
+			
+			Make(bool horizontal = false, Relativity relativity = Relativity::relationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
+			
+			SliderWheelAction* make(BasicActionInitInfo<BaseSlider&> initInfo);
+		};
+		
+		SliderWheelAction(Make&& make, BasicActionInitInfo<BaseSlider&> initInfo);
+		
 		explicit SliderWheelAction(bool horizontal = false, Relativity relativity = Relativity::relationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
 		
 		void setSlider(BaseSlider& slider);

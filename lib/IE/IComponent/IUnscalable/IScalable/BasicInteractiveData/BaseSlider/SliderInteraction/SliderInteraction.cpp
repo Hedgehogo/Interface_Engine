@@ -38,8 +38,7 @@ namespace ie {
 				), make.key
 			}, initInfo
 		),
-		wheelAction(make.wheelHorizontal, make.wheelRelativity, make.wheelSensitivity) {
-		wheelAction.setSlider(initInfo.additional);
+		wheelAction({make.wheelHorizontal, make.wheelRelativity, make.wheelSensitivity}, initInfo) {
 	}
 	
 	SliderInteraction::SliderInteraction(
