@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "../iDrawable/IDrawable.hpp"
+#include "../IDrawable/IDrawable.hpp"
 
 namespace ie {
 	class DrawManager : public IDrawable {

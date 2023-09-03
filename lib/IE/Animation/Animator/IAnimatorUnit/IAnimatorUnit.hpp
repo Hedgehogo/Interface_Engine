@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../Modules/yaml-Animation/buffer.hpp"
+#include "IE/Modules/yaml-animation/buffer.hpp"
 #include "IE/Modules/yaml-cpp/shared/value/general/sValue.hpp"
 
 namespace ie {

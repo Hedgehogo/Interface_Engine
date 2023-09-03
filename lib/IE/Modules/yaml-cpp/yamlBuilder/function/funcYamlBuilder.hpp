@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Empty/emptyYamlBuilder.hpp"
+#include "../empty/emptyYamlBuilder.hpp"
 
 namespace ie::detail {
 	class FuncYamlBuilder : public IYamlBuilder {
