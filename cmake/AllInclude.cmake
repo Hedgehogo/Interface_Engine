@@ -1,0 +1,5 @@
+file(GLOB cmakeFiles "cmake/*.cmake")
+list(REMOVE_ITEM cmakeFiles ${CMAKE_CURRENT_LIST_FILE})
+foreach ( cmakeFile IN LISTS cmakeFiles )
+    include(${cmakeFile})
+endforeach ()
