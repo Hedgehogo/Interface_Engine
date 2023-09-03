@@ -1,0 +1,2 @@
+#define SOURCES "${all_sources}"
+#define INCLUDE_DIRS "${all_include_dirs}"

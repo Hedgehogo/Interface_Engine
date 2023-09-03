@@ -17,8 +17,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-dependency_management()
-configure_dependency(${PROJECT_NAME})
+dependency_management(${PROJECT_NAME})
 
 add_executable(${PROJECT_NAME}_ex main.cpp)
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})
@@ -26,6 +25,7 @@ set_target_properties(${PROJECT_NAME}_ex PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${C
 
 add_subdirectory(example-resources/modules)
 
-create_tests()
-
+create_tests(${PROJECT_NAME})
 create_install_target()
+
+projects_checking("${PROJECT_NAME};${PROJECT_NAME}_tests")

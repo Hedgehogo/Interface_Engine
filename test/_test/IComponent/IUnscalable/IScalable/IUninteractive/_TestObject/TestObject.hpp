@@ -1,6 +1,6 @@
 #pragma once
 
-#include <IE/IComponent/iLayout/ILayout.hpp>
+#include <IE/IComponent/ILayout/ILayout.hpp>
 #include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
 
 template<typename T = ie::IUninteractive::Make>

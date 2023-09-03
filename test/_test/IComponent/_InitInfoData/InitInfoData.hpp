@@ -5,7 +5,7 @@
 #include <IE/IDrawable/DrawManager/DrawManager.hpp>
 #include <IE/IUpdatable/UpdateManager/UpdateManager.hpp>
 #include <IE/Interaction/InteractionManager/InteractionManager.hpp>
-#include <IE/Interaction/interactionStack/InteractionStack.hpp>
+#include <IE/Interaction/InteractionStack/InteractionStack.hpp>
 #include <IE/IComponent/Panel/IPanelManager/PanelManager/PanelManager.hpp>
 #include <IE/IComponent/InitInfo/InitInfo.hpp>
 

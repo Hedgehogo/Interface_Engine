@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.11)
 include(FetchContent)
 
+include(cmake/ConfigureDependency.cmake)
+
 function(connect_ImageMagick)
     find_package(ImageMagick COMPONENTS Magick++ MagickCore)
 
@@ -16,6 +18,8 @@ function(connect_ImageMagick)
     endif()
 
     message("<=================[ImageMagick]=================>")
+
+    configure_file(lib/config.h.in lib/config.h)
 endfunction()
 
 function(connect_yaml_cpp)
@@ -41,7 +45,7 @@ function(connect_yaml_cpp)
     add_subdirectory(${yaml-cpp_SOURCE_DIR})
 endfunction()
 
-function(dependency_management)
+function(dependency_management PROJECT)
     FetchContent_Declare(
             SFML
             GIT_REPOSITORY https://github.com/SFML/SFML.git
@@ -70,4 +74,6 @@ function(dependency_management)
 
     connect_yaml_cpp()
     connect_ImageMagick()
+
+    configure_dependency(${PROJECT})
 endfunction()

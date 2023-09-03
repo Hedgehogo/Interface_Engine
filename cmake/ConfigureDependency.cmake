@@ -1,5 +1,5 @@
 function(configure_dependency PROJECT)
-    set(libraries
+    set(libs
             sfml-graphics sfml-system sfml-window
             yaml-cpp
             libcurl
@@ -8,11 +8,11 @@ function(configure_dependency PROJECT)
             openLib
     )
 
-    foreach(lib IN LISTS libraries)
+    foreach(lib IN LISTS libs)
         set_target_properties(${lib} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
     endforeach()
 
-    target_link_libraries(${PROJECT} PUBLIC ${lib})
+    target_link_libraries(${PROJECT} PUBLIC ${libs})
 
     target_include_directories(${PROJECT} PUBLIC ${ImageMagick_INCLUDE_DIRS})
 endfunction()

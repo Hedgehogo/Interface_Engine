@@ -1,0 +1,40 @@
+function(get_target_include_directories target result)
+    get_target_property(includes ${target} INCLUDE_DIRECTORIES)
+    list(APPEND ${result} ${includes})
+
+    get_target_property(interface_includes ${target} INTERFACE_INCLUDE_DIRECTORIES)
+    list(APPEND ${result} ${interface_includes})
+
+    get_target_property(dependencies ${target} INTERFACE_LINK_LIBRARIES)
+    foreach(dependency IN LISTS dependencies)
+        if(TARGET ${dependency})
+            get_target_include_directories(${dependency} dependency_includes)
+            list(APPEND ${result} ${dependency_includes})
+        endif ()
+    endforeach()
+    set(${result} ${${result}} PARENT_SCOPE)
+endfunction()
+
+function(generate_data project)
+    #get_target_property(include_dirs ${project} INCLUDE_DIRECTORIES)
+    get_target_property(sources ${project} SOURCES)
+    get_target_include_directories(${project} include_dirs)
+
+    set(sources ${sources} PARENT_SCOPE)
+    set(include_dirs ${include_dirs} PARENT_SCOPE)
+endfunction()
+
+function(projects_checking projects)
+    set(all_sources "")
+    set(all_include_dirs "")
+    foreach (project IN LISTS projects)
+        generate_data(${project})
+        list(APPEND all_sources ${sources})
+        list(APPEND all_include_dirs ${include_dirs})
+    endforeach ()
+
+    configure_file(code-checking/config.hpp.in code-checking/config.hpp)
+
+    add_executable(code_checking code-checking/main.cpp)
+    target_include_directories(code_checking PRIVATE ${CMAKE_BINARY_DIR}/code-checking/)
+endfunction()
