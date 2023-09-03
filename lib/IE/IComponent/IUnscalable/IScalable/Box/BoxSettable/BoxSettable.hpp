@@ -6,9 +6,9 @@
 #include "../../../../Panel/IPanelManager/PanelManagerInterceptor/PanelManagerInterceptor.hpp"
 
 namespace ie {
-	class BoxSettable : public Box, public ILayoutObject, public IDrawable, public IUpdatable {
+	class BoxSettable : public Box, public virtual ILayoutObject, public virtual IDrawable, public virtual IUpdatable {
 	public:
-		struct Make : public Box::Make, public ILayoutObject::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutObject::Make {
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f minSize = {};
 			

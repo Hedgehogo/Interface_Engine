@@ -6,7 +6,7 @@
 #include "IE/Modules/yaml-cpp/buffer/buffer.hpp"
 
 namespace ie {
-	class Animation : public IAnimatorUnit {
+	class Animation : public virtual IAnimatorUnit {
 	public:
 		struct Variable {
 			PSfloat animationVariable;

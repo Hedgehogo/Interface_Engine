@@ -6,9 +6,9 @@
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	class BoxSwitcherTabs : public Box, public IUpdatable, public ILayoutObjectsArray {
+	class BoxSwitcherTabs : public Box, public virtual ILayoutObjectsArray, public virtual IUpdatable {
 	public:
-		struct Make : public Box::Make, public ILayoutObjectsArray::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
 			PSint value;
 			Key key;

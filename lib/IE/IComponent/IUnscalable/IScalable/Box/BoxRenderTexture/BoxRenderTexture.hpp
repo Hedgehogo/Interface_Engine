@@ -4,9 +4,9 @@
 #include "../../../../ILayout/ILayoutObject/ILayoutObject.hpp"
 
 namespace ie {
-	class BoxRenderTexture : public Box, public ILayoutObject, public IDrawable {
+	class BoxRenderTexture : public Box, public virtual ILayoutObject, public virtual IDrawable {
 	public:
-		struct Make : public Box::Make, public ILayoutObject::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutObject::Make {
 			BoxPtr<IScalable::Make> object;
 			bool optimize = true;
 			sf::Vector2f minSize = {};

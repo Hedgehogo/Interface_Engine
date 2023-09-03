@@ -5,9 +5,9 @@
 #include "../../../../ILayout/ILayoutObject/ILayoutObject.hpp"
 
 namespace ie {
-	class BoxPanel : public Box, public ILayoutObject {
+	class BoxPanel : public Box, public virtual ILayoutObject {
 	public:
-		struct Make : public Box::Make, public ILayoutObject::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutObject::Make {
 			BoxPtr<ConstPanel::Make> panel;
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f minSize = {};

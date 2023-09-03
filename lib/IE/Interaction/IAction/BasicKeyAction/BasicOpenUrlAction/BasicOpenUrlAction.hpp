@@ -9,7 +9,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicOpenUrlAction : public BasicBaseKeyAction<T> {
 	public:
-		struct Make : public BasicKeyAction<T>::Make {
+		struct Make : public virtual BasicKeyAction<T>::Make {
 			std::string url;
 			
 			Make(const std::string& url);

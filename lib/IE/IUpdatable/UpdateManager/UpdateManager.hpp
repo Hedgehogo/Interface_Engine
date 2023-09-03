@@ -4,7 +4,7 @@
 #include "../IUpdatable/IUpdatable.hpp"
 
 namespace ie {
-	class UpdateManager : public IUpdatable {
+	class UpdateManager : public virtual IUpdatable {
 	public:
 		UpdateManager() = default;
 		

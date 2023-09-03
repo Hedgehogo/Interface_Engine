@@ -7,9 +7,9 @@
 #include "../../../../../Enums/Corner/Corner.hpp"
 
 namespace ie {
-	class BoxConstRatio : public Box, public ILayoutBackground, public ILayoutTwoObjects, public IDrawable {
+	class BoxConstRatio : public Box, public virtual ILayoutBackground, public virtual ILayoutTwoObjects, public virtual IDrawable {
 	public:
-		struct Make : public Box::Make, public ILayoutBackground::Make, public ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutBackground::Make, public virtual ILayoutTwoObjects::Make {
 			BoxPtr<IScalable::Make> constObject;
 			BoxPtr<IScalable::Make> secondObject;
 			BoxPtr<IUninteractive::Make> background;

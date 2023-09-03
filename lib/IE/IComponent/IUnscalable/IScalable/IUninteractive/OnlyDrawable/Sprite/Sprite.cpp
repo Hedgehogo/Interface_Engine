@@ -55,9 +55,6 @@ namespace ie {
 		return {static_cast<float>(sprite.getTextureRect().width), static_cast<float>(sprite.getTextureRect().height)};
 	}
 	
-	Sprite::Sprite(sf::Sprite sprite, sf::Vector2f minSize) : sprite(sprite), minimumSize(minSize) {
-	}
-	
 	Sprite* Sprite::copy() {
 		return new Sprite{*this};
 	}

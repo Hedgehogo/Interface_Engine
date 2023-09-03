@@ -8,7 +8,7 @@
 namespace ie {
 	class SliderInteraction : public BasicOneKeyInteraction<BaseSlider&> {
 	public:
-		struct Make : public IBasicInteraction<BaseSlider&>::Make {
+		struct Make : public virtual IBasicInteraction<BaseSlider&>::Make {
 			Key key;
 			sf::Vector2i division;
 			bool wheelHorizontal;

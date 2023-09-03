@@ -8,7 +8,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicKeysInteraction : public virtual IBasicInteraction<T> {
 	public:
-		struct Make : public IBasicInteraction<T>::Make {
+		struct Make : public virtual IBasicInteraction<T>::Make {
 			BoxPtr<typename BasicKeyAction<T>::Make>&& action;
 			std::vector<Key> keys;
 			std::vector<Key> blackListKeys = {};

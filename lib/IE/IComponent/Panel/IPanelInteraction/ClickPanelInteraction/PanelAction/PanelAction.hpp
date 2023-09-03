@@ -10,7 +10,7 @@ namespace ie {
 	
 	class PanelAction : public BasicBaseKeyAction<Panel&> {
 	public:
-		struct Make : public BasicBaseKeyAction<Panel&>::Make {
+		struct Make : public virtual BasicKeyAction<Panel&>::Make {
 			PanelAction* make(PanelActionInitInfo initInfo) override = 0;
 		};
 		

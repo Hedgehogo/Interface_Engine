@@ -7,9 +7,9 @@
 #include "../../../../../Enums/Side/Side.hpp"
 
 namespace ie {
-	class BoxConstBorder : public Box, public ILayoutTwoObjects {
+	class BoxConstBorder : public Box, public virtual ILayoutTwoObjects {
 	public:
-		struct Make : public Box::Make, public ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutTwoObjects::Make {
 			BoxPtr<IScalable::Make> constObject;
 			BoxPtr<IScalable::Make> secondObject;
 			float borderDistance;

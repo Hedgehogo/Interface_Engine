@@ -4,9 +4,9 @@
 #include "../../ISizing/ISizing.hpp"
 
 namespace ie {
-	class ConstRatioSizing2 : public ISizing2 {
+	class ConstRatioSizing2 : public virtual ISizing2 {
 	public:
-		struct Make : public ISizing2::Make {
+		struct Make : public virtual ISizing2::Make {
 			BoxPtr<ISizing::Make> sizing;
 			float ratio;
 			bool horizontal;

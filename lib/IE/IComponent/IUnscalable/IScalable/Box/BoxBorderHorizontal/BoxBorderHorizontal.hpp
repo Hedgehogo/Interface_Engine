@@ -5,9 +5,9 @@
 #include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 
 namespace ie {
-	class BoxBorderHorizontal : public Box, public ILayoutObjectsArray {
+	class BoxBorderHorizontal : public Box, public virtual ILayoutObjectsArray {
 	public:
-		struct Make : public Box::Make, public ILayoutObjectsArray::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
 			std::vector<float> bounds;
 			sf::Vector2f minSize = {};

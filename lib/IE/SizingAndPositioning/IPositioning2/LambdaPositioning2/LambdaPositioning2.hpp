@@ -3,9 +3,9 @@
 #include "../IPositioning2.hpp"
 
 namespace ie {
-	class LambdaPositioning2 : public IPositioning2 {
+	class LambdaPositioning2 : public virtual IPositioning2 {
 	public:
-		struct Make : public IPositioning2::Make {
+		struct Make : public virtual IPositioning2::Make {
 			sf::Vector2f (* findPosition)(sf::Vector2f, sf::Vector2f, sf::Vector2f, sf::Vector2f);
 			
 			Make(sf::Vector2f (* findPosition)(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize, sf::Vector2f targetSize));

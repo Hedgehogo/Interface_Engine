@@ -37,7 +37,7 @@ namespace ie {
 	};
 	
 	template<typename T = std::monostate>
-	class IBasicInteraction : public IInteraction {
+	class IBasicInteraction : public virtual IInteraction {
 	public:
 		struct Make {
 			virtual IBasicInteraction<T>* make(BasicActionInitInfo<T> initInfo) = 0;

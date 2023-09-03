@@ -5,9 +5,9 @@
 #include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
-	class PointingDisplayPanelInteraction : public BasePanelInteraction, public IDisplayPanelInteraction {
+	class PointingDisplayPanelInteraction : public BasePanelInteraction, public virtual IDisplayPanelInteraction {
 	public:
-		struct Make : public IDisplayPanelInteraction::Make {
+		struct Make : public virtual IDisplayPanelInteraction::Make {
 			PointingDisplayPanelInteraction* make(PanelActionInitInfo initInfo) override;
 		};
 		

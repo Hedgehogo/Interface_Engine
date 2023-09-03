@@ -4,7 +4,7 @@
 #include "../../reference/sReferenceValue.hpp"
 
 namespace ie {
-	class SReferenceCoefficientValue : public ISCoefficientValue, public SReferenceValue<float> {
+	class SReferenceCoefficientValue : public SReferenceValue<float>, public virtual ISCoefficientValue {
 	public:
 		explicit SReferenceCoefficientValue(float& value);
 		

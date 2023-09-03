@@ -4,7 +4,7 @@
 
 namespace ie {
 	template<typename T>
-	class SList : public ISList {
+	class SList : public virtual ISList {
 	protected:
 		void set();
 	

@@ -4,9 +4,9 @@
 #include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 
 namespace ie {
-	class BoxAlternative : public Box, public ILayoutTwoObjects {
+	class BoxAlternative : public Box, public virtual ILayoutTwoObjects {
 	public:
-		struct Make : public Box::Make, public ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutTwoObjects::Make {
 			BoxPtr<IScalable::Make> topObject;
 			BoxPtr<IScalable::Make> bottomObject;
 			sf::Vector2f minSize = {};

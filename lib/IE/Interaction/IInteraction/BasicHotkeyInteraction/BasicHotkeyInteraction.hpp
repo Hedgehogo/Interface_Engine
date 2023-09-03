@@ -8,7 +8,7 @@ namespace ie {
 	namespace detail {
 		template<typename T = std::monostate>
 		struct BasicHotkeyInteractionHotkey {
-			BoxPtr<BasicKeysInteraction<T>> interaction;
+			BoxPtr<BasicKeysInteraction<T> > interaction;
 			uint state{std::numeric_limits<uint>::max()};
 			
 			struct Make {
@@ -36,7 +36,7 @@ namespace ie {
 	public:
 		using Hotkey = detail::BasicHotkeyInteractionHotkey<T>;
 		
-		struct Make : public IBasicInteraction<T>::Make {
+		struct Make : public virtual IBasicInteraction<T>::Make {
 			std::vector<std::vector<BoxPtr<typename Hotkey::Make> > >&& hotkeys;
 			uint state = 0;
 			

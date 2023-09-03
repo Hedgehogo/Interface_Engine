@@ -3,7 +3,7 @@
 #include "../IPositioning.hpp"
 
 namespace ie {
-	class MatchTargetPositioning : public IPositioning {
+	class MatchTargetPositioning : public virtual IPositioning {
 	public:
 		MatchTargetPositioning(float targetCoefficient, float objectCoefficient, float offset = 0);
 		

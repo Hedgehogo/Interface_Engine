@@ -4,9 +4,9 @@
 #include "IE/IComponent/ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 
 namespace ie {
-	class BoxSwitch : public Box, public ILayoutTwoObjects, public IDrawable {
+	class BoxSwitch : public Box, public virtual ILayoutTwoObjects, public virtual IDrawable {
 	public:
-		struct Make : public Box::Make, public ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutTwoObjects::Make {
 			BoxPtr<IScalable::Make> inactiveObject;
 			BoxPtr<IScalable::Make> activeObject;
 			PSbool value;

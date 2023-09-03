@@ -4,9 +4,9 @@
 #include "../../../../ILayout/ILayoutObject/ILayoutObject.hpp"
 
 namespace ie {
-	class BoxMakePermeable : public Box, public ILayoutObject {
+	class BoxMakePermeable : public Box, public virtual ILayoutObject {
 	public:
-		struct Make : public Box::Make, public ILayoutObject::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutObject::Make {
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f minSize = {};
 			

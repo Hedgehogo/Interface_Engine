@@ -3,7 +3,7 @@
 #include "../IChangeVariable.hpp"
 
 namespace ie {
-	class ChangeVariableByCurve : public IChangeVariable {
+	class ChangeVariableByCurve : public virtual IChangeVariable {
 	public:
 		ChangeVariableByCurve(float k1, float k2, float size = 1, sf::Vector2f start = {0, 0}, sf::Vector2f end = {1, 1});
 	

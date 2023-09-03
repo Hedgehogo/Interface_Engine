@@ -9,9 +9,9 @@
 #include "IE/Modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 
 namespace ie {
-	class BoxMovableBorder : public Box, public IUpdatable, public ILayoutTwoObjects {
+	class BoxMovableBorder : public Box, public virtual ILayoutTwoObjects, public virtual IUpdatable {
 	public:
-		struct Make : public Box::Make, public ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutTwoObjects::Make {
 			BoxPtr<IScalable::Make> firstObject;
 			BoxPtr<IScalable::Make> secondObject;
 			bool isHorizontalBorder;

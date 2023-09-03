@@ -4,9 +4,9 @@
 #include "../../../../ILayout/ILayoutObjectsArray/ILayoutObjectsArray.hpp"
 
 namespace ie {
-	class BoxSwitchTabs : public Box, public ILayoutObjectsArray, public IDrawable {
+	class BoxSwitchTabs : public Box, public virtual ILayoutObjectsArray, public virtual IDrawable {
 	public:
-		struct Make : public Box::Make, public ILayoutObjectsArray::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
 			PSValue<uint> value;
 			sf::Vector2f minSize = {};

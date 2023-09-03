@@ -7,9 +7,9 @@
 #include "../../../../../Interaction/InteractionManager/InteractionManager.hpp"
 
 namespace ie {
-	class BoxConstBezel : public Box, public ILayoutObject {
+	class BoxConstBezel : public Box, public virtual ILayoutObject {
 	public:
-		struct Make : public Box::Make, public ILayoutObject::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutObject::Make {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<IUninteractive::Make> bezel;
 			float thickness;

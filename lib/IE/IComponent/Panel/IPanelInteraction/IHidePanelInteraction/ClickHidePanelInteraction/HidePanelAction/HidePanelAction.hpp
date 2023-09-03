@@ -6,7 +6,7 @@
 namespace ie {
 	class HidePanelAction : public PanelAction {
 	public:
-		struct Make : public PanelAction::Make {
+		struct Make : public virtual PanelAction::Make {
 			bool onlyOnParent = false;
 			
 			Make(bool onlyOnParent = false);

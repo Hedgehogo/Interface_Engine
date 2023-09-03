@@ -7,7 +7,7 @@ namespace ie {
 	
 	class MovableBorderAction : public BasicBaseKeyAction<BoxMovableBorder&> {
 	public:
-		struct Make : public BasicKeyAction<BoxMovableBorder&>::Make {
+		struct Make : public virtual BasicKeyAction<BoxMovableBorder&>::Make {
 			MovableBorderAction* make(BasicActionInitInfo<BoxMovableBorder&> initInfo) override;
 		};
 		

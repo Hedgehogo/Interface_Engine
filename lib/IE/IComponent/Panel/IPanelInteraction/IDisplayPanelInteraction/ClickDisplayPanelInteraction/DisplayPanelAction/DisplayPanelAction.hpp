@@ -6,7 +6,7 @@
 namespace ie {
 	class DisplayPanelAction : public PanelAction {
 	public:
-		struct Make : public PanelAction::Make {
+		struct Make : public virtual PanelAction::Make {
 			DisplayPanelAction* make(PanelActionInitInfo initInfo) override;
 		};
 		

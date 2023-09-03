@@ -5,7 +5,7 @@
 namespace ie {
 	class ConstPanel : public BasePanel {
 	public:
-		struct Make : public BasePanel::Make {
+		struct Make : public virtual BasePanel::Make {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<ISizing2::Make> sizing;
 			BoxPtr<IPositioning2::Make> positioning;

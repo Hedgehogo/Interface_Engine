@@ -3,9 +3,9 @@
 #include "../ISizing2.hpp"
 
 namespace ie {
-	class LambdaSizing2 : public ISizing2 {
+	class LambdaSizing2 : public virtual ISizing2 {
 	public:
-		struct Make : public ISizing2::Make {
+		struct Make : public virtual ISizing2::Make {
 			sf::Vector2f (* findSize)(sf::Vector2f, sf::Vector2f, sf::Vector2f);
 			sf::Vector2f (* getParentMinSize)(sf::Vector2f);
 			

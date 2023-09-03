@@ -6,7 +6,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicLambdaInteraction : public virtual IBasicInteraction<T> {
 	public:
-		struct Make : public IBasicInteraction<T>::Make {
+		struct Make : public virtual IBasicInteraction<T>::Make {
 			void (* startPointing)(sf::Vector2i);
 			void (* finishPointing)(sf::Vector2i);
 			

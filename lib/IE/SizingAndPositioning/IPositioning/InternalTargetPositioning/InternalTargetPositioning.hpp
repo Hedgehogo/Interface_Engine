@@ -3,7 +3,7 @@
 #include "../IPositioning.hpp"
 
 namespace ie {
-	class InternalTargetPositioning : public IPositioning {
+	class InternalTargetPositioning : public virtual IPositioning {
 	public:
 		explicit InternalTargetPositioning(float coefficient, float offset = 0);
 		

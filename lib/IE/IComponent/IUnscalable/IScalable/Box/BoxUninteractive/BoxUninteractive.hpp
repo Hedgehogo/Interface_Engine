@@ -5,9 +5,9 @@
 #include "../Box.hpp"
 
 namespace ie {
-	class BoxUninteractive : public Box, public IUninteractive, public ILayoutObject {
+	class BoxUninteractive : public Box, public virtual IUninteractive, public virtual ILayoutObject {
 	public:
-		struct Make : public Box::Make, public ILayoutObject::Make {
+		struct Make : public virtual Box::Make, public virtual IUninteractive::Make, public virtual ILayoutObject::Make {
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f minSize = {};
 			

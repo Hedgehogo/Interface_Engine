@@ -6,7 +6,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicLambdaKeyAction : public BasicBaseKeyAction<T> {
 	public:
-		struct Make : public BasicKeyAction<T>::Make {
+		struct Make : public virtual BasicKeyAction<T>::Make {
 			void (* startPressedLambda)(sf::Vector2i mousePosition);
 			void (* whilePressedLambda)(sf::Vector2i mousePosition);
 			void (* stopPressedLambda)(sf::Vector2i mousePosition);

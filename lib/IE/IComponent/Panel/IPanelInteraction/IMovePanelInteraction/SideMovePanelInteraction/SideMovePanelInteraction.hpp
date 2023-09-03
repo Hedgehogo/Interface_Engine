@@ -4,9 +4,9 @@
 #include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
-	class SideMovePanelInteraction : public BasePanelInteraction, public IMovePanelInteraction {
+	class SideMovePanelInteraction : public BasePanelInteraction, public virtual IMovePanelInteraction {
 	public:
-		struct Make : public IMovePanelInteraction::Make {
+		struct Make : public virtual IMovePanelInteraction::Make {
 			float coefficient;
 			float offset;
 			bool horizontal;

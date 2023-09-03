@@ -6,7 +6,7 @@
 namespace ie {
 	class VideoFromTexture : public OnlyDrawable {
 	public:
-		struct Make : public IUninteractive::Make {
+		struct Make : public virtual IUninteractive::Make {
 			BoxPtr<IScalable::Make> object;
 			const sf::Texture& texture;
 			PSCoefficient viewingProgress;

@@ -5,9 +5,9 @@
 
 namespace ie {
 	template<typename T = std::monostate>
-	class BasicMouseLambdaInteraction : public BasicLambdaInteraction<T>, public IBasicMouseInteraction<T> {
+	class BasicMouseLambdaInteraction : public BasicLambdaInteraction<T>, public virtual IBasicMouseInteraction<T> {
 	public:
-		struct Make : public BasicLambdaInteraction<T>::Make, public IBasicInteraction<T>::Make {
+		struct Make : public BasicLambdaInteraction<T>::Make, public virtual IBasicInteraction<T>::Make {
 			BoxPtr<typename BasicKeyAction<T>::Make> leftButtonAction;
 			BoxPtr<typename BasicKeyAction<T>::Make> rightButtonAction;
 			

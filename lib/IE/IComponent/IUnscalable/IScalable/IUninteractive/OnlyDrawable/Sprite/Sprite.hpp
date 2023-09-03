@@ -7,7 +7,7 @@
 namespace ie {
 	class Sprite : public OnlyDrawable {
 	public:
-		struct Make : public IUninteractive::Make {
+		struct Make : public virtual IUninteractive::Make {
 			sf::Texture& texture;
 			sf::IntRect rect;
 			sf::Vector2f minSize;
@@ -36,11 +36,7 @@ namespace ie {
 		sf::Vector2f getMinSize() const override;
 		
 		sf::Vector2f getNormalSize() const override;
-	
-	protected:
-		Sprite(sf::Sprite sprite, sf::Vector2f minSize);
-	
-	public:
+		
 		Sprite* copy() override;
 	
 	protected:

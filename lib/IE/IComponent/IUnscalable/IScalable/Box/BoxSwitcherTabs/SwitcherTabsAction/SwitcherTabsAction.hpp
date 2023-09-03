@@ -8,7 +8,7 @@ namespace ie {
 	
 	class SwitcherTabsAction : public BasicBaseKeyAction<BoxSwitcherTabs&> {
 	public:
-		struct Make : public BasicKeyAction<BoxSwitcherTabs&>::Make {
+		struct Make : public virtual BasicKeyAction<BoxSwitcherTabs&>::Make {
 			PISint value;
 			
 			Make(PISint value);

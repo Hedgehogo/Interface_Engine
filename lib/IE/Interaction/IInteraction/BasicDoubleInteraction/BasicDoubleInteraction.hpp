@@ -6,7 +6,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicDoubleInteraction : public virtual IBasicInteraction<T> {
 	public:
-		struct Make : public IBasicInteraction<T>::Make {
+		struct Make : public virtual IBasicInteraction<T>::Make {
 			BoxPtr<typename IBasicInteraction<T>::Make> first;
 			BoxPtr<typename IBasicInteraction<T>::Make> second;
 			

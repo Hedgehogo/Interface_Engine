@@ -4,9 +4,9 @@
 #include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
-	class CoefficientMovePanelInteraction : public BasePanelInteraction, public IMovePanelInteraction {
+	class CoefficientMovePanelInteraction : public BasePanelInteraction, public virtual IMovePanelInteraction {
 	public:
-		struct Make : public IMovePanelInteraction::Make {
+		struct Make : public virtual IMovePanelInteraction::Make {
 			sf::Vector2f coefficient;
 			sf::Vector2f offset;
 			bool atStart = false;

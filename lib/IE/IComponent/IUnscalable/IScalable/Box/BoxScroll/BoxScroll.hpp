@@ -9,7 +9,7 @@ namespace ie {
 		sf::Vector2f getNewObjectPosition(sf::Vector2f normalObjectPosition);
 	
 	public:
-		struct Make : public Box::Make {
+		struct Make : public virtual Box::Make {
 			BoxPtr<IUnscalable::Make> object;
 			PSRVec2f normalObjectPosition;
 			sf::Vector2f minSize;

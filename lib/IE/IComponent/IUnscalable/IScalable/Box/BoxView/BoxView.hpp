@@ -4,7 +4,7 @@
 #include "../../../../../IDrawable/IDrawable/IDrawable.hpp"
 
 namespace ie {
-	class BoxWithView : public Box, public IDrawable {
+	class BoxWithView : public Box, public virtual IDrawable {
 	public:
 		BoxWithView(sf::Vector2f minSize, InitInfo initInfo);
 		

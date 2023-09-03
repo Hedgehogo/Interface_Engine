@@ -9,9 +9,9 @@
 #include "../../IUninteractive/OnlyDrawable/Empty/Empty.hpp"
 
 namespace ie {
-	class BoxConstRatioCenter : public Box, public ILayoutObject, public ILayoutBackground, public ILayoutTwoObjects, public IDrawable {
+	class BoxConstRatioCenter : public Box, public virtual ILayoutObject, public virtual ILayoutBackground, public virtual ILayoutTwoObjects, public virtual IDrawable {
 	public:
-		struct Make : public Box::Make, public ILayoutObject::Make, public ILayoutBackground::Make, public ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutObject::Make, public virtual ILayoutBackground::Make, public virtual ILayoutTwoObjects::Make {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<IScalable::Make> firstObject;
 			BoxPtr<IScalable::Make> secondObject;

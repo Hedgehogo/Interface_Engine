@@ -4,9 +4,9 @@
 #include "../IComponent/ILayout/ILayoutObject/ILayoutObject.hpp"
 
 namespace ie {
-	class BoxDebug : public Box, public ILayoutObject, public IDrawable {
+	class BoxDebug : public Box, public virtual ILayoutObject, public virtual IDrawable {
 	public:
-		struct Make : public Box::Make, public ILayoutObject::Make {
+		struct Make : public Box::Make, public virtual ILayoutObject::Make {
 			BoxPtr<IScalable::Make> object;
 			
 			Make(BoxPtr<IScalable::Make>&& object);

@@ -6,7 +6,7 @@
 
 namespace ie {
 	template<typename FromType, typename ToType>
-	class SConvertValue : public ISConvertValue<FromType, ToType>, public SValue<ToType> {
+	class SConvertValue : public SValue<ToType>, public virtual ISConvertValue<FromType, ToType> {
 	protected:
 		virtual ToType convert(FromType fromValue);
 	

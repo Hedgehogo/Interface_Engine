@@ -4,9 +4,9 @@
 
 namespace ie {
 	template<typename T = std::monostate>
-	class BasicEmptyAction : public BasicKeyAction<T> {
+	class BasicEmptyAction : public virtual BasicKeyAction<T> {
 	public:
-		struct Make : public BasicKeyAction<T>::Make {
+		struct Make : public virtual BasicKeyAction<T>::Make {
 			BasicEmptyAction<T>* make(BasicActionInitInfo<T> initInfo) override;
 		};
 		

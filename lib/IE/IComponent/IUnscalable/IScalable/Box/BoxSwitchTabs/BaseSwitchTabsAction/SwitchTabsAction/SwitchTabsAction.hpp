@@ -6,7 +6,7 @@
 namespace ie {
 	class SwitchTabsAction : public BaseSwitchTabsAction {
 	public:
-		struct Make : public BaseSwitchTabsAction::Make {
+		struct Make : public virtual BaseSwitchTabsAction::Make {
 			uint index = 0;
 			
 			Make(uint index = 0);

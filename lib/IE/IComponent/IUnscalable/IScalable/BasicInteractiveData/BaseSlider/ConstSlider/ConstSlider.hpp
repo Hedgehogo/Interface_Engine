@@ -5,7 +5,7 @@
 namespace ie {
 	class ConstSlider : public BaseSlider {
 	public:
-		struct Make : public IScalable::Make {
+		struct Make : public virtual IScalable::Make {
 			BoxPtr<IUninteractive::Make> slider;
 			BoxPtr<IUninteractive::Make> background;
 			const PSRVec2f& value;

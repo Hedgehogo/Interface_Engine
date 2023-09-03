@@ -5,7 +5,7 @@
 namespace ie {
 	class Button : public BaseButton {
 	public:
-		struct Make : public IScalable::Make {
+		struct Make : public virtual ILayoutObject::Make, public virtual IScalable::Make {
 			BoxPtr<IScalable::Make> background;
 			BoxPtr<IBaseInteraction::Make> interaction;
 			

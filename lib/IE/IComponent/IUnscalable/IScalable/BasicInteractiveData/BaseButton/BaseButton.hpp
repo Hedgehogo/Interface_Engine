@@ -5,7 +5,7 @@
 #include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
 
 namespace ie {
-	class BaseButton : public ILayoutObject, public virtual IScalable, public IUpdatable {
+	class BaseButton : public virtual ILayoutObject, public virtual IScalable, public virtual IUpdatable {
 	public:
 		BaseButton(BoxPtr<IScalable::Make>&& background, InitInfo initInfo);
 		

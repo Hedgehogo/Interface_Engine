@@ -4,9 +4,9 @@
 #include "../../ClickPanelInteraction/ClickPanelInteraction.hpp"
 
 namespace ie {
-	class ClickDisplayPanelInteraction : public ClickPanelInteraction, public IDisplayPanelInteraction {
+	class ClickDisplayPanelInteraction : public ClickPanelInteraction, public virtual IDisplayPanelInteraction {
 	public:
-		struct Make : public IDisplayPanelInteraction::Make {
+		struct Make : public virtual IDisplayPanelInteraction::Make {
 			Key key;
 			
 			Make(Key key);

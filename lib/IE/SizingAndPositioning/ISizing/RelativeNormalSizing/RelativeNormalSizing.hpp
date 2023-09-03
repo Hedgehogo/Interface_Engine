@@ -3,9 +3,9 @@
 #include "../ISizing.hpp"
 
 namespace ie {
-	class RelativeNormalSizing : public ISizing {
+	class RelativeNormalSizing : public virtual ISizing {
 	public:
-		struct Make : public ISizing::Make {
+		struct Make : public virtual ISizing::Make {
 			RelativeNormalSizing* make(float normalSize) override;
 		};
 		

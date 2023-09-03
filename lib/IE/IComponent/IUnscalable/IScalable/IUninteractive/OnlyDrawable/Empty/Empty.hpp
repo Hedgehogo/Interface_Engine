@@ -4,9 +4,9 @@
 #include "IE/IComponent/ILayout/ILayout.hpp"
 
 namespace ie {
-	class Empty : public OnlyDrawable, public ILayout {
+	class Empty : public OnlyDrawable, public virtual ILayout {
 	public:
-		struct Make : public IUninteractive::Make, public ILayout::Make {
+		struct Make : public virtual IUninteractive::Make, public virtual ILayout::Make {
 			Empty* make(InitInfo initInfo) override;
 		};
 		

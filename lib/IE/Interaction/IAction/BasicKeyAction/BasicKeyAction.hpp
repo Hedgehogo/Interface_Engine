@@ -6,7 +6,7 @@
 
 namespace ie {
 	template<typename T = std::monostate>
-	class BasicKeyAction : public IAction {
+	class BasicKeyAction : public virtual IAction {
 	public:
 		struct Make {
 			virtual BasicKeyAction<T>* make(BasicActionInitInfo<T> initInfo) = 0;

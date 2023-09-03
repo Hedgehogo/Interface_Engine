@@ -4,12 +4,12 @@
 #include <functional>
 
 namespace ie {
-	class LambdaSizing : public ISizing {
+	class LambdaSizing : public virtual ISizing {
 	public:
 		using FindSizeFunc = std::function<float(float parentSize, float targetSize, float normalSize)>;
 		using MinSizeFunc = std::function<float(float objectMinSize)>;
 		
-		struct Make : public ISizing::Make {
+		struct Make : public virtual ISizing::Make {
 			FindSizeFunc findSizeFunc;
 			MinSizeFunc minSizeFunc;
 			

@@ -6,9 +6,9 @@
 #include "../../../../../IDrawable/DrawManager/DrawManager.hpp"
 
 namespace ie {
-	class Bar : public OnlyDrawable, public ILayoutBackground {
+	class Bar : public OnlyDrawable, public virtual ILayoutBackground {
 	public:
-		struct Make : public IUninteractive::Make, public ILayoutBackground::Make {
+		struct Make : public virtual IUninteractive::Make, public virtual ILayoutBackground::Make {
 			BoxPtr<IUninteractive::Make> background;
 			BoxPtr<IUninteractive::Make> strip;
 			float offset = 0;

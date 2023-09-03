@@ -4,9 +4,9 @@
 #include "../../ClickPanelInteraction/ClickPanelInteraction.hpp"
 
 namespace ie {
-	class ClickHidePanelInteraction : public ClickPanelInteraction, public IHidePanelInteraction {
+	class ClickHidePanelInteraction : public ClickPanelInteraction, public virtual IHidePanelInteraction {
 	public:
-		struct Make : public IHidePanelInteraction::Make {
+		struct Make : public virtual IHidePanelInteraction::Make {
 			Key key;
 			bool onlyOnParent = false;
 			

@@ -6,7 +6,7 @@
 namespace ie {
 	class BaseSwitchTabsAction : public BasicBaseKeyAction<BoxSwitchTabs&> {
 	public:
-		struct Make : public BasicBaseKeyAction<BoxSwitchTabs&>::Make {
+		struct Make : public virtual BasicKeyAction<BoxSwitchTabs&>::Make {
 			BaseSwitchTabsAction* make(BasicActionInitInfo<BoxSwitchTabs&> initInfo) override = 0;
 		};
 		

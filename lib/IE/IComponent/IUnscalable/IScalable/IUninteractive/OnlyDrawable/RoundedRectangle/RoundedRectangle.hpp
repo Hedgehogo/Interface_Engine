@@ -4,9 +4,9 @@
 #include "IE/IComponent/ILayout/ILayout.hpp"
 
 namespace ie {
-	class RoundedRectangle : public OnlyDrawable, public ILayout {
+	class RoundedRectangle : public OnlyDrawable, public virtual ILayout {
 	public:
-		struct Make : public IUninteractive::Make, public ILayout::Make {
+		struct Make : public virtual IUninteractive::Make, public virtual ILayout::Make {
 			sf::Color color;
 			float radius;
 			

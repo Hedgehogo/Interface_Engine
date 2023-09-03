@@ -3,9 +3,9 @@
 #include "../ISizing.hpp"
 
 namespace ie {
-	class SmartSizing : public ISizing {
+	class SmartSizing : public virtual ISizing {
 	public:
-		struct Make : public ISizing::Make {
+		struct Make : public virtual ISizing::Make {
 			float targetCoefficient = 1;
 			float parentCoefficient = 0;
 			float addition = 0;

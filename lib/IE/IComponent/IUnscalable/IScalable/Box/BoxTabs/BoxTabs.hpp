@@ -4,9 +4,9 @@
 #include "IE/IComponent/ILayout/ILayoutObjectsArray/ILayoutObjectsArray.hpp"
 
 namespace ie {
-	class BoxTabs : public Box, public ILayoutObjectsArray, public IDrawable {
+	class BoxTabs : public Box, public virtual ILayoutObjectsArray, public virtual IDrawable {
 	public:
-		struct Make : public Box::Make, public ILayoutObjectsArray::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
 			PISint value;
 			sf::Vector2f minSize = {};

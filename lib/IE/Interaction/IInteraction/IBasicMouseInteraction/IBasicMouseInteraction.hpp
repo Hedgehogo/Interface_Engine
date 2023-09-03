@@ -6,7 +6,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class IBasicMouseInteraction : public virtual IBasicInteraction<T> {
 	public:
-		struct Make : public IBasicInteraction<T>::Make {
+		struct Make : public virtual IBasicInteraction<T>::Make {
 			IBasicMouseInteraction<T>* make(BasicActionInitInfo<T> initInfo) override = 0;
 		};
 		

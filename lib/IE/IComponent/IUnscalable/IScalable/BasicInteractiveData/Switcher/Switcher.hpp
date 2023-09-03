@@ -7,9 +7,9 @@
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	class Switcher : public virtual IScalable, public ILayout, public IDrawable, public IUpdatable {
+	class Switcher : public virtual IScalable, public virtual ILayout, public virtual IDrawable, public virtual IUpdatable {
 	public:
-		struct Make : public IScalable::Make, public ILayout::Make {
+		struct Make : public virtual IScalable::Make, public virtual ILayout::Make {
 			BoxPtr<IScalable::Make> inactiveBackground;
 			BoxPtr<IScalable::Make> activeBackground;
 			PSbool value;

@@ -7,7 +7,7 @@
 namespace ie {
 	class WhileSwitchTabsAction : public BaseSwitchTabsAction {
 	public:
-		struct Make : public BaseSwitchTabsAction::Make {
+		struct Make : public virtual BaseSwitchTabsAction::Make {
 			int step = 1;
 			
 			Make(int step = 1);

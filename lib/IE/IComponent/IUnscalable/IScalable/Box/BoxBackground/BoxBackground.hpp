@@ -5,9 +5,9 @@
 #include "../../../../ILayout/ILayoutBackground/ILayoutBackground.hpp"
 
 namespace ie {
-	class BoxBackground : public Box, public ILayoutBackground, public ILayoutObject {
+	class BoxBackground : public Box, public virtual ILayoutBackground, public virtual ILayoutObject {
 	public:
-	struct Make : public Box::Make, public ILayoutBackground::Make, public ILayoutObject::Make {
+		struct Make : public virtual Box::Make, public virtual ILayoutBackground::Make, public virtual ILayoutObject::Make {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<IUninteractive::Make> background;
 			sf::Vector2f offset = {};

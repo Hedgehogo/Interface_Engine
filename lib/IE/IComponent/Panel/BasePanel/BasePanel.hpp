@@ -14,9 +14,9 @@
 #include "../../../Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	class BasePanel : public ILayoutObject, public IDrawable, public IUpdatable {
+	class BasePanel : public virtual ILayoutObject, public virtual IDrawable, public virtual IUpdatable {
 	public:
-		struct Make : public ILayoutObject::Make {
+		struct Make : public virtual ILayoutObject::Make {
 			BasePanel* make(InitInfo initInfo) override = 0;
 		};
 		
