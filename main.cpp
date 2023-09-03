@@ -45,14 +45,14 @@ int main() {
 						makeBoxPtr<ie::FullColor::Make>(sf::Color::Green),
 						c_value
 					),
-					20.f, ie::Side::up
+					20.f, ie::Side::Up
 				),
 				makeBoxPtr<ie::BoxSwitch::Make>(
 					makeBoxPtr<ie::FullColor::Make>(sf::Color::Yellow),
 					makeBoxPtr<ie::FullColor::Make>(sf::Color::Blue),
 					b_value
 				),
-				20.f, ie::Side::right
+				20.f, ie::Side::Right
 			)
 		},
 		"IE works!",

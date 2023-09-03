@@ -9,23 +9,23 @@ namespace ie {
 	class SliderWheelAction : public BaseWheelAction {
 	public:
 		enum class Relativity {
-			relationArea,
-			relationSlider
+			RelationArea,
+			RelationSlider
 		};
 	
 		struct Make {
 			bool horizontal = false;
-			Relativity relativity = Relativity::relationSlider;
+			Relativity relativity = Relativity::RelationSlider;
 			sf::Vector2f sensitivity = {0.2f, 0.2f};
 			
-			Make(bool horizontal = false, Relativity relativity = Relativity::relationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
+			Make(bool horizontal = false, Relativity relativity = Relativity::RelationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
 			
 			SliderWheelAction* make(BasicActionInitInfo<BaseSlider&> initInfo);
 		};
 		
 		SliderWheelAction(Make&& make, BasicActionInitInfo<BaseSlider&> initInfo);
 		
-		explicit SliderWheelAction(bool horizontal = false, Relativity relativity = Relativity::relationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
+		explicit SliderWheelAction(bool horizontal = false, Relativity relativity = Relativity::RelationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
 		
 		void setSlider(BaseSlider& slider);
 		

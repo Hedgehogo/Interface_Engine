@@ -13,20 +13,20 @@ namespace ie {
 			BoxPtr<IScalable::Make> inactiveBackground;
 			BoxPtr<IScalable::Make> activeBackground;
 			PSbool value;
-			Key key = Key::mouseLeft;
+			Key key = Key::MouseLeft;
 			
-			Make(BoxPtr<IScalable::Make>&& inactiveBackground, BoxPtr<IScalable::Make>&& activeBackground, PSbool value, Key key = Key::mouseLeft);
+			Make(BoxPtr<IScalable::Make>&& inactiveBackground, BoxPtr<IScalable::Make>&& activeBackground, PSbool value, Key key = Key::MouseLeft);
 			
-			Make(BoxPtr<IScalable::Make>&& inactiveBackground, BoxPtr<IScalable::Make>&& activeBackground, Key key = Key::mouseLeft, bool startActive = false);
+			Make(BoxPtr<IScalable::Make>&& inactiveBackground, BoxPtr<IScalable::Make>&& activeBackground, Key key = Key::MouseLeft, bool startActive = false);
 			
 			Switcher* make(InitInfo initInfo) override;
 		};
 		
 		Switcher(Make&& make, InitInfo initInfo);
 		
-		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key = Key::mouseLeft);
+		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key = Key::MouseLeft);
 		
-		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, Key key = Key::mouseLeft, bool startActive = false);
+		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, Key key = Key::MouseLeft, bool startActive = false);
 		
 		void init(InitInfo initInfo) override;
 		

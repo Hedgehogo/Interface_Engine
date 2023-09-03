@@ -12,7 +12,7 @@ TEST(IComponent, BoxConstBorder) {
 			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
 			2,
-			ie::Side::left
+			ie::Side::Left
 		},
 		data.makeInitInfo()
 	};

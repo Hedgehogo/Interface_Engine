@@ -4,10 +4,10 @@
 
 namespace ie {
 	enum class Side {
-		up,
-		down,
-		right,
-		left
+		Up,
+		Down,
+		Right,
+		Left
 	};
 	
 	template<>

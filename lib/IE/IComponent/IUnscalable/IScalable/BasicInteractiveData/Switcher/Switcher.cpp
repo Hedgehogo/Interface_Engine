@@ -119,7 +119,7 @@ namespace ie {
 	bool DecodePointer<Switcher>::decodePointer(const YAML::Node& node, Switcher*& switcher) {
 		auto inactiveBackground{node["inactive-background"].as<BoxPtr<IScalable> >()};
 		auto activeBackground{node["active-background"].as<BoxPtr<IScalable> >()};
-		Key key{convDef<Key>(node["key"], Key::mouseLeft)};
+		Key key{convDef<Key>(node["key"], Key::MouseLeft)};
 		
 		if(node["value"]) {
 			switcher = new Switcher{

@@ -14,7 +14,7 @@ namespace ie {
 			BoxPtr<IScalable::Make> secondObject;
 			BoxPtr<IUninteractive::Make> background;
 			float aspectRatio;
-			Corner corner = Corner::upLeft;
+			Corner corner = Corner::UpLeft;
 			sf::Vector2f minSize = {};
 			
 			Make(
@@ -22,7 +22,7 @@ namespace ie {
 				BoxPtr<IScalable::Make>&& secondObject,
 				BoxPtr<IUninteractive::Make>&& background,
 				float aspectRatio = 1.f,
-				Corner corner = Corner::upLeft,
+				Corner corner = Corner::UpLeft,
 				sf::Vector2f minSize = {}
 			);
 			
@@ -36,7 +36,7 @@ namespace ie {
 			BoxPtr<IScalable>&& secondObject,
 			BoxPtr<IUninteractive>&& background,
 			float aspectRatio,
-			Corner corner = Corner::upLeft,
+			Corner corner = Corner::UpLeft,
 			sf::Vector2f minSize = {}
 		);
 		

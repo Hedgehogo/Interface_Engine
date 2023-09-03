@@ -4,11 +4,11 @@ namespace ie {
 	bool Decode<Location>::decode(const YAML::Node& node, Location& location) {
 		std::string str{node.as<std::string>()};
 		if(str == "origin") {
-			location = Location::origin;
+			location = Location::Origin;
 		} else if(str == "center") {
-			location = Location::center;
+			location = Location::Center;
 		} else if(str == "end") {
-			location = Location::end;
+			location = Location::End;
 		} else {
 			throw YAML::BadConversion{node.Mark()};
 		}

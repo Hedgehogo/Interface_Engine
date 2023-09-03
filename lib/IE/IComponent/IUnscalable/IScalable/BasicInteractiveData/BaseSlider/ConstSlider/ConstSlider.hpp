@@ -21,9 +21,9 @@ namespace ie {
 				BoxPtr<IUninteractive::Make>&& background,
 				const PSRVec2f& value,
 				float sliderScale = 1.0f,
-				Key key = Key::mouseLeft,
+				Key key = Key::MouseLeft,
 				bool wheelHorizontal = false,
-				SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::relationArea,
+				SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::RelationArea,
 				sf::Vector2f wheelSensitivity = {0.2f, 0.2f}
 			);
 			
@@ -33,7 +33,7 @@ namespace ie {
 				const PSRVec2f& value,
 				sf::Vector2i division,
 				float sliderScale = 1.0f,
-				Key key = Key::mouseLeft,
+				Key key = Key::MouseLeft,
 				bool wheelHorizontal = false
 			);
 			
@@ -47,9 +47,9 @@ namespace ie {
 			BoxPtr<IUninteractive>&& background,
 			const PSRVec2f& value,
 			float sliderScale = 1.0f,
-			Key key = Key::mouseLeft,
+			Key key = Key::MouseLeft,
 			bool wheelHorizontal = false,
-			SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::relationArea,
+			SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::RelationArea,
 			sf::Vector2f wheelSensitivity = {0.2f, 0.2f}
 		);
 		
@@ -59,7 +59,7 @@ namespace ie {
 			const PSRVec2f& value,
 			sf::Vector2i division,
 			float sliderScale = 1.0f,
-			Key key = Key::mouseLeft,
+			Key key = Key::MouseLeft,
 			bool wheelHorizontal = false
 		);
 		

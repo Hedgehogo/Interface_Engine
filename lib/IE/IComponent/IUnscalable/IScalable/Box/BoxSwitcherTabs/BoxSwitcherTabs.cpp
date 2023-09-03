@@ -92,7 +92,7 @@ namespace ie {
 		switcherTabs = new BoxSwitcherTabs{
 			node["objects"].as<std::vector<BoxPtr<IScalable> > >(),
 			Buffer::get<Sint>(node["value"]),
-			convDef(node["key"], Key::mouseLeft),
+			convDef(node["key"], Key::MouseLeft),
 			convBoolDef(node["direction"], "horizontal", "vertical"),
 			convDef(node["min-size"], sf::Vector2f{})
 		};

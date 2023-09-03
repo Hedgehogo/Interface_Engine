@@ -14,9 +14,9 @@ namespace ie {
 	class IInteraction {
 	public:
 		enum class Priority {
-			highest,
-			medium,
-			lowest,
+			Highest,
+			Medium,
+			Lowest,
 		};
 		
 		virtual ~IInteraction() = default;

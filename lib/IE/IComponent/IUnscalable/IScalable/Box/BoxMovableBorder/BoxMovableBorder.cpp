@@ -58,9 +58,9 @@ namespace ie {
 		interactive(makeBoxPtr<BasicOneKeyInteraction<BoxMovableBorder&> >(
 			makeBoxPtr<BasicAddBlockInteractionAction<BoxMovableBorder&> >(
 				makeBoxPtr<BasicPressedInteraction<BoxMovableBorder&> >(
-					makeBoxPtr<MovableBorderAction>(), Key::mouseLeft
+					makeBoxPtr<MovableBorderAction>(), Key::MouseLeft
 				)
-			), Key::mouseLeft
+			), Key::MouseLeft
 		)),
 		firstObject(std::move(firstObject)),
 		secondObject(std::move(secondObject)),

@@ -15,10 +15,10 @@ namespace ie {
 			KeyHandler::deleteKey(static_cast<Key>(event.key.code));
 		}
 		if(event.type == sf::Event::MouseButtonPressed) {
-			KeyHandler::addKey(static_cast<Key>(static_cast<int>(event.mouseButton.button) + static_cast<int>(Key::mouseLeft)));
+			KeyHandler::addKey(static_cast<Key>(static_cast<int>(event.mouseButton.button) + static_cast<int>(Key::MouseLeft)));
 		}
 		if(event.type == sf::Event::MouseButtonReleased) {
-			KeyHandler::deleteKey(static_cast<Key>(static_cast<int>(event.mouseButton.button) + static_cast<int>(Key::mouseLeft)));
+			KeyHandler::deleteKey(static_cast<Key>(static_cast<int>(event.mouseButton.button) + static_cast<int>(Key::MouseLeft)));
 		}
 	}
 	

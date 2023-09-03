@@ -15,7 +15,7 @@ namespace ie {
 			bool isHorizontal;
 			sf::Vector2f minSize = {};
 			
-			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key = Key::mouseLeft, bool isHorizontal = true, sf::Vector2f minSize = {});
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key = Key::MouseLeft, bool isHorizontal = true, sf::Vector2f minSize = {});
 			
 			BoxSwitcherTabs* make(InitInfo initInfo) override;
 		};

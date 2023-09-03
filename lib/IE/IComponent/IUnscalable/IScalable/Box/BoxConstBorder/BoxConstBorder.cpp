@@ -35,19 +35,19 @@ namespace ie {
 		layout.resize(size, position);
 		
 		switch(side) {
-			case Side::up:
+			case Side::Up:
 				constObject->resize({size.x, borderDistance}, position);
 				secondObject->resize({size.x, size.y - borderDistance}, position + sf::Vector2f(0, borderDistance));
 				break;
-			case Side::down:
+			case Side::Down:
 				constObject->resize({size.x, borderDistance}, {position.x, position.y + size.y - borderDistance});
 				secondObject->resize({size.x, size.y - borderDistance}, position);
 				break;
-			case Side::left:
+			case Side::Left:
 				constObject->resize({borderDistance, size.y}, position);
 				secondObject->resize({size.x - borderDistance, size.y}, position + sf::Vector2f(borderDistance, 0));
 				break;
-			case Side::right:
+			case Side::Right:
 				constObject->resize({borderDistance, size.y}, {position.x + size.x - borderDistance, position.y});
 				secondObject->resize({size.x - borderDistance, size.y}, position);
 				break;
@@ -64,7 +64,7 @@ namespace ie {
 	sf::Vector2f BoxConstBorder::getMinSize() const {
 		sf::Vector2f constMinSize = constObject->getMinSize();
 		sf::Vector2f secondMinSize = secondObject->getMinSize();
-		if(side == Side::down || side == Side::up) {
+		if(side == Side::Down || side == Side::Up) {
 			return {std::max(constMinSize.x, secondMinSize.x), secondMinSize.y + borderDistance};
 		} else {
 			return {secondMinSize.x + borderDistance, std::max(constMinSize.y, secondMinSize.y)};
@@ -74,7 +74,7 @@ namespace ie {
 	sf::Vector2f BoxConstBorder::getNormalSize() const {
 		sf::Vector2f constNormalSize = constObject->getNormalSize();
 		sf::Vector2f secondNormalSize = secondObject->getNormalSize();
-		if(side == Side::down || side == Side::up) {
+		if(side == Side::Down || side == Side::Up) {
 			return {std::max(constNormalSize.x, secondNormalSize.x), secondNormalSize.y + borderDistance};
 		} else {
 			return {secondNormalSize.x + borderDistance, std::max(constNormalSize.y, secondNormalSize.y)};

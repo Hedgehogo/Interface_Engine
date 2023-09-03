@@ -2,7 +2,7 @@
 
 namespace ie {
 	IBaseInteraction::Priority IHidePanelInteraction::getPriority() const {
-		return Priority::lowest;
+		return Priority::Lowest;
 	}
 }
 

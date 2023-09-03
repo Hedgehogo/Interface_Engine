@@ -26,8 +26,8 @@ namespace ie {
 		background(make.background->make(initInfo)),
 		constObject(make.constObject->make(initInfo)),
 		secondObject(make.secondObject->make(initInfo.copy(secondDrawManager))),
-		verticalSide(make.corner == Corner::upLeft || make.corner == Corner::upRight),
-		horizontalSide(make.corner == Corner::upLeft || make.corner == Corner::downLeft),
+		verticalSide(make.corner == Corner::UpLeft || make.corner == Corner::UpRight),
+		horizontalSide(make.corner == Corner::UpLeft || make.corner == Corner::DownLeft),
 		renderSecond(true),
 		aspectRatio(make.aspectRatio) {
 		initInfo.drawManager.add(*this);
@@ -45,8 +45,8 @@ namespace ie {
 		background(std::move(background)),
 		constObject(std::move(constObject)),
 		secondObject(std::move(secondObject)),
-		verticalSide(corner == Corner::upLeft || corner == Corner::upRight),
-		horizontalSide(corner == Corner::upLeft || corner == Corner::downLeft),
+		verticalSide(corner == Corner::UpLeft || corner == Corner::UpRight),
+		horizontalSide(corner == Corner::UpLeft || corner == Corner::DownLeft),
 		renderSecond(true),
 		aspectRatio(aspectRatio) {
 	}
@@ -66,14 +66,14 @@ namespace ie {
 	Corner BoxConstRatio::getCorner() {
 		if(verticalSide) {
 			if(horizontalSide) {
-				return Corner::upLeft;
+				return Corner::UpLeft;
 			}
-			return Corner::upRight;
+			return Corner::UpRight;
 		} else {
 			if(horizontalSide) {
-				return Corner::downLeft;
+				return Corner::DownLeft;
 			}
-			return Corner::downRight;
+			return Corner::DownRight;
 		}
 	}
 	
@@ -199,7 +199,7 @@ namespace ie {
 			node["second-object"].as<BoxPtr<IScalable> >(),
 			BoxPtr{convDefPtr<IUninteractive, Empty>(node["background"])},
 			node["aspect-ratio"].as<float>(),
-			convDef(node["corner"], Corner::upLeft),
+			convDef(node["corner"], Corner::UpLeft),
 			convDef(node["min-size"], sf::Vector2f{})
 		};
 		return true;

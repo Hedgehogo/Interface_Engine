@@ -67,7 +67,7 @@ namespace ie {
 	bool DecodePointer<BasicOneKeyInteraction<T> >::decodePointer(const YAML::Node& node, BasicOneKeyInteraction<T>*& oneKeyInteraction) {
 		oneKeyInteraction = new BasicOneKeyInteraction<T>{
 			node["action"].as<BoxPtr<BasicKeyAction<T> > >(),
-			convDef(node["key"], Key::mouseLeft)
+			convDef(node["key"], Key::MouseLeft)
 		};
 		return true;
 	}

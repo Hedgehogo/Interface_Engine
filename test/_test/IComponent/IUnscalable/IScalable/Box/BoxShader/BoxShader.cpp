@@ -13,7 +13,7 @@ TEST(IComponent, BoxShader) {
 		{
 			ie::makeBoxPtr<ie::IScalable::Make, ie::Capsule::Make>(sf::Color::Green),
 			new sf::Shader{},
-			ie::BoxShader::Transmission::texture
+			ie::BoxShader::Transmission::Texture
 		},
 		data.makeInitInfo()
 	};

@@ -20,7 +20,7 @@ namespace ie {
 		key(key),
 		division(division),
 		wheelHorizontal(wheelHorizontal),
-		wheelRelativity(SliderWheelAction::Relativity::relationArea),
+		wheelRelativity(SliderWheelAction::Relativity::RelationArea),
 		wheelSensitivity({1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}) {
 	}
 	
@@ -67,7 +67,7 @@ namespace ie {
 			key,
 			division,
 			wheelHorizontal,
-			SliderWheelAction::Relativity::relationArea,
+			SliderWheelAction::Relativity::RelationArea,
 			{1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}
 		) {
 	}

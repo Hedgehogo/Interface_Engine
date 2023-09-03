@@ -17,7 +17,7 @@ namespace ie {
 			bool isHorizontalBorder;
 			PSCoefficient borderValue;
 			int borderInteractionSize = 5;
-			Key key = Key::mouseLeft;
+			Key key = Key::MouseLeft;
 			sf::Vector2f minSize = {};
 			
 			Make(
@@ -26,7 +26,7 @@ namespace ie {
 				bool isHorizontalBorder,
 				PSCoefficient borderValue,
 				int borderInteractionSize = 5,
-				Key key = Key::mouseLeft,
+				Key key = Key::MouseLeft,
 				sf::Vector2f minSize = {}
 			);
 			

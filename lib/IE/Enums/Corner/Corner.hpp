@@ -4,10 +4,10 @@
 
 namespace ie {
 	enum class Corner {
-		upRight,
-		upLeft,
-		downRight,
-		downLeft
+		UpRight,
+		UpLeft,
+		DownRight,
+		DownLeft
 	};
 	
 	template<>
