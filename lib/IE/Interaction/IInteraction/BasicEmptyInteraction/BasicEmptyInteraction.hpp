@@ -4,12 +4,20 @@
 #include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
+	template<typename T>
+	class BasicEmptyInteraction;
+	
+	namespace make_system {
+		template<typename T = std::monostate>
+		struct BasicEmptyInteraction : public virtual IBasicInteraction<T> {
+			ie::BasicEmptyInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+	}
+	
 	template<typename T = std::monostate>
 	class BasicEmptyInteraction : public virtual IBasicInteraction<T> {
 	public:
-		struct Make : public virtual IBasicInteraction<T>::Make {
-			BasicEmptyInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
-		};
+		using Make = make_system::BasicEmptyInteraction<T>;
 		
 		BasicEmptyInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
 		

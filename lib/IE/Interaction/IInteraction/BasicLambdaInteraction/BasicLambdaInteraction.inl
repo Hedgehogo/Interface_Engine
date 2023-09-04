@@ -1,12 +1,14 @@
 namespace ie {
-	template<typename T>
-	BasicLambdaInteraction<T>::Make::Make(void (* startPointing)(sf::Vector2i), void (* finishPointing)(sf::Vector2i)) :
-		startPointing(startPointing), finishPointing(finishPointing) {
-	}
-	
-	template<typename T>
-	BasicLambdaInteraction<T>* BasicLambdaInteraction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
-		return new BasicLambdaInteraction<T>{std::move(*this), initInfo};
+	namespace make_system {
+		template<typename T>
+		BasicLambdaInteraction<T>::BasicLambdaInteraction(void (* startPointing)(sf::Vector2i), void (* finishPointing)(sf::Vector2i)) :
+			startPointing(startPointing), finishPointing(finishPointing) {
+		}
+		
+		template<typename T>
+		ie::BasicLambdaInteraction<T>* BasicLambdaInteraction<T>::make(BasicActionInitInfo<T> initInfo) {
+			return new ie::BasicLambdaInteraction<T>{std::move(*this), initInfo};
+		}
 	}
 	
 	template<typename T>

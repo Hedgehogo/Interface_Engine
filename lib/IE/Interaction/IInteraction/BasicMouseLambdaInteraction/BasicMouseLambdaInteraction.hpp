@@ -4,22 +4,30 @@
 #include "../IBasicMouseInteraction/IBasicMouseInteraction.hpp"
 
 namespace ie {
-	template<typename T = std::monostate>
-	class BasicMouseLambdaInteraction : public BasicLambdaInteraction<T>, public virtual IBasicMouseInteraction<T> {
-	public:
-		struct Make : public BasicLambdaInteraction<T>::Make, public virtual IBasicInteraction<T>::Make {
-			BoxPtr<typename BasicKeyAction<T>::Make> leftButtonAction;
-			BoxPtr<typename BasicKeyAction<T>::Make> rightButtonAction;
+	template<typename T>
+	class BasicMouseLambdaInteraction;
+	
+	namespace make_system {
+		template<typename T = std::monostate>
+		struct BasicMouseLambdaInteraction : public BasicLambdaInteraction<T>, public virtual IBasicMouseInteraction<T> {
+			BoxPtr<typename ie::BasicKeyAction<T>::Make> leftButtonAction;
+			BoxPtr<typename ie::BasicKeyAction<T>::Make> rightButtonAction;
 			
-			Make(
-				BoxPtr<typename BasicKeyAction<T>::Make>&& leftButtonAction,
-				BoxPtr<typename BasicKeyAction<T>::Make>&& rightButtonAction,
+			BasicMouseLambdaInteraction(
+				BoxPtr<typename ie::BasicKeyAction<T>::Make>&& leftButtonAction,
+				BoxPtr<typename ie::BasicKeyAction<T>::Make>&& rightButtonAction,
 				void (* startPointing)(sf::Vector2i mousePosition),
 				void (* finishPointing)(sf::Vector2i mousePosition)
 			);
 			
-			BasicMouseLambdaInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+			ie::BasicMouseLambdaInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
 		};
+	}
+	
+	template<typename T = std::monostate>
+	class BasicMouseLambdaInteraction : public BasicLambdaInteraction<T>, public virtual IBasicMouseInteraction<T> {
+	public:
+		using Make = make_system::BasicMouseLambdaInteraction<T>;
 		
 		BasicMouseLambdaInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
 		

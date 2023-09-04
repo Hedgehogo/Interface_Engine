@@ -1,21 +1,23 @@
 #include <iostream>
 
 namespace ie {
-	template<typename T>
-	BasicMouseLambdaInteraction<T>::Make::Make(
-		BoxPtr<typename BasicKeyAction<T>::Make>&& leftButtonAction,
-		BoxPtr<typename BasicKeyAction<T>::Make>&& rightButtonAction,
-		void (* startPointing)(sf::Vector2i),
-		void (* finishPointing)(sf::Vector2i)
-	) :
-		BasicLambdaInteraction<T>::Make(std::move(startPointing), std::move(finishPointing)),
-		leftButtonAction(std::move(leftButtonAction)),
-		rightButtonAction(std::move(rightButtonAction)) {
-	}
-	
-	template<typename T>
-	BasicMouseLambdaInteraction<T>* BasicMouseLambdaInteraction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
-		return new BasicMouseLambdaInteraction<T>{std::move(*this), initInfo};
+	namespace make_system {
+		template<typename T>
+		BasicMouseLambdaInteraction<T>::BasicMouseLambdaInteraction(
+			BoxPtr<typename ie::BasicKeyAction<T>::Make>&& leftButtonAction,
+			BoxPtr<typename ie::BasicKeyAction<T>::Make>&& rightButtonAction,
+			void (* startPointing)(sf::Vector2i),
+			void (* finishPointing)(sf::Vector2i)
+		) :
+			BasicLambdaInteraction<T>::Make(std::move(startPointing), std::move(finishPointing)),
+			leftButtonAction(std::move(leftButtonAction)),
+			rightButtonAction(std::move(rightButtonAction)) {
+		}
+		
+		template<typename T>
+		ie::BasicMouseLambdaInteraction<T>* BasicMouseLambdaInteraction<T>::make(BasicActionInitInfo<T> initInfo) {
+			return new ie::BasicMouseLambdaInteraction<T>{std::move(*this), initInfo};
+		}
 	}
 	
 	template<typename T>

@@ -5,17 +5,25 @@
 #include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
+	template<typename T>
+	class BasicOneKeyInteraction;
+	
+	namespace make_system {
+		template<typename T = std::monostate>
+		struct BasicOneKeyInteraction : public virtual IBasicInteraction<T> {
+			BoxPtr<typename ie::BasicKeyAction<T>::Make> action;
+			Key key;
+			
+			BasicOneKeyInteraction(BoxPtr<typename ie::BasicKeyAction<T>::Make>&& action, Key key);
+			
+			ie::BasicOneKeyInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+	}
+	
 	template<typename T = std::monostate>
 	class BasicOneKeyInteraction : public virtual IBasicInteraction<T> {
 	public:
-		struct Make : public virtual IBasicInteraction<T>::Make {
-			BoxPtr<typename BasicKeyAction<T>::Make> action;
-			Key key;
-			
-			Make(BoxPtr<typename BasicKeyAction<T>::Make>&& action, Key key);
-			
-			BasicOneKeyInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
-		};
+		using Make = make_system::BasicOneKeyInteraction<T>;
 		
 		BasicOneKeyInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
 		

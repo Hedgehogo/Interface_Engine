@@ -3,14 +3,16 @@
 #include "IE/Interaction/IAction/BasicKeyAction/BasicOpenUrlAction/BasicOpenUrlAction.hpp"
 
 namespace ie {
-	template<typename T>
-	BasicKeysInteraction<T>::Make::Make(BoxPtr<typename BasicKeyAction<T>::Make>&& action, std::vector<Key> keys, std::vector<Key> blackListKeys) :
-		action(std::move(action)), keys(std::move(keys)), blackListKeys(std::move(blackListKeys)) {
-	}
-	
-	template<typename T>
-	BasicKeysInteraction<T>* BasicKeysInteraction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
-		return new BasicKeysInteraction<T>{std::move(*this), initInfo};
+	namespace make_system {
+		template<typename T>
+		BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<typename ie::BasicKeyAction<T>::Make>&& action, std::vector<Key> keys, std::vector<Key> blackListKeys) :
+			action(std::move(action)), keys(std::move(keys)), blackListKeys(std::move(blackListKeys)) {
+		}
+		
+		template<typename T>
+		ie::BasicKeysInteraction<T>* BasicKeysInteraction<T>::make(BasicActionInitInfo<T> initInfo) {
+			return new ie::BasicKeysInteraction<T>{std::move(*this), initInfo};
+		}
 	}
 	
 	template<typename T>

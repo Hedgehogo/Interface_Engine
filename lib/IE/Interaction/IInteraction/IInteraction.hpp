@@ -36,14 +36,22 @@ namespace ie {
 		virtual IInteraction* copy() = 0;
 	};
 	
+	template<typename T>
+	class IBasicInteraction;
+	
+	namespace make_system {
+		template<typename T = std::monostate>
+		struct IBasicInteraction {
+			virtual ie::IBasicInteraction<T>* make(BasicActionInitInfo<T> initInfo) = 0;
+			
+			virtual ~IBasicInteraction() = default;
+		};
+	}
+	
 	template<typename T = std::monostate>
 	class IBasicInteraction : public virtual IInteraction {
 	public:
-		struct Make {
-			virtual IBasicInteraction<T>* make(BasicActionInitInfo<T> initInfo) = 0;
-			
-			virtual ~Make() = default;
-		};
+		using Make = make_system::IBasicInteraction<T>;
 		
 		virtual void init(BasicActionInitInfo<T> initInfo);
 		
