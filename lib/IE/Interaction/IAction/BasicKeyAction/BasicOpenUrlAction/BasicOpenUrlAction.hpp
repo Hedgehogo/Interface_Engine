@@ -6,16 +6,24 @@
 #include "IE/Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ie {
+	template<typename T>
+	class BasicOpenUrlAction;
+	
+	namespace make_system {
+		template<typename T = std::monostate>
+		struct BasicOpenUrlAction : public BasicKeyAction<T> {
+			std::string url;
+			
+			BasicOpenUrlAction(const std::string& url);
+			
+			ie::BasicOpenUrlAction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+	}
+	
 	template<typename T = std::monostate>
 	class BasicOpenUrlAction : public BasicBaseKeyAction<T> {
 	public:
-		struct Make : public virtual BasicKeyAction<T>::Make {
-			std::string url;
-			
-			Make(const std::string& url);
-			
-			BasicOpenUrlAction<T>* make(BasicActionInitInfo<T> initInfo) override;
-		};
+		using Make = make_system::BasicOpenUrlAction<T>;
 		
 		BasicOpenUrlAction(Make&& make, BasicActionInitInfo<T> initInfo);
 		

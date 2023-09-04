@@ -4,12 +4,12 @@ namespace ie {
 	namespace make_system {
 		template<typename T>
 		BasicMouseLambdaInteraction<T>::BasicMouseLambdaInteraction(
-			BoxPtr<typename ie::BasicKeyAction<T>::Make>&& leftButtonAction,
-			BoxPtr<typename ie::BasicKeyAction<T>::Make>&& rightButtonAction,
+			BoxPtr<BasicKeyAction<T> >&& leftButtonAction,
+			BoxPtr<BasicKeyAction<T> >&& rightButtonAction,
 			void (* startPointing)(sf::Vector2i),
 			void (* finishPointing)(sf::Vector2i)
 		) :
-			BasicLambdaInteraction<T>::Make(std::move(startPointing), std::move(finishPointing)),
+			BasicLambdaInteraction<T>(std::move(startPointing), std::move(finishPointing)),
 			leftButtonAction(std::move(leftButtonAction)),
 			rightButtonAction(std::move(rightButtonAction)) {
 		}

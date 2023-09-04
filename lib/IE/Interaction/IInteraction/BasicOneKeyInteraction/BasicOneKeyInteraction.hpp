@@ -11,10 +11,10 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicOneKeyInteraction : public virtual IBasicInteraction<T> {
-			BoxPtr<typename ie::BasicKeyAction<T>::Make> action;
+			BoxPtr<BasicKeyAction<T> > action;
 			Key key;
 			
-			BasicOneKeyInteraction(BoxPtr<typename ie::BasicKeyAction<T>::Make>&& action, Key key);
+			BasicOneKeyInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
 			
 			ie::BasicOneKeyInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
 		};

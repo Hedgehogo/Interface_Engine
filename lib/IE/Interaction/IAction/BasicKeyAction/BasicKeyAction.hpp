@@ -5,14 +5,22 @@
 #include "IE/Interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
 
 namespace ie {
+	template<typename T>
+	class BasicKeyAction;
+	
+	namespace make_system {
+		template<typename T = std::monostate>
+		struct BasicKeyAction {
+			virtual ie::BasicKeyAction<T>* make(BasicActionInitInfo<T> initInfo) = 0;
+			
+			virtual ~BasicKeyAction() = default;
+		};
+	}
+	
 	template<typename T = std::monostate>
 	class BasicKeyAction : public virtual IAction {
 	public:
-		struct Make {
-			virtual BasicKeyAction<T>* make(BasicActionInitInfo<T> initInfo) = 0;
-			
-			virtual ~Make() = default;
-		};
+		using Make = make_system::BasicKeyAction<T>;
 		
 		explicit BasicKeyAction();
 		

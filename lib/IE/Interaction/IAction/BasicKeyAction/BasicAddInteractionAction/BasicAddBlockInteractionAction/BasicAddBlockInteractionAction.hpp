@@ -4,14 +4,22 @@
 #include "IE/Interaction/IInteraction/IBasicBlockInteraction/IBasicBlockInteraction.hpp"
 
 namespace ie {
+	template<typename T>
+	class BasicAddBlockInteractionAction;
+	
+	namespace make_system {
+		template<typename T = std::monostate>
+		struct BasicAddBlockInteractionAction : public BasicAddInteractionAction<T> {
+			BasicAddBlockInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
+			
+			ie::BasicAddBlockInteractionAction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+	}
+	
 	template<typename T = std::monostate>
 	class BasicAddBlockInteractionAction : public BasicAddInteractionAction<T> {
 	public:
-		struct Make : public BasicAddInteractionAction<T>::Make {
-			Make(BoxPtr<typename IBasicInteraction<T>::Make>&& interaction);
-			
-			BasicAddBlockInteractionAction<T>* make(BasicActionInitInfo<T> initInfo) override;
-		};
+		using Make = make_system::BasicAddBlockInteractionAction<T>;
 		
 		BasicAddBlockInteractionAction(Make&& make, BasicActionInitInfo<T> initInfo);
 		

@@ -1,7 +1,7 @@
 namespace ie {
 	namespace make_system {
 		template<typename T>
-		BasicOneKeyInteraction<T>::BasicOneKeyInteraction(BoxPtr<typename ie::BasicKeyAction<T>::Make>&& action, Key key) :
+		BasicOneKeyInteraction<T>::BasicOneKeyInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key) :
 			action(std::move(action)), key(key) {
 		}
 		

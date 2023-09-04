@@ -10,12 +10,12 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicMouseLambdaInteraction : public BasicLambdaInteraction<T>, public virtual IBasicMouseInteraction<T> {
-			BoxPtr<typename ie::BasicKeyAction<T>::Make> leftButtonAction;
-			BoxPtr<typename ie::BasicKeyAction<T>::Make> rightButtonAction;
+			BoxPtr<BasicKeyAction<T> > leftButtonAction;
+			BoxPtr<BasicKeyAction<T> > rightButtonAction;
 			
 			BasicMouseLambdaInteraction(
-				BoxPtr<typename ie::BasicKeyAction<T>::Make>&& leftButtonAction,
-				BoxPtr<typename ie::BasicKeyAction<T>::Make>&& rightButtonAction,
+				BoxPtr<BasicKeyAction<T> >&& leftButtonAction,
+				BoxPtr<BasicKeyAction<T> >&& rightButtonAction,
 				void (* startPointing)(sf::Vector2i mousePosition),
 				void (* finishPointing)(sf::Vector2i mousePosition)
 			);

@@ -1,9 +1,11 @@
 #include "IE/Window/Window.hpp"
 
 namespace ie {
-	template<typename T>
-	BasicCloseWindowAction<T>* BasicCloseWindowAction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
-		return new BasicCloseWindowAction<T>{std::move(*this), initInfo};
+	namespace make_system {
+		template<typename T>
+		ie::BasicCloseWindowAction<T>* BasicCloseWindowAction<T>::make(BasicActionInitInfo<T> initInfo) {
+			return new ie::BasicCloseWindowAction<T>{std::move(*this), initInfo};
+		}
 	}
 	
 	template<typename T>

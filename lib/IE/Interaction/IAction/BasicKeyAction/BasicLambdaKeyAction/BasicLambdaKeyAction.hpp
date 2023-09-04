@@ -3,16 +3,18 @@
 #include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 
 namespace ie {
-	template<typename T = std::monostate>
-	class BasicLambdaKeyAction : public BasicBaseKeyAction<T> {
-	public:
-		struct Make : public virtual BasicKeyAction<T>::Make {
+	template<typename T>
+	class BasicLambdaKeyAction;
+	
+	namespace make_system {
+		template<typename T = std::monostate>
+		struct BasicLambdaKeyAction : public BasicKeyAction<T> {
 			void (* startPressedLambda)(sf::Vector2i mousePosition);
 			void (* whilePressedLambda)(sf::Vector2i mousePosition);
 			void (* stopPressedLambda)(sf::Vector2i mousePosition);
 			void (* whileNotPressedLambda)(sf::Vector2i mousePosition);
 			
-			Make(
+			BasicLambdaKeyAction(
 				void (* startPressedLambda)(sf::Vector2i mousePosition),
 				void (* whilePressedLambda )(sf::Vector2i mousePosition) = [](sf::Vector2i) {
 				},
@@ -22,8 +24,14 @@ namespace ie {
 				}
 			);
 			
-			BasicLambdaKeyAction<T>* make(BasicActionInitInfo<T> initInfo) override;
+			ie::BasicLambdaKeyAction<T>* make(BasicActionInitInfo<T> initInfo) override;
 		};
+	}
+	
+	template<typename T = std::monostate>
+	class BasicLambdaKeyAction : public BasicBaseKeyAction<T> {
+	public:
+		using Make = make_system::BasicLambdaKeyAction<T>;
 		
 		BasicLambdaKeyAction(Make&& make, BasicActionInitInfo<T> initInfo);
 		

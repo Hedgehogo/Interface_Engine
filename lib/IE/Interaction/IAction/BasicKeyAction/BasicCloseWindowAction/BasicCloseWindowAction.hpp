@@ -4,12 +4,20 @@
 #include "IE/Modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
+	template<typename T>
+	class BasicCloseWindowAction;
+	
+	namespace make_system {
+		template<typename T = std::monostate>
+		struct BasicCloseWindowAction : public BasicKeyAction<T> {
+			ie::BasicCloseWindowAction<T>* make(BasicActionInitInfo<T> initInfo) override;
+		};
+	}
+	
 	template<typename T = std::monostate>
 	class BasicCloseWindowAction : public BasicBaseKeyAction<T> {
 	public:
-		struct Make : public virtual BasicKeyAction<T>::Make {
-			BasicCloseWindowAction<T>* make(BasicActionInitInfo<T> initInfo) override;
-		};
+		using Make = make_system::BasicCloseWindowAction<T>;
 		
 		BasicCloseWindowAction(Make&& make, BasicActionInitInfo<T> initInfo);
 		

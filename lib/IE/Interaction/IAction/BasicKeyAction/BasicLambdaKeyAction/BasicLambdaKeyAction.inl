@@ -1,20 +1,22 @@
 namespace ie {
-	template<typename T>
-	BasicLambdaKeyAction<T>::Make::Make(
-		void (* startPressedLambda)(sf::Vector2i),
-		void (* whilePressedLambda)(sf::Vector2i),
-		void (* stopPressedLambda)(sf::Vector2i),
-		void (* whileNotPressedLambda)(sf::Vector2i)
-	) :
-		startPressedLambda(startPressedLambda),
-		whilePressedLambda(whilePressedLambda),
-		stopPressedLambda(stopPressedLambda),
-		whileNotPressedLambda(whileNotPressedLambda) {
-	}
-	
-	template<typename T>
-	BasicLambdaKeyAction<T>* BasicLambdaKeyAction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
-		return new BasicLambdaKeyAction<T>{std::move(*this), initInfo};
+	namespace make_system {
+		template<typename T>
+		BasicLambdaKeyAction<T>::BasicLambdaKeyAction(
+			void (* startPressedLambda)(sf::Vector2i),
+			void (* whilePressedLambda)(sf::Vector2i),
+			void (* stopPressedLambda)(sf::Vector2i),
+			void (* whileNotPressedLambda)(sf::Vector2i)
+		) :
+			startPressedLambda(startPressedLambda),
+			whilePressedLambda(whilePressedLambda),
+			stopPressedLambda(stopPressedLambda),
+			whileNotPressedLambda(whileNotPressedLambda) {
+		}
+		
+		template<typename T>
+		ie::BasicLambdaKeyAction<T>* BasicLambdaKeyAction<T>::make(BasicActionInitInfo<T> initInfo) {
+			return new ie::BasicLambdaKeyAction<T>{std::move(*this), initInfo};
+		}
 	}
 	
 	template<typename T>
