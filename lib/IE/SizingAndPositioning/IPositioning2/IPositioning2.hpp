@@ -7,7 +7,7 @@
 #include "../IPositioning/MatchPositioning/MatchPositioning.hpp"
 #include "../IPositioning/MatchSidesPositioning/MatchSidesPositioning.hpp"
 #include "../IPositioning/MatchTargetPositioning/MatchTargetPositioning.hpp"
-#include "../IPositioning/LambdaPositioning/LambdaPositioning.hpp"
+#include "IE/SizingAndPositioning/IPositioning/FnPositioning/FnPositioning.hpp"
 #include "Positioning2initInfo/Positioning2InitInfo.hpp"
 
 namespace ie {

@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/IPositioning2/LambdaPositioning2/LambdaPositioning2.hpp>
+#include "IE/SizingAndPositioning/IPositioning2/FnPositioning2/FnPositioning2.hpp"
 
-TEST(SizingAndPositioning, LambdaPositioning2) {
+TEST(SizingAndPositioning, FnPositioning2) {
 	sf::RenderTexture renderTexture;
 	
-	ie::LambdaPositioning2 lambdaPositioning2{
+	ie::FnPositioning2 fnPositioning2{
 		{
 			[](sf::Vector2f, sf::Vector2f, sf::Vector2f, sf::Vector2f) {
 				return sf::Vector2f{15, 20};
@@ -14,7 +14,7 @@ TEST(SizingAndPositioning, LambdaPositioning2) {
 	};
 	
 	ASSERT_EQ(
-		lambdaPositioning2.findPosition({12, 17}, {27, 31}, {16, 19}),
+		fnPositioning2.findPosition({12, 17}, {27, 31}, {16, 19}),
 		(sf::Vector2f{15, 20})
 	);
 }

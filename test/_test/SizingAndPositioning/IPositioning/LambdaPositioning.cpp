@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/IPositioning/LambdaPositioning/LambdaPositioning.hpp>
+#include "IE/SizingAndPositioning/IPositioning/FnPositioning/FnPositioning.hpp"
 
-TEST(SizingAndPositioning, LambdaPositioning) {
-	ie::LambdaPositioning lambdaPositioning{
+TEST(SizingAndPositioning, FnPositioning) {
+	ie::FnPositioning fnPositioning{
 		[](float, float, float, float) {
 			return 15.f;
 		}
 	};
 	
-	ASSERT_FLOAT_EQ(lambdaPositioning.findPosition(12, 27, 16, 51), 15);
+	ASSERT_FLOAT_EQ(fnPositioning.findPosition(12, 27, 16, 51), 15);
 }

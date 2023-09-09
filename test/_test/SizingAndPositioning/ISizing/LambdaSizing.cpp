@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/ISizing/LambdaSizing/LambdaSizing.hpp>
+#include "IE/SizingAndPositioning/ISizing/FnSizing/FnSizing.hpp"
 
-TEST(SizingAndPositioning, LambdaSizing) {
-	ie::LambdaSizing lambdaSizing{
+TEST(SizingAndPositioning, FnSizing) {
+	ie::FnSizing fnSizing{
 		{
 			[](float, float, float) {
 				return 13.f;
@@ -13,6 +13,6 @@ TEST(SizingAndPositioning, LambdaSizing) {
 		}, 17
 	};
 	
-	ASSERT_FLOAT_EQ(lambdaSizing.findSize(7, 51), 13);
-	ASSERT_FLOAT_EQ(lambdaSizing.getParentSize(23), 5.f);
+	ASSERT_FLOAT_EQ(fnSizing.findSize(7, 51), 13);
+	ASSERT_FLOAT_EQ(fnSizing.getParentSize(23), 5.f);
 }

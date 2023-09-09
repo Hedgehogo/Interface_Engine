@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/ISizing2/LambdaSizing2/LambdaSizing2.hpp>
+#include "IE/SizingAndPositioning/ISizing2/FnSizing2/FnSizing2.hpp"
 
-TEST(SizingAndPositioning, LambdaSizing2) {
+TEST(SizingAndPositioning, FnSizing2) {
 	sf::RenderTexture renderTexture;
 	
-	ie::LambdaSizing2 lambdaSizing2{
+	ie::FnSizing2 fnSizing2{
 		{
 			[](sf::Vector2f, sf::Vector2f, sf::Vector2f) {
 				return sf::Vector2f{13.f, 19.f};
@@ -19,6 +19,6 @@ TEST(SizingAndPositioning, LambdaSizing2) {
 		}
 	};
 	
-	ASSERT_EQ(lambdaSizing2.findSize({5, 7}), (sf::Vector2f{13, 19}));
-	ASSERT_EQ(lambdaSizing2.getParentSize({23, 29}), (sf::Vector2f{5, 7}));
+	ASSERT_EQ(fnSizing2.findSize({5, 7}), (sf::Vector2f{13, 19}));
+	ASSERT_EQ(fnSizing2.getParentSize({23, 29}), (sf::Vector2f{5, 7}));
 }
