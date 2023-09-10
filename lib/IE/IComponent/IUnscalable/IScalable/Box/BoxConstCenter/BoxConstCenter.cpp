@@ -66,11 +66,11 @@ namespace ie {
 	}
 	
 	sf::Vector2f BoxConstCenter::getMinSize() const {
-		return max(ILayoutTwoObjects::getMinSize(), constSize);
+		return max(IComponentTwoObjects::getMinSize(), constSize);
 	}
 	
 	sf::Vector2f BoxConstCenter::getNormalSize() const {
-		return max(ILayoutTwoObjects::getNormalSize(), constSize);
+		return max(IComponentTwoObjects::getNormalSize(), constSize);
 	}
 	
 	IScalable& BoxConstCenter::getFirstObject() {

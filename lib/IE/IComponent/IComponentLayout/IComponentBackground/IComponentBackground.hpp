@@ -1,13 +1,13 @@
 #pragma once
 
-#include "../ILayout.hpp"
+#include "../IComponentLayout.hpp"
 #include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
 
 namespace ie {
-	class ILayoutBackground : public virtual ILayout {
+	class IComponentBackground : public virtual IComponentLayout {
 	public:
-		struct Make : public virtual ILayout::Make {
-			virtual ILayoutBackground* make(InitInfo initInfo) = 0;
+		struct Make : public virtual IComponentLayout::Make {
+			virtual IComponentBackground* make(InitInfo initInfo) = 0;
 		};
 		
 		void setPosition(sf::Vector2f position) override;

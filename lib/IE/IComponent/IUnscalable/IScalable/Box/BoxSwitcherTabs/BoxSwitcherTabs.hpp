@@ -1,14 +1,14 @@
 #pragma once
 
 #include "IE/IComponent/IUnscalable/IScalable/Box/Box.hpp"
-#include "IE/IComponent/ILayout/ILayoutObjectsArray/ILayoutObjectsArray.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentObjectsArray/IComponentObjectsArray.hpp"
 #include "IE/IComponent/IUnscalable/IScalable/BasicInteractiveData/BasicInteractiveData.hpp"
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	class BoxSwitcherTabs : public Box, public virtual ILayoutObjectsArray, public virtual IUpdatable {
+	class BoxSwitcherTabs : public Box, public virtual IComponentObjectsArray, public virtual IUpdatable {
 	public:
-		struct Make : public virtual Box::Make, public virtual ILayoutObjectsArray::Make {
+		struct Make : public virtual Box::Make, public virtual IComponentObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
 			PSint value;
 			Key key;

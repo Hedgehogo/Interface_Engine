@@ -2,14 +2,14 @@
 
 #include "../Box.hpp"
 #include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
-#include "../../../../ILayout/ILayoutObject/ILayoutObject.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
 #include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 #include "../../../../../Interaction/InteractionManager/InteractionManager.hpp"
 
 namespace ie {
-	class BoxConstBezel : public Box, public virtual ILayoutObject {
+	class BoxConstBezel : public Box, public virtual IComponentObject {
 	public:
-		struct Make : public virtual Box::Make, public virtual ILayoutObject::Make {
+		struct Make : public virtual Box::Make, public virtual IComponentObject::Make {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<IUninteractive::Make> bezel;
 			float thickness;

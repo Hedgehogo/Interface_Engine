@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "../../../../ILayout/ILayoutObject/ILayoutObject.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
 
 namespace ie {
-	class BoxRenderTexture : public Box, public virtual ILayoutObject, public virtual IDrawable {
+	class BoxRenderTexture : public Box, public virtual IComponentObject, public virtual IDrawable {
 	public:
-		struct Make : public virtual Box::Make, public virtual ILayoutObject::Make {
+		struct Make : public virtual Box::Make, public virtual IComponentObject::Make {
 			BoxPtr<IScalable::Make> object;
 			bool optimize = true;
 			sf::Vector2f minSize = {};

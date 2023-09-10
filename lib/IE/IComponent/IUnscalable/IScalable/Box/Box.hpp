@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../IScalable.hpp"
-#include "IE/IComponent/ILayout/ILayout.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentLayout.hpp"
 
 namespace ie {
-	class Box : public virtual IScalable, public virtual ILayout {
+	class Box : public virtual IScalable, public virtual IComponentLayout {
 	public:
-		struct Make : public virtual IScalable::Make, public virtual ILayout::Make {
+		struct Make : public virtual IScalable::Make, public virtual IComponentLayout::Make {
 			virtual Box* make(InitInfo initInfo) = 0;
 		};
 		

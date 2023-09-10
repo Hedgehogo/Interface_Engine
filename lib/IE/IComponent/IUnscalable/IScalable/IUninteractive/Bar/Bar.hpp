@@ -2,13 +2,13 @@
 
 #include "../OnlyDrawable/OnlyDrawable.hpp"
 #include "../OnlyDrawable/Empty/Empty.hpp"
-#include "../../../../ILayout/ILayoutBackground/ILayoutBackground.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentBackground/IComponentBackground.hpp"
 #include "../../../../../IDrawable/DrawManager/DrawManager.hpp"
 
 namespace ie {
-	class Bar : public OnlyDrawable, public virtual ILayoutBackground {
+	class Bar : public OnlyDrawable, public virtual IComponentBackground {
 	public:
-		struct Make : public virtual IUninteractive::Make, public virtual ILayoutBackground::Make {
+		struct Make : public virtual IUninteractive::Make, public virtual IComponentBackground::Make {
 			BoxPtr<IUninteractive::Make> background;
 			BoxPtr<IUninteractive::Make> strip;
 			float offset = 0;

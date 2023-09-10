@@ -20,10 +20,10 @@ namespace ie {
 		void resize(sf::Vector2f size, sf::Vector2f position);
 	};
 	
-	class ILayout : public virtual IComponent {
+	class IComponentLayout : public virtual IComponent {
 	public:
 		struct Make : public virtual IComponent::Make {
-			virtual ILayout* make(InitInfo initInfo) = 0;
+			virtual IComponentLayout* make(InitInfo initInfo) = 0;
 		};
 		
 		void setPosition(sf::Vector2f position) override;

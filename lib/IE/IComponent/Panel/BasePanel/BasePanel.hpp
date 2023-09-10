@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../ILayout/ILayoutObject/ILayoutObject.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
 #include "IE/SizingAndPositioning/IPositioning/Functions/makePositioning/makePositioning.hpp"
 #include "IE/SizingAndPositioning/ISizing/Functions/makeSize/makeSize.hpp"
 #include "IE/SizingAndPositioning/ISizing2/ISizing2.hpp"
@@ -14,9 +14,9 @@
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	class BasePanel : public virtual ILayoutObject, public virtual IDrawable, public virtual IUpdatable {
+	class BasePanel : public virtual IComponentObject, public virtual IDrawable, public virtual IUpdatable {
 	public:
-		struct Make : public virtual ILayoutObject::Make {
+		struct Make : public virtual IComponentObject::Make {
 			BasePanel* make(InitInfo initInfo) override = 0;
 		};
 		

@@ -1,12 +1,12 @@
 #pragma once
 
 #include "IE/IComponent/IUnscalable/IScalable/Box/Box.hpp"
-#include "IE/IComponent/ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentTwoObjects/IComponentTwoObjects.hpp"
 
 namespace ie {
-	class BoxSwitch : public Box, public virtual ILayoutTwoObjects, public virtual IDrawable {
+	class BoxSwitch : public Box, public virtual IComponentTwoObjects, public virtual IDrawable {
 	public:
-		struct Make : public virtual Box::Make, public virtual ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual IComponentTwoObjects::Make {
 			BoxPtr<IScalable::Make> inactiveObject;
 			BoxPtr<IScalable::Make> activeObject;
 			PSbool value;

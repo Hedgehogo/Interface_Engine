@@ -1,13 +1,13 @@
 #pragma once
 
-#include "../ILayout.hpp"
-#include "../ILayoutObjectsArray/ILayoutObjectsArray.hpp"
+#include "../IComponentLayout.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentObjectsArray/IComponentObjectsArray.hpp"
 
 namespace ie {
-	class ILayoutTwoObjects : public virtual ILayoutObjectsArray {
+	class IComponentTwoObjects : public virtual IComponentObjectsArray {
 	public:
-		struct Make : public virtual ILayoutObjectsArray::Make {
-			virtual ILayoutTwoObjects* make(InitInfo initInfo) = 0;
+		struct Make : public virtual IComponentObjectsArray::Make {
+			virtual IComponentTwoObjects* make(InitInfo initInfo) = 0;
 		};
 		
 		sf::Vector2f getMinSize() const override;

@@ -2,14 +2,14 @@
 
 #include "../Box.hpp"
 #include "../../IUninteractive/OnlyDrawable/Empty/Empty.hpp"
-#include "../../../../ILayout/ILayoutBackground/ILayoutBackground.hpp"
-#include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentBackground/IComponentBackground.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentTwoObjects/IComponentTwoObjects.hpp"
 #include "../../../../../Enums/Corner/Corner.hpp"
 
 namespace ie {
-	class BoxConstRatio : public Box, public virtual ILayoutBackground, public virtual ILayoutTwoObjects, public virtual IDrawable {
+	class BoxConstRatio : public Box, public virtual IComponentBackground, public virtual IComponentTwoObjects, public virtual IDrawable {
 	public:
-		struct Make : public virtual Box::Make, public virtual ILayoutBackground::Make, public virtual ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual IComponentBackground::Make, public virtual IComponentTwoObjects::Make {
 			BoxPtr<IScalable::Make> constObject;
 			BoxPtr<IScalable::Make> secondObject;
 			BoxPtr<IUninteractive::Make> background;

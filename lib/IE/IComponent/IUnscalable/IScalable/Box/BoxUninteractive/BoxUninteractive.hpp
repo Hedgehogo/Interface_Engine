@@ -1,13 +1,13 @@
 #pragma once
 
 #include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
-#include "../../../../ILayout/ILayoutObject/ILayoutObject.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
 #include "../Box.hpp"
 
 namespace ie {
-	class BoxUninteractive : public Box, public virtual IUninteractive, public virtual ILayoutObject {
+	class BoxUninteractive : public Box, public virtual IUninteractive, public virtual IComponentObject {
 	public:
-		struct Make : public virtual Box::Make, public virtual IUninteractive::Make, public virtual ILayoutObject::Make {
+		struct Make : public virtual Box::Make, public virtual IUninteractive::Make, public virtual IComponentObject::Make {
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f minSize = {};
 			

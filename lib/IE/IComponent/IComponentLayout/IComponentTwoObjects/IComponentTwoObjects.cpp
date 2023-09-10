@@ -1,12 +1,12 @@
-#include "ILayoutTwoObjects.hpp"
+#include "IComponentTwoObjects.hpp"
 #include "../../../IDrawable/DrawManager/DrawManager.hpp"
 
 namespace ie {
-	std::size_t ILayoutTwoObjects::getArraySize() const {
+	std::size_t IComponentTwoObjects::getArraySize() const {
 		return 2;
 	}
 	
-	IScalable& ILayoutTwoObjects::getObjectAt(std::size_t index) {
+	IScalable& IComponentTwoObjects::getObjectAt(std::size_t index) {
 		if(index == 0) {
 			return getFirstObject();
 		}
@@ -16,7 +16,7 @@ namespace ie {
 		throw std::out_of_range(std::string("ILayoutWithTwoObjects::getObjectAt: __n (which is ") + std::to_string(index) + std::string(") >= _Nm (which is 2)"));
 	}
 	
-	const IScalable& ILayoutTwoObjects::getObjectAt(std::size_t index) const {
+	const IScalable& IComponentTwoObjects::getObjectAt(std::size_t index) const {
 		if(index == 0) {
 			return getFirstObject();
 		}
@@ -26,15 +26,15 @@ namespace ie {
 		throw std::out_of_range(std::string("ILayoutWithTwoObjects::getObjectAt: __n (which is ") + std::to_string(index) + std::string(") >= _Nm (which is 2)"));
 	}
 	
-	sf::Vector2f ILayoutTwoObjects::getMinSize() const {
+	sf::Vector2f IComponentTwoObjects::getMinSize() const {
 		return max(getFirstObject().getMinSize(), getSecondObject().getMinSize());
 	}
 	
-	sf::Vector2f ILayoutTwoObjects::getNormalSize() const {
+	sf::Vector2f IComponentTwoObjects::getNormalSize() const {
 		return max(getFirstObject().getNormalSize(), getSecondObject().getNormalSize());
 	}
 	
-	void ILayoutTwoObjects::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
+	void IComponentTwoObjects::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
 		IComponent::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		getFirstObject().drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		getSecondObject().drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
