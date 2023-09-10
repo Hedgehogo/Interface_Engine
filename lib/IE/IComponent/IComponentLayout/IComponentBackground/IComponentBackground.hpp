@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../IComponentLayout.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
+#include "IE/ILayout/ILayoutBackground/ILayoutBackground.hpp"
 
 namespace ie {
-	class IComponentBackground : public virtual IComponentLayout {
+	class IComponentBackground : public virtual IComponentLayout, public virtual ILayoutBackground {
 	public:
 		struct Make : public virtual IComponentLayout::Make {
 			virtual IComponentBackground* make(InitInfo initInfo) = 0;
@@ -21,10 +21,6 @@ namespace ie {
 		sf::Vector2f getMinSize() const override;
 		
 		sf::Vector2f getNormalSize() const override;
-		
-		virtual IUninteractive& getBackground() = 0;
-		
-		virtual const IUninteractive& getBackground() const = 0;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};

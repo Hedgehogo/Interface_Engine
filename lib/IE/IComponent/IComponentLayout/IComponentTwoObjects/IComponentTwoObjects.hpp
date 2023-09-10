@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../IComponentLayout.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentObjectsArray/IComponentObjectsArray.hpp"
+#include "../IComponentObjectsArray/IComponentObjectsArray.hpp"
+#include "IE/ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
 
 namespace ie {
-	class IComponentTwoObjects : public virtual IComponentObjectsArray {
+	class IComponentTwoObjects : public virtual IComponentObjectsArray, public virtual ILayoutTwoObjects{
 	public:
 		struct Make : public virtual IComponentObjectsArray::Make {
 			virtual IComponentTwoObjects* make(InitInfo initInfo) = 0;
@@ -13,20 +13,6 @@ namespace ie {
 		sf::Vector2f getMinSize() const override;
 		
 		sf::Vector2f getNormalSize() const override;
-		
-		std::size_t getArraySize() const override;
-		
-		IScalable& getObjectAt(std::size_t index) override;
-		
-		const IScalable& getObjectAt(std::size_t index) const override;
-		
-		virtual IScalable& getFirstObject() = 0;
-		
-		virtual IScalable& getSecondObject() = 0;
-		
-		virtual const IScalable& getFirstObject() const = 0;
-		
-		virtual const IScalable& getSecondObject() const = 0;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
 	};

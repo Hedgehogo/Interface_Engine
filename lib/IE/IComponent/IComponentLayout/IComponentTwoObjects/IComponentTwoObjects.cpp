@@ -1,31 +1,6 @@
 #include "IComponentTwoObjects.hpp"
-#include "../../../IDrawable/DrawManager/DrawManager.hpp"
 
 namespace ie {
-	std::size_t IComponentTwoObjects::getArraySize() const {
-		return 2;
-	}
-	
-	IScalable& IComponentTwoObjects::getObjectAt(std::size_t index) {
-		if(index == 0) {
-			return getFirstObject();
-		}
-		if(index == 1) {
-			return getSecondObject();
-		}
-		throw std::out_of_range(std::string("ILayoutWithTwoObjects::getObjectAt: __n (which is ") + std::to_string(index) + std::string(") >= _Nm (which is 2)"));
-	}
-	
-	const IScalable& IComponentTwoObjects::getObjectAt(std::size_t index) const {
-		if(index == 0) {
-			return getFirstObject();
-		}
-		if(index == 1) {
-			return getSecondObject();
-		}
-		throw std::out_of_range(std::string("ILayoutWithTwoObjects::getObjectAt: __n (which is ") + std::to_string(index) + std::string(") >= _Nm (which is 2)"));
-	}
-	
 	sf::Vector2f IComponentTwoObjects::getMinSize() const {
 		return max(getFirstObject().getMinSize(), getSecondObject().getMinSize());
 	}

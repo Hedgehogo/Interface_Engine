@@ -35,4 +35,4 @@ namespace ie {
 		IComponent::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
 		getObject().drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 	}
-	}
+}

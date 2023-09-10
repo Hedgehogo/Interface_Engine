@@ -38,4 +38,4 @@ namespace ie {
 			getObjectAt(i).drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
 		}
 	}
-	}
+}
