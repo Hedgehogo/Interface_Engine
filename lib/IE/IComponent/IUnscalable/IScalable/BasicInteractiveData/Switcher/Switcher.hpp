@@ -2,14 +2,15 @@
 
 #include "../BasicInteractiveData.hpp"
 #include "IE/IComponent/IComponentLayout/IComponentLayout.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
+#include "../../IUninteractive/IUninteractive.hpp"
+#include "../../IScalableLayout/IScalableLayout.hpp"
 #include "IE/IDrawable/IDrawable/IDrawable.hpp"
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	class Switcher : public virtual IScalable, public virtual IComponentLayout, public virtual IDrawable, public virtual IUpdatable {
+	class Switcher : public virtual IScalableLayout, public virtual IDrawable, public virtual IUpdatable {
 	public:
-		struct Make : public virtual IScalable::Make, public virtual IComponentLayout::Make {
+		struct Make : public virtual IScalableLayout::Make {
 			BoxPtr<IScalable::Make> inactiveBackground;
 			BoxPtr<IScalable::Make> activeBackground;
 			PSbool value;

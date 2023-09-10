@@ -1,14 +1,14 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
+#include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
 #include "../../../../Panel/IPanelManager/PanelManager/PanelManager.hpp"
 #include "../../../../Panel/IPanelManager/PanelManagerInterceptor/PanelManagerInterceptor.hpp"
 
 namespace ie {
-	class BoxSettable : public Box, public virtual IComponentObject, public virtual IDrawable, public virtual IUpdatable {
+	class BoxSettable : public Box, public virtual IScalableObject, public virtual IDrawable, public virtual IUpdatable {
 	public:
-		struct Make : public virtual Box::Make, public virtual IComponentObject::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f minSize = {};
 			

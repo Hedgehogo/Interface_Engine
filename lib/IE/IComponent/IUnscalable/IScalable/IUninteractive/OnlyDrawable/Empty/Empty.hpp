@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../OnlyDrawable.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentLayout.hpp"
+#include "../../IUninteractiveLayout/IUninteractiveLayout.hpp"
 
 namespace ie {
-	class Empty : public OnlyDrawable, public virtual IComponentLayout {
+	class Empty : public OnlyDrawable, public virtual IUninteractiveLayout {
 	public:
-		struct Make : public virtual IUninteractive::Make, public virtual IComponentLayout::Make {
+		struct Make : public virtual IUninteractiveLayout::Make {
 			Empty* make(InitInfo initInfo) override;
 		};
 		

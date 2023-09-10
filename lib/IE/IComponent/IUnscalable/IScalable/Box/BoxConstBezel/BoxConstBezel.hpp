@@ -1,15 +1,15 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
+#include "../../IUninteractive/IUninteractive.hpp"
+#include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
 #include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 #include "../../../../../Interaction/InteractionManager/InteractionManager.hpp"
 
 namespace ie {
-	class BoxConstBezel : public Box, public virtual IComponentObject {
+	class BoxConstBezel : public Box, public virtual IScalableObject {
 	public:
-		struct Make : public virtual Box::Make, public virtual IComponentObject::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<IUninteractive::Make> bezel;
 			float thickness;

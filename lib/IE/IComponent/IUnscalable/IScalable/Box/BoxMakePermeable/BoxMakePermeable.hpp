@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
+#include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
 
 namespace ie {
-	class BoxMakePermeable : public Box, public virtual IComponentObject {
+	class BoxMakePermeable : public Box, public virtual IScalableObject {
 	public:
-		struct Make : public virtual Box::Make, public virtual IComponentObject::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f minSize = {};
 			

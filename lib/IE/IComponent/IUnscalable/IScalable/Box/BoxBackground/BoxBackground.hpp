@@ -1,13 +1,13 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentBackground/IComponentBackground.hpp"
+#include "../../IScalableLayout/IScalableBackground/IScalableBackground.hpp"
+#include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
 
 namespace ie {
-	class BoxBackground : public Box, public virtual IComponentBackground, public virtual IComponentObject {
+	class BoxBackground : public Box, public virtual IScalableBackground, public virtual IScalableObject {
 	public:
-		struct Make : public virtual Box::Make, public virtual IComponentBackground::Make, public virtual IComponentObject::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableBackground::Make, public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<IUninteractive::Make> background;
 			sf::Vector2f offset = {};

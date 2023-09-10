@@ -1,14 +1,14 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentObjectsArray/IComponentObjectsArray.hpp"
+#include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
 #include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
 #include "../../../../../Interaction/InteractionManager/InteractionManager.hpp"
 
 namespace ie {
-	class BoxBorderVertical : public Box, public virtual IComponentObjectsArray {
+	class BoxBorderVertical : public Box, public virtual IScalableObjectsArray {
 	public:
-		struct Make : public virtual Box::Make, public virtual IComponentObjectsArray::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
 			std::vector<float> bounds;
 			sf::Vector2f minSize = {};

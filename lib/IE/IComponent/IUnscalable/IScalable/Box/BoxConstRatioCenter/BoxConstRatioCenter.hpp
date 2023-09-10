@@ -1,17 +1,15 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
 #include "../../IUninteractive/OnlyDrawable/Empty/Empty.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentBackground/IComponentBackground.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentTwoObjects/IComponentTwoObjects.hpp"
-#include "../../IUninteractive/OnlyDrawable/Empty/Empty.hpp"
+#include "../../IScalableLayout/IScalableBackground/IScalableBackground.hpp"
+#include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
+#include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 
 namespace ie {
-	class BoxConstRatioCenter : public Box, public virtual IComponentObject, public virtual IComponentBackground, public virtual IComponentTwoObjects, public virtual IDrawable {
+	class BoxConstRatioCenter : public Box, public virtual IScalableObject, public virtual IScalableBackground, public virtual IScalableTwoObjects, public virtual IDrawable {
 	public:
-		struct Make : public virtual Box::Make, public virtual IComponentObject::Make, public virtual IComponentBackground::Make, public virtual IComponentTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableObject::Make, public virtual IScalableBackground::Make, public virtual IScalableTwoObjects::Make {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<IScalable::Make> firstObject;
 			BoxPtr<IScalable::Make> secondObject;

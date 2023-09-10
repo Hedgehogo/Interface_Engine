@@ -1,14 +1,13 @@
 #pragma once
 
-#include "../OnlyDrawable/OnlyDrawable.hpp"
+#include "IE/IDrawable/DrawManager/DrawManager.hpp"
 #include "../OnlyDrawable/Empty/Empty.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentBackground/IComponentBackground.hpp"
-#include "../../../../../IDrawable/DrawManager/DrawManager.hpp"
+#include "../IUninteractiveLayout/IUninteractiveBackground/IUninteractiveBackground.hpp"
 
 namespace ie {
-	class Bar : public OnlyDrawable, public virtual IComponentBackground {
+	class Bar : public OnlyDrawable, public virtual IUninteractiveBackground {
 	public:
-		struct Make : public virtual IUninteractive::Make, public virtual IComponentBackground::Make {
+		struct Make : public virtual IUninteractiveBackground::Make {
 			BoxPtr<IUninteractive::Make> background;
 			BoxPtr<IUninteractive::Make> strip;
 			float offset = 0;

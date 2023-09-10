@@ -1,15 +1,15 @@
 #pragma once
 
+#include "IE/Enums/Corner/Corner.hpp"
 #include "../Box.hpp"
 #include "../../IUninteractive/OnlyDrawable/Empty/Empty.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentBackground/IComponentBackground.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentTwoObjects/IComponentTwoObjects.hpp"
-#include "../../../../../Enums/Corner/Corner.hpp"
+#include "../../IScalableLayout/IScalableBackground/IScalableBackground.hpp"
+#include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 
 namespace ie {
-	class BoxConstRatio : public Box, public virtual IComponentBackground, public virtual IComponentTwoObjects, public virtual IDrawable {
+	class BoxConstRatio : public Box, public virtual IScalableBackground, public virtual IScalableTwoObjects, public virtual IDrawable {
 	public:
-		struct Make : public virtual Box::Make, public virtual IComponentBackground::Make, public virtual IComponentTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableBackground::Make, public virtual IScalableTwoObjects::Make {
 			BoxPtr<IScalable::Make> constObject;
 			BoxPtr<IScalable::Make> secondObject;
 			BoxPtr<IUninteractive::Make> background;

@@ -1,17 +1,17 @@
 #pragma once
 
-#include "../Box.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/BasicInteractiveData/BasicInteractiveData.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentTwoObjects/IComponentTwoObjects.hpp"
-#include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/Box/BoxMovableBorder/MovableBorderAction/MovableBorderAction.hpp"
 #include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 #include "IE/Modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
+#include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
+#include "MovableBorderAction/MovableBorderAction.hpp"
+#include "../Box.hpp"
+#include "../../BasicInteractiveData/BasicInteractiveData.hpp"
+#include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 
 namespace ie {
-	class BoxMovableBorder : public Box, public virtual IComponentTwoObjects, public virtual IUpdatable {
+	class BoxMovableBorder : public Box, public virtual IScalableTwoObjects, public virtual IUpdatable {
 	public:
-		struct Make : public virtual Box::Make, public virtual IComponentTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableTwoObjects::Make {
 			BoxPtr<IScalable::Make> firstObject;
 			BoxPtr<IScalable::Make> secondObject;
 			bool isHorizontalBorder;
