@@ -6,7 +6,7 @@
 #include "IE/Interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 
 namespace ie {
-	class Text : public IUnscalable, public IDrawable, public IUpdatable {
+	class Text : public virtual IUnscalable, public virtual IDrawable, public virtual IUpdatable {
 	protected:
 		struct Selection {
 			std::vector<BaseCharacter*>::iterator start;
