@@ -19,7 +19,7 @@ namespace ie {
 	
 		BaseResizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);
 		
-		void init(std::vector<BaseCharacter*>& characters, std::vector<BaseLine*>& lines);
+		void init(std::vector<BaseCharacter*>& characters, std::vector<BoxPtr<BaseLine>>& lines);
 		
 		virtual void move(sf::Vector2f position) = 0;
 		
@@ -49,7 +49,7 @@ namespace ie {
 	
 	protected:
 		std::vector<BaseCharacter*>* characters;
-		std::vector<BaseLine*>* lines;
+		std::vector<BoxPtr<BaseLine> >* lines;
 		
 		const float lineSpacing;
 		const Align align;

@@ -17,7 +17,7 @@ namespace ie {
 		
 		virtual void resize(float start, float end, float height) = 0;
 		
-		virtual BaseLine* copy() = 0;
+		virtual BaseLine* copy() const = 0;
 		
 		virtual ~BaseLine() = default;
 	

@@ -25,7 +25,7 @@ namespace ie {
 		this->vertexArray = vertexArray;
 	}
 	
-	StrikeThrough* StrikeThrough::copy() {
+	StrikeThrough* StrikeThrough::copy() const{
 		StrikeThrough* underline = new StrikeThrough(sf::Color(), 0);
 		underline->init(strikeThroughOffset, underlineThickness, vertexArray, *renderTarget);
 		return underline;

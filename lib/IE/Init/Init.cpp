@@ -86,8 +86,8 @@ namespace ie {
 		inherit<KeyAction, SetSIntAction>({"SetSIntA"});
 		inherit<KeyAction, SetSFloatAction>({"SetSFloatA"});
 		
-		inherit<TextAction, TextCopyAction>({"TextCopyA"});
-		inherit<TextAction, TextSelectionAction>({"TextSelectionA"});
+		inherit<BasicKeyAction<Text&>, TextCopyAction>({"TextCopyA"});
+		inherit<BasicKeyAction<Text&>, TextSelectionAction>({"TextSelectionA"});
 		
 		inherit<IBaseInteraction, OneKeyInteraction>({"OneKeyI"});
 		inherit<IBaseInteraction, KeysInteraction>({"KeysI"});
@@ -105,9 +105,9 @@ namespace ie {
 		inherit<IMovePanelInteraction, SideMovePanelInteraction>({"SideMovePI"});
 		inherit<IPanelInteraction, IMovePanelInteraction>();
 		
-		inherit<TextInteraction, TextKeysInteraction>({"TextKeysI"});
-		inherit<TextInteraction, TextHotkeyInteraction>({"TextHotkeyI"});
-		inherit<TextInteraction, TextEmptyInteraction>({"TextEmptyI"});
+		inherit<IBasicInteraction<Text&>, BasicKeysInteraction<Text&>>({"TextKeysI"});
+		//inherit<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&>>({"TextHotkeyI"});
+		inherit<IBasicInteraction<Text&>, BasicEmptyInteraction<Text&>>({"TextEmptyI"});
 		
 		inherit<ISbool, SConvertFloatToBoolEquals>({"ConvertFloatToBoolEquals", "CFloatToBoolE"});
 		inherit<ISbool, SConvertFloatToBoolGreater>({"ConvertFloatToBoolGreater", "CFloatToBoolG"});
@@ -182,6 +182,6 @@ namespace ie {
 		addDetermine<IPositioning2>(determinePositioning2);
 		addDetermine<OpenUrlAction>(determineUrl);
 		addDetermine<KeysInteraction>(determineUrl);
-		addDetermine<TextKeysInteraction>(determineUrl);
+		addDetermine<BasicKeysInteraction<Text&>>(determineUrl);
 	}
 }

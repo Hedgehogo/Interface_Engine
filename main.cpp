@@ -20,7 +20,7 @@ public:
 		clock.restart();
 		return result;
 	}
-	
+
 private:
 	sf::Clock clock;
 	std::array<float, N> lastFPS{};
@@ -29,34 +29,118 @@ private:
 int main() {
 	ie::init();
 	
-	auto c_value{std::make_shared<ie::SRVec2f>()};
-	auto b_value{std::make_shared<ie::Sbool>(false)};
+	sf::Font font{};
+	font.loadFromFile("../../example-resources/segoeui.ttf");
+	
+	auto a_value{std::make_shared<ie::SRVec2f>()};
 	ie::Window window{
-		ie::Interface::Make{
-			makeBoxPtr<ie::BoxConstBorder::Make>(
-				makeBoxPtr<ie::BoxConstBorder::Make>(
-					makeBoxPtr<ie::Switcher::Make>(
-						makeBoxPtr<ie::FullColor::Make>(sf::Color::Yellow),
-						makeBoxPtr<ie::FullColor::Make>(sf::Color::Blue),
-						b_value
+		ie::Interface{
+			makeBoxPtr<ie::BoxScroll>(
+				makeBoxPtr<ie::Text>(
+					ie::makeVector(
+						makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
+							U"["
+						),
+						makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
+							U"aaa",
+							ie::nullColor,
+							nullptr,
+							sf::Text::Style{},
+							ie::makeVector (
+								makeBoxPtr<ie::BaseLine, ie::Underline>(sf::Color::Red)
+							)
+						),
+						makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
+							U"] [",
+							ie::nullColor,
+							nullptr,
+							sf::Text::Style{},
+							ie::makeVector (
+								makeBoxPtr<ie::BaseLine, ie::StrikeThrough>(sf::Color::Black, 0.15f)
+							)
+						),
+						makeBoxPtr<ie::BaseTextBlock, ie::InteractiveTextBlock>(
+							makeBoxPtr<ie::OneKeyInteraction>(
+								makeBoxPtr<ie::OpenUrlAction>(
+									"https://github.com/Hedgehogo/Interface_Engine/"
+								),
+								ie::Key::mouseLeft
+							),
+							U"bbb",
+							ie::nullColor,
+							nullptr,
+							sf::Text::Style{},
+							ie::makeVector (
+								makeBoxPtr<ie::BaseLine, ie::StrikeThrough>(sf::Color::Blue)
+							)
+						),
+						makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
+							U"] "
+						),
+						makeBoxPtr<ie::BaseTextBlock, ie::ObjectTextBlock>(
+							makeBoxPtr<ie::FullColor>(sf::Color::Red),
+							sf::Vector2f{100, 100}
+						),
+						makeBoxPtr<ie::BaseTextBlock, ie::ObjectTextBlock>(
+							makeBoxPtr<ie::BoxConstBezel>(
+								makeBoxPtr<ie::BoxScroll>(
+									makeBoxPtr<ie::Text>(
+										ie::makeVector(
+											makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
+												U"Text in text!"
+											)
+										),
+										makeBoxPtr<ie::FullColor>(sf::Color::White),
+										30,
+										&font,
+										sf::Color::Red,
+										sf::Color::White,
+										sf::Color::Blue,
+										ie::nullColor,
+										sf::Color{150, 150, 150},
+										makeBoxPtr<ie::Resizer>(1.15f, ie::BaseResizer::Align::center)
+									),
+									a_value
+								),
+								makeBoxPtr<ie::FullColor>(sf::Color::Green),
+								10.f
+							),
+							100.f
+						)
 					),
-					makeBoxPtr<ie::Slider::Make>(
-						makeBoxPtr<ie::Capsule::Make>(sf::Color::Red),
-						makeBoxPtr<ie::FullColor::Make>(sf::Color::Green),
-						c_value
-					),
-					20.f, ie::Side::up
+					makeBoxPtr<ie::FullColor>(sf::Color::White),
+					30,
+					&font,
+					sf::Color::Black,
+					sf::Color::White,
+					sf::Color::Blue,
+					ie::nullColor,
+					sf::Color{150, 150, 150},
+					makeBoxPtr<ie::Resizer>(1.15f, ie::BaseResizer::Align::left),
+					makeBoxPtr<ie::BasicHotkeyInteraction<ie::Text&>>(
+						ie::makeVector(
+							ie::makeVector(
+								makeBoxPtr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>>(
+									makeBoxPtr<ie::BasicKeysInteraction<ie::Text&>>(
+										makeBoxPtr<ie::TextSelectionAction>(),
+										std::vector{ie::Key::mouseLeft}
+									)
+								),
+								makeBoxPtr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>>(
+									makeBoxPtr<ie::BasicKeysInteraction<ie::Text&>>(
+										makeBoxPtr<ie::TextCopyAction>(),
+										std::vector{ie::Key::lControl, ie::Key::c}
+									)
+								)
+							)
+						)
+					)
 				),
-				makeBoxPtr<ie::BoxSwitch::Make>(
-					makeBoxPtr<ie::FullColor::Make>(sf::Color::Yellow),
-					makeBoxPtr<ie::FullColor::Make>(sf::Color::Blue),
-					b_value
-				),
-				20.f, ie::Side::right
+				a_value
 			)
 		},
 		"IE works!",
-		{200, 100},
+		{800, 600},
 		sf::ContextSettings{
 			0, 0, 1
 		}

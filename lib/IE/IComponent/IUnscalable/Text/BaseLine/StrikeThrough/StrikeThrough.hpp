@@ -15,7 +15,7 @@ namespace ie {
 		void init(float strikeThroughOffset, float underlineThickness, sf::VertexArray vertexArray, sf::RenderTarget& renderTarget);
 	
 	public:
-		StrikeThrough* copy();
+		StrikeThrough* copy() const override;
 	
 	protected:
 		float strikeThroughOffset;

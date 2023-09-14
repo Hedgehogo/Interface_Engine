@@ -7,18 +7,28 @@
 namespace ie {
 	class TextBlock : public BaseTextBlock {
 	public:
-		TextBlock(std::u32string str, TextVariables textVariables, std::vector<BaseLine*> lines);
+		TextBlock(std::u32string  text, TextVariables textVariables, std::vector<BoxPtr<BaseLine>>&& lines);
 		
 		TextBlock(
-			std::u32string text, sf::Color textColor = nullColor, sf::Font* font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0, sf::Color textSelectionColor = nullColor,
-			sf::Color backgroundSelectionColor = nullColor, sf::Color inactiveTextSelectionColor = nullColor, sf::Color inactiveBackgroundSelectionColor = nullColor
+			std::u32string  text,
+			sf::Color textColor = nullColor,
+			sf::Font* font = nullptr,
+			sf::Text::Style style = {},
+			std::vector<BoxPtr<BaseLine>>&& lines = {},
+			int size = 0,
+			sf::Color textSelectionColor = nullColor,
+			sf::Color backgroundSelectionColor = nullColor,
+			sf::Color inactiveTextSelectionColor = nullColor,
+			sf::Color inactiveBackgroundSelectionColor = nullColor
 		);
+		
+		void setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, sf::Font* font, uint size) override;
 		
 		std::vector<BaseCharacter*> getCharacters() override;
 		
-		bool in(sf::Vector2f mousePosition);
-		
 		void init(InitInfo textInitInfo, InitInfo) override;
+		
+		bool in(sf::Vector2f mousePosition);
 		
 		void update() override;
 		
@@ -26,13 +36,10 @@ namespace ie {
 		
 		TextBlock* copy() override;
 		
-		~TextBlock() override;
-	
 	protected:
-		std::u32string str;
-		
-		std::vector<BaseCharacter*> textCharacters;
-		std::vector<BaseLine*> lines;
+		std::vector<BoxPtr<BaseCharacter>> textCharacters;
+		std::vector<BoxPtr<BaseLine>> lines;
+		std::u32string text;
 	};
 	
 	

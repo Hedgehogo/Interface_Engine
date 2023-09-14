@@ -36,7 +36,7 @@ namespace ie {
 	}
 	
 	sf::Vector2f FullColor::getMinSize() const {
-		return sf::Vector2f();
+		return {};
 	}
 	
 	sf::Vector2f FullColor::getNormalSize() const {

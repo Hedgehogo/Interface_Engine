@@ -6,9 +6,9 @@
 namespace ie {
 	class ObjectTextBlock : public BaseTextBlock {
 	public:
-		ObjectTextBlock(IScalable* object, sf::Vector2f size = {0, 0}, bool isCharacter = true);
+		explicit ObjectTextBlock(BoxPtr<IScalable>&& object, sf::Vector2f size = {0, 0}, bool isCharacter = true);
 		
-		ObjectTextBlock(IScalable* object, float height);
+		ObjectTextBlock(BoxPtr<IScalable>&& object, float height);
 		
 		void init(InitInfo, InitInfo initInfo) override;
 		
@@ -23,12 +23,12 @@ namespace ie {
 		BaseTextBlock* copy() override;
 	
 	protected:
-		std::vector<BaseLine*> lines;
+		IScalable& object;
+		std::vector<BoxPtr<BaseLine>> lines;
 		sf::Vector2f size;
-		ObjectCharacter* objectCharacter;
+		BoxPtr<ObjectCharacter> objectCharacter;
 		bool isCharacter;
 		bool fullLine;
-		IScalable* object;
 	};
 	
 	template<>

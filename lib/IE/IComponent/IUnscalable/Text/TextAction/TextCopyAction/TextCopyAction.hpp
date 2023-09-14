@@ -1,15 +1,16 @@
 #pragma once
 
-#include "IE/IComponent/IUnscalable/Text/TextInteraction/TextAction/TextAction.hpp"
 #include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 #include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
+	class Text;
+	
 	class TextCopyAction : public BasicBaseKeyAction<Text&> {
 	public:
 		TextCopyAction();
 		
-		void init(TextInteractionInitInfo initInfo) override;
+		void init(BasicActionInitInfo<Text&> initInfo) override;
 		
 		TextCopyAction* copy() override;
 		

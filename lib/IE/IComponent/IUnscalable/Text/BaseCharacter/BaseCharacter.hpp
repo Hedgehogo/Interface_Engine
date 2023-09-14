@@ -40,7 +40,7 @@ namespace ie {
 		
 		virtual void move(sf::Vector2f position);
 		
-		virtual std::vector<BaseLine*>& getLine() = 0;
+		virtual const std::vector<BoxPtr<BaseLine>>& getLine() = 0;
 		
 		virtual sf::Vector2f getPosition() const;
 		
@@ -61,8 +61,6 @@ namespace ie {
 		virtual float getMinAdvance();
 		
 		virtual void drawDebug(sf::RenderTarget& renderTarget, int indentAddition, uint hue, uint hueOffset) = 0;
-		
-		virtual ~BaseCharacter() = default;
 	
 	protected:
 		sf::Vector2f position;

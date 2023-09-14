@@ -27,6 +27,12 @@ namespace ie {
 	}
 	
 	template<typename T>
+	void BasicKeysInteraction<T>::init(BasicActionInitInfo<T> initInfo) {
+		IBasicInteraction<T>::init(initInfo);
+		action->init(initInfo);
+	}
+	
+	template<typename T>
 	std::vector<Key> BasicKeysInteraction<T>::getKeys() {
 		return keys;
 	}

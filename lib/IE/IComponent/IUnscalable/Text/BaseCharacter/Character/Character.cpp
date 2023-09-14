@@ -2,7 +2,7 @@
 #include "IE/Modules/hsvToRgb/hsvToRgb.hpp"
 
 namespace ie {
-	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BaseLine*>& lines) :
+	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BoxPtr<BaseLine>>& lines) :
 		character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), selectionVertexArray(sf::Quads, 4), lines(lines) {
 		if(isSpecial() != BaseCharacter::Special::enter) {
 			glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style & sf::Text::Style::Bold);
@@ -69,16 +69,9 @@ namespace ie {
 	
 	void Character::setSelection(bool selection) {
 		BaseCharacter::setSelection(selection);
-		if(selection) {
-			vertexArray[0].color = textVariables.textSelectionColor;
-			vertexArray[1].color = textVariables.textSelectionColor;
-			vertexArray[2].color = textVariables.textSelectionColor;
-			vertexArray[3].color = textVariables.textSelectionColor;
-		} else {
-			vertexArray[0].color = textVariables.TextColor;
-			vertexArray[1].color = textVariables.TextColor;
-			vertexArray[2].color = textVariables.TextColor;
-			vertexArray[3].color = textVariables.TextColor;
+		auto currentColor{selection ? textVariables.textSelectionColor : textVariables.TextColor};
+		for(std::size_t i = 0; i < 4; ++i) {
+			vertexArray[i].color = currentColor;
 		}
 	}
 	
@@ -121,18 +114,13 @@ namespace ie {
 	
 	void Character::move(sf::Vector2f position) {
 		BaseCharacter::move(position);
-		vertexArray[0].position += position;
-		vertexArray[1].position += position;
-		vertexArray[2].position += position;
-		vertexArray[3].position += position;
-		
-		selectionVertexArray[0].position += position;
-		selectionVertexArray[1].position += position;
-		selectionVertexArray[2].position += position;
-		selectionVertexArray[3].position += position;
+		for(std::size_t i = 0; i < 4; ++i) {
+			selectionVertexArray[i].position += position;
+			         vertexArray[i].position += position;
+		}
 	}
 	
-	std::vector<BaseLine*>& Character::getLine() {
+	const std::vector<BoxPtr<BaseLine>>& Character::getLine() {
 		return lines;
 	}
 	

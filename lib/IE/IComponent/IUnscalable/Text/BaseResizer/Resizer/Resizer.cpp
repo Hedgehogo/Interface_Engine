@@ -8,22 +8,22 @@ namespace ie {
 		startRender += position;
 		endRender += position;
 		
-		for(BaseCharacter*& character: *characters) {
+		for(auto& character: *characters) {
 			character->move(position);
 		}
 		
-		for(BaseLine*& line: *lines) {
+		for(auto& line: *lines) {
 			line->move(position);
 		}
 	}
 	
 	void Resizer::setPosition(sf::Vector2f position) {
 		sf::Vector2f offset{position - startRender};
-		for(BaseCharacter*& character: *characters) {
+		for(auto& character: *characters) {
 			character->move({offset});
 		}
 		
-		for(BaseLine*& line: *lines) {
+		for(auto& line: *lines) {
 			line->move(offset);
 		}
 		
@@ -62,18 +62,18 @@ namespace ie {
 			(*character)->move(offset);
 		}
 		
-		std::vector<BaseLine*>* oldLine = nullptr;
+		const std::vector<BoxPtr<BaseLine>>* oldLine = nullptr;
 		float startLine = 0;
 		
 		for(auto character = afterEnter; character != endCharacter; ++character) {
-			std::vector<BaseLine*>& characterLine = (*character)->getLine();
+			auto& characterLine = (*character)->getLine();
 			if(oldLine != &characterLine) {
 				sf::Vector2f characterPos = (*character)->getPosition();
 				if(oldLine) {
-					for(BaseLine*& line: *oldLine) {
+					for(auto & line: *oldLine) {
 						BaseLine* copyLine = line->copy();
 						copyLine->resize(startLine, characterPos.x, characterPos.y);
-						this->lines->push_back(copyLine);
+						this->lines->emplace_back(copyLine);
 					}
 				}
 				
@@ -87,10 +87,10 @@ namespace ie {
 			sf::Vector2f lineEnd = character->getPosition();
 			lineEnd.x += character->getAdvance();
 			
-			for(BaseLine*& line: *oldLine) {
+			for(auto& line: *oldLine) {
 				BaseLine* copyLine = line->copy();
 				copyLine->resize(startLine, lineEnd.x, lineEnd.y);
-				this->lines->push_back(copyLine);
+				this->lines->emplace_back(copyLine);
 			}
 		}
 		return lineSize;
@@ -121,9 +121,6 @@ namespace ie {
 	}
 	
 	void Resizer::deleteOldCash(sf::Vector2f size, sf::Vector2f position) {
-		for(BaseLine*& line: *lines) {
-			delete line;
-		}
 		lines->clear();
 		
 		startRender = position;
@@ -240,7 +237,7 @@ namespace ie {
 		sf::Vector2f minSize = {0, 0};
 		float wordSizeX = 0;
 		
-		for(BaseCharacter* character: *characters) {
+		for(auto& character: *characters) {
 			if(character->isSpecial() == BaseCharacter::Special::no) {
 				wordSizeX += character->getMinAdvance();
 			} else {
@@ -259,7 +256,7 @@ namespace ie {
 		sf::Vector2f minSize = {0, 0};
 		
 		float advance = 0;
-		for(BaseCharacter* character: *characters) {
+		for(auto& character: *characters) {
 			advance = character->getMinAdvance();
 			if(advance > minSize.x)
 				minSize.x = advance;
@@ -271,7 +268,7 @@ namespace ie {
 		sf::Vector2f minSize = {0, 0};
 		float wordSizeX = 0;
 		
-		for(BaseCharacter* character: *characters) {
+		for(auto& character: *characters) {
 			if(character->isSpecial() != BaseCharacter::Special::enter) {
 				wordSizeX += character->getMinAdvance();
 			} else {

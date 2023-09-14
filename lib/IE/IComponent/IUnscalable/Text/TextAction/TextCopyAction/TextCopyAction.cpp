@@ -7,7 +7,7 @@ namespace ie {
 	TextCopyAction::TextCopyAction() : text(nullptr) {
 	}
 	
-	void TextCopyAction::init(TextInteractionInitInfo initInfo) {
+	void TextCopyAction::init(BasicActionInitInfo<Text&> initInfo) {
 		text = &initInfo.additional;
 	}
 	

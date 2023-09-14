@@ -15,7 +15,7 @@ namespace ie {
 		void init(float underlineOffset, float underlineThickness, sf::VertexArray vertexArray, sf::RenderTarget& renderTarget);
 	
 	public:
-		Underline* copy();
+		Underline* copy() const override;
 	
 	protected:
 		float underlineOffset;

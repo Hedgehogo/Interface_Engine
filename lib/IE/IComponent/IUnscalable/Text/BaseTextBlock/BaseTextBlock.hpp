@@ -8,17 +8,13 @@
 namespace ie {
 	class BaseTextBlock {
 	public:
-		struct Edge {
-			int start, end;
-		};
-	
 		BaseTextBlock();
 		
 		BaseTextBlock(TextVariables textVariables);
 		
 		virtual ~BaseTextBlock() = default;
 		
-		void setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, sf::Font* font, uint size);
+		virtual void setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, sf::Font* font, uint size);
 		
 		virtual void init(InitInfo textInitInfo, InitInfo initInfo) = 0;
 		

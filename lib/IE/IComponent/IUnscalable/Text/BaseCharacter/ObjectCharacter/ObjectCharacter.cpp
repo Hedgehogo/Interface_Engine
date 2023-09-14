@@ -1,7 +1,7 @@
 #include "ObjectCharacter.hpp"
 
 namespace ie {
-	ObjectCharacter::ObjectCharacter(IScalable* object, bool fullLine) : object(object), special(fullLine ? BaseCharacter::Special::fullLine : BaseCharacter::Special::no) {
+	ObjectCharacter::ObjectCharacter(BoxPtr<IScalable>&& object, bool fullLine) : object(std::move(object)), special(fullLine ? BaseCharacter::Special::fullLine : BaseCharacter::Special::no) {
 	}
 	
 	char32_t ObjectCharacter::getChar() {
@@ -44,15 +44,11 @@ namespace ie {
 	void ObjectCharacter::draw(bool) {
 	}
 	
-	ObjectCharacter::~ObjectCharacter() {
-		delete object;
-	}
-	
 	void ObjectCharacter::drawDebug(sf::RenderTarget& renderTarget, int indentAddition, uint hue, uint hueOffset) {
 		object->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
 	}
 	
-	std::vector<BaseLine*>& ObjectCharacter::getLine() {
+	const std::vector<BoxPtr<BaseLine>>& ObjectCharacter::getLine() {
 		return lines;
 	}
 	

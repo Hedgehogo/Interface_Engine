@@ -4,7 +4,7 @@ namespace ie {
 	BaseResizer::BaseResizer(float lineSpacing, Align align, Algorithm algorithm) : characters(nullptr), lines(nullptr), lineSpacing(lineSpacing), align(align), algorithm(algorithm) {
 	}
 	
-	void BaseResizer::init(std::vector<BaseCharacter*>& characters, std::vector<BaseLine*>& lines) {
+	void BaseResizer::init(std::vector<BaseCharacter*>& characters, std::vector<BoxPtr<BaseLine>>& lines) {
 		this->characters = &characters;
 		this->lines = &lines;
 	}

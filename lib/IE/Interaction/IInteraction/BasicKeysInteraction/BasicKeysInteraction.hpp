@@ -22,6 +22,8 @@ namespace ie {
 		
 		BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 		
+		void init(BasicActionInitInfo<T> initInfo) override;
+		
 		bool isPress() const;
 		
 		std::vector<Key> getKeys();

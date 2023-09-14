@@ -25,7 +25,7 @@ namespace ie {
 		this->vertexArray = vertexArray;
 	}
 	
-	Underline* Underline::copy() {
+	Underline* Underline::copy() const{
 		Underline* underline = new Underline;
 		underline->init(underlineOffset, underlineThickness, vertexArray, *renderTarget);
 		return underline;
