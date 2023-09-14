@@ -4,7 +4,7 @@
 namespace ie {
 	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BoxPtr<BaseLine>>& lines) :
 		character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), selectionVertexArray(sf::Quads, 4), lines(lines) {
-		if(isSpecial() != BaseCharacter::Special::enter) {
+		if(isSpecial() != BaseCharacter::Special::Enter) {
 			glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style & sf::Text::Style::Bold);
 			
 			texture = textVariables.font->getTexture(textVariables.size);
@@ -76,7 +76,7 @@ namespace ie {
 	}
 	
 	void Character::draw(bool selection) {
-		if(isSpecial() != BaseCharacter::Special::enter) {
+		if(isSpecial() != BaseCharacter::Special::Enter) {
 			if(this->selection && selection)
 				renderTarget->draw(selectionVertexArray);
 			renderTarget->draw(vertexArray, &texture);
@@ -85,10 +85,10 @@ namespace ie {
 	
 	BaseCharacter::Special Character::isSpecial() {
 		if(character == L' ')
-			return BaseCharacter::Special::space;
+			return BaseCharacter::Special::Space;
 		else if(character == L'\n')
-			return BaseCharacter::Special::enter;
-		return BaseCharacter::Special::no;
+			return BaseCharacter::Special::Enter;
+		return BaseCharacter::Special::No;
 	}
 	
 	char32_t Character::getChar() {

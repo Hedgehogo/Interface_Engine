@@ -10,9 +10,9 @@ namespace ie {
 	}
 	
 	sf::Vector2f BaseResizer::getMinSize() {
-		if(algorithm == Algorithm::console) {
+		if(algorithm == Algorithm::Console) {
 			return getMinSizeConsole();
-		} else if(algorithm == Algorithm::absolute) {
+		} else if(algorithm == Algorithm::Absolute) {
 			return getMinSizeAbsolute();
 		}
 		return getMinSizeBase();
@@ -20,11 +20,11 @@ namespace ie {
 	
 	bool Decode<BaseResizer::Align>::decode(const YAML::Node& node, BaseResizer::Align& align) {
 		if(node.as<std::string>() == "left") {
-			align = BaseResizer::Align::left;
+			align = BaseResizer::Align::Left;
 		} else if(node.as<std::string>() == "right") {
-			align = BaseResizer::Align::right;
+			align = BaseResizer::Align::Right;
 		} else if(node.as<std::string>() == "center") {
-			align = BaseResizer::Align::center;
+			align = BaseResizer::Align::Center;
 		} else {
 			throw YAML::BadConversion{node.Mark()};
 		}
@@ -33,11 +33,11 @@ namespace ie {
 	
 	bool Decode<BaseResizer::Algorithm>::decode(const YAML::Node& node, BaseResizer::Algorithm& align) {
 		if(node.as<std::string>() == "base") {
-			align = BaseResizer::Algorithm::base;
+			align = BaseResizer::Algorithm::Base;
 		} else if(node.as<std::string>() == "console") {
-			align = BaseResizer::Algorithm::console;
+			align = BaseResizer::Algorithm::Console;
 		} else if(node.as<std::string>() == "absolute") {
-			align = BaseResizer::Algorithm::absolute;
+			align = BaseResizer::Algorithm::Absolute;
 		} else {
 			throw YAML::BadConversion{node.Mark()};
 		}

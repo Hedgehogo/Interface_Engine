@@ -5,7 +5,7 @@
 namespace ie {
 	class Resizer : public BaseResizer {
 	public:
-		Resizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);
+		Resizer(float lineSpacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
 		
 		void move(sf::Vector2f position) override;
 		

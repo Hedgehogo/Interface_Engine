@@ -12,10 +12,10 @@ namespace ie {
 	class BaseCharacter {
 	public:
 		enum class Special {
-			space,
-			enter,
-			no,
-			fullLine,
+			Space,
+			Enter,
+			No,
+			FullLine,
 		};
 	
 		BaseCharacter();

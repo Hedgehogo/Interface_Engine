@@ -98,7 +98,7 @@ int main() {
 										sf::Color::Blue,
 										ie::nullColor,
 										sf::Color{150, 150, 150},
-										makeBoxPtr<ie::Resizer>(1.15f, ie::BaseResizer::Align::center)
+										makeBoxPtr<ie::Resizer>(1.15f, ie::BaseResizer::Align::Center)
 									),
 									a_value
 								),
@@ -116,7 +116,7 @@ int main() {
 					sf::Color::Blue,
 					ie::nullColor,
 					sf::Color{150, 150, 150},
-					makeBoxPtr<ie::Resizer>(1.15f, ie::BaseResizer::Align::left),
+					makeBoxPtr<ie::Resizer>(1.15f, ie::BaseResizer::Align::Left),
 					makeBoxPtr<ie::BasicHotkeyInteraction<ie::Text&>>(
 						ie::makeVector(
 							ie::makeVector(

@@ -5,19 +5,19 @@
 namespace ie {
 	class BaseResizer {
 	public:
-		enum Align {
-			left,
-			right,
-			center
+		enum class Align {
+			Left,
+			Right,
+			Center
 		};
 		
 		enum class Algorithm {
-			base,
-			console,
-			absolute
+			Base,
+			Console,
+			Absolute
 		};
 	
-		BaseResizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);
+		BaseResizer(float lineSpacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
 		
 		void init(std::vector<BaseCharacter*>& characters, std::vector<BoxPtr<BaseLine>>& lines);
 		

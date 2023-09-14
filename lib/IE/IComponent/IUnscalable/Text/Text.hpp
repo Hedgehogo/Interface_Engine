@@ -26,7 +26,7 @@ namespace ie {
 			sf::Color backgroundSelectionColor = sf::Color::Blue,
 			sf::Color inactiveTextSelectionColor = nullColor,
 			sf::Color inactiveBackgroundSelectionColor = {150, 150, 150},
-			BoxPtr<BaseResizer>&& resizer = makeBoxPtr<Resizer>(1.15f, BaseResizer::Align::left),
+			BoxPtr<BaseResizer>&& resizer = makeBoxPtr<Resizer>(1.15f, BaseResizer::Align::Left),
 			BoxPtr<IBasicInteraction<Text&>>&& textInteraction = makeBoxPtr<BasicEmptyInteraction<Text&>>()
 		);
 		

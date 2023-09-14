@@ -259,7 +259,7 @@ namespace ie {
 			convDef(node["background-selection-color"], sf::Color::Blue),
 			convDef(node["inactive-text-selection-color"], nullColor),
 			convDef(node["inactive-background-selection-color"], sf::Color{150, 150, 150}),
-			convDefBoxPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::left),
+			convDefBoxPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::Left),
 			node["text-interaction"] ? node["text-interaction"].as<BoxPtr<IBasicInteraction<Text&>>>() : makeBoxPtr<BasicEmptyInteraction<Text&>>()
 		};
 		return true;

@@ -1,7 +1,7 @@
 #include "ObjectCharacter.hpp"
 
 namespace ie {
-	ObjectCharacter::ObjectCharacter(BoxPtr<IScalable>&& object, bool fullLine) : object(std::move(object)), special(fullLine ? BaseCharacter::Special::fullLine : BaseCharacter::Special::no) {
+	ObjectCharacter::ObjectCharacter(BoxPtr<IScalable>&& object, bool fullLine) : object(std::move(object)), special(fullLine ? BaseCharacter::Special::FullLine : BaseCharacter::Special::No) {
 	}
 	
 	char32_t ObjectCharacter::getChar() {
@@ -57,7 +57,7 @@ namespace ie {
 	}
 	
 	float ObjectCharacter::getMinAdvance() {
-		return special == BaseCharacter::Special::fullLine ? object->getMinSize().x : object->getSize().x;
+		return special == BaseCharacter::Special::FullLine ? object->getMinSize().x : object->getSize().x;
 	}
 	
 	sf::Vector2f ObjectCharacter::getPosition() const {
