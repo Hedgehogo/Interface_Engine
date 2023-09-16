@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/Empty/Empty.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include <_test/_imageEqual.hpp>
+#include "_test/_imageEqual/_imageEqual.hpp"
 
 TEST(IComponent, Empty) {
 	InitInfoData data{{100, 100}};

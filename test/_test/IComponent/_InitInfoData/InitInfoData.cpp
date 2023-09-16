@@ -1,8 +1,10 @@
 #include "InitInfoData.hpp"
+#include "../../_imageDifference/_imageDifference.hpp"
 
 InitInfoData::InitInfoData(sf::Vector2u size) {
 	renderTarget.create(size.x, size.y);
 	renderTarget.clear(sf::Color::Transparent);
+	renderTarget.setSmooth(false);
 }
 
 ie::InitInfo InitInfoData::makeInitInfo() {
@@ -42,6 +44,8 @@ bool InitInfoData::renderEqualWithSave(std::filesystem::path path) {
 		std::filesystem::create_directories(directory);
 		path = directory / filename;
 		first.saveToFile(path.string());
+		path = directory / std::filesystem::path{"_" + filename.string()};
+		imageDifference(first, second).saveToFile(path.string());
 		return false;
 	}
 	return true;
