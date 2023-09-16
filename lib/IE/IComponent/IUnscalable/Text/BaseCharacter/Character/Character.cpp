@@ -5,9 +5,9 @@ namespace ie {
 	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BoxPtr<BaseLine>>& lines) :
 		character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), selectionVertexArray(sf::Quads, 4), lines(lines) {
 		if(isSpecial() != BaseCharacter::Special::Enter) {
-			glyph = textVariables.font->getGlyph(character, textVariables.size, textVariables.style & sf::Text::Style::Bold);
+			glyph = textVariables.font.some()->getGlyph(character, textVariables.size.some(), textVariables.style.some() & sf::Text::Style::Bold);
 			
-			texture = textVariables.font->getTexture(textVariables.size);
+			texture = textVariables.font.some()->getTexture(textVariables.size.some());
 			
 			vertexArray[0].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left, glyph.textureRect.top});
 			vertexArray[1].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left + glyph.textureRect.width, glyph.textureRect.top});
@@ -24,7 +24,7 @@ namespace ie {
 			selectionVertexArray[2].position = {getAdvance(), getHeight()};
 			selectionVertexArray[3].position = {0, getHeight()};
 			
-			if(textVariables.style & sf::Text::Style::Italic) {
+			if(textVariables.style.some() & sf::Text::Style::Italic) {
 				float italicShear = -0.26794;
 				
 				for(size_t i = 0; i < 4; ++i) {
@@ -36,8 +36,8 @@ namespace ie {
 				vertexArray[i].position += {glyph.bounds.left, glyph.bounds.top};
 				selectionVertexArray[i].position.y -= getHeight();
 				
-				vertexArray[i].color = textVariables.TextColor;
-				selectionVertexArray[i].color = textVariables.backgroundSelectionColor;
+				vertexArray[i].color = textVariables.TextColor.some();
+				selectionVertexArray[i].color = textVariables.backgroundSelectionColor.some();
 			}
 		}
 	}
@@ -50,13 +50,13 @@ namespace ie {
 		BaseCharacter::setActive(active);
 		if(active) {
 			for(int i = 0; i < 4; ++i) {
-				vertexArray[i].color = textVariables.textSelectionColor;
-				selectionVertexArray[i].color = textVariables.backgroundSelectionColor;
+				vertexArray[i].color = textVariables.textSelectionColor.some();
+				selectionVertexArray[i].color = textVariables.backgroundSelectionColor.some();
 			}
 		} else {
 			for(int i = 0; i < 4; ++i) {
-				vertexArray[i].color = textVariables.inactiveTextSelectionColor;
-				selectionVertexArray[i].color = textVariables.inactiveBackgroundSelectionColor;
+				vertexArray[i].color = textVariables.inactiveTextSelectionColor.some();
+				selectionVertexArray[i].color = textVariables.inactiveBackgroundSelectionColor.some();
 			}
 		}
 	}
@@ -69,7 +69,7 @@ namespace ie {
 	
 	void Character::setSelection(bool selection) {
 		BaseCharacter::setSelection(selection);
-		auto currentColor{selection ? textVariables.textSelectionColor : textVariables.TextColor};
+		auto currentColor{selection ? textVariables.textSelectionColor.some() : textVariables.TextColor.some()};
 		for(std::size_t i = 0; i < 4; ++i) {
 			vertexArray[i].color = currentColor;
 		}
@@ -96,7 +96,7 @@ namespace ie {
 	}
 	
 	float Character::getKerning(char32_t character) {
-		return textVariables.font->getKerning(this->character, character, textVariables.size);
+		return textVariables.font.some()->getKerning(this->character, character, textVariables.size.some());
 	}
 	
 	float Character::getAdvance() {
@@ -104,7 +104,7 @@ namespace ie {
 	}
 	
 	float Character::getHeight() const {
-		return textVariables.size;
+		return textVariables.size.some();
 	}
 	
 	void Character::setPosition(const sf::Vector2f position) {

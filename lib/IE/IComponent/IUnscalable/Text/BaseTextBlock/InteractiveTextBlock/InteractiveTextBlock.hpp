@@ -7,12 +7,17 @@ namespace ie {
 	class InteractiveTextBlock : public TextBlock {
 	public:
 		InteractiveTextBlock(
-			BoxPtr<IBaseInteraction>&& interaction, std::u32string text, sf::Color textColor = nullColor,
-			sf::Font* font = nullptr, sf::Text::Style style = {}, std::vector<BoxPtr<BaseLine>>&& lines = {}, int size = 0,
-			sf::Color textSelectionColor = nullColor,
-			sf::Color backgroundSelectionColor = nullColor,
-			sf::Color inactiveTextSelectionColor = nullColor,
-			sf::Color inactiveBackgroundSelectionColor = nullColor
+			BoxPtr<IBaseInteraction>&& interaction,
+			std::u32string text,
+			orl::Option<sf::Color> textColor = {},
+			orl::Option<sf::Font*> font = {},
+			orl::Option<sf::Text::Style> style = {},
+			std::vector<BoxPtr<BaseLine>>&& lines = {},
+			orl::Option<uint> size = {},
+			orl::Option<sf::Color> textSelectionColor = {},
+			orl::Option<sf::Color> backgroundSelectionColor = {},
+			orl::Option<sf::Color> inactiveTextSelectionColor = {},
+			orl::Option<sf::Color> inactiveBackgroundSelectionColor = {}
 		);
 		
 		void init(InitInfo textInitInfo, InitInfo initInfo);

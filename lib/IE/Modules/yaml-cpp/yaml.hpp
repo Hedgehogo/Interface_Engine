@@ -4,6 +4,8 @@
 #include <yaml-cpp/yaml.h>
 #include <functional>
 #include <Box_Ptr/boxPtr.hpp>
+#include <optional>
+#include <option_result/option_result.hpp>
 
 typedef long long llint;
 typedef unsigned int uint;
@@ -167,6 +169,11 @@ namespace ie {
 	struct Decode<BoxPtr<T> > {
 		static std::enable_if_t<std::is_class_v<T>, bool>
 		decode(const YAML::Node& node, BoxPtr<T>& object);
+	};
+	
+	template<typename T>
+	struct Decode<orl::Option<T> > {
+		static bool decode(const YAML::Node& node, orl::Option<T>& object);
 	};
 	
 	template<typename T>

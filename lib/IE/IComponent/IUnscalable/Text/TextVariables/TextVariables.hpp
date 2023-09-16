@@ -3,21 +3,28 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <optional>
+#include <option_result/option_result.hpp>
 
 using uint = unsigned;
 
 namespace ie {
 	struct TextVariables {
-		sf::Color TextColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor;
-		sf::Font* font;
-		sf::Text::Style style;
-		uint size;
-		float fontLineSpace;
+		orl::Option<sf::Color> TextColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor;
+		orl::Option<uint> size;
+		orl::Option<sf::Font*> font;
+		orl::Option<float> fontLineSpace;
+		orl::Option<sf::Text::Style> style;
 		
 		TextVariables(
-			sf::Color textColor = sf::Color{}, sf::Color textSelectionColor = sf::Color{}, sf::Color backgroundSelectionColor = sf::Color{},
-			sf::Color inactiveTextSelectionColor = sf::Color{}, sf::Color inactiveBackgroundSelectionColor = sf::Color{},
-			sf::Font* font = nullptr, sf::Text::Style style = {}, uint size = 0
+			orl::Option<sf::Color> textColor = {},
+			orl::Option<sf::Color> textSelectionColor = {},
+			orl::Option<sf::Color> backgroundSelectionColor = {},
+			orl::Option<sf::Color> inactiveTextSelectionColor = {},
+			orl::Option<sf::Color> inactiveBackgroundSelectionColor = {},
+			orl::Option<sf::Font*> font = nullptr,
+			orl::Option<sf::Text::Style> style = {},
+			orl::Option<uint> size = {}
 		);
 	};
 }

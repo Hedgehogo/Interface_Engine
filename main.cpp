@@ -43,8 +43,8 @@ int main() {
 						),
 						makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
 							U"aaa",
-							ie::nullColor,
-							nullptr,
+							sf::Color::Black,
+							orl::Option<sf::Font*>{},
 							sf::Text::Style{},
 							ie::makeVector (
 								makeBoxPtr<ie::BaseLine, ie::Underline>(sf::Color::Red)
@@ -52,8 +52,8 @@ int main() {
 						),
 						makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
 							U"] [",
-							ie::nullColor,
-							nullptr,
+							sf::Color::Black,
+							orl::Option<sf::Font*>{},
 							sf::Text::Style{},
 							ie::makeVector (
 								makeBoxPtr<ie::BaseLine, ie::StrikeThrough>(sf::Color::Black, 0.15f)
@@ -67,8 +67,8 @@ int main() {
 								ie::Key::mouseLeft
 							),
 							U"bbb",
-							ie::nullColor,
-							nullptr,
+							sf::Color::Black,
+							orl::Option<sf::Font*>{},
 							sf::Text::Style{},
 							ie::makeVector (
 								makeBoxPtr<ie::BaseLine, ie::StrikeThrough>(sf::Color::Blue)
@@ -96,8 +96,9 @@ int main() {
 										sf::Color::Red,
 										sf::Color::White,
 										sf::Color::Blue,
-										ie::nullColor,
+										sf::Color::Red,
 										sf::Color{150, 150, 150},
+										sf::Text::Style{},
 										makeBoxPtr<ie::Resizer>(1.15f, ie::BaseResizer::Align::Center)
 									),
 									a_value
@@ -114,8 +115,9 @@ int main() {
 					sf::Color::Black,
 					sf::Color::White,
 					sf::Color::Blue,
-					ie::nullColor,
+					sf::Color::Black,
 					sf::Color{150, 150, 150},
+					sf::Text::Style{},
 					makeBoxPtr<ie::Resizer>(1.15f, ie::BaseResizer::Align::Left),
 					makeBoxPtr<ie::BasicHotkeyInteraction<ie::Text&>>(
 						ie::makeVector(

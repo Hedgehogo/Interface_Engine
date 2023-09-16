@@ -16,18 +16,18 @@ namespace ie {
 		void init(InitInfo initInfo) override;
 	
 	public:
-		explicit Text(
-			std::vector<BoxPtr<BaseTextBlock>>&& textBlocks,
-			BoxPtr<IUninteractive>&& background = makeBoxPtr<FullColor>(sf::Color::White),
-			int size = 14,
-			sf::Font* font = nullptr,
-			sf::Color textColor = sf::Color::Black,
-			sf::Color textSelectionColor = sf::Color::White,
-			sf::Color backgroundSelectionColor = sf::Color::Blue,
-			sf::Color inactiveTextSelectionColor = nullColor,
-			sf::Color inactiveBackgroundSelectionColor = {150, 150, 150},
-			BoxPtr<BaseResizer>&& resizer = makeBoxPtr<Resizer>(1.15f, BaseResizer::Align::Left),
-			BoxPtr<IBasicInteraction<Text&>>&& textInteraction = makeBoxPtr<BasicEmptyInteraction<Text&>>()
+		explicit Text(std::vector<BoxPtr<BaseTextBlock>>&& textBlocks,
+					  BoxPtr<IUninteractive>&& background = makeBoxPtr<FullColor>(sf::Color::White),
+					  int size = 14,
+					  sf::Font* font = nullptr,
+					  sf::Color textColor = sf::Color::Black,
+					  sf::Color textSelectionColor = sf::Color::White,
+					  sf::Color backgroundSelectionColor = sf::Color::Blue,
+					  sf::Color inactiveTextSelectionColor = sf::Color::Black,
+					  sf::Color inactiveBackgroundSelectionColor = {150, 150, 150},
+					  sf::Text::Style style = {},
+					  BoxPtr<BaseResizer>&& resizer = makeBoxPtr<Resizer>(1.15f, BaseResizer::Align::Left),
+					  BoxPtr<IBasicInteraction<Text&>>&& textInteraction = makeBoxPtr<BasicEmptyInteraction<Text&>>()
 		);
 		
 		void setSelection(Selection selection);

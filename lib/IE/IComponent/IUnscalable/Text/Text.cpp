@@ -16,12 +16,21 @@ namespace ie {
 		sf::Color backgroundSelectionColor,
 		sf::Color inactiveTextSelectionColor,
 		sf::Color inactiveBackgroundSelectionColor,
+		sf::Text::Style style,
 		BoxPtr<BaseResizer>&& resizer,
 		BoxPtr<IBasicInteraction<Text&>>&& textInteraction
 	) : interactionManager(nullptr), textInteraction(std::move(textInteraction)), size(size), textBlocks(std::move(textBlocks)), resizer(std::move(resizer)), background(std::move(background)) {
 		for(auto& textBlock: this->textBlocks) {
-			textBlock->setTextVariables(textColor, textSelectionColor, backgroundSelectionColor, (inactiveTextSelectionColor == nullColor ? textColor : inactiveTextSelectionColor), inactiveBackgroundSelectionColor, font,
-										size);
+			textBlock->setTextVariables(
+				textColor,
+				textSelectionColor,
+				backgroundSelectionColor,
+				inactiveTextSelectionColor,
+				inactiveBackgroundSelectionColor,
+				font,
+				size,
+				style
+			);
 			std::vector<BaseCharacter*> characters = textBlock->getCharacters();
 			textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
 		}
@@ -249,19 +258,10 @@ namespace ie {
 	}
 	
 	bool DecodePointer<Text>::decodePointer(const YAML::Node& node, Text*& text) {
-		text = new Text{
-			node["text-block"] ? std::vector{node["text-block"].as<BoxPtr<BaseTextBlock>>()} : node["text-blocks"].as<std::vector<BoxPtr<BaseTextBlock>>>(),
-			convDefBoxPtr<IUninteractive, FullColor>(node["background"], sf::Color::White),
-			convDef(node["size"], 14),
-			convDef<sf::Font*>(node["font"], nullptr),
-			convDef(node["text-color"], sf::Color::Black),
-			convDef(node["text-selection-color"], sf::Color::White),
-			convDef(node["background-selection-color"], sf::Color::Blue),
-			convDef(node["inactive-text-selection-color"], nullColor),
-			convDef(node["inactive-background-selection-color"], sf::Color{150, 150, 150}),
-			convDefBoxPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::Left),
-			node["text-interaction"] ? node["text-interaction"].as<BoxPtr<IBasicInteraction<Text&>>>() : makeBoxPtr<BasicEmptyInteraction<Text&>>()
-		};
+		text = new Text{node["text-block"] ? std::vector{node["text-block"].as<BoxPtr<BaseTextBlock>>()} : node["text-blocks"].as<std::vector<BoxPtr<BaseTextBlock>>>(), convDefBoxPtr<IUninteractive, FullColor>(node["background"], sf::Color::White),
+						convDef(node["size"], 14), convDef<sf::Font*>(node["font"], nullptr), convDef(node["text-color"], sf::Color::Black), convDef(node["text-selection-color"], sf::Color::White),
+						convDef(node["background-selection-color"], sf::Color::Blue), convDef(node["inactive-text-selection-color"], nullColor), convDef(node["inactive-background-selection-color"], sf::Color{150, 150, 150}), sf::Text::Underlined,
+						convDefBoxPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::Left), node["text-interaction"] ? node["text-interaction"].as<BoxPtr<IBasicInteraction<Text&>>>() : makeBoxPtr<BasicEmptyInteraction<Text&>>()};
 		return true;
 	}
 	

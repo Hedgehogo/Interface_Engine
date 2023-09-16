@@ -14,7 +14,16 @@ namespace ie {
 		
 		virtual ~BaseTextBlock() = default;
 		
-		virtual void setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, sf::Font* font, uint size);
+		virtual void setTextVariables(
+			sf::Color TextColor,
+			sf::Color textSelectionColor,
+			sf::Color backgroundSelectionColor,
+			sf::Color inactiveTextSelectionColor,
+			sf::Color inactiveBackgroundSelectionColor,
+			sf::Font* font,
+			uint size,
+			sf::Text::Style style
+		);
 		
 		virtual void init(InitInfo textInitInfo, InitInfo initInfo) = 0;
 		

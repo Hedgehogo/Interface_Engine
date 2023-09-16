@@ -2,12 +2,23 @@
 
 namespace ie {
 	TextVariables::TextVariables(
-		sf::Color textColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
-		sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor,
-		sf::Font* font, sf::Text::Style style, uint size
+		orl::Option<sf::Color> textColor,
+		orl::Option<sf::Color> textSelectionColor,
+		orl::Option<sf::Color> backgroundSelectionColor,
+		orl::Option<sf::Color> inactiveTextSelectionColor,
+		orl::Option<sf::Color> inactiveBackgroundSelectionColor,
+		orl::Option<sf::Font*> font,
+		orl::Option<sf::Text::Style> style,
+		orl::Option<uint> size
 	) :
-		TextColor(textColor), textSelectionColor(textSelectionColor), backgroundSelectionColor(backgroundSelectionColor),
-		inactiveTextSelectionColor(inactiveTextSelectionColor), inactiveBackgroundSelectionColor(inactiveBackgroundSelectionColor),
-		font(font), style(style), size(size), fontLineSpace(font ? font->getLineSpacing(size) : 0) {
+		TextColor(textColor),
+		textSelectionColor(textSelectionColor),
+		backgroundSelectionColor(backgroundSelectionColor),
+		inactiveTextSelectionColor(inactiveTextSelectionColor),
+		inactiveBackgroundSelectionColor(inactiveBackgroundSelectionColor),
+		size(size),
+		font(font),
+		style(style),
+		fontLineSpace(font && size ? orl::Option{font.some()->getLineSpacing(this->size.some())} : orl::Option<float>{}) {
 	}
 }
