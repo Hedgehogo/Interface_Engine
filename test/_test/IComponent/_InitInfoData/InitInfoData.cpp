@@ -3,6 +3,7 @@
 InitInfoData::InitInfoData(sf::Vector2u size) {
 	renderTarget.create(size.x, size.y);
 	renderTarget.clear(sf::Color::Transparent);
+	renderTarget.setSmooth(false);
 }
 
 ie::InitInfo InitInfoData::makeInitInfo() {

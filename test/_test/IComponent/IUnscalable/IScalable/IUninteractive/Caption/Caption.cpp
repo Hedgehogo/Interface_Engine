@@ -13,6 +13,7 @@ TEST(IComponent, Caption) {
 	
 	sf::Font font{};
 	font.loadFromFile("../../example-resources/msyh.ttc");
+	font.setSmooth(false);
 	ie::Caption caption{
 		{
 			sf::String{ie::u32stringToUint32String(str)},
