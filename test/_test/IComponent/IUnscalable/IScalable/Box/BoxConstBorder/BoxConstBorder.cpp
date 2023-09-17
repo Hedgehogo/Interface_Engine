@@ -2,7 +2,7 @@
 #include <IE/IComponent/IUnscalable/IScalable/Box/BoxConstBorder/BoxConstBorder.hpp>
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include <_test/_imageEqual.hpp>
+#include "_test/_imageEqual/_imageEqual.hpp"
 
 TEST(IComponent, BoxConstBorder) {
 	InitInfoData data{{100, 100}};

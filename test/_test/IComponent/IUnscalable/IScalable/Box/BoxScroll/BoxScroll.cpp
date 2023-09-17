@@ -2,7 +2,7 @@
 #include <IE/IComponent/IUnscalable/IScalable/Box/BoxScroll/BoxScroll.hpp>
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include <_test/_imageEqual.hpp>
+#include "_test/_imageEqual/_imageEqual.hpp"
 
 TEST(IComponent, BoxScroll) {
 	InitInfoData data{{100, 100}};

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ISizing2.hpp"
+#include <functional>
 
 namespace ie {
 	class FnSizing2 : public virtual ISizing2 {

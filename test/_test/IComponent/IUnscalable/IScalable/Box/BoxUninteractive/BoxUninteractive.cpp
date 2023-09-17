@@ -2,7 +2,7 @@
 #include <IE/IComponent/IUnscalable/IScalable/Box/BoxUninteractive/BoxUninteractive.hpp>
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include <_test/_imageEqual.hpp>
+#include "_test/_imageEqual/_imageEqual.hpp"
 
 TEST(IComponent, BoxUninteractive) {
 	InitInfoData data{{100, 100}};

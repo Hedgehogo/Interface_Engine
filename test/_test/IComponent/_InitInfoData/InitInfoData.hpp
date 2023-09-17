@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Window.hpp>
-#include <_test/_imageEqual.hpp>
+#include "_test/_imageEqual/_imageEqual.hpp"
 #include <IE/IDrawable/DrawManager/DrawManager.hpp>
 #include <IE/IUpdatable/UpdateManager/UpdateManager.hpp>
 #include <IE/Interaction/InteractionManager/InteractionManager.hpp>
