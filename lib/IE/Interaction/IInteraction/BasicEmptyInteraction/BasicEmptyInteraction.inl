@@ -1,7 +1,9 @@
 namespace ie {
-	template<typename T>
-	BasicEmptyInteraction<T>* BasicEmptyInteraction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
-		return new BasicEmptyInteraction<T>{std::move(*this), initInfo};
+	namespace make_system {
+		template<typename T>
+		ie::BasicEmptyInteraction<T>* BasicEmptyInteraction<T>::make(BasicActionInitInfo<T> initInfo) {
+			return new ie::BasicEmptyInteraction<T>{std::move(*this), initInfo};
+		}
 	}
 	
 	template<typename T>

@@ -3,9 +3,9 @@
 #include "../IPositioning2.hpp"
 
 namespace ie {
-	class Positioning2 : public IPositioning2 {
+	class Positioning2 : public virtual IPositioning2 {
 	public:
-		struct Make : public IPositioning2::Make {
+		struct Make : public virtual IPositioning2::Make {
 			BoxPtr<IPositioning> horizontal;
 			BoxPtr<IPositioning> vertical;
 			

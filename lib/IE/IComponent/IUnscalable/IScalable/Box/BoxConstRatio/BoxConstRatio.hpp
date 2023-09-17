@@ -1,20 +1,20 @@
 #pragma once
 
+#include "IE/Enums/Corner/Corner.hpp"
 #include "../Box.hpp"
 #include "../../IUninteractive/OnlyDrawable/Empty/Empty.hpp"
-#include "../../../../ILayout/ILayoutBackground/ILayoutBackground.hpp"
-#include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
-#include "../../../../../Enums/Corner/Corner.hpp"
+#include "../../IScalableLayout/IScalableBackground/IScalableBackground.hpp"
+#include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 
 namespace ie {
-	class BoxConstRatio : public Box, public ILayoutBackground, public ILayoutTwoObjects, public IDrawable {
+	class BoxConstRatio : public Box, public virtual IScalableBackground, public virtual IScalableTwoObjects, public virtual IDrawable {
 	public:
-		struct Make : public Box::Make, public ILayoutBackground::Make, public ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableBackground::Make, public virtual IScalableTwoObjects::Make {
 			BoxPtr<IScalable::Make> constObject;
 			BoxPtr<IScalable::Make> secondObject;
 			BoxPtr<IUninteractive::Make> background;
 			float aspectRatio;
-			Corner corner = Corner::upLeft;
+			Corner corner = Corner::UpLeft;
 			sf::Vector2f minSize = {};
 			
 			Make(
@@ -22,7 +22,7 @@ namespace ie {
 				BoxPtr<IScalable::Make>&& secondObject,
 				BoxPtr<IUninteractive::Make>&& background,
 				float aspectRatio = 1.f,
-				Corner corner = Corner::upLeft,
+				Corner corner = Corner::UpLeft,
 				sf::Vector2f minSize = {}
 			);
 			
@@ -36,7 +36,7 @@ namespace ie {
 			BoxPtr<IScalable>&& secondObject,
 			BoxPtr<IUninteractive>&& background,
 			float aspectRatio,
-			Corner corner = Corner::upLeft,
+			Corner corner = Corner::UpLeft,
 			sf::Vector2f minSize = {}
 		);
 		

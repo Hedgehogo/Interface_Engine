@@ -25,7 +25,7 @@ namespace ie {
 		return new SmartSizing::Make{targetCoefficient, parentCoefficient, addition};
 	}
 	
-	ISizing::Make* makeSizeMake(LambdaSizing::FindSizeFunc findSizeFunc, LambdaSizing::MinSizeFunc minSizeFunc) {
-		return new LambdaSizing::Make{std::move(findSizeFunc), std::move(minSizeFunc)};
+	ISizing::Make* makeSizeMake(FnSizing::FindSizeFn findSizeFn, FnSizing::GetParentSizeFn getParentSizeFn) {
+		return new FnSizing::Make{std::move(findSizeFn), std::move(getParentSizeFn)};
 	}
 }

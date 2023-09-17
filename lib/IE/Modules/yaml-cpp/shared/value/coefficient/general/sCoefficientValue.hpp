@@ -11,7 +11,7 @@ namespace ie {
 	/// 			Use SRangeValue instead.
 	///
 	////////////////////////////////////////////////////////////
-	class SCoefficientValue : public SValue<float>, public ISCoefficientValue {
+	class SCoefficientValue : public SValue<float>, public virtual ISCoefficientValue {
 	public:
 		explicit SCoefficientValue(float value = 0.f);
 		

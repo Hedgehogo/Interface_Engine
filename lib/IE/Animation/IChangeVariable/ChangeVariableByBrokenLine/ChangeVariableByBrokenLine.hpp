@@ -3,7 +3,7 @@
 #include "../IChangeVariable.hpp"
 
 namespace ie {
-	class ChangeVariableByBrokenLine : public IChangeVariable {
+	class ChangeVariableByBrokenLine : public virtual IChangeVariable {
 	public:
 		struct Value {
 			float value;

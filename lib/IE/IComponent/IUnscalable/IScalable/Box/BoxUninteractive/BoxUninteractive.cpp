@@ -21,7 +21,7 @@ namespace ie {
 	}
 	
 	void BoxUninteractive::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayoutObject::resize(size, position);
+		IComponentObject::resize(size, position);
 	}
 	
 	bool BoxUninteractive::updateInteractions(sf::Vector2f mousePosition) {

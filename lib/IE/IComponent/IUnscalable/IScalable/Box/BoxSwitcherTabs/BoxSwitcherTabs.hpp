@@ -1,21 +1,21 @@
 #pragma once
 
-#include "IE/IComponent/IUnscalable/IScalable/Box/Box.hpp"
-#include "IE/IComponent/ILayout/ILayoutObjectsArray/ILayoutObjectsArray.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/BasicInteractiveData/BasicInteractiveData.hpp"
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
+#include "../Box.hpp"
+#include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
+#include "../../BasicInteractiveData/BasicInteractiveData.hpp"
 
 namespace ie {
-	class BoxSwitcherTabs : public Box, public IUpdatable, public ILayoutObjectsArray {
+	class BoxSwitcherTabs : public Box, public virtual IScalableObjectsArray, public virtual IUpdatable {
 	public:
-		struct Make : public Box::Make, public ILayoutObjectsArray::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
 			PSint value;
 			Key key;
 			bool isHorizontal;
 			sf::Vector2f minSize = {};
 			
-			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key = Key::mouseLeft, bool isHorizontal = true, sf::Vector2f minSize = {});
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key = Key::MouseLeft, bool isHorizontal = true, sf::Vector2f minSize = {});
 			
 			BoxSwitcherTabs* make(InitInfo initInfo) override;
 		};

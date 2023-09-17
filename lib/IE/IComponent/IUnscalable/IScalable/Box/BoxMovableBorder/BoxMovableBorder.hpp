@@ -1,23 +1,23 @@
 #pragma once
 
-#include "../Box.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/BasicInteractiveData/BasicInteractiveData.hpp"
-#include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
-#include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/Box/BoxMovableBorder/MovableBorderAction/MovableBorderAction.hpp"
 #include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 #include "IE/Modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
+#include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
+#include "MovableBorderAction/MovableBorderAction.hpp"
+#include "../Box.hpp"
+#include "../../BasicInteractiveData/BasicInteractiveData.hpp"
+#include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 
 namespace ie {
-	class BoxMovableBorder : public Box, public IUpdatable, public ILayoutTwoObjects {
+	class BoxMovableBorder : public Box, public virtual IScalableTwoObjects, public virtual IUpdatable {
 	public:
-		struct Make : public Box::Make, public ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableTwoObjects::Make {
 			BoxPtr<IScalable::Make> firstObject;
 			BoxPtr<IScalable::Make> secondObject;
 			bool isHorizontalBorder;
 			PSCoefficient borderValue;
 			int borderInteractionSize = 5;
-			Key key = Key::mouseLeft;
+			Key key = Key::MouseLeft;
 			sf::Vector2f minSize = {};
 			
 			Make(
@@ -26,7 +26,7 @@ namespace ie {
 				bool isHorizontalBorder,
 				PSCoefficient borderValue,
 				int borderInteractionSize = 5,
-				Key key = Key::mouseLeft,
+				Key key = Key::MouseLeft,
 				sf::Vector2f minSize = {}
 			);
 			

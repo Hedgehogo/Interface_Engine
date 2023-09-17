@@ -1,6 +1,22 @@
 #include "../../../../Modules/openUrl/openUrl.hpp"
 
 namespace ie {
+	namespace make_system {
+		template<typename T>
+		BasicOpenUrlAction<T>::BasicOpenUrlAction(const std::string& url) : url(url) {
+		}
+		
+		template<typename T>
+		ie::BasicOpenUrlAction<T>* BasicOpenUrlAction<T>::make(BasicActionInitInfo<T> initInfo) {
+			return new ie::BasicOpenUrlAction<T>{std::move(*this), initInfo};
+		}
+	}
+	
+	template<typename T>
+	BasicOpenUrlAction<T>::BasicOpenUrlAction(Make&& make, BasicActionInitInfo<T>) :
+		url(std::move(make.url)) {
+	}
+	
 	template<typename T>
 	BasicOpenUrlAction<T>::BasicOpenUrlAction(const std::string& url) : url(url) {
 	}

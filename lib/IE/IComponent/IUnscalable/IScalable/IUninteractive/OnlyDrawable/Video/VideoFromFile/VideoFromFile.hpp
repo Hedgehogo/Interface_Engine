@@ -8,7 +8,7 @@
 namespace ie {
 	class VideoFromFile : public OnlyDrawable {
 	public:
-		struct Make : public IUninteractive::Make {
+		struct Make : public virtual IUninteractive::Make {
 			std::vector<sf::Texture> video;
 			PSCoefficient viewingProgress;
 			

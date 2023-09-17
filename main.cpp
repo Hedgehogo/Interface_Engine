@@ -64,7 +64,7 @@ int main() {
 								makeBoxPtr<ie::OpenUrlAction>(
 									"https://github.com/Hedgehogo/Interface_Engine/"
 								),
-								ie::Key::mouseLeft
+								ie::Key::MouseLeft
 							),
 							U"bbb",
 							sf::Color::Black,
@@ -125,13 +125,13 @@ int main() {
 								makeBoxPtr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>>(
 									makeBoxPtr<ie::BasicKeysInteraction<ie::Text&>>(
 										makeBoxPtr<ie::TextSelectionAction>(),
-										std::vector{ie::Key::mouseLeft}
+										std::vector{ie::Key::MouseLeft}
 									)
 								),
 								makeBoxPtr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>>(
 									makeBoxPtr<ie::BasicKeysInteraction<ie::Text&>>(
 										makeBoxPtr<ie::TextCopyAction>(),
-										std::vector{ie::Key::lControl, ie::Key::c}
+										std::vector{ie::Key::LControl, ie::Key::C}
 									)
 								)
 							)

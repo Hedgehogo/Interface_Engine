@@ -4,7 +4,7 @@
 #include "../value/coefficient/reference/sReferenceCoefficientValue.hpp"
 
 namespace ie {
-	class ISVector2 : public IShared {
+	class ISVector2 : public virtual IShared {
 	public:
 		ISVector2() = default;
 		

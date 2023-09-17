@@ -61,7 +61,7 @@ namespace ie {
 	}
 	
 	void Bar::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayoutBackground::resize(size, position);
+		IComponentBackground::resize(size, position);
 		setValue(value);
 	}
 	

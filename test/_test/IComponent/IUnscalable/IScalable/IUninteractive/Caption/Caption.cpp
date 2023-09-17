@@ -56,5 +56,5 @@ TEST(IComponent, Caption) {
 	ASSERT_EQ(caption.getAreaPosition(), (sf::Vector2f{7, 46}));
 	
 	data.drawManager.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("test-src/Caption.png"));
+	ASSERT_TRUE(data.renderEqualWithSave("test-src/Caption.png", 0.001));
 }

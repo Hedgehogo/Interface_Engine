@@ -1,12 +1,12 @@
 #pragma once
 
-#include "IE/IComponent/IUnscalable/IScalable/Box/Box.hpp"
-#include "IE/IComponent/ILayout/ILayoutObjectsArray/ILayoutObjectsArray.hpp"
+#include "../Box.hpp"
+#include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
 
 namespace ie {
-	class BoxTabs : public Box, public ILayoutObjectsArray, public IDrawable {
+	class BoxTabs : public Box, public virtual IScalableObjectsArray, public virtual IDrawable {
 	public:
-		struct Make : public Box::Make, public ILayoutObjectsArray::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
 			PISint value;
 			sf::Vector2f minSize = {};

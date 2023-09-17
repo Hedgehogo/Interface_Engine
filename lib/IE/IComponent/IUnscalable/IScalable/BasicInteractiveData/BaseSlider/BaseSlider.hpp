@@ -6,7 +6,7 @@
 #include "../../../../../Modules/yaml-cpp/shared/shared.hpp"
 
 namespace ie {
-	class BaseSlider : public virtual IScalable, public IUpdatable {
+	class BaseSlider : public virtual IScalable, public virtual IUpdatable {
 	public:
 		BaseSlider(
 			BoxPtr<IUninteractive::Make>&& slider,

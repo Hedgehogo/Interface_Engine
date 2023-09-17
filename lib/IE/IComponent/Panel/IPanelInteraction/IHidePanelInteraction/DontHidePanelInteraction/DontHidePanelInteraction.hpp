@@ -4,9 +4,9 @@
 #include "IE/Interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 
 namespace ie {
-	class DontHidePanelInteraction : public BasicEmptyInteraction<Panel&>, public IHidePanelInteraction {
+	class DontHidePanelInteraction : public BasicEmptyInteraction<Panel&>, public virtual IHidePanelInteraction {
 	public:
-		struct Make : public IHidePanelInteraction::Make {
+		struct Make : public virtual IHidePanelInteraction::Make {
 			DontHidePanelInteraction* make(PanelActionInitInfo initInfo) override;
 		};
 		

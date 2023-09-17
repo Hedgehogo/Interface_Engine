@@ -3,9 +3,9 @@
 #include "../ISizing.hpp"
 
 namespace ie {
-	class TargetCoefficientSizing : public ISizing {
+	class TargetCoefficientSizing : public virtual ISizing {
 	public:
-		struct Make : public ISizing::Make {
+		struct Make : public virtual ISizing::Make {
 			float coefficient = 1;
 			float addition = 0;
 			

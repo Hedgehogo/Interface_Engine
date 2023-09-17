@@ -4,9 +4,9 @@
 
 namespace ie {
 	enum class Location {
-		origin,
-		center,
-		end
+		Origin,
+		Center,
+		End
 	};
 	
 	template<>

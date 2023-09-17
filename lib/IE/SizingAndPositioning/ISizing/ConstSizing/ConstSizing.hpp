@@ -3,9 +3,9 @@
 #include "../ISizing.hpp"
 
 namespace ie {
-	class ConstSizing : public ISizing {
+	class ConstSizing : public virtual ISizing {
 	public:
-		struct Make : public ISizing::Make {
+		struct Make : public virtual ISizing::Make {
 			float size;
 			
 			Make(float size);

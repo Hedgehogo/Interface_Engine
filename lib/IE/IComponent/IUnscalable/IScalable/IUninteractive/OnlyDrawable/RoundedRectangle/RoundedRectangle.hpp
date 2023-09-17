@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../OnlyDrawable.hpp"
-#include "IE/IComponent/ILayout/ILayout.hpp"
+#include "../../IUninteractiveLayout/IUninteractiveLayout.hpp"
 
 namespace ie {
-	class RoundedRectangle : public OnlyDrawable, public ILayout {
+	class RoundedRectangle : public OnlyDrawable, public virtual IUninteractiveLayout {
 	public:
-		struct Make : public IUninteractive::Make, public ILayout::Make {
+		struct Make : public virtual IUninteractiveLayout::Make {
 			sf::Color color;
 			float radius;
 			

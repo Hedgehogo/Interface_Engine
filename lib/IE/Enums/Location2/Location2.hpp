@@ -4,9 +4,9 @@
 
 namespace ie {
 	enum class Location2 {
-		upLeft, up, upRight,
-		left, center, right,
-		downLeft, down, downRight
+		UpLeft, Up, UpRight,
+		Left, Center, Right,
+		DownLeft, Down, DownRight
 	};
 	
 	Location getVerticalLocation(Location2 location2);

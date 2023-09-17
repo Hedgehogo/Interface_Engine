@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/Interaction/IAction/BasicKeyAction/BasicEmptyAction/BasicEmptyAction.hpp"
-#include "IE/Interaction/IAction/BasicKeyAction/BasicLambdaKeyAction/BasicLambdaKeyAction.hpp"
+#include "IE/Interaction/IAction/BasicKeyAction/BasicFnKeyAction/BasicFnKeyAction.hpp"
 #include "IE/Interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
 #include "IE/Make/make.hpp"
 #include <Box_Ptr/boxPtr.hpp>
@@ -14,9 +14,9 @@ namespace ie {
 	class IInteraction {
 	public:
 		enum class Priority {
-			highest,
-			medium,
-			lowest,
+			Highest,
+			Medium,
+			Lowest,
 		};
 		
 		virtual ~IInteraction() = default;
@@ -36,14 +36,22 @@ namespace ie {
 		virtual IInteraction* copy() = 0;
 	};
 	
-	template<typename T = std::monostate>
-	class IBasicInteraction : public IInteraction {
-	public:
-		struct Make {
-			virtual IBasicInteraction<T>* make(BasicActionInitInfo<T> initInfo) = 0;
+	template<typename T>
+	class IBasicInteraction;
+	
+	namespace make_system {
+		template<typename T = std::monostate>
+		struct IBasicInteraction {
+			virtual ie::IBasicInteraction<T>* make(BasicActionInitInfo<T> initInfo) = 0;
 			
-			virtual ~Make() = default;
+			virtual ~IBasicInteraction() = default;
 		};
+	}
+	
+	template<typename T = std::monostate>
+	class IBasicInteraction : public virtual IInteraction {
+	public:
+		using Make = make_system::IBasicInteraction<T>;
 		
 		virtual void init(BasicActionInitInfo<T> initInfo);
 		

@@ -1,22 +1,22 @@
 #pragma once
 
-#include "../../ILayout/ILayoutObject/ILayoutObject.hpp"
-#include "../../../SizingAndPositioning/IPositioning/Functions/makePositioning/makePositioning.hpp"
-#include "../../../SizingAndPositioning/ISizing/Functions/makeSize/makeSize.hpp"
-#include "../../../SizingAndPositioning/ISizing2/ISizing2.hpp"
-#include "../../../SizingAndPositioning/ISizing2/Sizing2/Sizing2.hpp"
-#include "../../../SizingAndPositioning/ISizing2/ConstRatioSizing2/ConstRatioSizing2.hpp"
-#include "../../../SizingAndPositioning/ISizing2/LambdaSizing2/LambdaSizing2.hpp"
-#include "../../../SizingAndPositioning/IPositioning2/IPositioning2.hpp"
-#include "../../../SizingAndPositioning/IPositioning2/Positioning2/Positioning2.hpp"
-#include "../../../SizingAndPositioning/IPositioning2/InternalPositioning2/InternalPositioning2.hpp"
-#include "../../../SizingAndPositioning/IPositioning2/LambdaPositioning2/LambdaPositioning2.hpp"
-#include "../../../Enums/KeyHandler/KeyHandler.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
+#include "IE/SizingAndPositioning/IPositioning/Functions/makePositioning/makePositioning.hpp"
+#include "IE/SizingAndPositioning/ISizing/Functions/makeSize/makeSize.hpp"
+#include "IE/SizingAndPositioning/ISizing2/ISizing2.hpp"
+#include "IE/SizingAndPositioning/ISizing2/Sizing2/Sizing2.hpp"
+#include "IE/SizingAndPositioning/ISizing2/ConstRatioSizing2/ConstRatioSizing2.hpp"
+#include "IE/SizingAndPositioning/ISizing2/FnSizing2/FnSizing2.hpp"
+#include "IE/SizingAndPositioning/IPositioning2/IPositioning2.hpp"
+#include "IE/SizingAndPositioning/IPositioning2/Positioning2/Positioning2.hpp"
+#include "IE/SizingAndPositioning/IPositioning2/InternalPositioning2/InternalPositioning2.hpp"
+#include "IE/SizingAndPositioning/IPositioning2/FnPositioning2/FnPositioning2.hpp"
+#include "IE/Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	class BasePanel : public ILayoutObject, public IDrawable, public IUpdatable {
+	class BasePanel : public virtual IComponentObject, public virtual IDrawable, public virtual IUpdatable {
 	public:
-		struct Make : public ILayoutObject::Make {
+		struct Make : public virtual IComponentObject::Make {
 			BasePanel* make(InitInfo initInfo) override = 0;
 		};
 		

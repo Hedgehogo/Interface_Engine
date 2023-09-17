@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
+#include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 
 namespace ie {
-	class BoxAlternative : public Box, public ILayoutTwoObjects {
+	class BoxAlternative : public Box, public virtual IScalableTwoObjects {
 	public:
-		struct Make : public Box::Make, public ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableTwoObjects::Make {
 			BoxPtr<IScalable::Make> topObject;
 			BoxPtr<IScalable::Make> bottomObject;
 			sf::Vector2f minSize = {};

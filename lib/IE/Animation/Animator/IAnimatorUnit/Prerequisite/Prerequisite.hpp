@@ -3,7 +3,7 @@
 #include "../IAnimatorUnit.hpp"
 
 namespace ie {
-	class Prerequisite : public IAnimatorUnit {
+	class Prerequisite : public virtual IAnimatorUnit {
 	public:
 		Prerequisite(PISbool valve, std::vector<IAnimatorUnit*> nextTrue, std::vector<IAnimatorUnit*> nextFalse);
 		

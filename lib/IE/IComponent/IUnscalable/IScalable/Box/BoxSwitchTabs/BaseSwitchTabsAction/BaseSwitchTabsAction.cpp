@@ -1,14 +1,22 @@
 #include "BaseSwitchTabsAction.hpp"
 
 namespace ie {
-	BaseSwitchTabsAction::BaseSwitchTabsAction(BoxSwitchTabs* objects) : object(objects) {
+	BaseSwitchTabsAction::BaseSwitchTabsAction(BasicActionInitInfo<BoxSwitchTabs&> initInfo) :
+		box(&initInfo.additional) {
 	}
 	
-	void BaseSwitchTabsAction::setObject(BoxSwitchTabs* object) {
-		this->object = object;
+	BaseSwitchTabsAction::BaseSwitchTabsAction() : box(nullptr) {
 	}
 	
-	BoxSwitchTabs* BaseSwitchTabsAction::getObject() {
-		return object;
+	void BaseSwitchTabsAction::init(BasicActionInitInfo<BoxSwitchTabs&> initInfo) {
+		box = &initInfo.additional;
+	}
+	
+	void BaseSwitchTabsAction::setBox(BoxSwitchTabs& box) {
+		this->box = &box;
+	}
+	
+	BoxSwitchTabs& BaseSwitchTabsAction::getBox() {
+		return *box;
 	}
 }

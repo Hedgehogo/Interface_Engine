@@ -20,7 +20,7 @@ namespace ie {
 		return new MatchSidesPositioning{parentSide, objectSide, offset};
 	}
 	
-	IPositioning* makePosition(LambdaPositioning::FindPositionFunc findPosition) {
-		return new LambdaPositioning{std::move(findPosition)};
+	IPositioning* makePosition(FnPositioning::FindPositionFn findPositionFn) {
+		return new FnPositioning{std::move(findPositionFn)};
 	}
 }

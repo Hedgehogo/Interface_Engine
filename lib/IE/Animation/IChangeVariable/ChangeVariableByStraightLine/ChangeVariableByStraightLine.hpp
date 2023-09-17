@@ -3,7 +3,7 @@
 #include "../IChangeVariable.hpp"
 
 namespace ie {
-	class ChangeVariableByStraightLine : public IChangeVariable {
+	class ChangeVariableByStraightLine : public virtual IChangeVariable {
 	public:
 		ChangeVariableByStraightLine(float k, float length, float b = 0);
 		

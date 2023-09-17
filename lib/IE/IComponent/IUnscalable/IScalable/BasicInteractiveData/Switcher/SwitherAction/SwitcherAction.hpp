@@ -8,6 +8,16 @@ namespace ie {
 	
 	class SwitcherAction : public BaseKeyAction {
 	public:
+		struct Make : public BaseKeyAction::Make {
+			PSbool value;
+			
+			Make(PSbool value);
+			
+			SwitcherAction* make(ActionInitInfo initInfo) override;
+		};
+		
+		SwitcherAction(Make&& make, ActionInitInfo initInfo);
+		
 		SwitcherAction(PSbool value);
 		
 		void startPressed() override;

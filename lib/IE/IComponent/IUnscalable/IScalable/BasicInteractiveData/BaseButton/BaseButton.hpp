@@ -1,11 +1,11 @@
 #pragma once
 
 #include "../BasicInteractiveData.hpp"
-#include "IE/IComponent/ILayout/ILayoutObject/ILayoutObject.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
+#include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
+#include "../../IUninteractive/IUninteractive.hpp"
 
 namespace ie {
-	class BaseButton : public ILayoutObject, public virtual IScalable, public IUpdatable {
+	class BaseButton : public virtual IScalableObject, public virtual IUpdatable {
 	public:
 		BaseButton(BoxPtr<IScalable::Make>&& background, InitInfo initInfo);
 		

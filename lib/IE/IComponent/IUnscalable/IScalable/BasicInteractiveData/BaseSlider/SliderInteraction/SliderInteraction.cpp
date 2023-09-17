@@ -20,7 +20,7 @@ namespace ie {
 		key(key),
 		division(division),
 		wheelHorizontal(wheelHorizontal),
-		wheelRelativity(SliderWheelAction::Relativity::relationArea),
+		wheelRelativity(SliderWheelAction::Relativity::RelationArea),
 		wheelSensitivity({1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}) {
 	}
 	
@@ -31,9 +31,9 @@ namespace ie {
 	SliderInteraction::SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> initInfo) :
 		BasicOneKeyInteraction<BaseSlider&>(
 			{
-				makeBoxPtr<BasicKeyAction<BaseSlider&>, BasicAddBlockInteractionAction<BaseSlider&> >(
-					makeBoxPtr<IBasicInteraction<BaseSlider&>, BasicPressedInteraction<BaseSlider&> >(
-						makeBoxPtr<BasicKeyAction<BaseSlider&>, SliderAction>(make.division), make.key
+				makeBoxPtr<BasicAddBlockInteractionAction<BaseSlider&>::Make>(
+					makeBoxPtr<BasicOneKeyInteraction<BaseSlider&>::Make, BasicPressedInteraction<BaseSlider&>::Make>(
+						makeBoxPtr<SliderAction::Make>(make.division), make.key
 					)
 				), make.key
 			}, initInfo
@@ -67,7 +67,7 @@ namespace ie {
 			key,
 			division,
 			wheelHorizontal,
-			SliderWheelAction::Relativity::relationArea,
+			SliderWheelAction::Relativity::RelationArea,
 			{1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}
 		) {
 	}

@@ -3,6 +3,17 @@
 #include <cmath>
 
 namespace ie {
+	SliderAction::Make::Make(sf::Vector2i division) : division(division) {
+	}
+	
+	SliderAction* SliderAction::Make::make(BasicActionInitInfo<BaseSlider&> initInfo) {
+		return new SliderAction{std::move(*this), initInfo};
+	}
+	
+	SliderAction::SliderAction(Make&& make, BasicActionInitInfo<BaseSlider&> initInfo) :
+		slider(&initInfo.additional), division(make.division) {
+	}
+	
 	SliderAction::SliderAction(sf::Vector2i division) :
 		slider(nullptr), startMousePosition(), startValue(), division(division) {
 	}

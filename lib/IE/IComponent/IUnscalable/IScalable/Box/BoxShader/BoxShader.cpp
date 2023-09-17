@@ -5,11 +5,11 @@ namespace ie {
 		uint transmission{};
 		if(node) {
 			std::map<std::string, BoxShader::Transmission> transmissionMap{
-				{"size",          BoxShader::Transmission::size},
-				{"texture",       BoxShader::Transmission::texture},
-				{"aspectRatio",   BoxShader::Transmission::aspectRatio},
-				{"mousePosition", BoxShader::Transmission::mousePosition},
-				{"time",          BoxShader::Transmission::time},
+				{"size",          BoxShader::Transmission::Size},
+				{"texture",       BoxShader::Transmission::Texture},
+				{"aspectRatio",   BoxShader::Transmission::AspectRatio},
+				{"mousePosition", BoxShader::Transmission::MousePosition},
+				{"time",          BoxShader::Transmission::Time},
 			};
 			
 			if(node.IsScalar()) {
@@ -120,9 +120,9 @@ namespace ie {
 	}
 	
 	void BoxShader::setSize(sf::Vector2f size) {
-		if(transmission & Transmission::size)
+		if(transmission & Transmission::Size)
 			shader->setUniform("size", size);
-		if(transmission & Transmission::aspectRatio)
+		if(transmission & Transmission::AspectRatio)
 			shader->setUniform("aspectRatio", size.x / size.y);
 		layout.setSize(size);
 	}
@@ -135,23 +135,23 @@ namespace ie {
 			sprite.setTexture(renderTexture.getTexture());
 			active = false;
 		}
-		if(transmission & Transmission::time)
+		if(transmission & Transmission::Time)
 			shader->setUniform("time", clock.getElapsedTime().asSeconds());
-		if(transmission & Transmission::texture)
+		if(transmission & Transmission::Texture)
 			shader->setUniform("texture", renderTexture.getTexture());
 		renderTarget->draw(sprite, shader);
 	}
 	
 	void BoxShader::resize(sf::Vector2f size, sf::Vector2f position) {
-		if(transmission & Transmission::size)
+		if(transmission & Transmission::Size)
 			shader->setUniform("size", size);
-		if(transmission & Transmission::aspectRatio)
+		if(transmission & Transmission::AspectRatio)
 			shader->setUniform("aspectRatio", size.x / size.y);
 		BoxRenderTexture::resize(size, position);
 	}
 	
 	bool BoxShader::updateInteractions(sf::Vector2f mousePosition) {
-		if(transmission & Transmission::mousePosition)
+		if(transmission & Transmission::MousePosition)
 			shader->setUniform("mousePosition", mousePosition - layout.position);
 		return BoxRenderTexture::updateInteractions(mousePosition);
 	}

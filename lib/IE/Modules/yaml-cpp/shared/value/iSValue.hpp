@@ -4,7 +4,7 @@
 
 namespace ie {
 	template<typename T>
-	class ISValue : public IShared {
+	class ISValue : public virtual IShared {
 	public:
 		using SetterFunc = std::function<void(const T&)>;
 		

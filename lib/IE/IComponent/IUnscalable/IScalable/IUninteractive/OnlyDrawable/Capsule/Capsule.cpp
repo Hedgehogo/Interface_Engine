@@ -13,7 +13,7 @@ namespace ie {
 		circle.setFillColor(make.color);
 	}
 	
-	Capsule::Capsule(sf::Color color) : ILayout() {
+	Capsule::Capsule(sf::Color color) {
 		rectangle.setFillColor(color);
 		circle.setFillColor(color);
 	}

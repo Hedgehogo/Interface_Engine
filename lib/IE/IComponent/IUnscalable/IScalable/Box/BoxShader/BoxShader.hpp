@@ -7,12 +7,12 @@ namespace ie {
 	class BoxShader : public BoxRenderTexture {
 	public:
 		enum Transmission {
-			none = 0,
-			texture = 1 << 0,
-			mousePosition = 1 << 1,
-			size = 1 << 2,
-			aspectRatio = 1 << 3,
-			time = 1 << 4,
+			None = 0,
+			Texture = 1 << 0,
+			MousePosition = 1 << 1,
+			Size = 1 << 2,
+			AspectRatio = 1 << 3,
+			Time = 1 << 4,
 		};
 		
 		struct Make : public BoxRenderTexture::Make {

@@ -17,7 +17,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	class AnimatorUnitMatch : public IAnimatorUnit {
+	class AnimatorUnitMatch : public virtual IAnimatorUnit {
 	public:
 		using Option = detail::AnimatorUnitMatch::Option<T>;
 	

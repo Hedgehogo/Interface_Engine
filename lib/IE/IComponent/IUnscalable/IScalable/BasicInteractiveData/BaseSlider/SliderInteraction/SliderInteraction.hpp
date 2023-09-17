@@ -8,7 +8,7 @@
 namespace ie {
 	class SliderInteraction : public BasicOneKeyInteraction<BaseSlider&> {
 	public:
-		struct Make : public IBasicInteraction<BaseSlider&>::Make {
+		struct Make : public virtual IBasicInteraction<BaseSlider&>::Make {
 			Key key;
 			sf::Vector2i division;
 			bool wheelHorizontal;
@@ -20,7 +20,7 @@ namespace ie {
 			Make(
 				Key key,
 				bool wheelHorizontal = false,
-				SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::relationSlider,
+				SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::RelationSlider,
 				sf::Vector2f wheelSensitivity = {0.2f, 0.2f}
 			);
 			
@@ -34,7 +34,7 @@ namespace ie {
 		SliderInteraction(
 			Key key,
 			bool wheelHorizontal = false,
-			SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::relationSlider,
+			SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::RelationSlider,
 			sf::Vector2f wheelSensitivity = {0.2f, 0.2f}
 		);
 		

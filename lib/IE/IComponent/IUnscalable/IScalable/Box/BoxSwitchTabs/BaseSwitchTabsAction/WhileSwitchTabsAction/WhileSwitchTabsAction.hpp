@@ -6,6 +6,23 @@
 
 namespace ie {
 	class WhileSwitchTabsAction : public BaseSwitchTabsAction {
+	public:
+		struct Make : public virtual BaseSwitchTabsAction::Make {
+			int step = 1;
+			
+			Make(int step = 1);
+			
+			WhileSwitchTabsAction* make(BasicActionInitInfo<BoxSwitchTabs&> initInfo) override;
+		};
+		
+		WhileSwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> initInfo);
+		
+		WhileSwitchTabsAction(int step = 1);
+		
+		void init(BasicActionInitInfo<BoxSwitchTabs&> initInfo) override;
+		
+		WhileSwitchTabsAction* copy() override;
+	
 	protected:
 		void startPressed() override;
 		
@@ -14,16 +31,10 @@ namespace ie {
 		void whilePressed() override;
 		
 		void whileNotPressed() override;
-	
-	public:
-		WhileSwitchTabsAction(BoxSwitchTabs* objects = nullptr, int offset = 1);
 		
-		WhileSwitchTabsAction* copy() override;
-	
-	protected:
-		int objectsSize;
-		PSValue<uint> index;
-		int offset;
+		int size;
+		PSValue<uint> value;
+		int step;
 	};
 	
 	template<>

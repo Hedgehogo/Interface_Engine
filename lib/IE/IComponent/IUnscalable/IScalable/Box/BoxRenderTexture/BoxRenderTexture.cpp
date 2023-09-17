@@ -53,7 +53,7 @@ namespace ie {
 	}
 	
 	void BoxRenderTexture::resize(sf::Vector2f size, sf::Vector2f position) {
-		ILayoutObject::resize(size, position);
+		IComponentObject::resize(size, position);
 		sf::Vector2f start{std::floor(position.x), std::ceil(position.y)};
 		sf::Vector2f end{std::floor(position.x + size.x), std::ceil(position.y + size.y)};
 		sf::Vector2i textureSize{end - start};

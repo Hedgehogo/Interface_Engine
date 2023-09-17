@@ -49,7 +49,7 @@ function(dependency_management PROJECT)
     FetchContent_Declare(
             SFML
             GIT_REPOSITORY https://github.com/SFML/SFML.git
-            GIT_TAG 2.5.1
+            GIT_TAG 2.6.0
             FIND_PACKAGE_ARGS NAMES SFML COMPONENTS graphics network audio window system
     )
     FetchContent_Declare(

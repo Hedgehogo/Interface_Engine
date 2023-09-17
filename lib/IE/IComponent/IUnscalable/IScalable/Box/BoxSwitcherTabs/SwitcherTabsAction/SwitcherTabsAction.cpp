@@ -2,8 +2,20 @@
 #include "../BoxSwitcherTabs.hpp"
 
 namespace ie {
+	SwitcherTabsAction::Make::Make(PISint value) : value(std::move(value)) {
+	}
+	
+	SwitcherTabsAction* SwitcherTabsAction::Make::make(BasicActionInitInfo<BoxSwitcherTabs&> initInfo) {
+		return new SwitcherTabsAction{std::move(*this), initInfo};
+	}
+	
+	SwitcherTabsAction::SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> initInfo) :
+		value(std::move(make.value)), switcherTabs(&initInfo.additional) {
+	}
+	
 	SwitcherTabsAction::SwitcherTabsAction(PISint value) :
-		value(std::move(value)), switcherTabs(nullptr) {}
+		value(std::move(value)), switcherTabs(nullptr) {
+	}
 	
 	void SwitcherTabsAction::init(BasicActionInitInfo<BoxSwitcherTabs&> initInfo) {
 		switcherTabs = &initInfo.additional;

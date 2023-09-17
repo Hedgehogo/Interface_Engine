@@ -3,6 +3,16 @@
 #include "../Switcher.hpp"
 
 namespace ie {
+	SwitcherAction::Make::Make(PSbool value) : value(value) {
+	}
+	
+	SwitcherAction* SwitcherAction::Make::make(ActionInitInfo initInfo) {
+		return new SwitcherAction{std::move(*this), initInfo};
+	}
+	
+	SwitcherAction::SwitcherAction(Make&& make, ActionInitInfo) : value(std::move(make.value)) {
+	}
+	
 	SwitcherAction::SwitcherAction(PSbool value) : value(value) {
 	}
 	

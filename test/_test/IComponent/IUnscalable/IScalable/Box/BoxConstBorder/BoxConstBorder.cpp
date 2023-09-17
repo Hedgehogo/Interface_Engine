@@ -2,7 +2,7 @@
 #include <IE/IComponent/IUnscalable/IScalable/Box/BoxConstBorder/BoxConstBorder.hpp>
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include <_test/_imageEqual.hpp>
+#include "_test/_imageEqual/_imageEqual.hpp"
 
 TEST(IComponent, BoxConstBorder) {
 	InitInfoData data{{100, 100}};
@@ -12,7 +12,7 @@ TEST(IComponent, BoxConstBorder) {
 			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
 			2,
-			ie::Side::left
+			ie::Side::Left
 		},
 		data.makeInitInfo()
 	};

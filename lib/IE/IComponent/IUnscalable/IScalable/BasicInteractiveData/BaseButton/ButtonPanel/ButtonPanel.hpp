@@ -14,7 +14,7 @@
 namespace ie {
 	class ButtonPanel : public BaseButton {
 	public:
-		struct Make : public IScalable::Make {
+		struct Make : public virtual IComponentObject::Make, public virtual IScalable::Make {
 			BoxPtr<Panel::Make> panel;
 			BoxPtr<IDisplayPanelInteraction::Make> interaction;
 			BoxPtr<IScalable::Make> background;

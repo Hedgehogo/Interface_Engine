@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Window.hpp>
-#include <_test/_imageEqual.hpp>
+#include "_test/_imageEqual/_imageEqual.hpp"
 #include <IE/IDrawable/DrawManager/DrawManager.hpp>
 #include <IE/IUpdatable/UpdateManager/UpdateManager.hpp>
 #include <IE/Interaction/InteractionManager/InteractionManager.hpp>
@@ -24,7 +24,7 @@ struct InitInfoData {
 	
 	void renderSave(std::filesystem::path path);
 	
-	bool renderEqual(std::filesystem::path path);
+	bool renderEqual(std::filesystem::path path, float precision = 0);
 	
-	bool renderEqualWithSave(std::filesystem::path path);
+	bool renderEqualWithSave(std::filesystem::path path, float precision = 0);
 };

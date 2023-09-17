@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../Interaction/IInteraction/IInteraction.hpp"
-#include "PanelInteractionInitInfo/PanelInteractionInitInfo.hpp"
+#include "IE/Interaction/IInteraction/IInteraction.hpp"
+#include "PanelActionInitInfo/PanelActionInitInfo.hpp"
 
 namespace ie {
 	class Panel;

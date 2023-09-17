@@ -6,7 +6,7 @@
 namespace ie {
 	class FullColor : public OnlyDrawable {
 	public:
-		struct Make : public IUninteractive::Make {
+		struct Make : public virtual IUninteractive::Make {
 			sf::Color color;
 			sf::Vector2f normalSize = {};
 			

@@ -6,7 +6,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicBaseKeyAction : public virtual BasicKeyAction<T> {
 	public:
-		BasicBaseKeyAction();
+		BasicBaseKeyAction() = default;
 		
 		void init(BasicActionInitInfo<T> initInfo) override;
 		

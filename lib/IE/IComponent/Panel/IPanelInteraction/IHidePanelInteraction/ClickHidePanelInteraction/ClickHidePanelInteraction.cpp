@@ -10,7 +10,7 @@ namespace ie {
 	}
 	
 	ClickHidePanelInteraction::ClickHidePanelInteraction(Make&& make, PanelActionInitInfo initInfo) :
-		ClickPanelInteraction(makeBoxPtr<HidePanelAction>(make.onlyOnParent), make.key, initInfo) {
+		ClickPanelInteraction(makeBoxPtr<HidePanelAction::Make>(make.onlyOnParent), make.key, initInfo) {
 	}
 	
 	ClickHidePanelInteraction::ClickHidePanelInteraction(Key key, bool onlyOnParent) :

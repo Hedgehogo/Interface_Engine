@@ -2,6 +2,10 @@
 #include "../../../IPanelManager/IPanelManager.hpp"
 
 namespace ie {
+	PanelAction::PanelAction(PanelActionInitInfo initInfo) :
+		panel(&initInfo.additional), panelManager(&initInfo.panelManager) {
+	}
+	
 	PanelAction::PanelAction() : panel(nullptr), panelManager(nullptr) {
 	}
 	

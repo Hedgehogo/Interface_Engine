@@ -6,7 +6,7 @@
 namespace ie {
 	class BoxBorder : public Box {
 	public:
-		struct Make : public Box::Make {
+		struct Make : public virtual Box::Make {
 			std::vector<std::vector<BoxPtr<IScalable::Make> > > objects;
 			std::vector<float> boundsHorizontal;
 			std::vector<float> boundsVertical;

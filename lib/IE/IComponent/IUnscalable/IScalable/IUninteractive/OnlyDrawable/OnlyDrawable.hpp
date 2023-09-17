@@ -3,7 +3,7 @@
 #include "../IUninteractive.hpp"
 
 namespace ie {
-	class OnlyDrawable : public IUninteractive, public IDrawable {
+	class OnlyDrawable : public virtual IUninteractive, public virtual IDrawable {
 	public:
 		OnlyDrawable(InitInfo initInfo);
 		

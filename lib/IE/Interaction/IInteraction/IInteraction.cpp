@@ -6,7 +6,7 @@ namespace ie {
 	}
 	
 	IInteraction::Priority IInteraction::getPriority() const {
-		return Priority::medium;
+		return Priority::Medium;
 	}
 	
 	bool IInteraction::operator<(IInteraction& interaction) const {

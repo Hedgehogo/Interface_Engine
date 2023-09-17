@@ -1,15 +1,14 @@
 #pragma once
 
+#include "IE/Enums/Side/Side.hpp"
+#include "IE/Interaction/InteractionStack/InteractionStack.hpp"
 #include "../Box.hpp"
-#include "../../IScalable.hpp"
-#include "../../../../ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
-#include "../../../../../Interaction/InteractionStack/InteractionStack.hpp"
-#include "../../../../../Enums/Side/Side.hpp"
+#include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 
 namespace ie {
-	class BoxConstBorder : public Box, public ILayoutTwoObjects {
+	class BoxConstBorder : public Box, public virtual IScalableTwoObjects {
 	public:
-		struct Make : public Box::Make, public ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableTwoObjects::Make {
 			BoxPtr<IScalable::Make> constObject;
 			BoxPtr<IScalable::Make> secondObject;
 			float borderDistance;

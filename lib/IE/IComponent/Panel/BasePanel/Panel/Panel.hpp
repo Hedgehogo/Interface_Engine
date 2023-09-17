@@ -7,7 +7,7 @@
 namespace ie {
 	class Panel : public BasePanel {
 	public:
-		struct Make : public BasePanel::Make {
+		struct Make : public virtual BasePanel::Make {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<IHidePanelInteraction::Make> hideInteraction;
 			BoxPtr<IMovePanelInteraction::Make> moveInteraction;

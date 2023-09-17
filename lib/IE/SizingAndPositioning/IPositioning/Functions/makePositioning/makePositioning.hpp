@@ -6,7 +6,7 @@
 #include "../../MatchPositioning/MatchPositioning.hpp"
 #include "../../MatchSidesPositioning/MatchSidesPositioning.hpp"
 #include "../../MatchTargetPositioning/MatchTargetPositioning.hpp"
-#include "../../LambdaPositioning/LambdaPositioning.hpp"
+#include "IE/SizingAndPositioning/IPositioning/FnPositioning/FnPositioning.hpp"
 
 namespace ie {
 	IPositioning* makePosition(float coefficient, float offset, bool relativeTarget = false);
@@ -15,5 +15,5 @@ namespace ie {
 	
 	IPositioning* makePosition(Location parentSide, Location objectSide, float offset);
 	
-	IPositioning* makePosition(LambdaPositioning::FindPositionFunc findPosition);
+	IPositioning* makePosition(FnPositioning::FindPositionFn findPositionFn);
 }

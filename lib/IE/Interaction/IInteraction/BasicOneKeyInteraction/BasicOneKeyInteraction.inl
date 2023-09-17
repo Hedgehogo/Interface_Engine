@@ -1,18 +1,19 @@
 namespace ie {
-	template<typename T>
-	BasicOneKeyInteraction<T>::Make::Make(BoxPtr<BasicKeyAction<T> >&& action, Key key) :
-		action(std::move(action)), key(key) {
-	}
-	
-	template<typename T>
-	BasicOneKeyInteraction<T>* BasicOneKeyInteraction<T>::Make::make(BasicActionInitInfo<T> initInfo) {
-		return new BasicOneKeyInteraction<T>{std::move(*this), initInfo};
+	namespace make_system {
+		template<typename T>
+		BasicOneKeyInteraction<T>::BasicOneKeyInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key) :
+			action(std::move(action)), key(key) {
+		}
+		
+		template<typename T>
+		ie::BasicOneKeyInteraction<T>* BasicOneKeyInteraction<T>::make(BasicActionInitInfo<T> initInfo) {
+			return new ie::BasicOneKeyInteraction<T>{std::move(*this), initInfo};
+		}
 	}
 	
 	template<typename T>
 	BasicOneKeyInteraction<T>::BasicOneKeyInteraction(Make&& make, BasicActionInitInfo<T> initInfo) :
-		action(std::move(make.action)), key(make.key) {
-		action->init(initInfo);
+		action(make.action->make(initInfo)), key(make.key) {
 	}
 	
 	template<typename T>
@@ -68,7 +69,7 @@ namespace ie {
 	bool DecodePointer<BasicOneKeyInteraction<T> >::decodePointer(const YAML::Node& node, BasicOneKeyInteraction<T>*& oneKeyInteraction) {
 		oneKeyInteraction = new BasicOneKeyInteraction<T>{
 			node["action"].as<BoxPtr<BasicKeyAction<T> > >(),
-			convDef(node["key"], Key::mouseLeft)
+			convDef(node["key"], Key::MouseLeft)
 		};
 		return true;
 	}

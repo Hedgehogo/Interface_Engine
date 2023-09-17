@@ -14,11 +14,11 @@ namespace ie {
 		slider(&initInfo.additional),
 		sensitivity(make.sensitivity),
 		horizontal(make.horizontal),
-		relativity(make.relativity == Relativity::relationSlider) {
+		relativity(make.relativity == Relativity::RelationSlider) {
 	}
 	
 	SliderWheelAction::SliderWheelAction(bool horizontal, Relativity relativity, sf::Vector2f sensitivity) :
-		sensitivity(sensitivity), horizontal(horizontal), relativity(relativity == Relativity::relationSlider) {
+		sensitivity(sensitivity), horizontal(horizontal), relativity(relativity == Relativity::RelationSlider) {
 	}
 	
 	void SliderWheelAction::startPressed(sf::Vector2i, int) {
@@ -29,7 +29,7 @@ namespace ie {
 	
 	void SliderWheelAction::whilePressed(sf::Vector2i, int value) {
 		sf::Vector2f move{sensitivity};
-		bool reverse{(isKeyPressed(Key::lShift) || isKeyPressed(Key::rShift)) != horizontal};
+		bool reverse{(isKeyPressed(Key::LShift) || isKeyPressed(Key::RShift)) != horizontal};
 		if(relativity) {
 			sf::Vector2f sliderSize{slider->getSliderSize()};
 			sf::Vector2f areaSize{slider->getAreaSize()};
@@ -53,9 +53,9 @@ namespace ie {
 	
 	bool Decode<SliderWheelAction::Relativity>::decode(const YAML::Node& node, SliderWheelAction::Relativity& relativity) {
 		if(convertBool(node, "relation-area", "relation-slider")) {
-			relativity = SliderWheelAction::Relativity::relationArea;
+			relativity = SliderWheelAction::Relativity::RelationArea;
 		} else {
-			relativity = SliderWheelAction::Relativity::relationSlider;
+			relativity = SliderWheelAction::Relativity::RelationSlider;
 		}
 		return true;
 	}

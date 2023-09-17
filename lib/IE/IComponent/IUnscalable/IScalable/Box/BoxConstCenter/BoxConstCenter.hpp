@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "IE/IComponent/ILayout/ILayoutTwoObjects/ILayoutTwoObjects.hpp"
+#include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 
 namespace ie {
-	class BoxConstCenter : public Box, public ILayoutTwoObjects {
+	class BoxConstCenter : public Box, public virtual IScalableTwoObjects {
 	public:
-		struct Make : public Box::Make, public ILayoutTwoObjects::Make {
+		struct Make : public virtual Box::Make, public virtual IScalableTwoObjects::Make {
 			BoxPtr<IScalable::Make> constObject;
 			BoxPtr<IScalable::Make> background;
 			sf::Vector2f constSize;

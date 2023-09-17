@@ -5,14 +5,22 @@
 #include "../../InteractionManager/InteractionManager.hpp"
 
 namespace ie {
-	template<typename T = std::monostate>
-	class BasicPressedInteraction : public BasicOneKeyInteraction<T>, public IBasicBlockInteraction<T> {
-	public:
-		struct Make : public BasicOneKeyInteraction<T>::Make, public IBasicBlockInteraction<T> {
-			Make(BoxPtr<BasicKeyAction<T> >&& action, Key key);
+	template<typename T>
+	class BasicPressedInteraction;
+	
+	namespace make_system {
+		template<typename T = std::monostate>
+		struct BasicPressedInteraction : public BasicOneKeyInteraction<T>, public virtual IBasicBlockInteraction<T> {
+			BasicPressedInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
 			
-			BasicPressedInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+			ie::BasicPressedInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
 		};
+	}
+	
+	template<typename T = std::monostate>
+	class BasicPressedInteraction : public BasicOneKeyInteraction<T>, public virtual IBasicBlockInteraction<T> {
+	public:
+		using Make = make_system::BasicPressedInteraction<T>;
 		
 		BasicPressedInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
 		

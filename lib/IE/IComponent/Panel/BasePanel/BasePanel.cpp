@@ -47,7 +47,7 @@ namespace ie {
 	}
 	
 	bool BasePanel::inPanel(sf::Vector2f pointPosition) {
-		return active && ILayout::inArea(pointPosition);
+		return active && IComponentLayout::inArea(pointPosition);
 	}
 	
 	void BasePanel::setPosition(sf::Vector2f position) {
@@ -72,7 +72,7 @@ namespace ie {
 	void BasePanel::resize(sf::Vector2f size, sf::Vector2f position) {
 		sf::Vector2f panelSize = (*sizing)(size);
 		sf::Vector2f panelPosition = (*positioning)(position, size, panelSize);
-		ILayoutObject::resize(panelSize, panelPosition);
+		IComponentObject::resize(panelSize, panelPosition);
 	}
 	
 	void BasePanel::update() {

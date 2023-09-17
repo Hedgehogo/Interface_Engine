@@ -6,6 +6,22 @@
 namespace ie {
 	template<typename T>
 	class SetSValueAction : public BaseKeyAction {
+	public:
+		struct Make : public BaseKeyAction::Make {
+			PISValue<T> value;
+			T constant;
+			
+			Make(PISValue<T> value, T constant);
+			
+			SetSValueAction* make(ActionInitInfo initInfo) override;
+		};
+		
+		SetSValueAction(Make&& make, ActionInitInfo initInfo);
+		
+		SetSValueAction(PISValue<T> value, T constant);
+		
+		SetSValueAction<T>* copy() override;
+	
 	protected:
 		void startPressed() override;
 		
@@ -14,15 +30,9 @@ namespace ie {
 		void whilePressed() override;
 		
 		void whileNotPressed() override;
-	
-	public:
-		SetSValueAction(const PISValue<T>& value, T variable);
 		
-		SetSValueAction<T>* copy() override;
-	
-	protected:
 		PISValue<T> value;
-		T variable;
+		T constant;
 	};
 	
 	template<typename T>

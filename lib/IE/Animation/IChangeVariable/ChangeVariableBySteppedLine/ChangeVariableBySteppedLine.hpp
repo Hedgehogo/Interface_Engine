@@ -3,7 +3,7 @@
 #include "../IChangeVariable.hpp"
 
 namespace ie {
-	class ChangeVariableBySteppedLine : public IChangeVariable {
+	class ChangeVariableBySteppedLine : public virtual IChangeVariable {
 	public:
 		struct Value {
 			float value;

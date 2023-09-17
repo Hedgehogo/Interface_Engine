@@ -16,7 +16,7 @@ namespace ie {
 	}
 	
 	Switcher::Switcher(Make&& make, InitInfo initInfo) :
-		interactive(makeBoxPtr<OneKeyInteraction::Make>(makeBoxPtr<SwitcherAction>(make.value), make.key), initInfo, {}),
+		interactive(makeBoxPtr<OneKeyInteraction::Make>(makeBoxPtr<SwitcherAction::Make>(make.value), make.key), initInfo, {}),
 		inactiveBackground(make.inactiveBackground->make(initInfo.copy(inactiveDrawManager))),
 		activeBackground(make.activeBackground->make(initInfo.copy(activeDrawManager))),
 		active(make.value) {
@@ -25,7 +25,7 @@ namespace ie {
 	}
 	
 	Switcher::Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key) :
-		interactive(makeBoxPtr<IBaseInteraction, OneKeyInteraction>(makeBoxPtr<KeyAction, SwitcherAction>(value), key)),
+		interactive(makeBoxPtr<OneKeyInteraction>(makeBoxPtr<SwitcherAction>(value), key)),
 		inactiveBackground(std::move(inactiveBackground)), activeBackground(std::move(activeBackground)), active(value) {
 	}
 	
@@ -119,7 +119,7 @@ namespace ie {
 	bool DecodePointer<Switcher>::decodePointer(const YAML::Node& node, Switcher*& switcher) {
 		auto inactiveBackground{node["inactive-background"].as<BoxPtr<IScalable> >()};
 		auto activeBackground{node["active-background"].as<BoxPtr<IScalable> >()};
-		Key key{convDef<Key>(node["key"], Key::mouseLeft)};
+		Key key{convDef<Key>(node["key"], Key::MouseLeft)};
 		
 		if(node["value"]) {
 			switcher = new Switcher{

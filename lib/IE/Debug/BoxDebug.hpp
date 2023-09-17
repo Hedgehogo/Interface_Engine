@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../IComponent/IUnscalable/IScalable/Box/Box.hpp"
-#include "../IComponent/ILayout/ILayoutObject/ILayoutObject.hpp"
+#include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
 
 namespace ie {
-	class BoxDebug : public Box, public ILayoutObject, public IDrawable {
+	class BoxDebug : public Box, public virtual IComponentObject, public virtual IDrawable {
 	public:
-		struct Make : public Box::Make, public ILayoutObject::Make {
+		struct Make : public Box::Make, public virtual IComponentObject::Make {
 			BoxPtr<IScalable::Make> object;
 			
 			Make(BoxPtr<IScalable::Make>&& object);

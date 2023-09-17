@@ -5,7 +5,7 @@
 #include "../../../SfmlEvents/MouseWheel/MouseWheel.hpp"
 
 namespace ie {
-	class WheelAction : public IAction {
+	class WheelAction : public virtual IAction {
 	public:
 		explicit WheelAction();
 		

@@ -4,7 +4,7 @@
 #include "../IDrawable/IDrawable.hpp"
 
 namespace ie {
-	class DrawManager : public IDrawable {
+	class DrawManager : public virtual IDrawable {
 	public:
 		DrawManager() = default;
 		

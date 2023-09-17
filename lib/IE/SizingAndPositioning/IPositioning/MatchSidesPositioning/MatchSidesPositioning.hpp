@@ -4,7 +4,7 @@
 #include "../../../Enums/Location/Location.hpp"
 
 namespace ie {
-	class MatchSidesPositioning : public IPositioning {
+	class MatchSidesPositioning : public virtual IPositioning {
 	public:
 		MatchSidesPositioning(Location parentSide, Location objectSide, float offset = 0);
 		

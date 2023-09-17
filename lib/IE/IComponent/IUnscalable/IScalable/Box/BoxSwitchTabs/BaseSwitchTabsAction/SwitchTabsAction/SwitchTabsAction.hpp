@@ -5,6 +5,23 @@
 
 namespace ie {
 	class SwitchTabsAction : public BaseSwitchTabsAction {
+	public:
+		struct Make : public virtual BaseSwitchTabsAction::Make {
+			uint index = 0;
+			
+			Make(uint index = 0);
+			
+			SwitchTabsAction* make(BasicActionInitInfo<BoxSwitchTabs&> initInfo) override;
+		};
+		
+		SwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> initInfo);
+		
+		SwitchTabsAction(uint index);
+		
+		void init(BasicActionInitInfo<BoxSwitchTabs&> initInfo) override;
+		
+		SwitchTabsAction* copy() override;
+	
 	protected:
 		void startPressed() override;
 		
@@ -13,13 +30,7 @@ namespace ie {
 		void whilePressed() override;
 		
 		void whileNotPressed() override;
-	
-	public:
-		SwitchTabsAction(std::shared_ptr<SValue<uint>> value, uint index);
 		
-		SwitchTabsAction* copy() override;
-	
-	protected:
 		uint index;
 		PSValue<uint> value;
 	};

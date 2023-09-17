@@ -2,6 +2,13 @@
 #include "../../../../BasePanel/Panel/Panel.hpp"
 
 namespace ie {
+	DisplayPanelAction* DisplayPanelAction::Make::make(PanelActionInitInfo initInfo) {
+		return new DisplayPanelAction{std::move(*this), initInfo};
+	}
+	
+	DisplayPanelAction::DisplayPanelAction(Make&&, PanelActionInitInfo initInfo) : PanelAction(initInfo) {
+	}
+	
 	void DisplayPanelAction::startPressed() {
 	}
 	

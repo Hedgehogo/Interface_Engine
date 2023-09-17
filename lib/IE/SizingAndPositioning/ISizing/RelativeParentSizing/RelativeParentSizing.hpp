@@ -3,9 +3,9 @@
 #include "../ISizing.hpp"
 
 namespace ie {
-	class RelativeParentSizing : public ISizing {
+	class RelativeParentSizing : public virtual ISizing {
 	public:
-		struct Make : public ISizing::Make {
+		struct Make : public virtual ISizing::Make {
 			float addition = 0;
 			
 			Make(float addition = 0);

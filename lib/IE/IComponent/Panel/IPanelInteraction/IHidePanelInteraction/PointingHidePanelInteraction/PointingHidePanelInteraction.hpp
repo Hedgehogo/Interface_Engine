@@ -5,9 +5,9 @@
 #include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
-	class PointingHidePanelInteraction : public BasePanelInteraction, public IHidePanelInteraction {
+	class PointingHidePanelInteraction : public BasePanelInteraction, public virtual IHidePanelInteraction {
 	public:
-		struct Make : public IHidePanelInteraction::Make {
+		struct Make : public virtual IHidePanelInteraction::Make {
 			bool onlyOnParent = false;
 			
 			Make(bool onlyOnParent = false);

@@ -37,7 +37,7 @@ namespace ie {
 		sliderScale(sliderScale),
 		key(key),
 		wheelHorizontal(wheelHorizontal),
-		wheelRelativity(SliderWheelAction::Relativity::relationArea),
+		wheelRelativity(SliderWheelAction::Relativity::RelationArea),
 		wheelSensitivity(1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)) {
 	}
 	
@@ -136,11 +136,11 @@ namespace ie {
 		auto background{node["background"].as<BoxPtr<IUninteractive> >()};
 		auto value{Buffer::get<SRVec2f>(node["value"])};
 		auto sliderScale{convDef(node["slider-scale"], sf::Vector2f{1.0f, 0.5f})};
-		auto key{convDef(node["key"], Key::mouseLeft)};
+		auto key{convDef(node["key"], Key::MouseLeft)};
 		auto wheelHorizontal{convBoolDef(node["default-wheel"], "horizontal", "vertical", false)};
 		
 		if(!node["division"]) {
-			auto wheelRelativity{convDef(node["wheel-relativity"], SliderWheelAction::Relativity::relationArea)};
+			auto wheelRelativity{convDef(node["wheel-relativity"], SliderWheelAction::Relativity::RelationArea)};
 			auto wheelSensitivity{convDef(node["wheel-sensitivity"], sf::Vector2f{0.2f, 0.2f})};
 			
 			sliderZone = new Slider{std::move(slider), std::move(background), value, sliderScale, key, wheelHorizontal, wheelRelativity, wheelSensitivity};

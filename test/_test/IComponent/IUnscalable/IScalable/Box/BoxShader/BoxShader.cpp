@@ -2,7 +2,7 @@
 #include <IE/IComponent/IUnscalable/IScalable/Box/BoxShader/BoxShader.hpp>
 #include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/Capsule/Capsule.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include <_test/_imageEqual.hpp>
+#include "_test/_imageEqual/_imageEqual.hpp"
 
 TEST(IComponent, BoxShader) {
 	InitInfoData data{{100, 100}};
@@ -13,7 +13,7 @@ TEST(IComponent, BoxShader) {
 		{
 			ie::makeBoxPtr<ie::IScalable::Make, ie::Capsule::Make>(sf::Color::Green),
 			new sf::Shader{},
-			ie::BoxShader::Transmission::texture
+			ie::BoxShader::Transmission::Texture
 		},
 		data.makeInitInfo()
 	};

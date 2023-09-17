@@ -1,4 +1,21 @@
 namespace ie {
+	namespace make_system {
+		template<typename T>
+		BasicAddInteractionAction<T>::BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction) :
+			interaction(std::move(interaction)) {
+		}
+		
+		template<typename T>
+		ie::BasicAddInteractionAction<T>* BasicAddInteractionAction<T>::make(BasicActionInitInfo<T> initInfo) {
+			return new ie::BasicAddInteractionAction<T>{std::move(*this), initInfo};
+		}
+	}
+	
+	template<typename T>
+	BasicAddInteractionAction<T>::BasicAddInteractionAction(Make&& make, BasicActionInitInfo<T> initInfo) :
+		interactionManager(&initInfo.interactionManager), interaction(make.interaction->make(initInfo)) {
+	}
+	
 	template<typename T>
 	BasicAddInteractionAction<T>::BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction) :
 		interactionManager(nullptr), interaction(std::move(interaction)) {

@@ -5,11 +5,11 @@
 namespace ie {
 	class Button : public BaseButton {
 	public:
-		struct Make : public IScalable::Make {
+		struct Make : public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> background;
-			BoxPtr<IBaseInteraction> interaction;
+			BoxPtr<IBaseInteraction::Make> interaction;
 			
-			Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IBaseInteraction>&& interaction);
+			Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IBaseInteraction::Make>&& interaction);
 			
 			Button* make(InitInfo initInfo) override;
 		};

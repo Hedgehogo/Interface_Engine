@@ -8,7 +8,7 @@
 namespace ie {
 	class ClickPanelInteraction : public BasicOneKeyInteraction<Panel&>, public virtual IPanelInteraction {
 	public:
-		ClickPanelInteraction(BoxPtr<PanelAction>&& action, Key key, PanelActionInitInfo initInfo);
+		ClickPanelInteraction(BoxPtr<PanelAction::Make>&& action, Key key, PanelActionInitInfo initInfo);
 		
 		ClickPanelInteraction(BoxPtr<PanelAction>&& action, Key key);
 		

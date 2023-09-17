@@ -6,7 +6,7 @@
 #include "../../ParentCoefficientSizing/ParentCoefficientSizing.hpp"
 #include "../../TargetCoefficientSizing/TargetCoefficientSizing.hpp"
 #include "../../SmartSizing/SmartSizing.hpp"
-#include "../../LambdaSizing/LambdaSizing.hpp"
+#include "../../FnSizing/FnSizing.hpp"
 
 namespace ie {
 	ISizing::Make* makeSizeMake(bool relativeParent);
@@ -17,5 +17,5 @@ namespace ie {
 	
 	ISizing::Make* makeSizeMake(float targetCoefficient, float parentCoefficient, float addition);
 	
-	ISizing::Make* makeSizeMake(LambdaSizing::FindSizeFunc findSizeFunc, LambdaSizing::MinSizeFunc minSizeFunc);
+	ISizing::Make* makeSizeMake(FnSizing::FindSizeFn findSizeFn, FnSizing::GetParentSizeFn getParentSizeFn);
 }

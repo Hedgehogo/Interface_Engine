@@ -6,6 +6,14 @@
 namespace ie {
 	class DisplayPanelAction : public PanelAction {
 	public:
+		struct Make : public virtual PanelAction::Make {
+			DisplayPanelAction* make(PanelActionInitInfo initInfo) override;
+		};
+		
+		DisplayPanelAction(Make&& make, PanelActionInitInfo initInfo);
+		
+		DisplayPanelAction() = default;
+		
 		DisplayPanelAction* copy() override;
 	
 	protected:

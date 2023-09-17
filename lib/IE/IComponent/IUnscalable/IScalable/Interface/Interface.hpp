@@ -9,12 +9,12 @@
 #include "IE/Interaction/IAction/WheelAction/WheelAction.hpp"
 
 namespace ie {
-	class Interface : public IScalable, public IDrawable, public IUpdatable {
+	class Interface : public virtual IScalable, public virtual IDrawable, public virtual IUpdatable {
 	protected:
 		bool isInWindow(sf::Vector2f position);
 	
 	public:
-		struct Make : public IScalable::Make {
+		struct Make : public virtual IScalable::Make {
 			BoxPtr<IScalable::Make> object;
 			AnimationManager animationManager = AnimationManager{{}};
 			BoxPtr<InteractionStack> interactionStack = makeBoxPtr<InteractionStack>();

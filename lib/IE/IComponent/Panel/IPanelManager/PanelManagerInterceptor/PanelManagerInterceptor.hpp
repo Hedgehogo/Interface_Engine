@@ -3,7 +3,7 @@
 #include "../IPanelManager.hpp"
 
 namespace ie {
-	class PanelManagerInterceptor : public IPanelManager {
+	class PanelManagerInterceptor : public virtual IPanelManager {
 	public:
 		PanelManagerInterceptor(IPanelManager& panelManager);
 		

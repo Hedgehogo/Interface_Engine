@@ -5,7 +5,7 @@
 
 namespace ie {
 	template<typename T>
-	class SVector2 : public ISVector2 {
+	class SVector2 : public virtual ISVector2 {
 	protected:
 		void set();
 	

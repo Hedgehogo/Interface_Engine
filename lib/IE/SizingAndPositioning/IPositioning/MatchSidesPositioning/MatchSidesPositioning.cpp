@@ -7,22 +7,22 @@ namespace ie {
 	float MatchSidesPositioning::findPosition(float parentPosition, float objectSize, float parentSize, float) {
 		float position{parentPosition + offset};
 		switch(parentSide) {
-			case Location::origin:
+			case Location::Origin:
 				break;
-			case Location::center:
+			case Location::Center:
 				position += parentSize * 0.5f;
 				break;
-			case Location::end:
+			case Location::End:
 				position += parentSize;
 				break;
 		}
 		switch(objectSide) {
-			case Location::origin:
+			case Location::Origin:
 				break;
-			case Location::center:
+			case Location::Center:
 				position -= objectSize * 0.5f;
 				break;
-			case Location::end:
+			case Location::End:
 				position -= objectSize;
 				break;
 		}
