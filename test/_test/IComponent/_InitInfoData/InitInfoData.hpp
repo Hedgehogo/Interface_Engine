@@ -24,7 +24,7 @@ struct InitInfoData {
 	
 	void renderSave(std::filesystem::path path);
 	
-	bool renderEqual(std::filesystem::path path);
+	bool renderEqual(std::filesystem::path path, float precision = 0);
 	
-	bool renderEqualWithSave(std::filesystem::path path);
+	bool renderEqualWithSave(std::filesystem::path path, float precision = 0);
 };
