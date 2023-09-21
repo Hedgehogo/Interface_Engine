@@ -23,7 +23,7 @@ namespace ie {
 	}
 	
 	void CoefficientMovePanelInteraction::move(sf::Vector2i mousePosition) {
-		sf::Vector2f panelSize{panel->getSize()};
+		sf::Vector2f panelSize{panel->getAreaSize()};
 		sf::Vector2f pointPosition{static_cast<sf::Vector2f>(mousePosition)};
 		panel->setPosition({pointPosition.x - panelSize.x * coefficient.x + offset.x, pointPosition.y - panelSize.y * coefficient.y + offset.y});
 	}

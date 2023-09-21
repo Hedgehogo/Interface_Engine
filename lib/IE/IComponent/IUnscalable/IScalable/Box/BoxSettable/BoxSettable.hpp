@@ -2,8 +2,8 @@
 
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
-#include "../../../../Panel/IPanelManager/PanelManager/PanelManager.hpp"
-#include "../../../../Panel/IPanelManager/PanelManagerInterceptor/PanelManagerInterceptor.hpp"
+#include "IE/Panel/IPanelManager/PanelManager/PanelManager.hpp"
+#include "IE/Panel/IPanelManager/PanelManagerInterceptor/PanelManagerInterceptor.hpp"
 
 namespace ie {
 	class BoxSettable : public Box, public virtual IScalableObject, public virtual IDrawable, public virtual IUpdatable {

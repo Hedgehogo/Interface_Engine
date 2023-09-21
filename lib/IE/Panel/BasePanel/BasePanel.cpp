@@ -47,7 +47,20 @@ namespace ie {
 	}
 	
 	bool BasePanel::inPanel(sf::Vector2f pointPosition) {
-		return active && IComponentLayout::inArea(pointPosition);
+		return active && inArea(pointPosition);
+	}
+	
+	bool BasePanel::inArea(sf::Vector2f pointPosition) {
+		return pointPosition.x > layout.position.x && pointPosition.x < layout.position.x + layout.size.x &&
+			   pointPosition.y > layout.position.y && pointPosition.y < layout.position.y + layout.size.y;
+	}
+	
+	bool BasePanel::in(sf::Vector2f pointPosition) {
+		return inArea(pointPosition);
+	}
+	
+	void BasePanel::draw() {
+		drawManager.draw();
 	}
 	
 	void BasePanel::setPosition(sf::Vector2f position) {
@@ -55,24 +68,16 @@ namespace ie {
 		object->setPosition(position);
 	}
 	
-	void BasePanel::move(sf::Vector2f position) {
-		layout.move(position);
-		object->move(position);
+	void BasePanel::move(sf::Vector2f offset) {
+		layout.move(offset);
+		object->move(offset);
 	}
 	
-	void BasePanel::setSize(sf::Vector2f size) {
-		layout.setSize(size);
-		object->setSize(size);
-	}
-	
-	void BasePanel::draw() {
-		drawManager.draw();
-	}
-	
-	void BasePanel::resize(sf::Vector2f size, sf::Vector2f position) {
-		sf::Vector2f panelSize = (*sizing)(size);
-		sf::Vector2f panelPosition = (*positioning)(position, size, panelSize);
-		IComponentObject::resize(panelSize, panelPosition);
+	void BasePanel::resize(sf::Vector2f parentSize, sf::Vector2f parentPosition) {
+		sf::Vector2f size = (*sizing)(parentSize);
+		sf::Vector2f position = (*positioning)(parentPosition, parentSize, size);
+		layout.resize(size, position);
+		object->resize(size, position);
 	}
 	
 	void BasePanel::update() {
@@ -89,6 +94,14 @@ namespace ie {
 		displayed = true;
 		this->active = active;
 		return updateInteractions(mousePosition);
+	}
+	
+	sf::Vector2f BasePanel::getAreaPosition() const {
+		return layout.position;
+	}
+	
+	sf::Vector2f BasePanel::getAreaSize() const {
+		return layout.size;
 	}
 	
 	sf::Vector2f BasePanel::getMinSize() const {
@@ -126,4 +139,4 @@ namespace ie {
 	const LayoutData& BasePanel::layoutGetData() const {
 		return layout;
 	}
-}
+	}

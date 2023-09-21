@@ -14,10 +14,12 @@
 #include "IE/Enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	class BasePanel : public virtual IComponentObject, public virtual IDrawable, public virtual IUpdatable {
+	class BasePanel : public virtual ILayoutObject, public virtual IDrawable, public virtual IUpdatable {
 	public:
-		struct Make : public virtual IComponentObject::Make {
-			BasePanel* make(InitInfo initInfo) override = 0;
+		struct Make {
+			virtual ~Make() = default;
+			
+			virtual BasePanel* make(InitInfo initInfo) = 0;
 		};
 		
 		BasePanel(
@@ -33,7 +35,9 @@ namespace ie {
 		
 		BasePanel(const BasePanel& other);
 		
-		void init(InitInfo initInfo) override;
+		virtual ~BasePanel() = default;
+		
+		virtual void init(InitInfo initInfo);
 		
 		virtual bool isIndependent() = 0;
 		
@@ -47,35 +51,41 @@ namespace ie {
 		
 		virtual bool inPanel(sf::Vector2f pointPosition);
 		
-		void setPosition(sf::Vector2f position) override;
+		bool inArea(sf::Vector2f pointPosition);
 		
-		void move(sf::Vector2f position) override;
-		
-		void setSize(sf::Vector2f size) override;
+		bool in(sf::Vector2f pointPosition);
 		
 		void draw() override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		void setPosition(sf::Vector2f position);
+		
+		void move(sf::Vector2f offset);
+		
+		void resize(sf::Vector2f parentSize, sf::Vector2f parentPosition);
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool updateInteractions(sf::Vector2f mousePosition);
 		
 		virtual bool updateInteractions(sf::Vector2f mousePosition, bool active);
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f getAreaPosition() const;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f getAreaSize() const;
+		
+		sf::Vector2f getMinSize() const;
+		
+		sf::Vector2f getNormalSize() const;
 		
 		IScalable& getObject() override;
 		
 		const IScalable& getObject() const override;
 		
-		BasePanel* copy() override = 0;
+		virtual BasePanel* copy() = 0;
 		
 		static void setFullDebug(bool fullDebug);
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
 	
 	protected:
 		LayoutData& layoutGetData() override;

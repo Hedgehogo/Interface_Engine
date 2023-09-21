@@ -6,7 +6,7 @@
 #include <IE/IUpdatable/UpdateManager/UpdateManager.hpp>
 #include <IE/Interaction/InteractionManager/InteractionManager.hpp>
 #include <IE/Interaction/InteractionStack/InteractionStack.hpp>
-#include <IE/IComponent/Panel/IPanelManager/PanelManager/PanelManager.hpp>
+#include <IE/Panel/IPanelManager/PanelManager/PanelManager.hpp>
 #include <IE/IComponent/InitInfo/InitInfo.hpp>
 
 struct InitInfoData {

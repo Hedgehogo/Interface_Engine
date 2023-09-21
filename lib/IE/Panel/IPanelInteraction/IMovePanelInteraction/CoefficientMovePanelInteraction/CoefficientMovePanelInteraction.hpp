@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IMovePanelInteraction.hpp"
-#include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
 	class CoefficientMovePanelInteraction : public BasePanelInteraction, public virtual IMovePanelInteraction {

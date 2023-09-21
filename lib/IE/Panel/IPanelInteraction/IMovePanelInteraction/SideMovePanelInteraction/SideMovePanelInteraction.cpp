@@ -23,7 +23,7 @@ namespace ie {
 	}
 	
 	void SideMovePanelInteraction::move(sf::Vector2i mousePosition) {
-		sf::Vector2f panelSize{panel->getSize()};
+		sf::Vector2f panelSize{panel->getAreaSize()};
 		sf::Vector2f panelPosition{panel->getAreaPosition()};
 		sf::Vector2f pointPosition{static_cast<sf::Vector2f>(mousePosition)};
 		float position = (horizontal ? (pointPosition.x - panelSize.x * coefficient + offset) : (pointPosition.y - panelSize.y * coefficient + offset));

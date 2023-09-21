@@ -2,7 +2,7 @@
 
 #include "../IDisplayPanelInteraction.hpp"
 #include "../../BasePanelInteraction/BasePanelInteraction.hpp"
-#include "../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
 	class PointingDisplayPanelInteraction : public BasePanelInteraction, public virtual IDisplayPanelInteraction {

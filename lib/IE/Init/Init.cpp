@@ -169,9 +169,9 @@ namespace ie {
 		inherit<IUnscalable, IScalable>();
 		inherit<IUnscalable, Text>();
 		inherit<IComponent, IUnscalable>();
+		
 		inherit<BasePanel, ConstPanel>();
 		inherit<BasePanel, Panel>();
-		inherit<IComponent, BasePanel>();
 		
 		addDetermine<FullColor>();
 		addDetermine<RoundedRectangle>();

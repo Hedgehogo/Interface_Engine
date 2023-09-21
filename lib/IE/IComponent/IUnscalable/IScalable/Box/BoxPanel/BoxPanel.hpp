@@ -2,7 +2,7 @@
 
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
-#include "../../../../Panel/BasePanel/ConstPanel/ConstPanel.hpp"
+#include "IE/Panel/BasePanel/ConstPanel/ConstPanel.hpp"
 
 namespace ie {
 	class BoxPanel : public Box, public virtual IScalableObject {

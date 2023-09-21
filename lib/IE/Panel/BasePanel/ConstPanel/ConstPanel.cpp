@@ -1,6 +1,6 @@
 #include "ConstPanel.hpp"
 #include "../../IPanelManager/PanelManager/PanelManager.hpp"
-#include "../../../../IDrawable/DrawManager/DrawManager.hpp"
+#include "IE/IDrawable/DrawManager/DrawManager.hpp"
 
 namespace ie {
 	ConstPanel::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2::Make> sizing, BoxPtr<IPositioning2::Make> positioning, bool displayed) :

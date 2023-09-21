@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/IComponent/Panel/IPanelInteraction/ClickPanelInteraction/PanelAction/PanelAction.hpp"
+#include "PanelAction/PanelAction.hpp"
 #include "../IHidePanelInteraction/IHidePanelInteraction.hpp"
 #include "../IDisplayPanelInteraction/IDisplayPanelInteraction.hpp"
 #include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"

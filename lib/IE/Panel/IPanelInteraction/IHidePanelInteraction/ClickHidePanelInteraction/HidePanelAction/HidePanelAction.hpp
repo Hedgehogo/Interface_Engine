@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IE/IComponent/Panel/IPanelInteraction/ClickPanelInteraction/PanelAction/PanelAction.hpp"
-#include "../../../../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "../../../ClickPanelInteraction/PanelAction/PanelAction.hpp"
+#include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
 	class HidePanelAction : public PanelAction {

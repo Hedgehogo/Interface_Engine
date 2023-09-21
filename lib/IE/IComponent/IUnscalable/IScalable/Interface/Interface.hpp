@@ -3,7 +3,7 @@
 #include <filesystem>
 
 #include "../IScalable.hpp"
-#include "../../../Panel/IPanelManager/PanelManager/PanelManager.hpp"
+#include "IE/Panel/IPanelManager/PanelManager/PanelManager.hpp"
 #include "IE/Interaction/InteractionManager/InteractionManager.hpp"
 #include "IE/Interaction/InteractionStack/InteractionStack.hpp"
 #include "IE/Interaction/IAction/WheelAction/WheelAction.hpp"
