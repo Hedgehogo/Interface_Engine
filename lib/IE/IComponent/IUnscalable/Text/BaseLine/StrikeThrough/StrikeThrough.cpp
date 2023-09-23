@@ -1,14 +1,26 @@
 #include "StrikeThrough.hpp"
 
 namespace ie {
+	StrikeThrough::Make::Make(const sf::Color& color, float strikeThroughOffset) : color(color), strikeThroughOffset(strikeThroughOffset) {
+	}
+	
+	BaseLine* StrikeThrough::Make::make(LineInitInfo initInfo) {
+		return new StrikeThrough{std::move(*this), initInfo};
+	}
+	
+	StrikeThrough::StrikeThrough(StrikeThrough::Make&& make, LineInitInfo initInfo) : BaseLine(sf::TriangleStrip, 4, make.color, initInfo), strikeThroughOffset(make.strikeThroughOffset) {
+		strikeThroughOffset *= initInfo.size;
+		underlineThickness = initInfo.font.getUnderlineThickness(initInfo.size);
+	}
+	
 	StrikeThrough::StrikeThrough(sf::Color color, float strikeThroughOffset) : BaseLine(sf::TriangleStrip, 4, color), strikeThroughOffset(strikeThroughOffset) {
 	}
 	
-	void StrikeThrough::init(uint size, sf::Font& font, sf::Color color, sf::RenderTarget& renderTarget) {
-		BaseLine::init(size, font, color, renderTarget);
+	void StrikeThrough::init(LineInitInfo initInfo) {
+		BaseLine::init(initInfo);
 		
-		strikeThroughOffset *= size;
-		underlineThickness = font.getUnderlineThickness(size);
+		strikeThroughOffset *= initInfo.size;
+		underlineThickness = initInfo.font.getUnderlineThickness(initInfo.size);
 	}
 	
 	void StrikeThrough::resize(float start, float end, float height) {
@@ -18,17 +30,8 @@ namespace ie {
 		vertexArray[3].position = {end, height - strikeThroughOffset + (underlineThickness / 2)};
 	}
 	
-	void StrikeThrough::init(float strikeThroughOffset, float underlineThickness, sf::VertexArray vertexArray, sf::RenderTarget& renderTarget) {
-		this->strikeThroughOffset = strikeThroughOffset;
-		this->underlineThickness = underlineThickness;
-		this->renderTarget = &renderTarget;
-		this->vertexArray = vertexArray;
-	}
-	
-	StrikeThrough* StrikeThrough::copy() {
-		StrikeThrough* underline = new StrikeThrough(sf::Color(), 0);
-		underline->init(strikeThroughOffset, underlineThickness, vertexArray, *renderTarget);
-		return underline;
+	StrikeThrough* StrikeThrough::copy() const{
+		return new StrikeThrough{*this};
 	}
 	
 	bool DecodePointer<StrikeThrough>::decodePointer(const YAML::Node& node, StrikeThrough*& strikeThrough) {

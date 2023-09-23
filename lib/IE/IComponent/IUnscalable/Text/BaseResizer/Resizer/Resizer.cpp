@@ -1,6 +1,16 @@
 #include "Resizer.hpp"
 
 namespace ie {
+	Resizer::Make::Make(float lineSpacing, BaseResizer::Align align, BaseResizer::Algorithm algorithm) : lineSpacing(lineSpacing), align(align), algorithm(algorithm) {
+	}
+	
+	Resizer* Resizer::Make::make(ResizerInitInfo initInfo) {
+		return new Resizer{std::move(*this), initInfo};
+	}
+	
+	Resizer::Resizer(Resizer::Make&& make, ResizerInitInfo initInfo) : BaseResizer{make.lineSpacing, make.align, make.algorithm, initInfo} {
+	}
+	
 	Resizer::Resizer(float lineSpacing, Align align, Algorithm algorithm) : BaseResizer{lineSpacing, align, algorithm} {
 	}
 	
@@ -8,22 +18,22 @@ namespace ie {
 		startRender += position;
 		endRender += position;
 		
-		for(BaseCharacter*& character: *characters) {
+		for(auto& character: *characters) {
 			character->move(position);
 		}
 		
-		for(BaseLine*& line: *lines) {
+		for(auto& line: *lines) {
 			line->move(position);
 		}
 	}
 	
 	void Resizer::setPosition(sf::Vector2f position) {
 		sf::Vector2f offset{position - startRender};
-		for(BaseCharacter*& character: *characters) {
+		for(auto& character: *characters) {
 			character->move({offset});
 		}
 		
-		for(BaseLine*& line: *lines) {
+		for(auto& line: *lines) {
 			line->move(offset);
 		}
 		
@@ -48,10 +58,10 @@ namespace ie {
 		sf::Vector2f offset{endRender.x - ((*(endCharacter - 1))->getPosition().x), lineSize};
 		
 		switch(align) {
-			case Align::left:
+			case Align::Left:
 				offset.x = 0;
 				break;
-			case Align::center:
+			case Align::Center:
 				offset.x /= 2;
 				break;
 			default:
@@ -62,18 +72,18 @@ namespace ie {
 			(*character)->move(offset);
 		}
 		
-		std::vector<BaseLine*>* oldLine = nullptr;
+		const std::vector<BoxPtr<BaseLine>>* oldLine = nullptr;
 		float startLine = 0;
 		
 		for(auto character = afterEnter; character != endCharacter; ++character) {
-			std::vector<BaseLine*>& characterLine = (*character)->getLine();
+			auto& characterLine = (*character)->getLine();
 			if(oldLine != &characterLine) {
 				sf::Vector2f characterPos = (*character)->getPosition();
 				if(oldLine) {
-					for(BaseLine*& line: *oldLine) {
+					for(auto & line: *oldLine) {
 						BaseLine* copyLine = line->copy();
 						copyLine->resize(startLine, characterPos.x, characterPos.y);
-						this->lines->push_back(copyLine);
+						this->lines->emplace_back(copyLine);
 					}
 				}
 				
@@ -83,14 +93,14 @@ namespace ie {
 		}
 		
 		if(oldLine) {
-			BaseCharacter* character = *(endCharacter - ((endCharacter != characters->begin() + 1 && (*(endCharacter - 1))->isSpecial() != BaseCharacter::Special::no) ? 2 : 1));
+			BaseCharacter* character = *(endCharacter - ((endCharacter != characters->begin() + 1 && (*(endCharacter - 1))->isSpecial() != BaseCharacter::Special::No) ? 2 : 1));
 			sf::Vector2f lineEnd = character->getPosition();
 			lineEnd.x += character->getAdvance();
 			
-			for(BaseLine*& line: *oldLine) {
+			for(auto& line: *oldLine) {
 				BaseLine* copyLine = line->copy();
 				copyLine->resize(startLine, lineEnd.x, lineEnd.y);
-				this->lines->push_back(copyLine);
+				this->lines->emplace_back(copyLine);
 			}
 		}
 		return lineSize;
@@ -121,9 +131,6 @@ namespace ie {
 	}
 	
 	void Resizer::deleteOldCash(sf::Vector2f size, sf::Vector2f position) {
-		for(BaseLine*& line: *lines) {
-			delete line;
-		}
 		lines->clear();
 		
 		startRender = position;
@@ -135,17 +142,17 @@ namespace ie {
 	}
 	
 	void Resizer::characterResize(float kerning) {
-		if(algorithm == BaseResizer::Algorithm::console)
+		if(algorithm == BaseResizer::Algorithm::Console)
 			return spaceResize(kerning);
 		
 		printCharacter(currentCharacter, kerning);
 	}
 	
 	void Resizer::spaceResize(float kerning) {
-		if(algorithm == BaseResizer::Algorithm::absolute)
+		if(algorithm == BaseResizer::Algorithm::Absolute)
 			return characterResize(kerning);
 		
-		if(this->nextPosition.x + (algorithm == BaseResizer::Algorithm::console ? (*currentCharacter)->getAdvance() : 0) <= endRender.x) {
+		if(this->nextPosition.x + (algorithm == BaseResizer::Algorithm::Console ? (*currentCharacter)->getAdvance() : 0) <= endRender.x) {
 			printCharacter(currentCharacter, kerning);
 			afterSpace = currentCharacter + 1;
 		} else {
@@ -197,16 +204,16 @@ namespace ie {
 			kerning = (currentCharacter + 1 != characters->end()) ? (*currentCharacter)->getKerning((*(currentCharacter + 1))->getChar()) : 0;
 			
 			switch((*currentCharacter)->isSpecial()) {
-				case BaseCharacter::Special::no:
+				case BaseCharacter::Special::No:
 					characterResize(kerning);
 					break;
-				case BaseCharacter::Special::space:
+				case BaseCharacter::Special::Space:
 					spaceResize(kerning);
 					break;
-				case BaseCharacter::Special::enter:
+				case BaseCharacter::Special::Enter:
 					enterResize();
 					break;
-				case BaseCharacter::Special::fullLine:
+				case BaseCharacter::Special::FullLine:
 					fullObjectResize();
 					break;
 			}
@@ -240,8 +247,8 @@ namespace ie {
 		sf::Vector2f minSize = {0, 0};
 		float wordSizeX = 0;
 		
-		for(BaseCharacter* character: *characters) {
-			if(character->isSpecial() == BaseCharacter::Special::no) {
+		for(auto& character: *characters) {
+			if(character->isSpecial() == BaseCharacter::Special::No) {
 				wordSizeX += character->getMinAdvance();
 			} else {
 				if(minSize.x < wordSizeX)
@@ -259,7 +266,7 @@ namespace ie {
 		sf::Vector2f minSize = {0, 0};
 		
 		float advance = 0;
-		for(BaseCharacter* character: *characters) {
+		for(auto& character: *characters) {
 			advance = character->getMinAdvance();
 			if(advance > minSize.x)
 				minSize.x = advance;
@@ -271,8 +278,8 @@ namespace ie {
 		sf::Vector2f minSize = {0, 0};
 		float wordSizeX = 0;
 		
-		for(BaseCharacter* character: *characters) {
-			if(character->isSpecial() != BaseCharacter::Special::enter) {
+		for(auto& character: *characters) {
+			if(character->isSpecial() != BaseCharacter::Special::Enter) {
 				wordSizeX += character->getMinAdvance();
 			} else {
 				if(minSize.x < wordSizeX)
@@ -297,8 +304,8 @@ namespace ie {
 	bool DecodePointer<Resizer>::decodePointer(const YAML::Node& node, Resizer*& resizer) {
 		resizer = new Resizer{
 			convDef(node["line-spacing"], 1.15f),
-			convDef(node["align"], BaseResizer::Align::left),
-			convDef(node["algorithm"], BaseResizer::Algorithm::base)
+			convDef(node["align"], BaseResizer::Align::Left),
+			convDef(node["algorithm"], BaseResizer::Algorithm::Base)
 		};
 		return true;
 	}

@@ -11,11 +11,11 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicKeysInteraction : public virtual IBasicInteraction<T> {
-			BoxPtr<ie::BasicKeyAction<T> >&& action;
+			BoxPtr<typename ie::BasicKeyAction<T>::Make > action;
 			std::vector<Key> keys;
 			std::vector<Key> blackListKeys = {};
 			
-			BasicKeysInteraction(BoxPtr<ie::BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+			BasicKeysInteraction(BoxPtr<typename ie::BasicKeyAction<T>::Make >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
 			
 			ie::BasicKeysInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
 		};
@@ -29,6 +29,8 @@ namespace ie {
 		BasicKeysInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
 		
 		BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+		
+		void init(BasicActionInitInfo<T> initInfo) override;
 		
 		bool isPress() const;
 		

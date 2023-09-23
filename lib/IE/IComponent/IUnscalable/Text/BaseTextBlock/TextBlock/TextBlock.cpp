@@ -1,23 +1,99 @@
 #include "TextBlock.hpp"
 
+#include <utility>
+
 #include "../../BaseLine/Underline/Underline.hpp"
 #include "../../BaseLine/StrikeThrough/StrikeThrough.hpp"
 #include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ie {
-	std::vector<BaseLine*> generateLines(std::vector<BaseLine*> lines, sf::Text::Style style) {
+	TextBlock::Make::Make(
+		std::u32string  text,
+		const orl::Option<sf::Color>& textColor,
+		const orl::Option<sf::Font*>& font,
+		const orl::Option<sf::Text::Style>& style,
+		std::vector<BoxPtr<BaseLine::Make>>&& lines,
+		const orl::Option<uint>& size,
+		const orl::Option<sf::Color>& textSelectionColor,
+		const orl::Option<sf::Color>& backgroundSelectionColor,
+		const orl::Option<sf::Color>& inactiveTextSelectionColor,
+		const orl::Option<sf::Color>& inactiveBackgroundSelectionColor
+	) : text(std::move(text)),
+		textColor(textColor),
+		font(font),
+		style(style),
+		lines(std::move(lines)),
+		size(size),
+		textSelectionColor(textSelectionColor),
+		backgroundSelectionColor(backgroundSelectionColor),
+		inactiveTextSelectionColor(inactiveTextSelectionColor),
+		inactiveBackgroundSelectionColor(inactiveBackgroundSelectionColor) {
+	}
+	
+	BaseTextBlock* TextBlock::Make::make(TextBockInitInfo textBlockInitInfo) {
+		return new TextBlock{std::move(*this), textBlockInitInfo};
+	}
+	
+	std::vector<BoxPtr<BaseLine>>&& generateLines(std::vector<BoxPtr<BaseLine>>&& lines, sf::Text::Style style) {
 		if(style & sf::Text::Underlined)
-			lines.push_back(new Underline);
+			lines.emplace_back(makeBoxPtr<Underline>());
 		if(style & sf::Text::StrikeThrough)
-			lines.push_back(new StrikeThrough);
-		return lines;
+			lines.emplace_back(makeBoxPtr<StrikeThrough>());
+		return std::move(lines);
+	}
+	
+	TextBlock::TextBlock(TextBlock::Make&& make, TextBockInitInfo initInfo) :
+		BaseTextBlock(
+			{
+				make.textColor.some_or(initInfo.textVariables.textColor.some()),
+				make.textSelectionColor.some_or(initInfo.textVariables.textSelectionColor.some()),
+				make.backgroundSelectionColor.some_or(initInfo.textVariables.backgroundSelectionColor.some()),
+				make.inactiveTextSelectionColor.some_or(initInfo.textVariables.inactiveTextSelectionColor.some()),
+				make.inactiveBackgroundSelectionColor.some_or(initInfo.textVariables.inactiveBackgroundSelectionColor.some()),
+				make.font.some_or(initInfo.textVariables.font.some()),
+				make.style.some_or(initInfo.textVariables.style.some()),
+				make.size.some_or(initInfo.textVariables.size.some()),
+			}
+		),
+		text(std::move(make.text)),
+		lines(
+			generateLines(
+				mapMake(
+					std::move(make.lines),
+					LineInitInfo{
+						textVariables.size.some(),
+						*textVariables.font.some(),
+						textVariables.textColor.some(),
+						initInfo.textRenderTarget
+					}
+				),
+				make.style.some()
+			)
+		) {
+		textCharacters.resize(text.size());
+		for(std::size_t i = 0; i < textCharacters.size(); ++i) {
+			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines);
+		}
+		
+		for(auto& character: textCharacters) {
+			character->init(initInfo.textRenderTarget);
+		}
 	}
 	
 	TextBlock::TextBlock(
-		std::u32string text, sf::Color textColor, sf::Font* font, sf::Text::Style style, std::vector<BaseLine*> lines, int size, sf::Color textSelectionColor, sf::Color backgroundSelectionColor,
-		sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor
-	) : str(text), lines(generateLines(lines, style)) {
-		textVariables.TextColor = textColor;
+		std::u32string text,
+		orl::Option<sf::Color> textColor,
+		orl::Option<sf::Font*> font,
+		orl::Option<sf::Text::Style> style,
+		std::vector<BoxPtr<BaseLine>>&& lines,
+		orl::Option<uint> size,
+		orl::Option<sf::Color> textSelectionColor,
+		orl::Option<sf::Color> backgroundSelectionColor,
+		orl::Option<sf::Color> inactiveTextSelectionColor,
+		orl::Option<sf::Color> inactiveBackgroundSelectionColor
+	) : text(std::move(text)),
+		lines(style ? generateLines(std::move(lines), style.some()) : std::move(lines)) {
+		textVariables.textColor = textColor;
 		textVariables.font = font;
 		textVariables.style = style;
 		textVariables.size = size;
@@ -27,24 +103,35 @@ namespace ie {
 		textVariables.inactiveBackgroundSelectionColor = inactiveBackgroundSelectionColor;
 	}
 	
-	TextBlock::TextBlock(std::u32string str, TextVariables textVariables, std::vector<BaseLine*> lines) : BaseTextBlock(textVariables), str(str), lines(lines) {
+	TextBlock::TextBlock(std::u32string text, TextVariables textVariables, std::vector<BoxPtr<BaseLine>>&& lines) : BaseTextBlock(textVariables), text(std::move(text)), lines(std::move(lines)) {
 	}
 	
-	void TextBlock::init(InitInfo textInitInfo, InitInfo) {
-		for(BaseCharacter*& character: textCharacters) {
-			character->init(textInitInfo.renderTarget);
+	void TextBlock::init(TextBockInitInfo textBlockInitInfo) {
+		for(auto& character: textCharacters) {
+			character->init(textBlockInitInfo.renderTarget);
 		}
 		
-		for(BaseLine*& line: lines) {
-			line->init(textVariables.size, *textVariables.font, textVariables.TextColor, textInitInfo.renderTarget);
+		for(auto& line: lines) {
+			line->init({textVariables.size.some(), *textVariables.font.some(), textVariables.textColor.some(), textBlockInitInfo.renderTarget});
+		}
+	}
+	
+	void TextBlock::setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, sf::Font* font, uint size,
+									 sf::Text::Style style) {
+		BaseTextBlock::setTextVariables(TextColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor, font, size, style);
+		
+		textCharacters.resize(text.size());
+		for(std::size_t i = 0; i < textCharacters.size(); ++i) {
+			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines);
 		}
 	}
 	
 	std::vector<BaseCharacter*> TextBlock::getCharacters() {
-		for(char32_t character: str) {
-			textCharacters.push_back(new Character(character, textVariables, lines));
+		std::vector<BaseCharacter*> result{textCharacters.size()};
+		for(int i = 0; i < result.size(); ++i) {
+			result[i] = textCharacters[i].get();
 		}
-		return textCharacters;
+		return result;
 	}
 	
 	void TextBlock::update() {
@@ -56,7 +143,7 @@ namespace ie {
 	
 	bool TextBlock::in(sf::Vector2f mousePosition) {
 		bool result = true;
-		for(BaseCharacter*& character: textCharacters) {
+		for(auto& character: textCharacters) {
 			bool buf = character->in(mousePosition);
 			if(!buf)
 				result = false;
@@ -65,17 +152,7 @@ namespace ie {
 	}
 	
 	TextBlock* TextBlock::copy() {
-		std::vector<BaseLine*> copyLines{lines.size()};
-		for(std::size_t i = 0; i < lines.size(); ++i) {
-			copyLines[i] = lines[i];
-		}
-		return new TextBlock(str, textVariables, copyLines);
-	}
-	
-	TextBlock::~TextBlock() {
-		for(BaseLine*& line: lines) {
-			delete line;
-		}
+		return nullptr;
 	}
 	
 	bool DecodePointer<TextBlock>::decodePointer(const YAML::Node& node, TextBlock*& textBlock) {
@@ -83,54 +160,19 @@ namespace ie {
 			textBlock = new TextBlock{node.as<std::u32string>()};
 			return true;
 		}
-		
-		std::u32string text;
-		sf::Color textColor = nullColor;
-		sf::Font* font = nullptr;
-		sf::Text::Style style = {};
-		std::vector<BaseLine*> lines = {};
-		int size = 0;
-		sf::Color textSelectionColor = nullColor;
-		sf::Color backgroundSelectionColor = nullColor;
-		sf::Color inactiveTextSelectionColor = nullColor;
-		sf::Color inactiveBackgroundSelectionColor = nullColor;
-		
-		node["text"] >> text;
-		if(node["text-color"])
-			node["text-color"] >> textColor;
-		if(node["text-color"])
-			node["text-color"] >> textColor;
-		if(node["font"])
-			node["font"] >> font;
-		if(node["style"])
-			node["style"] >> style;
-		if(node["size"])
-			node["size"] >> size;
-		if(node["text-selection-color"])
-			node["text-selection-color"] >> textSelectionColor;
-		if(node["background-selection-color"])
-			node["background-selection-color"] >> backgroundSelectionColor;
-		if(node["inactive-text-selection-color"])
-			node["inactive-text-selection-color"] >> inactiveTextSelectionColor;
-		if(node["inactive-background-selection-color"])
-			node["inactive-background-selection-color"] >> inactiveBackgroundSelectionColor;
-		
-		if(node["line"]) {
-			BaseLine* line;
-			node["line"] >> line;
-			lines.push_back(line);
-		} else if(node["lines"]) {
-			for(const YAML::Node& nodeLine: node["lines"]) {
-				BaseLine* line;
-				nodeLine >> line;
-				lines.push_back(line);
-			}
-		}
-		
-		{
-			textBlock = new TextBlock{text, textColor, font, style, lines, size, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor};
-			return true;
-		}
+		textBlock = new TextBlock{
+			node["text"].as<std::u32string>(),
+			convDef<orl::Option<sf::Color>>(node["text-color"], {}),
+			convDef<orl::Option<sf::Font*>>(node["font"], {}),
+			convDef<orl::Option<sf::Text::Style>>(node["style"], {}),
+			node["line"] ? makeVector(node["line"].as < BoxPtr < BaseLine >> ()) : node["line"].as<std::vector<BoxPtr<BaseLine>>>(),
+			convDef<orl::Option<uint>>(node["size"], {}),
+			convDef<orl::Option<sf::Color>>(node["text-selection-color"], {}),
+			convDef<orl::Option<sf::Color>>(node["background-selection-color"], {}),
+			convDef<orl::Option<sf::Color>>(node["inactive-text-selection-color"], {}),
+			convDef<orl::Option<sf::Color>>(node["inactive-background-selection-color"], {})
+		};
+		return true;
 	}
 	
 	template<>

@@ -6,6 +6,7 @@ function(configure_dependency PROJECT)
             localisation
             Box_Ptr
             openLib
+            option_result_cpp
     )
 
     foreach(lib IN LISTS libs)

@@ -6,7 +6,7 @@
 namespace ie {
 	class ObjectCharacter : public BaseCharacter {
 	public:
-		ObjectCharacter(IScalable* object, bool fullLine = false);
+		explicit ObjectCharacter(BoxPtr<IScalable>&& object, bool fullLine = false);
 		
 		void setPosition(sf::Vector2f position) override;
 		
@@ -14,7 +14,9 @@ namespace ie {
 		
 		void move(sf::Vector2f position) override;
 		
-		std::vector<BaseLine*>& getLine();
+		bool updateInteractions(sf::Vector2f mousePosition);
+		
+		const std::vector<BoxPtr<BaseLine>>& getLine() override;
 		
 		sf::Vector2f getPosition() const override;
 		
@@ -35,12 +37,10 @@ namespace ie {
 		float getMinAdvance() override;
 		
 		void drawDebug(sf::RenderTarget& renderTarget, int indentAddition, uint hue, uint hueOffset) override;
-		
-		~ObjectCharacter() override;
 	
 	protected:
-		IScalable* object;
-		std::vector<BaseLine*> lines;
+		BoxPtr<IScalable> object;
+		std::vector<BoxPtr<BaseLine>> lines;
 		BaseCharacter::Special special;
 	};
 }

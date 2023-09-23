@@ -4,23 +4,31 @@
 #include "../BaseCharacter/BaseCharacter.hpp"
 #include "IE/IComponent/IUnscalable/IScalable/BasicInteractiveData/BasicInteractiveData.hpp"
 #include "../../../InitInfo/InitInfo.hpp"
+#include "InitInfo/TextBockInitInfo.hpp"
 
 namespace ie {
 	class BaseTextBlock {
 	public:
-		struct Edge {
-			int start, end;
+		struct Make{
+			virtual BaseTextBlock* make(TextBockInitInfo textBlockInitInfo) = 0;
 		};
-	
+		
 		BaseTextBlock();
 		
 		BaseTextBlock(TextVariables textVariables);
 		
-		virtual ~BaseTextBlock() = default;
+		virtual void setTextVariables(
+			sf::Color TextColor,
+			sf::Color textSelectionColor,
+			sf::Color backgroundSelectionColor,
+			sf::Color inactiveTextSelectionColor,
+			sf::Color inactiveBackgroundSelectionColor,
+			sf::Font* font,
+			uint size,
+			sf::Text::Style style
+		);
 		
-		void setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, sf::Font* font, uint size);
-		
-		virtual void init(InitInfo textInitInfo, InitInfo initInfo) = 0;
+		virtual void init(TextBockInitInfo textBlockInitInfo) = 0;
 		
 		virtual bool in(sf::Vector2f mousePosition) = 0;
 		

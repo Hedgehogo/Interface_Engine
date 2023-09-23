@@ -2,18 +2,39 @@
 #include "../../BaseCharacter/Character/Character.hpp"
 
 namespace ie {
-	ObjectTextBlock::ObjectTextBlock(IScalable* object, sf::Vector2f size, bool isCharacter) :
-		BaseTextBlock(), size(size), objectCharacter(new ObjectCharacter(object)), isCharacter(isCharacter), fullLine(false), object(object) {
+	ObjectTextBlock::Make::Make(BoxPtr<IScalable::Make>&& object, const sf::Vector2f& size, bool isCharacter) : object(std::move(object)), size(size), isCharacter(isCharacter), fullLine(false) {
 	}
 	
-	ObjectTextBlock::ObjectTextBlock(IScalable* object, float height) :
-		size(0, height), objectCharacter(new ObjectCharacter{object, true}), isCharacter(false), fullLine(true), object(object) {
+	ObjectTextBlock::Make::Make(BoxPtr<IScalable::Make>&& object, float height) : object(std::move(object)), height(height), fullLine(true) {
 	}
 	
-	void ObjectTextBlock::init(InitInfo, InitInfo initInfo) {
-		object->init(initInfo);
-		sf::Vector2f minSize{object->getMinSize()};
-		object->setSize({std::max(size.x, minSize.x), std::max(size.y, minSize.y)});
+	ObjectTextBlock* ObjectTextBlock::Make::make(TextBockInitInfo textBlockInitInfo) {
+		return new ObjectTextBlock{std::move(*this), textBlockInitInfo};
+	}
+	
+	ObjectTextBlock::ObjectTextBlock(
+		ObjectTextBlock::Make&& make,
+		TextBockInitInfo textBlockInitInfo
+	) :
+		isCharacter(make.isCharacter && !make.fullLine),
+		objectCharacter(
+			new ObjectCharacter{
+				BoxPtr{
+					[&](){
+						auto result{make.object->make(static_cast<InitInfo>(textBlockInitInfo))};
+						sf::Vector2f size{make.size.x, make.fullLine ? make.height : make.size.y};
+						sf::Vector2f minSize{result->getSize()};
+						result->setSize({std::max(size.x, minSize.x), std::max(size.y, minSize.y)});
+						return result;
+					}()
+				},
+				make.fullLine
+			}
+		){
+	}
+	
+	void ObjectTextBlock::init(TextBockInitInfo textBlockInitInfo) {
+		throw std::runtime_error("ObjectTextBlock::init() not correct");
 	}
 	
 	bool ObjectTextBlock::in(sf::Vector2f mousePosition) {
@@ -22,13 +43,13 @@ namespace ie {
 	
 	std::vector<BaseCharacter*> ObjectTextBlock::getCharacters() {
 		std::vector<BaseCharacter*> result;
-		if(!isCharacter && !fullLine) {
+		if(!isCharacter) {
 			result.push_back(new Character{L'\n', textVariables, lines});
 		}
 		
-		result.push_back(objectCharacter);
+		result.push_back(objectCharacter.get());
 		
-		if(!isCharacter && !fullLine) {
+		if(!isCharacter) {
 			result.push_back(new Character{L'\n', textVariables, lines});
 		}
 		
@@ -39,37 +60,15 @@ namespace ie {
 	}
 	
 	bool ObjectTextBlock::updateInteractions(sf::Vector2f mousePosition) {
-		return object->updateInteractions(mousePosition);
+		return objectCharacter->updateInteractions(mousePosition);
 	}
 	
 	BaseTextBlock* ObjectTextBlock::copy() {
-		return new ObjectTextBlock{object->copy(), object->getAreaSize(), isCharacter};
+		return new ObjectTextBlock{*this};
 	}
 	
 	bool DecodePointer<ObjectTextBlock>::decodePointer(const YAML::Node& node, ObjectTextBlock*& objectTextBlock) {
-		IScalable* object;
-		
-		node["object"] >> object;
-		
-		if(node["size"]) {
-			sf::Vector2f size{0, 0};
-			bool isCharacter{true};
-			
-			node["size"] >> size;
-			if(node["is-character"])
-				node["is-character"] >> isCharacter;
-			{
-				objectTextBlock = new ObjectTextBlock{object, size, isCharacter};
-				return true;
-			}
-		} else {
-			float height{0};
-			
-			node["height"] >> height;
-			{
-				objectTextBlock = new ObjectTextBlock{object, height};
-				return true;
-			}
-		}
+		throw std::runtime_error("DecodePointer<ObjectTextBlock>::decodePointer() not correct");
+		return false;
 	}
 }

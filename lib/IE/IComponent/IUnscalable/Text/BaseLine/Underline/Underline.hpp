@@ -5,17 +5,23 @@
 namespace ie {
 	class Underline : public BaseLine {
 	public:
+		struct Make : public BaseLine::Make {
+			sf::Color color;
+			
+			explicit Make(const sf::Color& color = nullColor);
+			
+			Underline* make(LineInitInfo initInfo) override;
+		};
+		
+		Underline(Make&& make, LineInitInfo initInfo);
+		
 		Underline(sf::Color color = nullColor);
 		
-		void init(uint size, sf::Font& font, sf::Color color, sf::RenderTarget& renderTarget);
+		void init(LineInitInfo initInfo) override;
 		
-		void resize(float start, float end, float height);
-	
-	protected:
-		void init(float underlineOffset, float underlineThickness, sf::VertexArray vertexArray, sf::RenderTarget& renderTarget);
-	
-	public:
-		Underline* copy();
+		void resize(float start, float end, float height) override;
+		
+		Underline* copy() const override;
 	
 	protected:
 		float underlineOffset;

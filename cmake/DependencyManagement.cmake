@@ -70,7 +70,13 @@ function(dependency_management PROJECT)
             GIT_TAG master
             FIND_PACKAGE_ARGS NAMES Box_Ptr
     )
-    FetchContent_MakeAvailable(SFML curl localisation Box_Ptr)
+    FetchContent_Declare(
+            option_result_cpp
+            GIT_REPOSITORY https://github.com/Hedgehogo/option-result-cpp.git
+            GIT_TAG main
+            FIND_PACKAGE_ARGS NAMES option_result_cpp
+    )
+    FetchContent_MakeAvailable(SFML curl localisation Box_Ptr option_result_cpp)
 
     connect_yaml_cpp()
     connect_ImageMagick()

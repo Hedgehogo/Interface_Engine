@@ -18,35 +18,35 @@ namespace ie {
 		interface.setSize(sf::Vector2f{size});
 	}
 	
-	Window::Window(const Interface& interface) : interface(interface), resizer(getWindowResizer()) {
+	Window::Window(Interface&& interface) : interface(std::move(interface)), resizer(getWindowResizer()) {
 		construction();
 		this->interface.setRenderWindowSize(window);
 	}
 	
-	Window::Window(const Interface& interface, const sf::String& title, const sf::VideoMode& mode, const sf::ContextSettings& settings) :
+	Window::Window(Interface&& interface, const sf::String& title, const sf::VideoMode& mode, const sf::ContextSettings& settings) :
 		window(
 			(mode == sf::VideoMode{} ? [&] {
 				auto newWindowSize{interface.getNormalSize()};
 				setSize({static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))});
 				return sf::VideoMode{static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))};
 			}() : mode), title, sf::Style::None, settings
-		), interface(interface), resizer(getWindowResizer()) {
+		), interface(std::move(interface)), resizer(getWindowResizer()) {
 		construction();
 	}
 	
-	Window::Window(const Interface& interface, const sf::String& title, const sf::ContextSettings& settings) :
+	Window::Window(Interface&& interface, const sf::String& title, const sf::ContextSettings& settings) :
 		window(
 			[&] {
 				auto newWindowSize{interface.getNormalSize()};
 				setSize({static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))});
 				return sf::VideoMode{static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))};
 			}(), title, sf::Style::None, settings
-		), interface(interface), resizer(getWindowResizer()) {
+		), interface(std::move(interface)), resizer(getWindowResizer()) {
 		construction();
 	}
 	
-	Window::Window(const Interface& interface, sf::WindowHandle handle, const sf::ContextSettings& settings) :
-		window(handle, settings), interface(interface), resizer(getWindowResizer()) {
+	Window::Window(Interface&& interface, sf::WindowHandle handle, const sf::ContextSettings& settings) :
+		window(handle, settings), interface(std::move(interface)), resizer(getWindowResizer()) {
 		construction();
 		this->interface.setRenderWindowSize(window);
 	}

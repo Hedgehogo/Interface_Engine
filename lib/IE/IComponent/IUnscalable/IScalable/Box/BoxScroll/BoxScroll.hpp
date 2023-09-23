@@ -21,7 +21,7 @@ namespace ie {
 		
 		BoxScroll(Make&& make, InitInfo initInfo);
 		
-		BoxScroll(BoxPtr<IUnscalable>&& object, const PSRVec2f& normalObjectPosition, const sf::Vector2f& minSize);
+		BoxScroll(BoxPtr<IUnscalable>&& object, const PSRVec2f& normalObjectPosition, const sf::Vector2f& minSize = {});
 		
 		void init(InitInfo initInfo) override;
 		

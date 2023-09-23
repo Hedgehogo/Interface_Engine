@@ -15,7 +15,7 @@ namespace ie {
 		
 		template<typename T>
 		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(Make&& make, BasicActionInitInfo<T> initInfo) :
-			interaction(make.interaction->make(initInfo)), state(state) {
+			interaction(make.interaction->make(initInfo)), state(make.state) {
 		}
 		
 		template<typename T>

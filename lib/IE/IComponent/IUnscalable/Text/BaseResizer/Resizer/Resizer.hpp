@@ -5,7 +5,19 @@
 namespace ie {
 	class Resizer : public BaseResizer {
 	public:
-		Resizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);
+		struct Make : BaseResizer::Make{
+			float lineSpacing = 1.15;
+			Align align = Align::Left;
+			Algorithm algorithm = Algorithm::Base;
+			
+			Make(float lineSpacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
+			
+			Resizer* make(ResizerInitInfo initInfo) override;
+		};
+		
+		Resizer(Make&& make, ResizerInitInfo initInfo);
+		
+		Resizer(float lineSpacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
 		
 		void move(sf::Vector2f position) override;
 		

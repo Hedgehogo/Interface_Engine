@@ -1,17 +1,23 @@
 #pragma once
 
-#include "IE/IComponent/IUnscalable/Text/TextInteraction/TextAction/TextAction.hpp"
 #include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 #include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
 	class BaseCharacter;
+	class Text;
 	
 	class TextSelectionAction : public BasicBaseKeyAction<Text&> {
 	public:
+		struct Make : BasicBaseKeyAction<Text&>::Make {
+			TextSelectionAction* make(BasicActionInitInfo<Text&> initInfo) override;
+		};
+		
+		TextSelectionAction(Make&& make, BasicActionInitInfo<Text&> initInfo);
+		
 		TextSelectionAction();
 		
-		void init(TextInteractionInitInfo initInfo) override;
+		void init(BasicActionInitInfo<Text&> initInfo) override;
 		
 		std::vector<BaseCharacter*>::iterator getStart();
 		
