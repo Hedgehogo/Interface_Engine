@@ -17,8 +17,8 @@ namespace ie {
 		uint size,
 		sf::Text::Style style
 	) {
-		if(!textVariables.TextColor)
-			textVariables.TextColor = TextColor;
+		if(!textVariables.textColor)
+			textVariables.textColor = TextColor;
 		if(!textVariables.textSelectionColor)
 			textVariables.textSelectionColor = textSelectionColor;
 		if(!textVariables.backgroundSelectionColor)

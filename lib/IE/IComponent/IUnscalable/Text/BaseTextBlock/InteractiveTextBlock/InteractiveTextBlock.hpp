@@ -6,6 +6,27 @@
 namespace ie {
 	class InteractiveTextBlock : public TextBlock {
 	public:
+		struct Make : public TextBlock::Make {
+			BoxPtr<IBaseInteraction> interaction;
+			
+			Make(BoxPtr<IBaseInteraction>&& interaction,
+				 const std::u32string& text,
+				 const orl::Option<sf::Color>& textColor = {},
+				 const orl::Option<sf::Font*>& font = {},
+				 const orl::Option<sf::Text::Style>& style = {},
+				 std::vector<BoxPtr<BaseLine::Make>>&& lines = {},
+				 const orl::Option<uint>& size = {},
+				 const orl::Option<sf::Color>& textSelectionColor = {},
+				 const orl::Option<sf::Color>& backgroundSelectionColor = {},
+				 const orl::Option<sf::Color>& inactiveTextSelectionColor = {},
+				 const orl::Option<sf::Color>& inactiveBackgroundSelectionColor = {}
+			);
+			
+			InteractiveTextBlock* make(TextBockInitInfo textBlockInitInfo) override;
+		};
+		
+		InteractiveTextBlock(Make&& make, TextBockInitInfo textBlockInitInfo);
+		
 		InteractiveTextBlock(
 			BoxPtr<IBaseInteraction>&& interaction,
 			std::u32string text,
@@ -20,14 +41,14 @@ namespace ie {
 			orl::Option<sf::Color> inactiveBackgroundSelectionColor = {}
 		);
 		
-		void init(InitInfo textInitInfo, InitInfo initInfo);
+		void init(TextBockInitInfo textBlockInitInfo);
 		
 		bool in(sf::Vector2f mousePosition);
 		
 		void update() override;
 		
 		bool updateInteractions(sf::Vector2f) override;
-	
+		
 		InteractiveTextBlock* copy() override;
 	
 	protected:

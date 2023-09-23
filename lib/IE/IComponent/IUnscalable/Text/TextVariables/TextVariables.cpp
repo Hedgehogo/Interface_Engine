@@ -11,7 +11,7 @@ namespace ie {
 		orl::Option<sf::Text::Style> style,
 		orl::Option<uint> size
 	) :
-		TextColor(textColor),
+		textColor(textColor),
 		textSelectionColor(textSelectionColor),
 		backgroundSelectionColor(backgroundSelectionColor),
 		inactiveTextSelectionColor(inactiveTextSelectionColor),

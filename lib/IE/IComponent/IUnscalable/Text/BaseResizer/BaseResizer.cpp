@@ -1,12 +1,24 @@
 #include "BaseResizer.hpp"
 
 namespace ie {
+	BaseResizer* BaseResizer::Make::make(ResizerInitInfo resizerInitInfo) {
+		return nullptr;
+	}
+	
+	BaseResizer::BaseResizer(float lineSpacing, BaseResizer::Align align, BaseResizer::Algorithm algorithm, ResizerInitInfo initInfo) :
+		characters(&initInfo.characters),
+		lines(&initInfo.lines),
+		lineSpacing(lineSpacing),
+		align(align),
+		algorithm(algorithm) {
+	}
+	
 	BaseResizer::BaseResizer(float lineSpacing, Align align, Algorithm algorithm) : characters(nullptr), lines(nullptr), lineSpacing(lineSpacing), align(align), algorithm(algorithm) {
 	}
 	
-	void BaseResizer::init(std::vector<BaseCharacter*>& characters, std::vector<BoxPtr<BaseLine>>& lines) {
-		this->characters = &characters;
-		this->lines = &lines;
+	void BaseResizer::init(ResizerInitInfo initInfo) {
+		this->characters = &initInfo.characters;
+		this->lines = &initInfo.lines;
 	}
 	
 	sf::Vector2f BaseResizer::getMinSize() {

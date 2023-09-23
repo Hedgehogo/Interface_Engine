@@ -9,6 +9,12 @@ namespace ie {
 	
 	class TextSelectionAction : public BasicBaseKeyAction<Text&> {
 	public:
+		struct Make : BasicBaseKeyAction<Text&>::Make {
+			TextSelectionAction* make(BasicActionInitInfo<Text&> initInfo) override;
+		};
+		
+		TextSelectionAction(Make&& make, BasicActionInitInfo<Text&> initInfo);
+		
 		TextSelectionAction();
 		
 		void init(BasicActionInitInfo<Text&> initInfo) override;

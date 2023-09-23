@@ -5,7 +5,7 @@
 namespace ie {
 	namespace make_system {
 		template<typename T>
-		BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<ie::BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys) :
+		BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<typename ie::BasicKeyAction<T>::Make >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys) :
 			action(std::move(action)), keys(std::move(keys)), blackListKeys(std::move(blackListKeys)) {
 		}
 		

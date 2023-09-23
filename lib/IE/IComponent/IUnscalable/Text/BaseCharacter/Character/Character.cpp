@@ -36,7 +36,7 @@ namespace ie {
 				vertexArray[i].position += {glyph.bounds.left, glyph.bounds.top};
 				selectionVertexArray[i].position.y -= getHeight();
 				
-				vertexArray[i].color = textVariables.TextColor.some();
+				vertexArray[i].color = textVariables.textColor.some();
 				selectionVertexArray[i].color = textVariables.backgroundSelectionColor.some();
 			}
 		}
@@ -69,7 +69,7 @@ namespace ie {
 	
 	void Character::setSelection(bool selection) {
 		BaseCharacter::setSelection(selection);
-		auto currentColor{selection ? textVariables.textSelectionColor.some() : textVariables.TextColor.some()};
+		auto currentColor{selection ? textVariables.textSelectionColor.some() : textVariables.textColor.some()};
 		for(std::size_t i = 0; i < 4; ++i) {
 			vertexArray[i].color = currentColor;
 		}

@@ -1,6 +1,16 @@
 #include "Resizer.hpp"
 
 namespace ie {
+	Resizer::Make::Make(float lineSpacing, BaseResizer::Align align, BaseResizer::Algorithm algorithm) : lineSpacing(lineSpacing), align(align), algorithm(algorithm) {
+	}
+	
+	Resizer* Resizer::Make::make(ResizerInitInfo initInfo) {
+		return new Resizer{std::move(*this), initInfo};
+	}
+	
+	Resizer::Resizer(Resizer::Make&& make, ResizerInitInfo initInfo) : BaseResizer{make.lineSpacing, make.align, make.algorithm, initInfo} {
+	}
+	
 	Resizer::Resizer(float lineSpacing, Align align, Algorithm algorithm) : BaseResizer{lineSpacing, align, algorithm} {
 	}
 	

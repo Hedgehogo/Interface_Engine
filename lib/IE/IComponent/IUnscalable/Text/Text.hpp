@@ -12,10 +12,40 @@ namespace ie {
 			std::vector<BaseCharacter*>::iterator start;
 			std::vector<BaseCharacter*>::iterator end;
 		};
-		
-		void init(InitInfo initInfo) override;
-	
 	public:
+		
+		struct Make : public virtual IUnscalable::Make {
+			std::vector<BoxPtr<BaseTextBlock::Make>> textBlocks;
+			BoxPtr<IUninteractive::Make> background = makeBoxPtr<FullColor::Make>(sf::Color::White);
+			uint size = 14;
+			sf::Font* font = nullptr;
+			sf::Color textColor = sf::Color::Black;
+			sf::Color textSelectionColor = sf::Color::White;
+			sf::Color backgroundSelectionColor = sf::Color::Blue;
+			sf::Color inactiveTextSelectionColor = sf::Color::Black;
+			sf::Color inactiveBackgroundSelectionColor = {150, 150, 150};
+			sf::Text::Style style = {};
+			BoxPtr<BaseResizer::Make> resizer = makeBoxPtr<Resizer::Make>(1.15f, BaseResizer::Align::Left);
+			BoxPtr<IBasicInteraction<Text&>::Make> textInteraction = makeBoxPtr<BasicEmptyInteraction<Text&>::Make>();
+			
+			explicit Make(std::vector<BoxPtr<BaseTextBlock::Make>>&& textBlocks,
+						  BoxPtr<IUninteractive::Make>&& background = makeBoxPtr<FullColor::Make>(sf::Color::White),
+						  uint size = 14,
+						  sf::Font* font = nullptr,
+						  sf::Color textColor = sf::Color::Black,
+						  sf::Color textSelectionColor = sf::Color::White,
+						  sf::Color backgroundSelectionColor = sf::Color::Blue,
+						  sf::Color inactiveTextSelectionColor = sf::Color::Black,
+						  sf::Color inactiveBackgroundSelectionColor = {150, 150, 150},
+						  sf::Text::Style style = {},
+						  BoxPtr<BaseResizer::Make>&& resizer = makeBoxPtr<Resizer::Make>(1.15f, BaseResizer::Align::Left),
+						  BoxPtr<IBasicInteraction<Text&>::Make>&& textInteraction = makeBoxPtr<BasicEmptyInteraction<Text&>::Make>()
+			);
+			
+			Text* make(InitInfo initInfo) override;
+		};
+		Text(Make&& make, InitInfo initInfo);
+		
 		explicit Text(std::vector<BoxPtr<BaseTextBlock>>&& textBlocks,
 					  BoxPtr<IUninteractive>&& background = makeBoxPtr<FullColor>(sf::Color::White),
 					  int size = 14,
@@ -29,6 +59,8 @@ namespace ie {
 					  BoxPtr<BaseResizer>&& resizer = makeBoxPtr<Resizer>(1.15f, BaseResizer::Align::Left),
 					  BoxPtr<IBasicInteraction<Text&>>&& textInteraction = makeBoxPtr<BasicEmptyInteraction<Text&>>()
 		);
+		
+		void init(InitInfo initInfo) override;
 		
 		void setSelection(Selection selection);
 		
@@ -72,7 +104,6 @@ namespace ie {
 	
 	protected:
 		InteractionManager* interactionManager;
-		
 		sf::RenderTarget* renderTarget;
 		
 		sf::RenderTexture renderTexture;
@@ -81,13 +112,11 @@ namespace ie {
 		sf::Sprite sprite;
 		DrawManager drawManager;
 		
+		BoxPtr<IUninteractive> background;
+		
 		bool interact;
 		bool oldInteract;
-		
-		BoxPtr<IBasicInteraction<Text&> > textInteraction;
-		
 		Selection selection;
-		
 		uint size;
 		
 		std::vector<BaseCharacter*> textCharacters;
@@ -95,8 +124,7 @@ namespace ie {
 		std::vector<BoxPtr<BaseLine> > lines;
 		
 		BoxPtr<BaseResizer> resizer;
-		
-		BoxPtr<IUninteractive> background;
+		BoxPtr<IBasicInteraction<Text&> > textInteraction;
 	};
 	
 	template<>

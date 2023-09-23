@@ -5,6 +5,13 @@
 #include <cmath>
 
 namespace ie {
+	TextSelectionAction* TextSelectionAction::Make::make(BasicActionInitInfo<Text&> initInfo) {
+		return new TextSelectionAction{std::move(*this), initInfo};
+	}
+	
+	TextSelectionAction::TextSelectionAction(TextSelectionAction::Make&& make, BasicActionInitInfo<Text&> initInfo) : text(&initInfo.additional), start(), end() {
+	}
+	
 	TextSelectionAction::TextSelectionAction() : text(nullptr), start(), end() {
 	}
 	
@@ -21,7 +28,6 @@ namespace ie {
 	
 	void TextSelectionAction::whilePressed() {
 		text->setSelectionEnd(end = text->getCharacter(sf::Vector2f{mousePosition}));
-		
 		if(start != nullBaseCharacterIterator && end != nullBaseCharacterIterator) {
 			auto localStart = start, localEnd = end;
 			

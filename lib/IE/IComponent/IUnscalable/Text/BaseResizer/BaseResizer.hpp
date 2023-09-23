@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../BaseCharacter/BaseCharacter.hpp"
+#include "InitInfo/ResizerInitInfo.hpp"
 
 namespace ie {
 	class BaseResizer {
@@ -16,10 +17,16 @@ namespace ie {
 			Console,
 			Absolute
 		};
+		
+		struct Make{
+			virtual BaseResizer* make(ResizerInitInfo resizerInitInfo);
+		};
+		
+		BaseResizer(float lineSpacing, Align align, Algorithm algorithm, ResizerInitInfo initInfo);
 	
 		BaseResizer(float lineSpacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
 		
-		void init(std::vector<BaseCharacter*>& characters, std::vector<BoxPtr<BaseLine>>& lines);
+		void init(ResizerInitInfo initInfo);
 		
 		virtual void move(sf::Vector2f position) = 0;
 		

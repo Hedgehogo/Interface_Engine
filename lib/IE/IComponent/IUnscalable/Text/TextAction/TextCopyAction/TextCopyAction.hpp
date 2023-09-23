@@ -8,12 +8,18 @@ namespace ie {
 	
 	class TextCopyAction : public BasicBaseKeyAction<Text&> {
 	public:
+		struct Make : public BasicBaseKeyAction<Text&>::Make {
+			TextCopyAction* make(BasicActionInitInfo<Text&> initInfo);
+		};
+		
+		TextCopyAction(Make&& make, BasicActionInitInfo<Text&> initInfo);
+		
 		TextCopyAction();
 		
 		void init(BasicActionInitInfo<Text&> initInfo) override;
 		
 		TextCopyAction* copy() override;
-		
+	
 	protected:
 		void startPressed() override;
 		

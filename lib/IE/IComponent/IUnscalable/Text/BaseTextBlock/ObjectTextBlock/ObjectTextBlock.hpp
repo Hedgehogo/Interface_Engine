@@ -6,11 +6,23 @@
 namespace ie {
 	class ObjectTextBlock : public BaseTextBlock {
 	public:
-		explicit ObjectTextBlock(BoxPtr<IScalable>&& object, sf::Vector2f size = {0, 0}, bool isCharacter = true);
+		struct Make : public BaseTextBlock::Make {
+			BoxPtr<IScalable::Make> object;
+			sf::Vector2f size = {0, 0};
+			bool isCharacter = true;
+			float height = 0;
+			bool fullLine;
+			
+			explicit Make(BoxPtr<IScalable::Make>&& object, const sf::Vector2f& size = {0, 0}, bool isCharacter = true);
+			
+			Make(BoxPtr<IScalable::Make>&& object, float height);
+			
+			ObjectTextBlock* make(TextBockInitInfo textBlockInitInfo) override;
+		};
 		
-		ObjectTextBlock(BoxPtr<IScalable>&& object, float height);
+		ObjectTextBlock(Make&& make, TextBockInitInfo textBlockInitInfo);
 		
-		void init(InitInfo, InitInfo initInfo) override;
+		void init(TextBockInitInfo textBlockInitInfo) override;
 		
 		bool in(sf::Vector2f mousePosition) override;
 		
@@ -23,12 +35,9 @@ namespace ie {
 		BaseTextBlock* copy() override;
 	
 	protected:
-		IScalable& object;
 		std::vector<BoxPtr<BaseLine>> lines;
-		sf::Vector2f size;
-		BoxPtr<ObjectCharacter> objectCharacter;
 		bool isCharacter;
-		bool fullLine;
+		BoxPtr<ObjectCharacter> objectCharacter;
 	};
 	
 	template<>

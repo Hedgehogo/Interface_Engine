@@ -31,86 +31,59 @@ int main() {
 	
 	sf::Font font{};
 	font.loadFromFile("../../example-resources/segoeui.ttf");
-	
 	auto a_value{std::make_shared<ie::SRVec2f>()};
+	
 	ie::Window window{
-		ie::Interface{
-			makeBoxPtr<ie::BoxScroll>(
-				makeBoxPtr<ie::Text>(
+		ie::Interface::Make{
+			makeBoxPtr<ie::BoxScroll::Make>(
+				makeBoxPtr<ie::Text::Make>(
 					ie::makeVector(
-						makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
+						makeBoxPtr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
 							U"["
 						),
-						makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
-							U"aaa",
+						makeBoxPtr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
+							U"a bb ccc dddd",
 							sf::Color::Black,
 							orl::Option<sf::Font*>{},
 							sf::Text::Style{},
 							ie::makeVector (
-								makeBoxPtr<ie::BaseLine, ie::Underline>(sf::Color::Red)
+								makeBoxPtr<ie::BaseLine::Make, ie::Underline::Make>(sf::Color::Red)
 							)
 						),
-						makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
+						makeBoxPtr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
 							U"] [",
 							sf::Color::Black,
 							orl::Option<sf::Font*>{},
 							sf::Text::Style{},
 							ie::makeVector (
-								makeBoxPtr<ie::BaseLine, ie::StrikeThrough>(sf::Color::Black, 0.15f)
+								makeBoxPtr<ie::BaseLine::Make, ie::StrikeThrough::Make>(sf::Color::Black, 0.15f)
 							)
 						),
-						makeBoxPtr<ie::BaseTextBlock, ie::InteractiveTextBlock>(
+						makeBoxPtr<ie::BaseTextBlock::Make, ie::InteractiveTextBlock::Make>(
 							makeBoxPtr<ie::OneKeyInteraction>(
 								makeBoxPtr<ie::OpenUrlAction>(
 									"https://github.com/Hedgehogo/Interface_Engine/"
 								),
 								ie::Key::MouseLeft
 							),
-							U"bbb",
+							U"e ff ggg hhhh",
 							sf::Color::Black,
 							orl::Option<sf::Font*>{},
 							sf::Text::Style{},
 							ie::makeVector (
-								makeBoxPtr<ie::BaseLine, ie::StrikeThrough>(sf::Color::Blue)
+								makeBoxPtr<ie::BaseLine::Make, ie::StrikeThrough::Make>(sf::Color::Blue)
 							)
 						),
-						makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
+						makeBoxPtr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
 							U"] "
 						),
-						makeBoxPtr<ie::BaseTextBlock, ie::ObjectTextBlock>(
-							makeBoxPtr<ie::FullColor>(sf::Color::Red),
+						makeBoxPtr<ie::BaseTextBlock::Make, ie::ObjectTextBlock::Make>(
+							makeBoxPtr<ie::FullColor::Make>(sf::Color::Red),
 							sf::Vector2f{100, 100}
-						),
-						makeBoxPtr<ie::BaseTextBlock, ie::ObjectTextBlock>(
-							makeBoxPtr<ie::BoxConstBezel>(
-								makeBoxPtr<ie::BoxScroll>(
-									makeBoxPtr<ie::Text>(
-										ie::makeVector(
-											makeBoxPtr<ie::BaseTextBlock, ie::TextBlock>(
-												U"Text in text!"
-											)
-										),
-										makeBoxPtr<ie::FullColor>(sf::Color::White),
-										30,
-										&font,
-										sf::Color::Red,
-										sf::Color::White,
-										sf::Color::Blue,
-										sf::Color::Red,
-										sf::Color{150, 150, 150},
-										sf::Text::Style{},
-										makeBoxPtr<ie::Resizer>(1.15f, ie::BaseResizer::Align::Center)
-									),
-									a_value
-								),
-								makeBoxPtr<ie::FullColor>(sf::Color::Green),
-								10.f
-							),
-							100.f
 						)
 					),
-					makeBoxPtr<ie::FullColor>(sf::Color::White),
-					30,
+					makeBoxPtr<ie::FullColor::Make>(sf::Color::White),
+					30U,
 					&font,
 					sf::Color::Black,
 					sf::Color::White,
@@ -118,19 +91,19 @@ int main() {
 					sf::Color::Black,
 					sf::Color{150, 150, 150},
 					sf::Text::Style{},
-					makeBoxPtr<ie::Resizer>(1.15f, ie::BaseResizer::Align::Left),
-					makeBoxPtr<ie::BasicHotkeyInteraction<ie::Text&>>(
+					makeBoxPtr<ie::Resizer::Make>(1.15f, ie::BaseResizer::Align::Left),
+					makeBoxPtr<ie::BasicHotkeyInteraction<ie::Text&>::Make>(
 						ie::makeVector(
 							ie::makeVector(
-								makeBoxPtr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>>(
-									makeBoxPtr<ie::BasicKeysInteraction<ie::Text&>>(
-										makeBoxPtr<ie::TextSelectionAction>(),
+								makeBoxPtr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>::Make>(
+									makeBoxPtr<ie::BasicKeysInteraction<ie::Text&>::Make>(
+										makeBoxPtr<ie::TextSelectionAction::Make>(),
 										std::vector{ie::Key::MouseLeft}
 									)
 								),
-								makeBoxPtr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>>(
-									makeBoxPtr<ie::BasicKeysInteraction<ie::Text&>>(
-										makeBoxPtr<ie::TextCopyAction>(),
+								makeBoxPtr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>::Make>(
+									makeBoxPtr<ie::BasicKeysInteraction<ie::Text&>::Make>(
+										makeBoxPtr<ie::TextCopyAction::Make>(),
 										std::vector{ie::Key::LControl, ie::Key::C}
 									)
 								)

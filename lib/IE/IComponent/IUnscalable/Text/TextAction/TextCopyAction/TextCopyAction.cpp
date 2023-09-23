@@ -4,6 +4,14 @@
 #include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ie {
+	TextCopyAction* TextCopyAction::Make::make(BasicActionInitInfo<Text&> initInfo) {
+		return new TextCopyAction{std::move(*this), initInfo};
+	}
+	
+	TextCopyAction::TextCopyAction(TextCopyAction::Make&& make, BasicActionInitInfo<Text&> initInfo) : text(&initInfo.additional) {
+	
+	}
+	
 	TextCopyAction::TextCopyAction() : text(nullptr) {
 	}
 	

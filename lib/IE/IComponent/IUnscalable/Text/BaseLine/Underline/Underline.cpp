@@ -1,14 +1,26 @@
 #include "Underline.hpp"
 
 namespace ie {
+	Underline::Make::Make(const sf::Color& color) : color(color) {
+	}
+	
+	Underline* Underline::Make::make(LineInitInfo initInfo) {
+		return new Underline{std::move(*this), initInfo};
+	}
+	
+	Underline::Underline(Underline::Make&& make, LineInitInfo initInfo) : BaseLine(sf::TriangleStrip, 4, make.color, initInfo){
+		underlineOffset = initInfo.font.getUnderlinePosition(initInfo.size);
+		underlineThickness = initInfo.font.getUnderlineThickness(initInfo.size);
+	}
+	
 	Underline::Underline(sf::Color color) : BaseLine(sf::TriangleStrip, 4, color) {
 	}
 	
-	void Underline::init(uint size, sf::Font& font, sf::Color color, sf::RenderTarget& renderTarget) {
-		BaseLine::init(size, font, color, renderTarget);
+	void Underline::init(LineInitInfo initInfo) {
+		BaseLine::init(initInfo);
 		
-		underlineOffset = font.getUnderlinePosition(size);
-		underlineThickness = font.getUnderlineThickness(size);
+		underlineOffset = initInfo.font.getUnderlinePosition(initInfo.size);
+		underlineThickness = initInfo.font.getUnderlineThickness(initInfo.size);
 	}
 	
 	void Underline::resize(float start, float end, float height) {
@@ -18,17 +30,8 @@ namespace ie {
 		vertexArray[3].position = {end, height + underlineOffset + (underlineThickness / 2)};
 	}
 	
-	void Underline::init(float underlineOffset, float underlineThickness, sf::VertexArray vertexArray, sf::RenderTarget& renderTarget) {
-		this->underlineOffset = underlineOffset;
-		this->underlineThickness = underlineThickness;
-		this->renderTarget = &renderTarget;
-		this->vertexArray = vertexArray;
-	}
-	
 	Underline* Underline::copy() const{
-		Underline* underline = new Underline;
-		underline->init(underlineOffset, underlineThickness, vertexArray, *renderTarget);
-		return underline;
+		return new Underline{*this};
 	}
 	
 	bool DecodePointer<Underline>::decodePointer(const YAML::Node& node, Underline*& underline) {

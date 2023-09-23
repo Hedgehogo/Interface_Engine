@@ -6,6 +6,78 @@
 namespace ie {
 	std::vector<BaseCharacter*>::iterator nullBaseCharacterIterator{};
 	
+	Text::Make::Make(
+		std::vector<BoxPtr<BaseTextBlock::Make>>&& textBlocks,
+		BoxPtr<IUninteractive::Make>&& background,
+		uint size,
+		sf::Font* font,
+		sf::Color textColor,
+		sf::Color textSelectionColor,
+		sf::Color backgroundSelectionColor,
+		sf::Color inactiveTextSelectionColor,
+		sf::Color inactiveBackgroundSelectionColor,
+		sf::Text::Style style,
+		BoxPtr<BaseResizer::Make>&& resizer,
+		BoxPtr<IBasicInteraction<Text&>::Make>&& textInteraction
+	) : textBlocks(std::move(textBlocks)),
+		background(std::move(background)),
+		size(size),
+		font(font),
+		textColor(textColor),
+		textSelectionColor(textSelectionColor),
+		backgroundSelectionColor(backgroundSelectionColor),
+		inactiveTextSelectionColor(inactiveTextSelectionColor),
+		inactiveBackgroundSelectionColor(inactiveBackgroundSelectionColor),
+		style(style),
+		resizer(std::move(resizer)),
+		textInteraction(std::move(textInteraction)) {
+	}
+	
+	Text* Text::Make::make(InitInfo initInfo) {
+		return new Text{std::move(*this), initInfo};
+	}
+	
+	Text::Text(Text::Make&& make, InitInfo initInfo) :
+		interactionManager(&initInfo.interactionManager),
+		renderTarget(&initInfo.renderTarget),
+		textInteraction(nullptr),
+		size(make.size),
+		textBlocks(
+			mapMake(
+				std::move(make.textBlocks),
+				TextBockInitInfo{
+					initInfo,
+					renderTexture,
+					drawManager,
+					*interactionManager,
+					TextVariables{
+						make.textColor,
+						make.textSelectionColor,
+						make.backgroundSelectionColor,
+						make.inactiveTextSelectionColor,
+						make.inactiveBackgroundSelectionColor,
+						make.font,
+						make.style,
+						make.size
+					}
+				}
+			)
+		),
+		resizer(nullptr),
+		background(make.background->make(initInfo)),
+		interact(false),
+		oldInteract(false){
+		textInteraction.set(make.textInteraction->make({initInfo, *this}));
+		for(auto& textBlock: this->textBlocks) {
+			std::vector<BaseCharacter*> characters = textBlock->getCharacters();
+			textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
+		}
+		resizer = BoxPtr{make.resizer->make(ResizerInitInfo(textCharacters, lines))};
+		
+		initInfo.updateManager.add(*this);
+		initInfo.drawManager.add(*this);
+	}
+	
 	Text::Text(
 		std::vector<BoxPtr<BaseTextBlock>>&& textBlocks,
 		BoxPtr<IUninteractive>&& background,
@@ -19,36 +91,34 @@ namespace ie {
 		sf::Text::Style style,
 		BoxPtr<BaseResizer>&& resizer,
 		BoxPtr<IBasicInteraction<Text&>>&& textInteraction
-	) : interactionManager(nullptr), textInteraction(std::move(textInteraction)), size(size), textBlocks(std::move(textBlocks)), resizer(std::move(resizer)), background(std::move(background)) {
+	) : interactionManager(nullptr),
+		textInteraction(std::move(textInteraction)),
+		size(size),
+		textBlocks(std::move(textBlocks)),
+		resizer(std::move(resizer)),
+		background(std::move(background)){
 		for(auto& textBlock: this->textBlocks) {
-			textBlock->setTextVariables(
-				textColor,
-				textSelectionColor,
-				backgroundSelectionColor,
-				inactiveTextSelectionColor,
-				inactiveBackgroundSelectionColor,
-				font,
-				size,
-				style
-			);
 			std::vector<BaseCharacter*> characters = textBlock->getCharacters();
 			textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
 		}
-		this->resizer->init(textCharacters, lines);
+		this->resizer->init(ResizerInitInfo(textCharacters, lines));
 	}
 	
 	void Text::init(InitInfo initInfo) {
+/*
 		this->interactionManager = &initInfo.interactionManager;
-		initInfo.updateManager.add(*this);
 		this->renderTarget = &initInfo.renderTarget;
-		InitInfo textInitInfo{initInfo.window, renderTexture, drawManager, initInfo.updateManager, *interactionManager, initInfo.interactionStack, initInfo.panelManager};
+		initInfo.updateManager.add(*this);
 		background->init(initInfo);
 		initInfo.drawManager.add(*this);
+		
 		for(auto& textBlock: textBlocks) {
-			textBlock->init(textInitInfo, initInfo);
+			textBlock->init({initInfo, renderTexture, drawManager, *interactionManager});
 		}
 		
 		textInteraction->init({initInfo, *this});
+*/
+		throw std::runtime_error("Text::init() not correct");
 	}
 	
 	void Text::setSelection(Text::Selection selection) {
@@ -118,7 +188,6 @@ namespace ie {
 			return distanceToA < distanceToB;
 		}
 	}
-	
 	
 	std::vector<BaseCharacter*>::iterator Text::getCharacter(sf::Vector2f mousePosition) {
 		std::vector<BaseCharacter*>::iterator result{};
@@ -258,10 +327,12 @@ namespace ie {
 	}
 	
 	bool DecodePointer<Text>::decodePointer(const YAML::Node& node, Text*& text) {
-		text = new Text{node["text-block"] ? std::vector{node["text-block"].as<BoxPtr<BaseTextBlock>>()} : node["text-blocks"].as<std::vector<BoxPtr<BaseTextBlock>>>(), convDefBoxPtr<IUninteractive, FullColor>(node["background"], sf::Color::White),
+		text = new Text{node["text-block"] ? std::vector{node["text-block"].as < BoxPtr < BaseTextBlock >> ()} : node["text-blocks"].as<std::vector<BoxPtr<BaseTextBlock>>>(),
+						convDefBoxPtr<IUninteractive, FullColor>(node["background"], sf::Color::White),
 						convDef(node["size"], 14), convDef<sf::Font*>(node["font"], nullptr), convDef(node["text-color"], sf::Color::Black), convDef(node["text-selection-color"], sf::Color::White),
 						convDef(node["background-selection-color"], sf::Color::Blue), convDef(node["inactive-text-selection-color"], nullColor), convDef(node["inactive-background-selection-color"], sf::Color{150, 150, 150}), sf::Text::Underlined,
-						convDefBoxPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::Left), node["text-interaction"] ? node["text-interaction"].as<BoxPtr<IBasicInteraction<Text&>>>() : makeBoxPtr<BasicEmptyInteraction<Text&>>()};
+						convDefBoxPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::Left),
+						node["text-interaction"] ? node["text-interaction"].as < BoxPtr < IBasicInteraction<Text&>>>() : makeBoxPtr<BasicEmptyInteraction<Text&>>()};
 		return true;
 	}
 	

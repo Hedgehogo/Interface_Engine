@@ -4,10 +4,6 @@ namespace ie {
 	ObjectCharacter::ObjectCharacter(BoxPtr<IScalable>&& object, bool fullLine) : object(std::move(object)), special(fullLine ? BaseCharacter::Special::FullLine : BaseCharacter::Special::No) {
 	}
 	
-	char32_t ObjectCharacter::getChar() {
-		return '\0';
-	}
-	
 	void ObjectCharacter::setPosition(sf::Vector2f position) {
 		position.y -= getHeight();
 		BaseCharacter::setPosition(position);
@@ -23,6 +19,14 @@ namespace ie {
 	void ObjectCharacter::move(sf::Vector2f position) {
 		BaseCharacter::move(position);
 		object->move(position);
+	}
+	
+	bool ObjectCharacter::updateInteractions(sf::Vector2f mousePosition) {
+		return object->updateInteractions(mousePosition);
+	}
+	
+	char32_t ObjectCharacter::getChar() {
+		return '\0';
 	}
 	
 	float ObjectCharacter::getHeight() const {

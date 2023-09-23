@@ -14,6 +14,8 @@ namespace ie {
 		
 		void move(sf::Vector2f position) override;
 		
+		bool updateInteractions(sf::Vector2f mousePosition);
+		
 		const std::vector<BoxPtr<BaseLine>>& getLine() override;
 		
 		sf::Vector2f getPosition() const override;

@@ -10,7 +10,7 @@ using uint = unsigned;
 
 namespace ie {
 	struct TextVariables {
-		orl::Option<sf::Color> TextColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor;
+		orl::Option<sf::Color> textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor;
 		orl::Option<uint> size;
 		orl::Option<sf::Font*> font;
 		orl::Option<float> fontLineSpace;

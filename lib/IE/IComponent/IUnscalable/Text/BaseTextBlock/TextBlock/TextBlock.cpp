@@ -7,12 +7,77 @@
 #include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ie {
+	TextBlock::Make::Make(
+		std::u32string  text,
+		const orl::Option<sf::Color>& textColor,
+		const orl::Option<sf::Font*>& font,
+		const orl::Option<sf::Text::Style>& style,
+		std::vector<BoxPtr<BaseLine::Make>>&& lines,
+		const orl::Option<uint>& size,
+		const orl::Option<sf::Color>& textSelectionColor,
+		const orl::Option<sf::Color>& backgroundSelectionColor,
+		const orl::Option<sf::Color>& inactiveTextSelectionColor,
+		const orl::Option<sf::Color>& inactiveBackgroundSelectionColor
+	) : text(std::move(text)),
+		textColor(textColor),
+		font(font),
+		style(style),
+		lines(std::move(lines)),
+		size(size),
+		textSelectionColor(textSelectionColor),
+		backgroundSelectionColor(backgroundSelectionColor),
+		inactiveTextSelectionColor(inactiveTextSelectionColor),
+		inactiveBackgroundSelectionColor(inactiveBackgroundSelectionColor) {
+	}
+	
+	BaseTextBlock* TextBlock::Make::make(TextBockInitInfo textBlockInitInfo) {
+		return new TextBlock{std::move(*this), textBlockInitInfo};
+	}
+	
 	std::vector<BoxPtr<BaseLine>>&& generateLines(std::vector<BoxPtr<BaseLine>>&& lines, sf::Text::Style style) {
 		if(style & sf::Text::Underlined)
 			lines.emplace_back(makeBoxPtr<Underline>());
 		if(style & sf::Text::StrikeThrough)
 			lines.emplace_back(makeBoxPtr<StrikeThrough>());
 		return std::move(lines);
+	}
+	
+	TextBlock::TextBlock(TextBlock::Make&& make, TextBockInitInfo initInfo) :
+		BaseTextBlock(
+			{
+				make.textColor.some_or(initInfo.textVariables.textColor.some()),
+				make.textSelectionColor.some_or(initInfo.textVariables.textSelectionColor.some()),
+				make.backgroundSelectionColor.some_or(initInfo.textVariables.backgroundSelectionColor.some()),
+				make.inactiveTextSelectionColor.some_or(initInfo.textVariables.inactiveTextSelectionColor.some()),
+				make.inactiveBackgroundSelectionColor.some_or(initInfo.textVariables.inactiveBackgroundSelectionColor.some()),
+				make.font.some_or(initInfo.textVariables.font.some()),
+				make.style.some_or(initInfo.textVariables.style.some()),
+				make.size.some_or(initInfo.textVariables.size.some()),
+			}
+		),
+		text(std::move(make.text)),
+		lines(
+			generateLines(
+				mapMake(
+					std::move(make.lines),
+					LineInitInfo{
+						textVariables.size.some(),
+						*textVariables.font.some(),
+						textVariables.textColor.some(),
+						initInfo.textRenderTarget
+					}
+				),
+				make.style.some()
+			)
+		) {
+		textCharacters.resize(text.size());
+		for(std::size_t i = 0; i < textCharacters.size(); ++i) {
+			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines);
+		}
+		
+		for(auto& character: textCharacters) {
+			character->init(initInfo.textRenderTarget);
+		}
 	}
 	
 	TextBlock::TextBlock(
@@ -27,8 +92,8 @@ namespace ie {
 		orl::Option<sf::Color> inactiveTextSelectionColor,
 		orl::Option<sf::Color> inactiveBackgroundSelectionColor
 	) : text(std::move(text)),
-	lines(style ? generateLines(std::move(lines), style.some()) : std::move(lines)) {
-		textVariables.TextColor = textColor;
+		lines(style ? generateLines(std::move(lines), style.some()) : std::move(lines)) {
+		textVariables.textColor = textColor;
 		textVariables.font = font;
 		textVariables.style = style;
 		textVariables.size = size;
@@ -41,13 +106,13 @@ namespace ie {
 	TextBlock::TextBlock(std::u32string text, TextVariables textVariables, std::vector<BoxPtr<BaseLine>>&& lines) : BaseTextBlock(textVariables), text(std::move(text)), lines(std::move(lines)) {
 	}
 	
-	void TextBlock::init(InitInfo textInitInfo, InitInfo) {
+	void TextBlock::init(TextBockInitInfo textBlockInitInfo) {
 		for(auto& character: textCharacters) {
-			character->init(textInitInfo.renderTarget);
+			character->init(textBlockInitInfo.renderTarget);
 		}
 		
 		for(auto& line: lines) {
-			line->init(textVariables.size.some(), *textVariables.font.some(), textVariables.TextColor.some(), textInitInfo.renderTarget);
+			line->init({textVariables.size.some(), *textVariables.font.some(), textVariables.textColor.some(), textBlockInitInfo.renderTarget});
 		}
 	}
 	
@@ -100,7 +165,7 @@ namespace ie {
 			convDef<orl::Option<sf::Color>>(node["text-color"], {}),
 			convDef<orl::Option<sf::Font*>>(node["font"], {}),
 			convDef<orl::Option<sf::Text::Style>>(node["style"], {}),
-			node["line"] ? makeVector(node["line"].as<BoxPtr<BaseLine>>()) : node["line"].as<std::vector<BoxPtr<BaseLine>>>(),
+			node["line"] ? makeVector(node["line"].as < BoxPtr < BaseLine >> ()) : node["line"].as<std::vector<BoxPtr<BaseLine>>>(),
 			convDef<orl::Option<uint>>(node["size"], {}),
 			convDef<orl::Option<sf::Color>>(node["text-selection-color"], {}),
 			convDef<orl::Option<sf::Color>>(node["background-selection-color"], {}),
