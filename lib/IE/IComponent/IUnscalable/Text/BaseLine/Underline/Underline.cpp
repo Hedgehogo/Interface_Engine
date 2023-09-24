@@ -1,7 +1,7 @@
 #include "Underline.hpp"
 
 namespace ie {
-	Underline::Make::Make(const sf::Color& color) : color(color) {
+	Underline::Make::Make(const orl::Option<sf::Color>& color) : color(color) {
 	}
 	
 	Underline* Underline::Make::make(LineInitInfo initInfo) {
@@ -13,7 +13,7 @@ namespace ie {
 		underlineThickness = initInfo.font.getUnderlineThickness(initInfo.size);
 	}
 	
-	Underline::Underline(sf::Color color) : BaseLine(sf::TriangleStrip, 4, color) {
+	Underline::Underline(orl::Option<sf::Color> color) : BaseLine(sf::TriangleStrip, 4, color) {
 	}
 	
 	void Underline::init(LineInitInfo initInfo) {
@@ -35,12 +35,9 @@ namespace ie {
 	}
 	
 	bool DecodePointer<Underline>::decodePointer(const YAML::Node& node, Underline*& underline) {
-		sf::Color color{nullColor};
-		if(node["color"])
-			node["color"] >> color;
-		{
-			underline = new Underline{color};
-			return true;
-		}
+		underline = new Underline{
+			convDef<orl::Option<sf::Color>>(node["color"], {})
+		};
+		return true;
 	}
 }

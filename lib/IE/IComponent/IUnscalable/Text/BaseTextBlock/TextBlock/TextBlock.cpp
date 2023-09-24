@@ -72,11 +72,7 @@ namespace ie {
 		) {
 		textCharacters.resize(text.size());
 		for(std::size_t i = 0; i < textCharacters.size(); ++i) {
-			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines);
-		}
-		
-		for(auto& character: textCharacters) {
-			character->init(initInfo.textRenderTarget);
+			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines, initInfo.textRenderTarget);
 		}
 	}
 	
@@ -107,10 +103,6 @@ namespace ie {
 	}
 	
 	void TextBlock::init(TextBockInitInfo textBlockInitInfo) {
-		for(auto& character: textCharacters) {
-			character->init(textBlockInitInfo.renderTarget);
-		}
-		
 		for(auto& line: lines) {
 			line->init({textVariables.size.some(), *textVariables.font.some(), textVariables.textColor.some(), textBlockInitInfo.renderTarget});
 		}
@@ -122,7 +114,7 @@ namespace ie {
 		
 		textCharacters.resize(text.size());
 		for(std::size_t i = 0; i < textCharacters.size(); ++i) {
-			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines);
+			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines, orl::Option<sf::RenderTarget&> {});
 		}
 	}
 	

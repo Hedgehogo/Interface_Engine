@@ -2,27 +2,58 @@
 #include "IE/Modules/hsvToRgb/hsvToRgb.hpp"
 
 namespace ie {
-	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BoxPtr<BaseLine>>& lines) :
-		character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), selectionVertexArray(sf::Quads, 4), lines(lines) {
-		if(isSpecial() != BaseCharacter::Special::Enter) {
+	
+	template<typename T>
+	void makeRectBones(sf::Rect<T> rect, std::function<sf::Vector2f&(std::size_t)> getCords){
+		getCords(0) = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top}};
+		getCords(1) = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top}};
+		getCords(2) = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top + rect.height}};
+		getCords(3) = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top + rect.height}};
+	}
+	
+	template<>
+	void makeRectBones(sf::Rect<float> rect, std::function<sf::Vector2f&(std::size_t)> getCords){
+		getCords(0) = {rect.left, rect.top};
+		getCords(1) = {rect.left + rect.width, rect.top};
+		getCords(2) = {rect.left + rect.width, rect.top + rect.height};
+		getCords(3) = {rect.left, rect.top + rect.height};
+	}
+	
+	template<typename T>
+	void makeRectBonesPosition(sf::Rect<T> rect, sf::VertexArray& vertexArray){
+		makeRectBones<T>(rect, [&](auto i) -> auto& {
+			return vertexArray[i].position;
+		});
+	}
+	
+	template<typename T>
+	void makeRectBonesTexCoords(sf::Rect<T> rect, sf::VertexArray& vertexArray){
+		makeRectBones<T>(rect, [&](auto i) -> auto& {
+			return vertexArray[i].texCoords;
+		});
+	}
+	
+	Character::Character(
+		char32_t character,
+		TextVariables& textVariables,
+		std::vector<BoxPtr<BaseLine>>& lines,
+		orl::Option<sf::RenderTarget&> renderTarget
+	) : character(character),
+		textVariables(textVariables),
+		vertexArray(sf::Quads, 4),
+		selectionVertexArray(sf::Quads, 4),
+		lines(lines),
+		renderTarget(character == '\n' ? orl::Option<sf::RenderTarget&>{} : renderTarget) {
+		if(renderTarget) {
 			glyph = textVariables.font.some()->getGlyph(character, textVariables.size.some(), textVariables.style.some() & sf::Text::Style::Bold);
 			
 			texture = textVariables.font.some()->getTexture(textVariables.size.some());
 			
-			vertexArray[0].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left, glyph.textureRect.top});
-			vertexArray[1].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left + glyph.textureRect.width, glyph.textureRect.top});
-			vertexArray[2].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left + glyph.textureRect.width, glyph.textureRect.top + glyph.textureRect.height});
-			vertexArray[3].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left, glyph.textureRect.top + glyph.textureRect.height});
+			makeRectBonesTexCoords(glyph.textureRect, vertexArray);
 			
-			vertexArray[0].position = {0, 0};
-			vertexArray[1].position = sf::Vector2f{sf::Vector2i{glyph.textureRect.width, 0}};
-			vertexArray[2].position = sf::Vector2f{sf::Vector2i{glyph.textureRect.width, glyph.textureRect.height}};
-			vertexArray[3].position = sf::Vector2f{sf::Vector2i{0, glyph.textureRect.height}};
+			makeRectBonesPosition<int>({0, 0, glyph.textureRect.width, glyph.textureRect.height}, vertexArray);
 			
-			selectionVertexArray[0].position = {0, 0};
-			selectionVertexArray[1].position = {getAdvance(), 0};
-			selectionVertexArray[2].position = {getAdvance(), getHeight()};
-			selectionVertexArray[3].position = {0, getHeight()};
+			makeRectBonesPosition<float>({0, 0, getAdvance(), getHeight()}, selectionVertexArray);
 			
 			if(textVariables.style.some() & sf::Text::Style::Italic) {
 				float italicShear = -0.26794;
@@ -40,10 +71,6 @@ namespace ie {
 				selectionVertexArray[i].color = textVariables.backgroundSelectionColor.some();
 			}
 		}
-	}
-	
-	void Character::init(sf::RenderTarget& renderTarget) {
-		this->renderTarget = &renderTarget;
 	}
 	
 	void Character::setActive(bool active) {
@@ -76,10 +103,10 @@ namespace ie {
 	}
 	
 	void Character::draw(bool selection) {
-		if(isSpecial() != BaseCharacter::Special::Enter) {
+		if(renderTarget) {
 			if(this->selection && selection)
-				renderTarget->draw(selectionVertexArray);
-			renderTarget->draw(vertexArray, &texture);
+				renderTarget.some().draw(selectionVertexArray);
+			renderTarget.some().draw(vertexArray, &texture);
 		}
 	}
 	

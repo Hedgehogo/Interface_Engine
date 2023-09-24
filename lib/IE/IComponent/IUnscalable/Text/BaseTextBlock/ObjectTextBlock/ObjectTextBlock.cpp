@@ -44,13 +44,13 @@ namespace ie {
 	std::vector<BaseCharacter*> ObjectTextBlock::getCharacters() {
 		std::vector<BaseCharacter*> result;
 		if(!isCharacter) {
-			result.push_back(new Character{L'\n', textVariables, lines});
+			result.push_back(new Character{L'\n', textVariables, lines, {}});
 		}
 		
 		result.push_back(objectCharacter.get());
 		
 		if(!isCharacter) {
-			result.push_back(new Character{L'\n', textVariables, lines});
+			result.push_back(new Character{L'\n', textVariables, lines, {}});
 		}
 		
 		return result;

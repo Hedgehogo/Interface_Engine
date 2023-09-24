@@ -19,9 +19,9 @@ namespace ie {
 		
 		void init(BasicActionInitInfo<Text&> initInfo) override;
 		
-		std::vector<BaseCharacter*>::iterator getStart();
+		orl::Option<std::vector<BaseCharacter*>::iterator> getStart();
 		
-		std::vector<BaseCharacter*>::iterator getEnd();
+		orl::Option<std::vector<BaseCharacter*>::iterator> getEnd();
 		
 		void update(sf::Vector2i mousePosition, bool press) override;
 		
@@ -37,8 +37,7 @@ namespace ie {
 		void whileNotPressed() override;
 		
 		Text* text;
-		std::vector<BaseCharacter*>::iterator start;
-		std::vector<BaseCharacter*>::iterator end;
+		orl::Option<std::vector<BaseCharacter*>::iterator> start, end;
 	};
 	
 	template<>

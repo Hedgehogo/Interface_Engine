@@ -5,9 +5,6 @@ namespace ie {
 	BaseCharacter::BaseCharacter() : selection(false), rerender(false) {
 	}
 	
-	void BaseCharacter::init(sf::RenderTarget&) {
-	}
-	
 	bool BaseCharacter::getRerender() const {
 		return rerender;
 	}

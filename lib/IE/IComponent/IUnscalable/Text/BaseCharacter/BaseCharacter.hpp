@@ -28,8 +28,6 @@ namespace ie {
 		
 		virtual sf::Vector2i getSizeTexture() = 0;
 		
-		virtual void init(sf::RenderTarget& renderTarget);
-		
 		virtual bool in(sf::Vector2f mousePosition);
 		
 		virtual void setSelection(bool selection);

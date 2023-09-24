@@ -51,12 +51,12 @@ int main() {
 							)
 						),
 						makeBoxPtr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
-							U"] [",
+							U"]\n[",
 							sf::Color::Black,
 							orl::Option<sf::Font*>{},
 							sf::Text::Style{},
 							ie::makeVector (
-								makeBoxPtr<ie::BaseLine::Make, ie::StrikeThrough::Make>(sf::Color::Black, 0.15f)
+								makeBoxPtr<ie::BaseLine::Make, ie::StrikeThrough::Make>(orl::Option<sf::Color>{}, 0.15f)
 							)
 						),
 						makeBoxPtr<ie::BaseTextBlock::Make, ie::InteractiveTextBlock::Make>(

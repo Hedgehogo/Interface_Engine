@@ -22,7 +22,7 @@ namespace ie {
 			orl::Option<sf::Color> backgroundSelectionColor = {},
 			orl::Option<sf::Color> inactiveTextSelectionColor = {},
 			orl::Option<sf::Color> inactiveBackgroundSelectionColor = {},
-			orl::Option<sf::Font*> font = nullptr,
+			orl::Option<sf::Font*> font = {},
 			orl::Option<sf::Text::Style> style = {},
 			orl::Option<uint> size = {}
 		);

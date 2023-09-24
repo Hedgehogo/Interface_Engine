@@ -7,9 +7,7 @@
 namespace ie {
 	class Character : public BaseCharacter {
 	public:
-		Character(char32_t character, TextVariables& textVariables, std::vector<BoxPtr<BaseLine>>& lines);
-		
-		void init(sf::RenderTarget& renderTarget) override;
+		Character(char32_t character, TextVariables& textVariables, std::vector<BoxPtr<BaseLine>>& lines, orl::Option<sf::RenderTarget&> renderTarget);
 		
 		void setActive(bool active) override;
 		
@@ -45,7 +43,7 @@ namespace ie {
 		static bool debug;
 	
 	protected:
-		sf::RenderTarget* renderTarget;
+		orl::Option<sf::RenderTarget&> renderTarget;
 		
 		char32_t character;
 		

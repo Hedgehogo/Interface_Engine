@@ -4,13 +4,11 @@
 #include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ie {
-	std::vector<BaseCharacter*>::iterator nullBaseCharacterIterator{};
-	
 	Text::Make::Make(
 		std::vector<BoxPtr<BaseTextBlock::Make>>&& textBlocks,
 		BoxPtr<IUninteractive::Make>&& background,
 		uint size,
-		sf::Font* font,
+		orl::Option<sf::Font*> font,
 		sf::Color textColor,
 		sf::Color textSelectionColor,
 		sf::Color backgroundSelectionColor,
@@ -82,7 +80,7 @@ namespace ie {
 		std::vector<BoxPtr<BaseTextBlock>>&& textBlocks,
 		BoxPtr<IUninteractive>&& background,
 		int size,
-		sf::Font* font,
+		orl::Option<sf::Font*> font,
 		sf::Color textColor,
 		sf::Color textSelectionColor,
 		sf::Color backgroundSelectionColor,
@@ -125,11 +123,11 @@ namespace ie {
 		this->selection = selection;
 	}
 	
-	void Text::setSelectionStart(std::vector<BaseCharacter*>::iterator start) {
+	void Text::setSelectionStart(orl::Option<std::vector<BaseCharacter*>::iterator> start) {
 		selection.start = start;
 	}
 	
-	void Text::setSelectionEnd(std::vector<BaseCharacter*>::iterator end) {
+	void Text::setSelectionEnd(orl::Option<std::vector<BaseCharacter*>::iterator> end) {
 		selection.end = end;
 	}
 	
@@ -138,24 +136,24 @@ namespace ie {
 	}
 	
 	std::vector<BaseCharacter*>::iterator Text::getSelectionStart() const {
-		return selection.start;
+		return selection.start.except();
 	}
 	
 	std::vector<BaseCharacter*>::iterator Text::getSelectionEnd() const {
-		return selection.end;
+		return selection.end.except();
 	}
 	
 	std::u32string Text::getSelectionText() {
-		if(selection.start != nullBaseCharacterIterator && selection.end != nullBaseCharacterIterator) {
+		if(selection.start && selection.end) {
 			std::u32string SelectionText{};
 			std::vector<BaseCharacter*>::iterator localStart;
 			std::vector<BaseCharacter*>::iterator localEnd;
-			if(std::distance(selection.start, selection.end) < 0) {
-				localStart = selection.end;
-				localEnd = selection.start;
+			if(std::distance(selection.start.some(), selection.end.some()) < 0) {
+				localStart = selection.end.some();
+				localEnd = selection.start.some();
 			} else {
-				localStart = selection.start;
-				localEnd = selection.end;
+				localStart = selection.start.some();
+				localEnd = selection.end.some();
 			}
 			SelectionText.resize(std::distance(localStart, localEnd));
 			
@@ -189,18 +187,18 @@ namespace ie {
 		}
 	}
 	
-	std::vector<BaseCharacter*>::iterator Text::getCharacter(sf::Vector2f mousePosition) {
-		std::vector<BaseCharacter*>::iterator result{};
+	orl::Option<std::vector<BaseCharacter*>::iterator> Text::getCharacter(sf::Vector2f mousePosition) {
+		orl::Option<std::vector<BaseCharacter*>::iterator> result{};
 		
 		for(auto iterator = textCharacters.begin(); iterator != textCharacters.end(); ++iterator) {
-			if(result != nullBaseCharacterIterator) {
+			if(result) {
 				float DistanceYToIterator{getDistanceY(iterator, mousePosition.y)};
-				float DistanceYToResult{getDistanceY(result, mousePosition.y)};
+				float DistanceYToResult{getDistanceY(result.some(), mousePosition.y)};
 				if(DistanceYToIterator <= DistanceYToResult) {
 					if(DistanceYToIterator < DistanceYToResult) {
 						result = iterator;
 					}
-					if(minDistanceX(iterator, result, mousePosition.x)) {
+					if(minDistanceX(iterator, result.some(), mousePosition.x)) {
 						result = iterator;
 					}
 				}
@@ -209,8 +207,8 @@ namespace ie {
 			}
 		}
 		
-		if(mousePosition.x > (*result)->getPosition().x + (static_cast<float>((*result)->getSizeTexture().x) / 2.f)) {
-			++result;
+		if(mousePosition.x > (*result.except())->getPosition().x + (static_cast<float>((*result.except())->getSizeTexture().x) / 2.f)) {
+			++result.some();
 		}
 		
 		return result;
@@ -327,12 +325,21 @@ namespace ie {
 	}
 	
 	bool DecodePointer<Text>::decodePointer(const YAML::Node& node, Text*& text) {
-		text = new Text{node["text-block"] ? std::vector{node["text-block"].as < BoxPtr < BaseTextBlock >> ()} : node["text-blocks"].as<std::vector<BoxPtr<BaseTextBlock>>>(),
-						convDefBoxPtr<IUninteractive, FullColor>(node["background"], sf::Color::White),
-						convDef(node["size"], 14), convDef<sf::Font*>(node["font"], nullptr), convDef(node["text-color"], sf::Color::Black), convDef(node["text-selection-color"], sf::Color::White),
-						convDef(node["background-selection-color"], sf::Color::Blue), convDef(node["inactive-text-selection-color"], nullColor), convDef(node["inactive-background-selection-color"], sf::Color{150, 150, 150}), sf::Text::Underlined,
-						convDefBoxPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::Left),
-						node["text-interaction"] ? node["text-interaction"].as < BoxPtr < IBasicInteraction<Text&>>>() : makeBoxPtr<BasicEmptyInteraction<Text&>>()};
+		sf::Color textColor{convDef(node["text-color"], sf::Color::Black)};
+		
+		text = new Text{
+			node["text-block"] ? std::vector{node["text-block"].as < BoxPtr < BaseTextBlock >> ()} : node["text-blocks"].as<std::vector<BoxPtr<BaseTextBlock>>>(),
+			convDefBoxPtr<IUninteractive, FullColor>(node["background"], sf::Color::White),
+			convDef(node["size"], 14),
+			convDef<orl::Option<sf::Font*>>(node["font"], {}),
+			textColor,
+			convDef(node["text-selection-color"], sf::Color::White),
+			convDef(node["background-selection-color"], sf::Color::Blue),
+			convDef(node["inactive-text-selection-color"], textColor),
+			convDef(node["inactive-background-selection-color"],sf::Color{150, 150, 150}),
+			convDef<sf::Text::Style>(node["style"], {}),
+			convDefBoxPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::Left),
+			node["text-interaction"] ? node["text-interaction"].as < BoxPtr < IBasicInteraction<Text&>>>() : makeBoxPtr<BasicEmptyInteraction<Text&>>()};
 		return true;
 	}
 	

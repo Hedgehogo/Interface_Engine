@@ -6,16 +6,16 @@ namespace ie {
 	class Underline : public BaseLine {
 	public:
 		struct Make : public BaseLine::Make {
-			sf::Color color;
+			orl::Option<sf::Color> color;
 			
-			explicit Make(const sf::Color& color = nullColor);
+			explicit Make(const orl::Option<sf::Color>& color = {});
 			
 			Underline* make(LineInitInfo initInfo) override;
 		};
 		
 		Underline(Make&& make, LineInitInfo initInfo);
 		
-		Underline(sf::Color color = nullColor);
+		Underline(orl::Option<sf::Color> color = {});
 		
 		void init(LineInitInfo initInfo) override;
 		
