@@ -7,20 +7,31 @@ namespace ie {
 	BaseTextBlock::BaseTextBlock(TextVariables textVariables) : textVariables(textVariables) {
 	}
 	
-	void BaseTextBlock::setTextVariables(sf::Color TextColor, sf::Color textSelectionColor, sf::Color backgroundSelectionColor, sf::Color inactiveTextSelectionColor, sf::Color inactiveBackgroundSelectionColor, sf::Font* font, uint size) {
-		if(textVariables.TextColor == sf::Color(255, 255, 255, 0))
-			textVariables.TextColor = TextColor;
-		if(textVariables.textSelectionColor == sf::Color(255, 255, 255, 0))
+	void BaseTextBlock::setTextVariables(
+		sf::Color TextColor,
+		sf::Color textSelectionColor,
+		sf::Color backgroundSelectionColor,
+		sf::Color inactiveTextSelectionColor,
+		sf::Color inactiveBackgroundSelectionColor,
+		sf::Font* font,
+		uint size,
+		sf::Text::Style style
+	) {
+		if(!textVariables.textColor)
+			textVariables.textColor = TextColor;
+		if(!textVariables.textSelectionColor)
 			textVariables.textSelectionColor = textSelectionColor;
-		if(textVariables.backgroundSelectionColor == sf::Color(255, 255, 255, 0))
+		if(!textVariables.backgroundSelectionColor)
 			textVariables.backgroundSelectionColor = backgroundSelectionColor;
-		if(textVariables.inactiveTextSelectionColor == sf::Color(255, 255, 255, 0))
+		if(!textVariables.inactiveTextSelectionColor)
 			textVariables.inactiveTextSelectionColor = inactiveTextSelectionColor;
-		if(textVariables.inactiveBackgroundSelectionColor == sf::Color(255, 255, 255, 0))
+		if(!textVariables.inactiveBackgroundSelectionColor)
 			textVariables.inactiveBackgroundSelectionColor = inactiveBackgroundSelectionColor;
-		if(textVariables.font == nullptr)
+		if(!textVariables.font)
 			textVariables.font = font;
-		if(textVariables.size == 0)
+		if(!textVariables.size)
 			textVariables.size = size;
+		if(!textVariables.style)
+			textVariables.style = style;
 	}
 }

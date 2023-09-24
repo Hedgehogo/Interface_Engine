@@ -4,6 +4,8 @@
 #include <yaml-cpp/yaml.h>
 #include <functional>
 #include <Box_Ptr/boxPtr.hpp>
+#include <optional>
+#include <option_result/option_result.hpp>
 
 typedef long long llint;
 typedef unsigned int uint;
@@ -152,6 +154,12 @@ namespace ie {
 	template<typename B, typename T, typename ...Arg>
 	B* convDefPtr(const YAML::Node& node, Arg&&... arg);
 	
+	template<typename B, typename T, typename ...Arg>
+	BoxPtr<B> convertDefaultBoxPtr(const YAML::Node& node, Arg&&... arg);
+	
+	template<typename B, typename T, typename ...Arg>
+	BoxPtr<B> convDefBoxPtr(const YAML::Node& node, Arg&&... arg);
+	
 	bool convertBoolDefault(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue = false);
 	
 	bool convBoolDef(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue = false);
@@ -161,6 +169,11 @@ namespace ie {
 	struct Decode<BoxPtr<T> > {
 		static std::enable_if_t<std::is_class_v<T>, bool>
 		decode(const YAML::Node& node, BoxPtr<T>& object);
+	};
+	
+	template<typename T>
+	struct Decode<orl::Option<T> > {
+		static bool decode(const YAML::Node& node, orl::Option<T>& object);
 	};
 	
 	template<typename T>

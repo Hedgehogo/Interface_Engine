@@ -5,7 +5,7 @@
 namespace ie {
 	namespace make_system {
 		template<typename T>
-		BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<ie::BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys) :
+		BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<typename ie::BasicKeyAction<T>::Make >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys) :
 			action(std::move(action)), keys(std::move(keys)), blackListKeys(std::move(blackListKeys)) {
 		}
 		
@@ -25,6 +25,12 @@ namespace ie {
 	BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys) :
 		action(std::move(action)), keys(std::move(keys)), blackListKeys(std::move(blackListKeys)), press(false) {
 		std::sort(this->keys.begin(), this->keys.end());
+	}
+	
+	template<typename T>
+	void BasicKeysInteraction<T>::init(BasicActionInitInfo<T> initInfo) {
+		IBasicInteraction<T>::init(initInfo);
+		action->init(initInfo);
 	}
 	
 	template<typename T>

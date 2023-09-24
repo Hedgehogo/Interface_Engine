@@ -7,7 +7,7 @@
 namespace ie {
 	class Character : public BaseCharacter {
 	public:
-		Character(char32_t character, TextVariables& textVariables, std::vector<BaseLine*>& lines);
+		Character(char32_t character, TextVariables& textVariables, std::vector<BoxPtr<BaseLine>>& lines);
 		
 		void init(sf::RenderTarget& renderTarget) override;
 		
@@ -21,7 +21,7 @@ namespace ie {
 		
 		void move(sf::Vector2f position) override;
 		
-		std::vector<BaseLine*>& getLine();
+		const std::vector<BoxPtr<BaseLine>>& getLine();
 		
 		bool in(sf::Vector2f mousePosition) override;
 		
@@ -56,6 +56,6 @@ namespace ie {
 		sf::Texture texture;
 		sf::Vector2f origin;
 		
-		std::vector<BaseLine*>& lines;
+		std::vector<BoxPtr<BaseLine>>& lines;
 	};
 }

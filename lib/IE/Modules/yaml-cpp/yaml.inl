@@ -38,13 +38,23 @@ namespace ie {
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	B* convertDefaultPtr(const YAML::Node& node, Arg&&... arg){
-		return node.IsDefined() ? node.as<T*>() : new T{arg...};
+	B* convertDefaultPtr(const YAML::Node& node, Arg&&... arg) {
+		return node.IsDefined() ? node.as<B*>() : new T{arg...};
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	B* convDefPtr(const YAML::Node& node, Arg&&... arg){
+	B* convDefPtr(const YAML::Node& node, Arg&&... arg) {
 		return convertDefaultPtr<B, T>(node, arg...);
+	}
+	
+	template<typename B, typename T, typename ...Arg>
+	BoxPtr<B> convertDefaultBoxPtr(const YAML::Node& node, Arg&&... arg) {
+		return node.IsDefined() ? node.as<BoxPtr<B> >() : makeBoxPtr<T>(arg...);
+	}
+	
+	template<typename B, typename T, typename ...Arg>
+	BoxPtr<B> convDefBoxPtr(const YAML::Node& node, Arg&&... arg) {
+		return convertDefaultBoxPtr<B, T>(node, arg...);
 	}
 	
 	template<typename T>
@@ -55,7 +65,17 @@ namespace ie {
 	}
 	
 	template<typename T>
-	bool Decode<std::vector<T>>::decode(const YAML::Node& node, std::vector<T>& vector) {
+	bool Decode<orl::Option<T> >::decode(const YAML::Node& node, orl::Option<T>& object) {
+		if(node.IsNull()) {
+			object = orl::Option<T>{};
+		} else {
+			object = orl::Option<T>{node.as<T>()};
+		}
+		return true;
+	}
+	
+	template<typename T>
+	bool Decode<std::vector<T> >::decode(const YAML::Node& node, std::vector<T>& vector) {
 		for(const auto& item: node) {
 			vector.resize(vector.size() + 1);
 			item >> vector[vector.size() - 1];
@@ -91,7 +111,7 @@ namespace YAML {
 	
 	template<typename T>
 	bool convert<T>::decode(const Node& node, T& rhs) {
-		return ie::Decode<T>::decode(node, rhs);
+		return ie::Decode< T >::decode(node, rhs);
 	}
 }
 

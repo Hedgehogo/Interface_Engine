@@ -13,13 +13,13 @@ namespace ie {
 		void construction();
 		
 	public:
-		explicit Window(const Interface& interface);
+		explicit Window(Interface&& interface);
 		
-		Window(const Interface& interface, const sf::String& title, const sf::VideoMode& mode = {1, 1}, const sf::ContextSettings& settings = sf::ContextSettings());
+		Window(Interface&& interface, const sf::String& title, const sf::VideoMode& mode = {1, 1}, const sf::ContextSettings& settings = sf::ContextSettings());
 		
-		Window(const Interface& interface, const sf::String& title, const sf::ContextSettings& settings);
+		Window(Interface&& interface, const sf::String& title, const sf::ContextSettings& settings);
 		
-		Window(const Interface& interface, sf::WindowHandle handle, const sf::ContextSettings& settings = sf::ContextSettings());
+		Window(Interface&& interface, sf::WindowHandle handle, const sf::ContextSettings& settings = sf::ContextSettings());
 		
 		explicit Window(const std::filesystem::path& interface);
 		

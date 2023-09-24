@@ -6,42 +6,49 @@
 namespace ie {
 	class InteractiveTextBlock : public TextBlock {
 	public:
-		InteractiveTextBlock(
-			IBaseInteraction* interaction, std::u32string text, sf::Color textColor = nullColor,
-			sf::Font* font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0,
-			sf::Color textSelectionColor = nullColor,
-			sf::Color backgroundSelectionColor = nullColor,
-			sf::Color inactiveTextSelectionColor = nullColor,
-			sf::Color inactiveBackgroundSelectionColor = nullColor
-		);
+		struct Make : public TextBlock::Make {
+			BoxPtr<IBaseInteraction> interaction;
+			
+			Make(BoxPtr<IBaseInteraction>&& interaction,
+				 const std::u32string& text,
+				 const orl::Option<sf::Color>& textColor = {},
+				 const orl::Option<sf::Font*>& font = {},
+				 const orl::Option<sf::Text::Style>& style = {},
+				 std::vector<BoxPtr<BaseLine::Make>>&& lines = {},
+				 const orl::Option<uint>& size = {},
+				 const orl::Option<sf::Color>& textSelectionColor = {},
+				 const orl::Option<sf::Color>& backgroundSelectionColor = {},
+				 const orl::Option<sf::Color>& inactiveTextSelectionColor = {},
+				 const orl::Option<sf::Color>& inactiveBackgroundSelectionColor = {}
+			);
+			
+			InteractiveTextBlock* make(TextBockInitInfo textBlockInitInfo) override;
+		};
+		
+		InteractiveTextBlock(Make&& make, TextBockInitInfo textBlockInitInfo);
 		
 		InteractiveTextBlock(
-			int indexInteraction, std::u32string text, sf::Color textColor = nullColor,
-			sf::Font* font = nullptr, sf::Text::Style style = {}, std::vector<BaseLine*> lines = {}, int size = 0,
-			sf::Color textSelectionColor = nullColor,
-			sf::Color backgroundSelectionColor = nullColor,
-			sf::Color inactiveTextSelectionColor = nullColor,
-			sf::Color inactiveBackgroundSelectionColor = nullColor
+			BoxPtr<IBaseInteraction>&& interaction,
+			std::u32string text,
+			orl::Option<sf::Color> textColor = {},
+			orl::Option<sf::Font*> font = {},
+			orl::Option<sf::Text::Style> style = {},
+			std::vector<BoxPtr<BaseLine>>&& lines = {},
+			orl::Option<uint> size = {},
+			orl::Option<sf::Color> textSelectionColor = {},
+			orl::Option<sf::Color> backgroundSelectionColor = {},
+			orl::Option<sf::Color> inactiveTextSelectionColor = {},
+			orl::Option<sf::Color> inactiveBackgroundSelectionColor = {}
 		);
 		
-		~InteractiveTextBlock();
-		
-		void init(InitInfo textInitInfo, InitInfo initInfo);
-		
-		std::vector<BaseCharacter*> getCharacters() override;
+		void init(TextBockInitInfo textBlockInitInfo);
 		
 		bool in(sf::Vector2f mousePosition);
 		
 		void update() override;
 		
 		bool updateInteractions(sf::Vector2f) override;
-	
-	protected:
-		InteractiveTextBlock(std::u32string str, TextVariables textVariables, IBaseInteraction* interaction);
 		
-		InteractiveTextBlock(std::u32string str, TextVariables textVariables, int indexInteraction);
-	
-	public:
 		InteractiveTextBlock* copy() override;
 	
 	protected:
@@ -50,8 +57,7 @@ namespace ie {
 		bool interact;
 		bool oldInteract;
 		
-		int indexInteraction;
-		IInteraction* interaction;
+		BoxPtr<IInteraction> interaction;
 	};
 	
 	template<>

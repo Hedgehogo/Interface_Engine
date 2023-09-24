@@ -33,7 +33,7 @@ namespace ie {
 		return new Positioning2{std::move(*this), initInfo};
 	}
 	
-	Positioning2::Positioning2(Positioning2::Make&& make, Positioning2InitInfo initInfo) :
+	Positioning2::Positioning2(Make&& make, Positioning2InitInfo initInfo) :
 		horizontal(std::move(make.horizontal)), vertical(std::move(make.vertical)), renderTarget(&initInfo.renderTarget) {
 	}
 	

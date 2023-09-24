@@ -62,6 +62,28 @@ namespace ie {
 		globalKeysPressed.clear();
 	}
 	
+	bool KeyHandler::isKeyPressed(Key key) {
+		if(
+			std::find(keysPressed.begin(), keysPressed.end(), key) != keysPressed.end() ||
+			std::find(globalKeysPressed.begin(), globalKeysPressed.end(), key) != globalKeysPressed.end()
+			) {
+			return true;
+		}
+		sf::Vector2f delta = MouseWheel::getDelta();
+		switch(key) {
+			case Key::MouseWheelUp:
+				return delta.y > 0;
+			case Key::MouseWheelDown:
+				return delta.y < 0;
+			case Key::MouseWheelRight:
+				return delta.x > 0;
+			case Key::MouseWheelLeft:
+				return delta.x < 0;
+			default:
+				return false;
+		}
+	}
+	
 	std::string KeyHandler::toString(Key key) {
 		if(key == Key::A)
 			return "a";
@@ -286,29 +308,6 @@ namespace ie {
 		else if(key == Key::MouseWheelRight)
 			return "mouseWheelRight";
 		return "unknown";
-	}
-	
-	bool KeyHandler::isKeyPressed(Key key) {
-		if(
-			std::find(keysPressed.begin(), keysPressed.end(), key) != keysPressed.end() ||
-			std::find(globalKeysPressed.begin(), globalKeysPressed.end(), key) != globalKeysPressed.end()
-		) {
-			return true;
-		}
-		
-		sf::Vector2f delta = MouseWheel::getDelta();
-		switch(key) {
-			case Key::MouseWheelUp:
-				return delta.y > 0;
-			case Key::MouseWheelDown:
-				return delta.y < 0;
-			case Key::MouseWheelRight:
-				return delta.x > 0;
-			case Key::MouseWheelLeft:
-				return delta.x < 0;
-			default:
-				return false;
-		}
 	}
 	
 	bool Decode<Key>::decode(const YAML::Node& node, Key& key) {

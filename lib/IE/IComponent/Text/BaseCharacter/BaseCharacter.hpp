@@ -12,10 +12,10 @@ namespace ie {
 	class BaseCharacter {
 	public:
 		enum class Special {
-			space,
-			enter,
-			no,
-			fullLine,
+			Space,
+			Enter,
+			No,
+			FullLine,
 		};
 	
 		BaseCharacter();
@@ -40,7 +40,7 @@ namespace ie {
 		
 		virtual void move(sf::Vector2f position);
 		
-		virtual std::vector<BaseLine*>& getLine() = 0;
+		virtual const std::vector<BoxPtr<BaseLine>>& getLine() = 0;
 		
 		virtual sf::Vector2f getPosition() const;
 		

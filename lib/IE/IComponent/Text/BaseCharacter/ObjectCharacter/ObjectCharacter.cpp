@@ -1,11 +1,7 @@
 #include "ObjectCharacter.hpp"
 
 namespace ie {
-	ObjectCharacter::ObjectCharacter(IScalable* object, bool fullLine) : object(object), special(fullLine ? BaseCharacter::Special::fullLine : BaseCharacter::Special::no) {
-	}
-	
-	char32_t ObjectCharacter::getChar() {
-		return '\0';
+	ObjectCharacter::ObjectCharacter(BoxPtr<IScalable>&& object, bool fullLine) : object(std::move(object)), special(fullLine ? BaseCharacter::Special::FullLine : BaseCharacter::Special::No) {
 	}
 	
 	void ObjectCharacter::setPosition(sf::Vector2f position) {
@@ -23,6 +19,14 @@ namespace ie {
 	void ObjectCharacter::move(sf::Vector2f position) {
 		BaseCharacter::move(position);
 		object->move(position);
+	}
+	
+	bool ObjectCharacter::updateInteractions(sf::Vector2f mousePosition) {
+		return object->updateInteractions(mousePosition);
+	}
+	
+	char32_t ObjectCharacter::getChar() {
+		return '\0';
 	}
 	
 	float ObjectCharacter::getHeight() const {
@@ -44,15 +48,11 @@ namespace ie {
 	void ObjectCharacter::draw(bool) {
 	}
 	
-	ObjectCharacter::~ObjectCharacter() {
-		delete object;
-	}
-	
 	void ObjectCharacter::drawDebug(sf::RenderTarget& renderTarget, int indentAddition, uint hue, uint hueOffset) {
 		object->drawDebug(renderTarget, 0, indentAddition, hue, hueOffset);
 	}
 	
-	std::vector<BaseLine*>& ObjectCharacter::getLine() {
+	const std::vector<BoxPtr<BaseLine>>& ObjectCharacter::getLine() {
 		return lines;
 	}
 	
@@ -61,7 +61,7 @@ namespace ie {
 	}
 	
 	float ObjectCharacter::getMinAdvance() {
-		return special == BaseCharacter::Special::fullLine ? object->getMinSize().x : object->getSize().x;
+		return special == BaseCharacter::Special::FullLine ? object->getMinSize().x : object->getSize().x;
 	}
 	
 	sf::Vector2f ObjectCharacter::getPosition() const {

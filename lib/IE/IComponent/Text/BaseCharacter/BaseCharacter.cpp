@@ -42,7 +42,7 @@ namespace ie {
 	}
 	
 	bool BaseCharacter::isEnter() {
-		return isSpecial() == Special::enter;
+		return isSpecial() == Special::Enter;
 	}
 	
 	void BaseCharacter::setSelection(bool selection) {

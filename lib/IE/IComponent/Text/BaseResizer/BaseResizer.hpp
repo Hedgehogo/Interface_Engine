@@ -1,25 +1,34 @@
 #pragma once
 
 #include "../BaseCharacter/BaseCharacter.hpp"
+#include "InitInfo/ResizerInitInfo.hpp"
 
 namespace ie {
 	class BaseResizer {
 	public:
-		enum Align {
-			left,
-			right,
-			center
+		enum class Align {
+			Left,
+			Right,
+			Center
 		};
 		
 		enum class Algorithm {
-			base,
-			console,
-			absolute
+			Base,
+			Console,
+			Absolute
 		};
-	
-		BaseResizer(float lineSpacing = 1.15, Align align = Align::left, Algorithm algorithm = Algorithm::base);
 		
-		void init(std::vector<BaseCharacter*>& characters, std::vector<BaseLine*>& lines);
+		struct Make {
+			virtual BaseResizer* make(ResizerInitInfo resizerInitInfo) = 0;
+			
+			virtual ~Make() = default;
+		};
+		
+		BaseResizer(float lineSpacing, Align align, Algorithm algorithm, ResizerInitInfo initInfo);
+	
+		BaseResizer(float lineSpacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
+		
+		void init(ResizerInitInfo initInfo);
 		
 		virtual void move(sf::Vector2f position) = 0;
 		
@@ -49,7 +58,7 @@ namespace ie {
 	
 	protected:
 		std::vector<BaseCharacter*>* characters;
-		std::vector<BaseLine*>* lines;
+		std::vector<BoxPtr<BaseLine> >* lines;
 		
 		const float lineSpacing;
 		const Align align;
