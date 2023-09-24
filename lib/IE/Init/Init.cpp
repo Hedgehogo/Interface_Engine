@@ -166,9 +166,8 @@ namespace ie {
 		inherit<IScalable, ButtonPanel>();
 		inherit<IScalable, Button>();
 		inherit<IScalable, Switcher>();
-		inherit<IUnscalable, IScalable>();
-		inherit<IUnscalable, Text>();
-		inherit<IComponent, IUnscalable>();
+		inherit<IComponent, IScalable>();
+		inherit<IComponent, Text>();
 		
 		inherit<BasePanel, ConstPanel>();
 		inherit<BasePanel, Panel>();

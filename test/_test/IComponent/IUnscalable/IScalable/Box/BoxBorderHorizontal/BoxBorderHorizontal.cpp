@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IUnscalable/IScalable/Box/BoxBorderHorizontal/BoxBorderHorizontal.hpp>
-#include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/IComponent/IScalable/Box/BoxBorderHorizontal/BoxBorderHorizontal.hpp>
+#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_imageEqual/_imageEqual.hpp"
 

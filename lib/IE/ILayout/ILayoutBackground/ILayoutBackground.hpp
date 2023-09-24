@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../ILayout.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/IUninteractive/IUninteractive.hpp"
+#include "IE/IComponent/IScalable/IUninteractive/IUninteractive.hpp"
 
 namespace ie {
 	class ILayoutBackground : public virtual ILayout {

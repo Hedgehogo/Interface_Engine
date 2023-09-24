@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/Capsule/Capsule.hpp>
+#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/Capsule/Capsule.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 
 TEST(IComponent, Capsule) {

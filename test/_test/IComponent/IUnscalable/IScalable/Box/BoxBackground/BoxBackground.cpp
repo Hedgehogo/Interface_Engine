@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IUnscalable/IScalable/Box/BoxBackground/BoxBackground.hpp>
-#include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/Capsule/Capsule.hpp>
+#include <IE/IComponent/IScalable/Box/BoxBackground/BoxBackground.hpp>
+#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/Capsule/Capsule.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_imageEqual/_imageEqual.hpp"
 

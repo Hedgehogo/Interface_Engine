@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/Sprite/Sprite.hpp>
+#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/Sprite.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 
 TEST(IComponent, Sprite) {

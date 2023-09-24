@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/IComponent/IUnscalable/IScalable/IUninteractive/Caption/Caption.hpp>
+#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/IComponent/IScalable/IUninteractive/Caption/Caption.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <fstream>
 

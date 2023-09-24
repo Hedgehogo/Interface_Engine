@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../ILayout.hpp"
-#include "IE/IComponent/IUnscalable/IScalable/IScalable.hpp"
+#include "IE/IComponent/IScalable/IScalable.hpp"
 
 namespace ie {
 	class ILayoutObjectsArray : public virtual ILayout {

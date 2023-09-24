@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IUnscalable/IScalable/Box/BoxScroll/BoxScroll.hpp>
-#include <IE/IComponent/IUnscalable/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/IComponent/IScalable/Box/BoxScroll/BoxScroll.hpp>
+#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_imageEqual/_imageEqual.hpp"
 
@@ -9,7 +9,7 @@ TEST(IComponent, BoxScroll) {
 	
 	ie::BoxScroll boxScroll{
 		ie::BoxScroll::Make{
-			ie::makeBoxPtr<ie::IUnscalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::makeBoxPtr<ie::IComponent::Make, ie::FullColor::Make>(sf::Color::Green),
 			std::make_shared<ie::SRVec2f>(sf::Vector2f{})
 		},
 		data.makeInitInfo()
