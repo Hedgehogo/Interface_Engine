@@ -8,7 +8,7 @@ using uint = unsigned;
 namespace ie {
 	class BaseLine {
 	public:
-		struct Make{
+		struct Make {
 			virtual BaseLine* make(LineInitInfo initInfo) = 0;
 			
 			virtual ~Make() = default;

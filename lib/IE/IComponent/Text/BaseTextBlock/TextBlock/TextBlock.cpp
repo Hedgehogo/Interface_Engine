@@ -66,7 +66,7 @@ namespace ie {
 						initInfo.textRenderTarget
 					}
 				),
-				make.style.some()
+				textVariables.style.some()
 			)
 		),
 		text(std::move(make.text)) {

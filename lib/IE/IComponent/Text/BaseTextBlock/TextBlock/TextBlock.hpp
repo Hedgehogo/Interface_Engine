@@ -12,7 +12,7 @@ namespace ie {
 			orl::Option<sf::Color> textColor = {};
 			orl::Option<sf::Font*> font = nullptr;
 			orl::Option<sf::Text::Style> style = {};
-			std::vector<BoxPtr<BaseLine::Make>> lines = {};
+			std::vector<BoxPtr<BaseLine::Make> > lines = {};
 			orl::Option<uint> size = {};
 			orl::Option<sf::Color> textSelectionColor = {};
 			orl::Option<sf::Color> backgroundSelectionColor = {};

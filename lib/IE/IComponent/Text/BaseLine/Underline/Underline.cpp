@@ -8,7 +8,7 @@ namespace ie {
 		return new Underline{std::move(*this), initInfo};
 	}
 	
-	Underline::Underline(Make&& make, LineInitInfo initInfo) : BaseLine(sf::TriangleStrip, 4, make.color, initInfo){
+	Underline::Underline(Make&& make, LineInitInfo initInfo) : BaseLine(sf::TriangleStrip, 4, make.color, initInfo) {
 		underlineOffset = initInfo.font.getUnderlinePosition(initInfo.size);
 		underlineThickness = initInfo.font.getUnderlineThickness(initInfo.size);
 	}
@@ -35,12 +35,7 @@ namespace ie {
 	}
 	
 	bool DecodePointer<Underline>::decodePointer(const YAML::Node& node, Underline*& underline) {
-		sf::Color color{nullColor};
-		if(node["color"])
-			node["color"] >> color;
-		{
-			underline = new Underline{color};
-			return true;
-		}
+		underline = new Underline{convDef(node["color"], nullColor)};
+		return true;
 	}
 }

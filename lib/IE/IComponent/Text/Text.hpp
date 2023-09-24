@@ -15,7 +15,7 @@ namespace ie {
 		
 	public:
 		struct Make : public virtual IComponent::Make {
-			std::vector<BoxPtr<BaseTextBlock::Make>> textBlocks;
+			std::vector<BoxPtr<BaseTextBlock::Make> > textBlocks;
 			BoxPtr<IUninteractive::Make> background = makeBoxPtr<FullColor::Make>(sf::Color::White);
 			uint size = 14;
 			sf::Font* font = nullptr;
@@ -29,7 +29,7 @@ namespace ie {
 			BoxPtr<IBasicInteraction<Text&>::Make> textInteraction = makeBoxPtr<BasicEmptyInteraction<Text&>::Make>();
 			
 			explicit Make(
-				std::vector<BoxPtr<BaseTextBlock::Make>>&& textBlocks,
+				std::vector<BoxPtr<BaseTextBlock::Make> >&& textBlocks,
 				BoxPtr<IUninteractive::Make>&& background = makeBoxPtr<FullColor::Make>(sf::Color::White),
 				uint size = 14,
 				sf::Font* font = nullptr,
@@ -49,7 +49,7 @@ namespace ie {
 		Text(Make&& make, InitInfo initInfo);
 		
 		explicit Text(
-			std::vector<BoxPtr<BaseTextBlock>>&& textBlocks,
+			std::vector<BoxPtr<BaseTextBlock> >&& textBlocks,
 			BoxPtr<IUninteractive>&& background = makeBoxPtr<FullColor>(sf::Color::White),
 			int size = 14,
 			sf::Font* font = nullptr,

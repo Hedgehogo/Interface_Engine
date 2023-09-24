@@ -2,11 +2,10 @@
 #include "BaseLine.hpp"
 
 namespace ie {
-	BaseLine::BaseLine(sf::PrimitiveType type, std::size_t vertexCount, sf::Color color, LineInitInfo initInfo) : vertexArray(type, vertexCount) {
+	BaseLine::BaseLine(sf::PrimitiveType type, std::size_t vertexCount, sf::Color color, LineInitInfo initInfo) :
+		renderTarget(&initInfo.renderTarget), vertexArray(type, vertexCount) {
 		for(std::size_t i = 0; i < vertexArray.getVertexCount(); ++i)
 			vertexArray[i].color = color;
-		
-		this->renderTarget = &initInfo.renderTarget;
 		
 		if(vertexArray[0].color == sf::Color{255, 255, 255, 0})
 			for(std::size_t i = 0; i < vertexArray.getVertexCount(); ++i)
