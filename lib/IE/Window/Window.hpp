@@ -2,7 +2,7 @@
 
 #include <filesystem>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "../IComponent/IUnscalable/IScalable/Interface/Interface.hpp"
+#include "../IComponent/IScalable/Interface/Interface.hpp"
 #include "BaseWindowResizer/WindowResizer/WindowResizer.hpp"
 
 namespace ie {

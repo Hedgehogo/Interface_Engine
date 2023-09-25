@@ -9,7 +9,7 @@ namespace ie {
 		return new SmartSizing{std::move(*this), normalSize};
 	}
 	
-	SmartSizing::SmartSizing(SmartSizing::Make&& make, float) :
+	SmartSizing::SmartSizing(Make&& make, float) :
 		targetCoefficient(make.targetCoefficient), parentCoefficient(make.parentCoefficient), addition(make.addition) {
 	}
 	

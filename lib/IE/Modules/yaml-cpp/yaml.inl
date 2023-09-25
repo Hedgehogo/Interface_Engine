@@ -38,22 +38,22 @@ namespace ie {
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	B* convertDefaultPtr(const YAML::Node& node, Arg&& ... arg) {
+	B* convertDefaultPtr(const YAML::Node& node, Arg&&... arg) {
 		return node.IsDefined() ? node.as<B*>() : new T{arg...};
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	B* convDefPtr(const YAML::Node& node, Arg&& ... arg) {
+	B* convDefPtr(const YAML::Node& node, Arg&&... arg) {
 		return convertDefaultPtr<B, T>(node, arg...);
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	BoxPtr<B> convertDefaultBoxPtr(const YAML::Node& node, Arg&& ... arg) {
+	BoxPtr<B> convertDefaultBoxPtr(const YAML::Node& node, Arg&&... arg) {
 		return node.IsDefined() ? node.as<BoxPtr<B> >() : makeBoxPtr<T>(arg...);
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	BoxPtr<B> convDefBoxPtr(const YAML::Node& node, Arg&& ... arg) {
+	BoxPtr<B> convDefBoxPtr(const YAML::Node& node, Arg&&... arg) {
 		return convertDefaultBoxPtr<B, T>(node, arg...);
 	}
 	
@@ -111,7 +111,7 @@ namespace YAML {
 	
 	template<typename T>
 	bool convert<T>::decode(const Node& node, T& rhs) {
-		return ie::Decode < T > ::decode(node, rhs);
+		return ie::Decode< T >::decode(node, rhs);
 	}
 }
 

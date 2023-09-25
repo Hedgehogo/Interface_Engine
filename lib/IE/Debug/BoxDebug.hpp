@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../IComponent/IUnscalable/IScalable/Box/Box.hpp"
+#include "../IComponent/IScalable/Box/Box.hpp"
 #include "IE/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
 
 namespace ie {
