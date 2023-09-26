@@ -1,12 +1,15 @@
 #pragma once
 
-#include "../IDrawable/DrawManager/DrawManager.hpp"
-#include "../IUpdatable/UpdateManager/UpdateManager.hpp"
-#include "../Interaction/InteractionStack/InteractionStack.hpp"
-#include "../Interaction/InteractionManager/InteractionManager.hpp"
-#include "../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
-#include "../Animation/AnimationManager/AnimationManager.hpp"
-#include "../Make/make.hpp"
+#include "IE/IDrawable/DrawManager/DrawManager.hpp"
+#include "IE/IUpdatable/UpdateManager/UpdateManager.hpp"
+#include "IE/Interaction/InteractionStack/InteractionStack.hpp"
+#include "IE/Interaction/InteractionManager/InteractionManager.hpp"
+#include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "IE/Animation/AnimationManager/AnimationManager.hpp"
+#include "IE/Make/make.hpp"
+#include "IE/Utils/Reduce/Reduce.hpp"
+#include "IE/Utils/Vector/Vector.hpp"
+#include "IE/Utils/Vector2/Vector2.hpp"
 #include "InitInfo/InitInfo.hpp"
 
 using uint = unsigned;
@@ -64,51 +67,4 @@ namespace ie {
 		
 		virtual void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
 	};
-	
-	template<typename T>
-	sf::Vector2<T> max(const sf::Vector2<T>& first, const sf::Vector2<T>& second) {
-		return {std::max(first.x, second.x), std::max(first.y, second.y)};
-	}
-	
-	template<typename T>
-	sf::Vector2<T> max(const sf::Vector2<T>& first, const sf::Vector2<T>& second, const sf::Vector2<T>& third) {
-		return {std::max(first.x, std::max(second.x, third.x)), std::max(first.y, std::max(second.y, third.y))};
-	}
-	
-	std::vector<float>& addBounds(std::vector<float>& vector);
-	
-	std::vector<float> genBounds(std::size_t size);
-	
-	template<typename T>
-	std::size_t y_size(std::vector<std::vector<T> >& vector) {
-		if(vector.empty()) {
-			return 0;
-		}
-		return vector[0].size();
-	}
-	
-	namespace detail {
-		template<typename T>
-		void addItems(std::vector<T>&) {
-		}
-		
-		template<typename T, typename A, typename... As>
-		void addItems(std::vector<T>& vector, A&& arg, As&& ... args) {
-			vector.emplace_back(std::move(arg));
-			addItems<T, As...>(vector, std::move(args)...);
-		}
-	}
-	
-	template<typename T, typename... As>
-	std::vector<T> makeVector(T&& arg, As&&... args) {
-		std::vector<T> result;
-		result.reserve(sizeof...(As) + 1);
-		detail::addItems<T, As...>(result, std::move(arg), std::move(args)...);
-		return result;
-	}
-	
-	template<typename T, T (* f)(T)>
-	sf::Vector2<T> mapVector2(sf::Vector2<T> value) {
-		return {f(value.x), f(value.y)};
-	}
 }

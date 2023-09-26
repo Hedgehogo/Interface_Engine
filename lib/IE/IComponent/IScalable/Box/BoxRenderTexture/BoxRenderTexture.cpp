@@ -76,11 +76,11 @@ namespace ie {
 	}
 	
 	sf::Vector2f BoxRenderTexture::getMinSize() const {
-		return max(object->getMinSize(), minimumSize, {1, 1});
+		return max(object->getMinSize(), minimumSize, sf::Vector2f{1, 1});
 	}
 	
 	sf::Vector2f BoxRenderTexture::getNormalSize() const {
-		return max(object->getNormalSize(), minimumSize, {1, 1});
+		return max(object->getNormalSize(), minimumSize, sf::Vector2f{1, 1});
 	}
 	
 	IScalable& BoxRenderTexture::getObject() {
