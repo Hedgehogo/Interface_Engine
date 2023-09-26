@@ -2,7 +2,7 @@
 #include "BaseLine.hpp"
 
 namespace ie {
-	BaseLine* BaseLine::Make::make(LineInitInfo initInfo) {
+	BaseLine* BaseLine::Make::make(LineInitInfo) {
 		return nullptr;
 	}
 	

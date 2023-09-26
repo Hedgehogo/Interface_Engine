@@ -38,12 +38,12 @@ namespace ie {
 		TextVariables& textVariables,
 		std::vector<BoxPtr<BaseLine>>& lines,
 		orl::Option<sf::RenderTarget&> renderTarget
-	) : character(character),
+	) : renderTarget(character == '\n' ? orl::Option<sf::RenderTarget&>{} : renderTarget),
+		character(character),
 		textVariables(textVariables),
 		vertexArray(sf::Quads, 4),
 		selectionVertexArray(sf::Quads, 4),
-		lines(lines),
-		renderTarget(character == '\n' ? orl::Option<sf::RenderTarget&>{} : renderTarget) {
+		lines(lines) {
 		if(renderTarget) {
 			glyph = textVariables.font.some()->getGlyph(character, textVariables.size.some(), textVariables.style.some() & sf::Text::Style::Bold);
 			

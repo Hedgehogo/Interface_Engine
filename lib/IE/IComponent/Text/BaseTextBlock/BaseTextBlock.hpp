@@ -4,7 +4,7 @@
 #include "../BaseCharacter/BaseCharacter.hpp"
 #include "../../IScalable/BasicInteractiveData/BasicInteractiveData.hpp"
 #include "../../InitInfo/InitInfo.hpp"
-#include "InitInfo/TextBockInitInfo.hpp"
+#include "TextBockInitInfo/TextBockInitInfo.hpp"
 
 namespace ie {
 	class BaseTextBlock {

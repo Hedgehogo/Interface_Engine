@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
-#include "InitInfo/LineInitInfo.hpp"
+#include "LineInitInfo/LineInitInfo.hpp"
 
 using uint = unsigned;
 
