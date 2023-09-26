@@ -82,9 +82,9 @@ int main() {
 							sf::Vector2f{100, 100}
 						)
 					),
+					&font,
 					makeBoxPtr<ie::FullColor::Make>(sf::Color::White),
 					30U,
-					&font,
 					sf::Color::Black,
 					sf::Color::White,
 					sf::Color::Blue,

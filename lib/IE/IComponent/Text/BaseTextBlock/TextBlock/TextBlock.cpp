@@ -45,14 +45,14 @@ namespace ie {
 	TextBlock::TextBlock(Make&& make, TextBockInitInfo initInfo) :
 		BaseTextBlock(
 			{
-				make.textColor.some_or(initInfo.textVariables.textColor.some()),
-				make.textSelectionColor.some_or(initInfo.textVariables.textSelectionColor.some()),
-				make.backgroundSelectionColor.some_or(initInfo.textVariables.backgroundSelectionColor.some()),
-				make.inactiveTextSelectionColor.some_or(initInfo.textVariables.inactiveTextSelectionColor.some()),
-				make.inactiveBackgroundSelectionColor.some_or(initInfo.textVariables.inactiveBackgroundSelectionColor.some()),
-				make.font.some_or(initInfo.textVariables.font.some()),
-				make.style.some_or(initInfo.textVariables.style.some()),
-				make.size.some_or(initInfo.textVariables.size.some()),
+				make.textColor.some_or(initInfo.textVariables.textColor),
+				make.textSelectionColor.some_or(initInfo.textVariables.textSelectionColor),
+				make.backgroundSelectionColor.some_or(initInfo.textVariables.backgroundSelectionColor),
+				make.inactiveTextSelectionColor.some_or(initInfo.textVariables.inactiveTextSelectionColor),
+				make.inactiveBackgroundSelectionColor.some_or(initInfo.textVariables.inactiveBackgroundSelectionColor),
+				make.font.some_or(initInfo.textVariables.font),
+				make.style.some_or(initInfo.textVariables.style),
+				make.size.some_or(initInfo.textVariables.size),
 			}
 		),
 		lines(

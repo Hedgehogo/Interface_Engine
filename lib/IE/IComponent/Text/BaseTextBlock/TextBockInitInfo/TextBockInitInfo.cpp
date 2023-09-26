@@ -39,6 +39,5 @@ namespace ie {
 		textDrawManager(textDrawManager),
 		textInteractionManager(textInteractionManager),
 		textVariables(textVariables) {
-	
 	}
 }

@@ -16,9 +16,9 @@ namespace ie {
 	public:
 		struct Make : public virtual IComponent::Make {
 			std::vector<BoxPtr<BaseTextBlock::Make> > textBlocks;
+			sf::Font* font;
 			BoxPtr<IUninteractive::Make> background = makeBoxPtr<FullColor::Make>(sf::Color::White);
 			uint size = 14;
-			orl::Option<sf::Font*> font = {};
 			sf::Color textColor = sf::Color::Black;
 			sf::Color textSelectionColor = sf::Color::White;
 			sf::Color backgroundSelectionColor = sf::Color::Blue;
@@ -28,10 +28,11 @@ namespace ie {
 			BoxPtr<BaseResizer::Make> resizer = makeBoxPtr<Resizer::Make>(1.15f, BaseResizer::Align::Left);
 			BoxPtr<IBasicInteraction<Text&>::Make> textInteraction = makeBoxPtr<BasicEmptyInteraction<Text&>::Make>();
 			
-			explicit Make(std::vector<BoxPtr<BaseTextBlock::Make> >&& textBlocks,
+			explicit Make(
+				std::vector<BoxPtr<BaseTextBlock::Make> >&& textBlocks,
+				sf::Font* font,
 				BoxPtr<IUninteractive::Make>&& background = makeBoxPtr<FullColor::Make>(sf::Color::White),
 				uint size = 14,
-				orl::Option<sf::Font*> font = {},
 				sf::Color textColor = sf::Color::Black,
 				sf::Color textSelectionColor = sf::Color::White,
 				sf::Color backgroundSelectionColor = sf::Color::Blue,
@@ -47,10 +48,11 @@ namespace ie {
 		
 		Text(Make&& make, InitInfo initInfo);
 		
-		explicit Text(std::vector<BoxPtr<BaseTextBlock> >&& textBlocks,
+		explicit Text(
+			std::vector<BoxPtr<BaseTextBlock> >&& textBlocks,
+			sf::Font* font,
 			BoxPtr<IUninteractive>&& background = makeBoxPtr<FullColor>(sf::Color::White),
 			int size = 14,
-			orl::Option<sf::Font*> font = {},
 			sf::Color textColor = sf::Color::Black,
 			sf::Color textSelectionColor = sf::Color::White,
 			sf::Color backgroundSelectionColor = sf::Color::Blue,

@@ -6,9 +6,9 @@
 namespace ie {
 	Text::Make::Make(
 		std::vector<BoxPtr<BaseTextBlock::Make>>&& textBlocks,
+		sf::Font* font,
 		BoxPtr<IUninteractive::Make>&& background,
 		uint size,
-		orl::Option<sf::Font*> font,
 		sf::Color textColor,
 		sf::Color textSelectionColor,
 		sf::Color backgroundSelectionColor,
@@ -18,9 +18,9 @@ namespace ie {
 		BoxPtr<BaseResizer::Make>&& resizer,
 		BoxPtr<IBasicInteraction<Text&>::Make>&& textInteraction
 	) : textBlocks(std::move(textBlocks)),
+		font(font),
 		background(std::move(background)),
 		size(size),
-		font(font),
 		textColor(textColor),
 		textSelectionColor(textSelectionColor),
 		backgroundSelectionColor(backgroundSelectionColor),
@@ -50,7 +50,7 @@ namespace ie {
 					renderTexture,
 					drawManager,
 					*interactionManager,
-					TextVariables{
+					TextBockInitInfo::TextVariables{
 						make.textColor,
 						make.textSelectionColor,
 						make.backgroundSelectionColor,
@@ -78,9 +78,9 @@ namespace ie {
 	
 	Text::Text(
 		std::vector<BoxPtr<BaseTextBlock>>&& textBlocks,
+		sf::Font*,
 		BoxPtr<IUninteractive>&& background,
 		int size,
-		orl::Option<sf::Font*>,
 		sf::Color,
 		sf::Color,
 		sf::Color,
@@ -329,9 +329,9 @@ namespace ie {
 		
 		text = new Text{
 			node["text-block"] ? std::vector{node["text-block"].as <BoxPtr<BaseTextBlock> > ()} : node["text-blocks"].as<std::vector<BoxPtr<BaseTextBlock>>>(),
+			node["font"].as<sf::Font*>(),
 			convDefBoxPtr<IUninteractive, FullColor>(node["background"], sf::Color::White),
 			convDef(node["size"], 14),
-			convDef<orl::Option<sf::Font*>>(node["font"], {}),
 			textColor,
 			convDef(node["text-selection-color"], sf::Color::White),
 			convDef(node["background-selection-color"], sf::Color::Blue),
