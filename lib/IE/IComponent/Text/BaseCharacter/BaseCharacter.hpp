@@ -34,6 +34,8 @@ namespace ie {
 		
 		virtual void setPosition(sf::Vector2f position);
 		
+		virtual void setKerning(float kerning);
+		
 		virtual void resize(sf::Vector2f position, float);
 		
 		virtual void move(sf::Vector2f position);

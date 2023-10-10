@@ -32,6 +32,8 @@ namespace ie {
 		
 		virtual void init(TextBockInitInfo textBlockInitInfo) = 0;
 		
+		virtual void setKerning(char32_t character);
+		
 		virtual bool in(sf::Vector2f mousePosition) = 0;
 		
 		virtual std::vector<BaseCharacter*> getCharacters() = 0;

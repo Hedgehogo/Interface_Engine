@@ -19,6 +19,9 @@ namespace ie {
 		this->position = position;
 	}
 	
+	void BaseCharacter::setKerning(float) {
+	}
+	
 	void BaseCharacter::resize(sf::Vector2f position, float) {
 		setPosition(position);
 	}

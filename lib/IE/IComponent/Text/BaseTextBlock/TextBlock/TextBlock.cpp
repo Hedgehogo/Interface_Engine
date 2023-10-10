@@ -168,6 +168,13 @@ namespace ie {
 		return result;
 	}
 	
+	void TextBlock::setKerning(char32_t character) {
+		for(auto& textCharacter : textCharacters){
+			textCharacter->setKerning(textVariables.font.some()->getKerning(character, textCharacter->getChar(), textVariables.size.some()));
+			character = textCharacter->getChar();
+		}
+	}
+	
 	TextBlock* TextBlock::copy() {
 		return nullptr;
 	}

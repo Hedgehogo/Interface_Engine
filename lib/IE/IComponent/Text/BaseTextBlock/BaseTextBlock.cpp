@@ -7,6 +7,9 @@ namespace ie {
 	BaseTextBlock::BaseTextBlock(TextVariables textVariables) : textVariables(textVariables) {
 	}
 	
+	void BaseTextBlock::setKerning(char32_t) {
+	}
+	
 	void BaseTextBlock::setTextVariables(
 		sf::Color TextColor,
 		sf::Color textSelectionColor,

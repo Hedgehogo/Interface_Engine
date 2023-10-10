@@ -67,6 +67,7 @@ namespace ie {
 		textInteraction(nullptr) {
 		textInteraction.set(make.textInteraction->make({initInfo, *this}));
 		for(auto& textBlock: this->textBlocks) {
+			textBlock->setKerning(textCharacters.empty() ? U'\0' : textCharacters[textCharacters.size() - 1]->getChar());
 			std::vector<BaseCharacter*> characters = textBlock->getCharacters();
 			textCharacters.insert(textCharacters.end(), characters.begin(), characters.end());
 		}

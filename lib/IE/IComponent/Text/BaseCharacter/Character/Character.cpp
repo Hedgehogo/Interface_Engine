@@ -2,35 +2,20 @@
 #include "IE/Modules/hsvToRgb/hsvToRgb.hpp"
 
 namespace ie {
-	
-	template<typename T>
-	void makeRectBones(sf::Rect<T> rect, std::function<sf::Vector2f&(std::size_t)> getCords){
-		getCords(0) = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top}};
-		getCords(1) = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top}};
-		getCords(2) = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top + rect.height}};
-		getCords(3) = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top + rect.height}};
-	}
-	
-	template<>
-	void makeRectBones(sf::Rect<float> rect, std::function<sf::Vector2f&(std::size_t)> getCords){
-		getCords(0) = {rect.left, rect.top};
-		getCords(1) = {rect.left + rect.width, rect.top};
-		getCords(2) = {rect.left + rect.width, rect.top + rect.height};
-		getCords(3) = {rect.left, rect.top + rect.height};
-	}
-	
 	template<typename T>
 	void makeRectBonesPosition(sf::Rect<T> rect, sf::VertexArray& vertexArray){
-		makeRectBones<T>(rect, [&](auto i) -> auto& {
-			return vertexArray[i].position;
-		});
+		vertexArray[0].position = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top}};
+		vertexArray[1].position = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top}};
+		vertexArray[2].position = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top + rect.height}};
+		vertexArray[3].position = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top + rect.height}};
 	}
 	
 	template<typename T>
 	void makeRectBonesTexCoords(sf::Rect<T> rect, sf::VertexArray& vertexArray){
-		makeRectBones<T>(rect, [&](auto i) -> auto& {
-			return vertexArray[i].texCoords;
-		});
+		vertexArray[0].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top}};
+		vertexArray[1].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top}};
+		vertexArray[2].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top + rect.height}};
+ 		vertexArray[3].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top + rect.height}};
 	}
 	
 	Character::Character(
@@ -40,13 +25,15 @@ namespace ie {
 		orl::Option<sf::RenderTarget&> renderTarget
 	) : renderTarget(character == '\n' ? orl::Option<sf::RenderTarget&>{} : renderTarget),
 		character(character),
+		advance(0),
+		kerning(0),
 		textVariables(textVariables),
 		vertexArray(sf::Quads, 4),
 		selectionVertexArray(sf::Quads, 4),
 		lines(lines) {
 		if(renderTarget) {
 			glyph = textVariables.font.some()->getGlyph(character, textVariables.size.some(), textVariables.style.some() & sf::Text::Style::Bold);
-			
+			advance = glyph.advance;
 			texture = textVariables.font.some()->getTexture(textVariables.size.some());
 			
 			makeRectBonesTexCoords(glyph.textureRect, vertexArray);
@@ -127,16 +114,23 @@ namespace ie {
 	}
 	
 	float Character::getAdvance() {
-		return glyph.advance;
+		return advance;
 	}
 	
 	float Character::getHeight() const {
 		return textVariables.size.some();
 	}
 	
-	void Character::setPosition(const sf::Vector2f position) {
+	void Character::setPosition(sf::Vector2f position) {
+		position.x += kerning;
 		move(position - this->position);
 		BaseCharacter::setPosition(position);
+	}
+	
+	void Character::setKerning(float kerning) {
+		advance -= this->kerning;
+		advance += kerning;
+		this->kerning = kerning;
 	}
 	
 	void Character::move(sf::Vector2f position) {
@@ -152,7 +146,6 @@ namespace ie {
 	}
 	
 	bool Character::in(sf::Vector2f mousePosition) {
-		
 		return position.x < mousePosition.x && position.x + getAdvance() > mousePosition.x &&
 			   position.y - getHeight() < mousePosition.y && position.y > mousePosition.y;
 	}

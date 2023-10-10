@@ -39,47 +39,10 @@ int main() {
 				makeBoxPtr<ie::Text::Make>(
 					ie::makeVector(
 						makeBoxPtr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
-							U"["
+							U"bbabb"
 						),
 						makeBoxPtr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
-							U"a bb ccc dddd",
-							sf::Color::Black,
-							orl::Option<sf::Font*>{},
-							sf::Text::Style{},
-							ie::makeVector (
-								makeBoxPtr<ie::BaseLine::Make, ie::Underline::Make>(sf::Color::Red)
-							)
-						),
-						makeBoxPtr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
-							U"]\n[",
-							sf::Color::Black,
-							orl::Option<sf::Font*>{},
-							sf::Text::Style{},
-							ie::makeVector (
-								makeBoxPtr<ie::BaseLine::Make, ie::StrikeThrough::Make>(orl::Option<sf::Color>{}, 0.15f)
-							)
-						),
-						makeBoxPtr<ie::BaseTextBlock::Make, ie::InteractiveTextBlock::Make>(
-							makeBoxPtr<ie::OneKeyInteraction>(
-								makeBoxPtr<ie::OpenUrlAction>(
-									"https://github.com/Hedgehogo/Interface_Engine/"
-								),
-								ie::Key::MouseLeft
-							),
-							U"e ff ggg hhhh",
-							sf::Color::Black,
-							orl::Option<sf::Font*>{},
-							sf::Text::Style{},
-							ie::makeVector (
-								makeBoxPtr<ie::BaseLine::Make, ie::StrikeThrough::Make>(sf::Color::Blue)
-							)
-						),
-						makeBoxPtr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
-							U"] "
-						),
-						makeBoxPtr<ie::BaseTextBlock::Make, ie::ObjectTextBlock::Make>(
-							makeBoxPtr<ie::FullColor::Make>(sf::Color::Red),
-							sf::Vector2f{100, 100}
+							U"bbbbb"
 						)
 					),
 					&font,

@@ -17,6 +17,8 @@ namespace ie {
 		
 		void draw(bool selection) override;
 		
+		void setKerning(float kerning) override;
+		
 		void move(sf::Vector2f position) override;
 		
 		const std::vector<BoxPtr<BaseLine>>& getLine();
@@ -33,7 +35,7 @@ namespace ie {
 		
 		char32_t getChar() override;
 		
-		void setPosition(const sf::Vector2f position) override;
+		void setPosition(sf::Vector2f position) override;
 	
 		static void setDebug(bool debug);
 		
@@ -48,6 +50,8 @@ namespace ie {
 		char32_t character;
 		
 		sf::Glyph glyph;
+		float advance;
+		float kerning;
 		TextVariables& textVariables;
 		sf::VertexArray vertexArray;
 		sf::VertexArray selectionVertexArray;

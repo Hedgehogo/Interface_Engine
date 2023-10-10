@@ -41,9 +41,9 @@ namespace ie {
 		startRender = position;
 	}
 	
-	void Resizer::printCharacter(std::vector<BaseCharacter*>::iterator character, float kerning) {
+	void Resizer::printCharacter(std::vector<BaseCharacter*>::iterator character) {
 		(*character)->setPosition(nextPosition);
-		nextPosition.x += (*character)->getAdvance() + kerning;
+		nextPosition.x += (*character)->getAdvance();
 	}
 	
 	float Resizer::equalize(std::vector<BaseCharacter*>::iterator endCharacter) {
@@ -119,11 +119,8 @@ namespace ie {
 		nextPosition.y += lineSize * lineSpacing;
 		nextPosition.x = startRender.x;
 		
-		float kerning{0};
 		for(auto character = afterSpace; character != endCharacter; ++character) {
-			kerning = (character + 1 != characters->end()) ? ((*character)->getKerning((*(character + 1))->getChar())) : 0;
-			
-			printCharacter(character, kerning);
+			printCharacter(character);
 		}
 		
 		afterEnter = afterSpace;
@@ -145,7 +142,7 @@ namespace ie {
 		if(algorithm == BaseResizer::Algorithm::Console)
 			return spaceResize(kerning);
 		
-		printCharacter(currentCharacter, kerning);
+		printCharacter(currentCharacter);
 	}
 	
 	void Resizer::spaceResize(float kerning) {
@@ -153,7 +150,7 @@ namespace ie {
 			return characterResize(kerning);
 		
 		if(this->nextPosition.x + (algorithm == BaseResizer::Algorithm::Console ? (*currentCharacter)->getAdvance() : 0) <= endRender.x) {
-			printCharacter(currentCharacter, kerning);
+			printCharacter(currentCharacter);
 			afterSpace = currentCharacter + 1;
 		} else {
 			autoPorting(currentCharacter + 1);

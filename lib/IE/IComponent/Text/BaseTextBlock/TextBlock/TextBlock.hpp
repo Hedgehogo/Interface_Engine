@@ -67,6 +67,8 @@ namespace ie {
 		
 		void init(TextBockInitInfo textBlockInitInfo) override;
 		
+		void setKerning(char32_t character) override;
+		
 		bool in(sf::Vector2f mousePosition);
 		
 		void update() override;
