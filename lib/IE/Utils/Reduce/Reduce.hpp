@@ -10,8 +10,8 @@ namespace ie {
 		}
 		
 		template<typename... Other>
-		static T_ const& right(T_ const& first, Other const&... args) {
-			return Fn_(first, FnReduce<T_, Fn_>::right(args...));
+		static T_ const& right(T_ const& first, T_ const& second, Other const&... args) {
+			return Fn_(first, FnReduce<T_, Fn_>::right(second, args...));
 		}
 		
 		static T_ const& left(T_ const& first, T_ const& second) {
