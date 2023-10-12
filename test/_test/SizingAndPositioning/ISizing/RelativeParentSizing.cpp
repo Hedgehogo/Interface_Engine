@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/ISizing/RelativeParentSizing/RelativeParentSizing.hpp>
+#include <IE/sizing-positioning/ISizing/RelativeParentSizing/RelativeParentSizing.hpp>
 
 TEST(SizingAndPositioning, RelativeParentSizing) {
 	ie::RelativeParentSizing relativeParentSizing{{2}, 17};

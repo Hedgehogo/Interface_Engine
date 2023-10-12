@@ -20,7 +20,7 @@ TEST(FullColor, draw) {
 TEST(FullColor, YAML) {
     Program testProgram{
 	    new ie::Interface{
-            ie::loadFromYaml<ie::IScalable>("../test/tests/7-stage-object/IE/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/src/test.yaml")
+            ie::loadFromYaml<ie::IScalable>("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/src/test.yaml")
         }
     };
 

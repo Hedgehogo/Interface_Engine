@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <../../../../../lib/IE/IDrawable/DrawManager/DrawManager.hpp>
+#include <../../../../../lib/IE/component/IDrawable/DrawManager/DrawManager.hpp>
 #include "../../../testsObjects/testObject/testObject.hpp"
 
 TEST(DrawManager, draw_and_add) {

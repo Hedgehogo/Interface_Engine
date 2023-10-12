@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <../../../../../lib/IE/SizingAndPositioning/positioning/FnPositioning2/FnPositioning.hpp>
+#include <../../../../../lib/IE/sizing-positioning/positioning/FnPositioning2/FnPositioning.hpp>
 
 TEST(FnPositioning, base) {
 	ie::FnPositioning lambdaPositioning{[](float, float, float, float) -> float {return 13;}};

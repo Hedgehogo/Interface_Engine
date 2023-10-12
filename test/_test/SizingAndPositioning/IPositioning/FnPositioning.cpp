@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "IE/SizingAndPositioning/IPositioning/FnPositioning/FnPositioning.hpp"
+#include "IE/sizing-positioning/IPositioning/FnPositioning/FnPositioning.hpp"
 
 TEST(SizingAndPositioning, FnPositioning) {
 	ie::FnPositioning fnPositioning{

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/ISizing/RelativeNormalSizing/RelativeNormalSizing.hpp>
+#include <IE/sizing-positioning/ISizing/RelativeNormalSizing/RelativeNormalSizing.hpp>
 
 TEST(SizingAndPositioning, RelativeNormalSizing) {
 	ie::RelativeNormalSizing relativeNormalSizing{{}, 17};

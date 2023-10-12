@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/IPositioning2/Positioning2/Positioning2.hpp>
+#include <IE/sizing-positioning/IPositioning2/Positioning2/Positioning2.hpp>
 
 TEST(SizingAndPositioning, Positioning2) {
 	sf::RenderTexture renderTexture;

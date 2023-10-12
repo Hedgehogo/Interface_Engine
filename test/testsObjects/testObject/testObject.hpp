@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../lib/IE/IComponent/IScalable/IScalable.hpp"
-#include "IE/IComponent/IComponentLayout/IComponentLayout.hpp"
+#include "../../../lib/IE/component/IComponent/IScalable/IScalable.hpp"
+#include "IE/component/IComponent/IComponentLayout/IComponentLayout.hpp"
 #include <ctime>
 
 class TestObject : public ie::IScalable, public ie::ILayout, public ie::IDrawable, public ie::IUpdatable {

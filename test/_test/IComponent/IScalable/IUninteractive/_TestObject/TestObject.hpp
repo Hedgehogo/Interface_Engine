@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IE/IComponent/IComponentLayout/IComponentLayout.hpp"
-#include "IE/IComponent/IScalable/IUninteractive/IUninteractive.hpp"
+#include "IE/component/IComponent/IComponentLayout/IComponentLayout.hpp"
+#include "IE/component/IComponent/IScalable/IUninteractive/IUninteractive.hpp"
 
 template<typename T = ie::IUninteractive::Make>
 class TestObject : public ie::IUninteractive {

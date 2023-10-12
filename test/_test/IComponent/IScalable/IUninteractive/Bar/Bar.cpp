@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/Capsule/Capsule.hpp>
-#include <IE/IComponent/IScalable/IUninteractive/Bar/Bar.hpp>
+#include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Capsule/Capsule.hpp>
+#include <IE/component/IComponent/IScalable/IUninteractive/Bar/Bar.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 
 TEST(IComponent, Bar) {

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/ISizing/TargetCoefficientSizing/TargetCoefficientSizing.hpp>
+#include <IE/sizing-positioning/ISizing/TargetCoefficientSizing/TargetCoefficientSizing.hpp>
 
 TEST(SizingAndPositioning, TargetCoefficientSizing) {
 	ie::TargetCoefficientSizing targetCoefficientSizing{{0.5, 0.5}, 17};

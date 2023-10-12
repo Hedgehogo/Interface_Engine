@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/IPositioning/MatchTargetPositioning/MatchTargetPositioning.hpp>
+#include <IE/sizing-positioning/IPositioning/MatchTargetPositioning/MatchTargetPositioning.hpp>
 
 TEST(SizingAndPositioning, MatchTargetPositioning) {
 	ie::MatchTargetPositioning matchPositioning{0.5, 0.0, 0.5};

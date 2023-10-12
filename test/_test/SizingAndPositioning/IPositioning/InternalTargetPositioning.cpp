@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/IPositioning/InternalTargetPositioning/InternalTargetPositioning.hpp>
+#include <IE/sizing-positioning/IPositioning/InternalTargetPositioning/InternalTargetPositioning.hpp>
 
 TEST(SizingAndPositioning, InternalTargetPositioning) {
 	ie::InternalTargetPositioning internalTargetPositioning{0.5, 0.5};

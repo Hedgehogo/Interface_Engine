@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <../../../../../lib/IE/IUpdatable/UpdateManager/UpdateManager.hpp>
+#include <../../../../../lib/IE/component/IUpdatable/UpdateManager/UpdateManager.hpp>
 #include "../../../testsObjects/testObject/testObject.hpp"
 
 TEST(UpdateManager, draw_and_add) {

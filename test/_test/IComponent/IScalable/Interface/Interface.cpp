@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IScalable/Interface/Interface.hpp>
-#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/component/IComponent/IScalable/Interface/Interface.hpp>
+#include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_imageEqual/_imageEqual.hpp"
 

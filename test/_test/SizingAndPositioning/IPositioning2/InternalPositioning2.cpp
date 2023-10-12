@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/IPositioning2/InternalPositioning2/InternalPositioning2.hpp>
+#include <IE/sizing-positioning/IPositioning2/InternalPositioning2/InternalPositioning2.hpp>
 
 TEST(SizingAndPositioning, InternalPositioning2) {
 	ie::InternalPositioning2 internalPositioning2{{0.5, 0.5}};

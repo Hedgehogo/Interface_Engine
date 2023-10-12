@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/RoundedRectangle/RoundedRectangle.hpp>
+#include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/RoundedRectangle/RoundedRectangle.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 
 TEST(IComponent, RoundedRectangle) {

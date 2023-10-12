@@ -2,12 +2,12 @@
 
 #include <SFML/Window.hpp>
 #include "_test/_imageEqual/_imageEqual.hpp"
-#include <IE/IDrawable/DrawManager/DrawManager.hpp>
-#include <IE/IUpdatable/UpdateManager/UpdateManager.hpp>
+#include <IE/component/IDrawable/DrawManager/DrawManager.hpp>
+#include <IE/component/IUpdatable/UpdateManager/UpdateManager.hpp>
 #include <IE/Interaction/InteractionManager/InteractionManager.hpp>
 #include <IE/Interaction/InteractionStack/InteractionStack.hpp>
 #include <IE/Panel/IPanelManager/PanelManager/PanelManager.hpp>
-#include <IE/IComponent/InitInfo/InitInfo.hpp>
+#include <IE/component/IComponent/InitInfo/InitInfo.hpp>
 
 struct InitInfoData {
 	sf::RenderWindow window{};

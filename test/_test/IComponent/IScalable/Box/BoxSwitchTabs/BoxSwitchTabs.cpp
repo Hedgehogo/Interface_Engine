@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <IE/IComponent/IScalable/Box/BoxSwitchTabs/BoxSwitchTabs.hpp>
-#include <IE/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/component/IComponent/IScalable/Box/BoxSwitchTabs/BoxSwitchTabs.hpp>
+#include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_imageEqual/_imageEqual.hpp"
 

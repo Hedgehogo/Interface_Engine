@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/Panel/BasePanel/BasePanel.hpp"
-#include "IE/SizingAndPositioning/sizing/const/ConstSizing.hpp"
+#include "IE/sizing-positioning/sizing/const/ConstSizing.hpp"
 #include <ctime>
 
 class TestPanel : public ie::BasePanel {

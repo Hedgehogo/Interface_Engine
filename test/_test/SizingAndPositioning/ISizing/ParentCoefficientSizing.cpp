@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/ISizing/ParentCoefficientSizing/ParentCoefficientSizing.hpp>
+#include <IE/sizing-positioning/ISizing/ParentCoefficientSizing/ParentCoefficientSizing.hpp>
 
 TEST(SizingAndPositioning, ParentCoefficientSizing) {
 	ie::ParentCoefficientSizing parentCoefficientSizing{{0.5, 0.5}, 17};

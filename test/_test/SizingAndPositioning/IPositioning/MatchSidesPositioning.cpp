@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/IPositioning/MatchSidesPositioning/MatchSidesPositioning.hpp>
+#include <IE/sizing-positioning/IPositioning/MatchSidesPositioning/MatchSidesPositioning.hpp>
 
 TEST(SizingAndPositioning, MatchSidesPositioning) {
 	ie::MatchSidesPositioning matchSidesPositioning{ie::Location::Center, ie::Location::Origin, 0.5};

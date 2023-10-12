@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/ISizing/ConstSizing/ConstSizing.hpp>
+#include <IE/sizing-positioning/ISizing/ConstSizing/ConstSizing.hpp>
 
 TEST(SizingAndPositioning, ConstSizing) {
 	ie::ConstSizing constSizing{{13}, 17};

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <IE/SizingAndPositioning/ISizing/SmartSizing/SmartSizing.hpp>
+#include <IE/sizing-positioning/ISizing/SmartSizing/SmartSizing.hpp>
 
 TEST(SizingAndPositioning, SmartSizing) {
 	ie::SmartSizing parentCoefficientSizing{{0.5, 0.5, 1}, 17};

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "IE/SizingAndPositioning/ISizing/FnSizing/FnSizing.hpp"
+#include "IE/sizing-positioning/ISizing/FnSizing/FnSizing.hpp"
 
 TEST(SizingAndPositioning, FnSizing) {
 	ie::FnSizing fnSizing{

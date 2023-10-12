@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "IE/SizingAndPositioning/ISizing2/FnSizing2/FnSizing2.hpp"
+#include "IE/sizing-positioning/ISizing2/FnSizing2/FnSizing2.hpp"
 
 TEST(SizingAndPositioning, FnSizing2) {
 	sf::RenderTexture renderTexture;
