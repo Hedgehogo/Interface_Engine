@@ -131,6 +131,8 @@ namespace ie {
 		advance -= this->kerning;
 		advance += kerning;
 		this->kerning = kerning;
+		selectionVertexArray[0].position -= {kerning, 0};
+		selectionVertexArray[3].position -= {kerning, 0};
 	}
 	
 	void Character::move(sf::Vector2f position) {
