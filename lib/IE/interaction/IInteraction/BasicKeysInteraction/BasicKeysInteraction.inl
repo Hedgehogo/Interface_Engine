@@ -1,6 +1,6 @@
 #include <utility>
 
-#include "IE/Interaction/IAction/BasicKeyAction/BasicOpenUrlAction/BasicOpenUrlAction.hpp"
+#include "../../IAction/BasicKeyAction/BasicOpenUrlAction/BasicOpenUrlAction.hpp"
 
 namespace ie {
 	namespace make_system {

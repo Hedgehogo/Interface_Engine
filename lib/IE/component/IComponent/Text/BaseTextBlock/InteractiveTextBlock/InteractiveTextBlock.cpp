@@ -1,7 +1,7 @@
 #include "InteractiveTextBlock.hpp"
 
 #include <utility>
-#include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "IE/modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ie {
 	InteractiveTextBlock::Make::Make(
@@ -140,4 +140,3 @@ namespace ie {
 		return true;
 	}
 }
-

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../IInteraction.hpp"
-#include "../../../Enums/KeyHandler/KeyHandler.hpp"
-#include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "IE/enums/KeyHandler/KeyHandler.hpp"
+#include "IE/modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
 	template<typename T>

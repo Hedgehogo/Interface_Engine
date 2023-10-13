@@ -1,9 +1,9 @@
 #include "BoxSwitcherTabs.hpp"
 
 #include "../BoxSwitch/BoxSwitch.hpp"
-#include "IE/Enums/KeyHandler/KeyHandler.hpp"
-#include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
-#include "IE/Modules/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"
+#include "IE/enums/KeyHandler/KeyHandler.hpp"
+#include "IE/interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
+#include "IE/modules/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"
 #include "IE/component/IComponent/IScalable/Box/BoxSwitcherTabs/SwitcherTabsAction/SwitcherTabsAction.hpp"
 
 namespace ie {

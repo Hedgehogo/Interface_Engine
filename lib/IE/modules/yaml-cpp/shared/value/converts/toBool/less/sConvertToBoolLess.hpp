@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../baseComparison/baseSConvertToBoolComparison.hpp"
-#include "IE/Modules/yaml-cpp/buffer/buffer.hpp"
+#include "../../../../../buffer/buffer.hpp"
 
 namespace ie {
 	template<typename T>

@@ -1,6 +1,6 @@
 //included into shortcut.hpp
 
-#include "IE/Modules/yaml-cpp/modules/exception/yamlBuilderDoesNotExist/yamlBuilderDoesNotExistException.hpp"
+#include "../../modules/exception/yamlBuilderDoesNotExist/yamlBuilderDoesNotExistException.hpp"
 
 namespace ie {
 	template<typename Base, typename Type>

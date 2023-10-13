@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IE/Enums/Side/Side.hpp"
-#include "IE/Interaction/InteractionStack/InteractionStack.hpp"
+#include "IE/enums/Side/Side.hpp"
+#include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 

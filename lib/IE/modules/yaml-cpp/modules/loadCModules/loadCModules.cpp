@@ -4,7 +4,7 @@
 #include <yaml-cpp/yaml.h>
 #include <curl/curl.h>
 #include <iostream>
-#include "IE/Modules/yaml-cpp/yaml.hpp"
+#include "../../yaml.hpp"
 
 namespace ie {
 	size_t write_data(void* ptr, std::size_t size, std::size_t nMemB, void* stream) {

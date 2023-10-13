@@ -2,8 +2,8 @@
 
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
-#include "IE/Interaction/InteractionStack/InteractionStack.hpp"
-#include "IE/Interaction/InteractionManager/InteractionManager.hpp"
+#include "IE/interaction/InteractionStack/InteractionStack.hpp"
+#include "IE/interaction/InteractionManager/InteractionManager.hpp"
 
 namespace ie {
 	class BoxBorderVertical : public Box, public virtual IScalableObjectsArray {

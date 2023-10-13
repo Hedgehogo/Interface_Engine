@@ -1,4 +1,4 @@
-#include "vector.hpp"
+#include "Vector.hpp"
 #include <algorithm>
 
 namespace ie {

@@ -2,7 +2,7 @@
 
 #include "../BaseTextBlock.hpp"
 #include "../../BaseCharacter/Character/Character.hpp"
-#include "IE/Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
+#include "IE/modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ie {
 	class TextBlock : public BaseTextBlock {

@@ -3,8 +3,8 @@
 #include "../Box.hpp"
 #include "../../IUninteractive/IUninteractive.hpp"
 #include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
-#include "IE/Interaction/InteractionStack/InteractionStack.hpp"
-#include "IE/Interaction/InteractionManager/InteractionManager.hpp"
+#include "IE/interaction/InteractionStack/InteractionStack.hpp"
+#include "IE/interaction/InteractionManager/InteractionManager.hpp"
 
 namespace ie {
 	class BoxConstBezel : public Box, public virtual IScalableObject {

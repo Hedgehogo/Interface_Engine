@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Modules/yaml-cpp/buffer/buffer.hpp"
+#include "../../../../buffer/buffer.hpp"
 #include "../iSConvertValue.hpp"
 #include "../../general/sValue.hpp"
 

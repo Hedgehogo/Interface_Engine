@@ -1,9 +1,9 @@
 #pragma once
 
 #include "IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/OnlyDrawable.hpp"
-#include "IE/Modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
+#include "IE/modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 #include "IE/component/IUpdatable/IUpdatable/IUpdatable.hpp"
-#include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "IE/modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ie {
 	class VideoFromFile : public OnlyDrawable {

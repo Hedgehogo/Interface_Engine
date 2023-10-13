@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IE/Interaction/InteractionManager/InteractionManager.hpp"
-#include "IE/Interaction/InteractionStack/InteractionStack.hpp"
+#include "IE/interaction/InteractionManager/InteractionManager.hpp"
+#include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "../BaseLine/BaseLine.hpp"
 
 using uint = unsigned;

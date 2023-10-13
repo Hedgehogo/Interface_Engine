@@ -10,7 +10,6 @@
 #include <optional>
 #include <algorithm>
 
-
 struct Sources {
 	std::vector<std::string> src;
 	std::mutex mtx;
@@ -19,7 +18,6 @@ struct Sources {
 	explicit Sources(const std::vector<std::string>& src) : src(src), size(src.size()) {
 	}
 };
-
 
 std::optional<std::filesystem::path> get_source(Sources& sources) {
 	std::lock_guard<std::mutex> lock{sources.mtx};
@@ -32,7 +30,6 @@ std::optional<std::filesystem::path> get_source(Sources& sources) {
 }
 
 std::optional<std::tuple<std::filesystem::path, bool>> case_insensitive_file_find(const std::filesystem::path& dir, const std::filesystem::path& file, bool corrected = true) {
-	//printf("\033[0mdir: [%s]\nfile: [%s]\n", dir.c_str(), file.c_str());
 	auto begin_file{*file.begin()};
 	auto begin_file_str{begin_file.string()};
 	auto begin_file_lower{begin_file_str};
@@ -51,18 +48,19 @@ std::optional<std::tuple<std::filesystem::path, bool>> case_insensitive_file_fin
 		if(filename_lower == begin_file_lower) {
 			if(filename != begin_file_str)
 				corrected = false;
-			if(begin_file.extension() == ".hpp") {
-				return std::tuple{entry.path(),  corrected};
+			if(begin_file.extension() == ".hpp" || begin_file.extension() == ".inl") {
+				return std::tuple{entry.path(), corrected};
 			} else {
 				return case_insensitive_file_find(entry.path(), file.lexically_relative(begin_file), corrected);
 			}
 		}
 	}
-	return std::nullopt;
+	return {};
 }
 
 void code_checking(Sources& sources, std::vector<std::filesystem::path> include_dirs) {
 	std::size_t count_not_corrected_includes{0};
+	std::size_t count_not_found_includes{0};
 	
 	for(std::size_t file_number = 1;; ++file_number) {
 		std::filesystem::path source_path{};
@@ -98,14 +96,14 @@ void code_checking(Sources& sources, std::vector<std::filesystem::path> include_
 					}
 					
 					if (file_not_found) {
-						printf("\033[31mFile: [%s] included [%s] not found\n", source_path.c_str(), match.c_str());
-						++count_not_corrected_includes;
+						std::cout << "File: [" << source_path.string() << ":" << line_number << "] included [" << match.string() << "] not found\n";
+						++count_not_found_includes;
 					}
 					
 					if(!possible_path.empty()){
 						++count_not_corrected_includes;
 						not_corrected_file = true;
-						printf("\033[31mFile: [%s:%zu] includes [%s], the path to which may not work on a case-sensitive operating system.\nPerhaps you meant this file: ", source_path.c_str(), line_number,  match.c_str());
+						std::cout << "File: [" << source_path.string() << ":" << line_number << "] includes [" << match.string() << "], the path to which may not work on a case-sensitive operating system.\nPerhaps you meant this file: [" << possible_path.string() << "] -> \n";
 						auto optimal_path{possible_path};
 						for(const auto& include_dir: include_dirs){
 							auto possible_optimal_path = possible_path.lexically_relative(include_dir);
@@ -114,7 +112,7 @@ void code_checking(Sources& sources, std::vector<std::filesystem::path> include_
 							}
 						}
 						str.replace(str.find(match.string()), match.string().size(), optimal_path.string());
-						printf("[%s]\n", optimal_path.c_str());
+						std::cout << "[" << optimal_path.string() << "]\n";
 					}
 					include_dirs.pop_back();
 				}
@@ -126,7 +124,7 @@ void code_checking(Sources& sources, std::vector<std::filesystem::path> include_
 				std::ofstream file_for_write{source_path};
 				if(file_for_write.is_open()) {
 					file_for_write << file_str;
-					printf("\033[32mFile corrected\n");
+					std::cout << "File corrected\n";
 				}
 				file_for_write.close();
 			}
@@ -134,8 +132,14 @@ void code_checking(Sources& sources, std::vector<std::filesystem::path> include_
 		}
 	}
 	
-	if(count_not_corrected_includes != 0) {
-		std::cerr << "Not corrected " << count_not_corrected_includes << " includes\n";
+	if (count_not_corrected_includes + count_not_found_includes != 0) {
+		if(count_not_corrected_includes != 0) {
+			std::cout << count_not_corrected_includes << " includes have been fixed\n";
+		}
+		if (count_not_found_includes != 0) {
+			std::cout << count_not_found_includes << " includes not found\n";
+		}
+		
 	} else {
 		std::cout << "All includes correct\n";
 	}
@@ -156,7 +160,7 @@ std::vector<std::filesystem::path> cleansing_include_dirs(const std::vector<std:
 	std::vector<std::filesystem::path> result;
 	for(const auto& include_dir: include_dirs) {
 		if(include_dir.find("$<INSTALL_INTERFACE:") == std::string::npos && include_dir.find("includes-NOTFOUND") == std::string::npos) {
-			std::regex filter{R"(\$<.+:(.+)>)"};
+			std::regex filter{R"(\$<.+?:(.+)>)"};
 			std::smatch matches;
 			std::regex_match(include_dir, matches, filter);
 			auto match{matches.str(1)};

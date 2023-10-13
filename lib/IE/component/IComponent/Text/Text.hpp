@@ -3,7 +3,7 @@
 #include "BaseTextBlock/BaseTextBlock.hpp"
 #include "BaseResizer/Resizer/Resizer.hpp"
 #include "../IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp"
-#include "IE/Interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
+#include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 
 namespace ie {
 	class Text : public virtual IComponent, public virtual IDrawable, public virtual IUpdatable {

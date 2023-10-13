@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Enums/KeyHandler/KeyHandler.hpp"
+#include "IE/enums/KeyHandler/KeyHandler.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
 #include "../../BasicInteractiveData/BasicInteractiveData.hpp"

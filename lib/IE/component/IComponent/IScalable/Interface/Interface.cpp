@@ -1,7 +1,7 @@
 #include "Interface.hpp"
 
 #include <cmath>
-#include "IE/Modules/yaml-cpp/modules/loadModules.hpp"
+#include "IE/modules/yaml-cpp/modules/loadModules.hpp"
 #include "IE/window/Window/Window.hpp"
 
 namespace ie {

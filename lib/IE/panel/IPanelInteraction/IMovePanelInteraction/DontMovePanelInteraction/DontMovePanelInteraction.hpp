@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IMovePanelInteraction.hpp"
-#include "IE/Interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
+#include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 
 namespace ie {
 	class DontMovePanelInteraction : public virtual IMovePanelInteraction {

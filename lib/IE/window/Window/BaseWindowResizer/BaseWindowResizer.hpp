@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/System/Vector2.hpp>
-#include "IE/Interaction/IInteraction/IInteraction.hpp"
+#include "IE/interaction/IInteraction/IInteraction.hpp"
 
 namespace ie {
 	class Window;

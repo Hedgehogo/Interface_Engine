@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Enums/Corner/Corner.hpp"
+#include "IE/enums/Corner/Corner.hpp"
 #include "../Box.hpp"
 #include "../../IUninteractive/OnlyDrawable/Empty/Empty.hpp"
 #include "../../IScalableLayout/IScalableBackground/IScalableBackground.hpp"

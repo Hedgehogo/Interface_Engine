@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
-#include "IE/Modules/yaml-cpp/yaml.hpp"
+#include "../BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	template<typename T>

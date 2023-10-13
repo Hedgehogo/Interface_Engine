@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Interaction/IInteraction/IInteraction.hpp"
+#include "IE/interaction/IInteraction/IInteraction.hpp"
 #include "PanelActionInitInfo/PanelActionInitInfo.hpp"
 
 namespace ie {

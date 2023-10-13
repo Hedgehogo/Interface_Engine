@@ -1,6 +1,6 @@
 //included into buffer.hpp
 
-#include "IE/Modules/yaml-cpp/shared/value/general/sValue.hpp"
+#include "../shared/value/general/sValue.hpp"
 
 namespace ie {
 	template<typename T, typename... A>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics/RenderTarget.hpp>
-#include "IE/Interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
+#include "IE/interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
 
 namespace ie {
 	class Panel;

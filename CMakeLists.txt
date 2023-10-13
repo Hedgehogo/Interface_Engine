@@ -7,7 +7,7 @@ set(BUILD_SHARED_LIBS ON)
 include(cmake/AllInclude.cmake)
 
 file(GLOB_RECURSE src "lib/*.cpp")
-file(GLOB_RECURSE headers "lib/*.hpp")
+file(GLOB_RECURSE headers "lib/*.hpp" "lib/*.inl")
 
 add_library(${PROJECT_NAME} ${src} ${headers})
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})

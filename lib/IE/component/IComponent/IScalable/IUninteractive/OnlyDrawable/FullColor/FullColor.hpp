@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../OnlyDrawable.hpp"
-#include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "IE/modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
 	class FullColor : public OnlyDrawable {
@@ -46,4 +46,3 @@ namespace ie {
 	template<>
 	bool determine<FullColor>(const YAML::Node& node);
 }
-

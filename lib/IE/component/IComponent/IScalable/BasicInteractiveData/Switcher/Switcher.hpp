@@ -5,7 +5,7 @@
 #include "../../IUninteractive/IUninteractive.hpp"
 #include "../../IScalableLayout/IScalableLayout.hpp"
 #include "IE/component/IDrawable/IDrawable/IDrawable.hpp"
-#include "IE/Enums/KeyHandler/KeyHandler.hpp"
+#include "IE/enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
 	class Switcher : public virtual IScalableLayout, public virtual IDrawable, public virtual IUpdatable {

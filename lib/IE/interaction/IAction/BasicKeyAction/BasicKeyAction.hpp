@@ -2,7 +2,7 @@
 
 #include <SFML/System/Vector2.hpp>
 #include "../IAction.hpp"
-#include "IE/Interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
+#include "../../BasicActionInitInfo/BasicActionInitInfo.hpp"
 
 namespace ie {
 	template<typename T>

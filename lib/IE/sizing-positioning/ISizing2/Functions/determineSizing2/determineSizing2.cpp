@@ -1,5 +1,5 @@
 #include "determineSizing2.hpp"
-#include "../../../../Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
+#include "IE/modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ie {
 	bool determineSizing2(const YAML::Node& node, std::string& type) {

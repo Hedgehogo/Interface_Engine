@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../BoxSwitchTabs.hpp"
-#include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 
 namespace ie {
 	class BaseSwitchTabsAction : public BasicBaseKeyAction<BoxSwitchTabs&> {

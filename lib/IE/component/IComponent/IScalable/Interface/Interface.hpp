@@ -3,10 +3,10 @@
 #include <filesystem>
 
 #include "../IScalable.hpp"
-#include "IE/Panel/IPanelManager/PanelManager/PanelManager.hpp"
-#include "IE/Interaction/InteractionManager/InteractionManager.hpp"
-#include "IE/Interaction/InteractionStack/InteractionStack.hpp"
-#include "IE/Interaction/IAction/WheelAction/WheelAction.hpp"
+#include "IE/panel/IPanelManager/PanelManager/PanelManager.hpp"
+#include "IE/interaction/InteractionManager/InteractionManager.hpp"
+#include "IE/interaction/InteractionStack/InteractionStack.hpp"
+#include "IE/interaction/IAction/WheelAction/WheelAction.hpp"
 
 namespace ie {
 	class Interface : public virtual IScalable, public virtual IDrawable, public virtual IUpdatable {

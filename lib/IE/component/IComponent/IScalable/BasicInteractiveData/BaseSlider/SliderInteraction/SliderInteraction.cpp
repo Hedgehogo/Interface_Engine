@@ -1,5 +1,5 @@
 #include "SliderInteraction.hpp"
-#include "IE/Interaction/IAction/BasicKeyAction/BasicAddInteractionAction/BasicAddBlockInteractionAction/BasicAddBlockInteractionAction.hpp"
+#include "IE/interaction/IAction/BasicKeyAction/BasicAddInteractionAction/BasicAddBlockInteractionAction/BasicAddBlockInteractionAction.hpp"
 
 namespace ie {
 	SliderInteraction::Make::Make(

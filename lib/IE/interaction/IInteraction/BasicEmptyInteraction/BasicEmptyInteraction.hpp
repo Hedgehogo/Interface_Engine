@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IInteraction.hpp"
-#include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "IE/modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
 	template<typename T>

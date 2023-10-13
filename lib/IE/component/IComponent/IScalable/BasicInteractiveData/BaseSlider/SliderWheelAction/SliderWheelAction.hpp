@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IE/Interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
-#include "IE/Interaction/IAction/WheelAction/BaseWheelAction/BaseWheelAction.hpp"
+#include "IE/interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
+#include "IE/interaction/IAction/WheelAction/BaseWheelAction/BaseWheelAction.hpp"
 
 namespace ie {
 	class BaseSlider;

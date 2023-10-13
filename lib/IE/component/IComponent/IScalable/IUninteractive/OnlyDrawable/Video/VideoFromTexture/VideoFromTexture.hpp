@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../OnlyDrawable.hpp"
-#include "IE/Modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
+#include "IE/modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
 
 namespace ie {
 	class VideoFromTexture : public OnlyDrawable {

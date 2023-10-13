@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Modules/yaml-cpp/yaml.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	enum class Location {

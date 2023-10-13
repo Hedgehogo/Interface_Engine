@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Modules/yaml-cpp/shared/shared.hpp"
+#include "IE/modules/yaml-cpp/shared/shared.hpp"
 #include "IE/component/IComponent/IScalable/IUninteractive/IUninteractive.hpp"
 #include "../BasicInteractiveData.hpp"
 #include "SliderInteraction/SliderInteraction.hpp"

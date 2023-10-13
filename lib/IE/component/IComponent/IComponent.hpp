@@ -2,14 +2,14 @@
 
 #include "IE/component/IDrawable/DrawManager/DrawManager.hpp"
 #include "IE/component/IUpdatable/UpdateManager/UpdateManager.hpp"
-#include "IE/Interaction/InteractionStack/InteractionStack.hpp"
-#include "IE/Interaction/InteractionManager/InteractionManager.hpp"
-#include "IE/Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
-#include "IE/Animation/AnimationManager/AnimationManager.hpp"
+#include "IE/interaction/InteractionStack/InteractionStack.hpp"
+#include "IE/interaction/InteractionManager/InteractionManager.hpp"
+#include "IE/modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "IE/animation/AnimationManager/AnimationManager.hpp"
 #include "IE/initialization/make/make.hpp"
-#include "IE/Utils/Reduce/reduce.hpp"
-#include "IE/Utils/Vector/vector.hpp"
-#include "IE/Utils/Vector2/vector2.hpp"
+#include "IE/utils/Reduce/Reduce.hpp"
+#include "IE/utils/Vector/Vector.hpp"
+#include "IE/utils/Vector2/Vector2.hpp"
 #include "InitInfo/InitInfo.hpp"
 
 using uint = unsigned;

@@ -1,6 +1,6 @@
 #include "buffer.hpp"
-#include "IE/Modules/yaml-cpp/shared/vector/iSVector2.hpp"
-#include "IE/Modules/yaml-cpp/shared/list/iSList.hpp"
+#include "../shared/vector/iSVector2.hpp"
+#include "../shared/list/iSList.hpp"
 
 namespace ie {
 	std::vector<std::string> splitByDelimiter(const std::string& str, char delimiter) {

@@ -2,7 +2,7 @@
 
 #include <regex>
 #include "exception/bufferException.hpp"
-#include "IE/Modules/yaml-cpp/shared/iShared.hpp"
+#include "../shared/iShared.hpp"
 #include "../yamlBuilder/general/yamlBuilder.hpp"
 
 namespace ie {

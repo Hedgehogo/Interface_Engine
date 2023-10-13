@@ -1,5 +1,5 @@
 #include "Switcher.hpp"
-#include "IE/Interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
+#include "IE/interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 #include "SwitherAction/SwitcherAction.hpp"
 
 namespace ie {

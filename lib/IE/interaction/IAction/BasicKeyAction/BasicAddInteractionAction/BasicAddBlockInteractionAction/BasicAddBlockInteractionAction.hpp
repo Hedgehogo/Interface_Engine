@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../BasicAddInteractionAction.hpp"
-#include "IE/Interaction/IInteraction/IBasicBlockInteraction/IBasicBlockInteraction.hpp"
+#include "../../../../IInteraction/IBasicBlockInteraction/IBasicBlockInteraction.hpp"
 
 namespace ie {
 	template<typename T>

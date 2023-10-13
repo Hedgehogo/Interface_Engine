@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Modules/exception/baseException.hpp"
+#include "IE/modules/exception/baseException.hpp"
 
 namespace ie {
 	class YamlBuilderDoesNotExistException : public BaseException {

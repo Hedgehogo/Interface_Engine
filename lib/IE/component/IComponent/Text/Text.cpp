@@ -1,7 +1,7 @@
 #include "Text.hpp"
 
 #include <cmath>
-#include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "IE/modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ie {
 	std::vector<BaseCharacter*>::iterator nullBaseCharacterIterator{};

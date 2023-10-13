@@ -2,7 +2,7 @@
 
 #include "../IInteraction.hpp"
 #include "../BasicKeysInteraction/BasicKeysInteraction.hpp"
-#include "../../../Modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "IE/modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 
 namespace ie {
 	namespace detail {

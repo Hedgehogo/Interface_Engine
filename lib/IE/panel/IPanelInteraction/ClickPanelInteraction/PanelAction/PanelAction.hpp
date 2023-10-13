@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 #include "../../PanelActionInitInfo/PanelActionInitInfo.hpp"
 
 namespace ie {

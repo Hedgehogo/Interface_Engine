@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../TextBlock/TextBlock.hpp"
-#include "IE/Interaction/IInteraction/IInteraction.hpp"
+#include "IE/interaction/IInteraction/IInteraction.hpp"
 
 namespace ie {
 	class InteractiveTextBlock : public TextBlock {

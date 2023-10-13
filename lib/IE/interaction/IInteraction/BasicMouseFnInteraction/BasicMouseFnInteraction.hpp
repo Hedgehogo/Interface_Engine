@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Interaction/IInteraction/BasicFnInteraction/BasicFnInteraction.hpp"
+#include "../BasicFnInteraction/BasicFnInteraction.hpp"
 #include "../IBasicMouseInteraction/IBasicMouseInteraction.hpp"
 
 namespace ie {

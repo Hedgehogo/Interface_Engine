@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Box.hpp"
-#include "IE/Interaction/InteractionStack/InteractionStack.hpp"
+#include "IE/interaction/InteractionStack/InteractionStack.hpp"
 
 namespace ie {
 	class BoxBorder : public Box {
@@ -50,4 +50,3 @@ namespace ie {
 		static bool decodePointer(const YAML::Node& node, BoxBorder*& boxWithBorder);
 	};
 }
-

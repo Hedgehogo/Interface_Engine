@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IE/Modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
-#include "IE/Modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
-#include "IE/Interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
+#include "IE/modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "IE/modules/yaml-cpp/shared/value/coefficient/general/sCoefficientValue.hpp"
+#include "IE/interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
 #include "MovableBorderAction/MovableBorderAction.hpp"
 #include "../Box.hpp"
 #include "../../BasicInteractiveData/BasicInteractiveData.hpp"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Interaction/InteractionStack/InteractionStack.hpp"
+#include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
 

@@ -1,5 +1,5 @@
 function(create_tests PROJECT)
-    file(GLOB_RECURSE test_src "test/_test/*.cpp" "test/_test/*.hpp")
+    file(GLOB_RECURSE test_src "test/_test/*.cpp" "test/_test/*.hpp" "test/_test/*.inl")
     add_executable(${PROJECT}_tests ${test_src})
     target_link_libraries(${PROJECT}_tests PUBLIC gtest gtest_main ${PROJECT})
     target_include_directories(${PROJECT}_tests PUBLIC test)

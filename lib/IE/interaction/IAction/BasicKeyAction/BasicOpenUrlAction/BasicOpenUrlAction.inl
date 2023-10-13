@@ -1,4 +1,4 @@
-#include "IE/Utils/network/openUrl/openUrl.hpp"
+#include "IE/utils/network/openUrl/openUrl.hpp"
 
 namespace ie {
 	namespace make_system {

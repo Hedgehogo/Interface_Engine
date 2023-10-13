@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IPositioning.hpp"
-#include "../../../Enums/Location/Location.hpp"
+#include "IE/enums/Location/Location.hpp"
 
 namespace ie {
 	class MatchSidesPositioning : public virtual IPositioning {

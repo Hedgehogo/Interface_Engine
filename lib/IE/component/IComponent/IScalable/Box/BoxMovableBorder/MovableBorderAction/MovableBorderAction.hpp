@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 
 namespace ie {
 	class BoxMovableBorder;
@@ -36,6 +36,5 @@ namespace ie {
 		bool active;
 	};
 }
-
 
 

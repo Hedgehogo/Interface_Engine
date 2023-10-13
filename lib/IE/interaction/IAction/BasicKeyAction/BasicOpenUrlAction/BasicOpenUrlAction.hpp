@@ -1,9 +1,9 @@
 #pragma once
 
-#include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "../BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 #include <string>
-#include "IE/Modules/yaml-cpp/yaml.hpp"
-#include "IE/Modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ie {
 	template<typename T>
