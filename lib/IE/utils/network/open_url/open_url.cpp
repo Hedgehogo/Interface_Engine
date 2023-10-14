@@ -1,4 +1,4 @@
-#include "openUrl.hpp"
+#include "open_url.hpp"
 
 #ifdef WIN32
 #include <windows.h>

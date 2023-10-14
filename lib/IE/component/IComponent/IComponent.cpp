@@ -1,5 +1,5 @@
 #include "IComponent.hpp"
-#include "IE/utils/color/hsvToRgb/hsvToRgb.hpp"
+#include "IE/utils/color/hsv_to_rgb/hsv_to_rgb.hpp"
 
 namespace ie {
 	void IComponent::setPosition(sf::Vector2f position) {

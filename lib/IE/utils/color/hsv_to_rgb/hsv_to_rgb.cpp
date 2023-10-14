@@ -1,4 +1,4 @@
-#include "hsvToRgb.hpp"
+#include "hsv_to_rgb.hpp"
 #include <cmath>
 
 namespace ie {

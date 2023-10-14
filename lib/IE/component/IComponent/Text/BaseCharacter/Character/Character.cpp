@@ -1,5 +1,5 @@
 #include "Character.hpp"
-#include "IE/utils/color/hsvToRgb/hsvToRgb.hpp"
+#include "IE/utils/color/hsv_to_rgb/hsv_to_rgb.hpp"
 
 namespace ie {
 	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BoxPtr<BaseLine>>& lines) :

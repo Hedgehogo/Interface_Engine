@@ -1,6 +1,6 @@
 #include "Caption.hpp"
 #include <algorithm>
-#include "IE/utils/color/hsvToRgb/hsvToRgb.hpp"
+#include "IE/utils/color/hsv_to_rgb/hsv_to_rgb.hpp"
 #include "../OnlyDrawable/Capsule/Capsule.hpp"
 
 using uint = unsigned;
