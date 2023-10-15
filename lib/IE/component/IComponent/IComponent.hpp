@@ -7,9 +7,9 @@
 #include "IE/modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
 #include "IE/animation/AnimationManager/AnimationManager.hpp"
 #include "IE/initialization/make/make.hpp"
-#include "IE\utils\reduce\reduce.hpp"
-#include "IE\utils\vector\vector.hpp"
-#include "IE\utils\vector2\vector2.hpp"
+#include "IE/utils/reduce/reduce.hpp"
+#include "IE/utils/vector/vector.hpp"
+#include "IE/utils/vector2/vector2.hpp"
 #include "InitInfo/InitInfo.hpp"
 
 using uint = unsigned;

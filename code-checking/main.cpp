@@ -80,15 +80,24 @@ void code_checking(Sources& sources, std::vector<std::filesystem::path> include_
 			for(std::size_t line_number = 1; std::getline(file, str); ++line_number) {
 				if(std::regex_search(str, matches, filter)) {
 					
-					std::filesystem::path match{matches.str(1)};
+					std::string match_str{matches.str(1)};
+					std::filesystem::path match{match_str};
 					include_dirs.emplace_back(source_path.parent_path());
 					
 					std::filesystem::path possible_path;
 					
 					bool file_not_found = true;
 					
+					if (match_str.find('\\') != std::string::npos){
+						not_corrected_file = true;
+						auto match_str_temp{match_str};
+						std::replace(match_str_temp.begin(),match_str_temp.end(), '\\', '/');
+						match = std::filesystem::path{match_str_temp};
+						std::cout << match << std::endl;
+					}
+					
 					for(const auto& include_dir: std::vector<std::filesystem::path>{include_dirs.rbegin(), include_dirs.rend()}) {
-						if(auto opt = case_insensitive_file_find(include_dir, match.lexically_normal())) {
+						if(auto opt = case_insensitive_file_find(include_dir, match.lexically_normal(), !not_corrected_file)) {
 							file_not_found = false;
 							if(!std::get<1>(opt.value()))
 								possible_path = std::get<0>(opt.value());
@@ -96,14 +105,14 @@ void code_checking(Sources& sources, std::vector<std::filesystem::path> include_
 					}
 					
 					if (file_not_found) {
-						std::cout << "File: [" << source_path.string() << ":" << line_number << "] included [" << match.string() << "] not found\n";
+						std::cout << "File: [" << source_path.string() << ":" << line_number << "] included [" << match_str << "] not found\n";
 						++count_not_found_includes;
 					}
 					
 					if(!possible_path.empty()){
 						++count_not_corrected_includes;
 						not_corrected_file = true;
-						std::cout << "File: [" << source_path.string() << ":" << line_number << "] includes [" << match.string() << "], the path to which may not work on a case-sensitive operating system.\nPerhaps you meant this file: [" << possible_path.string() << "] -> \n";
+						std::cout << "File: [" << source_path.string() << ":" << line_number << "] includes [" << match_str << "], the path to which may not work on a case-sensitive operating system.\nPerhaps you meant this file: [" << possible_path.string() << "] -> \n";
 						auto optimal_path{possible_path};
 						for(const auto& include_dir: include_dirs){
 							auto possible_optimal_path = possible_path.lexically_relative(include_dir);
@@ -111,7 +120,7 @@ void code_checking(Sources& sources, std::vector<std::filesystem::path> include_
 								optimal_path = possible_optimal_path;
 							}
 						}
-						str.replace(str.find(match.string()), match.string().size(), optimal_path.string());
+						str.replace(str.find(match_str),match_str.size(), optimal_path.string());
 						std::cout << "[" << optimal_path.string() << "]\n";
 					}
 					include_dirs.pop_back();
