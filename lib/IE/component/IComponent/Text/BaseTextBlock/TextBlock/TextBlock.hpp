@@ -10,7 +10,7 @@ namespace ie {
 		struct Make : public BaseTextBlock::Make {
 			std::u32string text;
 			orl::Option<sf::Color> textColor = {};
-			orl::Option<sf::Font*> font = nullptr;
+			orl::Option<sf::Font*> font = {};
 			orl::Option<sf::Text::Style> style = {};
 			std::vector<BoxPtr<BaseLine::Make> > lines = {};
 			orl::Option<uint> size = {};
@@ -22,7 +22,7 @@ namespace ie {
 			Make(
 				std::u32string  text,
 				const orl::Option<sf::Color>& textColor = {},
-				const orl::Option<sf::Font*>& font = nullptr,
+				const orl::Option<sf::Font*>& font = {},
 				const orl::Option<sf::Text::Style>& style = {},
 				std::vector<BoxPtr<BaseLine::Make>>&& lines = {},
 				const orl::Option<uint>& size = {},
@@ -42,7 +42,7 @@ namespace ie {
 		TextBlock(
 			std::u32string text,
 			orl::Option<sf::Color> textColor = {},
-			orl::Option<sf::Font*> font = nullptr,
+			orl::Option<sf::Font*> font = {},
 			orl::Option<sf::Text::Style> style = {},
 			std::vector<BoxPtr<BaseLine>>&& lines = {},
 			orl::Option<uint> size = {},
@@ -66,6 +66,8 @@ namespace ie {
 		std::vector<BaseCharacter*> getCharacters() override;
 		
 		void init(TextBockInitInfo textBlockInitInfo) override;
+		
+		void setKerning(char32_t character) override;
 		
 		bool in(sf::Vector2f mousePosition);
 		

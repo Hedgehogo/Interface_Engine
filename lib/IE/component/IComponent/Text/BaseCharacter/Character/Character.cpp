@@ -2,27 +2,45 @@
 #include "IE/utils/color/hsv_to_rgb/hsv_to_rgb.hpp"
 
 namespace ie {
-	Character::Character(char32_t character, TextVariables& textVariables, std::vector<BoxPtr<BaseLine>>& lines) :
-		character(character), textVariables(textVariables), vertexArray(sf::Quads, 4), selectionVertexArray(sf::Quads, 4), lines(lines) {
-		if(isSpecial() != BaseCharacter::Special::Enter) {
+	template<typename T>
+	void makeRectBonesPosition(sf::Rect<T> rect, sf::VertexArray& vertexArray){
+		vertexArray[0].position = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top}};
+		vertexArray[1].position = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top}};
+		vertexArray[2].position = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top + rect.height}};
+		vertexArray[3].position = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top + rect.height}};
+	}
+	
+	template<typename T>
+	void makeRectBonesTexCoords(sf::Rect<T> rect, sf::VertexArray& vertexArray){
+		vertexArray[0].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top}};
+		vertexArray[1].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top}};
+		vertexArray[2].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top + rect.height}};
+ 		vertexArray[3].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top + rect.height}};
+	}
+	
+	Character::Character(
+		char32_t character,
+		TextVariables& textVariables,
+		std::vector<BoxPtr<BaseLine>>& lines,
+		orl::Option<sf::RenderTarget&> renderTarget
+	) : renderTarget(character == '\n' ? orl::Option<sf::RenderTarget&>{} : renderTarget),
+		character(character),
+		advance(0),
+		kerning(0),
+		textVariables(textVariables),
+		vertexArray(sf::Quads, 4),
+		selectionVertexArray(sf::Quads, 4),
+		lines(lines) {
+		if(renderTarget) {
 			glyph = textVariables.font.some()->getGlyph(character, textVariables.size.some(), textVariables.style.some() & sf::Text::Style::Bold);
-			
+			advance = glyph.advance;
 			texture = textVariables.font.some()->getTexture(textVariables.size.some());
 			
-			vertexArray[0].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left, glyph.textureRect.top});
-			vertexArray[1].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left + glyph.textureRect.width, glyph.textureRect.top});
-			vertexArray[2].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left + glyph.textureRect.width, glyph.textureRect.top + glyph.textureRect.height});
-			vertexArray[3].texCoords = sf::Vector2f(sf::Vector2i{glyph.textureRect.left, glyph.textureRect.top + glyph.textureRect.height});
+			makeRectBonesTexCoords(glyph.textureRect, vertexArray);
 			
-			vertexArray[0].position = {0, 0};
-			vertexArray[1].position = sf::Vector2f{sf::Vector2i{glyph.textureRect.width, 0}};
-			vertexArray[2].position = sf::Vector2f{sf::Vector2i{glyph.textureRect.width, glyph.textureRect.height}};
-			vertexArray[3].position = sf::Vector2f{sf::Vector2i{0, glyph.textureRect.height}};
+			makeRectBonesPosition<int>({0, 0, glyph.textureRect.width, glyph.textureRect.height}, vertexArray);
 			
-			selectionVertexArray[0].position = {0, 0};
-			selectionVertexArray[1].position = {getAdvance(), 0};
-			selectionVertexArray[2].position = {getAdvance(), getHeight()};
-			selectionVertexArray[3].position = {0, getHeight()};
+			makeRectBonesPosition<float>({0, 0, getAdvance(), getHeight()}, selectionVertexArray);
 			
 			if(textVariables.style.some() & sf::Text::Style::Italic) {
 				float italicShear = -0.26794;
@@ -40,10 +58,6 @@ namespace ie {
 				selectionVertexArray[i].color = textVariables.backgroundSelectionColor.some();
 			}
 		}
-	}
-	
-	void Character::init(sf::RenderTarget& renderTarget) {
-		this->renderTarget = &renderTarget;
 	}
 	
 	void Character::setActive(bool active) {
@@ -76,10 +90,10 @@ namespace ie {
 	}
 	
 	void Character::draw(bool selection) {
-		if(isSpecial() != BaseCharacter::Special::Enter) {
+		if(renderTarget) {
 			if(this->selection && selection)
-				renderTarget->draw(selectionVertexArray);
-			renderTarget->draw(vertexArray, &texture);
+				renderTarget.some().draw(selectionVertexArray);
+			renderTarget.some().draw(vertexArray, &texture);
 		}
 	}
 	
@@ -100,16 +114,25 @@ namespace ie {
 	}
 	
 	float Character::getAdvance() {
-		return glyph.advance;
+		return advance;
 	}
 	
 	float Character::getHeight() const {
 		return textVariables.size.some();
 	}
 	
-	void Character::setPosition(const sf::Vector2f position) {
+	void Character::setPosition(sf::Vector2f position) {
+		position.x += kerning;
 		move(position - this->position);
 		BaseCharacter::setPosition(position);
+	}
+	
+	void Character::setKerning(float kerning) {
+		advance -= this->kerning;
+		advance += kerning;
+		this->kerning = kerning;
+		selectionVertexArray[0].position -= {kerning, 0};
+		selectionVertexArray[3].position -= {kerning, 0};
 	}
 	
 	void Character::move(sf::Vector2f position) {
@@ -125,7 +148,6 @@ namespace ie {
 	}
 	
 	bool Character::in(sf::Vector2f mousePosition) {
-		
 		return position.x < mousePosition.x && position.x + getAdvance() > mousePosition.x &&
 			   position.y - getHeight() < mousePosition.y && position.y > mousePosition.y;
 	}

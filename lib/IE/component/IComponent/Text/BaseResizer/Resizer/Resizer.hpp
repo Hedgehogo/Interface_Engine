@@ -24,7 +24,7 @@ namespace ie {
 		void setPosition(sf::Vector2f position) override;
 	
 	protected:
-		virtual void printCharacter(std::vector<BaseCharacter*>::iterator character, float kerning);
+		virtual void printCharacter(std::vector<BaseCharacter*>::iterator character);
 		
 		virtual void porting(std::vector<BaseCharacter*>::iterator endCharacter);
 		

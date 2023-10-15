@@ -5,9 +5,6 @@ namespace ie {
 	BaseCharacter::BaseCharacter() : selection(false), rerender(false) {
 	}
 	
-	void BaseCharacter::init(sf::RenderTarget&) {
-	}
-	
 	bool BaseCharacter::getRerender() const {
 		return rerender;
 	}
@@ -20,6 +17,9 @@ namespace ie {
 		if(this->position != position)
 			rerender = true;
 		this->position = position;
+	}
+	
+	void BaseCharacter::setKerning(float) {
 	}
 	
 	void BaseCharacter::resize(sf::Vector2f position, float) {

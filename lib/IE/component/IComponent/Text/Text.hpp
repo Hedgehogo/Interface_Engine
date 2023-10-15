@@ -9,16 +9,16 @@ namespace ie {
 	class Text : public virtual IComponent, public virtual IDrawable, public virtual IUpdatable {
 	protected:
 		struct Selection {
-			std::vector<BaseCharacter*>::iterator start;
-			std::vector<BaseCharacter*>::iterator end;
+			orl::Option<std::vector<BaseCharacter*>::iterator> start;
+			orl::Option<std::vector<BaseCharacter*>::iterator> end;
 		};
 		
 	public:
 		struct Make : public virtual IComponent::Make {
 			std::vector<BoxPtr<BaseTextBlock::Make> > textBlocks;
+			sf::Font* font;
 			BoxPtr<IUninteractive::Make> background = makeBoxPtr<FullColor::Make>(sf::Color::White);
 			uint size = 14;
-			sf::Font* font = nullptr;
 			sf::Color textColor = sf::Color::Black;
 			sf::Color textSelectionColor = sf::Color::White;
 			sf::Color backgroundSelectionColor = sf::Color::Blue;
@@ -30,9 +30,9 @@ namespace ie {
 			
 			explicit Make(
 				std::vector<BoxPtr<BaseTextBlock::Make> >&& textBlocks,
+				sf::Font* font,
 				BoxPtr<IUninteractive::Make>&& background = makeBoxPtr<FullColor::Make>(sf::Color::White),
 				uint size = 14,
-				sf::Font* font = nullptr,
 				sf::Color textColor = sf::Color::Black,
 				sf::Color textSelectionColor = sf::Color::White,
 				sf::Color backgroundSelectionColor = sf::Color::Blue,
@@ -50,9 +50,9 @@ namespace ie {
 		
 		explicit Text(
 			std::vector<BoxPtr<BaseTextBlock> >&& textBlocks,
+			sf::Font* font,
 			BoxPtr<IUninteractive>&& background = makeBoxPtr<FullColor>(sf::Color::White),
 			int size = 14,
-			sf::Font* font = nullptr,
 			sf::Color textColor = sf::Color::Black,
 			sf::Color textSelectionColor = sf::Color::White,
 			sf::Color backgroundSelectionColor = sf::Color::Blue,
@@ -67,9 +67,9 @@ namespace ie {
 		
 		void setSelection(Selection selection);
 		
-		void setSelectionStart(std::vector<BaseCharacter*>::iterator start);
+		void setSelectionStart(orl::Option<std::vector<BaseCharacter*>::iterator> start);
 		
-		void setSelectionEnd(std::vector<BaseCharacter*>::iterator end);
+		void setSelectionEnd(orl::Option<std::vector<BaseCharacter*>::iterator> end);
 		
 		[[nodiscard]] Selection getSelection() const;
 		
@@ -79,7 +79,7 @@ namespace ie {
 		
 		std::u32string getSelectionText();
 		
-		std::vector<BaseCharacter*>::iterator getCharacter(sf::Vector2f mousePosition);
+		orl::Option<std::vector<BaseCharacter*>::iterator> getCharacter(sf::Vector2f mousePosition);
 		
 		void update() override;
 		
@@ -134,6 +134,4 @@ namespace ie {
 	struct DecodePointer<Text> {
 		static bool decodePointer(const YAML::Node& node, Text*& text);
 	};
-	
-	extern std::vector<BaseCharacter*>::iterator nullBaseCharacterIterator;
 }

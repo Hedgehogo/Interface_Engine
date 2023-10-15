@@ -7,9 +7,7 @@
 namespace ie {
 	class Character : public BaseCharacter {
 	public:
-		Character(char32_t character, TextVariables& textVariables, std::vector<BoxPtr<BaseLine>>& lines);
-		
-		void init(sf::RenderTarget& renderTarget) override;
+		Character(char32_t character, TextVariables& textVariables, std::vector<BoxPtr<BaseLine>>& lines, orl::Option<sf::RenderTarget&> renderTarget);
 		
 		void setActive(bool active) override;
 		
@@ -18,6 +16,8 @@ namespace ie {
 		void setSelection(bool selection) override;
 		
 		void draw(bool selection) override;
+		
+		void setKerning(float kerning) override;
 		
 		void move(sf::Vector2f position) override;
 		
@@ -35,7 +35,7 @@ namespace ie {
 		
 		char32_t getChar() override;
 		
-		void setPosition(const sf::Vector2f position) override;
+		void setPosition(sf::Vector2f position) override;
 	
 		static void setDebug(bool debug);
 		
@@ -45,11 +45,13 @@ namespace ie {
 		static bool debug;
 	
 	protected:
-		sf::RenderTarget* renderTarget;
+		orl::Option<sf::RenderTarget&> renderTarget;
 		
 		char32_t character;
 		
 		sf::Glyph glyph;
+		float advance;
+		float kerning;
 		TextVariables& textVariables;
 		sf::VertexArray vertexArray;
 		sf::VertexArray selectionVertexArray;

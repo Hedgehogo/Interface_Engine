@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
-#include "InitInfo/LineInitInfo.hpp"
+#include "LineInitInfo/LineInitInfo.hpp"
 
 using uint = unsigned;
 
@@ -14,9 +14,9 @@ namespace ie {
 			virtual ~Make() = default;
 		};
 		
-		BaseLine(sf::PrimitiveType type, std::size_t vertexCount, sf::Color color, LineInitInfo initInfo);
+		BaseLine(sf::PrimitiveType type, std::size_t vertexCount, orl::Option<sf::Color> color, LineInitInfo initInfo);
 		
-		BaseLine(sf::PrimitiveType type, std::size_t vertexCount = 0, sf::Color color = sf::Color{255, 255, 255, 0});
+		BaseLine(sf::PrimitiveType type, std::size_t vertexCount = 0, orl::Option<sf::Color> color = {});
 		
 		virtual void init(LineInitInfo initInfo);
 		

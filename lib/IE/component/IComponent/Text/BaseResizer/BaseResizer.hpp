@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../BaseCharacter/BaseCharacter.hpp"
-#include "InitInfo/ResizerInitInfo.hpp"
+#include "ResizerInitInfo/ResizerInitInfo.hpp"
 
 namespace ie {
 	class BaseResizer {

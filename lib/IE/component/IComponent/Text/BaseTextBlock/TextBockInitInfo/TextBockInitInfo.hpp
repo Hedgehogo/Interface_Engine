@@ -7,6 +7,12 @@
 
 namespace ie {
 	struct TextBockInitInfo : public InitInfo{
+		struct TextVariables{
+			sf::Color textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor;
+			sf::Font* font;
+			sf::Text::Style style;
+			uint size;
+		};
 		sf::RenderTarget& textRenderTarget;
 		DrawManager& textDrawManager;
 		InteractionManager& textInteractionManager;

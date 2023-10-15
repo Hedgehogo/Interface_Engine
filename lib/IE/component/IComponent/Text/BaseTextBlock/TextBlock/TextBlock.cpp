@@ -45,14 +45,14 @@ namespace ie {
 	TextBlock::TextBlock(Make&& make, TextBockInitInfo initInfo) :
 		BaseTextBlock(
 			{
-				make.textColor.some_or(initInfo.textVariables.textColor.some()),
-				make.textSelectionColor.some_or(initInfo.textVariables.textSelectionColor.some()),
-				make.backgroundSelectionColor.some_or(initInfo.textVariables.backgroundSelectionColor.some()),
-				make.inactiveTextSelectionColor.some_or(initInfo.textVariables.inactiveTextSelectionColor.some()),
-				make.inactiveBackgroundSelectionColor.some_or(initInfo.textVariables.inactiveBackgroundSelectionColor.some()),
-				make.font.some_or(initInfo.textVariables.font.some()),
-				make.style.some_or(initInfo.textVariables.style.some()),
-				make.size.some_or(initInfo.textVariables.size.some()),
+				make.textColor.some_or(initInfo.textVariables.textColor),
+				make.textSelectionColor.some_or(initInfo.textVariables.textSelectionColor),
+				make.backgroundSelectionColor.some_or(initInfo.textVariables.backgroundSelectionColor),
+				make.inactiveTextSelectionColor.some_or(initInfo.textVariables.inactiveTextSelectionColor),
+				make.inactiveBackgroundSelectionColor.some_or(initInfo.textVariables.inactiveBackgroundSelectionColor),
+				make.font.some_or(initInfo.textVariables.font),
+				make.style.some_or(initInfo.textVariables.style),
+				make.size.some_or(initInfo.textVariables.size),
 			}
 		),
 		lines(
@@ -72,11 +72,7 @@ namespace ie {
 		text(std::move(make.text)) {
 		textCharacters.resize(text.size());
 		for(std::size_t i = 0; i < textCharacters.size(); ++i) {
-			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines);
-		}
-		
-		for(auto& character: textCharacters) {
-			character->init(initInfo.textRenderTarget);
+			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines, initInfo.textRenderTarget);
 		}
 	}
 	
@@ -108,10 +104,6 @@ namespace ie {
 	}
 	
 	void TextBlock::init(TextBockInitInfo textBlockInitInfo) {
-		for(auto& character: textCharacters) {
-			character->init(textBlockInitInfo.renderTarget);
-		}
-		
 		for(auto& line: lines) {
 			line->init(
 				{
@@ -147,7 +139,7 @@ namespace ie {
 		
 		textCharacters.resize(text.size());
 		for(std::size_t i = 0; i < textCharacters.size(); ++i) {
-			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines);
+			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines, orl::Option<sf::RenderTarget&> {});
 		}
 	}
 	
@@ -174,6 +166,13 @@ namespace ie {
 				result = false;
 		}
 		return result;
+	}
+	
+	void TextBlock::setKerning(char32_t character) {
+		for(auto& textCharacter : textCharacters){
+			textCharacter->setKerning(textVariables.font.some()->getKerning(character, textCharacter->getChar(), textVariables.size.some()));
+			character = textCharacter->getChar();
+		}
 	}
 	
 	TextBlock* TextBlock::copy() {
