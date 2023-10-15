@@ -27,10 +27,10 @@ namespace ie {
 	
 	BoxMovableBorder::BoxMovableBorder(Make&& make, InitInfo initInfo) :
 		Box(make.minSize),
-		interactive(makeBoxPtr<BasicOneKeyInteraction<BoxMovableBorder&>::Make>(
-			makeBoxPtr<BasicAddBlockInteractionAction<BoxMovableBorder&>::Make>(
-				makeBoxPtr<BasicOneKeyInteraction<BoxMovableBorder&>::Make, BasicPressedInteraction<BoxMovableBorder&>::Make>(
-					makeBoxPtr<MovableBorderAction::Make>(), make.key
+		interactive(make_box_ptr<BasicOneKeyInteraction<BoxMovableBorder&>::Make>(
+			make_box_ptr<BasicAddBlockInteractionAction<BoxMovableBorder&>::Make>(
+				make_box_ptr<BasicOneKeyInteraction<BoxMovableBorder&>::Make, BasicPressedInteraction<BoxMovableBorder&>::Make>(
+					make_box_ptr<MovableBorderAction::Make>(), make.key
 				)
 			), make.key
 		), initInfo, *this),
@@ -55,10 +55,10 @@ namespace ie {
 		sf::Vector2f minSize
 	) :
 		Box(minSize),
-		interactive(makeBoxPtr<BasicOneKeyInteraction<BoxMovableBorder&> >(
-			makeBoxPtr<BasicAddBlockInteractionAction<BoxMovableBorder&> >(
-				makeBoxPtr<BasicPressedInteraction<BoxMovableBorder&> >(
-					makeBoxPtr<MovableBorderAction>(), Key::MouseLeft
+		interactive(make_box_ptr<BasicOneKeyInteraction<BoxMovableBorder&> >(
+			make_box_ptr<BasicAddBlockInteractionAction<BoxMovableBorder&> >(
+				make_box_ptr<BasicPressedInteraction<BoxMovableBorder&> >(
+					make_box_ptr<MovableBorderAction>(), Key::MouseLeft
 				)
 			), Key::MouseLeft
 		)),

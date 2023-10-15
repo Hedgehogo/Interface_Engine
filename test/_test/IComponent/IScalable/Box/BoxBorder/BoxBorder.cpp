@@ -11,12 +11,12 @@ TEST(IComponent, BoxBorder) {
 		{
 			ie::makeVector(
 				ie::makeVector(
-					ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
-					ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
+					ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+					ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
 				),
 				ie::makeVector(
-					ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Blue),
-					ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Yellow)
+					ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Blue),
+					ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Yellow)
 				)
 			)
 		}, data.makeInitInfo()

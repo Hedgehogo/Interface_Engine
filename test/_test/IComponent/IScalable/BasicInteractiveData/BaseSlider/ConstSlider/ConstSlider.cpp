@@ -10,8 +10,8 @@ TEST(IComponent, ConstSlider) {
 	auto value = std::make_shared<ie::SRVec2f>(sf::Vector2f{0.f, 0.f});
 	ie::ConstSlider constSlider{
 		{
-			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Green),
-			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Red),
+			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Red),
 			value
 		}, data.makeInitInfo()
 	};

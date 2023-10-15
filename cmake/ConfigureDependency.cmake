@@ -3,9 +3,9 @@ function(configure_dependency PROJECT)
             sfml-graphics sfml-system sfml-window
             yaml-cpp
             libcurl
-            localisation
-            Box_Ptr
-            openLib
+            localisation-cpp
+            box-ptr
+            open-lib
             option_result_cpp
     )
 

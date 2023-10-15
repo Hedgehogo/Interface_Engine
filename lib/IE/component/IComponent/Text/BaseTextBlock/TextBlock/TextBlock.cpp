@@ -36,9 +36,9 @@ namespace ie {
 	
 	std::vector<BoxPtr<BaseLine>>&& generateLines(std::vector<BoxPtr<BaseLine>>&& lines, sf::Text::Style style) {
 		if(style & sf::Text::Underlined)
-			lines.emplace_back(makeBoxPtr<Underline>());
+			lines.emplace_back(make_box_ptr<Underline>());
 		if(style & sf::Text::StrikeThrough)
-			lines.emplace_back(makeBoxPtr<StrikeThrough>());
+			lines.emplace_back(make_box_ptr<StrikeThrough>());
 		return std::move(lines);
 	}
 	
@@ -72,7 +72,7 @@ namespace ie {
 		text(std::move(make.text)) {
 		textCharacters.resize(text.size());
 		for(std::size_t i = 0; i < textCharacters.size(); ++i) {
-			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines, initInfo.textRenderTarget);
+			textCharacters[i] = make_box_ptr<Character>(text[i], textVariables, this->lines, initInfo.textRenderTarget);
 		}
 	}
 	
@@ -139,7 +139,7 @@ namespace ie {
 		
 		textCharacters.resize(text.size());
 		for(std::size_t i = 0; i < textCharacters.size(); ++i) {
-			textCharacters[i] = makeBoxPtr<Character>(text[i], textVariables, this->lines, orl::Option<sf::RenderTarget&> {});
+			textCharacters[i] = make_box_ptr<Character>(text[i], textVariables, this->lines, orl::Option<sf::RenderTarget&> {});
 		}
 	}
 	

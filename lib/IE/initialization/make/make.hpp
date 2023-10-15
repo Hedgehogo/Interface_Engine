@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <algorithm>
-#include <Box_Ptr/boxPtr.hpp>
+#include <box-ptr/BoxPtr.hpp>
 
 namespace ie {
 	using namespace bp;

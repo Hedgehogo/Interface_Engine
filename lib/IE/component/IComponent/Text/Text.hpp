@@ -17,7 +17,7 @@ namespace ie {
 		struct Make : public virtual IComponent::Make {
 			std::vector<BoxPtr<BaseTextBlock::Make> > textBlocks;
 			sf::Font* font;
-			BoxPtr<IUninteractive::Make> background = makeBoxPtr<FullColor::Make>(sf::Color::White);
+			BoxPtr<IUninteractive::Make> background = make_box_ptr<FullColor::Make>(sf::Color::White);
 			uint size = 14;
 			sf::Color textColor = sf::Color::Black;
 			sf::Color textSelectionColor = sf::Color::White;
@@ -25,13 +25,13 @@ namespace ie {
 			sf::Color inactiveTextSelectionColor = sf::Color::Black;
 			sf::Color inactiveBackgroundSelectionColor = {150, 150, 150};
 			sf::Text::Style style = {};
-			BoxPtr<BaseResizer::Make> resizer = makeBoxPtr<Resizer::Make>(1.15f, BaseResizer::Align::Left);
-			BoxPtr<IBasicInteraction<Text&>::Make> textInteraction = makeBoxPtr<BasicEmptyInteraction<Text&>::Make>();
+			BoxPtr<BaseResizer::Make> resizer = make_box_ptr<Resizer::Make>(1.15f, BaseResizer::Align::Left);
+			BoxPtr<IBasicInteraction<Text&>::Make> textInteraction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>();
 			
 			explicit Make(
 				std::vector<BoxPtr<BaseTextBlock::Make> >&& textBlocks,
 				sf::Font* font,
-				BoxPtr<IUninteractive::Make>&& background = makeBoxPtr<FullColor::Make>(sf::Color::White),
+				BoxPtr<IUninteractive::Make>&& background = make_box_ptr<FullColor::Make>(sf::Color::White),
 				uint size = 14,
 				sf::Color textColor = sf::Color::Black,
 				sf::Color textSelectionColor = sf::Color::White,
@@ -39,8 +39,8 @@ namespace ie {
 				sf::Color inactiveTextSelectionColor = sf::Color::Black,
 				sf::Color inactiveBackgroundSelectionColor = {150, 150, 150},
 				sf::Text::Style style = {},
-				BoxPtr<BaseResizer::Make>&& resizer = makeBoxPtr<Resizer::Make>(1.15f, BaseResizer::Align::Left),
-				BoxPtr<IBasicInteraction<Text&>::Make>&& textInteraction = makeBoxPtr<BasicEmptyInteraction<Text&>::Make>()
+				BoxPtr<BaseResizer::Make>&& resizer = make_box_ptr<Resizer::Make>(1.15f, BaseResizer::Align::Left),
+				BoxPtr<IBasicInteraction<Text&>::Make>&& textInteraction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>()
 			);
 			
 			Text* make(InitInfo initInfo) override;
@@ -51,7 +51,7 @@ namespace ie {
 		explicit Text(
 			std::vector<BoxPtr<BaseTextBlock> >&& textBlocks,
 			sf::Font* font,
-			BoxPtr<IUninteractive>&& background = makeBoxPtr<FullColor>(sf::Color::White),
+			BoxPtr<IUninteractive>&& background = make_box_ptr<FullColor>(sf::Color::White),
 			int size = 14,
 			sf::Color textColor = sf::Color::Black,
 			sf::Color textSelectionColor = sf::Color::White,
@@ -59,8 +59,8 @@ namespace ie {
 			sf::Color inactiveTextSelectionColor = sf::Color::Black,
 			sf::Color inactiveBackgroundSelectionColor = {150, 150, 150},
 			sf::Text::Style style = {},
-			BoxPtr<BaseResizer>&& resizer = makeBoxPtr<Resizer>(1.15f, BaseResizer::Align::Left),
-			BoxPtr<IBasicInteraction<Text&>>&& textInteraction = makeBoxPtr<BasicEmptyInteraction<Text&>>()
+			BoxPtr<BaseResizer>&& resizer = make_box_ptr<Resizer>(1.15f, BaseResizer::Align::Left),
+			BoxPtr<IBasicInteraction<Text&>>&& textInteraction = make_box_ptr<BasicEmptyInteraction<Text&>>()
 		);
 		
 		void init(InitInfo initInfo) override;

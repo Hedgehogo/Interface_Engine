@@ -10,8 +10,8 @@ TEST(IComponent, BoxSwitch) {
 	auto value = std::make_shared<ie::Sbool>(false);
 	ie::BoxSwitch boxSwitch{
 		{
-			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
-			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
+			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
 			value
 		}, data.makeInitInfo()
 	};

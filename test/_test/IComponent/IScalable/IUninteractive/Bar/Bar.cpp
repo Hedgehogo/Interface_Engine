@@ -9,8 +9,8 @@ TEST(IComponent, Bar) {
 	
 	ie::Bar bar{
 		{
-			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Yellow),
-			ie::makeBoxPtr<ie::IUninteractive::Make, ie::Capsule::Make>(sf::Color::Red),
+			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Yellow),
+			ie::make_box_ptr<ie::IUninteractive::Make, ie::Capsule::Make>(sf::Color::Red),
 			0.2f
 		}, data.makeInitInfo()
 	};

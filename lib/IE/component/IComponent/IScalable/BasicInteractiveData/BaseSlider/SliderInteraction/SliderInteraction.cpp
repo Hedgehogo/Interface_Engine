@@ -31,9 +31,9 @@ namespace ie {
 	SliderInteraction::SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> initInfo) :
 		BasicOneKeyInteraction<BaseSlider&>(
 			{
-				makeBoxPtr<BasicAddBlockInteractionAction<BaseSlider&>::Make>(
-					makeBoxPtr<BasicOneKeyInteraction<BaseSlider&>::Make, BasicPressedInteraction<BaseSlider&>::Make>(
-						makeBoxPtr<SliderAction::Make>(make.division), make.key
+				make_box_ptr<BasicAddBlockInteractionAction<BaseSlider&>::Make>(
+					make_box_ptr<BasicOneKeyInteraction<BaseSlider&>::Make, BasicPressedInteraction<BaseSlider&>::Make>(
+						make_box_ptr<SliderAction::Make>(make.division), make.key
 					)
 				), make.key
 			}, initInfo
@@ -49,9 +49,9 @@ namespace ie {
 		sf::Vector2f wheelSensitivity
 	) :
 		BasicOneKeyInteraction<BaseSlider&>(
-			makeBoxPtr<BasicAddBlockInteractionAction<BaseSlider&> >(
-				makeBoxPtr<BasicPressedInteraction<BaseSlider&> >(
-					makeBoxPtr<SliderAction>(division), key
+			make_box_ptr<BasicAddBlockInteractionAction<BaseSlider&> >(
+				make_box_ptr<BasicPressedInteraction<BaseSlider&> >(
+					make_box_ptr<SliderAction>(division), key
 				)
 			), key
 		),

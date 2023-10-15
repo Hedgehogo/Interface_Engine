@@ -66,7 +66,7 @@ namespace ie {
 	
 	template<typename T>
 	BasicMouseFnInteraction<T> BasicMouseFnInteraction<T>::debug{
-		makeBoxPtr<BasicKeyAction<T>, BasicFnKeyAction<T> >(
+		make_box_ptr<BasicKeyAction<T>, BasicFnKeyAction<T> >(
 			[](sf::Vector2i) {
 				std::cout << "sl";
 			},
@@ -80,7 +80,7 @@ namespace ie {
 				std::cout << "nl";
 			}
 		),
-		makeBoxPtr<BasicKeyAction<T>, BasicFnKeyAction<T> >(
+		make_box_ptr<BasicKeyAction<T>, BasicFnKeyAction<T> >(
 			[](sf::Vector2i) {
 				std::cout << "sr" << std::endl;
 			},

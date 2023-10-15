@@ -59,16 +59,16 @@ function(dependency_management PROJECT)
             FIND_PACKAGE_ARGS NAMES CURL
     )
     FetchContent_Declare(
-            localisation
-            GIT_REPOSITORY https://github.com/Andrewkoro105/Localisation_System.git
+            localisation-cpp
+            GIT_REPOSITORY https://github.com/Andrewkoro105/localisation-cpp.git
             GIT_TAG master
-            FIND_PACKAGE_ARGS NAMES localisation
+            FIND_PACKAGE_ARGS NAMES localisation-cpp
     )
     FetchContent_Declare(
-            Box_Ptr
-            GIT_REPOSITORY https://github.com/Andrewkoro105/Box_Ptr.git
+            box-ptr
+            GIT_REPOSITORY https://github.com/Andrewkoro105/box-ptr.git
             GIT_TAG master
-            FIND_PACKAGE_ARGS NAMES Box_Ptr
+            FIND_PACKAGE_ARGS NAMES box-ptr
     )
     FetchContent_Declare(
             option_result_cpp
@@ -76,7 +76,7 @@ function(dependency_management PROJECT)
             GIT_TAG main
             FIND_PACKAGE_ARGS NAMES option_result_cpp
     )
-    FetchContent_MakeAvailable(SFML curl localisation Box_Ptr option_result_cpp)
+    FetchContent_MakeAvailable(SFML curl localisation-cpp box-ptr option_result_cpp)
 
     connect_yaml_cpp()
     connect_ImageMagick()

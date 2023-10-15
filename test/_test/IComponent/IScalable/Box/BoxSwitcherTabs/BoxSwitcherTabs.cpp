@@ -10,8 +10,8 @@ TEST(IComponent, BoxSwitcherTabs) {
 	ie::BoxSwitcherTabs boxSwitcherTabs{
 		{
 			ie::makeVector(
-				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
-				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
+				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
 			),
 			std::make_shared<ie::Sint>(0)
 		}, data.makeInitInfo()

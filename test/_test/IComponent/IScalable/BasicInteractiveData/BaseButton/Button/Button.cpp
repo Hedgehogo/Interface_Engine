@@ -10,8 +10,8 @@ TEST(IComponent, Button) {
 	
 	ie::Button button{
 		{
-			ie::makeBoxPtr<ie::FullColor::Make>(sf::Color::Green),
-			ie::makeBoxPtr<ie::EmptyInteraction::Make>(),
+			ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::EmptyInteraction::Make>(),
 		}, data.makeInitInfo()
 	};
 	data.interactionManager.update({});

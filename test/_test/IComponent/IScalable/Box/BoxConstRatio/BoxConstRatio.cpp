@@ -9,9 +9,9 @@ TEST(IComponent, BoxConstRatio) {
 	
 	ie::BoxConstRatio boxConstRatio{
 		{
-			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
-			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
-			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Blue)
+			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
+			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Blue)
 		},
 		data.makeInitInfo()
 	};

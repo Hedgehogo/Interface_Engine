@@ -9,8 +9,8 @@ TEST(IComponent, BoxConstBezel) {
 	
 	ie::BoxConstBezel boxConstBezel{
 		{
-			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
-			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Red),
+			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Red),
 			1
 		},
 		data.makeInitInfo()

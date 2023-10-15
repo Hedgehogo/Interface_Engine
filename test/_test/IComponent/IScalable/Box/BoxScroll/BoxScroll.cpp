@@ -9,7 +9,7 @@ TEST(IComponent, BoxScroll) {
 	
 	ie::BoxScroll boxScroll{
 		ie::BoxScroll::Make{
-			ie::makeBoxPtr<ie::IComponent::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::IComponent::Make, ie::FullColor::Make>(sf::Color::Green),
 			std::make_shared<ie::SRVec2f>(sf::Vector2f{})
 		},
 		data.makeInitInfo()

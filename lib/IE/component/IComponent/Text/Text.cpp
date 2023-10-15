@@ -340,7 +340,7 @@ namespace ie {
 			convDef(node["inactive-background-selection-color"],sf::Color{150, 150, 150}),
 			convDef<sf::Text::Style>(node["style"], {}),
 			convDefBoxPtr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::Left),
-			node["text-interaction"] ? node["text-interaction"].as < BoxPtr < IBasicInteraction<Text&>>>() : makeBoxPtr<BasicEmptyInteraction<Text&>>()};
+			node["text-interaction"] ? node["text-interaction"].as < BoxPtr < IBasicInteraction<Text&>>>() : make_box_ptr<BasicEmptyInteraction<Text&>>()};
 		return true;
 	}
 	

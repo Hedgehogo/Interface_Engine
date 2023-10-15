@@ -49,7 +49,7 @@ namespace ie {
 	
 	template<typename B, typename T, typename ...Arg>
 	BoxPtr<B> convertDefaultBoxPtr(const YAML::Node& node, Arg&&... arg) {
-		return node.IsDefined() ? node.as<BoxPtr<B> >() : makeBoxPtr<T>(arg...);
+		return node.IsDefined() ? node.as<BoxPtr<B> >() : make_box_ptr<T>(arg...);
 	}
 	
 	template<typename B, typename T, typename ...Arg>

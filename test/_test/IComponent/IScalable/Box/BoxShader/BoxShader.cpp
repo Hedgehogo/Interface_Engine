@@ -11,7 +11,7 @@ TEST(IComponent, BoxShader) {
 	shader->loadFromFile("test-src/BoxShader.glsl", sf::Shader::Type::Fragment);
 	ie::BoxShader boxShader{
 		{
-			ie::makeBoxPtr<ie::IScalable::Make, ie::Capsule::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::IScalable::Make, ie::Capsule::Make>(sf::Color::Green),
 			new sf::Shader{},
 			ie::BoxShader::Transmission::Texture
 		},

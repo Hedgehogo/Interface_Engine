@@ -1,6 +1,6 @@
 #include "loadCModules.hpp"
 
-#include <openLib/openLib.hpp>
+#include <open-lib/DynamicLibrary.hpp>
 #include <yaml-cpp/yaml.h>
 #include <curl/curl.h>
 #include <iostream>
@@ -48,8 +48,8 @@ namespace ie {
 			
 			if(auto paths = cLibs["path"]; paths) {
 				for(const auto& path: paths) {
-					openLib::DynamicLibrary dl{cLibDir + path.as<std::string>()};
-					dl.getSim <void(*)(int argc, char * argv[])>("init")(argc, argv);
+					open_lib::DynamicLibrary dl{cLibDir + path.as<std::string>()};
+					dl.get_sim <void(*)(int argc, char * argv[])>("init")(argc, argv);
 				}
 			}
 			if(auto paths = cLibs["download"]; paths) {
@@ -81,8 +81,8 @@ namespace ie {
 						download_file(url, name);
 					}
 					
-					openLib::DynamicLibrary dl{name.erase(name.rfind('.'))};
-					dl.getSim < void(*)
+					open_lib::DynamicLibrary dl{name.erase(name.rfind('.'))};
+					dl.get_sim < void(*)
 					(int
 					argc, char * argv[])>("init")(argc, argv);
 				}

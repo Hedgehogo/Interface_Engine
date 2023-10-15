@@ -17,12 +17,12 @@ namespace ie {
 		struct Make : public virtual IScalable::Make {
 			BoxPtr<IScalable::Make> object;
 			AnimationManager animationManager = AnimationManager{{}};
-			BoxPtr<InteractionStack> interactionStack = makeBoxPtr<InteractionStack>();
+			BoxPtr<InteractionStack> interactionStack = make_box_ptr<InteractionStack>();
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
 				AnimationManager animationManager = AnimationManager{{}},
-				BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+				BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
 			);
 			
 			Interface* make(InitInfo initInfo) override;
@@ -33,34 +33,34 @@ namespace ie {
 		explicit Interface(
 			BoxPtr<IScalable>&& object,
 			AnimationManager animationManager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+			BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
 		);
 		
 		explicit Interface(
 			const std::string& filePath,
 			AnimationManager animationManager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+			BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
 		);
 		
 		explicit Interface(
 			sf::RenderWindow& window,
 			BoxPtr<IScalable>&& object,
 			AnimationManager animationManager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+			BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
 		);
 		
 		explicit Interface(
 			sf::RenderWindow& window,
 			const std::string& filePath,
 			AnimationManager animationManager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+			BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
 		);
 		
 		explicit Interface(
 			sf::RenderWindow& window,
 			BoxPtr<IScalable::Make>&& object,
 			AnimationManager animationManager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interactionStack = makeBoxPtr<InteractionStack>()
+			BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
 		);
 		
 		void init(InitInfo initInfo) override;

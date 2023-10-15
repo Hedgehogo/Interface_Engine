@@ -27,7 +27,7 @@ namespace ie {
 	) :
 		object(std::move(object)),
 		hideInteraction(std::move(hideInteraction)),
-		moveInteraction(makeBoxPtr<DontMovePanelInteraction::Make>()),
+		moveInteraction(make_box_ptr<DontMovePanelInteraction::Make>()),
 		sizing(std::move(sizing)),
 		positioning(std::move(positioning)),
 		displayed(displayed) {

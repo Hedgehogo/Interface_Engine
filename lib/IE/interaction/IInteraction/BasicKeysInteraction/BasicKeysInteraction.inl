@@ -90,7 +90,7 @@ namespace ie {
 	template<typename T>
 	bool DecodePointer<BasicKeysInteraction<T> >::decodePointer(const YAML::Node& node, BasicKeysInteraction<T> *& keysInteraction) {
 		if(node.IsScalar()) {
-			keysInteraction = new BasicKeysInteraction<T>{makeBoxPtr<BasicKeyAction<T>, BasicOpenUrlAction<T> >(node.as<std::string>()), {Key::MouseLeft}};
+			keysInteraction = new BasicKeysInteraction<T>{make_box_ptr<BasicKeyAction<T>, BasicOpenUrlAction<T> >(node.as<std::string>()), {Key::MouseLeft}};
 			return true;
 		}
 		

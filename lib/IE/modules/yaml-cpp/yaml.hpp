@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <yaml-cpp/yaml.h>
 #include <functional>
-#include <Box_Ptr/boxPtr.hpp>
+#include <box-ptr/BoxPtr.hpp>
 #include <optional>
 #include <option_result/option_result.hpp>
 

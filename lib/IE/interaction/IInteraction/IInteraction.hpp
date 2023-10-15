@@ -4,7 +4,7 @@
 #include "../IAction/BasicKeyAction/BasicFnKeyAction/BasicFnKeyAction.hpp"
 #include "../BasicActionInitInfo/BasicActionInitInfo.hpp"
 #include "IE/initialization/make/make.hpp"
-#include <Box_Ptr/boxPtr.hpp>
+#include <box-ptr/BoxPtr.hpp>
 
 namespace ie {
 	using namespace bp;

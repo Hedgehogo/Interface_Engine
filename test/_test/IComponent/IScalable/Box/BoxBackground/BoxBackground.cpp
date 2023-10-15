@@ -10,8 +10,8 @@ TEST(IComponent, BoxBackground) {
 	
 	ie::BoxBackground boxBackground{
 		{
-			ie::makeBoxPtr<ie::IScalable::Make, ie::Capsule::Make>(sf::Color::Green),
-			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Red)
+			ie::make_box_ptr<ie::IScalable::Make, ie::Capsule::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Red)
 		},
 		data.makeInitInfo()
 	};

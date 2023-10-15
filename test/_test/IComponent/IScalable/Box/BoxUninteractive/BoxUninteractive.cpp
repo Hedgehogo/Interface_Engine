@@ -9,7 +9,7 @@ TEST(IComponent, BoxUninteractive) {
 	
 	ie::BoxUninteractive boxUninteractive{
 		{
-			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green)
+			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green)
 		},
 		data.makeInitInfo()
 	};

@@ -9,14 +9,14 @@ TEST(IComponent, ButtonPanel) {
 	
 	ie::ButtonPanel buttonPanel{
 		{
-			ie::makeBoxPtr<ie::Panel::Make>(
-				ie::makeBoxPtr<ie::FullColor::Make>(sf::Color::Red),
-				ie::makeBoxPtr<ie::PointingHidePanelInteraction::Make>(),
-				ie::makeBoxPtr<ie::Sizing2::Make>(sf::Vector2f{10, 10}),
-				ie::makeBoxPtr<ie::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
+			ie::make_box_ptr<ie::Panel::Make>(
+				ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
+				ie::make_box_ptr<ie::PointingHidePanelInteraction::Make>(),
+				ie::make_box_ptr<ie::Sizing2::Make>(sf::Vector2f{10, 10}),
+				ie::make_box_ptr<ie::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
 			),
-			ie::makeBoxPtr<ie::PointingDisplayPanelInteraction::Make>(),
-			ie::makeBoxPtr<ie::FullColor::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::PointingDisplayPanelInteraction::Make>(),
+			ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Green),
 		}, data.makeInitInfo()
 	};
 	data.interactionManager.update({});

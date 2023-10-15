@@ -53,7 +53,7 @@ namespace ie {
 		BaseSlider(
 			std::move(make.slider),
 			std::move(make.background),
-			makeBoxPtr<SliderInteraction::Make>(
+			make_box_ptr<SliderInteraction::Make>(
 				make.key, make.division, make.wheelHorizontal, make.wheelRelativity, make.wheelSensitivity
 			),
 			make.value,
@@ -76,7 +76,7 @@ namespace ie {
 		BaseSlider(
 			std::move(slider),
 			std::move(background),
-			makeBoxPtr<SliderInteraction>(
+			make_box_ptr<SliderInteraction>(
 				key, wheelHorizontal, wheelRelativity, wheelSensitivity
 			),
 			value
@@ -97,7 +97,7 @@ namespace ie {
 		BaseSlider(
 			std::move(slider),
 			std::move(background),
-			makeBoxPtr<SliderInteraction>(
+			make_box_ptr<SliderInteraction>(
 				key, division, wheelHorizontal
 			),
 			value

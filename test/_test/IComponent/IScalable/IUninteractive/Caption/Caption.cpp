@@ -16,7 +16,7 @@ TEST(IComponent, Caption) {
 	ie::Caption caption{
 		{
 			sf::String{ie::u32stringToUint32String(str)},
-			ie::makeBoxPtr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Green),
 			font
 		}, data.makeInitInfo()
 	};

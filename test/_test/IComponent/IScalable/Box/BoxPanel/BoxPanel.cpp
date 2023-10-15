@@ -9,12 +9,12 @@ TEST(IComponent, BoxPanel) {
 	
 	ie::BoxPanel boxPanel{
 		{
-			ie::makeBoxPtr<ie::ConstPanel::Make>(
-				ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
-				ie::makeBoxPtr<ie::ISizing2::Make, ie::Sizing2::Make>(sf::Vector2f{10, 10}),
-				ie::makeBoxPtr<ie::IPositioning2::Make, ie::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
+			ie::make_box_ptr<ie::ConstPanel::Make>(
+				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
+				ie::make_box_ptr<ie::ISizing2::Make, ie::Sizing2::Make>(sf::Vector2f{10, 10}),
+				ie::make_box_ptr<ie::IPositioning2::Make, ie::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
 			),
-			ie::makeBoxPtr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 		}, data.makeInitInfo()
 	};
 	data.interactionManager.update({});

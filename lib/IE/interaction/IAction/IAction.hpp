@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Box_Ptr/boxPtr.hpp>
+#include <box-ptr/BoxPtr.hpp>
 
 using namespace bp;
 
