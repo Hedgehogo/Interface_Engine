@@ -2,7 +2,7 @@
 
 #include "../OnlyDrawable.hpp"
 #include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/determine/Determine.hpp"
+#include "IE\modules\yaml-cpp\yaml-builder\determine\determine.hpp"
 
 namespace ie {
 	class Sprite : public OnlyDrawable {
