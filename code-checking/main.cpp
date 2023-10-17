@@ -93,7 +93,6 @@ void code_checking(Sources& sources, std::vector<std::filesystem::path> include_
 						auto match_str_temp{match_str};
 						std::replace(match_str_temp.begin(),match_str_temp.end(), '\\', '/');
 						match = std::filesystem::path{match_str_temp};
-						std::cout << match << std::endl;
 					}
 					
 					for(const auto& include_dir: std::vector<std::filesystem::path>{include_dirs.rbegin(), include_dirs.rend()}) {
@@ -112,7 +111,7 @@ void code_checking(Sources& sources, std::vector<std::filesystem::path> include_
 					if(!possible_path.empty()){
 						++count_not_corrected_includes;
 						not_corrected_file = true;
-						std::cout << "File: [" << source_path.string() << ":" << line_number << "] includes [" << match_str << "], the path to which may not work on a case-sensitive operating system.\nPerhaps you meant this file: [" << possible_path.string() << "] -> \n";
+						std::cout << "File: [" << source_path.string() << ":" << line_number << "] includes [" << match_str << "], the path to which may not work on a case-sensitive operating system.\nPerhaps you meant this file: [" << possible_path.string() << "] -> ";
 						auto optimal_path{possible_path};
 						for(const auto& include_dir: include_dirs){
 							auto possible_optimal_path = possible_path.lexically_relative(include_dir);
@@ -121,6 +120,7 @@ void code_checking(Sources& sources, std::vector<std::filesystem::path> include_
 							}
 						}
 						str.replace(str.find(match_str),match_str.size(), optimal_path.string());
+						std::replace(str.begin(), str.end(), '\\', '/');
 						std::cout << "[" << optimal_path.string() << "]\n";
 					}
 					include_dirs.pop_back();

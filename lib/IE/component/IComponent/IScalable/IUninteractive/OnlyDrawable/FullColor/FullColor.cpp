@@ -1,5 +1,5 @@
 #include "FullColor.hpp"
-#include "IE\modules\yaml-cpp\yaml-builder\determine\determine.hpp"
+#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
 
 namespace ie {
 	FullColor::Make::Make(sf::Color color, sf::Vector2f normalSize) : color(color), normalSize(normalSize) {

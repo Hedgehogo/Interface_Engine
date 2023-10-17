@@ -1,5 +1,5 @@
 #include "determine_positioning.hpp"
-#include "IE\modules\yaml-cpp\yaml-builder\determine\determine.hpp"
+#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
 
 namespace ie {
 	bool determine_positioning(const YAML::Node& node, std::string& type) {
