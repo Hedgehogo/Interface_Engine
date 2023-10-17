@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../OnlyDrawable.hpp"
-#include "IE/modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
-#include "IE/modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
+#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
+#include "IE/modules/yaml-cpp/yaml-builder/determine/Determine.hpp"
 
 namespace ie {
 	class Sprite : public OnlyDrawable {

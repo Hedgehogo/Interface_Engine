@@ -1,1 +1,1 @@
-#include "vector/general/sVector2.hpp"
+#include "ISVector2/SVector2/SVector2.hpp"

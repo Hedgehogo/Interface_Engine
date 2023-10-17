@@ -3,7 +3,7 @@
 #include "VideoFromFile/VideoFromFile.hpp"
 #endif
 #include "VideoFromTexture/VideoFromTexture.hpp"
-#include "IE/modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
 
 namespace ie {
 	bool is_video(std::string path) {

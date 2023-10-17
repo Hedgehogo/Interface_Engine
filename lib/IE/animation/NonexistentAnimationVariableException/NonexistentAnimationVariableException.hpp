@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/modules/exception/baseException.hpp"
+#include "IE/modules/exception/BaseException.hpp"
 
 namespace ie {
 	class NonexistentAnimationVariableException : public BaseException {

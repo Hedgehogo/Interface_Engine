@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IE/modules/yaml-animation/buffer.hpp"
-#include "IE/modules/yaml-cpp/shared/value/general/sValue.hpp"
+#include "IE/modules/yaml-animation/Buffer.hpp"
+#include "IE/modules/yaml-cpp/shared/ISValue/SValue/SValue.hpp"
 
 namespace ie {
 	class IAnimatorUnit {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IInteraction/IInteraction.hpp"
-#include "IE/modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
 #include <vector>
 
 namespace ie {

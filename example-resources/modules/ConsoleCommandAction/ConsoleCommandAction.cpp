@@ -1,5 +1,5 @@
 #include "ConsoleCommandAction.hpp"
-#include <IE/Modules/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp>
+#include <IE/Modules/yaml-cpp/yaml-builder/shortcut/shortcut.hpp>
 
 namespace ie {
 	ConsoleCommandAction::ConsoleCommandAction(const std::string& command) : command(command) {}

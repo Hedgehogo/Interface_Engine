@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Modules/yaml-cpp/shared/value/iSValue.hpp"
+#include "IE/Modules/yaml-cpp/shared/ISValue/ISValue.hpp"
 
 class TestSValue : public ie::ISValue<float>{
 public:

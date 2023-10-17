@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "IE/Modules/yaml-Animation/buffer.hpp"
+#include "IE/Modules/yaml-Animation/Buffer.hpp"
 #include "../../../testsObjects/testAnimatorUnit/testAnimatorUnit.hpp"
 #include "../../../testsObjects/testAnimationVariable/testAnimationVariable.hpp"
 

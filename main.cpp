@@ -91,7 +91,7 @@ int main() {
 		
 		sf::Event event{};
 		while(window.getWindow().pollEvent(event)) {
-			ie::handleEvent(event);
+			ie::handle_event(event);
 			
 			if(event.type == sf::Event::Closed) {
 				window.getWindow().close();
@@ -99,6 +99,6 @@ int main() {
 		}
 		
 		window.update();
-		ie::clearEvent();
+		ie::clear_event();
 	}
 }

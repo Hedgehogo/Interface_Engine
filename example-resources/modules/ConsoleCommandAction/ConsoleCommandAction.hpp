@@ -3,7 +3,7 @@
 #include <string>
 #include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 #include <IE/Modules/yaml-cpp/yaml.hpp>
-#include <IE/Modules/yaml-cpp/yamlBuilder/base/baseYamlBuilder.hpp>
+#include <IE/Modules/yaml-cpp/yaml-builder/base/BaseYamlBuilder.hpp>
 
 namespace ie {
 	class ConsoleCommandAction : public BaseKeyAction {

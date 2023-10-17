@@ -3,7 +3,7 @@
 #include "../BoxSwitch/BoxSwitch.hpp"
 #include "IE/enums/KeyHandler/KeyHandler.hpp"
 #include "IE/interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
-#include "IE/modules/yaml-cpp/shared/value/converts/toBool/equals/sConvertToBoolEquals.hpp"
+#include "IE/modules/yaml-cpp/shared/ISValue/ISConvertValue/BaseSConvertToBoolComparison/SConvertToBoolEquals/SConvertToBoolEquals.hpp"
 #include "IE/component/IComponent/IScalable/Box/BoxSwitcherTabs/SwitcherTabsAction/SwitcherTabsAction.hpp"
 
 namespace ie {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../OnlyDrawable/OnlyDrawable.hpp"
-#include "IE/modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
 #include "IE/sizing-positioning/IPositioning2/InternalPositioning2/InternalPositioning2.hpp"
 
 namespace ie {

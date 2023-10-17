@@ -1,7 +1,7 @@
 #include <codecvt>
 #include "TextCopyAction.hpp"
 #include "IE/component/IComponent/Text/Text.hpp"
-#include "IE/modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
 
 namespace ie {
 	TextCopyAction* TextCopyAction::Make::make(BasicActionInitInfo<Text&> initInfo) {

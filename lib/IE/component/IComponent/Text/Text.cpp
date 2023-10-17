@@ -1,7 +1,7 @@
 #include "Text.hpp"
 
 #include <cmath>
-#include "IE/modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
+#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
 
 namespace ie {
 	Text::Make::Make(

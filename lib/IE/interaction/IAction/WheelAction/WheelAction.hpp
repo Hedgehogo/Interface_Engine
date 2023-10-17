@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
 #include "../IAction.hpp"
 #include "../../../sfml-events/MouseWheel/MouseWheel.hpp"
 

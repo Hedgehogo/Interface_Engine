@@ -1,6 +1,6 @@
 #include "Sprite.hpp"
 #include <algorithm>
-#include "IE/modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
+#include "IE/modules/yaml-cpp/yaml-builder/determine/Determine.hpp"
 
 namespace ie {
 	Sprite::Make::Make(sf::Texture& texture, sf::IntRect rect, sf::Vector2f minSize) :

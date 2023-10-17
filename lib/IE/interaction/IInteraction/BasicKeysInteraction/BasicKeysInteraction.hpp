@@ -2,7 +2,7 @@
 
 #include "../IInteraction.hpp"
 #include "IE/enums/KeyHandler/KeyHandler.hpp"
-#include "IE/modules/yaml-cpp/yamlBuilder/yamlBuilder.hpp"
+#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
 
 namespace ie {
 	template<typename T>
