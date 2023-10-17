@@ -1,5 +1,5 @@
 #include "Positioning2.hpp"
-#include "../../IPositioning/Functions/makePositioning/makePositioning.hpp"
+#include "IE/sizing-positioning/IPositioning/Functions/make_position/make_position.hpp"
 
 namespace ie {
 	Positioning2::Make::Make(BoxPtr<IPositioning>&& horizontal, BoxPtr<IPositioning>&& vertical) :
@@ -7,8 +7,8 @@ namespace ie {
 	}
 	
 	Positioning2::Make::Make(sf::Vector2f coefficient, sf::Vector2f offset, bool relativeTarget) :
-		horizontal(makePosition(coefficient.x, offset.x, relativeTarget)),
-		vertical(makePosition(coefficient.y, offset.y, relativeTarget)) {
+		horizontal(make_position(coefficient.x, offset.x, relativeTarget)),
+		vertical(make_position(coefficient.y, offset.y, relativeTarget)) {
 	}
 	
 	Positioning2::Make::Make(Location2 parentLocation, Location2 objectLocation, sf::Vector2f offset) :
@@ -25,8 +25,8 @@ namespace ie {
 	}
 	
 	Positioning2::Make::Make(sf::Vector2f coefficient, sf::Vector2f objectCoefficient, sf::Vector2f offset, bool relativeTarget) :
-		horizontal(makePosition(coefficient.x, objectCoefficient.x, offset.x, relativeTarget)),
-		vertical(makePosition(coefficient.y, objectCoefficient.y, offset.y, relativeTarget)) {
+		horizontal(make_position(coefficient.x, objectCoefficient.x, offset.x, relativeTarget)),
+		vertical(make_position(coefficient.y, objectCoefficient.y, offset.y, relativeTarget)) {
 	}
 	
 	Positioning2* Positioning2::Make::make(Positioning2InitInfo initInfo) {
@@ -42,8 +42,8 @@ namespace ie {
 	}
 	
 	Positioning2::Positioning2(sf::Vector2f coefficient, sf::Vector2f offset, bool relativeTarget) :
-		horizontal(makePosition(coefficient.x, offset.x, relativeTarget)),
-		vertical(makePosition(coefficient.y, offset.y, relativeTarget)),
+		horizontal(make_position(coefficient.x, offset.x, relativeTarget)),
+		vertical(make_position(coefficient.y, offset.y, relativeTarget)),
 		renderTarget(nullptr) {
 	}
 	
@@ -54,8 +54,8 @@ namespace ie {
 	}
 	
 	Positioning2::Positioning2(sf::Vector2f coefficient, sf::Vector2f objectCoefficient, sf::Vector2f offset, bool relativeTarget) :
-		horizontal(makePosition(coefficient.x, objectCoefficient.x, offset.x, relativeTarget)),
-		vertical(makePosition(coefficient.y, objectCoefficient.y, offset.y, relativeTarget)),
+		horizontal(make_position(coefficient.x, objectCoefficient.x, offset.x, relativeTarget)),
+		vertical(make_position(coefficient.y, objectCoefficient.y, offset.y, relativeTarget)),
 		renderTarget(nullptr) {
 	}
 	

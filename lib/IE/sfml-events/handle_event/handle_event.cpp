@@ -1,10 +1,10 @@
-#include "handleEvent.hpp"
+#include "handle_event.hpp"
 
 #include "../MouseWheel/MouseWheel.hpp"
 #include "IE/enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	void handleEvent(sf::Event event) {
+	void handle_event(sf::Event event) {
 		if(event.type == sf::Event::MouseWheelScrolled) {
 			MouseWheel::setDelta(event.mouseWheelScroll);
 		}
@@ -22,7 +22,7 @@ namespace ie {
 		}
 	}
 	
-	void clearEvent() {
+	void clear_event() {
 		MouseWheel::clear();
 	}
 }

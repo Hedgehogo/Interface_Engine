@@ -1,8 +1,8 @@
-#include "determinePositioning2.hpp"
+#include "determine_positioning2.hpp"
 #include "IE/modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ie {
-	bool determinePositioning2(const YAML::Node& node, std::string& type) {
+	bool determine_positioning2(const YAML::Node& node, std::string& type) {
 		if(node.IsScalar() ||
 		   determine(node, {
 			   {"horizontal"},

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "IE/component/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
-#include "IE/sizing-positioning/IPositioning/Functions/makePositioning/makePositioning.hpp"
-#include "IE/sizing-positioning/ISizing/Functions/makeSize/makeSize.hpp"
+#include "IE/sizing-positioning/IPositioning/Functions/make_position/make_position.hpp"
+#include "IE/sizing-positioning/ISizing/Functions/make_size_make/make_size_make.hpp"
 #include "IE/sizing-positioning/ISizing2/ISizing2.hpp"
 #include "IE/sizing-positioning/ISizing2/Sizing2/Sizing2.hpp"
 #include "IE/sizing-positioning/ISizing2/ConstRatioSizing2/ConstRatioSizing2.hpp"

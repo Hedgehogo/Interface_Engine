@@ -9,13 +9,13 @@
 #include "../../FnSizing/FnSizing.hpp"
 
 namespace ie {
-	ISizing::Make* makeSizeMake(bool relativeParent);
+	ISizing::Make* make_size_make(bool relativeParent);
 	
-	ISizing::Make* makeSizeMake(float constSize);
+	ISizing::Make* make_size_make(float constSize);
 	
-	ISizing::Make* makeSizeMake(float coefficient, float addition, bool relativeTarget);
+	ISizing::Make* make_size_make(float coefficient, float addition, bool relativeTarget);
 	
-	ISizing::Make* makeSizeMake(float targetCoefficient, float parentCoefficient, float addition);
+	ISizing::Make* make_size_make(float targetCoefficient, float parentCoefficient, float addition);
 	
-	ISizing::Make* makeSizeMake(FnSizing::FindSizeFn findSizeFn, FnSizing::GetParentSizeFn getParentSizeFn);
+	ISizing::Make* make_size_make(FnSizing::FindSizeFn findSizeFn, FnSizing::GetParentSizeFn getParentSizeFn);
 }

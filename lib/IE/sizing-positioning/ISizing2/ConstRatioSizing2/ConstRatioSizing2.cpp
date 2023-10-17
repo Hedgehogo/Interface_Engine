@@ -1,5 +1,5 @@
 #include "ConstRatioSizing2.hpp"
-#include "../../ISizing/Functions/makeSize/makeSize.hpp"
+#include "IE/sizing-positioning/ISizing/Functions/make_size_make/make_size_make.hpp"
 
 namespace ie {
 	ConstRatioSizing2::Make::Make(BoxPtr<ISizing::Make>&& sizing, float ratio, bool horizontal) :
@@ -7,7 +7,7 @@ namespace ie {
 	}
 	
 	ConstRatioSizing2::Make::Make(float ratio, bool horizontal, bool relativeParent) :
-		sizing(makeSizeMake(relativeParent)), ratio(ratio), horizontal(horizontal) {
+		sizing(make_size_make(relativeParent)), ratio(ratio), horizontal(horizontal) {
 	}
 	
 	ConstRatioSizing2::Make::Make(float constSize, float ratio, bool horizontal) :
@@ -15,7 +15,7 @@ namespace ie {
 	}
 	
 	ConstRatioSizing2::Make::Make(float coefficient, float addition, float ratio, bool horizontal, bool relativeTarget) :
-		sizing(makeSizeMake(coefficient, addition, relativeTarget)), ratio(ratio), horizontal(horizontal) {
+		sizing(make_size_make(coefficient, addition, relativeTarget)), ratio(ratio), horizontal(horizontal) {
 	}
 	
 	ConstRatioSizing2::Make::Make(float targetCoefficient, float parentCoefficient, float addition, float ratio, bool horizontal) :
@@ -37,7 +37,7 @@ namespace ie {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float ratio, bool horizontal, bool relativeParent) :
-		sizing(BoxPtr{makeSizeMake(relativeParent)}->make(0)), ratio(ratio), horizontal(horizontal) {
+		sizing(BoxPtr{make_size_make(relativeParent)}->make(0)), ratio(ratio), horizontal(horizontal) {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float constSize, float ratio, bool horizontal) :
@@ -45,7 +45,7 @@ namespace ie {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float coefficient, float addition, float ratio, bool horizontal, bool relativeTarget) :
-		sizing(BoxPtr{makeSizeMake(coefficient, addition, relativeTarget)}->make(0)), ratio(ratio), horizontal(horizontal) {
+		sizing(BoxPtr{make_size_make(coefficient, addition, relativeTarget)}->make(0)), ratio(ratio), horizontal(horizontal) {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float targetCoefficient, float parentCoefficient, float addition, float ratio, bool horizontal) :

@@ -1,18 +1,20 @@
-#include "videoConvert.hpp"
+#include "video_convert.hpp"
+#ifdef IE_ImageMagick_FOUND
 #include "VideoFromFile/VideoFromFile.hpp"
+#endif
 #include "VideoFromTexture/VideoFromTexture.hpp"
 #include "IE/modules/yaml-cpp/fileBuffer/fileBuffer.hpp"
 
 namespace ie {
-	bool isVideo(std::string path) {
+	bool is_video(std::string path) {
 		std::array<std::string, 8> arr{".bmp", ".png", ".jpg", ".tga", ".dds", ".psd", ".hdr", ".pic"};
 		std::string str{path.begin() + path.rfind('.'), path.end()};
 		return std::count(arr.begin(), arr.end(), str) == 0;
 	}
 	
-	bool videoConvert(const YAML::Node& node, OnlyDrawable*& video) {
+	bool video_convert(const YAML::Node& node, OnlyDrawable*& video) {
 #ifdef IE_ImageMagick_FOUND
-		if(!node["offset"] && isVideo(node["path"].as<std::string>())) {
+		if(!node["offset"] && is_video(node["path"].as<std::string>())) {
 			video = new VideoFromFile{
 				*node["path"].as<std::vector<sf::Texture>*>(),
 				Buffer::get<SCoefficientValue>(node["viewing-progress"])

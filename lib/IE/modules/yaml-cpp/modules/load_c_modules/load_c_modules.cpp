@@ -1,4 +1,4 @@
-#include "loadCModules.hpp"
+#include "load_c_modules.hpp"
 
 #include <open-lib/DynamicLibrary.hpp>
 #include <yaml-cpp/yaml.h>
@@ -40,7 +40,7 @@ namespace ie {
 		return 1;
 	}
 	
-	void loadCModules(const YAML::Node& libs, int argc, char* argv[]) {
+	void load_c_modules(const YAML::Node& libs, int argc, char* argv[0]) {
 		std::string libDir = convDef<std::string>(libs["lib-dir"], "./");
 		
 		if(YAML::Node cLibs{libs["CLib"]}) {

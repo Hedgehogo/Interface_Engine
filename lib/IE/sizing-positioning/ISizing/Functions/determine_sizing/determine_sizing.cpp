@@ -1,8 +1,8 @@
-#include "determineSizing.hpp"
+#include "determine_sizing.hpp"
 #include "IE/modules/yaml-cpp/yamlBuilder/determine/determine.hpp"
 
 namespace ie {
-	bool determineSizing(const YAML::Node& node, std::string& type) {
+	bool determine_sizing(const YAML::Node& node, std::string& type) {
 		if(node.IsScalar()) {
 			type = "ConstSizing";
 			return true;

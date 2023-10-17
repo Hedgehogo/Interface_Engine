@@ -1,10 +1,10 @@
 #include "Init.hpp"
 #include "IE/modules/yaml-cpp/yamlBuilder/shortcut/shortcut.hpp"
-#include "IE/sizing-positioning/ISizing/Functions/determineSizing/determineSizing.hpp"
-#include "IE/sizing-positioning/ISizing2/Functions/determineSizing2/determineSizing2.hpp"
-#include "IE/sizing-positioning/IPositioning/Functions/determinePositioning/determinePositioning.hpp"
-#include "IE/sizing-positioning/IPositioning2/Functions/determinePositioning2/determinePositioning2.hpp"
-#include "IE/modules/yaml-cpp/modules/loadModules.hpp"
+#include "IE/sizing-positioning/ISizing/Functions/determine_sizing/determine_sizing.hpp"
+#include "IE/sizing-positioning/ISizing2/Functions/determine_sizing2/determine_sizing2.hpp"
+#include "IE/sizing-positioning/IPositioning/Functions/determine_positioning/determine_positioning.hpp"
+#include "IE/sizing-positioning/IPositioning2/Functions/determine_positioning2/determine_positioning2.hpp"
+#include "IE/modules/yaml-cpp/modules/load_modules.hpp"
 #include "config.h"
 
 #ifdef IE_ImageMagick_FOUND
@@ -43,7 +43,7 @@ namespace ie {
 		Magick::InitializeMagick("");
 #endif
 		yamlBuilderInit();
-		loadModules(argc, argv, modulesList);
+		load_modules(argc, argv, modulesList);
 	}
 	
 	void yamlBuilderInit() {
@@ -125,7 +125,7 @@ namespace ie {
 		inherit<IChangeVariable, ChangeVariableBySinusoid>({"CVBySinusoid", "CVBySin"});
 		inherit<IChangeVariable, ChangeVariableByCurve>({"CVByCurve"});
 		
-		addFunc<OnlyDrawable>(videoConvert, {"Video"});
+		addFunc<OnlyDrawable>(video_convert, {"Video"});
 		//addFunc<Box>(switcherTabsDecodePointer, {"SwitcherTabs", "SwitcherT"});
 		
 		inherit<OnlyDrawable, Empty>();
@@ -176,10 +176,10 @@ namespace ie {
 		addDetermine<RoundedRectangle>();
 		addDetermine<Sprite>();
 		addDetermine<TextBlock>();
-		addDetermine<ISizing>(determineSizing);
-		addDetermine<ISizing2>(determineSizing2);
-		addDetermine<IPositioning>(determinePositioning);
-		addDetermine<IPositioning2>(determinePositioning2);
+		addDetermine<ISizing>(determine_sizing);
+		addDetermine<ISizing2>(determine_sizing2);
+		addDetermine<IPositioning>(determine_positioning);
+		addDetermine<IPositioning2>(determine_positioning2);
 		addDetermine<OpenUrlAction>(determineUrl);
 		addDetermine<KeysInteraction>(determineUrl);
 		addDetermine<BasicKeysInteraction<Text&>>(determineUrl);

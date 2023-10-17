@@ -3,7 +3,7 @@
 #include <SFML/Window/Event.hpp>
 
 namespace ie {
-	void handleEvent(sf::Event event);
+	void handle_event(sf::Event event);
 	
-	void clearEvent();
+	void clear_event();
 }

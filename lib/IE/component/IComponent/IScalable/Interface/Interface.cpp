@@ -1,7 +1,7 @@
 #include "Interface.hpp"
 
 #include <cmath>
-#include "IE/modules/yaml-cpp/modules/loadModules.hpp"
+#include "IE/modules/yaml-cpp/modules/load_modules.hpp"
 #include "IE/window/Window/Window.hpp"
 
 namespace ie {
@@ -216,7 +216,7 @@ namespace ie {
 	
 	Interface makeInterface(const std::filesystem::path& filePath, int argc, char* argv[]) {
 		if(auto modules = std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
-			loadModules(argc, argv, modules);
+			load_modules(argc, argv, modules);
 		
 		YAML::Node node{YAML::LoadFile(filePath.string())};
 		
@@ -229,7 +229,7 @@ namespace ie {
 	
 	Interface makeInterface(sf::RenderWindow& window, const std::filesystem::path& filePath, int argc, char* argv[]) {
 		if(auto modules = std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
-			loadModules(argc, argv, modules);
+			load_modules(argc, argv, modules);
 		
 		YAML::Node node{YAML::LoadFile(filePath.string())};
 		
@@ -243,7 +243,7 @@ namespace ie {
 	
 	Interface* makePrtInterface(sf::RenderWindow& window, const std::filesystem::path& filePath, int argc, char* argv[]) {
 		if(auto modules = std::filesystem::path{filePath}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
-			loadModules(argc, argv, modules);
+			load_modules(argc, argv, modules);
 		
 		YAML::Node node{YAML::LoadFile(filePath.string())};
 		
