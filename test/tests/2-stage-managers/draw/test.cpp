@@ -1,20 +1,20 @@
 #include <gtest/gtest.h>
 #include <../../../../../lib/IE/component/IDrawable/DrawManager/DrawManager.hpp>
-#include "../../../testsObjects/testObject/testObject.hpp"
+#include "../../../tests_objects/test_object/test_object.hpp"
 
 TEST(DrawManager, draw_and_add) {
-	TestObject testObject{};
-	ie::DrawManager drawManager;
-	drawManager.add(testObject);
-	drawManager.draw();
-	ASSERT_GT(testObject.getProcessed().draw, 0);
+	TestObject test_object{};
+	ie::DrawManager draw_manager;
+	draw_manager.add(test_object);
+	draw_manager.draw();
+	ASSERT_GT(test_object.get_processed().draw, 0);
 }
 
 TEST(DrawManager, clear) {
-	TestObject testObject{};
-	ie::DrawManager drawManager;
-	drawManager.add(testObject);
-	drawManager.clear();
-	drawManager.draw();
-	ASSERT_EQ(testObject.getProcessed().draw, 0);
+	TestObject test_object{};
+	ie::DrawManager draw_manager;
+	draw_manager.add(test_object);
+	draw_manager.clear();
+	draw_manager.draw();
+	ASSERT_EQ(test_object.get_processed().draw, 0);
 }

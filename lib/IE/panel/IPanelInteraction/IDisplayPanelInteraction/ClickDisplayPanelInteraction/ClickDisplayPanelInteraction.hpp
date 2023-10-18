@@ -11,22 +11,22 @@ namespace ie {
 			
 			Make(Key key);
 			
-			ClickDisplayPanelInteraction* make(PanelActionInitInfo initInfo) override;
+			ClickDisplayPanelInteraction* make(PanelActionInitInfo init_info) override;
 		};
 		
-		ClickDisplayPanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		ClickDisplayPanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
 		explicit ClickDisplayPanelInteraction(Key key);
 		
 		void start(sf::Vector2i) override;
 		
-		void finish(sf::Vector2i mousePosition) override;
+		void finish(sf::Vector2i mouse_position) override;
 		
 		ClickDisplayPanelInteraction* copy() override;
 	};
 	
 	template<>
 	struct DecodePointer<ClickDisplayPanelInteraction> {
-		static bool decodePointer(const YAML::Node& node, ClickDisplayPanelInteraction*& clickDisplayPanelInteraction);
+		static bool decode_pointer(const YAML::Node& node, ClickDisplayPanelInteraction*& click_display_panel_interaction);
 	};
 }

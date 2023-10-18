@@ -10,21 +10,21 @@ namespace ie {
 			BoxPtr<IUninteractive::Make> background;
 			const PSRVec2f& value;
 			sf::Vector2i division;
-			sf::Vector2f sliderScale;
+			sf::Vector2f slider_scale;
 			Key key;
-			bool wheelHorizontal;
-			SliderWheelAction::Relativity wheelRelativity;
-			sf::Vector2f wheelSensitivity;
+			bool wheel_horizontal;
+			SliderWheelAction::Relativity wheel_relativity;
+			sf::Vector2f wheel_sensitivity;
 			
 			Make(
 				BoxPtr<IUninteractive::Make>&& slider,
 				BoxPtr<IUninteractive::Make>&& background,
 				const PSRVec2f& value,
-				sf::Vector2f sliderScale = {1.0f, 0.5f},
+				sf::Vector2f slider_scale = {1.0f, 0.5f},
 				Key key = Key::MouseLeft,
-				bool wheelHorizontal = false,
-				SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::RelationArea,
-				sf::Vector2f wheelSensitivity = {0.2f, 0.2f}
+				bool wheel_horizontal = false,
+				SliderWheelAction::Relativity wheel_relativity = SliderWheelAction::Relativity::RelationArea,
+				sf::Vector2f wheel_sensitivity = {0.2f, 0.2f}
 			);
 			
 			Make(
@@ -32,25 +32,25 @@ namespace ie {
 				BoxPtr<IUninteractive::Make>&& background,
 				const PSRVec2f& value,
 				sf::Vector2i division,
-				sf::Vector2f sliderScale = {1.0f, 0.5f},
+				sf::Vector2f slider_scale = {1.0f, 0.5f},
 				Key key = Key::MouseLeft,
-				bool wheelHorizontal = false
+				bool wheel_horizontal = false
 			);
 			
-			Slider* make(InitInfo initInfo) override;
+			Slider* make(InitInfo init_info) override;
 		};
 		
-		Slider(Make&& make, InitInfo initInfo);
+		Slider(Make&& make, InitInfo init_info);
 		
 		Slider(
 			BoxPtr<IUninteractive>&& slider,
 			BoxPtr<IUninteractive>&& background,
 			const PSRVec2f& value,
-			sf::Vector2f sliderScale = {1.0f, 0.5f},
+			sf::Vector2f slider_scale = {1.0f, 0.5f},
 			Key key = Key::MouseLeft,
-			bool wheelHorizontal = false,
-			SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::RelationArea,
-			sf::Vector2f wheelSensitivity = {0.2f, 0.2f}
+			bool wheel_horizontal = false,
+			SliderWheelAction::Relativity wheel_relativity = SliderWheelAction::Relativity::RelationArea,
+			sf::Vector2f wheel_sensitivity = {0.2f, 0.2f}
 		);
 		
 		Slider(
@@ -58,22 +58,22 @@ namespace ie {
 			BoxPtr<IUninteractive>&& background,
 			const PSRVec2f& value,
 			sf::Vector2i division,
-			sf::Vector2f sliderScale = {1.0f, 0.5f},
+			sf::Vector2f slider_scale = {1.0f, 0.5f},
 			Key key = Key::MouseLeft,
-			bool wheelHorizontal = false
+			bool wheel_horizontal = false
 		);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		void setScale(sf::Vector2f scale);
+		void set_scale(sf::Vector2f scale);
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		const IUninteractive& getBackground() const;
+		const IUninteractive& get_background() const;
 		
-		const IUninteractive& getSlider() const;
+		const IUninteractive& get_slider() const;
 		
 		Slider* copy() override;
 	
@@ -83,6 +83,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<Slider> {
-		static bool decodePointer(const YAML::Node& node, Slider*& slider);
+		static bool decode_pointer(const YAML::Node& node, Slider*& slider);
 	};
 }

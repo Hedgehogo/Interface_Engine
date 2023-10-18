@@ -4,19 +4,19 @@ namespace ie {
 	BaseWheelAction::BaseWheelAction() {
 	}
 	
-	void BaseWheelAction::update(sf::Vector2i mousePosition, int value) {
+	void BaseWheelAction::update(sf::Vector2i mouse_position, int value) {
 		if(this->active != (value != 0)) {
 			this->active = (value != 0);
 			if(this->active) {
-				startPressed(mousePosition, value);
+				start_pressed(mouse_position, value);
 			} else {
-				stopPressed(mousePosition, value);
+				stop_pressed(mouse_position, value);
 			}
 		}
 		if(this->active) {
-			whilePressed(mousePosition, value);
+			while_pressed(mouse_position, value);
 		} else {
-			whileNotPressed(mousePosition, value);
+			while_not_pressed(mouse_position, value);
 		}
 	}
 }

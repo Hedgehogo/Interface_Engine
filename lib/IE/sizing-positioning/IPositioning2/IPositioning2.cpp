@@ -1,21 +1,21 @@
 #include "IPositioning2.hpp"
 
 namespace ie {
-	sf::Vector2f IPositioning2::operator()(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize) {
-		return this->findPosition(parentPosition, parentSize, objectSize);
+	sf::Vector2f IPositioning2::operator()(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) {
+		return this->find_position(parent_position, parent_size, object_size);
 	}
 
-	/*Positioning *makePosition(float coefficient, float offset, bool relativeTarget) {
-		if(!relativeTarget) {
+	/*Positioning *make_position(float coefficient, float offset, bool relative_target) {
+		if(!relative_target) {
 			return new InternalPositioning{coefficient, offset};
 		}
 		return new InternalTargetPositioning{coefficient, offset};
 	}
 	
-	Positioning *makePosition(float coefficient, float objectCoefficient, float offset, bool relativeTarget) {
-		if(!relativeTarget) {
-			return new MatchPositioning{coefficient, objectCoefficient, offset};
+	Positioning *make_position(float coefficient, float object_coefficient, float offset, bool relative_target) {
+		if(!relative_target) {
+			return new MatchPositioning{coefficient, object_coefficient, offset};
 		}
-		return new MatchTargetPositioning{coefficient, objectCoefficient, offset};
+		return new MatchTargetPositioning{coefficient, object_coefficient, offset};
 	}*/
 }

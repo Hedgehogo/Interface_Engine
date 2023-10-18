@@ -7,19 +7,19 @@ namespace ie {
 	class IComponentLayout : public virtual ILayout, public virtual IComponent {
 	public:
 		struct Make : public virtual IComponent::Make {
-			virtual IComponentLayout* make(InitInfo initInfo) = 0;
+			virtual IComponentLayout* make(InitInfo init_info) = 0;
 		};
 		
-		void setPosition(sf::Vector2f position) override;
+		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
 		
-		void setSize(sf::Vector2f size) override;
+		void set_size(sf::Vector2f size) override;
 		
-		sf::Vector2f getAreaPosition() const override;
+		sf::Vector2f get_area_position() const override;
 		
-		sf::Vector2f getAreaSize() const override;
+		sf::Vector2f get_area_size() const override;
 		
-		bool inArea(sf::Vector2f pointPosition) override;
+		bool in_area(sf::Vector2f point_position) override;
 	};
 }

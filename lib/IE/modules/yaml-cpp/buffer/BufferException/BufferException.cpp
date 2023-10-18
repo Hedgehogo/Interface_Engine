@@ -6,11 +6,11 @@ namespace ie {
 		name(name), level(level) {
 	}
 	
-	std::string BufferNonExistentNestingLevelException::getName() const {
+	std::string BufferNonExistentNestingLevelException::get_name() const {
 		return name;
 	}
 	
-	std::size_t BufferNonExistentNestingLevelException::getLevel() const {
+	std::size_t BufferNonExistentNestingLevelException::get_level() const {
 		return level;
 	}
 	
@@ -19,28 +19,28 @@ namespace ie {
 		name(name), type(type) {
 	}
 	
-	std::string BufferVariableNotFoundException::getName() const {
+	std::string BufferVariableNotFoundException::get_name() const {
 		return name;
 	}
 	
-	std::string BufferVariableNotFoundException::getType() const {
+	std::string BufferVariableNotFoundException::get_type() const {
 		return type;
 	}
 	
 	YamlBufferVariableNotFoundException::YamlBufferVariableNotFoundException(YAML::Mark mark, const BufferVariableNotFoundException& exception) :
-		BaseYamlException(mark, std::string("Failed to read buffer variable '") + exception.getName() + std::string("' as '") + exception.getType() + std::string("' type")),
+		BaseYamlException(mark, std::string("Failed to read buffer variable '") + exception.get_name() + std::string("' as '") + exception.get_type() + std::string("' type")),
 		exception(exception) {
 	}
 	
-	BufferVariableNotFoundException YamlBufferVariableNotFoundException::getException() const {
+	BufferVariableNotFoundException YamlBufferVariableNotFoundException::get_exception() const {
 		return exception;
 	}
 	
-	std::string YamlBufferVariableNotFoundException::getName() const {
-		return exception.getName();
+	std::string YamlBufferVariableNotFoundException::get_name() const {
+		return exception.get_name();
 	}
 	
-	std::string YamlBufferVariableNotFoundException::getType() const {
-		return exception.getType();
+	std::string YamlBufferVariableNotFoundException::get_type() const {
+		return exception.get_type();
 	}
 }

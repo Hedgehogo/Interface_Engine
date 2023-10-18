@@ -6,10 +6,10 @@ namespace ie {
 	class IUninteractive : public virtual IScalable {
 	public:
 		struct Make : public virtual IScalable::Make {
-			virtual IUninteractive* make(InitInfo initInfo) = 0;
+			virtual IUninteractive* make(InitInfo init_info) = 0;
 		};
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
 		IUninteractive* copy() override = 0;
 	};

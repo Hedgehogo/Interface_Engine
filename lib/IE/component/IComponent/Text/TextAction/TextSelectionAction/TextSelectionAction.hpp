@@ -10,31 +10,31 @@ namespace ie {
 	class TextSelectionAction : public BasicBaseKeyAction<Text&> {
 	public:
 		struct Make : BasicBaseKeyAction<Text&>::Make {
-			TextSelectionAction* make(BasicActionInitInfo<Text&> initInfo) override;
+			TextSelectionAction* make(BasicActionInitInfo<Text&> init_info) override;
 		};
 		
-		TextSelectionAction(Make&& make, BasicActionInitInfo<Text&> initInfo);
+		TextSelectionAction(Make&& make, BasicActionInitInfo<Text&> init_info);
 		
 		TextSelectionAction();
 		
-		void init(BasicActionInitInfo<Text&> initInfo) override;
+		void init(BasicActionInitInfo<Text&> init_info) override;
 		
-		orl::Option<std::vector<BaseCharacter*>::iterator> getStart();
+		orl::Option<std::vector<BaseCharacter*>::iterator> get_start();
 		
-		orl::Option<std::vector<BaseCharacter*>::iterator> getEnd();
+		orl::Option<std::vector<BaseCharacter*>::iterator> get_end();
 		
-		void update(sf::Vector2i mousePosition, bool press) override;
+		void update(sf::Vector2i mouse_position, bool press) override;
 		
 		TextSelectionAction* copy() override;
 	
 	protected:
-		void startPressed() override;
+		void start_pressed() override;
 		
-		void stopPressed() override;
+		void stop_pressed() override;
 		
-		void whilePressed() override;
+		void while_pressed() override;
 		
-		void whileNotPressed() override;
+		void while_not_pressed() override;
 		
 		Text* text;
 		orl::Option<std::vector<BaseCharacter*>::iterator> start, end;
@@ -42,6 +42,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<TextSelectionAction> {
-		static bool decodePointer(const YAML::Node&, TextSelectionAction*& textSelectionAction);
+		static bool decode_pointer(const YAML::Node&, TextSelectionAction*& text_selection_action);
 	};
 }

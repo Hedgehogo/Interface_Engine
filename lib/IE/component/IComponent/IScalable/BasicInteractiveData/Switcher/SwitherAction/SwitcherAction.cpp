@@ -6,8 +6,8 @@ namespace ie {
 	SwitcherAction::Make::Make(PSbool value) : value(value) {
 	}
 	
-	SwitcherAction* SwitcherAction::Make::make(ActionInitInfo initInfo) {
-		return new SwitcherAction{std::move(*this), initInfo};
+	SwitcherAction* SwitcherAction::Make::make(ActionInitInfo init_info) {
+		return new SwitcherAction{std::move(*this), init_info};
 	}
 	
 	SwitcherAction::SwitcherAction(Make&& make, ActionInitInfo) : value(std::move(make.value)) {
@@ -16,25 +16,25 @@ namespace ie {
 	SwitcherAction::SwitcherAction(PSbool value) : value(value) {
 	}
 	
-	void SwitcherAction::startPressed() {
+	void SwitcherAction::start_pressed() {
 	}
 	
-	void SwitcherAction::stopPressed() {
-		value->setValue(!value->getValue());
+	void SwitcherAction::stop_pressed() {
+		value->set_value(!value->get_value());
 	}
 	
-	void SwitcherAction::whilePressed() {
+	void SwitcherAction::while_pressed() {
 	}
 	
-	void SwitcherAction::whileNotPressed() {
+	void SwitcherAction::while_not_pressed() {
 	}
 	
 	SwitcherAction* SwitcherAction::copy() {
 		return new SwitcherAction{*this};
 	}
 	
-	bool DecodePointer<SwitcherAction>::decodePointer(const YAML::Node& node, SwitcherAction*& switcherAction) {
-		switcherAction = new SwitcherAction{
+	bool DecodePointer<SwitcherAction>::decode_pointer(const YAML::Node& node, SwitcherAction*& switcher_action) {
+		switcher_action = new SwitcherAction{
 			Buffer::get<Sbool>(node["value"])
 		};
 		return true;

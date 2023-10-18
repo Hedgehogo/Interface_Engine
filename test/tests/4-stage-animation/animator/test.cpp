@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include "IE/Animation/Animator/Animator.hpp"
-#include "../../../testsObjects/testAnimatorUnit/testAnimatorUnit.hpp"
+#include "../../../tests_objects/test_animator_unit/test_animator_unit.hpp"
 TEST(Animator, update) {
 	TestAnimatorUnit *test1_1 = new TestAnimatorUnit{},
 					 *test1_2 = new TestAnimatorUnit{},
@@ -19,34 +19,34 @@ TEST(Animator, update) {
 
 	animator.update(3.f);
 
-	ASSERT_EQ(test1->getProcessed().update[0].timeParameter, 3.f);
-	ASSERT_EQ(test2->getProcessed().update[0].timeParameter, 3.f);
-	ASSERT_EQ(test4->getProcessed().update[0].timeParameter, 3.f);
-	ASSERT_EQ(test3->getProcessed().update[0].timeParameter, 3.f);
-	ASSERT_EQ(test5->getProcessed().update[0].timeParameter, 3.f);
+	ASSERT_EQ(test1->get_processed().update[0].time_parameter, 3.f);
+	ASSERT_EQ(test2->get_processed().update[0].time_parameter, 3.f);
+	ASSERT_EQ(test4->get_processed().update[0].time_parameter, 3.f);
+	ASSERT_EQ(test3->get_processed().update[0].time_parameter, 3.f);
+	ASSERT_EQ(test5->get_processed().update[0].time_parameter, 3.f);
 
-	ASSERT_LT(test1->getProcessed().update[0].time, test2->getProcessed().update[0].time);
-	ASSERT_LT(test2->getProcessed().update[0].time, test3->getProcessed().update[0].time);
-	ASSERT_LT(test3->getProcessed().update[0].time, test4->getProcessed().update[0].time);
-	ASSERT_LT(test4->getProcessed().update[0].time, test5->getProcessed().update[0].time);
+	ASSERT_LT(test1->get_processed().update[0].time, test2->get_processed().update[0].time);
+	ASSERT_LT(test2->get_processed().update[0].time, test3->get_processed().update[0].time);
+	ASSERT_LT(test3->get_processed().update[0].time, test4->get_processed().update[0].time);
+	ASSERT_LT(test4->get_processed().update[0].time, test5->get_processed().update[0].time);
 
 	animator.update(4.f);
 
-	ASSERT_EQ(test1_1->getProcessed().update[0].timeParameter, 4.f);
-	ASSERT_EQ(test1_2->getProcessed().update[0].timeParameter, 4.f);
-	ASSERT_EQ(test2_1->getProcessed().update[0].timeParameter, 4.f);
-	ASSERT_EQ(test3_1->getProcessed().update[1].timeParameter, 4.f);
-	ASSERT_EQ(test3->getProcessed().update[1].timeParameter, 4.f);
-	ASSERT_EQ(test4->getProcessed().update[1].timeParameter, 4.f);
+	ASSERT_EQ(test1_1->get_processed().update[0].time_parameter, 4.f);
+	ASSERT_EQ(test1_2->get_processed().update[0].time_parameter, 4.f);
+	ASSERT_EQ(test2_1->get_processed().update[0].time_parameter, 4.f);
+	ASSERT_EQ(test3_1->get_processed().update[1].time_parameter, 4.f);
+	ASSERT_EQ(test3->get_processed().update[1].time_parameter, 4.f);
+	ASSERT_EQ(test4->get_processed().update[1].time_parameter, 4.f);
 
-	ASSERT_EQ(test5->getProcessed().update.size(), 1);
-	ASSERT_EQ(test6and7_1->getProcessed().update.size(), 1);
+	ASSERT_EQ(test5->get_processed().update.size(), 1);
+	ASSERT_EQ(test6and7_1->get_processed().update.size(), 1);
 
-	ASSERT_LT(test1_1->getProcessed().update[0].time, test1_2->getProcessed().update[0].time);
-	ASSERT_LT(test1_2->getProcessed().update[0].time, test2_1->getProcessed().update[0].time);
-	ASSERT_LT(test2_1->getProcessed().update[0].time, test3->getProcessed().update[1].time);
-	ASSERT_LT(test3->getProcessed().update[0].time, test3_1->getProcessed().update[1].time);
-	ASSERT_LT(test3_1->getProcessed().update[0].time, test4->getProcessed().update[1].time);
+	ASSERT_LT(test1_1->get_processed().update[0].time, test1_2->get_processed().update[0].time);
+	ASSERT_LT(test1_2->get_processed().update[0].time, test2_1->get_processed().update[0].time);
+	ASSERT_LT(test2_1->get_processed().update[0].time, test3->get_processed().update[1].time);
+	ASSERT_LT(test3->get_processed().update[0].time, test3_1->get_processed().update[1].time);
+	ASSERT_LT(test3_1->get_processed().update[0].time, test4->get_processed().update[1].time);
 
 	delete test1_1;
 	delete test1_2;
@@ -66,22 +66,22 @@ TEST(Animator, copy) {
 
 	delete animator.copy();
 
-	ASSERT_EQ(test1->getProcessed().copy.size(), 1);
-	ASSERT_EQ(test2->getProcessed().copy.size(), 1);
-	ASSERT_EQ(test1_1->getProcessed().copy.size(), 1);
-	ASSERT_EQ(test1_2->getProcessed().copy.size(), 1);
-	ASSERT_EQ(test2_1->getProcessed().copy.size(), 1);
-	ASSERT_EQ(test2_2->getProcessed().copy.size(), 1);
+	ASSERT_EQ(test1->get_processed().copy.size(), 1);
+	ASSERT_EQ(test2->get_processed().copy.size(), 1);
+	ASSERT_EQ(test1_1->get_processed().copy.size(), 1);
+	ASSERT_EQ(test1_2->get_processed().copy.size(), 1);
+	ASSERT_EQ(test2_1->get_processed().copy.size(), 1);
+	ASSERT_EQ(test2_2->get_processed().copy.size(), 1);
 
 	animator.update(3.f);
 	delete animator.copy();
 
-	ASSERT_EQ(test1->getProcessed().copy.size(), 2);
-	ASSERT_EQ(test2->getProcessed().copy.size(), 2);
-	ASSERT_EQ(test1_1->getProcessed().copy.size(), 2);
-	ASSERT_EQ(test1_2->getProcessed().copy.size(), 2);
-	ASSERT_EQ(test2_1->getProcessed().copy.size(), 2);
-	ASSERT_EQ(test2_2->getProcessed().copy.size(), 2);
+	ASSERT_EQ(test1->get_processed().copy.size(), 2);
+	ASSERT_EQ(test2->get_processed().copy.size(), 2);
+	ASSERT_EQ(test1_1->get_processed().copy.size(), 2);
+	ASSERT_EQ(test1_2->get_processed().copy.size(), 2);
+	ASSERT_EQ(test2_1->get_processed().copy.size(), 2);
+	ASSERT_EQ(test2_2->get_processed().copy.size(), 2);
 
 	delete test1_1;
 	delete test1_2;

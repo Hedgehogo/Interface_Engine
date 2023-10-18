@@ -9,11 +9,11 @@ namespace ie {
 		DownLeft, Down, DownRight
 	};
 	
-	Location getVerticalLocation(Location2 location2);
+	Location get_vertical_location(Location2 location2);
 	
-	Location getHorizontalLocation(Location2 location2);
+	Location get_horizontal_location(Location2 location2);
 	
-	Location2 makeLocation2(Location vertical, Location horizontal);
+	Location2 make_location2(Location vertical, Location horizontal);
 	
 	template<>
 	struct Decode<Location2> {

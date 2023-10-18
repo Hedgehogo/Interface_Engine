@@ -9,11 +9,11 @@
 #include "IE/sizing-positioning/IPositioning/FnPositioning/FnPositioning.hpp"
 
 namespace ie {
-	IPositioning* make_position(float coefficient, float offset, bool relativeTarget = false);
+	IPositioning* make_position(float coefficient, float offset, bool relative_target = false);
 	
-	IPositioning* make_position(float coefficient, float objectCoefficient, float offset, bool relativeTarget = false);
+	IPositioning* make_position(float coefficient, float object_coefficient, float offset, bool relative_target = false);
 	
-	IPositioning* make_position(Location parentSide, Location objectSide, float offset);
+	IPositioning* make_position(Location parent_side, Location object_side, float offset);
 	
-	IPositioning* make_position(FnPositioning::FindPositionFn findPositionFn);
+	IPositioning* make_position(FnPositioning::FindPositionFn find_position_fn);
 }

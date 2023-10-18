@@ -6,6 +6,6 @@
 #include <x86intrin.h>
 #endif
 
-inline unsigned long long getProcessorTime(){
+inline unsigned long long get_processor_time(){
 	return __rdtsc();
 }

@@ -6,82 +6,82 @@ namespace ie {
 		horizontal(std::move(horizontal)), vertical(std::move(vertical)) {
 	}
 	
-	Sizing2::Make::Make(bool relativeParent) :
-		horizontal(make_size_make(relativeParent)), vertical(make_size_make(relativeParent)) {
+	Sizing2::Make::Make(bool relative_parent) :
+		horizontal(make_size_make(relative_parent)), vertical(make_size_make(relative_parent)) {
 	}
 	
-	Sizing2::Make::Make(sf::Vector2f constSize) :
-		horizontal(make_size_make(constSize.x)), vertical(make_size_make(constSize.y)) {
+	Sizing2::Make::Make(sf::Vector2f const_size) :
+		horizontal(make_size_make(const_size.x)), vertical(make_size_make(const_size.y)) {
 	}
 	
-	Sizing2::Make::Make(sf::Vector2f coefficient, sf::Vector2f addition, bool relativeTarget) :
-		horizontal(make_size_make(coefficient.x, addition.x, relativeTarget)),
-		vertical(make_size_make(coefficient.y, addition.y, relativeTarget)) {
+	Sizing2::Make::Make(sf::Vector2f coefficient, sf::Vector2f addition, bool relative_target) :
+		horizontal(make_size_make(coefficient.x, addition.x, relative_target)),
+		vertical(make_size_make(coefficient.y, addition.y, relative_target)) {
 	}
 	
-	Sizing2::Make::Make(sf::Vector2f targetCoefficient, sf::Vector2f parentCoefficient, sf::Vector2f addition) :
-		horizontal(make_size_make(targetCoefficient.x, parentCoefficient.x, addition.x)),
-		vertical(make_size_make(targetCoefficient.y, parentCoefficient.y, addition.y)) {
+	Sizing2::Make::Make(sf::Vector2f target_coefficient, sf::Vector2f parent_coefficient, sf::Vector2f addition) :
+		horizontal(make_size_make(target_coefficient.x, parent_coefficient.x, addition.x)),
+		vertical(make_size_make(target_coefficient.y, parent_coefficient.y, addition.y)) {
 	}
 	
-	Sizing2* Sizing2::Make::make(Sizing2InitInfo initInfo) {
-		return new Sizing2{std::move(*this), initInfo};
+	Sizing2* Sizing2::Make::make(Sizing2InitInfo init_info) {
+		return new Sizing2{std::move(*this), init_info};
 	}
 	
-	Sizing2::Sizing2(Make&& make, Sizing2InitInfo initInfo) :
-		horizontal(make.horizontal->make(initInfo.normalSize.x)),
-		vertical(make.vertical->make(initInfo.normalSize.y)),
-		renderTarget(&initInfo.renderTarget) {
+	Sizing2::Sizing2(Make&& make, Sizing2InitInfo init_info) :
+		horizontal(make.horizontal->make(init_info.normal_size.x)),
+		vertical(make.vertical->make(init_info.normal_size.y)),
+		render_target(&init_info.render_target) {
 	}
 	
 	Sizing2::Sizing2(BoxPtr<ISizing>&& horizontal, BoxPtr<ISizing>&& vertical) :
-		horizontal(std::move(horizontal)), vertical(std::move(vertical)), renderTarget(nullptr) {
+		horizontal(std::move(horizontal)), vertical(std::move(vertical)), render_target(nullptr) {
 	}
 	
-	Sizing2::Sizing2(bool relativeParent) :
-		horizontal(BoxPtr{make_size_make(relativeParent)}->make(0)),
-		vertical(BoxPtr{make_size_make(relativeParent)}->make(0)),
-		renderTarget(nullptr) {
+	Sizing2::Sizing2(bool relative_parent) :
+		horizontal(BoxPtr{make_size_make(relative_parent)}->make(0)),
+		vertical(BoxPtr{make_size_make(relative_parent)}->make(0)),
+		render_target(nullptr) {
 	}
 	
-	Sizing2::Sizing2(sf::Vector2f constSize) :
-		horizontal(BoxPtr{make_size_make(constSize.x)}->make(0)),
-		vertical(BoxPtr{make_size_make(constSize.y)}->make(0)),
-		renderTarget(nullptr) {
+	Sizing2::Sizing2(sf::Vector2f const_size) :
+		horizontal(BoxPtr{make_size_make(const_size.x)}->make(0)),
+		vertical(BoxPtr{make_size_make(const_size.y)}->make(0)),
+		render_target(nullptr) {
 	}
 	
-	Sizing2::Sizing2(sf::Vector2f coefficient, sf::Vector2f addition, bool relativeTarget) :
-		horizontal(BoxPtr{make_size_make(coefficient.x, addition.x, relativeTarget)}->make(0)),
-		vertical(BoxPtr{make_size_make(coefficient.y, addition.y, relativeTarget)}->make(0)),
-		renderTarget(nullptr) {
+	Sizing2::Sizing2(sf::Vector2f coefficient, sf::Vector2f addition, bool relative_target) :
+		horizontal(BoxPtr{make_size_make(coefficient.x, addition.x, relative_target)}->make(0)),
+		vertical(BoxPtr{make_size_make(coefficient.y, addition.y, relative_target)}->make(0)),
+		render_target(nullptr) {
 	}
 	
-	Sizing2::Sizing2(sf::Vector2f targetCoefficient, sf::Vector2f parentCoefficient, sf::Vector2f addition) :
-		horizontal(BoxPtr{make_size_make(targetCoefficient.x, parentCoefficient.x, addition.x)}->make(0)),
-		vertical(BoxPtr{make_size_make(targetCoefficient.y, parentCoefficient.y, addition.y)}->make(0)),
-		renderTarget(nullptr) {
+	Sizing2::Sizing2(sf::Vector2f target_coefficient, sf::Vector2f parent_coefficient, sf::Vector2f addition) :
+		horizontal(BoxPtr{make_size_make(target_coefficient.x, parent_coefficient.x, addition.x)}->make(0)),
+		vertical(BoxPtr{make_size_make(target_coefficient.y, parent_coefficient.y, addition.y)}->make(0)),
+		render_target(nullptr) {
 	}
 	
-	void Sizing2::init(sf::RenderTarget& renderTarget, sf::Vector2f normalSize) {
-		this->renderTarget = &renderTarget;
-		horizontal->init(normalSize.x);
-		vertical->init(normalSize.y);
+	void Sizing2::init(sf::RenderTarget& render_target, sf::Vector2f normal_size) {
+		this->render_target = &render_target;
+		horizontal->init(normal_size.x);
+		vertical->init(normal_size.y);
 	}
 	
-	sf::Vector2f Sizing2::findSize(sf::Vector2f parentSize) {
-		sf::Vector2f targetSize{renderTarget->getSize()};
-		return {horizontal->findSize(parentSize.x, targetSize.x), vertical->findSize(parentSize.y, targetSize.y)};
+	sf::Vector2f Sizing2::find_size(sf::Vector2f parent_size) {
+		sf::Vector2f target_size{render_target->getSize()};
+		return {horizontal->find_size(parent_size.x, target_size.x), vertical->find_size(parent_size.y, target_size.y)};
 	}
 	
-	sf::Vector2f Sizing2::getParentSize(sf::Vector2f objectSize) {
-		return {horizontal->getParentSize(objectSize.x), vertical->getParentSize(objectSize.y)};
+	sf::Vector2f Sizing2::get_parent_size(sf::Vector2f object_size) {
+		return {horizontal->get_parent_size(object_size.x), vertical->get_parent_size(object_size.y)};
 	}
 	
 	Sizing2* Sizing2::copy() {
 		return new Sizing2{*this};
 	}
 	
-	bool DecodePointer<Sizing2>::decodePointer(const YAML::Node& node, Sizing2*& sizing2) {
+	bool DecodePointer<Sizing2>::decode_pointer(const YAML::Node& node, Sizing2*& sizing2) {
 		if(node.IsScalar()) {
 			sizing2 = new Sizing2{node.as<sf::Vector2f>()};
 		} else {
@@ -92,7 +92,7 @@ namespace ie {
 				};
 			} else if(node["relative"]) {
 				sizing2 = new Sizing2{
-					convertBool(node["relative"], "parent", "normal")
+					convert_bool(node["relative"], "parent", "normal")
 				};
 			} else if(node["const-size"]) {
 				sizing2 = new Sizing2{
@@ -101,14 +101,14 @@ namespace ie {
 			} else if(node["coefficient"]) {
 				sizing2 = new Sizing2{
 					node["coefficient"].as<sf::Vector2f>(),
-					convDef(node["addition"], sf::Vector2f{}),
-					convBoolDef(node["relative"], "target", "parent")
+					conv_def(node["addition"], sf::Vector2f{}),
+					conv_bool_def(node["relative"], "target", "parent")
 				};
 			} else if(node["target-coefficient"] && node["parent-coefficient"]) {
 				sizing2 = new Sizing2{
 					node["target-coefficient"].as<sf::Vector2f>(),
 					node["parent-coefficient"].as<sf::Vector2f>(),
-					convDef(node["addition"], sf::Vector2f{})
+					conv_def(node["addition"], sf::Vector2f{})
 				};
 			} else {
 				throw YAML::BadConversion{node.Mark()};

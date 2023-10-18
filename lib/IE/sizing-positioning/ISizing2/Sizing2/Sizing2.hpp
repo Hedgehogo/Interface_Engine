@@ -12,45 +12,45 @@ namespace ie {
 			
 			Make(BoxPtr<ISizing::Make>&& horizontal, BoxPtr<ISizing::Make>&& vertical);
 			
-			Make(bool relativeParent);
+			Make(bool relative_parent);
 			
-			Make(sf::Vector2f constSize);
+			Make(sf::Vector2f const_size);
 			
-			Make(sf::Vector2f coefficient, sf::Vector2f addition, bool relativeTarget = false);
+			Make(sf::Vector2f coefficient, sf::Vector2f addition, bool relative_target = false);
 			
-			Make(sf::Vector2f targetCoefficient, sf::Vector2f parentCoefficient, sf::Vector2f addition);
+			Make(sf::Vector2f target_coefficient, sf::Vector2f parent_coefficient, sf::Vector2f addition);
 			
-			Sizing2* make(Sizing2InitInfo initInfo) override;
+			Sizing2* make(Sizing2InitInfo init_info) override;
 		};
 		
-		Sizing2(Make&& make, Sizing2InitInfo initInfo);
+		Sizing2(Make&& make, Sizing2InitInfo init_info);
 		
 		Sizing2(BoxPtr<ISizing>&& horizontal, BoxPtr<ISizing>&& vertical);
 		
-		Sizing2(bool relativeParent);
+		Sizing2(bool relative_parent);
 		
-		Sizing2(sf::Vector2f constSize);
+		Sizing2(sf::Vector2f const_size);
 		
-		Sizing2(sf::Vector2f coefficient, sf::Vector2f addition, bool relativeTarget = false);
+		Sizing2(sf::Vector2f coefficient, sf::Vector2f addition, bool relative_target = false);
 		
-		Sizing2(sf::Vector2f targetCoefficient, sf::Vector2f parentCoefficient, sf::Vector2f addition);
+		Sizing2(sf::Vector2f target_coefficient, sf::Vector2f parent_coefficient, sf::Vector2f addition);
 		
-		void init(sf::RenderTarget& renderTarget, sf::Vector2f normalSize) override;
+		void init(sf::RenderTarget& render_target, sf::Vector2f normal_size) override;
 		
-		sf::Vector2f findSize(sf::Vector2f parentSize) override;
+		sf::Vector2f find_size(sf::Vector2f parent_size) override;
 		
-		sf::Vector2f getParentSize(sf::Vector2f objectSize) override;
+		sf::Vector2f get_parent_size(sf::Vector2f object_size) override;
 		
 		Sizing2* copy() override;
 	
 	protected:
 		BoxPtr<ISizing> horizontal;
 		BoxPtr<ISizing> vertical;
-		sf::RenderTarget* renderTarget;
+		sf::RenderTarget* render_target;
 	};
 	
 	template<>
 	struct DecodePointer<Sizing2> {
-		static bool decodePointer(const YAML::Node& node, Sizing2*& sizing2);
+		static bool decode_pointer(const YAML::Node& node, Sizing2*& sizing2);
 	};
 }

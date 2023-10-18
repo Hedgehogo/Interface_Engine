@@ -2,25 +2,25 @@
 #include <utility>
 
 namespace ie {
-	IPositioning* make_position(float coefficient, float offset, bool relativeTarget) {
-		if(!relativeTarget) {
+	IPositioning* make_position(float coefficient, float offset, bool relative_target) {
+		if(!relative_target) {
 			return new InternalPositioning{coefficient, offset};
 		}
 		return new InternalTargetPositioning{coefficient, offset};
 	}
 	
-	IPositioning* make_position(float coefficient, float objectCoefficient, float offset, bool relativeTarget) {
-		if(!relativeTarget) {
-			return new MatchPositioning{coefficient, objectCoefficient, offset};
+	IPositioning* make_position(float coefficient, float object_coefficient, float offset, bool relative_target) {
+		if(!relative_target) {
+			return new MatchPositioning{coefficient, object_coefficient, offset};
 		}
-		return new MatchTargetPositioning{coefficient, objectCoefficient, offset};
+		return new MatchTargetPositioning{coefficient, object_coefficient, offset};
 	}
 	
-	IPositioning* make_position(Location parentSide, Location objectSide, float offset) {
-		return new MatchSidesPositioning{parentSide, objectSide, offset};
+	IPositioning* make_position(Location parent_side, Location object_side, float offset) {
+		return new MatchSidesPositioning{parent_side, object_side, offset};
 	}
 	
-	IPositioning* make_position(FnPositioning::FindPositionFn findPositionFn) {
-		return new FnPositioning{std::move(findPositionFn)};
+	IPositioning* make_position(FnPositioning::FindPositionFn find_position_fn) {
+		return new FnPositioning{std::move(find_position_fn)};
 	}
 }

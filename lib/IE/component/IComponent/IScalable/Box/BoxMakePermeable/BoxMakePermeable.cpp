@@ -1,36 +1,36 @@
 #include "BoxMakePermeable.hpp"
 
 namespace ie {
-	BoxMakePermeable* BoxMakePermeable::Make::make(InitInfo initInfo) {
-		return new BoxMakePermeable{std::move(*this), initInfo};
+	BoxMakePermeable* BoxMakePermeable::Make::make(InitInfo init_info) {
+		return new BoxMakePermeable{std::move(*this), init_info};
 	}
 	
-	BoxMakePermeable::Make::Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize) :
-		object(std::move(object)), minSize(minSize) {
+	BoxMakePermeable::Make::Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size) :
+		object(std::move(object)), min_size(min_size) {
 	}
 	
-	BoxMakePermeable::BoxMakePermeable(Make&& make, InitInfo initInfo) :
-		Box(make.minSize), object(make.object->make(initInfo)) {
+	BoxMakePermeable::BoxMakePermeable(Make&& make, InitInfo init_info) :
+		Box(make.min_size), object(make.object->make(init_info)) {
 	}
 	
-	BoxMakePermeable::BoxMakePermeable(BoxPtr<IScalable>&& object, sf::Vector2f minSize) :
-		Box(minSize), object(std::move(object)) {
+	BoxMakePermeable::BoxMakePermeable(BoxPtr<IScalable>&& object, sf::Vector2f min_size) :
+		Box(min_size), object(std::move(object)) {
 	}
 	
-	void BoxMakePermeable::init(InitInfo initInfo) {
-		object->init(initInfo);
+	void BoxMakePermeable::init(InitInfo init_info) {
+		object->init(init_info);
 	}
 	
-	bool BoxMakePermeable::updateInteractions(sf::Vector2f mousePosition) {
-		object->updateInteractions(mousePosition);
+	bool BoxMakePermeable::update_interactions(sf::Vector2f mouse_position) {
+		object->update_interactions(mouse_position);
 		return false;
 	}
 	
-	IScalable& BoxMakePermeable::getObject() {
+	IScalable& BoxMakePermeable::get_object() {
 		return *object;
 	}
 	
-	const IScalable& BoxMakePermeable::getObject() const {
+	const IScalable& BoxMakePermeable::get_object() const {
 		return *object;
 	}
 	
@@ -38,10 +38,10 @@ namespace ie {
 		return new BoxMakePermeable{*this};
 	}
 	
-	bool DecodePointer<BoxMakePermeable>::decodePointer(const YAML::Node& node, BoxMakePermeable*& boxMakePermeable) {
-		boxMakePermeable = new BoxMakePermeable{
+	bool DecodePointer<BoxMakePermeable>::decode_pointer(const YAML::Node& node, BoxMakePermeable*& box_make_permeable) {
+		box_make_permeable = new BoxMakePermeable{
 			node["object"].as<BoxPtr<IScalable> >(),
-			convDef(node["min-size"], sf::Vector2f{})
+			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
 	}

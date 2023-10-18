@@ -6,36 +6,36 @@
 namespace ie {
 	class FnSizing2 : public virtual ISizing2 {
 	public:
-		using FindSizeFn = std::function<sf::Vector2f(sf::Vector2f parentSize, sf::Vector2f targetSize, sf::Vector2f normalSize)>;
-		using GetParentSizeFn = std::function<sf::Vector2f(sf::Vector2f objectMinSize)>;
+		using FindSizeFn = std::function<sf::Vector2f(sf::Vector2f parent_size, sf::Vector2f target_size, sf::Vector2f normal_size)>;
+		using GetParentSizeFn = std::function<sf::Vector2f(sf::Vector2f object_min_size)>;
 		
 		struct Make : public virtual ISizing2::Make {
-			FindSizeFn findSizeFn;
-			GetParentSizeFn getParentSizeFn;
+			FindSizeFn find_size_fn;
+			GetParentSizeFn get_parent_size_fn;
 			
 			Make() = default;
 			
-			Make(FindSizeFn findSizeFn, GetParentSizeFn getParentSizeFn);
+			Make(FindSizeFn find_size_fn, GetParentSizeFn get_parent_size_fn);
 			
-			FnSizing2* make(Sizing2InitInfo initInfo) override;
+			FnSizing2* make(Sizing2InitInfo init_info) override;
 		};
 		
-		FnSizing2(Make&& make, Sizing2InitInfo initInfo);
+		FnSizing2(Make&& make, Sizing2InitInfo init_info);
 		
-		FnSizing2(FindSizeFn findSizeFn, GetParentSizeFn getParentSizeFn);
+		FnSizing2(FindSizeFn find_size_fn, GetParentSizeFn get_parent_size_fn);
 		
-		void init(sf::RenderTarget& renderTarget, sf::Vector2f normalSize) override;
+		void init(sf::RenderTarget& render_target, sf::Vector2f normal_size) override;
 		
-		sf::Vector2f findSize(sf::Vector2f parentSize) override;
+		sf::Vector2f find_size(sf::Vector2f parent_size) override;
 		
-		sf::Vector2f getParentSize(sf::Vector2f objectSize) override;
+		sf::Vector2f get_parent_size(sf::Vector2f object_size) override;
 		
 		FnSizing2* copy() override;
 	
 	protected:
-		FindSizeFn findSizeFn;
-		GetParentSizeFn getParentSizeFn;
-		sf::RenderTarget* renderTarget;
-		sf::Vector2f normalSize;
+		FindSizeFn find_size_fn;
+		GetParentSizeFn get_parent_size_fn;
+		sf::RenderTarget* render_target;
+		sf::Vector2f normal_size;
 	};
 }

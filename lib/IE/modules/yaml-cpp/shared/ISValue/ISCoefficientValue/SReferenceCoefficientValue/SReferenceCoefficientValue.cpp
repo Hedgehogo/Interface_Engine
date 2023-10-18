@@ -5,14 +5,14 @@ namespace ie {
 	SReferenceCoefficientValue::SReferenceCoefficientValue(float& value) : SReferenceValue(value) {
 	}
 	
-	void SReferenceCoefficientValue::setValue(const float& value) {
-		*this->valueReference = std::min(std::max(value, 0.f), 1.f);
+	void SReferenceCoefficientValue::set_value(const float& value) {
+		*this->value_reference = std::min(std::max(value, 0.f), 1.f);
 		for(const auto& set: setters)
-			set(*this->valueReference);
+			set(*this->value_reference);
 	}
 	
-	void SReferenceCoefficientValue::setReference(float& valueReference) {
-		this->valueReference = &valueReference;
-		setValue(valueReference);
+	void SReferenceCoefficientValue::set_reference(float& value_reference) {
+		this->value_reference = &value_reference;
+		set_value(value_reference);
 	}
 }

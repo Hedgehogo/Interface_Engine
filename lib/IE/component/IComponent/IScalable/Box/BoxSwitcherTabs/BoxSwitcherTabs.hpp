@@ -12,45 +12,45 @@ namespace ie {
 			std::vector<BoxPtr<IScalable::Make> > objects;
 			PSint value;
 			Key key;
-			bool isHorizontal;
-			sf::Vector2f minSize = {};
+			bool is_horizontal;
+			sf::Vector2f min_size = {};
 			
-			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key = Key::MouseLeft, bool isHorizontal = true, sf::Vector2f minSize = {});
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key = Key::MouseLeft, bool is_horizontal = true, sf::Vector2f min_size = {});
 			
-			BoxSwitcherTabs* make(InitInfo initInfo) override;
+			BoxSwitcherTabs* make(InitInfo init_info) override;
 		};
 		
-		BoxSwitcherTabs(Make&& make, InitInfo initInfo);
+		BoxSwitcherTabs(Make&& make, InitInfo init_info);
 		
-		BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize = {});
+		BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool is_horizontal, sf::Vector2f min_size = {});
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		std::size_t getArraySize() const override;
+		std::size_t get_array_size() const override;
 		
-		IScalable& getObjectAt(std::size_t index) override;
+		IScalable& get_object_at(std::size_t index) override;
 		
-		const IScalable& getObjectAt(std::size_t index) const override;
+		const IScalable& get_object_at(std::size_t index) const override;
 		
-		int getTab(sf::Vector2f position);
+		int get_tab(sf::Vector2f position);
 		
 		BoxSwitcherTabs* copy() override;
 	
 	protected:
 		BasicInteractiveData<BoxSwitcherTabs&> interactive;
 		std::vector<BoxPtr<IScalable> > objects;
-		bool isHorizontal;
+		bool is_horizontal;
 		PSint value;
 	};
 	
 	template<>
 	struct DecodePointer<BoxSwitcherTabs> {
-		static bool decodePointer(const YAML::Node& node, BoxSwitcherTabs*& switcherTabs);
+		static bool decode_pointer(const YAML::Node& node, BoxSwitcherTabs*& switcher_tabs);
 	};
 }

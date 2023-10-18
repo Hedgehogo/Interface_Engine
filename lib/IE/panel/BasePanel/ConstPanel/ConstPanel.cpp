@@ -7,37 +7,37 @@ namespace ie {
 		object(std::move(object)), sizing(std::move(sizing)), positioning(std::move(positioning)), displayed(displayed) {
 	}
 	
-	ConstPanel* ConstPanel::Make::make(InitInfo initInfo) {
-		return new ConstPanel{std::move(*this), initInfo};
+	ConstPanel* ConstPanel::Make::make(InitInfo init_info) {
+		return new ConstPanel{std::move(*this), init_info};
 	}
 	
-	ConstPanel::ConstPanel(Make&& make, InitInfo initInfo) :
+	ConstPanel::ConstPanel(Make&& make, InitInfo init_info) :
 		BasePanel(
 			std::move(make.object),
 			std::move(make.sizing),
 			std::move(make.positioning),
 			make.displayed,
-			initInfo,
-			initInfo
+			init_info,
+			init_info
 		) {
-		initInfo.panelManager.displayPanel(this);
+		init_info.panel_manager.display_panel(this);
 	}
 	
 	ConstPanel::ConstPanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :
 		BasePanel(std::move(object), std::move(sizing), std::move(positioning), displayed) {
 	}
 	
-	void ConstPanel::init(InitInfo initInfo) {
-		BasePanel::init(initInfo);
-		object->init(initInfo.copy(this->drawManager).copy(this->updateManager));
-		initInfo.panelManager.displayPanel(this);
+	void ConstPanel::init(InitInfo init_info) {
+		BasePanel::init(init_info);
+		object->init(init_info.copy(this->draw_manager).copy(this->update_manager));
+		init_info.panel_manager.display_panel(this);
 	}
 	
-	bool ConstPanel::isIndependent() {
+	bool ConstPanel::is_independent() {
 		return false;
 	}
 	
-	bool ConstPanel::isFree() {
+	bool ConstPanel::is_free() {
 		return true;
 	}
 	
@@ -45,12 +45,12 @@ namespace ie {
 		return new ConstPanel{*this};
 	}
 	
-	bool DecodePointer<ConstPanel>::decodePointer(const YAML::Node& node, ConstPanel*& constPanel) {
-		constPanel = new ConstPanel{
+	bool DecodePointer<ConstPanel>::decode_pointer(const YAML::Node& node, ConstPanel*& const_panel) {
+		const_panel = new ConstPanel{
 			node["object"].as<BoxPtr<IScalable> >(),
 			node["sizing"].as<BoxPtr<ISizing2> >(),
 			node["positioning"].as<BoxPtr<IPositioning2> >(),
-			convDef(node["displayed"], false)
+			conv_def(node["displayed"], false)
 		};
 		return true;
 	}

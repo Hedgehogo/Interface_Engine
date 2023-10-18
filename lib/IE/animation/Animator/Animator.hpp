@@ -16,11 +16,11 @@ namespace ie {
 	
 	protected:
 		std::vector<IAnimatorUnit*> units;
-		std::vector<IAnimatorUnit*> unitsBuff;
+		std::vector<IAnimatorUnit*> units_buff;
 	};
 	
 	template<>
 	struct DecodePointer<Animator> {
-		static bool decodePointer(const YAML::Node& node, Animator*& animator);
+		static bool decode_pointer(const YAML::Node& node, Animator*& animator);
 	};
 }

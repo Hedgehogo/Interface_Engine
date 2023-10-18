@@ -11,44 +11,44 @@ namespace ie {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<IUninteractive::Make> background;
 			sf::Vector2f offset = {};
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& background, sf::Vector2f offset = {}, sf::Vector2f minSize = {});
+			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& background, sf::Vector2f offset = {}, sf::Vector2f min_size = {});
 			
-			BoxBackground* make(InitInfo initInfo) override;
+			BoxBackground* make(InitInfo init_info) override;
 		};
 		
-		BoxBackground(Make&& make, InitInfo initInfo);
+		BoxBackground(Make&& make, InitInfo init_info);
 		
-		BoxBackground(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, sf::Vector2f offset = {}, sf::Vector2f minSize = {});
+		BoxBackground(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, sf::Vector2f offset = {}, sf::Vector2f min_size = {});
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		void setPosition(sf::Vector2f position) override;
+		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
 		
-		void setSize(sf::Vector2f size) override;
+		void set_size(sf::Vector2f size) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
-		IUninteractive& getBackground() override;
+		IUninteractive& get_background() override;
 		
-		const IUninteractive& getBackground() const override;
+		const IUninteractive& get_background() const override;
 		
-		IScalable& getObject() override;
+		IScalable& get_object() override;
 		
-		const IScalable& getObject() const override;
+		const IScalable& get_object() const override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
 		BoxBackground* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
 		BoxPtr<IUninteractive> background;
@@ -58,6 +58,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<BoxBackground> {
-		static bool decodePointer(const YAML::Node& node, BoxBackground*& boxWithBackground);
+		static bool decode_pointer(const YAML::Node& node, BoxBackground*& box_with_background);
 	};
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Window.hpp>
-#include "_test/_imageEqual/_imageEqual.hpp"
+#include "_test/_image_equal/image_equal.hpp"
 #include <IE/component/IDrawable/DrawManager/DrawManager.hpp>
 #include <IE/component/IUpdatable/UpdateManager/UpdateManager.hpp>
 #include <IE/interaction/InteractionManager/InteractionManager.hpp>
@@ -11,20 +11,20 @@
 
 struct InitInfoData {
 	sf::RenderWindow window{};
-	sf::RenderTexture renderTarget{};
-	ie::DrawManager drawManager{};
-	ie::UpdateManager updateManager{};
-	ie::InteractionManager interactionManager{};
-	ie::InteractionStack interactionStack{};
-	ie::PanelManager panelManager{};
+	sf::RenderTexture render_target{};
+	ie::DrawManager draw_manager{};
+	ie::UpdateManager update_manager{};
+	ie::InteractionManager interaction_manager{};
+	ie::InteractionStack interaction_stack{};
+	ie::PanelManager panel_manager{};
 	
 	InitInfoData(sf::Vector2u size = {1, 1});
 	
-	ie::InitInfo makeInitInfo();
+	ie::InitInfo make_init_info();
 	
-	void renderSave(std::filesystem::path path);
+	void render_save(std::filesystem::path path);
 	
-	bool renderEqual(std::filesystem::path path, float precision = 0);
+	bool render_equal(std::filesystem::path path, float precision = 0);
 	
-	bool renderEqualWithSave(std::filesystem::path path, float precision = 0);
+	bool render_equal_with_save(std::filesystem::path path, float precision = 0);
 };

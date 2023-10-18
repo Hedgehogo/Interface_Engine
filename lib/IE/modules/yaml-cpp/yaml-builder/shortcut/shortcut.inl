@@ -5,72 +5,72 @@
 namespace ie {
 	template<typename Base, typename Type>
 	void inherit(const std::vector<std::string>& aliases) {
-		YamlBuilder<Type>::addAliases(aliases);
-		YamlBuilder<Base>::template addType<Type>();
+		YamlBuilder<Type>::add_aliases(aliases);
+		YamlBuilder<Base>::template add_type<Type>();
 		
-		addToYamlBuilders<Base>();
-		addToYamlBuilders<Type>();
+		add_to_yaml_builders<Base>();
+		add_to_yaml_builders<Type>();
 	}
 	
 	template<typename T>
-	void inherit(std::string baseTypeName, const std::vector<std::string>& aliases){
-		YamlBuilder<T>::addAliases(aliases);
-		if (detail::BaseYamlBuilder* base = detail::yamlBuilders[baseTypeName]; base)
-			detail::yamlBuilders[baseTypeName]->addType(&YamlBuilder<T>::builder);
+	void inherit(std::string base_type_name, const std::vector<std::string>& aliases){
+		YamlBuilder<T>::add_aliases(aliases);
+		if (detail::BaseYamlBuilder* base = detail::yaml_builders[base_type_name]; base)
+			detail::yaml_builders[base_type_name]->add_type(&YamlBuilder<T>::builder);
 		else
-			throw YamlBuilderDoesNotExistException{baseTypeName};
-		addToYamlBuilders<T>();
+			throw YamlBuilderDoesNotExistException{base_type_name};
+		add_to_yaml_builders<T>();
 	}
 	
 	template<typename Base, typename Type, typename... Types>
-	void addType() {
-		YamlBuilder<Base>::template addType<Type>();
+	void add_type() {
+		YamlBuilder<Base>::template add_type<Type>();
 		
-		addToYamlBuilders<Base>();
-		addToYamlBuilders<Type>();
+		add_to_yaml_builders<Base>();
+		add_to_yaml_builders<Type>();
 		
-		addType<Base, Types...>();
+		add_type<Base, Types...>();
 	}
 	
 	template<typename Base, typename... Types>
-	void addType(const std::vector<std::string>& aliases) {
-		YamlBuilder<Base>::addAliases(aliases);
-		addType<Base, Types...>();
+	void add_type(const std::vector<std::string>& aliases) {
+		YamlBuilder<Base>::add_aliases(aliases);
+		add_type<Base, Types...>();
 	}
 	
 	template<typename Type, typename Base, typename... Bases>
-	void addBase() {
-		YamlBuilder<Base>::template addType<Type>();
+	void add_base() {
+		YamlBuilder<Base>::template add_type<Type>();
 		
-		addToYamlBuilders<Base>();
-		addToYamlBuilders<Type>();
+		add_to_yaml_builders<Base>();
+		add_to_yaml_builders<Type>();
 		
-		addBase<Type, Bases...>();
+		add_base<Type, Bases...>();
 	}
 	
 	template<typename Type, typename... Bases>
-	void addBase(const std::vector<std::string>& aliases) {
-		YamlBuilder<Type>::addAliases(aliases);
-		addBase<Type, Bases...>();
+	void add_base(const std::vector<std::string>& aliases) {
+		YamlBuilder<Type>::add_aliases(aliases);
+		add_base<Type, Bases...>();
 	}
 	
 	template<typename Type>
-	void addAliases(const std::vector<std::string>& aliases) {
-		YamlBuilder<Type>::addAliases(aliases);
+	void add_aliases(const std::vector<std::string>& aliases) {
+		YamlBuilder<Type>::add_aliases(aliases);
 	}
 	
 	template<typename Type>
-	void addDetermine(const detail::DetermineTypeFunc& function) {
-		YamlBuilder<Type>::addDetermine(function);
+	void add_determine(const detail::DetermineTypeFunc& function) {
+		YamlBuilder<Type>::add_determine(function);
 	}
 	
 	template<typename Type>
-	void addDetermine(const detail::SimpleDetermineTypeFunc& function) {
-		YamlBuilder<Type>::addDetermine(function);
+	void add_determine(const detail::SimpleDetermineTypeFunc& function) {
+		YamlBuilder<Type>::add_determine(function);
 	}
 	
 	template<typename Base>
-	void addFunc(detail::FuncYamlBuilder::BuildFunc<Base> function, std::vector<std::string> names) {
-		YamlBuilder<Base>::addType(function, names);
+	void add_func(detail::FuncYamlBuilder::BuildFunc<Base> function, std::vector<std::string> names) {
+		YamlBuilder<Base>::add_type(function, names);
 	}
 }

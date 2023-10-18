@@ -5,18 +5,18 @@
 namespace ie {
 	class BasePanelInteraction : public virtual IPanelInteraction {
 	public:
-		BasePanelInteraction(PanelActionInitInfo initInfo);
+		BasePanelInteraction(PanelActionInitInfo init_info);
 		
 		BasePanelInteraction();
 		
-		void init(PanelActionInitInfo initInfo) override;
+		void init(PanelActionInitInfo init_info) override;
 		
-		void setPanel(Panel& panel) override;
+		void set_panel(Panel& panel) override;
 		
 		BasePanelInteraction* copy() override = 0;
 	
 	protected:
 		Panel* panel;
-		IPanelManager* panelManager;
+		IPanelManager* panel_manager;
 	};
 }

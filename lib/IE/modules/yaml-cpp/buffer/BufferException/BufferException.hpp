@@ -7,9 +7,9 @@ namespace ie {
 	public:
 		BufferNonExistentNestingLevelException(YAML::Mark mark, const std::string& name, std::size_t level);
 		
-		std::string getName() const;
+		std::string get_name() const;
 		
-		std::size_t getLevel() const;
+		std::size_t get_level() const;
 	
 	protected:
 		std::string name;
@@ -20,9 +20,9 @@ namespace ie {
 	public:
 		BufferVariableNotFoundException(const std::string& name, const std::string& type);
 		
-		std::string getName() const;
+		std::string get_name() const;
 		
-		std::string getType() const;
+		std::string get_type() const;
 	
 	protected:
 		std::string name;
@@ -33,11 +33,11 @@ namespace ie {
 	public:
 		YamlBufferVariableNotFoundException(YAML::Mark mark, const BufferVariableNotFoundException& exception);
 		
-		BufferVariableNotFoundException getException() const;
+		BufferVariableNotFoundException get_exception() const;
 		
-		std::string getName() const;
+		std::string get_name() const;
 		
-		std::string getType() const;
+		std::string get_type() const;
 	
 	protected:
 		BufferVariableNotFoundException exception;

@@ -3,31 +3,31 @@
 #include "../../yaml.hpp"
 
 namespace ie {
-	std::string removeNamespace(std::string name, std::string nameSpace);
+	std::string remove_namespace(std::string name, std::string name_space);
 	
 	namespace detail {
 		class IYamlBuilder {
 		public:
 			using TypeNameDeformer = std::function<std::string(std::string)>;
 		
-			static void setTypeNameDeformer(const TypeNameDeformer& typeNameDeform);
+			static void set_type_name_deformer(const TypeNameDeformer& type_name_deform);
 			
 			virtual bool build(const YAML::Node& node, void*& object) const = 0;
 			
-			virtual IYamlBuilder* getBuilder(const std::string& type) = 0;
+			virtual IYamlBuilder* get_builder(const std::string& type) = 0;
 			
 			virtual bool determine(const YAML::Node& node, std::string& type) = 0;
 			
-			virtual bool isExists();
+			virtual bool is_exists();
 			
 			explicit operator bool();
 			
 			virtual ~IYamlBuilder() = default;
 		
 		public:
-			static TypeNameDeformer typeNameDeform;
+			static TypeNameDeformer type_name_deform;
 		};
 	}
 	
-	void setTypeNameDeformer(const detail::IYamlBuilder::TypeNameDeformer& typeNameDeform);
+	void set_type_name_deformer(const detail::IYamlBuilder::TypeNameDeformer& type_name_deform);
 }

@@ -8,45 +8,45 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make {
 			std::vector<std::vector<BoxPtr<IScalable::Make> > > objects;
-			std::vector<float> boundsHorizontal;
-			std::vector<float> boundsVertical;
-			sf::Vector2f minSize = {};
+			std::vector<float> bounds_horizontal;
+			std::vector<float> bounds_vertical;
+			sf::Vector2f min_size = {};
 			
-			Make(std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize = {});
+			Make(std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects, std::vector<float> bounds_horizontal, std::vector<float> bounds_vertical, sf::Vector2f min_size = {});
 			
-			Make(std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects, sf::Vector2f minSize = {});
+			Make(std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects, sf::Vector2f min_size = {});
 			
-			BoxBorder* make(InitInfo initInfo) override;
+			BoxBorder* make(InitInfo init_info) override;
 		};
 		
-		BoxBorder(Make&& make, InitInfo initInfo);
+		BoxBorder(Make&& make, InitInfo init_info);
 		
-		BoxBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, std::vector<float> boundsHorizontal, std::vector<float> boundsVertical, sf::Vector2f minSize = {});
+		BoxBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, std::vector<float> bounds_horizontal, std::vector<float> bounds_vertical, sf::Vector2f min_size = {});
 		
-		BoxBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, sf::Vector2f minSize = {});
+		BoxBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, sf::Vector2f min_size = {});
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
 		BoxBorder* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
 		std::vector<std::vector<BoxPtr<IScalable> > > objects;
-		std::vector<float> boundsHorizontal;
-		std::vector<float> boundsVertical;
+		std::vector<float> bounds_horizontal;
+		std::vector<float> bounds_vertical;
 	};
 	
 	template<>
 	struct DecodePointer<BoxBorder> {
-		static bool decodePointer(const YAML::Node& node, BoxBorder*& boxWithBorder);
+		static bool decode_pointer(const YAML::Node& node, BoxBorder*& box_with_border);
 	};
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/Animation/convertToUse/iConvertToUse.hpp"
+#include "IE/Animation/convert_to_use/iConvert_to_use.hpp"
 
 class TestConvertToUse : public ie::IConvertToUse<float>{
 public:
@@ -20,5 +20,5 @@ protected:
 public:
 	explicit TestConvertToUse(float result);
 
-	const Processed &getProcessed() const;
+	const Processed &get_processed() const;
 };

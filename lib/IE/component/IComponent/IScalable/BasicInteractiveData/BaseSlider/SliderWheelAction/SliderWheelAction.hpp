@@ -20,22 +20,22 @@ namespace ie {
 			
 			Make(bool horizontal = false, Relativity relativity = Relativity::RelationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
 			
-			SliderWheelAction* make(BasicActionInitInfo<BaseSlider&> initInfo);
+			SliderWheelAction* make(BasicActionInitInfo<BaseSlider&> init_info);
 		};
 		
-		SliderWheelAction(Make&& make, BasicActionInitInfo<BaseSlider&> initInfo);
+		SliderWheelAction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info);
 		
 		explicit SliderWheelAction(bool horizontal = false, Relativity relativity = Relativity::RelationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
 		
-		void setSlider(BaseSlider& slider);
+		void set_slider(BaseSlider& slider);
 		
-		void startPressed(sf::Vector2i mousePosition, int value) override;
+		void start_pressed(sf::Vector2i mouse_position, int value) override;
 		
-		void stopPressed(sf::Vector2i mousePosition, int value) override;
+		void stop_pressed(sf::Vector2i mouse_position, int value) override;
 		
-		void whilePressed(sf::Vector2i mousePosition, int value) override;
+		void while_pressed(sf::Vector2i mouse_position, int value) override;
 		
-		void whileNotPressed(sf::Vector2i mousePosition, int value) override;
+		void while_not_pressed(sf::Vector2i mouse_position, int value) override;
 		
 		SliderWheelAction* copy() override;
 		

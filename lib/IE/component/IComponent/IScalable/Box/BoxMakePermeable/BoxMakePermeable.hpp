@@ -8,24 +8,24 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> object;
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize = {});
+			Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size = {});
 			
-			BoxMakePermeable* make(InitInfo initInfo) override;
+			BoxMakePermeable* make(InitInfo init_info) override;
 		};
 		
-		BoxMakePermeable(Make&& make, InitInfo initInfo);
+		BoxMakePermeable(Make&& make, InitInfo init_info);
 		
-		BoxMakePermeable(BoxPtr<IScalable>&& object, sf::Vector2f minSize);
+		BoxMakePermeable(BoxPtr<IScalable>&& object, sf::Vector2f min_size);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		IScalable& getObject() override;
+		IScalable& get_object() override;
 		
-		const IScalable& getObject() const override;
+		const IScalable& get_object() const override;
 		
 		BoxMakePermeable* copy() override;
 		
@@ -35,6 +35,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<BoxMakePermeable> {
-		static bool decodePointer(const YAML::Node& node, BoxMakePermeable*& boxMakePermeable);
+		static bool decode_pointer(const YAML::Node& node, BoxMakePermeable*& box_make_permeable);
 	};
 }

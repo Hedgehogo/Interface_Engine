@@ -6,25 +6,25 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicInteractiveData {
 	public:
-		BasicInteractiveData(BoxPtr<typename IBasicInteraction<T>::Make>&& interaction, InitInfo initInfo, T additional);
+		BasicInteractiveData(BoxPtr<typename IBasicInteraction<T>::Make>&& interaction, InitInfo init_info, T additional);
 		
-		BasicInteractiveData(BoxPtr<IBasicInteraction<T> >&& interaction, InitInfo initInfo, T additional);
+		BasicInteractiveData(BoxPtr<IBasicInteraction<T> >&& interaction, InitInfo init_info, T additional);
 		
 		explicit BasicInteractiveData(BoxPtr<IBasicInteraction<T> >&& interaction);
 		
-		void init(InitInfo initInfo, T additional);
+		void init(InitInfo init_info, T additional);
 		
 		void update();
 		
-		void updateInteractions();
+		void update_interactions();
 	
-		InteractionStack* interactionStack;
-		InteractionManager* interactionManager;
+		InteractionStack* interaction_stack;
+		InteractionManager* interaction_manager;
 		BoxPtr<IBasicInteraction<T> > interaction;
 	
 	private:
 		bool interact;
-		bool oldInteract;
+		bool old_interact;
 	};
 	
 	using InteractiveData = BasicInteractiveData<>;

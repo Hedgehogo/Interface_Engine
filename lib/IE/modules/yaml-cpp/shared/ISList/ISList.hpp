@@ -8,8 +8,8 @@ namespace ie {
 	public:
 		ISList() = default;
 		
-		virtual PIShared getElementPtr(std::size_t index) const = 0;
+		virtual PIShared get_element_ptr(std::size_t index) const = 0;
 		
-		virtual void setElementPtr(std::size_t index, PIShared value) = 0;
+		virtual void set_element_ptr(std::size_t index, PIShared value) = 0;
 	};
 }

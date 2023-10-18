@@ -10,34 +10,34 @@ namespace ie {
 		void set();
 	
 	public:
-		using V = to_auto<decltype(std::declval<T>().getValue())>;
+		using V = to_auto<decltype(std::declval<T>().get_value())>;
 		using SetterFunc = std::function<void(const sf::Vector2<V>&)>;
 		
 		SVector2(const sf::Vector2<V>& vector = {});
 		
 		SVector2(std::shared_ptr<T> x, std::shared_ptr<T> y);
 		
-		virtual void addSetter(const SetterFunc& setter);
+		virtual void add_setter(const SetterFunc& setter);
 		
-		PIShared getXPtr() const override;
+		PIShared get_x_ptr() const override;
 		
-		void setXPtr(PIShared value) override;
+		void set_x_ptr(PIShared value) override;
 		
-		PIShared getYPtr() const override;
+		PIShared get_y_ptr() const override;
 		
-		void setYPtr(PIShared value) override;
+		void set_y_ptr(PIShared value) override;
 		
-		V getX() const;
+		V get_x() const;
 		
-		void setX(const V& value);
+		void set_x(const V& value);
 		
-		V getY() const;
+		V get_y() const;
 		
-		void setY(const V& value);
+		void set_y(const V& value);
 		
-		sf::Vector2<V> getValue() const;
+		sf::Vector2<V> get_value() const;
 		
-		void setValue(const sf::Vector2<V>& vector);
+		void set_value(const sf::Vector2<V>& vector);
 	
 	protected:
 		std::shared_ptr<T> x, y;
@@ -46,7 +46,7 @@ namespace ie {
 	
 	template<typename T>
 	struct DecodePointer<SVector2<T> > {
-		static bool decodePointer(const YAML::Node& node, SVector2<T>*& withVector2);
+		static bool decode_pointer(const YAML::Node& node, SVector2<T>*& with_vector2);
 	};
 	
 	template<typename T>
@@ -56,13 +56,13 @@ namespace ie {
 	using PSVec2 = std::shared_ptr<SVec2<T> >;
 	
 	template<typename T>
-	void setRangeUpper(PSVec2<SRange<T> > value, sf::Vector2<T> upper);
+	void set_range_upper(PSVec2<SRange<T> > value, sf::Vector2<T> upper);
 	
 	template<typename T>
-	void setRangeLower(PSVec2<SRange<T> > value, sf::Vector2<T> lower);
+	void set_range_lower(PSVec2<SRange<T> > value, sf::Vector2<T> lower);
 	
 	template<typename T>
-	void setRangeBounds(PSVec2<SRange<T> > value, sf::Vector2<T> lower, sf::Vector2<T> upper);
+	void set_range_bounds(PSVec2<SRange<T> > value, sf::Vector2<T> lower, sf::Vector2<T> upper);
 	
 	using SVec2f = SVec2<Sfloat>;
 	using SVec2i = SVec2<Sint>;

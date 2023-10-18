@@ -13,27 +13,27 @@ namespace ie {
 			
 			Make(PISint value);
 			
-			SwitcherTabsAction* make(BasicActionInitInfo<BoxSwitcherTabs&> initInfo) override;
+			SwitcherTabsAction* make(BasicActionInitInfo<BoxSwitcherTabs&> init_info) override;
 		};
 		
-		SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> initInfo);
+		SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> init_info);
 		
 		SwitcherTabsAction(PISint value);
 		
-		void init(BasicActionInitInfo<BoxSwitcherTabs&> initInfo) override;
+		void init(BasicActionInitInfo<BoxSwitcherTabs&> init_info) override;
 		
-		void startPressed() override;
+		void start_pressed() override;
 		
-		void stopPressed() override;
+		void stop_pressed() override;
 		
-		void whilePressed() override;
+		void while_pressed() override;
 		
-		void whileNotPressed() override;
+		void while_not_pressed() override;
 		
 		SwitcherTabsAction* copy() override;
 	
 	protected:
 		PISint value;
-		BoxSwitcherTabs* switcherTabs;
+		BoxSwitcherTabs* switcher_tabs;
 	};
 }

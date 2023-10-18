@@ -7,15 +7,15 @@ namespace ie {
 	template<typename T>
 	class SConvertToBoolLess : public BaseSConvertToBoolComparison<T> {
 	protected:
-		bool convert(T fromValue, T compared) override;
+		bool convert(T from_value, T compared) override;
 	
 	public:
-		SConvertToBoolLess(PISValue<T> fromValue, T compared);
+		SConvertToBoolLess(PISValue<T> from_value, T compared);
 	};
 	
 	template<typename T>
 	struct DecodePointer<SConvertToBoolLess<T> > {
-		static bool decodePointer(const YAML::Node& node, SConvertToBoolLess<T>*& sConvertToBoolGreater);
+		static bool decode_pointer(const YAML::Node& node, SConvertToBoolLess<T>*& sConvert_to_bool_greater);
 	};
 	
 	using SConvertFloatToBoolLess = SConvertToBoolLess<float>;

@@ -12,7 +12,7 @@ namespace ie {
 		};
 	}
 	
-	bool determine(const YAML::Node& node, std::initializer_list<detail::YamlArg> args, size_t sizeAddition = 0);
+	bool determine(const YAML::Node& node, std::initializer_list<detail::YamlArg> args, size_t size_addition = 0);
 	
-	bool determine(const YAML::Node& node, std::initializer_list<detail::YamlArg> args, std::initializer_list<detail::YamlArg> optArgs, size_t sizeAddition = 0);
+	bool determine(const YAML::Node& node, std::initializer_list<detail::YamlArg> args, std::initializer_list<detail::YamlArg> opt_args, size_t size_addition = 0);
 }

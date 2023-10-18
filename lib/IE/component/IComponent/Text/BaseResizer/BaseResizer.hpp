@@ -19,38 +19,38 @@ namespace ie {
 		};
 		
 		struct Make {
-			virtual BaseResizer* make(ResizerInitInfo resizerInitInfo) = 0;
+			virtual BaseResizer* make(ResizerInitInfo resizer_init_info) = 0;
 			
 			virtual ~Make() = default;
 		};
 		
-		BaseResizer(float lineSpacing, Align align, Algorithm algorithm, ResizerInitInfo initInfo);
+		BaseResizer(float line_spacing, Align align, Algorithm algorithm, ResizerInitInfo init_info);
 	
-		BaseResizer(float lineSpacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
+		BaseResizer(float line_spacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
 		
-		void init(ResizerInitInfo initInfo);
+		void init(ResizerInitInfo init_info);
 		
 		virtual void move(sf::Vector2f position) = 0;
 		
-		virtual void setPosition(sf::Vector2f position) = 0;
+		virtual void set_position(sf::Vector2f position) = 0;
 		
 		virtual void resize(sf::Vector2f size, sf::Vector2f position) = 0;
 		
-		virtual sf::Vector2f getPosition() = 0;
+		virtual sf::Vector2f get_position() = 0;
 		
-		virtual sf::Vector2f getSize() = 0;
+		virtual sf::Vector2f get_size() = 0;
 	
 	protected:
-		virtual sf::Vector2f getMinSizeBase() = 0;
+		virtual sf::Vector2f get_min_size_base() = 0;
 		
-		virtual sf::Vector2f getMinSizeConsole() = 0;
+		virtual sf::Vector2f get_min_size_console() = 0;
 		
-		virtual sf::Vector2f getMinSizeAbsolute() = 0;
+		virtual sf::Vector2f get_min_size_absolute() = 0;
 	
 	public:
-		virtual sf::Vector2f getMinSize();
+		virtual sf::Vector2f get_min_size();
 		
-		virtual sf::Vector2f getNormalSize() = 0;
+		virtual sf::Vector2f get_normal_size() = 0;
 		
 		virtual BaseResizer* copy() = 0;
 		
@@ -60,7 +60,7 @@ namespace ie {
 		std::vector<BaseCharacter*>* characters;
 		std::vector<BoxPtr<BaseLine> >* lines;
 		
-		const float lineSpacing;
+		const float line_spacing;
 		const Align align;
 		const Algorithm algorithm;
 	};

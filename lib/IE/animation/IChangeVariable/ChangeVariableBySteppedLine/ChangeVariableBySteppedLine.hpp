@@ -12,7 +12,7 @@ namespace ie {
 	
 		ChangeVariableBySteppedLine(std::vector<Value> values);
 		
-		float getSize() override;
+		float get_size() override;
 		
 		float operator()(float frame) override;
 		
@@ -30,6 +30,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<ChangeVariableBySteppedLine> {
-		static bool decodePointer(const YAML::Node& node, ChangeVariableBySteppedLine*& brokenLine);
+		static bool decode_pointer(const YAML::Node& node, ChangeVariableBySteppedLine*& broken_line);
 	};
 }

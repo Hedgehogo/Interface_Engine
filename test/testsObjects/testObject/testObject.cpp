@@ -1,92 +1,92 @@
-#include "testObject.hpp"
+#include "test_object.hpp"
 
-#include "../processorTime.hpp"
+#include "../processor_time.hpp"
 
-TestObject::Make::Make(sf::Vector2f minSize, sf::Vector2f normalSize, bool updateInteractionsResult) :
-	minSize(minSize), normalSize(normalSize), updateInteractionsResult(updateInteractionsResult) {
+TestObject::Make::Make(sf::Vector2f min_size, sf::Vector2f normal_size, bool update_interactions_result) :
+	min_size(min_size), normal_size(normal_size), update_interactions_result(update_interactions_result) {
 }
 
-TestObject* TestObject::Make::make(ie::InitInfo initInfo) {
-	return new TestObject{std::move(*this), initInfo};
+TestObject* TestObject::Make::make(ie::InitInfo init_info) {
+	return new TestObject{std::move(*this), init_info};
 }
 
-TestObject::TestObject(Make&& make, ie::InitInfo initInfo) :
+TestObject::TestObject(Make&& make, ie::InitInfo init_info) :
 	processed(
 		{
 			{
-				getProcessorTime(),
-				&initInfo.renderTarget,
-				&initInfo.drawManager,
-				&initInfo.updateManager,
-				&initInfo.interactionManager,
-				&initInfo.interactionStack,
-				&initInfo.panelManager
+				get_processor_time(),
+				&init_info.render_target,
+				&init_info.draw_manager,
+				&init_info.update_manager,
+				&init_info.interaction_manager,
+				&init_info.interaction_stack,
+				&init_info.panel_manager
 			}
 		}
 	),
-	updateInteractionsResult(make.updateInteractionsResult),
-	minSize(make.minSize),
-	normalSize(make.normalSize) {
-	initInfo.drawManager.add(*this);
-	initInfo.updateManager.add(*this);
+	update_interactions_result(make.update_interactions_result),
+	min_size(make.min_size),
+	normal_size(make.normal_size) {
+	init_info.draw_manager.add(*this);
+	init_info.update_manager.add(*this);
 }
 
-TestObject::TestObject(sf::Vector2f minSize, sf::Vector2f normalSize, bool updateInteractionsResult) :
-	updateInteractionsResult(updateInteractionsResult), minSize(minSize), normalSize(normalSize) {
+TestObject::TestObject(sf::Vector2f min_size, sf::Vector2f normal_size, bool update_interactions_result) :
+	update_interactions_result(update_interactions_result), min_size(min_size), normal_size(normal_size) {
 }
 
-void TestObject::init(ie::InitInfo initInfo) {
-	processed.init.time = getProcessorTime();
-	processed.init.renderTarget = &initInfo.renderTarget;
-	processed.init.drawManager = &initInfo.drawManager;
-	processed.init.updateManager = &initInfo.updateManager;
-	processed.init.interactionManager = &initInfo.interactionManager;
-	processed.init.interactionStack = &initInfo.interactionStack;
-	processed.init.panelManager = &initInfo.panelManager;
+void TestObject::init(ie::InitInfo init_info) {
+	processed.init.time = get_processor_time();
+	processed.init.render_target = &init_info.render_target;
+	processed.init.draw_manager = &init_info.draw_manager;
+	processed.init.update_manager = &init_info.update_manager;
+	processed.init.interaction_manager = &init_info.interaction_manager;
+	processed.init.interaction_stack = &init_info.interaction_stack;
+	processed.init.panel_manager = &init_info.panel_manager;
 	
-	initInfo.drawManager.add(*this);
-	initInfo.updateManager.add(*this);
+	init_info.draw_manager.add(*this);
+	init_info.update_manager.add(*this);
 }
 
-TestObject::Processed TestObject::getProcessed() {
+TestObject::Processed TestObject::get_processed() {
 	return processed;
 }
 
-sf::Vector2f TestObject::getMinSize() const {
-	return minSize;
+sf::Vector2f TestObject::get_min_size() const {
+	return min_size;
 }
 
-sf::Vector2f TestObject::getNormalSize() const {
-	return normalSize;
+sf::Vector2f TestObject::get_normal_size() const {
+	return normal_size;
 }
 
-ie::LayoutData& TestObject::getLayoutData() {
-	return layoutData;
+ie::LayoutData& TestObject::get_layout_data() {
+	return layout_data;
 }
 
-const ie::LayoutData& TestObject::getLayoutData() const {
-	return layoutData;
+const ie::LayoutData& TestObject::get_layout_data() const {
+	return layout_data;
 }
 
-bool TestObject::updateInteractions(sf::Vector2f mousePosition) {
-	processed.updateInteractions.time = getProcessorTime();
-	processed.updateInteractions.mousePosition = mousePosition;
-	return updateInteractionsResult;
+bool TestObject::update_interactions(sf::Vector2f mouse_position) {
+	processed.update_interactions.time = get_processor_time();
+	processed.update_interactions.mouse_position = mouse_position;
+	return update_interactions_result;
 }
 
 void TestObject::draw() {
-	processed.draw = getProcessorTime();
+	processed.draw = get_processor_time();
 }
 
 void TestObject::update() {
-	processed.update = getProcessorTime();
+	processed.update = get_processor_time();
 }
 
 TestObject* TestObject::copy() {
-	processed.copy = getProcessorTime();
+	processed.copy = get_processor_time();
 	return new TestObject{*this};
 }
 
-void TestObject::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-	processed.drawDebug = getProcessorTime();
+void TestObject::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	processed.draw_debug = get_processor_time();
 }

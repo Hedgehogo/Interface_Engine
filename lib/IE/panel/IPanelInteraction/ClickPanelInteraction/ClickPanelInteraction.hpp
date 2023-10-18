@@ -8,13 +8,13 @@
 namespace ie {
 	class ClickPanelInteraction : public BasicOneKeyInteraction<Panel&>, public virtual IPanelInteraction {
 	public:
-		ClickPanelInteraction(BoxPtr<PanelAction::Make>&& action, Key key, PanelActionInitInfo initInfo);
+		ClickPanelInteraction(BoxPtr<PanelAction::Make>&& action, Key key, PanelActionInitInfo init_info);
 		
 		ClickPanelInteraction(BoxPtr<PanelAction>&& action, Key key);
 		
-		void init(PanelActionInitInfo initInfo) override;
+		void init(PanelActionInitInfo init_info) override;
 		
-		void setPanel(Panel& panel) override;
+		void set_panel(Panel& panel) override;
 		
 		ClickPanelInteraction* copy() override = 0;
 	};

@@ -7,11 +7,11 @@ namespace ie::detail {
 	public:
 		bool build(const YAML::Node&, void*&) const override;
 		
-		IYamlBuilder* getBuilder(const std::string&) override;
+		IYamlBuilder* get_builder(const std::string&) override;
 		
 		bool determine(const YAML::Node&, std::string&) override;
 		
-		bool isExists() override;
+		bool is_exists() override;
 	
 	public:
 		static EmptyYamlBuilder builder;

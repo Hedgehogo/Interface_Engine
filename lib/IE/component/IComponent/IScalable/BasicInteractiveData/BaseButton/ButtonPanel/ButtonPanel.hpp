@@ -21,30 +21,30 @@ namespace ie {
 			
 			Make(BoxPtr<Panel::Make>&& panel, BoxPtr<IDisplayPanelInteraction::Make>&& interaction, BoxPtr<IScalable::Make>&& background);
 			
-			ButtonPanel* make(InitInfo initInfo) override;
+			ButtonPanel* make(InitInfo init_info) override;
 		};
 		
-		ButtonPanel(Make&& make, InitInfo initInfo);
+		ButtonPanel(Make&& make, InitInfo init_info);
 		
 		ButtonPanel(BoxPtr<Panel>&& panel, BoxPtr<IDisplayPanelInteraction>&& interaction, BoxPtr<IScalable>&& background);
 		
 		ButtonPanel(const ButtonPanel& other);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		const Panel& getPanel() const;
+		const Panel& get_panel() const;
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
 		ButtonPanel* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
 		BoxPtr<Panel> panel;
@@ -53,6 +53,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<ButtonPanel> {
-		static bool decodePointer(const YAML::Node& node, ButtonPanel*& buttonWithPanel);
+		static bool decode_pointer(const YAML::Node& node, ButtonPanel*& button_with_panel);
 	};
 }

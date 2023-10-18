@@ -6,34 +6,34 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicPressedInteraction<T>* BasicPressedInteraction<T>::make(BasicActionInitInfo<T> initInfo) {
-			return new ie::BasicPressedInteraction<T>{std::move(*this), initInfo};
+		ie::BasicPressedInteraction<T>* BasicPressedInteraction<T>::make(BasicActionInitInfo<T> init_info) {
+			return new ie::BasicPressedInteraction<T>{std::move(*this), init_info};
 		}
 	}
 	
 	template<typename T>
-	BasicPressedInteraction<T>::BasicPressedInteraction(Make&& make, BasicActionInitInfo<T> initInfo) :
-		BasicOneKeyInteraction<T>({std::move(make.action), make.key}, initInfo), interactionManager(&initInfo.interactionManager) {
+	BasicPressedInteraction<T>::BasicPressedInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
+		BasicOneKeyInteraction<T>({std::move(make.action), make.key}, init_info), interaction_manager(&init_info.interaction_manager) {
 	}
 	
 	template<typename T>
 	BasicPressedInteraction<T>::BasicPressedInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key) :
-		BasicOneKeyInteraction<T>(std::move(action), key), interactionManager(nullptr) {
+		BasicOneKeyInteraction<T>(std::move(action), key), interaction_manager(nullptr) {
 	}
 	
 	template<typename T>
-	void BasicPressedInteraction<T>::init(BasicActionInitInfo<T> initInfo) {
-		BasicOneKeyInteraction<T>::init(initInfo);
-		this->interactionManager = &initInfo.interactionManager;
+	void BasicPressedInteraction<T>::init(BasicActionInitInfo<T> init_info) {
+		BasicOneKeyInteraction<T>::init(init_info);
+		this->interaction_manager = &init_info.interaction_manager;
 	}
 	
 	template<typename T>
-	void BasicPressedInteraction<T>::update(sf::Vector2i mousePosition) {
-		if(KeyHandler::isKeyPressed(this->key)) {
-			this->action->update(mousePosition, true);
+	void BasicPressedInteraction<T>::update(sf::Vector2i mouse_position) {
+		if(KeyHandler::is_key_pressed(this->key)) {
+			this->action->update(mouse_position, true);
 		} else {
-			this->action->update(mousePosition, false);
-			interactionManager->deleteInteraction(*this);
+			this->action->update(mouse_position, false);
+			interaction_manager->delete_interaction(*this);
 		}
 	}
 	

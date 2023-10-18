@@ -13,11 +13,11 @@ namespace ie {
 		struct BasicKeysInteraction : public virtual IBasicInteraction<T> {
 			BoxPtr<typename ie::BasicKeyAction<T>::Make > action;
 			std::vector<Key> keys;
-			std::vector<Key> blackListKeys = {};
+			std::vector<Key> black_list_keys = {};
 			
-			BasicKeysInteraction(BoxPtr<typename ie::BasicKeyAction<T>::Make >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+			BasicKeysInteraction(BoxPtr<typename ie::BasicKeyAction<T>::Make >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys = {});
 			
-			ie::BasicKeysInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+			ie::BasicKeysInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
 		};
 	}
 	
@@ -26,23 +26,23 @@ namespace ie {
 	public:
 		using Make = make_system::BasicKeysInteraction<T>;
 		
-		BasicKeysInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
+		BasicKeysInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> blackListKeys = {});
+		BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys = {});
 		
-		void init(BasicActionInitInfo<T> initInfo) override;
+		void init(BasicActionInitInfo<T> init_info) override;
 		
-		bool isPress() const;
+		bool is_press() const;
 		
-		std::vector<Key> getKeys();
+		std::vector<Key> get_keys();
 		
-		BasicKeyAction<T>* getAction();
+		BasicKeyAction<T>* get_action();
 		
-		void setAction(BasicKeyAction<T>* action);
+		void set_action(BasicKeyAction<T>* action);
 		
-		void start(sf::Vector2i mousePosition) override;
+		void start(sf::Vector2i mouse_position) override;
 		
-		void update(sf::Vector2i mousePosition) override;
+		void update(sf::Vector2i mouse_position) override;
 		
 		void finish(sf::Vector2i) override;
 		
@@ -51,7 +51,7 @@ namespace ie {
 	protected:
 		BoxPtr<BasicKeyAction<T> > action;
 		std::vector<Key> keys;
-		std::vector<Key> blackListKeys;
+		std::vector<Key> black_list_keys;
 		bool press;
 	};
 	
@@ -59,7 +59,7 @@ namespace ie {
 	
 	template<typename T>
 	struct DecodePointer<BasicKeysInteraction<T> > {
-		static bool decodePointer(const YAML::Node& node, BasicKeysInteraction<T>*& keysInteraction);
+		static bool decode_pointer(const YAML::Node& node, BasicKeysInteraction<T>*& keys_interaction);
 	};
 }
 

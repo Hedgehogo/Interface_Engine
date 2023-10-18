@@ -2,17 +2,17 @@
 
 namespace ie {
 	template<typename T>
-	void detail::AnimatorUnitMatch::Option<T>::addNextUnit(IAnimatorUnit* unit) {
+	void detail::AnimatorUnitMatch::Option<T>::add_next_unit(IAnimatorUnit* unit) {
 		next.emplace_back(unit);
 	}
 	
 	template<typename T>
 	detail::AnimatorUnitMatch::Option<T> detail::AnimatorUnitMatch::Option<T>::copy() {
-		std::vector<IAnimatorUnit*> copyNext{next.size()};
+		std::vector<IAnimatorUnit*> copy_next{next.size()};
 		for(std::size_t i = 0; i < next.size(); ++i) {
-			copyNext[i] = next[i]->copy();
+			copy_next[i] = next[i]->copy();
 		}
-		return Option{example, comparison, copyNext};
+		return Option{example, comparison, copy_next};
 	}
 	
 	template<typename T>
@@ -26,15 +26,15 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void AnimatorUnitMatch<T>::addNext(size_t i, IAnimatorUnit* unit) {
+	void AnimatorUnitMatch<T>::add_next(size_t i, IAnimatorUnit* unit) {
 		options[i].next.emplace_back(unit);
 	}
 	
 	template<typename T>
-	void AnimatorUnitMatch<T>::setSpeed(PSfloat speed) {
+	void AnimatorUnitMatch<T>::set_speed(PSfloat speed) {
 		for(auto& option: options) {
-			for(auto& animatorUnit: option.next) {
-				animatorUnit->setSpeed(speed);
+			for(auto& animator_unit: option.next) {
+				animator_unit->set_speed(speed);
 			}
 		}
 	}
@@ -42,8 +42,8 @@ namespace ie {
 	template<typename T>
 	void AnimatorUnitMatch<T>::restart() {
 		for(auto& option: options) {
-			for(auto& animatorUnit: option.next) {
-				animatorUnit->restart();
+			for(auto& animator_unit: option.next) {
+				animator_unit->restart();
 			}
 		}
 	}
@@ -51,7 +51,7 @@ namespace ie {
 	template<typename T>
 	std::vector<IAnimatorUnit*> AnimatorUnitMatch<T>::update(float) {
 		for(auto& option: options) {
-			if(option.comparison(value->getValue(), option.example)) {
+			if(option.comparison(value->get_value(), option.example)) {
 				return option.next;
 			}
 		}
@@ -60,12 +60,12 @@ namespace ie {
 	
 	template<typename T>
 	AnimatorUnitMatch<T>* AnimatorUnitMatch<T>::copy() {
-		std::vector<Option> copyOptions{options.size()};
+		std::vector<Option> copy_options{options.size()};
 		for(std::size_t i = 0; i < options.size(); ++i) {
-			copyOptions[i] = options[i].copy();
+			copy_options[i] = options[i].copy();
 		}
 		
-		return new AnimatorUnitMatch<T>{copyOptions, value};
+		return new AnimatorUnitMatch<T>{copy_options, value};
 	}
 	
 	
@@ -88,29 +88,29 @@ namespace ie {
 		}
 		
 		std::function<bool(T, T)> condition;
-		auto conditionStr{node["condition"].as<std::string>()};
+		auto condition_str{node["condition"].as<std::string>()};
 		
-		if(conditionStr == "equals") {
+		if(condition_str == "equals") {
 			condition = [](T a, T b) {
 				return a == b;
 			};
-		} else if(conditionStr == "not-equals") {
+		} else if(condition_str == "not-equals") {
 			condition = [](T a, T b) {
 				return a != b;
 			};
-		} else if(conditionStr == "greater") {
+		} else if(condition_str == "greater") {
 			condition = [](T a, T b) {
 				return a > b;
 			};
-		} else if(conditionStr == "less") {
+		} else if(condition_str == "less") {
 			condition = [](T a, T b) {
 				return a < b;
 			};
-		} else if(conditionStr == "greater-or-equals") {
+		} else if(condition_str == "greater-or-equals") {
 			condition = [](T a, T b) {
 				return a >= b;
 			};
-		} else if(conditionStr == "less-or-equals") {
+		} else if(condition_str == "less-or-equals") {
 			condition = [](T a, T b) {
 				return a <= b;
 			};
@@ -125,18 +125,18 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void addNextAnimatorUnitForMach(const YAML::Node& node, int i, AnimatorUnitMatch<T>*& animatorUnitMatch) {
-		addNextAnimatorUnit(node, [=](IAnimatorUnit* unit) {
-			animatorUnitMatch->addNext(i, unit);
+	void add_next_animator_unit_for_mach(const YAML::Node& node, int i, AnimatorUnitMatch<T>*& animator_unit_match) {
+		add_next_animator_unit(node, [=](IAnimatorUnit* unit) {
+			animator_unit_match->add_next(i, unit);
 		});
 		
-		addNextAnimatorUnit(node["options"][i], [=](IAnimatorUnit* unit) {
-			animatorUnitMatch->addNext(i, unit);
+		add_next_animator_unit(node["options"][i], [=](IAnimatorUnit* unit) {
+			animator_unit_match->add_next(i, unit);
 		});
 	}
 	
 	template<typename T>
-	bool DecodePointer<AnimatorUnitMatch<T>>::decodePointer(const YAML::Node& node, AnimatorUnitMatch<T>*& animatorUnitMatch) {
+	bool DecodePointer<AnimatorUnitMatch<T>>::decode_pointer(const YAML::Node& node, AnimatorUnitMatch<T>*& animator_unit_match) {
 		std::vector<typename AnimatorUnitMatch<T>::Option> options;
 		
 		if(node["options"]) {
@@ -145,20 +145,20 @@ namespace ie {
 			options = std::vector{node["option"].as<typename AnimatorUnitMatch<T>::Option>()};
 		}
 		
-		animatorUnitMatch = new AnimatorUnitMatch<T>{
+		animator_unit_match = new AnimatorUnitMatch<T>{
 			options,
 			Buffer::get<SValue<T>>(node["value"])
 		};
 		
 		if(node["options"]) {
 			for(std::size_t i = 0; i < node["options"].size(); ++i) {
-				addNextAnimatorUnitForMach(node, i, animatorUnitMatch);
+				add_next_animator_unit_for_mach(node, i, animator_unit_match);
 			}
 		} else {
-			addNextAnimatorUnitForMach(node, 0, animatorUnitMatch);
+			add_next_animator_unit_for_mach(node, 0, animator_unit_match);
 		}
 		
-		addUnitInBuffer(node, animatorUnitMatch);
+		add_unit_in_buffer(node, animator_unit_match);
 		return true;
 	}
 }

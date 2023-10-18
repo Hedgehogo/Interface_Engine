@@ -1,25 +1,25 @@
 #include "BoxConstBezel.hpp"
 
 namespace ie {
-	BoxConstBezel::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& bezel, float thickness, sf::Vector2f minSize) :
-		object(std::move(object)), bezel(std::move(bezel)), thickness(thickness), minSize(minSize) {
+	BoxConstBezel::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& bezel, float thickness, sf::Vector2f min_size) :
+		object(std::move(object)), bezel(std::move(bezel)), thickness(thickness), min_size(min_size) {
 	}
 	
-	BoxConstBezel* BoxConstBezel::Make::make(InitInfo initInfo) {
-		return new BoxConstBezel{std::move(*this), initInfo};
+	BoxConstBezel* BoxConstBezel::Make::make(InitInfo init_info) {
+		return new BoxConstBezel{std::move(*this), init_info};
 	}
 	
-	BoxConstBezel::BoxConstBezel(Make&& make, InitInfo initInfo) :
-		Box(make.minSize), bezel(make.bezel->make(initInfo)), object(make.object->make(initInfo)), thickness(make.thickness) {
+	BoxConstBezel::BoxConstBezel(Make&& make, InitInfo init_info) :
+		Box(make.min_size), bezel(make.bezel->make(init_info)), object(make.object->make(init_info)), thickness(make.thickness) {
 	}
 	
-	BoxConstBezel::BoxConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f minSize) :
-		Box(minSize), bezel(std::move(bezel)), object(std::move(object)), thickness(thickness) {
+	BoxConstBezel::BoxConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f min_size) :
+		Box(min_size), bezel(std::move(bezel)), object(std::move(object)), thickness(thickness) {
 	}
 	
-	void BoxConstBezel::init(InitInfo initInfo) {
-		bezel->init(initInfo);
-		object->init(initInfo);
+	void BoxConstBezel::init(InitInfo init_info) {
+		bezel->init(init_info);
+		object->init(init_info);
 	}
 	
 	void BoxConstBezel::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -28,26 +28,26 @@ namespace ie {
 		object->resize(size - sf::Vector2f(thickness * 2.0f, thickness * 2.0f), position + sf::Vector2f(thickness, thickness));
 	}
 	
-	bool BoxConstBezel::updateInteractions(sf::Vector2f mousePosition) {
-		if(object->inArea(mousePosition)) {
-			return object->updateInteractions(mousePosition);
+	bool BoxConstBezel::update_interactions(sf::Vector2f mouse_position) {
+		if(object->in_area(mouse_position)) {
+			return object->update_interactions(mouse_position);
 		}
-		return bezel->updateInteractions(mousePosition);
+		return bezel->update_interactions(mouse_position);
 	}
 	
-	sf::Vector2f BoxConstBezel::getMinSize() const {
-		return max(object->getMinSize() + sf::Vector2f{thickness * 2, thickness * 2}, bezel->getMinSize(), minimumSize);
+	sf::Vector2f BoxConstBezel::get_min_size() const {
+		return max(object->get_min_size() + sf::Vector2f{thickness * 2, thickness * 2}, bezel->get_min_size(), minimum_size);
 	}
 	
-	sf::Vector2f BoxConstBezel::getNormalSize() const {
-		return max(object->getNormalSize() + sf::Vector2f{thickness * 2, thickness * 2}, bezel->getNormalSize());
+	sf::Vector2f BoxConstBezel::get_normal_size() const {
+		return max(object->get_normal_size() + sf::Vector2f{thickness * 2, thickness * 2}, bezel->get_normal_size());
 	}
 	
-	IScalable& BoxConstBezel::getObject() {
+	IScalable& BoxConstBezel::get_object() {
 		return *object;
 	}
 	
-	const IScalable& BoxConstBezel::getObject() const {
+	const IScalable& BoxConstBezel::get_object() const {
 		return *object;
 	}
 	
@@ -55,17 +55,17 @@ namespace ie {
 		return new BoxConstBezel{*this};
 	}
 	
-	void BoxConstBezel::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-		bezel->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		object->drawDebug(renderTarget, indent, indentAddition, hue + hueOffset, hueOffset);
+	void BoxConstBezel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+		bezel->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+		object->draw_debug(render_target, indent, indent_addition, hue + hue_offset, hue_offset);
 	}
 	
-	bool DecodePointer<BoxConstBezel>::decodePointer(const YAML::Node& node, BoxConstBezel*& boxWithConstBezel) {
-		boxWithConstBezel = new BoxConstBezel{
+	bool DecodePointer<BoxConstBezel>::decode_pointer(const YAML::Node& node, BoxConstBezel*& box_with_const_bezel) {
+		box_with_const_bezel = new BoxConstBezel{
 			node["object"].as<BoxPtr<IScalable> >(),
 			node["bezel"].as<BoxPtr<IUninteractive> >(),
 			node["thickness"].as<float>(),
-			convDef(node["min-size"], sf::Vector2f{})
+			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
 	}

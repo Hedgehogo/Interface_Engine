@@ -5,19 +5,19 @@
 
 namespace ie {
 	template<typename Type>
-	bool buildOrProcess(const YAML::Node& node, Type*& object);
+	bool build_or_process(const YAML::Node& node, Type*& object);
 	
 	template<typename T>
-	bool loadFromYamlFile(const YAML::Node& node, T*& object);
+	bool load_from_yaml_file(const YAML::Node& node, T*& object);
 	
 	template<typename T>
-	bool loadFromYamlIf(const YAML::Node& node, T*& object);
+	bool load_from_yaml_if(const YAML::Node& node, T*& object);
 	
 	template<typename T>
-	bool loadFromYamlObject(const YAML::Node& node, T*& object);
+	bool load_from_yaml_object(const YAML::Node& node, T*& object);
 	
 	template<typename T>
-	T* loadFromYaml(std::string filePath);
+	T* load_from_yaml(std::string file_path);
 }
 
 #include "yaml-builder.inl"

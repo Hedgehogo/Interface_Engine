@@ -8,7 +8,7 @@ namespace ie {
 	public:
 		BaseYamlException(YAML::Mark mark, const std::string& description);
 		
-		YAML::Mark getMark();
+		YAML::Mark get_mark();
 	
 	protected:
 		YAML::Mark mark;

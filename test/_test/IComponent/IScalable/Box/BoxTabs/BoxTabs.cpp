@@ -2,59 +2,59 @@
 #include <IE/component/IComponent/IScalable/Box/BoxTabs/BoxTabs.hpp>
 #include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include "_test/_imageEqual/_imageEqual.hpp"
+#include "_test/_image_equal/image_equal.hpp"
 
 TEST(IComponent, BoxTabs) {
 	InitInfoData data{{100, 100}};
 	
 	auto value{std::make_shared<ie::Sint>(0)};
-	ie::BoxTabs boxTabs{
+	ie::BoxTabs box_tabs{
 		{
-			ie::makeVector(
+			ie::make_vector(
 				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
 			),
 			value
-		}, data.makeInitInfo()
+		}, data.make_init_info()
 	};
-	data.interactionManager.update({});
+	data.interaction_manager.update({});
 	
-	ASSERT_EQ(data.drawManager.size(), 1);
-	ASSERT_EQ(&data.drawManager.get(0), &boxTabs);
-	ASSERT_EQ(data.updateManager.size(), 0);
-	ASSERT_EQ(data.interactionManager.size(), 0);
-	ASSERT_EQ(data.panelManager.size(), 0);
+	ASSERT_EQ(data.draw_manager.size(), 1);
+	ASSERT_EQ(&data.draw_manager.get(0), &box_tabs);
+	ASSERT_EQ(data.update_manager.size(), 0);
+	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.panel_manager.size(), 0);
 	
-	ASSERT_EQ(boxTabs.getMinSize(), sf::Vector2f{});
-	ASSERT_EQ(boxTabs.getNormalSize(), sf::Vector2f{});
-	ASSERT_EQ(boxTabs.getSize(), sf::Vector2f{});
-	ASSERT_EQ(boxTabs.getAreaSize(), sf::Vector2f{});
-	ASSERT_EQ(boxTabs.getPosition(), sf::Vector2f{});
-	ASSERT_EQ(boxTabs.getAreaPosition(), sf::Vector2f{});
-	ASSERT_EQ(boxTabs.updateInteractions({}), true);
+	ASSERT_EQ(box_tabs.get_min_size(), sf::Vector2f{});
+	ASSERT_EQ(box_tabs.get_normal_size(), sf::Vector2f{});
+	ASSERT_EQ(box_tabs.get_size(), sf::Vector2f{});
+	ASSERT_EQ(box_tabs.get_area_size(), sf::Vector2f{});
+	ASSERT_EQ(box_tabs.get_position(), sf::Vector2f{});
+	ASSERT_EQ(box_tabs.get_area_position(), sf::Vector2f{});
+	ASSERT_EQ(box_tabs.update_interactions({}), true);
 	
-	boxTabs.setSize({5, 11});
-	ASSERT_EQ(boxTabs.getSize(), (sf::Vector2f{5, 11}));
-	ASSERT_EQ(boxTabs.getAreaSize(), (sf::Vector2f{5, 11}));
+	box_tabs.set_size({5, 11});
+	ASSERT_EQ(box_tabs.get_size(), (sf::Vector2f{5, 11}));
+	ASSERT_EQ(box_tabs.get_area_size(), (sf::Vector2f{5, 11}));
 	
-	boxTabs.setPosition({19, 39});
-	ASSERT_EQ(boxTabs.getPosition(), (sf::Vector2f{19, 39}));
-	ASSERT_EQ(boxTabs.getAreaPosition(), (sf::Vector2f{19, 39}));
+	box_tabs.set_position({19, 39});
+	ASSERT_EQ(box_tabs.get_position(), (sf::Vector2f{19, 39}));
+	ASSERT_EQ(box_tabs.get_area_position(), (sf::Vector2f{19, 39}));
 	
-	boxTabs.resize({7, 13}, {23, 41});
-	ASSERT_EQ(boxTabs.getSize(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(boxTabs.getAreaSize(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(boxTabs.getPosition(), (sf::Vector2f{23, 41}));
-	ASSERT_EQ(boxTabs.getAreaPosition(), (sf::Vector2f{23, 41}));
+	box_tabs.resize({7, 13}, {23, 41});
+	ASSERT_EQ(box_tabs.get_size(), (sf::Vector2f{7, 13}));
+	ASSERT_EQ(box_tabs.get_area_size(), (sf::Vector2f{7, 13}));
+	ASSERT_EQ(box_tabs.get_position(), (sf::Vector2f{23, 41}));
+	ASSERT_EQ(box_tabs.get_area_position(), (sf::Vector2f{23, 41}));
 	
-	boxTabs.move({10, 5});
-	ASSERT_EQ(boxTabs.getPosition(), (sf::Vector2f{33, 46}));
-	ASSERT_EQ(boxTabs.getAreaPosition(), (sf::Vector2f{33, 46}));
+	box_tabs.move({10, 5});
+	ASSERT_EQ(box_tabs.get_position(), (sf::Vector2f{33, 46}));
+	ASSERT_EQ(box_tabs.get_area_position(), (sf::Vector2f{33, 46}));
 	
-	data.drawManager.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("test-src/BoxTabs-0.png"));
+	data.draw_manager.draw();
+	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxTabs-0.png"));
 	
-	value->setValue(1);
-	data.drawManager.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("test-src/BoxTabs-1.png"));
+	value->set_value(1);
+	data.draw_manager.draw();
+	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxTabs-1.png"));
 }

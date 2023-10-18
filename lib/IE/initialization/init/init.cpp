@@ -14,10 +14,10 @@
 #endif
 
 namespace ie {
-	void yamlBuilderInitSfloat() {
+	void yaml_builder_init_sfloat() {
 		inherit<ISfloat, Sfloat>({"Float"});
 		inherit<ISfloat, ISCoefficientValue>();
-		addBase<SCoefficientValue, Sfloat, ISCoefficientValue>(std::vector<std::string>{"SCoefficientValue"});
+		add_base<SCoefficientValue, Sfloat, ISCoefficientValue>(std::vector<std::string>{"SCoefficientValue"});
 		
 		inherit<Sfloat, SRfloat>({"RFloat"});
 		inherit<SRfloat, SCRfloat>({"CRFloat"});
@@ -27,7 +27,7 @@ namespace ie {
 		inherit<ISVector2, SRVec2f>({"RVec2F"});
 	}
 	
-	void yamlBuilderInitSint(){
+	void yaml_builder_init_sint(){
 		inherit<ISint, Sint>({"Int"});
 		
 		inherit<Sint, SRint>({"RInt"});
@@ -38,17 +38,17 @@ namespace ie {
 		inherit<ISVector2, SRVec2i>({"RVec2I"});
 	}
 	
-	void init(int argc, char *argv[], std::filesystem::path modulesList) {
+	void init(int argc, char *argv[], std::filesystem::path modules_list) {
 #ifdef IE_ImageMagick_FOUND
 		Magick::InitializeMagick("");
 #endif
-		yamlBuilderInit();
-		load_modules(argc, argv, modulesList);
+		yaml_builder_init();
+		load_modules(argc, argv, modules_list);
 	}
 	
-	void yamlBuilderInit() {
-		yamlBuilderInitSint();
-		yamlBuilderInitSfloat();
+	void yaml_builder_init() {
+		yaml_builder_init_sint();
+		yaml_builder_init_sfloat();
 		
 		inherit<ISizing, ConstSizing>();
 		inherit<ISizing, RelativeNormalSizing>();
@@ -125,8 +125,8 @@ namespace ie {
 		inherit<IChangeVariable, ChangeVariableBySinusoid>({"CVBySinusoid", "CVBySin"});
 		inherit<IChangeVariable, ChangeVariableByCurve>({"CVByCurve"});
 		
-		addFunc<OnlyDrawable>(video_convert, {"Video"});
-		//addFunc<Box>(switcherTabsDecodePointer, {"SwitcherTabs", "SwitcherT"});
+		add_func<OnlyDrawable>(video_convert, {"Video"});
+		//add_func<Box>(switcher_tabs_decode_pointer, {"SwitcherTabs", "SwitcherT"});
 		
 		inherit<OnlyDrawable, Empty>();
 		inherit<OnlyDrawable, FullColor>();
@@ -158,7 +158,7 @@ namespace ie {
 		inherit<Box, BoxTabs>();
 		inherit<Box, BoxSwitcherTabs>();
 		inherit<Box, BoxConstCenter>();
-		addBase<BoxUninteractive, IUninteractive, Box>();
+		add_base<BoxUninteractive, IUninteractive, Box>();
 		inherit<IScalable, Box>();
 		inherit<BaseSlider, Slider>();
 		inherit<BaseSlider, ConstSlider>();
@@ -172,16 +172,16 @@ namespace ie {
 		inherit<BasePanel, ConstPanel>();
 		inherit<BasePanel, Panel>();
 		
-		addDetermine<FullColor>();
-		addDetermine<RoundedRectangle>();
-		addDetermine<Sprite>();
-		addDetermine<TextBlock>();
-		addDetermine<ISizing>(determine_sizing);
-		addDetermine<ISizing2>(determine_sizing2);
-		addDetermine<IPositioning>(determine_positioning);
-		addDetermine<IPositioning2>(determine_positioning2);
-		addDetermine<OpenUrlAction>(determineUrl);
-		addDetermine<KeysInteraction>(determineUrl);
-		addDetermine<BasicKeysInteraction<Text&>>(determineUrl);
+		add_determine<FullColor>();
+		add_determine<RoundedRectangle>();
+		add_determine<Sprite>();
+		add_determine<TextBlock>();
+		add_determine<ISizing>(determine_sizing);
+		add_determine<ISizing2>(determine_sizing2);
+		add_determine<IPositioning>(determine_positioning);
+		add_determine<IPositioning2>(determine_positioning2);
+		add_determine<OpenUrlAction>(determine_url);
+		add_determine<KeysInteraction>(determine_url);
+		add_determine<BasicKeysInteraction<Text&>>(determine_url);
 	}
 }

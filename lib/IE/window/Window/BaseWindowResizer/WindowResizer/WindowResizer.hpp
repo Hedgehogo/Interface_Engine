@@ -12,25 +12,25 @@ namespace ie {
 		};
 	
 	protected:
-		virtual void setSize();
+		virtual void set_size();
 		
-		virtual void setBorders();
+		virtual void set_borders();
 		
-		virtual void getCurrentBorder(int& grip, int*& currentBorder, int& border, int& border2, int& windowSize, int& mousePosition);
+		virtual void get_current_border(int& grip, int*& current_border, int& border, int& border2, int& window_size, int& mouse_position);
 	
 	public:
-		WindowResizer(int internalBorderSize = 5, int externalBorderSize = 5, Key key = Key::MouseLeft);
+		WindowResizer(int internal_border_size = 5, int external_border_size = 5, Key key = Key::MouseLeft);
 		
-		bool update(sf::Vector2i mousePosition) override;
+		bool update(sf::Vector2i mouse_position) override;
 	
 	protected:
-		int internalBorderSize;
-		int externalBorderSize;
+		int internal_border_size;
+		int external_border_size;
 		Key key;
 		
 		Borders borders;
 		sf::Vector2i grip;
-		sf::Vector2<int*> currentBorder;
-		bool oldKeyPressed;
+		sf::Vector2<int*> current_border;
+		bool old_key_pressed;
 	};
 }

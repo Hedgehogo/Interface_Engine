@@ -11,16 +11,16 @@ namespace ie {
 			
 			Make(sf::Vector2f coefficient);
 		
-			InternalPositioning2* make(Positioning2InitInfo initInfo) override;
+			InternalPositioning2* make(Positioning2InitInfo init_info) override;
 		};
 		
-		InternalPositioning2(Make&& make, Positioning2InitInfo initInfo);
+		InternalPositioning2(Make&& make, Positioning2InitInfo init_info);
 		
 		InternalPositioning2(sf::Vector2f coefficient);
 		
 		void init(sf::RenderTarget&);
 		
-		sf::Vector2f findPosition(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize);
+		sf::Vector2f find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size);
 	
 		InternalPositioning2* copy();
 	
@@ -31,6 +31,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<InternalPositioning2> {
-		static bool decodePointer(const YAML::Node& node, InternalPositioning2*& internalPositioning2);
+		static bool decode_pointer(const YAML::Node& node, InternalPositioning2*& internal_positioning2);
 	};
 }

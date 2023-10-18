@@ -5,8 +5,8 @@ namespace ie {
 		coefficient(coefficient), addition(addition) {
 	}
 	
-	ParentCoefficientSizing* ParentCoefficientSizing::Make::make(float normalSize) {
-		return new ParentCoefficientSizing{std::move(*this), normalSize};
+	ParentCoefficientSizing* ParentCoefficientSizing::Make::make(float normal_size) {
+		return new ParentCoefficientSizing{std::move(*this), normal_size};
 	}
 	
 	ParentCoefficientSizing::ParentCoefficientSizing(Make&& make, float) :
@@ -19,22 +19,22 @@ namespace ie {
 	void ParentCoefficientSizing::init(float) {
 	}
 	
-	float ParentCoefficientSizing::findSize(float parentSize, float) {
-		return parentSize * coefficient + addition;
+	float ParentCoefficientSizing::find_size(float parent_size, float) {
+		return parent_size * coefficient + addition;
 	}
 	
 	ParentCoefficientSizing* ParentCoefficientSizing::copy() {
 		return new ParentCoefficientSizing{*this};
 	}
 	
-	float ParentCoefficientSizing::getParentSize(float objectSize) {
-		return (objectSize - addition) / coefficient;
+	float ParentCoefficientSizing::get_parent_size(float object_size) {
+		return (object_size - addition) / coefficient;
 	}
 	
-	bool DecodePointer<ParentCoefficientSizing>::decodePointer(const YAML::Node& node, ParentCoefficientSizing*& parentCoefficientSizing) {
-		parentCoefficientSizing = new ParentCoefficientSizing{
+	bool DecodePointer<ParentCoefficientSizing>::decode_pointer(const YAML::Node& node, ParentCoefficientSizing*& parent_coefficient_sizing) {
+		parent_coefficient_sizing = new ParentCoefficientSizing{
 			node["coefficient"].as<float>(),
-			convDef(node["addition"], 0.f)
+			conv_def(node["addition"], 0.f)
 		};
 		return true;
 	}

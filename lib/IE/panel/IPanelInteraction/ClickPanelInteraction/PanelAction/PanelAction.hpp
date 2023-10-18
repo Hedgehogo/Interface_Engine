@@ -11,23 +11,23 @@ namespace ie {
 	class PanelAction : public BasicBaseKeyAction<Panel&> {
 	public:
 		struct Make : public virtual BasicKeyAction<Panel&>::Make {
-			PanelAction* make(PanelActionInitInfo initInfo) override = 0;
+			PanelAction* make(PanelActionInitInfo init_info) override = 0;
 		};
 		
-		PanelAction(PanelActionInitInfo initInfo);
+		PanelAction(PanelActionInitInfo init_info);
 		
 		PanelAction();
 		
-		void init(PanelActionInitInfo initInfo) override;
+		void init(PanelActionInitInfo init_info) override;
 		
-		void setPanel(Panel& panel);
+		void set_panel(Panel& panel);
 		
-		Panel* getPanel();
+		Panel* get_panel();
 		
 		PanelAction* copy() override = 0;
 	
 	protected:
 		Panel* panel;
-		IPanelManager* panelManager;
+		IPanelManager* panel_manager;
 	};
 }

@@ -10,7 +10,7 @@ namespace ie {
 		
 		const char* what() const noexcept override;
 		
-		std::string getDescription();
+		std::string get_description();
 	
 	protected:
 		std::string description;

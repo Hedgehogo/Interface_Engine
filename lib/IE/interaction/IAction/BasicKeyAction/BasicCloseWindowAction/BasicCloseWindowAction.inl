@@ -3,14 +3,14 @@
 namespace ie {
 	namespace make_system {
 		template<typename T>
-		ie::BasicCloseWindowAction<T>* BasicCloseWindowAction<T>::make(BasicActionInitInfo<T> initInfo) {
-			return new ie::BasicCloseWindowAction<T>{std::move(*this), initInfo};
+		ie::BasicCloseWindowAction<T>* BasicCloseWindowAction<T>::make(BasicActionInitInfo<T> init_info) {
+			return new ie::BasicCloseWindowAction<T>{std::move(*this), init_info};
 		}
 	}
 	
 	template<typename T>
-	BasicCloseWindowAction<T>::BasicCloseWindowAction(Make&&, BasicActionInitInfo<T> initInfo) :
-		window(&initInfo.window) {
+	BasicCloseWindowAction<T>::BasicCloseWindowAction(Make&&, BasicActionInitInfo<T> init_info) :
+		window(&init_info.window) {
 	}
 	
 	template<typename T>
@@ -18,27 +18,27 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicCloseWindowAction<T>::startPressed() {
+	void BasicCloseWindowAction<T>::start_pressed() {
 	}
 	
 	template<typename T>
-	void BasicCloseWindowAction<T>::stopPressed() {
+	void BasicCloseWindowAction<T>::stop_pressed() {
 		if(window->isOpen())
 			window->close();
 	}
 	
 	template<typename T>
-	void BasicCloseWindowAction<T>::whilePressed() {
+	void BasicCloseWindowAction<T>::while_pressed() {
 	}
 	
 	template<typename T>
-	void BasicCloseWindowAction<T>::whileNotPressed() {
+	void BasicCloseWindowAction<T>::while_not_pressed() {
 	}
 	
 	template<typename T>
-	void BasicCloseWindowAction<T>::init(BasicActionInitInfo<T> initInfo) {
-		BasicBaseKeyAction<T>::init(initInfo);
-		window = &initInfo.window;
+	void BasicCloseWindowAction<T>::init(BasicActionInitInfo<T> init_info) {
+		BasicBaseKeyAction<T>::init(init_info);
+		window = &init_info.window;
 	}
 	
 	template<typename T>
@@ -47,8 +47,8 @@ namespace ie {
 	}
 	
 	template<typename T>
-	bool DecodePointer<BasicCloseWindowAction<T> >::decodePointer(const YAML::Node&, BasicCloseWindowAction<T>*& closeWindowAction) {
-		closeWindowAction = new BasicCloseWindowAction<T>{};
+	bool DecodePointer<BasicCloseWindowAction<T> >::decode_pointer(const YAML::Node&, BasicCloseWindowAction<T>*& close_window_action) {
+		close_window_action = new BasicCloseWindowAction<T>{};
 		return true;
 	}
 }

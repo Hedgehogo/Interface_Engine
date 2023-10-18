@@ -9,57 +9,57 @@ namespace ie {
 		struct Make : public virtual Box::Make, public virtual IScalableObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
 			PSValue<uint> value;
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
-			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSValue<uint> value, sf::Vector2f minSize = {});
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSValue<uint> value, sf::Vector2f min_size = {});
 			
-			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, uint index = 0, sf::Vector2f minSize = {});
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, uint index = 0, sf::Vector2f min_size = {});
 			
-			BoxSwitchTabs* make(InitInfo initInfo) override;
+			BoxSwitchTabs* make(InitInfo init_info) override;
 		};
 		
-		BoxSwitchTabs(Make&& make, InitInfo initInfo);
+		BoxSwitchTabs(Make&& make, InitInfo init_info);
 		
-		BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, PSValue<uint> value, sf::Vector2f minSize = {});
+		BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, PSValue<uint> value, sf::Vector2f min_size = {});
 		
-		BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, uint index = 0, sf::Vector2f minSize = {});
+		BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, uint index = 0, sf::Vector2f min_size = {});
 		
 		BoxSwitchTabs(const BoxSwitchTabs& other);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		void setValue(PSValue<uint> index);
+		void set_value(PSValue<uint> index);
 		
-		PSValue<uint> getValue();
+		PSValue<uint> get_value();
 		
-		void setIndex(uint index);
+		void set_index(uint index);
 		
-		uint getIndex();
+		uint get_index();
 		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		std::size_t getArraySize() const override;
+		std::size_t get_array_size() const override;
 		
-		IScalable& getObjectAt(std::size_t index) override;
+		IScalable& get_object_at(std::size_t index) override;
 		
-		const IScalable& getObjectAt(std::size_t index) const override;
+		const IScalable& get_object_at(std::size_t index) const override;
 		
 		BoxSwitchTabs* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
-		std::vector<DrawManager> drawManagers;
+		std::vector<DrawManager> draw_managers;
 		std::vector<BoxPtr<IScalable> > objects;
 		PSValue<uint> value;
 	};
 	
 	template<>
 	struct DecodePointer<BoxSwitchTabs> {
-		static bool decodePointer(const YAML::Node& node, BoxSwitchTabs*& boxWithChangeableObjects);
+		static bool decode_pointer(const YAML::Node& node, BoxSwitchTabs*& box_with_changeable_objects);
 	};
 }

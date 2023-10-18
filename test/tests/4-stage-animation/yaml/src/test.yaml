@@ -41,7 +41,7 @@ animation-manager:
             next: anim
     - unit:
         type: A
-        name: startSlider
+        name: start_slider
         var:
           var:
             type: SAV
@@ -92,7 +92,7 @@ animation-manager:
                   start: 1
                   end: 0
                   length: 1
-              next: startSlider
+              next: start_slider
 object:
   type: LWBV
   first-object:

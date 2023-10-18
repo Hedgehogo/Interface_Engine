@@ -5,12 +5,12 @@ namespace ie {
 	ClickDisplayPanelInteraction::Make::Make(Key key) : key(key) {
 	}
 	
-	ClickDisplayPanelInteraction* ClickDisplayPanelInteraction::Make::make(PanelActionInitInfo initInfo) {
-		return new ClickDisplayPanelInteraction{std::move(*this), initInfo};
+	ClickDisplayPanelInteraction* ClickDisplayPanelInteraction::Make::make(PanelActionInitInfo init_info) {
+		return new ClickDisplayPanelInteraction{std::move(*this), init_info};
 	}
 	
-	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Make&& make, PanelActionInitInfo initInfo) :
-		ClickPanelInteraction(make_box_ptr<DisplayPanelAction::Make>(), make.key, initInfo) {
+	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Make&& make, PanelActionInitInfo init_info) :
+		ClickPanelInteraction(make_box_ptr<DisplayPanelAction::Make>(), make.key, init_info) {
 	}
 	
 	ClickDisplayPanelInteraction::ClickDisplayPanelInteraction(Key key) :
@@ -18,20 +18,20 @@ namespace ie {
 	}
 	
 	void ClickDisplayPanelInteraction::start(sf::Vector2i) {
-		dynamic_cast<PanelAction&>(*action).getPanel()->setParentProcessed(true);
+		dynamic_cast<PanelAction&>(*action).get_panel()->set_parent_processed(true);
 	}
 	
-	void ClickDisplayPanelInteraction::finish(sf::Vector2i mousePosition) {
-		BasicOneKeyInteraction<Panel&>::finish(mousePosition);
-		dynamic_cast<PanelAction&>(*action).getPanel()->setParentProcessed(false);
+	void ClickDisplayPanelInteraction::finish(sf::Vector2i mouse_position) {
+		BasicOneKeyInteraction<Panel&>::finish(mouse_position);
+		dynamic_cast<PanelAction&>(*action).get_panel()->set_parent_processed(false);
 	}
 	
 	ClickDisplayPanelInteraction* ClickDisplayPanelInteraction::copy() {
 		return new ClickDisplayPanelInteraction{*this};
 	}
 	
-	bool DecodePointer<ClickDisplayPanelInteraction>::decodePointer(const YAML::Node& node, ClickDisplayPanelInteraction*& clickDisplayPanelInteraction) {
-		clickDisplayPanelInteraction = new ClickDisplayPanelInteraction{node["key"].as<Key>()};
+	bool DecodePointer<ClickDisplayPanelInteraction>::decode_pointer(const YAML::Node& node, ClickDisplayPanelInteraction*& click_display_panel_interaction) {
+		click_display_panel_interaction = new ClickDisplayPanelInteraction{node["key"].as<Key>()};
 		return true;
 	}
 }

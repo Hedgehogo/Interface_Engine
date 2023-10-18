@@ -8,11 +8,11 @@ namespace ie {
 	public:
 		explicit SValue(T value = T{});
 		
-		void addSetter(const typename ISValue<T>::SetterFunc& setter) override;
+		void add_setter(const typename ISValue<T>::SetterFunc& setter) override;
 		
-		const T& getValue() const override;
+		const T& get_value() const override;
 		
-		void setValue(const T& value) override;
+		void set_value(const T& value) override;
 	
 	protected:
 		T value;
@@ -21,7 +21,7 @@ namespace ie {
 	
 	template<typename T>
 	struct DecodePointer<SValue<T> > {
-		static bool decodePointer(const YAML::Node& node, SValue<T>*& sValue);
+		static bool decode_pointer(const YAML::Node& node, SValue<T>*& sValue);
 	};
 	
 	typedef SValue<bool> Sbool;

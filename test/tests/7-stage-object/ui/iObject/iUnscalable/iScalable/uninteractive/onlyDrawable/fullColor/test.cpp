@@ -1,7 +1,7 @@
-#include "../../../../../../../../../createTestProgram/createTestProgram.hpp"
+#include "../../../../../../../../../create_test_program/create_test_program.hpp"
 
 TEST(FullColor, draw) {
-    Program testProgram{
+    Program test_program{
 	    new ie::Interface{
             new ie::FullColor{
                 {255, 0, 0}
@@ -14,16 +14,16 @@ TEST(FullColor, draw) {
     texture.create(100, 100);
     texture.clear({255, 0, 0});
 
-    ASSERT_TRUE(testProgram.renderTexture.getTexture() == texture.getTexture());
+    ASSERT_TRUE(test_program.render_texture.getTexture() == texture.getTexture());
 }
 
 TEST(FullColor, YAML) {
-    Program testProgram{
+    Program test_program{
 	    new ie::Interface{
-            ie::loadFromYaml<ie::IScalable>("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/src/test.yaml")
+            ie::load_from_yaml<ie::IScalable>("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/src/test.yaml")
         }
     };
 
-    ASSERT_TRUE((testProgram.renderTexture.getSize() == sf::Vector2u{100, 100}));
-    ASSERT_EQ((testProgram.renderTexture.getTexture().copyToImage().getPixel(0, 0)), sf::Color::Red);
+    ASSERT_TRUE((test_program.render_texture.get_size() == sf::Vector2u{100, 100}));
+    ASSERT_EQ((test_program.render_texture.getTexture().copyToImage().get_pixel(0, 0)), sf::Color::Red);
 }

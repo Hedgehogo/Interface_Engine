@@ -10,24 +10,24 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> object;
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize = {});
+			Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size = {});
 			
-			BoxSettable* make(InitInfo initInfo) override;
+			BoxSettable* make(InitInfo init_info) override;
 		};
 		
-		BoxSettable(Make&& make, InitInfo initInfo);
+		BoxSettable(Make&& make, InitInfo init_info);
 		
-		BoxSettable(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize, InitInfo initInfo);
+		BoxSettable(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size, InitInfo init_info);
 		
-		BoxSettable(BoxPtr<IScalable>&& object, sf::Vector2f minSize = {});
+		BoxSettable(BoxPtr<IScalable>&& object, sf::Vector2f min_size = {});
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		void setObject(BoxPtr<IScalable>&& newObject);
+		void set_object(BoxPtr<IScalable>&& new_object);
 		
-		void setObject(BoxPtr<IScalable::Make>&& newObject);
+		void set_object(BoxPtr<IScalable::Make>&& new_object);
 		
 		void draw() override;
 		
@@ -35,20 +35,20 @@ namespace ie {
 		
 		void update() override;
 		
-		IScalable& getObject() override;
+		IScalable& get_object() override;
 		
-		const IScalable& getObject() const override;
+		const IScalable& get_object() const override;
 		
 		BoxSettable* copy() override;
 	
 	protected:
-		DrawManager drawManager;
-		UpdateManager updateManager;
+		DrawManager draw_manager;
+		UpdateManager update_manager;
 		sf::RenderWindow* window;
-		sf::RenderTarget* renderTarget;
-		InteractionManager interactionManager;
-		InteractionStack* interactionStack;
-		PanelManagerInterceptor panelManagerInterceptor;
+		sf::RenderTarget* render_target;
+		InteractionManager interaction_manager;
+		InteractionStack* interaction_stack;
+		PanelManagerInterceptor panel_manager_interceptor;
 		BoxPtr<IScalable> object;
 	};
 }

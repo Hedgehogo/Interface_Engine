@@ -7,11 +7,11 @@ namespace ie {
 	public:
 		explicit InternalPositioning(float coefficient, float offset = 0);
 		
-		[[nodiscard]] float getCoefficient() const;
+		[[nodiscard]] float get_coefficient() const;
 		
-		[[nodiscard]] float getOffset() const;
+		[[nodiscard]] float get_offset() const;
 		
-		float findPosition(float parentPosition, float objectSize, float parentSize, float) override;
+		float find_position(float parent_position, float object_size, float parent_size, float) override;
 		
 		InternalPositioning* copy() override;
 	
@@ -22,6 +22,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<InternalPositioning> {
-		static bool decodePointer(const YAML::Node& node, InternalPositioning*& internalPositioning);
+		static bool decode_pointer(const YAML::Node& node, InternalPositioning*& internal_positioning);
 	};
 }

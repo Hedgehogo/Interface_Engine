@@ -11,127 +11,127 @@
 namespace ie {
 	class Interface : public virtual IScalable, public virtual IDrawable, public virtual IUpdatable {
 	protected:
-		bool isInWindow(sf::Vector2f position);
+		bool is_in_window(sf::Vector2f position);
 	
 	public:
 		struct Make : public virtual IScalable::Make {
 			BoxPtr<IScalable::Make> object;
-			AnimationManager animationManager = AnimationManager{{}};
-			BoxPtr<InteractionStack> interactionStack = make_box_ptr<InteractionStack>();
+			AnimationManager animation_manager = AnimationManager{{}};
+			BoxPtr<InteractionStack> interaction_stack = make_box_ptr<InteractionStack>();
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
-				AnimationManager animationManager = AnimationManager{{}},
-				BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
+				AnimationManager animation_manager = AnimationManager{{}},
+				BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
 			);
 			
-			Interface* make(InitInfo initInfo) override;
+			Interface* make(InitInfo init_info) override;
 		};
 		
-		Interface(Make&& make, InitInfo initInfo);
+		Interface(Make&& make, InitInfo init_info);
 		
 		explicit Interface(
 			BoxPtr<IScalable>&& object,
-			AnimationManager animationManager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
+			AnimationManager animation_manager = AnimationManager{{}},
+			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
 		);
 		
 		explicit Interface(
-			const std::string& filePath,
-			AnimationManager animationManager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
+			const std::string& file_path,
+			AnimationManager animation_manager = AnimationManager{{}},
+			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
 		);
 		
 		explicit Interface(
 			sf::RenderWindow& window,
 			BoxPtr<IScalable>&& object,
-			AnimationManager animationManager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
+			AnimationManager animation_manager = AnimationManager{{}},
+			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
 		);
 		
 		explicit Interface(
 			sf::RenderWindow& window,
-			const std::string& filePath,
-			AnimationManager animationManager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
+			const std::string& file_path,
+			AnimationManager animation_manager = AnimationManager{{}},
+			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
 		);
 		
 		explicit Interface(
 			sf::RenderWindow& window,
 			BoxPtr<IScalable::Make>&& object,
-			AnimationManager animationManager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interactionStack = make_box_ptr<InteractionStack>()
+			AnimationManager animation_manager = AnimationManager{{}},
+			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
 		);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
 		void init(sf::RenderWindow& window);
 		
-		[[nodiscard]] sf::RenderTarget& getRenderTarget();
+		[[nodiscard]] sf::RenderTarget& get_render_target();
 		
-		[[nodiscard]] DrawManager& getDrawManager();
+		[[nodiscard]] DrawManager& get_draw_manager();
 		
-		[[nodiscard]] UpdateManager& getUpdateManager();
+		[[nodiscard]] UpdateManager& get_update_manager();
 		
-		[[nodiscard]] InteractionManager& getInteractionManager();
+		[[nodiscard]] InteractionManager& get_interaction_manager();
 		
-		[[nodiscard]] InteractionStack& getInteractionStack();
+		[[nodiscard]] InteractionStack& get_interaction_stack();
 		
-		[[nodiscard]] PanelManager& getPanelManager();
+		[[nodiscard]] PanelManager& get_panel_manager();
 		
-		[[nodiscard]] IScalable& getObject();
+		[[nodiscard]] IScalable& get_object();
 		
-		void setRenderWindowSize(sf::RenderWindow& window);
+		void set_render_window_size(sf::RenderWindow& window);
 		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		sf::Vector2f getAreaPosition() const override;
+		sf::Vector2f get_area_position() const override;
 		
-		sf::Vector2f getAreaSize() const override;
+		sf::Vector2f get_area_size() const override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 	
 	protected:
-		void updateCluster(sf::Vector2f mousePosition);
+		void update_cluster(sf::Vector2f mouse_position);
 	
 	public:
 		void update() override;
 		
-		void update(sf::Vector2f mousePosition, bool active);
+		void update(sf::Vector2f mouse_position, bool active);
 		
 		Interface* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue = 0, uint hueOffset = 36) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue = 0, uint hue_offset = 36) override;
 	
 	protected:
 		sf::RenderWindow* window;
-		sf::RenderTarget* renderTarget;
-		DrawManager drawManager;
-		UpdateManager updateManager;
-		InteractionManager interactionManager;
-		BoxPtr<InteractionStack> interactionStack;
-		PanelManager panelManager;
-		AnimationManager animationManager;
+		sf::RenderTarget* render_target;
+		DrawManager draw_manager;
+		UpdateManager update_manager;
+		InteractionManager interaction_manager;
+		BoxPtr<InteractionStack> interaction_stack;
+		PanelManager panel_manager;
+		AnimationManager animation_manager;
 		BoxPtr<IScalable> object;
-		sf::Vector2f mousePosition;
+		sf::Vector2f mouse_position;
 		bool initialized;
 		bool active;
 	};
 	
 	template<>
 	struct DecodePointer<Interface> {
-		static bool decodePointer(const YAML::Node& node, Interface*& interface);
+		static bool decode_pointer(const YAML::Node& node, Interface*& interface);
 	};
 	
-	Interface makeInterface(const std::filesystem::path& filePath, int argc = 0, char* argv[] = {});
+	Interface make_interface(const std::filesystem::path& file_path, int argc = 0, char* argv[] = {});
 	
-	Interface makeInterface(sf::RenderWindow& window, const std::filesystem::path& filePath, int argc = 0, char* argv[] = {});
+	Interface make_interface(sf::RenderWindow& window, const std::filesystem::path& file_path, int argc = 0, char* argv[] = {});
 	
-	Interface* makePrtInterface(sf::RenderWindow& window, const std::filesystem::path& filePath, int argc = 0, char* argv[] = {});
+	Interface* make_prt_interface(sf::RenderWindow& window, const std::filesystem::path& file_path, int argc = 0, char* argv[] = {});
 }

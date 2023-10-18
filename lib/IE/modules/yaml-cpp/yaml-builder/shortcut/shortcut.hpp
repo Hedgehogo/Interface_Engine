@@ -7,39 +7,39 @@ namespace ie {
 	void inherit(const std::vector<std::string>& aliases = {});
 	
 	template<typename T>
-	void inherit(std::string baseTypeName, const std::vector<std::string>& aliases = {});
+	void inherit(std::string base_type_name, const std::vector<std::string>& aliases = {});
 	
 	template<typename Base>
-	constexpr void addType() noexcept {
+	constexpr void add_type() noexcept {
 	}
 	
 	template<typename Base, typename Type, typename... Types>
-	void addType();
+	void add_type();
 	
 	template<typename Base, typename... Types>
-	void addType(const std::vector<std::string>& aliases);
+	void add_type(const std::vector<std::string>& aliases);
 	
 	template<typename Type>
-	constexpr void addBase() noexcept {
+	constexpr void add_base() noexcept {
 	}
 	
 	template<typename Type, typename Base, typename... Bases>
-	void addBase();
+	void add_base();
 	
 	template<typename Type, typename... Bases>
-	void addBase(const std::vector<std::string>& aliases);
+	void add_base(const std::vector<std::string>& aliases);
 	
 	template<typename Type>
-	void addAliases(const std::vector<std::string>& aliases);
+	void add_aliases(const std::vector<std::string>& aliases);
 	
 	template<typename Type>
-	void addDetermine(const detail::DetermineTypeFunc& function);
+	void add_determine(const detail::DetermineTypeFunc& function);
 	
 	template<typename Type>
-	void addDetermine(const detail::SimpleDetermineTypeFunc& function = determine<Type>);
+	void add_determine(const detail::SimpleDetermineTypeFunc& function = determine<Type>);
 	
 	template<typename Base>
-	void addFunc(typename detail::FuncYamlBuilder::BuildFunc<Base> function, std::vector<std::string> names = {});
+	void add_func(typename detail::FuncYamlBuilder::BuildFunc<Base> function, std::vector<std::string> names = {});
 }
 
 #include "shortcut.inl"

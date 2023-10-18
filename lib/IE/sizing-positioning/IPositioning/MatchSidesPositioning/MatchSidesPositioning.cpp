@@ -1,29 +1,29 @@
 #include "MatchSidesPositioning.hpp"
 
 namespace ie {
-	MatchSidesPositioning::MatchSidesPositioning(Location parentSide, Location objectSide, float offset) : parentSide(parentSide), objectSide(objectSide), offset(offset) {
+	MatchSidesPositioning::MatchSidesPositioning(Location parent_side, Location object_side, float offset) : parent_side(parent_side), object_side(object_side), offset(offset) {
 	}
 	
-	float MatchSidesPositioning::findPosition(float parentPosition, float objectSize, float parentSize, float) {
-		float position{parentPosition + offset};
-		switch(parentSide) {
+	float MatchSidesPositioning::find_position(float parent_position, float object_size, float parent_size, float) {
+		float position{parent_position + offset};
+		switch(parent_side) {
 			case Location::Origin:
 				break;
 			case Location::Center:
-				position += parentSize * 0.5f;
+				position += parent_size * 0.5f;
 				break;
 			case Location::End:
-				position += parentSize;
+				position += parent_size;
 				break;
 		}
-		switch(objectSide) {
+		switch(object_side) {
 			case Location::Origin:
 				break;
 			case Location::Center:
-				position -= objectSize * 0.5f;
+				position -= object_size * 0.5f;
 				break;
 			case Location::End:
-				position -= objectSize;
+				position -= object_size;
 				break;
 		}
 		return position;
@@ -33,11 +33,11 @@ namespace ie {
 		return new MatchSidesPositioning{*this};
 	}
 	
-	bool DecodePointer<MatchSidesPositioning>::decodePointer(const YAML::Node& node, MatchSidesPositioning*& matchSidesPositioning) {
-		matchSidesPositioning = new MatchSidesPositioning{
+	bool DecodePointer<MatchSidesPositioning>::decode_pointer(const YAML::Node& node, MatchSidesPositioning*& match_sides_positioning) {
+		match_sides_positioning = new MatchSidesPositioning{
 			node["parent-side"].as<Location>(),
 			node["object-side"].as<Location>(),
-			convDef(node["offset"], 0.f)
+			conv_def(node["offset"], 0.f)
 		};
 		return true;
 	}

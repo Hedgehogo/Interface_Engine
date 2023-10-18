@@ -8,30 +8,30 @@
 namespace ie {
 	struct TextBockInitInfo : public InitInfo{
 		struct TextVariables{
-			sf::Color textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor;
+			sf::Color text_color, text_selection_color, background_selection_color, inactive_text_selection_color, inactive_background_selection_color;
 			sf::Font* font;
 			sf::Text::Style style;
 			uint size;
 		};
-		sf::RenderTarget& textRenderTarget;
-		DrawManager& textDrawManager;
-		InteractionManager& textInteractionManager;
-		TextVariables& textVariables;
+		sf::RenderTarget& text_render_target;
+		DrawManager& text_draw_manager;
+		InteractionManager& text_interaction_manager;
+		TextVariables& text_variables;
 		
 		TextBockInitInfo(
 			sf::RenderWindow& window,
-			sf::RenderTarget& renderTarget,
-			DrawManager& drawManager,
-			UpdateManager& updateManager,
-			InteractionManager& interactionManager,
-			InteractionStack& interactionStack,
-			IPanelManager& panelManager,
-			sf::RenderTarget& textRenderTarget,
-			DrawManager& textDrawManager,
-			InteractionManager& textInteractionManager,
-			TextVariables& textVariables
+			sf::RenderTarget& render_target,
+			DrawManager& draw_manager,
+			UpdateManager& update_manager,
+			InteractionManager& interaction_manager,
+			InteractionStack& interaction_stack,
+			IPanelManager& panel_manager,
+			sf::RenderTarget& text_render_target,
+			DrawManager& text_draw_manager,
+			InteractionManager& text_interaction_manager,
+			TextVariables& text_variables
 		);
 		
-		TextBockInitInfo(InitInfo initInfo, sf::RenderTarget& textRenderTarget, DrawManager& textDrawManager, InteractionManager& textInteractionManager, TextVariables&& textVariables);
+		TextBockInitInfo(InitInfo init_info, sf::RenderTarget& text_render_target, DrawManager& text_draw_manager, InteractionManager& text_interaction_manager, TextVariables&& text_variables);
 	};
 }

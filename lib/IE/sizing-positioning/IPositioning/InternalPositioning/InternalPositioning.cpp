@@ -4,31 +4,31 @@ namespace ie {
 	InternalPositioning::InternalPositioning(float coefficient, float offset) : coefficient(coefficient), offset(offset) {
 	}
 	
-	float InternalPositioning::findPosition(float parentPosition, float objectSize, float parentSize, float) {
-		return parentPosition + (parentSize - objectSize) * coefficient + offset;
+	float InternalPositioning::find_position(float parent_position, float object_size, float parent_size, float) {
+		return parent_position + (parent_size - object_size) * coefficient + offset;
 	}
 	
 	InternalPositioning* InternalPositioning::copy() {
 		return new InternalPositioning{*this};
 	}
 	
-	float InternalPositioning::getCoefficient() const {
+	float InternalPositioning::get_coefficient() const {
 		return coefficient;
 	}
 	
-	float InternalPositioning::getOffset() const {
+	float InternalPositioning::get_offset() const {
 		return offset;
 	}
 	
-	bool DecodePointer<InternalPositioning>::decodePointer(const YAML::Node& node, InternalPositioning*& internalPositioning) {
+	bool DecodePointer<InternalPositioning>::decode_pointer(const YAML::Node& node, InternalPositioning*& internal_positioning) {
 		if(node.IsScalar()) {
-			internalPositioning = new InternalPositioning{
+			internal_positioning = new InternalPositioning{
 				node.as<float>()
 			};
 		} else {
-			internalPositioning = new InternalPositioning{
+			internal_positioning = new InternalPositioning{
 				node["coefficient"].as<float>(),
-				convDef(node["offset"], 0.f)
+				conv_def(node["offset"], 0.f)
 			};
 		}
 		return true;

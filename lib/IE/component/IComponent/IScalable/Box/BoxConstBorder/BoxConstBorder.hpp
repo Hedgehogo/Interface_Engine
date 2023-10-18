@@ -9,52 +9,52 @@ namespace ie {
 	class BoxConstBorder : public Box, public virtual IScalableTwoObjects {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableTwoObjects::Make {
-			BoxPtr<IScalable::Make> constObject;
-			BoxPtr<IScalable::Make> secondObject;
-			float borderDistance;
+			BoxPtr<IScalable::Make> const_object;
+			BoxPtr<IScalable::Make> second_object;
+			float border_distance;
 			Side side;
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<IScalable::Make>&& constObject, BoxPtr<IScalable::Make>&& secondObject, float borderDistance, Side side, sf::Vector2f minSize = {});
+			Make(BoxPtr<IScalable::Make>&& const_object, BoxPtr<IScalable::Make>&& second_object, float border_distance, Side side, sf::Vector2f min_size = {});
 			
-			BoxConstBorder* make(InitInfo initInfo) override;
+			BoxConstBorder* make(InitInfo init_info) override;
 		};
 		
-		BoxConstBorder(Make&& make, InitInfo initInfo);
+		BoxConstBorder(Make&& make, InitInfo init_info);
 		
-		BoxConstBorder(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& secondObject, Side side, float borderDistance, sf::Vector2f minSize = {});
+		BoxConstBorder(BoxPtr<IScalable>&& const_object, BoxPtr<IScalable>&& second_object, Side side, float border_distance, sf::Vector2f min_size = {});
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
-		IScalable& getFirstObject() override;
+		IScalable& get_first_object() override;
 		
-		const IScalable& getFirstObject() const override;
+		const IScalable& get_first_object() const override;
 		
-		IScalable& getSecondObject() override;
+		IScalable& get_second_object() override;
 		
-		const IScalable& getSecondObject() const override;
+		const IScalable& get_second_object() const override;
 		
 		BoxConstBorder* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
-		BoxPtr<IScalable> constObject;
-		BoxPtr<IScalable> secondObject;
-		float borderDistance;
+		BoxPtr<IScalable> const_object;
+		BoxPtr<IScalable> second_object;
+		float border_distance;
 		Side side;
 	};
 	
 	template<>
 	struct DecodePointer<BoxConstBorder> {
-		static bool decodePointer(const YAML::Node& node, BoxConstBorder*& boxWithConstBorder);
+		static bool decode_pointer(const YAML::Node& node, BoxConstBorder*& box_with_const_border);
 	};
 }

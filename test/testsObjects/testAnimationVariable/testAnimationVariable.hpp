@@ -1,5 +1,5 @@
 #pragma once
-#include "IE/Animation/variables/iAnimationVariable.hpp"
+#include "IE/Animation/variables/iAnimation_variable.hpp"
 #include <vector>
 
 class TestAnimationVariable : public ie::IAnimationVariable{
@@ -7,9 +7,9 @@ public:
 	struct Processed{
 		struct ValueFromAnimation{
 			unsigned long long time;
-			float newValue;
+			float new_value;
 		};
-		std::vector<ValueFromAnimation> valueFromAnimation;
+		std::vector<ValueFromAnimation> value_from_animation;
 	};
 
 protected:
@@ -18,7 +18,7 @@ protected:
 public:
 	explicit TestAnimationVariable();
 
-	Processed getProcessed() const;
+	Processed get_processed() const;
 
-	void valueFromAnimation(float newValue) override;
+	void value_from_animation(float new_value) override;
 };

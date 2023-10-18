@@ -2,52 +2,52 @@
 #include <IE/component/IComponent/IScalable/Box/BoxBorderHorizontal/BoxBorderHorizontal.hpp>
 #include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include "_test/_imageEqual/_imageEqual.hpp"
+#include "_test/_image_equal/image_equal.hpp"
 
 TEST(IComponent, BoxBorderHorizontal) {
 	InitInfoData data{{100, 100}};
 	
-	ie::BoxBorderHorizontal boxBorderHorizontal{
+	ie::BoxBorderHorizontal box_border_horizontal{
 		{
-			ie::makeVector(
+			ie::make_vector(
 				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
 			),
-		}, data.makeInitInfo()
+		}, data.make_init_info()
 	};
-	data.interactionManager.update({});
+	data.interaction_manager.update({});
 	
-	ASSERT_EQ(data.drawManager.size(), 2);
-	ASSERT_EQ(data.updateManager.size(), 0);
-	ASSERT_EQ(data.interactionManager.size(), 0);
-	ASSERT_EQ(data.panelManager.size(), 0);
+	ASSERT_EQ(data.draw_manager.size(), 2);
+	ASSERT_EQ(data.update_manager.size(), 0);
+	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.panel_manager.size(), 0);
 	
-	ASSERT_EQ(boxBorderHorizontal.getMinSize(), sf::Vector2f{});
-	ASSERT_EQ(boxBorderHorizontal.getNormalSize(), sf::Vector2f{});
-	ASSERT_EQ(boxBorderHorizontal.getSize(), sf::Vector2f{});
-	ASSERT_EQ(boxBorderHorizontal.getAreaSize(), sf::Vector2f{});
-	ASSERT_EQ(boxBorderHorizontal.getPosition(), sf::Vector2f{});
-	ASSERT_EQ(boxBorderHorizontal.getAreaPosition(), sf::Vector2f{});
-	ASSERT_EQ(boxBorderHorizontal.updateInteractions({}), true);
+	ASSERT_EQ(box_border_horizontal.get_min_size(), sf::Vector2f{});
+	ASSERT_EQ(box_border_horizontal.get_normal_size(), sf::Vector2f{});
+	ASSERT_EQ(box_border_horizontal.get_size(), sf::Vector2f{});
+	ASSERT_EQ(box_border_horizontal.get_area_size(), sf::Vector2f{});
+	ASSERT_EQ(box_border_horizontal.get_position(), sf::Vector2f{});
+	ASSERT_EQ(box_border_horizontal.get_area_position(), sf::Vector2f{});
+	ASSERT_EQ(box_border_horizontal.update_interactions({}), true);
 	
-	boxBorderHorizontal.setSize({5, 11});
-	ASSERT_EQ(boxBorderHorizontal.getSize(), (sf::Vector2f{5, 11}));
-	ASSERT_EQ(boxBorderHorizontal.getAreaSize(), (sf::Vector2f{5, 11}));
+	box_border_horizontal.set_size({5, 11});
+	ASSERT_EQ(box_border_horizontal.get_size(), (sf::Vector2f{5, 11}));
+	ASSERT_EQ(box_border_horizontal.get_area_size(), (sf::Vector2f{5, 11}));
 	
-	boxBorderHorizontal.setPosition({19, 39});
-	ASSERT_EQ(boxBorderHorizontal.getPosition(), (sf::Vector2f{19, 39}));
-	ASSERT_EQ(boxBorderHorizontal.getAreaPosition(), (sf::Vector2f{19, 39}));
+	box_border_horizontal.set_position({19, 39});
+	ASSERT_EQ(box_border_horizontal.get_position(), (sf::Vector2f{19, 39}));
+	ASSERT_EQ(box_border_horizontal.get_area_position(), (sf::Vector2f{19, 39}));
 	
-	boxBorderHorizontal.resize({7, 13}, {23, 41});
-	ASSERT_EQ(boxBorderHorizontal.getSize(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(boxBorderHorizontal.getAreaSize(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(boxBorderHorizontal.getPosition(), (sf::Vector2f{23, 41}));
-	ASSERT_EQ(boxBorderHorizontal.getAreaPosition(), (sf::Vector2f{23, 41}));
+	box_border_horizontal.resize({7, 13}, {23, 41});
+	ASSERT_EQ(box_border_horizontal.get_size(), (sf::Vector2f{7, 13}));
+	ASSERT_EQ(box_border_horizontal.get_area_size(), (sf::Vector2f{7, 13}));
+	ASSERT_EQ(box_border_horizontal.get_position(), (sf::Vector2f{23, 41}));
+	ASSERT_EQ(box_border_horizontal.get_area_position(), (sf::Vector2f{23, 41}));
 	
-	boxBorderHorizontal.move({10, 5});
-	ASSERT_EQ(boxBorderHorizontal.getPosition(), (sf::Vector2f{33, 46}));
-	ASSERT_EQ(boxBorderHorizontal.getAreaPosition(), (sf::Vector2f{33, 46}));
+	box_border_horizontal.move({10, 5});
+	ASSERT_EQ(box_border_horizontal.get_position(), (sf::Vector2f{33, 46}));
+	ASSERT_EQ(box_border_horizontal.get_area_position(), (sf::Vector2f{33, 46}));
 	
-	data.drawManager.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("test-src/BoxBorderHorizontal.png"));
+	data.draw_manager.draw();
+	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxBorderHorizontal.png"));
 }

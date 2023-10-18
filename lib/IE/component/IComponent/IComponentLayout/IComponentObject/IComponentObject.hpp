@@ -7,23 +7,23 @@ namespace ie {
 	class IComponentObject : public virtual IComponentLayout, public virtual ILayoutObject {
 	public:
 		struct Make : public virtual IComponentLayout::Make {
-			virtual IComponentObject* make(InitInfo initInfo) = 0;
+			virtual IComponentObject* make(InitInfo init_info) = 0;
 		};
 		
-		void setPosition(sf::Vector2f position) override;
+		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
 		
-		void setSize(sf::Vector2f size) override;
+		void set_size(sf::Vector2f size) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	};
 }

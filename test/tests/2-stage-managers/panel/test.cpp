@@ -1,106 +1,106 @@
-#include "../../../createTestProgram/createTestProgram.hpp"
-#include "../../../testsObjects/testPanel/testPanel.hpp"
+#include "../../../create_test_program/create_test_program.hpp"
+#include "../../../tests_objects/test_panel/test_panel.hpp"
 
-TEST(PanelManager, draw_and_displayPanel) {
-	TestPanel testPanel{};
-	ie::PanelManager panelManager{{&testPanel}};
-	panelManager.displayPanel(&testPanel);
+TEST(PanelManager, draw_and_display_panel) {
+	TestPanel test_panel{};
+	ie::PanelManager panel_manager{{&test_panel}};
+	panel_manager.display_panel(&test_panel);
 
-	panelManager.draw();
+	panel_manager.draw();
 
-	ASSERT_GT(testPanel.getProcessed().draw, 0);
+	ASSERT_GT(test_panel.get_processed().draw, 0);
 }
 
-TEST(PanelManager, draw_and_hidePanel) {
-	TestPanel testPanel{};
-	ie::PanelManager panelManager{};
-	panelManager.displayPanel(&testPanel);
-	panelManager.hidePanel(&testPanel);
+TEST(PanelManager, draw_and_hide_panel) {
+	TestPanel test_panel{};
+	ie::PanelManager panel_manager{};
+	panel_manager.display_panel(&test_panel);
+	panel_manager.hide_panel(&test_panel);
 
-	panelManager.draw();
+	panel_manager.draw();
 
-	ASSERT_EQ(testPanel.getProcessed().draw, 0);
+	ASSERT_EQ(test_panel.get_processed().draw, 0);
 }
 
-TEST(PanelManager, update_and_addPanel) {
-	TestPanel testPanel{};
-	ie::PanelManager panelManager{};
-	panelManager.addPanel(&testPanel);
+TEST(PanelManager, update_and_add_panel) {
+	TestPanel test_panel{};
+	ie::PanelManager panel_manager{};
+	panel_manager.add_panel(&test_panel);
 
-	panelManager.update();
+	panel_manager.update();
 
-	ASSERT_GT(testPanel.getProcessed().update, 0);
+	ASSERT_GT(test_panel.get_processed().update, 0);
 }
 
-TEST(PanelManager, update_and_removePanel) {
-	TestPanel testPanel{};
-	ie::PanelManager panelManager{};
-	panelManager.addPanel(&testPanel);
-	panelManager.removePanel(&testPanel);
+TEST(PanelManager, update_and_remove_panel) {
+	TestPanel test_panel{};
+	ie::PanelManager panel_manager{};
+	panel_manager.add_panel(&test_panel);
+	panel_manager.remove_panel(&test_panel);
 
-	panelManager.update();
+	panel_manager.update();
 
-	ASSERT_EQ(testPanel.getProcessed().update, 0);
+	ASSERT_EQ(test_panel.get_processed().update, 0);
 }
 
-TEST(PanelManager, isFree) {
-	TestPanel testPanelNotFree{false, {0, 0}, {100, 100}, false};
-	TestPanel testPanelNotFree1{false, {0, 0}, {100, 100}, false};
-	ie::PanelManager panelManager{{&testPanelNotFree, &testPanelNotFree1}};
-	panelManager.displayPanel(&testPanelNotFree);
-	panelManager.displayPanel(&testPanelNotFree1);
-	ASSERT_TRUE(panelManager.isFree());
+TEST(PanelManager, is_free) {
+	TestPanel test_panel_not_free{false, {0, 0}, {100, 100}, false};
+	TestPanel test_panel_not_free1{false, {0, 0}, {100, 100}, false};
+	ie::PanelManager panel_manager{{&test_panel_not_free, &test_panel_not_free1}};
+	panel_manager.display_panel(&test_panel_not_free);
+	panel_manager.display_panel(&test_panel_not_free1);
+	ASSERT_TRUE(panel_manager.is_free());
 
-	TestPanel testPanel{};
+	TestPanel test_panel{};
 
-	panelManager.displayPanel(&testPanel);
+	panel_manager.display_panel(&test_panel);
 
-	ASSERT_FALSE(panelManager.isFree());
+	ASSERT_FALSE(panel_manager.is_free());
 }
 
-TEST(PanelManager, inConstPanels) {
-	TestPanel testPanelNotFree{};
-	TestPanel testPanelNotFree1{};
-	ie::PanelManager panelManager{{&testPanelNotFree, &testPanelNotFree1}};
-	panelManager.displayPanel(&testPanelNotFree);
-	panelManager.displayPanel(&testPanelNotFree1);
-	ASSERT_FALSE(panelManager.inConstPanels({0, 0}));
+TEST(PanelManager, in_const_panels) {
+	TestPanel test_panel_not_free{};
+	TestPanel test_panel_not_free1{};
+	ie::PanelManager panel_manager{{&test_panel_not_free, &test_panel_not_free1}};
+	panel_manager.display_panel(&test_panel_not_free);
+	panel_manager.display_panel(&test_panel_not_free1);
+	ASSERT_FALSE(panel_manager.in_const_panels({0, 0}));
 
-	TestPanel testPanel{false, {0, 0}, {100, 100}, false};
+	TestPanel test_panel{false, {0, 0}, {100, 100}, false};
 
-	panelManager.displayPanel(&testPanel);
+	panel_manager.display_panel(&test_panel);
 
-	ASSERT_TRUE(panelManager.inConstPanels({0, 0}));
+	ASSERT_TRUE(panel_manager.in_const_panels({0, 0}));
 }
 
-TEST(PanelManager, updateInteractions) {
-	TestPanel testPanel{false, {0, 0}, {100, 100}, true, true, true, false};
-	TestPanel testPanel1{};
-	ie::PanelManager panelManager{};
-	panelManager.displayPanel(&testPanel1);
-	panelManager.displayPanel(&testPanel);
+TEST(PanelManager, update_interactions) {
+	TestPanel test_panel{false, {0, 0}, {100, 100}, true, true, true, false};
+	TestPanel test_panel1{};
+	ie::PanelManager panel_manager{};
+	panel_manager.display_panel(&test_panel1);
+	panel_manager.display_panel(&test_panel);
 
-	panelManager.updateInteractions({5, 5}, true);
+	panel_manager.update_interactions({5, 5}, true);
 
-	ASSERT_GT(testPanel.getProcessed().updateInteractionsWithActive.time, 0);
-	ASSERT_GT(testPanel1.getProcessed().updateInteractionsWithActive.time, 0);
-	ASSERT_GT(testPanel1.getProcessed().updateInteractionsWithActive.time, testPanel.getProcessed().updateInteractionsWithActive.time);
+	ASSERT_GT(test_panel.get_processed().update_interactions_with_active.time, 0);
+	ASSERT_GT(test_panel1.get_processed().update_interactions_with_active.time, 0);
+	ASSERT_GT(test_panel1.get_processed().update_interactions_with_active.time, test_panel.get_processed().update_interactions_with_active.time);
 
-	ASSERT_TRUE((testPanel.getProcessed().updateInteractionsWithActive.mousePosition == sf::Vector2f{5, 5}));
-	ASSERT_TRUE(testPanel.getProcessed().updateInteractionsWithActive.active);
+	ASSERT_TRUE((test_panel.get_processed().update_interactions_with_active.mouse_position == sf::Vector2f{5, 5}));
+	ASSERT_TRUE(test_panel.get_processed().update_interactions_with_active.active);
 
-	ASSERT_TRUE((testPanel1.getProcessed().updateInteractionsWithActive.mousePosition == sf::Vector2f{5, 5}));
-	ASSERT_TRUE(testPanel1.getProcessed().updateInteractionsWithActive.active);
+	ASSERT_TRUE((test_panel1.get_processed().update_interactions_with_active.mouse_position == sf::Vector2f{5, 5}));
+	ASSERT_TRUE(test_panel1.get_processed().update_interactions_with_active.active);
 
-	panelManager.updateInteractions({6, 6}, true);
+	panel_manager.update_interactions({6, 6}, true);
 
-	ASSERT_GT(testPanel.getProcessed().updateInteractionsWithActive.time, 0);
-	ASSERT_GT(testPanel1.getProcessed().updateInteractionsWithActive.time, 0);
-	ASSERT_GT(testPanel.getProcessed().updateInteractionsWithActive.time, testPanel1.getProcessed().updateInteractionsWithActive.time);
+	ASSERT_GT(test_panel.get_processed().update_interactions_with_active.time, 0);
+	ASSERT_GT(test_panel1.get_processed().update_interactions_with_active.time, 0);
+	ASSERT_GT(test_panel.get_processed().update_interactions_with_active.time, test_panel1.get_processed().update_interactions_with_active.time);
 
-	ASSERT_TRUE((testPanel1.getProcessed().updateInteractionsWithActive.mousePosition == sf::Vector2f{6, 6}));
-	ASSERT_TRUE(testPanel1.getProcessed().updateInteractionsWithActive.active);
+	ASSERT_TRUE((test_panel1.get_processed().update_interactions_with_active.mouse_position == sf::Vector2f{6, 6}));
+	ASSERT_TRUE(test_panel1.get_processed().update_interactions_with_active.active);
 
-	ASSERT_TRUE((testPanel.getProcessed().updateInteractionsWithActive.mousePosition == sf::Vector2f{6, 6}));
-	ASSERT_FALSE(testPanel.getProcessed().updateInteractionsWithActive.active);
+	ASSERT_TRUE((test_panel.get_processed().update_interactions_with_active.mouse_position == sf::Vector2f{6, 6}));
+	ASSERT_FALSE(test_panel.get_processed().update_interactions_with_active.active);
 }

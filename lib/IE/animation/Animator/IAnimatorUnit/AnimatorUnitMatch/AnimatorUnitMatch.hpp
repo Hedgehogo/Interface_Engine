@@ -10,7 +10,7 @@ namespace ie {
 			std::function<bool(T, T)> comparison;
 			std::vector<IAnimatorUnit*> next;
 			
-			void addNextUnit(IAnimatorUnit* unit);
+			void add_next_unit(IAnimatorUnit* unit);
 			
 			Option copy();
 		};
@@ -23,9 +23,9 @@ namespace ie {
 	
 		AnimatorUnitMatch(std::vector<Option> options, PSValue<T> value);
 		
-		void addNext(size_t i, IAnimatorUnit* unit);
+		void add_next(size_t i, IAnimatorUnit* unit);
 		
-		void setSpeed(PSfloat speed) override;
+		void set_speed(PSfloat speed) override;
 		
 		void restart() override;
 		
@@ -45,7 +45,7 @@ namespace ie {
 	
 	template<typename T>
 	struct DecodePointer<AnimatorUnitMatch<T> > {
-		static bool decodePointer(const YAML::Node& node, AnimatorUnitMatch<T>*& animatorUnitMatch);
+		static bool decode_pointer(const YAML::Node& node, AnimatorUnitMatch<T>*& animator_unit_match);
 	};
 	
 	using AnimatorUnitMatchFloat = AnimatorUnitMatch<float>;

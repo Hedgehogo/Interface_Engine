@@ -3,5 +3,5 @@
 #include <string>
 
 namespace ie {
-	void openUrl(std::string str);
+	void open_url(std::string str);
 }

@@ -4,59 +4,59 @@ namespace ie {
 	namespace make_system {
 		template<typename T>
 		BasicMouseFnInteraction<T>::BasicMouseFnInteraction(
-			BoxPtr<BasicKeyAction<T> >&& leftButtonAction,
-			BoxPtr<BasicKeyAction<T> >&& rightButtonAction,
-			FnType startFn,
-			FnType finishFn
+			BoxPtr<BasicKeyAction<T> >&& left_button_action,
+			BoxPtr<BasicKeyAction<T> >&& right_button_action,
+			FnType start_fn,
+			FnType finish_fn
 		) :
-			BasicFnInteraction<T>(std::move(startFn), std::move(finishFn)),
-			leftButtonAction(std::move(leftButtonAction)),
-			rightButtonAction(std::move(rightButtonAction)) {
+			BasicFnInteraction<T>(std::move(start_fn), std::move(finish_fn)),
+			left_button_action(std::move(left_button_action)),
+			right_button_action(std::move(right_button_action)) {
 		}
 		
 		template<typename T>
-		ie::BasicMouseFnInteraction<T>* BasicMouseFnInteraction<T>::make(BasicActionInitInfo<T> initInfo) {
-			return new ie::BasicMouseFnInteraction<T>{std::move(*this), initInfo};
+		ie::BasicMouseFnInteraction<T>* BasicMouseFnInteraction<T>::make(BasicActionInitInfo<T> init_info) {
+			return new ie::BasicMouseFnInteraction<T>{std::move(*this), init_info};
 		}
 	}
 	
 	template<typename T>
-	BasicMouseFnInteraction<T>::BasicMouseFnInteraction(Make&& make, BasicActionInitInfo<T> initInfo) :
-		BasicFnInteraction<T>({std::move(make.startFn), std::move(make.finishFn)}, initInfo),
-		leftButtonAction(make.leftButtonAction->make(initInfo)),
-		rightButtonAction(make.rightButtonAction->make(initInfo)) {
+	BasicMouseFnInteraction<T>::BasicMouseFnInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
+		BasicFnInteraction<T>({std::move(make.start_fn), std::move(make.finish_fn)}, init_info),
+		left_button_action(make.left_button_action->make(init_info)),
+		right_button_action(make.right_button_action->make(init_info)) {
 	}
 	
 	template<typename T>
 	BasicMouseFnInteraction<T>::BasicMouseFnInteraction(
-		BoxPtr<BasicKeyAction<T> >&& leftButtonAction,
-		BoxPtr<BasicKeyAction<T> >&& rightButtonAction,
-		FnType startFn,
-		FnType finishFn
+		BoxPtr<BasicKeyAction<T> >&& left_button_action,
+		BoxPtr<BasicKeyAction<T> >&& right_button_action,
+		FnType start_fn,
+		FnType finish_fn
 	) :
-		BasicFnInteraction<T>(std::move(startFn), std::move(finishFn)),
-		leftButtonAction(std::move(leftButtonAction)),
-		rightButtonAction(std::move(rightButtonAction)) {
+		BasicFnInteraction<T>(std::move(start_fn), std::move(finish_fn)),
+		left_button_action(std::move(left_button_action)),
+		right_button_action(std::move(right_button_action)) {
 	}
 	
 	template<typename T>
-	BasicKeyAction<T>& BasicMouseFnInteraction<T>::getLeftButtonAction() {
-		return *leftButtonAction;
+	BasicKeyAction<T>& BasicMouseFnInteraction<T>::get_left_button_action() {
+		return *left_button_action;
 	}
 	
 	template<typename T>
-	const BasicKeyAction<T>& BasicMouseFnInteraction<T>::getLeftButtonAction() const {
-		return *leftButtonAction;
+	const BasicKeyAction<T>& BasicMouseFnInteraction<T>::get_left_button_action() const {
+		return *left_button_action;
 	}
 	
 	template<typename T>
-	BasicKeyAction<T>& BasicMouseFnInteraction<T>::getRightButtonAction() {
-		return *rightButtonAction;
+	BasicKeyAction<T>& BasicMouseFnInteraction<T>::get_right_button_action() {
+		return *right_button_action;
 	}
 	
 	template<typename T>
-	const BasicKeyAction<T>& BasicMouseFnInteraction<T>::getRightButtonAction() const {
-		return *rightButtonAction;
+	const BasicKeyAction<T>& BasicMouseFnInteraction<T>::get_right_button_action() const {
+		return *right_button_action;
 	}
 	
 	template<typename T>

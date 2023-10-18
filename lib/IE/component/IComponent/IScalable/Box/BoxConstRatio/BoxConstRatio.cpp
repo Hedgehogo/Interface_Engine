@@ -2,75 +2,75 @@
 
 namespace ie {
 	BoxConstRatio::Make::Make(
-		BoxPtr<IScalable::Make>&& constObject,
-		BoxPtr<IScalable::Make>&& secondObject,
+		BoxPtr<IScalable::Make>&& const_object,
+		BoxPtr<IScalable::Make>&& second_object,
 		BoxPtr<IUninteractive::Make>&& background,
-		float aspectRatio,
+		float aspect_ratio,
 		Corner corner,
-		sf::Vector2f minSize
+		sf::Vector2f min_size
 	) :
-		constObject(std::move(constObject)),
-		secondObject(std::move(secondObject)),
+		const_object(std::move(const_object)),
+		second_object(std::move(second_object)),
 		background(std::move(background)),
-		aspectRatio(aspectRatio),
+		aspect_ratio(aspect_ratio),
 		corner(corner),
-		minSize(minSize) {
+		min_size(min_size) {
 	}
 	
-	BoxConstRatio* BoxConstRatio::Make::make(InitInfo initInfo) {
-		return new BoxConstRatio{std::move(*this), initInfo};
+	BoxConstRatio* BoxConstRatio::Make::make(InitInfo init_info) {
+		return new BoxConstRatio{std::move(*this), init_info};
 	}
 	
-	BoxConstRatio::BoxConstRatio(Make&& make, InitInfo initInfo) :
-		Box(make.minSize),
-		background(make.background->make(initInfo)),
-		constObject(make.constObject->make(initInfo)),
-		secondObject(make.secondObject->make(initInfo.copy(secondDrawManager))),
-		verticalSide(make.corner == Corner::UpLeft || make.corner == Corner::UpRight),
-		horizontalSide(make.corner == Corner::UpLeft || make.corner == Corner::DownLeft),
-		renderSecond(true),
-		aspectRatio(make.aspectRatio) {
-		initInfo.drawManager.add(*this);
+	BoxConstRatio::BoxConstRatio(Make&& make, InitInfo init_info) :
+		Box(make.min_size),
+		background(make.background->make(init_info)),
+		const_object(make.const_object->make(init_info)),
+		second_object(make.second_object->make(init_info.copy(second_draw_manager))),
+		vertical_side(make.corner == Corner::UpLeft || make.corner == Corner::UpRight),
+		horizontal_side(make.corner == Corner::UpLeft || make.corner == Corner::DownLeft),
+		render_second(true),
+		aspect_ratio(make.aspect_ratio) {
+		init_info.draw_manager.add(*this);
 	}
 	
 	BoxConstRatio::BoxConstRatio(
-		BoxPtr<IScalable>&& constObject,
-		BoxPtr<IScalable>&& secondObject,
+		BoxPtr<IScalable>&& const_object,
+		BoxPtr<IScalable>&& second_object,
 		BoxPtr<IUninteractive>&& background,
-		float aspectRatio,
+		float aspect_ratio,
 		Corner corner,
-		sf::Vector2f minSize
+		sf::Vector2f min_size
 	) :
-		Box(minSize),
+		Box(min_size),
 		background(std::move(background)),
-		constObject(std::move(constObject)),
-		secondObject(std::move(secondObject)),
-		verticalSide(corner == Corner::UpLeft || corner == Corner::UpRight),
-		horizontalSide(corner == Corner::UpLeft || corner == Corner::DownLeft),
-		renderSecond(true),
-		aspectRatio(aspectRatio) {
+		const_object(std::move(const_object)),
+		second_object(std::move(second_object)),
+		vertical_side(corner == Corner::UpLeft || corner == Corner::UpRight),
+		horizontal_side(corner == Corner::UpLeft || corner == Corner::DownLeft),
+		render_second(true),
+		aspect_ratio(aspect_ratio) {
 	}
 	
 	BoxConstRatio::BoxConstRatio(const BoxConstRatio& other) :
-		Box(other), background(other.background), constObject(other.constObject), secondObject(other.secondObject),
-		verticalSide(other.verticalSide), horizontalSide(other.horizontalSide), renderSecond(other.renderSecond), aspectRatio(other.aspectRatio) {
+		Box(other), background(other.background), const_object(other.const_object), second_object(other.second_object),
+		vertical_side(other.vertical_side), horizontal_side(other.horizontal_side), render_second(other.render_second), aspect_ratio(other.aspect_ratio) {
 	}
 	
-	void BoxConstRatio::init(InitInfo initInfo) {
-		initInfo.drawManager.add(*this);
-		background->init(initInfo);
-		constObject->init(initInfo);
-		secondObject->init(initInfo.copy(secondDrawManager));
+	void BoxConstRatio::init(InitInfo init_info) {
+		init_info.draw_manager.add(*this);
+		background->init(init_info);
+		const_object->init(init_info);
+		second_object->init(init_info.copy(second_draw_manager));
 	}
 	
-	Corner BoxConstRatio::getCorner() {
-		if(verticalSide) {
-			if(horizontalSide) {
+	Corner BoxConstRatio::get_corner() {
+		if(vertical_side) {
+			if(horizontal_side) {
 				return Corner::UpLeft;
 			}
 			return Corner::UpRight;
 		} else {
-			if(horizontalSide) {
+			if(horizontal_side) {
 				return Corner::DownLeft;
 			}
 			return Corner::DownRight;
@@ -78,129 +78,129 @@ namespace ie {
 	}
 	
 	void BoxConstRatio::draw() {
-		if(renderSecond) {
-			secondDrawManager.draw();
+		if(render_second) {
+			second_draw_manager.draw();
 		}
 	}
 	
-	void BoxConstRatio::setPosition(sf::Vector2f position) {
+	void BoxConstRatio::set_position(sf::Vector2f position) {
 		BoxConstRatio::move(position - layout.position);
 	}
 	
 	void BoxConstRatio::move(sf::Vector2f position) {
 		layout.move(position);
 		background->move(position);
-		constObject->move(position);
-		secondObject->move(position);
+		const_object->move(position);
+		second_object->move(position);
 	}
 	
-	void BoxConstRatio::setSize(sf::Vector2f size) {
+	void BoxConstRatio::set_size(sf::Vector2f size) {
 		resize(size, layout.position);
 	}
 	
 	void BoxConstRatio::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout.resize(size, position);
 		
-		sf::Vector2f constSize = sf::Vector2f(size.x / size.y > aspectRatio ? sf::Vector2f{size.y * aspectRatio, size.y} : sf::Vector2f{size.x, size.x / aspectRatio});
-		sf::Vector2f secondSize = sf::Vector2f(size.x / size.y > aspectRatio ? sf::Vector2f{size.x - constSize.x, size.y} : sf::Vector2f{size.x, size.y - constSize.y});
+		sf::Vector2f const_size = sf::Vector2f(size.x / size.y > aspect_ratio ? sf::Vector2f{size.y * aspect_ratio, size.y} : sf::Vector2f{size.x, size.x / aspect_ratio});
+		sf::Vector2f second_size = sf::Vector2f(size.x / size.y > aspect_ratio ? sf::Vector2f{size.x - const_size.x, size.y} : sf::Vector2f{size.x, size.y - const_size.y});
 		
-		sf::Vector2f constPosition = sf::Vector2f{0, 0};
-		sf::Vector2f secondPosition = sf::Vector2f{0, 0};
+		sf::Vector2f const_position = sf::Vector2f{0, 0};
+		sf::Vector2f second_position = sf::Vector2f{0, 0};
 		
-		sf::Vector2f secondMinSize = secondObject->getMinSize();
-		renderSecond = secondSize.x > secondMinSize.x && secondSize.y > secondMinSize.y;
-		if(renderSecond) {
-			if(size.x / size.y > aspectRatio) {
-				if(horizontalSide) {
-					secondPosition.x = constSize.x;
+		sf::Vector2f second_min_size = second_object->get_min_size();
+		render_second = second_size.x > second_min_size.x && second_size.y > second_min_size.y;
+		if(render_second) {
+			if(size.x / size.y > aspect_ratio) {
+				if(horizontal_side) {
+					second_position.x = const_size.x;
 				} else {
-					constPosition.x = secondSize.x;
+					const_position.x = second_size.x;
 				}
 			} else {
-				if(verticalSide) {
-					secondPosition.y = constSize.y;
+				if(vertical_side) {
+					second_position.y = const_size.y;
 				} else {
-					constPosition.y = secondSize.y;
+					const_position.y = second_size.y;
 				}
 			}
 		} else {
-			constPosition = (layout.size - constSize) / 2.0f;
+			const_position = (layout.size - const_size) / 2.0f;
 		}
 		
-		constPosition += position;
-		secondPosition += position;
+		const_position += position;
+		second_position += position;
 		
-		constObject->resize(constSize, constPosition);
-		secondObject->resize(secondSize, secondPosition);
+		const_object->resize(const_size, const_position);
+		second_object->resize(second_size, second_position);
 		background->resize(size, position);
 	}
 	
-	bool BoxConstRatio::updateInteractions(sf::Vector2f mousePosition) {
-		if(renderSecond && secondObject->inArea(mousePosition)) {
-			return secondObject->updateInteractions(mousePosition);
+	bool BoxConstRatio::update_interactions(sf::Vector2f mouse_position) {
+		if(render_second && second_object->in_area(mouse_position)) {
+			return second_object->update_interactions(mouse_position);
 		}
-		if(constObject->inArea(mousePosition)) {
-			return constObject->updateInteractions(mousePosition);
+		if(const_object->in_area(mouse_position)) {
+			return const_object->update_interactions(mouse_position);
 		}
-		return background->updateInteractions(mousePosition);
+		return background->update_interactions(mouse_position);
 	}
 	
-	sf::Vector2f BoxConstRatio::getMinSize() const {
-		sf::Vector2f constMinSize{constObject->getMinSize()};
-		constMinSize = sf::Vector2f{std::max(constMinSize.x, constMinSize.y * aspectRatio), std::max(constMinSize.y, constMinSize.x / aspectRatio)};
-		return max(constMinSize, background->getMinSize(), minimumSize);
+	sf::Vector2f BoxConstRatio::get_min_size() const {
+		sf::Vector2f const_min_size{const_object->get_min_size()};
+		const_min_size = sf::Vector2f{std::max(const_min_size.x, const_min_size.y * aspect_ratio), std::max(const_min_size.y, const_min_size.x / aspect_ratio)};
+		return max(const_min_size, background->get_min_size(), minimum_size);
 	}
 	
-	sf::Vector2f BoxConstRatio::getNormalSize() const {
-		sf::Vector2f constNormalSize{constObject->getNormalSize()};
-		sf::Vector2f secondNormalSize{secondObject->getNormalSize()};
-		//sf::Vector2f normalSize{std::max(constNormalSize.x, constNormalSize.y * aspectRatio), std::max(constNormalSize.y, constNormalSize.x / aspectRatio)};
-		sf::Vector2f normalSize{constNormalSize.x + secondNormalSize.x, std::max(constNormalSize.y, secondNormalSize.y)};
-		return max(normalSize, background->getNormalSize());
+	sf::Vector2f BoxConstRatio::get_normal_size() const {
+		sf::Vector2f const_normal_size{const_object->get_normal_size()};
+		sf::Vector2f second_normal_size{second_object->get_normal_size()};
+		//sf::Vector2f normal_size{std::max(const_normal_size.x, const_normal_size.y * aspect_ratio), std::max(const_normal_size.y, const_normal_size.x / aspect_ratio)};
+		sf::Vector2f normal_size{const_normal_size.x + second_normal_size.x, std::max(const_normal_size.y, second_normal_size.y)};
+		return max(normal_size, background->get_normal_size());
 	}
 	
-	IUninteractive& BoxConstRatio::getBackground() {
+	IUninteractive& BoxConstRatio::get_background() {
 		return *background;
 	}
 	
-	const IUninteractive& BoxConstRatio::getBackground() const {
+	const IUninteractive& BoxConstRatio::get_background() const {
 		return *background;
 	}
 	
-	IScalable& BoxConstRatio::getFirstObject() {
-		return *constObject;
+	IScalable& BoxConstRatio::get_first_object() {
+		return *const_object;
 	}
 	
-	const IScalable& BoxConstRatio::getFirstObject() const {
-		return *constObject;
+	const IScalable& BoxConstRatio::get_first_object() const {
+		return *const_object;
 	}
 	
-	IScalable& BoxConstRatio::getSecondObject() {
-		return *secondObject;
+	IScalable& BoxConstRatio::get_second_object() {
+		return *second_object;
 	}
 	
-	const IScalable& BoxConstRatio::getSecondObject() const {
-		return *secondObject;
+	const IScalable& BoxConstRatio::get_second_object() const {
+		return *second_object;
 	}
 	
 	BoxConstRatio* BoxConstRatio::copy() {
 		return new BoxConstRatio{*this};
 	}
 	
-	void BoxConstRatio::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-		IComponent::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		constObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
-		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+	void BoxConstRatio::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+		const_object->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
+		second_object->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
 	
-	bool DecodePointer<BoxConstRatio>::decodePointer(const YAML::Node& node, BoxConstRatio*& boxWithConstRatio) {
-		boxWithConstRatio = new BoxConstRatio{
+	bool DecodePointer<BoxConstRatio>::decode_pointer(const YAML::Node& node, BoxConstRatio*& box_with_const_ratio) {
+		box_with_const_ratio = new BoxConstRatio{
 			node["const-object"].as<BoxPtr<IScalable> >(),
 			node["second-object"].as<BoxPtr<IScalable> >(),
-			BoxPtr{convDefPtr<IUninteractive, Empty>(node["background"])},
+			BoxPtr{conv_def_ptr<IUninteractive, Empty>(node["background"])},
 			node["aspect-ratio"].as<float>(),
-			convDef(node["corner"], Corner::UpLeft),
-			convDef(node["min-size"], sf::Vector2f{})
+			conv_def(node["corner"], Corner::UpLeft),
+			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
 	}

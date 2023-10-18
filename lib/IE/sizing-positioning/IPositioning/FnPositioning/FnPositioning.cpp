@@ -2,14 +2,14 @@
 #include <utility>
 
 namespace ie {
-	FnPositioning::FnPositioning(FindPositionFn findPositionFn) : findPositionFn(std::move(findPositionFn)) {
+	FnPositioning::FnPositioning(FindPositionFn find_position_fn) : find_position_fn(std::move(find_position_fn)) {
 	}
 	
-	float FnPositioning::findPosition(float parentPosition, float objectSize, float parentSize, float targetSize) {
-		return findPositionFn(parentPosition, objectSize, parentSize, targetSize);
+	float FnPositioning::find_position(float parent_position, float object_size, float parent_size, float target_size) {
+		return find_position_fn(parent_position, object_size, parent_size, target_size);
 	}
 	
 	FnPositioning* FnPositioning::copy() {
-		return new FnPositioning{findPositionFn};
+		return new FnPositioning{find_position_fn};
 	}
 }

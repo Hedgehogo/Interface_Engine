@@ -9,7 +9,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicEmptyAction : public BasicKeyAction<T> {
-			ie::BasicEmptyAction<T>* make(BasicActionInitInfo<T> initInfo) override;
+			ie::BasicEmptyAction<T>* make(BasicActionInitInfo<T> init_info) override;
 		};
 	}
 	
@@ -18,7 +18,7 @@ namespace ie {
 	public:
 		using Make = make_system::BasicEmptyAction<T>;
 		
-		BasicEmptyAction(Make&& make, BasicActionInitInfo<T> initInfo);
+		BasicEmptyAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
 		BasicEmptyAction();
 		

@@ -15,9 +15,9 @@ namespace ie {
 		
 		static T& get(const std::string& name);
 		
-		static void setObject(const std::string& name, const std::string& filePath);
+		static void set_object(const std::string& name, const std::string& file_path);
 		
-		static void addAlias(const std::string& name, const std::string& alias);
+		static void add_alias(const std::string& name, const std::string& alias);
 	
 	protected:
 		static std::map<std::string, T> objects;
@@ -31,9 +31,9 @@ namespace ie {
 		std::size_t number;
 	};
 	
-	SymbolPosition readCharacterIndex(const YAML::Node& node, std::basic_ifstream<char32_t>& fin);
+	SymbolPosition read_character_index(const YAML::Node& node, std::basic_ifstream<char32_t>& fin);
 	
-	std::basic_string<Uint32> u32stringToUint32String(std::basic_string<char32_t> str);
+	std::basic_string<Uint32> u32string_to_uint32_string(std::basic_string<char32_t> str);
 	
 	template<>
 	struct Decode<std::basic_string<char32_t>> {
@@ -42,7 +42,7 @@ namespace ie {
 	
 	template<>
 	struct Decode<sf::String> {
-		static bool decode(const YAML::Node& node, sf::String& sfString);
+		static bool decode(const YAML::Node& node, sf::String& sf_string);
 	};
 	
 	template<>

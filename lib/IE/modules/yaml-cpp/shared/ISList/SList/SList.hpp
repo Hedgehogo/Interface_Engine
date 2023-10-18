@@ -9,24 +9,24 @@ namespace ie {
 		void set();
 	
 	public:
-		using V = to_auto<decltype(std::declval<T>().getValue())>;
+		using V = to_auto<decltype(std::declval<T>().get_value())>;
 		using SetterFunc = std::function<void(const std::vector<V>&)>;
 		
 		SList(const std::vector<V>& list = {});
 		
 		SList(std::vector<std::shared_ptr<T>> list);
 		
-		PIShared getElementPtr(std::size_t index) const override;
+		PIShared get_element_ptr(std::size_t index) const override;
 		
-		void setElementPtr(std::size_t index, PIShared value) override;
+		void set_element_ptr(std::size_t index, PIShared value) override;
 		
-		V getElement(std::size_t index) const;
+		V get_element(std::size_t index) const;
 		
-		void setElement(std::size_t index, const V& value);
+		void set_element(std::size_t index, const V& value);
 		
-		std::vector<V> getValue() const;
+		std::vector<V> get_value() const;
 		
-		void setValue(const std::vector<V>& list);
+		void set_value(const std::vector<V>& list);
 		
 	protected:
 		std::vector<std::shared_ptr<T>> list;
@@ -35,7 +35,7 @@ namespace ie {
 	
 	template<typename T>
 	struct DecodePointer<SList<T> > {
-		static bool decodePointer(const YAML::Node& node, SList<T>*& withList);
+		static bool decode_pointer(const YAML::Node& node, SList<T>*& with_list);
 	};
 	
 	template<typename T>

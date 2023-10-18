@@ -12,33 +12,33 @@ namespace ie {
 			
 			Make(sf::Vector2i division = {0, 0});
 			
-			SliderAction* make(BasicActionInitInfo<BaseSlider&> initInfo) override;
+			SliderAction* make(BasicActionInitInfo<BaseSlider&> init_info) override;
 		};
 		
-		SliderAction(Make&& make, BasicActionInitInfo<BaseSlider&> initInfo);
+		SliderAction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info);
 		
 		explicit SliderAction(sf::Vector2i division = {0, 0});
 		
-		void init(BasicActionInitInfo<BaseSlider&> initInfo) override;
+		void init(BasicActionInitInfo<BaseSlider&> init_info) override;
 		
-		void setSlider(BaseSlider& slider);
+		void set_slider(BaseSlider& slider);
 		
 		SliderAction* copy() override;
 	
 	protected:
-		sf::Vector2f getMousePosition();
+		sf::Vector2f get_mouse_position();
 		
-		void startPressed() override;
+		void start_pressed() override;
 		
-		void stopPressed() override;
+		void stop_pressed() override;
 		
-		void whilePressed() override;
+		void while_pressed() override;
 		
-		void whileNotPressed() override;
+		void while_not_pressed() override;
 		
 		BaseSlider* slider;
-		sf::Vector2i startMousePosition;
-		sf::Vector2f startValue;
+		sf::Vector2i start_mouse_position;
+		sf::Vector2f start_value;
 		sf::Vector2i division;
 	};
 }

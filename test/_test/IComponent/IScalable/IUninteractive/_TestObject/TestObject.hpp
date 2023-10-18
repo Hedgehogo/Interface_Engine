@@ -11,18 +11,18 @@ public:
 		
 		Make(std::shared_ptr<T> object);
 		
-		TestObject* make(ie::InitInfo initInfo) override;
+		TestObject* make(ie::InitInfo init_info) override;
 	};
 	
-	TestObject(Make&& make, ie::InitInfo initInfo);
+	TestObject(Make&& make, ie::InitInfo init_info);
 	
-	void init(ie::InitInfo initInfo) override;
+	void init(ie::InitInfo init_info) override;
 	
 	void resize(sf::Vector2f size, sf::Vector2f position) override;
 	
-	sf::Vector2f getMinSize() const override;
+	sf::Vector2f get_min_size() const override;
 	
-	sf::Vector2f getNormalSize() const override;
+	sf::Vector2f get_normal_size() const override;
 	
 	TestObject* copy() override;
 

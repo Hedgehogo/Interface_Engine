@@ -1,50 +1,50 @@
 namespace ie {
 	template<typename T>
-	BasicInteractiveData<T>::BasicInteractiveData(BoxPtr<typename IBasicInteraction<T>::Make>&& interaction, InitInfo initInfo, T additional) :
-		interactionStack(&initInfo.interactionStack),
-		interactionManager(&initInfo.interactionManager),
-		interaction(interaction->make({initInfo, additional})),
+	BasicInteractiveData<T>::BasicInteractiveData(BoxPtr<typename IBasicInteraction<T>::Make>&& interaction, InitInfo init_info, T additional) :
+		interaction_stack(&init_info.interaction_stack),
+		interaction_manager(&init_info.interaction_manager),
+		interaction(interaction->make({init_info, additional})),
 		interact(false),
-		oldInteract(false) {
+		old_interact(false) {
 	}
 	
 	template<typename T>
-	BasicInteractiveData<T>::BasicInteractiveData(BoxPtr<IBasicInteraction<T> >&& interaction, InitInfo initInfo, T additional) :
-		interactionStack(&initInfo.interactionStack),
-		interactionManager(&initInfo.interactionManager),
+	BasicInteractiveData<T>::BasicInteractiveData(BoxPtr<IBasicInteraction<T> >&& interaction, InitInfo init_info, T additional) :
+		interaction_stack(&init_info.interaction_stack),
+		interaction_manager(&init_info.interaction_manager),
 		interaction(std::move(interaction)),
 		interact(false),
-		oldInteract(false) {
-		this->interaction->init({initInfo, additional});
+		old_interact(false) {
+		this->interaction->init({init_info, additional});
 	}
 	
 	template<typename T>
 	BasicInteractiveData<T>::BasicInteractiveData(BoxPtr<IBasicInteraction<T> >&& interaction) :
-		interactionStack(nullptr), interactionManager(nullptr), interaction(std::move(interaction)), interact(false), oldInteract(false) {
+		interaction_stack(nullptr), interaction_manager(nullptr), interaction(std::move(interaction)), interact(false), old_interact(false) {
 	}
 	
 	template<typename T>
-	void BasicInteractiveData<T>::init(InitInfo initInfo, T additional) {
-		this->interactionStack = &initInfo.interactionStack;
-		this->interactionManager = &initInfo.interactionManager;
-		interaction->init({initInfo, additional});
+	void BasicInteractiveData<T>::init(InitInfo init_info, T additional) {
+		this->interaction_stack = &init_info.interaction_stack;
+		this->interaction_manager = &init_info.interaction_manager;
+		interaction->init({init_info, additional});
 	}
 	
 	template<typename T>
 	void BasicInteractiveData<T>::update() {
-		if(interact != oldInteract) {
-			oldInteract = interact;
+		if(interact != old_interact) {
+			old_interact = interact;
 			if(interact) {
-				interactionManager->addInteraction(*interaction);
+				interaction_manager->add_interaction(*interaction);
 			} else {
-				interactionManager->deleteInteraction(*interaction);
+				interaction_manager->delete_interaction(*interaction);
 			}
 		}
 		interact = false;
 	}
 	
 	template<typename T>
-	void BasicInteractiveData<T>::updateInteractions() {
+	void BasicInteractiveData<T>::update_interactions() {
 		interact = true;
 	}
 }

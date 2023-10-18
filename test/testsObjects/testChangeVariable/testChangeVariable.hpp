@@ -11,7 +11,7 @@ public:
 		};
 
 		std::vector<Operat> operat;
-		std::vector<unsigned long long> getSize, copy;
+		std::vector<unsigned long long> get_size, copy;
 	};
 
 protected:
@@ -22,9 +22,9 @@ public:
 
 	TestChangeVariable(float size, float result);
 
-	const Processed &getProcessed() const;
+	const Processed &get_processed() const;
 
-	float getSize() override;
+	float get_size() override;
 
 	float operator()(float frame) override;
 

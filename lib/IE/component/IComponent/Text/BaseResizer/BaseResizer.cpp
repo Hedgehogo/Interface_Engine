@@ -1,29 +1,29 @@
 #include "BaseResizer.hpp"
 
 namespace ie {
-	BaseResizer::BaseResizer(float lineSpacing, BaseResizer::Align align, BaseResizer::Algorithm algorithm, ResizerInitInfo initInfo) :
-		characters(&initInfo.characters),
-		lines(&initInfo.lines),
-		lineSpacing(lineSpacing),
+	BaseResizer::BaseResizer(float line_spacing, BaseResizer::Align align, BaseResizer::Algorithm algorithm, ResizerInitInfo init_info) :
+		characters(&init_info.characters),
+		lines(&init_info.lines),
+		line_spacing(line_spacing),
 		align(align),
 		algorithm(algorithm) {
 	}
 	
-	BaseResizer::BaseResizer(float lineSpacing, Align align, Algorithm algorithm) : characters(nullptr), lines(nullptr), lineSpacing(lineSpacing), align(align), algorithm(algorithm) {
+	BaseResizer::BaseResizer(float line_spacing, Align align, Algorithm algorithm) : characters(nullptr), lines(nullptr), line_spacing(line_spacing), align(align), algorithm(algorithm) {
 	}
 	
-	void BaseResizer::init(ResizerInitInfo initInfo) {
-		this->characters = &initInfo.characters;
-		this->lines = &initInfo.lines;
+	void BaseResizer::init(ResizerInitInfo init_info) {
+		this->characters = &init_info.characters;
+		this->lines = &init_info.lines;
 	}
 	
-	sf::Vector2f BaseResizer::getMinSize() {
+	sf::Vector2f BaseResizer::get_min_size() {
 		if(algorithm == Algorithm::Console) {
-			return getMinSizeConsole();
+			return get_min_size_console();
 		} else if(algorithm == Algorithm::Absolute) {
-			return getMinSizeAbsolute();
+			return get_min_size_absolute();
 		}
-		return getMinSizeBase();
+		return get_min_size_base();
 	}
 	
 	bool Decode<BaseResizer::Align>::decode(const YAML::Node& node, BaseResizer::Align& align) {

@@ -10,26 +10,26 @@ namespace ie {
 			
 			explicit Make(const orl::Option<sf::Color>& color = {});
 			
-			Underline* make(LineInitInfo initInfo) override;
+			Underline* make(LineInitInfo init_info) override;
 		};
 		
-		Underline(Make&& make, LineInitInfo initInfo);
+		Underline(Make&& make, LineInitInfo init_info);
 		
 		Underline(orl::Option<sf::Color> color = {});
 		
-		void init(LineInitInfo initInfo) override;
+		void init(LineInitInfo init_info) override;
 		
 		void resize(float start, float end, float height) override;
 		
 		Underline* copy() const override;
 	
 	protected:
-		float underlineOffset;
-		float underlineThickness;
+		float underline_offset;
+		float underline_thickness;
 	};
 	
 	template<>
 	struct DecodePointer<Underline> {
-		static bool decodePointer(const YAML::Node& node, Underline*& underline);
+		static bool decode_pointer(const YAML::Node& node, Underline*& underline);
 	};
 }

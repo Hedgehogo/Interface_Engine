@@ -7,7 +7,7 @@ namespace ie {
 	class IUninteractiveTwoObjects : public virtual IUninteractiveLayout, public virtual IScalableTwoObjects {
 	public:
 		struct Make : public virtual IUninteractiveLayout::Make, public virtual IScalableTwoObjects::Make {
-			IUninteractiveTwoObjects* make(InitInfo initInfo) override = 0;
+			IUninteractiveTwoObjects* make(InitInfo init_info) override = 0;
 		};
 	};
 }

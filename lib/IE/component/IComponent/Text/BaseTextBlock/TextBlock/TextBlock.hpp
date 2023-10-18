@@ -9,76 +9,76 @@ namespace ie {
 	public:
 		struct Make : public BaseTextBlock::Make {
 			std::u32string text;
-			orl::Option<sf::Color> textColor = {};
+			orl::Option<sf::Color> text_color = {};
 			orl::Option<sf::Font*> font = {};
 			orl::Option<sf::Text::Style> style = {};
 			std::vector<BoxPtr<BaseLine::Make> > lines = {};
 			orl::Option<uint> size = {};
-			orl::Option<sf::Color> textSelectionColor = {};
-			orl::Option<sf::Color> backgroundSelectionColor = {};
-			orl::Option<sf::Color> inactiveTextSelectionColor = {};
-			orl::Option<sf::Color> inactiveBackgroundSelectionColor = {};
+			orl::Option<sf::Color> text_selection_color = {};
+			orl::Option<sf::Color> background_selection_color = {};
+			orl::Option<sf::Color> inactive_text_selection_color = {};
+			orl::Option<sf::Color> inactive_background_selection_color = {};
 			
 			Make(
 				std::u32string  text,
-				const orl::Option<sf::Color>& textColor = {},
+				const orl::Option<sf::Color>& text_color = {},
 				const orl::Option<sf::Font*>& font = {},
 				const orl::Option<sf::Text::Style>& style = {},
 				std::vector<BoxPtr<BaseLine::Make>>&& lines = {},
 				const orl::Option<uint>& size = {},
-				const orl::Option<sf::Color>& textSelectionColor = {},
-				const orl::Option<sf::Color>& backgroundSelectionColor = {},
-				const orl::Option<sf::Color>& inactiveTextSelectionColor = {},
-				const orl::Option<sf::Color>& inactiveBackgroundSelectionColor = {}
+				const orl::Option<sf::Color>& text_selection_color = {},
+				const orl::Option<sf::Color>& background_selection_color = {},
+				const orl::Option<sf::Color>& inactive_text_selection_color = {},
+				const orl::Option<sf::Color>& inactive_background_selection_color = {}
 			);
 			
-			BaseTextBlock* make(TextBockInitInfo textBlockInitInfo) override;
+			BaseTextBlock* make(TextBockInitInfo text_block_init_info) override;
 		};
 		
-		TextBlock(Make&& make, TextBockInitInfo initInfo);
+		TextBlock(Make&& make, TextBockInitInfo init_info);
 		
-		TextBlock(std::u32string text, TextVariables textVariables, std::vector<BoxPtr<BaseLine>>&& lines);
+		TextBlock(std::u32string text, TextVariables text_variables, std::vector<BoxPtr<BaseLine>>&& lines);
 		
 		TextBlock(
 			std::u32string text,
-			orl::Option<sf::Color> textColor = {},
+			orl::Option<sf::Color> text_color = {},
 			orl::Option<sf::Font*> font = {},
 			orl::Option<sf::Text::Style> style = {},
 			std::vector<BoxPtr<BaseLine>>&& lines = {},
 			orl::Option<uint> size = {},
-			orl::Option<sf::Color> textSelectionColor = {},
-			orl::Option<sf::Color> backgroundSelectionColor = {},
-			orl::Option<sf::Color> inactiveTextSelectionColor = {},
-			orl::Option<sf::Color> inactiveBackgroundSelectionColor = {}
+			orl::Option<sf::Color> text_selection_color = {},
+			orl::Option<sf::Color> background_selection_color = {},
+			orl::Option<sf::Color> inactive_text_selection_color = {},
+			orl::Option<sf::Color> inactive_background_selection_color = {}
 		);
 		
-		void setTextVariables(
+		void set_text_variables(
 			sf::Color TextColor,
-			sf::Color textSelectionColor,
-			sf::Color backgroundSelectionColor,
-			sf::Color inactiveTextSelectionColor,
-			sf::Color inactiveBackgroundSelectionColor,
+			sf::Color text_selection_color,
+			sf::Color background_selection_color,
+			sf::Color inactive_text_selection_color,
+			sf::Color inactive_background_selection_color,
 			sf::Font* font,
 			uint size,
 			sf::Text::Style style
 		) override;
 		
-		std::vector<BaseCharacter*> getCharacters() override;
+		std::vector<BaseCharacter*> get_characters() override;
 		
-		void init(TextBockInitInfo textBlockInitInfo) override;
+		void init(TextBockInitInfo text_block_init_info) override;
 		
-		void setKerning(char32_t character) override;
+		void set_kerning(char32_t character) override;
 		
-		bool in(sf::Vector2f mousePosition);
+		bool in(sf::Vector2f mouse_position);
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f) override;
+		bool update_interactions(sf::Vector2f) override;
 		
 		TextBlock* copy() override;
 	
 	protected:
-		std::vector<BoxPtr<BaseCharacter>> textCharacters;
+		std::vector<BoxPtr<BaseCharacter>> text_characters;
 		std::vector<BoxPtr<BaseLine>> lines;
 		std::u32string text;
 	};
@@ -86,7 +86,7 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<TextBlock> {
-		static bool decodePointer(const YAML::Node& node, TextBlock*& textBlock);
+		static bool decode_pointer(const YAML::Node& node, TextBlock*& text_block);
 	};
 	
 	template<>

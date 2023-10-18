@@ -12,88 +12,88 @@ namespace ie {
 	class BoxMovableBorder : public Box, public virtual IScalableTwoObjects, public virtual IUpdatable {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableTwoObjects::Make {
-			BoxPtr<IScalable::Make> firstObject;
-			BoxPtr<IScalable::Make> secondObject;
-			bool isHorizontalBorder;
-			PSCoefficient borderValue;
-			int borderInteractionSize = 5;
+			BoxPtr<IScalable::Make> first_object;
+			BoxPtr<IScalable::Make> second_object;
+			bool is_horizontal_border;
+			PSCoefficient border_value;
+			int border_interaction_size = 5;
 			Key key = Key::MouseLeft;
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
 			Make(
-				BoxPtr<IScalable::Make>&& firstObject,
-				BoxPtr<IScalable::Make>&& secondObject,
-				bool isHorizontalBorder,
-				PSCoefficient borderValue,
-				int borderInteractionSize = 5,
+				BoxPtr<IScalable::Make>&& first_object,
+				BoxPtr<IScalable::Make>&& second_object,
+				bool is_horizontal_border,
+				PSCoefficient border_value,
+				int border_interaction_size = 5,
 				Key key = Key::MouseLeft,
-				sf::Vector2f minSize = {}
+				sf::Vector2f min_size = {}
 			);
 			
-			BoxMovableBorder* make(InitInfo initInfo) override;
+			BoxMovableBorder* make(InitInfo init_info) override;
 		};
 		
-		BoxMovableBorder(Make&& make, InitInfo initInfo);
+		BoxMovableBorder(Make&& make, InitInfo init_info);
 		
 		BoxMovableBorder(
-			BoxPtr<IScalable>&& firstObject,
-			BoxPtr<IScalable>&& secondObject,
-			bool isHorizontalBorder,
-			PSCoefficient borderValue,
-			int borderInteractionSize = 5,
-			sf::Vector2f minSize = {}
+			BoxPtr<IScalable>&& first_object,
+			BoxPtr<IScalable>&& second_object,
+			bool is_horizontal_border,
+			PSCoefficient border_value,
+			int border_interaction_size = 5,
+			sf::Vector2f min_size = {}
 		);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		float getBorderValue();
+		float get_border_value();
 		
-		void setBorderValue(float borderValue);
+		void set_border_value(float border_value);
 		
-		float getBorderValueNow();
+		float get_border_value_now();
 		
-		int getBorderInteractionSize();
+		int get_border_interaction_size();
 		
-		void setBorderInteractionSize(int size);
+		void set_border_interaction_size(int size);
 		
-		bool getIsHorizontalBorder();
+		bool get_is_horizontal_border();
 		
-		bool isInBorder(sf::Vector2f pointPosition);
+		bool is_in_border(sf::Vector2f point_position);
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
-		IScalable& getFirstObject() override;
+		IScalable& get_first_object() override;
 		
-		const IScalable& getFirstObject() const override;
+		const IScalable& get_first_object() const override;
 		
-		IScalable& getSecondObject() override;
+		IScalable& get_second_object() override;
 		
-		const IScalable& getSecondObject() const override;
+		const IScalable& get_second_object() const override;
 		
 		BoxMovableBorder* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
 		BasicInteractiveData<BoxMovableBorder&> interactive;
-		BoxPtr<IScalable> firstObject;
-		BoxPtr<IScalable> secondObject;
-		PSCoefficient borderValue;
-		float borderValueNow;
-		int borderInteractionSize;
-		bool isHorizontalBorder;
+		BoxPtr<IScalable> first_object;
+		BoxPtr<IScalable> second_object;
+		PSCoefficient border_value;
+		float border_value_now;
+		int border_interaction_size;
+		bool is_horizontal_border;
 	};
 	
 	template<>
 	struct DecodePointer<BoxMovableBorder> {
-		static bool decodePointer(const YAML::Node& node, BoxMovableBorder*& boxWithMovableBorder);
+		static bool decode_pointer(const YAML::Node& node, BoxMovableBorder*& box_with_movable_border);
 	};
 }

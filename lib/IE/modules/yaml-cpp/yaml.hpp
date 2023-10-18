@@ -31,31 +31,31 @@ namespace ie {
 	std::string type_name(const std::type_info& type_info);
 	
 	template<typename T>
-	struct SetTypeName{
-		static std::string get(){
+	struct SetTypeName {
+		static std::string get() {
 			return type_name<T>();
 		}
 	};
 	
-	namespace detail{
+	namespace detail {
 		template<typename T>
-		std::string get_template_name(){
-			std::string typeName = type_name<T>();
-			typeName.resize(typeName.find('<'));
-			return typeName;
+		std::string get_template_name() {
+			std::string name = type_name<T>();
+			name.resize(name.find('<'));
+			return name;
 		}
 	}
 	
 	template<template<typename...> typename Type, typename... Types>
-	struct SetTypeName<Type<Types...>>{
-		static std::string get(){
-			return detail::get_template_name<Type<Types...>>();
+	struct SetTypeName<Type<Types...> > {
+		static std::string get() {
+			return detail::get_template_name<Type<Types...> >();
 		}
 	};
 	
 	template<>
-	struct SetTypeName<std::string>{
-		static std::string get(){
+	struct SetTypeName<std::string> {
+		static std::string get() {
 			return "String";
 		}
 	};
@@ -63,45 +63,45 @@ namespace ie {
 	template<typename T, typename E>
 	using type = T;
 	
-	namespace detail{
+	namespace detail {
 		template<typename T>
-		struct GetTypeName{
-			static std::string get(){
+		struct GetTypeName {
+			static std::string get() {
 				return SetTypeName<T>::get();
 			}
 		};
 		
 		template<typename... Ts>
-		struct GetTypeNames{
-			static std::string get(){
+		struct GetTypeNames {
+			static std::string get() {
 				return {};
 			}
 		};
 		
 		template<typename T>
-		struct GetTypeNames<T>{
-			static std::string get(){
+		struct GetTypeNames<T> {
+			static std::string get() {
 				return GetTypeName<T>::get();
 			}
 		};
 		
 		template<typename F, typename... Types>
-		struct GetTypeNames<F, Types...>{
+		struct GetTypeNames<F, Types...> {
 			static std::string get() {
 				return GetTypeName<F>::get() + ", " + GetTypeNames<Types...>::get();
 			}
 		};
 		
 		template<template<typename...> typename Type, typename... Types>
-		struct GetTypeName<Type<Types...>>{
-			static std::string get(){
-				return SetTypeName<Type<Types...>>::get() +  "<" + GetTypeNames<Types...>::get() + ">";
+		struct GetTypeName<Type<Types...> > {
+			static std::string get() {
+				return SetTypeName<Type<Types...> >::get() + "<" + GetTypeNames<Types...>::get() + ">";
 			}
 		};
 	}
 	
 	template<typename T>
-	std::string get_type_name(){
+	std::string get_type_name() {
 		return detail::GetTypeName<T>::get();
 	}
 	
@@ -125,7 +125,7 @@ namespace ie {
 	
 	
 	template<typename T>
-	bool createPointer(const YAML::Node& node, T*& object);
+	bool create_pointer(const YAML::Node& node, T*& object);
 	
 	
 	template<typename T>
@@ -140,29 +140,29 @@ namespace ie {
 	std::enable_if_t<std::is_class_v<T> && std::is_abstract_v<T>, bool>
 	convert(const YAML::Node& node, T*& object);
 	
-	bool convertBool(const YAML::Node& node, std::string trueValue, std::string falseValue);
+	bool convert_bool(const YAML::Node& node, std::string true_value, std::string false_value);
 	
 	template<typename T>
-	T convertDefault(const YAML::Node& node, const T& defaultValue);
+	T convert_default(const YAML::Node& node, const T& default_value);
 	
 	template<typename T>
-	T convDef(const YAML::Node& node, const T& defaultValue);
+	T conv_def(const YAML::Node& node, const T& default_value);
 	
 	template<typename B, typename T, typename ...Arg>
-	B* convertDefaultPtr(const YAML::Node& node, Arg&&... arg);
+	B* convert_default_ptr(const YAML::Node& node, Arg&& ... arg);
 	
 	template<typename B, typename T, typename ...Arg>
-	B* convDefPtr(const YAML::Node& node, Arg&&... arg);
+	B* conv_def_ptr(const YAML::Node& node, Arg&& ... arg);
 	
 	template<typename B, typename T, typename ...Arg>
-	BoxPtr<B> convertDefaultBoxPtr(const YAML::Node& node, Arg&&... arg);
+	BoxPtr<B> convert_default_box_ptr(const YAML::Node& node, Arg&& ... arg);
 	
 	template<typename B, typename T, typename ...Arg>
-	BoxPtr<B> convDefBoxPtr(const YAML::Node& node, Arg&&... arg);
+	BoxPtr<B> conv_def_box_ptr(const YAML::Node& node, Arg&& ... arg);
 	
-	bool convertBoolDefault(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue = false);
+	bool convert_bool_default(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value = false);
 	
-	bool convBoolDef(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue = false);
+	bool conv_bool_def(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value = false);
 	
 	
 	template<typename T>
@@ -236,7 +236,7 @@ namespace ie {
 	};
 	
 	template<typename T>
-	std::shared_ptr<T> getSValue(const YAML::Node& node, bool createIfNotExist = true);
+	std::shared_ptr<T> get_s_value(const YAML::Node& node, bool create_if_not_exist = true);
 }
 
 namespace YAML {

@@ -8,17 +8,17 @@ namespace ie {
 	public:
 		explicit SRangeValue(T value = {});
 		
-		T getUpper();
+		T get_upper();
 		
-		T getLower();
+		T get_lower();
 		
-		void setUpper(const T& upper);
+		void set_upper(const T& upper);
 		
-		void setLower(const T& lower);
+		void set_lower(const T& lower);
 		
-		void setBounds(T lower, T upper);
+		void set_bounds(T lower, T upper);
 		
-		void setValue(const T& value) override;
+		void set_value(const T& value) override;
 	
 	protected:
 		T upper;
@@ -27,7 +27,7 @@ namespace ie {
 	
 	template<typename T>
 	struct DecodePointer<SRangeValue<T>> {
-		static bool decodePointer(const YAML::Node& node, SRangeValue<T>*& sRangeValue);
+		static bool decode_pointer(const YAML::Node& node, SRangeValue<T>*& sRange_value);
 	};
 	
 	template<typename T>

@@ -1,19 +1,19 @@
 #include "OnlyDrawable.hpp"
 
 namespace ie {
-	OnlyDrawable::OnlyDrawable() : renderTarget(nullptr) {
+	OnlyDrawable::OnlyDrawable() : render_target(nullptr) {
 	}
 	
-	void OnlyDrawable::init(InitInfo initInfo) {
-		initInfo.drawManager.add(*this);
-		this->renderTarget = &initInfo.renderTarget;
+	void OnlyDrawable::init(InitInfo init_info) {
+		init_info.draw_manager.add(*this);
+		this->render_target = &init_info.render_target;
 	}
 	
-	OnlyDrawable::OnlyDrawable(InitInfo initInfo) : renderTarget(&initInfo.renderTarget) {
-		initInfo.drawManager.add(*this);
+	OnlyDrawable::OnlyDrawable(InitInfo init_info) : render_target(&init_info.render_target) {
+		init_info.draw_manager.add(*this);
 	}
 	
-	sf::RenderTarget& OnlyDrawable::getRenderTarget() {
-		return *renderTarget;
+	sf::RenderTarget& OnlyDrawable::get_render_target() {
+		return *render_target;
 	}
 }

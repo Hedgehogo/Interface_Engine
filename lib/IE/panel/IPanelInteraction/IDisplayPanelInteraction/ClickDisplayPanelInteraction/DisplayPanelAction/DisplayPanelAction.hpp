@@ -7,27 +7,27 @@ namespace ie {
 	class DisplayPanelAction : public PanelAction {
 	public:
 		struct Make : public virtual PanelAction::Make {
-			DisplayPanelAction* make(PanelActionInitInfo initInfo) override;
+			DisplayPanelAction* make(PanelActionInitInfo init_info) override;
 		};
 		
-		DisplayPanelAction(Make&& make, PanelActionInitInfo initInfo);
+		DisplayPanelAction(Make&& make, PanelActionInitInfo init_info);
 		
 		DisplayPanelAction() = default;
 		
 		DisplayPanelAction* copy() override;
 	
 	protected:
-		void startPressed() override;
+		void start_pressed() override;
 		
-		void whilePressed() override;
+		void while_pressed() override;
 		
-		void stopPressed() override;
+		void stop_pressed() override;
 		
-		void whileNotPressed() override;
+		void while_not_pressed() override;
 	};
 	
 	template<>
 	struct DecodePointer<DisplayPanelAction> {
-		static bool decodePointer(const YAML::Node& node, DisplayPanelAction*& displayPanelAction);
+		static bool decode_pointer(const YAML::Node& node, DisplayPanelAction*& display_panel_action);
 	};
 }

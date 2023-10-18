@@ -10,86 +10,86 @@ namespace ie {
 	class BoxConstRatio : public Box, public virtual IScalableBackground, public virtual IScalableTwoObjects, public virtual IDrawable {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableBackground::Make, public virtual IScalableTwoObjects::Make {
-			BoxPtr<IScalable::Make> constObject;
-			BoxPtr<IScalable::Make> secondObject;
+			BoxPtr<IScalable::Make> const_object;
+			BoxPtr<IScalable::Make> second_object;
 			BoxPtr<IUninteractive::Make> background;
-			float aspectRatio;
+			float aspect_ratio;
 			Corner corner = Corner::UpLeft;
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
 			Make(
-				BoxPtr<IScalable::Make>&& constObject,
-				BoxPtr<IScalable::Make>&& secondObject,
+				BoxPtr<IScalable::Make>&& const_object,
+				BoxPtr<IScalable::Make>&& second_object,
 				BoxPtr<IUninteractive::Make>&& background,
-				float aspectRatio = 1.f,
+				float aspect_ratio = 1.f,
 				Corner corner = Corner::UpLeft,
-				sf::Vector2f minSize = {}
+				sf::Vector2f min_size = {}
 			);
 			
-			BoxConstRatio* make(InitInfo initInfo) override;
+			BoxConstRatio* make(InitInfo init_info) override;
 		};
 		
-		BoxConstRatio(Make&& make, InitInfo initInfo);
+		BoxConstRatio(Make&& make, InitInfo init_info);
 		
 		BoxConstRatio(
-			BoxPtr<IScalable>&& constObject,
-			BoxPtr<IScalable>&& secondObject,
+			BoxPtr<IScalable>&& const_object,
+			BoxPtr<IScalable>&& second_object,
 			BoxPtr<IUninteractive>&& background,
-			float aspectRatio,
+			float aspect_ratio,
 			Corner corner = Corner::UpLeft,
-			sf::Vector2f minSize = {}
+			sf::Vector2f min_size = {}
 		);
 		
 		BoxConstRatio(const BoxConstRatio& other);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		Corner getCorner();
+		Corner get_corner();
 		
-		void setPosition(sf::Vector2f position) override;
+		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
 		
-		void setSize(sf::Vector2f size) override;
+		void set_size(sf::Vector2f size) override;
 		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
-		IUninteractive& getBackground() override;
+		IUninteractive& get_background() override;
 		
-		const IUninteractive& getBackground() const override;
+		const IUninteractive& get_background() const override;
 		
-		IScalable& getFirstObject() override;
+		IScalable& get_first_object() override;
 		
-		const IScalable& getFirstObject() const override;
+		const IScalable& get_first_object() const override;
 		
-		IScalable& getSecondObject() override;
+		IScalable& get_second_object() override;
 		
-		const IScalable& getSecondObject() const override;
+		const IScalable& get_second_object() const override;
 		
 		BoxConstRatio* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
-		DrawManager secondDrawManager;
+		DrawManager second_draw_manager;
 		BoxPtr<IUninteractive> background;
-		BoxPtr<IScalable> constObject;
-		BoxPtr<IScalable> secondObject;
-		bool verticalSide, horizontalSide;      //true = up   true = left
-		bool renderSecond;
-		float aspectRatio;
+		BoxPtr<IScalable> const_object;
+		BoxPtr<IScalable> second_object;
+		bool vertical_side, horizontal_side;      //true = up   true = left
+		bool render_second;
+		float aspect_ratio;
 	};
 	
 	template<>
 	struct DecodePointer<BoxConstRatio> {
-		static bool decodePointer(const YAML::Node& node, BoxConstRatio*& boxWithConstRatio);
+		static bool decode_pointer(const YAML::Node& node, BoxConstRatio*& box_with_const_ratio);
 	};
 }

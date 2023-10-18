@@ -1,96 +1,96 @@
 #include "Prerequisite.hpp"
 
 namespace ie {
-	Prerequisite::Prerequisite(PISbool valve, std::vector<IAnimatorUnit*> nextTrue, std::vector<IAnimatorUnit*> nextFalse) :
-		nextTrueBuf(nextTrue), nextFalseBuf(nextFalse), nextTrue(nextTrue), nextFalse(nextFalse), valve(valve) {
-		for(auto& unit: this->nextTrue) {
+	Prerequisite::Prerequisite(PISbool valve, std::vector<IAnimatorUnit*> next_true, std::vector<IAnimatorUnit*> next_false) :
+		next_true_buf(next_true), next_false_buf(next_false), next_true(next_true), next_false(next_false), valve(valve) {
+		for(auto& unit: this->next_true) {
 			if(!unit)
 				unit = this;
 		}
 		
-		for(auto& unit: this->nextFalse) {
+		for(auto& unit: this->next_false) {
 			if(!unit)
 				unit = this;
 		}
 	}
 	
-	void Prerequisite::setSpeed(PSfloat speed) {
-		for(auto& unit: this->nextTrue) {
+	void Prerequisite::set_speed(PSfloat speed) {
+		for(auto& unit: this->next_true) {
 			if(unit != this)
-				unit->setSpeed(speed);
+				unit->set_speed(speed);
 		}
 		
-		for(auto& unit: this->nextFalse) {
+		for(auto& unit: this->next_false) {
 			if(unit != this)
-				unit->setSpeed(speed);
+				unit->set_speed(speed);
 		}
 	}
 	
 	void Prerequisite::restart() {
-		for(auto& unit: this->nextTrue) {
+		for(auto& unit: this->next_true) {
 			unit->restart();
 		}
 		
-		for(auto& unit: this->nextFalse) {
+		for(auto& unit: this->next_false) {
 			unit->restart();
 		}
 	}
 	
 	std::vector<IAnimatorUnit*> Prerequisite::update(float) {
-		return valve->getValue() ? nextTrue : nextFalse;
+		return valve->get_value() ? next_true : next_false;
 	}
 	
-	void Prerequisite::addNextTrue(IAnimatorUnit* unit) {
-		nextTrue.push_back(unit);
+	void Prerequisite::add_next_true(IAnimatorUnit* unit) {
+		next_true.push_back(unit);
 	}
 	
-	void Prerequisite::addNextFalse(IAnimatorUnit* unit) {
-		nextFalse.push_back(unit);
+	void Prerequisite::add_next_false(IAnimatorUnit* unit) {
+		next_false.push_back(unit);
 	}
 	
 	IAnimatorUnit* Prerequisite::copy() {
-		std::vector<IAnimatorUnit*> copyNextTrue{nextTrueBuf.size()};
+		std::vector<IAnimatorUnit*> copy_next_true{next_true_buf.size()};
 		
-		for(size_t i = 0; i < nextTrueBuf.size(); ++i) {
-			copyNextTrue[i] = nextTrueBuf[i]->copy();
+		for(size_t i = 0; i < next_true_buf.size(); ++i) {
+			copy_next_true[i] = next_true_buf[i]->copy();
 		}
 		
-		std::vector<IAnimatorUnit*> copyNextFalse{nextFalseBuf.size()};
+		std::vector<IAnimatorUnit*> copy_next_false{next_false_buf.size()};
 		
-		for(size_t i = 0; i < nextFalseBuf.size(); ++i) {
-			copyNextFalse[i] = nextFalseBuf[i]->copy();
+		for(size_t i = 0; i < next_false_buf.size(); ++i) {
+			copy_next_false[i] = next_false_buf[i]->copy();
 		}
 		
-		return new Prerequisite{valve, copyNextTrue, copyNextFalse};
+		return new Prerequisite{valve, copy_next_true, copy_next_false};
 	}
 	
 	Prerequisite::~Prerequisite() {
-		for(auto item: nextTrueBuf) {
+		for(auto item: next_true_buf) {
 			delete item;
 		}
 		
-		for(auto item: nextFalseBuf) {
+		for(auto item: next_false_buf) {
 			delete item;
 		}
 	}
 	
 	
-	bool DecodePointer<Prerequisite>::decodePointer(const YAML::Node& node, Prerequisite*& prerequisite) {
+	bool DecodePointer<Prerequisite>::decode_pointer(const YAML::Node& node, Prerequisite*& prerequisite) {
 		prerequisite = new Prerequisite{
 			Buffer::get<ISbool>(node["valve"]),
-			getAnimatorUnits(node, "next-true"),
-			getAnimatorUnits(node, "next-false")
+			get_animator_units(node, "next-true"),
+			get_animator_units(node, "next-false")
 		};
 		
-		addNextAnimatorUnit(node, [=](IAnimatorUnit* unit) {
-			prerequisite->addNextTrue(unit);
+		add_next_animator_unit(node, [=](IAnimatorUnit* unit) {
+			prerequisite->add_next_true(unit);
 		}, "next-true");
 		
-		addNextAnimatorUnit(node, [=](IAnimatorUnit* unit) {
-			prerequisite->addNextFalse(unit);
+		add_next_animator_unit(node, [=](IAnimatorUnit* unit) {
+			prerequisite->add_next_false(unit);
 		}, "next-false");
 		
-		addUnitInBuffer(node, prerequisite);
+		add_unit_in_buffer(node, prerequisite);
 		return true;
 	}
 }

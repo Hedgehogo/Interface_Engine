@@ -10,18 +10,18 @@ namespace ie {
 			
 			Make(float addition = 0);
 			
-			RelativeParentSizing* make(float normalSize) override;
+			RelativeParentSizing* make(float normal_size) override;
 		};
 		
-		RelativeParentSizing(Make&& make, float normalSize);
+		RelativeParentSizing(Make&& make, float normal_size);
 		
 		explicit RelativeParentSizing(float addition = 0);
 		
 		void init(float) override;
 		
-		float findSize(float parentSize, float) override;
+		float find_size(float parent_size, float) override;
 		
-		float getParentSize(float objectSize) override;
+		float get_parent_size(float object_size) override;
 		
 		RelativeParentSizing* copy() override;
 	
@@ -31,6 +31,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<RelativeParentSizing> {
-		static bool decodePointer(const YAML::Node& node, RelativeParentSizing*& relativeParentSizing);
+		static bool decode_pointer(const YAML::Node& node, RelativeParentSizing*& relative_parent_sizing);
 	};
 }

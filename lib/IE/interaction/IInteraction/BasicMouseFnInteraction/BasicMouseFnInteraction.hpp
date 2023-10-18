@@ -12,19 +12,19 @@ namespace ie {
 		struct BasicMouseFnInteraction : public BasicFnInteraction<T>, public virtual IBasicMouseInteraction<T> {
 			using FnType = typename BasicFnInteraction<T>::FnType;
 			
-			BoxPtr<BasicKeyAction<T> > leftButtonAction;
-			BoxPtr<BasicKeyAction<T> > rightButtonAction;
+			BoxPtr<BasicKeyAction<T> > left_button_action;
+			BoxPtr<BasicKeyAction<T> > right_button_action;
 			
 			BasicMouseFnInteraction() = default;
 			
 			BasicMouseFnInteraction(
-				BoxPtr<BasicKeyAction<T> >&& leftButtonAction,
-				BoxPtr<BasicKeyAction<T> >&& rightButtonAction,
-				FnType startFn,
-				FnType finishFn
+				BoxPtr<BasicKeyAction<T> >&& left_button_action,
+				BoxPtr<BasicKeyAction<T> >&& right_button_action,
+				FnType start_fn,
+				FnType finish_fn
 			);
 			
-			ie::BasicMouseFnInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+			ie::BasicMouseFnInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
 		};
 	}
 	
@@ -34,30 +34,30 @@ namespace ie {
 		using FnType = typename BasicFnInteraction<T>::FnType;
 		using Make = make_system::BasicMouseFnInteraction<T>;
 		
-		BasicMouseFnInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
+		BasicMouseFnInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
 		BasicMouseFnInteraction(
-			BoxPtr<BasicKeyAction<T> >&& leftButtonAction,
-			BoxPtr<BasicKeyAction<T> >&& rightButtonAction,
-			FnType startFn,
-			FnType finishFn
+			BoxPtr<BasicKeyAction<T> >&& left_button_action,
+			BoxPtr<BasicKeyAction<T> >&& right_button_action,
+			FnType start_fn,
+			FnType finish_fn
 		);
 		
-		BasicKeyAction<T>& getLeftButtonAction() override;
+		BasicKeyAction<T>& get_left_button_action() override;
 		
-		const BasicKeyAction<T>& getLeftButtonAction() const override;
+		const BasicKeyAction<T>& get_left_button_action() const override;
 		
-		BasicKeyAction<T>& getRightButtonAction() override;
+		BasicKeyAction<T>& get_right_button_action() override;
 		
-		const BasicKeyAction<T>& getRightButtonAction() const override;
+		const BasicKeyAction<T>& get_right_button_action() const override;
 		
 		BasicMouseFnInteraction<T>* copy() override;
 	
 		static BasicMouseFnInteraction debug;
 		
 	protected:
-		BoxPtr<BasicKeyAction<T> > leftButtonAction;
-		BoxPtr<BasicKeyAction<T> > rightButtonAction;
+		BoxPtr<BasicKeyAction<T> > left_button_action;
+		BoxPtr<BasicKeyAction<T> > right_button_action;
 	};
 	
 	using MouseFnInteraction = BasicMouseFnInteraction<>;

@@ -1,16 +1,16 @@
 #include "IAnimatorUnit.hpp"
 
 namespace ie {
-	std::vector<IAnimatorUnit*> getAnimatorUnits(const YAML::Node& node, std::string nameNextNode) {
+	std::vector<IAnimatorUnit*> get_animator_units(const YAML::Node& node, std::string name_next_node) {
 		std::vector<IAnimatorUnit*> result{};
 		
-		if(const YAML::Node& nextNode = node[nameNextNode]; nextNode) {
-			if(!nextNode.IsScalar())
-				result = {nextNode.as<IAnimatorUnit*>()};
-			else if(nextNode.as<std::string>() == "this")
+		if(const YAML::Node& next_node = node[name_next_node]; next_node) {
+			if(!next_node.IsScalar())
+				result = {next_node.as<IAnimatorUnit*>()};
+			else if(next_node.as<std::string>() == "this")
 				result = {nullptr};
-		} else if(const YAML::Node& nextsNode = node[nameNextNode + 's']; nextsNode) {
-			for(auto& unit: nextsNode) {
+		} else if(const YAML::Node& nexts_node = node[name_next_node + 's']; nexts_node) {
+			for(auto& unit: nexts_node) {
 				if(!unit.IsScalar())
 					result.push_back(unit.as<IAnimatorUnit*>());
 				else if(unit.as<std::string>() == "this")

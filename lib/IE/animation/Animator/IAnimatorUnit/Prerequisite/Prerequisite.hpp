@@ -5,32 +5,32 @@
 namespace ie {
 	class Prerequisite : public virtual IAnimatorUnit {
 	public:
-		Prerequisite(PISbool valve, std::vector<IAnimatorUnit*> nextTrue, std::vector<IAnimatorUnit*> nextFalse);
+		Prerequisite(PISbool valve, std::vector<IAnimatorUnit*> next_true, std::vector<IAnimatorUnit*> next_false);
 		
-		void setSpeed(PSfloat speed) override;
+		void set_speed(PSfloat speed) override;
 		
 		void restart() override;
 		
 		std::vector<IAnimatorUnit*> update(float) override;
 		
-		void addNextTrue(IAnimatorUnit* unit);
+		void add_next_true(IAnimatorUnit* unit);
 		
-		void addNextFalse(IAnimatorUnit* unit);
+		void add_next_false(IAnimatorUnit* unit);
 		
 		IAnimatorUnit* copy() override;
 		
 		~Prerequisite();
 	
 	protected:
-		std::vector<IAnimatorUnit*> nextTrueBuf;
-		std::vector<IAnimatorUnit*> nextFalseBuf;
-		std::vector<IAnimatorUnit*> nextTrue;
-		std::vector<IAnimatorUnit*> nextFalse;
+		std::vector<IAnimatorUnit*> next_true_buf;
+		std::vector<IAnimatorUnit*> next_false_buf;
+		std::vector<IAnimatorUnit*> next_true;
+		std::vector<IAnimatorUnit*> next_false;
 		PISbool valve;
 	};
 	
 	template<>
 	struct DecodePointer<Prerequisite> {
-		static bool decodePointer(const YAML::Node& node, Prerequisite*& prerequisite);
+		static bool decode_pointer(const YAML::Node& node, Prerequisite*& prerequisite);
 	};
 }

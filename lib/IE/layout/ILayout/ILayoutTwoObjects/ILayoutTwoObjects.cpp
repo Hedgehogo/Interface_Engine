@@ -1,32 +1,32 @@
 #include "ILayoutTwoObjects.hpp"
 
 namespace ie {
-	std::size_t ILayoutTwoObjects::getArraySize() const {
+	std::size_t ILayoutTwoObjects::get_array_size() const {
 		return 2;
 	}
 	
-	const IScalable& ILayoutTwoObjects::getObjectAt(std::size_t index) const {
+	const IScalable& ILayoutTwoObjects::get_object_at(std::size_t index) const {
 		if(index == 0) {
-			return getFirstObject();
+			return get_first_object();
 		}
 		if(index == 1) {
-			return getSecondObject();
+			return get_second_object();
 		}
 		throw std::out_of_range(
-			std::string("ILayoutTwoObjects::getObjectAt: __n (which is ") +
+			std::string("ILayoutTwoObjects::get_object_at: __n (which is ") +
 			std::to_string(index) + std::string(") >= _Nm (which is 2)")
 		);
 	}
 	
-	IScalable& ILayoutTwoObjects::getObjectAt(std::size_t index) {
+	IScalable& ILayoutTwoObjects::get_object_at(std::size_t index) {
 		if(index == 0) {
-			return getFirstObject();
+			return get_first_object();
 		}
 		if(index == 1) {
-			return getSecondObject();
+			return get_second_object();
 		}
 		throw std::out_of_range(
-			std::string("ILayoutTwoObjects::getObjectAt: __n (which is ") +
+			std::string("ILayoutTwoObjects::get_object_at: __n (which is ") +
 			std::to_string(index) + std::string(") >= _Nm (which is 2)")
 		);
 	}

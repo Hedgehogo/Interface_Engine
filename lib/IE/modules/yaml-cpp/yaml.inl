@@ -22,39 +22,39 @@ namespace ie {
 	}
 	
 	template<typename T>
-	bool createPointer(const YAML::Node& node, T*& object) {
-		return DecodePointer<T>::decodePointer(node, object);
+	bool create_pointer(const YAML::Node& node, T*& object) {
+		return DecodePointer<T>::decode_pointer(node, object);
 	}
 	
 	
 	template<typename T>
-	T convertDefault(const YAML::Node& node, const T& defaultValue) {
-		return (node.IsDefined() ? node.as<T>() : defaultValue);
+	T convert_default(const YAML::Node& node, const T& default_value) {
+		return (node.IsDefined() ? node.as<T>() : default_value);
 	}
 	
 	template<typename T>
-	T convDef(const YAML::Node& node, const T& defaultValue) {
-		return convertDefault<T>(node, defaultValue);
+	T conv_def(const YAML::Node& node, const T& default_value) {
+		return convert_default<T>(node, default_value);
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	B* convertDefaultPtr(const YAML::Node& node, Arg&&... arg) {
+	B* convert_default_ptr(const YAML::Node& node, Arg&&... arg) {
 		return node.IsDefined() ? node.as<B*>() : new T{arg...};
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	B* convDefPtr(const YAML::Node& node, Arg&&... arg) {
-		return convertDefaultPtr<B, T>(node, arg...);
+	B* conv_def_ptr(const YAML::Node& node, Arg&&... arg) {
+		return convert_default_ptr<B, T>(node, arg...);
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	BoxPtr<B> convertDefaultBoxPtr(const YAML::Node& node, Arg&&... arg) {
+	BoxPtr<B> convert_default_box_ptr(const YAML::Node& node, Arg&&... arg) {
 		return node.IsDefined() ? node.as<BoxPtr<B> >() : make_box_ptr<T>(arg...);
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	BoxPtr<B> convDefBoxPtr(const YAML::Node& node, Arg&&... arg) {
-		return convertDefaultBoxPtr<B, T>(node, arg...);
+	BoxPtr<B> conv_def_box_ptr(const YAML::Node& node, Arg&&... arg) {
+		return convert_default_box_ptr<B, T>(node, arg...);
 	}
 	
 	template<typename T>

@@ -6,14 +6,14 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicAddBlockInteractionAction<T>* BasicAddBlockInteractionAction<T>::make(BasicActionInitInfo<T> initInfo) {
-			return new ie::BasicAddBlockInteractionAction<T>{std::move(*this), initInfo};
+		ie::BasicAddBlockInteractionAction<T>* BasicAddBlockInteractionAction<T>::make(BasicActionInitInfo<T> init_info) {
+			return new ie::BasicAddBlockInteractionAction<T>{std::move(*this), init_info};
 		}
 	}
 	
 	template<typename T>
-	BasicAddBlockInteractionAction<T>::BasicAddBlockInteractionAction(Make&& make, BasicActionInitInfo<T> initInfo) :
-		BasicAddInteractionAction<T>(std::move(make), initInfo) {
+	BasicAddBlockInteractionAction<T>::BasicAddBlockInteractionAction(Make&& make, BasicActionInitInfo<T> init_info) :
+		BasicAddInteractionAction<T>(std::move(make), init_info) {
 	}
 	
 	template<typename T>
@@ -22,7 +22,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicAddBlockInteractionAction<T>::stopPressed() {
+	void BasicAddBlockInteractionAction<T>::stop_pressed() {
 	}
 	
 	template<typename T>

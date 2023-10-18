@@ -5,33 +5,33 @@ namespace ie {
 	BaseCharacter::BaseCharacter() : selection(false), rerender(false) {
 	}
 	
-	bool BaseCharacter::getRerender() const {
+	bool BaseCharacter::get_rerender() const {
 		return rerender;
 	}
 	
-	void BaseCharacter::setRerender(bool rerender) {
+	void BaseCharacter::set_rerender(bool rerender) {
 		this->rerender = rerender;
 	}
 	
-	void BaseCharacter::setPosition(sf::Vector2f position) {
+	void BaseCharacter::set_position(sf::Vector2f position) {
 		if(this->position != position)
 			rerender = true;
 		this->position = position;
 	}
 	
-	void BaseCharacter::setKerning(float) {
+	void BaseCharacter::set_kerning(float) {
 	}
 	
 	void BaseCharacter::resize(sf::Vector2f position, float) {
-		setPosition(position);
+		set_position(position);
 	}
 	
-	bool BaseCharacter::in(sf::Vector2f mousePosition) {
-		return position.x < mousePosition.x && position.x + getAdvance() > mousePosition.x &&
-			   position.y < mousePosition.y && position.y + getHeight() > mousePosition.y;
+	bool BaseCharacter::in(sf::Vector2f mouse_position) {
+		return position.x < mouse_position.x && position.x + get_advance() > mouse_position.x &&
+			   position.y < mouse_position.y && position.y + get_height() > mouse_position.y;
 	}
 	
-	sf::Vector2f BaseCharacter::getPosition() const {
+	sf::Vector2f BaseCharacter::get_position() const {
 		return position;
 	}
 	
@@ -41,21 +41,21 @@ namespace ie {
 		this->position += position;
 	}
 	
-	bool BaseCharacter::isEnter() {
-		return isSpecial() == Special::Enter;
+	bool BaseCharacter::is_enter() {
+		return is_special() == Special::Enter;
 	}
 	
-	void BaseCharacter::setSelection(bool selection) {
+	void BaseCharacter::set_selection(bool selection) {
 		rerender = true;
 		this->selection = selection;
 	}
 	
-	void BaseCharacter::setActive(bool active) {
+	void BaseCharacter::set_active(bool active) {
 		rerender = true;
 		this->active = active;
 	}
 	
-	float BaseCharacter::getMinAdvance() {
-		return getAdvance();
+	float BaseCharacter::get_min_advance() {
+		return get_advance();
 	}
 }

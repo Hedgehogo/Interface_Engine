@@ -3,9 +3,9 @@
 #include <vector>
 
 namespace ie {
-	std::vector<float>& addBounds(std::vector<float>& vector);
+	std::vector<float>& add_bounds(std::vector<float>& vector);
 	
-	std::vector<float> genBounds(std::size_t size);
+	std::vector<float> gen_bounds(std::size_t size);
 	
 	template<typename T>
 	std::size_t y_size(std::vector<std::vector<T> >& vector) {
@@ -17,21 +17,21 @@ namespace ie {
 	
 	namespace detail {
 		template<typename T>
-		void addItems(std::vector<T>&) {
+		void add_items(std::vector<T>&) {
 		}
 		
 		template<typename T, typename A, typename... As>
-		void addItems(std::vector<T>& vector, A&& arg, As&&... args) {
+		void add_items(std::vector<T>& vector, A&& arg, As&&... args) {
 			vector.emplace_back(std::move(arg));
-			addItems<T, As...>(vector, std::move(args)...);
+			add_items<T, As...>(vector, std::move(args)...);
 		}
 	}
 	
 	template<typename T, typename... As>
-	std::vector<T> makeVector(T&& arg, As&&... args) {
+	std::vector<T> make_vector(T&& arg, As&&... args) {
 		std::vector<T> result;
 		result.reserve(sizeof...(As) + 1);
-		detail::addItems<T, As...>(result, std::move(arg), std::move(args)...);
+		detail::add_items<T, As...>(result, std::move(arg), std::move(args)...);
 		return result;
 	}
 }

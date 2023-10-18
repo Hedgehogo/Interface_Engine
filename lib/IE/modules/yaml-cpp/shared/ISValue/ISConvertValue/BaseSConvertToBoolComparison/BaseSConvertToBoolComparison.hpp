@@ -6,12 +6,12 @@ namespace ie {
 	template<typename T>
 	class BaseSConvertToBoolComparison : public SConvertToBool<T> {
 	protected:
-		virtual bool convert(T fromValue, T compared) = 0;
+		virtual bool convert(T from_value, T compared) = 0;
 		
-		bool convert(T fromValue) override;
+		bool convert(T from_value) override;
 		
 	public:
-		BaseSConvertToBoolComparison(PISValue<T> fromValue, bool defaultValue, T compared);
+		BaseSConvertToBoolComparison(PISValue<T> from_value, bool default_value, T compared);
 	
 	protected:
 		T compared;

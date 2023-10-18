@@ -11,10 +11,10 @@ namespace ie {
 			
 			Make(sf::Color color);
 			
-			Capsule* make(InitInfo initInfo) override;
+			Capsule* make(InitInfo init_info) override;
 		};
 		
-		Capsule(Make&& make, InitInfo initInfo);
+		Capsule(Make&& make, InitInfo init_info);
 		
 		Capsule(sf::Color color);
 		
@@ -22,16 +22,16 @@ namespace ie {
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
 		Capsule* copy() override;
 	
 	protected:
-		LayoutData& layoutGetData() override;
+		LayoutData& layout_get_data() override;
 		
-		const LayoutData& layoutGetData() const override;
+		const LayoutData& layout_get_data() const override;
 		
 		LayoutData layout;
 		sf::RectangleShape rectangle;
@@ -40,6 +40,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<Capsule> {
-		static bool decodePointer(const YAML::Node& node, Capsule*& capsule);
+		static bool decode_pointer(const YAML::Node& node, Capsule*& capsule);
 	};
 }

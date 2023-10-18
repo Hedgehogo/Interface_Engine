@@ -10,40 +10,40 @@ namespace ie {
 	public:
 		struct Make : public virtual IUninteractive::Make {
 			std::vector<sf::Texture> video;
-			PSCoefficient viewingProgress;
+			PSCoefficient viewing_progress;
 			
-			Make(std::vector<sf::Texture> video, PSCoefficient viewingProgress);
+			Make(std::vector<sf::Texture> video, PSCoefficient viewing_progress);
 			
-			VideoFromFile* make(InitInfo initInfo) override;
+			VideoFromFile* make(InitInfo init_info) override;
 		};
 		
-		VideoFromFile(Make&& make, InitInfo initInfo);
+		VideoFromFile(Make&& make, InitInfo init_info);
 		
-		VideoFromFile(std::vector<sf::Texture> video, PSCoefficient viewingProgress);
+		VideoFromFile(std::vector<sf::Texture> video, PSCoefficient viewing_progress);
 		
-		void setCurrentFrame(float viewingProgress);
+		void set_current_frame(float viewing_progress);
 		
 		void draw() override;
 		
-		sf::Vector2f getAreaPosition() const override;
+		sf::Vector2f get_area_position() const override;
 		
-		sf::Vector2f getAreaSize() const override;
+		sf::Vector2f get_area_size() const override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		VideoFromFile* copy() override;
 	
 	protected:
-		sf::Vector2i sizeVideo;
+		sf::Vector2i size_video;
 		sf::Vector2f size;
 		std::string path;
 		
-		std::vector<sf::Texture> bufferTexture;
+		std::vector<sf::Texture> buffer_texture;
 		sf::Sprite sprite;
-		PSCoefficient viewingProgress;
+		PSCoefficient viewing_progress;
 	};
 }

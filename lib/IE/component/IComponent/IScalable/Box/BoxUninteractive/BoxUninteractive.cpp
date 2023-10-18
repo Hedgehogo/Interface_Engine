@@ -1,45 +1,45 @@
 #include "BoxUninteractive.hpp"
 
 namespace ie {
-	BoxUninteractive* BoxUninteractive::Make::make(InitInfo initInfo) {
-		return new BoxUninteractive{std::move(*this), initInfo};
+	BoxUninteractive* BoxUninteractive::Make::make(InitInfo init_info) {
+		return new BoxUninteractive{std::move(*this), init_info};
 	}
 	
-	BoxUninteractive::Make::Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize) :
-		object(std::move(object)), minSize(minSize) {
+	BoxUninteractive::Make::Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size) :
+		object(std::move(object)), min_size(min_size) {
 	}
 	
-	BoxUninteractive::BoxUninteractive(Make&& make, InitInfo initInfo) :
-		Box(make.minSize), object(make.object->make(initInfo)) {
+	BoxUninteractive::BoxUninteractive(Make&& make, InitInfo init_info) :
+		Box(make.min_size), object(make.object->make(init_info)) {
 	}
 	
-	BoxUninteractive::BoxUninteractive(BoxPtr<IScalable>&& object, sf::Vector2f minSize) : Box(minSize), object(std::move(object)) {
+	BoxUninteractive::BoxUninteractive(BoxPtr<IScalable>&& object, sf::Vector2f min_size) : Box(min_size), object(std::move(object)) {
 	}
 	
-	void BoxUninteractive::init(InitInfo initInfo) {
-		object->init(initInfo);
+	void BoxUninteractive::init(InitInfo init_info) {
+		object->init(init_info);
 	}
 	
 	void BoxUninteractive::resize(sf::Vector2f size, sf::Vector2f position) {
 		IComponentObject::resize(size, position);
 	}
 	
-	bool BoxUninteractive::updateInteractions(sf::Vector2f mousePosition) {
-		return IUninteractive::updateInteractions(mousePosition);
+	bool BoxUninteractive::update_interactions(sf::Vector2f mouse_position) {
+		return IUninteractive::update_interactions(mouse_position);
 	}
 	
-	IScalable& BoxUninteractive::getObject() {
+	IScalable& BoxUninteractive::get_object() {
 		return *object;
 	}
 	
-	const IScalable& BoxUninteractive::getObject() const {
+	const IScalable& BoxUninteractive::get_object() const {
 		return *object;
 	}
 	
-	bool DecodePointer<BoxUninteractive>::decodePointer(const YAML::Node& node, BoxUninteractive*& boxUninteractive) {
-		boxUninteractive = new BoxUninteractive{
+	bool DecodePointer<BoxUninteractive>::decode_pointer(const YAML::Node& node, BoxUninteractive*& box_uninteractive) {
+		box_uninteractive = new BoxUninteractive{
 			node["object"].as<BoxPtr<IScalable> >(),
-			convDef(node["min-size"], sf::Vector2f{})
+			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
 	}

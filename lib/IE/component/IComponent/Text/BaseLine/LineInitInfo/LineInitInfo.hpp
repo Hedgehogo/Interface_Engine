@@ -9,8 +9,8 @@ namespace ie {
 		uint size;
 		sf::Font& font;
 		sf::Color color;
-		sf::RenderTarget& renderTarget;
+		sf::RenderTarget& render_target;
 		
-		LineInitInfo(uint size, sf::Font& font, const sf::Color& color, sf::RenderTarget& renderTarget);
+		LineInitInfo(uint size, sf::Font& font, const sf::Color& color, sf::RenderTarget& render_target);
 	};
 }

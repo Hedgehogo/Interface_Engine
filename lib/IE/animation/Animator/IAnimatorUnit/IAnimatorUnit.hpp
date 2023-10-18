@@ -6,7 +6,7 @@
 namespace ie {
 	class IAnimatorUnit {
 	public:
-		virtual void setSpeed(PSfloat speed) = 0;
+		virtual void set_speed(PSfloat speed) = 0;
 		
 		virtual void restart() = 0;
 		
@@ -17,5 +17,5 @@ namespace ie {
 		virtual ~IAnimatorUnit() = default;
 	};
 	
-	std::vector<IAnimatorUnit*> getAnimatorUnits(const YAML::Node& node, std::string nameNextNode = "next");
+	std::vector<IAnimatorUnit*> get_animator_units(const YAML::Node& node, std::string name_next_node = "next");
 }

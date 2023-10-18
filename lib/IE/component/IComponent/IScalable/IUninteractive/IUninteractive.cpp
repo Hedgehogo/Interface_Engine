@@ -1,7 +1,7 @@
 #include "IUninteractive.hpp"
 
 namespace ie {
-	bool IUninteractive::updateInteractions(sf::Vector2f) {
+	bool IUninteractive::update_interactions(sf::Vector2f) {
 		return true;
 	}
 }

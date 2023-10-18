@@ -3,43 +3,43 @@
 #include <utility>
 
 namespace ie {
-	BoxTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PISint value, sf::Vector2f minSize) :
-		objects(std::move(objects)), value(value), minSize(minSize) {
+	BoxTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PISint value, sf::Vector2f min_size) :
+		objects(std::move(objects)), value(value), min_size(min_size) {
 	}
 	
-	BoxTabs* BoxTabs::Make::make(InitInfo initInfo) {
-		return new BoxTabs{std::move(*this), initInfo};
+	BoxTabs* BoxTabs::Make::make(InitInfo init_info) {
+		return new BoxTabs{std::move(*this), init_info};
 	}
 	
-	BoxTabs::BoxTabs(Make&& make, InitInfo initInfo) :
-		Box(make.minSize),
-		drawManagers(make.objects.size()),
-		objects(mapMake(std::move(make.objects), [&](std::size_t i) {
-			return initInfo.copy(drawManagers[i]);
+	BoxTabs::BoxTabs(Make&& make, InitInfo init_info) :
+		Box(make.min_size),
+		draw_managers(make.objects.size()),
+		objects(map_make(std::move(make.objects), [&](std::size_t i) {
+			return init_info.copy(draw_managers[i]);
 		})),
 		value(make.value) {
-		initInfo.drawManager.add(*this);
+		init_info.draw_manager.add(*this);
 	}
 	
-	BoxTabs::BoxTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, sf::Vector2f minSize) :
-		Box(minSize), drawManagers(objects.size()), objects(std::move(objects)), value(std::move(value)) {
+	BoxTabs::BoxTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, sf::Vector2f min_size) :
+		Box(min_size), draw_managers(objects.size()), objects(std::move(objects)), value(std::move(value)) {
 	}
 	
 	BoxTabs::BoxTabs(const BoxTabs& other) :
-		Box(other), drawManagers(other.objects.size()), objects(other.objects), value(other.value) {
+		Box(other), draw_managers(other.objects.size()), objects(other.objects), value(other.value) {
 	}
 	
-	void BoxTabs::init(InitInfo initInfo) {
+	void BoxTabs::init(InitInfo init_info) {
 		for(std::size_t i = 0; i < objects.size(); ++i) {
-			objects[i]->init(initInfo.copy(drawManagers[i]));
+			objects[i]->init(init_info.copy(draw_managers[i]));
 		}
-		initInfo.drawManager.add(*this);
+		init_info.draw_manager.add(*this);
 	}
 	
-	void BoxTabs::setPosition(sf::Vector2f position) {
-		layout.setPosition(position);
+	void BoxTabs::set_position(sf::Vector2f position) {
+		layout.set_position(position);
 		for(auto& object: objects) {
-			object->setPosition(position);
+			object->set_position(position);
 		}
 	}
 	
@@ -50,10 +50,10 @@ namespace ie {
 		}
 	}
 	
-	void BoxTabs::setSize(sf::Vector2f size) {
-		layout.setSize(size);
+	void BoxTabs::set_size(sf::Vector2f size) {
+		layout.set_size(size);
 		for(auto& object: objects) {
-			object->setSize(size);
+			object->set_size(size);
 		}
 	}
 	
@@ -65,22 +65,22 @@ namespace ie {
 	}
 	
 	void BoxTabs::draw() {
-		drawManagers[value->getValue()].draw();
+		draw_managers[value->get_value()].draw();
 	}
 	
-	bool BoxTabs::updateInteractions(sf::Vector2f mousePosition) {
-		return objects[value->getValue()]->updateInteractions(mousePosition);
+	bool BoxTabs::update_interactions(sf::Vector2f mouse_position) {
+		return objects[value->get_value()]->update_interactions(mouse_position);
 	}
 	
-	std::size_t BoxTabs::getArraySize() const {
+	std::size_t BoxTabs::get_array_size() const {
 		return objects.size();
 	}
 	
-	IScalable& BoxTabs::getObjectAt(std::size_t index) {
+	IScalable& BoxTabs::get_object_at(std::size_t index) {
 		return *objects.at(index);
 	}
 	
-	const IScalable& BoxTabs::getObjectAt(std::size_t index) const {
+	const IScalable& BoxTabs::get_object_at(std::size_t index) const {
 		return *objects.at(index);
 	}
 	
@@ -88,11 +88,11 @@ namespace ie {
 		return new BoxTabs{*this};
 	}
 	
-	bool DecodePointer<BoxTabs>::decodePointer(const YAML::Node& node, BoxTabs*& boxWithTabs) {
-		boxWithTabs = new BoxTabs{
+	bool DecodePointer<BoxTabs>::decode_pointer(const YAML::Node& node, BoxTabs*& box_with_tabs) {
+		box_with_tabs = new BoxTabs{
 			node["objects"].as<std::vector<BoxPtr<IScalable> > >(),
 			Buffer::get<ISint>(node["value"]),
-			convDef(node["min-size"], sf::Vector2f{})
+			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
 	}

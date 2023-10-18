@@ -7,33 +7,33 @@ namespace ie {
 	class HidePanelAction : public PanelAction {
 	public:
 		struct Make : public virtual PanelAction::Make {
-			bool onlyOnParent = false;
+			bool only_on_parent = false;
 			
-			Make(bool onlyOnParent = false);
+			Make(bool only_on_parent = false);
 			
-			HidePanelAction* make(PanelActionInitInfo initInfo) override;
+			HidePanelAction* make(PanelActionInitInfo init_info) override;
 		};
 		
-		HidePanelAction(Make&& make, PanelActionInitInfo initInfo);
+		HidePanelAction(Make&& make, PanelActionInitInfo init_info);
 		
-		HidePanelAction(bool onlyOnParent = false);
+		HidePanelAction(bool only_on_parent = false);
 		
 		HidePanelAction* copy() override;
 	
 	protected:
-		void startPressed() override;
+		void start_pressed() override;
 		
-		void whilePressed() override;
+		void while_pressed() override;
 		
-		void stopPressed() override;
+		void stop_pressed() override;
 		
-		void whileNotPressed() override;
+		void while_not_pressed() override;
 		
-		bool onlyOnParent;
+		bool only_on_parent;
 	};
 	
 	template<>
 	struct DecodePointer<HidePanelAction> {
-		static bool decodePointer(const YAML::Node& node, HidePanelAction*& hidePanelAction);
+		static bool decode_pointer(const YAML::Node& node, HidePanelAction*& hide_panel_action);
 	};
 }

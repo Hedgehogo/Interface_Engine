@@ -1,38 +1,38 @@
-//included into sConvertValue.hpp
+//included into sConvert_value.hpp
 
 namespace ie {
 	template<typename FromType, typename ToType>
-	SConvertValue<FromType, ToType>::SConvertValue(PISValue<FromType> fromValue, ToType defaultValue) : SValue<ToType>(defaultValue), fromValue(fromValue) {
-		fromValue->addSetter([this](const FromType& value) {
-			setValue(convert(value));
+	SConvertValue<FromType, ToType>::SConvertValue(PISValue<FromType> from_value, ToType default_value) : SValue<ToType>(default_value), from_value(from_value) {
+		from_value->add_setter([this](const FromType& value) {
+			set_value(convert(value));
 		});
 	}
 	
 	template<typename FromType, typename ToType>
-	ToType SConvertValue<FromType, ToType>::convert(FromType fromValue) {
-		return static_cast<ToType>(fromValue);
+	ToType SConvertValue<FromType, ToType>::convert(FromType from_value) {
+		return static_cast<ToType>(from_value);
 	}
 	
 	template<typename FromType, typename ToType>
-	void SConvertValue<FromType, ToType>::setFromValue(PISValue<FromType> fromValue) {
-		this->fromValue = fromValue;
+	void SConvertValue<FromType, ToType>::set_from_value(PISValue<FromType> from_value) {
+		this->from_value = from_value;
 	}
 	
 	template<typename FromType, typename ToType>
-	void SConvertValue<FromType, ToType>::setValue(const ToType& value) {
-		SValue<ToType>::setValue(value);
+	void SConvertValue<FromType, ToType>::set_value(const ToType& value) {
+		SValue<ToType>::set_value(value);
 	}
 	
 	template<typename FromType, typename ToType>
-	const ToType& SConvertValue<FromType, ToType>::getValue() const {
-		return SValue<ToType>::getValue();
+	const ToType& SConvertValue<FromType, ToType>::get_value() const {
+		return SValue<ToType>::get_value();
 	}
 	
 	template<typename FromType, typename ToType>
-	bool DecodePointer<SConvertValue<FromType, ToType> >::decodePointer(const YAML::Node& node, SConvertValue<FromType, ToType>*& sConvertValue) {
-		sConvertValue = new SConvertValue<FromType, ToType>{
+	bool DecodePointer<SConvertValue<FromType, ToType> >::decode_pointer(const YAML::Node& node, SConvertValue<FromType, ToType>*& sConvert_value) {
+		sConvert_value = new SConvertValue<FromType, ToType>{
 			Buffer::get<ISValue<FromType>>(node["value"]),
-			convDef(node["default-value"], ToType{})
+			conv_def(node["default-value"], ToType{})
 		};
 		return true;
 	}

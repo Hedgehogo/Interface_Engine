@@ -5,7 +5,7 @@
 namespace ie {
 	class IChangeVariable {
 	public:
-		virtual float getSize() = 0;
+		virtual float get_size() = 0;
 		
 		virtual float operator()(float frame) = 0;
 		

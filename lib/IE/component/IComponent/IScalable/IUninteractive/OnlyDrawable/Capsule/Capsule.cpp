@@ -4,11 +4,11 @@ namespace ie {
 	Capsule::Make::Make(sf::Color color) : color(color) {
 	}
 	
-	Capsule* Capsule::Make::make(InitInfo initInfo) {
-		return new Capsule{std::move(*this), initInfo};
+	Capsule* Capsule::Make::make(InitInfo init_info) {
+		return new Capsule{std::move(*this), init_info};
 	}
 	
-	Capsule::Capsule(Make&& make, InitInfo initInfo) : OnlyDrawable(initInfo) {
+	Capsule::Capsule(Make&& make, InitInfo init_info) : OnlyDrawable(init_info) {
 		rectangle.setFillColor(make.color);
 		circle.setFillColor(make.color);
 	}
@@ -19,15 +19,15 @@ namespace ie {
 	}
 	
 	void Capsule::draw() {
-		renderTarget->draw(rectangle);
+		render_target->draw(rectangle);
 		circle.setPosition(layout.position);
-		renderTarget->draw(circle);
+		render_target->draw(circle);
 		if(layout.size.x > layout.size.y) {
 			circle.setPosition({layout.position.x + layout.size.x - layout.size.y, layout.position.y});
 		} else {
 			circle.setPosition({layout.position.x, layout.position.y + layout.size.y - layout.size.x});
 		}
-		renderTarget->draw(circle);
+		render_target->draw(circle);
 	}
 	
 	void Capsule::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -43,11 +43,11 @@ namespace ie {
 		}
 	}
 	
-	sf::Vector2f Capsule::getMinSize() const {
+	sf::Vector2f Capsule::get_min_size() const {
 		return {0, 0};
 	}
 	
-	sf::Vector2f Capsule::getNormalSize() const {
+	sf::Vector2f Capsule::get_normal_size() const {
 		return {1, 1};
 	}
 	
@@ -55,15 +55,15 @@ namespace ie {
 		return new Capsule{*this};
 	}
 	
-	LayoutData& Capsule::layoutGetData() {
+	LayoutData& Capsule::layout_get_data() {
 		return layout;
 	}
 	
-	const LayoutData& Capsule::layoutGetData() const {
+	const LayoutData& Capsule::layout_get_data() const {
 		return layout;
 	}
 	
-	bool DecodePointer<Capsule>::decodePointer(const YAML::Node& node, Capsule*& capsule) {
+	bool DecodePointer<Capsule>::decode_pointer(const YAML::Node& node, Capsule*& capsule) {
 		capsule = new Capsule{node["color"].as<sf::Color>()};
 		return true;
 	}

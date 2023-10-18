@@ -2,23 +2,23 @@
 #include "../../../IPanelManager/IPanelManager.hpp"
 
 namespace ie {
-	PanelAction::PanelAction(PanelActionInitInfo initInfo) :
-		panel(&initInfo.additional), panelManager(&initInfo.panelManager) {
+	PanelAction::PanelAction(PanelActionInitInfo init_info) :
+		panel(&init_info.additional), panel_manager(&init_info.panel_manager) {
 	}
 	
-	PanelAction::PanelAction() : panel(nullptr), panelManager(nullptr) {
+	PanelAction::PanelAction() : panel(nullptr), panel_manager(nullptr) {
 	}
 	
-	void PanelAction::init(PanelActionInitInfo initInfo) {
-		this->panel = &initInfo.additional;
-		this->panelManager = &initInfo.panelManager;
+	void PanelAction::init(PanelActionInitInfo init_info) {
+		this->panel = &init_info.additional;
+		this->panel_manager = &init_info.panel_manager;
 	}
 	
-	void PanelAction::setPanel(Panel& panel) {
+	void PanelAction::set_panel(Panel& panel) {
 		this->panel = &panel;
 	}
 	
-	Panel* PanelAction::getPanel() {
+	Panel* PanelAction::get_panel() {
 		return panel;
 	}
 }

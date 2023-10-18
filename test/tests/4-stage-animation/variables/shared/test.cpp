@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
-#include "../test/testsObjects/testConvertToUse/testConvertToUse.hpp"
-#include "IE/Animation/variables/shared/sharedAnimationVariable.hpp"
-#include "IE/../../test/testsObjects/testSValue/testSValue.hpp"
+#include "../test/tests_objects/test_convert_to_use/test_convert_to_use.hpp"
+#include "IE/Animation/variables/shared/shared_animation_variable.hpp"
+#include "IE/../../test/tests_objects/test_s_value/test_s_value.hpp"
 
-TEST(SharedAnimationVariable, valueFromAnimation) {
-	TestConvertToUse *testConvertToUse{new TestConvertToUse{3}};
-	std::shared_ptr<TestSValue> testSValue{new TestSValue{5}};
-	ie::SharedAnimationVariable<float> sharedAnimationVariable{testSValue, testConvertToUse};
+TEST(SharedAnimationVariable, value_from_animation) {
+	TestConvertToUse *test_convert_to_use{new TestConvertToUse{3}};
+	std::shared_ptr<TestSValue> test_s_value{new TestSValue{5}};
+	ie::SharedAnimationVariable<float> shared_animation_variable{test_s_value, test_convert_to_use};
 
-	sharedAnimationVariable.valueFromAnimation(2);
+	shared_animation_variable.value_from_animation(2);
 
-	ASSERT_EQ(testSValue->getProcessed().setValue[0].value, 3);
+	ASSERT_EQ(test_s_value->get_processed().set_value[0].value, 3);
 }

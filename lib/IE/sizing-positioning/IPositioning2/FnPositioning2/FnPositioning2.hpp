@@ -6,32 +6,32 @@ namespace ie {
 	class FnPositioning2 : public virtual IPositioning2 {
 	public:
 		using FindPositionFn = std::function<sf::Vector2f(
-			sf::Vector2f parentPosition,
-			sf::Vector2f objectSize,
-			sf::Vector2f parentSize,
-			sf::Vector2f targetSize
+			sf::Vector2f parent_position,
+			sf::Vector2f object_size,
+			sf::Vector2f parent_size,
+			sf::Vector2f target_size
 		)>;
 		
 		struct Make : public virtual IPositioning2::Make {
-			FindPositionFn findPositionFn;
+			FindPositionFn find_position_fn;
 			
-			Make(FindPositionFn findPositionFn);
+			Make(FindPositionFn find_position_fn);
 			
-			FnPositioning2* make(Positioning2InitInfo initInfo) override;
+			FnPositioning2* make(Positioning2InitInfo init_info) override;
 		};
 		
-		FnPositioning2(Make&& make, Positioning2InitInfo initInfo);
+		FnPositioning2(Make&& make, Positioning2InitInfo init_info);
 		
-		FnPositioning2(FindPositionFn findPositionFn);
+		FnPositioning2(FindPositionFn find_position_fn);
 		
-		void init(sf::RenderTarget& renderTarget) override;
+		void init(sf::RenderTarget& render_target) override;
 		
-		sf::Vector2f findPosition(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize) override;
+		sf::Vector2f find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) override;
 		
 		FnPositioning2* copy() override;
 	
 	protected:
-		FindPositionFn findPositionFn;
-		sf::RenderTarget* renderTarget;
+		FindPositionFn find_position_fn;
+		sf::RenderTarget* render_target;
 	};
 }

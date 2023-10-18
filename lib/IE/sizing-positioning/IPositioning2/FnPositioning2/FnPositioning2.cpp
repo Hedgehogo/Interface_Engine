@@ -1,29 +1,29 @@
 #include "FnPositioning2.hpp"
 
 namespace ie {
-	FnPositioning2::Make::Make(FindPositionFn findPositionFn) :
-		findPositionFn(std::move(findPositionFn)) {
+	FnPositioning2::Make::Make(FindPositionFn find_position_fn) :
+		find_position_fn(std::move(find_position_fn)) {
 	}
 	
-	FnPositioning2* FnPositioning2::Make::make(Positioning2InitInfo initInfo) {
-		return new FnPositioning2{std::move(*this), initInfo};
+	FnPositioning2* FnPositioning2::Make::make(Positioning2InitInfo init_info) {
+		return new FnPositioning2{std::move(*this), init_info};
 	}
 	
-	FnPositioning2::FnPositioning2(Make&& make, Positioning2InitInfo initInfo) :
-		findPositionFn(std::move(make.findPositionFn)), renderTarget(&initInfo.renderTarget) {
+	FnPositioning2::FnPositioning2(Make&& make, Positioning2InitInfo init_info) :
+		find_position_fn(std::move(make.find_position_fn)), render_target(&init_info.render_target) {
 	}
 	
-	FnPositioning2::FnPositioning2(FindPositionFn findPositionFn) :
-		findPositionFn(std::move(findPositionFn)), renderTarget(nullptr) {
+	FnPositioning2::FnPositioning2(FindPositionFn find_position_fn) :
+		find_position_fn(std::move(find_position_fn)), render_target(nullptr) {
 	}
 	
-	void FnPositioning2::init(sf::RenderTarget& renderTarget) {
-		this->renderTarget = &renderTarget;
+	void FnPositioning2::init(sf::RenderTarget& render_target) {
+		this->render_target = &render_target;
 	}
 	
-	sf::Vector2f FnPositioning2::findPosition(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize) {
-		sf::Vector2f targetSize{renderTarget->getSize()};
-		return findPositionFn(parentPosition, parentSize, objectSize, targetSize);
+	sf::Vector2f FnPositioning2::find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) {
+		sf::Vector2f target_size{render_target->getSize()};
+		return find_position_fn(parent_position, parent_size, object_size, target_size);
 	}
 	
 	FnPositioning2* FnPositioning2::copy() {

@@ -7,14 +7,14 @@ namespace ie {
 	class DontMovePanelInteraction : public virtual IMovePanelInteraction {
 	public:
 		struct Make : public virtual IMovePanelInteraction::Make {
-			DontMovePanelInteraction* make(PanelActionInitInfo initInfo) override;
+			DontMovePanelInteraction* make(PanelActionInitInfo init_info) override;
 		};
 		
-		DontMovePanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		DontMovePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
 		DontMovePanelInteraction() = default;
 		
-		bool getAtStart() override;
+		bool get_at_start() override;
 		
 		void move(sf::Vector2i) override;
 		
@@ -24,13 +24,13 @@ namespace ie {
 		
 		void init(PanelActionInitInfo) override;
 		
-		void setPanel(Panel&) override;
+		void set_panel(Panel&) override;
 		
 		DontMovePanelInteraction* copy() override;
 	};
 	
 	template<>
 	struct DecodePointer<DontMovePanelInteraction> {
-		static bool decodePointer(const YAML::Node&, DontMovePanelInteraction*& dontMovePanelInteraction);
+		static bool decode_pointer(const YAML::Node&, DontMovePanelInteraction*& dont_move_panel_interaction);
 	};
 }

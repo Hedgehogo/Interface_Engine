@@ -8,9 +8,9 @@ namespace ie {
 	public:
 		explicit SReferenceCoefficientValue(float& value);
 		
-		void setValue(const float& value) override;
+		void set_value(const float& value) override;
 		
-		void setReference(float& valueReference) override;
+		void set_reference(float& value_reference) override;
 	};
 	
 	typedef SReferenceCoefficientValue SRefCoefficient;

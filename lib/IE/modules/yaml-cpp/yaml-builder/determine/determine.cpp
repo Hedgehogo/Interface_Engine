@@ -7,8 +7,8 @@ namespace ie {
 		}
 	}
 	
-	bool determine(const YAML::Node& node, std::initializer_list<detail::YamlArg> args, size_t sizeAddition) {
-		return node.size() == args.size() + sizeAddition &&
+	bool determine(const YAML::Node& node, std::initializer_list<detail::YamlArg> args, size_t size_addition) {
+		return node.size() == args.size() + size_addition &&
 			   std::all_of(args.begin(), args.end(), [&node](const detail::YamlArg& arg) {
 				   return arg.present(node);
 			   });
@@ -27,13 +27,13 @@ namespace ie {
 		}
 	}
 	
-	bool determine(const YAML::Node& node, std::initializer_list<detail::YamlArg> args, std::initializer_list<detail::YamlArg> optArgs, size_t sizeAddition) {
-		return (node.size() >= args.size() + sizeAddition && node.size() <= args.size() + optArgs.size() + sizeAddition) &&
+	bool determine(const YAML::Node& node, std::initializer_list<detail::YamlArg> args, std::initializer_list<detail::YamlArg> opt_args, size_t size_addition) {
+		return (node.size() >= args.size() + size_addition && node.size() <= args.size() + opt_args.size() + size_addition) &&
 			   std::all_of(args.begin(), args.end(), [&node](const detail::YamlArg& arg) {
 				   return arg.present(node);
 			   }) &&
-			   detail::count_if(optArgs.begin(), optArgs.end(), [&node](const detail::YamlArg& optArg) {
-				   return optArg.present(node);
-			   }) == node.size() - args.size() + sizeAddition;
+			   detail::count_if(opt_args.begin(), opt_args.end(), [&node](const detail::YamlArg& opt_arg) {
+				   return opt_arg.present(node);
+			   }) == node.size() - args.size() + size_addition;
 	}
 }

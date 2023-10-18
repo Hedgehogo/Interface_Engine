@@ -24,9 +24,9 @@ namespace ie {
 		video = new VideoFromTexture{
 			*node["path"].as<sf::Texture*>(),
 			Buffer::get<SCoefficientValue>(node["viewing-progress"]),
-			convDef(node["rect"], sf::IntRect{0, 0, 0, 0}),
-			convDef(node["count-frame"], 0u),
-			convDef(node["offset"], sf::Vector2i{0, 0}),
+			conv_def(node["rect"], sf::IntRect{0, 0, 0, 0}),
+			conv_def(node["count-frame"], 0u),
+			conv_def(node["offset"], sf::Vector2i{0, 0}),
 		};
 #ifdef IE_ImageMagick_FOUND
 		}

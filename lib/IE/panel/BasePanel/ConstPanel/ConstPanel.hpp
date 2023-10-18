@@ -13,24 +13,24 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2::Make> sizing, BoxPtr<IPositioning2::Make> positioning, bool displayed = false);
 			
-			ConstPanel* make(InitInfo initInfo) override;
+			ConstPanel* make(InitInfo init_info) override;
 		};
 		
-		ConstPanel(Make&& make, InitInfo initInfo);
+		ConstPanel(Make&& make, InitInfo init_info);
 		
 		ConstPanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed = false);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		bool isIndependent() override;
+		bool is_independent() override;
 		
-		bool isFree() override;
+		bool is_free() override;
 		
 		ConstPanel* copy() override;
 	};
 	
 	template<>
 	struct DecodePointer<ConstPanel> {
-		static bool decodePointer(const YAML::Node& node, ConstPanel*& constPanel);
+		static bool decode_pointer(const YAML::Node& node, ConstPanel*& const_panel);
 	};
 }

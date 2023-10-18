@@ -13,7 +13,7 @@ namespace ie {
 			BoxPtr<IUninteractive::Make>&& background,
 			BoxPtr<SliderInteraction::Make>&& interaction,
 			const PSRVec2f& value,
-			InitInfo initInfo
+			InitInfo init_info
 		);
 		
 		BaseSlider(
@@ -25,51 +25,51 @@ namespace ie {
 		
 		BaseSlider(const BaseSlider& other);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		bool onSlider(sf::Vector2i mousePosition);
+		bool on_slider(sf::Vector2i mouse_position);
 		
-		sf::Vector2f getSliderSize();
+		sf::Vector2f get_slider_size();
 		
-		sf::Vector2f getValue();
+		sf::Vector2f get_value();
 		
-		PSRVec2f getValuePtr();
+		PSRVec2f get_value_ptr();
 		
-		void setValue(sf::Vector2f value);
+		void set_value(sf::Vector2f value);
 		
-		void setValueByMouse(sf::Vector2i mousePosition);
+		void set_value_by_mouse(sf::Vector2i mouse_position);
 		
-		sf::Vector2f moveSlider(sf::Vector2f value, sf::Vector2f offset) const;
+		sf::Vector2f move_slider(sf::Vector2f value, sf::Vector2f offset) const;
 		
-		static sf::Vector2f roundValueToDivision(sf::Vector2f value, sf::Vector2i division);
+		static sf::Vector2f round_value_to_division(sf::Vector2f value, sf::Vector2i division);
 		
-		sf::Vector2f getAreaPosition() const override;
+		sf::Vector2f get_area_position() const override;
 		
-		sf::Vector2f getAreaSize() const override;
+		sf::Vector2f get_area_size() const override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override = 0;
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
 		BaseSlider* copy() override = 0;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
-		virtual void resizeSlider(sf::Vector2f newValue);
+		virtual void resize_slider(sf::Vector2f new_value);
 		
 		BasicInteractiveData<BaseSlider&> interactive;
 		BoxPtr<IUninteractive> background;
 		BoxPtr<IUninteractive> slider;
 		PSRVec2f value;
 		sf::Vector2f position;
-		sf::Vector2f sliderSize;
-		sf::Vector2f moveZoneSize;
+		sf::Vector2f slider_size;
+		sf::Vector2f move_zone_size;
 	};
 }

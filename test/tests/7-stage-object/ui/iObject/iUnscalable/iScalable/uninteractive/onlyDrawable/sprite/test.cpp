@@ -1,40 +1,40 @@
-#include "../../../../../../../../../createTestProgram/createTestProgram.hpp"
+#include "../../../../../../../../../create_test_program/create_test_program.hpp"
 
 TEST(Sprite, draw) {
-    sf::Texture testTexture;
-    testTexture.loadFromFile("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/src/gigachad.jpg");
+    sf::Texture test_texture;
+    test_texture.loadFromFile("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/src/gigachad.jpg");
 
-    Program testProgram{
+    Program test_program{
         new ie::Interface{
             new ie::Sprite{
-                testTexture
+                test_texture
             }
         }
     };
 
-    ASSERT_TRUE(testProgram.renderTexture.getTexture() == testTexture);
+    ASSERT_TRUE(test_program.render_texture.getTexture() == test_texture);
 }
 
 TEST(Sprite, YAML) {
-    Program testProgram{
+    Program test_program{
 	    new ie::Interface{
-            ie::loadFromYaml<ie::IScalable>("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/src/test.yaml")
+            ie::load_from_yaml<ie::IScalable>("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/src/test.yaml")
         }
     };
 
-	ASSERT_TRUE((testProgram.interface->getMinSize() == sf::Vector2f{5, 5}));
-	ASSERT_TRUE((testProgram.interface->getNormalSize() == sf::Vector2f{10, 10}));
+	ASSERT_TRUE((test_program.interface->get_min_size() == sf::Vector2f{5, 5}));
+	ASSERT_TRUE((test_program.interface->get_normal_size() == sf::Vector2f{10, 10}));
 
-    sf::Image testImage;
-    testImage.loadFromFile("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/src/gigachad.jpg");
+    sf::Image test_image;
+    test_image.loadFromFile("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/src/gigachad.jpg");
 
-    sf::Image renderImage{testProgram.renderTexture.getTexture().copyToImage()};
+    sf::Image render_image{test_program.render_texture.getTexture().copyToImage()};
 
-    ASSERT_TRUE((renderImage.getSize() == sf::Vector2u{10, 10}));
+    ASSERT_TRUE((render_image.get_size() == sf::Vector2u{10, 10}));
 
     for (int x = 0; x < 10; ++x) {
         for (int y = 0; y < 10; ++y) {
-            ASSERT_TRUE((renderImage.getPixel(x, y) == testImage.getPixel(x, y)));
+            ASSERT_TRUE((render_image.get_pixel(x, y) == test_image.get_pixel(x, y)));
         }
     }
 }

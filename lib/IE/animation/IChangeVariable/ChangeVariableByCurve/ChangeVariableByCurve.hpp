@@ -7,7 +7,7 @@ namespace ie {
 	public:
 		ChangeVariableByCurve(float k1, float k2, float size = 1, sf::Vector2f start = {0, 0}, sf::Vector2f end = {1, 1});
 	
-		float getSize() override;
+		float get_size() override;
 		
 		float operator()(float frame) override;
 		
@@ -21,6 +21,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<ChangeVariableByCurve> {
-		static bool decodePointer(const YAML::Node& node, ChangeVariableByCurve*& changeVariableByCurve);
+		static bool decode_pointer(const YAML::Node& node, ChangeVariableByCurve*& change_variable_by_curve);
 	};
 }

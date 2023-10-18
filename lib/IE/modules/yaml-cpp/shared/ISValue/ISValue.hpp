@@ -8,11 +8,11 @@ namespace ie {
 	public:
 		using SetterFunc = std::function<void(const T&)>;
 		
-		virtual void addSetter(const SetterFunc& setter) = 0;
+		virtual void add_setter(const SetterFunc& setter) = 0;
 		
-		virtual const T& getValue() const = 0;
+		virtual const T& get_value() const = 0;
 		
-		virtual void setValue(const T& value) = 0;
+		virtual void set_value(const T& value) = 0;
 	};
 	
 	typedef ISValue<bool> ISbool;

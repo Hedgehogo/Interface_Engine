@@ -4,39 +4,39 @@ namespace ie {
 	Underline::Make::Make(const orl::Option<sf::Color>& color) : color(color) {
 	}
 	
-	Underline* Underline::Make::make(LineInitInfo initInfo) {
-		return new Underline{std::move(*this), initInfo};
+	Underline* Underline::Make::make(LineInitInfo init_info) {
+		return new Underline{std::move(*this), init_info};
 	}
 	
-	Underline::Underline(Make&& make, LineInitInfo initInfo) : BaseLine(sf::TriangleStrip, 4, make.color, initInfo) {
-		underlineOffset = initInfo.font.getUnderlinePosition(initInfo.size);
-		underlineThickness = initInfo.font.getUnderlineThickness(initInfo.size);
+	Underline::Underline(Make&& make, LineInitInfo init_info) : BaseLine(sf::TriangleStrip, 4, make.color, init_info) {
+		underline_offset = init_info.font.getUnderlinePosition(init_info.size);
+		underline_thickness = init_info.font.getUnderlineThickness(init_info.size);
 	}
 	
 	Underline::Underline(orl::Option<sf::Color> color) : BaseLine(sf::TriangleStrip, 4, color) {
 	}
 	
-	void Underline::init(LineInitInfo initInfo) {
-		BaseLine::init(initInfo);
+	void Underline::init(LineInitInfo init_info) {
+		BaseLine::init(init_info);
 		
-		underlineOffset = initInfo.font.getUnderlinePosition(initInfo.size);
-		underlineThickness = initInfo.font.getUnderlineThickness(initInfo.size);
+		underline_offset = init_info.font.getUnderlinePosition(init_info.size);
+		underline_thickness = init_info.font.getUnderlineThickness(init_info.size);
 	}
 	
 	void Underline::resize(float start, float end, float height) {
-		vertexArray[0].position = {start, height + underlineOffset - (underlineThickness / 2)};
-		vertexArray[1].position = {start, height + underlineOffset + (underlineThickness / 2)};
-		vertexArray[2].position = {end, height + underlineOffset - (underlineThickness / 2)};
-		vertexArray[3].position = {end, height + underlineOffset + (underlineThickness / 2)};
+		vertex_array[0].position = {start, height + underline_offset - (underline_thickness / 2)};
+		vertex_array[1].position = {start, height + underline_offset + (underline_thickness / 2)};
+		vertex_array[2].position = {end, height + underline_offset - (underline_thickness / 2)};
+		vertex_array[3].position = {end, height + underline_offset + (underline_thickness / 2)};
 	}
 	
 	Underline* Underline::copy() const{
 		return new Underline{*this};
 	}
 	
-	bool DecodePointer<Underline>::decodePointer(const YAML::Node& node, Underline*& underline) {
+	bool DecodePointer<Underline>::decode_pointer(const YAML::Node& node, Underline*& underline) {
 		underline = new Underline{
-			convDef<orl::Option<sf::Color>>(node["color"], {})
+			conv_def<orl::Option<sf::Color>>(node["color"], {})
 		};
 		return true;
 	}

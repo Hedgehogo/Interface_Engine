@@ -6,25 +6,25 @@ namespace ie {
 	class RelativeNormalSizing : public virtual ISizing {
 	public:
 		struct Make : public virtual ISizing::Make {
-			RelativeNormalSizing* make(float normalSize) override;
+			RelativeNormalSizing* make(float normal_size) override;
 		};
 		
-		RelativeNormalSizing(Make&& make, float normalSize);
+		RelativeNormalSizing(Make&& make, float normal_size);
 		
 		RelativeNormalSizing();
 		
-		void init(float normalSize) override;
+		void init(float normal_size) override;
 		
-		float findSize(float, float) override;
+		float find_size(float, float) override;
 		
 		RelativeNormalSizing* copy() override;
 	
 	protected:
-		float normalSize;
+		float normal_size;
 	};
 	
 	template<>
 	struct DecodePointer<RelativeNormalSizing> {
-		static bool decodePointer(const YAML::Node&, RelativeNormalSizing*& relativeNormalSizing);
+		static bool decode_pointer(const YAML::Node&, RelativeNormalSizing*& relative_normal_sizing);
 	};
 }

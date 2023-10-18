@@ -74,7 +74,7 @@
 #include "IE/debug/BoxDebug/BoxDebug.hpp"
 
 namespace ie {
-	void init(int argc = 0, char *argv[] = {}, std::filesystem::path modulesList = {});
+	void init(int argc = 0, char *argv[] = {}, std::filesystem::path modules_list = {});
 	
-	void yamlBuilderInit();
+	void yaml_builder_init();
 }

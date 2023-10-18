@@ -9,31 +9,31 @@ namespace ie {
 		struct Make : public virtual IMovePanelInteraction::Make {
 			sf::Vector2f coefficient;
 			sf::Vector2f offset;
-			bool atStart = false;
+			bool at_start = false;
 			
-			Make(sf::Vector2f coefficient, sf::Vector2f offset, bool atStart = false);
+			Make(sf::Vector2f coefficient, sf::Vector2f offset, bool at_start = false);
 			
-			CoefficientMovePanelInteraction* make(PanelActionInitInfo initInfo) override;
+			CoefficientMovePanelInteraction* make(PanelActionInitInfo init_info) override;
 		};
 		
-		CoefficientMovePanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		CoefficientMovePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		CoefficientMovePanelInteraction(sf::Vector2f coefficient, sf::Vector2f offset, bool atStart = false);
+		CoefficientMovePanelInteraction(sf::Vector2f coefficient, sf::Vector2f offset, bool at_start = false);
 		
-		bool getAtStart() override;
+		bool get_at_start() override;
 		
-		void move(sf::Vector2i mousePosition) override;
+		void move(sf::Vector2i mouse_position) override;
 		
 		CoefficientMovePanelInteraction* copy() override;
 	
 	protected:
 		sf::Vector2f coefficient;
 		sf::Vector2f offset;
-		bool atStart;
+		bool at_start;
 	};
 	
 	template<>
 	struct DecodePointer<CoefficientMovePanelInteraction> {
-		static bool decodePointer(const YAML::Node& node, CoefficientMovePanelInteraction*& coefficientMovePanelInteraction);
+		static bool decode_pointer(const YAML::Node& node, CoefficientMovePanelInteraction*& coefficient_move_panel_interaction);
 	};
 }

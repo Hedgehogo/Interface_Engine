@@ -1,41 +1,41 @@
 #include "IComponentObjectsArray.hpp"
 
 namespace ie {
-	void IComponentObjectsArray::setPosition(sf::Vector2f position) {
-		IComponentObjectsArray::move(position - layoutGetData().position);
+	void IComponentObjectsArray::set_position(sf::Vector2f position) {
+		IComponentObjectsArray::move(position - layout_get_data().position);
 	}
 	
 	void IComponentObjectsArray::move(sf::Vector2f position) {
-		layoutGetData().move(position);
-		for(std::size_t i = 0; i < getArraySize(); ++i) {
-			getObjectAt(i).move(position);
+		layout_get_data().move(position);
+		for(std::size_t i = 0; i < get_array_size(); ++i) {
+			get_object_at(i).move(position);
 		}
 	}
 	
-	void IComponentObjectsArray::setSize(sf::Vector2f size) {
-		IComponentLayout::setSize(size);
+	void IComponentObjectsArray::set_size(sf::Vector2f size) {
+		IComponentLayout::set_size(size);
 	}
 	
-	sf::Vector2f IComponentObjectsArray::getMinSize() const {
-		sf::Vector2f minSize{0, 0};
-		for(std::size_t i = 0; i < getArraySize(); ++i) {
-			minSize = max(minSize, getObjectAt(i).getMinSize());
+	sf::Vector2f IComponentObjectsArray::get_min_size() const {
+		sf::Vector2f min_size{0, 0};
+		for(std::size_t i = 0; i < get_array_size(); ++i) {
+			min_size = max(min_size, get_object_at(i).get_min_size());
 		}
-		return minSize;
+		return min_size;
 	}
 	
-	sf::Vector2f IComponentObjectsArray::getNormalSize() const {
-		sf::Vector2f normalSize{0, 0};
-		for(std::size_t i = 0; i < getArraySize(); ++i) {
-			normalSize = max(normalSize, getObjectAt(i).getNormalSize());
+	sf::Vector2f IComponentObjectsArray::get_normal_size() const {
+		sf::Vector2f normal_size{0, 0};
+		for(std::size_t i = 0; i < get_array_size(); ++i) {
+			normal_size = max(normal_size, get_object_at(i).get_normal_size());
 		}
-		return normalSize;
+		return normal_size;
 	}
 	
-	void IComponentObjectsArray::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-		IComponent::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		for(std::size_t i = 0; i < getArraySize(); ++i) {
-			getObjectAt(i).drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+	void IComponentObjectsArray::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+		for(std::size_t i = 0; i < get_array_size(); ++i) {
+			get_object_at(i).draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		}
 	}
 }

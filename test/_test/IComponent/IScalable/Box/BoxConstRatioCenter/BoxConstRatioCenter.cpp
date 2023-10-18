@@ -2,54 +2,54 @@
 #include <IE/component/IComponent/IScalable/Box/BoxConstRatioCenter/BoxConstRatioCenter.hpp>
 #include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include "_test/_imageEqual/_imageEqual.hpp"
+#include "_test/_image_equal/image_equal.hpp"
 
 TEST(IComponent, BoxConstRatioCenter) {
 	InitInfoData data{{100, 100}};
 	
-	ie::BoxConstRatioCenter boxConstRatioCenter{
+	ie::BoxConstRatioCenter box_const_ratio_center{
 		{
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Blue),
 			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Yellow),
 		},
-		data.makeInitInfo()
+		data.make_init_info()
 	};
-	data.interactionManager.update({});
+	data.interaction_manager.update({});
 	
-	ASSERT_EQ(data.drawManager.size(), 3);
-	ASSERT_EQ(&data.drawManager.get(2), &boxConstRatioCenter);
-	ASSERT_EQ(data.updateManager.size(), 0);
-	ASSERT_EQ(data.interactionManager.size(), 0);
-	ASSERT_EQ(data.panelManager.size(), 0);
+	ASSERT_EQ(data.draw_manager.size(), 3);
+	ASSERT_EQ(&data.draw_manager.get(2), &box_const_ratio_center);
+	ASSERT_EQ(data.update_manager.size(), 0);
+	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.panel_manager.size(), 0);
 	
-	ASSERT_EQ(boxConstRatioCenter.getMinSize(), sf::Vector2f{});
-	ASSERT_EQ(boxConstRatioCenter.getNormalSize(), sf::Vector2f{});
-	ASSERT_EQ(boxConstRatioCenter.getSize(), sf::Vector2f{});
-	ASSERT_EQ(boxConstRatioCenter.getAreaSize(), sf::Vector2f{});
-	ASSERT_EQ(boxConstRatioCenter.getPosition(), sf::Vector2f{});
-	ASSERT_EQ(boxConstRatioCenter.getAreaPosition(), sf::Vector2f{});
-	ASSERT_EQ(boxConstRatioCenter.updateInteractions({}), true);
+	ASSERT_EQ(box_const_ratio_center.get_min_size(), sf::Vector2f{});
+	ASSERT_EQ(box_const_ratio_center.get_normal_size(), sf::Vector2f{});
+	ASSERT_EQ(box_const_ratio_center.get_size(), sf::Vector2f{});
+	ASSERT_EQ(box_const_ratio_center.get_area_size(), sf::Vector2f{});
+	ASSERT_EQ(box_const_ratio_center.get_position(), sf::Vector2f{});
+	ASSERT_EQ(box_const_ratio_center.get_area_position(), sf::Vector2f{});
+	ASSERT_EQ(box_const_ratio_center.update_interactions({}), true);
 	
-	boxConstRatioCenter.setSize({5, 11});
-	ASSERT_EQ(boxConstRatioCenter.getSize(), (sf::Vector2f{5, 11}));
-	ASSERT_EQ(boxConstRatioCenter.getAreaSize(), (sf::Vector2f{5, 11}));
+	box_const_ratio_center.set_size({5, 11});
+	ASSERT_EQ(box_const_ratio_center.get_size(), (sf::Vector2f{5, 11}));
+	ASSERT_EQ(box_const_ratio_center.get_area_size(), (sf::Vector2f{5, 11}));
 	
-	boxConstRatioCenter.setPosition({19, 39});
-	ASSERT_EQ(boxConstRatioCenter.getPosition(), (sf::Vector2f{19, 39}));
-	ASSERT_EQ(boxConstRatioCenter.getAreaPosition(), (sf::Vector2f{19, 39}));
+	box_const_ratio_center.set_position({19, 39});
+	ASSERT_EQ(box_const_ratio_center.get_position(), (sf::Vector2f{19, 39}));
+	ASSERT_EQ(box_const_ratio_center.get_area_position(), (sf::Vector2f{19, 39}));
 	
-	boxConstRatioCenter.resize({7, 13}, {23, 41});
-	ASSERT_EQ(boxConstRatioCenter.getSize(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(boxConstRatioCenter.getAreaSize(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(boxConstRatioCenter.getPosition(), (sf::Vector2f{23, 41}));
-	ASSERT_EQ(boxConstRatioCenter.getAreaPosition(), (sf::Vector2f{23, 41}));
+	box_const_ratio_center.resize({7, 13}, {23, 41});
+	ASSERT_EQ(box_const_ratio_center.get_size(), (sf::Vector2f{7, 13}));
+	ASSERT_EQ(box_const_ratio_center.get_area_size(), (sf::Vector2f{7, 13}));
+	ASSERT_EQ(box_const_ratio_center.get_position(), (sf::Vector2f{23, 41}));
+	ASSERT_EQ(box_const_ratio_center.get_area_position(), (sf::Vector2f{23, 41}));
 	
-	boxConstRatioCenter.move({10, 5});
-	ASSERT_EQ(boxConstRatioCenter.getPosition(), (sf::Vector2f{33, 46}));
-	ASSERT_EQ(boxConstRatioCenter.getAreaPosition(), (sf::Vector2f{33, 46}));
+	box_const_ratio_center.move({10, 5});
+	ASSERT_EQ(box_const_ratio_center.get_position(), (sf::Vector2f{33, 46}));
+	ASSERT_EQ(box_const_ratio_center.get_area_position(), (sf::Vector2f{33, 46}));
 	
-	data.drawManager.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("test-src/BoxConstRatioCenter.png"));
+	data.draw_manager.draw();
+	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxConstRatioCenter.png"));
 }

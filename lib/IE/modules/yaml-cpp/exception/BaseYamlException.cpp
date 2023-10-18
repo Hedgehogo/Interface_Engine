@@ -5,7 +5,7 @@ namespace ie {
 		BaseException(std::to_string(mark.line) + std::string(", ") + std::to_string(mark.column) + std::string(": ") + description), mark(mark) {
 	}
 	
-	YAML::Mark BaseYamlException::getMark() {
+	YAML::Mark BaseYamlException::get_mark() {
 		return mark;
 	}
 }

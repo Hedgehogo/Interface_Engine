@@ -7,10 +7,10 @@
 namespace ie {
 	class InteractionStack {
 	protected:
-		std::vector<BoxPtr<IInteraction> > interactionStack;
+		std::vector<BoxPtr<IInteraction> > interaction_stack;
 	
 	public:
-		explicit InteractionStack(std::vector<BoxPtr<IInteraction> >&& interactionStack = {});
+		explicit InteractionStack(std::vector<BoxPtr<IInteraction> >&& interaction_stack = {});
 		
 		IInteraction& at(std::size_t index);
 		
@@ -19,6 +19,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<InteractionStack> {
-		static bool decodePointer(const YAML::Node& node, InteractionStack*& interactionStack);
+		static bool decode_pointer(const YAML::Node& node, InteractionStack*& interaction_stack);
 	};
 }

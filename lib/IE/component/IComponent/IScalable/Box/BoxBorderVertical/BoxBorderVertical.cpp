@@ -2,57 +2,57 @@
 #include <vector>
 
 namespace ie {
-	BoxBorderVertical::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, std::vector<float> bounds, sf::Vector2f minSize) :
-		objects(std::move(objects)), bounds(std::move(addBounds(bounds))), minSize(minSize) {
+	BoxBorderVertical::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, std::vector<float> bounds, sf::Vector2f min_size) :
+		objects(std::move(objects)), bounds(std::move(add_bounds(bounds))), min_size(min_size) {
 	}
 	
-	BoxBorderVertical::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, sf::Vector2f minSize) :
-		objects(std::move(objects)), bounds(genBounds(this->objects.size())), minSize(minSize) {
+	BoxBorderVertical::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, sf::Vector2f min_size) :
+		objects(std::move(objects)), bounds(gen_bounds(this->objects.size())), min_size(min_size) {
 	}
 	
-	BoxBorderVertical::Make::Make(BoxPtr<IScalable::Make>&& firstObject, BoxPtr<IScalable::Make>&& secondObject, float bound, sf::Vector2f minSize) :
-		objects(makeVector(std::move(firstObject), std::move(secondObject))), bounds({0.f, bound, 1.f}), minSize(minSize) {
+	BoxBorderVertical::Make::Make(BoxPtr<IScalable::Make>&& first_object, BoxPtr<IScalable::Make>&& second_object, float bound, sf::Vector2f min_size) :
+		objects(make_vector(std::move(first_object), std::move(second_object))), bounds({0.f, bound, 1.f}), min_size(min_size) {
 	}
 	
-	BoxBorderVertical* BoxBorderVertical::Make::make(InitInfo initInfo) {
-		return new BoxBorderVertical{std::move(*this), initInfo};
+	BoxBorderVertical* BoxBorderVertical::Make::make(InitInfo init_info) {
+		return new BoxBorderVertical{std::move(*this), init_info};
 	}
 	
-	BoxBorderVertical::BoxBorderVertical(Make&& make, InitInfo initInfo) :
-		Box(make.minSize), objects(mapMake(std::move(make.objects), initInfo)), bounds(std::move(make.bounds)) {
+	BoxBorderVertical::BoxBorderVertical(Make&& make, InitInfo init_info) :
+		Box(make.min_size), objects(map_make(std::move(make.objects), init_info)), bounds(std::move(make.bounds)) {
 	}
 	
-	BoxBorderVertical::BoxBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, std::vector<float> bounds, sf::Vector2f minSize) :
-		Box(minSize), objects(std::move(objects)), bounds(std::move(addBounds(bounds))) {
+	BoxBorderVertical::BoxBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, std::vector<float> bounds, sf::Vector2f min_size) :
+		Box(min_size), objects(std::move(objects)), bounds(std::move(add_bounds(bounds))) {
 	}
 	
-	BoxBorderVertical::BoxBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, sf::Vector2f minSize) :
-		Box(minSize), objects(std::move(objects)), bounds(genBounds(this->objects.size())) {
+	BoxBorderVertical::BoxBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, sf::Vector2f min_size) :
+		Box(min_size), objects(std::move(objects)), bounds(gen_bounds(this->objects.size())) {
 	}
 	
-	BoxBorderVertical::BoxBorderVertical(BoxPtr<IScalable>&& firstObject, BoxPtr<IScalable>&& secondObject, float bound, sf::Vector2f minSize) :
-		Box(minSize), objects({std::move(firstObject), std::move(secondObject)}), bounds({0.f, bound, 1.f}) {
+	BoxBorderVertical::BoxBorderVertical(BoxPtr<IScalable>&& first_object, BoxPtr<IScalable>&& second_object, float bound, sf::Vector2f min_size) :
+		Box(min_size), objects({std::move(first_object), std::move(second_object)}), bounds({0.f, bound, 1.f}) {
 	}
 	
-	void BoxBorderVertical::init(InitInfo initInfo) {
+	void BoxBorderVertical::init(InitInfo init_info) {
 		for(auto& object: objects) {
-			object->init(initInfo);
+			object->init(init_info);
 		}
 	}
 	
 	void BoxBorderVertical::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout.resize(size, position);
 		sf::Vector2f coordinate{0, 0};
-		sf::Vector2f objectSize{size};
+		sf::Vector2f object_size{size};
 		for(std::size_t y = 0; y < objects.size(); ++y) {
-			objectSize.y = size.y * (bounds[y + 1] - bounds[y]);
-			objects[y]->resize(objectSize, position + coordinate);
-			coordinate.y += objectSize.y;
+			object_size.y = size.y * (bounds[y + 1] - bounds[y]);
+			objects[y]->resize(object_size, position + coordinate);
+			coordinate.y += object_size.y;
 		}
 	}
 	
-	bool BoxBorderVertical::updateInteractions(sf::Vector2f mousePosition) {
-		sf::Vector2f position{mousePosition.x - layout.position.x, mousePosition.y - layout.position.y};
+	bool BoxBorderVertical::update_interactions(sf::Vector2f mouse_position) {
+		sf::Vector2f position{mouse_position.x - layout.position.x, mouse_position.y - layout.position.y};
 		if(position.x < 0.0f || position.x > layout.size.x || position.y < 0.0f || position.y > layout.size.y)
 			return false;
 		position.y = position.y / layout.size.y;
@@ -60,50 +60,50 @@ namespace ie {
 		std::size_t i{1};
 		while(position.y > bounds[i])
 			++i;
-		return objects[i - 1]->updateInteractions(mousePosition);
+		return objects[i - 1]->update_interactions(mouse_position);
 	}
 	
-	sf::Vector2f BoxBorderVertical::getMinSize() const {
-		sf::Vector2f minSize{0, 0};
-		std::vector<sf::Vector2f> objectMinSizes(objects.size());
-		for(std::size_t i = 0; i < objectMinSizes.size(); ++i) {
-			objectMinSizes[i] = objects[i]->getMinSize();
+	sf::Vector2f BoxBorderVertical::get_min_size() const {
+		sf::Vector2f min_size{0, 0};
+		std::vector<sf::Vector2f> object_min_sizes(objects.size());
+		for(std::size_t i = 0; i < object_min_sizes.size(); ++i) {
+			object_min_sizes[i] = objects[i]->get_min_size();
 		}
 		
-		sf::Vector2f objectMinSize;
-		for(std::size_t i = 0; i < objectMinSizes.size(); ++i) {
-			objectMinSize = {objectMinSizes[i].x, objectMinSizes[i].y / (bounds[i + 1] - bounds[i])};
-			minSize = max(objectMinSize, minSize);
+		sf::Vector2f object_min_size;
+		for(std::size_t i = 0; i < object_min_sizes.size(); ++i) {
+			object_min_size = {object_min_sizes[i].x, object_min_sizes[i].y / (bounds[i + 1] - bounds[i])};
+			min_size = max(object_min_size, min_size);
 		}
 		
-		return max(minSize, this->minimumSize);
+		return max(min_size, this->minimum_size);
 	}
 	
-	sf::Vector2f BoxBorderVertical::getNormalSize() const {
-		sf::Vector2f normalSize{0, 0};
-		std::vector<sf::Vector2f> objectNormalSizes(objects.size());
-		for(std::size_t i = 0; i < objectNormalSizes.size(); ++i) {
-			objectNormalSizes[i] = objects[i]->getNormalSize();
+	sf::Vector2f BoxBorderVertical::get_normal_size() const {
+		sf::Vector2f normal_size{0, 0};
+		std::vector<sf::Vector2f> object_normal_sizes(objects.size());
+		for(std::size_t i = 0; i < object_normal_sizes.size(); ++i) {
+			object_normal_sizes[i] = objects[i]->get_normal_size();
 		}
 		
-		sf::Vector2f objectNormalSize;
-		for(std::size_t i = 0; i < objectNormalSizes.size(); ++i) {
-			objectNormalSize = {objectNormalSizes[i].x, objectNormalSizes[i].y / (bounds[i + 1] - bounds[i])};
-			normalSize = max(objectNormalSize, normalSize);
+		sf::Vector2f object_normal_size;
+		for(std::size_t i = 0; i < object_normal_sizes.size(); ++i) {
+			object_normal_size = {object_normal_sizes[i].x, object_normal_sizes[i].y / (bounds[i + 1] - bounds[i])};
+			normal_size = max(object_normal_size, normal_size);
 		}
 		
-		return normalSize;
+		return normal_size;
 	}
 	
-	std::size_t BoxBorderVertical::getArraySize() const {
+	std::size_t BoxBorderVertical::get_array_size() const {
 		return objects.size();
 	}
 	
-	IScalable& BoxBorderVertical::getObjectAt(std::size_t index) {
+	IScalable& BoxBorderVertical::get_object_at(std::size_t index) {
 		return *objects.at(index);
 	}
 	
-	const IScalable& BoxBorderVertical::getObjectAt(std::size_t index) const {
+	const IScalable& BoxBorderVertical::get_object_at(std::size_t index) const {
 		return *objects.at(index);
 	}
 	
@@ -111,39 +111,39 @@ namespace ie {
 		return new BoxBorderVertical{*this};
 	}
 	
-	bool DecodePointer<BoxBorderVertical>::decodePointer(const YAML::Node& node, BoxBorderVertical*& boxWithBorderVertical) {
-		auto minSize{convDef(node["min-size"], sf::Vector2f{})};
+	bool DecodePointer<BoxBorderVertical>::decode_pointer(const YAML::Node& node, BoxBorderVertical*& box_with_border_vertical) {
+		auto min_size{conv_def(node["min-size"], sf::Vector2f{})};
 		
 		if(node["objects"]) {
 			auto objects{node["objects"].as<std::vector<BoxPtr<IScalable> > >()};
 			
 			if(node["bounds"]) {
-				boxWithBorderVertical = new BoxBorderVertical{
+				box_with_border_vertical = new BoxBorderVertical{
 					std::move(objects),
 					node["bounds"].as<std::vector<float> >(),
-					minSize
+					min_size
 				};
 			} else {
-				boxWithBorderVertical = new BoxBorderVertical{
+				box_with_border_vertical = new BoxBorderVertical{
 					std::move(objects),
-					minSize
+					min_size
 				};
 			}
 		} else {
-			boxWithBorderVertical = new BoxBorderVertical{
+			box_with_border_vertical = new BoxBorderVertical{
 				node["first-object"].as<BoxPtr<IScalable> >(),
 				node["first-object"].as<BoxPtr<IScalable> >(),
-				convDef(node["bound"], 0.5f),
-				minSize
+				conv_def(node["bound"], 0.5f),
+				min_size
 			};
 		}
 		return true;
 	}
 	
-	void BoxBorderVertical::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-		IComponent::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
+	void BoxBorderVertical::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		for(auto& object: objects) {
-			object->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+			object->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		}
 	}
 }

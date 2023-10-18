@@ -5,73 +5,73 @@
 #include <cmath>
 
 namespace ie {
-	TextSelectionAction* TextSelectionAction::Make::make(BasicActionInitInfo<Text&> initInfo) {
-		return new TextSelectionAction{std::move(*this), initInfo};
+	TextSelectionAction* TextSelectionAction::Make::make(BasicActionInitInfo<Text&> init_info) {
+		return new TextSelectionAction{std::move(*this), init_info};
 	}
 	
-	TextSelectionAction::TextSelectionAction(Make&&, BasicActionInitInfo<Text&> initInfo) : text(&initInfo.additional), start(), end() {
+	TextSelectionAction::TextSelectionAction(Make&&, BasicActionInitInfo<Text&> init_info) : text(&init_info.additional), start(), end() {
 	}
 	
 	TextSelectionAction::TextSelectionAction() : text(nullptr), start(), end() {
 	}
 	
-	void TextSelectionAction::init(BasicActionInitInfo<Text&> initInfo) {
-		text = &initInfo.additional;
+	void TextSelectionAction::init(BasicActionInitInfo<Text&> init_info) {
+		text = &init_info.additional;
 	}
 	
-	void TextSelectionAction::startPressed() {
-		text->setSelectionStart(start = text->getCharacter(sf::Vector2f{mousePosition}));
+	void TextSelectionAction::start_pressed() {
+		text->set_selection_start(start = text->get_character(sf::Vector2f{mouse_position}));
 	}
 	
-	void TextSelectionAction::stopPressed() {
+	void TextSelectionAction::stop_pressed() {
 	}
 	
-	void TextSelectionAction::whilePressed() {
-		text->setSelectionEnd(end = text->getCharacter(sf::Vector2f{mousePosition}));
+	void TextSelectionAction::while_pressed() {
+		text->set_selection_end(end = text->get_character(sf::Vector2f{mouse_position}));
 		if(start && end) {
-			auto localStart = start, localEnd = end;
+			auto local_start = start, local_end = end;
 			
 			if(start.some() > end.some())
-				std::swap(localStart, localEnd);
+				std::swap(local_start, local_end);
 			
-			for(auto iterator = localStart.some(); iterator != localEnd.some(); ++iterator) {
-				(*iterator)->setSelection(true);
-				(*iterator)->setActive(true);
+			for(auto iterator = local_start.some(); iterator != local_end.some(); ++iterator) {
+				(*iterator)->set_selection(true);
+				(*iterator)->set_active(true);
 			}
 		}
 	}
 	
-	void TextSelectionAction::whileNotPressed() {
+	void TextSelectionAction::while_not_pressed() {
 	}
 	
-	orl::Option<std::vector<BaseCharacter*>::iterator> TextSelectionAction::getStart() {
+	orl::Option<std::vector<BaseCharacter*>::iterator> TextSelectionAction::get_start() {
 		return start;
 	}
 	
-	orl::Option<std::vector<BaseCharacter*>::iterator> TextSelectionAction::getEnd() {
+	orl::Option<std::vector<BaseCharacter*>::iterator> TextSelectionAction::get_end() {
 		return end;
 	}
 	
-	void TextSelectionAction::update(sf::Vector2i mousePosition, bool press) {
+	void TextSelectionAction::update(sf::Vector2i mouse_position, bool press) {
 		if(press && start && end) {
-			auto localStart = start, localEnd = end;
+			auto local_start = start, local_end = end;
 			
 			if(start.some() > end.some())
-				std::swap(localStart, localEnd);
+				std::swap(local_start, local_end);
 			
-			for(auto iterator = localStart.some(); iterator != localEnd.some(); ++iterator) {
-				(*iterator)->setSelection(false);
+			for(auto iterator = local_start.some(); iterator != local_end.some(); ++iterator) {
+				(*iterator)->set_selection(false);
 			}
 		}
-		BasicBaseKeyAction<Text&>::update(mousePosition, press);
+		BasicBaseKeyAction<Text&>::update(mouse_position, press);
 	}
 	
 	TextSelectionAction* TextSelectionAction::copy() {
 		return new TextSelectionAction{*this};
 	}
 	
-	bool DecodePointer<TextSelectionAction>::decodePointer(const YAML::Node&, TextSelectionAction*& textSelectionAction) {
-		textSelectionAction = new TextSelectionAction{};
+	bool DecodePointer<TextSelectionAction>::decode_pointer(const YAML::Node&, TextSelectionAction*& text_selection_action) {
+		text_selection_action = new TextSelectionAction{};
 		return true;
 	}
 }

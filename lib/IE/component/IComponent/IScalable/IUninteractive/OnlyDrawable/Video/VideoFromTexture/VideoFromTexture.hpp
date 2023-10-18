@@ -9,35 +9,35 @@ namespace ie {
 		struct Make : public virtual IUninteractive::Make {
 			BoxPtr<IScalable::Make> object;
 			const sf::Texture& texture;
-			PSCoefficient viewingProgress;
+			PSCoefficient viewing_progress;
 			sf::IntRect rect = {};
-			std::size_t frameCount = 0;
+			std::size_t frame_count = 0;
 			sf::Vector2i offset = {};
 			
-			Make(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect, std::size_t frameCount, sf::Vector2i offset);
+			Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, std::size_t frame_count, sf::Vector2i offset);
 			
-			Make(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect, std::size_t frameCount);
+			Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, std::size_t frame_count);
 			
-			Make(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect);
+			Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect);
 			
-			VideoFromTexture* make(InitInfo initInfo) override;
+			VideoFromTexture* make(InitInfo init_info) override;
 		};
 		
-		VideoFromTexture(Make&& make, InitInfo initInfo);
+		VideoFromTexture(Make&& make, InitInfo init_info);
 		
-		VideoFromTexture(const sf::Texture& texture, PSCoefficient viewingProgress, sf::IntRect rect = {}, std::size_t frameCount = 0, sf::Vector2i offset = {});
+		VideoFromTexture(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect = {}, std::size_t frame_count = 0, sf::Vector2i offset = {});
 		
-		void setCurrentFrame(float viewingProgress);
+		void set_current_frame(float viewing_progress);
 		
 		void draw() override;
 		
-		sf::Vector2f getAreaPosition() const override;
+		sf::Vector2f get_area_position() const override;
 		
-		sf::Vector2f getAreaSize() const override;
+		sf::Vector2f get_area_size() const override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -46,10 +46,10 @@ namespace ie {
 	protected:
 		sf::IntRect rect;
 		sf::Vector2i offset;
-		PSCoefficient viewingProgress;
+		PSCoefficient viewing_progress;
 		sf::Sprite sprite;
-		sf::Vector2i textureSize;
+		sf::Vector2i texture_size;
 		sf::Vector2f size;
-		std::size_t frameCount;
+		std::size_t frame_count;
 	};
 }

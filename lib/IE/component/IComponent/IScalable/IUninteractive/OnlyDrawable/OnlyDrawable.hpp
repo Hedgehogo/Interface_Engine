@@ -5,15 +5,15 @@
 namespace ie {
 	class OnlyDrawable : public virtual IUninteractive, public virtual IDrawable {
 	public:
-		OnlyDrawable(InitInfo initInfo);
+		OnlyDrawable(InitInfo init_info);
 		
 		OnlyDrawable();
 		
-		sf::RenderTarget& getRenderTarget();
+		sf::RenderTarget& get_render_target();
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 	
 	protected:
-		sf::RenderTarget* renderTarget;
+		sf::RenderTarget* render_target;
 	};
 }

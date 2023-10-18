@@ -6,37 +6,37 @@
 namespace ie {
 	class ObjectCharacter : public BaseCharacter {
 	public:
-		explicit ObjectCharacter(BoxPtr<IScalable>&& object, bool fullLine = false);
+		explicit ObjectCharacter(BoxPtr<IScalable>&& object, bool full_line = false);
 		
-		void setPosition(sf::Vector2f position) override;
+		void set_position(sf::Vector2f position) override;
 		
-		void resize(sf::Vector2f position, float endPosition) override;
+		void resize(sf::Vector2f position, float end_position) override;
 		
 		void move(sf::Vector2f position) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition);
+		bool update_interactions(sf::Vector2f mouse_position);
 		
-		const std::vector<BoxPtr<BaseLine>>& getLine() override;
+		const std::vector<BoxPtr<BaseLine>>& get_line() override;
 		
-		sf::Vector2f getPosition() const override;
+		sf::Vector2f get_position() const override;
 		
-		sf::Vector2i getSizeTexture() override;
+		sf::Vector2i get_size_texture() override;
 		
-		float getHeight() const override;
+		float get_height() const override;
 		
-		float getAdvance() override;
+		float get_advance() override;
 		
-		float getKerning(char32_t) override;
+		float get_kerning(char32_t) override;
 		
-		Special isSpecial() override;
+		Special is_special() override;
 		
 		void draw(bool) override;
 		
-		char32_t getChar() override;
+		char32_t get_char() override;
 		
-		float getMinAdvance() override;
+		float get_min_advance() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
 		BoxPtr<IScalable> object;

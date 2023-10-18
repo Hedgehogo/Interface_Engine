@@ -6,11 +6,11 @@ namespace ie {
 		type(type), base(base) {
 	}
 	
-	std::string NonexistentTypeYamlException::getType() {
+	std::string NonexistentTypeYamlException::get_type() {
 		return type;
 	}
 	
-	std::string NonexistentTypeYamlException::getBase() {
+	std::string NonexistentTypeYamlException::get_base() {
 		return base;
 	}
 	
@@ -19,7 +19,7 @@ namespace ie {
 		type(type) {
 	}
 	
-	std::string AbstractTypeYamlException::getType() {
+	std::string AbstractTypeYamlException::get_type() {
 		return type;
 	}
 	
@@ -28,7 +28,7 @@ namespace ie {
 		type(type) {
 	}
 	
-	std::string FailedDetermineTypeYamlException::getType() {
+	std::string FailedDetermineTypeYamlException::get_type() {
 		return type;
 	}
 }

@@ -10,18 +10,18 @@ using uint = unsigned;
 
 namespace ie {
 	struct TextVariables {
-		orl::Option<sf::Color> textColor, textSelectionColor, backgroundSelectionColor, inactiveTextSelectionColor, inactiveBackgroundSelectionColor;
+		orl::Option<sf::Color> text_color, text_selection_color, background_selection_color, inactive_text_selection_color, inactive_background_selection_color;
 		orl::Option<uint> size;
 		orl::Option<sf::Font*> font;
-		orl::Option<float> fontLineSpace;
+		orl::Option<float> font_line_space;
 		orl::Option<sf::Text::Style> style;
 		
 		TextVariables(
-			orl::Option<sf::Color> textColor = {},
-			orl::Option<sf::Color> textSelectionColor = {},
-			orl::Option<sf::Color> backgroundSelectionColor = {},
-			orl::Option<sf::Color> inactiveTextSelectionColor = {},
-			orl::Option<sf::Color> inactiveBackgroundSelectionColor = {},
+			orl::Option<sf::Color> text_color = {},
+			orl::Option<sf::Color> text_selection_color = {},
+			orl::Option<sf::Color> background_selection_color = {},
+			orl::Option<sf::Color> inactive_text_selection_color = {},
+			orl::Option<sf::Color> inactive_background_selection_color = {},
 			orl::Option<sf::Font*> font = {},
 			orl::Option<sf::Text::Style> style = {},
 			orl::Option<uint> size = {}

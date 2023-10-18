@@ -14,7 +14,7 @@ namespace ie {
 			
 			BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
 			
-			ie::BasicAddInteractionAction<T>* make(BasicActionInitInfo<T> initInfo) override;
+			ie::BasicAddInteractionAction<T>* make(BasicActionInitInfo<T> init_info) override;
 		};
 	}
 	
@@ -23,26 +23,26 @@ namespace ie {
 	public:
 		using Make = make_system::BasicAddInteractionAction<T>;
 		
-		BasicAddInteractionAction(Make&& make, BasicActionInitInfo<T> initInfo);
+		BasicAddInteractionAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
 		explicit BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
 		
-		void init(BasicActionInitInfo<T> initInfo) override;
+		void init(BasicActionInitInfo<T> init_info) override;
 		
-		IBasicInteraction<T>& getInteraction();
+		IBasicInteraction<T>& get_interaction();
 		
 		BasicAddInteractionAction<T>* copy() override;
 	
 	protected:
-		void startPressed() override;
+		void start_pressed() override;
 		
-		void stopPressed() override;
+		void stop_pressed() override;
 		
-		void whilePressed() override;
+		void while_pressed() override;
 		
-		void whileNotPressed() override;
+		void while_not_pressed() override;
 		
-		InteractionManager* interactionManager;
+		InteractionManager* interaction_manager;
 		BoxPtr<IBasicInteraction<T> > interaction;
 	};
 	

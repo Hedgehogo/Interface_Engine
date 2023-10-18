@@ -1,53 +1,53 @@
 namespace ie {
 	namespace make_system {
 		template<typename T>
-		BasicFnKeyAction<T>::BasicFnKeyAction(FnType startPressedFn, FnType whilePressedFn, FnType stopPressedFn, FnType whileNotPressedFn) :
-			startPressedFn(std::move(startPressedFn)), 
-			whilePressedFn(std::move(whilePressedFn)), 
-			stopPressedFn(std::move(stopPressedFn)), 
-			whileNotPressedFn(std::move(whileNotPressedFn)) {
+		BasicFnKeyAction<T>::BasicFnKeyAction(FnType start_pressed_fn, FnType while_pressed_fn, FnType stop_pressed_fn, FnType while_not_pressed_fn) :
+			start_pressed_fn(std::move(start_pressed_fn)),
+			while_pressed_fn(std::move(while_pressed_fn)),
+			stop_pressed_fn(std::move(stop_pressed_fn)),
+			while_not_pressed_fn(std::move(while_not_pressed_fn)) {
 		}
 		
 		template<typename T>
-		ie::BasicFnKeyAction<T>* BasicFnKeyAction<T>::make(BasicActionInitInfo<T> initInfo) {
-			return new ie::BasicFnKeyAction<T>{std::move(*this), initInfo};
+		ie::BasicFnKeyAction<T>* BasicFnKeyAction<T>::make(BasicActionInitInfo<T> init_info) {
+			return new ie::BasicFnKeyAction<T>{std::move(*this), init_info};
 		}
 	}
 	
 	template<typename T>
 	BasicFnKeyAction<T>::BasicFnKeyAction(Make&& make, BasicActionInitInfo<T>) :
-		startPressedFn(std::move(make.startPressedFn)),
-		whilePressedFn(std::move(make.whilePressedFn)),
-		stopPressedFn(std::move(make.stopPressedFn)),
-		whileNotPressedFn(std::move(make.whileNotPressedFn)) {
+		start_pressed_fn(std::move(make.start_pressed_fn)),
+		while_pressed_fn(std::move(make.while_pressed_fn)),
+		stop_pressed_fn(std::move(make.stop_pressed_fn)),
+		while_not_pressed_fn(std::move(make.while_not_pressed_fn)) {
 	}
 	
 	template<typename T>
-	BasicFnKeyAction<T>::BasicFnKeyAction(FnType startPressedFn, FnType whilePressedFn, FnType stopPressedFn, FnType whileNotPressedFn) :
-		startPressedFn(std::move(startPressedFn)),
-		whilePressedFn(std::move(whilePressedFn)),
-		stopPressedFn(std::move(stopPressedFn)),
-		whileNotPressedFn(std::move(whileNotPressedFn)) {
+	BasicFnKeyAction<T>::BasicFnKeyAction(FnType start_pressed_fn, FnType while_pressed_fn, FnType stop_pressed_fn, FnType while_not_pressed_fn) :
+		start_pressed_fn(std::move(start_pressed_fn)),
+		while_pressed_fn(std::move(while_pressed_fn)),
+		stop_pressed_fn(std::move(stop_pressed_fn)),
+		while_not_pressed_fn(std::move(while_not_pressed_fn)) {
 	}
 	
 	template<typename T>
-	void BasicFnKeyAction<T>::startPressed() {
-		startPressedFn(this->mousePosition);
+	void BasicFnKeyAction<T>::start_pressed() {
+		start_pressed_fn(this->mouse_position);
 	}
 	
 	template<typename T>
-	void BasicFnKeyAction<T>::stopPressed() {
-		stopPressedFn(this->mousePosition);
+	void BasicFnKeyAction<T>::stop_pressed() {
+		stop_pressed_fn(this->mouse_position);
 	}
 	
 	template<typename T>
-	void BasicFnKeyAction<T>::whilePressed() {
-		whilePressedFn(this->mousePosition);
+	void BasicFnKeyAction<T>::while_pressed() {
+		while_pressed_fn(this->mouse_position);
 	}
 	
 	template<typename T>
-	void BasicFnKeyAction<T>::whileNotPressed() {
-		whileNotPressedFn(this->mousePosition);
+	void BasicFnKeyAction<T>::while_not_pressed() {
+		while_not_pressed_fn(this->mouse_position);
 	}
 	
 	template<typename T>

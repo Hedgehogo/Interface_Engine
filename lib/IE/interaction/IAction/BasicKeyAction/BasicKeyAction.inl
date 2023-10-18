@@ -8,7 +8,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicKeyAction<T>::setPressed(bool pressed) {
+	void BasicKeyAction<T>::set_pressed(bool pressed) {
 		this->pressed = pressed;
 	}
 }

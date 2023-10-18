@@ -5,8 +5,8 @@ namespace ie {
 		coefficient(coefficient), addition(addition) {
 	}
 	
-	TargetCoefficientSizing* TargetCoefficientSizing::Make::make(float normalSize) {
-		return new TargetCoefficientSizing{std::move(*this), normalSize};
+	TargetCoefficientSizing* TargetCoefficientSizing::Make::make(float normal_size) {
+		return new TargetCoefficientSizing{std::move(*this), normal_size};
 	}
 	
 	TargetCoefficientSizing::TargetCoefficientSizing(Make&& make, float) :
@@ -19,18 +19,18 @@ namespace ie {
 	void TargetCoefficientSizing::init(float) {
 	}
 	
-	float TargetCoefficientSizing::findSize(float, float targetSize) {
-		return targetSize * coefficient + addition;
+	float TargetCoefficientSizing::find_size(float, float target_size) {
+		return target_size * coefficient + addition;
 	}
 	
 	TargetCoefficientSizing* TargetCoefficientSizing::copy() {
 		return new TargetCoefficientSizing{*this};
 	}
 	
-	bool DecodePointer<TargetCoefficientSizing>::decodePointer(const YAML::Node& node, TargetCoefficientSizing*& targetCoefficientSizing) {
-		targetCoefficientSizing = new TargetCoefficientSizing{
+	bool DecodePointer<TargetCoefficientSizing>::decode_pointer(const YAML::Node& node, TargetCoefficientSizing*& target_coefficient_sizing) {
+		target_coefficient_sizing = new TargetCoefficientSizing{
 			node["coefficient"].as<float>(),
-			convDef(node["addition"], 0.f)
+			conv_def(node["addition"], 0.f)
 		};
 		return true;
 	}

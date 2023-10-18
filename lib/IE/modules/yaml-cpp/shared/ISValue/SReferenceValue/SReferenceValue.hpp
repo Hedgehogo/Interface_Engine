@@ -6,18 +6,18 @@ namespace ie {
 	template<typename T>
 	class SReferenceValue : public virtual ISValue<T> {
 	public:
-		explicit SReferenceValue(T& valueReference);
+		explicit SReferenceValue(T& value_reference);
 		
-		void addSetter(const typename ISValue<T>::SetterFunc& setter) override;
+		void add_setter(const typename ISValue<T>::SetterFunc& setter) override;
 		
-		const T& getValue() const override;
+		const T& get_value() const override;
 		
-		void setValue(const T& value) override;
+		void set_value(const T& value) override;
 		
-		virtual void setReference(T& valueReference);
+		virtual void set_reference(T& value_reference);
 	
 	protected:
-		T* valueReference;
+		T* value_reference;
 		std::vector<typename ISValue<T>::SetterFunc> setters;
 	};
 }

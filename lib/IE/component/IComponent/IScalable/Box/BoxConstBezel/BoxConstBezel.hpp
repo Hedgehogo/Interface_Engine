@@ -13,34 +13,34 @@ namespace ie {
 			BoxPtr<IScalable::Make> object;
 			BoxPtr<IUninteractive::Make> bezel;
 			float thickness;
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& bezel, float thickness, sf::Vector2f minSize = {});
+			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& bezel, float thickness, sf::Vector2f min_size = {});
 			
-			BoxConstBezel* make(InitInfo initInfo) override;
+			BoxConstBezel* make(InitInfo init_info) override;
 		};
 		
-		BoxConstBezel(Make&& make, InitInfo initInfo);
+		BoxConstBezel(Make&& make, InitInfo init_info);
 		
-		BoxConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f minSize = {});
+		BoxConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f min_size = {});
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
-		IScalable& getObject() override;
+		IScalable& get_object() override;
 		
-		const IScalable& getObject() const override;
+		const IScalable& get_object() const override;
 		
 		BoxConstBezel* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
 		BoxPtr<IUninteractive> bezel;
@@ -50,6 +50,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<BoxConstBezel> {
-		static bool decodePointer(const YAML::Node& node, BoxConstBezel*& boxWithConstBezel);
+		static bool decode_pointer(const YAML::Node& node, BoxConstBezel*& box_with_const_bezel);
 	};
 }

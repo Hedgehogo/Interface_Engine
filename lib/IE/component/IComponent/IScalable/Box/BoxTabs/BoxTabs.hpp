@@ -9,49 +9,49 @@ namespace ie {
 		struct Make : public virtual Box::Make, public virtual IScalableObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
 			PISint value;
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
-			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PISint value, sf::Vector2f minSize = {});
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PISint value, sf::Vector2f min_size = {});
 			
-			BoxTabs* make(InitInfo initInfo) override;
+			BoxTabs* make(InitInfo init_info) override;
 		};
 		
-		BoxTabs(Make&& make, InitInfo initInfo);
+		BoxTabs(Make&& make, InitInfo init_info);
 		
-		BoxTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, sf::Vector2f minSize = {});
+		BoxTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, sf::Vector2f min_size = {});
 		
 		BoxTabs(const BoxTabs& other);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		void setPosition(sf::Vector2f position) override;
+		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
 		
-		void setSize(sf::Vector2f size) override;
+		void set_size(sf::Vector2f size) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		void draw() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		std::size_t getArraySize() const override;
+		std::size_t get_array_size() const override;
 		
-		IScalable& getObjectAt(std::size_t index) override;
+		IScalable& get_object_at(std::size_t index) override;
 		
-		const IScalable& getObjectAt(std::size_t index) const override;
+		const IScalable& get_object_at(std::size_t index) const override;
 		
 		BoxTabs* copy() override;
 	
 	protected:
-		std::vector<DrawManager> drawManagers;
+		std::vector<DrawManager> draw_managers;
 		std::vector<BoxPtr<IScalable> > objects;
 		PISint value;
 	};
 	
 	template<>
 	struct DecodePointer<BoxTabs> {
-		static bool decodePointer(const YAML::Node& node, BoxTabs*& boxWithTabs);
+		static bool decode_pointer(const YAML::Node& node, BoxTabs*& box_with_tabs);
 	};
 }

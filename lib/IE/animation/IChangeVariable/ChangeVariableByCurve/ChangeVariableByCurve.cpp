@@ -4,7 +4,7 @@ namespace ie {
 	ChangeVariableByCurve::ChangeVariableByCurve(float k1, float k2, float size, sf::Vector2f start, sf::Vector2f end) : start(start), end(end), k1(k1), k2(k2), size(size) {
 	}
 	
-	float ChangeVariableByCurve::getSize() {
+	float ChangeVariableByCurve::get_size() {
 		return size;
 	}
 	
@@ -25,13 +25,13 @@ namespace ie {
 		return new ChangeVariableByCurve{k1, k2, size, start, end};
 	}
 	
-	bool DecodePointer<ChangeVariableByCurve>::decodePointer(const YAML::Node& node, ChangeVariableByCurve*& changeVariableByCurve) {
-		changeVariableByCurve = new ChangeVariableByCurve{
+	bool DecodePointer<ChangeVariableByCurve>::decode_pointer(const YAML::Node& node, ChangeVariableByCurve*& change_variable_by_curve) {
+		change_variable_by_curve = new ChangeVariableByCurve{
 			node["k1"].as<float>(),
 			node["k2"].as<float>(),
-			convDef(node["size"], 1.f),
-			convDef(node["start"], sf::Vector2f{0, 0}),
-			convDef(node["end"], sf::Vector2f{1, 1})
+			conv_def(node["size"], 1.f),
+			conv_def(node["start"], sf::Vector2f{0, 0}),
+			conv_def(node["end"], sf::Vector2f{1, 1})
 		};
 		
 		return true;

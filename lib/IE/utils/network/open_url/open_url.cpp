@@ -5,7 +5,7 @@
 #endif
 
 namespace ie {
-	void openUrl(std::string url) {
+	void open_url(std::string url) {
 #ifdef WIN32
 		ShellExecute(nullptr, "open", url.c_str(), nullptr, nullptr, SW_HIDE);
 #else

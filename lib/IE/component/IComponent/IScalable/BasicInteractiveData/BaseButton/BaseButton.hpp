@@ -7,24 +7,24 @@
 namespace ie {
 	class BaseButton : public virtual IScalableObject, public virtual IUpdatable {
 	public:
-		BaseButton(BoxPtr<IScalable::Make>&& background, InitInfo initInfo);
+		BaseButton(BoxPtr<IScalable::Make>&& background, InitInfo init_info);
 		
 		BaseButton(BoxPtr<IScalable>&& background);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		IScalable& getObject() override;
+		IScalable& get_object() override;
 		
-		const IScalable& getObject() const override;
+		const IScalable& get_object() const override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
-		LayoutData& layoutGetData() override;
+		LayoutData& layout_get_data() override;
 		
-		const LayoutData& layoutGetData() const override;
+		const LayoutData& layout_get_data() const override;
 		
 		LayoutData layout;
 		BoxPtr<IScalable> background;

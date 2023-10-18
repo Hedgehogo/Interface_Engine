@@ -4,7 +4,7 @@ namespace ie {
 	ChangeVariableByStraightLine::ChangeVariableByStraightLine(float k, float length, float b) : length(length), k(k), b(b) {
 	}
 	
-	float ChangeVariableByStraightLine::getSize() {
+	float ChangeVariableByStraightLine::get_size() {
 		return length;
 	}
 	
@@ -16,19 +16,19 @@ namespace ie {
 		return new ChangeVariableByStraightLine{k, length, b};
 	}
 	
-	ChangeVariableByStraightLine* makeChangeVariableByStraightLine(float start, float end, float length) {
+	ChangeVariableByStraightLine* make_change_variable_by_straight_line(float start, float end, float length) {
 		return new ChangeVariableByStraightLine((end - start) / length, length, start);
 	}
 	
-	bool DecodePointer<ChangeVariableByStraightLine>::decodePointer(const YAML::Node& node, ChangeVariableByStraightLine*& changeVariableByStraightLine) {
+	bool DecodePointer<ChangeVariableByStraightLine>::decode_pointer(const YAML::Node& node, ChangeVariableByStraightLine*& change_variable_by_straight_line) {
 		if(node["k"]) {
-			changeVariableByStraightLine = new ChangeVariableByStraightLine{
+			change_variable_by_straight_line = new ChangeVariableByStraightLine{
 				node["k"].as<float>(),
 				node["length"].as<float>(),
-				convDef(node["b"], 0.f)
+				conv_def(node["b"], 0.f)
 			};
 		} else {
-			changeVariableByStraightLine = makeChangeVariableByStraightLine(
+			change_variable_by_straight_line = make_change_variable_by_straight_line(
 				node["start"].as<float>(),
 				node["end"].as<float>(),
 				node["length"].as<float>()

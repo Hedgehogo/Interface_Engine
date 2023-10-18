@@ -10,34 +10,34 @@ namespace ie {
 		struct Make : public virtual Box::Make, public virtual IScalableObject::Make {
 			BoxPtr<ConstPanel::Make> panel;
 			BoxPtr<IScalable::Make> object;
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<ConstPanel::Make>&& panel, BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize = {});
+			Make(BoxPtr<ConstPanel::Make>&& panel, BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size = {});
 			
-			BoxPanel* make(InitInfo initInfo) override;
+			BoxPanel* make(InitInfo init_info) override;
 		};
 		
-		BoxPanel(Make&& make, InitInfo initInfo);
+		BoxPanel(Make&& make, InitInfo init_info);
 		
-		BoxPanel(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable>&& object, sf::Vector2f minSize = {});
+		BoxPanel(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable>&& object, sf::Vector2f min_size = {});
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
-		IScalable& getObject() override;
+		IScalable& get_object() override;
 		
-		const IScalable& getObject() const override;
+		const IScalable& get_object() const override;
 		
-		const ConstPanel& getPanel() const;
+		const ConstPanel& get_panel() const;
 		
 		BoxPanel* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
 		BoxPtr<IScalable> object;
@@ -46,6 +46,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<BoxPanel> {
-		static bool decodePointer(const YAML::Node& node, BoxPanel*& boxWithPanel);
+		static bool decode_pointer(const YAML::Node& node, BoxPanel*& box_with_panel);
 	};
 }

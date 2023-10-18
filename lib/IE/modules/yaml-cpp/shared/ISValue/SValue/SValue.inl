@@ -1,4 +1,4 @@
-//included into withValue.hpp
+//included into with_value.hpp
 
 namespace ie {
 	template<typename T>
@@ -6,24 +6,24 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void SValue<T>::addSetter(const typename ISValue<T>::SetterFunc& setter) {
+	void SValue<T>::add_setter(const typename ISValue<T>::SetterFunc& setter) {
 		setters.push_back(setter);
 	}
 	
 	template<typename T>
-	const T& SValue<T>::getValue() const {
+	const T& SValue<T>::get_value() const {
 		return value;
 	}
 	
 	template<typename T>
-	void SValue<T>::setValue(const T& value) {
+	void SValue<T>::set_value(const T& value) {
 		this->value = value;
 		for(const auto& set: setters)
 			set(value);
 	}
 	
 	template<typename T>
-	bool DecodePointer<SValue<T> >::decodePointer(const YAML::Node& node, SValue<T>*& sValue) {
+	bool DecodePointer<SValue<T> >::decode_pointer(const YAML::Node& node, SValue<T>*& sValue) {
 		T value{};
 		
 		if(node["value"])

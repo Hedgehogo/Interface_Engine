@@ -36,8 +36,8 @@ namespace ie {
 		struct MapMake {
 			using V = MakeType<T, I>;
 			
-			static V map(T&& make, const I& initInfo) {
-				return T{std::move(make), initInfo};
+			static V map(T&& make, const I& init_info) {
+				return T{std::move(make), init_info};
 			}
 		};
 		
@@ -45,8 +45,8 @@ namespace ie {
 		struct MapMake<T*, I> {
 			using V = MakeType<T, I>*;
 			
-			static V map(T*&& make, const I& initInfo) {
-				return make->make(initInfo);
+			static V map(T*&& make, const I& init_info) {
+				return make->make(init_info);
 			}
 		};
 		
@@ -54,8 +54,8 @@ namespace ie {
 		struct MapMake<BoxPtr<T>, I> {
 			using V = BoxPtr<MakeType<T, I> >;
 			
-			static V map(BoxPtr<T>&& make, const I& initInfo) {
-				return V{make->make(initInfo)};
+			static V map(BoxPtr<T>&& make, const I& init_info) {
+				return V{make->make(init_info)};
 			}
 		};
 		
@@ -63,18 +63,18 @@ namespace ie {
 		struct MapMake<std::vector<T>, I> {
 			using V = std::vector<typename MapMake<T, MakeInitInfo<I> >::V>;
 			
-			static V map(std::vector<T>&& make, const I& initInfo) {
+			static V map(std::vector<T>&& make, const I& init_info) {
 				V result;
 				if constexpr(std::is_invocable_v<I, std::size_t>) {
 					std::size_t size{make.size()};
 					result.reserve(size);
 					for(std::size_t i = 0; i < size; ++i) {
-						result.push_back(MapMake<T, MakeInitInfo<I> >::map(std::move(make[i]), initInfo(i)));
+						result.push_back(MapMake<T, MakeInitInfo<I> >::map(std::move(make[i]), init_info(i)));
 					}
 				} else {
 					result.reserve(make.size());
 					for(auto& item : make) {
-						result.push_back(MapMake<T, MakeInitInfo<I> >::map(std::move(item), initInfo));
+						result.push_back(MapMake<T, MakeInitInfo<I> >::map(std::move(item), init_info));
 					}
 				}
 				return result;
@@ -83,7 +83,7 @@ namespace ie {
 	}
 	
 	template<typename T, typename I>
-	typename detail::MapMake<T, I>::V mapMake(T&& make, const I& initInfo) {
-		return detail::MapMake<T, I>::map(std::move(make), initInfo);
+	typename detail::MapMake<T, I>::V map_make(T&& make, const I& init_info) {
+		return detail::MapMake<T, I>::map(std::move(make), init_info);
 	}
 }

@@ -11,44 +11,44 @@ namespace ie {
 		struct Make : public virtual IBasicInteraction<BaseSlider&>::Make {
 			Key key;
 			sf::Vector2i division;
-			bool wheelHorizontal;
-			SliderWheelAction::Relativity wheelRelativity;
-			sf::Vector2f wheelSensitivity;
+			bool wheel_horizontal;
+			SliderWheelAction::Relativity wheel_relativity;
+			sf::Vector2f wheel_sensitivity;
 			
-			Make(Key key, sf::Vector2i division, bool wheelHorizontal, SliderWheelAction::Relativity wheelRelativity, sf::Vector2f wheelSensitivity);
+			Make(Key key, sf::Vector2i division, bool wheel_horizontal, SliderWheelAction::Relativity wheel_relativity, sf::Vector2f wheel_sensitivity);
 			
 			Make(
 				Key key,
-				bool wheelHorizontal = false,
-				SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::RelationSlider,
-				sf::Vector2f wheelSensitivity = {0.2f, 0.2f}
+				bool wheel_horizontal = false,
+				SliderWheelAction::Relativity wheel_relativity = SliderWheelAction::Relativity::RelationSlider,
+				sf::Vector2f wheel_sensitivity = {0.2f, 0.2f}
 			);
 			
-			Make(Key key, sf::Vector2i division = {10, 10}, bool wheelHorizontal = false);
+			Make(Key key, sf::Vector2i division = {10, 10}, bool wheel_horizontal = false);
 			
-			SliderInteraction* make(BasicActionInitInfo<BaseSlider&> initInfo) override;
+			SliderInteraction* make(BasicActionInitInfo<BaseSlider&> init_info) override;
 		};
 		
-		SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> initInfo);
+		SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info);
 		
 		SliderInteraction(
 			Key key,
-			bool wheelHorizontal = false,
-			SliderWheelAction::Relativity wheelRelativity = SliderWheelAction::Relativity::RelationSlider,
-			sf::Vector2f wheelSensitivity = {0.2f, 0.2f}
+			bool wheel_horizontal = false,
+			SliderWheelAction::Relativity wheel_relativity = SliderWheelAction::Relativity::RelationSlider,
+			sf::Vector2f wheel_sensitivity = {0.2f, 0.2f}
 		);
 		
-		SliderInteraction(Key key, sf::Vector2i division = {10, 10}, bool wheelHorizontal = false);
+		SliderInteraction(Key key, sf::Vector2i division = {10, 10}, bool wheel_horizontal = false);
 		
-		SliderInteraction(Key key, sf::Vector2i division, bool wheelHorizontal, SliderWheelAction::Relativity wheelRelativity, sf::Vector2f wheelSensitivity);
+		SliderInteraction(Key key, sf::Vector2i division, bool wheel_horizontal, SliderWheelAction::Relativity wheel_relativity, sf::Vector2f wheel_sensitivity);
 		
-		void setSlider(BaseSlider& slider);
+		void set_slider(BaseSlider& slider);
 		
-		void update(sf::Vector2i mousePosition) override;
+		void update(sf::Vector2i mouse_position) override;
 		
 		SliderInteraction* copy() override;
 	
 	protected:
-		SliderWheelAction wheelAction;
+		SliderWheelAction wheel_action;
 	};
 }

@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace ie {
-	PanelManager::PanelManager(std::vector<BasePanel*> panels) : panels(std::move(panels)), activePanels() {
+	PanelManager::PanelManager(std::vector<BasePanel*> panels) : panels(std::move(panels)), active_panels() {
 	}
 	
 	std::size_t PanelManager::size() {
@@ -23,48 +23,48 @@ namespace ie {
 		}
 	}
 	
-	void PanelManager::printActive() {
-		for(const auto& panel: activePanels) {
+	void PanelManager::print_active() {
+		for(const auto& panel: active_panels) {
 			std::cout << panel << ", ";
 		}
-		if(!activePanels.empty()) {
+		if(!active_panels.empty()) {
 			std::cout << std::endl;
 		}
 	}
 	
-	bool PanelManager::isFree() {
-		return std::all_of(activePanels.begin(), activePanels.end(), [](BasePanel* panel) {
-			return !panel->isIndependent();
+	bool PanelManager::is_free() {
+		return std::all_of(active_panels.begin(), active_panels.end(), [](BasePanel* panel) {
+			return !panel->is_independent();
 		});
 	}
 	
-	bool PanelManager::inConstPanels(sf::Vector2f pointPosition) {
-		return std::any_of(activePanels.begin(), activePanels.end(), [&pointPosition](BasePanel* panel) {
-			return !panel->isIndependent() && panel->inPanel(pointPosition);
+	bool PanelManager::in_const_panels(sf::Vector2f point_position) {
+		return std::any_of(active_panels.begin(), active_panels.end(), [&point_position](BasePanel* panel) {
+			return !panel->is_independent() && panel->in_panel(point_position);
 		});
 	}
 	
-	void PanelManager::addPanel(BasePanel* panel) {
+	void PanelManager::add_panel(BasePanel* panel) {
 		panels.insert(panels.begin(), panel);
 	}
 	
-	void PanelManager::removePanel(BasePanel* panel) {
+	void PanelManager::remove_panel(BasePanel* panel) {
 		if(auto elem = std::find(panels.begin(), panels.end(), panel); elem != panels.end())
 			panels.erase(elem);
 	}
 	
-	void PanelManager::displayPanel(BasePanel* panel) {
-		if(std::find(activePanels.begin(), activePanels.end(), panel) == activePanels.end())
-			activePanels.insert(activePanels.begin(), panel);
+	void PanelManager::display_panel(BasePanel* panel) {
+		if(std::find(active_panels.begin(), active_panels.end(), panel) == active_panels.end())
+			active_panels.insert(active_panels.begin(), panel);
 	}
 	
-	void PanelManager::hidePanel(BasePanel* panel) {
-		if(auto iterator = std::find(activePanels.begin(), activePanels.end(), panel); iterator != activePanels.end())
-			activePanels.erase(iterator);
+	void PanelManager::hide_panel(BasePanel* panel) {
+		if(auto iterator = std::find(active_panels.begin(), active_panels.end(), panel); iterator != active_panels.end())
+			active_panels.erase(iterator);
 	}
 	
 	void PanelManager::draw() {
-		for(auto panel = activePanels.rbegin(); panel != activePanels.rend(); ++panel) {
+		for(auto panel = active_panels.rbegin(); panel != active_panels.rend(); ++panel) {
 			(*panel)->draw();
 		}
 	}
@@ -75,12 +75,12 @@ namespace ie {
 		}
 	}
 	
-	bool PanelManager::updateInteractions(sf::Vector2f mousePosition, bool active) {
-		for(auto iterator = activePanels.begin(); iterator != activePanels.end(); ++iterator) {
-			if((*iterator)->updateInteractions(mousePosition, active) && active) {
+	bool PanelManager::update_interactions(sf::Vector2f mouse_position, bool active) {
+		for(auto iterator = active_panels.begin(); iterator != active_panels.end(); ++iterator) {
+			if((*iterator)->update_interactions(mouse_position, active) && active) {
 				BasePanel* panel = *iterator;
-				activePanels.erase(iterator);
-				activePanels.insert(activePanels.begin(), panel);
+				active_panels.erase(iterator);
+				active_panels.insert(active_panels.begin(), panel);
 				active = false;
 			}
 		}

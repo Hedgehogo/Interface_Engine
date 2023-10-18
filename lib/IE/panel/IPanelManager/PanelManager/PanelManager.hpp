@@ -7,7 +7,7 @@ namespace ie {
 	protected:
 		void print();
 		
-		void printActive();
+		void print_active();
 	
 	public:
 		explicit PanelManager(std::vector<BasePanel*> panels = std::vector<BasePanel*>{});
@@ -16,26 +16,26 @@ namespace ie {
 		
 		BasePanel& get(std::size_t index);
 		
-		bool isFree() override;
+		bool is_free() override;
 		
-		bool inConstPanels(sf::Vector2f pointPosition) override;
+		bool in_const_panels(sf::Vector2f point_position) override;
 		
-		void addPanel(BasePanel* panel) override;
+		void add_panel(BasePanel* panel) override;
 		
-		void removePanel(BasePanel* panel) override;
+		void remove_panel(BasePanel* panel) override;
 		
-		void displayPanel(BasePanel* panel) override;
+		void display_panel(BasePanel* panel) override;
 		
-		void hidePanel(BasePanel* panel) override;
+		void hide_panel(BasePanel* panel) override;
 		
 		void draw() override;
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition, bool active) override;
+		bool update_interactions(sf::Vector2f mouse_position, bool active) override;
 	
 	protected:
 		std::vector<BasePanel*> panels;
-		std::vector<BasePanel*> activePanels;
+		std::vector<BasePanel*> active_panels;
 	};
 }

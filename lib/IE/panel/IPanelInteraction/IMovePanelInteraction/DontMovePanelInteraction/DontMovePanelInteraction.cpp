@@ -2,14 +2,14 @@
 #include "../../../IPanelManager/IPanelManager.hpp"
 
 namespace ie {
-	DontMovePanelInteraction* DontMovePanelInteraction::Make::make(PanelActionInitInfo initInfo) {
-		return new DontMovePanelInteraction{std::move(*this), initInfo};
+	DontMovePanelInteraction* DontMovePanelInteraction::Make::make(PanelActionInitInfo init_info) {
+		return new DontMovePanelInteraction{std::move(*this), init_info};
 	}
 	
 	DontMovePanelInteraction::DontMovePanelInteraction(Make&&, PanelActionInitInfo) {
 	}
 	
-	bool DontMovePanelInteraction::getAtStart() {
+	bool DontMovePanelInteraction::get_at_start() {
 		return false;
 	}
 	
@@ -25,15 +25,15 @@ namespace ie {
 	void DontMovePanelInteraction::init(PanelActionInitInfo) {
 	}
 	
-	void DontMovePanelInteraction::setPanel(Panel&) {
+	void DontMovePanelInteraction::set_panel(Panel&) {
 	}
 	
 	DontMovePanelInteraction* DontMovePanelInteraction::copy() {
 		return new DontMovePanelInteraction{};
 	}
 	
-	bool DecodePointer<DontMovePanelInteraction>::decodePointer(const YAML::Node&, DontMovePanelInteraction*& dontMovePanelInteraction) {
-		dontMovePanelInteraction = new DontMovePanelInteraction{};
+	bool DecodePointer<DontMovePanelInteraction>::decode_pointer(const YAML::Node&, DontMovePanelInteraction*& dont_move_panel_interaction) {
+		dont_move_panel_interaction = new DontMovePanelInteraction{};
 		return true;
 	}
 }

@@ -5,6 +5,6 @@
 namespace ie {
 	class YamlBuilderDoesNotExistException : public BaseException {
 	public:
-		explicit YamlBuilderDoesNotExistException(const std::string& yamlBuilderName);
+		explicit YamlBuilderDoesNotExistException(const std::string& yaml_builder_name);
 	};
 }

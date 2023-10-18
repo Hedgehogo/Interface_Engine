@@ -7,11 +7,11 @@ namespace ie::detail {
 		return false;
 	}
 	
-	IYamlBuilder* EmptyYamlBuilder::getBuilder(const std::string&) {
+	IYamlBuilder* EmptyYamlBuilder::get_builder(const std::string&) {
 		return this;
 	}
 	
-	bool EmptyYamlBuilder::isExists() {
+	bool EmptyYamlBuilder::is_exists() {
 		return false;
 	}
 	

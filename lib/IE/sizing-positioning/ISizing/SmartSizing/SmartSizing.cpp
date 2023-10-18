@@ -1,42 +1,42 @@
 #include "SmartSizing.hpp"
 
 namespace ie {
-	SmartSizing::Make::Make(float targetCoefficient, float parentCoefficient, float addition) :
-		targetCoefficient(targetCoefficient), parentCoefficient(parentCoefficient), addition(addition) {
+	SmartSizing::Make::Make(float target_coefficient, float parent_coefficient, float addition) :
+		target_coefficient(target_coefficient), parent_coefficient(parent_coefficient), addition(addition) {
 	}
 	
-	SmartSizing* SmartSizing::Make::make(float normalSize) {
-		return new SmartSizing{std::move(*this), normalSize};
+	SmartSizing* SmartSizing::Make::make(float normal_size) {
+		return new SmartSizing{std::move(*this), normal_size};
 	}
 	
 	SmartSizing::SmartSizing(Make&& make, float) :
-		targetCoefficient(make.targetCoefficient), parentCoefficient(make.parentCoefficient), addition(make.addition) {
+		target_coefficient(make.target_coefficient), parent_coefficient(make.parent_coefficient), addition(make.addition) {
 	}
 	
-	SmartSizing::SmartSizing(float targetCoefficient, float parentCoefficient, float addition) :
-		targetCoefficient(targetCoefficient), parentCoefficient(parentCoefficient), addition(addition) {
+	SmartSizing::SmartSizing(float target_coefficient, float parent_coefficient, float addition) :
+		target_coefficient(target_coefficient), parent_coefficient(parent_coefficient), addition(addition) {
 	}
 	
 	void SmartSizing::init(float) {
 	}
 	
-	float SmartSizing::findSize(float parentSize, float targetSize) {
-		return parentSize * parentCoefficient + targetSize * targetCoefficient + addition;
+	float SmartSizing::find_size(float parent_size, float target_size) {
+		return parent_size * parent_coefficient + target_size * target_coefficient + addition;
 	}
 	
 	SmartSizing* SmartSizing::copy() {
 		return new SmartSizing{*this};
 	}
 	
-	float SmartSizing::getParentSize(float objectSize) {
-		return (objectSize - addition) / parentCoefficient;
+	float SmartSizing::get_parent_size(float object_size) {
+		return (object_size - addition) / parent_coefficient;
 	}
 	
-	bool DecodePointer<SmartSizing>::decodePointer(const YAML::Node& node, SmartSizing*& smartSizing) {
-		smartSizing = new SmartSizing{
-			convDef(node["target-coefficient"], 1.f),
-			convDef(node["parent-coefficient"], 0.f),
-			convDef(node["addition"], 0.f)
+	bool DecodePointer<SmartSizing>::decode_pointer(const YAML::Node& node, SmartSizing*& smart_sizing) {
+		smart_sizing = new SmartSizing{
+			conv_def(node["target-coefficient"], 1.f),
+			conv_def(node["parent-coefficient"], 0.f),
+			conv_def(node["addition"], 0.f)
 		};
 		return true;
 	}

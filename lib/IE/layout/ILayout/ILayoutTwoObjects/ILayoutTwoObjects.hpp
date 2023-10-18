@@ -6,19 +6,19 @@
 namespace ie {
 	class ILayoutTwoObjects : public virtual ILayoutObjectsArray {
 	public:
-		std::size_t getArraySize() const override;
+		std::size_t get_array_size() const override;
 		
-		const IScalable& getObjectAt(std::size_t index) const override;
+		const IScalable& get_object_at(std::size_t index) const override;
 		
-		virtual const IScalable& getFirstObject() const = 0;
+		virtual const IScalable& get_first_object() const = 0;
 		
-		virtual const IScalable& getSecondObject() const = 0;
+		virtual const IScalable& get_second_object() const = 0;
 	
 	protected:
-		IScalable& getObjectAt(std::size_t index) override;
+		IScalable& get_object_at(std::size_t index) override;
 		
-		virtual IScalable& getFirstObject() = 0;
+		virtual IScalable& get_first_object() = 0;
 		
-		virtual IScalable& getSecondObject() = 0;
+		virtual IScalable& get_second_object() = 0;
 	};
 }

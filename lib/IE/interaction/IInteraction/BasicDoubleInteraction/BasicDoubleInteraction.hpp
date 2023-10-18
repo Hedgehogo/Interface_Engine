@@ -17,7 +17,7 @@ namespace ie {
 				BoxPtr<IBasicInteraction<T> >&& second
 			);
 			
-			ie::BasicDoubleInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+			ie::BasicDoubleInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
 		};
 	}
 	
@@ -26,27 +26,27 @@ namespace ie {
 	public:
 		using Make = make_system::BasicDoubleInteraction<T>;
 		
-		BasicDoubleInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
+		BasicDoubleInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
 		BasicDoubleInteraction(BoxPtr<IBasicInteraction<T> >&& first, BoxPtr<IBasicInteraction<T> >&& second);
 		
-		void setFirst(BoxPtr<IBasicInteraction<T> >&& first);
+		void set_first(BoxPtr<IBasicInteraction<T> >&& first);
 		
-		void setSecond(BoxPtr<IBasicInteraction<T> >&& second);
+		void set_second(BoxPtr<IBasicInteraction<T> >&& second);
 		
-		IBasicInteraction<T>& getFirst();
+		IBasicInteraction<T>& get_first();
 		
-		const IBasicInteraction<T>& getFirst() const;
+		const IBasicInteraction<T>& get_first() const;
 		
-		IBasicInteraction<T>& getSecond();
+		IBasicInteraction<T>& get_second();
 		
-		const IBasicInteraction<T>& getSecond() const;
+		const IBasicInteraction<T>& get_second() const;
 		
-		void start(sf::Vector2i mousePosition) override;
+		void start(sf::Vector2i mouse_position) override;
 		
-		void update(sf::Vector2i mousePosition) override;
+		void update(sf::Vector2i mouse_position) override;
 		
-		void finish(sf::Vector2i mousePosition) override;
+		void finish(sf::Vector2i mouse_position) override;
 		
 		BasicDoubleInteraction<T>* copy() override;
 	

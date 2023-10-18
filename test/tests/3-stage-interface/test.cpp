@@ -1,117 +1,117 @@
-#include "../../createTestProgram/createTestProgram.hpp"
-#include "../../testsObjects/testObject/testObject.hpp"
-#include "../../testsObjects/testPanel/testPanel.hpp"
+#include "../../create_test_program/create_test_program.hpp"
+#include "../../tests_objects/test_object/test_object.hpp"
+#include "../../tests_objects/test_panel/test_panel.hpp"
 
 TEST(Interface, draw) {
-	auto testObject = new TestObject{};
-	auto testPanel = new TestPanel{};
-	auto testInterface = new ie::Interface{testObject};
+	auto test_object = new TestObject{};
+	auto test_panel = new TestPanel{};
+	auto test_interface = new ie::Interface{test_object};
 
 
-	testInterface->getPanelManager()->displayPanel(testPanel);
+	test_interface->get_panel_manager()->display_panel(test_panel);
 
-    Program testProgram{
-		testInterface,
+    Program test_program{
+		test_interface,
         {1, 1}
     };
 
-	ASSERT_GT(testObject->getProcessed().draw, 0);
+	ASSERT_GT(test_object->get_processed().draw, 0);
 
-	ASSERT_GT(testPanel->getProcessed().draw, 0);
+	ASSERT_GT(test_panel->get_processed().draw, 0);
 
-	ASSERT_GT(testPanel->getProcessed().draw, testObject->getProcessed().draw);
+	ASSERT_GT(test_panel->get_processed().draw, test_object->get_processed().draw);
 }
 
 TEST(Interface, init) {
-	auto testObject = new TestObject;
-	auto testPanel = new TestPanel{};
-	auto testInterface = new ie::Interface{testObject};
+	auto test_object = new TestObject;
+	auto test_panel = new TestPanel{};
+	auto test_interface = new ie::Interface{test_object};
 
 
-	testInterface->getPanelManager()->displayPanel(testPanel);
+	test_interface->get_panel_manager()->display_panel(test_panel);
 
-	Program testProgram{
-		testInterface,
+	Program test_program{
+		test_interface,
 		{1, 1}
 	};
 
-	ASSERT_GT(testObject->getProcessed().init.time, 0);
+	ASSERT_GT(test_object->get_processed().init.time, 0);
 
-	ASSERT_EQ(testInterface->getRenderTarget(), testObject->getProcessed().init.renderTarget);
-	ASSERT_EQ(testInterface->getDrawManager(), testObject->getProcessed().init.drawManager);
-	ASSERT_EQ(testInterface->getUpdateManager(), testObject->getProcessed().init.updateManager);
-	ASSERT_EQ(testInterface->getInteractionStack(), testObject->getProcessed().init.interactionStack);
-	ASSERT_EQ(testInterface->getInteractionManager(), testObject->getProcessed().init.interactionManager);
-	ASSERT_EQ(testInterface->getPanelManager(), testObject->getProcessed().init.panelManager);
+	ASSERT_EQ(test_interface->get_render_target(), test_object->get_processed().init.render_target);
+	ASSERT_EQ(test_interface->get_draw_manager(), test_object->get_processed().init.draw_manager);
+	ASSERT_EQ(test_interface->get_update_manager(), test_object->get_processed().init.update_manager);
+	ASSERT_EQ(test_interface->get_interaction_stack(), test_object->get_processed().init.interaction_stack);
+	ASSERT_EQ(test_interface->get_interaction_manager(), test_object->get_processed().init.interaction_manager);
+	ASSERT_EQ(test_interface->get_panel_manager(), test_object->get_processed().init.panel_manager);
 }
 
 TEST(Interface, resize) {
-    auto fullColor = new ie::FullColor{sf::Color::Red};
-    ie::Interface interface{fullColor};
+    auto full_color = new ie::FullColor{sf::Color::Red};
+    ie::Interface interface{full_color};
     interface.resize({10, 10}, {5, 5});
 
-    ASSERT_TRUE((fullColor->getSize() == sf::Vector2f{10, 10}));
-    ASSERT_TRUE((fullColor->getPosition() == sf::Vector2f{5, 5}));
+    ASSERT_TRUE((full_color->get_size() == sf::Vector2f{10, 10}));
+    ASSERT_TRUE((full_color->get_position() == sf::Vector2f{5, 5}));
 }
 
-TEST(Interface, setSize) {
-    auto fullColor = new ie::FullColor{sf::Color::Red};
-    ie::Interface interface{fullColor};
-    interface.setSize({10, 10});
+TEST(Interface, set_size) {
+    auto full_color = new ie::FullColor{sf::Color::Red};
+    ie::Interface interface{full_color};
+    interface.set_size({10, 10});
 
-    ASSERT_TRUE((fullColor->getSize() == sf::Vector2f{10, 10}));
-	ASSERT_TRUE((interface.getSize() == sf::Vector2f{10, 10}));
+    ASSERT_TRUE((full_color->get_size() == sf::Vector2f{10, 10}));
+	ASSERT_TRUE((interface.get_size() == sf::Vector2f{10, 10}));
 }
 
-TEST(Interface, setPosition) {
-    auto fullColor = new ie::FullColor{sf::Color::Red};
-    ie::Interface interface{fullColor};
-    interface.setPosition({5, 5});
+TEST(Interface, set_position) {
+    auto full_color = new ie::FullColor{sf::Color::Red};
+    ie::Interface interface{full_color};
+    interface.set_position({5, 5});
 
-    ASSERT_TRUE((fullColor->getPosition() == sf::Vector2f{5, 5}));
-	ASSERT_TRUE((interface.getPosition() == sf::Vector2f{5, 5}));
+    ASSERT_TRUE((full_color->get_position() == sf::Vector2f{5, 5}));
+	ASSERT_TRUE((interface.get_position() == sf::Vector2f{5, 5}));
 }
 
 TEST(Interface, move) {
-	auto fullColor = new ie::FullColor{sf::Color::Red};
-	ie::Interface interface{fullColor};
-	interface.setPosition({5, 5});
+	auto full_color = new ie::FullColor{sf::Color::Red};
+	ie::Interface interface{full_color};
+	interface.set_position({5, 5});
 
-	ASSERT_TRUE((fullColor->getPosition() == sf::Vector2f{5, 5}));
-	ASSERT_TRUE((interface.getPosition() == sf::Vector2f{5, 5}));
+	ASSERT_TRUE((full_color->get_position() == sf::Vector2f{5, 5}));
+	ASSERT_TRUE((interface.get_position() == sf::Vector2f{5, 5}));
 }
 
 
-TEST(Interface, minSize) {
+TEST(Interface, min_size) {
 	ie::Interface interface{new TestObject{{10, 10}}};
-	ASSERT_TRUE((interface.getMinSize() == sf::Vector2f{ 10, 10 }));
+	ASSERT_TRUE((interface.get_min_size() == sf::Vector2f{ 10, 10 }));
 }
 
-TEST(Interface, normalSize) {
+TEST(Interface, normal_size) {
 	ie::Interface interface{new TestObject{{10, 10}, {20, 20}}};
-	ASSERT_TRUE((interface.getNormalSize() == sf::Vector2f{20, 20}));
+	ASSERT_TRUE((interface.get_normal_size() == sf::Vector2f{20, 20}));
 }
 
 TEST(Interface, copy) {
-	auto testObject = new TestObject;
+	auto test_object = new TestObject;
 
-	Program testProgram{
+	Program test_program{
 		new ie::Interface{
-			testObject
+			test_object
 		},
 		{1, 1}
 	};
 
-	ie::Interface interfaceCopy = *testProgram.interface->copy();
+	ie::Interface interface_copy = *test_program.interface->copy();
 
-	ASSERT_GT(testObject->getProcessed().copy, 0);
+	ASSERT_GT(test_object->get_processed().copy, 0);
 
-	ASSERT_EQ(interfaceCopy.getNormalSize(), testProgram.interface->getNormalSize());
-	ASSERT_EQ(interfaceCopy.getAreaPosition(), testProgram.interface->getAreaPosition());
-	ASSERT_EQ(interfaceCopy.getAreaSize(), testProgram.interface->getAreaSize());
-	ASSERT_EQ(interfaceCopy.getMinSize(), testProgram.interface->getMinSize());
-	ASSERT_EQ(interfaceCopy.getPosition(), testProgram.interface->getPosition());
-	ASSERT_EQ(interfaceCopy.getSize(), testProgram.interface->getSize());
-	ASSERT_EQ(interfaceCopy.getRenderTarget(), testProgram.interface->getRenderTarget());
-	ASSERT_EQ(interfaceCopy.getInteractionStack(), testProgram.interface->getInteractionStack());
+	ASSERT_EQ(interface_copy.get_normal_size(), test_program.interface->get_normal_size());
+	ASSERT_EQ(interface_copy.get_area_position(), test_program.interface->get_area_position());
+	ASSERT_EQ(interface_copy.get_area_size(), test_program.interface->get_area_size());
+	ASSERT_EQ(interface_copy.get_min_size(), test_program.interface->get_min_size());
+	ASSERT_EQ(interface_copy.get_position(), test_program.interface->get_position());
+	ASSERT_EQ(interface_copy.get_size(), test_program.interface->get_size());
+	ASSERT_EQ(interface_copy.get_render_target(), test_program.interface->get_render_target());
+	ASSERT_EQ(interface_copy.get_interaction_stack(), test_program.interface->get_interaction_stack());
 }

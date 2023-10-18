@@ -5,30 +5,30 @@ namespace ie {
 	SliderInteraction::Make::Make(
 		Key key,
 		sf::Vector2i division,
-		bool wheelHorizontal,
-		SliderWheelAction::Relativity wheelRelativity,
-		sf::Vector2f wheelSensitivity
+		bool wheel_horizontal,
+		SliderWheelAction::Relativity wheel_relativity,
+		sf::Vector2f wheel_sensitivity
 	) :
-		key(key), division(division), wheelHorizontal(wheelHorizontal), wheelRelativity(wheelRelativity), wheelSensitivity(wheelSensitivity) {
+		key(key), division(division), wheel_horizontal(wheel_horizontal), wheel_relativity(wheel_relativity), wheel_sensitivity(wheel_sensitivity) {
 	}
 	
-	SliderInteraction::Make::Make(Key key, bool wheelHorizontal, SliderWheelAction::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
-		key(key), division(), wheelHorizontal(wheelHorizontal), wheelRelativity(wheelRelativity), wheelSensitivity(wheelSensitivity) {
+	SliderInteraction::Make::Make(Key key, bool wheel_horizontal, SliderWheelAction::Relativity wheel_relativity, sf::Vector2f wheel_sensitivity) :
+		key(key), division(), wheel_horizontal(wheel_horizontal), wheel_relativity(wheel_relativity), wheel_sensitivity(wheel_sensitivity) {
 	}
 	
-	SliderInteraction::Make::Make(Key key, sf::Vector2i division, bool wheelHorizontal) :
+	SliderInteraction::Make::Make(Key key, sf::Vector2i division, bool wheel_horizontal) :
 		key(key),
 		division(division),
-		wheelHorizontal(wheelHorizontal),
-		wheelRelativity(SliderWheelAction::Relativity::RelationArea),
-		wheelSensitivity({1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}) {
+		wheel_horizontal(wheel_horizontal),
+		wheel_relativity(SliderWheelAction::Relativity::RelationArea),
+		wheel_sensitivity({1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}) {
 	}
 	
-	SliderInteraction* SliderInteraction::Make::make(BasicActionInitInfo<BaseSlider&> initInfo) {
-		return new SliderInteraction{std::move(*this), initInfo};
+	SliderInteraction* SliderInteraction::Make::make(BasicActionInitInfo<BaseSlider&> init_info) {
+		return new SliderInteraction{std::move(*this), init_info};
 	}
 	
-	SliderInteraction::SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> initInfo) :
+	SliderInteraction::SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info) :
 		BasicOneKeyInteraction<BaseSlider&>(
 			{
 				make_box_ptr<BasicAddBlockInteractionAction<BaseSlider&>::Make>(
@@ -36,17 +36,17 @@ namespace ie {
 						make_box_ptr<SliderAction::Make>(make.division), make.key
 					)
 				), make.key
-			}, initInfo
+			}, init_info
 		),
-		wheelAction({make.wheelHorizontal, make.wheelRelativity, make.wheelSensitivity}, initInfo) {
+		wheel_action({make.wheel_horizontal, make.wheel_relativity, make.wheel_sensitivity}, init_info) {
 	}
 	
 	SliderInteraction::SliderInteraction(
 		Key key,
 		sf::Vector2i division,
-		bool wheelHorizontal,
-		SliderWheelAction::Relativity wheelRelativity,
-		sf::Vector2f wheelSensitivity
+		bool wheel_horizontal,
+		SliderWheelAction::Relativity wheel_relativity,
+		sf::Vector2f wheel_sensitivity
 	) :
 		BasicOneKeyInteraction<BaseSlider&>(
 			make_box_ptr<BasicAddBlockInteractionAction<BaseSlider&> >(
@@ -55,33 +55,33 @@ namespace ie {
 				)
 			), key
 		),
-		wheelAction(wheelHorizontal, wheelRelativity, wheelSensitivity) {
+		wheel_action(wheel_horizontal, wheel_relativity, wheel_sensitivity) {
 	}
 	
-	SliderInteraction::SliderInteraction(Key key, bool wheelHorizontal, SliderWheelAction::Relativity wheelRelativity, sf::Vector2f wheelSensitivity) :
-		SliderInteraction(key, {}, wheelHorizontal, wheelRelativity, wheelSensitivity) {
+	SliderInteraction::SliderInteraction(Key key, bool wheel_horizontal, SliderWheelAction::Relativity wheel_relativity, sf::Vector2f wheel_sensitivity) :
+		SliderInteraction(key, {}, wheel_horizontal, wheel_relativity, wheel_sensitivity) {
 	}
 	
-	SliderInteraction::SliderInteraction(Key key, sf::Vector2i division, bool wheelHorizontal) :
+	SliderInteraction::SliderInteraction(Key key, sf::Vector2i division, bool wheel_horizontal) :
 		SliderInteraction(
 			key,
 			division,
-			wheelHorizontal,
+			wheel_horizontal,
 			SliderWheelAction::Relativity::RelationArea,
 			{1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}
 		) {
 	}
 	
-	void SliderInteraction::setSlider(BaseSlider& slider) {
-		auto& slideAction{dynamic_cast<BasicAddBlockInteractionAction<BaseSlider&>&>(*action)};
-		auto& slideInteraction{dynamic_cast<BasicPressedInteraction<BaseSlider&>&>(slideAction.getInteraction())};
-		dynamic_cast<SliderAction&>(slideInteraction.getAction()).setSlider(slider);
-		wheelAction.setSlider(slider);
+	void SliderInteraction::set_slider(BaseSlider& slider) {
+		auto& slide_action{dynamic_cast<BasicAddBlockInteractionAction<BaseSlider&>&>(*action)};
+		auto& slide_interaction{dynamic_cast<BasicPressedInteraction<BaseSlider&>&>(slide_action.get_interaction())};
+		dynamic_cast<SliderAction&>(slide_interaction.get_action()).set_slider(slider);
+		wheel_action.set_slider(slider);
 	}
 	
-	void SliderInteraction::update(sf::Vector2i mousePosition) {
-		wheelAction.update(mousePosition, MouseWheel::getDelta().y);
-		return BasicOneKeyInteraction<BaseSlider&>::update(mousePosition);
+	void SliderInteraction::update(sf::Vector2i mouse_position) {
+		wheel_action.update(mouse_position, MouseWheel::get_delta().y);
+		return BasicOneKeyInteraction<BaseSlider&>::update(mouse_position);
 	}
 	
 	SliderInteraction* SliderInteraction::copy() {

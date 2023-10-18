@@ -1,42 +1,42 @@
 #include <gtest/gtest.h>
-#include "IE/Animation/variables/base/animationVariable.hpp"
-#include "IE/../../test/testsObjects/testConvertToUse/testConvertToUse.hpp"
+#include "IE/Animation/variables/base/animation_variable.hpp"
+#include "IE/../../test/tests_objects/test_convert_to_use/test_convert_to_use.hpp"
 
 TEST(AnimationVariable, get_set) {
-	TestConvertToUse *testConvertToUse{new TestConvertToUse{5}};
-	ie::AnimationVariable animationVariable{0.5f, testConvertToUse};
+	TestConvertToUse *test_convert_to_use{new TestConvertToUse{5}};
+	ie::AnimationVariable animation_variable{0.5f, test_convert_to_use};
 
-	ASSERT_EQ(animationVariable.get(), 0.5);
+	ASSERT_EQ(animation_variable.get(), 0.5);
 
-	animationVariable.set(3);
-	ASSERT_EQ(animationVariable.get(), 3);
+	animation_variable.set(3);
+	ASSERT_EQ(animation_variable.get(), 3);
 
-	animationVariable = 5;
-	ASSERT_EQ(animationVariable.get(), 5);
+	animation_variable = 5;
+	ASSERT_EQ(animation_variable.get(), 5);
 }
 
-TEST(AnimationVariable, addAnimationSetter_valueFromAnimation) {
-	TestConvertToUse *testConvertToUse1{new TestConvertToUse{3}};
-	ie::AnimationVariable animationVariable1{0.5f, testConvertToUse1};
+TEST(AnimationVariable, add_animation_setter_value_from_animation) {
+	TestConvertToUse *test_convert_to_use1{new TestConvertToUse{3}};
+	ie::AnimationVariable animation_variable1{0.5f, test_convert_to_use1};
 
-	animationVariable1.addAnimationSetter([&](float value){
+	animation_variable1.add_animation_setter([&](float value){
 		ASSERT_EQ(value, 3);
 	});
 
-	animationVariable1.valueFromAnimation(2);
-	ASSERT_EQ(testConvertToUse1->getProcessed().convert[0].value, 2);
-	ASSERT_EQ(animationVariable1.get(), 3);
+	animation_variable1.value_from_animation(2);
+	ASSERT_EQ(test_convert_to_use1->get_processed().convert[0].value, 2);
+	ASSERT_EQ(animation_variable1.get(), 3);
 
 
-	TestConvertToUse *testConvertToUse2{new TestConvertToUse{5}};
-	ie::AnimationVariable animationVariable2{0.5f, testConvertToUse2, false};
+	TestConvertToUse *test_convert_to_use2{new TestConvertToUse{5}};
+	ie::AnimationVariable animation_variable2{0.5f, test_convert_to_use2, false};
 
-	animationVariable2.addAnimationSetter([&](float value){
+	animation_variable2.add_animation_setter([&](float value){
 		ASSERT_EQ(value, 5);
 	});
 
-	animationVariable2.valueFromAnimation(4);
-	ASSERT_EQ(testConvertToUse2->getProcessed().convert[0].value, 4);
-	ASSERT_EQ(animationVariable2.get(), 0.5);
+	animation_variable2.value_from_animation(4);
+	ASSERT_EQ(test_convert_to_use2->get_processed().convert[0].value, 4);
+	ASSERT_EQ(animation_variable2.get(), 0.5);
 
 }

@@ -8,12 +8,12 @@ namespace ie {
 	public:
 		ISVector2() = default;
 		
-		virtual PIShared getXPtr() const = 0;
+		virtual PIShared get_x_ptr() const = 0;
 		
-		virtual void setXPtr(PIShared value) = 0;
+		virtual void set_x_ptr(PIShared value) = 0;
 		
-		virtual PIShared getYPtr() const = 0;
+		virtual PIShared get_y_ptr() const = 0;
 		
-		virtual void setYPtr(PIShared value) = 0;
+		virtual void set_y_ptr(PIShared value) = 0;
 	};
 }

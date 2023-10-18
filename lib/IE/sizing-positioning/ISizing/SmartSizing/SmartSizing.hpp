@@ -6,35 +6,35 @@ namespace ie {
 	class SmartSizing : public virtual ISizing {
 	public:
 		struct Make : public virtual ISizing::Make {
-			float targetCoefficient = 1;
-			float parentCoefficient = 0;
+			float target_coefficient = 1;
+			float parent_coefficient = 0;
 			float addition = 0;
 			
-			Make(float targetCoefficient = 1, float parentCoefficient = 0, float addition = 0);
+			Make(float target_coefficient = 1, float parent_coefficient = 0, float addition = 0);
 			
-			SmartSizing* make(float normalSize) override;
+			SmartSizing* make(float normal_size) override;
 		};
 		
-		SmartSizing(Make&& make, float normalSize);
+		SmartSizing(Make&& make, float normal_size);
 		
-		explicit SmartSizing(float targetCoefficient = 1, float parentCoefficient = 0, float addition = 0);
+		explicit SmartSizing(float target_coefficient = 1, float parent_coefficient = 0, float addition = 0);
 		
 		void init(float) override;
 		
-		float findSize(float parentSize, float targetSize) override;
+		float find_size(float parent_size, float target_size) override;
 		
-		float getParentSize(float objectSize) override;
+		float get_parent_size(float object_size) override;
 		
 		SmartSizing* copy() override;
 	
 	protected:
-		float targetCoefficient;
-		float parentCoefficient;
+		float target_coefficient;
+		float parent_coefficient;
 		float addition;
 	};
 	
 	template<>
 	struct DecodePointer<SmartSizing> {
-		static bool decodePointer(const YAML::Node& node, SmartSizing*& smartSizing);
+		static bool decode_pointer(const YAML::Node& node, SmartSizing*& smart_sizing);
 	};
 }

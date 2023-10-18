@@ -16,12 +16,12 @@ namespace ie {
 		virtual ~AnimationManager();
 	
 	protected:
-		uint64_t startManager;
+		uint64_t start_manager;
 		std::vector<Animator*> animators;
 	};
 	
 	template<>
 	struct Decode<AnimationManager> {
-		static bool decode(const YAML::Node& node, AnimationManager& animationManager);
+		static bool decode(const YAML::Node& node, AnimationManager& animation_manager);
 	};
 }

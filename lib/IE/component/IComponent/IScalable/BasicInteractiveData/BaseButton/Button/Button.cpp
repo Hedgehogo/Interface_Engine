@@ -5,21 +5,21 @@ namespace ie {
 		background(std::move(background)), interaction(std::move(interaction)) {
 	}
 	
-	Button* Button::Make::make(InitInfo initInfo) {
-		return new Button{std::move(*this), initInfo};
+	Button* Button::Make::make(InitInfo init_info) {
+		return new Button{std::move(*this), init_info};
 	}
 	
-	Button::Button(Make&& make, InitInfo initInfo) :
-		BaseButton(std::move(make.background), initInfo), interactive(std::move(make.interaction), initInfo, {}) {
+	Button::Button(Make&& make, InitInfo init_info) :
+		BaseButton(std::move(make.background), init_info), interactive(std::move(make.interaction), init_info, {}) {
 	}
 	
 	Button::Button(BoxPtr<IScalable>&& background, BoxPtr<IBaseInteraction>&& interaction) :
 		BaseButton(std::move(background)), interactive(std::move(interaction)) {
 	}
 	
-	void Button::init(InitInfo initInfo) {
-		interactive.init(initInfo, {});
-		BaseButton::init(initInfo);
+	void Button::init(InitInfo init_info) {
+		interactive.init(init_info, {});
+		BaseButton::init(init_info);
 	}
 	
 	Button* Button::copy() {
@@ -30,13 +30,13 @@ namespace ie {
 		interactive.update();
 	}
 	
-	bool Button::updateInteractions(sf::Vector2f mousePosition) {
-		bool result{BaseButton::updateInteractions(mousePosition)};
-		interactive.updateInteractions();
+	bool Button::update_interactions(sf::Vector2f mouse_position) {
+		bool result{BaseButton::update_interactions(mouse_position)};
+		interactive.update_interactions();
 		return result;
 	}
 	
-	bool DecodePointer<Button>::decodePointer(const YAML::Node& node, Button*& button) {
+	bool DecodePointer<Button>::decode_pointer(const YAML::Node& node, Button*& button) {
 		button = new Button{
 			node["background"].as<BoxPtr<IScalable> >(),
 			node["interaction"].as<BoxPtr<IBaseInteraction> >()

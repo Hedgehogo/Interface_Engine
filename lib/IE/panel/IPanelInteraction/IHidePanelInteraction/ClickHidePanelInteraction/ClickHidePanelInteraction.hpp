@@ -8,22 +8,22 @@ namespace ie {
 	public:
 		struct Make : public virtual IHidePanelInteraction::Make {
 			Key key;
-			bool onlyOnParent = false;
+			bool only_on_parent = false;
 			
-			Make(Key key, bool onlyOnParent = false);
+			Make(Key key, bool only_on_parent = false);
 			
-			ClickHidePanelInteraction* make(PanelActionInitInfo initInfo) override;
+			ClickHidePanelInteraction* make(PanelActionInitInfo init_info) override;
 		};
 		
-		ClickHidePanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		ClickHidePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		explicit ClickHidePanelInteraction(Key key, bool onlyOnParent = false);
+		explicit ClickHidePanelInteraction(Key key, bool only_on_parent = false);
 		
 		ClickHidePanelInteraction* copy() override;
 	};
 	
 	template<>
 	struct DecodePointer<ClickHidePanelInteraction> {
-		static bool decodePointer(const YAML::Node& node, ClickHidePanelInteraction*& clickHidePanelInteraction);
+		static bool decode_pointer(const YAML::Node& node, ClickHidePanelInteraction*& click_hide_panel_interaction);
 	};
 }

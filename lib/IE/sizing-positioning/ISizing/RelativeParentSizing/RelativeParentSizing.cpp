@@ -4,8 +4,8 @@ namespace ie {
 	RelativeParentSizing::Make::Make(float addition) : addition(addition) {
 	}
 	
-	RelativeParentSizing* RelativeParentSizing::Make::make(float normalSize) {
-		return new RelativeParentSizing{std::move(*this), normalSize};
+	RelativeParentSizing* RelativeParentSizing::Make::make(float normal_size) {
+		return new RelativeParentSizing{std::move(*this), normal_size};
 	}
 	
 	RelativeParentSizing::RelativeParentSizing(Make&& make, float) :
@@ -18,20 +18,20 @@ namespace ie {
 	void RelativeParentSizing::init(float) {
 	}
 	
-	float RelativeParentSizing::findSize(float parentSize, float) {
-		return parentSize + addition;
+	float RelativeParentSizing::find_size(float parent_size, float) {
+		return parent_size + addition;
 	}
 	
-	float RelativeParentSizing::getParentSize(float objectSize) {
-		return objectSize - addition;
+	float RelativeParentSizing::get_parent_size(float object_size) {
+		return object_size - addition;
 	}
 	
 	RelativeParentSizing* RelativeParentSizing::copy() {
 		return new RelativeParentSizing{*this};
 	}
 	
-	bool DecodePointer<RelativeParentSizing>::decodePointer(const YAML::Node& node, RelativeParentSizing*& relativeParentSizing) {
-		relativeParentSizing = new RelativeParentSizing{node["addition"].as<float>()};
+	bool DecodePointer<RelativeParentSizing>::decode_pointer(const YAML::Node& node, RelativeParentSizing*& relative_parent_sizing) {
+		relative_parent_sizing = new RelativeParentSizing{node["addition"].as<float>()};
 		return true;
 	}
 }

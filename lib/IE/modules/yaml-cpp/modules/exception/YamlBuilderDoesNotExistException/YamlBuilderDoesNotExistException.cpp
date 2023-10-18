@@ -1,6 +1,6 @@
 #include "YamlBuilderDoesNotExistException.hpp"
 
 namespace ie {
-	YamlBuilderDoesNotExistException::YamlBuilderDoesNotExistException(const std::string& yamlBuilderName) :
-		BaseException("BaseYamlBuilder: '" + yamlBuilderName + "' does not exist, but was requested by the module") {}
+	YamlBuilderDoesNotExistException::YamlBuilderDoesNotExistException(const std::string& yaml_builder_name) :
+		BaseException("BaseYamlBuilder: '" + yaml_builder_name + "' does not exist, but was requested by the module") {}
 }

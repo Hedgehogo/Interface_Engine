@@ -7,8 +7,8 @@
 #include "../../yaml.hpp"
 
 namespace ie {
-	size_t write_data(void* ptr, std::size_t size, std::size_t nMemB, void* stream) {
-		size_t written = fwrite(ptr, size, nMemB, (FILE*)stream);
+	size_t write_data(void* ptr, std::size_t size, std::size_t nMem_b, void* stream) {
+		size_t written = fwrite(ptr, size, nMem_b, (FILE*)stream);
 		return written;
 	}
 	
@@ -41,14 +41,14 @@ namespace ie {
 	}
 	
 	void load_c_modules(const YAML::Node& libs, int argc, char* argv[0]) {
-		std::string libDir = convDef<std::string>(libs["lib-dir"], "./");
+		std::string lib_dir = conv_def<std::string>(libs["lib-dir"], "./");
 		
 		if(YAML::Node cLibs{libs["CLib"]}) {
-			std::string cLibDir{libDir + convDef<std::string>(cLibs["lib-dir"], "./")};
+			std::string cLib_dir{lib_dir + conv_def<std::string>(cLibs["lib-dir"], "./")};
 			
 			if(auto paths = cLibs["path"]; paths) {
 				for(const auto& path: paths) {
-					open_lib::DynamicLibrary dl{cLibDir + path.as<std::string>()};
+					open_lib::DynamicLibrary dl{cLib_dir + path.as<std::string>()};
 					dl.get_sim <void(*)(int argc, char * argv[])>("init")(argc, argv);
 				}
 			}
@@ -75,7 +75,7 @@ namespace ie {
 						pos += 2;
 					}
 					
-					name = cLibDir + name;
+					name = cLib_dir + name;
 					
 					if(!std::filesystem::exists(name)) {
 						download_file(url, name);

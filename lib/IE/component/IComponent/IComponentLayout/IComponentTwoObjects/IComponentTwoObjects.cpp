@@ -1,17 +1,17 @@
 #include "IComponentTwoObjects.hpp"
 
 namespace ie {
-	sf::Vector2f IComponentTwoObjects::getMinSize() const {
-		return max(getFirstObject().getMinSize(), getSecondObject().getMinSize());
+	sf::Vector2f IComponentTwoObjects::get_min_size() const {
+		return max(get_first_object().get_min_size(), get_second_object().get_min_size());
 	}
 	
-	sf::Vector2f IComponentTwoObjects::getNormalSize() const {
-		return max(getFirstObject().getNormalSize(), getSecondObject().getNormalSize());
+	sf::Vector2f IComponentTwoObjects::get_normal_size() const {
+		return max(get_first_object().get_normal_size(), get_second_object().get_normal_size());
 	}
 	
-	void IComponentTwoObjects::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-		IComponent::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		getFirstObject().drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
-		getSecondObject().drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+	void IComponentTwoObjects::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+		get_first_object().draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
+		get_second_object().draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
 }

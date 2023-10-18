@@ -10,9 +10,9 @@ namespace ie {
 		
 		virtual ~IPositioning() = default;
 		
-		virtual float findPosition(float parentPosition, float objectSize, float parentSize, float targetSize) = 0;
+		virtual float find_position(float parent_position, float object_size, float parent_size, float target_size) = 0;
 		
-		float operator()(float parentPosition, float objectSize, float parentSize, float targetSize);
+		float operator()(float parent_position, float object_size, float parent_size, float target_size);
 		
 		virtual IPositioning* copy() = 0;
 	};

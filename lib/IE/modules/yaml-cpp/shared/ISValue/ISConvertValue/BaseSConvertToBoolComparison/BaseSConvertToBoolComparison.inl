@@ -1,12 +1,12 @@
-//included into baseComparison.hpp
+//included into base_comparison.hpp
 
 namespace ie {
 	template<typename T>
-	BaseSConvertToBoolComparison<T>::BaseSConvertToBoolComparison(PISValue<T> fromValue, bool defaultValue, T compared) : SConvertToBool<T>(fromValue, defaultValue), compared(compared) {
+	BaseSConvertToBoolComparison<T>::BaseSConvertToBoolComparison(PISValue<T> from_value, bool default_value, T compared) : SConvertToBool<T>(from_value, default_value), compared(compared) {
 	}
 	
 	template<typename T>
-	bool BaseSConvertToBoolComparison<T>::convert(T fromValue) {
-		return convert(fromValue, compared);
+	bool BaseSConvertToBoolComparison<T>::convert(T from_value) {
+		return convert(from_value, compared);
 	}
 }

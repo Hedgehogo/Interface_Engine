@@ -9,53 +9,53 @@ public:
 	struct Processed {
 		struct Init {
 			uint64_t time{0};
-			sf::RenderTarget *renderTarget;
-			ie::DrawManager *drawManager;
-			ie::UpdateManager *updateManager;
-			ie::InteractionManager *interactionManager;
-			ie::InteractionStack *interactionStack;
-			ie::IPanelManager *panelManager;
+			sf::RenderTarget *render_target;
+			ie::DrawManager *draw_manager;
+			ie::UpdateManager *update_manager;
+			ie::InteractionManager *interaction_manager;
+			ie::InteractionStack *interaction_stack;
+			ie::IPanelManager *panel_manager;
 		} init;
 		
 		uint64_t update{0};
 
 		struct UpdateInteractions {
 			uint64_t time{0};
-			sf::Vector2f mousePosition{0, 0};
-		} updateInteractions{};
+			sf::Vector2f mouse_position{0, 0};
+		} update_interactions{};
 		
 		uint64_t draw{0};
 		uint64_t copy{0};
-		uint64_t drawDebug{0};
+		uint64_t draw_debug{0};
 	};
 	
 	struct Make : public ie::IScalable::Make, public ie::ILayout::Make {
-		sf::Vector2f minSize = {};
-		sf::Vector2f normalSize = {100, 100};
-		bool updateInteractionsResult = true;
+		sf::Vector2f min_size = {};
+		sf::Vector2f normal_size = {100, 100};
+		bool update_interactions_result = true;
 		
-		Make(sf::Vector2f minSize = {}, sf::Vector2f normalSize = {100, 100}, bool updateInteractionsResult = true);
+		Make(sf::Vector2f min_size = {}, sf::Vector2f normal_size = {100, 100}, bool update_interactions_result = true);
 		
-		TestObject* make(ie::InitInfo initInfo) override;
+		TestObject* make(ie::InitInfo init_info) override;
 	};
 	
-	TestObject(Make&& make, ie::InitInfo initInfo);
+	TestObject(Make&& make, ie::InitInfo init_info);
 	
-	TestObject(sf::Vector2f minSize = {0, 0}, sf::Vector2f normalSize = {100, 100}, bool updateInteractionsResult = true);
+	TestObject(sf::Vector2f min_size = {0, 0}, sf::Vector2f normal_size = {100, 100}, bool update_interactions_result = true);
 
-	void init(ie::InitInfo initInfo) override;
+	void init(ie::InitInfo init_info) override;
 
-	Processed getProcessed();
+	Processed get_processed();
 
-	sf::Vector2f getMinSize() const override;
+	sf::Vector2f get_min_size() const override;
 
-	sf::Vector2f getNormalSize() const override;
+	sf::Vector2f get_normal_size() const override;
 	
-	ie::LayoutData& getLayoutData() override;
+	ie::LayoutData& get_layout_data() override;
 	
-	const ie::LayoutData& getLayoutData() const override;
+	const ie::LayoutData& get_layout_data() const override;
 
-	bool updateInteractions(sf::Vector2f mousePosition) override;
+	bool update_interactions(sf::Vector2f mouse_position) override;
 
 	void draw() override;
 
@@ -63,12 +63,12 @@ public:
 
 	TestObject *copy() override;
 
-	void drawDebug(sf::RenderTarget &renderTarget, int indent, int indentAddition, uint hue = 0, uint hueOffset = 36) override;
+	void draw_debug(sf::RenderTarget &render_target, int indent, int indent_addition, uint hue = 0, uint hue_offset = 36) override;
 
 protected:
-	ie::LayoutData layoutData;
+	ie::LayoutData layout_data;
 	Processed processed;
-	bool updateInteractionsResult;
-	sf::Vector2f minSize = {0, 0};
-	sf::Vector2f normalSize = {100, 100};
+	bool update_interactions_result;
+	sf::Vector2f min_size = {0, 0};
+	sf::Vector2f normal_size = {100, 100};
 };

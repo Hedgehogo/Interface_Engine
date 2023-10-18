@@ -2,23 +2,23 @@
 
 namespace ie {
 	TextVariables::TextVariables(
-		orl::Option<sf::Color> textColor,
-		orl::Option<sf::Color> textSelectionColor,
-		orl::Option<sf::Color> backgroundSelectionColor,
-		orl::Option<sf::Color> inactiveTextSelectionColor,
-		orl::Option<sf::Color> inactiveBackgroundSelectionColor,
+		orl::Option<sf::Color> text_color,
+		orl::Option<sf::Color> text_selection_color,
+		orl::Option<sf::Color> background_selection_color,
+		orl::Option<sf::Color> inactive_text_selection_color,
+		orl::Option<sf::Color> inactive_background_selection_color,
 		orl::Option<sf::Font*> font,
 		orl::Option<sf::Text::Style> style,
 		orl::Option<uint> size
 	) :
-		textColor(textColor),
-		textSelectionColor(textSelectionColor),
-		backgroundSelectionColor(backgroundSelectionColor),
-		inactiveTextSelectionColor(inactiveTextSelectionColor),
-		inactiveBackgroundSelectionColor(inactiveBackgroundSelectionColor),
+		text_color(text_color),
+		text_selection_color(text_selection_color),
+		background_selection_color(background_selection_color),
+		inactive_text_selection_color(inactive_text_selection_color),
+		inactive_background_selection_color(inactive_background_selection_color),
 		size(size),
 		font(font),
-		fontLineSpace(font && size ? orl::Option{font.some()->getLineSpacing(this->size.some())} : orl::Option<float>{}),
+		font_line_space(font && size ? orl::Option{font.some()->getLineSpacing(this->size.some())} : orl::Option<float>{}),
 		style(style) {
 	}
 }

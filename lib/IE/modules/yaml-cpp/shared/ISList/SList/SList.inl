@@ -1,4 +1,4 @@
-//included into withList.hpp
+//included into with_list.hpp
 
 namespace ie {
 	template<typename T>
@@ -16,42 +16,42 @@ namespace ie {
 	template<typename T>
 	void SList<T>::set() {
 		for(const auto& setter: setters)
-			setter(getValue());
+			setter(get_value());
 	}
 	
 	template<typename T>
-	PIShared SList<T>::getElementPtr(std::size_t index) const {
+	PIShared SList<T>::get_element_ptr(std::size_t index) const {
 		return std::dynamic_pointer_cast<IShared>(list[index]);
 	}
 	
 	template<typename T>
-	void SList<T>::setElementPtr(std::size_t index, PIShared value) {
+	void SList<T>::set_element_ptr(std::size_t index, PIShared value) {
 		list[index] = std::dynamic_pointer_cast<T>(value);
 		set();
 	}
 	
 	template<typename T>
-	typename SList<T>::V SList<T>::getElement(std::size_t index) const {
-		return list[index]->getValue();
+	typename SList<T>::V SList<T>::get_element(std::size_t index) const {
+		return list[index]->get_value();
 	}
 	
 	template<typename T>
-	void SList<T>::setElement(std::size_t index, const typename SList<T>::V& value) {
-		list[index]->setValue(value);
+	void SList<T>::set_element(std::size_t index, const typename SList<T>::V& value) {
+		list[index]->set_value(value);
 		set();
 	}
 	
 	template<typename T>
-	std::vector<typename SList<T>::V> SList<T>::getValue() const {
+	std::vector<typename SList<T>::V> SList<T>::get_value() const {
 		std::vector<typename SList<T>::V> result{list.size()};
 		for(int i = 0; i < list.size(); ++i) {
-			this->result[i] = getElement(i);
+			this->result[i] = get_element(i);
 		}
 		return result;
 	}
 	
 	template<typename T>
-	void SList<T>::setValue(const std::vector<typename SList<T>::V>& list) {
+	void SList<T>::set_value(const std::vector<typename SList<T>::V>& list) {
 		this->list.resize(list.size());
 		for(int i = 0; i < list.size(); ++i) {
 			this->list[i] = std::make_shared<T>(list[i]);
@@ -60,19 +60,19 @@ namespace ie {
 	}
 	
 	template<typename T>
-	bool DecodePointer<SList<T> >::decodePointer(const YAML::Node& node, SList<T>*& withList) {
+	bool DecodePointer<SList<T> >::decode_pointer(const YAML::Node& node, SList<T>*& with_list) {
 		if(node["list"]) {
 			std::vector<typename SList<T>::V> list{node["list"].size()};
 			for(int i = 0; i < list.size(); ++i) {
 				node["list"][i] >> list[i];
 			}
-			withList = new SList <T>{list};
+			with_list = new SList <T>{list};
 		} else {
 			std::vector<std::shared_ptr<T> > list{node["vars"].size()};
 			for(int i = 0; i < list.size(); ++i) {
-				list[i] = getSValue<T>(node["vars"][i]);
+				list[i] = get_s_value<T>(node["vars"][i]);
 			}
-			withList = new SList <T>{list};
+			with_list = new SList <T>{list};
 		}
 		return true;
 	}

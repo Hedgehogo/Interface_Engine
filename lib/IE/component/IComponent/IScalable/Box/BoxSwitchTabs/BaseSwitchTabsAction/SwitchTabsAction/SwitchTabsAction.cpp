@@ -5,41 +5,41 @@ namespace ie {
 	SwitchTabsAction::Make::Make(uint index) : index(index) {
 	}
 	
-	SwitchTabsAction* SwitchTabsAction::Make::make(BasicActionInitInfo<BoxSwitchTabs&> initInfo) {
-		return new SwitchTabsAction{std::move(*this), initInfo};
+	SwitchTabsAction* SwitchTabsAction::Make::make(BasicActionInitInfo<BoxSwitchTabs&> init_info) {
+		return new SwitchTabsAction{std::move(*this), init_info};
 	}
 	
-	SwitchTabsAction::SwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> initInfo) :
-		BaseSwitchTabsAction(initInfo), index(make.index), value(box->getValue()) {
+	SwitchTabsAction::SwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> init_info) :
+		BaseSwitchTabsAction(init_info), index(make.index), value(box->get_value()) {
 	}
 	
 	SwitchTabsAction::SwitchTabsAction(uint index) : index(index), value(nullptr) {
 	}
 	
-	void SwitchTabsAction::init(BasicActionInitInfo<BoxSwitchTabs&> initInfo) {
-		BaseSwitchTabsAction::init(initInfo);
-		value = box->getValue();
+	void SwitchTabsAction::init(BasicActionInitInfo<BoxSwitchTabs&> init_info) {
+		BaseSwitchTabsAction::init(init_info);
+		value = box->get_value();
 	}
 	
-	void SwitchTabsAction::startPressed() {
+	void SwitchTabsAction::start_pressed() {
 	}
 	
-	void SwitchTabsAction::stopPressed() {
-		value->setValue(index);
+	void SwitchTabsAction::stop_pressed() {
+		value->set_value(index);
 	}
 	
-	void SwitchTabsAction::whilePressed() {
+	void SwitchTabsAction::while_pressed() {
 	}
 	
-	void SwitchTabsAction::whileNotPressed() {
+	void SwitchTabsAction::while_not_pressed() {
 	}
 	
 	SwitchTabsAction* SwitchTabsAction::copy() {
 		return new SwitchTabsAction{*this};
 	}
 	
-	bool DecodePointer<SwitchTabsAction>::decodePointer(const YAML::Node& node, SwitchTabsAction*& changeObjectAction) {
-		changeObjectAction = new SwitchTabsAction{convDef(node["index"], 0u)};
+	bool DecodePointer<SwitchTabsAction>::decode_pointer(const YAML::Node& node, SwitchTabsAction*& change_object_action) {
+		change_object_action = new SwitchTabsAction{conv_def(node["index"], 0u)};
 		return true;
 	}
 }

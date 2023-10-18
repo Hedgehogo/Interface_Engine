@@ -1,15 +1,15 @@
 #include "IInteraction.hpp"
 
 namespace ie {
-	bool IInteraction::isBlocked() const {
+	bool IInteraction::is_blocked() const {
 		return false;
 	}
 	
-	IInteraction::Priority IInteraction::getPriority() const {
+	IInteraction::Priority IInteraction::get_priority() const {
 		return Priority::Medium;
 	}
 	
 	bool IInteraction::operator<(IInteraction& interaction) const {
-		return getPriority() < interaction.getPriority();
+		return get_priority() < interaction.get_priority();
 	}
 }

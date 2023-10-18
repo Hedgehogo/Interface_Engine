@@ -10,43 +10,43 @@ namespace ie {
 	class BaseTextBlock {
 	public:
 		struct Make {
-			virtual BaseTextBlock* make(TextBockInitInfo textBlockInitInfo) = 0;
+			virtual BaseTextBlock* make(TextBockInitInfo text_block_init_info) = 0;
 			
 			virtual ~Make() = default;
 		};
 		
 		BaseTextBlock();
 		
-		BaseTextBlock(TextVariables textVariables);
+		BaseTextBlock(TextVariables text_variables);
 		
-		virtual void setTextVariables(
+		virtual void set_text_variables(
 			sf::Color TextColor,
-			sf::Color textSelectionColor,
-			sf::Color backgroundSelectionColor,
-			sf::Color inactiveTextSelectionColor,
-			sf::Color inactiveBackgroundSelectionColor,
+			sf::Color text_selection_color,
+			sf::Color background_selection_color,
+			sf::Color inactive_text_selection_color,
+			sf::Color inactive_background_selection_color,
 			sf::Font* font,
 			uint size,
 			sf::Text::Style style
 		);
 		
-		virtual void init(TextBockInitInfo textBlockInitInfo) = 0;
+		virtual void init(TextBockInitInfo text_block_init_info) = 0;
 		
-		virtual void setKerning(char32_t character);
+		virtual void set_kerning(char32_t character);
 		
-		virtual bool in(sf::Vector2f mousePosition) = 0;
+		virtual bool in(sf::Vector2f mouse_position) = 0;
 		
-		virtual std::vector<BaseCharacter*> getCharacters() = 0;
+		virtual std::vector<BaseCharacter*> get_characters() = 0;
 		
 		virtual void update() = 0;
 		
-		virtual bool updateInteractions(sf::Vector2f mousePosition) = 0;
+		virtual bool update_interactions(sf::Vector2f mouse_position) = 0;
 		
 		virtual BaseTextBlock* copy() = 0;
 	
 		virtual ~BaseTextBlock() = default;
 		
 	protected:
-		TextVariables textVariables;
+		TextVariables text_variables;
 	};
 }

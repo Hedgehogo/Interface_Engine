@@ -7,13 +7,13 @@ namespace ie {
 	class IComponentTwoObjects : public virtual IComponentObjectsArray, public virtual ILayoutTwoObjects{
 	public:
 		struct Make : public virtual IComponentObjectsArray::Make {
-			virtual IComponentTwoObjects* make(InitInfo initInfo) = 0;
+			virtual IComponentTwoObjects* make(InitInfo init_info) = 0;
 		};
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	};
 }

@@ -10,16 +10,16 @@ namespace ie {
 			
 			Make(float size);
 			
-			ConstSizing* make(float normalSize) override;
+			ConstSizing* make(float normal_size) override;
 		};
 		
-		ConstSizing(Make&& make, float normalSize);
+		ConstSizing(Make&& make, float normal_size);
 		
 		ConstSizing(float size);
 		
 		void init(float) override;
 		
-		float findSize(float, float) override;
+		float find_size(float, float) override;
 		
 		ConstSizing* copy() override;
 	
@@ -29,6 +29,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<ConstSizing> {
-		static bool decodePointer(const YAML::Node& node, ConstSizing*& constSizing);
+		static bool decode_pointer(const YAML::Node& node, ConstSizing*& const_sizing);
 	};
 }

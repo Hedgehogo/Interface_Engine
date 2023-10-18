@@ -11,35 +11,35 @@ namespace ie {
 	class Switcher : public virtual IScalableLayout, public virtual IDrawable, public virtual IUpdatable {
 	public:
 		struct Make : public virtual IScalableLayout::Make {
-			BoxPtr<IScalable::Make> inactiveBackground;
-			BoxPtr<IScalable::Make> activeBackground;
+			BoxPtr<IScalable::Make> inactive_background;
+			BoxPtr<IScalable::Make> active_background;
 			PSbool value;
 			Key key = Key::MouseLeft;
 			
-			Make(BoxPtr<IScalable::Make>&& inactiveBackground, BoxPtr<IScalable::Make>&& activeBackground, PSbool value, Key key = Key::MouseLeft);
+			Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, PSbool value, Key key = Key::MouseLeft);
 			
-			Make(BoxPtr<IScalable::Make>&& inactiveBackground, BoxPtr<IScalable::Make>&& activeBackground, Key key = Key::MouseLeft, bool startActive = false);
+			Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, Key key = Key::MouseLeft, bool start_active = false);
 			
-			Switcher* make(InitInfo initInfo) override;
+			Switcher* make(InitInfo init_info) override;
 		};
 		
-		Switcher(Make&& make, InitInfo initInfo);
+		Switcher(Make&& make, InitInfo init_info);
 		
-		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, PSbool value, Key key = Key::MouseLeft);
+		Switcher(BoxPtr<IScalable>&& inactive_background, BoxPtr<IScalable>&& active_background, PSbool value, Key key = Key::MouseLeft);
 		
-		Switcher(BoxPtr<IScalable>&& inactiveBackground, BoxPtr<IScalable>&& activeBackground, Key key = Key::MouseLeft, bool startActive = false);
+		Switcher(BoxPtr<IScalable>&& inactive_background, BoxPtr<IScalable>&& active_background, Key key = Key::MouseLeft, bool start_active = false);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		void setPosition(sf::Vector2f position) override;
+		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
 		
-		void setSize(sf::Vector2f size) override;
+		void set_size(sf::Vector2f size) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
 		void draw() override;
 		
@@ -47,28 +47,28 @@ namespace ie {
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
 		Switcher* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
-		LayoutData& layoutGetData() override;
+		LayoutData& layout_get_data() override;
 		
-		const LayoutData& layoutGetData() const override;
+		const LayoutData& layout_get_data() const override;
 		
 		LayoutData layout;
 		InteractiveData interactive;
-		DrawManager inactiveDrawManager;
-		DrawManager activeDrawManager;
-		BoxPtr<IScalable> inactiveBackground;
-		BoxPtr<IScalable> activeBackground;
+		DrawManager inactive_draw_manager;
+		DrawManager active_draw_manager;
+		BoxPtr<IScalable> inactive_background;
+		BoxPtr<IScalable> active_background;
 		PSbool active;
 	};
 	
 	template<>
 	struct DecodePointer<Switcher> {
-		static bool decodePointer(const YAML::Node& node, Switcher*& switcher);
+		static bool decode_pointer(const YAML::Node& node, Switcher*& switcher);
 	};
 }

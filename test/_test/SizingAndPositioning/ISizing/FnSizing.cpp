@@ -2,7 +2,7 @@
 #include "IE/sizing-positioning/ISizing/FnSizing/FnSizing.hpp"
 
 TEST(SizingAndPositioning, FnSizing) {
-	ie::FnSizing fnSizing{
+	ie::FnSizing fn_sizing{
 		{
 			[](float, float, float) {
 				return 13.f;
@@ -13,6 +13,6 @@ TEST(SizingAndPositioning, FnSizing) {
 		}, 17
 	};
 	
-	ASSERT_FLOAT_EQ(fnSizing.findSize(7, 51), 13);
-	ASSERT_FLOAT_EQ(fnSizing.getParentSize(23), 5.f);
+	ASSERT_FLOAT_EQ(fn_sizing.find_size(7, 51), 13);
+	ASSERT_FLOAT_EQ(fn_sizing.get_parent_size(23), 5.f);
 }

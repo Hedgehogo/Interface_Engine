@@ -6,76 +6,76 @@ namespace ie {
 	class Resizer : public BaseResizer {
 	public:
 		struct Make : BaseResizer::Make{
-			float lineSpacing = 1.15;
+			float line_spacing = 1.15;
 			Align align = Align::Left;
 			Algorithm algorithm = Algorithm::Base;
 			
-			Make(float lineSpacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
+			Make(float line_spacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
 			
-			Resizer* make(ResizerInitInfo initInfo) override;
+			Resizer* make(ResizerInitInfo init_info) override;
 		};
 		
-		Resizer(Make&& make, ResizerInitInfo initInfo);
+		Resizer(Make&& make, ResizerInitInfo init_info);
 		
-		Resizer(float lineSpacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
+		Resizer(float line_spacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
 		
 		void move(sf::Vector2f position) override;
 		
-		void setPosition(sf::Vector2f position) override;
+		void set_position(sf::Vector2f position) override;
 	
 	protected:
-		virtual void printCharacter(std::vector<BaseCharacter*>::iterator character);
+		virtual void print_character(std::vector<BaseCharacter*>::iterator character);
 		
-		virtual void porting(std::vector<BaseCharacter*>::iterator endCharacter);
+		virtual void porting(std::vector<BaseCharacter*>::iterator end_character);
 		
-		virtual void autoPorting(std::vector<BaseCharacter*>::iterator endCharacter);
+		virtual void auto_porting(std::vector<BaseCharacter*>::iterator end_character);
 		
-		virtual float equalize(std::vector<BaseCharacter*>::iterator endCharacter);
+		virtual float equalize(std::vector<BaseCharacter*>::iterator end_character);
 		
-		virtual void deleteOldCash(sf::Vector2f size, sf::Vector2f position);
+		virtual void delete_old_cash(sf::Vector2f size, sf::Vector2f position);
 		
-		virtual void characterResize(float kerning);
+		virtual void character_resize(float kerning);
 		
-		virtual void spaceResize(float kerning);
+		virtual void space_resize(float kerning);
 		
-		virtual void fullObjectResize();
+		virtual void full_object_resize();
 		
-		virtual void enterResize();
+		virtual void enter_resize();
 		
-		virtual void endLineEqualize();
+		virtual void end_line_equalize();
 	
 	public:
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		sf::Vector2f getPosition() override;
+		sf::Vector2f get_position() override;
 		
-		sf::Vector2f getSize() override;
+		sf::Vector2f get_size() override;
 	
 	protected:
-		sf::Vector2f getMinSizeBase() override;
+		sf::Vector2f get_min_size_base() override;
 		
-		sf::Vector2f getMinSizeConsole() override;
+		sf::Vector2f get_min_size_console() override;
 		
-		sf::Vector2f getMinSizeAbsolute() override;
+		sf::Vector2f get_min_size_absolute() override;
 	
 	public:
-		sf::Vector2f getNormalSize() override;
+		sf::Vector2f get_normal_size() override;
 		
 		Resizer* copy();
 	
 	protected:
-		std::vector<BaseCharacter*>::iterator afterEnter;
-		std::vector<BaseCharacter*>::iterator afterSpace;
-		std::vector<BaseCharacter*>::iterator currentCharacter;
+		std::vector<BaseCharacter*>::iterator after_enter;
+		std::vector<BaseCharacter*>::iterator after_space;
+		std::vector<BaseCharacter*>::iterator current_character;
 		
-		sf::Vector2f nextPosition;
+		sf::Vector2f next_position;
 		
-		sf::Vector2f startRender;
-		sf::Vector2f endRender;
+		sf::Vector2f start_render;
+		sf::Vector2f end_render;
 	};
 	
 	template<>
 	struct DecodePointer<Resizer> {
-		static bool decodePointer(const YAML::Node& node, Resizer*& resizer);
+		static bool decode_pointer(const YAML::Node& node, Resizer*& resizer);
 	};
 }

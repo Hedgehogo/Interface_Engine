@@ -5,8 +5,8 @@ namespace ie {
 	}
 	
 	template<typename T>
-	SetSValueAction<T>* SetSValueAction<T>::Make::make(ActionInitInfo initInfo) {
-		return new SetSValueAction<T>{std::move(*this), initInfo};
+	SetSValueAction<T>* SetSValueAction<T>::Make::make(ActionInitInfo init_info) {
+		return new SetSValueAction<T>{std::move(*this), init_info};
 	}
 	
 	template<typename T>
@@ -20,18 +20,18 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void SetSValueAction<T>::startPressed() {}
+	void SetSValueAction<T>::start_pressed() {}
 	
 	template<typename T>
-	void SetSValueAction<T>::stopPressed() {
-		value->setValue(constant);
+	void SetSValueAction<T>::stop_pressed() {
+		value->set_value(constant);
 	}
 	
 	template<typename T>
-	void SetSValueAction<T>::whilePressed() {}
+	void SetSValueAction<T>::while_pressed() {}
 	
 	template<typename T>
-	void SetSValueAction<T>::whileNotPressed() {}
+	void SetSValueAction<T>::while_not_pressed() {}
 	
 	template<typename T>
 	SetSValueAction<T>* SetSValueAction<T>::copy() {
@@ -39,8 +39,8 @@ namespace ie {
 	}
 	
 	template<typename T>
-	bool DecodePointer<SetSValueAction<T> >::decodePointer(const YAML::Node& node, SetSValueAction<T>*& setSValueAction) {
-		setSValueAction = new SetSValueAction<T>{
+	bool DecodePointer<SetSValueAction<T> >::decode_pointer(const YAML::Node& node, SetSValueAction<T>*& set_s_value_action) {
+		set_s_value_action = new SetSValueAction<T>{
 			Buffer::get<ISValue<T> >(node["value"]),
 			node["constant"].as<T>()
 		};

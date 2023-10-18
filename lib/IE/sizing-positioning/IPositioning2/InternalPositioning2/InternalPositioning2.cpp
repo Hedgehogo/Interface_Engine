@@ -4,8 +4,8 @@ namespace ie {
 	InternalPositioning2::Make::Make(sf::Vector2f coefficient) : coefficient(coefficient) {
 	}
 	
-	InternalPositioning2* InternalPositioning2::Make::make(Positioning2InitInfo initInfo) {
-		return new InternalPositioning2{std::move(*this), initInfo};
+	InternalPositioning2* InternalPositioning2::Make::make(Positioning2InitInfo init_info) {
+		return new InternalPositioning2{std::move(*this), init_info};
 	}
 	
 	InternalPositioning2::InternalPositioning2(Make&& make, Positioning2InitInfo) :
@@ -20,10 +20,10 @@ namespace ie {
 	void InternalPositioning2::init(sf::RenderTarget&) {
 	}
 	
-	sf::Vector2f InternalPositioning2::findPosition(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize) {
+	sf::Vector2f InternalPositioning2::find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) {
 		return {
-			horizontal.findPosition(parentPosition.x, objectSize.x, parentSize.x, 0),
-			vertical.findPosition(parentPosition.y, objectSize.y, parentSize.y, 0)
+			horizontal.find_position(parent_position.x, object_size.x, parent_size.x, 0),
+			vertical.find_position(parent_position.y, object_size.y, parent_size.y, 0)
 		};
 	}
 	
@@ -31,8 +31,8 @@ namespace ie {
 		return new InternalPositioning2{*this};
 	}
 	
-	bool DecodePointer<InternalPositioning2>::decodePointer(const YAML::Node& node, InternalPositioning2*& internalPositioning2) {
-		internalPositioning2 = new InternalPositioning2{node["coefficient"].as<sf::Vector2f>()};
+	bool DecodePointer<InternalPositioning2>::decode_pointer(const YAML::Node& node, InternalPositioning2*& internal_positioning2) {
+		internal_positioning2 = new InternalPositioning2{node["coefficient"].as<sf::Vector2f>()};
 		return true;
 	}
 }

@@ -10,20 +10,20 @@ namespace ie {
 			float coefficient;
 			float offset;
 			bool horizontal;
-			bool atStart = false;
+			bool at_start = false;
 			
-			Make(float coefficient, float offset, bool horizontal, bool atStart = false);
+			Make(float coefficient, float offset, bool horizontal, bool at_start = false);
 			
-			SideMovePanelInteraction* make(PanelActionInitInfo initInfo) override;
+			SideMovePanelInteraction* make(PanelActionInitInfo init_info) override;
 		};
 		
-		SideMovePanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		SideMovePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool atStart = false);
+		SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool at_start = false);
 		
-		bool getAtStart() override;
+		bool get_at_start() override;
 		
-		void move(sf::Vector2i mousePosition) override;
+		void move(sf::Vector2i mouse_position) override;
 		
 		SideMovePanelInteraction* copy() override;
 	
@@ -31,11 +31,11 @@ namespace ie {
 		float coefficient;
 		float offset;
 		bool horizontal;
-		bool atStart;
+		bool at_start;
 	};
 	
 	template<>
 	struct DecodePointer<SideMovePanelInteraction> {
-		static bool decodePointer(const YAML::Node& node, SideMovePanelInteraction*& sideMovePanelInteraction);
+		static bool decode_pointer(const YAML::Node& node, SideMovePanelInteraction*& side_move_panel_interaction);
 	};
 }

@@ -2,9 +2,9 @@
 #include "IE/sizing-positioning/ISizing2/FnSizing2/FnSizing2.hpp"
 
 TEST(SizingAndPositioning, FnSizing2) {
-	sf::RenderTexture renderTexture;
+	sf::RenderTexture render_texture;
 	
-	ie::FnSizing2 fnSizing2{
+	ie::FnSizing2 fn_sizing2{
 		{
 			[](sf::Vector2f, sf::Vector2f, sf::Vector2f) {
 				return sf::Vector2f{13.f, 19.f};
@@ -14,11 +14,11 @@ TEST(SizingAndPositioning, FnSizing2) {
 			}
 		},
 		{
-			renderTexture,
+			render_texture,
 			sf::Vector2f{17, 29}
 		}
 	};
 	
-	ASSERT_EQ(fnSizing2.findSize({5, 7}), (sf::Vector2f{13, 19}));
-	ASSERT_EQ(fnSizing2.getParentSize({23, 29}), (sf::Vector2f{5, 7}));
+	ASSERT_EQ(fn_sizing2.find_size({5, 7}), (sf::Vector2f{13, 19}));
+	ASSERT_EQ(fn_sizing2.get_parent_size({23, 29}), (sf::Vector2f{5, 7}));
 }

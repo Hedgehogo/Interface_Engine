@@ -30,27 +30,27 @@ namespace ie {
 #endif
 
 namespace ie {
-	bool convertBool(const YAML::Node& node, std::string trueValue, std::string falseValue) {
+	bool convert_bool(const YAML::Node& node, std::string true_value, std::string false_value) {
 		std::string parameter{node.as<std::string>()};
 		
-		if(parameter == trueValue)
+		if(parameter == true_value)
 			return true;
-		else if(parameter == falseValue)
+		else if(parameter == false_value)
 			return false;
 		else
 			throw YAML::BadConversion{node.Mark()};
 	}
 	
-	bool convertBoolDefault(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue) {
+	bool convert_bool_default(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value) {
 		if(node.IsDefined()) {
-			return convertBool(node, std::move(trueValue), std::move(falseValue));
+			return convert_bool(node, std::move(true_value), std::move(false_value));
 		} else {
-			return defaultValue;
+			return default_value;
 		}
 	}
 	
-	bool convBoolDef(const YAML::Node& node, std::string trueValue, std::string falseValue, bool defaultValue) {
-		return convertBoolDefault(node, std::move(trueValue), std::move(falseValue), defaultValue);
+	bool conv_bool_def(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value) {
+		return convert_bool_default(node, std::move(true_value), std::move(false_value), default_value);
 	}
 	
 	std::string type_name(const std::type_info& type_info) {
@@ -63,8 +63,8 @@ namespace ie {
 			vector.x = node[0].as<float>();
 			vector.y = node[1].as<float>();
 		} else if(node.IsScalar()) {
-			std::string strVector = node.as<std::string>();
-			sscanf(strVector.c_str(), "%f,%f", &vector.x, &vector.y);
+			std::string str_vector = node.as<std::string>();
+			sscanf(str_vector.c_str(), "%f,%f", &vector.x, &vector.y);
 		}
 		return true;
 	}
@@ -75,8 +75,8 @@ namespace ie {
 			vector.x = node[0].as<int>();
 			vector.y = node[1].as<int>();
 		} else if(node.IsScalar()) {
-			std::string strVector = node.as<std::string>();
-			sscanf(strVector.c_str(), "%i,%i", &vector.x, &vector.y);
+			std::string str_vector = node.as<std::string>();
+			sscanf(str_vector.c_str(), "%i,%i", &vector.x, &vector.y);
 		}
 		return true;
 	}
@@ -87,8 +87,8 @@ namespace ie {
 			vector.x = node[0].as<uint>();
 			vector.y = node[1].as<uint>();
 		} else if(node.IsScalar()) {
-			std::string strVector = node.as<std::string>();
-			sscanf(strVector.c_str(), "%u,%u", &vector.x, &vector.y);
+			std::string str_vector = node.as<std::string>();
+			sscanf(str_vector.c_str(), "%u,%u", &vector.x, &vector.y);
 		}
 		return true;
 	}
@@ -107,9 +107,9 @@ namespace ie {
 				}
 			}
 		} else if(node.IsScalar()) {
-			std::string strColor = node.as<std::string>();
+			std::string str_color = node.as<std::string>();
 			
-			std::map<std::string, sf::Color> colorMap{
+			std::map<std::string, sf::Color> color_map{
 				{"black",       sf::Color::Black},
 				{"white",       sf::Color::White},
 				{"red",         sf::Color::Red},
@@ -122,16 +122,16 @@ namespace ie {
 				{"null-color",  {255, 255, 255, 0}}
 			};
 			
-			if(colorMap.find(strColor) != colorMap.end()) {
-				color = colorMap[strColor];
+			if(color_map.find(str_color) != color_map.end()) {
+				color = color_map[str_color];
 				return true;
 			}
 			
 			uint r{0}, g{0}, b{0}, a{255};
-			if(strColor.size() == 8) {
-				sscanf(strColor.c_str(), "%02x%02x%02x%02x", &r, &g, &b, &a);
-			} else if(strColor.size() == 6) {
-				sscanf(strColor.c_str(), "%02x%02x%02x", &r, &g, &b);
+			if(str_color.size() == 8) {
+				sscanf(str_color.c_str(), "%02x%02x%02x%02x", &r, &g, &b, &a);
+			} else if(str_color.size() == 6) {
+				sscanf(str_color.c_str(), "%02x%02x%02x", &r, &g, &b);
 			} else {
 				throw YAML::BadConversion{node.Mark()};
 			}
@@ -142,7 +142,7 @@ namespace ie {
 	
 	
 	bool Decode<sf::Text::Style>::decode(const YAML::Node& node, sf::Text::Style& style) {
-		std::map<std::string, sf::Text::Style> styleMap{
+		std::map<std::string, sf::Text::Style> style_map{
 			{"Regular",       sf::Text::Style::Regular},
 			{"Bold",          sf::Text::Style::Bold},
 			{"Italic",        sf::Text::Style::Italic},
@@ -151,14 +151,14 @@ namespace ie {
 		};
 		
 		if(node.IsScalar()) {
-			std::string strStyle = node.as<std::string>();
-			style = styleMap[strStyle];
+			std::string str_style = node.as<std::string>();
+			style = style_map[str_style];
 		} else if(node.IsSequence()) {
 			style = sf::Text::Style::Regular;
-			std::string strStyle;
+			std::string str_style;
 			for(const auto& item: node) {
-				strStyle = item.as<std::string>();
-				style = static_cast<sf::Text::Style>(style | styleMap[strStyle]);
+				str_style = item.as<std::string>();
+				style = static_cast<sf::Text::Style>(style | style_map[str_style]);
 			}
 		} else {
 			throw YAML::BadConversion{node.Mark()};

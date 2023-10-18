@@ -4,37 +4,37 @@ namespace ie {
 	BaseTextBlock::BaseTextBlock() {
 	}
 	
-	BaseTextBlock::BaseTextBlock(TextVariables textVariables) : textVariables(textVariables) {
+	BaseTextBlock::BaseTextBlock(TextVariables text_variables) : text_variables(text_variables) {
 	}
 	
-	void BaseTextBlock::setKerning(char32_t) {
+	void BaseTextBlock::set_kerning(char32_t) {
 	}
 	
-	void BaseTextBlock::setTextVariables(
+	void BaseTextBlock::set_text_variables(
 		sf::Color TextColor,
-		sf::Color textSelectionColor,
-		sf::Color backgroundSelectionColor,
-		sf::Color inactiveTextSelectionColor,
-		sf::Color inactiveBackgroundSelectionColor,
+		sf::Color text_selection_color,
+		sf::Color background_selection_color,
+		sf::Color inactive_text_selection_color,
+		sf::Color inactive_background_selection_color,
 		sf::Font* font,
 		uint size,
 		sf::Text::Style style
 	) {
-		if(!textVariables.textColor)
-			textVariables.textColor = TextColor;
-		if(!textVariables.textSelectionColor)
-			textVariables.textSelectionColor = textSelectionColor;
-		if(!textVariables.backgroundSelectionColor)
-			textVariables.backgroundSelectionColor = backgroundSelectionColor;
-		if(!textVariables.inactiveTextSelectionColor)
-			textVariables.inactiveTextSelectionColor = inactiveTextSelectionColor;
-		if(!textVariables.inactiveBackgroundSelectionColor)
-			textVariables.inactiveBackgroundSelectionColor = inactiveBackgroundSelectionColor;
-		if(!textVariables.font)
-			textVariables.font = font;
-		if(!textVariables.size)
-			textVariables.size = size;
-		if(!textVariables.style)
-			textVariables.style = style;
+		if(!text_variables.text_color)
+			text_variables.text_color = TextColor;
+		if(!text_variables.text_selection_color)
+			text_variables.text_selection_color = text_selection_color;
+		if(!text_variables.background_selection_color)
+			text_variables.background_selection_color = background_selection_color;
+		if(!text_variables.inactive_text_selection_color)
+			text_variables.inactive_text_selection_color = inactive_text_selection_color;
+		if(!text_variables.inactive_background_selection_color)
+			text_variables.inactive_background_selection_color = inactive_background_selection_color;
+		if(!text_variables.font)
+			text_variables.font = font;
+		if(!text_variables.size)
+			text_variables.size = size;
+		if(!text_variables.style)
+			text_variables.style = style;
 	}
 }

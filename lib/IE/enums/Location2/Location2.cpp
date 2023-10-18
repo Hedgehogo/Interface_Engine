@@ -1,7 +1,7 @@
 #include "Location2.hpp"
 
 namespace ie {
-	Location getVerticalLocation(Location2 location2) {
+	Location get_vertical_location(Location2 location2) {
 		switch(location2) {
 			case Location2::UpLeft:
 			case Location2::Up:
@@ -19,7 +19,7 @@ namespace ie {
 		return Location::Center;
 	}
 	
-	Location getHorizontalLocation(Location2 location2) {
+	Location get_horizontal_location(Location2 location2) {
 		switch(location2) {
 			case Location2::UpLeft:
 			case Location2::Left:
@@ -37,7 +37,7 @@ namespace ie {
 		return Location::Center;
 	}
 	
-	Location2 makeLocation2(Location vertical, Location horizontal) {
+	Location2 make_location2(Location vertical, Location horizontal) {
 		switch(vertical) {
 			case Location::Origin:
 				switch(horizontal) {
@@ -95,7 +95,7 @@ namespace ie {
 		} else if(str == "down-right") {
 			location2 = Location2::DownRight;
 		} else {
-			location2 = makeLocation2(node["vertical"].as<Location>(), node["horizontal"].as<Location>());
+			location2 = make_location2(node["vertical"].as<Location>(), node["horizontal"].as<Location>());
 		}
 		return true;
 	}

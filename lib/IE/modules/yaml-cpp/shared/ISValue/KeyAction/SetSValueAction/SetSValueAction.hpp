@@ -13,23 +13,23 @@ namespace ie {
 			
 			Make(PISValue<T> value, T constant);
 			
-			SetSValueAction* make(ActionInitInfo initInfo) override;
+			SetSValueAction* make(ActionInitInfo init_info) override;
 		};
 		
-		SetSValueAction(Make&& make, ActionInitInfo initInfo);
+		SetSValueAction(Make&& make, ActionInitInfo init_info);
 		
 		SetSValueAction(PISValue<T> value, T constant);
 		
 		SetSValueAction<T>* copy() override;
 	
 	protected:
-		void startPressed() override;
+		void start_pressed() override;
 		
-		void stopPressed() override;
+		void stop_pressed() override;
 		
-		void whilePressed() override;
+		void while_pressed() override;
 		
-		void whileNotPressed() override;
+		void while_not_pressed() override;
 		
 		PISValue<T> value;
 		T constant;
@@ -37,7 +37,7 @@ namespace ie {
 	
 	template<typename T>
 	struct DecodePointer<SetSValueAction<T> > {
-		static bool decodePointer(const YAML::Node& node, SetSValueAction<T>*& setSValueAction);
+		static bool decode_pointer(const YAML::Node& node, SetSValueAction<T>*& set_s_value_action);
 	};
 	
 	using SetSIntAction = SetSValueAction<int>;

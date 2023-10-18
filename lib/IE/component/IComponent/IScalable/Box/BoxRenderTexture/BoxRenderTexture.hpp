@@ -9,55 +9,55 @@ namespace ie {
 		struct Make : public virtual Box::Make, public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> object;
 			bool optimize = true;
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<IScalable::Make>&& object, bool optimize = true, sf::Vector2f minSize = {});
+			Make(BoxPtr<IScalable::Make>&& object, bool optimize = true, sf::Vector2f min_size = {});
 			
-			BoxRenderTexture* make(InitInfo initInfo) override;
+			BoxRenderTexture* make(InitInfo init_info) override;
 		};
 		
-		BoxRenderTexture(Make&& make, InitInfo initInfo);
+		BoxRenderTexture(Make&& make, InitInfo init_info);
 		
-		BoxRenderTexture(BoxPtr<IScalable::Make>&& object, bool optimize, sf::Vector2f minSize, InitInfo initInfo);
+		BoxRenderTexture(BoxPtr<IScalable::Make>&& object, bool optimize, sf::Vector2f min_size, InitInfo init_info);
 		
-		BoxRenderTexture(BoxPtr<IScalable>&& object, bool optimize = true, sf::Vector2f minSize = {});
+		BoxRenderTexture(BoxPtr<IScalable>&& object, bool optimize = true, sf::Vector2f min_size = {});
 		
 		BoxRenderTexture(const BoxRenderTexture& other);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
-		IScalable& getObject() override;
+		IScalable& get_object() override;
 		
-		const IScalable& getObject() const override;
+		const IScalable& get_object() const override;
 		
 		BoxRenderTexture* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
-		sf::RenderTexture renderTexture;
+		sf::RenderTexture render_texture;
 		sf::Sprite sprite;
 		sf::View view;
-		DrawManager drawManager;
+		DrawManager draw_manager;
 		BoxPtr<IScalable> object;
-		InteractionManager* interactionManager;
-		sf::RenderTarget* renderTarget;
+		InteractionManager* interaction_manager;
+		sf::RenderTarget* render_target;
 		bool optimize;
 		bool active;
 	};
 	
 	template<>
 	struct DecodePointer<BoxRenderTexture> {
-		static bool decodePointer(const YAML::Node& node, BoxRenderTexture*& boxWithRenderTexture);
+		static bool decode_pointer(const YAML::Node& node, BoxRenderTexture*& box_with_render_texture);
 	};
 }

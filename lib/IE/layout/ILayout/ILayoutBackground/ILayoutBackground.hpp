@@ -6,9 +6,9 @@
 namespace ie {
 	class ILayoutBackground : public virtual ILayout {
 	public:
-		virtual const IUninteractive& getBackground() const = 0;
+		virtual const IUninteractive& get_background() const = 0;
 	
 	protected:
-		virtual IUninteractive& getBackground() = 0;
+		virtual IUninteractive& get_background() = 0;
 	};
 }

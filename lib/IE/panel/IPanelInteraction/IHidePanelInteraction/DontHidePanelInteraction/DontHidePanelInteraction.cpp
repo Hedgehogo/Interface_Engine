@@ -2,8 +2,8 @@
 #include "../../../IPanelManager/IPanelManager.hpp"
 
 namespace ie {
-	DontHidePanelInteraction* DontHidePanelInteraction::Make::make(PanelActionInitInfo initInfo) {
-		return new DontHidePanelInteraction{std::move(*this), initInfo};
+	DontHidePanelInteraction* DontHidePanelInteraction::Make::make(PanelActionInitInfo init_info) {
+		return new DontHidePanelInteraction{std::move(*this), init_info};
 	}
 	
 	DontHidePanelInteraction::DontHidePanelInteraction(Make&&, PanelActionInitInfo) {
@@ -12,15 +12,15 @@ namespace ie {
 	void DontHidePanelInteraction::init(PanelActionInitInfo) {
 	}
 	
-	void DontHidePanelInteraction::setPanel(Panel&) {
+	void DontHidePanelInteraction::set_panel(Panel&) {
 	}
 	
 	DontHidePanelInteraction* DontHidePanelInteraction::copy() {
 		return new DontHidePanelInteraction{};
 	}
 	
-	bool DecodePointer<DontHidePanelInteraction>::decodePointer(const YAML::Node&, DontHidePanelInteraction*& dontHidePanelInteraction) {
-		dontHidePanelInteraction = new DontHidePanelInteraction{};
+	bool DecodePointer<DontHidePanelInteraction>::decode_pointer(const YAML::Node&, DontHidePanelInteraction*& dont_hide_panel_interaction) {
+		dont_hide_panel_interaction = new DontHidePanelInteraction{};
 		return true;
 	}
 }

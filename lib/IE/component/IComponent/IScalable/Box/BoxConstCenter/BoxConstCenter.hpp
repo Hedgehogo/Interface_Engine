@@ -7,55 +7,55 @@ namespace ie {
 	class BoxConstCenter : public Box, public virtual IScalableTwoObjects {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableTwoObjects::Make {
-			BoxPtr<IScalable::Make> constObject;
+			BoxPtr<IScalable::Make> const_object;
 			BoxPtr<IScalable::Make> background;
-			sf::Vector2f constSize;
-			sf::Vector2f minSize = {};
+			sf::Vector2f const_size;
+			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<IScalable::Make>&& constObject, BoxPtr<IScalable::Make>&& background, sf::Vector2f constSize, sf::Vector2f minSize = {});
+			Make(BoxPtr<IScalable::Make>&& const_object, BoxPtr<IScalable::Make>&& background, sf::Vector2f const_size, sf::Vector2f min_size = {});
 			
-			BoxConstCenter* make(InitInfo initInfo) override;
+			BoxConstCenter* make(InitInfo init_info) override;
 		};
 		
-		BoxConstCenter(Make&& make, InitInfo initInfo);
+		BoxConstCenter(Make&& make, InitInfo init_info);
 		
-		BoxConstCenter(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& background, const sf::Vector2f& constSize, const sf::Vector2f& minSize = {});
+		BoxConstCenter(BoxPtr<IScalable>&& const_object, BoxPtr<IScalable>&& background, const sf::Vector2f& const_size, const sf::Vector2f& min_size = {});
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		void setPosition(sf::Vector2f position) override;
+		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
 		
-		void setSize(sf::Vector2f size) override;
+		void set_size(sf::Vector2f size) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
-		IScalable& getFirstObject() override;
+		IScalable& get_first_object() override;
 		
-		const IScalable& getFirstObject() const override;
+		const IScalable& get_first_object() const override;
 		
-		IScalable& getSecondObject() override;
+		IScalable& get_second_object() override;
 		
-		const IScalable& getSecondObject() const override;
+		const IScalable& get_second_object() const override;
 		
-		bool updateInteractions(sf::Vector2f) override;
+		bool update_interactions(sf::Vector2f) override;
 		
 		BoxConstCenter* copy() override;
 	
 	protected:
-		BoxPtr<IScalable> constObject;
+		BoxPtr<IScalable> const_object;
 		BoxPtr<IScalable> background;
-		sf::Vector2f constSize;
+		sf::Vector2f const_size;
 		bool resized;
 	};
 	
 	template<>
 	struct DecodePointer<BoxConstCenter> {
-		static bool decodePointer(const YAML::Node& node, BoxConstCenter*& boxWithConstCenter);
+		static bool decode_pointer(const YAML::Node& node, BoxConstCenter*& box_with_const_center);
 	};
 }

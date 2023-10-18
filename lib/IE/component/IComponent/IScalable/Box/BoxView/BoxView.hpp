@@ -6,13 +6,13 @@
 namespace ie {
 	class BoxWithView : public Box, public virtual IDrawable {
 	public:
-		BoxWithView(sf::Vector2f minSize, InitInfo initInfo);
+		BoxWithView(sf::Vector2f min_size, InitInfo init_info);
 		
-		BoxWithView(sf::Vector2f minSize);
+		BoxWithView(sf::Vector2f min_size);
 		
 		BoxWithView(const BoxWithView& other);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
 		void draw() override;
 		
@@ -21,8 +21,8 @@ namespace ie {
 		BoxWithView* copy() override = 0;
 	
 	protected:
-		DrawManager drawManager;
-		sf::RenderTarget* renderTarget;
+		DrawManager draw_manager;
+		sf::RenderTarget* render_target;
 		sf::View view;
 	};
 }

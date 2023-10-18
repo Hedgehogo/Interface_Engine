@@ -9,16 +9,16 @@ namespace ie {
 	public:
 		struct Make : public virtual BasePanel::Make {
 			BoxPtr<IScalable::Make> object;
-			BoxPtr<IHidePanelInteraction::Make> hideInteraction;
-			BoxPtr<IMovePanelInteraction::Make> moveInteraction;
+			BoxPtr<IHidePanelInteraction::Make> hide_interaction;
+			BoxPtr<IMovePanelInteraction::Make> move_interaction;
 			BoxPtr<ISizing2::Make> sizing;
 			BoxPtr<IPositioning2::Make> positioning;
 			bool displayed = false;
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
-				BoxPtr<IHidePanelInteraction::Make> hideInteraction,
-				BoxPtr<IMovePanelInteraction::Make> moveInteraction,
+				BoxPtr<IHidePanelInteraction::Make> hide_interaction,
+				BoxPtr<IMovePanelInteraction::Make> move_interaction,
 				BoxPtr<ISizing2::Make> sizing,
 				BoxPtr<IPositioning2::Make> positioning,
 				bool displayed = false
@@ -26,21 +26,21 @@ namespace ie {
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
-				BoxPtr<IHidePanelInteraction::Make> hideInteraction,
+				BoxPtr<IHidePanelInteraction::Make> hide_interaction,
 				BoxPtr<ISizing2::Make> sizing,
 				BoxPtr<IPositioning2::Make> positioning,
 				bool displayed = false
 			);
 			
-			Panel* make(InitInfo initInfo) override;
+			Panel* make(InitInfo init_info) override;
 		};
 		
-		Panel(Make&& make, InitInfo initInfo);
+		Panel(Make&& make, InitInfo init_info);
 		
 		Panel(
 			BoxPtr<IScalable>&& object,
-			BoxPtr<IHidePanelInteraction> hideInteraction,
-			BoxPtr<IMovePanelInteraction> moveInteraction,
+			BoxPtr<IHidePanelInteraction> hide_interaction,
+			BoxPtr<IMovePanelInteraction> move_interaction,
 			BoxPtr<ISizing2> sizing,
 			BoxPtr<IPositioning2> positioning,
 			bool displayed = false
@@ -48,7 +48,7 @@ namespace ie {
 		
 		Panel(
 			BoxPtr<IScalable>&& object,
-			BoxPtr<IHidePanelInteraction> hideInteraction,
+			BoxPtr<IHidePanelInteraction> hide_interaction,
 			BoxPtr<ISizing2> sizing,
 			BoxPtr<IPositioning2> positioning,
 			bool displayed = false
@@ -56,33 +56,33 @@ namespace ie {
 		
 		Panel(const Panel& other);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		void setDisplayed() override;
+		void set_displayed() override;
 		
-		bool isIndependent() override;
+		bool is_independent() override;
 		
-		bool isFree() override;
+		bool is_free() override;
 		
-		bool inConstPanels(sf::Vector2f pointPosition);
+		bool in_const_panels(sf::Vector2f point_position);
 		
 		void draw() override;
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition, bool active) override;
+		bool update_interactions(sf::Vector2f mouse_position, bool active) override;
 		
 		Panel* copy() override;
 	
 	protected:
-		PanelManager panelManager;
-		InteractionManager* interactionManager;
-		BoxPtr<IHidePanelInteraction> hideInteraction;
-		BoxPtr<IMovePanelInteraction> moveInteraction;
+		PanelManager panel_manager;
+		InteractionManager* interaction_manager;
+		BoxPtr<IHidePanelInteraction> hide_interaction;
+		BoxPtr<IMovePanelInteraction> move_interaction;
 	};
 	
 	template<>
 	struct DecodePointer<Panel> {
-		static bool decodePointer(const YAML::Node& node, Panel*& panel);
+		static bool decode_pointer(const YAML::Node& node, Panel*& panel);
 	};
 }

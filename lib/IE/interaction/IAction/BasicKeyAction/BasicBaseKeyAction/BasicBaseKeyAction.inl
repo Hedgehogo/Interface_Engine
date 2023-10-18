@@ -1,25 +1,25 @@
 namespace ie {
 	template<typename T>
-	void BasicBaseKeyAction<T>::setPressed(bool pressed) {
+	void BasicBaseKeyAction<T>::set_pressed(bool pressed) {
 		if(this->pressed != pressed) {
 			this->pressed = pressed;
 			if(this->pressed) {
-				startPressed();
+				start_pressed();
 			} else {
-				stopPressed();
+				stop_pressed();
 			}
 		}
-		BasicKeyAction<T>::setPressed(pressed);
+		BasicKeyAction<T>::set_pressed(pressed);
 	}
 	
 	template<typename T>
-	void BasicBaseKeyAction<T>::update(sf::Vector2i mousePosition, bool press) {
-		this->mousePosition = mousePosition;
-		setPressed(press);
+	void BasicBaseKeyAction<T>::update(sf::Vector2i mouse_position, bool press) {
+		this->mouse_position = mouse_position;
+		set_pressed(press);
 		if(this->pressed) {
-			whilePressed();
+			while_pressed();
 		} else {
-			whileNotPressed();
+			while_not_pressed();
 		}
 	}
 	

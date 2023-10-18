@@ -4,7 +4,7 @@
 
 namespace ie {
 	InteractionManager::InteractionManager() :
-		interactions(), addInteractions(), deleteInteractions(), position(0, 0), block(false) {
+		interactions(), add_interactions(), delete_interactions(), position(0, 0), block(false) {
 	}
 	
 	std::size_t InteractionManager::size() {
@@ -15,14 +15,14 @@ namespace ie {
 		return *interactions.at(index);
 	}
 	
-	void InteractionManager::addInteraction(IInteraction& interaction) {
-		addInteractions.push_back(&interaction);
+	void InteractionManager::add_interaction(IInteraction& interaction) {
+		add_interactions.push_back(&interaction);
 	}
 	
-	void InteractionManager::deleteInteraction(IInteraction& interaction) {
+	void InteractionManager::delete_interaction(IInteraction& interaction) {
 		if(auto iterator = std::find(interactions.begin(), interactions.end(), &interaction); iterator != interactions.end())
 			interactions.erase(iterator);
-		deleteInteractions.push_back(&interaction);
+		delete_interactions.push_back(&interaction);
 	}
 	
 	void InteractionManager::clear() {
@@ -32,38 +32,38 @@ namespace ie {
 		interactions.clear();
 	}
 	
-	bool InteractionManager::isBlocked() const {
+	bool InteractionManager::is_blocked() const {
 		return std::any_of(this->interactions.begin(), this->interactions.end(), [](IInteraction* interaction) {
-			return interaction->isBlocked();
+			return interaction->is_blocked();
 		});
 	}
 	
-	void InteractionManager::update(sf::Vector2i mousePosition) {
-		position = mousePosition;
+	void InteractionManager::update(sf::Vector2i mouse_position) {
+		position = mouse_position;
 		
-		if(!deleteInteractions.empty()) {
-			ptrSort(deleteInteractions);
-			for(auto& interaction: deleteInteractions) {
-				interaction->finish(mousePosition);
+		if(!delete_interactions.empty()) {
+			ptr_sort(delete_interactions);
+			for(auto& interaction: delete_interactions) {
+				interaction->finish(mouse_position);
 			}
-			deleteInteractions.clear();
+			delete_interactions.clear();
 		}
 		
-		if(!addInteractions.empty()) {
-			ptrSort(addInteractions);
-			for(auto& interaction: addInteractions) {
-				interaction->start(mousePosition);
+		if(!add_interactions.empty()) {
+			ptr_sort(add_interactions);
+			for(auto& interaction: add_interactions) {
+				interaction->start(mouse_position);
 				interactions.push_back(interaction);
 			}
 		}
 		
-		if(!addInteractions.empty()) {
-			ptrSort(interactions);
-			addInteractions.clear();
+		if(!add_interactions.empty()) {
+			ptr_sort(interactions);
+			add_interactions.clear();
 		}
 		
 		for(auto interaction: interactions) {
-			interaction->update(mousePosition);
+			interaction->update(mouse_position);
 		}
 	}
 }

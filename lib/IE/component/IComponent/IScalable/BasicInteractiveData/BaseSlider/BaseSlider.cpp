@@ -7,17 +7,17 @@ namespace ie {
 		BoxPtr<IUninteractive::Make>&& background,
 		BoxPtr<SliderInteraction::Make>&& interaction,
 		const PSRVec2f& value,
-		InitInfo initInfo
+		InitInfo init_info
 	) :
-		interactive(std::move(interaction), initInfo, *this),
-		background(background->make(initInfo)),
-		slider(slider->make(initInfo)),
+		interactive(std::move(interaction), init_info, *this),
+		background(background->make(init_info)),
+		slider(slider->make(init_info)),
 		value(value) {
-		value->addSetter([&](sf::Vector2f newValue) {
-			resizeSlider(newValue);
+		value->add_setter([&](sf::Vector2f new_value) {
+			resize_slider(new_value);
 		});
-		initInfo.updateManager.add(*this);
-		setRangeBounds(value, {0, 0}, {1, 1});
+		init_info.update_manager.add(*this);
+		set_range_bounds(value, {0, 0}, {1, 1});
 	}
 	
 	BaseSlider::BaseSlider(
@@ -30,10 +30,10 @@ namespace ie {
 		background(std::move(background)),
 		slider(std::move(slider)),
 		value(value) {
-		value->addSetter([this](sf::Vector2f newValue) {
-			resizeSlider(newValue);
+		value->add_setter([this](sf::Vector2f new_value) {
+			resize_slider(new_value);
 		});
-		setRangeBounds(value, {0, 0}, {1, 1});
+		set_range_bounds(value, {0, 0}, {1, 1});
 	}
 	
 	BaseSlider::BaseSlider(const BaseSlider& other) :
@@ -41,45 +41,45 @@ namespace ie {
 		background(other.background),
 		slider(other.slider),
 		value(other.value) {
-		dynamic_cast<SliderInteraction&>(*interactive.interaction).setSlider(*this);
-		value->addSetter([this](sf::Vector2f newValue) {
-			resizeSlider(newValue);
+		dynamic_cast<SliderInteraction&>(*interactive.interaction).set_slider(*this);
+		value->add_setter([this](sf::Vector2f new_value) {
+			resize_slider(new_value);
 		});
 	}
 	
-	void BaseSlider::init(InitInfo initInfo) {
-		initInfo.updateManager.add(*this);
-		interactive.init(initInfo, *this);
-		background->init(initInfo);
-		slider->init(initInfo);
+	void BaseSlider::init(InitInfo init_info) {
+		init_info.update_manager.add(*this);
+		interactive.init(init_info, *this);
+		background->init(init_info);
+		slider->init(init_info);
 	}
 	
-	void BaseSlider::resizeSlider(sf::Vector2f newValue) {
-		this->slider->resize(sliderSize, position + sf::Vector2f(moveZoneSize.x * newValue.x, moveZoneSize.y * newValue.y));
+	void BaseSlider::resize_slider(sf::Vector2f new_value) {
+		this->slider->resize(slider_size, position + sf::Vector2f(move_zone_size.x * new_value.x, move_zone_size.y * new_value.y));
 	}
 	
-	sf::Vector2f BaseSlider::getSliderSize() {
-		return sliderSize;
+	sf::Vector2f BaseSlider::get_slider_size() {
+		return slider_size;
 	}
 	
-	sf::Vector2f BaseSlider::getValue() {
-		return value->getValue();
+	sf::Vector2f BaseSlider::get_value() {
+		return value->get_value();
 	}
 	
-	void BaseSlider::setValue(sf::Vector2f value) {
-		this->value->setValue(value);
+	void BaseSlider::set_value(sf::Vector2f value) {
+		this->value->set_value(value);
 	}
 	
-	PSRVec2f BaseSlider::getValuePtr() {
+	PSRVec2f BaseSlider::get_value_ptr() {
 		return value;
 	}
 	
-	void BaseSlider::setValueByMouse(sf::Vector2i mousePosition) {
-		sf::Vector2f mouseOffset{static_cast<sf::Vector2f>(mousePosition) - position - sliderSize / 2.0f};
-		value->setValue({(moveZoneSize.x != 0 ? mouseOffset.x / moveZoneSize.x : 0), (moveZoneSize.y != 0 ? mouseOffset.y / moveZoneSize.y : 0)});
+	void BaseSlider::set_value_by_mouse(sf::Vector2i mouse_position) {
+		sf::Vector2f mouse_offset{static_cast<sf::Vector2f>(mouse_position) - position - slider_size / 2.0f};
+		value->set_value({(move_zone_size.x != 0 ? mouse_offset.x / move_zone_size.x : 0), (move_zone_size.y != 0 ? mouse_offset.y / move_zone_size.y : 0)});
 	}
 	
-	sf::Vector2f BaseSlider::roundValueToDivision(sf::Vector2f value, sf::Vector2i division) {
+	sf::Vector2f BaseSlider::round_value_to_division(sf::Vector2f value, sf::Vector2i division) {
 		sf::Vector2f divisions{division};
 		if(division.x != 0) {
 			value.x = std::round(value.x * divisions.x) / divisions.x;
@@ -90,51 +90,51 @@ namespace ie {
 		return value;
 	}
 	
-	sf::Vector2f BaseSlider::moveSlider(sf::Vector2f value, sf::Vector2f offset) const {
-		if(moveZoneSize.x != 0) {
-			value.x += offset.x / moveZoneSize.x;
+	sf::Vector2f BaseSlider::move_slider(sf::Vector2f value, sf::Vector2f offset) const {
+		if(move_zone_size.x != 0) {
+			value.x += offset.x / move_zone_size.x;
 		}
-		if(moveZoneSize.y != 0) {
-			value.y += offset.y / moveZoneSize.y;
+		if(move_zone_size.y != 0) {
+			value.y += offset.y / move_zone_size.y;
 		}
 		return value;
 	}
 	
-	bool BaseSlider::onSlider(sf::Vector2i mousePosition) {
-		sf::Vector2f mouse{static_cast<sf::Vector2f>(mousePosition)};
-		sf::Vector2f sliderPosition{position.x + value->getX() * moveZoneSize.x, position.y + value->getY() * moveZoneSize.y};
+	bool BaseSlider::on_slider(sf::Vector2i mouse_position) {
+		sf::Vector2f mouse{static_cast<sf::Vector2f>(mouse_position)};
+		sf::Vector2f slider_position{position.x + value->get_x() * move_zone_size.x, position.y + value->get_y() * move_zone_size.y};
 		return
-			mouse.x > sliderPosition.x && mouse.x < sliderPosition.x + sliderSize.x &&
-			mouse.y > sliderPosition.y && mouse.y < sliderPosition.y + sliderSize.y;
+			mouse.x > slider_position.x && mouse.x < slider_position.x + slider_size.x &&
+			mouse.y > slider_position.y && mouse.y < slider_position.y + slider_size.y;
 	}
 	
-	sf::Vector2f BaseSlider::getAreaPosition() const {
+	sf::Vector2f BaseSlider::get_area_position() const {
 		return position;
 	}
 	
-	sf::Vector2f BaseSlider::getAreaSize() const {
-		return sliderSize + moveZoneSize;
+	sf::Vector2f BaseSlider::get_area_size() const {
+		return slider_size + move_zone_size;
 	}
 	
-	sf::Vector2f BaseSlider::getMinSize() const {
-		return background->getMinSize();
+	sf::Vector2f BaseSlider::get_min_size() const {
+		return background->get_min_size();
 	}
 	
-	sf::Vector2f BaseSlider::getNormalSize() const {
-		return background->getNormalSize();
+	sf::Vector2f BaseSlider::get_normal_size() const {
+		return background->get_normal_size();
 	}
 	
 	void BaseSlider::update() {
 		interactive.update();
 	}
 	
-	bool BaseSlider::updateInteractions(sf::Vector2f) {
-		interactive.updateInteractions();
+	bool BaseSlider::update_interactions(sf::Vector2f) {
+		interactive.update_interactions();
 		return true;
 	}
 	
-	void BaseSlider::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-		background->drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		slider->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+	void BaseSlider::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+		background->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+		slider->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
 }

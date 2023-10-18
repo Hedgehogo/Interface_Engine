@@ -14,18 +14,18 @@ namespace ie {
 	class IPositioning2 {
 	public:
 		struct Make {
-			virtual IPositioning2* make(Positioning2InitInfo initInfo) = 0;
+			virtual IPositioning2* make(Positioning2InitInfo init_info) = 0;
 			
 			virtual ~Make() = default;
 		};
 		
 		virtual ~IPositioning2() = default;
 		
-		virtual void init(sf::RenderTarget& renderTarget) = 0;
+		virtual void init(sf::RenderTarget& render_target) = 0;
 		
-		virtual sf::Vector2f findPosition(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize) = 0;
+		virtual sf::Vector2f find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) = 0;
 		
-		virtual sf::Vector2f operator()(sf::Vector2f parentPosition, sf::Vector2f parentSize, sf::Vector2f objectSize);
+		virtual sf::Vector2f operator()(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size);
 		
 		virtual IPositioning2* copy() = 0;
 	};

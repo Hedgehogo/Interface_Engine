@@ -7,54 +7,54 @@
 #include "IE/component/IComponent/IScalable/Box/BoxSwitcherTabs/SwitcherTabsAction/SwitcherTabsAction.hpp"
 
 namespace ie {
-	BoxSwitcherTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
-		objects(std::move(objects)), value(std::move(value)), key(key), isHorizontal(isHorizontal), minSize(minSize) {
+	BoxSwitcherTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key, bool is_horizontal, sf::Vector2f min_size) :
+		objects(std::move(objects)), value(std::move(value)), key(key), is_horizontal(is_horizontal), min_size(min_size) {
 	}
 	
-	BoxSwitcherTabs* BoxSwitcherTabs::Make::make(InitInfo initInfo) {
-		return new BoxSwitcherTabs{std::move(*this), initInfo};
+	BoxSwitcherTabs* BoxSwitcherTabs::Make::make(InitInfo init_info) {
+		return new BoxSwitcherTabs{std::move(*this), init_info};
 	}
 	
-	BoxSwitcherTabs::BoxSwitcherTabs(Make&& make, InitInfo initInfo) :
-		Box(make.minSize),
+	BoxSwitcherTabs::BoxSwitcherTabs(Make&& make, InitInfo init_info) :
+		Box(make.min_size),
 		interactive(make_box_ptr<BasicOneKeyInteraction<BoxSwitcherTabs&>::Make>(
 			make_box_ptr<SwitcherTabsAction::Make>(make.value), make.key
-		), initInfo, *this),
-		objects(mapMake(std::move(make.objects), initInfo)),
-		isHorizontal(make.isHorizontal),
+		), init_info, *this),
+		objects(map_make(std::move(make.objects), init_info)),
+		is_horizontal(make.is_horizontal),
 		value(make.value) {
-		initInfo.updateManager.add(*this);
+		init_info.update_manager.add(*this);
 	}
 	
-	BoxSwitcherTabs::BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool isHorizontal, sf::Vector2f minSize) :
-		Box(minSize), interactive(make_box_ptr<BasicOneKeyInteraction<BoxSwitcherTabs&> >(make_box_ptr<SwitcherTabsAction>(value), key)),
-		objects(std::move(objects)), isHorizontal(isHorizontal), value(value) {
+	BoxSwitcherTabs::BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool is_horizontal, sf::Vector2f min_size) :
+		Box(min_size), interactive(make_box_ptr<BasicOneKeyInteraction<BoxSwitcherTabs&> >(make_box_ptr<SwitcherTabsAction>(value), key)),
+		objects(std::move(objects)), is_horizontal(is_horizontal), value(value) {
 	}
 	
-	void BoxSwitcherTabs::init(InitInfo initInfo) {
-		interactive.init(initInfo, *this);
+	void BoxSwitcherTabs::init(InitInfo init_info) {
+		interactive.init(init_info, *this);
 		for(auto& object: objects) {
-			object->init(initInfo);
+			object->init(init_info);
 		}
-		initInfo.updateManager.add(*this);
+		init_info.update_manager.add(*this);
 	}
 	
 	void BoxSwitcherTabs::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout.resize(size, position);
 		
-		if(isHorizontal) {
-			sf::Vector2f objectSize{size.x / objects.size(), size.y};
-			float positionX = position.x;
+		if(is_horizontal) {
+			sf::Vector2f object_size{size.x / objects.size(), size.y};
+			float position_x = position.x;
 			for(const auto& object: objects) {
-				object->resize(objectSize, {positionX, position.y});
-				positionX += objectSize.x;
+				object->resize(object_size, {position_x, position.y});
+				position_x += object_size.x;
 			}
 		} else {
-			sf::Vector2f objectSize{size.x, size.y / objects.size()};
-			float positionY = position.y;
+			sf::Vector2f object_size{size.x, size.y / objects.size()};
+			float position_y = position.y;
 			for(const auto& object: objects) {
-				object->resize(objectSize, {position.x, positionY});
-				positionY += objectSize.y;
+				object->resize(object_size, {position.x, position_y});
+				position_y += object_size.y;
 			}
 		}
 	}
@@ -63,38 +63,38 @@ namespace ie {
 		interactive.update();
 	}
 	
-	bool BoxSwitcherTabs::updateInteractions(sf::Vector2f) {
-		interactive.updateInteractions();
+	bool BoxSwitcherTabs::update_interactions(sf::Vector2f) {
+		interactive.update_interactions();
 		return true;
 	}
 	
-	std::size_t BoxSwitcherTabs::getArraySize() const {
+	std::size_t BoxSwitcherTabs::get_array_size() const {
 		return objects.size();
 	}
 	
-	IScalable& BoxSwitcherTabs::getObjectAt(std::size_t index) {
+	IScalable& BoxSwitcherTabs::get_object_at(std::size_t index) {
 		return *objects.at(index);
 	}
 	
-	const IScalable& BoxSwitcherTabs::getObjectAt(std::size_t index) const {
+	const IScalable& BoxSwitcherTabs::get_object_at(std::size_t index) const {
 		return *objects.at(index);
 	}
 	
-	int BoxSwitcherTabs::getTab(sf::Vector2f position) {
-		return static_cast<int>(isHorizontal ? (position.x - layout.position.x) / (layout.size.x / objects.size()) : (position.y - layout.position.y) / (layout.size.y / objects.size()));
+	int BoxSwitcherTabs::get_tab(sf::Vector2f position) {
+		return static_cast<int>(is_horizontal ? (position.x - layout.position.x) / (layout.size.x / objects.size()) : (position.y - layout.position.y) / (layout.size.y / objects.size()));
 	}
 	
 	BoxSwitcherTabs* BoxSwitcherTabs::copy() {
 		return new BoxSwitcherTabs{*this};
 	}
 	
-	bool DecodePointer<BoxSwitcherTabs>::decodePointer(const YAML::Node& node, BoxSwitcherTabs*& switcherTabs) {
-		switcherTabs = new BoxSwitcherTabs{
+	bool DecodePointer<BoxSwitcherTabs>::decode_pointer(const YAML::Node& node, BoxSwitcherTabs*& switcher_tabs) {
+		switcher_tabs = new BoxSwitcherTabs{
 			node["objects"].as<std::vector<BoxPtr<IScalable> > >(),
 			Buffer::get<Sint>(node["value"]),
-			convDef(node["key"], Key::MouseLeft),
-			convBoolDef(node["direction"], "horizontal", "vertical"),
-			convDef(node["min-size"], sf::Vector2f{})
+			conv_def(node["key"], Key::MouseLeft),
+			conv_bool_def(node["direction"], "horizontal", "vertical"),
+			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
 	}

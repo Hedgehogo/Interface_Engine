@@ -11,42 +11,42 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& object);
 			
-			BoxDebug* make(InitInfo initInfo) override;
+			BoxDebug* make(InitInfo init_info) override;
 		};
 		
-		BoxDebug(Make&& make, InitInfo initInfo);
+		BoxDebug(Make&& make, InitInfo init_info);
 		
 		BoxDebug(BoxPtr<IScalable>&& object);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
-		IScalable& getObject() override;
+		IScalable& get_object() override;
 		
-		const IScalable& getObject() const override;
+		const IScalable& get_object() const override;
 		
 		BoxDebug* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
 		BoxPtr<IScalable> object;
-		sf::RenderTarget* renderTarget;
+		sf::RenderTarget* render_target;
 		bool active;
 		bool drawn;
 	};
 	
 	template<>
 	struct DecodePointer<BoxDebug> {
-		static bool decodePointer(const YAML::Node& node, BoxDebug*& boxDebug);
+		static bool decode_pointer(const YAML::Node& node, BoxDebug*& box_debug);
 	};
 }

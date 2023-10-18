@@ -7,56 +7,56 @@ namespace ie {
 	class BoxSwitch : public Box, public virtual IScalableTwoObjects, public virtual IDrawable {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableTwoObjects::Make {
-			BoxPtr<IScalable::Make> inactiveObject;
-			BoxPtr<IScalable::Make> activeObject;
+			BoxPtr<IScalable::Make> inactive_object;
+			BoxPtr<IScalable::Make> active_object;
 			PSbool value;
-			sf::Vector2f minSize = {};
+			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<IScalable::Make>&& inactiveObject, BoxPtr<IScalable::Make>&& activeObject, PSbool value, const sf::Vector2f& minSize = {});
+			Make(BoxPtr<IScalable::Make>&& inactive_object, BoxPtr<IScalable::Make>&& active_object, PSbool value, const sf::Vector2f& min_size = {});
 			
-			BoxSwitch* make(InitInfo initInfo) override;
+			BoxSwitch* make(InitInfo init_info) override;
 		};
 		
-		BoxSwitch(Make&& make, InitInfo initInfo);
+		BoxSwitch(Make&& make, InitInfo init_info);
 		
-		BoxSwitch(BoxPtr<IScalable>&& inactiveObject, BoxPtr<IScalable>&& activeObject, PSbool value, const sf::Vector2f& minSize = {});
+		BoxSwitch(BoxPtr<IScalable>&& inactive_object, BoxPtr<IScalable>&& active_object, PSbool value, const sf::Vector2f& min_size = {});
 		
 		BoxSwitch(const BoxSwitch& other);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		void setPosition(sf::Vector2f position) override;
+		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
 		
-		void setSize(sf::Vector2f size) override;
+		void set_size(sf::Vector2f size) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		void draw() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		IScalable& getFirstObject() override;
+		IScalable& get_first_object() override;
 		
-		const IScalable& getFirstObject() const override;
+		const IScalable& get_first_object() const override;
 		
-		IScalable& getSecondObject() override;
+		IScalable& get_second_object() override;
 		
-		const IScalable& getSecondObject() const override;
+		const IScalable& get_second_object() const override;
 		
 		BoxSwitch* copy() override;
 	
 	protected:
-		DrawManager inactiveDrawManager;
-		DrawManager activeDrawManager;
-		BoxPtr<IScalable> inactiveObject;
-		BoxPtr<IScalable> activeObject;
+		DrawManager inactive_draw_manager;
+		DrawManager active_draw_manager;
+		BoxPtr<IScalable> inactive_object;
+		BoxPtr<IScalable> active_object;
 		PSbool value;
 	};
 	
 	template<>
 	struct DecodePointer<BoxSwitch> {
-		static bool decodePointer(const YAML::Node& node, BoxSwitch*& boxSwitcher);
+		static bool decode_pointer(const YAML::Node& node, BoxSwitch*& box_switcher);
 	};
 }

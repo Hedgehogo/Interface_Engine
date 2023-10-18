@@ -3,15 +3,15 @@
 #include <memory>
 
 namespace ie {
-	Animator::Animator(std::vector<IAnimatorUnit*> units, PSfloat speed) : units(units), unitsBuff(units) {
+	Animator::Animator(std::vector<IAnimatorUnit*> units, PSfloat speed) : units(units), units_buff(units) {
 		for(auto& unit: units) {
-			unit->setSpeed(speed);
+			unit->set_speed(speed);
 		}
 	}
 	
-	void replace(std::vector<IAnimatorUnit*>& mainVec, std::vector<IAnimatorUnit*>::iterator iter, std::vector<IAnimatorUnit*> vec) {
+	void replace(std::vector<IAnimatorUnit*>& main_vec, std::vector<IAnimatorUnit*>::iterator iter, std::vector<IAnimatorUnit*> vec) {
 		if(vec.empty()) {
-			mainVec.erase(iter);
+			main_vec.erase(iter);
 			return;
 		} else if(vec.size() == 1 && vec[0] == *iter)
 			return;
@@ -19,16 +19,16 @@ namespace ie {
 		
 		bool erase = vec[0] == *iter;
 		if(!erase)
-			mainVec.erase(iter);
+			main_vec.erase(iter);
 		
-		mainVec.insert(iter + (int)erase, vec.begin(), vec.end());
+		main_vec.insert(iter + (int)erase, vec.begin(), vec.end());
 	}
 	
 	void Animator::update(float time) {
 		for(size_t i = 0; i < units.size(); ++i) {
-			std::vector<IAnimatorUnit*> addUnits{units[i]->update(time)};
-			replace(units, units.begin() + i, addUnits);
-			i += addUnits.size() - 1;
+			std::vector<IAnimatorUnit*> add_units{units[i]->update(time)};
+			replace(units, units.begin() + i, add_units);
+			i += add_units.size() - 1;
 		}
 		
 		std::vector<IAnimatorUnit*> buf;
@@ -41,20 +41,20 @@ namespace ie {
 	}
 	
 	Animator* Animator::copy() {
-		std::vector<IAnimatorUnit*> copyUnits{unitsBuff.size()};
-		for(size_t i = 0; i < unitsBuff.size(); ++i) {
-			copyUnits[i] = unitsBuff[i]->copy();
+		std::vector<IAnimatorUnit*> copy_units{units_buff.size()};
+		for(size_t i = 0; i < units_buff.size(); ++i) {
+			copy_units[i] = units_buff[i]->copy();
 		}
-		return new Animator{copyUnits};
+		return new Animator{copy_units};
 	}
 	
 	Animator::~Animator() {
-		for(auto& unit: unitsBuff) {
+		for(auto& unit: units_buff) {
 			delete unit;
 		}
 	}
 	
-	bool DecodePointer<Animator>::decodePointer(const YAML::Node& node, Animator*& animator) {
+	bool DecodePointer<Animator>::decode_pointer(const YAML::Node& node, Animator*& animator) {
 		animator = new Animator{
 			node["unit"] ? std::vector<IAnimatorUnit*>{node["unit"].as<IAnimatorUnit*>()} : node["units"].as<std::vector<IAnimatorUnit*>>(),
 			(node["speed"] ? Buffer::get<Sfloat>(node["speed"]) : std::make_shared<Sfloat>(1))

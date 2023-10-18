@@ -11,7 +11,7 @@
 #endif
 
 namespace ie {
-	SymbolPosition readCharacterIndex(const YAML::Node& node, std::basic_ifstream<char32_t>& fin) {
+	SymbolPosition read_character_index(const YAML::Node& node, std::basic_ifstream<char32_t>& fin) {
 		std::size_t line{0};
 		std::size_t number{0};
 		std::basic_string<char32_t> str;
@@ -31,7 +31,7 @@ namespace ie {
 			}
 		} else {
 			if(node["symbol"]) {
-				SymbolPosition position{readCharacterIndex(node["symbol"], fin)};
+				SymbolPosition position{read_character_index(node["symbol"], fin)};
 				line = position.line;
 				number = position.number;
 				if(node["line-offset"])
@@ -81,7 +81,7 @@ namespace ie {
 		return SymbolPosition{line, number};
 	}
 	
-	std::basic_string<Uint32> u32stringToUint32String(std::basic_string<char32_t> str) {
+	std::basic_string<Uint32> u32string_to_uint32_string(std::basic_string<char32_t> str) {
 		if(!str.empty()) {
 			bool bom{str[0] == 65279}; //In the code it is used as value 0 or 1
 			std::basic_string<Uint32> result(str.size() - bom, L' ');
@@ -110,19 +110,19 @@ namespace ie {
 					loc::system.set_now_language(node["language"].as<std::string>());
 				string32 = loc::system.get_text(node["key"].as<std::string>());
 			} else {
-				std::string filePath;
-				node["filePath"] >> filePath;
-				std::basic_ifstream<char32_t> fin(filePath);
+				std::string file_path;
+				node["file_path"] >> file_path;
+				std::basic_ifstream<char32_t> fin(file_path);
 				std::basic_string<char32_t> str{};
 				if(node["line"]) {
 					std::size_t line{node["line"].as<std::size_t>() + 1};
 					for(std::size_t i = 0; i < line; ++i)
 						std::getline(fin, str, U'\n');
 				} else if(node["first-symbol"]) {
-					SymbolPosition start{readCharacterIndex(node["first-symbol"], fin)};
+					SymbolPosition start{read_character_index(node["first-symbol"], fin)};
 					if(node["last-symbol"]) {
-						const YAML::Node& secondNode = node["last-symbol"];
-						SymbolPosition end{readCharacterIndex(secondNode, fin)};
+						const YAML::Node& second_node = node["last-symbol"];
+						SymbolPosition end{read_character_index(second_node, fin)};
 						std::basic_string<char32_t> line;
 						for(std::size_t i = 0; i < start.line; ++i)
 							std::getline(fin, line, U'\n');
@@ -147,13 +147,13 @@ namespace ie {
 		return true;
 	}
 	
-	bool Decode<sf::String>::decode(const YAML::Node& node, sf::String& sfString) {
+	bool Decode<sf::String>::decode(const YAML::Node& node, sf::String& sf_string) {
 		if(node.IsScalar()) {
-			sfString = sf::String(node.as<std::string>());
+			sf_string = sf::String(node.as<std::string>());
 		} else {
 			std::basic_string<char32_t> str;
 			node >> str;
-			sfString = {u32stringToUint32String(str)};
+			sf_string = {u32string_to_uint32_string(str)};
 		}
 		return true;
 	}
@@ -171,33 +171,33 @@ namespace ie {
 #ifdef IE_ImageMagick_FOUND
 	void LoadFromFile<std::vector<sf::Texture>>::load(std::vector<sf::Texture>& object, std::string name) {
 		std::list<Magick::Image> images;
-		Magick::readImages(&images, name);
+		Magick::read_images(&images, name);
 		
 		object.resize(images.size());
 		
-		sf::Vector2<size_t> sizeVideo{images.begin()->baseColumns(), images.begin()->baseRows()};
+		sf::Vector2<size_t> size_video{images.begin()->base_columns(), images.begin()->base_rows()};
 		
 		int i = 0;
 		for(auto& frame: images) {
 			frame.magick("RGBA");
-			frame.backgroundColor(Magick::Color("transparent"));
-			frame.extent({static_cast<size_t>(sizeVideo.x), static_cast<size_t>(sizeVideo.y)}, Magick::CenterGravity);
+			frame.background_color(Magick::Color("transparent"));
+			frame.extent({static_cast<size_t>(size_video.x), static_cast<size_t>(size_video.y)}, Magick::CenterGravity);
 			
-			sf::Image sfImage;
-			sfImage.create(sizeVideo.x, sizeVideo.y);
-			for(int x = 0; x < sizeVideo.x; ++x) {
-				for(int y = 0; y < sizeVideo.y; ++y) {
-					Magick::Color pixel = frame.pixelColor(x, y);
-					sfImage.setPixel(x, y, {
-										 static_cast<sf::Uint8>(QuantumScale * pixel.quantumRed() * 255),
-										 static_cast<sf::Uint8>(QuantumScale * pixel.quantumGreen() * 255),
-										 static_cast<sf::Uint8>(QuantumScale * pixel.quantumBlue() * 255),
-										 static_cast<sf::Uint8>(QuantumScale * pixel.quantumAlpha() * 255),
+			sf::Image sf_image;
+			sf_image.create(size_video.x, size_video.y);
+			for(int x = 0; x < size_video.x; ++x) {
+				for(int y = 0; y < size_video.y; ++y) {
+					Magick::Color pixel = frame.pixel_color(x, y);
+					sf_image.set_pixel(x, y, {
+										 static_cast<sf::Uint8>(QuantumScale * pixel.quantum_red() * 255),
+										 static_cast<sf::Uint8>(QuantumScale * pixel.quantum_green() * 255),
+										 static_cast<sf::Uint8>(QuantumScale * pixel.quantum_blue() * 255),
+										 static_cast<sf::Uint8>(QuantumScale * pixel.quantum_alpha() * 255),
 									 }
 					);
 				}
 			}
-			object[i].loadFromImage(sfImage);
+			object[i].load_from_image(sf_image);
 			++i;
 		}
 		

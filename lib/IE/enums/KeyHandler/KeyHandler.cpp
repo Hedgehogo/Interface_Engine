@@ -3,73 +3,73 @@
 #include "../../sfml-events/MouseWheel/MouseWheel.hpp"
 
 namespace ie {
-	std::vector<Key> KeyHandler::keysPressed{};
-	std::vector<Key> KeyHandler::globalKeysPressed{};
+	std::vector<Key> KeyHandler::keys_pressed{};
+	std::vector<Key> KeyHandler::global_keys_pressed{};
 	
-	std::vector<Key> KeyHandler::getKeysPressed() {
-		return keysPressed;
+	std::vector<Key> KeyHandler::get_keys_pressed() {
+		return keys_pressed;
 	}
 	
-	void KeyHandler::setKeysPressed(std::vector<Key> keysPressed) {
-		KeyHandler::keysPressed = keysPressed;
+	void KeyHandler::set_keys_pressed(std::vector<Key> keys_pressed) {
+		KeyHandler::keys_pressed = keys_pressed;
 	}
 	
 	void KeyHandler::update() {
-		updateKeyBoard();
-		updateMouse();
+		update_key_board();
+		update_mouse();
 	}
 	
-	void KeyHandler::updateKeyBoard() {
+	void KeyHandler::update_key_board() {
 		for(int i = 0; i < static_cast<int>(Key::MouseLeft); ++i) {
 			if(
 				sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(i)) &&
-				std::find(keysPressed.begin(), keysPressed.end(), static_cast<Key>(i)) == keysPressed.end()
+				std::find(keys_pressed.begin(), keys_pressed.end(), static_cast<Key>(i)) == keys_pressed.end()
 				) {
-				globalKeysPressed.push_back(static_cast<Key>(i));
+				global_keys_pressed.push_back(static_cast<Key>(i));
 			}
 		}
 	}
 	
-	void KeyHandler::updateMouse() {
+	void KeyHandler::update_mouse() {
 		for(int i = static_cast<int>(Key::MouseLeft); i < static_cast<int>(Key::MouseWheelUp); ++i) {
 			if(
 				sf::Mouse::isButtonPressed(static_cast<sf::Mouse::Button>(i - static_cast<int>(Key::MouseLeft))) &&
-				std::find(keysPressed.begin(), keysPressed.end(), static_cast<Key>(i)) == keysPressed.end()
+				std::find(keys_pressed.begin(), keys_pressed.end(), static_cast<Key>(i)) == keys_pressed.end()
 				) {
-				globalKeysPressed.push_back(static_cast<Key>(i));
+				global_keys_pressed.push_back(static_cast<Key>(i));
 			}
 		}
 	}
 	
-	void KeyHandler::addKey(Key key) {
-		if(std::find(keysPressed.begin(), keysPressed.end(), key) == keysPressed.end()) {
-			keysPressed.push_back(key);
+	void KeyHandler::add_key(Key key) {
+		if(std::find(keys_pressed.begin(), keys_pressed.end(), key) == keys_pressed.end()) {
+			keys_pressed.push_back(key);
 		}
 	}
 	
-	void KeyHandler::deleteKey(Key key) {
-		auto element = std::find(keysPressed.begin(), keysPressed.end(), key);
-		if(element != keysPressed.end()) {
-			keysPressed.erase(element);
+	void KeyHandler::delete_key(Key key) {
+		auto element = std::find(keys_pressed.begin(), keys_pressed.end(), key);
+		if(element != keys_pressed.end()) {
+			keys_pressed.erase(element);
 		}
 	}
 	
 	void KeyHandler::clear() {
-		keysPressed.clear();
+		keys_pressed.clear();
 	}
 	
-	void KeyHandler::clearGlobalKeys() {
-		globalKeysPressed.clear();
+	void KeyHandler::clear_global_keys() {
+		global_keys_pressed.clear();
 	}
 	
-	bool KeyHandler::isKeyPressed(Key key) {
+	bool KeyHandler::is_key_pressed(Key key) {
 		if(
-			std::find(keysPressed.begin(), keysPressed.end(), key) != keysPressed.end() ||
-			std::find(globalKeysPressed.begin(), globalKeysPressed.end(), key) != globalKeysPressed.end()
+			std::find(keys_pressed.begin(), keys_pressed.end(), key) != keys_pressed.end() ||
+			std::find(global_keys_pressed.begin(), global_keys_pressed.end(), key) != global_keys_pressed.end()
 			) {
 			return true;
 		}
-		sf::Vector2f delta = MouseWheel::getDelta();
+		sf::Vector2f delta = MouseWheel::get_delta();
 		switch(key) {
 			case Key::MouseWheelUp:
 				return delta.y > 0;
@@ -84,7 +84,7 @@ namespace ie {
 		}
 	}
 	
-	std::string KeyHandler::toString(Key key) {
+	std::string KeyHandler::to_string(Key key) {
 		if(key == Key::A)
 			return "a";
 		else if(key == Key::B)
@@ -208,9 +208,9 @@ namespace ie {
 		else if(key == Key::Tab)
 			return "tab";
 		else if(key == Key::PageUp)
-			return "pageUp";
+			return "page_up";
 		else if(key == Key::PageDown)
-			return "pageDown";
+			return "page_down";
 		else if(key == Key::End)
 			return "end";
 		else if(key == Key::Home)
@@ -289,24 +289,24 @@ namespace ie {
 			return "pause";
 		
 		else if(key == Key::MouseLeft)
-			return "mouseLeft";
+			return "mouse_left";
 		else if(key == Key::MouseRight)
-			return "mouseRight";
+			return "mouse_right";
 		else if(key == Key::MouseMiddle)
-			return "mouseMiddle";
+			return "mouse_middle";
 		else if(key == Key::MouseXButton1)
-			return "mouseXButton1";
+			return "mouse_x_button1";
 		else if(key == Key::MouseXButton2)
-			return "mouseXButton2";
+			return "mouse_x_button2";
 		
 		else if(key == Key::MouseWheelUp)
-			return "mouseWheelUp";
+			return "mouse_wheel_up";
 		else if(key == Key::MouseWheelDown)
-			return "mouseWheelDown";
+			return "mouse_wheel_down";
 		else if(key == Key::MouseWheelLeft)
-			return "mouseWheelLeft";
+			return "mouse_wheel_left";
 		else if(key == Key::MouseWheelRight)
-			return "mouseWheelRight";
+			return "mouse_wheel_right";
 		return "unknown";
 	}
 	
@@ -545,15 +545,15 @@ namespace ie {
 		return true;
 	}
 	
-	std::string toString(Key key) {
-		return KeyHandler::toString(key);
+	std::string to_string(Key key) {
+		return KeyHandler::to_string(key);
 	}
 	
-	bool isKeyPressed(Key key) {
-		return KeyHandler::isKeyPressed(key);
+	bool is_key_pressed(Key key) {
+		return KeyHandler::is_key_pressed(key);
 	}
 	
-	Key makeKeyFromYaml(YAML::Node node) {
+	Key make_key_from_yaml(YAML::Node node) {
 		Key key;
 		Decode<Key>::decode(node, key);
 		return key;

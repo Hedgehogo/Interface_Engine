@@ -8,24 +8,24 @@ namespace ie {
 	template<typename FromType, typename ToType>
 	class SConvertValue : public SValue<ToType>, public virtual ISConvertValue<FromType, ToType> {
 	protected:
-		virtual ToType convert(FromType fromValue);
+		virtual ToType convert(FromType from_value);
 	
 	public:
-		SConvertValue(PISValue<FromType> fromValue, ToType defaultValue = ToType{});
+		SConvertValue(PISValue<FromType> from_value, ToType default_value = ToType{});
 		
-		void setFromValue(PISValue<FromType> fromValue);
+		void set_from_value(PISValue<FromType> from_value);
 		
-		const ToType& getValue() const override;
+		const ToType& get_value() const override;
 		
-		void setValue(const ToType& value) override;
+		void set_value(const ToType& value) override;
 	
 	protected:
-		PISValue<FromType> fromValue;
+		PISValue<FromType> from_value;
 	};
 	
 	template<typename FromType, typename ToType>
 	struct DecodePointer<SConvertValue<FromType, ToType> > {
-		static bool decodePointer(const YAML::Node& node, SConvertValue<FromType, ToType>*& sConvertValue);
+		static bool decode_pointer(const YAML::Node& node, SConvertValue<FromType, ToType>*& sConvert_value);
 	};
 	
 	template<typename T>

@@ -14,12 +14,12 @@ namespace ie::detail {
 		
 		bool build(const YAML::Node& node, void*& object) const override;
 		
-		IYamlBuilder* getBuilder(const std::string& type) override;
+		IYamlBuilder* get_builder(const std::string& type) override;
 		
 		bool determine(const YAML::Node&, std::string&) override;
 		
 		template<typename Type>
-		static FuncYamlBuilder& addBuilder(BuildFunc<Type> function, std::vector<std::string> aliases = {});
+		static FuncYamlBuilder& add_builder(BuildFunc<Type> function, std::vector<std::string> aliases = {});
 		
 	protected:
 		static std::vector<FuncYamlBuilder> builders;

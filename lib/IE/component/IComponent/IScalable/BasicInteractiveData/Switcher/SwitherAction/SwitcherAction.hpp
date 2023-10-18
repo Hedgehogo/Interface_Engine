@@ -13,20 +13,20 @@ namespace ie {
 			
 			Make(PSbool value);
 			
-			SwitcherAction* make(ActionInitInfo initInfo) override;
+			SwitcherAction* make(ActionInitInfo init_info) override;
 		};
 		
-		SwitcherAction(Make&& make, ActionInitInfo initInfo);
+		SwitcherAction(Make&& make, ActionInitInfo init_info);
 		
 		SwitcherAction(PSbool value);
 		
-		void startPressed() override;
+		void start_pressed() override;
 		
-		void stopPressed() override;
+		void stop_pressed() override;
 		
-		void whilePressed() override;
+		void while_pressed() override;
 		
-		void whileNotPressed() override;
+		void while_not_pressed() override;
 		
 		SwitcherAction* copy() override;
 		
@@ -36,7 +36,7 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<SwitcherAction> {
-		static bool decodePointer(const YAML::Node& node, SwitcherAction*& switcherAction);
+		static bool decode_pointer(const YAML::Node& node, SwitcherAction*& switcher_action);
 	};
 	
 }

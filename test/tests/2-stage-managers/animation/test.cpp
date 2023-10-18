@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
 #include "IE/Animation/AnimationManager/AnimationManager.hpp"
-#include "../../../testsObjects/testAnimatorUnit/testAnimatorUnit.hpp"
+#include "../../../tests_objects/test_animator_unit/test_animator_unit.hpp"
 
 TEST(AnimationManager, update) {
 	TestAnimatorUnit *test1 = new TestAnimatorUnit{}, *test2 = new TestAnimatorUnit{};
 
-	ie::AnimationManager animationManager{
+	ie::AnimationManager animation_manager{
 		{
 			new ie::Animator{
 				{
@@ -20,16 +20,16 @@ TEST(AnimationManager, update) {
 		}
 	};
 
-	animationManager.update();
+	animation_manager.update();
 
-	ASSERT_LT(test1->getProcessed().update[0].time, test2->getProcessed().update[0].time);
-	ASSERT_EQ(test1->getProcessed().update[0].timeParameter, test2->getProcessed().update[0].timeParameter);
+	ASSERT_LT(test1->get_processed().update[0].time, test2->get_processed().update[0].time);
+	ASSERT_EQ(test1->get_processed().update[0].time_parameter, test2->get_processed().update[0].time_parameter);
 }
 
 TEST(AnimationManager, copy) {
 	TestAnimatorUnit *test1 = new TestAnimatorUnit{}, *test2 = new TestAnimatorUnit{};
 
-	ie::AnimationManager animationManager{
+	ie::AnimationManager animation_manager{
 		{
 			new ie::Animator{
 				{
@@ -44,8 +44,8 @@ TEST(AnimationManager, copy) {
 		}
 	};
 
-	animationManager.copy();
+	animation_manager.copy();
 
-	ASSERT_NE(test1->getProcessed().copy[0], 0);
-	ASSERT_LT(test1->getProcessed().copy[0], test2->getProcessed().copy[0]);
+	ASSERT_NE(test1->get_processed().copy[0], 0);
+	ASSERT_LT(test1->get_processed().copy[0], test2->get_processed().copy[0]);
 }

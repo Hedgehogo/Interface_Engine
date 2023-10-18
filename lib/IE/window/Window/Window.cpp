@@ -2,94 +2,94 @@
 #include "IE/sfml-events/handle_event/handle_event.hpp"
 
 namespace ie {
-	BaseWindowResizer* getWindowResizer() {
+	BaseWindowResizer* get_window_resizer() {
 		return new WindowResizer{};
 	}
 	
 	void Window::construction() {
-		resizer->setWindow(*this);
+		resizer->set_window(*this);
 		interface.init(window);
-		reCalculateMinSize();
+		re_calculate_min_size();
 		
-		auto size{max(sf::Vector2u(minSize), window.getSize())};
+		auto size{max(sf::Vector2u(min_size), window.getSize())};
 		
 		sf::View view{sf::Vector2f{size / 2u}, sf::Vector2f{size}};
 		window.setView(view);
-		interface.setSize(sf::Vector2f{size});
+		interface.set_size(sf::Vector2f{size});
 	}
 	
-	Window::Window(Interface&& interface) : interface(std::move(interface)), resizer(getWindowResizer()) {
+	Window::Window(Interface&& interface) : interface(std::move(interface)), resizer(get_window_resizer()) {
 		construction();
-		this->interface.setRenderWindowSize(window);
+		this->interface.set_render_window_size(window);
 	}
 	
 	Window::Window(Interface&& interface, const sf::String& title, const sf::VideoMode& mode, const sf::ContextSettings& settings) :
 		window(
 			(mode == sf::VideoMode{} ? [&] {
-				auto newWindowSize{interface.getNormalSize()};
-				setSize({static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))});
-				return sf::VideoMode{static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))};
+				auto new_window_size{interface.get_normal_size()};
+				set_size({static_cast<unsigned>(std::ceil(new_window_size.x)), static_cast<unsigned>(std::ceil(new_window_size.y))});
+				return sf::VideoMode{static_cast<unsigned>(std::ceil(new_window_size.x)), static_cast<unsigned>(std::ceil(new_window_size.y))};
 			}() : mode), title, sf::Style::None, settings
-		), interface(std::move(interface)), resizer(getWindowResizer()) {
+		), interface(std::move(interface)), resizer(get_window_resizer()) {
 		construction();
 	}
 	
 	Window::Window(Interface&& interface, const sf::String& title, const sf::ContextSettings& settings) :
 		window(
 			[&] {
-				auto newWindowSize{interface.getNormalSize()};
-				setSize({static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))});
-				return sf::VideoMode{static_cast<unsigned>(std::ceil(newWindowSize.x)), static_cast<unsigned>(std::ceil(newWindowSize.y))};
+				auto new_window_size{interface.get_normal_size()};
+				set_size({static_cast<unsigned>(std::ceil(new_window_size.x)), static_cast<unsigned>(std::ceil(new_window_size.y))});
+				return sf::VideoMode{static_cast<unsigned>(std::ceil(new_window_size.x)), static_cast<unsigned>(std::ceil(new_window_size.y))};
 			}(), title, sf::Style::None, settings
-		), interface(std::move(interface)), resizer(getWindowResizer()) {
+		), interface(std::move(interface)), resizer(get_window_resizer()) {
 		construction();
 	}
 	
 	Window::Window(Interface&& interface, sf::WindowHandle handle, const sf::ContextSettings& settings) :
-		window(handle, settings), interface(std::move(interface)), resizer(getWindowResizer()) {
+		window(handle, settings), interface(std::move(interface)), resizer(get_window_resizer()) {
 		construction();
-		this->interface.setRenderWindowSize(window);
+		this->interface.set_render_window_size(window);
 	}
 	
-	Window::Window(const std::filesystem::path& interface) : interface(makeInterface(interface)), resizer(getWindowResizer()) {
+	Window::Window(const std::filesystem::path& interface) : interface(make_interface(interface)), resizer(get_window_resizer()) {
 		construction();
-		this->interface.setRenderWindowSize(window);
+		this->interface.set_render_window_size(window);
 	}
 	
 	Window::Window(const std::filesystem::path& interface, const sf::String& title, const sf::VideoMode& mode, const sf::ContextSettings& settings) :
-		window(mode, title, sf::Style::None, settings), interface(makeInterface(interface)), resizer(getWindowResizer()) {
+		window(mode, title, sf::Style::None, settings), interface(make_interface(interface)), resizer(get_window_resizer()) {
 		construction();
-		this->interface.setRenderWindowSize(window);
+		this->interface.set_render_window_size(window);
 	}
 	
 	Window::Window(const std::filesystem::path& interface, const sf::String& title, const sf::ContextSettings& settings) :
-		window({1, 1}, title, sf::Style::None, settings), interface(makeInterface(interface)), resizer(getWindowResizer()) {
+		window({1, 1}, title, sf::Style::None, settings), interface(make_interface(interface)), resizer(get_window_resizer()) {
 		construction();
-		this->interface.setRenderWindowSize(window);
+		this->interface.set_render_window_size(window);
 	}
 	
 	Window::Window(const std::filesystem::path& interface, sf::WindowHandle handle, const sf::ContextSettings& settings) :
-		window(handle, settings), interface(makeInterface(interface)), resizer(getWindowResizer()) {
+		window(handle, settings), interface(make_interface(interface)), resizer(get_window_resizer()) {
 		construction();
-		this->interface.setRenderWindowSize(window);
+		this->interface.set_render_window_size(window);
 	}
 	
 	Window::Window(Interface::Make&& make, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) :
-		interface(window, std::move(make.object), std::move(make.animationManager), std::move(make.interactionStack)),
-		resizer(getWindowResizer()) {
+		interface(window, std::move(make.object), std::move(make.animation_manager), std::move(make.interaction_stack)),
+		resizer(get_window_resizer()) {
 		
-		Window::reCalculateMinSize();
+		Window::re_calculate_min_size();
 		if(mode == sf::VideoMode{}) {
-			sf::Vector2u normalSize{mapVector2<float, std::ceil>(this->interface.getNormalSize())};
-			sf::Vector2u size{max(sf::Vector2u(minSize), normalSize)};
+			sf::Vector2u normal_size{map_vector2<float, std::ceil>(this->interface.get_normal_size())};
+			sf::Vector2u size{max(sf::Vector2u(min_size), normal_size)};
 			mode = sf::VideoMode{size.x, size.y};
 		}
 		sf::Vector2u size{mode.width, mode.height};
 		
 		window.create(mode, title, sf::Style::None, settings);
 		window.setView({sf::Vector2f{size / 2u}, sf::Vector2f{size}});
-		interface.setSize(sf::Vector2f{size});
-		resizer->setWindow(*this);
+		interface.set_size(sf::Vector2f{size});
+		resizer->set_window(*this);
 	}
 	
 	void Window::create(sf::VideoMode mode, const sf::String& title, sf::Uint32, const sf::ContextSettings& settings) {
@@ -100,41 +100,41 @@ namespace ie {
 		Window::create(mode, title, sf::Style::None, settings);
 	}
 	
-	void Window::reCalculateMinSize() {
-		minSize = max(sf::Vector2u{mapVector2<float, std::ceil>(this->interface.getMinSize())}, {1, 1});
+	void Window::re_calculate_min_size() {
+		min_size = max(sf::Vector2u{map_vector2<float, std::ceil>(this->interface.get_min_size())}, {1, 1});
 	}
 	
 	void Window::update() {
-		KeyHandler::updateMouse();
-		sf::Vector2i mousePosition{sf::Mouse::getPosition(window)};
+		KeyHandler::update_mouse();
+		sf::Vector2i mouse_position{sf::Mouse::getPosition(window)};
 		
-		bool resizerUpdated = resizer->update(mousePosition);
+		bool resizer_updated = resizer->update(mouse_position);
 		
 		window.clear();
-		interface.update(sf::Vector2f{(mousePosition)}, !resizerUpdated && window.hasFocus());
+		interface.update(sf::Vector2f{(mouse_position)}, !resizer_updated && window.hasFocus());
 		interface.draw();
-		//interface.drawDebug(window, 0, 2, 90, 90);
+		//interface.draw_debug(window, 0, 2, 90, 90);
 		window.display();
 		
-		KeyHandler::clearGlobalKeys();
+		KeyHandler::clear_global_keys();
 	}
 	
-	Interface& Window::getInterface() {
+	Interface& Window::get_interface() {
 		return interface;
 	}
 	
-	sf::RenderWindow& Window::getWindow() {
+	sf::RenderWindow& Window::get_window() {
 		return window;
 	}
 	
-	sf::Vector2u Window::getMinSize() const {
-		return minSize;
+	sf::Vector2u Window::get_min_size() const {
+		return min_size;
 	}
 	
-	void Window::setSize(const sf::Vector2u& size) {
+	void Window::set_size(const sf::Vector2u& size) {
 		sf::View view{sf::Vector2f{size / 2u}, sf::Vector2f{size}};
 		window.setSize(size);
 		window.setView(view);
-		interface.setSize(sf::Vector2f{size});
+		interface.set_size(sf::Vector2f{size});
 	}
 }

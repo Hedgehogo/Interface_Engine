@@ -6,7 +6,7 @@
 #include "BaseWindowResizer/WindowResizer/WindowResizer.hpp"
 
 namespace ie {
-	BaseWindowResizer* getWindowResizer();
+	BaseWindowResizer* get_window_resizer();
 	
 	class Window {
 	protected:
@@ -35,22 +35,22 @@ namespace ie {
 		
 		virtual void create(sf::VideoMode mode, const sf::String& title, const sf::ContextSettings& settings = sf::ContextSettings());
 		
-		void setSize(const sf::Vector2u& size);
+		void set_size(const sf::Vector2u& size);
 		
-		virtual void reCalculateMinSize();
+		virtual void re_calculate_min_size();
 		
 		virtual void update();
 		
-		Interface& getInterface();
+		Interface& get_interface();
 		
-		sf::RenderWindow& getWindow();
+		sf::RenderWindow& get_window();
 		
-		sf::Vector2u getMinSize() const;
+		sf::Vector2u get_min_size() const;
 	
 	protected:
 		sf::RenderWindow window;
 		Interface interface;
 		BoxPtr<BaseWindowResizer> resizer;
-		sf::Vector2u minSize;
+		sf::Vector2u min_size;
 	};
 }

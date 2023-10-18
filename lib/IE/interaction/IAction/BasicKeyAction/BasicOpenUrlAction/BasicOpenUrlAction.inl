@@ -7,8 +7,8 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicOpenUrlAction<T>* BasicOpenUrlAction<T>::make(BasicActionInitInfo<T> initInfo) {
-			return new ie::BasicOpenUrlAction<T>{std::move(*this), initInfo};
+		ie::BasicOpenUrlAction<T>* BasicOpenUrlAction<T>::make(BasicActionInitInfo<T> init_info) {
+			return new ie::BasicOpenUrlAction<T>{std::move(*this), init_info};
 		}
 	}
 	
@@ -22,20 +22,20 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicOpenUrlAction<T>::startPressed() {
+	void BasicOpenUrlAction<T>::start_pressed() {
 	}
 	
 	template<typename T>
-	void BasicOpenUrlAction<T>::stopPressed() {
-		openUrl(url);
+	void BasicOpenUrlAction<T>::stop_pressed() {
+		open_url(url);
 	}
 	
 	template<typename T>
-	void BasicOpenUrlAction<T>::whilePressed() {
+	void BasicOpenUrlAction<T>::while_pressed() {
 	}
 	
 	template<typename T>
-	void BasicOpenUrlAction<T>::whileNotPressed() {
+	void BasicOpenUrlAction<T>::while_not_pressed() {
 	}
 	
 	template<typename T>
@@ -44,8 +44,8 @@ namespace ie {
 	}
 	
 	template<typename T>
-	bool DecodePointer<BasicOpenUrlAction<T> >::decodePointer(const YAML::Node& node, BasicOpenUrlAction<T>*& openUrlInteraction) {
-		openUrlInteraction = new BasicOpenUrlAction<T>{
+	bool DecodePointer<BasicOpenUrlAction<T> >::decode_pointer(const YAML::Node& node, BasicOpenUrlAction<T>*& open_url_interaction) {
+		open_url_interaction = new BasicOpenUrlAction<T>{
 			(node.IsScalar() ? node : node["url"]).as<std::string>()
 		};
 		return true;

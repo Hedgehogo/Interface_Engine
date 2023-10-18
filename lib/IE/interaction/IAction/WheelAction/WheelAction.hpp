@@ -9,7 +9,7 @@ namespace ie {
 	public:
 		explicit WheelAction();
 		
-		virtual void update(sf::Vector2i mousePosition, int value) = 0;
+		virtual void update(sf::Vector2i mouse_position, int value) = 0;
 		
 		virtual WheelAction* copy() = 0;
 	

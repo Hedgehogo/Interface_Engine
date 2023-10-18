@@ -9,26 +9,26 @@ public:
 			unsigned long long time;
 			const SetterFunc &setter;
 		};
-		struct setValue{
+		struct set_value{
 			unsigned long long time;
 			float value;
 		};
-		std::vector<AddSetter> addSetter;
-		std::vector<setValue> setValue;
+		std::vector<AddSetter> add_setter;
+		std::vector<set_value> set_value;
 	};
 
 protected:
 	Processed processed;
-	float resultGet;
+	float result_get;
 
 public:
-	explicit TestSValue(float resultGet);
+	explicit TestSValue(float result_get);
 
-	const Processed &getProcessed() const;
+	const Processed &get_processed() const;
 
-	void addSetter(const SetterFunc &setter) override;
+	void add_setter(const SetterFunc &setter) override;
 
-	const float &getValue() const override;
+	const float &get_value() const override;
 
-	void setValue(const float &value) override;
+	void set_value(const float &value) override;
 };

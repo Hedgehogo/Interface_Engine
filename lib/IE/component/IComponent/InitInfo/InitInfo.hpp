@@ -17,27 +17,27 @@ namespace ie {
 	
 	struct InitInfo {
 		sf::RenderWindow& window;
-		sf::RenderTarget& renderTarget;
-		DrawManager& drawManager;
-		UpdateManager& updateManager;
-		InteractionManager& interactionManager;
-		InteractionStack& interactionStack;
-		IPanelManager& panelManager;
+		sf::RenderTarget& render_target;
+		DrawManager& draw_manager;
+		UpdateManager& update_manager;
+		InteractionManager& interaction_manager;
+		InteractionStack& interaction_stack;
+		IPanelManager& panel_manager;
 		
-		InitInfo(sf::RenderWindow& window_, sf::RenderTarget& renderTarget_, DrawManager& drawManager_, UpdateManager& updateManager_, InteractionManager& interactionManager_, InteractionStack& interactionStack_, IPanelManager& panelManager_);
+		InitInfo(sf::RenderWindow& window_, sf::RenderTarget& render_target_, DrawManager& draw_manager_, UpdateManager& update_manager_, InteractionManager& interaction_manager_, InteractionStack& interaction_stack_, IPanelManager& panel_manager_);
 		
 		InitInfo copy(sf::RenderWindow& window_) const;
 		
-		InitInfo copy(sf::RenderTarget& renderTarget_) const;
+		InitInfo copy(sf::RenderTarget& render_target_) const;
 		
-		InitInfo copy(DrawManager& drawManager_) const;
+		InitInfo copy(DrawManager& draw_manager_) const;
 		
-		InitInfo copy(UpdateManager& updateManager_) const;
+		InitInfo copy(UpdateManager& update_manager_) const;
 		
-		InitInfo copy(InteractionManager& interactionManager_) const;
+		InitInfo copy(InteractionManager& interaction_manager_) const;
 		
-		InitInfo copy(InteractionStack& interactionStack_) const;
+		InitInfo copy(InteractionStack& interaction_stack_) const;
 		
-		InitInfo copy(IPanelManager& panelManager_) const;
+		InitInfo copy(IPanelManager& panel_manager_) const;
 	};
 }

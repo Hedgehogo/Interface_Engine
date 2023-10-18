@@ -2,33 +2,33 @@
 
 namespace ie {
 	BoxConstBorder::Make::Make(
-		BoxPtr<IScalable::Make>&& constObject,
-		BoxPtr<IScalable::Make>&& secondObject,
-		float borderDistance,
+		BoxPtr<IScalable::Make>&& const_object,
+		BoxPtr<IScalable::Make>&& second_object,
+		float border_distance,
 		Side side,
-		sf::Vector2f minSize
-	) : constObject(std::move(constObject)), secondObject(std::move(secondObject)), borderDistance(borderDistance), side(side), minSize(minSize) {
+		sf::Vector2f min_size
+	) : const_object(std::move(const_object)), second_object(std::move(second_object)), border_distance(border_distance), side(side), min_size(min_size) {
 	}
 	
-	BoxConstBorder* BoxConstBorder::Make::make(InitInfo initInfo) {
-		return new BoxConstBorder{std::move(*this), initInfo};
+	BoxConstBorder* BoxConstBorder::Make::make(InitInfo init_info) {
+		return new BoxConstBorder{std::move(*this), init_info};
 	}
 	
-	BoxConstBorder::BoxConstBorder(Make&& make, InitInfo initInfo) :
-		Box(make.minSize),
-		constObject(make.constObject->make(initInfo)),
-		secondObject(make.secondObject->make(initInfo)),
-		borderDistance(make.borderDistance),
+	BoxConstBorder::BoxConstBorder(Make&& make, InitInfo init_info) :
+		Box(make.min_size),
+		const_object(make.const_object->make(init_info)),
+		second_object(make.second_object->make(init_info)),
+		border_distance(make.border_distance),
 		side(make.side) {
 	}
 	
-	BoxConstBorder::BoxConstBorder(BoxPtr<IScalable>&& constObject, BoxPtr<IScalable>&& secondObject, Side side, float borderDistance, sf::Vector2f minSize) :
-		Box(minSize), constObject(std::move(constObject)), secondObject(std::move(secondObject)), borderDistance(borderDistance), side(side) {
+	BoxConstBorder::BoxConstBorder(BoxPtr<IScalable>&& const_object, BoxPtr<IScalable>&& second_object, Side side, float border_distance, sf::Vector2f min_size) :
+		Box(min_size), const_object(std::move(const_object)), second_object(std::move(second_object)), border_distance(border_distance), side(side) {
 	}
 	
-	void BoxConstBorder::init(InitInfo initInfo) {
-		constObject->init(initInfo);
-		secondObject->init(initInfo);
+	void BoxConstBorder::init(InitInfo init_info) {
+		const_object->init(init_info);
+		second_object->init(init_info);
 	}
 	
 	void BoxConstBorder::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -36,84 +36,84 @@ namespace ie {
 		
 		switch(side) {
 			case Side::Up:
-				constObject->resize({size.x, borderDistance}, position);
-				secondObject->resize({size.x, size.y - borderDistance}, position + sf::Vector2f(0, borderDistance));
+				const_object->resize({size.x, border_distance}, position);
+				second_object->resize({size.x, size.y - border_distance}, position + sf::Vector2f(0, border_distance));
 				break;
 			case Side::Down:
-				constObject->resize({size.x, borderDistance}, {position.x, position.y + size.y - borderDistance});
-				secondObject->resize({size.x, size.y - borderDistance}, position);
+				const_object->resize({size.x, border_distance}, {position.x, position.y + size.y - border_distance});
+				second_object->resize({size.x, size.y - border_distance}, position);
 				break;
 			case Side::Left:
-				constObject->resize({borderDistance, size.y}, position);
-				secondObject->resize({size.x - borderDistance, size.y}, position + sf::Vector2f(borderDistance, 0));
+				const_object->resize({border_distance, size.y}, position);
+				second_object->resize({size.x - border_distance, size.y}, position + sf::Vector2f(border_distance, 0));
 				break;
 			case Side::Right:
-				constObject->resize({borderDistance, size.y}, {position.x + size.x - borderDistance, position.y});
-				secondObject->resize({size.x - borderDistance, size.y}, position);
+				const_object->resize({border_distance, size.y}, {position.x + size.x - border_distance, position.y});
+				second_object->resize({size.x - border_distance, size.y}, position);
 				break;
 		}
 	}
 	
-	bool BoxConstBorder::updateInteractions(sf::Vector2f mousePosition) {
-		if(constObject->inArea(mousePosition)) {
-			return constObject->updateInteractions(mousePosition);
+	bool BoxConstBorder::update_interactions(sf::Vector2f mouse_position) {
+		if(const_object->in_area(mouse_position)) {
+			return const_object->update_interactions(mouse_position);
 		}
-		return secondObject->updateInteractions(mousePosition);
+		return second_object->update_interactions(mouse_position);
 	}
 	
-	sf::Vector2f BoxConstBorder::getMinSize() const {
-		sf::Vector2f constMinSize = constObject->getMinSize();
-		sf::Vector2f secondMinSize = secondObject->getMinSize();
+	sf::Vector2f BoxConstBorder::get_min_size() const {
+		sf::Vector2f const_min_size = const_object->get_min_size();
+		sf::Vector2f second_min_size = second_object->get_min_size();
 		if(side == Side::Down || side == Side::Up) {
-			return {std::max(constMinSize.x, secondMinSize.x), secondMinSize.y + borderDistance};
+			return {std::max(const_min_size.x, second_min_size.x), second_min_size.y + border_distance};
 		} else {
-			return {secondMinSize.x + borderDistance, std::max(constMinSize.y, secondMinSize.y)};
+			return {second_min_size.x + border_distance, std::max(const_min_size.y, second_min_size.y)};
 		}
 	}
 	
-	sf::Vector2f BoxConstBorder::getNormalSize() const {
-		sf::Vector2f constNormalSize = constObject->getNormalSize();
-		sf::Vector2f secondNormalSize = secondObject->getNormalSize();
+	sf::Vector2f BoxConstBorder::get_normal_size() const {
+		sf::Vector2f const_normal_size = const_object->get_normal_size();
+		sf::Vector2f second_normal_size = second_object->get_normal_size();
 		if(side == Side::Down || side == Side::Up) {
-			return {std::max(constNormalSize.x, secondNormalSize.x), secondNormalSize.y + borderDistance};
+			return {std::max(const_normal_size.x, second_normal_size.x), second_normal_size.y + border_distance};
 		} else {
-			return {secondNormalSize.x + borderDistance, std::max(constNormalSize.y, secondNormalSize.y)};
+			return {second_normal_size.x + border_distance, std::max(const_normal_size.y, second_normal_size.y)};
 		}
 	}
 	
-	IScalable& BoxConstBorder::getFirstObject() {
-		return *constObject;
+	IScalable& BoxConstBorder::get_first_object() {
+		return *const_object;
 	}
 	
-	const IScalable& BoxConstBorder::getFirstObject() const {
-		return *constObject;
+	const IScalable& BoxConstBorder::get_first_object() const {
+		return *const_object;
 	}
 	
-	IScalable& BoxConstBorder::getSecondObject() {
-		return *secondObject;
+	IScalable& BoxConstBorder::get_second_object() {
+		return *second_object;
 	}
 	
-	const IScalable& BoxConstBorder::getSecondObject() const {
-		return *secondObject;
+	const IScalable& BoxConstBorder::get_second_object() const {
+		return *second_object;
 	}
 	
 	BoxConstBorder* BoxConstBorder::copy() {
 		return new BoxConstBorder{*this};
 	}
 	
-	void BoxConstBorder::drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) {
-		IComponent::drawDebug(renderTarget, indent, indentAddition, hue, hueOffset);
-		constObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
-		secondObject->drawDebug(renderTarget, indent + indentAddition, indentAddition, hue + hueOffset, hueOffset);
+	void BoxConstBorder::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+		const_object->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
+		second_object->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
 	
-	bool DecodePointer<BoxConstBorder>::decodePointer(const YAML::Node& node, BoxConstBorder*& boxWithConstBorder) {
-		boxWithConstBorder = new BoxConstBorder{
+	bool DecodePointer<BoxConstBorder>::decode_pointer(const YAML::Node& node, BoxConstBorder*& box_with_const_border) {
+		box_with_const_border = new BoxConstBorder{
 			node["const-object"].as<BoxPtr<IScalable> >(),
 			node["second-object"].as<BoxPtr<IScalable> >(),
 			node["side"].as<Side>(),
 			node["border-distance"].as<float>(),
-			convDef(node["min-size"], sf::Vector2f{})
+			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
 	}

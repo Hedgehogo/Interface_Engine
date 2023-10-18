@@ -2,62 +2,62 @@ namespace ie {
 	template<typename T>
 	BasicActionInitInfo<T>::BasicActionInitInfo(
 		sf::RenderWindow& window_,
-		sf::RenderTarget& renderTarget_,
-		InteractionManager& interactionManager_,
-		InteractionStack& interactionStack_,
-		IPanelManager& panelManager_,
+		sf::RenderTarget& render_target_,
+		InteractionManager& interaction_manager_,
+		InteractionStack& interaction_stack_,
+		IPanelManager& panel_manager_,
 		T additional_
 	) :
 		window(window_),
-		renderTarget(renderTarget_),
-		interactionManager(interactionManager_),
-		interactionStack(interactionStack_),
-		panelManager(panelManager_),
+		render_target(render_target_),
+		interaction_manager(interaction_manager_),
+		interaction_stack(interaction_stack_),
+		panel_manager(panel_manager_),
 		additional(additional_){
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T>::BasicActionInitInfo(ActionInitInfo initInfo, T additional_) :
-		BasicActionInitInfo(initInfo.window, initInfo.renderTarget, initInfo.interactionManager, initInfo.interactionStack, initInfo.panelManager, additional_) {
+	BasicActionInitInfo<T>::BasicActionInitInfo(ActionInitInfo init_info, T additional_) :
+		BasicActionInitInfo(init_info.window, init_info.render_target, init_info.interaction_manager, init_info.interaction_stack, init_info.panel_manager, additional_) {
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T>::BasicActionInitInfo(InitInfo initInfo, T additional_) :
-		BasicActionInitInfo(initInfo.window, initInfo.renderTarget, initInfo.interactionManager, initInfo.interactionStack, initInfo.panelManager, additional_) {
+	BasicActionInitInfo<T>::BasicActionInitInfo(InitInfo init_info, T additional_) :
+		BasicActionInitInfo(init_info.window, init_info.render_target, init_info.interaction_manager, init_info.interaction_stack, init_info.panel_manager, additional_) {
 	}
 	
 	template<typename T>
 	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(sf::RenderWindow& window_) const {
-		return {window_, renderTarget, interactionManager, interactionStack, panelManager, additional};
+		return {window_, render_target, interaction_manager, interaction_stack, panel_manager, additional};
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(sf::RenderTarget& renderTarget_) const {
-		return {window, renderTarget_, interactionManager, interactionStack, panelManager, additional};
+	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(sf::RenderTarget& render_target_) const {
+		return {window, render_target_, interaction_manager, interaction_stack, panel_manager, additional};
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(InteractionManager& interactionManager_) const {
-		return {window, renderTarget, interactionManager_, interactionStack, panelManager, additional};
+	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(InteractionManager& interaction_manager_) const {
+		return {window, render_target, interaction_manager_, interaction_stack, panel_manager, additional};
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(InteractionStack& interactionStack_) const {
-		return {window, renderTarget, interactionManager, interactionStack_, panelManager, additional};
+	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(InteractionStack& interaction_stack_) const {
+		return {window, render_target, interaction_manager, interaction_stack_, panel_manager, additional};
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(IPanelManager& panelManager_) const {
-		return {window, renderTarget, interactionManager, interactionStack, panelManager_, additional};
+	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(IPanelManager& panel_manager_) const {
+		return {window, render_target, interaction_manager, interaction_stack, panel_manager_, additional};
 	}
 	
 	template<typename T>
 	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(T additional_) const {
-		return {window, renderTarget, interactionManager, interactionStack, panelManager, additional_};
+		return {window, render_target, interaction_manager, interaction_stack, panel_manager, additional_};
 	}
 	
 	template<typename T>
-	ActionInitInfo BasicActionInitInfo<T>::toGeneral() const {
-		return {window, renderTarget, interactionManager, interactionStack, panelManager, {}};
+	ActionInitInfo BasicActionInitInfo<T>::to_general() const {
+		return {window, render_target, interaction_manager, interaction_stack, panel_manager, {}};
 	}
 }

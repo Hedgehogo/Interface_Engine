@@ -7,7 +7,7 @@ namespace ie {
 	public:
 		ChangeVariableByStraightLine(float k, float length, float b = 0);
 		
-		float getSize() override;
+		float get_size() override;
 		
 		float operator()(float x) override;
 		
@@ -18,10 +18,10 @@ namespace ie {
 		float k, b;
 	};
 	
-	ChangeVariableByStraightLine* makeChangeVariableByStraightLine(float start, float end, float length);
+	ChangeVariableByStraightLine* make_change_variable_by_straight_line(float start, float end, float length);
 	
 	template<>
 	struct DecodePointer<ChangeVariableByStraightLine> {
-		static bool decodePointer(const YAML::Node& node, ChangeVariableByStraightLine*& changeVariableByStraightLine);
+		static bool decode_pointer(const YAML::Node& node, ChangeVariableByStraightLine*& change_variable_by_straight_line);
 	};
 }

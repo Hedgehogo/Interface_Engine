@@ -1,74 +1,74 @@
 #include "BoxSettable.hpp"
 
 namespace ie {
-	BoxSettable::Make::Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize) :
-		object(std::move(object)), minSize(minSize) {
+	BoxSettable::Make::Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size) :
+		object(std::move(object)), min_size(min_size) {
 	}
 	
-	BoxSettable* BoxSettable::Make::make(InitInfo initInfo) {
-		return new BoxSettable{std::move(*this), initInfo};
+	BoxSettable* BoxSettable::Make::make(InitInfo init_info) {
+		return new BoxSettable{std::move(*this), init_info};
 	}
 	
-	BoxSettable::BoxSettable(Make&& make, InitInfo initInfo) :
-		BoxSettable(std::move(make.object), make.minSize, initInfo) {
+	BoxSettable::BoxSettable(Make&& make, InitInfo init_info) :
+		BoxSettable(std::move(make.object), make.min_size, init_info) {
 	}
 	
-	BoxSettable::BoxSettable(BoxPtr<IScalable::Make>&& object, sf::Vector2f minSize, InitInfo initInfo) :
-		Box(minSize),
-		window(&initInfo.window),
-		renderTarget(&initInfo.renderTarget),
-		interactionStack(&initInfo.interactionStack),
-		panelManagerInterceptor(initInfo.panelManager),
+	BoxSettable::BoxSettable(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size, InitInfo init_info) :
+		Box(min_size),
+		window(&init_info.window),
+		render_target(&init_info.render_target),
+		interaction_stack(&init_info.interaction_stack),
+		panel_manager_interceptor(init_info.panel_manager),
 		object(object->make(
 			{
-				initInfo.window,
-				initInfo.renderTarget,
-				drawManager,
-				updateManager,
-				interactionManager,
-				initInfo.interactionStack,
-				panelManagerInterceptor
+				init_info.window,
+				init_info.render_target,
+				draw_manager,
+				update_manager,
+				interaction_manager,
+				init_info.interaction_stack,
+				panel_manager_interceptor
 			}
 		)) {
-		initInfo.drawManager.add(*this);
-		initInfo.updateManager.add(*this);
+		init_info.draw_manager.add(*this);
+		init_info.update_manager.add(*this);
 	}
 	
-	BoxSettable::BoxSettable(BoxPtr<IScalable>&& object, sf::Vector2f minSize) : Box(minSize), object(std::move(object)) {
+	BoxSettable::BoxSettable(BoxPtr<IScalable>&& object, sf::Vector2f min_size) : Box(min_size), object(std::move(object)) {
 	}
 	
-	void BoxSettable::init(InitInfo initInfo) {
-		drawManager.add(this->drawManager);
-		updateManager.add(this->updateManager);
+	void BoxSettable::init(InitInfo init_info) {
+		draw_manager.add(this->draw_manager);
+		update_manager.add(this->update_manager);
 		
-		this->panelManagerInterceptor.init(initInfo.panelManager);
+		this->panel_manager_interceptor.init(init_info.panel_manager);
 		
-		this->window = &initInfo.window;
-		this->renderTarget = &initInfo.renderTarget;
-		this->interactionStack = &initInfo.interactionStack;
+		this->window = &init_info.window;
+		this->render_target = &init_info.render_target;
+		this->interaction_stack = &init_info.interaction_stack;
 	}
 	
-	void BoxSettable::setObject(BoxPtr<IScalable>&& newObject) {
-		drawManager.clear();
-		updateManager.clear();
-		interactionManager.clear();
-		panelManagerInterceptor.clear();
-		InitInfo initInfo{*window, *renderTarget, drawManager, updateManager, interactionManager, *interactionStack, panelManagerInterceptor};
-		newObject->init(initInfo);
-		object = newObject;
+	void BoxSettable::set_object(BoxPtr<IScalable>&& new_object) {
+		draw_manager.clear();
+		update_manager.clear();
+		interaction_manager.clear();
+		panel_manager_interceptor.clear();
+		InitInfo init_info{*window, *render_target, draw_manager, update_manager, interaction_manager, *interaction_stack, panel_manager_interceptor};
+		new_object->init(init_info);
+		object = new_object;
 	}
 	
-	void BoxSettable::setObject(BoxPtr<IScalable::Make>&& newObject) {
-		drawManager.clear();
-		updateManager.clear();
-		interactionManager.clear();
-		panelManagerInterceptor.clear();
-		InitInfo initInfo{*window, *renderTarget, drawManager, updateManager, interactionManager, *interactionStack, panelManagerInterceptor};
-		object = BoxPtr{newObject->make(initInfo)};
+	void BoxSettable::set_object(BoxPtr<IScalable::Make>&& new_object) {
+		draw_manager.clear();
+		update_manager.clear();
+		interaction_manager.clear();
+		panel_manager_interceptor.clear();
+		InitInfo init_info{*window, *render_target, draw_manager, update_manager, interaction_manager, *interaction_stack, panel_manager_interceptor};
+		object = BoxPtr{new_object->make(init_info)};
 	}
 	
 	void BoxSettable::draw() {
-		this->drawManager.draw();
+		this->draw_manager.draw();
 	}
 	
 	void BoxSettable::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -77,14 +77,14 @@ namespace ie {
 	}
 	
 	void BoxSettable::update() {
-		this->updateManager.update();
+		this->update_manager.update();
 	}
 	
-	IScalable& BoxSettable::getObject() {
+	IScalable& BoxSettable::get_object() {
 		return *object;
 	}
 	
-	const IScalable& BoxSettable::getObject() const {
+	const IScalable& BoxSettable::get_object() const {
 		return *object;
 	}
 	

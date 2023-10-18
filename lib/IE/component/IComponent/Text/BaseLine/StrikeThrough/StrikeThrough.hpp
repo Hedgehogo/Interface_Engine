@@ -7,30 +7,30 @@ namespace ie {
 	public:
 		struct Make : public BaseLine::Make {
 			orl::Option<sf::Color> color = sf::Color{255, 255, 255, 0};
-			float strikeThroughOffset;
+			float strike_through_offset;
 			
-			Make(const orl::Option<sf::Color>& color = {}, float strikeThroughOffset = 0.3);
+			Make(const orl::Option<sf::Color>& color = {}, float strike_through_offset = 0.3);
 			
-			BaseLine* make(LineInitInfo initInfo) override;
+			BaseLine* make(LineInitInfo init_info) override;
 		};
 		
-		StrikeThrough(Make&& make, LineInitInfo initInfo);
+		StrikeThrough(Make&& make, LineInitInfo init_info);
 		
-		StrikeThrough(orl::Option<sf::Color> color = {}, float strikeThroughOffset = 0.3);
+		StrikeThrough(orl::Option<sf::Color> color = {}, float strike_through_offset = 0.3);
 		
-		void init(LineInitInfo initInfo);
+		void init(LineInitInfo init_info);
 		
 		void resize(float start, float end, float height);
 		
 		StrikeThrough* copy() const override;
 	
 	protected:
-		float strikeThroughOffset;
-		float underlineThickness;
+		float strike_through_offset;
+		float underline_thickness;
 	};
 	
 	template<>
 	struct DecodePointer<StrikeThrough> {
-		static bool decodePointer(const YAML::Node& node, StrikeThrough*& strikeThrough);
+		static bool decode_pointer(const YAML::Node& node, StrikeThrough*& strike_through);
 	};
 }

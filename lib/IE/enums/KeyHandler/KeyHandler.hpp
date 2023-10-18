@@ -126,36 +126,36 @@ namespace ie {
 	
 	class KeyHandler {
 	public:
-		static std::vector<Key> getKeysPressed();
+		static std::vector<Key> get_keys_pressed();
 		
-		static void setKeysPressed(std::vector<Key> keysPressed);
+		static void set_keys_pressed(std::vector<Key> keys_pressed);
 		
 		static void update();
 		
-		static void updateKeyBoard();
+		static void update_key_board();
 		
-		static void updateMouse();
+		static void update_mouse();
 		
-		static void addKey(Key key);
+		static void add_key(Key key);
 		
-		static void deleteKey(Key key);
+		static void delete_key(Key key);
 		
 		static void clear();
 		
-		static void clearGlobalKeys();
+		static void clear_global_keys();
 		
-		static std::string toString(Key key);
+		static std::string to_string(Key key);
 		
-		static bool isKeyPressed(Key key);
+		static bool is_key_pressed(Key key);
 	
 	protected:
-		static std::vector<Key> keysPressed;
-		static std::vector<Key> globalKeysPressed;
+		static std::vector<Key> keys_pressed;
+		static std::vector<Key> global_keys_pressed;
 	};
 	
-	std::string toString(Key key);
+	std::string to_string(Key key);
 	
-	bool isKeyPressed(Key key);
+	bool is_key_pressed(Key key);
 	
 	template<>
 	struct Decode<Key> {

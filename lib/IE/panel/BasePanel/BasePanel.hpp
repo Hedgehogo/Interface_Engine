@@ -19,7 +19,7 @@ namespace ie {
 		struct Make {
 			virtual ~Make() = default;
 			
-			virtual BasePanel* make(InitInfo initInfo) = 0;
+			virtual BasePanel* make(InitInfo init_info) = 0;
 		};
 		
 		BasePanel(
@@ -27,8 +27,8 @@ namespace ie {
 			BoxPtr<ISizing2::Make> sizing,
 			BoxPtr<IPositioning2::Make> positioning,
 			bool displayed,
-			InitInfo objectInitInfo,
-			InitInfo initInfo
+			InitInfo object_init_info,
+			InitInfo init_info
 		);
 		
 		BasePanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed = false);
@@ -37,72 +37,72 @@ namespace ie {
 		
 		virtual ~BasePanel() = default;
 		
-		virtual void init(InitInfo initInfo);
+		virtual void init(InitInfo init_info);
 		
-		virtual bool isIndependent() = 0;
+		virtual bool is_independent() = 0;
 		
-		virtual bool isFree() = 0;
+		virtual bool is_free() = 0;
 		
-		virtual void setDisplayed();
+		virtual void set_displayed();
 		
-		virtual void setParentProcessed(bool parentProcessed);
+		virtual void set_parent_processed(bool parent_processed);
 		
-		virtual bool getParentProcessed();
+		virtual bool get_parent_processed();
 		
-		virtual bool inPanel(sf::Vector2f pointPosition);
+		virtual bool in_panel(sf::Vector2f point_position);
 		
-		bool inArea(sf::Vector2f pointPosition);
+		bool in_area(sf::Vector2f point_position);
 		
-		bool in(sf::Vector2f pointPosition);
+		bool in(sf::Vector2f point_position);
 		
 		void draw() override;
 		
-		void setPosition(sf::Vector2f position);
+		void set_position(sf::Vector2f position);
 		
 		void move(sf::Vector2f offset);
 		
-		void resize(sf::Vector2f parentSize, sf::Vector2f parentPosition);
+		void resize(sf::Vector2f parent_size, sf::Vector2f parent_position);
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition);
+		bool update_interactions(sf::Vector2f mouse_position);
 		
-		virtual bool updateInteractions(sf::Vector2f mousePosition, bool active);
+		virtual bool update_interactions(sf::Vector2f mouse_position, bool active);
 		
-		sf::Vector2f getAreaPosition() const;
+		sf::Vector2f get_area_position() const;
 		
-		sf::Vector2f getAreaSize() const;
+		sf::Vector2f get_area_size() const;
 		
-		sf::Vector2f getMinSize() const;
+		sf::Vector2f get_min_size() const;
 		
-		sf::Vector2f getNormalSize() const;
+		sf::Vector2f get_normal_size() const;
 		
-		IScalable& getObject() override;
+		IScalable& get_object() override;
 		
-		const IScalable& getObject() const override;
+		const IScalable& get_object() const override;
 		
 		virtual BasePanel* copy() = 0;
 		
-		static void setFullDebug(bool fullDebug);
+		static void set_full_debug(bool full_debug);
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset);
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset);
 	
 	protected:
-		LayoutData& layoutGetData() override;
+		LayoutData& layout_get_data() override;
 		
-		const LayoutData& layoutGetData() const override;
+		const LayoutData& layout_get_data() const override;
 		
 		LayoutData layout;
-		DrawManager drawManager;
-		UpdateManager updateManager;
+		DrawManager draw_manager;
+		UpdateManager update_manager;
 		BoxPtr<IScalable> object;
 		BoxPtr<ISizing2> sizing;
 		BoxPtr<IPositioning2> positioning;
-		bool parentProcessed;
-		bool oldDisplayed;
+		bool parent_processed;
+		bool old_displayed;
 		bool displayed;
 		bool active;
 		
-		static bool fullDebug;
+		static bool full_debug;
 	};
 }

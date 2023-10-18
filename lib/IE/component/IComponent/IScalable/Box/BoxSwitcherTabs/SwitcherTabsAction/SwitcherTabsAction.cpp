@@ -5,31 +5,31 @@ namespace ie {
 	SwitcherTabsAction::Make::Make(PISint value) : value(std::move(value)) {
 	}
 	
-	SwitcherTabsAction* SwitcherTabsAction::Make::make(BasicActionInitInfo<BoxSwitcherTabs&> initInfo) {
-		return new SwitcherTabsAction{std::move(*this), initInfo};
+	SwitcherTabsAction* SwitcherTabsAction::Make::make(BasicActionInitInfo<BoxSwitcherTabs&> init_info) {
+		return new SwitcherTabsAction{std::move(*this), init_info};
 	}
 	
-	SwitcherTabsAction::SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> initInfo) :
-		value(std::move(make.value)), switcherTabs(&initInfo.additional) {
+	SwitcherTabsAction::SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> init_info) :
+		value(std::move(make.value)), switcher_tabs(&init_info.additional) {
 	}
 	
 	SwitcherTabsAction::SwitcherTabsAction(PISint value) :
-		value(std::move(value)), switcherTabs(nullptr) {
+		value(std::move(value)), switcher_tabs(nullptr) {
 	}
 	
-	void SwitcherTabsAction::init(BasicActionInitInfo<BoxSwitcherTabs&> initInfo) {
-		switcherTabs = &initInfo.additional;
+	void SwitcherTabsAction::init(BasicActionInitInfo<BoxSwitcherTabs&> init_info) {
+		switcher_tabs = &init_info.additional;
 	}
 	
-	void SwitcherTabsAction::startPressed() {}
+	void SwitcherTabsAction::start_pressed() {}
 	
-	void SwitcherTabsAction::stopPressed() {
-		value->setValue(switcherTabs->getTab(sf::Vector2f(mousePosition)));
+	void SwitcherTabsAction::stop_pressed() {
+		value->set_value(switcher_tabs->get_tab(sf::Vector2f(mouse_position)));
 	}
 	
-	void SwitcherTabsAction::whilePressed() {}
+	void SwitcherTabsAction::while_pressed() {}
 	
-	void SwitcherTabsAction::whileNotPressed() {}
+	void SwitcherTabsAction::while_not_pressed() {}
 	
 	SwitcherTabsAction* SwitcherTabsAction::copy() {
 		return new SwitcherTabsAction{*this};

@@ -6,38 +6,38 @@ namespace ie {
 		return nullptr;
 	}
 	
-	BaseLine::BaseLine(sf::PrimitiveType type, std::size_t vertexCount, orl::Option<sf::Color> color, LineInitInfo initInfo) : vertexArray(type, vertexCount) {
-		sf::Color currentColor;
+	BaseLine::BaseLine(sf::PrimitiveType type, std::size_t vertex_count, orl::Option<sf::Color> color, LineInitInfo init_info) : vertex_array(type, vertex_count) {
+		sf::Color current_color;
 		if(color.is_some())
-			currentColor = color.some();
+			current_color = color.some();
 		else
-			currentColor = initInfo.color;
+			current_color = init_info.color;
 		
-		for(std::size_t i = 0; i < vertexArray.getVertexCount(); ++i)
-			vertexArray[i].color = currentColor;
+		for(std::size_t i = 0; i < vertex_array.getVertexCount(); ++i)
+			vertex_array[i].color = current_color;
 		
-		this->renderTarget = &initInfo.renderTarget;
+		this->render_target = &init_info.render_target;
 	}
 	
-	BaseLine::BaseLine(sf::PrimitiveType type, std::size_t vertexCount, orl::Option<sf::Color> color) : vertexArray(type, vertexCount) {
-		for(std::size_t i = 0; i < vertexArray.getVertexCount(); ++i)
-			vertexArray[i].color = color.except();
+	BaseLine::BaseLine(sf::PrimitiveType type, std::size_t vertex_count, orl::Option<sf::Color> color) : vertex_array(type, vertex_count) {
+		for(std::size_t i = 0; i < vertex_array.getVertexCount(); ++i)
+			vertex_array[i].color = color.except();
 	}
 	
-	void BaseLine::init(LineInitInfo initInfo) {
-		this->renderTarget = &initInfo.renderTarget;
+	void BaseLine::init(LineInitInfo init_info) {
+		this->render_target = &init_info.render_target;
 		
-		if(vertexArray[0].color == sf::Color{255, 255, 255, 0})
-			for(std::size_t i = 0; i < vertexArray.getVertexCount(); ++i)
-				vertexArray[i].color = initInfo.color;
+		if(vertex_array[0].color == sf::Color{255, 255, 255, 0})
+			for(std::size_t i = 0; i < vertex_array.getVertexCount(); ++i)
+				vertex_array[i].color = init_info.color;
 	}
 	
 	void BaseLine::draw() {
-		renderTarget->draw(vertexArray);
+		render_target->draw(vertex_array);
 	}
 	
 	void BaseLine::move(sf::Vector2f position) {
-		for(std::size_t i = 0; i < vertexArray.getVertexCount(); ++i)
-			vertexArray[i].position += position;
+		for(std::size_t i = 0; i < vertex_array.getVertexCount(); ++i)
+			vertex_array[i].position += position;
 	}
 }

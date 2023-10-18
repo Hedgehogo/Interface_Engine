@@ -16,7 +16,7 @@ namespace ie {
 			
 			BasicOneKeyInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
 			
-			ie::BasicOneKeyInteraction<T>* make(BasicActionInitInfo<T> initInfo) override;
+			ie::BasicOneKeyInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
 		};
 	}
 	
@@ -25,23 +25,23 @@ namespace ie {
 	public:
 		using Make = make_system::BasicOneKeyInteraction<T>;
 		
-		BasicOneKeyInteraction(Make&& make, BasicActionInitInfo<T> initInfo);
+		BasicOneKeyInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
 		BasicOneKeyInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
 		
-		void init(BasicActionInitInfo<T> initInfo) override;
+		void init(BasicActionInitInfo<T> init_info) override;
 		
-		Key getKey();
+		Key get_key();
 		
-		BasicKeyAction<T>& getAction();
+		BasicKeyAction<T>& get_action();
 		
-		const BasicKeyAction<T>& getAction() const;
+		const BasicKeyAction<T>& get_action() const;
 		
-		void setAction(BoxPtr<BasicKeyAction<T> >&& action);
+		void set_action(BoxPtr<BasicKeyAction<T> >&& action);
 		
-		void start(sf::Vector2i mousePosition) override;
+		void start(sf::Vector2i mouse_position) override;
 		
-		void update(sf::Vector2i mousePosition) override;
+		void update(sf::Vector2i mouse_position) override;
 		
 		void finish(sf::Vector2i) override;
 		
@@ -56,7 +56,7 @@ namespace ie {
 	
 	template<typename T>
 	struct DecodePointer<BasicOneKeyInteraction<T> > {
-		static bool decodePointer(const YAML::Node& node, BasicOneKeyInteraction<T>*& oneKeyInteraction);
+		static bool decode_pointer(const YAML::Node& node, BasicOneKeyInteraction<T>*& one_key_interaction);
 	};
 }
 

@@ -8,7 +8,7 @@ namespace ie {
 		return description.c_str();
 	}
 	
-	std::string BaseException::getDescription() {
+	std::string BaseException::get_description() {
 		return description;
 	}
 }

@@ -7,18 +7,18 @@ namespace ie {
 		}
 	}
 	
-	float ChangeVariableByBrokenLine::getSize() {
+	float ChangeVariableByBrokenLine::get_size() {
 		return size;
 	}
 	
 	float ChangeVariableByBrokenLine::operator()(float frame) {
-		float sumSize{0};
+		float sum_size{0};
 		std::size_t i{0};
-		for(; sumSize + values[i].size < frame && i < values.size(); ++i) {
-			sumSize += values[i].size;
+		for(; sum_size + values[i].size < frame && i < values.size(); ++i) {
+			sum_size += values[i].size;
 		}
 		
-		float ratio = (frame - sumSize) / values[i].size;
+		float ratio = (frame - sum_size) / values[i].size;
 		return (ratio * (values[((i == values.size() - 1) ? (0) : (i + 1))].value - values[i].value)) + values[i].value;
 	}
 	
@@ -29,14 +29,14 @@ namespace ie {
 	bool Decode<ChangeVariableByBrokenLine::Value>::decode(const YAML::Node& node, ChangeVariableByBrokenLine::Value& value) {
 		value = ChangeVariableByBrokenLine::Value{
 			node["value"].as<float>(),
-			convDef(node["size"], 0.f),
+			conv_def(node["size"], 0.f),
 		};
 		
 		return true;
 	}
 	
-	bool DecodePointer<ChangeVariableByBrokenLine>::decodePointer(const YAML::Node& node, ChangeVariableByBrokenLine*& brokenLine) {
-		brokenLine = new ChangeVariableByBrokenLine{
+	bool DecodePointer<ChangeVariableByBrokenLine>::decode_pointer(const YAML::Node& node, ChangeVariableByBrokenLine*& broken_line) {
+		broken_line = new ChangeVariableByBrokenLine{
 			node["values"].as<std::vector<ChangeVariableByBrokenLine::Value>>()
 		};
 		

@@ -1,4 +1,4 @@
-//included into fileBuffer.hpp
+//included into file_buffer.hpp
 
 namespace ie {
 	template<typename T>
@@ -24,12 +24,12 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void FileBuffer<T>::setObject(const std::string& name, const std::string& filePath) {
-		LoadFromFile<T>::load(objects[name], filePath);
+	void FileBuffer<T>::set_object(const std::string& name, const std::string& file_path) {
+		LoadFromFile<T>::load(objects[name], file_path);
 	}
 	
 	template<typename T>
-	void FileBuffer<T>::addAlias(const std::string& name, const std::string& alias) {
+	void FileBuffer<T>::add_alias(const std::string& name, const std::string& alias) {
 		aliases[alias] = &get(name);
 	}
 }

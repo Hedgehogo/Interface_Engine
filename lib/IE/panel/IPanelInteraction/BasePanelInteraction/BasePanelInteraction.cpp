@@ -2,19 +2,19 @@
 #include "../../IPanelManager/IPanelManager.hpp"
 
 namespace ie {
-	BasePanelInteraction::BasePanelInteraction(PanelActionInitInfo initInfo) :
-		panel(&initInfo.additional), panelManager(&initInfo.panelManager) {
+	BasePanelInteraction::BasePanelInteraction(PanelActionInitInfo init_info) :
+		panel(&init_info.additional), panel_manager(&init_info.panel_manager) {
 	}
 	
-	BasePanelInteraction::BasePanelInteraction() : panel(nullptr), panelManager(nullptr) {
+	BasePanelInteraction::BasePanelInteraction() : panel(nullptr), panel_manager(nullptr) {
 	}
 	
-	void BasePanelInteraction::init(PanelActionInitInfo initInfo) {
-		this->panel = &initInfo.additional;
-		this->panelManager = &initInfo.panelManager;
+	void BasePanelInteraction::init(PanelActionInitInfo init_info) {
+		this->panel = &init_info.additional;
+		this->panel_manager = &init_info.panel_manager;
 	}
 	
-	void BasePanelInteraction::setPanel(Panel& panel) {
+	void BasePanelInteraction::set_panel(Panel& panel) {
 		this->panel = &panel;
 	}
 }

@@ -11,16 +11,16 @@ namespace ie {
 			
 			Make(float coefficient = 1, float addition = 0);
 			
-			TargetCoefficientSizing* make(float normalSize) override;
+			TargetCoefficientSizing* make(float normal_size) override;
 		};
 		
-		TargetCoefficientSizing(Make&& make, float normalSize);
+		TargetCoefficientSizing(Make&& make, float normal_size);
 		
 		explicit TargetCoefficientSizing(float coefficient = 1, float addition = 0);
 		
 		void init(float) override;
 		
-		float findSize(float, float targetSize) override;
+		float find_size(float, float target_size) override;
 		
 		TargetCoefficientSizing* copy() override;
 	
@@ -31,6 +31,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<TargetCoefficientSizing> {
-		static bool decodePointer(const YAML::Node& node, TargetCoefficientSizing*& targetCoefficientSizing);
+		static bool decode_pointer(const YAML::Node& node, TargetCoefficientSizing*& target_coefficient_sizing);
 	};
 }

@@ -7,15 +7,15 @@ namespace ie {
 		}
 	}
 	
-	float ChangeVariableBySteppedLine::getSize() {
+	float ChangeVariableBySteppedLine::get_size() {
 		return size;
 	}
 	
 	float ChangeVariableBySteppedLine::operator()(float frame) {
-		float sumSize{0};
+		float sum_size{0};
 		std::size_t i{0};
-		for(; sumSize + values[i].size < frame && i < values.size(); ++i) {
-			sumSize += values[i].size;
+		for(; sum_size + values[i].size < frame && i < values.size(); ++i) {
+			sum_size += values[i].size;
 		}
 		
 		return values[i].value;
@@ -28,14 +28,14 @@ namespace ie {
 	bool Decode<ChangeVariableBySteppedLine::Value>::decode(const YAML::Node& node, ChangeVariableBySteppedLine::Value& value) {
 		value = ChangeVariableBySteppedLine::Value{
 			node["value"].as<float>(),
-			convDef(node["size"], 0.f),
+			conv_def(node["size"], 0.f),
 		};
 		
 		return true;
 	}
 	
-	bool DecodePointer<ChangeVariableBySteppedLine>::decodePointer(const YAML::Node& node, ChangeVariableBySteppedLine*& brokenLine) {
-		brokenLine = new ChangeVariableBySteppedLine{
+	bool DecodePointer<ChangeVariableBySteppedLine>::decode_pointer(const YAML::Node& node, ChangeVariableBySteppedLine*& broken_line) {
+		broken_line = new ChangeVariableBySteppedLine{
 			node["values"].as<std::vector<ChangeVariableBySteppedLine::Value>>()
 		};
 		

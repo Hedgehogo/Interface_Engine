@@ -4,7 +4,7 @@ namespace ie {
 	ChangeVariableBySinusoid::ChangeVariableBySinusoid(float size, float a, float b, float c, float d) : a(a), b(b), c(c), d(d), size(size) {
 	}
 	
-	float ChangeVariableBySinusoid::getSize() {
+	float ChangeVariableBySinusoid::get_size() {
 		return size;
 	}
 	
@@ -17,13 +17,13 @@ namespace ie {
 	}
 	
 	
-	bool DecodePointer<ChangeVariableBySinusoid>::decodePointer(const YAML::Node& node, ChangeVariableBySinusoid*& changeVariableBySinusoid) {
-		changeVariableBySinusoid = new ChangeVariableBySinusoid{
+	bool DecodePointer<ChangeVariableBySinusoid>::decode_pointer(const YAML::Node& node, ChangeVariableBySinusoid*& change_variable_by_sinusoid) {
+		change_variable_by_sinusoid = new ChangeVariableBySinusoid{
 			node["size"].as<float>(),
-			convDef(node["a"], convDef(node["offset-OY"], 0.f)),
-			convDef(node["b"], convDef(node["amplitude"], 1.f)),
-			convDef(node["c"], convDef(node["frequency"], 1.f)),
-			convDef(node["d"], convDef(node["offset-OX"], 0.f)),
+			conv_def(node["a"], conv_def(node["offset-OY"], 0.f)),
+			conv_def(node["b"], conv_def(node["amplitude"], 1.f)),
+			conv_def(node["c"], conv_def(node["frequency"], 1.f)),
+			conv_def(node["d"], conv_def(node["offset-OX"], 0.f)),
 		};
 		
 		return true;

@@ -4,7 +4,7 @@
 namespace ie {
 	sf::Vector2f MouseWheel::delta{0, 0};
 	
-	void MouseWheel::setDelta(sf::Event::MouseWheelScrollEvent event) {
+	void MouseWheel::set_delta(sf::Event::MouseWheelScrollEvent event) {
 		if(event.wheel == sf::Mouse::Wheel::VerticalWheel) {
 			delta.y += event.delta;
 		} else {
@@ -12,7 +12,7 @@ namespace ie {
 		}
 	}
 	
-	void MouseWheel::setDelta(sf::Vector2f delta) {
+	void MouseWheel::set_delta(sf::Vector2f delta) {
 		MouseWheel::delta = delta;
 	}
 	
@@ -20,7 +20,7 @@ namespace ie {
 		delta = {0, 0};
 	}
 	
-	sf::Vector2f MouseWheel::getDelta() {
+	sf::Vector2f MouseWheel::get_delta() {
 		return delta;
 	}
 }

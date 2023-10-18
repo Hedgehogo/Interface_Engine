@@ -10,7 +10,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicCloseWindowAction : public BasicKeyAction<T> {
-			ie::BasicCloseWindowAction<T>* make(BasicActionInitInfo<T> initInfo) override;
+			ie::BasicCloseWindowAction<T>* make(BasicActionInitInfo<T> init_info) override;
 		};
 	}
 	
@@ -19,22 +19,22 @@ namespace ie {
 	public:
 		using Make = make_system::BasicCloseWindowAction<T>;
 		
-		BasicCloseWindowAction(Make&& make, BasicActionInitInfo<T> initInfo);
+		BasicCloseWindowAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
 		BasicCloseWindowAction();
 		
-		void init(BasicActionInitInfo<T> initInfo) override;
+		void init(BasicActionInitInfo<T> init_info) override;
 		
 		BasicCloseWindowAction<T>* copy() override;
 	
 	protected:
-		void startPressed() override;
+		void start_pressed() override;
 		
-		void stopPressed() override;
+		void stop_pressed() override;
 		
-		void whilePressed() override;
+		void while_pressed() override;
 		
-		void whileNotPressed() override;
+		void while_not_pressed() override;
 		
 		sf::RenderWindow* window;
 	};
@@ -43,7 +43,7 @@ namespace ie {
 	
 	template<typename T>
 	struct DecodePointer<BasicCloseWindowAction<T> > {
-		static bool decodePointer(const YAML::Node&, BasicCloseWindowAction<T>*& closeWindowAction);
+		static bool decode_pointer(const YAML::Node&, BasicCloseWindowAction<T>*& close_window_action);
 	};
 }
 

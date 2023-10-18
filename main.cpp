@@ -7,23 +7,23 @@ class FpsCounter {
 public:
 	float medium() {
 		float sum = 0.0f;
-		for(const auto& fps: lastFPS) {
+		for(const auto& fps: last_fps_) {
 			sum += fps;
 		}
-		return sum / static_cast<float>(lastFPS.size());
+		return sum / static_cast<float>(last_fps_.size());
 	}
 	
 	float restart() {
-		lastFPS[0] = 1.f / clock.restart().asSeconds();
-		std::rotate(lastFPS.begin(), lastFPS.begin() + 1, lastFPS.end());
+		last_fps_[0] = 1.f / clock_.restart().asSeconds();
+		std::rotate(last_fps_.begin(), last_fps_.begin() + 1, last_fps_.end());
 		float result = medium();
-		clock.restart();
+		clock_.restart();
 		return result;
 	}
 
 private:
-	sf::Clock clock;
-	std::array<float, N> lastFPS{};
+	sf::Clock clock_;
+	std::array<float, N> last_fps_{};
 };
 
 int main() {
@@ -37,7 +37,7 @@ int main() {
 		ie::Interface::Make{
 			make_box_ptr<ie::BoxScroll::Make>(
 				make_box_ptr<ie::Text::Make>(
-					ie::makeVector(
+					ie::make_vector(
 						make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
 							U"bbabb"
 						),
@@ -56,8 +56,8 @@ int main() {
 					sf::Text::Style{},
 					make_box_ptr<ie::Resizer::Make>(1.15f, ie::BaseResizer::Align::Left),
 					make_box_ptr<ie::BasicHotkeyInteraction<ie::Text&>::Make>(
-						ie::makeVector(
-							ie::makeVector(
+						ie::make_vector(
+							ie::make_vector(
 								make_box_ptr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>::Make>(
 									make_box_ptr<ie::BasicKeysInteraction<ie::Text&>::Make>(
 										make_box_ptr<ie::TextSelectionAction::Make>(),
@@ -86,15 +86,15 @@ int main() {
 	
 	FpsCounter<500> fps;
 	
-	while(window.getWindow().isOpen()) {
-		window.getWindow().setTitle(std::to_string(fps.restart()));
+	while(window.get_window().isOpen()) {
+		window.get_window().setTitle(std::to_string(fps.restart()));
 		
 		sf::Event event{};
-		while(window.getWindow().pollEvent(event)) {
+		while(window.get_window().pollEvent(event)) {
 			ie::handle_event(event);
 			
 			if(event.type == sf::Event::Closed) {
-				window.getWindow().close();
+				window.get_window().close();
 			}
 		}
 		

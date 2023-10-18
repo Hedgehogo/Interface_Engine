@@ -7,112 +7,112 @@ namespace ie {
 	InteractiveTextBlock::Make::Make(
 		BoxPtr<IBaseInteraction>&& interaction,
 		const std::u32string& text,
-		const orl::Option<sf::Color>& textColor,
+		const orl::Option<sf::Color>& text_color,
 		const orl::Option<sf::Font*>& font,
 		const orl::Option<sf::Text::Style>& style,
 		std::vector<BoxPtr<BaseLine::Make>>&& lines,
 		const orl::Option<uint>& size,
-		const orl::Option<sf::Color>& textSelectionColor,
-		const orl::Option<sf::Color>& backgroundSelectionColor,
-		const orl::Option<sf::Color>& inactiveTextSelectionColor,
-		const orl::Option<sf::Color>& inactiveBackgroundSelectionColor
+		const orl::Option<sf::Color>& text_selection_color,
+		const orl::Option<sf::Color>& background_selection_color,
+		const orl::Option<sf::Color>& inactive_text_selection_color,
+		const orl::Option<sf::Color>& inactive_background_selection_color
 	) : TextBlock::Make(
 			text,
-			textColor,
+			text_color,
 			font,
 			style,
 			std::move(lines),
 			size,
-			textSelectionColor,
-			backgroundSelectionColor,
-			inactiveTextSelectionColor,
-			inactiveBackgroundSelectionColor
+			text_selection_color,
+			background_selection_color,
+			inactive_text_selection_color,
+			inactive_background_selection_color
 		),
 		interaction(std::move(interaction)) {
 	}
 	
-	InteractiveTextBlock* InteractiveTextBlock::Make::make(TextBockInitInfo textBlockInitInfo) {
-		return new InteractiveTextBlock{std::move(*this), textBlockInitInfo};
+	InteractiveTextBlock* InteractiveTextBlock::Make::make(TextBockInitInfo text_block_init_info) {
+		return new InteractiveTextBlock{std::move(*this), text_block_init_info};
 	}
 	
 	InteractiveTextBlock::InteractiveTextBlock(
 		Make&& make,
-		TextBockInitInfo textBlockInitInfo
+		TextBockInitInfo text_block_init_info
 	) : TextBlock(
 			TextBlock::Make{
 				std::move(make.text),
-				make.textColor,
+				make.text_color,
 				make.font,
 				make.style,
 				std::move(make.lines),
 				make.size,
-				make.textSelectionColor,
-				make.backgroundSelectionColor,
-				make.inactiveTextSelectionColor,
-				make.inactiveBackgroundSelectionColor
+				make.text_selection_color,
+				make.background_selection_color,
+				make.inactive_text_selection_color,
+				make.inactive_background_selection_color
 			},
-			textBlockInitInfo
+			text_block_init_info
 		),
 		interact(false),
-		oldInteract(false),
+		old_interact(false),
 		interaction(std::move(make.interaction)) {
-		this->interactionManager = &textBlockInitInfo.textInteractionManager;
+		this->interaction_manager = &text_block_init_info.text_interaction_manager;
 	}
 	
 	InteractiveTextBlock::InteractiveTextBlock(
 		BoxPtr<IBaseInteraction>&& interaction,
 		std::u32string text,
-		orl::Option<sf::Color> textColor,
+		orl::Option<sf::Color> text_color,
 		orl::Option<sf::Font*> font,
 		orl::Option<sf::Text::Style> style,
 		std::vector<BoxPtr<BaseLine>>&& lines,
 		orl::Option<uint> size,
-		orl::Option<sf::Color> textSelectionColor,
-		orl::Option<sf::Color> backgroundSelectionColor,
-		orl::Option<sf::Color> inactiveTextSelectionColor,
-		orl::Option<sf::Color> inactiveBackgroundSelectionColor
+		orl::Option<sf::Color> text_selection_color,
+		orl::Option<sf::Color> background_selection_color,
+		orl::Option<sf::Color> inactive_text_selection_color,
+		orl::Option<sf::Color> inactive_background_selection_color
 	) : TextBlock(
 			std::move(text),
-			textColor,
+			text_color,
 			font,
 			style,
 			std::move(lines),
 			size,
-			textSelectionColor,
-			backgroundSelectionColor,
-			inactiveTextSelectionColor,
-			inactiveBackgroundSelectionColor
+			text_selection_color,
+			background_selection_color,
+			inactive_text_selection_color,
+			inactive_background_selection_color
 		),
 		interact(false),
-		oldInteract(false),
+		old_interact(false),
 		interaction(std::move(interaction)) {
 	}
 	
-	void InteractiveTextBlock::init(TextBockInitInfo textBlockInitInfo) {
-		TextBlock::init(textBlockInitInfo);
-		this->interactionManager = &textBlockInitInfo.interactionManager;
+	void InteractiveTextBlock::init(TextBockInitInfo text_block_init_info) {
+		TextBlock::init(text_block_init_info);
+		this->interaction_manager = &text_block_init_info.interaction_manager;
 	}
 	
 	void InteractiveTextBlock::update() {
-		if(interact != oldInteract) {
-			oldInteract = interact;
+		if(interact != old_interact) {
+			old_interact = interact;
 			if(interact) {
-				interactionManager->addInteraction(*interaction);
+				interaction_manager->add_interaction(*interaction);
 			} else {
-				interactionManager->deleteInteraction(*interaction);
+				interaction_manager->delete_interaction(*interaction);
 			}
 		}
 		interact = false;
 	}
 	
-	bool InteractiveTextBlock::updateInteractions(sf::Vector2f) {
+	bool InteractiveTextBlock::update_interactions(sf::Vector2f) {
 		interact = true;
 		return true;
 	}
 	
-	bool InteractiveTextBlock::in(sf::Vector2f mousePosition) {
-		for(auto& character: textCharacters) {
-			if(character->in(mousePosition)) {
+	bool InteractiveTextBlock::in(sf::Vector2f mouse_position) {
+		for(auto& character: text_characters) {
+			if(character->in(mouse_position)) {
 				return true;
 			}
 		}
@@ -123,19 +123,19 @@ namespace ie {
 		return nullptr;
 	}
 	
-	bool DecodePointer<InteractiveTextBlock>::decodePointer(const YAML::Node& node, InteractiveTextBlock*& interactiveTextBlock) {
-		interactiveTextBlock = new InteractiveTextBlock{
+	bool DecodePointer<InteractiveTextBlock>::decode_pointer(const YAML::Node& node, InteractiveTextBlock*& interactive_text_block) {
+		interactive_text_block = new InteractiveTextBlock{
 			node["interaction"].as < BoxPtr < IBaseInteraction > > (),
 			node["text"].as<std::u32string>(),
-			convDef<orl::Option<sf::Color> >(node["text-color"], {}),
-			convDef<orl::Option<sf::Font*> >(node["font"], {}),
-			convDef<orl::Option<sf::Text::Style> >(node["style"], {}),
-			node["line"] ? makeVector(node["line"].as < BoxPtr < BaseLine >> ()) : node["line"].as<std::vector<BoxPtr<BaseLine>>>(),
-			convDef<orl::Option<uint>>(node["size"], {}),
-			convDef<orl::Option<sf::Color> >(node["text-selection-color"], {}),
-			convDef<orl::Option<sf::Color> >(node["background-selection-color"], {}),
-			convDef<orl::Option<sf::Color> >(node["inactive-text-selection-color"], {}),
-			convDef<orl::Option<sf::Color> >(node["inactive-background-selection-color"], {})
+			conv_def<orl::Option<sf::Color> >(node["text-color"], {}),
+			conv_def<orl::Option<sf::Font*> >(node["font"], {}),
+			conv_def<orl::Option<sf::Text::Style> >(node["style"], {}),
+			node["line"] ? make_vector(node["line"].as < BoxPtr < BaseLine >> ()) : node["line"].as<std::vector<BoxPtr<BaseLine>>>(),
+			conv_def<orl::Option<uint>>(node["size"], {}),
+			conv_def<orl::Option<sf::Color> >(node["text-selection-color"], {}),
+			conv_def<orl::Option<sf::Color> >(node["background-selection-color"], {}),
+			conv_def<orl::Option<sf::Color> >(node["inactive-text-selection-color"], {}),
+			conv_def<orl::Option<sf::Color> >(node["inactive-background-selection-color"], {})
 		};
 		return true;
 	}

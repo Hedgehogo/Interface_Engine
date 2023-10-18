@@ -16,7 +16,7 @@ namespace ie {
 			
 			BasicOpenUrlAction(const std::string& url);
 			
-			ie::BasicOpenUrlAction<T>* make(BasicActionInitInfo<T> initInfo) override;
+			ie::BasicOpenUrlAction<T>* make(BasicActionInitInfo<T> init_info) override;
 		};
 	}
 	
@@ -25,20 +25,20 @@ namespace ie {
 	public:
 		using Make = make_system::BasicOpenUrlAction<T>;
 		
-		BasicOpenUrlAction(Make&& make, BasicActionInitInfo<T> initInfo);
+		BasicOpenUrlAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
 		explicit BasicOpenUrlAction(const std::string& url);
 		
 		BasicOpenUrlAction<T>* copy() override;
 	
 	protected:
-		void startPressed() override;
+		void start_pressed() override;
 		
-		void stopPressed() override;
+		void stop_pressed() override;
 		
-		void whilePressed() override;
+		void while_pressed() override;
 		
-		void whileNotPressed() override;
+		void while_not_pressed() override;
 		
 		std::string url;
 	};
@@ -47,10 +47,10 @@ namespace ie {
 	
 	template<typename T>
 	struct DecodePointer<BasicOpenUrlAction<T> > {
-		static bool decodePointer(const YAML::Node& node, BasicOpenUrlAction<T>*& openUrlInteraction);
+		static bool decode_pointer(const YAML::Node& node, BasicOpenUrlAction<T>*& open_url_interaction);
 	};
 	
-	bool determineUrl(const YAML::Node& node);
+	bool determine_url(const YAML::Node& node);
 }
 
 #include "BasicOpenUrlAction.inl"

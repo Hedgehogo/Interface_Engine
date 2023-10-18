@@ -7,22 +7,22 @@ namespace ie {
 	class DontHidePanelInteraction : public BasicEmptyInteraction<Panel&>, public virtual IHidePanelInteraction {
 	public:
 		struct Make : public virtual IHidePanelInteraction::Make {
-			DontHidePanelInteraction* make(PanelActionInitInfo initInfo) override;
+			DontHidePanelInteraction* make(PanelActionInitInfo init_info) override;
 		};
 		
-		DontHidePanelInteraction(Make&& make, PanelActionInitInfo initInfo);
+		DontHidePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
 		DontHidePanelInteraction() = default;
 		
-		void init(PanelActionInitInfo initInfo) override;
+		void init(PanelActionInitInfo init_info) override;
 		
-		void setPanel(Panel&) override;
+		void set_panel(Panel&) override;
 		
 		DontHidePanelInteraction* copy() override;
 	};
 	
 	template<>
 	struct DecodePointer<DontHidePanelInteraction> {
-		static bool decodePointer(const YAML::Node&, DontHidePanelInteraction*& dontHidePanelInteraction);
+		static bool decode_pointer(const YAML::Node&, DontHidePanelInteraction*& dont_hide_panel_interaction);
 	};
 }

@@ -8,12 +8,12 @@ namespace ie {
 	
 	class IAnimatorUnit;
 	
-	extern std::map<std::string, std::vector<std::function<void(IAnimatorUnit*)>>> animatorUnitRequest;
-	extern std::map<std::string, IAnimatorUnit*> animatorUnitBuffer;
+	extern std::map<std::string, std::vector<std::function<void(IAnimatorUnit*)>>> animator_unit_request;
+	extern std::map<std::string, IAnimatorUnit*> animator_unit_buffer;
 	
-	void animatorUnitRequestUpdate();
+	void animator_unit_request_update();
 	
-	void addNextAnimatorUnit(const YAML::Node& node, std::function<void(IAnimatorUnit*)> fun, std::string nameNextNode = "next");
+	void add_next_animator_unit(const YAML::Node& node, std::function<void(IAnimatorUnit*)> fun, std::string name_next_node = "next");
 	
-	void addUnitInBuffer(const YAML::Node& node, IAnimatorUnit* unit, std::string name = "name");
+	void add_unit_in_buffer(const YAML::Node& node, IAnimatorUnit* unit, std::string name = "name");
 }

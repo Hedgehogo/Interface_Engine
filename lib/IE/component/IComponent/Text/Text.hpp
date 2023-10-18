@@ -15,123 +15,123 @@ namespace ie {
 		
 	public:
 		struct Make : public virtual IComponent::Make {
-			std::vector<BoxPtr<BaseTextBlock::Make> > textBlocks;
+			std::vector<BoxPtr<BaseTextBlock::Make> > text_blocks;
 			sf::Font* font;
 			BoxPtr<IUninteractive::Make> background = make_box_ptr<FullColor::Make>(sf::Color::White);
 			uint size = 14;
-			sf::Color textColor = sf::Color::Black;
-			sf::Color textSelectionColor = sf::Color::White;
-			sf::Color backgroundSelectionColor = sf::Color::Blue;
-			sf::Color inactiveTextSelectionColor = sf::Color::Black;
-			sf::Color inactiveBackgroundSelectionColor = {150, 150, 150};
+			sf::Color text_color = sf::Color::Black;
+			sf::Color text_selection_color = sf::Color::White;
+			sf::Color background_selection_color = sf::Color::Blue;
+			sf::Color inactive_text_selection_color = sf::Color::Black;
+			sf::Color inactive_background_selection_color = {150, 150, 150};
 			sf::Text::Style style = {};
 			BoxPtr<BaseResizer::Make> resizer = make_box_ptr<Resizer::Make>(1.15f, BaseResizer::Align::Left);
-			BoxPtr<IBasicInteraction<Text&>::Make> textInteraction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>();
+			BoxPtr<IBasicInteraction<Text&>::Make> text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>();
 			
 			explicit Make(
-				std::vector<BoxPtr<BaseTextBlock::Make> >&& textBlocks,
+				std::vector<BoxPtr<BaseTextBlock::Make> >&& text_blocks,
 				sf::Font* font,
 				BoxPtr<IUninteractive::Make>&& background = make_box_ptr<FullColor::Make>(sf::Color::White),
 				uint size = 14,
-				sf::Color textColor = sf::Color::Black,
-				sf::Color textSelectionColor = sf::Color::White,
-				sf::Color backgroundSelectionColor = sf::Color::Blue,
-				sf::Color inactiveTextSelectionColor = sf::Color::Black,
-				sf::Color inactiveBackgroundSelectionColor = {150, 150, 150},
+				sf::Color text_color = sf::Color::Black,
+				sf::Color text_selection_color = sf::Color::White,
+				sf::Color background_selection_color = sf::Color::Blue,
+				sf::Color inactive_text_selection_color = sf::Color::Black,
+				sf::Color inactive_background_selection_color = {150, 150, 150},
 				sf::Text::Style style = {},
 				BoxPtr<BaseResizer::Make>&& resizer = make_box_ptr<Resizer::Make>(1.15f, BaseResizer::Align::Left),
-				BoxPtr<IBasicInteraction<Text&>::Make>&& textInteraction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>()
+				BoxPtr<IBasicInteraction<Text&>::Make>&& text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>()
 			);
 			
-			Text* make(InitInfo initInfo) override;
+			Text* make(InitInfo init_info) override;
 		};
 		
-		Text(Make&& make, InitInfo initInfo);
+		Text(Make&& make, InitInfo init_info);
 		
 		explicit Text(
-			std::vector<BoxPtr<BaseTextBlock> >&& textBlocks,
+			std::vector<BoxPtr<BaseTextBlock> >&& text_blocks,
 			sf::Font* font,
 			BoxPtr<IUninteractive>&& background = make_box_ptr<FullColor>(sf::Color::White),
 			int size = 14,
-			sf::Color textColor = sf::Color::Black,
-			sf::Color textSelectionColor = sf::Color::White,
-			sf::Color backgroundSelectionColor = sf::Color::Blue,
-			sf::Color inactiveTextSelectionColor = sf::Color::Black,
-			sf::Color inactiveBackgroundSelectionColor = {150, 150, 150},
+			sf::Color text_color = sf::Color::Black,
+			sf::Color text_selection_color = sf::Color::White,
+			sf::Color background_selection_color = sf::Color::Blue,
+			sf::Color inactive_text_selection_color = sf::Color::Black,
+			sf::Color inactive_background_selection_color = {150, 150, 150},
 			sf::Text::Style style = {},
 			BoxPtr<BaseResizer>&& resizer = make_box_ptr<Resizer>(1.15f, BaseResizer::Align::Left),
-			BoxPtr<IBasicInteraction<Text&>>&& textInteraction = make_box_ptr<BasicEmptyInteraction<Text&>>()
+			BoxPtr<IBasicInteraction<Text&>>&& text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>>()
 		);
 		
-		void init(InitInfo initInfo) override;
+		void init(InitInfo init_info) override;
 		
-		void setSelection(Selection selection);
+		void set_selection(Selection selection);
 		
-		void setSelectionStart(orl::Option<std::vector<BaseCharacter*>::iterator> start);
+		void set_selection_start(orl::Option<std::vector<BaseCharacter*>::iterator> start);
 		
-		void setSelectionEnd(orl::Option<std::vector<BaseCharacter*>::iterator> end);
+		void set_selection_end(orl::Option<std::vector<BaseCharacter*>::iterator> end);
 		
-		[[nodiscard]] Selection getSelection() const;
+		[[nodiscard]] Selection get_selection() const;
 		
-		[[nodiscard]] std::vector<BaseCharacter*>::iterator getSelectionStart() const;
+		[[nodiscard]] std::vector<BaseCharacter*>::iterator get_selection_start() const;
 		
-		[[nodiscard]] std::vector<BaseCharacter*>::iterator getSelectionEnd() const;
+		[[nodiscard]] std::vector<BaseCharacter*>::iterator get_selection_end() const;
 		
-		std::u32string getSelectionText();
+		std::u32string get_selection_text();
 		
-		orl::Option<std::vector<BaseCharacter*>::iterator> getCharacter(sf::Vector2f mousePosition);
+		orl::Option<std::vector<BaseCharacter*>::iterator> get_character(sf::Vector2f mouse_position);
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition) override;
+		bool update_interactions(sf::Vector2f mouse_position) override;
 		
 		void draw() override;
 		
 		void move(sf::Vector2f position) override;
 		
-		void setPosition(sf::Vector2f position) override;
+		void set_position(sf::Vector2f position) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		sf::Vector2f getAreaPosition() const override;
+		sf::Vector2f get_area_position() const override;
 		
-		sf::Vector2f getAreaSize() const override;
+		sf::Vector2f get_area_size() const override;
 		
-		sf::Vector2f getMinSize() const override;
+		sf::Vector2f get_min_size() const override;
 		
-		sf::Vector2f getNormalSize() const override;
+		sf::Vector2f get_normal_size() const override;
 		
 		Text* copy() override;
 		
-		void drawDebug(sf::RenderTarget& renderTarget, int indent, int indentAddition, uint hue, uint hueOffset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
 	
 	protected:
-		InteractionManager* interactionManager;
-		sf::RenderTarget* renderTarget;
+		InteractionManager* interaction_manager;
+		sf::RenderTarget* render_target;
 		
-		sf::RenderTexture renderTexture;
+		sf::RenderTexture render_texture;
 		sf::View view;
 		sf::Texture texture;
 		sf::Sprite sprite;
-		DrawManager drawManager;
+		DrawManager draw_manager;
 		
 		BoxPtr<IUninteractive> background;
 		
 		bool interact;
-		bool oldInteract;
+		bool old_interact;
 		Selection selection;
 		uint size;
 		
-		std::vector<BaseCharacter*> textCharacters;
-		std::vector<BoxPtr<BaseTextBlock> > textBlocks;
+		std::vector<BaseCharacter*> text_characters;
+		std::vector<BoxPtr<BaseTextBlock> > text_blocks;
 		std::vector<BoxPtr<BaseLine> > lines;
 		
 		BoxPtr<BaseResizer> resizer;
-		BoxPtr<IBasicInteraction<Text&> > textInteraction;
+		BoxPtr<IBasicInteraction<Text&> > text_interaction;
 	};
 	
 	template<>
 	struct DecodePointer<Text> {
-		static bool decodePointer(const YAML::Node& node, Text*& text);
+		static bool decode_pointer(const YAML::Node& node, Text*& text);
 	};
 }

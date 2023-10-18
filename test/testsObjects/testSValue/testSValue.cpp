@@ -1,21 +1,21 @@
-#include "testSValue.hpp"
+#include "test_s_value.hpp"
 
-#include "../processorTime.hpp"
+#include "../processor_time.hpp"
 
-TestSValue::TestSValue(float resultGet) : resultGet(resultGet) {}
+TestSValue::TestSValue(float result_get) : result_get(result_get) {}
 
-const TestSValue::Processed &TestSValue::getProcessed() const {
+const TestSValue::Processed &TestSValue::get_processed() const {
 	return processed;
 }
 
-void TestSValue::addSetter(const TestSValue::ISValue::SetterFunc &setter) {
-	processed.addSetter.push_back({getProcessorTime(), setter});
+void TestSValue::add_setter(const TestSValue::ISValue::SetterFunc &setter) {
+	processed.add_setter.push_back({get_processor_time(), setter});
 }
 
-const float &TestSValue::getValue() const {
-	return resultGet;
+const float &TestSValue::get_value() const {
+	return result_get;
 }
 
-void TestSValue::setValue(const float &value) {
-	processed.setValue.push_back({getProcessorTime(), value});
+void TestSValue::set_value(const float &value) {
+	processed.set_value.push_back({get_processor_time(), value});
 }

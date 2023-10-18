@@ -15,12 +15,12 @@ namespace ie {
 	public:
 		explicit SCoefficientValue(float value = 0.f);
 		
-		void setValue(const float& value) override;
+		void set_value(const float& value) override;
 	};
 	
 	template<>
 	struct DecodePointer<SCoefficientValue> {
-		static bool decodePointer(const YAML::Node& node, SCoefficientValue*& sCoefficientValue);
+		static bool decode_pointer(const YAML::Node& node, SCoefficientValue*& sCoefficient_value);
 	};
 	
 	typedef SCoefficientValue SCoefficient;

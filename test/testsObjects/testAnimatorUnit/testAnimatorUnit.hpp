@@ -6,40 +6,40 @@ class TestAnimatorUnit : public ie::IAnimatorUnit{
 	struct Processed{
 		struct Update{
 			unsigned long long time{0};
-			float timeParameter;
+			float time_parameter;
 		};
 		struct SetNextUnits{
 			unsigned long long time{0};
-			std::vector<IAnimatorUnit *> nextUnits;
+			std::vector<IAnimatorUnit *> next_units;
 		};
 		struct AddNextUnits{
 			unsigned long long time{0};
-			IAnimatorUnit *nextUnit;
+			IAnimatorUnit *next_unit;
 		};
 
 		std::vector<unsigned long long> restart;
 		std::vector<Update> update;
-		std::vector<SetNextUnits> setNextUnits;
-		std::vector<AddNextUnits> addNextUnits;
+		std::vector<SetNextUnits> set_next_units;
+		std::vector<AddNextUnits> add_next_units;
 		std::vector<unsigned long long> copy;
 	};
 
 protected:
 	Processed processed;
-	std::vector<IAnimatorUnit *> updateResult;
+	std::vector<IAnimatorUnit *> update_result;
 
 public:
-	explicit TestAnimatorUnit(std::vector<IAnimatorUnit *> updateResult = {});
+	explicit TestAnimatorUnit(std::vector<IAnimatorUnit *> update_result = {});
 
-	Processed getProcessed();
+	Processed get_processed();
 
 	void restart() override;
 
 	std::vector<IAnimatorUnit *> update(float time) override;
 
-	void setNextUnits(std::vector<IAnimatorUnit *> nextUnits);
+	void set_next_units(std::vector<IAnimatorUnit *> next_units);
 
-	void addNextUnits(IAnimatorUnit *nextUnit);
+	void add_next_units(IAnimatorUnit *next_unit);
 
 	TestAnimatorUnit * copy() override;
 };

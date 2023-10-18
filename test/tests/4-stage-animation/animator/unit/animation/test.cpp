@@ -1,81 +1,81 @@
 #include <gtest/gtest.h>
 #include "IE/Animation/Animator/IAnimatorUnit/Animation/Animation.hpp"
-#include "../test/testsObjects/testAnimationVariable/testAnimationVariable.hpp"
-#include "../test/testsObjects/testChangeVariable/testChangeVariable.hpp"
-#include "../test/testsObjects/testAnimatorUnit/testAnimatorUnit.hpp"
+#include "../test/tests_objects/test_animation_variable/test_animation_variable.hpp"
+#include "../test/tests_objects/test_change_variable/test_change_variable.hpp"
+#include "../test/tests_objects/test_animator_unit/test_animator_unit.hpp"
 
 TEST(Animation, update) {
-	auto *testChangeVariable1a = new TestChangeVariable{1, 2},
-					   *testChangeVariable1b = new TestChangeVariable{1, 2},
-					   *testChangeVariable2a = new TestChangeVariable{1, 2},
-					   *testChangeVariable2b = new TestChangeVariable{1, 2};
-	auto *testAnimationVariable1 = new TestAnimationVariable{},
-						  *testAnimationVariable2 = new TestAnimationVariable{};
-	auto *testAnimatorUnit = new TestAnimatorUnit{};
+	auto *test_change_variable1a = new TestChangeVariable{1, 2},
+					   *test_change_variable1b = new TestChangeVariable{1, 2},
+					   *test_change_variable2a = new TestChangeVariable{1, 2},
+					   *test_change_variable2b = new TestChangeVariable{1, 2};
+	auto *test_animation_variable1 = new TestAnimationVariable{},
+						  *test_animation_variable2 = new TestAnimationVariable{};
+	auto *test_animator_unit = new TestAnimatorUnit{};
 	ie::Animation animation{
 		{
 			{
-				testAnimationVariable1,
-				{testChangeVariable1a, testChangeVariable1b}
+				test_animation_variable1,
+				{test_change_variable1a, test_change_variable1b}
 			},
 			{
-				testAnimationVariable2,
-				{testChangeVariable2a, testChangeVariable2b}
+				test_animation_variable2,
+				{test_change_variable2a, test_change_variable2b}
 			}
 		},
-		{testAnimatorUnit, nullptr}
+		{test_animator_unit, nullptr}
 	};
 
-	auto nextAnim = animation.update(0.1);
+	auto next_anim = animation.update(0.1);
 
-	ASSERT_EQ(nextAnim.size(), 1);
-	ASSERT_EQ(nextAnim[0], &animation);
+	ASSERT_EQ(next_anim.size(), 1);
+	ASSERT_EQ(next_anim[0], &animation);
 
-	ASSERT_EQ(testChangeVariable1a->getProcessed().operat[0].frame, 0);
-	ASSERT_EQ(testChangeVariable2a->getProcessed().operat[0].frame, 0);
+	ASSERT_EQ(test_change_variable1a->get_processed().operat[0].frame, 0);
+	ASSERT_EQ(test_change_variable2a->get_processed().operat[0].frame, 0);
 
-	ASSERT_EQ(testChangeVariable1b->getProcessed().operat.size(), 0);
-	ASSERT_EQ(testChangeVariable2b->getProcessed().operat.size(), 0);
+	ASSERT_EQ(test_change_variable1b->get_processed().operat.size(), 0);
+	ASSERT_EQ(test_change_variable2b->get_processed().operat.size(), 0);
 
-	nextAnim = animation.update(0.5);
+	next_anim = animation.update(0.5);
 
-	ASSERT_EQ(nextAnim.size(), 1);
-	ASSERT_EQ(nextAnim[0], &animation);
+	ASSERT_EQ(next_anim.size(), 1);
+	ASSERT_EQ(next_anim[0], &animation);
 
-	ASSERT_EQ(testChangeVariable1a->getProcessed().operat[1].frame, 0.4f);
-	ASSERT_EQ(testChangeVariable2a->getProcessed().operat[1].frame, 0.4f);
+	ASSERT_EQ(test_change_variable1a->get_processed().operat[1].frame, 0.4f);
+	ASSERT_EQ(test_change_variable2a->get_processed().operat[1].frame, 0.4f);
 
-	ASSERT_EQ(testChangeVariable1b->getProcessed().operat.size(), 0);
-	ASSERT_EQ(testChangeVariable2b->getProcessed().operat.size(), 0);
+	ASSERT_EQ(test_change_variable1b->get_processed().operat.size(), 0);
+	ASSERT_EQ(test_change_variable2b->get_processed().operat.size(), 0);
 
-	nextAnim = animation.update(1.5);
+	next_anim = animation.update(1.5);
 
-	ASSERT_EQ(nextAnim.size(), 1);
-	ASSERT_EQ(nextAnim[0], &animation);
+	ASSERT_EQ(next_anim.size(), 1);
+	ASSERT_EQ(next_anim[0], &animation);
 
-	ASSERT_EQ(testChangeVariable1a->getProcessed().operat.size(), 2);
-	ASSERT_EQ(testChangeVariable2a->getProcessed().operat.size(), 2);
+	ASSERT_EQ(test_change_variable1a->get_processed().operat.size(), 2);
+	ASSERT_EQ(test_change_variable2a->get_processed().operat.size(), 2);
 
 
-	ASSERT_EQ(testChangeVariable1b->getProcessed().operat[0].frame, 1.4f);
-	ASSERT_EQ(testChangeVariable2b->getProcessed().operat[0].frame, 1.4f);
+	ASSERT_EQ(test_change_variable1b->get_processed().operat[0].frame, 1.4f);
+	ASSERT_EQ(test_change_variable2b->get_processed().operat[0].frame, 1.4f);
 
-	nextAnim = animation.update(3);
+	next_anim = animation.update(3);
 
-	ASSERT_EQ(nextAnim.size(), 2);
-	ASSERT_EQ(nextAnim[0], testAnimatorUnit);
-	ASSERT_EQ(nextAnim[1], &animation);
+	ASSERT_EQ(next_anim.size(), 2);
+	ASSERT_EQ(next_anim[0], test_animator_unit);
+	ASSERT_EQ(next_anim[1], &animation);
 }
 
 TEST(Animation, restart) {
-	auto *testChangeVariable = new TestChangeVariable{1, 2};
-	auto *testAnimationVariable = new TestAnimationVariable{};
+	auto *test_change_variable = new TestChangeVariable{1, 2};
+	auto *test_animation_variable = new TestAnimationVariable{};
 	ie::Animation animation{
 		{
 			{
-				testAnimationVariable,
+				test_animation_variable,
 				{
-					testChangeVariable
+					test_change_variable
 				}
 			}
 		}
@@ -83,133 +83,133 @@ TEST(Animation, restart) {
 
 	animation.update(0.1);
 
-	ASSERT_EQ(testChangeVariable->getProcessed().operat[0].frame, 0);
+	ASSERT_EQ(test_change_variable->get_processed().operat[0].frame, 0);
 
 	animation.update(1.1);
 
-	ASSERT_EQ(testChangeVariable->getProcessed().operat[1].frame, 1);
+	ASSERT_EQ(test_change_variable->get_processed().operat[1].frame, 1);
 
 	animation.restart();
 	animation.update(0.1);
 
-	ASSERT_EQ(testChangeVariable->getProcessed().operat[2].frame, 0);
+	ASSERT_EQ(test_change_variable->get_processed().operat[2].frame, 0);
 }
 
-TEST(Animation, setNextUnits) {
-	auto *testChangeVariable = new TestChangeVariable{1, 2};
-	auto *testAnimationVariable = new TestAnimationVariable{};
-	auto *testAnimatorUnit1 = new TestAnimatorUnit{},
-					 *testAnimatorUnit2 = new TestAnimatorUnit{},
-					 *testAnimatorUnit3 = new TestAnimatorUnit{};
+TEST(Animation, set_next_units) {
+	auto *test_change_variable = new TestChangeVariable{1, 2};
+	auto *test_animation_variable = new TestAnimationVariable{};
+	auto *test_animator_unit1 = new TestAnimatorUnit{},
+					 *test_animator_unit2 = new TestAnimatorUnit{},
+					 *test_animator_unit3 = new TestAnimatorUnit{};
 	ie::Animation animation{
 		{
 			{
-				testAnimationVariable,
+				test_animation_variable,
 				{
-					testChangeVariable
+					test_change_variable
 				}
 			}
 		},
-		{testAnimatorUnit1}
+		{test_animator_unit1}
 	};
 
 	animation.update(0.1);
 	auto next = animation.update(2);
 	ASSERT_EQ(next.size(), 1);
-	ASSERT_EQ(next[0], testAnimatorUnit1);
+	ASSERT_EQ(next[0], test_animator_unit1);
 	animation.restart();
 
-	animation.setNextUnits({testAnimatorUnit2, testAnimatorUnit3});
+	animation.set_next_units({test_animator_unit2, test_animator_unit3});
 	animation.update(0.1);
 	next = animation.update(2);
 	ASSERT_EQ(next.size(), 2);
-	ASSERT_EQ(next[0], testAnimatorUnit2);
-	ASSERT_EQ(next[1], testAnimatorUnit3);
+	ASSERT_EQ(next[0], test_animator_unit2);
+	ASSERT_EQ(next[1], test_animator_unit3);
 
-	delete testAnimatorUnit2;
-	delete testAnimatorUnit3;
+	delete test_animator_unit2;
+	delete test_animator_unit3;
 }
 
-TEST(Animation, addNextUnits) {
-	auto *testChangeVariable = new TestChangeVariable{1, 2};
-	auto *testAnimationVariable = new TestAnimationVariable{};
-	auto *testAnimatorUnit1 = new TestAnimatorUnit{},
-					 *testAnimatorUnit2 = new TestAnimatorUnit{};
+TEST(Animation, add_next_units) {
+	auto *test_change_variable = new TestChangeVariable{1, 2};
+	auto *test_animation_variable = new TestAnimationVariable{};
+	auto *test_animator_unit1 = new TestAnimatorUnit{},
+					 *test_animator_unit2 = new TestAnimatorUnit{};
 	ie::Animation animation{
 		{
 			{
-				testAnimationVariable,
+				test_animation_variable,
 				{
-					testChangeVariable
+					test_change_variable
 				}
 			}
 		},
-		{testAnimatorUnit1}
+		{test_animator_unit1}
 	};
 
 	animation.update(0.1);
 	auto next = animation.update(2);
 	ASSERT_EQ(next.size(), 1);
-	ASSERT_EQ(next[0], testAnimatorUnit1);
+	ASSERT_EQ(next[0], test_animator_unit1);
 	animation.restart();
 
-	animation.addNextUnits(testAnimatorUnit2);
+	animation.add_next_units(test_animator_unit2);
 	animation.update(0.1);
 	next = animation.update(2);
 	ASSERT_EQ(next.size(), 2);
-	ASSERT_EQ(next[0], testAnimatorUnit1);
-	ASSERT_EQ(next[1], testAnimatorUnit2);
+	ASSERT_EQ(next[0], test_animator_unit1);
+	ASSERT_EQ(next[1], test_animator_unit2);
 
-	delete testAnimatorUnit2;
+	delete test_animator_unit2;
 }
 
 TEST(Animation, copy) {
-	auto *testChangeVariable = new TestChangeVariable{1, 2};
-	auto *testAnimationVariable = new TestAnimationVariable{};
-	auto *testAnimatorUnit1 = new TestAnimatorUnit{},
-		 *testAnimatorUnit2 = new TestAnimatorUnit{},
-		 *testAnimatorUnit3 = new TestAnimatorUnit{},
-		 *testAnimatorUnit4 = new TestAnimatorUnit{},
-		 *testAnimatorUnit5 = new TestAnimatorUnit{};
+	auto *test_change_variable = new TestChangeVariable{1, 2};
+	auto *test_animation_variable = new TestAnimationVariable{};
+	auto *test_animator_unit1 = new TestAnimatorUnit{},
+		 *test_animator_unit2 = new TestAnimatorUnit{},
+		 *test_animator_unit3 = new TestAnimatorUnit{},
+		 *test_animator_unit4 = new TestAnimatorUnit{},
+		 *test_animator_unit5 = new TestAnimatorUnit{};
 	ie::Animation animation1{
 		{
 			{
-				testAnimationVariable,
+				test_animation_variable,
 				{
-					testChangeVariable
+					test_change_variable
 				}
 			}
 		},
-		{testAnimatorUnit1}
+		{test_animator_unit1}
 	};
-	animation1.setNextUnits({testAnimatorUnit2, testAnimatorUnit3});
+	animation1.set_next_units({test_animator_unit2, test_animator_unit3});
 
 	delete animation1.copy();
 
-	ASSERT_EQ(testChangeVariable->getProcessed().copy.size(), 1);
-	ASSERT_EQ(testAnimatorUnit1->getProcessed().copy.size(), 1);
-	ASSERT_EQ(testAnimatorUnit2->getProcessed().copy.size(), 0);
-	ASSERT_EQ(testAnimatorUnit3->getProcessed().copy.size(), 0);
+	ASSERT_EQ(test_change_variable->get_processed().copy.size(), 1);
+	ASSERT_EQ(test_animator_unit1->get_processed().copy.size(), 1);
+	ASSERT_EQ(test_animator_unit2->get_processed().copy.size(), 0);
+	ASSERT_EQ(test_animator_unit3->get_processed().copy.size(), 0);
 
 	ie::Animation animation2{
 		{
 			{
-				testAnimationVariable,
+				test_animation_variable,
 				{
-					testChangeVariable
+					test_change_variable
 				}
 			}
 		},
-		{testAnimatorUnit4}
+		{test_animator_unit4}
 	};
-	animation2.addNextUnits(testAnimatorUnit5);
+	animation2.add_next_units(test_animator_unit5);
 
 	delete animation2.copy();
 
-	ASSERT_EQ(testAnimatorUnit4->getProcessed().copy.size(), 1);
-	ASSERT_EQ(testAnimatorUnit5->getProcessed().copy.size(), 0);
+	ASSERT_EQ(test_animator_unit4->get_processed().copy.size(), 1);
+	ASSERT_EQ(test_animator_unit5->get_processed().copy.size(), 0);
 
-	delete testAnimatorUnit2;
-	delete testAnimatorUnit3;
-	delete testAnimatorUnit5;
+	delete test_animator_unit2;
+	delete test_animator_unit3;
+	delete test_animator_unit5;
 }

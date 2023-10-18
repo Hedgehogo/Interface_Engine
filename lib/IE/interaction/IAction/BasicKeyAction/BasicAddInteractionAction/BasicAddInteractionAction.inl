@@ -6,29 +6,29 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicAddInteractionAction<T>* BasicAddInteractionAction<T>::make(BasicActionInitInfo<T> initInfo) {
-			return new ie::BasicAddInteractionAction<T>{std::move(*this), initInfo};
+		ie::BasicAddInteractionAction<T>* BasicAddInteractionAction<T>::make(BasicActionInitInfo<T> init_info) {
+			return new ie::BasicAddInteractionAction<T>{std::move(*this), init_info};
 		}
 	}
 	
 	template<typename T>
-	BasicAddInteractionAction<T>::BasicAddInteractionAction(Make&& make, BasicActionInitInfo<T> initInfo) :
-		interactionManager(&initInfo.interactionManager), interaction(make.interaction->make(initInfo)) {
+	BasicAddInteractionAction<T>::BasicAddInteractionAction(Make&& make, BasicActionInitInfo<T> init_info) :
+		interaction_manager(&init_info.interaction_manager), interaction(make.interaction->make(init_info)) {
 	}
 	
 	template<typename T>
 	BasicAddInteractionAction<T>::BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction) :
-		interactionManager(nullptr), interaction(std::move(interaction)) {
+		interaction_manager(nullptr), interaction(std::move(interaction)) {
 	}
 	
 	template<typename T>
-	void BasicAddInteractionAction<T>::init(BasicActionInitInfo<T> initInfo) {
-		interactionManager = &initInfo.interactionManager;
-		interaction->init(initInfo);
+	void BasicAddInteractionAction<T>::init(BasicActionInitInfo<T> init_info) {
+		interaction_manager = &init_info.interaction_manager;
+		interaction->init(init_info);
 	}
 	
 	template<typename T>
-	IBasicInteraction<T>& BasicAddInteractionAction<T>::getInteraction() {
+	IBasicInteraction<T>& BasicAddInteractionAction<T>::get_interaction() {
 		return *interaction;
 	}
 	
@@ -38,20 +38,20 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicAddInteractionAction<T>::startPressed() {
-		interactionManager->addInteraction(*interaction);
+	void BasicAddInteractionAction<T>::start_pressed() {
+		interaction_manager->add_interaction(*interaction);
 	}
 	
 	template<typename T>
-	void BasicAddInteractionAction<T>::stopPressed() {
-		interactionManager->deleteInteraction(*interaction);
+	void BasicAddInteractionAction<T>::stop_pressed() {
+		interaction_manager->delete_interaction(*interaction);
 	}
 	
 	template<typename T>
-	void BasicAddInteractionAction<T>::whilePressed() {
+	void BasicAddInteractionAction<T>::while_pressed() {
 	}
 	
 	template<typename T>
-	void BasicAddInteractionAction<T>::whileNotPressed() {
+	void BasicAddInteractionAction<T>::while_not_pressed() {
 	}
 }

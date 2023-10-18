@@ -1,50 +1,50 @@
 #include "InitInfoData.hpp"
-#include "../../_imageDifference/_imageDifference.hpp"
+#include "_test/_image_difference/image_difference.hpp"
 
 InitInfoData::InitInfoData(sf::Vector2u size) {
-	renderTarget.create(size.x, size.y);
-	renderTarget.clear(sf::Color::Transparent);
+	render_target.create(size.x, size.y);
+	render_target.clear(sf::Color::Transparent);
 }
 
-ie::InitInfo InitInfoData::makeInitInfo() {
+ie::InitInfo InitInfoData::make_init_info() {
 	return ie::InitInfo{
 		window,
-		renderTarget,
-		drawManager,
-		updateManager,
-		interactionManager,
-		interactionStack,
-		panelManager
+		render_target,
+		draw_manager,
+		update_manager,
+		interaction_manager,
+		interaction_stack,
+		panel_manager
 	};
 }
 
-void InitInfoData::renderSave(std::filesystem::path path) {
-	renderTarget.getTexture().copyToImage().saveToFile(path.string());
+void InitInfoData::render_save(std::filesystem::path path) {
+	render_target.getTexture().copyToImage().saveToFile(path.string());
 }
 
-bool InitInfoData::renderEqual(std::filesystem::path path, float precision) {
-	renderTarget.display();
+bool InitInfoData::render_equal(std::filesystem::path path, float precision) {
+	render_target.display();
 	sf::Image second{};
 	second.loadFromFile(path.make_preferred().lexically_normal().string());
-	return imageEqual(renderTarget.getTexture().copyToImage(), second, precision);
+	return image_equal(render_target.getTexture().copyToImage(), second, precision);
 }
 
-bool InitInfoData::renderEqualWithSave(std::filesystem::path path, float precision) {
-	renderTarget.display();
+bool InitInfoData::render_equal_with_save(std::filesystem::path path, float precision) {
+	render_target.display();
 	
-	auto filePath{path.make_preferred().lexically_normal()};
-	sf::Image first{renderTarget.getTexture().copyToImage()};
+	auto file_path{path.make_preferred().lexically_normal()};
+	sf::Image first{render_target.getTexture().copyToImage()};
 	sf::Image second{};
-	second.loadFromFile(filePath.string());
+	second.loadFromFile(file_path.string());
 	
-	if(!imageEqual(first, second, precision)) {
+	if(!image_equal(first, second, precision)) {
 		auto filename = path.filename();
 		auto directory = path.remove_filename() / std::filesystem::path{"tmp"};
 		std::filesystem::create_directories(directory);
 		path = directory / filename;
 		first.saveToFile(path.string());
 		path = directory / std::filesystem::path{"_" + filename.string()};
-		imageDifference(first, second).saveToFile(path.string());
+		image_difference(first, second).saveToFile(path.string());
 		return false;
 	}
 	return true;

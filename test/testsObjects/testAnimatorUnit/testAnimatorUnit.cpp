@@ -1,41 +1,41 @@
-#include "testAnimatorUnit.hpp"
-#include "../processorTime.hpp"
+#include "test_animator_unit.hpp"
+#include "../processor_time.hpp"
 
-TestAnimatorUnit::TestAnimatorUnit(std::vector<IAnimatorUnit *> updateResult) : updateResult(updateResult) {
-	for (size_t i = 0; i < updateResult.size(); ++i) {
-		if (!this->updateResult[i]) this->updateResult[i] = this;
+TestAnimatorUnit::TestAnimatorUnit(std::vector<IAnimatorUnit *> update_result) : update_result(update_result) {
+	for (size_t i = 0; i < update_result.size(); ++i) {
+		if (!this->update_result[i]) this->update_result[i] = this;
 	}
 }
 
-TestAnimatorUnit::Processed TestAnimatorUnit::getProcessed() {
+TestAnimatorUnit::Processed TestAnimatorUnit::get_processed() {
 	return processed;
 }
 
 void TestAnimatorUnit::restart() {
-	processed.restart.push_back(getProcessorTime());
+	processed.restart.push_back(get_processor_time());
 }
 
 std::vector<ie::IAnimatorUnit *> TestAnimatorUnit::update(float time) {
-	processed.update.push_back({getProcessorTime(), time});
-	return updateResult;
+	processed.update.push_back({get_processor_time(), time});
+	return update_result;
 }
 
-void TestAnimatorUnit::setNextUnits(std::vector<IAnimatorUnit *> nextUnits) {
-	processed.setNextUnits.push_back({getProcessorTime(), nextUnits});
+void TestAnimatorUnit::set_next_units(std::vector<IAnimatorUnit *> next_units) {
+	processed.set_next_units.push_back({get_processor_time(), next_units});
 }
 
-void TestAnimatorUnit::addNextUnits(ie::IAnimatorUnit *nextUnit) {
-	processed.addNextUnits.push_back({getProcessorTime(), nextUnit});
+void TestAnimatorUnit::add_next_units(ie::IAnimatorUnit *next_unit) {
+	processed.add_next_units.push_back({get_processor_time(), next_unit});
 }
 
 TestAnimatorUnit *TestAnimatorUnit::copy() {
-	processed.copy.push_back(getProcessorTime());
+	processed.copy.push_back(get_processor_time());
 
-	std::vector<IAnimatorUnit *> copyUpdateResult{updateResult.size()};
+	std::vector<IAnimatorUnit *> copy_update_result{update_result.size()};
 
-	for (size_t i = 0; i < copyUpdateResult.size(); ++i) {
-		copyUpdateResult[i] = updateResult[i]->copy();
+	for (size_t i = 0; i < copy_update_result.size(); ++i) {
+		copy_update_result[i] = update_result[i]->copy();
 	}
 	
-	return new TestAnimatorUnit{copyUpdateResult};
+	return new TestAnimatorUnit{copy_update_result};
 }

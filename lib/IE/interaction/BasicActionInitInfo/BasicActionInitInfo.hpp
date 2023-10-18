@@ -10,38 +10,38 @@ namespace ie {
 		using AdditionalType = T;
 		
 		sf::RenderWindow& window;
-		sf::RenderTarget& renderTarget;
-		InteractionManager& interactionManager;
-		InteractionStack& interactionStack;
-		IPanelManager& panelManager;
+		sf::RenderTarget& render_target;
+		InteractionManager& interaction_manager;
+		InteractionStack& interaction_stack;
+		IPanelManager& panel_manager;
 		T additional;
 		
 		BasicActionInitInfo(
 			sf::RenderWindow& window_,
-			sf::RenderTarget& renderTarget_,
-			InteractionManager& interactionManager_,
-			InteractionStack& interactionStack_,
-			IPanelManager& panelManager_,
+			sf::RenderTarget& render_target_,
+			InteractionManager& interaction_manager_,
+			InteractionStack& interaction_stack_,
+			IPanelManager& panel_manager_,
 			T additional_
 		);
 		
-		BasicActionInitInfo(BasicActionInitInfo<> initInfo, T additional_);
+		BasicActionInitInfo(BasicActionInitInfo<> init_info, T additional_);
 		
-		BasicActionInitInfo(InitInfo initInfo, T additional_);
+		BasicActionInitInfo(InitInfo init_info, T additional_);
 		
 		BasicActionInitInfo<T> copy(sf::RenderWindow& window_) const;
 		
-		BasicActionInitInfo<T> copy(sf::RenderTarget& renderTarget_) const;
+		BasicActionInitInfo<T> copy(sf::RenderTarget& render_target_) const;
 		
-		BasicActionInitInfo<T> copy(InteractionManager& interactionManager_) const;
+		BasicActionInitInfo<T> copy(InteractionManager& interaction_manager_) const;
 		
-		BasicActionInitInfo<T> copy(InteractionStack& interactionStack_) const;
+		BasicActionInitInfo<T> copy(InteractionStack& interaction_stack_) const;
 		
-		BasicActionInitInfo<T> copy(IPanelManager& panelManager_) const;
+		BasicActionInitInfo<T> copy(IPanelManager& panel_manager_) const;
 		
 		BasicActionInitInfo<T> copy(T additional_) const;
 		
-		BasicActionInitInfo<> toGeneral() const;
+		BasicActionInitInfo<> to_general() const;
 	};
 	
 	using ActionInitInfo = BasicActionInitInfo<>;

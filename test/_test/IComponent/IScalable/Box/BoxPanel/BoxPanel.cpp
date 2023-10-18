@@ -2,12 +2,12 @@
 #include <IE/component/IComponent/IScalable/Box/BoxPanel/BoxPanel.hpp>
 #include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include "_test/_imageEqual/_imageEqual.hpp"
+#include "_test/_image_equal/image_equal.hpp"
 
 TEST(IComponent, BoxPanel) {
 	InitInfoData data{{100, 100}};
 	
-	ie::BoxPanel boxPanel{
+	ie::BoxPanel box_panel{
 		{
 			ie::make_box_ptr<ie::ConstPanel::Make>(
 				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
@@ -15,43 +15,43 @@ TEST(IComponent, BoxPanel) {
 				ie::make_box_ptr<ie::IPositioning2::Make, ie::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
 			),
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
-		}, data.makeInitInfo()
+		}, data.make_init_info()
 	};
-	data.interactionManager.update({});
+	data.interaction_manager.update({});
 	
-	ASSERT_EQ(data.drawManager.size(), 1);
-	ASSERT_EQ(data.updateManager.size(), 0);
-	ASSERT_EQ(data.interactionManager.size(), 0);
-	ASSERT_EQ(data.panelManager.size(), 1);
-	ASSERT_EQ(&data.panelManager.get(0), &boxPanel.getPanel());
+	ASSERT_EQ(data.draw_manager.size(), 1);
+	ASSERT_EQ(data.update_manager.size(), 0);
+	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.panel_manager.size(), 1);
+	ASSERT_EQ(&data.panel_manager.get(0), &box_panel.get_panel());
 	
-	ASSERT_EQ(boxPanel.getMinSize(), sf::Vector2f{});
-	ASSERT_EQ(boxPanel.getNormalSize(), sf::Vector2f{});
-	ASSERT_EQ(boxPanel.getSize(), sf::Vector2f{});
-	ASSERT_EQ(boxPanel.getAreaSize(), sf::Vector2f{});
-	ASSERT_EQ(boxPanel.getPosition(), sf::Vector2f{});
-	ASSERT_EQ(boxPanel.getAreaPosition(), sf::Vector2f{});
-	ASSERT_EQ(boxPanel.updateInteractions({}), true);
+	ASSERT_EQ(box_panel.get_min_size(), sf::Vector2f{});
+	ASSERT_EQ(box_panel.get_normal_size(), sf::Vector2f{});
+	ASSERT_EQ(box_panel.get_size(), sf::Vector2f{});
+	ASSERT_EQ(box_panel.get_area_size(), sf::Vector2f{});
+	ASSERT_EQ(box_panel.get_position(), sf::Vector2f{});
+	ASSERT_EQ(box_panel.get_area_position(), sf::Vector2f{});
+	ASSERT_EQ(box_panel.update_interactions({}), true);
 	
-	boxPanel.setSize({5, 11});
-	ASSERT_EQ(boxPanel.getSize(), (sf::Vector2f{5, 11}));
-	ASSERT_EQ(boxPanel.getAreaSize(), (sf::Vector2f{5, 11}));
+	box_panel.set_size({5, 11});
+	ASSERT_EQ(box_panel.get_size(), (sf::Vector2f{5, 11}));
+	ASSERT_EQ(box_panel.get_area_size(), (sf::Vector2f{5, 11}));
 	
-	boxPanel.setPosition({19, 39});
-	ASSERT_EQ(boxPanel.getPosition(), (sf::Vector2f{19, 39}));
-	ASSERT_EQ(boxPanel.getAreaPosition(), (sf::Vector2f{19, 39}));
+	box_panel.set_position({19, 39});
+	ASSERT_EQ(box_panel.get_position(), (sf::Vector2f{19, 39}));
+	ASSERT_EQ(box_panel.get_area_position(), (sf::Vector2f{19, 39}));
 	
-	boxPanel.resize({7, 13}, {23, 41});
-	ASSERT_EQ(boxPanel.getSize(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(boxPanel.getAreaSize(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(boxPanel.getPosition(), (sf::Vector2f{23, 41}));
-	ASSERT_EQ(boxPanel.getAreaPosition(), (sf::Vector2f{23, 41}));
+	box_panel.resize({7, 13}, {23, 41});
+	ASSERT_EQ(box_panel.get_size(), (sf::Vector2f{7, 13}));
+	ASSERT_EQ(box_panel.get_area_size(), (sf::Vector2f{7, 13}));
+	ASSERT_EQ(box_panel.get_position(), (sf::Vector2f{23, 41}));
+	ASSERT_EQ(box_panel.get_area_position(), (sf::Vector2f{23, 41}));
 	
-	boxPanel.move({10, 5});
-	ASSERT_EQ(boxPanel.getPosition(), (sf::Vector2f{33, 46}));
-	ASSERT_EQ(boxPanel.getAreaPosition(), (sf::Vector2f{33, 46}));
+	box_panel.move({10, 5});
+	ASSERT_EQ(box_panel.get_position(), (sf::Vector2f{33, 46}));
+	ASSERT_EQ(box_panel.get_area_position(), (sf::Vector2f{33, 46}));
 	
-	data.drawManager.draw();
-	data.panelManager.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("test-src/BoxPanel.png"));
+	data.draw_manager.draw();
+	data.panel_manager.draw();
+	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxPanel.png"));
 }

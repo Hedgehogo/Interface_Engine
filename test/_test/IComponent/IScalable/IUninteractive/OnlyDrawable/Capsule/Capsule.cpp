@@ -5,42 +5,42 @@
 TEST(IComponent, Capsule) {
 	InitInfoData data{{100, 100}};
 	
-	ie::Capsule capsule{{sf::Color::Red}, data.makeInitInfo()};
-	data.interactionManager.update({});
+	ie::Capsule capsule{{sf::Color::Red}, data.make_init_info()};
+	data.interaction_manager.update({});
 	
-	ASSERT_EQ(data.drawManager.size(), 1);
-	ASSERT_EQ(&data.drawManager.get(0), &capsule);
-	ASSERT_EQ(data.updateManager.size(), 0);
-	ASSERT_EQ(data.interactionManager.size(), 0);
-	ASSERT_EQ(data.panelManager.size(), 0);
+	ASSERT_EQ(data.draw_manager.size(), 1);
+	ASSERT_EQ(&data.draw_manager.get(0), &capsule);
+	ASSERT_EQ(data.update_manager.size(), 0);
+	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.panel_manager.size(), 0);
 	
-	ASSERT_EQ(&capsule.getRenderTarget(), &data.renderTarget);
-	ASSERT_EQ(capsule.getMinSize(), sf::Vector2f{});
-	ASSERT_EQ(capsule.getNormalSize(), (sf::Vector2f{1, 1}));
-	ASSERT_EQ(capsule.getSize(), sf::Vector2f{});
-	ASSERT_EQ(capsule.getAreaSize(), sf::Vector2f{});
-	ASSERT_EQ(capsule.getPosition(), sf::Vector2f{});
-	ASSERT_EQ(capsule.getAreaPosition(), sf::Vector2f{});
-	ASSERT_EQ(capsule.updateInteractions({}), true);
+	ASSERT_EQ(&capsule.get_render_target(), &data.render_target);
+	ASSERT_EQ(capsule.get_min_size(), sf::Vector2f{});
+	ASSERT_EQ(capsule.get_normal_size(), (sf::Vector2f{1, 1}));
+	ASSERT_EQ(capsule.get_size(), sf::Vector2f{});
+	ASSERT_EQ(capsule.get_area_size(), sf::Vector2f{});
+	ASSERT_EQ(capsule.get_position(), sf::Vector2f{});
+	ASSERT_EQ(capsule.get_area_position(), sf::Vector2f{});
+	ASSERT_EQ(capsule.update_interactions({}), true);
 	
-	capsule.setSize({5, 11});
-	ASSERT_EQ(capsule.getSize(), (sf::Vector2f{5, 11}));
-	ASSERT_EQ(capsule.getAreaSize(), (sf::Vector2f{5, 11}));
+	capsule.set_size({5, 11});
+	ASSERT_EQ(capsule.get_size(), (sf::Vector2f{5, 11}));
+	ASSERT_EQ(capsule.get_area_size(), (sf::Vector2f{5, 11}));
 	
-	capsule.setPosition({19, 39});
-	ASSERT_EQ(capsule.getPosition(), (sf::Vector2f{19, 39}));
-	ASSERT_EQ(capsule.getAreaPosition(), (sf::Vector2f{19, 39}));
+	capsule.set_position({19, 39});
+	ASSERT_EQ(capsule.get_position(), (sf::Vector2f{19, 39}));
+	ASSERT_EQ(capsule.get_area_position(), (sf::Vector2f{19, 39}));
 	
 	capsule.resize({7, 13}, {23, 41});
-	ASSERT_EQ(capsule.getSize(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(capsule.getAreaSize(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(capsule.getPosition(), (sf::Vector2f{23, 41}));
-	ASSERT_EQ(capsule.getAreaPosition(), (sf::Vector2f{23, 41}));
+	ASSERT_EQ(capsule.get_size(), (sf::Vector2f{7, 13}));
+	ASSERT_EQ(capsule.get_area_size(), (sf::Vector2f{7, 13}));
+	ASSERT_EQ(capsule.get_position(), (sf::Vector2f{23, 41}));
+	ASSERT_EQ(capsule.get_area_position(), (sf::Vector2f{23, 41}));
 	
 	capsule.move({10, 5});
-	ASSERT_EQ(capsule.getPosition(), (sf::Vector2f{33, 46}));
-	ASSERT_EQ(capsule.getAreaPosition(), (sf::Vector2f{33, 46}));
+	ASSERT_EQ(capsule.get_position(), (sf::Vector2f{33, 46}));
+	ASSERT_EQ(capsule.get_area_position(), (sf::Vector2f{33, 46}));
 	
-	data.drawManager.draw();
-	ASSERT_TRUE(data.renderEqualWithSave("test-src/Capsule.png"));
+	data.draw_manager.draw();
+	ASSERT_TRUE(data.render_equal_with_save("test-src/Capsule.png"));
 }

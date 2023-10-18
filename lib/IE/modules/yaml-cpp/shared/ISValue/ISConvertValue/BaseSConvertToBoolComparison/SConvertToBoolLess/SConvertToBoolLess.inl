@@ -1,20 +1,20 @@
-//included into sConvertToBoolEquals.hpp
+//included into sConvert_to_bool_equals.hpp
 
 namespace ie {
 	template<typename T>
-	SConvertToBoolLess<T>::SConvertToBoolLess(PISValue<T> fromValue, T compared) :
-		BaseSConvertToBoolComparison<T>(fromValue, convert(fromValue->getValue(), compared), compared) {
+	SConvertToBoolLess<T>::SConvertToBoolLess(PISValue<T> from_value, T compared) :
+		BaseSConvertToBoolComparison<T>(from_value, convert(from_value->get_value(), compared), compared) {
 	}
 	
 	template<typename T>
-	bool SConvertToBoolLess<T>::convert(T fromValue, T compared) {
-		return fromValue < compared;
+	bool SConvertToBoolLess<T>::convert(T from_value, T compared) {
+		return from_value < compared;
 	}
 	
 	template<typename T>
-	bool DecodePointer<SConvertToBoolLess<T> >::decodePointer(const YAML::Node& node, SConvertToBoolLess<T>*& sConvertToBoolLess) {
-		sConvertToBoolLess = new SConvertToBoolLess<T>{
-			getSValue<ISValue<T> >(node["value"]),
+	bool DecodePointer<SConvertToBoolLess<T> >::decode_pointer(const YAML::Node& node, SConvertToBoolLess<T>*& sConvert_to_bool_less) {
+		sConvert_to_bool_less = new SConvertToBoolLess<T>{
+			get_s_value<ISValue<T> >(node["value"]),
 			node["compared"].as<T>()
 		};
 		

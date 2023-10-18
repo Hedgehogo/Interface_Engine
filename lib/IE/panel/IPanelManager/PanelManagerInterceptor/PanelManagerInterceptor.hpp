@@ -5,34 +5,34 @@
 namespace ie {
 	class PanelManagerInterceptor : public virtual IPanelManager {
 	public:
-		PanelManagerInterceptor(IPanelManager& panelManager);
+		PanelManagerInterceptor(IPanelManager& panel_manager);
 		
 		PanelManagerInterceptor();
 		
-		void init(IPanelManager& panelManager);
+		void init(IPanelManager& panel_manager);
 		
 		void clear();
 		
-		bool isFree() override;
+		bool is_free() override;
 		
-		bool inConstPanels(sf::Vector2f pointPosition) override;
+		bool in_const_panels(sf::Vector2f point_position) override;
 		
-		void addPanel(BasePanel* panel) override;
+		void add_panel(BasePanel* panel) override;
 		
-		void removePanel(BasePanel* panel) override;
+		void remove_panel(BasePanel* panel) override;
 		
-		void displayPanel(BasePanel* panel) override;
+		void display_panel(BasePanel* panel) override;
 		
-		void hidePanel(BasePanel* panel) override;
+		void hide_panel(BasePanel* panel) override;
 		
 		void draw() override;
 		
 		void update() override;
 		
-		bool updateInteractions(sf::Vector2f mousePosition, bool active) override;
+		bool update_interactions(sf::Vector2f mouse_position, bool active) override;
 	
 	protected:
-		IPanelManager* panelManager;
+		IPanelManager* panel_manager;
 		std::vector<BasePanel*> panels;
 	};
 }

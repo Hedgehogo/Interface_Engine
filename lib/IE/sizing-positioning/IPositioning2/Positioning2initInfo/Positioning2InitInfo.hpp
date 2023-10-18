@@ -4,6 +4,6 @@
 
 namespace ie {
 	struct Positioning2InitInfo {
-		sf::RenderTarget& renderTarget;
+		sf::RenderTarget& render_target;
 	};
 }

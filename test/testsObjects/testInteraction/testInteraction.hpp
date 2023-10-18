@@ -9,15 +9,15 @@ public:
 	struct Processed {
 		struct Start {
 			unsigned long long time{0};
-			sf::Vector2i mousePosition;
+			sf::Vector2i mouse_position;
 		};
 		struct Update {
 			unsigned long long time{0};
-			sf::Vector2i mousePosition;
+			sf::Vector2i mouse_position;
 		};
 		struct Finish {
 			unsigned long long time{0};
-			sf::Vector2i mousePosition;
+			sf::Vector2i mouse_position;
 		};
 		std::vector<Start> start;
 		std::vector<Update> update;
@@ -39,17 +39,17 @@ protected:
 public:
 	TestInteraction(Priority priority = Priority::medium, bool blocked = false);
 	
-	Processed getProcessed();
+	Processed get_processed();
 	
-	bool isBlocked() const override;
+	bool is_blocked() const override;
 	
-	Priority getPriority() const override;
+	Priority get_priority() const override;
 	
-	void start(sf::Vector2i mousePosition) override;
+	void start(sf::Vector2i mouse_position) override;
 	
-	void update(sf::Vector2i mousePosition) override;
+	void update(sf::Vector2i mouse_position) override;
 	
-	void finish(sf::Vector2i mousePosition) override;
+	void finish(sf::Vector2i mouse_position) override;
 	
 	IInteraction* copy() override;
 };

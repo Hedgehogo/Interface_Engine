@@ -9,47 +9,47 @@ namespace ie {
 	class Animation : public virtual IAnimatorUnit {
 	public:
 		struct Variable {
-			PSfloat animationVariable;
-			std::vector<IChangeVariable*> changeVariables;
-			unsigned int activeChanger = 0;
-			float timeStartChanger = 0;
+			PSfloat animation_variable;
+			std::vector<IChangeVariable*> change_variables;
+			unsigned int active_changer = 0;
+			float time_start_changer = 0;
 			
-			Variable(PSfloat animationVariable = {}, std::vector<IChangeVariable*> changeVariables = {});
+			Variable(PSfloat animation_variable = {}, std::vector<IChangeVariable*> change_variables = {});
 			
 			Variable copy();
 		};
 	
-		explicit Animation(std::vector<Variable> animationVariables, PSfloat speed = PSfloat{nullptr}, std::vector<IAnimatorUnit*> nextUnits = {});
+		explicit Animation(std::vector<Variable> animation_variables, PSfloat speed = PSfloat{nullptr}, std::vector<IAnimatorUnit*> next_units = {});
 		
-		void setSpeed(PSfloat speed) override;
+		void set_speed(PSfloat speed) override;
 		
 		void restart() override;
 		
 		std::vector<IAnimatorUnit*> update(float time) override;
 		
-		void setNextUnits(std::vector<IAnimatorUnit*> nextUnit);
+		void set_next_units(std::vector<IAnimatorUnit*> next_unit);
 		
-		void addNextUnits(IAnimatorUnit* nextUnit);
+		void add_next_units(IAnimatorUnit* next_unit);
 		
 		Animation* copy() override;
 		
 		~Animation();
 	
 	protected:
-		std::vector<IAnimatorUnit*> nextUnits;
-		std::vector<IAnimatorUnit*> nextUnitsBuff;
-		std::vector<Variable> animationVariables;
-		std::vector<Variable*> animationUpdatableVariables;
+		std::vector<IAnimatorUnit*> next_units;
+		std::vector<IAnimatorUnit*> next_units_buff;
+		std::vector<Variable> animation_variables;
+		std::vector<Variable*> animation_updatable_variables;
 		PSfloat speed;
 	};
 	
 	template<>
 	struct Decode<Animation::Variable> {
-		static bool decode(const YAML::Node& node, Animation::Variable& animationUnit);
+		static bool decode(const YAML::Node& node, Animation::Variable& animation_unit);
 	};
 	
 	template<>
 	struct DecodePointer<Animation> {
-		static bool decodePointer(const YAML::Node& node, Animation*& animation);
+		static bool decode_pointer(const YAML::Node& node, Animation*& animation);
 	};
 }

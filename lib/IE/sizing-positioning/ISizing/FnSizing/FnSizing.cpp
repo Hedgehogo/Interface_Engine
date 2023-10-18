@@ -3,32 +3,32 @@
 #include <utility>
 
 namespace ie {
-	FnSizing::Make::Make(FindSizeFn findSizeFn, GetParentSizeFn getParentSizeFn) :
-		findSizeFn(std::move(findSizeFn)), getParentSizeFn(std::move(getParentSizeFn)){
+	FnSizing::Make::Make(FindSizeFn find_size_fn, GetParentSizeFn get_parent_size_fn) :
+		find_size_fn(std::move(find_size_fn)), get_parent_size_fn(std::move(get_parent_size_fn)){
 	}
 	
-	FnSizing* FnSizing::Make::make(float normalSize) {
-		return new FnSizing{std::move(*this), normalSize};
+	FnSizing* FnSizing::Make::make(float normal_size) {
+		return new FnSizing{std::move(*this), normal_size};
 	}
 	
-	FnSizing::FnSizing(Make&& make, float normalSize) :
-		findSizeFn(std::move(make.findSizeFn)), getParentSizeFn(std::move(make.getParentSizeFn)), normalSize(normalSize) {
+	FnSizing::FnSizing(Make&& make, float normal_size) :
+		find_size_fn(std::move(make.find_size_fn)), get_parent_size_fn(std::move(make.get_parent_size_fn)), normal_size(normal_size) {
 	}
 	
-	FnSizing::FnSizing(FindSizeFn findSizeFn, GetParentSizeFn getParentSizeFn) :
-		findSizeFn(std::move(findSizeFn)), getParentSizeFn(std::move(getParentSizeFn)), normalSize() {
+	FnSizing::FnSizing(FindSizeFn find_size_fn, GetParentSizeFn get_parent_size_fn) :
+		find_size_fn(std::move(find_size_fn)), get_parent_size_fn(std::move(get_parent_size_fn)), normal_size() {
 	}
 	
-	void FnSizing::init(float normalSize) {
-		this->normalSize = normalSize;
+	void FnSizing::init(float normal_size) {
+		this->normal_size = normal_size;
 	}
 	
-	float FnSizing::findSize(float parentSize, float targetSize) {
-		return findSizeFn(parentSize, targetSize, normalSize);
+	float FnSizing::find_size(float parent_size, float target_size) {
+		return find_size_fn(parent_size, target_size, normal_size);
 	}
 	
-	float FnSizing::getParentSize(float objectMinSize) {
-		return getParentSizeFn(objectMinSize);
+	float FnSizing::get_parent_size(float object_min_size) {
+		return get_parent_size_fn(object_min_size);
 	}
 	
 	FnSizing* FnSizing::copy() {

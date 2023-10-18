@@ -2,32 +2,32 @@
 #include "../../../../BasePanel/Panel/Panel.hpp"
 
 namespace ie {
-	DisplayPanelAction* DisplayPanelAction::Make::make(PanelActionInitInfo initInfo) {
-		return new DisplayPanelAction{std::move(*this), initInfo};
+	DisplayPanelAction* DisplayPanelAction::Make::make(PanelActionInitInfo init_info) {
+		return new DisplayPanelAction{std::move(*this), init_info};
 	}
 	
-	DisplayPanelAction::DisplayPanelAction(Make&&, PanelActionInitInfo initInfo) : PanelAction(initInfo) {
+	DisplayPanelAction::DisplayPanelAction(Make&&, PanelActionInitInfo init_info) : PanelAction(init_info) {
 	}
 	
-	void DisplayPanelAction::startPressed() {
+	void DisplayPanelAction::start_pressed() {
 	}
 	
-	void DisplayPanelAction::whilePressed() {
+	void DisplayPanelAction::while_pressed() {
 	}
 	
-	void DisplayPanelAction::stopPressed() {
-		panelManager->displayPanel(panel);
+	void DisplayPanelAction::stop_pressed() {
+		panel_manager->display_panel(panel);
 	}
 	
-	void DisplayPanelAction::whileNotPressed() {
+	void DisplayPanelAction::while_not_pressed() {
 	}
 	
 	DisplayPanelAction* DisplayPanelAction::copy() {
 		return new DisplayPanelAction{*this};
 	}
 	
-	bool DecodePointer<DisplayPanelAction>::decodePointer(const YAML::Node&, DisplayPanelAction*& displayPanelAction) {
-		displayPanelAction = new DisplayPanelAction{};
+	bool DecodePointer<DisplayPanelAction>::decode_pointer(const YAML::Node&, DisplayPanelAction*& display_panel_action) {
+		display_panel_action = new DisplayPanelAction{};
 		return false;
 	}
 }

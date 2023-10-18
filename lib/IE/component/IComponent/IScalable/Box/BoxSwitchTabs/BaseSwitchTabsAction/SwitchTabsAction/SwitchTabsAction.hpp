@@ -11,25 +11,25 @@ namespace ie {
 			
 			Make(uint index = 0);
 			
-			SwitchTabsAction* make(BasicActionInitInfo<BoxSwitchTabs&> initInfo) override;
+			SwitchTabsAction* make(BasicActionInitInfo<BoxSwitchTabs&> init_info) override;
 		};
 		
-		SwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> initInfo);
+		SwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> init_info);
 		
 		SwitchTabsAction(uint index);
 		
-		void init(BasicActionInitInfo<BoxSwitchTabs&> initInfo) override;
+		void init(BasicActionInitInfo<BoxSwitchTabs&> init_info) override;
 		
 		SwitchTabsAction* copy() override;
 	
 	protected:
-		void startPressed() override;
+		void start_pressed() override;
 		
-		void stopPressed() override;
+		void stop_pressed() override;
 		
-		void whilePressed() override;
+		void while_pressed() override;
 		
-		void whileNotPressed() override;
+		void while_not_pressed() override;
 		
 		uint index;
 		PSValue<uint> value;
@@ -37,6 +37,6 @@ namespace ie {
 	
 	template<>
 	struct DecodePointer<SwitchTabsAction> {
-		static bool decodePointer(const YAML::Node& node, SwitchTabsAction*& changeObjectAction);
+		static bool decode_pointer(const YAML::Node& node, SwitchTabsAction*& change_object_action);
 	};
 }

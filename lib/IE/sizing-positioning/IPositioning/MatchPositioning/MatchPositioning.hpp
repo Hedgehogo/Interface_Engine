@@ -5,20 +5,20 @@
 namespace ie {
 	class MatchPositioning : public virtual IPositioning {
 	public:
-		MatchPositioning(float parentCoefficient, float objectCoefficient, float offset = 0);
+		MatchPositioning(float parent_coefficient, float object_coefficient, float offset = 0);
 		
-		float findPosition(float parentPosition, float objectSize, float parentSize, float) override;
+		float find_position(float parent_position, float object_size, float parent_size, float) override;
 		
 		MatchPositioning* copy() override;
 	
 	protected:
-		float parentCoefficient;
-		float objectCoefficient;
+		float parent_coefficient;
+		float object_coefficient;
 		float offset;
 	};
 	
 	template<>
 	struct DecodePointer<MatchPositioning> {
-		static bool decodePointer(const YAML::Node& node, MatchPositioning*& matchPositioning);
+		static bool decode_pointer(const YAML::Node& node, MatchPositioning*& match_positioning);
 	};
 }

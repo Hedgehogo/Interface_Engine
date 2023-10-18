@@ -11,7 +11,7 @@ namespace ie::detail {
 		return function(node, object);
 	}
 	
-	IYamlBuilder* FuncYamlBuilder::getBuilder(const std::string& type) {
+	IYamlBuilder* FuncYamlBuilder::get_builder(const std::string& type) {
 		if(std::find(names.begin(), names.end(), type) != names.end()) {
 			return this;
 		} else {
