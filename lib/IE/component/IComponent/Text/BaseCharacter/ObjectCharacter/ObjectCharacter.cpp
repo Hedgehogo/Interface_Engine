@@ -45,7 +45,7 @@ namespace ie {
 		return special;
 	}
 	
-	void ObjectCharacter::draw(bool) {
+	void ObjectCharacter::draw() {
 	}
 	
 	void ObjectCharacter::draw_debug(sf::RenderTarget& render_target, int indent_addition, uint hue, uint hue_offset) {

@@ -2,7 +2,7 @@
 #include "../BaseTextBlock/BaseTextBlock.hpp"
 
 namespace ie {
-	BaseCharacter::BaseCharacter() : selection(false), rerender(false) {
+	BaseCharacter::BaseCharacter() : selection(false), active(true), rerender(false) {
 	}
 	
 	bool BaseCharacter::get_rerender() const {

@@ -15,7 +15,7 @@ namespace ie {
 		
 		void set_selection(bool selection) override;
 		
-		void draw(bool selection) override;
+		void draw() override;
 		
 		void set_kerning(float kerning) override;
 		

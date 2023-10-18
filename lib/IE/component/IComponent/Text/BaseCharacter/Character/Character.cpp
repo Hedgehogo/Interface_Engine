@@ -89,9 +89,9 @@ namespace ie {
 		}
 	}
 	
-	void Character::draw(bool selection) {
+	void Character::draw() {
 		if(render_target) {
-			if(this->selection && selection)
+			if(selection)
 				render_target.some().draw(selection_vertex_array);
 			render_target.some().draw(vertex_array, &texture);
 		}

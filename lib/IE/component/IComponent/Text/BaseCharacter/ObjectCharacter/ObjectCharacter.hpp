@@ -30,7 +30,7 @@ namespace ie {
 		
 		Special is_special() override;
 		
-		void draw(bool) override;
+		void draw() override;
 		
 		char32_t get_char() override;
 		

@@ -259,11 +259,11 @@ namespace ie {
 			draw_manager.draw();
 			
 			for(auto& character: text_characters) {
-				character->draw(true);
+				character->draw();
 			}
 			
 			for(auto& character: text_characters) {
-				character->draw(false);
+				character->draw();
 			}
 			
 			for(auto& line: lines) {

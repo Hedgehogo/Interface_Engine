@@ -54,7 +54,7 @@ namespace ie {
 		
 		virtual Special is_special() = 0;
 		
-		virtual void draw(bool selection) = 0;
+		virtual void draw() = 0;
 		
 		virtual char32_t get_char() = 0;
 		
