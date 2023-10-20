@@ -35,18 +35,18 @@ int main() {
 	
 	ie::Window window{
 		ie::Interface::Make{
-			make_box_ptr<ie::BoxScroll::Make>(
-				make_box_ptr<ie::Text::Make>(
+			ie::make_box_ptr<ie::BoxScroll::Make>(
+				ie::make_box_ptr<ie::Text::Make>(
 					ie::make_vector(
-						make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
+						ie::make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
 							U"bbabb"
 						),
-						make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
+						ie::make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
 							U"bbbbb"
 						)
 					),
 					&font,
-					make_box_ptr<ie::FullColor::Make>(sf::Color::White),
+					ie::make_box_ptr<ie::FullColor::Make>(sf::Color::White),
 					30U,
 					sf::Color::Black,
 					sf::Color::White,
@@ -54,19 +54,19 @@ int main() {
 					sf::Color::Black,
 					sf::Color{150, 150, 150},
 					sf::Text::Style{},
-					make_box_ptr<ie::Resizer::Make>(1.15f, ie::BaseResizer::Align::Left),
-					make_box_ptr<ie::BasicHotkeyInteraction<ie::Text&>::Make>(
+					ie::make_box_ptr<ie::Resizer::Make>(1.15f, ie::BaseResizer::Align::Left),
+					ie::make_box_ptr<ie::BasicHotkeyInteraction<ie::Text&>::Make>(
 						ie::make_vector(
 							ie::make_vector(
-								make_box_ptr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>::Make>(
-									make_box_ptr<ie::BasicKeysInteraction<ie::Text&>::Make>(
-										make_box_ptr<ie::TextSelectionAction::Make>(),
+								ie::make_box_ptr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>::Make>(
+									ie::make_box_ptr<ie::BasicKeysInteraction<ie::Text&>::Make>(
+										ie::make_box_ptr<ie::TextSelectionAction::Make>(),
 										std::vector{ie::Key::MouseLeft}
 									)
 								),
-								make_box_ptr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>::Make>(
-									make_box_ptr<ie::BasicKeysInteraction<ie::Text&>::Make>(
-										make_box_ptr<ie::TextCopyAction::Make>(),
+								ie::make_box_ptr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>::Make>(
+									ie::make_box_ptr<ie::BasicKeysInteraction<ie::Text&>::Make>(
+										ie::make_box_ptr<ie::TextCopyAction::Make>(),
 										std::vector{ie::Key::LControl, ie::Key::C}
 									)
 								)

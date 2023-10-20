@@ -2,9 +2,9 @@
 
 #include <box-ptr/BoxPtr.hpp>
 
-using namespace bp;
-
 namespace ie {
+	using namespace bp;
+	
 	class IAction {
 	public:
 		virtual void start() {
