@@ -44,7 +44,7 @@ namespace ie {
 		layout.resize(size, position);
 		sf::Vector2f coordinate{0, 0};
 		sf::Vector2f object_size{size};
-		for(std::size_t x = 0; x < objects.size(); ++x) {
+		for(size_t x = 0; x < objects.size(); ++x) {
 			object_size.x = size.x * (bounds[x + 1] - bounds[x]);
 			objects[x]->resize(object_size, position + coordinate);
 			coordinate.x += object_size.x;
@@ -57,7 +57,7 @@ namespace ie {
 			return false;
 		position.x = position.x / layout.size.x;
 		
-		std::size_t object{1};
+		size_t object{1};
 		while(position.x > bounds[object])
 			++object;
 		return objects[object - 1]->update_interactions(mouse_position);
@@ -66,12 +66,12 @@ namespace ie {
 	sf::Vector2f BoxBorderHorizontal::get_min_size() const {
 		sf::Vector2f min_size{0, 0};
 		std::vector<sf::Vector2f> object_min_sizes(objects.size());
-		for(std::size_t i = 0; i < object_min_sizes.size(); ++i) {
+		for(size_t i = 0; i < object_min_sizes.size(); ++i) {
 			object_min_sizes[i] = objects[i]->get_min_size();
 		}
 		
 		sf::Vector2f object_min_size;
-		for(std::size_t i = 0; i < object_min_sizes.size(); ++i) {
+		for(size_t i = 0; i < object_min_sizes.size(); ++i) {
 			object_min_size = {object_min_sizes[i].x / (bounds[i + 1] - bounds[i]), object_min_sizes[i].y};
 			min_size = max(object_min_size, min_size);
 		}
@@ -82,12 +82,12 @@ namespace ie {
 	sf::Vector2f BoxBorderHorizontal::get_normal_size() const {
 		sf::Vector2f normal_size{0, 0};
 		std::vector<sf::Vector2f> object_normal_sizes(objects.size());
-		for(std::size_t i = 0; i < object_normal_sizes.size(); ++i) {
+		for(size_t i = 0; i < object_normal_sizes.size(); ++i) {
 			object_normal_sizes[i] = objects[i]->get_normal_size();
 		}
 		
 		sf::Vector2f object_normal_size;
-		for(std::size_t i = 0; i < object_normal_sizes.size(); ++i) {
+		for(size_t i = 0; i < object_normal_sizes.size(); ++i) {
 			object_normal_size = {object_normal_sizes[i].x / (bounds[i + 1] - bounds[i]), object_normal_sizes[i].y};
 			normal_size = max(object_normal_size, normal_size);
 		}
@@ -95,15 +95,15 @@ namespace ie {
 		return normal_size;
 	}
 	
-	std::size_t BoxBorderHorizontal::get_array_size() const {
+	size_t BoxBorderHorizontal::get_array_size() const {
 		return objects.size();
 	}
 	
-	IScalable& BoxBorderHorizontal::get_object_at(std::size_t index) {
+	IScalable& BoxBorderHorizontal::get_object_at(size_t index) {
 		return *objects.at(index);
 	}
 	
-	const IScalable& BoxBorderHorizontal::get_object_at(std::size_t index) const {
+	const IScalable& BoxBorderHorizontal::get_object_at(size_t index) const {
 		return *objects.at(index);
 	}
 	

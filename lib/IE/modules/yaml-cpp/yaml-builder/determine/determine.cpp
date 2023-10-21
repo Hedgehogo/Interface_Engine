@@ -16,8 +16,8 @@ namespace ie {
 
 	namespace detail{
 		template<class InputIt, class UnaryPredicate>
-		std::size_t count_if(InputIt first, InputIt last, UnaryPredicate p) {
-			std::size_t count = 0;
+		size_t count_if(InputIt first, InputIt last, UnaryPredicate p) {
+			size_t count = 0;
 			for(; first != last; ++first) {
 				if(p(*first)) {
 					++count;

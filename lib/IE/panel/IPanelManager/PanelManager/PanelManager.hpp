@@ -12,9 +12,9 @@ namespace ie {
 	public:
 		explicit PanelManager(std::vector<BasePanel*> panels = std::vector<BasePanel*>{});
 		
-		std::size_t size();
+		size_t size();
 		
-		BasePanel& get(std::size_t index);
+		BasePanel& get(size_t index);
 		
 		bool is_free() override;
 		

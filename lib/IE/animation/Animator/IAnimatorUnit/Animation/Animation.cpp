@@ -40,7 +40,7 @@ namespace ie {
 	void Animation::restart() {
 		animation_updatable_variables.resize(animation_variables.size());
 		
-		for(std::size_t i = 0; i < animation_updatable_variables.size(); ++i) {
+		for(size_t i = 0; i < animation_updatable_variables.size(); ++i) {
 			animation_updatable_variables[i] = &animation_variables[i];
 		}
 		
@@ -51,7 +51,7 @@ namespace ie {
 	}
 	
 	std::vector<IAnimatorUnit*> Animation::update(float time) {
-		for(std::size_t i = 0; i < animation_updatable_variables.size(); ++i) {
+		for(size_t i = 0; i < animation_updatable_variables.size(); ++i) {
 			Variable*& animation_variable = animation_updatable_variables[i];
 			
 			if(animation_variable->time_start_changer == 0 || time < animation_variable->time_start_changer)

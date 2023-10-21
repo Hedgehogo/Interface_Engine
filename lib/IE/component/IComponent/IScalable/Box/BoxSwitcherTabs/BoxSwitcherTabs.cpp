@@ -68,15 +68,15 @@ namespace ie {
 		return true;
 	}
 	
-	std::size_t BoxSwitcherTabs::get_array_size() const {
+	size_t BoxSwitcherTabs::get_array_size() const {
 		return objects.size();
 	}
 	
-	IScalable& BoxSwitcherTabs::get_object_at(std::size_t index) {
+	IScalable& BoxSwitcherTabs::get_object_at(size_t index) {
 		return *objects.at(index);
 	}
 	
-	const IScalable& BoxSwitcherTabs::get_object_at(std::size_t index) const {
+	const IScalable& BoxSwitcherTabs::get_object_at(size_t index) const {
 		return *objects.at(index);
 	}
 	

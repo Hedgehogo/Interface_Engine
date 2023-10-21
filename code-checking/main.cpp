@@ -13,7 +13,7 @@
 struct Sources {
 	std::vector<std::string> src;
 	std::mutex mtx;
-	std::size_t size;
+	size_t size;
 	
 	explicit Sources(const std::vector<std::string>& src) : src(src), size(src.size()) {
 	}
@@ -59,10 +59,10 @@ std::optional<std::tuple<std::filesystem::path, bool>> case_insensitive_file_fin
 }
 
 void code_checking(Sources& sources, std::vector<std::filesystem::path> include_dirs) {
-	std::size_t count_not_corrected_includes{0};
-	std::size_t count_not_found_includes{0};
+	size_t count_not_corrected_includes{0};
+	size_t count_not_found_includes{0};
 	
-	for(std::size_t file_number = 1;; ++file_number) {
+	for(size_t file_number = 1;; ++file_number) {
 		std::filesystem::path source_path{};
 		if(auto opt = get_source(sources)) {
 			source_path = opt.value();
@@ -77,7 +77,7 @@ void code_checking(Sources& sources, std::vector<std::filesystem::path> include_
 			std::string file_str;
 			bool not_corrected_file = false;
 			
-			for(std::size_t line_number = 1; std::getline(file, str); ++line_number) {
+			for(size_t line_number = 1; std::getline(file, str); ++line_number) {
 				if(std::regex_search(str, matches, filter)) {
 					
 					std::string match_str{matches.str(1)};
@@ -158,7 +158,7 @@ std::vector<std::string> split_set(const std::string& s, char delimiter) {
 	std::vector<std::string> tokens;
 	std::string token;
 	std::istringstream tokenStream(s);
-	for(std::size_t i = 0; std::getline(tokenStream, token, delimiter); ++i) {
+	for(size_t i = 0; std::getline(tokenStream, token, delimiter); ++i) {
 		if(std::find(tokens.begin(), tokens.end(), token) == tokens.end())
 			tokens.push_back(token);
 	}

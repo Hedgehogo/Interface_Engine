@@ -12,8 +12,8 @@
 
 namespace ie {
 	SymbolPosition read_character_index(const YAML::Node& node, std::basic_ifstream<char32_t>& fin) {
-		std::size_t line{0};
-		std::size_t number{0};
+		size_t line{0};
+		size_t number{0};
 		std::basic_string<char32_t> str;
 		
 		if(node.IsScalar()) {
@@ -43,7 +43,7 @@ namespace ie {
 					node["line"] >> line;
 				if(node["line-offset"])
 					line += node["line-offset"].as<llint>();
-				for(std::size_t i = 0; i < line; ++i) {
+				for(size_t i = 0; i < line; ++i) {
 					std::getline(fin, str, U'\n');
 				}
 				if(node["number"]) {
@@ -97,7 +97,7 @@ namespace ie {
 		if(node.IsScalar()) {
 			std::string str = node.as<std::string>();
 			string32.resize(str.size());
-			for(std::size_t i = 0; i < str.size(); ++i) {
+			for(size_t i = 0; i < str.size(); ++i) {
 				string32[i] = str[i];
 			}
 		} else {
@@ -115,8 +115,8 @@ namespace ie {
 				std::basic_ifstream<char32_t> fin(file_path);
 				std::basic_string<char32_t> str{};
 				if(node["line"]) {
-					std::size_t line{node["line"].as<std::size_t>() + 1};
-					for(std::size_t i = 0; i < line; ++i)
+					size_t line{node["line"].as<size_t>() + 1};
+					for(size_t i = 0; i < line; ++i)
 						std::getline(fin, str, U'\n');
 				} else if(node["first-symbol"]) {
 					SymbolPosition start{read_character_index(node["first-symbol"], fin)};
@@ -124,16 +124,16 @@ namespace ie {
 						const YAML::Node& second_node = node["last-symbol"];
 						SymbolPosition end{read_character_index(second_node, fin)};
 						std::basic_string<char32_t> line;
-						for(std::size_t i = 0; i < start.line; ++i)
+						for(size_t i = 0; i < start.line; ++i)
 							std::getline(fin, line, U'\n');
-						for(std::size_t i = 0; i < end.line - start.line; ++i) {
+						for(size_t i = 0; i < end.line - start.line; ++i) {
 							std::getline(fin, line, U'\n');
 							str += line + U"\n";
 						}
 						std::getline(fin, line, U'\n');
 						str += line.substr(0, end.number + 1);
 					} else {
-						for(std::size_t i = 0; i < start.line; ++i)
+						for(size_t i = 0; i < start.line; ++i)
 							std::getline(fin, str, U'\n');
 						std::getline(fin, str, U'\0');
 					}

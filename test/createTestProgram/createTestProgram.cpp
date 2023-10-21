@@ -44,8 +44,8 @@ bool operator==(const sf::Texture& texture1, const sf::Texture& texture2) {
 	sf::Image image1{texture1.copyToImage()};
 	sf::Image image2{texture2.copyToImage()};
 	
-	for(std::size_t x = 0; x < texture1.get_size().x; ++x) {
-		for(std::size_t y = 0; y < texture1.get_size().y; ++y) {
+	for(size_t x = 0; x < texture1.get_size().x; ++x) {
+		for(size_t y = 0; y < texture1.get_size().y; ++y) {
 			if(image1.get_pixel(x, y) != image2.get_pixel(x, y))
 				return false;
 		}

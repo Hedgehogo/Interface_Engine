@@ -27,8 +27,8 @@ namespace ie {
 	using Uint32 = sf::Uint32;
 	
 	struct SymbolPosition {
-		std::size_t line;
-		std::size_t number;
+		size_t line;
+		size_t number;
 	};
 	
 	SymbolPosition read_character_index(const YAML::Node& node, std::basic_ifstream<char32_t>& fin);

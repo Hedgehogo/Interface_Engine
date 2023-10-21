@@ -84,7 +84,7 @@ namespace ie {
 	void Character::set_selection(bool selection) {
 		BaseCharacter::set_selection(selection);
 		auto current_color{selection ? text_variables.text_selection_color.some() : text_variables.text_color.some()};
-		for(std::size_t i = 0; i < 4; ++i) {
+		for(size_t i = 0; i < 4; ++i) {
 			vertex_array[i].color = current_color;
 		}
 	}
@@ -137,7 +137,7 @@ namespace ie {
 	
 	void Character::move(sf::Vector2f position) {
 		BaseCharacter::move(position);
-		for(std::size_t i = 0; i < 4; ++i) {
+		for(size_t i = 0; i < 4; ++i) {
 			selection_vertex_array[i].position += position;
 			         vertex_array[i].position += position;
 		}

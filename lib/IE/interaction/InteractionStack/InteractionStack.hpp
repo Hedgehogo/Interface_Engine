@@ -12,7 +12,7 @@ namespace ie {
 	public:
 		explicit InteractionStack(std::vector<BoxPtr<IInteraction> >&& interaction_stack = {});
 		
-		IInteraction& at(std::size_t index);
+		IInteraction& at(size_t index);
 		
 		void add(BoxPtr<IInteraction>&& element);
 	};

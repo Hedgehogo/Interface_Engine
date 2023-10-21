@@ -2,7 +2,7 @@
 #include <iostream>
 #include <array>
 
-template<std::size_t N>
+template<size_t N>
 class FpsCounter {
 public:
 	float medium() {

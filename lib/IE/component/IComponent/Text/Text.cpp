@@ -158,7 +158,7 @@ namespace ie {
 			}
 			SelectionText.resize(std::distance(local_start, local_end));
 			
-			for(std::size_t i = 0; i < SelectionText.length(); ++i) {
+			for(size_t i = 0; i < SelectionText.length(); ++i) {
 				SelectionText[i] = (*(local_start + i))->get_char();
 			}
 			

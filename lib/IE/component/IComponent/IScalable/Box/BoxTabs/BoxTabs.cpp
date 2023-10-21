@@ -14,7 +14,7 @@ namespace ie {
 	BoxTabs::BoxTabs(Make&& make, InitInfo init_info) :
 		Box(make.min_size),
 		draw_managers(make.objects.size()),
-		objects(map_make(std::move(make.objects), [&](std::size_t i) {
+		objects(map_make(std::move(make.objects), [&](size_t i) {
 			return init_info.copy(draw_managers[i]);
 		})),
 		value(make.value) {
@@ -30,7 +30,7 @@ namespace ie {
 	}
 	
 	void BoxTabs::init(InitInfo init_info) {
-		for(std::size_t i = 0; i < objects.size(); ++i) {
+		for(size_t i = 0; i < objects.size(); ++i) {
 			objects[i]->init(init_info.copy(draw_managers[i]));
 		}
 		init_info.draw_manager.add(*this);
@@ -72,15 +72,15 @@ namespace ie {
 		return objects[value->get_value()]->update_interactions(mouse_position);
 	}
 	
-	std::size_t BoxTabs::get_array_size() const {
+	size_t BoxTabs::get_array_size() const {
 		return objects.size();
 	}
 	
-	IScalable& BoxTabs::get_object_at(std::size_t index) {
+	IScalable& BoxTabs::get_object_at(size_t index) {
 		return *objects.at(index);
 	}
 	
-	const IScalable& BoxTabs::get_object_at(std::size_t index) const {
+	const IScalable& BoxTabs::get_object_at(size_t index) const {
 		return *objects.at(index);
 	}
 	

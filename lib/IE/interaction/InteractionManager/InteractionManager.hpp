@@ -18,9 +18,9 @@ namespace ie {
 	public:
 		explicit InteractionManager();
 		
-		std::size_t size();
+		size_t size();
 		
-		IInteraction& get(std::size_t index);
+		IInteraction& get(size_t index);
 		
 		void add_interaction(IInteraction& interaction);
 		

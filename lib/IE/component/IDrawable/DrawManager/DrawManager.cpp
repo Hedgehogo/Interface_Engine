@@ -15,11 +15,11 @@ namespace ie {
 		}
 	}
 	
-	std::size_t DrawManager::size() {
+	size_t DrawManager::size() {
 		return drawables.size();
 	}
 	
-	IDrawable& DrawManager::get(std::size_t index) {
+	IDrawable& DrawManager::get(size_t index) {
 		return *drawables.at(index);
 	}
 }

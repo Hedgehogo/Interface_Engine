@@ -36,11 +36,11 @@ namespace ie {
 		
 		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		std::size_t get_array_size() const override;
+		size_t get_array_size() const override;
 		
-		IScalable& get_object_at(std::size_t index) override;
+		IScalable& get_object_at(size_t index) override;
 		
-		const IScalable& get_object_at(std::size_t index) const override;
+		const IScalable& get_object_at(size_t index) const override;
 		
 		BoxTabs* copy() override;
 	

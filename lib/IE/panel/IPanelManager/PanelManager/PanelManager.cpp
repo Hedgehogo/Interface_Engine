@@ -6,11 +6,11 @@ namespace ie {
 	PanelManager::PanelManager(std::vector<BasePanel*> panels) : panels(std::move(panels)), active_panels() {
 	}
 	
-	std::size_t PanelManager::size() {
+	size_t PanelManager::size() {
 		return panels.size();
 	}
 	
-	BasePanel& PanelManager::get(std::size_t index) {
+	BasePanel& PanelManager::get(size_t index) {
 		return *panels.at(index);
 	}
 	

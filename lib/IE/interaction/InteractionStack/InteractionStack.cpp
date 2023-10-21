@@ -4,7 +4,7 @@ namespace ie {
 	InteractionStack::InteractionStack(std::vector<BoxPtr<IInteraction> >&& interaction_stack) : interaction_stack(std::move(interaction_stack)) {
 	}
 	
-	IInteraction& InteractionStack::at(std::size_t index) {
+	IInteraction& InteractionStack::at(size_t index) {
 		return *interaction_stack.at(index);
 	}
 	

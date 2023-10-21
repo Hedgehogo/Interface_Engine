@@ -16,13 +16,13 @@ namespace ie {
 		
 		SList(std::vector<std::shared_ptr<T>> list);
 		
-		PIShared get_element_ptr(std::size_t index) const override;
+		PIShared get_element_ptr(size_t index) const override;
 		
-		void set_element_ptr(std::size_t index, PIShared value) override;
+		void set_element_ptr(size_t index, PIShared value) override;
 		
-		V get_element(std::size_t index) const;
+		V get_element(size_t index) const;
 		
-		void set_element(std::size_t index, const V& value);
+		void set_element(size_t index, const V& value);
 		
 		std::vector<V> get_value() const;
 		

@@ -11,12 +11,12 @@ namespace ie {
 			const sf::Texture& texture;
 			PSCoefficient viewing_progress;
 			sf::IntRect rect = {};
-			std::size_t frame_count = 0;
+			size_t frame_count = 0;
 			sf::Vector2i offset = {};
 			
-			Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, std::size_t frame_count, sf::Vector2i offset);
+			Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, size_t frame_count, sf::Vector2i offset);
 			
-			Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, std::size_t frame_count);
+			Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, size_t frame_count);
 			
 			Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect);
 			
@@ -25,7 +25,7 @@ namespace ie {
 		
 		VideoFromTexture(Make&& make, InitInfo init_info);
 		
-		VideoFromTexture(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect = {}, std::size_t frame_count = 0, sf::Vector2i offset = {});
+		VideoFromTexture(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect = {}, size_t frame_count = 0, sf::Vector2i offset = {});
 		
 		void set_current_frame(float viewing_progress);
 		
@@ -50,6 +50,6 @@ namespace ie {
 		sf::Sprite sprite;
 		sf::Vector2i texture_size;
 		sf::Vector2f size;
-		std::size_t frame_count;
+		size_t frame_count;
 	};
 }

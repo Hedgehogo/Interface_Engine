@@ -9,7 +9,7 @@ namespace ie {
 	template<typename T>
 	detail::AnimatorUnitMatch::Option<T> detail::AnimatorUnitMatch::Option<T>::copy() {
 		std::vector<IAnimatorUnit*> copy_next{next.size()};
-		for(std::size_t i = 0; i < next.size(); ++i) {
+		for(size_t i = 0; i < next.size(); ++i) {
 			copy_next[i] = next[i]->copy();
 		}
 		return Option{example, comparison, copy_next};
@@ -61,7 +61,7 @@ namespace ie {
 	template<typename T>
 	AnimatorUnitMatch<T>* AnimatorUnitMatch<T>::copy() {
 		std::vector<Option> copy_options{options.size()};
-		for(std::size_t i = 0; i < options.size(); ++i) {
+		for(size_t i = 0; i < options.size(); ++i) {
 			copy_options[i] = options[i].copy();
 		}
 		
@@ -151,7 +151,7 @@ namespace ie {
 		};
 		
 		if(node["options"]) {
-			for(std::size_t i = 0; i < node["options"].size(); ++i) {
+			for(size_t i = 0; i < node["options"].size(); ++i) {
 				add_next_animator_unit_for_mach(node, i, animator_unit_match);
 			}
 		} else {

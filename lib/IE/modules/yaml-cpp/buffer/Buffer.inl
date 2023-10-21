@@ -14,11 +14,11 @@ namespace ie {
 			throw BufferNonExistentNestingLevelException{node.Mark(), name, 0};
 		}
 		
-		std::size_t level{objects_levels.size() - 1};
+		size_t level{objects_levels.size() - 1};
 		
 		if(node["level"]) {
 			if(node["level"]["relative"]) {
-				auto relative{node["level"]["relative"].as<std::size_t>()};
+				auto relative{node["level"]["relative"].as<size_t>()};
 				
 				if(level < relative) {
 					throw BufferNonExistentNestingLevelException{node.Mark(), name, 0};

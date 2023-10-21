@@ -13,7 +13,7 @@ namespace ie {
 	
 	float ChangeVariableByBrokenLine::operator()(float frame) {
 		float sum_size{0};
-		std::size_t i{0};
+		size_t i{0};
 		for(; sum_size + values[i].size < frame && i < values.size(); ++i) {
 			sum_size += values[i].size;
 		}

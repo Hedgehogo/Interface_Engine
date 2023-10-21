@@ -20,23 +20,23 @@ namespace ie {
 	}
 	
 	template<typename T>
-	PIShared SList<T>::get_element_ptr(std::size_t index) const {
+	PIShared SList<T>::get_element_ptr(size_t index) const {
 		return std::dynamic_pointer_cast<IShared>(list[index]);
 	}
 	
 	template<typename T>
-	void SList<T>::set_element_ptr(std::size_t index, PIShared value) {
+	void SList<T>::set_element_ptr(size_t index, PIShared value) {
 		list[index] = std::dynamic_pointer_cast<T>(value);
 		set();
 	}
 	
 	template<typename T>
-	typename SList<T>::V SList<T>::get_element(std::size_t index) const {
+	typename SList<T>::V SList<T>::get_element(size_t index) const {
 		return list[index]->get_value();
 	}
 	
 	template<typename T>
-	void SList<T>::set_element(std::size_t index, const typename SList<T>::V& value) {
+	void SList<T>::set_element(size_t index, const typename SList<T>::V& value) {
 		list[index]->set_value(value);
 		set();
 	}

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <cstddef>
 #include "../IDrawable/IDrawable.hpp"
 
 namespace ie {
@@ -8,9 +9,9 @@ namespace ie {
 	public:
 		DrawManager() = default;
 		
-		std::size_t size();
+		size_t size();
 		
-		IDrawable& get(std::size_t index);
+		IDrawable& get(size_t index);
 		
 		void add(IDrawable& drawable);
 		

@@ -71,7 +71,7 @@ namespace ie {
 		),
 		text(std::move(make.text)) {
 		text_characters.resize(text.size());
-		for(std::size_t i = 0; i < text_characters.size(); ++i) {
+		for(size_t i = 0; i < text_characters.size(); ++i) {
 			text_characters[i] = make_box_ptr<Character>(text[i], text_variables, this->lines, init_info.text_render_target);
 		}
 	}
@@ -138,7 +138,7 @@ namespace ie {
 		);
 		
 		text_characters.resize(text.size());
-		for(std::size_t i = 0; i < text_characters.size(); ++i) {
+		for(size_t i = 0; i < text_characters.size(); ++i) {
 			text_characters[i] = make_box_ptr<Character>(text[i], text_variables, this->lines, orl::Option<sf::RenderTarget&> {});
 		}
 	}

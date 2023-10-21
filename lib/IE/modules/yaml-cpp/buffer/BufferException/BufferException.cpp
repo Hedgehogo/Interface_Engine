@@ -1,7 +1,7 @@
 #include "BufferException.hpp"
 
 namespace ie {
-	BufferNonExistentNestingLevelException::BufferNonExistentNestingLevelException(YAML::Mark mark, const std::string& name, std::size_t level) :
+	BufferNonExistentNestingLevelException::BufferNonExistentNestingLevelException(YAML::Mark mark, const std::string& name, size_t level) :
 		BaseYamlException(mark, std::string("An attempt was made to put the Buffer variable '") + name + std::string("' on a non-existent nesting level, the '") + std::to_string(level) + std::string("' level")),
 		name(name), level(level) {
 	}
@@ -10,7 +10,7 @@ namespace ie {
 		return name;
 	}
 	
-	std::size_t BufferNonExistentNestingLevelException::get_level() const {
+	size_t BufferNonExistentNestingLevelException::get_level() const {
 		return level;
 	}
 	

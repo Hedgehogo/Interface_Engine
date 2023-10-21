@@ -44,7 +44,7 @@ namespace ie {
 		layout.resize(size, position);
 		sf::Vector2f coordinate{0, 0};
 		sf::Vector2f object_size{size};
-		for(std::size_t y = 0; y < objects.size(); ++y) {
+		for(size_t y = 0; y < objects.size(); ++y) {
 			object_size.y = size.y * (bounds[y + 1] - bounds[y]);
 			objects[y]->resize(object_size, position + coordinate);
 			coordinate.y += object_size.y;
@@ -57,7 +57,7 @@ namespace ie {
 			return false;
 		position.y = position.y / layout.size.y;
 		
-		std::size_t i{1};
+		size_t i{1};
 		while(position.y > bounds[i])
 			++i;
 		return objects[i - 1]->update_interactions(mouse_position);
@@ -66,12 +66,12 @@ namespace ie {
 	sf::Vector2f BoxBorderVertical::get_min_size() const {
 		sf::Vector2f min_size{0, 0};
 		std::vector<sf::Vector2f> object_min_sizes(objects.size());
-		for(std::size_t i = 0; i < object_min_sizes.size(); ++i) {
+		for(size_t i = 0; i < object_min_sizes.size(); ++i) {
 			object_min_sizes[i] = objects[i]->get_min_size();
 		}
 		
 		sf::Vector2f object_min_size;
-		for(std::size_t i = 0; i < object_min_sizes.size(); ++i) {
+		for(size_t i = 0; i < object_min_sizes.size(); ++i) {
 			object_min_size = {object_min_sizes[i].x, object_min_sizes[i].y / (bounds[i + 1] - bounds[i])};
 			min_size = max(object_min_size, min_size);
 		}
@@ -82,12 +82,12 @@ namespace ie {
 	sf::Vector2f BoxBorderVertical::get_normal_size() const {
 		sf::Vector2f normal_size{0, 0};
 		std::vector<sf::Vector2f> object_normal_sizes(objects.size());
-		for(std::size_t i = 0; i < object_normal_sizes.size(); ++i) {
+		for(size_t i = 0; i < object_normal_sizes.size(); ++i) {
 			object_normal_sizes[i] = objects[i]->get_normal_size();
 		}
 		
 		sf::Vector2f object_normal_size;
-		for(std::size_t i = 0; i < object_normal_sizes.size(); ++i) {
+		for(size_t i = 0; i < object_normal_sizes.size(); ++i) {
 			object_normal_size = {object_normal_sizes[i].x, object_normal_sizes[i].y / (bounds[i + 1] - bounds[i])};
 			normal_size = max(object_normal_size, normal_size);
 		}
@@ -95,15 +95,15 @@ namespace ie {
 		return normal_size;
 	}
 	
-	std::size_t BoxBorderVertical::get_array_size() const {
+	size_t BoxBorderVertical::get_array_size() const {
 		return objects.size();
 	}
 	
-	IScalable& BoxBorderVertical::get_object_at(std::size_t index) {
+	IScalable& BoxBorderVertical::get_object_at(size_t index) {
 		return *objects.at(index);
 	}
 	
-	const IScalable& BoxBorderVertical::get_object_at(std::size_t index) const {
+	const IScalable& BoxBorderVertical::get_object_at(size_t index) const {
 		return *objects.at(index);
 	}
 	

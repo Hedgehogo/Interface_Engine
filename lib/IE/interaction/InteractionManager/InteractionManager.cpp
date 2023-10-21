@@ -7,11 +7,11 @@ namespace ie {
 		interactions(), add_interactions(), delete_interactions(), position(0, 0), block(false) {
 	}
 	
-	std::size_t InteractionManager::size() {
+	size_t InteractionManager::size() {
 		return interactions.size();
 	}
 	
-	IInteraction& InteractionManager::get(std::size_t index) {
+	IInteraction& InteractionManager::get(size_t index) {
 		return *interactions.at(index);
 	}
 	

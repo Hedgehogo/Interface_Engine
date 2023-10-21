@@ -5,8 +5,8 @@ sf::Image image_difference(const sf::Image& first, const sf::Image& second) {
 	if(first.getSize() == second.getSize()) {
 		sf::Image result;
 		result.create(first.getSize().x, first.getSize().y, sf::Color::Transparent);
-		for(std::size_t x = 0; x < first.getSize().x; ++x) {
-			for(std::size_t y = 0; y < first.getSize().y; ++y) {
+		for(size_t x = 0; x < first.getSize().x; ++x) {
+			for(size_t y = 0; y < first.getSize().y; ++y) {
 				auto first_color{first.getPixel(x, y)};
 				auto second_color{second.getPixel(x, y)};
 				long first_r{first_color.r},

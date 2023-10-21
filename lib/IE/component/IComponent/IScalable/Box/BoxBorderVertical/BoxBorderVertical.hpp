@@ -40,11 +40,11 @@ namespace ie {
 		
 		sf::Vector2f get_normal_size() const override;
 		
-		std::size_t get_array_size() const override;
+		size_t get_array_size() const override;
 		
-		IScalable& get_object_at(std::size_t index) override;
+		IScalable& get_object_at(size_t index) override;
 		
-		const IScalable& get_object_at(std::size_t index) const override;
+		const IScalable& get_object_at(size_t index) const override;
 		
 		BoxBorderVertical* copy() override;
 		

@@ -1,11 +1,11 @@
 #include "UpdateManager.hpp"
 
 namespace ie {
-	std::size_t UpdateManager::size() {
+	size_t UpdateManager::size() {
 		return updatable.size();
 	}
 	
-	IUpdatable& UpdateManager::get(std::size_t index) {
+	IUpdatable& UpdateManager::get(size_t index) {
 		return *updatable.at(index);
 	}
 	
