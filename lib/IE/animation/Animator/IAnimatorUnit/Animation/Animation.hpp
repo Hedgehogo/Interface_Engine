@@ -36,11 +36,11 @@ namespace ie {
 		~Animation();
 	
 	protected:
-		std::vector<IAnimatorUnit*> next_units;
-		std::vector<IAnimatorUnit*> next_units_buff;
-		std::vector<Variable> animation_variables;
-		std::vector<Variable*> animation_updatable_variables;
-		PSfloat speed;
+		std::vector<IAnimatorUnit*> next_units_;
+		std::vector<IAnimatorUnit*> next_units_buff_;
+		std::vector<Variable> animation_variables_;
+		std::vector<Variable*> animation_updatable_variables_;
+		PSfloat speed_;
 	};
 	
 	template<>

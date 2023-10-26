@@ -14,9 +14,9 @@ namespace ie {
 		ChangeVariableByCurve* copy() override;
 	
 	protected:
-		sf::Vector2f start, end;
-		float k1, k2;
-		float size;
+		sf::Vector2f start_, end_;
+		float k1_, k2_;
+		float size_;
 	};
 	
 	template<>

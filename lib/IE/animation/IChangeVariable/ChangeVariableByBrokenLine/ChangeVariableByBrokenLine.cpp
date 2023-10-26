@@ -1,29 +1,29 @@
 #include "ChangeVariableByBrokenLine.hpp"
 
 namespace ie {
-	ChangeVariableByBrokenLine::ChangeVariableByBrokenLine(std::vector<Value> values) : values(values) {
+	ChangeVariableByBrokenLine::ChangeVariableByBrokenLine(std::vector<Value> values) : values_(values) {
 		for(const auto& item: values) {
-			size += item.size;
+			size_ += item.size;
 		}
 	}
 	
 	float ChangeVariableByBrokenLine::get_size() {
-		return size;
+		return size_;
 	}
 	
 	float ChangeVariableByBrokenLine::operator()(float frame) {
 		float sum_size{0};
 		size_t i{0};
-		for(; sum_size + values[i].size < frame && i < values.size(); ++i) {
-			sum_size += values[i].size;
+		for(; sum_size + values_[i].size < frame && i < values_.size(); ++i) {
+			sum_size += values_[i].size;
 		}
 		
-		float ratio = (frame - sum_size) / values[i].size;
-		return (ratio * (values[((i == values.size() - 1) ? (0) : (i + 1))].value - values[i].value)) + values[i].value;
+		float ratio = (frame - sum_size) / values_[i].size;
+		return (ratio * (values_[((i == values_.size() - 1) ? (0) : (i + 1))].value - values_[i].value)) + values_[i].value;
 	}
 	
 	IChangeVariable* ChangeVariableByBrokenLine::copy() {
-		return new ChangeVariableByBrokenLine{values};
+		return new ChangeVariableByBrokenLine{values_};
 	}
 	
 	bool Decode<ChangeVariableByBrokenLine::Value>::decode(const YAML::Node& node, ChangeVariableByBrokenLine::Value& value) {

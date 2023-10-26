@@ -14,7 +14,7 @@ namespace ie {
 		IChangeVariable* copy() override;
 	
 	protected:
-		const float a, b, c, d, size;
+		const float a_, b_, c_, d_, size_;
 	};
 	
 	template<>

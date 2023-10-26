@@ -19,8 +19,8 @@ namespace ie {
 		IChangeVariable* copy() override;
 	
 	protected:
-		std::vector<Value> values;
-		float size;
+		std::vector<Value> values_;
+		float size_;
 	};
 	
 	template<>

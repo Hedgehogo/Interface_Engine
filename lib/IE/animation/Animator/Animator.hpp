@@ -15,8 +15,8 @@ namespace ie {
 		virtual ~Animator();
 	
 	protected:
-		std::vector<IAnimatorUnit*> units;
-		std::vector<IAnimatorUnit*> units_buff;
+		std::vector<IAnimatorUnit*> units_;
+		std::vector<IAnimatorUnit*> units_buff_;
 	};
 	
 	template<>

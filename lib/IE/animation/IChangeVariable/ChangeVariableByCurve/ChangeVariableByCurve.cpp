@@ -1,11 +1,11 @@
 #include "ChangeVariableByCurve.hpp"
 
 namespace ie {
-	ChangeVariableByCurve::ChangeVariableByCurve(float k1, float k2, float size, sf::Vector2f start, sf::Vector2f end) : start(start), end(end), k1(k1), k2(k2), size(size) {
+	ChangeVariableByCurve::ChangeVariableByCurve(float k1, float k2, float size, sf::Vector2f start, sf::Vector2f end) : start_(start), end_(end), k1_(k1), k2_(k2), size_(size) {
 	}
 	
 	float ChangeVariableByCurve::get_size() {
-		return size;
+		return size_;
 	}
 	
 	float s(float x) {
@@ -17,12 +17,12 @@ namespace ie {
 	}
 	
 	float ChangeVariableByCurve::operator()(float frame) {
-		frame /= size;
-		return s((end.x - frame) / (end.x - start.x)) * d(frame, start, k1) + s((frame - start.x) / (end.x - start.x)) * d(frame, end, k2);
+		frame /= size_;
+		return s((end_.x - frame) / (end_.x - start_.x)) * d(frame, start_, k1_) + s((frame - start_.x) / (end_.x - start_.x)) * d(frame, end_, k2_);
 	}
 	
 	ChangeVariableByCurve* ChangeVariableByCurve::copy() {
-		return new ChangeVariableByCurve{k1, k2, size, start, end};
+		return new ChangeVariableByCurve{k1_, k2_, size_, start_, end_};
 	}
 	
 	bool DecodePointer<ChangeVariableByCurve>::decode_pointer(const YAML::Node& node, ChangeVariableByCurve*& change_variable_by_curve) {

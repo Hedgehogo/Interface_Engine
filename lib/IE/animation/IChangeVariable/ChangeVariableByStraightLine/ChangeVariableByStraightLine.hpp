@@ -14,8 +14,8 @@ namespace ie {
 		IChangeVariable* copy() override;
 	
 	protected:
-		float length;
-		float k, b;
+		float length_;
+		float k_, b_;
 	};
 	
 	ChangeVariableByStraightLine* make_change_variable_by_straight_line(float start, float end, float length);

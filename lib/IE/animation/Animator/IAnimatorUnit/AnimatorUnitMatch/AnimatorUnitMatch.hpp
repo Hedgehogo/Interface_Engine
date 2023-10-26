@@ -34,8 +34,8 @@ namespace ie {
 		AnimatorUnitMatch<T>* copy() override;
 	
 	protected:
-		std::vector<Option> options;
-		PSValue<T> value;
+		std::vector<Option> options_;
+		PSValue<T> value_;
 	};
 	
 	template<typename T>

@@ -1,19 +1,19 @@
 #include "ChangeVariableByStraightLine.hpp"
 
 namespace ie {
-	ChangeVariableByStraightLine::ChangeVariableByStraightLine(float k, float length, float b) : length(length), k(k), b(b) {
+	ChangeVariableByStraightLine::ChangeVariableByStraightLine(float k, float length, float b) : length_(length), k_(k), b_(b) {
 	}
 	
 	float ChangeVariableByStraightLine::get_size() {
-		return length;
+		return length_;
 	}
 	
 	float ChangeVariableByStraightLine::operator()(float x) {
-		return (k * x) + b;
+		return (k_ * x) + b_;
 	}
 	
 	IChangeVariable* ChangeVariableByStraightLine::copy() {
-		return new ChangeVariableByStraightLine{k, length, b};
+		return new ChangeVariableByStraightLine{k_, length_, b_};
 	}
 	
 	ChangeVariableByStraightLine* make_change_variable_by_straight_line(float start, float end, float length) {

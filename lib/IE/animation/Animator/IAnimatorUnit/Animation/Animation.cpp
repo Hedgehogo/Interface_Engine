@@ -18,8 +18,8 @@ namespace ie {
 	}
 	
 	Animation::Animation(std::vector<Variable> animation_variables, PSfloat speed, std::vector<IAnimatorUnit*> next_units) :
-		next_units(next_units), next_units_buff(next_units), animation_variables(std::move(animation_variables)), speed(std::move(speed)) {
-		for(auto& unit: this->next_units) {
+		next_units_(next_units), next_units_buff_(next_units), animation_variables_(std::move(animation_variables)), speed_(std::move(speed)) {
+		for(auto& unit: this->next_units_) {
 			if(!unit)
 				unit = this;
 		}
@@ -28,31 +28,31 @@ namespace ie {
 	}
 	
 	void Animation::set_speed(PSfloat speed) {
-		if(!this->speed)
-			this->speed = speed;
+		if(!this->speed_)
+			this->speed_ = speed;
 		
-		for(auto& unit: next_units) {
+		for(auto& unit: next_units_) {
 			if(unit != this)
 				unit->set_speed(speed);
 		}
 	}
 	
 	void Animation::restart() {
-		animation_updatable_variables.resize(animation_variables.size());
+		animation_updatable_variables_.resize(animation_variables_.size());
 		
-		for(size_t i = 0; i < animation_updatable_variables.size(); ++i) {
-			animation_updatable_variables[i] = &animation_variables[i];
+		for(size_t i = 0; i < animation_updatable_variables_.size(); ++i) {
+			animation_updatable_variables_[i] = &animation_variables_[i];
 		}
 		
-		for(auto& animation_variable: animation_variables) {
+		for(auto& animation_variable: animation_variables_) {
 			animation_variable.active_changer = 0;
 			animation_variable.time_start_changer = 0;
 		}
 	}
 	
 	std::vector<IAnimatorUnit*> Animation::update(float time) {
-		for(size_t i = 0; i < animation_updatable_variables.size(); ++i) {
-			Variable*& animation_variable = animation_updatable_variables[i];
+		for(size_t i = 0; i < animation_updatable_variables_.size(); ++i) {
+			Variable*& animation_variable = animation_updatable_variables_[i];
 			
 			if(animation_variable->time_start_changer == 0 || time < animation_variable->time_start_changer)
 				animation_variable->time_start_changer = time;
@@ -60,13 +60,13 @@ namespace ie {
 			float time_from_changer = time - (animation_variable->time_start_changer);
 			IChangeVariable* change_variable = animation_variable->change_variables[animation_variable->active_changer];
 			
-			time_from_changer *= speed->get_value();
+			time_from_changer *= speed_->get_value();
 			animation_variable->animation_variable->set_value((*change_variable)(time_from_changer));
 			
 			if(change_variable->get_size() < time_from_changer) {
 				animation_variable->active_changer++;
 				if(animation_variable->active_changer == animation_variable->change_variables.size()) {
-					animation_updatable_variables.erase(std::vector<Variable*>::iterator{&animation_variable});
+					animation_updatable_variables_.erase(std::vector<Variable*>::iterator{&animation_variable});
 					--i;
 					continue;
 				}
@@ -75,34 +75,34 @@ namespace ie {
 			}
 		}
 		
-		if(animation_updatable_variables.empty()) {
+		if(animation_updatable_variables_.empty()) {
 			restart();
-			return next_units;
+			return next_units_;
 		}
 		
 		return {this};
 	}
 	
 	void Animation::set_next_units(std::vector<IAnimatorUnit*> next_units) {
-		this->next_units = next_units;
+		this->next_units_ = next_units;
 	}
 	
 	void Animation::add_next_units(IAnimatorUnit* next_unit) {
-		next_units.push_back(next_unit);
+		next_units_.push_back(next_unit);
 	}
 	
 	Animation* Animation::copy() {
-		std::vector<IAnimatorUnit*> copy_next_units{next_units_buff.size()};
+		std::vector<IAnimatorUnit*> copy_next_units{next_units_buff_.size()};
 		
-		for(size_t i = 0; i < next_units_buff.size(); ++i) {
-			copy_next_units[i] = next_units_buff[i]->copy();
+		for(size_t i = 0; i < next_units_buff_.size(); ++i) {
+			copy_next_units[i] = next_units_buff_[i]->copy();
 		}
 		
-		return new Animation{animation_variables, speed, copy_next_units};
+		return new Animation{animation_variables_, speed_, copy_next_units};
 	}
 	
 	Animation::~Animation() {
-		for(auto& item: next_units_buff) {
+		for(auto& item: next_units_buff_) {
 			if(item)
 				delete item;
 		}

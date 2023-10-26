@@ -5,13 +5,13 @@ namespace ie {
 		return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 	}
 	
-	AnimationManager::AnimationManager(std::vector<Animator*> animators) : animators(animators) {
-		start_manager = get_time();
+	AnimationManager::AnimationManager(std::vector<Animator*> animators) : animators_(animators) {
+		start_time_ = get_time();
 	}
 	
 	void AnimationManager::update() {
-		float current_time = static_cast<double>(get_time() - start_manager) / 1000;
-		for(auto& animator: animators) {
+		float current_time = static_cast<double>(get_time() - start_time_) / 1000;
+		for(auto& animator: animators_) {
 			animator->update(current_time);
 		}
 	}
@@ -19,7 +19,7 @@ namespace ie {
 	AnimationManager* AnimationManager::copy() {
 		std::vector<Animator*> result;
 		
-		for(auto& item: animators) {
+		for(auto& item: animators_) {
 			result.push_back(item->copy());
 		}
 		
@@ -27,7 +27,7 @@ namespace ie {
 	}
 	
 	AnimationManager::~AnimationManager() {
-		std::destroy(animators.begin(), animators.end());
+		std::destroy(animators_.begin(), animators_.end());
 	}
 	
 	bool Decode<AnimationManager>::decode(const YAML::Node& node, AnimationManager& animation_manager) {
