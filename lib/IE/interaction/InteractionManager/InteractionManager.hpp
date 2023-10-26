@@ -33,10 +33,10 @@ namespace ie {
 		virtual ~InteractionManager() = default;
 		
 	protected:
-		std::vector<IInteraction*> interactions;
-		std::vector<IInteraction*> add_interactions;
-		std::vector<IInteraction*> delete_interactions;
-		sf::Vector2i position;
-		bool block;
+		std::vector<IInteraction*> interactions_;
+		std::vector<IInteraction*> add_interactions_;
+		std::vector<IInteraction*> delete_interactions_;
+		sf::Vector2i position_;
+		bool block_;
 	};
 }

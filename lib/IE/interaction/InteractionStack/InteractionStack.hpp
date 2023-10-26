@@ -6,15 +6,15 @@
 
 namespace ie {
 	class InteractionStack {
-	protected:
-		std::vector<BoxPtr<IInteraction> > interaction_stack;
-	
 	public:
 		explicit InteractionStack(std::vector<BoxPtr<IInteraction> >&& interaction_stack = {});
 		
 		IInteraction& at(size_t index);
 		
 		void add(BoxPtr<IInteraction>&& element);
+	
+	protected:
+		std::vector<BoxPtr<IInteraction> > interaction_stack_;
 	};
 	
 	template<>
