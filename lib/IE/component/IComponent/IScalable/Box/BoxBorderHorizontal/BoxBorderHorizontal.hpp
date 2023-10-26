@@ -50,8 +50,8 @@ namespace ie {
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		std::vector<BoxPtr<IScalable> > objects;
-		std::vector<float> bounds;
+		std::vector<BoxPtr<IScalable> > objects_;
+		std::vector<float> bounds_;
 	};
 	
 	template<>

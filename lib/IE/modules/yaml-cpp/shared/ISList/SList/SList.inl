@@ -3,8 +3,8 @@
 namespace ie {
 	template<typename T>
 	SList<T>::SList(const std::vector<typename SList<T>::V>& list) : setters() {
-		this->list.resize(list.size());
-		for(int i = 0; i < list.size(); ++i) {
+		this->list.resize(list.size_());
+		for(int i = 0; i < list.size_(); ++i) {
 			this->list[i] = std::make_shared<T>(list[i]);
 		}
 	}
@@ -43,8 +43,8 @@ namespace ie {
 	
 	template<typename T>
 	std::vector<typename SList<T>::V> SList<T>::get_value() const {
-		std::vector<typename SList<T>::V> result{list.size()};
-		for(int i = 0; i < list.size(); ++i) {
+		std::vector<typename SList<T>::V> result{list.size_()};
+		for(int i = 0; i < list.size_(); ++i) {
 			this->result[i] = get_element(i);
 		}
 		return result;
@@ -52,8 +52,8 @@ namespace ie {
 	
 	template<typename T>
 	void SList<T>::set_value(const std::vector<typename SList<T>::V>& list) {
-		this->list.resize(list.size());
-		for(int i = 0; i < list.size(); ++i) {
+		this->list.resize(list.size_());
+		for(int i = 0; i < list.size_(); ++i) {
 			this->list[i] = std::make_shared<T>(list[i]);
 		}
 		set();
@@ -62,13 +62,13 @@ namespace ie {
 	template<typename T>
 	bool DecodePointer<SList<T> >::decode_pointer(const YAML::Node& node, SList<T>*& with_list) {
 		if(node["list"]) {
-			std::vector<typename SList<T>::V> list{node["list"].size()};
+			std::vector<typename SList<T>::V> list{node["list"].size_()};
 			for(int i = 0; i < list.size(); ++i) {
 				node["list"][i] >> list[i];
 			}
 			with_list = new SList <T>{list};
 		} else {
-			std::vector<std::shared_ptr<T> > list{node["vars"].size()};
+			std::vector<std::shared_ptr<T> > list{node["vars"].size_()};
 			for(int i = 0; i < list.size(); ++i) {
 				list[i] = get_s_value<T>(node["vars"][i]);
 			}

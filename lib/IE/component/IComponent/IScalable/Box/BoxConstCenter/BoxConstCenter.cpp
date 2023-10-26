@@ -10,87 +10,87 @@ namespace ie {
 	}
 	
 	BoxConstCenter::BoxConstCenter(Make&& make, InitInfo init_info) :
-		Box(make.min_size), const_object(make.const_object->make(init_info)), background(make.background->make(init_info)), const_size(make.const_size) {
+		Box(make.min_size), const_object_(make.const_object->make(init_info)), background_(make.background->make(init_info)), const_size_(make.const_size) {
 	}
 	
 	BoxConstCenter::BoxConstCenter(BoxPtr<IScalable>&& const_object, BoxPtr<IScalable>&& background, const sf::Vector2f& const_size, const sf::Vector2f& min_size) :
-		Box(min_size), const_object(std::move(const_object)), background(std::move(background)), const_size(const_size) {
+		Box(min_size), const_object_(std::move(const_object)), background_(std::move(background)), const_size_(const_size) {
 	}
 	
 	void BoxConstCenter::init(InitInfo init_info) {
-		const_object->init(init_info);
-		background->init(init_info);
+		const_object_->init(init_info);
+		background_->init(init_info);
 	}
 	
 	void BoxConstCenter::set_position(sf::Vector2f position) {
 		Box::set_position(position);
-		if(resized) {
-			const_object->move(const_size);
+		if(resized_) {
+			const_object_->move(const_size_);
 		} else {
-			resized = true;
-			const_object->resize(const_size, layout_.position + position);
+			resized_ = true;
+			const_object_->resize(const_size_, layout_.position + position);
 		}
-		const_object->set_position(position + (layout_.size / 2.f) - (const_size / 2.f));
-		background->set_position(position);
+		const_object_->set_position(position + (layout_.size / 2.f) - (const_size_ / 2.f));
+		background_->set_position(position);
 	}
 	
 	void BoxConstCenter::move(sf::Vector2f position) {
 		Box::move(position);
-		if(resized) {
-			const_object->move(const_size);
+		if(resized_) {
+			const_object_->move(const_size_);
 		} else {
-			resized = true;
-			const_object->resize(const_size, layout_.position + position);
+			resized_ = true;
+			const_object_->resize(const_size_, layout_.position + position);
 		}
-		background->move(position);
+		background_->move(position);
 	}
 	
 	void BoxConstCenter::set_size(sf::Vector2f size) {
 		Box::set_size(size);
-		if(!resized) {
-			resized = true;
-			const_object->set_size(const_size);
+		if(!resized_) {
+			resized_ = true;
+			const_object_->set_size(const_size_);
 		}
-		background->set_size(size);
+		background_->set_size(size);
 	}
 	
 	void BoxConstCenter::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout_.resize(size, position);
-		if(resized) {
-			const_object->set_position(position + (size / 2.f) - (const_size / 2.f));
+		if(resized_) {
+			const_object_->set_position(position + (size / 2.f) - (const_size_ / 2.f));
 		} else {
-			resized = true;
-			const_object->resize(const_size, position + (size / 2.f) - (const_size / 2.f));
+			resized_ = true;
+			const_object_->resize(const_size_, position + (size / 2.f) - (const_size_ / 2.f));
 		}
-		background->resize(size, position);
+		background_->resize(size, position);
 	}
 	
 	sf::Vector2f BoxConstCenter::get_min_size() const {
-		return max(IComponentTwoObjects::get_min_size(), const_size);
+		return max(IComponentTwoObjects::get_min_size(), const_size_);
 	}
 	
 	sf::Vector2f BoxConstCenter::get_normal_size() const {
-		return max(IComponentTwoObjects::get_normal_size(), const_size);
+		return max(IComponentTwoObjects::get_normal_size(), const_size_);
 	}
 	
 	IScalable& BoxConstCenter::get_first_object() {
-		return *const_object;
+		return *const_object_;
 	}
 	
 	const IScalable& BoxConstCenter::get_first_object() const {
-		return *const_object;
+		return *const_object_;
 	}
 	
 	IScalable& BoxConstCenter::get_second_object() {
-		return *background;
+		return *background_;
 	}
 	
 	const IScalable& BoxConstCenter::get_second_object() const {
-		return *background;
+		return *background_;
 	}
 	
 	bool BoxConstCenter::update_interactions(sf::Vector2f) {
-		return background->in(layout_.position) ? background->update_interactions(layout_.position) : const_object->update_interactions(layout_.position);
+		return background_->in(layout_.position) ? background_->update_interactions(layout_.position) : const_object_->update_interactions(layout_.position);
 	}
 	
 	BoxConstCenter* BoxConstCenter::copy() {

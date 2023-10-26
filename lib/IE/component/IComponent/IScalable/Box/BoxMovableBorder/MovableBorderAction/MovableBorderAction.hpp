@@ -30,10 +30,10 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		BoxMovableBorder* box;
-		sf::Vector2i start_mouse_position;
-		float start_border_value;
-		bool active;
+		BoxMovableBorder* box_;
+		sf::Vector2i start_mouse_position_;
+		float start_border_value_;
+		bool active_;
 	};
 }
 

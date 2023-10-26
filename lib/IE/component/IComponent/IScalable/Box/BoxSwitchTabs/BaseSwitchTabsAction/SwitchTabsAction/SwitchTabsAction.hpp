@@ -31,8 +31,8 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		size_t index;
-		PSValue<size_t> value;
+		size_t index_;
+		PSValue<size_t> value_;
 	};
 	
 	template<>

@@ -75,10 +75,10 @@ namespace ie {
 		BoxShader* copy() override;
 	
 	protected:
-		sf::Shader* shader;
-		size_t transmission;
+		sf::Shader* shader_;
+		size_t transmission_;
 		
-		sf::Clock clock;
+		sf::Clock clock_;
 	};
 	
 	template<>

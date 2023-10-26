@@ -43,9 +43,9 @@ namespace ie {
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		BoxPtr<IUninteractive> bezel;
-		BoxPtr<IScalable> object;
-		float thickness;
+		BoxPtr<IUninteractive> bezel_;
+		BoxPtr<IScalable> object_;
+		float thickness_;
 	};
 	
 	template<>

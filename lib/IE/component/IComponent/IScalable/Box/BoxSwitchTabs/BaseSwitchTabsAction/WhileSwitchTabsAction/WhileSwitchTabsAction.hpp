@@ -32,9 +32,9 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		int size;
-		PSValue<size_t> value;
-		int step;
+		int size_;
+		PSValue<size_t> value_;
+		int step_;
 	};
 	
 	template<>

@@ -48,10 +48,10 @@ namespace ie {
 		BoxConstCenter* copy() override;
 	
 	protected:
-		BoxPtr<IScalable> const_object;
-		BoxPtr<IScalable> background;
-		sf::Vector2f const_size;
-		bool resized;
+		BoxPtr<IScalable> const_object_;
+		BoxPtr<IScalable> background_;
+		sf::Vector2f const_size_;
+		bool resized_;
 	};
 	
 	template<>

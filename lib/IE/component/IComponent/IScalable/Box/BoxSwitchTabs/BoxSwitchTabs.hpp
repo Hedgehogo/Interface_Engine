@@ -53,9 +53,9 @@ namespace ie {
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		std::vector<DrawManager> draw_managers;
-		std::vector<BoxPtr<IScalable> > objects;
-		PSValue<size_t> value;
+		std::vector<DrawManager> draw_managers_;
+		std::vector<BoxPtr<IScalable> > objects_;
+		PSValue<size_t> value_;
 	};
 	
 	template<>

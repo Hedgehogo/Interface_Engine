@@ -10,22 +10,22 @@ namespace ie {
 	}
 	
 	SwitchTabsAction::SwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> init_info) :
-		BaseSwitchTabsAction(init_info), index(make.index), value(box->get_value()) {
+		BaseSwitchTabsAction(init_info), index_(make.index), value_(box_->get_value()) {
 	}
 	
-	SwitchTabsAction::SwitchTabsAction(size_t index) : index(index), value(nullptr) {
+	SwitchTabsAction::SwitchTabsAction(size_t index) : index_(index), value_(nullptr) {
 	}
 	
 	void SwitchTabsAction::init(BasicActionInitInfo<BoxSwitchTabs&> init_info) {
 		BaseSwitchTabsAction::init(init_info);
-		value = box->get_value();
+		value_ = box_->get_value();
 	}
 	
 	void SwitchTabsAction::start_pressed() {
 	}
 	
 	void SwitchTabsAction::stop_pressed() {
-		value->set_value(index);
+		value_->set_value(index_);
 	}
 	
 	void SwitchTabsAction::while_pressed() {

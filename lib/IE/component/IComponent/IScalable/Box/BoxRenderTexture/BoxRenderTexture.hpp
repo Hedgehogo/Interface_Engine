@@ -45,15 +45,15 @@ namespace ie {
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		sf::RenderTexture render_texture;
-		sf::Sprite sprite;
-		sf::View view;
-		DrawManager draw_manager;
-		BoxPtr<IScalable> object;
-		InteractionManager* interaction_manager;
-		sf::RenderTarget* render_target;
-		bool optimize;
-		bool active;
+		sf::RenderTexture render_texture_;
+		sf::Sprite sprite_;
+		sf::View view_;
+		DrawManager draw_manager_;
+		BoxPtr<IScalable> object_;
+		InteractionManager* interaction_manager_;
+		sf::RenderTarget* render_target_;
+		bool optimize_;
+		bool active_;
 	};
 	
 	template<>

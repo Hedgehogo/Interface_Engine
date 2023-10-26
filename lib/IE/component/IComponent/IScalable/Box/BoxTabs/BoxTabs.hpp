@@ -45,9 +45,9 @@ namespace ie {
 		BoxTabs* copy() override;
 	
 	protected:
-		std::vector<DrawManager> draw_managers;
-		std::vector<BoxPtr<IScalable> > objects;
-		PISint value;
+		std::vector<DrawManager> draw_managers_;
+		std::vector<BoxPtr<IScalable> > objects_;
+		PISint value_;
 	};
 	
 	template<>

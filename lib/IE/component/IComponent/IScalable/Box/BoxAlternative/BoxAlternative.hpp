@@ -37,8 +37,8 @@ namespace ie {
 		BoxAlternative* copy() override;
 		
 	protected:
-		BoxPtr<IScalable> bottom_object;
-		BoxPtr<IScalable> top_object;
+		BoxPtr<IScalable> bottom_object_;
+		BoxPtr<IScalable> top_object_;
 	};
 	
 	template<>

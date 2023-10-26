@@ -43,10 +43,10 @@ namespace ie {
 		BoxSwitcherTabs* copy() override;
 	
 	protected:
-		BasicInteractiveData<BoxSwitcherTabs&> interactive;
-		std::vector<BoxPtr<IScalable> > objects;
-		bool is_horizontal;
-		PSint value;
+		BasicInteractiveData<BoxSwitcherTabs&> interactive_;
+		std::vector<BoxPtr<IScalable> > objects_;
+		bool is_horizontal_;
+		PSint value_;
 	};
 	
 	template<>

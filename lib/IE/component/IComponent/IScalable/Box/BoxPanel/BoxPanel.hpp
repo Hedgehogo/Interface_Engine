@@ -40,8 +40,8 @@ namespace ie {
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		BoxPtr<IScalable> object;
-		BoxPtr<ConstPanel> panel;
+		BoxPtr<IScalable> object_;
+		BoxPtr<ConstPanel> panel_;
 	};
 	
 	template<>
