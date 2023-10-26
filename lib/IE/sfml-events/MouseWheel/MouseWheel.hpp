@@ -6,7 +6,7 @@
 namespace ie {
 	class MouseWheel {
 	protected:
-		static sf::Vector2f delta;
+		static sf::Vector2f delta_;
 	
 	public:
 		static void set_delta(sf::Event::MouseWheelScrollEvent event);

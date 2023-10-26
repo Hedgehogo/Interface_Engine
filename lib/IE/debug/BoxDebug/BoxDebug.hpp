@@ -39,10 +39,10 @@ namespace ie {
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		BoxPtr<IScalable> object;
-		sf::RenderTarget* render_target;
-		bool active;
-		bool drawn;
+		BoxPtr<IScalable> object_;
+		sf::RenderTarget* render_target_;
+		bool active_;
+		bool drawn_;
 	};
 	
 	template<>

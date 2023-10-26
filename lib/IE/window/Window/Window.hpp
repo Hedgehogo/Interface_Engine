@@ -48,9 +48,9 @@ namespace ie {
 		sf::Vector2u get_min_size() const;
 	
 	protected:
-		sf::RenderWindow window;
-		Interface interface;
-		BoxPtr<BaseWindowResizer> resizer;
-		sf::Vector2u min_size;
+		sf::RenderWindow window_;
+		Interface interface_;
+		BoxPtr<BaseWindowResizer> resizer_;
+		sf::Vector2u min_size_;
 	};
 }

@@ -15,6 +15,6 @@ namespace ie {
 		virtual ~BaseWindowResizer() = default;
 		
 	protected:
-		Window* window;
+		Window* window_;
 	};
 }

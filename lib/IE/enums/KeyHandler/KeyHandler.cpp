@@ -3,15 +3,15 @@
 #include "../../sfml-events/MouseWheel/MouseWheel.hpp"
 
 namespace ie {
-	std::vector<Key> KeyHandler::keys_pressed{};
-	std::vector<Key> KeyHandler::global_keys_pressed{};
+	std::vector<Key> KeyHandler::keys_pressed_{};
+	std::vector<Key> KeyHandler::global_keys_pressed_{};
 	
 	std::vector<Key> KeyHandler::get_keys_pressed() {
-		return keys_pressed;
+		return keys_pressed_;
 	}
 	
 	void KeyHandler::set_keys_pressed(std::vector<Key> keys_pressed) {
-		KeyHandler::keys_pressed = keys_pressed;
+		KeyHandler::keys_pressed_ = keys_pressed;
 	}
 	
 	void KeyHandler::update() {
@@ -23,9 +23,9 @@ namespace ie {
 		for(int i = 0; i < static_cast<int>(Key::MouseLeft); ++i) {
 			if(
 				sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(i)) &&
-				std::find(keys_pressed.begin(), keys_pressed.end(), static_cast<Key>(i)) == keys_pressed.end()
+					std::find(keys_pressed_.begin(), keys_pressed_.end(), static_cast<Key>(i)) == keys_pressed_.end()
 				) {
-				global_keys_pressed.push_back(static_cast<Key>(i));
+				global_keys_pressed_.push_back(static_cast<Key>(i));
 			}
 		}
 	}
@@ -34,38 +34,38 @@ namespace ie {
 		for(int i = static_cast<int>(Key::MouseLeft); i < static_cast<int>(Key::MouseWheelUp); ++i) {
 			if(
 				sf::Mouse::isButtonPressed(static_cast<sf::Mouse::Button>(i - static_cast<int>(Key::MouseLeft))) &&
-				std::find(keys_pressed.begin(), keys_pressed.end(), static_cast<Key>(i)) == keys_pressed.end()
+					std::find(keys_pressed_.begin(), keys_pressed_.end(), static_cast<Key>(i)) == keys_pressed_.end()
 				) {
-				global_keys_pressed.push_back(static_cast<Key>(i));
+				global_keys_pressed_.push_back(static_cast<Key>(i));
 			}
 		}
 	}
 	
 	void KeyHandler::add_key(Key key) {
-		if(std::find(keys_pressed.begin(), keys_pressed.end(), key) == keys_pressed.end()) {
-			keys_pressed.push_back(key);
+		if(std::find(keys_pressed_.begin(), keys_pressed_.end(), key) == keys_pressed_.end()) {
+			keys_pressed_.push_back(key);
 		}
 	}
 	
 	void KeyHandler::delete_key(Key key) {
-		auto element = std::find(keys_pressed.begin(), keys_pressed.end(), key);
-		if(element != keys_pressed.end()) {
-			keys_pressed.erase(element);
+		auto element = std::find(keys_pressed_.begin(), keys_pressed_.end(), key);
+		if(element != keys_pressed_.end()) {
+			keys_pressed_.erase(element);
 		}
 	}
 	
 	void KeyHandler::clear() {
-		keys_pressed.clear();
+		keys_pressed_.clear();
 	}
 	
 	void KeyHandler::clear_global_keys() {
-		global_keys_pressed.clear();
+		global_keys_pressed_.clear();
 	}
 	
 	bool KeyHandler::is_key_pressed(Key key) {
 		if(
-			std::find(keys_pressed.begin(), keys_pressed.end(), key) != keys_pressed.end() ||
-			std::find(global_keys_pressed.begin(), global_keys_pressed.end(), key) != global_keys_pressed.end()
+			std::find(keys_pressed_.begin(), keys_pressed_.end(), key) != keys_pressed_.end() ||
+				std::find(global_keys_pressed_.begin(), global_keys_pressed_.end(), key) != global_keys_pressed_.end()
 			) {
 			return true;
 		}
