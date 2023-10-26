@@ -30,8 +30,8 @@ namespace ie {
 		struct BasicHotkeyInteractionHotkey {
 			using Make = make_system::BasicHotkeyInteractionHotkey<T>;
 			
-			BoxPtr<BasicKeysInteraction<T> > interaction;
-			size_t state{std::numeric_limits<size_t>::max()};
+			BoxPtr<BasicKeysInteraction<T> > interaction_;
+			size_t state_{std::numeric_limits<size_t>::max()};
 			
 			BasicHotkeyInteractionHotkey(Make&& make, BasicActionInitInfo<T> init_info);
 			

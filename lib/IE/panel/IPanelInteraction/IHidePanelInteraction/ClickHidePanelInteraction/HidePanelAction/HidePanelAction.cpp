@@ -23,7 +23,7 @@ namespace ie {
 	}
 	
 	void HidePanelAction::stop_pressed() {
-		sf::Vector2f point_position{static_cast<sf::Vector2f>(mouse_position)};
+		sf::Vector2f point_position{static_cast<sf::Vector2f>(mouse_position_)};
 		if(only_on_parent ? panel->get_parent_processed() : !panel->in_panel(point_position) && !panel->in_const_panels(point_position) && panel->is_free()) {
 			panel_manager->hide_panel(panel);
 		}

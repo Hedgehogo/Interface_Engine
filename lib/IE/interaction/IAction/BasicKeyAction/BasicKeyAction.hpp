@@ -33,7 +33,7 @@ namespace ie {
 		virtual BasicKeyAction* copy() = 0;
 	
 	protected:
-		bool pressed;
+		bool pressed_;
 	};
 	
 	using KeyAction = BasicKeyAction<std::monostate>;

@@ -14,11 +14,11 @@ namespace ie {
 	
 	template<typename T>
 	BasicOpenUrlAction<T>::BasicOpenUrlAction(Make&& make, BasicActionInitInfo<T>) :
-		url(std::move(make.url)) {
+		url_(std::move(make.url)) {
 	}
 	
 	template<typename T>
-	BasicOpenUrlAction<T>::BasicOpenUrlAction(const std::string& url) : url(url) {
+	BasicOpenUrlAction<T>::BasicOpenUrlAction(const std::string& url) : url_(url) {
 	}
 	
 	template<typename T>
@@ -27,7 +27,7 @@ namespace ie {
 	
 	template<typename T>
 	void BasicOpenUrlAction<T>::stop_pressed() {
-		open_url(url);
+		open_url(url_);
 	}
 	
 	template<typename T>

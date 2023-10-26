@@ -15,17 +15,17 @@ namespace ie {
 		
 		template<typename T>
 		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(Make&& make, BasicActionInitInfo<T> init_info) :
-			interaction(make.interaction->make(init_info)), state(make.state) {
+			interaction_(make.interaction->make(init_info)), state_(make.state) {
 		}
 		
 		template<typename T>
 		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(BoxPtr<BasicKeysInteraction<T> >&& interaction, size_t state) :
-			interaction(std::move(interaction)), state(state) {
+			interaction_(std::move(interaction)), state_(state) {
 		}
 		
 		template<typename T>
 		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(size_t state) :
-			interaction(nullptr), state(state) {
+			interaction_(nullptr), state_(state) {
 		}
 	}
 	
@@ -63,7 +63,7 @@ namespace ie {
 	void BasicHotkeyInteraction<T>::init(BasicActionInitInfo<T> init_info) {
 		for(const auto& hotkey_state: hotkey_states) {
 			for(auto& hotkey: hotkey_state) {
-				hotkey->interaction->init(init_info);
+				hotkey->interaction_->init(init_info);
 			}
 		}
 	}
@@ -93,17 +93,17 @@ namespace ie {
 	template<typename T>
 	void BasicHotkeyInteraction<T>::start(sf::Vector2i mouse_position) {
 		for(auto& hotkey: *now_hotkeys) {
-			hotkey->interaction->start(mouse_position);
+			hotkey->interaction_->start(mouse_position);
 		}
 	}
 	
 	template<typename T>
 	void BasicHotkeyInteraction<T>::update(sf::Vector2i mouse_position) {
 		for(auto& hotkey: *now_hotkeys) {
-			hotkey->interaction->update(mouse_position);
-			if(hotkey->interaction->is_press() && hotkey->state != std::numeric_limits<size_t>::max()) {
+			hotkey->interaction_->update(mouse_position);
+			if(hotkey->interaction_->is_press() && hotkey->state_ != std::numeric_limits<size_t>::max()) {
 				finish(mouse_position);
-				now_hotkeys = &hotkey_states[hotkey->state];
+				now_hotkeys = &hotkey_states[hotkey->state_];
 				start(mouse_position);
 			}
 		}
@@ -112,7 +112,7 @@ namespace ie {
 	template<typename T>
 	void BasicHotkeyInteraction<T>::finish(sf::Vector2i mouse_position) {
 		for(auto& hotkey: *now_hotkeys) {
-			hotkey->interaction->finish(mouse_position);
+			hotkey->interaction_->finish(mouse_position);
 		}
 	}
 	

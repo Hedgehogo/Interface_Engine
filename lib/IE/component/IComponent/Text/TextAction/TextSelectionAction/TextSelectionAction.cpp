@@ -20,14 +20,14 @@ namespace ie {
 	}
 	
 	void TextSelectionAction::start_pressed() {
-		text->set_selection_start(start = text->get_character(sf::Vector2f{mouse_position}));
+		text->set_selection_start(start = text->get_character(sf::Vector2f{mouse_position_}));
 	}
 	
 	void TextSelectionAction::stop_pressed() {
 	}
 	
 	void TextSelectionAction::while_pressed() {
-		text->set_selection_end(end = text->get_character(sf::Vector2f{mouse_position}));
+		text->set_selection_end(end = text->get_character(sf::Vector2f{mouse_position_}));
 		if(start && end) {
 			auto local_start = start, local_end = end;
 			

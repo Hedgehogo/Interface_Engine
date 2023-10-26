@@ -10,11 +10,11 @@ namespace ie {
 	
 	template<typename T>
 	BasicCloseWindowAction<T>::BasicCloseWindowAction(Make&&, BasicActionInitInfo<T> init_info) :
-		window(&init_info.window) {
+		window_(&init_info.window) {
 	}
 	
 	template<typename T>
-	BasicCloseWindowAction<T>::BasicCloseWindowAction() : window{nullptr}{
+	BasicCloseWindowAction<T>::BasicCloseWindowAction() : window_{nullptr}{
 	}
 	
 	template<typename T>
@@ -23,8 +23,8 @@ namespace ie {
 	
 	template<typename T>
 	void BasicCloseWindowAction<T>::stop_pressed() {
-		if(window->isOpen())
-			window->close();
+		if(window_->isOpen())
+			window_->close();
 	}
 	
 	template<typename T>
@@ -38,7 +38,7 @@ namespace ie {
 	template<typename T>
 	void BasicCloseWindowAction<T>::init(BasicActionInitInfo<T> init_info) {
 		BasicBaseKeyAction<T>::init(init_info);
-		window = &init_info.window;
+		window_ = &init_info.window;
 	}
 	
 	template<typename T>

@@ -23,7 +23,7 @@ namespace ie {
 		
 		virtual void while_not_pressed() = 0;
 		
-		sf::Vector2i mouse_position;
+		sf::Vector2i mouse_position_;
 	};
 	
 	using BaseKeyAction = BasicBaseKeyAction<>;

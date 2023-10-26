@@ -23,9 +23,9 @@ namespace ie {
 	}
 	
 	void MovableBorderAction::start_pressed() {
-		this->active_ = box_->is_in_border(static_cast<sf::Vector2f>(mouse_position));
+		this->active_ = box_->is_in_border(static_cast<sf::Vector2f>(mouse_position_));
 		if(this->active_) {
-			start_mouse_position_ = mouse_position;
+			start_mouse_position_ = mouse_position_;
 			start_border_value_ = box_->get_border_value_now();
 		}
 	}
@@ -36,7 +36,7 @@ namespace ie {
 	
 	void MovableBorderAction::while_pressed() {
 		if(this->active_) {
-			sf::Vector2f mouse_offset = static_cast<sf::Vector2f>(mouse_position - this->start_mouse_position_);
+			sf::Vector2f mouse_offset = static_cast<sf::Vector2f>(mouse_position_ - this->start_mouse_position_);
 			float value_offset = 0;
 			if(box_->get_is_horizontal_border()) {
 				value_offset = mouse_offset.x / box_->get_area_size().x;

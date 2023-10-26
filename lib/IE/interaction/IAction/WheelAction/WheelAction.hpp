@@ -14,6 +14,6 @@ namespace ie {
 		virtual WheelAction* copy() = 0;
 	
 	protected:
-		bool active;
+		bool active_;
 	};
 }

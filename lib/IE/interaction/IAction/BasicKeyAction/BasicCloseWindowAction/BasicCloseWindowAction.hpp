@@ -36,7 +36,7 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		sf::RenderWindow* window;
+		sf::RenderWindow* window_;
 	};
 	
 	using CloseWindowAction = BasicCloseWindowAction<std::monostate>;

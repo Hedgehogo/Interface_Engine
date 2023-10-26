@@ -42,8 +42,8 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		InteractionManager* interaction_manager;
-		BoxPtr<IBasicInteraction<T> > interaction;
+		InteractionManager* interaction_manager_;
+		BoxPtr<IBasicInteraction<T> > interaction_;
 	};
 	
 	using AddInteractionAction = BasicAddInteractionAction<>;

@@ -62,10 +62,10 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		FnType start_pressed_fn;
-		FnType while_pressed_fn;
-		FnType stop_pressed_fn;
-		FnType while_not_pressed_fn;
+		FnType start_pressed_fn_;
+		FnType while_pressed_fn_;
+		FnType stop_pressed_fn_;
+		FnType while_not_pressed_fn_;
 	};
 	
 	using FnKeyAction = BasicFnKeyAction<>;
