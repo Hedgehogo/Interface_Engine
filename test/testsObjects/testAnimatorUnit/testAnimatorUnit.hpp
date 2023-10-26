@@ -5,23 +5,23 @@
 class TestAnimatorUnit : public ie::IAnimatorUnit{
 	struct Processed{
 		struct Update{
-			unsigned long long time{0};
+			size_t time{0};
 			float time_parameter;
 		};
 		struct SetNextUnits{
-			unsigned long long time{0};
+			size_t time{0};
 			std::vector<IAnimatorUnit *> next_units;
 		};
 		struct AddNextUnits{
-			unsigned long long time{0};
+			size_t time{0};
 			IAnimatorUnit *next_unit;
 		};
 
-		std::vector<unsigned long long> restart;
+		std::vector<size_t> restart;
 		std::vector<Update> update;
 		std::vector<SetNextUnits> set_next_units;
 		std::vector<AddNextUnits> add_next_units;
-		std::vector<unsigned long long> copy;
+		std::vector<size_t> copy;
 	};
 
 protected:

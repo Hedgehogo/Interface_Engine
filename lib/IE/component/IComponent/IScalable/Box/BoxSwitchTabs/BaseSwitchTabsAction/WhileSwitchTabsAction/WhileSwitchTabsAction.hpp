@@ -33,7 +33,7 @@ namespace ie {
 		void while_not_pressed() override;
 		
 		int size;
-		PSValue<uint> value;
+		PSValue<size_t> value;
 		int step;
 	};
 	

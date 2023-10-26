@@ -158,7 +158,7 @@ namespace ie {
 		Character::debug = debug;
 	}
 	
-	void Character::draw_debug(sf::RenderTarget& render_target, int, uint hue, uint) {
+	void Character::draw_debug(sf::RenderTarget& render_target, int, size_t hue, size_t) {
 		if(debug) {
 			sf::Vector2f size{get_advance() - 2.0f, get_height() - 2.0f};
 			sf::Vector2f position{this->get_position() + sf::Vector2f{1.0f, 1.0f - get_height()}};

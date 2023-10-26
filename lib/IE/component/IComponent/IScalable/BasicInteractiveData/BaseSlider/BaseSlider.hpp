@@ -59,7 +59,7 @@ namespace ie {
 		
 		BaseSlider* copy() override = 0;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
 		virtual void resize_slider(sf::Vector2f new_value);

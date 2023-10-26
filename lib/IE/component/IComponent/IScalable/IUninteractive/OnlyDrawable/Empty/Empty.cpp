@@ -34,7 +34,7 @@ namespace ie {
 		return new Empty{*this};
 	}
 	
-	void Empty::draw_debug(sf::RenderTarget&, int, int, uint, uint) {
+	void Empty::draw_debug(sf::RenderTarget&, int, int, size_t, size_t) {
 	}
 	
 	LayoutData& Empty::layout_get_data() {

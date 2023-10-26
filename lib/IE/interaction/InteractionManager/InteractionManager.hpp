@@ -4,8 +4,6 @@
 #include <algorithm>
 #include <vector>
 
-using ullint = unsigned long long;
-
 namespace ie {
 	template<typename T>
 	void ptr_sort(std::vector<T*>& vector) {

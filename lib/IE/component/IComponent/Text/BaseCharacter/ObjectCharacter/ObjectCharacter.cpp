@@ -48,7 +48,7 @@ namespace ie {
 	void ObjectCharacter::draw() {
 	}
 	
-	void ObjectCharacter::draw_debug(sf::RenderTarget& render_target, int indent_addition, uint hue, uint hue_offset) {
+	void ObjectCharacter::draw_debug(sf::RenderTarget& render_target, int indent_addition, size_t hue, size_t hue_offset) {
 		object->draw_debug(render_target, 0, indent_addition, hue, hue_offset);
 	}
 	

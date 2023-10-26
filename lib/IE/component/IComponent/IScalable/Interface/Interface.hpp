@@ -107,7 +107,7 @@ namespace ie {
 		
 		Interface* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue = 0, uint hue_offset = 36) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue = 0, size_t hue_offset = 36) override;
 	
 	protected:
 		sf::RenderWindow* window;

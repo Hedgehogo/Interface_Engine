@@ -100,7 +100,7 @@ namespace ie {
 		return new Switcher{*this};
 	}
 	
-	void Switcher::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	void Switcher::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		if(active->get_value()) {
 			active_background->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		} else {

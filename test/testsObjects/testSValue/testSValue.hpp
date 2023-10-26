@@ -6,11 +6,11 @@ class TestSValue : public ie::ISValue<float>{
 public:
 	struct Processed{
 		struct AddSetter{
-			unsigned long long time;
+			size_t time;
 			const SetterFunc &setter;
 		};
 		struct set_value{
-			unsigned long long time;
+			size_t time;
 			float value;
 		};
 		std::vector<AddSetter> add_setter;

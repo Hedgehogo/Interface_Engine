@@ -191,7 +191,7 @@ namespace ie {
 		return new BoxConstRatioCenter{*this};
 	}
 	
-	void BoxConstRatioCenter::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	void BoxConstRatioCenter::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		background->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		object->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		first_object->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);

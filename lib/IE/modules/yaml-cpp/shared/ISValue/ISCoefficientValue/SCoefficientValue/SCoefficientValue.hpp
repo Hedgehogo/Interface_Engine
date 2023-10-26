@@ -23,7 +23,7 @@ namespace ie {
 		static bool decode_pointer(const YAML::Node& node, SCoefficientValue*& sCoefficient_value);
 	};
 	
-	typedef SCoefficientValue SCoefficient;
+	using SCoefficient = SCoefficientValue;
 	
-	typedef std::shared_ptr<SCoefficient> PSCoefficient;
+	using PSCoefficient = std::shared_ptr<SCoefficient>;
 }

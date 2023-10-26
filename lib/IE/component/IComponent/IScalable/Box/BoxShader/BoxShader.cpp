@@ -1,8 +1,8 @@
 #include "BoxShader.hpp"
 
 namespace ie {
-	uint convert_transmission_def(const YAML::Node& node) {
-		uint transmission{};
+	size_t convert_transmission_def(const YAML::Node& node) {
+		size_t transmission{};
 		if(node) {
 			std::map<std::string, BoxShader::Transmission> transmission_map{
 				{"size",          BoxShader::Transmission::Size},
@@ -29,7 +29,7 @@ namespace ie {
 	BoxShader::Make::Make(
 		BoxPtr<IScalable::Make>&& object,
 		sf::Shader* shader,
-		uint transmission,
+		size_t transmission,
 		std::map<std::string, PISfloat> values_f,
 		std::map<std::string, PISint> values_i,
 		std::map<std::string, PISbool> values_b,
@@ -72,7 +72,7 @@ namespace ie {
 	}
 	
 	BoxShader::BoxShader(
-		BoxPtr<IScalable>&& object, sf::Shader* shader, uint transmission,
+		BoxPtr<IScalable>&& object, sf::Shader* shader, size_t transmission,
 		std::map<std::string, PISfloat> values_f,
 		std::map<std::string, PISint> values_i,
 		std::map<std::string, PISbool> values_b,

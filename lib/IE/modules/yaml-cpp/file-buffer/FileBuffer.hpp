@@ -33,7 +33,7 @@ namespace ie {
 	
 	SymbolPosition read_character_index(const YAML::Node& node, std::basic_ifstream<char32_t>& fin);
 	
-	std::basic_string<Uint32> u32string_to_uint32_string(std::basic_string<char32_t> str);
+	std::basic_string<Uint32> u32_string_to_uint32_string(std::basic_string<char32_t> str);
 	
 	template<>
 	struct Decode<std::basic_string<char32_t>> {

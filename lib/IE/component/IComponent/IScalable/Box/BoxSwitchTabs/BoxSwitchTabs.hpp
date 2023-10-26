@@ -8,33 +8,33 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
-			PSValue<uint> value;
+			PSValue<size_t> value;
 			sf::Vector2f min_size = {};
 			
-			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSValue<uint> value, sf::Vector2f min_size = {});
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSValue<size_t> value, sf::Vector2f min_size = {});
 			
-			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, uint index = 0, sf::Vector2f min_size = {});
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, size_t index = 0, sf::Vector2f min_size = {});
 			
 			BoxSwitchTabs* make(InitInfo init_info) override;
 		};
 		
 		BoxSwitchTabs(Make&& make, InitInfo init_info);
 		
-		BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, PSValue<uint> value, sf::Vector2f min_size = {});
+		BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, PSValue<size_t> value, sf::Vector2f min_size = {});
 		
-		BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, uint index = 0, sf::Vector2f min_size = {});
+		BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, size_t index = 0, sf::Vector2f min_size = {});
 		
 		BoxSwitchTabs(const BoxSwitchTabs& other);
 		
 		void init(InitInfo init_info) override;
 		
-		void set_value(PSValue<uint> index);
+		void set_value(PSValue<size_t> index);
 		
-		PSValue<uint> get_value();
+		PSValue<size_t> get_value();
 		
-		void set_index(uint index);
+		void set_index(size_t index);
 		
-		uint get_index();
+		size_t get_index();
 		
 		void draw() override;
 		
@@ -50,12 +50,12 @@ namespace ie {
 		
 		BoxSwitchTabs* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
 		std::vector<DrawManager> draw_managers;
 		std::vector<BoxPtr<IScalable> > objects;
-		PSValue<uint> value;
+		PSValue<size_t> value;
 	};
 	
 	template<>

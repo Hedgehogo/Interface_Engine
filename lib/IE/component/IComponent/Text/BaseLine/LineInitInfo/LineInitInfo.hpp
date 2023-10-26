@@ -3,14 +3,12 @@
 #include <SFML/Graphics.hpp>
 
 namespace ie {
-	using uint = unsigned;
-	
 	struct LineInitInfo {
-		uint size;
+		size_t size;
 		sf::Font& font;
 		sf::Color color;
 		sf::RenderTarget& render_target;
 		
-		LineInitInfo(uint size, sf::Font& font, const sf::Color& color, sf::RenderTarget& render_target);
+		LineInitInfo(size_t size, sf::Font& font, const sf::Color& color, sf::RenderTarget& render_target);
 	};
 }

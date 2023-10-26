@@ -12,8 +12,6 @@
 #include "IE/utils/vector2/vector2.hpp"
 #include "InitInfo/InitInfo.hpp"
 
-using uint = unsigned;
-
 namespace ie {
 	using namespace bp;
 	
@@ -63,8 +61,8 @@ namespace ie {
 		
 		virtual IComponent* copy() = 0;
 		
-		static void draw_debug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& render_target, uint hue);
+		static void draw_debug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& render_target, size_t hue);
 		
-		virtual void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset);
+		virtual void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset);
 	};
 }

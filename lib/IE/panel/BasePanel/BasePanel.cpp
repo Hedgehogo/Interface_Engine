@@ -126,7 +126,7 @@ namespace ie {
 		BasePanel::full_debug = full_debug;
 	}
 	
-	void BasePanel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	void BasePanel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		if(full_debug || old_displayed) {
 			object->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		}

@@ -64,7 +64,7 @@ namespace ie {
 		return new BoxDebug{*this};
 	}
 	
-	void BoxDebug::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	void BoxDebug::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		sf::Vector2f size{this->get_area_size() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2, indent * 2})};
 		size = {std::round(size.x - 2.0f), std::round(size.y - 2.0f)};
 		sf::Vector2f position{this->get_area_position() + static_cast<sf::Vector2f>(sf::Vector2i{indent, indent})};

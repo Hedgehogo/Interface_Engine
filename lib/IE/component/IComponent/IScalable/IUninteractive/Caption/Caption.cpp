@@ -3,8 +3,6 @@
 #include "IE/utils/color/hsv_to_rgb/hsv_to_rgb.hpp"
 #include "../OnlyDrawable/Capsule/Capsule.hpp"
 
-using uint = unsigned;
-
 namespace ie {
 	sf::Color Caption::default_color = sf::Color::Black;
 	int Caption::default_size = 10;
@@ -202,7 +200,7 @@ namespace ie {
 		return new Caption{*this};
 	}
 	
-	void Caption::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	void Caption::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		background->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		{
 			sf::FloatRect bounds{text.getGlobalBounds()};

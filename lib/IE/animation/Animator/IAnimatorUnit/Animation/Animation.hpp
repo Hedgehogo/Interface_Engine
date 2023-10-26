@@ -11,7 +11,7 @@ namespace ie {
 		struct Variable {
 			PSfloat animation_variable;
 			std::vector<IChangeVariable*> change_variables;
-			unsigned int active_changer = 0;
+			size_t active_changer = 0;
 			float time_start_changer = 0;
 			
 			Variable(PSfloat animation_variable = {}, std::vector<IChangeVariable*> change_variables = {});

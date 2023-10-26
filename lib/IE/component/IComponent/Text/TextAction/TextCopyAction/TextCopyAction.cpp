@@ -20,7 +20,7 @@ namespace ie {
 	}
 	
 	void TextCopyAction::start_pressed() {
-		sf::Clipboard::setString(u32string_to_uint32_string(text->get_selection_text()));
+		sf::Clipboard::setString(u32_string_to_uint32_string(text->get_selection_text()));
 	}
 	
 	void TextCopyAction::stop_pressed() {

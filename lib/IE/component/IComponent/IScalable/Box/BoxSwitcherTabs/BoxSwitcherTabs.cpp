@@ -81,7 +81,10 @@ namespace ie {
 	}
 	
 	int BoxSwitcherTabs::get_tab(sf::Vector2f position) {
-		return static_cast<int>(is_horizontal ? (position.x - layout.position.x) / (layout.size.x / objects.size()) : (position.y - layout.position.y) / (layout.size.y / objects.size()));
+		if(is_horizontal) {
+			return static_cast<int>((position.x - layout.position.x) / (layout.size.x / objects.size()));
+		}
+		return static_cast<int>((position.y - layout.position.y) / (layout.size.y / objects.size()));
 	}
 	
 	BoxSwitcherTabs* BoxSwitcherTabs::copy() {

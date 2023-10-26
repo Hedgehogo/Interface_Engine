@@ -39,7 +39,7 @@ namespace ie {
 	
 		static void set_debug(bool debug);
 		
-		void draw_debug(sf::RenderTarget& render_target, int, uint hue, uint) override;
+		void draw_debug(sf::RenderTarget& render_target, int, size_t hue, size_t) override;
 	
 	private:
 		static bool debug;

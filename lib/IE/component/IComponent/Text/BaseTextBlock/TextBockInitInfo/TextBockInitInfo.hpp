@@ -11,7 +11,7 @@ namespace ie {
 			sf::Color text_color, text_selection_color, background_selection_color, inactive_text_selection_color, inactive_background_selection_color;
 			sf::Font* font;
 			sf::Text::Style style;
-			uint size;
+			size_t size;
 		};
 		sf::RenderTarget& text_render_target;
 		DrawManager& text_draw_manager;

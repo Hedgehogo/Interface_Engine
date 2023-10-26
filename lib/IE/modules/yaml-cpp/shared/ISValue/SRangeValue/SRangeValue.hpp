@@ -34,17 +34,17 @@ namespace ie {
 	using SRange = SRangeValue<T>;
 	
 	template<typename T>
-	using PSRange = std::shared_ptr<SRange<T>>;
+	using PSRange = std::shared_ptr<SRange<T> >;
 	
 	using SRbool = SRange<bool>;
 	using SRfloat = SRange<float>;
 	using SRint = SRange<int>;
-	using SRuint = SRange<unsigned>;
+	using SRsize = SRange<size_t>;
 	
 	using PSRbool = std::shared_ptr<SRbool>;
 	using PSRfloat = std::shared_ptr<SRfloat>;
 	using PSRint = std::shared_ptr<SRint>;
-	using PSRuint = std::shared_ptr<SRuint>;
+	using PSRsize = std::shared_ptr<SRsize>;
 }
 
 #include "SRangeValue.inl"

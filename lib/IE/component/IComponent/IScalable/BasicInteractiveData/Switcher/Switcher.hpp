@@ -51,7 +51,7 @@ namespace ie {
 		
 		Switcher* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
 		LayoutData& layout_get_data() override;

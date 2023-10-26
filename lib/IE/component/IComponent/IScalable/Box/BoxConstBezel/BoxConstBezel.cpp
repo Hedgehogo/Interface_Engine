@@ -55,7 +55,7 @@ namespace ie {
 		return new BoxConstBezel{*this};
 	}
 	
-	void BoxConstBezel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	void BoxConstBezel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		bezel->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		object->draw_debug(render_target, indent, indent_addition, hue + hue_offset, hue_offset);
 	}

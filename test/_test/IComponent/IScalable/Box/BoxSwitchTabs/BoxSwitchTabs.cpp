@@ -7,7 +7,7 @@
 TEST(IComponent, BoxSwitchTabs) {
 	InitInfoData data{{100, 100}};
 	
-	auto value = std::make_shared<ie::Suint>(0);
+	auto value = std::make_shared<ie::Ssize>(0);
 	ie::BoxSwitchTabs box_switch_tabs{
 		{
 			ie::make_vector(

@@ -89,7 +89,7 @@ namespace ie {
 		return new Bar{*this};
 	}
 	
-	void Bar::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	void Bar::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		background->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		strip->draw_debug(render_target, indent + indent_addition, indent_addition, hue, hue_offset);
 	}

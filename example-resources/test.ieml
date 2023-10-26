@@ -7,14 +7,12 @@ object: = BoxWithConstBorder:
 		const-object: = Switcher:
 			inactive-background: yellow
 			active-background: blue
-			value:
-				var: > b-value
+			value: &b-value null
 		second-object: = Slider:
 			slider: = Capsule: red
 			background: green
-			value:
-				var: > c-value
+			value: &c-value null
 	second-object: = BoxSwitcher:
 		inactive-object: yellow
 		active-object: blue
-		value: > b-value
+		value: *b-value

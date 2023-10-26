@@ -17,7 +17,7 @@ namespace ie {
 		sf::Color inactive_text_selection_color,
 		sf::Color inactive_background_selection_color,
 		sf::Font* font,
-		uint size,
+		size_t size,
 		sf::Text::Style style
 	) {
 		if(!text_variables.text_color)

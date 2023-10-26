@@ -8,7 +8,7 @@ namespace ie {
 		std::vector<BoxPtr<BaseTextBlock::Make>>&& text_blocks,
 		sf::Font* font,
 		BoxPtr<IUninteractive::Make>&& background,
-		uint size,
+		size_t size,
 		sf::Color text_color,
 		sf::Color text_selection_color,
 		sf::Color background_selection_color,
@@ -344,7 +344,7 @@ namespace ie {
 		return true;
 	}
 	
-	void Text::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	void Text::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		for(BaseCharacter*& character: text_characters) {
 			character->draw_debug(render_target, indent_addition, hue + hue_offset, hue_offset);
 		}

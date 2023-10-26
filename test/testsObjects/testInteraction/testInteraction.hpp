@@ -8,21 +8,21 @@ class TestInteraction : public ie::IInteraction {
 public:
 	struct Processed {
 		struct Start {
-			unsigned long long time{0};
+			size_t time{0};
 			sf::Vector2i mouse_position;
 		};
 		struct Update {
-			unsigned long long time{0};
+			size_t time{0};
 			sf::Vector2i mouse_position;
 		};
 		struct Finish {
-			unsigned long long time{0};
+			size_t time{0};
 			sf::Vector2i mouse_position;
 		};
 		std::vector<Start> start;
 		std::vector<Update> update;
 		std::vector<Finish> finish;
-		std::vector<unsigned long long> copy;
+		std::vector<size_t> copy;
 	};
 	
 	enum class Function {

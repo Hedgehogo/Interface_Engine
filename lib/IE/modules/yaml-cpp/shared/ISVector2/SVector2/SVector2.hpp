@@ -66,10 +66,10 @@ namespace ie {
 	
 	using SVec2f = SVec2<Sfloat>;
 	using SVec2i = SVec2<Sint>;
-	using SVec2u = SVec2<Suint>;
+	using SVec2u = SVec2<Ssize>;
 	using SRVec2f = SVec2<SRfloat>;
 	using SRVec2i = SVec2<SRint>;
-	using SRVec2u = SVec2<SRuint>;
+	using SRVec2u = SVec2<SRsize>;
 	using SCoefficientVec2 = SVec2<SCoefficientValue>;
 	
 	using PSVec2f = std::shared_ptr<SVec2f>;

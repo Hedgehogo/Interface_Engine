@@ -6,7 +6,7 @@ class TestConvertToUse : public ie::IConvertToUse<float>{
 public:
 	struct Processed{
 		struct Convert{
-			unsigned long long time;
+			size_t time;
 			float value;
 		};
 		std::vector<Convert> convert;

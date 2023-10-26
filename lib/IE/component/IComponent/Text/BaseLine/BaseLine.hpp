@@ -3,8 +3,6 @@
 #include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
 #include "LineInitInfo/LineInitInfo.hpp"
 
-using uint = unsigned;
-
 namespace ie {
 	class BaseLine {
 	public:

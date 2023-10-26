@@ -3,7 +3,7 @@ namespace ie {
 		namespace make_system {
 			template<typename T>
 			BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(
-				BoxPtr<make_system::BasicKeysInteraction<T> >&& interaction, uint state
+				BoxPtr<make_system::BasicKeysInteraction<T> >&& interaction, size_t state
 			) : interaction(std::move(interaction)), state(state) {
 			}
 			
@@ -19,19 +19,19 @@ namespace ie {
 		}
 		
 		template<typename T>
-		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(BoxPtr<BasicKeysInteraction<T> >&& interaction, uint state) :
+		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(BoxPtr<BasicKeysInteraction<T> >&& interaction, size_t state) :
 			interaction(std::move(interaction)), state(state) {
 		}
 		
 		template<typename T>
-		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(uint state) :
+		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(size_t state) :
 			interaction(nullptr), state(state) {
 		}
 	}
 	
 	namespace make_system {
 		template<typename T>
-		BasicHotkeyInteraction<T>::BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, uint state) :
+		BasicHotkeyInteraction<T>::BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, size_t state) :
 			hotkeys(std::move(hotkeys)), state(state) {
 		}
 		
@@ -51,7 +51,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicHotkeyInteraction<T>::BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, uint state) :
+	BasicHotkeyInteraction<T>::BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, size_t state) :
 		hotkey_states(std::move(hotkeys)), now_hotkeys(nullptr) {
 		if(this->hotkey_states.size() <= state) {
 			this->hotkey_states.resize(state, {});
@@ -73,7 +73,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicHotkeyInteraction<T>::set_hotkey_action(uint state, typename BasicHotkeyInteraction<T>::Hotkey* hotkey_action) {
+	void BasicHotkeyInteraction<T>::set_hotkey_action(size_t state, typename BasicHotkeyInteraction<T>::Hotkey* hotkey_action) {
 		if(hotkey_states.size() <= state) {
 			hotkey_states.resize(state, {});
 		}
@@ -101,7 +101,7 @@ namespace ie {
 	void BasicHotkeyInteraction<T>::update(sf::Vector2i mouse_position) {
 		for(auto& hotkey: *now_hotkeys) {
 			hotkey->interaction->update(mouse_position);
-			if(hotkey->interaction->is_press() && hotkey->state != std::numeric_limits<uint>::max()) {
+			if(hotkey->interaction->is_press() && hotkey->state != std::numeric_limits<size_t>::max()) {
 				finish(mouse_position);
 				now_hotkeys = &hotkey_states[hotkey->state];
 				start(mouse_position);
@@ -125,7 +125,7 @@ namespace ie {
 	bool Decode<detail::BasicHotkeyInteractionHotkey<T>*>::decode(const YAML::Node& node, detail::BasicHotkeyInteractionHotkey<T>*& hotkey) {
 		hotkey = new detail::BasicHotkeyInteractionHotkey<T>{
 			conv_def(node["interaction"], BoxPtr<BasicKeysInteraction<T> >{}),
-			conv_def(node["state"], std::numeric_limits<uint>::max())
+			conv_def(node["state"], std::numeric_limits<size_t>::max())
 		};
 		return true;
 	}

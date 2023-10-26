@@ -2,7 +2,7 @@
 #include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
 
 namespace ie {
-	SwitchTabsAction::Make::Make(uint index) : index(index) {
+	SwitchTabsAction::Make::Make(size_t index) : index(index) {
 	}
 	
 	SwitchTabsAction* SwitchTabsAction::Make::make(BasicActionInitInfo<BoxSwitchTabs&> init_info) {
@@ -13,7 +13,7 @@ namespace ie {
 		BaseSwitchTabsAction(init_info), index(make.index), value(box->get_value()) {
 	}
 	
-	SwitchTabsAction::SwitchTabsAction(uint index) : index(index), value(nullptr) {
+	SwitchTabsAction::SwitchTabsAction(size_t index) : index(index), value(nullptr) {
 	}
 	
 	void SwitchTabsAction::init(BasicActionInitInfo<BoxSwitchTabs&> init_info) {

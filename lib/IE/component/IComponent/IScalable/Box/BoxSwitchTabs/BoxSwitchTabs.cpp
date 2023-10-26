@@ -1,12 +1,12 @@
 #include "BoxSwitchTabs.hpp"
 
 namespace ie {
-	BoxSwitchTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSValue<uint> value, sf::Vector2f min_size) :
+	BoxSwitchTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSValue<size_t> value, sf::Vector2f min_size) :
 		objects(std::move(objects)), value(value), min_size(min_size) {
 	}
 	
-	BoxSwitchTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, uint index, sf::Vector2f min_size) :
-		objects(std::move(objects)), value(std::make_shared<SValue<uint> >(index)), min_size(min_size) {
+	BoxSwitchTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, size_t index, sf::Vector2f min_size) :
+		objects(std::move(objects)), value(std::make_shared<SValue<size_t> >(index)), min_size(min_size) {
 	}
 	
 	BoxSwitchTabs* BoxSwitchTabs::Make::make(InitInfo init_info) {
@@ -21,12 +21,12 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	BoxSwitchTabs::BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, PSValue<uint> value, sf::Vector2f min_size) :
+	BoxSwitchTabs::BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, PSValue<size_t> value, sf::Vector2f min_size) :
 		Box(min_size), draw_managers(objects.size()), objects(std::move(objects)), value(value) {
 	}
 	
-	BoxSwitchTabs::BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, uint index, sf::Vector2f min_size) :
-		Box(min_size), draw_managers(objects.size()), objects(std::move(objects)), value(std::make_shared<SValue<uint>>(index)) {
+	BoxSwitchTabs::BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, size_t index, sf::Vector2f min_size) :
+		Box(min_size), draw_managers(objects.size()), objects(std::move(objects)), value(std::make_shared<SValue<size_t>>(index)) {
 	}
 	
 	BoxSwitchTabs::BoxSwitchTabs(const BoxSwitchTabs& other) :
@@ -41,19 +41,19 @@ namespace ie {
 		}
 	}
 	
-	void BoxSwitchTabs::set_value(std::shared_ptr<SValue<uint>> index) {
+	void BoxSwitchTabs::set_value(std::shared_ptr<SValue<size_t>> index) {
 		value = index;
 	}
 	
-	std::shared_ptr<SValue<uint>> BoxSwitchTabs::get_value() {
+	std::shared_ptr<SValue<size_t>> BoxSwitchTabs::get_value() {
 		return value;
 	}
 	
-	void BoxSwitchTabs::set_index(uint index) {
+	void BoxSwitchTabs::set_index(size_t index) {
 		value->set_value(index);
 	}
 	
-	uint BoxSwitchTabs::get_index() {
+	size_t BoxSwitchTabs::get_index() {
 		return value->get_value();
 	}
 	
@@ -95,7 +95,7 @@ namespace ie {
 		if(node["value"]) {
 			box_with_changeable_objects = new BoxSwitchTabs{
 				std::move(objects),
-				Buffer::get<SValue<uint>>(node["value"]),
+				Buffer::get<SValue<size_t>>(node["value"]),
 				min_size
 			};
 		} else {
@@ -108,7 +108,7 @@ namespace ie {
 		return true;
 	}
 	
-	void BoxSwitchTabs::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	void BoxSwitchTabs::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		objects[value->get_value()]->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
 }
