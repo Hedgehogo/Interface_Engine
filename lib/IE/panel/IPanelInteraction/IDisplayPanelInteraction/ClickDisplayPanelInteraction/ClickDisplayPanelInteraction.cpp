@@ -18,12 +18,12 @@ namespace ie {
 	}
 	
 	void ClickDisplayPanelInteraction::start(sf::Vector2i) {
-		dynamic_cast<PanelAction&>(*action).get_panel()->set_parent_processed(true);
+		dynamic_cast<PanelAction&>(*action_).get_panel()->set_parent_processed(true);
 	}
 	
 	void ClickDisplayPanelInteraction::finish(sf::Vector2i mouse_position) {
 		BasicOneKeyInteraction<Panel&>::finish(mouse_position);
-		dynamic_cast<PanelAction&>(*action).get_panel()->set_parent_processed(false);
+		dynamic_cast<PanelAction&>(*action_).get_panel()->set_parent_processed(false);
 	}
 	
 	ClickDisplayPanelInteraction* ClickDisplayPanelInteraction::copy() {

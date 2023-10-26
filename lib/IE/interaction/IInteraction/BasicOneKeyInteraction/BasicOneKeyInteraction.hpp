@@ -48,8 +48,8 @@ namespace ie {
 		BasicOneKeyInteraction<T>* copy() override;
 	
 	protected:
-		BoxPtr<BasicKeyAction<T> > action;
-		Key key;
+		BoxPtr<BasicKeyAction<T> > action_;
+		Key key_;
 	};
 	
 	using OneKeyInteraction = BasicOneKeyInteraction<>;

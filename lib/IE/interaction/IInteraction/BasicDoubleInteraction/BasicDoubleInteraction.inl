@@ -15,60 +15,60 @@ namespace ie {
 	
 	template<typename T>
 	BasicDoubleInteraction<T>::BasicDoubleInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
-		first(make.first->make(init_info)), second(make.second->make(init_info)) {
+		first_(make.first_->make(init_info)), second_(make.second_->make(init_info)) {
 	}
 	
 	template<typename T>
 	BasicDoubleInteraction<T>::BasicDoubleInteraction(BoxPtr<IBasicInteraction<T> >&& first, BoxPtr<IBasicInteraction<T> >&& second) :
-		first(std::move(first)), second(std::move(second)) {
+		first_(std::move(first)), second_(std::move(second)) {
 	}
 	
 	template<typename T>
 	void BasicDoubleInteraction<T>::set_first(BoxPtr<IBasicInteraction<T> >&& first) {
-		this->first = std::move(first);
+		this->first_ = std::move(first);
 	}
 	
 	template<typename T>
 	void BasicDoubleInteraction<T>::set_second(BoxPtr<IBasicInteraction<T> >&& second) {
-		this->second = std::move(second);
+		this->second_ = std::move(second);
 	}
 	
 	template<typename T>
 	IBasicInteraction<T>& BasicDoubleInteraction<T>::get_first() {
-		return *first;
+		return *first_;
 	}
 	
 	template<typename T>
 	const IBasicInteraction<T>& BasicDoubleInteraction<T>::get_first() const {
-		return *first;
+		return *first_;
 	}
 	
 	template<typename T>
 	IBasicInteraction<T>& BasicDoubleInteraction<T>::get_second() {
-		return *second;
+		return *second_;
 	}
 	
 	template<typename T>
 	const IBasicInteraction<T>& BasicDoubleInteraction<T>::get_second() const {
-		return *second;
+		return *second_;
 	}
 	
 	template<typename T>
 	void BasicDoubleInteraction<T>::start(sf::Vector2i mouse_position) {
-		first->start(mouse_position);
-		second->start(mouse_position);
+		first_->start(mouse_position);
+		second_->start(mouse_position);
 	}
 	
 	template<typename T>
 	void BasicDoubleInteraction<T>::update(sf::Vector2i mouse_position) {
-		first->update(mouse_position);
-		second->update(mouse_position);
+		first_->update(mouse_position);
+		second_->update(mouse_position);
 	}
 	
 	template<typename T>
 	void BasicDoubleInteraction<T>::finish(sf::Vector2i mouse_position) {
-		second->finish(mouse_position);
-		first->finish(mouse_position);
+		second_->finish(mouse_position);
+		first_->finish(mouse_position);
 	}
 	
 	template<typename T>

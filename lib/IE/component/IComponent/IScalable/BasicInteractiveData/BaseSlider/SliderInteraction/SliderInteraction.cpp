@@ -73,7 +73,7 @@ namespace ie {
 	}
 	
 	void SliderInteraction::set_slider(BaseSlider& slider) {
-		auto& slide_action{dynamic_cast<BasicAddBlockInteractionAction<BaseSlider&>&>(*action)};
+		auto& slide_action{dynamic_cast<BasicAddBlockInteractionAction<BaseSlider&>&>(*action_)};
 		auto& slide_interaction{dynamic_cast<BasicPressedInteraction<BaseSlider&>&>(slide_action.get_interaction())};
 		dynamic_cast<SliderAction&>(slide_interaction.get_action()).set_slider(slider);
 		wheel_action_.set_slider(slider);

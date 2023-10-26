@@ -87,9 +87,8 @@ namespace ie {
 		BasicHotkeyInteraction<T>* copy() override;
 	
 	protected:
-		bool a{false};
-		std::vector<std::vector<BoxPtr<Hotkey> > > hotkey_states;
-		std::vector<BoxPtr<Hotkey> >* now_hotkeys;
+		std::vector<std::vector<BoxPtr<Hotkey> > > hotkey_states_;
+		std::vector<BoxPtr<Hotkey> >* now_hotkeys_;
 	};
 	
 	using HotkeyInteraction = BasicHotkeyInteraction<>;

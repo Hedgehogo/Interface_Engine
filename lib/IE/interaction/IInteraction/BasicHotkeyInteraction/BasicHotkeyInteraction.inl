@@ -43,25 +43,25 @@ namespace ie {
 	
 	template<typename T>
 	BasicHotkeyInteraction<T>::BasicHotkeyInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
-		hotkey_states(map_make(std::move(make.hotkeys), init_info)), now_hotkeys(nullptr) {
-		if(hotkey_states.size() <= make.state) {
-			hotkey_states.resize(make.state, {});
+		hotkey_states_(map_make(std::move(make.hotkeys), init_info)), now_hotkeys_(nullptr) {
+		if(hotkey_states_.size() <= make.state) {
+			hotkey_states_.resize(make.state, {});
 		}
-		now_hotkeys = &hotkey_states[make.state];
+		now_hotkeys_ = &hotkey_states_[make.state];
 	}
 	
 	template<typename T>
 	BasicHotkeyInteraction<T>::BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, size_t state) :
-		hotkey_states(std::move(hotkeys)), now_hotkeys(nullptr) {
-		if(this->hotkey_states.size() <= state) {
-			this->hotkey_states.resize(state, {});
+		hotkey_states_(std::move(hotkeys)), now_hotkeys_(nullptr) {
+		if(this->hotkey_states_.size() <= state) {
+			this->hotkey_states_.resize(state, {});
 		}
-		now_hotkeys = &this->hotkey_states[state];
+		now_hotkeys_ = &this->hotkey_states_[state];
 	}
 	
 	template<typename T>
 	void BasicHotkeyInteraction<T>::init(BasicActionInitInfo<T> init_info) {
-		for(const auto& hotkey_state: hotkey_states) {
+		for(const auto& hotkey_state: hotkey_states_) {
 			for(auto& hotkey: hotkey_state) {
 				hotkey->interaction_->init(init_info);
 			}
@@ -74,36 +74,36 @@ namespace ie {
 	
 	template<typename T>
 	void BasicHotkeyInteraction<T>::set_hotkey_action(size_t state, typename BasicHotkeyInteraction<T>::Hotkey* hotkey_action) {
-		if(hotkey_states.size() <= state) {
-			hotkey_states.resize(state, {});
+		if(hotkey_states_.size() <= state) {
+			hotkey_states_.resize(state, {});
 		}
-		hotkey_states[state].emplace_back(hotkey_action);
+		hotkey_states_[state].emplace_back(hotkey_action);
 	}
 	
 	template<typename T>
 	std::vector<BoxPtr<typename BasicHotkeyInteraction<T>::Hotkey> > BasicHotkeyInteraction<T>::get_hotkeys(int state) {
-		return hotkey_states[state];
+		return hotkey_states_[state];
 	}
 	
 	template<typename T>
 	BoxPtr<typename BasicHotkeyInteraction<T>::Hotkey> BasicHotkeyInteraction<T>::get_hotkey(int state, int i) {
-		return hotkey_states[state][i];
+		return hotkey_states_[state][i];
 	}
 	
 	template<typename T>
 	void BasicHotkeyInteraction<T>::start(sf::Vector2i mouse_position) {
-		for(auto& hotkey: *now_hotkeys) {
+		for(auto& hotkey: *now_hotkeys_) {
 			hotkey->interaction_->start(mouse_position);
 		}
 	}
 	
 	template<typename T>
 	void BasicHotkeyInteraction<T>::update(sf::Vector2i mouse_position) {
-		for(auto& hotkey: *now_hotkeys) {
+		for(auto& hotkey: *now_hotkeys_) {
 			hotkey->interaction_->update(mouse_position);
 			if(hotkey->interaction_->is_press() && hotkey->state_ != std::numeric_limits<size_t>::max()) {
 				finish(mouse_position);
-				now_hotkeys = &hotkey_states[hotkey->state_];
+				now_hotkeys_ = &hotkey_states_[hotkey->state_];
 				start(mouse_position);
 			}
 		}
@@ -111,7 +111,7 @@ namespace ie {
 	
 	template<typename T>
 	void BasicHotkeyInteraction<T>::finish(sf::Vector2i mouse_position) {
-		for(auto& hotkey: *now_hotkeys) {
+		for(auto& hotkey: *now_hotkeys_) {
 			hotkey->interaction_->finish(mouse_position);
 		}
 	}

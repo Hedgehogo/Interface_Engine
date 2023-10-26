@@ -13,21 +13,21 @@ namespace ie {
 	
 	template<typename T>
 	BasicFnInteraction<T>::BasicFnInteraction(Make&& make, BasicActionInitInfo<T>) :
-		start_fn(std::move(make.start_pointing)), finish_fn(std::move(make.finish_pointing)) {
+		start_fn_(std::move(make.start_pointing)), finish_fn_(std::move(make.finish_pointing)) {
 	}
 	
 	template<typename T>
 	BasicFnInteraction<T>::BasicFnInteraction(FnType start_fn, FnType finish_fn) :
-		start_fn(std::move(start_fn)), finish_fn(std::move(finish_fn)) {
+		start_fn_(std::move(start_fn)), finish_fn_(std::move(finish_fn)) {
 	}
 	
 	template<typename T>
 	void BasicFnInteraction<T>::start(sf::Vector2i mouse_position) {
-		start_fn(mouse_position);
+		start_fn_(mouse_position);
 	}
 	
 	template<typename T>
 	void BasicFnInteraction<T>::finish(sf::Vector2i mouse_position) {
-		finish_fn(mouse_position);
+		finish_fn_(mouse_position);
 	}
 }

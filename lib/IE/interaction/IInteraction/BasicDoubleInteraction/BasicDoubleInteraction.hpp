@@ -51,8 +51,8 @@ namespace ie {
 		BasicDoubleInteraction<T>* copy() override;
 	
 	protected:
-		BoxPtr<IBasicInteraction<T> > first;
-		BoxPtr<IBasicInteraction<T> > second;
+		BoxPtr<IBasicInteraction<T> > first_;
+		BoxPtr<IBasicInteraction<T> > second_;
 	};
 	
 	using DoubleInteraction = BasicDoubleInteraction<>;
