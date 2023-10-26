@@ -72,15 +72,15 @@ namespace ie {
 	
 	void BoxConstRatioCenter::set_aspect_ratio(float aspect_ratio) {
 		this->aspect_ratio = aspect_ratio;
-		this->set_position(layout.position);
+		this->set_position(layout_.position);
 	}
 	
 	void BoxConstRatioCenter::set_position(sf::Vector2f position) {
-		BoxConstRatioCenter::move(position - layout.position);
+		BoxConstRatioCenter::move(position - layout_.position);
 	}
 	
 	void BoxConstRatioCenter::move(sf::Vector2f position) {
-		layout.move(position);
+		layout_.move(position);
 		object->move(position);
 		background->move(position);
 		first_object->move(position);
@@ -88,7 +88,7 @@ namespace ie {
 	}
 	
 	void BoxConstRatioCenter::set_size(sf::Vector2f size) {
-		resize(size, layout.position);
+		resize(size, layout_.position);
 	}
 	
 	void BoxConstRatioCenter::draw() {
@@ -101,7 +101,7 @@ namespace ie {
 	}
 	
 	void BoxConstRatioCenter::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		
 		sf::Vector2f first_min_size{first_object->get_min_size()};
 		sf::Vector2f second_min_size{second_object->get_min_size()};
@@ -112,17 +112,17 @@ namespace ie {
 		float size_aspect_ratio = size.x / size.y;
 		if(size_aspect_ratio > aspect_ratio) {
 			size.x = size.y * aspect_ratio;
-			objects_size.x = (layout.size.x - size.x) / 2.0f;
+			objects_size.x = (layout_.size.x - size.x) / 2.0f;
 			second_position.x += objects_size.x + size.x;
 		} else {
 			size.y = size.x / aspect_ratio;
-			objects_size.y = (layout.size.y - size.y) / 2.0f;
+			objects_size.y = (layout_.size.y - size.y) / 2.0f;
 			second_position.y += objects_size.y + size.y;
 		}
 		render_first = first_min_size.x < objects_size.x && first_min_size.y < objects_size.y;
 		render_second = second_min_size.x < objects_size.x && second_min_size.y < objects_size.y;
 		
-		object->resize(size, position + (layout.size - size) / 2.0f);
+		object->resize(size, position + (layout_.size - size) / 2.0f);
 		
 		if(render_first)
 			first_object->resize(objects_size, position);

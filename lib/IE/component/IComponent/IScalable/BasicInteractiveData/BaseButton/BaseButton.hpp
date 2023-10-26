@@ -26,7 +26,7 @@ namespace ie {
 		
 		const LayoutData& layout_get_data() const override;
 		
-		LayoutData layout;
-		BoxPtr<IScalable> background;
+		LayoutData layout_;
+		BoxPtr<IScalable> background_;
 	};
 }

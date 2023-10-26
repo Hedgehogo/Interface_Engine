@@ -26,7 +26,7 @@ namespace ie {
 	}
 	
 	void BoxWithView::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		
 		view.setSize(size);
 		view.setCenter(position + (size / 2.f));

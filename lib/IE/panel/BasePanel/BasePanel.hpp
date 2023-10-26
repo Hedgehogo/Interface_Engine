@@ -92,7 +92,7 @@ namespace ie {
 		
 		const LayoutData& layout_get_data() const override;
 		
-		LayoutData layout;
+		LayoutData layout_;
 		DrawManager draw_manager;
 		UpdateManager update_manager;
 		BoxPtr<IScalable> object;

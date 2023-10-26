@@ -24,7 +24,7 @@ namespace ie {
 	}
 	
 	BasePanel::BasePanel(const BasePanel& other) :
-		layout(other.layout), object(other.object), sizing(other.sizing), positioning(other.positioning),
+		layout_(other.layout_), object(other.object), sizing(other.sizing), positioning(other.positioning),
 		parent_processed(other.parent_processed), old_displayed(other.old_displayed), displayed(other.displayed), active(false) {
 	}
 	
@@ -51,8 +51,8 @@ namespace ie {
 	}
 	
 	bool BasePanel::in_area(sf::Vector2f point_position) {
-		return point_position.x > layout.position.x && point_position.x < layout.position.x + layout.size.x &&
-			   point_position.y > layout.position.y && point_position.y < layout.position.y + layout.size.y;
+		return point_position.x > layout_.position.x && point_position.x < layout_.position.x + layout_.size.x &&
+			   point_position.y > layout_.position.y && point_position.y < layout_.position.y + layout_.size.y;
 	}
 	
 	bool BasePanel::in(sf::Vector2f point_position) {
@@ -64,19 +64,19 @@ namespace ie {
 	}
 	
 	void BasePanel::set_position(sf::Vector2f position) {
-		layout.set_position(position);
+		layout_.set_position(position);
 		object->set_position(position);
 	}
 	
 	void BasePanel::move(sf::Vector2f offset) {
-		layout.move(offset);
+		layout_.move(offset);
 		object->move(offset);
 	}
 	
 	void BasePanel::resize(sf::Vector2f parent_size, sf::Vector2f parent_position) {
 		sf::Vector2f size = (*sizing)(parent_size);
 		sf::Vector2f position = (*positioning)(parent_position, parent_size, size);
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		object->resize(size, position);
 	}
 	
@@ -97,11 +97,11 @@ namespace ie {
 	}
 	
 	sf::Vector2f BasePanel::get_area_position() const {
-		return layout.position;
+		return layout_.position;
 	}
 	
 	sf::Vector2f BasePanel::get_area_size() const {
-		return layout.size;
+		return layout_.size;
 	}
 	
 	sf::Vector2f BasePanel::get_min_size() const {
@@ -133,10 +133,10 @@ namespace ie {
 	}
 	
 	LayoutData& BasePanel::layout_get_data() {
-		return layout;
+		return layout_;
 	}
 	
 	const LayoutData& BasePanel::layout_get_data() const {
-		return layout;
+		return layout_;
 	}
 	}

@@ -70,8 +70,8 @@ namespace ie {
 		ConstSlider* copy() override;
 	
 	protected:
-		float aspect_ratio;
-		float slider_scale;
+		float aspect_ratio_;
+		float slider_scale_;
 	};
 	
 	template<>

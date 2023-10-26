@@ -41,7 +41,7 @@ namespace ie {
 		border_interaction_size(make.border_interaction_size),
 		is_horizontal_border(make.is_horizontal_border) {
 		border_value->add_setter([&](float) {
-			this->resize(layout.size, layout.position);
+			this->resize(layout_.size, layout_.position);
 		});
 		init_info.update_manager.add(*this);
 	}
@@ -69,7 +69,7 @@ namespace ie {
 		border_interaction_size(border_interaction_size),
 		is_horizontal_border(is_horizontal_border) {
 		border_value->add_setter([&](float) {
-			this->resize(layout.size, layout.position);
+			this->resize(layout_.size, layout_.position);
 		});
 	}
 	
@@ -102,18 +102,18 @@ namespace ie {
 	
 	bool BoxMovableBorder::is_in_border(sf::Vector2f point_position) {
 		if(
-			point_position.x < layout.position.x ||
-			point_position.x > layout.position.x + layout.size.x ||
-			point_position.y < layout.position.y ||
-			point_position.y > layout.position.y + layout.size.y
+			point_position.x < layout_.position.x ||
+			point_position.x > layout_.position.x + layout_.size.x ||
+			point_position.y < layout_.position.y ||
+			point_position.y > layout_.position.y + layout_.size.y
 			) {
 			return false;
 		}
 		if(this->is_horizontal_border) {
-			int border_position = layout.size.x * border_value_now + layout.position.x;
+			int border_position = layout_.size.x * border_value_now + layout_.position.x;
 			return point_position.x > border_position - border_interaction_size && point_position.x < border_position + border_interaction_size;
 		}
-		int border_position = layout.size.y * border_value_now + layout.position.y;
+		int border_position = layout_.size.y * border_value_now + layout_.position.y;
 		return point_position.y > border_position - border_interaction_size && point_position.y < border_position + border_interaction_size;
 	}
 	
@@ -128,13 +128,13 @@ namespace ie {
 	bool BoxMovableBorder::update_interactions(sf::Vector2f mouse_position) {
 		if(!this->is_in_border(mouse_position)) {
 			if(this->is_horizontal_border) {
-				float split_position = layout.position.x + layout.size.x * this->border_value_now;
+				float split_position = layout_.position.x + layout_.size.x * this->border_value_now;
 				if(split_position > mouse_position.x) {
 					return first_object->update_interactions(mouse_position);
 				}
 				return second_object->update_interactions(mouse_position);
 			} else {
-				float split_position = layout.position.y + layout.size.y * this->border_value_now;
+				float split_position = layout_.position.y + layout_.size.y * this->border_value_now;
 				if(split_position > mouse_position.y) {
 					return first_object->update_interactions(mouse_position);
 				}
@@ -147,7 +147,7 @@ namespace ie {
 	}
 	
 	void BoxMovableBorder::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		
 		sf::Vector2f first_object_size;
 		sf::Vector2f second_object_size;

@@ -20,18 +20,18 @@ namespace ie {
 	
 	void Capsule::draw() {
 		render_target->draw(rectangle);
-		circle.setPosition(layout.position);
+		circle.setPosition(layout_.position);
 		render_target->draw(circle);
-		if(layout.size.x > layout.size.y) {
-			circle.setPosition({layout.position.x + layout.size.x - layout.size.y, layout.position.y});
+		if(layout_.size.x > layout_.size.y) {
+			circle.setPosition({layout_.position.x + layout_.size.x - layout_.size.y, layout_.position.y});
 		} else {
-			circle.setPosition({layout.position.x, layout.position.y + layout.size.y - layout.size.x});
+			circle.setPosition({layout_.position.x, layout_.position.y + layout_.size.y - layout_.size.x});
 		}
 		render_target->draw(circle);
 	}
 	
 	void Capsule::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		if(size.x > size.y) {
 			rectangle.setSize({size.x - size.y, size.y});
 			rectangle.setPosition(position + sf::Vector2f{size.y / 2, 0});
@@ -56,11 +56,11 @@ namespace ie {
 	}
 	
 	LayoutData& Capsule::layout_get_data() {
-		return layout;
+		return layout_;
 	}
 	
 	const LayoutData& Capsule::layout_get_data() const {
-		return layout;
+		return layout_;
 	}
 	
 	bool DecodePointer<Capsule>::decode_pointer(const YAML::Node& node, Capsule*& capsule) {

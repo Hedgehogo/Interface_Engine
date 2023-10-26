@@ -15,7 +15,7 @@ namespace ie {
 	}
 	
 	void Empty::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 	}
 	
 	bool Empty::update_interactions(sf::Vector2f) {
@@ -38,11 +38,11 @@ namespace ie {
 	}
 	
 	LayoutData& Empty::layout_get_data() {
-		return layout;
+		return layout_;
 	}
 	
 	const LayoutData& Empty::layout_get_data() const {
-		return layout;
+		return layout_;
 	}
 	
 	bool DecodePointer<Empty>::decode_pointer(const YAML::Node&, Empty*& empty) {

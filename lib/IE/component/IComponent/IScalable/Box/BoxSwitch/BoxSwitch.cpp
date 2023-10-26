@@ -32,25 +32,25 @@ namespace ie {
 	}
 	
 	void BoxSwitch::set_position(sf::Vector2f position) {
-		layout.set_position(position);
+		layout_.set_position(position);
 		inactive_object->set_position(position);
 		active_object->set_position(position);
 	}
 	
 	void BoxSwitch::move(sf::Vector2f position) {
-		layout.move(position);
+		layout_.move(position);
 		inactive_object->move(position);
 		active_object->move(position);
 	}
 	
 	void BoxSwitch::set_size(sf::Vector2f size) {
-		layout.set_size(size);
+		layout_.set_size(size);
 		inactive_object->set_size(size);
 		active_object->set_size(size);
 	}
 	
 	void BoxSwitch::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		inactive_object->resize(size, position);
 		active_object->resize(size, position);
 	}

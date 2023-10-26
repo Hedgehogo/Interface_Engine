@@ -38,7 +38,7 @@ namespace ie {
 	}
 	
 	void BoxBorder::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		sf::Vector2f coordinate{};
 		sf::Vector2f object_size{size};
 		for(size_t x = 0; x < objects.size(); ++x) {
@@ -54,11 +54,11 @@ namespace ie {
 	}
 	
 	bool BoxBorder::update_interactions(sf::Vector2f mouse_position) {
-		sf::Vector2f position{mouse_position.x - layout.position.x, mouse_position.y - layout.position.y};
-		if(position.x < 0.0f || position.x > layout.size.x || position.y < 0.0f || position.y > layout.size.y) {
+		sf::Vector2f position{mouse_position.x - layout_.position.x, mouse_position.y - layout_.position.y};
+		if(position.x < 0.0f || position.x > layout_.size.x || position.y < 0.0f || position.y > layout_.size.y) {
 			return false;
 		}
-		position = {position.x / layout.size.x, position.y / layout.size.y};
+		position = {position.x / layout_.size.x, position.y / layout_.size.y};
 		
 		sf::Vector2u object{1, 1};
 		while(position.x > bounds_horizontal[object.x]) {

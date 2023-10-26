@@ -28,9 +28,9 @@ namespace ie {
 			const_object->move(const_size);
 		} else {
 			resized = true;
-			const_object->resize(const_size, layout.position + position);
+			const_object->resize(const_size, layout_.position + position);
 		}
-		const_object->set_position(position + (layout.size / 2.f) - (const_size / 2.f));
+		const_object->set_position(position + (layout_.size / 2.f) - (const_size / 2.f));
 		background->set_position(position);
 	}
 	
@@ -40,7 +40,7 @@ namespace ie {
 			const_object->move(const_size);
 		} else {
 			resized = true;
-			const_object->resize(const_size, layout.position + position);
+			const_object->resize(const_size, layout_.position + position);
 		}
 		background->move(position);
 	}
@@ -55,7 +55,7 @@ namespace ie {
 	}
 	
 	void BoxConstCenter::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		if(resized) {
 			const_object->set_position(position + (size / 2.f) - (const_size / 2.f));
 		} else {
@@ -90,7 +90,7 @@ namespace ie {
 	}
 	
 	bool BoxConstCenter::update_interactions(sf::Vector2f) {
-		return background->in(layout.position) ? background->update_interactions(layout.position) : const_object->update_interactions(layout.position);
+		return background->in(layout_.position) ? background->update_interactions(layout_.position) : const_object->update_interactions(layout_.position);
 	}
 	
 	BoxConstCenter* BoxConstCenter::copy() {

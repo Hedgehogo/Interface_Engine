@@ -46,15 +46,15 @@ namespace ie {
 		if(this->division > 1) {
 			this->value = std::round(this->value);
 		}
-		sf::Vector2f strip_size{layout.size};
+		sf::Vector2f strip_size{layout_.size};
 		if(horizontal) {
-			strip_size.x = offset * layout.size.y;
-			strip_size.x += (layout.size.x - strip_size.x) * this->value / static_cast<float>(division);
+			strip_size.x = offset * layout_.size.y;
+			strip_size.x += (layout_.size.x - strip_size.x) * this->value / static_cast<float>(division);
 		} else {
-			strip_size.y = offset * layout.size.x;
-			strip_size.y += (layout.size.y - strip_size.y) * this->value / static_cast<float>(division);
+			strip_size.y = offset * layout_.size.x;
+			strip_size.y += (layout_.size.y - strip_size.y) * this->value / static_cast<float>(division);
 		}
-		strip->resize(strip_size, layout.position);
+		strip->resize(strip_size, layout_.position);
 	}
 	
 	void Bar::draw() {
@@ -95,11 +95,11 @@ namespace ie {
 	}
 	
 	LayoutData& Bar::layout_get_data() {
-		return layout;
+		return layout_;
 	}
 	
 	const LayoutData& Bar::layout_get_data() const {
-		return layout;
+		return layout_;
 	}
 	
 	bool DecodePointer<Bar>::decode_pointer(const YAML::Node& node, Bar*& bar) {

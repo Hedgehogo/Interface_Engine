@@ -64,12 +64,12 @@ namespace ie {
 	protected:
 		virtual void resize_slider(sf::Vector2f new_value);
 		
-		BasicInteractiveData<BaseSlider&> interactive;
-		BoxPtr<IUninteractive> background;
-		BoxPtr<IUninteractive> slider;
-		PSRVec2f value;
-		sf::Vector2f position;
-		sf::Vector2f slider_size;
-		sf::Vector2f move_zone_size;
+		BasicInteractiveData<BaseSlider&> interactive_;
+		BoxPtr<IUninteractive> background_;
+		BoxPtr<IUninteractive> slider_;
+		PSRVec2f value_;
+		sf::Vector2f position_;
+		sf::Vector2f slider_size_;
+		sf::Vector2f move_zone_size_;
 	};
 }

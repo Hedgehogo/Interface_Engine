@@ -62,7 +62,7 @@ namespace ie {
 	}
 	
 	void BoxSwitchTabs::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		for(auto& object : objects) {
 			object->resize(size, position);
 		}

@@ -37,28 +37,28 @@ namespace ie {
 	}
 	
 	void BoxTabs::set_position(sf::Vector2f position) {
-		layout.set_position(position);
+		layout_.set_position(position);
 		for(auto& object: objects) {
 			object->set_position(position);
 		}
 	}
 	
 	void BoxTabs::move(sf::Vector2f position) {
-		layout.move(position);
+		layout_.move(position);
 		for(auto& object: objects) {
 			object->move(position);
 		}
 	}
 	
 	void BoxTabs::set_size(sf::Vector2f size) {
-		layout.set_size(size);
+		layout_.set_size(size);
 		for(auto& object: objects) {
 			object->set_size(size);
 		}
 	}
 	
 	void BoxTabs::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		for(auto& object: objects) {
 			object->resize(size, position);
 		}

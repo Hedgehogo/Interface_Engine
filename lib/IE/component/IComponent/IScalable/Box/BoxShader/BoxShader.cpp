@@ -124,7 +124,7 @@ namespace ie {
 			shader->setUniform("size", size);
 		if(transmission & Transmission::AspectRatio)
 			shader->setUniform("aspect_ratio", size.x / size.y);
-		layout.set_size(size);
+		layout_.set_size(size);
 	}
 	
 	void BoxShader::draw() {
@@ -152,7 +152,7 @@ namespace ie {
 	
 	bool BoxShader::update_interactions(sf::Vector2f mouse_position) {
 		if(transmission & Transmission::MousePosition)
-			shader->setUniform("mouse_position", mouse_position - layout.position);
+			shader->setUniform("mouse_position", mouse_position - layout_.position);
 		return BoxRenderTexture::update_interactions(mouse_position);
 	}
 	

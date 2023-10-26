@@ -34,7 +34,7 @@ namespace ie {
 		
 		const LayoutData& layout_get_data() const override;
 		
-		LayoutData layout;
+		LayoutData layout_;
 		sf::RectangleShape horizontal_rectangle;
 		sf::RectangleShape vertical_rectangle;
 		sf::CircleShape circle;

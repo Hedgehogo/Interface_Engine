@@ -20,6 +20,6 @@ namespace ie {
 		void draw() override;
 	
 	protected:
-		std::vector<IDrawable*> drawables;
+		std::vector<IDrawable*> drawables_;
 	};
 }

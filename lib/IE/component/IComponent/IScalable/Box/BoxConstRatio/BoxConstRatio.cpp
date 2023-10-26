@@ -84,22 +84,22 @@ namespace ie {
 	}
 	
 	void BoxConstRatio::set_position(sf::Vector2f position) {
-		BoxConstRatio::move(position - layout.position);
+		BoxConstRatio::move(position - layout_.position);
 	}
 	
 	void BoxConstRatio::move(sf::Vector2f position) {
-		layout.move(position);
+		layout_.move(position);
 		background->move(position);
 		const_object->move(position);
 		second_object->move(position);
 	}
 	
 	void BoxConstRatio::set_size(sf::Vector2f size) {
-		resize(size, layout.position);
+		resize(size, layout_.position);
 	}
 	
 	void BoxConstRatio::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		
 		sf::Vector2f const_size = sf::Vector2f(size.x / size.y > aspect_ratio ? sf::Vector2f{size.y * aspect_ratio, size.y} : sf::Vector2f{size.x, size.x / aspect_ratio});
 		sf::Vector2f second_size = sf::Vector2f(size.x / size.y > aspect_ratio ? sf::Vector2f{size.x - const_size.x, size.y} : sf::Vector2f{size.x, size.y - const_size.y});
@@ -124,7 +124,7 @@ namespace ie {
 				}
 			}
 		} else {
-			const_position = (layout.size - const_size) / 2.0f;
+			const_position = (layout_.size - const_size) / 2.0f;
 		}
 		
 		const_position += position;

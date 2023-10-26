@@ -58,13 +58,13 @@ namespace ie {
 		
 		const LayoutData& layout_get_data() const override;
 		
-		LayoutData layout;
-		InteractiveData interactive;
-		DrawManager inactive_draw_manager;
-		DrawManager active_draw_manager;
-		BoxPtr<IScalable> inactive_background;
-		BoxPtr<IScalable> active_background;
-		PSbool active;
+		LayoutData layout_;
+		InteractiveData interactive_;
+		DrawManager inactive_draw_manager_;
+		DrawManager active_draw_manager_;
+		BoxPtr<IScalable> inactive_background_;
+		BoxPtr<IScalable> active_background_;
+		PSbool active_;
 	};
 	
 	template<>

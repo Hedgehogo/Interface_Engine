@@ -54,7 +54,7 @@ namespace ie {
 		
 		const LayoutData& layout_get_data() const override;
 		
-		LayoutData layout;
+		LayoutData layout_;
 		BoxPtr<IUninteractive> background;
 		BoxPtr<IUninteractive> strip;
 		bool horizontal;

@@ -28,7 +28,7 @@ namespace ie {
 	}
 	
 	void BoxAlternative::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		top_object->resize(size, position);
 		bottom_object->resize(size, position);
 	}

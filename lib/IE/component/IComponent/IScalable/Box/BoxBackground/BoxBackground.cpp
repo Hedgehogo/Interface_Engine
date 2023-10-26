@@ -23,19 +23,19 @@ namespace ie {
 	}
 	
 	void BoxBackground::set_position(sf::Vector2f position) {
-		layout.set_position(position);
+		layout_.set_position(position);
 		background->set_position(position);
 		object->set_position(position);
 	}
 	
 	void BoxBackground::move(sf::Vector2f position) {
-		layout.move(position);
+		layout_.move(position);
 		background->move(position);
 		object->move(position);
 	}
 	
 	void BoxBackground::set_size(sf::Vector2f size) {
-		layout.set_size(size);
+		layout_.set_size(size);
 		background->set_size(size);
 		object->set_size(size);
 	}
@@ -65,7 +65,7 @@ namespace ie {
 	}
 	
 	void BoxBackground::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		background->resize(size, position);
 		object->resize(size - offset * 2.f, position + offset);
 	}

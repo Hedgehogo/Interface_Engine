@@ -54,7 +54,7 @@ namespace ie {
 			),
 			make.value,
 			init_info
-		), scale(make.slider_scale) {
+		), scale_(make.slider_scale) {
 	}
 	
 	Slider::Slider(
@@ -74,7 +74,7 @@ namespace ie {
 				key, wheel_horizontal, wheel_relativity, wheel_sensitivity
 			),
 			value
-		), scale(slider_scale) {
+		), scale_(slider_scale) {
 	}
 	
 	Slider::Slider(
@@ -93,38 +93,38 @@ namespace ie {
 				key, division, wheel_horizontal
 			),
 			value
-		), scale(slider_scale) {
+		), scale_(slider_scale) {
 	}
 	
 	void Slider::init(InitInfo init_info) {
 		BaseSlider::init(init_info);
-		interactive.init(init_info, *this);
+		interactive_.init(init_info, *this);
 	}
 	
 	void Slider::set_scale(sf::Vector2f scale) {
-		this->scale = scale;
+		this->scale_ = scale;
 	}
 	
 	void Slider::resize(sf::Vector2f size, sf::Vector2f position) {
-		this->position = position;
-		slider_size = {size.x * scale.x, size.y * scale.y};
-		move_zone_size = size - slider_size;
-		background->resize(size, position);
-		resize_slider(value->get_value());
+		this->position_ = position;
+		slider_size_ = {size.x * scale_.x, size.y * scale_.y};
+		move_zone_size_ = size - slider_size_;
+		background_->resize(size, position);
+		resize_slider(value_->get_value());
 	}
 	
 	sf::Vector2f Slider::get_min_size() const {
-		sf::Vector2f min_size{slider->get_min_size()};
-		min_size = {min_size.x / scale.x, min_size.y / scale.y};
-		return max(min_size, background->get_min_size());
+		sf::Vector2f min_size{slider_->get_min_size()};
+		min_size = {min_size.x / scale_.x, min_size.y / scale_.y};
+		return max(min_size, background_->get_min_size());
 	}
 	
 	const IUninteractive& Slider::get_background() const {
-		return *background;
+		return *background_;
 	}
 	
 	const IUninteractive& Slider::get_slider() const {
-		return *slider;
+		return *slider_;
 	}
 	
 	Slider* Slider::copy() {

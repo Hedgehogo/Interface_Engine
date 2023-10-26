@@ -72,7 +72,7 @@ namespace ie {
 	}
 	
 	void BoxSettable::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		object->resize(size, position);
 	}
 	

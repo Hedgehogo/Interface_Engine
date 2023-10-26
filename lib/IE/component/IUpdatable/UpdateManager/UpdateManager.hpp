@@ -20,6 +20,6 @@ namespace ie {
 		void update() override;
 	
 	protected:
-		std::vector<IUpdatable*> updatable;
+		std::vector<IUpdatable*> updatable_;
 	};
 }

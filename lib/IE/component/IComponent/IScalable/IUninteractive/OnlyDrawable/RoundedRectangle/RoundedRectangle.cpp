@@ -27,18 +27,18 @@ namespace ie {
 	void RoundedRectangle::draw() {
 		render_target->draw(horizontal_rectangle);
 		render_target->draw(vertical_rectangle);
-		circle.setPosition(layout.position);
+		circle.setPosition(layout_.position);
 		render_target->draw(circle);
-		circle.setPosition(layout.position.x + layout.size.x - radius * 2, layout.position.y);
+		circle.setPosition(layout_.position.x + layout_.size.x - radius * 2, layout_.position.y);
 		render_target->draw(circle);
-		circle.setPosition(layout.position.x, layout.position.y + layout.size.y - radius * 2);
+		circle.setPosition(layout_.position.x, layout_.position.y + layout_.size.y - radius * 2);
 		render_target->draw(circle);
-		circle.setPosition(layout.position.x + layout.size.x - radius * 2, layout.position.y + layout.size.y - radius * 2);
+		circle.setPosition(layout_.position.x + layout_.size.x - radius * 2, layout_.position.y + layout_.size.y - radius * 2);
 		render_target->draw(circle);
 	}
 	
 	void RoundedRectangle::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		vertical_rectangle.setSize({size.x - radius * 2, size.y});
 		vertical_rectangle.setPosition(position + sf::Vector2f{radius, 0});
 		horizontal_rectangle.setSize({size.x, size.y - radius * 2});
@@ -58,11 +58,11 @@ namespace ie {
 	}
 	
 	LayoutData& RoundedRectangle::layout_get_data() {
-		return layout;
+		return layout_;
 	}
 	
 	const LayoutData& RoundedRectangle::layout_get_data() const {
-		return layout;
+		return layout_;
 	}
 	
 	bool DecodePointer<RoundedRectangle>::decode_pointer(const YAML::Node& node, RoundedRectangle*& rounded_rectangle) {

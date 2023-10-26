@@ -40,10 +40,10 @@ namespace ie {
 		SliderWheelAction* copy() override;
 		
 	protected:
-		BaseSlider* slider;
-		sf::Vector2f sensitivity;
-		bool horizontal;
-		bool relativity;
+		BaseSlider* slider_;
+		sf::Vector2f sensitivity_;
+		bool horizontal_;
+		bool relativity_;
 	};
 	
 	template<>

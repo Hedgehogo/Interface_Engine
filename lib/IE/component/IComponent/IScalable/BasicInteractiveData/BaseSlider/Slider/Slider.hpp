@@ -78,7 +78,7 @@ namespace ie {
 		Slider* copy() override;
 	
 	protected:
-		sf::Vector2f scale;
+		sf::Vector2f scale_;
 	};
 	
 	template<>
