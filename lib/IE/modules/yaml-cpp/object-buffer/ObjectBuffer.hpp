@@ -14,6 +14,6 @@ namespace ie {
 		static bool has(const std::string& name);
 	
 	protected:
-		static std::map<std::string, const YAML::Node> nodes;
+		static std::map<std::string, const YAML::Node> nodes_;
 	};
 }

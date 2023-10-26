@@ -11,6 +11,6 @@ namespace ie {
 		YAML::Mark get_mark();
 	
 	protected:
-		YAML::Mark mark;
+		YAML::Mark mark_;
 	};
 }

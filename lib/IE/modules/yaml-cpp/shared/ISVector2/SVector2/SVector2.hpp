@@ -40,8 +40,8 @@ namespace ie {
 		void set_value(const sf::Vector2<V>& vector);
 	
 	protected:
-		std::shared_ptr<T> x, y;
-		std::vector<SetterFunc> setters;
+		std::shared_ptr<T> x_, y_;
+		std::vector<SetterFunc> setters_;
 	};
 	
 	template<typename T>

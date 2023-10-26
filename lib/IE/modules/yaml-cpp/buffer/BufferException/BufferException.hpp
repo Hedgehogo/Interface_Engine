@@ -25,8 +25,8 @@ namespace ie {
 		std::string get_type() const;
 	
 	protected:
-		std::string name;
-		std::string type;
+		std::string name_;
+		std::string type_;
 	};
 	
 	class YamlBufferVariableNotFoundException : public BaseYamlException {
@@ -40,6 +40,6 @@ namespace ie {
 		std::string get_type() const;
 	
 	protected:
-		BufferVariableNotFoundException exception;
+		BufferVariableNotFoundException exception_;
 	};
 }

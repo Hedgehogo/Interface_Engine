@@ -6,10 +6,10 @@ namespace ie {
 	template<typename T>
 	class SConvertRange : public SRangeValue<T> {
 	public:
-		explicit SConvertRange(PSRange<T> sRange_value, T upper, T lower);
+		explicit SConvertRange(PSRange<T> value, T upper, T lower);
 	
 	protected:
-		PSRange<T> sRange_value;
+		PSRange<T> value_;
 	};
 	
 	template<typename T>

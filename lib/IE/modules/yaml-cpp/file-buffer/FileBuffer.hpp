@@ -20,8 +20,8 @@ namespace ie {
 		static void add_alias(const std::string& name, const std::string& alias);
 	
 	protected:
-		static std::map<std::string, T> objects;
-		static std::map<std::string, T*> aliases;
+		static std::map<std::string, T> objects_;
+		static std::map<std::string, T*> aliases_;
 	};
 	
 	using Uint32 = sf::Uint32;

@@ -31,8 +31,8 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		PISValue<T> value;
-		T constant;
+		PISValue<T> value_;
+		T constant_;
 	};
 	
 	template<typename T>

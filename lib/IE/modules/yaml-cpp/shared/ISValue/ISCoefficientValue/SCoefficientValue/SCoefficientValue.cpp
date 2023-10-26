@@ -6,9 +6,9 @@ namespace ie {
 	}
 	
 	void SCoefficientValue::set_value(const float& value) {
-		this->value = std::min(std::max(value, 0.f), 1.f);
-		for(const auto& set: setters)
-			set(this->value);
+		this->value_ = std::min(std::max(value, 0.f), 1.f);
+		for(const auto& set: setters_)
+			set(this->value_);
 	}
 	
 	bool DecodePointer<SCoefficientValue>::decode_pointer(const YAML::Node& node, SCoefficientValue*& sCoefficient_value) {

@@ -29,8 +29,8 @@ namespace ie {
 		void set_value(const std::vector<V>& list);
 		
 	protected:
-		std::vector<std::shared_ptr<T>> list;
-		std::vector<SetterFunc> setters;
+		std::vector<std::shared_ptr<T> > list_;
+		std::vector<SetterFunc> setters_;
 	};
 	
 	template<typename T>

@@ -2,23 +2,23 @@
 
 namespace ie {
 	template<typename T>
-	SValue<T>::SValue(T value) : value(value), setters() {
+	SValue<T>::SValue(T value) : value_(value), setters_() {
 	}
 	
 	template<typename T>
 	void SValue<T>::add_setter(const typename ISValue<T>::SetterFunc& setter) {
-		setters.push_back(setter);
+		setters_.push_back(setter);
 	}
 	
 	template<typename T>
 	const T& SValue<T>::get_value() const {
-		return value;
+		return value_;
 	}
 	
 	template<typename T>
 	void SValue<T>::set_value(const T& value) {
-		this->value = value;
-		for(const auto& set: setters)
+		this->value_ = value;
+		for(const auto& set: setters_)
 			set(value);
 	}
 	

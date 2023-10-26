@@ -10,12 +10,12 @@ namespace ie {
 	}
 	
 	namespace detail {
-		IYamlBuilder::TypeNameDeformer IYamlBuilder::type_name_deform = [](std::string name) -> std::string {
+		IYamlBuilder::TypeNameDeformer IYamlBuilder::type_name_deformer = [](std::string name) -> std::string {
 			return remove_namespace(std::move(name), "ui");
 		};
 		
 		void IYamlBuilder::set_type_name_deformer(const TypeNameDeformer& type_name_deform) {
-			IYamlBuilder::type_name_deform = type_name_deform;
+			IYamlBuilder::type_name_deformer = type_name_deform;
 		}
 		
 		bool IYamlBuilder::is_exists() {

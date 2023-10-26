@@ -22,10 +22,10 @@ namespace ie::detail {
 		static FuncYamlBuilder& add_builder(BuildFunc<Type> function, std::vector<std::string> aliases = {});
 		
 	protected:
-		static std::vector<FuncYamlBuilder> builders;
+		static std::vector<FuncYamlBuilder> builders_;
 		
-		std::vector<std::string> names;
-		VoidBuildFunc function;
+		std::vector<std::string> names_;
+		VoidBuildFunc function_;
 	};
 }
 

@@ -2,27 +2,27 @@
 
 namespace ie {
 	template<typename T>
-	SRangeValue<T>::SRangeValue(T value) : SValue<T>(value), upper(std::numeric_limits<T>::max()), lower(std::numeric_limits<T>::lowest()) {
+	SRangeValue<T>::SRangeValue(T value) : SValue<T>(value), upper_(std::numeric_limits<T>::max()), lower_(std::numeric_limits<T>::lowest()) {
 	}
 	
 	template<typename T>
 	T SRangeValue<T>::get_upper() {
-		return upper;
+		return upper_;
 	}
 	
 	template<typename T>
 	T SRangeValue<T>::get_lower() {
-		return lower;
+		return lower_;
 	}
 	
 	template<typename T>
 	void SRangeValue<T>::set_upper(const T& upper) {
-		this->upper = std::min(this->upper, upper);
+		this->upper_ = std::min(this->upper_, upper);
 	}
 	
 	template<typename T>
 	void SRangeValue<T>::set_lower(const T& lower) {
-		this->lower = std::max(this->lower, lower);
+		this->lower_ = std::max(this->lower_, lower);
 	}
 	
 	template<typename T>
@@ -33,9 +33,9 @@ namespace ie {
 	
 	template<typename T>
 	void SRangeValue<T>::set_value(const T& value) {
-		this->value = std::clamp(value, lower, upper);
-		for(const auto& set: this->setters)
-			set(this->value);
+		this->value_ = std::clamp(value, lower_, upper_);
+		for(const auto& set: this->setters_)
+			set(this->value_);
 	}
 	
 	template<typename T>

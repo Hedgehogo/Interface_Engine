@@ -1,8 +1,8 @@
 namespace ie {
 	template<typename T>
-	SConvertRange<T>::SConvertRange(PSRange<T> sRange_value, T upper, T lower) : sRange_value(sRange_value) {
-		sRange_value->add_setter([=](const T& value){
-			this->set_value(value * ((upper - lower) / (sRange_value->get_upper() - sRange_value->get_lower())));
+	SConvertRange<T>::SConvertRange(PSRange<T> value, T upper, T lower) : value_(value) {
+		value->add_setter([=](const T& value){
+			this->set_value(value * ((upper - lower) / (value_->get_upper() - value_->get_lower())));
 		});
 	}
 	

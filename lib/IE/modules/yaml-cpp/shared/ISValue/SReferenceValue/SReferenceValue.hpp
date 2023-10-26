@@ -17,8 +17,8 @@ namespace ie {
 		virtual void set_reference(T& value_reference);
 	
 	protected:
-		T* value_reference;
-		std::vector<typename ISValue<T>::SetterFunc> setters;
+		T* value_reference_;
+		std::vector<typename ISValue<T>::SetterFunc> setters_;
 	};
 }
 

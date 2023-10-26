@@ -15,8 +15,8 @@ namespace ie {
 		void set_value(const T& value) override;
 	
 	protected:
-		T value;
-		std::vector<typename ISValue<T>::SetterFunc> setters;
+		T value_;
+		std::vector<typename ISValue<T>::SetterFunc> setters_;
 	};
 	
 	template<typename T>

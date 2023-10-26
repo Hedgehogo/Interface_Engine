@@ -21,8 +21,8 @@ namespace ie {
 		void set_value(const T& value) override;
 	
 	protected:
-		T upper;
-		T lower;
+		T upper_;
+		T lower_;
 	};
 	
 	template<typename T>

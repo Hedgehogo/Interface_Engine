@@ -20,7 +20,7 @@ namespace ie {
 		void set_value(const ToType& value) override;
 	
 	protected:
-		PISValue<FromType> from_value;
+		PISValue<FromType> from_value_;
 	};
 	
 	template<typename FromType, typename ToType>
