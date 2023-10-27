@@ -31,7 +31,7 @@ namespace ie {
 		FnPositioning2* copy() override;
 	
 	protected:
-		FindPositionFn find_position_fn;
-		sf::RenderTarget* render_target;
+		FindPositionFn find_position_fn_;
+		sf::RenderTarget* render_target_;
 	};
 }

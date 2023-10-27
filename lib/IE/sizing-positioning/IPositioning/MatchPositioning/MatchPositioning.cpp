@@ -1,11 +1,11 @@
 #include "MatchPositioning.hpp"
 
 namespace ie {
-	MatchPositioning::MatchPositioning(float parent_coefficient, float object_coefficient, float offset) : parent_coefficient(parent_coefficient), object_coefficient(object_coefficient), offset(offset) {
+	MatchPositioning::MatchPositioning(float parent_coefficient, float object_coefficient, float offset) : parent_coefficient_(parent_coefficient), object_coefficient_(object_coefficient), offset_(offset) {
 	}
 	
 	float MatchPositioning::find_position(float parent_position, float object_size, float parent_size, float) {
-		return parent_position + parent_size * parent_coefficient - object_size * object_coefficient + offset;
+		return parent_position + parent_size * parent_coefficient_ - object_size * object_coefficient_ + offset_;
 	}
 	
 	MatchPositioning* MatchPositioning::copy() {

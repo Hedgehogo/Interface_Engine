@@ -27,45 +27,45 @@ namespace ie {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(Make&& make, Sizing2InitInfo init_info) :
-		render_target(&init_info.render_target),
-		sizing(make.sizing->make((make.horizontal ? init_info.normal_size.x : init_info.normal_size.y))),
-		ratio(make.ratio),
-		horizontal(make.horizontal) {
+		render_target_(&init_info.render_target),
+		sizing_(make.sizing->make((make.horizontal ? init_info.normal_size.x : init_info.normal_size.y))),
+		ratio_(make.ratio),
+		horizontal_(make.horizontal) {
 	}
 	
-	ConstRatioSizing2::ConstRatioSizing2(BoxPtr<ISizing>&& sizing, float ratio, bool horizontal) : sizing(std::move(sizing)), ratio(ratio), horizontal(horizontal) {
+	ConstRatioSizing2::ConstRatioSizing2(BoxPtr<ISizing>&& sizing, float ratio, bool horizontal) : sizing_(std::move(sizing)), ratio_(ratio), horizontal_(horizontal) {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float ratio, bool horizontal, bool relative_parent) :
-		sizing(BoxPtr{make_size_make(relative_parent)}->make(0)), ratio(ratio), horizontal(horizontal) {
+		sizing_(BoxPtr{make_size_make(relative_parent)}->make(0)), ratio_(ratio), horizontal_(horizontal) {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float const_size, float ratio, bool horizontal) :
-		sizing(new ConstSizing{const_size}), ratio(ratio), horizontal(horizontal) {
+		sizing_(new ConstSizing{const_size}), ratio_(ratio), horizontal_(horizontal) {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float coefficient, float addition, float ratio, bool horizontal, bool relative_target) :
-		sizing(BoxPtr{make_size_make(coefficient, addition, relative_target)}->make(0)), ratio(ratio), horizontal(horizontal) {
+		sizing_(BoxPtr{make_size_make(coefficient, addition, relative_target)}->make(0)), ratio_(ratio), horizontal_(horizontal) {
 	}
 	
 	ConstRatioSizing2::ConstRatioSizing2(float target_coefficient, float parent_coefficient, float addition, float ratio, bool horizontal) :
-		sizing(new SmartSizing{target_coefficient, parent_coefficient, addition}), ratio(ratio), horizontal(horizontal) {
+		sizing_(new SmartSizing{target_coefficient, parent_coefficient, addition}), ratio_(ratio), horizontal_(horizontal) {
 	}
 	
 	void ConstRatioSizing2::init(sf::RenderTarget& render_target, sf::Vector2f normal_size) {
-		this->render_target = &render_target;
-		sizing->init((horizontal ? normal_size.x : normal_size.y));
+		this->render_target_ = &render_target;
+		sizing_->init((horizontal_ ? normal_size.x : normal_size.y));
 	}
 	
 	sf::Vector2f ConstRatioSizing2::find_size(sf::Vector2f parent_size) {
-		sf::Vector2f target_size{static_cast<sf::Vector2f>(render_target->getSize())};
-		float size = (horizontal ? sizing->find_size(parent_size.x, target_size.x) : sizing->find_size(parent_size.y, target_size.y));
-		return (horizontal ? sf::Vector2f{size, size / ratio} : sf::Vector2f{size * ratio, size});
+		sf::Vector2f target_size{static_cast<sf::Vector2f>(render_target_->getSize())};
+		float size = (horizontal_ ? sizing_->find_size(parent_size.x, target_size.x) : sizing_->find_size(parent_size.y, target_size.y));
+		return (horizontal_ ? sf::Vector2f{size, size / ratio_} : sf::Vector2f{size * ratio_, size});
 	}
 	
 	sf::Vector2f ConstRatioSizing2::get_parent_size(sf::Vector2f object_size) {
-		float size = (horizontal ? sizing->get_parent_size(object_size.x) : sizing->get_parent_size(object_size.y));
-		return (horizontal ? sf::Vector2f{size, size / ratio} : sf::Vector2f{size * ratio, size});
+		float size = (horizontal_ ? sizing_->get_parent_size(object_size.x) : sizing_->get_parent_size(object_size.y));
+		return (horizontal_ ? sf::Vector2f{size, size / ratio_} : sf::Vector2f{size * ratio_, size});
 	}
 	
 	ConstRatioSizing2* ConstRatioSizing2::copy() {

@@ -1,11 +1,11 @@
 #include "InternalTargetPositioning.hpp"
 
 namespace ie {
-	InternalTargetPositioning::InternalTargetPositioning(float coefficient, float offset) : coefficient(coefficient), offset(offset) {
+	InternalTargetPositioning::InternalTargetPositioning(float coefficient, float offset) : coefficient_(coefficient), offset_(offset) {
 	}
 	
 	float InternalTargetPositioning::find_position(float, float object_size, float, float target_size) {
-		return (target_size - object_size) * coefficient + offset;
+		return (target_size - object_size) * coefficient_ + offset_;
 	}
 	
 	InternalTargetPositioning* InternalTargetPositioning::copy() {
@@ -13,11 +13,11 @@ namespace ie {
 	}
 	
 	float InternalTargetPositioning::get_coefficient() const {
-		return coefficient;
+		return coefficient_;
 	}
 	
 	float InternalTargetPositioning::get_offset() const {
-		return offset;
+		return offset_;
 	}
 	
 	bool DecodePointer<InternalTargetPositioning>::decode_pointer(const YAML::Node& node, InternalTargetPositioning*& internal_target_positioning) {

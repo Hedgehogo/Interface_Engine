@@ -28,9 +28,9 @@ namespace ie {
 		SmartSizing* copy() override;
 	
 	protected:
-		float target_coefficient;
-		float parent_coefficient;
-		float addition;
+		float target_coefficient_;
+		float parent_coefficient_;
+		float addition_;
 	};
 	
 	template<>

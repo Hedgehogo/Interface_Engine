@@ -44,9 +44,9 @@ TEST(IComponent, BoxBorder) {
 	ASSERT_EQ(box_border.get_position(), (sf::Vector2f{19, 39}));
 	ASSERT_EQ(box_border.get_area_position(), (sf::Vector2f{19, 39}));
 	
-	box_border.resize({7, 13}, {23, 41});
-	ASSERT_EQ(box_border.get_size(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(box_border.get_area_size(), (sf::Vector2f{7, 13}));
+	box_border.resize({8, 14}, {23, 41});
+	ASSERT_EQ(box_border.get_size(), (sf::Vector2f{8, 14}));
+	ASSERT_EQ(box_border.get_area_size(), (sf::Vector2f{8, 14}));
 	ASSERT_EQ(box_border.get_position(), (sf::Vector2f{23, 41}));
 	ASSERT_EQ(box_border.get_area_position(), (sf::Vector2f{23, 41}));
 	

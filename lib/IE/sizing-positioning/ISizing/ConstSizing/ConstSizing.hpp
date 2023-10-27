@@ -24,7 +24,7 @@ namespace ie {
 		ConstSizing* copy() override;
 	
 	protected:
-		float size;
+		float size_;
 	};
 	
 	template<>

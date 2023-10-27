@@ -6,18 +6,18 @@ namespace ie {
 	}
 	
 	RelativeNormalSizing::RelativeNormalSizing(Make&&, float normal_size) :
-		normal_size(normal_size) {
+		normal_size_(normal_size) {
 	}
 	
-	RelativeNormalSizing::RelativeNormalSizing() : normal_size(0) {
+	RelativeNormalSizing::RelativeNormalSizing() : normal_size_(0) {
 	}
 	
 	void RelativeNormalSizing::init(float normal_size) {
-		this->normal_size = normal_size;
+		this->normal_size_ = normal_size;
 	}
 	
 	float RelativeNormalSizing::find_size(float, float) {
-		return this->normal_size;
+		return this->normal_size_;
 	}
 	
 	RelativeNormalSizing* RelativeNormalSizing::copy() {

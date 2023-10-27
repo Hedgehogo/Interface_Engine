@@ -33,9 +33,9 @@ namespace ie {
 		FnSizing2* copy() override;
 	
 	protected:
-		FindSizeFn find_size_fn;
-		GetParentSizeFn get_parent_size_fn;
-		sf::RenderTarget* render_target;
-		sf::Vector2f normal_size;
+		FindSizeFn find_size_fn_;
+		GetParentSizeFn get_parent_size_fn_;
+		sf::RenderTarget* render_target_;
+		sf::Vector2f normal_size_;
 	};
 }

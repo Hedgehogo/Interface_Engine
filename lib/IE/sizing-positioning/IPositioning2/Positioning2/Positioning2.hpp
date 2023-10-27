@@ -37,9 +37,9 @@ namespace ie {
 		Positioning2* copy() override;
 	
 	protected:
-		BoxPtr<IPositioning> horizontal;
-		BoxPtr<IPositioning> vertical;
-		sf::RenderTarget* render_target;
+		BoxPtr<IPositioning> horizontal_;
+		BoxPtr<IPositioning> vertical_;
+		sf::RenderTarget* render_target_;
 	};
 	
 	template<>

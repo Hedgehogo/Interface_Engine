@@ -26,7 +26,7 @@ namespace ie {
 		RelativeParentSizing* copy() override;
 	
 	protected:
-		float addition;
+		float addition_;
 	};
 	
 	template<>

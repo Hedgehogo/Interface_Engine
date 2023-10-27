@@ -10,9 +10,9 @@ TEST(IComponent, BoxPanel) {
 	ie::BoxPanel box_panel{
 		{
 			ie::make_box_ptr<ie::ConstPanel::Make>(
-				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
-				ie::make_box_ptr<ie::ISizing2::Make, ie::Sizing2::Make>(sf::Vector2f{10, 10}),
-				ie::make_box_ptr<ie::IPositioning2::Make, ie::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
+				ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
+				ie::make_box_ptr<ie::Sizing2::Make>(sf::Vector2f{10, 10}),
+				ie::make_box_ptr<ie::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
 			),
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 		}, data.make_init_info()
@@ -41,9 +41,9 @@ TEST(IComponent, BoxPanel) {
 	ASSERT_EQ(box_panel.get_position(), (sf::Vector2f{19, 39}));
 	ASSERT_EQ(box_panel.get_area_position(), (sf::Vector2f{19, 39}));
 	
-	box_panel.resize({7, 13}, {23, 41});
-	ASSERT_EQ(box_panel.get_size(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(box_panel.get_area_size(), (sf::Vector2f{7, 13}));
+	box_panel.resize({8, 14}, {23, 41});
+	ASSERT_EQ(box_panel.get_size(), (sf::Vector2f{8, 14}));
+	ASSERT_EQ(box_panel.get_area_size(), (sf::Vector2f{8, 14}));
 	ASSERT_EQ(box_panel.get_position(), (sf::Vector2f{23, 41}));
 	ASSERT_EQ(box_panel.get_area_position(), (sf::Vector2f{23, 41}));
 	

@@ -9,21 +9,21 @@ namespace ie {
 	}
 	
 	RelativeParentSizing::RelativeParentSizing(Make&& make, float) :
-		addition(make.addition) {
+		addition_(make.addition) {
 	}
 	
-	RelativeParentSizing::RelativeParentSizing(float addition) : addition(addition) {
+	RelativeParentSizing::RelativeParentSizing(float addition) : addition_(addition) {
 	}
 	
 	void RelativeParentSizing::init(float) {
 	}
 	
 	float RelativeParentSizing::find_size(float parent_size, float) {
-		return parent_size + addition;
+		return parent_size + addition_;
 	}
 	
 	float RelativeParentSizing::get_parent_size(float object_size) {
-		return object_size - addition;
+		return object_size - addition_;
 	}
 	
 	RelativeParentSizing* RelativeParentSizing::copy() {
