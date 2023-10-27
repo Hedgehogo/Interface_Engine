@@ -43,12 +43,12 @@ namespace ie {
 			std::move(make.sizing),
 			std::move(make.positioning),
 			make.displayed,
-			init_info.copy(panel_manager),
+			init_info.copy(panel_manager_),
 			init_info
 		),
-		interaction_manager(&init_info.interaction_manager),
-		hide_interaction(make.hide_interaction->make({init_info, *this})),
-		move_interaction(make.move_interaction->make({init_info, *this})) {
+		interaction_manager_(&init_info.interaction_manager),
+		hide_interaction_(make.hide_interaction->make({init_info, *this})),
+		move_interaction_(make.move_interaction->make({init_info, *this})) {
 	}
 	
 	Panel::Panel(
@@ -59,7 +59,7 @@ namespace ie {
 		BoxPtr<IPositioning2> positioning,
 		bool displayed
 	) : BasePanel(std::move(object), std::move(sizing), std::move(positioning), displayed),
-		interaction_manager(nullptr), hide_interaction(std::move(hide_interaction)), move_interaction(std::move(move_interaction)) {
+		interaction_manager_(nullptr), hide_interaction_(std::move(hide_interaction)), move_interaction_(std::move(move_interaction)) {
 	}
 	
 	Panel::Panel(
@@ -69,25 +69,25 @@ namespace ie {
 		BoxPtr<IPositioning2> positioning,
 		bool displayed
 	) : BasePanel(std::move(object), std::move(sizing), std::move(positioning), displayed),
-		interaction_manager(nullptr), hide_interaction(std::move(hide_interaction)), move_interaction(new DontMovePanelInteraction{}) {
+		interaction_manager_(nullptr), hide_interaction_(std::move(hide_interaction)), move_interaction_(new DontMovePanelInteraction{}) {
 	}
 	
 	Panel::Panel(const Panel& other) :
-		BasePanel(other), interaction_manager(other.interaction_manager), hide_interaction(other.hide_interaction), move_interaction(other.move_interaction) {
-		hide_interaction->set_panel(*this);
+		BasePanel(other), interaction_manager_(other.interaction_manager_), hide_interaction_(other.hide_interaction_), move_interaction_(other.move_interaction_) {
+		hide_interaction_->set_panel(*this);
 	}
 	
 	void Panel::init(InitInfo init_info) {
 		BasePanel::init(init_info);
-		InitInfo new_init_info{init_info.window, init_info.render_target, this->draw_manager, this->update_manager, init_info.interaction_manager, init_info.interaction_stack, this->panel_manager};
-		object->init(new_init_info);
-		hide_interaction->init({init_info, *this});
-		move_interaction->init({init_info, *this});
-		this->interaction_manager = &init_info.interaction_manager;
+		InitInfo new_init_info{init_info.window, init_info.render_target, this->draw_manager_, this->update_manager_, init_info.interaction_manager, init_info.interaction_stack, this->panel_manager_};
+		object_->init(new_init_info);
+		hide_interaction_->init({init_info, *this});
+		move_interaction_->init({init_info, *this});
+		this->interaction_manager_ = &init_info.interaction_manager;
 	}
 	
 	void Panel::set_displayed() {
-		displayed = true;
+		displayed_ = true;
 	}
 	
 	bool Panel::is_independent() {
@@ -95,36 +95,36 @@ namespace ie {
 	}
 	
 	bool Panel::is_free() {
-		return panel_manager.is_free();
+		return panel_manager_.is_free();
 	}
 	
 	bool Panel::in_const_panels(sf::Vector2f point_position) {
-		return panel_manager.in_const_panels(point_position);
+		return panel_manager_.in_const_panels(point_position);
 	}
 	
 	void Panel::draw() {
 		BasePanel::draw();
-		panel_manager.draw();
+		panel_manager_.draw();
 	}
 	
 	void Panel::update() {
-		panel_manager.update();
-		if(old_displayed != displayed) {
-			if(displayed) {
-				interaction_manager->add_interaction(*hide_interaction);
-				interaction_manager->add_interaction(*move_interaction);
+		panel_manager_.update();
+		if(old_displayed_ != displayed_) {
+			if(displayed_) {
+				interaction_manager_->add_interaction(*hide_interaction_);
+				interaction_manager_->add_interaction(*move_interaction_);
 			} else {
-				interaction_manager->delete_interaction(*hide_interaction);
-				interaction_manager->delete_interaction(*move_interaction);
+				interaction_manager_->delete_interaction(*hide_interaction_);
+				interaction_manager_->delete_interaction(*move_interaction_);
 			}
 		}
 		BasePanel::update();
 	}
 	
 	bool Panel::update_interactions(sf::Vector2f mouse_position, bool active) {
-		displayed = true;
-		this->active = active;
-		if(panel_manager.update_interactions(mouse_position, active))
+		displayed_ = true;
+		this->active_ = active;
+		if(panel_manager_.update_interactions(mouse_position, active))
 			return true;
 		return BasePanel::update_interactions(mouse_position);
 	}

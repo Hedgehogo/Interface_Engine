@@ -28,10 +28,10 @@ namespace ie {
 		SideMovePanelInteraction* copy() override;
 	
 	protected:
-		float coefficient;
-		float offset;
-		bool horizontal;
-		bool at_start;
+		float coefficient_;
+		float offset_;
+		bool horizontal_;
+		bool at_start_;
 	};
 	
 	template<>

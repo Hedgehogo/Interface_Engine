@@ -16,7 +16,7 @@ namespace ie {
 		BasePanelInteraction* copy() override = 0;
 	
 	protected:
-		Panel* panel;
-		IPanelManager* panel_manager;
+		Panel* panel_;
+		IPanelManager* panel_manager_;
 	};
 }

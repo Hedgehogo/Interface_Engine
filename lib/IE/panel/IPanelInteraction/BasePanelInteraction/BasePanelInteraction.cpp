@@ -3,18 +3,18 @@
 
 namespace ie {
 	BasePanelInteraction::BasePanelInteraction(PanelActionInitInfo init_info) :
-		panel(&init_info.additional), panel_manager(&init_info.panel_manager) {
+		panel_(&init_info.additional), panel_manager_(&init_info.panel_manager) {
 	}
 	
-	BasePanelInteraction::BasePanelInteraction() : panel(nullptr), panel_manager(nullptr) {
+	BasePanelInteraction::BasePanelInteraction() : panel_(nullptr), panel_manager_(nullptr) {
 	}
 	
 	void BasePanelInteraction::init(PanelActionInitInfo init_info) {
-		this->panel = &init_info.additional;
-		this->panel_manager = &init_info.panel_manager;
+		this->panel_ = &init_info.additional;
+		this->panel_manager_ = &init_info.panel_manager;
 	}
 	
 	void BasePanelInteraction::set_panel(Panel& panel) {
-		this->panel = &panel;
+		this->panel_ = &panel;
 	}
 }

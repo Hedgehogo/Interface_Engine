@@ -28,7 +28,7 @@ namespace ie {
 		PointingHidePanelInteraction* copy() override;
 	
 	protected:
-		bool only_on_parent;
+		bool only_on_parent_;
 	};
 	
 	template<>
