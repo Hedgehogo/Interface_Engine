@@ -20,7 +20,7 @@ namespace ie {
 		RelativeNormalSizing* copy() override;
 	
 	protected:
-		float normal_size;
+		float normal_size_;
 	};
 	
 	template<>

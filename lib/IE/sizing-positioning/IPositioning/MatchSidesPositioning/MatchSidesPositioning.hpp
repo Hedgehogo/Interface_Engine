@@ -13,9 +13,9 @@ namespace ie {
 		MatchSidesPositioning* copy() override;
 	
 	protected:
-		Location parent_side;
-		Location object_side;
-		float offset;
+		Location parent_side_;
+		Location object_side_;
+		float offset_;
 	};
 	
 	template<>

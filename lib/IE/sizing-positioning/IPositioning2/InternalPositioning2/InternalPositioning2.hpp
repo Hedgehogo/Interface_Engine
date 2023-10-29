@@ -25,8 +25,8 @@ namespace ie {
 		InternalPositioning2* copy();
 	
 	protected:
-		InternalPositioning vertical;
-		InternalPositioning horizontal;
+		InternalPositioning vertical_;
+		InternalPositioning horizontal_;
 	};
 	
 	template<>

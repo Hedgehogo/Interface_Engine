@@ -27,9 +27,9 @@ namespace ie {
 		CoefficientMovePanelInteraction* copy() override;
 	
 	protected:
-		sf::Vector2f coefficient;
-		sf::Vector2f offset;
-		bool at_start;
+		sf::Vector2f coefficient_;
+		sf::Vector2f offset_;
+		bool at_start_;
 	};
 	
 	template<>

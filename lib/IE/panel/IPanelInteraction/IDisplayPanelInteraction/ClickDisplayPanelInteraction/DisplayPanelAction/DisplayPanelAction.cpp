@@ -16,7 +16,7 @@ namespace ie {
 	}
 	
 	void DisplayPanelAction::stop_pressed() {
-		panel_manager->display_panel(panel);
+		panel_manager_->display_panel(panel_);
 	}
 	
 	void DisplayPanelAction::while_not_pressed() {

@@ -12,9 +12,9 @@ namespace ie {
 		MatchPositioning* copy() override;
 	
 	protected:
-		float parent_coefficient;
-		float object_coefficient;
-		float offset;
+		float parent_coefficient_;
+		float object_coefficient_;
+		float offset_;
 	};
 	
 	template<>

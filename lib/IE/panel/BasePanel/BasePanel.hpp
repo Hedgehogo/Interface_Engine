@@ -93,16 +93,16 @@ namespace ie {
 		const LayoutData& layout_get_data() const override;
 		
 		LayoutData layout_;
-		DrawManager draw_manager;
-		UpdateManager update_manager;
-		BoxPtr<IScalable> object;
-		BoxPtr<ISizing2> sizing;
-		BoxPtr<IPositioning2> positioning;
-		bool parent_processed;
-		bool old_displayed;
-		bool displayed;
-		bool active;
+		DrawManager draw_manager_;
+		UpdateManager update_manager_;
+		BoxPtr<IScalable> object_;
+		BoxPtr<ISizing2> sizing_;
+		BoxPtr<IPositioning2> positioning_;
+		bool parent_processed_;
+		bool old_displayed_;
+		bool displayed_;
+		bool active_;
 		
-		static bool full_debug;
+		static bool full_debug_;
 	};
 }

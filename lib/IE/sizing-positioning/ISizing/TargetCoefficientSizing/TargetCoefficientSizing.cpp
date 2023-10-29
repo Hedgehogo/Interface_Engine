@@ -10,17 +10,17 @@ namespace ie {
 	}
 	
 	TargetCoefficientSizing::TargetCoefficientSizing(Make&& make, float) :
-		coefficient(make.coefficient), addition(make.addition) {
+		coefficient_(make.coefficient), addition_(make.addition) {
 	}
 	
-	TargetCoefficientSizing::TargetCoefficientSizing(float coefficient, float addition) : coefficient(coefficient), addition(addition) {
+	TargetCoefficientSizing::TargetCoefficientSizing(float coefficient, float addition) : coefficient_(coefficient), addition_(addition) {
 	}
 	
 	void TargetCoefficientSizing::init(float) {
 	}
 	
 	float TargetCoefficientSizing::find_size(float, float target_size) {
-		return target_size * coefficient + addition;
+		return target_size * coefficient_ + addition_;
 	}
 	
 	TargetCoefficientSizing* TargetCoefficientSizing::copy() {

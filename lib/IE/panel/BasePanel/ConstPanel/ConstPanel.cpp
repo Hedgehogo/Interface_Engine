@@ -29,7 +29,7 @@ namespace ie {
 	
 	void ConstPanel::init(InitInfo init_info) {
 		BasePanel::init(init_info);
-		object->init(init_info.copy(this->draw_manager).copy(this->update_manager));
+		object_->init(init_info.copy(this->draw_manager_).copy(this->update_manager_));
 		init_info.panel_manager.display_panel(this);
 	}
 	

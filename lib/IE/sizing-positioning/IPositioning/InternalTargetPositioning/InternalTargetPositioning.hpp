@@ -16,8 +16,8 @@ namespace ie {
 		InternalTargetPositioning* copy() override;
 	
 	protected:
-		float coefficient;
-		float offset;
+		float coefficient_;
+		float offset_;
 	};
 	
 	template<>

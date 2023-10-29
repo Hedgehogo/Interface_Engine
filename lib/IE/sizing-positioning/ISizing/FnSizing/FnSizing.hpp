@@ -33,8 +33,8 @@ namespace ie {
 		FnSizing* copy() override;
 	
 	protected:
-		FindSizeFn find_size_fn;
-		GetParentSizeFn get_parent_size_fn;
-		float normal_size;
+		FindSizeFn find_size_fn_;
+		GetParentSizeFn get_parent_size_fn_;
+		float normal_size_;
 	};
 }

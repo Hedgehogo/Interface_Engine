@@ -35,7 +35,7 @@ namespace ie {
 		bool update_interactions(sf::Vector2f mouse_position, bool active) override;
 	
 	protected:
-		std::vector<BasePanel*> panels;
-		std::vector<BasePanel*> active_panels;
+		std::vector<BasePanel*> panels_;
+		std::vector<BasePanel*> active_panels_;
 	};
 }

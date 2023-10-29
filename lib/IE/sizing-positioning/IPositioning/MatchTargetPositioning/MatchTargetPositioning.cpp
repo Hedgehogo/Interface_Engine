@@ -1,11 +1,11 @@
 #include "MatchTargetPositioning.hpp"
 
 namespace ie {
-	MatchTargetPositioning::MatchTargetPositioning(float target_coefficient, float object_coefficient, float offset) : target_coefficient(target_coefficient), object_coefficient(object_coefficient), offset(offset) {
+	MatchTargetPositioning::MatchTargetPositioning(float target_coefficient, float object_coefficient, float offset) : target_coefficient_(target_coefficient), object_coefficient_(object_coefficient), offset_(offset) {
 	}
 	
 	float MatchTargetPositioning::find_position(float, float object_size, float, float target_size) {
-		return target_size * target_coefficient - object_size * object_coefficient + offset;
+		return target_size * target_coefficient_ - object_size * object_coefficient_ + offset_;
 	}
 	
 	MatchTargetPositioning* MatchTargetPositioning::copy() {

@@ -44,9 +44,9 @@ namespace ie {
 		Sizing2* copy() override;
 	
 	protected:
-		BoxPtr<ISizing> horizontal;
-		BoxPtr<ISizing> vertical;
-		sf::RenderTarget* render_target;
+		BoxPtr<ISizing> horizontal_;
+		BoxPtr<ISizing> vertical_;
+		sf::RenderTarget* render_target_;
 	};
 	
 	template<>

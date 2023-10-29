@@ -14,6 +14,6 @@ namespace ie {
 		FnPositioning* copy() override;
 	
 	protected:
-		FindPositionFn find_position_fn;
+		FindPositionFn find_position_fn_;
 	};
 }
