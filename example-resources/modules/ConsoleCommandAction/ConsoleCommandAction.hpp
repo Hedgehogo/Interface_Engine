@@ -1,32 +1,32 @@
 #pragma once
 
 #include <string>
-#include "IE/Interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
-#include <IE/Modules/yaml-cpp/yaml.hpp>
-#include <IE/Modules/yaml-cpp/yaml-builder/base/BaseYamlBuilder.hpp>
+#include <IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp>
+#include <IE/modules/yaml-cpp/yaml.hpp>
+#include <IE/modules/yaml-cpp/yaml-builder/IYamlBuilder/BaseYamlBuilder/BaseYamlBuilder.hpp>
 
 namespace ie {
 	class ConsoleCommandAction : public BaseKeyAction {
-	protected:
-		std::string command;
-		
-		void startPressed() override;
-		
-		void stopPressed() override;
-		
-		void whilePressed() override;
-		
-		void whileNotPressed() override;
-		
 	public:
 		explicit ConsoleCommandAction(const std::string& command);
 		
 		ConsoleCommandAction* copy() override;
+	
+	protected:
+		void start_pressed() override;
+		
+		void stop_pressed() override;
+		
+		void while_pressed() override;
+		
+		void while_not_pressed() override;
+		
+		std::string command;
 	};
 	
 	template<>
 	struct DecodePointer<ConsoleCommandAction> {
-		static bool decodePointer(const YAML::Node& node, ConsoleCommandAction*& consoleCommandAction);
+		static bool decode_pointer(const YAML::Node& node, ConsoleCommandAction*& console_command_action);
 	};
 	
 	extern "C" {

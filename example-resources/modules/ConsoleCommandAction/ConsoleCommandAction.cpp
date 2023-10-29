@@ -4,28 +4,28 @@
 namespace ie {
 	ConsoleCommandAction::ConsoleCommandAction(const std::string& command) : command(command) {}
 	
-	void ConsoleCommandAction::startPressed() {}
-	
-	void ConsoleCommandAction::stopPressed() {
-		system(command.c_str());
-	}
-	
-	void ConsoleCommandAction::whilePressed() {}
-	
-	void ConsoleCommandAction::whileNotPressed() {}
-	
 	ConsoleCommandAction* ConsoleCommandAction::copy() {
 		return new ConsoleCommandAction{*this};
 	}
 	
-	bool DecodePointer<ConsoleCommandAction>::decodePointer(const YAML::Node& node, ConsoleCommandAction*& consoleCommandAction) {
-		consoleCommandAction = new ConsoleCommandAction{
+	void ConsoleCommandAction::start_pressed() {}
+	
+	void ConsoleCommandAction::stop_pressed() {
+		system(command.c_str());
+	}
+	
+	void ConsoleCommandAction::while_pressed() {}
+	
+	void ConsoleCommandAction::while_not_pressed() {}
+	
+	bool DecodePointer<ConsoleCommandAction>::decode_pointer(const YAML::Node& node, ConsoleCommandAction*& console_command_action) {
+		console_command_action = new ConsoleCommandAction{
 			node["command"].as<std::string>()
 		};
 		return true;
 	}
 	
 	void init(int argc, char *argv[]) {
-		inherit<ie::ConsoleCommandAction>("KeyAction", {"ConsoleCommandAction"});
+		inherit<ie::KeyAction, ie::ConsoleCommandAction>({"ConsoleCommandAction"});
 	}
 }
