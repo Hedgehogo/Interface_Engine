@@ -2,21 +2,29 @@
 
 namespace ie {
 	BufferNonExistentNestingLevelException::BufferNonExistentNestingLevelException(YAML::Mark mark, const std::string& name, size_t level) :
-		BaseYamlException(mark, std::string("An attempt was made to put the Buffer variable '") + name + std::string("' on a non-existent nesting level, the '") + std::to_string(level) + std::string("' level")),
-		name(name), level(level) {
+		BaseYamlException(mark), name_(name), level_(level) {
+	}
+	
+	std::string BufferNonExistentNestingLevelException::get_description() const {
+		return
+			std::string("An attempt was made to put the Buffer variable '") + name_ +
+			std::string("' on a non-existent nesting level, the '") + std::to_string(level_) + std::string("' level");
 	}
 	
 	std::string BufferNonExistentNestingLevelException::get_name() const {
-		return name;
+		return name_;
 	}
 	
 	size_t BufferNonExistentNestingLevelException::get_level() const {
-		return level;
+		return level_;
 	}
 	
 	BufferVariableNotFoundException::BufferVariableNotFoundException(const std::string& name, const std::string& type) :
-		BaseException(std::string("Failed to read buffer variable '") + name + std::string("' as '") + type + std::string("' type")),
 		name_(name), type_(type) {
+	}
+	
+	std::string BufferVariableNotFoundException::get_description() const {
+		return std::string("Failed to read buffer variable '") + name_ + std::string("' as '") + type_ + std::string("' type");
 	}
 	
 	std::string BufferVariableNotFoundException::get_name() const {
@@ -28,11 +36,16 @@ namespace ie {
 	}
 	
 	YamlBufferVariableNotFoundException::YamlBufferVariableNotFoundException(YAML::Mark mark, const BufferVariableNotFoundException& exception) :
-		BaseYamlException(mark, std::string("Failed to read buffer variable '") + exception.get_name() + std::string("' as '") + exception.get_type() + std::string("' type")),
-		exception_(exception) {
+		BaseYamlException(mark), exception_(exception) {
 	}
 	
-	BufferVariableNotFoundException YamlBufferVariableNotFoundException::get_exception() const {
+	std::string YamlBufferVariableNotFoundException::get_description() const {
+		return
+			std::string("Failed to read buffer variable '") + exception_.get_name() +
+			std::string("' as '") + exception_.get_type() + std::string("' type");
+	}
+	
+	const BufferVariableNotFoundException& YamlBufferVariableNotFoundException::get_exception() const {
 		return exception_;
 	}
 	

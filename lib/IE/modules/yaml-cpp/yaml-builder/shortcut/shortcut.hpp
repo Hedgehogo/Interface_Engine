@@ -6,9 +6,6 @@ namespace ie {
 	template<typename Base, typename Type>
 	void inherit(const std::vector<std::string>& aliases = {});
 	
-	template<typename T>
-	void inherit(std::string base_type_name, const std::vector<std::string>& aliases = {});
-	
 	template<typename Base>
 	constexpr void add_type() noexcept {
 	}

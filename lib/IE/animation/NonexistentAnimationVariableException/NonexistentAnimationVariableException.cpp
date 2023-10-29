@@ -2,6 +2,10 @@
 
 namespace ie {
 	NonexistentAnimationVariableException::NonexistentAnimationVariableException(std::string name) :
-		BaseException(std::string{"variable '"} + name + std::string{"' does not exist"}) {
+		name_(std::move(name)) {
+	}
+	
+	std::string NonexistentAnimationVariableException::get_description() const {
+		return std::string{"Variable '"} + name_ + std::string{"' does not exist."};
 	}
 }

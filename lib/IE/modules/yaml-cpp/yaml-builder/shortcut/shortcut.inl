@@ -1,7 +1,5 @@
 //included into shortcut.hpp
 
-#include "../../modules/exception/YamlBuilderDoesNotExistException/YamlBuilderDoesNotExistException.hpp"
-
 namespace ie {
 	template<typename Base, typename Type>
 	void inherit(const std::vector<std::string>& aliases) {
@@ -10,16 +8,6 @@ namespace ie {
 		
 		add_to_yaml_builders<Base>();
 		add_to_yaml_builders<Type>();
-	}
-	
-	template<typename T>
-	void inherit(std::string base_type_name, const std::vector<std::string>& aliases){
-		YamlBuilder<T>::add_aliases(aliases);
-		if (detail::BaseYamlBuilder* base = detail::yaml_builders[base_type_name]; base)
-			detail::yaml_builders[base_type_name]->add_type(&YamlBuilder<T>::builder);
-		else
-			throw YamlBuilderDoesNotExistException{base_type_name};
-		add_to_yaml_builders<T>();
 	}
 	
 	template<typename Base, typename Type, typename... Types>

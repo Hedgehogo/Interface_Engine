@@ -82,13 +82,13 @@ namespace ie {
 	}
 	
 	
-	bool Decode<sf::Vector2<size_t>>::decode(const YAML::Node& node, sf::Vector2<size_t>& vector) {
+	bool Decode<sf::Vector2<size_t> >::decode(const YAML::Node& node, sf::Vector2<size_t>& vector) {
 		if(node.IsSequence()) {
 			vector.x = node[0].as<size_t>();
 			vector.y = node[1].as<size_t>();
 		} else if(node.IsScalar()) {
 			std::string str_vector = node.as<std::string>();
-			sscanf(str_vector.c_str(), "%u,%u", &vector.x, &vector.y);
+			sscanf(str_vector.c_str(), "%zu,%zu", &vector.x, &vector.y);
 		}
 		return true;
 	}
@@ -127,7 +127,7 @@ namespace ie {
 				return true;
 			}
 			
-			size_t r{0}, g{0}, b{0}, a{255};
+			unsigned r{0}, g{0}, b{0}, a{255};
 			if(str_color.size() == 8) {
 				sscanf(str_color.c_str(), "%02x%02x%02x%02x", &r, &g, &b, &a);
 			} else if(str_color.size() == 6) {

@@ -7,6 +7,8 @@ namespace ie {
 	public:
 		NonexistentTypeYamlException(YAML::Mark mark, const std::string& type, const std::string& base);
 		
+		std::string get_description() const override;
+		
 		std::string get_type();
 		
 		std::string get_base();
@@ -20,6 +22,8 @@ namespace ie {
 	public:
 		AbstractTypeYamlException(YAML::Mark mark, const std::string& type);
 		
+		std::string get_description() const override;
+		
 		std::string get_type();
 	
 	protected:
@@ -29,6 +33,8 @@ namespace ie {
 	class FailedDetermineTypeYamlException : public BaseYamlException {
 	public:
 		FailedDetermineTypeYamlException(YAML::Mark mark, const std::string& type);
+		
+		std::string get_description() const override;
 		
 		std::string get_type();
 	

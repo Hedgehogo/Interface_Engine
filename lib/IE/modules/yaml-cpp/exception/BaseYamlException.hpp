@@ -6,9 +6,11 @@
 namespace ie {
 	class BaseYamlException : public BaseException {
 	public:
-		BaseYamlException(YAML::Mark mark, const std::string& description);
+		BaseYamlException(YAML::Mark mark);
 		
-		YAML::Mark get_mark();
+		std::string get_note() const override;
+		
+		YAML::Mark get_mark() const;
 	
 	protected:
 		YAML::Mark mark_;
