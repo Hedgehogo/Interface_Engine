@@ -118,6 +118,7 @@ namespace ie {
 		}
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxBorderHorizontal>::decode_pointer(const YAML::Node& node, BoxBorderHorizontal*& box_with_border_horizontal) {
 		auto min_size{conv_def(node["min-size"], sf::Vector2f{})};
 		
@@ -145,5 +146,7 @@ namespace ie {
 			};
 		}
 		return true;
+
 	}
+	*/
 }

@@ -69,6 +69,7 @@ namespace ie {
 	}
 	
 	
+	/*old_yaml_decode_impl
 	template<typename T>
 	bool Decode<detail::AnimatorUnitMatch::Option<T>>::decode(const YAML::Node& node, detail::AnimatorUnitMatch::Option<T>& option) {
 		std::vector<IAnimatorUnit*> nexts;
@@ -122,7 +123,9 @@ namespace ie {
 			nexts
 		};
 		return true;
+
 	}
+	*/
 	
 	template<typename T>
 	void add_next_animator_unit_for_mach(const YAML::Node& node, int i, AnimatorUnitMatch<T>*& animator_unit_match) {
@@ -135,6 +138,7 @@ namespace ie {
 		});
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<AnimatorUnitMatch<T>>::decode_pointer(const YAML::Node& node, AnimatorUnitMatch<T>*& animator_unit_match) {
 		std::vector<typename AnimatorUnitMatch<T>::Option> options;
@@ -160,5 +164,7 @@ namespace ie {
 		
 		add_unit_in_buffer(node, animator_unit_match);
 		return true;
+
 	}
+	*/
 }

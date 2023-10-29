@@ -1,6 +1,7 @@
 #include "Corner.hpp"
 
 namespace ie {
+	/*old_yaml_decode_impl
 	bool Decode<Corner>::decode(const YAML::Node& node, Corner& corner) {
 		std::string str{node.as<std::string>()};
 		if(str == "up-right") {
@@ -15,5 +16,7 @@ namespace ie {
 			throw YAML::BadConversion(node.Mark());
 		}
 		return true;
+
 	}
+	*/
 }

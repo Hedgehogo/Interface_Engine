@@ -15,8 +15,10 @@ namespace ie {
 	
 	Location2 make_location2(Location vertical, Location horizontal);
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<Location2> {
 		static bool decode(const YAML::Node& node, Location2& location2);
 	};
+	*/
 }

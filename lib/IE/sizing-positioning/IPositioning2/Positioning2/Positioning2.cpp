@@ -73,6 +73,7 @@ namespace ie {
 		return new Positioning2{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Positioning2>::decode_pointer(const YAML::Node& node, Positioning2*& positioning2) {
 		if(node.IsScalar()) {
 			positioning2 = new Positioning2{node.as<sf::Vector2f>()};
@@ -119,5 +120,7 @@ namespace ie {
 			}
 		}
 		return true;
+
 	}
+	*/
 }

@@ -48,8 +48,10 @@ namespace ie {
 		float thickness_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxConstBezel> {
 		static bool decode_pointer(const YAML::Node& node, BoxConstBezel*& box_with_const_bezel);
 	};
+	*/
 }

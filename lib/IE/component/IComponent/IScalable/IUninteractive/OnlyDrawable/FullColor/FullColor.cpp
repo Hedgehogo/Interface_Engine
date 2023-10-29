@@ -1,5 +1,5 @@
 #include "FullColor.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	FullColor::Make::Make(sf::Color color, sf::Vector2f normal_size) : color(color), normal_size(normal_size) {
@@ -47,6 +47,7 @@ namespace ie {
 		return new FullColor{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<FullColor>::decode_pointer(const YAML::Node& node, FullColor*& full_color) {
 		if(node.IsScalar()) {
 			full_color = new FullColor{node.as<sf::Color>(), {}};
@@ -57,8 +58,11 @@ namespace ie {
 			};
 		}
 		return true;
+
 	}
+	*/
 	
+	/*old_yaml_determine_impl
 	template<>
 	bool determine<FullColor>(const YAML::Node& node) {
 		if(node.IsScalar()) {
@@ -67,4 +71,5 @@ namespace ie {
 			return determine(node, {{"color", YAML::NodeType::Scalar}}, {{"normal-size"}});
 		}
 	}
+	*/
 }

@@ -65,6 +65,7 @@ namespace ie {
 		return new BasicOneKeyInteraction<T>{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<BasicOneKeyInteraction<T> >::decode_pointer(const YAML::Node& node, BasicOneKeyInteraction<T>*& one_key_interaction) {
 		one_key_interaction = new BasicOneKeyInteraction<T>{
@@ -72,5 +73,7 @@ namespace ie {
 			conv_def(node["key"], Key::MouseLeft)
 		};
 		return true;
+
 	}
+	*/
 }

@@ -42,18 +42,22 @@ namespace ie {
 		initialized_(false), active_(true) {
 	}
 	
+	/*
 	Interface::Interface(const std::string& file_path, AnimationManager animation_manager, BoxPtr<InteractionStack>&& interaction_stack) :
 		Interface(BoxPtr{ie::load_from_yaml<ie::IScalable>(file_path)}, animation_manager, std::move(interaction_stack)) {
 	}
+	*/
 	
 	Interface::Interface(sf::RenderWindow& window, BoxPtr<IScalable>&& object, AnimationManager animation_manager, BoxPtr<InteractionStack>&& interaction_stack) :
 		Interface(std::move(object), animation_manager, std::move(interaction_stack)) {
 		init(window);
 	}
 	
+	/*
 	Interface::Interface(sf::RenderWindow& window, const std::string& file_path, AnimationManager animation_manager, BoxPtr<InteractionStack>&& interaction_stack) :
 		Interface(window, BoxPtr{ie::load_from_yaml<ie::IScalable>(file_path)}, animation_manager, std::move(interaction_stack)) {
 	}
+	*/
 	
 	Interface::Interface(sf::RenderWindow& window, BoxPtr<IScalable::Make>&& object, AnimationManager animation_manager, BoxPtr<InteractionStack>&& interaction_stack) :
 		window_(&window),
@@ -205,6 +209,7 @@ namespace ie {
 		set_size(sf::Vector2f(window_size));
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Interface>::decode_pointer(const YAML::Node& node, Interface*& interface) {
 		interface = new Interface{
 			node["object"].as<BoxPtr<IScalable> >(),
@@ -212,6 +217,7 @@ namespace ie {
 			BoxPtr{conv_def_ptr<InteractionStack, InteractionStack>(node["interaction-stack"])}
 		};
 		return true;
+
 	}
 	
 	Interface make_interface(const std::filesystem::path& file_path, int argc, char* argv[]) {
@@ -254,4 +260,5 @@ namespace ie {
 			BoxPtr{conv_def_ptr<InteractionStack, InteractionStack>(node["interaction-stack"])}
 		};
 	}
+	*/
 }

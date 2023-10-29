@@ -56,8 +56,10 @@ namespace ie {
 		bool active_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxRenderTexture> {
 		static bool decode_pointer(const YAML::Node& node, BoxRenderTexture*& box_with_render_texture);
 	};
+	*/
 }

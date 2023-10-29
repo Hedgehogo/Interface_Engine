@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics/RenderTarget.hpp>
-#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class ISizing {

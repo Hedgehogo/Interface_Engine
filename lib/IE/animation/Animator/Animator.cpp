@@ -54,11 +54,14 @@ namespace ie {
 		}
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Animator>::decode_pointer(const YAML::Node& node, Animator*& animator) {
 		animator = new Animator{
 			node["unit"] ? std::vector<IAnimatorUnit*>{node["unit"].as<IAnimatorUnit*>()} : node["units"].as<std::vector<IAnimatorUnit*>>(),
 			(node["speed"] ? Buffer::get<Sfloat>(node["speed"]) : std::make_shared<Sfloat>(1))
 		};
 		return true;
+
 	}
+	*/
 }

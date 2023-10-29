@@ -171,6 +171,7 @@ namespace ie {
 		return result;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxShader>::decode_pointer(const YAML::Node& node, BoxShader*& box_with_shader) {
 		sf::Shader* shader{new sf::Shader{}};
 		if(node["shader"]) {
@@ -189,5 +190,7 @@ namespace ie {
 			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
+
 	}
+	*/
 }

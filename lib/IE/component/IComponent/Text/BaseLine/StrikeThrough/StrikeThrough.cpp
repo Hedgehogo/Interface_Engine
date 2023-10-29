@@ -34,11 +34,14 @@ namespace ie {
 		return new StrikeThrough{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<StrikeThrough>::decode_pointer(const YAML::Node& node, StrikeThrough*& strike_through) {
 		strike_through = new StrikeThrough{
 			conv_def<orl::Option<sf::Color>>(node["color"], {}),
 			conv_def(node["strike-through-offset"], 0.3f)
 		};
 		return true;
+
 	}
+	*/
 }

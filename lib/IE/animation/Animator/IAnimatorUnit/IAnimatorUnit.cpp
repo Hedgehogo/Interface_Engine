@@ -1,6 +1,7 @@
 #include "IAnimatorUnit.hpp"
 
 namespace ie {
+	/*old_yaml
 	std::vector<IAnimatorUnit*> get_animator_units(const YAML::Node& node, std::string name_next_node) {
 		std::vector<IAnimatorUnit*> result{};
 		
@@ -20,4 +21,5 @@ namespace ie {
 		
 		return result;
 	}
+	*/
 }

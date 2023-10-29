@@ -12,6 +12,7 @@ namespace ie {
 		return std::count(arr.begin(), arr.end(), str) == 0;
 	}
 	
+	/*old_yaml
 	bool video_convert(const YAML::Node& node, OnlyDrawable*& video) {
 #ifdef IE_ImageMagick_FOUND
 		if(!node["offset"] && is_video(node["path"].as<std::string>())) {
@@ -33,4 +34,5 @@ namespace ie {
 #endif
 		return true;
 	}
+	*/
 }

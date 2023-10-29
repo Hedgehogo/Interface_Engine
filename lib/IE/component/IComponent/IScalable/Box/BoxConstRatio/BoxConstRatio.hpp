@@ -88,8 +88,10 @@ namespace ie {
 		float aspect_ratio_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxConstRatio> {
 		static bool decode_pointer(const YAML::Node& node, BoxConstRatio*& box_with_const_ratio);
 	};
+	*/
 }

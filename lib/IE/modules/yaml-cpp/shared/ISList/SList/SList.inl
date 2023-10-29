@@ -60,6 +60,7 @@ namespace ie {
 		set();
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<SList<T> >::decode_pointer(const YAML::Node& node, SList<T>*& with_list) {
 		if(node["list"]) {
@@ -76,5 +77,7 @@ namespace ie {
 			with_list = new SList <T>{list};
 		}
 		return true;
+
 	}
+	*/
 }

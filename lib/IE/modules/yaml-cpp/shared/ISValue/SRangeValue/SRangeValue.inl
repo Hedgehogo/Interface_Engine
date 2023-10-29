@@ -38,9 +38,12 @@ namespace ie {
 			set(this->value_);
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<SRangeValue<T> >::decode_pointer(const YAML::Node& node, SRangeValue<T>*& sRange_value) {
 		sRange_value = new SRangeValue<T>{conv_def<T>(node["value"], {})};
 		return true;
+
 	}
+	*/
 }

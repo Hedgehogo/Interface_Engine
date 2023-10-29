@@ -2,7 +2,6 @@
 
 #include <regex>
 #include "../shared/IShared.hpp"
-#include "../yaml-builder/IYamlBuilder/YamlBuilder/YamlBuilder.hpp"
 #include "BufferException/BufferException.hpp"
 
 namespace ie {

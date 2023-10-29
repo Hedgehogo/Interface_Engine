@@ -91,6 +91,7 @@ namespace ie {
 		return new BoxSwitcherTabs{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxSwitcherTabs>::decode_pointer(const YAML::Node& node, BoxSwitcherTabs*& switcher_tabs) {
 		switcher_tabs = new BoxSwitcherTabs{
 			node["objects"].as<std::vector<BoxPtr<IScalable> > >(),
@@ -100,5 +101,7 @@ namespace ie {
 			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
+
 	}
+	*/
 }

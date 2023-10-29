@@ -1,5 +1,5 @@
 #include "SwitchTabsAction.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	SwitchTabsAction::Make::Make(size_t index) : index(index) {
@@ -38,8 +38,11 @@ namespace ie {
 		return new SwitchTabsAction{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<SwitchTabsAction>::decode_pointer(const YAML::Node& node, SwitchTabsAction*& change_object_action) {
 		change_object_action = new SwitchTabsAction{conv_def(node["index"], 0u)};
 		return true;
+
 	}
+	*/
 }

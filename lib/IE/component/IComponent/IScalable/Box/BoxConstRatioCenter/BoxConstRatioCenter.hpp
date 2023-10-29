@@ -98,8 +98,10 @@ namespace ie {
 		bool render_second_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxConstRatioCenter> {
 		static bool decode_pointer(const YAML::Node& node, BoxConstRatioCenter*& box_with_const_ratio_center);
 	};
+	*/
 }

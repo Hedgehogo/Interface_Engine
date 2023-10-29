@@ -22,8 +22,10 @@ namespace ie {
 		ClickHidePanelInteraction* copy() override;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<ClickHidePanelInteraction> {
 		static bool decode_pointer(const YAML::Node& node, ClickHidePanelInteraction*& click_hide_panel_interaction);
 	};
+	*/
 }

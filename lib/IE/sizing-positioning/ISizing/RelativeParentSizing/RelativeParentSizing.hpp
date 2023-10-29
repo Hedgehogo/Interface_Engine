@@ -29,8 +29,10 @@ namespace ie {
 		float addition_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<RelativeParentSizing> {
 		static bool decode_pointer(const YAML::Node& node, RelativeParentSizing*& relative_parent_sizing);
 	};
+	*/
 }

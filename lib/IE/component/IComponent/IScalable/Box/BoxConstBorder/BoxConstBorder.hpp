@@ -53,8 +53,10 @@ namespace ie {
 		Side side_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxConstBorder> {
 		static bool decode_pointer(const YAML::Node& node, BoxConstBorder*& box_with_const_border);
 	};
+	*/
 }

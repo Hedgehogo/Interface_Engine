@@ -26,6 +26,7 @@ namespace ie {
 		return get_min_size_base();
 	}
 	
+	/*old_yaml_decode_impl
 	bool Decode<BaseResizer::Align>::decode(const YAML::Node& node, BaseResizer::Align& align) {
 		if(node.as<std::string>() == "left") {
 			align = BaseResizer::Align::Left;
@@ -37,8 +38,11 @@ namespace ie {
 			throw YAML::BadConversion{node.Mark()};
 		}
 		return true;
+
 	}
+	*/
 	
+	/*old_yaml_decode_impl
 	bool Decode<BaseResizer::Algorithm>::decode(const YAML::Node& node, BaseResizer::Algorithm& align) {
 		if(node.as<std::string>() == "base") {
 			align = BaseResizer::Algorithm::Base;
@@ -50,5 +54,7 @@ namespace ie {
 			throw YAML::BadConversion{node.Mark()};
 		}
 		return true;
+
 	}
+	*/
 }

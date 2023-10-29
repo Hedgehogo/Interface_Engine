@@ -53,6 +53,7 @@ namespace ie {
 		return new BoxAlternative{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxAlternative>::decode_pointer(const YAML::Node& node, BoxAlternative*& box_with_alternative_object) {
 		box_with_alternative_object = new BoxAlternative{
 			node["top-object"].as<BoxPtr<IScalable> >(),
@@ -60,5 +61,7 @@ namespace ie {
 			conv_def(node["min-size"], sf::Vector2f{}),
 		};
 		return true;
+
 	}
+	*/
 }

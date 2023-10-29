@@ -73,6 +73,7 @@ namespace ie {
 		return Location2::Center;
 	}
 	
+	/*old_yaml_decode_impl
 	bool Decode<Location2>::decode(const YAML::Node& node, Location2& location2) {
 		std::string str{node.as<std::string>()};
 		
@@ -98,5 +99,7 @@ namespace ie {
 			location2 = make_location2(node["vertical"].as<Location>(), node["horizontal"].as<Location>());
 		}
 		return true;
+
 	}
+	*/
 }

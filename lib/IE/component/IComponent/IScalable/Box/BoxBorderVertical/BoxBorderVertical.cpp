@@ -111,6 +111,7 @@ namespace ie {
 		return new BoxBorderVertical{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxBorderVertical>::decode_pointer(const YAML::Node& node, BoxBorderVertical*& box_with_border_vertical) {
 		auto min_size{conv_def(node["min-size"], sf::Vector2f{})};
 		
@@ -138,7 +139,9 @@ namespace ie {
 			};
 		}
 		return true;
+
 	}
+	*/
 	
 	void BoxBorderVertical::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);

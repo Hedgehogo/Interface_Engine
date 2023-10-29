@@ -17,6 +17,7 @@ namespace ie {
 	}
 	
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ChangeVariableBySinusoid>::decode_pointer(const YAML::Node& node, ChangeVariableBySinusoid*& change_variable_by_sinusoid) {
 		change_variable_by_sinusoid = new ChangeVariableBySinusoid{
 			node["size"].as<float>(),
@@ -27,5 +28,7 @@ namespace ie {
 		};
 		
 		return true;
+
 	}
+	*/
 }

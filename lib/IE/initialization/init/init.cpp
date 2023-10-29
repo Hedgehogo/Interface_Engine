@@ -1,5 +1,4 @@
 #include "init.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/shortcut/shortcut.hpp"
 #include "IE/sizing-positioning/ISizing/Functions/determine_sizing/determine_sizing.hpp"
 #include "IE/sizing-positioning/ISizing2/Functions/determine_sizing2/determine_sizing2.hpp"
 #include "IE/sizing-positioning/IPositioning/Functions/determine_positioning/determine_positioning.hpp"
@@ -14,6 +13,7 @@
 #endif
 
 namespace ie {
+	/*
 	void yaml_builder_init_sfloat() {
 		inherit<ISfloat, Sfloat>({"Float"});
 		inherit<ISfloat, ISCoefficientValue>();
@@ -37,15 +37,17 @@ namespace ie {
 		inherit<ISVector2, SVec2i>({"Vec2I"});
 		inherit<ISVector2, SRVec2i>({"RVec2I"});
 	}
+	*/
 	
 	void init(int argc, char *argv[], std::filesystem::path modules_list) {
 #ifdef IE_ImageMagick_FOUND
 		Magick::InitializeMagick("");
 #endif
-		yaml_builder_init();
+		//yaml_builder_init();
 		load_modules(argc, argv, modules_list);
 	}
 	
+	/*
 	void yaml_builder_init() {
 		yaml_builder_init_sint();
 		yaml_builder_init_sfloat();
@@ -184,4 +186,5 @@ namespace ie {
 		add_determine<KeysInteraction>(determine_url);
 		add_determine<BasicKeysInteraction<Text&>>(determine_url);
 	}
+	 */
 }

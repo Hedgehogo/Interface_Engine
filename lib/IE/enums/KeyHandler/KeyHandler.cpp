@@ -310,6 +310,7 @@ namespace ie {
 		return "unknown";
 	}
 	
+	/*old_yaml_decode_impl
 	bool Decode<Key>::decode(const YAML::Node& node, Key& key) {
 		std::string str = node.as<std::string>();
 		if(str == "a")
@@ -543,7 +544,9 @@ namespace ie {
 		else
 			key = Key::Unknown;
 		return true;
+
 	}
+	*/
 	
 	std::string to_string(Key key) {
 		return KeyHandler::to_string(key);
@@ -553,9 +556,11 @@ namespace ie {
 		return KeyHandler::is_key_pressed(key);
 	}
 	
+	/*old_yaml
 	Key make_key_from_yaml(YAML::Node node) {
 		Key key;
 		Decode<Key>::decode(node, key);
 		return key;
 	}
+	*/
 }

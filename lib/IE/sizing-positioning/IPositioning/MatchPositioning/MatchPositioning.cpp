@@ -12,6 +12,7 @@ namespace ie {
 		return new MatchPositioning{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<MatchPositioning>::decode_pointer(const YAML::Node& node, MatchPositioning*& match_positioning) {
 		match_positioning = new MatchPositioning{
 			node["parent-coefficient"].as<float>(),
@@ -19,5 +20,7 @@ namespace ie {
 			conv_def(node["offset"], 0.f)
 		};
 		return true;
+
 	}
+	*/
 }

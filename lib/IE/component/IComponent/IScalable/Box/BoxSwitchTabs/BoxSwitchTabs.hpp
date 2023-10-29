@@ -58,8 +58,10 @@ namespace ie {
 		PSValue<size_t> value_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxSwitchTabs> {
 		static bool decode_pointer(const YAML::Node& node, BoxSwitchTabs*& box_with_changeable_objects);
 	};
+	*/
 }

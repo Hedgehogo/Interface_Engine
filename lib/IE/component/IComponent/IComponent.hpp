@@ -4,7 +4,6 @@
 #include "IE/component/IUpdatable/UpdateManager/UpdateManager.hpp"
 #include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "IE/interaction/InteractionManager/InteractionManager.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
 #include "IE/animation/AnimationManager/AnimationManager.hpp"
 #include "IE/initialization/make/make.hpp"
 #include "IE/utils/reduce/reduce.hpp"

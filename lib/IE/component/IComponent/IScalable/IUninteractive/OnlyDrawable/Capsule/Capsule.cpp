@@ -63,8 +63,11 @@ namespace ie {
 		return layout_;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Capsule>::decode_pointer(const YAML::Node& node, Capsule*& capsule) {
 		capsule = new Capsule{node["color"].as<sf::Color>()};
 		return true;
+
 	}
+	*/
 }

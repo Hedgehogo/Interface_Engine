@@ -87,6 +87,7 @@ namespace ie {
 		return new BasicKeysInteraction<T>{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<BasicKeysInteraction<T> >::decode_pointer(const YAML::Node& node, BasicKeysInteraction<T> *& keys_interaction) {
 		if(node.IsScalar()) {
@@ -100,5 +101,7 @@ namespace ie {
 			conv_def<std::vector<Key> >(node["black-list_keys"], {})
 		};
 		return true;
+
 	}
+	*/
 }

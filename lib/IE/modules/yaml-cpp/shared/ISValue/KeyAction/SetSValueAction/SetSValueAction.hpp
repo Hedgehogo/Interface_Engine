@@ -35,10 +35,12 @@ namespace ie {
 		T constant_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<typename T>
 	struct DecodePointer<SetSValueAction<T> > {
 		static bool decode_pointer(const YAML::Node& node, SetSValueAction<T>*& set_s_value_action);
 	};
+	*/
 	
 	using SetSIntAction = SetSValueAction<int>;
 	using SetSFloatAction = SetSValueAction<float>;

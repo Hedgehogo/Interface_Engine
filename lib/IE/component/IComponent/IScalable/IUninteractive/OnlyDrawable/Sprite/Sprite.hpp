@@ -2,7 +2,8 @@
 
 #include "../OnlyDrawable.hpp"
 #include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class Sprite : public OnlyDrawable {
@@ -44,11 +45,15 @@ namespace ie {
 		sf::Vector2f minimum_size;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Sprite> {
 		static bool decode_pointer(const YAML::Node& node, Sprite*& sprite);
 	};
+	*/
 	
+	/*old_yaml_determine
 	template<>
 	bool determine<Sprite>(const YAML::Node& node);
+	*/
 }

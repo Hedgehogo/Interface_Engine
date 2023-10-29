@@ -33,8 +33,10 @@ namespace ie {
 		BoxPtr<IScalable> object_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxMakePermeable> {
 		static bool decode_pointer(const YAML::Node& node, BoxMakePermeable*& box_make_permeable);
 	};
+	*/
 }

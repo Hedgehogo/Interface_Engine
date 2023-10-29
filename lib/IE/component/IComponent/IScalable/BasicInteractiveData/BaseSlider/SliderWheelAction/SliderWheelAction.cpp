@@ -51,6 +51,7 @@ namespace ie {
 		return new SliderWheelAction{*this};
 	}
 	
+	/*old_yaml_decode_impl
 	bool Decode<SliderWheelAction::Relativity>::decode(const YAML::Node& node, SliderWheelAction::Relativity& relativity) {
 		if(convert_bool(node, "relation-area", "relation-slider")) {
 			relativity = SliderWheelAction::Relativity::RelationArea;
@@ -58,5 +59,7 @@ namespace ie {
 			relativity = SliderWheelAction::Relativity::RelationSlider;
 		}
 		return true;
+
 	}
+	*/
 }

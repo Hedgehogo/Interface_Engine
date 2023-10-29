@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IMovePanelInteraction.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class CoefficientMovePanelInteraction : public BasePanelInteraction, public virtual IMovePanelInteraction {
@@ -32,8 +32,10 @@ namespace ie {
 		bool at_start_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<CoefficientMovePanelInteraction> {
 		static bool decode_pointer(const YAML::Node& node, CoefficientMovePanelInteraction*& coefficient_move_panel_interaction);
 	};
+	*/
 }

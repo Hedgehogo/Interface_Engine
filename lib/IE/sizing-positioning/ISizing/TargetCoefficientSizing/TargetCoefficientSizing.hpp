@@ -29,8 +29,10 @@ namespace ie {
 		float addition_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<TargetCoefficientSizing> {
 		static bool decode_pointer(const YAML::Node& node, TargetCoefficientSizing*& target_coefficient_sizing);
 	};
+	*/
 }

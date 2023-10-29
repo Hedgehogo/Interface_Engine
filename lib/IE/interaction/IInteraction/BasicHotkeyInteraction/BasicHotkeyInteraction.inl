@@ -121,6 +121,7 @@ namespace ie {
 		return new BasicHotkeyInteraction<T>{*this};
 	}
 	
+	/*old_yaml_decode_impl
 	template<typename T>
 	bool Decode<detail::BasicHotkeyInteractionHotkey<T>*>::decode(const YAML::Node& node, detail::BasicHotkeyInteractionHotkey<T>*& hotkey) {
 		hotkey = new detail::BasicHotkeyInteractionHotkey<T>{
@@ -128,5 +129,7 @@ namespace ie {
 			conv_def(node["state"], std::numeric_limits<size_t>::max())
 		};
 		return true;
+
 	}
+	*/
 }

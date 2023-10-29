@@ -123,6 +123,7 @@ namespace ie {
 		return nullptr;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<InteractiveTextBlock>::decode_pointer(const YAML::Node& node, InteractiveTextBlock*& interactive_text_block) {
 		interactive_text_block = new InteractiveTextBlock{
 			node["interaction"].as < BoxPtr < IBaseInteraction > > (),
@@ -138,5 +139,7 @@ namespace ie {
 			conv_def<orl::Option<sf::Color> >(node["inactive-background-selection-color"], {})
 		};
 		return true;
+
 	}
+	*/
 }

@@ -42,8 +42,10 @@ namespace ie {
 		sf::RenderTarget* render_target_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Positioning2> {
 		static bool decode_pointer(const YAML::Node& node, Positioning2*& positioning2);
 	};
+	*/
 }

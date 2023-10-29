@@ -325,6 +325,7 @@ namespace ie {
 		return nullptr;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Text>::decode_pointer(const YAML::Node& node, Text*& text) {
 		sf::Color text_color{conv_def(node["text-color"], sf::Color::Black)};
 		
@@ -342,7 +343,9 @@ namespace ie {
 			conv_def_box_ptr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::Left),
 			node["text-interaction"] ? node["text-interaction"].as < BoxPtr < IBasicInteraction<Text&>>>() : make_box_ptr<BasicEmptyInteraction<Text&>>()};
 		return true;
+
 	}
+	*/
 	
 	void Text::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		for(BaseCharacter*& character: text_characters) {

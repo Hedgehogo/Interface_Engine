@@ -55,8 +55,10 @@ namespace ie {
 		std::vector<float> bounds_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxBorderVertical> {
 		static bool decode_pointer(const YAML::Node& node, BoxBorderVertical*& box_with_border_vertical);
 	};
+	*/
 }

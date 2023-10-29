@@ -38,11 +38,14 @@ namespace ie {
 		return new BoxMakePermeable{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxMakePermeable>::decode_pointer(const YAML::Node& node, BoxMakePermeable*& box_make_permeable) {
 		box_make_permeable = new BoxMakePermeable{
 			node["object"].as<BoxPtr<IScalable> >(),
 			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
+
 	}
+	*/
 }

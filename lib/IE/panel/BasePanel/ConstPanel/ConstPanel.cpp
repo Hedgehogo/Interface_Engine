@@ -45,6 +45,7 @@ namespace ie {
 		return new ConstPanel{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ConstPanel>::decode_pointer(const YAML::Node& node, ConstPanel*& const_panel) {
 		const_panel = new ConstPanel{
 			node["object"].as<BoxPtr<IScalable> >(),
@@ -53,5 +54,7 @@ namespace ie {
 			conv_def(node["displayed"], false)
 		};
 		return true;
+
 	}
+	*/
 }

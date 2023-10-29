@@ -32,6 +32,7 @@ namespace ie {
 		return new CoefficientMovePanelInteraction{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<CoefficientMovePanelInteraction>::decode_pointer(const YAML::Node& node, CoefficientMovePanelInteraction*& coefficient_move_panel_interaction) {
 		sf::Vector2f coefficient;
 		sf::Vector2f offset;
@@ -44,5 +45,7 @@ namespace ie {
 		
 		coefficient_move_panel_interaction = new CoefficientMovePanelInteraction{coefficient, offset, at_start};
 		return true;
+
 	}
+	*/
 }

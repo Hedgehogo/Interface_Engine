@@ -97,6 +97,7 @@ namespace ie {
 		return new BoxConstCenter{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxConstCenter>::decode_pointer(const YAML::Node& node, BoxConstCenter*& box_with_const_center) {
 		box_with_const_center = new BoxConstCenter{
 			node["const-object"].as<BoxPtr<IScalable> >(),
@@ -105,5 +106,7 @@ namespace ie {
 			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
+
 	}
+	*/
 }

@@ -1,6 +1,6 @@
 #include "Sprite.hpp"
 #include <algorithm>
-#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	Sprite::Make::Make(sf::Texture& texture, sf::IntRect rect, sf::Vector2f min_size) :
@@ -59,6 +59,7 @@ namespace ie {
 		return new Sprite{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Sprite>::decode_pointer(const YAML::Node& node, Sprite*& sprite) {
 		if(node["rect"]) {
 			sprite = new Sprite{
@@ -73,8 +74,11 @@ namespace ie {
 			};
 		}
 		return true;
+
 	}
+	*/
 	
+	/*old_yaml_determine_impl
 	template<>
 	bool determine<Sprite>(const YAML::Node& node) {
 		return determine(node, {{"texture"}}, {
@@ -82,4 +86,5 @@ namespace ie {
 			{"min-size"}
 		});
 	}
+	*/
 }

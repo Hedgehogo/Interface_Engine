@@ -248,6 +248,7 @@ namespace ie {
 		}
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Caption>::decode_pointer(const YAML::Node& node, Caption*& caption) {
 		caption = new Caption{
 			node["text"].as<sf::String>(),
@@ -262,5 +263,7 @@ namespace ie {
 			conv_def(node["cut-back"], true)
 		};
 		return true;
+
 	}
+	*/
 }

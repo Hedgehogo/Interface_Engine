@@ -30,6 +30,7 @@ namespace ie {
 		std::destroy(animators_.begin(), animators_.end());
 	}
 	
+	/*old_yaml_decode_impl
 	bool Decode<AnimationManager>::decode(const YAML::Node& node, AnimationManager& animation_manager) {
 		animation_manager = AnimationManager{
 			node["animator"] ? std::vector<Animator*>{node["animator"].as<Animator*>()} : node["animators"].as<std::vector<Animator*> >()
@@ -38,5 +39,7 @@ namespace ie {
 		animator_unit_request_update();
 		
 		return true;
+
 	}
+	*/
 }

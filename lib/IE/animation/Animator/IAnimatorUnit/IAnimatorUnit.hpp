@@ -17,5 +17,7 @@ namespace ie {
 		virtual ~IAnimatorUnit() = default;
 	};
 	
+	/*old_yaml
 	std::vector<IAnimatorUnit*> get_animator_units(const YAML::Node& node, std::string name_next_node = "next");
+	*/
 }

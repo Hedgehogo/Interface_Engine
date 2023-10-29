@@ -179,6 +179,7 @@ namespace ie {
 		return nullptr;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<TextBlock>::decode_pointer(const YAML::Node& node, TextBlock*& text_block) {
 		if(node.IsScalar()) {
 			text_block = new TextBlock{node.as<std::u32string>()};
@@ -197,10 +198,14 @@ namespace ie {
 			};
 		}
 		return true;
+
 	}
+	*/
 	
+	/*old_yaml_determine_impl
 	template<>
 	bool determine<TextBlock>(const YAML::Node& node) {
 		return node.IsScalar();
 	}
+	*/
 }

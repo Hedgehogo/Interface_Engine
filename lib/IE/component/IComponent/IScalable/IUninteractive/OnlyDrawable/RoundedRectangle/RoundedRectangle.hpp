@@ -41,11 +41,14 @@ namespace ie {
 		float radius;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<RoundedRectangle> {
 		static bool decode_pointer(const YAML::Node& node, RoundedRectangle*& rounded_rectangle);
 	};
-	
+	*/
+	/*old_yaml_determine
 	template<>
 	bool determine<RoundedRectangle>(const YAML::Node& node);
+	*/
 }

@@ -38,8 +38,10 @@ namespace ie {
 		sf::CircleShape circle;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Capsule> {
 		static bool decode_pointer(const YAML::Node& node, Capsule*& capsule);
 	};
+	*/
 }

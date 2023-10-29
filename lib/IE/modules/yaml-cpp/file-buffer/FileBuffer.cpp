@@ -40,7 +40,7 @@ namespace ie {
 					number += node["offset"].as<int>();
 			} else {
 				if(node["line"])
-					node["line"] >> line;
+					line = node["line"].as<size_t>();
 				if(node["line-offset"])
 					line += node["line-offset"].as<int>();
 				for(size_t i = 0; i < line; ++i) {
@@ -48,7 +48,7 @@ namespace ie {
 				}
 				if(node["number"]) {
 					try {
-						node["number"] >> number;
+						number = node["number"].as<size_t>();
 						if(node["offset"])
 							number += node["offset"].as<int>();
 					} catch(YAML::BadConversion& e) {
@@ -93,6 +93,7 @@ namespace ie {
 		return std::basic_string<Uint32>{};
 	}
 	
+	/*old_yaml_decode_impl
 	bool Decode<std::basic_string<char32_t>>::decode(const YAML::Node& node, std::basic_string<char32_t>& string32) {
 		if(node.IsScalar()) {
 			std::string str = node.as<std::string>();
@@ -145,8 +146,11 @@ namespace ie {
 			}
 		}
 		return true;
+
 	}
+	*/
 	
+	/*old_yaml_decode_impl
 	bool Decode<sf::String>::decode(const YAML::Node& node, sf::String& sf_string) {
 		if(node.IsScalar()) {
 			sf_string = sf::String(node.as<std::string>());
@@ -156,17 +160,25 @@ namespace ie {
 			sf_string = {u32_string_to_uint32_string(str)};
 		}
 		return true;
+
 	}
+	*/
 	
+	/*old_yaml_decode_impl
 	bool Decode<sf::Texture*>::decode(const YAML::Node& node, sf::Texture*& texture) {
 		texture = &FileBuffer<sf::Texture>::get(node.as<std::string>());
 		return true;
+
 	}
+	*/
 	
+	/*old_yaml_decode_impl
 	bool Decode<sf::Font*>::decode(const YAML::Node& node, sf::Font*& font) {
 		font = &FileBuffer<sf::Font>::get(node.as<std::string>());
 		return true;
+
 	}
+	*/
 	
 #ifdef IE_ImageMagick_FOUND
 	void LoadFromFile<std::vector<sf::Texture>>::load(std::vector<sf::Texture>& object, std::string name) {
@@ -203,9 +215,12 @@ namespace ie {
 		
 	}
 	
+	/*old_yaml_decode_impl
 	bool Decode<std::vector<sf::Texture>*>::decode(const YAML::Node& node, std::vector<sf::Texture>*& video) {
 		video = &FileBuffer<std::vector<sf::Texture>>::get(node.as<std::string>());
 		return true;
+
 	}
+	*/
 #endif
 }

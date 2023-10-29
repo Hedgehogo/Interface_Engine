@@ -84,6 +84,7 @@ namespace ie {
 		
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxBackground>::decode_pointer(const YAML::Node& node, BoxBackground*& box_with_background) {
 		box_with_background = new BoxBackground{
 			node["object"].as<BoxPtr<IScalable> >(),
@@ -92,5 +93,7 @@ namespace ie {
 			conv_def(node["min-size"], sf::Vector2f{}),
 		};
 		return true;
+
 	}
+	*/
 }

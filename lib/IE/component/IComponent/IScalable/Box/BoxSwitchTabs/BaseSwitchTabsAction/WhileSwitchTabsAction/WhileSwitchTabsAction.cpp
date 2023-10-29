@@ -42,8 +42,10 @@ namespace ie {
 		return new WhileSwitchTabsAction{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<WhileSwitchTabsAction>::decode_pointer(const YAML::Node&, WhileSwitchTabsAction*& while_changing_objects_action) {
 		while_changing_objects_action = new WhileSwitchTabsAction{};
 		return true;
 	}
+	*/
 }

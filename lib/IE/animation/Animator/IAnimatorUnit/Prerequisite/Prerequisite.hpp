@@ -29,8 +29,10 @@ namespace ie {
 		PISbool valve_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Prerequisite> {
 		static bool decode_pointer(const YAML::Node& node, Prerequisite*& prerequisite);
 	};
+	*/
 }

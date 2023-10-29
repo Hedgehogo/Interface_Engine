@@ -3,7 +3,7 @@
 #include "../BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 #include <string>
 #include "IE/modules/yaml-cpp/yaml.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	template<typename T>
@@ -45,10 +45,12 @@ namespace ie {
 	
 	using OpenUrlAction = BasicOpenUrlAction<>;
 	
+	/*old_yaml_decode_pointer
 	template<typename T>
 	struct DecodePointer<BasicOpenUrlAction<T> > {
 		static bool decode_pointer(const YAML::Node& node, BasicOpenUrlAction<T>*& open_url_interaction);
 	};
+	*/
 	
 	bool determine_url(const YAML::Node& node);
 }

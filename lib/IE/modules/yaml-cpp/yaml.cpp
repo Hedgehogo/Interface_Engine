@@ -58,6 +58,7 @@ namespace ie {
 	}
 	
 	
+	/*old_yaml_decode_impl
 	bool Decode<sf::Vector2<float>>::decode(const YAML::Node& node, sf::Vector2<float>& vector) {
 		if(node.IsSequence()) {
 			vector.x = node[0].as<float>();
@@ -67,9 +68,12 @@ namespace ie {
 			sscanf(str_vector.c_str(), "%f,%f", &vector.x, &vector.y);
 		}
 		return true;
+
 	}
+	*/
 	
 	
+	/*old_yaml_decode_impl
 	bool Decode<sf::Vector2<int>>::decode(const YAML::Node& node, sf::Vector2<int>& vector) {
 		if(node.IsSequence()) {
 			vector.x = node[0].as<int>();
@@ -79,9 +83,12 @@ namespace ie {
 			sscanf(str_vector.c_str(), "%i,%i", &vector.x, &vector.y);
 		}
 		return true;
+
 	}
+	*/
 	
 	
+	/*old_yaml_decode_impl
 	bool Decode<sf::Vector2<size_t> >::decode(const YAML::Node& node, sf::Vector2<size_t>& vector) {
 		if(node.IsSequence()) {
 			vector.x = node[0].as<size_t>();
@@ -91,9 +98,12 @@ namespace ie {
 			sscanf(str_vector.c_str(), "%zu,%zu", &vector.x, &vector.y);
 		}
 		return true;
+
 	}
+	*/
 	
 	
+	/*old_yaml_decode_impl
 	bool Decode<sf::Color>::decode(const YAML::Node& node, sf::Color& color) {
 		if(node.IsSequence()) {
 			if(node.size() >= 3) {
@@ -138,9 +148,12 @@ namespace ie {
 			color = {sf::Uint8(r), sf::Uint8(g), sf::Uint8(b), sf::Uint8(a)};
 		}
 		return true;
+
 	}
+	*/
 	
 	
+	/*old_yaml_decode_impl
 	bool Decode<sf::Text::Style>::decode(const YAML::Node& node, sf::Text::Style& style) {
 		std::map<std::string, sf::Text::Style> style_map{
 			{"Regular",       sf::Text::Style::Regular},
@@ -164,9 +177,12 @@ namespace ie {
 			throw YAML::BadConversion{node.Mark()};
 		}
 		return true;
+
 	}
+	*/
 	
 	
+	/*old_yaml_decode_impl
 	bool Decode<sf::Mouse::Button>::decode(const YAML::Node& node, sf::Mouse::Button& button) {
 		if(node.as<std::string>() == "right")
 			button = sf::Mouse::Button::Right;
@@ -183,9 +199,12 @@ namespace ie {
 		else
 			throw YAML::BadConversion{node.Mark()};
 		return true;
+
 	}
+	*/
 	
 	
+	/*old_yaml_decode_impl
 	bool Decode<sf::Shader>::decode(const YAML::Node& node, sf::Shader& shader) {
 		std::string vert;
 		std::string frag;
@@ -205,5 +224,7 @@ namespace ie {
 			}
 		}
 		return true;
+
 	}
+	*/
 }

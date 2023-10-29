@@ -68,6 +68,7 @@ namespace ie {
 		panel_->draw_debug(render_target, 0, indent_addition, hue, hue_offset);
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ButtonPanel>::decode_pointer(const YAML::Node& node, ButtonPanel*& button_with_panel) {
 		button_with_panel = new ButtonPanel{
 			node["panel"].as<BoxPtr<Panel> >(),
@@ -75,5 +76,7 @@ namespace ie {
 			node["background"].as<BoxPtr<IScalable> >()
 		};
 		return true;
+
 	}
+	*/
 }

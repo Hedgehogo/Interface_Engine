@@ -27,8 +27,10 @@ namespace ie {
 		float size_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<ConstSizing> {
 		static bool decode_pointer(const YAML::Node& node, ConstSizing*& const_sizing);
 	};
+	*/
 }

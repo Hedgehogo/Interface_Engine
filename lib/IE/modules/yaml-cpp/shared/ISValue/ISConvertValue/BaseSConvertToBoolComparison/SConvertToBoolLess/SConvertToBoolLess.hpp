@@ -13,10 +13,12 @@ namespace ie {
 		SConvertToBoolLess(PISValue<T> from_value, T compared);
 	};
 	
+	/*old_yaml_decode_pointer
 	template<typename T>
 	struct DecodePointer<SConvertToBoolLess<T> > {
 		static bool decode_pointer(const YAML::Node& node, SConvertToBoolLess<T>*& sConvert_to_bool_greater);
 	};
+	*/
 	
 	using SConvertFloatToBoolLess = SConvertToBoolLess<float>;
 	using SConvertIntToBoolLess = SConvertToBoolLess<int>;

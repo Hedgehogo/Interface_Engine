@@ -64,6 +64,7 @@ namespace ie {
 		return true;
 	}
 	
+	/*old_yaml_decode_impl
 	template<typename T>
 	bool Decode<orl::Option<T> >::decode(const YAML::Node& node, orl::Option<T>& object) {
 		if(node.IsNull()) {
@@ -72,8 +73,11 @@ namespace ie {
 			object = orl::Option<T>{node.as<T>()};
 		}
 		return true;
+
 	}
+	*/
 	
+	/*old_yaml_decode_impl
 	template<typename T>
 	bool Decode<std::vector<T> >::decode(const YAML::Node& node, std::vector<T>& vector) {
 		for(const auto& item: node) {
@@ -81,17 +85,23 @@ namespace ie {
 			item >> vector[vector.size() - 1];
 		}
 		return true;
+
 	}
+	*/
 	
 	
+	/*old_yaml_decode_impl
 	template<typename T>
 	bool Decode<sf::Vector2<T>>::decode(const YAML::Node& node, sf::Vector2<T>& vector) {
 		vector.x = node[0].as<T>();
 		vector.y = node[1].as<T>();
 		return true;
+
 	}
+	*/
 	
 	
+	/*old_yaml_decode_impl
 	template<typename T>
 	bool Decode<sf::Rect<T>>::decode(const YAML::Node& node, sf::Rect<T>& rect) {
 		sf::Vector2<T> position;
@@ -100,29 +110,7 @@ namespace ie {
 		node["size"] >> size;
 		rect = sf::Rect<T>{position, size};
 		return true;
-	}
-}
 
-namespace YAML {
-	template<typename T>
-	Node convert<T>::encode(const T& rhs) {
-		return ie::Encode<T>::encode(rhs);
 	}
-	
-	template<typename T>
-	bool convert<T>::decode(const Node& node, T& rhs) {
-		return ie::Decode< T >::decode(node, rhs);
-	}
-}
-
-template<typename T>
-std::enable_if_t<std::is_copy_constructible_v<T>, void>
-operator>>(const YAML::Node& node, T& value) {
-	value = node.as<T>();
-}
-
-template<typename T>
-std::enable_if_t<!std::is_copy_constructible_v<T>, void>
-operator>>(const YAML::Node& node, T& value) {
-	YAML::convert<T>::decode(node, value);
+	*/
 }

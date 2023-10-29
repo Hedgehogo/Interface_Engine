@@ -25,6 +25,7 @@ namespace ie {
 		return new ChangeVariableByCurve{k1_, k2_, size_, start_, end_};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ChangeVariableByCurve>::decode_pointer(const YAML::Node& node, ChangeVariableByCurve*& change_variable_by_curve) {
 		change_variable_by_curve = new ChangeVariableByCurve{
 			node["k1"].as<float>(),
@@ -35,5 +36,7 @@ namespace ie {
 		};
 		
 		return true;
+
 	}
+	*/
 }

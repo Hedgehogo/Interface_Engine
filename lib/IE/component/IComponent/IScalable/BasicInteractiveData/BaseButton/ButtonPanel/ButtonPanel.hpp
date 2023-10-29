@@ -51,8 +51,10 @@ namespace ie {
 		BasicInteractiveData<Panel&> interactive_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<ButtonPanel> {
 		static bool decode_pointer(const YAML::Node& node, ButtonPanel*& button_with_panel);
 	};
+	*/
 }

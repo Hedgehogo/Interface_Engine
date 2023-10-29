@@ -22,6 +22,7 @@ namespace ie {
 			set(value);
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<SValue<T> >::decode_pointer(const YAML::Node& node, SValue<T>*& sValue) {
 		T value{};
@@ -31,5 +32,7 @@ namespace ie {
 		
 		sValue = new SValue<T>{value};
 		return true;
+
 	}
+	*/
 }

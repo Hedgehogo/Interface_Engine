@@ -46,8 +46,10 @@ namespace ie {
 		bool relativity_;
 	};
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<SliderWheelAction::Relativity> {
 		static bool decode(const YAML::Node& node, SliderWheelAction::Relativity& relativity);
 	};
+	*/
 }

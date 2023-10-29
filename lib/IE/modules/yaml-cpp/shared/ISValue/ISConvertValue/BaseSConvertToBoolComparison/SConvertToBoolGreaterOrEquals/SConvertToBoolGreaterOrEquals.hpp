@@ -13,10 +13,12 @@ namespace ie {
 		SConvertToBoolGreaterOrEquals(PISValue<T> from_value, T compared);
 	};
 	
+	/*old_yaml_decode_pointer
 	template<typename T>
 	struct DecodePointer<SConvertToBoolGreaterOrEquals<T> > {
 		static bool decode_pointer(const YAML::Node& node, SConvertToBoolGreaterOrEquals<T>*& sConvert_to_bool_greater_or_equals);
 	};
+	*/
 	
 	using SConvertFloatToBoolGreaterOrEquals = SConvertToBoolGreaterOrEquals<float>;
 	using SConvertIntToBoolGreaterOrEquals = SConvertToBoolGreaterOrEquals<int>;

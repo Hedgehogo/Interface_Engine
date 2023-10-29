@@ -32,6 +32,7 @@ namespace ie {
 		return (object_size - addition_) / parent_coefficient_;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<SmartSizing>::decode_pointer(const YAML::Node& node, SmartSizing*& smart_sizing) {
 		smart_sizing = new SmartSizing{
 			conv_def(node["target-coefficient"], 1.f),
@@ -39,5 +40,7 @@ namespace ie {
 			conv_def(node["addition"], 0.f)
 		};
 		return true;
+
 	}
+	*/
 }

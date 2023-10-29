@@ -63,6 +63,7 @@ namespace ie {
 		return new BoxScroll{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxScroll>::decode_pointer(const YAML::Node& node, BoxScroll*& box_scroll) {
 		box_scroll = new BoxScroll{
 			node["object"].as<BoxPtr<IComponent> >(),
@@ -70,5 +71,7 @@ namespace ie {
 			(node["min-size"] ? node["min-size"].as<sf::Vector2f>() : sf::Vector2f{0, 0})
 		};
 		return true;
+
 	}
+	*/
 }

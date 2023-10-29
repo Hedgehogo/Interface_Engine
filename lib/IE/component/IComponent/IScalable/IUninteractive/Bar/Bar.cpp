@@ -102,6 +102,7 @@ namespace ie {
 		return layout_;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Bar>::decode_pointer(const YAML::Node& node, Bar*& bar) {
 		bar = new Bar{
 			node["background"].as<BoxPtr<IUninteractive> >(),
@@ -111,5 +112,7 @@ namespace ie {
 			conv_def(node["offset"], true)
 		};
 		return true;
+
 	}
+	*/
 }

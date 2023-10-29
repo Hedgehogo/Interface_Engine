@@ -35,6 +35,7 @@ namespace ie {
 		return new PointingHidePanelInteraction{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<PointingHidePanelInteraction>::decode_pointer(const YAML::Node& node, PointingHidePanelInteraction*& pointing_hide_panel_interaction) {
 		bool only_on_parent{false};
 		
@@ -43,5 +44,7 @@ namespace ie {
 		
 		pointing_hide_panel_interaction = new PointingHidePanelInteraction{only_on_parent};
 		return true;
+
 	}
+	*/
 }

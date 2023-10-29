@@ -34,6 +34,7 @@ namespace ie {
 		return new SideMovePanelInteraction{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<SideMovePanelInteraction>::decode_pointer(const YAML::Node& node, SideMovePanelInteraction*& side_move_panel_interaction) {
 		float coefficient;
 		float offset;
@@ -48,5 +49,7 @@ namespace ie {
 		
 		side_move_panel_interaction = new SideMovePanelInteraction{coefficient, offset, horizontal, at_start};
 		return true;
+
 	}
+	*/
 }

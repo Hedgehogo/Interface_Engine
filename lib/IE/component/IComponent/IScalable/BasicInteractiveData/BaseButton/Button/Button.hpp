@@ -30,8 +30,10 @@ namespace ie {
 		InteractiveData interactive_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Button> {
 		static bool decode_pointer(const YAML::Node& node, Button*& button);
 	};
+	*/
 }

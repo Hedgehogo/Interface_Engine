@@ -11,6 +11,7 @@ namespace ie {
 		return from_value < compared;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<SConvertToBoolLess<T> >::decode_pointer(const YAML::Node& node, SConvertToBoolLess<T>*& sConvert_to_bool_less) {
 		sConvert_to_bool_less = new SConvertToBoolLess<T>{
@@ -19,5 +20,7 @@ namespace ie {
 		};
 		
 		return true;
+
 	}
+	*/
 }

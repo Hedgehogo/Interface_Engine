@@ -12,11 +12,14 @@ namespace ie {
 		interaction_stack_.push_back(std::move(element));
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<InteractionStack>::decode_pointer(const YAML::Node& node, InteractionStack*& interaction_stack) {
 		interaction_stack = new InteractionStack{
 			conv_def(node["interaction"], std::vector<BoxPtr<IInteraction> >{})
 		};
 		return true;
+
 	}
+	*/
 }
 

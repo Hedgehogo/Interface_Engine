@@ -44,10 +44,12 @@ namespace ie {
 		std::vector<SetterFunc> setters_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<typename T>
 	struct DecodePointer<SVector2<T> > {
 		static bool decode_pointer(const YAML::Node& node, SVector2<T>*& with_vector2);
 	};
+	*/
 	
 	template<typename T>
 	using SVec2 = SVector2<T>;

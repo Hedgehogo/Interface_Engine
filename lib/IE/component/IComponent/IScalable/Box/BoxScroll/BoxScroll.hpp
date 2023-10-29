@@ -40,8 +40,10 @@ namespace ie {
 		PSRVec2f normal_object_position_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxScroll> {
 		static bool decode_pointer(const YAML::Node& node, BoxScroll*& box_scroll);
 	};
+	*/
 }

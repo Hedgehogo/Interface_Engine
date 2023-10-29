@@ -167,69 +167,91 @@ namespace ie {
 		decode(const YAML::Node& node, BoxPtr<T>& object);
 	};
 	
+	/*old_yaml_decode
 	template<typename T>
 	struct Decode<orl::Option<T> > {
 		static bool decode(const YAML::Node& node, orl::Option<T>& object);
 	};
+	*/
 	
+	/*old_yaml_decode
 	template<typename T>
 	struct Decode<std::vector<T> > {
 		static bool decode(const YAML::Node& node, std::vector<T>& vector);
 	};
+	*/
 	
 	
+	/*old_yaml_decode
 	template<typename T>
 	struct Decode<sf::Vector2<T> > {
 		static bool decode(const YAML::Node& node, sf::Vector2<T>& vector);
 	};
+	*/
 	
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<sf::Vector2<float> > {
 		static bool decode(const YAML::Node& node, sf::Vector2<float>& vector);
 	};
+	*/
 	
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<sf::Vector2<int> > {
 		static bool decode(const YAML::Node& node, sf::Vector2<int>& vector);
 	};
+	*/
 	
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<sf::Vector2<size_t> > {
 		static bool decode(const YAML::Node& node, sf::Vector2<size_t>& vector);
 	};
+	*/
 	
 	
+	/*old_yaml_decode
 	template<typename T>
 	struct Decode<sf::Rect<T> > {
 		static bool decode(const YAML::Node& node, sf::Rect<T>& rect);
 	};
+	*/
 	
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<sf::Color> {
 		static bool decode(const YAML::Node& node, sf::Color& color);
 	};
+	*/
 	
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<sf::Text::Style> {
 		static bool decode(const YAML::Node& node, sf::Text::Style& style);
 	};
+	*/
 	
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<sf::Mouse::Button> {
 		static bool decode(const YAML::Node& node, sf::Mouse::Button& button);
 	};
+	*/
 	
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<sf::Shader> {
 		static bool decode(const YAML::Node& node, sf::Shader& shader);
 	};
+	*/
 	
 	template<typename T>
 	std::shared_ptr<T> get_s_value(const YAML::Node& node, bool create_if_not_exist = true);

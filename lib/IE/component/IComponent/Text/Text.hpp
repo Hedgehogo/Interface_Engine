@@ -130,8 +130,10 @@ namespace ie {
 		BoxPtr<IBasicInteraction<Text&> > text_interaction;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Text> {
 		static bool decode_pointer(const YAML::Node& node, Text*& text);
 	};
+	*/
 }

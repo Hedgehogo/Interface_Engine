@@ -23,10 +23,12 @@ namespace ie {
 		PISValue<FromType> from_value_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<typename FromType, typename ToType>
 	struct DecodePointer<SConvertValue<FromType, ToType> > {
 		static bool decode_pointer(const YAML::Node& node, SConvertValue<FromType, ToType>*& sConvert_value);
 	};
+	*/
 	
 	template<typename T>
 	using SConvertToBool = SConvertValue<T, bool>;

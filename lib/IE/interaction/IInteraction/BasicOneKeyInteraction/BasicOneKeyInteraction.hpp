@@ -2,7 +2,7 @@
 
 #include "../IInteraction.hpp"
 #include "IE/enums/KeyHandler/KeyHandler.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	template<typename T>
@@ -54,10 +54,12 @@ namespace ie {
 	
 	using OneKeyInteraction = BasicOneKeyInteraction<>;
 	
+	/*old_yaml_decode_pointer
 	template<typename T>
 	struct DecodePointer<BasicOneKeyInteraction<T> > {
 		static bool decode_pointer(const YAML::Node& node, BasicOneKeyInteraction<T>*& one_key_interaction);
 	};
+	*/
 }
 
 #include "BasicOneKeyInteraction.inl"

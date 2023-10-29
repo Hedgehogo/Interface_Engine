@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../yaml-builder.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	namespace detail {

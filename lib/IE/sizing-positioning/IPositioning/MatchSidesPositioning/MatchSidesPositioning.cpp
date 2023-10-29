@@ -33,6 +33,7 @@ namespace ie {
 		return new MatchSidesPositioning{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<MatchSidesPositioning>::decode_pointer(const YAML::Node& node, MatchSidesPositioning*& match_sides_positioning) {
 		match_sides_positioning = new MatchSidesPositioning{
 			node["parent-side"].as<Location>(),
@@ -40,5 +41,7 @@ namespace ie {
 			conv_def(node["offset"], 0.f)
 		};
 		return true;
+
 	}
+	*/
 }

@@ -24,10 +24,12 @@ namespace ie {
 		std::string command;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<ConsoleCommandAction> {
 		static bool decode_pointer(const YAML::Node& node, ConsoleCommandAction*& console_command_action);
 	};
+	*/
 	
 	extern "C" {
 		void init(int argc, char *argv[]);

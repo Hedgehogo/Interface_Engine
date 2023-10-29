@@ -35,25 +35,33 @@ namespace ie {
 	
 	std::basic_string<Uint32> u32_string_to_uint32_string(std::basic_string<char32_t> str);
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<std::basic_string<char32_t>> {
 		static bool decode(const YAML::Node& node, std::basic_string<char32_t>& string32);
 	};
+	*/
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<sf::String> {
 		static bool decode(const YAML::Node& node, sf::String& sf_string);
 	};
+	*/
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<sf::Texture*> {
 		static bool decode(const YAML::Node& node, sf::Texture*& texture);
 	};
+	*/
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<sf::Font*> {
 		static bool decode(const YAML::Node& node, sf::Font*& font);
 	};
+	*/
 	
 #ifdef IE_ImageMagick_FOUND
 	template<>
@@ -61,10 +69,12 @@ namespace ie {
 		static void load(std::vector<sf::Texture>& object, std::string name);
 	};
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<std::vector<sf::Texture>*> {
 		static bool decode(const YAML::Node& node, std::vector<sf::Texture>*& video);
 	};
+	*/
 #endif
 }
 

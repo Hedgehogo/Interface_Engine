@@ -28,6 +28,7 @@ namespace ie {
 		return SValue<ToType>::get_value();
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename FromType, typename ToType>
 	bool DecodePointer<SConvertValue<FromType, ToType> >::decode_pointer(const YAML::Node& node, SConvertValue<FromType, ToType>*& sConvert_value) {
 		sConvert_value = new SConvertValue<FromType, ToType>{
@@ -35,5 +36,7 @@ namespace ie {
 			conv_def(node["default-value"], ToType{})
 		};
 		return true;
+
 	}
+	*/
 }

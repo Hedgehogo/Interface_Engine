@@ -1,6 +1,7 @@
 #include "Location.hpp"
 
 namespace ie {
+	/*old_yaml_decode_impl
 	bool Decode<Location>::decode(const YAML::Node& node, Location& location) {
 		std::string str{node.as<std::string>()};
 		if(str == "origin") {
@@ -13,5 +14,7 @@ namespace ie {
 			throw YAML::BadConversion{node.Mark()};
 		}
 		return true;
+
 	}
+	*/
 }

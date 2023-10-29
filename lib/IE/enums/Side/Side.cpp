@@ -1,6 +1,7 @@
 #include "Side.hpp"
 
 namespace ie {
+	/*old_yaml_decode_impl
 	bool Decode<Side>::decode(const YAML::Node& node, Side& side) {
 		std::string str{node.as<std::string>()};
 		if(str == "up") {
@@ -15,5 +16,7 @@ namespace ie {
 			throw YAML::BadConversion(node.Mark());
 		}
 		return true;
+
 	}
+	*/
 }

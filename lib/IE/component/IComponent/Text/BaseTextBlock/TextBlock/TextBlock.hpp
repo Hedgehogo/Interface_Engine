@@ -2,7 +2,7 @@
 
 #include "../BaseTextBlock.hpp"
 #include "../../BaseCharacter/Character/Character.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class TextBlock : public BaseTextBlock {
@@ -84,11 +84,15 @@ namespace ie {
 	};
 	
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<TextBlock> {
 		static bool decode_pointer(const YAML::Node& node, TextBlock*& text_block);
 	};
+	*/
 	
+	/*old_yaml_determine
 	template<>
 	bool determine<TextBlock>(const YAML::Node& node);
+	*/
 }

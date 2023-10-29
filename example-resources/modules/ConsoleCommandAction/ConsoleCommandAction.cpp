@@ -18,12 +18,15 @@ namespace ie {
 	
 	void ConsoleCommandAction::while_not_pressed() {}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ConsoleCommandAction>::decode_pointer(const YAML::Node& node, ConsoleCommandAction*& console_command_action) {
 		console_command_action = new ConsoleCommandAction{
 			node["command"].as<std::string>()
 		};
 		return true;
+
 	}
+	*/
 	
 	void init(int argc, char *argv[]) {
 		inherit<ie::KeyAction, ie::ConsoleCommandAction>({"ConsoleCommandAction"});

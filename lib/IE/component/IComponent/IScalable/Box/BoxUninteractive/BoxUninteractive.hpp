@@ -35,8 +35,10 @@ namespace ie {
 		BoxPtr<IScalable> object_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxUninteractive> {
 		static bool decode_pointer(const YAML::Node& node, BoxUninteractive*& box_uninteractive);
 	};
+	*/
 }

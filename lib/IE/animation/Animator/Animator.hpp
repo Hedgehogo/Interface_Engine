@@ -19,8 +19,10 @@ namespace ie {
 		std::vector<IAnimatorUnit*> units_buff_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Animator> {
 		static bool decode_pointer(const YAML::Node& node, Animator*& animator);
 	};
+	*/
 }

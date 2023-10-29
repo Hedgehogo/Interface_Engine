@@ -80,12 +80,7 @@ namespace ie {
 	}
 	
 	bool Buffer::exist(const YAML::Node& node) {
-		std::string name;
-		if(node.IsScalar()) {
-			node >> name;
-		} else {
-			node["var"] >> name;
-		}
+		std::string name{(node.IsScalar() ? node.as<std::string>() : node["var"].as<std::string>())};
 		for(auto& level: objects_levels_) {
 			if(level.find(name) != level.end())
 				return true;

@@ -20,11 +20,14 @@ namespace ie {
 		return offset_;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<InternalTargetPositioning>::decode_pointer(const YAML::Node& node, InternalTargetPositioning*& internal_target_positioning) {
 		internal_target_positioning = new InternalTargetPositioning{
 			node["coefficient"].as<float>(),
 			conv_def(node["offset"], 0.f)
 		};
 		return true;
+
 	}
+	*/
 }

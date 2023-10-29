@@ -109,6 +109,7 @@ namespace ie {
 		std::dynamic_pointer_cast<SRange<T> >(value->get_y_ptr())->set_bounds(lower.y, upper.y);
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<SVector2<T> >::decode_pointer(const YAML::Node& node, SVector2<T>*& with_vector2) {
 		if(node["x"] && node["y"]) {
@@ -122,5 +123,7 @@ namespace ie {
 			with_vector2 = new SVector2<T>(vector);
 		}
 		return true;
+
 	}
+	*/
 }

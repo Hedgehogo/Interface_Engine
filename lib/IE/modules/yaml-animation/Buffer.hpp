@@ -1,6 +1,7 @@
 #pragma once
 
-#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
+#include <map>
+#include <yaml-cpp/yaml.h>
 #include <functional>
 
 namespace ie {
@@ -8,7 +9,7 @@ namespace ie {
 	
 	class IAnimatorUnit;
 	
-	extern std::map<std::string, std::vector<std::function<void(IAnimatorUnit*)>>> animator_unit_request;
+	extern std::map<std::string, std::vector<std::function<void(IAnimatorUnit*)> > > animator_unit_request;
 	extern std::map<std::string, IAnimatorUnit*> animator_unit_buffer;
 	
 	void animator_unit_request_update();

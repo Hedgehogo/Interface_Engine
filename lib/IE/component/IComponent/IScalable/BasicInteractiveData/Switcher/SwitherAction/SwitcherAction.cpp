@@ -33,10 +33,13 @@ namespace ie {
 		return new SwitcherAction{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<SwitcherAction>::decode_pointer(const YAML::Node& node, SwitcherAction*& switcher_action) {
 		switcher_action = new SwitcherAction{
 			Buffer::get<Sbool>(node["value"])
 		};
 		return true;
+
 	}
+	*/
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../../ClickPanelInteraction/PanelAction/PanelAction.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class HidePanelAction : public PanelAction {
@@ -32,8 +32,10 @@ namespace ie {
 		bool only_on_parent;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<HidePanelAction> {
 		static bool decode_pointer(const YAML::Node& node, HidePanelAction*& hide_panel_action);
 	};
+	*/
 }

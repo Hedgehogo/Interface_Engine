@@ -116,8 +116,10 @@ namespace ie {
 		InternalPositioning2 positioning;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Caption> {
 		static bool decode_pointer(const YAML::Node& node, Caption*& caption);
 	};
+	*/
 }

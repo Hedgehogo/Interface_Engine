@@ -17,8 +17,10 @@ namespace ie {
 		float offset_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<MatchTargetPositioning> {
 		static bool decode_pointer(const YAML::Node& node, MatchTargetPositioning*& match_target_positioning);
 	};
+	*/
 }

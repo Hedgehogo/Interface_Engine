@@ -44,8 +44,10 @@ namespace ie {
 		BoxPtr<ConstPanel> panel_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxPanel> {
 		static bool decode_pointer(const YAML::Node& node, BoxPanel*& box_with_panel);
 	};
+	*/
 }

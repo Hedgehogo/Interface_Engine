@@ -1,5 +1,5 @@
 #include "RoundedRectangle.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	RoundedRectangle::Make::Make(sf::Color color, float radius) : color(color), radius(radius) {
@@ -65,11 +65,15 @@ namespace ie {
 		return layout_;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<RoundedRectangle>::decode_pointer(const YAML::Node& node, RoundedRectangle*& rounded_rectangle) {
 		rounded_rectangle = new RoundedRectangle{node["color"].as<sf::Color>(), node["radius"].as<float>()};
 		return true;
+
 	}
+	*/
 	
+	/*old_yaml_determine_impl
 	template<>
 	bool determine<RoundedRectangle>(const YAML::Node& node) {
 		return determine(node, {
@@ -77,4 +81,5 @@ namespace ie {
 			{"radius", YAML::NodeType::Scalar}
 		});
 	}
+	*/
 }

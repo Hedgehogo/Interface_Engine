@@ -43,13 +43,17 @@ namespace ie {
 		PSfloat speed_;
 	};
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<Animation::Variable> {
 		static bool decode(const YAML::Node& node, Animation::Variable& animation_unit);
 	};
+	*/
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Animation> {
 		static bool decode_pointer(const YAML::Node& node, Animation*& animation);
 	};
+	*/
 }

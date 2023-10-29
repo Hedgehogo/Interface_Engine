@@ -30,8 +30,11 @@ namespace ie {
 		return new RelativeParentSizing{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<RelativeParentSizing>::decode_pointer(const YAML::Node& node, RelativeParentSizing*& relative_parent_sizing) {
 		relative_parent_sizing = new RelativeParentSizing{node["addition"].as<float>()};
 		return true;
+
 	}
+	*/
 }

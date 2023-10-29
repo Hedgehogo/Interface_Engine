@@ -21,11 +21,14 @@ namespace ie {
 		return new ClickHidePanelInteraction{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ClickHidePanelInteraction>::decode_pointer(const YAML::Node& node, ClickHidePanelInteraction*& click_hide_panel_interaction) {
 		click_hide_panel_interaction = new ClickHidePanelInteraction{
 			node["key"].as<Key>(),
 			conv_def(node["only-on-parent"], false)
 		};
 		return true;
+
 	}
+	*/
 }

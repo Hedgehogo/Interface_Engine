@@ -9,8 +9,10 @@ namespace ie {
 		End
 	};
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<Location> {
 		static bool decode(const YAML::Node& node, Location& location);
 	};
+	*/
 }

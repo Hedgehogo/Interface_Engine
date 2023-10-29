@@ -27,11 +27,14 @@ namespace ie {
 		return new TargetCoefficientSizing{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<TargetCoefficientSizing>::decode_pointer(const YAML::Node& node, TargetCoefficientSizing*& target_coefficient_sizing) {
 		target_coefficient_sizing = new TargetCoefficientSizing{
 			node["coefficient"].as<float>(),
 			conv_def(node["addition"], 0.f)
 		};
 		return true;
+
 	}
+	*/
 }

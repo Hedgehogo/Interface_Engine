@@ -88,6 +88,7 @@ namespace ie {
 		return new BoxSwitchTabs{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxSwitchTabs>::decode_pointer(const YAML::Node& node, BoxSwitchTabs*& box_with_changeable_objects) {
 		auto objects{node["objects"].as<std::vector<BoxPtr<IScalable> > >()};
 		auto min_size{conv_def(node["min-size"], sf::Vector2f{})};
@@ -106,7 +107,9 @@ namespace ie {
 			};
 		}
 		return true;
+
 	}
+	*/
 	
 	void BoxSwitchTabs::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		objects_[value_->get_value()]->draw_debug(render_target, indent, indent_addition, hue, hue_offset);

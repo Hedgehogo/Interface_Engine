@@ -25,8 +25,10 @@ namespace ie {
 		ClickDisplayPanelInteraction* copy() override;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<ClickDisplayPanelInteraction> {
 		static bool decode_pointer(const YAML::Node& node, ClickDisplayPanelInteraction*& click_display_panel_interaction);
 	};
+	*/
 }

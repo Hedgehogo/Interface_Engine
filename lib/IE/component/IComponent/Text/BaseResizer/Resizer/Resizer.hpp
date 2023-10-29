@@ -74,8 +74,10 @@ namespace ie {
 		sf::Vector2f end_render;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Resizer> {
 		static bool decode_pointer(const YAML::Node& node, Resizer*& resizer);
 	};
+	*/
 }

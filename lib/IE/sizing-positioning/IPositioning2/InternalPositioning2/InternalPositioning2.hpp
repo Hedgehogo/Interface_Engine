@@ -29,8 +29,10 @@ namespace ie {
 		InternalPositioning horizontal_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<InternalPositioning2> {
 		static bool decode_pointer(const YAML::Node& node, InternalPositioning2*& internal_positioning2);
 	};
+	*/
 }

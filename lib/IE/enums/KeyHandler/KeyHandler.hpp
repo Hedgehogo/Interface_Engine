@@ -157,8 +157,10 @@ namespace ie {
 	
 	bool is_key_pressed(Key key);
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<Key> {
 		static bool decode(const YAML::Node& node, Key& key);
 	};
+	*/
 }

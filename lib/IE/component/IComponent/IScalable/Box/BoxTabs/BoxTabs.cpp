@@ -88,6 +88,7 @@ namespace ie {
 		return new BoxTabs{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxTabs>::decode_pointer(const YAML::Node& node, BoxTabs*& box_with_tabs) {
 		box_with_tabs = new BoxTabs{
 			node["objects"].as<std::vector<BoxPtr<IScalable> > >(),
@@ -95,5 +96,7 @@ namespace ie {
 			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
+
 	}
+	*/
 }

@@ -43,11 +43,14 @@ namespace ie {
 		return new BasicOpenUrlAction<T>{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<BasicOpenUrlAction<T> >::decode_pointer(const YAML::Node& node, BasicOpenUrlAction<T>*& open_url_interaction) {
 		open_url_interaction = new BasicOpenUrlAction<T>{
 			(node.IsScalar() ? node : node["url"]).as<std::string>()
 		};
 		return true;
+
 	}
+	*/
 }

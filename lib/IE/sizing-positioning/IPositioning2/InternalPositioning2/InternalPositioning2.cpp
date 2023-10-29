@@ -31,8 +31,11 @@ namespace ie {
 		return new InternalPositioning2{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<InternalPositioning2>::decode_pointer(const YAML::Node& node, InternalPositioning2*& internal_positioning2) {
 		internal_positioning2 = new InternalPositioning2{node["coefficient"].as<sf::Vector2f>()};
 		return true;
+
 	}
+	*/
 }

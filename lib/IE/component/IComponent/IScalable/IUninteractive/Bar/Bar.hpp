@@ -63,8 +63,10 @@ namespace ie {
 		float value;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Bar> {
 		static bool decode_pointer(const YAML::Node& node, Bar*& bar);
 	};
+	*/
 }

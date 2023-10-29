@@ -298,6 +298,7 @@ namespace ie {
 		return new Resizer(line_spacing, align);
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Resizer>::decode_pointer(const YAML::Node& node, Resizer*& resizer) {
 		resizer = new Resizer{
 			conv_def(node["line-spacing"], 1.15f),
@@ -305,5 +306,7 @@ namespace ie {
 			conv_def(node["algorithm"], BaseResizer::Algorithm::Base)
 		};
 		return true;
+
 	}
+	*/
 }

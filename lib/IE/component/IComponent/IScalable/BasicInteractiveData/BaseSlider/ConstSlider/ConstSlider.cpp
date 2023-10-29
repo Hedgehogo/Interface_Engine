@@ -127,6 +127,7 @@ namespace ie {
 		return new ConstSlider{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ConstSlider>::decode_pointer(const YAML::Node& node, ConstSlider*& const_slider) {
 		auto slider{node["slider"].as<BoxPtr<IUninteractive> >()};
 		auto background{node["background"].as<BoxPtr<IUninteractive> >()};
@@ -146,5 +147,7 @@ namespace ie {
 			const_slider = new ConstSlider{std::move(slider), std::move(background), value, division, slider_scale, key, wheel_horizontal};
 		}
 		return true;
+
 	}
+	*/
 }

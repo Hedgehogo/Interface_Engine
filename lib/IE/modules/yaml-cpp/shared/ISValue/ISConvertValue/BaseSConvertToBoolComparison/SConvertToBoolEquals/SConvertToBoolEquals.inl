@@ -11,6 +11,7 @@ namespace ie {
 		return from_value == compared;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<SConvertToBoolEquals<T> >::decode_pointer(const YAML::Node& node, SConvertToBoolEquals<T>*& sConvert_to_bool_equals) {
 		sConvert_to_bool_equals = new SConvertToBoolEquals<T>{
@@ -19,5 +20,7 @@ namespace ie {
 		};
 		
 		return true;
+
 	}
+	*/
 }

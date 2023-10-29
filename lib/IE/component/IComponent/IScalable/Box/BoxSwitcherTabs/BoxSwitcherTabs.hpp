@@ -49,8 +49,10 @@ namespace ie {
 		PSint value_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxSwitcherTabs> {
 		static bool decode_pointer(const YAML::Node& node, BoxSwitcherTabs*& switcher_tabs);
 	};
+	*/
 }

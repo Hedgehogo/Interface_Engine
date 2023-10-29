@@ -108,14 +108,18 @@ namespace ie {
 		}
 	}
 	
+	/*old_yaml_decode_impl
 	bool Decode<Animation::Variable>::decode(const YAML::Node& node, Animation::Variable& animation_var) {
 		animation_var = Animation::Variable{
 			Buffer::get<Sfloat>(node["var"]),
 			node["change-variable"] ? std::vector<IChangeVariable*>{node["change-variable"].as<IChangeVariable*>()} : node["change-variables"].as<std::vector<IChangeVariable*>>()
 		};
 		return true;
+
 	}
+	*/
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Animation>::decode_pointer(const YAML::Node& node, Animation*& animation) {
 		animation = new Animation{
 			node["var"] ? std::vector<Animation::Variable>{node["var"].as<Animation::Variable>()} : node["vars"].as<std::vector<Animation::Variable>>(),
@@ -129,5 +133,7 @@ namespace ie {
 		
 		add_unit_in_buffer(node, animation);
 		return true;
+
 	}
+	*/
 }

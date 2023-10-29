@@ -10,8 +10,10 @@ namespace ie {
 		DownLeft
 	};
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<Corner> {
 		static bool decode(const YAML::Node& node, Corner& corner);
 	};
+	*/
 }

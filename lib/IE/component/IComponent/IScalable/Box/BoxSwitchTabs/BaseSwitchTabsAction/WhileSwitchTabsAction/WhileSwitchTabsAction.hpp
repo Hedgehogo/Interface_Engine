@@ -37,8 +37,10 @@ namespace ie {
 		int step_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<WhileSwitchTabsAction> {
 		static bool decode_pointer(const YAML::Node& node, WhileSwitchTabsAction*& while_changing_objects_action);
 	};
+	*/
 }

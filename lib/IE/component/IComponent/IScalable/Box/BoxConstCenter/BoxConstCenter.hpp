@@ -54,8 +54,10 @@ namespace ie {
 		bool resized_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxConstCenter> {
 		static bool decode_pointer(const YAML::Node& node, BoxConstCenter*& box_with_const_center);
 	};
+	*/
 }

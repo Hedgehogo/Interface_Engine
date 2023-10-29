@@ -25,6 +25,7 @@ namespace ie {
 		return new ChangeVariableBySteppedLine{values_};
 	}
 	
+	/*old_yaml_decode_impl
 	bool Decode<ChangeVariableBySteppedLine::Value>::decode(const YAML::Node& node, ChangeVariableBySteppedLine::Value& value) {
 		value = ChangeVariableBySteppedLine::Value{
 			node["value"].as<float>(),
@@ -32,13 +33,18 @@ namespace ie {
 		};
 		
 		return true;
+
 	}
+	*/
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ChangeVariableBySteppedLine>::decode_pointer(const YAML::Node& node, ChangeVariableBySteppedLine*& broken_line) {
 		broken_line = new ChangeVariableBySteppedLine{
 			node["values"].as<std::vector<ChangeVariableBySteppedLine::Value>>()
 		};
 		
 		return true;
+
 	}
+	*/
 }

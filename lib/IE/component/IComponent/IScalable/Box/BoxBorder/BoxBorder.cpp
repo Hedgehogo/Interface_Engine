@@ -147,6 +147,7 @@ namespace ie {
 		}
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxBorder>::decode_pointer(const YAML::Node& node, BoxBorder*& box_with_border) {
 		auto objects(node["objects"].as<std::vector<std::vector<BoxPtr<IScalable> > > >());
 		auto min_size{conv_def(node["min-size"], sf::Vector2f{})};
@@ -165,5 +166,7 @@ namespace ie {
 			};
 		}
 		return true;
+
 	}
+	*/
 }

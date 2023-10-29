@@ -133,6 +133,7 @@ namespace ie {
 		return new Panel{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Panel>::decode_pointer(const YAML::Node& node, Panel*& panel) {
 		panel = new Panel{
 			node["object"].as<BoxPtr<IScalable> >(),
@@ -143,5 +144,7 @@ namespace ie {
 			conv_def(node["displayed"], false)
 		};
 		return true;
+
 	}
+	*/
 }

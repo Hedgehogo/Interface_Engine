@@ -1,6 +1,8 @@
 #pragma once
 
+#include <vector>
 #include "../IChangeVariable.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class ChangeVariableBySteppedLine : public virtual IChangeVariable {
@@ -23,13 +25,17 @@ namespace ie {
 		float size_;
 	};
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<ChangeVariableBySteppedLine::Value> {
 		static bool decode(const YAML::Node& node, ChangeVariableBySteppedLine::Value& value);
 	};
+	*/
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<ChangeVariableBySteppedLine> {
 		static bool decode_pointer(const YAML::Node& node, ChangeVariableBySteppedLine*& broken_line);
 	};
+	*/
 }

@@ -91,8 +91,11 @@ namespace ie {
 		object_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxDebug>::decode_pointer(const YAML::Node& node, BoxDebug*& box_debug) {
 		box_debug = new BoxDebug{node["object"].as<BoxPtr<IScalable> >()};
 		return true;
+
 	}
+	*/
 }

@@ -12,6 +12,7 @@ namespace ie {
 		return new MatchTargetPositioning{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<MatchTargetPositioning>::decode_pointer(const YAML::Node& node, MatchTargetPositioning*& match_target_positioning) {
 		match_target_positioning = new MatchTargetPositioning{
 			node["target-coefficient"].as<float>(),
@@ -19,5 +20,7 @@ namespace ie {
 			conv_def(node["offset"], 0.f)
 		};
 		return true;
+
 	}
+	*/
 }

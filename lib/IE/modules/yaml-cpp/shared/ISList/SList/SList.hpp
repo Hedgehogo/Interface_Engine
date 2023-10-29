@@ -33,10 +33,12 @@ namespace ie {
 		std::vector<SetterFunc> setters_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<typename T>
 	struct DecodePointer<SList<T> > {
 		static bool decode_pointer(const YAML::Node& node, SList<T>*& with_list);
 	};
+	*/
 	
 	template<typename T>
 	using PSList = std::shared_ptr<SList<T>>;

@@ -28,8 +28,10 @@ namespace ie {
 		float underline_thickness;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Underline> {
 		static bool decode_pointer(const YAML::Node& node, Underline*& underline);
 	};
+	*/
 }

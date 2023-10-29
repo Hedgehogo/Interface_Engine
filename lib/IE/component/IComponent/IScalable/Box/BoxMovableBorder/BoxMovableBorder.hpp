@@ -92,8 +92,10 @@ namespace ie {
 		bool is_horizontal_border_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxMovableBorder> {
 		static bool decode_pointer(const YAML::Node& node, BoxMovableBorder*& box_with_movable_border);
 	};
+	*/
 }

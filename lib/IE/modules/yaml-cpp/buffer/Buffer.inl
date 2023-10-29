@@ -27,9 +27,9 @@ namespace ie {
 				level -= relative;
 			} else {
 				if(node.IsScalar()) {
-					node["level"] >> level;
+					level = node["level"].as<size_t>();
 				} else {
-					node["level"]["absolute"] >> level;
+					level = node["level"]["absolute"].as<size_t>();
 				}
 			}
 		}
@@ -43,8 +43,7 @@ namespace ie {
 	
 	template<typename T>
 	void Buffer::insert(const YAML::Node& node) {
-		std::string name;
-		node["var"] >> name;
+		auto name{node["var"].as<std::string>()};
 		if(!exist_at_level(name)) {
 			insert<T>(name, node);
 		} else {
@@ -73,9 +72,9 @@ namespace ie {
 	std::shared_ptr<T> Buffer::get(const YAML::Node& node, bool create_if_not_exist) {
 		std::string name;
 		if(node.IsScalar()) {
-			node >> name;
+			name = node.as<std::string>();
 		} else {
-			node["var"] >> name;
+			name = node["var"].as<std::string>();
 			if(create_if_not_exist && !exist_at_level(name)) {
 				insert<T>(name, node);
 			}

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../../ClickPanelInteraction/PanelAction/PanelAction.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class DisplayPanelAction : public PanelAction {
@@ -26,8 +26,10 @@ namespace ie {
 		void while_not_pressed() override;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<DisplayPanelAction> {
 		static bool decode_pointer(const YAML::Node& node, DisplayPanelAction*& display_panel_action);
 	};
+	*/
 }

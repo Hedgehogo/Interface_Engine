@@ -81,8 +81,10 @@ namespace ie {
 		sf::Vector2f scale_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Slider> {
 		static bool decode_pointer(const YAML::Node& node, Slider*& slider);
 	};
+	*/
 }

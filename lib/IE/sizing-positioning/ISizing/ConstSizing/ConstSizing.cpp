@@ -25,6 +25,7 @@ namespace ie {
 		return new ConstSizing{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ConstSizing>::decode_pointer(const YAML::Node& node, ConstSizing*& const_sizing) {
 		if(node.IsScalar()) {
 			const_sizing = new ConstSizing{node.as<float>()};
@@ -32,5 +33,7 @@ namespace ie {
 			const_sizing = new ConstSizing{node["size"].as<float>()};
 		}
 		return true;
+
 	}
+	*/
 }

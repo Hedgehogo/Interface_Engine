@@ -34,9 +34,11 @@ namespace ie {
 		PSbool value_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<SwitcherAction> {
 		static bool decode_pointer(const YAML::Node& node, SwitcherAction*& switcher_action);
 	};
+	*/
 	
 }

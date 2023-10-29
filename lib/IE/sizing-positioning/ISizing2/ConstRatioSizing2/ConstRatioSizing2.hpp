@@ -51,8 +51,10 @@ namespace ie {
 		bool horizontal_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<ConstRatioSizing2> {
 		static bool decode_pointer(const YAML::Node& node, ConstRatioSizing2*& const_ratio_sizing2);
 	};
+	*/
 }

@@ -56,6 +56,7 @@ namespace ie {
 		panel_->draw_debug(render_target, 0, indent_addition, hue, hue_offset);
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxPanel>::decode_pointer(const YAML::Node& node, BoxPanel*& box_with_panel) {
 		box_with_panel = new BoxPanel{
 			node["panel"].as<BoxPtr<ConstPanel> >(),
@@ -63,5 +64,7 @@ namespace ie {
 			conv_def(node["min-size"], sf::Vector2f{}),
 		};
 		return true;
+
 	}
+	*/
 }

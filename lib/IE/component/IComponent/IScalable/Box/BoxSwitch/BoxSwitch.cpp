@@ -87,6 +87,7 @@ namespace ie {
 		return new BoxSwitch{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxSwitch>::decode_pointer(const YAML::Node& node, BoxSwitch*& box_switcher) {
 		box_switcher = new BoxSwitch{
 			node["inactive-object"].as<BoxPtr<IScalable>>(),
@@ -95,5 +96,7 @@ namespace ie {
 			conv_def(node["min-size"],sf::Vector2f{})
 		};
 		return true;
+
 	}
+	*/
 }

@@ -60,6 +60,7 @@ namespace ie {
 		object_->draw_debug(render_target, indent, indent_addition, hue + hue_offset, hue_offset);
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxConstBezel>::decode_pointer(const YAML::Node& node, BoxConstBezel*& box_with_const_bezel) {
 		box_with_const_bezel = new BoxConstBezel{
 			node["object"].as<BoxPtr<IScalable> >(),
@@ -68,6 +69,8 @@ namespace ie {
 			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
+
 	}
+	*/
 }
 

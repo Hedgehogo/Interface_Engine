@@ -38,6 +38,7 @@ namespace ie {
 		return new SetSValueAction<T>{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<SetSValueAction<T> >::decode_pointer(const YAML::Node& node, SetSValueAction<T>*& set_s_value_action) {
 		set_s_value_action = new SetSValueAction<T>{
@@ -45,5 +46,7 @@ namespace ie {
 			node["constant"].as<T>()
 		};
 		return true;
+
 	}
+	*/
 }

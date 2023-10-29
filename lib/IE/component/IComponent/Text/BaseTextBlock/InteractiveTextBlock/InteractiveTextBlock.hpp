@@ -60,8 +60,10 @@ namespace ie {
 		BoxPtr<IInteraction> interaction;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<InteractiveTextBlock> {
 		static bool decode_pointer(const YAML::Node& node, InteractiveTextBlock*& interactive_text_block);
 	};
+	*/
 }

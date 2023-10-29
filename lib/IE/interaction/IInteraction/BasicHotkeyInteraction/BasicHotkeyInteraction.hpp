@@ -2,7 +2,7 @@
 
 #include "../IInteraction.hpp"
 #include "../BasicKeysInteraction/BasicKeysInteraction.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	namespace detail {
@@ -93,10 +93,12 @@ namespace ie {
 	
 	using HotkeyInteraction = BasicHotkeyInteraction<>;
 	
+	/*old_yaml_decode
 	template<typename T>
 	struct Decode<detail::BasicHotkeyInteractionHotkey<T>*> {
 		static bool decode(const YAML::Node& node, detail::BasicHotkeyInteractionHotkey<T>*& hotkey);
 	};
+	*/
 }
 
 #include "BasicHotkeyInteraction.inl"

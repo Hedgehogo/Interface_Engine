@@ -20,6 +20,7 @@ namespace ie {
 		return new ChangeVariableByStraightLine((end - start) / length, length, start);
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ChangeVariableByStraightLine>::decode_pointer(const YAML::Node& node, ChangeVariableByStraightLine*& change_variable_by_straight_line) {
 		if(node["k"]) {
 			change_variable_by_straight_line = new ChangeVariableByStraightLine{
@@ -35,5 +36,7 @@ namespace ie {
 			);
 		}
 		return true;
+
 	}
+	*/
 }

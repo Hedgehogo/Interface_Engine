@@ -116,6 +116,7 @@ namespace ie {
 		return layout_;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Switcher>::decode_pointer(const YAML::Node& node, Switcher*& switcher) {
 		auto inactive_background{node["inactive-background"].as<BoxPtr<IScalable> >()};
 		auto active_background{node["active-background"].as<BoxPtr<IScalable> >()};
@@ -144,5 +145,7 @@ namespace ie {
 			};
 		}
 		return true;
+
 	}
+	*/
 }

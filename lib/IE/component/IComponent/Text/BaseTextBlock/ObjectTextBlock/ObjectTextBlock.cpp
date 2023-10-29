@@ -67,8 +67,10 @@ namespace ie {
 		return new ObjectTextBlock{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ObjectTextBlock>::decode_pointer(const YAML::Node&, ObjectTextBlock*&) {
 		throw std::runtime_error("DecodePointer<ObjectTextBlock>::decode_pointer() not correct");
 		return false;
 	}
+	*/
 }

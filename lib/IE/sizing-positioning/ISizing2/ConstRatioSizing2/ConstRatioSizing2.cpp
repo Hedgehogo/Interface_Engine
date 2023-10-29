@@ -72,6 +72,7 @@ namespace ie {
 		return new ConstRatioSizing2{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ConstRatioSizing2>::decode_pointer(const YAML::Node& node, ConstRatioSizing2*& const_ratio_sizing2) {
 		float ratio{conv_def(node["ratio"], 1.f)};
 		bool horizontal{conv_bool_def(node["direction"], "horizontal", "vertical", true)};
@@ -114,5 +115,7 @@ namespace ie {
 			throw YAML::BadConversion{node.Mark()};
 		}
 		return true;
+
 	}
+	*/
 }

@@ -99,6 +99,7 @@ namespace ie {
 		object_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxRenderTexture>::decode_pointer(const YAML::Node& node, BoxRenderTexture*& box_with_render_texture) {
 		box_with_render_texture = new BoxRenderTexture{
 			node["object"].as<BoxPtr<IScalable> >(),
@@ -106,5 +107,7 @@ namespace ie {
 			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
+
 	}
+	*/
 }

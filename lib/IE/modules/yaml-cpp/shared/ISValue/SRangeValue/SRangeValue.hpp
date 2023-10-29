@@ -25,10 +25,12 @@ namespace ie {
 		T lower_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<typename T>
 	struct DecodePointer<SRangeValue<T>> {
 		static bool decode_pointer(const YAML::Node& node, SRangeValue<T>*& sRange_value);
 	};
+	*/
 	
 	template<typename T>
 	using SRange = SRangeValue<T>;

@@ -51,6 +51,7 @@ namespace ie {
 		this->interface_.set_render_window_size(window_);
 	}
 	
+	/*old_yaml
 	Window::Window(const std::filesystem::path& interface) : interface_(make_interface(interface)), resizer_(get_window_resizer()) {
 		construction();
 		this->interface_.set_render_window_size(window_);
@@ -73,6 +74,7 @@ namespace ie {
 		construction();
 		this->interface_.set_render_window_size(window_);
 	}
+	*/
 	
 	Window::Window(Interface::Make&& make, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) :
 		interface_(window_, std::move(make.object), std::move(make.animation_manager), std::move(make.interaction_stack)),

@@ -34,10 +34,13 @@ namespace ie {
 		return new Underline{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Underline>::decode_pointer(const YAML::Node& node, Underline*& underline) {
 		underline = new Underline{
 			conv_def<orl::Option<sf::Color>>(node["color"], {})
 		};
 		return true;
+
 	}
+	*/
 }

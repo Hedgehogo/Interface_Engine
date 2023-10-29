@@ -45,8 +45,10 @@ namespace ie {
 		bool drawn_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxDebug> {
 		static bool decode_pointer(const YAML::Node& node, BoxDebug*& box_debug);
 	};
+	*/
 }

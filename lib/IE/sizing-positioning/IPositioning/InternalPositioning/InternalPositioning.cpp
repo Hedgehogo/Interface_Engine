@@ -20,6 +20,7 @@ namespace ie {
 		return offset_;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<InternalPositioning>::decode_pointer(const YAML::Node& node, InternalPositioning*& internal_positioning) {
 		if(node.IsScalar()) {
 			internal_positioning = new InternalPositioning{
@@ -32,5 +33,7 @@ namespace ie {
 			};
 		}
 		return true;
+
 	}
+	*/
 }

@@ -20,8 +20,10 @@ namespace ie {
 		std::vector<Animator*> animators_;
 	};
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<AnimationManager> {
 		static bool decode(const YAML::Node& node, AnimationManager& animation_manager);
 	};
+	*/
 }

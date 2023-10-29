@@ -193,6 +193,7 @@ namespace ie {
 		second_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxConstRatio>::decode_pointer(const YAML::Node& node, BoxConstRatio*& box_with_const_ratio) {
 		box_with_const_ratio = new BoxConstRatio{
 			node["const-object"].as<BoxPtr<IScalable> >(),
@@ -203,5 +204,7 @@ namespace ie {
 			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
+
 	}
+	*/
 }

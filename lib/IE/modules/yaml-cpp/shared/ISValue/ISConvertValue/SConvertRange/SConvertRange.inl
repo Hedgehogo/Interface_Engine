@@ -6,6 +6,7 @@ namespace ie {
 		});
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	template<typename T>
 	bool DecodePointer<SConvertRange<T> >::decode_pointer(const YAML::Node& node, SConvertRange<T>*& sConvert_range) {
 		sConvert_range = new SConvertRange<T>{
@@ -14,5 +15,7 @@ namespace ie {
 			node["lower"].as<T>()
 		};
 		return true;
+
 	}
+	*/
 }

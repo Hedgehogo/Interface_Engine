@@ -65,13 +65,17 @@ namespace ie {
 		const Algorithm algorithm;
 	};
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<BaseResizer::Align> {
 		static bool decode(const YAML::Node& node, BaseResizer::Align& align);
 	};
+	*/
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<BaseResizer::Algorithm> {
 		static bool decode(const YAML::Node& node, BaseResizer::Algorithm& align);
 	};
+	*/
 }

@@ -36,11 +36,13 @@ namespace ie {
 			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
 		);
 		
+		/*old_yaml
 		explicit Interface(
 			const std::string& file_path,
 			AnimationManager animation_manager = AnimationManager{{}},
 			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
 		);
+		*/
 		
 		explicit Interface(
 			sf::RenderWindow& window,
@@ -49,12 +51,14 @@ namespace ie {
 			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
 		);
 		
+		/*old_yaml
 		explicit Interface(
 			sf::RenderWindow& window,
 			const std::string& file_path,
 			AnimationManager animation_manager = AnimationManager{{}},
 			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
 		);
+		*/
 		
 		explicit Interface(
 			sf::RenderWindow& window,
@@ -124,6 +128,7 @@ namespace ie {
 		bool active_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<Interface> {
 		static bool decode_pointer(const YAML::Node& node, Interface*& interface);
@@ -134,4 +139,5 @@ namespace ie {
 	Interface make_interface(sf::RenderWindow& window, const std::filesystem::path& file_path, int argc = 0, char* argv[] = {});
 	
 	Interface* make_prt_interface(sf::RenderWindow& window, const std::filesystem::path& file_path, int argc = 0, char* argv[] = {});
+	*/
 }

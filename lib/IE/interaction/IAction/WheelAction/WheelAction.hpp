@@ -1,8 +1,7 @@
 #pragma once
 
-#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
 #include "../IAction.hpp"
-#include "../../../sfml-events/MouseWheel/MouseWheel.hpp"
+#include "IE/sfml-events/MouseWheel/MouseWheel.hpp"
 
 namespace ie {
 	class WheelAction : public virtual IAction {

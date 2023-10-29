@@ -12,10 +12,12 @@ namespace ie {
 		PSRange<T> value_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<typename T>
 	struct DecodePointer<SConvertRange<T> > {
 		static bool decode_pointer(const YAML::Node& node, SConvertRange<T>*& sConvert_range);
 	};
+	*/
 	
 	using SCRint = SConvertRange<int>;
 	using SCRfloat = SConvertRange<float>;

@@ -81,8 +81,10 @@ namespace ie {
 		sf::Clock clock_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxShader> {
 		static bool decode_pointer(const YAML::Node& node, BoxShader*& box_with_shader);
 	};
+	*/
 }

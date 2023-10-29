@@ -56,8 +56,10 @@ namespace ie {
 		sf::Vector2f offset_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<BoxBackground> {
 		static bool decode_pointer(const YAML::Node& node, BoxBackground*& box_with_background);
 	};
+	*/
 }

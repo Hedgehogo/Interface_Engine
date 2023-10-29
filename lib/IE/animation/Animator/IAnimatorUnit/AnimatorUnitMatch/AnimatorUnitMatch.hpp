@@ -38,15 +38,19 @@ namespace ie {
 		PSValue<T> value_;
 	};
 	
+	/*old_yaml_decode
 	template<typename T>
 	struct Decode<detail::AnimatorUnitMatch::Option<T> > {
 		static bool decode(const YAML::Node& node, detail::AnimatorUnitMatch::Option<T>& option);
 	};
+	*/
 	
+	/*old_yaml_decode_pointer
 	template<typename T>
 	struct DecodePointer<AnimatorUnitMatch<T> > {
 		static bool decode_pointer(const YAML::Node& node, AnimatorUnitMatch<T>*& animator_unit_match);
 	};
+	*/
 	
 	using AnimatorUnitMatchFloat = AnimatorUnitMatch<float>;
 }

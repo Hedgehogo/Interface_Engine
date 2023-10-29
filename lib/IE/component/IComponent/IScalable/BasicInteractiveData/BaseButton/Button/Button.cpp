@@ -36,11 +36,14 @@ namespace ie {
 		return result;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Button>::decode_pointer(const YAML::Node& node, Button*& button) {
 		button = new Button{
 			node["background"].as<BoxPtr<IScalable> >(),
 			node["interaction"].as<BoxPtr<IBaseInteraction> >()
 		};
 		return true;
+
 	}
+	*/
 }

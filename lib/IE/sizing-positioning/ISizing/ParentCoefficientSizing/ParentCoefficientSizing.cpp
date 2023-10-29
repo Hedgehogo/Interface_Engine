@@ -31,11 +31,14 @@ namespace ie {
 		return (object_size - addition_) / coefficient_;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<ParentCoefficientSizing>::decode_pointer(const YAML::Node& node, ParentCoefficientSizing*& parent_coefficient_sizing) {
 		parent_coefficient_sizing = new ParentCoefficientSizing{
 			node["coefficient"].as<float>(),
 			conv_def(node["addition"], 0.f)
 		};
 		return true;
+
 	}
+	*/
 }

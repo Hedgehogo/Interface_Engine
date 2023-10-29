@@ -19,10 +19,12 @@ namespace ie {
 		std::vector<typename ISValue<T>::SetterFunc> setters_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<typename T>
 	struct DecodePointer<SValue<T> > {
 		static bool decode_pointer(const YAML::Node& node, SValue<T>*& sValue);
 	};
+	*/
 	
 	using Sbool = SValue<bool>;
 	using Sfloat = SValue<float>;

@@ -18,10 +18,12 @@ namespace ie {
 		void set_value(const float& value) override;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<SCoefficientValue> {
 		static bool decode_pointer(const YAML::Node& node, SCoefficientValue*& sCoefficient_value);
 	};
+	*/
 	
 	using SCoefficient = SCoefficientValue;
 	

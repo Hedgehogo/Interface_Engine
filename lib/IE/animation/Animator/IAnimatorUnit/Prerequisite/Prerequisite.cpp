@@ -75,6 +75,7 @@ namespace ie {
 	}
 	
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Prerequisite>::decode_pointer(const YAML::Node& node, Prerequisite*& prerequisite) {
 		prerequisite = new Prerequisite{
 			Buffer::get<ISbool>(node["valve"]),
@@ -92,5 +93,7 @@ namespace ie {
 		
 		add_unit_in_buffer(node, prerequisite);
 		return true;
+
 	}
+	*/
 }

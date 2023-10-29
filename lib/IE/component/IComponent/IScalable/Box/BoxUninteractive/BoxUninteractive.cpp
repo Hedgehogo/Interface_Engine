@@ -36,13 +36,16 @@ namespace ie {
 		return *object_;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxUninteractive>::decode_pointer(const YAML::Node& node, BoxUninteractive*& box_uninteractive) {
 		box_uninteractive = new BoxUninteractive{
 			node["object"].as<BoxPtr<IScalable> >(),
 			conv_def(node["min-size"], sf::Vector2f{})
 		};
 		return true;
+
 	}
+	*/
 	
 	BoxUninteractive* BoxUninteractive::copy() {
 		return new BoxUninteractive{*this};

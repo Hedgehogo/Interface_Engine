@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	enum class Side {
@@ -10,8 +10,10 @@ namespace ie {
 		Left
 	};
 	
+	/*old_yaml_decode
 	template<>
 	struct Decode<Side> {
 		static bool decode(const YAML::Node& node, Side& side);
 	};
+	*/
 }

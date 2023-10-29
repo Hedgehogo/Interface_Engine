@@ -1,6 +1,8 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
 #include "../IChangeVariable.hpp"
+#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class ChangeVariableByCurve : public virtual IChangeVariable {
@@ -19,8 +21,10 @@ namespace ie {
 		float size_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<ChangeVariableByCurve> {
 		static bool decode_pointer(const YAML::Node& node, ChangeVariableByCurve*& change_variable_by_curve);
 	};
+	*/
 }

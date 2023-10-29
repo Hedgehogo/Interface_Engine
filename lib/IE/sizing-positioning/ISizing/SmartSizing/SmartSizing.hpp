@@ -33,8 +33,10 @@ namespace ie {
 		float addition_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<SmartSizing> {
 		static bool decode_pointer(const YAML::Node& node, SmartSizing*& smart_sizing);
 	};
+	*/
 }
