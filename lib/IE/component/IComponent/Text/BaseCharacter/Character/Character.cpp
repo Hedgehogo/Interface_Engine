@@ -25,17 +25,15 @@ namespace ie {
 		orl::Option<sf::RenderTarget&> render_target
 	) : render_target(character == '\n' ? orl::Option<sf::RenderTarget&>{} : render_target),
 		character(character),
-		advance(0),
+		glyph(text_variables.font.some()->getGlyph(character, text_variables.size.some(), text_variables.style.some() & sf::Text::Style::Bold)),
+		advance(glyph.advance),
 		kerning(0),
 		text_variables(text_variables),
 		vertex_array(sf::Quads, 4),
 		selection_vertex_array(sf::Quads, 4),
-		lines(lines) {
+		lines(lines),
+		texture(text_variables.font.some()->getTexture(text_variables.size.some())){
 		if(render_target) {
-			glyph = text_variables.font.some()->getGlyph(character, text_variables.size.some(), text_variables.style.some() & sf::Text::Style::Bold);
-			advance = glyph.advance;
-			texture = text_variables.font.some()->getTexture(text_variables.size.some());
-			
 			make_rect_bones_tex_coords(glyph.textureRect, vertex_array);
 			
 			make_rect_bones_position<int>({0, 0, glyph.textureRect.width, glyph.textureRect.height}, vertex_array);
@@ -118,7 +116,7 @@ namespace ie {
 	}
 	
 	float Character::get_height() const {
-		return text_variables.size.some();
+		return text_variables.size.some_or(0);
 	}
 	
 	void Character::set_position(sf::Vector2f position) {

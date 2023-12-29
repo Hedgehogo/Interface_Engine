@@ -84,7 +84,7 @@ namespace ie {
 		inherit<KeyAction, SetSIntAction>({"SetSIntA"});
 		inherit<KeyAction, SetSFloatAction>({"SetSFloatA"});
 		
-		inherit<BasicKeyAction<Text&>, TextCopyAction>({"TextCopyA"});
+		inherit<BasicKeyAction<Text&>, TextCopyAction >({"TextCopyA"});
 		inherit<BasicKeyAction<Text&>, TextSelectionAction>({"TextSelectionA"});
 		
 		inherit<BaseSwitchTabsAction, SwitchTabsAction>({"SwitchTabsA"});

@@ -6,7 +6,7 @@ namespace ie {
 	class StrikeThrough : public BaseLine {
 	public:
 		struct Make : public BaseLine::Make {
-			orl::Option<sf::Color> color = sf::Color{255, 255, 255, 0};
+			orl::Option<sf::Color> color = {};
 			float strike_through_offset;
 			
 			Make(const orl::Option<sf::Color>& color = {}, float strike_through_offset = 0.3);

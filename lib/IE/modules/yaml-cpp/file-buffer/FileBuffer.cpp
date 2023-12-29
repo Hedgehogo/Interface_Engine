@@ -93,6 +93,17 @@ namespace ie {
 		return std::basic_string<Uint32>{};
 	}
 	
+	std::basic_string<char32_t> uint32_to_u32string_string(std::basic_string<Uint32> str) {
+		if(!str.empty()) {
+			std::basic_string<char32_t> result(str.size(), L' ');
+			for(std::basic_string<char32_t>::size_type i = 0; i < str.size(); ++i) {
+				result[i] = str[i];
+			}
+			return result;
+		}
+		return std::basic_string<char32_t>{};
+	}
+	
 	bool Decode<std::basic_string<char32_t>>::decode(const YAML::Node& node, std::basic_string<char32_t>& string32) {
 		if(node.IsScalar()) {
 			std::string str = node.as<std::string>();

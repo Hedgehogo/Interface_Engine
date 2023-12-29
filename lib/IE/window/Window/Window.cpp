@@ -79,14 +79,13 @@ namespace ie {
 		resizer(get_window_resizer()) {
 		
 		Window::re_calculate_min_size();
-		if(mode == sf::VideoMode{}) {
-			sf::Vector2u normal_size{map_vector2<float, std::ceil>(this->interface.get_normal_size())};
-			sf::Vector2u size{max(sf::Vector2u(min_size), normal_size)};
-			mode = sf::VideoMode{size.x, size.y};
-		}
 		sf::Vector2u size{mode.width, mode.height};
+		if(size == sf::Vector2u{0, 0}) {
+			size = sf::Vector2u(map_vector2<float, std::ceil>(this->interface.get_normal_size()));
+		}
+		size = max(sf::Vector2u(min_size), size);
 		
-		window.create(mode, title, sf::Style::None, settings);
+		window.create(sf::VideoMode{size.x, size.y}, title, sf::Style::None, settings);
 		window.setView({sf::Vector2f{size / 2u}, sf::Vector2f{size}});
 		interface.set_size(sf::Vector2f{size});
 		resizer->set_window(*this);

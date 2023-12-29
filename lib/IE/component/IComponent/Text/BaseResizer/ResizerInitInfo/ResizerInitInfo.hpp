@@ -4,8 +4,7 @@
 namespace ie {
 	struct ResizerInitInfo {
 		std::vector<BaseCharacter*>& characters;
-		std::vector<BoxPtr<BaseLine>>& lines;
 	
-		ResizerInitInfo(std::vector<BaseCharacter*>& characters, std::vector<BoxPtr<BaseLine>>& lines);
+		explicit ResizerInitInfo(std::vector<BaseCharacter*>& characters);
 	};
 }

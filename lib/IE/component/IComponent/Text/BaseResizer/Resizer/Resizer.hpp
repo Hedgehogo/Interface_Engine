@@ -17,8 +17,6 @@ namespace ie {
 		
 		Resizer(Make&& make, ResizerInitInfo init_info);
 		
-		Resizer(float line_spacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
-		
 		void move(sf::Vector2f position) override;
 		
 		void set_position(sf::Vector2f position) override;
@@ -30,17 +28,19 @@ namespace ie {
 		
 		virtual void auto_porting(std::vector<BaseCharacter*>::iterator end_character);
 		
-		virtual float equalize(std::vector<BaseCharacter*>::iterator end_character);
+		virtual void equalize_characters(std::vector<BaseCharacter*>::iterator end_character, float line_size, float length_end_character);
+		
+		virtual float equalize(std::vector<BaseCharacter*>::iterator end_character, float height_end_character);
 		
 		virtual void delete_old_cash(sf::Vector2f size, sf::Vector2f position);
 		
-		virtual void character_resize(float kerning);
+		virtual void character_resize();
 		
-		virtual void space_resize(float kerning);
+		virtual void space_resize();
 		
-		virtual void full_object_resize();
+ 		virtual void enter_resize();
 		
-		virtual void enter_resize();
+		virtual void object_resize(bool full);
 		
 		virtual void end_line_equalize();
 	

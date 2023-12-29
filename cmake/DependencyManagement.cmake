@@ -71,12 +71,18 @@ function(dependency_management PROJECT)
             FIND_PACKAGE_ARGS NAMES box-ptr
     )
     FetchContent_Declare(
-            option_result_cpp
-            GIT_REPOSITORY https://github.com/Hedgehogo/option-result-cpp.git
+            IEML_CBOR_cpp
+            GIT_REPOSITORY https://github.com/Hedgehogo/IEML-CBOR-cpp.git
             GIT_TAG main
-            FIND_PACKAGE_ARGS NAMES option_result_cpp
+            FIND_PACKAGE_ARGS NAMES IEML_CBOR_cpp
     )
-    FetchContent_MakeAvailable(SFML curl localisation-cpp box-ptr option_result_cpp)
+    FetchContent_Declare(
+            RTTB_cpp
+            GIT_REPOSITORY https://github.com/Hedgehogo/RTTB-cpp.git
+            GIT_TAG master
+            FIND_PACKAGE_ARGS NAMES RTTB_cpp
+    )
+    FetchContent_MakeAvailable(SFML curl localisation-cpp box-ptr IEML_CBOR_cpp RTTB_cpp)
 
     connect_yaml_cpp()
     connect_ImageMagick()

@@ -39,22 +39,35 @@ int main() {
 				make_box_ptr<ie::Text::Make>(
 					ie::make_vector(
 						make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
-							U"bbabb"
+							U"The Interface_Engine project was created to easily write a scalable interface for games and programs in C++ 17 or more. At the same time it allows you to:\n"
+							"\n"
+							"Automatically calculate the minimum size at which the interface is displayed correctly.\n"
+							"Automatically calculate the ideal size for displaying your interface.\n"
+							"Before studying and using this library, we advise you to familiarize yourself with the basics of SFML.",
+							orl::Option<sf::Color>{},
+							orl::Option<sf::Font*>{},
+							orl::Option<sf::Text::Style>{},
+							ie::make_vector(
+								make_box_ptr<ie::BaseLine::Make, ie::Underline::Make>(),
+								make_box_ptr<ie::BaseLine::Make, ie::StrikeThrough::Make>()
+							),
+							30U
 						),
-						make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
-							U"bbbbb"
+						make_box_ptr<ie::BaseTextBlock::Make, ie::ObjectTextBlock::Make>(
+							make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
+							100.f
 						)
 					),
 					&font,
 					make_box_ptr<ie::FullColor::Make>(sf::Color::White),
-					30U,
+					14U,
 					sf::Color::Black,
 					sf::Color::White,
 					sf::Color::Blue,
 					sf::Color::Black,
 					sf::Color{150, 150, 150},
 					sf::Text::Style{},
-					make_box_ptr<ie::Resizer::Make>(1.15f, ie::BaseResizer::Align::Left),
+					make_box_ptr<ie::Resizer::Make>(1.15f, ie::BaseResizer::Align::Center, ie::BaseResizer::Algorithm::Base),
 					make_box_ptr<ie::BasicHotkeyInteraction<ie::Text&>::Make>(
 						ie::make_vector(
 							ie::make_vector(
@@ -78,10 +91,7 @@ int main() {
 			)
 		},
 		"IE works!",
-		{800, 600},
-		sf::ContextSettings{
-			0, 0, 1
-		}
+		{800, 600}
 	};
 	
 	FpsCounter<500> fps;

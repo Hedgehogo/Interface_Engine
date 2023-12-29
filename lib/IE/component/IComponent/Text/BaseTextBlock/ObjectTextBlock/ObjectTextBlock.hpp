@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../BaseTextBlock.hpp"
+#include "../../BaseCharacter/Character/Character.hpp"
 #include "../../BaseCharacter/ObjectCharacter/ObjectCharacter.hpp"
 
 namespace ie {
@@ -8,19 +9,17 @@ namespace ie {
 	public:
 		struct Make : public BaseTextBlock::Make {
 			BoxPtr<IScalable::Make> object;
-			sf::Vector2f size = {0, 0};
-			bool is_character = true;
-			float height = 0;
-			bool full_line;
+			sf::Vector2f size;
+			ObjectCharacter::ObjectSpecial special = ObjectCharacter::ObjectSpecial::No;
 			
-			explicit Make(BoxPtr<IScalable::Make>&& object, const sf::Vector2f& size = {0, 0}, bool is_character = true);
+			Make(BoxPtr<IScalable::Make>&& object, const sf::Vector2f& size, bool is_character = true);
 			
 			Make(BoxPtr<IScalable::Make>&& object, float height);
 			
-			ObjectTextBlock* make(TextBockInitInfo text_block_init_info) override;
+			ObjectTextBlock* make(TextBockInitInfo init_info) override;
 		};
 		
-		ObjectTextBlock(Make&& make, TextBockInitInfo text_block_init_info);
+		ObjectTextBlock(Make&& make, TextBockInitInfo init_info);
 		
 		void init(TextBockInitInfo text_block_init_info) override;
 		
@@ -35,9 +34,8 @@ namespace ie {
 		BaseTextBlock* copy() override;
 	
 	protected:
+		ObjectCharacter object_character;
 		std::vector<BoxPtr<BaseLine>> lines;
-		bool is_character;
-		BoxPtr<ObjectCharacter> object_character;
 	};
 	
 	template<>

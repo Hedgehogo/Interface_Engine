@@ -2,19 +2,19 @@
 
 namespace ie {
 	BaseResizer::BaseResizer(float line_spacing, BaseResizer::Align align, BaseResizer::Algorithm algorithm, ResizerInitInfo init_info) :
-		characters(&init_info.characters),
-		lines(&init_info.lines),
+		characters(init_info.characters),
+		lines(),
 		line_spacing(line_spacing),
 		align(align),
 		algorithm(algorithm) {
 	}
 	
-	BaseResizer::BaseResizer(float line_spacing, Align align, Algorithm algorithm) : characters(nullptr), lines(nullptr), line_spacing(line_spacing), align(align), algorithm(algorithm) {
+	void BaseResizer::init(ResizerInitInfo init_info) {
+		//this->characters = &init_info.characters;
 	}
 	
-	void BaseResizer::init(ResizerInitInfo init_info) {
-		this->characters = &init_info.characters;
-		this->lines = &init_info.lines;
+	const std::vector<BoxPtr<BaseLine> >& BaseResizer::get_lines() const {
+		return lines;
 	}
 	
 	sf::Vector2f BaseResizer::get_min_size() {

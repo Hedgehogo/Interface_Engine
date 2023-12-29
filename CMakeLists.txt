@@ -28,4 +28,4 @@ add_subdirectory(example-resources/modules)
 create_tests(${PROJECT_NAME})
 create_install_target()
 
-projects_checking("${PROJECT_NAME};${PROJECT_NAME}_tests")
+projects_checking("${PROJECT_NAME};${PROJECT_NAME}_tests" "${PROJECT_NAME}_tests")

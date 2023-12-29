@@ -35,6 +35,8 @@ namespace ie {
 	
 	std::basic_string<Uint32> u32string_to_uint32_string(std::basic_string<char32_t> str);
 	
+	std::basic_string<char32_t> uint32_to_u32string_string(std::basic_string<Uint32> str);
+	
 	template<>
 	struct Decode<std::basic_string<char32_t>> {
 		static bool decode(const YAML::Node& node, std::basic_string<char32_t>& string32);
