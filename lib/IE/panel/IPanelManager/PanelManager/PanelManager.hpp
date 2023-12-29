@@ -12,9 +12,9 @@ namespace ie {
 	public:
 		explicit PanelManager(std::vector<BasePanel*> panels = std::vector<BasePanel*>{});
 		
-		std::size_t size();
+		size_t size();
 		
-		BasePanel& get(std::size_t index);
+		BasePanel& get(size_t index);
 		
 		bool is_free() override;
 		
@@ -35,7 +35,7 @@ namespace ie {
 		bool update_interactions(sf::Vector2f mouse_position, bool active) override;
 	
 	protected:
-		std::vector<BasePanel*> panels;
-		std::vector<BasePanel*> active_panels;
+		std::vector<BasePanel*> panels_;
+		std::vector<BasePanel*> active_panels_;
 	};
 }

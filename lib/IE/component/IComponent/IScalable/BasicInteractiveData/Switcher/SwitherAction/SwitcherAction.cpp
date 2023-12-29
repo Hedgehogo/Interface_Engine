@@ -10,17 +10,17 @@ namespace ie {
 		return new SwitcherAction{std::move(*this), init_info};
 	}
 	
-	SwitcherAction::SwitcherAction(Make&& make, ActionInitInfo) : value(std::move(make.value)) {
+	SwitcherAction::SwitcherAction(Make&& make, ActionInitInfo) : value_(std::move(make.value)) {
 	}
 	
-	SwitcherAction::SwitcherAction(PSbool value) : value(value) {
+	SwitcherAction::SwitcherAction(PSbool value) : value_(value) {
 	}
 	
 	void SwitcherAction::start_pressed() {
 	}
 	
 	void SwitcherAction::stop_pressed() {
-		value->set_value(!value->get_value());
+		value_->set_value(!value_->get_value());
 	}
 	
 	void SwitcherAction::while_pressed() {

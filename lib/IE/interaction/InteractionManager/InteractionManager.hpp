@@ -4,8 +4,6 @@
 #include <algorithm>
 #include <vector>
 
-using ullint = unsigned long long;
-
 namespace ie {
 	template<typename T>
 	void ptr_sort(std::vector<T*>& vector) {
@@ -18,9 +16,9 @@ namespace ie {
 	public:
 		explicit InteractionManager();
 		
-		std::size_t size();
+		size_t size();
 		
-		IInteraction& get(std::size_t index);
+		IInteraction& get(size_t index);
 		
 		void add_interaction(IInteraction& interaction);
 		
@@ -35,10 +33,10 @@ namespace ie {
 		virtual ~InteractionManager() = default;
 		
 	protected:
-		std::vector<IInteraction*> interactions;
-		std::vector<IInteraction*> add_interactions;
-		std::vector<IInteraction*> delete_interactions;
-		sf::Vector2i position;
-		bool block;
+		std::vector<IInteraction*> interactions_;
+		std::vector<IInteraction*> add_interactions_;
+		std::vector<IInteraction*> delete_interactions_;
+		sf::Vector2i position_;
+		bool block_;
 	};
 }

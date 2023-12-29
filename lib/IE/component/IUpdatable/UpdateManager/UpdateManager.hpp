@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <cstddef>
 #include "../IUpdatable/IUpdatable.hpp"
 
 namespace ie {
@@ -8,9 +9,9 @@ namespace ie {
 	public:
 		UpdateManager() = default;
 		
-		std::size_t size();
+		size_t size();
 		
-		IUpdatable& get(std::size_t index);
+		IUpdatable& get(size_t index);
 		
 		void add(IUpdatable& updatable);
 		
@@ -19,6 +20,6 @@ namespace ie {
 		void update() override;
 	
 	protected:
-		std::vector<IUpdatable*> updatable;
+		std::vector<IUpdatable*> updatable_;
 	};
 }

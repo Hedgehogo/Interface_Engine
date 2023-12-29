@@ -32,21 +32,21 @@ namespace ie {
 		
 		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		std::size_t get_array_size() const override;
+		size_t get_array_size() const override;
 		
-		IScalable& get_object_at(std::size_t index) override;
+		IScalable& get_object_at(size_t index) override;
 		
-		const IScalable& get_object_at(std::size_t index) const override;
+		const IScalable& get_object_at(size_t index) const override;
 		
 		int get_tab(sf::Vector2f position);
 		
 		BoxSwitcherTabs* copy() override;
 	
 	protected:
-		BasicInteractiveData<BoxSwitcherTabs&> interactive;
-		std::vector<BoxPtr<IScalable> > objects;
-		bool is_horizontal;
-		PSint value;
+		BasicInteractiveData<BoxSwitcherTabs&> interactive_;
+		std::vector<BoxPtr<IScalable> > objects_;
+		bool is_horizontal_;
+		PSint value_;
 	};
 	
 	template<>

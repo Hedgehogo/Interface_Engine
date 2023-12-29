@@ -10,18 +10,18 @@ namespace ie {
 	}
 	
 	SmartSizing::SmartSizing(Make&& make, float) :
-		target_coefficient(make.target_coefficient), parent_coefficient(make.parent_coefficient), addition(make.addition) {
+		target_coefficient_(make.target_coefficient), parent_coefficient_(make.parent_coefficient), addition_(make.addition) {
 	}
 	
 	SmartSizing::SmartSizing(float target_coefficient, float parent_coefficient, float addition) :
-		target_coefficient(target_coefficient), parent_coefficient(parent_coefficient), addition(addition) {
+		target_coefficient_(target_coefficient), parent_coefficient_(parent_coefficient), addition_(addition) {
 	}
 	
 	void SmartSizing::init(float) {
 	}
 	
 	float SmartSizing::find_size(float parent_size, float target_size) {
-		return parent_size * parent_coefficient + target_size * target_coefficient + addition;
+		return parent_size * parent_coefficient_ + target_size * target_coefficient_ + addition_;
 	}
 	
 	SmartSizing* SmartSizing::copy() {
@@ -29,7 +29,7 @@ namespace ie {
 	}
 	
 	float SmartSizing::get_parent_size(float object_size) {
-		return (object_size - addition) / parent_coefficient;
+		return (object_size - addition_) / parent_coefficient_;
 	}
 	
 	bool DecodePointer<SmartSizing>::decode_pointer(const YAML::Node& node, SmartSizing*& smart_sizing) {

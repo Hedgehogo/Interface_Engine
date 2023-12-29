@@ -9,7 +9,7 @@ namespace ie {
 		orl::Option<sf::Color> inactive_background_selection_color,
 		orl::Option<sf::Font*> font,
 		orl::Option<sf::Text::Style> style,
-		orl::Option<uint> size
+		orl::Option<size_t> size
 	) :
 		text_color(text_color),
 		text_selection_color(text_selection_color),

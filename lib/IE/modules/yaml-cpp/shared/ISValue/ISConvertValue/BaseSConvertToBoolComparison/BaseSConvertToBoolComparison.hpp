@@ -14,7 +14,7 @@ namespace ie {
 		BaseSConvertToBoolComparison(PISValue<T> from_value, bool default_value, T compared);
 	
 	protected:
-		T compared;
+		T compared_;
 	};
 }
 

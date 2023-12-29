@@ -19,8 +19,8 @@ namespace ie {
 		
 		const LayoutData& layout_get_data() const override;
 		
-		LayoutData layout;
-		sf::Vector2f minimum_size;
+		LayoutData layout_;
+		sf::Vector2f minimum_size_;
 	};
 }
 

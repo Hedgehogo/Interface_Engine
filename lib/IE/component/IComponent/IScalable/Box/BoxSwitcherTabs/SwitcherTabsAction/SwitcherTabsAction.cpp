@@ -10,21 +10,21 @@ namespace ie {
 	}
 	
 	SwitcherTabsAction::SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> init_info) :
-		value(std::move(make.value)), switcher_tabs(&init_info.additional) {
+		value_(std::move(make.value)), switcher_tabs_(&init_info.additional) {
 	}
 	
 	SwitcherTabsAction::SwitcherTabsAction(PISint value) :
-		value(std::move(value)), switcher_tabs(nullptr) {
+		value_(std::move(value)), switcher_tabs_(nullptr) {
 	}
 	
 	void SwitcherTabsAction::init(BasicActionInitInfo<BoxSwitcherTabs&> init_info) {
-		switcher_tabs = &init_info.additional;
+		switcher_tabs_ = &init_info.additional;
 	}
 	
 	void SwitcherTabsAction::start_pressed() {}
 	
 	void SwitcherTabsAction::stop_pressed() {
-		value->set_value(switcher_tabs->get_tab(sf::Vector2f(mouse_position)));
+		value_->set_value(switcher_tabs_->get_tab(sf::Vector2f(mouse_position_)));
 	}
 	
 	void SwitcherTabsAction::while_pressed() {}

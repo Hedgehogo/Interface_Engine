@@ -45,10 +45,10 @@ namespace ie {
 		ConstRatioSizing2* copy() override;
 	
 	protected:
-		sf::RenderTarget* render_target;
-		BoxPtr<ISizing> sizing;
-		float ratio;
-		bool horizontal;
+		sf::RenderTarget* render_target_;
+		BoxPtr<ISizing> sizing_;
+		float ratio_;
+		bool horizontal_;
 	};
 	
 	template<>

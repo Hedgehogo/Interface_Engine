@@ -48,11 +48,11 @@ namespace ie {
 		BoxSwitch* copy() override;
 	
 	protected:
-		DrawManager inactive_draw_manager;
-		DrawManager active_draw_manager;
-		BoxPtr<IScalable> inactive_object;
-		BoxPtr<IScalable> active_object;
-		PSbool value;
+		DrawManager inactive_draw_manager_;
+		DrawManager active_draw_manager_;
+		BoxPtr<IScalable> inactive_object_;
+		BoxPtr<IScalable> active_object_;
+		PSbool value_;
 	};
 	
 	template<>

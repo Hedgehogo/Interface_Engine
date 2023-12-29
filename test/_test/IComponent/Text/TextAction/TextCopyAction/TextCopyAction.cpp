@@ -24,7 +24,7 @@ TEST(IComponent_Text, TextCopyAction) {
 	ie::Text text{
 		ie::Text::Make{
 			ie::make_vector(
-				make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
+                    ie::make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
 					U"aaa\naaa"
 				)
 			),

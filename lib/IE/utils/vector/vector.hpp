@@ -1,14 +1,15 @@
 #pragma once
 
 #include <vector>
+#include <cstddef>
 
 namespace ie {
 	std::vector<float>& add_bounds(std::vector<float>& vector);
 	
-	std::vector<float> gen_bounds(std::size_t size);
+	std::vector<float> gen_bounds(size_t size);
 	
 	template<typename T>
-	std::size_t y_size(std::vector<std::vector<T> >& vector) {
+	size_t y_size(std::vector<std::vector<T> >& vector) {
 		if(vector.empty()) {
 			return 0;
 		}

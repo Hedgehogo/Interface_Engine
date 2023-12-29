@@ -18,7 +18,7 @@ namespace ie {
 			std::vector<BoxPtr<BaseTextBlock::Make> > text_blocks;
 			sf::Font* font;
 			BoxPtr<IUninteractive::Make> background = make_box_ptr<FullColor::Make>(sf::Color::White);
-			uint size = 14;
+			size_t size = 14;
 			sf::Color text_color = sf::Color::Black;
 			sf::Color text_selection_color = sf::Color::White;
 			sf::Color background_selection_color = sf::Color::Blue;
@@ -32,7 +32,7 @@ namespace ie {
 				std::vector<BoxPtr<BaseTextBlock::Make> >&& text_blocks,
 				sf::Font* font,
 				BoxPtr<IUninteractive::Make>&& background = make_box_ptr<FullColor::Make>(sf::Color::White),
-				uint size = 14,
+				size_t size = 14,
 				sf::Color text_color = sf::Color::Black,
 				sf::Color text_selection_color = sf::Color::White,
 				sf::Color background_selection_color = sf::Color::Blue,
@@ -107,7 +107,7 @@ namespace ie {
 		
 		Text* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
 		InteractionManager* interaction_manager;
@@ -124,7 +124,7 @@ namespace ie {
 		bool interact;
 		bool old_interact;
 		Selection selection;
-		uint size;
+		size_t size;
 		
 		std::vector<BaseCharacter*> text_characters;
 		std::vector<BoxPtr<BaseTextBlock> > text_blocks;

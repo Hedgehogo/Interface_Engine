@@ -36,8 +36,8 @@ namespace ie {
 		BoxScroll* copy() override;
 	
 	protected:
-		BoxPtr<IComponent> object;
-		PSRVec2f normal_object_position;
+		BoxPtr<IComponent> object_;
+		PSRVec2f normal_object_position_;
 	};
 	
 	template<>

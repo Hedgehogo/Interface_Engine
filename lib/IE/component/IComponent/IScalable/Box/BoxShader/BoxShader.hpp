@@ -17,7 +17,7 @@ namespace ie {
 		
 		struct Make : public BoxRenderTexture::Make {
 			sf::Shader* shader;
-			uint transmission;
+			size_t transmission;
 			std::map<std::string, PISfloat> values_f = {};
 			std::map<std::string, PISint> values_i = {};
 			std::map<std::string, PISbool> values_b = {};
@@ -27,7 +27,7 @@ namespace ie {
 			Make(
 				BoxPtr<IScalable::Make>&& object,
 				sf::Shader* shader,
-				uint transmission,
+				size_t transmission,
 				std::map<std::string, PISfloat> values_f = {},
 				std::map<std::string, PISint> values_i = {},
 				std::map<std::string, PISbool> values_b = {},
@@ -43,7 +43,7 @@ namespace ie {
 		BoxShader(Make&& make, InitInfo init_info);
 		
 		BoxShader(
-			BoxPtr<IScalable>&& object, sf::Shader* shader, uint transmission,
+			BoxPtr<IScalable>&& object, sf::Shader* shader, size_t transmission,
 			std::map<std::string, PISfloat> values_f = {},
 			std::map<std::string, PISint> values_i = {},
 			std::map<std::string, PISbool> values_b = {},
@@ -75,10 +75,10 @@ namespace ie {
 		BoxShader* copy() override;
 	
 	protected:
-		sf::Shader* shader;
-		uint transmission;
+		sf::Shader* shader_;
+		size_t transmission_;
 		
-		sf::Clock clock;
+		sf::Clock clock_;
 	};
 	
 	template<>

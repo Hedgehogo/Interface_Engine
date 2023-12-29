@@ -149,8 +149,8 @@ namespace ie {
 		static bool is_key_pressed(Key key);
 	
 	protected:
-		static std::vector<Key> keys_pressed;
-		static std::vector<Key> global_keys_pressed;
+		static std::vector<Key> keys_pressed_;
+		static std::vector<Key> global_keys_pressed_;
 	};
 	
 	std::string to_string(Key key);

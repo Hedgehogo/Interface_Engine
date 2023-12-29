@@ -31,7 +31,7 @@ namespace ie {
 		SwitcherAction* copy() override;
 		
 	protected:
-		PSbool value;
+		PSbool value_;
 	};
 	
 	template<>

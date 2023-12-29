@@ -15,8 +15,8 @@ namespace ie {
 		void set_value(const T& value) override;
 	
 	protected:
-		T value;
-		std::vector<typename ISValue<T>::SetterFunc> setters;
+		T value_;
+		std::vector<typename ISValue<T>::SetterFunc> setters_;
 	};
 	
 	template<typename T>
@@ -24,18 +24,18 @@ namespace ie {
 		static bool decode_pointer(const YAML::Node& node, SValue<T>*& sValue);
 	};
 	
-	typedef SValue<bool> Sbool;
-	typedef SValue<float> Sfloat;
-	typedef SValue<int> Sint;
-	typedef SValue<unsigned> Suint;
+	using Sbool = SValue<bool>;
+	using Sfloat = SValue<float>;
+	using Sint = SValue<int>;
+	using Ssize = SValue<size_t>;
 	
 	template<typename T>
 	using PSValue = std::shared_ptr<SValue<T>>;
 	
-	typedef std::shared_ptr<Sbool> PSbool;
-	typedef std::shared_ptr<Sfloat> PSfloat;
-	typedef std::shared_ptr<Sint> PSint;
-	typedef std::shared_ptr<Suint> PSuint;
+	using PSbool = std::shared_ptr<Sbool>;
+	using PSfloat = std::shared_ptr<Sfloat>;
+	using PSint = std::shared_ptr<Sint>;
+	using PSsize = std::shared_ptr<Ssize>;
 }
 
 #include "SValue.inl"

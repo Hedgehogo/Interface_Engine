@@ -38,8 +38,8 @@ namespace ie {
 		void finish(sf::Vector2i mouse_position) override;
 	
 	protected:
-		FnType start_fn;
-		FnType finish_fn;
+		FnType start_fn_;
+		FnType finish_fn_;
 	};
 	
 	using FnInteraction = BasicFnInteraction<>;

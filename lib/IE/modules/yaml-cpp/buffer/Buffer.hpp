@@ -49,8 +49,8 @@ namespace ie {
 		static std::shared_ptr<T> get(const YAML::Node& node, bool create_if_not_exist = true);
 		
 	protected:
-		static std::vector<std::map<std::string, PIShared>> objects_levels;
-		static std::vector<std::pair<std::regex, GetOption>> options;
+		static std::vector<std::map<std::string, PIShared> > objects_levels_;
+		static std::vector<std::pair<std::regex, GetOption> > options_;
 	};
 	
 	template<typename T>

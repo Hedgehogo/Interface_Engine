@@ -10,14 +10,14 @@ namespace ie {
 	}
 	
 	BoxUninteractive::BoxUninteractive(Make&& make, InitInfo init_info) :
-		Box(make.min_size), object(make.object->make(init_info)) {
+		Box(make.min_size), object_(make.object->make(init_info)) {
 	}
 	
-	BoxUninteractive::BoxUninteractive(BoxPtr<IScalable>&& object, sf::Vector2f min_size) : Box(min_size), object(std::move(object)) {
+	BoxUninteractive::BoxUninteractive(BoxPtr<IScalable>&& object, sf::Vector2f min_size) : Box(min_size), object_(std::move(object)) {
 	}
 	
 	void BoxUninteractive::init(InitInfo init_info) {
-		object->init(init_info);
+		object_->init(init_info);
 	}
 	
 	void BoxUninteractive::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -29,11 +29,11 @@ namespace ie {
 	}
 	
 	IScalable& BoxUninteractive::get_object() {
-		return *object;
+		return *object_;
 	}
 	
 	const IScalable& BoxUninteractive::get_object() const {
-		return *object;
+		return *object_;
 	}
 	
 	bool DecodePointer<BoxUninteractive>::decode_pointer(const YAML::Node& node, BoxUninteractive*& box_uninteractive) {

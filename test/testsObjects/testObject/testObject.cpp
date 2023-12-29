@@ -87,6 +87,6 @@ TestObject* TestObject::copy() {
 	return new TestObject{*this};
 }
 
-void TestObject::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+void TestObject::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 	processed.draw_debug = get_processor_time();
 }

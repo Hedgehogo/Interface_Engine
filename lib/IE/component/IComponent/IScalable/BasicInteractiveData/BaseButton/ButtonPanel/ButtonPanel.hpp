@@ -44,11 +44,11 @@ namespace ie {
 		
 		ButtonPanel* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		BoxPtr<Panel> panel;
-		BasicInteractiveData<Panel&> interactive;
+		BoxPtr<Panel> panel_;
+		BasicInteractiveData<Panel&> interactive_;
 	};
 	
 	template<>

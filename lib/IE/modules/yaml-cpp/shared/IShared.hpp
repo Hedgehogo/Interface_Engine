@@ -11,5 +11,5 @@ namespace ie {
 		virtual ~IShared() = default;
 	};
 	
-	typedef std::shared_ptr<IShared> PIShared;
+	using PIShared = std::shared_ptr<IShared>;
 }

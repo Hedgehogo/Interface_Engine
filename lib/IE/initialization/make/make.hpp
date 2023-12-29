@@ -27,7 +27,7 @@ namespace ie {
 	
 	namespace detail {
 		template<typename I>
-		using MakeInitInfo = invoke_result_or_else_t<I, I, std::size_t>;
+		using MakeInitInfo = invoke_result_or_else_t<I, I, size_t>;
 		
 		template<typename T, typename I>
 		using MakeType = std::remove_pointer_t<decltype(std::declval<T>().make(std::declval<I>()))>;
@@ -65,10 +65,10 @@ namespace ie {
 			
 			static V map(std::vector<T>&& make, const I& init_info) {
 				V result;
-				if constexpr(std::is_invocable_v<I, std::size_t>) {
-					std::size_t size{make.size()};
+				if constexpr(std::is_invocable_v<I, size_t>) {
+					size_t size{make.size()};
 					result.reserve(size);
-					for(std::size_t i = 0; i < size; ++i) {
+					for(size_t i = 0; i < size; ++i) {
 						result.push_back(MapMake<T, MakeInitInfo<I> >::map(std::move(make[i]), init_info(i)));
 					}
 				} else {

@@ -10,50 +10,50 @@ namespace ie {
 	}
 	
 	BoxPanel::BoxPanel(Make&& make, InitInfo init_info) :
-		Box(make.min_size), object(make.object->make(init_info)), panel(make.panel->make(init_info)) {
+		Box(make.min_size), object_(make.object->make(init_info)), panel_(make.panel->make(init_info)) {
 	}
 	
 	BoxPanel::BoxPanel(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable>&& object, sf::Vector2f min_size) :
-		Box(min_size), object(std::move(object)), panel(std::move(panel)) {
+		Box(min_size), object_(std::move(object)), panel_(std::move(panel)) {
 	}
 	
 	void BoxPanel::init(InitInfo init_info) {
-		object->init(init_info);
-		panel->init(init_info);
+		object_->init(init_info);
+		panel_->init(init_info);
 	}
 	
 	void BoxPanel::resize(sf::Vector2f size, sf::Vector2f position) {
 		IComponentObject::resize(size, position);
-		panel->resize(size, position);
+		panel_->resize(size, position);
 	}
 	
 	sf::Vector2f BoxPanel::get_min_size() const {
-		return max(object->get_min_size(), panel->get_min_size(), minimum_size);
+		return max(object_->get_min_size(), panel_->get_min_size(), minimum_size_);
 	}
 	
 	sf::Vector2f BoxPanel::get_normal_size() const {
-		return max(object->get_normal_size(), panel->get_normal_size());
+		return max(object_->get_normal_size(), panel_->get_normal_size());
 	}
 	
 	IScalable& BoxPanel::get_object() {
-		return *object;
+		return *object_;
 	}
 	
 	const IScalable& BoxPanel::get_object() const {
-		return *object;
+		return *object_;
 	}
 	
 	const ConstPanel& BoxPanel::get_panel() const {
-		return *panel;
+		return *panel_;
 	}
 	
 	BoxPanel* BoxPanel::copy() {
 		return new BoxPanel{*this};
 	}
 	
-	void BoxPanel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
-		object->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
-		panel->draw_debug(render_target, 0, indent_addition, hue, hue_offset);
+	void BoxPanel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+		object_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+		panel_->draw_debug(render_target, 0, indent_addition, hue, hue_offset);
 	}
 	
 	bool DecodePointer<BoxPanel>::decode_pointer(const YAML::Node& node, BoxPanel*& box_with_panel) {

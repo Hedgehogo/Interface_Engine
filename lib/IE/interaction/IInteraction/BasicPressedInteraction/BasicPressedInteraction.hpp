@@ -33,7 +33,7 @@ namespace ie {
 		BasicPressedInteraction<T>* copy() override;
 	
 	protected:
-		InteractionManager* interaction_manager;
+		InteractionManager* interaction_manager_;
 	};
 	
 	using PressedInteraction = BasicPressedInteraction<>;

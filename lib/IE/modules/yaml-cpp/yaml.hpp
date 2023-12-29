@@ -7,10 +7,6 @@
 #include <optional>
 #include <option_result/option_result.hpp>
 
-typedef long long llint;
-typedef unsigned int uint;
-typedef unsigned long long ullint;
-
 template<typename T>
 sf::Vector2<T> operator*(const sf::Vector2<T>& first, const sf::Vector2<T>& second);
 
@@ -201,8 +197,8 @@ namespace ie {
 	
 	
 	template<>
-	struct Decode<sf::Vector2<uint> > {
-		static bool decode(const YAML::Node& node, sf::Vector2<uint>& vector);
+	struct Decode<sf::Vector2<size_t> > {
+		static bool decode(const YAML::Node& node, sf::Vector2<size_t>& vector);
 	};
 	
 	

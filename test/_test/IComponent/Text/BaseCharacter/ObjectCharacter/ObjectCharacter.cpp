@@ -9,10 +9,10 @@ TEST(IComponent_Text, ObjectCharacter) {
 		InitInfoData data{{100, 100}};
 		
 		auto object{
-			make_box_ptr<ie::BoxAlternative>(
+                ie::make_box_ptr<ie::BoxAlternative>(
 				ie::BoxAlternative::Make{
-					make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
-					make_box_ptr<ie::FullColor::Make>(sf::Color::Blue),
+                        ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
+                        ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Blue),
 					{10, 10}
 				},
 				data.make_init_info()
@@ -41,8 +41,8 @@ TEST(IComponent_Text, ObjectCharacter) {
 	}
 	{
 		InitInfoData data{{100, 100}};
-		
-		BoxPtr<ie::FullColor> full_color{
+
+        ie::BoxPtr<ie::FullColor> full_color{
 			new ie::FullColor{
 				{
 					sf::Color::Red
@@ -79,8 +79,8 @@ TEST(IComponent_Text, ObjectCharacter) {
 	}
 	{
 		InitInfoData data{{100, 100}};
-		
-		BoxPtr<ie::FullColor> full_color{
+
+        ie::BoxPtr<ie::FullColor> full_color{
 			new ie::FullColor{
 				{
 					sf::Color::Red
@@ -106,8 +106,8 @@ TEST(IComponent_Text, ObjectCharacter) {
 	}
 	{
 		InitInfoData data{{100, 100}};
-		
-		BoxPtr<ie::FullColor> full_color{
+
+        ie::BoxPtr<ie::FullColor> full_color{
 			new ie::FullColor{
 				{
 					sf::Color::Red

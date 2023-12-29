@@ -40,7 +40,7 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		std::string url;
+		std::string url_;
 	};
 	
 	using OpenUrlAction = BasicOpenUrlAction<>;

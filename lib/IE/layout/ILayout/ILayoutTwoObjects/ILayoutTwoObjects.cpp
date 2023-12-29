@@ -1,11 +1,11 @@
 #include "ILayoutTwoObjects.hpp"
 
 namespace ie {
-	std::size_t ILayoutTwoObjects::get_array_size() const {
+	size_t ILayoutTwoObjects::get_array_size() const {
 		return 2;
 	}
 	
-	const IScalable& ILayoutTwoObjects::get_object_at(std::size_t index) const {
+	const IScalable& ILayoutTwoObjects::get_object_at(size_t index) const {
 		if(index == 0) {
 			return get_first_object();
 		}
@@ -18,7 +18,7 @@ namespace ie {
 		);
 	}
 	
-	IScalable& ILayoutTwoObjects::get_object_at(std::size_t index) {
+	IScalable& ILayoutTwoObjects::get_object_at(size_t index) {
 		if(index == 0) {
 			return get_first_object();
 		}

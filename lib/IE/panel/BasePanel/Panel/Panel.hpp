@@ -75,10 +75,10 @@ namespace ie {
 		Panel* copy() override;
 	
 	protected:
-		PanelManager panel_manager;
-		InteractionManager* interaction_manager;
-		BoxPtr<IHidePanelInteraction> hide_interaction;
-		BoxPtr<IMovePanelInteraction> move_interaction;
+		PanelManager panel_manager_;
+		InteractionManager* interaction_manager_;
+		BoxPtr<IHidePanelInteraction> hide_interaction_;
+		BoxPtr<IMovePanelInteraction> move_interaction_;
 	};
 	
 	template<>

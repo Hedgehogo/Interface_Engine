@@ -12,8 +12,8 @@ namespace ie {
 		std::string get_base();
 	
 	protected:
-		std::string type;
-		std::string base;
+		std::string type_;
+		std::string base_;
 	};
 	
 	class AbstractTypeYamlException : public BaseYamlException {
@@ -23,7 +23,7 @@ namespace ie {
 		std::string get_type();
 	
 	protected:
-		std::string type;
+		std::string type_;
 	};
 	
 	class FailedDetermineTypeYamlException : public BaseYamlException {
@@ -33,6 +33,6 @@ namespace ie {
 		std::string get_type();
 	
 	protected:
-		std::string type;
+		std::string type_;
 	};
 }

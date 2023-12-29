@@ -3,8 +3,6 @@
 #include "IE/modules/yaml-cpp/yaml-builder/yaml-builder.hpp"
 #include "LineInitInfo/LineInitInfo.hpp"
 
-using uint = unsigned;
-
 namespace ie {
 	class BaseLine {
 	public:
@@ -14,9 +12,9 @@ namespace ie {
 			virtual ~Make() = default;
 		};
 		
-		BaseLine(sf::PrimitiveType type, std::size_t vertex_count, orl::Option<sf::Color> color, LineInitInfo init_info);
+		BaseLine(sf::PrimitiveType type, size_t vertex_count, orl::Option<sf::Color> color, LineInitInfo init_info);
 		
-		BaseLine(sf::PrimitiveType type, std::size_t vertex_count = 0, orl::Option<sf::Color> color = {});
+		BaseLine(sf::PrimitiveType type, size_t vertex_count = 0, orl::Option<sf::Color> color = {});
 		
 		virtual void init(LineInitInfo init_info);
 		

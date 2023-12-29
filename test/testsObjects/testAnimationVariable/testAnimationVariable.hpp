@@ -2,11 +2,11 @@
 #include "IE/Animation/variables/iAnimation_variable.hpp"
 #include <vector>
 
-class TestAnimationVariable : public ie::IAnimationVariable{
+class TestAnimationVariable : public ie::IAnimationVariable {
 public:
 	struct Processed{
 		struct ValueFromAnimation{
-			unsigned long long time;
+			size_t time;
 			float new_value;
 		};
 		std::vector<ValueFromAnimation> value_from_animation;

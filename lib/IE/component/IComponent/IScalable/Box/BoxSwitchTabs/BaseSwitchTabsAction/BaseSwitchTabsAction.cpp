@@ -2,21 +2,21 @@
 
 namespace ie {
 	BaseSwitchTabsAction::BaseSwitchTabsAction(BasicActionInitInfo<BoxSwitchTabs&> init_info) :
-		box(&init_info.additional) {
+		box_(&init_info.additional) {
 	}
 	
-	BaseSwitchTabsAction::BaseSwitchTabsAction() : box(nullptr) {
+	BaseSwitchTabsAction::BaseSwitchTabsAction() : box_(nullptr) {
 	}
 	
 	void BaseSwitchTabsAction::init(BasicActionInitInfo<BoxSwitchTabs&> init_info) {
-		box = &init_info.additional;
+		box_ = &init_info.additional;
 	}
 	
 	void BaseSwitchTabsAction::set_box(BoxSwitchTabs& box) {
-		this->box = &box;
+		this->box_ = &box;
 	}
 	
 	BoxSwitchTabs& BaseSwitchTabsAction::get_box() {
-		return *box;
+		return *box_;
 	}
 }

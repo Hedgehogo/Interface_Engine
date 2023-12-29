@@ -42,13 +42,13 @@ namespace ie {
 		BoxSettable* copy() override;
 	
 	protected:
-		DrawManager draw_manager;
-		UpdateManager update_manager;
-		sf::RenderWindow* window;
-		sf::RenderTarget* render_target;
-		InteractionManager interaction_manager;
-		InteractionStack* interaction_stack;
-		PanelManagerInterceptor panel_manager_interceptor;
-		BoxPtr<IScalable> object;
+		DrawManager draw_manager_;
+		UpdateManager update_manager_;
+		sf::RenderWindow* window_;
+		sf::RenderTarget* render_target_;
+		InteractionManager interaction_manager_;
+		InteractionStack* interaction_stack_;
+		PanelManagerInterceptor panel_manager_interceptor_;
+		BoxPtr<IScalable> object_;
 	};
 }

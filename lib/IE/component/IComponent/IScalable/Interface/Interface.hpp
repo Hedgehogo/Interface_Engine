@@ -107,21 +107,21 @@ namespace ie {
 		
 		Interface* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue = 0, uint hue_offset = 36) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue = 0, size_t hue_offset = 36) override;
 	
 	protected:
-		sf::RenderWindow* window;
-		sf::RenderTarget* render_target;
-		DrawManager draw_manager;
-		UpdateManager update_manager;
-		InteractionManager interaction_manager;
-		BoxPtr<InteractionStack> interaction_stack;
-		PanelManager panel_manager;
-		AnimationManager animation_manager;
-		BoxPtr<IScalable> object;
-		sf::Vector2f mouse_position;
-		bool initialized;
-		bool active;
+		sf::RenderWindow* window_;
+		sf::RenderTarget* render_target_;
+		DrawManager draw_manager_;
+		UpdateManager update_manager_;
+		InteractionManager interaction_manager_;
+		BoxPtr<InteractionStack> interaction_stack_;
+		PanelManager panel_manager_;
+		AnimationManager animation_manager_;
+		BoxPtr<IScalable> object_;
+		sf::Vector2f mouse_position_;
+		bool initialized_;
+		bool active_;
 	};
 	
 	template<>

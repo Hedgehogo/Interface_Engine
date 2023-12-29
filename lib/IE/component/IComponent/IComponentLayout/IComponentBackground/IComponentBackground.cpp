@@ -26,7 +26,7 @@ namespace ie {
 		return get_background().get_normal_size();
 	}
 	
-	void IComponentBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	void IComponentBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		get_background().draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
 }

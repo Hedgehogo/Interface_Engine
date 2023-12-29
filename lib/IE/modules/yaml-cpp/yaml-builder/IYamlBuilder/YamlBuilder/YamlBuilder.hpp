@@ -60,9 +60,9 @@ namespace ie {
 		static YamlBuilder builder;
 	
 	protected:
-		static std::vector<std::string> names;
-		static std::vector<detail::IYamlBuilder*> types;
-		static std::vector<DetermineType> determiners;
+		static std::vector<std::string> names_;
+		static std::vector<detail::IYamlBuilder*> types_;
+		static std::vector<DetermineType> determiners_;
 	};
 	
 	template<typename T>

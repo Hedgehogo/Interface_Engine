@@ -5,20 +5,20 @@
 namespace ie {
 	template<typename T, typename... A>
 	void Buffer::emplace(const std::string& name, A&& ... args) {
-		objects_levels[objects_levels.size() - 1].try_emplace(name, std::make_shared<T>(args...));
+		objects_levels_[objects_levels_.size() - 1].try_emplace(name, std::make_shared<T>(args...));
 	}
 	
 	template<typename T>
 	void Buffer::insert(const std::string& name, const YAML::Node& node) {
-		if(objects_levels.empty()) {
+		if(objects_levels_.empty()) {
 			throw BufferNonExistentNestingLevelException{node.Mark(), name, 0};
 		}
 		
-		std::size_t level{objects_levels.size() - 1};
+		size_t level{objects_levels_.size() - 1};
 		
 		if(node["level"]) {
 			if(node["level"]["relative"]) {
-				auto relative{node["level"]["relative"].as<std::size_t>()};
+				auto relative{node["level"]["relative"].as<size_t>()};
 				
 				if(level < relative) {
 					throw BufferNonExistentNestingLevelException{node.Mark(), name, 0};
@@ -34,8 +34,8 @@ namespace ie {
 			}
 		}
 		
-		if(level < objects_levels.size()) {
-			objects_levels[level].try_emplace(name, node.as<T*>());
+		if(level < objects_levels_.size()) {
+			objects_levels_[level].try_emplace(name, node.as<T*>());
 		} else {
 			throw BufferNonExistentNestingLevelException{node.Mark(), name, level};
 		}
@@ -58,7 +58,7 @@ namespace ie {
 		std::vector<std::string> names{split_by_delimiter(full_name, '.')};
 		std::string name{names[0]};
 		names.erase(names.begin());
-		for(auto level = objects_levels.rbegin(); level != objects_levels.rend(); ++level) {
+		for(auto level = objects_levels_.rbegin(); level != objects_levels_.rend(); ++level) {
 			if(auto object = level->find(name); object != level->end()) {
 				ptr = std::dynamic_pointer_cast<T>(get_variable(object->second, names));
 				if(ptr.get() != nullptr) {

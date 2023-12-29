@@ -23,8 +23,8 @@ namespace ie {
 		BoxPtr<IBasicInteraction<T> > interaction;
 	
 	private:
-		bool interact;
-		bool old_interact;
+		bool interact_;
+		bool old_interact_;
 	};
 	
 	using InteractiveData = BasicInteractiveData<>;

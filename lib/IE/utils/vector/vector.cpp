@@ -10,10 +10,10 @@ namespace ie {
 		return vector;
 	}
 	
-	std::vector<float> gen_bounds(std::size_t size) {
+	std::vector<float> gen_bounds(size_t size) {
 		std::vector<float> vector;
 		vector.reserve(size + 1);
-		for(std::size_t i = 0; i < size; ++i) {
+		for(size_t i = 0; i < size; ++i) {
 			vector.push_back(static_cast<float>(i) / static_cast<float>(size));
 		}
 		vector.push_back(1.f);

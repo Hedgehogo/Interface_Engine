@@ -2,7 +2,7 @@
 #include <iostream>
 #include <array>
 
-template<std::size_t N>
+template<size_t N>
 class FpsCounter {
 public:
 	float medium() {
@@ -35,51 +35,38 @@ int main() {
 	
 	ie::Window window{
 		ie::Interface::Make{
-			make_box_ptr<ie::BoxScroll::Make>(
-				make_box_ptr<ie::Text::Make>(
+			ie::make_box_ptr<ie::BoxScroll::Make>(
+				ie::make_box_ptr<ie::Text::Make>(
 					ie::make_vector(
-						make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
-							U"The Interface_Engine project was created to easily write a scalable interface for games and programs in C++ 17 or more. At the same time it allows you to:\n"
-							"\n"
-							"Automatically calculate the minimum size at which the interface is displayed correctly.\n"
-							"Automatically calculate the ideal size for displaying your interface.\n"
-							"Before studying and using this library, we advise you to familiarize yourself with the basics of SFML.",
-							orl::Option<sf::Color>{},
-							orl::Option<sf::Font*>{},
-							orl::Option<sf::Text::Style>{},
-							ie::make_vector(
-								make_box_ptr<ie::BaseLine::Make, ie::Underline::Make>(),
-								make_box_ptr<ie::BaseLine::Make, ie::StrikeThrough::Make>()
-							),
-							30U
+						ie::make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
+							U"bbabb"
 						),
-						make_box_ptr<ie::BaseTextBlock::Make, ie::ObjectTextBlock::Make>(
-							make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
-							100.f
+						ie::make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
+							U"bbbbb"
 						)
 					),
 					&font,
-					make_box_ptr<ie::FullColor::Make>(sf::Color::White),
-					14U,
+					ie::make_box_ptr<ie::FullColor::Make>(sf::Color::White),
+					30U,
 					sf::Color::Black,
 					sf::Color::White,
 					sf::Color::Blue,
 					sf::Color::Black,
 					sf::Color{150, 150, 150},
 					sf::Text::Style{},
-					make_box_ptr<ie::Resizer::Make>(1.15f, ie::BaseResizer::Align::Center, ie::BaseResizer::Algorithm::Base),
-					make_box_ptr<ie::BasicHotkeyInteraction<ie::Text&>::Make>(
+					ie::make_box_ptr<ie::Resizer::Make>(1.15f, ie::BaseResizer::Align::Left),
+					ie::make_box_ptr<ie::BasicHotkeyInteraction<ie::Text&>::Make>(
 						ie::make_vector(
 							ie::make_vector(
-								make_box_ptr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>::Make>(
-									make_box_ptr<ie::BasicKeysInteraction<ie::Text&>::Make>(
-										make_box_ptr<ie::TextSelectionAction::Make>(),
+								ie::make_box_ptr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>::Make>(
+									ie::make_box_ptr<ie::BasicKeysInteraction<ie::Text&>::Make>(
+										ie::make_box_ptr<ie::TextSelectionAction::Make>(),
 										std::vector{ie::Key::MouseLeft}
 									)
 								),
-								make_box_ptr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>::Make>(
-									make_box_ptr<ie::BasicKeysInteraction<ie::Text&>::Make>(
-										make_box_ptr<ie::TextCopyAction::Make>(),
+								ie::make_box_ptr<ie::detail::BasicHotkeyInteractionHotkey<ie::Text&>::Make>(
+									ie::make_box_ptr<ie::BasicKeysInteraction<ie::Text&>::Make>(
+										ie::make_box_ptr<ie::TextCopyAction::Make>(),
 										std::vector{ie::Key::LControl, ie::Key::C}
 									)
 								)
@@ -91,7 +78,10 @@ int main() {
 			)
 		},
 		"IE works!",
-		{800, 600}
+		{800, 600},
+		sf::ContextSettings{
+			0, 0, 1
+		}
 	};
 	
 	FpsCounter<500> fps;

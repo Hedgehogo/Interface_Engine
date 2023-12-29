@@ -48,12 +48,12 @@ namespace ie {
 		
 		BoxBackground* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		BoxPtr<IUninteractive> background;
-		BoxPtr<IScalable> object;
-		sf::Vector2f offset;
+		BoxPtr<IUninteractive> background_;
+		BoxPtr<IScalable> object_;
+		sf::Vector2f offset_;
 	};
 	
 	template<>

@@ -13,6 +13,6 @@ namespace ie {
 		std::string get_description();
 	
 	protected:
-		std::string description;
+		std::string description_;
 	};
 }

@@ -33,7 +33,7 @@ namespace ie {
 		return in_area(point_position);
 	}
 	
-	void IComponent::draw_debug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& render_target, uint hue) {
+	void IComponent::draw_debug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& render_target, size_t hue) {
 		if(size.x > 0 && size.y > 0) {
 			sf::Color color{hsv_to_rgb(static_cast<float>(hue % 360))};
 			
@@ -53,7 +53,7 @@ namespace ie {
 		}
 	}
 	
-	void IComponent::draw_debug(sf::RenderTarget& render_target, int indent, int, uint hue, uint) {
+	void IComponent::draw_debug(sf::RenderTarget& render_target, int indent, int, size_t hue, size_t) {
 		sf::Vector2f size{this->get_area_size() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2 + 2, indent * 2 + 2})};
 		sf::Vector2f position{this->get_area_position() + static_cast<sf::Vector2f>(sf::Vector2i{indent + 1, indent + 1})};
 		if(size.x > 0 && size.y > 0) {

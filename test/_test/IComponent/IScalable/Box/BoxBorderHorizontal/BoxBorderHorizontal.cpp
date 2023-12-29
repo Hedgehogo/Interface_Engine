@@ -38,9 +38,9 @@ TEST(IComponent, BoxBorderHorizontal) {
 	ASSERT_EQ(box_border_horizontal.get_position(), (sf::Vector2f{19, 39}));
 	ASSERT_EQ(box_border_horizontal.get_area_position(), (sf::Vector2f{19, 39}));
 	
-	box_border_horizontal.resize({7, 13}, {23, 41});
-	ASSERT_EQ(box_border_horizontal.get_size(), (sf::Vector2f{7, 13}));
-	ASSERT_EQ(box_border_horizontal.get_area_size(), (sf::Vector2f{7, 13}));
+	box_border_horizontal.resize({8, 13}, {23, 41});
+	ASSERT_EQ(box_border_horizontal.get_size(), (sf::Vector2f{8, 13}));
+	ASSERT_EQ(box_border_horizontal.get_area_size(), (sf::Vector2f{8, 13}));
 	ASSERT_EQ(box_border_horizontal.get_position(), (sf::Vector2f{23, 41}));
 	ASSERT_EQ(box_border_horizontal.get_area_position(), (sf::Vector2f{23, 41}));
 	

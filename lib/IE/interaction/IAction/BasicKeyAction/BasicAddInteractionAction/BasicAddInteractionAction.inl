@@ -13,23 +13,23 @@ namespace ie {
 	
 	template<typename T>
 	BasicAddInteractionAction<T>::BasicAddInteractionAction(Make&& make, BasicActionInitInfo<T> init_info) :
-		interaction_manager(&init_info.interaction_manager), interaction(make.interaction->make(init_info)) {
+		interaction_manager_(&init_info.interaction_manager), interaction_(make.interaction->make(init_info)) {
 	}
 	
 	template<typename T>
 	BasicAddInteractionAction<T>::BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction) :
-		interaction_manager(nullptr), interaction(std::move(interaction)) {
+		interaction_manager_(nullptr), interaction_(std::move(interaction)) {
 	}
 	
 	template<typename T>
 	void BasicAddInteractionAction<T>::init(BasicActionInitInfo<T> init_info) {
-		interaction_manager = &init_info.interaction_manager;
-		interaction->init(init_info);
+		interaction_manager_ = &init_info.interaction_manager;
+		interaction_->init(init_info);
 	}
 	
 	template<typename T>
 	IBasicInteraction<T>& BasicAddInteractionAction<T>::get_interaction() {
-		return *interaction;
+		return *interaction_;
 	}
 	
 	template<typename T>
@@ -39,12 +39,12 @@ namespace ie {
 	
 	template<typename T>
 	void BasicAddInteractionAction<T>::start_pressed() {
-		interaction_manager->add_interaction(*interaction);
+		interaction_manager_->add_interaction(*interaction_);
 	}
 	
 	template<typename T>
 	void BasicAddInteractionAction<T>::stop_pressed() {
-		interaction_manager->delete_interaction(*interaction);
+		interaction_manager_->delete_interaction(*interaction_);
 	}
 	
 	template<typename T>

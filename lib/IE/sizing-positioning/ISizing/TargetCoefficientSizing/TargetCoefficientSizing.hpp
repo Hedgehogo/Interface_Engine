@@ -25,8 +25,8 @@ namespace ie {
 		TargetCoefficientSizing* copy() override;
 	
 	protected:
-		float coefficient;
-		float addition;
+		float coefficient_;
+		float addition_;
 	};
 	
 	template<>

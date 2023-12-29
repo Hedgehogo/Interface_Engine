@@ -20,20 +20,20 @@ namespace ie {
 		static void add_alias(const std::string& name, const std::string& alias);
 	
 	protected:
-		static std::map<std::string, T> objects;
-		static std::map<std::string, T*> aliases;
+		static std::map<std::string, T> objects_;
+		static std::map<std::string, T*> aliases_;
 	};
 	
 	using Uint32 = sf::Uint32;
 	
 	struct SymbolPosition {
-		std::size_t line;
-		std::size_t number;
+		size_t line;
+		size_t number;
 	};
 	
 	SymbolPosition read_character_index(const YAML::Node& node, std::basic_ifstream<char32_t>& fin);
 	
-	std::basic_string<Uint32> u32string_to_uint32_string(std::basic_string<char32_t> str);
+	std::basic_string<Uint32> u32_string_to_uint32_string(std::basic_string<char32_t> str);
 	
 	std::basic_string<char32_t> uint32_to_u32string_string(std::basic_string<Uint32> str);
 	

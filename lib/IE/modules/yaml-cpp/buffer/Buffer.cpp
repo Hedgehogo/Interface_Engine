@@ -34,8 +34,8 @@ namespace ie {
 		return list->get_element_ptr(std::stoull(name));
 	}
 	
-	std::vector<std::map<std::string, PIShared>> Buffer::objects_levels = {1, std::map<std::string, PIShared>{}};
-	std::vector<std::pair<std::regex, Buffer::GetOption>> Buffer::options = {
+	std::vector<std::map<std::string, PIShared>> Buffer::objects_levels_ = {1, std::map<std::string, PIShared>{}};
+	std::vector<std::pair<std::regex, Buffer::GetOption>> Buffer::options_ = {
 		std::make_pair(std::regex{R"([xy])"}, get_vector_axis),
 		std::make_pair(std::regex{R"(\d+)"}, get_list_element)
 	};
@@ -44,10 +44,10 @@ namespace ie {
 		if(!names.empty()) {
 			std::string name = names[names.size() - 1];
 			names.pop_back();
-			auto option_function = std::find_if(options.begin(), options.end(), [&](const std::pair<std::regex, GetOption>& option) {
+			auto option_function = std::find_if(options_.begin(), options_.end(), [&](const std::pair<std::regex, GetOption>& option) {
 				return std::regex_match(name.cbegin(), name.cend(), option.first);
 			});
-			if(option_function != options.end()) {
+			if(option_function != options_.end()) {
 				return option_function->second(get_variable(var, names), name);
 			} else {
 				throw BufferVariableNotFoundException{name, type_name<IShared>()};
@@ -57,21 +57,21 @@ namespace ie {
 	}
 	
 	std::map<std::string, PIShared>& Buffer::get_level() {
-		return objects_levels[objects_levels.size() - 1];
+		return objects_levels_[objects_levels_.size() - 1];
 	}
 	
 	void Buffer::raise_nesting_level() {
-		objects_levels.emplace_back();
+		objects_levels_.emplace_back();
 	}
 	
 	void Buffer::lower_nesting_level() {
-		objects_levels.pop_back();
+		objects_levels_.pop_back();
 	}
 	
 	void Buffer::read_level(std::function<void()> function) {
-		objects_levels.emplace_back();
+		objects_levels_.emplace_back();
 		function();
-		objects_levels.pop_back();
+		objects_levels_.pop_back();
 	}
 	
 	bool Buffer::exist_at_level(const std::string& name) {
@@ -86,7 +86,7 @@ namespace ie {
 		} else {
 			node["var"] >> name;
 		}
-		for(auto& level: objects_levels) {
+		for(auto& level: objects_levels_) {
 			if(level.find(name) != level.end())
 				return true;
 		}

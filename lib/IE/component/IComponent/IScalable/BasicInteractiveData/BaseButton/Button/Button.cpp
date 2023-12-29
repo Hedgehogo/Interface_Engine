@@ -10,15 +10,15 @@ namespace ie {
 	}
 	
 	Button::Button(Make&& make, InitInfo init_info) :
-		BaseButton(std::move(make.background), init_info), interactive(std::move(make.interaction), init_info, {}) {
+		BaseButton(std::move(make.background), init_info), interactive_(std::move(make.interaction), init_info, {}) {
 	}
 	
 	Button::Button(BoxPtr<IScalable>&& background, BoxPtr<IBaseInteraction>&& interaction) :
-		BaseButton(std::move(background)), interactive(std::move(interaction)) {
+		BaseButton(std::move(background)), interactive_(std::move(interaction)) {
 	}
 	
 	void Button::init(InitInfo init_info) {
-		interactive.init(init_info, {});
+		interactive_.init(init_info, {});
 		BaseButton::init(init_info);
 	}
 	
@@ -27,12 +27,12 @@ namespace ie {
 	}
 	
 	void Button::update() {
-		interactive.update();
+		interactive_.update();
 	}
 	
 	bool Button::update_interactions(sf::Vector2f mouse_position) {
 		bool result{BaseButton::update_interactions(mouse_position)};
-		interactive.update_interactions();
+		interactive_.update_interactions();
 		return result;
 	}
 	

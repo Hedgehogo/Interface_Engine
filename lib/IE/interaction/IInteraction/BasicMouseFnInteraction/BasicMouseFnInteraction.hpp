@@ -56,8 +56,8 @@ namespace ie {
 		static BasicMouseFnInteraction debug;
 		
 	protected:
-		BoxPtr<BasicKeyAction<T> > left_button_action;
-		BoxPtr<BasicKeyAction<T> > right_button_action;
+		BoxPtr<BasicKeyAction<T> > left_button_action_;
+		BoxPtr<BasicKeyAction<T> > right_button_action_;
 	};
 	
 	using MouseFnInteraction = BasicMouseFnInteraction<>;

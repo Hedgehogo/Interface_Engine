@@ -6,12 +6,12 @@ class TestChangeVariable : public ie::IChangeVariable{
 public:
 	struct Processed{
 		struct Operat{
-			unsigned long long time;
+			size_t time;
 			float frame;
 		};
 
 		std::vector<Operat> operat;
-		std::vector<unsigned long long> get_size, copy;
+		std::vector<size_t> get_size, copy;
 	};
 
 protected:

@@ -37,12 +37,12 @@ namespace ie {
 		
 		BoxBorder* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		std::vector<std::vector<BoxPtr<IScalable> > > objects;
-		std::vector<float> bounds_horizontal;
-		std::vector<float> bounds_vertical;
+		std::vector<std::vector<BoxPtr<IScalable> > > objects_;
+		std::vector<float> bounds_horizontal_;
+		std::vector<float> bounds_vertical_;
 	};
 	
 	template<>

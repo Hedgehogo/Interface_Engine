@@ -34,39 +34,39 @@ namespace ie {
 	}
 	
 	Positioning2::Positioning2(Make&& make, Positioning2InitInfo init_info) :
-		horizontal(std::move(make.horizontal)), vertical(std::move(make.vertical)), render_target(&init_info.render_target) {
+		horizontal_(std::move(make.horizontal)), vertical_(std::move(make.vertical)), render_target_(&init_info.render_target) {
 	}
 	
 	Positioning2::Positioning2(BoxPtr<IPositioning>&& horizontal, BoxPtr<IPositioning>&& vertical) :
-		horizontal(std::move(horizontal)), vertical(std::move(vertical)), render_target(nullptr) {
+		horizontal_(std::move(horizontal)), vertical_(std::move(vertical)), render_target_(nullptr) {
 	}
 	
 	Positioning2::Positioning2(sf::Vector2f coefficient, sf::Vector2f offset, bool relative_target) :
-		horizontal(make_position(coefficient.x, offset.x, relative_target)),
-		vertical(make_position(coefficient.y, offset.y, relative_target)),
-		render_target(nullptr) {
+		horizontal_(make_position(coefficient.x, offset.x, relative_target)),
+		vertical_(make_position(coefficient.y, offset.y, relative_target)),
+		render_target_(nullptr) {
 	}
 	
 	Positioning2::Positioning2(Location2 parent_location, Location2 object_location, sf::Vector2f offset) :
-		horizontal(new MatchSidesPositioning{get_horizontal_location(parent_location), get_horizontal_location(object_location), offset.x}),
-		vertical(new MatchSidesPositioning{get_vertical_location(parent_location), get_vertical_location(object_location), offset.y}),
-		render_target(nullptr) {
+		horizontal_(new MatchSidesPositioning{get_horizontal_location(parent_location), get_horizontal_location(object_location), offset.x}),
+		vertical_(new MatchSidesPositioning{get_vertical_location(parent_location), get_vertical_location(object_location), offset.y}),
+		render_target_(nullptr) {
 	}
 	
 	Positioning2::Positioning2(sf::Vector2f coefficient, sf::Vector2f object_coefficient, sf::Vector2f offset, bool relative_target) :
-		horizontal(make_position(coefficient.x, object_coefficient.x, offset.x, relative_target)),
-		vertical(make_position(coefficient.y, object_coefficient.y, offset.y, relative_target)),
-		render_target(nullptr) {
+		horizontal_(make_position(coefficient.x, object_coefficient.x, offset.x, relative_target)),
+		vertical_(make_position(coefficient.y, object_coefficient.y, offset.y, relative_target)),
+		render_target_(nullptr) {
 	}
 	
 	void Positioning2::init(sf::RenderTarget& render_target) {
-		this->render_target = &render_target;
+		this->render_target_ = &render_target;
 	}
 	
 	sf::Vector2f Positioning2::find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) {
-		sf::Vector2f target_size{static_cast<sf::Vector2f>(render_target->getSize())};
-		return {horizontal->find_position(parent_position.x, object_size.x, parent_size.x, target_size.x),
-				vertical->find_position(parent_position.y, object_size.y, parent_size.y, target_size.y)};
+		sf::Vector2f target_size{static_cast<sf::Vector2f>(render_target_->getSize())};
+		return {horizontal_->find_position(parent_position.x, object_size.x, parent_size.x, target_size.x),
+				vertical_->find_position(parent_position.y, object_size.y, parent_size.y, target_size.y)};
 	}
 	
 	Positioning2* Positioning2::copy() {

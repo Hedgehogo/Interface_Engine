@@ -4,6 +4,6 @@
 
 namespace ie {
 	void BaseWindowResizer::set_window(Window& window) {
-		BaseWindowResizer::window = &window;
+		BaseWindowResizer::window_ = &window;
 	}
 }

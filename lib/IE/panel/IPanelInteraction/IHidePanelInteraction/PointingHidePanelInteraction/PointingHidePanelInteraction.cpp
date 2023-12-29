@@ -12,10 +12,10 @@ namespace ie {
 	}
 	
 	PointingHidePanelInteraction::PointingHidePanelInteraction(Make&& make, PanelActionInitInfo init_info) :
-		BasePanelInteraction(init_info), only_on_parent(make.only_on_parent) {
+		BasePanelInteraction(init_info), only_on_parent_(make.only_on_parent) {
 	}
 	
-	PointingHidePanelInteraction::PointingHidePanelInteraction(bool only_on_parent) : only_on_parent(only_on_parent) {
+	PointingHidePanelInteraction::PointingHidePanelInteraction(bool only_on_parent) : only_on_parent_(only_on_parent) {
 	}
 	
 	void PointingHidePanelInteraction::start(sf::Vector2i) {
@@ -23,8 +23,8 @@ namespace ie {
 	
 	void PointingHidePanelInteraction::update(sf::Vector2i mouse_position) {
 		sf::Vector2f point_position{static_cast<sf::Vector2f>(mouse_position)};
-		if(!panel->get_parent_processed() && (only_on_parent || (!panel->in_panel(point_position) && panel->is_free() && !panel->in_const_panels(point_position)))) {
-			panel_manager->hide_panel(panel);
+		if(!panel_->get_parent_processed() && (only_on_parent_ || (!panel_->in_panel(point_position) && panel_->is_free() && !panel_->in_const_panels(point_position)))) {
+			panel_manager_->hide_panel(panel_);
 		}
 	}
 	

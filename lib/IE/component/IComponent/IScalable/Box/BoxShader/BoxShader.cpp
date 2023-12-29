@@ -1,8 +1,8 @@
 #include "BoxShader.hpp"
 
 namespace ie {
-	uint convert_transmission_def(const YAML::Node& node) {
-		uint transmission{};
+	size_t convert_transmission_def(const YAML::Node& node) {
+		size_t transmission{};
 		if(node) {
 			std::map<std::string, BoxShader::Transmission> transmission_map{
 				{"size",          BoxShader::Transmission::Size},
@@ -29,7 +29,7 @@ namespace ie {
 	BoxShader::Make::Make(
 		BoxPtr<IScalable::Make>&& object,
 		sf::Shader* shader,
-		uint transmission,
+		size_t transmission,
 		std::map<std::string, PISfloat> values_f,
 		std::map<std::string, PISint> values_i,
 		std::map<std::string, PISbool> values_b,
@@ -54,8 +54,8 @@ namespace ie {
 	
 	BoxShader::BoxShader(Make&& make, InitInfo init_info) :
 		BoxRenderTexture(std::move(make.object), make.optimize, make.min_size, init_info),
-		shader(make.shader),
-		transmission(make.transmission) {
+		shader_(make.shader),
+		transmission_(make.transmission) {
 		auto add_setters = [&](auto& values) {
 			for(auto& pair: values) {
 				pair.second->add_setter([&](auto var) {
@@ -72,14 +72,14 @@ namespace ie {
 	}
 	
 	BoxShader::BoxShader(
-		BoxPtr<IScalable>&& object, sf::Shader* shader, uint transmission,
+		BoxPtr<IScalable>&& object, sf::Shader* shader, size_t transmission,
 		std::map<std::string, PISfloat> values_f,
 		std::map<std::string, PISint> values_i,
 		std::map<std::string, PISbool> values_b,
 		std::map<std::string, PISValue<sf::Color>> values_c,
 		std::map<std::string, PSRVec2f> values_v,
 		bool optimize, sf::Vector2f min_size
-	) : BoxRenderTexture(std::move(object), optimize, min_size), shader(shader), transmission(transmission) {
+	) : BoxRenderTexture(std::move(object), optimize, min_size), shader_(shader), transmission_(transmission) {
 		auto add_setters = [&](auto& values) {
 			for(auto& pair: values) {
 				pair.second->add_setter([&](auto var) {
@@ -96,63 +96,63 @@ namespace ie {
 	}
 	
 	BoxShader::~BoxShader() {
-		delete shader;
+		delete shader_;
 	}
 	
 	void BoxShader::set_uniform(std::string name, float var) {
-		shader->setUniform(name, var);
+		shader_->setUniform(name, var);
 	}
 	
 	void BoxShader::set_uniform(std::string name, int var) {
-		shader->setUniform(name, var);
+		shader_->setUniform(name, var);
 	}
 	
 	void BoxShader::set_uniform(std::string name, bool var) {
-		shader->setUniform(name, var);
+		shader_->setUniform(name, var);
 	}
 	
 	void BoxShader::set_uniform(std::string name, sf::Color var) {
-		shader->setUniform(name, sf::Glsl::Vec4{var});
+		shader_->setUniform(name, sf::Glsl::Vec4{var});
 	}
 	
 	void BoxShader::set_uniform(std::string name, sf::Vector2f var) {
-		shader->setUniform(name, var);
+		shader_->setUniform(name, var);
 	}
 	
 	void BoxShader::set_size(sf::Vector2f size) {
-		if(transmission & Transmission::Size)
-			shader->setUniform("size", size);
-		if(transmission & Transmission::AspectRatio)
-			shader->setUniform("aspect_ratio", size.x / size.y);
-		layout.set_size(size);
+		if(transmission_ & Transmission::Size)
+			shader_->setUniform("size", size);
+		if(transmission_ & Transmission::AspectRatio)
+			shader_->setUniform("aspect_ratio", size.x / size.y);
+		layout_.set_size(size);
 	}
 	
 	void BoxShader::draw() {
-		if(!optimize || active || interaction_manager->is_blocked()) {
-			render_texture.clear(sf::Color(0, 0, 0, 0));
-			draw_manager.draw();
-			render_texture.display();
-			sprite.setTexture(render_texture.getTexture());
-			active = false;
+		if(!optimize_ || active_ || interaction_manager_->is_blocked()) {
+			render_texture_.clear(sf::Color(0, 0, 0, 0));
+			draw_manager_.draw();
+			render_texture_.display();
+			sprite_.setTexture(render_texture_.getTexture());
+			active_ = false;
 		}
-		if(transmission & Transmission::Time)
-			shader->setUniform("time", clock.getElapsedTime().asSeconds());
-		if(transmission & Transmission::Texture)
-			shader->setUniform("texture", render_texture.getTexture());
-		render_target->draw(sprite, shader);
+		if(transmission_ & Transmission::Time)
+			shader_->setUniform("time", clock_.getElapsedTime().asSeconds());
+		if(transmission_ & Transmission::Texture)
+			shader_->setUniform("texture", render_texture_.getTexture());
+		render_target_->draw(sprite_, shader_);
 	}
 	
 	void BoxShader::resize(sf::Vector2f size, sf::Vector2f position) {
-		if(transmission & Transmission::Size)
-			shader->setUniform("size", size);
-		if(transmission & Transmission::AspectRatio)
-			shader->setUniform("aspect_ratio", size.x / size.y);
+		if(transmission_ & Transmission::Size)
+			shader_->setUniform("size", size);
+		if(transmission_ & Transmission::AspectRatio)
+			shader_->setUniform("aspect_ratio", size.x / size.y);
 		BoxRenderTexture::resize(size, position);
 	}
 	
 	bool BoxShader::update_interactions(sf::Vector2f mouse_position) {
-		if(transmission & Transmission::MousePosition)
-			shader->setUniform("mouse_position", mouse_position - layout.position);
+		if(transmission_ & Transmission::MousePosition)
+			shader_->setUniform("mouse_position", mouse_position - layout_.position);
 		return BoxRenderTexture::update_interactions(mouse_position);
 	}
 	

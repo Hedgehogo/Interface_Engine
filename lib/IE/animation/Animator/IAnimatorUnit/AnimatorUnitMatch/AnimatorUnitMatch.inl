@@ -9,14 +9,14 @@ namespace ie {
 	template<typename T>
 	detail::AnimatorUnitMatch::Option<T> detail::AnimatorUnitMatch::Option<T>::copy() {
 		std::vector<IAnimatorUnit*> copy_next{next.size()};
-		for(std::size_t i = 0; i < next.size(); ++i) {
+		for(size_t i = 0; i < next.size(); ++i) {
 			copy_next[i] = next[i]->copy();
 		}
 		return Option{example, comparison, copy_next};
 	}
 	
 	template<typename T>
-	AnimatorUnitMatch<T>::AnimatorUnitMatch(std::vector<Option> options, PSValue<T> value) : options(options), value(value) {
+	AnimatorUnitMatch<T>::AnimatorUnitMatch(std::vector<Option> options, PSValue<T> value) : options_(options), value_(value) {
 		for(auto& option: options) {
 			for(auto& unit: option.next) {
 				if(!unit)
@@ -27,12 +27,12 @@ namespace ie {
 	
 	template<typename T>
 	void AnimatorUnitMatch<T>::add_next(size_t i, IAnimatorUnit* unit) {
-		options[i].next.emplace_back(unit);
+		options_[i].next.emplace_back(unit);
 	}
 	
 	template<typename T>
 	void AnimatorUnitMatch<T>::set_speed(PSfloat speed) {
-		for(auto& option: options) {
+		for(auto& option: options_) {
 			for(auto& animator_unit: option.next) {
 				animator_unit->set_speed(speed);
 			}
@@ -41,7 +41,7 @@ namespace ie {
 	
 	template<typename T>
 	void AnimatorUnitMatch<T>::restart() {
-		for(auto& option: options) {
+		for(auto& option: options_) {
 			for(auto& animator_unit: option.next) {
 				animator_unit->restart();
 			}
@@ -50,8 +50,8 @@ namespace ie {
 	
 	template<typename T>
 	std::vector<IAnimatorUnit*> AnimatorUnitMatch<T>::update(float) {
-		for(auto& option: options) {
-			if(option.comparison(value->get_value(), option.example)) {
+		for(auto& option: options_) {
+			if(option.comparison(value_->get_value(), option.example)) {
 				return option.next;
 			}
 		}
@@ -60,12 +60,12 @@ namespace ie {
 	
 	template<typename T>
 	AnimatorUnitMatch<T>* AnimatorUnitMatch<T>::copy() {
-		std::vector<Option> copy_options{options.size()};
-		for(std::size_t i = 0; i < options.size(); ++i) {
-			copy_options[i] = options[i].copy();
+		std::vector<Option> copy_options{options_.size()};
+		for(size_t i = 0; i < options_.size(); ++i) {
+			copy_options[i] = options_[i].copy();
 		}
 		
-		return new AnimatorUnitMatch<T>{copy_options, value};
+		return new AnimatorUnitMatch<T>{copy_options, value_};
 	}
 	
 	
@@ -151,7 +151,7 @@ namespace ie {
 		};
 		
 		if(node["options"]) {
-			for(std::size_t i = 0; i < node["options"].size(); ++i) {
+			for(size_t i = 0; i < node["options"].size(); ++i) {
 				add_next_animator_unit_for_mach(node, i, animator_unit_match);
 			}
 		} else {

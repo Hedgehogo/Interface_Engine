@@ -19,101 +19,101 @@ namespace ie {
 	}
 	
 	BoxBorderHorizontal::BoxBorderHorizontal(Make&& make, InitInfo init_info) :
-		Box(make.min_size), objects(map_make(std::move(make.objects), init_info)), bounds(std::move(make.bounds)) {
+		Box(make.min_size), objects_(map_make(std::move(make.objects), init_info)), bounds_(std::move(make.bounds)) {
 	}
 	
 	BoxBorderHorizontal::BoxBorderHorizontal(std::vector<BoxPtr<IScalable> >&& objects, std::vector<float> bounds, sf::Vector2f min_size) :
-		Box(min_size), objects(std::move(objects)), bounds(std::move(add_bounds(bounds))) {
+		Box(min_size), objects_(std::move(objects)), bounds_(std::move(add_bounds(bounds))) {
 	}
 	
 	BoxBorderHorizontal::BoxBorderHorizontal(std::vector<BoxPtr<IScalable> >&& objects, sf::Vector2f min_size) :
-		Box(min_size), objects(std::move(objects)), bounds(gen_bounds(this->objects.size())) {
+		Box(min_size), objects_(std::move(objects)), bounds_(gen_bounds(this->objects_.size())) {
 	}
 	
 	BoxBorderHorizontal::BoxBorderHorizontal(BoxPtr<IScalable>&& first_object, BoxPtr<IScalable>&& second_object, float bound, sf::Vector2f min_size) :
-		Box(min_size), objects({std::move(first_object), std::move(second_object)}), bounds({0.f, bound, 1.f}) {
+		Box(min_size), objects_({std::move(first_object), std::move(second_object)}), bounds_({0.f, bound, 1.f}) {
 	}
 	
 	void BoxBorderHorizontal::init(InitInfo init_info) {
-		for(auto& object: objects) {
+		for(auto& object: objects_) {
 			object->init(init_info);
 		}
 	}
 	
 	void BoxBorderHorizontal::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
+		layout_.resize(size, position);
 		sf::Vector2f coordinate{0, 0};
 		sf::Vector2f object_size{size};
-		for(std::size_t x = 0; x < objects.size(); ++x) {
-			object_size.x = size.x * (bounds[x + 1] - bounds[x]);
-			objects[x]->resize(object_size, position + coordinate);
+		for(size_t x = 0; x < objects_.size(); ++x) {
+			object_size.x = size.x * (bounds_[x + 1] - bounds_[x]);
+			objects_[x]->resize(object_size, position + coordinate);
 			coordinate.x += object_size.x;
 		}
 	}
 	
 	bool BoxBorderHorizontal::update_interactions(sf::Vector2f mouse_position) {
-		sf::Vector2f position{mouse_position.x - layout.position.x, mouse_position.y - layout.position.y};
-		if(position.x < 0.0f || position.x > layout.size.x || position.y < 0.0f || position.y > layout.size.y)
+		sf::Vector2f position{mouse_position.x - layout_.position.x, mouse_position.y - layout_.position.y};
+		if(position.x < 0.0f || position.x > layout_.size.x || position.y < 0.0f || position.y > layout_.size.y)
 			return false;
-		position.x = position.x / layout.size.x;
+		position.x = position.x / layout_.size.x;
 		
-		std::size_t object{1};
-		while(position.x > bounds[object])
+		size_t object{1};
+		while(position.x > bounds_[object])
 			++object;
-		return objects[object - 1]->update_interactions(mouse_position);
+		return objects_[object - 1]->update_interactions(mouse_position);
 	}
 	
 	sf::Vector2f BoxBorderHorizontal::get_min_size() const {
 		sf::Vector2f min_size{0, 0};
-		std::vector<sf::Vector2f> object_min_sizes(objects.size());
-		for(std::size_t i = 0; i < object_min_sizes.size(); ++i) {
-			object_min_sizes[i] = objects[i]->get_min_size();
+		std::vector<sf::Vector2f> object_min_sizes(objects_.size());
+		for(size_t i = 0; i < object_min_sizes.size(); ++i) {
+			object_min_sizes[i] = objects_[i]->get_min_size();
 		}
 		
 		sf::Vector2f object_min_size;
-		for(std::size_t i = 0; i < object_min_sizes.size(); ++i) {
-			object_min_size = {object_min_sizes[i].x / (bounds[i + 1] - bounds[i]), object_min_sizes[i].y};
+		for(size_t i = 0; i < object_min_sizes.size(); ++i) {
+			object_min_size = {object_min_sizes[i].x / (bounds_[i + 1] - bounds_[i]), object_min_sizes[i].y};
 			min_size = max(object_min_size, min_size);
 		}
 		
-		return max(min_size, this->minimum_size);
+		return max(min_size, this->minimum_size_);
 	}
 	
 	sf::Vector2f BoxBorderHorizontal::get_normal_size() const {
 		sf::Vector2f normal_size{0, 0};
-		std::vector<sf::Vector2f> object_normal_sizes(objects.size());
-		for(std::size_t i = 0; i < object_normal_sizes.size(); ++i) {
-			object_normal_sizes[i] = objects[i]->get_normal_size();
+		std::vector<sf::Vector2f> object_normal_sizes(objects_.size());
+		for(size_t i = 0; i < object_normal_sizes.size(); ++i) {
+			object_normal_sizes[i] = objects_[i]->get_normal_size();
 		}
 		
 		sf::Vector2f object_normal_size;
-		for(std::size_t i = 0; i < object_normal_sizes.size(); ++i) {
-			object_normal_size = {object_normal_sizes[i].x / (bounds[i + 1] - bounds[i]), object_normal_sizes[i].y};
+		for(size_t i = 0; i < object_normal_sizes.size(); ++i) {
+			object_normal_size = {object_normal_sizes[i].x / (bounds_[i + 1] - bounds_[i]), object_normal_sizes[i].y};
 			normal_size = max(object_normal_size, normal_size);
 		}
 		
 		return normal_size;
 	}
 	
-	std::size_t BoxBorderHorizontal::get_array_size() const {
-		return objects.size();
+	size_t BoxBorderHorizontal::get_array_size() const {
+		return objects_.size();
 	}
 	
-	IScalable& BoxBorderHorizontal::get_object_at(std::size_t index) {
-		return *objects.at(index);
+	IScalable& BoxBorderHorizontal::get_object_at(size_t index) {
+		return *objects_.at(index);
 	}
 	
-	const IScalable& BoxBorderHorizontal::get_object_at(std::size_t index) const {
-		return *objects.at(index);
+	const IScalable& BoxBorderHorizontal::get_object_at(size_t index) const {
+		return *objects_.at(index);
 	}
 	
 	BoxBorderHorizontal* BoxBorderHorizontal::copy() {
 		return new BoxBorderHorizontal{*this};
 	}
 	
-	void BoxBorderHorizontal::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
+	void BoxBorderHorizontal::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
-		for(auto& object: objects) {
+		for(auto& object: objects_) {
 			object->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		}
 	}

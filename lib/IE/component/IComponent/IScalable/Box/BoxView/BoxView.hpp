@@ -21,8 +21,8 @@ namespace ie {
 		BoxWithView* copy() override = 0;
 	
 	protected:
-		DrawManager draw_manager;
-		sf::RenderTarget* render_target;
-		sf::View view;
+		DrawManager draw_manager_;
+		sf::RenderTarget* render_target_;
+		sf::View view_;
 	};
 }

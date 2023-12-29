@@ -76,16 +76,16 @@ namespace ie {
 		
 		BoxConstRatio* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		DrawManager second_draw_manager;
-		BoxPtr<IUninteractive> background;
-		BoxPtr<IScalable> const_object;
-		BoxPtr<IScalable> second_object;
-		bool vertical_side, horizontal_side;      //true = up   true = left
-		bool render_second;
-		float aspect_ratio;
+		DrawManager second_draw_manager_;
+		BoxPtr<IUninteractive> background_;
+		BoxPtr<IScalable> const_object_;
+		BoxPtr<IScalable> second_object_;
+		bool vertical_side_, horizontal_side_;      //true = up   true = left
+		bool render_second_;
+		float aspect_ratio_;
 	};
 	
 	template<>

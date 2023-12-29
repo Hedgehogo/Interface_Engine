@@ -3,7 +3,7 @@
 
 namespace ie {
 	void ProcessClipboard<sf::Clipboard>::set_string(sf::Clipboard&, std::u32string str) {
-		sf::Clipboard::setString(u32string_to_uint32_string(std::move(str)));
+		sf::Clipboard::setString(u32_string_to_uint32_string(std::move(str)));
 	}
 	
 	std::u32string ProcessClipboard<sf::Clipboard>::get_string(sf::Clipboard&) {

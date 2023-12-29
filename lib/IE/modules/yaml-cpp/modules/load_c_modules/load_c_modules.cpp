@@ -7,7 +7,7 @@
 #include "../../yaml.hpp"
 
 namespace ie {
-	size_t write_data(void* ptr, std::size_t size, std::size_t nMem_b, void* stream) {
+	size_t write_data(void* ptr, size_t size, size_t nMem_b, void* stream) {
 		size_t written = fwrite(ptr, size, nMem_b, (FILE*)stream);
 		return written;
 	}

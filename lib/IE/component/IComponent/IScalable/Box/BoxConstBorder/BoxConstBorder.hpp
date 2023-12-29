@@ -44,13 +44,13 @@ namespace ie {
 		
 		BoxConstBorder* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		BoxPtr<IScalable> const_object;
-		BoxPtr<IScalable> second_object;
-		float border_distance;
-		Side side;
+		BoxPtr<IScalable> const_object_;
+		BoxPtr<IScalable> second_object_;
+		float border_distance_;
+		Side side_;
 	};
 	
 	template<>

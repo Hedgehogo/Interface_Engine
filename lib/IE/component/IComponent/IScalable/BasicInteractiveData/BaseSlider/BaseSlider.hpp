@@ -59,17 +59,17 @@ namespace ie {
 		
 		BaseSlider* copy() override = 0;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
 		virtual void resize_slider(sf::Vector2f new_value);
 		
-		BasicInteractiveData<BaseSlider&> interactive;
-		BoxPtr<IUninteractive> background;
-		BoxPtr<IUninteractive> slider;
-		PSRVec2f value;
-		sf::Vector2f position;
-		sf::Vector2f slider_size;
-		sf::Vector2f move_zone_size;
+		BasicInteractiveData<BaseSlider&> interactive_;
+		BoxPtr<IUninteractive> background_;
+		BoxPtr<IUninteractive> slider_;
+		PSRVec2f value_;
+		sf::Vector2f position_;
+		sf::Vector2f slider_size_;
+		sf::Vector2f move_zone_size_;
 	};
 }

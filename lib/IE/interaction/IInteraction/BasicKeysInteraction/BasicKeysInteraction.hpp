@@ -49,10 +49,10 @@ namespace ie {
 		BasicKeysInteraction<T>* copy() override;
 		
 	protected:
-		BoxPtr<BasicKeyAction<T> > action;
-		std::vector<Key> keys;
-		std::vector<Key> black_list_keys;
-		bool press;
+		BoxPtr<BasicKeyAction<T> > action_;
+		std::vector<Key> keys_;
+		std::vector<Key> black_list_keys_;
+		bool press_;
 	};
 	
 	using KeysInteraction = BasicKeysInteraction<>;

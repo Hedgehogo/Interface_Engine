@@ -13,27 +13,27 @@ namespace ie {
 	
 	template<typename T>
 	BasicPressedInteraction<T>::BasicPressedInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
-		BasicOneKeyInteraction<T>({std::move(make.action), make.key}, init_info), interaction_manager(&init_info.interaction_manager) {
+		BasicOneKeyInteraction<T>({std::move(make.action), make.key}, init_info), interaction_manager_(&init_info.interaction_manager) {
 	}
 	
 	template<typename T>
 	BasicPressedInteraction<T>::BasicPressedInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key) :
-		BasicOneKeyInteraction<T>(std::move(action), key), interaction_manager(nullptr) {
+		BasicOneKeyInteraction<T>(std::move(action), key), interaction_manager_(nullptr) {
 	}
 	
 	template<typename T>
 	void BasicPressedInteraction<T>::init(BasicActionInitInfo<T> init_info) {
 		BasicOneKeyInteraction<T>::init(init_info);
-		this->interaction_manager = &init_info.interaction_manager;
+		this->interaction_manager_ = &init_info.interaction_manager;
 	}
 	
 	template<typename T>
 	void BasicPressedInteraction<T>::update(sf::Vector2i mouse_position) {
-		if(KeyHandler::is_key_pressed(this->key)) {
-			this->action->update(mouse_position, true);
+		if(KeyHandler::is_key_pressed(this->key_)) {
+			this->action_->update(mouse_position, true);
 		} else {
-			this->action->update(mouse_position, false);
-			interaction_manager->delete_interaction(*this);
+			this->action_->update(mouse_position, false);
+			interaction_manager_->delete_interaction(*this);
 		}
 	}
 	

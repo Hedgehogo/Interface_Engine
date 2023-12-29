@@ -24,13 +24,13 @@ namespace ie {
 		bool update(sf::Vector2i mouse_position) override;
 	
 	protected:
-		int internal_border_size;
-		int external_border_size;
-		Key key;
+		int internal_border_size_;
+		int external_border_size_;
+		Key key_;
 		
-		Borders borders;
-		sf::Vector2i grip;
-		sf::Vector2<int*> current_border;
-		bool old_key_pressed;
+		Borders borders_;
+		sf::Vector2i grip_;
+		sf::Vector2<int*> current_border_;
+		bool old_key_pressed_;
 	};
 }

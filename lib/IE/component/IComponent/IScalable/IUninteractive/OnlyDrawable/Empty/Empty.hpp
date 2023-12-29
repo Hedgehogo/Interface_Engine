@@ -26,14 +26,14 @@ namespace ie {
 		
 		Empty* copy() override;
 		
-		void draw_debug(sf::RenderTarget&, int, int, uint, uint) override;
+		void draw_debug(sf::RenderTarget&, int, int, size_t, size_t) override;
 	
 	protected:
 		LayoutData& layout_get_data() override;
 		
 		const LayoutData& layout_get_data() const override;
 		
-		LayoutData layout;
+		LayoutData layout_;
 	};
 	
 	template<>

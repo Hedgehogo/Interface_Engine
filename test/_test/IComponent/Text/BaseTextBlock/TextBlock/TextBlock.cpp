@@ -18,7 +18,7 @@ TEST(IComponent_Text, TextBlock) {
 				{},
 				{},
 				ie::make_vector(
-				make_box_ptr<ie::BaseLine::Make, ie::Underline::Make>()
+                    ie::make_box_ptr<ie::BaseLine::Make, ie::Underline::Make>()
 				)
 			},
 			{
@@ -85,7 +85,7 @@ TEST(IComponent_Text, TextBlock) {
 				sf::Color::Red,
 				&font,
 				{},
-				std::vector<BoxPtr<ie::BaseLine::Make>>{},
+				std::vector<ie::BoxPtr<ie::BaseLine::Make>>{},
 				30,
 				sf::Color::Yellow,
 				sf::Color::Green,

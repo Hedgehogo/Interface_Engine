@@ -10,49 +10,49 @@ namespace ie {
 		InitInfo object_init_info,
 		InitInfo init_info
 	) :
-		object(object->make(object_init_info.copy(draw_manager).copy(update_manager))),
-		sizing(sizing->make({init_info.render_target, this->object->get_normal_size()})),
-		positioning(positioning->make({init_info.render_target})),
-		displayed(displayed) {
-		this->positioning->init(init_info.render_target);
+		object_(object->make(object_init_info.copy(draw_manager_).copy(update_manager_))),
+		sizing_(sizing->make({init_info.render_target, this->object_->get_normal_size()})),
+		positioning_(positioning->make({init_info.render_target})),
+		displayed_(displayed) {
+		this->positioning_->init(init_info.render_target);
 		init_info.panel_manager.add_panel(this);
 	}
 	
 	BasePanel::BasePanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :
-		object(std::move(object)), sizing(std::move(sizing)), positioning(std::move(positioning)),
-		parent_processed(false), old_displayed(false), displayed(displayed), active(false) {
+		object_(std::move(object)), sizing_(std::move(sizing)), positioning_(std::move(positioning)),
+		parent_processed_(false), old_displayed_(false), displayed_(displayed), active_(false) {
 	}
 	
 	BasePanel::BasePanel(const BasePanel& other) :
-		layout(other.layout), object(other.object), sizing(other.sizing), positioning(other.positioning),
-		parent_processed(other.parent_processed), old_displayed(other.old_displayed), displayed(other.displayed), active(false) {
+		layout_(other.layout_), object_(other.object_), sizing_(other.sizing_), positioning_(other.positioning_),
+		parent_processed_(other.parent_processed_), old_displayed_(other.old_displayed_), displayed_(other.displayed_), active_(false) {
 	}
 	
 	void BasePanel::init(InitInfo init_info) {
 		init_info.panel_manager.add_panel(this);
-		sf::Vector2f object_normal_size = object->get_normal_size();
-		sizing->init(init_info.render_target, object_normal_size);
-		positioning->init(init_info.render_target);
+		sf::Vector2f object_normal_size = object_->get_normal_size();
+		sizing_->init(init_info.render_target, object_normal_size);
+		positioning_->init(init_info.render_target);
 	}
 	
 	void BasePanel::set_displayed() {
 	}
 	
 	void BasePanel::set_parent_processed(bool parent_processed) {
-		this->parent_processed = parent_processed;
+		this->parent_processed_ = parent_processed;
 	}
 	
 	bool BasePanel::get_parent_processed() {
-		return this->parent_processed;
+		return this->parent_processed_;
 	}
 	
 	bool BasePanel::in_panel(sf::Vector2f point_position) {
-		return active && in_area(point_position);
+		return active_ && in_area(point_position);
 	}
 	
 	bool BasePanel::in_area(sf::Vector2f point_position) {
-		return point_position.x > layout.position.x && point_position.x < layout.position.x + layout.size.x &&
-			   point_position.y > layout.position.y && point_position.y < layout.position.y + layout.size.y;
+		return point_position.x > layout_.position.x && point_position.x < layout_.position.x + layout_.size.x &&
+			   point_position.y > layout_.position.y && point_position.y < layout_.position.y + layout_.size.y;
 	}
 	
 	bool BasePanel::in(sf::Vector2f point_position) {
@@ -60,83 +60,83 @@ namespace ie {
 	}
 	
 	void BasePanel::draw() {
-		draw_manager.draw();
+		draw_manager_.draw();
 	}
 	
 	void BasePanel::set_position(sf::Vector2f position) {
-		layout.set_position(position);
-		object->set_position(position);
+		layout_.set_position(position);
+		object_->set_position(position);
 	}
 	
 	void BasePanel::move(sf::Vector2f offset) {
-		layout.move(offset);
-		object->move(offset);
+		layout_.move(offset);
+		object_->move(offset);
 	}
 	
 	void BasePanel::resize(sf::Vector2f parent_size, sf::Vector2f parent_position) {
-		sf::Vector2f size = (*sizing)(parent_size);
-		sf::Vector2f position = (*positioning)(parent_position, parent_size, size);
-		layout.resize(size, position);
-		object->resize(size, position);
+		sf::Vector2f size = (*sizing_)(parent_size);
+		sf::Vector2f position = (*positioning_)(parent_position, parent_size, size);
+		layout_.resize(size, position);
+		object_->resize(size, position);
 	}
 	
 	void BasePanel::update() {
-		old_displayed = displayed;
-		displayed = false;
-		update_manager.update();
+		old_displayed_ = displayed_;
+		displayed_ = false;
+		update_manager_.update();
 	}
 	
 	bool BasePanel::update_interactions(sf::Vector2f mouse_position) {
-		return in_panel(mouse_position) && object->update_interactions(mouse_position);
+		return in_panel(mouse_position) && object_->update_interactions(mouse_position);
 	}
 	
 	bool BasePanel::update_interactions(sf::Vector2f mouse_position, bool active) {
-		displayed = true;
-		this->active = active;
+		displayed_ = true;
+		this->active_ = active;
 		return update_interactions(mouse_position);
 	}
 	
 	sf::Vector2f BasePanel::get_area_position() const {
-		return layout.position;
+		return layout_.position;
 	}
 	
 	sf::Vector2f BasePanel::get_area_size() const {
-		return layout.size;
+		return layout_.size;
 	}
 	
 	sf::Vector2f BasePanel::get_min_size() const {
-		return sizing->get_parent_size(object->get_min_size());
+		return sizing_->get_parent_size(object_->get_min_size());
 	}
 	
 	sf::Vector2f BasePanel::get_normal_size() const {
-		return sizing->get_parent_size(object->get_normal_size());
+		return sizing_->get_parent_size(object_->get_normal_size());
 	}
 	
 	IScalable& BasePanel::get_object() {
-		return *object;
+		return *object_;
 	}
 	
 	const IScalable& BasePanel::get_object() const {
-		return *object;
+		return *object_;
 	}
 	
-	bool BasePanel::full_debug = false;
+	bool BasePanel::full_debug_ = false;
 	
 	void BasePanel::set_full_debug(bool full_debug) {
-		BasePanel::full_debug = full_debug;
+		BasePanel::full_debug_ = full_debug;
 	}
 	
-	void BasePanel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
-		if(full_debug || old_displayed) {
-			object->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+	void BasePanel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+		if(full_debug_ || old_displayed_) {
+			object_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		}
 	}
 	
 	LayoutData& BasePanel::layout_get_data() {
-		return layout;
+		return layout_;
 	}
 	
 	const LayoutData& BasePanel::layout_get_data() const {
-		return layout;
+		return layout_;
 	}
 	}

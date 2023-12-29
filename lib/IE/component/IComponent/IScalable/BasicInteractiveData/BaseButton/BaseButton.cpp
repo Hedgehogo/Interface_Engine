@@ -2,40 +2,40 @@
 
 namespace ie {
 	BaseButton::BaseButton(BoxPtr<IScalable::Make>&& background, InitInfo init_info) :
-		background(background->make(init_info)) {
+		background_(background->make(init_info)) {
 		init_info.update_manager.add(*this);
 	}
 	
 	BaseButton::BaseButton(BoxPtr<IScalable>&& background) :
-		background(std::move(background)) {
+		background_(std::move(background)) {
 	}
 	
 	void BaseButton::init(InitInfo init_info) {
 		init_info.update_manager.add(*this);
-		background->init(init_info);
+		background_->init(init_info);
 	}
 	
 	IScalable& BaseButton::get_object() {
-		return *background;
+		return *background_;
 	}
 	
 	const IScalable& BaseButton::get_object() const {
-		return *background;
+		return *background_;
 	}
 	
 	bool BaseButton::update_interactions(sf::Vector2f mouse_position) {
-		return background->update_interactions(mouse_position);
+		return background_->update_interactions(mouse_position);
 	}
 	
 	LayoutData& BaseButton::layout_get_data() {
-		return layout;
+		return layout_;
 	}
 	
 	const LayoutData& BaseButton::layout_get_data() const {
-		return layout;
+		return layout_;
 	}
 	
-	void BaseButton::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
-		background->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+	void BaseButton::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+		background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
 }

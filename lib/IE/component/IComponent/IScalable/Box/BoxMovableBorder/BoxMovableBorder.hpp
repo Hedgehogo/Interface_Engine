@@ -80,16 +80,16 @@ namespace ie {
 		
 		BoxMovableBorder* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		BasicInteractiveData<BoxMovableBorder&> interactive;
-		BoxPtr<IScalable> first_object;
-		BoxPtr<IScalable> second_object;
-		PSCoefficient border_value;
-		float border_value_now;
-		int border_interaction_size;
-		bool is_horizontal_border;
+		BasicInteractiveData<BoxMovableBorder&> interactive_;
+		BoxPtr<IScalable> first_object_;
+		BoxPtr<IScalable> second_object_;
+		PSCoefficient border_value_;
+		float border_value_now_;
+		int border_interaction_size_;
+		bool is_horizontal_border_;
 	};
 	
 	template<>

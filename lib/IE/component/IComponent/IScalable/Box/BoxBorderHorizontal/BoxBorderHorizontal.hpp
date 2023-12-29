@@ -39,19 +39,19 @@ namespace ie {
 		
 		sf::Vector2f get_normal_size() const override;
 		
-		std::size_t get_array_size() const override;
+		size_t get_array_size() const override;
 		
-		IScalable& get_object_at(std::size_t index) override;
+		IScalable& get_object_at(size_t index) override;
 		
-		const IScalable& get_object_at(std::size_t index) const override;
+		const IScalable& get_object_at(size_t index) const override;
 		
 		BoxBorderHorizontal* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		std::vector<BoxPtr<IScalable> > objects;
-		std::vector<float> bounds;
+		std::vector<BoxPtr<IScalable> > objects_;
+		std::vector<float> bounds_;
 	};
 	
 	template<>

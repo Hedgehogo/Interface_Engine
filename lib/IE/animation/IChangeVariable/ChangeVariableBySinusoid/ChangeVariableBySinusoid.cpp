@@ -1,19 +1,19 @@
 #include "ChangeVariableBySinusoid.hpp"
 
 namespace ie {
-	ChangeVariableBySinusoid::ChangeVariableBySinusoid(float size, float a, float b, float c, float d) : a(a), b(b), c(c), d(d), size(size) {
+	ChangeVariableBySinusoid::ChangeVariableBySinusoid(float size, float a, float b, float c, float d) : a_(a), b_(b), c_(c), d_(d), size_(size) {
 	}
 	
 	float ChangeVariableBySinusoid::get_size() {
-		return size;
+		return size_;
 	}
 	
 	float ChangeVariableBySinusoid::operator()(float frame) {
-		return a + (b * std::sin((c * frame) + d));
+		return a_ + (b_ * std::sin((c_ * frame) + d_));
 	}
 	
 	IChangeVariable* ChangeVariableBySinusoid::copy() {
-		return new ChangeVariableBySinusoid{size, a, b, c, d};
+		return new ChangeVariableBySinusoid{size_, a_, b_, c_, d_};
 	}
 	
 	

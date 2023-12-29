@@ -13,7 +13,7 @@ namespace ie {
 			orl::Option<sf::Font*> font = {};
 			orl::Option<sf::Text::Style> style = {};
 			std::vector<BoxPtr<BaseLine::Make> > lines = {};
-			orl::Option<uint> size = {};
+			orl::Option<size_t> size = {};
 			orl::Option<sf::Color> text_selection_color = {};
 			orl::Option<sf::Color> background_selection_color = {};
 			orl::Option<sf::Color> inactive_text_selection_color = {};
@@ -25,7 +25,7 @@ namespace ie {
 				const orl::Option<sf::Font*>& font = {},
 				const orl::Option<sf::Text::Style>& style = {},
 				std::vector<BoxPtr<BaseLine::Make>>&& lines = {},
-				const orl::Option<uint>& size = {},
+				const orl::Option<size_t>& size = {},
 				const orl::Option<sf::Color>& text_selection_color = {},
 				const orl::Option<sf::Color>& background_selection_color = {},
 				const orl::Option<sf::Color>& inactive_text_selection_color = {},
@@ -45,7 +45,7 @@ namespace ie {
 			orl::Option<sf::Font*> font = {},
 			orl::Option<sf::Text::Style> style = {},
 			std::vector<BoxPtr<BaseLine>>&& lines = {},
-			orl::Option<uint> size = {},
+			orl::Option<size_t> size = {},
 			orl::Option<sf::Color> text_selection_color = {},
 			orl::Option<sf::Color> background_selection_color = {},
 			orl::Option<sf::Color> inactive_text_selection_color = {},
@@ -59,7 +59,7 @@ namespace ie {
 			sf::Color inactive_text_selection_color,
 			sf::Color inactive_background_selection_color,
 			sf::Font* font,
-			uint size,
+			size_t size,
 			sf::Text::Style style
 		) override;
 		

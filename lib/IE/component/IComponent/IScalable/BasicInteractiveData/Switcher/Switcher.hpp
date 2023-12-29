@@ -51,20 +51,20 @@ namespace ie {
 		
 		Switcher* copy() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
 		LayoutData& layout_get_data() override;
 		
 		const LayoutData& layout_get_data() const override;
 		
-		LayoutData layout;
-		InteractiveData interactive;
-		DrawManager inactive_draw_manager;
-		DrawManager active_draw_manager;
-		BoxPtr<IScalable> inactive_background;
-		BoxPtr<IScalable> active_background;
-		PSbool active;
+		LayoutData layout_;
+		InteractiveData interactive_;
+		DrawManager inactive_draw_manager_;
+		DrawManager active_draw_manager_;
+		BoxPtr<IScalable> inactive_background_;
+		BoxPtr<IScalable> active_background_;
+		PSbool active_;
 	};
 	
 	template<>

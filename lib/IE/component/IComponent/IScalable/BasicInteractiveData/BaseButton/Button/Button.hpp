@@ -27,7 +27,7 @@ namespace ie {
 		Button* copy() override;
 	
 	protected:
-		InteractiveData interactive;
+		InteractiveData interactive_;
 	};
 	
 	template<>

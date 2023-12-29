@@ -25,7 +25,7 @@ namespace ie {
 			virtual ~IYamlBuilder() = default;
 		
 		public:
-			static TypeNameDeformer type_name_deform;
+			static TypeNameDeformer type_name_deformer;
 		};
 	}
 	

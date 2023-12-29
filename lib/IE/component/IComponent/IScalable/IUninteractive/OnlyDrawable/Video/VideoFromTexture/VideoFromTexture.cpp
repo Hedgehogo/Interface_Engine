@@ -1,11 +1,11 @@
 #include "VideoFromTexture.hpp"
 
 namespace ie {
-	VideoFromTexture::Make::Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, std::size_t frame_count, sf::Vector2i offset) :
+	VideoFromTexture::Make::Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, size_t frame_count, sf::Vector2i offset) :
 		texture(texture), viewing_progress(viewing_progress), rect(rect), frame_count(frame_count), offset(offset) {
 	}
 	
-	VideoFromTexture::Make::Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, std::size_t frame_count) :
+	VideoFromTexture::Make::Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, size_t frame_count) :
 		texture(texture), viewing_progress(viewing_progress), rect(rect), frame_count(frame_count), offset(this->rect.width, 0) {
 	}
 	
@@ -34,7 +34,7 @@ namespace ie {
 		});
 	}
 	
-	VideoFromTexture::VideoFromTexture(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, std::size_t frame_count, sf::Vector2i offset) :
+	VideoFromTexture::VideoFromTexture(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, size_t frame_count, sf::Vector2i offset) :
 		rect(rect), offset(offset), viewing_progress(viewing_progress), texture_size(texture.getSize()), frame_count(frame_count) {
 		viewing_progress->add_setter([=](float viewing_progress) {
 			set_current_frame(viewing_progress);

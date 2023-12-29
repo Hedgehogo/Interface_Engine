@@ -16,8 +16,8 @@ namespace ie {
 		virtual ~AnimationManager();
 	
 	protected:
-		uint64_t start_manager;
-		std::vector<Animator*> animators;
+		uint64_t start_time_;
+		std::vector<Animator*> animators_;
 	};
 	
 	template<>

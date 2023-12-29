@@ -59,8 +59,8 @@ namespace ie {
 			make.value,
 			init_info
 		),
-		aspect_ratio(get_aspect_ratio(max(slider->get_normal_size(), {1, 1}))),
-		slider_scale(make.slider_scale) {
+		aspect_ratio_(get_aspect_ratio(max(slider_->get_normal_size(), {1, 1}))),
+		slider_scale_(make.slider_scale) {
 	}
 	
 	ConstSlider::ConstSlider(
@@ -80,9 +80,9 @@ namespace ie {
 				key, wheel_horizontal, wheel_relativity, wheel_sensitivity
 			),
 			value
-		), slider_scale(slider_scale) {
-		slider_size = slider->get_normal_size();
-		aspect_ratio = slider_size.x / slider_size.y;
+		), slider_scale_(slider_scale) {
+		slider_size_ = slider->get_normal_size();
+		aspect_ratio_ = slider_size_.x / slider_size_.y;
 	}
 	
 	ConstSlider::ConstSlider(
@@ -101,26 +101,26 @@ namespace ie {
 				key, division, wheel_horizontal
 			),
 			value
-		), slider_scale(slider_scale) {
-		slider_size = slider->get_normal_size();
-		aspect_ratio = slider_size.x / slider_size.y;
+		), slider_scale_(slider_scale) {
+		slider_size_ = slider->get_normal_size();
+		aspect_ratio_ = slider_size_.x / slider_size_.y;
 	}
 	
 	void ConstSlider::init(InitInfo init_info) {
 		BaseSlider::init(init_info);
-		interactive.init(init_info, *this);
+		interactive_.init(init_info, *this);
 	}
 	
 	void ConstSlider::resize(sf::Vector2f size, sf::Vector2f position) {
-		this->position = position;
-		if(size.x / aspect_ratio < size.y) {
-			slider_size = sf::Vector2f{size.x, size.x / aspect_ratio} * slider_scale;
+		this->position_ = position;
+		if(size.x / aspect_ratio_ < size.y) {
+			slider_size_ = sf::Vector2f{size.x, size.x / aspect_ratio_} * slider_scale_;
 		} else {
-			slider_size = sf::Vector2f{size.y * aspect_ratio, size.y} * slider_scale;
+			slider_size_ = sf::Vector2f{size.y * aspect_ratio_, size.y} * slider_scale_;
 		}
-		move_zone_size = size - slider_size;
-		background->resize(size, position);
-		resize_slider(value->get_value());
+		move_zone_size_ = size - slider_size_;
+		background_->resize(size, position);
+		resize_slider(value_->get_value());
 	}
 	
 	ConstSlider* ConstSlider::copy() {

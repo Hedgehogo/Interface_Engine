@@ -12,9 +12,9 @@ TEST(IComponent_Text, Character) {
 	{
 		InitInfoData data{{100, 100}};
 		
-		std::vector<BoxPtr<ie::BaseLine>> lines{
-			make_box_ptr<ie::BaseLine, ie::Underline>(sf::Color::Red),
-			make_box_ptr<ie::BaseLine, ie::StrikeThrough>(sf::Color::Blue, 0.6f)
+		std::vector<ie::BoxPtr<ie::BaseLine>> lines{
+                ie::make_box_ptr<ie::BaseLine, ie::Underline>(sf::Color::Red),
+                ie::make_box_ptr<ie::BaseLine, ie::StrikeThrough>(sf::Color::Blue, 0.6f)
 		};
 		
 		ie::TextVariables text_variables{
@@ -109,7 +109,7 @@ TEST(IComponent_Text, Character) {
 	{
 		InitInfoData data{{100, 100}};
 		
-		std::vector<BoxPtr<ie::BaseLine>> lines{};
+		std::vector<ie::BoxPtr<ie::BaseLine>> lines{};
 		
 		ie::TextVariables text_variables{
 			sf::Color::Black,
@@ -139,7 +139,7 @@ TEST(IComponent_Text, Character) {
 	{
 		InitInfoData data{{100, 100}};
 		
-		std::vector<BoxPtr<ie::BaseLine>> lines{};
+		std::vector<ie::BoxPtr<ie::BaseLine>> lines{};
 		
 		ie::TextVariables text_variables{
 			sf::Color::Black,
@@ -170,7 +170,7 @@ TEST(IComponent_Text, Character) {
 	{
 		InitInfoData data{{100, 100}};
 		
-		std::vector<BoxPtr<ie::BaseLine>> lines{};
+		std::vector<ie::BoxPtr<ie::BaseLine>> lines{};
 		
 		ie::TextVariables text_variables{
 			sf::Color::Red,

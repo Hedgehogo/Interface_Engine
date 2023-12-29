@@ -14,8 +14,8 @@ bool image_equal(const sf::Image& first, const sf::Image& second, float precisio
 		return false;
 	}
 	float total_difference{0};
-	for(std::size_t x = 0; x < size.x; ++x) {
-		for(std::size_t y = 0; y < size.y; ++y) {
+	for(size_t x = 0; x < size.x; ++x) {
+		for(size_t y = 0; y < size.y; ++y) {
 			total_difference += total_difference_color(first.getPixel(x, y), second.getPixel(x, y));
 		}
 	}

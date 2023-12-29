@@ -2,24 +2,24 @@
 
 namespace ie {
 	void DrawManager::add(IDrawable& drawable) {
-		drawables.push_back(&drawable);
+		drawables_.push_back(&drawable);
 	}
 	
 	void DrawManager::clear() {
-		drawables.clear();
+		drawables_.clear();
 	}
 	
 	void DrawManager::draw() {
-		for(auto& drawable: drawables) {
+		for(auto& drawable: drawables_) {
 			drawable->draw();
 		}
 	}
 	
-	std::size_t DrawManager::size() {
-		return drawables.size();
+	size_t DrawManager::size() {
+		return drawables_.size();
 	}
 	
-	IDrawable& DrawManager::get(std::size_t index) {
-		return *drawables.at(index);
+	IDrawable& DrawManager::get(size_t index) {
+		return *drawables_.at(index);
 	}
 }

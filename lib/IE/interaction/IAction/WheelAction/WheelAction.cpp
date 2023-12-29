@@ -5,6 +5,6 @@ namespace sf::Wheel {
 }
 
 namespace ie {
-	WheelAction::WheelAction() : active(false) {
+	WheelAction::WheelAction() : active_(false) {
 	}
 }

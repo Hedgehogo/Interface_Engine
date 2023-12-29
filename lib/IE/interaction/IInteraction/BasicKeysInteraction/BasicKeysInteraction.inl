@@ -17,35 +17,35 @@ namespace ie {
 	
 	template<typename T>
 	BasicKeysInteraction<T>::BasicKeysInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
-		action(make.action->make(init_info)), keys(std::move(make.keys)), black_list_keys(std::move(make.black_list_keys)), press(false) {
-		std::sort(this->keys.begin(), this->keys.end());
+		action_(make.action->make(init_info)), keys_(std::move(make.keys)), black_list_keys_(std::move(make.black_list_keys)), press_(false) {
+		std::sort(this->keys_.begin(), this->keys_.end());
 	}
 	
 	template<typename T>
 	BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys) :
-		action(std::move(action)), keys(std::move(keys)), black_list_keys(std::move(black_list_keys)), press(false) {
-		std::sort(this->keys.begin(), this->keys.end());
+		action_(std::move(action)), keys_(std::move(keys)), black_list_keys_(std::move(black_list_keys)), press_(false) {
+		std::sort(this->keys_.begin(), this->keys_.end());
 	}
 	
 	template<typename T>
 	void BasicKeysInteraction<T>::init(BasicActionInitInfo<T> init_info) {
 		IBasicInteraction<T>::init(init_info);
-		action->init(init_info);
+		action_->init(init_info);
 	}
 	
 	template<typename T>
 	std::vector<Key> BasicKeysInteraction<T>::get_keys() {
-		return keys;
+		return keys_;
 	}
 	
 	template<typename T>
 	BasicKeyAction<T>* BasicKeysInteraction<T>::get_action() {
-		return action.get();
+		return action_.get();
 	}
 	
 	template<typename T>
 	void BasicKeysInteraction<T>::set_action(BasicKeyAction<T>* action) {
-		this->action.reset(action);
+		this->action_.reset(action);
 	}
 	
 	template<typename T>
@@ -54,32 +54,32 @@ namespace ie {
 	
 	template<typename T>
 	void BasicKeysInteraction<T>::update(sf::Vector2i mouse_position) {
-		press = true;
-		for(auto& key: keys) {
+		press_ = true;
+		for(auto& key: keys_) {
 			if(!KeyHandler::is_key_pressed(key)) {
-				press = false;
+				press_ = false;
 				break;
 			}
 		}
-		if(press) {
-			for(auto& key: black_list_keys) {
+		if(press_) {
+			for(auto& key: black_list_keys_) {
 				if(KeyHandler::is_key_pressed(key)) {
-					press = false;
+					press_ = false;
 					break;
 				}
 			}
 		}
-		action->update(mouse_position, press);
+		action_->update(mouse_position, press_);
 	}
 	
 	template<typename T>
 	void BasicKeysInteraction<T>::finish(sf::Vector2i) {
-		action->set_pressed(false);
+		action_->set_pressed(false);
 	}
 	
 	template<typename T>
 	bool BasicKeysInteraction<T>::is_press() const {
-		return press;
+		return press_;
 	}
 	
 	template<typename T>

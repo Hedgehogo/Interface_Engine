@@ -1,12 +1,12 @@
 #include "MatchSidesPositioning.hpp"
 
 namespace ie {
-	MatchSidesPositioning::MatchSidesPositioning(Location parent_side, Location object_side, float offset) : parent_side(parent_side), object_side(object_side), offset(offset) {
+	MatchSidesPositioning::MatchSidesPositioning(Location parent_side, Location object_side, float offset) : parent_side_(parent_side), object_side_(object_side), offset_(offset) {
 	}
 	
 	float MatchSidesPositioning::find_position(float parent_position, float object_size, float parent_size, float) {
-		float position{parent_position + offset};
-		switch(parent_side) {
+		float position{parent_position + offset_};
+		switch(parent_side_) {
 			case Location::Origin:
 				break;
 			case Location::Center:
@@ -16,7 +16,7 @@ namespace ie {
 				position += parent_size;
 				break;
 		}
-		switch(object_side) {
+		switch(object_side_) {
 			case Location::Origin:
 				break;
 			case Location::Center:

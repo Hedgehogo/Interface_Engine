@@ -1,28 +1,28 @@
 #include "ChangeVariableBySteppedLine.hpp"
 
 namespace ie {
-	ChangeVariableBySteppedLine::ChangeVariableBySteppedLine(std::vector<Value> values) : values(values) {
+	ChangeVariableBySteppedLine::ChangeVariableBySteppedLine(std::vector<Value> values) : values_(values) {
 		for(const auto& item: values) {
-			size += item.size;
+			size_ += item.size;
 		}
 	}
 	
 	float ChangeVariableBySteppedLine::get_size() {
-		return size;
+		return size_;
 	}
 	
 	float ChangeVariableBySteppedLine::operator()(float frame) {
 		float sum_size{0};
-		std::size_t i{0};
-		for(; sum_size + values[i].size < frame && i < values.size(); ++i) {
-			sum_size += values[i].size;
+		size_t i{0};
+		for(; sum_size + values_[i].size < frame && i < values_.size(); ++i) {
+			sum_size += values_[i].size;
 		}
 		
-		return values[i].value;
+		return values_[i].value;
 	}
 	
 	IChangeVariable* ChangeVariableBySteppedLine::copy() {
-		return new ChangeVariableBySteppedLine{values};
+		return new ChangeVariableBySteppedLine{values_};
 	}
 	
 	bool Decode<ChangeVariableBySteppedLine::Value>::decode(const YAML::Node& node, ChangeVariableBySteppedLine::Value& value) {

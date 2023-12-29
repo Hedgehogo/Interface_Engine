@@ -11,7 +11,7 @@ TEST(IComponent_Text, ObjectTextBlock) {
 		
 		ie::ObjectTextBlock object_text_block{
 			{
-				make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
+                    ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
 				30.f
 			},
 			{
@@ -45,7 +45,7 @@ TEST(IComponent_Text, ObjectTextBlock) {
 		
 		ie::ObjectTextBlock object_text_block{
 			ie::ObjectTextBlock::Make{
-				make_box_ptr<ie::Empty::Make>(),
+                    ie::make_box_ptr<ie::Empty::Make>(),
 				sf::Vector2f{10, 10},
 				true
 			},
@@ -80,7 +80,7 @@ TEST(IComponent_Text, ObjectTextBlock) {
 		
 		ie::ObjectTextBlock object_text_block{
 			ie::ObjectTextBlock::Make{
-				make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
+                    ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
 				sf::Vector2f{10, 10},
 				false
 			},

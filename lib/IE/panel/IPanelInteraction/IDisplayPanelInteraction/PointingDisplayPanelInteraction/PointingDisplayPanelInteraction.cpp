@@ -11,15 +11,15 @@ namespace ie {
 	}
 	
 	void PointingDisplayPanelInteraction::start(sf::Vector2i) {
-		panel_manager->display_panel(panel);
-		panel->set_parent_processed(true);
+		panel_manager_->display_panel(panel_);
+		panel_->set_parent_processed(true);
 	}
 	
 	void PointingDisplayPanelInteraction::update(sf::Vector2i) {
 	}
 	
 	void PointingDisplayPanelInteraction::finish(sf::Vector2i) {
-		panel->set_parent_processed(false);
+		panel_->set_parent_processed(false);
 	}
 	
 	PointingDisplayPanelInteraction* PointingDisplayPanelInteraction::copy() {

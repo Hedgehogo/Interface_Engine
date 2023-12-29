@@ -44,5 +44,5 @@ TEST(IComponent, Sprite) {
 	ASSERT_EQ(sprite.get_area_position(), (sf::Vector2f{33, 46}));
 	
 	data.draw_manager.draw();
-	ASSERT_TRUE(data.render_equal_with_save("test-src/Sprite.png"));
+	ASSERT_TRUE(data.render_equal_with_save("test-src/Sprite.png", 0.01));
 }

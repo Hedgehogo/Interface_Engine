@@ -15,11 +15,11 @@ namespace ie {
 			template<typename T = std::monostate>
 			struct BasicHotkeyInteractionHotkey {
 				BoxPtr<make_system::BasicKeysInteraction<T> > interaction;
-				uint state{std::numeric_limits<uint>::max()};
+				size_t state{std::numeric_limits<size_t>::max()};
 				
 				BasicHotkeyInteractionHotkey(
 					BoxPtr<make_system::BasicKeysInteraction<T> >&& interaction,
-					uint state = std::numeric_limits<uint>::max()
+					size_t state = std::numeric_limits<size_t>::max()
 				);
 				
 				detail::BasicHotkeyInteractionHotkey<T>* make(BasicActionInitInfo<T> init_info);
@@ -30,14 +30,14 @@ namespace ie {
 		struct BasicHotkeyInteractionHotkey {
 			using Make = make_system::BasicHotkeyInteractionHotkey<T>;
 			
-			BoxPtr<BasicKeysInteraction<T> > interaction;
-			uint state{std::numeric_limits<uint>::max()};
+			BoxPtr<BasicKeysInteraction<T> > interaction_;
+			size_t state_{std::numeric_limits<size_t>::max()};
 			
 			BasicHotkeyInteractionHotkey(Make&& make, BasicActionInitInfo<T> init_info);
 			
-			BasicHotkeyInteractionHotkey(BoxPtr<BasicKeysInteraction<T> >&& interaction, uint state = std::numeric_limits<uint>::max());
+			BasicHotkeyInteractionHotkey(BoxPtr<BasicKeysInteraction<T> >&& interaction, size_t state = std::numeric_limits<size_t>::max());
 			
-			BasicHotkeyInteractionHotkey(uint state);
+			BasicHotkeyInteractionHotkey(size_t state);
 		};
 	}
 	
@@ -50,9 +50,9 @@ namespace ie {
 			using Hotkey = detail::make_system::BasicHotkeyInteractionHotkey<T>;
 			
 			std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys;
-			uint state = 0;
+			size_t state = 0;
 			
-			BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, uint state = 0);
+			BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, size_t state = 0);
 			
 			ie::BasicHotkeyInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
 		};
@@ -66,13 +66,13 @@ namespace ie {
 		
 		BasicHotkeyInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, uint state = 0);
+		BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, size_t state = 0);
 		
 		BasicHotkeyInteraction(std::string);
 		
 		void init(BasicActionInitInfo<T> init_info) override;
 		
-		void set_hotkey_action(uint state, Hotkey* hotkey_action);
+		void set_hotkey_action(size_t state, Hotkey* hotkey_action);
 		
 		std::vector<BoxPtr<Hotkey> > get_hotkeys(int state);
 		
@@ -87,9 +87,8 @@ namespace ie {
 		BasicHotkeyInteraction<T>* copy() override;
 	
 	protected:
-		bool a{false};
-		std::vector<std::vector<BoxPtr<Hotkey> > > hotkey_states;
-		std::vector<BoxPtr<Hotkey> >* now_hotkeys;
+		std::vector<std::vector<BoxPtr<Hotkey> > > hotkey_states_;
+		std::vector<BoxPtr<Hotkey> >* now_hotkeys_;
 	};
 	
 	using HotkeyInteraction = BasicHotkeyInteraction<>;

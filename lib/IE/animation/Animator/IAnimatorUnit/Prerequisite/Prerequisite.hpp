@@ -22,11 +22,11 @@ namespace ie {
 		~Prerequisite();
 	
 	protected:
-		std::vector<IAnimatorUnit*> next_true_buf;
-		std::vector<IAnimatorUnit*> next_false_buf;
-		std::vector<IAnimatorUnit*> next_true;
-		std::vector<IAnimatorUnit*> next_false;
-		PISbool valve;
+		std::vector<IAnimatorUnit*> next_true_buf_;
+		std::vector<IAnimatorUnit*> next_false_buf_;
+		std::vector<IAnimatorUnit*> next_true_;
+		std::vector<IAnimatorUnit*> next_false_;
+		PISbool valve_;
 	};
 	
 	template<>

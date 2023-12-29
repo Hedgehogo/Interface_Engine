@@ -7,16 +7,16 @@ namespace ie {
 	class SwitchTabsAction : public BaseSwitchTabsAction {
 	public:
 		struct Make : public virtual BaseSwitchTabsAction::Make {
-			uint index = 0;
+			size_t index = 0;
 			
-			Make(uint index = 0);
+			Make(size_t index = 0);
 			
 			SwitchTabsAction* make(BasicActionInitInfo<BoxSwitchTabs&> init_info) override;
 		};
 		
 		SwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> init_info);
 		
-		SwitchTabsAction(uint index);
+		SwitchTabsAction(size_t index);
 		
 		void init(BasicActionInitInfo<BoxSwitchTabs&> init_info) override;
 		
@@ -31,8 +31,8 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		uint index;
-		PSValue<uint> value;
+		size_t index_;
+		PSValue<size_t> value_;
 	};
 	
 	template<>

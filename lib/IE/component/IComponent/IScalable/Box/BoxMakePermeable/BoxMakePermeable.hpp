@@ -30,7 +30,7 @@ namespace ie {
 		BoxMakePermeable* copy() override;
 		
 	protected:
-		BoxPtr<IScalable> object;
+		BoxPtr<IScalable> object_;
 	};
 	
 	template<>

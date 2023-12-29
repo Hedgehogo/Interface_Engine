@@ -2,7 +2,7 @@
 
 namespace ie {
 	template<typename FromType, typename ToType>
-	SConvertValue<FromType, ToType>::SConvertValue(PISValue<FromType> from_value, ToType default_value) : SValue<ToType>(default_value), from_value(from_value) {
+	SConvertValue<FromType, ToType>::SConvertValue(PISValue<FromType> from_value, ToType default_value) : SValue<ToType>(default_value), from_value_(from_value) {
 		from_value->add_setter([this](const FromType& value) {
 			set_value(convert(value));
 		});
@@ -15,7 +15,7 @@ namespace ie {
 	
 	template<typename FromType, typename ToType>
 	void SConvertValue<FromType, ToType>::set_from_value(PISValue<FromType> from_value) {
-		this->from_value = from_value;
+		from_value_ = from_value;
 	}
 	
 	template<typename FromType, typename ToType>

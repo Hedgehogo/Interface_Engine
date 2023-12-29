@@ -15,16 +15,16 @@ namespace ie {
 		virtual void set_value(const T& value) = 0;
 	};
 	
-	typedef ISValue<bool> ISbool;
-	typedef ISValue<float> ISfloat;
-	typedef ISValue<int> ISint;
-	typedef ISValue<unsigned> ISuint;
+	using ISbool = ISValue<bool>;
+	using ISfloat = ISValue<float>;
+	using ISint = ISValue<int>;
+	using ISsize = ISValue<size_t>;
 	
 	template<typename T>
 	using PISValue = std::shared_ptr<ISValue<T>>;
 	
-	typedef std::shared_ptr<ISbool> PISbool;
-	typedef std::shared_ptr<ISfloat> PISfloat;
-	typedef std::shared_ptr<ISint> PISint;
-	typedef std::shared_ptr<unsigned> PISuint;
+	using PISbool = std::shared_ptr<ISbool>;
+	using PISfloat = std::shared_ptr<ISfloat>;
+	using PISint = std::shared_ptr<ISint>;
+	using PISsize = std::shared_ptr<size_t>;
 }

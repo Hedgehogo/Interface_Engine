@@ -21,6 +21,6 @@ namespace ie {
 		virtual BoxSwitchTabs& get_box();
 	
 	protected:
-		BoxSwitchTabs* box;
+		BoxSwitchTabs* box_;
 	};
 }

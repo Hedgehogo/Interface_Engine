@@ -84,18 +84,18 @@ namespace ie {
 		
 		void draw() override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) override;
+		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		DrawManager first_draw_manager;
-		DrawManager second_draw_manager;
-		BoxPtr<IUninteractive> background;
-		BoxPtr<IScalable> object;
-		BoxPtr<IScalable> first_object;
-		BoxPtr<IScalable> second_object;
-		float aspect_ratio;
-		bool render_first;
-		bool render_second;
+		DrawManager first_draw_manager_;
+		DrawManager second_draw_manager_;
+		BoxPtr<IUninteractive> background_;
+		BoxPtr<IScalable> object_;
+		BoxPtr<IScalable> first_object_;
+		BoxPtr<IScalable> second_object_;
+		float aspect_ratio_;
+		bool render_first_;
+		bool render_second_;
 	};
 	
 	template<>

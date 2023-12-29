@@ -33,7 +33,7 @@ namespace ie {
 		SwitcherTabsAction* copy() override;
 	
 	protected:
-		PISint value;
-		BoxSwitcherTabs* switcher_tabs;
+		PISint value_;
+		BoxSwitcherTabs* switcher_tabs_;
 	};
 }

@@ -49,6 +49,6 @@ namespace ie {
 		SliderInteraction* copy() override;
 	
 	protected:
-		SliderWheelAction wheel_action;
+		SliderWheelAction wheel_action_;
 	};
 }

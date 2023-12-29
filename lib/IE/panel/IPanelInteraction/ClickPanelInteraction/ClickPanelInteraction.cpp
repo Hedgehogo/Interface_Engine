@@ -11,10 +11,10 @@ namespace ie {
 	}
 	
 	void ClickPanelInteraction::init(PanelActionInitInfo init_info) {
-		dynamic_cast<PanelAction&>(*action).init(init_info);
+		dynamic_cast<PanelAction&>(*action_).init(init_info);
 	}
 	
 	void ClickPanelInteraction::set_panel(Panel& panel) {
-		dynamic_cast<PanelAction&>(*action).set_panel(panel);
+		dynamic_cast<PanelAction&>(*action_).set_panel(panel);
 	}
 }

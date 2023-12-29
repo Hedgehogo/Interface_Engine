@@ -12,7 +12,7 @@ TEST(IComponent_Text, InteractiveTextBlock) {
 	
 	ie::InteractiveTextBlock interactive_text_block{
 		{
-			make_box_ptr<ie::EmptyInteraction::Make>(),
+                ie::make_box_ptr<ie::EmptyInteraction::Make>(),
 			U"aaa bbb"
 		},
 		{

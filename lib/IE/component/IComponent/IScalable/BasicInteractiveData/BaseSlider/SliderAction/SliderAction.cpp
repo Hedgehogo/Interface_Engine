@@ -11,45 +11,45 @@ namespace ie {
 	}
 	
 	SliderAction::SliderAction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info) :
-		slider(&init_info.additional), division(make.division) {
+		slider_(&init_info.additional), division_(make.division) {
 	}
 	
 	SliderAction::SliderAction(sf::Vector2i division) :
-		slider(nullptr), start_mouse_position(), start_value(), division(division) {
+		slider_(nullptr), start_mouse_position_(), start_value_(), division_(division) {
 	}
 	
 	void SliderAction::init(BasicActionInitInfo<BaseSlider&> init_info) {
-		slider = &init_info.additional;
+		slider_ = &init_info.additional;
 	}
 	
 	sf::Vector2f SliderAction::get_mouse_position() {
-		return sf::Vector2f{mouse_position};
+		return sf::Vector2f{mouse_position_};
 	}
 	
 	void SliderAction::start_pressed() {
-		if(!slider->on_slider(mouse_position)) {
-			slider->set_value_by_mouse(mouse_position);
+		if(!slider_->on_slider(mouse_position_)) {
+			slider_->set_value_by_mouse(mouse_position_);
 		}
-		start_value = slider->get_value();
-		start_mouse_position = mouse_position;
+		start_value_ = slider_->get_value();
+		start_mouse_position_ = mouse_position_;
 	}
 	
 	void SliderAction::stop_pressed() {
 	}
 	
 	void SliderAction::while_pressed() {
-		sf::Vector2f mouse_offset{sf::Vector2i{mouse_position.x - start_mouse_position.x, mouse_position.y - start_mouse_position.y}};
+		sf::Vector2f mouse_offset{sf::Vector2i{mouse_position_.x - start_mouse_position_.x, mouse_position_.y - start_mouse_position_.y}};
 		sf::Vector2f new_value;
-		new_value = slider->move_slider(start_value, mouse_offset);
-		new_value = BaseSlider::round_value_to_division(new_value, division);
-		slider->set_value(new_value);
+		new_value = slider_->move_slider(start_value_, mouse_offset);
+		new_value = BaseSlider::round_value_to_division(new_value, division_);
+		slider_->set_value(new_value);
 	}
 	
 	void SliderAction::while_not_pressed() {
 	}
 	
 	void SliderAction::set_slider(BaseSlider& slider) {
-		this->slider = &slider;
+		this->slider_ = &slider;
 	}
 	
 	SliderAction* SliderAction::copy() {

@@ -13,7 +13,7 @@ namespace ie {
 		void set_reference(float& value_reference) override;
 	};
 	
-	typedef SReferenceCoefficientValue SRefCoefficient;
+	using SRefCoefficient = SReferenceCoefficientValue;
 	
-	typedef std::shared_ptr<SRefCoefficient> PSRefCoefficient;
+	using PSRefCoefficient = std::shared_ptr<SRefCoefficient>;
 }

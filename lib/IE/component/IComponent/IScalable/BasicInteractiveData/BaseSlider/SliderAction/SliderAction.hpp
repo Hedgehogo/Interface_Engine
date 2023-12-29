@@ -36,9 +36,9 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		BaseSlider* slider;
-		sf::Vector2i start_mouse_position;
-		sf::Vector2f start_value;
-		sf::Vector2i division;
+		BaseSlider* slider_;
+		sf::Vector2i start_mouse_position_;
+		sf::Vector2f start_value_;
+		sf::Vector2i division_;
 	};
 }

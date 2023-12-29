@@ -10,77 +10,77 @@ namespace ie {
 	}
 	
 	BoxBackground::BoxBackground(Make&& make, InitInfo init_info) :
-		Box(make.min_size), background(make.background->make(init_info)), object(make.object->make(init_info)), offset(make.offset) {
+		Box(make.min_size), background_(make.background->make(init_info)), object_(make.object->make(init_info)), offset_(make.offset) {
 	}
 	
 	BoxBackground::BoxBackground(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, sf::Vector2f offset, sf::Vector2f min_size) :
-		Box(min_size), background(std::move(background)), object(std::move(object)), offset(offset) {
+		Box(min_size), background_(std::move(background)), object_(std::move(object)), offset_(offset) {
 	}
 	
 	void BoxBackground::init(InitInfo init_info) {
-		background->init(init_info);
-		object->init(init_info);
+		background_->init(init_info);
+		object_->init(init_info);
 	}
 	
 	void BoxBackground::set_position(sf::Vector2f position) {
-		layout.set_position(position);
-		background->set_position(position);
-		object->set_position(position);
+		layout_.set_position(position);
+		background_->set_position(position);
+		object_->set_position(position);
 	}
 	
 	void BoxBackground::move(sf::Vector2f position) {
-		layout.move(position);
-		background->move(position);
-		object->move(position);
+		layout_.move(position);
+		background_->move(position);
+		object_->move(position);
 	}
 	
 	void BoxBackground::set_size(sf::Vector2f size) {
-		layout.set_size(size);
-		background->set_size(size);
-		object->set_size(size);
+		layout_.set_size(size);
+		background_->set_size(size);
+		object_->set_size(size);
 	}
 	
 	sf::Vector2f BoxBackground::get_min_size() const {
-		return max(object->get_min_size() + offset * 2.f, background->get_min_size(), minimum_size);
+		return max(object_->get_min_size() + offset_ * 2.f, background_->get_min_size(), minimum_size_);
 	}
 	
 	sf::Vector2f BoxBackground::get_normal_size() const {
-		return max(object->get_normal_size() + offset * 2.f, background->get_normal_size());
+		return max(object_->get_normal_size() + offset_ * 2.f, background_->get_normal_size());
 	}
 	
 	IUninteractive& BoxBackground::get_background() {
-		return *background;
+		return *background_;
 	}
 	
 	const IUninteractive& BoxBackground::get_background() const {
-		return *background;
+		return *background_;
 	}
 	
 	IScalable& BoxBackground::get_object() {
-		return *object;
+		return *object_;
 	}
 	
 	const IScalable& BoxBackground::get_object() const {
-		return *object;
+		return *object_;
 	}
 	
 	void BoxBackground::resize(sf::Vector2f size, sf::Vector2f position) {
-		layout.resize(size, position);
-		background->resize(size, position);
-		object->resize(size - offset * 2.f, position + offset);
+		layout_.resize(size, position);
+		background_->resize(size, position);
+		object_->resize(size - offset_ * 2.f, position + offset_);
 	}
 	
 	bool BoxBackground::update_interactions(sf::Vector2f mouse_position) {
-		return object->update_interactions(mouse_position);
+		return object_->update_interactions(mouse_position);
 	}
 	
 	BoxBackground* BoxBackground::copy() {
 		return new BoxBackground{*this};
 	}
 	
-	void BoxBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, uint hue, uint hue_offset) {
-		background->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
-		object->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
+	void BoxBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+		background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+		object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		
 	}
 	

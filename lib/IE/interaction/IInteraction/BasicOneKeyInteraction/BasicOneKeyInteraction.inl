@@ -13,37 +13,37 @@ namespace ie {
 	
 	template<typename T>
 	BasicOneKeyInteraction<T>::BasicOneKeyInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
-		action(make.action->make(init_info)), key(make.key) {
+		action_(make.action->make(init_info)), key_(make.key) {
 	}
 	
 	template<typename T>
 	BasicOneKeyInteraction<T>::BasicOneKeyInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key) :
-		action(std::move(action)), key(key) {
+		action_(std::move(action)), key_(key) {
 	}
 	
 	template<typename T>
 	void BasicOneKeyInteraction<T>::init(BasicActionInitInfo<T> init_info) {
-		action->init(init_info);
+		action_->init(init_info);
 	}
 	
 	template<typename T>
 	Key BasicOneKeyInteraction<T>::get_key() {
-		return key;
+		return key_;
 	}
 	
 	template<typename T>
 	BasicKeyAction<T>& BasicOneKeyInteraction<T>::get_action() {
-		return *action;
+		return *action_;
 	}
 	
 	template<typename T>
 	const BasicKeyAction<T>& BasicOneKeyInteraction<T>::get_action() const {
-		return *action;
+		return *action_;
 	}
 	
 	template<typename T>
 	void BasicOneKeyInteraction<T>::set_action(BoxPtr<BasicKeyAction<T> >&& action) {
-		this->action = std::move(action);
+		this->action_ = std::move(action);
 	}
 	
 	template<typename T>
@@ -52,12 +52,12 @@ namespace ie {
 	
 	template<typename T>
 	void BasicOneKeyInteraction<T>::update(sf::Vector2i mouse_position) {
-		action->update(mouse_position, KeyHandler::is_key_pressed(key));
+		action_->update(mouse_position, KeyHandler::is_key_pressed(key_));
 	}
 	
 	template<typename T>
 	void BasicOneKeyInteraction<T>::finish(sf::Vector2i) {
-		action->set_pressed(false);
+		action_->set_pressed(false);
 	}
 	
 	template<typename T>
