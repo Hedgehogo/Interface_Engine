@@ -111,7 +111,8 @@ namespace ie {
 	};
 	
 	template<typename T>
-	struct DecodePointer;
+	struct DecodePointer {
+	};
 	
 	template<typename T>
 	struct Encode;

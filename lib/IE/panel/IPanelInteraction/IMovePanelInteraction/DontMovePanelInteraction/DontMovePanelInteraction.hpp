@@ -29,8 +29,10 @@ namespace ie {
 		DontMovePanelInteraction* copy() override;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<DontMovePanelInteraction> {
 		static bool decode_pointer(const YAML::Node&, DontMovePanelInteraction*& dont_move_panel_interaction);
 	};
+	*/
 }

@@ -70,8 +70,10 @@ namespace ie {
 		return new TextSelectionAction{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<TextSelectionAction>::decode_pointer(const YAML::Node&, TextSelectionAction*& text_selection_action) {
 		text_selection_action = new TextSelectionAction{};
 		return true;
 	}
+	*/
 }

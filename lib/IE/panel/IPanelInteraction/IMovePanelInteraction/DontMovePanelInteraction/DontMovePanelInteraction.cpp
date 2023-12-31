@@ -32,8 +32,10 @@ namespace ie {
 		return new DontMovePanelInteraction{};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<DontMovePanelInteraction>::decode_pointer(const YAML::Node&, DontMovePanelInteraction*& dont_move_panel_interaction) {
 		dont_move_panel_interaction = new DontMovePanelInteraction{};
 		return true;
 	}
+	*/
 }

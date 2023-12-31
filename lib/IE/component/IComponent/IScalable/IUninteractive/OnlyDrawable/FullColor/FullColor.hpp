@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../OnlyDrawable.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IEML/node.hpp"
 
 namespace ie {
 	class FullColor : public OnlyDrawable {
@@ -38,15 +38,13 @@ namespace ie {
 		sf::Vector2f normal_size;
 	};
 	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<FullColor> {
-		static bool decode_pointer(const YAML::Node& node, FullColor*& full_color);
-	};
-	*/
-	
 	/*old_yaml_determine_impl
 	template<>
 	bool determine<FullColor>(const YAML::Node& node);
 	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::FullColor> {
+	static orl::Option<ie::FullColor> decode(ieml::Node const& node);
+};

@@ -36,8 +36,10 @@ namespace ie {
 		return new TextCopyAction{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<TextCopyAction>::decode_pointer(const YAML::Node&, TextCopyAction*& text_copy_action) {
 		text_copy_action = new TextCopyAction{};
 		return true;
 	}
+	*/
 }

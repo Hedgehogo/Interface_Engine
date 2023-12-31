@@ -24,8 +24,10 @@ namespace ie {
 		PointingDisplayPanelInteraction* copy() override;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<PointingDisplayPanelInteraction> {
 		static bool decode_pointer(const YAML::Node&, PointingDisplayPanelInteraction*& pointing_display_panel_interaction);
 	};
+	*/
 }

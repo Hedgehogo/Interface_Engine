@@ -24,8 +24,10 @@ namespace ie {
 		return new RelativeNormalSizing{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<RelativeNormalSizing>::decode_pointer(const YAML::Node&, RelativeNormalSizing*& relative_normal_sizing) {
 		relative_normal_sizing = new RelativeNormalSizing{};
 		return true;
 	}
+	*/
 }

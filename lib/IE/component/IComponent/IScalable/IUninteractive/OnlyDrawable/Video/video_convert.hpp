@@ -1,9 +1,8 @@
 #pragma once
 
+#include <IEML/node.hpp>
 #include "../OnlyDrawable.hpp"
 
 namespace ie {
-	/*old_yaml
-	bool video_convert(const YAML::Node& node, OnlyDrawable*& video);
-	*/
+	orl::Option<OnlyDrawable*> video_convert(ieml::Node const& node);
 }

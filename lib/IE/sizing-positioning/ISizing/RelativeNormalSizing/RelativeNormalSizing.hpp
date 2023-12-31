@@ -23,8 +23,10 @@ namespace ie {
 		float normal_size_;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<RelativeNormalSizing> {
 		static bool decode_pointer(const YAML::Node&, RelativeNormalSizing*& relative_normal_sizing);
 	};
+	*/
 }

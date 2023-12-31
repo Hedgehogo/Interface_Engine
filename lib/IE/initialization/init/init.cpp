@@ -4,12 +4,13 @@
 #include "IE/sizing-positioning/IPositioning/Functions/determine_positioning/determine_positioning.hpp"
 #include "IE/sizing-positioning/IPositioning2/Functions/determine_positioning2/determine_positioning2.hpp"
 #include "IE/modules/yaml-cpp/modules/load_modules.hpp"
+#include "IE/ieml/shortcuts/shortcuts.hpp"
 #include "config.h"
 
 #ifdef IE_ImageMagick_FOUND
-	#define MAGICKCORE_QUANTUM_DEPTH 16
-	#define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
-	#include <Magick++.h>
+#define MAGICKCORE_QUANTUM_DEPTH 16
+#define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
+#include <Magick++.h>
 #endif
 
 namespace ie {
@@ -39,12 +40,140 @@ namespace ie {
 	}
 	*/
 	
-	void init(int argc, char *argv[], std::filesystem::path modules_list) {
+	void init(int argc, char* argv[], std::filesystem::path modules_list) {
 #ifdef IE_ImageMagick_FOUND
 		Magick::InitializeMagick("");
 #endif
-		//yaml_builder_init();
+		ieml_rttb_init();
 		load_modules(argc, argv, modules_list);
+	}
+	
+	void ieml_rttb_init() {
+		[[maybe_unused]] static bool once{[]() {
+			add_type_named<ISizing, ConstSizing>();
+			add_type_named<ISizing, RelativeNormalSizing>();
+			add_type_named<ISizing, RelativeParentSizing>();
+			add_type_named<ISizing, ParentCoefficientSizing>();
+			add_type_named<ISizing, TargetCoefficientSizing>();
+			add_type_named<ISizing, SmartSizing>();
+			
+			add_type_named<ISizing2, Sizing2>("Sizing2");
+			add_type_named<ISizing2, ConstRatioSizing2>("ConstRatioSizing2");
+			
+			add_type_named<IPositioning, InternalPositioning>("InternalPos");
+			add_type_named<IPositioning, InternalTargetPositioning>("InternalTargetPos");
+			add_type_named<IPositioning, MatchPositioning>("MatchPos");
+			add_type_named<IPositioning, MatchTargetPositioning>("MatchTargetPos");
+			add_type_named<IPositioning, MatchSidesPositioning>("MatchSidesPos");
+			
+			add_type_named<IPositioning2, Positioning2>("Pos2");
+			add_type_named<IPositioning2, InternalPositioning2>("InternalPos2");
+			
+			add_type_named<BaseLine, Underline>();
+			add_type_named<BaseLine, StrikeThrough>();
+			
+			add_type_named<BaseTextBlock, TextBlock>();
+			add_type_named<BaseTextBlock, InteractiveTextBlock>();
+			add_type_named<BaseTextBlock, ObjectTextBlock>();
+			
+			add_type_named<BaseResizer, Resizer>();
+			
+			add_type_named<KeyAction, OpenUrlAction>("OpenUrlA");
+			add_type_named<KeyAction, CloseWindowAction>("CloseWindowA");
+			add_type_named<KeyAction, SwitcherAction>("SwitcherA");
+			add_type_named<KeyAction, SetSIntAction>("SetSIntA");
+			add_type_named<KeyAction, SetSFloatAction>("SetSFloatA");
+			
+			add_type_named<BasicKeyAction<Text&>, TextCopyAction>("TextCopyA");
+			add_type_named<BasicKeyAction<Text&>, TextSelectionAction>("TextSelectionA");
+			
+			add_type_named<BaseSwitchTabsAction, SwitchTabsAction>("SwitchTabsA");
+			add_type_named<BaseSwitchTabsAction, WhileSwitchTabsAction>("WhileSwitchTabsA");
+			
+			add_type_named<IBaseInteraction, OneKeyInteraction>("OneKeyI");
+			add_type_named<IBaseInteraction, KeysInteraction>("KeysI");
+			add_type_named<IBaseInteraction, EmptyInteraction>("EmptyI");
+			
+			add_type_named<IHidePanelInteraction, DontHidePanelInteraction>("DontHidePI");
+			add_type_named<IHidePanelInteraction, ClickHidePanelInteraction>("ClickHidePI");
+			add_type_named<IHidePanelInteraction, PointingHidePanelInteraction>("PointingHidePI");
+			add_type<IPanelInteraction, IHidePanelInteraction>();
+			add_type_named<IDisplayPanelInteraction, ClickDisplayPanelInteraction>("ClickDisplayPI");
+			add_type_named<IDisplayPanelInteraction, PointingDisplayPanelInteraction>("PointingDisplayPI");
+			add_type<IPanelInteraction, IDisplayPanelInteraction>();
+			add_type_named<IMovePanelInteraction, CoefficientMovePanelInteraction>("CoefficientMovePI");
+			add_type_named<IMovePanelInteraction, DontMovePanelInteraction>("DontMovePI");
+			add_type_named<IMovePanelInteraction, SideMovePanelInteraction>("SideMovePI");
+			add_type<IPanelInteraction, IMovePanelInteraction>();
+			
+			add_type<IBasicInteraction<Text&>, BasicKeysInteraction<Text&> >("TextKeysInteraction", "TextKeysI");
+			//add_type<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&> >("TextHotkeyInteraction", "TextHotkeyI");
+			add_type<IBasicInteraction<Text&>, BasicEmptyInteraction<Text&> >("TextEmptyInteraction", "TextEmptyI");
+			
+			add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
+			add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
+			add_type<ISbool, SConvertFloatToBoolGreaterOrEquals>("ConvertFloatToBoolGreaterOrEquals", "CFloatToBoolGOE");
+			add_type<ISbool, SConvertFloatToBoolLess>("ConvertFloatToBoolLess", "CFloatToBoolL");
+			add_type<ISbool, SConvertFloatToBoolLessOrEquals>("ConvertFloatToBoolLessOrEquals", "CFloatToBoolLOE");
+			
+			add_type_named<IAnimatorUnit, Animation>();
+			add_type_named<IAnimatorUnit, Prerequisite>();
+			add_type_named<IAnimatorUnit, AnimatorUnitMatchFloat>("AUnitMatchF");
+			add_type_named<IChangeVariable, ChangeVariableByStraightLine>("CVByStraightLine", "CVByStraightL");
+			add_type_named<IChangeVariable, ChangeVariableByBrokenLine>("CVByBrokenLine", "CVByBrokenL");
+			add_type_named<IChangeVariable, ChangeVariableBySteppedLine>("CVBySteppedLine", "CVBySteppedL");
+			add_type_named<IChangeVariable, ChangeVariableBySinusoid>("CVBySinusoid", "CVBySin");
+			add_type_named<IChangeVariable, ChangeVariableByCurve>("CVByCurve");
+			
+			add_fn<OnlyDrawable>(video_convert, "Video");
+			//add_fn<Box>(switcher_tabs_decode_pointer, "SwitcherTabs", "SwitcherT");
+			
+			add_type_named<OnlyDrawable, Empty>();
+			add_type_named<OnlyDrawable, FullColor>();
+			add_type_named<OnlyDrawable, RoundedRectangle>();
+			add_type_named<OnlyDrawable, Capsule>();
+			add_type_named<OnlyDrawable, Sprite>();
+			add_type<IUninteractive, OnlyDrawable>();
+			add_type_named<IUninteractive, Bar>();
+			add_type_named<IUninteractive, Caption>();
+			add_type_named<IUninteractive, BoxUninteractive>();
+			add_type<IScalable, IUninteractive>();
+			add_type_named<Box, BoxDebug>();
+			add_type_named<Box, BoxBackground>();
+			add_type_named<Box, BoxAlternative>();
+			add_type_named<Box, BoxBorder>();
+			add_type_named<Box, BoxBorderVertical>();
+			add_type_named<Box, BoxBorderHorizontal>();
+			add_type_named<Box, BoxConstBorder>();
+			add_type_named<Box, BoxConstBezel>();
+			add_type_named<Box, BoxConstRatio>();
+			add_type_named<Box, BoxConstRatioCenter>();
+			add_type_named<Box, BoxMovableBorder>();
+			add_type_named<Box, BoxPanel>();
+			add_type_named<Box, BoxRenderTexture>();
+			add_type_named<Box, BoxShader>();
+			add_type_named<Box, BoxSwitchTabs>();
+			add_type_named<Box, BoxMakePermeable>();
+			add_type_named<Box, BoxScroll>();
+			add_type_named<Box, BoxSwitch>();
+			add_type_named<Box, BoxTabs>();
+			add_type_named<Box, BoxSwitcherTabs>();
+			add_type_named<Box, BoxConstCenter>();
+			add_type_named<Box, BoxUninteractive>();
+			add_type<IScalable, Box>();
+			add_type_named<BaseSlider, Slider>();
+			add_type_named<BaseSlider, ConstSlider>();
+			add_type_named<IScalable, BaseSlider>();
+			add_type_named<IScalable, ButtonPanel>();
+			add_type<IScalable, Button>();
+			add_type_named<IScalable, Switcher>();
+			add_type<IComponent, IScalable>();
+			add_type_named<IComponent, Text>();
+			
+			add_type_named<BasePanel, ConstPanel>();
+			add_type_named<BasePanel, Panel>();
+			return true;
+		}()};
 	}
 	
 	/*

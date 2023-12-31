@@ -1,5 +1,4 @@
 #include "ConsoleCommandAction.hpp"
-#include <IE/Modules/yaml-cpp/yaml-builder/shortcut/shortcut.hpp>
 
 namespace ie {
 	ConsoleCommandAction::ConsoleCommandAction(const std::string& command) : command(command) {}
@@ -29,6 +28,6 @@ namespace ie {
 	*/
 	
 	void init(int argc, char *argv[]) {
-		inherit<ie::KeyAction, ie::ConsoleCommandAction>({"ConsoleCommandAction"});
+		//inherit<ie::KeyAction, ie::ConsoleCommandAction>({"ConsoleCommandAction"});
 	}
 }

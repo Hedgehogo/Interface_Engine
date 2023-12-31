@@ -1,5 +1,5 @@
 #include "FullColor.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	FullColor::Make::Make(sf::Color color, sf::Vector2f normal_size) : color(color), normal_size(normal_size) {
@@ -47,21 +47,6 @@ namespace ie {
 		return new FullColor{*this};
 	}
 	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<FullColor>::decode_pointer(const YAML::Node& node, FullColor*& full_color) {
-		if(node.IsScalar()) {
-			full_color = new FullColor{node.as<sf::Color>(), {}};
-		} else {
-			full_color = new FullColor{
-				node["color"].as<sf::Color>(),
-				conv_def(node["normal-size"], sf::Vector2f{})
-			};
-		}
-		return true;
-
-	}
-	*/
-	
 	/*old_yaml_determine_impl
 	template<>
 	bool determine<FullColor>(const YAML::Node& node) {
@@ -72,4 +57,15 @@ namespace ie {
 		}
 	}
 	*/
+}
+
+orl::Option<ie::FullColor> ieml::Decode<char, ie::FullColor>::decode(ieml::Node const& node) {
+	if(auto color{node.as<sf::Color>()}) {
+		return ie::FullColor{color.ok()};
+	} else {
+		return ie::FullColor{
+			node.at("color").except().as<sf::Color>().except(),
+			node.get_as<sf::Vector2f>("normal-size").ok_or({})
+		};
+	}
 }

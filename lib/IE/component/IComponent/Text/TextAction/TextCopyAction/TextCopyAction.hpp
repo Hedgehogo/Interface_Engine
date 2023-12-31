@@ -32,8 +32,10 @@ namespace ie {
 		Text* text;
 	};
 	
+	/*old_yaml_decode_pointer
 	template<>
 	struct DecodePointer<TextCopyAction> {
 		static bool decode_pointer(const YAML::Node&, TextCopyAction*& text_copy_action);
 	};
+	*/
 }

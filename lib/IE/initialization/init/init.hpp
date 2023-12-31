@@ -76,5 +76,5 @@
 namespace ie {
 	void init(int argc = 0, char *argv[] = {}, std::filesystem::path modules_list = {});
 	
-	void yaml_builder_init();
+	void ieml_rttb_init();
 }

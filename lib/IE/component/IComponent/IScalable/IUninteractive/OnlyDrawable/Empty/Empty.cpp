@@ -45,8 +45,10 @@ namespace ie {
 		return layout_;
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Empty>::decode_pointer(const YAML::Node&, Empty*& empty) {
 		empty = new Empty{};
 		return true;
 	}
+	*/
 }

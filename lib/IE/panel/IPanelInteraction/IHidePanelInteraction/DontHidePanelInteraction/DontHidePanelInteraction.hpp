@@ -21,8 +21,10 @@ namespace ie {
 		DontHidePanelInteraction* copy() override;
 	};
 	
+	/*old_yaml_decode_pointer_impl
 	template<>
 	struct DecodePointer<DontHidePanelInteraction> {
 		static bool decode_pointer(const YAML::Node&, DontHidePanelInteraction*& dont_hide_panel_interaction);
 	};
+	*/
 }

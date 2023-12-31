@@ -6,7 +6,8 @@ function(configure_dependency PROJECT)
             localisation-cpp
             box-ptr
             open-lib
-            option_result_cpp
+            IEML_CBOR_cpp
+            RTTB_cpp
     )
 
     foreach(lib IN LISTS libs)

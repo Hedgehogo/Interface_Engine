@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.11)
 project(Interface_Engine CXX)
 set(CMAKE_CXX_STANDARD 17)
 
-set(BUILD_SHARED_LIBS ON)
+set(BUILD_SHARED_LIBS OFF)
 
 include(cmake/AllInclude.cmake)
 
@@ -28,4 +28,4 @@ add_subdirectory(example-resources/modules)
 create_tests(${PROJECT_NAME})
 create_install_target()
 
-projects_checking("${PROJECT_NAME};${PROJECT_NAME}_tests")
+projects_checking("${PROJECT_NAME};${PROJECT_NAME}_tests" "${PROJECT_NAME}_tests")
