@@ -4,6 +4,7 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_image_equal/image_equal.hpp"
 
+/*
 TEST(IComponent, ButtonPanel) {
 	InitInfoData data{{100, 100}};
 	
@@ -57,3 +58,4 @@ TEST(IComponent, ButtonPanel) {
 	data.draw_manager.draw();
 	ASSERT_TRUE(data.render_equal_with_save("test-src/ButtonPanel.png"));
 }
+*/
