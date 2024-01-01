@@ -5,9 +5,9 @@ namespace ie {
 	}
 	
 	orl::Option<LoadShader> LoadShader::decode(const ieml::Node& node) {
-		auto& clear_node{node.get_clear()};
-		auto vert{clear_node.at("vert")};
-		auto frag{clear_node.at("frag")};
+		auto map{node.get_map_view().except()};
+		auto vert{map.at("vert")};
+		auto frag{map.at("frag")};
 		if(vert) {
 			auto& vert_str{vert.ok().get_string().except()};
 			if(frag) {

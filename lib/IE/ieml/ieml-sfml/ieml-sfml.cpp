@@ -21,10 +21,10 @@ namespace ieml {
 	std::enable_if_t<std::is_arithmetic_v<T>, orl::Option<sf::Vector2<T> > >
 	decode_vector2(ieml::Node const& node) {
 		auto& clear_node = node.get_clear();
-		if(clear_node.get_type() == NodeType::List) {
+		if(auto list{clear_node.get_list_view()}) {
 			return sf::Vector2<T>{
-				node.at(0).except().as<T>().except(),
-				node.at(1).except().as<T>().except(),
+				list.ok().at(0).except().as<T>().except(),
+				list.ok().at(1).except().as<T>().except(),
 			};
 		}
 		auto& str{clear_node.get_string().except()};
@@ -45,12 +45,12 @@ namespace ieml {
 	
 	orl::Option<sf::Color> Decode<char, sf::Color>::decode(ieml::Node const& node) {
 		auto& clear_node{node.get_clear()};
-		if(clear_node.get_type() == NodeType::List) {
+		if(auto list{clear_node.get_list_view()}) {
 			return sf::Color{
-				node.at(0).except().as<uint8_t>(),
-				node.at(0).except().as<uint8_t>(),
-				node.at(0).except().as<uint8_t>(),
-				node.get_as<uint8_t>(0).ok_or(255)
+				list.ok().at(0).except().as<uint8_t>(),
+				list.ok().at(0).except().as<uint8_t>(),
+				list.ok().at(0).except().as<uint8_t>(),
+				list.ok().get_as<uint8_t>(0).ok_or(255)
 			};
 		}
 		auto& str{clear_node.get_string().except()};

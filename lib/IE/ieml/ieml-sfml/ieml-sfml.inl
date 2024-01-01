@@ -8,7 +8,7 @@ namespace ieml {
 		}
 		return orl::Option<T>{};
 	}
-
+	
 	template<typename T>
 	orl::Option<std::vector<T> > Decode<char, std::vector<T> >::decode(ieml::Node const& node) {
 		auto& list = node.get_list().except();
@@ -19,7 +19,7 @@ namespace ieml {
 		}
 		return result;
 	}
-
+	
 	template<typename T>
 	orl::Option<sf::Vector2<T> > Decode<char, sf::Vector2<T> >::decode(ieml::Node const& node) {
 		return sf::Vector2<T>{
@@ -27,11 +27,12 @@ namespace ieml {
 			node.at(1).except().as<T>().except(),
 		};
 	}
-
+	
 	template<typename T>
 	orl::Option<sf::Rect<T> > Decode<char, sf::Rect<T> >::decode(ieml::Node const& node) {
-		auto position{node.at("position").except().as<sf::Vector2<T> >().except()};
-		auto size{node.at("size").except().as<sf::Vector2<T> >().except()};
+		auto map{node.get_map_view().except()};
+		auto position{map.at("position").except().as<sf::Vector2<T> >().except()};
+		auto size{map.at("size").except().as<sf::Vector2<T> >().except()};
 		return sf::Rect<T>{position, size};
 	}
 }
