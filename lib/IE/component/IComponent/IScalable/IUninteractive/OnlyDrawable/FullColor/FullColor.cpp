@@ -1,5 +1,6 @@
 #include "FullColor.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
+#include "IE/ieml/determine/determine.hpp"
 
 namespace ie {
 	FullColor::Make::Make(sf::Color color, sf::Vector2f normal_size) : color(color), normal_size(normal_size) {
@@ -47,16 +48,13 @@ namespace ie {
 		return new FullColor{*this};
 	}
 	
-	/*old_yaml_determine_impl
-	template<>
-	bool determine<FullColor>(const YAML::Node& node) {
-		if(node.IsScalar()) {
-			return node.as<std::string>().size() <= 11;
+	bool Determine<FullColor>::determine(const ieml::Node& node) {
+		if(auto str{node.get_raw()}) {
+			return str.ok().str.size() <= 11;
 		} else {
-			return determine(node, {{"color", YAML::NodeType::Scalar}}, {{"normal-size"}});
+			return ie::determine(node, {{"color", ieml::NodeType::Raw}}, {{"normal-size"}});
 		}
 	}
-	*/
 }
 
 orl::Option<ie::FullColor> ieml::Decode<char, ie::FullColor>::decode(ieml::Node const& node) {

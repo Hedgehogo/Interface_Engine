@@ -20,21 +20,6 @@ namespace ieml {
 		static orl::Option<sf::Vector2<T> > decode(ieml::Node const& node);
 	};
 	
-	template<>
-	struct Decode<char, sf::Vector2<float> > {
-		static orl::Option<sf::Vector2<float> > decode(ieml::Node const& node);
-	};
-	
-	template<>
-	struct Decode<char, sf::Vector2<int> > {
-		static orl::Option<sf::Vector2<int> > decode(ieml::Node const& node);
-	};
-	
-	template<>
-	struct Decode<char, sf::Vector2<size_t> > {
-		static orl::Option<sf::Vector2<size_t> > decode(ieml::Node const& node);
-	};
-	
 	template<typename T>
 	struct Decode<char, sf::Rect<T> > {
 		static orl::Option<sf::Rect<T> > decode(ieml::Node const& node);

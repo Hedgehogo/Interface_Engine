@@ -1,48 +1,6 @@
 #include "ieml-sfml.hpp"
 
 namespace ieml {
-	template<typename T>
-	std::enable_if_t<std::is_arithmetic_v<T>, orl::Option<sf::Vector2<T> > >
-	decode_vector2_str(BasicStringCIter<char> first, BasicStringCIter<char> last) {
-		number::Parser<char, T> x_parser{std::move(first), std::move(last)};
-		auto x{x_parser.parse_number_scientific()};
-		if(x.is_some() && first != last && *first == ',' && (first + 1) != last && *(first + 1) == ' ') {
-			number::Parser<char, T> y_parser{std::move(x_parser.pos() + 2), std::move(last)};
-			auto y{y_parser.parse_number_scientific()};
-			y_parser.skip_blank_line();
-			if(y.is_some() && y_parser.is_complete()) {
-				return sf::Vector2<T>{x.some(), y.some()};
-			}
-		}
-		return {};
-	}
-	
-	template<typename T>
-	std::enable_if_t<std::is_arithmetic_v<T>, orl::Option<sf::Vector2<T> > >
-	decode_vector2(ieml::Node const& node) {
-		auto& clear_node = node.get_clear();
-		if(auto list{clear_node.get_list_view()}) {
-			return sf::Vector2<T>{
-				list.ok().at(0).except().as<T>().except(),
-				list.ok().at(1).except().as<T>().except(),
-			};
-		}
-		auto& str{clear_node.get_string().except()};
-		return decode_vector2_str<T>(str.cbegin(), str.cend());
-	}
-	
-	orl::Option<sf::Vector2<float> > Decode<char, sf::Vector2<float> >::decode(ieml::Node const& node) {
-		return decode_vector2<float>(node);
-	}
-	
-	orl::Option<sf::Vector2<int> > Decode<char, sf::Vector2<int> >::decode(ieml::Node const& node) {
-		return decode_vector2<int>(node);
-	}
-	
-	orl::Option<sf::Vector2<size_t> > Decode<char, sf::Vector2<size_t> >::decode(ieml::Node const& node) {
-		return decode_vector2<size_t>(node);
-	}
-	
 	orl::Option<sf::Color> Decode<char, sf::Color>::decode(ieml::Node const& node) {
 		auto& clear_node{node.get_clear()};
 		if(auto list{clear_node.get_list_view()}) {
@@ -53,31 +11,31 @@ namespace ieml {
 				list.ok().get_as<uint8_t>(0).ok_or(255)
 			};
 		}
-		auto& str{clear_node.get_string().except()};
-		if(str == "black") {
+		auto& raw{clear_node.get_raw().except().str};
+		if(raw == "black") {
 			return sf::Color::Black;
-		} else if(str == "white") {
+		} else if(raw == "white") {
 			return sf::Color::White;
-		} else if(str == "red") {
+		} else if(raw == "red") {
 			return sf::Color::Red;
-		} else if(str == "green") {
+		} else if(raw == "green") {
 			return sf::Color::Green;
-		} else if(str == "blue") {
+		} else if(raw == "blue") {
 			return sf::Color::Blue;
-		} else if(str == "yellow") {
+		} else if(raw == "yellow") {
 			return sf::Color::Yellow;
-		} else if(str == "magenta") {
+		} else if(raw == "magenta") {
 			return sf::Color::Magenta;
-		} else if(str == "cyan") {
+		} else if(raw == "cyan") {
 			return sf::Color::Cyan;
-		} else if(str == "transparent") {
+		} else if(raw == "transparent") {
 			return sf::Color::Transparent;
 		}
 		unsigned r, g, b, a{255};
-		if(str.size() == 8) {
-			sscanf(str.c_str(), "%02x%02x%02x%02x", &r, &g, &b, &a);
-		} else if(str.size() == 6) {
-			sscanf(str.c_str(), "%02x%02x%02x", &r, &g, &b);
+		if(raw.size() == 8) {
+			sscanf(raw.c_str(), "%02x%02x%02x%02x", &r, &g, &b, &a);
+		} else if(raw.size() == 6) {
+			sscanf(raw.c_str(), "%02x%02x%02x", &r, &g, &b);
 		} else {
 			return {};
 		}
@@ -88,15 +46,15 @@ namespace ieml {
 		auto& clear_node{node.get_clear()};
 		if(auto scalar{clear_node.get_string()}) {
 			auto& str{scalar.ok()};
-			if(str == "Regular") {
+			if(str == "regular") {
 				return sf::Text::Style::Regular;
-			} else if(str == "Bold") {
+			} else if(str == "bold") {
 				return sf::Text::Style::Bold;
-			} else if(str == "Italic") {
+			} else if(str == "italic") {
 				return sf::Text::Style::Italic;
-			} else if(str == "Underlined") {
+			} else if(str == "underlined") {
 				return sf::Text::Style::Underlined;
-			} else if(str == "StrikeThrough") {
+			} else if(str == "strike-through") {
 				return sf::Text::Style::StrikeThrough;
 			}
 		} else {

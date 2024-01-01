@@ -40,20 +40,16 @@ namespace ie {
 	};
 	
 	namespace detail {
-		template<typename Type_>
-		auto has_determine_helper(Type_&&) -> decltype(Determine<Type_>::determine(std::declval<ieml::Node const&>()), std::true_type{}) {
-			return {};
-		}
-		
-		[[maybe_unused]] std::false_type has_determine_helper(...) {
-			return {};
-		}
+		template<typename Type_, typename = void>
+		struct HasDetermine : std::false_type {
+		};
 		
 		template<typename Type_>
-		using has_determine = decltype(has_determine_helper(std::declval<Type_>()));
+		struct HasDetermine<Type_, std::void_t<decltype(Determine<Type_>::determine(std::declval<ieml::Node const&>()))> > : std::true_type {
+		};
 		
 		template<typename Type_>
-		constexpr auto has_determine_v = has_determine<Type_>::value;
+		constexpr auto has_determine_v = HasDetermine<Type_>::value;
 	}
 	
 	template<typename Type>

@@ -2,6 +2,7 @@
 
 #include "../OnlyDrawable.hpp"
 #include "IEML/node.hpp"
+#include "IE/ieml/shortcuts/shortcuts.hpp"
 
 namespace ie {
 	class FullColor : public OnlyDrawable {
@@ -38,10 +39,10 @@ namespace ie {
 		sf::Vector2f normal_size;
 	};
 	
-	/*old_yaml_determine_impl
 	template<>
-	bool determine<FullColor>(const YAML::Node& node);
-	*/
+	struct Determine<FullColor> {
+		static bool determine(ieml::Node const& node);
+	};
 }
 
 template<>

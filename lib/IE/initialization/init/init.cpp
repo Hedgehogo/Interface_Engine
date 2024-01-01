@@ -172,6 +172,8 @@ namespace ie {
 			
 			add_type_named<BasePanel, ConstPanel>();
 			add_type_named<BasePanel, Panel>();
+			
+			add_determine<FullColor>();
 			return true;
 		}()};
 	}
