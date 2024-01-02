@@ -1,31 +1,31 @@
 #include "determine_sizing2.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
+#include "IE/ieml/determine/determine.hpp"
 
 namespace ie {
-	bool determine_sizing2(const YAML::Node& node, std::string& type) {
-		if(node.IsScalar()) {
-			type = "Sizing2";
-			return true;
+	orl::Option<std::string> determine_sizing2(ieml::Node const& node) {
+		auto& clear_node{node.get_clear()};
+		if(clear_node.is_raw()) {
+			return {"Sizing2"};
 		} else {
-			if(node["ratio"].IsDefined() || node["horizontal"].IsDefined()) {
+			if(clear_node.at("ratio").is_ok() || clear_node.at("horizontal").is_ok()) {
 				if(
-					determine(node, {}, {
+					determine(clear_node, {}, {
 						{"relative"},
 						{"ratio"},
 						{"horizontal"}
 					}) ||
-					determine(node, {{"const-size"}}, {
+					determine(clear_node, {{"const-size"}}, {
 						{"ratio"},
 						{"horizontal"}
 					}) ||
-					determine(node, {{"coefficient"}}, {
+					determine(clear_node, {{"coefficient"}}, {
 						{"addition"},
 						{"relative"},
 						{"ratio"},
 						{"horizontal"}
 					}) ||
 					determine(
-						node, {
+						clear_node, {
 							{"target-coefficient"},
 							{"parent-coefficient"}
 						}, {
@@ -35,38 +35,35 @@ namespace ie {
 						}
 					)
 					) {
-					type = "ConstRatioSizing2";
-					return true;
+					return {"ConstRatioSizing2"};
 				}
 			} else {
 				if(
-					determine(node, {
+					determine(clear_node, {
 						{"horizontal"},
 						{"vertical"}
 					}) ||
-					determine(node, {{"relative"}}) ||
-					determine(node, {{"const-size"}}) ||
-					determine(node, {{"coefficient"}}, {
+					determine(clear_node, {{"relative"}}) ||
+					determine(clear_node, {{"const-size"}}) ||
+					determine(clear_node, {{"coefficient"}}, {
 						{"addition"},
 						{"relative"}
 					}) ||
-					determine(node, {
+					determine(clear_node, {
 						{"target-coefficient"},
 						{"parent-coefficient"}
 					}, {{"addition"}})
 					) {
-					type = "Sizing2";
-					return true;
+					return {"Sizing2"};
 				}
 			}
-			if(determine(node, {{"sizing"}}, {
+			if(determine(clear_node, {{"sizing"}}, {
 				{"ratio"},
 				{"horizontal"}
 			})) {
-				type = "ConstRatioSizing2";
-				return true;
+				return {"ConstRatioSizing2"};
 			}
 		}
-		return false;
+		return {};
 	}
 }

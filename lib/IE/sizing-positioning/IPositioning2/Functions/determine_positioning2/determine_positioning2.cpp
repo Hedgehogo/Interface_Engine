@@ -1,32 +1,32 @@
 #include "determine_positioning2.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
+#include "IE/ieml/determine/determine.hpp"
 
 namespace ie {
-	bool determine_positioning2(const YAML::Node& node, std::string& type) {
-		if(node.IsScalar() ||
-		   determine(node, {
+	orl::Option<std::string> determine_positioning2(ieml::Node const& node) {
+		auto& clear_node{node.get_clear()};
+		if(clear_node.is_raw() ||
+		   determine(clear_node, {
 			   {"horizontal"},
 			   {"vertical"}
 		   }) ||
-		   determine(node, {{"coefficient"}}, {
+		   determine(clear_node, {{"coefficient"}}, {
 			   {"relative"},
 			   {"offset"}
 		   }) ||
-		   determine(node, {
+		   determine(clear_node, {
 			   {"parent-coefficient"},
 			   {"object-coefficient"}
 		   }, {{"offset"}}) ||
-		   determine(node, {
+		   determine(clear_node, {
 			   {"target-coefficient"},
 			   {"object-coefficient"}
 		   }, {{"offset"}}) ||
-		   determine(node, {
+		   determine(clear_node, {
 			   {"parent-location"},
 			   {"object-location"}
 		   }, {{"offset"}})) {
-			type = "Positioning2";
-			return true;
+			return {"Positioning2"};
 		}
-		return false;
+		return {};
 	}
 }

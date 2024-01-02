@@ -1,9 +1,7 @@
 #pragma once
 
 #include "../OnlyDrawable.hpp"
-#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/ieml/shortcuts/shortcuts.hpp"
 
 namespace ie {
 	class Sprite : public OnlyDrawable {
@@ -45,15 +43,15 @@ namespace ie {
 		sf::Vector2f minimum_size;
 	};
 	
-	/*old_yaml_decode_pointer
 	template<>
-	struct DecodePointer<Sprite> {
-		static bool decode_pointer(const YAML::Node& node, Sprite*& sprite);
+	struct Determine<Sprite::Make> {
+		static bool determine(ieml::Node const& node);
 	};
-	*/
-	
-	/*old_yaml_determine
-	template<>
-	bool determine<Sprite>(const YAML::Node& node);
-	*/
 }
+
+/*old_yaml
+template<>
+struct ieml::Decode<char, ie::Sprite::Make> {
+	static orl::Option<ie::Sprite::Make> decode(ieml::Node const& node);
+}
+*/

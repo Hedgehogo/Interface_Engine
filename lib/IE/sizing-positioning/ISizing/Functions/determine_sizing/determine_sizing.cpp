@@ -1,36 +1,31 @@
 #include "determine_sizing.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
+#include "IE/ieml/determine/determine.hpp"
 
 namespace ie {
-	bool determine_sizing(const YAML::Node& node, std::string& type) {
-		if(node.IsScalar()) {
-			type = "ConstSizing";
-			return true;
+	orl::Option<std::string> determine_sizing(ieml::Node const& node) {
+		auto& clear_node{node.get_clear()};
+		if(clear_node.is_raw()) {
+			return {"ConstSizing"};
 		} else {
-			if(determine(node, {})) {
-				type = "RelativeNormalSizing";
-				return true;
+			if(determine(clear_node, {})) {
+				return {"RelativeNormalSizing"};
 			}
-			if(determine(node, {{"size"}})) {
-				type = "ConstSizing";
-				return true;
+			if(determine(clear_node, {{"size"}})) {
+				return {"ConstSizing"};
 			}
-			if(determine(node, {{"addition"}})) {
-				type = "RelativeParentSizing";
-				return true;
+			if(determine(clear_node, {{"addition"}})) {
+				return {"RelativeParentSizing"};
 			}
-			if(determine(node, {{"coefficient"}}, {{"addition"}})) {
-				type = "ParentCoefficientSizing";
-				return true;
+			if(determine(clear_node, {{"coefficient"}}, {{"addition"}})) {
+				return {"ParentCoefficientSizing"};
 			}
-			if(determine(node, {
+			if(determine(clear_node, {
 				{"target-coefficient"},
 				{"parent-coefficient"}
 			}, {{"addition"}})) {
-				type = "SmartSizing";
-				return true;
+				return {"SmartSizing"};
 			}
 		}
-		return false;
+		return {};
 	}
 }

@@ -56,7 +56,10 @@ namespace ie {
 	void add_determine(rttb::DetermineFn<ieml::Node const&> determine_fn);
 	
 	template<typename Type>
-	std::enable_if_t<detail::has_determine_v<Type> > add_determine();
+	void add_bool_determine(std::function<bool(ieml::Node const&)> determine_fn);
+	
+	template<typename Type>
+	std::enable_if_t<detail::has_determine_v<Type> > add_bool_determine();
 	
 	template<typename Base, typename Derived, typename... Names>
 	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && meta::is_names<Names...> >
@@ -78,7 +81,10 @@ namespace ie {
 	void add_determine_make(rttb::DetermineFn<ieml::Node const&> determine_fn);
 	
 	template<typename Type>
-	std::enable_if_t<detail::has_determine_v<typename Type::Make> > add_determine_make();
+	void add_bool_determine_make(std::function<bool(ieml::Node const&)> determine_fn);
+	
+	template<typename Type>
+	std::enable_if_t<detail::has_determine_v<typename Type::Make> > add_bool_determine_make();
 }
 
 #include "shortcuts.inl"

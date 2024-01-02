@@ -1,6 +1,7 @@
 #include "Sprite.hpp"
 #include <algorithm>
-#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
+#include "IE/ieml/determine/determine.hpp"
 
 namespace ie {
 	Sprite::Make::Make(sf::Texture& texture, sf::IntRect rect, sf::Vector2f min_size) :
@@ -59,32 +60,22 @@ namespace ie {
 		return new Sprite{*this};
 	}
 	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Sprite>::decode_pointer(const YAML::Node& node, Sprite*& sprite) {
-		if(node["rect"]) {
-			sprite = new Sprite{
-				*node["texture"].as<sf::Texture*>(),
-				node["rect"].as<sf::IntRect>(),
-				conv_def(node["min-size"], sf::Vector2f{})
-			};
-		} else {
-			sprite = new Sprite{
-				*node["texture"].as<sf::Texture*>(),
-				conv_def(node["min-size"], sf::Vector2f{})
-			};
-		}
-		return true;
-
-	}
-	*/
-	
-	/*old_yaml_determine_impl
-	template<>
-	bool determine<Sprite>(const YAML::Node& node) {
-		return determine(node, {{"texture"}}, {
+	bool Determine<Sprite::Make>::determine(ieml::Node const& node) {
+		return ie::determine(node, {{"texture"}}, {
 			{"rect"},
 			{"min-size"}
 		});
 	}
-	*/
 }
+
+/*old_yaml
+orl::Option<ie::Sprite::Make> ieml::Decode<char, ie::Sprite::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	auto& texture{map.at("texture").except().as<sf::Texture&>().except()};
+	auto min_size{map.get_as<sf::Vector2f>("min-size").ok_or({})};
+	if(auto rect{map.at("rect")}) {
+		return ie::Sprite::Make{texture, rect.ok().as<sf::IntRect>().except(), min_size};
+	}
+	return ie::Sprite::Make{texture, min_size};
+}
+*/

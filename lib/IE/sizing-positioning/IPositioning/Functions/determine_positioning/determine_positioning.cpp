@@ -1,32 +1,34 @@
 #include "determine_positioning.hpp"
-#include "IE/modules/yaml-cpp/yaml-builder/determine/determine.hpp"
+#include "IE/ieml/determine/determine.hpp"
 
 namespace ie {
-	bool determine_positioning(const YAML::Node& node, std::string& type) {
-		if(node.IsScalar()) {
-			type = "InternalPositioning";
-			return true;
+	orl::Option<std::string> determine_positioning(ieml::Node const& node) {
+		auto& clear_node{node.get_clear()};
+		if(clear_node.is_raw()) {
+			return {"InternalPositioning"};
 		} else {
-			if(determine(node, {{"coefficient"}}, {{"offset"}})) {
-				type = "InternalPositioning";
-				return true;
+			if(determine(clear_node, {{"coefficient"}}, {{"offset"}})) {
+				return {"InternalPositioning"};
 			}
-			if(determine(node, {{"parent-coefficient"},
-								{"object-coefficient"}}, {{"offset"}})) {
-				type = "MatchPositioning";
-				return true;
+			if(determine(clear_node, {
+				{"parent-coefficient"},
+				{"object-coefficient"}
+			}, {{"offset"}})) {
+				return {"MatchPositioning"};
 			}
-			if(determine(node, {{"target-coefficient"},
-								{"object-coefficient"}}, {{"offset"}})) {
-				type = "MatchTargetPositioning";
-				return true;
+			if(determine(clear_node, {
+				{"target-coefficient"},
+				{"object-coefficient"}
+			}, {{"offset"}})) {
+				return {"MatchTargetPositioning"};
 			}
-			if(determine(node, {{"parent-side"},
-								{"object-side"}}, {{"offset"}})) {
-				type = "MatchSidesPositioning";
-				return true;
+			if(determine(clear_node, {
+				{"parent-side"},
+				{"object-side"}
+			}, {{"offset"}})) {
+				return {"MatchSidesPositioning"};
 			}
 		}
-		return false;
+		return {};
 	}
 }

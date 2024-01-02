@@ -63,7 +63,23 @@ namespace ie {
 	}
 	
 	template<typename Type>
-	std::enable_if_t<detail::has_determine_v<Type> > add_determine() {
+	void add_bool_determine(std::function<bool(ieml::Node const&)> determine_fn) {
+		rttb::Builder<ieml::Node const&, Type>::builder().add_determine(
+			[determine_fn = std::move(determine_fn)]
+			(ieml::Node const& node) -> orl::Option<std::string> {
+				if(determine_fn(node)) {
+					auto& names{rttb::Builder<ieml::Node const&, Type>::builder().get_names()};
+					if(!names.empty()) {
+						return *names.cbegin();
+					}
+				}
+				return {};
+			}
+		);
+	}
+	
+	template<typename Type>
+	std::enable_if_t<detail::has_determine_v<Type> > add_bool_determine() {
 		rttb::Builder<ieml::Node const&, Type>::builder().add_determine(
 			[](ieml::Node const& node) -> orl::Option<std::string> {
 				if(Determine<Type>::determine(node)) {
@@ -107,7 +123,12 @@ namespace ie {
 	}
 	
 	template<typename Type>
-	std::enable_if_t<detail::has_determine_v<typename Type::Make> > add_determine_make() {
-		add_determine<typename Type::Make>();
+	void add_bool_determine_make(std::function<bool(ieml::Node const&)> determine_fn) {
+		add_bool_determine<typename Type::Make>(std::move(determine_fn));
+	}
+	
+	template<typename Type>
+	std::enable_if_t<detail::has_determine_v<typename Type::Make> > add_bool_determine_make() {
+		add_bool_determine<typename Type::Make>();
 	}
 }

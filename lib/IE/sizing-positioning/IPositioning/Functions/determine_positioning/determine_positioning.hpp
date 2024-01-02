@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/ieml/shortcuts/shortcuts.hpp"
 
 namespace ie {
-	bool determine_positioning(const YAML::Node& node, std::string& type);
+	orl::Option<std::string> determine_positioning(ieml::Node const& node);
 }

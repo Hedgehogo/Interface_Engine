@@ -2,8 +2,7 @@
 
 #include "../BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 #include <string>
-#include "IE/modules/yaml-cpp/yaml.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/ieml/shortcuts/shortcuts.hpp"
 
 namespace ie {
 	template<typename T>
@@ -52,7 +51,7 @@ namespace ie {
 	};
 	*/
 	
-	bool determine_url(const YAML::Node& node);
+	bool determine_url(ieml::Node const& node);
 }
 
 #include "BasicOpenUrlAction.inl"

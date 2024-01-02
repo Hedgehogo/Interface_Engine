@@ -2,6 +2,7 @@
 
 #include "../OnlyDrawable.hpp"
 #include "../../IUninteractiveLayout/IUninteractiveLayout.hpp"
+#include "IE/ieml/shortcuts/shortcuts.hpp"
 
 namespace ie {
 	class RoundedRectangle : public OnlyDrawable, public virtual IUninteractiveLayout {
@@ -41,14 +42,13 @@ namespace ie {
 		float radius;
 	};
 	
-	/*old_yaml_decode_pointer
 	template<>
-	struct DecodePointer<RoundedRectangle> {
-		static bool decode_pointer(const YAML::Node& node, RoundedRectangle*& rounded_rectangle);
+	struct Determine<RoundedRectangle::Make> {
+		static bool determine(ieml::Node const& node);
 	};
-	*/
-	/*old_yaml_determine
-	template<>
-	bool determine<RoundedRectangle>(const YAML::Node& node);
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::RoundedRectangle::Make> {
+	static orl::Option<ie::RoundedRectangle::Make> decode(ieml::Node const& node);
+};

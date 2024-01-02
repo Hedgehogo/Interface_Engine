@@ -1,5 +1,6 @@
 #include "RoundedRectangle.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
+#include "IE/ieml/determine/determine.hpp"
 
 namespace ie {
 	RoundedRectangle::Make::Make(sf::Color color, float radius) : color(color), radius(radius) {
@@ -65,21 +66,18 @@ namespace ie {
 		return layout_;
 	}
 	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<RoundedRectangle>::decode_pointer(const YAML::Node& node, RoundedRectangle*& rounded_rectangle) {
-		rounded_rectangle = new RoundedRectangle{node["color"].as<sf::Color>(), node["radius"].as<float>()};
-		return true;
-
-	}
-	*/
-	
-	/*old_yaml_determine_impl
-	template<>
-	bool determine<RoundedRectangle>(const YAML::Node& node) {
-		return determine(node, {
-			{"color",  YAML::NodeType::Scalar},
-			{"radius", YAML::NodeType::Scalar}
+	bool Determine<RoundedRectangle::Make>::determine(ieml::Node const& node) {
+		return ie::determine(node, {
+			{"color",  ieml::NodeType::Raw},
+			{"radius", ieml::NodeType::Raw}
 		});
 	}
-	*/
+}
+
+orl::Option<ie::RoundedRectangle::Make> ieml::Decode<char, ie::RoundedRectangle::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::RoundedRectangle::Make{
+		map.at("color").except().as<sf::Color>().except(),
+		map.at("radius").except().as<float>().except(),
+	};
 }

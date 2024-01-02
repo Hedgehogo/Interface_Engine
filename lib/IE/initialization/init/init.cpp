@@ -173,7 +173,17 @@ namespace ie {
 			add_type_make_named<BasePanel, ConstPanel>();
 			add_type_make_named<BasePanel, Panel>();
 			
-			add_determine_make<FullColor>();
+			add_bool_determine_make<FullColor>();
+			add_bool_determine_make<RoundedRectangle>();
+			add_bool_determine_make<Sprite>();
+			//add_determine_make<TextBlock>();
+			add_determine_make<ISizing>(determine_sizing);
+			add_determine_make<ISizing2>(determine_sizing2);
+			add_determine<IPositioning>(determine_positioning);
+			add_determine_make<IPositioning2>(determine_positioning2);
+			add_bool_determine_make<OpenUrlAction>(determine_url);
+			add_bool_determine_make<KeysInteraction>(determine_url);
+			//add_bool_determine_make<BasicKeysInteraction<Text&>>(determine_url);
 			return true;
 		}()};
 	}

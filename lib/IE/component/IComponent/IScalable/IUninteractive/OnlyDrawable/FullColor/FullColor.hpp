@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../OnlyDrawable.hpp"
-#include "IEML/node.hpp"
 #include "IE/ieml/shortcuts/shortcuts.hpp"
 
 namespace ie {
