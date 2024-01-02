@@ -57,6 +57,28 @@ namespace ie {
 	
 	template<typename Type>
 	std::enable_if_t<detail::has_determine_v<Type> > add_determine();
+	
+	template<typename Base, typename Derived, typename... Names>
+	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && meta::is_names<Names...> >
+	add_type_make(Names... names);
+	
+	template<typename Base, typename Derived, typename... Names>
+	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && meta::is_names<Names...> >
+	add_type_make_named(Names... names);
+	
+	template<typename Type, typename FirstName, typename... Names>
+	std::enable_if_t<meta::is_names<FirstName, Names...> >
+	add_fn_make(
+		NamedBuildFn<ieml::Node const&,typename Type::Make> build_fn,
+		FirstName first_name,
+		Names... names
+	);
+	
+	template<typename Type>
+	void add_determine_make(rttb::DetermineFn<ieml::Node const&> determine_fn);
+	
+	template<typename Type>
+	std::enable_if_t<detail::has_determine_v<typename Type::Make> > add_determine_make();
 }
 
 #include "shortcuts.inl"

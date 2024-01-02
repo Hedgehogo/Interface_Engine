@@ -40,12 +40,12 @@ namespace ie {
 	};
 	
 	template<>
-	struct Determine<FullColor> {
+	struct Determine<FullColor::Make> {
 		static bool determine(ieml::Node const& node);
 	};
 }
 
 template<>
-struct ieml::Decode<char, ie::FullColor> {
-	static orl::Option<ie::FullColor> decode(ieml::Node const& node);
+struct ieml::Decode<char, ie::FullColor::Make> {
+	static orl::Option<ie::FullColor::Make> decode(ieml::Node const& node);
 };

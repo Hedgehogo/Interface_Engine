@@ -48,7 +48,7 @@ namespace ie {
 		return new FullColor{*this};
 	}
 	
-	bool Determine<FullColor>::determine(const ieml::Node& node) {
+	bool Determine<FullColor::Make>::determine(const ieml::Node& node) {
 		if(auto str{node.get_raw()}) {
 			return str.ok().str.size() <= 11;
 		} else {
@@ -57,11 +57,11 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::FullColor> ieml::Decode<char, ie::FullColor>::decode(ieml::Node const& node) {
+orl::Option<ie::FullColor::Make> ieml::Decode<char, ie::FullColor::Make>::decode(ieml::Node const& node) {
 	if(auto color{node.as<sf::Color>()}) {
-		return ie::FullColor{color.ok()};
+		return ie::FullColor::Make{color.ok()};
 	} else {
-		return ie::FullColor{
+		return ie::FullColor::Make{
 			node.at("color").except().as<sf::Color>().except(),
 			node.get_as<sf::Vector2f>("normal-size").ok_or({})
 		};

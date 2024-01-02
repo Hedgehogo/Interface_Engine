@@ -50,15 +50,15 @@ namespace ie {
 	
 	void ieml_rttb_init() {
 		[[maybe_unused]] static bool once{[]() {
-			add_type_named<ISizing, ConstSizing>();
-			add_type_named<ISizing, RelativeNormalSizing>();
-			add_type_named<ISizing, RelativeParentSizing>();
-			add_type_named<ISizing, ParentCoefficientSizing>();
-			add_type_named<ISizing, TargetCoefficientSizing>();
-			add_type_named<ISizing, SmartSizing>();
+			add_type_make_named<ISizing, ConstSizing>();
+			add_type_make_named<ISizing, RelativeNormalSizing>();
+			add_type_make_named<ISizing, RelativeParentSizing>();
+			add_type_make_named<ISizing, ParentCoefficientSizing>();
+			add_type_make_named<ISizing, TargetCoefficientSizing>();
+			add_type_make_named<ISizing, SmartSizing>();
 			
-			add_type_named<ISizing2, Sizing2>("Sizing2");
-			add_type_named<ISizing2, ConstRatioSizing2>("ConstRatioSizing2");
+			add_type_make_named<ISizing2, Sizing2>("Sizing2");
+			add_type_make_named<ISizing2, ConstRatioSizing2>("ConstRatioSizing2");
 			
 			add_type_named<IPositioning, InternalPositioning>("InternalPos");
 			add_type_named<IPositioning, InternalTargetPositioning>("InternalTargetPos");
@@ -69,46 +69,46 @@ namespace ie {
 			add_type_named<IPositioning2, Positioning2>("Pos2");
 			add_type_named<IPositioning2, InternalPositioning2>("InternalPos2");
 			
-			add_type_named<BaseLine, Underline>();
-			add_type_named<BaseLine, StrikeThrough>();
+			add_type_make_named<BaseLine, Underline>();
+			add_type_make_named<BaseLine, StrikeThrough>();
 			
-			add_type_named<BaseTextBlock, TextBlock>();
-			add_type_named<BaseTextBlock, InteractiveTextBlock>();
-			add_type_named<BaseTextBlock, ObjectTextBlock>();
+			add_type_make_named<BaseTextBlock, TextBlock>();
+			add_type_make_named<BaseTextBlock, InteractiveTextBlock>();
+			add_type_make_named<BaseTextBlock, ObjectTextBlock>();
 			
-			add_type_named<BaseResizer, Resizer>();
+			add_type_make_named<BaseResizer, Resizer>();
 			
-			add_type_named<KeyAction, OpenUrlAction>("OpenUrlA");
-			add_type_named<KeyAction, CloseWindowAction>("CloseWindowA");
-			add_type_named<KeyAction, SwitcherAction>("SwitcherA");
-			add_type_named<KeyAction, SetSIntAction>("SetSIntA");
-			add_type_named<KeyAction, SetSFloatAction>("SetSFloatA");
+			add_type_make_named<KeyAction, OpenUrlAction>("OpenUrlA");
+			add_type_make_named<KeyAction, CloseWindowAction>("CloseWindowA");
+			add_type_make_named<KeyAction, SwitcherAction>("SwitcherA");
+			add_type_make_named<KeyAction, SetSIntAction>("SetSIntA");
+			add_type_make_named<KeyAction, SetSFloatAction>("SetSFloatA");
 			
-			add_type_named<BasicKeyAction<Text&>, TextCopyAction>("TextCopyA");
-			add_type_named<BasicKeyAction<Text&>, TextSelectionAction>("TextSelectionA");
+			add_type_make_named<BasicKeyAction<Text&>, TextCopyAction>("TextCopyA");
+			add_type_make_named<BasicKeyAction<Text&>, TextSelectionAction>("TextSelectionA");
 			
-			add_type_named<BaseSwitchTabsAction, SwitchTabsAction>("SwitchTabsA");
-			add_type_named<BaseSwitchTabsAction, WhileSwitchTabsAction>("WhileSwitchTabsA");
+			add_type_make_named<BaseSwitchTabsAction, SwitchTabsAction>("SwitchTabsA");
+			add_type_make_named<BaseSwitchTabsAction, WhileSwitchTabsAction>("WhileSwitchTabsA");
 			
-			add_type_named<IBaseInteraction, OneKeyInteraction>("OneKeyI");
-			add_type_named<IBaseInteraction, KeysInteraction>("KeysI");
-			add_type_named<IBaseInteraction, EmptyInteraction>("EmptyI");
+			add_type_make_named<IBaseInteraction, OneKeyInteraction>("OneKeyI");
+			add_type_make_named<IBaseInteraction, KeysInteraction>("KeysI");
+			add_type_make_named<IBaseInteraction, EmptyInteraction>("EmptyI");
 			
-			add_type_named<IHidePanelInteraction, DontHidePanelInteraction>("DontHidePI");
-			add_type_named<IHidePanelInteraction, ClickHidePanelInteraction>("ClickHidePI");
-			add_type_named<IHidePanelInteraction, PointingHidePanelInteraction>("PointingHidePI");
-			add_type<IPanelInteraction, IHidePanelInteraction>();
-			add_type_named<IDisplayPanelInteraction, ClickDisplayPanelInteraction>("ClickDisplayPI");
-			add_type_named<IDisplayPanelInteraction, PointingDisplayPanelInteraction>("PointingDisplayPI");
-			add_type<IPanelInteraction, IDisplayPanelInteraction>();
-			add_type_named<IMovePanelInteraction, CoefficientMovePanelInteraction>("CoefficientMovePI");
-			add_type_named<IMovePanelInteraction, DontMovePanelInteraction>("DontMovePI");
-			add_type_named<IMovePanelInteraction, SideMovePanelInteraction>("SideMovePI");
-			add_type<IPanelInteraction, IMovePanelInteraction>();
+			add_type_make_named<IHidePanelInteraction, DontHidePanelInteraction>("DontHidePI");
+			add_type_make_named<IHidePanelInteraction, ClickHidePanelInteraction>("ClickHidePI");
+			add_type_make_named<IHidePanelInteraction, PointingHidePanelInteraction>("PointingHidePI");
+			add_type_make<IPanelInteraction, IHidePanelInteraction>();
+			add_type_make_named<IDisplayPanelInteraction, ClickDisplayPanelInteraction>("ClickDisplayPI");
+			add_type_make_named<IDisplayPanelInteraction, PointingDisplayPanelInteraction>("PointingDisplayPI");
+			add_type_make<IPanelInteraction, IDisplayPanelInteraction>();
+			add_type_make_named<IMovePanelInteraction, CoefficientMovePanelInteraction>("CoefficientMovePI");
+			add_type_make_named<IMovePanelInteraction, DontMovePanelInteraction>("DontMovePI");
+			add_type_make_named<IMovePanelInteraction, SideMovePanelInteraction>("SideMovePI");
+			add_type_make<IPanelInteraction, IMovePanelInteraction>();
 			
-			add_type<IBasicInteraction<Text&>, BasicKeysInteraction<Text&> >("TextKeysInteraction", "TextKeysI");
-			//add_type<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&> >("TextHotkeyInteraction", "TextHotkeyI");
-			add_type<IBasicInteraction<Text&>, BasicEmptyInteraction<Text&> >("TextEmptyInteraction", "TextEmptyI");
+			add_type_make<IBasicInteraction<Text&>, BasicKeysInteraction<Text&> >("TextKeysInteraction", "TextKeysI");
+			//add_type_make<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&> >("TextHotkeyInteraction", "TextHotkeyI");
+			add_type_make<IBasicInteraction<Text&>, BasicEmptyInteraction<Text&> >("TextEmptyInteraction", "TextEmptyI");
 			
 			add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
 			add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
@@ -128,52 +128,52 @@ namespace ie {
 			add_fn<OnlyDrawable>(video_convert, "Video");
 			//add_fn<Box>(switcher_tabs_decode_pointer, "SwitcherTabs", "SwitcherT");
 			
-			add_type_named<OnlyDrawable, Empty>();
-			add_type_named<OnlyDrawable, FullColor>();
-			add_type_named<OnlyDrawable, RoundedRectangle>();
-			add_type_named<OnlyDrawable, Capsule>();
-			add_type_named<OnlyDrawable, Sprite>();
-			add_type<IUninteractive, OnlyDrawable>();
-			add_type_named<IUninteractive, Bar>();
-			add_type_named<IUninteractive, Caption>();
-			add_type_named<IUninteractive, BoxUninteractive>();
-			add_type<IScalable, IUninteractive>();
-			add_type_named<Box, BoxDebug>();
-			add_type_named<Box, BoxBackground>();
-			add_type_named<Box, BoxAlternative>();
-			add_type_named<Box, BoxBorder>();
-			add_type_named<Box, BoxBorderVertical>();
-			add_type_named<Box, BoxBorderHorizontal>();
-			add_type_named<Box, BoxConstBorder>();
-			add_type_named<Box, BoxConstBezel>();
-			add_type_named<Box, BoxConstRatio>();
-			add_type_named<Box, BoxConstRatioCenter>();
-			add_type_named<Box, BoxMovableBorder>();
-			add_type_named<Box, BoxPanel>();
-			add_type_named<Box, BoxRenderTexture>();
-			add_type_named<Box, BoxShader>();
-			add_type_named<Box, BoxSwitchTabs>();
-			add_type_named<Box, BoxMakePermeable>();
-			add_type_named<Box, BoxScroll>();
-			add_type_named<Box, BoxSwitch>();
-			add_type_named<Box, BoxTabs>();
-			add_type_named<Box, BoxSwitcherTabs>();
-			add_type_named<Box, BoxConstCenter>();
-			add_type_named<Box, BoxUninteractive>();
-			add_type<IScalable, Box>();
-			add_type_named<BaseSlider, Slider>();
-			add_type_named<BaseSlider, ConstSlider>();
-			add_type_named<IScalable, BaseSlider>();
-			add_type_named<IScalable, ButtonPanel>();
-			add_type<IScalable, Button>();
-			add_type_named<IScalable, Switcher>();
-			add_type<IComponent, IScalable>();
-			add_type_named<IComponent, Text>();
+			add_type_make_named<OnlyDrawable, Empty>();
+			add_type_make_named<OnlyDrawable, FullColor>();
+			add_type_make_named<OnlyDrawable, RoundedRectangle>();
+			add_type_make_named<OnlyDrawable, Capsule>();
+			add_type_make_named<OnlyDrawable, Sprite>();
+			add_type_make<IUninteractive, OnlyDrawable>();
+			add_type_make_named<IUninteractive, Bar>();
+			add_type_make_named<IUninteractive, Caption>();
+			add_type_make_named<IUninteractive, BoxUninteractive>();
+			add_type_make<IScalable, IUninteractive>();
+			add_type_make_named<Box, BoxDebug>();
+			add_type_make_named<Box, BoxBackground>();
+			add_type_make_named<Box, BoxAlternative>();
+			add_type_make_named<Box, BoxBorder>();
+			add_type_make_named<Box, BoxBorderVertical>();
+			add_type_make_named<Box, BoxBorderHorizontal>();
+			add_type_make_named<Box, BoxConstBorder>();
+			add_type_make_named<Box, BoxConstBezel>();
+			add_type_make_named<Box, BoxConstRatio>();
+			add_type_make_named<Box, BoxConstRatioCenter>();
+			add_type_make_named<Box, BoxMovableBorder>();
+			add_type_make_named<Box, BoxPanel>();
+			add_type_make_named<Box, BoxRenderTexture>();
+			add_type_make_named<Box, BoxShader>();
+			add_type_make_named<Box, BoxSwitchTabs>();
+			add_type_make_named<Box, BoxMakePermeable>();
+			add_type_make_named<Box, BoxScroll>();
+			add_type_make_named<Box, BoxSwitch>();
+			add_type_make_named<Box, BoxTabs>();
+			add_type_make_named<Box, BoxSwitcherTabs>();
+			add_type_make_named<Box, BoxConstCenter>();
+			add_type_make<Box, BoxUninteractive>();
+			add_type_make<IScalable, Box>();
+			add_type_make_named<BaseSlider, Slider>();
+			add_type_make_named<BaseSlider, ConstSlider>();
+			add_type_make_named<IScalable, BaseSlider>();
+			add_type_make_named<IScalable, ButtonPanel>();
+			add_type_make<IScalable, Button>();
+			add_type_make_named<IScalable, Switcher>();
+			add_type_make<IComponent, IScalable>();
+			add_type_make_named<IComponent, Text>();
 			
-			add_type_named<BasePanel, ConstPanel>();
-			add_type_named<BasePanel, Panel>();
+			add_type_make_named<BasePanel, ConstPanel>();
+			add_type_make_named<BasePanel, Panel>();
 			
-			add_determine<FullColor>();
+			add_determine_make<FullColor>();
 			return true;
 		}()};
 	}

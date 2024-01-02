@@ -76,4 +76,38 @@ namespace ie {
 			}
 		);
 	}
+	
+	template<typename Base, typename Derived, typename... Names>
+	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && meta::is_names<Names...> >
+	add_type_make(Names... names) {
+		add_type<typename Base::Make, typename Derived::Make, Names...>(std::forward<Names>(names)...);
+	}
+	
+	template<typename Base, typename Derived, typename... Names>
+	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && meta::is_names<Names...> >
+	add_type_make_named(Names... names) {
+		std::string type_name{ieml::get_type_name<Derived>()};
+		add_names<typename Derived::Make>(std::string{meta::remove_namespace(type_name)});
+		add_type_make<Base, Derived, Names...>(std::forward<Names>(names)...);
+	}
+	
+	template<typename Type, typename FirstName, typename... Names>
+	std::enable_if_t<meta::is_names<FirstName, Names...> >
+	add_fn_make(
+		NamedBuildFn<ieml::Node const&, typename Type::Make> build_fn,
+		FirstName first_name,
+		Names... names
+	) {
+		add_fn<typename Type::Make, FirstName, Names...>(std::move(build_fn), std::forward<FirstName>(first_name), std::forward<Names>(names)...);
+	}
+	
+	template<typename Type>
+	void add_determine_make(rttb::DetermineFn<ieml::Node const&> determine_fn) {
+		add_determine<typename Type::Make>(std::move(determine_fn));
+	}
+	
+	template<typename Type>
+	std::enable_if_t<detail::has_determine_v<typename Type::Make> > add_determine_make() {
+		add_determine<typename Type::Make>();
+	}
 }
