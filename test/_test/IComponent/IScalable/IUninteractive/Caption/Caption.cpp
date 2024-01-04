@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <IE/utils/utf/to_utf/to_utf.hpp>
 #include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <IE/component/IComponent/IScalable/IUninteractive/Caption/Caption.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
@@ -15,7 +16,7 @@ TEST(IComponent, Caption) {
 	font.loadFromFile("../../example-resources/msyh.ttc");
 	ie::Caption caption{
 		{
-			sf::String{ie::u32_string_to_uint32_string(str)},
+			ie::to_utf32(str),
 			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Green),
 			font
 		}, data.make_init_info()

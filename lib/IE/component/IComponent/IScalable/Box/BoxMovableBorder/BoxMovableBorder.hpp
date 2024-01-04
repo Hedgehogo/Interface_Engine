@@ -1,6 +1,5 @@
 #pragma once
 
-#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
 #include "IE/modules/yaml-cpp/shared/ISValue/ISCoefficientValue/SCoefficientValue/SCoefficientValue.hpp"
 #include "IE/interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
 #include "MovableBorderAction/MovableBorderAction.hpp"

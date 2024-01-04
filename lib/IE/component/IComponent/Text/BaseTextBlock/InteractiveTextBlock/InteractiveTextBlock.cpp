@@ -1,7 +1,6 @@
 #include "InteractiveTextBlock.hpp"
 
 #include <utility>
-#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
 
 namespace ie {
 	InteractiveTextBlock::Make::Make(

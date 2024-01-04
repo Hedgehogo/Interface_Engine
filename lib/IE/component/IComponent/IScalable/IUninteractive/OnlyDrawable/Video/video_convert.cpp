@@ -5,7 +5,6 @@
 #endif
 #include "VideoFromTexture/VideoFromTexture.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
-#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
 
 namespace ie {
 	bool is_video(std::string path) {

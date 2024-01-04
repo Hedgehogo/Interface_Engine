@@ -7,10 +7,10 @@ namespace ie {
 	}
 	
 	template<typename T>
-	std::map<std::string, T> FileBuffer<T>::objects_ = {};
+	absl::flat_hash_map<std::string, T> FileBuffer<T>::objects_ = {};
 	
 	template<typename T>
-	std::map<std::string, T*> FileBuffer<T>::aliases_ = {};
+	absl::flat_hash_map<std::string, T*> FileBuffer<T>::aliases_ = {};
 	
 	template<typename T>
 	T& FileBuffer<T>::get(const std::string& name) {

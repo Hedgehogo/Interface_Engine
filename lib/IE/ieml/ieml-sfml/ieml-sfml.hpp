@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <IEML/node.hpp>
 #include "LoadShader/LoadShader.hpp"
+#include "LoadString//LoadString.hpp"
 
 namespace ieml {
 	template<typename T>
@@ -13,6 +14,16 @@ namespace ieml {
 	template<typename T>
 	struct Decode<char, std::vector<T> > {
 		static orl::Option<std::vector<T> > decode(ieml::Node const& node);
+	};
+	
+	template<>
+	struct Decode<char, ie::LoadString> {
+		static orl::Option<ie::LoadString> decode(ieml::Node const& node);
+	};
+	
+	template<>
+	struct Decode<char, sf::String> {
+		static orl::Option<sf::String> decode(ieml::Node const& node);
 	};
 	
 	template<typename T>

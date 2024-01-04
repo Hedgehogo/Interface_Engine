@@ -82,9 +82,7 @@ namespace ie {
 					}
 					
 					open_lib::DynamicLibrary dl{name.erase(name.rfind('.'))};
-					dl.get_sim < void(*)
-					(int
-					argc, char * argv[])>("init")(argc, argv);
+					dl.get_sim < void(*)(int argc, char * argv[])>("init")(argc, argv);
 				}
 			}
 		}

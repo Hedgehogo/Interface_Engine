@@ -4,7 +4,6 @@
 
 #include "../../BaseLine/Underline/Underline.hpp"
 #include "../../BaseLine/StrikeThrough/StrikeThrough.hpp"
-#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
 
 namespace ie {
 	TextBlock::Make::Make(

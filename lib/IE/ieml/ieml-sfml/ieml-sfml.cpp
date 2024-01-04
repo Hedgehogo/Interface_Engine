@@ -1,6 +1,35 @@
 #include "ieml-sfml.hpp"
+#include "IE/utils/utf/to_utf/to_utf.hpp"
+#include <localisation/system.hpp>
 
 namespace ieml {
+	orl::Option<ie::LoadString> Decode<char, ie::LoadString>::decode(ieml::Node const& node) {
+		if(auto map{node.get_map_view()}) {
+			if(auto key{map.ok().at("key")}) {
+				if(auto directory{node.at("directory")}) {
+					loc::system.load_from_directory(directory.ok().get_string().except());
+				}
+				if(auto default_language{node.at("default-language")}) {
+					loc::system.set_default_language(default_language.ok().get_string().except());
+				}
+				if(auto language{node.at("language")}) {
+					loc::system.set_now_language(language.ok().get_string().except());
+				}
+				//return loc::system.get_text(key.ok().get_string().except());
+				return {};
+			}
+		}
+		return {{node.get_string().except()}};
+	}
+	
+	orl::Option<sf::String> Decode<char, sf::String>::decode(ieml::Node const& node) {
+		if(auto str{node.get_string()}) {
+			return ie::to_utf32(ie::to_utf32(str.ok()));
+		}
+		std::string str{node.as<ie::LoadString>().except().str};
+		return ie::to_utf32(ie::to_utf32(str));
+	}
+	
 	orl::Option<sf::Color> Decode<char, sf::Color>::decode(ieml::Node const& node) {
 		auto& clear_node{node.get_clear()};
 		if(auto list{clear_node.get_list_view()}) {

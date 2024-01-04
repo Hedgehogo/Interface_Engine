@@ -1,7 +1,7 @@
 #include <codecvt>
 #include "TextCopyAction.hpp"
+#include "IE/utils/utf/to_utf/to_utf.hpp"
 #include "IE/component/IComponent/Text/Text.hpp"
-#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
 
 namespace ie {
 	TextCopyAction* TextCopyAction::Make::make(BasicActionInitInfo<Text&> init_info) {
@@ -20,7 +20,7 @@ namespace ie {
 	}
 	
 	void TextCopyAction::start_pressed() {
-		sf::Clipboard::setString(u32_string_to_uint32_string(text->get_selection_text()));
+		sf::Clipboard::setString(to_utf32(text->get_selection_text()));
 	}
 	
 	void TextCopyAction::stop_pressed() {
