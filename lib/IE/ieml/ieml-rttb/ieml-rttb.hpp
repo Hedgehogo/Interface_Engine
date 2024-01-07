@@ -7,14 +7,10 @@ namespace rttb {
 	template<>
 	struct DecodePtr<ieml::Node const&> {
 		template<typename Type_>
-		static DecodePtrReturn<ieml::Decode<char, Type_>, ieml::Node const&, Type_*>
-		decode(ieml::Node const& node) {
-			auto result{ieml::Decode<char, Type_>::decode(node)};
-			if(result.is_some()) {
-				return new Type_{std::move(result.some())};
-			}
-			return {};
-		}
+		using Return = DecodePtrReturn<ieml::Decode<char, Type_>, ieml::Node const&, Type_*>;
+		
+		template<typename Type_>
+		static Return<Type_> decode(ieml::Node const& node);
 	};
 }
 
@@ -23,13 +19,35 @@ namespace ieml {
 	struct Decode<char, Type_*> {
 		using Return = std::enable_if_t<rttb::detail::has_decode_ptr_v<ieml::Node const&, Type_*>, orl::Option<Type_*> >;
 		
-		static Return decode(ieml::Node const& node) {
-			auto const& clear_node{node.get_clear<NodeType::File, NodeType::TakeAnchor, NodeType::GetAnchor>()};
-			if(auto type_name{clear_node.get_tag()}) {
-				return rttb::Builder<ieml::Node const&, Type_>::builder().build(type_name.some(), node);
-			} else {
-				return rttb::Builder<ieml::Node const&, Type_>::builder().implicit_build(node);
-			}
-		}
+		static Return decode(ieml::Node const& node);
 	};
 }
+
+namespace ie {
+	template<typename Type_>
+	class MakeDyn {
+	public:
+		using Data = std::variant<std::pair<size_t, rttb::Dyn>, std::string>;
+		
+		orl::Option<MakeDyn<Type_> > decode(ieml::Node const& node);
+		
+		size_t get_id() const;
+		
+		rttb::Dyn& get_object();
+		
+		rttb::Dyn const& get_object() const;
+	
+	private:
+		MakeDyn(size_t id, rttb::Dyn object_);
+		
+		size_t id_;
+		rttb::Dyn object_;
+	};
+}
+
+template<typename Type_>
+struct ieml::Decode<char, ie::MakeDyn<Type_> > {
+	static orl::Option<ie::MakeDyn<Type_> > decode(ieml::Node const& node);
+};
+
+#include "ieml-rttb.inl"

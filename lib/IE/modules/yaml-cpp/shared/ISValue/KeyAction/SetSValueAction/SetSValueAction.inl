@@ -11,7 +11,7 @@ namespace ie {
 	
 	template<typename T>
 	SetSValueAction<T>::SetSValueAction(Make&& make, ActionInitInfo) :
-		value_(std::move(make.value)), constant_(std::move(make.value)) {
+		value_(std::move(make.value)), constant_(std::move(make.constant)) {
 	}
 	
 	template<typename T>

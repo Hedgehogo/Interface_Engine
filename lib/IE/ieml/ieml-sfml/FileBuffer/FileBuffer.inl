@@ -1,4 +1,4 @@
-//included into file_buffer.hpp
+//included into FileBuffer.hpp
 
 namespace ie {
 	template<typename T>
