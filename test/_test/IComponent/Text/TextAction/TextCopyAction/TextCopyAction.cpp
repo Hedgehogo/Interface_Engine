@@ -15,7 +15,7 @@ struct ie::ProcessClipboard<std::u32string>{
 	}
 };
 
-
+//todo
 TEST(IComponent_Text, TextCopyAction) {
 	InitInfoData data{{100, 100}};
 	sf::Font font{};

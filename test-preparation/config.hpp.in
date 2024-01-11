@@ -1,0 +1,4 @@
+#define TEST_LIB_DIR "${test_lib_dir}"
+#define LIB_DIR "${lib_dir}"
+#define TEST_DIR "${test_dir}"
+#define SRC_TEST_DIR "${src_test_dir}"
