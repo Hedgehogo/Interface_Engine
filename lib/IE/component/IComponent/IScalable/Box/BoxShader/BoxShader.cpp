@@ -1,31 +1,6 @@
 #include "BoxShader.hpp"
 
 namespace ie {
-	size_t convert_transmission_def(const YAML::Node& node) {
-		size_t transmission{};
-		if(node) {
-			absl::flat_hash_map<std::string, BoxShader::Transmission> transmission_map{
-				{"size",           BoxShader::Transmission::Size},
-				{"texture",        BoxShader::Transmission::Texture},
-				{"aspect_ratio",   BoxShader::Transmission::AspectRatio},
-				{"mouse_position", BoxShader::Transmission::MousePosition},
-				{"time",           BoxShader::Transmission::Time},
-			};
-			
-			if(node.IsScalar()) {
-				std::string str_transmission = node.as<std::string>();
-				transmission = transmission_map[str_transmission];
-			} else if(node.IsSequence()) {
-				std::string str_transmission;
-				for(const auto& item: node) {
-					str_transmission = item.as<std::string>();
-					transmission = static_cast<BoxShader::Transmission>(transmission | transmission_map[str_transmission]);
-				}
-			}
-		}
-		return transmission;
-	}
-	
 	BoxShader::Make::Make(
 		BoxPtr<IScalable::Make>&& object,
 		sf::Shader* shader,
@@ -145,19 +120,6 @@ namespace ie {
 		return new BoxShader{*this};
 	}
 	
-	/*old_yaml
-	template<typename T>
-	auto get_s_values_def(const YAML::Node& node) {
-		std::map<std::string, std::shared_ptr<T> > result;
-		if(node) {
-			for(auto& pair: node) {
-				result.insert(std::make_pair(pair.first.as<std::string>(), Buffer::get<T>(pair.second)));
-			}
-		}
-		return result;
-	}
-	*/
-	
 	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxShader>::decode_pointer(const YAML::Node& node, BoxShader*& box_with_shader) {
 		sf::Shader* shader{new sf::Shader{}};
@@ -180,4 +142,31 @@ namespace ie {
 
 	}
 	*/
+}
+
+orl::Option<ie::BoxShader::LoadTransmission>
+ieml::Decode<char, ie::BoxShader::LoadTransmission>::decode(const ieml::Node& node) {
+	auto& clear_node{node.get_clear()};
+	if(auto list{clear_node.get_list()}) {
+		ie::BoxShader::Transmission result{ie::BoxShader::Transmission::None};
+		for(auto& item: list.ok()) {
+			auto item_result{item.as<ie::BoxShader::LoadTransmission>().except().transmission};
+			result = static_cast<ie::BoxShader::Transmission>(result | item_result);
+		}
+		return {{result}};
+	} else {
+		auto& str{clear_node.get_string().except()};
+		if(str == "size") {
+			return {{ie::BoxShader::Transmission::Size}};
+		} else if(str == "texture") {
+			return {{ie::BoxShader::Transmission::Texture}};
+		} else if(str == "aspect_ratio") {
+			return {{ie::BoxShader::Transmission::AspectRatio}};
+		} else if(str == "mouse_position") {
+			return {{ie::BoxShader::Transmission::MousePosition}};
+		} else if(str == "time") {
+			return {{ie::BoxShader::Transmission::Time}};
+		}
+	}
+	return {};
 }

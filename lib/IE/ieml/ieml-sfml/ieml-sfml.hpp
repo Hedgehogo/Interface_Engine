@@ -4,6 +4,7 @@
 #include <IEML/node.hpp>
 #include "LoadShader/LoadShader.hpp"
 #include "LoadString//LoadString.hpp"
+#include "LoadTextStyle/LoadTextStyle.hpp"
 
 namespace ieml {
 	template<typename T>
@@ -14,6 +15,11 @@ namespace ieml {
 	template<typename T>
 	struct Decode<char, std::vector<T> > {
 		static orl::Option<std::vector<T> > decode(ieml::Node const& node);
+	};
+	
+	template<typename T>
+	struct Decode<char, absl::flat_hash_map<std::string, T> > {
+		static orl::Option<absl::flat_hash_map<std::string, T> > decode(ieml::Node const& node);
 	};
 	
 	template<>
@@ -42,8 +48,8 @@ namespace ieml {
 	};
 	
 	template<>
-	struct Decode<char, sf::Text::Style> {
-		static orl::Option<sf::Text::Style> decode(ieml::Node const& node);
+	struct Decode<char, ie::LoadTextStyle> {
+		static orl::Option<ie::LoadTextStyle> decode(ieml::Node const& node);
 	};
 	
 	template<>

@@ -71,28 +71,27 @@ namespace ieml {
 		return sf::Color{uint8_t(r), uint8_t(g), uint8_t(b), uint8_t(a)};
 	}
 	
-	orl::Option<sf::Text::Style> Decode<char, sf::Text::Style>::decode(ieml::Node const& node) {
+	orl::Option<ie::LoadTextStyle> Decode<char, ie::LoadTextStyle>::decode(ieml::Node const& node) {
 		auto& clear_node{node.get_clear()};
-		if(auto scalar{clear_node.get_string()}) {
-			auto& str{scalar.ok()};
-			if(str == "regular") {
-				return sf::Text::Style::Regular;
-			} else if(str == "bold") {
-				return sf::Text::Style::Bold;
-			} else if(str == "italic") {
-				return sf::Text::Style::Italic;
-			} else if(str == "underlined") {
-				return sf::Text::Style::Underlined;
-			} else if(str == "strike-through") {
-				return sf::Text::Style::StrikeThrough;
-			}
-		} else {
-			auto& list{clear_node.get_list().except()};
+		if(auto list{clear_node.get_list()}) {
 			sf::Text::Style result{sf::Text::Style::Regular};
-			for(auto& item: list) {
-				result = static_cast<sf::Text::Style>(result | item.as<sf::Text::Style>().except());
+			for(auto& item: list.ok()) {
+				result = static_cast<sf::Text::Style>(result | item.as<ie::LoadTextStyle>().except().style);
 			}
-			return result;
+			return {{result}};
+		} else {
+			auto& str{clear_node.get_string().except()};
+			if(str == "regular") {
+				return {{sf::Text::Style::Regular}};
+			} else if(str == "bold") {
+				return {{sf::Text::Style::Bold}};
+			} else if(str == "italic") {
+				return {{sf::Text::Style::Italic}};
+			} else if(str == "underlined") {
+				return {{sf::Text::Style::Underlined}};
+			} else if(str == "strike-through") {
+				return {{sf::Text::Style::StrikeThrough}};
+			}
 		}
 		return {};
 	}

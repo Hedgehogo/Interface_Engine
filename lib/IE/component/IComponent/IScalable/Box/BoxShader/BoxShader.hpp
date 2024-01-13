@@ -22,6 +22,10 @@ namespace ie {
 			Time = 1 << 4,
 		};
 		
+		struct LoadTransmission {
+			size_t transmission;
+		};
+		
 		struct Make : public BoxRenderTexture::Make {
 			sf::Shader* shader;
 			size_t transmission;
@@ -90,3 +94,8 @@ namespace ie {
 	};
 	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxShader::LoadTransmission> {
+	static orl::Option<ie::BoxShader::LoadTransmission> decode(ieml::Node const& node);
+};
