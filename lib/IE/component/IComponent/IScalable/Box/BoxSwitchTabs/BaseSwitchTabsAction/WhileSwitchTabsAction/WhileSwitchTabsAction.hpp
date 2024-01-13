@@ -17,8 +17,6 @@ namespace ie {
 		
 		WhileSwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> init_info);
 		
-		WhileSwitchTabsAction(int step = 1);
-		
 		void init(BasicActionInitInfo<BoxSwitchTabs&> init_info) override;
 		
 		WhileSwitchTabsAction* copy() override;
@@ -33,7 +31,7 @@ namespace ie {
 		void while_not_pressed() override;
 		
 		int size_;
-		PSValue<size_t> value_;
+		ISRSize& value_;
 		int step_;
 	};
 	

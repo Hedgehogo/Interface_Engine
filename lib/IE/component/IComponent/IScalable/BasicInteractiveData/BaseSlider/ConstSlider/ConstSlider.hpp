@@ -8,7 +8,7 @@ namespace ie {
 		struct Make : public virtual IScalable::Make {
 			BoxPtr<IUninteractive::Make> slider;
 			BoxPtr<IUninteractive::Make> background;
-			const PSRVec2f& value;
+			MakeDyn<SRVec2F> value;
 			sf::Vector2i division;
 			float slider_scale;
 			Key key;
@@ -19,7 +19,7 @@ namespace ie {
 			Make(
 				BoxPtr<IUninteractive::Make>&& slider,
 				BoxPtr<IUninteractive::Make>&& background,
-				const PSRVec2f& value,
+				MakeDyn<SRVec2F> value,
 				float slider_scale = 1.0f,
 				Key key = Key::MouseLeft,
 				bool wheel_horizontal = false,
@@ -30,7 +30,7 @@ namespace ie {
 			Make(
 				BoxPtr<IUninteractive::Make>&& slider,
 				BoxPtr<IUninteractive::Make>&& background,
-				const PSRVec2f& value,
+				MakeDyn<SRVec2F> value,
 				sf::Vector2i division,
 				float slider_scale = 1.0f,
 				Key key = Key::MouseLeft,
@@ -41,27 +41,6 @@ namespace ie {
 		};
 		
 		ConstSlider(Make&& make, InitInfo init_info);
-		
-		ConstSlider(
-			BoxPtr<IUninteractive>&& slider,
-			BoxPtr<IUninteractive>&& background,
-			const PSRVec2f& value,
-			float slider_scale = 1.0f,
-			Key key = Key::MouseLeft,
-			bool wheel_horizontal = false,
-			SliderWheelAction::Relativity wheel_relativity = SliderWheelAction::Relativity::RelationArea,
-			sf::Vector2f wheel_sensitivity = {0.2f, 0.2f}
-		);
-		
-		ConstSlider(
-			BoxPtr<IUninteractive>&& slider,
-			BoxPtr<IUninteractive>&& background,
-			const PSRVec2f& value,
-			sf::Vector2i division,
-			float slider_scale = 1.0f,
-			Key key = Key::MouseLeft,
-			bool wheel_horizontal = false
-		);
 		
 		void init(InitInfo init_info) override;
 		

@@ -1,7 +1,8 @@
 #pragma once
 
+#include "IE/shared/SReader/SReader.hpp"
+#include "IE/shared/ISRanged/ISRanged.hpp"
 #include "../../OnlyDrawable.hpp"
-#include "IE/modules/yaml-cpp/shared/ISValue/ISCoefficientValue/SCoefficientValue/SCoefficientValue.hpp"
 
 namespace ie {
 	class VideoFromTexture : public OnlyDrawable {
@@ -9,23 +10,21 @@ namespace ie {
 		struct Make : public virtual IUninteractive::Make {
 			BoxPtr<IScalable::Make> object;
 			const sf::Texture& texture;
-			PSCoefficient viewing_progress;
+			MakeDyn<ISRFloat> viewing_progress;
 			sf::IntRect rect = {};
 			size_t frame_count = 0;
 			sf::Vector2i offset = {};
 			
-			Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, size_t frame_count, sf::Vector2i offset);
+			Make(const sf::Texture& texture, MakeDyn<ISRFloat> viewing_progress, sf::IntRect rect, size_t frame_count, sf::Vector2i offset);
 			
-			Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect, size_t frame_count);
+			Make(const sf::Texture& texture, MakeDyn<ISRFloat> viewing_progress, sf::IntRect rect, size_t frame_count);
 			
-			Make(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect);
+			Make(const sf::Texture& texture, MakeDyn<ISRFloat> viewing_progress, sf::IntRect rect);
 			
 			VideoFromTexture* make(InitInfo init_info) override;
 		};
 		
 		VideoFromTexture(Make&& make, InitInfo init_info);
-		
-		VideoFromTexture(const sf::Texture& texture, PSCoefficient viewing_progress, sf::IntRect rect = {}, size_t frame_count = 0, sf::Vector2i offset = {});
 		
 		void set_current_frame(float viewing_progress);
 		
@@ -46,7 +45,7 @@ namespace ie {
 	protected:
 		sf::IntRect rect;
 		sf::Vector2i offset;
-		PSCoefficient viewing_progress;
+		SReader<ISRFloat> viewing_progress;
 		sf::Sprite sprite;
 		sf::Vector2i texture_size;
 		sf::Vector2f size;

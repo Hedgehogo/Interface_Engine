@@ -77,7 +77,7 @@ namespace ie {
 	*/
 	
 	Window::Window(Interface::Make&& make, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) :
-		interface_(window_, std::move(make.object), std::move(make.animation_manager), std::move(make.interaction_stack)),
+		interface_(window_, dyn_buffer, std::move(make.object), std::move(make.animation_manager), std::move(make.interaction_stack)),
 		resizer_(get_window_resizer()) {
 		
 		Window::re_calculate_min_size();

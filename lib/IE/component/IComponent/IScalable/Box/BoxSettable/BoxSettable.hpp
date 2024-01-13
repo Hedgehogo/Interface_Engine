@@ -25,8 +25,6 @@ namespace ie {
 		
 		void init(InitInfo init_info) override;
 		
-		void set_object(BoxPtr<IScalable>&& new_object);
-		
 		void set_object(BoxPtr<IScalable::Make>&& new_object);
 		
 		void draw() override;
@@ -46,6 +44,7 @@ namespace ie {
 		UpdateManager update_manager_;
 		sf::RenderWindow* window_;
 		sf::RenderTarget* render_target_;
+		DynBuffer* dyn_buffer_;
 		InteractionManager interaction_manager_;
 		InteractionStack* interaction_stack_;
 		PanelManagerInterceptor panel_manager_interceptor_;

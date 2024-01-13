@@ -16,8 +16,6 @@ namespace ie {
 		
 		SwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> init_info);
 		
-		SwitchTabsAction(size_t index);
-		
 		void init(BasicActionInitInfo<BoxSwitchTabs&> init_info) override;
 		
 		SwitchTabsAction* copy() override;
@@ -32,7 +30,7 @@ namespace ie {
 		void while_not_pressed() override;
 		
 		size_t index_;
-		PSValue<size_t> value_;
+		ISRSize& value_;
 	};
 	
 	/*old_yaml_decode_pointer

@@ -1,24 +1,22 @@
 #pragma once
 
 #include "IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/OnlyDrawable.hpp"
-#include "IE/modules/yaml-cpp/shared/ISValue/ISCoefficientValue/SCoefficientValue/SCoefficientValue.hpp"
 #include "IE/component/IUpdatable/IUpdatable/IUpdatable.hpp"
+#include "IE/shared/SReader/SReader.hpp"
 
 namespace ie {
 	class VideoFromFile : public OnlyDrawable {
 	public:
 		struct Make : public virtual IUninteractive::Make {
 			std::vector<sf::Texture> video;
-			PSCoefficient viewing_progress;
+			MakeDyn<ISRFloat> viewing_progress;
 			
-			Make(std::vector<sf::Texture> video, PSCoefficient viewing_progress);
+			Make(std::vector<sf::Texture> video, MakeDyn<ISRFloat> viewing_progress);
 			
 			VideoFromFile* make(InitInfo init_info) override;
 		};
 		
 		VideoFromFile(Make&& make, InitInfo init_info);
-		
-		VideoFromFile(std::vector<sf::Texture> video, PSCoefficient viewing_progress);
 		
 		void set_current_frame(float viewing_progress);
 		
@@ -43,6 +41,6 @@ namespace ie {
 		
 		std::vector<sf::Texture> buffer_texture;
 		sf::Sprite sprite;
-		PSCoefficient viewing_progress;
+		SReader<ISRFloat> viewing_progress;
 	};
 }

@@ -1,19 +1,21 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/Box/BoxSwitcherTabs/BoxSwitcherTabs.hpp>
 #include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/shared/ISValue/SRanged/SRanged.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_image_equal/image_equal.hpp"
 
 TEST(IComponent, BoxSwitcherTabs) {
 	InitInfoData data{{100, 100}};
 	
+	ie::SRSize value{0};
 	ie::BoxSwitcherTabs box_switcher_tabs{
 		{
 			ie::make_vector(
 				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
 			),
-			std::make_shared<ie::Sint>(0)
+			value
 		}, data.make_init_info()
 	};
 	data.interaction_manager.update({});

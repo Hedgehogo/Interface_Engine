@@ -1,7 +1,8 @@
 #pragma once
 
+#include "IE/shared/SReader/SReader.hpp"
+#include "IE/shared/ISValue/ISValue.hpp"
 #include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
-#include "IE/modules/yaml-cpp/shared/ISValue/SValue/SValue.hpp"
 
 namespace ie {
 	class Switcher;
@@ -9,16 +10,16 @@ namespace ie {
 	class SwitcherAction : public BaseKeyAction {
 	public:
 		struct Make : public BaseKeyAction::Make {
-			PSbool value;
+			MakeDyn<ISBool> value;
 			
-			Make(PSbool value);
+			Make(MakeDyn<ISBool> value);
 			
 			SwitcherAction* make(ActionInitInfo init_info) override;
 		};
 		
 		SwitcherAction(Make&& make, ActionInitInfo init_info);
 		
-		SwitcherAction(PSbool value);
+		SwitcherAction(ISBool& value);
 		
 		void start_pressed() override;
 		
@@ -31,7 +32,7 @@ namespace ie {
 		SwitcherAction* copy() override;
 		
 	protected:
-		PSbool value_;
+		ISBool& value_;
 	};
 	
 	/*old_yaml_decode_pointer

@@ -23,31 +23,4 @@ namespace ieml {
 	};
 }
 
-namespace ie {
-	template<typename Type_>
-	class MakeDyn {
-	public:
-		using Data = std::variant<std::pair<size_t, rttb::Dyn>, std::string>;
-		
-		orl::Option<MakeDyn<Type_> > decode(ieml::Node const& node);
-		
-		size_t get_id() const;
-		
-		rttb::Dyn& get_object();
-		
-		rttb::Dyn const& get_object() const;
-	
-	private:
-		MakeDyn(size_t id, rttb::Dyn object_);
-		
-		size_t id_;
-		rttb::Dyn object_;
-	};
-}
-
-template<typename Type_>
-struct ieml::Decode<char, ie::MakeDyn<Type_> > {
-	static orl::Option<ie::MakeDyn<Type_> > decode(ieml::Node const& node);
-};
-
 #include "ieml-rttb.inl"

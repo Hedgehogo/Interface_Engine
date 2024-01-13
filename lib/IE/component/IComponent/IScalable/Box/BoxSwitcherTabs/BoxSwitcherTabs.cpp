@@ -3,11 +3,16 @@
 #include "../BoxSwitch/BoxSwitch.hpp"
 #include "IE/enums/KeyHandler/KeyHandler.hpp"
 #include "IE/interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
-#include "IE/modules/yaml-cpp/shared/ISValue/ISConvertValue/BaseSConvertToBoolComparison/SConvertToBoolEquals/SConvertToBoolEquals.hpp"
 #include "IE/component/IComponent/IScalable/Box/BoxSwitcherTabs/SwitcherTabsAction/SwitcherTabsAction.hpp"
 
 namespace ie {
-	BoxSwitcherTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key, bool is_horizontal, sf::Vector2f min_size) :
+	BoxSwitcherTabs::Make::Make(
+		std::vector<BoxPtr<IScalable::Make> >&& objects,
+		MakeDyn<ISRSize> value,
+		Key key,
+		bool is_horizontal,
+		sf::Vector2f min_size
+	) :
 		objects(std::move(objects)), value(std::move(value)), key(key), is_horizontal(is_horizontal), min_size(min_size) {
 	}
 	
@@ -18,17 +23,12 @@ namespace ie {
 	BoxSwitcherTabs::BoxSwitcherTabs(Make&& make, InitInfo init_info) :
 		Box(make.min_size),
 		interactive_(make_box_ptr<BasicOneKeyInteraction<BoxSwitcherTabs&>::Make>(
-			make_box_ptr<SwitcherTabsAction::Make>(make.value), make.key
+			make_box_ptr<SwitcherTabsAction::Make>(make.value.make(init_info.dyn_buffer)), make.key
 		), init_info, *this),
 		objects_(map_make(std::move(make.objects), init_info)),
 		is_horizontal_(make.is_horizontal),
-		value_(make.value) {
+		value_(make.value.make(init_info.dyn_buffer)) {
 		init_info.update_manager.add(*this);
-	}
-	
-	BoxSwitcherTabs::BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool is_horizontal, sf::Vector2f min_size) :
-		Box(min_size), interactive_(make_box_ptr<BasicOneKeyInteraction<BoxSwitcherTabs&> >(make_box_ptr<SwitcherTabsAction>(value), key)),
-		objects_(std::move(objects)), is_horizontal_(is_horizontal), value_(value) {
 	}
 	
 	void BoxSwitcherTabs::init(InitInfo init_info) {

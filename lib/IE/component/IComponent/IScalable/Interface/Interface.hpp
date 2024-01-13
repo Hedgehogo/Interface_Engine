@@ -7,6 +7,7 @@
 #include "IE/interaction/InteractionManager/InteractionManager.hpp"
 #include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "IE/interaction/IAction/WheelAction/WheelAction.hpp"
+#include "IE/shared/DynBuffer/DynBuffer.hpp"
 
 namespace ie {
 	class Interface : public virtual IScalable, public virtual IDrawable, public virtual IUpdatable {
@@ -62,6 +63,7 @@ namespace ie {
 		
 		explicit Interface(
 			sf::RenderWindow& window,
+			DynBuffer& dyn_buffer,
 			BoxPtr<IScalable::Make>&& object,
 			AnimationManager animation_manager = AnimationManager{{}},
 			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()

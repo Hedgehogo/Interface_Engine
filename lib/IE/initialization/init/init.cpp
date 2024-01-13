@@ -81,8 +81,8 @@ namespace ie {
 			add_type_make_named<KeyAction, OpenUrlAction>("OpenUrlA");
 			add_type_make_named<KeyAction, CloseWindowAction>("CloseWindowA");
 			add_type_make_named<KeyAction, SwitcherAction>("SwitcherA");
-			add_type_make_named<KeyAction, SetSIntAction>("SetSIntA");
-			add_type_make_named<KeyAction, SetSFloatAction>("SetSFloatA");
+			//add_type_make_named<KeyAction, SetSIntAction>("SetSIntA");
+			//add_type_make_named<KeyAction, SetSFloatAction>("SetSFloatA");
 			
 			add_type_make_named<BasicKeyAction<Text&>, TextCopyAction>("TextCopyA");
 			add_type_make_named<BasicKeyAction<Text&>, TextSelectionAction>("TextSelectionA");
@@ -110,20 +110,20 @@ namespace ie {
 			//add_type_make<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&> >("TextHotkeyInteraction", "TextHotkeyI");
 			add_type_make<IBasicInteraction<Text&>, BasicEmptyInteraction<Text&> >("TextEmptyInteraction", "TextEmptyI");
 			
-			add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
-			add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
-			add_type<ISbool, SConvertFloatToBoolGreaterOrEquals>("ConvertFloatToBoolGreaterOrEquals", "CFloatToBoolGOE");
-			add_type<ISbool, SConvertFloatToBoolLess>("ConvertFloatToBoolLess", "CFloatToBoolL");
-			add_type<ISbool, SConvertFloatToBoolLessOrEquals>("ConvertFloatToBoolLessOrEquals", "CFloatToBoolLOE");
+			//add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
+			//add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
+			//add_type<ISbool, SConvertFloatToBoolGreaterOrEquals>("ConvertFloatToBoolGreaterOrEquals", "CFloatToBoolGOE");
+			//add_type<ISbool, SConvertFloatToBoolLess>("ConvertFloatToBoolLess", "CFloatToBoolL");
+			//add_type<ISbool, SConvertFloatToBoolLessOrEquals>("ConvertFloatToBoolLessOrEquals", "CFloatToBoolLOE");
 			
-			add_type_named<IAnimatorUnit, Animation>();
-			add_type_named<IAnimatorUnit, Prerequisite>();
-			add_type_named<IAnimatorUnit, AnimatorUnitMatchFloat>("AUnitMatchF");
-			add_type_named<IChangeVariable, ChangeVariableByStraightLine>("CVByStraightLine", "CVByStraightL");
-			add_type_named<IChangeVariable, ChangeVariableByBrokenLine>("CVByBrokenLine", "CVByBrokenL");
-			add_type_named<IChangeVariable, ChangeVariableBySteppedLine>("CVBySteppedLine", "CVBySteppedL");
-			add_type_named<IChangeVariable, ChangeVariableBySinusoid>("CVBySinusoid", "CVBySin");
-			add_type_named<IChangeVariable, ChangeVariableByCurve>("CVByCurve");
+			//add_type_named<IAnimatorUnit, Animation>();
+			//add_type_named<IAnimatorUnit, Prerequisite>();
+			//add_type_named<IAnimatorUnit, AnimatorUnitMatchFloat>("AUnitMatchF");
+			//add_type_named<IChangeVariable, ChangeVariableByStraightLine>("CVByStraightLine", "CVByStraightL");
+			//add_type_named<IChangeVariable, ChangeVariableByBrokenLine>("CVByBrokenLine", "CVByBrokenL");
+			//add_type_named<IChangeVariable, ChangeVariableBySteppedLine>("CVBySteppedLine", "CVBySteppedL");
+			//add_type_named<IChangeVariable, ChangeVariableBySinusoid>("CVBySinusoid", "CVBySin");
+			//add_type_named<IChangeVariable, ChangeVariableByCurve>("CVByCurve");
 			
 			add_fn<OnlyDrawable>(video_convert, "Video");
 			//add_fn<Box>(switcher_tabs_decode_pointer, "SwitcherTabs", "SwitcherT");
@@ -183,7 +183,7 @@ namespace ie {
 			add_determine_make<IPositioning2>(determine_positioning2);
 			add_bool_determine_make<OpenUrlAction>(determine_url);
 			add_bool_determine_make<KeysInteraction>(determine_url);
-			//add_bool_determine_make<BasicKeysInteraction<Text&>>(determine_url);
+			//add_bool_determine_make<BasicKeysInteraction<Text&> >(determine_url);
 			return true;
 		}()};
 	}

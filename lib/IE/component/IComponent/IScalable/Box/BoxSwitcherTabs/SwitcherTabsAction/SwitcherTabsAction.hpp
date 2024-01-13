@@ -1,7 +1,7 @@
 #pragma once
 
+#include "IE/shared/ISRanged/ISRanged.hpp"
 #include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
-#include "IE/modules/yaml-cpp/shared/ISValue/SValue/SValue.hpp"
 
 namespace ie {
 	class BoxSwitcherTabs;
@@ -9,16 +9,14 @@ namespace ie {
 	class SwitcherTabsAction : public BasicBaseKeyAction<BoxSwitcherTabs&> {
 	public:
 		struct Make : public virtual BasicKeyAction<BoxSwitcherTabs&>::Make {
-			PISint value;
+			MakeDyn<ISRSize> value;
 			
-			Make(PISint value);
+			Make(MakeDyn<ISRSize> value);
 			
 			SwitcherTabsAction* make(BasicActionInitInfo<BoxSwitcherTabs&> init_info) override;
 		};
 		
 		SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> init_info);
-		
-		SwitcherTabsAction(PISint value);
 		
 		void init(BasicActionInitInfo<BoxSwitcherTabs&> init_info) override;
 		
@@ -33,7 +31,7 @@ namespace ie {
 		SwitcherTabsAction* copy() override;
 	
 	protected:
-		PISint value_;
+		ISRSize& value_;
 		BoxSwitcherTabs* switcher_tabs_;
 	};
 }

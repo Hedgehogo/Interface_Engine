@@ -7,7 +7,7 @@ namespace ie {
 		BoxPtr<IScalable::Make>&& first_object,
 		BoxPtr<IScalable::Make>&& second_object,
 		bool is_horizontal_border,
-		PSCoefficient border_value,
+		MakeDyn<ISRFloat> border_value,
 		int border_interaction_size,
 		Key key,
 		sf::Vector2f min_size
@@ -15,7 +15,7 @@ namespace ie {
 		first_object(std::move(first_object)),
 		second_object(std::move(second_object)),
 		is_horizontal_border(is_horizontal_border),
-		border_value(border_value),
+		border_value(std::move(border_value)),
 		border_interaction_size(border_interaction_size),
 		key(key),
 		min_size(min_size) {
@@ -36,56 +36,27 @@ namespace ie {
 		), init_info, *this),
 		first_object_(make.first_object->make(init_info)),
 		second_object_(make.second_object->make(init_info)),
-		border_value_(make.border_value),
-		border_value_now_(border_value_->get_value()),
+		border_value_(
+			init_info.dyn_buffer.get(std::move(make.border_value)),
+			[this](const float& ) {
+				this->resize(layout_.size, layout_.position);
+			}
+		),
+		border_value_now_(border_value_.get().get()),
 		border_interaction_size_(make.border_interaction_size),
 		is_horizontal_border_(make.is_horizontal_border) {
-		border_value_->add_setter([&](float) {
-			this->resize(layout_.size, layout_.position);
-		});
 		init_info.update_manager.add(*this);
-	}
-	
-	BoxMovableBorder::BoxMovableBorder(
-		BoxPtr<IScalable>&& first_object,
-		BoxPtr<IScalable>&& second_object,
-		bool is_horizontal_border,
-		PSCoefficient border_value,
-		int border_interaction_size,
-		sf::Vector2f min_size
-	) :
-		Box(min_size),
-		interactive_(make_box_ptr<BasicOneKeyInteraction<BoxMovableBorder&> >(
-			make_box_ptr<BasicAddBlockInteractionAction<BoxMovableBorder&> >(
-				make_box_ptr<BasicPressedInteraction<BoxMovableBorder&> >(
-					make_box_ptr<MovableBorderAction>(), Key::MouseLeft
-				)
-			), Key::MouseLeft
-		)),
-		first_object_(std::move(first_object)),
-		second_object_(std::move(second_object)),
-		border_value_(border_value),
-		border_value_now_(border_value->get_value()),
-		border_interaction_size_(border_interaction_size),
-		is_horizontal_border_(is_horizontal_border) {
-		border_value->add_setter([&](float) {
-			this->resize(layout_.size, layout_.position);
-		});
 	}
 	
 	void BoxMovableBorder::init(InitInfo init_info) {
-		interactive_.init(init_info, *this);
-		first_object_->init(init_info);
-		second_object_->init(init_info);
-		init_info.update_manager.add(*this);
 	}
 	
 	float BoxMovableBorder::get_border_value() {
-		return border_value_->get_value();
+		return border_value_.get().get();
 	}
 	
 	void BoxMovableBorder::set_border_value(float border_value) {
-		this->border_value_->set_value(border_value);
+		this->border_value_.get().set(border_value);
 	}
 	
 	float BoxMovableBorder::get_border_value_now() {
@@ -161,11 +132,11 @@ namespace ie {
 			float c = second_object_min_size.x / first_object_min_size.x;
 			float min_size_border = 1 - c / (c + 1);
 			
-			if(min_size_border > border_value_->get_value()) {
-				border_value_now_ = std::max({first_object_min_size.x / size.x, border_value_->get_value()});
+			if(min_size_border > border_value_.get().get()) {
+				border_value_now_ = std::max({first_object_min_size.x / size.x, border_value_.get().get()});
 			} else {
 				float diff = size.x - get_min_size().x;
-				border_value_now_ = std::min({(diff + first_object_min_size.x) / size.x, border_value_->get_value()});
+				border_value_now_ = std::min({(diff + first_object_min_size.x) / size.x, border_value_.get().get()});
 			}
 			
 			first_object_size = {size.x * border_value_now_, size.y};
@@ -176,11 +147,11 @@ namespace ie {
 			float c = second_object_min_size.y / first_object_min_size.y;
 			float min_size_border = 1 - c / (c + 1);
 			
-			if(min_size_border > border_value_->get_value()) {
-				border_value_now_ = std::max({first_object_min_size.y / size.y, border_value_->get_value()});
+			if(min_size_border > border_value_.get().get()) {
+				border_value_now_ = std::max({first_object_min_size.y / size.y, border_value_.get().get()});
 			} else {
 				float diff = size.y - get_min_size().y;
-				border_value_now_ = std::min({(diff + first_object_min_size.y) / size.y, border_value_->get_value()});
+				border_value_now_ = std::min({(diff + first_object_min_size.y) / size.y, border_value_.get().get()});
 			}
 			
 			first_object_size = {size.x, size.y * border_value_now_};
@@ -224,7 +195,7 @@ namespace ie {
 	}
 	
 	BoxMovableBorder* BoxMovableBorder::copy() {
-		return new BoxMovableBorder{*this};
+		return nullptr;
 	}
 	
 	void BoxMovableBorder::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

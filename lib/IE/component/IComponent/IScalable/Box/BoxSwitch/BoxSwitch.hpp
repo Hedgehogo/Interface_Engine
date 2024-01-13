@@ -1,5 +1,7 @@
 #pragma once
 
+#include "IE/shared/SReader/SReader.hpp"
+#include "IE/shared/ISValue/ISValue.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 
@@ -9,19 +11,15 @@ namespace ie {
 		struct Make : public virtual Box::Make, public virtual IScalableTwoObjects::Make {
 			BoxPtr<IScalable::Make> inactive_object;
 			BoxPtr<IScalable::Make> active_object;
-			PSbool value;
+			MakeDyn<ISBool> value;
 			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<IScalable::Make>&& inactive_object, BoxPtr<IScalable::Make>&& active_object, PSbool value, const sf::Vector2f& min_size = {});
+			Make(BoxPtr<IScalable::Make>&& inactive_object, BoxPtr<IScalable::Make>&& active_object, MakeDyn<ISBool> value, const sf::Vector2f& min_size = {});
 			
 			BoxSwitch* make(InitInfo init_info) override;
 		};
 		
 		BoxSwitch(Make&& make, InitInfo init_info);
-		
-		BoxSwitch(BoxPtr<IScalable>&& inactive_object, BoxPtr<IScalable>&& active_object, PSbool value, const sf::Vector2f& min_size = {});
-		
-		BoxSwitch(const BoxSwitch& other);
 		
 		void init(InitInfo init_info) override;
 		
@@ -52,7 +50,7 @@ namespace ie {
 		DrawManager active_draw_manager_;
 		BoxPtr<IScalable> inactive_object_;
 		BoxPtr<IScalable> active_object_;
-		PSbool value_;
+		ISBool& value_;
 	};
 	
 	/*old_yaml_decode_pointer

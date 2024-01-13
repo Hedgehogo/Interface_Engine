@@ -1,13 +1,16 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/BasicInteractiveData/BaseSlider/Slider/Slider.hpp>
 #include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/shared/ISValue/SRanged/SRanged.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_image_equal/image_equal.hpp"
 
 TEST(IComponent, Slider) {
 	InitInfoData data{{100, 100}};
 	
-	auto value = std::make_shared<ie::SRVec2f>(sf::Vector2f{0.f, 0.f});
+	ie::SRFloat value_x{0};
+	ie::SRFloat value_y{0};
+	ie::SRVec2F value{value_x, value_y};
 	ie::Slider slider{
 		{
 			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Green),
@@ -52,11 +55,11 @@ TEST(IComponent, Slider) {
 	data.draw_manager.draw();
 	ASSERT_TRUE(data.render_equal_with_save("test-src/Slider-0.0.png"));
 	
-	value->set_value(sf::Vector2f{0.0f, 0.7f});
+	value.set(sf::Vector2f{0.0f, 0.7f});
 	data.draw_manager.draw();
 	ASSERT_TRUE(data.render_equal_with_save("test-src/Slider-0.7.png"));
 	
-	value->set_value(sf::Vector2f{0.0f, 1.0f});
+	value.set(sf::Vector2f{0.0f, 1.0f});
 	data.draw_manager.draw();
 	ASSERT_TRUE(data.render_equal_with_save("test-src/Slider-1.0.png"));
 }

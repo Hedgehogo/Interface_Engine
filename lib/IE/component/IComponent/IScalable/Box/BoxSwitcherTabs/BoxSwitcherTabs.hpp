@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/shared/ISRanged/ISRanged.hpp"
 #include "IE/enums/KeyHandler/KeyHandler.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
@@ -10,19 +11,23 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
-			PSint value;
+			MakeDyn<ISRSize> value;
 			Key key;
 			bool is_horizontal;
 			sf::Vector2f min_size = {};
 			
-			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSint value, Key key = Key::MouseLeft, bool is_horizontal = true, sf::Vector2f min_size = {});
+			Make(
+				std::vector<BoxPtr<IScalable::Make> >&& objects,
+				MakeDyn<ISRSize> value,
+				Key key = Key::MouseLeft,
+				bool is_horizontal = true,
+				sf::Vector2f min_size = {}
+			);
 			
 			BoxSwitcherTabs* make(InitInfo init_info) override;
 		};
 		
 		BoxSwitcherTabs(Make&& make, InitInfo init_info);
-		
-		BoxSwitcherTabs(std::vector<BoxPtr<IScalable> >&& objects, PSint value, Key key, bool is_horizontal, sf::Vector2f min_size = {});
 		
 		void init(InitInfo init_info) override;
 		
@@ -46,7 +51,7 @@ namespace ie {
 		BasicInteractiveData<BoxSwitcherTabs&> interactive_;
 		std::vector<BoxPtr<IScalable> > objects_;
 		bool is_horizontal_;
-		PSint value_;
+		ISRSize& value_;
 	};
 	
 	/*old_yaml_decode_pointer

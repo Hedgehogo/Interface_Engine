@@ -1,6 +1,7 @@
 #pragma once
 
-#include "IE/modules/yaml-cpp/shared/shared.hpp"
+#include "IE/shared/SReader/SReader.hpp"
+#include "IE/shared/ISValue/SVec2/SVec2.hpp"
 #include "IE/component/IComponent/IScalable/IUninteractive/IUninteractive.hpp"
 #include "../BasicInteractiveData.hpp"
 #include "SliderInteraction/SliderInteraction.hpp"
@@ -12,18 +13,9 @@ namespace ie {
 			BoxPtr<IUninteractive::Make>&& slider,
 			BoxPtr<IUninteractive::Make>&& background,
 			BoxPtr<SliderInteraction::Make>&& interaction,
-			const PSRVec2f& value,
+			MakeDyn<SRVec2F>&& value,
 			InitInfo init_info
 		);
-		
-		BaseSlider(
-			BoxPtr<IUninteractive>&& slider,
-			BoxPtr<IUninteractive>&& background,
-			BoxPtr<SliderInteraction>&& interaction,
-			const PSRVec2f& value
-		);
-		
-		BaseSlider(const BaseSlider& other);
 		
 		void init(InitInfo init_info) override;
 		
@@ -33,7 +25,7 @@ namespace ie {
 		
 		sf::Vector2f get_value();
 		
-		PSRVec2f get_value_ptr();
+		SRVec2F& get_value_ptr();
 		
 		void set_value(sf::Vector2f value);
 		
@@ -67,7 +59,7 @@ namespace ie {
 		BasicInteractiveData<BaseSlider&> interactive_;
 		BoxPtr<IUninteractive> background_;
 		BoxPtr<IUninteractive> slider_;
-		PSRVec2f value_;
+		SReader<SRVec2F> value_;
 		sf::Vector2f position_;
 		sf::Vector2f slider_size_;
 		sf::Vector2f move_zone_size_;

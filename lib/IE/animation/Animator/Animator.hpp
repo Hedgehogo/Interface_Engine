@@ -1,12 +1,13 @@
 #pragma once
 
 #include "IAnimatorUnit/IAnimatorUnit.hpp"
-#include "IE/modules/yaml-cpp/buffer/Buffer.hpp"
 
 namespace ie {
 	class Animator {
 	public:
+		/*
 		explicit Animator(std::vector<IAnimatorUnit*> units, PSfloat speed = std::make_shared<Sfloat>(1));
+		*/
 		
 		void update(float time);
 		

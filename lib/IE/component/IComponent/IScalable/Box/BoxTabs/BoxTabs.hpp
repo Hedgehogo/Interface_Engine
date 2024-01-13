@@ -1,5 +1,7 @@
 #pragma once
 
+#include "IE/shared/SReader/SReader.hpp"
+#include "IE/shared/ISRanged/ISRanged.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
 
@@ -8,19 +10,15 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
-			PISint value;
+			MakeDyn<ISRSize> value;
 			sf::Vector2f min_size = {};
 			
-			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PISint value, sf::Vector2f min_size = {});
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, MakeDyn<ISRSize> value, sf::Vector2f min_size = {});
 			
 			BoxTabs* make(InitInfo init_info) override;
 		};
 		
 		BoxTabs(Make&& make, InitInfo init_info);
-		
-		BoxTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, sf::Vector2f min_size = {});
-		
-		BoxTabs(const BoxTabs& other);
 		
 		void init(InitInfo init_info) override;
 		
@@ -47,7 +45,7 @@ namespace ie {
 	protected:
 		std::vector<DrawManager> draw_managers_;
 		std::vector<BoxPtr<IScalable> > objects_;
-		PISint value_;
+		ISRSize& value_;
 	};
 	
 	/*old_yaml_decode_pointer

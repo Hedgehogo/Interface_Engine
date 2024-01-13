@@ -3,24 +3,24 @@
 #include "../Switcher.hpp"
 
 namespace ie {
-	SwitcherAction::Make::Make(PSbool value) : value(value) {
+	SwitcherAction::Make::Make(MakeDyn<ISBool> value) : value(std::move(value)) {
 	}
 	
 	SwitcherAction* SwitcherAction::Make::make(ActionInitInfo init_info) {
 		return new SwitcherAction{std::move(*this), init_info};
 	}
 	
-	SwitcherAction::SwitcherAction(Make&& make, ActionInitInfo) : value_(std::move(make.value)) {
+	SwitcherAction::SwitcherAction(Make&& make, ActionInitInfo init_info) : value_(make.value.make(init_info.dyn_buffer)) {
 	}
 	
-	SwitcherAction::SwitcherAction(PSbool value) : value_(value) {
+	SwitcherAction::SwitcherAction(ISBool& value) : value_(value) {
 	}
 	
 	void SwitcherAction::start_pressed() {
 	}
 	
 	void SwitcherAction::stop_pressed() {
-		value_->set_value(!value_->get_value());
+		value_.set(!value_.get());
 	}
 	
 	void SwitcherAction::while_pressed() {

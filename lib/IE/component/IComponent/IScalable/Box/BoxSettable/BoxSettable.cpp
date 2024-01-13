@@ -17,12 +17,14 @@ namespace ie {
 		Box(min_size),
 		window_(&init_info.window),
 		render_target_(&init_info.render_target),
+		dyn_buffer_(&init_info.dyn_buffer),
 		interaction_stack_(&init_info.interaction_stack),
 		panel_manager_interceptor_(init_info.panel_manager),
 		object_(object->make(
 			{
 				init_info.window,
 				init_info.render_target,
+				init_info.dyn_buffer,
 				draw_manager_,
 				update_manager_,
 				interaction_manager_,
@@ -48,22 +50,21 @@ namespace ie {
 		this->interaction_stack_ = &init_info.interaction_stack;
 	}
 	
-	void BoxSettable::set_object(BoxPtr<IScalable>&& new_object) {
-		draw_manager_.clear();
-		update_manager_.clear();
-		interaction_manager_.clear();
-		panel_manager_interceptor_.clear();
-		InitInfo init_info{*window_, *render_target_, draw_manager_, update_manager_, interaction_manager_, *interaction_stack_, panel_manager_interceptor_};
-		new_object->init(init_info);
-		object_ = new_object;
-	}
-	
 	void BoxSettable::set_object(BoxPtr<IScalable::Make>&& new_object) {
 		draw_manager_.clear();
 		update_manager_.clear();
 		interaction_manager_.clear();
 		panel_manager_interceptor_.clear();
-		InitInfo init_info{*window_, *render_target_, draw_manager_, update_manager_, interaction_manager_, *interaction_stack_, panel_manager_interceptor_};
+		InitInfo init_info{
+			*window_,
+			*render_target_,
+			*dyn_buffer_,
+			draw_manager_,
+			update_manager_,
+			interaction_manager_,
+			*interaction_stack_,
+			panel_manager_interceptor_
+		};
 		object_ = BoxPtr{new_object->make(init_info)};
 	}
 	

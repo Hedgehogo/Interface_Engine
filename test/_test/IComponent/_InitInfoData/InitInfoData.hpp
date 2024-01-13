@@ -12,6 +12,7 @@
 struct InitInfoData {
 	sf::RenderWindow window{};
 	sf::RenderTexture render_target{};
+	ie::DynBuffer dyn_buffer{};
 	ie::DrawManager draw_manager{};
 	ie::UpdateManager update_manager{};
 	ie::InteractionManager interaction_manager{};

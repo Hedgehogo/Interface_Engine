@@ -1,12 +1,9 @@
 #include "BoxSwitchTabs.hpp"
+#include "IE/shared/ISValue/SRanged/SRanged.hpp"
 
 namespace ie {
-	BoxSwitchTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PSValue<size_t> value, sf::Vector2f min_size) :
-		objects(std::move(objects)), value(value), min_size(min_size) {
-	}
-	
-	BoxSwitchTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, size_t index, sf::Vector2f min_size) :
-		objects(std::move(objects)), value(std::make_shared<SValue<size_t> >(index)), min_size(min_size) {
+	BoxSwitchTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, MakeDyn<ISRSize> value, sf::Vector2f min_size) :
+		objects(std::move(objects)), value(std::move(value)), min_size(min_size) {
 	}
 	
 	BoxSwitchTabs* BoxSwitchTabs::Make::make(InitInfo init_info) {
@@ -17,20 +14,9 @@ namespace ie {
 		Box(make.min_size), draw_managers_(make.objects.size()),
 		objects_(map_make(std::move(make.objects), [&](size_t i) {
 			return init_info.copy(draw_managers_[i]);
-		})), value_(make.value) {
+		})), value_(make.value.make(init_info.dyn_buffer)) {
+		value_.set_bounds(0, objects_.size() - 1);
 		init_info.draw_manager.add(*this);
-	}
-	
-	BoxSwitchTabs::BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, PSValue<size_t> value, sf::Vector2f min_size) :
-		Box(min_size), draw_managers_(objects.size()), objects_(std::move(objects)), value_(value) {
-	}
-	
-	BoxSwitchTabs::BoxSwitchTabs(std::vector<BoxPtr<IScalable> >&& objects, size_t index, sf::Vector2f min_size) :
-		Box(min_size), draw_managers_(objects.size()), objects_(std::move(objects)), value_(std::make_shared<SValue<size_t>>(index)) {
-	}
-	
-	BoxSwitchTabs::BoxSwitchTabs(const BoxSwitchTabs& other) :
-		Box(other), draw_managers_(other.objects_.size()), objects_(other.objects_), value_(other.value_) {
 	}
 	
 	void BoxSwitchTabs::init(InitInfo init_info) {
@@ -41,24 +27,20 @@ namespace ie {
 		}
 	}
 	
-	void BoxSwitchTabs::set_value(std::shared_ptr<SValue<size_t>> index) {
-		value_ = index;
-	}
-	
-	std::shared_ptr<SValue<size_t>> BoxSwitchTabs::get_value() {
+	ISRSize& BoxSwitchTabs::get_value() {
 		return value_;
 	}
 	
 	void BoxSwitchTabs::set_index(size_t index) {
-		value_->set_value(index);
+		value_.set(index);
 	}
 	
 	size_t BoxSwitchTabs::get_index() {
-		return value_->get_value();
+		return value_.get();
 	}
 	
 	void BoxSwitchTabs::draw() {
-		draw_managers_[value_->get_value()].draw();
+		draw_managers_[value_.get()].draw();
 	}
 	
 	void BoxSwitchTabs::resize(sf::Vector2f size, sf::Vector2f position) {
@@ -69,7 +51,7 @@ namespace ie {
 	}
 	
 	bool BoxSwitchTabs::update_interactions(sf::Vector2f mouse_position) {
-		return objects_[value_->get_value()]->update_interactions(mouse_position);
+		return objects_[value_.get()]->update_interactions(mouse_position);
 	}
 	
 	size_t BoxSwitchTabs::get_array_size() const {
@@ -85,7 +67,7 @@ namespace ie {
 	}
 	
 	BoxSwitchTabs* BoxSwitchTabs::copy() {
-		return new BoxSwitchTabs{*this};
+		return nullptr;
 	}
 	
 	/*old_yaml_decode_pointer_impl
@@ -112,6 +94,6 @@ namespace ie {
 	*/
 	
 	void BoxSwitchTabs::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
-		objects_[value_->get_value()]->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+		objects_[value_.get()]->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
 }

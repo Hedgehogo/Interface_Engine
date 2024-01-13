@@ -79,7 +79,16 @@ namespace ie {
 	
 	void Panel::init(InitInfo init_info) {
 		BasePanel::init(init_info);
-		InitInfo new_init_info{init_info.window, init_info.render_target, this->draw_manager_, this->update_manager_, init_info.interaction_manager, init_info.interaction_stack, this->panel_manager_};
+		InitInfo new_init_info{
+			init_info.window,
+			init_info.render_target,
+			init_info.dyn_buffer,
+			this->draw_manager_,
+			this->update_manager_,
+			init_info.interaction_manager,
+			init_info.interaction_stack,
+			this->panel_manager_
+		};
 		object_->init(new_init_info);
 		hide_interaction_->init({init_info, *this});
 		move_interaction_->init({init_info, *this});

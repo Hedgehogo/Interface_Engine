@@ -3,8 +3,8 @@
 #include <utility>
 
 namespace ie {
-	BoxTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, PISint value, sf::Vector2f min_size) :
-		objects(std::move(objects)), value(value), min_size(min_size) {
+	BoxTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, MakeDyn<ISRSize> value, sf::Vector2f min_size) :
+		objects(std::move(objects)), value(std::move(value)), min_size(min_size) {
 	}
 	
 	BoxTabs* BoxTabs::Make::make(InitInfo init_info) {
@@ -17,16 +17,9 @@ namespace ie {
 		objects_(map_make(std::move(make.objects), [&](size_t i) {
 			return init_info.copy(draw_managers_[i]);
 		})),
-		value_(make.value) {
+		value_(make.value.make(init_info.dyn_buffer)) {
+		value_.set_upper_bound(objects_.size() - 1);
 		init_info.draw_manager.add(*this);
-	}
-	
-	BoxTabs::BoxTabs(std::vector<BoxPtr<IScalable> >&& objects, PISint value, sf::Vector2f min_size) :
-		Box(min_size), draw_managers_(objects.size()), objects_(std::move(objects)), value_(std::move(value)) {
-	}
-	
-	BoxTabs::BoxTabs(const BoxTabs& other) :
-		Box(other), draw_managers_(other.objects_.size()), objects_(other.objects_), value_(other.value_) {
 	}
 	
 	void BoxTabs::init(InitInfo init_info) {
@@ -65,11 +58,11 @@ namespace ie {
 	}
 	
 	void BoxTabs::draw() {
-		draw_managers_[value_->get_value()].draw();
+		draw_managers_[value_.get()].draw();
 	}
 	
 	bool BoxTabs::update_interactions(sf::Vector2f mouse_position) {
-		return objects_[value_->get_value()]->update_interactions(mouse_position);
+		return objects_[value_.get()]->update_interactions(mouse_position);
 	}
 	
 	size_t BoxTabs::get_array_size() const {
@@ -85,7 +78,7 @@ namespace ie {
 	}
 	
 	BoxTabs* BoxTabs::copy() {
-		return new BoxTabs{*this};
+		return nullptr;
 	}
 	
 	/*old_yaml_decode_pointer_impl

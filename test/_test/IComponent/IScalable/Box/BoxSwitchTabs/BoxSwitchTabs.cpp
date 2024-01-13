@@ -1,13 +1,14 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/Box/BoxSwitchTabs/BoxSwitchTabs.hpp>
 #include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/shared/ISValue/SRanged/SRanged.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_image_equal/image_equal.hpp"
 
 TEST(IComponent, BoxSwitchTabs) {
 	InitInfoData data{{100, 100}};
 	
-	auto value = std::make_shared<ie::Ssize>(0);
+	ie::SRSize value{0};
 	ie::BoxSwitchTabs box_switch_tabs{
 		{
 			ie::make_vector(
@@ -54,7 +55,7 @@ TEST(IComponent, BoxSwitchTabs) {
 	data.draw_manager.draw();
 	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxSwitchTabs-0.png"));
 	
-	value->set_value(1);
+	value.set(1);
 	data.draw_manager.draw();
 	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxSwitchTabs-1.png"));
 }

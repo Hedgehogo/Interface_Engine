@@ -1,12 +1,13 @@
 #pragma once
 
 #include "IE/modules/yaml-animation/Buffer.hpp"
-#include "IE/modules/yaml-cpp/shared/ISValue/SValue/SValue.hpp"
 
 namespace ie {
 	class IAnimatorUnit {
 	public:
+		/*old_yaml
 		virtual void set_speed(PSfloat speed) = 0;
+		*/
 		
 		virtual void restart() = 0;
 		

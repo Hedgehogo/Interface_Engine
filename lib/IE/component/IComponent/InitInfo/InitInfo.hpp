@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "IE/shared/DynBuffer/DynBuffer.hpp"
 
 namespace ie {
 	class Window;
@@ -18,17 +19,29 @@ namespace ie {
 	struct InitInfo {
 		sf::RenderWindow& window;
 		sf::RenderTarget& render_target;
+		DynBuffer& dyn_buffer;
 		DrawManager& draw_manager;
 		UpdateManager& update_manager;
 		InteractionManager& interaction_manager;
 		InteractionStack& interaction_stack;
 		IPanelManager& panel_manager;
 		
-		InitInfo(sf::RenderWindow& window_, sf::RenderTarget& render_target_, DrawManager& draw_manager_, UpdateManager& update_manager_, InteractionManager& interaction_manager_, InteractionStack& interaction_stack_, IPanelManager& panel_manager_);
+		InitInfo(
+			sf::RenderWindow& window_,
+			sf::RenderTarget& render_target_,
+			DynBuffer& dyn_buffer,
+			DrawManager& draw_manager_,
+			UpdateManager& update_manager_,
+			InteractionManager& interaction_manager_,
+			InteractionStack& interaction_stack_,
+			IPanelManager& panel_manager_
+		);
 		
 		InitInfo copy(sf::RenderWindow& window_) const;
 		
 		InitInfo copy(sf::RenderTarget& render_target_) const;
+		
+		InitInfo copy(DynBuffer& dyn_buffer_) const;
 		
 		InitInfo copy(DrawManager& draw_manager_) const;
 		

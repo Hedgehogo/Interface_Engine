@@ -11,6 +11,7 @@ namespace ie {
 		
 		sf::RenderWindow& window;
 		sf::RenderTarget& render_target;
+		DynBuffer& dyn_buffer;
 		InteractionManager& interaction_manager;
 		InteractionStack& interaction_stack;
 		IPanelManager& panel_manager;
@@ -19,6 +20,7 @@ namespace ie {
 		BasicActionInitInfo(
 			sf::RenderWindow& window_,
 			sf::RenderTarget& render_target_,
+			DynBuffer& dyn_buffer,
 			InteractionManager& interaction_manager_,
 			InteractionStack& interaction_stack_,
 			IPanelManager& panel_manager_,
@@ -32,6 +34,8 @@ namespace ie {
 		BasicActionInitInfo<T> copy(sf::RenderWindow& window_) const;
 		
 		BasicActionInitInfo<T> copy(sf::RenderTarget& render_target_) const;
+		
+		BasicActionInitInfo<T> copy(DynBuffer& dyn_buffer_) const;
 		
 		BasicActionInitInfo<T> copy(InteractionManager& interaction_manager_) const;
 		

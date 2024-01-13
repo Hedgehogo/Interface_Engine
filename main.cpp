@@ -31,7 +31,9 @@ int main() {
 	
 	sf::Font font{};
 	font.loadFromFile("../../example-resources/segoeui.ttf");
-	auto a_value{std::make_shared<ie::SRVec2f>()};
+	ie::SRFloat a_value_x{0};
+	ie::SRFloat a_value_y{0};
+	ie::SRVec2F a_value{a_value_x, a_value_y};
 	
 	ie::Window window{
 		ie::Interface::Make{

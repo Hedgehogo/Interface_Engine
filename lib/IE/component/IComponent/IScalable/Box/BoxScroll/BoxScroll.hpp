@@ -1,7 +1,8 @@
 #pragma once
 
+#include "IE/shared/SReader/SReader.hpp"
+#include "IE/shared/ISValue/SVec2/SVec2.hpp"
 #include "../BoxView/BoxView.hpp"
-#include "IE/modules/yaml-cpp/shared/ISVector2/SVector2/SVector2.hpp"
 
 namespace ie {
 	class BoxScroll : public BoxWithView {
@@ -11,17 +12,15 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make {
 			BoxPtr<IComponent::Make> object;
-			PSRVec2f normal_object_position;
+			MakeDyn<SRVec2F> normal_object_position;
 			sf::Vector2f min_size;
 			
-			Make(BoxPtr<IComponent::Make>&& object, PSRVec2f normal_object_position, sf::Vector2f min_size = {});
+			Make(BoxPtr<IComponent::Make>&& object, MakeDyn<SRVec2F> normal_object_position, sf::Vector2f min_size = {});
 			
 			BoxScroll* make(InitInfo init_info) override;
 		};
 		
 		BoxScroll(Make&& make, InitInfo init_info);
-		
-		BoxScroll(BoxPtr<IComponent>&& object, const PSRVec2f& normal_object_position, const sf::Vector2f& min_size = {});
 		
 		void init(InitInfo init_info) override;
 		
@@ -37,7 +36,7 @@ namespace ie {
 	
 	protected:
 		BoxPtr<IComponent> object_;
-		PSRVec2f normal_object_position_;
+		SReader<SRVec2F> normal_object_position_;
 	};
 	
 	/*old_yaml_decode_pointer

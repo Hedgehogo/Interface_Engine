@@ -4,6 +4,7 @@ namespace ie {
 	TextBockInitInfo::TextBockInitInfo(
 		sf::RenderWindow& window,
 		sf::RenderTarget& render_target,
+		DynBuffer& dyn_buffer,
 		DrawManager& draw_manager,
 		UpdateManager& update_manager,
 		InteractionManager& interaction_manager,
@@ -16,6 +17,7 @@ namespace ie {
 	) : InitInfo(
 			window,
 			render_target,
+			dyn_buffer,
 			draw_manager,
 			update_manager,
 			interaction_manager,

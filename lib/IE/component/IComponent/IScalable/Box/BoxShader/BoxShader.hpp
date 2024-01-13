@@ -1,11 +1,18 @@
 #pragma once
 
+#include "IE/shared/SReader/SReader.hpp"
+#include "IE/shared/ISValue/SVec2/SVec2.hpp"
 #include "../BoxRenderTexture/BoxRenderTexture.hpp"
-#include "IE/modules/yaml-cpp/shared/ISVector2/SVector2/SVector2.hpp"
 
 namespace ie {
 	class BoxShader : public BoxRenderTexture {
 	public:
+		template<typename T>
+		using SMakeMap = absl::flat_hash_map<std::string, MakeDyn<T> >;
+		
+		template<typename T>
+		using SReaderVec = std::vector<SReader<T> >;
+		
 		enum Transmission {
 			None = 0,
 			Texture = 1 << 0,
@@ -18,21 +25,21 @@ namespace ie {
 		struct Make : public BoxRenderTexture::Make {
 			sf::Shader* shader;
 			size_t transmission;
-			std::map<std::string, PISfloat> values_f = {};
-			std::map<std::string, PISint> values_i = {};
-			std::map<std::string, PISbool> values_b = {};
-			std::map<std::string, PISValue<sf::Color>> values_c = {};
-			std::map<std::string, PSRVec2f> values_v = {};
+			SMakeMap<ISFloat> values_f;
+			SMakeMap<ISInt> values_i;
+			SMakeMap<ISBool> values_b;
+			SMakeMap<ISValue<sf::Color> > values_c;
+			SMakeMap<SRVec2F> values_v;
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
 				sf::Shader* shader,
 				size_t transmission,
-				std::map<std::string, PISfloat> values_f = {},
-				std::map<std::string, PISint> values_i = {},
-				std::map<std::string, PISbool> values_b = {},
-				std::map<std::string, PISValue<sf::Color>> values_c = {},
-				std::map<std::string, PSRVec2f> values_v = {},
+				SMakeMap<ISFloat> values_f = {},
+				SMakeMap<ISInt> values_i = {},
+				SMakeMap<ISBool> values_b = {},
+				SMakeMap<ISValue<sf::Color> > values_c = {},
+				SMakeMap<SRVec2F> values_v = {},
 				bool optimize = true,
 				sf::Vector2f min_size = {}
 			);
@@ -42,27 +49,17 @@ namespace ie {
 		
 		BoxShader(Make&& make, InitInfo init_info);
 		
-		BoxShader(
-			BoxPtr<IScalable>&& object, sf::Shader* shader, size_t transmission,
-			std::map<std::string, PISfloat> values_f = {},
-			std::map<std::string, PISint> values_i = {},
-			std::map<std::string, PISbool> values_b = {},
-			std::map<std::string, PISValue<sf::Color>> values_c = {},
-			std::map<std::string, PSRVec2f> values_v = {},
-			bool optimize = true, sf::Vector2f min_size = {}
-		);
-		
 		~BoxShader();
 		
-		void set_uniform(std::string name, float var);
+		void set_uniform(std::string const& name, float var);
 		
-		void set_uniform(std::string name, int var);
+		void set_uniform(std::string const& name, int var);
 		
-		void set_uniform(std::string name, bool var);
+		void set_uniform(std::string const& name, bool var);
 		
-		void set_uniform(std::string name, sf::Color var);
+		void set_uniform(std::string const& name, sf::Color var);
 		
-		void set_uniform(std::string name, sf::Vector2f var);
+		void set_uniform(std::string const& name, sf::Vector2f var);
 		
 		void set_size(sf::Vector2f size) override;
 		
@@ -77,6 +74,11 @@ namespace ie {
 	protected:
 		sf::Shader* shader_;
 		size_t transmission_;
+		SReaderVec<ISFloat> values_f_;
+		SReaderVec<ISInt> values_i_;
+		SReaderVec<ISBool> values_b_;
+		SReaderVec<ISValue<sf::Color> > values_c_;
+		SReaderVec<SRVec2F> values_v_;
 		
 		sf::Clock clock_;
 	};

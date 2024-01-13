@@ -12,6 +12,7 @@ namespace ie {
 	Interface* Interface::Make::make(InitInfo init_info) {
 		return new Interface{std::move(*this), init_info};
 	}
+	
 	Interface::Interface(Make&& make, InitInfo init_info) :
 		window_(&init_info.window),
 		render_target_(&init_info.render_target),
@@ -21,6 +22,7 @@ namespace ie {
 			{
 				init_info.window,
 				init_info.render_target,
+				init_info.dyn_buffer,
 				this->draw_manager_,
 				this->update_manager_,
 				this->interaction_manager_,
@@ -48,7 +50,12 @@ namespace ie {
 	}
 	*/
 	
-	Interface::Interface(sf::RenderWindow& window, BoxPtr<IScalable>&& object, AnimationManager animation_manager, BoxPtr<InteractionStack>&& interaction_stack) :
+	Interface::Interface(
+		sf::RenderWindow& window,
+		BoxPtr<IScalable>&& object,
+		AnimationManager animation_manager,
+		BoxPtr<InteractionStack>&& interaction_stack
+	) :
 		Interface(std::move(object), animation_manager, std::move(interaction_stack)) {
 		init(window);
 	}
@@ -59,7 +66,13 @@ namespace ie {
 	}
 	*/
 	
-	Interface::Interface(sf::RenderWindow& window, BoxPtr<IScalable::Make>&& object, AnimationManager animation_manager, BoxPtr<InteractionStack>&& interaction_stack) :
+	Interface::Interface(
+		sf::RenderWindow& window,
+		DynBuffer& dyn_buffer,
+		BoxPtr<IScalable::Make>&& object,
+		AnimationManager animation_manager,
+		BoxPtr<InteractionStack>&& interaction_stack
+	) :
 		window_(&window),
 		render_target_(&window),
 		interaction_stack_(std::move(interaction_stack)),
@@ -68,6 +81,7 @@ namespace ie {
 			{
 				window,
 				window,
+				dyn_buffer,
 				this->draw_manager_,
 				this->update_manager_,
 				this->interaction_manager_,
@@ -80,31 +94,15 @@ namespace ie {
 	}
 	
 	bool Interface::is_in_window(sf::Vector2f position) {
-		return position.x > 0 && position.x < static_cast<float>(render_target_->getSize().x) && position.y > 0 && position.y < static_cast<float>(render_target_->getSize().y);
+		return
+			position.x > 0 && position.x < static_cast<float>(render_target_->getSize().x) &&
+			position.y > 0 && position.y < static_cast<float>(render_target_->getSize().y);
 	}
 	
 	void Interface::init(InitInfo init_info) {
-		if(!initialized_) {
-			this->window_ = &init_info.window;
-			this->render_target_ = &init_info.render_target;
-			init_info.draw_manager.add(*this);
-			init_info.update_manager.add(*this);
-			InitInfo new_init_info{init_info.window, init_info.render_target, this->draw_manager_, this->update_manager_, this->interaction_manager_, *this->interaction_stack_, this->panel_manager_};
-			object_->init(new_init_info);
-			initialized_ = true;
-		}
 	}
 	
 	void Interface::init(sf::RenderWindow& window) {
-		if(!initialized_) {
-			this->window_ = &window;
-			this->render_target_ = &window;
-			InitInfo init_info{window, window, draw_manager_, update_manager_, interaction_manager_, *interaction_stack_, panel_manager_};
-			object_->init(init_info);
-			sf::Vector2f size(max(static_cast<sf::Vector2f>(static_cast<sf::RenderWindow&>(window).getSize()), object_->get_min_size()));
-			resize(size, sf::Vector2f(0, 0));
-			initialized_ = true;
-		}
 	}
 	
 	sf::RenderTarget& Interface::get_render_target() {

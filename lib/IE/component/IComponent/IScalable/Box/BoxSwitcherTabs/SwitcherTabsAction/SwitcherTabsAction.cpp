@@ -2,7 +2,7 @@
 #include "../BoxSwitcherTabs.hpp"
 
 namespace ie {
-	SwitcherTabsAction::Make::Make(PISint value) : value(std::move(value)) {
+	SwitcherTabsAction::Make::Make(MakeDyn<ISRSize> value) : value(std::move(value)) {
 	}
 	
 	SwitcherTabsAction* SwitcherTabsAction::Make::make(BasicActionInitInfo<BoxSwitcherTabs&> init_info) {
@@ -10,11 +10,7 @@ namespace ie {
 	}
 	
 	SwitcherTabsAction::SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> init_info) :
-		value_(std::move(make.value)), switcher_tabs_(&init_info.additional) {
-	}
-	
-	SwitcherTabsAction::SwitcherTabsAction(PISint value) :
-		value_(std::move(value)), switcher_tabs_(nullptr) {
+		value_(make.value.make(init_info.dyn_buffer)), switcher_tabs_(&init_info.additional) {
 	}
 	
 	void SwitcherTabsAction::init(BasicActionInitInfo<BoxSwitcherTabs&> init_info) {
@@ -24,7 +20,7 @@ namespace ie {
 	void SwitcherTabsAction::start_pressed() {}
 	
 	void SwitcherTabsAction::stop_pressed() {
-		value_->set_value(switcher_tabs_->get_tab(sf::Vector2f(mouse_position_)));
+		value_.set(switcher_tabs_->get_tab(sf::Vector2f(mouse_position_)));
 	}
 	
 	void SwitcherTabsAction::while_pressed() {}

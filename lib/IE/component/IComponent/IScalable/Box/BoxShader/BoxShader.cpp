@@ -4,12 +4,12 @@ namespace ie {
 	size_t convert_transmission_def(const YAML::Node& node) {
 		size_t transmission{};
 		if(node) {
-			std::map<std::string, BoxShader::Transmission> transmission_map{
-				{"size",          BoxShader::Transmission::Size},
-				{"texture",       BoxShader::Transmission::Texture},
+			absl::flat_hash_map<std::string, BoxShader::Transmission> transmission_map{
+				{"size",           BoxShader::Transmission::Size},
+				{"texture",        BoxShader::Transmission::Texture},
 				{"aspect_ratio",   BoxShader::Transmission::AspectRatio},
 				{"mouse_position", BoxShader::Transmission::MousePosition},
-				{"time",          BoxShader::Transmission::Time},
+				{"time",           BoxShader::Transmission::Time},
 			};
 			
 			if(node.IsScalar()) {
@@ -30,92 +30,77 @@ namespace ie {
 		BoxPtr<IScalable::Make>&& object,
 		sf::Shader* shader,
 		size_t transmission,
-		std::map<std::string, PISfloat> values_f,
-		std::map<std::string, PISint> values_i,
-		std::map<std::string, PISbool> values_b,
-		std::map<std::string, PISValue<sf::Color>> values_c,
-		std::map<std::string, PSRVec2f> values_v,
+		SMakeMap<ISFloat> values_f,
+		SMakeMap<ISInt> values_i,
+		SMakeMap<ISBool> values_b,
+		SMakeMap<ISValue<sf::Color> > values_c,
+		SMakeMap<SRVec2F> values_v,
 		bool optimize,
 		sf::Vector2f min_size
 	) :
 		BoxRenderTexture::Make(std::move(object), optimize, min_size),
 		shader(shader),
 		transmission(transmission),
-		values_f(values_f),
-		values_i(values_i),
-		values_b(values_b),
-		values_c(values_c),
-		values_v(values_v) {
+		values_f(std::move(values_f)),
+		values_i(std::move(values_i)),
+		values_b(std::move(values_b)),
+		values_c(std::move(values_c)),
+		values_v(std::move(values_v)) {
 	}
 	
 	BoxShader* BoxShader::Make::make(InitInfo init_info) {
 		return new BoxShader{std::move(*this), init_info};
 	}
 	
+	template<typename T>
+	BoxShader::SReaderVec<T> make_reader_map(BoxShader::SMakeMap<T>&& map, DynBuffer& dyn_buffer, BoxShader& box_shader) {
+		BoxShader::SReaderVec<T> reader_map{};
+		reader_map.reserve(map.size());
+		for(auto& [key, make]: map) {
+			reader_map.emplace_back(
+				SReader<T>{
+					make.make(dyn_buffer),
+					[key = std::move(key), &box_shader](auto const& value) {
+						box_shader.set_uniform(key, value);
+					}
+				}
+			);
+		}
+		return reader_map;
+	}
+	
 	BoxShader::BoxShader(Make&& make, InitInfo init_info) :
 		BoxRenderTexture(std::move(make.object), make.optimize, make.min_size, init_info),
 		shader_(make.shader),
-		transmission_(make.transmission) {
-		auto add_setters = [&](auto& values) {
-			for(auto& pair: values) {
-				pair.second->add_setter([&](auto var) {
-					set_uniform(pair.first, var);
-				});
-			}
-		};
-		
-		add_setters(make.values_f);
-		add_setters(make.values_i);
-		add_setters(make.values_b);
-		add_setters(make.values_c);
-		add_setters(make.values_v);
-	}
-	
-	BoxShader::BoxShader(
-		BoxPtr<IScalable>&& object, sf::Shader* shader, size_t transmission,
-		std::map<std::string, PISfloat> values_f,
-		std::map<std::string, PISint> values_i,
-		std::map<std::string, PISbool> values_b,
-		std::map<std::string, PISValue<sf::Color>> values_c,
-		std::map<std::string, PSRVec2f> values_v,
-		bool optimize, sf::Vector2f min_size
-	) : BoxRenderTexture(std::move(object), optimize, min_size), shader_(shader), transmission_(transmission) {
-		auto add_setters = [&](auto& values) {
-			for(auto& pair: values) {
-				pair.second->add_setter([&](auto var) {
-					set_uniform(pair.first, var);
-				});
-			}
-		};
-		
-		add_setters(values_f);
-		add_setters(values_i);
-		add_setters(values_b);
-		add_setters(values_c);
-		add_setters(values_v);
+		transmission_(make.transmission),
+		values_f_(make_reader_map(std::move(make.values_f), init_info.dyn_buffer, *this)),
+		values_i_(make_reader_map(std::move(make.values_i), init_info.dyn_buffer, *this)),
+		values_b_(make_reader_map(std::move(make.values_b), init_info.dyn_buffer, *this)),
+		values_c_(make_reader_map(std::move(make.values_c), init_info.dyn_buffer, *this)),
+		values_v_(make_reader_map(std::move(make.values_v), init_info.dyn_buffer, *this)) {
 	}
 	
 	BoxShader::~BoxShader() {
 		delete shader_;
 	}
 	
-	void BoxShader::set_uniform(std::string name, float var) {
+	void BoxShader::set_uniform(std::string const& name, float var) {
 		shader_->setUniform(name, var);
 	}
 	
-	void BoxShader::set_uniform(std::string name, int var) {
+	void BoxShader::set_uniform(std::string const& name, int var) {
 		shader_->setUniform(name, var);
 	}
 	
-	void BoxShader::set_uniform(std::string name, bool var) {
+	void BoxShader::set_uniform(std::string const& name, bool var) {
 		shader_->setUniform(name, var);
 	}
 	
-	void BoxShader::set_uniform(std::string name, sf::Color var) {
+	void BoxShader::set_uniform(std::string const& name, sf::Color var) {
 		shader_->setUniform(name, sf::Glsl::Vec4{var});
 	}
 	
-	void BoxShader::set_uniform(std::string name, sf::Vector2f var) {
+	void BoxShader::set_uniform(std::string const& name, sf::Vector2f var) {
 		shader_->setUniform(name, var);
 	}
 	
@@ -160,6 +145,7 @@ namespace ie {
 		return new BoxShader{*this};
 	}
 	
+	/*old_yaml
 	template<typename T>
 	auto get_s_values_def(const YAML::Node& node) {
 		std::map<std::string, std::shared_ptr<T> > result;
@@ -170,6 +156,7 @@ namespace ie {
 		}
 		return result;
 	}
+	*/
 	
 	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<BoxShader>::decode_pointer(const YAML::Node& node, BoxShader*& box_with_shader) {

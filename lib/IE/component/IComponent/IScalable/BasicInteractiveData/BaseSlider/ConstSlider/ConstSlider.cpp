@@ -4,7 +4,7 @@ namespace ie {
 	ConstSlider::Make::Make(
 		BoxPtr<IUninteractive::Make>&& slider,
 		BoxPtr<IUninteractive::Make>&& background,
-		const PSRVec2f& value,
+		MakeDyn<SRVec2F> value,
 		float slider_scale,
 		Key key,
 		bool wheel_horizontal,
@@ -13,7 +13,7 @@ namespace ie {
 	) :
 		slider(std::move(slider)),
 		background(std::move(background)),
-		value(value),
+		value(std::move(value)),
 		slider_scale(slider_scale),
 		key(key),
 		wheel_horizontal(wheel_horizontal),
@@ -24,7 +24,7 @@ namespace ie {
 	ConstSlider::Make::Make(
 		BoxPtr<IUninteractive::Make>&& slider,
 		BoxPtr<IUninteractive::Make>&& background,
-		const PSRVec2f& value,
+		MakeDyn<SRVec2F> value,
 		sf::Vector2i division,
 		float slider_scale,
 		Key key,
@@ -32,7 +32,7 @@ namespace ie {
 	) :
 		slider(std::move(slider)),
 		background(std::move(background)),
-		value(value),
+		value(std::move(value)),
 		division(division),
 		slider_scale(slider_scale),
 		key(key),
@@ -56,54 +56,11 @@ namespace ie {
 			make_box_ptr<SliderInteraction::Make>(
 				make.key, make.division, make.wheel_horizontal, make.wheel_relativity, make.wheel_sensitivity
 			),
-			make.value,
+			std::move(make.value),
 			init_info
 		),
 		aspect_ratio_(get_aspect_ratio(max(slider_->get_normal_size(), {1, 1}))),
 		slider_scale_(make.slider_scale) {
-	}
-	
-	ConstSlider::ConstSlider(
-		BoxPtr<IUninteractive>&& slider,
-		BoxPtr<IUninteractive>&& background,
-		const PSRVec2f& value,
-		float slider_scale,
-		Key key,
-		bool wheel_horizontal,
-		SliderWheelAction::Relativity wheel_relativity,
-		sf::Vector2f wheel_sensitivity
-	) :
-		BaseSlider(
-			std::move(slider),
-			std::move(background),
-			make_box_ptr<SliderInteraction>(
-				key, wheel_horizontal, wheel_relativity, wheel_sensitivity
-			),
-			value
-		), slider_scale_(slider_scale) {
-		slider_size_ = slider->get_normal_size();
-		aspect_ratio_ = slider_size_.x / slider_size_.y;
-	}
-	
-	ConstSlider::ConstSlider(
-		BoxPtr<IUninteractive>&& slider,
-		BoxPtr<IUninteractive>&& background,
-		const PSRVec2f& value,
-		sf::Vector2i division,
-		float slider_scale,
-		Key key,
-		bool wheel_horizontal
-	) :
-		BaseSlider(
-			std::move(slider),
-			std::move(background),
-			make_box_ptr<SliderInteraction>(
-				key, division, wheel_horizontal
-			),
-			value
-		), slider_scale_(slider_scale) {
-		slider_size_ = slider->get_normal_size();
-		aspect_ratio_ = slider_size_.x / slider_size_.y;
 	}
 	
 	void ConstSlider::init(InitInfo init_info) {
@@ -120,11 +77,11 @@ namespace ie {
 		}
 		move_zone_size_ = size - slider_size_;
 		background_->resize(size, position);
-		resize_slider(value_->get_value());
+		resize_slider(value_.get().get());
 	}
 	
 	ConstSlider* ConstSlider::copy() {
-		return new ConstSlider{*this};
+		return nullptr;
 	}
 	
 	/*old_yaml_decode_pointer_impl

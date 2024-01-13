@@ -3,11 +3,13 @@
 #include <memory>
 
 namespace ie {
+	/*old_yaml
 	Animator::Animator(std::vector<IAnimatorUnit*> units, PSfloat speed) : units_(units), units_buff_(units) {
 		for(auto& unit: units) {
 			unit->set_speed(speed);
 		}
 	}
+	*/
 	
 	void replace(std::vector<IAnimatorUnit*>& main_vec, std::vector<IAnimatorUnit*>::iterator iter, std::vector<IAnimatorUnit*> vec) {
 		if(vec.empty()) {
@@ -45,7 +47,8 @@ namespace ie {
 		for(size_t i = 0; i < units_buff_.size(); ++i) {
 			copy_units[i] = units_buff_[i]->copy();
 		}
-		return new Animator{copy_units};
+		//return new Animator{copy_units};
+		return nullptr;
 	}
 	
 	Animator::~Animator() {

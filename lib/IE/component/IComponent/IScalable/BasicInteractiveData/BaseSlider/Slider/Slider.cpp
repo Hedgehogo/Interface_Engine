@@ -4,7 +4,7 @@ namespace ie {
 	Slider::Make::Make(
 		BoxPtr<IUninteractive::Make>&& slider,
 		BoxPtr<IUninteractive::Make>&& background,
-		const PSRVec2f& value,
+		MakeDyn<SRVec2F> value,
 		sf::Vector2f slider_scale,
 		Key key,
 		bool wheel_horizontal,
@@ -13,7 +13,7 @@ namespace ie {
 	) :
 		slider(std::move(slider)),
 		background(std::move(background)),
-		value(value),
+		value(std::move(value)),
 		slider_scale(slider_scale),
 		key(key),
 		wheel_horizontal(wheel_horizontal),
@@ -24,7 +24,7 @@ namespace ie {
 	Slider::Make::Make(
 		BoxPtr<IUninteractive::Make>&& slider,
 		BoxPtr<IUninteractive::Make>&& background,
-		const PSRVec2f& value,
+		MakeDyn<SRVec2F> value,
 		sf::Vector2i division,
 		sf::Vector2f slider_scale,
 		Key key,
@@ -32,7 +32,7 @@ namespace ie {
 	) :
 		slider(std::move(slider)),
 		background(std::move(background)),
-		value(value),
+		value(std::move(value)),
 		division(division),
 		slider_scale(slider_scale),
 		key(key),
@@ -52,48 +52,9 @@ namespace ie {
 			make_box_ptr<SliderInteraction::Make>(
 				make.key, make.division, make.wheel_horizontal, make.wheel_relativity, make.wheel_sensitivity
 			),
-			make.value,
+			std::move(make.value),
 			init_info
 		), scale_(make.slider_scale) {
-	}
-	
-	Slider::Slider(
-		BoxPtr<IUninteractive>&& slider,
-		BoxPtr<IUninteractive>&& background,
-		const PSRVec2f& value,
-		sf::Vector2f slider_scale,
-		Key key,
-		bool wheel_horizontal,
-		SliderWheelAction::Relativity wheel_relativity,
-		sf::Vector2f wheel_sensitivity
-	) :
-		BaseSlider(
-			std::move(slider),
-			std::move(background),
-			make_box_ptr<SliderInteraction>(
-				key, wheel_horizontal, wheel_relativity, wheel_sensitivity
-			),
-			value
-		), scale_(slider_scale) {
-	}
-	
-	Slider::Slider(
-		BoxPtr<IUninteractive>&& slider,
-		BoxPtr<IUninteractive>&& background,
-		const PSRVec2f& value,
-		sf::Vector2i division,
-		sf::Vector2f slider_scale,
-		Key key,
-		bool wheel_horizontal
-	) :
-		BaseSlider(
-			std::move(slider),
-			std::move(background),
-			make_box_ptr<SliderInteraction>(
-				key, division, wheel_horizontal
-			),
-			value
-		), scale_(slider_scale) {
 	}
 	
 	void Slider::init(InitInfo init_info) {
@@ -110,7 +71,7 @@ namespace ie {
 		slider_size_ = {size.x * scale_.x, size.y * scale_.y};
 		move_zone_size_ = size - slider_size_;
 		background_->resize(size, position);
-		resize_slider(value_->get_value());
+		resize_slider(value_.get().get());
 	}
 	
 	sf::Vector2f Slider::get_min_size() const {
@@ -128,7 +89,7 @@ namespace ie {
 	}
 	
 	Slider* Slider::copy() {
-		return new Slider{*this};
+		return nullptr;
 	}
 	
 	/*old_yaml_decode_pointer_impl

@@ -1,15 +1,16 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/Box/BoxTabs/BoxTabs.hpp>
 #include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/shared/ISValue/SRanged/SRanged.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_image_equal/image_equal.hpp"
 
 TEST(IComponent, BoxTabs) {
 	InitInfoData data{{100, 100}};
 	
-	auto value{std::make_shared<ie::Sint>(0)};
+	ie::SRSize value{0};
 	ie::BoxTabs box_tabs{
-		{
+		ie::BoxTabs::Make{
 			ie::make_vector(
 				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 				ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red)
@@ -54,7 +55,7 @@ TEST(IComponent, BoxTabs) {
 	data.draw_manager.draw();
 	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxTabs-0.png"));
 	
-	value->set_value(1);
+	value.set(1);
 	data.draw_manager.draw();
 	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxTabs-1.png"));
 }

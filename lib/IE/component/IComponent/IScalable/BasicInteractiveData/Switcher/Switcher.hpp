@@ -1,5 +1,7 @@
 #pragma once
 
+#include "IE/shared/SReader/SReader.hpp"
+#include "IE/shared/ISValue/ISValue.hpp"
 #include "../BasicInteractiveData.hpp"
 #include "IE/component/IComponent/IComponentLayout/IComponentLayout.hpp"
 #include "../../IUninteractive/IUninteractive.hpp"
@@ -13,10 +15,10 @@ namespace ie {
 		struct Make : public virtual IScalableLayout::Make {
 			BoxPtr<IScalable::Make> inactive_background;
 			BoxPtr<IScalable::Make> active_background;
-			PSbool value;
+			MakeDyn<ISBool> value;
 			Key key = Key::MouseLeft;
 			
-			Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, PSbool value, Key key = Key::MouseLeft);
+			Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, MakeDyn<ISBool> value, Key key = Key::MouseLeft);
 			
 			Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, Key key = Key::MouseLeft, bool start_active = false);
 			
@@ -24,10 +26,6 @@ namespace ie {
 		};
 		
 		Switcher(Make&& make, InitInfo init_info);
-		
-		Switcher(BoxPtr<IScalable>&& inactive_background, BoxPtr<IScalable>&& active_background, PSbool value, Key key = Key::MouseLeft);
-		
-		Switcher(BoxPtr<IScalable>&& inactive_background, BoxPtr<IScalable>&& active_background, Key key = Key::MouseLeft, bool start_active = false);
 		
 		void init(InitInfo init_info) override;
 		
@@ -64,7 +62,7 @@ namespace ie {
 		DrawManager active_draw_manager_;
 		BoxPtr<IScalable> inactive_background_;
 		BoxPtr<IScalable> active_background_;
-		PSbool active_;
+		ISBool& active_;
 	};
 	
 	/*old_yaml_decode_pointer

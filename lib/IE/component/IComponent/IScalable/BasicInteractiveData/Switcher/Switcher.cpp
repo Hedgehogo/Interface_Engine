@@ -1,14 +1,16 @@
 #include "Switcher.hpp"
+#include "IE/shared/ISValue/SValue/SValue.hpp"
 #include "IE/interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 #include "SwitherAction/SwitcherAction.hpp"
 
 namespace ie {
-	Switcher::Make::Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, PSbool value, Key key) :
-		inactive_background(std::move(inactive_background)), active_background(std::move(active_background)), value(value), key(key) {
+	Switcher::Make::Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, MakeDyn<ISBool> value, Key key) :
+		inactive_background(std::move(inactive_background)), active_background(std::move(active_background)), value(std::move(value)), key(key) {
 	}
 	
 	Switcher::Make::Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, Key key, bool start_active) :
-		inactive_background(std::move(inactive_background)), active_background(std::move(active_background)), value(std::make_shared<Sbool>(start_active)), key(key) {
+		inactive_background(std::move(inactive_background)), active_background(std::move(active_background)),
+		value(make_box_ptr<SBool::Make>(start_active)), key(key) {
 	}
 	
 	Switcher* Switcher::Make::make(InitInfo init_info) {
@@ -16,21 +18,14 @@ namespace ie {
 	}
 	
 	Switcher::Switcher(Make&& make, InitInfo init_info) :
-		interactive_(make_box_ptr<OneKeyInteraction::Make>(make_box_ptr<SwitcherAction::Make>(make.value), make.key), init_info, {}),
+		interactive_(make_box_ptr<OneKeyInteraction::Make>(
+			make_box_ptr<SwitcherAction::Make>(make.value.make(init_info.dyn_buffer)), make.key
+		), init_info, {}),
 		inactive_background_(make.inactive_background->make(init_info.copy(inactive_draw_manager_))),
 		active_background_(make.active_background->make(init_info.copy(active_draw_manager_))),
-		active_(make.value) {
+		active_(make.value.make(init_info.dyn_buffer)) {
 		init_info.draw_manager.add(*this);
 		init_info.update_manager.add(*this);
-	}
-	
-	Switcher::Switcher(BoxPtr<IScalable>&& inactive_background, BoxPtr<IScalable>&& active_background, PSbool value, Key key) :
-		interactive_(make_box_ptr<OneKeyInteraction>(make_box_ptr<SwitcherAction>(value), key)),
-		inactive_background_(std::move(inactive_background)), active_background_(std::move(active_background)), active_(value) {
-	}
-	
-	Switcher::Switcher(BoxPtr<IScalable>&& inactive_background, BoxPtr<IScalable>&& active_background, Key key, bool start_active) :
-		Switcher(std::move(inactive_background), std::move(active_background), std::make_shared<Sbool>(start_active), key) {
 	}
 	
 	void Switcher::init(InitInfo init_info) {
@@ -68,7 +63,7 @@ namespace ie {
 	}
 	
 	void Switcher::draw() {
-		if(active_->get_value()) {
+		if(active_.get()) {
 			active_draw_manager_.draw();
 		} else {
 			inactive_draw_manager_.draw();
@@ -87,7 +82,7 @@ namespace ie {
 	
 	bool Switcher::update_interactions(sf::Vector2f mouse_position) {
 		bool background_update;
-		if(active_->get_value()) {
+		if(active_.get()) {
 			background_update = active_background_->update_interactions(mouse_position);
 		} else {
 			background_update = inactive_background_->update_interactions(mouse_position);
@@ -97,11 +92,11 @@ namespace ie {
 	}
 	
 	Switcher* Switcher::copy() {
-		return new Switcher{*this};
+		return nullptr;
 	}
 	
 	void Switcher::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
-		if(active_->get_value()) {
+		if(active_.get()) {
 			active_background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		} else {
 			inactive_background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);

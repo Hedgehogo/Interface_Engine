@@ -10,6 +10,7 @@ ie::InitInfo InitInfoData::make_init_info() {
 	return ie::InitInfo{
 		window,
 		render_target,
+		dyn_buffer,
 		draw_manager,
 		update_manager,
 		interaction_manager,

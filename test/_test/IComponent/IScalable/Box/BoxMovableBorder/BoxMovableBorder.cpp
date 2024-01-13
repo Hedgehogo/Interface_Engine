@@ -1,13 +1,14 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/Box/BoxMovableBorder/BoxMovableBorder.hpp>
 #include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/shared/ISValue/SRanged/SRanged.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_image_equal/image_equal.hpp"
 
 TEST(IComponent, BoxMovableBorder) {
 	InitInfoData data{{100, 100}};
 	
-	auto value = std::make_shared<ie::SCoefficient>(0.f);
+	ie::SRFloat value{0.f};
 	ie::BoxMovableBorder box_movable_border{
 		{
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
@@ -54,7 +55,7 @@ TEST(IComponent, BoxMovableBorder) {
 	data.draw_manager.draw();
 	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxMovableBorder-0.0.png"));
 	
-	value->set_value(0.7f);
+	value.set(0.7f);
 	data.draw_manager.draw();
 	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxMovableBorder-0.7.png"));
 }
