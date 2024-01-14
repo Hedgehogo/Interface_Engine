@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	enum class Side {
@@ -9,11 +9,9 @@ namespace ie {
 		Right,
 		Left
 	};
-	
-	/*old_yaml_decode
-	template<>
-	struct Decode<Side> {
-		static bool decode(const YAML::Node& node, Side& side);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Side> {
+	static orl::Option<ie::Side> decode(ieml::Node const& node);
+};

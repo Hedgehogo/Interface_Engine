@@ -14,11 +14,9 @@ namespace ie {
 	Location get_horizontal_location(Location2 location2);
 	
 	Location2 make_location2(Location vertical, Location horizontal);
-	
-	/*old_yaml_decode
-	template<>
-	struct Decode<Location2> {
-		static bool decode(const YAML::Node& node, Location2& location2);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Location2> {
+	static orl::Option<ie::Location2> decode(ieml::Node const& node);
+};

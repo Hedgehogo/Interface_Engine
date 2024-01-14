@@ -50,16 +50,14 @@ namespace ie {
 	SliderWheelAction* SliderWheelAction::copy() {
 		return new SliderWheelAction{*this};
 	}
-	
-	/*old_yaml_decode_impl
-	bool Decode<SliderWheelAction::Relativity>::decode(const YAML::Node& node, SliderWheelAction::Relativity& relativity) {
-		if(convert_bool(node, "relation-area", "relation-slider")) {
-			relativity = SliderWheelAction::Relativity::RelationArea;
-		} else {
-			relativity = SliderWheelAction::Relativity::RelationSlider;
-		}
-		return true;
+}
 
+orl::Option<ie::SliderWheelAction::Relativity> ieml::Decode<char, ie::SliderWheelAction::Relativity>::decode(ieml::Node const& node) {
+	auto& str{node.get_raw().except().str};
+	if(str == "relation-area") {
+		return ie::SliderWheelAction::Relativity::RelationArea;
+	} else if(str == "relation-slider") {
+		return ie::SliderWheelAction::Relativity::RelationSlider;
 	}
-	*/
+	return {};
 }

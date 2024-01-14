@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	enum class Key : int {
@@ -156,11 +156,9 @@ namespace ie {
 	std::string to_string(Key key);
 	
 	bool is_key_pressed(Key key);
-	
-	/*old_yaml_decode
-	template<>
-	struct Decode<Key> {
-		static bool decode(const YAML::Node& node, Key& key);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Key> {
+	static orl::Option<ie::Key> decode(ieml::Node const& node);
+};

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	enum class Location {
@@ -8,11 +8,9 @@ namespace ie {
 		Center,
 		End
 	};
-	
-	/*old_yaml_decode
-	template<>
-	struct Decode<Location> {
-		static bool decode(const YAML::Node& node, Location& location);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Location> {
+	static orl::Option<ie::Location> decode(ieml::Node const& node);
+};

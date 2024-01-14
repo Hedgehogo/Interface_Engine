@@ -72,34 +72,35 @@ namespace ie {
 		}
 		return Location2::Center;
 	}
-	
-	/*old_yaml_decode_impl
-	bool Decode<Location2>::decode(const YAML::Node& node, Location2& location2) {
-		std::string str{node.as<std::string>()};
-		
-		if(str == "up-left") {
-			location2 = Location2::UpLeft;
-		} else if(str == "up") {
-			location2 = Location2::Up;
-		} else if(str == "up-right") {
-			location2 = Location2::UpRight;
-		} else if(str == "left") {
-			location2 = Location2::Left;
-		} else if(str == "center") {
-			location2 = Location2::Center;
-		} else if(str == "right") {
-			location2 = Location2::Right;
-		} else if(str == "down-left") {
-			location2 = Location2::DownLeft;
-		} else if(str == "down") {
-			location2 = Location2::Down;
-		} else if(str == "down-right") {
-			location2 = Location2::DownRight;
-		} else {
-			location2 = make_location2(node["vertical"].as<Location>(), node["horizontal"].as<Location>());
-		}
-		return true;
+}
 
+orl::Option<ie::Location2> ieml::Decode<char, ie::Location2>::decode(ieml::Node const& node) {
+	if(auto map_view{node.get_map_view()}) {
+		auto& map{map_view.ok()};
+		return ie::make_location2(
+			map.at("vertical").except().as<ie::Location>().except(),
+			map.at("horizontal").except().as<ie::Location>().except()
+		);
 	}
-	*/
+	auto& str{node.get_raw().except().str};
+	if(str == "up-left") {
+		return ie::Location2::UpLeft;
+	} else if(str == "up") {
+		return ie::Location2::Up;
+	} else if(str == "up-right") {
+		return ie::Location2::UpRight;
+	} else if(str == "left") {
+		return ie::Location2::Left;
+	} else if(str == "center") {
+		return ie::Location2::Center;
+	} else if(str == "right") {
+		return ie::Location2::Right;
+	} else if(str == "down-left") {
+		return ie::Location2::DownLeft;
+	} else if(str == "down") {
+		return ie::Location2::Down;
+	} else if(str == "down-right") {
+		return ie::Location2::DownRight;
+	}
+	return {};
 }

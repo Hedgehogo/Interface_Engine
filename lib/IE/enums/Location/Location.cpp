@@ -1,20 +1,13 @@
 #include "Location.hpp"
 
-namespace ie {
-	/*old_yaml_decode_impl
-	bool Decode<Location>::decode(const YAML::Node& node, Location& location) {
-		std::string str{node.as<std::string>()};
-		if(str == "origin") {
-			location = Location::Origin;
-		} else if(str == "center") {
-			location = Location::Center;
-		} else if(str == "end") {
-			location = Location::End;
-		} else {
-			throw YAML::BadConversion{node.Mark()};
-		}
-		return true;
-
+orl::Option<ie::Location> ieml::Decode<char, ie::Location>::decode(ieml::Node const& node) {
+	auto& str{node.get_raw().except().str};
+	if(str == "origin") {
+		return ie::Location::Origin;
+	} else if(str == "center") {
+		return ie::Location::Center;
+	} else if(str == "end") {
+		return ie::Location::End;
 	}
-	*/
+	return {};
 }

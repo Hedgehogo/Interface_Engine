@@ -310,244 +310,6 @@ namespace ie {
 		return "unknown";
 	}
 	
-	/*old_yaml_decode_impl
-	bool Decode<Key>::decode(const YAML::Node& node, Key& key) {
-		std::string str = node.as<std::string>();
-		if(str == "a")
-			key = Key::A;
-		else if(str == "b")
-			key = Key::B;
-		else if(str == "c")
-			key = Key::C;
-		else if(str == "d")
-			key = Key::D;
-		else if(str == "e")
-			key = Key::E;
-		else if(str == "f")
-			key = Key::F;
-		else if(str == "g")
-			key = Key::G;
-		else if(str == "h")
-			key = Key::H;
-		else if(str == "i")
-			key = Key::I;
-		else if(str == "j")
-			key = Key::J;
-		else if(str == "k")
-			key = Key::K;
-		else if(str == "l")
-			key = Key::L;
-		else if(str == "m")
-			key = Key::M;
-		else if(str == "n")
-			key = Key::N;
-		else if(str == "o")
-			key = Key::O;
-		else if(str == "p")
-			key = Key::P;
-		else if(str == "q")
-			key = Key::Q;
-		else if(str == "r")
-			key = Key::R;
-		else if(str == "s")
-			key = Key::S;
-		else if(str == "t")
-			key = Key::T;
-		else if(str == "u")
-			key = Key::U;
-		else if(str == "v")
-			key = Key::V;
-		else if(str == "w")
-			key = Key::W;
-		else if(str == "x")
-			key = Key::X;
-		else if(str == "y")
-			key = Key::Y;
-		else if(str == "z")
-			key = Key::Z;
-		else if(str == "num0")
-			key = Key::Num0;
-		else if(str == "num1")
-			key = Key::Num1;
-		else if(str == "num2")
-			key = Key::Num2;
-		else if(str == "num3")
-			key = Key::Num3;
-		else if(str == "num4")
-			key = Key::Num4;
-		else if(str == "num5")
-			key = Key::Num5;
-		else if(str == "num6")
-			key = Key::Num6;
-		else if(str == "num7")
-			key = Key::Num7;
-		else if(str == "num8")
-			key = Key::Num8;
-		else if(str == "num9")
-			key = Key::Num9;
-		else if(str == "escape")
-			key = Key::Escape;
-		else if(str == "l-control")
-			key = Key::LControl;
-		else if(str == "l-shift")
-			key = Key::LShift;
-		else if(str == "l-alt")
-			key = Key::LAlt;
-		else if(str == "l-system")
-			key = Key::LSystem;
-		else if(str == "r-control")
-			key = Key::RControl;
-		else if(str == "r-shift")
-			key = Key::RShift;
-		else if(str == "r-alt")
-			key = Key::RAlt;
-		else if(str == "r-system")
-			key = Key::RSystem;
-		else if(str == "menu")
-			key = Key::Menu;
-		else if(str == "l-bracket")
-			key = Key::LBracket;
-		else if(str == "r-bracket")
-			key = Key::RBracket;
-		else if(str == "semicolon")
-			key = Key::Semicolon;
-		else if(str == "comma")
-			key = Key::Comma;
-		else if(str == "period")
-			key = Key::Period;
-		else if(str == "quote")
-			key = Key::Quote;
-		else if(str == "slash")
-			key = Key::Slash;
-		else if(str == "backslash")
-			key = Key::Backslash;
-		else if(str == "tilde")
-			key = Key::Tilde;
-		else if(str == "equal")
-			key = Key::Equal;
-		else if(str == "hyphen")
-			key = Key::Hyphen;
-		else if(str == "space")
-			key = Key::Space;
-		else if(str == "enter")
-			key = Key::Enter;
-		else if(str == "backspace")
-			key = Key::Backspace;
-		else if(str == "tab")
-			key = Key::Tab;
-		else if(str == "page-up")
-			key = Key::PageUp;
-		else if(str == "page-down")
-			key = Key::PageDown;
-		else if(str == "end")
-			key = Key::End;
-		else if(str == "home")
-			key = Key::Home;
-		else if(str == "insert")
-			key = Key::Insert;
-		else if(str == "del")
-			key = Key::Del;
-		else if(str == "add")
-			key = Key::Add;
-		else if(str == "subtract")
-			key = Key::Subtract;
-		else if(str == "multiply")
-			key = Key::Multiply;
-		else if(str == "divide")
-			key = Key::Divide;
-		else if(str == "left")
-			key = Key::Left;
-		else if(str == "right")
-			key = Key::Right;
-		else if(str == "up")
-			key = Key::Up;
-		else if(str == "down")
-			key = Key::Down;
-		else if(str == "numpad0")
-			key = Key::Numpad0;
-		else if(str == "numpad1")
-			key = Key::Numpad1;
-		else if(str == "numpad2")
-			key = Key::Numpad2;
-		else if(str == "numpad3")
-			key = Key::Numpad3;
-		else if(str == "numpad4")
-			key = Key::Numpad4;
-		else if(str == "numpad5")
-			key = Key::Numpad5;
-		else if(str == "numpad6")
-			key = Key::Numpad6;
-		else if(str == "numpad7")
-			key = Key::Numpad7;
-		else if(str == "numpad8")
-			key = Key::Numpad8;
-		else if(str == "numpad9")
-			key = Key::Numpad9;
-		else if(str == "f1")
-			key = Key::F1;
-		else if(str == "f2")
-			key = Key::F2;
-		else if(str == "f3")
-			key = Key::F3;
-		else if(str == "f4")
-			key = Key::F4;
-		else if(str == "f5")
-			key = Key::F5;
-		else if(str == "f6")
-			key = Key::F6;
-		else if(str == "f7")
-			key = Key::F7;
-		else if(str == "f8")
-			key = Key::F8;
-		else if(str == "f9")
-			key = Key::F9;
-		else if(str == "f10")
-			key = Key::F10;
-		else if(str == "f11")
-			key = Key::F11;
-		else if(str == "f12")
-			key = Key::F12;
-		else if(str == "f13")
-			key = Key::F13;
-		else if(str == "f14")
-			key = Key::F14;
-		else if(str == "f15")
-			key = Key::F15;
-		else if(str == "pause")
-			key = Key::Pause;
-		else if(str == "dash")
-			key = Key::Dash;
-		else if(str == "back-space")
-			key = Key::BackSpace;
-		else if(str == "back-slash")
-			key = Key::BackSlash;
-		else if(str == "semi-colon")
-			key = Key::SemiColon;
-		else if(str == "mouse-left")
-			key = Key::MouseLeft;
-		else if(str == "mouse-right")
-			key = Key::MouseRight;
-		else if(str == "mouse-middle")
-			key = Key::MouseMiddle;
-		else if(str == "mouse-x-button1")
-			key = Key::MouseXButton1;
-		else if(str == "mouse-x-button2")
-			key = Key::MouseXButton2;
-		else if(str == "mouse-wheel-up")
-			key = Key::MouseWheelUp;
-		else if(str == "mouse-wheel-down")
-			key = Key::MouseWheelDown;
-		else if(str == "mouse-wheel-left")
-			key = Key::MouseWheelLeft;
-		else if(str == "mouse-wheel-right")
-			key = Key::MouseWheelRight;
-		else
-			key = Key::Unknown;
-		return true;
-
-	}
-	*/
-	
 	std::string to_string(Key key) {
 		return KeyHandler::to_string(key);
 	}
@@ -555,4 +317,239 @@ namespace ie {
 	bool is_key_pressed(Key key) {
 		return KeyHandler::is_key_pressed(key);
 	}
+}
+
+orl::Option<ie::Key> ieml::Decode<char, ie::Key>::decode(ieml::Node const& node) {
+	auto& str{node.get_raw().except().str};
+	if(str == "a")
+		return ie::Key::A;
+	else if(str == "b")
+		return ie::Key::B;
+	else if(str == "c")
+		return ie::Key::C;
+	else if(str == "d")
+		return ie::Key::D;
+	else if(str == "e")
+		return ie::Key::E;
+	else if(str == "f")
+		return ie::Key::F;
+	else if(str == "g")
+		return ie::Key::G;
+	else if(str == "h")
+		return ie::Key::H;
+	else if(str == "i")
+		return ie::Key::I;
+	else if(str == "j")
+		return ie::Key::J;
+	else if(str == "k")
+		return ie::Key::K;
+	else if(str == "l")
+		return ie::Key::L;
+	else if(str == "m")
+		return ie::Key::M;
+	else if(str == "n")
+		return ie::Key::N;
+	else if(str == "o")
+		return ie::Key::O;
+	else if(str == "p")
+		return ie::Key::P;
+	else if(str == "q")
+		return ie::Key::Q;
+	else if(str == "r")
+		return ie::Key::R;
+	else if(str == "s")
+		return ie::Key::S;
+	else if(str == "t")
+		return ie::Key::T;
+	else if(str == "u")
+		return ie::Key::U;
+	else if(str == "v")
+		return ie::Key::V;
+	else if(str == "w")
+		return ie::Key::W;
+	else if(str == "x")
+		return ie::Key::X;
+	else if(str == "y")
+		return ie::Key::Y;
+	else if(str == "z")
+		return ie::Key::Z;
+	else if(str == "num0")
+		return ie::Key::Num0;
+	else if(str == "num1")
+		return ie::Key::Num1;
+	else if(str == "num2")
+		return ie::Key::Num2;
+	else if(str == "num3")
+		return ie::Key::Num3;
+	else if(str == "num4")
+		return ie::Key::Num4;
+	else if(str == "num5")
+		return ie::Key::Num5;
+	else if(str == "num6")
+		return ie::Key::Num6;
+	else if(str == "num7")
+		return ie::Key::Num7;
+	else if(str == "num8")
+		return ie::Key::Num8;
+	else if(str == "num9")
+		return ie::Key::Num9;
+	else if(str == "escape")
+		return ie::Key::Escape;
+	else if(str == "l-control")
+		return ie::Key::LControl;
+	else if(str == "l-shift")
+		return ie::Key::LShift;
+	else if(str == "l-alt")
+		return ie::Key::LAlt;
+	else if(str == "l-system")
+		return ie::Key::LSystem;
+	else if(str == "r-control")
+		return ie::Key::RControl;
+	else if(str == "r-shift")
+		return ie::Key::RShift;
+	else if(str == "r-alt")
+		return ie::Key::RAlt;
+	else if(str == "r-system")
+		return ie::Key::RSystem;
+	else if(str == "menu")
+		return ie::Key::Menu;
+	else if(str == "l-bracket")
+		return ie::Key::LBracket;
+	else if(str == "r-bracket")
+		return ie::Key::RBracket;
+	else if(str == "semicolon")
+		return ie::Key::Semicolon;
+	else if(str == "comma")
+		return ie::Key::Comma;
+	else if(str == "period")
+		return ie::Key::Period;
+	else if(str == "quote")
+		return ie::Key::Quote;
+	else if(str == "slash")
+		return ie::Key::Slash;
+	else if(str == "backslash")
+		return ie::Key::Backslash;
+	else if(str == "tilde")
+		return ie::Key::Tilde;
+	else if(str == "equal")
+		return ie::Key::Equal;
+	else if(str == "hyphen")
+		return ie::Key::Hyphen;
+	else if(str == "space")
+		return ie::Key::Space;
+	else if(str == "enter")
+		return ie::Key::Enter;
+	else if(str == "backspace")
+		return ie::Key::Backspace;
+	else if(str == "tab")
+		return ie::Key::Tab;
+	else if(str == "page-up")
+		return ie::Key::PageUp;
+	else if(str == "page-down")
+		return ie::Key::PageDown;
+	else if(str == "end")
+		return ie::Key::End;
+	else if(str == "home")
+		return ie::Key::Home;
+	else if(str == "insert")
+		return ie::Key::Insert;
+	else if(str == "del")
+		return ie::Key::Del;
+	else if(str == "add")
+		return ie::Key::Add;
+	else if(str == "subtract")
+		return ie::Key::Subtract;
+	else if(str == "multiply")
+		return ie::Key::Multiply;
+	else if(str == "divide")
+		return ie::Key::Divide;
+	else if(str == "left")
+		return ie::Key::Left;
+	else if(str == "right")
+		return ie::Key::Right;
+	else if(str == "up")
+		return ie::Key::Up;
+	else if(str == "down")
+		return ie::Key::Down;
+	else if(str == "numpad0")
+		return ie::Key::Numpad0;
+	else if(str == "numpad1")
+		return ie::Key::Numpad1;
+	else if(str == "numpad2")
+		return ie::Key::Numpad2;
+	else if(str == "numpad3")
+		return ie::Key::Numpad3;
+	else if(str == "numpad4")
+		return ie::Key::Numpad4;
+	else if(str == "numpad5")
+		return ie::Key::Numpad5;
+	else if(str == "numpad6")
+		return ie::Key::Numpad6;
+	else if(str == "numpad7")
+		return ie::Key::Numpad7;
+	else if(str == "numpad8")
+		return ie::Key::Numpad8;
+	else if(str == "numpad9")
+		return ie::Key::Numpad9;
+	else if(str == "f1")
+		return ie::Key::F1;
+	else if(str == "f2")
+		return ie::Key::F2;
+	else if(str == "f3")
+		return ie::Key::F3;
+	else if(str == "f4")
+		return ie::Key::F4;
+	else if(str == "f5")
+		return ie::Key::F5;
+	else if(str == "f6")
+		return ie::Key::F6;
+	else if(str == "f7")
+		return ie::Key::F7;
+	else if(str == "f8")
+		return ie::Key::F8;
+	else if(str == "f9")
+		return ie::Key::F9;
+	else if(str == "f10")
+		return ie::Key::F10;
+	else if(str == "f11")
+		return ie::Key::F11;
+	else if(str == "f12")
+		return ie::Key::F12;
+	else if(str == "f13")
+		return ie::Key::F13;
+	else if(str == "f14")
+		return ie::Key::F14;
+	else if(str == "f15")
+		return ie::Key::F15;
+	else if(str == "pause")
+		return ie::Key::Pause;
+	else if(str == "dash")
+		return ie::Key::Dash;
+	else if(str == "back-space")
+		return ie::Key::BackSpace;
+	else if(str == "back-slash")
+		return ie::Key::BackSlash;
+	else if(str == "semi-colon")
+		return ie::Key::SemiColon;
+	else if(str == "mouse-left")
+		return ie::Key::MouseLeft;
+	else if(str == "mouse-right")
+		return ie::Key::MouseRight;
+	else if(str == "mouse-middle")
+		return ie::Key::MouseMiddle;
+	else if(str == "mouse-x-button1")
+		return ie::Key::MouseXButton1;
+	else if(str == "mouse-x-button2")
+		return ie::Key::MouseXButton2;
+	else if(str == "mouse-wheel-up")
+		return ie::Key::MouseWheelUp;
+	else if(str == "mouse-wheel-down")
+		return ie::Key::MouseWheelDown;
+	else if(str == "mouse-wheel-left")
+		return ie::Key::MouseWheelLeft;
+	else if(str == "mouse-wheel-right")
+		return ie::Key::MouseWheelRight;
+	else if(str == "unknown")
+		return ie::Key::Unknown;
+	return {};
 }

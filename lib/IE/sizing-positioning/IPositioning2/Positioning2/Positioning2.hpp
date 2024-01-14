@@ -1,8 +1,11 @@
 #pragma once
 
+#include "box-ptr/BoxPtr.hpp"
 #include "../IPositioning2.hpp"
 
 namespace ie {
+	using namespace bp;
+	
 	class Positioning2 : public virtual IPositioning2 {
 	public:
 		struct Make : public virtual IPositioning2::Make {
