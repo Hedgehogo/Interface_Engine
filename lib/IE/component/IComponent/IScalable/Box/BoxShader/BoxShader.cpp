@@ -160,9 +160,9 @@ ieml::Decode<char, ie::BoxShader::LoadTransmission>::decode(const ieml::Node& no
 			return {{ie::BoxShader::Transmission::Size}};
 		} else if(str == "texture") {
 			return {{ie::BoxShader::Transmission::Texture}};
-		} else if(str == "aspect_ratio") {
+		} else if(str == "aspect-ratio") {
 			return {{ie::BoxShader::Transmission::AspectRatio}};
-		} else if(str == "mouse_position") {
+		} else if(str == "mouse-position") {
 			return {{ie::BoxShader::Transmission::MousePosition}};
 		} else if(str == "time") {
 			return {{ie::BoxShader::Transmission::Time}};

@@ -160,27 +160,27 @@ namespace ie {
 		else if(key == Key::Escape)
 			return "escape";
 		else if(key == Key::LControl)
-			return "lControl";
+			return "l-control";
 		else if(key == Key::LShift)
-			return "lShift";
+			return "l-shift";
 		else if(key == Key::LAlt)
-			return "lAlt";
+			return "l-alt";
 		else if(key == Key::LSystem)
-			return "lSystem";
+			return "l-system";
 		else if(key == Key::RControl)
-			return "rControl";
+			return "r-control";
 		else if(key == Key::RShift)
-			return "rShift";
+			return "r-shift";
 		else if(key == Key::RAlt)
-			return "rAlt";
+			return "r-alt";
 		else if(key == Key::RSystem)
-			return "rSystem";
+			return "r-system";
 		else if(key == Key::Menu)
 			return "menu";
 		else if(key == Key::LBracket)
-			return "lBracket";
+			return "l-bracket";
 		else if(key == Key::RBracket)
-			return "rBracket";
+			return "r-bracket";
 		else if(key == Key::Semicolon)
 			return "semicolon";
 		else if(key == Key::Comma)
@@ -208,9 +208,9 @@ namespace ie {
 		else if(key == Key::Tab)
 			return "tab";
 		else if(key == Key::PageUp)
-			return "page_up";
+			return "page-up";
 		else if(key == Key::PageDown)
-			return "page_down";
+			return "page-down";
 		else if(key == Key::End)
 			return "end";
 		else if(key == Key::Home)
@@ -289,24 +289,24 @@ namespace ie {
 			return "pause";
 		
 		else if(key == Key::MouseLeft)
-			return "mouse_left";
+			return "mouse-left";
 		else if(key == Key::MouseRight)
-			return "mouse_right";
+			return "mouse-right";
 		else if(key == Key::MouseMiddle)
-			return "mouse_middle";
+			return "mouse-middle";
 		else if(key == Key::MouseXButton1)
-			return "mouse_x_button1";
+			return "mouse-x-button1";
 		else if(key == Key::MouseXButton2)
-			return "mouse_x_button2";
+			return "mouse-x-button2";
 		
 		else if(key == Key::MouseWheelUp)
-			return "mouse_wheel_up";
+			return "mouse-wheel-up";
 		else if(key == Key::MouseWheelDown)
-			return "mouse_wheel_down";
+			return "mouse-wheel-down";
 		else if(key == Key::MouseWheelLeft)
-			return "mouse_wheel_left";
+			return "mouse-wheel-left";
 		else if(key == Key::MouseWheelRight)
-			return "mouse_wheel_right";
+			return "mouse-wheel-right";
 		return "unknown";
 	}
 	
@@ -555,12 +555,4 @@ namespace ie {
 	bool is_key_pressed(Key key) {
 		return KeyHandler::is_key_pressed(key);
 	}
-	
-	/*old_yaml
-	Key make_key_from_yaml(YAML::Node node) {
-		Key key;
-		Decode<Key>::decode(node, key);
-		return key;
-	}
-	*/
 }
