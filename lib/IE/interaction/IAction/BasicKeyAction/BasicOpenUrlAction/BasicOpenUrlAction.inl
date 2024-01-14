@@ -3,7 +3,7 @@
 namespace ie {
 	namespace make_system {
 		template<typename T>
-		BasicOpenUrlAction<T>::BasicOpenUrlAction(const std::string& url) : url(url) {
+		BasicOpenUrlAction<T>::BasicOpenUrlAction(std::string url) : url(std::move(url)) {
 		}
 		
 		template<typename T>
@@ -42,15 +42,13 @@ namespace ie {
 	BasicOpenUrlAction<T>* BasicOpenUrlAction<T>::copy() {
 		return new BasicOpenUrlAction<T>{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	template<typename T>
-	bool DecodePointer<BasicOpenUrlAction<T> >::decode_pointer(const YAML::Node& node, BasicOpenUrlAction<T>*& open_url_interaction) {
-		open_url_interaction = new BasicOpenUrlAction<T>{
-			(node.IsScalar() ? node : node["url"]).as<std::string>()
-		};
-		return true;
+}
 
+template<typename T>
+orl::Option<ie::make_system::BasicOpenUrlAction<T> > ieml::Decode<char, ie::make_system::BasicOpenUrlAction<T> >::decode(ieml::Node const& node) {
+	auto& clear_node{node.get_clear()};
+	if(auto map_view{clear_node.get_map_view()}) {
+		return {{map_view.ok().at("url").except().get_string().except()}};
 	}
-	*/
+	return {{clear_node.get_string().except()}};
 }

@@ -13,7 +13,7 @@ namespace ie {
 		struct BasicOpenUrlAction : public BasicKeyAction<T> {
 			std::string url;
 			
-			BasicOpenUrlAction(const std::string& url);
+			BasicOpenUrlAction(std::string url);
 			
 			ie::BasicOpenUrlAction<T>* make(BasicActionInitInfo<T> init_info) override;
 		};
@@ -44,14 +44,12 @@ namespace ie {
 	
 	using OpenUrlAction = BasicOpenUrlAction<>;
 	
-	/*old_yaml_decode_pointer
-	template<typename T>
-	struct DecodePointer<BasicOpenUrlAction<T> > {
-		static bool decode_pointer(const YAML::Node& node, BasicOpenUrlAction<T>*& open_url_interaction);
-	};
-	*/
-	
 	bool determine_url(ieml::Node const& node);
 }
+
+template<typename T>
+struct ieml::Decode<char, ie::make_system::BasicOpenUrlAction<T> > {
+	static orl::Option<ie::make_system::BasicOpenUrlAction<T> > decode(ieml::Node const& node);
+};
 
 #include "BasicOpenUrlAction.inl"
