@@ -5,7 +5,7 @@
 namespace ie {
 	namespace make_system {
 		template<typename T>
-		BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<typename ie::BasicKeyAction<T>::Make >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys) :
+		BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys) :
 			action(std::move(action)), keys(std::move(keys)), black_list_keys(std::move(black_list_keys)) {
 		}
 		
@@ -86,22 +86,21 @@ namespace ie {
 	BasicKeysInteraction<T>* BasicKeysInteraction<T>::copy() {
 		return new BasicKeysInteraction<T>{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	template<typename T>
-	bool DecodePointer<BasicKeysInteraction<T> >::decode_pointer(const YAML::Node& node, BasicKeysInteraction<T> *& keys_interaction) {
-		if(node.IsScalar()) {
-			keys_interaction = new BasicKeysInteraction<T>{make_box_ptr<BasicKeyAction<T>, BasicOpenUrlAction<T> >(node.as<std::string>()), {Key::MouseLeft}};
-			return true;
-		}
-		
-		keys_interaction = new BasicKeysInteraction<T>{
-			node["action"].as<BoxPtr<BasicKeyAction<T> > >(),
-			node["keys"].as<std::vector<Key> >(),
-			conv_def<std::vector<Key> >(node["black-list_keys"], {})
-		};
-		return true;
+}
 
+template<typename T>
+orl::Option<ie::make_system::BasicKeysInteraction<T> > ieml::Decode<char, ie::make_system::BasicKeysInteraction<T> >::decode(ieml::Node const& node) {
+	auto& clear_node{node.get_clear()};
+	if(auto str{clear_node.get_string()}) {
+		return ie::make_system::BasicKeysInteraction<T>{
+			bp::make_box_ptr<ie::make_system::BasicKeyAction<T>, ie::make_system::BasicOpenUrlAction<T> >(str.ok()),
+			std::vector{ie::Key::MouseLeft},
+		};
 	}
-	*/
+	auto& map{clear_node.get_map_view().except()};
+	return ie::make_system::BasicKeysInteraction<T>{
+		map.at("action").except().as<ie::BoxPtr<ie::make_system::BasicKeyAction<T> > >().move_except(),
+		map.at("keys").except().as<std::vector<ie::Key> >().move_except(),
+		map.get_as<std::vector<ie::Key> >("black-list-keys").move_ok_or({}),
+	};
 }

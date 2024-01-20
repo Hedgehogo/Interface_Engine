@@ -34,12 +34,9 @@ namespace ie {
 	protected:
 		ISBool& value_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<SwitcherAction> {
-		static bool decode_pointer(const YAML::Node& node, SwitcherAction*& switcher_action);
-	};
-	*/
-	
 }
+
+template<>
+struct ieml::Decode<char, ie::SwitcherAction::Make> {
+	static orl::Option<ie::SwitcherAction::Make> decode(ieml::Node const& node);
+};

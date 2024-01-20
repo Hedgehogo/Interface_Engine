@@ -17,9 +17,7 @@ namespace rttb {
 namespace ieml {
 	template<typename Type_>
 	struct Decode<char, Type_*> {
-		using Return = std::enable_if_t<rttb::detail::has_decode_ptr_v<ieml::Node const&, Type_*>, orl::Option<Type_*> >;
-		
-		static Return decode(ieml::Node const& node);
+		static orl::Option<Type_*> decode(ieml::Node const& node);
 	};
 }
 

@@ -64,16 +64,14 @@ namespace ie {
 	BasicOneKeyInteraction<T>* BasicOneKeyInteraction<T>::copy() {
 		return new BasicOneKeyInteraction<T>{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	template<typename T>
-	bool DecodePointer<BasicOneKeyInteraction<T> >::decode_pointer(const YAML::Node& node, BasicOneKeyInteraction<T>*& one_key_interaction) {
-		one_key_interaction = new BasicOneKeyInteraction<T>{
-			node["action"].as<BoxPtr<BasicKeyAction<T> > >(),
-			conv_def(node["key"], Key::MouseLeft)
-		};
-		return true;
+}
 
-	}
-	*/
+template<typename T>
+orl::Option<ie::make_system::BasicOneKeyInteraction<T> >
+ieml::Decode<char, ie::make_system::BasicOneKeyInteraction<T> >::decode(ieml::Node const& node) {
+	auto& clear_node{node.get_clear()};
+	return ie::make_system::BasicOneKeyInteraction<T>{
+		clear_node.at("action").except().template as<bp::BoxPtr<ie::make_system::BasicKeyAction<T> > > ().move_except(),
+		clear_node.get_as<ie::Key>().ok_or(ie::Key::MouseLeft),
+	};
 }

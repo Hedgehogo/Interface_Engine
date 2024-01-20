@@ -32,11 +32,9 @@ namespace ie {
 		size_t index_;
 		ISRSize& value_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<SwitchTabsAction> {
-		static bool decode_pointer(const YAML::Node& node, SwitchTabsAction*& change_object_action);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::SwitchTabsAction::Make> {
+	static orl::Option<ie::SwitchTabsAction::Make> decode(ieml::Node const& node);
+};

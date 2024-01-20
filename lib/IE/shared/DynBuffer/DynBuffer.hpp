@@ -31,9 +31,9 @@ namespace ie {
 	public:
 		using MakeType = typename Type_::Make;
 		
-		MakeDyn(Type_& ref);
-		
 		MakeDyn(bp::BoxPtr<MakeType> make);
+		
+		MakeDyn(Type_& ref);
 		
 		Type_& make(DynBuffer& dyn_buffer);
 		
@@ -47,10 +47,21 @@ namespace ie {
 		struct Pair {
 			size_t id_;
 			bp::BoxPtr<MakeType> make_;
+			
+			Pair(size_t id_, bp::BoxPtr<MakeType> make_);
+			
+			Pair(Pair const&) = delete;
+			
+			Pair(Pair&&) = default;
 		};
 		
 		std::variant<Pair, std::reference_wrapper<Type_> > data_;
 	};
 }
+
+template<typename Type_>
+struct ieml::Decode<char, ie::MakeDyn<Type_> > {
+	static orl::Option<ie::MakeDyn<Type_> > decode(ieml::Node const& node);
+};
 
 #include "DynBuffer.inl"

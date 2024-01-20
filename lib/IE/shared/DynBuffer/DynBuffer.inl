@@ -24,7 +24,7 @@ namespace ie {
 	}
 	
 	template<typename Type_>
-	MakeDyn<Type_>::MakeDyn(Type_& ref) : data_(ref) {
+	MakeDyn<Type_>::MakeDyn(size_t id, bp::BoxPtr<MakeType> make) : data_(Pair{id, std::move(make)}) {
 	}
 	
 	template<typename Type_>
@@ -32,7 +32,7 @@ namespace ie {
 	}
 	
 	template<typename Type_>
-	MakeDyn<Type_>::MakeDyn(size_t id, bp::BoxPtr<MakeType> make) : data_(Pair{id, std::move(make)}) {
+	MakeDyn<Type_>::MakeDyn(Type_& ref) : data_(ref) {
 	}
 	
 	template<typename Type_>
@@ -42,25 +42,37 @@ namespace ie {
 	
 	template<typename Type_>
 	orl::Option<MakeDyn<Type_> > MakeDyn<Type_>::decode(ieml::Node const& node) {
-		auto decode_make_fn = [&](ieml::Node const& node) -> bp::BoxPtr<MakeType> {
+		auto decode_make_fn = [&](ieml::Node const& node) -> orl::Option<bp::BoxPtr<MakeType> > {
 			auto& builder{rttb::Builder<ieml::Node const&, MakeType>::builder()};
 			auto& clear_node{node.get_clear_data<ieml::NodeType::Tag>()};
 			if(&clear_node != &node) {
 				auto type_name{node.get_tag()};
 				if(auto make{builder.build(type_name.some(), clear_node)}) {
-					return {make.some()};
+					return {bp::BoxPtr{make.some()}};
 				}
 			}
 			if(auto make{builder.implicit_build(node)}) {
-				return {make.some()};
+				return {bp::BoxPtr{make.some()}};
 			}
+			return {};
 		};
 		auto& tag_node{node.get_clear_data<ieml::NodeType::GetAnchor, ieml::NodeType::TakeAnchor>()};
-		auto result{decode_make_fn(tag_node)};
-		if(&tag_node != &node) {
-			size_t id{reinterpret_cast<size_t>(&tag_node)};
-			return {{id, {result}}};
+		if(auto result{decode_make_fn(tag_node)}) {
+			if(&tag_node != &node) {
+				size_t id{reinterpret_cast<size_t>(&tag_node)};
+				return {{id, result.move_some()}};
+			}
+			return {{result.move_some()}};
 		}
-		return {{0, {result}}};
+		return {};
 	}
+	
+	template<typename Type_>
+	ie::MakeDyn<Type_>::Pair::Pair(size_t id_, bp::BoxPtr <MakeType> make_) : id_(id_), make_(std::move(make_)) {
+	}
+}
+
+template<typename Type_>
+orl::Option<ie::MakeDyn<Type_> > ieml::Decode<char, ie::MakeDyn<Type_> >::decode(const ieml::Node& node) {
+	return ie::MakeDyn<Type_>::decode(node);
 }

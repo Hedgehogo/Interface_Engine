@@ -32,14 +32,10 @@ namespace ie {
 	SwitcherAction* SwitcherAction::copy() {
 		return new SwitcherAction{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<SwitcherAction>::decode_pointer(const YAML::Node& node, SwitcherAction*& switcher_action) {
-		switcher_action = new SwitcherAction{
-			Buffer::get<Sbool>(node["value"])
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::SwitcherAction::Make> ieml::Decode<char, ie::SwitcherAction::Make>::decode(ieml::Node const& node) {
+	return ie::SwitcherAction::Make{
+		node.at("value").except().as<ie::MakeDyn<ie::ISBool> >().move_except()
+	};
 }

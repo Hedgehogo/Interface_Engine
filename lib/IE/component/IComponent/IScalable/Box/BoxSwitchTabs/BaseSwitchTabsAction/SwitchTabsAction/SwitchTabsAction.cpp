@@ -34,12 +34,8 @@ namespace ie {
 	SwitchTabsAction* SwitchTabsAction::copy() {
 		return new SwitchTabsAction{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<SwitchTabsAction>::decode_pointer(const YAML::Node& node, SwitchTabsAction*& change_object_action) {
-		change_object_action = new SwitchTabsAction{conv_def(node["index"], 0u)};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::SwitchTabsAction::Make> ieml::Decode<char, ie::SwitchTabsAction::Make>::decode(ieml::Node const& node) {
+	return {{node.get_as<size_t>("index").ok_or(0u)}};
 }

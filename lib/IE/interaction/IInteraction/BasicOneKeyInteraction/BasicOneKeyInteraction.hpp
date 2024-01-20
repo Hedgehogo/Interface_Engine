@@ -53,13 +53,11 @@ namespace ie {
 	};
 	
 	using OneKeyInteraction = BasicOneKeyInteraction<>;
-	
-	/*old_yaml_decode_pointer
-	template<typename T>
-	struct DecodePointer<BasicOneKeyInteraction<T> > {
-		static bool decode_pointer(const YAML::Node& node, BasicOneKeyInteraction<T>*& one_key_interaction);
-	};
-	*/
 }
+
+template<typename T>
+struct ieml::Decode<char, ie::make_system::BasicOneKeyInteraction<T> > {
+	static orl::Option<ie::make_system::BasicOneKeyInteraction<T>> decode(ieml::Node const& node);
+};
 
 #include "BasicOneKeyInteraction.inl"

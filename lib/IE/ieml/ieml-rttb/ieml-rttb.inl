@@ -5,7 +5,7 @@ namespace rttb {
 	auto DecodePtr<const ieml::Node&>::decode(const ieml::Node& node) -> Return<Type_> {
 		auto result{ieml::Decode<char, Type_>::decode(node)};
 		if(result.is_some()) {
-			return new Type_{std::move(result.some())};
+			return new Type_{result.move_some()};
 		}
 		return {};
 	}
@@ -13,7 +13,7 @@ namespace rttb {
 
 namespace ieml {
 	template<typename Type_>
-	auto Decode<char, Type_*>::decode(const Node& node) -> Return {
+	auto Decode<char, Type_*>::decode(const Node& node) -> orl::Option<Type_*> {
 		auto& clear_node{node.get_clear_data<NodeType::Tag>()};
 		if(&clear_node != &node) {
 			auto type_name{node.get_tag()};

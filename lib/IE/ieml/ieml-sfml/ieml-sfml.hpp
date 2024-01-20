@@ -1,12 +1,19 @@
 #pragma once
 
+#include <box-ptr/BoxPtr.hpp>
 #include <SFML/Graphics.hpp>
 #include <IEML/node.hpp>
+#include "IE/ieml/ieml-rttb/ieml-rttb.hpp"
 #include "LoadShader/LoadShader.hpp"
 #include "LoadString//LoadString.hpp"
 #include "LoadTextStyle/LoadTextStyle.hpp"
 
 namespace ieml {
+	template<typename T>
+	struct Decode<char, bp::BoxPtr<T> > {
+		static orl::Option<bp::BoxPtr<T> > decode(ieml::Node const& node);
+	};
+	
 	template<typename T>
 	struct Decode<char, orl::Option<T> > {
 		static orl::Option<orl::Option<T> > decode(ieml::Node const& node);

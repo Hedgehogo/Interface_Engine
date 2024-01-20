@@ -11,11 +11,11 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicKeysInteraction : public virtual IBasicInteraction<T> {
-			BoxPtr<typename ie::BasicKeyAction<T>::Make > action;
+			BoxPtr<BasicKeyAction<T> > action;
 			std::vector<Key> keys;
 			std::vector<Key> black_list_keys = {};
 			
-			BasicKeysInteraction(BoxPtr<typename ie::BasicKeyAction<T>::Make >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys = {});
+			BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys = {});
 			
 			ie::BasicKeysInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
 		};
@@ -56,13 +56,11 @@ namespace ie {
 	};
 	
 	using KeysInteraction = BasicKeysInteraction<>;
-	
-	/*old_yaml_decode_pointer
-	template<typename T>
-	struct DecodePointer<BasicKeysInteraction<T> > {
-		static bool decode_pointer(const YAML::Node& node, BasicKeysInteraction<T>*& keys_interaction);
-	};
-	*/
 }
+
+template<typename T>
+struct ieml::Decode<char, ie::make_system::BasicKeysInteraction<T> > {
+	static orl::Option<ie::make_system::BasicKeysInteraction<T> > decode(ieml::Node const& node);
+};
 
 #include "BasicKeysInteraction.inl"
