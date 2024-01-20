@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../ISizing.hpp"
 
 namespace ie {
@@ -28,11 +29,9 @@ namespace ie {
 		float coefficient_;
 		float addition_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<TargetCoefficientSizing> {
-		static bool decode_pointer(const YAML::Node& node, TargetCoefficientSizing*& target_coefficient_sizing);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::TargetCoefficientSizing::Make> {
+	static orl::Option<ie::TargetCoefficientSizing::Make> decode(ieml::Node const& node);
+};

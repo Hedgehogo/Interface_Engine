@@ -24,16 +24,12 @@ namespace ie {
 	ConstSizing* ConstSizing::copy() {
 		return new ConstSizing{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<ConstSizing>::decode_pointer(const YAML::Node& node, ConstSizing*& const_sizing) {
-		if(node.IsScalar()) {
-			const_sizing = new ConstSizing{node.as<float>()};
-		} else {
-			const_sizing = new ConstSizing{node["size"].as<float>()};
-		}
-		return true;
+}
 
+orl::Option<ie::ConstSizing::Make> ieml::Decode<char, ie::ConstSizing::Make>::decode(ieml::Node const& node) {
+	auto& clear_node{node.get_clear()};
+	if(auto scalar{clear_node.as<float>()}) {
+		return {{scalar.ok()}};
 	}
-	*/
+	return {{clear_node.at("size").except().as<float>().except()}};
 }

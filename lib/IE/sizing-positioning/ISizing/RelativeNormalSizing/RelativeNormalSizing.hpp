@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../ISizing.hpp"
 
 namespace ie {
@@ -22,11 +23,9 @@ namespace ie {
 	protected:
 		float normal_size_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<RelativeNormalSizing> {
-		static bool decode_pointer(const YAML::Node&, RelativeNormalSizing*& relative_normal_sizing);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::RelativeNormalSizing::Make> {
+	static orl::Option<ie::RelativeNormalSizing::Make> decode(ieml::Node const& node);
+};

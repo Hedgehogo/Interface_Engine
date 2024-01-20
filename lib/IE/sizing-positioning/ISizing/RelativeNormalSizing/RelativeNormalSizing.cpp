@@ -23,11 +23,8 @@ namespace ie {
 	RelativeNormalSizing* RelativeNormalSizing::copy() {
 		return new RelativeNormalSizing{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<RelativeNormalSizing>::decode_pointer(const YAML::Node&, RelativeNormalSizing*& relative_normal_sizing) {
-		relative_normal_sizing = new RelativeNormalSizing{};
-		return true;
-	}
-	*/
+}
+
+orl::Option<ie::RelativeNormalSizing::Make> ieml::Decode<char, ie::RelativeNormalSizing::Make>::decode(ieml::Node const&) {
+	return {{}};
 }

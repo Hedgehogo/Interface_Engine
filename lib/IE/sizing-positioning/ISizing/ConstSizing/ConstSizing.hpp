@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../ISizing.hpp"
 
 namespace ie {
@@ -26,11 +27,9 @@ namespace ie {
 	protected:
 		float size_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<ConstSizing> {
-		static bool decode_pointer(const YAML::Node& node, ConstSizing*& const_sizing);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::ConstSizing::Make> {
+	static orl::Option<ie::ConstSizing::Make> decode(ieml::Node const& node);
+};

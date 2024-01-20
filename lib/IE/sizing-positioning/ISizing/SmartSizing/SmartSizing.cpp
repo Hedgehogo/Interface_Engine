@@ -31,16 +31,13 @@ namespace ie {
 	float SmartSizing::get_parent_size(float object_size) {
 		return (object_size - addition_) / parent_coefficient_;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<SmartSizing>::decode_pointer(const YAML::Node& node, SmartSizing*& smart_sizing) {
-		smart_sizing = new SmartSizing{
-			conv_def(node["target-coefficient"], 1.f),
-			conv_def(node["parent-coefficient"], 0.f),
-			conv_def(node["addition"], 0.f)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::SmartSizing::Make> ieml::Decode<char, ie::SmartSizing::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::SmartSizing::Make{
+		map.get_as<float>("target-coefficient").ok_or(1.),
+		map.get_as<float>("parent-coefficient").ok_or(0.),
+		map.get_as<float>("addition").ok_or(0.),
+	};
 }

@@ -29,12 +29,8 @@ namespace ie {
 	RelativeParentSizing* RelativeParentSizing::copy() {
 		return new RelativeParentSizing{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<RelativeParentSizing>::decode_pointer(const YAML::Node& node, RelativeParentSizing*& relative_parent_sizing) {
-		relative_parent_sizing = new RelativeParentSizing{node["addition"].as<float>()};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::RelativeParentSizing::Make> ieml::Decode<char, ie::RelativeParentSizing::Make>::decode(ieml::Node const& node) {
+	return ie::RelativeParentSizing::Make{node.at("addition").except().as<float>().except()};
 }

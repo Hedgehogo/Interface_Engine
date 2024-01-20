@@ -30,15 +30,12 @@ namespace ie {
 	float ParentCoefficientSizing::get_parent_size(float object_size) {
 		return (object_size - addition_) / coefficient_;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<ParentCoefficientSizing>::decode_pointer(const YAML::Node& node, ParentCoefficientSizing*& parent_coefficient_sizing) {
-		parent_coefficient_sizing = new ParentCoefficientSizing{
-			node["coefficient"].as<float>(),
-			conv_def(node["addition"], 0.f)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::ParentCoefficientSizing::Make> ieml::Decode<char, ie::ParentCoefficientSizing::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::ParentCoefficientSizing::Make{
+		map.at("coefficient").except().as<float>().except(),
+		map.get_as<float>("addition").ok_or(0.)
+	};
 }
