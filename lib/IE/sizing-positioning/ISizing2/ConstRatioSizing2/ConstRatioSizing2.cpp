@@ -85,6 +85,15 @@ orl::Option<ie::ConstRatioSizing2::Make> ieml::Decode<char, ie::ConstRatioSizing
 	}
 	auto target_coefficient{map.at("target-coefficient")};
 	auto parent_coefficient{map.at("parent-coefficient")};
+	if(target_coefficient.is_ok() && parent_coefficient.is_ok()) {
+		return ie::ConstRatioSizing2::Make{
+			target_coefficient.ok().as<float>().except(),
+			parent_coefficient.ok().as<float>().except(),
+			map.get_as<float>("addition").ok_or(0.),
+			ratio,
+			horizontal
+		};
+	}
 	if(target_coefficient.is_ok() || parent_coefficient.is_ok()) {
 		auto relative_target{target_coefficient.is_ok()};
 		auto& coefficient{relative_target ? target_coefficient.ok() : parent_coefficient.ok()};
@@ -94,15 +103,6 @@ orl::Option<ie::ConstRatioSizing2::Make> ieml::Decode<char, ie::ConstRatioSizing
 			ratio,
 			horizontal,
 			relative_target
-		};
-	}
-	if(target_coefficient.is_ok() && parent_coefficient.is_ok()) {
-		return ie::ConstRatioSizing2::Make{
-			target_coefficient.ok().as<float>().except(),
-			parent_coefficient.ok().as<float>().except(),
-			map.get_as<float>("addition").ok_or(0.),
-			ratio,
-			horizontal
 		};
 	}
 	return ie::ConstRatioSizing2::Make{

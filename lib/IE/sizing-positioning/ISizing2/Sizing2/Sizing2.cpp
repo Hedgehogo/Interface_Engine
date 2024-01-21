@@ -96,6 +96,13 @@ orl::Option<ie::Sizing2::Make> ieml::Decode<char, ie::Sizing2::Make>::decode(iem
 	}
 	auto target_coefficient{map.at("target-coefficient")};
 	auto parent_coefficient{map.at("parent-coefficient")};
+	if(target_coefficient.is_ok() && parent_coefficient.is_ok()) {
+		return ie::Sizing2::Make{
+			target_coefficient.ok().as<sf::Vector2f>().except(),
+			parent_coefficient.ok().as<sf::Vector2f>().except(),
+			map.get_as<sf::Vector2f>("addition").ok_or({})
+		};
+	}
 	if(target_coefficient.is_ok() || parent_coefficient.is_ok()) {
 		auto relative_target{target_coefficient.is_ok()};
 		auto& coefficient{relative_target ? target_coefficient.ok() : parent_coefficient.ok()};
@@ -103,13 +110,6 @@ orl::Option<ie::Sizing2::Make> ieml::Decode<char, ie::Sizing2::Make>::decode(iem
 			coefficient.as<sf::Vector2f>().except(),
 			map.get_as<sf::Vector2f>("addition").ok_or({}),
 			relative_target
-		};
-	}
-	if(target_coefficient.is_ok() && parent_coefficient.is_ok()) {
-		return ie::Sizing2::Make{
-			target_coefficient.ok().as<sf::Vector2f>().except(),
-			parent_coefficient.ok().as<sf::Vector2f>().except(),
-			map.get_as<sf::Vector2f>("addition").ok_or({})
 		};
 	}
 	return ie::Sizing2::Make{

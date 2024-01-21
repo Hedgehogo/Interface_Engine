@@ -48,8 +48,20 @@ namespace ie {
 	}
 	
 	Positioning2::Positioning2(Location2 parent_location, Location2 object_location, sf::Vector2f offset) :
-		horizontal_(new MatchSidesPositioning{get_horizontal_location(parent_location), get_horizontal_location(object_location), offset.x}),
-		vertical_(new MatchSidesPositioning{get_vertical_location(parent_location), get_vertical_location(object_location), offset.y}),
+		horizontal_(
+			new MatchSidesPositioning{
+				get_horizontal_location(parent_location),
+				get_horizontal_location(object_location),
+				offset.x
+			}
+		),
+		vertical_(
+			new MatchSidesPositioning{
+				get_vertical_location(parent_location),
+				get_vertical_location(object_location),
+				offset.y
+			}
+		),
 		render_target_(nullptr) {
 	}
 	
@@ -72,55 +84,39 @@ namespace ie {
 	Positioning2* Positioning2::copy() {
 		return new Positioning2{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Positioning2>::decode_pointer(const YAML::Node& node, Positioning2*& positioning2) {
-		if(node.IsScalar()) {
-			positioning2 = new Positioning2{node.as<sf::Vector2f>()};
-		} else {
-			if(node["horizontal"] && node["vertical"]) {
-				positioning2 = new Positioning2{
-					node["horizontal"].as < BoxPtr < IPositioning > > (),
-					node["vertical"].as < BoxPtr < IPositioning > > ()
-				};
-			} else {
-				auto offset{conv_def(node["offset"], sf::Vector2f{})};
-				
-				if(node["coefficient"]) {
-					positioning2 = new Positioning2{
-						node["coefficient"].as<sf::Vector2f>(),
-						offset,
-						conv_bool_def(node["relative"], "target", "parent")
-					};
-				} else if(node["object-coefficient"]) {
-					auto object_coefficient{node["object-coefficient"].as<sf::Vector2f>()};
-					
-					if(node["parent-coefficient"]) {
-						positioning2 = new Positioning2{
-							node["parent-coefficient"].as<sf::Vector2f>(),
-							object_coefficient, offset, false
-						};
-					} else if(node["target-coefficient"]) {
-						positioning2 = new Positioning2{
-							node["target-coefficient"].as<sf::Vector2f>(),
-							object_coefficient, offset, true
-						};
-					} else {
-						throw YAML::BadConversion{node.Mark()};
-					}
-				} else if(node["parent-location"] && node["object-location"]) {
-					positioning2 = new Positioning2{
-						node["parent-location"].as<Location2>(),
-						node["object-location"].as<Location2>(),
-						offset
-					};
-				} else {
-					throw YAML::BadConversion{node.Mark()};
-				}
-			}
-		}
-		return true;
+}
 
+orl::Option<ie::Positioning2::Make> ieml::Decode<char, ie::Positioning2::Make>::decode(ieml::Node const& node) {
+	auto& clear_node{node.get_clear()};
+	if(auto result{clear_node.as<sf::Vector2f>()}) {
+		return {{result.ok()}};
 	}
-	*/
+	auto map{clear_node.get_map_view().except()};
+	auto target_coefficient{map.at("target-coefficient")};
+	auto parent_coefficient{map.at("parent-coefficient")};
+	if(target_coefficient.is_ok() || parent_coefficient.is_ok()) {
+		auto relative_target{target_coefficient.is_ok()};
+		auto& coefficient_node{relative_target ? target_coefficient.ok() : parent_coefficient.ok()};
+		auto coefficient{coefficient_node.as<sf::Vector2f>().except()};
+		auto offset{map.get_as<sf::Vector2f>("offset").ok_or({})};
+		if(auto object_coefficient_node{map.at("object-coefficient")}) {
+			auto object_coefficient{object_coefficient_node.ok().as<sf::Vector2f>().except()};
+			return {{coefficient, object_coefficient, offset, relative_target}};
+		} else {
+			return {{coefficient, offset, relative_target}};
+		}
+	}
+	auto parent_location{map.at("parent-location")};
+	auto object_location{map.at("object-location")};
+	if(parent_location.is_ok() && object_location.is_ok()) {
+		return ie::Positioning2::Make{
+			parent_location.ok().as<ie::Location2>().except(),
+			object_location.ok().as<ie::Location2>().except(),
+			map.get_as<sf::Vector2f>("offset").ok_or({})
+		};
+	}
+	return ie::Positioning2::Make{
+		map.at("horizontal").except().as<ie::BoxPtr<ie::IPositioning> >().move_except(),
+		map.at("vertical").except().as<ie::BoxPtr<ie::IPositioning> >().move_except(),
+	};
 }

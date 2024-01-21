@@ -44,11 +44,9 @@ namespace ie {
 		BoxPtr<IPositioning> vertical_;
 		sf::RenderTarget* render_target_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Positioning2> {
-		static bool decode_pointer(const YAML::Node& node, Positioning2*& positioning2);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Positioning2::Make> {
+	static orl::Option<ie::Positioning2::Make> decode(ieml::Node const& node);
+};
