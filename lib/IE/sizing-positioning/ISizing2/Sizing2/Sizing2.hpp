@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../ISizing2.hpp"
 #include "../../ISizing/ISizing.hpp"
 
@@ -48,11 +49,9 @@ namespace ie {
 		BoxPtr<ISizing> vertical_;
 		sf::RenderTarget* render_target_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Sizing2> {
-		static bool decode_pointer(const YAML::Node& node, Sizing2*& sizing2);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Sizing2::Make> {
+	static orl::Option<ie::Sizing2::Make> decode(ieml::Node const& node);
+};

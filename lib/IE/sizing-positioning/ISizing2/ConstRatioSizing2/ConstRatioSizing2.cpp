@@ -71,51 +71,43 @@ namespace ie {
 	ConstRatioSizing2* ConstRatioSizing2::copy() {
 		return new ConstRatioSizing2{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<ConstRatioSizing2>::decode_pointer(const YAML::Node& node, ConstRatioSizing2*& const_ratio_sizing2) {
-		float ratio{conv_def(node["ratio"], 1.f)};
-		bool horizontal{conv_bool_def(node["direction"], "horizontal", "vertical", true)};
-		
-		if(node["sizing"]) {
-			const_ratio_sizing2 = new ConstRatioSizing2{
-				node["sizing"].as<BoxPtr<ISizing> >(),
-				ratio,
-				horizontal
-			};
-		} else if(node["relative"]) {
-			const_ratio_sizing2 = new ConstRatioSizing2{
-				ratio,
-				horizontal,
-				convert_bool(node["relative"], "parent", "normal")
-			};
-		} else if(node["const-size"]) {
-			const_ratio_sizing2 = new ConstRatioSizing2{
-				node["const-size"].as<float>(),
-				ratio,
-				horizontal
-			};
-		} else if(node["coefficient"]) {
-			const_ratio_sizing2 = new ConstRatioSizing2{
-				node["coefficient"].as<float>(),
-				conv_def(node["addition"], 0.f),
-				ratio,
-				horizontal,
-				conv_bool_def(node["relative"], "target", "parent")
-			};
-		} else if(node["target-coefficient"] && node["parent-coefficient"]) {
-			const_ratio_sizing2 = new ConstRatioSizing2{
-				node["target-coefficient"].as<float>(),
-				node["parent-coefficient"].as<float>(),
-				conv_def(node["addition"], 0.f),
-				ratio,
-				horizontal
-			};
-		} else {
-			throw YAML::BadConversion{node.Mark()};
-		}
-		return true;
+}
 
+orl::Option<ie::ConstRatioSizing2::Make> ieml::Decode<char, ie::ConstRatioSizing2::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	auto ratio{map.get_as<float>("ratio").ok_or(1.)};
+	auto horizontal{map.get_as<bool>("horizontal").ok_or(true)};
+	if(auto relative_parent{map.at("relative-parent")}) {
+		return {{ratio, horizontal, relative_parent.ok().as<bool>().except()}};
 	}
-	*/
+	if(auto const_size{map.at("const-size")}) {
+		return {{const_size.ok().as<float>().except(), ratio, horizontal}};
+	}
+	auto target_coefficient{map.at("target-coefficient")};
+	auto parent_coefficient{map.at("parent-coefficient")};
+	if(target_coefficient.is_ok() || parent_coefficient.is_ok()) {
+		auto relative_target{target_coefficient.is_ok()};
+		auto& coefficient{relative_target ? target_coefficient.ok() : parent_coefficient.ok()};
+		return ie::ConstRatioSizing2::Make{
+			coefficient.as<float>().except(),
+			map.get_as<float>("addition").ok_or(0.),
+			ratio,
+			horizontal,
+			relative_target
+		};
+	}
+	if(target_coefficient.is_ok() && parent_coefficient.is_ok()) {
+		return ie::ConstRatioSizing2::Make{
+			target_coefficient.ok().as<float>().except(),
+			parent_coefficient.ok().as<float>().except(),
+			map.get_as<float>("addition").ok_or(0.),
+			ratio,
+			horizontal
+		};
+	}
+	return ie::ConstRatioSizing2::Make{
+		map.at("sizing").except().as<ie::BoxPtr<ie::ISizing::Make> >().move_except(),
+		ratio,
+		horizontal
+	};
 }

@@ -80,43 +80,40 @@ namespace ie {
 	Sizing2* Sizing2::copy() {
 		return new Sizing2{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Sizing2>::decode_pointer(const YAML::Node& node, Sizing2*& sizing2) {
-		if(node.IsScalar()) {
-			sizing2 = new Sizing2{node.as<sf::Vector2f>()};
-		} else {
-			if(node["horizontal"] && node["vertical"]) {
-				sizing2 = new Sizing2{
-					node["horizontal"].as<BoxPtr<ISizing> >(),
-					node["vertical"].as<BoxPtr<ISizing> >()
-				};
-			} else if(node["relative"]) {
-				sizing2 = new Sizing2{
-					convert_bool(node["relative"], "parent", "normal")
-				};
-			} else if(node["const-size"]) {
-				sizing2 = new Sizing2{
-					node["const-size"].as<sf::Vector2f>()
-				};
-			} else if(node["coefficient"]) {
-				sizing2 = new Sizing2{
-					node["coefficient"].as<sf::Vector2f>(),
-					conv_def(node["addition"], sf::Vector2f{}),
-					conv_bool_def(node["relative"], "target", "parent")
-				};
-			} else if(node["target-coefficient"] && node["parent-coefficient"]) {
-				sizing2 = new Sizing2{
-					node["target-coefficient"].as<sf::Vector2f>(),
-					node["parent-coefficient"].as<sf::Vector2f>(),
-					conv_def(node["addition"], sf::Vector2f{})
-				};
-			} else {
-				throw YAML::BadConversion{node.Mark()};
-			}
-		}
-		return true;
+}
 
+orl::Option<ie::Sizing2::Make> ieml::Decode<char, ie::Sizing2::Make>::decode(ieml::Node const& node) {
+	auto& clear_node{node.get_clear()};
+	if(auto result{clear_node.as<sf::Vector2f>()}) {
+		return {{result.ok()}};
 	}
-	*/
+	auto map{clear_node.get_map_view().except()};
+	if(auto relative{map.at("relative-parent")}) {
+		return {{relative.ok().as<bool>().except()}};
+	}
+	if(auto const_size{map.at("const-size")}) {
+		return {{const_size.ok().as<sf::Vector2f>().except()}};
+	}
+	auto target_coefficient{map.at("target-coefficient")};
+	auto parent_coefficient{map.at("parent-coefficient")};
+	if(target_coefficient.is_ok() || parent_coefficient.is_ok()) {
+		auto relative_target{target_coefficient.is_ok()};
+		auto& coefficient{relative_target ? target_coefficient.ok() : parent_coefficient.ok()};
+		return ie::Sizing2::Make{
+			coefficient.as<sf::Vector2f>().except(),
+			map.get_as<sf::Vector2f>("addition").ok_or({}),
+			relative_target
+		};
+	}
+	if(target_coefficient.is_ok() && parent_coefficient.is_ok()) {
+		return ie::Sizing2::Make{
+			target_coefficient.ok().as<sf::Vector2f>().except(),
+			parent_coefficient.ok().as<sf::Vector2f>().except(),
+			map.get_as<sf::Vector2f>("addition").ok_or({})
+		};
+	}
+	return ie::Sizing2::Make{
+		map.at("horizontal").except().as<ie::BoxPtr<ie::ISizing::Make> >().move_except(),
+		map.at("vertical").except().as<ie::BoxPtr<ie::ISizing::Make> >().move_except(),
+	};
 }
