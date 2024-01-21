@@ -11,16 +11,13 @@ namespace ie {
 	MatchPositioning* MatchPositioning::copy() {
 		return new MatchPositioning{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<MatchPositioning>::decode_pointer(const YAML::Node& node, MatchPositioning*& match_positioning) {
-		match_positioning = new MatchPositioning{
-			node["parent-coefficient"].as<float>(),
-			node["object-coefficient"].as<float>(),
-			conv_def(node["offset"], 0.f)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::MatchPositioning> ieml::Decode<char, ie::MatchPositioning>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::MatchPositioning{
+		map.at("parent-coefficient").except().as<float>().except(),
+		map.at("object-coefficient").except().as<float>().except(),
+		map.get_as<float>("offset").ok_or(0.),
+	};
 }

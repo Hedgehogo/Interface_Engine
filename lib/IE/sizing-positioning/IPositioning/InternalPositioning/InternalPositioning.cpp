@@ -19,21 +19,16 @@ namespace ie {
 	float InternalPositioning::get_offset() const {
 		return offset_;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<InternalPositioning>::decode_pointer(const YAML::Node& node, InternalPositioning*& internal_positioning) {
-		if(node.IsScalar()) {
-			internal_positioning = new InternalPositioning{
-				node.as<float>()
-			};
-		} else {
-			internal_positioning = new InternalPositioning{
-				node["coefficient"].as<float>(),
-				conv_def(node["offset"], 0.f)
-			};
-		}
-		return true;
+}
 
+orl::Option<ie::InternalPositioning> ieml::Decode<char, ie::InternalPositioning>::decode(ieml::Node const& node) {
+	auto& clear_node{node.get_clear()};
+	if(auto result{clear_node.as<float>()}) {
+		return ie::InternalPositioning{result.ok()};
 	}
-	*/
+	auto map{clear_node.get_map_view().except()};
+	return ie::InternalPositioning{
+		map.at("coefficient").except().as<float>().except(),
+		map.get_as<float>("offset").ok_or(0.),
+	};
 }

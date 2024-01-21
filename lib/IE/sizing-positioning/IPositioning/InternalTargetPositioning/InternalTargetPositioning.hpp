@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../IPositioning.hpp"
 
 namespace ie {
@@ -19,11 +20,9 @@ namespace ie {
 		float coefficient_;
 		float offset_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<InternalTargetPositioning> {
-		static bool decode_pointer(const YAML::Node& node, InternalTargetPositioning*& internal_target_positioning);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::InternalTargetPositioning> {
+	static orl::Option<ie::InternalTargetPositioning> decode(ieml::Node const& node);
+};

@@ -1,7 +1,8 @@
 #include "MatchSidesPositioning.hpp"
 
 namespace ie {
-	MatchSidesPositioning::MatchSidesPositioning(Location parent_side, Location object_side, float offset) : parent_side_(parent_side), object_side_(object_side), offset_(offset) {
+	MatchSidesPositioning::MatchSidesPositioning(Location parent_side, Location object_side, float offset) :
+		parent_side_(parent_side), object_side_(object_side), offset_(offset) {
 	}
 	
 	float MatchSidesPositioning::find_position(float parent_position, float object_size, float parent_size, float) {
@@ -32,16 +33,13 @@ namespace ie {
 	MatchSidesPositioning* MatchSidesPositioning::copy() {
 		return new MatchSidesPositioning{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<MatchSidesPositioning>::decode_pointer(const YAML::Node& node, MatchSidesPositioning*& match_sides_positioning) {
-		match_sides_positioning = new MatchSidesPositioning{
-			node["parent-side"].as<Location>(),
-			node["object-side"].as<Location>(),
-			conv_def(node["offset"], 0.f)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::MatchSidesPositioning> ieml::Decode<char, ie::MatchSidesPositioning>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::MatchSidesPositioning{
+		map.at("parent-side").except().as<ie::Location>().except(),
+		map.at("object-side").except().as<ie::Location>().except(),
+		map.get_as<float>("offset").ok_or(0.),
+	};
 }

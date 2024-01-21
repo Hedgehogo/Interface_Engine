@@ -17,11 +17,9 @@ namespace ie {
 		Location object_side_;
 		float offset_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<MatchSidesPositioning> {
-		static bool decode_pointer(const YAML::Node& node, MatchSidesPositioning*& match_sides_positioning);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::MatchSidesPositioning> {
+	static orl::Option<ie::MatchSidesPositioning> decode(ieml::Node const& node);
+};

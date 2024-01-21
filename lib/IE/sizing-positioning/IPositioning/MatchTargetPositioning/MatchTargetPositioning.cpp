@@ -1,7 +1,8 @@
 #include "MatchTargetPositioning.hpp"
 
 namespace ie {
-	MatchTargetPositioning::MatchTargetPositioning(float target_coefficient, float object_coefficient, float offset) : target_coefficient_(target_coefficient), object_coefficient_(object_coefficient), offset_(offset) {
+	MatchTargetPositioning::MatchTargetPositioning(float target_coefficient, float object_coefficient, float offset) :
+		target_coefficient_(target_coefficient), object_coefficient_(object_coefficient), offset_(offset) {
 	}
 	
 	float MatchTargetPositioning::find_position(float, float object_size, float, float target_size) {
@@ -11,16 +12,13 @@ namespace ie {
 	MatchTargetPositioning* MatchTargetPositioning::copy() {
 		return new MatchTargetPositioning{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<MatchTargetPositioning>::decode_pointer(const YAML::Node& node, MatchTargetPositioning*& match_target_positioning) {
-		match_target_positioning = new MatchTargetPositioning{
-			node["target-coefficient"].as<float>(),
-			node["object-coefficient"].as<float>(),
-			conv_def(node["offset"], 0.f)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::MatchTargetPositioning> ieml::Decode<char, ie::MatchTargetPositioning>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::MatchTargetPositioning{
+		map.at("target-coefficient").except().as<float>().except(),
+		map.at("object-coefficient").except().as<float>().except(),
+		map.get_as<float>("offset").ok_or(0.),
+	};
 }

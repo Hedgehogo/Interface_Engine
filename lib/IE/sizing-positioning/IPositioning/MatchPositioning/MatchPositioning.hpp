@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../IPositioning.hpp"
 
 namespace ie {
@@ -16,11 +17,9 @@ namespace ie {
 		float object_coefficient_;
 		float offset_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<MatchPositioning> {
-		static bool decode_pointer(const YAML::Node& node, MatchPositioning*& match_positioning);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::MatchPositioning> {
+	static orl::Option<ie::MatchPositioning> decode(ieml::Node const& node);
+};
