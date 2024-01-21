@@ -28,11 +28,9 @@ namespace ie {
 		
 		ConstPanel* copy() override;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<ConstPanel> {
-		static bool decode_pointer(const YAML::Node& node, ConstPanel*& const_panel);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::ConstPanel::Make> {
+	static orl::Option<ie::ConstPanel::Make> decode(ieml::Node const& node);
+};

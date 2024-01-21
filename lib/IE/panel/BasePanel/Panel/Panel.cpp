@@ -73,7 +73,10 @@ namespace ie {
 	}
 	
 	Panel::Panel(const Panel& other) :
-		BasePanel(other), interaction_manager_(other.interaction_manager_), hide_interaction_(other.hide_interaction_), move_interaction_(other.move_interaction_) {
+		BasePanel(other),
+		interaction_manager_(other.interaction_manager_),
+		hide_interaction_(other.hide_interaction_),
+		move_interaction_(other.move_interaction_) {
 		hide_interaction_->set_panel(*this);
 	}
 	
@@ -141,19 +144,21 @@ namespace ie {
 	Panel* Panel::copy() {
 		return new Panel{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Panel>::decode_pointer(const YAML::Node& node, Panel*& panel) {
-		panel = new Panel{
-			node["object"].as<BoxPtr<IScalable> >(),
-			node["hide-interaction"].as<BoxPtr<IHidePanelInteraction> >(),
-			BoxPtr{conv_def_ptr<IMovePanelInteraction, DontMovePanelInteraction>(node["move-interaction"])},
-			node["sizing"].as<BoxPtr<ISizing2> >(),
-			node["positioning"].as<BoxPtr<IPositioning2> >(),
-			conv_def(node["displayed"], false)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::Panel::Make> ieml::Decode<char, ie::Panel::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::Panel::Make{
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("hide-interaction").except().as<ie::BoxPtr<ie::IHidePanelInteraction::Make> >().move_except(),
+		[&]{
+			if(auto move_interaction{map.at("move-interaction")}) {
+				return move_interaction.ok().as<ie::BoxPtr<ie::IMovePanelInteraction::Make> >().move_except();
+			}
+			return ie::make_box_ptr<ie::IMovePanelInteraction::Make, ie::DontMovePanelInteraction::Make>();
+		}(),
+		map.at("sizing").except().as<ie::BoxPtr<ie::ISizing2::Make> >().move_except(),
+		map.at("positioning").except().as<ie::BoxPtr<ie::IPositioning2::Make> >().move_except(),
+		map.get_as<bool>("displayed").ok_or(false),
+	};
 }

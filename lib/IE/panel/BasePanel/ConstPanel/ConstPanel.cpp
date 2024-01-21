@@ -44,17 +44,14 @@ namespace ie {
 	ConstPanel* ConstPanel::copy() {
 		return new ConstPanel{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<ConstPanel>::decode_pointer(const YAML::Node& node, ConstPanel*& const_panel) {
-		const_panel = new ConstPanel{
-			node["object"].as<BoxPtr<IScalable> >(),
-			node["sizing"].as<BoxPtr<ISizing2> >(),
-			node["positioning"].as<BoxPtr<IPositioning2> >(),
-			conv_def(node["displayed"], false)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::ConstPanel::Make> ieml::Decode<char, ie::ConstPanel::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::ConstPanel::Make{
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("sizing").except().as<ie::BoxPtr<ie::ISizing2::Make> >().move_except(),
+		map.at("positioning").except().as<ie::BoxPtr<ie::IPositioning2::Make> >().move_except(),
+		map.get_as<bool>("displayed").ok_or(false)
+	};
 }
