@@ -110,37 +110,25 @@ namespace ie {
 	const LayoutData& Switcher::layout_get_data() const {
 		return layout_;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Switcher>::decode_pointer(const YAML::Node& node, Switcher*& switcher) {
-		auto inactive_background{node["inactive-background"].as<BoxPtr<IScalable> >()};
-		auto active_background{node["active-background"].as<BoxPtr<IScalable> >()};
-		Key key{conv_def<Key>(node["key"], Key::MouseLeft)};
-		
-		if(node["value"]) {
-			switcher = new Switcher{
-				std::move(inactive_background),
-				std::move(active_background),
-				Buffer::get<Sbool>(node["value"]),
-				key
-			};
-		} else if(node["state"]) {
-			switcher = new Switcher{
-				std::move(inactive_background),
-				std::move(active_background),
-				key,
-				convert_bool(node["state"], "active", "inactive")
-			};
-		} else {
-			switcher = new Switcher{
-				std::move(inactive_background),
-				std::move(active_background),
-				key,
-				conv_def(node["start-active"], false)
-			};
-		}
-		return true;
+}
 
+orl::Option<ie::Switcher::Make> ieml::Decode<char, ie::Switcher::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	auto inactive_background{map.at("inactive-background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except()};
+	auto active_background{map.at("active-background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except()};
+	auto key{map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft)};
+	if(auto value{map.at("value")}) {
+		return ie::Switcher::Make{
+			std::move(inactive_background),
+			std::move(active_background),
+			value.ok().as<ie::MakeDyn<ie::ISBool> >().move_except(),
+			key,
+		};
 	}
-	*/
+	return ie::Switcher::Make{
+		std::move(inactive_background),
+		std::move(active_background),
+		key,
+		map.get_as<bool>("start-active").ok_or(false),
+	};
 }

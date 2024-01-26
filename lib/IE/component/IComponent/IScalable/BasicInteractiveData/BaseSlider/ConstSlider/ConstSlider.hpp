@@ -52,11 +52,9 @@ namespace ie {
 		float aspect_ratio_;
 		float slider_scale_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<ConstSlider> {
-		static bool decode_pointer(const YAML::Node& node, ConstSlider*& const_slider);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::ConstSlider::Make> {
+	static orl::Option<ie::ConstSlider::Make> decode(ieml::Node const& node);
+};

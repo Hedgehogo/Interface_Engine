@@ -50,11 +50,9 @@ namespace ie {
 		BoxPtr<Panel> panel_;
 		BasicInteractiveData<Panel&> interactive_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<ButtonPanel> {
-		static bool decode_pointer(const YAML::Node& node, ButtonPanel*& button_with_panel);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::ButtonPanel::Make> {
+	static orl::Option<ie::ButtonPanel::Make> decode(ieml::Node const& node);
+};

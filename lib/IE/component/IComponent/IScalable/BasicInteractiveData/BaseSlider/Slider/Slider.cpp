@@ -91,28 +91,29 @@ namespace ie {
 	Slider* Slider::copy() {
 		return nullptr;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Slider>::decode_pointer(const YAML::Node& node, Slider*& slider_zone) {
-		auto slider{node["slider"].as<BoxPtr<IUninteractive> >()};
-		auto background{node["background"].as<BoxPtr<IUninteractive> >()};
-		auto value{Buffer::get<SRVec2f>(node["value"])};
-		auto slider_scale{conv_def(node["slider-scale"], sf::Vector2f{1.0f, 0.5f})};
-		auto key{conv_def(node["key"], Key::MouseLeft)};
-		auto wheel_horizontal{conv_bool_def(node["default-wheel"], "horizontal", "vertical", false)};
-		
-		if(!node["division"]) {
-			auto wheel_relativity{conv_def(node["wheel-relativity"], SliderWheelAction::Relativity::RelationArea)};
-			auto wheel_sensitivity{conv_def(node["wheel-sensitivity"], sf::Vector2f{0.2f, 0.2f})};
-			
-			slider_zone = new Slider{std::move(slider), std::move(background), value, slider_scale, key, wheel_horizontal, wheel_relativity, wheel_sensitivity};
-		} else {
-			auto division{node["division"].as<sf::Vector2i>()};
-			
-			slider_zone = new Slider{std::move(slider), std::move(background), value, division, slider_scale, key, wheel_horizontal};
-		}
-		return true;
+}
 
+orl::Option<ie::Slider::Make> ieml::Decode<char, ie::Slider::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	auto slider{ map.at("slider").except().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except()};
+	auto background{ map.at("background").except().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except()};
+	auto value{map.at("value").except().as<ie::MakeDyn<ie::SRVec2F> >().move_except()};
+	auto slider_scale{ map.get_as<sf::Vector2f>("slider-scale").ok_or({1.0f, 0.5f})};
+	auto key{ map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft)};
+	auto wheel_horizontal{ map.get_as<bool>("wheel-horizontal").ok_or(false)};
+	
+	if(auto division_node{map.at("division")}) {
+		auto division{division_node.ok().as<sf::Vector2i>().except()};
+		return {{std::move(slider), std::move(background), std::move(value), division, slider_scale, key, wheel_horizontal}};
 	}
-	*/
+	return ie::Slider::Make{
+		std::move(slider),
+		std::move(background),
+		std::move(value),
+		slider_scale,
+		key,
+		wheel_horizontal,
+		map.get_as<ie::SliderWheelAction::Relativity>("wheel-relativity").ok_or(ie::SliderWheelAction::Relativity::RelationArea),
+		map.get_as<sf::Vector2f>("wheel-sensitivity").ok_or({0.2f, 0.2f})
+	};
 }

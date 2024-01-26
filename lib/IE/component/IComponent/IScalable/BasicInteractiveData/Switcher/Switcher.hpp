@@ -64,11 +64,9 @@ namespace ie {
 		BoxPtr<IScalable> active_background_;
 		ISBool& active_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Switcher> {
-		static bool decode_pointer(const YAML::Node& node, Switcher*& switcher);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Switcher::Make> {
+	static orl::Option<ie::Switcher::Make> decode(ieml::Node const& node);
+};

@@ -35,15 +35,12 @@ namespace ie {
 		interactive_.update_interactions();
 		return result;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Button>::decode_pointer(const YAML::Node& node, Button*& button) {
-		button = new Button{
-			node["background"].as<BoxPtr<IScalable> >(),
-			node["interaction"].as<BoxPtr<IBaseInteraction> >()
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::Button::Make> ieml::Decode<char, ie::Button::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::Button::Make{
+		map.at("background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("interaction").except().as<ie::BoxPtr<ie::IBaseInteraction::Make> >().move_except(),
+	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../BaseButton.hpp"
 
 namespace ie {
@@ -30,10 +31,9 @@ namespace ie {
 		InteractiveData interactive_;
 	};
 	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Button> {
-		static bool decode_pointer(const YAML::Node& node, Button*& button);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Button::Make> {
+	static orl::Option<ie::Button::Make> decode(ieml::Node const& node);
+};

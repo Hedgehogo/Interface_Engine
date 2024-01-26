@@ -59,11 +59,9 @@ namespace ie {
 	protected:
 		sf::Vector2f scale_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Slider> {
-		static bool decode_pointer(const YAML::Node& node, Slider*& slider);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Slider::Make> {
+	static orl::Option<ie::Slider::Make> decode(ieml::Node const& node);
+};
