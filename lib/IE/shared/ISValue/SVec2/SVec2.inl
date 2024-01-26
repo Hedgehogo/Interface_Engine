@@ -16,8 +16,8 @@ orl::Option<ie::make_system::BasicSVec2<Value_> >
 ieml::Decode<char, ie::make_system::BasicSVec2<Value_> >::decode(const ieml::Node& node) {
 	return {
 		{
-			node.as<ie::MakeDyn<ie::BasicSVec2<Value_> > >().except(),
-			node.as<ie::MakeDyn<ie::BasicSVec2<Value_> > >().except()
+			node.as<ie::MakeDyn<Value_> >().move_except(),
+			node.as<ie::MakeDyn<Value_> >().move_except()
 		}
 	};
 }

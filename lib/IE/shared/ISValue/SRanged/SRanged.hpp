@@ -28,7 +28,7 @@ namespace ie {
 	class SRanged : public SValue<T_>, public virtual ISRanged<T_> {
 	public:
 		using ReadFn = typename SValue<T_>::ReadFn;
-		using Make = make_system::SValue<T_>;
+		using Make = make_system::SRanged<T_>;
 		
 		SRanged(Make&& make, DynBuffer& dyn_buffer);
 		

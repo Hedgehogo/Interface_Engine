@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../OnlyDrawable.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/ieml/shortcuts/shortcuts.hpp"
+#include "../OnlyDrawable.hpp"
 
 namespace ie {
 	class Sprite : public OnlyDrawable {
@@ -49,9 +50,7 @@ namespace ie {
 	};
 }
 
-/*old_yaml
 template<>
 struct ieml::Decode<char, ie::Sprite::Make> {
 	static orl::Option<ie::Sprite::Make> decode(ieml::Node const& node);
-}
-*/
+};

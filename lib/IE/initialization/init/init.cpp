@@ -5,6 +5,7 @@
 #include "IE/sizing-positioning/IPositioning2/Functions/determine_positioning2/determine_positioning2.hpp"
 #include "IE/modules/yaml-cpp/modules/load_modules.hpp"
 #include "IE/ieml/shortcuts/shortcuts.hpp"
+#include "IE/utils/meta/is_contains_v/is_contains_v.hpp"
 #include "config.h"
 
 #ifdef IE_ImageMagick_FOUND
@@ -14,32 +15,6 @@
 #endif
 
 namespace ie {
-	/*
-	void yaml_builder_init_sfloat() {
-		inherit<ISfloat, Sfloat>({"Float"});
-		inherit<ISfloat, ISCoefficientValue>();
-		add_base<SCoefficientValue, Sfloat, ISCoefficientValue>(std::vector<std::string>{"SCoefficientValue"});
-		
-		inherit<Sfloat, SRfloat>({"RFloat"});
-		inherit<SRfloat, SCRfloat>({"CRFloat"});
-		inherit<Sfloat, SConvertToFloat<int>>({"CIntToFloat"});
-		
-		inherit<ISVector2, SVec2f>({"Vec2F"});
-		inherit<ISVector2, SRVec2f>({"RVec2F"});
-	}
-	
-	void yaml_builder_init_sint(){
-		inherit<ISint, Sint>({"Int"});
-		
-		inherit<Sint, SRint>({"RInt"});
-		inherit<SRint, SCRint>({"CRFloat"});
-		inherit<ISint, SConvertToInt<float> >({"CFloatToInt"});
-		
-		inherit<ISVector2, SVec2i>({"Vec2I"});
-		inherit<ISVector2, SRVec2i>({"RVec2I"});
-	}
-	*/
-	
 	void init(int argc, char* argv[], std::filesystem::path modules_list) {
 #ifdef IE_ImageMagick_FOUND
 		Magick::InitializeMagick("");
@@ -48,8 +23,41 @@ namespace ie {
 		load_modules(argc, argv, modules_list);
 	}
 	
+	template<typename T>
+	void ieml_rttb_init_shared(char first, std::string name) {
+		add_type_make<ISValue<T>, SValue<T> >(name);
+		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
+			add_type_make<ISVec2<T>, BasicSVec2<ISValue<T> > >(std::string("Vec2") + std::string(1, first));
+			add_type_make<ISVec2<T>, BasicSVec2<ISRanged<T> > >(std::string("RVec2") + std::string(1, first));
+			add_type_make<ISValue<sf::Vector2<T> >, ISVec2<T> >();
+			add_type_make<SValue<T>, SRanged<T> >(std::string("R") + name);
+			add_type_make<ISRanged<T>, SRanged<T> >();
+			add_type_make<ISValue<T>, ISRanged<T> >();
+		}
+	}
+	
 	void ieml_rttb_init() {
 		[[maybe_unused]] static bool once{[]() {
+			ieml_rttb_init_shared<bool>('B', "Bool");
+			ieml_rttb_init_shared<size_t>('U', "USize");
+			ieml_rttb_init_shared<int>('I', "Int");
+			ieml_rttb_init_shared<float>('F', "Float");
+			
+			//add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
+			//add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
+			//add_type<ISbool, SConvertFloatToBoolGreaterOrEquals>("ConvertFloatToBoolGreaterOrEquals", "CFloatToBoolGOE");
+			//add_type<ISbool, SConvertFloatToBoolLess>("ConvertFloatToBoolLess", "CFloatToBoolL");
+			//add_type<ISbool, SConvertFloatToBoolLessOrEquals>("ConvertFloatToBoolLessOrEquals", "CFloatToBoolLOE");
+			
+			//add_type_named<IAnimatorUnit, Animation>();
+			//add_type_named<IAnimatorUnit, Prerequisite>();
+			//add_type_named<IAnimatorUnit, AnimatorUnitMatchFloat>("AUnitMatchF");
+			//add_type_named<IChangeVariable, ChangeVariableByStraightLine>("CVByStraightLine", "CVByStraightL");
+			//add_type_named<IChangeVariable, ChangeVariableByBrokenLine>("CVByBrokenLine", "CVByBrokenL");
+			//add_type_named<IChangeVariable, ChangeVariableBySteppedLine>("CVBySteppedLine", "CVBySteppedL");
+			//add_type_named<IChangeVariable, ChangeVariableBySinusoid>("CVBySinusoid", "CVBySin");
+			//add_type_named<IChangeVariable, ChangeVariableByCurve>("CVByCurve");
+			
 			add_type_make_named<ISizing, ConstSizing>();
 			add_type_make_named<ISizing, RelativeNormalSizing>();
 			add_type_make_named<ISizing, RelativeParentSizing>();
@@ -110,22 +118,7 @@ namespace ie {
 			//add_type_make<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&> >("TextHotkeyInteraction", "TextHotkeyI");
 			add_type_make<IBasicInteraction<Text&>, BasicEmptyInteraction<Text&> >("TextEmptyInteraction", "TextEmptyI");
 			
-			//add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
-			//add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
-			//add_type<ISbool, SConvertFloatToBoolGreaterOrEquals>("ConvertFloatToBoolGreaterOrEquals", "CFloatToBoolGOE");
-			//add_type<ISbool, SConvertFloatToBoolLess>("ConvertFloatToBoolLess", "CFloatToBoolL");
-			//add_type<ISbool, SConvertFloatToBoolLessOrEquals>("ConvertFloatToBoolLessOrEquals", "CFloatToBoolLOE");
-			
-			//add_type_named<IAnimatorUnit, Animation>();
-			//add_type_named<IAnimatorUnit, Prerequisite>();
-			//add_type_named<IAnimatorUnit, AnimatorUnitMatchFloat>("AUnitMatchF");
-			//add_type_named<IChangeVariable, ChangeVariableByStraightLine>("CVByStraightLine", "CVByStraightL");
-			//add_type_named<IChangeVariable, ChangeVariableByBrokenLine>("CVByBrokenLine", "CVByBrokenL");
-			//add_type_named<IChangeVariable, ChangeVariableBySteppedLine>("CVBySteppedLine", "CVBySteppedL");
-			//add_type_named<IChangeVariable, ChangeVariableBySinusoid>("CVBySinusoid", "CVBySin");
-			//add_type_named<IChangeVariable, ChangeVariableByCurve>("CVByCurve");
-			
-			add_fn<OnlyDrawable>(video_convert, "Video");
+			add_fn_make<OnlyDrawable>(video_convert, "Video");
 			//add_fn<Box>(switcher_tabs_decode_pointer, "SwitcherTabs", "SwitcherT");
 			
 			add_type_make_named<OnlyDrawable, Empty>();
@@ -189,6 +182,30 @@ namespace ie {
 	}
 	
 	/*
+	void yaml_builder_init_sfloat() {
+		inherit<ISfloat, Sfloat>({"Float"});
+		inherit<ISfloat, ISCoefficientValue>();
+		add_base<SCoefficientValue, Sfloat, ISCoefficientValue>(std::vector<std::string>{"SCoefficientValue"});
+		
+		inherit<Sfloat, SRfloat>({"RFloat"});
+		inherit<SRfloat, SCRfloat>({"CRFloat"});
+		inherit<Sfloat, SConvertToFloat<int>>({"CIntToFloat"});
+		
+		inherit<ISVector2, SVec2f>({"Vec2F"});
+		inherit<ISVector2, SRVec2f>({"RVec2F"});
+	}
+	
+	void yaml_builder_init_sint(){
+		inherit<ISint, Sint>({"Int"});
+		
+		inherit<Sint, SRint>({"RInt"});
+		inherit<SRint, SCRint>({"CRFloat"});
+		inherit<ISint, SConvertToInt<float> >({"CFloatToInt"});
+		
+		inherit<ISVector2, SVec2i>({"Vec2I"});
+		inherit<ISVector2, SRVec2i>({"RVec2I"});
+	}
+	
 	void yaml_builder_init() {
 		yaml_builder_init_sint();
 		yaml_builder_init_sfloat();

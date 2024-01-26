@@ -44,11 +44,8 @@ namespace ie {
 	const LayoutData& Empty::layout_get_data() const {
 		return layout_;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Empty>::decode_pointer(const YAML::Node&, Empty*& empty) {
-		empty = new Empty{};
-		return true;
-	}
-	*/
+}
+
+orl::Option<ie::Empty::Make> ieml::Decode<char, ie::Empty::Make>::decode(ieml::Node const&) {
+	return {{}};
 }

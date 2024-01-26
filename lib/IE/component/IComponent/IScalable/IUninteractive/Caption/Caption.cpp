@@ -1,5 +1,7 @@
 #include "Caption.hpp"
+
 #include <algorithm>
+#include "IE/ieml/ieml-sfml/FileBuffer/FileBuffer.hpp"
 #include "IE/utils/color/hsv_to_rgb/hsv_to_rgb.hpp"
 #include "../OnlyDrawable/Capsule/Capsule.hpp"
 
@@ -247,23 +249,20 @@ namespace ie {
 			}
 		}
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Caption>::decode_pointer(const YAML::Node& node, Caption*& caption) {
-		caption = new Caption{
-			node["text"].as<sf::String>(),
-			node["background"].as<BoxPtr<IUninteractive> >(),
-			*node["background"].as<sf::Font*>(),
-			conv_def(node["min-size"], sf::Vector2f{}),
-			conv_def(node["font-size"], Caption::get_default_size()),
-			conv_def(node["color"], Caption::get_default_color()),
-			conv_def(node["style"], sf::Text::Style{}),
-			conv_def(node["rotation"], 0.f),
-			InternalPositioning2{{0.5, 0.5}},
-			conv_def(node["cut-back"], true)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::Caption::Make> ieml::Decode<char, ie::Caption::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::Caption::Make{
+		map.at("text").except().as<sf::String>().move_except(),
+		map.at("background").except().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except(),
+		map.at("background").except().as<sf::Font&>().except(),
+		map.get_as<sf::Vector2f>("min-size").ok_or({}),
+		map.get_as<int>("font-size").ok_or(ie::Caption::get_default_size()),
+		map.get_as<sf::Color>("color").ok_or(ie::Caption::get_default_color()),
+		map.get_as<ie::LoadTextStyle>("style").ok_or({}).style,
+		map.get_as<float>("rotation").ok_or(0.0),
+		ie::InternalPositioning2::Make{{0.5, 0.5}},
+		map.get_as<bool>("cut-back").ok_or(true)
+	};
 }

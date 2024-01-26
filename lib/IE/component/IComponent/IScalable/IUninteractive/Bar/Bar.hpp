@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/component/IDrawable/DrawManager/DrawManager.hpp"
 #include "../OnlyDrawable/Empty/Empty.hpp"
 #include "../IUninteractiveLayout/IUninteractiveBackground/IUninteractiveBackground.hpp"
@@ -62,11 +63,9 @@ namespace ie {
 		int division;
 		float value;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Bar> {
-		static bool decode_pointer(const YAML::Node& node, Bar*& bar);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Bar::Make> {
+	static orl::Option<ie::Bar::Make> decode(ieml::Node const& node);
+};

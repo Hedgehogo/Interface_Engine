@@ -62,12 +62,8 @@ namespace ie {
 	const LayoutData& Capsule::layout_get_data() const {
 		return layout_;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Capsule>::decode_pointer(const YAML::Node& node, Capsule*& capsule) {
-		capsule = new Capsule{node["color"].as<sf::Color>()};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::Capsule::Make> ieml::Decode<char, ie::Capsule::Make>::decode(ieml::Node const& node) {
+	return {{node.at("color").except().as<sf::Color>().except()}};
 }

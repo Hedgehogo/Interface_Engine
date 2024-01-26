@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../OnlyDrawable/OnlyDrawable.hpp"
 #include "IE/sizing-positioning/IPositioning2/InternalPositioning2/InternalPositioning2.hpp"
 
@@ -114,11 +115,9 @@ namespace ie {
 		sf::Vector2f minimum_size;
 		InternalPositioning2 positioning;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Caption> {
-		static bool decode_pointer(const YAML::Node& node, Caption*& caption);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Caption::Make> {
+	static orl::Option<ie::Caption::Make> decode(ieml::Node const& node);
+};

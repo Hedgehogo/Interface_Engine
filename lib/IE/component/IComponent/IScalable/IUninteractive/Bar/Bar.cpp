@@ -101,18 +101,15 @@ namespace ie {
 	const LayoutData& Bar::layout_get_data() const {
 		return layout_;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Bar>::decode_pointer(const YAML::Node& node, Bar*& bar) {
-		bar = new Bar{
-			node["background"].as<BoxPtr<IUninteractive> >(),
-			node["strip"].as<BoxPtr<IUninteractive> >(),
-			conv_def(node["division"], 1),
-			conv_def(node["offset"], 0.0f),
-			conv_def(node["offset"], true)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::Bar::Make> ieml::Decode<char, ie::Bar::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::Bar::Make{
+		map.at("background").except().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except(),
+		map.at("strip").except().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except(),
+		map.get_as<int>("division").ok_or(1),
+		map.get_as<float>("offset").ok_or(0.0),
+		map.get_as<bool>("offset").ok_or(true),
+	};
 }

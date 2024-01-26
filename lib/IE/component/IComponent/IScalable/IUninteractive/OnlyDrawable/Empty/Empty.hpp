@@ -35,11 +35,9 @@ namespace ie {
 		
 		LayoutData layout_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Empty> {
-		static bool decode_pointer(const YAML::Node&, Empty*& empty);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Empty::Make> {
+	static orl::Option<ie::Empty::Make> decode(ieml::Node const& node);
+};

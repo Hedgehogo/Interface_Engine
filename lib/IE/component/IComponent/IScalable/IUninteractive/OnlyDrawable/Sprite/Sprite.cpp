@@ -1,6 +1,6 @@
 #include "Sprite.hpp"
 #include <algorithm>
-#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
+#include "IE/ieml/ieml-sfml/FileBuffer/FileBuffer.hpp"
 #include "IE/ieml/determine/determine.hpp"
 
 namespace ie {
@@ -68,7 +68,6 @@ namespace ie {
 	}
 }
 
-/*old_yaml
 orl::Option<ie::Sprite::Make> ieml::Decode<char, ie::Sprite::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	auto& texture{map.at("texture").except().as<sf::Texture&>().except()};
@@ -78,4 +77,3 @@ orl::Option<ie::Sprite::Make> ieml::Decode<char, ie::Sprite::Make>::decode(ieml:
 	}
 	return ie::Sprite::Make{texture, min_size};
 }
-*/

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../OnlyDrawable.hpp"
 #include "../../IUninteractiveLayout/IUninteractiveLayout.hpp"
 
@@ -37,11 +38,9 @@ namespace ie {
 		sf::RectangleShape rectangle;
 		sf::CircleShape circle;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Capsule> {
-		static bool decode_pointer(const YAML::Node& node, Capsule*& capsule);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Capsule::Make> {
+	static orl::Option<ie::Capsule::Make> decode(ieml::Node const& node);
+};
