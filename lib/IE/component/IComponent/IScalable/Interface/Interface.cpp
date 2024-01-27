@@ -1,6 +1,7 @@
 #include "Interface.hpp"
 
 #include <cmath>
+#include <IEML/parser.hpp>
 #include "IE/modules/yaml-cpp/modules/load_modules.hpp"
 #include "IE/window/Window/Window.hpp"
 
@@ -30,41 +31,10 @@ namespace ie {
 				this->panel_manager_
 			}
 		)),
-		initialized_(true),
 		active_(true) {
 		init_info.draw_manager.add(*this);
 		init_info.update_manager.add(*this);
 	}
-	
-	Interface::Interface(BoxPtr<IScalable>&& object, AnimationManager animation_manager, BoxPtr<InteractionStack>&& interaction_stack) :
-		render_target_(nullptr),
-		interaction_stack_(interaction_stack),
-		animation_manager_(std::move(animation_manager)),
-		object_(std::move(object)),
-		initialized_(false), active_(true) {
-	}
-	
-	/*
-	Interface::Interface(const std::string& file_path, AnimationManager animation_manager, BoxPtr<InteractionStack>&& interaction_stack) :
-		Interface(BoxPtr{ie::load_from_yaml<ie::IScalable>(file_path)}, animation_manager, std::move(interaction_stack)) {
-	}
-	*/
-	
-	Interface::Interface(
-		sf::RenderWindow& window,
-		BoxPtr<IScalable>&& object,
-		AnimationManager animation_manager,
-		BoxPtr<InteractionStack>&& interaction_stack
-	) :
-		Interface(std::move(object), animation_manager, std::move(interaction_stack)) {
-		init(window);
-	}
-	
-	/*
-	Interface::Interface(sf::RenderWindow& window, const std::string& file_path, AnimationManager animation_manager, BoxPtr<InteractionStack>&& interaction_stack) :
-		Interface(window, BoxPtr{ie::load_from_yaml<ie::IScalable>(file_path)}, animation_manager, std::move(interaction_stack)) {
-	}
-	*/
 	
 	Interface::Interface(
 		sf::RenderWindow& window,
@@ -89,7 +59,6 @@ namespace ie {
 				this->panel_manager_
 			}
 		)),
-		initialized_(true),
 		active_(true) {
 	}
 	
@@ -119,10 +88,6 @@ namespace ie {
 	
 	InteractionManager& Interface::get_interaction_manager() {
 		return interaction_manager_;
-	}
-	
-	InteractionStack& Interface::get_interaction_stack() {
-		return *interaction_stack_;
 	}
 	
 	PanelManager& Interface::get_panel_manager() {
@@ -207,56 +172,32 @@ namespace ie {
 		set_size(sf::Vector2f(window_size));
 	}
 	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Interface>::decode_pointer(const YAML::Node& node, Interface*& interface) {
-		interface = new Interface{
-			node["object"].as<BoxPtr<IScalable> >(),
-			conv_def(node["animation-manager"], AnimationManager{}),
-			BoxPtr{conv_def_ptr<InteractionStack, InteractionStack>(node["interaction-stack"])}
-		};
-		return true;
+	Interface::Make make_interface(std::filesystem::path file_path, int argc, char* argv[]) {
+		if(auto modules = std::filesystem::path{file_path}.replace_filename("modules.ieml"); std::filesystem::exists(modules)) {
+			load_modules(argc, argv, modules);
+		}
+		
+		auto node{ieml::from_file(file_path)};
+		auto map{node.get_map_view().except()};
+		auto object{map.at("object").except().as<BoxPtr<IScalable::Make> >().move_except()};
+		return Interface::Make{std::move(object)};
+	}
+	
+	Interface make_interface(sf::RenderWindow& window, DynBuffer& dyn_buffer, std::filesystem::path file_path, int argc, char* argv[]) {
+		if(auto modules = std::filesystem::path{file_path}.replace_filename("modules.yaml"); std::filesystem::exists(modules)) {
+			load_modules(argc, argv, modules);
+		}
+		
+		auto node{ieml::from_file(file_path)};
+		auto map{node.get_map_view().except()};
+		auto object{map.at("object").except().as<BoxPtr<IScalable::Make> >().move_except()};
+		return Interface{window, dyn_buffer, std::move(object)};
+	}
+}
 
-	}
-	
-	Interface make_interface(const std::filesystem::path& file_path, int argc, char* argv[]) {
-		if(auto modules = std::filesystem::path{file_path}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
-			load_modules(argc, argv, modules);
-		
-		YAML::Node node{YAML::LoadFile(file_path.string())};
-		
-		return Interface{
-			node["object"].as<BoxPtr<IScalable> >(),
-			conv_def(node["animation-manager"], AnimationManager{}),
-			BoxPtr{conv_def_ptr<InteractionStack, InteractionStack>(node["interaction-stack"])}
-		};
-	}
-	
-	Interface make_interface(sf::RenderWindow& window, const std::filesystem::path& file_path, int argc, char* argv[]) {
-		if(auto modules = std::filesystem::path{file_path}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
-			load_modules(argc, argv, modules);
-		
-		YAML::Node node{YAML::LoadFile(file_path.string())};
-		
-		return Interface{
-			window,
-			node["object"].as<BoxPtr<IScalable> >(),
-			conv_def(node["animation-manager"], AnimationManager{}),
-			BoxPtr{conv_def_ptr<InteractionStack, InteractionStack>(node["interaction-stack"])}
-		};
-	}
-	
-	Interface* make_prt_interface(sf::RenderWindow& window, const std::filesystem::path& file_path, int argc, char* argv[]) {
-		if(auto modules = std::filesystem::path{file_path}.replace_filename("modules.yaml"); std::filesystem::exists(modules))
-			load_modules(argc, argv, modules);
-		
-		YAML::Node node{YAML::LoadFile(file_path.string())};
-		
-		return new Interface{
-			window,
-			node["object"].as<BoxPtr<IScalable> >(),
-			conv_def(node["animation-manager"], AnimationManager{}),
-			BoxPtr{conv_def_ptr<InteractionStack, InteractionStack>(node["interaction-stack"])}
-		};
-	}
-	*/
+orl::Option<ie::Interface::Make> ieml::Decode<char, ie::Interface::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::Interface::Make{
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except()
+	};
 }

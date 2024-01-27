@@ -2,12 +2,13 @@
 
 #include <filesystem>
 
-#include "../IScalable.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/panel/IPanelManager/PanelManager/PanelManager.hpp"
 #include "IE/interaction/InteractionManager/InteractionManager.hpp"
 #include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "IE/interaction/IAction/WheelAction/WheelAction.hpp"
 #include "IE/shared/DynBuffer/DynBuffer.hpp"
+#include "../IScalable.hpp"
 
 namespace ie {
 	class Interface : public virtual IScalable, public virtual IDrawable, public virtual IUpdatable {
@@ -32,36 +33,6 @@ namespace ie {
 		Interface(Make&& make, InitInfo init_info);
 		
 		explicit Interface(
-			BoxPtr<IScalable>&& object,
-			AnimationManager animation_manager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
-		);
-		
-		/*old_yaml
-		explicit Interface(
-			const std::string& file_path,
-			AnimationManager animation_manager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
-		);
-		*/
-		
-		explicit Interface(
-			sf::RenderWindow& window,
-			BoxPtr<IScalable>&& object,
-			AnimationManager animation_manager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
-		);
-		
-		/*old_yaml
-		explicit Interface(
-			sf::RenderWindow& window,
-			const std::string& file_path,
-			AnimationManager animation_manager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
-		);
-		*/
-		
-		explicit Interface(
 			sf::RenderWindow& window,
 			DynBuffer& dyn_buffer,
 			BoxPtr<IScalable::Make>&& object,
@@ -73,19 +44,17 @@ namespace ie {
 		
 		void init(sf::RenderWindow& window);
 		
-		[[nodiscard]] sf::RenderTarget& get_render_target();
+		sf::RenderTarget& get_render_target();
 		
-		[[nodiscard]] DrawManager& get_draw_manager();
+		DrawManager& get_draw_manager();
 		
-		[[nodiscard]] UpdateManager& get_update_manager();
+		UpdateManager& get_update_manager();
 		
-		[[nodiscard]] InteractionManager& get_interaction_manager();
+		InteractionManager& get_interaction_manager();
 		
-		[[nodiscard]] InteractionStack& get_interaction_stack();
+		PanelManager& get_panel_manager();
 		
-		[[nodiscard]] PanelManager& get_panel_manager();
-		
-		[[nodiscard]] IScalable& get_object();
+		IScalable& get_object();
 		
 		void set_render_window_size(sf::RenderWindow& window);
 		
@@ -126,20 +95,15 @@ namespace ie {
 		AnimationManager animation_manager_;
 		BoxPtr<IScalable> object_;
 		sf::Vector2f mouse_position_;
-		bool initialized_;
 		bool active_;
 	};
 	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Interface> {
-		static bool decode_pointer(const YAML::Node& node, Interface*& interface);
-	};
+	Interface::Make make_interface(std::filesystem::path file_path, int argc = 0, char* argv[] = {});
 	
-	Interface make_interface(const std::filesystem::path& file_path, int argc = 0, char* argv[] = {});
-	
-	Interface make_interface(sf::RenderWindow& window, const std::filesystem::path& file_path, int argc = 0, char* argv[] = {});
-	
-	Interface* make_prt_interface(sf::RenderWindow& window, const std::filesystem::path& file_path, int argc = 0, char* argv[] = {});
-	*/
+	Interface make_interface(sf::RenderWindow& window, DynBuffer& dyn_buffer, std::filesystem::path file_path, int argc = 0, char* argv[] = {});
 }
+
+template<>
+struct ieml::Decode<char, ie::Interface::Make> {
+	static orl::Option<ie::Interface::Make> decode(ieml::Node const& node);
+};

@@ -26,8 +26,6 @@ private:
 	std::array<float, N> last_fps_{};
 };
 
-#include "IEML/file-include-util.hpp"
-
 int main() {
 	ie::init();
 	
