@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../Box.hpp"
 #include "../../IUninteractive/IUninteractiveLayout/IUninteractiveObject/IUninteractiveObject.hpp"
 
@@ -34,11 +35,9 @@ namespace ie {
 	protected:
 		BoxPtr<IScalable> object_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxUninteractive> {
-		static bool decode_pointer(const YAML::Node& node, BoxUninteractive*& box_uninteractive);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxUninteractive::Make> {
+	static orl::Option<ie::BoxUninteractive::Make> decode(ieml::Node const& node);
+};

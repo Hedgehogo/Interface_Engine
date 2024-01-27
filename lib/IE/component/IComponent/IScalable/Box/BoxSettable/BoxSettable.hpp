@@ -1,9 +1,10 @@
 #pragma once
 
-#include "../Box.hpp"
-#include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/panel/IPanelManager/PanelManager/PanelManager.hpp"
 #include "IE/panel/IPanelManager/PanelManagerInterceptor/PanelManagerInterceptor.hpp"
+#include "../Box.hpp"
+#include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
 
 namespace ie {
 	class BoxSettable : public Box, public virtual IScalableObject, public virtual IDrawable, public virtual IUpdatable {

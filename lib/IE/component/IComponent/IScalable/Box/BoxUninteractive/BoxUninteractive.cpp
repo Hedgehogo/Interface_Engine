@@ -36,18 +36,15 @@ namespace ie {
 		return *object_;
 	}
 	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxUninteractive>::decode_pointer(const YAML::Node& node, BoxUninteractive*& box_uninteractive) {
-		box_uninteractive = new BoxUninteractive{
-			node["object"].as<BoxPtr<IScalable> >(),
-			conv_def(node["min-size"], sf::Vector2f{})
-		};
-		return true;
-
-	}
-	*/
-	
 	BoxUninteractive* BoxUninteractive::copy() {
 		return new BoxUninteractive{*this};
 	}
+}
+
+orl::Option<ie::BoxUninteractive::Make> ieml::Decode<char, ie::BoxUninteractive::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxUninteractive::Make{
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.get_as<sf::Vector2f>("min-size").ok_or({})
+	};
 }

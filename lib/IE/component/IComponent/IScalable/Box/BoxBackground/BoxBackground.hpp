@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableBackground/IScalableBackground.hpp"
 #include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
@@ -55,11 +56,9 @@ namespace ie {
 		BoxPtr<IScalable> object_;
 		sf::Vector2f offset_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxBackground> {
-		static bool decode_pointer(const YAML::Node& node, BoxBackground*& box_with_background);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxBackground::Make> {
+	static orl::Option<ie::BoxBackground::Make> decode(ieml::Node const& node);
+};

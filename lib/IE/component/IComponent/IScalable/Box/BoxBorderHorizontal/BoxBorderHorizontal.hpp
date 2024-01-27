@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
@@ -53,11 +54,9 @@ namespace ie {
 		std::vector<BoxPtr<IScalable> > objects_;
 		std::vector<float> bounds_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxBorderHorizontal> {
-		static bool decode_pointer(const YAML::Node& node, BoxBorderHorizontal*& box_with_border_horizontal);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxBorderHorizontal::Make> {
+	static orl::Option<ie::BoxBorderHorizontal::Make> decode(ieml::Node const& node);
+};

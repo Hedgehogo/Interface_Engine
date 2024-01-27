@@ -52,8 +52,14 @@ namespace ie {
 	}
 	
 	BoxConstRatio::BoxConstRatio(const BoxConstRatio& other) :
-		Box(other), background_(other.background_), const_object_(other.const_object_), second_object_(other.second_object_),
-		vertical_side_(other.vertical_side_), horizontal_side_(other.horizontal_side_), render_second_(other.render_second_), aspect_ratio_(other.aspect_ratio_) {
+		Box(other),
+		background_(other.background_),
+		const_object_(other.const_object_),
+		second_object_(other.second_object_),
+		vertical_side_(other.vertical_side_),
+		horizontal_side_(other.horizontal_side_),
+		render_second_(other.render_second_),
+		aspect_ratio_(other.aspect_ratio_) {
 	}
 	
 	void BoxConstRatio::init(InitInfo init_info) {
@@ -101,8 +107,10 @@ namespace ie {
 	void BoxConstRatio::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout_.resize(size, position);
 		
-		sf::Vector2f const_size = sf::Vector2f(size.x / size.y > aspect_ratio_ ? sf::Vector2f{size.y * aspect_ratio_, size.y} : sf::Vector2f{size.x, size.x / aspect_ratio_});
-		sf::Vector2f second_size = sf::Vector2f(size.x / size.y > aspect_ratio_ ? sf::Vector2f{size.x - const_size.x, size.y} : sf::Vector2f{size.x, size.y - const_size.y});
+		sf::Vector2f const_size = sf::Vector2f(
+			size.x / size.y > aspect_ratio_ ? sf::Vector2f{size.y * aspect_ratio_, size.y} : sf::Vector2f{size.x, size.x / aspect_ratio_});
+		sf::Vector2f second_size = sf::Vector2f(
+			size.x / size.y > aspect_ratio_ ? sf::Vector2f{size.x - const_size.x, size.y} : sf::Vector2f{size.x, size.y - const_size.y});
 		
 		sf::Vector2f const_position = sf::Vector2f{0, 0};
 		sf::Vector2f second_position = sf::Vector2f{0, 0};
@@ -147,7 +155,8 @@ namespace ie {
 	
 	sf::Vector2f BoxConstRatio::get_min_size() const {
 		sf::Vector2f const_min_size{const_object_->get_min_size()};
-		const_min_size = sf::Vector2f{std::max(const_min_size.x, const_min_size.y * aspect_ratio_), std::max(const_min_size.y, const_min_size.x / aspect_ratio_)};
+		const_min_size = sf::Vector2f{std::max(const_min_size.x, const_min_size.y * aspect_ratio_),
+									  std::max(const_min_size.y, const_min_size.x / aspect_ratio_)};
 		return max(const_min_size, background_->get_min_size(), minimum_size_);
 	}
 	
@@ -192,19 +201,21 @@ namespace ie {
 		const_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		second_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxConstRatio>::decode_pointer(const YAML::Node& node, BoxConstRatio*& box_with_const_ratio) {
-		box_with_const_ratio = new BoxConstRatio{
-			node["const-object"].as<BoxPtr<IScalable> >(),
-			node["second-object"].as<BoxPtr<IScalable> >(),
-			BoxPtr{conv_def_ptr<IUninteractive, Empty>(node["background"])},
-			node["aspect-ratio"].as<float>(),
-			conv_def(node["corner"], Corner::UpLeft),
-			conv_def(node["min-size"], sf::Vector2f{})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxConstRatio::Make> ieml::Decode<char, ie::BoxConstRatio::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxConstRatio::Make{
+		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("second-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		[&]{
+			if(auto background{map.at("background")}) {
+				return background.ok().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except();
+			}
+			return ie::make_box_ptr<ie::IUninteractive::Make, ie::Empty::Make>();
+		}(),
+		map.at("aspect-ratio").except().as<float>().except(),
+		map.get_as<ie::Corner>("corner").ok_or(ie::Corner::UpLeft),
+		map.get_as<sf::Vector2f>("min-size").ok_or({})
+	};
 }

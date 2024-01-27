@@ -1,7 +1,12 @@
 #include "BoxSwitch.hpp"
 
 namespace ie {
-	BoxSwitch::Make::Make(BoxPtr<IScalable::Make>&& inactive_object, BoxPtr<IScalable::Make>&& active_object, MakeDyn<ISBool> value, const sf::Vector2f& min_size) :
+	BoxSwitch::Make::Make(
+		BoxPtr<IScalable::Make>&& inactive_object,
+		BoxPtr<IScalable::Make>&& active_object,
+		MakeDyn<ISBool> value,
+		const sf::Vector2f& min_size
+	) :
 		inactive_object(std::move(inactive_object)), active_object(std::move(active_object)), value(std::move(value)), min_size(min_size) {
 	}
 	
@@ -78,17 +83,14 @@ namespace ie {
 	BoxSwitch* BoxSwitch::copy() {
 		return nullptr;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxSwitch>::decode_pointer(const YAML::Node& node, BoxSwitch*& box_switcher) {
-		box_switcher = new BoxSwitch{
-			node["inactive-object"].as<BoxPtr<IScalable>>(),
-			node["active-object"].as<BoxPtr<IScalable> >(),
-			Buffer::get<Sbool>(node["value"]),
-			conv_def(node["min-size"],sf::Vector2f{})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxSwitch::Make> ieml::Decode<char, ie::BoxSwitch::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxSwitch::Make{
+		map.at("inactive-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("active-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("value").except().as<ie::MakeDyn<ie::ISBool> >().move_except(),
+		map.get_as<sf::Vector2f>("min-size").ok_or({}),
+	};
 }

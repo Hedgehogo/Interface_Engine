@@ -98,16 +98,13 @@ namespace ie {
 	void BoxRenderTexture::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		object_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxRenderTexture>::decode_pointer(const YAML::Node& node, BoxRenderTexture*& box_with_render_texture) {
-		box_with_render_texture = new BoxRenderTexture{
-			node["object"].as<BoxPtr<IScalable> >(),
-			conv_def(node["optimize"], true),
-			conv_def(node["min-size"], sf::Vector2f{})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxRenderTexture::Make> ieml::Decode<char, ie::BoxRenderTexture::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxRenderTexture::Make{
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.get_as<bool>("optimize").ok_or(true),
+		map.get_as<sf::Vector2f>("min-size").ok_or({})
+	};
 }

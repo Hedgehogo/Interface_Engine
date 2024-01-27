@@ -38,7 +38,7 @@ namespace ie {
 		second_object_(make.second_object->make(init_info)),
 		border_value_(
 			init_info.dyn_buffer.get(std::move(make.border_value)),
-			[this](const float& ) {
+			[this](const float&) {
 				this->resize(layout_.size, layout_.position);
 			}
 		),
@@ -203,19 +203,17 @@ namespace ie {
 		first_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		second_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxMovableBorder>::decode_pointer(const YAML::Node& node, BoxMovableBorder*& box_with_movable_border) {
-		box_with_movable_border = new BoxMovableBorder{
-			node["first-object"].as < BoxPtr < IScalable > > (),
-			node["first-object"].as < BoxPtr < IScalable > > (),
-			conv_bool_def(node["border-direction"], "horizontal", "vertical", false),
-			Buffer::get<SCoefficientValue>(node["border-value"]),
-			conv_def(node["border-interaction-size"], 5),
-			conv_def(node["min-size"], sf::Vector2f{})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxMovableBorder::Make> ieml::Decode<char, ie::BoxMovableBorder::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxMovableBorder::Make{
+		map.at("first-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("first-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.get_as<bool>("border-horizontal").ok_or(false),
+		map.at("border-value").except().as<ie::MakeDyn<ie::ISRFloat> >().move_except(),
+		map.get_as<int>("border-interaction-size").ok_or(5),
+		map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft),
+		map.get_as<sf::Vector2f>("min-size").ok_or({})
+	};
 }

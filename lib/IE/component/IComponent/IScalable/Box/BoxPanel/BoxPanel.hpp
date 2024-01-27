@@ -1,8 +1,9 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
+#include "IE/panel/BasePanel/ConstPanel/ConstPanel.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
-#include "IE/panel/BasePanel/ConstPanel/ConstPanel.hpp"
 
 namespace ie {
 	class BoxPanel : public Box, public virtual IScalableObject {
@@ -43,11 +44,9 @@ namespace ie {
 		BoxPtr<IScalable> object_;
 		BoxPtr<ConstPanel> panel_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxPanel> {
-		static bool decode_pointer(const YAML::Node& node, BoxPanel*& box_with_panel);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxPanel::Make> {
+	static orl::Option<ie::BoxPanel::Make> decode(ieml::Node const& node);
+};

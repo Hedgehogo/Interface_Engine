@@ -2,12 +2,23 @@
 #include <vector>
 
 namespace ie {
-	BoxBorder::Make::Make(std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects, std::vector<float> bounds_horizontal, std::vector<float> bounds_vertical, sf::Vector2f min_size) :
-		objects(std::move(objects)), bounds_horizontal(std::move(add_bounds(bounds_horizontal))), bounds_vertical(std::move(add_bounds(bounds_vertical))), min_size(min_size) {
+	BoxBorder::Make::Make(
+		std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects,
+		std::vector<float> bounds_horizontal,
+		std::vector<float> bounds_vertical,
+		sf::Vector2f min_size
+	) :
+		objects(std::move(objects)),
+		bounds_horizontal(std::move(add_bounds(bounds_horizontal))),
+		bounds_vertical(std::move(add_bounds(bounds_vertical))),
+		min_size(min_size) {
 	}
 	
 	BoxBorder::Make::Make(std::vector<std::vector<BoxPtr<IScalable::Make> > >&& objects, sf::Vector2f min_size) :
-		objects(std::move(objects)), bounds_horizontal(gen_bounds(this->objects.size())), bounds_vertical(gen_bounds(y_size(this->objects))), min_size(min_size) {
+		objects(std::move(objects)),
+		bounds_horizontal(gen_bounds(this->objects.size())),
+		bounds_vertical(gen_bounds(y_size(this->objects))),
+		min_size(min_size) {
 	}
 	
 	BoxBorder* BoxBorder::Make::make(InitInfo init_info) {
@@ -21,12 +32,21 @@ namespace ie {
 		bounds_vertical_(std::move(make.bounds_vertical)) {
 	}
 	
-	BoxBorder::BoxBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, std::vector<float> bounds_horizontal, std::vector<float> bounds_vertical, sf::Vector2f min_size) :
-		Box(min_size), objects_(std::move(objects)), bounds_horizontal_(std::move(add_bounds(bounds_horizontal))), bounds_vertical_(std::move(add_bounds(bounds_vertical))) {
+	BoxBorder::BoxBorder(
+		std::vector<std::vector<BoxPtr<IScalable> > >&& objects,
+		std::vector<float> bounds_horizontal,
+		std::vector<float> bounds_vertical,
+		sf::Vector2f min_size
+	) :
+		Box(min_size),
+		objects_(std::move(objects)),
+		bounds_horizontal_(std::move(add_bounds(bounds_horizontal))),
+		bounds_vertical_(std::move(add_bounds(bounds_vertical))) {
 	}
 	
 	BoxBorder::BoxBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, sf::Vector2f min_size) :
-		Box(min_size), objects_(objects), bounds_horizontal_(gen_bounds(this->objects_.size())), bounds_vertical_(gen_bounds(y_size(this->objects_))) {
+		Box(min_size), objects_(objects), bounds_horizontal_(gen_bounds(this->objects_.size())),
+		bounds_vertical_(gen_bounds(y_size(this->objects_))) {
 	}
 	
 	void BoxBorder::init(InitInfo init_info) {
@@ -146,27 +166,21 @@ namespace ie {
 			}
 		}
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxBorder>::decode_pointer(const YAML::Node& node, BoxBorder*& box_with_border) {
-		auto objects(node["objects"].as<std::vector<std::vector<BoxPtr<IScalable> > > >());
-		auto min_size{conv_def(node["min-size"], sf::Vector2f{})};
-		
-		if(node["bounds-vertical"] && node["bounds-horizontal"]) {
-			box_with_border = new BoxBorder{
-				std::move(objects),
-				node["bounds-vertical"].as<std::vector<float> >(),
-				node["bounds-horizontal"].as<std::vector<float> >(),
-				min_size
-			};
-		} else {
-			box_with_border = new BoxBorder{
-				std::move(objects),
-				min_size
-			};
-		}
-		return true;
+}
 
+orl::Option<ie::BoxBorder::Make> ieml::Decode<char, ie::BoxBorder::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	auto objects(map.at("objects").except().as<std::vector<std::vector<ie::BoxPtr<ie::IScalable::Make> > > >().move_except());
+	auto min_size{map.get_as<sf::Vector2f>("min-size").ok_or({})};
+	auto bounds_vertical{map.at("bounds-vertical")};
+	auto bounds_horizontal{map.at("bounds-horizontal")};
+	if(bounds_vertical.is_ok() && bounds_horizontal.is_ok()) {
+		return ie::BoxBorder::Make{
+			std::move(objects),
+			bounds_vertical.ok().as<std::vector<float> >().move_except(),
+			bounds_horizontal.ok().as<std::vector<float> >().move_except(),
+			min_size
+		};
 	}
-	*/
+	return {{std::move(objects), min_size}};
 }

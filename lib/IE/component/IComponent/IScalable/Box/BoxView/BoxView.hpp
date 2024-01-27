@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../Box.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/component/IDrawable/IDrawable/IDrawable.hpp"
+#include "../Box.hpp"
 
 namespace ie {
 	class BoxWithView : public Box, public virtual IDrawable {

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
 
@@ -32,11 +33,9 @@ namespace ie {
 	protected:
 		BoxPtr<IScalable> object_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxMakePermeable> {
-		static bool decode_pointer(const YAML::Node& node, BoxMakePermeable*& box_make_permeable);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxMakePermeable::Make> {
+	static orl::Option<ie::BoxMakePermeable::Make> decode(ieml::Node const& node);
+};

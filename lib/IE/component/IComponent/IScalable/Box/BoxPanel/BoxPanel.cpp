@@ -55,16 +55,13 @@ namespace ie {
 		object_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		panel_->draw_debug(render_target, 0, indent_addition, hue, hue_offset);
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxPanel>::decode_pointer(const YAML::Node& node, BoxPanel*& box_with_panel) {
-		box_with_panel = new BoxPanel{
-			node["panel"].as<BoxPtr<ConstPanel> >(),
-			node["panel"].as<BoxPtr<IScalable> >(),
-			conv_def(node["min-size"], sf::Vector2f{}),
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxPanel::Make> ieml::Decode<char, ie::BoxPanel::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxPanel::Make{
+		map.at("panel").except().as<ie::BoxPtr<ie::ConstPanel::Make> >().move_except(),
+		map.at("panel").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.get_as<sf::Vector2f>("min-size").ok_or({}),
+	};
 }

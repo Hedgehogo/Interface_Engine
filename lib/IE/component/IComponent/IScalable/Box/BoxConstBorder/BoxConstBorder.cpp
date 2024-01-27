@@ -7,7 +7,12 @@ namespace ie {
 		float border_distance,
 		Side side,
 		sf::Vector2f min_size
-	) : const_object(std::move(const_object)), second_object(std::move(second_object)), border_distance(border_distance), side(side), min_size(min_size) {
+	) :
+		const_object(std::move(const_object)),
+		second_object(std::move(second_object)),
+		border_distance(border_distance),
+		side(side),
+		min_size(min_size) {
 	}
 	
 	BoxConstBorder* BoxConstBorder::Make::make(InitInfo init_info) {
@@ -22,8 +27,18 @@ namespace ie {
 		side_(make.side) {
 	}
 	
-	BoxConstBorder::BoxConstBorder(BoxPtr<IScalable>&& const_object, BoxPtr<IScalable>&& second_object, Side side, float border_distance, sf::Vector2f min_size) :
-		Box(min_size), const_object_(std::move(const_object)), second_object_(std::move(second_object)), border_distance_(border_distance), side_(side) {
+	BoxConstBorder::BoxConstBorder(
+		BoxPtr<IScalable>&& const_object,
+		BoxPtr<IScalable>&& second_object,
+		Side side,
+		float border_distance,
+		sf::Vector2f min_size
+	) :
+		Box(min_size),
+		const_object_(std::move(const_object)),
+		second_object_(std::move(second_object)),
+		border_distance_(border_distance),
+		side_(side) {
 	}
 	
 	void BoxConstBorder::init(InitInfo init_info) {
@@ -106,18 +121,15 @@ namespace ie {
 		const_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		second_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxConstBorder>::decode_pointer(const YAML::Node& node, BoxConstBorder*& box_with_const_border) {
-		box_with_const_border = new BoxConstBorder{
-			node["const-object"].as<BoxPtr<IScalable> >(),
-			node["second-object"].as<BoxPtr<IScalable> >(),
-			node["side"].as<Side>(),
-			node["border-distance"].as<float>(),
-			conv_def(node["min-size"], sf::Vector2f{})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxConstBorder::Make> ieml::Decode<char, ie::BoxConstBorder::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxConstBorder::Make{
+		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("second-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("border-distance").except().as<float>().except(),
+		map.at("side").except().as<ie::Side>().except(),
+		map.get_as<sf::Vector2f>("min-size").ok_or({})
+	};
 }

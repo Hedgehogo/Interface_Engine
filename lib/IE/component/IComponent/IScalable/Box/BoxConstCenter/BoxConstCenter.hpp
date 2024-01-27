@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 
@@ -53,11 +54,9 @@ namespace ie {
 		sf::Vector2f const_size_;
 		bool resized_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxConstCenter> {
-		static bool decode_pointer(const YAML::Node& node, BoxConstCenter*& box_with_const_center);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxConstCenter::Make> {
+	static orl::Option<ie::BoxConstCenter::Make> decode(ieml::Node const& node);
+};

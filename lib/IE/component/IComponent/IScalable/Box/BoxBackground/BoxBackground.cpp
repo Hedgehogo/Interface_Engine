@@ -1,7 +1,12 @@
 #include "BoxBackground.hpp"
 
 namespace ie {
-	BoxBackground::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& background, sf::Vector2f offset, sf::Vector2f min_size) :
+	BoxBackground::Make::Make(
+		BoxPtr<IScalable::Make>&& object,
+		BoxPtr<IUninteractive::Make>&& background,
+		sf::Vector2f offset,
+		sf::Vector2f min_size
+	) :
 		object(std::move(object)), background(std::move(background)), offset(offset), min_size(min_size) {
 	}
 	
@@ -81,19 +86,15 @@ namespace ie {
 	void BoxBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
-		
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxBackground>::decode_pointer(const YAML::Node& node, BoxBackground*& box_with_background) {
-		box_with_background = new BoxBackground{
-			node["object"].as<BoxPtr<IScalable> >(),
-			node["background"].as<BoxPtr<IUninteractive> >(),
-			conv_def(node["offset"], sf::Vector2f{}),
-			conv_def(node["min-size"], sf::Vector2f{}),
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxBackground::Make> ieml::Decode<char, ie::BoxBackground::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxBackground::Make{
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("background").except().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except(),
+		map.get_as<sf::Vector2f>("offset").ok_or({}),
+		map.get_as<sf::Vector2f>("min-size").ok_or({}),
+	};
 }

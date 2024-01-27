@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISValue/SVec2/SVec2.hpp"
 #include "../BoxRenderTexture/BoxRenderTexture.hpp"
@@ -86,16 +87,14 @@ namespace ie {
 		
 		sf::Clock clock_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxShader> {
-		static bool decode_pointer(const YAML::Node& node, BoxShader*& box_with_shader);
-	};
-	*/
 }
 
 template<>
 struct ieml::Decode<char, ie::BoxShader::LoadTransmission> {
 	static orl::Option<ie::BoxShader::LoadTransmission> decode(ieml::Node const& node);
+};
+
+template<>
+struct ieml::Decode<char, ie::BoxShader::Make> {
+	static orl::Option<ie::BoxShader::Make> decode(ieml::Node const& node);
 };

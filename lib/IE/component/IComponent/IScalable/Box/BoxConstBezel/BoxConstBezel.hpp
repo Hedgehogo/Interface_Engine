@@ -1,10 +1,11 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
+#include "IE/interaction/InteractionStack/InteractionStack.hpp"
+#include "IE/interaction/InteractionManager/InteractionManager.hpp"
 #include "../Box.hpp"
 #include "../../IUninteractive/IUninteractive.hpp"
 #include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
-#include "IE/interaction/InteractionStack/InteractionStack.hpp"
-#include "IE/interaction/InteractionManager/InteractionManager.hpp"
 
 namespace ie {
 	class BoxConstBezel : public Box, public virtual IScalableObject {
@@ -47,11 +48,9 @@ namespace ie {
 		BoxPtr<IScalable> object_;
 		float thickness_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxConstBezel> {
-		static bool decode_pointer(const YAML::Node& node, BoxConstBezel*& box_with_const_bezel);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxConstBezel::Make> {
+	static orl::Option<ie::BoxConstBezel::Make> decode(ieml::Node const& node);
+};

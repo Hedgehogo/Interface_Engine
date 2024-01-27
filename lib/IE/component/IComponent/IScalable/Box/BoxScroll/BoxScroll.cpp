@@ -59,16 +59,13 @@ namespace ie {
 	BoxScroll* BoxScroll::copy() {
 		return nullptr;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxScroll>::decode_pointer(const YAML::Node& node, BoxScroll*& box_scroll) {
-		box_scroll = new BoxScroll{
-			node["object"].as<BoxPtr<IComponent> >(),
-			Buffer::get<SRVec2f>(node["normal-object-position"]),
-			(node["min-size"] ? node["min-size"].as<sf::Vector2f>() : sf::Vector2f{0, 0})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxScroll::Make> ieml::Decode<char, ie::BoxScroll::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxScroll::Make{
+		map.at("object").except().as<ie::BoxPtr<ie::IComponent::Make> >().move_except(),
+		map.at("normal-object-position").except().as<ie::MakeDyn<ie::SRVec2F> >().move_except(),
+		map.get_as<sf::Vector2f>("min-size").ok_or({}),
+	};
 }

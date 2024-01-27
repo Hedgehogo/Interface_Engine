@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/enums/Side/Side.hpp"
 #include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "../Box.hpp"
@@ -52,11 +53,9 @@ namespace ie {
 		float border_distance_;
 		Side side_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxConstBorder> {
-		static bool decode_pointer(const YAML::Node& node, BoxConstBorder*& box_with_const_border);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxConstBorder::Make> {
+	static orl::Option<ie::BoxConstBorder::Make> decode(ieml::Node const& node);
+};

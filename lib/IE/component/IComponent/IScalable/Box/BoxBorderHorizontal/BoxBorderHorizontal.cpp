@@ -10,7 +10,12 @@ namespace ie {
 		objects(std::move(objects)), bounds(gen_bounds(this->objects.size())), min_size(min_size) {
 	}
 	
-	BoxBorderHorizontal::Make::Make(BoxPtr<IScalable::Make>&& first_object, BoxPtr<IScalable::Make>&& second_object, float bound, sf::Vector2f min_size) :
+	BoxBorderHorizontal::Make::Make(
+		BoxPtr<IScalable::Make>&& first_object,
+		BoxPtr<IScalable::Make>&& second_object,
+		float bound,
+		sf::Vector2f min_size
+	) :
 		objects(make_vector(std::move(first_object), std::move(second_object))), bounds({0.f, bound, 1.f}), min_size(min_size) {
 	}
 	
@@ -30,7 +35,12 @@ namespace ie {
 		Box(min_size), objects_(std::move(objects)), bounds_(gen_bounds(this->objects_.size())) {
 	}
 	
-	BoxBorderHorizontal::BoxBorderHorizontal(BoxPtr<IScalable>&& first_object, BoxPtr<IScalable>&& second_object, float bound, sf::Vector2f min_size) :
+	BoxBorderHorizontal::BoxBorderHorizontal(
+		BoxPtr<IScalable>&& first_object,
+		BoxPtr<IScalable>&& second_object,
+		float bound,
+		sf::Vector2f min_size
+	) :
 		Box(min_size), objects_({std::move(first_object), std::move(second_object)}), bounds_({0.f, bound, 1.f}) {
 	}
 	
@@ -117,36 +127,28 @@ namespace ie {
 			object->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		}
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxBorderHorizontal>::decode_pointer(const YAML::Node& node, BoxBorderHorizontal*& box_with_border_horizontal) {
-		auto min_size{conv_def(node["min-size"], sf::Vector2f{})};
-		
-		if(node["objects"]) {
-			auto objects{node["objects"].as<std::vector<BoxPtr<IScalable> > >()};
-			
-			if(node["bounds"]) {
-				box_with_border_horizontal = new BoxBorderHorizontal{
-					std::move(objects),
-					node["bounds"].as<std::vector<float> >(),
-					min_size
-				};
-			} else {
-				box_with_border_horizontal = new BoxBorderHorizontal{
-					std::move(objects),
-					min_size
-				};
-			}
-		} else {
-			box_with_border_horizontal = new BoxBorderHorizontal{
-				node["first-object"].as<BoxPtr<IScalable> >(),
-				node["first-object"].as<BoxPtr<IScalable> >(),
-				conv_def(node["bound"], 0.5f),
-				min_size
-			};
-		}
-		return true;
+}
 
+orl::Option<ie::BoxBorderHorizontal::Make> ieml::Decode<char, ie::BoxBorderHorizontal::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	auto min_size{map.get_as<sf::Vector2f>("min-size").ok_or({})};
+	auto first_object{map.at("first-object")};
+	auto second_object{map.at("second-object")};
+	if(first_object.is_ok() && second_object.is_ok()) {
+		return ie::BoxBorderHorizontal::Make{
+			first_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+			second_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+			map.get_as<float>("bound").ok_or(0.5),
+			min_size
+		};
 	}
-	*/
+	auto objects{map.at("bounds").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().move_except()};
+	if(auto bounds{map.at("bounds")}) {
+		return ie::BoxBorderHorizontal::Make{
+			std::move(objects),
+			bounds.ok().as<std::vector<float> >().move_except(),
+			min_size
+		};
+	}
+	return {{std::move(objects), min_size}};
 }

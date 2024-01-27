@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISRanged/ISRanged.hpp"
 #include "../Box.hpp"
@@ -47,11 +48,9 @@ namespace ie {
 		std::vector<BoxPtr<IScalable> > objects_;
 		ISRSize& value_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxTabs> {
-		static bool decode_pointer(const YAML::Node& node, BoxTabs*& box_with_tabs);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxTabs::Make> {
+	static orl::Option<ie::BoxTabs::Make> decode(ieml::Node const& node);
+};

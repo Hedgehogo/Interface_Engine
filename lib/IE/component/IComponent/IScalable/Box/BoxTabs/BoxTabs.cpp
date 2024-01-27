@@ -80,16 +80,13 @@ namespace ie {
 	BoxTabs* BoxTabs::copy() {
 		return nullptr;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxTabs>::decode_pointer(const YAML::Node& node, BoxTabs*& box_with_tabs) {
-		box_with_tabs = new BoxTabs{
-			node["objects"].as<std::vector<BoxPtr<IScalable> > >(),
-			Buffer::get<ISint>(node["value"]),
-			conv_def(node["min-size"], sf::Vector2f{})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxTabs::Make> ieml::Decode<char, ie::BoxTabs::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxTabs::Make{
+		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().move_except(),
+		map.at("value").except().as<ie::MakeDyn<ie::ISRSize> >().move_except(),
+		map.get_as<sf::Vector2f>("min-size").ok_or({})
+	};
 }

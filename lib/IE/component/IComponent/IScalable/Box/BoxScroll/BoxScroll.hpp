@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISValue/SVec2/SVec2.hpp"
 #include "../BoxView/BoxView.hpp"
@@ -38,11 +39,9 @@ namespace ie {
 		BoxPtr<IComponent> object_;
 		SReader<SRVec2F> normal_object_position_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxScroll> {
-		static bool decode_pointer(const YAML::Node& node, BoxScroll*& box_scroll);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxScroll::Make> {
+	static orl::Option<ie::BoxScroll::Make> decode(ieml::Node const& node);
+};

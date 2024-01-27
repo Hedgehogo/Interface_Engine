@@ -1,7 +1,12 @@
 #include "BoxConstRatioCenter.hpp"
 
 namespace ie {
-	BoxConstRatioCenter::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& background, float aspect_ratio, sf::Vector2f min_size) :
+	BoxConstRatioCenter::Make::Make(
+		BoxPtr<IScalable::Make>&& object,
+		BoxPtr<IUninteractive::Make>&& background,
+		float aspect_ratio,
+		sf::Vector2f min_size
+	) :
 		object(std::move(object)),
 		first_object(new Empty::Make),
 		second_object(new Empty::Make),
@@ -45,7 +50,13 @@ namespace ie {
 		BoxPtr<IUninteractive>&& background,
 		float aspect_ratio,
 		sf::Vector2f min_size
-	) : Box(min_size), background_(std::move(background)), object_(std::move(object)), first_object_(new Empty), second_object_(new Empty), aspect_ratio_(aspect_ratio) {
+	) :
+		Box(min_size),
+		background_(std::move(background)),
+		object_(std::move(object)),
+		first_object_(new Empty),
+		second_object_(new Empty),
+		aspect_ratio_(aspect_ratio) {
 	}
 	
 	BoxConstRatioCenter::BoxConstRatioCenter(
@@ -55,11 +66,22 @@ namespace ie {
 		BoxPtr<IUninteractive>&& background,
 		float aspect_ratio,
 		sf::Vector2f min_size
-	) : Box(min_size), background_(std::move(background)), object_(std::move(object)), first_object_(std::move(first_object)), second_object_(std::move(second_object)), aspect_ratio_(aspect_ratio) {
+	) :
+		Box(min_size),
+		background_(std::move(background)),
+		object_(std::move(object)),
+		first_object_(std::move(first_object)),
+		second_object_(std::move(second_object)),
+		aspect_ratio_(aspect_ratio) {
 	}
 	
 	BoxConstRatioCenter::BoxConstRatioCenter(const BoxConstRatioCenter& other) :
-		Box(other), background_(other.background_), object_(other.object_), first_object_(other.first_object_), second_object_(other.second_object_), aspect_ratio_(other.aspect_ratio_) {
+		Box(other),
+		background_(other.background_),
+		object_(other.object_),
+		first_object_(other.first_object_),
+		second_object_(other.second_object_),
+		aspect_ratio_(other.aspect_ratio_) {
 	}
 	
 	void BoxConstRatioCenter::init(InitInfo init_info) {
@@ -145,13 +167,15 @@ namespace ie {
 	
 	sf::Vector2f BoxConstRatioCenter::get_min_size() const {
 		sf::Vector2f object_min_size{object_->get_min_size()};
-		object_min_size = sf::Vector2f{std::max(object_min_size.x, object_min_size.y * aspect_ratio_), std::max(object_min_size.y, object_min_size.x / aspect_ratio_)};
+		object_min_size = sf::Vector2f{std::max(object_min_size.x, object_min_size.y * aspect_ratio_),
+									   std::max(object_min_size.y, object_min_size.x / aspect_ratio_)};
 		return max(object_min_size, background_->get_min_size(), minimum_size_);
 	}
 	
 	sf::Vector2f BoxConstRatioCenter::get_normal_size() const {
 		sf::Vector2f object_normal_size{object_->get_normal_size()};
-		object_normal_size = sf::Vector2f{std::max(object_normal_size.x, object_normal_size.y * aspect_ratio_), std::max(object_normal_size.y, object_normal_size.x / aspect_ratio_)};
+		object_normal_size = sf::Vector2f{std::max(object_normal_size.x, object_normal_size.y * aspect_ratio_),
+										  std::max(object_normal_size.y, object_normal_size.x / aspect_ratio_)};
 		return max(object_normal_size, background_->get_normal_size());
 	}
 	
@@ -197,19 +221,31 @@ namespace ie {
 		first_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		second_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxConstRatioCenter>::decode_pointer(const YAML::Node& node, BoxConstRatioCenter*& box_with_const_ratio_center) {
-		box_with_const_ratio_center = new BoxConstRatioCenter{
-			node["object"].as<BoxPtr<IScalable> >(),
-			BoxPtr{conv_def_ptr<IScalable, Empty>(node["first-object"])},
-			BoxPtr{conv_def_ptr<IScalable, Empty>(node["second-object"])},
-			BoxPtr{conv_def_ptr<IUninteractive, Empty>(node["background"])},
-			node["aspect-ratio"].as<float>(),
-			node["min-size"].as<sf::Vector2f>(),
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxConstRatioCenter::Make> ieml::Decode<char, ie::BoxConstRatioCenter::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxConstRatioCenter::Make{
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		[&]{
+			if(auto first_object{map.at("first-object")}) {
+				return first_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().move_except();
+			}
+			return ie::make_box_ptr<ie::IScalable::Make, ie::Empty::Make>();
+		}(),
+		[&]{
+			if(auto second_object{map.at("second-object")}) {
+				return second_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().move_except();
+			}
+			return ie::make_box_ptr<ie::IScalable::Make, ie::Empty::Make>();
+		}(),
+		[&]{
+			if(auto background{map.at("background")}) {
+				return background.ok().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except();
+			}
+			return ie::make_box_ptr<ie::IUninteractive::Make, ie::Empty::Make>();
+		}(),
+		map.at("aspect-ratio").except().as<float>().except(),
+		map.at("min-size").except().as<sf::Vector2f>().except(),
+	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
 
@@ -55,11 +56,9 @@ namespace ie {
 		bool optimize_;
 		bool active_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxRenderTexture> {
-		static bool decode_pointer(const YAML::Node& node, BoxRenderTexture*& box_with_render_texture);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxRenderTexture::Make> {
+	static orl::Option<ie::BoxRenderTexture::Make> decode(ieml::Node const& node);
+};

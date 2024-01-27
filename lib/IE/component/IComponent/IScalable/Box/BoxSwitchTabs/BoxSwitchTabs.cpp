@@ -45,7 +45,7 @@ namespace ie {
 	
 	void BoxSwitchTabs::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout_.resize(size, position);
-		for(auto& object : objects_) {
+		for(auto& object: objects_) {
 			object->resize(size, position);
 		}
 	}
@@ -70,30 +70,16 @@ namespace ie {
 		return nullptr;
 	}
 	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxSwitchTabs>::decode_pointer(const YAML::Node& node, BoxSwitchTabs*& box_with_changeable_objects) {
-		auto objects{node["objects"].as<std::vector<BoxPtr<IScalable> > >()};
-		auto min_size{conv_def(node["min-size"], sf::Vector2f{})};
-		
-		if(node["value"]) {
-			box_with_changeable_objects = new BoxSwitchTabs{
-				std::move(objects),
-				Buffer::get<SValue<size_t>>(node["value"]),
-				min_size
-			};
-		} else {
-			box_with_changeable_objects = new BoxSwitchTabs{
-				std::move(objects),
-				conv_def(node["index"], 0u),
-				min_size
-			};
-		}
-		return true;
-
-	}
-	*/
-	
 	void BoxSwitchTabs::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
 		objects_[value_.get()]->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
+}
+
+orl::Option<ie::BoxSwitchTabs::Make> ieml::Decode<char, ie::BoxSwitchTabs::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxSwitchTabs::Make{
+		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().move_except(),
+		map.get_as<ie::MakeDyn<ie::ISRSize> >("value").move_ok_or({ie::make_box_ptr<ie::SRSize::Make>(0u)}),
+		map.get_as<sf::Vector2f>("min-size").ok_or({})
+	};
 }

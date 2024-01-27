@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISValue/ISValue.hpp"
 #include "../Box.hpp"
@@ -52,11 +53,9 @@ namespace ie {
 		BoxPtr<IScalable> active_object_;
 		ISBool& value_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxSwitch> {
-		static bool decode_pointer(const YAML::Node& node, BoxSwitch*& box_switcher);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxSwitch::Make> {
+	static orl::Option<ie::BoxSwitch::Make> decode(ieml::Node const& node);
+};

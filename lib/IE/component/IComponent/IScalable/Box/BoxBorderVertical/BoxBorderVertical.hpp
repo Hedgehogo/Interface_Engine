@@ -1,9 +1,10 @@
 #pragma once
 
-#include "../Box.hpp"
-#include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "IE/interaction/InteractionManager/InteractionManager.hpp"
+#include "../Box.hpp"
+#include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
 
 namespace ie {
 	class BoxBorderVertical : public Box, public virtual IScalableObjectsArray {
@@ -54,11 +55,9 @@ namespace ie {
 		std::vector<BoxPtr<IScalable> > objects_;
 		std::vector<float> bounds_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxBorderVertical> {
-		static bool decode_pointer(const YAML::Node& node, BoxBorderVertical*& box_with_border_vertical);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxBorderVertical::Make> {
+	static orl::Option<ie::BoxBorderVertical::Make> decode(ieml::Node const& node);
+};

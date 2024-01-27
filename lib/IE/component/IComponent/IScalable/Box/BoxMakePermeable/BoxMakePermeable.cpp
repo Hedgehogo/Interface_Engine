@@ -37,15 +37,12 @@ namespace ie {
 	BoxMakePermeable* BoxMakePermeable::copy() {
 		return new BoxMakePermeable{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxMakePermeable>::decode_pointer(const YAML::Node& node, BoxMakePermeable*& box_make_permeable) {
-		box_make_permeable = new BoxMakePermeable{
-			node["object"].as<BoxPtr<IScalable> >(),
-			conv_def(node["min-size"], sf::Vector2f{})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxMakePermeable::Make> ieml::Decode<char, ie::BoxMakePermeable::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxMakePermeable::Make{
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.get_as<sf::Vector2f>("min-size").ok_or({})
+	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
 #include "MovableBorderAction/MovableBorderAction.hpp"
@@ -81,11 +82,9 @@ namespace ie {
 		int border_interaction_size_;
 		bool is_horizontal_border_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxMovableBorder> {
-		static bool decode_pointer(const YAML::Node& node, BoxMovableBorder*& box_with_movable_border);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxMovableBorder::Make> {
+	static orl::Option<ie::BoxMovableBorder::Make> decode(ieml::Node const& node);
+};

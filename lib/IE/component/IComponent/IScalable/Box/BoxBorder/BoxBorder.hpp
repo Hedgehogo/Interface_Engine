@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../Box.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/interaction/InteractionStack/InteractionStack.hpp"
+#include "../Box.hpp"
 
 namespace ie {
 	class BoxBorder : public Box {
@@ -44,11 +45,9 @@ namespace ie {
 		std::vector<float> bounds_horizontal_;
 		std::vector<float> bounds_vertical_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxBorder> {
-		static bool decode_pointer(const YAML::Node& node, BoxBorder*& box_with_border);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxBorder::Make> {
+	static orl::Option<ie::BoxBorder::Make> decode(ieml::Node const& node);
+};

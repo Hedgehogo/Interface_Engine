@@ -52,16 +52,13 @@ namespace ie {
 	BoxAlternative* BoxAlternative::copy() {
 		return new BoxAlternative{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxAlternative>::decode_pointer(const YAML::Node& node, BoxAlternative*& box_with_alternative_object) {
-		box_with_alternative_object = new BoxAlternative{
-			node["top-object"].as<BoxPtr<IScalable> >(),
-			node["bottom-object"].as<BoxPtr<IScalable> >(),
-			conv_def(node["min-size"], sf::Vector2f{}),
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxAlternative::Make> ieml::Decode<char, ie::BoxAlternative::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxAlternative::Make{
+		map.at("top-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("bottom-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.get_as<sf::Vector2f>("min-size").ok_or({}),
+	};
 }

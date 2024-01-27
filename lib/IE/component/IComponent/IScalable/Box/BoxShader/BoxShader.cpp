@@ -119,29 +119,6 @@ namespace ie {
 	BoxShader* BoxShader::copy() {
 		return new BoxShader{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxShader>::decode_pointer(const YAML::Node& node, BoxShader*& box_with_shader) {
-		sf::Shader* shader{new sf::Shader{}};
-		if(node["shader"]) {
-			node["shader"] >> *shader;
-		}
-		box_with_shader = new BoxShader{
-			node["object"].as < BoxPtr < IScalable > > (),
-			shader,
-			convert_transmission_def(node["transmission"]),
-			get_s_values_def<ISfloat>(node["values-f"]),
-			get_s_values_def<ISint>(node["values-i"]),
-			get_s_values_def<ISbool>(node["values-b"]),
-			get_s_values_def<ISValue<sf::Color> >(node["values-c"]),
-			get_s_values_def<SRVec2f>(node["values-v"]),
-			conv_def(node["optimize"], true),
-			conv_def(node["min-size"], sf::Vector2f{})
-		};
-		return true;
-
-	}
-	*/
 }
 
 orl::Option<ie::BoxShader::LoadTransmission>
@@ -169,4 +146,24 @@ ieml::Decode<char, ie::BoxShader::LoadTransmission>::decode(const ieml::Node& no
 		}
 	}
 	return {};
+}
+
+orl::Option<ie::BoxShader::Make> ieml::Decode<char, ie::BoxShader::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	sf::Shader* shader{new sf::Shader{}};
+	if(auto shader_node{map.at("shader")}) {
+		shader_node.ok().as<ie::LoadShader>().except().load(*shader);
+	}
+	return ie::BoxShader::Make{
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		shader,
+		map.at("transmission").except().as<ie::BoxShader::LoadTransmission>().except().transmission,
+		map.at("values-f").except().as<ie::BoxShader::SMakeMap<ie::ISFloat> >().move_except(),
+		map.at("values-i").except().as<ie::BoxShader::SMakeMap<ie::ISInt> >().move_except(),
+		map.at("values-b").except().as<ie::BoxShader::SMakeMap<ie::ISBool> >().move_except(),
+		map.at("values-c").except().as<ie::BoxShader::SMakeMap<ie::ISValue<sf::Color> > >().move_except(),
+		map.at("values-v").except().as<ie::BoxShader::SMakeMap<ie::SRVec2F> >().move_except(),
+		map.get_as<bool>("optimize").ok_or(true),
+		map.get_as<sf::Vector2f>("min-size").ok_or({})
+	};
 }

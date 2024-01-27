@@ -90,18 +90,15 @@ namespace ie {
 	BoxSwitcherTabs* BoxSwitcherTabs::copy() {
 		return new BoxSwitcherTabs{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxSwitcherTabs>::decode_pointer(const YAML::Node& node, BoxSwitcherTabs*& switcher_tabs) {
-		switcher_tabs = new BoxSwitcherTabs{
-			node["objects"].as<std::vector<BoxPtr<IScalable> > >(),
-			Buffer::get<Sint>(node["value"]),
-			conv_def(node["key"], Key::MouseLeft),
-			conv_bool_def(node["direction"], "horizontal", "vertical"),
-			conv_def(node["min-size"], sf::Vector2f{})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxSwitcherTabs::Make> ieml::Decode<char, ie::BoxSwitcherTabs::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxSwitcherTabs::Make{
+		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().move_except(),
+		map.at("value").except().as<ie::MakeDyn<ie::ISRSize> >().move_except(),
+		map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft),
+		map.get_as<bool>("horizontal").ok_or(true),
+		map.get_as<sf::Vector2f>("min-size").ok_or({}),
+	};
 }

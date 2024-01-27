@@ -1,7 +1,12 @@
 #include "BoxConstCenter.hpp"
 
 namespace ie {
-	BoxConstCenter::Make::Make(BoxPtr<IScalable::Make>&& const_object, BoxPtr<IScalable::Make>&& background, sf::Vector2f const_size, sf::Vector2f min_size) :
+	BoxConstCenter::Make::Make(
+		BoxPtr<IScalable::Make>&& const_object,
+		BoxPtr<IScalable::Make>&& background,
+		sf::Vector2f const_size,
+		sf::Vector2f min_size
+	) :
 		const_object(std::move(const_object)), background(std::move(background)), const_size(const_size), min_size(min_size) {
 	}
 	
@@ -10,10 +15,18 @@ namespace ie {
 	}
 	
 	BoxConstCenter::BoxConstCenter(Make&& make, InitInfo init_info) :
-		Box(make.min_size), const_object_(make.const_object->make(init_info)), background_(make.background->make(init_info)), const_size_(make.const_size) {
+		Box(make.min_size),
+		const_object_(make.const_object->make(init_info)),
+		background_(make.background->make(init_info)),
+		const_size_(make.const_size) {
 	}
 	
-	BoxConstCenter::BoxConstCenter(BoxPtr<IScalable>&& const_object, BoxPtr<IScalable>&& background, const sf::Vector2f& const_size, const sf::Vector2f& min_size) :
+	BoxConstCenter::BoxConstCenter(
+		BoxPtr<IScalable>&& const_object,
+		BoxPtr<IScalable>&& background,
+		const sf::Vector2f& const_size,
+		const sf::Vector2f& min_size
+	) :
 		Box(min_size), const_object_(std::move(const_object)), background_(std::move(background)), const_size_(const_size) {
 	}
 	
@@ -90,23 +103,23 @@ namespace ie {
 	}
 	
 	bool BoxConstCenter::update_interactions(sf::Vector2f) {
-		return background_->in(layout_.position) ? background_->update_interactions(layout_.position) : const_object_->update_interactions(layout_.position);
+		return
+			background_->in(layout_.position)
+			? background_->update_interactions(layout_.position)
+			: const_object_->update_interactions(layout_.position);
 	}
 	
 	BoxConstCenter* BoxConstCenter::copy() {
 		return new BoxConstCenter{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxConstCenter>::decode_pointer(const YAML::Node& node, BoxConstCenter*& box_with_const_center) {
-		box_with_const_center = new BoxConstCenter{
-			node["const-object"].as<BoxPtr<IScalable> >(),
-			node["background"].as<BoxPtr<IScalable> >(),
-			node["const-size"].as<sf::Vector2f>(),
-			conv_def(node["min-size"], sf::Vector2f{})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::BoxConstCenter::Make> ieml::Decode<char, ie::BoxConstCenter::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::BoxConstCenter::Make{
+		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("const-size").except().as<sf::Vector2f>().except(),
+		map.get_as<sf::Vector2f>("min-size").ok_or({})
+	};
 }

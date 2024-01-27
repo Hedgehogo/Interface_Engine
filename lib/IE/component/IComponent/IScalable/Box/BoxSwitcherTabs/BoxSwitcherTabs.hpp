@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/ISRanged/ISRanged.hpp"
 #include "IE/enums/KeyHandler/KeyHandler.hpp"
 #include "../Box.hpp"
@@ -53,11 +54,9 @@ namespace ie {
 		bool is_horizontal_;
 		ISRSize& value_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxSwitcherTabs> {
-		static bool decode_pointer(const YAML::Node& node, BoxSwitcherTabs*& switcher_tabs);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxSwitcherTabs::Make> {
+	static orl::Option<ie::BoxSwitcherTabs::Make> decode(ieml::Node const& node);
+};

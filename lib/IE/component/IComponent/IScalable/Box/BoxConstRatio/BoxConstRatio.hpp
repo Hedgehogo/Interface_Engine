@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/enums/Corner/Corner.hpp"
 #include "../Box.hpp"
 #include "../../IUninteractive/OnlyDrawable/Empty/Empty.hpp"
@@ -87,11 +88,9 @@ namespace ie {
 		bool render_second_;
 		float aspect_ratio_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<BoxConstRatio> {
-		static bool decode_pointer(const YAML::Node& node, BoxConstRatio*& box_with_const_ratio);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BoxConstRatio::Make> {
+	static orl::Option<ie::BoxConstRatio::Make> decode(ieml::Node const& node);
+};
