@@ -139,4 +139,8 @@ namespace ie {
 		window_.setView(view);
 		interface_.set_size(sf::Vector2f{size});
 	}
+	
+	Window make_window(fs::path file_path, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) {
+		return {make_interface(std::move(file_path)), std::move(title), std::move(mode), std::move(settings)};
+	}
 }
