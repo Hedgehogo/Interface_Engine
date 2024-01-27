@@ -30,12 +30,8 @@ namespace ie {
 	InternalPositioning2* InternalPositioning2::copy() {
 		return new InternalPositioning2{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<InternalPositioning2>::decode_pointer(const YAML::Node& node, InternalPositioning2*& internal_positioning2) {
-		internal_positioning2 = new InternalPositioning2{node["coefficient"].as<sf::Vector2f>()};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::InternalPositioning2::Make> ieml::Decode<char, ie::InternalPositioning2::Make>::decode(ieml::Node const& node) {
+	return {{node.at("coefficient").except().as<sf::Vector2f>().except()}};
 }
