@@ -35,12 +35,8 @@ namespace ie {
 	HidePanelAction* HidePanelAction::copy() {
 		return new HidePanelAction{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<HidePanelAction>::decode_pointer(const YAML::Node& node, HidePanelAction*& hide_panel_action) {
-		hide_panel_action = new HidePanelAction{conv_def(node["only-on-parent"], false)};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::HidePanelAction::Make> ieml::Decode<char, ie::HidePanelAction::Make>::decode(ieml::Node const& node) {
+	return {{node.get_as<bool>("only-on-parent").ok_or(false)}};
 }

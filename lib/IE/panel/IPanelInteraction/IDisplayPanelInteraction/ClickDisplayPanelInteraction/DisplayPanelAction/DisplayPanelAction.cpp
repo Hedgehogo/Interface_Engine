@@ -25,11 +25,8 @@ namespace ie {
 	DisplayPanelAction* DisplayPanelAction::copy() {
 		return new DisplayPanelAction{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<DisplayPanelAction>::decode_pointer(const YAML::Node&, DisplayPanelAction*& display_panel_action) {
-		display_panel_action = new DisplayPanelAction{};
-		return false;
-	}
-	*/
+}
+
+orl::Option<ie::DisplayPanelAction::Make> ieml::Decode<char, ie::DisplayPanelAction::Make>::decode(ieml::Node const&) {
+	return {{}};
 }

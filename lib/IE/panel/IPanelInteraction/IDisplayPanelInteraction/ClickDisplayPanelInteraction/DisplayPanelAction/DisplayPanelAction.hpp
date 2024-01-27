@@ -25,11 +25,9 @@ namespace ie {
 		
 		void while_not_pressed() override;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<DisplayPanelAction> {
-		static bool decode_pointer(const YAML::Node& node, DisplayPanelAction*& display_panel_action);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::DisplayPanelAction::Make> {
+	static orl::Option<ie::DisplayPanelAction::Make> decode(ieml::Node const& node);
+};

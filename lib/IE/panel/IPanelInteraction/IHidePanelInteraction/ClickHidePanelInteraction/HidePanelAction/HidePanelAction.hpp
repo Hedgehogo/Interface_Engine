@@ -31,11 +31,9 @@ namespace ie {
 		
 		bool only_on_parent;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<HidePanelAction> {
-		static bool decode_pointer(const YAML::Node& node, HidePanelAction*& hide_panel_action);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::HidePanelAction::Make> {
+	static orl::Option<ie::HidePanelAction::Make> decode(ieml::Node const& node);
+};
