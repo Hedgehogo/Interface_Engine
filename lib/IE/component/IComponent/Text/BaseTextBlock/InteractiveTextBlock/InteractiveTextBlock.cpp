@@ -4,7 +4,7 @@
 
 namespace ie {
 	InteractiveTextBlock::Make::Make(
-		BoxPtr<IBaseInteraction>&& interaction,
+		BoxPtr<IBaseInteraction::Make>&& interaction,
 		const std::u32string& text,
 		const orl::Option<sf::Color>& text_color,
 		const orl::Option<sf::Font*>& font,
@@ -30,15 +30,15 @@ namespace ie {
 		interaction(std::move(interaction)) {
 	}
 	
-	InteractiveTextBlock* InteractiveTextBlock::Make::make(TextBockInitInfo text_block_init_info) {
-		return new InteractiveTextBlock{std::move(*this), text_block_init_info};
+	InteractiveTextBlock* InteractiveTextBlock::Make::make(TextBockInitInfo init_info) {
+		return new InteractiveTextBlock{std::move(*this), init_info};
 	}
 	
 	InteractiveTextBlock::InteractiveTextBlock(
 		Make&& make,
-		TextBockInitInfo text_block_init_info
+		TextBockInitInfo init_info
 	) : TextBlock(
-			TextBlock::Make{
+		TextBlock::Make{
 				std::move(make.text),
 				make.text_color,
 				make.font,
@@ -50,12 +50,12 @@ namespace ie {
 				make.inactive_text_selection_color,
 				make.inactive_background_selection_color
 			},
-			text_block_init_info
+		init_info
 		),
 		interact(false),
 		old_interact(false),
-		interaction(std::move(make.interaction)) {
-		this->interaction_manager = &text_block_init_info.text_interaction_manager;
+		interaction(make.interaction->make({static_cast<InitInfo>(init_info), std::monostate()})) {
+		this->interaction_manager = &init_info.text_interaction_manager;
 	}
 	
 	InteractiveTextBlock::InteractiveTextBlock(

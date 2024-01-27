@@ -48,6 +48,7 @@ namespace ie {
 		
 		Text(Make&& make, InitInfo init_info);
 		
+/*
 		explicit Text(
 			std::vector<BoxPtr<BaseTextBlock> >&& text_blocks,
 			sf::Font* font,
@@ -62,6 +63,7 @@ namespace ie {
 			BoxPtr<BaseResizer>&& resizer = make_box_ptr<Resizer>(1.15f, BaseResizer::Align::Left),
 			BoxPtr<IBasicInteraction<Text&>>&& text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>>()
 		);
+*/
 		
 		void init(InitInfo init_info) override;
 		
@@ -78,6 +80,8 @@ namespace ie {
 		[[nodiscard]] std::vector<BaseCharacter*>::iterator get_selection_end() const;
 		
 		std::u32string get_selection_text();
+		
+		std::vector<BaseCharacter*>& get_characters();
 		
 		orl::Option<std::vector<BaseCharacter*>::iterator> get_character(sf::Vector2f mouse_position);
 		
@@ -124,7 +128,6 @@ namespace ie {
 		
 		std::vector<BaseCharacter*> text_characters;
 		std::vector<BoxPtr<BaseTextBlock> > text_blocks;
-		std::vector<BoxPtr<BaseLine> > lines;
 		
 		BoxPtr<BaseResizer> resizer;
 		BoxPtr<IBasicInteraction<Text&> > text_interaction;

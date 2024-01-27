@@ -70,12 +70,13 @@ namespace ie {
 			std::vector<BaseCharacter*> characters = text_block->get_characters();
 			text_characters.insert(text_characters.end(), characters.begin(), characters.end());
 		}
-		resizer = BoxPtr{make.resizer->make(ResizerInitInfo(text_characters, lines))};
+		resizer = BoxPtr{make.resizer->make(ResizerInitInfo(text_characters))};
 		
 		init_info.update_manager.add(*this);
 		init_info.draw_manager.add(*this);
 	}
 	
+/*
 	Text::Text(
 		std::vector<BoxPtr<BaseTextBlock>>&& text_blocks,
 		sf::Font*,
@@ -99,9 +100,9 @@ namespace ie {
 			std::vector<BaseCharacter*> characters = text_block->get_characters();
 			text_characters.insert(text_characters.end(), characters.begin(), characters.end());
 		}
-		this->resizer->init(ResizerInitInfo(text_characters, lines));
+		this->resizer->init(ResizerInitInfo(text_characters));
 	}
-	
+*/
 	void Text::init(InitInfo) {
 /*
 		this->interaction_manager = &init_info.interaction_manager;
@@ -187,6 +188,10 @@ namespace ie {
 		}
 	}
 	
+	std::vector<BaseCharacter*>& Text::get_characters() {
+		return text_characters;
+	}
+	
 	orl::Option<std::vector<BaseCharacter*>::iterator> Text::get_character(sf::Vector2f mouse_position) {
 		orl::Option<std::vector<BaseCharacter*>::iterator> result{};
 		
@@ -261,11 +266,7 @@ namespace ie {
 				character->draw();
 			}
 			
-			for(auto& character: text_characters) {
-				character->draw();
-			}
-			
-			for(auto& line: lines) {
+			for(auto& line: resizer->get_lines()) {
 				line->draw();
 			}
 			render_texture.display();

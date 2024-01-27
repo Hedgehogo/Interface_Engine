@@ -55,7 +55,7 @@ namespace ie {
 		TextVariables& text_variables;
 		sf::VertexArray vertex_array;
 		sf::VertexArray selection_vertex_array;
-		sf::Texture texture;
+		const sf::Texture& texture;
 		sf::Vector2f origin;
 		
 		std::vector<BoxPtr<BaseLine>>& lines;

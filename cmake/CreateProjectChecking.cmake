@@ -22,7 +22,7 @@ function(get_target_include_directories target result proven_dependencies)
     set(proven_dependencies ${proven_dependencies} PARENT_SCOPE)
 endfunction()
 
-function(projects_checking project_for_sources project_for_include_dirs)
+function(create_projects_checking project_for_sources project_for_include_dirs)
     set(all_sources "")
     set(all_include_dirs "")
     foreach (project IN LISTS project_for_sources)
@@ -39,4 +39,5 @@ function(projects_checking project_for_sources project_for_include_dirs)
 
     add_executable(code_checking code-checking/main.cpp)
     target_include_directories(code_checking PRIVATE ${CMAKE_BINARY_DIR}/code-checking/)
+
 endfunction()

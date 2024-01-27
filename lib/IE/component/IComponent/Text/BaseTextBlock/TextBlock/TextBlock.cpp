@@ -29,15 +29,15 @@ namespace ie {
 		inactive_background_selection_color(inactive_background_selection_color) {
 	}
 	
-	BaseTextBlock* TextBlock::Make::make(TextBockInitInfo text_block_init_info) {
-		return new TextBlock{std::move(*this), text_block_init_info};
+	BaseTextBlock* TextBlock::Make::make(TextBockInitInfo init_info) {
+		return new TextBlock{std::move(*this), init_info};
 	}
 	
-	std::vector<BoxPtr<BaseLine>>&& generate_lines(std::vector<BoxPtr<BaseLine>>&& lines, sf::Text::Style style) {
+	std::vector<BoxPtr<BaseLine::Make>>&& generate_lines(std::vector<BoxPtr<BaseLine::Make>>&& lines, sf::Text::Style style) {
 		if(style & sf::Text::Underlined)
-			lines.emplace_back(make_box_ptr<Underline>());
+			lines.emplace_back(make_box_ptr<Underline::Make>());
 		if(style & sf::Text::StrikeThrough)
-			lines.emplace_back(make_box_ptr<StrikeThrough>());
+			lines.emplace_back(make_box_ptr<StrikeThrough::Make>());
 		return std::move(lines);
 	}
 	
@@ -55,17 +55,17 @@ namespace ie {
 			}
 		),
 		lines(
-			generate_lines(
-				map_make(
-					std::move(make.lines),
-					LineInitInfo{
-						text_variables.size.some(),
-						*text_variables.font.some(),
-						text_variables.text_color.some(),
-						init_info.text_render_target
-					}
-				),
+			map_make(
+				generate_lines(
+				std::move(make.lines),
 				text_variables.style.some()
+				),
+				LineInitInfo{
+					text_variables.size.some(),
+					*text_variables.font.some(),
+					text_variables.text_color.some(),
+					init_info.text_render_target
+				}
 			)
 		),
 		text(std::move(make.text)) {
@@ -87,7 +87,7 @@ namespace ie {
 		orl::Option<sf::Color> inactive_text_selection_color,
 		orl::Option<sf::Color> inactive_background_selection_color
 	) :
-		lines(style ? generate_lines(std::move(lines), style.some()) : std::move(lines)), text(std::move(text)) {
+		lines(std::move(lines)), text(std::move(text)) {
 		text_variables.text_color = text_color;
 		text_variables.font = font;
 		text_variables.style = style;
@@ -158,13 +158,7 @@ namespace ie {
 	}
 	
 	bool TextBlock::in(sf::Vector2f mouse_position) {
-		bool result = true;
-		for(auto& character: text_characters) {
-			bool buf = character->in(mouse_position);
-			if(!buf)
-				result = false;
-		}
-		return result;
+		return false;
 	}
 	
 	void TextBlock::set_kerning(char32_t character) {

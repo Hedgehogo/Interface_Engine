@@ -1,7 +1,7 @@
 #include "ObjectCharacter.hpp"
 
 namespace ie {
-	ObjectCharacter::ObjectCharacter(BoxPtr<IScalable>&& object, bool full_line) : object(std::move(object)), special(full_line ? BaseCharacter::Special::FullLine : BaseCharacter::Special::No) {
+	ObjectCharacter::ObjectCharacter(BoxPtr<IScalable>&& object, ObjectSpecial special) : object(std::move(object)), special(static_cast<BaseCharacter::Special>(special)) {
 	}
 	
 	void ObjectCharacter::set_position(sf::Vector2f position) {
@@ -13,7 +13,7 @@ namespace ie {
 	void ObjectCharacter::resize(sf::Vector2f position, float end_position) {
 		position.y -= get_height();
 		BaseCharacter::set_position(position);
-		object->resize({end_position - position.x, object->get_size().y}, position);
+		object->resize({is_special() == BaseCharacter::Special::FullLine ?  end_position - position.x : object->get_size().x, object->get_size().y}, position);
 	}
 	
 	void ObjectCharacter::move(sf::Vector2f position) {

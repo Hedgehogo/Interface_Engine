@@ -32,7 +32,7 @@ namespace ie {
 				const orl::Option<sf::Color>& inactive_background_selection_color = {}
 			);
 			
-			BaseTextBlock* make(TextBockInitInfo text_block_init_info) override;
+			BaseTextBlock* make(TextBockInitInfo init_info) override;
 		};
 		
 		TextBlock(Make&& make, TextBockInitInfo init_info);
@@ -69,7 +69,7 @@ namespace ie {
 		
 		void set_kerning(char32_t character) override;
 		
-		bool in(sf::Vector2f mouse_position);
+		bool in(sf::Vector2f mouse_position) override;
 		
 		void update() override;
 		

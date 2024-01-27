@@ -6,7 +6,13 @@
 namespace ie {
 	class ObjectCharacter : public BaseCharacter {
 	public:
-		explicit ObjectCharacter(BoxPtr<IScalable>&& object, bool full_line = false);
+		enum class ObjectSpecial {
+			No,
+			Object = static_cast<int>(BaseCharacter::Special::Object),
+			FullLine,
+		};
+		
+		explicit ObjectCharacter(BoxPtr<IScalable>&& object, ObjectSpecial special = ObjectSpecial::No);
 		
 		void set_position(sf::Vector2f position) override;
 		

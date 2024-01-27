@@ -6,19 +6,24 @@
 namespace ie {
 	class Text;
 	
-	class TextCopyAction : public BasicBaseKeyAction<Text&> {
+	template<typename T>
+	class BasicTextCopyAction : public BasicBaseKeyAction<Text&> {
 	public:
 		struct Make : public BasicBaseKeyAction<Text&>::Make {
-			TextCopyAction* make(BasicActionInitInfo<Text&> init_info);
+			T& clipboard;
+			
+			Make(T&& clipboard = T{});
+			
+			BasicTextCopyAction* make(BasicActionInitInfo<Text&> init_info);
 		};
 		
-		TextCopyAction(Make&& make, BasicActionInitInfo<Text&> init_info);
+		BasicTextCopyAction(Make&& make, BasicActionInitInfo<Text&> init_info);
 		
-		TextCopyAction();
+		BasicTextCopyAction(T&& clipboard = T{});
 		
 		void init(BasicActionInitInfo<Text&> init_info) override;
 		
-		TextCopyAction* copy() override;
+		BasicTextCopyAction<T>* copy() override;
 	
 	protected:
 		void start_pressed() override;
@@ -30,7 +35,10 @@ namespace ie {
 		void while_not_pressed() override;
 		
 		Text* text;
+		T& clipboard;
 	};
+	
+	using TextCopyAction = BasicTextCopyAction<sf::Clipboard>;
 	
 	/*old_yaml_decode_pointer
 	template<>
@@ -38,4 +46,26 @@ namespace ie {
 		static bool decode_pointer(const YAML::Node&, TextCopyAction*& text_copy_action);
 	};
 	*/
+	
+	/// @brief Trait to work with the clipboard.
+	///
+	/// Must contain functions:
+	/// @code
+	/// static void set_string(T& clipboard, std::u32string str);
+	/// static std::u32string get_string(T& clipboard);
+	/// @endcode
+	///
+	/// @tparam T Clipboard type.
+	template<typename T>
+	struct ProcessClipboard{
+	};
+	
+	template<>
+	struct ProcessClipboard<sf::Clipboard>{
+		static void set_string(sf::Clipboard& clipboard, std::u32string str);
+		
+		static std::u32string get_string(sf::Clipboard& clipboard);
+	};
 }
+
+#include "TextCopyAction.inl"

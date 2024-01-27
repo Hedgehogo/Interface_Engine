@@ -9,10 +9,11 @@ namespace ie {
 	
 	class BaseCharacter {
 	public:
-		enum class Special {
+		enum class Special{
+			No,
 			Space,
 			Enter,
-			No,
+			Object,
 			FullLine,
 		};
 	
