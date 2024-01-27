@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../IMovePanelInteraction.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
+#include "../IMovePanelInteraction.hpp"
 
 namespace ie {
 	class DontMovePanelInteraction : public virtual IMovePanelInteraction {
@@ -28,11 +29,9 @@ namespace ie {
 		
 		DontMovePanelInteraction* copy() override;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<DontMovePanelInteraction> {
-		static bool decode_pointer(const YAML::Node&, DontMovePanelInteraction*& dont_move_panel_interaction);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::DontMovePanelInteraction::Make> {
+	static orl::Option<ie::DontMovePanelInteraction::Make> decode(ieml::Node const& node);
+};

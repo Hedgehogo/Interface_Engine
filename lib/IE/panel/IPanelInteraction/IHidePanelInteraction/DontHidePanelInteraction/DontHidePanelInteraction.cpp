@@ -18,11 +18,8 @@ namespace ie {
 	DontHidePanelInteraction* DontHidePanelInteraction::copy() {
 		return new DontHidePanelInteraction{};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<DontHidePanelInteraction>::decode_pointer(const YAML::Node&, DontHidePanelInteraction*& dont_hide_panel_interaction) {
-		dont_hide_panel_interaction = new DontHidePanelInteraction{};
-		return true;
-	}
-	*/
+}
+
+orl::Option<ie::DontHidePanelInteraction::Make> ieml::Decode<char, ie::DontHidePanelInteraction::Make>::decode(ieml::Node const&) {
+	return {{}};
 }

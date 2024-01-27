@@ -1,8 +1,8 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../IDisplayPanelInteraction.hpp"
 #include "../../BasePanelInteraction/BasePanelInteraction.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class PointingDisplayPanelInteraction : public BasePanelInteraction, public virtual IDisplayPanelInteraction {
@@ -23,11 +23,9 @@ namespace ie {
 		
 		PointingDisplayPanelInteraction* copy() override;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<PointingDisplayPanelInteraction> {
-		static bool decode_pointer(const YAML::Node&, PointingDisplayPanelInteraction*& pointing_display_panel_interaction);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::PointingDisplayPanelInteraction::Make> {
+	static orl::Option<ie::PointingDisplayPanelInteraction::Make> decode(ieml::Node const& node);
+};

@@ -29,12 +29,8 @@ namespace ie {
 	ClickDisplayPanelInteraction* ClickDisplayPanelInteraction::copy() {
 		return new ClickDisplayPanelInteraction{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<ClickDisplayPanelInteraction>::decode_pointer(const YAML::Node& node, ClickDisplayPanelInteraction*& click_display_panel_interaction) {
-		click_display_panel_interaction = new ClickDisplayPanelInteraction{node["key"].as<Key>()};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::ClickDisplayPanelInteraction::Make> ieml::Decode<char, ie::ClickDisplayPanelInteraction::Make>::decode(ieml::Node const& node) {
+	return {{node.at("key").except().as<ie::Key>().except()}};
 }

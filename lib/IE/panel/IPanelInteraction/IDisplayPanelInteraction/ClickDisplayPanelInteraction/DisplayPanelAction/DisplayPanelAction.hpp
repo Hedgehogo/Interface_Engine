@@ -1,7 +1,7 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../../../ClickPanelInteraction/PanelAction/PanelAction.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class DisplayPanelAction : public PanelAction {

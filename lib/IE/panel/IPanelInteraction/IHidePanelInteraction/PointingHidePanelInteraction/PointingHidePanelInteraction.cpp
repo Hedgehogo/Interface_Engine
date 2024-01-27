@@ -34,17 +34,8 @@ namespace ie {
 	PointingHidePanelInteraction* PointingHidePanelInteraction::copy() {
 		return new PointingHidePanelInteraction{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<PointingHidePanelInteraction>::decode_pointer(const YAML::Node& node, PointingHidePanelInteraction*& pointing_hide_panel_interaction) {
-		bool only_on_parent{false};
-		
-		if(node["only-on-parent"])
-			node["only-on-parent"] >> only_on_parent;
-		
-		pointing_hide_panel_interaction = new PointingHidePanelInteraction{only_on_parent};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::PointingHidePanelInteraction::Make> ieml::Decode<char, ie::PointingHidePanelInteraction::Make>::decode(ieml::Node const& node) {
+	return {{node.get_as<bool>("only-on-parent").ok_or(false)}};
 }

@@ -25,12 +25,8 @@ namespace ie {
 	PointingDisplayPanelInteraction* PointingDisplayPanelInteraction::copy() {
 		return new PointingDisplayPanelInteraction{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<PointingDisplayPanelInteraction>::decode_pointer(const YAML::Node&, PointingDisplayPanelInteraction*& pointing_display_panel_interaction) {
-		pointing_display_panel_interaction = new PointingDisplayPanelInteraction{};
-		return true;
-	}
-	*/
 }
 
+orl::Option<ie::PointingDisplayPanelInteraction::Make> ieml::Decode<char, ie::PointingDisplayPanelInteraction::Make>::decode(ieml::Node const&) {
+	return {{}};
+}

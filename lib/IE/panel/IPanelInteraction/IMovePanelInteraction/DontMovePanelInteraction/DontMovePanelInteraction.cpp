@@ -31,11 +31,8 @@ namespace ie {
 	DontMovePanelInteraction* DontMovePanelInteraction::copy() {
 		return new DontMovePanelInteraction{};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<DontMovePanelInteraction>::decode_pointer(const YAML::Node&, DontMovePanelInteraction*& dont_move_panel_interaction) {
-		dont_move_panel_interaction = new DontMovePanelInteraction{};
-		return true;
-	}
-	*/
+}
+
+orl::Option<ie::DontMovePanelInteraction::Make> ieml::Decode<char, ie::DontMovePanelInteraction::Make>::decode(ieml::Node const&) {
+	return {{}};
 }

@@ -1,8 +1,8 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../IHidePanelInteraction.hpp"
 #include "../../BasePanelInteraction/BasePanelInteraction.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class PointingHidePanelInteraction : public BasePanelInteraction, public virtual IHidePanelInteraction {
@@ -30,11 +30,9 @@ namespace ie {
 	protected:
 		bool only_on_parent_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<PointingHidePanelInteraction> {
-		static bool decode_pointer(const YAML::Node& node, PointingHidePanelInteraction*& pointing_hide_panel_interaction);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::PointingHidePanelInteraction::Make> {
+	static orl::Option<ie::PointingHidePanelInteraction::Make> decode(ieml::Node const& node);
+};

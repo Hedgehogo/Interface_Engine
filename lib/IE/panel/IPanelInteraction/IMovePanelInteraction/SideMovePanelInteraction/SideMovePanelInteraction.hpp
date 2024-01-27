@@ -1,7 +1,7 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../IMovePanelInteraction.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class SideMovePanelInteraction : public BasePanelInteraction, public virtual IMovePanelInteraction {
@@ -33,11 +33,9 @@ namespace ie {
 		bool horizontal_;
 		bool at_start_;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<SideMovePanelInteraction> {
-		static bool decode_pointer(const YAML::Node& node, SideMovePanelInteraction*& side_move_panel_interaction);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::SideMovePanelInteraction::Make> {
+	static orl::Option<ie::SideMovePanelInteraction::Make> decode(ieml::Node const& node);
+};

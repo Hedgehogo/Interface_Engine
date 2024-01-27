@@ -31,21 +31,13 @@ namespace ie {
 	CoefficientMovePanelInteraction* CoefficientMovePanelInteraction::copy() {
 		return new CoefficientMovePanelInteraction{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<CoefficientMovePanelInteraction>::decode_pointer(const YAML::Node& node, CoefficientMovePanelInteraction*& coefficient_move_panel_interaction) {
-		sf::Vector2f coefficient;
-		sf::Vector2f offset;
-		bool at_start{false};
-		
-		node["coefficient"] >> coefficient;
-		node["offset"] >> offset;
-		if(node["at-start"])
-			node["at-start"] >> at_start;
-		
-		coefficient_move_panel_interaction = new CoefficientMovePanelInteraction{coefficient, offset, at_start};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::CoefficientMovePanelInteraction::Make> ieml::Decode<char, ie::CoefficientMovePanelInteraction::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::CoefficientMovePanelInteraction::Make{
+		map.at("coefficient").except().as<sf::Vector2f>().except(),
+		map.at("offset").except().as<sf::Vector2f>().except(),
+		map.get_as<bool>("at-start").ok_or(false),
+	};
 }

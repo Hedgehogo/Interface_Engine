@@ -33,23 +33,14 @@ namespace ie {
 	SideMovePanelInteraction* SideMovePanelInteraction::copy() {
 		return new SideMovePanelInteraction{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<SideMovePanelInteraction>::decode_pointer(const YAML::Node& node, SideMovePanelInteraction*& side_move_panel_interaction) {
-		float coefficient;
-		float offset;
-		bool horizontal;
-		bool at_start = false;
-		
-		node["coefficient"] >> coefficient;
-		node["offset"] >> offset;
-		node["horizontal"] >> horizontal;
-		if(node["at-start"])
-			node["at-start"] >> at_start;
-		
-		side_move_panel_interaction = new SideMovePanelInteraction{coefficient, offset, horizontal, at_start};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::SideMovePanelInteraction::Make> ieml::Decode<char, ie::SideMovePanelInteraction::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::SideMovePanelInteraction::Make{
+		map.at("coefficient").except().as<float>().except(),
+		map.at("offset").except().as<float>().except(),
+		map.at("horizontal").except().as<bool>().except(),
+		map.get_as<bool>("at-start").ok_or(false),
+	};
 }

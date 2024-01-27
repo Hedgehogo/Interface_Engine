@@ -20,15 +20,12 @@ namespace ie {
 	ClickHidePanelInteraction* ClickHidePanelInteraction::copy() {
 		return new ClickHidePanelInteraction{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<ClickHidePanelInteraction>::decode_pointer(const YAML::Node& node, ClickHidePanelInteraction*& click_hide_panel_interaction) {
-		click_hide_panel_interaction = new ClickHidePanelInteraction{
-			node["key"].as<Key>(),
-			conv_def(node["only-on-parent"], false)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::ClickHidePanelInteraction::Make> ieml::Decode<char, ie::ClickHidePanelInteraction::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::ClickHidePanelInteraction::Make{
+		map.at("key").except().as<ie::Key>().except(),
+		map.get_as<bool>("only-on-parent").ok_or(false),
+	};
 }

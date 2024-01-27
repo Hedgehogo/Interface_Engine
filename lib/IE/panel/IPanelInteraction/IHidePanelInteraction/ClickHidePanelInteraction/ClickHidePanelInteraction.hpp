@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../../IHidePanelInteraction/ClickHidePanelInteraction/HidePanelAction/HidePanelAction.hpp"
 #include "../../ClickPanelInteraction/ClickPanelInteraction.hpp"
 
@@ -21,11 +22,9 @@ namespace ie {
 		
 		ClickHidePanelInteraction* copy() override;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<ClickHidePanelInteraction> {
-		static bool decode_pointer(const YAML::Node& node, ClickHidePanelInteraction*& click_hide_panel_interaction);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::ClickHidePanelInteraction::Make> {
+	static orl::Option<ie::ClickHidePanelInteraction::Make> decode(ieml::Node const& node);
+};
