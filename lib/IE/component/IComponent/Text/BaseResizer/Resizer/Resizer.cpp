@@ -11,29 +11,26 @@ namespace ie {
 	Resizer::Resizer(Make&& make, ResizerInitInfo init_info) : BaseResizer{make.line_spacing, make.align, make.algorithm, init_info} {
 	}
 	
-	Resizer::Resizer(float line_spacing, Align align, Algorithm algorithm) : BaseResizer{line_spacing, align, algorithm} {
-	}
-	
 	void Resizer::move(sf::Vector2f position) {
 		start_render += position;
 		end_render += position;
 		
-		for(auto& character: *characters) {
+		for(auto& character: characters) {
 			character->move(position);
 		}
 		
-		for(auto& line: *lines) {
+		for(auto& line: lines) {
 			line->move(position);
 		}
 	}
 	
 	void Resizer::set_position(sf::Vector2f position) {
 		sf::Vector2f offset{position - start_render};
-		for(auto& character: *characters) {
+		for(auto& character: characters) {
 			character->move({offset});
 		}
 		
-		for(auto& line: *lines) {
+		for(auto& line: lines) {
 			line->move(offset);
 		}
 		
@@ -61,7 +58,7 @@ namespace ie {
 		}
 		
 		for(auto character = after_enter; character != end_character; ++character) {
-				(*character)->move(offset);
+			(*character)->move(offset);
 		}
 	}
 	

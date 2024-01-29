@@ -3,6 +3,7 @@ project(Interface_Engine CXX)
 set(CMAKE_CXX_STANDARD 17)
 
 set(BUILD_SHARED_LIBS OFF)
+set(ABSL_PROPAGATE_CXX_STD ON)
 
 include(cmake/AllInclude.cmake)
 
@@ -40,7 +41,7 @@ set_target_properties(${PROJECT_NAME}_ex PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${C
 add_subdirectory(example-resources/modules)
 
 create_tests(${PROJECT_NAME})
-create_install_target()
+#[[create_install_target()]]
 
 create_projects_checking("${PROJECT_NAME};${PROJECT_NAME}_tests" "${PROJECT_NAME}_tests")
 crete_test_preparation(

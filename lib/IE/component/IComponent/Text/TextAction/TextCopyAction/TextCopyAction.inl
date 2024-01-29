@@ -1,17 +1,9 @@
 #include "IE/component/IComponent/Text/Text.hpp"
-#include "IE/modules/yaml-cpp/file-buffer/FileBuffer.hpp"
+#include "IE/utils/utf/to_utf/to_utf.hpp"
 
 namespace ie {
-	void ProcessClipboard<sf::Clipboard>::set_string(sf::Clipboard&, std::u32string str) {
-		sf::Clipboard::setString(u32_string_to_uint32_string(std::move(str)));
-	}
-	
-	std::u32string ProcessClipboard<sf::Clipboard>::get_string(sf::Clipboard&) {
-		return uint32_to_u32string_string(sf::Clipboard::getString().toUtf32());
-	}
-	
 	template<typename T>
-	BasicTextCopyAction<T>::Make::Make(T&& clipboard) : clipboard(clipboard){
+	BasicTextCopyAction<T>::Make::Make(T&& clipboard) : clipboard(clipboard) {
 	}
 	
 	template<typename T>
@@ -20,8 +12,8 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicTextCopyAction<T>::BasicTextCopyAction(Make&& make, BasicActionInitInfo<Text&> init_info) : text(&init_info.additional), clipboard(make.clipboard) {
-	
+	BasicTextCopyAction<T>::BasicTextCopyAction(Make&& make, BasicActionInitInfo<Text&> init_info) :
+		text(&init_info.additional), clipboard(make.clipboard) {
 	}
 	
 	template<typename T>
@@ -39,7 +31,7 @@ namespace ie {
 	
 	template<typename T>
 	void BasicTextCopyAction<T>::stop_pressed() {
-		ProcessClipboard<T>::set_string(clipboard, text->get_selection_text());
+		ProcessClipboard<T>::set_string(clipboard, to_utf32(text->get_selection_text()));
 	}
 	
 	template<typename T>
@@ -55,8 +47,10 @@ namespace ie {
 		return new BasicTextCopyAction{*this};
 	}
 	
+	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<TextCopyAction>::decode_pointer(const YAML::Node&, TextCopyAction*& text_copy_action) {
 		text_copy_action = new TextCopyAction{};
 		return true;
 	}
+	*/
 }

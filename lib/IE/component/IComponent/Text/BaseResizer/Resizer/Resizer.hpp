@@ -38,7 +38,7 @@ namespace ie {
 		
 		virtual void space_resize();
 		
- 		virtual void enter_resize();
+		virtual void enter_resize();
 		
 		virtual void object_resize(bool full);
 		

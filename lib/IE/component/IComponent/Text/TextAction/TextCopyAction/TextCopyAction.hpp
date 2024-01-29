@@ -40,13 +40,6 @@ namespace ie {
 	
 	using TextCopyAction = BasicTextCopyAction<sf::Clipboard>;
 	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<TextCopyAction> {
-		static bool decode_pointer(const YAML::Node&, TextCopyAction*& text_copy_action);
-	};
-	*/
-	
 	/// @brief Trait to work with the clipboard.
 	///
 	/// Must contain functions:
@@ -57,15 +50,22 @@ namespace ie {
 	///
 	/// @tparam T Clipboard type.
 	template<typename T>
-	struct ProcessClipboard{
+	struct ProcessClipboard {
 	};
 	
 	template<>
-	struct ProcessClipboard<sf::Clipboard>{
-		static void set_string(sf::Clipboard& clipboard, std::u32string str);
+	struct ProcessClipboard<sf::Clipboard> {
+		static void set_string(sf::Clipboard& clipboard, const sf::String& str);
 		
-		static std::u32string get_string(sf::Clipboard& clipboard);
+		static sf::String get_string(sf::Clipboard& clipboard);
 	};
+	
+	/*old_yaml_decode_pointer
+	template<>
+	struct DecodePointer<TextCopyAction> {
+		static bool decode_pointer(const YAML::Node&, TextCopyAction*& text_copy_action);
+	};
+	*/
 }
 
 #include "TextCopyAction.inl"
