@@ -105,7 +105,7 @@ void establish_friendship(
 	}
 }
 
-int main(int argc, char* argv[]) {
+int main() {
 	for_files<ctll::fixed_string{R"(.+(\.png|\.txt|\.glsl))"}>(TEST_DIR, copy_file<false>, TEST_DIR, SRC_TEST_DIR);
 	
 	for_files<ctll::fixed_string{R"(.+(\.cpp|\.inl))"}>(LIB_DIR, copy_file<true>, LIB_DIR, TEST_LIB_DIR);
@@ -113,7 +113,5 @@ int main(int argc, char* argv[]) {
 	auto tests_data = for_files<ctll::fixed_string{R"(.+\.cpp)"}>(TEST_DIR, get_test_class);
 	
 	for_files<ctll::fixed_string{ctll::fixed_string{R"(.+\.hpp)"}}>(LIB_DIR, establish_friendship, tests_data, LIB_DIR, TEST_LIB_DIR);
-	
-	std::filesystem::remove(argv[0]);
 	return 0;
 }

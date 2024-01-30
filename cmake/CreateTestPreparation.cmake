@@ -20,5 +20,8 @@ function(crete_test_preparation test_lib lib_test lib_dir test_dir test_lib_dir 
 		set(executable "${CMAKE_BINARY_DIR}/bin/Test_Preparation")
 	endif()
 	
-	add_custom_command(TARGET Test_Preparation POST_BUILD COMMAND ${executable})
+	add_custom_command(TARGET Test_Preparation POST_BUILD
+			COMMAND ${executable}
+			COMMAND ${CMAKE_COMMAND} -E remove ${executable}
+	)
 endfunction()

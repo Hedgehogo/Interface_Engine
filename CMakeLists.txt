@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.11)
 project(Interface_Engine CXX)
 set(CMAKE_CXX_STANDARD 17)
 
+option(IE_ENABLE_INSTALL "Enable install rule" ON)
+
 set(BUILD_SHARED_LIBS OFF)
 set(ABSL_PROPAGATE_CXX_STD ON)
 
@@ -14,7 +16,6 @@ set(test_src "")
 foreach (path IN LISTS src headers)
 	string(REPLACE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_BINARY_DIR}/Test_${PROJECT_NAME}" path2 ${path})
 	list(APPEND test_src "${path2}")
-
 
 	if (NOT EXISTS "${path2}")
 		file(WRITE "${path2}" "")
@@ -41,7 +42,6 @@ set_target_properties(${PROJECT_NAME}_ex PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${C
 add_subdirectory(example-resources/modules)
 
 create_tests(${PROJECT_NAME})
-#[[create_install_target()]]
 
 create_projects_checking("${PROJECT_NAME};${PROJECT_NAME}_tests" "${PROJECT_NAME}_tests")
 crete_test_preparation(
@@ -52,3 +52,8 @@ crete_test_preparation(
 		"${CMAKE_CURRENT_BINARY_DIR}/Test_${PROJECT_NAME}/lib/"
 		"${CMAKE_CURRENT_BINARY_DIR}/bin/test-src/"
 )
+
+if (IE_ENABLE_INSTALL)
+	set(ABSL_ENABLE_INSTALL ON)
+	create_install_target()
+endif ()
