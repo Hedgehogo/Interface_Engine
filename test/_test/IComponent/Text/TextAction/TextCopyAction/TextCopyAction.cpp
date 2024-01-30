@@ -6,16 +6,15 @@
 
 template<>
 struct ie::ProcessClipboard<std::u32string>{
-	static void set_string(std::u32string&, std::u32string str){
-		ASSERT_EQ(str, U"aaa\n");
+	static void set_string(std::u32string&, sf::String str){
+		ASSERT_EQ(str, "aaa\n");
 	}
 	
-	static std::u32string get_string(std::u32string&){
+	static sf::String get_string(std::u32string&){
 		return {};
 	}
 };
 
-//todo
 TEST(IComponent_Text, TextCopyAction) {
 	InitInfoData data{{100, 100}};
 	sf::Font font{};

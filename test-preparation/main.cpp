@@ -71,7 +71,7 @@ void establish_friendship(
 	const std::filesystem::path& test_lib_dir
 ) {
 	std::filesystem::path second_path{test_lib_dir.string() + first_path.string().erase(0, lib_dir.string().length())};
-	if(std::filesystem::last_write_time(first_path) > std::filesystem::last_write_time(second_path)) {
+	if(std::filesystem::last_write_time(first_path) > std::filesystem::last_write_time(second_path) || is_file_empty(second_path)) {
 		std::ifstream first_file{first_path};
 		
 		if(first_file.is_open()) {
