@@ -6,6 +6,7 @@ option(IE_ENABLE_INSTALL "Enable install rule" ON)
 
 set(BUILD_SHARED_LIBS OFF)
 set(ABSL_PROPAGATE_CXX_STD ON)
+set(ABSL_ENABLE_INSTALL ${IE_ENABLE_INSTALL})
 
 include(cmake/AllInclude.cmake)
 
@@ -54,6 +55,5 @@ crete_test_preparation(
 )
 
 if (IE_ENABLE_INSTALL)
-	set(ABSL_ENABLE_INSTALL ON)
 	create_install_target()
 endif ()
