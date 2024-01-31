@@ -7,12 +7,14 @@ object: = BoxConstBorder:
 		const-object: = Switcher:
 			inactive-background: yellow
 			active-background: blue
-			value: &b-value null
+			value: &b-value = Bool: yes
 		second-object: = Slider:
 			slider: = Capsule: red
 			background: green
-			value: &c-value null
-	second-object: = BoxSwitcher:
+			value: = RVec2F:
+				x: = RFloat: 0
+				y: = RFloat: 0
+	second-object: = BoxSwitch:
 		inactive-object: yellow
 		active-object: blue
 		value: *b-value

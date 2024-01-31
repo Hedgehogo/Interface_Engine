@@ -14,11 +14,10 @@ namespace ie::make_system {
 template<typename Value_>
 orl::Option<ie::make_system::BasicSVec2<Value_> >
 ieml::Decode<char, ie::make_system::BasicSVec2<Value_> >::decode(const ieml::Node& node) {
-	return {
-		{
-			node.as<ie::MakeDyn<Value_> >().move_except(),
-			node.as<ie::MakeDyn<Value_> >().move_except()
-		}
+	auto map{node.get_map_view().except()};
+	return ie::make_system::BasicSVec2<Value_>{
+		map.at("x").except().as<ie::MakeDyn<Value_> >().move_except(),
+		map.at("y").except().as<ie::MakeDyn<Value_> >().move_except(),
 	};
 }
 

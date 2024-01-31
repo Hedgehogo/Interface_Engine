@@ -21,10 +21,9 @@ namespace ieml {
 	
 	template<typename T>
 	Option<bp::BoxPtr<T> > Decode<char, bp::BoxPtr<T> >::decode(const Node& node) {
-		if(auto ptr{node.as<T*>()}) {
-			return bp::BoxPtr<T>{ptr.ok()};
-		}
-		return {};
+		return Decode<char, T*>::decode(node).map([](auto& value) {
+			return bp::BoxPtr{value};
+		});
 	}
 	
 	template<typename T>
@@ -51,7 +50,7 @@ namespace ieml {
 		auto& map = node.get_map().except();
 		absl::flat_hash_map<std::string, T> result{};
 		result.reserve(map.size());
-		for(auto& [key, value] : map) {
+		for(auto& [key, value]: map) {
 			result.insert(std::make_pair(key, value.template as<T>().move_except()));
 		}
 		return result;

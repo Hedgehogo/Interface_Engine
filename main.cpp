@@ -31,27 +31,23 @@ int main() {
 	
 	sf::Font font{};
 	font.loadFromFile("../../example-resources/segoeui.ttf");
-	try {
-		auto window{ie::make_window("../../example-resources/test", "IEML works!")};
+	auto window{ie::make_window("../../example-resources/test", "IEML works!")};
+	
+	FpsCounter<500> fps;
+	
+	while(window.get_window().isOpen()) {
+		window.get_window().setTitle(std::to_string(fps.restart()));
 		
-		FpsCounter<500> fps;
-		
-		while(window.get_window().isOpen()) {
-			window.get_window().setTitle(std::to_string(fps.restart()));
+		sf::Event event{};
+		while(window.get_window().pollEvent(event)) {
+			ie::handle_event(event);
 			
-			sf::Event event{};
-			while(window.get_window().pollEvent(event)) {
-				ie::handle_event(event);
-				
-				if(event.type == sf::Event::Closed) {
-					window.get_window().close();
-				}
+			if(event.type == sf::Event::Closed) {
+				window.get_window().close();
 			}
-			
-			window.update();
-			ie::clear_event();
 		}
-	} catch(ieml::FailedDecodeDataException& e) {
-		std::cout << e.get_full_description();
+		
+		window.update();
+		ie::clear_event();
 	}
 }
