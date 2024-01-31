@@ -18,9 +18,11 @@ namespace ie {
 			MakeDyn<ISBool> value;
 			Key key = Key::MouseLeft;
 			
-			Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, MakeDyn<ISBool> value, Key key = Key::MouseLeft);
+			Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, MakeDyn<ISBool> value,
+				 Key key = Key::MouseLeft);
 			
-			Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, Key key = Key::MouseLeft, bool start_active = false);
+			Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, Key key = Key::MouseLeft,
+				 bool start_active = false);
 			
 			Switcher* make(InitInfo init_info) override;
 		};
@@ -52,6 +54,14 @@ namespace ie {
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
+		Switcher(
+			BoxPtr<IScalable::Make> inactive_background,
+			BoxPtr<IScalable::Make> active_background,
+			ISBool& value,
+			Key key,
+			InitInfo init_info
+		);
+		
 		LayoutData& layout_get_data() override;
 		
 		const LayoutData& layout_get_data() const override;

@@ -18,12 +18,26 @@ namespace ie {
 	}
 	
 	Switcher::Switcher(Make&& make, InitInfo init_info) :
-		interactive_(make_box_ptr<OneKeyInteraction::Make>(
-			make_box_ptr<SwitcherAction::Make>(make.value.make(init_info.dyn_buffer)), make.key
-		), init_info, {}),
-		inactive_background_(make.inactive_background->make(init_info.copy(inactive_draw_manager_))),
-		active_background_(make.active_background->make(init_info.copy(active_draw_manager_))),
-		active_(make.value.make(init_info.dyn_buffer)) {
+		Switcher(
+			std::move(make.inactive_background),
+			std::move(make.active_background),
+			make.value.make(init_info.dyn_buffer),
+			make.key,
+			init_info
+		) {
+	}
+	
+	Switcher::Switcher(
+		BoxPtr<IScalable::Make> inactive_background,
+		BoxPtr<IScalable::Make> active_background,
+		ISBool& value,
+		Key key,
+		InitInfo init_info
+	) :
+		interactive_(make_box_ptr<OneKeyInteraction::Make>(make_box_ptr<SwitcherAction::Make>(value), key), init_info, {}),
+		inactive_background_(inactive_background->make(init_info.copy(inactive_draw_manager_))),
+		active_background_(active_background->make(init_info.copy(active_draw_manager_))),
+		active_(value) {
 		init_info.draw_manager.add(*this);
 		init_info.update_manager.add(*this);
 	}
