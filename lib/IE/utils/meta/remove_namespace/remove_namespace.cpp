@@ -8,7 +8,7 @@ namespace ie {
 	
 	std::string_view meta::remove_namespace(std::string_view input) {
 		std::string_view removable_namespace_view{removable_namespace()};
-		if(removable_namespace_view.size() + 2 > input.size()) {
+		if(removable_namespace_view.size() + 2 < input.size()) {
 			auto input_namespace = input.substr(0, removable_namespace_view.size());
 			if(input_namespace == removable_namespace_view) {
 				auto input_colons = input.substr(removable_namespace_view.size(), 2);

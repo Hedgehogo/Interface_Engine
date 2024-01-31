@@ -1,7 +1,7 @@
-object: = BoxWithConstBorder:
+object: = BoxConstBorder:
 	border-distance: 20
 	side: right
-	const-object: = BoxWithConstBorder:
+	const-object: = BoxConstBorder:
 		border-distance: 20
 		side: up
 		const-object: = Switcher:

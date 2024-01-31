@@ -121,12 +121,11 @@ namespace ie {
 			add_fn_make<OnlyDrawable>(video_convert, "Video");
 			//add_fn<Box>(switcher_tabs_decode_pointer, "SwitcherTabs", "SwitcherT");
 			
-			add_type_make_named<OnlyDrawable, Empty>();
-			add_type_make_named<OnlyDrawable, FullColor>();
-			add_type_make_named<OnlyDrawable, RoundedRectangle>();
-			add_type_make_named<OnlyDrawable, Capsule>();
-			add_type_make_named<OnlyDrawable, Sprite>();
-			add_type_make<IUninteractive, OnlyDrawable>();
+			add_type_make_named<IUninteractive, Empty>();
+			add_type_make_named<IUninteractive, FullColor>();
+			add_type_make_named<IUninteractive, RoundedRectangle>();
+			add_type_make_named<IUninteractive, Capsule>();
+			add_type_make_named<IUninteractive, Sprite>();
 			add_type_make_named<IUninteractive, Bar>();
 			add_type_make_named<IUninteractive, Caption>();
 			add_type_make_named<IUninteractive, BoxUninteractive>();
@@ -152,13 +151,12 @@ namespace ie {
 			add_type_make_named<Box, BoxTabs>();
 			add_type_make_named<Box, BoxSwitcherTabs>();
 			add_type_make_named<Box, BoxConstCenter>();
-			add_type_make<Box, BoxUninteractive>();
+			add_type_make_named<Box, BoxUninteractive>();
 			add_type_make<IScalable, Box>();
-			add_type_make_named<BaseSlider, Slider>();
-			add_type_make_named<BaseSlider, ConstSlider>();
-			add_type_make_named<IScalable, BaseSlider>();
+			add_type_make_named<IScalable, Slider>();
+			add_type_make_named<IScalable, ConstSlider>();
 			add_type_make_named<IScalable, ButtonPanel>();
-			add_type_make<IScalable, Button>();
+			add_type_make_named<IScalable, Button>();
 			add_type_make_named<IScalable, Switcher>();
 			add_type_make<IComponent, IScalable>();
 			add_type_make_named<IComponent, Text>();
