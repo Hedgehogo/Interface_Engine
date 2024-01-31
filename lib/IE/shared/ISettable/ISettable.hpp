@@ -5,5 +5,7 @@ namespace ie {
 	class ISettable {
 	public:
 		virtual void set(T_ value) = 0;
+		
+		virtual ~ISettable() = default;
 	};
 }

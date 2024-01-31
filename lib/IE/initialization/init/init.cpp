@@ -25,13 +25,20 @@ namespace ie {
 	
 	template<typename T>
 	void ieml_rttb_init_shared(char first, std::string name) {
+		add_type<ISValue<T>, SValue<T> >();
 		add_type_make<ISValue<T>, SValue<T> >(name);
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
+			add_type<ISVec2<T>, BasicSVec2<ISValue<T> > >();
 			add_type_make<ISVec2<T>, BasicSVec2<ISValue<T> > >(std::string("Vec2") + std::string(1, first));
+			add_type<ISVec2<T>, BasicSVec2<ISRanged<T> > >();
 			add_type_make<ISVec2<T>, BasicSVec2<ISRanged<T> > >(std::string("RVec2") + std::string(1, first));
+			add_type<ISValue<sf::Vector2<T> >, ISVec2<T> >();
 			add_type_make<ISValue<sf::Vector2<T> >, ISVec2<T> >();
+			add_type<SValue<T>, SRanged<T> >();
 			add_type_make<SValue<T>, SRanged<T> >(std::string("R") + name);
+			add_type<ISRanged<T>, SRanged<T> >();
 			add_type_make<ISRanged<T>, SRanged<T> >();
+			add_type<ISValue<T>, ISRanged<T> >();
 			add_type_make<ISValue<T>, ISRanged<T> >();
 		}
 	}

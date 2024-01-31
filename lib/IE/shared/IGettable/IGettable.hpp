@@ -7,5 +7,7 @@ namespace ie {
 		using T = T_;
 		
 		virtual T_ get() const = 0;
+		
+		virtual ~IGettable() = default;
 	};
 }
