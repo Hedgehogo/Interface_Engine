@@ -12,10 +12,6 @@ namespace ie {
 		
 		BaseSwitchTabsAction(BasicActionInitInfo<BoxSwitchTabs&> init_info);
 		
-		BaseSwitchTabsAction();
-		
-		void init(BasicActionInitInfo<BoxSwitchTabs&> init_info) override;
-		
 		virtual void set_box(BoxSwitchTabs& box);
 		
 		virtual BoxSwitchTabs& get_box();

@@ -12,10 +12,6 @@ namespace ie {
 		
 		DisplayPanelAction(Make&& make, PanelActionInitInfo init_info);
 		
-		DisplayPanelAction() = default;
-		
-		DisplayPanelAction* copy() override;
-	
 	protected:
 		void start_pressed() override;
 		

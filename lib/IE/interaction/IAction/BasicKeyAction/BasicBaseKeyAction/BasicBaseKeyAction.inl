@@ -22,8 +22,4 @@ namespace ie {
 			while_not_pressed();
 		}
 	}
-	
-	template<typename T>
-	void BasicBaseKeyAction<T>::init(BasicActionInitInfo<T>) {
-	}
 }

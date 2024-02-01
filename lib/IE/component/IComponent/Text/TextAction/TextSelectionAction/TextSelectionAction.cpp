@@ -12,13 +12,6 @@ namespace ie {
 	TextSelectionAction::TextSelectionAction(Make&&, BasicActionInitInfo<Text&> init_info) : text(&init_info.additional), start(), end() {
 	}
 	
-	TextSelectionAction::TextSelectionAction() : text(nullptr), start(), end() {
-	}
-	
-	void TextSelectionAction::init(BasicActionInitInfo<Text&> init_info) {
-		text = &init_info.additional;
-	}
-	
 	void TextSelectionAction::start_pressed() {
 		text->set_selection_start(start = text->get_character(sf::Vector2f{mouse_position_}));
 	}
@@ -64,10 +57,6 @@ namespace ie {
 			}
 		}
 		BasicBaseKeyAction<Text&>::update(mouse_position, press);
-	}
-	
-	TextSelectionAction* TextSelectionAction::copy() {
-		return new TextSelectionAction{*this};
 	}
 	
 	/*old_yaml_decode_pointer_impl

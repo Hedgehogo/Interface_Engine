@@ -10,8 +10,6 @@ namespace ie {
 		
 		virtual void update(sf::Vector2i mouse_position, int value) = 0;
 		
-		virtual WheelAction* copy() = 0;
-	
 	protected:
 		bool active_;
 	};

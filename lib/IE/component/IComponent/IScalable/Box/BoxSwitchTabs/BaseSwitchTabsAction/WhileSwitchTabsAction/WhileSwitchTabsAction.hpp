@@ -17,10 +17,6 @@ namespace ie {
 		
 		WhileSwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> init_info);
 		
-		void init(BasicActionInitInfo<BoxSwitchTabs&> init_info) override;
-		
-		WhileSwitchTabsAction* copy() override;
-	
 	protected:
 		void start_pressed() override;
 		

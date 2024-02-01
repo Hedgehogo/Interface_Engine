@@ -10,7 +10,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicAddInteractionAction : public BasicKeyAction<T> {
-			BoxPtr<IBasicInteraction<T>> interaction;
+			BoxPtr<IBasicInteraction<T> > interaction;
 			
 			BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
 			
@@ -25,14 +25,8 @@ namespace ie {
 		
 		BasicAddInteractionAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		explicit BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
-		
-		void init(BasicActionInitInfo<T> init_info) override;
-		
 		IBasicInteraction<T>& get_interaction();
 		
-		BasicAddInteractionAction<T>* copy() override;
-	
 	protected:
 		void start_pressed() override;
 		

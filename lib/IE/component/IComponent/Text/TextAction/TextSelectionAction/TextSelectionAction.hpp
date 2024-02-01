@@ -15,18 +15,12 @@ namespace ie {
 		
 		TextSelectionAction(Make&& make, BasicActionInitInfo<Text&> init_info);
 		
-		TextSelectionAction();
-		
-		void init(BasicActionInitInfo<Text&> init_info) override;
-		
 		orl::Option<std::vector<BaseCharacter*>::iterator> get_start();
 		
 		orl::Option<std::vector<BaseCharacter*>::iterator> get_end();
 		
 		void update(sf::Vector2i mouse_position, bool press) override;
 		
-		TextSelectionAction* copy() override;
-	
 	protected:
 		void start_pressed() override;
 		

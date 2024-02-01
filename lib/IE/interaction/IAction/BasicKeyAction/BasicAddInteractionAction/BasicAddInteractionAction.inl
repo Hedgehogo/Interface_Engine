@@ -17,22 +17,8 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicAddInteractionAction<T>::BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction) :
-		interaction_manager_(nullptr), interaction_(std::move(interaction)) {
-	}
-	
-	template<typename T>
-	void BasicAddInteractionAction<T>::init(BasicActionInitInfo<T> init_info) {
-	}
-	
-	template<typename T>
 	IBasicInteraction<T>& BasicAddInteractionAction<T>::get_interaction() {
 		return *interaction_;
-	}
-	
-	template<typename T>
-	BasicAddInteractionAction<T>* BasicAddInteractionAction<T>::copy() {
-		return nullptr;
 	}
 	
 	template<typename T>

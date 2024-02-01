@@ -17,14 +17,8 @@ namespace ie {
 		
 		SliderAction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info);
 		
-		explicit SliderAction(sf::Vector2i division = {0, 0});
-		
-		void init(BasicActionInitInfo<BaseSlider&> init_info) override;
-		
 		void set_slider(BaseSlider& slider);
 		
-		SliderAction* copy() override;
-	
 	protected:
 		sf::Vector2f get_mouse_position();
 		

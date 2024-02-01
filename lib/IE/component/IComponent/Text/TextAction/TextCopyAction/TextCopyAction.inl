@@ -17,15 +17,6 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicTextCopyAction<T>::BasicTextCopyAction(T&& clipboard) : text(nullptr), clipboard(clipboard) {
-	}
-	
-	template<typename T>
-	void BasicTextCopyAction<T>::init(BasicActionInitInfo<Text&> init_info) {
-		text = &init_info.additional;
-	}
-	
-	template<typename T>
 	void BasicTextCopyAction<T>::start_pressed() {
 	}
 	
@@ -40,11 +31,6 @@ namespace ie {
 	
 	template<typename T>
 	void BasicTextCopyAction<T>::while_not_pressed() {
-	}
-	
-	template<typename T>
-	BasicTextCopyAction<T>* BasicTextCopyAction<T>::copy() {
-		return new BasicTextCopyAction{*this};
 	}
 	
 	/*old_yaml_decode_pointer_impl

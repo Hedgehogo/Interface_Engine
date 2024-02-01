@@ -28,10 +28,6 @@ namespace ie {
 	
 	void SwitcherAction::while_not_pressed() {
 	}
-	
-	SwitcherAction* SwitcherAction::copy() {
-		return new SwitcherAction{*this};
-	}
 }
 
 orl::Option<ie::SwitcherAction::Make> ieml::Decode<char, ie::SwitcherAction::Make>::decode(ieml::Node const& node) {

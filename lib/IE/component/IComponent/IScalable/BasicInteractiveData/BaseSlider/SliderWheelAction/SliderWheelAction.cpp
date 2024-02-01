@@ -17,10 +17,6 @@ namespace ie {
 		relativity_(make.relativity == Relativity::RelationSlider) {
 	}
 	
-	SliderWheelAction::SliderWheelAction(bool horizontal, Relativity relativity, sf::Vector2f sensitivity) :
-		sensitivity_(sensitivity), horizontal_(horizontal), relativity_(relativity == Relativity::RelationSlider) {
-	}
-	
 	void SliderWheelAction::start_pressed(sf::Vector2i, int) {
 	}
 	
@@ -45,10 +41,6 @@ namespace ie {
 	
 	void SliderWheelAction::set_slider(BaseSlider& slider) {
 		this->slider_ = &slider;
-	}
-	
-	SliderWheelAction* SliderWheelAction::copy() {
-		return new SliderWheelAction{*this};
 	}
 }
 

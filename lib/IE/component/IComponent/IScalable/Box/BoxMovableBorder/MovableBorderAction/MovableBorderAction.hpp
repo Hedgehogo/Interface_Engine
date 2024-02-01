@@ -13,14 +13,8 @@ namespace ie {
 		
 		MovableBorderAction(Make&& make, BasicActionInitInfo<BoxMovableBorder&> init_info);
 		
-		explicit MovableBorderAction();
-		
-		void init(BasicActionInitInfo<BoxMovableBorder&> init_info) override;
-		
 		void set_box(BoxMovableBorder& box);
 		
-		MovableBorderAction* copy() override;
-	
 	protected:
 		void start_pressed() override;
 		

@@ -29,8 +29,6 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		SwitcherAction* copy() override;
-		
 	protected:
 		ISBool& value_;
 	};

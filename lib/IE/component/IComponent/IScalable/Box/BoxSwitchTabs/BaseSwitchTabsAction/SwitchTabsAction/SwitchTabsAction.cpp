@@ -13,11 +13,6 @@ namespace ie {
 		BaseSwitchTabsAction(init_info), index_(make.index), value_(box_->get_value()) {
 	}
 	
-	void SwitchTabsAction::init(BasicActionInitInfo<BoxSwitchTabs&> init_info) {
-		BaseSwitchTabsAction::init(init_info);
-		value_ = box_->get_value();
-	}
-	
 	void SwitchTabsAction::start_pressed() {
 	}
 	
@@ -29,10 +24,6 @@ namespace ie {
 	}
 	
 	void SwitchTabsAction::while_not_pressed() {
-	}
-	
-	SwitchTabsAction* SwitchTabsAction::copy() {
-		return new SwitchTabsAction{*this};
 	}
 }
 

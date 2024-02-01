@@ -49,10 +49,5 @@ namespace ie {
 	void BasicFnKeyAction<T>::while_not_pressed() {
 		while_not_pressed_fn_(this->mouse_position_);
 	}
-	
-	template<typename T>
-	BasicFnKeyAction<T>* BasicFnKeyAction<T>::copy() {
-		return new BasicFnKeyAction<T>{*this};
-	}
 }
 

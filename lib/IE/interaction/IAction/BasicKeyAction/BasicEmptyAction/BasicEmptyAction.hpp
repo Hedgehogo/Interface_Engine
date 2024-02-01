@@ -23,8 +23,6 @@ namespace ie {
 		BasicEmptyAction();
 		
 		void update(sf::Vector2i, bool) override;
-		
-		BasicEmptyAction<T>* copy() override;
 	};
 	
 	using EmptyAction = BasicEmptyAction<>;

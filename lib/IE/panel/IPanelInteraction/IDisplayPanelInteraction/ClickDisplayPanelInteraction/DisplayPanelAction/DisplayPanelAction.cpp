@@ -21,10 +21,6 @@ namespace ie {
 	
 	void DisplayPanelAction::while_not_pressed() {
 	}
-	
-	DisplayPanelAction* DisplayPanelAction::copy() {
-		return new DisplayPanelAction{*this};
-	}
 }
 
 orl::Option<ie::DisplayPanelAction::Make> ieml::Decode<char, ie::DisplayPanelAction::Make>::decode(ieml::Node const&) {

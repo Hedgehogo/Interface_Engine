@@ -11,13 +11,6 @@ namespace ie {
 		box_(&init_info.additional) {
 	}
 	
-	MovableBorderAction::MovableBorderAction() : box_(nullptr) {
-	}
-	
-	void MovableBorderAction::init(BasicActionInitInfo<BoxMovableBorder&> init_info) {
-		box_ = &init_info.additional;
-	}
-	
 	void MovableBorderAction::set_box(BoxMovableBorder& box) {
 		this->box_ = &box;
 	}
@@ -51,7 +44,4 @@ namespace ie {
 	
 	void MovableBorderAction::while_not_pressed() {
 	}
-	
-	MovableBorderAction* MovableBorderAction::copy() {
-		return new MovableBorderAction{*this};
-	}}
+}

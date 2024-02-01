@@ -14,14 +14,6 @@ namespace ie {
 		slider_(&init_info.additional), division_(make.division) {
 	}
 	
-	SliderAction::SliderAction(sf::Vector2i division) :
-		slider_(nullptr), start_mouse_position_(), start_value_(), division_(division) {
-	}
-	
-	void SliderAction::init(BasicActionInitInfo<BaseSlider&> init_info) {
-		slider_ = &init_info.additional;
-	}
-	
 	sf::Vector2f SliderAction::get_mouse_position() {
 		return sf::Vector2f{mouse_position_};
 	}
@@ -50,9 +42,5 @@ namespace ie {
 	
 	void SliderAction::set_slider(BaseSlider& slider) {
 		this->slider_ = &slider;
-	}
-	
-	SliderAction* SliderAction::copy() {
-		return new SliderAction{*this};
 	}
 }

@@ -24,14 +24,10 @@ namespace ie {
 		
 		explicit BasicKeyAction();
 		
-		virtual void init(BasicActionInitInfo<T> init_info);
-		
 		virtual void set_pressed(bool pressed);
 		
 		virtual void update(sf::Vector2i mouse_position, bool press) = 0;
 		
-		virtual BasicKeyAction* copy() = 0;
-	
 	protected:
 		bool pressed_;
 	};

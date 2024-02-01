@@ -13,9 +13,6 @@ namespace ie {
 		PanelAction(init_info), only_on_parent(make.only_on_parent) {
 	}
 	
-	HidePanelAction::HidePanelAction(bool only_on_parent) : only_on_parent(only_on_parent) {
-	}
-	
 	void HidePanelAction::start_pressed() {
 	}
 	
@@ -30,10 +27,6 @@ namespace ie {
 	}
 	
 	void HidePanelAction::while_not_pressed() {
-	}
-	
-	HidePanelAction* HidePanelAction::copy() {
-		return new HidePanelAction{*this};
 	}
 }
 

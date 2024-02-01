@@ -51,8 +51,6 @@ namespace ie {
 			}
 		);
 		
-		BasicFnKeyAction<T>* copy() override;
-	
 	protected:
 		void start_pressed() override;
 		

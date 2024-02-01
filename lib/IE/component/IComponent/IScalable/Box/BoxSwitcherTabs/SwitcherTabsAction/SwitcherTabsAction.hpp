@@ -18,8 +18,6 @@ namespace ie {
 		
 		SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> init_info);
 		
-		void init(BasicActionInitInfo<BoxSwitcherTabs&> init_info) override;
-		
 		void start_pressed() override;
 		
 		void stop_pressed() override;
@@ -28,8 +26,6 @@ namespace ie {
 		
 		void while_not_pressed() override;
 		
-		SwitcherTabsAction* copy() override;
-	
 	protected:
 		ISRSize& value_;
 		BoxSwitcherTabs* switcher_tabs_;

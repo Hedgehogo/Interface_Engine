@@ -16,10 +16,6 @@ namespace ie {
 		
 		HidePanelAction(Make&& make, PanelActionInitInfo init_info);
 		
-		HidePanelAction(bool only_on_parent = false);
-		
-		HidePanelAction* copy() override;
-	
 	protected:
 		void start_pressed() override;
 		

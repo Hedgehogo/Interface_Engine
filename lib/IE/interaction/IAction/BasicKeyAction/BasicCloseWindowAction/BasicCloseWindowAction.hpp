@@ -21,12 +21,6 @@ namespace ie {
 		
 		BasicCloseWindowAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		BasicCloseWindowAction();
-		
-		void init(BasicActionInitInfo<T> init_info) override;
-		
-		BasicCloseWindowAction<T>* copy() override;
-	
 	protected:
 		void start_pressed() override;
 		

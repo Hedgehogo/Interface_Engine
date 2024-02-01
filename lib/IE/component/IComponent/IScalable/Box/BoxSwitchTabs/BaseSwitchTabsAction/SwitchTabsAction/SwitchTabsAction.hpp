@@ -16,10 +16,6 @@ namespace ie {
 		
 		SwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> init_info);
 		
-		void init(BasicActionInitInfo<BoxSwitchTabs&> init_info) override;
-		
-		SwitchTabsAction* copy() override;
-	
 	protected:
 		void start_pressed() override;
 		

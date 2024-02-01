@@ -23,10 +23,6 @@ namespace ie {
 		
 		BasicAddBlockInteractionAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		explicit BasicAddBlockInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
-		
-		BasicAddBlockInteractionAction<T>* copy() override;
-	
 	protected:
 		void stop_pressed() override;
 	};

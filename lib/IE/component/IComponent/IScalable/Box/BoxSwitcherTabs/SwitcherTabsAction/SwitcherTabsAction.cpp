@@ -13,21 +13,16 @@ namespace ie {
 		value_(make.value.make(init_info.dyn_buffer)), switcher_tabs_(&init_info.additional) {
 	}
 	
-	void SwitcherTabsAction::init(BasicActionInitInfo<BoxSwitcherTabs&> init_info) {
-		switcher_tabs_ = &init_info.additional;
+	void SwitcherTabsAction::start_pressed() {
 	}
-	
-	void SwitcherTabsAction::start_pressed() {}
 	
 	void SwitcherTabsAction::stop_pressed() {
 		value_.set(switcher_tabs_->get_tab(sf::Vector2f(mouse_position_)));
 	}
 	
-	void SwitcherTabsAction::while_pressed() {}
+	void SwitcherTabsAction::while_pressed() {
+	}
 	
-	void SwitcherTabsAction::while_not_pressed() {}
-	
-	SwitcherTabsAction* SwitcherTabsAction::copy() {
-		return new SwitcherTabsAction{*this};
+	void SwitcherTabsAction::while_not_pressed() {
 	}
 }

@@ -8,8 +8,6 @@ namespace ie {
 	public:
 		BasicBaseKeyAction() = default;
 		
-		void init(BasicActionInitInfo<T> init_info) override;
-		
 		void set_pressed(bool pressed) override;
 		
 		void update(sf::Vector2i mouse_position, bool press) override;

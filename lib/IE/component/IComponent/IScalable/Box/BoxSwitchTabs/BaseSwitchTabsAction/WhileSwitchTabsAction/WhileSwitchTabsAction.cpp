@@ -12,12 +12,6 @@ namespace ie {
 		BaseSwitchTabsAction(init_info), size_(box_->get_array_size()), value_(box_->get_value()), step_(make.step) {
 	}
 	
-	void WhileSwitchTabsAction::init(BasicActionInitInfo<BoxSwitchTabs&> init_info) {
-		BaseSwitchTabsAction::init(init_info);
-		size_ = box_->get_array_size();
-		value_ = box_->get_value();
-	}
-	
 	void WhileSwitchTabsAction::start_pressed() {
 	}
 	
@@ -32,10 +26,6 @@ namespace ie {
 	}
 	
 	void WhileSwitchTabsAction::while_not_pressed() {
-	}
-	
-	WhileSwitchTabsAction* WhileSwitchTabsAction::copy() {
-		return new WhileSwitchTabsAction{*this};
 	}
 }
 

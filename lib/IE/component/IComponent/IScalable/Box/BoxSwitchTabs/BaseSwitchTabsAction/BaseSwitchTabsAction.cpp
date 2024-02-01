@@ -5,13 +5,6 @@ namespace ie {
 		box_(&init_info.additional) {
 	}
 	
-	BaseSwitchTabsAction::BaseSwitchTabsAction() : box_(nullptr) {
-	}
-	
-	void BaseSwitchTabsAction::init(BasicActionInitInfo<BoxSwitchTabs&> init_info) {
-		box_ = &init_info.additional;
-	}
-	
 	void BaseSwitchTabsAction::set_box(BoxSwitchTabs& box) {
 		this->box_ = &box;
 	}

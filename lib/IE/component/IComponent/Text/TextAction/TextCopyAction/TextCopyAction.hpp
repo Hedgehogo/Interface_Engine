@@ -19,12 +19,6 @@ namespace ie {
 		
 		BasicTextCopyAction(Make&& make, BasicActionInitInfo<Text&> init_info);
 		
-		BasicTextCopyAction(T&& clipboard = T{});
-		
-		void init(BasicActionInitInfo<Text&> init_info) override;
-		
-		BasicTextCopyAction<T>* copy() override;
-	
 	protected:
 		void start_pressed() override;
 		

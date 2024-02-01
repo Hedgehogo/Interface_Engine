@@ -26,10 +26,8 @@ namespace ie {
 		
 		BasicOpenUrlAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		explicit BasicOpenUrlAction(const std::string& url);
+		BasicOpenUrlAction(std::string url);
 		
-		BasicOpenUrlAction<T>* copy() override;
-	
 	protected:
 		void start_pressed() override;
 		

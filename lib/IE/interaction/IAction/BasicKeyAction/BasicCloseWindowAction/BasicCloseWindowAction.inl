@@ -14,10 +14,6 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicCloseWindowAction<T>::BasicCloseWindowAction() : window_{nullptr}{
-	}
-	
-	template<typename T>
 	void BasicCloseWindowAction<T>::start_pressed() {
 	}
 	
@@ -33,17 +29,6 @@ namespace ie {
 	
 	template<typename T>
 	void BasicCloseWindowAction<T>::while_not_pressed() {
-	}
-	
-	template<typename T>
-	void BasicCloseWindowAction<T>::init(BasicActionInitInfo<T> init_info) {
-		BasicBaseKeyAction<T>::init(init_info);
-		window_ = &init_info.window;
-	}
-	
-	template<typename T>
-	BasicCloseWindowAction<T>* BasicCloseWindowAction<T>::copy() {
-		return new BasicCloseWindowAction<T>{*this};
 	}
 	
 	template<typename T>
