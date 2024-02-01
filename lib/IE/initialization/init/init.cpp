@@ -28,10 +28,10 @@ namespace ie {
 		add_type<ISValue<T>, SValue<T> >();
 		add_type_make<ISValue<T>, SValue<T> >(name);
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
-			add_type<ISVec2<T>, BasicSVec2<ISValue<T> > >();
-			add_type_make<ISVec2<T>, BasicSVec2<ISValue<T> > >(std::string("Vec2") + std::string(1, first));
-			add_type<ISVec2<T>, BasicSVec2<ISRanged<T> > >();
-			add_type_make<ISVec2<T>, BasicSVec2<ISRanged<T> > >(std::string("RVec2") + std::string(1, first));
+			add_type<ISVec2<T>, SVec2<T> >();
+			add_type_make<ISVec2<T>, SVec2<T> >(std::string("Vec2") + std::string(1, first));
+			add_type<ISVec2<T>, SRVec2<T> >();
+			add_type_make<ISVec2<T>, SRVec2<T> >(std::string("RVec2") + std::string(1, first));
 			add_type<ISValue<sf::Vector2<T> >, ISVec2<T> >();
 			add_type_make<ISValue<sf::Vector2<T> >, ISVec2<T> >();
 			add_type<SValue<T>, SRanged<T> >();
@@ -40,6 +40,9 @@ namespace ie {
 			add_type_make<ISRanged<T>, SRanged<T> >();
 			add_type<ISValue<T>, ISRanged<T> >();
 			add_type_make<ISValue<T>, ISRanged<T> >();
+			
+			add_bool_determine_make<SRVec2<T> >();
+			add_bool_determine_make<SRanged<T> >();
 		}
 	}
 	
@@ -171,6 +174,7 @@ namespace ie {
 			add_type_make_named<BasePanel, ConstPanel>();
 			add_type_make_named<BasePanel, Panel>();
 			
+			add_bool_determine_make<SBool>();
 			add_bool_determine_make<FullColor>();
 			add_bool_determine_make<RoundedRectangle>();
 			add_bool_determine_make<Sprite>();

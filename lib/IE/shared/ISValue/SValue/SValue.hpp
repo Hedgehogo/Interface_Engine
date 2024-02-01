@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ISValue.hpp"
+#include "IE/ieml/shortcuts/shortcuts.hpp"
 
 namespace ie {
 	template<typename T_>
@@ -52,6 +53,11 @@ namespace ie {
 	using SFloat = SValue<float>;
 	using SInt = SValue<int>;
 	using SSize = SValue<size_t>;
+	
+	template<>
+	struct Determine<SBool::Make> {
+		static bool determine(ieml::Node const& node);
+	};
 }
 
 #include "SValue.inl"

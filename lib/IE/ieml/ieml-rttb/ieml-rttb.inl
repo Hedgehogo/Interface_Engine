@@ -11,10 +11,14 @@ namespace ieml {
 	template<typename Type_>
 	auto Decode<char, Type_*>::decode(const Node& node) -> orl::Option<Type_*> {
 		auto& clear_node{node.get_clear_data<NodeType::Tag>()};
+		auto& builder{rttb::Builder<ieml::Node const&, Type_>::builder()};
 		if(&clear_node != &node) {
-			auto type_name{node.get_tag()};
-			return rttb::Builder<ieml::Node const&, Type_>::builder().build(type_name.some(), clear_node);
+			auto& type_name{node.get_tag().some()};
+			if(type_name == "_") {
+				return builder.implicit_build(clear_node);
+			}
+			return builder.build(type_name, clear_node);
 		}
-		return rttb::Builder<ieml::Node const&, Type_>::builder().implicit_build(node);
+		return builder.implicit_build(node);
 	}
 }

@@ -14,6 +14,12 @@ namespace ie::make_system {
 template<typename Value_>
 orl::Option<ie::make_system::BasicSVec2<Value_> >
 ieml::Decode<char, ie::make_system::BasicSVec2<Value_> >::decode(const ieml::Node& node) {
+	if(auto list{node.get_list_view()}) {
+		return ie::make_system::BasicSVec2<Value_>{
+			list.ok().at(0).except().as<ie::MakeDyn<Value_> >().move_except(),
+			list.ok().at(1).except().as<ie::MakeDyn<Value_> >().move_except(),
+		};
+	}
 	auto map{node.get_map_view().except()};
 	return ie::make_system::BasicSVec2<Value_>{
 		map.at("x").except().as<ie::MakeDyn<Value_> >().move_except(),
@@ -96,5 +102,10 @@ namespace ie {
 			}
 			reset_ = true;
 		}
+	}
+	
+	template<typename T_>
+	bool Determine<make_system::BasicSVec2<ISRanged<T_> > >::determine(ieml::Node const& node) {
+		return node.is_list() || node.is_map();
 	}
 }

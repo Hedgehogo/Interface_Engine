@@ -96,4 +96,9 @@ namespace ie {
 			read_fn(value);
 		}
 	}
+	
+	template<typename T_>
+	bool Determine<make_system::SRanged<T_> >::determine(ieml::Node const& node) {
+		return node.is_raw();
+	}
 }

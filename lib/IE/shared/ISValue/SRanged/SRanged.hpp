@@ -57,6 +57,11 @@ namespace ie {
 	using SRFloat = SRanged<float>;
 	using SRInt = SRanged<int>;
 	using SRSize = SRanged<size_t>;
+	
+	template<typename T_>
+	struct Determine<make_system::SRanged<T_> > {
+		static bool determine(ieml::Node const& node);
+	};
 }
 
 #include "SRanged.inl"

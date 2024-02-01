@@ -42,33 +42,18 @@ namespace ie {
 	
 	template<typename Type_>
 	orl::Option<MakeDyn<Type_> > MakeDyn<Type_>::decode(ieml::Node const& node) {
-		auto decode_make_fn = [&](ieml::Node const& node) -> orl::Option<bp::BoxPtr<MakeType> > {
-			auto& builder{rttb::Builder<ieml::Node const&, MakeType>::builder()};
-			auto& clear_node{node.get_clear_data<ieml::NodeType::Tag>()};
-			if(&clear_node != &node) {
-				auto type_name{node.get_tag()};
-				if(auto make{builder.build(type_name.some(), clear_node)}) {
-					return {bp::BoxPtr{make.some()}};
-				}
-			}
-			if(auto make{builder.implicit_build(node)}) {
-				return {bp::BoxPtr{make.some()}};
-			}
-			return {};
-		};
 		auto& tag_node{node.get_clear_data<ieml::NodeType::GetAnchor, ieml::NodeType::TakeAnchor>()};
-		if(auto result{decode_make_fn(tag_node)}) {
+		return ieml::Decode<char, bp::BoxPtr<MakeType> >::decode(tag_node).map([&](auto& value) -> MakeDyn<Type_> {
 			if(&tag_node != &node) {
 				size_t id{reinterpret_cast<size_t>(&tag_node)};
-				return {{id, result.move_some()}};
+				return {id, std::move(value)};
 			}
-			return {{result.move_some()}};
-		}
-		return {};
+			return {std::move(value)};
+		});
 	}
 	
 	template<typename Type_>
-	ie::MakeDyn<Type_>::Pair::Pair(size_t id_, bp::BoxPtr <MakeType> make_) : id_(id_), make_(std::move(make_)) {
+	ie::MakeDyn<Type_>::Pair::Pair(size_t id_, bp::BoxPtr<MakeType> make_) : id_(id_), make_(std::move(make_)) {
 	}
 }
 

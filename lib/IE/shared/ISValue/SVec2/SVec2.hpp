@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/ieml/shortcuts/shortcuts.hpp"
 #include "../../SReader/SReader.hpp"
 #include "../../ISVec2/ISVec2.hpp"
 #include "../../ISRanged/ISRanged.hpp"
@@ -73,10 +74,14 @@ namespace ie {
 	template<typename T>
 	using SRVec2 = BasicSVec2<ISRanged<T> >;
 	
-	using SRVec2B = SRVec2<bool>;
 	using SRVec2F = SRVec2<float>;
 	using SRVec2I = SRVec2<int>;
 	using SRVec2S = SRVec2<size_t>;
+	
+	template<typename T_>
+	struct Determine<make_system::BasicSVec2<ISRanged<T_> > > {
+		static bool determine(ieml::Node const& node);
+	};
 }
 
 #include "SVec2.inl"
