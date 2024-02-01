@@ -14,7 +14,6 @@ namespace ie {
 		sizing_(sizing->make({init_info.render_target, this->object_->get_normal_size()})),
 		positioning_(positioning->make({init_info.render_target})),
 		displayed_(displayed) {
-		this->positioning_->init(init_info.render_target);
 		init_info.panel_manager.add_panel(this);
 	}
 	

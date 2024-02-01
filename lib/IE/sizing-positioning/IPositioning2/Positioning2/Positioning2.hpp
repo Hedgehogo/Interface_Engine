@@ -25,20 +25,8 @@ namespace ie {
 		
 		Positioning2(Make&& make, Positioning2InitInfo init_info);
 		
-		Positioning2(BoxPtr<IPositioning>&& horizontal, BoxPtr<IPositioning>&& vertical);
-		
-		Positioning2(sf::Vector2f coefficient, sf::Vector2f offset = {}, bool relative_target = false);
-		
-		Positioning2(Location2 parent_location, Location2 object_location, sf::Vector2f offset = {});
-		
-		Positioning2(sf::Vector2f coefficient, sf::Vector2f object_coefficient, sf::Vector2f offset, bool relative_target = false);
-		
-		void init(sf::RenderTarget& render_target) override;
-		
 		sf::Vector2f find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) override;
 		
-		Positioning2* copy() override;
-	
 	protected:
 		BoxPtr<IPositioning> horizontal_;
 		BoxPtr<IPositioning> vertical_;

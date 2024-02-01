@@ -18,11 +18,7 @@ namespace ie {
 		
 		InternalPositioning2(sf::Vector2f coefficient);
 		
-		void init(sf::RenderTarget&);
-		
 		sf::Vector2f find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size);
-	
-		InternalPositioning2* copy();
 	
 	protected:
 		InternalPositioning vertical_;

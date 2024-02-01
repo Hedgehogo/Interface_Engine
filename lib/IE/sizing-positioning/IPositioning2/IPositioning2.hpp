@@ -21,12 +21,8 @@ namespace ie {
 		
 		virtual ~IPositioning2() = default;
 		
-		virtual void init(sf::RenderTarget& render_target) = 0;
-		
 		virtual sf::Vector2f find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) = 0;
 		
 		virtual sf::Vector2f operator()(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size);
-		
-		virtual IPositioning2* copy() = 0;
 	};
 }

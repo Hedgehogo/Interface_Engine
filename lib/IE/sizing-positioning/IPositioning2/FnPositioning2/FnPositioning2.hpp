@@ -22,14 +22,8 @@ namespace ie {
 		
 		FnPositioning2(Make&& make, Positioning2InitInfo init_info);
 		
-		FnPositioning2(FindPositionFn find_position_fn);
-		
-		void init(sf::RenderTarget& render_target) override;
-		
 		sf::Vector2f find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) override;
 		
-		FnPositioning2* copy() override;
-	
 	protected:
 		FindPositionFn find_position_fn_;
 		sf::RenderTarget* render_target_;
