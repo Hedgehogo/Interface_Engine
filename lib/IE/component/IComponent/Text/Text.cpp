@@ -70,7 +70,7 @@ namespace ie {
 			std::vector<BaseCharacter*> characters = text_block->get_characters();
 			text_characters.insert(text_characters.end(), characters.begin(), characters.end());
 		}
-		resizer = BoxPtr{make.resizer->make(ResizerInitInfo(text_characters))};
+		resizer = BoxPtr<BaseResizer>{make.resizer->make(ResizerInitInfo(text_characters))};
 		
 		init_info.update_manager.add(*this);
 		init_info.draw_manager.add(*this);

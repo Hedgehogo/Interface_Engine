@@ -28,10 +28,6 @@ namespace ie {
 		
 		BasicKeysInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys = {});
-		
-		void init(BasicActionInitInfo<T> init_info) override;
-		
 		bool is_press() const;
 		
 		std::vector<Key> get_keys();
@@ -45,8 +41,6 @@ namespace ie {
 		void update(sf::Vector2i mouse_position) override;
 		
 		void finish(sf::Vector2i) override;
-		
-		BasicKeysInteraction<T>* copy() override;
 		
 	protected:
 		BoxPtr<BasicKeyAction<T> > action_;

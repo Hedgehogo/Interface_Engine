@@ -22,18 +22,6 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys) :
-		action_(std::move(action)), keys_(std::move(keys)), black_list_keys_(std::move(black_list_keys)), press_(false) {
-		std::sort(this->keys_.begin(), this->keys_.end());
-	}
-	
-	template<typename T>
-	void BasicKeysInteraction<T>::init(BasicActionInitInfo<T> init_info) {
-		IBasicInteraction<T>::init(init_info);
-		action_->init(init_info);
-	}
-	
-	template<typename T>
 	std::vector<Key> BasicKeysInteraction<T>::get_keys() {
 		return keys_;
 	}
@@ -80,11 +68,6 @@ namespace ie {
 	template<typename T>
 	bool BasicKeysInteraction<T>::is_press() const {
 		return press_;
-	}
-	
-	template<typename T>
-	BasicKeysInteraction<T>* BasicKeysInteraction<T>::copy() {
-		return new BasicKeysInteraction<T>{*this};
 	}
 }
 

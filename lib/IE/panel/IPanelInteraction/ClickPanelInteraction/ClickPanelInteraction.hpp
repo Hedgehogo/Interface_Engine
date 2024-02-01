@@ -10,12 +10,6 @@ namespace ie {
 	public:
 		ClickPanelInteraction(BoxPtr<PanelAction::Make>&& action, Key key, PanelActionInitInfo init_info);
 		
-		ClickPanelInteraction(BoxPtr<PanelAction>&& action, Key key);
-		
-		void init(PanelActionInitInfo init_info) override;
-		
 		void set_panel(Panel& panel) override;
-		
-		ClickPanelInteraction* copy() override = 0;
 	};
 }

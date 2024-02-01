@@ -18,13 +18,9 @@ namespace ie {
 		
 		CoefficientMovePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		CoefficientMovePanelInteraction(sf::Vector2f coefficient, sf::Vector2f offset, bool at_start = false);
-		
 		bool get_at_start() override;
 		
 		void move(sf::Vector2i mouse_position) override;
-		
-		CoefficientMovePanelInteraction* copy() override;
 	
 	protected:
 		sf::Vector2f coefficient_;

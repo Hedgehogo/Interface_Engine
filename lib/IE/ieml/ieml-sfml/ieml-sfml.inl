@@ -22,7 +22,7 @@ namespace ieml {
 	template<typename T>
 	Option<bp::BoxPtr<T> > Decode<char, bp::BoxPtr<T> >::decode(const Node& node) {
 		return Decode<char, T*>::decode(node).map([](auto& value) {
-			return bp::BoxPtr{value};
+			return bp::BoxPtr<T>{value};
 		});
 	}
 	

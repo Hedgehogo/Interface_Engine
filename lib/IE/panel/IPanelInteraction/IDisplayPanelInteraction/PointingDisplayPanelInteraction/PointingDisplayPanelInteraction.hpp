@@ -13,15 +13,11 @@ namespace ie {
 		
 		PointingDisplayPanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		PointingDisplayPanelInteraction() = default;
-		
 		void start(sf::Vector2i mouse_position) override;
 		
 		void update(sf::Vector2i mouse_position) override;
 		
 		void finish(sf::Vector2i mouse_position) override;
-		
-		PointingDisplayPanelInteraction* copy() override;
 	};
 }
 

@@ -23,7 +23,7 @@ namespace ie {
 		TextBockInitInfo init_info
 	) :
 		object_character(
-			BoxPtr{
+			BoxPtr<IScalable>{
 				[&]() {
 					auto result{make.object->make(static_cast<InitInfo>(init_info))};
 					sf::Vector2f min_size{result->get_size()};

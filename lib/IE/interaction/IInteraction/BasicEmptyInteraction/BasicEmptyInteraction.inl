@@ -27,11 +27,6 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicEmptyInteraction<T>* BasicEmptyInteraction<T>::copy() {
-		return new BasicEmptyInteraction<T>{};
-	}
-	
-	template<typename T>
 	bool DecodePointer<BasicEmptyInteraction<T> >::decode_pointer(const YAML::Node&, BasicEmptyInteraction<T>*& empty_interaction) {
 		empty_interaction = new BasicEmptyInteraction<T>{};
 		return true;

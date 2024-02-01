@@ -12,14 +12,6 @@ namespace ie {
 	ClickHidePanelInteraction::ClickHidePanelInteraction(Make&& make, PanelActionInitInfo init_info) :
 		ClickPanelInteraction(make_box_ptr<HidePanelAction::Make>(make.only_on_parent), make.key, init_info) {
 	}
-	
-	ClickHidePanelInteraction::ClickHidePanelInteraction(Key key, bool only_on_parent) :
-		ClickPanelInteraction(make_box_ptr<HidePanelAction>(only_on_parent), key) {
-	}
-	
-	ClickHidePanelInteraction* ClickHidePanelInteraction::copy() {
-		return new ClickHidePanelInteraction{*this};
-	}
 }
 
 orl::Option<ie::ClickHidePanelInteraction::Make> ieml::Decode<char, ie::ClickHidePanelInteraction::Make>::decode(ieml::Node const& node) {

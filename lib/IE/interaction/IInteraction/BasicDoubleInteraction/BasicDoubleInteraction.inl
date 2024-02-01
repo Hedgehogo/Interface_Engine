@@ -19,21 +19,6 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicDoubleInteraction<T>::BasicDoubleInteraction(BoxPtr<IBasicInteraction<T> >&& first, BoxPtr<IBasicInteraction<T> >&& second) :
-		first_(std::move(first)), second_(std::move(second)) {
-	}
-	
-	template<typename T>
-	void BasicDoubleInteraction<T>::set_first(BoxPtr<IBasicInteraction<T> >&& first) {
-		this->first_ = std::move(first);
-	}
-	
-	template<typename T>
-	void BasicDoubleInteraction<T>::set_second(BoxPtr<IBasicInteraction<T> >&& second) {
-		this->second_ = std::move(second);
-	}
-	
-	template<typename T>
 	IBasicInteraction<T>& BasicDoubleInteraction<T>::get_first() {
 		return *first_;
 	}
@@ -69,10 +54,5 @@ namespace ie {
 	void BasicDoubleInteraction<T>::finish(sf::Vector2i mouse_position) {
 		second_->finish(mouse_position);
 		first_->finish(mouse_position);
-	}
-	
-	template<typename T>
-	BasicDoubleInteraction<T>* BasicDoubleInteraction<T>::copy() {
-		return new BasicDoubleInteraction<T>{*this};
 	}
 }

@@ -10,7 +10,5 @@ namespace ie {
 		};
 		
 		Priority get_priority() const override;
-		
-		IHidePanelInteraction* copy() override = 0;
 	};
 }

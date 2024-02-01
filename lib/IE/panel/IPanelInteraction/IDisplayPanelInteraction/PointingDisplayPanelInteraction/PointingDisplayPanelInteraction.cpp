@@ -21,10 +21,6 @@ namespace ie {
 	void PointingDisplayPanelInteraction::finish(sf::Vector2i) {
 		panel_->set_parent_processed(false);
 	}
-	
-	PointingDisplayPanelInteraction* PointingDisplayPanelInteraction::copy() {
-		return new PointingDisplayPanelInteraction{*this};
-	}
 }
 
 orl::Option<ie::PointingDisplayPanelInteraction::Make> ieml::Decode<char, ie::PointingDisplayPanelInteraction::Make>::decode(ieml::Node const&) {

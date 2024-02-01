@@ -23,11 +23,7 @@ namespace ie {
 		
 		void update(sf::Vector2i) override;
 		
-		void init(PanelActionInitInfo) override;
-		
 		void set_panel(Panel&) override;
-		
-		DontMovePanelInteraction* copy() override;
 	};
 }
 

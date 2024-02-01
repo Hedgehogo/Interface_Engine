@@ -66,12 +66,6 @@ namespace ie {
 		
 		BasicHotkeyInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, size_t state = 0);
-		
-		BasicHotkeyInteraction(std::string);
-		
-		void init(BasicActionInitInfo<T> init_info) override;
-		
 		void set_hotkey_action(size_t state, Hotkey* hotkey_action);
 		
 		std::vector<BoxPtr<Hotkey> > get_hotkeys(int state);
@@ -84,8 +78,6 @@ namespace ie {
 		
 		void finish(sf::Vector2i mouse_position) override;
 		
-		BasicHotkeyInteraction<T>* copy() override;
-	
 	protected:
 		std::vector<std::vector<BoxPtr<Hotkey> > > hotkey_states_;
 		std::vector<BoxPtr<Hotkey> >* now_hotkeys_;

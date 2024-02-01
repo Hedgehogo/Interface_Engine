@@ -18,7 +18,5 @@ namespace ie {
 		void update(sf::Vector2i mouse_position) override;
 		
 		void finish(sf::Vector2i mouse_position) override;
-		
-		IMovePanelInteraction* copy() override = 0;
 	};
 }

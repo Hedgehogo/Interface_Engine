@@ -19,14 +19,10 @@ namespace ie {
 		
 		SideMovePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool at_start = false);
-		
 		bool get_at_start() override;
 		
 		void move(sf::Vector2i mouse_position) override;
 		
-		SideMovePanelInteraction* copy() override;
-	
 	protected:
 		float coefficient_;
 		float offset_;

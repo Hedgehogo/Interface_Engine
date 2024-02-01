@@ -28,12 +28,6 @@ namespace ie {
 		
 		BasicDoubleInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		BasicDoubleInteraction(BoxPtr<IBasicInteraction<T> >&& first, BoxPtr<IBasicInteraction<T> >&& second);
-		
-		void set_first(BoxPtr<IBasicInteraction<T> >&& first);
-		
-		void set_second(BoxPtr<IBasicInteraction<T> >&& second);
-		
 		IBasicInteraction<T>& get_first();
 		
 		const IBasicInteraction<T>& get_first() const;
@@ -48,8 +42,6 @@ namespace ie {
 		
 		void finish(sf::Vector2i mouse_position) override;
 		
-		BasicDoubleInteraction<T>* copy() override;
-	
 	protected:
 		BoxPtr<IBasicInteraction<T> > first_;
 		BoxPtr<IBasicInteraction<T> > second_;

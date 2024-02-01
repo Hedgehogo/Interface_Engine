@@ -9,14 +9,7 @@ namespace ie {
 	DontHidePanelInteraction::DontHidePanelInteraction(Make&&, PanelActionInitInfo) {
 	}
 	
-	void DontHidePanelInteraction::init(PanelActionInitInfo) {
-	}
-	
 	void DontHidePanelInteraction::set_panel(Panel&) {
-	}
-	
-	DontHidePanelInteraction* DontHidePanelInteraction::copy() {
-		return new DontHidePanelInteraction{};
 	}
 }
 

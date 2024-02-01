@@ -15,9 +15,6 @@ namespace ie {
 		BasePanelInteraction(init_info), only_on_parent_(make.only_on_parent) {
 	}
 	
-	PointingHidePanelInteraction::PointingHidePanelInteraction(bool only_on_parent) : only_on_parent_(only_on_parent) {
-	}
-	
 	void PointingHidePanelInteraction::start(sf::Vector2i) {
 	}
 	
@@ -29,10 +26,6 @@ namespace ie {
 	}
 	
 	void PointingHidePanelInteraction::finish(sf::Vector2i) {
-	}
-	
-	PointingHidePanelInteraction* PointingHidePanelInteraction::copy() {
-		return new PointingHidePanelInteraction{*this};
 	}
 }
 

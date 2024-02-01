@@ -32,8 +32,6 @@ namespace ie {
 		virtual void finish(sf::Vector2i mouse_position) = 0;
 		
 		bool operator<(IInteraction& interaction) const;
-		
-		virtual IInteraction* copy() = 0;
 	};
 	
 	template<typename T>
@@ -52,10 +50,6 @@ namespace ie {
 	class IBasicInteraction : public virtual IInteraction {
 	public:
 		using Make = make_system::IBasicInteraction<T>;
-		
-		virtual void init(BasicActionInitInfo<T> init_info);
-		
-		virtual IBasicInteraction<T>* copy() = 0;
 	};
 	
 	using IBaseInteraction = IBasicInteraction<>;

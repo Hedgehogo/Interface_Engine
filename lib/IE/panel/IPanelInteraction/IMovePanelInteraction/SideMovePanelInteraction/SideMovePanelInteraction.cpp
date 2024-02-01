@@ -14,10 +14,6 @@ namespace ie {
 		BasePanelInteraction(init_info), coefficient_(make.coefficient), offset_(make.offset), horizontal_(make.horizontal), at_start_(make.at_start) {
 	}
 	
-	SideMovePanelInteraction::SideMovePanelInteraction(float coefficient, float offset, bool horizontal, bool at_start) :
-		coefficient_(coefficient), offset_(offset), horizontal_(horizontal), at_start_(at_start) {
-	}
-	
 	bool SideMovePanelInteraction::get_at_start() {
 		return at_start_;
 	}
@@ -28,10 +24,6 @@ namespace ie {
 		sf::Vector2f point_position{static_cast<sf::Vector2f>(mouse_position)};
 		float position = (horizontal_ ? (point_position.x - panel_size.x * coefficient_ + offset_) : (point_position.y - panel_size.y * coefficient_ + offset_));
 		panel_->set_position((horizontal_ ? sf::Vector2f{position, panel_position.y} : sf::Vector2f{panel_position.x, position}));
-	}
-	
-	SideMovePanelInteraction* SideMovePanelInteraction::copy() {
-		return new SideMovePanelInteraction{*this};
 	}
 }
 

@@ -27,10 +27,6 @@ namespace ie {
 		
 		BasicOneKeyInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		BasicOneKeyInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
-		
-		void init(BasicActionInitInfo<T> init_info) override;
-		
 		Key get_key();
 		
 		BasicKeyAction<T>& get_action();
@@ -45,8 +41,6 @@ namespace ie {
 		
 		void finish(sf::Vector2i) override;
 		
-		BasicOneKeyInteraction<T>* copy() override;
-	
 	protected:
 		BoxPtr<BasicKeyAction<T> > action_;
 		Key key_;

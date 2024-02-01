@@ -27,6 +27,6 @@ namespace ie {
 	
 	template<typename T>
 	BasicAddBlockInteractionAction<T>* BasicAddBlockInteractionAction<T>::copy() {
-		return new BasicAddBlockInteractionAction<T>{*this};
+		return nullptr;
 	}
 }

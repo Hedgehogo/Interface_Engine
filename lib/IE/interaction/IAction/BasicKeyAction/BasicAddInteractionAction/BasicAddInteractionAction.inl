@@ -23,8 +23,6 @@ namespace ie {
 	
 	template<typename T>
 	void BasicAddInteractionAction<T>::init(BasicActionInitInfo<T> init_info) {
-		interaction_manager_ = &init_info.interaction_manager;
-		interaction_->init(init_info);
 	}
 	
 	template<typename T>
@@ -34,7 +32,7 @@ namespace ie {
 	
 	template<typename T>
 	BasicAddInteractionAction<T>* BasicAddInteractionAction<T>::copy() {
-		return new BasicAddInteractionAction<T>{*this};
+		return nullptr;
 	}
 	
 	template<typename T>

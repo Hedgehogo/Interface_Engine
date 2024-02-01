@@ -24,14 +24,8 @@ namespace ie {
 		
 		BasicPressedInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		BasicPressedInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
-		
-		void init(BasicActionInitInfo<T> init_info) override;
-		
 		void update(sf::Vector2i mouse_position) override;
 		
-		BasicPressedInteraction<T>* copy() override;
-	
 	protected:
 		InteractionManager* interaction_manager_;
 	};

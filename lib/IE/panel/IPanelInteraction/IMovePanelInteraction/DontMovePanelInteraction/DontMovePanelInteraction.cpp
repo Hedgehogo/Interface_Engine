@@ -22,14 +22,7 @@ namespace ie {
 	void DontMovePanelInteraction::update(sf::Vector2i) {
 	}
 	
-	void DontMovePanelInteraction::init(PanelActionInitInfo) {
-	}
-	
 	void DontMovePanelInteraction::set_panel(Panel&) {
-	}
-	
-	DontMovePanelInteraction* DontMovePanelInteraction::copy() {
-		return new DontMovePanelInteraction{};
 	}
 }
 

@@ -14,10 +14,6 @@ namespace ie {
 		BasePanelInteraction(init_info), coefficient_(make.coefficient), offset_(make.offset), at_start_(make.at_start) {
 	}
 	
-	CoefficientMovePanelInteraction::CoefficientMovePanelInteraction(sf::Vector2f coefficient, sf::Vector2f offset, bool at_start) :
-		coefficient_(coefficient), offset_(offset), at_start_(at_start) {
-	}
-	
 	bool CoefficientMovePanelInteraction::get_at_start() {
 		return at_start_;
 	}
@@ -26,10 +22,6 @@ namespace ie {
 		sf::Vector2f panel_size{panel_->get_area_size()};
 		sf::Vector2f point_position{static_cast<sf::Vector2f>(mouse_position)};
 		panel_->set_position({point_position.x - panel_size.x * coefficient_.x + offset_.x, point_position.y - panel_size.y * coefficient_.y + offset_.y});
-	}
-	
-	CoefficientMovePanelInteraction* CoefficientMovePanelInteraction::copy() {
-		return new CoefficientMovePanelInteraction{*this};
 	}
 }
 

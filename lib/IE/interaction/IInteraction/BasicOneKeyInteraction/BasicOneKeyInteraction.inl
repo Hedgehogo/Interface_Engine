@@ -17,16 +17,6 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicOneKeyInteraction<T>::BasicOneKeyInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key) :
-		action_(std::move(action)), key_(key) {
-	}
-	
-	template<typename T>
-	void BasicOneKeyInteraction<T>::init(BasicActionInitInfo<T> init_info) {
-		action_->init(init_info);
-	}
-	
-	template<typename T>
 	Key BasicOneKeyInteraction<T>::get_key() {
 		return key_;
 	}
@@ -58,11 +48,6 @@ namespace ie {
 	template<typename T>
 	void BasicOneKeyInteraction<T>::finish(sf::Vector2i) {
 		action_->set_pressed(false);
-	}
-	
-	template<typename T>
-	BasicOneKeyInteraction<T>* BasicOneKeyInteraction<T>::copy() {
-		return new BasicOneKeyInteraction<T>{*this};
 	}
 }
 

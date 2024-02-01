@@ -51,7 +51,7 @@ namespace ie {
 			*interaction_stack_,
 			panel_manager_interceptor_
 		};
-		object_ = BoxPtr{new_object->make(init_info)};
+		object_ = BoxPtr<IScalable>{new_object->make(init_info)};
 	}
 	
 	void BoxSettable::draw() {

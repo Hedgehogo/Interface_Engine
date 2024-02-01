@@ -15,7 +15,5 @@ namespace ie {
 		};
 		
 		virtual void set_panel(Panel& panel) = 0;
-		
-		IPanelInteraction* copy() override = 0;
 	};
 }

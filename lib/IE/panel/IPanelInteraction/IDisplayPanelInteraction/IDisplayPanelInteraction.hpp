@@ -8,7 +8,5 @@ namespace ie {
 		struct Make : public virtual IPanelInteraction::Make {
 			IDisplayPanelInteraction* make(PanelActionInitInfo init_info) override = 0;
 		};
-		
-		IDisplayPanelInteraction* copy() override = 0;
 	};
 }

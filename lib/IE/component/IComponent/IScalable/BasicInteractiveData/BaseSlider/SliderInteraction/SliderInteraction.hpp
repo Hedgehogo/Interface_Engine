@@ -31,23 +31,10 @@ namespace ie {
 		
 		SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info);
 		
-		SliderInteraction(
-			Key key,
-			bool wheel_horizontal = false,
-			SliderWheelAction::Relativity wheel_relativity = SliderWheelAction::Relativity::RelationSlider,
-			sf::Vector2f wheel_sensitivity = {0.2f, 0.2f}
-		);
-		
-		SliderInteraction(Key key, sf::Vector2i division = {10, 10}, bool wheel_horizontal = false);
-		
-		SliderInteraction(Key key, sf::Vector2i division, bool wheel_horizontal, SliderWheelAction::Relativity wheel_relativity, sf::Vector2f wheel_sensitivity);
-		
 		void set_slider(BaseSlider& slider);
 		
 		void update(sf::Vector2i mouse_position) override;
 		
-		SliderInteraction* copy() override;
-	
 	protected:
 		SliderWheelAction wheel_action_;
 	};

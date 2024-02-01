@@ -17,16 +17,12 @@ namespace ie {
 		
 		PointingHidePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		PointingHidePanelInteraction(bool only_on_parent = false);
-		
 		void start(sf::Vector2i mouse_position) override;
 		
 		void update(sf::Vector2i mouse_position) override;
 		
 		void finish(sf::Vector2i mouse_position) override;
 		
-		PointingHidePanelInteraction* copy() override;
-	
 	protected:
 		bool only_on_parent_;
 	};

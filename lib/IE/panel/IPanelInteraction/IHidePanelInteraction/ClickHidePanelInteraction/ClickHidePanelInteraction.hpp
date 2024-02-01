@@ -17,10 +17,6 @@ namespace ie {
 		};
 		
 		ClickHidePanelInteraction(Make&& make, PanelActionInitInfo init_info);
-		
-		explicit ClickHidePanelInteraction(Key key, bool only_on_parent = false);
-		
-		ClickHidePanelInteraction* copy() override;
 	};
 }
 

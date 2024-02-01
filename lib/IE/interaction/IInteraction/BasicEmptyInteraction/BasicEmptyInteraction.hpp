@@ -28,8 +28,6 @@ namespace ie {
 		void update(sf::Vector2i) override;
 		
 		void finish(sf::Vector2i) override;
-		
-		BasicEmptyInteraction<T>* copy() override;
 	};
 	
 	using EmptyInteraction = BasicEmptyInteraction<>;

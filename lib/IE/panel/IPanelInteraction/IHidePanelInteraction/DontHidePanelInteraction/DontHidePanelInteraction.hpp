@@ -15,11 +15,7 @@ namespace ie {
 		
 		DontHidePanelInteraction() = default;
 		
-		void init(PanelActionInitInfo init_info) override;
-		
 		void set_panel(Panel&) override;
-		
-		DontHidePanelInteraction* copy() override;
 	};
 }
 
