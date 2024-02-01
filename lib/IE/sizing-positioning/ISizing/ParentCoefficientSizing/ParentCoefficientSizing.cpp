@@ -16,15 +16,8 @@ namespace ie {
 	ParentCoefficientSizing::ParentCoefficientSizing(float coefficient, float addition) : coefficient_(coefficient), addition_(addition) {
 	}
 	
-	void ParentCoefficientSizing::init(float) {
-	}
-	
 	float ParentCoefficientSizing::find_size(float parent_size, float) {
 		return parent_size * coefficient_ + addition_;
-	}
-	
-	ParentCoefficientSizing* ParentCoefficientSizing::copy() {
-		return new ParentCoefficientSizing{*this};
 	}
 	
 	float ParentCoefficientSizing::get_parent_size(float object_size) {

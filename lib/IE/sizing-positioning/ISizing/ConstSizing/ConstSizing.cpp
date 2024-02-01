@@ -14,15 +14,8 @@ namespace ie {
 	ConstSizing::ConstSizing(float size) : size_(size) {
 	}
 	
-	void ConstSizing::init(float) {
-	}
-	
 	float ConstSizing::find_size(float, float) {
 		return this->size_;
-	}
-	
-	ConstSizing* ConstSizing::copy() {
-		return new ConstSizing{*this};
 	}
 }
 

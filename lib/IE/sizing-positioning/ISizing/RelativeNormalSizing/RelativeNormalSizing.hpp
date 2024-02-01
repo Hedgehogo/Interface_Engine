@@ -14,12 +14,8 @@ namespace ie {
 		
 		RelativeNormalSizing();
 		
-		void init(float normal_size) override;
-		
 		float find_size(float, float) override;
 		
-		RelativeNormalSizing* copy() override;
-	
 	protected:
 		float normal_size_;
 	};

@@ -19,14 +19,10 @@ namespace ie {
 		
 		explicit ParentCoefficientSizing(float coefficient = 1, float addition = 0);
 		
-		void init(float) override;
-		
 		float find_size(float parent_size, float) override;
 		
 		float get_parent_size(float object_size) override;
 		
-		ParentCoefficientSizing* copy() override;
-	
 	protected:
 		float coefficient_;
 		float addition_;

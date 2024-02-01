@@ -24,14 +24,10 @@ namespace ie {
 		
 		FnSizing2(FindSizeFn find_size_fn, GetParentSizeFn get_parent_size_fn);
 		
-		void init(sf::RenderTarget& render_target, sf::Vector2f normal_size) override;
-		
 		sf::Vector2f find_size(sf::Vector2f parent_size) override;
 		
 		sf::Vector2f get_parent_size(sf::Vector2f object_size) override;
 		
-		FnSizing2* copy() override;
-	
 	protected:
 		FindSizeFn find_size_fn_;
 		GetParentSizeFn get_parent_size_fn_;

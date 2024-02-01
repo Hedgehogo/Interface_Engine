@@ -14,14 +14,10 @@ namespace ie {
 		
 		virtual ~ISizing2() = default;
 		
-		virtual void init(sf::RenderTarget& render_target, sf::Vector2f normal_size) = 0;
-		
 		virtual sf::Vector2f find_size(sf::Vector2f parent_size) = 0;
 		
 		virtual sf::Vector2f get_parent_size(sf::Vector2f object_size) = 0;
 		
 		virtual sf::Vector2f operator()(sf::Vector2f parent_size);
-		
-		virtual ISizing2* copy() = 0;
 	};
 }

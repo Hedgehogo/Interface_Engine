@@ -18,12 +18,8 @@ namespace ie {
 		
 		ConstSizing(float size);
 		
-		void init(float) override;
-		
 		float find_size(float, float) override;
 		
-		ConstSizing* copy() override;
-	
 	protected:
 		float size_;
 	};

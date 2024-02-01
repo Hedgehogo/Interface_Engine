@@ -16,15 +16,8 @@ namespace ie {
 	TargetCoefficientSizing::TargetCoefficientSizing(float coefficient, float addition) : coefficient_(coefficient), addition_(addition) {
 	}
 	
-	void TargetCoefficientSizing::init(float) {
-	}
-	
 	float TargetCoefficientSizing::find_size(float, float target_size) {
 		return target_size * coefficient_ + addition_;
-	}
-	
-	TargetCoefficientSizing* TargetCoefficientSizing::copy() {
-		return new TargetCoefficientSizing{*this};
 	}
 }
 

@@ -19,12 +19,8 @@ namespace ie {
 		
 		explicit TargetCoefficientSizing(float coefficient = 1, float addition = 0);
 		
-		void init(float) override;
-		
 		float find_size(float, float target_size) override;
 		
-		TargetCoefficientSizing* copy() override;
-	
 	protected:
 		float coefficient_;
 		float addition_;

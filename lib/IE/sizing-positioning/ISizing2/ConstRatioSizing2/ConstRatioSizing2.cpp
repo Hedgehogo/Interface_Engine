@@ -33,30 +33,6 @@ namespace ie {
 		horizontal_(make.horizontal) {
 	}
 	
-	ConstRatioSizing2::ConstRatioSizing2(BoxPtr<ISizing>&& sizing, float ratio, bool horizontal) : sizing_(std::move(sizing)), ratio_(ratio), horizontal_(horizontal) {
-	}
-	
-	ConstRatioSizing2::ConstRatioSizing2(float ratio, bool horizontal, bool relative_parent) :
-		sizing_(BoxPtr{make_size_make(relative_parent)}->make(0)), ratio_(ratio), horizontal_(horizontal) {
-	}
-	
-	ConstRatioSizing2::ConstRatioSizing2(float const_size, float ratio, bool horizontal) :
-		sizing_(new ConstSizing{const_size}), ratio_(ratio), horizontal_(horizontal) {
-	}
-	
-	ConstRatioSizing2::ConstRatioSizing2(float coefficient, float addition, float ratio, bool horizontal, bool relative_target) :
-		sizing_(BoxPtr{make_size_make(coefficient, addition, relative_target)}->make(0)), ratio_(ratio), horizontal_(horizontal) {
-	}
-	
-	ConstRatioSizing2::ConstRatioSizing2(float target_coefficient, float parent_coefficient, float addition, float ratio, bool horizontal) :
-		sizing_(new SmartSizing{target_coefficient, parent_coefficient, addition}), ratio_(ratio), horizontal_(horizontal) {
-	}
-	
-	void ConstRatioSizing2::init(sf::RenderTarget& render_target, sf::Vector2f normal_size) {
-		this->render_target_ = &render_target;
-		sizing_->init((horizontal_ ? normal_size.x : normal_size.y));
-	}
-	
 	sf::Vector2f ConstRatioSizing2::find_size(sf::Vector2f parent_size) {
 		sf::Vector2f target_size{static_cast<sf::Vector2f>(render_target_->getSize())};
 		float size = (horizontal_ ? sizing_->find_size(parent_size.x, target_size.x) : sizing_->find_size(parent_size.y, target_size.y));
@@ -66,10 +42,6 @@ namespace ie {
 	sf::Vector2f ConstRatioSizing2::get_parent_size(sf::Vector2f object_size) {
 		float size = (horizontal_ ? sizing_->get_parent_size(object_size.x) : sizing_->get_parent_size(object_size.y));
 		return (horizontal_ ? sf::Vector2f{size, size / ratio_} : sf::Vector2f{size * ratio_, size});
-	}
-	
-	ConstRatioSizing2* ConstRatioSizing2::copy() {
-		return new ConstRatioSizing2{*this};
 	}
 }
 

@@ -20,13 +20,9 @@ namespace ie {
 		
 		explicit SmartSizing(float target_coefficient = 1, float parent_coefficient = 0, float addition = 0);
 		
-		void init(float) override;
-		
 		float find_size(float parent_size, float target_size) override;
 		
 		float get_parent_size(float object_size) override;
-		
-		SmartSizing* copy() override;
 	
 	protected:
 		float target_coefficient_;

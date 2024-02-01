@@ -26,24 +26,10 @@ namespace ie {
 		
 		Sizing2(Make&& make, Sizing2InitInfo init_info);
 		
-		Sizing2(BoxPtr<ISizing>&& horizontal, BoxPtr<ISizing>&& vertical);
-		
-		Sizing2(bool relative_parent);
-		
-		Sizing2(sf::Vector2f const_size);
-		
-		Sizing2(sf::Vector2f coefficient, sf::Vector2f addition, bool relative_target = false);
-		
-		Sizing2(sf::Vector2f target_coefficient, sf::Vector2f parent_coefficient, sf::Vector2f addition);
-		
-		void init(sf::RenderTarget& render_target, sf::Vector2f normal_size) override;
-		
 		sf::Vector2f find_size(sf::Vector2f parent_size) override;
 		
 		sf::Vector2f get_parent_size(sf::Vector2f object_size) override;
 		
-		Sizing2* copy() override;
-	
 	protected:
 		BoxPtr<ISizing> horizontal_;
 		BoxPtr<ISizing> vertical_;

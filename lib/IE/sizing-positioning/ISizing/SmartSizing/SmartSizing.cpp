@@ -17,15 +17,8 @@ namespace ie {
 		target_coefficient_(target_coefficient), parent_coefficient_(parent_coefficient), addition_(addition) {
 	}
 	
-	void SmartSizing::init(float) {
-	}
-	
 	float SmartSizing::find_size(float parent_size, float target_size) {
 		return parent_size * parent_coefficient_ + target_size * target_coefficient_ + addition_;
-	}
-	
-	SmartSizing* SmartSizing::copy() {
-		return new SmartSizing{*this};
 	}
 	
 	float SmartSizing::get_parent_size(float object_size) {

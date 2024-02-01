@@ -34,40 +34,6 @@ namespace ie {
 		render_target_(&init_info.render_target) {
 	}
 	
-	Sizing2::Sizing2(BoxPtr<ISizing>&& horizontal, BoxPtr<ISizing>&& vertical) :
-		horizontal_(std::move(horizontal)), vertical_(std::move(vertical)), render_target_(nullptr) {
-	}
-	
-	Sizing2::Sizing2(bool relative_parent) :
-		horizontal_(BoxPtr{make_size_make(relative_parent)}->make(0)),
-		vertical_(BoxPtr{make_size_make(relative_parent)}->make(0)),
-		render_target_(nullptr) {
-	}
-	
-	Sizing2::Sizing2(sf::Vector2f const_size) :
-		horizontal_(BoxPtr{make_size_make(const_size.x)}->make(0)),
-		vertical_(BoxPtr{make_size_make(const_size.y)}->make(0)),
-		render_target_(nullptr) {
-	}
-	
-	Sizing2::Sizing2(sf::Vector2f coefficient, sf::Vector2f addition, bool relative_target) :
-		horizontal_(BoxPtr{make_size_make(coefficient.x, addition.x, relative_target)}->make(0)),
-		vertical_(BoxPtr{make_size_make(coefficient.y, addition.y, relative_target)}->make(0)),
-		render_target_(nullptr) {
-	}
-	
-	Sizing2::Sizing2(sf::Vector2f target_coefficient, sf::Vector2f parent_coefficient, sf::Vector2f addition) :
-		horizontal_(BoxPtr{make_size_make(target_coefficient.x, parent_coefficient.x, addition.x)}->make(0)),
-		vertical_(BoxPtr{make_size_make(target_coefficient.y, parent_coefficient.y, addition.y)}->make(0)),
-		render_target_(nullptr) {
-	}
-	
-	void Sizing2::init(sf::RenderTarget& render_target, sf::Vector2f normal_size) {
-		this->render_target_ = &render_target;
-		horizontal_->init(normal_size.x);
-		vertical_->init(normal_size.y);
-	}
-	
 	sf::Vector2f Sizing2::find_size(sf::Vector2f parent_size) {
 		sf::Vector2f target_size{render_target_->getSize()};
 		return {horizontal_->find_size(parent_size.x, target_size.x), vertical_->find_size(parent_size.y, target_size.y)};
@@ -75,10 +41,6 @@ namespace ie {
 	
 	sf::Vector2f Sizing2::get_parent_size(sf::Vector2f object_size) {
 		return {horizontal_->get_parent_size(object_size.x), vertical_->get_parent_size(object_size.y)};
-	}
-	
-	Sizing2* Sizing2::copy() {
-		return new Sizing2{*this};
 	}
 }
 
