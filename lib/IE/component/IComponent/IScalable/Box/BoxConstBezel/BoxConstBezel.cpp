@@ -13,15 +13,6 @@ namespace ie {
 		Box(make.min_size), bezel_(make.bezel->make(init_info)), object_(make.object->make(init_info)), thickness_(make.thickness) {
 	}
 	
-	BoxConstBezel::BoxConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f min_size) :
-		Box(min_size), bezel_(std::move(bezel)), object_(std::move(object)), thickness_(thickness) {
-	}
-	
-	void BoxConstBezel::init(InitInfo init_info) {
-		bezel_->init(init_info);
-		object_->init(init_info);
-	}
-	
 	void BoxConstBezel::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout_.resize(size, position);
 		bezel_->resize(size, position);
@@ -49,10 +40,6 @@ namespace ie {
 	
 	const IScalable& BoxConstBezel::get_object() const {
 		return *object_;
-	}
-	
-	BoxConstBezel* BoxConstBezel::copy() {
-		return new BoxConstBezel{*this};
 	}
 	
 	void BoxConstBezel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

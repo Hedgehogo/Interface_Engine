@@ -57,11 +57,6 @@ namespace ie {
 		), scale_(make.slider_scale) {
 	}
 	
-	void Slider::init(InitInfo init_info) {
-		BaseSlider::init(init_info);
-		interactive_.init(init_info, *this);
-	}
-	
 	void Slider::set_scale(sf::Vector2f scale) {
 		this->scale_ = scale;
 	}
@@ -86,10 +81,6 @@ namespace ie {
 	
 	const IUninteractive& Slider::get_slider() const {
 		return *slider_;
-	}
-	
-	Slider* Slider::copy() {
-		return nullptr;
 	}
 }
 

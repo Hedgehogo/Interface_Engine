@@ -24,8 +24,6 @@ namespace ie {
 		
 		sf::Vector2f get_normal_size() const override;
 		
-		Empty* copy() override;
-		
 		void draw_debug(sf::RenderTarget&, int, int, size_t, size_t) override;
 	
 	protected:

@@ -18,23 +18,6 @@ namespace ie {
 		init_info.panel_manager.add_panel(this);
 	}
 	
-	BasePanel::BasePanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :
-		object_(std::move(object)), sizing_(std::move(sizing)), positioning_(std::move(positioning)),
-		parent_processed_(false), old_displayed_(false), displayed_(displayed), active_(false) {
-	}
-	
-	BasePanel::BasePanel(const BasePanel& other) :
-		layout_(other.layout_), object_(other.object_), sizing_(other.sizing_), positioning_(other.positioning_),
-		parent_processed_(other.parent_processed_), old_displayed_(other.old_displayed_), displayed_(other.displayed_), active_(false) {
-	}
-	
-	void BasePanel::init(InitInfo init_info) {
-		init_info.panel_manager.add_panel(this);
-		sf::Vector2f object_normal_size = object_->get_normal_size();
-		sizing_->init(init_info.render_target, object_normal_size);
-		positioning_->init(init_info.render_target);
-	}
-	
 	void BasePanel::set_displayed() {
 	}
 	
@@ -139,4 +122,4 @@ namespace ie {
 	const LayoutData& BasePanel::layout_get_data() const {
 		return layout_;
 	}
-	}
+}

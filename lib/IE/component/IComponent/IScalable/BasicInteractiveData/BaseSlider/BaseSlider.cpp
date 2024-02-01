@@ -23,13 +23,6 @@ namespace ie {
 		value_.get().get_y().set_bounds(0, 1);
 	}
 	
-	void BaseSlider::init(InitInfo init_info) {
-		init_info.update_manager.add(*this);
-		interactive_.init(init_info, *this);
-		background_->init(init_info);
-		slider_->init(init_info);
-	}
-	
 	void BaseSlider::resize_slider(sf::Vector2f new_value) {
 		this->slider_->resize(slider_size_, position_ + sf::Vector2f(move_zone_size_.x * new_value.x, move_zone_size_.y * new_value.y));
 	}

@@ -20,10 +20,6 @@ namespace ie {
 		
 		BoxConstCenter(Make&& make, InitInfo init_info);
 		
-		BoxConstCenter(BoxPtr<IScalable>&& const_object, BoxPtr<IScalable>&& background, const sf::Vector2f& const_size, const sf::Vector2f& min_size = {});
-		
-		void init(InitInfo init_info) override;
-		
 		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
@@ -46,8 +42,6 @@ namespace ie {
 		
 		bool update_interactions(sf::Vector2f) override;
 		
-		BoxConstCenter* copy() override;
-	
 	protected:
 		BoxPtr<IScalable> const_object_;
 		BoxPtr<IScalable> background_;

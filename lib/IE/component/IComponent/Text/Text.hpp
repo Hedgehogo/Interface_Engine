@@ -48,25 +48,6 @@ namespace ie {
 		
 		Text(Make&& make, InitInfo init_info);
 		
-/*
-		explicit Text(
-			std::vector<BoxPtr<BaseTextBlock> >&& text_blocks,
-			sf::Font* font,
-			BoxPtr<IUninteractive>&& background = make_box_ptr<FullColor>(sf::Color::White),
-			int size = 14,
-			sf::Color text_color = sf::Color::Black,
-			sf::Color text_selection_color = sf::Color::White,
-			sf::Color background_selection_color = sf::Color::Blue,
-			sf::Color inactive_text_selection_color = sf::Color::Black,
-			sf::Color inactive_background_selection_color = {150, 150, 150},
-			sf::Text::Style style = {},
-			BoxPtr<BaseResizer>&& resizer = make_box_ptr<Resizer>(1.15f, BaseResizer::Align::Left),
-			BoxPtr<IBasicInteraction<Text&>>&& text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>>()
-		);
-*/
-		
-		void init(InitInfo init_info) override;
-		
 		void set_selection(Selection selection);
 		
 		void set_selection_start(orl::Option<std::vector<BaseCharacter*>::iterator> start);
@@ -104,8 +85,6 @@ namespace ie {
 		sf::Vector2f get_min_size() const override;
 		
 		sf::Vector2f get_normal_size() const override;
-		
-		Text* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

@@ -32,8 +32,6 @@ namespace ie {
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		VideoFromFile* copy() override;
-	
 	protected:
 		sf::Vector2i size_video;
 		sf::Vector2f size;

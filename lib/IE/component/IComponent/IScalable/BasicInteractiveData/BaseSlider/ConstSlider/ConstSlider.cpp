@@ -63,11 +63,6 @@ namespace ie {
 		slider_scale_(make.slider_scale) {
 	}
 	
-	void ConstSlider::init(InitInfo init_info) {
-		BaseSlider::init(init_info);
-		interactive_.init(init_info, *this);
-	}
-	
 	void ConstSlider::resize(sf::Vector2f size, sf::Vector2f position) {
 		this->position_ = position;
 		if(size.x / aspect_ratio_ < size.y) {
@@ -78,10 +73,6 @@ namespace ie {
 		move_zone_size_ = size - slider_size_;
 		background_->resize(size, position);
 		resize_slider(value_.get().get());
-	}
-	
-	ConstSlider* ConstSlider::copy() {
-		return nullptr;
 	}
 }
 

@@ -18,15 +18,9 @@ namespace ie {
 		
 		ConstPanel(Make&& make, InitInfo init_info);
 		
-		ConstPanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed = false);
-		
-		void init(InitInfo init_info) override;
-		
 		bool is_independent() override;
 		
 		bool is_free() override;
-		
-		ConstPanel* copy() override;
 	};
 }
 

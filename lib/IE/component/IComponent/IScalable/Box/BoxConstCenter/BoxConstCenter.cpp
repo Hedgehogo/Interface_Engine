@@ -21,20 +21,6 @@ namespace ie {
 		const_size_(make.const_size) {
 	}
 	
-	BoxConstCenter::BoxConstCenter(
-		BoxPtr<IScalable>&& const_object,
-		BoxPtr<IScalable>&& background,
-		const sf::Vector2f& const_size,
-		const sf::Vector2f& min_size
-	) :
-		Box(min_size), const_object_(std::move(const_object)), background_(std::move(background)), const_size_(const_size) {
-	}
-	
-	void BoxConstCenter::init(InitInfo init_info) {
-		const_object_->init(init_info);
-		background_->init(init_info);
-	}
-	
 	void BoxConstCenter::set_position(sf::Vector2f position) {
 		Box::set_position(position);
 		if(resized_) {
@@ -107,10 +93,6 @@ namespace ie {
 			background_->in(layout_.position)
 			? background_->update_interactions(layout_.position)
 			: const_object_->update_interactions(layout_.position);
-	}
-	
-	BoxConstCenter* BoxConstCenter::copy() {
-		return new BoxConstCenter{*this};
 	}
 }
 

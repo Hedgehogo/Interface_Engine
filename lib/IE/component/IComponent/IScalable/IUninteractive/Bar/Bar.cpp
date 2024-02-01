@@ -24,19 +24,6 @@ namespace ie {
 		value(0) {
 	}
 	
-	Bar::Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, float offset, bool horizontal) :
-		background(std::move(background)), strip(std::move(strip)), horizontal(horizontal), offset(offset), division(1), value(0) {
-	}
-	
-	Bar::Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, int division, float offset, bool horizontal) :
-		background(std::move(background)), strip(std::move(strip)), horizontal(horizontal), offset(offset), division(division), value(0) {
-	}
-	
-	void Bar::init(InitInfo init_info) {
-		background->init(init_info);
-		strip->init(init_info);
-	}
-	
 	float Bar::get_value() {
 		return value;
 	}
@@ -83,10 +70,6 @@ namespace ie {
 	
 	const IUninteractive& Bar::get_background() const {
 		return *background;
-	}
-	
-	Bar* Bar::copy() {
-		return new Bar{*this};
 	}
 	
 	void Bar::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

@@ -23,12 +23,6 @@ namespace ie {
 		Box({}), object_(std::move(object)), render_target_(nullptr), active_(false), drawn_(false) {
 	}
 	
-	void BoxDebug::init(InitInfo init_info) {
-		object_->init(init_info);
-		init_info.draw_manager.add(*this);
-		this->render_target_ = &init_info.render_target;
-	}
-	
 	void BoxDebug::draw() {
 		drawn_ = true;
 		object_->draw_debug(*render_target_, 0, 2, 0, 72);
@@ -58,10 +52,6 @@ namespace ie {
 	
 	const IScalable& BoxDebug::get_object() const {
 		return *object_;
-	}
-	
-	BoxDebug* BoxDebug::copy() {
-		return new BoxDebug{*this};
 	}
 	
 	void BoxDebug::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

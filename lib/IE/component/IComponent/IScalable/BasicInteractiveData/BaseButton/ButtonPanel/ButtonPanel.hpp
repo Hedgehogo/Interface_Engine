@@ -26,12 +26,6 @@ namespace ie {
 		
 		ButtonPanel(Make&& make, InitInfo init_info);
 		
-		ButtonPanel(BoxPtr<Panel>&& panel, BoxPtr<IDisplayPanelInteraction>&& interaction, BoxPtr<IScalable>&& background);
-		
-		ButtonPanel(const ButtonPanel& other);
-		
-		void init(InitInfo init_info) override;
-		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		sf::Vector2f get_min_size() const override;
@@ -41,8 +35,6 @@ namespace ie {
 		void update() override;
 		
 		bool update_interactions(sf::Vector2f mouse_position) override;
-		
-		ButtonPanel* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

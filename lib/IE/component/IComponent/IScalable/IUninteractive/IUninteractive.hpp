@@ -10,7 +10,5 @@ namespace ie {
 		};
 		
 		bool update_interactions(sf::Vector2f mouse_position) override;
-		
-		IUninteractive* copy() override = 0;
 	};
 }

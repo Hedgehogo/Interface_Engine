@@ -13,14 +13,6 @@ namespace ie {
 		Box(make.min_size), object_(make.object->make(init_info)) {
 	}
 	
-	BoxMakePermeable::BoxMakePermeable(BoxPtr<IScalable>&& object, sf::Vector2f min_size) :
-		Box(min_size), object_(std::move(object)) {
-	}
-	
-	void BoxMakePermeable::init(InitInfo init_info) {
-		object_->init(init_info);
-	}
-	
 	bool BoxMakePermeable::update_interactions(sf::Vector2f mouse_position) {
 		object_->update_interactions(mouse_position);
 		return false;
@@ -32,10 +24,6 @@ namespace ie {
 	
 	const IScalable& BoxMakePermeable::get_object() const {
 		return *object_;
-	}
-	
-	BoxMakePermeable* BoxMakePermeable::copy() {
-		return new BoxMakePermeable{*this};
 	}
 }
 

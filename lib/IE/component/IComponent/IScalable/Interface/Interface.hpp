@@ -40,10 +40,6 @@ namespace ie {
 			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
 		);
 		
-		void init(InitInfo init_info) override;
-		
-		void init(sf::RenderWindow& window);
-		
 		sf::RenderTarget& get_render_target();
 		
 		DrawManager& get_draw_manager();
@@ -79,8 +75,6 @@ namespace ie {
 		void update() override;
 		
 		void update(sf::Vector2f mouse_position, bool active);
-		
-		Interface* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue = 0, size_t hue_offset = 36) override;
 	

@@ -6,15 +6,6 @@ namespace ie {
 		init_info.update_manager.add(*this);
 	}
 	
-	BaseButton::BaseButton(BoxPtr<IScalable>&& background) :
-		background_(std::move(background)) {
-	}
-	
-	void BaseButton::init(InitInfo init_info) {
-		init_info.update_manager.add(*this);
-		background_->init(init_info);
-	}
-	
 	IScalable& BaseButton::get_object() {
 		return *background_;
 	}

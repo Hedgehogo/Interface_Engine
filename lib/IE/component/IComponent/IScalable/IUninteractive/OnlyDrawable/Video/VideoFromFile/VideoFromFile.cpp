@@ -60,8 +60,4 @@ namespace ie {
 	sf::Vector2f VideoFromFile::get_normal_size() const {
 		return sf::Vector2f{size_video};
 	}
-	
-	VideoFromFile* VideoFromFile::copy() {
-		return nullptr;
-	}
 }

@@ -14,6 +14,8 @@ namespace ie {
 		
 		explicit ObjectCharacter(BoxPtr<IScalable>&& object, ObjectSpecial special = ObjectSpecial::No);
 		
+		ObjectCharacter(const ObjectCharacter& other);
+		
 		void set_position(sf::Vector2f position) override;
 		
 		void resize(sf::Vector2f position, float end_position) override;

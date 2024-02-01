@@ -77,8 +77,4 @@ namespace ie {
 		sprite.setPosition(position);
 		sprite.setScale(size / sf::Vector2f{sf::Vector2i{rect.width, rect.height}});
 	}
-	
-	VideoFromTexture* VideoFromTexture::copy() {
-		return nullptr;
-	}
 }

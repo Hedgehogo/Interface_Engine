@@ -22,13 +22,6 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	void BoxTabs::init(InitInfo init_info) {
-		for(size_t i = 0; i < objects_.size(); ++i) {
-			objects_[i]->init(init_info.copy(draw_managers_[i]));
-		}
-		init_info.draw_manager.add(*this);
-	}
-	
 	void BoxTabs::set_position(sf::Vector2f position) {
 		layout_.set_position(position);
 		for(auto& object: objects_) {
@@ -75,10 +68,6 @@ namespace ie {
 	
 	const IScalable& BoxTabs::get_object_at(size_t index) const {
 		return *objects_.at(index);
-	}
-	
-	BoxTabs* BoxTabs::copy() {
-		return nullptr;
 	}
 }
 

@@ -31,14 +31,6 @@ namespace ie {
 		init_info.update_manager.add(*this);
 	}
 	
-	void BoxSwitcherTabs::init(InitInfo init_info) {
-		interactive_.init(init_info, *this);
-		for(auto& object: objects_) {
-			object->init(init_info);
-		}
-		init_info.update_manager.add(*this);
-	}
-	
 	void BoxSwitcherTabs::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout_.resize(size, position);
 		
@@ -85,10 +77,6 @@ namespace ie {
 			return static_cast<int>((position.x - layout_.position.x) / (layout_.size.x / objects_.size()));
 		}
 		return static_cast<int>((position.y - layout_.position.y) / (layout_.size.y / objects_.size()));
-	}
-	
-	BoxSwitcherTabs* BoxSwitcherTabs::copy() {
-		return new BoxSwitcherTabs{*this};
 	}
 }
 

@@ -42,8 +42,6 @@ namespace ie {
 		
 		Slider(Make&& make, InitInfo init_info);
 		
-		void init(InitInfo init_info) override;
-		
 		void set_scale(sf::Vector2f scale);
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
@@ -54,8 +52,6 @@ namespace ie {
 		
 		const IUninteractive& get_slider() const;
 		
-		Slider* copy() override;
-	
 	protected:
 		sf::Vector2f scale_;
 	};

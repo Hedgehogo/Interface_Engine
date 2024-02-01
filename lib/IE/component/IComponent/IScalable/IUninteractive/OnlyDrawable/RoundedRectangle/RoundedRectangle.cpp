@@ -54,10 +54,6 @@ namespace ie {
 		return sf::Vector2f(radius * 2, radius * 2);
 	}
 	
-	RoundedRectangle* RoundedRectangle::copy() {
-		return new RoundedRectangle{*this};
-	}
-	
 	LayoutData& RoundedRectangle::layout_get_data() {
 		return layout_;
 	}

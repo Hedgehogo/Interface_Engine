@@ -25,14 +25,6 @@ namespace ie {
 		
 		BoxBorderVertical(Make&& make, InitInfo init_info);
 		
-		BoxBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, std::vector<float> bounds, sf::Vector2f min_size = {0, 0});
-		
-		BoxBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, sf::Vector2f min_size = {0, 0});
-		
-		BoxBorderVertical(BoxPtr<IScalable>&& first_object, BoxPtr<IScalable>&& second_object, float bound = 0.5f, sf::Vector2f min_size = {0, 0});
-		
-		void init(InitInfo init_info) override;
-		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		bool update_interactions(sf::Vector2f mouse_position) override;
@@ -46,8 +38,6 @@ namespace ie {
 		IScalable& get_object_at(size_t index) override;
 		
 		const IScalable& get_object_at(size_t index) const override;
-		
-		BoxBorderVertical* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

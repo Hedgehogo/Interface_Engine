@@ -44,10 +44,6 @@ namespace ie {
 		return normal_size;
 	}
 	
-	FullColor* FullColor::copy() {
-		return new FullColor{*this};
-	}
-	
 	bool Determine<FullColor::Make>::determine(const ieml::Node& node) {
 		if(auto str{node.get_raw()}) {
 			return str.ok().str.size() <= 11;

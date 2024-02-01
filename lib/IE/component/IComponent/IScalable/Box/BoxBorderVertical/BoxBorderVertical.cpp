@@ -27,24 +27,6 @@ namespace ie {
 		Box(make.min_size), objects_(map_make(std::move(make.objects), init_info)), bounds_(std::move(make.bounds)) {
 	}
 	
-	BoxBorderVertical::BoxBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, std::vector<float> bounds, sf::Vector2f min_size) :
-		Box(min_size), objects_(std::move(objects)), bounds_(std::move(add_bounds(bounds))) {
-	}
-	
-	BoxBorderVertical::BoxBorderVertical(std::vector<BoxPtr<IScalable> >&& objects, sf::Vector2f min_size) :
-		Box(min_size), objects_(std::move(objects)), bounds_(gen_bounds(this->objects_.size())) {
-	}
-	
-	BoxBorderVertical::BoxBorderVertical(BoxPtr<IScalable>&& first_object, BoxPtr<IScalable>&& second_object, float bound, sf::Vector2f min_size) :
-		Box(min_size), objects_({std::move(first_object), std::move(second_object)}), bounds_({0.f, bound, 1.f}) {
-	}
-	
-	void BoxBorderVertical::init(InitInfo init_info) {
-		for(auto& object: objects_) {
-			object->init(init_info);
-		}
-	}
-	
 	void BoxBorderVertical::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout_.resize(size, position);
 		sf::Vector2f coordinate{0, 0};
@@ -110,10 +92,6 @@ namespace ie {
 	
 	const IScalable& BoxBorderVertical::get_object_at(size_t index) const {
 		return *objects_.at(index);
-	}
-	
-	BoxBorderVertical* BoxBorderVertical::copy() {
-		return new BoxBorderVertical{*this};
 	}
 	
 	void BoxBorderVertical::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

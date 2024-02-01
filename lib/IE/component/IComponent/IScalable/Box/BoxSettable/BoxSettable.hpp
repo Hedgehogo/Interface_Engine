@@ -22,10 +22,6 @@ namespace ie {
 		
 		BoxSettable(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size, InitInfo init_info);
 		
-		BoxSettable(BoxPtr<IScalable>&& object, sf::Vector2f min_size = {});
-		
-		void init(InitInfo init_info) override;
-		
 		void set_object(BoxPtr<IScalable::Make>&& new_object);
 		
 		void draw() override;
@@ -38,8 +34,6 @@ namespace ie {
 		
 		const IScalable& get_object() const override;
 		
-		BoxSettable* copy() override;
-	
 	protected:
 		DrawManager draw_manager_;
 		UpdateManager update_manager_;

@@ -90,50 +90,6 @@ namespace ie {
 		this->text.setRotation(make.rotation);
 	}
 	
-	Caption::Caption(
-		sf::String text,
-		BoxPtr<IUninteractive>&& background,
-		sf::Font& font,
-		sf::Vector2f min_size,
-		int font_size,
-		sf::Color color,
-		sf::Text::Style style,
-		float rotation,
-		InternalPositioning2 positioning,
-		bool cut_back
-	) : cut_back(cut_back), str(text), background(std::move(background)), minimum_size(min_size), positioning(positioning) {
-		this->text.setString(text);
-		this->text.setFont(font);
-		this->text.setCharacterSize(font_size);
-		this->text.setFillColor(color);
-		this->text.setStyle(style);
-		this->text.setRotation(rotation);
-	}
-	
-	Caption::Caption(
-		sf::String text,
-		BoxPtr<IUninteractive>&& background,
-		sf::Font& font,
-		int font_size,
-		sf::Color color,
-		sf::Text::Style style,
-		float rotation,
-		InternalPositioning2 positioning,
-		bool cut_back
-	) : cut_back(cut_back), str(text), background(background), minimum_size(), positioning(positioning) {
-		this->text.setString(text);
-		this->text.setFont(font);
-		this->text.setCharacterSize(font_size);
-		this->text.setFillColor(color);
-		this->text.setStyle(style);
-		this->text.setRotation(rotation);
-	}
-	
-	void Caption::init(InitInfo init_info) {
-		OnlyDrawable::init(init_info);
-		background->init(init_info.copy(this->draw_manager));
-	}
-	
 	void Caption::draw() {
 		draw_manager.draw();
 		render_target->draw(text);
@@ -196,10 +152,6 @@ namespace ie {
 	sf::Vector2f Caption::get_normal_size() const {
 		sf::FloatRect rect = text.getGlobalBounds();
 		return max({rect.width, rect.height}, background->get_normal_size());
-	}
-	
-	Caption* Caption::copy() {
-		return new Caption{*this};
 	}
 	
 	void Caption::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

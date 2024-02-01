@@ -51,10 +51,6 @@ namespace ie {
 		return {1, 1};
 	}
 	
-	Capsule* Capsule::copy() {
-		return new Capsule{*this};
-	}
-	
 	LayoutData& Capsule::layout_get_data() {
 		return layout_;
 	}

@@ -31,13 +31,7 @@ namespace ie {
 			InitInfo init_info
 		);
 		
-		BasePanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed = false);
-		
-		BasePanel(const BasePanel& other);
-		
 		virtual ~BasePanel() = default;
-		
-		virtual void init(InitInfo init_info);
 		
 		virtual bool is_independent() = 0;
 		
@@ -80,8 +74,6 @@ namespace ie {
 		IScalable& get_object() override;
 		
 		const IScalable& get_object() const override;
-		
-		virtual BasePanel* copy() = 0;
 		
 		static void set_full_debug(bool full_debug);
 		

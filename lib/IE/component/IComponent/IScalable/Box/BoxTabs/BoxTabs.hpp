@@ -21,8 +21,6 @@ namespace ie {
 		
 		BoxTabs(Make&& make, InitInfo init_info);
 		
-		void init(InitInfo init_info) override;
-		
 		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
@@ -41,8 +39,6 @@ namespace ie {
 		
 		const IScalable& get_object_at(size_t index) const override;
 		
-		BoxTabs* copy() override;
-	
 	protected:
 		std::vector<DrawManager> draw_managers_;
 		std::vector<BoxPtr<IScalable> > objects_;

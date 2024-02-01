@@ -24,24 +24,6 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	BoxRenderTexture::BoxRenderTexture(BoxPtr<IScalable>&& object, bool optimize, sf::Vector2f min_size) :
-		Box(min_size), object_(std::move(object)), interaction_manager_(nullptr), render_target_(nullptr), optimize_(optimize), active_(true) {
-		sprite_.setTexture(render_texture_.getTexture());
-	}
-	
-	BoxRenderTexture::BoxRenderTexture(const BoxRenderTexture& other) :
-		Box(other), object_(other.object_), render_target_(other.render_target_), optimize_(other.optimize_), active_(true) {
-		sf::Vector2u size = this->render_texture_.getSize();
-		render_texture_.create(size.x, size.y);
-	}
-	
-	void BoxRenderTexture::init(InitInfo init_info) {
-		this->render_target_ = &init_info.render_target;
-		this->interaction_manager_ = &init_info.interaction_manager;
-		init_info.draw_manager.add(*this);
-		object_->init(init_info.copy(render_texture_).copy(this->draw_manager_));
-	}
-	
 	void BoxRenderTexture::draw() {
 		if(!optimize_ || active_ || interaction_manager_->is_blocked()) {
 			render_texture_.clear(sf::Color(0, 0, 0, 0));
@@ -89,10 +71,6 @@ namespace ie {
 	
 	const IScalable& BoxRenderTexture::get_object() const {
 		return *object_;
-	}
-	
-	BoxRenderTexture* BoxRenderTexture::copy() {
-		return new BoxRenderTexture{*this};
 	}
 	
 	void BoxRenderTexture::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

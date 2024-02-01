@@ -51,53 +51,6 @@ namespace ie {
 		move_interaction_(make.move_interaction->make({init_info, *this})) {
 	}
 	
-	Panel::Panel(
-		BoxPtr<IScalable>&& object,
-		BoxPtr<IHidePanelInteraction> hide_interaction,
-		BoxPtr<IMovePanelInteraction> move_interaction,
-		BoxPtr<ISizing2> sizing,
-		BoxPtr<IPositioning2> positioning,
-		bool displayed
-	) : BasePanel(std::move(object), std::move(sizing), std::move(positioning), displayed),
-		interaction_manager_(nullptr), hide_interaction_(std::move(hide_interaction)), move_interaction_(std::move(move_interaction)) {
-	}
-	
-	Panel::Panel(
-		BoxPtr<IScalable>&& object,
-		BoxPtr<IHidePanelInteraction> hide_interaction,
-		BoxPtr<ISizing2> sizing,
-		BoxPtr<IPositioning2> positioning,
-		bool displayed
-	) : BasePanel(std::move(object), std::move(sizing), std::move(positioning), displayed),
-		interaction_manager_(nullptr), hide_interaction_(std::move(hide_interaction)), move_interaction_(new DontMovePanelInteraction{}) {
-	}
-	
-	Panel::Panel(const Panel& other) :
-		BasePanel(other),
-		interaction_manager_(other.interaction_manager_),
-		hide_interaction_(other.hide_interaction_),
-		move_interaction_(other.move_interaction_) {
-		hide_interaction_->set_panel(*this);
-	}
-	
-	void Panel::init(InitInfo init_info) {
-		BasePanel::init(init_info);
-		InitInfo new_init_info{
-			init_info.window,
-			init_info.render_target,
-			init_info.dyn_buffer,
-			this->draw_manager_,
-			this->update_manager_,
-			init_info.interaction_manager,
-			init_info.interaction_stack,
-			this->panel_manager_
-		};
-		object_->init(new_init_info);
-		hide_interaction_->init({init_info, *this});
-		move_interaction_->init({init_info, *this});
-		this->interaction_manager_ = &init_info.interaction_manager;
-	}
-	
 	void Panel::set_displayed() {
 		displayed_ = true;
 	}
@@ -139,10 +92,6 @@ namespace ie {
 		if(panel_manager_.update_interactions(mouse_position, active))
 			return true;
 		return BasePanel::update_interactions(mouse_position);
-	}
-	
-	Panel* Panel::copy() {
-		return new Panel{*this};
 	}
 }
 

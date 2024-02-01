@@ -13,19 +13,6 @@ namespace ie {
 		BaseButton(std::move(make.background), init_info), interactive_(std::move(make.interaction), init_info, {}) {
 	}
 	
-	Button::Button(BoxPtr<IScalable>&& background, BoxPtr<IBaseInteraction>&& interaction) :
-		BaseButton(std::move(background)), interactive_(std::move(interaction)) {
-	}
-	
-	void Button::init(InitInfo init_info) {
-		interactive_.init(init_info, {});
-		BaseButton::init(init_info);
-	}
-	
-	Button* Button::copy() {
-		return new Button{*this};
-	}
-	
 	void Button::update() {
 		interactive_.update();
 	}

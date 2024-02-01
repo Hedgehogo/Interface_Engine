@@ -13,15 +13,6 @@ namespace ie {
 		Box(make.min_size), object_(make.object->make(init_info)), panel_(make.panel->make(init_info)) {
 	}
 	
-	BoxPanel::BoxPanel(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable>&& object, sf::Vector2f min_size) :
-		Box(min_size), object_(std::move(object)), panel_(std::move(panel)) {
-	}
-	
-	void BoxPanel::init(InitInfo init_info) {
-		object_->init(init_info);
-		panel_->init(init_info);
-	}
-	
 	void BoxPanel::resize(sf::Vector2f size, sf::Vector2f position) {
 		IComponentObject::resize(size, position);
 		panel_->resize(size, position);
@@ -45,10 +36,6 @@ namespace ie {
 	
 	const ConstPanel& BoxPanel::get_panel() const {
 		return *panel_;
-	}
-	
-	BoxPanel* BoxPanel::copy() {
-		return new BoxPanel{*this};
 	}
 	
 	void BoxPanel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

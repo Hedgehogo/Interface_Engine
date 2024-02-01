@@ -9,10 +9,6 @@ namespace ie {
 	public:
 		BaseButton(BoxPtr<IScalable::Make>&& background, InitInfo init_info);
 		
-		BaseButton(BoxPtr<IScalable>&& background);
-		
-		void init(InitInfo init_info) override;
-		
 		IScalable& get_object() override;
 		
 		const IScalable& get_object() const override;

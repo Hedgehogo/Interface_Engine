@@ -24,12 +24,6 @@ namespace ie {
 		
 		Bar(Make&& make, InitInfo init_info);
 		
-		explicit Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, float offset = 0, bool horizontal = true);
-		
-		explicit Bar(BoxPtr<IUninteractive>&& background, BoxPtr<IUninteractive>&& strip, int division, float offset = 0, bool horizontal = true);
-		
-		void init(InitInfo init_info) override;
-		
 		float get_value();
 		
 		void set_value(float value);
@@ -45,8 +39,6 @@ namespace ie {
 		IUninteractive& get_background() override;
 		
 		const IUninteractive& get_background() const override;
-		
-		Bar* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

@@ -4,6 +4,9 @@ namespace ie {
 	ObjectCharacter::ObjectCharacter(BoxPtr<IScalable>&& object, ObjectSpecial special) : object(std::move(object)), special(static_cast<BaseCharacter::Special>(special)) {
 	}
 	
+	ObjectCharacter::ObjectCharacter(const ObjectCharacter& other) : object(nullptr), special(other.special) {
+	}
+	
 	void ObjectCharacter::set_position(sf::Vector2f position) {
 		position.y -= get_height();
 		BaseCharacter::set_position(position);

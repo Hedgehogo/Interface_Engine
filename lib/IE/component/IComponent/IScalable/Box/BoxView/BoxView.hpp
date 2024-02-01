@@ -11,16 +11,10 @@ namespace ie {
 		
 		BoxWithView(sf::Vector2f min_size);
 		
-		BoxWithView(const BoxWithView& other);
-		
-		void init(InitInfo init_info) override;
-		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		BoxWithView* copy() override = 0;
-	
 	protected:
 		DrawManager draw_manager_;
 		sf::RenderTarget* render_target_;

@@ -33,42 +33,6 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	BoxConstRatio::BoxConstRatio(
-		BoxPtr<IScalable>&& const_object,
-		BoxPtr<IScalable>&& second_object,
-		BoxPtr<IUninteractive>&& background,
-		float aspect_ratio,
-		Corner corner,
-		sf::Vector2f min_size
-	) :
-		Box(min_size),
-		background_(std::move(background)),
-		const_object_(std::move(const_object)),
-		second_object_(std::move(second_object)),
-		vertical_side_(corner == Corner::UpLeft || corner == Corner::UpRight),
-		horizontal_side_(corner == Corner::UpLeft || corner == Corner::DownLeft),
-		render_second_(true),
-		aspect_ratio_(aspect_ratio) {
-	}
-	
-	BoxConstRatio::BoxConstRatio(const BoxConstRatio& other) :
-		Box(other),
-		background_(other.background_),
-		const_object_(other.const_object_),
-		second_object_(other.second_object_),
-		vertical_side_(other.vertical_side_),
-		horizontal_side_(other.horizontal_side_),
-		render_second_(other.render_second_),
-		aspect_ratio_(other.aspect_ratio_) {
-	}
-	
-	void BoxConstRatio::init(InitInfo init_info) {
-		init_info.draw_manager.add(*this);
-		background_->init(init_info);
-		const_object_->init(init_info);
-		second_object_->init(init_info.copy(second_draw_manager_));
-	}
-	
 	Corner BoxConstRatio::get_corner() {
 		if(vertical_side_) {
 			if(horizontal_side_) {
@@ -190,10 +154,6 @@ namespace ie {
 	
 	const IScalable& BoxConstRatio::get_second_object() const {
 		return *second_object_;
-	}
-	
-	BoxConstRatio* BoxConstRatio::copy() {
-		return new BoxConstRatio{*this};
 	}
 	
 	void BoxConstRatio::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

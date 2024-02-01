@@ -56,10 +56,6 @@ namespace ie {
 		return {static_cast<float>(sprite.getTextureRect().width), static_cast<float>(sprite.getTextureRect().height)};
 	}
 	
-	Sprite* Sprite::copy() {
-		return new Sprite{*this};
-	}
-	
 	bool Determine<Sprite::Make>::determine(ieml::Node const& node) {
 		return ie::determine(node, {{"texture"}}, {
 			{"rect"},

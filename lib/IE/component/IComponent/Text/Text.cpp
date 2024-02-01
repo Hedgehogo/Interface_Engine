@@ -76,50 +76,6 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-/*
-	Text::Text(
-		std::vector<BoxPtr<BaseTextBlock>>&& text_blocks,
-		sf::Font*,
-		BoxPtr<IUninteractive>&& background,
-		int size,
-		sf::Color,
-		sf::Color,
-		sf::Color,
-		sf::Color,
-		sf::Color,
-		sf::Text::Style,
-		BoxPtr<BaseResizer>&& resizer,
-		BoxPtr<IBasicInteraction<Text&>>&& text_interaction
-	) : interaction_manager(nullptr),
-		background(std::move(background)),
-		size(size),
-		text_blocks(std::move(text_blocks)),
-		resizer(std::move(resizer)),
-		text_interaction(std::move(text_interaction)) {
-		for(auto& text_block: this->text_blocks) {
-			std::vector<BaseCharacter*> characters = text_block->get_characters();
-			text_characters.insert(text_characters.end(), characters.begin(), characters.end());
-		}
-		this->resizer->init(ResizerInitInfo(text_characters));
-	}
-*/
-	void Text::init(InitInfo) {
-/*
-		this->interaction_manager = &init_info.interaction_manager;
-		this->render_target = &init_info.render_target;
-		init_info.update_manager.add(*this);
-		background->init(init_info);
-		init_info.draw_manager.add(*this);
-		
-		for(auto& text_block: text_blocks) {
-			text_block->init({init_info, render_texture, draw_manager, *interaction_manager});
-		}
-		
-		text_interaction->init({init_info, *this});
-*/
-		throw std::runtime_error("Text::init() not correct");
-	}
-	
 	void Text::set_selection(Text::Selection selection) {
 		this->selection = selection;
 	}
@@ -321,8 +277,12 @@ namespace ie {
 		return max(resizer->get_normal_size(), background->get_normal_size());
 	}
 	
-	Text* Text::copy() {
-		return nullptr;
+	void Text::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+		for(BaseCharacter*& character: text_characters) {
+			character->draw_debug(render_target, indent_addition, hue + hue_offset, hue_offset);
+		}
+		
+		background->draw_debug(render_target, indent, indent_addition, hue + hue_offset, hue_offset);
 	}
 	
 	/*old_yaml_decode_pointer_impl
@@ -346,12 +306,4 @@ namespace ie {
 
 	}
 	*/
-	
-	void Text::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
-		for(BaseCharacter*& character: text_characters) {
-			character->draw_debug(render_target, indent_addition, hue + hue_offset, hue_offset);
-		}
-		
-		background->draw_debug(render_target, indent, indent_addition, hue + hue_offset, hue_offset);
-	}
 }

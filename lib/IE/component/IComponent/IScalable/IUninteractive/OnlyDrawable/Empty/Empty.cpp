@@ -30,10 +30,6 @@ namespace ie {
 		return {};
 	}
 	
-	Empty* Empty::copy() {
-		return new Empty{*this};
-	}
-	
 	void Empty::draw_debug(sf::RenderTarget&, int, int, size_t, size_t) {
 	}
 	

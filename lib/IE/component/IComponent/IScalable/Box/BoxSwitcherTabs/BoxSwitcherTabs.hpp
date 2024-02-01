@@ -30,8 +30,6 @@ namespace ie {
 		
 		BoxSwitcherTabs(Make&& make, InitInfo init_info);
 		
-		void init(InitInfo init_info) override;
-		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		void update() override;
@@ -46,8 +44,6 @@ namespace ie {
 		
 		int get_tab(sf::Vector2f position);
 		
-		BoxSwitcherTabs* copy() override;
-	
 	protected:
 		BasicInteractiveData<BoxSwitcherTabs&> interactive_;
 		std::vector<BoxPtr<IScalable> > objects_;

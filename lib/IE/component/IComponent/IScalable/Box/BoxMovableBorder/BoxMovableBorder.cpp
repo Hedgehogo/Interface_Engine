@@ -48,9 +48,6 @@ namespace ie {
 		init_info.update_manager.add(*this);
 	}
 	
-	void BoxMovableBorder::init(InitInfo init_info) {
-	}
-	
 	float BoxMovableBorder::get_border_value() {
 		return border_value_.get().get();
 	}
@@ -192,10 +189,6 @@ namespace ie {
 	
 	const IScalable& BoxMovableBorder::get_second_object() const {
 		return *second_object_;
-	}
-	
-	BoxMovableBorder* BoxMovableBorder::copy() {
-		return nullptr;
 	}
 	
 	void BoxMovableBorder::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

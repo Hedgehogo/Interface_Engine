@@ -18,15 +18,6 @@ namespace ie {
 		Box(make.min_size), background_(make.background->make(init_info)), object_(make.object->make(init_info)), offset_(make.offset) {
 	}
 	
-	BoxBackground::BoxBackground(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& background, sf::Vector2f offset, sf::Vector2f min_size) :
-		Box(min_size), background_(std::move(background)), object_(std::move(object)), offset_(offset) {
-	}
-	
-	void BoxBackground::init(InitInfo init_info) {
-		background_->init(init_info);
-		object_->init(init_info);
-	}
-	
 	void BoxBackground::set_position(sf::Vector2f position) {
 		layout_.set_position(position);
 		background_->set_position(position);
@@ -77,10 +68,6 @@ namespace ie {
 	
 	bool BoxBackground::update_interactions(sf::Vector2f mouse_position) {
 		return object_->update_interactions(mouse_position);
-	}
-	
-	BoxBackground* BoxBackground::copy() {
-		return new BoxBackground{*this};
 	}
 	
 	void BoxBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

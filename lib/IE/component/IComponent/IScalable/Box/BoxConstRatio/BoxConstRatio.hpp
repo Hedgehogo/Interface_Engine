@@ -32,19 +32,6 @@ namespace ie {
 		
 		BoxConstRatio(Make&& make, InitInfo init_info);
 		
-		BoxConstRatio(
-			BoxPtr<IScalable>&& const_object,
-			BoxPtr<IScalable>&& second_object,
-			BoxPtr<IUninteractive>&& background,
-			float aspect_ratio,
-			Corner corner = Corner::UpLeft,
-			sf::Vector2f min_size = {}
-		);
-		
-		BoxConstRatio(const BoxConstRatio& other);
-		
-		void init(InitInfo init_info) override;
-		
 		Corner get_corner();
 		
 		void set_position(sf::Vector2f position) override;
@@ -74,8 +61,6 @@ namespace ie {
 		IScalable& get_second_object() override;
 		
 		const IScalable& get_second_object() const override;
-		
-		BoxConstRatio* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

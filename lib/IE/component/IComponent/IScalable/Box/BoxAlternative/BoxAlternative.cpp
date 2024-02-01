@@ -14,15 +14,6 @@ namespace ie {
 		Box(make.min_size), bottom_object_(make.bottom_object->make(init_info)), top_object_(make.top_object->make(init_info)) {
 	}
 	
-	BoxAlternative::BoxAlternative(BoxPtr<IScalable>&& top_object, BoxPtr<IScalable>&& bottom_object, sf::Vector2f min_size) :
-		Box(min_size), bottom_object_(std::move(bottom_object)), top_object_(std::move(top_object)) {
-	}
-	
-	void BoxAlternative::init(InitInfo init_info) {
-		top_object_->init(init_info);
-		bottom_object_->init(init_info);
-	}
-	
 	bool BoxAlternative::update_interactions(sf::Vector2f mouse_position) {
 		return top_object_->update_interactions(mouse_position) || bottom_object_->update_interactions(mouse_position);
 	}
@@ -47,10 +38,6 @@ namespace ie {
 	
 	const IScalable& BoxAlternative::get_second_object() const {
 		return *bottom_object_;
-	}
-	
-	BoxAlternative* BoxAlternative::copy() {
-		return new BoxAlternative{*this};
 	}
 }
 

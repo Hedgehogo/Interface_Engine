@@ -35,8 +35,6 @@ namespace ie {
 		
 		BoxMovableBorder(Make&& make, InitInfo init_info);
 		
-		void init(InitInfo init_info) override;
-		
 		float get_border_value();
 		
 		void set_border_value(float border_value);
@@ -68,8 +66,6 @@ namespace ie {
 		IScalable& get_second_object() override;
 		
 		const IScalable& get_second_object() const override;
-		
-		BoxMovableBorder* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

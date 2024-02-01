@@ -22,11 +22,6 @@ namespace ie {
 		normal_object_position_.get().get_y().set_bounds(0, 1);
 	}
 	
-	void BoxScroll::init(InitInfo init_info) {
-		BoxWithView::init(init_info);
-		object_->init(init_info.copy(this->draw_manager_));
-	}
-	
 	sf::Vector2f BoxScroll::get_min_size() const {
 		return max(minimum_size_, object_->get_min_size());
 	}
@@ -54,10 +49,6 @@ namespace ie {
 	
 	bool BoxScroll::update_interactions(sf::Vector2f mouse_position) {
 		return object_->update_interactions(mouse_position);
-	}
-	
-	BoxScroll* BoxScroll::copy() {
-		return nullptr;
 	}
 }
 

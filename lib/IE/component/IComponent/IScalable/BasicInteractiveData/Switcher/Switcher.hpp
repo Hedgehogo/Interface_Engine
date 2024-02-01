@@ -30,8 +30,6 @@ namespace ie {
 		
 		Switcher(Make&& make, InitInfo init_info);
 		
-		void init(InitInfo init_info) override;
-		
 		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
@@ -49,8 +47,6 @@ namespace ie {
 		void update() override;
 		
 		bool update_interactions(sf::Vector2f mouse_position) override;
-		
-		Switcher* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

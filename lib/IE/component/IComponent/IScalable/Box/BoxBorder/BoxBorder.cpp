@@ -32,31 +32,6 @@ namespace ie {
 		bounds_vertical_(std::move(make.bounds_vertical)) {
 	}
 	
-	BoxBorder::BoxBorder(
-		std::vector<std::vector<BoxPtr<IScalable> > >&& objects,
-		std::vector<float> bounds_horizontal,
-		std::vector<float> bounds_vertical,
-		sf::Vector2f min_size
-	) :
-		Box(min_size),
-		objects_(std::move(objects)),
-		bounds_horizontal_(std::move(add_bounds(bounds_horizontal))),
-		bounds_vertical_(std::move(add_bounds(bounds_vertical))) {
-	}
-	
-	BoxBorder::BoxBorder(std::vector<std::vector<BoxPtr<IScalable> > >&& objects, sf::Vector2f min_size) :
-		Box(min_size), objects_(objects), bounds_horizontal_(gen_bounds(this->objects_.size())),
-		bounds_vertical_(gen_bounds(y_size(this->objects_))) {
-	}
-	
-	void BoxBorder::init(InitInfo init_info) {
-		for(auto& line: objects_) {
-			for(auto& object: line) {
-				object->init(init_info);
-			}
-		}
-	}
-	
 	void BoxBorder::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout_.resize(size, position);
 		sf::Vector2f coordinate{};
@@ -152,10 +127,6 @@ namespace ie {
 		}
 		
 		return normal_size;
-	}
-	
-	BoxBorder* BoxBorder::copy() {
-		return new BoxBorder{*this};
 	}
 	
 	void BoxBorder::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

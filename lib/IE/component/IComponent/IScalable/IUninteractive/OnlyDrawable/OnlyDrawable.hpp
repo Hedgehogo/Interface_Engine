@@ -11,8 +11,6 @@ namespace ie {
 		
 		sf::RenderTarget& get_render_target();
 		
-		void init(InitInfo init_info) override;
-	
 	protected:
 		sf::RenderTarget* render_target;
 	};

@@ -45,53 +45,6 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	BoxConstRatioCenter::BoxConstRatioCenter(
-		BoxPtr<IScalable>&& object,
-		BoxPtr<IUninteractive>&& background,
-		float aspect_ratio,
-		sf::Vector2f min_size
-	) :
-		Box(min_size),
-		background_(std::move(background)),
-		object_(std::move(object)),
-		first_object_(new Empty),
-		second_object_(new Empty),
-		aspect_ratio_(aspect_ratio) {
-	}
-	
-	BoxConstRatioCenter::BoxConstRatioCenter(
-		BoxPtr<IScalable>&& object,
-		BoxPtr<IScalable>&& first_object,
-		BoxPtr<IScalable>&& second_object,
-		BoxPtr<IUninteractive>&& background,
-		float aspect_ratio,
-		sf::Vector2f min_size
-	) :
-		Box(min_size),
-		background_(std::move(background)),
-		object_(std::move(object)),
-		first_object_(std::move(first_object)),
-		second_object_(std::move(second_object)),
-		aspect_ratio_(aspect_ratio) {
-	}
-	
-	BoxConstRatioCenter::BoxConstRatioCenter(const BoxConstRatioCenter& other) :
-		Box(other),
-		background_(other.background_),
-		object_(other.object_),
-		first_object_(other.first_object_),
-		second_object_(other.second_object_),
-		aspect_ratio_(other.aspect_ratio_) {
-	}
-	
-	void BoxConstRatioCenter::init(InitInfo init_info) {
-		background_->init(init_info);
-		object_->init(init_info);
-		init_info.draw_manager.add(*this);
-		first_object_->init(init_info.copy(this->first_draw_manager_));
-		second_object_->init(init_info.copy(this->second_draw_manager_));
-	}
-	
 	void BoxConstRatioCenter::set_aspect_ratio(float aspect_ratio) {
 		this->aspect_ratio_ = aspect_ratio;
 		this->set_position(layout_.position);
@@ -209,10 +162,6 @@ namespace ie {
 	
 	const IScalable& BoxConstRatioCenter::get_second_object() const {
 		return *second_object_;
-	}
-	
-	BoxConstRatioCenter* BoxConstRatioCenter::copy() {
-		return new BoxConstRatioCenter{*this};
 	}
 	
 	void BoxConstRatioCenter::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

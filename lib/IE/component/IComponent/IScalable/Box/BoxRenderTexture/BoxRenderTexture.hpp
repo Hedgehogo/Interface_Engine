@@ -21,12 +21,6 @@ namespace ie {
 		
 		BoxRenderTexture(BoxPtr<IScalable::Make>&& object, bool optimize, sf::Vector2f min_size, InitInfo init_info);
 		
-		BoxRenderTexture(BoxPtr<IScalable>&& object, bool optimize = true, sf::Vector2f min_size = {});
-		
-		BoxRenderTexture(const BoxRenderTexture& other);
-		
-		void init(InitInfo init_info) override;
-		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
@@ -40,8 +34,6 @@ namespace ie {
 		IScalable& get_object() override;
 		
 		const IScalable& get_object() const override;
-		
-		BoxRenderTexture* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

@@ -36,20 +36,6 @@ namespace ie {
 		init_info.update_manager.add(*this);
 	}
 	
-	BoxSettable::BoxSettable(BoxPtr<IScalable>&& object, sf::Vector2f min_size) : Box(min_size), object_(std::move(object)) {
-	}
-	
-	void BoxSettable::init(InitInfo init_info) {
-		draw_manager_.add(this->draw_manager_);
-		update_manager_.add(this->update_manager_);
-		
-		this->panel_manager_interceptor_.init(init_info.panel_manager);
-		
-		this->window_ = &init_info.window;
-		this->render_target_ = &init_info.render_target;
-		this->interaction_stack_ = &init_info.interaction_stack;
-	}
-	
 	void BoxSettable::set_object(BoxPtr<IScalable::Make>&& new_object) {
 		draw_manager_.clear();
 		update_manager_.clear();
@@ -87,9 +73,5 @@ namespace ie {
 	
 	const IScalable& BoxSettable::get_object() const {
 		return *object_;
-	}
-	
-	BoxSettable* BoxSettable::copy() {
-		return new BoxSettable{*this};
 	}
 }

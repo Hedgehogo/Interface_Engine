@@ -22,12 +22,6 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	void BoxSwitch::init(InitInfo init_info) {
-		inactive_object_->init(init_info.copy(inactive_draw_manager_));
-		active_object_->init(init_info.copy(active_draw_manager_));
-		init_info.draw_manager.add(*this);
-	}
-	
 	void BoxSwitch::set_position(sf::Vector2f position) {
 		layout_.set_position(position);
 		inactive_object_->set_position(position);
@@ -78,10 +72,6 @@ namespace ie {
 	
 	const IScalable& BoxSwitch::get_second_object() const {
 		return *active_object_;
-	}
-	
-	BoxSwitch* BoxSwitch::copy() {
-		return nullptr;
 	}
 }
 

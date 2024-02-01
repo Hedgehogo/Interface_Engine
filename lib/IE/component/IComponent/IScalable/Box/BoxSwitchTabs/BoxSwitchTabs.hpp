@@ -20,8 +20,6 @@ namespace ie {
 		
 		BoxSwitchTabs(Make&& make, InitInfo init_info);
 		
-		void init(InitInfo init_info) override;
-		
 		ISRSize& get_value();
 		
 		void set_index(size_t index);
@@ -39,8 +37,6 @@ namespace ie {
 		IScalable& get_object_at(size_t index) override;
 		
 		const IScalable& get_object_at(size_t index) const override;
-		
-		BoxSwitchTabs* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

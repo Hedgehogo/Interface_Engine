@@ -37,27 +37,6 @@ namespace ie {
 		
 		Panel(Make&& make, InitInfo init_info);
 		
-		Panel(
-			BoxPtr<IScalable>&& object,
-			BoxPtr<IHidePanelInteraction> hide_interaction,
-			BoxPtr<IMovePanelInteraction> move_interaction,
-			BoxPtr<ISizing2> sizing,
-			BoxPtr<IPositioning2> positioning,
-			bool displayed = false
-		);
-		
-		Panel(
-			BoxPtr<IScalable>&& object,
-			BoxPtr<IHidePanelInteraction> hide_interaction,
-			BoxPtr<ISizing2> sizing,
-			BoxPtr<IPositioning2> positioning,
-			bool displayed = false
-		);
-		
-		Panel(const Panel& other);
-		
-		void init(InitInfo init_info) override;
-		
 		void set_displayed() override;
 		
 		bool is_independent() override;
@@ -72,8 +51,6 @@ namespace ie {
 		
 		bool update_interactions(sf::Vector2f mouse_position, bool active) override;
 		
-		Panel* copy() override;
-	
 	protected:
 		PanelManager panel_manager_;
 		InteractionManager* interaction_manager_;

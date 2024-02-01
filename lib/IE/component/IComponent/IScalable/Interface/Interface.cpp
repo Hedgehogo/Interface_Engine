@@ -68,12 +68,6 @@ namespace ie {
 			position.y > 0 && position.y < static_cast<float>(render_target_->getSize().y);
 	}
 	
-	void Interface::init(InitInfo init_info) {
-	}
-	
-	void Interface::init(sf::RenderWindow& window) {
-	}
-	
 	sf::RenderTarget& Interface::get_render_target() {
 		return *render_target_;
 	}
@@ -153,12 +147,6 @@ namespace ie {
 			}
 		}
 		return true;
-	}
-	
-	Interface* Interface::copy() {
-		Interface* interface{new Interface{*this}};
-		interface->init(*window_);
-		return interface;
 	}
 	
 	void Interface::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

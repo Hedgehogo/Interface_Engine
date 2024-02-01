@@ -23,26 +23,12 @@ namespace ie {
 		init_info.panel_manager.display_panel(this);
 	}
 	
-	ConstPanel::ConstPanel(BoxPtr<IScalable>&& object, BoxPtr<ISizing2> sizing, BoxPtr<IPositioning2> positioning, bool displayed) :
-		BasePanel(std::move(object), std::move(sizing), std::move(positioning), displayed) {
-	}
-	
-	void ConstPanel::init(InitInfo init_info) {
-		BasePanel::init(init_info);
-		object_->init(init_info.copy(this->draw_manager_).copy(this->update_manager_));
-		init_info.panel_manager.display_panel(this);
-	}
-	
 	bool ConstPanel::is_independent() {
 		return false;
 	}
 	
 	bool ConstPanel::is_free() {
 		return true;
-	}
-	
-	ConstPanel* ConstPanel::copy() {
-		return new ConstPanel{*this};
 	}
 }
 

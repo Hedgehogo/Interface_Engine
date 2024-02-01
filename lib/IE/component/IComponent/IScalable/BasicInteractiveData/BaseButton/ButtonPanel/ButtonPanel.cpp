@@ -15,25 +15,6 @@ namespace ie {
 		interactive_(std::move(make.interaction), init_info, *panel_) {
 	}
 	
-	ButtonPanel::ButtonPanel(BoxPtr<Panel>&& panel, BoxPtr<IDisplayPanelInteraction>&& interaction, BoxPtr<IScalable>&& background) :
-		BaseButton(std::move(background)),
-		panel_(std::move(panel)),
-		interactive_(std::move(interaction)) {
-	}
-	
-	ButtonPanel::ButtonPanel(const ButtonPanel& other) :
-		BaseButton(BoxPtr{other.background_}),
-		panel_(other.panel_),
-		interactive_(other.interactive_) {
-		dynamic_cast<IDisplayPanelInteraction&>(*interactive_.interaction).set_panel(*panel_);
-	}
-	
-	void ButtonPanel::init(InitInfo init_info) {
-		BaseButton::init(init_info);
-		panel_->init(init_info);
-		dynamic_cast<IDisplayPanelInteraction&>(*interactive_.interaction).init({init_info, *panel_});
-	}
-	
 	void ButtonPanel::resize(sf::Vector2f size, sf::Vector2f position) {
 		BaseButton::resize(size, position);
 		panel_->resize(size, position);
@@ -57,10 +38,6 @@ namespace ie {
 		bool result{BaseButton::update_interactions(mouse_position)};
 		interactive_.update_interactions();
 		return result;
-	}
-	
-	ButtonPanel* ButtonPanel::copy() {
-		return new ButtonPanel{*this};
 	}
 	
 	void ButtonPanel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

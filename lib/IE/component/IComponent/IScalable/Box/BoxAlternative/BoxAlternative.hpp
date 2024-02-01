@@ -19,10 +19,6 @@ namespace ie {
 		
 		BoxAlternative(Make&& make, InitInfo init_info);
 		
-		BoxAlternative(BoxPtr<IScalable>&& top_object, BoxPtr<IScalable>&& bottom_object, sf::Vector2f min_size = {});
-		
-		void init(InitInfo init_info) override;
-		
 		bool update_interactions(sf::Vector2f mouse_position) override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
@@ -34,8 +30,6 @@ namespace ie {
 		IScalable& get_second_object() override;
 		
 		const IScalable& get_second_object() const override;
-		
-		BoxAlternative* copy() override;
 		
 	protected:
 		BoxPtr<IScalable> bottom_object_;

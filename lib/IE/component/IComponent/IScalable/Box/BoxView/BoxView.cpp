@@ -9,15 +9,6 @@ namespace ie {
 	BoxWithView::BoxWithView(sf::Vector2f min_size) : Box(min_size), render_target_(nullptr) {
 	}
 	
-	BoxWithView::BoxWithView(const BoxWithView& other) :
-		Box(other), render_target_(other.render_target_), view_(other.view_) {
-	}
-	
-	void BoxWithView::init(InitInfo init_info) {
-		this->render_target_ = &init_info.render_target;
-		init_info.draw_manager.add(*this);
-	}
-	
 	void BoxWithView::draw() {
 		sf::View old_view = render_target_->getView();
 		render_target_->setView(view_);

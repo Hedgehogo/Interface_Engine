@@ -27,8 +27,6 @@ namespace ie {
 		
 		sf::Vector2f get_normal_size() const override;
 		
-		Capsule* copy() override;
-	
 	protected:
 		LayoutData& layout_get_data() override;
 		

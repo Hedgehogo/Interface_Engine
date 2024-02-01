@@ -9,10 +9,8 @@ namespace ie {
 	BaseWindowResizer* get_window_resizer();
 	
 	class Window {
-	protected:
-		void construction();
-	
 	public:
+		/*old_yaml
 		explicit Window(Interface&& interface);
 		
 		Window(
@@ -26,7 +24,6 @@ namespace ie {
 		
 		Window(Interface&& interface, sf::WindowHandle handle, const sf::ContextSettings& settings = sf::ContextSettings());
 		
-		/*old_yaml
 		explicit Window(const std::filesystem::path& interface);
 		
 		Window(const std::filesystem::path& interface, const sf::String& title, const sf::VideoMode& mode = {1, 1}, const sf::ContextSettings& settings = sf::ContextSettings());

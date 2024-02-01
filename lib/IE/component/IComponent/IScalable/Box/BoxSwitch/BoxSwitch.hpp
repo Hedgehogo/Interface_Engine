@@ -22,8 +22,6 @@ namespace ie {
 		
 		BoxSwitch(Make&& make, InitInfo init_info);
 		
-		void init(InitInfo init_info) override;
-		
 		void set_position(sf::Vector2f position) override;
 		
 		void move(sf::Vector2f position) override;
@@ -44,8 +42,6 @@ namespace ie {
 		
 		const IScalable& get_second_object() const override;
 		
-		BoxSwitch* copy() override;
-	
 	protected:
 		DrawManager inactive_draw_manager_;
 		DrawManager active_draw_manager_;

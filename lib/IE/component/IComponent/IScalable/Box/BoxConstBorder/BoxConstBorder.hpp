@@ -23,10 +23,6 @@ namespace ie {
 		
 		BoxConstBorder(Make&& make, InitInfo init_info);
 		
-		BoxConstBorder(BoxPtr<IScalable>&& const_object, BoxPtr<IScalable>&& second_object, Side side, float border_distance, sf::Vector2f min_size = {});
-		
-		void init(InitInfo init_info) override;
-		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		bool update_interactions(sf::Vector2f mouse_position) override;
@@ -42,8 +38,6 @@ namespace ie {
 		IScalable& get_second_object() override;
 		
 		const IScalable& get_second_object() const override;
-		
-		BoxConstBorder* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

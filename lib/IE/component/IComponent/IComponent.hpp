@@ -30,8 +30,6 @@ namespace ie {
 		
 		virtual ~IComponent() = default;
 		
-		virtual void init(InitInfo init_info) = 0;
-		
 		virtual void set_position(sf::Vector2f position);
 		
 		virtual void move(sf::Vector2f position);
@@ -57,8 +55,6 @@ namespace ie {
 		virtual void resize(sf::Vector2f size, sf::Vector2f position) = 0;
 		
 		virtual bool update_interactions(sf::Vector2f mouse_position) = 0;
-		
-		virtual IComponent* copy() = 0;
 		
 		static void draw_debug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& render_target, size_t hue);
 		

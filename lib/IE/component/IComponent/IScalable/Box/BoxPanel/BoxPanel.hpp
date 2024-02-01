@@ -20,10 +20,6 @@ namespace ie {
 		
 		BoxPanel(Make&& make, InitInfo init_info);
 		
-		BoxPanel(BoxPtr<ConstPanel>&& panel, BoxPtr<IScalable>&& object, sf::Vector2f min_size = {});
-		
-		void init(InitInfo init_info) override;
-		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		sf::Vector2f get_min_size() const override;
@@ -35,8 +31,6 @@ namespace ie {
 		const IScalable& get_object() const override;
 		
 		const ConstPanel& get_panel() const;
-		
-		BoxPanel* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

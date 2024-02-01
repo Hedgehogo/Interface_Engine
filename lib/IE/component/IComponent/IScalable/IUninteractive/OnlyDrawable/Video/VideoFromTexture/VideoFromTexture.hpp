@@ -40,8 +40,6 @@ namespace ie {
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		VideoFromTexture* copy() override;
-	
 	protected:
 		sf::IntRect rect;
 		sf::Vector2i offset;

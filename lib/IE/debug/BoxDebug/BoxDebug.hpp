@@ -18,8 +18,6 @@ namespace ie {
 		
 		BoxDebug(BoxPtr<IScalable>&& object);
 		
-		void init(InitInfo init_info) override;
-		
 		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
@@ -33,8 +31,6 @@ namespace ie {
 		IScalable& get_object() override;
 		
 		const IScalable& get_object() const override;
-		
-		BoxDebug* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

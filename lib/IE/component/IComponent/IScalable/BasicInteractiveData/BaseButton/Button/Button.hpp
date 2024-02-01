@@ -17,16 +17,10 @@ namespace ie {
 		
 		Button(Make&& make, InitInfo init_info);
 		
-		Button(BoxPtr<IScalable>&& background, BoxPtr<IBaseInteraction>&& interaction);
-		
-		void init(InitInfo init_info) override;
-		
 		void update() override;
 		
 		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		Button* copy() override;
-	
 	protected:
 		InteractiveData interactive_;
 	};

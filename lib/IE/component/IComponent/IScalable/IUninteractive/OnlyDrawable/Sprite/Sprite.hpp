@@ -37,8 +37,6 @@ namespace ie {
 		
 		sf::Vector2f get_normal_size() const override;
 		
-		Sprite* copy() override;
-	
 	protected:
 		sf::Sprite sprite;
 		sf::Vector2f minimum_size;

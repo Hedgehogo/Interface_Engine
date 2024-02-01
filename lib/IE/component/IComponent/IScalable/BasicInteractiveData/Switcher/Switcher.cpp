@@ -36,14 +36,6 @@ namespace ie {
 		init_info.update_manager.add(*this);
 	}
 	
-	void Switcher::init(InitInfo init_info) {
-		interactive_.init(init_info, {});
-		init_info.draw_manager.add(*this);
-		init_info.update_manager.add(*this);
-		inactive_background_->init(init_info.copy(inactive_draw_manager_));
-		active_background_->init(init_info.copy(active_draw_manager_));
-	}
-	
 	void Switcher::set_position(sf::Vector2f position) {
 		layout_.set_position(position);
 		inactive_background_->set_position(position);
@@ -97,10 +89,6 @@ namespace ie {
 		}
 		interactive_.update_interactions();
 		return background_update;
-	}
-	
-	Switcher* Switcher::copy() {
-		return nullptr;
 	}
 	
 	void Switcher::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

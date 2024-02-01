@@ -23,10 +23,6 @@ namespace ie {
 		
 		BoxConstBezel(Make&& make, InitInfo init_info);
 		
-		BoxConstBezel(BoxPtr<IScalable>&& object, BoxPtr<IUninteractive>&& bezel, float thickness, sf::Vector2f min_size = {});
-		
-		void init(InitInfo init_info) override;
-		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 		bool update_interactions(sf::Vector2f mouse_position) override;
@@ -38,8 +34,6 @@ namespace ie {
 		IScalable& get_object() override;
 		
 		const IScalable& get_object() const override;
-		
-		BoxConstBezel* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

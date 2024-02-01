@@ -115,10 +115,6 @@ namespace ie {
 			shader_->setUniform("mouse_position", mouse_position - layout_.position);
 		return BoxRenderTexture::update_interactions(mouse_position);
 	}
-	
-	BoxShader* BoxShader::copy() {
-		return new BoxShader{*this};
-	}
 }
 
 orl::Option<ie::BoxShader::LoadTransmission>

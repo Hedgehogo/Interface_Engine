@@ -19,14 +19,6 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	void BoxSwitchTabs::init(InitInfo init_info) {
-		init_info.draw_manager.add(*this);
-		
-		for(size_t i = 0; i < objects_.size(); ++i) {
-			objects_[i]->init(init_info.copy(draw_managers_[i]));
-		}
-	}
-	
 	ISRSize& BoxSwitchTabs::get_value() {
 		return value_;
 	}
@@ -64,10 +56,6 @@ namespace ie {
 	
 	const IScalable& BoxSwitchTabs::get_object_at(size_t index) const {
 		return *objects_.at(index);
-	}
-	
-	BoxSwitchTabs* BoxSwitchTabs::copy() {
-		return nullptr;
 	}
 	
 	void BoxSwitchTabs::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

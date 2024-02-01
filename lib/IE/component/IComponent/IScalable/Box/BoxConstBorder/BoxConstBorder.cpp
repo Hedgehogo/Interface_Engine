@@ -27,25 +27,6 @@ namespace ie {
 		side_(make.side) {
 	}
 	
-	BoxConstBorder::BoxConstBorder(
-		BoxPtr<IScalable>&& const_object,
-		BoxPtr<IScalable>&& second_object,
-		Side side,
-		float border_distance,
-		sf::Vector2f min_size
-	) :
-		Box(min_size),
-		const_object_(std::move(const_object)),
-		second_object_(std::move(second_object)),
-		border_distance_(border_distance),
-		side_(side) {
-	}
-	
-	void BoxConstBorder::init(InitInfo init_info) {
-		const_object_->init(init_info);
-		second_object_->init(init_info);
-	}
-	
 	void BoxConstBorder::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout_.resize(size, position);
 		
@@ -110,10 +91,6 @@ namespace ie {
 	
 	const IScalable& BoxConstBorder::get_second_object() const {
 		return *second_object_;
-	}
-	
-	BoxConstBorder* BoxConstBorder::copy() {
-		return new BoxConstBorder{*this};
 	}
 	
 	void BoxConstBorder::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {

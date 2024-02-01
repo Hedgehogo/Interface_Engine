@@ -74,8 +74,6 @@ namespace ie {
 		
 		bool update_interactions(sf::Vector2f mouse_position) override;
 		
-		BoxShader* copy() override;
-	
 	protected:
 		sf::Shader* shader_;
 		size_t transmission_;

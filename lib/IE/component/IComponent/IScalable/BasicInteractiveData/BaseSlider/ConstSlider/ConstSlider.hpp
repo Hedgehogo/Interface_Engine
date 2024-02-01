@@ -42,12 +42,8 @@ namespace ie {
 		
 		ConstSlider(Make&& make, InitInfo init_info);
 		
-		void init(InitInfo init_info) override;
-		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
-		ConstSlider* copy() override;
-	
 	protected:
 		float aspect_ratio_;
 		float slider_scale_;

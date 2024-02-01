@@ -31,8 +31,6 @@ namespace ie {
 		
 		sf::Vector2f get_normal_size() const override;
 		
-		FullColor* copy() override;
-	
 	protected:
 		sf::RectangleShape rectangle;
 		sf::Vector2f normal_size;

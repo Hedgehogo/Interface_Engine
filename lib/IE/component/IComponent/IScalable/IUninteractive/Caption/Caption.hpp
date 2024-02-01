@@ -57,33 +57,6 @@ namespace ie {
 		
 		Caption(Make&& make, InitInfo init_info);
 		
-		Caption(
-			sf::String text,
-			BoxPtr<IUninteractive>&& background,
-			sf::Font& font,
-			sf::Vector2f min_size,
-			int font_size = default_size,
-			sf::Color color = default_color,
-			sf::Text::Style style = {},
-			float rotation = 0,
-			InternalPositioning2 positioning = {{0, 0}},
-			bool cut_back = true
-		);
-		
-		Caption(
-			sf::String text,
-			BoxPtr<IUninteractive>&& background,
-			sf::Font& font,
-			int font_size = default_size,
-			sf::Color color = default_color,
-			sf::Text::Style style = {},
-			float rotation = 0,
-			InternalPositioning2 positioning = {{0, 0}},
-			bool cut_back = true
-		);
-		
-		void init(InitInfo init_info) override;
-		
 		void draw() override;
 		
 		sf::FloatRect get_bounds(const sf::Text& text) const;
@@ -97,8 +70,6 @@ namespace ie {
 		sf::Vector2f get_min_size() const override;
 		
 		sf::Vector2f get_normal_size() const override;
-		
-		Caption* copy() override;
 		
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	

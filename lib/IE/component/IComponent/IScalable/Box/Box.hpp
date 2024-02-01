@@ -12,8 +12,6 @@ namespace ie {
 		
 		explicit Box(sf::Vector2f min_size, sf::Vector2f size = {0.0f, 0.0f});
 		
-		Box* copy() override = 0;
-	
 	protected:
 		LayoutData& layout_get_data() override;
 		

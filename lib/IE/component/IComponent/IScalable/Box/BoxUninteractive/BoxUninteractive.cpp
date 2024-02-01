@@ -16,10 +16,6 @@ namespace ie {
 	BoxUninteractive::BoxUninteractive(BoxPtr<IScalable>&& object, sf::Vector2f min_size) : Box(min_size), object_(std::move(object)) {
 	}
 	
-	void BoxUninteractive::init(InitInfo init_info) {
-		object_->init(init_info);
-	}
-	
 	void BoxUninteractive::resize(sf::Vector2f size, sf::Vector2f position) {
 		IComponentObject::resize(size, position);
 	}
@@ -34,10 +30,6 @@ namespace ie {
 	
 	const IScalable& BoxUninteractive::get_object() const {
 		return *object_;
-	}
-	
-	BoxUninteractive* BoxUninteractive::copy() {
-		return new BoxUninteractive{*this};
 	}
 }
 
