@@ -19,7 +19,9 @@ orl::Option<ie::make_system::SRanged<T_> > ieml::Decode<char, ie::make_system::S
 namespace ie {
 	template<typename T_>
 	SRanged<T_>::SRanged(Make&& make, DynBuffer& dyn_buffer) :
-		SValue<T_>({std::forward<T_>(make.data)}, dyn_buffer) {
+		SValue<T_>(std::forward<T_>(make.data), dyn_buffer),
+		upper_bound_(std::numeric_limits<T_>::max()),
+		lower_bound_(std::numeric_limits<T_>::lowest()) {
 	}
 	
 	template<typename T_>
@@ -54,7 +56,7 @@ namespace ie {
 	template<typename T_>
 	void SRanged<T_>::set_upper_bound(T_ upper_bound) {
 		if(upper_bound_ > upper_bound) {
-			upper_bound_ = upper_bound;
+			upper_bound_ = std::forward<T_>(upper_bound);
 			if(this->data_ > upper_bound_) {
 				set(upper_bound_);
 			}
@@ -64,7 +66,7 @@ namespace ie {
 	template<typename T_>
 	void SRanged<T_>::set_lower_bound(T_ lower_bound) {
 		if(lower_bound_ < lower_bound) {
-			lower_bound_ = lower_bound;
+			lower_bound_ = std::forward<T_>(lower_bound);
 			if(this->data_ < lower_bound_) {
 				set(lower_bound_);
 			}
@@ -74,8 +76,8 @@ namespace ie {
 	template<typename T_>
 	void SRanged<T_>::set_bounds(T_ lower_bound, T_ upper_bound) {
 		if(upper_bound_ > upper_bound && lower_bound_ < lower_bound) {
-			upper_bound_ = upper_bound;
-			lower_bound_ = lower_bound;
+			upper_bound_ = std::forward<T_>(upper_bound);
+			lower_bound_ = std::forward<T_>(lower_bound);
 			if(this->data_ > upper_bound_) {
 				set(upper_bound_);
 			} else if(this->data_ < lower_bound_) {

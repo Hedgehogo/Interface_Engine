@@ -14,8 +14,8 @@ namespace ie {
 		slider_(slider->make(init_info)),
 		value_(
 			init_info.dyn_buffer.get(std::move(value)),
-			[&](sf::Vector2f new_value) {
-				resize_slider(new_value);
+			[this](sf::Vector2f new_value) {
+				this->resize_slider(new_value);
 			}
 		) {
 		init_info.update_manager.add(*this);
