@@ -18,11 +18,12 @@ namespace ie {
 			MakeDyn<ISBool> value;
 			Key key = Key::MouseLeft;
 			
-			Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, MakeDyn<ISBool> value,
-				 Key key = Key::MouseLeft);
-			
-			Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, Key key = Key::MouseLeft,
-				 bool start_active = false);
+			Make(
+				BoxPtr<IScalable::Make>&& inactive_background,
+				BoxPtr<IScalable::Make>&& active_background,
+				MakeDyn<ISBool> value,
+				Key key = Key::MouseLeft
+			);
 			
 			Switcher* make(InitInfo init_info) override;
 		};

@@ -1,16 +1,10 @@
 #include "Switcher.hpp"
-#include "IE/shared/ISValue/SValue/SValue.hpp"
 #include "IE/interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 #include "SwitherAction/SwitcherAction.hpp"
 
 namespace ie {
 	Switcher::Make::Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, MakeDyn<ISBool> value, Key key) :
 		inactive_background(std::move(inactive_background)), active_background(std::move(active_background)), value(std::move(value)), key(key) {
-	}
-	
-	Switcher::Make::Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, Key key, bool start_active) :
-		inactive_background(std::move(inactive_background)), active_background(std::move(active_background)),
-		value(make_box_ptr<SBool::Make>(start_active)), key(key) {
 	}
 	
 	Switcher* Switcher::Make::make(InitInfo init_info) {
@@ -128,21 +122,10 @@ namespace ie {
 
 orl::Option<ie::Switcher::Make> ieml::Decode<char, ie::Switcher::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
-	auto inactive_background{map.at("inactive-background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except()};
-	auto active_background{map.at("active-background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except()};
-	auto key{map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft)};
-	if(auto value{map.at("value")}) {
-		return ie::Switcher::Make{
-			std::move(inactive_background),
-			std::move(active_background),
-			value.ok().as<ie::MakeDyn<ie::ISBool> >().move_except(),
-			key,
-		};
-	}
 	return ie::Switcher::Make{
-		std::move(inactive_background),
-		std::move(active_background),
-		key,
-		map.get_as<bool>("start-active").ok_or(false),
+		map.at("inactive-background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("active-background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("value").except().as<ie::MakeDyn<ie::ISBool> >().move_except(),
+		map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft),
 	};
 }
