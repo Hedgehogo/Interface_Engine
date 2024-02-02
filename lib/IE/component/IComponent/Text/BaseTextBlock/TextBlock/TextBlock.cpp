@@ -168,10 +168,6 @@ namespace ie {
 		}
 	}
 	
-	TextBlock* TextBlock::copy() {
-		return nullptr;
-	}
-	
 	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<TextBlock>::decode_pointer(const YAML::Node& node, TextBlock*& text_block) {
 		if(node.IsScalar()) {

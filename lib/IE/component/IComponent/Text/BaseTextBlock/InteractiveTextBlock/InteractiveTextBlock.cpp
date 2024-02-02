@@ -118,10 +118,6 @@ namespace ie {
 		return false;
 	}
 	
-	InteractiveTextBlock* InteractiveTextBlock::copy() {
-		return nullptr;
-	}
-	
 	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<InteractiveTextBlock>::decode_pointer(const YAML::Node& node, InteractiveTextBlock*& interactive_text_block) {
 		interactive_text_block = new InteractiveTextBlock{

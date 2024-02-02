@@ -52,8 +52,6 @@ namespace ie {
 		
 		virtual sf::Vector2f get_normal_size() = 0;
 		
-		virtual BaseResizer* copy() = 0;
-		
 		virtual ~BaseResizer() = default;
 	
 	protected:

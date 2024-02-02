@@ -60,8 +60,6 @@ namespace ie {
 	
 	public:
 		sf::Vector2f get_normal_size() override;
-		
-		Resizer* copy();
 	
 	protected:
 		std::vector<BaseCharacter*>::iterator after_enter;

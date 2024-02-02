@@ -74,8 +74,6 @@ namespace ie {
 		void update() override;
 		
 		bool update_interactions(sf::Vector2f) override;
-		
-		TextBlock* copy() override;
 	
 	protected:
 		std::vector<BoxPtr<BaseCharacter>> text_characters;

@@ -48,8 +48,6 @@ namespace ie {
 		void update() override;
 		
 		bool update_interactions(sf::Vector2f) override;
-		
-		InteractiveTextBlock* copy() override;
 	
 	protected:
 		InteractionManager* interaction_manager;

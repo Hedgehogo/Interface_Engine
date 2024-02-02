@@ -41,8 +41,6 @@ namespace ie {
 		virtual void update() = 0;
 		
 		virtual bool update_interactions(sf::Vector2f mouse_position) = 0;
-		
-		virtual BaseTextBlock* copy() = 0;
 	
 		virtual ~BaseTextBlock() = default;
 		
