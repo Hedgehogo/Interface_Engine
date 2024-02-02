@@ -33,12 +33,12 @@ namespace ie {
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 	protected:
-		sf::Vector2i size_video;
-		sf::Vector2f size;
-		std::string path;
+		sf::Vector2i size_video_;
+		sf::Vector2f size_;
+		std::string path_;
 		
-		std::vector<sf::Texture> buffer_texture;
-		sf::Sprite sprite;
-		SReader<ISRFloat> viewing_progress;
+		std::vector<sf::Texture> buffer_texture_;
+		sf::Sprite sprite_;
+		SReader<ISRFloat> viewing_progress_;
 	};
 }

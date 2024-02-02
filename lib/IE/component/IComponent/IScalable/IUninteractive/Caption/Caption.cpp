@@ -6,23 +6,23 @@
 #include "../OnlyDrawable/Capsule/Capsule.hpp"
 
 namespace ie {
-	sf::Color Caption::default_color = sf::Color::Black;
-	int Caption::default_size = 10;
+	sf::Color Caption::default_color_ = sf::Color::Black;
+	int Caption::default_size_ = 10;
 	
 	void Caption::set_default_color(sf::Color color) {
-		default_color = color;
+		default_color_ = color;
 	}
 	
 	void Caption::set_default_size(int size) {
-		default_size = size;
+		default_size_ = size;
 	}
 	
 	sf::Color Caption::get_default_color() {
-		return default_color;
+		return default_color_;
 	}
 	
 	int Caption::get_default_size() {
-		return default_size;
+		return default_size_;
 	}
 	
 	Caption::Make::Make(
@@ -77,22 +77,22 @@ namespace ie {
 	
 	Caption::Caption(Make&& make, InitInfo init_info) :
 		OnlyDrawable(init_info),
-		cut_back(make.cut_back),
-		str(make.text),
-		background(make.background->make(init_info.copy(draw_manager))),
-		minimum_size(make.min_size),
-		positioning(std::move(make.positioning), {init_info.render_target}) {
-		this->text.setString(make.text);
-		this->text.setFont(make.font);
-		this->text.setCharacterSize(make.font_size);
-		this->text.setFillColor(make.color);
-		this->text.setStyle(make.style);
-		this->text.setRotation(make.rotation);
+		cut_back_(make.cut_back),
+		str_(make.text),
+		background_(make.background->make(init_info.copy(draw_manager_))),
+		minimum_size_(make.min_size),
+		positioning_(std::move(make.positioning), {init_info.render_target}) {
+		this->text_.setString(make.text);
+		this->text_.setFont(make.font);
+		this->text_.setCharacterSize(make.font_size);
+		this->text_.setFillColor(make.color);
+		this->text_.setStyle(make.style);
+		this->text_.setRotation(make.rotation);
 	}
 	
 	void Caption::draw() {
-		draw_manager.draw();
-		render_target->draw(text);
+		draw_manager_.draw();
+		render_target_->draw(text_);
 	}
 	
 	sf::FloatRect Caption::get_bounds(const sf::Text& text) const {
@@ -112,52 +112,52 @@ namespace ie {
 	}
 	
 	void Caption::resize(sf::Vector2f size, sf::Vector2f position) {
-		background->resize(size, position);
-		text.setString(str);
+		background_->resize(size, position);
+		text_.setString(str_);
 		
-		sf::FloatRect bounds = get_bounds(text);
-		if(cut_back) {
-			sf::String string = this->str + sf::String("...");
+		sf::FloatRect bounds = get_bounds(text_);
+		if(cut_back_) {
+			sf::String string = this->str_ + sf::String("...");
 			while(bounds.width > size.x || bounds.height > size.y) {
 				string.erase(string.getSize() - 4, 1);
-				text.setString(string);
-				bounds = get_bounds(text);
+				text_.setString(string);
+				bounds = get_bounds(text_);
 			}
 		}
-		sf::Vector2f find_position{positioning.find_position(position, size, {bounds.width, bounds.height})};
-		text.setPosition(find_position - sf::Vector2f(get_bounds(text).left - text.getPosition().x, get_bounds(text).top - text.getPosition().y));
+		sf::Vector2f find_position{positioning_.find_position(position, size, {bounds.width, bounds.height})};
+		text_.setPosition(find_position - sf::Vector2f(get_bounds(text_).left - text_.getPosition().x, get_bounds(text_).top - text_.getPosition().y));
 	}
 	
 	sf::Vector2f Caption::get_area_position() const {
-		return background->get_area_position();
+		return background_->get_area_position();
 	}
 	
 	sf::Vector2f Caption::get_area_size() const {
-		return background->get_area_size();
+		return background_->get_area_size();
 	}
 	
 	sf::Vector2f Caption::get_min_size() const {
-		sf::FloatRect bounds{get_bounds(sf::Text{"...", *text.getFont(), text.getCharacterSize()})};
+		sf::FloatRect bounds{get_bounds(sf::Text{"...", *text_.getFont(), text_.getCharacterSize()})};
 		return max(
 			max(
-				minimum_size,
-				(cut_back ?
+				minimum_size_,
+				(cut_back_ ?
 				 sf::Vector2f{bounds.width, bounds.height} :
 				 sf::Vector2f{})
 			),
-			background->get_min_size()
+			background_->get_min_size()
 		);
 	}
 	
 	sf::Vector2f Caption::get_normal_size() const {
-		sf::FloatRect rect = text.getGlobalBounds();
-		return max({rect.width, rect.height}, background->get_normal_size());
+		sf::FloatRect rect = text_.getGlobalBounds();
+		return max({rect.width, rect.height}, background_->get_normal_size());
 	}
 	
 	void Caption::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
-		background->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
+		background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		{
-			sf::FloatRect bounds{text.getGlobalBounds()};
+			sf::FloatRect bounds{text_.getGlobalBounds()};
 			sf::Vector2f size{bounds.width, bounds.height};
 			sf::Vector2f position{bounds.left, bounds.top};
 			if(size.x > 0 && size.y > 0) {
@@ -179,7 +179,7 @@ namespace ie {
 			}
 		}
 		{
-			sf::FloatRect bounds{get_bounds(text)};
+			sf::FloatRect bounds{get_bounds(text_)};
 			sf::Vector2f size{bounds.width, bounds.height};
 			sf::Vector2f position{bounds.left, bounds.top};
 			if(size.x > 0 && size.y > 0) {

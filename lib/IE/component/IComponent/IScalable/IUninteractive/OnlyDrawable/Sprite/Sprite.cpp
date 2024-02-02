@@ -18,42 +18,42 @@ namespace ie {
 	
 	Sprite::Sprite(Make&& make, InitInfo init_info) :
 		OnlyDrawable(init_info),
-		sprite(make.texture, make.rect),
-		minimum_size(std::max(make.min_size.x, 1.f), std::max(make.min_size.y, 1.f)) {
+		sprite_(make.texture, make.rect),
+		minimum_size_(std::max(make.min_size.x, 1.f), std::max(make.min_size.y, 1.f)) {
 	}
 	
 	Sprite::Sprite(sf::Texture& texture, sf::IntRect rect, sf::Vector2f min_size) :
-		sprite(texture, rect), minimum_size(std::max(min_size.x, 1.f), std::max(min_size.y, 1.f)) {
+		sprite_(texture, rect), minimum_size_(std::max(min_size.x, 1.f), std::max(min_size.y, 1.f)) {
 	}
 	
 	Sprite::Sprite(sf::Texture& texture, sf::Vector2f min_size) :
-		sprite(texture), minimum_size(std::max(min_size.x, 1.f), std::max(min_size.y, 1.f)) {
+		sprite_(texture), minimum_size_(std::max(min_size.x, 1.f), std::max(min_size.y, 1.f)) {
 	}
 	
 	void Sprite::draw() {
-		render_target->draw(sprite);
+		render_target_->draw(sprite_);
 	}
 	
 	void Sprite::resize(sf::Vector2f size, sf::Vector2f position) {
-		sf::FloatRect global_bounds = sprite.getGlobalBounds();
-		sprite.scale(sf::Vector2f(size.x / global_bounds.width, size.y / global_bounds.height));
-		sprite.setPosition(position);
+		sf::FloatRect global_bounds = sprite_.getGlobalBounds();
+		sprite_.scale(sf::Vector2f(size.x / global_bounds.width, size.y / global_bounds.height));
+		sprite_.setPosition(position);
 	}
 	
 	sf::Vector2f Sprite::get_area_position() const {
-		return sprite.getPosition();
+		return sprite_.getPosition();
 	}
 	
 	sf::Vector2f Sprite::get_area_size() const {
-		return {sprite.getGlobalBounds().width, sprite.getGlobalBounds().height};
+		return {sprite_.getGlobalBounds().width, sprite_.getGlobalBounds().height};
 	}
 	
 	sf::Vector2f Sprite::get_min_size() const {
-		return minimum_size;
+		return minimum_size_;
 	}
 	
 	sf::Vector2f Sprite::get_normal_size() const {
-		return {static_cast<float>(sprite.getTextureRect().width), static_cast<float>(sprite.getTextureRect().height)};
+		return {static_cast<float>(sprite_.getTextureRect().width), static_cast<float>(sprite_.getTextureRect().height)};
 	}
 	
 	bool Determine<Sprite::Make>::determine(ieml::Node const& node) {

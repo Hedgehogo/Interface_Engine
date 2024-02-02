@@ -41,12 +41,12 @@ namespace ie {
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
 	protected:
-		sf::IntRect rect;
-		sf::Vector2i offset;
-		SReader<ISRFloat> viewing_progress;
-		sf::Sprite sprite;
-		sf::Vector2i texture_size;
-		sf::Vector2f size;
-		size_t frame_count;
+		sf::IntRect rect_;
+		sf::Vector2i offset_;
+		SReader<ISRFloat> viewing_progress_;
+		sf::Sprite sprite_;
+		sf::Vector2i texture_size_;
+		sf::Vector2f size_;
+		size_t frame_count_;
 	};
 }

@@ -19,8 +19,8 @@ namespace ie {
 			sf::String text;
 			BoxPtr<IUninteractive::Make> background;
 			sf::Font& font;
-			int font_size = default_size;
-			sf::Color color = default_color;
+			int font_size = default_size_;
+			sf::Color color = default_color_;
 			sf::Text::Style style = {};
 			float rotation = 0;
 			InternalPositioning2::Make positioning = {{0, 0}};
@@ -32,8 +32,8 @@ namespace ie {
 				BoxPtr<IUninteractive::Make>&& background,
 				sf::Font& font,
 				sf::Vector2f min_size,
-				int font_size = default_size,
-				sf::Color color = default_color,
+				int font_size = default_size_,
+				sf::Color color = default_color_,
 				sf::Text::Style style = {},
 				float rotation = 0,
 				InternalPositioning2::Make positioning = {{0, 0}},
@@ -44,8 +44,8 @@ namespace ie {
 				sf::String text,
 				BoxPtr<IUninteractive::Make>&& background,
 				sf::Font& font,
-				int font_size = default_size,
-				sf::Color color = default_color,
+				int font_size = default_size_,
+				sf::Color color = default_color_,
 				sf::Text::Style style = {},
 				float rotation = 0,
 				InternalPositioning2::Make positioning = {{0, 0}},
@@ -74,17 +74,17 @@ namespace ie {
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		static sf::Color default_color;
-		static int default_size;
+		static sf::Color default_color_;
+		static int default_size_;
 		
-		bool cut_back;
+		bool cut_back_;
 		
-		sf::Text text;
-		sf::String str;
-		DrawManager draw_manager;
-		BoxPtr<IUninteractive> background;
-		sf::Vector2f minimum_size;
-		InternalPositioning2 positioning;
+		sf::Text text_;
+		sf::String str_;
+		DrawManager draw_manager_;
+		BoxPtr<IUninteractive> background_;
+		sf::Vector2f minimum_size_;
+		InternalPositioning2 positioning_;
 	};
 }
 

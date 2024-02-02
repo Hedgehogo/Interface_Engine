@@ -29,39 +29,39 @@ namespace ie {
 	
 	VideoFromTexture::VideoFromTexture(Make&& make, InitInfo init_info) :
 		OnlyDrawable(init_info),
-		rect(make.rect),
-		offset(make.offset),
-		viewing_progress(
+		rect_(make.rect),
+		offset_(make.offset),
+		viewing_progress_(
 			make.viewing_progress.make(init_info.dyn_buffer),
 			[this](float value) {
 				set_current_frame(value);
 			}
 		),
-		sprite(make.texture, make.rect),
-		texture_size(make.texture.getSize()),
-		frame_count(make.frame_count) {
-		viewing_progress.get().set_bounds(0, 1);
+		sprite_(make.texture, make.rect),
+		texture_size_(make.texture.getSize()),
+		frame_count_(make.frame_count) {
+		viewing_progress_.get().set_bounds(0, 1);
 	}
 	
 	void VideoFromTexture::set_current_frame(float viewing_progress) {
-		sprite.setTextureRect(
+		sprite_.setTextureRect(
 			{
-				(offset * static_cast<int>(viewing_progress * frame_count)) + sf::Vector2i{rect.left, rect.top},
-				{rect.width, rect.height}
+				(offset_ * static_cast<int>(viewing_progress * frame_count_)) + sf::Vector2i{rect_.left, rect_.top},
+				{rect_.width, rect_.height}
 			}
 		);
 	}
 	
 	void VideoFromTexture::draw() {
-		render_target->draw(sprite);
+		render_target_->draw(sprite_);
 	}
 	
 	sf::Vector2f VideoFromTexture::get_area_position() const {
-		return sprite.getPosition();
+		return sprite_.getPosition();
 	}
 	
 	sf::Vector2f VideoFromTexture::get_area_size() const {
-		return size;
+		return size_;
 	}
 	
 	sf::Vector2f VideoFromTexture::get_min_size() const {
@@ -69,12 +69,12 @@ namespace ie {
 	}
 	
 	sf::Vector2f VideoFromTexture::get_normal_size() const {
-		return sf::Vector2f{sf::Vector2i{rect.width, rect.height}};
+		return sf::Vector2f{sf::Vector2i{rect_.width, rect_.height}};
 	}
 	
 	void VideoFromTexture::resize(sf::Vector2f size, sf::Vector2f position) {
-		this->size = size;
-		sprite.setPosition(position);
-		sprite.setScale(div_xy(size, sf::Vector2f{sf::Vector2i{rect.width, rect.height}}));
+		this->size_ = size;
+		sprite_.setPosition(position);
+		sprite_.setScale(div_xy(size, sf::Vector2f{sf::Vector2i{rect_.width, rect_.height}}));
 	}
 }

@@ -11,29 +11,29 @@ namespace ie {
 	}
 	
 	FullColor::FullColor(Make&& make, InitInfo init_info) :
-		OnlyDrawable(init_info), normal_size(make.normal_size) {
-		rectangle.setFillColor(make.color);
+		OnlyDrawable(init_info), normal_size_(make.normal_size) {
+		rectangle_.setFillColor(make.color);
 	}
 	
-	FullColor::FullColor(sf::Color color, sf::Vector2f normal_size) : OnlyDrawable(), rectangle(), normal_size(normal_size) {
-		rectangle.setFillColor(color);
+	FullColor::FullColor(sf::Color color, sf::Vector2f normal_size) : OnlyDrawable(), rectangle_(), normal_size_(normal_size) {
+		rectangle_.setFillColor(color);
 	}
 	
 	void FullColor::draw() {
-		render_target->draw(rectangle);
+		render_target_->draw(rectangle_);
 	}
 	
 	void FullColor::resize(sf::Vector2f size, sf::Vector2f position) {
-		rectangle.setSize(size);
-		rectangle.setPosition(position);
+		rectangle_.setSize(size);
+		rectangle_.setPosition(position);
 	}
 	
 	sf::Vector2f FullColor::get_area_position() const {
-		return rectangle.getPosition();
+		return rectangle_.getPosition();
 	}
 	
 	sf::Vector2f FullColor::get_area_size() const {
-		return rectangle.getSize();
+		return rectangle_.getSize();
 	}
 	
 	sf::Vector2f FullColor::get_min_size() const {
@@ -41,7 +41,7 @@ namespace ie {
 	}
 	
 	sf::Vector2f FullColor::get_normal_size() const {
-		return normal_size;
+		return normal_size_;
 	}
 	
 	bool Determine<FullColor::Make>::determine(const ieml::Node& node) {

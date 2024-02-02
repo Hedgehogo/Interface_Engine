@@ -38,8 +38,8 @@ namespace ie {
 		sf::Vector2f get_normal_size() const override;
 		
 	protected:
-		sf::Sprite sprite;
-		sf::Vector2f minimum_size;
+		sf::Sprite sprite_;
+		sf::Vector2f minimum_size_;
 	};
 	
 	template<>

@@ -48,12 +48,12 @@ namespace ie {
 		const LayoutData& layout_get_data() const override;
 		
 		LayoutData layout_;
-		BoxPtr<IUninteractive> background;
-		BoxPtr<IUninteractive> strip;
-		bool horizontal;
-		float offset;
-		int division;
-		float value;
+		BoxPtr<IUninteractive> background_;
+		BoxPtr<IUninteractive> strip_;
+		bool horizontal_;
+		float offset_;
+		int division_;
+		float value_;
 	};
 }
 

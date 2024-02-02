@@ -32,8 +32,8 @@ namespace ie {
 		sf::Vector2f get_normal_size() const override;
 		
 	protected:
-		sf::RectangleShape rectangle;
-		sf::Vector2f normal_size;
+		sf::RectangleShape rectangle_;
+		sf::Vector2f normal_size_;
 	};
 	
 	template<>

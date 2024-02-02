@@ -33,8 +33,8 @@ namespace ie {
 		const LayoutData& layout_get_data() const override;
 		
 		LayoutData layout_;
-		sf::RectangleShape rectangle;
-		sf::CircleShape circle;
+		sf::RectangleShape rectangle_;
+		sf::CircleShape circle_;
 	};
 }
 

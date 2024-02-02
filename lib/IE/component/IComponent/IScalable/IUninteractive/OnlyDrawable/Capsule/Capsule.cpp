@@ -9,37 +9,37 @@ namespace ie {
 	}
 	
 	Capsule::Capsule(Make&& make, InitInfo init_info) : OnlyDrawable(init_info) {
-		rectangle.setFillColor(make.color);
-		circle.setFillColor(make.color);
+		rectangle_.setFillColor(make.color);
+		circle_.setFillColor(make.color);
 	}
 	
 	Capsule::Capsule(sf::Color color) {
-		rectangle.setFillColor(color);
-		circle.setFillColor(color);
+		rectangle_.setFillColor(color);
+		circle_.setFillColor(color);
 	}
 	
 	void Capsule::draw() {
-		render_target->draw(rectangle);
-		circle.setPosition(layout_.position);
-		render_target->draw(circle);
+		render_target_->draw(rectangle_);
+		circle_.setPosition(layout_.position);
+		render_target_->draw(circle_);
 		if(layout_.size.x > layout_.size.y) {
-			circle.setPosition({layout_.position.x + layout_.size.x - layout_.size.y, layout_.position.y});
+			circle_.setPosition({layout_.position.x + layout_.size.x - layout_.size.y, layout_.position.y});
 		} else {
-			circle.setPosition({layout_.position.x, layout_.position.y + layout_.size.y - layout_.size.x});
+			circle_.setPosition({layout_.position.x, layout_.position.y + layout_.size.y - layout_.size.x});
 		}
-		render_target->draw(circle);
+		render_target_->draw(circle_);
 	}
 	
 	void Capsule::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout_.resize(size, position);
 		if(size.x > size.y) {
-			rectangle.setSize({size.x - size.y, size.y});
-			rectangle.setPosition(position + sf::Vector2f{size.y / 2, 0});
-			circle.setRadius(size.y / 2);
+			rectangle_.setSize({size.x - size.y, size.y});
+			rectangle_.setPosition(position + sf::Vector2f{size.y / 2, 0});
+			circle_.setRadius(size.y / 2);
 		} else {
-			rectangle.setSize({size.x, size.y - size.x});
-			rectangle.setPosition(position + sf::Vector2f{0, size.x / 2});
-			circle.setRadius(size.x / 2);
+			rectangle_.setSize({size.x, size.y - size.x});
+			rectangle_.setPosition(position + sf::Vector2f{0, size.x / 2});
+			circle_.setRadius(size.x / 2);
 		}
 	}
 	

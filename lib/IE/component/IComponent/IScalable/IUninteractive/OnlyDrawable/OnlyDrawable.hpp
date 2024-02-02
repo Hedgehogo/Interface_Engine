@@ -12,6 +12,6 @@ namespace ie {
 		sf::RenderTarget& get_render_target();
 		
 	protected:
-		sf::RenderTarget* render_target;
+		sf::RenderTarget* render_target_;
 	};
 }

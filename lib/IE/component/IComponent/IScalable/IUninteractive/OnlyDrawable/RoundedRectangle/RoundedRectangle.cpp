@@ -11,47 +11,47 @@ namespace ie {
 	}
 	
 	RoundedRectangle::RoundedRectangle(Make&& make, InitInfo init_info) :
-		OnlyDrawable(init_info), radius(make.radius) {
-		horizontal_rectangle.setFillColor(make.color);
-		vertical_rectangle.setFillColor(make.color);
-		circle.setFillColor(make.color);
-		circle.setRadius(radius);
+		OnlyDrawable(init_info), radius_(make.radius) {
+		horizontal_rectangle_.setFillColor(make.color);
+		vertical_rectangle_.setFillColor(make.color);
+		circle_.setFillColor(make.color);
+		circle_.setRadius(radius_);
 	}
 	
-	RoundedRectangle::RoundedRectangle(sf::Color color, float radius) : radius(radius) {
-		horizontal_rectangle.setFillColor(color);
-		vertical_rectangle.setFillColor(color);
-		circle.setFillColor(color);
-		circle.setRadius(radius);
+	RoundedRectangle::RoundedRectangle(sf::Color color, float radius) : radius_(radius) {
+		horizontal_rectangle_.setFillColor(color);
+		vertical_rectangle_.setFillColor(color);
+		circle_.setFillColor(color);
+		circle_.setRadius(radius);
 	}
 	
 	void RoundedRectangle::draw() {
-		render_target->draw(horizontal_rectangle);
-		render_target->draw(vertical_rectangle);
-		circle.setPosition(layout_.position);
-		render_target->draw(circle);
-		circle.setPosition(layout_.position.x + layout_.size.x - radius * 2, layout_.position.y);
-		render_target->draw(circle);
-		circle.setPosition(layout_.position.x, layout_.position.y + layout_.size.y - radius * 2);
-		render_target->draw(circle);
-		circle.setPosition(layout_.position.x + layout_.size.x - radius * 2, layout_.position.y + layout_.size.y - radius * 2);
-		render_target->draw(circle);
+		render_target_->draw(horizontal_rectangle_);
+		render_target_->draw(vertical_rectangle_);
+		circle_.setPosition(layout_.position);
+		render_target_->draw(circle_);
+		circle_.setPosition(layout_.position.x + layout_.size.x - radius_ * 2, layout_.position.y);
+		render_target_->draw(circle_);
+		circle_.setPosition(layout_.position.x, layout_.position.y + layout_.size.y - radius_ * 2);
+		render_target_->draw(circle_);
+		circle_.setPosition(layout_.position.x + layout_.size.x - radius_ * 2, layout_.position.y + layout_.size.y - radius_ * 2);
+		render_target_->draw(circle_);
 	}
 	
 	void RoundedRectangle::resize(sf::Vector2f size, sf::Vector2f position) {
 		layout_.resize(size, position);
-		vertical_rectangle.setSize({size.x - radius * 2, size.y});
-		vertical_rectangle.setPosition(position + sf::Vector2f{radius, 0});
-		horizontal_rectangle.setSize({size.x, size.y - radius * 2});
-		horizontal_rectangle.setPosition(position + sf::Vector2f{0, radius});
+		vertical_rectangle_.setSize({size.x - radius_ * 2, size.y});
+		vertical_rectangle_.setPosition(position + sf::Vector2f{radius_, 0});
+		horizontal_rectangle_.setSize({size.x, size.y - radius_ * 2});
+		horizontal_rectangle_.setPosition(position + sf::Vector2f{0, radius_});
 	}
 	
 	sf::Vector2f RoundedRectangle::get_min_size() const {
-		return sf::Vector2f(radius * 2, radius * 2);
+		return sf::Vector2f(radius_ * 2, radius_ * 2);
 	}
 	
 	sf::Vector2f RoundedRectangle::get_normal_size() const {
-		return sf::Vector2f(radius * 2, radius * 2);
+		return sf::Vector2f(radius_ * 2, radius_ * 2);
 	}
 	
 	LayoutData& RoundedRectangle::layout_get_data() {
