@@ -27,6 +27,9 @@ namespace ie {
 	void ieml_rttb_init_shared(char first, std::string name) {
 		add_type<ISValue<T>, SValue<T> >();
 		add_type_make<ISValue<T>, SValue<T> >(name);
+		
+		add_type_make<KeyAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
+		
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
 			add_type<ISVec2<T>, SVec2<T> >();
 			add_type_make<ISVec2<T>, SVec2<T> >(std::string("Vec2") + std::string(1, first));
