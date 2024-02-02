@@ -8,11 +8,7 @@ namespace ie {
 		align(align),
 		algorithm(algorithm) {
 	}
-	
-	void BaseResizer::init(ResizerInitInfo init_info) {
-		//this->characters = &init_info.characters;
-	}
-	
+
 	const std::vector<BoxPtr<BaseLine> >& BaseResizer::get_lines() const {
 		return lines;
 	}

@@ -12,17 +12,7 @@ namespace ie {
 		underline_offset = init_info.font.getUnderlinePosition(init_info.size);
 		underline_thickness = init_info.font.getUnderlineThickness(init_info.size);
 	}
-	
-	Underline::Underline(orl::Option<sf::Color> color) : BaseLine(sf::TriangleStrip, 4, color) {
-	}
-	
-	void Underline::init(LineInitInfo init_info) {
-		BaseLine::init(init_info);
-		
-		underline_offset = init_info.font.getUnderlinePosition(init_info.size);
-		underline_thickness = init_info.font.getUnderlineThickness(init_info.size);
-	}
-	
+
 	void Underline::resize(float start, float end, float height) {
 		vertex_array[0].position = {start, height + underline_offset - (underline_thickness / 2)};
 		vertex_array[1].position = {start, height + underline_offset + (underline_thickness / 2)};

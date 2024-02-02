@@ -25,8 +25,6 @@ namespace ie {
 		};
 		
 		BaseResizer(float line_spacing, Align align, Algorithm algorithm, ResizerInitInfo init_info);
-	
-		void init(ResizerInitInfo init_info);
 		
 		virtual const std::vector<BoxPtr<BaseLine> >& get_lines() const;
 		

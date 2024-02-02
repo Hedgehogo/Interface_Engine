@@ -75,46 +75,6 @@ namespace ie {
 		}
 	}
 	
-	TextBlock::TextBlock(
-		std::u32string text,
-		orl::Option<sf::Color> text_color,
-		orl::Option<sf::Font*> font,
-		orl::Option<sf::Text::Style> style,
-		std::vector<BoxPtr<BaseLine>>&& lines,
-		orl::Option<size_t> size,
-		orl::Option<sf::Color> text_selection_color,
-		orl::Option<sf::Color> background_selection_color,
-		orl::Option<sf::Color> inactive_text_selection_color,
-		orl::Option<sf::Color> inactive_background_selection_color
-	) :
-		lines(std::move(lines)), text(std::move(text)) {
-		text_variables.text_color = text_color;
-		text_variables.font = font;
-		text_variables.style = style;
-		text_variables.size = size;
-		text_variables.text_selection_color = text_selection_color;
-		text_variables.background_selection_color = background_selection_color;
-		text_variables.inactive_text_selection_color = inactive_text_selection_color;
-		text_variables.inactive_background_selection_color = inactive_background_selection_color;
-	}
-	
-	TextBlock::TextBlock(std::u32string text, TextVariables text_variables, std::vector<BoxPtr<BaseLine>>&& lines) :
-		BaseTextBlock(text_variables), lines(std::move(lines)), text(std::move(text)) {
-	}
-	
-	void TextBlock::init(TextBockInitInfo text_block_init_info) {
-		for(auto& line: lines) {
-			line->init(
-				{
-					text_variables.size.some(),
-					*text_variables.font.some(),
-					text_variables.text_color.some(),
-					text_block_init_info.render_target
-				}
-			);
-		}
-	}
-	
 	void TextBlock::set_text_variables(
 		sf::Color TextColor,
 		sf::Color text_selection_color,

@@ -12,9 +12,11 @@ TEST(IComponent_Text, Character) {
 	{
 		InitInfoData data{{100, 100}};
 		
-		std::vector<ie::BoxPtr<ie::BaseLine>> lines{
-                ie::make_box_ptr<ie::BaseLine, ie::Underline>(sf::Color::Red),
-                ie::make_box_ptr<ie::BaseLine, ie::StrikeThrough>(sf::Color::Blue, 0.6f)
+		auto lines_make{
+			ie::make_vector(
+            	ie::make_box_ptr<ie::BaseLine::Make, ie::Underline::Make>(sf::Color::Red),
+            	ie::make_box_ptr<ie::BaseLine::Make, ie::StrikeThrough::Make>(sf::Color::Blue, 0.6f)
+			)
 		};
 		
 		ie::TextVariables text_variables{
@@ -26,6 +28,18 @@ TEST(IComponent_Text, Character) {
 			&font,
 			sf::Text::Style::Regular,
 			14
+		};
+		
+		auto lines{
+			ie::map_make(
+				std::move(lines_make),
+				ie::LineInitInfo{
+					text_variables.size.except(),
+					*text_variables.font.except(),
+					text_variables.text_color.except(),
+					data.render_target
+				}
+			)
 		};
 		
 		ie::Character character{

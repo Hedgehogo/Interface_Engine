@@ -15,9 +15,7 @@ namespace ie {
 			virtual ~Make() = default;
 		};
 		
-		BaseTextBlock();
-		
-		BaseTextBlock(TextVariables text_variables);
+		explicit BaseTextBlock(TextVariables text_variables);
 		
 		virtual void set_text_variables(
 			sf::Color TextColor,
@@ -29,8 +27,6 @@ namespace ie {
 			size_t size,
 			sf::Text::Style style
 		);
-		
-		virtual void init(TextBockInitInfo text_block_init_info) = 0;
 		
 		virtual void set_kerning(char32_t character);
 		

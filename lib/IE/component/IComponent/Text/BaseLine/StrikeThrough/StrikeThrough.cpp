@@ -13,16 +13,6 @@ namespace ie {
 		underline_thickness = init_info.font.getUnderlineThickness(init_info.size);
 	}
 	
-	StrikeThrough::StrikeThrough(orl::Option<sf::Color> color, float strike_through_offset) : BaseLine(sf::TriangleStrip, 4, color), strike_through_offset(strike_through_offset) {
-	}
-	
-	void StrikeThrough::init(LineInitInfo init_info) {
-		BaseLine::init(init_info);
-		
-		strike_through_offset *= init_info.size;
-		underline_thickness = init_info.font.getUnderlineThickness(init_info.size);
-	}
-	
 	void StrikeThrough::resize(float start, float end, float height) {
 		vertex_array[0].position = {start, height - strike_through_offset - (underline_thickness / 2)};
 		vertex_array[1].position = {start, height - strike_through_offset + (underline_thickness / 2)};

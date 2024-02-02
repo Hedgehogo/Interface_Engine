@@ -37,21 +37,6 @@ namespace ie {
 		
 		TextBlock(Make&& make, TextBockInitInfo init_info);
 		
-		TextBlock(std::u32string text, TextVariables text_variables, std::vector<BoxPtr<BaseLine>>&& lines);
-		
-		TextBlock(
-			std::u32string text,
-			orl::Option<sf::Color> text_color = {},
-			orl::Option<sf::Font*> font = {},
-			orl::Option<sf::Text::Style> style = {},
-			std::vector<BoxPtr<BaseLine>>&& lines = {},
-			orl::Option<size_t> size = {},
-			orl::Option<sf::Color> text_selection_color = {},
-			orl::Option<sf::Color> background_selection_color = {},
-			orl::Option<sf::Color> inactive_text_selection_color = {},
-			orl::Option<sf::Color> inactive_background_selection_color = {}
-		);
-		
 		void set_text_variables(
 			sf::Color TextColor,
 			sf::Color text_selection_color,
@@ -64,8 +49,6 @@ namespace ie {
 		) override;
 		
 		std::vector<BaseCharacter*> get_characters() override;
-		
-		void init(TextBockInitInfo text_block_init_info) override;
 		
 		void set_kerning(char32_t character) override;
 		

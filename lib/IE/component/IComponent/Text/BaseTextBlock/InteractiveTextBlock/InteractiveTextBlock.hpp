@@ -27,22 +27,6 @@ namespace ie {
 		
 		InteractiveTextBlock(Make&& make, TextBockInitInfo init_info);
 		
-		InteractiveTextBlock(
-			BoxPtr<IBaseInteraction>&& interaction,
-			std::u32string text,
-			orl::Option<sf::Color> text_color = {},
-			orl::Option<sf::Font*> font = {},
-			orl::Option<sf::Text::Style> style = {},
-			std::vector<BoxPtr<BaseLine>>&& lines = {},
-			orl::Option<size_t> size = {},
-			orl::Option<sf::Color> text_selection_color = {},
-			orl::Option<sf::Color> background_selection_color = {},
-			orl::Option<sf::Color> inactive_text_selection_color = {},
-			orl::Option<sf::Color> inactive_background_selection_color = {}
-		);
-		
-		void init(TextBockInitInfo text_block_init_info) override;
-		
 		bool in(sf::Vector2f mouse_position) override;
 		
 		void update() override;
