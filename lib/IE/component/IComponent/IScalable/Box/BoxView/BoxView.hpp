@@ -5,11 +5,11 @@
 #include "../Box.hpp"
 
 namespace ie {
-	class BoxWithView : public Box, public virtual IDrawable {
+	class BoxView : public Box, public virtual IDrawable {
 	public:
-		BoxWithView(sf::Vector2f min_size, InitInfo init_info);
+		BoxView(sf::Vector2f min_size, InitInfo init_info);
 		
-		BoxWithView(sf::Vector2f min_size);
+		BoxView(sf::Vector2f min_size);
 		
 		void draw() override;
 		

@@ -6,7 +6,7 @@
 #include "../BoxView/BoxView.hpp"
 
 namespace ie {
-	class BoxScroll : public BoxWithView {
+	class BoxScroll : public BoxView {
 	protected:
 		sf::Vector2f get_new_object_position(sf::Vector2f normal_object_position);
 	

@@ -10,7 +10,7 @@ namespace ie {
 	}
 	
 	BoxScroll::BoxScroll(Make&& make, InitInfo init_info) :
-		BoxWithView(make.min_size, init_info),
+		BoxView(make.min_size, init_info),
 		object_(make.object->make(init_info.copy(this->draw_manager_))),
 		normal_object_position_(
 			make.normal_object_position.make(init_info.dyn_buffer),
@@ -37,7 +37,7 @@ namespace ie {
 	}
 	
 	void BoxScroll::resize(sf::Vector2f size, sf::Vector2f position) {
-		BoxWithView::resize(size, position);
+		BoxView::resize(size, position);
 		
 		object_->set_size(size);
 		
