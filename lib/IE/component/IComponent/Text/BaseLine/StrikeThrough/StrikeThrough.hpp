@@ -16,7 +16,7 @@ namespace ie {
 		
 		StrikeThrough(Make&& make, LineInitInfo init_info);
 
-		void resize(float start, float end, float height);
+		void resize(float start, float end, float height) override;
 		
 		StrikeThrough* copy() const override;
 	

@@ -21,7 +21,7 @@ namespace ie {
 		
 		void move(sf::Vector2f position) override;
 		
-		const std::vector<BoxPtr<BaseLine>>& get_line();
+		const std::vector<BoxPtr<BaseLine>>& get_line() override;
 		
 		bool in(sf::Vector2f mouse_position) override;
 		
