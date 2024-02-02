@@ -4,7 +4,7 @@
 #include "IE/shared/ISValue/ISValue.hpp"
 #include "../BasicInteractiveData.hpp"
 #include "IE/component/IComponent/IComponentLayout/IComponentLayout.hpp"
-#include "../../IUninteractive/IUninteractive.hpp"
+#include "../../INonInteractive/INonInteractive.hpp"
 #include "../../IScalableLayout/IScalableLayout.hpp"
 #include "IE/component/IDrawable/IDrawable/IDrawable.hpp"
 #include "IE/enums/KeyHandler/KeyHandler.hpp"

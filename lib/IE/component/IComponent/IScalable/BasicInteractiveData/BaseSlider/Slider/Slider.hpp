@@ -6,8 +6,8 @@ namespace ie {
 	class Slider : public BaseSlider {
 	public:
 		struct Make : public virtual IScalable::Make {
-			BoxPtr<IUninteractive::Make> slider;
-			BoxPtr<IUninteractive::Make> background;
+			BoxPtr<INonInteractive::Make> slider;
+			BoxPtr<INonInteractive::Make> background;
 			MakeDyn<SRVec2F> value;
 			sf::Vector2i division;
 			sf::Vector2f slider_scale;
@@ -17,8 +17,8 @@ namespace ie {
 			sf::Vector2f wheel_sensitivity;
 			
 			Make(
-				BoxPtr<IUninteractive::Make>&& slider,
-				BoxPtr<IUninteractive::Make>&& background,
+				BoxPtr<INonInteractive::Make>&& slider,
+				BoxPtr<INonInteractive::Make>&& background,
 				MakeDyn<SRVec2F> value,
 				sf::Vector2f slider_scale = {1.0f, 0.5f},
 				Key key = Key::MouseLeft,
@@ -28,8 +28,8 @@ namespace ie {
 			);
 			
 			Make(
-				BoxPtr<IUninteractive::Make>&& slider,
-				BoxPtr<IUninteractive::Make>&& background,
+				BoxPtr<INonInteractive::Make>&& slider,
+				BoxPtr<INonInteractive::Make>&& background,
 				MakeDyn<SRVec2F> value,
 				sf::Vector2i division,
 				sf::Vector2f slider_scale = {1.0f, 0.5f},
@@ -48,9 +48,9 @@ namespace ie {
 		
 		sf::Vector2f get_min_size() const override;
 		
-		const IUninteractive& get_background() const;
+		const INonInteractive& get_background() const;
 		
-		const IUninteractive& get_slider() const;
+		const INonInteractive& get_slider() const;
 		
 	protected:
 		sf::Vector2f scale_;

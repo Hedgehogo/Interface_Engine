@@ -2,13 +2,13 @@
 
 #include <filesystem>
 
-#include "IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/Sprite.hpp"
-#include "IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Capsule/Capsule.hpp"
-#include "IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/RoundedRectangle/RoundedRectangle.hpp"
-#include "IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Video/video_convert.hpp"
-#include "IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Video/VideoFromFile/VideoFromFile.hpp"
-#include "IE/component/IComponent/IScalable/IUninteractive/Caption/Caption.hpp"
-#include "IE/component/IComponent/IScalable/IUninteractive/Bar/Bar.hpp"
+#include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Sprite/Sprite.hpp"
+#include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Capsule/Capsule.hpp"
+#include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/RoundedRectangle/RoundedRectangle.hpp"
+#include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Video/video_convert.hpp"
+#include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Video/VideoFromFile/VideoFromFile.hpp"
+#include "IE/component/IComponent/IScalable/INonInteractive/Caption/Caption.hpp"
+#include "IE/component/IComponent/IScalable/INonInteractive/Bar/Bar.hpp"
 #include "IE/component/IComponent/IScalable/Box/BoxBorderHorizontal/BoxBorderHorizontal.hpp"
 #include "IE/component/IComponent/IScalable/Box/BoxBorderVertical/BoxBorderVertical.hpp"
 #include "IE/component/IComponent/IScalable/Box/BoxBorder/BoxBorder.hpp"

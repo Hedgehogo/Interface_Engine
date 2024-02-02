@@ -1,7 +1,7 @@
 #include "BoxConstBezel.hpp"
 
 namespace ie {
-	BoxConstBezel::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& bezel, float thickness, sf::Vector2f min_size) :
+	BoxConstBezel::Make::Make(BoxPtr<IScalable::Make>&& object, BoxPtr<INonInteractive::Make>&& bezel, float thickness, sf::Vector2f min_size) :
 		object(std::move(object)), bezel(std::move(bezel)), thickness(thickness), min_size(min_size) {
 	}
 	
@@ -52,7 +52,7 @@ orl::Option<ie::BoxConstBezel::Make> ieml::Decode<char, ie::BoxConstBezel::Make>
 	auto map{node.get_map_view().except()};
 	return ie::BoxConstBezel::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
-		map.at("bezel").except().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except(),
+		map.at("bezel").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().move_except(),
 		map.at("thickness").except().as<float>().except(),
 		map.get_as<sf::Vector2f>("min-size").ok_or({})
 	};

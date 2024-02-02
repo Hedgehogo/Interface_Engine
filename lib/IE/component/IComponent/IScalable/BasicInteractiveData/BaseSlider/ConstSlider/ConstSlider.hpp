@@ -6,8 +6,8 @@ namespace ie {
 	class ConstSlider : public BaseSlider {
 	public:
 		struct Make : public virtual IScalable::Make {
-			BoxPtr<IUninteractive::Make> slider;
-			BoxPtr<IUninteractive::Make> background;
+			BoxPtr<INonInteractive::Make> slider;
+			BoxPtr<INonInteractive::Make> background;
 			MakeDyn<SRVec2F> value;
 			sf::Vector2i division;
 			float slider_scale;
@@ -17,8 +17,8 @@ namespace ie {
 			sf::Vector2f wheel_sensitivity;
 			
 			Make(
-				BoxPtr<IUninteractive::Make>&& slider,
-				BoxPtr<IUninteractive::Make>&& background,
+				BoxPtr<INonInteractive::Make>&& slider,
+				BoxPtr<INonInteractive::Make>&& background,
 				MakeDyn<SRVec2F> value,
 				float slider_scale = 1.0f,
 				Key key = Key::MouseLeft,
@@ -28,8 +28,8 @@ namespace ie {
 			);
 			
 			Make(
-				BoxPtr<IUninteractive::Make>&& slider,
-				BoxPtr<IUninteractive::Make>&& background,
+				BoxPtr<INonInteractive::Make>&& slider,
+				BoxPtr<INonInteractive::Make>&& background,
 				MakeDyn<SRVec2F> value,
 				sf::Vector2i division,
 				float slider_scale = 1.0f,

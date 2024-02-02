@@ -10,11 +10,11 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableBackground::Make, public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> object;
-			BoxPtr<IUninteractive::Make> background;
+			BoxPtr<INonInteractive::Make> background;
 			sf::Vector2f offset = {};
 			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& background, sf::Vector2f offset = {}, sf::Vector2f min_size = {});
+			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<INonInteractive::Make>&& background, sf::Vector2f offset = {}, sf::Vector2f min_size = {});
 			
 			BoxBackground* make(InitInfo init_info) override;
 		};
@@ -31,9 +31,9 @@ namespace ie {
 		
 		sf::Vector2f get_normal_size() const override;
 		
-		IUninteractive& get_background() override;
+		INonInteractive& get_background() override;
 		
-		const IUninteractive& get_background() const override;
+		const INonInteractive& get_background() const override;
 		
 		IScalable& get_object() override;
 		
@@ -46,7 +46,7 @@ namespace ie {
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		BoxPtr<IUninteractive> background_;
+		BoxPtr<INonInteractive> background_;
 		BoxPtr<IScalable> object_;
 		sf::Vector2f offset_;
 	};

@@ -4,7 +4,7 @@
 #include <IE/component/IComponent/Text/BaseTextBlock/ObjectTextBlock/ObjectTextBlock.hpp>
 #include <IE/component/IComponent/Text/BaseLine/Underline/Underline.hpp>
 #include <IE/component/IComponent/Text/BaseLine/StrikeThrough/StrikeThrough.hpp>
-#include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include "_test/IComponent/_InitInfoData/InitInfoData.hpp"
 
 /*

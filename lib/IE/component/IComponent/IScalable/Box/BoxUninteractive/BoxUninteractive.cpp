@@ -21,7 +21,7 @@ namespace ie {
 	}
 	
 	bool BoxUninteractive::update_interactions(sf::Vector2f mouse_position) {
-		return IUninteractive::update_interactions(mouse_position);
+		return INonInteractive::update_interactions(mouse_position);
 	}
 	
 	IScalable& BoxUninteractive::get_object() {

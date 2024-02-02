@@ -3,7 +3,7 @@
 namespace ie {
 	BoxConstRatioCenter::Make::Make(
 		BoxPtr<IScalable::Make>&& object,
-		BoxPtr<IUninteractive::Make>&& background,
+		BoxPtr<INonInteractive::Make>&& background,
 		float aspect_ratio,
 		sf::Vector2f min_size
 	) :
@@ -19,7 +19,7 @@ namespace ie {
 		BoxPtr<IScalable::Make>&& object,
 		BoxPtr<IScalable::Make>&& first_object,
 		BoxPtr<IScalable::Make>&& second_object,
-		BoxPtr<IUninteractive::Make>&& background,
+		BoxPtr<INonInteractive::Make>&& background,
 		float aspect_ratio,
 		sf::Vector2f min_size
 	) :
@@ -132,11 +132,11 @@ namespace ie {
 		return max(object_normal_size, background_->get_normal_size());
 	}
 	
-	IUninteractive& BoxConstRatioCenter::get_background() {
+	INonInteractive& BoxConstRatioCenter::get_background() {
 		return *background_;
 	}
 	
-	const IUninteractive& BoxConstRatioCenter::get_background() const {
+	const INonInteractive& BoxConstRatioCenter::get_background() const {
 		return *background_;
 	}
 	
@@ -190,9 +190,9 @@ orl::Option<ie::BoxConstRatioCenter::Make> ieml::Decode<char, ie::BoxConstRatioC
 		}(),
 		[&]{
 			if(auto background{map.at("background")}) {
-				return background.ok().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except();
+				return background.ok().as<ie::BoxPtr<ie::INonInteractive::Make> >().move_except();
 			}
-			return ie::make_box_ptr<ie::IUninteractive::Make, ie::Empty::Make>();
+			return ie::make_box_ptr<ie::INonInteractive::Make, ie::Empty::Make>();
 		}(),
 		map.at("aspect-ratio").except().as<float>().except(),
 		map.at("min-size").except().as<sf::Vector2f>().except(),

@@ -3,7 +3,7 @@
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/enums/Corner/Corner.hpp"
 #include "../Box.hpp"
-#include "../../IUninteractive/OnlyDrawable/Empty/Empty.hpp"
+#include "../../INonInteractive/OnlyDrawable/Empty/Empty.hpp"
 #include "../../IScalableLayout/IScalableBackground/IScalableBackground.hpp"
 #include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 
@@ -13,7 +13,7 @@ namespace ie {
 		struct Make : public virtual Box::Make, public virtual IScalableBackground::Make, public virtual IScalableTwoObjects::Make {
 			BoxPtr<IScalable::Make> const_object;
 			BoxPtr<IScalable::Make> second_object;
-			BoxPtr<IUninteractive::Make> background;
+			BoxPtr<INonInteractive::Make> background;
 			float aspect_ratio;
 			Corner corner = Corner::UpLeft;
 			sf::Vector2f min_size = {};
@@ -21,7 +21,7 @@ namespace ie {
 			Make(
 				BoxPtr<IScalable::Make>&& const_object,
 				BoxPtr<IScalable::Make>&& second_object,
-				BoxPtr<IUninteractive::Make>&& background,
+				BoxPtr<INonInteractive::Make>&& background,
 				float aspect_ratio = 1.f,
 				Corner corner = Corner::UpLeft,
 				sf::Vector2f min_size = {}
@@ -50,9 +50,9 @@ namespace ie {
 		
 		sf::Vector2f get_normal_size() const override;
 		
-		IUninteractive& get_background() override;
+		INonInteractive& get_background() override;
 		
-		const IUninteractive& get_background() const override;
+		const INonInteractive& get_background() const override;
 		
 		IScalable& get_first_object() override;
 		
@@ -66,7 +66,7 @@ namespace ie {
 	
 	protected:
 		DrawManager second_draw_manager_;
-		BoxPtr<IUninteractive> background_;
+		BoxPtr<INonInteractive> background_;
 		BoxPtr<IScalable> const_object_;
 		BoxPtr<IScalable> second_object_;
 		bool vertical_side_, horizontal_side_;      //true = up   true = left

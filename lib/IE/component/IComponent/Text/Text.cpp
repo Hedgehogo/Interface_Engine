@@ -6,7 +6,7 @@ namespace ie {
 	Text::Make::Make(
 		std::vector<BoxPtr<BaseTextBlock::Make>>&& text_blocks,
 		sf::Font* font,
-		BoxPtr<IUninteractive::Make>&& background,
+		BoxPtr<INonInteractive::Make>&& background,
 		size_t size,
 		sf::Color text_color,
 		sf::Color text_selection_color,

@@ -2,8 +2,8 @@
 
 namespace ie {
 	Slider::Make::Make(
-		BoxPtr<IUninteractive::Make>&& slider,
-		BoxPtr<IUninteractive::Make>&& background,
+		BoxPtr<INonInteractive::Make>&& slider,
+		BoxPtr<INonInteractive::Make>&& background,
 		MakeDyn<SRVec2F> value,
 		sf::Vector2f slider_scale,
 		Key key,
@@ -22,8 +22,8 @@ namespace ie {
 	}
 	
 	Slider::Make::Make(
-		BoxPtr<IUninteractive::Make>&& slider,
-		BoxPtr<IUninteractive::Make>&& background,
+		BoxPtr<INonInteractive::Make>&& slider,
+		BoxPtr<INonInteractive::Make>&& background,
 		MakeDyn<SRVec2F> value,
 		sf::Vector2i division,
 		sf::Vector2f slider_scale,
@@ -75,19 +75,19 @@ namespace ie {
 		return max(min_size, background_->get_min_size());
 	}
 	
-	const IUninteractive& Slider::get_background() const {
+	const INonInteractive& Slider::get_background() const {
 		return *background_;
 	}
 	
-	const IUninteractive& Slider::get_slider() const {
+	const INonInteractive& Slider::get_slider() const {
 		return *slider_;
 	}
 }
 
 orl::Option<ie::Slider::Make> ieml::Decode<char, ie::Slider::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
-	auto slider{map.at("slider").except().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except()};
-	auto background{map.at("background").except().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except()};
+	auto slider{map.at("slider").except().as < ie::BoxPtr < ie::INonInteractive::Make > > ().move_except()};
+	auto background{map.at("background").except().as < ie::BoxPtr < ie::INonInteractive::Make > > ().move_except()};
 	auto value{map.at("value").except().as<ie::MakeDyn<ie::SRVec2F> >().move_except()};
 	auto slider_scale{map.get_as<sf::Vector2f>("slider-scale").ok_or({1.0f, 0.5f})};
 	auto key{map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft)};

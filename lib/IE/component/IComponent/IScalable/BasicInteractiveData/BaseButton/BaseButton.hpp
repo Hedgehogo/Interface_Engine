@@ -2,7 +2,7 @@
 
 #include "../BasicInteractiveData.hpp"
 #include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
-#include "../../IUninteractive/IUninteractive.hpp"
+#include "IE/component/IComponent/IScalable/INonInteractive/INonInteractive.hpp"
 
 namespace ie {
 	class BaseButton : public virtual IScalableObject, public virtual IUpdatable {

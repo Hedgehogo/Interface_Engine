@@ -2,7 +2,7 @@
 
 TEST(Sprite, draw) {
     sf::Texture test_texture;
-    test_texture.loadFromFile("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/src/gigachad.jpg");
+    test_texture.loadFromFile("../test/tests/7-stage-object/IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Sprite/src/gigachad.jpg");
 
     Program test_program{
         new ie::Interface{
@@ -18,7 +18,7 @@ TEST(Sprite, draw) {
 TEST(Sprite, YAML) {
     Program test_program{
 	    new ie::Interface{
-            ie::load_from_yaml<ie::IScalable>("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/src/test.yaml")
+            ie::load_from_yaml<ie::IScalable>("../test/tests/7-stage-object/IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Sprite/src/test.yaml")
         }
     };
 
@@ -26,7 +26,7 @@ TEST(Sprite, YAML) {
 	ASSERT_TRUE((test_program.interface->get_normal_size() == sf::Vector2f{10, 10}));
 
     sf::Image test_image;
-    test_image.loadFromFile("../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/src/gigachad.jpg");
+    test_image.loadFromFile("../test/tests/7-stage-object/IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Sprite/src/gigachad.jpg");
 
     sf::Image render_image{test_program.render_texture.getTexture().copyToImage()};
 

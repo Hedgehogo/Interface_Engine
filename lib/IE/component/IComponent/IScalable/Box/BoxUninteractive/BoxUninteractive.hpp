@@ -2,12 +2,12 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../Box.hpp"
-#include "../../IUninteractive/IUninteractiveLayout/IUninteractiveObject/IUninteractiveObject.hpp"
+#include "../../INonInteractive/INonInteractiveLayout/INonInteractiveObject/INonInteractiveObject.hpp"
 
 namespace ie {
-	class BoxUninteractive : public Box, public virtual IUninteractiveObject {
+	class BoxUninteractive : public Box, public virtual INonInteractiveObject {
 	public:
-		struct Make : public virtual Box::Make, public virtual IUninteractiveObject::Make {
+		struct Make : public virtual Box::Make, public virtual INonInteractiveObject::Make {
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f min_size = {};
 			

@@ -1,5 +1,5 @@
 type: Sprite
-texture: ../test/tests/7-stage-object/IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Sprite/src/gigachad.jpg
+texture: ../test/tests/7-stage-object/IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Sprite/src/gigachad.jpg
 min-size: 5, 5
 rect:
   position: 0, 0

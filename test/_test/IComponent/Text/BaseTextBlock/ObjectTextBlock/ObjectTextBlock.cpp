@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/Text/BaseTextBlock/ObjectTextBlock/ObjectTextBlock.hpp>
-#include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/Empty/Empty.hpp>
+#include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Empty/Empty.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 
 TEST(IComponent_Text, ObjectTextBlock) {

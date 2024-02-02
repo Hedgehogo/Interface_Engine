@@ -131,15 +131,15 @@ namespace ie {
 			add_fn_make<OnlyDrawable>(video_convert, "Video");
 			//add_fn<Box>(switcher_tabs_decode_pointer, "SwitcherTabs", "SwitcherT");
 			
-			add_type_make_named<IUninteractive, Empty>();
-			add_type_make_named<IUninteractive, FullColor>();
-			add_type_make_named<IUninteractive, RoundedRectangle>();
-			add_type_make_named<IUninteractive, Capsule>();
-			add_type_make_named<IUninteractive, Sprite>();
-			add_type_make_named<IUninteractive, Bar>();
-			add_type_make_named<IUninteractive, Caption>();
-			add_type_make_named<IUninteractive, BoxUninteractive>();
-			add_type_make<IScalable, IUninteractive>();
+			add_type_make_named<INonInteractive, Empty>();
+			add_type_make_named<INonInteractive, FullColor>();
+			add_type_make_named<INonInteractive, RoundedRectangle>();
+			add_type_make_named<INonInteractive, Capsule>();
+			add_type_make_named<INonInteractive, Sprite>();
+			add_type_make_named<INonInteractive, Bar>();
+			add_type_make_named<INonInteractive, Caption>();
+			add_type_make_named<INonInteractive, BoxUninteractive>();
+			add_type_make<IScalable, INonInteractive>();
 			add_type_make_named<Box, BoxDebug>();
 			add_type_make_named<Box, BoxBackground>();
 			add_type_make_named<Box, BoxAlternative>();

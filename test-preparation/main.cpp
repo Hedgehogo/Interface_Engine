@@ -92,14 +92,11 @@ void establish_friendship(
 			}
 			
 			
-			if(std::filesystem::last_write_time(first_path) > std::filesystem::last_write_time(second_path) || edit) {
-				std::ofstream second_file{second_path};
-				if(second_file.is_open()) {
-					second_file << str_file;
-					second_file.close();
-				}
+			std::ofstream second_file{second_path};
+			if(second_file.is_open()) {
+				second_file << str_file;
+				second_file.close();
 			}
-			
 		}
 		first_file.close();
 	}

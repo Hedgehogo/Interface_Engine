@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/BasicInteractiveData/BaseSlider/ConstSlider/ConstSlider.hpp>
-#include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <IE/shared/ISValue/SRanged/SRanged.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_image_equal/image_equal.hpp"
@@ -13,8 +13,8 @@ TEST(IComponent, ConstSlider) {
 	ie::SRVec2F value{value_x, value_y};
 	ie::ConstSlider const_slider{
 		{
-			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Green),
-			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Red),
+			ie::make_box_ptr<ie::INonInteractive::Make, ie::FullColor::Make>(sf::Color::Green),
+			ie::make_box_ptr<ie::INonInteractive::Make, ie::FullColor::Make>(sf::Color::Red),
 			value
 		}, data.make_init_info()
 	};

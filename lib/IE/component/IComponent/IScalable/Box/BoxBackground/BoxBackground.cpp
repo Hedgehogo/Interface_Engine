@@ -3,7 +3,7 @@
 namespace ie {
 	BoxBackground::Make::Make(
 		BoxPtr<IScalable::Make>&& object,
-		BoxPtr<IUninteractive::Make>&& background,
+		BoxPtr<INonInteractive::Make>&& background,
 		sf::Vector2f offset,
 		sf::Vector2f min_size
 	) :
@@ -44,11 +44,11 @@ namespace ie {
 		return max(object_->get_normal_size() + offset_ * 2.f, background_->get_normal_size());
 	}
 	
-	IUninteractive& BoxBackground::get_background() {
+	INonInteractive& BoxBackground::get_background() {
 		return *background_;
 	}
 	
-	const IUninteractive& BoxBackground::get_background() const {
+	const INonInteractive& BoxBackground::get_background() const {
 		return *background_;
 	}
 	
@@ -80,7 +80,7 @@ orl::Option<ie::BoxBackground::Make> ieml::Decode<char, ie::BoxBackground::Make>
 	auto map{node.get_map_view().except()};
 	return ie::BoxBackground::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
-		map.at("background").except().as<ie::BoxPtr<ie::IUninteractive::Make> >().move_except(),
+		map.at("background").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().move_except(),
 		map.get_as<sf::Vector2f>("offset").ok_or({}),
 		map.get_as<sf::Vector2f>("min-size").ok_or({}),
 	};

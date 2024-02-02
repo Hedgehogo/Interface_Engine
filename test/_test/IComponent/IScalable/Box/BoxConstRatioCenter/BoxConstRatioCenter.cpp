@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/Box/BoxConstRatioCenter/BoxConstRatioCenter.hpp>
-#include <IE/component/IComponent/IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp>
+#include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_image_equal/image_equal.hpp"
 
@@ -12,7 +12,7 @@ TEST(IComponent, BoxConstRatioCenter) {
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Blue),
-			ie::make_box_ptr<ie::IUninteractive::Make, ie::FullColor::Make>(sf::Color::Yellow),
+			ie::make_box_ptr<ie::INonInteractive::Make, ie::FullColor::Make>(sf::Color::Yellow),
 		},
 		data.make_init_info()
 	};

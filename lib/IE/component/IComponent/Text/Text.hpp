@@ -2,7 +2,7 @@
 
 #include "BaseTextBlock/BaseTextBlock.hpp"
 #include "BaseResizer/Resizer/Resizer.hpp"
-#include "../IScalable/IUninteractive/OnlyDrawable/FullColor/FullColor.hpp"
+#include "../IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp"
 #include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 
 namespace ie {
@@ -17,7 +17,7 @@ namespace ie {
 		struct Make : public virtual IComponent::Make {
 			std::vector<BoxPtr<BaseTextBlock::Make> > text_blocks;
 			sf::Font* font;
-			BoxPtr<IUninteractive::Make> background = make_box_ptr<FullColor::Make>(sf::Color::White);
+			BoxPtr<INonInteractive::Make> background = make_box_ptr<FullColor::Make>(sf::Color::White);
 			size_t size = 14;
 			sf::Color text_color = sf::Color::Black;
 			sf::Color text_selection_color = sf::Color::White;
@@ -31,7 +31,7 @@ namespace ie {
 			explicit Make(
 				std::vector<BoxPtr<BaseTextBlock::Make> >&& text_blocks,
 				sf::Font* font,
-				BoxPtr<IUninteractive::Make>&& background = make_box_ptr<FullColor::Make>(sf::Color::White),
+				BoxPtr<INonInteractive::Make>&& background = make_box_ptr<FullColor::Make>(sf::Color::White),
 				size_t size = 14,
 				sf::Color text_color = sf::Color::Black,
 				sf::Color text_selection_color = sf::Color::White,
@@ -98,7 +98,7 @@ namespace ie {
 		sf::Sprite sprite;
 		DrawManager draw_manager;
 		
-		BoxPtr<IUninteractive> background;
+		BoxPtr<INonInteractive> background;
 		
 		bool interact;
 		bool old_interact;

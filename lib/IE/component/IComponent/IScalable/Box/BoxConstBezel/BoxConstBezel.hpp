@@ -3,7 +3,7 @@
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/interaction/InteractionManager/InteractionManager.hpp"
 #include "../Box.hpp"
-#include "../../IUninteractive/IUninteractive.hpp"
+#include "../../INonInteractive/INonInteractive.hpp"
 #include "../../IScalableLayout/IScalableObject/IScalableObject.hpp"
 
 namespace ie {
@@ -11,11 +11,11 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> object;
-			BoxPtr<IUninteractive::Make> bezel;
+			BoxPtr<INonInteractive::Make> bezel;
 			float thickness;
 			sf::Vector2f min_size = {};
 			
-			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<IUninteractive::Make>&& bezel, float thickness, sf::Vector2f min_size = {});
+			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<INonInteractive::Make>&& bezel, float thickness, sf::Vector2f min_size = {});
 			
 			BoxConstBezel* make(InitInfo init_info) override;
 		};
@@ -37,7 +37,7 @@ namespace ie {
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
-		BoxPtr<IUninteractive> bezel_;
+		BoxPtr<INonInteractive> bezel_;
 		BoxPtr<IScalable> object_;
 		float thickness_;
 	};

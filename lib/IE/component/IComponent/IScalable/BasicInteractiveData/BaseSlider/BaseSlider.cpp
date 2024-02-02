@@ -3,8 +3,8 @@
 
 namespace ie {
 	BaseSlider::BaseSlider(
-		BoxPtr<IUninteractive::Make>&& slider,
-		BoxPtr<IUninteractive::Make>&& background,
+		BoxPtr<INonInteractive::Make>&& slider,
+		BoxPtr<INonInteractive::Make>&& background,
 		BoxPtr<SliderInteraction::Make>&& interaction,
 		MakeDyn<SRVec2F>&& value,
 		InitInfo init_info
