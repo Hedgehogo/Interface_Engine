@@ -12,8 +12,6 @@ namespace ie {
 	
 	class InteractionManager;
 	
-	class InteractionStack;
-	
 	class IPanelManager;
 	
 	struct InitInfo {
@@ -23,7 +21,6 @@ namespace ie {
 		DrawManager& draw_manager;
 		UpdateManager& update_manager;
 		InteractionManager& interaction_manager;
-		InteractionStack& interaction_stack;
 		IPanelManager& panel_manager;
 		
 		InitInfo(
@@ -33,7 +30,6 @@ namespace ie {
 			DrawManager& draw_manager_,
 			UpdateManager& update_manager_,
 			InteractionManager& interaction_manager_,
-			InteractionStack& interaction_stack_,
 			IPanelManager& panel_manager_
 		);
 		
@@ -48,8 +44,6 @@ namespace ie {
 		InitInfo copy(UpdateManager& update_manager_) const;
 		
 		InitInfo copy(InteractionManager& interaction_manager_) const;
-		
-		InitInfo copy(InteractionStack& interaction_stack_) const;
 		
 		InitInfo copy(IPanelManager& panel_manager_) const;
 	};

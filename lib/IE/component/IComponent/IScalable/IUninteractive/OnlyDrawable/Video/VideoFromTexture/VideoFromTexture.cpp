@@ -75,6 +75,6 @@ namespace ie {
 	void VideoFromTexture::resize(sf::Vector2f size, sf::Vector2f position) {
 		this->size = size;
 		sprite.setPosition(position);
-		sprite.setScale(size / sf::Vector2f{sf::Vector2i{rect.width, rect.height}});
+		sprite.setScale(div_xy(size, sf::Vector2f{sf::Vector2i{rect.width, rect.height}}));
 	}
 }

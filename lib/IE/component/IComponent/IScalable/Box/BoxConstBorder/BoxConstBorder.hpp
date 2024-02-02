@@ -2,7 +2,6 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/enums/Side/Side.hpp"
-#include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 

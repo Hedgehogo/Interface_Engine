@@ -32,7 +32,7 @@ namespace ie {
 	
 	sf::Vector2f BoxScroll::get_new_object_position(sf::Vector2f normal_object_position) {
 		sf::Vector2f max_offset{object_->get_size() - layout_.size};
-		sf::Vector2f offset{max_offset * normal_object_position};
+		sf::Vector2f offset{mul_xy(max_offset, normal_object_position)};
 		return layout_.position - offset;
 	}
 	

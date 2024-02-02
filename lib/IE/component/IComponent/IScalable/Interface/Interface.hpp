@@ -5,7 +5,6 @@
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/panel/IPanelManager/PanelManager/PanelManager.hpp"
 #include "IE/interaction/InteractionManager/InteractionManager.hpp"
-#include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "IE/interaction/IAction/WheelAction/WheelAction.hpp"
 #include "IE/shared/DynBuffer/DynBuffer.hpp"
 #include "../IScalable.hpp"
@@ -19,12 +18,10 @@ namespace ie {
 		struct Make : public virtual IScalable::Make {
 			BoxPtr<IScalable::Make> object;
 			AnimationManager animation_manager = AnimationManager{{}};
-			BoxPtr<InteractionStack> interaction_stack = make_box_ptr<InteractionStack>();
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
-				AnimationManager animation_manager = AnimationManager{{}},
-				BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
+				AnimationManager animation_manager = AnimationManager{{}}
 			);
 			
 			Interface* make(InitInfo init_info) override;
@@ -36,8 +33,7 @@ namespace ie {
 			sf::RenderWindow& window,
 			DynBuffer& dyn_buffer,
 			BoxPtr<IScalable::Make>&& object,
-			AnimationManager animation_manager = AnimationManager{{}},
-			BoxPtr<InteractionStack>&& interaction_stack = make_box_ptr<InteractionStack>()
+			AnimationManager animation_manager = AnimationManager{{}}
 		);
 		
 		sf::RenderTarget& get_render_target();
@@ -84,7 +80,6 @@ namespace ie {
 		DrawManager draw_manager_;
 		UpdateManager update_manager_;
 		InteractionManager interaction_manager_;
-		BoxPtr<InteractionStack> interaction_stack_;
 		PanelManager panel_manager_;
 		AnimationManager animation_manager_;
 		BoxPtr<IScalable> object_;

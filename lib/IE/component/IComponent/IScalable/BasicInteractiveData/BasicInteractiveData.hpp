@@ -8,17 +8,12 @@ namespace ie {
 	public:
 		BasicInteractiveData(BoxPtr<typename IBasicInteraction<T>::Make>&& interaction, InitInfo init_info, T additional);
 		
-		BasicInteractiveData(BoxPtr<IBasicInteraction<T> >&& interaction, InitInfo init_info, T additional);
-		
-		explicit BasicInteractiveData(BoxPtr<IBasicInteraction<T> >&& interaction);
-		
-		void init(InitInfo init_info, T additional);
+		BasicInteractiveData(BoxPtr<IBasicInteraction<T> >&& interaction, InitInfo init_info);
 		
 		void update();
 		
 		void update_interactions();
 	
-		InteractionStack* interaction_stack;
 		InteractionManager* interaction_manager;
 		BoxPtr<IBasicInteraction<T> > interaction;
 	

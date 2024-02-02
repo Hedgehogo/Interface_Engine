@@ -18,7 +18,6 @@ namespace ie {
 		window_(&init_info.window),
 		render_target_(&init_info.render_target),
 		dyn_buffer_(&init_info.dyn_buffer),
-		interaction_stack_(&init_info.interaction_stack),
 		panel_manager_interceptor_(init_info.panel_manager),
 		object_(object->make(
 			{
@@ -28,7 +27,6 @@ namespace ie {
 				draw_manager_,
 				update_manager_,
 				interaction_manager_,
-				init_info.interaction_stack,
 				panel_manager_interceptor_
 			}
 		)) {
@@ -48,7 +46,6 @@ namespace ie {
 			draw_manager_,
 			update_manager_,
 			interaction_manager_,
-			*interaction_stack_,
 			panel_manager_interceptor_
 		};
 		object_ = BoxPtr<IScalable>{new_object->make(init_info)};

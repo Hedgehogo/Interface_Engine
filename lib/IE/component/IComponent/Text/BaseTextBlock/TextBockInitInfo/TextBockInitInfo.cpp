@@ -8,7 +8,6 @@ namespace ie {
 		DrawManager& draw_manager,
 		UpdateManager& update_manager,
 		InteractionManager& interaction_manager,
-		InteractionStack& interaction_stack,
 		IPanelManager& panel_manager,
 		sf::RenderTarget& text_render_target,
 		DrawManager& text_draw_manager,
@@ -21,7 +20,6 @@ namespace ie {
 			draw_manager,
 			update_manager,
 			interaction_manager,
-			interaction_stack,
 			panel_manager
 		),
 		text_render_target(text_render_target),

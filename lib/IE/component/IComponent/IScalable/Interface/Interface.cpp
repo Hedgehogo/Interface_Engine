@@ -3,11 +3,10 @@
 #include <cmath>
 #include <IEML/parser.hpp>
 #include "IE/modules/yaml-cpp/modules/load_modules.hpp"
-#include "IE/window/Window/Window.hpp"
 
 namespace ie {
-	Interface::Make::Make(BoxPtr<IScalable::Make>&& object, AnimationManager animation_manager, BoxPtr<InteractionStack>&& interaction_stack) :
-		object(std::move(object)), animation_manager(std::move(animation_manager)), interaction_stack(std::move(interaction_stack)) {
+	Interface::Make::Make(BoxPtr<IScalable::Make>&& object, AnimationManager animation_manager) :
+		object(std::move(object)), animation_manager(std::move(animation_manager)) {
 	}
 	
 	Interface* Interface::Make::make(InitInfo init_info) {
@@ -17,7 +16,6 @@ namespace ie {
 	Interface::Interface(Make&& make, InitInfo init_info) :
 		window_(&init_info.window),
 		render_target_(&init_info.render_target),
-		interaction_stack_(std::move(make.interaction_stack)),
 		animation_manager_(std::move(make.animation_manager)),
 		object_(make.object->make(
 			{
@@ -27,7 +25,6 @@ namespace ie {
 				this->draw_manager_,
 				this->update_manager_,
 				this->interaction_manager_,
-				*this->interaction_stack_,
 				this->panel_manager_
 			}
 		)),
@@ -40,12 +37,10 @@ namespace ie {
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
 		BoxPtr<IScalable::Make>&& object,
-		AnimationManager animation_manager,
-		BoxPtr<InteractionStack>&& interaction_stack
+		AnimationManager animation_manager
 	) :
 		window_(&window),
 		render_target_(&window),
-		interaction_stack_(std::move(interaction_stack)),
 		animation_manager_(std::move(animation_manager)),
 		object_(object->make(
 			{
@@ -55,7 +50,6 @@ namespace ie {
 				this->draw_manager_,
 				this->update_manager_,
 				this->interaction_manager_,
-				*this->interaction_stack_,
 				this->panel_manager_
 			}
 		)),

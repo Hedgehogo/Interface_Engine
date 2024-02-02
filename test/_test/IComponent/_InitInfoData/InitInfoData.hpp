@@ -16,7 +16,6 @@ struct InitInfoData {
 	ie::DrawManager draw_manager{};
 	ie::UpdateManager update_manager{};
 	ie::InteractionManager interaction_manager{};
-	ie::InteractionStack interaction_stack{};
 	ie::PanelManager panel_manager{};
 	
 	InitInfoData(sf::Vector2u size = {1, 1});

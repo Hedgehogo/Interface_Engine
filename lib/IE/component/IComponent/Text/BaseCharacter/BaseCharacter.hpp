@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IE/interaction/InteractionManager/InteractionManager.hpp"
-#include "IE/interaction/InteractionStack/InteractionStack.hpp"
 #include "../BaseLine/BaseLine.hpp"
 
 namespace ie {

@@ -42,7 +42,7 @@ namespace ie {
 	void VideoFromFile::resize(sf::Vector2f size, sf::Vector2f position) {
 		this->size = size;
 		sprite.setPosition(position);
-		sprite.setScale(size / sf::Vector2f{size_video});
+		sprite.setScale(div_xy(size, sf::Vector2f{size_video}));
 	}
 	
 	sf::Vector2f VideoFromFile::get_area_position() const {

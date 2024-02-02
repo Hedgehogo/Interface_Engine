@@ -14,7 +14,6 @@ ie::InitInfo InitInfoData::make_init_info() {
 		draw_manager,
 		update_manager,
 		interaction_manager,
-		interaction_stack,
 		panel_manager
 	};
 }

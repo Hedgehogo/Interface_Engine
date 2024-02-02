@@ -41,7 +41,6 @@ namespace ie {
 		sf::RenderTarget* render_target_;
 		DynBuffer* dyn_buffer_;
 		InteractionManager interaction_manager_;
-		InteractionStack* interaction_stack_;
 		PanelManagerInterceptor panel_manager_interceptor_;
 		BoxPtr<IScalable> object_;
 	};
