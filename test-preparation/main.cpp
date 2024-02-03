@@ -91,7 +91,6 @@ void establish_friendship(
 				}
 			}
 			
-			
 			std::ofstream second_file{second_path};
 			if(second_file.is_open()) {
 				second_file << str_file;

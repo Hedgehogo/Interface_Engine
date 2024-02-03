@@ -4,13 +4,6 @@ namespace ie {
 	PanelManagerInterceptor::PanelManagerInterceptor(IPanelManager& panel_manager) : panel_manager_(&panel_manager) {
 	}
 	
-	PanelManagerInterceptor::PanelManagerInterceptor() : panel_manager_(nullptr) {
-	}
-	
-	void PanelManagerInterceptor::init(IPanelManager& panel_manager) {
-		this->panel_manager_ = &panel_manager;
-	}
-	
 	void PanelManagerInterceptor::clear() {
 		for(const auto& panel: panels_) {
 			panel_manager_->remove_panel(panel);

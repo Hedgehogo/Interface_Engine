@@ -15,10 +15,6 @@ namespace ie {
 		
 		Underline(Make&& make, LineInitInfo init_info);
 		
-		Underline(orl::Option<sf::Color> color = {});
-		
-		void init(LineInitInfo init_info) override;
-		
 		void resize(float start, float end, float height) override;
 		
 		Underline* copy() const override;

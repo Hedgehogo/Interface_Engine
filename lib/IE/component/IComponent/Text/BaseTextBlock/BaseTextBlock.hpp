@@ -15,9 +15,7 @@ namespace ie {
 			virtual ~Make() = default;
 		};
 		
-		BaseTextBlock();
-		
-		BaseTextBlock(TextVariables text_variables);
+		explicit BaseTextBlock(TextVariables text_variables);
 		
 		virtual void set_text_variables(
 			sf::Color TextColor,
@@ -30,8 +28,6 @@ namespace ie {
 			sf::Text::Style style
 		);
 		
-		virtual void init(TextBockInitInfo text_block_init_info) = 0;
-		
 		virtual void set_kerning(char32_t character);
 		
 		virtual bool in(sf::Vector2f mouse_position) = 0;
@@ -41,8 +37,6 @@ namespace ie {
 		virtual void update() = 0;
 		
 		virtual bool update_interactions(sf::Vector2f mouse_position) = 0;
-		
-		virtual BaseTextBlock* copy() = 0;
 	
 		virtual ~BaseTextBlock() = default;
 		

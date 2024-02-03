@@ -22,6 +22,7 @@ namespace ie {
 		Make&& make,
 		TextBockInitInfo init_info
 	) :
+		BaseTextBlock({}),
 		object_character(
 			BoxPtr<IScalable>{
 				[&]() {
@@ -33,10 +34,6 @@ namespace ie {
 			},
 			make.special
 		) {
-	}
-	
-	void ObjectTextBlock::init(TextBockInitInfo) {
-		throw std::runtime_error("ObjectTextBlock::init() not correct");
 	}
 	
 	bool ObjectTextBlock::in(sf::Vector2f mouse_position) {
@@ -52,10 +49,6 @@ namespace ie {
 	
 	bool ObjectTextBlock::update_interactions(sf::Vector2f mouse_position) {
 		return object_character.update_interactions(mouse_position);
-	}
-	
-	BaseTextBlock* ObjectTextBlock::copy() {
-		return new ObjectTextBlock{*this};
 	}
 	
 	/*old_yaml_decode_pointer_impl

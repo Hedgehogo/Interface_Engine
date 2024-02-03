@@ -303,10 +303,6 @@ namespace ie {
 		return get_min_size();
 	}
 	
-	Resizer* Resizer::copy() {
-		return new Resizer{*this};
-	}
-	
 	/*old_yaml_decode_pointer_impl
 	bool DecodePointer<Resizer>::decode_pointer(const YAML::Node& node, Resizer*& resizer) {
 		resizer = new Resizer{

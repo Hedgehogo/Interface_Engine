@@ -7,10 +7,6 @@ namespace ie {
 	public:
 		PanelManagerInterceptor(IPanelManager& panel_manager);
 		
-		PanelManagerInterceptor();
-		
-		void init(IPanelManager& panel_manager);
-		
 		void clear();
 		
 		bool is_free() override;

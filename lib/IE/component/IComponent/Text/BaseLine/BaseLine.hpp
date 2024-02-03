@@ -13,11 +13,7 @@ namespace ie {
 		};
 		
 		BaseLine(sf::PrimitiveType type, size_t vertex_count, orl::Option<sf::Color> color, LineInitInfo init_info);
-		
-		BaseLine(sf::PrimitiveType type, size_t vertex_count = 0, orl::Option<sf::Color> color = {});
-		
-		virtual void init(LineInitInfo init_info);
-		
+
 		virtual void draw();
 		
 		virtual void move(sf::Vector2f position);

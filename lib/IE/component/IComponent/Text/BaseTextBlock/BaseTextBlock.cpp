@@ -1,9 +1,6 @@
 #include "BaseTextBlock.hpp"
 
 namespace ie {
-	BaseTextBlock::BaseTextBlock() {
-	}
-	
 	BaseTextBlock::BaseTextBlock(TextVariables text_variables) : text_variables(text_variables) {
 	}
 	

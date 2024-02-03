@@ -15,12 +15,8 @@ namespace ie {
 		};
 		
 		StrikeThrough(Make&& make, LineInitInfo init_info);
-		
-		StrikeThrough(orl::Option<sf::Color> color = {}, float strike_through_offset = 0.3);
-		
-		void init(LineInitInfo init_info);
-		
-		void resize(float start, float end, float height);
+
+		void resize(float start, float end, float height) override;
 		
 		StrikeThrough* copy() const override;
 	

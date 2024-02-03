@@ -58,40 +58,6 @@ namespace ie {
 		this->interaction_manager = &init_info.text_interaction_manager;
 	}
 	
-	InteractiveTextBlock::InteractiveTextBlock(
-		BoxPtr<IBaseInteraction>&& interaction,
-		std::u32string text,
-		orl::Option<sf::Color> text_color,
-		orl::Option<sf::Font*> font,
-		orl::Option<sf::Text::Style> style,
-		std::vector<BoxPtr<BaseLine>>&& lines,
-		orl::Option<size_t> size,
-		orl::Option<sf::Color> text_selection_color,
-		orl::Option<sf::Color> background_selection_color,
-		orl::Option<sf::Color> inactive_text_selection_color,
-		orl::Option<sf::Color> inactive_background_selection_color
-	) : TextBlock(
-			std::move(text),
-			text_color,
-			font,
-			style,
-			std::move(lines),
-			size,
-			text_selection_color,
-			background_selection_color,
-			inactive_text_selection_color,
-			inactive_background_selection_color
-		),
-		interact(false),
-		old_interact(false),
-		interaction(std::move(interaction)) {
-	}
-	
-	void InteractiveTextBlock::init(TextBockInitInfo text_block_init_info) {
-		TextBlock::init(text_block_init_info);
-		this->interaction_manager = &text_block_init_info.interaction_manager;
-	}
-	
 	void InteractiveTextBlock::update() {
 		if(interact != old_interact) {
 			old_interact = interact;
@@ -116,10 +82,6 @@ namespace ie {
 			}
 		}
 		return false;
-	}
-	
-	InteractiveTextBlock* InteractiveTextBlock::copy() {
-		return nullptr;
 	}
 	
 	/*old_yaml_decode_pointer_impl

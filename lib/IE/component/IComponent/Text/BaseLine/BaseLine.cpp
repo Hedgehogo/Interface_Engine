@@ -19,19 +19,6 @@ namespace ie {
 		this->render_target = &init_info.render_target;
 	}
 	
-	BaseLine::BaseLine(sf::PrimitiveType type, size_t vertex_count, orl::Option<sf::Color> color) : vertex_array(type, vertex_count) {
-		for(size_t i = 0; i < vertex_array.getVertexCount(); ++i)
-			vertex_array[i].color = color.except();
-	}
-	
-	void BaseLine::init(LineInitInfo init_info) {
-		this->render_target = &init_info.render_target;
-		
-		if(vertex_array[0].color == sf::Color{255, 255, 255, 0})
-			for(size_t i = 0; i < vertex_array.getVertexCount(); ++i)
-				vertex_array[i].color = init_info.color;
-	}
-	
 	void BaseLine::draw() {
 		render_target->draw(vertex_array);
 	}

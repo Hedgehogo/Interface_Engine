@@ -20,9 +20,7 @@ namespace ie {
 		};
 		
 		ObjectTextBlock(Make&& make, TextBockInitInfo init_info);
-		
-		void init(TextBockInitInfo text_block_init_info) override;
-		
+
 		bool in(sf::Vector2f mouse_position) override;
 		
 		std::vector<BaseCharacter*> get_characters() override;
@@ -30,8 +28,6 @@ namespace ie {
 		void update() override;
 		
 		bool update_interactions(sf::Vector2f mouse_position) override;
-		
-		BaseTextBlock* copy() override;
 	
 	protected:
 		ObjectCharacter object_character;
