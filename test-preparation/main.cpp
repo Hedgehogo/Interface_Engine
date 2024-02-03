@@ -17,11 +17,6 @@ void copyFile(const std::filesystem::path& sourcePath, const std::filesystem::pa
 	}
 }
 
-bool is_file_empty(const std::filesystem::path& filename) {
-	std::ifstream file(filename, std::ios::ate);
-	return file.tellg() == 0;
-}
-
 template<bool B>
 void copy_file(
 	const std::filesystem::path& first_path,
@@ -40,7 +35,7 @@ void copy_file(
 			std::filesystem::create_directories(second_dir);
 		}
 		std::filesystem::copy_file(first_path, second_path);
-	} else if(is_file_empty(second_path) || std::filesystem::last_write_time(first_path) > std::filesystem::last_write_time(second_path)) {
+	} else {
 		copyFile(first_path, second_path);
 	}
 }
@@ -71,34 +66,30 @@ void establish_friendship(
 	const std::filesystem::path& test_lib_dir
 ) {
 	std::filesystem::path second_path{test_lib_dir.string() + first_path.string().erase(0, lib_dir.string().length())};
-	if(std::filesystem::last_write_time(first_path) > std::filesystem::last_write_time(second_path) || is_file_empty(second_path)) {
-		std::ifstream first_file{first_path};
+	std::ifstream first_file{first_path};
+	
+	if(first_file.is_open()) {
+		std::string str_file;
+		std::getline(first_file, str_file, '\0');
 		
-		if(first_file.is_open()) {
-			bool edit = false;
-			std::string str_file;
-			std::getline(first_file, str_file, '\0');
-			
-			static constexpr auto pattern = ctll::fixed_string{R"([ \t]*class ([a-z_A-Z][a-z_A-Z0-9]+) *(\<|:|\{).*?\n)"};
-			
-			for(auto [whole_match, name, b]: ctre::search_all<pattern>(str_file)) {
-				if(auto find{tests_data.find(name.str())}; find != tests_data.end()) {
-					edit = true;
-					std::string declare_friend = "class " + find->second + ";\n";
-					std::string use_friend = "\nfriend " + find->second + ";\n";
-					str_file.insert(whole_match.end(), use_friend.begin(), use_friend.end());
-					str_file.insert(str_file.begin(), declare_friend.begin(), declare_friend.end());
-				}
-			}
-			
-			std::ofstream second_file{second_path};
-			if(second_file.is_open()) {
-				second_file << str_file;
-				second_file.close();
+		static constexpr auto pattern = ctll::fixed_string{R"([ \t]*class ([a-z_A-Z][a-z_A-Z0-9]+) *(\<|:|\{).*?\n)"};
+		
+		for(auto [whole_match, name, b]: ctre::search_all<pattern>(str_file)) {
+			if(auto find{tests_data.find(name.str())}; find != tests_data.end()) {
+				std::string declare_friend = "class " + find->second + ";\n";
+				std::string use_friend = "\nfriend " + find->second + ";\n";
+				str_file.insert(whole_match.end(), use_friend.begin(), use_friend.end());
+				str_file.insert(str_file.begin(), declare_friend.begin(), declare_friend.end());
 			}
 		}
-		first_file.close();
+		
+		std::ofstream second_file{second_path};
+		if(second_file.is_open()) {
+			second_file << str_file;
+			second_file.close();
+		}
 	}
+	first_file.close();
 }
 
 int main() {
