@@ -1,17 +1,17 @@
-#include "Resizer.hpp"
+#include "TextResizer.hpp"
 
 namespace ie {
-	Resizer::Make::Make(float line_spacing, BaseResizer::Align align, BaseResizer::Algorithm algorithm) : line_spacing(line_spacing), align(align), algorithm(algorithm) {
+	TextResizer::Make::Make(float line_spacing, BaseTextResizer::Align align, BaseTextResizer::Algorithm algorithm) : line_spacing(line_spacing), align(align), algorithm(algorithm) {
 	}
 	
-	Resizer* Resizer::Make::make(ResizerInitInfo init_info) {
-		return new Resizer{std::move(*this), init_info};
+	TextResizer* TextResizer::Make::make(TextResizerInitInfo init_info) {
+		return new TextResizer{std::move(*this), init_info};
 	}
 	
-	Resizer::Resizer(Make&& make, ResizerInitInfo init_info) : BaseResizer{make.line_spacing, make.align, make.algorithm, init_info} {
+	TextResizer::TextResizer(Make&& make, TextResizerInitInfo init_info) : BaseTextResizer{make.line_spacing, make.align, make.algorithm, init_info} {
 	}
 	
-	void Resizer::move(sf::Vector2f position) {
+	void TextResizer::move(sf::Vector2f position) {
 		start_render += position;
 		end_render += position;
 		
@@ -24,7 +24,7 @@ namespace ie {
 		}
 	}
 	
-	void Resizer::set_position(sf::Vector2f position) {
+	void TextResizer::set_position(sf::Vector2f position) {
 		sf::Vector2f offset{position - start_render};
 		for(auto& character: characters) {
 			character->move({offset});
@@ -38,12 +38,12 @@ namespace ie {
 		start_render = position;
 	}
 	
-	void Resizer::print_character(std::vector<BaseCharacter*>::iterator character) {
+	void TextResizer::print_character(std::vector<BaseCharacter*>::iterator character) {
 		(*character)->set_position(next_position);
 		next_position.x += (*character)->get_advance();
 	}
 	
-	void Resizer::equalize_characters(std::vector<BaseCharacter*>::iterator end_character, float line_size, float length_end_character ) {
+	void TextResizer::equalize_characters(std::vector<BaseCharacter*>::iterator end_character, float line_size, float length_end_character ) {
 		sf::Vector2f offset{end_render.x - (((*(end_character - 1))->get_position().x) + length_end_character), line_size};
 		
 		switch(align) {
@@ -62,7 +62,7 @@ namespace ie {
 		}
 	}
 	
-	float Resizer::equalize(std::vector<BaseCharacter*>::iterator end_character, float height_end_character) {
+	float TextResizer::equalize(std::vector<BaseCharacter*>::iterator end_character, float height_end_character) {
 		float line_size{0};
 		for(auto character = after_enter; character != end_character; ++character) {
 			if(character != end_character - 1 && (*character)->is_special() !=  BaseCharacter::Special::FullLine && (*character)->is_special() !=  BaseCharacter::Special::Object) {
@@ -110,14 +110,14 @@ namespace ie {
 		return line_size;
 	}
 	
-	void Resizer::porting(std::vector<BaseCharacter*>::iterator end_character) {
+	void TextResizer::porting(std::vector<BaseCharacter*>::iterator end_character) {
 		next_position.y += equalize(end_character, 0);
 		next_position.x = start_render.x;
 		
 		after_enter = end_character;
 	}
 	
-	void Resizer::auto_porting(std::vector<BaseCharacter*>::iterator end_character) {
+	void TextResizer::auto_porting(std::vector<BaseCharacter*>::iterator end_character) {
 		next_position.y += equalize(after_space, 0);
 		next_position.x = start_render.x;
 		
@@ -129,7 +129,7 @@ namespace ie {
 		after_space = end_character;
 	}
 	
-	void Resizer::delete_old_cash(sf::Vector2f size, sf::Vector2f position) {
+	void TextResizer::delete_old_cash(sf::Vector2f size, sf::Vector2f position) {
 		lines.clear();
 		
 		start_render = position;
@@ -140,18 +140,18 @@ namespace ie {
 		after_space = characters.begin();
 	}
 	
-	void Resizer::character_resize() {
-		if(algorithm == BaseResizer::Algorithm::Console)
+	void TextResizer::character_resize() {
+		if(algorithm == BaseTextResizer::Algorithm::Console)
 			return space_resize();
 		
 		print_character(current_character);
 	}
 	
-	void Resizer::space_resize() {
-		if(algorithm == BaseResizer::Algorithm::Absolute)
+	void TextResizer::space_resize() {
+		if(algorithm == BaseTextResizer::Algorithm::Absolute)
 			return character_resize();
 		
-		if(this->next_position.x + (algorithm == BaseResizer::Algorithm::Console ? (*current_character)->get_advance() : 0) <= end_render.x) {
+		if(this->next_position.x + (algorithm == BaseTextResizer::Algorithm::Console ? (*current_character)->get_advance() : 0) <= end_render.x) {
 			print_character(current_character);
 			after_space = current_character + 1;
 		} else {
@@ -159,14 +159,14 @@ namespace ie {
 		}
 	}
 	
-	void Resizer::enter_resize() {
+	void TextResizer::enter_resize() {
 		(*current_character)->set_position(next_position);
 		if(this->next_position.x > end_render.x)
 			auto_porting(current_character + 1);
 		porting(current_character + 1);
 	}
 	
-	void Resizer::object_resize(bool full) {
+	void TextResizer::object_resize(bool full) {
 		if(next_position.x != start_render.x) {
 			enter_resize();
 		}
@@ -183,14 +183,14 @@ namespace ie {
 		after_enter = current_character + 1;
 	}
 	
-	void Resizer::end_line_equalize() {
+	void TextResizer::end_line_equalize() {
 		if(end_render.x < this->next_position.x) {
 			auto_porting(characters.end());
 		}
 		equalize(characters.end(), 0);
 	}
 	
-	void Resizer::resize(sf::Vector2f size, sf::Vector2f position) {
+	void TextResizer::resize(sf::Vector2f size, sf::Vector2f position) {
 		if(characters.empty()) {
 			start_render = position;
 			end_render = position + size;
@@ -228,11 +228,11 @@ namespace ie {
 		end_line_equalize();
 	}
 	
-	sf::Vector2f Resizer::get_position() {
+	sf::Vector2f TextResizer::get_position() {
 		return start_render;
 	}
 	
-	sf::Vector2f Resizer::get_size() {
+	sf::Vector2f TextResizer::get_size() {
 		if(characters.empty())
 			return {0, 0};
 		std::vector<BaseCharacter*>::iterator max_x{
@@ -249,7 +249,7 @@ namespace ie {
 		return sf::Vector2f{(*max_x)->get_position().x, (*max_y)->get_position().y} - get_position();
 	}
 	
-	sf::Vector2f Resizer::get_min_size_base() {
+	sf::Vector2f TextResizer::get_min_size_base() {
 		sf::Vector2f min_size = {0, 0};
 		float word_size_x = 0;
 		
@@ -268,7 +268,7 @@ namespace ie {
 		return min_size;
 	}
 	
-	sf::Vector2f Resizer::get_min_size_console() {
+	sf::Vector2f TextResizer::get_min_size_console() {
 		sf::Vector2f min_size = {0, 0};
 		
 		float advance = 0;
@@ -280,7 +280,7 @@ namespace ie {
 		return min_size;
 	}
 	
-	sf::Vector2f Resizer::get_min_size_absolute() {
+	sf::Vector2f TextResizer::get_min_size_absolute() {
 		sf::Vector2f min_size = {0, 0};
 		float string_size_x = 0;
 		
@@ -299,7 +299,7 @@ namespace ie {
 		return min_size;
 	}
 	
-	sf::Vector2f Resizer::get_normal_size() {
+	sf::Vector2f TextResizer::get_normal_size() {
 		return get_min_size();
 	}
 	

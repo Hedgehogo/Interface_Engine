@@ -1,7 +1,7 @@
-#include "BaseResizer.hpp"
+#include "BaseTextResizer.hpp"
 
 namespace ie {
-	BaseResizer::BaseResizer(float line_spacing, BaseResizer::Align align, BaseResizer::Algorithm algorithm, ResizerInitInfo init_info) :
+	BaseTextResizer::BaseTextResizer(float line_spacing, BaseTextResizer::Align align, BaseTextResizer::Algorithm algorithm, TextResizerInitInfo init_info) :
 		characters(init_info.characters),
 		lines(),
 		line_spacing(line_spacing),
@@ -9,11 +9,11 @@ namespace ie {
 		algorithm(algorithm) {
 	}
 
-	const std::vector<BoxPtr<BaseLine> >& BaseResizer::get_lines() const {
+	const std::vector<BoxPtr<BaseLine> >& BaseTextResizer::get_lines() const {
 		return lines;
 	}
 	
-	sf::Vector2f BaseResizer::get_min_size() {
+	sf::Vector2f BaseTextResizer::get_min_size() {
 		if(algorithm == Algorithm::Console) {
 			return get_min_size_console();
 		} else if(algorithm == Algorithm::Absolute) {

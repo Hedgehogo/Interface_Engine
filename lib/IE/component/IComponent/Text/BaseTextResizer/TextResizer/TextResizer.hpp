@@ -1,21 +1,21 @@
 #pragma once
 
-#include "../BaseResizer.hpp"
+#include "../BaseTextResizer.hpp"
 
 namespace ie {
-	class Resizer : public BaseResizer {
+	class TextResizer : public BaseTextResizer {
 	public:
-		struct Make : BaseResizer::Make{
+		struct Make : BaseTextResizer::Make{
 			float line_spacing = 1.15;
 			Align align = Align::Left;
 			Algorithm algorithm = Algorithm::Base;
 			
 			Make(float line_spacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
 			
-			Resizer* make(ResizerInitInfo init_info) override;
+			TextResizer* make(TextResizerInitInfo init_info) override;
 		};
 		
-		Resizer(Make&& make, ResizerInitInfo init_info);
+		TextResizer(Make&& make, TextResizerInitInfo init_info);
 		
 		void move(sf::Vector2f position) override;
 		
