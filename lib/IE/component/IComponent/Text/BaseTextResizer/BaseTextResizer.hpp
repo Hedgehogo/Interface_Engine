@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../BaseCharacter/BaseCharacter.hpp"
-#include "ResizerInitInfo/ResizerInitInfo.hpp"
+#include "IE/component/IComponent/Text/BaseTextResizer/TextResizerInitInfo/TextResizerInitInfo.hpp"
 
 namespace ie {
-	class BaseResizer {
+	class BaseTextResizer {
 	public:
 		enum class Align {
 			Left,
@@ -19,12 +19,12 @@ namespace ie {
 		};
 		
 		struct Make {
-			virtual BaseResizer* make(ResizerInitInfo resizer_init_info) = 0;
+			virtual BaseTextResizer* make(TextResizerInitInfo resizer_init_info) = 0;
 			
 			virtual ~Make() = default;
 		};
 		
-		BaseResizer(float line_spacing, Align align, Algorithm algorithm, ResizerInitInfo init_info);
+		BaseTextResizer(float line_spacing, Align align, Algorithm algorithm, TextResizerInitInfo init_info);
 		
 		virtual const std::vector<BoxPtr<BaseLine> >& get_lines() const;
 		
@@ -50,7 +50,7 @@ namespace ie {
 		
 		virtual sf::Vector2f get_normal_size() = 0;
 		
-		virtual ~BaseResizer() = default;
+		virtual ~BaseTextResizer() = default;
 	
 	protected:
 		std::vector<BaseCharacter*>& characters;

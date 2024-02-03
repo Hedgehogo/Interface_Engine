@@ -109,7 +109,7 @@ namespace ie {
 			add_type_make_named<BaseTextBlock, InteractiveTextBlock>();
 			add_type_make_named<BaseTextBlock, ObjectTextBlock>();
 			
-			add_type_make_named<BaseResizer, Resizer>();
+			add_type_make_named<BaseTextResizer, TextResizer>();
 			
 			add_type_make_named<KeyAction, OpenUrlAction>("OpenUrlA");
 			add_type_make_named<KeyAction, CloseWindowAction>("CloseWindowA");

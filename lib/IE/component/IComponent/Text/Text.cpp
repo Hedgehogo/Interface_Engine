@@ -14,7 +14,7 @@ namespace ie {
 		sf::Color inactive_text_selection_color,
 		sf::Color inactive_background_selection_color,
 		sf::Text::Style style,
-		BoxPtr<BaseResizer::Make>&& resizer,
+		BoxPtr<BaseTextResizer::Make>&& resizer,
 		BoxPtr<IBasicInteraction<Text&>::Make>&& text_interaction
 	) : text_blocks(std::move(text_blocks)),
 		font(font),
@@ -70,7 +70,7 @@ namespace ie {
 			std::vector<BaseCharacter*> characters = text_block->get_characters();
 			text_characters.insert(text_characters.end(), characters.begin(), characters.end());
 		}
-		resizer = BoxPtr<BaseResizer>{make.resizer->make(ResizerInitInfo(text_characters))};
+		resizer = BoxPtr<BaseTextResizer>{make.resizer->make(TextResizerInitInfo(text_characters))};
 		
 		init_info.update_manager.add(*this);
 		init_info.draw_manager.add(*this);

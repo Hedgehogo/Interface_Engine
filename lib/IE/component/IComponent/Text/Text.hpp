@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BaseTextBlock/BaseTextBlock.hpp"
-#include "BaseResizer/Resizer/Resizer.hpp"
+#include "IE/component/IComponent/Text/BaseTextResizer/TextResizer/TextResizer.hpp"
 #include "../IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp"
 #include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 
@@ -25,7 +25,7 @@ namespace ie {
 			sf::Color inactive_text_selection_color = sf::Color::Black;
 			sf::Color inactive_background_selection_color = {150, 150, 150};
 			sf::Text::Style style = {};
-			BoxPtr<BaseResizer::Make> resizer = make_box_ptr<Resizer::Make>(1.15f, BaseResizer::Align::Left);
+			BoxPtr<BaseTextResizer::Make> resizer = make_box_ptr<TextResizer::Make>(1.15f, BaseTextResizer::Align::Left);
 			BoxPtr<IBasicInteraction<Text&>::Make> text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>();
 			
 			explicit Make(
@@ -39,7 +39,7 @@ namespace ie {
 				sf::Color inactive_text_selection_color = sf::Color::Black,
 				sf::Color inactive_background_selection_color = {150, 150, 150},
 				sf::Text::Style style = {},
-				BoxPtr<BaseResizer::Make>&& resizer = make_box_ptr<Resizer::Make>(1.15f, BaseResizer::Align::Left),
+				BoxPtr<BaseTextResizer::Make>&& resizer = make_box_ptr<TextResizer::Make>(1.15f, BaseTextResizer::Align::Left),
 				BoxPtr<IBasicInteraction<Text&>::Make>&& text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>()
 			);
 			
@@ -108,7 +108,7 @@ namespace ie {
 		std::vector<BaseCharacter*> text_characters;
 		std::vector<BoxPtr<BaseTextBlock> > text_blocks;
 		
-		BoxPtr<BaseResizer> resizer;
+		BoxPtr<BaseTextResizer> resizer;
 		BoxPtr<IBasicInteraction<Text&> > text_interaction;
 	};
 	

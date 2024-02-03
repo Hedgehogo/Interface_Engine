@@ -17,13 +17,12 @@ file(GLOB_RECURSE src "lib/*.cpp")
 file(GLOB_RECURSE headers "lib/*.hpp" "lib/*.inl")
 set(test_src "")
 
+file(REMOVE_RECURSE "${CMAKE_CURRENT_BINARY_DIR}/Test_${PROJECT_NAME}")
 foreach (path IN LISTS src headers)
 	string(REPLACE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_BINARY_DIR}/Test_${PROJECT_NAME}" path2 ${path})
 	list(APPEND test_src "${path2}")
 
-	if (NOT EXISTS "${path2}")
-		file(WRITE "${path2}" "")
-	endif ()
+	file(WRITE "${path2}" "")
 endforeach ()
 
 create_IE(
