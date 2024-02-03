@@ -52,9 +52,21 @@ namespace ie {
 	void ieml_rttb_init() {
 		[[maybe_unused]] static bool once{[]() {
 			ieml_rttb_init_shared<bool>('B', "Bool");
-			ieml_rttb_init_shared<size_t>('U', "USize");
+			ieml_rttb_init_shared<size_t>('S', "Size");
 			ieml_rttb_init_shared<int>('I', "Int");
 			ieml_rttb_init_shared<float>('F', "Float");
+			add_type<ISInt, SCastF2I>();
+			add_type_make<ISInt, SCastF2I>("CastF");
+			add_type<ISSize, SCastF2S>();
+			add_type_make<ISSize, SCastF2S>("CastF");
+			add_type<ISFloat, SCastI2F>();
+			add_type_make<ISFloat , SCastI2F>("CastI");
+			add_type<ISSize, SCastF2S>();
+			add_type_make<ISSize, SCastF2S>("CastI");
+			add_type<ISFloat, SCastS2F>();
+			add_type_make<ISFloat , SCastS2F>("CastS");
+			add_type<ISInt, SCastS2I>();
+			add_type_make<ISInt, SCastS2I>("CastS");
 			
 			//add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
 			//add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
