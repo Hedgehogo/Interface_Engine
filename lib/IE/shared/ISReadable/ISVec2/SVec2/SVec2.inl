@@ -132,7 +132,7 @@ namespace ie {
 	
 	template<typename Value_>
 	ToMutable<Value_>& BasicSMVec2<Value_>::get_y() const {
-		return this->x_.get();
+		return this->y_.get();
 	}
 
 	template<typename Value_>
