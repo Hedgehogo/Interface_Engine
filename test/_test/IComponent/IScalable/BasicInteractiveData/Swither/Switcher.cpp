@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/BasicInteractiveData/Switcher/Switcher.hpp>
 #include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/shared/ISMutable/SMutable/SMutable.hpp>
+#include <IE/shared/ISReadable/SReadable/SReadable.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_image_equal/image_equal.hpp>
 

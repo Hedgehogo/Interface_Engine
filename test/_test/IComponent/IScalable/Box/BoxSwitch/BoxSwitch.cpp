@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/Box/BoxSwitch/BoxSwitch.hpp>
 #include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/shared/ISValue/SValue/SValue.hpp>
+#include <IE/shared/ISReadable/SReadable/SReadable.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_image_equal/image_equal.hpp"
 
 TEST(IComponent, BoxSwitch) {
 	InitInfoData data{{100, 100}};
 	
-	ie::SBool value{false};
+	ie::SMBool value{false};
 	ie::BoxSwitch box_switch{
 		{
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),

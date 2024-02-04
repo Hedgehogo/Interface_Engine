@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/BasicInteractiveData/BaseSlider/ConstSlider/ConstSlider.hpp>
 #include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/shared/ISMutable/SMRanged/SMRanged.hpp>
+#include <IE/shared/ISReadable/ISRanged/SRanged/SRanged.hpp>
+#include <IE/shared/ISReadable/ISVec2/SVec2/SVec2.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <_test/_image_equal/image_equal.hpp>
 
