@@ -41,11 +41,6 @@ namespace ie {
 		
 		template<typename Return_, typename... Args_>
 		template<typename Result_, Return_(* Fn_)(Args_...)>
-		void SFnImpl<Return_(*)(Args_...)>::Type<Result_, Fn_>::set(T) {
-		}
-		
-		template<typename Return_, typename... Args_>
-		template<typename Result_, Return_(* Fn_)(Args_...)>
 		auto SFnImpl<Return_(*)(Args_...)>::Type<Result_, Fn_>::add_read_fn(ReadFn&& read_fn) -> ReadFn& {
 			return read_fns_.emplace_back(std::move(read_fn));
 		}

@@ -2,7 +2,7 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
-#include "IE/shared/ISValue/SVec2/SVec2.hpp"
+#include "IE/shared/ISReadable/ISVec2/ISVec2.hpp"
 #include "../BoxView/BoxView.hpp"
 
 namespace ie {
@@ -13,10 +13,10 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make {
 			BoxPtr<IComponent::Make> object;
-			MakeDyn<SRVec2F> normal_object_position;
+			MakeDyn<ISRVec2F> normal_object_position;
 			sf::Vector2f min_size;
 			
-			Make(BoxPtr<IComponent::Make>&& object, MakeDyn<SRVec2F> normal_object_position, sf::Vector2f min_size = {});
+			Make(BoxPtr<IComponent::Make>&& object, MakeDyn<ISRVec2F> normal_object_position, sf::Vector2f min_size = {});
 			
 			BoxScroll* make(InitInfo init_info) override;
 		};
@@ -33,7 +33,7 @@ namespace ie {
 		
 	protected:
 		BoxPtr<IComponent> object_;
-		SReader<SRVec2F> normal_object_position_;
+		SReader<ISRVec2F> normal_object_position_;
 	};
 }
 

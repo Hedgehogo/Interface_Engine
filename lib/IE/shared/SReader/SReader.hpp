@@ -1,15 +1,14 @@
 #pragma once
 
 #include <functional>
-#include "../ISValue/ISValue.hpp"
-#include "../ISRanged/ISRanged.hpp"
+#include "IE/shared/ISReadable/ISReadable.hpp"
 
 namespace ie {
-	template<typename Value_, typename = std::enable_if_t<is_shared<Value_> > >
+	template<typename Value_, typename = std::enable_if_t<is_readable<Value_> > >
 	class SReader {
 	public:
 		using T = typename Value_::T;
-		using ReadFn = typename ISValue<typename Value_::T>::ReadFn;
+		using ReadFn = typename ISReadable<typename Value_::T>::ReadFn;
 		
 		SReader(Value_& readable, ReadFn&& read_fn);
 		

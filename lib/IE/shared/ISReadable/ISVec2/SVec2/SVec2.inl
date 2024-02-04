@@ -2,12 +2,22 @@
 
 namespace ie::make_system {
 	template<typename Value_, typename _>
-	BasicSVec2<Value_, _>::BasicSVec2(MakeDyn<Value_> x, MakeDyn<Value_> y) : x_(std::move(x)), y_(std::move(y)) {
+	BasicSVec2<Value_, _>::BasicSVec2(MakeDyn<Value_> x, MakeDyn<Value_> y) : x(std::move(x)), y(std::move(y)) {
 	}
 	
 	template<typename Value_, typename _>
 	rttb::Dyn BasicSVec2<Value_, _>::make(DynBuffer& dyn_buffer) {
 		return rttb::Dyn{ie::BasicSVec2<Value_>{std::move(*this), dyn_buffer}};
+	}
+	
+	template<typename Value_>
+	BasicSMVec2<Value_>::ToMutable(MakeDyn<ie::ToMutable<Value_> > x, MakeDyn<ie::ToMutable<Value_> > y) :
+		BasicSVec2<ie::ToMutable<Value_> >(std::move(x), std::move(y)) {
+	}
+	
+	template<typename Value_>
+	rttb::Dyn BasicSMVec2<Value_>::make(DynBuffer& dyn_buffer) {
+		return rttb::Dyn{ie::BasicSMVec2<Value_>{std::move(*this), dyn_buffer}};
 	}
 }
 
@@ -27,12 +37,22 @@ ieml::Decode<char, ie::make_system::BasicSVec2<Value_> >::decode(const ieml::Nod
 	};
 }
 
+template<typename Value_>
+orl::Option<ie::make_system::BasicSMVec2<Value_> >
+ieml::Decode<char, ie::make_system::BasicSMVec2<Value_> >::decode(const ieml::Node& node) {
+	return ieml::Decode<char, ie::make_system::BasicSVec2<ie::ToMutable<Value_> > >::decode(node).map(
+		[](auto& value) -> ie::make_system::BasicSMVec2<Value_> {
+			return {std::move(value.x), std::move(value.y)};
+		}
+	);
+}
+
 namespace ie {
 	template<typename Value_, typename _>
 	BasicSVec2<Value_, _>::BasicSVec2(Make&& make, DynBuffer& dyn_buffer) :
-		BasicSVec2(
-			dyn_buffer.get(std::move(make.x_)),
-			dyn_buffer.get(std::move(make.y_))
+		BasicSVec2<Value_>(
+			dyn_buffer.get(std::move(make.x)),
+			dyn_buffer.get(std::move(make.y))
 		) {
 	}
 	
@@ -67,15 +87,6 @@ namespace ie {
 	}
 	
 	template<typename Value_, typename _>
-	void BasicSVec2<Value_, _>::set(T value) {
-		reset_ = false;
-		x_.get().set(value.x);
-		y_.get().set(value.y);
-		reset_ = true;
-		reset();
-	}
-	
-	template<typename Value_, typename _>
 	auto BasicSVec2<Value_, _>::add_read_fn(ReadFn&& read_fn) -> ReadFn& {
 		return read_fns_.emplace_back(std::move(read_fn));
 	}
@@ -104,8 +115,42 @@ namespace ie {
 		}
 	}
 	
+	template<typename Value_>
+	BasicSMVec2<Value_>::ToMutable(Make&& make, DynBuffer& dyn_buffer) :
+		BasicSVec2<ToMutable<Value_> >({std::move(make.x), std::move(make.y)}, dyn_buffer) {
+	}
+	
+	template<typename Value_>
+	BasicSMVec2<Value_>::ToMutable(ToMutable<Value_>& x, ToMutable<Value_>& y) :
+		BasicSVec2<ToMutable<Value_> >(x, y) {
+	}
+	
+	template<typename Value_>
+	ToMutable<Value_>& BasicSMVec2<Value_>::get_x() const {
+		return this->x_.get();
+	}
+	
+	template<typename Value_>
+	ToMutable<Value_>& BasicSMVec2<Value_>::get_y() const {
+		return this->x_.get();
+	}
+
+	template<typename Value_>
+	auto BasicSMVec2<Value_>::get() const -> T {
+		return BasicSVec2<ToMutable<Value_> >::get();
+	}
+	
+	template<typename Value_>
+	void BasicSMVec2<Value_>::set(T value) {
+		this->reset_ = false;
+		this->x_.get().set(value.x);
+		this->y_.get().set(value.y);
+		this->reset_ = true;
+		this->reset();
+	}
+	
 	template<typename T_>
-	bool Determine<make_system::BasicSVec2<ISRanged<T_> > >::determine(ieml::Node const& node) {
+	bool Determine<make_system::BasicSMVec2<ISRanged<T_> > >::determine(ieml::Node const& node) {
 		return node.is_list() || node.is_map();
 	}
 }

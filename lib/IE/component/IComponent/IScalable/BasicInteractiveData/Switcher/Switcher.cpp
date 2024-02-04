@@ -3,8 +3,16 @@
 #include "SwitherAction/SwitcherAction.hpp"
 
 namespace ie {
-	Switcher::Make::Make(BoxPtr<IScalable::Make>&& inactive_background, BoxPtr<IScalable::Make>&& active_background, MakeDyn<ISBool> value, Key key) :
-		inactive_background(std::move(inactive_background)), active_background(std::move(active_background)), value(std::move(value)), key(key) {
+	Switcher::Make::Make(
+		BoxPtr<IScalable::Make>&& inactive_background,
+		BoxPtr<IScalable::Make>&& active_background,
+		MakeDyn<ISMBool> value,
+		Key key
+	) :
+		inactive_background(std::move(inactive_background)),
+		active_background(std::move(active_background)),
+		value(std::move(value)),
+		key(key) {
 	}
 	
 	Switcher* Switcher::Make::make(InitInfo init_info) {
@@ -24,7 +32,7 @@ namespace ie {
 	Switcher::Switcher(
 		BoxPtr<IScalable::Make> inactive_background,
 		BoxPtr<IScalable::Make> active_background,
-		ISBool& value,
+		ISMBool& value,
 		Key key,
 		InitInfo init_info
 	) :
@@ -113,7 +121,7 @@ orl::Option<ie::Switcher::Make> ieml::Decode<char, ie::Switcher::Make>::decode(i
 	return ie::Switcher::Make{
 		map.at("inactive-background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
 		map.at("active-background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
-		map.at("value").except().as<ie::MakeDyn<ie::ISBool> >().move_except(),
+		map.at("value").except().as<ie::MakeDyn<ie::ISMBool> >().move_except(),
 		map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft),
 	};
 }

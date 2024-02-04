@@ -7,7 +7,7 @@ namespace ie {
 		BoxPtr<IScalable::Make>&& first_object,
 		BoxPtr<IScalable::Make>&& second_object,
 		bool is_horizontal_border,
-		MakeDyn<ISRFloat> border_value,
+		MakeDyn<ISMRFloat> border_value,
 		int border_interaction_size,
 		Key key,
 		sf::Vector2f min_size
@@ -204,7 +204,7 @@ orl::Option<ie::BoxMovableBorder::Make> ieml::Decode<char, ie::BoxMovableBorder:
 		map.at("first-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
 		map.at("first-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
 		map.get_as<bool>("border-horizontal").ok_or(false),
-		map.at("border-value").except().as<ie::MakeDyn<ie::ISRFloat> >().move_except(),
+		map.at("border-value").except().as<ie::MakeDyn<ie::ISMRFloat> >().move_except(),
 		map.get_as<int>("border-interaction-size").ok_or(5),
 		map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft),
 		map.get_as<sf::Vector2f>("min-size").ok_or({})

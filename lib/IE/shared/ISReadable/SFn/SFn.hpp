@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ISValue.hpp"
+#include "../ISReadable.hpp"
 #include "../../SReader/SReader.hpp"
 
 namespace ie {
@@ -46,8 +46,6 @@ namespace ie {
 				
 				T get() const override;
 				
-				void set(T) override;
-			
 			protected:
 				ReadFn& add_read_fn(ReadFn&& read_fn) override;
 				
@@ -72,8 +70,7 @@ namespace ie {
 	}
 	
 	template<typename Result_, auto Fn_>
-	class SFn :
-		public detail::SFnImpl<decltype(Fn_)>::template Type<Result_, Fn_> {
+	class SFn : public detail::SFnImpl<decltype(Fn_)>::template Type<Result_, Fn_> {
 	public:
 		using Make = make_system::SFn<Result_, Fn_>;
 		

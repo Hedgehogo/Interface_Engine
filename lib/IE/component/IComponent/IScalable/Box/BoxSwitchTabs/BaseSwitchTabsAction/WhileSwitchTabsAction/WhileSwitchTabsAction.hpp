@@ -27,7 +27,7 @@ namespace ie {
 		void while_not_pressed() override;
 		
 		int size_;
-		ISRSize& value_;
+		ISMRSize& value_;
 		int step_;
 	};
 }

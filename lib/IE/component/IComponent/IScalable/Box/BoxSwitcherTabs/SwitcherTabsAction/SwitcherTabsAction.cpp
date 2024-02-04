@@ -2,7 +2,7 @@
 #include "../BoxSwitcherTabs.hpp"
 
 namespace ie {
-	SwitcherTabsAction::Make::Make(MakeDyn<ISRSize> value) : value(std::move(value)) {
+	SwitcherTabsAction::Make::Make(MakeDyn<ISMRSize> value) : value(std::move(value)) {
 	}
 	
 	SwitcherTabsAction* SwitcherTabsAction::Make::make(BasicActionInitInfo<BoxSwitcherTabs&> init_info) {

@@ -1,13 +1,13 @@
 #pragma once
 
 #include "IE/shared/SReader/SReader.hpp"
-#include "IE/shared/ISValue/ISValue.hpp"
-#include "../BasicInteractiveData.hpp"
+#include "IE/shared/ISReadable/ISReadable.hpp"
+#include "IE/enums/KeyHandler/KeyHandler.hpp"
+#include "IE/component/IDrawable/IDrawable/IDrawable.hpp"
 #include "IE/component/IComponent/IComponentLayout/IComponentLayout.hpp"
+#include "../BasicInteractiveData.hpp"
 #include "../../INonInteractive/INonInteractive.hpp"
 #include "../../IScalableLayout/IScalableLayout.hpp"
-#include "IE/component/IDrawable/IDrawable/IDrawable.hpp"
-#include "IE/enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
 	class Switcher : public virtual IScalableLayout, public virtual IDrawable, public virtual IUpdatable {
@@ -15,13 +15,13 @@ namespace ie {
 		struct Make : public virtual IScalableLayout::Make {
 			BoxPtr<IScalable::Make> inactive_background;
 			BoxPtr<IScalable::Make> active_background;
-			MakeDyn<ISBool> value;
+			MakeDyn<ISMBool> value;
 			Key key = Key::MouseLeft;
 			
 			Make(
 				BoxPtr<IScalable::Make>&& inactive_background,
 				BoxPtr<IScalable::Make>&& active_background,
-				MakeDyn<ISBool> value,
+				MakeDyn<ISMBool> value,
 				Key key = Key::MouseLeft
 			);
 			
@@ -54,7 +54,7 @@ namespace ie {
 		Switcher(
 			BoxPtr<IScalable::Make> inactive_background,
 			BoxPtr<IScalable::Make> active_background,
-			ISBool& value,
+			ISMBool& value,
 			Key key,
 			InitInfo init_info
 		);
@@ -69,7 +69,7 @@ namespace ie {
 		DrawManager active_draw_manager_;
 		BoxPtr<IScalable> inactive_background_;
 		BoxPtr<IScalable> active_background_;
-		ISBool& active_;
+		ISMBool& active_;
 	};
 }
 

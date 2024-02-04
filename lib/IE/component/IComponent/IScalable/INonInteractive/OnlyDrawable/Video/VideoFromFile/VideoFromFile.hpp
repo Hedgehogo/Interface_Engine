@@ -3,6 +3,7 @@
 #include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/OnlyDrawable.hpp"
 #include "IE/component/IUpdatable/IUpdatable/IUpdatable.hpp"
 #include "IE/shared/SReader/SReader.hpp"
+#include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
 
 namespace ie {
 	class VideoFromFile : public OnlyDrawable {

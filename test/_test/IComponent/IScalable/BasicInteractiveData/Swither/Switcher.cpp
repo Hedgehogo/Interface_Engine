@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/BasicInteractiveData/Switcher/Switcher.hpp>
 #include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/shared/ISValue/SValue/SValue.hpp>
+#include <IE/shared/ISMutable/SMutable/SMutable.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include "_test/_image_equal/image_equal.hpp"
+#include <_test/_image_equal/image_equal.hpp>
 
 TEST(IComponent, Switcher) {
 	InitInfoData data{{100, 100}};
 	
-	ie::SBool value{false};
+	ie::SMBool value{false};
 	ie::Switcher switcher{
 		{
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),

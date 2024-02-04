@@ -1,16 +1,17 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/Box/BoxScroll/BoxScroll.hpp>
 #include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/shared/ISValue/SRanged/SRanged.hpp>
+#include <IE/shared/ISMutable/SMRanged/SMRanged.hpp>
+#include <IE/shared/ISMutable/SMVec2/SMVec2.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include "_test/_image_equal/image_equal.hpp"
+#include <_test/_image_equal/image_equal.hpp>
 
 TEST(IComponent, BoxScroll) {
 	InitInfoData data{{100, 100}};
 	
-	ie::SRFloat value_x{0};
-	ie::SRFloat value_y{0};
-	ie::SRVec2F value{value_x, value_y};
+	ie::SMRFloat value_x{0};
+	ie::SMRFloat value_y{0};
+	ie::SMRVec2F value{value_x, value_y};
 	ie::BoxScroll box_scroll{
 		ie::BoxScroll::Make{
 			ie::make_box_ptr<ie::IComponent::Make, ie::FullColor::Make>(sf::Color::Green),

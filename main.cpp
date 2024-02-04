@@ -1,4 +1,4 @@
-﻿#include "lib/IE/IE.hpp"
+﻿#include "IE/IE.hpp"
 #include <iostream>
 #include <array>
 

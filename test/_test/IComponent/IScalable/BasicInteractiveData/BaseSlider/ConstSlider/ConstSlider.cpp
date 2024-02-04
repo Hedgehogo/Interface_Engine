@@ -1,16 +1,16 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/BasicInteractiveData/BaseSlider/ConstSlider/ConstSlider.hpp>
 #include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/shared/ISValue/SRanged/SRanged.hpp>
+#include <IE/shared/ISMutable/SMRanged/SMRanged.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
-#include "_test/_image_equal/image_equal.hpp"
+#include <_test/_image_equal/image_equal.hpp>
 
 TEST(IComponent, ConstSlider) {
 	InitInfoData data{{100, 100}};
 	
-	ie::SRFloat value_x{0};
-	ie::SRFloat value_y{0};
-	ie::SRVec2F value{value_x, value_y};
+	ie::SMRFloat value_x{0};
+	ie::SMRFloat value_y{0};
+	ie::SMRVec2F value{value_x, value_y};
 	ie::ConstSlider const_slider{
 		{
 			ie::make_box_ptr<ie::INonInteractive::Make, ie::FullColor::Make>(sf::Color::Green),

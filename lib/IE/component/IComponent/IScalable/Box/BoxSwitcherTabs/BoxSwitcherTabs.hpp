@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
-#include "IE/shared/ISRanged/ISRanged.hpp"
+#include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
 #include "IE/enums/KeyHandler/KeyHandler.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
@@ -12,14 +12,14 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
-			MakeDyn<ISRSize> value;
+			MakeDyn<ISMRSize> value;
 			Key key;
 			bool is_horizontal;
 			sf::Vector2f min_size = {};
 			
 			Make(
 				std::vector<BoxPtr<IScalable::Make> >&& objects,
-				MakeDyn<ISRSize> value,
+				MakeDyn<ISMRSize> value,
 				Key key = Key::MouseLeft,
 				bool is_horizontal = true,
 				sf::Vector2f min_size = {}
@@ -48,7 +48,7 @@ namespace ie {
 		BasicInteractiveData<BoxSwitcherTabs&> interactive_;
 		std::vector<BoxPtr<IScalable> > objects_;
 		bool is_horizontal_;
-		ISRSize& value_;
+		ISMRSize& value_;
 	};
 }
 

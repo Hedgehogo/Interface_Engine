@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/shared/SReader/SReader.hpp"
-#include "IE/shared/ISRanged/ISRanged.hpp"
+#include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
 #include "../../OnlyDrawable.hpp"
 
 namespace ie {

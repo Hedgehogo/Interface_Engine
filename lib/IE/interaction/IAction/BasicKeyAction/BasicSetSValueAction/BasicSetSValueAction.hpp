@@ -1,15 +1,15 @@
 #pragma once
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
-#include "IE/shared/ISValue/ISValue.hpp"
+#include "IE/shared/ISReadable/ISReadable.hpp"
 #include "../BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 
 namespace ie {
-	template<typename T_, typename Value_, typename = std::enable_if_t<is_shared<Value_> > >
+	template<typename T_, typename Value_, typename = std::enable_if_t<is_readable<Value_> > >
 	class BasicSetSValueAction;
 	
 	namespace make_system {
-		template<typename T_, typename Value_, typename = std::enable_if_t<is_shared<Value_> > >
+		template<typename T_, typename Value_, typename = std::enable_if_t<is_readable<Value_> > >
 		struct BasicSetSValueAction : public BasicKeyAction<T_> {
 			MakeDyn<Value_> value;
 			typename Value_::T constant;
@@ -48,12 +48,12 @@ namespace ie {
 	};
 	
 	template<typename T_>
-	using SetSValueAction = BasicSetSValueAction<std::monostate, ISValue<T_> >;
+	using SetSValueAction = BasicSetSValueAction<std::monostate, ISMutable<T_> >;
 	
 	using SetSBoolAction = SetSValueAction<bool>;
 	using SetSFloatAction = SetSValueAction<float>;
 	using SetSIntAction = SetSValueAction<int>;
-	using SetSUSizeAction = SetSValueAction<size_t>;
+	using SetSSizeAction = SetSValueAction<size_t>;
 }
 
 #include "BasicSetSValueAction.inl"

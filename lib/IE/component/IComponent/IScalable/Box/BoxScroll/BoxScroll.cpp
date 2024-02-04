@@ -1,7 +1,7 @@
 #include "BoxScroll.hpp"
 
 namespace ie {
-	BoxScroll::Make::Make(BoxPtr<IComponent::Make>&& object, MakeDyn<SRVec2F> normal_object_position, sf::Vector2f min_size) :
+	BoxScroll::Make::Make(BoxPtr<IComponent::Make>&& object, MakeDyn<ISRVec2F> normal_object_position, sf::Vector2f min_size) :
 		object(std::move(object)), normal_object_position(std::move(normal_object_position)), min_size(min_size) {
 	}
 	
@@ -56,7 +56,7 @@ orl::Option<ie::BoxScroll::Make> ieml::Decode<char, ie::BoxScroll::Make>::decode
 	auto map{node.get_map_view().except()};
 	return ie::BoxScroll::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IComponent::Make> >().move_except(),
-		map.at("normal-object-position").except().as<ie::MakeDyn<ie::SRVec2F> >().move_except(),
+		map.at("normal-object-position").except().as<ie::MakeDyn<ie::ISRVec2F> >().move_except(),
 		map.get_as<sf::Vector2f>("min-size").ok_or({}),
 	};
 }
