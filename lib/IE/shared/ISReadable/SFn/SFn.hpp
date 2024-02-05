@@ -10,72 +10,46 @@ namespace ie {
 		
 		template<typename T>
 		using SFnWrap = SReader<std::remove_reference_t<T> >;
-		
-		template<typename FnType_>
-		struct SFnImpl;
-		
-		namespace make_system {
-			template<typename FnType_>
-			struct SFnImpl;
-			
-			template<typename Return_, typename... Args_>
-			struct SFnImpl<Return_(*)(Args_...)> {
-				template<typename Result_, Return_(* Fn_)(Args_...)>
-				struct Type : public Result_::Make {
-					std::tuple<SFnMakeWrap<Args_>...> args;
-					
-					using Return = typename ie::detail::SFnImpl<Return_(*)(Args_...)>::template Type<Result_, Fn_>;
-					
-					Type(SFnMakeWrap<Args_>... args);
-					
-					rttb::Dyn make(DynBuffer& dyn_buffer) override;
-				};
-			};
-		}
-		
-		template<typename Return_, typename... Args_>
-		struct SFnImpl<Return_(*)(Args_...)> {
-			template<typename Result_, Return_(* Fn_)(Args_...)>
-			class Type : public Result_ {
-			public:
-				using T = typename Result_::T;
-				using ReadFn = typename Result_::ReadFn;
-				using Make = typename make_system::SFnImpl<Return_(*)(Args_...)>::template Type<Result_, Fn_>;
-				
-				Type(Make&& make, DynBuffer& dyn_buffer);
-				
-				T get() const override;
-				
-			protected:
-				ReadFn& add_read_fn(ReadFn&& read_fn) override;
-				
-				bool delete_read_fn(ReadFn& read_fn) override;
-			
-			private:
-				void reset();
-				
-				std::tuple<SFnWrap<Args_>...> args_;
-				std::vector<ReadFn> read_fns_;
-			};
-		};
 	}
 	
 	namespace make_system {
 		template<typename Result_, auto Fn_>
-		class SFn : public detail::make_system::SFnImpl<decltype(Fn_)>::template Type<Result_, Fn_> {
-		public:
-			template<typename... Ts>
-			SFn(Ts... args);
+		class SFn;
+		
+		template<typename Result_, typename Return_, typename... Args_, Return_(* Fn_)(Args_...)>
+		struct SFn<Result_, Fn_> : public Result_::Make {
+			std::tuple<detail::SFnMakeWrap<Args_>...> args;
+			
+			SFn(detail::SFnMakeWrap<Args_>... args);
+			
+			rttb::Dyn make(DynBuffer& dyn_buffer) override;
 		};
 	}
 	
 	template<typename Result_, auto Fn_>
-	class SFn : public detail::SFnImpl<decltype(Fn_)>::template Type<Result_, Fn_> {
+	class SFn;
+	
+	template<typename Result_, typename Return_, typename... Args_, Return_(* Fn_)(Args_...)>
+	class SFn<Result_, Fn_> : public Result_ {
 	public:
+		using T = typename Result_::T;
+		using ReadFn = typename Result_::ReadFn;
 		using Make = make_system::SFn<Result_, Fn_>;
 		
-		template<typename... Ts>
-		SFn(Ts... args);
+		SFn(Make&& make, DynBuffer& dyn_buffer);
+		
+		T get() const override;
+	
+	protected:
+		ReadFn& add_read_fn(ReadFn&& read_fn) override;
+		
+		bool delete_read_fn(ReadFn& read_fn) override;
+	
+	private:
+		void reset();
+		
+		std::tuple<detail::SFnWrap<Args_>...> args_;
+		std::vector<ReadFn> read_fns_;
 	};
 }
 
