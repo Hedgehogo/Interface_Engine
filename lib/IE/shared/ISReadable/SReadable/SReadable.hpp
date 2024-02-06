@@ -57,6 +57,8 @@ namespace ie {
 		
 		bool delete_read_fn(ReadFn& read_fn) override;
 		
+		void reset() override;
+		
 		T_ data_;
 		std::vector<ReadFn> read_fns_;
 	};

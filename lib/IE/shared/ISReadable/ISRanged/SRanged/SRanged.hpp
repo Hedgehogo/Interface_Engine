@@ -60,12 +60,13 @@ namespace ie {
 		void set_lower_bound(T_ lower_bound) override;
 		
 		void set_bounds(T_ lower_bound, T_ upper_bound) override;
-	
+		
 	protected:
-		void reset();
+		void reset() override;
 		
 		void set(T_ value);
-		
+	
+	private:
 		T_ upper_bound_;
 		T_ lower_bound_;
 	};
