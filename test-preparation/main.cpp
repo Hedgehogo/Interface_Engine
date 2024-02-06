@@ -4,14 +4,24 @@
 #include <string>
 #include "for_files.hpp"
 
-void copyFile(const std::filesystem::path& sourcePath, const std::filesystem::path& destinationPath) {
-	std::ifstream source(sourcePath, std::ios::binary);
+void my_copy_file(const std::filesystem::path& source_path, const std::filesystem::path& destination_path) {
+	std::ifstream source(source_path, std::ios::binary);
 	
 	if(source.is_open()) {
-		std::ofstream destination(destinationPath, std::ios::binary);
-		if(destination.is_open()) {
-			destination << source.rdbuf();
-			destination.close();
+		std::ifstream destination_i(destination_path, std::ios::binary);
+		if(destination_i.is_open()) {
+			std::string destination_str, source_str;
+			std::getline(destination_i, destination_str, '\0');
+			std::getline(source, source_str, '\0');
+			if(destination_str != source_str) {
+				destination_i.close();
+				std::ofstream destination_o(destination_path, std::ios::binary);
+				if(destination_o.is_open()) {
+					destination_o << source_str;
+					printf("copy: %s\n", source_path.string().c_str());
+					destination_o.close();
+				}
+			}
 		}
 		source.close();
 	}
@@ -36,7 +46,7 @@ void copy_file(
 		}
 		std::filesystem::copy_file(first_path, second_path);
 	} else {
-		copyFile(first_path, second_path);
+		my_copy_file(first_path, second_path);
 	}
 }
 
@@ -82,11 +92,16 @@ void establish_friendship(
 				str_file.insert(str_file.begin(), declare_friend.begin(), declare_friend.end());
 			}
 		}
-		
-		std::ofstream second_file{second_path};
+		std::fstream second_file{second_path};
 		if(second_file.is_open()) {
-			second_file << str_file;
-			second_file.close();
+			std::string second_str;
+			std::getline(second_file, second_str, '\0');
+			if(second_str != str_file) {
+				second_file.clear();
+				second_file << str_file;
+				second_file.close();
+				printf("copy_h\n");
+			}
 		}
 	}
 	first_file.close();
