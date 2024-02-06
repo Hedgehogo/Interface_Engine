@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/shared/SReader/SReader.hpp"
-#include "IE/shared/ISValue/ISValue.hpp"
+#include "IE/shared/ISReadable/ISReadable.hpp"
 #include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 
 namespace ie {
@@ -10,16 +10,16 @@ namespace ie {
 	class SwitcherAction : public BaseKeyAction {
 	public:
 		struct Make : public BaseKeyAction::Make {
-			MakeDyn<ISBool> value;
+			MakeDyn<ISMBool> value;
 			
-			Make(MakeDyn<ISBool> value);
+			Make(MakeDyn<ISMBool> value);
 			
 			SwitcherAction* make(ActionInitInfo init_info) override;
 		};
 		
 		SwitcherAction(Make&& make, ActionInitInfo init_info);
 		
-		SwitcherAction(ISBool& value);
+		SwitcherAction(ISMBool& value);
 		
 		void start_pressed() override;
 		
@@ -30,7 +30,7 @@ namespace ie {
 		void while_not_pressed() override;
 		
 	protected:
-		ISBool& value_;
+		ISMBool& value_;
 	};
 }
 

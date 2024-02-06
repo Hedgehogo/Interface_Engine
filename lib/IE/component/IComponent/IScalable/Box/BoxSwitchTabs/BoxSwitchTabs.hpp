@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
-#include "IE/shared/ISRanged/ISRanged.hpp"
+#include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
 
@@ -10,17 +10,17 @@ namespace ie {
 	public:
 		struct Make : public virtual Box::Make, public virtual IScalableObjectsArray::Make {
 			std::vector<BoxPtr<IScalable::Make> > objects;
-			MakeDyn<ISRSize> value;
+			MakeDyn<ISMRSize> value;
 			sf::Vector2f min_size = {};
 			
-			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, MakeDyn<ISRSize> value, sf::Vector2f min_size = {});
+			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, MakeDyn<ISMRSize> value, sf::Vector2f min_size = {});
 			
 			BoxSwitchTabs* make(InitInfo init_info) override;
 		};
 		
 		BoxSwitchTabs(Make&& make, InitInfo init_info);
 		
-		ISRSize& get_value();
+		ISMRSize& get_value();
 		
 		void set_index(size_t index);
 		
@@ -43,7 +43,7 @@ namespace ie {
 	protected:
 		std::vector<DrawManager> draw_managers_;
 		std::vector<BoxPtr<IScalable> > objects_;
-		ISRSize& value_;
+		ISMRSize& value_;
 	};
 }
 

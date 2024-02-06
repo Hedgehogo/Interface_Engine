@@ -26,7 +26,7 @@ namespace ie {
 		void while_not_pressed() override;
 		
 		size_t index_;
-		ISRSize& value_;
+		ISMRSize& value_;
 	};
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/shared/ISRanged/ISRanged.hpp"
+#include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
 #include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 
 namespace ie {
@@ -9,9 +9,9 @@ namespace ie {
 	class SwitcherTabsAction : public BasicBaseKeyAction<BoxSwitcherTabs&> {
 	public:
 		struct Make : public virtual BasicKeyAction<BoxSwitcherTabs&>::Make {
-			MakeDyn<ISRSize> value;
+			MakeDyn<ISMRSize> value;
 			
-			Make(MakeDyn<ISRSize> value);
+			Make(MakeDyn<ISMRSize> value);
 			
 			SwitcherTabsAction* make(BasicActionInitInfo<BoxSwitcherTabs&> init_info) override;
 		};
@@ -27,7 +27,7 @@ namespace ie {
 		void while_not_pressed() override;
 		
 	protected:
-		ISRSize& value_;
+		ISMRSize& value_;
 		BoxSwitcherTabs* switcher_tabs_;
 	};
 }

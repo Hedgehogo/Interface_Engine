@@ -2,6 +2,7 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
+#include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
 #include "IE/interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
 #include "MovableBorderAction/MovableBorderAction.hpp"
 #include "../Box.hpp"
@@ -15,7 +16,7 @@ namespace ie {
 			BoxPtr<IScalable::Make> first_object;
 			BoxPtr<IScalable::Make> second_object;
 			bool is_horizontal_border;
-			MakeDyn<ISRFloat> border_value;
+			MakeDyn<ISMRFloat> border_value;
 			int border_interaction_size = 5;
 			Key key = Key::MouseLeft;
 			sf::Vector2f min_size = {};
@@ -24,7 +25,7 @@ namespace ie {
 				BoxPtr<IScalable::Make>&& first_object,
 				BoxPtr<IScalable::Make>&& second_object,
 				bool is_horizontal_border,
-				MakeDyn<ISRFloat> border_value,
+				MakeDyn<ISMRFloat> border_value,
 				int border_interaction_size = 5,
 				Key key = Key::MouseLeft,
 				sf::Vector2f min_size = {}
@@ -73,7 +74,7 @@ namespace ie {
 		BasicInteractiveData<BoxMovableBorder&> interactive_;
 		BoxPtr<IScalable> first_object_;
 		BoxPtr<IScalable> second_object_;
-		SReader<ISRFloat> border_value_;
+		SReader<ISMRFloat> border_value_;
 		float border_value_now_;
 		int border_interaction_size_;
 		bool is_horizontal_border_;

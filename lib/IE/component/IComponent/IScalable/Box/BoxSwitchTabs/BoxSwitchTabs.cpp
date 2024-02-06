@@ -1,8 +1,8 @@
 #include "BoxSwitchTabs.hpp"
-#include "IE/shared/ISValue/SRanged/SRanged.hpp"
+#include "IE/shared/ISReadable/ISRanged/SRanged/SRanged.hpp"
 
 namespace ie {
-	BoxSwitchTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, MakeDyn<ISRSize> value, sf::Vector2f min_size) :
+	BoxSwitchTabs::Make::Make(std::vector<BoxPtr<IScalable::Make> >&& objects, MakeDyn<ISMRSize> value, sf::Vector2f min_size) :
 		objects(std::move(objects)), value(std::move(value)), min_size(min_size) {
 	}
 	
@@ -19,7 +19,7 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	ISRSize& BoxSwitchTabs::get_value() {
+	ISMRSize& BoxSwitchTabs::get_value() {
 		return value_;
 	}
 	
@@ -67,7 +67,7 @@ orl::Option<ie::BoxSwitchTabs::Make> ieml::Decode<char, ie::BoxSwitchTabs::Make>
 	auto map{node.get_map_view().except()};
 	return ie::BoxSwitchTabs::Make{
 		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().move_except(),
-		map.get_as<ie::MakeDyn<ie::ISRSize> >("value").move_ok_or({ie::make_box_ptr<ie::SRSize::Make>(0u)}),
+		map.get_as<ie::MakeDyn<ie::ISMRSize> >("value").move_ok_or({ie::make_box_ptr<ie::SMRSize::Make>(0u)}),
 		map.get_as<sf::Vector2f>("min-size").ok_or({})
 	};
 }

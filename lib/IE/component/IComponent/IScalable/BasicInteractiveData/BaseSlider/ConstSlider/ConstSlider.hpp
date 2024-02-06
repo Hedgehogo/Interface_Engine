@@ -8,7 +8,7 @@ namespace ie {
 		struct Make : public virtual IScalable::Make {
 			BoxPtr<INonInteractive::Make> slider;
 			BoxPtr<INonInteractive::Make> background;
-			MakeDyn<SRVec2F> value;
+			MakeDyn<ISMRVec2F> value;
 			sf::Vector2i division;
 			float slider_scale;
 			Key key;
@@ -19,7 +19,7 @@ namespace ie {
 			Make(
 				BoxPtr<INonInteractive::Make>&& slider,
 				BoxPtr<INonInteractive::Make>&& background,
-				MakeDyn<SRVec2F> value,
+				MakeDyn<ISMRVec2F> value,
 				float slider_scale = 1.0f,
 				Key key = Key::MouseLeft,
 				bool wheel_horizontal = false,
@@ -30,7 +30,7 @@ namespace ie {
 			Make(
 				BoxPtr<INonInteractive::Make>&& slider,
 				BoxPtr<INonInteractive::Make>&& background,
-				MakeDyn<SRVec2F> value,
+				MakeDyn<ISMRVec2F> value,
 				sf::Vector2i division,
 				float slider_scale = 1.0f,
 				Key key = Key::MouseLeft,

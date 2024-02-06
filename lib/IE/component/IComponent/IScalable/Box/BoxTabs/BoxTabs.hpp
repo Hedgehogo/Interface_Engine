@@ -2,7 +2,7 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
-#include "IE/shared/ISRanged/ISRanged.hpp"
+#include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
 

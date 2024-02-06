@@ -2,45 +2,47 @@
 
 namespace ie::make_system {
 	template<typename T_>
-	SRanged<T_>::SRanged(T_ data) : SValue<T_>(std::forward<T_>(data)) {
+	SRanged<T_>::SRanged(T_ data) : SReadable<T_>(std::forward<T_>(data)) {
 	}
 	
 	template<typename T_>
 	rttb::Dyn SRanged<T_>::make(DynBuffer& dyn_buffer) {
 		return rttb::Dyn{ie::SRanged<T_>{std::move(*this), dyn_buffer}};
 	}
+	
+	template<typename T_>
+	SMRanged<T_>::ToMutable(T_ data) : SRanged<T_>(std::forward<T_>(data)) {
+	}
+	
+	template<typename T_>
+	rttb::Dyn SMRanged<T_>::make(DynBuffer& dyn_buffer) {
+		return rttb::Dyn{ie::SMRanged<T_>{std::move(*this), dyn_buffer}};
+	}
 }
 
 template<typename T_>
-orl::Option<ie::make_system::SRanged<T_> > ieml::Decode<char, ie::make_system::SRanged<T_> >::decode(const ieml::Node& node) {
+orl::Option<ie::make_system::SRanged<T_> >
+ieml::Decode<char, ie::make_system::SRanged<T_> >::decode(const ieml::Node& node) {
+	return {{node.as<T_>().except()}};
+}
+
+template<typename T_>
+orl::Option<ie::make_system::SMRanged<T_> >
+ieml::Decode<char, ie::make_system::SMRanged<T_> >::decode(const ieml::Node& node) {
 	return {{node.as<T_>().except()}};
 }
 
 namespace ie {
 	template<typename T_>
 	SRanged<T_>::SRanged(Make&& make, DynBuffer& dyn_buffer) :
-		SValue<T_>(std::forward<T_>(make.data), dyn_buffer),
-		upper_bound_(std::numeric_limits<T_>::max()),
-		lower_bound_(std::numeric_limits<T_>::lowest()) {
+		SRanged(std::forward<T_>(make.data)) {
 	}
 	
 	template<typename T_>
 	SRanged<T_>::SRanged(T_ data) :
-		SValue<T_>(std::forward<T_>(data)),
+		SReadable<T_>(std::forward<T_>(data)),
 		upper_bound_(std::numeric_limits<T_>::max()),
 		lower_bound_(std::numeric_limits<T_>::lowest()) {
-	}
-	
-	template<typename T_>
-	void SRanged<T_>::set(T_ value) {
-		if(value > upper_bound_) {
-			this->data_ = upper_bound_;
-		} else if(value < lower_bound_) {
-			this->data_ = lower_bound_;
-		} else {
-			this->data_ = std::forward<T_>(value);
-		}
-		reset();
 	}
 	
 	template<typename T_>
@@ -98,7 +100,34 @@ namespace ie {
 	}
 	
 	template<typename T_>
-	bool Determine<make_system::SRanged<T_> >::determine(ieml::Node const& node) {
+	void SRanged<T_>::set(T_ value) {
+		if(value > upper_bound_) {
+			this->data_ = upper_bound_;
+		} else if(value < lower_bound_) {
+			this->data_ = lower_bound_;
+		} else {
+			this->data_ = std::forward<T_>(value);
+		}
+		reset();
+	}
+	
+	template<typename T_>
+	SMRanged<T_>::ToMutable(Make&& make, DynBuffer& dyn_buffer) :
+		SRanged<T_>(std::forward<T_>(make.data)) {
+	}
+	
+	template<typename T_>
+	SMRanged<T_>::ToMutable(T_ data) :
+		SRanged<T_>(std::forward<T_>(data)) {
+	}
+	
+	template<typename T_>
+	void SMRanged<T_>::set(T_ value) {
+		SRanged<T_>::set(std::forward<T_>(value));
+	}
+	
+	template<typename T_>
+	bool Determine<make_system::SMRanged<T_> >::determine(ieml::Node const& node) {
 		return node.is_raw();
 	}
 }

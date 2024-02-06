@@ -2,7 +2,7 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
-#include "IE/shared/ISValue/SVec2/SVec2.hpp"
+#include "IE/shared/ISReadable/ISVec2/ISVec2.hpp"
 #include "../BoxRenderTexture/BoxRenderTexture.hpp"
 
 namespace ie {
@@ -33,8 +33,8 @@ namespace ie {
 			SMakeMap<ISFloat> values_f;
 			SMakeMap<ISInt> values_i;
 			SMakeMap<ISBool> values_b;
-			SMakeMap<ISValue<sf::Color> > values_c;
-			SMakeMap<SRVec2F> values_v;
+			SMakeMap<ISReadable<sf::Color> > values_c;
+			SMakeMap<ISRVec2F> values_v;
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
@@ -43,8 +43,8 @@ namespace ie {
 				SMakeMap<ISFloat> values_f = {},
 				SMakeMap<ISInt> values_i = {},
 				SMakeMap<ISBool> values_b = {},
-				SMakeMap<ISValue<sf::Color> > values_c = {},
-				SMakeMap<SRVec2F> values_v = {},
+				SMakeMap<ISReadable<sf::Color> > values_c = {},
+				SMakeMap<ISRVec2F> values_v = {},
 				bool optimize = true,
 				sf::Vector2f min_size = {}
 			);
@@ -80,8 +80,8 @@ namespace ie {
 		SReaderVec<ISFloat> values_f_;
 		SReaderVec<ISInt> values_i_;
 		SReaderVec<ISBool> values_b_;
-		SReaderVec<ISValue<sf::Color> > values_c_;
-		SReaderVec<SRVec2F> values_v_;
+		SReaderVec<ISReadable<sf::Color> > values_c_;
+		SReaderVec<ISRVec2F> values_v_;
 		
 		sf::Clock clock_;
 	};

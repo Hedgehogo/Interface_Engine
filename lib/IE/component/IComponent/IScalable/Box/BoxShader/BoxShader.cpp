@@ -8,8 +8,8 @@ namespace ie {
 		SMakeMap<ISFloat> values_f,
 		SMakeMap<ISInt> values_i,
 		SMakeMap<ISBool> values_b,
-		SMakeMap<ISValue<sf::Color> > values_c,
-		SMakeMap<SRVec2F> values_v,
+		SMakeMap<ISReadable<sf::Color> > values_c,
+		SMakeMap<ISRVec2F> values_v,
 		bool optimize,
 		sf::Vector2f min_size
 	) :
@@ -157,8 +157,8 @@ orl::Option<ie::BoxShader::Make> ieml::Decode<char, ie::BoxShader::Make>::decode
 		map.at("values-f").except().as<ie::BoxShader::SMakeMap<ie::ISFloat> >().move_except(),
 		map.at("values-i").except().as<ie::BoxShader::SMakeMap<ie::ISInt> >().move_except(),
 		map.at("values-b").except().as<ie::BoxShader::SMakeMap<ie::ISBool> >().move_except(),
-		map.at("values-c").except().as<ie::BoxShader::SMakeMap<ie::ISValue<sf::Color> > >().move_except(),
-		map.at("values-v").except().as<ie::BoxShader::SMakeMap<ie::SRVec2F> >().move_except(),
+		map.at("values-c").except().as<ie::BoxShader::SMakeMap<ie::ISReadable<sf::Color> > >().move_except(),
+		map.at("values-v").except().as<ie::BoxShader::SMakeMap<ie::ISRVec2F> >().move_except(),
 		map.get_as<bool>("optimize").ok_or(true),
 		map.get_as<sf::Vector2f>("min-size").ok_or({})
 	};

@@ -4,7 +4,7 @@ namespace ie {
 	ConstSlider::Make::Make(
 		BoxPtr<INonInteractive::Make>&& slider,
 		BoxPtr<INonInteractive::Make>&& background,
-		MakeDyn<SRVec2F> value,
+		MakeDyn<ISMRVec2F> value,
 		float slider_scale,
 		Key key,
 		bool wheel_horizontal,
@@ -24,7 +24,7 @@ namespace ie {
 	ConstSlider::Make::Make(
 		BoxPtr<INonInteractive::Make>&& slider,
 		BoxPtr<INonInteractive::Make>&& background,
-		MakeDyn<SRVec2F> value,
+		MakeDyn<ISMRVec2F> value,
 		sf::Vector2i division,
 		float slider_scale,
 		Key key,
@@ -80,7 +80,7 @@ orl::Option<ie::ConstSlider::Make> ieml::Decode<char, ie::ConstSlider::Make>::de
 	auto map{node.get_map_view().except()};
 	auto slider{map.at("slider").except().as < ie::BoxPtr < ie::INonInteractive::Make > > ().move_except()};
 	auto background{map.at("background").except().as < ie::BoxPtr < ie::INonInteractive::Make > > ().move_except()};
-	auto value{map.at("value").except().as<ie::MakeDyn<ie::SRVec2F> >().move_except()};
+	auto value{map.at("value").except().as<ie::MakeDyn<ie::ISMRVec2F> >().move_except()};
 	auto slider_scale{map.get_as<float>("slider-scale").ok_or(1.0)};
 	auto key{map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft)};
 	bool wheel_horizontal{map.get_as<bool>("wheel-horizontal").ok_or(false)};

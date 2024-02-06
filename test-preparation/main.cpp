@@ -18,7 +18,6 @@ void my_copy_file(const std::filesystem::path& source_path, const std::filesyste
 				std::ofstream destination_o(destination_path, std::ios::binary);
 				if(destination_o.is_open()) {
 					destination_o << source_str;
-					printf("copy: %s\n", source_path.string().c_str());
 					destination_o.close();
 				}
 			}
@@ -100,7 +99,6 @@ void establish_friendship(
 				second_file.clear();
 				second_file << str_file;
 				second_file.close();
-				printf("copy_h\n");
 			}
 		}
 	}

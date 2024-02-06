@@ -8,7 +8,7 @@
 namespace ie {
 	BoxSwitcherTabs::Make::Make(
 		std::vector<BoxPtr<IScalable::Make> >&& objects,
-		MakeDyn<ISRSize> value,
+		MakeDyn<ISMRSize> value,
 		Key key,
 		bool is_horizontal,
 		sf::Vector2f min_size
@@ -84,7 +84,7 @@ orl::Option<ie::BoxSwitcherTabs::Make> ieml::Decode<char, ie::BoxSwitcherTabs::M
 	auto map{node.get_map_view().except()};
 	return ie::BoxSwitcherTabs::Make{
 		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().move_except(),
-		map.at("value").except().as<ie::MakeDyn<ie::ISRSize> >().move_except(),
+		map.at("value").except().as<ie::MakeDyn<ie::ISMRSize> >().move_except(),
 		map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft),
 		map.get_as<bool>("horizontal").ok_or(true),
 		map.get_as<sf::Vector2f>("min-size").ok_or({}),

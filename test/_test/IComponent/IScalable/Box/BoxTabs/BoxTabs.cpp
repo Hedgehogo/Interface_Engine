@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/Box/BoxTabs/BoxTabs.hpp>
 #include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include <IE/shared/ISValue/SRanged/SRanged.hpp>
+#include <IE/shared/ISReadable/ISRanged/SRanged/SRanged.hpp>
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_test/_image_equal/image_equal.hpp"
 
 TEST(IComponent, BoxTabs) {
 	InitInfoData data{{100, 100}};
 	
-	ie::SRSize value{0};
+	ie::SMRSize value{0};
 	ie::BoxTabs box_tabs{
 		ie::BoxTabs::Make{
 			ie::make_vector(

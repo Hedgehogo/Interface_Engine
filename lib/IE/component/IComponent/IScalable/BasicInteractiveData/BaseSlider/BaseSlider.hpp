@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/shared/SReader/SReader.hpp"
-#include "IE/shared/ISValue/SVec2/SVec2.hpp"
+#include "IE/shared/ISReadable/ISVec2/ISVec2.hpp"
 #include "IE/component/IComponent/IScalable/INonInteractive/INonInteractive.hpp"
 #include "../BasicInteractiveData.hpp"
 #include "SliderInteraction/SliderInteraction.hpp"
@@ -13,7 +13,7 @@ namespace ie {
 			BoxPtr<INonInteractive::Make>&& slider,
 			BoxPtr<INonInteractive::Make>&& background,
 			BoxPtr<SliderInteraction::Make>&& interaction,
-			MakeDyn<SRVec2F>&& value,
+			MakeDyn<ISMRVec2F>&& value,
 			InitInfo init_info
 		);
 		
@@ -23,7 +23,7 @@ namespace ie {
 		
 		sf::Vector2f get_value();
 		
-		SRVec2F& get_value_ptr();
+		ISMRVec2F& get_value_ptr();
 		
 		void set_value(sf::Vector2f value);
 		
@@ -55,7 +55,7 @@ namespace ie {
 		BasicInteractiveData<BaseSlider&> interactive_;
 		BoxPtr<INonInteractive> background_;
 		BoxPtr<INonInteractive> slider_;
-		SReader<SRVec2F> value_;
+		SReader<ISMRVec2F> value_;
 		sf::Vector2f position_;
 		sf::Vector2f slider_size_;
 		sf::Vector2f move_zone_size_;

@@ -25,36 +25,69 @@ namespace ie {
 	
 	template<typename T>
 	void ieml_rttb_init_shared(char first, std::string name) {
-		add_type<ISValue<T>, SValue<T> >();
-		add_type_make<ISValue<T>, SValue<T> >(name);
+		add_type<ISMutable<T>, SMutable<T> >();
+		add_type_make<ISMutable<T>, SMutable<T> >(std::string("M") + name);
+		add_type<ISReadable<T>, ISMutable<T> >();
+		add_type_make<ISReadable<T>, ISMutable<T> >();
+		add_type<ISReadable<T>, SReadable<T> >();
+		add_type_make<ISReadable<T>, SReadable<T> >(name);
 		
 		add_type_make<KeyAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
 		
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
+			add_type<ISMVec2<T>, SMVec2<T> >();
+			add_type_make<ISMVec2<T>, SMVec2<T> >(std::string("MVec2") + std::string(1, first));
+			add_type<ISMRVec2<T>, SMRVec2<T> >();
+			add_type_make<ISMRVec2<T>, SMRVec2<T> >(std::string("MRVec2") + std::string(1, first));
+			add_type<ISMutable<sf::Vector2<T> >, ISMVec2<T> >();
+			add_type_make<ISMutable<sf::Vector2<T> >, ISMVec2<T> >();
+			add_type<ISMutable<T>, SMRanged<T> >();
+			add_type_make<ISMutable<T>, SMRanged<T> >(std::string("MR") + name);
+			add_type<ISMRanged<T>, SMRanged<T> >();
+			add_type_make<ISMRanged<T>, SMRanged<T> >();
+			add_type<ISMutable<T>, ISMRanged<T> >();
+			add_type_make<ISMutable<T>, ISMRanged<T> >();
+			
 			add_type<ISVec2<T>, SVec2<T> >();
 			add_type_make<ISVec2<T>, SVec2<T> >(std::string("Vec2") + std::string(1, first));
-			add_type<ISVec2<T>, SRVec2<T> >();
-			add_type_make<ISVec2<T>, SRVec2<T> >(std::string("RVec2") + std::string(1, first));
-			add_type<ISValue<sf::Vector2<T> >, ISVec2<T> >();
-			add_type_make<ISValue<sf::Vector2<T> >, ISVec2<T> >();
-			add_type<SValue<T>, SRanged<T> >();
-			add_type_make<SValue<T>, SRanged<T> >(std::string("R") + name);
+			add_type<ISRVec2<T>, SRVec2<T> >();
+			add_type_make<ISRVec2<T>, SRVec2<T> >(std::string("RVec2") + std::string(1, first));
+			add_type<ISVec2<T>, ISMVec2<T> >();
+			add_type_make<ISVec2<T>, ISMVec2<T> >();
+			add_type<ISReadable<sf::Vector2<T> >, ISVec2<T> >();
+			add_type_make<ISReadable<sf::Vector2<T> >, ISVec2<T> >();
+			add_type<ISReadable<T>, SRanged<T> >();
+			add_type_make<ISReadable<T>, SRanged<T> >(std::string("R") + name);
 			add_type<ISRanged<T>, SRanged<T> >();
 			add_type_make<ISRanged<T>, SRanged<T> >();
-			add_type<ISValue<T>, ISRanged<T> >();
-			add_type_make<ISValue<T>, ISRanged<T> >();
+			add_type<ISRanged<T>, ISMRanged<T> >();
+			add_type_make<ISRanged<T>, ISMRanged<T> >();
+			add_type<ISReadable<T>, ISRanged<T> >();
+			add_type_make<ISReadable<T>, ISRanged<T> >();
 			
-			add_bool_determine_make<SRVec2<T> >();
-			add_bool_determine_make<SRanged<T> >();
+			add_bool_determine_make<SMRVec2<T> >();
+			add_bool_determine_make<SMRanged<T> >();
 		}
 	}
 	
 	void ieml_rttb_init() {
 		[[maybe_unused]] static bool once{[]() {
 			ieml_rttb_init_shared<bool>('B', "Bool");
-			ieml_rttb_init_shared<size_t>('U', "USize");
+			ieml_rttb_init_shared<size_t>('S', "Size");
 			ieml_rttb_init_shared<int>('I', "Int");
 			ieml_rttb_init_shared<float>('F', "Float");
+			add_type<ISInt, SCastF2I>();
+			add_type_make<ISInt, SCastF2I>("CastF");
+			add_type<ISSize, SCastF2S>();
+			add_type_make<ISSize, SCastF2S>("CastF");
+			add_type<ISFloat, SCastI2F>();
+			add_type_make<ISFloat , SCastI2F>("CastI");
+			add_type<ISSize, SCastF2S>();
+			add_type_make<ISSize, SCastF2S>("CastI");
+			add_type<ISFloat, SCastS2F>();
+			add_type_make<ISFloat , SCastS2F>("CastS");
+			add_type<ISInt, SCastS2I>();
+			add_type_make<ISInt, SCastS2I>("CastS");
 			
 			//add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
 			//add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
@@ -178,7 +211,7 @@ namespace ie {
 			add_type_make_named<BasePanel, Panel>();
 			
 			add_bool_determine_make<TextBlock>();
-			add_bool_determine_make<SBool>();
+			add_bool_determine_make<SMBool>();
 			add_bool_determine_make<FullColor>();
 			add_bool_determine_make<RoundedRectangle>();
 			add_bool_determine_make<Sprite>();

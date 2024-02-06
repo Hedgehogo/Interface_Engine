@@ -6,7 +6,7 @@ namespace ie {
 		BoxPtr<INonInteractive::Make>&& slider,
 		BoxPtr<INonInteractive::Make>&& background,
 		BoxPtr<SliderInteraction::Make>&& interaction,
-		MakeDyn<SRVec2F>&& value,
+		MakeDyn<ISMRVec2F>&& value,
 		InitInfo init_info
 	) :
 		interactive_(std::move(interaction), init_info, *this),
@@ -39,7 +39,7 @@ namespace ie {
 		this->value_.get().set(value);
 	}
 	
-	SRVec2F& BaseSlider::get_value_ptr() {
+	ISMRVec2F& BaseSlider::get_value_ptr() {
 		return value_.get();
 	}
 	
