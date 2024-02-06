@@ -23,14 +23,11 @@ namespace ie {
 	Underline* Underline::copy() const{
 		return new Underline{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Underline>::decode_pointer(const YAML::Node& node, Underline*& underline) {
-		underline = new Underline{
-			conv_def<orl::Option<sf::Color>>(node["color"], {})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::Underline::Make> ieml::Decode<char, ie::Underline::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::Underline::Make{
+		map.get_as<orl::Option<sf::Color>>("color").ok_or({}),
+	};
 }

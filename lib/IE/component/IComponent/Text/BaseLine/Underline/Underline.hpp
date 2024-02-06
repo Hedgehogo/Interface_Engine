@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../BaseLine.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class Underline : public BaseLine {
@@ -23,11 +24,9 @@ namespace ie {
 		float underline_offset;
 		float underline_thickness;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Underline> {
-		static bool decode_pointer(const YAML::Node& node, Underline*& underline);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Underline::Make> {
+	static orl::Option<ie::Underline::Make> decode(ieml::Node const& node);
+};

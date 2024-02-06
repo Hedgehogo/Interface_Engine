@@ -13,7 +13,7 @@ TEST(IComponent_Text, TextBlock) {
 		
 		ie::TextBlock text_block{
 			{
-				U"aaa bbb",
+				"aaa bbb",
 				{},
 				{},
 				{},
@@ -32,7 +32,7 @@ TEST(IComponent_Text, TextBlock) {
 					sf::Color::Blue,
 					sf::Color::Black,
 					{150, 150, 150},
-					&font,
+					font,
 					sf::Text::Style::StrikeThrough,
 					30
 				}
@@ -80,10 +80,10 @@ TEST(IComponent_Text, TextBlock) {
 		InitInfoData text_data{{100, 100}};
 		
 		ie::TextBlock text_block{
-			ie::TextBlock::Make{
-				U"aaa bbb",
+			{
+				"aaa bbb",
 				sf::Color::Red,
-				&font,
+				font,
 				{},
 				std::vector<ie::BoxPtr<ie::BaseLine::Make>>{},
 				30,
@@ -103,7 +103,7 @@ TEST(IComponent_Text, TextBlock) {
 					sf::Color::Blue,
 					sf::Color::Black,
 					{150, 150, 150},
-					&font,
+					font,
 					{},
 					30
 				}

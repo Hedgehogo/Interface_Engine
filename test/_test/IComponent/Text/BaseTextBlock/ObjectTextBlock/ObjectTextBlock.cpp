@@ -5,13 +5,15 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 
 TEST(IComponent_Text, ObjectTextBlock) {
+	sf::Font font{};
+	font.loadFromFile("../../example-resources/msyh.ttc");
 	{
 		InitInfoData data{{100, 100}};
 		InitInfoData text_data{{100, 100}};
 		
 		ie::ObjectTextBlock object_text_block{
 			{
-                    ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
+				ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
 				30.f
 			},
 			{
@@ -25,7 +27,7 @@ TEST(IComponent_Text, ObjectTextBlock) {
 					sf::Color::Blue,
 					sf::Color::Black,
 					{150, 150, 150},
-					nullptr,
+					font,
 					sf::Text::Style::StrikeThrough,
 					30
 				}
@@ -60,7 +62,7 @@ TEST(IComponent_Text, ObjectTextBlock) {
 					sf::Color::Blue,
 					sf::Color::Black,
 					{150, 150, 150},
-					nullptr,
+					font,
 					sf::Text::Style::StrikeThrough,
 					30
 				}
@@ -95,7 +97,7 @@ TEST(IComponent_Text, ObjectTextBlock) {
 					sf::Color::Blue,
 					sf::Color::Black,
 					{150, 150, 150},
-					nullptr,
+					font,
 					sf::Text::Style::StrikeThrough,
 					30
 				}

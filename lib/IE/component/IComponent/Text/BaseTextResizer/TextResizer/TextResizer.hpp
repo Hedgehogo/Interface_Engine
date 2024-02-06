@@ -71,11 +71,9 @@ namespace ie {
 		sf::Vector2f start_render;
 		sf::Vector2f end_render;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Resizer> {
-		static bool decode_pointer(const YAML::Node& node, Resizer*& resizer);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::TextResizer::Make> {
+	static orl::Option<ie::TextResizer::Make> decode(ieml::Node const& node);
+};

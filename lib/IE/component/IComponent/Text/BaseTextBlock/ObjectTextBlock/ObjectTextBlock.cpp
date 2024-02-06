@@ -1,5 +1,4 @@
 #include "ObjectTextBlock.hpp"
-#include "../../BaseCharacter/Character/Character.hpp"
 
 namespace ie {
 	ObjectTextBlock::Make::Make(
@@ -11,7 +10,8 @@ namespace ie {
 		special(is_character ? ObjectCharacter::ObjectSpecial::No : ObjectCharacter::ObjectSpecial::Object) {
 	}
 	
-	ObjectTextBlock::Make::Make(BoxPtr<IScalable::Make>&& object, float height) : object(std::move(object)), size(0, height), special(ObjectCharacter::ObjectSpecial::FullLine) {
+	ObjectTextBlock::Make::Make(BoxPtr<IScalable::Make>&& object, float height) : object(std::move(object)), size(0, height),
+																				  special(ObjectCharacter::ObjectSpecial::FullLine) {
 	}
 	
 	ObjectTextBlock* ObjectTextBlock::Make::make(TextBockInitInfo init_info) {
@@ -41,7 +41,7 @@ namespace ie {
 	}
 	
 	std::vector<BaseCharacter*> ObjectTextBlock::get_characters() {
-		return std::vector<BaseCharacter*> {&object_character};
+		return std::vector<BaseCharacter*>{&object_character};
 	}
 	
 	void ObjectTextBlock::update() {
@@ -50,11 +50,20 @@ namespace ie {
 	bool ObjectTextBlock::update_interactions(sf::Vector2f mouse_position) {
 		return object_character.update_interactions(mouse_position);
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<ObjectTextBlock>::decode_pointer(const YAML::Node&, ObjectTextBlock*&) {
-		throw std::runtime_error("DecodePointer<ObjectTextBlock>::decode_pointer() not correct");
-		return false;
+}
+
+orl::Option<ie::ObjectTextBlock::Make> ieml::Decode<char, ie::ObjectTextBlock::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	if(auto size{map.at("size")}) {
+		return ie::ObjectTextBlock::Make{
+			map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().move_except(),
+			size.except().as<sf::Vector2f>().except(),
+			map.get_as<bool>("is-character").ok_or(true),
+		};
+	} else {
+		return ie::ObjectTextBlock::Make{
+			map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().move_except(),
+			map.at("height").except().as<float>().except(),
+		};
 	}
-	*/
 }

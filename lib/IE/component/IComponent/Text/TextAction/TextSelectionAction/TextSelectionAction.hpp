@@ -33,11 +33,9 @@ namespace ie {
 		Text* text;
 		orl::Option<std::vector<BaseCharacter*>::iterator> start, end;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<TextSelectionAction> {
-		static bool decode_pointer(const YAML::Node&, TextSelectionAction*& text_selection_action);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::TextSelectionAction::Make> {
+	static orl::Option<ie::TextSelectionAction::Make> decode(ieml::Node const& node);
+};

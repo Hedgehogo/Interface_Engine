@@ -3,6 +3,7 @@
 #include "../BaseTextBlock.hpp"
 #include "../../BaseCharacter/Character/Character.hpp"
 #include "../../BaseCharacter/ObjectCharacter/ObjectCharacter.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class ObjectTextBlock : public BaseTextBlock {
@@ -33,11 +34,9 @@ namespace ie {
 		ObjectCharacter object_character;
 		std::vector<BoxPtr<BaseLine>> lines;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<ObjectTextBlock> {
-		static bool decode_pointer(const YAML::Node& node, ObjectTextBlock*& object_text_block);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::ObjectTextBlock::Make> {
+	static orl::Option<ie::ObjectTextBlock::Make> decode(ieml::Node const& node);
+};

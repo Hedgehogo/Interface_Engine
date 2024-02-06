@@ -210,6 +210,7 @@ namespace ie {
 			add_type_make_named<BasePanel, ConstPanel>();
 			add_type_make_named<BasePanel, Panel>();
 			
+			add_bool_determine_make<TextBlock>();
 			add_bool_determine_make<SMBool>();
 			add_bool_determine_make<FullColor>();
 			add_bool_determine_make<RoundedRectangle>();

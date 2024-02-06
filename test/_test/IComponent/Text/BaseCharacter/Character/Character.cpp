@@ -25,7 +25,7 @@ TEST(IComponent_Text, Character) {
 			sf::Color::Blue,
 			sf::Color::Black,
 			sf::Color{150, 150, 150},
-			&font,
+			font,
 			sf::Text::Style::Regular,
 			14
 		};
@@ -35,7 +35,7 @@ TEST(IComponent_Text, Character) {
 				std::move(lines_make),
 				ie::LineInitInfo{
 					text_variables.size.except(),
-					*text_variables.font.except(),
+					text_variables.font.except(),
 					text_variables.text_color.except(),
 					data.render_target
 				}
@@ -131,7 +131,7 @@ TEST(IComponent_Text, Character) {
 			sf::Color::Blue,
 			sf::Color::Black,
 			sf::Color{150, 150, 150},
-			&font,
+			font,
 			sf::Text::Style::Regular,
 			14
 		};
@@ -161,7 +161,7 @@ TEST(IComponent_Text, Character) {
 			sf::Color::Blue,
 			sf::Color::Black,
 			sf::Color{150, 150, 150},
-			&font,
+			font,
 			sf::Text::Style::Regular,
 			14
 		};
@@ -192,7 +192,7 @@ TEST(IComponent_Text, Character) {
 			sf::Color::Yellow,
 			sf::Color::Cyan,
 			sf::Color::Magenta,
-			&font,
+			font,
 			sf::Text::Style::Regular,
 			14
 		};

@@ -23,15 +23,12 @@ namespace ie {
 	StrikeThrough* StrikeThrough::copy() const{
 		return new StrikeThrough{*this};
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<StrikeThrough>::decode_pointer(const YAML::Node& node, StrikeThrough*& strike_through) {
-		strike_through = new StrikeThrough{
-			conv_def<orl::Option<sf::Color>>(node["color"], {}),
-			conv_def(node["strike-through-offset"], 0.3f)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::StrikeThrough::Make> ieml::Decode<char, ie::StrikeThrough::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::StrikeThrough::Make{
+		map.get_as<orl::Option<sf::Color>>("color").ok_or({}),
+		map.get_as<float>("strike-through-offset").ok_or(0.3f),
+	};
 }

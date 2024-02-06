@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../BaseLine.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class StrikeThrough : public BaseLine {
@@ -24,11 +25,9 @@ namespace ie {
 		float strike_through_offset;
 		float underline_thickness;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<StrikeThrough> {
-		static bool decode_pointer(const YAML::Node& node, StrikeThrough*& strike_through);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::StrikeThrough::Make> {
+	static orl::Option<ie::StrikeThrough::Make> decode(ieml::Node const& node);
+};

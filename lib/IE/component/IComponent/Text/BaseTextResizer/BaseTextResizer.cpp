@@ -21,36 +21,28 @@ namespace ie {
 		}
 		return get_min_size_base();
 	}
-	
-	/*old_yaml_decode_impl
-	bool Decode<BaseResizer::Align>::decode(const YAML::Node& node, BaseResizer::Align& align) {
-		if(node.as<std::string>() == "left") {
-			align = BaseResizer::Align::Left;
-		} else if(node.as<std::string>() == "right") {
-			align = BaseResizer::Align::Right;
-		} else if(node.as<std::string>() == "center") {
-			align = BaseResizer::Align::Center;
-		} else {
-			throw YAML::BadConversion{node.Mark()};
-		}
-		return true;
+}
 
+orl::Option<ie::BaseTextResizer::Align> ieml::Decode<char, ie::BaseTextResizer::Align>::decode(ieml::Node const& node) {
+	auto& str{node.get_clear().get_string().except()};
+	if(str == "left") {
+		return ie::BaseTextResizer::Align::Left;
+	} else if(str == "right") {
+		return ie::BaseTextResizer::Align::Right;
+	} else if(str == "center") {
+		return ie::BaseTextResizer::Align::Center;
 	}
-	*/
-	
-	/*old_yaml_decode_impl
-	bool Decode<BaseResizer::Algorithm>::decode(const YAML::Node& node, BaseResizer::Algorithm& align) {
-		if(node.as<std::string>() == "base") {
-			align = BaseResizer::Algorithm::Base;
-		} else if(node.as<std::string>() == "console") {
-			align = BaseResizer::Algorithm::Console;
-		} else if(node.as<std::string>() == "absolute") {
-			align = BaseResizer::Algorithm::Absolute;
-		} else {
-			throw YAML::BadConversion{node.Mark()};
-		}
-		return true;
+	return {};
+}
 
+orl::Option<ie::BaseTextResizer::Algorithm> ieml::Decode<char, ie::BaseTextResizer::Algorithm>::decode(ieml::Node const& node) {
+	auto& str{node.get_clear().get_string().except()};
+	if(str == "base") {
+		return ie::BaseTextResizer::Algorithm::Base;
+	} else if(str == "console") {
+		return ie::BaseTextResizer::Algorithm::Console;
+	} else if(str == "absolute") {
+		return ie::BaseTextResizer::Algorithm::Absolute;
 	}
-	*/
+	return {};
 }
