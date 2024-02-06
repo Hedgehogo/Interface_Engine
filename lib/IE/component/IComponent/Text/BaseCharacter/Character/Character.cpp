@@ -25,14 +25,14 @@ namespace ie {
 		orl::Option<sf::RenderTarget&> render_target
 	) : render_target(character == '\n' ? orl::Option<sf::RenderTarget&>{} : render_target),
 		character(character),
-		glyph(text_variables.font.some()->getGlyph(character, text_variables.size.some(), text_variables.style.some() & sf::Text::Style::Bold)),
+		glyph(text_variables.font.some().getGlyph(character, text_variables.size.some(), text_variables.style.some() & sf::Text::Style::Bold)),
 		advance(glyph.advance),
 		kerning(0),
 		text_variables(text_variables),
 		vertex_array(sf::Quads, 4),
 		selection_vertex_array(sf::Quads, 4),
-		lines(lines),
-		texture(text_variables.font.some()->getTexture(text_variables.size.some())){
+		texture(text_variables.font.some().getTexture(text_variables.size.some())),
+		lines(lines){
 		if(render_target) {
 			make_rect_bones_tex_coords(glyph.textureRect, vertex_array);
 			
@@ -108,7 +108,7 @@ namespace ie {
 	}
 	
 	float Character::get_kerning(char32_t character) {
-		return text_variables.font.some()->getKerning(this->character, character, text_variables.size.some());
+		return text_variables.font.some().getKerning(this->character, character, text_variables.size.some());
 	}
 	
 	float Character::get_advance() {

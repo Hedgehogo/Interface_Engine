@@ -31,7 +31,15 @@ int main() {
 	
 	sf::Font font{};
 	font.loadFromFile("../../example-resources/segoeui.ttf");
-	auto window{ie::make_window("../../example-resources/test", "IEML works!")};
+	auto window{
+		ie::make_window(
+			"../../example-resources/test", "IEML works!",
+			{800, 600},
+			sf::ContextSettings{
+				0, 0, 1
+			}
+		)
+	};
 	
 	FpsCounter<500> fps;
 	

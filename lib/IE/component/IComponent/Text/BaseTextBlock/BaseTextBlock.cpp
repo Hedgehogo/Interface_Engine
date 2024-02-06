@@ -13,7 +13,7 @@ namespace ie {
 		sf::Color background_selection_color,
 		sf::Color inactive_text_selection_color,
 		sf::Color inactive_background_selection_color,
-		sf::Font* font,
+		sf::Font& font,
 		size_t size,
 		sf::Text::Style style
 	) {

@@ -302,16 +302,13 @@ namespace ie {
 	sf::Vector2f TextResizer::get_normal_size() {
 		return get_min_size();
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Resizer>::decode_pointer(const YAML::Node& node, Resizer*& resizer) {
-		resizer = new Resizer{
-			conv_def(node["line-spacing"], 1.15f),
-			conv_def(node["align"], BaseResizer::Align::Left),
-			conv_def(node["algorithm"], BaseResizer::Algorithm::Base)
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::TextResizer::Make> ieml::Decode<char, ie::TextResizer::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::TextResizer::Make{
+		map.get_as<float>("line-spacing").ok_or(1.15f),
+		map.get_as<ie::BaseTextResizer::Align>("align").ok_or(ie::BaseTextResizer::Align::Left),
+		map.get_as<ie::BaseTextResizer::Algorithm>("algorithm").ok_or(ie::BaseTextResizer::Algorithm::Base),
+	};
 }

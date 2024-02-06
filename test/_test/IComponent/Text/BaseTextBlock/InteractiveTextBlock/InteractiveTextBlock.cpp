@@ -12,8 +12,8 @@ TEST(IComponent_Text, InteractiveTextBlock) {
 	
 	ie::InteractiveTextBlock interactive_text_block{
 		{
-                ie::make_box_ptr<ie::EmptyInteraction::Make>(),
-			U"aaa bbb"
+			ie::make_box_ptr<ie::EmptyInteraction::Make>(),
+			"aaa bbb"
 		},
 		{
 			data.make_init_info(),
@@ -26,7 +26,7 @@ TEST(IComponent_Text, InteractiveTextBlock) {
 				sf::Color::Blue,
 				sf::Color::Black,
 				{150, 150, 150},
-				&font,
+				font,
 				sf::Text::Style::StrikeThrough,
 				30
 			}

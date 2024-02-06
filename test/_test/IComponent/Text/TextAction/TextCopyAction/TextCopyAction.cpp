@@ -24,10 +24,10 @@ TEST(IComponent_Text, TextCopyAction) {
 		ie::Text::Make{
 			ie::make_vector(
                     ie::make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
-					U"aaa\naaa"
+					"aaa\naaa"
 				)
 			),
-			&font
+			font
 		},
 		data.make_init_info()
 	};

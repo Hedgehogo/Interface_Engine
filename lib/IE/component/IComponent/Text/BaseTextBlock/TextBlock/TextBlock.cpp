@@ -7,9 +7,9 @@
 
 namespace ie {
 	TextBlock::Make::Make(
-		std::u32string text,
+		sf::String text,
 		const orl::Option<sf::Color>& text_color,
-		const orl::Option<sf::Font*>& font,
+		const orl::Option<sf::Font&>& font,
 		const orl::Option<sf::Text::Style>& style,
 		std::vector<BoxPtr<BaseLine::Make>>&& lines,
 		const orl::Option<size_t>& size,
@@ -62,14 +62,14 @@ namespace ie {
 				),
 				LineInitInfo{
 					text_variables.size.some(),
-					*text_variables.font.some(),
+					text_variables.font.some(),
 					text_variables.text_color.some(),
 					init_info.text_render_target
 				}
 			)
 		),
 		text(std::move(make.text)) {
-		text_characters.resize(text.size());
+		text_characters.resize(text.getSize());
 		for(size_t i = 0; i < text_characters.size(); ++i) {
 			text_characters[i] = make_box_ptr<Character>(text[i], text_variables, this->lines, init_info.text_render_target);
 		}
@@ -81,7 +81,7 @@ namespace ie {
 		sf::Color background_selection_color,
 		sf::Color inactive_text_selection_color,
 		sf::Color inactive_background_selection_color,
-		sf::Font* font,
+		sf::Font& font,
 		size_t size,
 		sf::Text::Style style
 	) {
@@ -96,7 +96,7 @@ namespace ie {
 			style
 		);
 		
-		text_characters.resize(text.size());
+		text_characters.resize(text.getSize());
 		for(size_t i = 0; i < text_characters.size(); ++i) {
 			text_characters[i] = make_box_ptr<Character>(text[i], text_variables, this->lines, orl::Option<sf::RenderTarget&> {});
 		}
@@ -117,44 +117,40 @@ namespace ie {
 		return false;
 	}
 	
-	bool TextBlock::in(sf::Vector2f mouse_position) {
+	bool TextBlock::in(sf::Vector2f) {
 		return false;
 	}
 	
 	void TextBlock::set_kerning(char32_t character) {
 		for(auto& text_character : text_characters){
-			text_character->set_kerning(text_variables.font.some()->getKerning(character, text_character->get_char(), text_variables.size.some()));
+			text_character->set_kerning(text_variables.font.some().getKerning(character, text_character->get_char(), text_variables.size.some()));
 			character = text_character->get_char();
 		}
 	}
 	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<TextBlock>::decode_pointer(const YAML::Node& node, TextBlock*& text_block) {
-		if(node.IsScalar()) {
-			text_block = new TextBlock{node.as<std::u32string>()};
-		} else {
-			text_block = new TextBlock{
-				node["text"].as<std::u32string>(),
-				conv_def<orl::Option<sf::Color> >(node["text-color"], {}),
-				conv_def<orl::Option<sf::Font*> >(node["font"], {}),
-				conv_def<orl::Option<sf::Text::Style> >(node["style"], {}),
-				node["line"] ? make_vector(node["line"].as<BoxPtr<BaseLine > >()) : node["line"].as<std::vector<BoxPtr<BaseLine> > >(),
-				conv_def<orl::Option<size_t> >(node["size"], {}),
-				conv_def<orl::Option<sf::Color> >(node["text-selection-color"], {}),
-				conv_def<orl::Option<sf::Color> >(node["background-selection-color"], {}),
-				conv_def<orl::Option<sf::Color> >(node["inactive-text-selection-color"], {}),
-				conv_def<orl::Option<sf::Color> >(node["inactive-background-selection-color"], {})
-			};
-		}
-		return true;
+	bool Determine<TextBlock::Make>::determine(const ieml::Node& node) {
+		return node.is_string();
+	}
+}
 
+orl::Option<ie::TextBlock::Make> ieml::Decode<char, ie::TextBlock::Make>::decode(ieml::Node const& node) {
+	auto& clear_node{node.get_clear()};
+	if (auto str{clear_node.get_string()}){
+		return {{ie::to_utf32(ie::to_utf32(str.except()))}};
 	}
-	*/
-	
-	/*old_yaml_determine_impl
-	template<>
-	bool determine<TextBlock>(const YAML::Node& node) {
-		return node.IsScalar();
-	}
-	*/
+	auto map{clear_node.get_map_view().except()};
+	return ie::TextBlock::Make{
+		map.at("text").except().as<sf::String>().except(),
+		map.get_as<orl::Option<sf::Color> >("text-color").ok_or({}),
+		map.get_as<orl::Option<sf::Font&> >("font").ok_or({}),
+		map.get_as<orl::Option<ie::LoadTextStyle> >("style").ok_or({}).map([](auto& style){
+			return style.style;
+		}),
+		map.get_as<std::vector<bp::BoxPtr<ie::BaseLine::Make> > >("lines").move_ok_or({}),
+		map.get_as<orl::Option<size_t>>("font-size").ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("text-selection-color").ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("background-selection-color").ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("inactive-text-selection-color").ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("inactive-background-selection-color").ok_or({}),
+	};
 }

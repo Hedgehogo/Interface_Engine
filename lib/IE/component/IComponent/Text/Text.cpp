@@ -1,11 +1,10 @@
 #include "Text.hpp"
 
 #include <cmath>
-
 namespace ie {
 	Text::Make::Make(
 		std::vector<BoxPtr<BaseTextBlock::Make>>&& text_blocks,
-		sf::Font* font,
+		sf::Font& font,
 		BoxPtr<INonInteractive::Make>&& background,
 		size_t size,
 		sf::Color text_color,
@@ -100,27 +99,21 @@ namespace ie {
 		return selection.end.except();
 	}
 	
-	std::u32string Text::get_selection_text() {
+	sf::String Text::get_selection_text() {
 		if(selection.start && selection.end) {
-			std::u32string SelectionText{};
-			std::vector<BaseCharacter*>::iterator local_start;
-			std::vector<BaseCharacter*>::iterator local_end;
-			if(std::distance(selection.start.some(), selection.end.some()) < 0) {
-				local_start = selection.end.some();
-				local_end = selection.start.some();
-			} else {
-				local_start = selection.start.some();
-				local_end = selection.end.some();
+			sf::String SelectionText{};
+			std::vector<BaseCharacter*>::iterator local_start{selection.start.some()}, local_end{selection.end.some()};
+			if(std::distance(local_start, local_end) < 0) {
+				std::swap(local_start, local_end);
 			}
-			SelectionText.resize(std::distance(local_start, local_end));
 			
-			for(size_t i = 0; i < SelectionText.length(); ++i) {
-				SelectionText[i] = (*(local_start + i))->get_char();
+			for(auto item = local_start; item != local_end; ++item) {
+				SelectionText += (*(item))->get_char();
 			}
 			
 			return SelectionText;
 		}
-		return std::u32string{U""};
+		return sf::String{""};
 	}
 	
 	float get_distance_y(std::vector<BaseCharacter*>::iterator iterator, float mouse_position_y) {
@@ -284,26 +277,36 @@ namespace ie {
 		
 		background->draw_debug(render_target, indent, indent_addition, hue + hue_offset, hue_offset);
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<Text>::decode_pointer(const YAML::Node& node, Text*& text) {
-		sf::Color text_color{conv_def(node["text-color"], sf::Color::Black)};
-		
-		text = new Text{
-			node["text-block"] ? std::vector{node["text-block"].as <BoxPtr<BaseTextBlock> > ()} : node["text-blocks"].as<std::vector<BoxPtr<BaseTextBlock>>>(),
-			node["font"].as<sf::Font*>(),
-			conv_def_box_ptr<IUninteractive, FullColor>(node["background"], sf::Color::White),
-			conv_def(node["size"], 14),
-			text_color,
-			conv_def(node["text-selection-color"], sf::Color::White),
-			conv_def(node["background-selection-color"], sf::Color::Blue),
-			conv_def(node["inactive-text-selection-color"], text_color),
-			conv_def(node["inactive-background-selection-color"],sf::Color{150, 150, 150}),
-			conv_def<sf::Text::Style>(node["style"], {}),
-			conv_def_box_ptr<BaseResizer, Resizer>(node["resizer"], 1.15f, BaseResizer::Align::Left),
-			node["text-interaction"] ? node["text-interaction"].as < BoxPtr < IBasicInteraction<Text&>>>() : make_box_ptr<BasicEmptyInteraction<Text&>>()};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::Text::Make> ieml::Decode<char, ie::Text::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	auto color{map.get_as<sf::Color>("text-color").ok_or(sf::Color::Black)};
+	return ie::Text::Make{
+		map.at("text-blocks").except().as<std::vector<bp::BoxPtr<ie::BaseTextBlock::Make> > >().move_except(),
+		map.at("font").except().as<sf::Font&>().except(),
+		map.get_as<bp::BoxPtr<ie::INonInteractive::Make> >("background").move_ok_or(
+			bp::make_box_ptr<ie::INonInteractive::Make, ie::FullColor::Make>(
+				sf::Color::White
+			)
+		),
+		map.get_as<size_t>("font-size").ok_or(14),
+		color,
+		map.get_as<sf::Color>("text-selection-color").ok_or(sf::Color::White),
+		map.get_as<sf::Color>("background-selection-color").ok_or(sf::Color::Blue),
+		map.get_as<sf::Color>("inactive-text-selection-color").ok_or(color),
+		map.get_as<sf::Color>("inactive-background-selection-color").ok_or(
+			sf::Color{150, 150, 150}
+		),
+		map.get_as<ie::LoadTextStyle>("style").ok_or({}).style,
+		map.get_as<bp::BoxPtr<ie::BaseTextResizer::Make> >("resizer").move_ok_or(
+			bp::make_box_ptr<ie::BaseTextResizer::Make, ie::TextResizer::Make>(
+				1.15f,
+				ie::BaseTextResizer::Align::Left
+			)
+		),
+		map.get_as<bp::BoxPtr<ie::IBasicInteraction<ie::Text&>::Make > >("text-interaction").move_ok_or(
+			bp::make_box_ptr<ie::IBasicInteraction<ie::Text&>::Make, ie::BasicEmptyInteraction<ie::Text&>::Make>()
+		),
+	};
 }

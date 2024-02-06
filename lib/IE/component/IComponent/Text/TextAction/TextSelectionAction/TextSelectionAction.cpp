@@ -58,11 +58,8 @@ namespace ie {
 		}
 		BasicBaseKeyAction<Text&>::update(mouse_position, press);
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<TextSelectionAction>::decode_pointer(const YAML::Node&, TextSelectionAction*& text_selection_action) {
-		text_selection_action = new TextSelectionAction{};
-		return true;
-	}
-	*/
+}
+
+orl::Option<ie::TextSelectionAction::Make> ieml::Decode<char, ie::TextSelectionAction::Make>::decode(ieml::Node const& node) {
+	return ie::TextSelectionAction::Make{};
 }

@@ -4,6 +4,8 @@
 #include "IE/component/IComponent/Text/BaseTextResizer/TextResizer/TextResizer.hpp"
 #include "../IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp"
 #include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
+#include "IE/ieml/ieml-sfml/FileBuffer/FileBuffer.hpp"
 
 namespace ie {
 	class Text : public virtual IComponent, public virtual IDrawable, public virtual IUpdatable {
@@ -16,7 +18,7 @@ namespace ie {
 	public:
 		struct Make : public virtual IComponent::Make {
 			std::vector<BoxPtr<BaseTextBlock::Make> > text_blocks;
-			sf::Font* font;
+			sf::Font& font;
 			BoxPtr<INonInteractive::Make> background = make_box_ptr<FullColor::Make>(sf::Color::White);
 			size_t size = 14;
 			sf::Color text_color = sf::Color::Black;
@@ -30,7 +32,7 @@ namespace ie {
 			
 			explicit Make(
 				std::vector<BoxPtr<BaseTextBlock::Make> >&& text_blocks,
-				sf::Font* font,
+				sf::Font& font,
 				BoxPtr<INonInteractive::Make>&& background = make_box_ptr<FullColor::Make>(sf::Color::White),
 				size_t size = 14,
 				sf::Color text_color = sf::Color::Black,
@@ -60,7 +62,7 @@ namespace ie {
 		
 		[[nodiscard]] std::vector<BaseCharacter*>::iterator get_selection_end() const;
 		
-		std::u32string get_selection_text();
+		sf::String get_selection_text();
 		
 		std::vector<BaseCharacter*>& get_characters();
 		
@@ -111,11 +113,9 @@ namespace ie {
 		BoxPtr<BaseTextResizer> resizer;
 		BoxPtr<IBasicInteraction<Text&> > text_interaction;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<Text> {
-		static bool decode_pointer(const YAML::Node& node, Text*& text);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::Text::Make> {
+	static orl::Option<ie::Text::Make> decode(ieml::Node const& node);
+};

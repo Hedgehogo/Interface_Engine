@@ -3,14 +3,17 @@
 #include "../BaseTextBlock.hpp"
 #include "../../BaseCharacter/Character/Character.hpp"
 #include "IE/modules/yaml-cpp/yaml.hpp"
+#include "IE/ieml/shortcuts/shortcuts.hpp"
+#include "IE/ieml/ieml-sfml/FileBuffer/FileBuffer.hpp"
+#include "IE/utils/utf/to_utf/to_utf.hpp"
 
 namespace ie {
 	class TextBlock : public BaseTextBlock {
 	public:
 		struct Make : public BaseTextBlock::Make {
-			std::u32string text;
+			sf::String text;
 			orl::Option<sf::Color> text_color = {};
-			orl::Option<sf::Font*> font = {};
+			orl::Option<sf::Font&> font = {};
 			orl::Option<sf::Text::Style> style = {};
 			std::vector<BoxPtr<BaseLine::Make> > lines = {};
 			orl::Option<size_t> size = {};
@@ -20,9 +23,9 @@ namespace ie {
 			orl::Option<sf::Color> inactive_background_selection_color = {};
 			
 			Make(
-				std::u32string  text,
+				sf::String  text,
 				const orl::Option<sf::Color>& text_color = {},
-				const orl::Option<sf::Font*>& font = {},
+				const orl::Option<sf::Font&>& font = {},
 				const orl::Option<sf::Text::Style>& style = {},
 				std::vector<BoxPtr<BaseLine::Make>>&& lines = {},
 				const orl::Option<size_t>& size = {},
@@ -43,7 +46,7 @@ namespace ie {
 			sf::Color background_selection_color,
 			sf::Color inactive_text_selection_color,
 			sf::Color inactive_background_selection_color,
-			sf::Font* font,
+			sf::Font& font,
 			size_t size,
 			sf::Text::Style style
 		) override;
@@ -61,19 +64,21 @@ namespace ie {
 	protected:
 		std::vector<BoxPtr<BaseCharacter>> text_characters;
 		std::vector<BoxPtr<BaseLine>> lines;
-		std::u32string text;
+		sf::String text;
 	};
-	
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<TextBlock> {
-		static bool decode_pointer(const YAML::Node& node, TextBlock*& text_block);
-	};
-	*/
 	
 	/*old_yaml_determine
 	template<>
 	bool determine<TextBlock>(const YAML::Node& node);
 	*/
+	
+	template<>
+	struct Determine<TextBlock::Make> {
+		static bool determine(ieml::Node const& node);
+	};
 }
+
+template<>
+struct ieml::Decode<char, ie::TextBlock::Make> {
+	static orl::Option<ie::TextBlock::Make> decode(ieml::Node const& node);
+};

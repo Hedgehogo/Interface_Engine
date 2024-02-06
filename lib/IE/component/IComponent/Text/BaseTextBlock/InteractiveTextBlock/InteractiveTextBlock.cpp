@@ -5,9 +5,9 @@
 namespace ie {
 	InteractiveTextBlock::Make::Make(
 		BoxPtr<IBaseInteraction::Make>&& interaction,
-		const std::u32string& text,
+		const sf::String& text,
 		const orl::Option<sf::Color>& text_color,
-		const orl::Option<sf::Font*>& font,
+		const orl::Option<sf::Font&>& font,
 		const orl::Option<sf::Text::Style>& style,
 		std::vector<BoxPtr<BaseLine::Make>>&& lines,
 		const orl::Option<size_t>& size,
@@ -83,24 +83,23 @@ namespace ie {
 		}
 		return false;
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<InteractiveTextBlock>::decode_pointer(const YAML::Node& node, InteractiveTextBlock*& interactive_text_block) {
-		interactive_text_block = new InteractiveTextBlock{
-			node["interaction"].as < BoxPtr < IBaseInteraction > > (),
-			node["text"].as<std::u32string>(),
-			conv_def<orl::Option<sf::Color> >(node["text-color"], {}),
-			conv_def<orl::Option<sf::Font*> >(node["font"], {}),
-			conv_def<orl::Option<sf::Text::Style> >(node["style"], {}),
-			node["line"] ? make_vector(node["line"].as < BoxPtr < BaseLine >> ()) : node["line"].as<std::vector<BoxPtr<BaseLine>>>(),
-			conv_def<orl::Option<size_t>>(node["size"], {}),
-			conv_def<orl::Option<sf::Color> >(node["text-selection-color"], {}),
-			conv_def<orl::Option<sf::Color> >(node["background-selection-color"], {}),
-			conv_def<orl::Option<sf::Color> >(node["inactive-text-selection-color"], {}),
-			conv_def<orl::Option<sf::Color> >(node["inactive-background-selection-color"], {})
-		};
-		return true;
+}
 
-	}
-	*/
+orl::Option<ie::InteractiveTextBlock::Make> ieml::Decode<char, ie::InteractiveTextBlock::Make>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::InteractiveTextBlock::Make{
+		map.at("interaction").except().as<bp::BoxPtr<ie::IBaseInteraction::Make> >().move_except(),
+		map.at("text").except().as<sf::String>().except(),
+		map.get_as<orl::Option<sf::Color> >("text-color").ok_or({}),
+		map.get_as<orl::Option<sf::Font&> >("font").ok_or({}),
+		map.get_as<orl::Option<ie::LoadTextStyle> >("style").ok_or({}).map([](auto& style){
+			return style.style;
+		}),
+		map.get_as<std::vector<bp::BoxPtr<ie::BaseLine::Make> > >("lines").move_ok_or({}),
+		map.get_as<orl::Option<size_t>>("font-size").ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("text-selection-color").ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("background-selection-color").ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("inactive-text-selection-color").ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("inactive-background-selection-color").ok_or({}),
+	};
 }

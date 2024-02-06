@@ -2,6 +2,7 @@
 
 #include "../TextBlock/TextBlock.hpp"
 #include "IE/interaction/IInteraction/IInteraction.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class InteractiveTextBlock : public TextBlock {
@@ -9,17 +10,18 @@ namespace ie {
 		struct Make : public TextBlock::Make {
 			BoxPtr<IBaseInteraction::Make> interaction;
 			
-			Make(BoxPtr<IBaseInteraction::Make>&& interaction,
-				 const std::u32string& text,
-				 const orl::Option<sf::Color>& text_color = {},
-				 const orl::Option<sf::Font*>& font = {},
-				 const orl::Option<sf::Text::Style>& style = {},
-				 std::vector<BoxPtr<BaseLine::Make>>&& lines = {},
-				 const orl::Option<size_t>& size = {},
-				 const orl::Option<sf::Color>& text_selection_color = {},
-				 const orl::Option<sf::Color>& background_selection_color = {},
-				 const orl::Option<sf::Color>& inactive_text_selection_color = {},
-				 const orl::Option<sf::Color>& inactive_background_selection_color = {}
+			Make(
+				BoxPtr<IBaseInteraction::Make>&& interaction,
+				const sf::String& text,
+				const orl::Option<sf::Color>& text_color = {},
+				const orl::Option<sf::Font&>& font = {},
+				const orl::Option<sf::Text::Style>& style = {},
+				std::vector<BoxPtr<BaseLine::Make>>&& lines = {},
+				const orl::Option<size_t>& size = {},
+				const orl::Option<sf::Color>& text_selection_color = {},
+				const orl::Option<sf::Color>& background_selection_color = {},
+				const orl::Option<sf::Color>& inactive_text_selection_color = {},
+				const orl::Option<sf::Color>& inactive_background_selection_color = {}
 			);
 			
 			InteractiveTextBlock* make(TextBockInitInfo init_info) override;
@@ -41,11 +43,9 @@ namespace ie {
 		
 		BoxPtr<IInteraction> interaction;
 	};
-	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<InteractiveTextBlock> {
-		static bool decode_pointer(const YAML::Node& node, InteractiveTextBlock*& interactive_text_block);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::InteractiveTextBlock::Make> {
+	static orl::Option<ie::InteractiveTextBlock::Make> decode(ieml::Node const& node);
+};

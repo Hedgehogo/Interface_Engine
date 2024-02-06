@@ -60,18 +60,14 @@ namespace ie {
 		const Align align;
 		const Algorithm algorithm;
 	};
-	
-	/*old_yaml_decode
-	template<>
-	struct Decode<BaseResizer::Align> {
-		static bool decode(const YAML::Node& node, BaseResizer::Align& align);
-	};
-	*/
-	
-	/*old_yaml_decode
-	template<>
-	struct Decode<BaseResizer::Algorithm> {
-		static bool decode(const YAML::Node& node, BaseResizer::Algorithm& align);
-	};
-	*/
 }
+
+template<>
+struct ieml::Decode<char, ie::BaseTextResizer::Align> {
+	static orl::Option<ie::BaseTextResizer::Align> decode(ieml::Node const& node);
+};
+
+template<>
+struct ieml::Decode<char, ie::BaseTextResizer::Algorithm> {
+	static orl::Option<ie::BaseTextResizer::Algorithm> decode(ieml::Node const& node);
+};

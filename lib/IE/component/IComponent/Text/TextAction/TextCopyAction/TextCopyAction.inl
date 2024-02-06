@@ -2,13 +2,15 @@
 #include "IE/utils/utf/to_utf/to_utf.hpp"
 
 namespace ie {
-	template<typename T>
-	BasicTextCopyAction<T>::Make::Make(T&& clipboard) : clipboard(clipboard) {
-	}
-	
-	template<typename T>
-	BasicTextCopyAction<T>* BasicTextCopyAction<T>::Make::make(BasicActionInitInfo<Text&> init_info) {
-		return new BasicTextCopyAction{std::move(*this), init_info};
+	namespace make_system{
+		template<typename T>
+		BasicTextCopyAction<T>::BasicTextCopyAction(bp::BoxPtr<T>&& clipboard) : clipboard(clipboard) {
+		}
+		
+		template<typename T>
+		ie::BasicTextCopyAction<T>* BasicTextCopyAction<T>::make(BasicActionInitInfo<Text&> init_info) {
+			return new ie::BasicTextCopyAction{std::move(*this), init_info};
+		}
 	}
 	
 	template<typename T>
@@ -22,7 +24,7 @@ namespace ie {
 	
 	template<typename T>
 	void BasicTextCopyAction<T>::stop_pressed() {
-		ProcessClipboard<T>::set_string(clipboard, to_utf32(text->get_selection_text()));
+		ProcessClipboard<T>::set_string(*clipboard.get(), text->get_selection_text());
 	}
 	
 	template<typename T>
@@ -32,11 +34,12 @@ namespace ie {
 	template<typename T>
 	void BasicTextCopyAction<T>::while_not_pressed() {
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<TextCopyAction>::decode_pointer(const YAML::Node&, TextCopyAction*& text_copy_action) {
-		text_copy_action = new TextCopyAction{};
-		return true;
-	}
-	*/
+}
+
+template<typename T>
+orl::Option<ie::make_system::BasicTextCopyAction<T>> ieml::Decode<char, ie::make_system::BasicTextCopyAction<T>>::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::make_system::BasicTextCopyAction<T>{
+		map.get_as<bp::BoxPtr<T>>("clipboard").move_ok_or({}),
+	};
 }
