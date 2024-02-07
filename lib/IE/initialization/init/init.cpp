@@ -50,6 +50,8 @@ namespace ie {
 			
 			add_type<ISVec2<T>, SVec2<T> >();
 			add_type_make<ISVec2<T>, SVec2<T> >(std::string("Vec2") + std::string(1, first));
+			add_type<ISRVec2<T>, ISMRVec2<T> >();
+			add_type_make<ISRVec2<T>, ISMRVec2<T> >();
 			add_type<ISRVec2<T>, SRVec2<T> >();
 			add_type_make<ISRVec2<T>, SRVec2<T> >(std::string("RVec2") + std::string(1, first));
 			add_type<ISVec2<T>, ISMVec2<T> >();
