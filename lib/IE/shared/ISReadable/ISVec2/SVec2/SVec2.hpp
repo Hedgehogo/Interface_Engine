@@ -62,7 +62,7 @@ namespace ie {
 		
 		bool delete_read_fn(ReadFn& read_fn) override;
 	
-		void reset() override;
+		void reset();
 		
 		bool reset_;
 		SReader<Value_> x_;

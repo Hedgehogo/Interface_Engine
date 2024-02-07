@@ -47,8 +47,6 @@ namespace ie {
 		virtual ReadFn& add_read_fn(ReadFn&& read_fn) = 0;
 		
 		virtual bool delete_read_fn(ReadFn& read_fn) = 0;
-		
-		virtual void reset() = 0;
 	};
 	
 	template<typename T_>

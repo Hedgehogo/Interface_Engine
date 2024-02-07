@@ -62,10 +62,6 @@ namespace ie {
 		}
 		return false;
 	}
-
-	template<typename T_>
-	void SReadable<T_>::reset() {
-	}
 	
 	template<typename T_>
 	SMutable<T_>::ToMutable(Make&& make, DynBuffer&) : SReadable<T_>(std::forward<T_>(make.data)) {

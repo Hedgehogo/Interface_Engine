@@ -45,9 +45,9 @@ namespace ie {
 		
 		bool delete_read_fn(ReadFn& read_fn) override;
 	
-		void reset() override;
-		
 	private:
+		void reset();
+		
 		std::tuple<detail::SFnWrap<Args_>...> args_;
 		std::vector<ReadFn> read_fns_;
 	};
