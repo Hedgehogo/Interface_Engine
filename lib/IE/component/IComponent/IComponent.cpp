@@ -22,14 +22,14 @@ namespace ie {
 		return get_area_size();
 	}
 	
-	bool IComponent::in_area(sf::Vector2f point_position) {
+	bool IComponent::in_area(sf::Vector2f point_position) const {
 		sf::Vector2f size{get_area_size()};
 		sf::Vector2f position{get_area_position()};
 		return point_position.x > position.x && point_position.x < position.x + size.x &&
 			   point_position.y > position.y && point_position.y < position.y + size.y;
 	}
 	
-	bool IComponent::in(sf::Vector2f point_position) {
+	bool IComponent::in(sf::Vector2f point_position) const {
 		return in_area(point_position);
 	}
 	

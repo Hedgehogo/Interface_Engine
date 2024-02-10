@@ -20,6 +20,6 @@ namespace ie {
 		
 		sf::Vector2f get_area_size() const override;
 		
-		bool in_area(sf::Vector2f point_position) override;
+		bool in_area(sf::Vector2f point_position) const override;
 	};
 }

@@ -47,9 +47,9 @@ namespace ie {
 		
 		virtual sf::Vector2f get_normal_size() const = 0;
 		
-		virtual bool in_area(sf::Vector2f point_position);
+		virtual bool in_area(sf::Vector2f point_position) const;
 		
-		virtual bool in(sf::Vector2f point_position);
+		virtual bool in(sf::Vector2f point_position) const;
 		
 		virtual void resize(sf::Vector2f size, sf::Vector2f position) = 0;
 		
