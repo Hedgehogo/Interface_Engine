@@ -45,22 +45,20 @@ namespace ie {
 	}
 	
 	bool Determine<FullColor::Make>::determine(const ieml::Node& node) {
-		if(auto str{node.get_raw()}) {
-			return str.ok().str.size() <= 11;
-		} else {
-			return ie::determine(node, {{"color", ieml::NodeType::Raw}}, {{"normal-size"}});
+		for(auto& str: node.get_raw().ok_or_none()) {
+			return str.str.size() <= 11;
 		}
+		return ie::determine(node, {{"color", ieml::NodeType::Raw}}, {{"normal-size"}});
 	}
 }
 
 orl::Option<ie::FullColor::Make> ieml::Decode<char, ie::FullColor::Make>::decode(ieml::Node const& node) {
-	if(auto color{node.as<sf::Color>()}) {
-		return ie::FullColor::Make{color.ok()};
-	} else {
-		auto map{node.get_map_view().except()};
-		return ie::FullColor::Make{
-			map.at("color").except().as<sf::Color>().except(),
-			map.get_as<sf::Vector2f>("normal-size").ok_or({})
-		};
+	for(auto& color: node.as<sf::Color>().ok_or_none()) {
+		return ie::FullColor::Make{color};
 	}
+	auto map{node.get_map_view().except()};
+	return ie::FullColor::Make{
+		map.at("color").except().as<sf::Color>().except(),
+		map.get_as<sf::Vector2f>("normal-size").ok_or({})
+	};
 }

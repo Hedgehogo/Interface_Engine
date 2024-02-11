@@ -176,24 +176,15 @@ orl::Option<ie::BoxConstRatioCenter::Make> ieml::Decode<char, ie::BoxConstRatioC
 	auto map{node.get_map_view().except()};
 	return ie::BoxConstRatioCenter::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
-		[&]{
-			if(auto first_object{map.at("first-object")}) {
-				return first_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().except();
-			}
+		map.get_as<ie::BoxPtr<ie::IScalable::Make> >("first-object").ok_or_else([] {
 			return ie::make_box_ptr<ie::IScalable::Make, ie::Empty::Make>();
-		}(),
-		[&]{
-			if(auto second_object{map.at("second-object")}) {
-				return second_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().except();
-			}
+		}),
+		map.get_as<ie::BoxPtr<ie::IScalable::Make> >("second-object").ok_or_else([] {
 			return ie::make_box_ptr<ie::IScalable::Make, ie::Empty::Make>();
-		}(),
-		[&]{
-			if(auto background{map.at("background")}) {
-				return background.ok().as<ie::BoxPtr<ie::INonInteractive::Make> >().except();
-			}
+		}),
+		map.get_as<ie::BoxPtr<ie::INonInteractive::Make> >("background").ok_or_else([] {
 			return ie::make_box_ptr<ie::INonInteractive::Make, ie::Empty::Make>();
-		}(),
+		}),
 		map.at("aspect-ratio").except().as<float>().except(),
 		map.at("min-size").except().as<sf::Vector2f>().except(),
 	};

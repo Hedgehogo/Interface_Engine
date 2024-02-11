@@ -68,8 +68,8 @@ orl::Option<ie::Sprite::Make> ieml::Decode<char, ie::Sprite::Make>::decode(ieml:
 	auto map{node.get_map_view().except()};
 	auto& texture{map.at("texture").except().as<sf::Texture&>().except()};
 	auto min_size{map.get_as<sf::Vector2f>("min-size").ok_or({})};
-	if(auto rect{map.at("rect")}) {
-		return ie::Sprite::Make{texture, rect.ok().as<sf::IntRect>().except(), min_size};
+	for(auto& rect: map.at("rect").ok_or_none()) {
+		return {{texture, rect.as<sf::IntRect>().except(), min_size}};
 	}
-	return ie::Sprite::Make{texture, min_size};
+	return {{texture, min_size}};
 }

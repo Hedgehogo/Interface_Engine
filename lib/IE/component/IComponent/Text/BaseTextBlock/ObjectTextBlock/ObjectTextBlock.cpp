@@ -54,16 +54,11 @@ namespace ie {
 
 orl::Option<ie::ObjectTextBlock::Make> ieml::Decode<char, ie::ObjectTextBlock::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
-	if(auto size{map.at("size")}) {
-		return ie::ObjectTextBlock::Make{
-			map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().except(),
-			size.except().as<sf::Vector2f>().except(),
-			map.get_as<bool>("is-character").ok_or(true),
-		};
-	} else {
-		return ie::ObjectTextBlock::Make{
-			map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().except(),
-			map.at("height").except().as<float>().except(),
-		};
+	auto object{map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().except()};
+	for(auto& size: map.at("size").ok_or_none()) {
+		auto is_character{map.get_as<bool>("is-character").ok_or(true)};
+		return {{std::move(object), size.as<sf::Vector2f>().except(), is_character}};
 	}
+	auto height{map.at("height").except().as<float>().except()};
+	return {{std::move(object), height}};
 }

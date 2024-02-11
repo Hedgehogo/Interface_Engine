@@ -23,8 +23,8 @@ namespace ie {
 
 orl::Option<ie::InternalPositioning> ieml::Decode<char, ie::InternalPositioning>::decode(ieml::Node const& node) {
 	auto& clear_node{node.get_clear()};
-	if(auto result{clear_node.as<float>()}) {
-		return ie::InternalPositioning{result.ok()};
+	for(auto result: clear_node.as<float>().ok_or_none()) {
+		return ie::InternalPositioning{result};
 	}
 	auto map{clear_node.get_map_view().except()};
 	return ie::InternalPositioning{

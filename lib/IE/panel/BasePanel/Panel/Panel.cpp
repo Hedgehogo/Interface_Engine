@@ -100,12 +100,9 @@ orl::Option<ie::Panel::Make> ieml::Decode<char, ie::Panel::Make>::decode(ieml::N
 	return ie::Panel::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("hide-interaction").except().as<ie::BoxPtr<ie::IHidePanelInteraction::Make> >().except(),
-		[&]{
-			if(auto move_interaction{map.at("move-interaction")}) {
-				return move_interaction.ok().as<ie::BoxPtr<ie::IMovePanelInteraction::Make> >().except();
-			}
+		map.get_as<ie::BoxPtr<ie::IMovePanelInteraction::Make> >("move-interaction").ok_or_else([] {
 			return ie::make_box_ptr<ie::IMovePanelInteraction::Make, ie::DontMovePanelInteraction::Make>();
-		}(),
+		}),
 		map.at("sizing").except().as<ie::BoxPtr<ie::ISizing2::Make> >().except(),
 		map.at("positioning").except().as<ie::BoxPtr<ie::IPositioning2::Make> >().except(),
 		map.get_as<bool>("displayed").ok_or(false),

@@ -105,21 +105,20 @@ namespace ie {
 orl::Option<ie::BoxBorderHorizontal::Make> ieml::Decode<char, ie::BoxBorderHorizontal::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	auto min_size{map.get_as<sf::Vector2f>("min-size").ok_or({})};
-	auto first_object{map.at("first-object")};
-	auto second_object{map.at("second-object")};
-	if(first_object.is_ok() && second_object.is_ok()) {
+	auto two_objects{map.at("first-object").ok_or_none() && map.at("second-object").ok_or_none()};
+	for(auto& [first_object, second_object]: two_objects) {
 		return ie::BoxBorderHorizontal::Make{
-			first_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
-			second_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
+			first_object.as<ie::BoxPtr<ie::IScalable::Make> >().except(),
+			second_object.as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 			map.get_as<float>("bound").ok_or(0.5),
 			min_size
 		};
 	}
 	auto objects{map.at("bounds").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().except()};
-	if(auto bounds{map.at("bounds")}) {
+	for(auto& bounds: map.at("bounds").ok_or_none()) {
 		return ie::BoxBorderHorizontal::Make{
 			std::move(objects),
-			bounds.ok().as<std::vector<float> >().except(),
+			bounds.as<std::vector<float> >().except(),
 			min_size
 		};
 	}

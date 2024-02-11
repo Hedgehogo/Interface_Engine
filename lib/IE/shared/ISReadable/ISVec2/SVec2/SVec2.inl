@@ -24,10 +24,10 @@ namespace ie::make_system {
 template<typename Value_>
 orl::Option<ie::make_system::BasicSVec2<Value_> >
 ieml::Decode<char, ie::make_system::BasicSVec2<Value_> >::decode(const ieml::Node& node) {
-	if(auto list{node.get_list_view()}) {
+	for(auto list: node.get_list_view().ok_or_none()) {
 		return ie::make_system::BasicSVec2<Value_>{
-			list.ok().at(0).except().as<ie::MakeDyn<Value_> >().except(),
-			list.ok().at(1).except().as<ie::MakeDyn<Value_> >().except(),
+			list.at(0).except().as<ie::MakeDyn<Value_> >().except(),
+			list.at(1).except().as<ie::MakeDyn<Value_> >().except(),
 		};
 	}
 	auto map{node.get_map_view().except()};

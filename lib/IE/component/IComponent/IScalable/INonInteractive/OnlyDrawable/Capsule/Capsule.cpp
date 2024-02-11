@@ -61,8 +61,8 @@ namespace ie {
 }
 
 orl::Option<ie::Capsule::Make> ieml::Decode<char, ie::Capsule::Make>::decode(ieml::Node const& node) {
-	if(auto color{node.as<sf::Color>()}) {
-		return {{color.ok()}};
+	for(auto& color: node.as<sf::Color>().ok_or_none()) {
+		return {{std::move(color)}};
 	}
 	return {{node.at("color").except().as<sf::Color>().except()}};
 }

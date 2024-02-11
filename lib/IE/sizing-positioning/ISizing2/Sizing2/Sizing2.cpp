@@ -46,28 +46,27 @@ namespace ie {
 
 orl::Option<ie::Sizing2::Make> ieml::Decode<char, ie::Sizing2::Make>::decode(ieml::Node const& node) {
 	auto& clear_node{node.get_clear()};
-	if(auto result{clear_node.as<sf::Vector2f>()}) {
-		return {{result.ok()}};
+	for(auto result: clear_node.as<sf::Vector2f>().ok_or_none()) {
+		return {{result}};
 	}
 	auto map{clear_node.get_map_view().except()};
-	if(auto relative{map.at("relative-parent")}) {
-		return {{relative.ok().as<bool>().except()}};
+	for(auto& relative: map.at("relative-parent").ok_or_none()) {
+		return {{relative.as<bool>().except()}};
 	}
-	if(auto const_size{map.at("const-size")}) {
-		return {{const_size.ok().as<sf::Vector2f>().except()}};
+	for(auto& const_size: map.at("const-size").ok_or_none()) {
+		return {{const_size.as<sf::Vector2f>().except()}};
 	}
-	auto target_coefficient{map.at("target-coefficient")};
-	auto parent_coefficient{map.at("parent-coefficient")};
-	if(target_coefficient.is_ok() && parent_coefficient.is_ok()) {
+	auto target_coefficient_node{map.at("target-coefficient").ok_or_none()};
+	auto parent_coefficient_node{map.at("parent-coefficient").ok_or_none()};
+	for(auto& [target_coefficient, parent_coefficient]: target_coefficient_node && parent_coefficient_node) {
 		return ie::Sizing2::Make{
-			target_coefficient.ok().as<sf::Vector2f>().except(),
-			parent_coefficient.ok().as<sf::Vector2f>().except(),
+			target_coefficient.as<sf::Vector2f>().except(),
+			parent_coefficient.as<sf::Vector2f>().except(),
 			map.get_as<sf::Vector2f>("addition").ok_or({})
 		};
 	}
-	if(target_coefficient.is_ok() || parent_coefficient.is_ok()) {
-		auto relative_target{target_coefficient.is_ok()};
-		auto& coefficient{relative_target ? target_coefficient.ok() : parent_coefficient.ok()};
+	for(auto& coefficient: target_coefficient_node || parent_coefficient_node) {
+		auto relative_target{target_coefficient_node.is_some()};
 		return ie::Sizing2::Make{
 			coefficient.as<sf::Vector2f>().except(),
 			map.get_as<sf::Vector2f>("addition").ok_or({}),

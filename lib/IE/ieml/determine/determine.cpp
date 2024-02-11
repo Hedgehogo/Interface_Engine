@@ -11,8 +11,7 @@ namespace ie {
 	}
 	
 	bool determine(ieml::Node const& node, std::initializer_list<detail::IemlArg> args, size_t size_addition) {
-		if(auto map_result{node.get_map()}) {
-			auto& map{map_result.ok()};
+		for(auto& map: node.get_map().ok_or_none()) {
 			return map.size() == args.size() + size_addition && std::all_of(
 				args.begin(),
 				args.end(),
@@ -43,8 +42,7 @@ namespace ie {
 		std::initializer_list<detail::IemlArg> opt_args,
 		size_t size_addition
 	) {
-		if(auto map_result{node.get_map()}) {
-			auto& map{map_result.ok()};
+		for(auto& map: node.get_map().ok_or_none()) {
 			return (map.size() >= args.size() + size_addition && map.size() <= args.size() + opt_args.size() + size_addition) && std::all_of(
 				args.begin(),
 				args.end(),

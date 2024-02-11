@@ -60,8 +60,8 @@ namespace ieml {
 	orl::Option<sf::Vector2<T> > Decode<char, sf::Vector2<T> >::decode(ieml::Node const& node) {
 		auto& clear_node = node.get_clear();
 		if constexpr(std::is_arithmetic_v<T>) {
-			if(auto raw{clear_node.get_raw()}) {
-				return detail::decode_vector2_str<T>(raw.ok().str.cbegin(), raw.ok().str.cend());
+			for(auto& raw: clear_node.get_raw().ok_or_none()) {
+				return detail::decode_vector2_str<T>(raw.str.cbegin(), raw.str.cend());
 			}
 		}
 		auto list{clear_node.get_list_view().except()};

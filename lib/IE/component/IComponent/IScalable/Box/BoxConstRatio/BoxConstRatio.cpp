@@ -168,12 +168,9 @@ orl::Option<ie::BoxConstRatio::Make> ieml::Decode<char, ie::BoxConstRatio::Make>
 	return ie::BoxConstRatio::Make{
 		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("second-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
-		[&]{
-			if(auto background{map.at("background")}) {
-				return background.ok().as<ie::BoxPtr<ie::INonInteractive::Make> >().except();
-			}
+		map.get_as<ie::BoxPtr<ie::INonInteractive::Make> >("background").ok_or_else([] {
 			return ie::make_box_ptr<ie::INonInteractive::Make, ie::Empty::Make>();
-		}(),
+		}),
 		map.at("aspect-ratio").except().as<float>().except(),
 		map.get_as<ie::Corner>("corner").ok_or(ie::Corner::UpLeft),
 		map.get_as<sf::Vector2f>("min-size").ok_or({})

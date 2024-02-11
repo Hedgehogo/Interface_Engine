@@ -120,26 +120,25 @@ namespace ie {
 orl::Option<ie::BoxShader::LoadTransmission>
 ieml::Decode<char, ie::BoxShader::LoadTransmission>::decode(const ieml::Node& node) {
 	auto& clear_node{node.get_clear()};
-	if(auto list{clear_node.get_list()}) {
+	for(auto& list: clear_node.get_list().ok_or_none()) {
 		ie::BoxShader::Transmission result{ie::BoxShader::Transmission::None};
-		for(auto& item: list.ok()) {
+		for(auto& item: list) {
 			auto item_result{item.as<ie::BoxShader::LoadTransmission>().except().transmission};
 			result = static_cast<ie::BoxShader::Transmission>(result | item_result);
 		}
 		return {{result}};
-	} else {
-		auto& str{clear_node.get_string().except()};
-		if(str == "size") {
-			return {{ie::BoxShader::Transmission::Size}};
-		} else if(str == "texture") {
-			return {{ie::BoxShader::Transmission::Texture}};
-		} else if(str == "aspect-ratio") {
-			return {{ie::BoxShader::Transmission::AspectRatio}};
-		} else if(str == "mouse-position") {
-			return {{ie::BoxShader::Transmission::MousePosition}};
-		} else if(str == "time") {
-			return {{ie::BoxShader::Transmission::Time}};
-		}
+	}
+	auto& str{clear_node.get_string().except()};
+	if(str == "size") {
+		return {{ie::BoxShader::Transmission::Size}};
+	} else if(str == "texture") {
+		return {{ie::BoxShader::Transmission::Texture}};
+	} else if(str == "aspect-ratio") {
+		return {{ie::BoxShader::Transmission::AspectRatio}};
+	} else if(str == "mouse-position") {
+		return {{ie::BoxShader::Transmission::MousePosition}};
+	} else if(str == "time") {
+		return {{ie::BoxShader::Transmission::Time}};
 	}
 	return {};
 }
@@ -147,8 +146,8 @@ ieml::Decode<char, ie::BoxShader::LoadTransmission>::decode(const ieml::Node& no
 orl::Option<ie::BoxShader::Make> ieml::Decode<char, ie::BoxShader::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	sf::Shader* shader{new sf::Shader{}};
-	if(auto shader_node{map.at("shader")}) {
-		shader_node.ok().as<ie::LoadShader>().except().load(*shader);
+	for(auto& shader_node: map.at("shader").ok_or_none()) {
+		shader_node.as<ie::LoadShader>().except().load(*shader);
 	}
 	return ie::BoxShader::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),

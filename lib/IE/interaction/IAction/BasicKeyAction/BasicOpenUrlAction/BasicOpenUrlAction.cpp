@@ -3,8 +3,8 @@
 
 namespace ie {
 	bool determine_url(ieml::Node const& node) {
-		if(auto url_result{node.get_string()}) {
-			std::string_view url{url_result.ok()};
+		for(auto& url_str: node.get_string().ok_or_none()) {
+			std::string_view url{url_str};
 			return
 				url.substr(0, 7) == "file://" ||
 				url.substr(0, 7) == "http://" ||

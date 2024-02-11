@@ -74,9 +74,9 @@ namespace ie {
 template<typename T>
 orl::Option<ie::make_system::BasicKeysInteraction<T> > ieml::Decode<char, ie::make_system::BasicKeysInteraction<T> >::decode(ieml::Node const& node) {
 	auto& clear_node{node.get_clear()};
-	if(auto str{clear_node.get_string()}) {
+	for(auto& str: clear_node.get_string().ok_or_none()) {
 		return ie::make_system::BasicKeysInteraction<T>{
-			bp::make_box_ptr<ie::make_system::BasicKeyAction<T>, ie::make_system::BasicOpenUrlAction<T> >(str.ok()),
+			bp::make_box_ptr<ie::make_system::BasicKeyAction<T>, ie::make_system::BasicOpenUrlAction<T> >(str),
 			std::vector{ie::Key::MouseLeft},
 		};
 	}

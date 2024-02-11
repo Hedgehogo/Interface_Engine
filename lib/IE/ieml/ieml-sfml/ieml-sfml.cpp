@@ -4,40 +4,42 @@
 
 namespace ieml {
 	orl::Option<ie::LoadString> Decode<char, ie::LoadString>::decode(ieml::Node const& node) {
-		if(auto map{node.get_map_view()}) {
-			if(auto key{map.ok().at("key")}) {
-				if(auto directory{node.at("directory")}) {
-					loc::system.load_from_directory(directory.ok().get_string().except());
+		auto& clear_node{node.get_clear()};
+		for(auto map: clear_node.get_map_view().ok_or_none()) {
+			for(auto& key: map.at("key").ok_or_none()) {
+				for(auto& directory: node.at("directory").ok_or_none()) {
+					loc::system.load_from_directory(directory.get_string().except());
 				}
-				if(auto default_language{node.at("default-language")}) {
-					loc::system.set_default_language(default_language.ok().get_string().except());
+				for(auto& default_language: node.at("default-language").ok_or_none()) {
+					loc::system.set_default_language(default_language.get_string().except());
 				}
-				if(auto language{node.at("language")}) {
-					loc::system.set_now_language(language.ok().get_string().except());
+				for(auto& language: node.at("language").ok_or_none()) {
+					loc::system.set_now_language(language.get_string().except());
 				}
 				//return loc::system.get_text(key.ok().get_string().except());
 				return {};
 			}
 		}
-		return {{node.get_string().except()}};
+		return {{clear_node.get_string().except()}};
 	}
 	
 	orl::Option<sf::String> Decode<char, sf::String>::decode(ieml::Node const& node) {
-		if(auto str{node.get_string()}) {
-			return ie::to_utf32(ie::to_utf32(str.ok()));
+		auto& clear_node{node.get_clear()};
+		for(auto& str: clear_node.get_string().ok_or_none()) {
+			return ie::to_utf32(ie::to_utf32(str));
 		}
-		std::string str{node.as<ie::LoadString>().except().str};
+		auto str{clear_node.as<ie::LoadString>().except().str};
 		return ie::to_utf32(ie::to_utf32(str));
 	}
 	
 	orl::Option<sf::Color> Decode<char, sf::Color>::decode(ieml::Node const& node) {
 		auto& clear_node{node.get_clear()};
-		if(auto list{clear_node.get_list_view()}) {
+		for(auto list: clear_node.get_list_view().ok_or_none()) {
 			return sf::Color{
-				list.ok().at(0).except().as<uint8_t>(),
-				list.ok().at(0).except().as<uint8_t>(),
-				list.ok().at(0).except().as<uint8_t>(),
-				list.ok().get_as<uint8_t>(0).ok_or(255)
+				list.at(0).except().as<uint8_t>(),
+				list.at(0).except().as<uint8_t>(),
+				list.at(0).except().as<uint8_t>(),
+				list.get_as<uint8_t>(0).ok_or(255)
 			};
 		}
 		auto& raw{clear_node.get_raw().except().str};
@@ -73,25 +75,24 @@ namespace ieml {
 	
 	orl::Option<ie::LoadTextStyle> Decode<char, ie::LoadTextStyle>::decode(ieml::Node const& node) {
 		auto& clear_node{node.get_clear()};
-		if(auto list{clear_node.get_list()}) {
+		for(auto& list: clear_node.get_list().ok_or_none()) {
 			sf::Text::Style result{sf::Text::Style::Regular};
-			for(auto& item: list.ok()) {
+			for(auto& item: list) {
 				result = static_cast<sf::Text::Style>(result | item.as<ie::LoadTextStyle>().except().style);
 			}
 			return {{result}};
-		} else {
-			auto& str{clear_node.get_string().except()};
-			if(str == "regular") {
-				return {{sf::Text::Style::Regular}};
-			} else if(str == "bold") {
-				return {{sf::Text::Style::Bold}};
-			} else if(str == "italic") {
-				return {{sf::Text::Style::Italic}};
-			} else if(str == "underlined") {
-				return {{sf::Text::Style::Underlined}};
-			} else if(str == "strike-through") {
-				return {{sf::Text::Style::StrikeThrough}};
-			}
+		}
+		auto& str{clear_node.get_string().except()};
+		if(str == "regular") {
+			return {{sf::Text::Style::Regular}};
+		} else if(str == "bold") {
+			return {{sf::Text::Style::Bold}};
+		} else if(str == "italic") {
+			return {{sf::Text::Style::Italic}};
+		} else if(str == "underlined") {
+			return {{sf::Text::Style::Underlined}};
+		} else if(str == "strike-through") {
+			return {{sf::Text::Style::StrikeThrough}};
 		}
 		return {};
 	}

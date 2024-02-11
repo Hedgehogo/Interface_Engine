@@ -21,8 +21,8 @@ namespace ie {
 
 orl::Option<ie::ConstSizing::Make> ieml::Decode<char, ie::ConstSizing::Make>::decode(ieml::Node const& node) {
 	auto& clear_node{node.get_clear()};
-	if(auto scalar{clear_node.as<float>()}) {
-		return {{scalar.ok()}};
+	for(auto scalar: clear_node.as<float>().ok_or_none()) {
+		return {{scalar}};
 	}
 	return {{clear_node.at("size").except().as<float>().except()}};
 }

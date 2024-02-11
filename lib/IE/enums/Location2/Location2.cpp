@@ -75,8 +75,7 @@ namespace ie {
 }
 
 orl::Option<ie::Location2> ieml::Decode<char, ie::Location2>::decode(ieml::Node const& node) {
-	if(auto map_view{node.get_map_view()}) {
-		auto& map{map_view.ok()};
+	for(auto map: node.get_map_view().ok_or_none()) {
 		return ie::make_location2(
 			map.at("vertical").except().as<ie::Location>().except(),
 			map.at("horizontal").except().as<ie::Location>().except()

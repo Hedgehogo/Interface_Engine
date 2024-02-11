@@ -46,30 +46,27 @@ namespace ie {
 
 orl::Option<ie::Positioning2::Make> ieml::Decode<char, ie::Positioning2::Make>::decode(ieml::Node const& node) {
 	auto& clear_node{node.get_clear()};
-	if(auto result{clear_node.as<sf::Vector2f>()}) {
-		return {{result.ok()}};
+	for(auto result: clear_node.as<sf::Vector2f>().ok_or_none()) {
+		return {{result}};
 	}
 	auto map{clear_node.get_map_view().except()};
-	auto target_coefficient{map.at("target-coefficient")};
-	auto parent_coefficient{map.at("parent-coefficient")};
-	if(target_coefficient.is_ok() || parent_coefficient.is_ok()) {
-		auto relative_target{target_coefficient.is_ok()};
-		auto& coefficient_node{relative_target ? target_coefficient.ok() : parent_coefficient.ok()};
+	auto target_coefficient{map.at("target-coefficient").ok_or_none()};
+	auto parent_coefficient{map.at("parent-coefficient").ok_or_none()};
+	for(auto& coefficient_node: target_coefficient || parent_coefficient) {
+		auto relative_target{target_coefficient.is_some()};
 		auto coefficient{coefficient_node.as<sf::Vector2f>().except()};
 		auto offset{map.get_as<sf::Vector2f>("offset").ok_or({})};
-		if(auto object_coefficient_node{map.at("object-coefficient")}) {
-			auto object_coefficient{object_coefficient_node.ok().as<sf::Vector2f>().except()};
+		for(auto& object_coefficient_node: map.at("object-coefficient").ok_or_none()) {
+			auto object_coefficient{object_coefficient_node.as<sf::Vector2f>().except()};
 			return {{coefficient, object_coefficient, offset, relative_target}};
-		} else {
-			return {{coefficient, offset, relative_target}};
 		}
+		return {{coefficient, offset, relative_target}};
 	}
-	auto parent_location{map.at("parent-location")};
-	auto object_location{map.at("object-location")};
-	if(parent_location.is_ok() && object_location.is_ok()) {
+	auto locations{map.at("parent-location").ok_or_none() && map.at("object-location").ok_or_none()};
+	for(auto& [parent_location, object_location]: locations) {
 		return ie::Positioning2::Make{
-			parent_location.ok().as<ie::Location2>().except(),
-			object_location.ok().as<ie::Location2>().except(),
+			parent_location.as<ie::Location2>().except(),
+			object_location.as<ie::Location2>().except(),
 			map.get_as<sf::Vector2f>("offset").ok_or({})
 		};
 	}

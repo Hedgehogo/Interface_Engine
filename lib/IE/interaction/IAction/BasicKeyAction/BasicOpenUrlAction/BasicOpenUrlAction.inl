@@ -41,8 +41,8 @@ namespace ie {
 template<typename T>
 orl::Option<ie::make_system::BasicOpenUrlAction<T> > ieml::Decode<char, ie::make_system::BasicOpenUrlAction<T> >::decode(ieml::Node const& node) {
 	auto& clear_node{node.get_clear()};
-	if(auto map_view{clear_node.get_map_view()}) {
-		return {{map_view.ok().at("url").except().get_string().except()}};
+	for(auto map: clear_node.get_map_view().ok_or_none()) {
+		return {{map.at("url").except().get_string().except()}};
 	}
 	return {{clear_node.get_string().except()}};
 }
