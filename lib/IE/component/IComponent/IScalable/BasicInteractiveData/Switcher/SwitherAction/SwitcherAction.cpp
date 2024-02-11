@@ -32,6 +32,6 @@ namespace ie {
 
 orl::Option<ie::SwitcherAction::Make> ieml::Decode<char, ie::SwitcherAction::Make>::decode(ieml::Node const& node) {
 	return ie::SwitcherAction::Make{
-		node.at("value").except().as<ie::MakeDyn<ie::ISMBool> >().move_except()
+		node.at("value").except().as<ie::MakeDyn<ie::ISMBool> >().except()
 	};
 }

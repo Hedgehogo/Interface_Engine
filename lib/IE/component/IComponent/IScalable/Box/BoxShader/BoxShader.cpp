@@ -151,14 +151,14 @@ orl::Option<ie::BoxShader::Make> ieml::Decode<char, ie::BoxShader::Make>::decode
 		shader_node.ok().as<ie::LoadShader>().except().load(*shader);
 	}
 	return ie::BoxShader::Make{
-		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		shader,
 		map.at("transmission").except().as<ie::BoxShader::LoadTransmission>().except().transmission,
-		map.at("values-f").except().as<ie::BoxShader::SMakeMap<ie::ISFloat> >().move_except(),
-		map.at("values-i").except().as<ie::BoxShader::SMakeMap<ie::ISInt> >().move_except(),
-		map.at("values-b").except().as<ie::BoxShader::SMakeMap<ie::ISBool> >().move_except(),
-		map.at("values-c").except().as<ie::BoxShader::SMakeMap<ie::ISReadable<sf::Color> > >().move_except(),
-		map.at("values-v").except().as<ie::BoxShader::SMakeMap<ie::ISRVec2F> >().move_except(),
+		map.at("values-f").except().as<ie::BoxShader::SMakeMap<ie::ISFloat> >().except(),
+		map.at("values-i").except().as<ie::BoxShader::SMakeMap<ie::ISInt> >().except(),
+		map.at("values-b").except().as<ie::BoxShader::SMakeMap<ie::ISBool> >().except(),
+		map.at("values-c").except().as<ie::BoxShader::SMakeMap<ie::ISReadable<sf::Color> > >().except(),
+		map.at("values-v").except().as<ie::BoxShader::SMakeMap<ie::ISRVec2F> >().except(),
 		map.get_as<bool>("optimize").ok_or(true),
 		map.get_as<sf::Vector2f>("min-size").ok_or({})
 	};

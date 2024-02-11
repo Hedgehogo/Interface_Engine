@@ -146,7 +146,7 @@ orl::Option<ie::TextBlock::Make> ieml::Decode<char, ie::TextBlock::Make>::decode
 		map.get_as<orl::Option<ie::LoadTextStyle> >("style").ok_or({}).map([](auto& style){
 			return style.style;
 		}),
-		map.get_as<std::vector<bp::BoxPtr<ie::BaseLine::Make> > >("lines").move_ok_or({}),
+		map.get_as<std::vector<bp::BoxPtr<ie::BaseLine::Make> > >("lines").ok_or({}),
 		map.get_as<orl::Option<size_t>>("font-size").ok_or({}),
 		map.get_as<orl::Option<sf::Color>>("text-selection-color").ok_or({}),
 		map.get_as<orl::Option<sf::Color>>("background-selection-color").ok_or({}),

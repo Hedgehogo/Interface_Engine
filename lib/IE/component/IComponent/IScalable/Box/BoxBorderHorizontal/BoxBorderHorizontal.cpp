@@ -109,17 +109,17 @@ orl::Option<ie::BoxBorderHorizontal::Make> ieml::Decode<char, ie::BoxBorderHoriz
 	auto second_object{map.at("second-object")};
 	if(first_object.is_ok() && second_object.is_ok()) {
 		return ie::BoxBorderHorizontal::Make{
-			first_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
-			second_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+			first_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
+			second_object.ok().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 			map.get_as<float>("bound").ok_or(0.5),
 			min_size
 		};
 	}
-	auto objects{map.at("bounds").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().move_except()};
+	auto objects{map.at("bounds").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().except()};
 	if(auto bounds{map.at("bounds")}) {
 		return ie::BoxBorderHorizontal::Make{
 			std::move(objects),
-			bounds.ok().as<std::vector<float> >().move_except(),
+			bounds.ok().as<std::vector<float> >().except(),
 			min_size
 		};
 	}

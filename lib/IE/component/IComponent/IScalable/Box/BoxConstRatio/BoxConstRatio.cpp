@@ -166,11 +166,11 @@ namespace ie {
 orl::Option<ie::BoxConstRatio::Make> ieml::Decode<char, ie::BoxConstRatio::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::BoxConstRatio::Make{
-		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
-		map.at("second-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
+		map.at("second-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		[&]{
 			if(auto background{map.at("background")}) {
-				return background.ok().as<ie::BoxPtr<ie::INonInteractive::Make> >().move_except();
+				return background.ok().as<ie::BoxPtr<ie::INonInteractive::Make> >().except();
 			}
 			return ie::make_box_ptr<ie::INonInteractive::Make, ie::Empty::Make>();
 		}(),

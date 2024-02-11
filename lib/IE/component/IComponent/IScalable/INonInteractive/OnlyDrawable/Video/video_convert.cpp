@@ -19,7 +19,7 @@ namespace ie {
 	orl::Option<OnlyDrawable::Make*> video_convert(ieml::Node const& node) {
 		auto map{node.get_map_view().except()};
 		auto& path_node{map.at("path").except()};
-		auto viewing_progress{map.at("viewing-progress").except().as<MakeDyn<ISRFloat> >().move_except()};
+		auto viewing_progress{map.at("viewing-progress").except().as<MakeDyn<ISRFloat> >().except()};
 #ifdef IE_ImageMagick_FOUND
 		/*old_yaml
 		if(!map.at("offset").is_ok() && is_video(path_node.get_string().except())) {

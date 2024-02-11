@@ -80,10 +80,10 @@ orl::Option<ie::make_system::BasicKeysInteraction<T> > ieml::Decode<char, ie::ma
 			std::vector{ie::Key::MouseLeft},
 		};
 	}
-	auto& map{clear_node.get_map_view().except()};
+	auto map{clear_node.get_map_view().except()};
 	return ie::make_system::BasicKeysInteraction<T>{
-		map.at("action").except().as<ie::BoxPtr<ie::make_system::BasicKeyAction<T> > >().move_except(),
-		map.at("keys").except().as<std::vector<ie::Key> >().move_except(),
-		map.get_as<std::vector<ie::Key> >("black-list-keys").move_ok_or({}),
+		map.at("action").except().as<ie::BoxPtr<ie::make_system::BasicKeyAction<T> > >().except(),
+		map.at("keys").except().as<std::vector<ie::Key> >().except(),
+		map.get_as<std::vector<ie::Key> >("black-list-keys").ok_or({}),
 	};
 }

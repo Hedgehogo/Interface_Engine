@@ -26,14 +26,14 @@ orl::Option<ie::make_system::BasicSVec2<Value_> >
 ieml::Decode<char, ie::make_system::BasicSVec2<Value_> >::decode(const ieml::Node& node) {
 	if(auto list{node.get_list_view()}) {
 		return ie::make_system::BasicSVec2<Value_>{
-			list.ok().at(0).except().as<ie::MakeDyn<Value_> >().move_except(),
-			list.ok().at(1).except().as<ie::MakeDyn<Value_> >().move_except(),
+			list.ok().at(0).except().as<ie::MakeDyn<Value_> >().except(),
+			list.ok().at(1).except().as<ie::MakeDyn<Value_> >().except(),
 		};
 	}
 	auto map{node.get_map_view().except()};
 	return ie::make_system::BasicSVec2<Value_>{
-		map.at("x").except().as<ie::MakeDyn<Value_> >().move_except(),
-		map.at("y").except().as<ie::MakeDyn<Value_> >().move_except(),
+		map.at("x").except().as<ie::MakeDyn<Value_> >().except(),
+		map.at("y").except().as<ie::MakeDyn<Value_> >().except(),
 	};
 }
 
@@ -41,7 +41,7 @@ template<typename Value_>
 orl::Option<ie::make_system::BasicSMVec2<Value_> >
 ieml::Decode<char, ie::make_system::BasicSMVec2<Value_> >::decode(const ieml::Node& node) {
 	return ieml::Decode<char, ie::make_system::BasicSVec2<ie::ToMutable<Value_> > >::decode(node).map(
-		[](auto& value) -> ie::make_system::BasicSMVec2<Value_> {
+		[](auto&& value) -> ie::make_system::BasicSMVec2<Value_> {
 			return {std::move(value.x), std::move(value.y)};
 		}
 	);

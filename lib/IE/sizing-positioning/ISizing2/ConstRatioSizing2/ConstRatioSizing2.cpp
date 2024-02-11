@@ -78,7 +78,7 @@ orl::Option<ie::ConstRatioSizing2::Make> ieml::Decode<char, ie::ConstRatioSizing
 		};
 	}
 	return ie::ConstRatioSizing2::Make{
-		map.at("sizing").except().as<ie::BoxPtr<ie::ISizing::Make> >().move_except(),
+		map.at("sizing").except().as<ie::BoxPtr<ie::ISizing::Make> >().except(),
 		ratio,
 		horizontal
 	};

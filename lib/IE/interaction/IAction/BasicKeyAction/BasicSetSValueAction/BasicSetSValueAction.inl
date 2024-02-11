@@ -19,7 +19,7 @@ orl::Option<ie::make_system::BasicSetSValueAction<T_, Value_> >
 ieml::Decode<char, ie::make_system::BasicSetSValueAction<T_, Value_> >::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::make_system::BasicSetSValueAction<T_, Value_>{
-		map.at("value").except().as<ie::MakeDyn<Value_> >().move_except(),
+		map.at("value").except().as<ie::MakeDyn<Value_> >().except(),
 		std::forward<typename Value_::T>(map.at("constant").except().as<typename Value_::T>().except()),
 	};
 }

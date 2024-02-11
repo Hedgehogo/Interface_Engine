@@ -74,7 +74,7 @@ orl::Option<ie::Positioning2::Make> ieml::Decode<char, ie::Positioning2::Make>::
 		};
 	}
 	return ie::Positioning2::Make{
-		map.at("horizontal").except().as<ie::BoxPtr<ie::IPositioning> >().move_except(),
-		map.at("vertical").except().as<ie::BoxPtr<ie::IPositioning> >().move_except(),
+		map.at("horizontal").except().as<ie::BoxPtr<ie::IPositioning> >().except(),
+		map.at("vertical").except().as<ie::BoxPtr<ie::IPositioning> >().except(),
 	};
 }

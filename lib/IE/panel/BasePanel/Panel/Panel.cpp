@@ -98,16 +98,16 @@ namespace ie {
 orl::Option<ie::Panel::Make> ieml::Decode<char, ie::Panel::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::Panel::Make{
-		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
-		map.at("hide-interaction").except().as<ie::BoxPtr<ie::IHidePanelInteraction::Make> >().move_except(),
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
+		map.at("hide-interaction").except().as<ie::BoxPtr<ie::IHidePanelInteraction::Make> >().except(),
 		[&]{
 			if(auto move_interaction{map.at("move-interaction")}) {
-				return move_interaction.ok().as<ie::BoxPtr<ie::IMovePanelInteraction::Make> >().move_except();
+				return move_interaction.ok().as<ie::BoxPtr<ie::IMovePanelInteraction::Make> >().except();
 			}
 			return ie::make_box_ptr<ie::IMovePanelInteraction::Make, ie::DontMovePanelInteraction::Make>();
 		}(),
-		map.at("sizing").except().as<ie::BoxPtr<ie::ISizing2::Make> >().move_except(),
-		map.at("positioning").except().as<ie::BoxPtr<ie::IPositioning2::Make> >().move_except(),
+		map.at("sizing").except().as<ie::BoxPtr<ie::ISizing2::Make> >().except(),
+		map.at("positioning").except().as<ie::BoxPtr<ie::IPositioning2::Make> >().except(),
 		map.get_as<bool>("displayed").ok_or(false),
 	};
 }

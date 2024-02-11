@@ -206,8 +206,8 @@ namespace ie {
 orl::Option<ie::Caption::Make> ieml::Decode<char, ie::Caption::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::Caption::Make{
-		map.at("text").except().as<sf::String>().move_except(),
-		map.at("background").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().move_except(),
+		map.at("text").except().as<sf::String>().except(),
+		map.at("background").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().except(),
 		map.at("font").except().as<sf::Font&>().except(),
 		map.get_as<sf::Vector2f>("min-size").ok_or({}),
 		map.get_as<int>("font-size").ok_or(ie::Caption::get_default_size()),

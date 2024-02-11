@@ -78,9 +78,9 @@ namespace ie {
 orl::Option<ie::BoxSwitch::Make> ieml::Decode<char, ie::BoxSwitch::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::BoxSwitch::Make{
-		map.at("inactive-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
-		map.at("active-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
-		map.at("value").except().as<ie::MakeDyn<ie::ISBool> >().move_except(),
+		map.at("inactive-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
+		map.at("active-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
+		map.at("value").except().as<ie::MakeDyn<ie::ISBool> >().except(),
 		map.get_as<sf::Vector2f>("min-size").ok_or({}),
 	};
 }

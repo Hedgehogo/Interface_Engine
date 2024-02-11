@@ -74,8 +74,8 @@ namespace ie {
 orl::Option<ie::BoxTabs::Make> ieml::Decode<char, ie::BoxTabs::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::BoxTabs::Make{
-		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().move_except(),
-		map.at("value").except().as<ie::MakeDyn<ie::ISRSize> >().move_except(),
+		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().except(),
+		map.at("value").except().as<ie::MakeDyn<ie::ISRSize> >().except(),
 		map.get_as<sf::Vector2f>("min-size").ok_or({})
 	};
 }

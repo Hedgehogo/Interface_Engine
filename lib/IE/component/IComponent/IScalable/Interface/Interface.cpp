@@ -161,7 +161,7 @@ namespace ie {
 		
 		auto node{ieml::from_file(file_path)};
 		auto map{node.get_map_view().except()};
-		auto object{map.at("object").except().as<BoxPtr<IScalable::Make> >().move_except()};
+		auto object{map.at("object").except().as<BoxPtr<IScalable::Make> >().except()};
 		return Interface::Make{std::move(object)};
 	}
 	
@@ -172,7 +172,7 @@ namespace ie {
 		
 		auto node{ieml::from_file(file_path)};
 		auto map{node.get_map_view().except()};
-		auto object{map.at("object").except().as<BoxPtr<IScalable::Make> >().move_except()};
+		auto object{map.at("object").except().as<BoxPtr<IScalable::Make> >().except()};
 		return Interface{window, dyn_buffer, std::move(object)};
 	}
 }
@@ -180,6 +180,6 @@ namespace ie {
 orl::Option<ie::Interface::Make> ieml::Decode<char, ie::Interface::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::Interface::Make{
-		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except()
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except()
 	};
 }

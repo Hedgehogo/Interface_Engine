@@ -49,8 +49,8 @@ namespace ie {
 orl::Option<ie::ButtonPanel::Make> ieml::Decode<char, ie::ButtonPanel::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::ButtonPanel::Make{
-		map.at("panel").except().as<ie::BoxPtr<ie::Panel::Make> >().move_except(),
-		map.at("display-interaction").except().as<ie::BoxPtr<ie::IDisplayPanelInteraction::Make> >().move_except(),
-		map.at("background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("panel").except().as<ie::BoxPtr<ie::Panel::Make> >().except(),
+		map.at("display-interaction").except().as<ie::BoxPtr<ie::IDisplayPanelInteraction::Make> >().except(),
+		map.at("background").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 	};
 }

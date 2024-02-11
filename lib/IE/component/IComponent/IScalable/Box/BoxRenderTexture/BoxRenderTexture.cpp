@@ -81,7 +81,7 @@ namespace ie {
 orl::Option<ie::BoxRenderTexture::Make> ieml::Decode<char, ie::BoxRenderTexture::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::BoxRenderTexture::Make{
-		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.get_as<bool>("optimize").ok_or(true),
 		map.get_as<sf::Vector2f>("min-size").ok_or({})
 	};

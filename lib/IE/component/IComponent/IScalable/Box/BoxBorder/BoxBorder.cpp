@@ -141,15 +141,15 @@ namespace ie {
 
 orl::Option<ie::BoxBorder::Make> ieml::Decode<char, ie::BoxBorder::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
-	auto objects(map.at("objects").except().as<std::vector<std::vector<ie::BoxPtr<ie::IScalable::Make> > > >().move_except());
+	auto objects(map.at("objects").except().as<std::vector<std::vector<ie::BoxPtr<ie::IScalable::Make> > > >().except());
 	auto min_size{map.get_as<sf::Vector2f>("min-size").ok_or({})};
 	auto bounds_vertical{map.at("bounds-vertical")};
 	auto bounds_horizontal{map.at("bounds-horizontal")};
 	if(bounds_vertical.is_ok() && bounds_horizontal.is_ok()) {
 		return ie::BoxBorder::Make{
 			std::move(objects),
-			bounds_vertical.ok().as<std::vector<float> >().move_except(),
-			bounds_horizontal.ok().as<std::vector<float> >().move_except(),
+			bounds_vertical.ok().as<std::vector<float> >().except(),
+			bounds_horizontal.ok().as<std::vector<float> >().except(),
 			min_size
 		};
 	}

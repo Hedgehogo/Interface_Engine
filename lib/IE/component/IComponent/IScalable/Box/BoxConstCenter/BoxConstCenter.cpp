@@ -99,8 +99,8 @@ namespace ie {
 orl::Option<ie::BoxConstCenter::Make> ieml::Decode<char, ie::BoxConstCenter::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::BoxConstCenter::Make{
-		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
-		map.at("background").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
+		map.at("background").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("const-size").except().as<sf::Vector2f>().except(),
 		map.get_as<sf::Vector2f>("min-size").ok_or({})
 	};

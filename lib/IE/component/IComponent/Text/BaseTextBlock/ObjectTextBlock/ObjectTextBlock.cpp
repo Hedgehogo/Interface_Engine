@@ -56,13 +56,13 @@ orl::Option<ie::ObjectTextBlock::Make> ieml::Decode<char, ie::ObjectTextBlock::M
 	auto map{node.get_map_view().except()};
 	if(auto size{map.at("size")}) {
 		return ie::ObjectTextBlock::Make{
-			map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().move_except(),
+			map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().except(),
 			size.except().as<sf::Vector2f>().except(),
 			map.get_as<bool>("is-character").ok_or(true),
 		};
 	} else {
 		return ie::ObjectTextBlock::Make{
-			map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().move_except(),
+			map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().except(),
 			map.at("height").except().as<float>().except(),
 		};
 	}

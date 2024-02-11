@@ -30,7 +30,7 @@ namespace ie {
 orl::Option<ie::BoxMakePermeable::Make> ieml::Decode<char, ie::BoxMakePermeable::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::BoxMakePermeable::Make{
-		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.get_as<sf::Vector2f>("min-size").ok_or({})
 	};
 }

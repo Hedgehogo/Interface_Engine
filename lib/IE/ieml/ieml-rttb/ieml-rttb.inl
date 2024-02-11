@@ -3,7 +3,7 @@
 namespace rttb {
 	template<typename Type_>
 	auto DecodePtr<const ieml::Node&>::decode(const ieml::Node& node) -> Return<Type_> {
-		return {new Type_{node.as<Type_>().move_except()}};
+		return {new Type_{node.as<Type_>().except()}};
 	}
 }
 

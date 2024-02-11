@@ -47,8 +47,8 @@ namespace ie {
 orl::Option<ie::BoxPanel::Make> ieml::Decode<char, ie::BoxPanel::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::BoxPanel::Make{
-		map.at("panel").except().as<ie::BoxPtr<ie::ConstPanel::Make> >().move_except(),
-		map.at("panel").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("panel").except().as<ie::BoxPtr<ie::ConstPanel::Make> >().except(),
+		map.at("panel").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.get_as<sf::Vector2f>("min-size").ok_or({}),
 	};
 }

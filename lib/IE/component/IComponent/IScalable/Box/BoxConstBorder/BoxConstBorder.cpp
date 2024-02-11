@@ -103,8 +103,8 @@ namespace ie {
 orl::Option<ie::BoxConstBorder::Make> ieml::Decode<char, ie::BoxConstBorder::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::BoxConstBorder::Make{
-		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
-		map.at("second-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
+		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
+		map.at("second-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("border-distance").except().as<float>().except(),
 		map.at("side").except().as<ie::Side>().except(),
 		map.get_as<sf::Vector2f>("min-size").ok_or({})

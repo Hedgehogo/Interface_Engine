@@ -79,8 +79,8 @@ namespace ie {
 orl::Option<ie::BoxBackground::Make> ieml::Decode<char, ie::BoxBackground::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::BoxBackground::Make{
-		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().move_except(),
-		map.at("background").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().move_except(),
+		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
+		map.at("background").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().except(),
 		map.get_as<sf::Vector2f>("offset").ok_or({}),
 		map.get_as<sf::Vector2f>("min-size").ok_or({}),
 	};

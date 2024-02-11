@@ -88,14 +88,14 @@ namespace ie {
 orl::Option<ie::InteractiveTextBlock::Make> ieml::Decode<char, ie::InteractiveTextBlock::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::InteractiveTextBlock::Make{
-		map.at("interaction").except().as<bp::BoxPtr<ie::IBaseInteraction::Make> >().move_except(),
+		map.at("interaction").except().as<bp::BoxPtr<ie::IBaseInteraction::Make> >().except(),
 		map.at("text").except().as<sf::String>().except(),
 		map.get_as<orl::Option<sf::Color> >("text-color").ok_or({}),
 		map.get_as<orl::Option<sf::Font&> >("font").ok_or({}),
 		map.get_as<orl::Option<ie::LoadTextStyle> >("style").ok_or({}).map([](auto& style){
 			return style.style;
 		}),
-		map.get_as<std::vector<bp::BoxPtr<ie::BaseLine::Make> > >("lines").move_ok_or({}),
+		map.get_as<std::vector<bp::BoxPtr<ie::BaseLine::Make> > >("lines").ok_or({}),
 		map.get_as<orl::Option<size_t>>("font-size").ok_or({}),
 		map.get_as<orl::Option<sf::Color>>("text-selection-color").ok_or({}),
 		map.get_as<orl::Option<sf::Color>>("background-selection-color").ok_or({}),

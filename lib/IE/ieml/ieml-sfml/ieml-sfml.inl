@@ -40,7 +40,7 @@ namespace ieml {
 		std::vector<T> result{};
 		result.reserve(list.size());
 		for(auto& item: list) {
-			result.push_back(item.template as<T>().move_except());
+			result.push_back(item.template as<T>().except());
 		}
 		return result;
 	}
@@ -51,7 +51,7 @@ namespace ieml {
 		absl::flat_hash_map<std::string, T> result{};
 		result.reserve(map.size());
 		for(auto& [key, value]: map) {
-			result.insert(std::make_pair(key, value.template as<T>().move_except()));
+			result.insert(std::make_pair(key, value.template as<T>().except()));
 		}
 		return result;
 	}
@@ -66,16 +66,16 @@ namespace ieml {
 		}
 		auto list{clear_node.get_list_view().except()};
 		return sf::Vector2<T>{
-			list.at(0).except().as<T>().move_except(),
-			list.at(1).except().as<T>().move_except(),
+			list.at(0).except().as<T>().except(),
+			list.at(1).except().as<T>().except(),
 		};
 	}
 	
 	template<typename T>
 	orl::Option<sf::Rect<T> > Decode<char, sf::Rect<T> >::decode(ieml::Node const& node) {
 		auto map{node.get_map_view().except()};
-		auto position{map.at("position").except().as<sf::Vector2<T> >().move_except()};
-		auto size{map.at("size").except().as<sf::Vector2<T> >().move_except()};
+		auto position{map.at("position").except().as<sf::Vector2<T> >().except()};
+		auto size{map.at("size").except().as<sf::Vector2<T> >().except()};
 		return sf::Rect<T>{std::move(position), std::move(size)};
 	}
 }

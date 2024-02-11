@@ -43,7 +43,7 @@ namespace ie {
 	template<typename Type_>
 	orl::Option<MakeDyn<Type_> > MakeDyn<Type_>::decode(ieml::Node const& node) {
 		auto& tag_node{node.get_clear_data<ieml::NodeType::GetAnchor, ieml::NodeType::TakeAnchor>()};
-		return ieml::Decode<char, bp::BoxPtr<MakeType> >::decode(tag_node).map([&](auto& value) -> MakeDyn<Type_> {
+		return ieml::Decode<char, bp::BoxPtr<MakeType> >::decode(tag_node).map([&](auto&& value) -> MakeDyn<Type_> {
 			if(&tag_node != &node) {
 				size_t id{reinterpret_cast<size_t>(&tag_node)};
 				return {id, std::move(value)};
