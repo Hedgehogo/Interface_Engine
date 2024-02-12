@@ -16,8 +16,7 @@ namespace ieml {
 				for(auto& language: node.at("language").ok_or_none()) {
 					loc::system.set_now_language(language.get_string().except());
 				}
-				//return loc::system.get_text(key.ok().get_string().except());
-				return {};
+				return {{loc::system.get_text(key.get_string().except())}};
 			}
 		}
 		return {{clear_node.get_string().except()}};

@@ -22,7 +22,6 @@ namespace ie {
 			int font_size = default_size_;
 			sf::Color color = default_color_;
 			sf::Text::Style style = {};
-			float rotation = 0;
 			InternalPositioning2::Make positioning = {{0, 0}};
 			bool cut_back = true;
 			sf::Vector2f min_size = {};
@@ -30,36 +29,29 @@ namespace ie {
 			Make(
 				sf::String text,
 				BoxPtr<INonInteractive::Make>&& background,
-				sf::Font& font,
-				sf::Vector2f min_size,
-				int font_size = default_size_,
-				sf::Color color = default_color_,
-				sf::Text::Style style = {},
-				float rotation = 0,
-				InternalPositioning2::Make positioning = {{0, 0}},
-				bool cut_back = true
+				sf::Font& font
 			);
 			
-			Make(
-				sf::String text,
-				BoxPtr<INonInteractive::Make>&& background,
-				sf::Font& font,
-				int font_size = default_size_,
-				sf::Color color = default_color_,
-				sf::Text::Style style = {},
-				float rotation = 0,
-				InternalPositioning2::Make positioning = {{0, 0}},
-				bool cut_back = true
-			);
+			Make set_font_size(int font_size)&&;
+			
+			Make set_color(sf::Color color)&&;
+			
+			Make set_style(sf::Text::Style style)&&;
+			
+			Make set_positioning(InternalPositioning2::Make positioning)&&;
+			
+			Make set_cut_back(bool cut_back)&&;
+			
+			Make set_min_size(sf::Vector2f min_size)&&;
 			
 			Caption* make(InitInfo init_info) override;
 		};
 		
 		Caption(Make&& make, InitInfo init_info);
 		
-		void draw() override;
+		void set_string(sf::String str);
 		
-		sf::FloatRect get_bounds(const sf::Text& text) const;
+		void draw() override;
 		
 		void resize(sf::Vector2f size, sf::Vector2f position) override;
 		
@@ -74,6 +66,8 @@ namespace ie {
 		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
 	
 	protected:
+		void text_resize(sf::Vector2f size, sf::Vector2f position);
+		
 		static sf::Color default_color_;
 		static int default_size_;
 		

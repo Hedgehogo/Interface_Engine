@@ -91,14 +91,18 @@ void establish_friendship(
 				str_file.insert(str_file.begin(), declare_friend.begin(), declare_friend.end());
 			}
 		}
-		std::fstream second_file{second_path};
-		if(second_file.is_open()) {
+		std::ifstream input_second_file{second_path};
+		if(input_second_file.is_open()) {
 			std::string second_str;
-			std::getline(second_file, second_str, '\0');
+			std::getline(input_second_file, second_str, '\0');
 			if(second_str != str_file) {
-				second_file.clear();
-				second_file << str_file;
-				second_file.close();
+				std::ofstream output_second_file{second_path, std::ios::trunc};
+				if(output_second_file.is_open()) {
+					output_second_file.clear();
+					output_second_file << str_file;
+					output_second_file.close();
+				}
+				input_second_file.close();
 			}
 		}
 	}
