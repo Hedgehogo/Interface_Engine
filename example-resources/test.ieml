@@ -1,46 +1,14 @@
 object: = BoxScroll:
 	object: = Text:
 		text-blocks:
-			- >>
-				Linux kernel
-				============
-				---
-				There are several guides for kernel developers and users. These guides can
-				be rendered in a number of formats, like HTML and PDF. Please read
-				Documentation/admin-guide/README.rst first.
-				---
-				In order to build the documentation, use ``make htmldocs`` or
-				``make pdfdocs``.  The formatted documentation can also be read online at:
-				---
-				https://www.kernel.org/doc/html/latest/
-				---
-				There are various text files in the Documentation/ subdirectory,
-				several of them using the Restructured Text markup notation.
-				---
-				Please read the Documentation/process/changes.rst file, as it contains the
-				requirements for building and running the kernel, and information about
-				the problems which may result by upgrading your kernel.
 			- = TextBlock:
-				text: "\nabc"
-				font-size: 30
-				text-color: red
-			- = ObjectTextBlock:
-				object: red
-				size: [30, 30]
-				is-character: yes
-			- = ObjectTextBlock:
-				object: cyan
-				height: 10
+				text:
+					directory: > ../../example-resources/
+					language: > ru
+					key: > linux-readme
 		font: > ../../example-resources/segoeui.ttf
-		background: black
 		font-size: 20
-		text-color: white
-		text-selection-color: blue
-		background-selection-color: green
-		inactive-text-selection-color: cyan
-		inactive-background-selection-color: magenta
-		style: italic
 		resizer: = TextResizer:
 			align: > center
-			algorithm: > absolute
+			algorithm: > base
 	normal-object-position: [0, 0]

@@ -28,51 +28,45 @@ namespace ie {
 	Caption::Make::Make(
 		sf::String text,
 		BoxPtr<INonInteractive::Make>&& background,
-		sf::Font& font,
-		sf::Vector2f min_size,
-		int font_size,
-		sf::Color color,
-		sf::Text::Style style,
-		float rotation,
-		InternalPositioning2::Make positioning,
-		bool cut_back
+		sf::Font& font
 	) :
 		text(text),
 		background(std::move(background)),
-		font(font),
-		font_size(font_size),
-		color(color),
-		style(style),
-		rotation(rotation),
-		positioning(positioning),
-		cut_back(cut_back),
-		min_size(min_size) {
-	}
-	
-	Caption::Make::Make(
-		sf::String text,
-		BoxPtr<INonInteractive::Make>&& background,
-		sf::Font& font,
-		int font_size,
-		sf::Color color,
-		sf::Text::Style style,
-		float rotation,
-		InternalPositioning2::Make positioning,
-		bool cut_back
-	) :
-		text(text),
-		background(std::move(background)),
-		font(font),
-		font_size(font_size),
-		color(color),
-		style(style),
-		rotation(rotation),
-		positioning(positioning),
-		cut_back(cut_back) {
+		font(font) {
 	}
 	
 	Caption* Caption::Make::make(InitInfo init_info) {
 		return new Caption{std::move(*this), init_info};
+	}
+	
+	Caption::Make Caption::Make::set_font_size(int font_size)&& {
+		this->font_size = font_size;
+		return std::move(*this);
+	}
+	
+	Caption::Make Caption::Make::set_color(sf::Color color)&& {
+		this->color = color;
+		return std::move(*this);
+	}
+	
+	Caption::Make Caption::Make::set_style(sf::Text::Style style)&& {
+		this->style = style;
+		return std::move(*this);
+	}
+	
+	Caption::Make Caption::Make::set_positioning(InternalPositioning2::Make positioning)&& {
+		this->positioning = positioning;
+		return std::move(*this);
+	}
+	
+	Caption::Make Caption::Make::set_cut_back(bool cut_back)&& {
+		this->cut_back = cut_back;
+		return std::move(*this);
+	}
+	
+	Caption::Make Caption::Make::set_min_size(sf::Vector2f min_size)&& {
+		this->min_size = min_size;
+		return std::move(*this);
 	}
 	
 	Caption::Caption(Make&& make, InitInfo init_info) :
@@ -87,7 +81,11 @@ namespace ie {
 		this->text_.setCharacterSize(make.font_size);
 		this->text_.setFillColor(make.color);
 		this->text_.setStyle(make.style);
-		this->text_.setRotation(make.rotation);
+	}
+	
+	void Caption::set_string(sf::String str) {
+		str_ = str;
+		text_resize(get_size(), get_position());
 	}
 	
 	void Caption::draw() {
@@ -95,37 +93,39 @@ namespace ie {
 		render_target_->draw(text_);
 	}
 	
-	sf::FloatRect Caption::get_bounds(const sf::Text& text) const {
+	sf::Vector2f get_text_size(const sf::Text& text) {
 		sf::FloatRect local_bounds = text.getLocalBounds();
 		
-		float count_enter{(static_cast<float>(std::count(text.getString().begin(), text.getString().end(), '\n')))};
-		float character_size{static_cast<float>(text.getFont()->getLineSpacing(text.getCharacterSize()))};
+		float count_lines{(static_cast<float>(std::count(text.getString().begin(), text.getString().end(), '\n'))) + 1};
+		float character_size{static_cast<float>(text.getFont()->getLineSpacing(text.getCharacterSize()))}; //`getLineSpacing()` returns the actual size of the string
 		
-		sf::FloatRect bounds{
-			{0, 0},
-			{
-			 local_bounds.left + local_bounds.width,
-				text.getCharacterSize() + (count_enter * text.getLineSpacing() * character_size)
-			}
+		return sf::Vector2f{
+			local_bounds.left + local_bounds.width,
+			count_lines * text.getLineSpacing() * character_size
 		};
-		return text.getTransform().transformRect(bounds);
+	}
+	
+	void Caption::text_resize(sf::Vector2f size, sf::Vector2f position) {
+		sf::Vector2f text_size;
+		if(cut_back_) {
+			text_.setString(str_);
+			text_size = get_text_size(text_);
+			sf::String string = this->str_ + sf::String("...");
+			while(text_size.x > size.x || text_size.y > size.y) {
+				string.erase(string.getSize() - 4, 1);
+				text_.setString(string);
+				text_size = get_text_size(text_);
+			}
+		} else {
+			text_size = get_text_size(text_);
+		}
+		
+		text_.setPosition(positioning_.find_position(position, size, text_size));
 	}
 	
 	void Caption::resize(sf::Vector2f size, sf::Vector2f position) {
 		background_->resize(size, position);
-		text_.setString(str_);
-		
-		sf::FloatRect bounds = get_bounds(text_);
-		if(cut_back_) {
-			sf::String string = this->str_ + sf::String("...");
-			while(bounds.width > size.x || bounds.height > size.y) {
-				string.erase(string.getSize() - 4, 1);
-				text_.setString(string);
-				bounds = get_bounds(text_);
-			}
-		}
-		sf::Vector2f find_position{positioning_.find_position(position, size, {bounds.width, bounds.height})};
-		text_.setPosition(find_position - sf::Vector2f(get_bounds(text_).left - text_.getPosition().x, get_bounds(text_).top - text_.getPosition().y));
+		text_resize(size, position);
 	}
 	
 	sf::Vector2f Caption::get_area_position() const {
@@ -137,13 +137,16 @@ namespace ie {
 	}
 	
 	sf::Vector2f Caption::get_min_size() const {
-		sf::FloatRect bounds{get_bounds(sf::Text{"...", *text_.getFont(), text_.getCharacterSize()})};
 		return max(
 			max(
 				minimum_size_,
-				(cut_back_ ?
-				 sf::Vector2f{bounds.width, bounds.height} :
-				 sf::Vector2f{})
+				get_text_size([&] {
+					if(cut_back_) {
+						return sf::Text{"...", *text_.getFont(), text_.getCharacterSize()};
+					} else {
+						return text_;
+					}
+				}())
 			),
 			background_->get_min_size()
 		);
@@ -179,9 +182,8 @@ namespace ie {
 			}
 		}
 		{
-			sf::FloatRect bounds{get_bounds(text_)};
-			sf::Vector2f size{bounds.width, bounds.height};
-			sf::Vector2f position{bounds.left, bounds.top};
+			sf::Vector2f size{get_text_size(text_)};
+			sf::Vector2f position{get_position()};
 			if(size.x > 0 && size.y > 0) {
 				sf::Color color{hsv_to_rgb(static_cast<float>(hue + hue_offset % 360))};
 				
@@ -209,12 +211,11 @@ orl::Option<ie::Caption::Make> ieml::Decode<char, ie::Caption::Make>::decode(iem
 		map.at("text").except().as<sf::String>().except(),
 		map.at("background").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().except(),
 		map.at("font").except().as<sf::Font&>().except(),
-		map.get_as<sf::Vector2f>("min-size").ok_or({}),
-		map.get_as<int>("font-size").ok_or(ie::Caption::get_default_size()),
-		map.get_as<sf::Color>("color").ok_or(ie::Caption::get_default_color()),
-		map.get_as<ie::LoadTextStyle>("style").ok_or({}).style,
-		map.get_as<float>("rotation").ok_or(0.0),
-		ie::InternalPositioning2::Make{{0.5, 0.5}},
-		map.get_as<bool>("cut-back").ok_or(true)
-	};
+	}
+		.set_font_size(map.get_as<int>("font-size").except().ok_or(ie::Caption::get_default_size()))
+		.set_color(map.get_as<sf::Color>("color").except().ok_or(ie::Caption::get_default_color()))
+		.set_style(map.get_as<ie::LoadTextStyle>("style").except().ok_or({}).style)
+		.set_positioning(map.get_as<ie::InternalPositioning2::Make>("positioning").except().ok_or({{0.5, 0.5}}))
+		.set_cut_back(map.get_as<bool>("cut-back").except().ok_or(true))
+		.set_min_size(map.get_as<sf::Vector2f>("min-size").except().ok_or({}));
 }
