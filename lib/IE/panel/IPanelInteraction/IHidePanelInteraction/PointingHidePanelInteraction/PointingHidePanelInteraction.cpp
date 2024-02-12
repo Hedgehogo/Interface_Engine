@@ -30,5 +30,5 @@ namespace ie {
 }
 
 orl::Option<ie::PointingHidePanelInteraction::Make> ieml::Decode<char, ie::PointingHidePanelInteraction::Make>::decode(ieml::Node const& node) {
-	return {{node.get_as<bool>("only-on-parent").ok_or(false)}};
+	return {{node.get_as<bool>("only-on-parent").except().ok_or(false)}};
 }

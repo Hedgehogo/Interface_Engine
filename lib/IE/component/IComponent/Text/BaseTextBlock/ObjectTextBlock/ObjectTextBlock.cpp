@@ -56,7 +56,7 @@ orl::Option<ie::ObjectTextBlock::Make> ieml::Decode<char, ie::ObjectTextBlock::M
 	auto map{node.get_map_view().except()};
 	auto object{map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().except()};
 	for(auto& size: map.at("size").ok_or_none()) {
-		auto is_character{map.get_as<bool>("is-character").ok_or(true)};
+		auto is_character{map.get_as<bool>("is-character").except().ok_or(true)};
 		return {{std::move(object), size.as<sf::Vector2f>().except(), is_character}};
 	}
 	auto height{map.at("height").except().as<float>().except()};

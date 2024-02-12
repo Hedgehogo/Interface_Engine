@@ -76,6 +76,6 @@ orl::Option<ie::BoxTabs::Make> ieml::Decode<char, ie::BoxTabs::Make>::decode(iem
 	return ie::BoxTabs::Make{
 		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().except(),
 		map.at("value").except().as<ie::MakeDyn<ie::ISRSize> >().except(),
-		map.get_as<sf::Vector2f>("min-size").ok_or({})
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({})
 	};
 }

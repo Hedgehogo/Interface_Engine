@@ -307,8 +307,8 @@ namespace ie {
 orl::Option<ie::TextResizer::Make> ieml::Decode<char, ie::TextResizer::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::TextResizer::Make{
-		map.get_as<float>("line-spacing").ok_or(1.15f),
-		map.get_as<ie::BaseTextResizer::Align>("align").ok_or(ie::BaseTextResizer::Align::Left),
-		map.get_as<ie::BaseTextResizer::Algorithm>("algorithm").ok_or(ie::BaseTextResizer::Algorithm::Base),
+		map.get_as<float>("line-spacing").except().ok_or(1.15f),
+		map.get_as<ie::BaseTextResizer::Align>("align").except().ok_or(ie::BaseTextResizer::Align::Left),
+		map.get_as<ie::BaseTextResizer::Algorithm>("algorithm").except().ok_or(ie::BaseTextResizer::Algorithm::Base),
 	};
 }

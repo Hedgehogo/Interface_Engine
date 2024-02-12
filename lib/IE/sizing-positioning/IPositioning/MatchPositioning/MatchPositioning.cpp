@@ -18,6 +18,6 @@ orl::Option<ie::MatchPositioning> ieml::Decode<char, ie::MatchPositioning>::deco
 	return ie::MatchPositioning{
 		map.at("parent-coefficient").except().as<float>().except(),
 		map.at("object-coefficient").except().as<float>().except(),
-		map.get_as<float>("offset").ok_or(0.),
+		map.get_as<float>("offset").except().ok_or(0.),
 	};
 }

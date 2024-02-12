@@ -90,16 +90,16 @@ orl::Option<ie::InteractiveTextBlock::Make> ieml::Decode<char, ie::InteractiveTe
 	return ie::InteractiveTextBlock::Make{
 		map.at("interaction").except().as<bp::BoxPtr<ie::IBaseInteraction::Make> >().except(),
 		map.at("text").except().as<sf::String>().except(),
-		map.get_as<orl::Option<sf::Color> >("text-color").ok_or({}),
-		map.get_as<orl::Option<sf::Font&> >("font").ok_or({}),
-		map.get_as<orl::Option<ie::LoadTextStyle> >("style").ok_or({}).map([](auto& style){
+		map.get_as<orl::Option<sf::Color> >("text-color").except().ok_or({}),
+		map.get_as<orl::Option<sf::Font&> >("font").except().ok_or({}),
+		map.get_as<orl::Option<ie::LoadTextStyle> >("style").except().ok_or({}).map([](auto& style){
 			return style.style;
 		}),
-		map.get_as<std::vector<bp::BoxPtr<ie::BaseLine::Make> > >("lines").ok_or({}),
-		map.get_as<orl::Option<size_t>>("font-size").ok_or({}),
-		map.get_as<orl::Option<sf::Color>>("text-selection-color").ok_or({}),
-		map.get_as<orl::Option<sf::Color>>("background-selection-color").ok_or({}),
-		map.get_as<orl::Option<sf::Color>>("inactive-text-selection-color").ok_or({}),
-		map.get_as<orl::Option<sf::Color>>("inactive-background-selection-color").ok_or({}),
+		map.get_as<std::vector<bp::BoxPtr<ie::BaseLine::Make> > >("lines").except().ok_or({}),
+		map.get_as<orl::Option<size_t>>("font-size").except().ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("text-selection-color").except().ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("background-selection-color").except().ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("inactive-text-selection-color").except().ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("inactive-background-selection-color").except().ok_or({}),
 	};
 }

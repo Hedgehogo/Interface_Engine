@@ -158,7 +158,7 @@ orl::Option<ie::BoxShader::Make> ieml::Decode<char, ie::BoxShader::Make>::decode
 		map.at("values-b").except().as<ie::BoxShader::SMakeMap<ie::ISBool> >().except(),
 		map.at("values-c").except().as<ie::BoxShader::SMakeMap<ie::ISReadable<sf::Color> > >().except(),
 		map.at("values-v").except().as<ie::BoxShader::SMakeMap<ie::ISRVec2F> >().except(),
-		map.get_as<bool>("optimize").ok_or(true),
-		map.get_as<sf::Vector2f>("min-size").ok_or({})
+		map.get_as<bool>("optimize").except().ok_or(true),
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({})
 	};
 }

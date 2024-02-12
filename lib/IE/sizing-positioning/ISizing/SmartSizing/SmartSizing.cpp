@@ -29,8 +29,8 @@ namespace ie {
 orl::Option<ie::SmartSizing::Make> ieml::Decode<char, ie::SmartSizing::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::SmartSizing::Make{
-		map.get_as<float>("target-coefficient").ok_or(1.),
-		map.get_as<float>("parent-coefficient").ok_or(0.),
-		map.get_as<float>("addition").ok_or(0.),
+		map.get_as<float>("target-coefficient").except().ok_or(1.),
+		map.get_as<float>("parent-coefficient").except().ok_or(0.),
+		map.get_as<float>("addition").except().ok_or(0.),
 	};
 }

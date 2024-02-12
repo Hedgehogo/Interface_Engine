@@ -91,8 +91,8 @@ orl::Option<ie::Bar::Make> ieml::Decode<char, ie::Bar::Make>::decode(ieml::Node 
 	return ie::Bar::Make{
 		map.at("background").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().except(),
 		map.at("strip").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().except(),
-		map.get_as<int>("division").ok_or(1),
-		map.get_as<float>("offset").ok_or(0.0),
-		map.get_as<bool>("offset").ok_or(true),
+		map.get_as<int>("division").except().ok_or(1),
+		map.get_as<float>("offset").except().ok_or(0.0),
+		map.get_as<bool>("offset").except().ok_or(true),
 	};
 }

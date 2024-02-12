@@ -67,7 +67,7 @@ namespace ie {
 orl::Option<ie::Sprite::Make> ieml::Decode<char, ie::Sprite::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	auto& texture{map.at("texture").except().as<sf::Texture&>().except()};
-	auto min_size{map.get_as<sf::Vector2f>("min-size").ok_or({})};
+	auto min_size{map.get_as<sf::Vector2f>("min-size").except().ok_or({})};
 	for(auto& rect: map.at("rect").ok_or_none()) {
 		return {{texture, rect.as<sf::IntRect>().except(), min_size}};
 	}

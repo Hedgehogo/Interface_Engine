@@ -37,9 +37,9 @@ namespace ieml {
 		for(auto list: clear_node.get_list_view().ok_or_none()) {
 			return sf::Color{
 				list.at(0).except().as<uint8_t>(),
-				list.at(0).except().as<uint8_t>(),
-				list.at(0).except().as<uint8_t>(),
-				list.get_as<uint8_t>(0).ok_or(255)
+				list.at(1).except().as<uint8_t>(),
+				list.at(2).except().as<uint8_t>(),
+				list.get_as<uint8_t>(3).except().ok_or(255)
 			};
 		}
 		auto& raw{clear_node.get_raw().except().str};
@@ -82,7 +82,7 @@ namespace ieml {
 			}
 			return {{result}};
 		}
-		auto& str{clear_node.get_string().except()};
+		auto& str{clear_node.get_raw().except().str};
 		if(str == "regular") {
 			return {{sf::Text::Style::Regular}};
 		} else if(str == "bold") {

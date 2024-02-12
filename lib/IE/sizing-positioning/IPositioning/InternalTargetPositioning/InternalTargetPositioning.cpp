@@ -25,6 +25,6 @@ orl::Option<ie::InternalTargetPositioning> ieml::Decode<char, ie::InternalTarget
 	auto map{node.get_map_view().except()};
 	return ie::InternalTargetPositioning{
 		map.at("coefficient").except().as<float>().except(),
-		map.get_as<float>("offset").ok_or(0.)
+		map.get_as<float>("offset").except().ok_or(0.)
 	};
 }

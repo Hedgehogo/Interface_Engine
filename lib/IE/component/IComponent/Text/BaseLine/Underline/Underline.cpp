@@ -28,6 +28,6 @@ namespace ie {
 orl::Option<ie::Underline::Make> ieml::Decode<char, ie::Underline::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::Underline::Make{
-		map.get_as<orl::Option<sf::Color>>("color").ok_or({}),
+		map.get_as<orl::Option<sf::Color>>("color").except().ok_or({}),
 	};
 }

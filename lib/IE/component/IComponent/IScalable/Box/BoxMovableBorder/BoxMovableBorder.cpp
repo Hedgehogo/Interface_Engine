@@ -203,10 +203,10 @@ orl::Option<ie::BoxMovableBorder::Make> ieml::Decode<char, ie::BoxMovableBorder:
 	return ie::BoxMovableBorder::Make{
 		map.at("first-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("first-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
-		map.get_as<bool>("border-horizontal").ok_or(false),
+		map.get_as<bool>("border-horizontal").except().ok_or(false),
 		map.at("border-value").except().as<ie::MakeDyn<ie::ISMRFloat> >().except(),
-		map.get_as<int>("border-interaction-size").ok_or(5),
-		map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft),
-		map.get_as<sf::Vector2f>("min-size").ok_or({})
+		map.get_as<int>("border-interaction-size").except().ok_or(5),
+		map.get_as<ie::Key>("key").except().ok_or(ie::Key::MouseLeft),
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({})
 	};
 }

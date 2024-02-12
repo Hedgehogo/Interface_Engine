@@ -29,6 +29,6 @@ orl::Option<ie::ParentCoefficientSizing::Make> ieml::Decode<char, ie::ParentCoef
 	auto map{node.get_map_view().except()};
 	return ie::ParentCoefficientSizing::Make{
 		map.at("coefficient").except().as<float>().except(),
-		map.get_as<float>("addition").ok_or(0.)
+		map.get_as<float>("addition").except().ok_or(0.)
 	};
 }

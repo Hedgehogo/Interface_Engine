@@ -57,6 +57,6 @@ orl::Option<ie::BoxScroll::Make> ieml::Decode<char, ie::BoxScroll::Make>::decode
 	return ie::BoxScroll::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IComponent::Make> >().except(),
 		map.at("normal-object-position").except().as<ie::MakeDyn<ie::ISRVec2F> >().except(),
-		map.get_as<sf::Vector2f>("min-size").ok_or({}),
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({}),
 	};
 }

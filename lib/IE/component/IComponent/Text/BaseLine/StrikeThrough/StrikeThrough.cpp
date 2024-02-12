@@ -28,7 +28,7 @@ namespace ie {
 orl::Option<ie::StrikeThrough::Make> ieml::Decode<char, ie::StrikeThrough::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::StrikeThrough::Make{
-		map.get_as<orl::Option<sf::Color>>("color").ok_or({}),
-		map.get_as<float>("strike-through-offset").ok_or(0.3f),
+		map.get_as<orl::Option<sf::Color>>("color").except().ok_or({}),
+		map.get_as<float>("strike-through-offset").except().ok_or(0.3f),
 	};
 }

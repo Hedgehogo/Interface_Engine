@@ -54,6 +54,6 @@ orl::Option<ie::BoxConstBezel::Make> ieml::Decode<char, ie::BoxConstBezel::Make>
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("bezel").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().except(),
 		map.at("thickness").except().as<float>().except(),
-		map.get_as<sf::Vector2f>("min-size").ok_or({})
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({})
 	};
 }

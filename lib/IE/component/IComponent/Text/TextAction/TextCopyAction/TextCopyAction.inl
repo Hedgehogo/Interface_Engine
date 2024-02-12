@@ -40,6 +40,6 @@ template<typename T>
 orl::Option<ie::make_system::BasicTextCopyAction<T>> ieml::Decode<char, ie::make_system::BasicTextCopyAction<T>>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	return ie::make_system::BasicTextCopyAction<T>{
-		map.get_as<bp::BoxPtr<T>>("clipboard").ok_or({}),
+		map.get_as<bp::BoxPtr<T>>("clipboard").except().ok_or({}),
 	};
 }

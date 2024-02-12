@@ -29,6 +29,6 @@ orl::Option<ie::InternalPositioning> ieml::Decode<char, ie::InternalPositioning>
 	auto map{clear_node.get_map_view().except()};
 	return ie::InternalPositioning{
 		map.at("coefficient").except().as<float>().except(),
-		map.get_as<float>("offset").ok_or(0.),
+		map.get_as<float>("offset").except().ok_or(0.),
 	};
 }

@@ -281,29 +281,29 @@ namespace ie {
 
 orl::Option<ie::Text::Make> ieml::Decode<char, ie::Text::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
-	auto color{map.get_as<sf::Color>("text-color").ok_or(sf::Color::Black)};
+	auto color{map.get_as<sf::Color>("text-color").except().ok_or(sf::Color::Black)};
 	return ie::Text::Make{
 		map.at("text-blocks").except().as<std::vector<bp::BoxPtr<ie::BaseTextBlock::Make> > >().except(),
 		map.at("font").except().as<sf::Font&>().except(),
-		map.get_as<bp::BoxPtr<ie::INonInteractive::Make> >("background").ok_or_else([] {
+		map.get_as<bp::BoxPtr<ie::INonInteractive::Make> >("background").except().ok_or_else([] {
 			return bp::make_box_ptr<ie::INonInteractive::Make, ie::FullColor::Make>(sf::Color::White);
 		}),
-		map.get_as<size_t>("font-size").ok_or(14),
+		map.get_as<size_t>("font-size").except().ok_or(14),
 		color,
-		map.get_as<sf::Color>("text-selection-color").ok_or(sf::Color::White),
-		map.get_as<sf::Color>("background-selection-color").ok_or(sf::Color::Blue),
-		map.get_as<sf::Color>("inactive-text-selection-color").ok_or(color),
-		map.get_as<sf::Color>("inactive-background-selection-color").ok_or(
+		map.get_as<sf::Color>("text-selection-color").except().ok_or(sf::Color::White),
+		map.get_as<sf::Color>("background-selection-color").except().ok_or(sf::Color::Blue),
+		map.get_as<sf::Color>("inactive-text-selection-color").except().ok_or(color),
+		map.get_as<sf::Color>("inactive-background-selection-color").except().ok_or(
 			sf::Color{150, 150, 150}
 		),
-		map.get_as<ie::LoadTextStyle>("style").ok_or({}).style,
-		map.get_as<bp::BoxPtr<ie::BaseTextResizer::Make> >("resizer").ok_or(
+		map.get_as<ie::LoadTextStyle>("style").except().ok_or({}).style,
+		map.get_as<bp::BoxPtr<ie::BaseTextResizer::Make> >("resizer").except().ok_or(
 			bp::make_box_ptr<ie::BaseTextResizer::Make, ie::TextResizer::Make>(
 				1.15f,
 				ie::BaseTextResizer::Align::Left
 			)
 		),
-		map.get_as<bp::BoxPtr<ie::IBasicInteraction<ie::Text&>::Make > >("text-interaction").ok_or_else([] {
+		map.get_as<bp::BoxPtr<ie::IBasicInteraction<ie::Text&>::Make > >("text-interaction").except().ok_or_else([] {
 			return bp::make_box_ptr<ie::IBasicInteraction<ie::Text&>::Make, ie::BasicEmptyInteraction<ie::Text&>::Make>();
 		}),
 	};

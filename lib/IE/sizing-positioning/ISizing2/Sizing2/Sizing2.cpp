@@ -62,14 +62,14 @@ orl::Option<ie::Sizing2::Make> ieml::Decode<char, ie::Sizing2::Make>::decode(iem
 		return ie::Sizing2::Make{
 			target_coefficient.as<sf::Vector2f>().except(),
 			parent_coefficient.as<sf::Vector2f>().except(),
-			map.get_as<sf::Vector2f>("addition").ok_or({})
+			map.get_as<sf::Vector2f>("addition").except().ok_or({})
 		};
 	}
 	for(auto& coefficient: target_coefficient_node || parent_coefficient_node) {
 		auto relative_target{target_coefficient_node.is_some()};
 		return ie::Sizing2::Make{
 			coefficient.as<sf::Vector2f>().except(),
-			map.get_as<sf::Vector2f>("addition").ok_or({}),
+			map.get_as<sf::Vector2f>("addition").except().ok_or({}),
 			relative_target
 		};
 	}

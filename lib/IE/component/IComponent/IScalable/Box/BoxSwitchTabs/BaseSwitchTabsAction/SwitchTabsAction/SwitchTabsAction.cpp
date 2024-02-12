@@ -28,5 +28,5 @@ namespace ie {
 }
 
 orl::Option<ie::SwitchTabsAction::Make> ieml::Decode<char, ie::SwitchTabsAction::Make>::decode(ieml::Node const& node) {
-	return {{node.get_as<size_t>("index").ok_or(0u)}};
+	return {{node.get_as<size_t>("index").except().ok_or(0u)}};
 }

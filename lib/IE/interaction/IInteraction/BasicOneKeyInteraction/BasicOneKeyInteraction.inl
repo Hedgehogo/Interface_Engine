@@ -57,6 +57,6 @@ ieml::Decode<char, ie::make_system::BasicOneKeyInteraction<T> >::decode(ieml::No
 	auto& clear_node{node.get_clear()};
 	return ie::make_system::BasicOneKeyInteraction<T>{
 		clear_node.at("action").except().template as<bp::BoxPtr<ie::make_system::BasicKeyAction<T> > > ().except(),
-		clear_node.get_as<ie::Key>().ok_or(ie::Key::MouseLeft),
+		clear_node.get_as<ie::Key>("key").except().ok_or(ie::Key::MouseLeft),
 	};
 }

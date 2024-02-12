@@ -55,7 +55,7 @@ orl::Option<ie::Positioning2::Make> ieml::Decode<char, ie::Positioning2::Make>::
 	for(auto& coefficient_node: target_coefficient || parent_coefficient) {
 		auto relative_target{target_coefficient.is_some()};
 		auto coefficient{coefficient_node.as<sf::Vector2f>().except()};
-		auto offset{map.get_as<sf::Vector2f>("offset").ok_or({})};
+		auto offset{map.get_as<sf::Vector2f>("offset").except().ok_or({})};
 		for(auto& object_coefficient_node: map.at("object-coefficient").ok_or_none()) {
 			auto object_coefficient{object_coefficient_node.as<sf::Vector2f>().except()};
 			return {{coefficient, object_coefficient, offset, relative_target}};
@@ -67,7 +67,7 @@ orl::Option<ie::Positioning2::Make> ieml::Decode<char, ie::Positioning2::Make>::
 		return ie::Positioning2::Make{
 			parent_location.as<ie::Location2>().except(),
 			object_location.as<ie::Location2>().except(),
-			map.get_as<sf::Vector2f>("offset").ok_or({})
+			map.get_as<sf::Vector2f>("offset").except().ok_or({})
 		};
 	}
 	return ie::Positioning2::Make{

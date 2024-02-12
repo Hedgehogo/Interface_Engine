@@ -49,6 +49,6 @@ orl::Option<ie::BoxPanel::Make> ieml::Decode<char, ie::BoxPanel::Make>::decode(i
 	return ie::BoxPanel::Make{
 		map.at("panel").except().as<ie::BoxPtr<ie::ConstPanel::Make> >().except(),
 		map.at("panel").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
-		map.get_as<sf::Vector2f>("min-size").ok_or({}),
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({}),
 	};
 }

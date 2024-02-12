@@ -46,6 +46,6 @@ orl::Option<ie::BoxAlternative::Make> ieml::Decode<char, ie::BoxAlternative::Mak
 	return ie::BoxAlternative::Make{
 		map.at("top-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("bottom-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
-		map.get_as<sf::Vector2f>("min-size").ok_or({}),
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({}),
 	};
 }

@@ -38,6 +38,6 @@ orl::Option<ie::ConstPanel::Make> ieml::Decode<char, ie::ConstPanel::Make>::deco
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("sizing").except().as<ie::BoxPtr<ie::ISizing2::Make> >().except(),
 		map.at("positioning").except().as<ie::BoxPtr<ie::IPositioning2::Make> >().except(),
-		map.get_as<bool>("displayed").ok_or(false)
+		map.get_as<bool>("displayed").except().ok_or(false)
 	};
 }

@@ -122,6 +122,6 @@ orl::Option<ie::Switcher::Make> ieml::Decode<char, ie::Switcher::Make>::decode(i
 		map.at("inactive-background").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("active-background").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("value").except().as<ie::MakeDyn<ie::ISMBool> >().except(),
-		map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft),
+		map.get_as<ie::Key>("key").except().ok_or(ie::Key::MouseLeft),
 	};
 }

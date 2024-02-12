@@ -67,9 +67,9 @@ orl::Option<ie::BoxSwitchTabs::Make> ieml::Decode<char, ie::BoxSwitchTabs::Make>
 	auto map{node.get_map_view().except()};
 	return ie::BoxSwitchTabs::Make{
 		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().except(),
-		map.get_as<ie::MakeDyn<ie::ISMRSize> >("value").ok_or_else([] {
+		map.get_as<ie::MakeDyn<ie::ISMRSize> >("value").except().ok_or_else([] {
 			return ie::MakeDyn<ie::ISMRSize>{ie::make_box_ptr<ie::SMRSize::Make>(0u)};
 		}),
-		map.get_as<sf::Vector2f>("min-size").ok_or({})
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({})
 	};
 }

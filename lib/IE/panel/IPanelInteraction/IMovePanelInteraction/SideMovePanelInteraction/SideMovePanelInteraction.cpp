@@ -33,6 +33,6 @@ orl::Option<ie::SideMovePanelInteraction::Make> ieml::Decode<char, ie::SideMoveP
 		map.at("coefficient").except().as<float>().except(),
 		map.at("offset").except().as<float>().except(),
 		map.at("horizontal").except().as<bool>().except(),
-		map.get_as<bool>("at-start").ok_or(false),
+		map.get_as<bool>("at-start").except().ok_or(false),
 	};
 }

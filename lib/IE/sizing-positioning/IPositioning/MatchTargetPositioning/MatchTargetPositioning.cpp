@@ -19,6 +19,6 @@ orl::Option<ie::MatchTargetPositioning> ieml::Decode<char, ie::MatchTargetPositi
 	return ie::MatchTargetPositioning{
 		map.at("target-coefficient").except().as<float>().except(),
 		map.at("object-coefficient").except().as<float>().except(),
-		map.get_as<float>("offset").ok_or(0.),
+		map.get_as<float>("offset").except().ok_or(0.),
 	};
 }

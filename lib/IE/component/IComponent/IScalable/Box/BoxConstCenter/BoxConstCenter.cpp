@@ -102,6 +102,6 @@ orl::Option<ie::BoxConstCenter::Make> ieml::Decode<char, ie::BoxConstCenter::Mak
 		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("background").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("const-size").except().as<sf::Vector2f>().except(),
-		map.get_as<sf::Vector2f>("min-size").ok_or({})
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({})
 	};
 }

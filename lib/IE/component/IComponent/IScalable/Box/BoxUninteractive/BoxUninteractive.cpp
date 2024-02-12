@@ -37,6 +37,6 @@ orl::Option<ie::BoxUninteractive::Make> ieml::Decode<char, ie::BoxUninteractive:
 	auto map{node.get_map_view().except()};
 	return ie::BoxUninteractive::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
-		map.get_as<sf::Vector2f>("min-size").ok_or({})
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({})
 	};
 }

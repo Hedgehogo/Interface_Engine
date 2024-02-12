@@ -142,7 +142,7 @@ namespace ie {
 orl::Option<ie::BoxBorder::Make> ieml::Decode<char, ie::BoxBorder::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
 	auto objects(map.at("objects").except().as<std::vector<std::vector<ie::BoxPtr<ie::IScalable::Make> > > >().except());
-	auto min_size{map.get_as<sf::Vector2f>("min-size").ok_or({})};
+	auto min_size{map.get_as<sf::Vector2f>("min-size").except().ok_or({})};
 	auto bounds_vertical{map.at("bounds-vertical")};
 	auto bounds_horizontal{map.at("bounds-horizontal")};
 	if(bounds_vertical.is_ok() && bounds_horizontal.is_ok()) {

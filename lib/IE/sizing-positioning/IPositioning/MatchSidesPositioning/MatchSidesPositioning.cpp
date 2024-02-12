@@ -40,6 +40,6 @@ orl::Option<ie::MatchSidesPositioning> ieml::Decode<char, ie::MatchSidesPosition
 	return ie::MatchSidesPositioning{
 		map.at("parent-side").except().as<ie::Location>().except(),
 		map.at("object-side").except().as<ie::Location>().except(),
-		map.get_as<float>("offset").ok_or(0.),
+		map.get_as<float>("offset").except().ok_or(0.),
 	};
 }

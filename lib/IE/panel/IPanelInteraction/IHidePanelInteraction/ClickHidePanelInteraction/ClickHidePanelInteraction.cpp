@@ -18,6 +18,6 @@ orl::Option<ie::ClickHidePanelInteraction::Make> ieml::Decode<char, ie::ClickHid
 	auto map{node.get_map_view().except()};
 	return ie::ClickHidePanelInteraction::Make{
 		map.at("key").except().as<ie::Key>().except(),
-		map.get_as<bool>("only-on-parent").ok_or(false),
+		map.get_as<bool>("only-on-parent").except().ok_or(false),
 	};
 }

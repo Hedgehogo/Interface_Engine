@@ -84,6 +84,6 @@ orl::Option<ie::make_system::BasicKeysInteraction<T> > ieml::Decode<char, ie::ma
 	return ie::make_system::BasicKeysInteraction<T>{
 		map.at("action").except().as<ie::BoxPtr<ie::make_system::BasicKeyAction<T> > >().except(),
 		map.at("keys").except().as<std::vector<ie::Key> >().except(),
-		map.get_as<std::vector<ie::Key> >("black-list-keys").ok_or({}),
+		map.get_as<std::vector<ie::Key> >("black-list-keys").except().ok_or({}),
 	};
 }

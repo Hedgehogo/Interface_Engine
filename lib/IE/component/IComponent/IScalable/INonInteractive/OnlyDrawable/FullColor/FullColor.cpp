@@ -59,6 +59,6 @@ orl::Option<ie::FullColor::Make> ieml::Decode<char, ie::FullColor::Make>::decode
 	auto map{node.get_map_view().except()};
 	return ie::FullColor::Make{
 		map.at("color").except().as<sf::Color>().except(),
-		map.get_as<sf::Vector2f>("normal-size").ok_or({})
+		map.get_as<sf::Vector2f>("normal-size").except().ok_or({})
 	};
 }

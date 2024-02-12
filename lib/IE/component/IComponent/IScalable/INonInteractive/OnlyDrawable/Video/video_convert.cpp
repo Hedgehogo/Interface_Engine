@@ -33,9 +33,9 @@ namespace ie {
 		return new VideoFromTexture::Make{
 			path_node.as<sf::Texture&>().except(),
 			std::move(viewing_progress),
-			map.get_as<sf::IntRect>("rect").ok_or({0, 0, 0, 0}),
-			map.get_as<size_t>("count-frame").ok_or(0u),
-			map.get_as<sf::Vector2i>("offset").ok_or({0, 0})
+			map.get_as<sf::IntRect>("rect").except().ok_or({0, 0, 0, 0}),
+			map.get_as<size_t>("count-frame").except().ok_or(0u),
+			map.get_as<sf::Vector2i>("offset").except().ok_or({0, 0})
 		};
 	}
 }

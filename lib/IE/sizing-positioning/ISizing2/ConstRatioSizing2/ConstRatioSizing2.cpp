@@ -47,8 +47,8 @@ namespace ie {
 
 orl::Option<ie::ConstRatioSizing2::Make> ieml::Decode<char, ie::ConstRatioSizing2::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
-	auto ratio{map.get_as<float>("ratio").ok_or(1.)};
-	auto horizontal{map.get_as<bool>("horizontal").ok_or(true)};
+	auto ratio{map.get_as<float>("ratio").except().ok_or(1.)};
+	auto horizontal{map.get_as<bool>("horizontal").except().ok_or(true)};
 	for(auto& relative_parent: map.at("relative-parent").ok_or_none()) {
 		return {{ratio, horizontal, relative_parent.as<bool>().except()}};
 	}
@@ -61,7 +61,7 @@ orl::Option<ie::ConstRatioSizing2::Make> ieml::Decode<char, ie::ConstRatioSizing
 		return ie::ConstRatioSizing2::Make{
 			target_coefficient.as<float>().except(),
 			parent_coefficient.as<float>().except(),
-			map.get_as<float>("addition").ok_or(0.),
+			map.get_as<float>("addition").except().ok_or(0.),
 			ratio,
 			horizontal
 		};
@@ -70,7 +70,7 @@ orl::Option<ie::ConstRatioSizing2::Make> ieml::Decode<char, ie::ConstRatioSizing
 		auto relative_target{target_coefficient_node.is_some()};
 		return ie::ConstRatioSizing2::Make{
 			coefficient.as<float>().except(),
-			map.get_as<float>("addition").ok_or(0.),
+			map.get_as<float>("addition").except().ok_or(0.),
 			ratio,
 			horizontal,
 			relative_target

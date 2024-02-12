@@ -30,6 +30,6 @@ orl::Option<ie::CoefficientMovePanelInteraction::Make> ieml::Decode<char, ie::Co
 	return ie::CoefficientMovePanelInteraction::Make{
 		map.at("coefficient").except().as<sf::Vector2f>().except(),
 		map.at("offset").except().as<sf::Vector2f>().except(),
-		map.get_as<bool>("at-start").ok_or(false),
+		map.get_as<bool>("at-start").except().ok_or(false),
 	};
 }

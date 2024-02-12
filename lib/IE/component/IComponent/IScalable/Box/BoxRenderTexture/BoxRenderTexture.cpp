@@ -82,7 +82,7 @@ orl::Option<ie::BoxRenderTexture::Make> ieml::Decode<char, ie::BoxRenderTexture:
 	auto map{node.get_map_view().except()};
 	return ie::BoxRenderTexture::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
-		map.get_as<bool>("optimize").ok_or(true),
-		map.get_as<sf::Vector2f>("min-size").ok_or({})
+		map.get_as<bool>("optimize").except().ok_or(true),
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({})
 	};
 }

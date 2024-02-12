@@ -176,13 +176,13 @@ orl::Option<ie::BoxConstRatioCenter::Make> ieml::Decode<char, ie::BoxConstRatioC
 	auto map{node.get_map_view().except()};
 	return ie::BoxConstRatioCenter::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
-		map.get_as<ie::BoxPtr<ie::IScalable::Make> >("first-object").ok_or_else([] {
+		map.get_as<ie::BoxPtr<ie::IScalable::Make> >("first-object").except().ok_or_else([] {
 			return ie::make_box_ptr<ie::IScalable::Make, ie::Empty::Make>();
 		}),
-		map.get_as<ie::BoxPtr<ie::IScalable::Make> >("second-object").ok_or_else([] {
+		map.get_as<ie::BoxPtr<ie::IScalable::Make> >("second-object").except().ok_or_else([] {
 			return ie::make_box_ptr<ie::IScalable::Make, ie::Empty::Make>();
 		}),
-		map.get_as<ie::BoxPtr<ie::INonInteractive::Make> >("background").ok_or_else([] {
+		map.get_as<ie::BoxPtr<ie::INonInteractive::Make> >("background").except().ok_or_else([] {
 			return ie::make_box_ptr<ie::INonInteractive::Make, ie::Empty::Make>();
 		}),
 		map.at("aspect-ratio").except().as<float>().except(),

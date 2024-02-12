@@ -104,13 +104,13 @@ namespace ie {
 
 orl::Option<ie::BoxBorderHorizontal::Make> ieml::Decode<char, ie::BoxBorderHorizontal::Make>::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
-	auto min_size{map.get_as<sf::Vector2f>("min-size").ok_or({})};
+	auto min_size{map.get_as<sf::Vector2f>("min-size").except().ok_or({})};
 	auto two_objects{map.at("first-object").ok_or_none() && map.at("second-object").ok_or_none()};
 	for(auto& [first_object, second_object]: two_objects) {
 		return ie::BoxBorderHorizontal::Make{
 			first_object.as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 			second_object.as<ie::BoxPtr<ie::IScalable::Make> >().except(),
-			map.get_as<float>("bound").ok_or(0.5),
+			map.get_as<float>("bound").except().ok_or(0.5),
 			min_size
 		};
 	}

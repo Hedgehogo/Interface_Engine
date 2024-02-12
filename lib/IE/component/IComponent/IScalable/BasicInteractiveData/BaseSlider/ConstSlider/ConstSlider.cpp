@@ -81,9 +81,9 @@ orl::Option<ie::ConstSlider::Make> ieml::Decode<char, ie::ConstSlider::Make>::de
 	auto slider{map.at("slider").except().as < ie::BoxPtr < ie::INonInteractive::Make > > ().except()};
 	auto background{map.at("background").except().as < ie::BoxPtr < ie::INonInteractive::Make > > ().except()};
 	auto value{map.at("value").except().as<ie::MakeDyn<ie::ISMRVec2F> >().except()};
-	auto slider_scale{map.get_as<float>("slider-scale").ok_or(1.0)};
-	auto key{map.get_as<ie::Key>("key").ok_or(ie::Key::MouseLeft)};
-	bool wheel_horizontal{map.get_as<bool>("wheel-horizontal").ok_or(false)};
+	auto slider_scale{map.get_as<float>("slider-scale").except().ok_or(1.0)};
+	auto key{map.get_as<ie::Key>("key").except().ok_or(ie::Key::MouseLeft)};
+	bool wheel_horizontal{map.get_as<bool>("wheel-horizontal").except().ok_or(false)};
 	for(auto& division_node: map.at("division").ok_or_none()) {
 		auto division{division_node.as<sf::Vector2i>().except()};
 		return {{std::move(slider), std::move(background), std::move(value), division, slider_scale, key, wheel_horizontal}};
@@ -95,7 +95,7 @@ orl::Option<ie::ConstSlider::Make> ieml::Decode<char, ie::ConstSlider::Make>::de
 		slider_scale,
 		key,
 		wheel_horizontal,
-		map.get_as<ie::SliderWheelAction::Relativity>("wheel-relativity").ok_or(ie::SliderWheelAction::Relativity::RelationArea),
-		map.get_as<sf::Vector2f>("wheel-sensitivity").ok_or({0.2, 0.2})
+		map.get_as<ie::SliderWheelAction::Relativity>("wheel-relativity").except().ok_or(ie::SliderWheelAction::Relativity::RelationArea),
+		map.get_as<sf::Vector2f>("wheel-sensitivity").except().ok_or({0.2, 0.2})
 	};
 }

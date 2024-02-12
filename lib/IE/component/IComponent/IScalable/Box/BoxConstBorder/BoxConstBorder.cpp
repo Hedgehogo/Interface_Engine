@@ -107,6 +107,6 @@ orl::Option<ie::BoxConstBorder::Make> ieml::Decode<char, ie::BoxConstBorder::Mak
 		map.at("second-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.at("border-distance").except().as<float>().except(),
 		map.at("side").except().as<ie::Side>().except(),
-		map.get_as<sf::Vector2f>("min-size").ok_or({})
+		map.get_as<sf::Vector2f>("min-size").except().ok_or({})
 	};
 }
