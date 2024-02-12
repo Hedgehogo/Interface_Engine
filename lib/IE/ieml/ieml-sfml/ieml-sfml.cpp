@@ -35,9 +35,9 @@ namespace ieml {
 		auto& clear_node{node.get_clear()};
 		for(auto list: clear_node.get_list_view().ok_or_none()) {
 			return sf::Color{
-				list.at(0).except().as<uint8_t>(),
-				list.at(1).except().as<uint8_t>(),
-				list.at(2).except().as<uint8_t>(),
+				list.at(0).except().as<uint8_t>().except(),
+				list.at(1).except().as<uint8_t>().except(),
+				list.at(2).except().as<uint8_t>().except(),
 				list.get_as<uint8_t>(3).except().ok_or(255)
 			};
 		}
