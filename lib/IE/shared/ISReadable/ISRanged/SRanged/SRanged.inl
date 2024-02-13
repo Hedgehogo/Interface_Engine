@@ -2,20 +2,38 @@
 
 namespace ie::make_system {
 	template<typename T_>
-	SRanged<T_>::SRanged(T_ data) : SReadable<T_>(std::forward<T_>(data)) {
+	SRanged<T_, true>::SRanged(T_ data) : SReadable<T_>(std::forward<T_>(data)) {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SRanged<T_>::make(DynBuffer& dyn_buffer) {
+	rttb::Dyn SRanged<T_, true>::make(DynBuffer& dyn_buffer) {
 		return rttb::Dyn{ie::SRanged<T_>{std::move(*this), dyn_buffer}};
 	}
 	
 	template<typename T_>
-	SMRanged<T_>::ToMutable(T_ data) : SRanged<T_>(std::forward<T_>(data)) {
+	SRanged<T_, false>::SRanged(T_ data) : SReadable<T_>(std::forward<T_>(data)) {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SMRanged<T_>::make(DynBuffer& dyn_buffer) {
+	rttb::Dyn SRanged<T_, false>::make(DynBuffer& dyn_buffer) {
+		return rttb::Dyn{ie::SRanged<T_>{std::move(*this), dyn_buffer}};
+	}
+	
+	template<typename T_>
+	SMRanged<T_, true>::ToMutable(T_ data) : SRanged<T_>(std::forward<T_>(data)) {
+	}
+	
+	template<typename T_>
+	rttb::Dyn SMRanged<T_, true>::make(DynBuffer& dyn_buffer) {
+		return rttb::Dyn{ie::SMRanged<T_>{std::move(*this), dyn_buffer}};
+	}
+	
+	template<typename T_>
+	SMRanged<T_, false>::ToMutable(T_ data) : SRanged<T_>(std::forward<T_>(data)) {
+	}
+	
+	template<typename T_>
+	rttb::Dyn SMRanged<T_, false>::make(DynBuffer& dyn_buffer) {
 		return rttb::Dyn{ie::SMRanged<T_>{std::move(*this), dyn_buffer}};
 	}
 }
@@ -23,13 +41,17 @@ namespace ie::make_system {
 template<typename T_>
 orl::Option<ie::make_system::SRanged<T_> >
 ieml::Decode<char, ie::make_system::SRanged<T_> >::decode(const ieml::Node& node) {
-	return {{node.as<T_>().except()}};
+	return ieml::Decode<char, ie::make_system::SReadable<T_> >::decode(node).map([](auto&& value) {
+		return ie::make_system::SRanged<T_>{std::move(value.data)};
+	});
 }
 
 template<typename T_>
 orl::Option<ie::make_system::SMRanged<T_> >
 ieml::Decode<char, ie::make_system::SMRanged<T_> >::decode(const ieml::Node& node) {
-	return {{node.as<T_>().except()}};
+	return ieml::Decode<char, ie::make_system::SRanged<T_> >::decode(node).map([](auto&& value) {
+		return ie::make_system::SMRanged<T_>{std::move(value.data)};
+	});
 }
 
 namespace ie {

@@ -5,8 +5,21 @@
 
 namespace ie {
 	namespace make_system {
+		template<typename T_, bool Default_ = std::is_default_constructible_v<T_> >
+		struct SReadable;
+		
 		template<typename T_>
-		struct SReadable : public virtual ISReadable<T_> {
+		struct SReadable<T_, true> : public virtual ISReadable<T_> {
+		public:
+			T_ data;
+			
+			SReadable(T_ data = {});
+			
+			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+		};
+		
+		template<typename T_>
+		struct SReadable<T_, false> : public virtual ISReadable<T_> {
 		public:
 			T_ data;
 			
@@ -16,15 +29,23 @@ namespace ie {
 		};
 		
 		template<typename T_>
-		struct ToMutable<SReadable<T_> > : public SReadable<T_>, public virtual ISMutable<T_> {
+		struct ToMutable<SReadable<T_, true> > : public SReadable<T_>, public virtual ISMutable<T_> {
+		public:
+			ToMutable(T_ data = {});
+			
+			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+		};
+		
+		template<typename T_>
+		struct ToMutable<SReadable<T_, false> > : public SReadable<T_>, public virtual ISMutable<T_> {
 		public:
 			ToMutable(T_ data);
 			
 			rttb::Dyn make(DynBuffer& dyn_buffer) override;
 		};
 		
-		template<typename T_>
-		using SMutable = ToMutable<SReadable<T_> >;
+		template<typename T_, bool Default_ = std::is_default_constructible_v<T_> >
+		using SMutable = ToMutable<SReadable<T_, Default_> >;
 	}
 }
 

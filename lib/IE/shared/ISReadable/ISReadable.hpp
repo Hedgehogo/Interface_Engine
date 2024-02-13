@@ -11,9 +11,6 @@ namespace ie {
 	template<typename T_>
 	class ISReadable;
 	
-	template<typename Value_>
-	class ToMutable;
-	
 	namespace make_system {
 		template<typename Value_>
 		struct ToMutable;
@@ -32,6 +29,9 @@ namespace ie {
 		template<typename T_>
 		using ISMutable = ToMutable<ISReadable<T_> >;
 	}
+	
+	template<typename Value_>
+	class ToMutable;
 	
 	template<typename T_>
 	class ISReadable : public virtual IGettable<T_> {

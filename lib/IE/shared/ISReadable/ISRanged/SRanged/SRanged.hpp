@@ -4,12 +4,20 @@
 #include "../../SReadable/SReadable.hpp"
 
 namespace ie {
-	template<typename T_>
-	class SRanged;
-	
 	namespace make_system {
+		template<typename T_, bool Default_ = std::is_default_constructible_v<T_> >
+		struct SRanged;
+		
 		template<typename T_>
-		struct SRanged : public SReadable<T_>, public virtual ISRanged<T_> {
+		struct SRanged<T_, true> : public SReadable<T_>, public virtual ISRanged<T_> {
+		public:
+			SRanged(T_ data = {});
+			
+			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+		};
+		
+		template<typename T_>
+		struct SRanged<T_, false> : public SReadable<T_>, public virtual ISRanged<T_> {
 		public:
 			SRanged(T_ data);
 			
@@ -17,15 +25,23 @@ namespace ie {
 		};
 		
 		template<typename T_>
-		struct ToMutable<SRanged<T_> > : public SRanged<T_>, public virtual ISMRanged<T_> {
+		struct ToMutable<SRanged<T_, true> > : public SRanged<T_>, public virtual ISMRanged<T_> {
+		public:
+			ToMutable(T_ data = {});
+			
+			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+		};
+		
+		template<typename T_>
+		struct ToMutable<SRanged<T_, false> > : public SRanged<T_>, public virtual ISMRanged<T_> {
 		public:
 			ToMutable(T_ data);
 			
 			rttb::Dyn make(DynBuffer& dyn_buffer) override;
 		};
 		
-		template<typename T_>
-		using SMRanged = ToMutable<SRanged<T_> >;
+		template<typename T_, bool Default_ = std::is_default_constructible_v<T_> >
+		using SMRanged = ToMutable<SRanged<T_, Default_> >;
 	}
 }
 
