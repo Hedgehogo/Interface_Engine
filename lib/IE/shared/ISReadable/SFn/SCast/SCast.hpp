@@ -14,7 +14,7 @@ namespace ie {
 	using BasicSCast = SFn<To, detail::SCast<From, To>::fn>;
 	
 	template<typename From, typename To>
-	using SCast = BasicSCast<ISReadable<From>, ISReadable<To> >;
+	using SCast = BasicSCast<ISReadable<From>, SReadable<To> >;
 	
 	using SCastF2I = SCast<float, int>;
 	using SCastF2S = SCast<float, size_t>;
