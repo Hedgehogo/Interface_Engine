@@ -146,6 +146,7 @@ namespace ie {
 			add_type_make_named<BaseSwitchTabsAction, SwitchTabsAction>("SwitchTabsA");
 			add_type_make_named<BaseSwitchTabsAction, WhileSwitchTabsAction>("WhileSwitchTabsA");
 			
+			add_type_make_named<IBaseInteraction, HotkeyInteraction>("HotkeyI");
 			add_type_make_named<IBaseInteraction, OneKeyInteraction>("OneKeyI");
 			add_type_make_named<IBaseInteraction, KeysInteraction>("KeysI");
 			add_type_make_named<IBaseInteraction, EmptyInteraction>("EmptyI");
@@ -163,7 +164,7 @@ namespace ie {
 			add_type_make<IPanelInteraction, IMovePanelInteraction>();
 			
 			add_type_make<IBasicInteraction<Text&>, BasicKeysInteraction<Text&> >("TextKeysInteraction", "TextKeysI");
-			//add_type_make<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&> >("TextHotkeyInteraction", "TextHotkeyI");
+			add_type_make<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&> >("TextHotkeyInteraction", "TextHotkeyI");
 			add_type_make<IBasicInteraction<Text&>, BasicEmptyInteraction<Text&> >("TextEmptyInteraction", "TextEmptyI");
 			
 			add_fn_make<OnlyDrawable>(video_convert, "Video");

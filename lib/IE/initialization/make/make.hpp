@@ -37,7 +37,7 @@ namespace ie {
 			using V = MakeType<T, I>;
 			
 			static V map(T&& make, const I& init_info) {
-				return T{std::move(make), init_info};
+				return V{std::move(make), init_info};
 			}
 		};
 		

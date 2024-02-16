@@ -14,13 +14,23 @@ https://www.kernel.org/doc/html/latest/
 There are various text files in the Documentation/ subdirectory, several of them using the Restructured Text markup notation.
 Please read the Documentation/process/changes.rst file, as it contains the requirements for building and running the kernel, and information about the problems which may result by upgrading your kernel."
 
-	-ru "Ядро Linux
+	-fr "Noyau Linux
 ============
 
-Существует несколько руководств для разработчиков и пользователей ядра. Эти руководства могут представлены в различных форматах, таких как HTML и PDF. Пожалуйста, прочитайте Documentation/admin-guide/README.rst.
-Чтобы собрать документацию, используйте ``make htmldocs`` или ``make pdfdocs``.  Отформатированную документацию также можно прочитать онлайн по адресу:
+Il existe plusieurs guides destinés aux développeurs et aux utilisateurs du noyau. Ces guides peuvent être rendus dans un certain nombre de formats, comme HTML et PDF. Veuillez d'abord lire Documentation/admin-guide/README.rst.
+Pour compiler la documentation, utilisez ``make htmldocs`` ou ``make pdfdocs``.  La documentation formatée peut également être lue en ligne à l'adresse suivante :
 
-https://www.kernel.org/doc/html/latest/.
+https://www.kernel.org/doc/html/latest/
 
-В подкаталоге Documentation/ находятся различные текстовые файлы, некоторые из них используют нотацию разметки Restructured Text.
-Пожалуйста, прочитайте файл Documentation/process/changes.rst, поскольку он содержит требования к сборке и запуску ядра, а также информацию о проблемах, которые могут возникнуть при обновлении ядра."
+Le sous-répertoire Documentation/ contient plusieurs fichiers texte, dont plusieurs utilisent la notation Restructured Text.
+Veuillez lire le fichier Documentation/process/changes.rst, qui contient les conditions requises pour compiler et exécuter le noyau, ainsi que des informations sur les problèmes qui peuvent résulter de la mise à jour de votre noyau."
+
+cpp-wiki
+
+	-fr "Le C++ (ˈsiː plʌs plʌs, prononcé 'C plus plus' et parfois abrégé en CPP) est un langage de programmation général de haut niveau créé par l'informaticien danois Bjarne Stroustrup. Publié pour la première fois en 1985 en tant qu'extension du langage de programmation C, il s'est considérablement développé au fil du temps. Depuis 1997, le C++ possède des caractéristiques orientées objet, génériques et fonctionnelles, ainsi que des fonctions de manipulation de la mémoire de bas niveau. Il est presque toujours implémenté en tant que langage compilé, et de nombreux fournisseurs proposent des compilateurs C++, notamment la Free Software Foundation, LLVM, Microsoft, Intel, Embarcadero, Oracle et IBM[14].
+Le C++ a été conçu pour la programmation de systèmes, les logiciels embarqués à ressources limitées et les grands systèmes, avec pour points forts la performance, l'efficacité et la souplesse d'utilisation[15]. Le C++ s'est également révélé utile dans de nombreux autres contextes, ses points forts étant l'infrastructure logicielle et les applications à ressources limitées[15], y compris les applications de bureau, les jeux vidéo, les serveurs (par exemple, le commerce électronique, la recherche sur le web ou les bases de données) et les applications à performances critiques (par exemple, les commutateurs téléphoniques ou les sondes spatiales[16])[17].
+Le C++ est normalisé par l'Organisation internationale de normalisation (ISO), la dernière version de la norme ayant été ratifiée et publiée par l'ISO en décembre 2020 sous le nom d'ISO/IEC 14882:2020 (officieusement connu sous le nom de C++20)[17]. Le langage de programmation C++ a été initialement normalisé en 1998 sous le nom d'ISO/IEC 14882:1998, qui a ensuite été modifié par le C++03,"
+
+	-en "C++ (ˈsiː plʌs plʌs, pronounced 'C plus plus' and sometimes abbreviated as CPP) is a high-level, general-purpose programming language created by Danish computer scientist Bjarne Stroustrup. First released in 1985 as an extension of the C programming language, it has since expanded significantly over time; as of 1997, C++ has object-oriented, generic, and functional features, in addition to facilities for low-level memory manipulation. It is almost always implemented as a compiled language, and many vendors provide C++ compilers, including the Free Software Foundation, LLVM, Microsoft, Intel, Embarcadero, Oracle, and IBM.[14]
+C++ was designed with systems programming and embedded, resource-constrained software and large systems in mind, with performance, efficiency, and flexibility of use as its design highlights.[15] C++ has also been found useful in many other contexts, with key strengths being software infrastructure and resource-constrained applications,[15] including desktop applications, video games, servers (e.g., e-commerce, web search, or databases), and performance-critical applications (e.g., telephone switches or space probes).[16]
+C++ is standardized by the International Organization for Standardization (ISO), with the latest standard version ratified and published by ISO in December 2020 as ISO/IEC 14882:2020 (informally known as C++20).[17] The C++ programming language was initially standardized in 1998 as ISO/IEC 14882:1998, which was then amended by the C++03, C++11, C++14, and C++17 standards. The current C++20 standard supersedes these with new features and an enlarged standard library. Before the initial standardization in 1998, C++ was developed by Stroustrup at Bell Labs since 1979 as an extension of the C language; he wanted an efficient and flexible language similar to C that also provided high-level features for program organization.[18] Since 2012, C++ has been on a three-year release schedule[19] with C++23 as the next planned standard.[20]"

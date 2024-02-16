@@ -38,8 +38,14 @@ namespace ie {
 
 template<typename T>
 orl::Option<ie::make_system::BasicTextCopyAction<T>> ieml::Decode<char, ie::make_system::BasicTextCopyAction<T>>::decode(ieml::Node const& node) {
-	auto map{node.get_map_view().except()};
-	return ie::make_system::BasicTextCopyAction<T>{
-		map.get_as<bp::BoxPtr<T>>("clipboard").except().ok_or({}),
-	};
+	const auto& clear_node{node.get_clear()};
+	for(auto& map: clear_node.get_map_view().ok_or_none()) {
+		return ie::make_system::BasicTextCopyAction<T>{
+			map.get_as<bp::BoxPtr<T>>("clipboard").except().ok_or({}),
+		};
+	}
+	if (clear_node.is_null()){
+		return ie::make_system::BasicTextCopyAction<T>{};
+	}
+	return {};
 }

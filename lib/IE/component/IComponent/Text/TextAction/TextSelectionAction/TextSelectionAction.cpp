@@ -61,5 +61,8 @@ namespace ie {
 }
 
 orl::Option<ie::TextSelectionAction::Make> ieml::Decode<char, ie::TextSelectionAction::Make>::decode(ieml::Node const& node) {
-	return ie::TextSelectionAction::Make{};
+	if (node.is_null()){
+		return ie::TextSelectionAction::Make{};
+	}
+	return {};
 }

@@ -3,8 +3,10 @@ namespace ie {
 		namespace make_system {
 			template<typename T>
 			BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(
-				BoxPtr<make_system::BasicKeysInteraction<T> >&& interaction, size_t state
-			) : interaction(std::move(interaction)), state(state) {
+				bp::BoxPtr<make_system::BasicKeysInteraction<T> >&& interaction,
+				size_t state
+			) : interaction(std::move(interaction)),
+				state(state) {
 			}
 			
 			template<typename T>
@@ -19,7 +21,7 @@ namespace ie {
 		}
 		
 		template<typename T>
-		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(BoxPtr<BasicKeysInteraction<T> >&& interaction, size_t state) :
+		BasicHotkeyInteractionHotkey<T>::BasicHotkeyInteractionHotkey(bp::BoxPtr<BasicKeysInteraction<T> >&& interaction, size_t state) :
 			interaction_(std::move(interaction)), state_(state) {
 		}
 		
@@ -31,7 +33,7 @@ namespace ie {
 	
 	namespace make_system {
 		template<typename T>
-		BasicHotkeyInteraction<T>::BasicHotkeyInteraction(std::vector<std::vector<BoxPtr<Hotkey> > >&& hotkeys, size_t state) :
+		BasicHotkeyInteraction<T>::BasicHotkeyInteraction(std::vector<std::vector<Hotkey > > hotkeys, size_t state) :
 			hotkeys(std::move(hotkeys)), state(state) {
 		}
 		
@@ -43,11 +45,7 @@ namespace ie {
 	
 	template<typename T>
 	BasicHotkeyInteraction<T>::BasicHotkeyInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
-		hotkey_states_(map_make(std::move(make.hotkeys), init_info)), now_hotkeys_(nullptr) {
-		if(hotkey_states_.size() <= make.state) {
-			hotkey_states_.resize(make.state, {});
-		}
-		now_hotkeys_ = &hotkey_states_[make.state];
+		hotkey_states_(map_make(std::move(make.hotkeys), init_info)), now_hotkeys_(&hotkey_states_[make.state]) {
 	}
 	
 	template<typename T>
@@ -59,29 +57,29 @@ namespace ie {
 	}
 	
 	template<typename T>
-	std::vector<BoxPtr<typename BasicHotkeyInteraction<T>::Hotkey> > BasicHotkeyInteraction<T>::get_hotkeys(int state) {
+	std::vector<typename BasicHotkeyInteraction<T>::Hotkey> BasicHotkeyInteraction<T>::get_hotkeys(int state) {
 		return hotkey_states_[state];
 	}
 	
 	template<typename T>
-	BoxPtr<typename BasicHotkeyInteraction<T>::Hotkey> BasicHotkeyInteraction<T>::get_hotkey(int state, int i) {
+	typename BasicHotkeyInteraction<T>::Hotkey BasicHotkeyInteraction<T>::get_hotkey(int state, int i) {
 		return hotkey_states_[state][i];
 	}
 	
 	template<typename T>
 	void BasicHotkeyInteraction<T>::start(sf::Vector2i mouse_position) {
 		for(auto& hotkey: *now_hotkeys_) {
-			hotkey->interaction_->start(mouse_position);
+			hotkey.interaction_->start(mouse_position);
 		}
 	}
 	
 	template<typename T>
 	void BasicHotkeyInteraction<T>::update(sf::Vector2i mouse_position) {
 		for(auto& hotkey: *now_hotkeys_) {
-			hotkey->interaction_->update(mouse_position);
-			if(hotkey->interaction_->is_press() && hotkey->state_ != std::numeric_limits<size_t>::max()) {
+			hotkey.interaction_->update(mouse_position);
+			if(hotkey.interaction_->is_press() && hotkey.state_ != std::numeric_limits<size_t>::max()) {
 				finish(mouse_position);
-				now_hotkeys_ = &hotkey_states_[hotkey->state_];
+				now_hotkeys_ = &hotkey_states_[hotkey.state_];
 				start(mouse_position);
 			}
 		}
@@ -90,19 +88,28 @@ namespace ie {
 	template<typename T>
 	void BasicHotkeyInteraction<T>::finish(sf::Vector2i mouse_position) {
 		for(auto& hotkey: *now_hotkeys_) {
-			hotkey->interaction_->finish(mouse_position);
+			hotkey.interaction_->finish(mouse_position);
 		}
 	}
-	
-	/*old_yaml_decode_impl
-	template<typename T>
-	bool Decode<detail::BasicHotkeyInteractionHotkey<T>*>::decode(const YAML::Node& node, detail::BasicHotkeyInteractionHotkey<T>*& hotkey) {
-		hotkey = new detail::BasicHotkeyInteractionHotkey<T>{
-			conv_def(node["interaction"], BoxPtr<BasicKeysInteraction<T> >{}),
-			conv_def(node["state"], std::numeric_limits<size_t>::max())
-		};
-		return true;
-
-	}
-	*/
 }
+
+template<typename T>
+orl::Option<ie::detail::make_system::BasicHotkeyInteractionHotkey<T> >
+ieml::Decode<char, ie::detail::make_system::BasicHotkeyInteractionHotkey<T> >::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::detail::make_system::BasicHotkeyInteractionHotkey<T>{
+		map.at("interaction").except().as<bp::BoxPtr<ie::make_system::BasicKeysInteraction<T> > >().except(),
+		map.get_as<size_t>("state").except().ok_or(std::numeric_limits<size_t>::max())
+	};
+}
+
+template<typename T>
+orl::Option<ie::make_system::BasicHotkeyInteraction<T> >
+ieml::Decode<char, ie::make_system::BasicHotkeyInteraction<T> >::decode(ieml::Node const& node) {
+	auto map{node.get_map_view().except()};
+	return ie::make_system::BasicHotkeyInteraction<T>{
+		map.at("hotkeys").except().as<std::vector<std::vector<ie::detail::make_system::BasicHotkeyInteractionHotkey<T> > > >().except(),
+		map.get_as<size_t>("state").except().ok_or(0)
+	};
+}
+
