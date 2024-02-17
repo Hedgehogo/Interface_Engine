@@ -68,12 +68,12 @@ namespace ie {
 	}
 	
 	template<typename T_>
-	T_ SRanged<T_>::get_upper_bound() {
+	T_ SRanged<T_>::get_upper_bound() const {
 		return upper_bound_;
 	}
 	
 	template<typename T_>
-	T_ SRanged<T_>::get_lower_bound() {
+	T_ SRanged<T_>::get_lower_bound() const {
 		return lower_bound_;
 	}
 	

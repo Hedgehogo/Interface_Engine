@@ -67,9 +67,9 @@ namespace ie {
 		
 		SRanged(T_ data);
 		
-		T_ get_upper_bound() override;
+		T_ get_upper_bound() const override;
 		
-		T_ get_lower_bound() override;
+		T_ get_lower_bound() const override;
 		
 		void set_upper_bound(T_ upper_bound) override;
 		

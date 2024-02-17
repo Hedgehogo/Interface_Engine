@@ -32,6 +32,7 @@ namespace ie {
 		add_type_make<KeyAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
 		
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
+			add_type_with_make<SRanged<T>, SLerp<T> >("Lerp");
 			add_type_with_make<SRanged<T>, SRFloor<T> >("RFloor");
 			add_type_with_make<SRanged<T>, SRCeil<T> >("RCeil");
 			add_type_with_make<SRanged<T>, SRRound<T> >("RRound");
