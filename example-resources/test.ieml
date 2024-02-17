@@ -24,7 +24,8 @@ object: = BoxConstBorder:
 				algorithm: > base
 			text-interaction: = TextHotkeyI:
 				hotkeys:
-					- - interaction: = TextKeysI:
+					-
+						- interaction: = TextKeysI:
 								action: = TextSelectionA: null
 								keys: [mouse-left]
 						- interaction: = TextKeysI:

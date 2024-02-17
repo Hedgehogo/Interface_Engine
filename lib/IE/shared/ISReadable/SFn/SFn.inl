@@ -35,6 +35,13 @@ namespace ie {
 		}, args_)};
 		this->set(value);
 	}
+	
+	namespace detail {
+		template<typename Value_, typename... SArgs_, typename Return_, typename... Args_, Return_ (* Fn_)(Args_...)>
+		Return_ ToSFn<Value_(SArgs_...), Fn_>::fn(SArgs_& ... args) {
+			return Fn_(args.get()...);
+		}
+	}
 }
 
 template<typename Value_, typename Return_, typename... Args_, Return_ (* Fn_)(Args_...)>

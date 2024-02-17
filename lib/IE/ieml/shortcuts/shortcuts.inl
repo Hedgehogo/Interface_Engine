@@ -107,6 +107,13 @@ namespace ie {
 		add_type_make<Base, Derived, Names...>(std::forward<Names>(names)...);
 	}
 	
+	template<typename Base, typename Derived, typename... Names>
+	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && std::is_base_of_v<Base, Derived> && meta::is_names<Names...> >
+	add_type_with_make(Names... names) {
+		add_type<Base, Derived>();
+		add_type_make<Base, Derived>(std::forward<Names>(names)...);
+	}
+	
 	template<typename Type, typename FirstName, typename... Names>
 	std::enable_if_t<meta::is_names<FirstName, Names...> >
 	add_fn_make(
