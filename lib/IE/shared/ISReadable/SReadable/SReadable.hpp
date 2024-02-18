@@ -2,6 +2,7 @@
 
 #include "IE/ieml/shortcuts/shortcuts.hpp"
 #include "../ISReadable.hpp"
+#include "../../SInitInfo/SInitInfo.hpp"
 
 namespace ie {
 	namespace make_system {
@@ -15,7 +16,7 @@ namespace ie {
 			
 			SReadable(T_ data = {});
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		template<typename T_>
@@ -25,7 +26,7 @@ namespace ie {
 			
 			SReadable(T_ data);
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		template<typename T_>
@@ -33,7 +34,7 @@ namespace ie {
 		public:
 			ToMutable(T_ data = {});
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		template<typename T_>
@@ -41,7 +42,7 @@ namespace ie {
 		public:
 			ToMutable(T_ data);
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		template<typename T_, bool Default_ = std::is_default_constructible_v<T_> >
@@ -67,7 +68,7 @@ namespace ie {
 		using ReadFn = typename SReadable<T_>::ReadFn;
 		using Make = make_system::SReadable<T_>;
 		
-		SReadable(Make&& make, DynBuffer&);
+		SReadable(Make&& make, SInitInfo init_info);
 		
 		SReadable(T_ data);
 		
@@ -94,7 +95,7 @@ namespace ie {
 		using ReadFn = typename ISMutable<T_>::ReadFn;
 		using Make = make_system::SMutable<T_>;
 		
-		ToMutable(Make&& make, DynBuffer&);
+		ToMutable(Make&& make, SInitInfo);
 		
 		ToMutable(T_ data);
 		

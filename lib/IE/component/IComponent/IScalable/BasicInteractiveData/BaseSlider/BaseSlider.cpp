@@ -13,7 +13,7 @@ namespace ie {
 		background_(background->make(init_info)),
 		slider_(slider->make(init_info)),
 		value_(
-			init_info.dyn_buffer.get(std::move(value)),
+			DynBuffer::get(std::move(value), SInitInfo{init_info}),
 			[this](sf::Vector2f new_value) {
 				this->resize_slider(new_value);
 			}

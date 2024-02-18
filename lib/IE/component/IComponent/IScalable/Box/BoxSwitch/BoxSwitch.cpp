@@ -18,7 +18,7 @@ namespace ie {
 		Box(make.min_size),
 		inactive_object_(make.inactive_object->make(init_info.copy(inactive_draw_manager_))),
 		active_object_(make.active_object->make(init_info.copy(active_draw_manager_))),
-		value_(make.value.make(init_info.dyn_buffer)) {
+		value_(make.value.make(SInitInfo{init_info})) {
 		init_info.draw_manager.add(*this);
 	}
 	

@@ -8,18 +8,18 @@ namespace ie {
 		}
 		
 		template<typename Value_, typename Return_, typename... Args_, Return_(* Fn_)(Args_...)>
-		rttb::Dyn SFn<Value_, Fn_>::make(DynBuffer& dyn_buffer) {
-			return rttb::Dyn{ie::SFn<Value_, Fn_>{std::move(*this), dyn_buffer}};
+		rttb::Dyn SFn<Value_, Fn_>::make(SInitInfo init_info) {
+			return rttb::Dyn{ie::SFn<Value_, Fn_>{std::move(*this), SInitInfo{init_info}}};
 		}
 	}
 	
 	template<typename Value_, typename Return_, typename... Args_, Return_(* Fn_)(Args_...)>
-	SFn<Value_, Fn_>::SFn(Make&& make, DynBuffer& dyn_buffer) :
-		ToMutable<Value_>(static_cast<typename ToMutable<Value_>::Make&&>(make), dyn_buffer),
-		args_(std::apply([&dyn_buffer, this](detail::SFnMakeWrap<Args_>&&... args) {
+	SFn<Value_, Fn_>::SFn(Make&& make, SInitInfo init_info) :
+		ToMutable<Value_>(static_cast<typename ToMutable<Value_>::Make&&>(make), SInitInfo{init_info}),
+		args_(std::apply([init_info, this](detail::SFnMakeWrap<Args_>&&... args) {
 			return std::make_tuple(
 				detail::SFnWrap<Args_>{
-					dyn_buffer.get(std::move(args)),
+					DynBuffer::get(std::move(args), SInitInfo{init_info}),
 					[this](Return_ const&) {
 						this->reset();
 					}

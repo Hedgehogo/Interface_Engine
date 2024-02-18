@@ -17,7 +17,7 @@ namespace ie {
 		
 		template<typename T_>
 		struct ISReadable {
-			virtual rttb::Dyn make(DynBuffer& dyn_buffer) = 0;
+			virtual rttb::Dyn make(SInitInfo init_info) = 0;
 			
 			virtual ~ISReadable() = default;
 		};

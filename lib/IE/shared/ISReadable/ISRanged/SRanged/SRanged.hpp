@@ -13,7 +13,7 @@ namespace ie {
 		public:
 			SRanged(T_ data = {});
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		template<typename T_>
@@ -21,7 +21,7 @@ namespace ie {
 		public:
 			SRanged(T_ data);
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		template<typename T_>
@@ -29,7 +29,7 @@ namespace ie {
 		public:
 			ToMutable(T_ data = {});
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		template<typename T_>
@@ -37,7 +37,7 @@ namespace ie {
 		public:
 			ToMutable(T_ data);
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		template<typename T_, bool Default_ = std::is_default_constructible_v<T_> >
@@ -63,7 +63,7 @@ namespace ie {
 		using ReadFn = typename SReadable<T_>::ReadFn;
 		using Make = make_system::SRanged<T_>;
 		
-		SRanged(Make&& make, DynBuffer& dyn_buffer);
+		SRanged(Make&& make, SInitInfo init_info);
 		
 		SRanged(T_ data);
 		
@@ -97,7 +97,7 @@ namespace ie {
 		using ReadFn = typename SRanged<T_>::ReadFn;
 		using Make = make_system::SMRanged<T_>;
 		
-		ToMutable(Make&& make, DynBuffer& dyn_buffer);
+		ToMutable(Make&& make, SInitInfo init_info);
 		
 		ToMutable(T_ data);
 		

@@ -6,8 +6,8 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SRanged<T_, true>::make(DynBuffer& dyn_buffer) {
-		return rttb::Dyn{ie::SRanged<T_>{std::move(*this), dyn_buffer}};
+	rttb::Dyn SRanged<T_, true>::make(SInitInfo init_info) {
+		return rttb::Dyn{ie::SRanged<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 	
 	template<typename T_>
@@ -15,8 +15,8 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SRanged<T_, false>::make(DynBuffer& dyn_buffer) {
-		return rttb::Dyn{ie::SRanged<T_>{std::move(*this), dyn_buffer}};
+	rttb::Dyn SRanged<T_, false>::make(SInitInfo init_info) {
+		return rttb::Dyn{ie::SRanged<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 	
 	template<typename T_>
@@ -24,8 +24,8 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SMRanged<T_, true>::make(DynBuffer& dyn_buffer) {
-		return rttb::Dyn{ie::SMRanged<T_>{std::move(*this), dyn_buffer}};
+	rttb::Dyn SMRanged<T_, true>::make(SInitInfo init_info) {
+		return rttb::Dyn{ie::SMRanged<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 	
 	template<typename T_>
@@ -33,8 +33,8 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SMRanged<T_, false>::make(DynBuffer& dyn_buffer) {
-		return rttb::Dyn{ie::SMRanged<T_>{std::move(*this), dyn_buffer}};
+	rttb::Dyn SMRanged<T_, false>::make(SInitInfo init_info) {
+		return rttb::Dyn{ie::SMRanged<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 }
 
@@ -56,7 +56,7 @@ ieml::Decode<char, ie::make_system::SMRanged<T_> >::decode(const ieml::Node& nod
 
 namespace ie {
 	template<typename T_>
-	SRanged<T_>::SRanged(Make&& make, DynBuffer& dyn_buffer) :
+	SRanged<T_>::SRanged(Make&& make, SInitInfo init_info) :
 		SRanged(std::forward<T_>(make.data)) {
 	}
 	
@@ -134,7 +134,7 @@ namespace ie {
 	}
 	
 	template<typename T_>
-	SMRanged<T_>::ToMutable(Make&& make, DynBuffer& dyn_buffer) :
+	SMRanged<T_>::ToMutable(Make&& make, SInitInfo init_info) :
 		SRanged<T_>(std::forward<T_>(make.data)) {
 	}
 	

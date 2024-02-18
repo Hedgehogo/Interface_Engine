@@ -28,13 +28,13 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BoxShader::SReaderVec<T> make_reader_map(BoxShader::SMakeMap<T>&& map, DynBuffer& dyn_buffer, BoxShader& box_shader) {
+	BoxShader::SReaderVec<T> make_reader_map(BoxShader::SMakeMap<T>&& map, SInitInfo init_info, BoxShader& box_shader) {
 		BoxShader::SReaderVec<T> reader_map{};
 		reader_map.reserve(map.size());
 		for(auto& [key, make]: map) {
 			reader_map.emplace_back(
 				SReader<T>{
-					make.make(dyn_buffer),
+					make.make(init_info),
 					[key = std::move(key), &box_shader](auto const& value) {
 						box_shader.set_uniform(key, value);
 					}
@@ -48,11 +48,11 @@ namespace ie {
 		BoxRenderTexture(std::move(make.object), make.optimize, make.min_size, init_info),
 		shader_(make.shader),
 		transmission_(make.transmission),
-		values_f_(make_reader_map(std::move(make.values_f), init_info.dyn_buffer, *this)),
-		values_i_(make_reader_map(std::move(make.values_i), init_info.dyn_buffer, *this)),
-		values_b_(make_reader_map(std::move(make.values_b), init_info.dyn_buffer, *this)),
-		values_c_(make_reader_map(std::move(make.values_c), init_info.dyn_buffer, *this)),
-		values_v_(make_reader_map(std::move(make.values_v), init_info.dyn_buffer, *this)) {
+		values_f_(make_reader_map(std::move(make.values_f), SInitInfo{init_info}, *this)),
+		values_i_(make_reader_map(std::move(make.values_i), SInitInfo{init_info}, *this)),
+		values_b_(make_reader_map(std::move(make.values_b), SInitInfo{init_info}, *this)),
+		values_c_(make_reader_map(std::move(make.values_c), SInitInfo{init_info}, *this)),
+		values_v_(make_reader_map(std::move(make.values_v), SInitInfo{init_info}, *this)) {
 	}
 	
 	BoxShader::~BoxShader() {

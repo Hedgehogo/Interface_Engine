@@ -37,7 +37,7 @@ namespace ie {
 		first_object_(make.first_object->make(init_info)),
 		second_object_(make.second_object->make(init_info)),
 		border_value_(
-			init_info.dyn_buffer.get(std::move(make.border_value)),
+			DynBuffer::get(std::move(make.border_value), SInitInfo{init_info}),
 			[this](const float&) {
 				this->resize(layout_.size, layout_.position);
 			}

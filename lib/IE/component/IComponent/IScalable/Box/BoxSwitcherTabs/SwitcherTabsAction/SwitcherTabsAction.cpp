@@ -10,7 +10,7 @@ namespace ie {
 	}
 	
 	SwitcherTabsAction::SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> init_info) :
-		value_(make.value.make(init_info.dyn_buffer)), switcher_tabs_(&init_info.additional) {
+		value_(make.value.make(SInitInfo{init_info})), switcher_tabs_(&init_info.additional) {
 	}
 	
 	void SwitcherTabsAction::start_pressed() {

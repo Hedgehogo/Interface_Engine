@@ -2,6 +2,7 @@
 
 #include <IE/ieml/ieml-rttb/ieml-rttb.hpp>
 #include <box-ptr/BoxPtr.hpp>
+#include "../SInitInfo/SInitInfo.hpp"
 
 namespace ie {
 	namespace fs = std::filesystem;
@@ -16,10 +17,10 @@ namespace ie {
 		DynBuffer(DynBuffer&& other) = default;
 		
 		template<typename T>
-		bool add(MakeDyn<T> make_dyn);
+		static bool add(MakeDyn<T> make_dyn, SInitInfo init_info);
 		
 		template<typename T>
-		T& get(MakeDyn<T> make_dyn);
+		static T& get(MakeDyn<T> make_dyn, SInitInfo init_info);
 	
 	private:
 		absl::flat_hash_map<size_t, rttb::Dyn> indexed_;
@@ -35,7 +36,7 @@ namespace ie {
 		
 		MakeDyn(Type_& ref);
 		
-		Type_& make(DynBuffer& dyn_buffer);
+		Type_& make(SInitInfo init_info);
 		
 		static orl::Option<MakeDyn<Type_> > decode(ieml::Node const& node);
 		

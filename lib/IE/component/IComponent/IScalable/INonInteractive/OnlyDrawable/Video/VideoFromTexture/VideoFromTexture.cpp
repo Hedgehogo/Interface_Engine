@@ -32,7 +32,7 @@ namespace ie {
 		rect_(make.rect),
 		offset_(make.offset),
 		viewing_progress_(
-			make.viewing_progress.make(init_info.dyn_buffer),
+			make.viewing_progress.make(SInitInfo{init_info}),
 			[this](float value) {
 				set_current_frame(value);
 			}

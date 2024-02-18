@@ -6,8 +6,8 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SReadable<T_, true>::make(DynBuffer& dyn_buffer) {
-		return rttb::Dyn{ie::SReadable<T_>{std::move(*this), dyn_buffer}};
+	rttb::Dyn SReadable<T_, true>::make(SInitInfo init_info) {
+		return rttb::Dyn{ie::SReadable<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 	
 	template<typename T_>
@@ -15,8 +15,8 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SReadable<T_, false>::make(DynBuffer& dyn_buffer) {
-		return rttb::Dyn{ie::SReadable<T_>{std::move(*this), dyn_buffer}};
+	rttb::Dyn SReadable<T_, false>::make(SInitInfo init_info) {
+		return rttb::Dyn{ie::SReadable<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 	
 	template<typename T_>
@@ -24,8 +24,8 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SMutable<T_, true>::make(DynBuffer& dyn_buffer) {
-		return rttb::Dyn{ie::SMutable<T_>{std::move(*this), dyn_buffer}};
+	rttb::Dyn SMutable<T_, true>::make(SInitInfo init_info) {
+		return rttb::Dyn{ie::SMutable<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 	
 	template<typename T_>
@@ -33,8 +33,8 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SMutable<T_, false>::make(DynBuffer& dyn_buffer) {
-		return rttb::Dyn{ie::SMutable<T_>{std::move(*this), dyn_buffer}};
+	rttb::Dyn SMutable<T_, false>::make(SInitInfo init_info) {
+		return rttb::Dyn{ie::SMutable<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 }
 
@@ -62,7 +62,7 @@ ieml::Decode<char, ie::make_system::SMutable<T_> >::decode(const ieml::Node& nod
 
 namespace ie {
 	template<typename T_>
-	SReadable<T_>::SReadable(Make&& make, DynBuffer&) : data_(std::forward<T_>(make.data)) {
+	SReadable<T_>::SReadable(Make&& make, SInitInfo init_info) : data_(std::forward<T_>(make.data)) {
 	}
 	
 	template<typename T_>
@@ -92,7 +92,7 @@ namespace ie {
 	}
 	
 	template<typename T_>
-	SMutable<T_>::ToMutable(Make&& make, DynBuffer&) : SReadable<T_>(std::forward<T_>(make.data)) {
+	SMutable<T_>::ToMutable(Make&& make, SInitInfo) : SReadable<T_>(std::forward<T_>(make.data)) {
 	}
 	
 	template<typename T_>

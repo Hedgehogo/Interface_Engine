@@ -23,7 +23,7 @@ namespace ie {
 		Switcher(
 			std::move(make.inactive_background),
 			std::move(make.active_background),
-			make.value.make(init_info.dyn_buffer),
+			make.value.make({init_info.dyn_buffer, init_info.update_manager}),
 			make.key,
 			init_info
 		) {

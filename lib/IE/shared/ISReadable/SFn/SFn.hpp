@@ -22,7 +22,7 @@ namespace ie {
 			
 			SFn(typename ie::ToMutable<Value_>::Make make, detail::SFnMakeWrap<Args_>... args);
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 	}
 	
@@ -36,7 +36,7 @@ namespace ie {
 		using ReadFn = typename ToMutable<Value_>::ReadFn;
 		using Make = make_system::SFn<Value_, Fn_>;
 		
-		SFn(Make&& make, DynBuffer& dyn_buffer);
+		SFn(Make&& make, SInitInfo init_info);
 		
 	private:
 		void reset();

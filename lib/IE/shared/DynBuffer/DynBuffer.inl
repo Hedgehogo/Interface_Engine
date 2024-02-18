@@ -2,23 +2,23 @@
 
 namespace ie {
 	template<typename T>
-	bool DynBuffer::add(MakeDyn<T> make_dyn) {
+	bool DynBuffer::add(MakeDyn<T> make_dyn, SInitInfo init_info) {
 		if(auto pair{std::get_if<0>(&make_dyn.data_)}) {
-			return indexed_.emplace(pair->id_, pair->make_.make(*this)).second;
+			return init_info.dyn_buffer.indexed_.emplace(pair->id_, pair->make_.make(init_info)).second;
 		}
 	}
 	
 	template<typename T>
-	T& DynBuffer::get(MakeDyn<T> make_dyn) {
+	T& DynBuffer::get(MakeDyn<T> make_dyn, SInitInfo init_info) {
 		if(auto pair{std::get_if<0>(&make_dyn.data_)}) {
 			auto& builder{rttb::Builder<ieml::Node const&, T>::builder()};
 			if(pair->id_ != 0) {
-				if(auto add_result{indexed_.emplace(pair->id_, pair->make_->make(*this))}; add_result.second) {
+				if(auto add_result{init_info.dyn_buffer.indexed_.emplace(pair->id_, pair->make_->make(init_info))}; add_result.second) {
 					return *builder.cast(add_result.first->second).except();
 				}
-				return *builder.cast(indexed_.at(pair->id_)).except();
+				return *builder.cast(init_info.dyn_buffer.indexed_.at(pair->id_)).except();
 			}
-			return *builder.cast(non_indexed_.emplace_back(pair->make_->make(*this))).except();
+			return *builder.cast(init_info.dyn_buffer.non_indexed_.emplace_back(pair->make_->make(init_info))).except();
 		}
 		return *std::get_if<1>(&make_dyn.data_);
 	}
@@ -36,8 +36,8 @@ namespace ie {
 	}
 	
 	template<typename Type_>
-	Type_& MakeDyn<Type_>::make(DynBuffer& dyn_buffer) {
-		return dyn_buffer.get(std::move(*this));
+	Type_& MakeDyn<Type_>::make(SInitInfo init_info) {
+		return init_info.dyn_buffer.get(std::move(*this), init_info);
 	}
 	
 	template<typename Type_>

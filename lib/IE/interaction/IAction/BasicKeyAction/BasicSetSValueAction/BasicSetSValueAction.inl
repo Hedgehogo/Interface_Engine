@@ -27,7 +27,7 @@ ieml::Decode<char, ie::make_system::BasicSetSValueAction<T_, Value_> >::decode(i
 namespace ie {
 	template<typename T_, typename Value_, typename _>
 	BasicSetSValueAction<T_, Value_, _>::BasicSetSValueAction(Make&& make, BasicActionInitInfo<T_> init_info) :
-		value(make.value.make(init_info.dyn_buffer)), constant(std::forward<typename Value_::T>(make.constant)) {
+		value(make.value.make(SInitInfo{init_info})), constant(std::forward<typename Value_::T>(make.constant)) {
 	}
 	
 	template<typename T_, typename Value_, typename _>

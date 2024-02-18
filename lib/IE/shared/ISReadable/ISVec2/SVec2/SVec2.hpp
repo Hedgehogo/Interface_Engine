@@ -14,14 +14,14 @@ namespace ie {
 			
 			BasicSVec2(MakeDyn<Value_> x, MakeDyn<Value_> y);
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		template<typename Value_>
 		struct ToMutable<BasicSVec2<Value_> > : public BasicSVec2<ie::ToMutable<Value_> >, public virtual IBasicSMVec2<Value_> {
 			ToMutable(MakeDyn<ie::ToMutable<Value_> > x, MakeDyn<ie::ToMutable<Value_> > y);
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		template<typename Value_>
@@ -47,7 +47,7 @@ namespace ie {
 		using ReadFn = typename IBasicSVec2<Value_>::ReadFn;
 		using Make = make_system::BasicSVec2<Value_>;
 		
-		BasicSVec2(Make&& make, DynBuffer& dyn_buffer);
+		BasicSVec2(Make&& make, SInitInfo init_info);
 		
 		BasicSVec2(Value_& x, Value_& y);
 		
@@ -92,7 +92,7 @@ namespace ie {
 		using ReadFn = typename IBasicSMVec2<Value_>::ReadFn;
 		using Make = make_system::BasicSMVec2<Value_>;
 		
-		ToMutable(Make&& make, DynBuffer& dyn_buffer);
+		ToMutable(Make&& make, SInitInfo init_info);
 		
 		ToMutable(ToMutable<Value_>& x, ToMutable<Value_>& y);
 		

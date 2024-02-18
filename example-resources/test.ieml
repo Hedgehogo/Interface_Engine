@@ -24,13 +24,13 @@ object: = BoxConstBorder:
 				algorithm: > base
 			text-interaction: = TextHotkeyI:
 				hotkeys:
-					- - interaction: = TextKeysI:
+					-
+						- interaction: = TextKeysI:
 								action: = TextSelectionA: null
 								keys: [mouse-left]
 						- interaction: = TextKeysI:
 								action: = TextCopyA: null
 								keys: [l-control, c]
-
 		normal-object-position: &a [0, 0]
 	const-object: = Slider:
 		slider-scale: [1, 0.1]

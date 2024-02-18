@@ -2,6 +2,7 @@
 
 #include "IE/interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
 #include "IE/interaction/IAction/WheelAction/BaseWheelAction/BaseWheelAction.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class BaseSlider;

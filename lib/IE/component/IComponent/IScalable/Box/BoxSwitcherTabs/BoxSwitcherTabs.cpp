@@ -23,11 +23,11 @@ namespace ie {
 	BoxSwitcherTabs::BoxSwitcherTabs(Make&& make, InitInfo init_info) :
 		Box(make.min_size),
 		interactive_(make_box_ptr<BasicOneKeyInteraction<BoxSwitcherTabs&>::Make>(
-			make_box_ptr<SwitcherTabsAction::Make>(make.value.make(init_info.dyn_buffer)), make.key
+			make_box_ptr<SwitcherTabsAction::Make>(make.value.make(SInitInfo{init_info})), make.key
 		), init_info, *this),
 		objects_(map_make(std::move(make.objects), init_info)),
 		is_horizontal_(make.is_horizontal),
-		value_(make.value.make(init_info.dyn_buffer)) {
+		value_(make.value.make(SInitInfo{init_info})) {
 		init_info.update_manager.add(*this);
 	}
 	

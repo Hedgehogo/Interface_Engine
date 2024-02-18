@@ -13,7 +13,7 @@ namespace ie {
 		BoxView(make.min_size, init_info),
 		object_(make.object->make(init_info.copy(this->draw_manager_))),
 		normal_object_position_(
-			make.normal_object_position.make(init_info.dyn_buffer),
+			make.normal_object_position.make(SInitInfo{init_info}),
 			[&](sf::Vector2f value) {
 				this->object_->set_position(get_new_object_position(value));
 			}

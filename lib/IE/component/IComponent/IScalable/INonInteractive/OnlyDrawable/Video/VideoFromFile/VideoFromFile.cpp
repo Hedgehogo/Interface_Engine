@@ -14,7 +14,7 @@ namespace ie {
 		size_video_(make.video[0].getSize()),
 		buffer_texture_(make.video),
 		viewing_progress_(
-			make.viewing_progress.make(init_info.dyn_buffer),
+			make.viewing_progress.make(SInitInfo{init_info}),
 			[this](const float& value) {
 				set_current_frame(value);
 			}

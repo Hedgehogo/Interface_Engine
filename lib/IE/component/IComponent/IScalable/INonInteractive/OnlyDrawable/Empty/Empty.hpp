@@ -2,6 +2,7 @@
 
 #include "../OnlyDrawable.hpp"
 #include "../../INonInteractiveLayout/INonInteractiveLayout.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class Empty : public OnlyDrawable, public virtual INonInteractiveLayout {

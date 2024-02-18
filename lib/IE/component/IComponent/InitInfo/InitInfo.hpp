@@ -1,10 +1,11 @@
 #pragma once
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "IE/shared/DynBuffer/DynBuffer.hpp"
 
 namespace ie {
 	class Window;
+	
+	class DynBuffer;
 	
 	class DrawManager;
 	

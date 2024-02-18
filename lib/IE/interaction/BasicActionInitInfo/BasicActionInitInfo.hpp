@@ -1,10 +1,11 @@
 #pragma once
 
 #include <variant>
-#include <SFML/Graphics/RenderTarget.hpp>
 #include "IE/component/IComponent/InitInfo/InitInfo.hpp"
 
 namespace ie {
+	class UpdateManager;
+	
 	template<typename T = std::monostate>
 	struct BasicActionInitInfo {
 		using AdditionalType = T;
@@ -12,6 +13,7 @@ namespace ie {
 		sf::RenderWindow& window;
 		sf::RenderTarget& render_target;
 		DynBuffer& dyn_buffer;
+		UpdateManager& update_manager;
 		InteractionManager& interaction_manager;
 		IPanelManager& panel_manager;
 		T additional;
@@ -19,7 +21,8 @@ namespace ie {
 		BasicActionInitInfo(
 			sf::RenderWindow& window_,
 			sf::RenderTarget& render_target_,
-			DynBuffer& dyn_buffer,
+			DynBuffer& dyn_buffer_,
+			UpdateManager& update_manager_,
 			InteractionManager& interaction_manager_,
 			IPanelManager& panel_manager_,
 			T additional_

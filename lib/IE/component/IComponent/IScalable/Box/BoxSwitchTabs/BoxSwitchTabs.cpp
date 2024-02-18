@@ -14,7 +14,7 @@ namespace ie {
 		Box(make.min_size), draw_managers_(make.objects.size()),
 		objects_(map_make(std::move(make.objects), [&](size_t i) {
 			return init_info.copy(draw_managers_[i]);
-		})), value_(make.value.make(init_info.dyn_buffer)) {
+		})), value_(make.value.make(SInitInfo{init_info})) {
 		value_.set_bounds(0, objects_.size() - 1);
 		init_info.draw_manager.add(*this);
 	}

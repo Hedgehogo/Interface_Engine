@@ -2,6 +2,7 @@
 
 #include "../BaseCharacter/BaseCharacter.hpp"
 #include "IE/component/IComponent/Text/BaseTextResizer/TextResizerInitInfo/TextResizerInitInfo.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class BaseTextResizer {
