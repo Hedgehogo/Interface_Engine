@@ -66,6 +66,10 @@ namespace ie {
 	add_type_make(Names... names);
 	
 	template<typename Base, typename Derived, typename... Names>
+	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && std::is_base_of_v<Base, Derived> && meta::is_names<Names...> >
+	add_type_with_make(Names... names);
+	
+	template<typename Base, typename Derived, typename... Names>
 	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && meta::is_names<Names...> >
 	add_type_make_named(Names... names);
 	
