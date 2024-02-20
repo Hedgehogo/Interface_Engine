@@ -32,6 +32,14 @@ namespace ie {
 		add_type_make<KeyAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
 		
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
+			add_type_with_make<SReadable<bool>, SEqual<sf::Vector2<T> > >(std::string("(=)Vec2") + std::string(1, first));
+			add_type_with_make<SReadable<bool>, SNotEqual<sf::Vector2<T> > >(std::string("(!=)Vec2") + std::string(1, first));
+			add_type_with_make<SReadable<bool>, SEqual<T> >(std::string("(=)") + name);
+			add_type_with_make<SReadable<bool>, SNotEqual<T> >(std::string("(!=)") + name);
+			add_type_with_make<SReadable<bool>, SLess<T> >(std::string("(<)") + name);
+			add_type_with_make<SReadable<bool>, SGreater<T> >(std::string("(>)") + name);
+			add_type_with_make<SReadable<bool>, SLessOrEqual<T> >(std::string("(<=)") + name);
+			add_type_with_make<SReadable<bool>, SGreaterOrEqual<T> >(std::string("(>=)") + name);
 			add_type_with_make<SRanged<T>, SLerp<T> >("Lerp");
 			add_type_with_make<SRanged<T>, SRFloor<T> >("RFloor");
 			add_type_with_make<SRanged<T>, SRCeil<T> >("RCeil");
@@ -54,6 +62,7 @@ namespace ie {
 			add_type_with_make<ISRanged<T>, SRanged<T> >();
 			add_type_with_make<ISRanged<T>, ISMRanged<T> >();
 			add_type_with_make<ISReadable<T>, ISRanged<T> >();
+			
 			add_bool_determine_make<SMRVec2<T> >();
 			add_bool_determine_make<SMRanged<T> >();
 		}
