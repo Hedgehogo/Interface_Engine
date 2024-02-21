@@ -86,6 +86,9 @@ namespace ie {
 			add_type_with_make<ISRSize, SRCastF2S>("RCastI");
 			add_type_with_make<ISRFloat , SRCastS2F>("RCastS");
 			add_type_with_make<ISRInt, SRCastS2I>("RCastS");
+			add_type_with_make<ISMString, SMString>("MString");
+			add_type_with_make<ISString, SString>("String");
+			add_type_with_make<ISString, ISMString>();
 			
 			//add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
 			//add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
@@ -209,6 +212,7 @@ namespace ie {
 			add_type_make_named<BasePanel, ConstPanel>();
 			add_type_make_named<BasePanel, Panel>();
 			
+			add_bool_determine_make<SMString>();
 			add_bool_determine_make<TextBlock>();
 			add_bool_determine_make<SMBool>();
 			add_bool_determine_make<FullColor>();

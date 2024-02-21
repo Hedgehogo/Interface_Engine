@@ -3,11 +3,7 @@
 
 namespace ieml {
 	orl::Option<sf::String> Decode<char, sf::String>::decode(ieml::Node const& node) {
-		auto& clear_node{node.get_clear()};
-		for(auto& str: clear_node.get_string().ok_or_none()) {
-			return ie::to_utf32(ie::to_utf32(str));
-		}
-		auto str{clear_node.as<ie::LoadString>().except().str};
+		auto str{node.as<ie::LoadString>().except().str};
 		return ie::to_utf32(ie::to_utf32(str));
 	}
 	
