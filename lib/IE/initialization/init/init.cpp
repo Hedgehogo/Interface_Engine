@@ -32,6 +32,7 @@ namespace ie {
 		add_type_make<KeyAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
 		
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
+			add_type_with_make<SString, SToString<T> >(std::string("ToString") + std::string(1, first));
 			add_type_with_make<SReadable<bool>, SEqual<sf::Vector2<T> > >(std::string("(=)Vec2") + std::string(1, first));
 			add_type_with_make<SReadable<bool>, SNotEqual<sf::Vector2<T> > >(std::string("(!=)Vec2") + std::string(1, first));
 			add_type_with_make<SReadable<bool>, SEqual<T> >(std::string("(=)") + name);

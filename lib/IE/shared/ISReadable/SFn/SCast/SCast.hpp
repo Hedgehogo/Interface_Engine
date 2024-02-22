@@ -18,6 +18,11 @@ namespace ie {
 			
 			static To_ round(float value);
 		};
+		
+		template<typename From_>
+		struct SToString {
+			static std::u32string to_string(From_ value);
+		};
 	}
 	
 	template<typename From, typename To>
@@ -31,6 +36,9 @@ namespace ie {
 	
 	template<typename From, typename To>
 	using BasicSRound = ToSFn<To(From&), detail::SFloatCast<typename To::T>::round>;
+	
+	template<typename From>
+	using BasicSToString = ToSFn<SString(From&), detail::SToString<typename From::T>::to_string>;
 	
 	template<typename From, typename To>
 	using SCast = BasicSCast<ISReadable<From>, SReadable<To> >;
@@ -55,6 +63,9 @@ namespace ie {
 	
 	template<typename To>
 	using SRRound = BasicSRound<ISRFloat, SRanged<To> >;
+	
+	template<typename From>
+	using SToString = BasicSToString<ISReadable<From> >;
 	
 	using SCastF2I = SCast<float, int>;
 	using SCastF2S = SCast<float, size_t>;
@@ -93,6 +104,10 @@ namespace ie {
 	using SRRoundF = SRRound<float>;
 	using SRRoundI = SRRound<int>;
 	using SRRoundS = SRRound<size_t>;
+	
+	using SToStringF = SToString<float>;
+	using SToStringI = SToString<int>;
+	using SToStringS = SToString<size_t>;
 }
 
 #include "SCast.inl"
