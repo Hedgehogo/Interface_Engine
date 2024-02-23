@@ -176,7 +176,8 @@ namespace ie {
 			add_type_make_named<INonInteractive, Capsule>();
 			add_type_make_named<INonInteractive, Sprite>();
 			add_type_make_named<INonInteractive, Bar>();
-			add_type_make_named<INonInteractive, Caption>();
+			add_type_make<INonInteractive, Caption>("Caption");
+			add_type_make<INonInteractive, EditCaption>("EditCaption");
 			add_type_make_named<INonInteractive, BoxUninteractive>();
 			add_type_make<IScalable, INonInteractive>();
 			add_type_make_named<Box, BoxDebug>();

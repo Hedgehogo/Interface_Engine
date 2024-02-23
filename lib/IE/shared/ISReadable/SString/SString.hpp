@@ -6,7 +6,7 @@
 
 namespace ie {
 	namespace make_system {
-		struct SString : public virtual ISReadable<std::u32string_view> {
+		struct SString : public virtual ISReadable<std::u32string> {
 		public:
 			std::u32string data;
 			
@@ -16,7 +16,7 @@ namespace ie {
 		};
 		
 		template<>
-		struct ToMutable<SString> : public SString, public virtual ISMutable<std::u32string_view> {
+		struct ToMutable<SString> : public SString, public virtual ISMutable<std::u32string> {
 		public:
 			ToMutable(std::u32string data = {});
 			
@@ -38,17 +38,17 @@ struct ieml::Decode<char, ie::make_system::SMString> {
 };
 
 namespace ie {
-	class SString : public virtual ISReadable<std::u32string_view> {
+	class SString : public virtual ISReadable<std::u32string> {
 	public:
-		using T = ISReadable<std::u32string_view>::T;
-		using ReadFn = ISReadable<std::u32string_view>::ReadFn;
+		using T = ISReadable<std::u32string>::T;
+		using ReadFn = ISReadable<std::u32string>::ReadFn;
 		using Make = make_system::SString;
 		
 		SString(Make&& make, DynBuffer&);
 		
 		SString(std::u32string data);
 		
-		std::u32string_view get() const override;
+		std::u32string get() const override;
 	
 	protected:
 		ReadFn& add_read_fn(ReadFn&& read_fn) override;
@@ -60,17 +60,17 @@ namespace ie {
 	};
 	
 	template<>
-	class ToMutable<SString> : public SString, public virtual ISMutable<std::u32string_view> {
+	class ToMutable<SString> : public SString, public virtual ISMutable<std::u32string> {
 	public:
 		using T = SString::T;
-		using ReadFn = ISMutable<std::u32string_view>::ReadFn;
+		using ReadFn = ISMutable<std::u32string>::ReadFn;
 		using Make = make_system::SMString;
 		
 		ToMutable(Make&& make, DynBuffer&);
 		
 		ToMutable(std::u32string data);
 		
-		void set(std::u32string_view value) override;
+		void set(std::u32string value) override;
 	};
 	
 	using SMString = ToMutable<SString>;

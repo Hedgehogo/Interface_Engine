@@ -38,7 +38,7 @@ namespace ie {
 	SString::SString(std::u32string data) : data_(std::move(data)) {
 	}
 	
-	std::u32string_view SString::get() const {
+	std::u32string SString::get() const {
 		return data_;
 	}
 	
@@ -63,8 +63,8 @@ namespace ie {
 	SMString::ToMutable(std::u32string data) : SString(std::move(data)) {
 	}
 	
-	void ToMutable<SString>::set(std::u32string_view value) {
-		data_ = value;
+	void ToMutable<SString>::set(std::u32string value) {
+		data_ = std::move(value);
 	}
 
 	bool Determine<SMString::Make>::determine(const ieml::Node& node) {
