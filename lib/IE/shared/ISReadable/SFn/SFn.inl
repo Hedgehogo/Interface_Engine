@@ -20,7 +20,7 @@ namespace ie {
 			return std::make_tuple(
 				detail::SFnWrap<Args_>{
 					DynBuffer::get(std::move(args), SInitInfo{init_info}),
-					[this](Return_ const&) {
+					[this](auto const&) {
 						this->reset();
 					}
 				}...

@@ -84,4 +84,9 @@ namespace ie::detail {
 	To_ SFloatCast<To_>::round(float value) {
 		return SCast<float, To_>::checked(std::round(value));
 	}
+	
+	template<typename From_>
+	std::u32string SToString<From_>::to_string(From_ value) {
+		return ie::to_utf32(std::to_string(value));
+	}
 }

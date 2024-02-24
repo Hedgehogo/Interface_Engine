@@ -32,6 +32,16 @@ namespace ie {
 		add_type_make<KeyAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
 		
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
+			add_type_with_make<SString, SToString<T> >(std::string("ToString") + std::string(1, first));
+			add_type_with_make<SReadable<bool>, SEqual<sf::Vector2<T> > >(std::string("(=)Vec2") + std::string(1, first));
+			add_type_with_make<SReadable<bool>, SNotEqual<sf::Vector2<T> > >(std::string("(!=)Vec2") + std::string(1, first));
+			add_type_with_make<SReadable<bool>, SEqual<T> >(std::string("(=)") + name);
+			add_type_with_make<SReadable<bool>, SNotEqual<T> >(std::string("(!=)") + name);
+			add_type_with_make<SReadable<bool>, SLess<T> >(std::string("(<)") + name);
+			add_type_with_make<SReadable<bool>, SGreater<T> >(std::string("(>)") + name);
+			add_type_with_make<SReadable<bool>, SLessOrEqual<T> >(std::string("(<=)") + name);
+			add_type_with_make<SReadable<bool>, SGreaterOrEqual<T> >(std::string("(>=)") + name);
+			add_type_with_make<SRanged<T>, SLerp<T> >("Lerp");
 			add_type_with_make<SRanged<T>, SRFloor<T> >("RFloor");
 			add_type_with_make<SRanged<T>, SRCeil<T> >("RCeil");
 			add_type_with_make<SRanged<T>, SRRound<T> >("RRound");
@@ -53,6 +63,7 @@ namespace ie {
 			add_type_with_make<ISRanged<T>, SRanged<T> >();
 			add_type_with_make<ISRanged<T>, ISMRanged<T> >();
 			add_type_with_make<ISReadable<T>, ISRanged<T> >();
+			
 			add_bool_determine_make<SMRVec2<T> >();
 			add_bool_determine_make<SMRanged<T> >();
 		}
@@ -76,6 +87,9 @@ namespace ie {
 			add_type_with_make<ISRSize, SRCastF2S>("RCastI");
 			add_type_with_make<ISRFloat , SRCastS2F>("RCastS");
 			add_type_with_make<ISRInt, SRCastS2I>("RCastS");
+			add_type_with_make<ISMString, SMString>("MString");
+			add_type_with_make<ISString, SString>("String");
+			add_type_with_make<ISString, ISMString>();
 			
 			//add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
 			//add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
@@ -162,7 +176,8 @@ namespace ie {
 			add_type_make_named<INonInteractive, Capsule>();
 			add_type_make_named<INonInteractive, Sprite>();
 			add_type_make_named<INonInteractive, Bar>();
-			add_type_make_named<INonInteractive, Caption>();
+			add_type_make<INonInteractive, Caption>("Caption");
+			add_type_make<INonInteractive, EditCaption>("EditCaption");
 			add_type_make_named<INonInteractive, BoxUninteractive>();
 			add_type_make<IScalable, INonInteractive>();
 			add_type_make_named<Box, BoxDebug>();
@@ -199,6 +214,7 @@ namespace ie {
 			add_type_make_named<BasePanel, ConstPanel>();
 			add_type_make_named<BasePanel, Panel>();
 			
+			add_bool_determine_make<SMString>();
 			add_bool_determine_make<TextBlock>();
 			add_bool_determine_make<SMBool>();
 			add_bool_determine_make<FullColor>();

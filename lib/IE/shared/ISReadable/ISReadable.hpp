@@ -56,6 +56,7 @@ namespace ie {
 	using ISFloat = ISReadable<float>;
 	using ISInt = ISReadable<int>;
 	using ISSize = ISReadable<size_t>;
+	using ISString = ISReadable<std::u32string>;
 	
 	template<typename T_>
 	class ToMutable<ISReadable<T_> > : public virtual ISReadable<T_>, public virtual ISettable<T_> {
@@ -74,4 +75,5 @@ namespace ie {
 	using ISMFloat = ISMutable<float>;
 	using ISMInt = ISMutable<int>;
 	using ISMSize = ISMutable<size_t>;
+	using ISMString = ISReadable<std::u32string>;
 }

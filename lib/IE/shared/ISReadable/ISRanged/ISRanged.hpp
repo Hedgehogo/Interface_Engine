@@ -23,9 +23,9 @@ namespace ie {
 		using ReadFn = typename ISReadable<T_>::ReadFn;
 		using Make = make_system::ISRanged<T_>;
 		
-		virtual T_ get_upper_bound() = 0;
+		virtual T_ get_upper_bound() const = 0;
 		
-		virtual T_ get_lower_bound() = 0;
+		virtual T_ get_lower_bound() const = 0;
 		
 		virtual void set_upper_bound(T_ upper_bound) = 0;
 		
