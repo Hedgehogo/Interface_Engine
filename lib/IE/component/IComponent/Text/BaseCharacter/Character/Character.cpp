@@ -88,10 +88,11 @@ namespace ie {
 	}
 	
 	void Character::draw() {
-		if(render_target.is_some()) {
-			if(selection)
-				render_target.some().draw(selection_vertex_array);
-			render_target.some().draw(vertex_array, &texture);
+		for(auto& render_target_value: render_target) {
+			if(selection) {
+				render_target_value.draw(selection_vertex_array);
+			}
+			render_target_value.draw(vertex_array, &texture);
 		}
 	}
 	
