@@ -18,7 +18,10 @@ namespace ie {
 		inactive_background_selection_color(inactive_background_selection_color),
 		size(size),
 		font(font),
-		font_line_space(font && size ? orl::Option{font.some().getLineSpacing(this->size.some())} : orl::Option<float>{}),
+		font_line_space((font && size).map([](auto& value) {
+			auto& [font_unwrap, size_unwrap]{value};
+			return font_unwrap.getLineSpacing(size_unwrap);
+		})),
 		style(style) {
 	}
 }

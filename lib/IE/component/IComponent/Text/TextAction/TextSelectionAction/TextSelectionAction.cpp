@@ -21,13 +21,12 @@ namespace ie {
 	
 	void TextSelectionAction::while_pressed() {
 		text->set_selection_end(end = text->get_character(sf::Vector2f{mouse_position_}));
-		if(start && end) {
-			auto local_start = start, local_end = end;
-			
-			if(start.some() > end.some())
+		for(auto [local_start, local_end]: start && end) {
+			if(start.some() > end.some()) {
 				std::swap(local_start, local_end);
+			}
 			
-			for(auto iterator = local_start.some(); iterator != local_end.some(); ++iterator) {
+			for(auto iterator = local_start; iterator != local_end; ++iterator) {
 				(*iterator)->set_selection(true);
 				(*iterator)->set_active(true);
 			}
@@ -46,14 +45,15 @@ namespace ie {
 	}
 	
 	void TextSelectionAction::update(sf::Vector2i mouse_position, bool press) {
-		if(press && start && end) {
-			auto local_start = start, local_end = end;
-			
-			if(start.some() > end.some())
-				std::swap(local_start, local_end);
-			
-			for(auto iterator = local_start.some(); iterator != local_end.some(); ++iterator) {
-				(*iterator)->set_selection(false);
+		if(press) {
+			for(auto [local_start, local_end]: start && end){
+				if(start.some() > end.some()) {
+					std::swap(local_start, local_end);
+				}
+				
+				for(auto iterator = local_start; iterator != local_end; ++iterator) {
+					(*iterator)->set_selection(false);
+				}
 			}
 		}
 		BasicBaseKeyAction<Text&>::update(mouse_position, press);
