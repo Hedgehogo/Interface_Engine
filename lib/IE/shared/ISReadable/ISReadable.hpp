@@ -75,5 +75,5 @@ namespace ie {
 	using ISMFloat = ISMutable<float>;
 	using ISMInt = ISMutable<int>;
 	using ISMSize = ISMutable<size_t>;
-	using ISMString = ISReadable<std::u32string>;
+	using ISMString = ISMutable<std::u32string>;
 }

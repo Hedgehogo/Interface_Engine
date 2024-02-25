@@ -135,8 +135,8 @@ namespace ie {
 
 orl::Option<ie::TextBlock::Make> ieml::Decode<char, ie::TextBlock::Make>::decode(ieml::Node const& node) {
 	auto& clear_node{node.get_clear()};
-	if (auto str{clear_node.get_string()}){
-		return {{ie::to_utf32(ie::to_utf32(str.except()))}};
+	for(auto& str: clear_node.get_string().ok_or_none()) {
+		return {{ie::to_utf32(ie::to_utf32(str))}};
 	}
 	auto map{clear_node.get_map_view().except()};
 	return ie::TextBlock::Make{

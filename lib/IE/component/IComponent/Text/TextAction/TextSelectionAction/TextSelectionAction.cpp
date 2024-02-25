@@ -21,13 +21,13 @@ namespace ie {
 	
 	void TextSelectionAction::while_pressed() {
 		text->set_selection_end(end = text->get_character(sf::Vector2f{mouse_position_}));
-		if(start && end) {
-			auto local_start = start, local_end = end;
+		auto local_start{start}, local_end{end};
+		for(auto [start_value, end_value]: std::move(local_start) && std::move(local_end)) {
+			if(start_value > end_value) {
+				std::swap(start_value, end_value);
+			}
 			
-			if(start.some() > end.some())
-				std::swap(local_start, local_end);
-			
-			for(auto iterator = local_start.some(); iterator != local_end.some(); ++iterator) {
+			for(auto iterator = start_value; iterator != end_value; ++iterator) {
 				(*iterator)->set_selection(true);
 				(*iterator)->set_active(true);
 			}
@@ -46,13 +46,13 @@ namespace ie {
 	}
 	
 	void TextSelectionAction::update(sf::Vector2i mouse_position, bool press) {
-		if(press && start && end) {
-			auto local_start = start, local_end = end;
+		auto local_start{start}, local_end{end};
+		for(auto [start_value, end_value]: press && std::move(local_start) && std::move(local_end)) {
+			if(start_value > end_value) {
+				std::swap(start_value, end_value);
+			}
 			
-			if(start.some() > end.some())
-				std::swap(local_start, local_end);
-			
-			for(auto iterator = local_start.some(); iterator != local_end.some(); ++iterator) {
+			for(auto iterator = start_value; iterator != end_value; ++iterator) {
 				(*iterator)->set_selection(false);
 			}
 		}

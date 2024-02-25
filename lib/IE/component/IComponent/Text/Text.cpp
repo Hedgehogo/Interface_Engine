@@ -1,6 +1,7 @@
 #include "Text.hpp"
 
 #include <cmath>
+
 namespace ie {
 	Text::Make::Make(
 		std::vector<BoxPtr<BaseTextBlock::Make>>&& text_blocks,
@@ -100,9 +101,8 @@ namespace ie {
 	}
 	
 	sf::String Text::get_selection_text() {
-		if(selection.start && selection.end) {
+		for(auto [local_start, local_end]: selection.start && selection.end) {
 			sf::String SelectionText{};
-			std::vector<BaseCharacter*>::iterator local_start{selection.start.some()}, local_end{selection.end.some()};
 			if(std::distance(local_start, local_end) < 0) {
 				std::swap(local_start, local_end);
 			}
@@ -116,53 +116,55 @@ namespace ie {
 		return sf::String{""};
 	}
 	
-	float get_distance_y(std::vector<BaseCharacter*>::iterator iterator, float mouse_position_y) {
-		return std::min(std::abs(mouse_position_y - (*iterator)->get_position().y), std::abs(mouse_position_y - ((*iterator)->get_position().y - (*iterator)->get_height())));
-	}
-	
-	bool min_distance_x(std::vector<BaseCharacter*>::iterator& a, std::vector<BaseCharacter*>::iterator& b, float find) {
-		float distance_to_a{std::abs((*a)->get_position().x - find)},
-			distance_to_a1{std::abs((*a)->get_position().x + (*a)->get_advance() - find)},
-			distance_to_b{std::abs((*b)->get_position().x - find)},
-			distance_to_b1{std::abs((*b)->get_position().x + (*b)->get_advance() - find)};
-		if(distance_to_a > distance_to_a1)
-			std::swap(distance_to_a, distance_to_a1);
-		if(distance_to_b > distance_to_b1)
-			std::swap(distance_to_b, distance_to_b1);
-		
-		if(distance_to_a == distance_to_b) {
-			return distance_to_a1 < distance_to_b1;
-		} else {
-			return distance_to_a < distance_to_b;
-		}
-	}
-	
 	std::vector<BaseCharacter*>& Text::get_characters() {
 		return text_characters;
 	}
 	
 	orl::Option<std::vector<BaseCharacter*>::iterator> Text::get_character(sf::Vector2f mouse_position) {
-		orl::Option<std::vector<BaseCharacter*>::iterator> result{};
+		using Iterator = std::vector<BaseCharacter*>::iterator;
+		
+		auto get_distance_y = [](Iterator iterator, float mouse_position_y) -> float {
+			return std::min(
+				std::abs(mouse_position_y - (*iterator)->get_position().y),
+				std::abs(mouse_position_y - ((*iterator)->get_position().y - (*iterator)->get_height()))
+			);
+		};
+		
+		auto min_distance_x = [](Iterator first, Iterator second, float find) -> bool {
+			float distance_to_first{std::abs((*first)->get_position().x - find)};
+			float distance_to_first1{std::abs((*first)->get_position().x + (*first)->get_advance() - find)};
+			float distance_to_second{std::abs((*second)->get_position().x - find)};
+			float distance_to_second1{std::abs((*second)->get_position().x + (*second)->get_advance() - find)};
+			if(distance_to_first > distance_to_first1)
+				std::swap(distance_to_first, distance_to_first1);
+			if(distance_to_second > distance_to_second1)
+				std::swap(distance_to_second, distance_to_second1);
+			
+			if(distance_to_first == distance_to_second) {
+				return distance_to_first1 < distance_to_second1;
+			}
+			return distance_to_first < distance_to_second;
+		};
+		
+		orl::Option<Iterator> result{};
 		
 		for(auto iterator = text_characters.begin(); iterator != text_characters.end(); ++iterator) {
-			if(result) {
-				float DistanceYToIterator{get_distance_y(iterator, mouse_position.y)};
-				float DistanceYToResult{get_distance_y(result.some(), mouse_position.y)};
-				if(DistanceYToIterator <= DistanceYToResult) {
-					if(DistanceYToIterator < DistanceYToResult) {
-						result = iterator;
-					}
-					if(min_distance_x(iterator, result.some(), mouse_position.x)) {
-						result = iterator;
+			result = result.map([=](auto& value) {
+				float distance_y_to_iterator{get_distance_y(iterator, mouse_position.y)};
+				float distance_y_to_result{get_distance_y(value, mouse_position.y)};
+				if(distance_y_to_iterator <= distance_y_to_result) {
+					if((distance_y_to_iterator < distance_y_to_result) || min_distance_x(iterator, value, mouse_position.x)) {
+						return iterator;
 					}
 				}
-			} else {
-				result = iterator;
-			}
+				return value;
+			}).some_or(iterator);
 		}
 		
-		if(mouse_position.x > (*result.except())->get_position().x + (static_cast<float>((*result.except())->get_size_texture().x) / 2.f)) {
-			++result.some();
+		for(auto& value: result) {
+			if(mouse_position.x > (*value)->get_position().x + (static_cast<float>((*value)->get_size_texture().x) / 2.f)) {
+				++value;
+			}
 		}
 		
 		return result;
@@ -297,13 +299,10 @@ orl::Option<ie::Text::Make> ieml::Decode<char, ie::Text::Make>::decode(ieml::Nod
 			sf::Color{150, 150, 150}
 		),
 		map.get_as<ie::LoadTextStyle>("style").except().ok_or({}).style,
-		map.get_as<bp::BoxPtr<ie::BaseTextResizer::Make> >("resizer").except().ok_or(
-			bp::make_box_ptr<ie::BaseTextResizer::Make, ie::TextResizer::Make>(
-				1.15f,
-				ie::BaseTextResizer::Align::Left
-			)
-		),
-		map.get_as<bp::BoxPtr<ie::IBasicInteraction<ie::Text&>::Make > >("text-interaction").except().ok_or_else([] {
+		map.get_as<bp::BoxPtr<ie::BaseTextResizer::Make> >("resizer").except().ok_or_else([] {
+			return bp::make_box_ptr<ie::BaseTextResizer::Make, ie::TextResizer::Make>(1.15f, ie::BaseTextResizer::Align::Left);
+		}),
+		map.get_as<bp::BoxPtr<ie::IBasicInteraction<ie::Text&>::Make> >("text-interaction").except().ok_or_else([] {
 			return bp::make_box_ptr<ie::IBasicInteraction<ie::Text&>::Make, ie::BasicEmptyInteraction<ie::Text&>::Make>();
 		}),
 	};

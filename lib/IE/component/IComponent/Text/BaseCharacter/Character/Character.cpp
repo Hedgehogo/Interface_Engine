@@ -32,8 +32,8 @@ namespace ie {
 		vertex_array(sf::Quads, 4),
 		selection_vertex_array(sf::Quads, 4),
 		texture(text_variables.font.some().getTexture(text_variables.size.some())),
-		lines(lines){
-		if(render_target) {
+		lines(lines) {
+		if(render_target.is_some()) {
 			make_rect_bones_tex_coords(glyph.textureRect, vertex_array);
 			
 			make_rect_bones_position<int>({0, 0, glyph.textureRect.width, glyph.textureRect.height}, vertex_array);
@@ -88,10 +88,11 @@ namespace ie {
 	}
 	
 	void Character::draw() {
-		if(render_target) {
-			if(selection)
-				render_target.some().draw(selection_vertex_array);
-			render_target.some().draw(vertex_array, &texture);
+		for(auto& render_target_value: render_target) {
+			if(selection) {
+				render_target_value.draw(selection_vertex_array);
+			}
+			render_target_value.draw(vertex_array, &texture);
 		}
 	}
 	
