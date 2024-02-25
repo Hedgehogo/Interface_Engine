@@ -21,8 +21,7 @@ namespace ie {
 	
 	void TextSelectionAction::while_pressed() {
 		text->set_selection_end(end = text->get_character(sf::Vector2f{mouse_position_}));
-		auto local_start{start}, local_end{end};
-		for(auto [start_value, end_value]: std::move(local_start) && std::move(local_end)) {
+		for(auto [start_value, end_value]: orl::clone(start) && orl::clone(end)) {
 			if(start_value > end_value) {
 				std::swap(start_value, end_value);
 			}
@@ -46,8 +45,7 @@ namespace ie {
 	}
 	
 	void TextSelectionAction::update(sf::Vector2i mouse_position, bool press) {
-		auto local_start{start}, local_end{end};
-		for(auto [start_value, end_value]: press && std::move(local_start) && std::move(local_end)) {
+		for(auto [start_value, end_value]: press && orl::clone(start) && orl::clone(end)) {
 			if(start_value > end_value) {
 				std::swap(start_value, end_value);
 			}
