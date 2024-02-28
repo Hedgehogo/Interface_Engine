@@ -58,6 +58,7 @@
 #include "IE/interaction/IAction/BasicKeyAction/BasicCloseWindowAction/BasicCloseWindowAction.hpp"
 #include "IE/component/IComponent/IScalable/BasicInteractiveData/Switcher/SwitherAction/SwitcherAction.hpp"
 #include "IE/shared/ISReadable/readable.hpp"
+#include "IE/shared/ISReadable/ISRanged/STime/STime.hpp"
 //#include "IE/modules/yaml-cpp/shared/ISValue/KeyAction/SetSValueAction/SetSValueAction.hpp"
 //#include "IE/modules/yaml-cpp/shared/ISValue/ISConvertValue/BaseSConvertToBoolComparison/SConvertToBoolEquals/SConvertToBoolEquals.hpp"
 //#include "IE/modules/yaml-cpp/shared/ISValue/ISConvertValue/BaseSConvertToBoolComparison/SConvertToBoolGreater/SConvertToBoolGreater.hpp"

@@ -2,6 +2,7 @@
 
 #include <SFML/Window.hpp>
 #include "_test/_image_equal/image_equal.hpp"
+#include <IE/shared/DynBuffer/DynBuffer.hpp>
 #include <IE/component/IDrawable/DrawManager/DrawManager.hpp>
 #include <IE/component/IUpdatable/UpdateManager/UpdateManager.hpp>
 #include <IE/interaction/InteractionManager/InteractionManager.hpp>

@@ -5,7 +5,7 @@
 #include <_test/IComponent/_InitInfoData/InitInfoData.hpp>
 #include <fstream>
 
-TEST(IComponent, Caption) {
+TEST(IComponent, BasicCaption) {
 	InitInfoData data{{100, 100}};
 	
 	std::basic_ifstream<char32_t> file1{"test-src/Caption.txt"};

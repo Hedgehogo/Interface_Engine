@@ -114,7 +114,7 @@ orl::Option<ie::BoxBorderHorizontal::Make> ieml::Decode<char, ie::BoxBorderHoriz
 			min_size
 		};
 	}
-	auto objects{map.at("bounds").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().except()};
+	auto objects{map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().except()};
 	for(auto& bounds: map.at("bounds").ok_or_none()) {
 		return ie::BoxBorderHorizontal::Make{
 			std::move(objects),

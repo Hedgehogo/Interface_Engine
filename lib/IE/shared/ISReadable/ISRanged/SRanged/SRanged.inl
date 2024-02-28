@@ -61,6 +61,13 @@ namespace ie {
 	}
 	
 	template<typename T_>
+	SRanged<T_>::SRanged(T_ data, T_ upper_bound_, T_ lower_bound_) :
+		SReadable<T_>(std::forward<T_>(data)),
+		upper_bound_(std::forward<T_>(upper_bound_)),
+		lower_bound_(std::forward<T_>(lower_bound_)) {
+	}
+	
+	template<typename T_>
 	SRanged<T_>::SRanged(T_ data) :
 		SReadable<T_>(std::forward<T_>(data)),
 		upper_bound_(std::numeric_limits<T_>::max()),

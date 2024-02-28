@@ -5,15 +5,15 @@ namespace ie::make_system {
 	SString::SString(std::u32string data) : data(std::move(data)) {
 	}
 	
-	rttb::Dyn SString::make(DynBuffer& dyn_buffer) {
-		return rttb::Dyn{ie::SString{std::move(*this), dyn_buffer}};
+	rttb::Dyn SString::make(SInitInfo init_info) {
+		return rttb::Dyn{ie::SString{std::move(*this), init_info}};
 	}
 	
 	SMString::ToMutable(std::u32string data) : SString(std::move(data)) {
 	}
 	
-	rttb::Dyn SMString::make(DynBuffer& dyn_buffer) {
-		return rttb::Dyn{ie::SMString{std::move(*this), dyn_buffer}};
+	rttb::Dyn SMString::make(SInitInfo init_info) {
+		return rttb::Dyn{ie::SMString{std::move(*this), init_info}};
 	}
 }
 
@@ -32,7 +32,7 @@ orl::Option<ie::make_system::SMString> ieml::Decode<char, ie::make_system::SMStr
 }
 
 namespace ie {
-	SString::SString(Make&& make, ie::DynBuffer&) : data_(std::move(make.data)) {
+	SString::SString(Make&& make, SInitInfo init_info) : data_(std::move(make.data)) {
 	}
 	
 	SString::SString(std::u32string data) : data_(std::move(data)) {
@@ -57,7 +57,7 @@ namespace ie {
 		return false;
 	}
 	
-	SMString::ToMutable(Make&& make, DynBuffer&) : SString(std::move(make.data)) {
+	SMString::ToMutable(Make&& make, SInitInfo init_info) : SString(std::move(make.data)) {
 	}
 
 	SMString::ToMutable(std::u32string data) : SString(std::move(data)) {

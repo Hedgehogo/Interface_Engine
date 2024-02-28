@@ -1,40 +1,34 @@
-object: = BoxConstBorder:
-	side: right
-	border-distance: 20
-	second-object: = BoxScroll:
-		object: = Text:
-			text-blocks:
-				- = TextBlock:
-					text:
-						directory: > ../../example-resources/
-						default-language: > en
-						language: > fr
-						key: > linux-readme
-				- = ObjectTextBlock:
-					object: blue
-					height: 10
-				- = TextBlock:
-					text:
-						language: > jp
-						key: > cpp-wiki
-			font: > ../../example-resources/segoeui.ttf
-			font-size: 20
-			resizer: = TextResizer:
-				align: > left
-				algorithm: > base
-			text-interaction: = TextHotkeyI:
-				hotkeys:
-					-
-						- interaction: = TextKeysI:
-								action: = TextSelectionA: null
-								keys: [mouse-left]
-						- interaction: = TextKeysI:
-								action: = TextCopyA: null
-								keys: [l-control, c]
-		normal-object-position: &a [0, 0]
-	const-object: = Slider:
-		slider-scale: [1, 0.1]
-		slider: black
-		background: = FullColor:
-			color: AAAAAA
-		value: *a
+object: = BoxBorderHorizontal:
+	objects:
+		- = BoxTabs:
+			objects: &arr [red, green, blue, yellow, magenta, cyan]
+			value: = RCastF:
+				args:
+					- = Time:
+						end-time: 6
+						start: &start yes
+						end: &end no
+		- = BoxTabs:
+			objects: *arr
+			value: = RCastF:
+				args:
+					- = Time:
+						end-time: 6
+						start: *end
+						end: &end1 no
+		- = BoxTabs:
+			objects: *arr
+			value: = RCastF:
+				args:
+					- = Time:
+						end-time: 6
+						start: *end1
+						end: &end2 no
+		- = BoxTabs:
+			objects: *arr
+			value: = RCastF:
+				args:
+					- = Time:
+						end-time: 6
+						start: *end2
+						end: *start

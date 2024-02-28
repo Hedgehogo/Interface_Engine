@@ -12,7 +12,7 @@ namespace ie {
 			
 			SString(std::u32string data = {});
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		template<>
@@ -20,7 +20,7 @@ namespace ie {
 		public:
 			ToMutable(std::u32string data = {});
 			
-			rttb::Dyn make(DynBuffer& dyn_buffer) override;
+			rttb::Dyn make(SInitInfo init_info) override;
 		};
 		
 		using SMString = ToMutable<SString>;
@@ -44,7 +44,7 @@ namespace ie {
 		using ReadFn = ISReadable<std::u32string>::ReadFn;
 		using Make = make_system::SString;
 		
-		SString(Make&& make, DynBuffer&);
+		SString(Make&& make, SInitInfo init_info);
 		
 		SString(std::u32string data);
 		
@@ -66,7 +66,7 @@ namespace ie {
 		using ReadFn = ISMutable<std::u32string>::ReadFn;
 		using Make = make_system::SMString;
 		
-		ToMutable(Make&& make, DynBuffer&);
+		ToMutable(Make&& make, SInitInfo init_info);
 		
 		ToMutable(std::u32string data);
 		

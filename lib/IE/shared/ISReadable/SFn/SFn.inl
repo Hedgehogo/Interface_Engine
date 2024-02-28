@@ -9,17 +9,17 @@ namespace ie {
 		
 		template<typename Return_, typename Value_, typename... Args_, Return_(* Fn_)(Value_ const&, Args_...)>
 		rttb::Dyn SFn<Fn_>::make(SInitInfo init_info) {
-			return rttb::Dyn{ie::SFn<Fn_>{std::move(*this), init_info}};
+			return rttb::Dyn{new ie::SFn<Fn_>{std::move(*this), init_info}};
 		}
 	}
 	
 	template<typename Return_, typename Value_, typename... Args_, Return_(* Fn_)(Value_ const&, Args_...)>
 	SFn<Fn_>::SFn(Make&& make, SInitInfo init_info) :
-		ToMutable<Value_>(static_cast<typename ToMutable<Value_>::Make&&>(make), SInitInfo{init_info}),
+		ToMutable<Value_>(static_cast<typename ToMutable<Value_>::Make&&>(make), init_info),
 		args_(std::apply([&init_info, this](detail::SFnMakeWrap<Args_>&&... args) {
 			return std::make_tuple(
 				detail::SFnWrap<Args_>{
-					DynBuffer::get(std::move(args), SInitInfo{init_info}),
+					DynBuffer::get(std::move(args), init_info),
 					[this](auto const&) {
 						this->reset();
 					}

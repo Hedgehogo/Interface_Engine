@@ -20,7 +20,7 @@ namespace ie {
 		InitInfo init_info
 	) {
 		return SReader<ISString>{
-			init_info.dyn_buffer.get(std::move(make)),
+			DynBuffer::get(std::move(make), SInitInfo{init_info}),
 			[&caption](std::u32string_view value) {
 				caption.set_string(to_utf32(value));
 			}

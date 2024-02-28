@@ -65,6 +65,8 @@ namespace ie {
 		
 		SRanged(Make&& make, SInitInfo init_info);
 		
+		SRanged(T_ data, T_ upper_bound_, T_ lower_bound_);
+		
 		SRanged(T_ data);
 		
 		T_ get_upper_bound() const override;

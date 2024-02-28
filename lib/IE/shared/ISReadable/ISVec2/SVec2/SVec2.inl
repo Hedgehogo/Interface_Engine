@@ -51,8 +51,8 @@ namespace ie {
 	template<typename Value_, typename _>
 	BasicSVec2<Value_, _>::BasicSVec2(Make&& make, SInitInfo init_info) :
 		BasicSVec2<Value_>(
-			DynBuffer::get(std::move(make.x), SInitInfo{init_info}),
-			DynBuffer::get(std::move(make.y), SInitInfo{init_info})
+			DynBuffer::get(std::move(make.x), init_info),
+			DynBuffer::get(std::move(make.y), init_info)
 		) {
 	}
 	

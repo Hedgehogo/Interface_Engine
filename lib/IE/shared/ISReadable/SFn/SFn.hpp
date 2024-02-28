@@ -17,7 +17,8 @@ namespace ie {
 		class SFn;
 		
 		template<typename Return_, typename Value_, typename... Args_, Return_(* Fn_)(Value_ const&, Args_...)>
-		struct SFn<Fn_> : public ie::ToMutable<Value_>::Make {
+		class SFn<Fn_> : public ie::ToMutable<Value_>::Make {
+		public:
 			std::tuple<detail::SFnMakeWrap<Args_>...> args;
 			
 			SFn(typename ie::ToMutable<Value_>::Make make, detail::SFnMakeWrap<Args_>... args);
