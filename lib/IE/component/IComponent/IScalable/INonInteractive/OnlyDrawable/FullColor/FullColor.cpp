@@ -57,8 +57,10 @@ orl::Option<ie::FullColor::Make> ieml::Decode<char, ie::FullColor::Make>::decode
 		return ie::FullColor::Make{color};
 	}
 	auto map{node.get_map_view().except()};
-	return ie::FullColor::Make{
-		map.at("color").except().as<sf::Color>().except(),
-		map.get_as<sf::Vector2f>("normal-size").except().ok_or({})
-	};
+	return map.read([](MapReader<char>& map) {
+		return ie::FullColor::Make{
+			map.at("color").except().as<sf::Color>().except(),
+			map.get_as<sf::Vector2f>("normal-size").except().ok_or({})
+		};
+	}).except();
 }
