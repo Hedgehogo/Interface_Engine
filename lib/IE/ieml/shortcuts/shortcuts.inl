@@ -1,5 +1,6 @@
 //included into shortcuts.hpp
 
+#include <IEML/helpers/unstable_type_name/unstable_type_name.hpp>
 #include "IE/utils/meta/is_any_same/is_any_same.hpp"
 #include "IE/utils/meta/remove_namespace/remove_namespace.hpp"
 
@@ -25,7 +26,7 @@ namespace ie {
 	template<typename Base, typename Derived, typename... Names>
 	std::enable_if_t<std::is_base_of_v<Base, Derived> && meta::is_names<Names...> >
 	add_type_named(Names... names) {
-		std::string type_name{ieml::get_type_name<Derived>()};
+		std::string type_name{ieml::unstable_type_name<Derived>()};
 		add_names<Derived>(std::string{meta::remove_namespace(type_name)});
 		add_type<Base, Derived, Names...>(names...);
 	}
@@ -102,7 +103,7 @@ namespace ie {
 	template<typename Base, typename Derived, typename... Names>
 	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && meta::is_names<Names...> >
 	add_type_make_named(Names... names) {
-		std::string type_name{ieml::get_type_name<Derived>()};
+		std::string type_name{ieml::unstable_type_name<Derived>()};
 		add_names<typename Derived::Make>(std::string{meta::remove_namespace(type_name)});
 		add_type_make<Base, Derived, Names...>(std::forward<Names>(names)...);
 	}

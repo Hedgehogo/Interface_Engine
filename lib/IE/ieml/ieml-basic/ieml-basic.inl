@@ -1,5 +1,42 @@
 //included into ieml-basic.hpp
 
+namespace tnl {
+	template<typename T_>
+	auto TypeName<bp::BoxPtr<T_> >::type_name() -> StringView {
+		return tnl::type_name<T_*>();
+	}
+	
+	template<typename T_>
+	auto TypeName<orl::Option<T_> >::type_name() -> StringView {
+		static auto name{[] {
+			auto name{tnl::type_name<T_>()};
+			return String{"Option("} + String{name.begin(), name.end()} + String{")"};
+		}()};
+		return {name};
+	}
+	
+	template<typename T_>
+	auto TypeName<std::vector<T_> >::type_name() -> StringView {
+		static auto name{[] {
+			auto name{tnl::type_name<T_>()};
+			return String{"Vec("} + String{name.begin(), name.end()} + String{")"};
+		}()};
+		return {name};
+	}
+	
+	template<typename K_, typename V_>
+	auto TypeName<absl::flat_hash_map<K_, V_> >::type_name() -> StringView {
+		static auto name{[] {
+			auto key_name{tnl::type_name<K_>()};
+			auto value_name{tnl::type_name<V_>()};
+			return
+				String{"Map("} + String{key_name.begin(), key_name.end()} +
+				String{", "} + String{value_name.begin(), value_name.end()} + String{")"};
+		}()};
+		return {name};
+	}
+}
+
 namespace ieml {
 	template<typename T>
 	Option<bp::BoxPtr<T> > Decode<char, bp::BoxPtr<T> >::decode(const Node& node) {

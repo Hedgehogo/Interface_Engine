@@ -14,6 +14,13 @@ namespace rttb {
 	};
 }
 
+namespace tnl {
+	template<typename Type_>
+	struct TypeName<Type_*> {
+		static auto type_name() -> StringView;
+	};
+}
+
 namespace ieml {
 	template<typename Type_>
 	struct Decode<char, Type_*> {

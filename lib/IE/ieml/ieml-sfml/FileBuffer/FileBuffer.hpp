@@ -34,6 +34,18 @@ namespace ie {
 #endif
 }
 
+namespace tnl {
+	template<>
+	struct TypeName<sf::Texture> {
+		constexpr static auto type_name = tnl::StringView{"Texture"};
+	};
+	
+	template<>
+	struct TypeName<sf::Font> {
+		constexpr static auto type_name = tnl::StringView{"Font"};
+	};
+}
+
 namespace ieml {
 	template<>
 	struct Decode<char, sf::Texture&> {

@@ -58,6 +58,11 @@ namespace ie {
 }
 
 template<typename Type_>
+auto tnl::TypeName<ie::MakeDyn<Type_> >::type_name() -> StringView {
+	return tnl::type_name<bp::BoxPtr<typename Type_::Make> >();
+}
+
+template<typename Type_>
 orl::Option<ie::MakeDyn<Type_> > ieml::Decode<char, ie::MakeDyn<Type_> >::decode(const ieml::Node& node) {
 	return ie::MakeDyn<Type_>::decode(node);
 }

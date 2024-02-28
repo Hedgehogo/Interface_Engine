@@ -28,6 +28,7 @@ namespace ie {
 		add_type_with_make<ISMutable<T>, SMutable<T> >(std::string("M") + name);
 		add_type_with_make<ISReadable<T>, ISMutable<T> >();
 		add_type_with_make<ISReadable<T>, SReadable<T> >(name);
+		add_names<ISReadable<T> >(std::string("I") + name);
 		
 		add_type_make<KeyAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
 		
@@ -50,19 +51,21 @@ namespace ie {
 			add_type_with_make<SReadable<T>, SRound<T> >("Round");
 			add_type_with_make<ISMVec2<T>, SMVec2<T> >(std::string("MVec2") + std::string(1, first));
 			add_type_with_make<ISMRVec2<T>, SMRVec2<T> >(std::string("MRVec2") + std::string(1, first));
-			add_type_with_make<ISMutable<sf::Vector2<T> >, ISMVec2<T> >();
+			add_type_with_make<ISMutable<sf::Vector2<T> >, ISMVec2<T> >(
+				std::string("IMutable(Vec2") + std::string(1, first) + std::string(")")
+			);
 			add_type_with_make<ISMutable<T>, SMRanged<T> >(std::string("MR") + name);
 			add_type_with_make<ISMRanged<T>, SMRanged<T> >();
-			add_type_with_make<ISMutable<T>, ISMRanged<T> >();
+			add_type_with_make<ISMutable<T>, ISMRanged<T> >(std::string("IMR") + name);
 			add_type_with_make<ISVec2<T>, SVec2<T> >(std::string("Vec2") + std::string(1, first));
-			add_type_with_make<ISRVec2<T>, ISMRVec2<T> >();
+			add_type_with_make<ISRVec2<T>, ISMRVec2<T> >(std::string("IMRVec2") + std::string(1, first));
 			add_type_with_make<ISRVec2<T>, SRVec2<T> >(std::string("RVec2") + std::string(1, first));
-			add_type_with_make<ISVec2<T>, ISMVec2<T> >();
-			add_type_with_make<ISReadable<sf::Vector2<T> >, ISVec2<T> >();
+			add_type_with_make<ISVec2<T>, ISMVec2<T> >(std::string("IMVec2") + std::string(1, first));
+			add_type_with_make<ISReadable<sf::Vector2<T> >, ISVec2<T> >(std::string("IVec2") + std::string(1, first));
 			add_type_with_make<ISReadable<T>, SRanged<T> >(std::string("R") + name);
-			add_type_with_make<ISRanged<T>, SRanged<T> >();
-			add_type_with_make<ISRanged<T>, ISMRanged<T> >();
-			add_type_with_make<ISReadable<T>, ISRanged<T> >();
+			add_type_with_make<ISRanged<T>, SRanged<T> >(std::string("R") + name);
+			add_type_with_make<ISRanged<T>, ISMRanged<T> >(std::string("IMR") + name);
+			add_type_with_make<ISReadable<T>, ISRanged<T> >(std::string("IR") + name);
 			
 			add_bool_determine_make<SMRVec2<T> >();
 			add_bool_determine_make<SMRanged<T> >();
@@ -90,7 +93,8 @@ namespace ie {
 			add_type_with_make<ISRInt, SRCastS2I>("RCastS");
 			add_type_with_make<ISMString, SMString>("MString");
 			add_type_with_make<ISString, SString>("String");
-			add_type_with_make<ISString, ISMString>();
+			add_type_with_make<ISString, ISMString>("IMString");
+			add_names<ISString::Make>("IString");
 			
 			//add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
 			//add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
@@ -113,64 +117,76 @@ namespace ie {
 			add_type_make_named<ISizing, ParentCoefficientSizing>();
 			add_type_make_named<ISizing, TargetCoefficientSizing>();
 			add_type_make_named<ISizing, SmartSizing>();
+			add_names<ISizing::Make>("ISizing");
 			
-			add_type_make_named<ISizing2, Sizing2>("Sizing2");
-			add_type_make_named<ISizing2, ConstRatioSizing2>("ConstRatioSizing2");
+			add_type_make_named<ISizing2, Sizing2>();
+			add_type_make_named<ISizing2, ConstRatioSizing2>();
+			add_names<ISizing2::Make>("ISizing2");
 			
 			add_type_named<IPositioning, InternalPositioning>("InternalPos");
 			add_type_named<IPositioning, InternalTargetPositioning>("InternalTargetPos");
 			add_type_named<IPositioning, MatchPositioning>("MatchPos");
 			add_type_named<IPositioning, MatchTargetPositioning>("MatchTargetPos");
 			add_type_named<IPositioning, MatchSidesPositioning>("MatchSidesPos");
+			add_names<IPositioning>("IPos");
 			
 			add_type_named<IPositioning2, Positioning2>("Pos2");
 			add_type_named<IPositioning2, InternalPositioning2>("InternalPos2");
+			add_names<IPositioning>("IPos2");
 			
 			add_type_make_named<BaseLine, Underline>();
 			add_type_make_named<BaseLine, StrikeThrough>();
+			add_names<BaseLine::Make>("BaseLine");
 			
 			add_type_make_named<BaseTextBlock, TextBlock>();
 			add_type_make_named<BaseTextBlock, InteractiveTextBlock>();
 			add_type_make_named<BaseTextBlock, ObjectTextBlock>();
+			add_names<BaseTextBlock::Make>("BaseTextBlock");
 			
 			add_type_make_named<BaseTextResizer, TextResizer>();
+			add_names<BaseTextResizer::Make>("BaseTextResizer");
 			
-			add_type_make_named<KeyAction, OpenUrlAction>("OpenUrlA");
-			add_type_make_named<KeyAction, CloseWindowAction>("CloseWindowA");
-			add_type_make_named<KeyAction, SwitcherAction>("SwitcherA");
+			add_type_make<KeyAction, OpenUrlAction>("OpenUrlAction", "OpenUrlA");
+			add_type_make<KeyAction, CloseWindowAction>("CloseWindowAction", "CloseWindowA");
+			add_type_make<KeyAction, SwitcherAction>("SwitcherAction", "SwitcherA");
 			//add_type_make_named<KeyAction, SetSIntAction>("SetSIntA");
 			//add_type_make_named<KeyAction, SetSFloatAction>("SetSFloatA");
+			add_names<KeyAction::Make>("KeyAction");
 			
 			add_type_make_named<BasicKeyAction<Text&>, TextCopyAction>("TextCopyA");
 			add_type_make_named<BasicKeyAction<Text&>, TextSelectionAction>("TextSelectionA");
+			add_names<BasicKeyAction<Text&>::Make>("TextKeyAction");
 			
 			add_type_make_named<BaseSwitchTabsAction, SwitchTabsAction>("SwitchTabsA");
 			add_type_make_named<BaseSwitchTabsAction, WhileSwitchTabsAction>("WhileSwitchTabsA");
+			add_names<BaseSwitchTabsAction::Make>("BaseSwitchTabsAction");
 			
 			add_type_make_named<IBaseInteraction, HotkeyInteraction>("HotkeyI");
 			add_type_make_named<IBaseInteraction, OneKeyInteraction>("OneKeyI");
 			add_type_make_named<IBaseInteraction, KeysInteraction>("KeysI");
 			add_type_make_named<IBaseInteraction, EmptyInteraction>("EmptyI");
+			add_names<IBaseInteraction::Make>("IBaseInteraction");
 			
 			add_type_make_named<IHidePanelInteraction, DontHidePanelInteraction>("DontHidePI");
 			add_type_make_named<IHidePanelInteraction, ClickHidePanelInteraction>("ClickHidePI");
 			add_type_make_named<IHidePanelInteraction, PointingHidePanelInteraction>("PointingHidePI");
-			add_type_make<IPanelInteraction, IHidePanelInteraction>();
+			add_type_make_named<IPanelInteraction, IHidePanelInteraction>("IHidePI");
 			add_type_make_named<IDisplayPanelInteraction, ClickDisplayPanelInteraction>("ClickDisplayPI");
 			add_type_make_named<IDisplayPanelInteraction, PointingDisplayPanelInteraction>("PointingDisplayPI");
-			add_type_make<IPanelInteraction, IDisplayPanelInteraction>();
+			add_type_make_named<IPanelInteraction, IDisplayPanelInteraction>("IDisplayPI");
 			add_type_make_named<IMovePanelInteraction, CoefficientMovePanelInteraction>("CoefficientMovePI");
 			add_type_make_named<IMovePanelInteraction, DontMovePanelInteraction>("DontMovePI");
 			add_type_make_named<IMovePanelInteraction, SideMovePanelInteraction>("SideMovePI");
-			add_type_make<IPanelInteraction, IMovePanelInteraction>();
+			add_type_make_named<IPanelInteraction, IMovePanelInteraction>("IMovePI");
+			add_names<IPanelInteraction::Make>("IPanelInteraction");
 			
 			add_type_make<IBasicInteraction<Text&>, BasicKeysInteraction<Text&> >("TextKeysInteraction", "TextKeysI");
 			add_type_make<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&> >("TextHotkeyInteraction", "TextHotkeyI");
 			add_type_make<IBasicInteraction<Text&>, BasicEmptyInteraction<Text&> >("TextEmptyInteraction", "TextEmptyI");
+			add_names<IBasicInteraction<Text&>::Make>("ITextInteraction");
 			
 			add_fn_make<OnlyDrawable>(video_convert, "Video");
 			//add_fn<Box>(switcher_tabs_decode_pointer, "SwitcherTabs", "SwitcherT");
-			
 			add_type_make_named<INonInteractive, Empty>();
 			add_type_make_named<INonInteractive, FullColor>();
 			add_type_make_named<INonInteractive, RoundedRectangle>();
@@ -180,7 +196,7 @@ namespace ie {
 			add_type_make<INonInteractive, Caption>("Caption");
 			add_type_make<INonInteractive, EditCaption>("EditCaption");
 			add_type_make_named<INonInteractive, BoxUninteractive>();
-			add_type_make<IScalable, INonInteractive>();
+			add_type_make_named<IScalable, INonInteractive>();
 			add_type_make_named<Box, BoxDebug>();
 			add_type_make_named<Box, BoxBackground>();
 			add_type_make_named<Box, BoxAlternative>();
@@ -203,17 +219,19 @@ namespace ie {
 			add_type_make_named<Box, BoxSwitcherTabs>();
 			add_type_make_named<Box, BoxConstCenter>();
 			add_type_make_named<Box, BoxUninteractive>();
-			add_type_make<IScalable, Box>();
+			add_type_make_named<IScalable, Box>();
 			add_type_make_named<IScalable, Slider>();
 			add_type_make_named<IScalable, ConstSlider>();
 			add_type_make_named<IScalable, ButtonPanel>();
 			add_type_make_named<IScalable, Button>();
 			add_type_make_named<IScalable, Switcher>();
-			add_type_make<IComponent, IScalable>();
+			add_type_make_named<IComponent, IScalable>();
 			add_type_make_named<IComponent, Text>();
+			add_names<IComponent::Make>("IComponent");
 			
 			add_type_make_named<BasePanel, ConstPanel>();
 			add_type_make_named<BasePanel, Panel>();
+			add_names<BasePanel::Make>("BasePanel");
 			
 			add_bool_determine_make<SMString>();
 			add_bool_determine_make<TextBlock>();

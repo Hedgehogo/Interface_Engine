@@ -1,5 +1,25 @@
 //included into ieml-sfml.hpp
 
+namespace tnl {
+	template<typename T>
+	auto tnl::TypeName<sf::Vector2<T> >::type_name() -> StringView {
+		static auto name{[] {
+			auto name{tnl::type_name<T>()};
+			return String{"Vector2("} + String{name.begin(), name.end()} + String{")"};
+		}()};
+		return {name};
+	}
+	
+	template<typename T>
+	auto tnl::TypeName<sf::Rect<T> >::type_name() -> StringView {
+		static auto name{[] {
+			auto name{tnl::type_name<T>()};
+			return String{"Rect("} + String{name.begin(), name.end()} + String{")"};
+		}()};
+		return {name};
+	}
+}
+
 namespace ieml {
 	namespace detail {
 		template<typename T>

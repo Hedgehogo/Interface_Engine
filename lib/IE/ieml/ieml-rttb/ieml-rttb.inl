@@ -7,6 +7,17 @@ namespace rttb {
 	}
 }
 
+namespace tnl {
+	template<typename Type_>
+	auto TypeName<Type_*>::type_name() -> StringView {
+		static auto name{[] {
+			auto name{tnl::type_name<Type_>()};
+			return String{"dyn "} + String{name.begin(), name.end()};
+		}()};
+		return {name};
+	}
+}
+
 namespace ieml {
 	template<typename Type_>
 	auto Decode<char, Type_*>::decode(const Node& node) -> orl::Option<Type_*> {

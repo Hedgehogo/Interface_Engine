@@ -5,6 +5,43 @@
 #include "LoadTextStyle/LoadTextStyle.hpp"
 #include "../ieml-basic/ieml-basic.hpp"
 
+namespace tnl {
+	template<>
+	struct TypeName<sf::String> {
+		constexpr static auto type_name = StringView{"String32"};
+	};
+	
+	template<typename T>
+	struct TypeName<sf::Vector2<T> > {
+		static auto type_name() -> StringView;
+	};
+	
+	template<typename T>
+	struct TypeName<sf::Rect<T> > {
+		static auto type_name() -> StringView;
+	};
+	
+	template<>
+	struct TypeName<sf::Color> {
+		constexpr static auto type_name = StringView{"Color"};
+	};
+	
+	template<>
+	struct TypeName<ie::LoadTextStyle> {
+		constexpr static auto type_name = StringView{"TextStyle"};
+	};
+	
+	template<>
+	struct TypeName<sf::Mouse::Button> {
+		constexpr static auto type_name = StringView{"MouseButton"};
+	};
+	
+	template<>
+	struct TypeName<ie::LoadShader> {
+		constexpr static auto type_name = StringView{"Shader"};
+	};
+}
+
 namespace ieml {
 	template<>
 	struct Decode<char, sf::String> {

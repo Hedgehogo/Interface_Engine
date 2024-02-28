@@ -61,6 +61,11 @@ namespace ie {
 }
 
 template<typename Type_>
+struct tnl::TypeName<ie::MakeDyn<Type_> > {
+	static auto type_name() -> StringView;
+};
+
+template<typename Type_>
 struct ieml::Decode<char, ie::MakeDyn<Type_> > {
 	static orl::Option<ie::MakeDyn<Type_> > decode(ieml::Node const& node);
 };
