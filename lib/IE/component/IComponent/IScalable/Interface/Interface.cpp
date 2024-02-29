@@ -5,8 +5,8 @@
 #include "IE/modules/yaml-cpp/modules/load_modules.hpp"
 
 namespace ie {
-	Interface::Make::Make(BoxPtr<IScalable::Make>&& object, AnimationManager animation_manager) :
-		object(std::move(object)), animation_manager(std::move(animation_manager)) {
+	Interface::Make::Make(BoxPtr<IScalable::Make>&& object) :
+		object(std::move(object)) {
 	}
 	
 	Interface* Interface::Make::make(InitInfo init_info) {
@@ -16,7 +16,6 @@ namespace ie {
 	Interface::Interface(Make&& make, InitInfo init_info) :
 		window_(&init_info.window),
 		render_target_(&init_info.render_target),
-		animation_manager_(std::move(make.animation_manager)),
 		object_(make.object->make(
 			{
 				init_info.window,
@@ -36,12 +35,10 @@ namespace ie {
 	Interface::Interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
-		BoxPtr<IScalable::Make>&& object,
-		AnimationManager animation_manager
+		BoxPtr<IScalable::Make>&& object
 	) :
 		window_(&window),
 		render_target_(&window),
-		animation_manager_(std::move(animation_manager)),
 		object_(object->make(
 			{
 				window,
@@ -116,7 +113,6 @@ namespace ie {
 	}
 	
 	void Interface::update() {
-		animation_manager_.update();
 		panel_manager_.update();
 		update_manager_.update();
 		update_cluster(mouse_position_);

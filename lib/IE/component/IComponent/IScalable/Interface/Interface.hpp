@@ -17,12 +17,8 @@ namespace ie {
 	public:
 		struct Make : public virtual IScalable::Make {
 			BoxPtr<IScalable::Make> object;
-			AnimationManager animation_manager = AnimationManager{{}};
 			
-			Make(
-				BoxPtr<IScalable::Make>&& object,
-				AnimationManager animation_manager = AnimationManager{{}}
-			);
+			Make(BoxPtr<IScalable::Make>&& object);
 			
 			Interface* make(InitInfo init_info) override;
 		};
@@ -32,8 +28,7 @@ namespace ie {
 		explicit Interface(
 			sf::RenderWindow& window,
 			DynBuffer& dyn_buffer,
-			BoxPtr<IScalable::Make>&& object,
-			AnimationManager animation_manager = AnimationManager{{}}
+			BoxPtr<IScalable::Make>&& object
 		);
 		
 		sf::RenderTarget& get_render_target();
@@ -81,7 +76,6 @@ namespace ie {
 		UpdateManager update_manager_;
 		InteractionManager interaction_manager_;
 		PanelManager panel_manager_;
-		AnimationManager animation_manager_;
 		BoxPtr<IScalable> object_;
 		sf::Vector2f mouse_position_;
 		bool active_;

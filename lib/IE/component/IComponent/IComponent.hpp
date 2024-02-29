@@ -3,7 +3,6 @@
 #include "IE/component/IDrawable/DrawManager/DrawManager.hpp"
 #include "IE/component/IUpdatable/UpdateManager/UpdateManager.hpp"
 #include "IE/interaction/InteractionManager/InteractionManager.hpp"
-#include "IE/animation/AnimationManager/AnimationManager.hpp"
 #include "IE/initialization/make/make.hpp"
 #include "IE/utils/reduce/reduce.hpp"
 #include "IE/utils/vector/vector.hpp"
