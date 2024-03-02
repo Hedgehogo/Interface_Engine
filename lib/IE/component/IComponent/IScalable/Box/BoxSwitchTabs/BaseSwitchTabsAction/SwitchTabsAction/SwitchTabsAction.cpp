@@ -1,5 +1,4 @@
 #include "SwitchTabsAction.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	SwitchTabsAction::Make::Make(size_t index) : index(index) {

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../IInteraction.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	template<typename T>
@@ -31,11 +30,11 @@ namespace ie {
 	};
 	
 	using EmptyInteraction = BasicEmptyInteraction<>;
-	
-	template<typename T>
-	struct DecodePointer<BasicEmptyInteraction<T> > {
-		static auto decode_pointer(const YAML::Node&, BasicEmptyInteraction<T>*& empty_interaction) -> bool;
-	};
 }
+
+template<typename T>
+struct ieml::Decode<char, ie::BasicEmptyInteraction<T> > {
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BasicEmptyInteraction<T> >;
+};
 
 #include "BasicEmptyInteraction.inl"

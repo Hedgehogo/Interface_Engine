@@ -2,7 +2,6 @@
 
 #include "../BaseTextBlock.hpp"
 #include "../../BaseCharacter/Character/Character.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
 #include "IE/ieml/shortcuts/shortcuts.hpp"
 #include "IE/ieml/ieml-sfml/FileBuffer/FileBuffer.hpp"
 #include "IE/utils/utf/to_utf/to_utf.hpp"

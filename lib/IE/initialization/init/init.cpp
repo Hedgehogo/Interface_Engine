@@ -3,7 +3,7 @@
 #include "IE/sizing-positioning/ISizing2/Functions/determine_sizing2/determine_sizing2.hpp"
 #include "IE/sizing-positioning/IPositioning/Functions/determine_positioning/determine_positioning.hpp"
 #include "IE/sizing-positioning/IPositioning2/Functions/determine_positioning2/determine_positioning2.hpp"
-#include "IE/modules/yaml-cpp/modules/load_modules.hpp"
+#include "IE/modules/load_modules.hpp"
 #include "IE/ieml/shortcuts/shortcuts.hpp"
 #include "IE/utils/meta/is_contains_v/is_contains_v.hpp"
 #include "config.h"
@@ -31,6 +31,7 @@ namespace ie {
 		add_names<ISReadable<T> >(std::string("I") + name);
 		
 		add_type_make<KeyAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
+		add_type_make<KeyAction, AddSValueAction<T> >(std::string("Add") + name + std::string("Action"));
 		
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
 			add_type_with_make<SString, SToString<T> >(std::string("ToString") + std::string(1, first));

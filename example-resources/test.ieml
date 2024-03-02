@@ -1,14 +1,21 @@
 object: = BoxConstBorder:
-	border-distance: 20
-	side: right
-	const-object: = Slider:
-		slider: = Capsule: red
-		background: green
-		value:
-			x: 0
-			y: &value 0
+	border-distance: 40
+	side: down
+	const-object: = BoxBorderHorizontal:
+		first-object: = Button:
+			background: red
+			interaction: = OneKeyI:
+				action: = AddIntAction:
+					value: &value 0
+					constant: 1
+		second-object: = Button:
+			background: green
+			interaction: = OneKeyI:
+				action: = AddIntAction:
+					value: *value
+					constant: -1
 	second-object: = EditCaption:
-		text: = ToStringF:
+		text: = ToStringI:
 			value: > 0.000000
 			args:
 				- *value

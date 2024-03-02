@@ -25,10 +25,9 @@ namespace ie {
 	template<typename T>
 	auto BasicEmptyInteraction<T>::finish(sf::Vector2i) -> void {
 	}
-	
-	template<typename T>
-	auto DecodePointer<BasicEmptyInteraction<T> >::decode_pointer(YAML::Node const&, BasicEmptyInteraction<T>*& empty_interaction) -> bool {
-		empty_interaction = new BasicEmptyInteraction<T>{};
-		return true;
-	}
+}
+
+template<typename T>
+auto ieml::Decode<char, ie::BasicEmptyInteraction<T> >::decode(ieml::Node const&) -> orl::Option<ie::BasicEmptyInteraction<T> > {
+	return ie::BasicEmptyInteraction<T>{};
 }

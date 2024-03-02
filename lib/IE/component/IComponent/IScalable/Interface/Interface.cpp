@@ -2,7 +2,7 @@
 
 #include <cmath>
 #include <IEML/parser.hpp>
-#include "IE/modules/yaml-cpp/modules/load_modules.hpp"
+#include "IE/modules/load_modules.hpp"
 
 namespace ie {
 	Interface::Make::Make(BoxPtr<IScalable::Make>&& object) :

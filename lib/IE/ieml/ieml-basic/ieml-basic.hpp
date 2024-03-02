@@ -5,6 +5,10 @@
 #include "IE/ieml/ieml-rttb/ieml-rttb.hpp"
 #include "LoadString/LoadString.hpp"
 
+namespace ie {
+	using namespace bp;
+}
+
 namespace tnl {
 	template<typename T_>
 	struct TypeName<bp::BoxPtr<T_> > {
