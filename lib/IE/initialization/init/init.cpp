@@ -31,6 +31,7 @@ namespace ie {
 		add_names<ISReadable<T> >(std::string("I") + name);
 		
 		add_type_make<KeyAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
+		add_type_make<KeyAction, AddSValueAction<T> >(std::string("Add") + name + std::string("Action"));
 		
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
 			add_type_with_make<SString, SToString<T> >(std::string("ToString") + std::string(1, first));

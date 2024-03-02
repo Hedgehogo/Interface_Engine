@@ -56,6 +56,7 @@
 #include "IE/interaction/IInteraction/BasicHotkeyInteraction/BasicHotkeyInteraction.hpp"
 #include "IE/interaction/IAction/BasicKeyAction/BasicOpenUrlAction/BasicOpenUrlAction.hpp"
 #include "IE/interaction/IAction/BasicKeyAction/BasicSetSValueAction/BasicSetSValueAction.hpp"
+#include "IE/interaction/IAction/BasicKeyAction/BasicAddSValueAction/BasicAddSValueAction.hpp"
 #include "IE/interaction/IAction/BasicKeyAction/BasicCloseWindowAction/BasicCloseWindowAction.hpp"
 #include "IE/component/IComponent/IScalable/BasicInteractiveData/Switcher/SwitherAction/SwitcherAction.hpp"
 #include "IE/shared/ISReadable/readable.hpp"
