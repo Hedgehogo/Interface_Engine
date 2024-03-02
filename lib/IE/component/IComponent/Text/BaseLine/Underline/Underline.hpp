@@ -9,24 +9,24 @@ namespace ie {
 		struct Make : public BaseLine::Make {
 			orl::Option<sf::Color> color;
 			
-			explicit Make(const orl::Option<sf::Color>& color = {});
+			Make(orl::Option<sf::Color> color = {});
 			
-			Underline* make(LineInitInfo init_info) override;
+			auto make(LineInitInfo init_info) -> Underline* override;
 		};
 		
 		Underline(Make&& make, LineInitInfo init_info);
 		
-		void resize(float start, float end, float height) override;
+		auto resize(float start, float end, float height) -> void override;
 		
-		Underline* copy() const override;
+		auto copy() const -> Underline* override;
 	
 	protected:
-		float underline_offset;
-		float underline_thickness;
+		float underline_offset_;
+		float underline_thickness_;
 	};
 }
 
 template<>
 struct ieml::Decode<char, ie::Underline::Make> {
-	static orl::Option<ie::Underline::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Underline::Make>;
 };

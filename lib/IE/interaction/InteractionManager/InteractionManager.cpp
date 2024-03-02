@@ -7,38 +7,39 @@ namespace ie {
 		interactions_(), add_interactions_(), delete_interactions_(), position_(0, 0), block_(false) {
 	}
 	
-	size_t InteractionManager::size() {
+	auto InteractionManager::size() -> size_t {
 		return interactions_.size();
 	}
 	
-	IInteraction& InteractionManager::get(size_t index) {
+	auto InteractionManager::get(size_t index) -> IInteraction& {
 		return *interactions_.at(index);
 	}
 	
-	void InteractionManager::add_interaction(IInteraction& interaction) {
+	auto InteractionManager::add_interaction(IInteraction& interaction) -> void {
 		add_interactions_.push_back(&interaction);
 	}
 	
-	void InteractionManager::delete_interaction(IInteraction& interaction) {
-		if(auto iterator = std::find(interactions_.begin(), interactions_.end(), &interaction); iterator != interactions_.end())
+	auto InteractionManager::delete_interaction(IInteraction& interaction) -> void {
+		if(auto iterator = std::find(interactions_.begin(), interactions_.end(), &interaction); iterator != interactions_.end()) {
 			interactions_.erase(iterator);
+		}
 		delete_interactions_.push_back(&interaction);
 	}
 	
-	void InteractionManager::clear() {
+	auto InteractionManager::clear() -> void {
 		for(auto& interaction: interactions_) {
 			interaction->finish(position_);
 		}
 		interactions_.clear();
 	}
 	
-	bool InteractionManager::is_blocked() const {
+	auto InteractionManager::is_blocked() const -> bool {
 		return std::any_of(this->interactions_.begin(), this->interactions_.end(), [](IInteraction* interaction) {
 			return interaction->is_blocked();
 		});
 	}
 	
-	void InteractionManager::update(sf::Vector2i mouse_position) {
+	auto InteractionManager::update(sf::Vector2i mouse_position) -> void {
 		position_ = mouse_position;
 		
 		if(!delete_interactions_.empty()) {

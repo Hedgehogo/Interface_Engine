@@ -15,7 +15,7 @@
 #endif
 
 namespace ie {
-	void init(int argc, char* argv[], std::filesystem::path modules_list) {
+	auto init(int argc, char* argv[], std::filesystem::path modules_list) -> void {
 #ifdef IE_ImageMagick_FOUND
 		Magick::InitializeMagick("");
 #endif
@@ -24,7 +24,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void ieml_rttb_init_shared(char first, std::string name) {
+	auto ieml_rttb_init_shared(char first, std::string name) -> void {
 		add_type_with_make<ISMutable<T>, SMutable<T> >(std::string("M") + name);
 		add_type_with_make<ISReadable<T>, ISMutable<T> >();
 		add_type_with_make<ISReadable<T>, SReadable<T> >(name);
@@ -72,7 +72,7 @@ namespace ie {
 		}
 	}
 	
-	void ieml_rttb_init() {
+	auto ieml_rttb_init() -> void {
 		[[maybe_unused]] static bool once{[]() {
 			ieml_rttb_init_shared<bool>('B', "Bool");
 			ieml_rttb_init_shared<size_t>('S', "Size");

@@ -7,7 +7,7 @@ namespace ie {
 	namespace detail {
 		template<typename T_>
 		struct SLerp {
-			static T_ lerp(SRanged<T_> const& to, ISRanged<T_>& from);
+			static auto lerp(SRanged<T_> const& to, ISRanged<T_>& from) -> T_;
 		};
 	}
 	

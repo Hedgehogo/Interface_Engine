@@ -13,7 +13,7 @@ namespace ie {
 		struct BasicPressedInteraction : public BasicOneKeyInteraction<T>, public virtual IBasicBlockInteraction<T> {
 			BasicPressedInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
 			
-			ie::BasicPressedInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicPressedInteraction<T>* override;
 		};
 	}
 	
@@ -24,7 +24,7 @@ namespace ie {
 		
 		BasicPressedInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		void update(sf::Vector2i mouse_position) override;
+		auto update(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
 		InteractionManager* interaction_manager_;

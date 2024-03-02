@@ -5,7 +5,7 @@ namespace ie {
 	ClickDisplayPanelInteraction::Make::Make(Key key) : key(key) {
 	}
 	
-	ClickDisplayPanelInteraction* ClickDisplayPanelInteraction::Make::make(PanelActionInitInfo init_info) {
+	auto ClickDisplayPanelInteraction::Make::make(PanelActionInitInfo init_info) -> ClickDisplayPanelInteraction* {
 		return new ClickDisplayPanelInteraction{std::move(*this), init_info};
 	}
 	
@@ -13,16 +13,18 @@ namespace ie {
 		ClickPanelInteraction(make_box_ptr<DisplayPanelAction::Make>(), make.key, init_info) {
 	}
 	
-	void ClickDisplayPanelInteraction::start(sf::Vector2i) {
+	auto ClickDisplayPanelInteraction::start(sf::Vector2i) -> void {
 		dynamic_cast<PanelAction&>(*action_).get_panel()->set_parent_processed(true);
 	}
 	
-	void ClickDisplayPanelInteraction::finish(sf::Vector2i mouse_position) {
+	auto ClickDisplayPanelInteraction::finish(sf::Vector2i mouse_position) -> void {
 		BasicOneKeyInteraction<Panel&>::finish(mouse_position);
 		dynamic_cast<PanelAction&>(*action_).get_panel()->set_parent_processed(false);
 	}
 }
 
-orl::Option<ie::ClickDisplayPanelInteraction::Make> ieml::Decode<char, ie::ClickDisplayPanelInteraction::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::ClickDisplayPanelInteraction::Make>::decode(
+	ieml::Node const& node
+) -> orl::Option<ie::ClickDisplayPanelInteraction::Make> {
 	return {{node.at("key").except().as<ie::Key>().except()}};
 }

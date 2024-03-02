@@ -8,11 +8,16 @@ namespace ie {
 			std::string name;
 			orl::Option<ieml::NodeType> type{};
 			
-			[[nodiscard]] bool present(ieml::MapData const& map) const;
+			[[nodiscard]] auto present(ieml::MapData const& map) const -> bool;
 		};
 	}
 	
-	bool determine(ieml::Node const& node, std::initializer_list<detail::IemlArg> args, size_t size_addition = 0);
+	auto determine(ieml::Node const& node, std::initializer_list<detail::IemlArg> args, size_t size_addition = 0) -> bool;
 	
-	bool determine(ieml::Node const& node, std::initializer_list<detail::IemlArg> args, std::initializer_list<detail::IemlArg> opt_args, size_t size_addition = 0);
+	auto determine(
+		ieml::Node const& node,
+		std::initializer_list<detail::IemlArg> args,
+		std::initializer_list<detail::IemlArg> opt_args,
+		size_t size_addition = 0
+	) -> bool;
 }

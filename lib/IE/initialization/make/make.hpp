@@ -13,7 +13,7 @@ namespace ie {
 		}
 		
 		template<typename Default, typename, typename...>
-		[[noreturn]] [[maybe_unused]] static Default invoke_result_or_else_helper(...) {
+		[[noreturn]] [[maybe_unused]] static auto invoke_result_or_else_helper(...) -> Default {
 		}
 	}
 	
@@ -36,7 +36,7 @@ namespace ie {
 		struct MapMake {
 			using V = MakeType<T, I>;
 			
-			static V map(T&& make, const I& init_info) {
+			static auto map(T&& make, I const& init_info) -> V {
 				return V{std::move(make), init_info};
 			}
 		};
@@ -45,7 +45,7 @@ namespace ie {
 		struct MapMake<T*, I> {
 			using V = MakeType<T, I>*;
 			
-			static V map(T*&& make, const I& init_info) {
+			static auto map(T*&& make, I const& init_info) -> V {
 				return make->make(init_info);
 			}
 		};
@@ -54,7 +54,7 @@ namespace ie {
 		struct MapMake<BoxPtr<T>, I> {
 			using V = BoxPtr<MakeType<T, I> >;
 			
-			static V map(BoxPtr<T>&& make, const I& init_info) {
+			static auto map(BoxPtr<T>&& make, I const& init_info) -> V {
 				return V{make->make(init_info)};
 			}
 		};
@@ -63,7 +63,7 @@ namespace ie {
 		struct MapMake<std::vector<T>, I> {
 			using V = std::vector<typename MapMake<T, MakeInitInfo<I> >::V>;
 			
-			static V map(std::vector<T>&& make, const I& init_info) {
+			static auto map(std::vector<T>&& make, I const& init_info) -> V {
 				V result;
 				if constexpr(std::is_invocable_v<I, size_t>) {
 					size_t size{make.size()};
@@ -83,7 +83,7 @@ namespace ie {
 	}
 	
 	template<typename T, typename I>
-	typename detail::MapMake<T, I>::V map_make(T&& make, const I& init_info) {
+	auto map_make(T&& make, I const& init_info) -> typename detail::MapMake<T, I>::V {
 		return detail::MapMake<T, I>::map(std::move(make), init_info);
 	}
 }

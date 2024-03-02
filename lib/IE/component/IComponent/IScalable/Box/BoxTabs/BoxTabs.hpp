@@ -16,28 +16,28 @@ namespace ie {
 			
 			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, MakeDyn<ISRSize> value, sf::Vector2f min_size = {});
 			
-			BoxTabs* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxTabs* override;
 		};
 		
 		BoxTabs(Make&& make, InitInfo init_info);
 		
-		void set_position(sf::Vector2f position) override;
+		auto set_position(sf::Vector2f position) -> void override;
 		
-		void move(sf::Vector2f position) override;
+		auto move(sf::Vector2f position) -> void override;
 		
-		void set_size(sf::Vector2f size) override;
+		auto set_size(sf::Vector2f size) -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		size_t get_array_size() const override;
+		auto get_array_size() const -> size_t override;
 		
-		IScalable& get_object_at(size_t index) override;
+		auto get_object_at(size_t index) -> IScalable& override;
 		
-		const IScalable& get_object_at(size_t index) const override;
+		auto get_object_at(size_t index) const -> IScalable const& override;
 		
 	protected:
 		std::vector<DrawManager> draw_managers_;
@@ -48,5 +48,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxTabs::Make> {
-	static orl::Option<ie::BoxTabs::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxTabs::Make>;
 };

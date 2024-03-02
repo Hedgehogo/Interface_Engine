@@ -1,7 +1,7 @@
 #include "Empty.hpp"
 
 namespace ie {
-	Empty* Empty::Make::make(InitInfo init_info) {
+	auto Empty::Make::make(InitInfo init_info) -> Empty* {
 		return new Empty{std::move(*this), init_info};
 	}
 	
@@ -11,37 +11,37 @@ namespace ie {
 	Empty::Empty() {
 	}
 	
-	void Empty::draw() {
+	auto Empty::draw() -> void {
 	}
 	
-	void Empty::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto Empty::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 	}
 	
-	bool Empty::update_interactions(sf::Vector2f) {
+	auto Empty::update_interactions(sf::Vector2f) -> bool {
 		return false;
 	}
 	
-	sf::Vector2f Empty::get_min_size() const {
+	auto Empty::get_min_size() const -> sf::Vector2f {
 		return {};
 	}
 	
-	sf::Vector2f Empty::get_normal_size() const {
+	auto Empty::get_normal_size() const -> sf::Vector2f {
 		return {};
 	}
 	
-	void Empty::draw_debug(sf::RenderTarget&, int, int, size_t, size_t) {
+	auto Empty::draw_debug(sf::RenderTarget&, int, int, size_t, size_t) -> void {
 	}
 	
-	LayoutData& Empty::layout_get_data() {
+	auto Empty::layout_get_data() -> LayoutData& {
 		return layout_;
 	}
 	
-	const LayoutData& Empty::layout_get_data() const {
+	auto Empty::layout_get_data() const -> LayoutData const& {
 		return layout_;
 	}
 }
 
-orl::Option<ie::Empty::Make> ieml::Decode<char, ie::Empty::Make>::decode(ieml::Node const&) {
+auto ieml::Decode<char, ie::Empty::Make>::decode(ieml::Node const&) -> orl::Option<ie::Empty::Make> {
 	return {{}};
 }

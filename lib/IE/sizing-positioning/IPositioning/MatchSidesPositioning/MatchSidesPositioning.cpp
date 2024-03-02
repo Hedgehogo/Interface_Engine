@@ -5,7 +5,7 @@ namespace ie {
 		parent_side_(parent_side), object_side_(object_side), offset_(offset) {
 	}
 	
-	float MatchSidesPositioning::find_position(float parent_position, float object_size, float parent_size, float) {
+	auto MatchSidesPositioning::find_position(float parent_position, float object_size, float parent_size, float) -> float {
 		float position{parent_position + offset_};
 		switch(parent_side_) {
 			case Location::Origin:
@@ -30,12 +30,12 @@ namespace ie {
 		return position;
 	}
 	
-	MatchSidesPositioning* MatchSidesPositioning::copy() {
+	auto MatchSidesPositioning::copy() -> MatchSidesPositioning* {
 		return new MatchSidesPositioning{*this};
 	}
 }
 
-orl::Option<ie::MatchSidesPositioning> ieml::Decode<char, ie::MatchSidesPositioning>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::MatchSidesPositioning>::decode(ieml::Node const& node) -> orl::Option<ie::MatchSidesPositioning> {
 	auto map{node.get_map_view().except()};
 	return ie::MatchSidesPositioning{
 		map.at("parent-side").except().as<ie::Location>().except(),

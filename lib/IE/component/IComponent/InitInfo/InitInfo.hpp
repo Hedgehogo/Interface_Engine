@@ -34,18 +34,18 @@ namespace ie {
 			IPanelManager& panel_manager_
 		);
 		
-		InitInfo copy(sf::RenderWindow& window_) const;
+		auto copy(sf::RenderWindow& window_) const -> InitInfo;
 		
-		InitInfo copy(sf::RenderTarget& render_target_) const;
+		auto copy(sf::RenderTarget& render_target_) const -> InitInfo;
 		
-		InitInfo copy(DynBuffer& dyn_buffer_) const;
+		auto copy(DynBuffer& dyn_buffer_) const -> InitInfo;
 		
-		InitInfo copy(DrawManager& draw_manager_) const;
+		auto copy(DrawManager& draw_manager_) const -> InitInfo;
 		
-		InitInfo copy(UpdateManager& update_manager_) const;
+		auto copy(UpdateManager& update_manager_) const -> InitInfo;
 		
-		InitInfo copy(InteractionManager& interaction_manager_) const;
+		auto copy(InteractionManager& interaction_manager_) const -> InitInfo;
 		
-		InitInfo copy(IPanelManager& panel_manager_) const;
+		auto copy(IPanelManager& panel_manager_) const -> InitInfo;
 	};
 }

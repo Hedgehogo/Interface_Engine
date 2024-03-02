@@ -5,7 +5,7 @@ namespace ie {
 		coefficient(coefficient), addition(addition) {
 	}
 	
-	ParentCoefficientSizing* ParentCoefficientSizing::Make::make(float normal_size) {
+	auto ParentCoefficientSizing::Make::make(float normal_size) -> ParentCoefficientSizing* {
 		return new ParentCoefficientSizing{std::move(*this), normal_size};
 	}
 	
@@ -16,16 +16,16 @@ namespace ie {
 	ParentCoefficientSizing::ParentCoefficientSizing(float coefficient, float addition) : coefficient_(coefficient), addition_(addition) {
 	}
 	
-	float ParentCoefficientSizing::find_size(float parent_size, float) {
+	auto ParentCoefficientSizing::find_size(float parent_size, float) -> float {
 		return parent_size * coefficient_ + addition_;
 	}
 	
-	float ParentCoefficientSizing::get_parent_size(float object_size) {
+	auto ParentCoefficientSizing::get_parent_size(float object_size) -> float {
 		return (object_size - addition_) / coefficient_;
 	}
 }
 
-orl::Option<ie::ParentCoefficientSizing::Make> ieml::Decode<char, ie::ParentCoefficientSizing::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::ParentCoefficientSizing::Make>::decode(ieml::Node const& node) -> orl::Option<ie::ParentCoefficientSizing::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::ParentCoefficientSizing::Make{
 		map.at("coefficient").except().as<float>().except(),

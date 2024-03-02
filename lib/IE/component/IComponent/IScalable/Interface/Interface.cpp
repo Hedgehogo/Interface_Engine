@@ -5,18 +5,17 @@
 #include "IE/modules/yaml-cpp/modules/load_modules.hpp"
 
 namespace ie {
-	Interface::Make::Make(BoxPtr<IScalable::Make>&& object, AnimationManager animation_manager) :
-		object(std::move(object)), animation_manager(std::move(animation_manager)) {
+	Interface::Make::Make(BoxPtr<IScalable::Make>&& object) :
+		object(std::move(object)) {
 	}
 	
-	Interface* Interface::Make::make(InitInfo init_info) {
+	auto Interface::Make::make(InitInfo init_info) -> Interface* {
 		return new Interface{std::move(*this), init_info};
 	}
 	
 	Interface::Interface(Make&& make, InitInfo init_info) :
 		window_(&init_info.window),
 		render_target_(&init_info.render_target),
-		animation_manager_(std::move(make.animation_manager)),
 		object_(make.object->make(
 			{
 				init_info.window,
@@ -36,12 +35,10 @@ namespace ie {
 	Interface::Interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
-		BoxPtr<IScalable::Make>&& object,
-		AnimationManager animation_manager
+		BoxPtr<IScalable::Make>&& object
 	) :
 		window_(&window),
 		render_target_(&window),
-		animation_manager_(std::move(animation_manager)),
 		object_(object->make(
 			{
 				window,
@@ -56,74 +53,73 @@ namespace ie {
 		active_(true) {
 	}
 	
-	bool Interface::is_in_window(sf::Vector2f position) {
+	auto Interface::is_in_window(sf::Vector2f position) -> bool {
 		return
 			position.x > 0 && position.x < static_cast<float>(render_target_->getSize().x) &&
 			position.y > 0 && position.y < static_cast<float>(render_target_->getSize().y);
 	}
 	
-	sf::RenderTarget& Interface::get_render_target() {
+	auto Interface::get_render_target() -> sf::RenderTarget& {
 		return *render_target_;
 	}
 	
-	DrawManager& Interface::get_draw_manager() {
+	auto Interface::get_draw_manager() -> DrawManager& {
 		return draw_manager_;
 	}
 	
-	UpdateManager& Interface::get_update_manager() {
+	auto Interface::get_update_manager() -> UpdateManager& {
 		return update_manager_;
 	}
 	
-	InteractionManager& Interface::get_interaction_manager() {
+	auto Interface::get_interaction_manager() -> InteractionManager& {
 		return interaction_manager_;
 	}
 	
-	PanelManager& Interface::get_panel_manager() {
+	auto Interface::get_panel_manager() -> PanelManager& {
 		return panel_manager_;
 	}
 	
-	IScalable& Interface::get_object() {
+	auto Interface::get_object() -> IScalable& {
 		return *object_;
 	}
 	
-	void Interface::draw() {
+	auto Interface::draw() -> void {
 		draw_manager_.draw();
 		panel_manager_.draw();
 	}
 	
-	void Interface::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto Interface::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		object_->resize(size, position);
 	}
 	
-	sf::Vector2f Interface::get_area_position() const {
+	auto Interface::get_area_position() const -> sf::Vector2f {
 		return object_->get_area_position();
 	}
 	
-	sf::Vector2f Interface::get_area_size() const {
+	auto Interface::get_area_size() const -> sf::Vector2f {
 		return object_->get_area_size();
 	}
 	
-	sf::Vector2f Interface::get_min_size() const {
+	auto Interface::get_min_size() const -> sf::Vector2f {
 		return object_->get_min_size();
 	}
 	
-	sf::Vector2f Interface::get_normal_size() const {
+	auto Interface::get_normal_size() const -> sf::Vector2f {
 		return object_->get_normal_size();
 	}
 	
-	void Interface::update_cluster(sf::Vector2f mouse_position) {
+	auto Interface::update_cluster(sf::Vector2f mouse_position) -> void {
 		interaction_manager_.update(sf::Vector2i(mouse_position));
 	}
 	
-	void Interface::update() {
-		animation_manager_.update();
+	auto Interface::update() -> void {
 		panel_manager_.update();
 		update_manager_.update();
 		update_cluster(mouse_position_);
 		active_ = false;
 	}
 	
-	void Interface::update(sf::Vector2f mouse_position, bool active) {
+	auto Interface::update(sf::Vector2f mouse_position, bool active) -> void {
 		if(active) {
 			this->update_interactions(mouse_position);
 		} else {
@@ -132,7 +128,7 @@ namespace ie {
 		this->update();
 	}
 	
-	bool Interface::update_interactions(sf::Vector2f mouse_position) {
+	auto Interface::update_interactions(sf::Vector2f mouse_position) -> bool {
 		active_ = true;
 		this->mouse_position_ = mouse_position;
 		if(is_in_window(mouse_position) && !interaction_manager_.is_blocked()) {
@@ -143,18 +139,18 @@ namespace ie {
 		return true;
 	}
 	
-	void Interface::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto Interface::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		object_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
 	
-	void Interface::set_render_window_size(sf::RenderWindow& window) {
+	auto Interface::set_render_window_size(sf::RenderWindow& window) -> void {
 		auto new_window_size{ie::max(get_normal_size(), sf::Vector2f(window.getSize()))};
-		sf::Vector2u window_size = {static_cast<unsigned>(std::ceil(new_window_size.x)), static_cast<unsigned>(std::ceil(new_window_size.y))};
+		auto window_size{sf::Vector2u{sf::Vector2f{std::ceil(new_window_size.x), std::ceil(new_window_size.y)}}};
 		window.setSize(window_size);
 		set_size(sf::Vector2f(window_size));
 	}
 	
-	Interface::Make make_interface(std::filesystem::path file_path, int argc, char* argv[]) {
+	auto make_interface(std::filesystem::path file_path, int argc, char* argv[]) -> Interface::Make {
 		if(auto modules = std::filesystem::path{file_path}.replace_filename("modules.ieml"); std::filesystem::exists(modules)) {
 			load_modules(argc, argv, modules);
 		}
@@ -165,7 +161,7 @@ namespace ie {
 		return Interface::Make{std::move(object)};
 	}
 	
-	Interface make_interface(sf::RenderWindow& window, DynBuffer& dyn_buffer, std::filesystem::path file_path, int argc, char* argv[]) {
+	auto make_interface(sf::RenderWindow& window, DynBuffer& dyn_buffer, std::filesystem::path file_path, int argc, char* argv[]) -> Interface {
 		if(auto modules = std::filesystem::path{file_path}.replace_filename("modules.yaml"); std::filesystem::exists(modules)) {
 			load_modules(argc, argv, modules);
 		}
@@ -177,9 +173,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::Interface::Make> ieml::Decode<char, ie::Interface::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Interface::Make>::decode(ieml::Node const& node) -> orl::Option<ie::Interface::Make> {
 	auto map{node.get_map_view().except()};
-	return ie::Interface::Make{
-		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except()
-	};
+	return {{map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except()}};
 }

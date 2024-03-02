@@ -16,7 +16,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicInteractiveData<T>::update() {
+	auto BasicInteractiveData<T>::update() -> void {
 		if(interact_ != old_interact_) {
 			old_interact_ = interact_;
 			if(interact_) {
@@ -29,7 +29,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicInteractiveData<T>::update_interactions() {
+	auto BasicInteractiveData<T>::update_interactions() -> void {
 		interact_ = true;
 	}
 }

@@ -2,12 +2,12 @@
 #include "IE/utils/utf/to_utf/to_utf.hpp"
 
 namespace ieml {
-	orl::Option<sf::String> Decode<char, sf::String>::decode(ieml::Node const& node) {
+	auto Decode<char, sf::String>::decode(ieml::Node const& node) -> orl::Option<sf::String> {
 		auto str{node.as<ie::LoadString>().except().str};
 		return ie::to_utf32(ie::to_utf32(str));
 	}
 	
-	orl::Option<sf::Color> Decode<char, sf::Color>::decode(ieml::Node const& node) {
+	auto Decode<char, sf::Color>::decode(ieml::Node const& node) -> orl::Option<sf::Color> {
 		auto& clear_node{node.get_clear()};
 		for(auto list: clear_node.get_list_view().ok_or_none()) {
 			return sf::Color{
@@ -48,7 +48,7 @@ namespace ieml {
 		return sf::Color{uint8_t(r), uint8_t(g), uint8_t(b), uint8_t(a)};
 	}
 	
-	orl::Option<ie::LoadTextStyle> Decode<char, ie::LoadTextStyle>::decode(ieml::Node const& node) {
+	auto Decode<char, ie::LoadTextStyle>::decode(ieml::Node const& node) -> orl::Option<ie::LoadTextStyle> {
 		auto& clear_node{node.get_clear()};
 		for(auto& list: clear_node.get_list().ok_or_none()) {
 			sf::Text::Style result{sf::Text::Style::Regular};
@@ -72,7 +72,7 @@ namespace ieml {
 		return {};
 	}
 	
-	orl::Option<sf::Mouse::Button> Decode<char, sf::Mouse::Button>::decode(ieml::Node const& node) {
+	auto Decode<char, sf::Mouse::Button>::decode(ieml::Node const& node) -> orl::Option<sf::Mouse::Button> {
 		auto& clear_node{node.get_clear()};
 		auto& str{clear_node.get_string().except()};
 		if(str == "right") {
@@ -91,7 +91,7 @@ namespace ieml {
 		return {};
 	}
 	
-	orl::Option<ie::LoadShader> Decode<char, ie::LoadShader>::decode(ieml::Node const& node) {
+	auto Decode<char, ie::LoadShader>::decode(ieml::Node const& node) -> orl::Option<ie::LoadShader> {
 		return ie::LoadShader::decode(node);
 	}
 }

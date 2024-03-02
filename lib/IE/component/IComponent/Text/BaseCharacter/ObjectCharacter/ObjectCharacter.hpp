@@ -14,41 +14,41 @@ namespace ie {
 		
 		explicit ObjectCharacter(BoxPtr<IScalable>&& object, ObjectSpecial special = ObjectSpecial::No);
 		
-		ObjectCharacter(const ObjectCharacter& other);
+		ObjectCharacter(ObjectCharacter const& other);
 		
-		void set_position(sf::Vector2f position) override;
+		auto set_position(sf::Vector2f position) -> void override;
 		
-		void resize(sf::Vector2f position, float end_position) override;
+		auto resize(sf::Vector2f position, float end_position) -> void override;
 		
-		void move(sf::Vector2f position) override;
+		auto move(sf::Vector2f position) -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position);
+		auto update_interactions(sf::Vector2f mouse_position) -> bool;
 		
-		const std::vector<BoxPtr<BaseLine>>& get_line() override;
+		auto get_line() -> std::vector<BoxPtr<BaseLine> > const& override;
 		
-		sf::Vector2f get_position() const override;
+		auto get_position() const -> sf::Vector2f override;
 		
-		sf::Vector2i get_size_texture() override;
+		auto get_size_texture() -> sf::Vector2i override;
 		
-		float get_height() const override;
+		auto get_height() const -> float override;
 		
-		float get_advance() override;
+		auto get_advance() -> float override;
 		
-		float get_kerning(char32_t) override;
+		auto get_kerning(char32_t) -> float override;
 		
-		Special is_special() override;
+		auto is_special() -> Special override;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		char32_t get_char() override;
+		auto get_char() -> char32_t override;
 		
-		float get_min_advance() override;
+		auto get_min_advance() -> float override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
-		BoxPtr<IScalable> object;
-		std::vector<BoxPtr<BaseLine>> lines;
-		BaseCharacter::Special special;
+		BoxPtr<IScalable> object_;
+		std::vector<BoxPtr<BaseLine> > lines_;
+		BaseCharacter::Special special_;
 	};
 }

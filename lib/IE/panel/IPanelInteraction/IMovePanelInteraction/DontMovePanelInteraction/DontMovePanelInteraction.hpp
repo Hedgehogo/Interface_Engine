@@ -8,26 +8,26 @@ namespace ie {
 	class DontMovePanelInteraction : public virtual IMovePanelInteraction {
 	public:
 		struct Make : public virtual IMovePanelInteraction::Make {
-			DontMovePanelInteraction* make(PanelActionInitInfo init_info) override;
+			auto make(PanelActionInitInfo init_info) -> DontMovePanelInteraction* override;
 		};
 		
 		DontMovePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
 		DontMovePanelInteraction() = default;
 		
-		bool get_at_start() override;
+		auto get_at_start() -> bool override;
 		
-		void move(sf::Vector2i) override;
+		auto move(sf::Vector2i) -> void override;
 		
-		void start(sf::Vector2i) override;
+		auto start(sf::Vector2i) -> void override;
 		
-		void update(sf::Vector2i) override;
+		auto update(sf::Vector2i) -> void override;
 		
-		void set_panel(Panel&) override;
+		auto set_panel(Panel&) -> void override;
 	};
 }
 
 template<>
 struct ieml::Decode<char, ie::DontMovePanelInteraction::Make> {
-	static orl::Option<ie::DontMovePanelInteraction::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::DontMovePanelInteraction::Make>;
 };

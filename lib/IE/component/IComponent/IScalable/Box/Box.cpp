@@ -5,11 +5,11 @@ namespace ie {
 		layout_({}, size), minimum_size_(min_size) {
 	}
 	
-	LayoutData& Box::layout_get_data() {
+	auto Box::layout_get_data() -> LayoutData& {
 		return layout_;
 	}
 	
-	const LayoutData& Box::layout_get_data() const {
+	auto Box::layout_get_data() const -> LayoutData const& {
 		return layout_;
 	}
 }

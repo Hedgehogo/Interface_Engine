@@ -26,14 +26,14 @@ namespace ie {
 			
 			Make(Key key, sf::Vector2i division = {10, 10}, bool wheel_horizontal = false);
 			
-			SliderInteraction* make(BasicActionInitInfo<BaseSlider&> init_info) override;
+			auto make(BasicActionInitInfo<BaseSlider&> init_info) -> SliderInteraction* override;
 		};
 		
 		SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info);
 		
-		void set_slider(BaseSlider& slider);
+		auto set_slider(BaseSlider& slider) -> void;
 		
-		void update(sf::Vector2i mouse_position) override;
+		auto update(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
 		SliderWheelAction wheel_action_;

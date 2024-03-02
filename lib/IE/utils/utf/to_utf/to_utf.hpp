@@ -3,7 +3,7 @@
 #include <SFML/System.hpp>
 
 namespace ie {
-	std::u32string to_utf32(std::string_view str);
+	auto to_utf32(std::string_view str) -> std::u32string;
 	
-	sf::String to_utf32(std::u32string_view str);
+	auto to_utf32(std::u32string_view str) -> sf::String;
 }

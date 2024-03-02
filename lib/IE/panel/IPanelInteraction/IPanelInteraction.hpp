@@ -11,9 +11,9 @@ namespace ie {
 	class IPanelInteraction : public virtual IBasicInteraction<Panel&> {
 	public:
 		struct Make : public virtual IBasicInteraction<Panel&>::Make {
-			IPanelInteraction* make(PanelActionInitInfo init_info) override = 0;
+			auto make(PanelActionInitInfo init_info) -> IPanelInteraction* override = 0;
 		};
 		
-		virtual void set_panel(Panel& panel) = 0;
+		virtual auto set_panel(Panel& panel) -> void = 0;
 	};
 }

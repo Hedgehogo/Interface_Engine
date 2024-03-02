@@ -15,7 +15,7 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicMouseFnInteraction<T>* BasicMouseFnInteraction<T>::make(BasicActionInitInfo<T> init_info) {
+		auto BasicMouseFnInteraction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicMouseFnInteraction<T>* {
 			return new ie::BasicMouseFnInteraction<T>{std::move(*this), init_info};
 		}
 	}
@@ -28,22 +28,22 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicKeyAction<T>& BasicMouseFnInteraction<T>::get_left_button_action() {
+	auto BasicMouseFnInteraction<T>::get_left_button_action() -> BasicKeyAction<T>& {
 		return *left_button_action_;
 	}
 	
 	template<typename T>
-	const BasicKeyAction<T>& BasicMouseFnInteraction<T>::get_left_button_action() const {
+	auto BasicMouseFnInteraction<T>::get_left_button_action() const -> BasicKeyAction<T> const& {
 		return *left_button_action_;
 	}
 	
 	template<typename T>
-	BasicKeyAction<T>& BasicMouseFnInteraction<T>::get_right_button_action() {
+	auto BasicMouseFnInteraction<T>::get_right_button_action() -> BasicKeyAction<T>& {
 		return *right_button_action_;
 	}
 	
 	template<typename T>
-	const BasicKeyAction<T>& BasicMouseFnInteraction<T>::get_right_button_action() const {
+	auto BasicMouseFnInteraction<T>::get_right_button_action() const -> BasicKeyAction<T> const& {
 		return *right_button_action_;
 	}
 }

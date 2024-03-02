@@ -11,9 +11,9 @@ namespace ie {
 		
 		BoxView(sf::Vector2f min_size);
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
 	protected:
 		DrawManager draw_manager_;

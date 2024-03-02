@@ -7,10 +7,10 @@ namespace ie {
 	
 	class IAction {
 	public:
-		virtual void start() {
+		virtual auto start() -> void {
 		}
 		
-		virtual void finish() {
+		virtual auto finish() -> void {
 		}
 		
 		virtual ~IAction() = default;

@@ -3,5 +3,5 @@
 #include "IE/ieml/shortcuts/shortcuts.hpp"
 
 namespace ie {
-	orl::Option<std::string> determine_sizing(ieml::Node const& node);
+	auto determine_sizing(ieml::Node const& node) -> orl::Option<std::string>;
 }

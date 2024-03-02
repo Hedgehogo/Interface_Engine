@@ -24,7 +24,7 @@ namespace ie {
 		wheel_sensitivity({1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)}) {
 	}
 	
-	SliderInteraction* SliderInteraction::Make::make(BasicActionInitInfo<BaseSlider&> init_info) {
+	auto SliderInteraction::Make::make(BasicActionInitInfo<BaseSlider&> init_info) -> SliderInteraction* {
 		return new SliderInteraction{std::move(*this), init_info};
 	}
 	
@@ -46,14 +46,14 @@ namespace ie {
 		);
 	}
 	
-	void SliderInteraction::set_slider(BaseSlider& slider) {
+	auto SliderInteraction::set_slider(BaseSlider& slider) -> void {
 		auto& slide_action{dynamic_cast<BasicAddBlockInteractionAction<BaseSlider&>&>(*action_)};
 		auto& slide_interaction{dynamic_cast<BasicPressedInteraction<BaseSlider&>&>(slide_action.get_interaction())};
 		dynamic_cast<SliderAction&>(slide_interaction.get_action()).set_slider(slider);
 		wheel_action_.set_slider(slider);
 	}
 	
-	void SliderInteraction::update(sf::Vector2i mouse_position) {
+	auto SliderInteraction::update(sf::Vector2i mouse_position) -> void {
 		wheel_action_.update(mouse_position, MouseWheel::get_delta().y);
 		return BasicOneKeyInteraction<BaseSlider&>::update(mouse_position);
 	}

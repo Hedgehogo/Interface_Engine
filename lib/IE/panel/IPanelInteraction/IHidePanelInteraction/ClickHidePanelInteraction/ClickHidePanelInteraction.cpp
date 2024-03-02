@@ -5,7 +5,7 @@ namespace ie {
 		key(key), only_on_parent(only_on_parent) {
 	}
 	
-	ClickHidePanelInteraction* ClickHidePanelInteraction::Make::make(PanelActionInitInfo init_info) {
+	auto ClickHidePanelInteraction::Make::make(PanelActionInitInfo init_info) -> ClickHidePanelInteraction* {
 		return new ClickHidePanelInteraction{std::move(*this), init_info};
 	}
 	
@@ -14,7 +14,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::ClickHidePanelInteraction::Make> ieml::Decode<char, ie::ClickHidePanelInteraction::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::ClickHidePanelInteraction::Make>::decode(ieml::Node const& node) -> orl::Option<ie::ClickHidePanelInteraction::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::ClickHidePanelInteraction::Make{
 		map.at("key").except().as<ie::Key>().except(),

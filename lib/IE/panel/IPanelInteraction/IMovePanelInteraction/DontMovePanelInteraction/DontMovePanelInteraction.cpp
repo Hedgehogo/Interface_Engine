@@ -2,30 +2,30 @@
 #include "../../../IPanelManager/IPanelManager.hpp"
 
 namespace ie {
-	DontMovePanelInteraction* DontMovePanelInteraction::Make::make(PanelActionInitInfo init_info) {
+	auto DontMovePanelInteraction::Make::make(PanelActionInitInfo init_info) -> DontMovePanelInteraction* {
 		return new DontMovePanelInteraction{std::move(*this), init_info};
 	}
 	
 	DontMovePanelInteraction::DontMovePanelInteraction(Make&&, PanelActionInitInfo) {
 	}
 	
-	bool DontMovePanelInteraction::get_at_start() {
+	auto DontMovePanelInteraction::get_at_start() -> bool {
 		return false;
 	}
 	
-	void DontMovePanelInteraction::move(sf::Vector2i) {
+	auto DontMovePanelInteraction::move(sf::Vector2i) -> void {
 	}
 	
-	void DontMovePanelInteraction::start(sf::Vector2i) {
+	auto DontMovePanelInteraction::start(sf::Vector2i) -> void {
 	}
 	
-	void DontMovePanelInteraction::update(sf::Vector2i) {
+	auto DontMovePanelInteraction::update(sf::Vector2i) -> void {
 	}
 	
-	void DontMovePanelInteraction::set_panel(Panel&) {
+	auto DontMovePanelInteraction::set_panel(Panel&) -> void {
 	}
 }
 
-orl::Option<ie::DontMovePanelInteraction::Make> ieml::Decode<char, ie::DontMovePanelInteraction::Make>::decode(ieml::Node const&) {
+auto ieml::Decode<char, ie::DontMovePanelInteraction::Make>::decode(ieml::Node const&) -> orl::Option<ie::DontMovePanelInteraction::Make> {
 	return {{}};
 }

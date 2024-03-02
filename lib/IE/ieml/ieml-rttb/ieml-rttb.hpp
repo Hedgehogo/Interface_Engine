@@ -10,7 +10,7 @@ namespace rttb {
 		using Return = DecodePtrReturn<ieml::Decode<char, Type_>, ieml::Node const&, Type_*>;
 		
 		template<typename Type_>
-		static Return<Type_> decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> Return<Type_>;
 	};
 }
 
@@ -24,7 +24,7 @@ namespace tnl {
 namespace ieml {
 	template<typename Type_>
 	struct Decode<char, Type_*> {
-		static orl::Option<Type_*> decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<Type_*>;
 	};
 }
 

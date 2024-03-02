@@ -7,19 +7,19 @@ namespace ie {
 	LayoutData::LayoutData(sf::Vector2f position, sf::Vector2f size) : position(position), size(size) {
 	}
 	
-	void LayoutData::set_position(sf::Vector2f position) {
+	auto LayoutData::set_position(sf::Vector2f position) -> void {
 		this->position = position;
 	}
 	
-	void LayoutData::move(sf::Vector2f position) {
+	auto LayoutData::move(sf::Vector2f position) -> void {
 		this->position += position;
 	}
 	
-	void LayoutData::set_size(sf::Vector2f size) {
+	auto LayoutData::set_size(sf::Vector2f size) -> void {
 		this->size = size;
 	}
 	
-	void LayoutData::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto LayoutData::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		this->size = size;
 		this->position = position;
 	}

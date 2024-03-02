@@ -11,19 +11,19 @@ namespace ie {
 			
 			Make(size_t index = 0);
 			
-			SwitchTabsAction* make(BasicActionInitInfo<BoxSwitchTabs&> init_info) override;
+			auto make(BasicActionInitInfo<BoxSwitchTabs&> init_info) -> SwitchTabsAction* override;
 		};
 		
 		SwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> init_info);
 		
 	protected:
-		void start_pressed() override;
+		auto start_pressed() -> void override;
 		
-		void stop_pressed() override;
+		auto stop_pressed() -> void override;
 		
-		void while_pressed() override;
+		auto while_pressed() -> void override;
 		
-		void while_not_pressed() override;
+		auto while_not_pressed() -> void override;
 		
 		size_t index_;
 		ISMRSize& value_;
@@ -32,5 +32,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::SwitchTabsAction::Make> {
-	static orl::Option<ie::SwitchTabsAction::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::SwitchTabsAction::Make>;
 };

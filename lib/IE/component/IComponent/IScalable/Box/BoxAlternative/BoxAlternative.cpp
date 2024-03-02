@@ -6,7 +6,7 @@ namespace ie {
 		top_object(std::move(top_object)), bottom_object(std::move(bottom_object)), min_size(min_size) {
 	}
 	
-	BoxAlternative* BoxAlternative::Make::make(InitInfo init_info) {
+	auto BoxAlternative::Make::make(InitInfo init_info) -> BoxAlternative* {
 		return new BoxAlternative{std::move(*this), init_info};
 	}
 	
@@ -14,34 +14,34 @@ namespace ie {
 		Box(make.min_size), bottom_object_(make.bottom_object->make(init_info)), top_object_(make.top_object->make(init_info)) {
 	}
 	
-	bool BoxAlternative::update_interactions(sf::Vector2f mouse_position) {
+	auto BoxAlternative::update_interactions(sf::Vector2f mouse_position) -> bool {
 		return top_object_->update_interactions(mouse_position) || bottom_object_->update_interactions(mouse_position);
 	}
 	
-	void BoxAlternative::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxAlternative::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		top_object_->resize(size, position);
 		bottom_object_->resize(size, position);
 	}
 	
-	IScalable& BoxAlternative::get_first_object() {
+	auto BoxAlternative::get_first_object() -> IScalable& {
 		return *top_object_;
 	}
 	
-	const IScalable& BoxAlternative::get_first_object() const {
+	auto BoxAlternative::get_first_object() const -> IScalable const& {
 		return *top_object_;
 	}
 	
-	IScalable& BoxAlternative::get_second_object() {
+	auto BoxAlternative::get_second_object() -> IScalable& {
 		return *bottom_object_;
 	}
 	
-	const IScalable& BoxAlternative::get_second_object() const {
+	auto BoxAlternative::get_second_object() const -> IScalable const& {
 		return *bottom_object_;
 	}
 }
 
-orl::Option<ie::BoxAlternative::Make> ieml::Decode<char, ie::BoxAlternative::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxAlternative::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxAlternative::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::BoxAlternative::Make{
 		map.at("top-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),

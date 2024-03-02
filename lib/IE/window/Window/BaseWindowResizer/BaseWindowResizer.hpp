@@ -8,12 +8,12 @@ namespace ie {
 	
 	class BaseWindowResizer {
 	public:
-		virtual void set_window(Window& window);
-	
-		virtual bool update(sf::Vector2i mouse_position) = 0;
-	
-		virtual ~BaseWindowResizer() = default;
+		virtual auto set_window(Window& window) -> void;
 		
+		virtual auto update(sf::Vector2i mouse_position) -> bool = 0;
+		
+		virtual ~BaseWindowResizer() = default;
+	
 	protected:
 		Window* window_;
 	};

@@ -16,9 +16,9 @@ namespace ie {
 		
 		PanelAction(PanelActionInitInfo init_info);
 		
-		void set_panel(Panel& panel);
+		auto set_panel(Panel& panel) -> void;
 		
-		Panel* get_panel();
+		auto get_panel() -> Panel*;
 		
 	protected:
 		Panel* panel_;

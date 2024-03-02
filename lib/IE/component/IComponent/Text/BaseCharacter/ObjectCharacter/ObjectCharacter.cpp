@@ -1,31 +1,38 @@
 #include "ObjectCharacter.hpp"
 
 namespace ie {
-	ObjectCharacter::ObjectCharacter(BoxPtr<IScalable>&& object, ObjectSpecial special) : object(std::move(object)), special(static_cast<BaseCharacter::Special>(special)) {
+	ObjectCharacter::ObjectCharacter(BoxPtr<IScalable>&& object, ObjectSpecial special) :
+		object_(std::move(object)), special_(static_cast<BaseCharacter::Special>(special)) {
 	}
 	
-	ObjectCharacter::ObjectCharacter(const ObjectCharacter& other) : object(nullptr), special(other.special) {
+	ObjectCharacter::ObjectCharacter(const ObjectCharacter& other) : object_(nullptr), special_(other.special_) {
 	}
 	
 	void ObjectCharacter::set_position(sf::Vector2f position) {
 		position.y -= get_height();
 		BaseCharacter::set_position(position);
-		object->set_position(position);
+		object_->set_position(position);
 	}
 	
 	void ObjectCharacter::resize(sf::Vector2f position, float end_position) {
 		position.y -= get_height();
 		BaseCharacter::set_position(position);
-		object->resize({is_special() == BaseCharacter::Special::FullLine ?  end_position - position.x : object->get_size().x, object->get_size().y}, position);
+		object_->resize(
+			{
+				is_special() == BaseCharacter::Special::FullLine ?
+				end_position - position.x :
+				object_->get_size().x, object_->get_size().y
+			}, position
+		);
 	}
 	
 	void ObjectCharacter::move(sf::Vector2f position) {
 		BaseCharacter::move(position);
-		object->move(position);
+		object_->move(position);
 	}
 	
 	bool ObjectCharacter::update_interactions(sf::Vector2f mouse_position) {
-		return object->update_interactions(mouse_position);
+		return object_->update_interactions(mouse_position);
 	}
 	
 	char32_t ObjectCharacter::get_char() {
@@ -33,11 +40,11 @@ namespace ie {
 	}
 	
 	float ObjectCharacter::get_height() const {
-		return object->get_area_size().y;
+		return object_->get_area_size().y;
 	}
 	
 	float ObjectCharacter::get_advance() {
-		return object->get_area_size().x;
+		return object_->get_area_size().x;
 	}
 	
 	float ObjectCharacter::get_kerning(char32_t) {
@@ -45,26 +52,26 @@ namespace ie {
 	}
 	
 	BaseCharacter::Special ObjectCharacter::is_special() {
-		return special;
+		return special_;
 	}
 	
 	void ObjectCharacter::draw() {
 	}
 	
 	void ObjectCharacter::draw_debug(sf::RenderTarget& render_target, int indent_addition, size_t hue, size_t hue_offset) {
-		object->draw_debug(render_target, 0, indent_addition, hue, hue_offset);
+		object_->draw_debug(render_target, 0, indent_addition, hue, hue_offset);
 	}
 	
 	const std::vector<BoxPtr<BaseLine>>& ObjectCharacter::get_line() {
-		return lines;
+		return lines_;
 	}
 	
 	sf::Vector2i ObjectCharacter::get_size_texture() {
-		return sf::Vector2i{object->get_area_size()};
+		return sf::Vector2i{object_->get_area_size()};
 	}
 	
 	float ObjectCharacter::get_min_advance() {
-		return special == BaseCharacter::Special::FullLine ? object->get_min_size().x : object->get_size().x;
+		return special_ == BaseCharacter::Special::FullLine ? object_->get_min_size().x : object_->get_size().x;
 	}
 	
 	sf::Vector2f ObjectCharacter::get_position() const {

@@ -1,6 +1,6 @@
 namespace ie {
 	template<typename T>
-	void BasicBaseKeyAction<T>::set_pressed(bool pressed) {
+	auto BasicBaseKeyAction<T>::set_pressed(bool pressed) -> void {
 		if(this->pressed_ != pressed) {
 			this->pressed_ = pressed;
 			if(this->pressed_) {
@@ -13,7 +13,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicBaseKeyAction<T>::update(sf::Vector2i mouse_position, bool press) {
+	auto BasicBaseKeyAction<T>::update(sf::Vector2i mouse_position, bool press) -> void {
 		this->mouse_position_ = mouse_position;
 		set_pressed(press);
 		if(this->pressed_) {

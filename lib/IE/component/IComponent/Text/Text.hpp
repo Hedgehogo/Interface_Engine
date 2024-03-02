@@ -45,50 +45,50 @@ namespace ie {
 				BoxPtr<IBasicInteraction<Text&>::Make>&& text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>()
 			);
 			
-			Text* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> Text* override;
 		};
 		
 		Text(Make&& make, InitInfo init_info);
 		
-		void set_selection(Selection selection);
+		auto set_selection(Selection selection) -> void;
 		
-		void set_selection_start(orl::Option<std::vector<BaseCharacter*>::iterator> start);
+		auto set_selection_start(orl::Option<std::vector<BaseCharacter*>::iterator> start) -> void;
 		
-		void set_selection_end(orl::Option<std::vector<BaseCharacter*>::iterator> end);
+		auto set_selection_end(orl::Option<std::vector<BaseCharacter*>::iterator> end) -> void;
 		
-		[[nodiscard]] Selection get_selection() const;
+		[[nodiscard]] auto get_selection() const -> Selection;
 		
-		[[nodiscard]] std::vector<BaseCharacter*>::iterator get_selection_start() const;
+		[[nodiscard]] auto get_selection_start() const -> std::vector<BaseCharacter*>::iterator;
 		
-		[[nodiscard]] std::vector<BaseCharacter*>::iterator get_selection_end() const;
+		[[nodiscard]] auto get_selection_end() const -> std::vector<BaseCharacter*>::iterator;
 		
-		sf::String get_selection_text();
+		auto get_selection_text() -> sf::String;
 		
-		std::vector<BaseCharacter*>& get_characters();
+		auto get_characters() -> std::vector<BaseCharacter*>&;
 		
-		orl::Option<std::vector<BaseCharacter*>::iterator> get_character(sf::Vector2f mouse_position);
+		auto get_character(sf::Vector2f mouse_position) -> orl::Option<std::vector<BaseCharacter*>::iterator>;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void move(sf::Vector2f position) override;
+		auto move(sf::Vector2f position) -> void override;
 		
-		void set_position(sf::Vector2f position) override;
+		auto set_position(sf::Vector2f position) -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		sf::Vector2f get_area_position() const override;
+		auto get_area_position() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_area_size() const override;
+		auto get_area_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
 		InteractionManager* interaction_manager;
@@ -117,5 +117,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::Text::Make> {
-	static orl::Option<ie::Text::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Text::Make>;
 };

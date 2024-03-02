@@ -4,7 +4,7 @@
 #include "IE/enums/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	void handle_event(sf::Event event) {
+	auto handle_event(sf::Event event) -> void {
 		if(event.type == sf::Event::MouseWheelScrolled) {
 			MouseWheel::set_delta(event.mouseWheelScroll);
 		}
@@ -22,7 +22,7 @@ namespace ie {
 		}
 	}
 	
-	void clear_event() {
+	auto clear_event() -> void {
 		MouseWheel::clear();
 	}
 }

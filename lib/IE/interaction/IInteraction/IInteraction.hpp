@@ -19,19 +19,19 @@ namespace ie {
 			Lowest,
 		};
 		
-		virtual ~IInteraction() = default;
+		virtual auto is_blocked() const -> bool;
 		
-		virtual bool is_blocked() const;
+		virtual auto get_priority() const -> Priority;
 		
-		virtual Priority get_priority() const;
+		virtual auto start(sf::Vector2i mouse_position) -> void = 0;
 		
-		virtual void start(sf::Vector2i mouse_position) = 0;
+		virtual auto update(sf::Vector2i mouse_position) -> void = 0;
 		
-		virtual void update(sf::Vector2i mouse_position) = 0;
-		
-		virtual void finish(sf::Vector2i mouse_position) = 0;
+		virtual auto finish(sf::Vector2i mouse_position) -> void = 0;
 		
 		bool operator<(IInteraction& interaction) const;
+		
+		virtual ~IInteraction() = default;
 	};
 	
 	template<typename T>
@@ -40,7 +40,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct IBasicInteraction {
-			virtual ie::IBasicInteraction<T>* make(BasicActionInitInfo<T> init_info) = 0;
+			virtual auto make(BasicActionInitInfo<T> init_info) -> ie::IBasicInteraction<T>* = 0;
 			
 			virtual ~IBasicInteraction() = default;
 		};
@@ -54,5 +54,3 @@ namespace ie {
 	
 	using IBaseInteraction = IBasicInteraction<>;
 }
-
-#include "IInteraction.inl"

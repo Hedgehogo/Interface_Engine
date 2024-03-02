@@ -8,7 +8,7 @@
 #include <cxxabi.h>
 
 namespace ie {
-	std::string demangle(const char* name) {
+	auto demangle(const char* name) -> std::string {
 		int status = -4; // some arbitrary value to eliminate the compiler warning
 		
 		// enable c++11 by passing the flag -std=c++11 to g++
@@ -23,14 +23,14 @@ namespace ie {
 #else
 // does nothing if not g++
 namespace ie {
-	std::string demangle(const char* name) {
+	auto demangle(const char* name) -> std::string {
 		return name;
 	}
 }
 #endif
 
 namespace ie {
-	bool convert_bool(const YAML::Node& node, std::string true_value, std::string false_value) {
+	auto convert_bool(const YAML::Node& node, std::string true_value, std::string false_value) -> bool {
 		std::string parameter{node.as<std::string>()};
 		
 		if(parameter == true_value)
@@ -41,7 +41,7 @@ namespace ie {
 			throw YAML::BadConversion{node.Mark()};
 	}
 	
-	bool convert_bool_default(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value) {
+	auto convert_bool_default(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value) -> bool {
 		if(node.IsDefined()) {
 			return convert_bool(node, std::move(true_value), std::move(false_value));
 		} else {
@@ -49,11 +49,11 @@ namespace ie {
 		}
 	}
 	
-	bool conv_bool_def(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value) {
+	auto conv_bool_def(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value) -> bool {
 		return convert_bool_default(node, std::move(true_value), std::move(false_value), default_value);
 	}
 	
-	std::string type_name(const std::type_info& type_info) {
+	auto type_name(const std::type_info& type_info) -> std::string {
 		return demangle(type_info.name());
 	}
 	

@@ -7,12 +7,12 @@
 #include "../../yaml.hpp"
 
 namespace ie {
-	size_t write_data(void* ptr, size_t size, size_t nMem_b, void* stream) {
+	auto write_data(void* ptr, size_t size, size_t nMem_b, void* stream) -> size_t {
 		size_t written = fwrite(ptr, size, nMem_b, (FILE*)stream);
 		return written;
 	}
 	
-	int download_file(const std::string& url, const std::string& filepath) {
+	auto download_file(const std::string& url, const std::string& filepath) -> int {
 		CURL* curl;
 		CURLcode res;
 		FILE* fp;
@@ -40,7 +40,7 @@ namespace ie {
 		return 1;
 	}
 	
-	void load_c_modules(const YAML::Node& libs, int argc, char* argv[0]) {
+	auto load_c_modules(const YAML::Node& libs, int argc, char* argv[0]) -> void {
 		std::string lib_dir = conv_def<std::string>(libs["lib-dir"], "./");
 		
 		if(YAML::Node cLibs{libs["CLib"]}) {

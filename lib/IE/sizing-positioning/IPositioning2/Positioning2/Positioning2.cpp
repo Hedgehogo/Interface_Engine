@@ -29,7 +29,7 @@ namespace ie {
 		vertical(make_position(coefficient.y, object_coefficient.y, offset.y, relative_target)) {
 	}
 	
-	Positioning2* Positioning2::Make::make(Positioning2InitInfo init_info) {
+	auto Positioning2::Make::make(Positioning2InitInfo init_info) -> Positioning2* {
 		return new Positioning2{std::move(*this), init_info};
 	}
 	
@@ -37,14 +37,14 @@ namespace ie {
 		horizontal_(std::move(make.horizontal)), vertical_(std::move(make.vertical)), render_target_(&init_info.render_target) {
 	}
 	
-	sf::Vector2f Positioning2::find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) {
+	auto Positioning2::find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) -> sf::Vector2f {
 		sf::Vector2f target_size{static_cast<sf::Vector2f>(render_target_->getSize())};
 		return {horizontal_->find_position(parent_position.x, object_size.x, parent_size.x, target_size.x),
 				vertical_->find_position(parent_position.y, object_size.y, parent_size.y, target_size.y)};
 	}
 }
 
-orl::Option<ie::Positioning2::Make> ieml::Decode<char, ie::Positioning2::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Positioning2::Make>::decode(ieml::Node const& node) -> orl::Option<ie::Positioning2::Make> {
 	auto& clear_node{node.get_clear()};
 	for(auto result: clear_node.as<sf::Vector2f>().ok_or_none()) {
 		return {{result}};

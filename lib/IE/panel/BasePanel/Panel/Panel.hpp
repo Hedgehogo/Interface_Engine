@@ -32,24 +32,24 @@ namespace ie {
 				bool displayed = false
 			);
 			
-			Panel* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> Panel* override;
 		};
 		
 		Panel(Make&& make, InitInfo init_info);
 		
-		void set_displayed() override;
+		auto set_displayed() -> void override;
 		
-		bool is_independent() override;
+		auto is_independent() -> bool override;
 		
-		bool is_free() override;
+		auto is_free() -> bool override;
 		
-		bool in_const_panels(sf::Vector2f point_position);
+		auto in_const_panels(sf::Vector2f point_position) -> bool;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position, bool active) override;
+		auto update_interactions(sf::Vector2f mouse_position, bool active) -> bool override;
 		
 	protected:
 		PanelManager panel_manager_;
@@ -61,5 +61,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::Panel::Make> {
-	static orl::Option<ie::Panel::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Panel::Make>;
 };

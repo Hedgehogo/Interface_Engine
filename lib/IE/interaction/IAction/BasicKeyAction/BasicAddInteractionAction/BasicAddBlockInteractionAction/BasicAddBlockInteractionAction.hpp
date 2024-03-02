@@ -12,7 +12,7 @@ namespace ie {
 		struct BasicAddBlockInteractionAction : public BasicAddInteractionAction<T> {
 			BasicAddBlockInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
 			
-			ie::BasicAddBlockInteractionAction<T>* make(BasicActionInitInfo<T> init_info) override;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicAddBlockInteractionAction<T>* override;
 		};
 	}
 	
@@ -24,7 +24,7 @@ namespace ie {
 		BasicAddBlockInteractionAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
 	protected:
-		void stop_pressed() override;
+		auto stop_pressed() -> void override;
 	};
 	
 	using AddBlockInteractionAction = BasicAddBlockInteractionAction<std::monostate>;

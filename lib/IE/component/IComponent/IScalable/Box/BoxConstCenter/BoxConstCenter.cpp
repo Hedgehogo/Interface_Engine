@@ -10,7 +10,7 @@ namespace ie {
 		const_object(std::move(const_object)), background(std::move(background)), const_size(const_size), min_size(min_size) {
 	}
 	
-	BoxConstCenter* BoxConstCenter::Make::make(InitInfo init_info) {
+	auto BoxConstCenter::Make::make(InitInfo init_info) -> BoxConstCenter* {
 		return new BoxConstCenter{std::move(*this), init_info};
 	}
 	
@@ -21,7 +21,7 @@ namespace ie {
 		const_size_(make.const_size) {
 	}
 	
-	void BoxConstCenter::set_position(sf::Vector2f position) {
+	auto BoxConstCenter::set_position(sf::Vector2f position) -> void {
 		Box::set_position(position);
 		if(resized_) {
 			const_object_->move(const_size_);
@@ -33,7 +33,7 @@ namespace ie {
 		background_->set_position(position);
 	}
 	
-	void BoxConstCenter::move(sf::Vector2f position) {
+	auto BoxConstCenter::move(sf::Vector2f position) -> void {
 		Box::move(position);
 		if(resized_) {
 			const_object_->move(const_size_);
@@ -44,7 +44,7 @@ namespace ie {
 		background_->move(position);
 	}
 	
-	void BoxConstCenter::set_size(sf::Vector2f size) {
+	auto BoxConstCenter::set_size(sf::Vector2f size) -> void {
 		Box::set_size(size);
 		if(!resized_) {
 			resized_ = true;
@@ -53,7 +53,7 @@ namespace ie {
 		background_->set_size(size);
 	}
 	
-	void BoxConstCenter::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxConstCenter::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		if(resized_) {
 			const_object_->set_position(position + (size / 2.f) - (const_size_ / 2.f));
@@ -64,31 +64,31 @@ namespace ie {
 		background_->resize(size, position);
 	}
 	
-	sf::Vector2f BoxConstCenter::get_min_size() const {
+	auto BoxConstCenter::get_min_size() const -> sf::Vector2f {
 		return max(IComponentTwoObjects::get_min_size(), const_size_);
 	}
 	
-	sf::Vector2f BoxConstCenter::get_normal_size() const {
+	auto BoxConstCenter::get_normal_size() const -> sf::Vector2f {
 		return max(IComponentTwoObjects::get_normal_size(), const_size_);
 	}
 	
-	IScalable& BoxConstCenter::get_first_object() {
+	auto BoxConstCenter::get_first_object() -> IScalable& {
 		return *const_object_;
 	}
 	
-	const IScalable& BoxConstCenter::get_first_object() const {
+	auto BoxConstCenter::get_first_object() const -> IScalable const& {
 		return *const_object_;
 	}
 	
-	IScalable& BoxConstCenter::get_second_object() {
+	auto BoxConstCenter::get_second_object() -> IScalable& {
 		return *background_;
 	}
 	
-	const IScalable& BoxConstCenter::get_second_object() const {
+	auto BoxConstCenter::get_second_object() const -> IScalable const& {
 		return *background_;
 	}
 	
-	bool BoxConstCenter::update_interactions(sf::Vector2f) {
+	auto BoxConstCenter::update_interactions(sf::Vector2f) -> bool {
 		return
 			background_->in(layout_.position)
 			? background_->update_interactions(layout_.position)
@@ -96,7 +96,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::BoxConstCenter::Make> ieml::Decode<char, ie::BoxConstCenter::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxConstCenter::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxConstCenter::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::BoxConstCenter::Make{
 		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),

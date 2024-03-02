@@ -7,57 +7,62 @@
 namespace ie {
 	class Character : public BaseCharacter {
 	public:
-		Character(char32_t character, TextVariables& text_variables, std::vector<BoxPtr<BaseLine>>& lines, orl::Option<sf::RenderTarget&> render_target);
+		Character(
+			char32_t character,
+			TextVariables& text_variables,
+			std::vector<BoxPtr<BaseLine> >& lines,
+			orl::Option<sf::RenderTarget&> render_target
+		);
 		
-		void set_active(bool active) override;
+		auto set_active(bool active) -> void override;
 		
-		sf::Vector2i get_size_texture() override;
+		auto get_size_texture() -> sf::Vector2i override;
 		
-		void set_selection(bool selection) override;
+		auto set_selection(bool selection) -> void override;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void set_kerning(float kerning) override;
+		auto set_kerning(float kerning) -> void override;
 		
-		void move(sf::Vector2f position) override;
+		auto move(sf::Vector2f position) -> void override;
 		
-		const std::vector<BoxPtr<BaseLine>>& get_line() override;
+		auto get_line() -> std::vector<BoxPtr<BaseLine> > const& override;
 		
-		bool in(sf::Vector2f mouse_position) override;
+		auto in(sf::Vector2f mouse_position) -> bool override;
 		
-		float get_height() const override;
+		auto get_height() const -> float override;
 		
-		float get_advance() override;
+		auto get_advance() -> float override;
 		
-		float get_kerning(char32_t character) override;
+		auto get_kerning(char32_t character) -> float override;
 		
-		Special is_special() override;
+		auto is_special() -> Special override;
 		
-		char32_t get_char() override;
+		auto get_char() -> char32_t override;
 		
-		void set_position(sf::Vector2f position) override;
-	
-		static void set_debug(bool debug);
+		auto set_position(sf::Vector2f position) -> void override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int, size_t hue, size_t) override;
+		static auto set_debug(bool debug) -> void;
+		
+		auto draw_debug(sf::RenderTarget& render_target, int, size_t hue, size_t) -> void override;
 	
 	private:
-		static bool debug;
+		static bool debug_;
 	
 	protected:
-		orl::Option<sf::RenderTarget&> render_target;
+		orl::Option<sf::RenderTarget&> render_target_;
 		
-		char32_t character;
+		char32_t character_;
 		
-		sf::Glyph glyph;
-		float advance;
-		float kerning;
-		TextVariables& text_variables;
-		sf::VertexArray vertex_array;
-		sf::VertexArray selection_vertex_array;
-		const sf::Texture& texture;
-		sf::Vector2f origin;
+		sf::Glyph glyph_;
+		float advance_;
+		float kerning_;
+		TextVariables& text_variables_;
+		sf::VertexArray vertex_array_;
+		sf::VertexArray selection_vertex_array_;
+		sf::Texture const& texture_;
+		sf::Vector2f origin_;
 		
-		std::vector<BoxPtr<BaseLine>>& lines;
+		std::vector<BoxPtr<BaseLine> >& lines_;
 	};
 }

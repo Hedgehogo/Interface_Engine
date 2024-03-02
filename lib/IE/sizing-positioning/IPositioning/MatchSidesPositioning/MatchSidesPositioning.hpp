@@ -8,9 +8,9 @@ namespace ie {
 	public:
 		MatchSidesPositioning(Location parent_side, Location object_side, float offset = 0);
 		
-		float find_position(float parent_position, float object_size, float parent_size, float) override;
+		auto find_position(float parent_position, float object_size, float parent_size, float) -> float override;
 		
-		MatchSidesPositioning* copy() override;
+		auto copy() -> MatchSidesPositioning* override;
 	
 	protected:
 		Location parent_side_;
@@ -21,5 +21,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::MatchSidesPositioning> {
-	static orl::Option<ie::MatchSidesPositioning> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::MatchSidesPositioning>;
 };

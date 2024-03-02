@@ -12,68 +12,68 @@ namespace ie {
 			
 			Make(float line_spacing = 1.15, Align align = Align::Left, Algorithm algorithm = Algorithm::Base);
 			
-			TextResizer* make(TextResizerInitInfo init_info) override;
+			auto make(TextResizerInitInfo init_info) -> TextResizer* override;
 		};
 		
 		TextResizer(Make&& make, TextResizerInitInfo init_info);
 		
-		void move(sf::Vector2f position) override;
+		auto move(sf::Vector2f position) -> void override;
 		
-		void set_position(sf::Vector2f position) override;
+		auto set_position(sf::Vector2f position) -> void override;
 	
 	protected:
-		virtual void print_character(std::vector<BaseCharacter*>::iterator character);
+		virtual auto print_character(std::vector<BaseCharacter*>::iterator character) -> void;
 		
-		virtual void porting(std::vector<BaseCharacter*>::iterator end_character);
+		virtual auto porting(std::vector<BaseCharacter*>::iterator end_character) -> void;
 		
-		virtual void auto_porting(std::vector<BaseCharacter*>::iterator end_character);
+		virtual auto auto_porting(std::vector<BaseCharacter*>::iterator end_character) -> void;
 		
-		virtual void equalize_characters(std::vector<BaseCharacter*>::iterator end_character, float line_size, float length_end_character);
+		virtual auto equalize_characters(std::vector<BaseCharacter*>::iterator end_character, float line_size, float length_end_character) -> void;
 		
-		virtual float equalize(std::vector<BaseCharacter*>::iterator end_character, float height_end_character);
+		virtual auto equalize(std::vector<BaseCharacter*>::iterator end_character, float height_end_character) -> float;
 		
-		virtual void delete_old_cash(sf::Vector2f size, sf::Vector2f position);
+		virtual auto delete_old_cash(sf::Vector2f size, sf::Vector2f position) -> void;
 		
-		virtual void character_resize();
+		virtual auto character_resize() -> void;
 		
-		virtual void space_resize();
+		virtual auto space_resize() -> void;
 		
-		virtual void enter_resize();
+		virtual auto enter_resize() -> void;
 		
-		virtual void object_resize(bool full);
+		virtual auto object_resize(bool full) -> void;
 		
-		virtual void end_line_equalize();
+		virtual auto end_line_equalize() -> void;
 	
 	public:
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		sf::Vector2f get_position() override;
+		auto get_position() -> sf::Vector2f override;
 		
-		sf::Vector2f get_size() override;
+		auto get_size() -> sf::Vector2f override;
 	
 	protected:
-		sf::Vector2f get_min_size_base() override;
+		auto get_min_size_base() -> sf::Vector2f override;
 		
-		sf::Vector2f get_min_size_console() override;
+		auto get_min_size_console() -> sf::Vector2f override;
 		
-		sf::Vector2f get_min_size_absolute() override;
+		auto get_min_size_absolute() -> sf::Vector2f override;
 	
 	public:
-		sf::Vector2f get_normal_size() override;
+		auto get_normal_size() -> sf::Vector2f override;
 	
 	protected:
-		std::vector<BaseCharacter*>::iterator after_enter;
-		std::vector<BaseCharacter*>::iterator after_space;
-		std::vector<BaseCharacter*>::iterator current_character;
+		std::vector<BaseCharacter*>::iterator after_enter_;
+		std::vector<BaseCharacter*>::iterator after_space_;
+		std::vector<BaseCharacter*>::iterator current_character_;
 		
-		sf::Vector2f next_position;
+		sf::Vector2f next_position_;
 		
-		sf::Vector2f start_render;
-		sf::Vector2f end_render;
+		sf::Vector2f start_render_;
+		sf::Vector2f end_render_;
 	};
 }
 
 template<>
 struct ieml::Decode<char, ie::TextResizer::Make> {
-	static orl::Option<ie::TextResizer::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::TextResizer::Make>;
 };

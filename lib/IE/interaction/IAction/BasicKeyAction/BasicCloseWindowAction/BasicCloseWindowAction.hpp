@@ -1,7 +1,7 @@
 #pragma once
 
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../BasicBaseKeyAction/BasicBaseKeyAction.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	template<typename T>
@@ -10,7 +10,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicCloseWindowAction : public BasicKeyAction<T> {
-			ie::BasicCloseWindowAction<T>* make(BasicActionInitInfo<T> init_info) override;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicCloseWindowAction<T>* override;
 		};
 	}
 	
@@ -22,23 +22,23 @@ namespace ie {
 		BasicCloseWindowAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
 	protected:
-		void start_pressed() override;
+		auto start_pressed() -> void override;
 		
-		void stop_pressed() override;
+		auto stop_pressed() -> void override;
 		
-		void while_pressed() override;
+		auto while_pressed() -> void override;
 		
-		void while_not_pressed() override;
+		auto while_not_pressed() -> void override;
 		
 		sf::RenderWindow* window_;
 	};
 	
 	using CloseWindowAction = BasicCloseWindowAction<std::monostate>;
-	
-	template<typename T>
-	struct DecodePointer<BasicCloseWindowAction<T> > {
-		static bool decode_pointer(const YAML::Node&, BasicCloseWindowAction<T>*& close_window_action);
-	};
 }
+
+template<typename T>
+struct ieml::Decode<char, ie::BasicCloseWindowAction<T> > {
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BasicCloseWindowAction<T> >;
+};
 
 #include "BasicCloseWindowAction.inl"

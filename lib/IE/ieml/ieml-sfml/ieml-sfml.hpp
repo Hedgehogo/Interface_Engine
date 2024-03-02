@@ -45,37 +45,37 @@ namespace tnl {
 namespace ieml {
 	template<>
 	struct Decode<char, sf::String> {
-		static orl::Option<sf::String> decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<sf::String>;
 	};
 	
 	template<typename T>
 	struct Decode<char, sf::Vector2<T> > {
-		static orl::Option<sf::Vector2<T> > decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<sf::Vector2<T> >;
 	};
 	
 	template<typename T>
 	struct Decode<char, sf::Rect<T> > {
-		static orl::Option<sf::Rect<T> > decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<sf::Rect<T> >;
 	};
 	
 	template<>
 	struct Decode<char, sf::Color> {
-		static orl::Option<sf::Color> decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<sf::Color>;
 	};
 	
 	template<>
 	struct Decode<char, ie::LoadTextStyle> {
-		static orl::Option<ie::LoadTextStyle> decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<ie::LoadTextStyle>;
 	};
 	
 	template<>
 	struct Decode<char, sf::Mouse::Button> {
-		static orl::Option<sf::Mouse::Button> decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<sf::Mouse::Button>;
 	};
 	
 	template<>
 	struct Decode<char, ie::LoadShader> {
-		static orl::Option<ie::LoadShader> decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<ie::LoadShader>;
 	};
 }
 

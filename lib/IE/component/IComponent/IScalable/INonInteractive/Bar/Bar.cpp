@@ -10,7 +10,7 @@ namespace ie {
 		background(std::move(background)), strip(std::move(strip)), offset(offset), horizontal(horizontal), division(division) {
 	}
 	
-	Bar* Bar::Make::make(InitInfo init_info) {
+	auto Bar::Make::make(InitInfo init_info) -> Bar* {
 		return new Bar{std::move(*this), init_info};
 	}
 	
@@ -24,11 +24,11 @@ namespace ie {
 		value_(0) {
 	}
 	
-	float Bar::get_value() {
+	auto Bar::get_value() -> float {
 		return value_;
 	}
 	
-	void Bar::set_value(float value) {
+	auto Bar::set_value(float value) -> void {
 		this->value_ = value;
 		if(this->division_ > 1) {
 			this->value_ = std::round(this->value_);
@@ -44,49 +44,49 @@ namespace ie {
 		strip_->resize(strip_size, layout_.position);
 	}
 	
-	void Bar::draw() {
+	auto Bar::draw() -> void {
 	}
 	
-	void Bar::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto Bar::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		IComponentBackground::resize(size, position);
 		set_value(value_);
 	}
 	
-	sf::Vector2f Bar::get_min_size() const {
+	auto Bar::get_min_size() const -> sf::Vector2f {
 		sf::Vector2f strip_min_size{strip_->get_min_size()};
 		(horizontal_ ? strip_min_size.x : strip_min_size.y) *= value_;
 		return max(strip_min_size, background_->get_min_size());
 	}
 	
-	sf::Vector2f Bar::get_normal_size() const {
+	auto Bar::get_normal_size() const -> sf::Vector2f {
 		sf::Vector2f strip_normal_size{strip_->get_normal_size()};
 		(horizontal_ ? strip_normal_size.x : strip_normal_size.y) *= value_;
 		return max(strip_normal_size, background_->get_normal_size());
 	}
 	
-	INonInteractive& Bar::get_background() {
+	auto Bar::get_background() -> INonInteractive& {
 		return *background_;
 	}
 	
-	const INonInteractive& Bar::get_background() const {
+	auto Bar::get_background() const -> INonInteractive const& {
 		return *background_;
 	}
 	
-	void Bar::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto Bar::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		strip_->draw_debug(render_target, indent + indent_addition, indent_addition, hue, hue_offset);
 	}
 	
-	LayoutData& Bar::layout_get_data() {
+	auto Bar::layout_get_data() -> LayoutData& {
 		return layout_;
 	}
 	
-	const LayoutData& Bar::layout_get_data() const {
+	auto Bar::layout_get_data() const -> LayoutData const& {
 		return layout_;
 	}
 }
 
-orl::Option<ie::Bar::Make> ieml::Decode<char, ie::Bar::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Bar::Make>::decode(ieml::Node const& node) -> orl::Option<ie::Bar::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::Bar::Make{
 		map.at("background").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().except(),

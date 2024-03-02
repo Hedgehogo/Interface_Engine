@@ -8,7 +8,7 @@ namespace ie {
 		}
 		
 		template<typename Return_, typename Value_, typename... Args_, Return_(* Fn_)(Value_ const&, Args_...)>
-		rttb::Dyn SFn<Fn_>::make(SInitInfo init_info) {
+		auto SFn<Fn_>::make(SInitInfo init_info) -> rttb::Dyn {
 			return rttb::Dyn{new ie::SFn<Fn_>{std::move(*this), init_info}};
 		}
 	}
@@ -29,7 +29,7 @@ namespace ie {
 	}
 
 	template<typename Return_, typename Value_, typename... Args_, Return_(* Fn_)(Value_ const&, Args_...)>
-	void SFn<Fn_>::reset() {
+	auto SFn<Fn_>::reset() -> void {
 		auto value{std::apply([this](detail::SFnWrap <Args_> const& ... args) {
 			return Fn_(static_cast<Value_ const&>(*this), args.get()...);
 		}, args_)};
@@ -38,7 +38,7 @@ namespace ie {
 	
 	namespace detail {
 		template<typename Value_, typename... SArgs_, typename Return_, typename... Args_, Return_(* Fn_)(Args_...)>
-		Return_ ToSFn<Value_(SArgs_...), Fn_>::fn(Value_ const&, SArgs_& ... args) {
+		auto ToSFn<Value_(SArgs_...), Fn_>::fn(Value_ const&, SArgs_& ... args) -> Return_ {
 			return Fn_(args.get()...);
 		}
 	}
@@ -46,10 +46,9 @@ namespace ie {
 
 template<typename Return_, typename Value_, typename... Args_, Return_(* Fn_)(Value_ const&, Args_...)>
 template<size_t... Index>
-std::tuple<ie::detail::SFnMakeWrap<Args_>...>
-ieml::Decode<char, ie::make_system::SFn<Fn_> >::decode_args(
+auto ieml::Decode<char, ie::make_system::SFn<Fn_> >::decode_args(
 	ieml::ListView const& list, std::index_sequence<Index...>
-) {
+) -> std::tuple<ie::detail::SFnMakeWrap<Args_>...> {
 	return std::make_tuple(
 		std::forward<ie::detail::SFnMakeWrap<Args_> >(
 			list.at(Index).except().as<ie::detail::SFnMakeWrap<Args_> >().except()
@@ -58,8 +57,7 @@ ieml::Decode<char, ie::make_system::SFn<Fn_> >::decode_args(
 }
 
 template<typename Return_, typename Value_, typename... Args_, Return_(* Fn_)(Value_ const&, Args_...)>
-orl::Option<ie::make_system::SFn<Fn_> >
-ieml::Decode<char, ie::make_system::SFn<Fn_> >::decode(const ieml::Node& node) {
+auto ieml::Decode<char, ie::make_system::SFn<Fn_> >::decode(const ieml::Node& node) -> orl::Option<ie::make_system::SFn<Fn_> > {
 	using ValueMake = typename ie::ToMutable<Value_>::Make;
 	auto result_fn = [](ValueMake make, ListView list) {
 		return std::apply([&](ie::detail::SFnMakeWrap<Args_>&& ... args) {

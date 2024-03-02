@@ -23,28 +23,28 @@ namespace ie {
 		value_.get().get_y().set_bounds(0, 1);
 	}
 	
-	void BaseSlider::resize_slider(sf::Vector2f new_value) {
-		this->slider_->resize(slider_size_, position_ + sf::Vector2f(move_zone_size_.x * new_value.x, move_zone_size_.y * new_value.y));
+	auto BaseSlider::resize_slider(sf::Vector2f new_value) -> void {
+		this->slider_->resize(slider_size_, position_ + sf::Vector2f{move_zone_size_.x * new_value.x, move_zone_size_.y * new_value.y});
 	}
 	
-	sf::Vector2f BaseSlider::get_slider_size() {
+	auto BaseSlider::get_slider_size() -> sf::Vector2f {
 		return slider_size_;
 	}
 	
-	sf::Vector2f BaseSlider::get_value() {
+	auto BaseSlider::get_value() -> sf::Vector2f {
 		return value_.get().get();
 	}
 	
-	void BaseSlider::set_value(sf::Vector2f value) {
+	auto BaseSlider::set_value(sf::Vector2f value) -> void {
 		this->value_.get().set(value);
 	}
 	
-	ISMRVec2F& BaseSlider::get_value_ptr() {
+	auto BaseSlider::get_value_ptr() -> ISMRVec2F& {
 		return value_.get();
 	}
 	
-	void BaseSlider::set_value_by_mouse(sf::Vector2i mouse_position) {
-		sf::Vector2f mouse_offset{static_cast<sf::Vector2f>(mouse_position) - position_ - slider_size_ / 2.0f};
+	auto BaseSlider::set_value_by_mouse(sf::Vector2i mouse_position) -> void {
+		auto mouse_offset{sf::Vector2f{mouse_position} - position_ - slider_size_ / 2.0f};
 		value_.get().set(
 			{
 				(move_zone_size_.x != 0 ? mouse_offset.x / move_zone_size_.x : 0),
@@ -53,8 +53,8 @@ namespace ie {
 		);
 	}
 	
-	sf::Vector2f BaseSlider::round_value_to_division(sf::Vector2f value, sf::Vector2i division) {
-		sf::Vector2f divisions{division};
+	auto BaseSlider::round_value_to_division(sf::Vector2f value, sf::Vector2i division) -> sf::Vector2f {
+		auto divisions{sf::Vector2f{division}};
 		if(division.x != 0) {
 			value.x = std::round(value.x * divisions.x) / divisions.x;
 		}
@@ -64,7 +64,7 @@ namespace ie {
 		return value;
 	}
 	
-	sf::Vector2f BaseSlider::move_slider(sf::Vector2f value, sf::Vector2f offset) const {
+	auto BaseSlider::move_slider(sf::Vector2f value, sf::Vector2f offset) const -> sf::Vector2f {
 		if(move_zone_size_.x != 0) {
 			value.x += offset.x / move_zone_size_.x;
 		}
@@ -74,41 +74,41 @@ namespace ie {
 		return value;
 	}
 	
-	bool BaseSlider::on_slider(sf::Vector2i mouse_position) {
-		sf::Vector2f mouse{static_cast<sf::Vector2f>(mouse_position)};
-		sf::Vector2f value{value_.get().get()};
-		sf::Vector2f slider_position{position_.x + value.x * move_zone_size_.x, position_.y + value.y * move_zone_size_.y};
+	auto BaseSlider::on_slider(sf::Vector2i mouse_position) -> bool {
+		auto mouse{sf::Vector2f{mouse_position}};
+		auto value{value_.get().get()};
+		auto slider_position{sf::Vector2f{position_.x + value.x * move_zone_size_.x, position_.y + value.y * move_zone_size_.y}};
 		return
 			mouse.x > slider_position.x && mouse.x < slider_position.x + slider_size_.x &&
 			mouse.y > slider_position.y && mouse.y < slider_position.y + slider_size_.y;
 	}
 	
-	sf::Vector2f BaseSlider::get_area_position() const {
+	auto BaseSlider::get_area_position() const -> sf::Vector2f {
 		return position_;
 	}
 	
-	sf::Vector2f BaseSlider::get_area_size() const {
+	auto BaseSlider::get_area_size() const -> sf::Vector2f {
 		return slider_size_ + move_zone_size_;
 	}
 	
-	sf::Vector2f BaseSlider::get_min_size() const {
+	auto BaseSlider::get_min_size() const -> sf::Vector2f {
 		return background_->get_min_size();
 	}
 	
-	sf::Vector2f BaseSlider::get_normal_size() const {
+	auto BaseSlider::get_normal_size() const -> sf::Vector2f {
 		return background_->get_normal_size();
 	}
 	
-	void BaseSlider::update() {
+	auto BaseSlider::update() -> void {
 		interactive_.update();
 	}
 	
-	bool BaseSlider::update_interactions(sf::Vector2f) {
+	auto BaseSlider::update_interactions(sf::Vector2f) -> bool {
 		interactive_.update_interactions();
 		return true;
 	}
 	
-	void BaseSlider::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto BaseSlider::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		slider_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}

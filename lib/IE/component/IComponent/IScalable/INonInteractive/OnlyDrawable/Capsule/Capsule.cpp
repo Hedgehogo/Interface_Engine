@@ -4,7 +4,7 @@ namespace ie {
 	Capsule::Make::Make(sf::Color color) : color(color) {
 	}
 	
-	Capsule* Capsule::Make::make(InitInfo init_info) {
+	auto Capsule::Make::make(InitInfo init_info) -> Capsule* {
 		return new Capsule{std::move(*this), init_info};
 	}
 	
@@ -18,7 +18,7 @@ namespace ie {
 		circle_.setFillColor(color);
 	}
 	
-	void Capsule::draw() {
+	auto Capsule::draw() -> void {
 		render_target_->draw(rectangle_);
 		circle_.setPosition(layout_.position);
 		render_target_->draw(circle_);
@@ -30,7 +30,7 @@ namespace ie {
 		render_target_->draw(circle_);
 	}
 	
-	void Capsule::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto Capsule::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		if(size.x > size.y) {
 			rectangle_.setSize({size.x - size.y, size.y});
@@ -43,24 +43,24 @@ namespace ie {
 		}
 	}
 	
-	sf::Vector2f Capsule::get_min_size() const {
+	auto Capsule::get_min_size() const -> sf::Vector2f {
 		return {0, 0};
 	}
 	
-	sf::Vector2f Capsule::get_normal_size() const {
+	auto Capsule::get_normal_size() const -> sf::Vector2f {
 		return {1, 1};
 	}
 	
-	LayoutData& Capsule::layout_get_data() {
+	auto Capsule::layout_get_data() -> LayoutData& {
 		return layout_;
 	}
 	
-	const LayoutData& Capsule::layout_get_data() const {
+	auto Capsule::layout_get_data() const -> LayoutData const& {
 		return layout_;
 	}
 }
 
-orl::Option<ie::Capsule::Make> ieml::Decode<char, ie::Capsule::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Capsule::Make>::decode(ieml::Node const& node) -> orl::Option<ie::Capsule::Make> {
 	for(auto& color: node.as<sf::Color>().ok_or_none()) {
 		return {{std::move(color)}};
 	}

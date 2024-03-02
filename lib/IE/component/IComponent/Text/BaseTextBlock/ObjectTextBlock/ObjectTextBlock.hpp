@@ -17,26 +17,26 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& object, float height);
 			
-			ObjectTextBlock* make(TextBockInitInfo init_info) override;
+			auto make(TextBockInitInfo init_info) -> ObjectTextBlock* override;
 		};
 		
 		ObjectTextBlock(Make&& make, TextBockInitInfo init_info);
 
-		bool in(sf::Vector2f mouse_position) override;
+		auto in(sf::Vector2f mouse_position) -> bool override;
 		
-		std::vector<BaseCharacter*> get_characters() override;
+		auto get_characters() -> std::vector<BaseCharacter*> override;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 	
 	protected:
-		ObjectCharacter object_character;
-		std::vector<BoxPtr<BaseLine>> lines;
+		ObjectCharacter object_character_;
+		std::vector<BoxPtr<BaseLine> > lines_;
 	};
 }
 
 template<>
 struct ieml::Decode<char, ie::ObjectTextBlock::Make> {
-	static orl::Option<ie::ObjectTextBlock::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::ObjectTextBlock::Make>;
 };

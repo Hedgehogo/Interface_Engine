@@ -12,16 +12,16 @@ namespace ie {
 			
 			Make(float coefficient = 1, float addition = 0);
 			
-			ParentCoefficientSizing* make(float normal_size) override;
+			auto make(float normal_size) -> ParentCoefficientSizing* override;
 		};
 		
 		ParentCoefficientSizing(Make&& make, float normal_size);
 		
 		explicit ParentCoefficientSizing(float coefficient = 1, float addition = 0);
 		
-		float find_size(float parent_size, float) override;
+		auto find_size(float parent_size, float) -> float override;
 		
-		float get_parent_size(float object_size) override;
+		auto get_parent_size(float object_size) -> float override;
 		
 	protected:
 		float coefficient_;
@@ -31,5 +31,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::ParentCoefficientSizing::Make> {
-	static orl::Option<ie::ParentCoefficientSizing::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::ParentCoefficientSizing::Make>;
 };

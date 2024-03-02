@@ -13,20 +13,20 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size = {});
 			
-			BoxUninteractive* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxUninteractive* override;
 		};
 		
 		BoxUninteractive(Make&& make, InitInfo init_info);
 		
 		BoxUninteractive(BoxPtr<IScalable>&& object, sf::Vector2f min_size = {});
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		IScalable& get_object() override;
+		auto get_object() -> IScalable& override;
 		
-		const IScalable& get_object() const override;
+		auto get_object() const -> IScalable const& override;
 		
 	protected:
 		BoxPtr<IScalable> object_;
@@ -35,5 +35,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxUninteractive::Make> {
-	static orl::Option<ie::BoxUninteractive::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxUninteractive::Make>;
 };

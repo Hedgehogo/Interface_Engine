@@ -9,14 +9,15 @@ namespace ie {
 			float end_time,
 			float data,
 			bool pause_restart
-		) : SRanged<float>(data),
+		) :
+			SRanged<float>(data),
 			end_time(end_time),
 			start(std::move(start)),
 			end(std::move(end)),
 			pause_restart(pause_restart) {
 		}
 		
-		rttb::Dyn STime::make(SInitInfo init_info) {
+		auto STime::make(SInitInfo init_info) -> rttb::Dyn {
 			return rttb::Dyn{new ie::STime{std::move(*this), init_info}};
 		}
 	}
@@ -48,9 +49,9 @@ namespace ie {
 		init_info.update_manager.add(*this);
 	}
 	
-	void STime::update() {
+	auto STime::update() -> void {
 		if(play_) {
-			float data{clock_.getElapsedTime().asSeconds()};
+			auto data{clock_.getElapsedTime().asSeconds()};
 			for(auto const& delta: delta_) {
 				data += delta.asSeconds();
 			}
@@ -71,7 +72,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::make_system::STime> ieml::Decode<char, ie::make_system::STime>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::make_system::STime>::decode(ieml::Node const& node) -> orl::Option<ie::make_system::STime> {
 	auto map{node.get_map_view().except()};
 	return ie::make_system::STime{
 		map.at("start").except().as<ie::MakeDyn<ie::ISBool> >().except(),

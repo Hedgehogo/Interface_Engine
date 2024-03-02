@@ -1,7 +1,7 @@
 #include "Location2.hpp"
 
 namespace ie {
-	Location get_vertical_location(Location2 location2) {
+	auto get_vertical_location(Location2 location2) -> Location {
 		switch(location2) {
 			case Location2::UpLeft:
 			case Location2::Up:
@@ -19,7 +19,7 @@ namespace ie {
 		return Location::Center;
 	}
 	
-	Location get_horizontal_location(Location2 location2) {
+	auto get_horizontal_location(Location2 location2) -> Location {
 		switch(location2) {
 			case Location2::UpLeft:
 			case Location2::Left:
@@ -37,7 +37,7 @@ namespace ie {
 		return Location::Center;
 	}
 	
-	Location2 make_location2(Location vertical, Location horizontal) {
+	auto make_location2(Location vertical, Location horizontal) -> Location2 {
 		switch(vertical) {
 			case Location::Origin:
 				switch(horizontal) {
@@ -74,7 +74,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::Location2> ieml::Decode<char, ie::Location2>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Location2>::decode(ieml::Node const& node) -> orl::Option<ie::Location2> {
 	for(auto map: node.get_map_view().ok_or_none()) {
 		return ie::make_location2(
 			map.at("vertical").except().as<ie::Location>().except(),

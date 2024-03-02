@@ -1,7 +1,7 @@
 #include "INonInteractive.hpp"
 
 namespace ie {
-	bool INonInteractive::update_interactions(sf::Vector2f) {
+	auto INonInteractive::update_interactions(sf::Vector2f) -> bool {
 		return true;
 	}
 }

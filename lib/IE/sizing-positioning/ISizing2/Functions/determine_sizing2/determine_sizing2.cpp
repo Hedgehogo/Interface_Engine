@@ -2,7 +2,7 @@
 #include "IE/ieml/determine/determine.hpp"
 
 namespace ie {
-	orl::Option<std::string> determine_sizing2(ieml::Node const& node) {
+	auto determine_sizing2(ieml::Node const& node) -> orl::Option<std::string> {
 		auto& clear_node{node.get_clear()};
 		if(clear_node.is_raw()) {
 			return {"Sizing2"};

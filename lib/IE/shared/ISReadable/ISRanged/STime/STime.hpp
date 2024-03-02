@@ -16,7 +16,7 @@ namespace ie {
 			
 			STime(MakeDyn<ISBool> start, orl::Option<MakeDyn<ISMBool> > end, float end_time = std::numeric_limits<float>::max(), float data = {}, bool pause_restart = false);
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 	}
 	
@@ -28,7 +28,7 @@ namespace ie {
 		
 		STime(STime &&) = delete;
 		
-		void update() override;
+		auto update() -> void override;
 		
 	protected:
 		orl::Option<sf::Time> delta_;
@@ -41,5 +41,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::make_system::STime> {
-	static orl::Option<ie::make_system::STime> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::STime>;
 };

@@ -9,12 +9,12 @@ namespace ie {
 		static sf::Vector2f delta_;
 	
 	public:
-		static void set_delta(sf::Event::MouseWheelScrollEvent event);
+		static auto set_delta(sf::Event::MouseWheelScrollEvent event) -> void;
 		
-		static void set_delta(sf::Vector2f delta);
+		static auto set_delta(sf::Vector2f delta) -> void;
 		
-		static sf::Vector2f get_delta();
+		static auto get_delta() -> sf::Vector2f;
 		
-		static void clear();
+		static auto clear() -> void;
 	};
 }

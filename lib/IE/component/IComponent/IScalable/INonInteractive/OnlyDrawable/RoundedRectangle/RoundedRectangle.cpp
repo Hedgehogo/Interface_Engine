@@ -6,7 +6,7 @@ namespace ie {
 	RoundedRectangle::Make::Make(sf::Color color, float radius) : color(color), radius(radius) {
 	}
 	
-	RoundedRectangle* RoundedRectangle::Make::make(InitInfo init_info) {
+	auto RoundedRectangle::Make::make(InitInfo init_info) -> RoundedRectangle* {
 		return new RoundedRectangle{std::move(*this), init_info};
 	}
 	
@@ -25,7 +25,7 @@ namespace ie {
 		circle_.setRadius(radius);
 	}
 	
-	void RoundedRectangle::draw() {
+	auto RoundedRectangle::draw() -> void {
 		render_target_->draw(horizontal_rectangle_);
 		render_target_->draw(vertical_rectangle_);
 		circle_.setPosition(layout_.position);
@@ -38,7 +38,7 @@ namespace ie {
 		render_target_->draw(circle_);
 	}
 	
-	void RoundedRectangle::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto RoundedRectangle::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		vertical_rectangle_.setSize({size.x - radius_ * 2, size.y});
 		vertical_rectangle_.setPosition(position + sf::Vector2f{radius_, 0});
@@ -46,23 +46,23 @@ namespace ie {
 		horizontal_rectangle_.setPosition(position + sf::Vector2f{0, radius_});
 	}
 	
-	sf::Vector2f RoundedRectangle::get_min_size() const {
+	auto RoundedRectangle::get_min_size() const -> sf::Vector2f {
 		return sf::Vector2f(radius_ * 2, radius_ * 2);
 	}
 	
-	sf::Vector2f RoundedRectangle::get_normal_size() const {
+	auto RoundedRectangle::get_normal_size() const -> sf::Vector2f {
 		return sf::Vector2f(radius_ * 2, radius_ * 2);
 	}
 	
-	LayoutData& RoundedRectangle::layout_get_data() {
+	auto RoundedRectangle::layout_get_data() -> LayoutData& {
 		return layout_;
 	}
 	
-	const LayoutData& RoundedRectangle::layout_get_data() const {
+	auto RoundedRectangle::layout_get_data() const -> const LayoutData& {
 		return layout_;
 	}
 	
-	bool Determine<RoundedRectangle::Make>::determine(ieml::Node const& node) {
+	auto Determine<RoundedRectangle::Make>::determine(ieml::Node const& node) -> bool {
 		return ie::determine(node, {
 			{"color",  ieml::NodeType::Raw},
 			{"radius", ieml::NodeType::Raw}
@@ -70,7 +70,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::RoundedRectangle::Make> ieml::Decode<char, ie::RoundedRectangle::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::RoundedRectangle::Make>::decode(ieml::Node const& node) -> orl::Option<ie::RoundedRectangle::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::RoundedRectangle::Make{
 		map.at("color").except().as<sf::Color>().except(),

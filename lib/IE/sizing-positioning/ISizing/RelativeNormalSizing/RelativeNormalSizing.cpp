@@ -1,7 +1,7 @@
 #include "RelativeNormalSizing.hpp"
 
 namespace ie {
-	RelativeNormalSizing* RelativeNormalSizing::Make::make(float normal_size) {
+	auto RelativeNormalSizing::Make::make(float normal_size) -> RelativeNormalSizing* {
 		return new RelativeNormalSizing{std::move(*this), normal_size};
 	}
 	
@@ -12,11 +12,11 @@ namespace ie {
 	RelativeNormalSizing::RelativeNormalSizing() : normal_size_(0) {
 	}
 	
-	float RelativeNormalSizing::find_size(float, float) {
+	auto RelativeNormalSizing::find_size(float, float) -> float {
 		return this->normal_size_;
 	}
 }
 
-orl::Option<ie::RelativeNormalSizing::Make> ieml::Decode<char, ie::RelativeNormalSizing::Make>::decode(ieml::Node const&) {
+auto ieml::Decode<char, ie::RelativeNormalSizing::Make>::decode(ieml::Node const&) -> orl::Option<ie::RelativeNormalSizing::Make> {
 	return {{}};
 }

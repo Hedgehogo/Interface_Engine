@@ -17,35 +17,41 @@ namespace ie {
 			
 			Make(BoxPtr<INonInteractive::Make>&& background, BoxPtr<INonInteractive::Make>&& strip, float offset = 0, bool horizontal = true);
 			
-			Make(BoxPtr<INonInteractive::Make>&& background, BoxPtr<INonInteractive::Make>&& strip, int division, float offset = 0, bool horizontal = true);
+			Make(
+				BoxPtr<INonInteractive::Make>&& background,
+				BoxPtr<INonInteractive::Make>&& strip,
+				int division,
+				float offset = 0,
+				bool horizontal = true
+			);
 			
-			Bar* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> Bar* override;
 		};
 		
 		Bar(Make&& make, InitInfo init_info);
 		
-		float get_value();
+		auto get_value() -> float;
 		
-		void set_value(float value);
+		auto set_value(float value) -> void;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		INonInteractive& get_background() override;
+		auto get_background() -> INonInteractive& override;
 		
-		const INonInteractive& get_background() const override;
+		auto get_background() const -> INonInteractive const& override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
-		LayoutData& layout_get_data() override;
+		auto layout_get_data() -> LayoutData& override;
 		
-		const LayoutData& layout_get_data() const override;
+		auto layout_get_data() const -> LayoutData const& override;
 		
 		LayoutData layout_;
 		BoxPtr<INonInteractive> background_;
@@ -59,5 +65,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::Bar::Make> {
-	static orl::Option<ie::Bar::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Bar::Make>;
 };

@@ -6,7 +6,7 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicAddBlockInteractionAction<T>* BasicAddBlockInteractionAction<T>::make(BasicActionInitInfo<T> init_info) {
+		auto BasicAddBlockInteractionAction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicAddBlockInteractionAction<T>* {
 			return new ie::BasicAddBlockInteractionAction<T>{std::move(*this), init_info};
 		}
 	}
@@ -17,6 +17,6 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicAddBlockInteractionAction<T>::stop_pressed() {
+	auto BasicAddBlockInteractionAction<T>::stop_pressed() -> void {
 	}
 }

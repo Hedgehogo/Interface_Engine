@@ -6,7 +6,7 @@ namespace ie {
 		object(std::move(object)) {
 	}
 	
-	BoxDebug* BoxDebug::Make::make(InitInfo init_info) {
+	auto BoxDebug::Make::make(InitInfo init_info) -> BoxDebug* {
 		return new BoxDebug{std::move(*this), init_info};
 	}
 	
@@ -23,41 +23,41 @@ namespace ie {
 		Box({}), object_(std::move(object)), render_target_(nullptr), active_(false), drawn_(false) {
 	}
 	
-	void BoxDebug::draw() {
+	auto BoxDebug::draw() -> void {
 		drawn_ = true;
 		object_->draw_debug(*render_target_, 0, 2, 0, 72);
 	}
 	
-	void BoxDebug::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxDebug::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		object_->resize(size, position);
 	}
 	
-	bool BoxDebug::update_interactions(sf::Vector2f mouse_position) {
+	auto BoxDebug::update_interactions(sf::Vector2f mouse_position) -> bool {
 		active_ = true;
 		return object_->update_interactions(mouse_position);
 	}
 	
-	sf::Vector2f BoxDebug::get_min_size() const {
+	auto BoxDebug::get_min_size() const -> sf::Vector2f {
 		return object_->get_min_size();
 	}
 	
-	sf::Vector2f BoxDebug::get_normal_size() const {
+	auto BoxDebug::get_normal_size() const -> sf::Vector2f {
 		return object_->get_normal_size();
 	}
 	
-	IScalable& BoxDebug::get_object() {
+	auto BoxDebug::get_object() -> IScalable& {
 		return *object_;
 	}
 	
-	const IScalable& BoxDebug::get_object() const {
+	auto BoxDebug::get_object() const -> IScalable const& {
 		return *object_;
 	}
 	
-	void BoxDebug::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
-		sf::Vector2f size{this->get_area_size() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2, indent * 2})};
+	auto BoxDebug::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
+		auto size{this->get_area_size() - sf::Vector2f{sf::Vector2i{indent * 2, indent * 2}}};
 		size = {std::round(size.x - 2.0f), std::round(size.y - 2.0f)};
-		sf::Vector2f position{this->get_area_position() + static_cast<sf::Vector2f>(sf::Vector2i{indent, indent})};
+		auto position{this->get_area_position() + sf::Vector2f{sf::Vector2i{indent, indent}}};
 		position = {std::round(position.x + 1.0f), std::round(position.y + 1.0f)};
 		
 		if(drawn_ || active_) {
@@ -80,12 +80,8 @@ namespace ie {
 		
 		object_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<BoxDebug>::decode_pointer(const YAML::Node& node, BoxDebug*& box_debug) {
-		box_debug = new BoxDebug{node["object"].as<BoxPtr<IScalable> >()};
-		return true;
+}
 
-	}
-	*/
+auto ieml::Decode<char, ie::BoxDebug>::decode(ieml::Node const& node) -> orl::Option<ie::BoxDebug> {
+	return {{node.at("object").except().as<ie::BoxPtr<ie::IScalable> >().except()}};
 }

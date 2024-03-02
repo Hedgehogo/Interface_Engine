@@ -1,32 +1,32 @@
 #include "IComponentBackground.hpp"
 
 namespace ie {
-	void IComponentBackground::set_position(sf::Vector2f position) {
+	auto IComponentBackground::set_position(sf::Vector2f position) -> void {
 		IComponentLayout::set_position(position);
 	}
 	
-	void IComponentBackground::move(sf::Vector2f position) {
+	auto IComponentBackground::move(sf::Vector2f position) -> void {
 		IComponentLayout::move(position);
 	}
 	
-	void IComponentBackground::set_size(sf::Vector2f size) {
+	auto IComponentBackground::set_size(sf::Vector2f size) -> void {
 		IComponentLayout::set_size(size);
 	}
 	
-	void IComponentBackground::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto IComponentBackground::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_get_data().resize(size, position);
 		get_background().resize(size, position);
 	}
 	
-	sf::Vector2f IComponentBackground::get_min_size() const {
+	auto IComponentBackground::get_min_size() const -> sf::Vector2f {
 		return get_background().get_min_size();
 	}
 	
-	sf::Vector2f IComponentBackground::get_normal_size() const {
+	auto IComponentBackground::get_normal_size() const -> sf::Vector2f {
 		return get_background().get_normal_size();
 	}
 	
-	void IComponentBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto IComponentBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		get_background().draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
 }

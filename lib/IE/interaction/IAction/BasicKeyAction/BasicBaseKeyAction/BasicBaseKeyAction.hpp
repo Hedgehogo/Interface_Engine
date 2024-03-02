@@ -8,18 +8,18 @@ namespace ie {
 	public:
 		BasicBaseKeyAction() = default;
 		
-		void set_pressed(bool pressed) override;
+		auto set_pressed(bool pressed) -> void override;
 		
-		void update(sf::Vector2i mouse_position, bool press) override;
+		auto update(sf::Vector2i mouse_position, bool press) -> void override;
 	
 	protected:
-		virtual void start_pressed() = 0;
+		virtual auto start_pressed() -> void = 0;
 		
-		virtual void stop_pressed() = 0;
+		virtual auto stop_pressed() -> void = 0;
 		
-		virtual void while_pressed() = 0;
+		virtual auto while_pressed() -> void = 0;
 		
-		virtual void while_not_pressed() = 0;
+		virtual auto while_not_pressed() -> void = 0;
 		
 		sf::Vector2i mouse_position_;
 	};

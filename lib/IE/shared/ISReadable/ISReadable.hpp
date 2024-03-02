@@ -17,7 +17,7 @@ namespace ie {
 		
 		template<typename T_>
 		struct ISReadable {
-			virtual rttb::Dyn make(SInitInfo init_info) = 0;
+			virtual auto make(SInitInfo init_info) -> rttb::Dyn = 0;
 			
 			virtual ~ISReadable() = default;
 		};
@@ -44,9 +44,9 @@ namespace ie {
 		friend class SReader;
 	
 	protected:
-		virtual ReadFn& add_read_fn(ReadFn&& read_fn) = 0;
+		virtual auto add_read_fn(ReadFn&& read_fn) -> ReadFn& = 0;
 		
-		virtual bool delete_read_fn(ReadFn& read_fn) = 0;
+		virtual auto delete_read_fn(ReadFn& read_fn) -> bool = 0;
 	};
 	
 	template<typename T_>

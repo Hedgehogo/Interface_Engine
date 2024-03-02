@@ -3,5 +3,3 @@
 #include "ISizing2/ConstRatioSizing2/ConstRatioSizing2.hpp"
 #include "IPositioning2/Positioning2/Positioning2.hpp"
 #include "IE/sizing-positioning/IPositioning2/FnPositioning2/FnPositioning2.hpp"
-
-

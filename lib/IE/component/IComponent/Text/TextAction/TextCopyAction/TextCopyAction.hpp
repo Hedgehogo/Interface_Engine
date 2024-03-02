@@ -17,7 +17,7 @@ namespace ie {
 			
 			BasicTextCopyAction(bp::BoxPtr<T>&& clipboard = bp::BoxPtr<T>{});
 			
-			ie::BasicTextCopyAction<T>* make(BasicActionInitInfo<Text&> init_info);
+			auto make(BasicActionInitInfo<Text&> init_info) -> ie::BasicTextCopyAction<T>*;
 		};
 	}
 	
@@ -29,16 +29,16 @@ namespace ie {
 		BasicTextCopyAction(Make&& make, BasicActionInitInfo<Text&> init_info);
 		
 	protected:
-		void start_pressed() override;
+		auto start_pressed() -> void override;
 		
-		void stop_pressed() override;
+		auto stop_pressed() -> void override;
 		
-		void while_pressed() override;
+		auto while_pressed() -> void override;
 		
-		void while_not_pressed() override;
+		auto while_not_pressed() -> void override;
 		
-		Text* text;
-		bp::BoxPtr<T> clipboard;
+		Text* text_;
+		bp::BoxPtr<T> clipboard_;
 	};
 	
 	using TextCopyAction = BasicTextCopyAction<sf::Clipboard>;
@@ -47,8 +47,8 @@ namespace ie {
 	///
 	/// Must contain functions:
 	/// @code
-	/// static void set_string(T& clipboard, sf::String str);
-	/// static sf::String get_string(T& clipboard);
+	/// static auto set_string(T& clipboard, sf::String str) -> void;
+	/// static auto get_string(T& clipboard) -> sf::String;
 	/// @endcode
 	///
 	/// @tparam T Clipboard type.
@@ -58,15 +58,15 @@ namespace ie {
 	
 	template<>
 	struct ProcessClipboard<sf::Clipboard> {
-		static void set_string(sf::Clipboard& clipboard, const sf::String& str);
+		static auto set_string(sf::Clipboard& clipboard, sf::String const& str) -> void;
 		
-		static sf::String get_string(sf::Clipboard& clipboard);
+		static auto get_string(sf::Clipboard& clipboard) -> sf::String;
 	};
 }
 
 template<typename T>
 struct ieml::Decode<char, ie::make_system::BasicTextCopyAction<T>> {
-	static orl::Option<ie::make_system::BasicTextCopyAction<T>> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicTextCopyAction<T>>;
 };
 
 #include "TextCopyAction.inl"

@@ -7,25 +7,25 @@ namespace ie {
 	class BaseLine {
 	public:
 		struct Make {
-			virtual BaseLine* make(LineInitInfo init_info) = 0;
+			virtual auto make(LineInitInfo init_info) -> BaseLine* = 0;
 			
 			virtual ~Make() = default;
 		};
 		
 		BaseLine(sf::PrimitiveType type, size_t vertex_count, orl::Option<sf::Color> color, LineInitInfo init_info);
 
-		virtual void draw();
+		virtual auto draw() -> void;
 		
-		virtual void move(sf::Vector2f position);
+		virtual auto move(sf::Vector2f position) -> void;
 		
-		virtual void resize(float start, float end, float height) = 0;
+		virtual auto resize(float start, float end, float height) -> void = 0;
 		
-		virtual BaseLine* copy() const = 0;
+		virtual auto copy() const -> BaseLine* = 0;
 		
 		virtual ~BaseLine() = default;
 	
 	protected:
-		sf::RenderTarget* render_target;
-		sf::VertexArray vertex_array;
+		sf::RenderTarget* render_target_;
+		sf::VertexArray vertex_array_;
 	};
 }

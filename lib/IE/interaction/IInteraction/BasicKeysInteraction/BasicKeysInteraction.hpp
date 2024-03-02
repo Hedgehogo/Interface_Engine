@@ -17,7 +17,7 @@ namespace ie {
 			
 			BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys = {});
 			
-			ie::BasicKeysInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicKeysInteraction<T>* override;
 		};
 	}
 	
@@ -28,19 +28,19 @@ namespace ie {
 		
 		BasicKeysInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		bool is_press() const;
+		auto is_press() const -> bool;
 		
-		std::vector<Key> get_keys();
+		auto get_keys() -> std::vector<Key>;
 		
-		BasicKeyAction<T>* get_action();
+		auto get_action() -> BasicKeyAction<T>*;
 		
-		void set_action(BasicKeyAction<T>* action);
+		auto set_action(BasicKeyAction<T>* action) -> void;
 		
-		void start(sf::Vector2i mouse_position) override;
+		auto start(sf::Vector2i mouse_position) -> void override;
 		
-		void update(sf::Vector2i mouse_position) override;
+		auto update(sf::Vector2i mouse_position) -> void override;
 		
-		void finish(sf::Vector2i) override;
+		auto finish(sf::Vector2i) -> void override;
 		
 	protected:
 		BoxPtr<BasicKeyAction<T> > action_;
@@ -54,7 +54,7 @@ namespace ie {
 
 template<typename T>
 struct ieml::Decode<char, ie::make_system::BasicKeysInteraction<T> > {
-	static orl::Option<ie::make_system::BasicKeysInteraction<T> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicKeysInteraction<T> >;
 };
 
 #include "BasicKeysInteraction.inl"

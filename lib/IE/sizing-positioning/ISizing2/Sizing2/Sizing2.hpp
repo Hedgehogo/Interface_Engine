@@ -21,14 +21,14 @@ namespace ie {
 			
 			Make(sf::Vector2f target_coefficient, sf::Vector2f parent_coefficient, sf::Vector2f addition);
 			
-			Sizing2* make(Sizing2InitInfo init_info) override;
+			auto make(Sizing2InitInfo init_info) -> Sizing2* override;
 		};
 		
 		Sizing2(Make&& make, Sizing2InitInfo init_info);
 		
-		sf::Vector2f find_size(sf::Vector2f parent_size) override;
+		auto find_size(sf::Vector2f parent_size) -> sf::Vector2f override;
 		
-		sf::Vector2f get_parent_size(sf::Vector2f object_size) override;
+		auto get_parent_size(sf::Vector2f object_size) -> sf::Vector2f override;
 		
 	protected:
 		BoxPtr<ISizing> horizontal_;
@@ -39,5 +39,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::Sizing2::Make> {
-	static orl::Option<ie::Sizing2::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Sizing2::Make>;
 };

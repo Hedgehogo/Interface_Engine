@@ -5,7 +5,7 @@ namespace ie {
 	SwitchTabsAction::Make::Make(size_t index) : index(index) {
 	}
 	
-	SwitchTabsAction* SwitchTabsAction::Make::make(BasicActionInitInfo<BoxSwitchTabs&> init_info) {
+	auto SwitchTabsAction::Make::make(BasicActionInitInfo<BoxSwitchTabs&> init_info) -> SwitchTabsAction* {
 		return new SwitchTabsAction{std::move(*this), init_info};
 	}
 	
@@ -13,20 +13,20 @@ namespace ie {
 		BaseSwitchTabsAction(init_info), index_(make.index), value_(box_->get_value()) {
 	}
 	
-	void SwitchTabsAction::start_pressed() {
+	auto SwitchTabsAction::start_pressed() -> void {
 	}
 	
-	void SwitchTabsAction::stop_pressed() {
+	auto SwitchTabsAction::stop_pressed() -> void {
 		value_.set(index_);
 	}
 	
-	void SwitchTabsAction::while_pressed() {
+	auto SwitchTabsAction::while_pressed() -> void {
 	}
 	
-	void SwitchTabsAction::while_not_pressed() {
+	auto SwitchTabsAction::while_not_pressed() -> void {
 	}
 }
 
-orl::Option<ie::SwitchTabsAction::Make> ieml::Decode<char, ie::SwitchTabsAction::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::SwitchTabsAction::Make>::decode(ieml::Node const& node) -> orl::Option<ie::SwitchTabsAction::Make> {
 	return {{node.get_as<size_t>("index").except().ok_or(0u)}};
 }

@@ -2,36 +2,36 @@
 #include "../../../IDrawable/DrawManager/DrawManager.hpp"
 
 namespace ie {
-	void IComponentObject::set_position(sf::Vector2f position) {
+	auto IComponentObject::set_position(sf::Vector2f position) -> void {
 		IComponentLayout::set_position(position);
 	}
 	
-	void IComponentObject::move(sf::Vector2f position) {
+	auto IComponentObject::move(sf::Vector2f position) -> void {
 		IComponentLayout::move(position);
 	}
 	
-	void IComponentObject::set_size(sf::Vector2f size) {
+	auto IComponentObject::set_size(sf::Vector2f size) -> void {
 		IComponentLayout::set_size(size);
 	}
 	
-	void IComponentObject::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto IComponentObject::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_get_data().resize(size, position);
 		get_object().resize(size, position);
 	}
 	
-	bool IComponentObject::update_interactions(sf::Vector2f mouse_position) {
+	auto IComponentObject::update_interactions(sf::Vector2f mouse_position) -> bool {
 		return get_object().update_interactions(mouse_position);
 	}
 	
-	sf::Vector2f IComponentObject::get_min_size() const {
+	auto IComponentObject::get_min_size() const -> sf::Vector2f {
 		return get_object().get_min_size();
 	}
 	
-	sf::Vector2f IComponentObject::get_normal_size() const {
+	auto IComponentObject::get_normal_size() const -> sf::Vector2f {
 		return get_object().get_normal_size();
 	}
 	
-	void IComponentObject::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto IComponentObject::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		get_object().draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}

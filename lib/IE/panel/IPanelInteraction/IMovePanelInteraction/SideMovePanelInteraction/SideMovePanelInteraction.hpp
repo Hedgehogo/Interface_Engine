@@ -14,14 +14,14 @@ namespace ie {
 			
 			Make(float coefficient, float offset, bool horizontal, bool at_start = false);
 			
-			SideMovePanelInteraction* make(PanelActionInitInfo init_info) override;
+			auto make(PanelActionInitInfo init_info) -> SideMovePanelInteraction* override;
 		};
 		
 		SideMovePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		bool get_at_start() override;
+		auto get_at_start() -> bool override;
 		
-		void move(sf::Vector2i mouse_position) override;
+		auto move(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
 		float coefficient_;
@@ -33,5 +33,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::SideMovePanelInteraction::Make> {
-	static orl::Option<ie::SideMovePanelInteraction::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::SideMovePanelInteraction::Make>;
 };

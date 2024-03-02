@@ -17,40 +17,40 @@ namespace ie {
 			InitInfo init_info
 		);
 		
-		bool on_slider(sf::Vector2i mouse_position);
+		auto on_slider(sf::Vector2i mouse_position) -> bool;
 		
-		sf::Vector2f get_slider_size();
+		auto get_slider_size() -> sf::Vector2f;
 		
-		sf::Vector2f get_value();
+		auto get_value() -> sf::Vector2f;
 		
-		ISMRVec2F& get_value_ptr();
+		auto get_value_ptr() -> ISMRVec2F&;
 		
-		void set_value(sf::Vector2f value);
+		auto set_value(sf::Vector2f value) -> void;
 		
-		void set_value_by_mouse(sf::Vector2i mouse_position);
+		auto set_value_by_mouse(sf::Vector2i mouse_position) -> void;
 		
-		sf::Vector2f move_slider(sf::Vector2f value, sf::Vector2f offset) const;
+		auto move_slider(sf::Vector2f value, sf::Vector2f offset) const -> sf::Vector2f;
 		
-		static sf::Vector2f round_value_to_division(sf::Vector2f value, sf::Vector2i division);
+		static auto round_value_to_division(sf::Vector2f value, sf::Vector2i division) -> sf::Vector2f;
 		
-		sf::Vector2f get_area_position() const override;
+		auto get_area_position() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_area_size() const override;
+		auto get_area_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override = 0;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override = 0;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
-		virtual void resize_slider(sf::Vector2f new_value);
+		virtual auto resize_slider(sf::Vector2f new_value) -> void;
 		
 		BasicInteractiveData<BaseSlider&> interactive_;
 		BoxPtr<INonInteractive> background_;

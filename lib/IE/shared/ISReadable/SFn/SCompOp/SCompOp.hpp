@@ -7,17 +7,17 @@ namespace ie {
 	namespace detail {
 		template<typename T_>
 		struct SCompOp {
-			static bool equal(T_ first, T_ second);
+			static auto equal(T_ first, T_ second) -> bool;
 			
-			static bool not_equal(T_ first, T_ second);
+			static auto not_equal(T_ first, T_ second) -> bool;
 			
-			static bool less(T_ first, T_ second);
+			static auto less(T_ first, T_ second) -> bool;
 			
-			static bool greater(T_ first, T_ second);
+			static auto greater(T_ first, T_ second) -> bool;
 			
-			static bool less_or_equal(T_ first, T_ second);
+			static auto less_or_equal(T_ first, T_ second) -> bool;
 			
-			static bool greater_or_equal(T_ first, T_ second);
+			static auto greater_or_equal(T_ first, T_ second) -> bool;
 		};
 	}
 	

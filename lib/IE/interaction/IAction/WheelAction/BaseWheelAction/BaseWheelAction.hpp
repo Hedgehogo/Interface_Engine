@@ -7,14 +7,14 @@ namespace ie {
 	public:
 		explicit BaseWheelAction();
 		
-		virtual void start_pressed(sf::Vector2i mouse_position, int value) = 0;
+		virtual auto start_pressed(sf::Vector2i mouse_position, int value) -> void = 0;
 		
-		virtual void stop_pressed(sf::Vector2i mouse_position, int value) = 0;
+		virtual auto stop_pressed(sf::Vector2i mouse_position, int value) -> void = 0;
 		
-		virtual void while_pressed(sf::Vector2i mouse_position, int value) = 0;
+		virtual auto while_pressed(sf::Vector2i mouse_position, int value) -> void = 0;
 		
-		virtual void while_not_pressed(sf::Vector2i mouse_position, int value) = 0;
+		virtual auto while_not_pressed(sf::Vector2i mouse_position, int value) -> void = 0;
 		
-		void update(sf::Vector2i mouse_position, int value) override;
+		auto update(sf::Vector2i mouse_position, int value) -> void override;
 	};
 }

@@ -3,7 +3,7 @@
 
 namespace ie {
 	template<typename T>
-	void make_rect_bones_position(sf::Rect<T> rect, sf::VertexArray& vertex_array){
+	auto make_rect_bones_position(sf::Rect<T> rect, sf::VertexArray& vertex_array) -> void {
 		vertex_array[0].position = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top}};
 		vertex_array[1].position = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top}};
 		vertex_array[2].position = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top + rect.height}};
@@ -11,160 +11,168 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void make_rect_bones_tex_coords(sf::Rect<T> rect, sf::VertexArray& vertex_array){
+	auto make_rect_bones_tex_coords(sf::Rect<T> rect, sf::VertexArray& vertex_array) -> void {
 		vertex_array[0].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top}};
 		vertex_array[1].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top}};
 		vertex_array[2].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left + rect.width, rect.top + rect.height}};
- 		vertex_array[3].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top + rect.height}};
+		vertex_array[3].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top + rect.height}};
 	}
 	
 	Character::Character(
 		char32_t character,
 		TextVariables& text_variables,
-		std::vector<BoxPtr<BaseLine>>& lines,
+		std::vector<BoxPtr<BaseLine> >& lines,
 		orl::Option<sf::RenderTarget&> render_target
-	) : render_target(character == '\n' ? orl::Option<sf::RenderTarget&>{} : render_target),
-		character(character),
-		glyph(text_variables.font.some().getGlyph(character, text_variables.size.some(), text_variables.style.some() & sf::Text::Style::Bold)),
-		advance(glyph.advance),
-		kerning(0),
-		text_variables(text_variables),
-		vertex_array(sf::Quads, 4),
-		selection_vertex_array(sf::Quads, 4),
-		texture(text_variables.font.some().getTexture(text_variables.size.some())),
-		lines(lines) {
+	) :
+		render_target_(character == '\n' ? orl::Option<sf::RenderTarget&>{} : render_target),
+		character_(character),
+		glyph_(text_variables.font.some().getGlyph(
+			character,
+			text_variables.size.some(),
+			text_variables.style.some() & sf::Text::Style::Bold
+		)),
+		advance_(glyph_.advance),
+		kerning_(0),
+		text_variables_(text_variables),
+		vertex_array_(sf::Quads, 4),
+		selection_vertex_array_(sf::Quads, 4),
+		texture_(text_variables.font.some().getTexture(text_variables.size.some())),
+		lines_(lines) {
 		if(render_target.is_some()) {
-			make_rect_bones_tex_coords(glyph.textureRect, vertex_array);
+			make_rect_bones_tex_coords(glyph_.textureRect, vertex_array_);
 			
-			make_rect_bones_position<int>({0, 0, glyph.textureRect.width, glyph.textureRect.height}, vertex_array);
+			make_rect_bones_position<int>({0, 0, glyph_.textureRect.width, glyph_.textureRect.height}, vertex_array_);
 			
-			make_rect_bones_position<float>({0, 0, get_advance(), get_height()}, selection_vertex_array);
+			make_rect_bones_position<float>({0, 0, get_advance(), get_height()}, selection_vertex_array_);
 			
 			if(text_variables.style.some() & sf::Text::Style::Italic) {
 				float italic_shear = -0.26794;
 				
 				for(size_t i = 0; i < 4; ++i) {
-					vertex_array[i].position.x += (vertex_array[i].position.y + glyph.bounds.top) * italic_shear;
+					vertex_array_[i].position.x += (vertex_array_[i].position.y + glyph_.bounds.top) * italic_shear;
 				}
 			}
 			
 			for(size_t i = 0; i < 4; ++i) {
-				vertex_array[i].position += {glyph.bounds.left, glyph.bounds.top};
-				selection_vertex_array[i].position.y -= get_height();
+				vertex_array_[i].position += {glyph_.bounds.left, glyph_.bounds.top};
+				selection_vertex_array_[i].position.y -= get_height();
 				
-				vertex_array[i].color = text_variables.text_color.some();
-				selection_vertex_array[i].color = text_variables.background_selection_color.some();
+				vertex_array_[i].color = text_variables.text_color.some();
+				selection_vertex_array_[i].color = text_variables.background_selection_color.some();
 			}
 		}
 	}
 	
-	void Character::set_active(bool active) {
+	auto Character::set_active(bool active) -> void {
 		BaseCharacter::set_active(active);
 		if(active) {
 			for(int i = 0; i < 4; ++i) {
-				vertex_array[i].color = text_variables.text_selection_color.some();
-				selection_vertex_array[i].color = text_variables.background_selection_color.some();
+				vertex_array_[i].color = text_variables_.text_selection_color.some();
+				selection_vertex_array_[i].color = text_variables_.background_selection_color.some();
 			}
 		} else {
 			for(int i = 0; i < 4; ++i) {
-				vertex_array[i].color = text_variables.inactive_text_selection_color.some();
-				selection_vertex_array[i].color = text_variables.inactive_background_selection_color.some();
+				vertex_array_[i].color = text_variables_.inactive_text_selection_color.some();
+				selection_vertex_array_[i].color = text_variables_.inactive_background_selection_color.some();
 			}
 		}
 	}
 	
-	sf::Vector2i Character::get_size_texture() {
-		if(get_char() == U' ')
-			return {static_cast<int>(get_advance()), static_cast<int>(get_height())};
-		return {glyph.textureRect.width, glyph.textureRect.height};
+	auto Character::get_size_texture() -> sf::Vector2i {
+		if(get_char() == U' ') {
+			return sf::Vector2i{sf::Vector2f{get_advance(), get_height()}};
+		}
+		return {glyph_.textureRect.width, glyph_.textureRect.height};
 	}
 	
-	void Character::set_selection(bool selection) {
+	auto Character::set_selection(bool selection) -> void {
 		BaseCharacter::set_selection(selection);
-		auto current_color{selection ? text_variables.text_selection_color.some() : text_variables.text_color.some()};
+		auto current_color{selection ? text_variables_.text_selection_color.some() : text_variables_.text_color.some()};
 		for(size_t i = 0; i < 4; ++i) {
-			vertex_array[i].color = current_color;
+			vertex_array_[i].color = current_color;
 		}
 	}
 	
-	void Character::draw() {
-		for(auto& render_target_value: render_target) {
-			if(selection) {
-				render_target_value.draw(selection_vertex_array);
+	auto Character::draw() -> void {
+		for(auto& render_target_value: render_target_) {
+			if(selection_) {
+				render_target_value.draw(selection_vertex_array_);
 			}
-			render_target_value.draw(vertex_array, &texture);
+			render_target_value.draw(vertex_array_, &texture_);
 		}
 	}
 	
-	BaseCharacter::Special Character::is_special() {
-		if(character == L' ')
+	auto Character::is_special() -> Special {
+		if(character_ == L' ') {
 			return BaseCharacter::Special::Space;
-		else if(character == L'\n')
+		} else if(character_ == L'\n') {
 			return BaseCharacter::Special::Enter;
+		}
 		return BaseCharacter::Special::No;
 	}
 	
-	char32_t Character::get_char() {
-		return character;
+	auto Character::get_char() -> char32_t {
+		return character_;
 	}
 	
-	float Character::get_kerning(char32_t character) {
-		return text_variables.font.some().getKerning(this->character, character, text_variables.size.some());
+	auto Character::get_kerning(char32_t character) -> float {
+		return text_variables_.font.some().getKerning(this->character_, character, text_variables_.size.some());
 	}
 	
-	float Character::get_advance() {
-		return advance;
+	auto Character::get_advance() -> float {
+		return advance_;
 	}
 	
-	float Character::get_height() const {
-		return text_variables.size.some_or(0);
+	auto Character::get_height() const -> float {
+		return text_variables_.size.some_or(0);
 	}
 	
-	void Character::set_position(sf::Vector2f position) {
-		position.x += kerning;
-		move(position - this->position);
+	auto Character::set_position(sf::Vector2f position) -> void {
+		position.x += kerning_;
+		move(position - this->position_);
 		BaseCharacter::set_position(position);
 	}
 	
-	void Character::set_kerning(float kerning) {
-		advance -= this->kerning;
-		advance += kerning;
-		this->kerning = kerning;
-		selection_vertex_array[0].position -= {kerning, 0};
-		selection_vertex_array[3].position -= {kerning, 0};
+	auto Character::set_kerning(float kerning) -> void {
+		advance_ -= this->kerning_;
+		advance_ += kerning;
+		this->kerning_ = kerning;
+		selection_vertex_array_[0].position -= {kerning, 0};
+		selection_vertex_array_[3].position -= {kerning, 0};
 	}
 	
-	void Character::move(sf::Vector2f position) {
+	auto Character::move(sf::Vector2f position) -> void {
 		BaseCharacter::move(position);
 		for(size_t i = 0; i < 4; ++i) {
-			selection_vertex_array[i].position += position;
-			         vertex_array[i].position += position;
+			selection_vertex_array_[i].position += position;
+			vertex_array_[i].position += position;
 		}
 	}
 	
-	const std::vector<BoxPtr<BaseLine>>& Character::get_line() {
-		return lines;
+	auto Character::get_line() -> std::vector<BoxPtr<BaseLine> > const& {
+		return lines_;
 	}
 	
-	bool Character::in(sf::Vector2f mouse_position) {
-		return position.x < mouse_position.x && position.x + get_advance() > mouse_position.x &&
-			   position.y - get_height() < mouse_position.y && position.y > mouse_position.y;
+	auto Character::in(sf::Vector2f mouse_position) -> bool {
+		return
+			position_.x < mouse_position.x && position_.x + get_advance() > mouse_position.x &&
+			position_.y - get_height() < mouse_position.y && position_.y > mouse_position.y;
 	}
 	
-	bool Character::debug = false;
+	bool Character::debug_ = false;
 	
-	void Character::set_debug(bool debug) {
-		Character::debug = debug;
+	auto Character::set_debug(bool debug) -> void {
+		Character::debug_ = debug;
 	}
 	
-	void Character::draw_debug(sf::RenderTarget& render_target, int, size_t hue, size_t) {
-		if(debug) {
-			sf::Vector2f size{get_advance() - 2.0f, get_height() - 2.0f};
-			sf::Vector2f position{this->get_position() + sf::Vector2f{1.0f, 1.0f - get_height()}};
+	auto Character::draw_debug(sf::RenderTarget& render_target, int, size_t hue, size_t) -> void {
+		if(debug_) {
+			auto size{sf::Vector2f{get_advance() - 2.0f, get_height() - 2.0f}};
+			auto position{this->get_position() + sf::Vector2f{1.0f, 1.0f - get_height()}};
 			if(size.x > 0 && size.y > 0) {
-				sf::Color color{hsv_to_rgb(static_cast<float>(hue % 360))};
+				auto color{hsv_to_rgb(static_cast<float>(hue % 360))};
 				
-				sf::RectangleShape rectangle{size};
+				auto rectangle{sf::RectangleShape{size}};
 				rectangle.setPosition(position);
 				rectangle.setFillColor(sf::Color::Transparent);
 				rectangle.setOutlineThickness(1);

@@ -17,12 +17,12 @@ namespace ie {
 			
 			Make(FindPositionFn find_position_fn);
 			
-			FnPositioning2* make(Positioning2InitInfo init_info) override;
+			auto make(Positioning2InitInfo init_info) -> FnPositioning2* override;
 		};
 		
 		FnPositioning2(Make&& make, Positioning2InitInfo init_info);
 		
-		sf::Vector2f find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) override;
+		auto find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) -> sf::Vector2f override;
 		
 	protected:
 		FindPositionFn find_position_fn_;

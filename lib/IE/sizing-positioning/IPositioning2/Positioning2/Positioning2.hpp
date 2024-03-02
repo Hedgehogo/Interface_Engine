@@ -20,12 +20,12 @@ namespace ie {
 			
 			Make(sf::Vector2f coefficient, sf::Vector2f object_coefficient, sf::Vector2f offset, bool relative_target = false);
 			
-			Positioning2* make(Positioning2InitInfo init_info) override;
+			auto make(Positioning2InitInfo init_info) -> Positioning2* override;
 		};
 		
 		Positioning2(Make&& make, Positioning2InitInfo init_info);
 		
-		sf::Vector2f find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) override;
+		auto find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) -> sf::Vector2f override;
 		
 	protected:
 		BoxPtr<IPositioning> horizontal_;
@@ -36,5 +36,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::Positioning2::Make> {
-	static orl::Option<ie::Positioning2::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Positioning2::Make>;
 };

@@ -6,7 +6,7 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicAddInteractionAction<T>* BasicAddInteractionAction<T>::make(BasicActionInitInfo<T> init_info) {
+		auto BasicAddInteractionAction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicAddInteractionAction<T>* {
 			return new ie::BasicAddInteractionAction<T>{std::move(*this), init_info};
 		}
 	}
@@ -17,25 +17,25 @@ namespace ie {
 	}
 	
 	template<typename T>
-	IBasicInteraction<T>& BasicAddInteractionAction<T>::get_interaction() {
+	auto BasicAddInteractionAction<T>::get_interaction() -> IBasicInteraction<T>& {
 		return *interaction_;
 	}
 	
 	template<typename T>
-	void BasicAddInteractionAction<T>::start_pressed() {
+	auto BasicAddInteractionAction<T>::start_pressed() -> void {
 		interaction_manager_->add_interaction(*interaction_);
 	}
 	
 	template<typename T>
-	void BasicAddInteractionAction<T>::stop_pressed() {
+	auto BasicAddInteractionAction<T>::stop_pressed() -> void {
 		interaction_manager_->delete_interaction(*interaction_);
 	}
 	
 	template<typename T>
-	void BasicAddInteractionAction<T>::while_pressed() {
+	auto BasicAddInteractionAction<T>::while_pressed() -> void {
 	}
 	
 	template<typename T>
-	void BasicAddInteractionAction<T>::while_not_pressed() {
+	auto BasicAddInteractionAction<T>::while_not_pressed() -> void {
 	}
 }

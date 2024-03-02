@@ -5,7 +5,7 @@ namespace ie {
 		coefficient(coefficient), addition(addition) {
 	}
 	
-	TargetCoefficientSizing* TargetCoefficientSizing::Make::make(float normal_size) {
+	auto TargetCoefficientSizing::Make::make(float normal_size) -> TargetCoefficientSizing* {
 		return new TargetCoefficientSizing{std::move(*this), normal_size};
 	}
 	
@@ -16,12 +16,12 @@ namespace ie {
 	TargetCoefficientSizing::TargetCoefficientSizing(float coefficient, float addition) : coefficient_(coefficient), addition_(addition) {
 	}
 	
-	float TargetCoefficientSizing::find_size(float, float target_size) {
+	auto TargetCoefficientSizing::find_size(float, float target_size) -> float {
 		return target_size * coefficient_ + addition_;
 	}
 }
 
-orl::Option<ie::TargetCoefficientSizing::Make> ieml::Decode<char, ie::TargetCoefficientSizing::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::TargetCoefficientSizing::Make>::decode(ieml::Node const& node) -> orl::Option<ie::TargetCoefficientSizing::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::TargetCoefficientSizing::Make{
 		map.at("coefficient").except().as<float>().except(),

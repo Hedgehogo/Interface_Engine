@@ -27,42 +27,42 @@ namespace ie {
 				sf::Vector2f min_size = {}
 			);
 			
-			BoxConstRatio* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxConstRatio* override;
 		};
 		
 		BoxConstRatio(Make&& make, InitInfo init_info);
 		
-		Corner get_corner();
+		auto get_corner() -> Corner;
 		
-		void set_position(sf::Vector2f position) override;
+		auto set_position(sf::Vector2f position) -> void override;
 		
-		void move(sf::Vector2f position) override;
+		auto move(sf::Vector2f position) -> void override;
 		
-		void set_size(sf::Vector2f size) override;
+		auto set_size(sf::Vector2f size) -> void override;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		INonInteractive& get_background() override;
+		auto get_background() -> INonInteractive& override;
 		
-		const INonInteractive& get_background() const override;
+		auto get_background() const -> const INonInteractive& override;
 		
-		IScalable& get_first_object() override;
+		auto get_first_object() -> IScalable& override;
 		
-		const IScalable& get_first_object() const override;
+		auto get_first_object() const -> IScalable const& override;
 		
-		IScalable& get_second_object() override;
+		auto get_second_object() -> IScalable& override;
 		
-		const IScalable& get_second_object() const override;
+		auto get_second_object() const -> IScalable const& override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
 		DrawManager second_draw_manager_;
@@ -77,5 +77,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxConstRatio::Make> {
-	static orl::Option<ie::BoxConstRatio::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxConstRatio::Make>;
 };

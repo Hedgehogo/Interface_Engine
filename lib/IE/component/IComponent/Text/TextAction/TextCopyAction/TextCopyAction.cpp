@@ -1,11 +1,11 @@
 #include "TextCopyAction.hpp"
 
 namespace ie {
-	void ProcessClipboard<sf::Clipboard>::set_string(sf::Clipboard&, const sf::String& str) {
+	auto ProcessClipboard<sf::Clipboard>::set_string(sf::Clipboard&, sf::String const& str) -> void {
 		sf::Clipboard::setString(str);
 	}
 	
-	sf::String ProcessClipboard<sf::Clipboard>::get_string(sf::Clipboard&) {
+	auto ProcessClipboard<sf::Clipboard>::get_string(sf::Clipboard&) -> sf::String {
 		return sf::Clipboard::getString();
 	}
 }

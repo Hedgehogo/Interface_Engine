@@ -6,7 +6,7 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicPressedInteraction<T>* BasicPressedInteraction<T>::make(BasicActionInitInfo<T> init_info) {
+		auto BasicPressedInteraction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicPressedInteraction<T>* {
 			return new ie::BasicPressedInteraction<T>{std::move(*this), init_info};
 		}
 	}
@@ -17,7 +17,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicPressedInteraction<T>::update(sf::Vector2i mouse_position) {
+	auto BasicPressedInteraction<T>::update(sf::Vector2i mouse_position) -> void {
 		if(KeyHandler::is_key_pressed(this->key_)) {
 			this->action_->update(mouse_position, true);
 		} else {

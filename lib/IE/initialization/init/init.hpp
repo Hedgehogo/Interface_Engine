@@ -60,13 +60,6 @@
 #include "IE/component/IComponent/IScalable/BasicInteractiveData/Switcher/SwitherAction/SwitcherAction.hpp"
 #include "IE/shared/ISReadable/readable.hpp"
 #include "IE/shared/ISReadable/ISRanged/STime/STime.hpp"
-//#include "IE/modules/yaml-cpp/shared/ISValue/KeyAction/SetSValueAction/SetSValueAction.hpp"
-//#include "IE/modules/yaml-cpp/shared/ISValue/ISConvertValue/BaseSConvertToBoolComparison/SConvertToBoolEquals/SConvertToBoolEquals.hpp"
-//#include "IE/modules/yaml-cpp/shared/ISValue/ISConvertValue/BaseSConvertToBoolComparison/SConvertToBoolGreater/SConvertToBoolGreater.hpp"
-//#include "IE/modules/yaml-cpp/shared/ISValue/ISConvertValue/BaseSConvertToBoolComparison/SConvertToBoolLess/SConvertToBoolLess.hpp"
-//#include "IE/modules/yaml-cpp/shared/ISValue/ISConvertValue/BaseSConvertToBoolComparison/SConvertToBoolLessOrEquals/SConvertToBoolLessOrEquals.hpp"
-//#include "IE/modules/yaml-cpp/shared/ISValue/ISConvertValue/BaseSConvertToBoolComparison/SConvertToBoolGreaterOrEquals/SConvertToBoolGreaterOrEquals.hpp"
-//#include "IE/modules/yaml-cpp/shared/ISValue/ISConvertValue/SConvertRange/SConvertRange.hpp"
 //#include "IE/animation/Animator/IAnimatorUnit/Animation/Animation.hpp"
 //#include "IE/animation/Animator/IAnimatorUnit/Prerequisite/Prerequisite.hpp"
 //#include "IE/animation/Animator/IAnimatorUnit/AnimatorUnitMatch/AnimatorUnitMatch.hpp"
@@ -78,7 +71,7 @@
 #include "IE/debug/BoxDebug/BoxDebug.hpp"
 
 namespace ie {
-	void init(int argc = 0, char *argv[] = {}, std::filesystem::path modules_list = {});
+	auto init(int argc = 0, char *argv[] = {}, std::filesystem::path modules_list = {}) -> void;
 	
-	void ieml_rttb_init();
+	auto ieml_rttb_init() -> void;
 }

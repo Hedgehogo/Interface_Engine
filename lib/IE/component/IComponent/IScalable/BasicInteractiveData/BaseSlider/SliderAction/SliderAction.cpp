@@ -6,7 +6,7 @@ namespace ie {
 	SliderAction::Make::Make(sf::Vector2i division) : division(division) {
 	}
 	
-	SliderAction* SliderAction::Make::make(BasicActionInitInfo<BaseSlider&> init_info) {
+	auto SliderAction::Make::make(BasicActionInitInfo<BaseSlider&> init_info) -> SliderAction* {
 		return new SliderAction{std::move(*this), init_info};
 	}
 	
@@ -14,11 +14,11 @@ namespace ie {
 		slider_(&init_info.additional), division_(make.division) {
 	}
 	
-	sf::Vector2f SliderAction::get_mouse_position() {
+	auto SliderAction::get_mouse_position() -> sf::Vector2f {
 		return sf::Vector2f{mouse_position_};
 	}
 	
-	void SliderAction::start_pressed() {
+	auto SliderAction::start_pressed() -> void {
 		if(!slider_->on_slider(mouse_position_)) {
 			slider_->set_value_by_mouse(mouse_position_);
 		}
@@ -26,21 +26,24 @@ namespace ie {
 		start_mouse_position_ = mouse_position_;
 	}
 	
-	void SliderAction::stop_pressed() {
+	auto SliderAction::stop_pressed() -> void {
 	}
 	
-	void SliderAction::while_pressed() {
-		sf::Vector2f mouse_offset{sf::Vector2i{mouse_position_.x - start_mouse_position_.x, mouse_position_.y - start_mouse_position_.y}};
-		sf::Vector2f new_value;
-		new_value = slider_->move_slider(start_value_, mouse_offset);
-		new_value = BaseSlider::round_value_to_division(new_value, division_);
-		slider_->set_value(new_value);
+	auto SliderAction::while_pressed() -> void {
+		auto const mouse_offset{sf::Vector2f{sf::Vector2i{
+			mouse_position_.x - start_mouse_position_.x,
+			mouse_position_.y - start_mouse_position_.y
+		}}};
+		slider_->set_value(BaseSlider::round_value_to_division(
+			slider_->move_slider(start_value_, mouse_offset),
+			division_
+		));
 	}
 	
-	void SliderAction::while_not_pressed() {
+	auto SliderAction::while_not_pressed() -> void {
 	}
 	
-	void SliderAction::set_slider(BaseSlider& slider) {
+	auto SliderAction::set_slider(BaseSlider& slider) -> void {
 		this->slider_ = &slider;
 	}
 }

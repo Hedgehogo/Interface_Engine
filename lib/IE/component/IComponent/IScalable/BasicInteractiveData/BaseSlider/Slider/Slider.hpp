@@ -37,20 +37,20 @@ namespace ie {
 				bool wheel_horizontal = false
 			);
 			
-			Slider* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> Slider* override;
 		};
 		
 		Slider(Make&& make, InitInfo init_info);
 		
-		void set_scale(sf::Vector2f scale);
+		auto set_scale(sf::Vector2f scale) -> void;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		const INonInteractive& get_background() const;
+		auto get_background() const -> INonInteractive const&;
 		
-		const INonInteractive& get_slider() const;
+		auto get_slider() const -> INonInteractive const&;
 		
 	protected:
 		sf::Vector2f scale_;
@@ -59,5 +59,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::Slider::Make> {
-	static orl::Option<ie::Slider::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Slider::Make>;
 };

@@ -11,14 +11,14 @@ namespace ie {
 			
 			Make(sf::Vector2f coefficient);
 		
-			InternalPositioning2* make(Positioning2InitInfo init_info) override;
+			auto make(Positioning2InitInfo init_info) -> InternalPositioning2* override;
 		};
 		
 		InternalPositioning2(Make&& make, Positioning2InitInfo init_info);
 		
 		InternalPositioning2(sf::Vector2f coefficient);
 		
-		sf::Vector2f find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size);
+		auto find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) -> sf::Vector2f;
 	
 	protected:
 		InternalPositioning vertical_;
@@ -28,5 +28,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::InternalPositioning2::Make> {
-	static orl::Option<ie::InternalPositioning2::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::InternalPositioning2::Make>;
 };

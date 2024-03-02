@@ -10,9 +10,9 @@ namespace ie {
 		
 		FnPositioning(FindPositionFn find_position_fn);
 		
-		float find_position(float parent_position, float object_size, float parent_size, float target_size) override;
+		auto find_position(float parent_position, float object_size, float parent_size, float target_size) -> float override;
 		
-		FnPositioning* copy() override;
+		auto copy() -> FnPositioning* override;
 	
 	protected:
 		FindPositionFn find_position_fn_;

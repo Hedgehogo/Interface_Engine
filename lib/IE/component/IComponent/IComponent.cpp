@@ -2,42 +2,43 @@
 #include "IE/utils/color/hsv_to_rgb/hsv_to_rgb.hpp"
 
 namespace ie {
-	void IComponent::set_position(sf::Vector2f position) {
+	auto IComponent::set_position(sf::Vector2f position) -> void {
 		resize(get_area_size(), position);
 	}
 	
-	void IComponent::move(sf::Vector2f position) {
+	auto IComponent::move(sf::Vector2f position) -> void {
 		resize(get_area_size(), get_area_position() + position);
 	}
 	
-	void IComponent::set_size(sf::Vector2f size) {
+	auto IComponent::set_size(sf::Vector2f size) -> void {
 		resize(size, get_area_position());
 	}
 	
-	sf::Vector2f IComponent::get_position() const {
+	auto IComponent::get_position() const -> sf::Vector2f {
 		return get_area_position();
 	}
 	
-	sf::Vector2f IComponent::get_size() const {
+	auto IComponent::get_size() const -> sf::Vector2f {
 		return get_area_size();
 	}
 	
-	bool IComponent::in_area(sf::Vector2f point_position) const {
-		sf::Vector2f size{get_area_size()};
-		sf::Vector2f position{get_area_position()};
-		return point_position.x > position.x && point_position.x < position.x + size.x &&
-			   point_position.y > position.y && point_position.y < position.y + size.y;
+	auto IComponent::in_area(sf::Vector2f point_position) const -> bool {
+		auto size{get_area_size()};
+		auto position{get_area_position()};
+		return
+			point_position.x > position.x && point_position.x < position.x + size.x &&
+			point_position.y > position.y && point_position.y < position.y + size.y;
 	}
 	
-	bool IComponent::in(sf::Vector2f point_position) const {
+	auto IComponent::in(sf::Vector2f point_position) const -> bool {
 		return in_area(point_position);
 	}
 	
-	void IComponent::draw_debug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& render_target, size_t hue) {
+	auto IComponent::draw_debug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& render_target, size_t hue) -> void {
 		if(size.x > 0 && size.y > 0) {
-			sf::Color color{hsv_to_rgb(static_cast<float>(hue % 360))};
+			auto color{hsv_to_rgb(static_cast<float>(hue % 360))};
 			
-			sf::RectangleShape rectangle{size};
+			auto rectangle{sf::RectangleShape{size}};
 			rectangle.setPosition(position);
 			rectangle.setFillColor(sf::Color::Transparent);
 			rectangle.setOutlineThickness(1);
@@ -45,7 +46,7 @@ namespace ie {
 			
 			render_target.draw(rectangle);
 			
-			sf::CircleShape circle{2, 4};
+			auto circle{sf::CircleShape{2, 4}};
 			circle.setPosition(position + size * 0.5f - sf::Vector2f{2.0f, 2.0f});
 			circle.setFillColor(color);
 			
@@ -53,13 +54,13 @@ namespace ie {
 		}
 	}
 	
-	void IComponent::draw_debug(sf::RenderTarget& render_target, int indent, int, size_t hue, size_t) {
-		sf::Vector2f size{this->get_area_size() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2 + 2, indent * 2 + 2})};
-		sf::Vector2f position{this->get_area_position() + static_cast<sf::Vector2f>(sf::Vector2i{indent + 1, indent + 1})};
+	auto IComponent::draw_debug(sf::RenderTarget& render_target, int indent, int, size_t hue, size_t) -> void {
+		auto size{this->get_area_size() - static_cast<sf::Vector2f>(sf::Vector2i{indent * 2 + 2, indent * 2 + 2})};
+		auto position{this->get_area_position() + static_cast<sf::Vector2f>(sf::Vector2i{indent + 1, indent + 1})};
 		if(size.x > 0 && size.y > 0) {
-			sf::Color color{hsv_to_rgb(static_cast<float>(hue % 360))};
+			auto color{hsv_to_rgb(static_cast<float>(hue % 360))};
 			
-			sf::RectangleShape rectangle{size};
+			auto rectangle{sf::RectangleShape{size}};
 			rectangle.setPosition(position);
 			rectangle.setFillColor(sf::Color::Transparent);
 			rectangle.setOutlineThickness(1);
@@ -67,7 +68,7 @@ namespace ie {
 			
 			render_target.draw(rectangle);
 			
-			sf::CircleShape circle{2, 4};
+			auto circle{sf::CircleShape{2, 4}};
 			circle.setPosition(position + size * 0.5f - sf::Vector2f{2.0f, 2.0f});
 			circle.setFillColor(color);
 			

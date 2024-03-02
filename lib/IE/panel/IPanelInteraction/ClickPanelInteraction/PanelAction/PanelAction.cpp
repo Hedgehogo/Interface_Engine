@@ -6,11 +6,11 @@ namespace ie {
 		panel_(&init_info.additional), panel_manager_(&init_info.panel_manager) {
 	}
 	
-	void PanelAction::set_panel(Panel& panel) {
+	auto PanelAction::set_panel(Panel& panel) -> void {
 		this->panel_ = &panel;
 	}
 	
-	Panel* PanelAction::get_panel() {
+	auto PanelAction::get_panel() -> Panel* {
 		return panel_;
 	}
 }

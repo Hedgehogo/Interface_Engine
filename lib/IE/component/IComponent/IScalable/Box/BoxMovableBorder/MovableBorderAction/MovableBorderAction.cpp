@@ -3,19 +3,19 @@
 #include "../BoxMovableBorder.hpp"
 
 namespace ie {
-	MovableBorderAction* MovableBorderAction::Make::make(BasicActionInitInfo<BoxMovableBorder&> init_info) {
-		return new MovableBorderAction{std::move(*this), init_info};
-	}
-	
 	MovableBorderAction::MovableBorderAction(Make&&, BasicActionInitInfo<BoxMovableBorder&> init_info) :
 		box_(&init_info.additional) {
 	}
 	
-	void MovableBorderAction::set_box(BoxMovableBorder& box) {
+	auto MovableBorderAction::Make::make(BasicActionInitInfo<BoxMovableBorder&> init_info) -> MovableBorderAction* {
+		return new MovableBorderAction{std::move(*this), init_info};
+	}
+	
+	auto MovableBorderAction::set_box(BoxMovableBorder& box) -> void {
 		this->box_ = &box;
 	}
 	
-	void MovableBorderAction::start_pressed() {
+	auto MovableBorderAction::start_pressed() -> void {
 		this->active_ = box_->is_in_border(static_cast<sf::Vector2f>(mouse_position_));
 		if(this->active_) {
 			start_mouse_position_ = mouse_position_;
@@ -23,11 +23,11 @@ namespace ie {
 		}
 	}
 	
-	void MovableBorderAction::stop_pressed() {
+	auto MovableBorderAction::stop_pressed() -> void {
 		this->active_ = false;
 	}
 	
-	void MovableBorderAction::while_pressed() {
+	auto MovableBorderAction::while_pressed() -> void {
 		if(this->active_) {
 			sf::Vector2f mouse_offset = static_cast<sf::Vector2f>(mouse_position_ - this->start_mouse_position_);
 			float value_offset = 0;
@@ -42,6 +42,6 @@ namespace ie {
 		}
 	}
 	
-	void MovableBorderAction::while_not_pressed() {
+	auto MovableBorderAction::while_not_pressed() -> void {
 	}
 }

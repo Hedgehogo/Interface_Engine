@@ -7,14 +7,14 @@ namespace ie {
 	class RelativeNormalSizing : public virtual ISizing {
 	public:
 		struct Make : public virtual ISizing::Make {
-			RelativeNormalSizing* make(float normal_size) override;
+			auto make(float normal_size) -> RelativeNormalSizing* override;
 		};
 		
 		RelativeNormalSizing(Make&& make, float normal_size);
 		
 		RelativeNormalSizing();
 		
-		float find_size(float, float) override;
+		auto find_size(float, float) -> float override;
 		
 	protected:
 		float normal_size_;
@@ -23,5 +23,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::RelativeNormalSizing::Make> {
-	static orl::Option<ie::RelativeNormalSizing::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::RelativeNormalSizing::Make>;
 };

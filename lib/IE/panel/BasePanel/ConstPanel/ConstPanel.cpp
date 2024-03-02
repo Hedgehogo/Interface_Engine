@@ -7,7 +7,7 @@ namespace ie {
 		object(std::move(object)), sizing(std::move(sizing)), positioning(std::move(positioning)), displayed(displayed) {
 	}
 	
-	ConstPanel* ConstPanel::Make::make(InitInfo init_info) {
+	auto ConstPanel::Make::make(InitInfo init_info) -> ConstPanel* {
 		return new ConstPanel{std::move(*this), init_info};
 	}
 	
@@ -23,16 +23,16 @@ namespace ie {
 		init_info.panel_manager.display_panel(this);
 	}
 	
-	bool ConstPanel::is_independent() {
+	auto ConstPanel::is_independent() -> bool {
 		return false;
 	}
 	
-	bool ConstPanel::is_free() {
+	auto ConstPanel::is_free() -> bool {
 		return true;
 	}
 }
 
-orl::Option<ie::ConstPanel::Make> ieml::Decode<char, ie::ConstPanel::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::ConstPanel::Make>::decode(ieml::Node const& node) -> orl::Option<ie::ConstPanel::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::ConstPanel::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),

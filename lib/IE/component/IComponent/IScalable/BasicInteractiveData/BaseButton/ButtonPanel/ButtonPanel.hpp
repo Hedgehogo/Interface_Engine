@@ -21,22 +21,22 @@ namespace ie {
 			
 			Make(BoxPtr<Panel::Make>&& panel, BoxPtr<IDisplayPanelInteraction::Make>&& interaction, BoxPtr<IScalable::Make>&& background);
 			
-			ButtonPanel* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> ButtonPanel* override;
 		};
 		
 		ButtonPanel(Make&& make, InitInfo init_info);
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		const Panel& get_panel() const;
+		auto get_panel() const -> Panel const&;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
 		BoxPtr<Panel> panel_;
@@ -46,5 +46,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::ButtonPanel::Make> {
-	static orl::Option<ie::ButtonPanel::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::ButtonPanel::Make>;
 };

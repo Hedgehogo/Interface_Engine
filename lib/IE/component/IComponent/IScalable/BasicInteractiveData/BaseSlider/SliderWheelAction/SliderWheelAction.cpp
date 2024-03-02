@@ -6,7 +6,7 @@ namespace ie {
 		horizontal(horizontal), relativity(relativity), sensitivity(sensitivity) {
 	}
 	
-	SliderWheelAction* SliderWheelAction::Make::make(BasicActionInitInfo<BaseSlider&> init_info) {
+	auto SliderWheelAction::Make::make(BasicActionInitInfo<BaseSlider&> init_info) -> SliderWheelAction* {
 		return new SliderWheelAction{std::move(*this), init_info};
 	}
 	
@@ -17,15 +17,15 @@ namespace ie {
 		relativity_(make.relativity == Relativity::RelationSlider) {
 	}
 	
-	void SliderWheelAction::start_pressed(sf::Vector2i, int) {
+	auto SliderWheelAction::start_pressed(sf::Vector2i, int) -> void {
 	}
 	
-	void SliderWheelAction::stop_pressed(sf::Vector2i, int) {
+	auto SliderWheelAction::stop_pressed(sf::Vector2i, int) -> void {
 	}
 	
-	void SliderWheelAction::while_pressed(sf::Vector2i, int value) {
-		sf::Vector2f move{sensitivity_};
-		bool reverse{(is_key_pressed(Key::LShift) || is_key_pressed(Key::RShift)) != horizontal_};
+	auto SliderWheelAction::while_pressed(sf::Vector2i, int value) -> void {
+		auto move{sensitivity_};
+		auto reverse{(is_key_pressed(Key::LShift) || is_key_pressed(Key::RShift)) != horizontal_};
 		if(relativity_) {
 			sf::Vector2f slider_size{slider_->get_slider_size()};
 			sf::Vector2f area_size{slider_->get_area_size()};
@@ -36,15 +36,15 @@ namespace ie {
 		slider_->set_value(slider_->get_value() + move);
 	}
 	
-	void SliderWheelAction::while_not_pressed(sf::Vector2i, int) {
+	auto SliderWheelAction::while_not_pressed(sf::Vector2i, int) -> void {
 	}
 	
-	void SliderWheelAction::set_slider(BaseSlider& slider) {
+	auto SliderWheelAction::set_slider(BaseSlider& slider) -> void {
 		this->slider_ = &slider;
 	}
 }
 
-orl::Option<ie::SliderWheelAction::Relativity> ieml::Decode<char, ie::SliderWheelAction::Relativity>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::SliderWheelAction::Relativity>::decode(ieml::Node const& node) -> orl::Option<ie::SliderWheelAction::Relativity> {
 	auto& str{node.get_raw().except().str};
 	if(str == "relation-area") {
 		return ie::SliderWheelAction::Relativity::RelationArea;

@@ -17,22 +17,22 @@ namespace ie {
 	struct CaptionString<sf::String> {
 		using Make = sf::String;
 		
-		static sf::String make(BasicCaption<sf::String>& caption, Make&& make, InitInfo init_info);
+		static auto make(BasicCaption<sf::String>& caption, Make&& make, InitInfo init_info) -> sf::String;
 		
-		static sf::String get(sf::String const& object);
+		static auto get(sf::String const& object) -> sf::String;
 		
-		static void set(sf::String& first, sf::String const& second);
+		static auto set(sf::String& first, sf::String const& second) -> void;
 	};
 	
 	template<>
 	struct CaptionString<SReader<ISString> > {
 		using Make = MakeDyn<ISString>;
 		
-		static SReader<ISString> make(BasicCaption<SReader<ISString> >& caption, Make&& make, InitInfo init_info);
+		static auto make(BasicCaption<SReader<ISString> >& caption, Make&& make, InitInfo init_info) -> SReader<ISString>;
 		
-		static sf::String get(SReader<ISString> const& object);
+		static auto get(SReader<ISString> const& object) -> sf::String;
 		
-		static void set(SReader<ISString>& first, sf::String const& second);
+		static auto set(SReader<ISString>& first, sf::String const& second) -> void;
 	};
 	
 	namespace make_system {
@@ -49,13 +49,13 @@ namespace ie {
 			bool cut_back = true;
 			sf::Vector2f min_size = {};
 			
-			static void set_default_color(sf::Color color = sf::Color::White);
+			static auto set_default_color(sf::Color color = sf::Color::White) -> void;
 			
-			static void set_default_size(int size);
+			static auto set_default_size(int size) -> void;
 			
-			static sf::Color get_default_color();
+			static auto get_default_color() -> sf::Color;
 			
-			static int get_default_size();
+			static auto get_default_size() -> int;
 			
 			BasicCaption(
 				typename CaptionString<StringStorage_>::Make text,
@@ -63,19 +63,19 @@ namespace ie {
 				sf::Font& font
 			);
 			
-			BasicCaption set_font_size(int font_size)&&;
+			auto set_font_size(int font_size)&& -> BasicCaption;
 			
-			BasicCaption set_color(sf::Color color)&&;
+			auto set_color(sf::Color color)&& -> BasicCaption;
 			
-			BasicCaption set_style(sf::Text::Style style)&&;
+			auto set_style(sf::Text::Style style)&& -> BasicCaption;
 			
-			BasicCaption set_positioning(InternalPositioning2::Make positioning)&&;
+			auto set_positioning(InternalPositioning2::Make positioning)&& -> BasicCaption;
 			
-			BasicCaption set_cut_back(bool cut_back)&&;
+			auto set_cut_back(bool cut_back)&& -> BasicCaption;
 			
-			BasicCaption set_min_size(sf::Vector2f min_size)&&;
+			auto set_min_size(sf::Vector2f min_size)&& -> BasicCaption;
 			
-			ie::BasicCaption<StringStorage_>* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> ie::BasicCaption<StringStorage_>* override;
 			
 		protected:
 			static sf::Color default_color_;
@@ -90,26 +90,26 @@ namespace ie {
 		
 		BasicCaption(Make&& make, InitInfo init_info);
 		
-		void set_string(sf::String str);
+		auto set_string(sf::String str) -> void;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		sf::Vector2f get_area_position() const override;
+		auto get_area_position() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_area_size() const override;
+		auto get_area_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
-		static sf::Vector2f get_text_size(sf::Text const& text);
+		static auto get_text_size(sf::Text const& text) -> sf::Vector2f;
 		
-		void text_resize(sf::Vector2f size, sf::Vector2f position);
+		auto text_resize(sf::Vector2f size, sf::Vector2f position) -> void;
 		
 		bool cut_back_;
 		
@@ -127,7 +127,7 @@ namespace ie {
 
 template<typename StringStorage_>
 struct ieml::Decode<char, ie::make_system::BasicCaption<StringStorage_> > {
-	static orl::Option<ie::make_system::BasicCaption<StringStorage_> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicCaption<StringStorage_> >;
 };
 
 #include "Caption.inl"

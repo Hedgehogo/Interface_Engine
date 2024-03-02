@@ -41,11 +41,11 @@ namespace ie {
 		wheel_sensitivity(1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)) {
 	}
 	
-	ConstSlider* ConstSlider::Make::make(InitInfo init_info) {
+	auto ConstSlider::Make::make(InitInfo init_info) -> ConstSlider* {
 		return new ConstSlider{std::move(*this), init_info};
 	}
 	
-	float get_aspect_ratio(sf::Vector2f size) {
+	auto get_aspect_ratio(sf::Vector2f size) -> float {
 		return size.x / size.y;
 	}
 	
@@ -63,7 +63,7 @@ namespace ie {
 		slider_scale_(make.slider_scale) {
 	}
 	
-	void ConstSlider::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto ConstSlider::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		this->position_ = position;
 		if(size.x / aspect_ratio_ < size.y) {
 			slider_size_ = sf::Vector2f{size.x, size.x / aspect_ratio_} * slider_scale_;
@@ -76,7 +76,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::ConstSlider::Make> ieml::Decode<char, ie::ConstSlider::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::ConstSlider::Make>::decode(ieml::Node const& node) -> orl::Option<ie::ConstSlider::Make> {
 	auto map{node.get_map_view().except()};
 	auto slider{map.at("slider").except().as < ie::BoxPtr < ie::INonInteractive::Make > > ().except()};
 	auto background{map.at("background").except().as < ie::BoxPtr < ie::INonInteractive::Make > > ().except()};

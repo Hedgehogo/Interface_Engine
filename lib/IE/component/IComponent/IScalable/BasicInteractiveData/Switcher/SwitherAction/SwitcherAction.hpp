@@ -14,20 +14,20 @@ namespace ie {
 			
 			Make(MakeDyn<ISMBool> value);
 			
-			SwitcherAction* make(ActionInitInfo init_info) override;
+			auto make(ActionInitInfo init_info) -> SwitcherAction* override;
 		};
 		
 		SwitcherAction(Make&& make, ActionInitInfo init_info);
 		
 		SwitcherAction(ISMBool& value);
 		
-		void start_pressed() override;
+		auto start_pressed() -> void override;
 		
-		void stop_pressed() override;
+		auto stop_pressed() -> void override;
 		
-		void while_pressed() override;
+		auto while_pressed() -> void override;
 		
-		void while_not_pressed() override;
+		auto while_not_pressed() -> void override;
 		
 	protected:
 		ISMBool& value_;
@@ -36,5 +36,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::SwitcherAction::Make> {
-	static orl::Option<ie::SwitcherAction::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::SwitcherAction::Make>;
 };

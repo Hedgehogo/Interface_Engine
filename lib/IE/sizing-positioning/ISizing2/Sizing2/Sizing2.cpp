@@ -24,7 +24,7 @@ namespace ie {
 		vertical(make_size_make(target_coefficient.y, parent_coefficient.y, addition.y)) {
 	}
 	
-	Sizing2* Sizing2::Make::make(Sizing2InitInfo init_info) {
+	auto Sizing2::Make::make(Sizing2InitInfo init_info) -> Sizing2* {
 		return new Sizing2{std::move(*this), init_info};
 	}
 	
@@ -34,17 +34,17 @@ namespace ie {
 		render_target_(&init_info.render_target) {
 	}
 	
-	sf::Vector2f Sizing2::find_size(sf::Vector2f parent_size) {
+	auto Sizing2::find_size(sf::Vector2f parent_size) -> sf::Vector2f {
 		sf::Vector2f target_size{render_target_->getSize()};
 		return {horizontal_->find_size(parent_size.x, target_size.x), vertical_->find_size(parent_size.y, target_size.y)};
 	}
 	
-	sf::Vector2f Sizing2::get_parent_size(sf::Vector2f object_size) {
+	auto Sizing2::get_parent_size(sf::Vector2f object_size) -> sf::Vector2f {
 		return {horizontal_->get_parent_size(object_size.x), vertical_->get_parent_size(object_size.y)};
 	}
 }
 
-orl::Option<ie::Sizing2::Make> ieml::Decode<char, ie::Sizing2::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Sizing2::Make>::decode(ieml::Node const& node) -> orl::Option<ie::Sizing2::Make> {
 	auto& clear_node{node.get_clear()};
 	for(auto result: clear_node.as<sf::Vector2f>().ok_or_none()) {
 		return {{result}};

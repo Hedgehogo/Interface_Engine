@@ -1,7 +1,7 @@
 #include "SReadable.hpp"
 
 namespace ie {
-	bool Determine<SMBool::Make>::determine(ieml::Node const& node) {
+	auto Determine<SMBool::Make>::determine(ieml::Node const& node) -> bool {
 		return node.is_raw();
 	}
 }

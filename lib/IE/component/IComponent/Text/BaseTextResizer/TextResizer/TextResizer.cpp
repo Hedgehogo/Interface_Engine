@@ -1,52 +1,54 @@
 #include "TextResizer.hpp"
 
 namespace ie {
-	TextResizer::Make::Make(float line_spacing, BaseTextResizer::Align align, BaseTextResizer::Algorithm algorithm) : line_spacing(line_spacing), align(align), algorithm(algorithm) {
+	TextResizer::Make::Make(float line_spacing, BaseTextResizer::Align align, BaseTextResizer::Algorithm algorithm) :
+		line_spacing(line_spacing), align(align), algorithm(algorithm) {
 	}
 	
-	TextResizer* TextResizer::Make::make(TextResizerInitInfo init_info) {
+	auto TextResizer::Make::make(TextResizerInitInfo init_info) -> TextResizer* {
 		return new TextResizer{std::move(*this), init_info};
 	}
 	
-	TextResizer::TextResizer(Make&& make, TextResizerInitInfo init_info) : BaseTextResizer{make.line_spacing, make.align, make.algorithm, init_info} {
+	TextResizer::TextResizer(Make&& make, TextResizerInitInfo init_info) :
+		BaseTextResizer{make.line_spacing, make.align, make.algorithm, init_info} {
 	}
 	
-	void TextResizer::move(sf::Vector2f position) {
-		start_render += position;
-		end_render += position;
+	auto TextResizer::move(sf::Vector2f position) -> void {
+		start_render_ += position;
+		end_render_ += position;
 		
-		for(auto& character: characters) {
+		for(auto& character: characters_) {
 			character->move(position);
 		}
 		
-		for(auto& line: lines) {
+		for(auto& line: lines_) {
 			line->move(position);
 		}
 	}
 	
-	void TextResizer::set_position(sf::Vector2f position) {
-		sf::Vector2f offset{position - start_render};
-		for(auto& character: characters) {
+	auto TextResizer::set_position(sf::Vector2f position) -> void {
+		sf::Vector2f offset{position - start_render_};
+		for(auto& character: characters_) {
 			character->move({offset});
 		}
 		
-		for(auto& line: lines) {
+		for(auto& line: lines_) {
 			line->move(offset);
 		}
 		
-		end_render += offset;
-		start_render = position;
+		end_render_ += offset;
+		start_render_ = position;
 	}
 	
-	void TextResizer::print_character(std::vector<BaseCharacter*>::iterator character) {
-		(*character)->set_position(next_position);
-		next_position.x += (*character)->get_advance();
+	auto TextResizer::print_character(std::vector<BaseCharacter*>::iterator character) -> void {
+		(*character)->set_position(next_position_);
+		next_position_.x += (*character)->get_advance();
 	}
 	
-	void TextResizer::equalize_characters(std::vector<BaseCharacter*>::iterator end_character, float line_size, float length_end_character ) {
-		sf::Vector2f offset{end_render.x - (((*(end_character - 1))->get_position().x) + length_end_character), line_size};
+	auto TextResizer::equalize_characters(std::vector<BaseCharacter*>::iterator end_character, float line_size, float length_end_character) -> void {
+		auto offset{sf::Vector2f{end_render_.x - (((*(end_character - 1))->get_position().x) + length_end_character), line_size}};
 		
-		switch(align) {
+		switch(align_) {
 			case Align::Left:
 				offset.x = 0;
 				break;
@@ -57,37 +59,41 @@ namespace ie {
 				break;
 		}
 		
-		for(auto character = after_enter; character != end_character; ++character) {
+		for(auto character = after_enter_; character != end_character; ++character) {
 			(*character)->move(offset);
 		}
 	}
 	
-	float TextResizer::equalize(std::vector<BaseCharacter*>::iterator end_character, float height_end_character) {
-		float line_size{0};
-		for(auto character = after_enter; character != end_character; ++character) {
-			if(character != end_character - 1 && (*character)->is_special() !=  BaseCharacter::Special::FullLine && (*character)->is_special() !=  BaseCharacter::Special::Object) {
+	auto TextResizer::equalize(std::vector<BaseCharacter*>::iterator end_character, float height_end_character) -> float {
+		auto line_size{0.f};
+		for(auto character = after_enter_; character != end_character; ++character) {
+			if(
+				character != end_character - 1 &&
+				(*character)->is_special() != BaseCharacter::Special::FullLine &&
+				(*character)->is_special() != BaseCharacter::Special::Object
+				) {
 				float character_size = (*character)->get_height();
 				if(line_size < character_size)
 					line_size = character_size;
 			}
 		}
 		
-		line_size *= line_spacing;
+		line_size *= line_spacing_;
 		
 		equalize_characters(end_character, line_size, 0);
 		
-		const std::vector<BoxPtr<BaseLine>>* old_line = nullptr;
-		float start_line = 0;
+		auto old_line{(std::vector<BoxPtr<BaseLine> > const*)nullptr};
+		auto start_line{0.f};
 		
-		for(auto character = after_enter; character != end_character; ++character) {
+		for(auto character = after_enter_; character != end_character; ++character) {
 			auto& character_line = (*character)->get_line();
 			if(old_line != &character_line) {
-				sf::Vector2f character_pos = (*character)->get_position();
+				auto character_pos{(*character)->get_position()};
 				if(old_line) {
 					for(auto& line: *old_line) {
-						BaseLine* copy_line = line->copy();
+						auto copy_line{line->copy()};
 						copy_line->resize(start_line, character_pos.x, character_pos.y);
-						this->lines.emplace_back(copy_line);
+						this->lines_.emplace_back(copy_line);
 					}
 				}
 				
@@ -97,115 +103,123 @@ namespace ie {
 		}
 		
 		if(old_line) {
-			BaseCharacter* character = *(end_character - ((end_character != characters.begin() + 1 && (*(end_character - 1))->is_special() != BaseCharacter::Special::No) ? 2 : 1));
-			sf::Vector2f line_end = character->get_position();
+			auto character{[this, end_character] {
+				if(end_character != characters_.begin() + 1 && (*(end_character - 1))->is_special() != BaseCharacter::Special::No) {
+					return *(end_character - 2);
+				}
+				return *(end_character - 1);
+			}()};
+			auto line_end{character->get_position()};
 			line_end.x += character->get_advance();
 			
 			for(auto& line: *old_line) {
-				BaseLine* copy_line = line->copy();
+				auto copy_line{line->copy()};
 				copy_line->resize(start_line, line_end.x, line_end.y);
-				this->lines.emplace_back(copy_line);
+				this->lines_.emplace_back(copy_line);
 			}
 		}
 		return line_size;
 	}
 	
-	void TextResizer::porting(std::vector<BaseCharacter*>::iterator end_character) {
-		next_position.y += equalize(end_character, 0);
-		next_position.x = start_render.x;
+	auto TextResizer::porting(std::vector<BaseCharacter*>::iterator end_character) -> void {
+		next_position_.y += equalize(end_character, 0);
+		next_position_.x = start_render_.x;
 		
-		after_enter = end_character;
+		after_enter_ = end_character;
 	}
 	
-	void TextResizer::auto_porting(std::vector<BaseCharacter*>::iterator end_character) {
-		next_position.y += equalize(after_space, 0);
-		next_position.x = start_render.x;
+	auto TextResizer::auto_porting(std::vector<BaseCharacter*>::iterator end_character) -> void {
+		next_position_.y += equalize(after_space_, 0);
+		next_position_.x = start_render_.x;
 		
-		for(auto character = after_space; character != end_character; ++character) {
+		for(auto character = after_space_; character != end_character; ++character) {
 			print_character(character);
 		}
 		
-		after_enter = after_space;
-		after_space = end_character;
+		after_enter_ = after_space_;
+		after_space_ = end_character;
 	}
 	
-	void TextResizer::delete_old_cash(sf::Vector2f size, sf::Vector2f position) {
-		lines.clear();
+	auto TextResizer::delete_old_cash(sf::Vector2f size, sf::Vector2f position) -> void {
+		lines_.clear();
 		
-		start_render = position;
-		end_render = position + size;
-		this->next_position = start_render;
+		start_render_ = position;
+		end_render_ = position + size;
+		this->next_position_ = start_render_;
 		
-		after_enter = characters.begin();
-		after_space = characters.begin();
+		after_enter_ = characters_.begin();
+		after_space_ = characters_.begin();
 	}
 	
-	void TextResizer::character_resize() {
-		if(algorithm == BaseTextResizer::Algorithm::Console)
+	auto TextResizer::character_resize() -> void {
+		if(algorithm_ == BaseTextResizer::Algorithm::Console) {
 			return space_resize();
+		}
 		
-		print_character(current_character);
+		print_character(current_character_);
 	}
 	
-	void TextResizer::space_resize() {
-		if(algorithm == BaseTextResizer::Algorithm::Absolute)
+	auto TextResizer::space_resize() -> void {
+		if(algorithm_ == BaseTextResizer::Algorithm::Absolute) {
 			return character_resize();
+		}
 		
-		if(this->next_position.x + (algorithm == BaseTextResizer::Algorithm::Console ? (*current_character)->get_advance() : 0) <= end_render.x) {
-			print_character(current_character);
-			after_space = current_character + 1;
+		if(this->next_position_.x + (algorithm_ == BaseTextResizer::Algorithm::Console ? (*current_character_)->get_advance() : 0) <= end_render_.x) {
+			print_character(current_character_);
+			after_space_ = current_character_ + 1;
 		} else {
-			auto_porting(current_character + 1);
+			auto_porting(current_character_ + 1);
 		}
 	}
 	
-	void TextResizer::enter_resize() {
-		(*current_character)->set_position(next_position);
-		if(this->next_position.x > end_render.x)
-			auto_porting(current_character + 1);
-		porting(current_character + 1);
+	auto TextResizer::enter_resize() -> void {
+		(*current_character_)->set_position(next_position_);
+		if(this->next_position_.x > end_render_.x) {
+			auto_porting(current_character_ + 1);
+		}
+		porting(current_character_ + 1);
 	}
 	
-	void TextResizer::object_resize(bool full) {
-		if(next_position.x != start_render.x) {
+	auto TextResizer::object_resize(bool full) -> void {
+		if(next_position_.x != start_render_.x) {
 			enter_resize();
 		}
-		after_enter = current_character;
+		after_enter_ = current_character_;
 		if(full) {
-			(*current_character)->resize(next_position, end_render.x);
+			(*current_character_)->resize(next_position_, end_render_.x);
 		} else {
-			(*current_character)->set_position(next_position);
-			next_position.x = start_render.x;
+			(*current_character_)->set_position(next_position_);
+			next_position_.x = start_render_.x;
 		}
-		float line_size{line_spacing * (*current_character)->get_height()};
-		equalize_characters(current_character + 1, line_size, (*current_character)->get_advance());
-		next_position.y += line_size;
-		after_enter = current_character + 1;
+		auto line_size{line_spacing_ * (*current_character_)->get_height()};
+		equalize_characters(current_character_ + 1, line_size, (*current_character_)->get_advance());
+		next_position_.y += line_size;
+		after_enter_ = current_character_ + 1;
 	}
 	
-	void TextResizer::end_line_equalize() {
-		if(end_render.x < this->next_position.x) {
-			auto_porting(characters.end());
+	auto TextResizer::end_line_equalize() -> void {
+		if(end_render_.x < this->next_position_.x) {
+			auto_porting(characters_.end());
 		}
-		equalize(characters.end(), 0);
+		equalize(characters_.end(), 0);
 	}
 	
-	void TextResizer::resize(sf::Vector2f size, sf::Vector2f position) {
-		if(characters.empty()) {
-			start_render = position;
-			end_render = position + size;
+	auto TextResizer::resize(sf::Vector2f size, sf::Vector2f position) -> void {
+		if(characters_.empty()) {
+			start_render_ = position;
+			end_render_ = position + size;
 			return;
 		}
-		if(size.x == end_render.x - start_render.x) {
+		if(size.x == end_render_.x - start_render_.x) {
 			set_position(position);
 			return;
 		}
 		
 		delete_old_cash(size, position);
-		size_t count = 0;
-		for(current_character = characters.begin(); current_character != characters.end(); ++current_character) {
+		auto count{size_t{0}};
+		for(current_character_ = characters_.begin(); current_character_ != characters_.end(); ++current_character_) {
 			//printf("%c", static_cast<char>((*current_character)->get_char()));
-			switch((*current_character)->is_special()) {
+			switch((*current_character_)->is_special()) {
 				case BaseCharacter::Special::No:
 					character_resize();
 					break;
@@ -228,32 +242,33 @@ namespace ie {
 		end_line_equalize();
 	}
 	
-	sf::Vector2f TextResizer::get_position() {
-		return start_render;
+	auto TextResizer::get_position() -> sf::Vector2f {
+		return start_render_;
 	}
 	
-	sf::Vector2f TextResizer::get_size() {
-		if(characters.empty())
+	auto TextResizer::get_size() -> sf::Vector2f {
+		if(characters_.empty()) {
 			return {0, 0};
-		std::vector<BaseCharacter*>::iterator max_x{
-			std::max_element(characters.begin(), characters.end(), [](BaseCharacter* elem, BaseCharacter* elem2) {
+		}
+		auto max_x{
+			std::max_element(characters_.begin(), characters_.end(), [](BaseCharacter* elem, BaseCharacter* elem2) {
 				return elem->get_position().x < elem2->get_position().x;
 			})
 		};
 		
-		std::vector<BaseCharacter*>::iterator max_y{
-			std::max_element(characters.begin(), characters.end(), [](BaseCharacter* elem, BaseCharacter* elem2) {
+		auto max_y{
+			std::max_element(characters_.begin(), characters_.end(), [](BaseCharacter* elem, BaseCharacter* elem2) {
 				return elem->get_position().y < elem2->get_position().y;
 			})
 		};
 		return sf::Vector2f{(*max_x)->get_position().x, (*max_y)->get_position().y} - get_position();
 	}
 	
-	sf::Vector2f TextResizer::get_min_size_base() {
-		sf::Vector2f min_size = {0, 0};
-		float word_size_x = 0;
+	auto TextResizer::get_min_size_base() -> sf::Vector2f {
+		auto min_size{sf::Vector2f{0, 0}};
+		auto word_size_x{0.f};
 		
-		for(auto& character: characters) {
+		for(auto& character: characters_) {
 			if(character->is_special() == BaseCharacter::Special::No) {
 				word_size_x += character->get_min_advance();
 			} else {
@@ -262,17 +277,18 @@ namespace ie {
 				word_size_x = 0;
 			}
 		}
-		if(min_size.x < word_size_x)
+		if(min_size.x < word_size_x) {
 			min_size.x = word_size_x;
+		}
 		
 		return min_size;
 	}
 	
-	sf::Vector2f TextResizer::get_min_size_console() {
-		sf::Vector2f min_size = {0, 0};
+	auto TextResizer::get_min_size_console() -> sf::Vector2f {
+		auto min_size{sf::Vector2f{0, 0}};
 		
-		float advance = 0;
-		for(auto& character: characters) {
+		auto advance{0.f};
+		for(auto& character: characters_) {
 			advance = character->get_min_advance();
 			if(advance > min_size.x)
 				min_size.x = advance;
@@ -280,11 +296,11 @@ namespace ie {
 		return min_size;
 	}
 	
-	sf::Vector2f TextResizer::get_min_size_absolute() {
-		sf::Vector2f min_size = {0, 0};
-		float string_size_x = 0;
+	auto TextResizer::get_min_size_absolute() -> sf::Vector2f {
+		auto min_size{sf::Vector2f{0, 0}};
+		auto string_size_x{0.f};
 		
-		for(auto& character: characters) {
+		for(auto& character: characters_) {
 			if(character->is_special() != BaseCharacter::Special::Enter) {
 				string_size_x += character->get_min_advance();
 			} else {
@@ -293,18 +309,19 @@ namespace ie {
 				string_size_x = 0;
 			}
 		}
-		if(min_size.x < string_size_x)
+		if(min_size.x < string_size_x) {
 			min_size.x = string_size_x;
+		}
 		
 		return min_size;
 	}
 	
-	sf::Vector2f TextResizer::get_normal_size() {
+	auto TextResizer::get_normal_size() -> sf::Vector2f {
 		return get_min_size();
 	}
 }
 
-orl::Option<ie::TextResizer::Make> ieml::Decode<char, ie::TextResizer::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::TextResizer::Make>::decode(ieml::Node const& node) -> orl::Option<ie::TextResizer::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::TextResizer::Make{
 		map.get_as<float>("line-spacing").except().ok_or(1.15f),

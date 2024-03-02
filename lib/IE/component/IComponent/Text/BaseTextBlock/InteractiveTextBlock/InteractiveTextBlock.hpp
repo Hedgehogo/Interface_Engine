@@ -12,40 +12,40 @@ namespace ie {
 			
 			Make(
 				BoxPtr<IBaseInteraction::Make>&& interaction,
-				const sf::String& text,
-				const orl::Option<sf::Color>& text_color = {},
-				const orl::Option<sf::Font&>& font = {},
-				const orl::Option<sf::Text::Style>& style = {},
-				std::vector<BoxPtr<BaseLine::Make>>&& lines = {},
-				const orl::Option<size_t>& size = {},
-				const orl::Option<sf::Color>& text_selection_color = {},
-				const orl::Option<sf::Color>& background_selection_color = {},
-				const orl::Option<sf::Color>& inactive_text_selection_color = {},
-				const orl::Option<sf::Color>& inactive_background_selection_color = {}
+				sf::String const& text,
+				orl::Option<sf::Color> text_color = {},
+				orl::Option<sf::Font&> font = {},
+				orl::Option<sf::Text::Style> style = {},
+				std::vector<BoxPtr<BaseLine::Make> >&& lines = {},
+				orl::Option<size_t> size = {},
+				orl::Option<sf::Color> text_selection_color = {},
+				orl::Option<sf::Color> background_selection_color = {},
+				orl::Option<sf::Color> inactive_text_selection_color = {},
+				orl::Option<sf::Color> inactive_background_selection_color = {}
 			);
 			
-			InteractiveTextBlock* make(TextBockInitInfo init_info) override;
+			auto make(TextBockInitInfo init_info) -> InteractiveTextBlock* override;
 		};
 		
 		InteractiveTextBlock(Make&& make, TextBockInitInfo init_info);
 		
-		bool in(sf::Vector2f mouse_position) override;
+		auto in(sf::Vector2f mouse_position) -> bool override;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f) override;
+		auto update_interactions(sf::Vector2f) -> bool override;
 	
 	protected:
-		InteractionManager* interaction_manager;
+		InteractionManager* interaction_manager_;
 		
-		bool interact;
-		bool old_interact;
+		bool interact_;
+		bool old_interact_;
 		
-		BoxPtr<IInteraction> interaction;
+		BoxPtr<IInteraction> interaction_;
 	};
 }
 
 template<>
 struct ieml::Decode<char, ie::InteractiveTextBlock::Make> {
-	static orl::Option<ie::InteractiveTextBlock::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::InteractiveTextBlock::Make>;
 };

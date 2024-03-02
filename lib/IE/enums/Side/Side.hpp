@@ -13,5 +13,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::Side> {
-	static orl::Option<ie::Side> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Side>;
 };

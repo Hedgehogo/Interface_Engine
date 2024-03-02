@@ -45,37 +45,37 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(sf::RenderWindow& window_) const {
+	auto BasicActionInitInfo<T>::copy(sf::RenderWindow& window_) const -> BasicActionInitInfo<T> {
 		return {window_, render_target, dyn_buffer, update_manager, interaction_manager, panel_manager, additional};
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(sf::RenderTarget& render_target_) const {
+	auto BasicActionInitInfo<T>::copy(sf::RenderTarget& render_target_) const -> BasicActionInitInfo<T> {
 		return {window, render_target_, dyn_buffer, update_manager, interaction_manager, panel_manager, additional};
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(DynBuffer& dyn_buffer_) const {
+	auto BasicActionInitInfo<T>::copy(DynBuffer& dyn_buffer_) const -> BasicActionInitInfo<T> {
 		return {window, render_target, dyn_buffer_, update_manager, interaction_manager, panel_manager, additional};
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(InteractionManager& interaction_manager_) const {
+	auto BasicActionInitInfo<T>::copy(InteractionManager& interaction_manager_) const -> BasicActionInitInfo<T> {
 		return {window, render_target, dyn_buffer, update_manager, interaction_manager_, panel_manager, additional};
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(IPanelManager& panel_manager_) const {
+	auto BasicActionInitInfo<T>::copy(IPanelManager& panel_manager_) const -> BasicActionInitInfo<T> {
 		return {window, render_target, dyn_buffer, update_manager, interaction_manager, panel_manager_, additional};
 	}
 	
 	template<typename T>
-	BasicActionInitInfo<T> BasicActionInitInfo<T>::copy(T additional_) const {
+	auto BasicActionInitInfo<T>::copy(T additional_) const -> BasicActionInitInfo<T> {
 		return {window, render_target, dyn_buffer, update_manager, interaction_manager, panel_manager, additional_};
 	}
 	
 	template<typename T>
-	ActionInitInfo BasicActionInitInfo<T>::to_general() const {
+	auto BasicActionInitInfo<T>::to_general() const -> ActionInitInfo {
 		return {window, render_target, dyn_buffer, update_manager, interaction_manager, panel_manager, {}};
 	}
 }

@@ -7,7 +7,7 @@ namespace ie {
 	class INonInteractiveObjectsArray : public virtual INonInteractiveLayout, public virtual IScalableObjectsArray {
 	public:
 		struct Make : public virtual INonInteractiveLayout::Make, public virtual IScalableObjectsArray::Make {
-			INonInteractiveObjectsArray* make(InitInfo init_info) override = 0;
+			auto make(InitInfo init_info) -> INonInteractiveObjectsArray* override = 0;
 		};
 	};
 }

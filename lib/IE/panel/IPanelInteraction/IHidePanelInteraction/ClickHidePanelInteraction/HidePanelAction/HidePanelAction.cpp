@@ -13,23 +13,23 @@ namespace ie {
 		PanelAction(init_info), only_on_parent(make.only_on_parent) {
 	}
 	
-	void HidePanelAction::start_pressed() {
+	auto HidePanelAction::start_pressed() -> void {
 	}
 	
-	void HidePanelAction::while_pressed() {
+	auto HidePanelAction::while_pressed() -> void {
 	}
 	
-	void HidePanelAction::stop_pressed() {
+	auto HidePanelAction::stop_pressed() -> void {
 		sf::Vector2f point_position{static_cast<sf::Vector2f>(mouse_position_)};
 		if(only_on_parent ? panel_->get_parent_processed() : !panel_->in_panel(point_position) && !panel_->in_const_panels(point_position) && panel_->is_free()) {
 			panel_manager_->hide_panel(panel_);
 		}
 	}
 	
-	void HidePanelAction::while_not_pressed() {
+	auto HidePanelAction::while_not_pressed() -> void {
 	}
 }
 
-orl::Option<ie::HidePanelAction::Make> ieml::Decode<char, ie::HidePanelAction::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::HidePanelAction::Make>::decode(ieml::Node const& node) -> orl::Option<ie::HidePanelAction::Make> {
 	return {{node.get_as<bool>("only-on-parent").except().ok_or(false)}};
 }

@@ -12,7 +12,7 @@ namespace ie {
 			
 			SString(std::u32string data = {});
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		template<>
@@ -20,7 +20,7 @@ namespace ie {
 		public:
 			ToMutable(std::u32string data = {});
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		using SMString = ToMutable<SString>;
@@ -29,12 +29,12 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::make_system::SString> {
-	static orl::Option<ie::make_system::SString> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::SString>;
 };
 
 template<>
 struct ieml::Decode<char, ie::make_system::SMString> {
-	static orl::Option<ie::make_system::SMString> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::SMString>;
 };
 
 namespace ie {
@@ -48,12 +48,12 @@ namespace ie {
 		
 		SString(std::u32string data);
 		
-		std::u32string get() const override;
+		auto get() const -> std::u32string override;
 	
 	protected:
-		ReadFn& add_read_fn(ReadFn&& read_fn) override;
+		auto add_read_fn(ReadFn&& read_fn) -> ReadFn& override;
 		
-		bool delete_read_fn(ReadFn& read_fn) override;
+		auto delete_read_fn(ReadFn& read_fn) -> bool override;
 		
 		std::u32string data_;
 		std::vector<ReadFn> read_fns_;
@@ -70,13 +70,13 @@ namespace ie {
 		
 		ToMutable(std::u32string data);
 		
-		void set(std::u32string value) override;
+		auto set(std::u32string value) -> void override;
 	};
 	
 	using SMString = ToMutable<SString>;
 	
 	template<>
 	struct Determine<SMString::Make> {
-		static bool determine(ieml::Node const& node);
+		static auto determine(ieml::Node const& node) -> bool;
 	};
 }

@@ -22,7 +22,7 @@ namespace ie {
 		sizing(new SmartSizing::Make{target_coefficient, parent_coefficient, addition}), ratio(ratio), horizontal(horizontal) {
 	}
 	
-	ConstRatioSizing2* ConstRatioSizing2::Make::make(Sizing2InitInfo init_info) {
+	auto ConstRatioSizing2::Make::make(Sizing2InitInfo init_info) -> ConstRatioSizing2* {
 		return new ConstRatioSizing2{std::move(*this), init_info};
 	}
 	
@@ -33,19 +33,19 @@ namespace ie {
 		horizontal_(make.horizontal) {
 	}
 	
-	sf::Vector2f ConstRatioSizing2::find_size(sf::Vector2f parent_size) {
+	auto ConstRatioSizing2::find_size(sf::Vector2f parent_size) -> sf::Vector2f {
 		sf::Vector2f target_size{static_cast<sf::Vector2f>(render_target_->getSize())};
 		float size = (horizontal_ ? sizing_->find_size(parent_size.x, target_size.x) : sizing_->find_size(parent_size.y, target_size.y));
 		return (horizontal_ ? sf::Vector2f{size, size / ratio_} : sf::Vector2f{size * ratio_, size});
 	}
 	
-	sf::Vector2f ConstRatioSizing2::get_parent_size(sf::Vector2f object_size) {
+	auto ConstRatioSizing2::get_parent_size(sf::Vector2f object_size) -> sf::Vector2f {
 		float size = (horizontal_ ? sizing_->get_parent_size(object_size.x) : sizing_->get_parent_size(object_size.y));
 		return (horizontal_ ? sf::Vector2f{size, size / ratio_} : sf::Vector2f{size * ratio_, size});
 	}
 }
 
-orl::Option<ie::ConstRatioSizing2::Make> ieml::Decode<char, ie::ConstRatioSizing2::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::ConstRatioSizing2::Make>::decode(ieml::Node const& node) -> orl::Option<ie::ConstRatioSizing2::Make> {
 	auto map{node.get_map_view().except()};
 	auto ratio{map.get_as<float>("ratio").except().ok_or(1.)};
 	auto horizontal{map.get_as<bool>("horizontal").except().ok_or(true)};

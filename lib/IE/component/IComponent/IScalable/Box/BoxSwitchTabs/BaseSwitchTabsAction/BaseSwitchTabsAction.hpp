@@ -7,14 +7,14 @@ namespace ie {
 	class BaseSwitchTabsAction : public BasicBaseKeyAction<BoxSwitchTabs&> {
 	public:
 		struct Make : public virtual BasicKeyAction<BoxSwitchTabs&>::Make {
-			BaseSwitchTabsAction* make(BasicActionInitInfo<BoxSwitchTabs&> init_info) override = 0;
+			auto make(BasicActionInitInfo<BoxSwitchTabs&> init_info) -> BaseSwitchTabsAction* override = 0;
 		};
 		
 		BaseSwitchTabsAction(BasicActionInitInfo<BoxSwitchTabs&> init_info);
 		
-		virtual void set_box(BoxSwitchTabs& box);
+		virtual auto set_box(BoxSwitchTabs& box) -> void;
 		
-		virtual BoxSwitchTabs& get_box();
+		virtual auto get_box() -> BoxSwitchTabs&;
 	
 	protected:
 		BoxSwitchTabs* box_;

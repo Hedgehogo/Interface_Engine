@@ -9,15 +9,15 @@ namespace ie {
 	public:
 		DrawManager() = default;
 		
-		size_t size();
+		auto size() -> size_t;
 		
-		IDrawable& get(size_t index);
+		auto get(size_t index) -> IDrawable&;
 		
-		void add(IDrawable& drawable);
+		auto add(IDrawable& drawable) -> void;
 		
-		void clear();
+		auto clear() -> void;
 		
-		void draw() override;
+		auto draw() -> void override;
 	
 	protected:
 		std::vector<IDrawable*> drawables_;

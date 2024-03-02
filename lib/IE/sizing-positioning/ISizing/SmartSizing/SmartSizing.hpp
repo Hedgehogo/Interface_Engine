@@ -13,16 +13,16 @@ namespace ie {
 			
 			Make(float target_coefficient = 1, float parent_coefficient = 0, float addition = 0);
 			
-			SmartSizing* make(float normal_size) override;
+			auto make(float normal_size) -> SmartSizing* override;
 		};
 		
 		SmartSizing(Make&& make, float normal_size);
 		
 		explicit SmartSizing(float target_coefficient = 1, float parent_coefficient = 0, float addition = 0);
 		
-		float find_size(float parent_size, float target_size) override;
+		auto find_size(float parent_size, float target_size) -> float override;
 		
-		float get_parent_size(float object_size) override;
+		auto get_parent_size(float object_size) -> float override;
 	
 	protected:
 		float target_coefficient_;
@@ -33,5 +33,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::SmartSizing::Make> {
-	static orl::Option<ie::SmartSizing::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::SmartSizing::Make>;
 };

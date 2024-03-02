@@ -1,25 +1,25 @@
 #include "DrawManager.hpp"
 
 namespace ie {
-	void DrawManager::add(IDrawable& drawable) {
+	auto DrawManager::add(IDrawable& drawable) -> void {
 		drawables_.push_back(&drawable);
 	}
 	
-	void DrawManager::clear() {
+	auto DrawManager::clear() -> void {
 		drawables_.clear();
 	}
 	
-	void DrawManager::draw() {
+	auto DrawManager::draw() -> void {
 		for(auto& drawable: drawables_) {
 			drawable->draw();
 		}
 	}
 	
-	size_t DrawManager::size() {
+	auto DrawManager::size() -> size_t {
 		return drawables_.size();
 	}
 	
-	IDrawable& DrawManager::get(size_t index) {
+	auto DrawManager::get(size_t index) -> IDrawable& {
 		return *drawables_.at(index);
 	}
 }

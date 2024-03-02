@@ -9,7 +9,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct IBasicMouseInteraction : public virtual IBasicInteraction<T> {
-			ie::IBasicMouseInteraction<T>* make(BasicActionInitInfo<T> init_info) override = 0;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::IBasicMouseInteraction<T>* override = 0;
 		};
 	}
 	
@@ -18,15 +18,15 @@ namespace ie {
 	public:
 		using Make = make_system::IBasicMouseInteraction<T>;
 		
-		virtual BasicKeyAction<T>& get_left_button_action() = 0;
+		virtual auto get_left_button_action() -> BasicKeyAction<T>& = 0;
 		
-		virtual const BasicKeyAction<T>& get_left_button_action() const = 0;
+		virtual auto get_left_button_action() const -> BasicKeyAction<T> const& = 0;
 		
-		virtual BasicKeyAction<T>& get_right_button_action() = 0;
+		virtual auto get_right_button_action() -> BasicKeyAction<T>& = 0;
 		
-		virtual const BasicKeyAction<T>& get_right_button_action() const = 0;
+		virtual auto get_right_button_action() const -> BasicKeyAction<T> const& = 0;
 		
-		void update(sf::Vector2i mouse_position) override;
+		auto update(sf::Vector2i mouse_position) -> void override;
 	};
 	
 	using IMouseInteraction = IBasicMouseInteraction<>;

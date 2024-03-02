@@ -7,7 +7,7 @@ namespace ie {
 	class INonInteractiveBackground : public virtual INonInteractiveLayout, public virtual IScalableBackground {
 	public:
 		struct Make : public virtual INonInteractiveLayout::Make, public virtual IScalableBackground::Make {
-			INonInteractiveBackground* make(InitInfo init_info) override = 0;
+			auto make(InitInfo init_info) -> INonInteractiveBackground* override = 0;
 		};
 	};
 }

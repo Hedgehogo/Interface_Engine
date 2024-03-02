@@ -23,15 +23,15 @@ namespace ie {
 		using ReadFn = typename ISReadable<T_>::ReadFn;
 		using Make = make_system::ISRanged<T_>;
 		
-		virtual T_ get_upper_bound() const = 0;
+		virtual auto get_upper_bound() const -> T_ = 0;
 		
-		virtual T_ get_lower_bound() const = 0;
+		virtual auto get_lower_bound() const -> T_ = 0;
 		
-		virtual void set_upper_bound(T_ upper_bound) = 0;
+		virtual auto set_upper_bound(T_ upper_bound) -> void = 0;
 		
-		virtual void set_lower_bound(T_ lower_bound) = 0;
+		virtual auto set_lower_bound(T_ lower_bound) -> void = 0;
 		
-		virtual void set_bounds(T_ lower_bound, T_ upper_bound);
+		virtual auto set_bounds(T_ lower_bound, T_ upper_bound) -> void;
 	};
 	
 	using ISRFloat = ISRanged<float>;

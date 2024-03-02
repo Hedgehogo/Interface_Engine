@@ -7,7 +7,7 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicOpenUrlAction<T>* BasicOpenUrlAction<T>::make(BasicActionInitInfo<T> init_info) {
+		auto BasicOpenUrlAction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicOpenUrlAction<T>* {
 			return new ie::BasicOpenUrlAction<T>{std::move(*this), init_info};
 		}
 	}
@@ -21,25 +21,27 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicOpenUrlAction<T>::start_pressed() {
+	auto BasicOpenUrlAction<T>::start_pressed() -> void {
 	}
 	
 	template<typename T>
-	void BasicOpenUrlAction<T>::stop_pressed() {
+	auto BasicOpenUrlAction<T>::stop_pressed() -> void {
 		open_url(url_);
 	}
 	
 	template<typename T>
-	void BasicOpenUrlAction<T>::while_pressed() {
+	auto BasicOpenUrlAction<T>::while_pressed() -> void {
 	}
 	
 	template<typename T>
-	void BasicOpenUrlAction<T>::while_not_pressed() {
+	auto BasicOpenUrlAction<T>::while_not_pressed() -> void {
 	}
 }
 
 template<typename T>
-orl::Option<ie::make_system::BasicOpenUrlAction<T> > ieml::Decode<char, ie::make_system::BasicOpenUrlAction<T> >::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::make_system::BasicOpenUrlAction<T> >::decode(
+	ieml::Node const& node
+) -> orl::Option<ie::make_system::BasicOpenUrlAction<T> > {
 	auto& clear_node{node.get_clear()};
 	for(auto map: clear_node.get_map_view().ok_or_none()) {
 		return {{map.at("url").except().get_string().except()}};

@@ -6,27 +6,27 @@ namespace ie {
 		init_info.update_manager.add(*this);
 	}
 	
-	IScalable& BaseButton::get_object() {
+	auto BaseButton::get_object() -> IScalable& {
 		return *background_;
 	}
 	
-	const IScalable& BaseButton::get_object() const {
+	auto BaseButton::get_object() const -> IScalable const& {
 		return *background_;
 	}
 	
-	bool BaseButton::update_interactions(sf::Vector2f mouse_position) {
+	auto BaseButton::update_interactions(sf::Vector2f mouse_position) -> bool {
 		return background_->update_interactions(mouse_position);
 	}
 	
-	LayoutData& BaseButton::layout_get_data() {
+	auto BaseButton::layout_get_data() -> LayoutData& {
 		return layout_;
 	}
 	
-	const LayoutData& BaseButton::layout_get_data() const {
+	auto BaseButton::layout_get_data() const -> LayoutData const& {
 		return layout_;
 	}
 	
-	void BaseButton::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto BaseButton::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
 }

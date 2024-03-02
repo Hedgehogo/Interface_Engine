@@ -5,16 +5,17 @@ namespace ie {
 		BoxPtr<IScalable::Make>&& object,
 		const sf::Vector2f& size,
 		bool is_character
-	) : object(std::move(object)),
+	) :
+		object(std::move(object)),
 		size(size),
 		special(is_character ? ObjectCharacter::ObjectSpecial::No : ObjectCharacter::ObjectSpecial::Object) {
 	}
 	
-	ObjectTextBlock::Make::Make(BoxPtr<IScalable::Make>&& object, float height) : object(std::move(object)), size(0, height),
-																				  special(ObjectCharacter::ObjectSpecial::FullLine) {
+	ObjectTextBlock::Make::Make(BoxPtr<IScalable::Make>&& object, float height) :
+		object(std::move(object)), size(0, height), special(ObjectCharacter::ObjectSpecial::FullLine) {
 	}
 	
-	ObjectTextBlock* ObjectTextBlock::Make::make(TextBockInitInfo init_info) {
+	auto ObjectTextBlock::Make::make(TextBockInitInfo init_info) -> ObjectTextBlock* {
 		return new ObjectTextBlock{std::move(*this), init_info};
 	}
 	
@@ -23,11 +24,11 @@ namespace ie {
 		TextBockInitInfo init_info
 	) :
 		BaseTextBlock({}),
-		object_character(
+		object_character_(
 			BoxPtr<IScalable>{
 				[&]() {
 					auto result{make.object->make(static_cast<InitInfo>(init_info))};
-					sf::Vector2f min_size{result->get_size()};
+					auto min_size{result->get_size()};
 					result->set_size({std::max(make.size.x, min_size.x), std::max(make.size.y, min_size.y)});
 					return result;
 				}()
@@ -36,23 +37,23 @@ namespace ie {
 		) {
 	}
 	
-	bool ObjectTextBlock::in(sf::Vector2f mouse_position) {
-		return object_character.in(mouse_position);
+	auto ObjectTextBlock::in(sf::Vector2f mouse_position) -> bool {
+		return object_character_.in(mouse_position);
 	}
 	
-	std::vector<BaseCharacter*> ObjectTextBlock::get_characters() {
-		return std::vector<BaseCharacter*>{&object_character};
+	auto ObjectTextBlock::get_characters() -> std::vector<BaseCharacter*> {
+		return std::vector<BaseCharacter*>{&object_character_};
 	}
 	
-	void ObjectTextBlock::update() {
+	auto ObjectTextBlock::update() -> void {
 	}
 	
-	bool ObjectTextBlock::update_interactions(sf::Vector2f mouse_position) {
-		return object_character.update_interactions(mouse_position);
+	auto ObjectTextBlock::update_interactions(sf::Vector2f mouse_position) -> bool {
+		return object_character_.update_interactions(mouse_position);
 	}
 }
 
-orl::Option<ie::ObjectTextBlock::Make> ieml::Decode<char, ie::ObjectTextBlock::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::ObjectTextBlock::Make>::decode(ieml::Node const& node) -> orl::Option<ie::ObjectTextBlock::Make> {
 	auto map{node.get_map_view().except()};
 	auto object{map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().except()};
 	for(auto& size: map.at("size").ok_or_none()) {

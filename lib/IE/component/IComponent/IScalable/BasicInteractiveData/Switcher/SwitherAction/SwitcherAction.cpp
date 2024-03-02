@@ -6,32 +6,31 @@ namespace ie {
 	SwitcherAction::Make::Make(MakeDyn<ISMBool> value) : value(std::move(value)) {
 	}
 	
-	SwitcherAction* SwitcherAction::Make::make(ActionInitInfo init_info) {
+	auto SwitcherAction::Make::make(ActionInitInfo init_info) -> SwitcherAction* {
 		return new SwitcherAction{std::move(*this), init_info};
 	}
 	
-	SwitcherAction::SwitcherAction(Make&& make, ActionInitInfo init_info) : value_(make.value.make({init_info.dyn_buffer, init_info.update_manager})) {
+	SwitcherAction::SwitcherAction(Make&& make, ActionInitInfo init_info) :
+		value_(make.value.make({init_info.dyn_buffer, init_info.update_manager})) {
 	}
 	
 	SwitcherAction::SwitcherAction(ISMBool& value) : value_(value) {
 	}
 	
-	void SwitcherAction::start_pressed() {
+	auto SwitcherAction::start_pressed() -> void {
 	}
 	
-	void SwitcherAction::stop_pressed() {
+	auto SwitcherAction::stop_pressed() -> void {
 		value_.set(!value_.get());
 	}
 	
-	void SwitcherAction::while_pressed() {
+	auto SwitcherAction::while_pressed() -> void {
 	}
 	
-	void SwitcherAction::while_not_pressed() {
+	auto SwitcherAction::while_not_pressed() -> void {
 	}
 }
 
-orl::Option<ie::SwitcherAction::Make> ieml::Decode<char, ie::SwitcherAction::Make>::decode(ieml::Node const& node) {
-	return ie::SwitcherAction::Make{
-		node.at("value").except().as<ie::MakeDyn<ie::ISMBool> >().except()
-	};
+auto ieml::Decode<char, ie::SwitcherAction::Make>::decode(ieml::Node const& node) -> orl::Option<ie::SwitcherAction::Make> {
+	return {{node.at("value").except().as<ie::MakeDyn<ie::ISMBool> >().except()}};
 }

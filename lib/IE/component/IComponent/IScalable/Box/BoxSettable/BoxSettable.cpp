@@ -5,7 +5,7 @@ namespace ie {
 		object(std::move(object)), min_size(min_size) {
 	}
 	
-	BoxSettable* BoxSettable::Make::make(InitInfo init_info) {
+	auto BoxSettable::Make::make(InitInfo init_info) -> BoxSettable* {
 		return new BoxSettable{std::move(*this), init_info};
 	}
 	
@@ -34,7 +34,7 @@ namespace ie {
 		init_info.update_manager.add(*this);
 	}
 	
-	void BoxSettable::set_object(BoxPtr<IScalable::Make>&& new_object) {
+	auto BoxSettable::set_object(BoxPtr<IScalable::Make>&& new_object) -> void {
 		draw_manager_.clear();
 		update_manager_.clear();
 		interaction_manager_.clear();
@@ -51,24 +51,24 @@ namespace ie {
 		object_ = BoxPtr<IScalable>{new_object->make(init_info)};
 	}
 	
-	void BoxSettable::draw() {
+	auto BoxSettable::draw() -> void {
 		this->draw_manager_.draw();
 	}
 	
-	void BoxSettable::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxSettable::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		object_->resize(size, position);
 	}
 	
-	void BoxSettable::update() {
+	auto BoxSettable::update() -> void {
 		this->update_manager_.update();
 	}
 	
-	IScalable& BoxSettable::get_object() {
+	auto BoxSettable::get_object() -> IScalable& {
 		return *object_;
 	}
 	
-	const IScalable& BoxSettable::get_object() const {
+	auto BoxSettable::get_object() const -> IScalable const& {
 		return *object_;
 	}
 }

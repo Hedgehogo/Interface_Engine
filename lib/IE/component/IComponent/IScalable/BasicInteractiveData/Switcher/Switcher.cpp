@@ -15,7 +15,7 @@ namespace ie {
 		key(key) {
 	}
 	
-	Switcher* Switcher::Make::make(InitInfo init_info) {
+	auto Switcher::Make::make(InitInfo init_info) -> Switcher* {
 		return new Switcher{std::move(*this), init_info};
 	}
 	
@@ -44,33 +44,33 @@ namespace ie {
 		init_info.update_manager.add(*this);
 	}
 	
-	void Switcher::set_position(sf::Vector2f position) {
+	auto Switcher::set_position(sf::Vector2f position) -> void {
 		layout_.set_position(position);
 		inactive_background_->set_position(position);
 		active_background_->set_position(position);
 	}
 	
-	void Switcher::move(sf::Vector2f position) {
+	auto Switcher::move(sf::Vector2f position) -> void {
 		layout_.move(position);
 		inactive_background_->move(position);
 		active_background_->move(position);
 	}
 	
-	void Switcher::set_size(sf::Vector2f size) {
+	auto Switcher::set_size(sf::Vector2f size) -> void {
 		layout_.set_size(size);
 		inactive_background_->set_size(size);
 		active_background_->set_size(size);
 	}
 	
-	sf::Vector2f Switcher::get_min_size() const {
+	auto Switcher::get_min_size() const -> sf::Vector2f {
 		return max(active_background_->get_min_size(), inactive_background_->get_min_size());
 	}
 	
-	sf::Vector2f Switcher::get_normal_size() const {
+	auto Switcher::get_normal_size() const -> sf::Vector2f {
 		return max(active_background_->get_normal_size(), inactive_background_->get_normal_size());
 	}
 	
-	void Switcher::draw() {
+	auto Switcher::draw() -> void {
 		if(active_.get()) {
 			active_draw_manager_.draw();
 		} else {
@@ -78,28 +78,27 @@ namespace ie {
 		}
 	}
 	
-	void Switcher::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto Switcher::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		active_background_->resize(size, position);
 		inactive_background_->resize(size, position);
 	}
 	
-	void Switcher::update() {
+	auto Switcher::update() -> void {
 		interactive_.update();
 	}
 	
-	bool Switcher::update_interactions(sf::Vector2f mouse_position) {
-		bool background_update;
-		if(active_.get()) {
-			background_update = active_background_->update_interactions(mouse_position);
-		} else {
-			background_update = inactive_background_->update_interactions(mouse_position);
-		}
+	auto Switcher::update_interactions(sf::Vector2f mouse_position) -> bool {
+		auto background_update{
+			active_.get() ?
+			active_background_->update_interactions(mouse_position) :
+			inactive_background_->update_interactions(mouse_position)
+		};
 		interactive_.update_interactions();
 		return background_update;
 	}
 	
-	void Switcher::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto Switcher::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		if(active_.get()) {
 			active_background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		} else {
@@ -107,16 +106,16 @@ namespace ie {
 		}
 	}
 	
-	LayoutData& Switcher::layout_get_data() {
+	auto Switcher::layout_get_data() -> LayoutData& {
 		return layout_;
 	}
 	
-	const LayoutData& Switcher::layout_get_data() const {
+	auto Switcher::layout_get_data() const -> LayoutData const& {
 		return layout_;
 	}
 }
 
-orl::Option<ie::Switcher::Make> ieml::Decode<char, ie::Switcher::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Switcher::Make>::decode(ieml::Node const& node) -> orl::Option<ie::Switcher::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::Switcher::Make{
 		map.at("inactive-background").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),

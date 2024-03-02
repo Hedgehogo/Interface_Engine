@@ -12,14 +12,14 @@ namespace ie {
 			
 			Make(float coefficient = 1, float addition = 0);
 			
-			TargetCoefficientSizing* make(float normal_size) override;
+			auto make(float normal_size) -> TargetCoefficientSizing* override;
 		};
 		
 		TargetCoefficientSizing(Make&& make, float normal_size);
 		
 		explicit TargetCoefficientSizing(float coefficient = 1, float addition = 0);
 		
-		float find_size(float, float target_size) override;
+		auto find_size(float, float target_size) -> float override;
 		
 	protected:
 		float coefficient_;
@@ -29,5 +29,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::TargetCoefficientSizing::Make> {
-	static orl::Option<ie::TargetCoefficientSizing::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::TargetCoefficientSizing::Make>;
 };

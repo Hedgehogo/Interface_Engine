@@ -8,13 +8,13 @@ namespace ie {
 	public:
 		explicit InternalTargetPositioning(float coefficient, float offset = 0);
 		
-		[[nodiscard]] float get_coefficient() const;
+		[[nodiscard]] auto get_coefficient() const -> float;
 		
-		[[nodiscard]] float get_offset() const;
+		[[nodiscard]] auto get_offset() const -> float;
 		
-		float find_position(float, float object_size, float, float target_size) override;
+		auto find_position(float, float object_size, float, float target_size) -> float override;
 		
-		InternalTargetPositioning* copy() override;
+		auto copy() -> InternalTargetPositioning* override;
 	
 	protected:
 		float coefficient_;
@@ -24,5 +24,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::InternalTargetPositioning> {
-	static orl::Option<ie::InternalTargetPositioning> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::InternalTargetPositioning>;
 };

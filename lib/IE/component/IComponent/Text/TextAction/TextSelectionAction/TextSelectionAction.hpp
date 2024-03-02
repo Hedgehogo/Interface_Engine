@@ -10,33 +10,33 @@ namespace ie {
 	
 	class TextSelectionAction : public BasicBaseKeyAction<Text&> {
 	public:
-		struct Make : BasicBaseKeyAction<Text&>::Make {
-			TextSelectionAction* make(BasicActionInitInfo<Text&> init_info) override;
+		struct Make : public BasicBaseKeyAction<Text&>::Make {
+			auto make(BasicActionInitInfo<Text&> init_info) -> TextSelectionAction* override;
 		};
 		
 		TextSelectionAction(Make&& make, BasicActionInitInfo<Text&> init_info);
 		
-		orl::Option<std::vector<BaseCharacter*>::iterator> get_start();
+		auto get_start() -> orl::Option<std::vector<BaseCharacter*>::iterator>;
 		
-		orl::Option<std::vector<BaseCharacter*>::iterator> get_end();
+		auto get_end() -> orl::Option<std::vector<BaseCharacter*>::iterator>;
 		
-		void update(sf::Vector2i mouse_position, bool press) override;
+		auto update(sf::Vector2i mouse_position, bool press) -> void override;
 		
 	protected:
-		void start_pressed() override;
+		auto start_pressed() -> void override;
 		
-		void stop_pressed() override;
+		auto stop_pressed() -> void override;
 		
-		void while_pressed() override;
+		auto while_pressed() -> void override;
 		
-		void while_not_pressed() override;
+		auto while_not_pressed() -> void override;
 		
-		Text* text;
-		orl::Option<std::vector<BaseCharacter*>::iterator> start, end;
+		Text* text_;
+		orl::Option<std::vector<BaseCharacter*>::iterator> start_, end_;
 	};
 }
 
 template<>
 struct ieml::Decode<char, ie::TextSelectionAction::Make> {
-	static orl::Option<ie::TextSelectionAction::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::TextSelectionAction::Make>;
 };

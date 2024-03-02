@@ -15,7 +15,7 @@ namespace ie {
 			
 			BasicOpenUrlAction(std::string url);
 			
-			ie::BasicOpenUrlAction<T>* make(BasicActionInitInfo<T> init_info) override;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicOpenUrlAction<T>* override;
 		};
 	}
 	
@@ -29,25 +29,25 @@ namespace ie {
 		BasicOpenUrlAction(std::string url);
 		
 	protected:
-		void start_pressed() override;
+		auto start_pressed() -> void override;
 		
-		void stop_pressed() override;
+		auto stop_pressed() -> void override;
 		
-		void while_pressed() override;
+		auto while_pressed() -> void override;
 		
-		void while_not_pressed() override;
+		auto while_not_pressed() -> void override;
 		
 		std::string url_;
 	};
 	
 	using OpenUrlAction = BasicOpenUrlAction<>;
 	
-	bool determine_url(ieml::Node const& node);
+	auto determine_url(ieml::Node const& node) -> bool;
 }
 
 template<typename T>
 struct ieml::Decode<char, ie::make_system::BasicOpenUrlAction<T> > {
-	static orl::Option<ie::make_system::BasicOpenUrlAction<T> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicOpenUrlAction<T> >;
 };
 
 #include "BasicOpenUrlAction.inl"

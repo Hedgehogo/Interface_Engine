@@ -9,36 +9,36 @@ namespace ie {
 	public:
 		struct Make : public virtual INonInteractive::Make {
 			BoxPtr<IScalable::Make> object;
-			const sf::Texture& texture;
+			sf::Texture const& texture;
 			MakeDyn<ISRFloat> viewing_progress;
 			sf::IntRect rect = {};
 			size_t frame_count = 0;
 			sf::Vector2i offset = {};
 			
-			Make(const sf::Texture& texture, MakeDyn<ISRFloat> viewing_progress, sf::IntRect rect, size_t frame_count, sf::Vector2i offset);
+			Make(sf::Texture const& texture, MakeDyn<ISRFloat> viewing_progress, sf::IntRect rect, size_t frame_count, sf::Vector2i offset);
 			
-			Make(const sf::Texture& texture, MakeDyn<ISRFloat> viewing_progress, sf::IntRect rect, size_t frame_count);
+			Make(sf::Texture const& texture, MakeDyn<ISRFloat> viewing_progress, sf::IntRect rect, size_t frame_count);
 			
-			Make(const sf::Texture& texture, MakeDyn<ISRFloat> viewing_progress, sf::IntRect rect);
+			Make(sf::Texture const& texture, MakeDyn<ISRFloat> viewing_progress, sf::IntRect rect);
 			
-			VideoFromTexture* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> VideoFromTexture* override;
 		};
 		
 		VideoFromTexture(Make&& make, InitInfo init_info);
 		
-		void set_current_frame(float viewing_progress);
+		auto set_current_frame(float viewing_progress) -> void;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		sf::Vector2f get_area_position() const override;
+		auto get_area_position() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_area_size() const override;
+		auto get_area_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
 	protected:
 		sf::IntRect rect_;

@@ -29,46 +29,46 @@ namespace ie {
 				sf::Vector2f min_size = {}
 			);
 			
-			BoxConstRatioCenter* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxConstRatioCenter* override;
 		};
 		
 		BoxConstRatioCenter(Make&& make, InitInfo init_info);
 		
-		void set_aspect_ratio(float aspect_ratio);
+		auto set_aspect_ratio(float aspect_ratio) -> void;
 		
-		void set_position(sf::Vector2f position) override;
+		auto set_position(sf::Vector2f position) -> void override;
 		
-		void move(sf::Vector2f position) override;
+		auto move(sf::Vector2f position) -> void override;
 		
-		void set_size(sf::Vector2f size) override;
+		auto set_size(sf::Vector2f size) -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		INonInteractive& get_background() override;
+		auto get_background() -> INonInteractive& override;
 		
-		const INonInteractive& get_background() const override;
+		auto get_background() const -> INonInteractive const& override;
 		
-		IScalable& get_object() override;
+		auto get_object() -> IScalable& override;
 		
-		const IScalable& get_object() const override;
+		auto get_object() const -> IScalable const& override;
 		
-		IScalable& get_first_object() override;
+		auto get_first_object() -> IScalable& override;
 		
-		const IScalable& get_first_object() const override;
+		auto get_first_object() const -> IScalable const& override;
 		
-		IScalable& get_second_object() override;
+		auto get_second_object() -> IScalable& override;
 		
-		const IScalable& get_second_object() const override;
+		auto get_second_object() const -> IScalable const& override;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
 		DrawManager first_draw_manager_;
@@ -85,5 +85,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxConstRatioCenter::Make> {
-	static orl::Option<ie::BoxConstRatioCenter::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxConstRatioCenter::Make>;
 };

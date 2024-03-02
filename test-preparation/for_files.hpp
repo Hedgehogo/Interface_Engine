@@ -6,7 +6,6 @@
 
 template<auto P, typename Fn, typename... Args, typename R = std::invoke_result_t<Fn, const std::filesystem::path&, Args...> >
 R for_files(const std::filesystem::path& dir, Fn fn, Args... args) {
-
 	if constexpr(std::is_same_v<R, void>) {
 		for(auto& entry: std::filesystem::directory_iterator(dir)) {
 			if(entry.is_regular_file() && ctre::match<P>(entry.path().string())) {
@@ -16,8 +15,8 @@ R for_files(const std::filesystem::path& dir, Fn fn, Args... args) {
 			}
 		}
 	} else {
-		R result{};
-		R result0{};
+		auto result{R{}};
+		auto result0{R{}};
 		for(auto& entry: std::filesystem::directory_iterator(dir)) {
 			if(entry.is_regular_file() && ctre::match<P>(entry.path().string())) {
 				result0 = fn(entry.path(), args...);

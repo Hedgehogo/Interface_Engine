@@ -2,27 +2,27 @@
 #include "../../../../BasePanel/Panel/Panel.hpp"
 
 namespace ie {
-	DisplayPanelAction* DisplayPanelAction::Make::make(PanelActionInitInfo init_info) {
+	auto DisplayPanelAction::Make::make(PanelActionInitInfo init_info) -> DisplayPanelAction* {
 		return new DisplayPanelAction{std::move(*this), init_info};
 	}
 	
 	DisplayPanelAction::DisplayPanelAction(Make&&, PanelActionInitInfo init_info) : PanelAction(init_info) {
 	}
 	
-	void DisplayPanelAction::start_pressed() {
+	auto DisplayPanelAction::start_pressed() -> void {
 	}
 	
-	void DisplayPanelAction::while_pressed() {
+	auto DisplayPanelAction::while_pressed() -> void {
 	}
 	
-	void DisplayPanelAction::stop_pressed() {
+	auto DisplayPanelAction::stop_pressed() -> void {
 		panel_manager_->display_panel(panel_);
 	}
 	
-	void DisplayPanelAction::while_not_pressed() {
+	auto DisplayPanelAction::while_not_pressed() -> void {
 	}
 }
 
-orl::Option<ie::DisplayPanelAction::Make> ieml::Decode<char, ie::DisplayPanelAction::Make>::decode(ieml::Node const&) {
+auto ieml::Decode<char, ie::DisplayPanelAction::Make>::decode(ieml::Node const&) -> orl::Option<ie::DisplayPanelAction::Make> {
 	return {{}};
 }

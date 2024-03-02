@@ -8,41 +8,41 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicTextCopyAction<T>* BasicTextCopyAction<T>::make(BasicActionInitInfo<Text&> init_info) {
+		auto BasicTextCopyAction<T>::make(BasicActionInitInfo<Text&> init_info) -> ie::BasicTextCopyAction<T>* {
 			return new ie::BasicTextCopyAction{std::move(*this), init_info};
 		}
 	}
 	
 	template<typename T>
 	BasicTextCopyAction<T>::BasicTextCopyAction(Make&& make, BasicActionInitInfo<Text&> init_info) :
-		text(&init_info.additional), clipboard(make.clipboard) {
+		text_(&init_info.additional), clipboard_(make.clipboard) {
 	}
 	
 	template<typename T>
-	void BasicTextCopyAction<T>::start_pressed() {
+	auto BasicTextCopyAction<T>::start_pressed() -> void {
 	}
 	
 	template<typename T>
-	void BasicTextCopyAction<T>::stop_pressed() {
-		ProcessClipboard<T>::set_string(*clipboard.get(), text->get_selection_text());
+	auto BasicTextCopyAction<T>::stop_pressed() -> void {
+		ProcessClipboard<T>::set_string(*clipboard_.get(), text_->get_selection_text());
 	}
 	
 	template<typename T>
-	void BasicTextCopyAction<T>::while_pressed() {
+	auto BasicTextCopyAction<T>::while_pressed() -> void {
 	}
 	
 	template<typename T>
-	void BasicTextCopyAction<T>::while_not_pressed() {
+	auto BasicTextCopyAction<T>::while_not_pressed() -> void {
 	}
 }
 
 template<typename T>
-orl::Option<ie::make_system::BasicTextCopyAction<T>> ieml::Decode<char, ie::make_system::BasicTextCopyAction<T>>::decode(ieml::Node const& node) {
-	const auto& clear_node{node.get_clear()};
+auto ieml::Decode<char, ie::make_system::BasicTextCopyAction<T> >::decode(
+	ieml::Node const& node
+) -> orl::Option<ie::make_system::BasicTextCopyAction<T> > {
+	auto const& clear_node{node.get_clear()};
 	for(auto& map: clear_node.get_map_view().ok_or_none()) {
-		return ie::make_system::BasicTextCopyAction<T>{
-			map.get_as<bp::BoxPtr<T>>("clipboard").except().ok_or({}),
-		};
+		return {{map.get_as<bp::BoxPtr<T> >("clipboard").except().ok_or({})}};
 	}
 	if (clear_node.is_null()){
 		return ie::make_system::BasicTextCopyAction<T>{};

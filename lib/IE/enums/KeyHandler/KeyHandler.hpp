@@ -107,7 +107,7 @@ namespace ie {
 		F15,                   ///< The F15 key
 		Pause,                 ///< The Pause key
 		
-		Dash = Hyphen,    ///< \deprecated Use Hyphen instead
+		Dash = Hyphen,         ///< \deprecated Use Hyphen instead
 		BackSpace = Backspace, ///< \deprecated Use Backspace instead
 		BackSlash = Backslash, ///< \deprecated Use Backslash instead
 		SemiColon = Semicolon, ///< \deprecated Use Semicolon instead
@@ -126,39 +126,39 @@ namespace ie {
 	
 	class KeyHandler {
 	public:
-		static std::vector<Key> get_keys_pressed();
+		static auto get_keys_pressed() -> std::vector<Key>;
 		
-		static void set_keys_pressed(std::vector<Key> keys_pressed);
+		static auto set_keys_pressed(std::vector<Key> keys_pressed) -> void;
 		
-		static void update();
+		static auto update() -> void;
 		
-		static void update_key_board();
+		static auto update_key_board() -> void;
 		
-		static void update_mouse();
+		static auto update_mouse() -> void;
 		
-		static void add_key(Key key);
+		static auto add_key(Key key) -> void;
 		
-		static void delete_key(Key key);
+		static auto delete_key(Key key) -> void;
 		
-		static void clear();
+		static auto clear() -> void;
 		
-		static void clear_global_keys();
+		static auto clear_global_keys() -> void;
 		
-		static std::string to_string(Key key);
+		static auto to_string(Key key) -> std::string;
 		
-		static bool is_key_pressed(Key key);
+		static auto is_key_pressed(Key key) -> bool;
 	
 	protected:
 		static std::vector<Key> keys_pressed_;
 		static std::vector<Key> global_keys_pressed_;
 	};
 	
-	std::string to_string(Key key);
+	auto to_string(Key key) -> std::string;
 	
-	bool is_key_pressed(Key key);
+	auto is_key_pressed(Key key) -> bool;
 }
 
 template<>
 struct ieml::Decode<char, ie::Key> {
-	static orl::Option<ie::Key> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Key>;
 };

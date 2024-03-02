@@ -5,7 +5,7 @@ namespace ie {
 		video(std::move(video)), viewing_progress(std::move(viewing_progress)) {
 	}
 	
-	VideoFromFile* VideoFromFile::Make::make(InitInfo init_info) {
+	auto VideoFromFile::Make::make(InitInfo init_info) -> VideoFromFile* {
 		return new VideoFromFile{std::move(*this), init_info};
 	}
 	
@@ -15,7 +15,7 @@ namespace ie {
 		buffer_texture_(make.video),
 		viewing_progress_(
 			make.viewing_progress.make(SInitInfo{init_info}),
-			[this](const float& value) {
+			[this](float value) {
 				set_current_frame(value);
 			}
 		) {
@@ -23,7 +23,7 @@ namespace ie {
 		sprite_.setTexture(buffer_texture_[0]);
 	}
 	
-	void VideoFromFile::set_current_frame(float viewing_progress) {
+	auto VideoFromFile::set_current_frame(float viewing_progress) -> void {
 		if(viewing_progress >= 1) {
 			sprite_.setTexture(buffer_texture_[buffer_texture_.size()]);
 			return;
@@ -35,29 +35,29 @@ namespace ie {
 		sprite_.setTexture(buffer_texture_[buffer_texture_.size() * viewing_progress]);
 	}
 	
-	void VideoFromFile::draw() {
+	auto VideoFromFile::draw() -> void {
 		render_target_->draw(sprite_);
 	}
 	
-	void VideoFromFile::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto VideoFromFile::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		this->size_ = size;
 		sprite_.setPosition(position);
 		sprite_.setScale(div_xy(size, sf::Vector2f{size_video_}));
 	}
 	
-	sf::Vector2f VideoFromFile::get_area_position() const {
+	auto VideoFromFile::get_area_position() const -> sf::Vector2f {
 		return sprite_.getPosition();
 	}
 	
-	sf::Vector2f VideoFromFile::get_area_size() const {
+	auto VideoFromFile::get_area_size() const -> sf::Vector2f {
 		return size_;
 	}
 	
-	sf::Vector2f VideoFromFile::get_min_size() const {
+	auto VideoFromFile::get_min_size() const -> sf::Vector2f {
 		return {0, 0};
 	}
 	
-	sf::Vector2f VideoFromFile::get_normal_size() const {
+	auto VideoFromFile::get_normal_size() const -> sf::Vector2f {
 		return sf::Vector2f{size_video_};
 	}
 }

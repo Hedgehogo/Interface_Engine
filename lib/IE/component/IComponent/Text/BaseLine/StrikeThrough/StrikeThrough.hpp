@@ -10,24 +10,24 @@ namespace ie {
 			orl::Option<sf::Color> color = {};
 			float strike_through_offset;
 			
-			Make(const orl::Option<sf::Color>& color = {}, float strike_through_offset = 0.3);
+			Make(orl::Option<sf::Color> color = {}, float strike_through_offset = 0.3);
 			
-			BaseLine* make(LineInitInfo init_info) override;
+			auto make(LineInitInfo init_info) -> BaseLine* override;
 		};
 		
 		StrikeThrough(Make&& make, LineInitInfo init_info);
 
-		void resize(float start, float end, float height) override;
+		auto resize(float start, float end, float height) -> void override;
 		
-		StrikeThrough* copy() const override;
+		auto copy() const -> StrikeThrough* override;
 	
 	protected:
-		float strike_through_offset;
-		float underline_thickness;
+		float strike_through_offset_;
+		float underline_thickness_;
 	};
 }
 
 template<>
 struct ieml::Decode<char, ie::StrikeThrough::Make> {
-	static orl::Option<ie::StrikeThrough::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::StrikeThrough::Make>;
 };

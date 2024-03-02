@@ -1,29 +1,34 @@
 #include "BaseTextResizer.hpp"
 
 namespace ie {
-	BaseTextResizer::BaseTextResizer(float line_spacing, BaseTextResizer::Align align, BaseTextResizer::Algorithm algorithm, TextResizerInitInfo init_info) :
-		characters(init_info.characters),
-		lines(),
-		line_spacing(line_spacing),
-		align(align),
-		algorithm(algorithm) {
+	BaseTextResizer::BaseTextResizer(
+		float line_spacing,
+		BaseTextResizer::Align align,
+		BaseTextResizer::Algorithm algorithm,
+		TextResizerInitInfo init_info
+	) :
+		characters_(init_info.characters),
+		lines_(),
+		line_spacing_(line_spacing),
+		align_(align),
+		algorithm_(algorithm) {
 	}
 
-	const std::vector<BoxPtr<BaseLine> >& BaseTextResizer::get_lines() const {
-		return lines;
+	auto BaseTextResizer::get_lines() const -> std::vector<BoxPtr<BaseLine> > const& {
+		return lines_;
 	}
 	
-	sf::Vector2f BaseTextResizer::get_min_size() {
-		if(algorithm == Algorithm::Console) {
+	auto BaseTextResizer::get_min_size() -> sf::Vector2f {
+		if(algorithm_ == Algorithm::Console) {
 			return get_min_size_console();
-		} else if(algorithm == Algorithm::Absolute) {
+		} else if(algorithm_ == Algorithm::Absolute) {
 			return get_min_size_absolute();
 		}
 		return get_min_size_base();
 	}
 }
 
-orl::Option<ie::BaseTextResizer::Align> ieml::Decode<char, ie::BaseTextResizer::Align>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BaseTextResizer::Align>::decode(ieml::Node const& node) -> orl::Option<ie::BaseTextResizer::Align> {
 	auto& str{node.get_clear().get_string().except()};
 	if(str == "left") {
 		return ie::BaseTextResizer::Align::Left;
@@ -35,7 +40,7 @@ orl::Option<ie::BaseTextResizer::Align> ieml::Decode<char, ie::BaseTextResizer::
 	return {};
 }
 
-orl::Option<ie::BaseTextResizer::Algorithm> ieml::Decode<char, ie::BaseTextResizer::Algorithm>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BaseTextResizer::Algorithm>::decode(ieml::Node const& node) -> orl::Option<ie::BaseTextResizer::Algorithm> {
 	auto& str{node.get_clear().get_string().except()};
 	if(str == "base") {
 		return ie::BaseTextResizer::Algorithm::Base;

@@ -13,7 +13,7 @@ namespace ie {
 		public:
 			SRanged(T_ data = {});
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		template<typename T_>
@@ -21,7 +21,7 @@ namespace ie {
 		public:
 			SRanged(T_ data);
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		template<typename T_>
@@ -29,7 +29,7 @@ namespace ie {
 		public:
 			ToMutable(T_ data = {});
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		template<typename T_>
@@ -37,7 +37,7 @@ namespace ie {
 		public:
 			ToMutable(T_ data);
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		template<typename T_, bool Default_ = std::is_default_constructible_v<T_> >
@@ -47,12 +47,12 @@ namespace ie {
 
 template<typename T_>
 struct ieml::Decode<char, ie::make_system::SRanged<T_> > {
-	static orl::Option<ie::make_system::SRanged<T_> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::SRanged<T_> >;
 };
 
 template<typename T_>
 struct ieml::Decode<char, ie::make_system::SMRanged<T_> > {
-	static orl::Option<ie::make_system::SMRanged<T_> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::SMRanged<T_> >;
 };
 
 namespace ie {
@@ -69,20 +69,20 @@ namespace ie {
 		
 		SRanged(T_ data);
 		
-		T_ get_upper_bound() const override;
+		auto get_upper_bound() const -> T_ override;
 		
-		T_ get_lower_bound() const override;
+		auto get_lower_bound() const -> T_ override;
 		
-		void set_upper_bound(T_ upper_bound) override;
+		auto set_upper_bound(T_ upper_bound) -> void override;
 		
-		void set_lower_bound(T_ lower_bound) override;
+		auto set_lower_bound(T_ lower_bound) -> void override;
 		
-		void set_bounds(T_ lower_bound, T_ upper_bound) override;
+		auto set_bounds(T_ lower_bound, T_ upper_bound) -> void override;
 	
 	protected:
-		void reset();
+		auto reset() -> void;
 		
-		void set(T_ value);
+		auto set(T_ value) -> void;
 		
 		T_ upper_bound_;
 		T_ lower_bound_;
@@ -103,7 +103,7 @@ namespace ie {
 		
 		ToMutable(T_ data);
 		
-		void set(T_ value) override;
+		auto set(T_ value) -> void override;
 	};
 	
 	template<typename T_>
@@ -115,7 +115,7 @@ namespace ie {
 	
 	template<typename T_>
 	struct Determine<make_system::SMRanged<T_> > {
-		static bool determine(ieml::Node const& node);
+		static auto determine(ieml::Node const& node) -> bool;
 	};
 }
 

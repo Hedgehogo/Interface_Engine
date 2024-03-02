@@ -9,14 +9,14 @@ namespace ie {
 		DownLeft, Down, DownRight
 	};
 	
-	Location get_vertical_location(Location2 location2);
+	auto get_vertical_location(Location2 location2) -> Location;
 	
-	Location get_horizontal_location(Location2 location2);
+	auto get_horizontal_location(Location2 location2) -> Location;
 	
-	Location2 make_location2(Location vertical, Location horizontal);
+	auto make_location2(Location vertical, Location horizontal) -> Location2;
 }
 
 template<>
 struct ieml::Decode<char, ie::Location2> {
-	static orl::Option<ie::Location2> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Location2>;
 };

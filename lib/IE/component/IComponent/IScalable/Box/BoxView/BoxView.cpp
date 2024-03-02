@@ -9,14 +9,14 @@ namespace ie {
 	BoxView::BoxView(sf::Vector2f min_size) : Box(min_size), render_target_(nullptr) {
 	}
 	
-	void BoxView::draw() {
-		sf::View old_view = render_target_->getView();
+	auto BoxView::draw() -> void {
+		auto old_view = render_target_->getView();
 		render_target_->setView(view_);
 		draw_manager_.draw();
 		render_target_->setView(old_view);
 	}
 	
-	void BoxView::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxView::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		
 		view_.setSize(size);

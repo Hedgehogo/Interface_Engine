@@ -8,7 +8,7 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	sf::RenderTarget& OnlyDrawable::get_render_target() {
+	auto OnlyDrawable::get_render_target() -> sf::RenderTarget& {
 		return *render_target_;
 	}
 }
