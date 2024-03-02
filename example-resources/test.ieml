@@ -1,3 +1,17 @@
-object: = FullColor:
-	color: red
-	radius: null
+object: = BoxConstBorder:
+	border-distance: 20
+	side: right
+	const-object: = Slider:
+		slider: = Capsule: red
+		background: green
+		value:
+			x: 0
+			y: &value 0
+	second-object: = EditCaption:
+		text: = ToStringF:
+			value: > 0.000000
+			args:
+				- *value
+		background: blue
+		font: > ../../example-resources/segoeui.ttf
+		font-size: 30

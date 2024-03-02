@@ -4,6 +4,7 @@
 
 #include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Sprite/Sprite.hpp"
 #include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Capsule/Capsule.hpp"
+#include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Capsule/Capsule.hpp"
 #include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/RoundedRectangle/RoundedRectangle.hpp"
 #include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Video/video_convert.hpp"
 #include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Video/VideoFromFile/VideoFromFile.hpp"

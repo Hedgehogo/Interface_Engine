@@ -8,11 +8,11 @@
 TEST(IComponent, BasicCaption) {
 	InitInfoData data{{100, 100}};
 	
-	std::basic_ifstream<char32_t> file1{"test-src/Caption.txt"};
+	std::basic_ifstream<char32_t> file1{"test-src/Caption1.txt"};
 	std::u32string str1;
 	std::getline(file1, str1, U'\0');
 	
-	std::basic_ifstream<char32_t> file2{"test-src/Caption.txt"};
+	std::basic_ifstream<char32_t> file2{"test-src/Caption2.txt"};
 	std::u32string str2;
 	std::getline(file2, str2, U'\0');
 	auto utf32_str2{ie::to_utf32(str2)};
@@ -36,7 +36,7 @@ TEST(IComponent, BasicCaption) {
 	
 	ASSERT_EQ(&caption.get_render_target(), &data.render_target);
 	ASSERT_EQ(caption.get_min_size(), (sf::Vector2f{6, 13}));
-	ASSERT_EQ(caption.get_normal_size(), (sf::Vector2f{51, 11}));
+	ASSERT_EQ(caption.get_normal_size(), (sf::Vector2f{50, 13}));
 	ASSERT_EQ(caption.get_size(), sf::Vector2f{});
 	ASSERT_EQ(caption.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(caption.get_position(), sf::Vector2f{});
