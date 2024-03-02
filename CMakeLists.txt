@@ -51,7 +51,7 @@ crete_test_preparation(
 		"Test_${PROJECT_NAME}"
 		"${PROJECT_NAME}_tests"
 		"${CMAKE_CURRENT_SOURCE_DIR}/lib/"
-		"${CMAKE_CURRENT_SOURCE_DIR}/test/_test/"
+		"${CMAKE_CURRENT_SOURCE_DIR}/test/"
 		"${CMAKE_CURRENT_BINARY_DIR}/Test_${PROJECT_NAME}/lib/"
 		"${CMAKE_CURRENT_BINARY_DIR}/bin/test-src/"
 )

@@ -60,14 +60,6 @@
 #include "IE/component/IComponent/IScalable/BasicInteractiveData/Switcher/SwitherAction/SwitcherAction.hpp"
 #include "IE/shared/ISReadable/readable.hpp"
 #include "IE/shared/ISReadable/ISRanged/STime/STime.hpp"
-//#include "IE/animation/Animator/IAnimatorUnit/Animation/Animation.hpp"
-//#include "IE/animation/Animator/IAnimatorUnit/Prerequisite/Prerequisite.hpp"
-//#include "IE/animation/Animator/IAnimatorUnit/AnimatorUnitMatch/AnimatorUnitMatch.hpp"
-//#include "IE/animation/IChangeVariable/ChangeVariableByStraightLine/ChangeVariableByStraightLine.hpp"
-//#include "IE/animation/IChangeVariable/ChangeVariableByBrokenLine/ChangeVariableByBrokenLine.hpp"
-//#include "IE/animation/IChangeVariable/ChangeVariableBySteppedLine/ChangeVariableBySteppedLine.hpp"
-//#include "IE/animation/IChangeVariable/ChangeVariableBySinusoid/ChangeVariableBySinusoid.hpp"
-//#include "IE/animation/IChangeVariable/ChangeVariableByCurve/ChangeVariableByCurve.hpp"
 #include "IE/debug/BoxDebug/BoxDebug.hpp"
 
 namespace ie {
