@@ -5,23 +5,23 @@
 #include <cmath>
 
 namespace ie {
-	TextSelectionAction* TextSelectionAction::Make::make(BasicActionInitInfo<Text&> init_info) {
+	auto TextSelectionAction::Make::make(BasicActionInitInfo<Text&> init_info) -> TextSelectionAction* {
 		return new TextSelectionAction{std::move(*this), init_info};
 	}
 	
-	TextSelectionAction::TextSelectionAction(Make&&, BasicActionInitInfo<Text&> init_info) : text(&init_info.additional), start(), end() {
+	TextSelectionAction::TextSelectionAction(Make&&, BasicActionInitInfo<Text&> init_info) : text_(&init_info.additional), start_(), end_() {
 	}
 	
-	void TextSelectionAction::start_pressed() {
-		text->set_selection_start(start = text->get_character(sf::Vector2f{mouse_position_}));
+	auto TextSelectionAction::start_pressed() -> void {
+		text_->set_selection_start(start_ = text_->get_character(sf::Vector2f{mouse_position_}));
 	}
 	
-	void TextSelectionAction::stop_pressed() {
+	auto TextSelectionAction::stop_pressed() -> void {
 	}
 	
-	void TextSelectionAction::while_pressed() {
-		text->set_selection_end(end = text->get_character(sf::Vector2f{mouse_position_}));
-		for(auto [start_value, end_value]: orl::clone(start) && orl::clone(end)) {
+	auto TextSelectionAction::while_pressed() -> void {
+		text_->set_selection_end(end_ = text_->get_character(sf::Vector2f{mouse_position_}));
+		for(auto [start_value, end_value]: orl::clone(start_) && orl::clone(end_)) {
 			if(start_value > end_value) {
 				std::swap(start_value, end_value);
 			}
@@ -33,19 +33,19 @@ namespace ie {
 		}
 	}
 	
-	void TextSelectionAction::while_not_pressed() {
+	auto TextSelectionAction::while_not_pressed() -> void {
 	}
 	
-	orl::Option<std::vector<BaseCharacter*>::iterator> TextSelectionAction::get_start() {
-		return start;
+	auto TextSelectionAction::get_start() -> orl::Option<std::vector<BaseCharacter*>::iterator> {
+		return start_;
 	}
 	
-	orl::Option<std::vector<BaseCharacter*>::iterator> TextSelectionAction::get_end() {
-		return end;
+	auto TextSelectionAction::get_end() -> orl::Option<std::vector<BaseCharacter*>::iterator> {
+		return end_;
 	}
 	
-	void TextSelectionAction::update(sf::Vector2i mouse_position, bool press) {
-		for(auto [start_value, end_value]: press && orl::clone(start) && orl::clone(end)) {
+	auto TextSelectionAction::update(sf::Vector2i mouse_position, bool press) -> void {
+		for(auto [start_value, end_value]: press && orl::clone(start_) && orl::clone(end_)) {
 			if(start_value > end_value) {
 				std::swap(start_value, end_value);
 			}
@@ -58,9 +58,9 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::TextSelectionAction::Make> ieml::Decode<char, ie::TextSelectionAction::Make>::decode(ieml::Node const& node) {
-	if (node.is_null()){
-		return ie::TextSelectionAction::Make{};
+auto ieml::Decode<char, ie::TextSelectionAction::Make>::decode(ieml::Node const& node) -> orl::Option<ie::TextSelectionAction::Make> {
+	if(node.is_null()) {
+		return {{}};
 	}
 	return {};
 }

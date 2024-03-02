@@ -7,21 +7,21 @@ namespace ie {
 	namespace detail {
 		template<typename From, typename To>
 		struct SCast {
-			static To checked(From value);
+			static auto checked(From value) -> To;
 		};
 		
 		template<typename To_>
 		struct SFloatCast {
-			static To_ floor(float value);
+			static auto floor(float value) -> To_;
 			
-			static To_ ceil(float value);
+			static auto ceil(float value) -> To_;
 			
-			static To_ round(float value);
+			static auto round(float value) -> To_;
 		};
 		
 		template<typename From_>
 		struct SToString {
-			static std::u32string to_string(From_ value);
+			static auto to_string(From_ value) -> std::u32string;
 		};
 	}
 	

@@ -4,7 +4,7 @@ namespace ie {
 	ConstSizing::Make::Make(float size) : size(size) {
 	}
 	
-	ConstSizing* ConstSizing::Make::make(float normal_size) {
+	auto ConstSizing::Make::make(float normal_size) -> ConstSizing* {
 		return new ConstSizing{std::move(*this), normal_size};
 	}
 	
@@ -14,12 +14,12 @@ namespace ie {
 	ConstSizing::ConstSizing(float size) : size_(size) {
 	}
 	
-	float ConstSizing::find_size(float, float) {
+	auto ConstSizing::find_size(float, float) -> float {
 		return this->size_;
 	}
 }
 
-orl::Option<ie::ConstSizing::Make> ieml::Decode<char, ie::ConstSizing::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::ConstSizing::Make>::decode(ieml::Node const& node) -> orl::Option<ie::ConstSizing::Make> {
 	auto& clear_node{node.get_clear()};
 	for(auto scalar: clear_node.as<float>().ok_or_none()) {
 		return {{scalar}};

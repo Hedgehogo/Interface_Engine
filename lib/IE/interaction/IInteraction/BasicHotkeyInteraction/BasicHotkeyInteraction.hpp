@@ -22,7 +22,7 @@ namespace ie {
 					size_t state = std::numeric_limits<size_t>::max()
 				);
 				
-				detail::BasicHotkeyInteractionHotkey<T>* make(BasicActionInitInfo<T> init_info);
+				auto make(BasicActionInitInfo<T> init_info) -> detail::BasicHotkeyInteractionHotkey<T>*;
 			};
 		}
 	
@@ -54,7 +54,7 @@ namespace ie {
 			
 			explicit BasicHotkeyInteraction(std::vector<std::vector<Hotkey > > hotkeys, size_t state = 0);
 			
-			ie::BasicHotkeyInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicHotkeyInteraction<T>* override;
 		};
 	}
 	
@@ -66,17 +66,17 @@ namespace ie {
 		
 		BasicHotkeyInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		void set_hotkey_action(size_t state, Hotkey* hotkey_action);
+		auto set_hotkey_action(size_t state, Hotkey* hotkey_action) -> void;
 		
-		std::vector<Hotkey > get_hotkeys(int state);
+		auto get_hotkeys(int state) -> std::vector<Hotkey>;
 		
-		Hotkey get_hotkey(int state, int i);
+		auto get_hotkey(int state, int i) -> Hotkey;
 		
-		void start(sf::Vector2i mouse_position) override;
+		auto start(sf::Vector2i mouse_position) -> void override;
 		
-		void update(sf::Vector2i mouse_position) override;
+		auto update(sf::Vector2i mouse_position) -> void override;
 		
-		void finish(sf::Vector2i mouse_position) override;
+		auto finish(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
 		std::vector<std::vector<Hotkey > > hotkey_states_;
@@ -88,12 +88,12 @@ namespace ie {
 
 template<typename T>
 struct ieml::Decode<char, ie::detail::make_system::BasicHotkeyInteractionHotkey<T> > {
-	static orl::Option<ie::detail::make_system::BasicHotkeyInteractionHotkey<T> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::detail::make_system::BasicHotkeyInteractionHotkey<T> >;
 };
 
 template<typename T>
 struct ieml::Decode<char, ie::make_system::BasicHotkeyInteraction<T> > {
-	static orl::Option<ie::make_system::BasicHotkeyInteraction<T> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicHotkeyInteraction<T> >;
 };
 
 #include "BasicHotkeyInteraction.inl"

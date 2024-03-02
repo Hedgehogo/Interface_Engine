@@ -6,7 +6,7 @@
 #include "BaseWindowResizer/WindowResizer/WindowResizer.hpp"
 
 namespace ie {
-	BaseWindowResizer* get_window_resizer();
+	auto get_window_resizer() -> BaseWindowResizer*;
 	
 	class Window {
 	public:
@@ -40,21 +40,21 @@ namespace ie {
 			sf::ContextSettings&& settings = sf::ContextSettings{}
 		);
 		
-		void create(sf::VideoMode mode, const sf::String& title, sf::Uint32, const sf::ContextSettings& settings);
+		auto create(sf::VideoMode mode, const sf::String& title, sf::Uint32, const sf::ContextSettings& settings) -> void;
 		
-		virtual void create(sf::VideoMode mode, const sf::String& title, const sf::ContextSettings& settings = sf::ContextSettings());
+		virtual auto create(sf::VideoMode mode, const sf::String& title, const sf::ContextSettings& settings = sf::ContextSettings()) -> void;
 		
-		void set_size(const sf::Vector2u& size);
+		auto set_size(const sf::Vector2u& size) -> void;
 		
-		virtual void re_calculate_min_size();
+		virtual auto re_calculate_min_size() -> void;
 		
-		virtual void update();
+		virtual auto update() -> void;
 		
-		Interface& get_interface();
+		auto get_interface() -> Interface&;
 		
-		sf::RenderWindow& get_window();
+		auto get_window() -> sf::RenderWindow&;
 		
-		sf::Vector2u get_min_size() const;
+		auto get_min_size() const -> sf::Vector2u;
 	
 	protected:
 		sf::RenderWindow window_;
@@ -64,10 +64,10 @@ namespace ie {
 		sf::Vector2u min_size_;
 	};
 	
-	Window make_window(
+	auto make_window(
 		fs::path file_path,
 		sf::String&& title,
 		sf::VideoMode&& mode = {1, 1},
 		sf::ContextSettings&& settings = sf::ContextSettings{}
-	);
+	) -> Window;
 }

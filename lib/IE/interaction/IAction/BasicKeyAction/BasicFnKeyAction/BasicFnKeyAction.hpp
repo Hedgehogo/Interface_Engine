@@ -28,7 +28,7 @@ namespace ie {
 				}
 			);
 			
-			ie::BasicFnKeyAction<T>* make(BasicActionInitInfo<T> init_info) override;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicFnKeyAction<T>* override;
 		};
 	}
 	
@@ -52,13 +52,13 @@ namespace ie {
 		);
 		
 	protected:
-		void start_pressed() override;
+		auto start_pressed() -> void override;
 		
-		void stop_pressed() override;
+		auto stop_pressed() -> void override;
 		
-		void while_pressed() override;
+		auto while_pressed() -> void override;
 		
-		void while_not_pressed() override;
+		auto while_not_pressed() -> void override;
 		
 		FnType start_pressed_fn_;
 		FnType while_pressed_fn_;

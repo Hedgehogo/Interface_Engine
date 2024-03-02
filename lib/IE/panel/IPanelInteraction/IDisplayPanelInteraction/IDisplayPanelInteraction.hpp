@@ -6,7 +6,7 @@ namespace ie {
 	class IDisplayPanelInteraction : public virtual IPanelInteraction {
 	public:
 		struct Make : public virtual IPanelInteraction::Make {
-			IDisplayPanelInteraction* make(PanelActionInitInfo init_info) override = 0;
+			auto make(PanelActionInitInfo init_info) -> IDisplayPanelInteraction* override = 0;
 		};
 	};
 }

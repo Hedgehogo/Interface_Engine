@@ -3,7 +3,7 @@
 #include "../Window.hpp"
 
 namespace ie {
-	void BaseWindowResizer::set_window(Window& window) {
+	auto BaseWindowResizer::set_window(Window& window) -> void {
 		BaseWindowResizer::window_ = &window;
 	}
 }

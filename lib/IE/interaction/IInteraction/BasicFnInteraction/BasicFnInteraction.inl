@@ -6,7 +6,7 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicFnInteraction<T>* BasicFnInteraction<T>::make(BasicActionInitInfo<T> init_info) {
+		auto BasicFnInteraction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicFnInteraction<T>* {
 			return new ie::BasicFnInteraction<T>{std::move(*this), init_info};
 		}
 	}
@@ -22,12 +22,12 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicFnInteraction<T>::start(sf::Vector2i mouse_position) {
+	auto BasicFnInteraction<T>::start(sf::Vector2i mouse_position) -> void {
 		start_fn_(mouse_position);
 	}
 	
 	template<typename T>
-	void BasicFnInteraction<T>::finish(sf::Vector2i mouse_position) {
+	auto BasicFnInteraction<T>::finish(sf::Vector2i mouse_position) -> void {
 		finish_fn_(mouse_position);
 	}
 }

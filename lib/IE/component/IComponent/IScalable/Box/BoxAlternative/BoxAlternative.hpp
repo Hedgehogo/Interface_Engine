@@ -14,22 +14,22 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& top_object, BoxPtr<IScalable::Make>&& bottom_object, sf::Vector2f min_size = {});
 			
-			BoxAlternative* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxAlternative* override;
 		};
 		
 		BoxAlternative(Make&& make, InitInfo init_info);
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		IScalable& get_first_object() override;
+		auto get_first_object() -> IScalable& override;
 		
-		const IScalable& get_first_object() const override;
+		auto get_first_object() const -> IScalable const& override;
 		
-		IScalable& get_second_object() override;
+		auto get_second_object() -> IScalable& override;
 		
-		const IScalable& get_second_object() const override;
+		auto get_second_object() const -> IScalable const& override;
 		
 	protected:
 		BoxPtr<IScalable> bottom_object_;
@@ -39,5 +39,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxAlternative::Make> {
-	static orl::Option<ie::BoxAlternative::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxAlternative::Make>;
 };

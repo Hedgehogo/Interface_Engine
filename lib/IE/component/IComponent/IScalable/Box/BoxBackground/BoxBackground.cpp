@@ -10,7 +10,7 @@ namespace ie {
 		object(std::move(object)), background(std::move(background)), offset(offset), min_size(min_size) {
 	}
 	
-	BoxBackground* BoxBackground::Make::make(InitInfo init_info) {
+	auto BoxBackground::Make::make(InitInfo init_info) -> BoxBackground* {
 		return new BoxBackground{std::move(*this), init_info};
 	}
 	
@@ -18,65 +18,65 @@ namespace ie {
 		Box(make.min_size), background_(make.background->make(init_info)), object_(make.object->make(init_info)), offset_(make.offset) {
 	}
 	
-	void BoxBackground::set_position(sf::Vector2f position) {
+	auto BoxBackground::set_position(sf::Vector2f position) -> void {
 		layout_.set_position(position);
 		background_->set_position(position);
 		object_->set_position(position);
 	}
 	
-	void BoxBackground::move(sf::Vector2f position) {
+	auto BoxBackground::move(sf::Vector2f position) -> void {
 		layout_.move(position);
 		background_->move(position);
 		object_->move(position);
 	}
 	
-	void BoxBackground::set_size(sf::Vector2f size) {
+	auto BoxBackground::set_size(sf::Vector2f size) -> void {
 		layout_.set_size(size);
 		background_->set_size(size);
 		object_->set_size(size);
 	}
 	
-	sf::Vector2f BoxBackground::get_min_size() const {
+	auto BoxBackground::get_min_size() const -> sf::Vector2f {
 		return max(object_->get_min_size() + offset_ * 2.f, background_->get_min_size(), minimum_size_);
 	}
 	
-	sf::Vector2f BoxBackground::get_normal_size() const {
+	auto BoxBackground::get_normal_size() const -> sf::Vector2f {
 		return max(object_->get_normal_size() + offset_ * 2.f, background_->get_normal_size());
 	}
 	
-	INonInteractive& BoxBackground::get_background() {
+	auto BoxBackground::get_background() -> INonInteractive& {
 		return *background_;
 	}
 	
-	const INonInteractive& BoxBackground::get_background() const {
+	auto BoxBackground::get_background() const -> INonInteractive const& {
 		return *background_;
 	}
 	
-	IScalable& BoxBackground::get_object() {
+	auto BoxBackground::get_object() -> IScalable& {
 		return *object_;
 	}
 	
-	const IScalable& BoxBackground::get_object() const {
+	auto BoxBackground::get_object() const -> IScalable const& {
 		return *object_;
 	}
 	
-	void BoxBackground::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxBackground::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		background_->resize(size, position);
 		object_->resize(size - offset_ * 2.f, position + offset_);
 	}
 	
-	bool BoxBackground::update_interactions(sf::Vector2f mouse_position) {
+	auto BoxBackground::update_interactions(sf::Vector2f mouse_position) -> bool {
 		return object_->update_interactions(mouse_position);
 	}
 	
-	void BoxBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto BoxBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
 }
 
-orl::Option<ie::BoxBackground::Make> ieml::Decode<char, ie::BoxBackground::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxBackground::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxBackground::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::BoxBackground::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),

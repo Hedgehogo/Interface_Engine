@@ -37,12 +37,12 @@ namespace ie {
 				bool wheel_horizontal = false
 			);
 			
-			ConstSlider* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> ConstSlider* override;
 		};
 		
 		ConstSlider(Make&& make, InitInfo init_info);
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
 	protected:
 		float aspect_ratio_;
@@ -52,5 +52,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::ConstSlider::Make> {
-	static orl::Option<ie::ConstSlider::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::ConstSlider::Make>;
 };

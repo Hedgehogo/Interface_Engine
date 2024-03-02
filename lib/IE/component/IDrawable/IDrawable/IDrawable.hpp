@@ -3,7 +3,7 @@
 namespace ie {
 	class IDrawable {
 	public:
-		virtual void draw() = 0;
+		virtual auto draw() -> void = 0;
 		
 		virtual ~IDrawable() = default;
 	};

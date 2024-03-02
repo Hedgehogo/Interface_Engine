@@ -16,7 +16,7 @@ namespace ie {
 		
 		SReader(SReader&& other);
 		
-		Value_& get() const;
+		auto get() const -> Value_&;
 		
 		~SReader();
 	

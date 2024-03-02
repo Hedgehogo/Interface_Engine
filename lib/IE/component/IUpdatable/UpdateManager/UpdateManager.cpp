@@ -1,23 +1,23 @@
 #include "UpdateManager.hpp"
 
 namespace ie {
-	size_t UpdateManager::size() {
+	auto UpdateManager::size() -> size_t {
 		return updatable_.size();
 	}
 	
-	IUpdatable& UpdateManager::get(size_t index) {
+	auto UpdateManager::get(size_t index) -> IUpdatable& {
 		return *updatable_.at(index);
 	}
 	
-	void UpdateManager::add(IUpdatable& updatable) {
+	auto UpdateManager::add(IUpdatable& updatable) -> void {
 		this->updatable_.push_back(&updatable);
 	}
 	
-	void UpdateManager::clear() {
+	auto UpdateManager::clear() -> void {
 		updatable_.clear();
 	}
 	
-	void UpdateManager::update() {
+	auto UpdateManager::update() -> void {
 		for(auto& updatable: updatable_) {
 			updatable->update();
 		}

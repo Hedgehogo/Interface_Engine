@@ -1,6 +1,6 @@
 #include "Corner.hpp"
 
-orl::Option<ie::Corner> ieml::Decode<char, ie::Corner>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Corner>::decode(ieml::Node const& node) -> orl::Option<ie::Corner> {
 	auto& str{node.get_raw().except().str};
 	if(str == "up-right") {
 		return ie::Corner::UpRight;

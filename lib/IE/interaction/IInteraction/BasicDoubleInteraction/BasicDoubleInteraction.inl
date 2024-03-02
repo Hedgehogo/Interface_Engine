@@ -8,7 +8,7 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicDoubleInteraction<T>* BasicDoubleInteraction<T>::make(BasicActionInitInfo<T> init_info) {
+		auto BasicDoubleInteraction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicDoubleInteraction<T>* {
 			return new ie::BasicDoubleInteraction<T>{std::move(*this), init_info};
 		}
 	}
@@ -19,39 +19,39 @@ namespace ie {
 	}
 	
 	template<typename T>
-	IBasicInteraction<T>& BasicDoubleInteraction<T>::get_first() {
+	auto BasicDoubleInteraction<T>::get_first() -> IBasicInteraction<T>& {
 		return *first_;
 	}
 	
 	template<typename T>
-	const IBasicInteraction<T>& BasicDoubleInteraction<T>::get_first() const {
+	auto BasicDoubleInteraction<T>::get_first() const -> IBasicInteraction<T> const& {
 		return *first_;
 	}
 	
 	template<typename T>
-	IBasicInteraction<T>& BasicDoubleInteraction<T>::get_second() {
+	auto BasicDoubleInteraction<T>::get_second() -> IBasicInteraction<T>& {
 		return *second_;
 	}
 	
 	template<typename T>
-	const IBasicInteraction<T>& BasicDoubleInteraction<T>::get_second() const {
+	auto BasicDoubleInteraction<T>::get_second() const -> IBasicInteraction<T> const& {
 		return *second_;
 	}
 	
 	template<typename T>
-	void BasicDoubleInteraction<T>::start(sf::Vector2i mouse_position) {
-		first_->start(mouse_position);
-		second_->start(mouse_position);
+	auto BasicDoubleInteraction<T>::start(sf::Vector2i mouse_position) -> void {
+		first_->start_(mouse_position);
+		second_->start_(mouse_position);
 	}
 	
 	template<typename T>
-	void BasicDoubleInteraction<T>::update(sf::Vector2i mouse_position) {
+	auto BasicDoubleInteraction<T>::update(sf::Vector2i mouse_position) -> void {
 		first_->update(mouse_position);
 		second_->update(mouse_position);
 	}
 	
 	template<typename T>
-	void BasicDoubleInteraction<T>::finish(sf::Vector2i mouse_position) {
+	auto BasicDoubleInteraction<T>::finish(sf::Vector2i mouse_position) -> void {
 		second_->finish(mouse_position);
 		first_->finish(mouse_position);
 	}

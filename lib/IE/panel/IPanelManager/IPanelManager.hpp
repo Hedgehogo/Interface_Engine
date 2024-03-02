@@ -5,23 +5,23 @@
 namespace ie {
 	class IPanelManager : public IUpdatable, public IDrawable {
 	public:
-		virtual bool is_free() = 0;
+		virtual auto is_free() -> bool = 0;
 		
-		virtual bool in_const_panels(sf::Vector2f point_position) = 0;
+		virtual auto in_const_panels(sf::Vector2f point_position) -> bool = 0;
 		
-		virtual void add_panel(BasePanel* panel) = 0;
+		virtual auto add_panel(BasePanel* panel) -> void = 0;
 		
-		virtual void remove_panel(BasePanel* panel) = 0;
+		virtual auto remove_panel(BasePanel* panel) -> void = 0;
 		
-		virtual void display_panel(BasePanel* panel) = 0;
+		virtual auto display_panel(BasePanel* panel) -> void = 0;
 		
-		virtual void hide_panel(BasePanel* panel) = 0;
+		virtual auto hide_panel(BasePanel* panel) -> void = 0;
 		
-		void draw() override = 0;
+		auto draw() -> void override = 0;
 		
-		void update() override = 0;
+		auto update() -> void override = 0;
 		
-		virtual bool update_interactions(sf::Vector2f mouse_position, bool active) = 0;
+		virtual auto update_interactions(sf::Vector2f mouse_position, bool active) -> bool = 0;
 		
 		virtual ~IPanelManager() = default;
 	};

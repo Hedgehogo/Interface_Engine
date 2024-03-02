@@ -15,30 +15,30 @@ namespace ie {
 			
 			Make(std::vector<BoxPtr<IScalable::Make> >&& objects, MakeDyn<ISMRSize> value, sf::Vector2f min_size = {});
 			
-			BoxSwitchTabs* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxSwitchTabs* override;
 		};
 		
 		BoxSwitchTabs(Make&& make, InitInfo init_info);
 		
-		ISMRSize& get_value();
+		auto get_value() -> ISMRSize&;
 		
-		void set_index(size_t index);
+		auto set_index(size_t index) -> void;
 		
-		size_t get_index();
+		auto get_index() -> size_t;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		size_t get_array_size() const override;
+		auto get_array_size() const -> size_t override;
 		
-		IScalable& get_object_at(size_t index) override;
+		auto get_object_at(size_t index) -> IScalable& override;
 		
-		const IScalable& get_object_at(size_t index) const override;
+		auto get_object_at(size_t index) const -> IScalable const& override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
 		std::vector<DrawManager> draw_managers_;
@@ -49,5 +49,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxSwitchTabs::Make> {
-	static orl::Option<ie::BoxSwitchTabs::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxSwitchTabs::Make>;
 };

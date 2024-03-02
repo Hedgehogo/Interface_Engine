@@ -10,7 +10,7 @@ namespace ie {
 	class BaseTextBlock {
 	public:
 		struct Make {
-			virtual BaseTextBlock* make(TextBockInitInfo text_block_init_info) = 0;
+			virtual auto make(TextBockInitInfo text_block_init_info) -> BaseTextBlock* = 0;
 			
 			virtual ~Make() = default;
 		};
@@ -18,7 +18,7 @@ namespace ie {
 		explicit BaseTextBlock(TextVariables text_variables);
 		
 		virtual void set_text_variables(
-			sf::Color TextColor,
+			sf::Color text_color,
 			sf::Color text_selection_color,
 			sf::Color background_selection_color,
 			sf::Color inactive_text_selection_color,
@@ -28,19 +28,19 @@ namespace ie {
 			sf::Text::Style style
 		);
 		
-		virtual void set_kerning(char32_t character);
+		virtual auto set_kerning(char32_t character) -> void;
 		
-		virtual bool in(sf::Vector2f mouse_position) = 0;
+		virtual auto in(sf::Vector2f mouse_position) -> bool = 0;
 		
-		virtual std::vector<BaseCharacter*> get_characters() = 0;
+		virtual auto get_characters() -> std::vector<BaseCharacter*> = 0;
 		
-		virtual void update() = 0;
+		virtual auto update() -> void = 0;
 		
-		virtual bool update_interactions(sf::Vector2f mouse_position) = 0;
+		virtual auto update_interactions(sf::Vector2f mouse_position) -> bool = 0;
 	
 		virtual ~BaseTextBlock() = default;
 		
 	protected:
-		TextVariables text_variables;
+		TextVariables text_variables_;
 	};
 }

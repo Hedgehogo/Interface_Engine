@@ -17,10 +17,10 @@ namespace ie {
 		DynBuffer(DynBuffer&& other) = default;
 		
 		template<typename T>
-		static bool add(MakeDyn<T> make_dyn, SInitInfo init_info);
+		static auto add(MakeDyn<T> make_dyn, SInitInfo init_info) -> bool;
 		
 		template<typename T>
-		static T& get(MakeDyn<T> make_dyn, SInitInfo init_info);
+		static auto get(MakeDyn<T> make_dyn, SInitInfo init_info) -> T&;
 	
 	private:
 		absl::flat_hash_map<size_t, rttb::Dyn> indexed_;
@@ -36,9 +36,9 @@ namespace ie {
 		
 		MakeDyn(Type_& ref);
 		
-		Type_& make(SInitInfo init_info);
+		auto make(SInitInfo init_info) -> Type_&;
 		
-		static orl::Option<MakeDyn<Type_> > decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<MakeDyn<Type_> >;
 		
 		friend DynBuffer;
 	
@@ -67,7 +67,7 @@ struct tnl::TypeName<ie::MakeDyn<Type_> > {
 
 template<typename Type_>
 struct ieml::Decode<char, ie::MakeDyn<Type_> > {
-	static orl::Option<ie::MakeDyn<Type_> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::MakeDyn<Type_> >;
 };
 
 #include "DynBuffer.inl"

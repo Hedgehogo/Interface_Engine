@@ -16,14 +16,14 @@ namespace ie {
 			
 			BasicSetSValueAction(MakeDyn<Value_>&& value, typename Value_::T constant);
 			
-			ie::BasicSetSValueAction<T_, Value_>* make(BasicActionInitInfo<T_> init_info);
+			auto make(BasicActionInitInfo<T_> init_info) -> ie::BasicSetSValueAction<T_, Value_>*;
 		};
 	}
 }
 
 template<typename T_, typename Value_>
 struct ieml::Decode<char, ie::make_system::BasicSetSValueAction<T_, Value_> > {
-	static orl::Option<ie::make_system::BasicSetSValueAction<T_, Value_> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicSetSValueAction<T_, Value_> >;
 };
 
 namespace ie {
@@ -35,13 +35,13 @@ namespace ie {
 		BasicSetSValueAction(Make&& make, BasicActionInitInfo<T_> init_info);
 	
 	protected:
-		void start_pressed() override;
+		auto start_pressed() -> void override;
 		
-		void stop_pressed() override;
+		auto stop_pressed() -> void override;
 		
-		void while_pressed() override;
+		auto while_pressed() -> void override;
 		
-		void while_not_pressed() override;
+		auto while_not_pressed() -> void override;
 		
 		Value_& value;
 		typename Value_::T constant;

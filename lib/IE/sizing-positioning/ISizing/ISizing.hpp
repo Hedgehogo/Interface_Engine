@@ -7,19 +7,19 @@ namespace ie {
 	class ISizing {
 	public:
 		struct Make {
-			virtual ISizing* make(float normal_size) = 0;
+			virtual auto make(float normal_size) -> ISizing* = 0;
 			
 			virtual ~Make() = default;
 		};
 		
 		ISizing() = default;
 		
+		virtual auto find_size(float parent_size, float target_size) -> float = 0;
+		
+		virtual auto get_parent_size(float object_min_size) -> float;
+		
+		auto operator()(float parent_size, float target_size) -> float;
+		
 		virtual ~ISizing() = default;
-		
-		virtual float find_size(float parent_size, float target_size) = 0;
-		
-		float operator()(float parent_size, float target_size);
-		
-		virtual float get_parent_size(float object_min_size);
 	};
 }

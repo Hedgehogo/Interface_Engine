@@ -1,7 +1,7 @@
 namespace ie {
 	namespace make_system {
 		template<typename T>
-		ie::BasicEmptyInteraction<T>* BasicEmptyInteraction<T>::make(BasicActionInitInfo<T> init_info) {
+		auto BasicEmptyInteraction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicEmptyInteraction<T>* {
 			return new ie::BasicEmptyInteraction<T>{std::move(*this), init_info};
 		}
 	}
@@ -15,19 +15,19 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicEmptyInteraction<T>::start(sf::Vector2i) {
+	auto BasicEmptyInteraction<T>::start(sf::Vector2i) -> void {
 	}
 	
 	template<typename T>
-	void BasicEmptyInteraction<T>::update(sf::Vector2i) {
+	auto BasicEmptyInteraction<T>::update(sf::Vector2i) -> void {
 	}
 	
 	template<typename T>
-	void BasicEmptyInteraction<T>::finish(sf::Vector2i) {
+	auto BasicEmptyInteraction<T>::finish(sf::Vector2i) -> void {
 	}
 	
 	template<typename T>
-	bool DecodePointer<BasicEmptyInteraction<T> >::decode_pointer(const YAML::Node&, BasicEmptyInteraction<T>*& empty_interaction) {
+	auto DecodePointer<BasicEmptyInteraction<T> >::decode_pointer(YAML::Node const&, BasicEmptyInteraction<T>*& empty_interaction) -> bool {
 		empty_interaction = new BasicEmptyInteraction<T>{};
 		return true;
 	}

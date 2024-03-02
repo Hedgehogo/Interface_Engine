@@ -9,7 +9,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct IBasicBlockInteraction : public virtual IBasicInteraction<T> {
-			ie::IBasicBlockInteraction<T>* make(BasicActionInitInfo<T> init_info) override = 0;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::IBasicBlockInteraction<T>* override = 0;
 		};
 	}
 	
@@ -18,7 +18,7 @@ namespace ie {
 	public:
 		using Make = make_system::IBasicBlockInteraction<T>;
 		
-		bool is_blocked() const override;
+		auto is_blocked() const -> bool override;
 	};
 	
 	using IBlockInteraction = IBasicBlockInteraction<>;

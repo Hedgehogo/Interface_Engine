@@ -2,13 +2,13 @@
 #include "IE/ieml/determine/determine.hpp"
 
 namespace ie {
-	bool determine_url(ieml::Node const& node) {
+	auto determine_url(ieml::Node const& node) -> bool {
 		for(auto& url_str: node.get_string().ok_or_none()) {
-			std::string_view url{url_str};
+			auto url{std::string_view{url_str}};
 			return
-				url.substr(0, 7) == "file://" ||
-				url.substr(0, 7) == "http://" ||
-				url.substr(0, 8) == "https://";
+				url.substr(0, 7) == std::string_view{"file://"} ||
+				url.substr(0, 7) == std::string_view{"http://"} ||
+				url.substr(0, 8) == std::string_view{"https://"};
 		}
 		return false;
 	}

@@ -16,26 +16,26 @@ sf::Vector2<T> operator/(const sf::Vector2<T>& first, const sf::Vector2<T>& seco
 namespace ie {
 	using namespace bp;
 	
-	std::string demangle(const char* name);
+	auto demangle(const char* name) -> std::string;
 	
 	template<class T>
-	std::string type_name(const T& type);
+	auto type_name(const T& type) -> std::string;
 	
 	template<class T>
-	std::string type_name();
+	auto type_name() -> std::string;
 	
-	std::string type_name(const std::type_info& type_info);
+	auto type_name(const std::type_info& type_info) -> std::string;
 	
 	template<typename T>
 	struct SetTypeName {
-		static std::string get() {
+		static auto get() -> std::string {
 			return type_name<T>();
 		}
 	};
 	
 	namespace detail {
 		template<typename T>
-		std::string get_template_name() {
+		auto get_template_name() -> std::string {
 			std::string name = type_name<T>();
 			name.resize(name.find('<'));
 			return name;
@@ -44,14 +44,14 @@ namespace ie {
 	
 	template<template<typename...> typename Type, typename... Types>
 	struct SetTypeName<Type<Types...> > {
-		static std::string get() {
+		static auto get() -> std::string {
 			return detail::get_template_name<Type<Types...> >();
 		}
 	};
 	
 	template<>
 	struct SetTypeName<std::string> {
-		static std::string get() {
+		static auto get() -> std::string {
 			return "String";
 		}
 	};
@@ -62,42 +62,42 @@ namespace ie {
 	namespace detail {
 		template<typename T>
 		struct GetTypeName {
-			static std::string get() {
+			static auto get() -> std::string {
 				return SetTypeName<T>::get();
 			}
 		};
 		
 		template<typename... Ts>
 		struct GetTypeNames {
-			static std::string get() {
+			static auto get() -> std::string {
 				return {};
 			}
 		};
 		
 		template<typename T>
 		struct GetTypeNames<T> {
-			static std::string get() {
+			static auto get() -> std::string {
 				return GetTypeName<T>::get();
 			}
 		};
 		
 		template<typename F, typename... Types>
 		struct GetTypeNames<F, Types...> {
-			static std::string get() {
+			static auto get() -> std::string {
 				return GetTypeName<F>::get() + ", " + GetTypeNames<Types...>::get();
 			}
 		};
 		
 		template<template<typename...> typename Type, typename... Types>
 		struct GetTypeName<Type<Types...> > {
-			static std::string get() {
+			static auto get() -> std::string {
 				return SetTypeName<Type<Types...> >::get() + "<" + GetTypeNames<Types...>::get() + ">";
 			}
 		};
 	}
 	
 	template<typename T>
-	std::string get_type_name() {
+	auto get_type_name() -> std::string {
 		return detail::GetTypeName<T>::get();
 	}
 	
@@ -106,8 +106,7 @@ namespace ie {
 	
 	template<typename T>
 	struct Decode<T*> {
-		static std::enable_if_t<std::is_class_v<T>, bool>
-		decode(const YAML::Node& node, T*& object);
+		static auto decode(const YAML::Node& node, T*& object) -> std::enable_if_t<std::is_class_v<T>, bool>;
 	};
 	
 	template<typename T>
@@ -118,54 +117,50 @@ namespace ie {
 	struct Encode;
 	
 	template<typename T>
-	YAML::Node convert(const T& rhs);
+	auto convert(const T& rhs) -> YAML::Node;
 	
 	
 	template<typename T>
-	bool create_pointer(const YAML::Node& node, T*& object);
+	auto create_pointer(const YAML::Node& node, T*& object) -> bool;
 	
 	
 	template<typename T>
-	std::enable_if_t<std::is_class_v<T>, YAML::Node>
-	convert(const T*& rhs);
+	auto convert(const T*& rhs) -> std::enable_if_t<std::is_class_v<T>, YAML::Node>;
 	
 	template<typename T>
-	std::enable_if_t<std::is_class_v<T> && !std::is_abstract_v<T>, bool>
-	convert(const YAML::Node& node, T*& object);
+	auto convert(const YAML::Node& node, T*& object) -> std::enable_if_t<std::is_class_v<T> && !std::is_abstract_v<T>, bool>;
 	
 	template<typename T>
-	std::enable_if_t<std::is_class_v<T> && std::is_abstract_v<T>, bool>
-	convert(const YAML::Node& node, T*& object);
+	auto convert(const YAML::Node& node, T*& object) -> std::enable_if_t<std::is_class_v<T> && std::is_abstract_v<T>, bool>;
 	
-	bool convert_bool(const YAML::Node& node, std::string true_value, std::string false_value);
-	
-	template<typename T>
-	T convert_default(const YAML::Node& node, const T& default_value);
+	auto convert_bool(const YAML::Node& node, std::string true_value, std::string false_value) -> bool;
 	
 	template<typename T>
-	T conv_def(const YAML::Node& node, const T& default_value);
+	auto convert_default(const YAML::Node& node, const T& default_value) -> T;
+	
+	template<typename T>
+	auto conv_def(const YAML::Node& node, const T& default_value) -> T;
 	
 	template<typename B, typename T, typename ...Arg>
-	B* convert_default_ptr(const YAML::Node& node, Arg&& ... arg);
+	auto convert_default_ptr(const YAML::Node& node, Arg&& ... arg) -> B*;
 	
 	template<typename B, typename T, typename ...Arg>
-	B* conv_def_ptr(const YAML::Node& node, Arg&& ... arg);
+	auto conv_def_ptr(const YAML::Node& node, Arg&& ... arg) -> B*;
 	
 	template<typename B, typename T, typename ...Arg>
-	BoxPtr<B> convert_default_box_ptr(const YAML::Node& node, Arg&& ... arg);
+	auto convert_default_box_ptr(const YAML::Node& node, Arg&& ... arg) -> BoxPtr<B>;
 	
 	template<typename B, typename T, typename ...Arg>
-	BoxPtr<B> conv_def_box_ptr(const YAML::Node& node, Arg&& ... arg);
+	auto conv_def_box_ptr(const YAML::Node& node, Arg&& ... arg) -> BoxPtr<B>;
 	
-	bool convert_bool_default(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value = false);
+	auto convert_bool_default(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value = false) -> bool;
 	
-	bool conv_bool_def(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value = false);
+	auto conv_bool_def(const YAML::Node& node, std::string true_value, std::string false_value, bool default_value = false) -> bool;
 	
 	
 	template<typename T>
 	struct Decode<BoxPtr<T> > {
-		static std::enable_if_t<std::is_class_v<T>, bool>
-		decode(const YAML::Node& node, BoxPtr<T>& object);
+		static auto decode(const YAML::Node& node, BoxPtr<T>& object) -> std::enable_if_t<std::is_class_v<T>, bool>;
 	};
 	
 	/*old_yaml_decode
@@ -255,24 +250,22 @@ namespace ie {
 	*/
 	
 	template<typename T>
-	std::shared_ptr<T> get_s_value(const YAML::Node& node, bool create_if_not_exist = true);
+	auto get_s_value(const YAML::Node& node, bool create_if_not_exist = true) -> std::shared_ptr<T>;
 }
 
 namespace YAML {
 	template<typename T>
 	struct convert {
-		static Node encode(const T& rhs);
+		static auto encode(const T& rhs) -> Node;
 		
-		static bool decode(const Node& node, T& rhs);
+		static auto decode(const Node& node, T& rhs) -> bool;
 	};
 }
 
 template<typename T>
-std::enable_if_t<std::is_copy_constructible_v<T>, void>
-operator>>(const YAML::Node& node, T& value);
+auto operator>>(const YAML::Node& node, T& value) -> std::enable_if_t<std::is_copy_constructible_v<T>, void>;
 
 template<typename T>
-std::enable_if_t<!std::is_copy_constructible_v<T>, void>
-operator>>(const YAML::Node& node, T& value);
+auto operator>>(const YAML::Node& node, T& value) -> std::enable_if_t<!std::is_copy_constructible_v<T>, void>;
 
 #include "yaml.inl"

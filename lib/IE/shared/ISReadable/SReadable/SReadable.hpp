@@ -16,7 +16,7 @@ namespace ie {
 			
 			SReadable(T_ data = {});
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		template<typename T_>
@@ -26,7 +26,7 @@ namespace ie {
 			
 			SReadable(T_ data);
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		template<typename T_>
@@ -34,7 +34,7 @@ namespace ie {
 		public:
 			ToMutable(T_ data = {});
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		template<typename T_>
@@ -42,7 +42,7 @@ namespace ie {
 		public:
 			ToMutable(T_ data);
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		template<typename T_, bool Default_ = std::is_default_constructible_v<T_> >
@@ -52,12 +52,12 @@ namespace ie {
 
 template<typename T_>
 struct ieml::Decode<char, ie::make_system::SReadable<T_> > {
-	static orl::Option<ie::make_system::SReadable<T_> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::SReadable<T_> >;
 };
 
 template<typename T_>
 struct ieml::Decode<char, ie::make_system::SMutable<T_> > {
-	static orl::Option<ie::make_system::SMutable<T_> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::SMutable<T_> >;
 };
 
 namespace ie {
@@ -72,12 +72,12 @@ namespace ie {
 		
 		SReadable(T_ data);
 		
-		T_ get() const override;
+		auto get() const -> T_ override;
 		
 	protected:
-		ReadFn& add_read_fn(ReadFn&& read_fn) override;
+		auto add_read_fn(ReadFn&& read_fn) -> ReadFn& override;
 		
-		bool delete_read_fn(ReadFn& read_fn) override;
+		auto delete_read_fn(ReadFn& read_fn) -> bool override;
 		
 		T_ data_;
 		std::vector<ReadFn> read_fns_;
@@ -99,7 +99,7 @@ namespace ie {
 		
 		ToMutable(T_ data);
 		
-		void set(T_ value) override;
+		auto set(T_ value) -> void override;
 	};
 	
 	template<typename T_>
@@ -112,7 +112,7 @@ namespace ie {
 	
 	template<>
 	struct Determine<SMBool::Make> {
-		static bool determine(ieml::Node const& node);
+		static auto determine(ieml::Node const& node) -> bool;
 	};
 }
 

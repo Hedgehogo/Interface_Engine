@@ -8,7 +8,12 @@
 
 namespace ie {
 	struct TextVariables {
-		orl::Option<sf::Color> text_color, text_selection_color, background_selection_color, inactive_text_selection_color, inactive_background_selection_color;
+		orl::Option<sf::Color>
+			text_color,
+			text_selection_color,
+			background_selection_color,
+			inactive_text_selection_color,
+			inactive_background_selection_color;
 		orl::Option<size_t> size;
 		orl::Option<sf::Font&> font;
 		orl::Option<float> font_line_space;

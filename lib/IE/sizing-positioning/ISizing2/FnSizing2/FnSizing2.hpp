@@ -17,16 +17,16 @@ namespace ie {
 			
 			Make(FindSizeFn find_size_fn, GetParentSizeFn get_parent_size_fn);
 			
-			FnSizing2* make(Sizing2InitInfo init_info) override;
+			auto make(Sizing2InitInfo init_info) -> FnSizing2* override;
 		};
 		
 		FnSizing2(Make&& make, Sizing2InitInfo init_info);
 		
 		FnSizing2(FindSizeFn find_size_fn, GetParentSizeFn get_parent_size_fn);
 		
-		sf::Vector2f find_size(sf::Vector2f parent_size) override;
+		auto find_size(sf::Vector2f parent_size) -> sf::Vector2f override;
 		
-		sf::Vector2f get_parent_size(sf::Vector2f object_size) override;
+		auto get_parent_size(sf::Vector2f object_size) -> sf::Vector2f override;
 		
 	protected:
 		FindSizeFn find_size_fn_;

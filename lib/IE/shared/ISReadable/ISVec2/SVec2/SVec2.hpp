@@ -14,14 +14,14 @@ namespace ie {
 			
 			BasicSVec2(MakeDyn<Value_> x, MakeDyn<Value_> y);
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		template<typename Value_>
 		struct ToMutable<BasicSVec2<Value_> > : public BasicSVec2<ie::ToMutable<Value_> >, public virtual IBasicSMVec2<Value_> {
 			ToMutable(MakeDyn<ie::ToMutable<Value_> > x, MakeDyn<ie::ToMutable<Value_> > y);
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 		
 		template<typename Value_>
@@ -31,12 +31,12 @@ namespace ie {
 
 template<typename Value_>
 struct ieml::Decode<char, ie::make_system::BasicSVec2<Value_> > {
-	static orl::Option<ie::make_system::BasicSVec2<Value_> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicSVec2<Value_> >;
 };
 
 template<typename Value_>
 struct ieml::Decode<char, ie::make_system::BasicSMVec2<Value_> > {
-	static orl::Option<ie::make_system::BasicSMVec2<Value_> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicSMVec2<Value_> >;
 };
 
 namespace ie {
@@ -51,18 +51,18 @@ namespace ie {
 		
 		BasicSVec2(Value_& x, Value_& y);
 		
-		Value_& get_x() const override;
+		auto get_x() const -> Value_& override;
 		
-		Value_& get_y() const override;
+		auto get_y() const -> Value_& override;
 		
-		T get() const override;
+		auto get() const -> T override;
 		
 	protected:
-		ReadFn& add_read_fn(ReadFn&& read_fn) override;
+		auto add_read_fn(ReadFn&& read_fn) -> ReadFn& override;
 		
-		bool delete_read_fn(ReadFn& read_fn) override;
+		auto delete_read_fn(ReadFn& read_fn) -> bool override;
 	
-		void reset();
+		auto reset() -> void;
 		
 		bool reset_;
 		SReader<Value_> x_;
@@ -96,13 +96,13 @@ namespace ie {
 		
 		ToMutable(ToMutable<Value_>& x, ToMutable<Value_>& y);
 		
-		ToMutable<Value_>& get_x() const override;
+		auto get_x() const -> ToMutable<Value_>& override;
 		
-		ToMutable<Value_>& get_y() const override;
+		auto get_y() const -> ToMutable<Value_>& override;
 		
-		T get() const override;
+		auto get() const -> T override;
 		
-		void set(T value) override;
+		auto set(T value) -> void override;
 	};
 	
 	template<typename Value_>
@@ -125,7 +125,7 @@ namespace ie {
 	
 	template<typename T_>
 	struct Determine<make_system::BasicSMVec2<ISRanged<T_> > > {
-		static bool determine(ieml::Node const& node);
+		static auto determine(ieml::Node const& node) -> bool;
 	};
 }
 

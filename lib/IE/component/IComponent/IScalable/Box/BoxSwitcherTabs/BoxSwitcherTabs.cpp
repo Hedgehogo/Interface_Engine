@@ -16,7 +16,7 @@ namespace ie {
 		objects(std::move(objects)), value(std::move(value)), key(key), is_horizontal(is_horizontal), min_size(min_size) {
 	}
 	
-	BoxSwitcherTabs* BoxSwitcherTabs::Make::make(InitInfo init_info) {
+	auto BoxSwitcherTabs::Make::make(InitInfo init_info) -> BoxSwitcherTabs* {
 		return new BoxSwitcherTabs{std::move(*this), init_info};
 	}
 	
@@ -31,7 +31,7 @@ namespace ie {
 		init_info.update_manager.add(*this);
 	}
 	
-	void BoxSwitcherTabs::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxSwitcherTabs::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		
 		if(is_horizontal_) {
@@ -51,28 +51,28 @@ namespace ie {
 		}
 	}
 	
-	void BoxSwitcherTabs::update() {
+	auto BoxSwitcherTabs::update() -> void {
 		interactive_.update();
 	}
 	
-	bool BoxSwitcherTabs::update_interactions(sf::Vector2f) {
+	auto BoxSwitcherTabs::update_interactions(sf::Vector2f) -> bool {
 		interactive_.update_interactions();
 		return true;
 	}
 	
-	size_t BoxSwitcherTabs::get_array_size() const {
+	auto BoxSwitcherTabs::get_array_size() const -> size_t {
 		return objects_.size();
 	}
 	
-	IScalable& BoxSwitcherTabs::get_object_at(size_t index) {
+	auto BoxSwitcherTabs::get_object_at(size_t index) -> IScalable& {
 		return *objects_.at(index);
 	}
 	
-	const IScalable& BoxSwitcherTabs::get_object_at(size_t index) const {
+	auto BoxSwitcherTabs::get_object_at(size_t index) const -> IScalable const& {
 		return *objects_.at(index);
 	}
 	
-	int BoxSwitcherTabs::get_tab(sf::Vector2f position) {
+	auto BoxSwitcherTabs::get_tab(sf::Vector2f position) -> int {
 		if(is_horizontal_) {
 			return static_cast<int>((position.x - layout_.position.x) / (layout_.size.x / objects_.size()));
 		}
@@ -80,7 +80,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::BoxSwitcherTabs::Make> ieml::Decode<char, ie::BoxSwitcherTabs::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxSwitcherTabs::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxSwitcherTabs::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::BoxSwitcherTabs::Make{
 		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().except(),

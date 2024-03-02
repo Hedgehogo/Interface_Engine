@@ -17,7 +17,7 @@ namespace ie {
 	}
 	
 	template<typename Value_, typename _>
-	Value_& SReader<Value_, _>::get() const {
+	auto SReader<Value_, _>::get() const -> Value_& {
 		return *readable_;
 	}
 	

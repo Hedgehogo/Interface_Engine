@@ -7,9 +7,6 @@
 
 namespace ie {
 	class BoxScroll : public BoxView {
-	protected:
-		sf::Vector2f get_new_object_position(sf::Vector2f normal_object_position);
-	
 	public:
 		struct Make : public virtual Box::Make {
 			BoxPtr<IComponent::Make> object;
@@ -18,20 +15,22 @@ namespace ie {
 			
 			Make(BoxPtr<IComponent::Make>&& object, MakeDyn<ISRVec2F> normal_object_position, sf::Vector2f min_size = {});
 			
-			BoxScroll* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxScroll* override;
 		};
 		
 		BoxScroll(Make&& make, InitInfo init_info);
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
 	protected:
+		auto get_new_object_position(sf::Vector2f normal_object_position) -> sf::Vector2f;
+		
 		BoxPtr<IComponent> object_;
 		SReader<ISRVec2F> normal_object_position_;
 	};
@@ -39,5 +38,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxScroll::Make> {
-	static orl::Option<ie::BoxScroll::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxScroll::Make>;
 };

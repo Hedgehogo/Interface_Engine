@@ -22,14 +22,14 @@ namespace ie {
 			
 			Make(float target_coefficient, float parent_coefficient, float addition, float ratio, bool horizontal = true);
 			
-			ConstRatioSizing2* make(Sizing2InitInfo init_info) override;
+			auto make(Sizing2InitInfo init_info) -> ConstRatioSizing2* override;
 		};
 		
 		ConstRatioSizing2(Make&& make, Sizing2InitInfo init_info);
 		
-		sf::Vector2f find_size(sf::Vector2f parent_size) override;
+		auto find_size(sf::Vector2f parent_size) -> sf::Vector2f override;
 		
-		sf::Vector2f get_parent_size(sf::Vector2f object_size) override;
+		auto get_parent_size(sf::Vector2f object_size) -> sf::Vector2f override;
 		
 	protected:
 		sf::RenderTarget* render_target_;
@@ -41,5 +41,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::ConstRatioSizing2::Make> {
-	static orl::Option<ie::ConstRatioSizing2::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::ConstRatioSizing2::Make>;
 };

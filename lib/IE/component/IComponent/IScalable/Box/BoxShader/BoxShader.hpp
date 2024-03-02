@@ -49,30 +49,30 @@ namespace ie {
 				sf::Vector2f min_size = {}
 			);
 			
-			BoxShader* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxShader* override;
 		};
 		
 		BoxShader(Make&& make, InitInfo init_info);
 		
 		~BoxShader();
 		
-		void set_uniform(std::string const& name, float var);
+		auto set_uniform(std::string const& name, float var) -> void;
 		
-		void set_uniform(std::string const& name, int var);
+		auto set_uniform(std::string const& name, int var) -> void;
 		
-		void set_uniform(std::string const& name, bool var);
+		auto set_uniform(std::string const& name, bool var) -> void;
 		
-		void set_uniform(std::string const& name, sf::Color var);
+		auto set_uniform(std::string const& name, sf::Color var) -> void;
 		
-		void set_uniform(std::string const& name, sf::Vector2f var);
+		auto set_uniform(std::string const& name, sf::Vector2f var) -> void;
 		
-		void set_size(sf::Vector2f size) override;
+		auto set_size(sf::Vector2f size) -> void override;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
 	protected:
 		sf::Shader* shader_;
@@ -89,10 +89,10 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxShader::LoadTransmission> {
-	static orl::Option<ie::BoxShader::LoadTransmission> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxShader::LoadTransmission>;
 };
 
 template<>
 struct ieml::Decode<char, ie::BoxShader::Make> {
-	static orl::Option<ie::BoxShader::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxShader::Make>;
 };

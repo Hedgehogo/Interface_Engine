@@ -17,7 +17,7 @@ namespace ie {
 				BoxPtr<IBasicInteraction<T> >&& second
 			);
 			
-			ie::BasicDoubleInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicDoubleInteraction<T>* override;
 		};
 	}
 	
@@ -28,19 +28,19 @@ namespace ie {
 		
 		BasicDoubleInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		IBasicInteraction<T>& get_first();
+		auto get_first() -> IBasicInteraction<T>&;
 		
-		const IBasicInteraction<T>& get_first() const;
+		auto get_first() const -> IBasicInteraction<T> const&;
 		
-		IBasicInteraction<T>& get_second();
+		auto get_second() -> IBasicInteraction<T>&;
 		
-		const IBasicInteraction<T>& get_second() const;
+		auto get_second() const -> IBasicInteraction<T> const&;
 		
-		void start(sf::Vector2i mouse_position) override;
+		auto start(sf::Vector2i mouse_position) -> void override;
 		
-		void update(sf::Vector2i mouse_position) override;
+		auto update(sf::Vector2i mouse_position) -> void override;
 		
-		void finish(sf::Vector2i mouse_position) override;
+		auto finish(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
 		BoxPtr<IBasicInteraction<T> > first_;

@@ -2,15 +2,15 @@
 #include "IE/utils/utf/to_utf/to_utf.hpp"
 
 namespace ie {
-	sf::String CaptionString<sf::String>::make(BasicCaption<sf::String>&, sf::String&& make, InitInfo) {
+	auto CaptionString<sf::String>::make(BasicCaption<sf::String>&, sf::String&& make, InitInfo) -> sf::String {
 		return std::move(make);
 	}
 	
-	sf::String CaptionString<sf::String>::get(const sf::String& object) {
+	auto CaptionString<sf::String>::get(sf::String const& object) -> sf::String {
 		return object;
 	}
 	
-	void CaptionString<sf::String>::set(sf::String& first, sf::String const& second) {
+	auto CaptionString<sf::String>::set(sf::String& first, sf::String const& second) -> void {
 		first = second;
 	}
 	
@@ -27,10 +27,10 @@ namespace ie {
 		};
 	}
 	
-	sf::String CaptionString<SReader<ISString> >::get(SReader<ISString> const& object) {
+	auto CaptionString<SReader<ISString> >::get(SReader<ISString> const& object) -> sf::String {
 		return to_utf32(object.get().get());
 	}
 	
-	void CaptionString<SReader<ISString> >::set(SReader<ISString>&, sf::String const&) {
+	auto CaptionString<SReader<ISString> >::set(SReader<ISString>&, sf::String const&) -> void {
 	}
 }

@@ -13,7 +13,7 @@ namespace ie {
 			
 			Make(Key key, bool only_on_parent = false);
 			
-			ClickHidePanelInteraction* make(PanelActionInitInfo init_info) override;
+			auto make(PanelActionInitInfo init_info) -> ClickHidePanelInteraction* override;
 		};
 		
 		ClickHidePanelInteraction(Make&& make, PanelActionInitInfo init_info);
@@ -22,5 +22,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::ClickHidePanelInteraction::Make> {
-	static orl::Option<ie::ClickHidePanelInteraction::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::ClickHidePanelInteraction::Make>;
 };

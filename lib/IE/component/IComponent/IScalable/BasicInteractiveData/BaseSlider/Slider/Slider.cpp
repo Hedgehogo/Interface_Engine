@@ -41,7 +41,7 @@ namespace ie {
 		wheel_sensitivity(1.0f / static_cast<float>(division.x), 1.0f / static_cast<float>(division.y)) {
 	}
 	
-	Slider* Slider::Make::make(InitInfo init_info) {
+	auto Slider::Make::make(InitInfo init_info) -> Slider* {
 		return new Slider{std::move(*this), init_info};
 	}
 	
@@ -57,11 +57,11 @@ namespace ie {
 		), scale_(make.slider_scale) {
 	}
 	
-	void Slider::set_scale(sf::Vector2f scale) {
+	auto Slider::set_scale(sf::Vector2f scale) -> void {
 		this->scale_ = scale;
 	}
 	
-	void Slider::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto Slider::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		this->position_ = position;
 		slider_size_ = {size.x * scale_.x, size.y * scale_.y};
 		move_zone_size_ = size - slider_size_;
@@ -69,22 +69,22 @@ namespace ie {
 		resize_slider(value_.get().get());
 	}
 	
-	sf::Vector2f Slider::get_min_size() const {
-		sf::Vector2f min_size{slider_->get_min_size()};
+	auto Slider::get_min_size() const -> sf::Vector2f {
+		auto min_size{slider_->get_min_size()};
 		min_size = {min_size.x / scale_.x, min_size.y / scale_.y};
 		return max(min_size, background_->get_min_size());
 	}
 	
-	const INonInteractive& Slider::get_background() const {
+	auto Slider::get_background() const -> INonInteractive const& {
 		return *background_;
 	}
 	
-	const INonInteractive& Slider::get_slider() const {
+	auto Slider::get_slider() const -> INonInteractive const& {
 		return *slider_;
 	}
 }
 
-orl::Option<ie::Slider::Make> ieml::Decode<char, ie::Slider::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Slider::Make>::decode(ieml::Node const& node) -> orl::Option<ie::Slider::Make> {
 	auto map{node.get_map_view().except()};
 	auto slider{map.at("slider").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().except()};
 	auto background{map.at("background").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().except()};

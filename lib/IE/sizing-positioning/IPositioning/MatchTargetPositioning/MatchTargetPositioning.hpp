@@ -8,9 +8,9 @@ namespace ie {
 	public:
 		MatchTargetPositioning(float target_coefficient, float object_coefficient, float offset = 0);
 		
-		float find_position(float, float object_size, float, float target_size) override;
+		auto find_position(float, float object_size, float, float target_size) -> float override;
 		
-		MatchTargetPositioning* copy() override;
+		auto copy() -> MatchTargetPositioning* override;
 	
 	protected:
 		float target_coefficient_;
@@ -21,5 +21,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::MatchTargetPositioning> {
-	static orl::Option<ie::MatchTargetPositioning> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::MatchTargetPositioning>;
 };

@@ -17,16 +17,16 @@ namespace ie {
 			
 			Make(FindSizeFn find_size_fn, GetParentSizeFn get_parent_size_fn);
 			
-			FnSizing* make(float normal_size) override;
+			auto make(float normal_size) -> FnSizing* override;
 		};
 		
 		FnSizing(Make&& make, float normal_size);
 		
 		FnSizing(FindSizeFn find_size_fn, GetParentSizeFn get_parent_size_fn);
 		
-		float find_size(float parent_size, float target_size) override;
+		auto find_size(float parent_size, float target_size) -> float override;
 		
-		float get_parent_size(float object_min_size) override;
+		auto get_parent_size(float object_min_size) -> float override;
 		
 	protected:
 		FindSizeFn find_size_fn_;

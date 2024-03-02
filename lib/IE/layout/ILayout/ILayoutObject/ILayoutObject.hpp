@@ -6,9 +6,9 @@
 namespace ie {
 	class ILayoutObject : public virtual ILayout {
 	public:
-		virtual const IScalable& get_object() const = 0;
+		virtual auto get_object() const -> IScalable const& = 0;
 	
 	protected:
-		virtual IScalable& get_object() = 0;
+		virtual auto get_object() -> IScalable& = 0;
 	};
 }

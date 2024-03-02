@@ -3,7 +3,7 @@
 #include <string>
 
 namespace ie::meta {
-	std::string& removable_namespace();
+	auto removable_namespace() -> std::string&;
 	
-	std::string_view remove_namespace(std::string_view input);
+	auto remove_namespace(std::string_view input) -> std::string_view;
 }

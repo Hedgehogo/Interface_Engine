@@ -15,7 +15,7 @@ namespace ie {
 		min_size(min_size) {
 	}
 	
-	BoxConstBorder* BoxConstBorder::Make::make(InitInfo init_info) {
+	auto BoxConstBorder::Make::make(InitInfo init_info) -> BoxConstBorder* {
 		return new BoxConstBorder{std::move(*this), init_info};
 	}
 	
@@ -27,7 +27,7 @@ namespace ie {
 		side_(make.side) {
 	}
 	
-	void BoxConstBorder::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxConstBorder::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		
 		switch(side_) {
@@ -50,16 +50,16 @@ namespace ie {
 		}
 	}
 	
-	bool BoxConstBorder::update_interactions(sf::Vector2f mouse_position) {
+	auto BoxConstBorder::update_interactions(sf::Vector2f mouse_position) -> bool {
 		if(const_object_->in_area(mouse_position)) {
 			return const_object_->update_interactions(mouse_position);
 		}
 		return second_object_->update_interactions(mouse_position);
 	}
 	
-	sf::Vector2f BoxConstBorder::get_min_size() const {
-		sf::Vector2f const_min_size = const_object_->get_min_size();
-		sf::Vector2f second_min_size = second_object_->get_min_size();
+	auto BoxConstBorder::get_min_size() const -> sf::Vector2f {
+		auto const_min_size{const_object_->get_min_size()};
+		auto second_min_size{second_object_->get_min_size()};
 		if(side_ == Side::Down || side_ == Side::Up) {
 			return {std::max(const_min_size.x, second_min_size.x), second_min_size.y + border_distance_};
 		} else {
@@ -67,9 +67,9 @@ namespace ie {
 		}
 	}
 	
-	sf::Vector2f BoxConstBorder::get_normal_size() const {
-		sf::Vector2f const_normal_size = const_object_->get_normal_size();
-		sf::Vector2f second_normal_size = second_object_->get_normal_size();
+	auto BoxConstBorder::get_normal_size() const -> sf::Vector2f {
+		auto const_normal_size{const_object_->get_normal_size()};
+		auto second_normal_size{second_object_->get_normal_size()};
 		if(side_ == Side::Down || side_ == Side::Up) {
 			return {std::max(const_normal_size.x, second_normal_size.x), second_normal_size.y + border_distance_};
 		} else {
@@ -77,30 +77,30 @@ namespace ie {
 		}
 	}
 	
-	IScalable& BoxConstBorder::get_first_object() {
+	auto BoxConstBorder::get_first_object() -> IScalable& {
 		return *const_object_;
 	}
 	
-	const IScalable& BoxConstBorder::get_first_object() const {
+	auto BoxConstBorder::get_first_object() const -> IScalable const& {
 		return *const_object_;
 	}
 	
-	IScalable& BoxConstBorder::get_second_object() {
+	auto BoxConstBorder::get_second_object() -> IScalable& {
 		return *second_object_;
 	}
 	
-	const IScalable& BoxConstBorder::get_second_object() const {
+	auto BoxConstBorder::get_second_object() const -> IScalable const& {
 		return *second_object_;
 	}
 	
-	void BoxConstBorder::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto BoxConstBorder::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		const_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		second_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
 }
 
-orl::Option<ie::BoxConstBorder::Make> ieml::Decode<char, ie::BoxConstBorder::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxConstBorder::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxConstBorder::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::BoxConstBorder::Make{
 		map.at("const-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),

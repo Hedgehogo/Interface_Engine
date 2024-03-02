@@ -2,7 +2,7 @@
 #include "../../../BasePanel/Panel/Panel.hpp"
 
 namespace ie {
-	PointingDisplayPanelInteraction* PointingDisplayPanelInteraction::Make::make(PanelActionInitInfo init_info) {
+	auto PointingDisplayPanelInteraction::Make::make(PanelActionInitInfo init_info) -> PointingDisplayPanelInteraction* {
 		return new PointingDisplayPanelInteraction{std::move(*this), init_info};
 	}
 	
@@ -10,19 +10,21 @@ namespace ie {
 		BasePanelInteraction(init_info) {
 	}
 	
-	void PointingDisplayPanelInteraction::start(sf::Vector2i) {
+	auto PointingDisplayPanelInteraction::start(sf::Vector2i) -> void {
 		panel_manager_->display_panel(panel_);
 		panel_->set_parent_processed(true);
 	}
 	
-	void PointingDisplayPanelInteraction::update(sf::Vector2i) {
+	auto PointingDisplayPanelInteraction::update(sf::Vector2i) -> void {
 	}
 	
-	void PointingDisplayPanelInteraction::finish(sf::Vector2i) {
+	auto PointingDisplayPanelInteraction::finish(sf::Vector2i) -> void {
 		panel_->set_parent_processed(false);
 	}
 }
 
-orl::Option<ie::PointingDisplayPanelInteraction::Make> ieml::Decode<char, ie::PointingDisplayPanelInteraction::Make>::decode(ieml::Node const&) {
+auto ieml::Decode<char, ie::PointingDisplayPanelInteraction::Make>::decode(
+	ieml::Node const&
+) -> orl::Option<ie::PointingDisplayPanelInteraction::Make> {
 	return {{}};
 }

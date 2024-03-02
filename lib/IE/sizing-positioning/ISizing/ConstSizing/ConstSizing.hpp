@@ -11,14 +11,14 @@ namespace ie {
 			
 			Make(float size);
 			
-			ConstSizing* make(float normal_size) override;
+			auto make(float normal_size) -> ConstSizing* override;
 		};
 		
 		ConstSizing(Make&& make, float normal_size);
 		
 		ConstSizing(float size);
 		
-		float find_size(float, float) override;
+		auto find_size(float, float) -> float override;
 		
 	protected:
 		float size_;
@@ -27,5 +27,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::ConstSizing::Make> {
-	static orl::Option<ie::ConstSizing::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::ConstSizing::Make>;
 };

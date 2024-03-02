@@ -31,44 +31,44 @@ namespace ie {
 				sf::Vector2f min_size = {}
 			);
 			
-			BoxMovableBorder* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxMovableBorder* override;
 		};
 		
 		BoxMovableBorder(Make&& make, InitInfo init_info);
 		
-		float get_border_value();
+		auto get_border_value() -> float;
 		
-		void set_border_value(float border_value);
+		auto set_border_value(float border_value) -> void;
 		
-		float get_border_value_now();
+		auto get_border_value_now() -> float;
 		
-		int get_border_interaction_size();
+		auto get_border_interaction_size() -> int;
 		
-		void set_border_interaction_size(int size);
+		auto set_border_interaction_size(int size) -> void;
 		
-		bool get_is_horizontal_border();
+		auto get_is_horizontal_border() -> bool;
 		
-		bool is_in_border(sf::Vector2f point_position);
+		auto is_in_border(sf::Vector2f point_position) -> bool;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		IScalable& get_first_object() override;
+		auto get_first_object() -> IScalable& override;
 		
-		const IScalable& get_first_object() const override;
+		auto get_first_object() const -> IScalable const& override;
 		
-		IScalable& get_second_object() override;
+		auto get_second_object() -> IScalable& override;
 		
-		const IScalable& get_second_object() const override;
+		auto get_second_object() const -> IScalable const& override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
 		BasicInteractiveData<BoxMovableBorder&> interactive_;
@@ -83,5 +83,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxMovableBorder::Make> {
-	static orl::Option<ie::BoxMovableBorder::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxMovableBorder::Make>;
 };

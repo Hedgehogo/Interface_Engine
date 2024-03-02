@@ -6,7 +6,7 @@ namespace ie {
 		BasicOneKeyInteraction<Panel&>({std::move(action), key}, init_info) {
 	}
 	
-	void ClickPanelInteraction::set_panel(Panel& panel) {
+	auto ClickPanelInteraction::set_panel(Panel& panel) -> void {
 		dynamic_cast<PanelAction&>(*action_).set_panel(panel);
 	}
 }

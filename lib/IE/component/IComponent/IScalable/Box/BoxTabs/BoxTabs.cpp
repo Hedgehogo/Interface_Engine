@@ -7,7 +7,7 @@ namespace ie {
 		objects(std::move(objects)), value(std::move(value)), min_size(min_size) {
 	}
 	
-	BoxTabs* BoxTabs::Make::make(InitInfo init_info) {
+	auto BoxTabs::Make::make(InitInfo init_info) -> BoxTabs* {
 		return new BoxTabs{std::move(*this), init_info};
 	}
 	
@@ -22,56 +22,56 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	void BoxTabs::set_position(sf::Vector2f position) {
+	auto BoxTabs::set_position(sf::Vector2f position) -> void {
 		layout_.set_position(position);
 		for(auto& object: objects_) {
 			object->set_position(position);
 		}
 	}
 	
-	void BoxTabs::move(sf::Vector2f position) {
+	auto BoxTabs::move(sf::Vector2f position) -> void {
 		layout_.move(position);
 		for(auto& object: objects_) {
 			object->move(position);
 		}
 	}
 	
-	void BoxTabs::set_size(sf::Vector2f size) {
+	auto BoxTabs::set_size(sf::Vector2f size) -> void {
 		layout_.set_size(size);
 		for(auto& object: objects_) {
 			object->set_size(size);
 		}
 	}
 	
-	void BoxTabs::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxTabs::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		for(auto& object: objects_) {
 			object->resize(size, position);
 		}
 	}
 	
-	void BoxTabs::draw() {
+	auto BoxTabs::draw() -> void {
 		draw_managers_[value_.get()].draw();
 	}
 	
-	bool BoxTabs::update_interactions(sf::Vector2f mouse_position) {
+	auto BoxTabs::update_interactions(sf::Vector2f mouse_position) -> bool {
 		return objects_[value_.get()]->update_interactions(mouse_position);
 	}
 	
-	size_t BoxTabs::get_array_size() const {
+	auto BoxTabs::get_array_size() const -> size_t {
 		return objects_.size();
 	}
 	
-	IScalable& BoxTabs::get_object_at(size_t index) {
+	auto BoxTabs::get_object_at(size_t index) -> IScalable& {
 		return *objects_.at(index);
 	}
 	
-	const IScalable& BoxTabs::get_object_at(size_t index) const {
+	auto BoxTabs::get_object_at(size_t index) const -> IScalable const& {
 		return *objects_.at(index);
 	}
 }
 
-orl::Option<ie::BoxTabs::Make> ieml::Decode<char, ie::BoxTabs::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxTabs::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxTabs::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::BoxTabs::Make{
 		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().except(),

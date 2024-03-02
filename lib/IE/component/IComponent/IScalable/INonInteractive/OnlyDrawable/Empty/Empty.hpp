@@ -8,29 +8,29 @@ namespace ie {
 	class Empty : public OnlyDrawable, public virtual INonInteractiveLayout {
 	public:
 		struct Make : public virtual INonInteractiveLayout::Make {
-			Empty* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> Empty* override;
 		};
 		
 		Empty(Make&& make, InitInfo init_info);
 		
 		Empty();
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		bool update_interactions(sf::Vector2f) override;
+		auto update_interactions(sf::Vector2f) -> bool override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		void draw_debug(sf::RenderTarget&, int, int, size_t, size_t) override;
+		auto draw_debug(sf::RenderTarget&, int, int, size_t, size_t) -> void override;
 	
 	protected:
-		LayoutData& layout_get_data() override;
+		auto layout_get_data() -> LayoutData& override;
 		
-		const LayoutData& layout_get_data() const override;
+		auto layout_get_data() const -> LayoutData const& override;
 		
 		LayoutData layout_;
 	};
@@ -38,5 +38,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::Empty::Make> {
-	static orl::Option<ie::Empty::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Empty::Make>;
 };

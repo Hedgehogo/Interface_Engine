@@ -1,7 +1,7 @@
 #include "IPositioning2.hpp"
 
 namespace ie {
-	sf::Vector2f IPositioning2::operator()(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) {
+	auto IPositioning2::operator()(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) -> sf::Vector2f {
 		return this->find_position(parent_position, parent_size, object_size);
 	}
 

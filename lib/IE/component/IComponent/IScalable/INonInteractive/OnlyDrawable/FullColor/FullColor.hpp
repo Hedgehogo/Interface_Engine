@@ -12,24 +12,24 @@ namespace ie {
 			
 			Make(sf::Color color, sf::Vector2f normal_size = {0, 0});
 			
-			FullColor* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> FullColor* override;
 		};
 		
 		FullColor(Make&& make, InitInfo init_info);
 		
 		explicit FullColor(sf::Color color, sf::Vector2f normal_size = {0, 0});
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		sf::Vector2f get_area_position() const override;
+		auto get_area_position() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_area_size() const override;
+		auto get_area_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
 	protected:
 		sf::RectangleShape rectangle_;
@@ -38,11 +38,11 @@ namespace ie {
 	
 	template<>
 	struct Determine<FullColor::Make> {
-		static bool determine(ieml::Node const& node);
+		static auto determine(ieml::Node const& node) -> bool;
 	};
 }
 
 template<>
 struct ieml::Decode<char, ie::FullColor::Make> {
-	static orl::Option<ie::FullColor::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::FullColor::Make>;
 };

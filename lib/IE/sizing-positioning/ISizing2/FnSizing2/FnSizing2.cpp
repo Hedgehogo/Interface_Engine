@@ -6,7 +6,7 @@ namespace ie {
 		get_parent_size_fn((get_parent_size_fn)) {
 	}
 	
-	FnSizing2* FnSizing2::Make::make(Sizing2InitInfo init_info) {
+	auto FnSizing2::Make::make(Sizing2InitInfo init_info) -> FnSizing2* {
 		return new FnSizing2{std::move(*this), init_info};
 	}
 	
@@ -21,12 +21,12 @@ namespace ie {
 		find_size_fn_(std::move(find_size_fn)), get_parent_size_fn_(std::move(get_parent_size_fn)), render_target_(nullptr), normal_size_() {
 	}
 	
-	sf::Vector2f FnSizing2::find_size(sf::Vector2f parent_size) {
+	auto FnSizing2::find_size(sf::Vector2f parent_size) -> sf::Vector2f {
 		sf::Vector2f target_size{render_target_->getSize()};
 		return find_size_fn_(parent_size, target_size, normal_size_);
 	}
 	
-	sf::Vector2f FnSizing2::get_parent_size(sf::Vector2f object_size) {
+	auto FnSizing2::get_parent_size(sf::Vector2f object_size) -> sf::Vector2f {
 		return get_parent_size_fn_(object_size);
 	}
 }

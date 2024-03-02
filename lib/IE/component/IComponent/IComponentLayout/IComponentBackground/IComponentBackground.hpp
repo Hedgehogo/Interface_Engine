@@ -7,21 +7,21 @@ namespace ie {
 	class IComponentBackground : public virtual IComponentLayout, public virtual ILayoutBackground {
 	public:
 		struct Make : public virtual IComponentLayout::Make {
-			virtual IComponentBackground* make(InitInfo init_info) = 0;
+			virtual auto make(InitInfo init_info) -> IComponentBackground* = 0;
 		};
 		
-		void set_position(sf::Vector2f position) override;
+		auto set_position(sf::Vector2f position) -> void override;
 		
-		void move(sf::Vector2f position) override;
+		auto move(sf::Vector2f position) -> void override;
 		
-		void set_size(sf::Vector2f size) override;
+		auto set_size(sf::Vector2f size) -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	};
 }

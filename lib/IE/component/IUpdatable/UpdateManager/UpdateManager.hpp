@@ -9,15 +9,15 @@ namespace ie {
 	public:
 		UpdateManager() = default;
 		
-		size_t size();
+		auto size() -> size_t;
 		
-		IUpdatable& get(size_t index);
+		auto get(size_t index) -> IUpdatable&;
 		
-		void add(IUpdatable& updatable);
+		auto add(IUpdatable& updatable) -> void;
 		
-		void clear();
+		auto clear() -> void;
 		
-		void update() override;
+		auto update() -> void override;
 	
 	protected:
 		std::vector<IUpdatable*> updatable_;

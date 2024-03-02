@@ -17,30 +17,30 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& inactive_object, BoxPtr<IScalable::Make>&& active_object, MakeDyn<ISBool> value, const sf::Vector2f& min_size = {});
 			
-			BoxSwitch* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxSwitch* override;
 		};
 		
 		BoxSwitch(Make&& make, InitInfo init_info);
 		
-		void set_position(sf::Vector2f position) override;
+		auto set_position(sf::Vector2f position) -> void override;
 		
-		void move(sf::Vector2f position) override;
+		auto move(sf::Vector2f position) -> void override;
 		
-		void set_size(sf::Vector2f size) override;
+		auto set_size(sf::Vector2f size) -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		IScalable& get_first_object() override;
+		auto get_first_object() -> IScalable& override;
 		
-		const IScalable& get_first_object() const override;
+		auto get_first_object() const -> IScalable const& override;
 		
-		IScalable& get_second_object() override;
+		auto get_second_object() -> IScalable& override;
 		
-		const IScalable& get_second_object() const override;
+		auto get_second_object() const -> IScalable const& override;
 		
 	protected:
 		DrawManager inactive_draw_manager_;
@@ -53,5 +53,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxSwitch::Make> {
-	static orl::Option<ie::BoxSwitch::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxSwitch::Make>;
 };

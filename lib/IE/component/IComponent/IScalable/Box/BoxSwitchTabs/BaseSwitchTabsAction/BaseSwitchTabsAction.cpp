@@ -5,11 +5,11 @@ namespace ie {
 		box_(&init_info.additional) {
 	}
 	
-	void BaseSwitchTabsAction::set_box(BoxSwitchTabs& box) {
+	auto BaseSwitchTabsAction::set_box(BoxSwitchTabs& box) -> void {
 		this->box_ = &box;
 	}
 	
-	BoxSwitchTabs& BaseSwitchTabsAction::get_box() {
+	auto BaseSwitchTabsAction::get_box() -> BoxSwitchTabs& {
 		return *box_;
 	}
 }

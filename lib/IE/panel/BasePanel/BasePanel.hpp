@@ -19,7 +19,7 @@ namespace ie {
 		struct Make {
 			virtual ~Make() = default;
 			
-			virtual BasePanel* make(InitInfo init_info) = 0;
+			virtual auto make(InitInfo init_info) -> BasePanel* = 0;
 		};
 		
 		BasePanel(
@@ -33,56 +33,56 @@ namespace ie {
 		
 		virtual ~BasePanel() = default;
 		
-		virtual bool is_independent() = 0;
+		virtual auto is_independent() -> bool = 0;
 		
-		virtual bool is_free() = 0;
+		virtual auto is_free() -> bool = 0;
 		
-		virtual void set_displayed();
+		virtual auto set_displayed() -> void;
 		
-		virtual void set_parent_processed(bool parent_processed);
+		virtual auto set_parent_processed(bool parent_processed) -> void;
 		
-		virtual bool get_parent_processed();
+		virtual auto get_parent_processed() -> bool;
 		
-		virtual bool in_panel(sf::Vector2f point_position);
+		virtual auto in_panel(sf::Vector2f point_position) -> bool;
 		
-		bool in_area(sf::Vector2f point_position);
+		auto in_area(sf::Vector2f point_position) -> bool;
 		
-		bool in(sf::Vector2f point_position);
+		auto in(sf::Vector2f point_position) -> bool;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void set_position(sf::Vector2f position);
+		auto set_position(sf::Vector2f position) -> void;
 		
-		void move(sf::Vector2f offset);
+		auto move(sf::Vector2f offset) -> void;
 		
-		void resize(sf::Vector2f parent_size, sf::Vector2f parent_position);
+		auto resize(sf::Vector2f parent_size, sf::Vector2f parent_position) -> void;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position);
+		auto update_interactions(sf::Vector2f mouse_position) -> bool;
 		
-		virtual bool update_interactions(sf::Vector2f mouse_position, bool active);
+		virtual auto update_interactions(sf::Vector2f mouse_position, bool active) -> bool;
 		
-		sf::Vector2f get_area_position() const;
+		auto get_area_position() const -> sf::Vector2f;
 		
-		sf::Vector2f get_area_size() const;
+		auto get_area_size() const -> sf::Vector2f;
 		
-		sf::Vector2f get_min_size() const;
+		auto get_min_size() const -> sf::Vector2f;
 		
-		sf::Vector2f get_normal_size() const;
+		auto get_normal_size() const -> sf::Vector2f;
 		
-		IScalable& get_object() override;
+		auto get_object() -> IScalable& override;
 		
-		const IScalable& get_object() const override;
+		auto get_object() const -> IScalable const& override;
 		
-		static void set_full_debug(bool full_debug);
+		static auto set_full_debug(bool full_debug) -> void;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset);
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void;
 	
 	protected:
-		LayoutData& layout_get_data() override;
+		auto layout_get_data() -> LayoutData& override;
 		
-		const LayoutData& layout_get_data() const override;
+		auto layout_get_data() const -> LayoutData const& override;
 		
 		LayoutData layout_;
 		DrawManager draw_manager_;

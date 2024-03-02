@@ -23,12 +23,12 @@ namespace ie {
 		values_v(std::move(values_v)) {
 	}
 	
-	BoxShader* BoxShader::Make::make(InitInfo init_info) {
+	auto BoxShader::Make::make(InitInfo init_info) -> BoxShader* {
 		return new BoxShader{std::move(*this), init_info};
 	}
 	
 	template<typename T>
-	BoxShader::SReaderVec<T> make_reader_map(BoxShader::SMakeMap<T>&& map, SInitInfo init_info, BoxShader& box_shader) {
+	auto make_reader_map(BoxShader::SMakeMap<T>&& map, SInitInfo init_info, BoxShader& box_shader) -> BoxShader::SReaderVec<T> {
 		BoxShader::SReaderVec<T> reader_map{};
 		reader_map.reserve(map.size());
 		for(auto& [key, make]: map) {
@@ -59,27 +59,27 @@ namespace ie {
 		delete shader_;
 	}
 	
-	void BoxShader::set_uniform(std::string const& name, float var) {
+	auto BoxShader::set_uniform(std::string const& name, float var) -> void {
 		shader_->setUniform(name, var);
 	}
 	
-	void BoxShader::set_uniform(std::string const& name, int var) {
+	auto BoxShader::set_uniform(std::string const& name, int var) -> void {
 		shader_->setUniform(name, var);
 	}
 	
-	void BoxShader::set_uniform(std::string const& name, bool var) {
+	auto BoxShader::set_uniform(std::string const& name, bool var) -> void {
 		shader_->setUniform(name, var);
 	}
 	
-	void BoxShader::set_uniform(std::string const& name, sf::Color var) {
+	auto BoxShader::set_uniform(std::string const& name, sf::Color var) -> void {
 		shader_->setUniform(name, sf::Glsl::Vec4{var});
 	}
 	
-	void BoxShader::set_uniform(std::string const& name, sf::Vector2f var) {
+	auto BoxShader::set_uniform(std::string const& name, sf::Vector2f var) -> void {
 		shader_->setUniform(name, var);
 	}
 	
-	void BoxShader::set_size(sf::Vector2f size) {
+	auto BoxShader::set_size(sf::Vector2f size) -> void {
 		if(transmission_ & Transmission::Size)
 			shader_->setUniform("size", size);
 		if(transmission_ & Transmission::AspectRatio)
@@ -87,7 +87,7 @@ namespace ie {
 		layout_.set_size(size);
 	}
 	
-	void BoxShader::draw() {
+	auto BoxShader::draw() -> void {
 		if(!optimize_ || active_ || interaction_manager_->is_blocked()) {
 			render_texture_.clear(sf::Color(0, 0, 0, 0));
 			draw_manager_.draw();
@@ -102,7 +102,7 @@ namespace ie {
 		render_target_->draw(sprite_, shader_);
 	}
 	
-	void BoxShader::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxShader::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		if(transmission_ & Transmission::Size)
 			shader_->setUniform("size", size);
 		if(transmission_ & Transmission::AspectRatio)
@@ -110,15 +110,14 @@ namespace ie {
 		BoxRenderTexture::resize(size, position);
 	}
 	
-	bool BoxShader::update_interactions(sf::Vector2f mouse_position) {
+	auto BoxShader::update_interactions(sf::Vector2f mouse_position) -> bool {
 		if(transmission_ & Transmission::MousePosition)
 			shader_->setUniform("mouse_position", mouse_position - layout_.position);
 		return BoxRenderTexture::update_interactions(mouse_position);
 	}
 }
 
-orl::Option<ie::BoxShader::LoadTransmission>
-ieml::Decode<char, ie::BoxShader::LoadTransmission>::decode(const ieml::Node& node) {
+auto ieml::Decode<char, ie::BoxShader::LoadTransmission>::decode(const ieml::Node& node) -> orl::Option<ie::BoxShader::LoadTransmission> {
 	auto& clear_node{node.get_clear()};
 	for(auto& list: clear_node.get_list().ok_or_none()) {
 		ie::BoxShader::Transmission result{ie::BoxShader::Transmission::None};
@@ -143,7 +142,7 @@ ieml::Decode<char, ie::BoxShader::LoadTransmission>::decode(const ieml::Node& no
 	return {};
 }
 
-orl::Option<ie::BoxShader::Make> ieml::Decode<char, ie::BoxShader::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxShader::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxShader::Make> {
 	auto map{node.get_map_view().except()};
 	sf::Shader* shader{new sf::Shader{}};
 	for(auto& shader_node: map.at("shader").ok_or_none()) {

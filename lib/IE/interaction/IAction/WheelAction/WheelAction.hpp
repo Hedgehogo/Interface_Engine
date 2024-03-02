@@ -8,7 +8,7 @@ namespace ie {
 	public:
 		explicit WheelAction();
 		
-		virtual void update(sf::Vector2i mouse_position, int value) = 0;
+		virtual auto update(sf::Vector2i mouse_position, int value) -> void = 0;
 		
 	protected:
 		bool active_;

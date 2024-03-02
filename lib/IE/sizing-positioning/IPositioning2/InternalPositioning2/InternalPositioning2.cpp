@@ -4,7 +4,7 @@ namespace ie {
 	InternalPositioning2::Make::Make(sf::Vector2f coefficient) : coefficient(coefficient) {
 	}
 	
-	InternalPositioning2* InternalPositioning2::Make::make(Positioning2InitInfo init_info) {
+	auto InternalPositioning2::Make::make(Positioning2InitInfo init_info) -> InternalPositioning2* {
 		return new InternalPositioning2{std::move(*this), init_info};
 	}
 	
@@ -17,7 +17,7 @@ namespace ie {
 		vertical_(std::max(0.f, std::min(1.f, coefficient.y))), horizontal_(std::max(0.f, std::min(1.f, coefficient.x))) {
 	}
 	
-	sf::Vector2f InternalPositioning2::find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) {
+	auto InternalPositioning2::find_position(sf::Vector2f parent_position, sf::Vector2f parent_size, sf::Vector2f object_size) -> sf::Vector2f {
 		return {
 			horizontal_.find_position(parent_position.x, object_size.x, parent_size.x, 0),
 			vertical_.find_position(parent_position.y, object_size.y, parent_size.y, 0)
@@ -25,6 +25,6 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::InternalPositioning2::Make> ieml::Decode<char, ie::InternalPositioning2::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::InternalPositioning2::Make>::decode(ieml::Node const& node) -> orl::Option<ie::InternalPositioning2::Make> {
 	return {{node.at("coefficient").except().as<sf::Vector2f>().except()}};
 }

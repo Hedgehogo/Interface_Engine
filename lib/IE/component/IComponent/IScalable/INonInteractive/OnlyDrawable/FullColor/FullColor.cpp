@@ -6,7 +6,7 @@ namespace ie {
 	FullColor::Make::Make(sf::Color color, sf::Vector2f normal_size) : color(color), normal_size(normal_size) {
 	}
 	
-	FullColor* FullColor::Make::make(InitInfo init_info) {
+	auto FullColor::Make::make(InitInfo init_info) -> FullColor* {
 		return new FullColor{std::move(*this), init_info};
 	}
 	
@@ -19,32 +19,32 @@ namespace ie {
 		rectangle_.setFillColor(color);
 	}
 	
-	void FullColor::draw() {
+	auto FullColor::draw() -> void {
 		render_target_->draw(rectangle_);
 	}
 	
-	void FullColor::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto FullColor::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		rectangle_.setSize(size);
 		rectangle_.setPosition(position);
 	}
 	
-	sf::Vector2f FullColor::get_area_position() const {
+	auto FullColor::get_area_position() const -> sf::Vector2f {
 		return rectangle_.getPosition();
 	}
 	
-	sf::Vector2f FullColor::get_area_size() const {
+	auto FullColor::get_area_size() const -> sf::Vector2f {
 		return rectangle_.getSize();
 	}
 	
-	sf::Vector2f FullColor::get_min_size() const {
+	auto FullColor::get_min_size() const -> sf::Vector2f {
 		return {};
 	}
 	
-	sf::Vector2f FullColor::get_normal_size() const {
+	auto FullColor::get_normal_size() const -> sf::Vector2f {
 		return normal_size_;
 	}
 	
-	bool Determine<FullColor::Make>::determine(const ieml::Node& node) {
+	bool Determine<FullColor::Make>::determine(ieml::Node const& node) {
 		for(auto& str: node.get_raw().ok_or_none()) {
 			return str.str.size() <= 11;
 		}
@@ -52,7 +52,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::FullColor::Make> ieml::Decode<char, ie::FullColor::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::FullColor::Make>::decode(ieml::Node const& node) -> orl::Option<ie::FullColor::Make> {
 	for(auto& color: node.as<sf::Color>().ok_or_none()) {
 		return ie::FullColor::Make{color};
 	}

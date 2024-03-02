@@ -6,7 +6,7 @@ namespace ie {
 	class IScalable : public virtual IComponent {
 	public:
 		struct Make : public virtual IComponent::Make {
-			virtual IScalable* make(InitInfo init_info) = 0;
+			virtual auto make(InitInfo init_info) -> IScalable* = 0;
 		};
 	};
 }

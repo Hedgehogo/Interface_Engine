@@ -6,7 +6,7 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicOneKeyInteraction<T>* BasicOneKeyInteraction<T>::make(BasicActionInitInfo<T> init_info) {
+		auto BasicOneKeyInteraction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicOneKeyInteraction<T>* {
 			return new ie::BasicOneKeyInteraction<T>{std::move(*this), init_info};
 		}
 	}
@@ -17,46 +17,47 @@ namespace ie {
 	}
 	
 	template<typename T>
-	Key BasicOneKeyInteraction<T>::get_key() {
+	auto BasicOneKeyInteraction<T>::get_key() -> Key {
 		return key_;
 	}
 	
 	template<typename T>
-	BasicKeyAction<T>& BasicOneKeyInteraction<T>::get_action() {
+	auto BasicOneKeyInteraction<T>::get_action() -> BasicKeyAction<T>& {
 		return *action_;
 	}
 	
 	template<typename T>
-	const BasicKeyAction<T>& BasicOneKeyInteraction<T>::get_action() const {
+	auto BasicOneKeyInteraction<T>::get_action() const -> BasicKeyAction<T> const& {
 		return *action_;
 	}
 	
 	template<typename T>
-	void BasicOneKeyInteraction<T>::set_action(BoxPtr<BasicKeyAction<T> >&& action) {
+	auto BasicOneKeyInteraction<T>::set_action(BoxPtr<BasicKeyAction<T> >&& action) -> void {
 		this->action_ = std::move(action);
 	}
 	
 	template<typename T>
-	void BasicOneKeyInteraction<T>::start(sf::Vector2i) {
+	auto BasicOneKeyInteraction<T>::start(sf::Vector2i) -> void {
 	}
 	
 	template<typename T>
-	void BasicOneKeyInteraction<T>::update(sf::Vector2i mouse_position) {
+	auto BasicOneKeyInteraction<T>::update(sf::Vector2i mouse_position) -> void {
 		action_->update(mouse_position, KeyHandler::is_key_pressed(key_));
 	}
 	
 	template<typename T>
-	void BasicOneKeyInteraction<T>::finish(sf::Vector2i) {
+	auto BasicOneKeyInteraction<T>::finish(sf::Vector2i) -> void {
 		action_->set_pressed(false);
 	}
 }
 
 template<typename T>
-orl::Option<ie::make_system::BasicOneKeyInteraction<T> >
-ieml::Decode<char, ie::make_system::BasicOneKeyInteraction<T> >::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::make_system::BasicOneKeyInteraction<T> >::decode(
+	ieml::Node const& node
+) -> orl::Option<ie::make_system::BasicOneKeyInteraction<T> > {
 	auto& clear_node{node.get_clear()};
 	return ie::make_system::BasicOneKeyInteraction<T>{
-		clear_node.at("action").except().template as<bp::BoxPtr<ie::make_system::BasicKeyAction<T> > > ().except(),
+		clear_node.at("action").except().template as<bp::BoxPtr<ie::make_system::BasicKeyAction<T> > >().except(),
 		clear_node.get_as<ie::Key>("key").except().ok_or(ie::Key::MouseLeft),
 	};
 }

@@ -4,24 +4,24 @@ namespace ie {
 	InternalTargetPositioning::InternalTargetPositioning(float coefficient, float offset) : coefficient_(coefficient), offset_(offset) {
 	}
 	
-	float InternalTargetPositioning::find_position(float, float object_size, float, float target_size) {
+	auto InternalTargetPositioning::find_position(float, float object_size, float, float target_size) -> float {
 		return (target_size - object_size) * coefficient_ + offset_;
 	}
 	
-	InternalTargetPositioning* InternalTargetPositioning::copy() {
+	auto InternalTargetPositioning::copy() -> InternalTargetPositioning* {
 		return new InternalTargetPositioning{*this};
 	}
 	
-	float InternalTargetPositioning::get_coefficient() const {
+	auto InternalTargetPositioning::get_coefficient() const -> float {
 		return coefficient_;
 	}
 	
-	float InternalTargetPositioning::get_offset() const {
+	auto InternalTargetPositioning::get_offset() const -> float {
 		return offset_;
 	}
 }
 
-orl::Option<ie::InternalTargetPositioning> ieml::Decode<char, ie::InternalTargetPositioning>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::InternalTargetPositioning>::decode(ieml::Node const& node) -> orl::Option<ie::InternalTargetPositioning> {
 	auto map{node.get_map_view().except()};
 	return ie::InternalTargetPositioning{
 		map.at("coefficient").except().as<float>().except(),

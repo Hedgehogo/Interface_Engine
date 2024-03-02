@@ -1,6 +1,6 @@
 #include "Location.hpp"
 
-orl::Option<ie::Location> ieml::Decode<char, ie::Location>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Location>::decode(ieml::Node const& node) -> orl::Option<ie::Location> {
 	auto& str{node.get_raw().except().str};
 	if(str == "origin") {
 		return ie::Location::Origin;

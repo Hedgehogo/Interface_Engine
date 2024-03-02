@@ -32,19 +32,19 @@ namespace ie {
 		
 		BasicActionInitInfo(InitInfo init_info, T additional_);
 		
-		BasicActionInitInfo<T> copy(sf::RenderWindow& window_) const;
+		auto copy(sf::RenderWindow& window_) const -> BasicActionInitInfo<T>;
 		
-		BasicActionInitInfo<T> copy(sf::RenderTarget& render_target_) const;
+		auto copy(sf::RenderTarget& render_target_) const -> BasicActionInitInfo<T>;
 		
-		BasicActionInitInfo<T> copy(DynBuffer& dyn_buffer_) const;
+		auto copy(DynBuffer& dyn_buffer_) const -> BasicActionInitInfo<T>;
 		
-		BasicActionInitInfo<T> copy(InteractionManager& interaction_manager_) const;
+		auto copy(InteractionManager& interaction_manager_) const -> BasicActionInitInfo<T>;
 		
-		BasicActionInitInfo<T> copy(IPanelManager& panel_manager_) const;
+		auto copy(IPanelManager& panel_manager_) const -> BasicActionInitInfo<T>;
 		
-		BasicActionInitInfo<T> copy(T additional_) const;
+		auto copy(T additional_) const -> BasicActionInitInfo<T>;
 		
-		BasicActionInitInfo<> to_general() const;
+		auto to_general() const -> BasicActionInitInfo<>;
 	};
 	
 	using ActionInitInfo = BasicActionInitInfo<>;

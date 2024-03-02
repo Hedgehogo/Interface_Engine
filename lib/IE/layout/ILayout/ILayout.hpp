@@ -11,20 +11,20 @@ namespace ie {
 		
 		LayoutData(sf::Vector2f position, sf::Vector2f size);
 		
-		void set_position(sf::Vector2f position);
+		auto set_position(sf::Vector2f position) -> void;
 		
-		void move(sf::Vector2f position);
+		auto move(sf::Vector2f position) -> void;
 		
-		void set_size(sf::Vector2f size);
+		auto set_size(sf::Vector2f size) -> void;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position);
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void;
 	};
 	
 	class ILayout {
 	public:
-		virtual const LayoutData& layout_get_data() const = 0;
+		virtual auto layout_get_data() const -> LayoutData const& = 0;
 		
 	protected:
-		virtual LayoutData& layout_get_data() = 0;
+		virtual auto layout_get_data() -> LayoutData& = 0;
 	};
 }

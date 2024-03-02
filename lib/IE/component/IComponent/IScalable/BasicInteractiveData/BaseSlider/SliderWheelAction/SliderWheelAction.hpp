@@ -21,20 +21,20 @@ namespace ie {
 			
 			Make(bool horizontal = false, Relativity relativity = Relativity::RelationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
 			
-			SliderWheelAction* make(BasicActionInitInfo<BaseSlider&> init_info);
+			auto make(BasicActionInitInfo<BaseSlider&> init_info) -> SliderWheelAction*;
 		};
 		
 		SliderWheelAction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info);
 		
-		void set_slider(BaseSlider& slider);
+		auto set_slider(BaseSlider& slider) -> void;
 		
-		void start_pressed(sf::Vector2i mouse_position, int value) override;
+		auto start_pressed(sf::Vector2i mouse_position, int value) -> void override;
 		
-		void stop_pressed(sf::Vector2i mouse_position, int value) override;
+		auto stop_pressed(sf::Vector2i mouse_position, int value) -> void override;
 		
-		void while_pressed(sf::Vector2i mouse_position, int value) override;
+		auto while_pressed(sf::Vector2i mouse_position, int value) -> void override;
 		
-		void while_not_pressed(sf::Vector2i mouse_position, int value) override;
+		auto while_not_pressed(sf::Vector2i mouse_position, int value) -> void override;
 		
 	protected:
 		BaseSlider* slider_;
@@ -46,5 +46,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::SliderWheelAction::Relativity> {
-	static orl::Option<ie::SliderWheelAction::Relativity> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::SliderWheelAction::Relativity>;
 };

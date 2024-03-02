@@ -6,20 +6,20 @@ namespace ie {
 	std::vector<Key> KeyHandler::keys_pressed_{};
 	std::vector<Key> KeyHandler::global_keys_pressed_{};
 	
-	std::vector<Key> KeyHandler::get_keys_pressed() {
+	auto KeyHandler::get_keys_pressed() -> std::vector<Key> {
 		return keys_pressed_;
 	}
 	
-	void KeyHandler::set_keys_pressed(std::vector<Key> keys_pressed) {
+	auto KeyHandler::set_keys_pressed(std::vector<Key> keys_pressed) -> void {
 		KeyHandler::keys_pressed_ = keys_pressed;
 	}
 	
-	void KeyHandler::update() {
+	auto KeyHandler::update() -> void {
 		update_key_board();
 		update_mouse();
 	}
 	
-	void KeyHandler::update_key_board() {
+	auto KeyHandler::update_key_board() -> void {
 		for(int i = 0; i < static_cast<int>(Key::MouseLeft); ++i) {
 			if(
 				sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(i)) &&
@@ -30,7 +30,7 @@ namespace ie {
 		}
 	}
 	
-	void KeyHandler::update_mouse() {
+	auto KeyHandler::update_mouse() -> void {
 		for(int i = static_cast<int>(Key::MouseLeft); i < static_cast<int>(Key::MouseWheelUp); ++i) {
 			if(
 				sf::Mouse::isButtonPressed(static_cast<sf::Mouse::Button>(i - static_cast<int>(Key::MouseLeft))) &&
@@ -41,28 +41,28 @@ namespace ie {
 		}
 	}
 	
-	void KeyHandler::add_key(Key key) {
+	auto KeyHandler::add_key(Key key) -> void {
 		if(std::find(keys_pressed_.begin(), keys_pressed_.end(), key) == keys_pressed_.end()) {
 			keys_pressed_.push_back(key);
 		}
 	}
 	
-	void KeyHandler::delete_key(Key key) {
+	auto KeyHandler::delete_key(Key key) -> void {
 		auto element = std::find(keys_pressed_.begin(), keys_pressed_.end(), key);
 		if(element != keys_pressed_.end()) {
 			keys_pressed_.erase(element);
 		}
 	}
 	
-	void KeyHandler::clear() {
+	auto KeyHandler::clear() -> void {
 		keys_pressed_.clear();
 	}
 	
-	void KeyHandler::clear_global_keys() {
+	auto KeyHandler::clear_global_keys() -> void {
 		global_keys_pressed_.clear();
 	}
 	
-	bool KeyHandler::is_key_pressed(Key key) {
+	auto KeyHandler::is_key_pressed(Key key) -> bool {
 		if(
 			std::find(keys_pressed_.begin(), keys_pressed_.end(), key) != keys_pressed_.end() ||
 				std::find(global_keys_pressed_.begin(), global_keys_pressed_.end(), key) != global_keys_pressed_.end()
@@ -84,7 +84,7 @@ namespace ie {
 		}
 	}
 	
-	std::string KeyHandler::to_string(Key key) {
+	auto KeyHandler::to_string(Key key) -> std::string {
 		if(key == Key::A)
 			return "a";
 		else if(key == Key::B)
@@ -310,16 +310,16 @@ namespace ie {
 		return "unknown";
 	}
 	
-	std::string to_string(Key key) {
+	auto to_string(Key key) -> std::string {
 		return KeyHandler::to_string(key);
 	}
 	
-	bool is_key_pressed(Key key) {
+	auto is_key_pressed(Key key) -> bool {
 		return KeyHandler::is_key_pressed(key);
 	}
 }
 
-orl::Option<ie::Key> ieml::Decode<char, ie::Key>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Key>::decode(ieml::Node const& node) -> orl::Option<ie::Key> {
 	auto& str{node.get_raw().except().str};
 	if(str == "a")
 		return ie::Key::A;

@@ -23,7 +23,7 @@ namespace ie {
 			
 			SFn(typename ie::ToMutable<Value_>::Make make, detail::SFnMakeWrap<Args_>... args);
 			
-			rttb::Dyn make(SInitInfo init_info) override;
+			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
 	}
 	
@@ -40,7 +40,7 @@ namespace ie {
 		SFn(Make&& make, SInitInfo init_info);
 		
 	private:
-		void reset();
+		auto reset() -> void;
 		
 		std::tuple<detail::SFnWrap<Args_>...> args_;
 	};
@@ -51,7 +51,7 @@ namespace ie {
 		
 		template<typename Value_, typename... SArgs_, typename Return_, typename... Args_, Return_(* Fn_)(Args_...)>
 		struct ToSFn<Value_(SArgs_...), Fn_> {
-			static Return_ fn(Value_ const&, SArgs_&... args);
+			static auto fn(Value_ const&, SArgs_&... args) -> Return_;
 			
 			using type = SFn<fn>;
 		};
@@ -64,9 +64,9 @@ namespace ie {
 template<typename Return_, typename Value_, typename... Args_, Return_(* Fn_)(Value_ const&, Args_...)>
 struct ieml::Decode<char, ie::make_system::SFn<Fn_> > {
 	template<size_t... Index>
-	static std::tuple<ie::detail::SFnMakeWrap<Args_>...> decode_args(ieml::ListView const& list, std::index_sequence<Index...>);
+	static auto decode_args(ieml::ListView const& list, std::index_sequence<Index...>) -> std::tuple<ie::detail::SFnMakeWrap<Args_>...>;
 	
-	static orl::Option<ie::make_system::SFn<Fn_> > decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::SFn<Fn_> >;
 };
 
 #include "SFn.inl"

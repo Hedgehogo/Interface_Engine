@@ -7,7 +7,7 @@ namespace ie {
 	public:
 		BasePanelInteraction(PanelActionInitInfo init_info);
 		
-		void set_panel(Panel& panel) override;
+		auto set_panel(Panel& panel) -> void override;
 		
 	protected:
 		Panel* panel_;

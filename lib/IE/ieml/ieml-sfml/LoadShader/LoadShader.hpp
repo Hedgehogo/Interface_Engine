@@ -6,9 +6,9 @@
 namespace ie {
 	class LoadShader {
 	public:
-		static orl::Option<LoadShader> decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<LoadShader>;
 		
-		void load(sf::Shader& shader);
+		auto load(sf::Shader& shader) -> void;
 	
 	private:
 		LoadShader(std::string vert, std::string frag);

@@ -28,9 +28,9 @@ namespace ie {
 		using ReadFn = std::function<void(const T&)>;
 		using Make = make_system::IBasicSVec2<Value_>;
 		
-		virtual Value_& get_x() const = 0;
+		virtual auto get_x() const -> Value_& = 0;
 		
-		virtual Value_& get_y() const = 0;
+		virtual auto get_y() const -> Value_& = 0;
 	};
 	
 	template<typename T_>
@@ -58,11 +58,11 @@ namespace ie {
 		using ReadFn = typename IBasicSVec2<Value_>::ReadFn;
 		using Make = make_system::IBasicSMVec2<Value_>;
 		
-		ToMutable<Value_>& get_x() const override = 0;
+		auto get_x() const -> ToMutable<Value_>& override = 0;
 		
-		ToMutable<Value_>& get_y() const override = 0;
+		auto get_y() const -> ToMutable<Value_>& override = 0;
 		
-		T get() const override = 0;
+		auto get() const -> T override = 0;
 	};
 	
 	template<typename T_>

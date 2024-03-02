@@ -19,7 +19,7 @@ namespace ie {
 			
 			BasicFnInteraction(FnType start_fn, FnType finish_fn);
 			
-			ie::BasicFnInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicFnInteraction<T>* override;
 		};
 	}
 	
@@ -33,9 +33,9 @@ namespace ie {
 		
 		BasicFnInteraction(FnType start_fn, FnType finish_fn);
 		
-		void start(sf::Vector2i mouse_position) override;
+		auto start(sf::Vector2i mouse_position) -> void override;
 		
-		void finish(sf::Vector2i mouse_position) override;
+		auto finish(sf::Vector2i mouse_position) -> void override;
 	
 	protected:
 		FnType start_fn_;

@@ -8,21 +8,21 @@ namespace ie {
 	class MovableBorderAction : public BasicBaseKeyAction<BoxMovableBorder&> {
 	public:
 		struct Make : public virtual BasicKeyAction<BoxMovableBorder&>::Make {
-			MovableBorderAction* make(BasicActionInitInfo<BoxMovableBorder&> init_info) override;
+			auto make(BasicActionInitInfo<BoxMovableBorder&> init_info) -> MovableBorderAction* override;
 		};
 		
 		MovableBorderAction(Make&& make, BasicActionInitInfo<BoxMovableBorder&> init_info);
 		
-		void set_box(BoxMovableBorder& box);
+		auto set_box(BoxMovableBorder& box) -> void;
 		
 	protected:
-		void start_pressed() override;
+		auto start_pressed() -> void override;
 		
-		void stop_pressed() override;
+		auto stop_pressed() -> void override;
 		
-		void while_pressed() override;
+		auto while_pressed() -> void override;
 		
-		void while_not_pressed() override;
+		auto while_not_pressed() -> void override;
 		
 		BoxMovableBorder* box_;
 		sf::Vector2i start_mouse_position_;

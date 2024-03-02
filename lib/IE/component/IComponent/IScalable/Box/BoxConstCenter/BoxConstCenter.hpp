@@ -15,32 +15,32 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& const_object, BoxPtr<IScalable::Make>&& background, sf::Vector2f const_size, sf::Vector2f min_size = {});
 			
-			BoxConstCenter* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxConstCenter* override;
 		};
 		
 		BoxConstCenter(Make&& make, InitInfo init_info);
 		
-		void set_position(sf::Vector2f position) override;
+		auto set_position(sf::Vector2f position) -> void override;
 		
-		void move(sf::Vector2f position) override;
+		auto move(sf::Vector2f position) -> void override;
 		
-		void set_size(sf::Vector2f size) override;
+		auto set_size(sf::Vector2f size) -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		IScalable& get_first_object() override;
+		auto get_first_object() -> IScalable& override;
 		
-		const IScalable& get_first_object() const override;
+		auto get_first_object() const -> IScalable const& override;
 		
-		IScalable& get_second_object() override;
+		auto get_second_object() -> IScalable& override;
 		
-		const IScalable& get_second_object() const override;
+		auto get_second_object() const -> IScalable const& override;
 		
-		bool update_interactions(sf::Vector2f) override;
+		auto update_interactions(sf::Vector2f) -> bool override;
 		
 	protected:
 		BoxPtr<IScalable> const_object_;
@@ -52,5 +52,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxConstCenter::Make> {
-	static orl::Option<ie::BoxConstCenter::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxConstCenter::Make>;
 };

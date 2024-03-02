@@ -5,19 +5,19 @@ namespace ie::make_system {
 	SString::SString(std::u32string data) : data(std::move(data)) {
 	}
 	
-	rttb::Dyn SString::make(SInitInfo init_info) {
+	auto SString::make(SInitInfo init_info) -> rttb::Dyn {
 		return rttb::Dyn{ie::SString{std::move(*this), init_info}};
 	}
 	
 	SMString::ToMutable(std::u32string data) : SString(std::move(data)) {
 	}
 	
-	rttb::Dyn SMString::make(SInitInfo init_info) {
+	auto SMString::make(SInitInfo init_info) -> rttb::Dyn {
 		return rttb::Dyn{ie::SMString{std::move(*this), init_info}};
 	}
 }
 
-orl::Option<ie::make_system::SString> ieml::Decode<char, ie::make_system::SString>::decode(const ieml::Node& node) {
+auto ieml::Decode<char, ie::make_system::SString>::decode(const ieml::Node& node) -> orl::Option<ie::make_system::SString> {
 	auto& clear_node{node.get_clear()};
 	if(clear_node.is_null()) {
 		return {{}};
@@ -25,7 +25,7 @@ orl::Option<ie::make_system::SString> ieml::Decode<char, ie::make_system::SStrin
 	return {{ie::to_utf32(clear_node.as<ie::LoadString>().except().str)}};
 }
 
-orl::Option<ie::make_system::SMString> ieml::Decode<char, ie::make_system::SMString>::decode(const ieml::Node& node) {
+auto ieml::Decode<char, ie::make_system::SMString>::decode(const ieml::Node& node) -> orl::Option<ie::make_system::SMString> {
 	return ieml::Decode<char, ie::make_system::SString>::decode(node).map([](auto&& value) {
 		return ie::make_system::SMString{std::move(value.data)};
 	});
@@ -38,7 +38,7 @@ namespace ie {
 	SString::SString(std::u32string data) : data_(std::move(data)) {
 	}
 	
-	std::u32string SString::get() const {
+	auto SString::get() const -> std::u32string {
 		return data_;
 	}
 	
@@ -46,7 +46,7 @@ namespace ie {
 		return read_fns_.emplace_back(std::move(read_fn));
 	}
 	
-	bool SString::delete_read_fn(SString::ReadFn& read_fn) {
+	auto SString::delete_read_fn(SString::ReadFn& read_fn) -> bool {
 		auto result{std::find_if(read_fns_.cbegin(), read_fns_.cend(), [&](ReadFn const& item) {
 			return &item == &read_fn;
 		})};
@@ -63,11 +63,11 @@ namespace ie {
 	SMString::ToMutable(std::u32string data) : SString(std::move(data)) {
 	}
 	
-	void ToMutable<SString>::set(std::u32string value) {
+	auto ToMutable<SString>::set(std::u32string value) -> void {
 		data_ = std::move(value);
 	}
 
-	bool Determine<SMString::Make>::determine(const ieml::Node& node) {
+	auto Determine<SMString::Make>::determine(const ieml::Node& node) -> bool {
 		return node.is_string();
 	}
 }

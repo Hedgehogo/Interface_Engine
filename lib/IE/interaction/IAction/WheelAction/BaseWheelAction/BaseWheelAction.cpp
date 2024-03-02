@@ -4,7 +4,7 @@ namespace ie {
 	BaseWheelAction::BaseWheelAction() {
 	}
 	
-	void BaseWheelAction::update(sf::Vector2i mouse_position, int value) {
+	auto BaseWheelAction::update(sf::Vector2i mouse_position, int value) -> void {
 		if(this->active_ != (value != 0)) {
 			this->active_ = (value != 0);
 			if(this->active_) {

@@ -2,7 +2,7 @@
 #include <localisation/system.hpp>
 
 namespace ieml {
-	orl::Option<ie::LoadString> Decode<char, ie::LoadString>::decode(ieml::Node const& node) {
+	auto Decode<char, ie::LoadString>::decode(ieml::Node const& node) -> orl::Option<ie::LoadString> {
 		auto& clear_node{node.get_clear()};
 		for(auto map: clear_node.get_map_view().ok_or_none()) {
 			for(auto& key: map.at("key").ok_or_none()) {

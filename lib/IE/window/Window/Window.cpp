@@ -2,7 +2,7 @@
 #include "IE/sfml-events/handle_event/handle_event.hpp"
 
 namespace ie {
-	BaseWindowResizer* get_window_resizer() {
+	auto get_window_resizer() -> BaseWindowResizer* {
 		return new WindowResizer{};
 	}
 	
@@ -93,19 +93,19 @@ namespace ie {
 		resizer_->set_window(*this);
 	}
 	
-	void Window::create(sf::VideoMode mode, const sf::String& title, sf::Uint32, const sf::ContextSettings& settings) {
+	auto Window::create(sf::VideoMode mode, const sf::String& title, sf::Uint32, const sf::ContextSettings& settings) -> void {
 		window_.create(mode, title, sf::Style::None, settings);
 	}
 	
-	void Window::create(sf::VideoMode mode, const sf::String& title, const sf::ContextSettings& settings) {
+	auto Window::create(sf::VideoMode mode, const sf::String& title, const sf::ContextSettings& settings) -> void {
 		Window::create(mode, title, sf::Style::None, settings);
 	}
 	
-	void Window::re_calculate_min_size() {
+	auto Window::re_calculate_min_size() -> void {
 		min_size_ = max(sf::Vector2u{map_vector2<float, std::ceil>(this->interface_.get_min_size())}, {1, 1});
 	}
 	
-	void Window::update() {
+	auto Window::update() -> void {
 		KeyHandler::update_mouse();
 		sf::Vector2i mouse_position{sf::Mouse::getPosition(window_)};
 		
@@ -120,26 +120,26 @@ namespace ie {
 		KeyHandler::clear_global_keys();
 	}
 	
-	Interface& Window::get_interface() {
+	auto Window::get_interface() -> Interface& {
 		return interface_;
 	}
 	
-	sf::RenderWindow& Window::get_window() {
+	auto Window::get_window() -> sf::RenderWindow& {
 		return window_;
 	}
 	
-	sf::Vector2u Window::get_min_size() const {
+	auto Window::get_min_size() const -> sf::Vector2u {
 		return min_size_;
 	}
 	
-	void Window::set_size(const sf::Vector2u& size) {
+	auto Window::set_size(const sf::Vector2u& size) -> void {
 		sf::View view{sf::Vector2f{size / 2u}, sf::Vector2f{size}};
 		window_.setSize(size);
 		window_.setView(view);
 		interface_.set_size(sf::Vector2f{size});
 	}
 	
-	Window make_window(fs::path file_path, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) {
+	auto make_window(fs::path file_path, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) -> Window {
 		return {make_interface(std::move(file_path)), std::move(title), std::move(mode), std::move(settings)};
 	}
 }

@@ -10,7 +10,7 @@ namespace ie {
 		inactive_object(std::move(inactive_object)), active_object(std::move(active_object)), value(std::move(value)), min_size(min_size) {
 	}
 	
-	BoxSwitch* BoxSwitch::Make::make(InitInfo init_info) {
+	auto BoxSwitch::Make::make(InitInfo init_info) -> BoxSwitch* {
 		return new BoxSwitch{std::move(*this), init_info};
 	}
 	
@@ -22,31 +22,31 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	void BoxSwitch::set_position(sf::Vector2f position) {
+	auto BoxSwitch::set_position(sf::Vector2f position) -> void {
 		layout_.set_position(position);
 		inactive_object_->set_position(position);
 		active_object_->set_position(position);
 	}
 	
-	void BoxSwitch::move(sf::Vector2f position) {
+	auto BoxSwitch::move(sf::Vector2f position) -> void {
 		layout_.move(position);
 		inactive_object_->move(position);
 		active_object_->move(position);
 	}
 	
-	void BoxSwitch::set_size(sf::Vector2f size) {
+	auto BoxSwitch::set_size(sf::Vector2f size) -> void {
 		layout_.set_size(size);
 		inactive_object_->set_size(size);
 		active_object_->set_size(size);
 	}
 	
-	void BoxSwitch::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxSwitch::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		inactive_object_->resize(size, position);
 		active_object_->resize(size, position);
 	}
 	
-	void BoxSwitch::draw() {
+	auto BoxSwitch::draw() -> void {
 		if(value_.get()) {
 			active_draw_manager_.draw();
 		} else {
@@ -54,28 +54,28 @@ namespace ie {
 		}
 	}
 	
-	bool BoxSwitch::update_interactions(sf::Vector2f mouse_position) {
+	auto BoxSwitch::update_interactions(sf::Vector2f mouse_position) -> bool {
 		return value_.get() ? active_object_->update_interactions(mouse_position) : inactive_object_->update_interactions(mouse_position);
 	}
 	
-	IScalable& BoxSwitch::get_first_object() {
+	auto BoxSwitch::get_first_object() -> IScalable& {
 		return *inactive_object_;
 	}
 	
-	const IScalable& BoxSwitch::get_first_object() const {
+	auto BoxSwitch::get_first_object() const -> const IScalable& {
 		return *inactive_object_;
 	}
 	
-	IScalable& BoxSwitch::get_second_object() {
+	auto BoxSwitch::get_second_object() -> IScalable& {
 		return *active_object_;
 	}
 	
-	const IScalable& BoxSwitch::get_second_object() const {
+	auto BoxSwitch::get_second_object() const -> const IScalable& {
 		return *active_object_;
 	}
 }
 
-orl::Option<ie::BoxSwitch::Make> ieml::Decode<char, ie::BoxSwitch::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxSwitch::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxSwitch::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::BoxSwitch::Make{
 		map.at("inactive-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),

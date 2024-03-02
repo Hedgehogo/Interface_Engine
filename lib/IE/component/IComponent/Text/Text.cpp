@@ -30,7 +30,7 @@ namespace ie {
 		text_interaction(std::move(text_interaction)) {
 	}
 	
-	Text* Text::Make::make(InitInfo init_info) {
+	auto Text::Make::make(InitInfo init_info) -> Text* {
 		return new Text{std::move(*this), init_info};
 	}
 	
@@ -62,65 +62,64 @@ namespace ie {
 				}
 			)
 		),
-		resizer(nullptr),
-		text_interaction(nullptr) {
-		text_interaction.set(make.text_interaction->make({init_info, *this}));
-		for(auto& text_block: this->text_blocks) {
-			text_block->set_kerning(text_characters.empty() ? U'\0' : text_characters[text_characters.size() - 1]->get_char());
-			std::vector<BaseCharacter*> characters = text_block->get_characters();
-			text_characters.insert(text_characters.end(), characters.begin(), characters.end());
-		}
-		resizer = BoxPtr<BaseTextResizer>{make.resizer->make(TextResizerInitInfo(text_characters))};
-		
+		resizer([this, &make] {
+			for(auto& text_block: this->text_blocks) {
+				text_block->set_kerning(text_characters.empty() ? U'\0' : text_characters[text_characters.size() - 1]->get_char());
+				auto characters{text_block->get_characters()};
+				text_characters.insert(text_characters.end(), characters.begin(), characters.end());
+			}
+			return make.resizer->make(TextResizerInitInfo(text_characters));
+		}()),
+		text_interaction(make.text_interaction->make({init_info, *this})) {
 		init_info.update_manager.add(*this);
 		init_info.draw_manager.add(*this);
 	}
 	
-	void Text::set_selection(Text::Selection selection) {
+	auto Text::set_selection(Text::Selection selection) -> void {
 		this->selection = selection;
 	}
 	
-	void Text::set_selection_start(orl::Option<std::vector<BaseCharacter*>::iterator> start) {
+	auto Text::set_selection_start(orl::Option<std::vector<BaseCharacter*>::iterator> start) -> void {
 		selection.start = start;
 	}
 	
-	void Text::set_selection_end(orl::Option<std::vector<BaseCharacter*>::iterator> end) {
+	auto Text::set_selection_end(orl::Option<std::vector<BaseCharacter*>::iterator> end) -> void {
 		selection.end = end;
 	}
 	
-	Text::Selection Text::get_selection() const {
+	auto Text::get_selection() const -> Text::Selection {
 		return selection;
 	}
 	
-	std::vector<BaseCharacter*>::iterator Text::get_selection_start() const {
+	auto Text::get_selection_start() const -> std::vector<BaseCharacter*>::iterator {
 		return selection.start.except();
 	}
 	
-	std::vector<BaseCharacter*>::iterator Text::get_selection_end() const {
+	auto Text::get_selection_end() const -> std::vector<BaseCharacter*>::iterator {
 		return selection.end.except();
 	}
 	
-	sf::String Text::get_selection_text() {
+	auto Text::get_selection_text() -> sf::String {
 		for(auto [local_start, local_end]: selection.start && selection.end) {
-			sf::String SelectionText{};
+			auto selection_text{sf::String{}};
 			if(std::distance(local_start, local_end) < 0) {
 				std::swap(local_start, local_end);
 			}
 			
 			for(auto item = local_start; item != local_end; ++item) {
-				SelectionText += (*(item))->get_char();
+				selection_text += (*(item))->get_char();
 			}
 			
-			return SelectionText;
+			return selection_text;
 		}
 		return sf::String{""};
 	}
 	
-	std::vector<BaseCharacter*>& Text::get_characters() {
+	auto Text::get_characters() -> std::vector<BaseCharacter*>& {
 		return text_characters;
 	}
 	
-	orl::Option<std::vector<BaseCharacter*>::iterator> Text::get_character(sf::Vector2f mouse_position) {
+	auto Text::get_character(sf::Vector2f mouse_position) -> orl::Option<std::vector<BaseCharacter*>::iterator> {
 		using Iterator = std::vector<BaseCharacter*>::iterator;
 		
 		auto get_distance_y = [](Iterator iterator, float mouse_position_y) -> float {
@@ -131,14 +130,16 @@ namespace ie {
 		};
 		
 		auto min_distance_x = [](Iterator first, Iterator second, float find) -> bool {
-			float distance_to_first{std::abs((*first)->get_position().x - find)};
-			float distance_to_first1{std::abs((*first)->get_position().x + (*first)->get_advance() - find)};
-			float distance_to_second{std::abs((*second)->get_position().x - find)};
-			float distance_to_second1{std::abs((*second)->get_position().x + (*second)->get_advance() - find)};
-			if(distance_to_first > distance_to_first1)
+			auto distance_to_first{std::abs((*first)->get_position().x - find)};
+			auto distance_to_first1{std::abs((*first)->get_position().x + (*first)->get_advance() - find)};
+			auto distance_to_second{std::abs((*second)->get_position().x - find)};
+			auto distance_to_second1{std::abs((*second)->get_position().x + (*second)->get_advance() - find)};
+			if(distance_to_first > distance_to_first1) {
 				std::swap(distance_to_first, distance_to_first1);
-			if(distance_to_second > distance_to_second1)
+			}
+			if(distance_to_second > distance_to_second1) {
 				std::swap(distance_to_second, distance_to_second1);
+			}
 			
 			if(distance_to_first == distance_to_second) {
 				return distance_to_first1 < distance_to_second1;
@@ -146,12 +147,12 @@ namespace ie {
 			return distance_to_first < distance_to_second;
 		};
 		
-		orl::Option<Iterator> result{};
+		auto result{orl::Option<Iterator>{}};
 		
 		for(auto iterator = text_characters.begin(); iterator != text_characters.end(); ++iterator) {
 			result = result.map([=](auto& value) {
-				float distance_y_to_iterator{get_distance_y(iterator, mouse_position.y)};
-				float distance_y_to_result{get_distance_y(value, mouse_position.y)};
+				auto distance_y_to_iterator{get_distance_y(iterator, mouse_position.y)};
+				auto distance_y_to_result{get_distance_y(value, mouse_position.y)};
 				if(distance_y_to_iterator <= distance_y_to_result) {
 					if((distance_y_to_iterator < distance_y_to_result) || min_distance_x(iterator, value, mouse_position.x)) {
 						return iterator;
@@ -170,7 +171,7 @@ namespace ie {
 		return result;
 	}
 	
-	void Text::update() {
+	auto Text::update() -> void {
 		if(interact != old_interact) {
 			old_interact = interact;
 			
@@ -187,20 +188,21 @@ namespace ie {
 		}
 	}
 	
-	bool Text::update_interactions(sf::Vector2f mouse_position) {
+	auto Text::update_interactions(sf::Vector2f mouse_position) -> bool {
 		interact = true;
 		
 		for(auto& text_bock: text_blocks) {
-			
-			if(text_bock->in(mouse_position))
-				if(text_bock->update_interactions(mouse_position))
+			if(text_bock->in(mouse_position)) {
+				if(text_bock->update_interactions(mouse_position)) {
 					return true;
+				}
+			}
 		}
 		return background->update_interactions(mouse_position);
 	}
 	
-	void Text::draw() {
-		bool rerender{false};
+	auto Text::draw() -> void {
+		auto rerender{false};
 		for(auto& character: text_characters) {
 			if(character->get_rerender()) {
 				rerender = true;
@@ -228,7 +230,7 @@ namespace ie {
 		render_target->draw(sprite);
 	}
 	
-	void Text::move(sf::Vector2f position) {
+	auto Text::move(sf::Vector2f position) -> void {
 		view.reset({get_position() + position, view.getSize()});
 		render_texture.setView(view);
 		sprite.move(position);
@@ -236,7 +238,7 @@ namespace ie {
 		resizer->move(position);
 	}
 	
-	void Text::set_position(sf::Vector2f position) {
+	auto Text::set_position(sf::Vector2f position) -> void {
 		view.reset({position, view.getSize()});
 		render_texture.setView(view);
 		sprite.setPosition(position);
@@ -244,7 +246,7 @@ namespace ie {
 		resizer->set_position(position);
 	}
 	
-	void Text::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto Text::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		resizer->resize(size, position);
 		
 		size = max(resizer->get_size(), size);
@@ -256,23 +258,23 @@ namespace ie {
 		sprite.setTextureRect({{0, 0}, sf::Vector2i(size)});
 	}
 	
-	sf::Vector2f Text::get_area_position() const {
+	auto Text::get_area_position() const -> sf::Vector2f {
 		return background->get_area_position();
 	}
 	
-	sf::Vector2f Text::get_area_size() const {
+	auto Text::get_area_size() const -> sf::Vector2f {
 		return max(background->get_area_size(), resizer->get_size());
 	}
 	
-	sf::Vector2f Text::get_min_size() const {
+	auto Text::get_min_size() const -> sf::Vector2f {
 		return max(resizer->get_min_size(), background->get_min_size());
 	}
 	
-	sf::Vector2f Text::get_normal_size() const {
+	auto Text::get_normal_size() const -> sf::Vector2f {
 		return max(resizer->get_normal_size(), background->get_normal_size());
 	}
 	
-	void Text::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto Text::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		for(BaseCharacter*& character: text_characters) {
 			character->draw_debug(render_target, indent_addition, hue + hue_offset, hue_offset);
 		}
@@ -281,7 +283,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::Text::Make> ieml::Decode<char, ie::Text::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Text::Make>::decode(ieml::Node const& node) -> orl::Option<ie::Text::Make> {
 	auto map{node.get_map_view().except()};
 	auto color{map.get_as<sf::Color>("text-color").except().ok_or(sf::Color::Black)};
 	return ie::Text::Make{

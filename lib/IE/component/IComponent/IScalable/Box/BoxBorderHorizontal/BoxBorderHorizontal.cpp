@@ -27,74 +27,74 @@ namespace ie {
 		Box(make.min_size), objects_(map_make(std::move(make.objects), init_info)), bounds_(std::move(make.bounds)) {
 	}
 	
-	void BoxBorderHorizontal::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxBorderHorizontal::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
-		sf::Vector2f coordinate{0, 0};
-		sf::Vector2f object_size{size};
-		for(size_t x = 0; x < objects_.size(); ++x) {
+		auto coordinate{sf::Vector2f{0, 0}};
+		auto object_size{size};
+		for(auto x{size_t{0}}; x < objects_.size(); ++x) {
 			object_size.x = size.x * (bounds_[x + 1] - bounds_[x]);
 			objects_[x]->resize(object_size, position + coordinate);
 			coordinate.x += object_size.x;
 		}
 	}
 	
-	bool BoxBorderHorizontal::update_interactions(sf::Vector2f mouse_position) {
-		sf::Vector2f position{mouse_position.x - layout_.position.x, mouse_position.y - layout_.position.y};
-		if(position.x < 0.0f || position.x > layout_.size.x || position.y < 0.0f || position.y > layout_.size.y)
+	auto BoxBorderHorizontal::update_interactions(sf::Vector2f mouse_position) -> bool {
+		auto position{sf::Vector2f{mouse_position.x - layout_.position.x, mouse_position.y - layout_.position.y}};
+		if(position.x < 0.0f || position.x > layout_.size.x || position.y < 0.0f || position.y > layout_.size.y) {
 			return false;
+		}
 		position.x = position.x / layout_.size.x;
 		
-		size_t object{1};
-		while(position.x > bounds_[object])
+		auto object{size_t{1}};
+		while(position.x > bounds_[object]) {
 			++object;
+		}
 		return objects_[object - 1]->update_interactions(mouse_position);
 	}
 	
-	sf::Vector2f BoxBorderHorizontal::get_min_size() const {
-		sf::Vector2f min_size{0, 0};
-		std::vector<sf::Vector2f> object_min_sizes(objects_.size());
-		for(size_t i = 0; i < object_min_sizes.size(); ++i) {
+	auto BoxBorderHorizontal::get_min_size() const -> sf::Vector2f {
+		auto min_size{sf::Vector2f{0, 0}};
+		auto object_min_sizes{std::vector<sf::Vector2f>{objects_.size()}};
+		for(auto i{size_t{0}}; i < object_min_sizes.size(); ++i) {
 			object_min_sizes[i] = objects_[i]->get_min_size();
 		}
 		
-		sf::Vector2f object_min_size;
-		for(size_t i = 0; i < object_min_sizes.size(); ++i) {
-			object_min_size = {object_min_sizes[i].x / (bounds_[i + 1] - bounds_[i]), object_min_sizes[i].y};
+		for(auto i{size_t{0}}; i < object_min_sizes.size(); ++i) {
+			auto object_min_size{sf::Vector2f{object_min_sizes[i].x / (bounds_[i + 1] - bounds_[i]), object_min_sizes[i].y}};
 			min_size = max(object_min_size, min_size);
 		}
 		
 		return max(min_size, this->minimum_size_);
 	}
 	
-	sf::Vector2f BoxBorderHorizontal::get_normal_size() const {
-		sf::Vector2f normal_size{0, 0};
-		std::vector<sf::Vector2f> object_normal_sizes(objects_.size());
-		for(size_t i = 0; i < object_normal_sizes.size(); ++i) {
+	auto BoxBorderHorizontal::get_normal_size() const -> sf::Vector2f {
+		auto normal_size{sf::Vector2f{0, 0}};
+		auto object_normal_sizes{std::vector<sf::Vector2f>{objects_.size()}};
+		for(auto i{size_t{0}}; i < object_normal_sizes.size(); ++i) {
 			object_normal_sizes[i] = objects_[i]->get_normal_size();
 		}
 		
-		sf::Vector2f object_normal_size;
-		for(size_t i = 0; i < object_normal_sizes.size(); ++i) {
-			object_normal_size = {object_normal_sizes[i].x / (bounds_[i + 1] - bounds_[i]), object_normal_sizes[i].y};
+		for(auto i{size_t{0}}; i < object_normal_sizes.size(); ++i) {
+			auto object_normal_size{sf::Vector2f{object_normal_sizes[i].x / (bounds_[i + 1] - bounds_[i]), object_normal_sizes[i].y}};
 			normal_size = max(object_normal_size, normal_size);
 		}
 		
 		return normal_size;
 	}
 	
-	size_t BoxBorderHorizontal::get_array_size() const {
+	auto BoxBorderHorizontal::get_array_size() const -> size_t {
 		return objects_.size();
 	}
 	
-	IScalable& BoxBorderHorizontal::get_object_at(size_t index) {
+	auto BoxBorderHorizontal::get_object_at(size_t index) -> IScalable& {
 		return *objects_.at(index);
 	}
 	
-	const IScalable& BoxBorderHorizontal::get_object_at(size_t index) const {
+	auto BoxBorderHorizontal::get_object_at(size_t index) const -> IScalable const& {
 		return *objects_.at(index);
 	}
 	
-	void BoxBorderHorizontal::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto BoxBorderHorizontal::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		for(auto& object: objects_) {
 			object->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
@@ -102,7 +102,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::BoxBorderHorizontal::Make> ieml::Decode<char, ie::BoxBorderHorizontal::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxBorderHorizontal::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxBorderHorizontal::Make> {
 	auto map{node.get_map_view().except()};
 	auto min_size{map.get_as<sf::Vector2f>("min-size").except().ok_or({})};
 	auto two_objects{map.at("first-object").ok_or_none() && map.at("second-object").ok_or_none()};

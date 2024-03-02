@@ -7,7 +7,7 @@ namespace ie {
 		find_size_fn(std::move(find_size_fn)), get_parent_size_fn(std::move(get_parent_size_fn)){
 	}
 	
-	FnSizing* FnSizing::Make::make(float normal_size) {
+	auto FnSizing::Make::make(float normal_size) -> FnSizing* {
 		return new FnSizing{std::move(*this), normal_size};
 	}
 	
@@ -19,11 +19,11 @@ namespace ie {
 		find_size_fn_(std::move(find_size_fn)), get_parent_size_fn_(std::move(get_parent_size_fn)), normal_size_() {
 	}
 	
-	float FnSizing::find_size(float parent_size, float target_size) {
+	auto FnSizing::find_size(float parent_size, float target_size) -> float {
 		return find_size_fn_(parent_size, target_size, normal_size_);
 	}
 	
-	float FnSizing::get_parent_size(float object_min_size) {
+	auto FnSizing::get_parent_size(float object_min_size) -> float {
 		return get_parent_size_fn_(object_min_size);
 	}
 }

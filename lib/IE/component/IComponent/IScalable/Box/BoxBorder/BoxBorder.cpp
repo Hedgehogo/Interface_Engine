@@ -21,7 +21,7 @@ namespace ie {
 		min_size(min_size) {
 	}
 	
-	BoxBorder* BoxBorder::Make::make(InitInfo init_info) {
+	auto BoxBorder::Make::make(InitInfo init_info) -> BoxBorder* {
 		return new BoxBorder{std::move(*this), init_info};
 	}
 	
@@ -32,14 +32,14 @@ namespace ie {
 		bounds_vertical_(std::move(make.bounds_vertical)) {
 	}
 	
-	void BoxBorder::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxBorder::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
-		sf::Vector2f coordinate{};
-		sf::Vector2f object_size{size};
-		for(size_t x = 0; x < objects_.size(); ++x) {
+		auto coordinate{sf::Vector2f{}};
+		auto object_size{size};
+		for(auto x{size_t{0}}; x < objects_.size(); ++x) {
 			object_size.x = size.x * (bounds_horizontal_[x + 1] - bounds_horizontal_[x]);
 			coordinate.y = 0;
-			for(size_t y = 0; y < objects_[0].size(); ++y) {
+			for(auto y{size_t{0}}; y < objects_[0].size(); ++y) {
 				object_size.y = size.y * (bounds_vertical_[y + 1] - bounds_vertical_[y]);
 				objects_[x][y]->resize(object_size, position + coordinate);
 				coordinate.y += object_size.y;
@@ -48,14 +48,14 @@ namespace ie {
 		}
 	}
 	
-	bool BoxBorder::update_interactions(sf::Vector2f mouse_position) {
-		sf::Vector2f position{mouse_position.x - layout_.position.x, mouse_position.y - layout_.position.y};
+	auto BoxBorder::update_interactions(sf::Vector2f mouse_position) -> bool {
+		auto position{sf::Vector2f{mouse_position.x - layout_.position.x, mouse_position.y - layout_.position.y}};
 		if(position.x < 0.0f || position.x > layout_.size.x || position.y < 0.0f || position.y > layout_.size.y) {
 			return false;
 		}
 		position = {position.x / layout_.size.x, position.y / layout_.size.y};
 		
-		sf::Vector2u object{1, 1};
+		auto object{sf::Vector2u{1, 1}};
 		while(position.x > bounds_horizontal_[object.x]) {
 			++object.x;
 		}
@@ -65,29 +65,29 @@ namespace ie {
 		return objects_[object.x - 1][object.y - 1]->update_interactions(mouse_position);
 	}
 	
-	sf::Vector2f BoxBorder::get_min_size() const {
-		sf::Vector2f min_size{0, 0};
-		std::vector<std::vector<sf::Vector2f>> object_min_sizes(objects_.size());
-		for(size_t x = 0; x < object_min_sizes.size(); ++x) {
-			for(size_t y = 0; y < object_min_sizes[x].size(); ++y) {
+	auto BoxBorder::get_min_size() const -> sf::Vector2f {
+		auto min_size{sf::Vector2f{0, 0}};
+		auto object_min_sizes{std::vector<std::vector<sf::Vector2f> >{objects_.size()}};
+		for(auto x{size_t{0}}; x < object_min_sizes.size(); ++x) {
+			for(auto y{size_t{0}}; y < object_min_sizes[x].size(); ++y) {
 				object_min_sizes[x][y] = objects_[x][y]->get_min_size();
 			}
 		}
 		
-		sf::Vector2f line_min_size{0, 0};
-		sf::Vector2f object_min_size{0, 0};
+		auto line_min_size{sf::Vector2f{0, 0}};
+		auto object_min_size{sf::Vector2f{0, 0}};
 		for(auto& line: object_min_sizes) {
 			line_min_size.y = 0;
-			for(size_t y = 0; y < line.size(); ++y) {
+			for(auto y{size_t{0}}; y < line.size(); ++y) {
 				object_min_size.y = line[y].y / (bounds_vertical_[y + 1] - bounds_vertical_[y]);
 				line_min_size.y = std::max(object_min_size.y, line_min_size.y);
 			}
 			min_size.y = std::max(line_min_size.y, min_size.y);
 		}
 		
-		for(size_t y = 0; y < object_min_sizes[0].size(); ++y) {
+		for(auto y{size_t{0}}; y < object_min_sizes[0].size(); ++y) {
 			line_min_size.x = 0;
-			for(size_t x = 0; x < object_min_sizes.size(); ++x) {
+			for(auto x{size_t{0}}; x < object_min_sizes.size(); ++x) {
 				object_min_size.x = object_min_sizes[x][y].x / (bounds_horizontal_[x + 1] - bounds_horizontal_[x]);
 				line_min_size.x = std::max(object_min_size.x, line_min_size.x);
 			}
@@ -97,29 +97,29 @@ namespace ie {
 		return {std::max(min_size.x, this->minimum_size_.x), std::max(min_size.y, this->minimum_size_.y)};
 	}
 	
-	sf::Vector2f BoxBorder::get_normal_size() const {
-		sf::Vector2f normal_size{0, 0};
-		std::vector<std::vector<sf::Vector2f>> object_normal_sizes(objects_.size());
-		for(size_t x = 0; x < object_normal_sizes.size(); ++x) {
-			for(size_t y = 0; y < object_normal_sizes[x].size(); ++y) {
+	auto BoxBorder::get_normal_size() const -> sf::Vector2f {
+		auto normal_size{sf::Vector2f{0, 0}};
+		auto object_normal_sizes{std::vector<std::vector<sf::Vector2f> >{objects_.size()}};
+		for(auto x{size_t{0}}; x < object_normal_sizes.size(); ++x) {
+			for(auto y{size_t{0}}; y < object_normal_sizes[x].size(); ++y) {
 				object_normal_sizes[x][y] = objects_[x][y]->get_normal_size();
 			}
 		}
 		
-		sf::Vector2f line_normal_size{0, 0};
-		sf::Vector2f object_normal_size{0, 0};
+		auto line_normal_size{sf::Vector2f{0, 0}};
+		auto object_normal_size{sf::Vector2f{0, 0}};
 		for(auto& line: object_normal_sizes) {
 			line_normal_size.y = 0;
-			for(size_t y = 0; y < line.size(); ++y) {
+			for(auto y{size_t{0}}; y < line.size(); ++y) {
 				object_normal_size.y = line[y].y / (bounds_vertical_[y + 1] - bounds_vertical_[y]);
 				line_normal_size.y = std::max(object_normal_size.y, line_normal_size.y);
 			}
 			normal_size.y = std::max(line_normal_size.y, normal_size.y);
 		}
 		
-		for(size_t y = 0; y < object_normal_sizes[0].size(); ++y) {
+		for(auto y{size_t{0}}; y < object_normal_sizes[0].size(); ++y) {
 			line_normal_size.x = 0;
-			for(size_t x = 0; x < object_normal_sizes.size(); ++x) {
+			for(auto x{size_t{0}}; x < object_normal_sizes.size(); ++x) {
 				object_normal_size.x = object_normal_sizes[x][y].x / (bounds_horizontal_[x + 1] - bounds_horizontal_[x]);
 				line_normal_size.x = std::max(object_normal_size.x, line_normal_size.x);
 			}
@@ -129,7 +129,7 @@ namespace ie {
 		return normal_size;
 	}
 	
-	void BoxBorder::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto BoxBorder::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		for(auto& line: objects_) {
 			for(auto& object: line) {
@@ -139,7 +139,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::BoxBorder::Make> ieml::Decode<char, ie::BoxBorder::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxBorder::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxBorder::Make> {
 	auto map{node.get_map_view().except()};
 	auto objects(map.at("objects").except().as<std::vector<std::vector<ie::BoxPtr<ie::IScalable::Make> > > >().except());
 	auto min_size{map.get_as<sf::Vector2f>("min-size").except().ok_or({})};

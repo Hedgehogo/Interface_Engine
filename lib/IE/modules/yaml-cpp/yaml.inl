@@ -1,65 +1,64 @@
 //included into yaml.hpp
 
 template<typename T>
-sf::Vector2<T> operator*(const sf::Vector2<T>& first, const sf::Vector2<T>& second) {
+auto operator*(const sf::Vector2<T>& first, const sf::Vector2<T>& second) -> sf::Vector2<T> {
 	return {first.x * second.x, first.y * second.y};
 }
 
 template<typename T>
-sf::Vector2<T> operator/(const sf::Vector2<T>& first, const sf::Vector2<T>& second) {
+auto operator/(const sf::Vector2<T>& first, const sf::Vector2<T>& second) -> sf::Vector2<T> {
 	return {first.x / second.x, first.y / second.y};
 }
 
 namespace ie {
 	template<class T>
-	std::string type_name(const T& type) {
+	auto type_name(const T& type) -> std::string {
 		return demangle(typeid(type).name());
 	}
 	
 	template<class T>
-	std::string type_name() {
+	auto type_name() -> std::string {
 		return demangle(typeid(T).name());
 	}
 	
 	template<typename T>
-	bool create_pointer(const YAML::Node& node, T*& object) {
+	auto create_pointer(const YAML::Node& node, T*& object) -> bool {
 		return DecodePointer<T>::decode_pointer(node, object);
 	}
 	
 	
 	template<typename T>
-	T convert_default(const YAML::Node& node, const T& default_value) {
+	auto convert_default(const YAML::Node& node, const T& default_value) -> T {
 		return (node.IsDefined() ? node.as<T>() : default_value);
 	}
 	
 	template<typename T>
-	T conv_def(const YAML::Node& node, const T& default_value) {
+	auto conv_def(const YAML::Node& node, const T& default_value) -> T {
 		return convert_default<T>(node, default_value);
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	B* convert_default_ptr(const YAML::Node& node, Arg&&... arg) {
+	auto convert_default_ptr(const YAML::Node& node, Arg&&... arg) -> B* {
 		return node.IsDefined() ? node.as<B*>() : new T{arg...};
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	B* conv_def_ptr(const YAML::Node& node, Arg&&... arg) {
+	auto conv_def_ptr(const YAML::Node& node, Arg&&... arg) -> B* {
 		return convert_default_ptr<B, T>(node, arg...);
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	BoxPtr<B> convert_default_box_ptr(const YAML::Node& node, Arg&&... arg) {
+	auto convert_default_box_ptr(const YAML::Node& node, Arg&&... arg) -> BoxPtr<B> {
 		return node.IsDefined() ? node.as<BoxPtr<B> >() : make_box_ptr<T>(arg...);
 	}
 	
 	template<typename B, typename T, typename ...Arg>
-	BoxPtr<B> conv_def_box_ptr(const YAML::Node& node, Arg&&... arg) {
+	auto conv_def_box_ptr(const YAML::Node& node, Arg&&... arg) -> BoxPtr<B> {
 		return convert_default_box_ptr<B, T>(node, arg...);
 	}
 	
 	template<typename T>
-	std::enable_if_t<std::is_class_v<T>, bool>
-	Decode<BoxPtr<T>>::decode(const YAML::Node& node, BoxPtr<T>& object) {
+	auto Decode<BoxPtr<T> >::decode(const YAML::Node& node, BoxPtr<T>& object) -> std::enable_if_t<std::is_class_v<T>, bool> {
 		object = BoxPtr{node.as<T*>()};
 		return true;
 	}

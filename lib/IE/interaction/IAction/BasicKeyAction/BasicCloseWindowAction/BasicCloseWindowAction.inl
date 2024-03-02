@@ -3,7 +3,7 @@
 namespace ie {
 	namespace make_system {
 		template<typename T>
-		ie::BasicCloseWindowAction<T>* BasicCloseWindowAction<T>::make(BasicActionInitInfo<T> init_info) {
+		auto BasicCloseWindowAction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicCloseWindowAction<T>* {
 			return new ie::BasicCloseWindowAction<T>{std::move(*this), init_info};
 		}
 	}
@@ -14,26 +14,25 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicCloseWindowAction<T>::start_pressed() {
+	auto BasicCloseWindowAction<T>::start_pressed() -> void {
 	}
 	
 	template<typename T>
-	void BasicCloseWindowAction<T>::stop_pressed() {
+	auto BasicCloseWindowAction<T>::stop_pressed() -> void {
 		if(window_->isOpen())
 			window_->close();
 	}
 	
 	template<typename T>
-	void BasicCloseWindowAction<T>::while_pressed() {
+	auto BasicCloseWindowAction<T>::while_pressed() -> void {
 	}
 	
 	template<typename T>
-	void BasicCloseWindowAction<T>::while_not_pressed() {
+	auto BasicCloseWindowAction<T>::while_not_pressed() -> void {
 	}
-	
-	template<typename T>
-	bool DecodePointer<BasicCloseWindowAction<T> >::decode_pointer(const YAML::Node&, BasicCloseWindowAction<T>*& close_window_action) {
-		close_window_action = new BasicCloseWindowAction<T>{};
-		return true;
-	}
+}
+
+template<typename T>
+auto ieml::Decode<char, ie::BasicCloseWindowAction<T> >::decode(ieml::Node const&) -> orl::Option<ie::BasicCloseWindowAction<T> > {
+	return ie::BasicCloseWindowAction<T>{};
 }

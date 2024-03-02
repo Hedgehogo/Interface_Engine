@@ -21,7 +21,7 @@ namespace ie {
 		min_size(min_size) {
 	}
 	
-	BoxMovableBorder* BoxMovableBorder::Make::make(InitInfo init_info) {
+	auto BoxMovableBorder::Make::make(InitInfo init_info) -> BoxMovableBorder* {
 		return new BoxMovableBorder{std::move(*this), init_info};
 	}
 	
@@ -48,27 +48,27 @@ namespace ie {
 		init_info.update_manager.add(*this);
 	}
 	
-	float BoxMovableBorder::get_border_value() {
+	auto BoxMovableBorder::get_border_value() -> float {
 		return border_value_.get().get();
 	}
 	
-	void BoxMovableBorder::set_border_value(float border_value) {
+	auto BoxMovableBorder::set_border_value(float border_value) -> void {
 		this->border_value_.get().set(border_value);
 	}
 	
-	float BoxMovableBorder::get_border_value_now() {
+	auto BoxMovableBorder::get_border_value_now() -> float {
 		return this->border_value_now_;
 	}
 	
-	int BoxMovableBorder::get_border_interaction_size() {
+	auto BoxMovableBorder::get_border_interaction_size() -> int {
 		return this->border_interaction_size_;
 	}
 	
-	void BoxMovableBorder::set_border_interaction_size(int size) {
+	auto BoxMovableBorder::set_border_interaction_size(int size) -> void {
 		this->border_interaction_size_ = size;
 	}
 	
-	bool BoxMovableBorder::is_in_border(sf::Vector2f point_position) {
+	auto BoxMovableBorder::is_in_border(sf::Vector2f point_position) -> bool {
 		if(
 			point_position.x < layout_.position.x ||
 			point_position.x > layout_.position.x + layout_.size.x ||
@@ -85,15 +85,15 @@ namespace ie {
 		return point_position.y > border_position - border_interaction_size_ && point_position.y < border_position + border_interaction_size_;
 	}
 	
-	bool BoxMovableBorder::get_is_horizontal_border() {
+	auto BoxMovableBorder::get_is_horizontal_border() -> bool {
 		return this->is_horizontal_border_;
 	}
 	
-	void BoxMovableBorder::update() {
+	auto BoxMovableBorder::update() -> void {
 		interactive_.update();
 	}
 	
-	bool BoxMovableBorder::update_interactions(sf::Vector2f mouse_position) {
+	auto BoxMovableBorder::update_interactions(sf::Vector2f mouse_position) -> bool {
 		if(!this->is_in_border(mouse_position)) {
 			if(this->is_horizontal_border_) {
 				float split_position = layout_.position.x + layout_.size.x * this->border_value_now_;
@@ -114,40 +114,39 @@ namespace ie {
 		return true;
 	}
 	
-	void BoxMovableBorder::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxMovableBorder::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		
 		sf::Vector2f first_object_size;
 		sf::Vector2f second_object_size;
 		
-		sf::Vector2f first_object_min_size = first_object_->get_min_size();
-		sf::Vector2f second_object_min_size = second_object_->get_min_size();
+		auto first_object_min_size{first_object_->get_min_size()};
+		auto second_object_min_size{second_object_->get_min_size()};
 		
-		sf::Vector2f second_position = position;
+		auto second_position = position;
 		
 		if(this->is_horizontal_border_) {
-			float c = second_object_min_size.x / first_object_min_size.x;
-			float min_size_border = 1 - c / (c + 1);
+			auto c{second_object_min_size.x / first_object_min_size.x};
+			auto min_size_border{1 - c / (c + 1)};
 			
 			if(min_size_border > border_value_.get().get()) {
 				border_value_now_ = std::max({first_object_min_size.x / size.x, border_value_.get().get()});
 			} else {
-				float diff = size.x - get_min_size().x;
+				auto diff = size.x - get_min_size().x;
 				border_value_now_ = std::min({(diff + first_object_min_size.x) / size.x, border_value_.get().get()});
 			}
 			
 			first_object_size = {size.x * border_value_now_, size.y};
 			second_object_size = {size.x - first_object_size.x, size.y};
 			second_position.x += first_object_size.x;
-			
 		} else {
-			float c = second_object_min_size.y / first_object_min_size.y;
-			float min_size_border = 1 - c / (c + 1);
+			auto c{second_object_min_size.y / first_object_min_size.y};
+			auto min_size_border{1 - c / (c + 1)};
 			
 			if(min_size_border > border_value_.get().get()) {
 				border_value_now_ = std::max({first_object_min_size.y / size.y, border_value_.get().get()});
 			} else {
-				float diff = size.y - get_min_size().y;
+				auto diff = size.y - get_min_size().y;
 				border_value_now_ = std::min({(diff + first_object_min_size.y) / size.y, border_value_.get().get()});
 			}
 			
@@ -159,46 +158,48 @@ namespace ie {
 		second_object_->resize(second_object_size, second_position);
 	}
 	
-	sf::Vector2f BoxMovableBorder::get_min_size() const {
-		sf::Vector2f first_min_size = first_object_->get_min_size();
-		sf::Vector2f second_min_size = second_object_->get_min_size();
-		if(this->is_horizontal_border_)
+	auto BoxMovableBorder::get_min_size() const -> sf::Vector2f {
+		auto first_min_size{first_object_->get_min_size()};
+		auto second_min_size{second_object_->get_min_size()};
+		if(this->is_horizontal_border_) {
 			return {first_min_size.x + second_min_size.x, std::max(first_min_size.y, second_min_size.y)};
+		}
 		return {std::max(first_min_size.x, second_min_size.x), std::max(first_min_size.y + second_min_size.y, this->minimum_size_.y)};
 	}
 	
-	sf::Vector2f BoxMovableBorder::get_normal_size() const {
-		sf::Vector2f first_normal_size = first_object_->get_normal_size();
-		sf::Vector2f second_normal_size = second_object_->get_normal_size();
-		if(this->is_horizontal_border_)
+	auto BoxMovableBorder::get_normal_size() const -> sf::Vector2f {
+		auto first_normal_size{first_object_->get_normal_size()};
+		auto second_normal_size{second_object_->get_normal_size()};
+		if(this->is_horizontal_border_) {
 			return {first_normal_size.x + second_normal_size.x, std::max(first_normal_size.y, second_normal_size.y)};
+		}
 		return {std::max(first_normal_size.x, second_normal_size.x), first_normal_size.y + second_normal_size.y};
 	}
 	
-	IScalable& BoxMovableBorder::get_first_object() {
+	auto BoxMovableBorder::get_first_object() -> IScalable& {
 		return *first_object_;
 	}
 	
-	const IScalable& BoxMovableBorder::get_first_object() const {
+	auto BoxMovableBorder::get_first_object() const -> IScalable const& {
 		return *first_object_;
 	}
 	
-	IScalable& BoxMovableBorder::get_second_object() {
+	auto BoxMovableBorder::get_second_object() -> IScalable& {
 		return *second_object_;
 	}
 	
-	const IScalable& BoxMovableBorder::get_second_object() const {
+	auto BoxMovableBorder::get_second_object() const -> IScalable const& {
 		return *second_object_;
 	}
 	
-	void BoxMovableBorder::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto BoxMovableBorder::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		first_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		second_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 	}
 }
 
-orl::Option<ie::BoxMovableBorder::Make> ieml::Decode<char, ie::BoxMovableBorder::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxMovableBorder::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxMovableBorder::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::BoxMovableBorder::Make{
 		map.at("first-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),

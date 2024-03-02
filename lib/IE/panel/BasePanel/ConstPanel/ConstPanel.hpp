@@ -13,18 +13,18 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& object, BoxPtr<ISizing2::Make> sizing, BoxPtr<IPositioning2::Make> positioning, bool displayed = false);
 			
-			ConstPanel* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> ConstPanel* override;
 		};
 		
 		ConstPanel(Make&& make, InitInfo init_info);
 		
-		bool is_independent() override;
+		auto is_independent() -> bool override;
 		
-		bool is_free() override;
+		auto is_free() -> bool override;
 	};
 }
 
 template<>
 struct ieml::Decode<char, ie::ConstPanel::Make> {
-	static orl::Option<ie::ConstPanel::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::ConstPanel::Make>;
 };

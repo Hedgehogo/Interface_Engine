@@ -11,16 +11,16 @@ namespace ie {
 			
 			Make(float addition = 0);
 			
-			RelativeParentSizing* make(float normal_size) override;
+			auto make(float normal_size) -> RelativeParentSizing* override;
 		};
 		
 		RelativeParentSizing(Make&& make, float normal_size);
 		
 		explicit RelativeParentSizing(float addition = 0);
 		
-		float find_size(float parent_size, float) override;
+		auto find_size(float parent_size, float) -> float override;
 		
-		float get_parent_size(float object_size) override;
+		auto get_parent_size(float object_size) -> float override;
 		
 	protected:
 		float addition_;
@@ -29,5 +29,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::RelativeParentSizing::Make> {
-	static orl::Option<ie::RelativeParentSizing::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::RelativeParentSizing::Make>;
 };

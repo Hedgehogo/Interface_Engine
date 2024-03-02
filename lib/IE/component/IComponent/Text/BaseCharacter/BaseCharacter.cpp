@@ -2,60 +2,63 @@
 #include "../BaseTextBlock/BaseTextBlock.hpp"
 
 namespace ie {
-	BaseCharacter::BaseCharacter() : selection(false), active(true), rerender(false) {
+	BaseCharacter::BaseCharacter() : selection_(false), active_(true), rerender_(false) {
 	}
 	
-	bool BaseCharacter::get_rerender() const {
-		return rerender;
+	auto BaseCharacter::get_rerender() const -> bool {
+		return rerender_;
 	}
 	
-	void BaseCharacter::set_rerender(bool rerender) {
-		this->rerender = rerender;
+	auto BaseCharacter::set_rerender(bool rerender) -> void {
+		this->rerender_ = rerender;
 	}
 	
-	void BaseCharacter::set_position(sf::Vector2f position) {
-		if(this->position != position)
-			rerender = true;
-		this->position = position;
+	auto BaseCharacter::set_position(sf::Vector2f position) -> void {
+		if(this->position_ != position) {
+			rerender_ = true;
+		}
+		this->position_ = position;
 	}
 	
-	void BaseCharacter::set_kerning(float) {
+	auto BaseCharacter::set_kerning(float) -> void {
 	}
 	
-	void BaseCharacter::resize(sf::Vector2f position, float) {
+	auto BaseCharacter::resize(sf::Vector2f position, float) -> void {
 		set_position(position);
 	}
 	
-	bool BaseCharacter::in(sf::Vector2f mouse_position) {
-		return position.x < mouse_position.x && position.x + get_advance() > mouse_position.x &&
-			   position.y < mouse_position.y && position.y + get_height() > mouse_position.y;
+	auto BaseCharacter::in(sf::Vector2f mouse_position) -> bool {
+		return
+			position_.x < mouse_position.x && position_.x + get_advance() > mouse_position.x &&
+			position_.y < mouse_position.y && position_.y + get_height() > mouse_position.y;
 	}
 	
-	sf::Vector2f BaseCharacter::get_position() const {
-		return position;
+	auto BaseCharacter::get_position() const -> sf::Vector2f {
+		return position_;
 	}
 	
-	void BaseCharacter::move(sf::Vector2f position) {
-		if(position != sf::Vector2f{0.f, 0.f})
-			rerender = true;
-		this->position += position;
+	auto BaseCharacter::move(sf::Vector2f position) -> void {
+		if(position != sf::Vector2f{}) {
+			rerender_ = true;
+		}
+		this->position_ += position;
 	}
 	
-	bool BaseCharacter::is_enter() {
+	auto BaseCharacter::is_enter() -> bool {
 		return is_special() == Special::Enter;
 	}
 	
-	void BaseCharacter::set_selection(bool selection) {
-		rerender = true;
-		this->selection = selection;
+	auto BaseCharacter::set_selection(bool selection) -> void {
+		rerender_ = true;
+		this->selection_ = selection;
 	}
 	
-	void BaseCharacter::set_active(bool active) {
-		rerender = true;
-		this->active = active;
+	auto BaseCharacter::set_active(bool active) -> void {
+		rerender_ = true;
+		this->active_ = active;
 	}
 	
-	float BaseCharacter::get_min_advance() {
+	auto BaseCharacter::get_min_advance() -> float {
 		return get_advance();
 	}
 }

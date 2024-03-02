@@ -5,7 +5,7 @@ namespace ie {
 	SwitcherTabsAction::Make::Make(MakeDyn<ISMRSize> value) : value(std::move(value)) {
 	}
 	
-	SwitcherTabsAction* SwitcherTabsAction::Make::make(BasicActionInitInfo<BoxSwitcherTabs&> init_info) {
+	auto SwitcherTabsAction::Make::make(BasicActionInitInfo<BoxSwitcherTabs&> init_info) -> SwitcherTabsAction* {
 		return new SwitcherTabsAction{std::move(*this), init_info};
 	}
 	
@@ -13,16 +13,16 @@ namespace ie {
 		value_(make.value.make(SInitInfo{init_info})), switcher_tabs_(&init_info.additional) {
 	}
 	
-	void SwitcherTabsAction::start_pressed() {
+	auto SwitcherTabsAction::start_pressed() -> void {
 	}
 	
-	void SwitcherTabsAction::stop_pressed() {
+	auto SwitcherTabsAction::stop_pressed() -> void {
 		value_.set(switcher_tabs_->get_tab(sf::Vector2f(mouse_position_)));
 	}
 	
-	void SwitcherTabsAction::while_pressed() {
+	auto SwitcherTabsAction::while_pressed() -> void {
 	}
 	
-	void SwitcherTabsAction::while_not_pressed() {
+	auto SwitcherTabsAction::while_not_pressed() -> void {
 	}
 }

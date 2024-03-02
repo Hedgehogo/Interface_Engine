@@ -14,24 +14,24 @@ namespace ie {
 			
 			Make(std::vector<sf::Texture> video, MakeDyn<ISRFloat> viewing_progress);
 			
-			VideoFromFile* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> VideoFromFile* override;
 		};
 		
 		VideoFromFile(Make&& make, InitInfo init_info);
 		
-		void set_current_frame(float viewing_progress);
+		auto set_current_frame(float viewing_progress) -> void;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		sf::Vector2f get_area_position() const override;
+		auto get_area_position() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_area_size() const override;
+		auto get_area_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
 	protected:
 		sf::Vector2i size_video_;

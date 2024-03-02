@@ -11,19 +11,19 @@ namespace ie {
 			
 			Make(bool only_on_parent = false);
 			
-			HidePanelAction* make(PanelActionInitInfo init_info) override;
+			auto make(PanelActionInitInfo init_info) -> HidePanelAction* override;
 		};
 		
 		HidePanelAction(Make&& make, PanelActionInitInfo init_info);
 		
 	protected:
-		void start_pressed() override;
+		auto start_pressed() -> void override;
 		
-		void while_pressed() override;
+		auto while_pressed() -> void override;
 		
-		void stop_pressed() override;
+		auto stop_pressed() -> void override;
 		
-		void while_not_pressed() override;
+		auto while_not_pressed() -> void override;
 		
 		bool only_on_parent;
 	};
@@ -31,5 +31,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::HidePanelAction::Make> {
-	static orl::Option<ie::HidePanelAction::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::HidePanelAction::Make>;
 };

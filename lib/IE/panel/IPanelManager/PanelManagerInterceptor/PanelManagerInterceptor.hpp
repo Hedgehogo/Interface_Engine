@@ -7,25 +7,25 @@ namespace ie {
 	public:
 		PanelManagerInterceptor(IPanelManager& panel_manager);
 		
-		void clear();
+		auto clear() -> void;
 		
-		bool is_free() override;
+		auto is_free() -> bool override;
 		
-		bool in_const_panels(sf::Vector2f point_position) override;
+		auto in_const_panels(sf::Vector2f point_position) -> bool override;
 		
-		void add_panel(BasePanel* panel) override;
+		auto add_panel(BasePanel* panel) -> void override;
 		
-		void remove_panel(BasePanel* panel) override;
+		auto remove_panel(BasePanel* panel) -> void override;
 		
-		void display_panel(BasePanel* panel) override;
+		auto display_panel(BasePanel* panel) -> void override;
 		
-		void hide_panel(BasePanel* panel) override;
+		auto hide_panel(BasePanel* panel) -> void override;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position, bool active) override;
+		auto update_interactions(sf::Vector2f mouse_position, bool active) -> bool override;
 	
 	protected:
 		IPanelManager* panel_manager_;

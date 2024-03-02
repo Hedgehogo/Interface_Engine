@@ -18,54 +18,54 @@ namespace ie {
 	
 		BaseCharacter();
 		
-		virtual bool get_rerender() const;
+		virtual auto get_rerender() const -> bool;
 		
-		virtual void set_rerender(bool rerender);
+		virtual auto set_rerender(bool rerender) -> void;
 		
-		virtual void set_active(bool active);
+		virtual auto set_active(bool active) -> void;
 		
-		virtual sf::Vector2i get_size_texture() = 0;
+		virtual auto get_size_texture() -> sf::Vector2i = 0;
 		
-		virtual bool in(sf::Vector2f mouse_position);
+		virtual auto in(sf::Vector2f mouse_position) -> bool;
 		
-		virtual void set_selection(bool selection);
+		virtual auto set_selection(bool selection) -> void;
 		
-		virtual void set_position(sf::Vector2f position);
+		virtual auto set_position(sf::Vector2f position) -> void;
 		
-		virtual void set_kerning(float kerning);
+		virtual auto set_kerning(float kerning) -> void;
 		
-		virtual void resize(sf::Vector2f position, float);
+		virtual auto resize(sf::Vector2f position, float) -> void;
 		
-		virtual void move(sf::Vector2f position);
+		virtual auto move(sf::Vector2f position) -> void;
 		
-		virtual const std::vector<BoxPtr<BaseLine>>& get_line() = 0;
+		virtual auto get_line() -> std::vector<BoxPtr<BaseLine> > const& = 0;
 		
-		virtual sf::Vector2f get_position() const;
+		virtual auto get_position() const -> sf::Vector2f;
 		
-		virtual float get_height() const = 0;
+		virtual auto get_height() const -> float = 0;
 		
-		virtual float get_advance() = 0;
+		virtual auto get_advance() -> float = 0;
 		
-		virtual float get_kerning(char32_t) = 0;
+		virtual auto get_kerning(char32_t) -> float = 0;
 		
-		virtual bool is_enter();
+		virtual auto is_enter() -> bool;
 		
-		virtual Special is_special() = 0;
+		virtual auto is_special() -> Special = 0;
 		
-		virtual void draw() = 0;
+		virtual auto draw() -> void = 0;
 		
-		virtual char32_t get_char() = 0;
+		virtual auto get_char() -> char32_t = 0;
 		
-		virtual float get_min_advance();
+		virtual auto get_min_advance() -> float;
 		
-		virtual void draw_debug(sf::RenderTarget& render_target, int indent_addition, size_t hue, size_t hue_offset) = 0;
+		virtual auto draw_debug(sf::RenderTarget& render_target, int indent_addition, size_t hue, size_t hue_offset) -> void = 0;
 		
 		virtual ~BaseCharacter() = default;
 	
 	protected:
-		sf::Vector2f position;
-		bool selection;
-		bool active;
-		bool rerender;
+		sf::Vector2f position_;
+		bool selection_;
+		bool active_;
+		bool rerender_;
 	};
 }

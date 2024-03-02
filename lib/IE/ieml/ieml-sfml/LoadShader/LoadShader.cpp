@@ -4,7 +4,7 @@ namespace ie {
 	LoadShader::LoadShader(std::string vert, std::string frag) : vert_(std::move(vert)), frag_(std::move(frag)) {
 	}
 	
-	orl::Option<LoadShader> LoadShader::decode(const ieml::Node& node) {
+	auto LoadShader::decode(const ieml::Node& node) -> orl::Option<LoadShader> {
 		auto map{node.get_map_view().except()};
 		auto frag_str_result{map.at("frag").map_ok([](auto& frag) -> auto& {
 			return frag.get_string().except();
@@ -22,7 +22,7 @@ namespace ie {
 		});
 	}
 	
-	void LoadShader::load(sf::Shader& shader) {
+	auto LoadShader::load(sf::Shader& shader) -> void {
 		if(frag_.empty()) {
 			shader.loadFromFile(vert_, sf::Shader::Vertex);
 			return;

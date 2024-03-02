@@ -25,24 +25,24 @@ namespace ie {
 				sf::Vector2f min_size = {}
 			);
 			
-			BoxSwitcherTabs* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxSwitcherTabs* override;
 		};
 		
 		BoxSwitcherTabs(Make&& make, InitInfo init_info);
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		size_t get_array_size() const override;
+		auto get_array_size() const -> size_t override;
 		
-		IScalable& get_object_at(size_t index) override;
+		auto get_object_at(size_t index) -> IScalable& override;
 		
-		const IScalable& get_object_at(size_t index) const override;
+		auto get_object_at(size_t index) const -> IScalable const& override;
 		
-		int get_tab(sf::Vector2f position);
+		auto get_tab(sf::Vector2f position) -> int;
 		
 	protected:
 		BasicInteractiveData<BoxSwitcherTabs&> interactive_;
@@ -54,5 +54,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxSwitcherTabs::Make> {
-	static orl::Option<ie::BoxSwitcherTabs::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxSwitcherTabs::Make>;
 };

@@ -1,6 +1,6 @@
 #include "Side.hpp"
 
-orl::Option<ie::Side> ieml::Decode<char, ie::Side>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Side>::decode(ieml::Node const& node) -> orl::Option<ie::Side> {
 	auto& str{node.get_raw().except().str};
 	if(str == "up") {
 		return ie::Side::Up;

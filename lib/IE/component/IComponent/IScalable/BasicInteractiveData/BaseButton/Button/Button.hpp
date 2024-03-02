@@ -12,22 +12,21 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IBaseInteraction::Make>&& interaction);
 			
-			Button* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> Button* override;
 		};
 		
 		Button(Make&& make, InitInfo init_info);
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
 	protected:
 		InteractiveData interactive_;
 	};
-	
 }
 
 template<>
 struct ieml::Decode<char, ie::Button::Make> {
-	static orl::Option<ie::Button::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Button::Make>;
 };

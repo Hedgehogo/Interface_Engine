@@ -4,48 +4,48 @@ namespace ie {
 	PanelManagerInterceptor::PanelManagerInterceptor(IPanelManager& panel_manager) : panel_manager_(&panel_manager) {
 	}
 	
-	void PanelManagerInterceptor::clear() {
-		for(const auto& panel: panels_) {
+	auto PanelManagerInterceptor::clear() -> void {
+		for(auto const& panel: panels_) {
 			panel_manager_->remove_panel(panel);
 		}
 		
 		panels_.clear();
 	}
 	
-	bool PanelManagerInterceptor::is_free() {
+	auto PanelManagerInterceptor::is_free() -> bool {
 		return panel_manager_->is_free();
 	}
 	
-	bool PanelManagerInterceptor::in_const_panels(sf::Vector2f point_position) {
+	auto PanelManagerInterceptor::in_const_panels(sf::Vector2f point_position) -> bool {
 		return panel_manager_->in_const_panels(point_position);
 	}
 	
-	void PanelManagerInterceptor::add_panel(BasePanel* panel) {
+	auto PanelManagerInterceptor::add_panel(BasePanel* panel) -> void {
 		panel_manager_->add_panel(panel);
 		panels_.push_back(panel);
 	}
 	
-	void PanelManagerInterceptor::remove_panel(BasePanel* panel) {
+	auto PanelManagerInterceptor::remove_panel(BasePanel* panel) -> void {
 		panel_manager_->remove_panel(panel);
 	}
 	
-	void PanelManagerInterceptor::display_panel(BasePanel* panel) {
+	auto PanelManagerInterceptor::display_panel(BasePanel* panel) -> void {
 		panel_manager_->display_panel(panel);
 	}
 	
-	void PanelManagerInterceptor::hide_panel(BasePanel* panel) {
+	auto PanelManagerInterceptor::hide_panel(BasePanel* panel) -> void {
 		panel_manager_->hide_panel(panel);
 	}
 	
-	void PanelManagerInterceptor::draw() {
+	auto PanelManagerInterceptor::draw() -> void {
 		panel_manager_->draw();
 	}
 	
-	void PanelManagerInterceptor::update() {
+	auto PanelManagerInterceptor::update() -> void {
 		panel_manager_->update();
 	}
 	
-	bool PanelManagerInterceptor::update_interactions(sf::Vector2f mouse_position, bool active) {
+	auto PanelManagerInterceptor::update_interactions(sf::Vector2f mouse_position, bool active) -> bool {
 		return panel_manager_->update_interactions(mouse_position, active);
 	}
-	}
+}

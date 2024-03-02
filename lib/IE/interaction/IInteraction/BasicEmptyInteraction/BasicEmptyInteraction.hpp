@@ -10,7 +10,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicEmptyInteraction : public virtual IBasicInteraction<T> {
-			ie::BasicEmptyInteraction<T>* make(BasicActionInitInfo<T> init_info) override;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicEmptyInteraction<T>* override;
 		};
 	}
 	
@@ -23,18 +23,18 @@ namespace ie {
 		
 		BasicEmptyInteraction();
 		
-		void start(sf::Vector2i) override;
+		auto start(sf::Vector2i) -> void override;
 		
-		void update(sf::Vector2i) override;
+		auto update(sf::Vector2i) -> void override;
 		
-		void finish(sf::Vector2i) override;
+		auto finish(sf::Vector2i) -> void override;
 	};
 	
 	using EmptyInteraction = BasicEmptyInteraction<>;
 	
 	template<typename T>
 	struct DecodePointer<BasicEmptyInteraction<T> > {
-		static bool decode_pointer(const YAML::Node&, BasicEmptyInteraction<T>*& empty_interaction);
+		static auto decode_pointer(const YAML::Node&, BasicEmptyInteraction<T>*& empty_interaction) -> bool;
 	};
 }
 

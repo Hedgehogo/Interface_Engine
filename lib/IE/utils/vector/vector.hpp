@@ -4,35 +4,15 @@
 #include <cstddef>
 
 namespace ie {
-	std::vector<float>& add_bounds(std::vector<float>& vector);
+	auto add_bounds(std::vector<float>& vector) -> std::vector<float>&;
 	
-	std::vector<float> gen_bounds(size_t size);
+	auto gen_bounds(size_t size) -> std::vector<float>;
 	
 	template<typename T>
-	size_t y_size(std::vector<std::vector<T> >& vector) {
-		if(vector.empty()) {
-			return 0;
-		}
-		return vector[0].size();
-	}
-	
-	namespace detail {
-		template<typename T>
-		void add_items(std::vector<T>&) {
-		}
-		
-		template<typename T, typename A, typename... As>
-		void add_items(std::vector<T>& vector, A&& arg, As&&... args) {
-			vector.emplace_back(std::move(arg));
-			add_items<T, As...>(vector, std::move(args)...);
-		}
-	}
+	auto y_size(std::vector<std::vector<T> >& vector) -> size_t;
 	
 	template<typename T, typename... As>
-	std::vector<T> make_vector(T&& arg, As&&... args) {
-		std::vector<T> result;
-		result.reserve(sizeof...(As) + 1);
-		detail::add_items<T, As...>(result, std::move(arg), std::move(args)...);
-		return result;
-	}
+	auto make_vector(T&& arg, As&&... args) -> std::vector<T>;
 }
+
+#include "vector.inl"

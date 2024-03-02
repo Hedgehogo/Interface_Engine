@@ -12,18 +12,18 @@ namespace ie {
 			
 			Make(Key key);
 			
-			ClickDisplayPanelInteraction* make(PanelActionInitInfo init_info) override;
+			auto make(PanelActionInitInfo init_info) -> ClickDisplayPanelInteraction* override;
 		};
 		
 		ClickDisplayPanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		void start(sf::Vector2i) override;
+		auto start(sf::Vector2i) -> void override;
 		
-		void finish(sf::Vector2i mouse_position) override;
+		auto finish(sf::Vector2i mouse_position) -> void override;
 	};
 }
 
 template<>
 struct ieml::Decode<char, ie::ClickDisplayPanelInteraction::Make> {
-	static orl::Option<ie::ClickDisplayPanelInteraction::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::ClickDisplayPanelInteraction::Make>;
 };

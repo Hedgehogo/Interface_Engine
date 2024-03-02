@@ -9,7 +9,7 @@ namespace ie {
 		
 		OnlyDrawable();
 		
-		sf::RenderTarget& get_render_target();
+		auto get_render_target() -> sf::RenderTarget&;
 		
 	protected:
 		sf::RenderTarget* render_target_;

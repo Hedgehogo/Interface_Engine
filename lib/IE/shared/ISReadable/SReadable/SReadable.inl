@@ -6,7 +6,7 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SReadable<T_, true>::make(SInitInfo init_info) {
+	auto SReadable<T_, true>::make(SInitInfo init_info) -> rttb::Dyn {
 		return rttb::Dyn{ie::SReadable<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 	
@@ -15,7 +15,7 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SReadable<T_, false>::make(SInitInfo init_info) {
+	auto SReadable<T_, false>::make(SInitInfo init_info) -> rttb::Dyn {
 		return rttb::Dyn{ie::SReadable<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 	
@@ -24,7 +24,7 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SMutable<T_, true>::make(SInitInfo init_info) {
+	auto SMutable<T_, true>::make(SInitInfo init_info) -> rttb::Dyn {
 		return rttb::Dyn{ie::SMutable<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 	
@@ -33,14 +33,13 @@ namespace ie::make_system {
 	}
 	
 	template<typename T_>
-	rttb::Dyn SMutable<T_, false>::make(SInitInfo init_info) {
+	auto SMutable<T_, false>::make(SInitInfo init_info) -> rttb::Dyn {
 		return rttb::Dyn{ie::SMutable<T_>{std::move(*this), SInitInfo{init_info}}};
 	}
 }
 
 template<typename T_>
-orl::Option<ie::make_system::SReadable<T_> >
-ieml::Decode<char, ie::make_system::SReadable<T_> >::decode(const ieml::Node& node) {
+auto ieml::Decode<char, ie::make_system::SReadable<T_> >::decode(const ieml::Node& node) -> orl::Option<ie::make_system::SReadable<T_> > {
 	if constexpr(std::is_default_constructible_v<T_>) {
 		auto& clear_node{node.get_clear()};
 		if(clear_node.is_null()) {
@@ -53,8 +52,7 @@ ieml::Decode<char, ie::make_system::SReadable<T_> >::decode(const ieml::Node& no
 }
 
 template<typename T_>
-orl::Option<ie::make_system::SMutable<T_> >
-ieml::Decode<char, ie::make_system::SMutable<T_> >::decode(const ieml::Node& node) {
+auto ieml::Decode<char, ie::make_system::SMutable<T_> >::decode(const ieml::Node& node) -> orl::Option<ie::make_system::SMutable<T_> > {
 	return ieml::Decode<char, ie::make_system::SReadable<T_> >::decode(node).map([](auto&& value) {
 		return ie::make_system::SMutable<T_>{std::move(value.data)};
 	});
@@ -70,7 +68,7 @@ namespace ie {
 	}
 	
 	template<typename T_>
-	T_ SReadable<T_>::get() const {
+	auto SReadable<T_>::get() const -> T_ {
 		return data_;
 	}
 	
@@ -80,7 +78,7 @@ namespace ie {
 	}
 	
 	template<typename T_>
-	bool SReadable<T_>::delete_read_fn(ReadFn& read_fn) {
+	auto SReadable<T_>::delete_read_fn(ReadFn& read_fn) -> bool {
 		auto result{std::find_if(read_fns_.cbegin(), read_fns_.cend(), [&](ReadFn const& item) {
 			return &item == &read_fn;
 		})};
@@ -100,7 +98,7 @@ namespace ie {
 	}
 	
 	template<typename T_>
-	void SMutable<T_>::set(T_ value) {
+	auto SMutable<T_>::set(T_ value) -> void {
 		this->data_ = std::move(value);
 		for(auto& read_fn : this->read_fns_) {
 			read_fn(this->data_);

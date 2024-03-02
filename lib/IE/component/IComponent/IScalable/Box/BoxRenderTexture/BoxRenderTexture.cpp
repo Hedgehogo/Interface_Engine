@@ -5,7 +5,7 @@ namespace ie {
 		object(std::move(object)), optimize(optimize), min_size(min_size) {
 	}
 	
-	BoxRenderTexture* BoxRenderTexture::Make::make(InitInfo init_info) {
+	auto BoxRenderTexture::Make::make(InitInfo init_info) -> BoxRenderTexture* {
 		return new BoxRenderTexture{std::move(*this), init_info};
 	}
 	
@@ -24,7 +24,7 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	void BoxRenderTexture::draw() {
+	auto BoxRenderTexture::draw() -> void {
 		if(!optimize_ || active_ || interaction_manager_->is_blocked()) {
 			render_texture_.clear(sf::Color(0, 0, 0, 0));
 			draw_manager_.draw();
@@ -34,11 +34,11 @@ namespace ie {
 		render_target_->draw(sprite_);
 	}
 	
-	void BoxRenderTexture::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxRenderTexture::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		IComponentObject::resize(size, position);
-		sf::Vector2f start{std::floor(position.x), std::ceil(position.y)};
-		sf::Vector2f end{std::floor(position.x + size.x), std::ceil(position.y + size.y)};
-		sf::Vector2i texture_size{end - start};
+		auto start{sf::Vector2f{std::floor(position.x), std::ceil(position.y)}};
+		auto end{sf::Vector2f{std::floor(position.x + size.x), std::ceil(position.y + size.y)}};
+		auto texture_size{sf::Vector2i{end - start}};
 		
 		view_.reset({start, end - start});
 		
@@ -52,33 +52,33 @@ namespace ie {
 		active_ = true;
 	}
 	
-	bool BoxRenderTexture::update_interactions(sf::Vector2f mouse_position) {
+	auto BoxRenderTexture::update_interactions(sf::Vector2f mouse_position) -> bool {
 		active_ = true;
 		return object_->update_interactions(mouse_position);
 	}
 	
-	sf::Vector2f BoxRenderTexture::get_min_size() const {
+	auto BoxRenderTexture::get_min_size() const -> sf::Vector2f {
 		return max(object_->get_min_size(), minimum_size_, sf::Vector2f{1, 1});
 	}
 	
-	sf::Vector2f BoxRenderTexture::get_normal_size() const {
+	auto BoxRenderTexture::get_normal_size() const -> sf::Vector2f {
 		return max(object_->get_normal_size(), minimum_size_, sf::Vector2f{1, 1});
 	}
 	
-	IScalable& BoxRenderTexture::get_object() {
+	auto BoxRenderTexture::get_object() -> IScalable& {
 		return *object_;
 	}
 	
-	const IScalable& BoxRenderTexture::get_object() const {
+	auto BoxRenderTexture::get_object() const -> IScalable const& {
 		return *object_;
 	}
 	
-	void BoxRenderTexture::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto BoxRenderTexture::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		object_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
 }
 
-orl::Option<ie::BoxRenderTexture::Make> ieml::Decode<char, ie::BoxRenderTexture::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxRenderTexture::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxRenderTexture::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::BoxRenderTexture::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),

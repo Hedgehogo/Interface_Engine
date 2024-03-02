@@ -5,7 +5,7 @@
 namespace ie {
 	template<typename T>
 	struct LoadFromFile {
-		static void load(T& object, std::string name);
+		static auto load(T& object, std::string name) -> void;
 	};
 	
 	template<typename T>
@@ -13,11 +13,11 @@ namespace ie {
 	public:
 		FileBuffer() = default;
 		
-		static T& get(const std::string& name);
+		static auto get(const std::string& name) -> T&;
 		
-		static void set_object(const std::string& name, const std::string& file_path);
+		static auto set_object(std::string const& name, std::string const& file_path) -> void;
 		
-		static void add_alias(const std::string& name, const std::string& alias);
+		static auto add_alias(std::string const& name, std::string const& alias) -> void;
 	
 	protected:
 		static absl::flat_hash_map<std::string, T> objects_;
@@ -28,7 +28,7 @@ namespace ie {
 	/*old_yaml
 	template<>
 	struct LoadFromFile<std::vector<sf::Texture> > {
-		static void load(std::vector<sf::Texture>& object, std::string name);
+		static auto load(std::vector<sf::Texture>& object, std::string name) -> void;
 	};
 	*/
 #endif
@@ -49,19 +49,19 @@ namespace tnl {
 namespace ieml {
 	template<>
 	struct Decode<char, sf::Texture&> {
-		static orl::Option<sf::Texture&> decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<sf::Texture&>;
 	};
 	
 	template<>
 	struct Decode<char, sf::Font&> {
-		static orl::Option<sf::Font&> decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<sf::Font&>;
 	};
 	
 #ifdef IE_ImageMagick_FOUND
 	/*old_yaml
 	template<>
 	struct Decode<char, std::vector<sf::Texture>&> {
-		static orl::Option<std::vector<sf::Texture>&> decode(ieml::Node const& node);
+		static auto decode(ieml::Node const& node) -> orl::Option<std::vector<sf::Texture>&>;
 	};
 	*/
 #endif

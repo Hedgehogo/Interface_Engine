@@ -7,7 +7,7 @@ namespace ie {
 		only_on_parent(only_on_parent) {
 	}
 	
-	PointingHidePanelInteraction* PointingHidePanelInteraction::Make::make(PanelActionInitInfo init_info) {
+	auto PointingHidePanelInteraction::Make::make(PanelActionInitInfo init_info) -> PointingHidePanelInteraction* {
 		return new PointingHidePanelInteraction{std::move(*this), init_info};
 	}
 	
@@ -15,20 +15,24 @@ namespace ie {
 		BasePanelInteraction(init_info), only_on_parent_(make.only_on_parent) {
 	}
 	
-	void PointingHidePanelInteraction::start(sf::Vector2i) {
+	auto PointingHidePanelInteraction::start(sf::Vector2i) -> void {
 	}
 	
-	void PointingHidePanelInteraction::update(sf::Vector2i mouse_position) {
-		sf::Vector2f point_position{static_cast<sf::Vector2f>(mouse_position)};
-		if(!panel_->get_parent_processed() && (only_on_parent_ || (!panel_->in_panel(point_position) && panel_->is_free() && !panel_->in_const_panels(point_position)))) {
-			panel_manager_->hide_panel(panel_);
+	auto PointingHidePanelInteraction::update(sf::Vector2i mouse_position) -> void {
+		auto point_position{sf::Vector2f{mouse_position}};
+		if(!panel_->get_parent_processed()) {
+			if(only_on_parent_ || (!panel_->in_panel(point_position) && panel_->is_free() && !panel_->in_const_panels(point_position))) {
+				panel_manager_->hide_panel(panel_);
+			}
 		}
 	}
 	
-	void PointingHidePanelInteraction::finish(sf::Vector2i) {
+	auto PointingHidePanelInteraction::finish(sf::Vector2i) -> void {
 	}
 }
 
-orl::Option<ie::PointingHidePanelInteraction::Make> ieml::Decode<char, ie::PointingHidePanelInteraction::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::PointingHidePanelInteraction::Make>::decode(
+	ieml::Node const& node
+) -> orl::Option<ie::PointingHidePanelInteraction::Make> {
 	return {{node.get_as<bool>("only-on-parent").except().ok_or(false)}};
 }

@@ -53,7 +53,7 @@ namespace ie {
 		}
 		
 		template<typename StringStorage_>
-		ie::BasicCaption<StringStorage_>* BasicCaption<StringStorage_>::make(InitInfo init_info) {
+		auto BasicCaption<StringStorage_>::make(InitInfo init_info) -> ie::BasicCaption<StringStorage_>* {
 			return new ie::BasicCaption<StringStorage_>{std::move(*this), init_info};
 		}
 	}
@@ -65,22 +65,22 @@ namespace ie {
 	int BasicCaption<StringStorage_>::default_size_ = 10;
 	
 	template<typename StringStorage_>
-	void BasicCaption<StringStorage_>::set_default_color(sf::Color color) {
+	auto BasicCaption<StringStorage_>::set_default_color(sf::Color color) -> void {
 		default_color_ = color;
 	}
 	
 	template<typename StringStorage_>
-	void BasicCaption<StringStorage_>::set_default_size(int size) {
+	auto BasicCaption<StringStorage_>::set_default_size(int size) -> void {
 		default_size_ = size;
 	}
 	
 	template<typename StringStorage_>
-	sf::Color BasicCaption<StringStorage_>::get_default_color() {
+	auto BasicCaption<StringStorage_>::get_default_color() -> sf::Color {
 		return default_color_;
 	}
 	
 	template<typename StringStorage_>
-	int BasicCaption<StringStorage_>::get_default_size() {
+	auto BasicCaption<StringStorage_>::get_default_size() -> int {
 		return default_size_;
 	}
 	
@@ -100,36 +100,33 @@ namespace ie {
 	}
 	
 	template<typename StringStorage_>
-	void BasicCaption<StringStorage_>::set_string(sf::String str) {
+	auto BasicCaption<StringStorage_>::set_string(sf::String str) -> void {
 		CaptionString<StringStorage_>::set(str_, str);
 		text_resize(get_size(), get_position());
 	}
 	
 	template<typename StringStorage_>
-	void BasicCaption<StringStorage_>::draw() {
+	auto BasicCaption<StringStorage_>::draw() -> void {
 		draw_manager_.draw();
 		render_target_->draw(text_);
 	}
 	
 	template<typename StringStorage_>
-	sf::Vector2f BasicCaption<StringStorage_>::get_text_size(sf::Text const& text) {
-		sf::FloatRect local_bounds = text.getLocalBounds();
+	auto BasicCaption<StringStorage_>::get_text_size(sf::Text const& text) -> sf::Vector2f {
+		auto local_bounds{text.getLocalBounds()};
 		
-		float count_lines{(static_cast<float>(std::count(text.getString().begin(), text.getString().end(), '\n'))) + 1};
+		auto count_lines{(static_cast<float>(std::count(text.getString().begin(), text.getString().end(), '\n'))) + 1};
 		//`getLineSpacing()` returns the actual size of the string
-		float character_size{static_cast<float>(text.getFont()->getLineSpacing(text.getCharacterSize()))};
+		auto character_size{static_cast<float>(text.getFont()->getLineSpacing(text.getCharacterSize()))};
 		
-		return sf::Vector2f{
-			local_bounds.left + local_bounds.width,
-			count_lines * text.getLineSpacing() * character_size
-		};
+		return {local_bounds.left + local_bounds.width, count_lines * text.getLineSpacing() * character_size};
 	}
 	
 	template<typename StringStorage_>
-	void BasicCaption<StringStorage_>::text_resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BasicCaption<StringStorage_>::text_resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		sf::Vector2f text_size;
 		if(cut_back_) {
-			sf::String string{CaptionString<StringStorage_>::get(str_)};
+			auto string{CaptionString<StringStorage_>::get(str_)};
 			text_.setString(string);
 			text_size = get_text_size(text_);
 			if(text_size.x > size.x || text_size.y > size.y) {
@@ -148,23 +145,23 @@ namespace ie {
 	}
 	
 	template<typename StringStorage_>
-	void BasicCaption<StringStorage_>::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BasicCaption<StringStorage_>::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		background_->resize(size, position);
 		text_resize(size, position);
 	}
 	
 	template<typename StringStorage_>
-	sf::Vector2f BasicCaption<StringStorage_>::get_area_position() const {
+	auto BasicCaption<StringStorage_>::get_area_position() const -> sf::Vector2f {
 		return background_->get_area_position();
 	}
 	
 	template<typename StringStorage_>
-	sf::Vector2f BasicCaption<StringStorage_>::get_area_size() const {
+	auto BasicCaption<StringStorage_>::get_area_size() const -> sf::Vector2f {
 		return background_->get_area_size();
 	}
 	
 	template<typename StringStorage_>
-	sf::Vector2f BasicCaption<StringStorage_>::get_min_size() const {
+	auto BasicCaption<StringStorage_>::get_min_size() const -> sf::Vector2f {
 		return max(
 			max(
 				minimum_size_,
@@ -181,19 +178,25 @@ namespace ie {
 	}
 	
 	template<typename StringStorage_>
-	sf::Vector2f BasicCaption<StringStorage_>::get_normal_size() const {
-		sf::FloatRect rect = text_.getGlobalBounds();
+	auto BasicCaption<StringStorage_>::get_normal_size() const -> sf::Vector2f {
+		auto rect{text_.getGlobalBounds()};
 		return max({rect.width, rect.height}, background_->get_normal_size());
 	}
 	
 	template<typename StringStorage_>
-	void BasicCaption<StringStorage_>::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto BasicCaption<StringStorage_>::draw_debug(
+		sf::RenderTarget& render_target,
+		int indent,
+		int indent_addition,
+		size_t hue,
+		size_t hue_offset
+	) -> void {
 		background_->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		auto draw_rectangle = [&](sf::Vector2f size, sf::Vector2f position) {
 			if(size.x > 0 && size.y > 0) {
-				sf::Color color{hsv_to_rgb(static_cast<float>(hue + hue_offset * 2 % 360))};
+				auto color{hsv_to_rgb(static_cast<float>(hue + hue_offset * 2 % 360))};
 				
-				sf::RectangleShape rectangle{size};
+				auto rectangle{sf::RectangleShape{size}};
 				rectangle.setPosition(position);
 				rectangle.setFillColor(sf::Color::Transparent);
 				rectangle.setOutlineThickness(1);
@@ -201,22 +204,23 @@ namespace ie {
 				
 				render_target.draw(rectangle);
 				
-				sf::CircleShape circle{2, 4};
+				auto circle{sf::CircleShape{2, 4}};
 				circle.setPosition(position + size * 0.5f - sf::Vector2f{2.0f, 2.0f});
 				circle.setFillColor(color);
 				
 				render_target.draw(circle);
 			}
 		};
-		sf::FloatRect bounds{text_.getGlobalBounds()};
+		auto bounds{text_.getGlobalBounds()};
 		draw_rectangle({bounds.width, bounds.height}, {bounds.left, bounds.top});
 		draw_rectangle(get_text_size(text_), get_position());
 	}
 }
 
 template<typename StringStorage_>
-orl::Option<ie::make_system::BasicCaption<StringStorage_> >
-ieml::Decode<char, ie::make_system::BasicCaption<StringStorage_> >::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::make_system::BasicCaption<StringStorage_> >::decode(
+	ieml::Node const& node
+) -> orl::Option<ie::make_system::BasicCaption<StringStorage_> > {
 	auto map{node.get_map_view().except()};
 	return ie::make_system::BasicCaption<StringStorage_>{
 		map.at("text").except().as<typename ie::CaptionString<StringStorage_>::Make>().except(),

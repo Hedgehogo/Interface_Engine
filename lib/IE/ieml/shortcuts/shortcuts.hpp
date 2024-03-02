@@ -14,26 +14,24 @@ namespace ie {
 	using NamedBuildFn = std::function<orl::Option<Type_*>(Resource_ resource)>;
 	
 	template<typename Type>
-	void add_names();
+	auto add_names() -> void;
 	
 	template<typename Type, typename Name, typename... Names>
-	std::enable_if_t<meta::is_names<Name, Names...> >
-	add_names(Name name, Names... names);
+	auto add_names(Name name, Names... names) -> std::enable_if_t<meta::is_names<Name, Names...> >;
 	
 	template<typename Base, typename Derived, typename... Names>
-	std::enable_if_t<std::is_base_of_v<Base, Derived> && meta::is_names<Names...> >
-	add_type(Names... names);
+	auto add_type(Names... names) -> std::enable_if_t<std::is_base_of_v<Base, Derived> && meta::is_names<Names...> >;
 	
 	template<typename Base, typename Derived, typename... Names>
-	std::enable_if_t<std::is_base_of_v<Base, Derived> && meta::is_names<Names...> >
-	add_type_named(Names... names);
+	auto add_type_named(Names... names) -> std::enable_if_t<std::is_base_of_v<Base, Derived> && meta::is_names<Names...> >;
 	
 	template<typename Type>
-	void add_fn(rttb::BuildFn<ieml::Node const&, Type> build_fn);
+	auto add_fn(rttb::BuildFn<ieml::Node const&, Type> build_fn) -> void;
 	
 	template<typename Type, typename FirstName, typename... Names>
-	std::enable_if_t<meta::is_names<FirstName, Names...> >
-	add_fn(NamedBuildFn<ieml::Node const&, Type> build_fn, FirstName first_name, Names... names);
+	auto add_fn(
+		NamedBuildFn<ieml::Node const&, Type> build_fn, FirstName first_name, Names... names
+	) -> std::enable_if_t<meta::is_names<FirstName, Names...> >;
 	
 	template<typename Type_>
 	struct Determine {
@@ -53,42 +51,47 @@ namespace ie {
 	}
 	
 	template<typename Type>
-	void add_determine(rttb::DetermineFn<ieml::Node const&> determine_fn);
+	auto add_determine(rttb::DetermineFn<ieml::Node const&> determine_fn) -> void;
 	
 	template<typename Type>
-	void add_bool_determine(std::function<bool(ieml::Node const&)> determine_fn);
+	auto add_bool_determine(std::function<bool(ieml::Node const&)> determine_fn) -> void;
 	
 	template<typename Type>
-	std::enable_if_t<detail::has_determine_v<Type> > add_bool_determine();
+	auto add_bool_determine() -> std::enable_if_t<detail::has_determine_v<Type> >;
 	
 	template<typename Base, typename Derived, typename... Names>
-	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && meta::is_names<Names...> >
-	add_type_make(Names... names);
+	auto add_type_make(Names... names) -> std::enable_if_t<
+		std::is_base_of_v<typename Base::Make, typename Derived::Make> &&
+		meta::is_names<Names...>
+	>;
 	
 	template<typename Base, typename Derived, typename... Names>
-	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && std::is_base_of_v<Base, Derived> && meta::is_names<Names...> >
-	add_type_with_make(Names... names);
+	auto add_type_with_make(Names... names) -> std::enable_if_t<
+		std::is_base_of_v<typename Base::Make, typename Derived::Make> &&
+		std::is_base_of_v<Base, Derived> && meta::is_names<Names...>
+	>;
 	
 	template<typename Base, typename Derived, typename... Names>
-	std::enable_if_t<std::is_base_of_v<typename Base::Make, typename Derived::Make> && meta::is_names<Names...> >
-	add_type_make_named(Names... names);
+	auto add_type_make_named(Names... names) -> std::enable_if_t<
+		std::is_base_of_v<typename Base::Make, typename Derived::Make> &&
+		meta::is_names<Names...>
+	>;
 	
 	template<typename Type, typename FirstName, typename... Names>
-	std::enable_if_t<meta::is_names<FirstName, Names...> >
-	add_fn_make(
-		NamedBuildFn<ieml::Node const&,typename Type::Make> build_fn,
+	auto add_fn_make(
+		NamedBuildFn<ieml::Node const&, typename Type::Make> build_fn,
 		FirstName first_name,
 		Names... names
-	);
+	) -> std::enable_if_t<meta::is_names<FirstName, Names...> >;
 	
 	template<typename Type>
-	void add_determine_make(rttb::DetermineFn<ieml::Node const&> determine_fn);
+	auto add_determine_make(rttb::DetermineFn<ieml::Node const&> determine_fn) -> void;
 	
 	template<typename Type>
-	void add_bool_determine_make(std::function<bool(ieml::Node const&)> determine_fn);
+	auto add_bool_determine_make(std::function<bool(ieml::Node const&)> determine_fn) -> void;
 	
 	template<typename Type>
-	std::enable_if_t<detail::has_determine_v<typename Type::Make> > add_bool_determine_make();
+	auto add_bool_determine_make() -> std::enable_if_t<detail::has_determine_v<typename Type::Make> >;
 }
 
 #include "shortcuts.inl"

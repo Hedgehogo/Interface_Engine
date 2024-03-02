@@ -5,7 +5,7 @@ namespace ie {
 		target_coefficient(target_coefficient), parent_coefficient(parent_coefficient), addition(addition) {
 	}
 	
-	SmartSizing* SmartSizing::Make::make(float normal_size) {
+	auto SmartSizing::Make::make(float normal_size) -> SmartSizing* {
 		return new SmartSizing{std::move(*this), normal_size};
 	}
 	
@@ -17,16 +17,16 @@ namespace ie {
 		target_coefficient_(target_coefficient), parent_coefficient_(parent_coefficient), addition_(addition) {
 	}
 	
-	float SmartSizing::find_size(float parent_size, float target_size) {
+	auto SmartSizing::find_size(float parent_size, float target_size) -> float {
 		return parent_size * parent_coefficient_ + target_size * target_coefficient_ + addition_;
 	}
 	
-	float SmartSizing::get_parent_size(float object_size) {
+	auto SmartSizing::get_parent_size(float object_size) -> float {
 		return (object_size - addition_) / parent_coefficient_;
 	}
 }
 
-orl::Option<ie::SmartSizing::Make> ieml::Decode<char, ie::SmartSizing::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::SmartSizing::Make>::decode(ieml::Node const& node) -> orl::Option<ie::SmartSizing::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::SmartSizing::Make{
 		map.get_as<float>("target-coefficient").except().ok_or(1.),

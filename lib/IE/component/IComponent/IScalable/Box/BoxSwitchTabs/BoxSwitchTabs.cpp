@@ -6,7 +6,7 @@ namespace ie {
 		objects(std::move(objects)), value(std::move(value)), min_size(min_size) {
 	}
 	
-	BoxSwitchTabs* BoxSwitchTabs::Make::make(InitInfo init_info) {
+	auto BoxSwitchTabs::Make::make(InitInfo init_info) -> BoxSwitchTabs* {
 		return new BoxSwitchTabs{std::move(*this), init_info};
 	}
 	
@@ -19,51 +19,51 @@ namespace ie {
 		init_info.draw_manager.add(*this);
 	}
 	
-	ISMRSize& BoxSwitchTabs::get_value() {
+	auto BoxSwitchTabs::get_value() -> ISMRSize& {
 		return value_;
 	}
 	
-	void BoxSwitchTabs::set_index(size_t index) {
+	auto BoxSwitchTabs::set_index(size_t index) -> void {
 		value_.set(index);
 	}
 	
-	size_t BoxSwitchTabs::get_index() {
+	auto BoxSwitchTabs::get_index() -> size_t {
 		return value_.get();
 	}
 	
-	void BoxSwitchTabs::draw() {
+	auto BoxSwitchTabs::draw() -> void {
 		draw_managers_[value_.get()].draw();
 	}
 	
-	void BoxSwitchTabs::resize(sf::Vector2f size, sf::Vector2f position) {
+	auto BoxSwitchTabs::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
 		for(auto& object: objects_) {
 			object->resize(size, position);
 		}
 	}
 	
-	bool BoxSwitchTabs::update_interactions(sf::Vector2f mouse_position) {
+	auto BoxSwitchTabs::update_interactions(sf::Vector2f mouse_position) -> bool {
 		return objects_[value_.get()]->update_interactions(mouse_position);
 	}
 	
-	size_t BoxSwitchTabs::get_array_size() const {
+	auto BoxSwitchTabs::get_array_size() const -> size_t {
 		return objects_.size();
 	}
 	
-	IScalable& BoxSwitchTabs::get_object_at(size_t index) {
+	auto BoxSwitchTabs::get_object_at(size_t index) -> IScalable& {
 		return *objects_.at(index);
 	}
 	
-	const IScalable& BoxSwitchTabs::get_object_at(size_t index) const {
+	auto BoxSwitchTabs::get_object_at(size_t index) const -> const IScalable& {
 		return *objects_.at(index);
 	}
 	
-	void BoxSwitchTabs::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) {
+	auto BoxSwitchTabs::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
 		objects_[value_.get()]->draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 	}
 }
 
-orl::Option<ie::BoxSwitchTabs::Make> ieml::Decode<char, ie::BoxSwitchTabs::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::BoxSwitchTabs::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxSwitchTabs::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::BoxSwitchTabs::Make{
 		map.at("objects").except().as<std::vector<ie::BoxPtr<ie::IScalable::Make> > >().except(),

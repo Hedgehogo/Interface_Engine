@@ -15,24 +15,24 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size = {});
 			
-			BoxSettable* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxSettable* override;
 		};
 		
 		BoxSettable(Make&& make, InitInfo init_info);
 		
 		BoxSettable(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size, InitInfo init_info);
 		
-		void set_object(BoxPtr<IScalable::Make>&& new_object);
+		auto set_object(BoxPtr<IScalable::Make>&& new_object) -> void;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		IScalable& get_object() override;
+		auto get_object() -> IScalable& override;
 		
-		const IScalable& get_object() const override;
+		auto get_object() const -> IScalable const& override;
 		
 	protected:
 		DrawManager draw_manager_;

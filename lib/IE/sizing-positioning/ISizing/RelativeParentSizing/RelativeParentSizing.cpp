@@ -4,7 +4,7 @@ namespace ie {
 	RelativeParentSizing::Make::Make(float addition) : addition(addition) {
 	}
 	
-	RelativeParentSizing* RelativeParentSizing::Make::make(float normal_size) {
+	auto RelativeParentSizing::Make::make(float normal_size) -> RelativeParentSizing* {
 		return new RelativeParentSizing{std::move(*this), normal_size};
 	}
 	
@@ -15,15 +15,15 @@ namespace ie {
 	RelativeParentSizing::RelativeParentSizing(float addition) : addition_(addition) {
 	}
 	
-	float RelativeParentSizing::find_size(float parent_size, float) {
+	auto RelativeParentSizing::find_size(float parent_size, float) -> float {
 		return parent_size + addition_;
 	}
 	
-	float RelativeParentSizing::get_parent_size(float object_size) {
+	auto RelativeParentSizing::get_parent_size(float object_size) -> float {
 		return object_size - addition_;
 	}
 }
 
-orl::Option<ie::RelativeParentSizing::Make> ieml::Decode<char, ie::RelativeParentSizing::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::RelativeParentSizing::Make>::decode(ieml::Node const& node) -> orl::Option<ie::RelativeParentSizing::Make> {
 	return ie::RelativeParentSizing::Make{node.at("addition").except().as<float>().except()};
 }

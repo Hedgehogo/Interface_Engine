@@ -21,41 +21,41 @@ namespace ie {
 	class IComponent {
 	public:
 		struct Make {
-			virtual IComponent* make(InitInfo init_info) = 0;
+			virtual auto make(InitInfo init_info) -> IComponent* = 0;
 			
 			virtual ~Make() = default;
 		};
 		
 		virtual ~IComponent() = default;
 		
-		virtual void set_position(sf::Vector2f position);
+		virtual auto set_position(sf::Vector2f position) -> void;
 		
-		virtual void move(sf::Vector2f position);
+		virtual auto move(sf::Vector2f position) -> void;
 		
-		virtual void set_size(sf::Vector2f size);
+		virtual auto set_size(sf::Vector2f size) -> void;
 		
-		virtual sf::Vector2f get_area_position() const = 0;
+		virtual auto get_area_position() const -> sf::Vector2f = 0;
 		
-		virtual sf::Vector2f get_position() const;
+		virtual auto get_position() const -> sf::Vector2f;
 		
-		virtual sf::Vector2f get_area_size() const = 0;
+		virtual auto get_area_size() const -> sf::Vector2f = 0;
 		
-		virtual sf::Vector2f get_size() const;
+		virtual auto get_size() const -> sf::Vector2f;
 		
-		virtual sf::Vector2f get_min_size() const = 0;
+		virtual auto get_min_size() const -> sf::Vector2f = 0;
 		
-		virtual sf::Vector2f get_normal_size() const = 0;
+		virtual auto get_normal_size() const -> sf::Vector2f = 0;
 		
-		virtual bool in_area(sf::Vector2f point_position) const;
+		virtual auto in_area(sf::Vector2f point_position) const -> bool;
 		
-		virtual bool in(sf::Vector2f point_position) const;
+		virtual auto in(sf::Vector2f point_position) const -> bool;
 		
-		virtual void resize(sf::Vector2f size, sf::Vector2f position) = 0;
+		virtual auto resize(sf::Vector2f size, sf::Vector2f position) -> void = 0;
 		
-		virtual bool update_interactions(sf::Vector2f mouse_position) = 0;
+		virtual auto update_interactions(sf::Vector2f mouse_position) -> bool = 0;
 		
-		static void draw_debug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& render_target, size_t hue);
+		static auto draw_debug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& render_target, size_t hue) -> void;
 		
-		virtual void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset);
+		virtual auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void;
 	};
 }

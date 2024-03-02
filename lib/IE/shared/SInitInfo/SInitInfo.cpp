@@ -7,11 +7,11 @@ namespace ie {
 	SInitInfo::SInitInfo(InitInfo init_info) : SInitInfo(init_info.dyn_buffer, init_info.update_manager){
 	}
 	
-	SInitInfo SInitInfo::copy(DynBuffer& dyn_buffer_) {
+	auto SInitInfo::copy(DynBuffer& dyn_buffer_) -> SInitInfo {
 		return SInitInfo(dyn_buffer_, update_manager);
 	}
 	
-	SInitInfo SInitInfo::copy(UpdateManager& update_manager_) {
+	auto SInitInfo::copy(UpdateManager& update_manager_) -> SInitInfo {
 		return SInitInfo(dyn_buffer, update_manager_);
 	}
 }

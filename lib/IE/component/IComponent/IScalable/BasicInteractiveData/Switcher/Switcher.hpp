@@ -25,30 +25,30 @@ namespace ie {
 				Key key = Key::MouseLeft
 			);
 			
-			Switcher* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> Switcher* override;
 		};
 		
 		Switcher(Make&& make, InitInfo init_info);
 		
-		void set_position(sf::Vector2f position) override;
+		auto set_position(sf::Vector2f position) -> void override;
 		
-		void move(sf::Vector2f position) override;
+		auto move(sf::Vector2f position) -> void override;
 		
-		void set_size(sf::Vector2f size) override;
+		auto set_size(sf::Vector2f size) -> void override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		void update() override;
+		auto update() -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
 		Switcher(
@@ -59,9 +59,9 @@ namespace ie {
 			InitInfo init_info
 		);
 		
-		LayoutData& layout_get_data() override;
+		auto layout_get_data() -> LayoutData& override;
 		
-		const LayoutData& layout_get_data() const override;
+		auto layout_get_data() const -> LayoutData const& override;
 		
 		LayoutData layout_;
 		InteractiveData interactive_;
@@ -75,5 +75,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::Switcher::Make> {
-	static orl::Option<ie::Switcher::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Switcher::Make>;
 };

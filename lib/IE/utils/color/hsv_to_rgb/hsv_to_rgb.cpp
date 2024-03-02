@@ -2,7 +2,7 @@
 #include <cmath>
 
 namespace ie {
-	sf::Color hsv_to_rgb(float H, float S, float V) {
+	auto hsv_to_rgb(float H, float S, float V) -> sf::Color {
 		float C = S * V; // Chroma
 		float HPrime = std::fmod(H / 60, 6.f); // H'
 		float X = C * (1 - std::fabs(std::fmod(HPrime, 2.f) - 1));

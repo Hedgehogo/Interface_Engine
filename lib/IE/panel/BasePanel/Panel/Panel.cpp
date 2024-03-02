@@ -33,7 +33,7 @@ namespace ie {
 		displayed(displayed) {
 	}
 	
-	Panel* Panel::Make::make(InitInfo init_info) {
+	auto Panel::Make::make(InitInfo init_info) -> Panel* {
 		return new Panel{std::move(*this), init_info};
 	}
 	
@@ -51,28 +51,28 @@ namespace ie {
 		move_interaction_(make.move_interaction->make({init_info, *this})) {
 	}
 	
-	void Panel::set_displayed() {
+	auto Panel::set_displayed() -> void {
 		displayed_ = true;
 	}
 	
-	bool Panel::is_independent() {
+	auto Panel::is_independent() -> bool {
 		return true;
 	}
 	
-	bool Panel::is_free() {
+	auto Panel::is_free() -> bool {
 		return panel_manager_.is_free();
 	}
 	
-	bool Panel::in_const_panels(sf::Vector2f point_position) {
+	auto Panel::in_const_panels(sf::Vector2f point_position) -> bool {
 		return panel_manager_.in_const_panels(point_position);
 	}
 	
-	void Panel::draw() {
+	auto Panel::draw() -> void {
 		BasePanel::draw();
 		panel_manager_.draw();
 	}
 	
-	void Panel::update() {
+	auto Panel::update() -> void {
 		panel_manager_.update();
 		if(old_displayed_ != displayed_) {
 			if(displayed_) {
@@ -86,7 +86,7 @@ namespace ie {
 		BasePanel::update();
 	}
 	
-	bool Panel::update_interactions(sf::Vector2f mouse_position, bool active) {
+	auto Panel::update_interactions(sf::Vector2f mouse_position, bool active) -> bool {
 		displayed_ = true;
 		this->active_ = active;
 		if(panel_manager_.update_interactions(mouse_position, active))
@@ -95,7 +95,7 @@ namespace ie {
 	}
 }
 
-orl::Option<ie::Panel::Make> ieml::Decode<char, ie::Panel::Make>::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::Panel::Make>::decode(ieml::Node const& node) -> orl::Option<ie::Panel::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::Panel::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),

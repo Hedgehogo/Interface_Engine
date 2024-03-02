@@ -6,7 +6,7 @@ namespace ie {
 	public:
 		using T = T_;
 		
-		virtual T_ get() const = 0;
+		virtual auto get() const -> T_ = 0;
 		
 		virtual ~IGettable() = default;
 	};

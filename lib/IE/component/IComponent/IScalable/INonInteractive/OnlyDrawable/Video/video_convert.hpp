@@ -4,5 +4,5 @@
 #include "../OnlyDrawable.hpp"
 
 namespace ie {
-	orl::Option<OnlyDrawable::Make*> video_convert(ieml::Node const& node);
+	auto video_convert(ieml::Node const& node) -> orl::Option<OnlyDrawable::Make*>;
 }

@@ -10,9 +10,9 @@ namespace ie {
 		
 		BasicInteractiveData(BoxPtr<IBasicInteraction<T> >&& interaction, InitInfo init_info);
 		
-		void update();
+		auto update() -> void;
 		
-		void update_interactions();
+		auto update_interactions() -> void;
 	
 		InteractionManager* interaction_manager;
 		BoxPtr<IBasicInteraction<T> > interaction;

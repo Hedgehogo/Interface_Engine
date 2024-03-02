@@ -17,28 +17,28 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& const_object, BoxPtr<IScalable::Make>&& second_object, float border_distance, Side side, sf::Vector2f min_size = {});
 			
-			BoxConstBorder* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxConstBorder* override;
 		};
 		
 		BoxConstBorder(Make&& make, InitInfo init_info);
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		IScalable& get_first_object() override;
+		auto get_first_object() -> IScalable& override;
 		
-		const IScalable& get_first_object() const override;
+		auto get_first_object() const -> IScalable const& override;
 		
-		IScalable& get_second_object() override;
+		auto get_second_object() -> IScalable& override;
 		
-		const IScalable& get_second_object() const override;
+		auto get_second_object() const -> IScalable const& override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
 		BoxPtr<IScalable> const_object_;
@@ -50,5 +50,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxConstBorder::Make> {
-	static orl::Option<ie::BoxConstBorder::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxConstBorder::Make>;
 };

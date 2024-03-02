@@ -11,9 +11,9 @@
 #endif
 
 namespace ie {
-#ifdef IE_ImageMagick_FOUND
+	#ifdef IE_ImageMagick_FOUND
 	/*old_yaml
-	void LoadFromFile<std::vector<sf::Texture>>::load(std::vector<sf::Texture>& object, std::string name) {
+	auto LoadFromFile<std::vector<sf::Texture> >::load(std::vector<sf::Texture>& object, std::string name) -> void {
 		std::list<Magick::Image> images;
 		Magick::read_images(&images, name);
 		
@@ -46,23 +46,23 @@ namespace ie {
 		}
 	}
 	*/
-#endif
+	#endif
 }
 
 namespace ieml {
-	orl::Option<sf::Texture&> Decode<char, sf::Texture&>::decode(ieml::Node const& node) {
+	auto Decode<char, sf::Texture&>::decode(ieml::Node const& node) -> orl::Option<sf::Texture&> {
 		return {ie::FileBuffer<sf::Texture>::get(node.get_string().except())};
 	}
 	
-	orl::Option<sf::Font&> Decode<char, sf::Font&>::decode(ieml::Node const& node) {
+	auto Decode<char, sf::Font&>::decode(ieml::Node const& node) -> orl::Option<sf::Font&> {
 		return {ie::FileBuffer<sf::Font>::get(node.get_string().except())};
 	}
-
-#ifdef IE_ImageMagick_FOUND
+	
+	#ifdef IE_ImageMagick_FOUND
 	/*old_yaml
-	orl::Option<std::vector<sf::Texture>&> Decode<char, std::vector<sf::Texture>&>::decode(ieml::Node const& node) {
+	auto Decode<char, std::vector<sf::Texture>&>::decode(ieml::Node const& node) -> orl::Option<std::vector<sf::Texture>&> {
 		return {FileBuffer<std::vector<sf::Texture> >::get(node.get_string().except())};
 	}
 	*/
-#endif
+	#endif
 }

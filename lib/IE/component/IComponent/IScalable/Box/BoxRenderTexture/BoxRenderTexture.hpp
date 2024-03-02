@@ -14,28 +14,28 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& object, bool optimize = true, sf::Vector2f min_size = {});
 			
-			BoxRenderTexture* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxRenderTexture* override;
 		};
 		
 		BoxRenderTexture(Make&& make, InitInfo init_info);
 		
 		BoxRenderTexture(BoxPtr<IScalable::Make>&& object, bool optimize, sf::Vector2f min_size, InitInfo init_info);
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
-		IScalable& get_object() override;
+		auto get_object() -> IScalable& override;
 		
-		const IScalable& get_object() const override;
+		auto get_object() const -> IScalable const& override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
 		sf::RenderTexture render_texture_;
@@ -52,5 +52,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxRenderTexture::Make> {
-	static orl::Option<ie::BoxRenderTexture::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxRenderTexture::Make>;
 };

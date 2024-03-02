@@ -15,9 +15,9 @@ namespace ie {
 		template<typename T>
 		explicit SInitInfo(BasicActionInitInfo<T> init_info);
 		
-		SInitInfo copy(DynBuffer& dyn_buffer_);
+		auto copy(DynBuffer& dyn_buffer_) -> SInitInfo;
 		
-		SInitInfo copy(UpdateManager& update_manager_);
+		auto copy(UpdateManager& update_manager_) -> SInitInfo;
 	};
 }
 

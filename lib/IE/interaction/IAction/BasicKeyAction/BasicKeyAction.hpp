@@ -11,7 +11,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicKeyAction {
-			virtual ie::BasicKeyAction<T>* make(BasicActionInitInfo<T> init_info) = 0;
+			virtual auto make(BasicActionInitInfo<T> init_info) -> ie::BasicKeyAction<T>* = 0;
 			
 			virtual ~BasicKeyAction() = default;
 		};
@@ -24,9 +24,9 @@ namespace ie {
 		
 		explicit BasicKeyAction();
 		
-		virtual void set_pressed(bool pressed);
+		virtual auto set_pressed(bool pressed) -> void;
 		
-		virtual void update(sf::Vector2i mouse_position, bool press) = 0;
+		virtual auto update(sf::Vector2i mouse_position, bool press) -> void = 0;
 		
 	protected:
 		bool pressed_;

@@ -6,9 +6,9 @@ namespace ie {
 	class INonInteractive : public virtual IScalable {
 	public:
 		struct Make : public virtual IScalable::Make {
-			virtual INonInteractive* make(InitInfo init_info) = 0;
+			virtual auto make(InitInfo init_info) -> INonInteractive* = 0;
 		};
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 	};
 }

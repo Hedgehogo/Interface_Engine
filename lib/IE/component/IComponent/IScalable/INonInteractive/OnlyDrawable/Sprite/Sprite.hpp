@@ -16,7 +16,7 @@ namespace ie {
 			
 			Make(sf::Texture& texture, sf::Vector2f min_size = {});
 			
-			Sprite* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> Sprite* override;
 		};
 		
 		Sprite(Make&& make, InitInfo init_info);
@@ -25,17 +25,17 @@ namespace ie {
 		
 		Sprite(sf::Texture& texture, sf::Vector2f min_size = {});
 		
-		void draw() override;
+		auto draw() -> void override;
 		
-		void resize(sf::Vector2f size, sf::Vector2f position) override;
+		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		sf::Vector2f get_area_position() const override;
+		auto get_area_position() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_area_size() const override;
+		auto get_area_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_min_size() const override;
+		auto get_min_size() const -> sf::Vector2f override;
 		
-		sf::Vector2f get_normal_size() const override;
+		auto get_normal_size() const -> sf::Vector2f override;
 		
 	protected:
 		sf::Sprite sprite_;
@@ -44,11 +44,11 @@ namespace ie {
 	
 	template<>
 	struct Determine<Sprite::Make> {
-		static bool determine(ieml::Node const& node);
+		static auto determine(ieml::Node const& node) -> bool;
 	};
 }
 
 template<>
 struct ieml::Decode<char, ie::Sprite::Make> {
-	static orl::Option<ie::Sprite::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Sprite::Make>;
 };

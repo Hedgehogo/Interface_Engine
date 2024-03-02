@@ -5,11 +5,11 @@ namespace ie {
 		mark_(mark) {
 	}
 	
-	std::string BaseYamlException::get_note() const {
+	auto BaseYamlException::get_note() const -> std::string {
 		return std::to_string(mark_.line) + std::string(", ") + std::to_string(mark_.column) + std::string(": ");
 	}
 	
-	YAML::Mark BaseYamlException::get_mark() const {
+	auto BaseYamlException::get_mark() const -> YAML::Mark {
 		return mark_;
 	}
 }

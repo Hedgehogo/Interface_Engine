@@ -6,7 +6,7 @@
 
 namespace ie {
 	template<typename T>
-	void ptr_sort(std::vector<T*>& vector) {
+	auto ptr_sort(std::vector<T*>& vector) -> void {
 		std::sort(vector.begin(), vector.end(), [](T* first, T* second) {
 			return *first < *second;
 		});
@@ -16,19 +16,19 @@ namespace ie {
 	public:
 		explicit InteractionManager();
 		
-		size_t size();
+		auto size() -> size_t;
 		
-		IInteraction& get(size_t index);
+		auto get(size_t index) -> IInteraction&;
 		
-		void add_interaction(IInteraction& interaction);
+		auto add_interaction(IInteraction& interaction) -> void;
 		
-		void delete_interaction(IInteraction& interaction);
+		auto delete_interaction(IInteraction& interaction) -> void;
 		
-		void clear();
+		auto clear() -> void;
 		
-		bool is_blocked() const;
+		auto is_blocked() const -> bool;
 		
-		virtual void update(sf::Vector2i mouse_position);
+		virtual auto update(sf::Vector2i mouse_position) -> void;
 	
 		virtual ~InteractionManager() = default;
 		

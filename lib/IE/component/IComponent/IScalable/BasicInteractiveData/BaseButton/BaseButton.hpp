@@ -9,18 +9,18 @@ namespace ie {
 	public:
 		BaseButton(BoxPtr<IScalable::Make>&& background, InitInfo init_info);
 		
-		IScalable& get_object() override;
+		auto get_object() -> IScalable& override;
 		
-		const IScalable& get_object() const override;
+		auto get_object() const -> IScalable const& override;
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		void draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) override;
+		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
-		LayoutData& layout_get_data() override;
+		auto layout_get_data() -> LayoutData& override;
 		
-		const LayoutData& layout_get_data() const override;
+		auto layout_get_data() const -> LayoutData const& override;
 		
 		LayoutData layout_;
 		BoxPtr<IScalable> background_;

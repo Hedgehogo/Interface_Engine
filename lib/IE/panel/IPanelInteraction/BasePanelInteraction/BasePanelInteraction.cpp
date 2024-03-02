@@ -6,7 +6,7 @@ namespace ie {
 		panel_(&init_info.additional), panel_manager_(&init_info.panel_manager) {
 	}
 	
-	void BasePanelInteraction::set_panel(Panel& panel) {
+	auto BasePanelInteraction::set_panel(Panel& panel) -> void {
 		this->panel_ = &panel;
 	}
 }

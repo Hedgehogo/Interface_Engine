@@ -10,7 +10,7 @@ namespace ie {
 		}
 		
 		template<typename T>
-		ie::BasicKeysInteraction<T>* BasicKeysInteraction<T>::make(BasicActionInitInfo<T> init_info) {
+		auto BasicKeysInteraction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicKeysInteraction<T>* {
 			return new ie::BasicKeysInteraction<T>{std::move(*this), init_info};
 		}
 	}
@@ -18,30 +18,30 @@ namespace ie {
 	template<typename T>
 	BasicKeysInteraction<T>::BasicKeysInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
 		action_(make.action->make(init_info)), keys_(std::move(make.keys)), black_list_keys_(std::move(make.black_list_keys)), press_(false) {
-		std::sort(this->keys_.begin(), this->keys_.end());
+		std::sort(keys_.begin(), keys_.end());
 	}
 	
 	template<typename T>
-	std::vector<Key> BasicKeysInteraction<T>::get_keys() {
+	auto BasicKeysInteraction<T>::get_keys() -> std::vector<Key> {
 		return keys_;
 	}
 	
 	template<typename T>
-	BasicKeyAction<T>* BasicKeysInteraction<T>::get_action() {
+	auto BasicKeysInteraction<T>::get_action() -> BasicKeyAction<T>* {
 		return action_.get();
 	}
 	
 	template<typename T>
-	void BasicKeysInteraction<T>::set_action(BasicKeyAction<T>* action) {
+	auto BasicKeysInteraction<T>::set_action(BasicKeyAction<T>* action) -> void {
 		this->action_.reset(action);
 	}
 	
 	template<typename T>
-	void BasicKeysInteraction<T>::start(sf::Vector2i) {
+	auto BasicKeysInteraction<T>::start(sf::Vector2i) -> void {
 	}
 	
 	template<typename T>
-	void BasicKeysInteraction<T>::update(sf::Vector2i mouse_position) {
+	auto BasicKeysInteraction<T>::update(sf::Vector2i mouse_position) -> void {
 		press_ = true;
 		for(auto& key: keys_) {
 			if(!KeyHandler::is_key_pressed(key)) {
@@ -61,18 +61,20 @@ namespace ie {
 	}
 	
 	template<typename T>
-	void BasicKeysInteraction<T>::finish(sf::Vector2i) {
+	auto BasicKeysInteraction<T>::finish(sf::Vector2i) -> void {
 		action_->set_pressed(false);
 	}
 	
 	template<typename T>
-	bool BasicKeysInteraction<T>::is_press() const {
+	auto BasicKeysInteraction<T>::is_press() const -> bool {
 		return press_;
 	}
 }
 
 template<typename T>
-orl::Option<ie::make_system::BasicKeysInteraction<T> > ieml::Decode<char, ie::make_system::BasicKeysInteraction<T> >::decode(ieml::Node const& node) {
+auto ieml::Decode<char, ie::make_system::BasicKeysInteraction<T> >::decode(
+	ieml::Node const& node
+) -> orl::Option<ie::make_system::BasicKeysInteraction<T> > {
 	auto& clear_node{node.get_clear()};
 	for(auto& str: clear_node.get_string().ok_or_none()) {
 		return ie::make_system::BasicKeysInteraction<T>{

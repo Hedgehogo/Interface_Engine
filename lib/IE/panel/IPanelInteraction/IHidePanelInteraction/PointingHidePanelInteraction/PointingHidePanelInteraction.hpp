@@ -12,16 +12,16 @@ namespace ie {
 			
 			Make(bool only_on_parent = false);
 			
-			PointingHidePanelInteraction* make(PanelActionInitInfo init_info) override;
+			auto make(PanelActionInitInfo init_info) -> PointingHidePanelInteraction* override;
 		};
 		
 		PointingHidePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		void start(sf::Vector2i mouse_position) override;
+		auto start(sf::Vector2i mouse_position) -> void override;
 		
-		void update(sf::Vector2i mouse_position) override;
+		auto update(sf::Vector2i mouse_position) -> void override;
 		
-		void finish(sf::Vector2i mouse_position) override;
+		auto finish(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
 		bool only_on_parent_;
@@ -30,5 +30,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::PointingHidePanelInteraction::Make> {
-	static orl::Option<ie::PointingHidePanelInteraction::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::PointingHidePanelInteraction::Make>;
 };

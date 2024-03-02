@@ -13,16 +13,16 @@ namespace ie {
 			
 			Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size = {});
 			
-			BoxMakePermeable* make(InitInfo init_info) override;
+			auto make(InitInfo init_info) -> BoxMakePermeable* override;
 		};
 		
 		BoxMakePermeable(Make&& make, InitInfo init_info);
 		
-		bool update_interactions(sf::Vector2f mouse_position) override;
+		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
 		
-		IScalable& get_object() override;
+		auto get_object() -> IScalable& override;
 		
-		const IScalable& get_object() const override;
+		auto get_object() const -> IScalable const& override;
 		
 	protected:
 		BoxPtr<IScalable> object_;
@@ -31,5 +31,5 @@ namespace ie {
 
 template<>
 struct ieml::Decode<char, ie::BoxMakePermeable::Make> {
-	static orl::Option<ie::BoxMakePermeable::Make> decode(ieml::Node const& node);
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxMakePermeable::Make>;
 };
