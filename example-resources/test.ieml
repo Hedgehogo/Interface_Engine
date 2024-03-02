@@ -16,7 +16,7 @@ object: = BoxConstBorder:
 					constant: -1
 	second-object: = EditCaption:
 		text: = ToStringI:
-			value: > 0.000000
+			value: > 0
 			args:
 				- *value
 		background: blue

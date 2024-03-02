@@ -15,7 +15,6 @@ namespace ie {
 	}
 	
 	Bar::Bar(Make&& make, InitInfo init_info) :
-		OnlyDrawable(init_info),
 		background_(make.background->make(init_info)),
 		strip_(make.strip->make(init_info)),
 		horizontal_(make.horizontal),
@@ -33,7 +32,7 @@ namespace ie {
 		if(this->division_ > 1) {
 			this->value_ = std::round(this->value_);
 		}
-		sf::Vector2f strip_size{layout_.size};
+		auto strip_size{sf::Vector2f{layout_.size}};
 		if(horizontal_) {
 			strip_size.x = offset_ * layout_.size.y;
 			strip_size.x += (layout_.size.x - strip_size.x) * this->value_ / static_cast<float>(division_);
@@ -42,9 +41,6 @@ namespace ie {
 			strip_size.y += (layout_.size.y - strip_size.y) * this->value_ / static_cast<float>(division_);
 		}
 		strip_->resize(strip_size, layout_.position);
-	}
-	
-	auto Bar::draw() -> void {
 	}
 	
 	auto Bar::resize(sf::Vector2f size, sf::Vector2f position) -> void {

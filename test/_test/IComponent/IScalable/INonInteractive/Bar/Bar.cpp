@@ -16,13 +16,11 @@ TEST(IComponent, Bar) {
 	};
 	data.interaction_manager.update({});
 	
-	ASSERT_EQ(data.draw_manager.size(), 3);
-	ASSERT_EQ(&data.draw_manager.get(0), &bar);
+	ASSERT_EQ(data.draw_manager.size(), 2);
 	ASSERT_EQ(data.update_manager.size(), 0);
 	ASSERT_EQ(data.interaction_manager.size(), 0);
 	ASSERT_EQ(data.panel_manager.size(), 0);
 	
-	ASSERT_EQ(&bar.get_render_target(), &data.render_target);
 	ASSERT_EQ(bar.get_min_size(), sf::Vector2f{});
 	ASSERT_EQ(bar.get_normal_size(), (sf::Vector2f{0, 1}));
 	ASSERT_EQ(bar.get_size(), sf::Vector2f{});
