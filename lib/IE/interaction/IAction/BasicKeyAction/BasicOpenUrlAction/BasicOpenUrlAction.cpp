@@ -6,9 +6,9 @@ namespace ie {
 		for(auto& url_str: node.get_string().ok_or_none()) {
 			auto url{std::string_view{url_str}};
 			return
-				url.substr(0, 7) == std::string_view{"file://"} ||
-				url.substr(0, 7) == std::string_view{"http://"} ||
-				url.substr(0, 8) == std::string_view{"https://"};
+				url.size() >= 7 && url.substr(0, 7) == std::string_view{"file://"} ||
+				url.size() >= 7 && url.substr(0, 7) == std::string_view{"http://"} ||
+				url.size() >= 8 && url.substr(0, 8) == std::string_view{"https://"};
 		}
 		return false;
 	}
