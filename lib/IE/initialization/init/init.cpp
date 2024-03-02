@@ -97,21 +97,6 @@ namespace ie {
 			add_type_with_make<ISString, ISMString>("IMString");
 			add_names<ISString::Make>("IString");
 			
-			//add_type<ISbool, SConvertFloatToBoolEquals>("ConvertFloatToBoolEquals", "CFloatToBoolE");
-			//add_type<ISbool, SConvertFloatToBoolGreater>("ConvertFloatToBoolGreater", "CFloatToBoolG");
-			//add_type<ISbool, SConvertFloatToBoolGreaterOrEquals>("ConvertFloatToBoolGreaterOrEquals", "CFloatToBoolGOE");
-			//add_type<ISbool, SConvertFloatToBoolLess>("ConvertFloatToBoolLess", "CFloatToBoolL");
-			//add_type<ISbool, SConvertFloatToBoolLessOrEquals>("ConvertFloatToBoolLessOrEquals", "CFloatToBoolLOE");
-			
-			//add_type_named<IAnimatorUnit, Animation>();
-			//add_type_named<IAnimatorUnit, Prerequisite>();
-			//add_type_named<IAnimatorUnit, AnimatorUnitMatchFloat>("AUnitMatchF");
-			//add_type_named<IChangeVariable, ChangeVariableByStraightLine>("CVByStraightLine", "CVByStraightL");
-			//add_type_named<IChangeVariable, ChangeVariableByBrokenLine>("CVByBrokenLine", "CVByBrokenL");
-			//add_type_named<IChangeVariable, ChangeVariableBySteppedLine>("CVBySteppedLine", "CVBySteppedL");
-			//add_type_named<IChangeVariable, ChangeVariableBySinusoid>("CVBySinusoid", "CVBySin");
-			//add_type_named<IChangeVariable, ChangeVariableByCurve>("CVByCurve");
-			
 			add_type_make_named<ISizing, ConstSizing>();
 			add_type_make_named<ISizing, RelativeNormalSizing>();
 			add_type_make_named<ISizing, RelativeParentSizing>();
@@ -340,21 +325,6 @@ namespace ie {
 		inherit<IBasicInteraction<Text&>, BasicKeysInteraction<Text&>>({"TextKeysI"});
 		//inherit<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&>>({"TextHotkeyI"});
 		inherit<IBasicInteraction<Text&>, BasicEmptyInteraction<Text&>>({"TextEmptyI"});
-		
-		inherit<ISbool, SConvertFloatToBoolEquals>({"ConvertFloatToBoolEquals", "CFloatToBoolE"});
-		inherit<ISbool, SConvertFloatToBoolGreater>({"ConvertFloatToBoolGreater", "CFloatToBoolG"});
-		inherit<ISbool, SConvertFloatToBoolGreaterOrEquals>({"ConvertFloatToBoolGreaterOrEquals", "CFloatToBoolGOE"});
-		inherit<ISbool, SConvertFloatToBoolLess>({"ConvertFloatToBoolLess", "CFloatToBoolL"});
-		inherit<ISbool, SConvertFloatToBoolLessOrEquals>({"ConvertFloatToBoolLessOrEquals", "CFloatToBoolLOE"});
-		
-		inherit<IAnimatorUnit, Animation>();
-		inherit<IAnimatorUnit, Prerequisite>();
-		inherit<IAnimatorUnit, AnimatorUnitMatchFloat>({"AUnitMatchF"});
-		inherit<IChangeVariable, ChangeVariableByStraightLine>({"CVByStraightLine", "CVByStraightL"});
-		inherit<IChangeVariable, ChangeVariableByBrokenLine>({"CVByBrokenLine", "CVByBrokenL"});
-		inherit<IChangeVariable, ChangeVariableBySteppedLine>({"CVBySteppedLine", "CVBySteppedL"});
-		inherit<IChangeVariable, ChangeVariableBySinusoid>({"CVBySinusoid", "CVBySin"});
-		inherit<IChangeVariable, ChangeVariableByCurve>({"CVByCurve"});
 		
 		add_func<OnlyDrawable>(video_convert, {"Video"});
 		//add_func<Box>(switcher_tabs_decode_pointer, {"SwitcherTabs", "SwitcherT"});
