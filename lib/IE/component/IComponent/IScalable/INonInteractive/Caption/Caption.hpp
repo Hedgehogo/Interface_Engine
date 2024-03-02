@@ -42,12 +42,20 @@ namespace ie {
 			typename CaptionString<StringStorage_>::Make text;
 			BoxPtr<ie::INonInteractive::Make> background;
 			sf::Font& font;
-			int font_size;
-			sf::Color color;
+			int font_size = default_size_;
+			sf::Color color = default_color_;
 			sf::Text::Style style = {};
 			InternalPositioning2::Make positioning = {{0, 0}};
 			bool cut_back = true;
 			sf::Vector2f min_size = {};
+			
+			static auto set_default_color(sf::Color color = sf::Color::White) -> void;
+			
+			static auto set_default_size(int size) -> void;
+			
+			static auto get_default_color() -> sf::Color;
+			
+			static auto get_default_size() -> int;
 			
 			BasicCaption(
 				typename CaptionString<StringStorage_>::Make text,
@@ -68,6 +76,10 @@ namespace ie {
 			auto set_min_size(sf::Vector2f min_size)&& -> BasicCaption;
 			
 			auto make(InitInfo init_info) -> ie::BasicCaption<StringStorage_>* override;
+			
+		protected:
+			static sf::Color default_color_;
+			static int default_size_;
 		};
 	}
 	
@@ -75,14 +87,6 @@ namespace ie {
 	class BasicCaption : public OnlyDrawable {
 	public:
 		using Make = make_system::BasicCaption<StringStorage_>;
-		
-		static auto set_default_color(sf::Color color = sf::Color::White) -> void;
-		
-		static auto set_default_size(int size) -> void;
-		
-		static auto get_default_color() -> sf::Color;
-		
-		static auto get_default_size() -> int;
 		
 		BasicCaption(Make&& make, InitInfo init_info);
 		
@@ -106,9 +110,6 @@ namespace ie {
 		static auto get_text_size(sf::Text const& text) -> sf::Vector2f;
 		
 		auto text_resize(sf::Vector2f size, sf::Vector2f position) -> void;
-		
-		static sf::Color default_color_;
-		static int default_size_;
 		
 		bool cut_back_;
 		

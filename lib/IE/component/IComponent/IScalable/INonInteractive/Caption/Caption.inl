@@ -6,6 +6,32 @@
 namespace ie {
 	namespace make_system {
 		template<typename StringStorage_>
+		sf::Color BasicCaption<StringStorage_>::default_color_ = sf::Color::Black;
+		
+		template<typename StringStorage_>
+		int BasicCaption<StringStorage_>::default_size_ = 10;
+		
+		template<typename StringStorage_>
+		auto BasicCaption<StringStorage_>::set_default_color(sf::Color color) -> void {
+			default_color_ = color;
+		}
+		
+		template<typename StringStorage_>
+		auto BasicCaption<StringStorage_>::set_default_size(int size) -> void {
+			default_size_ = size;
+		}
+		
+		template<typename StringStorage_>
+		auto BasicCaption<StringStorage_>::get_default_color() -> sf::Color {
+			return default_color_;
+		}
+		
+		template<typename StringStorage_>
+		auto BasicCaption<StringStorage_>::get_default_size() -> int {
+			return default_size_;
+		}
+		
+		template<typename StringStorage_>
 		BasicCaption<StringStorage_>::BasicCaption(
 			typename CaptionString<StringStorage_>::Make text,
 			BoxPtr<INonInteractive::Make>&& background,
@@ -59,32 +85,6 @@ namespace ie {
 	}
 	
 	template<typename StringStorage_>
-	sf::Color BasicCaption<StringStorage_>::default_color_ = sf::Color::Black;
-	
-	template<typename StringStorage_>
-	int BasicCaption<StringStorage_>::default_size_ = 10;
-	
-	template<typename StringStorage_>
-	auto BasicCaption<StringStorage_>::set_default_color(sf::Color color) -> void {
-		default_color_ = color;
-	}
-	
-	template<typename StringStorage_>
-	auto BasicCaption<StringStorage_>::set_default_size(int size) -> void {
-		default_size_ = size;
-	}
-	
-	template<typename StringStorage_>
-	auto BasicCaption<StringStorage_>::get_default_color() -> sf::Color {
-		return default_color_;
-	}
-	
-	template<typename StringStorage_>
-	auto BasicCaption<StringStorage_>::get_default_size() -> int {
-		return default_size_;
-	}
-	
-	template<typename StringStorage_>
 	BasicCaption<StringStorage_>::BasicCaption(Make&& make, InitInfo init_info) :
 		OnlyDrawable(init_info),
 		cut_back_(make.cut_back),
@@ -102,6 +102,7 @@ namespace ie {
 	template<typename StringStorage_>
 	auto BasicCaption<StringStorage_>::set_string(sf::String str) -> void {
 		CaptionString<StringStorage_>::set(str_, str);
+		text_.setString(str);
 		text_resize(get_size(), get_position());
 	}
 	
@@ -179,8 +180,7 @@ namespace ie {
 	
 	template<typename StringStorage_>
 	auto BasicCaption<StringStorage_>::get_normal_size() const -> sf::Vector2f {
-		auto rect{text_.getGlobalBounds()};
-		return max({rect.width, rect.height}, background_->get_normal_size());
+		return max(get_text_size(text_), background_->get_normal_size());
 	}
 	
 	template<typename StringStorage_>
@@ -227,8 +227,8 @@ auto ieml::Decode<char, ie::make_system::BasicCaption<StringStorage_> >::decode(
 		map.at("background").except().as<ie::BoxPtr<ie::INonInteractive::Make> >().except(),
 		map.at("font").except().as<sf::Font&>().except(),
 	}
-		.set_font_size(map.get_as<int>("font-size").except().ok_or(ie::BasicCaption<StringStorage_>::get_default_size()))
-		.set_color(map.get_as<sf::Color>("color").except().ok_or(ie::BasicCaption<StringStorage_>::get_default_color()))
+		.set_font_size(map.get_as<int>("font-size").except().ok_or(ie::make_system::BasicCaption<StringStorage_>::get_default_size()))
+		.set_color(map.get_as<sf::Color>("color").except().ok_or(ie::make_system::BasicCaption<StringStorage_>::get_default_color()))
 		.set_style(map.get_as<ie::LoadTextStyle>("style").except().ok_or({}).style)
 		.set_positioning(map.get_as<ie::InternalPositioning2::Make>("positioning").except().ok_or({{0.5, 0.5}}))
 		.set_cut_back(map.get_as<bool>("cut-back").except().ok_or(true))

@@ -19,12 +19,13 @@ namespace ie {
 		MakeDyn<ISString>&& make,
 		InitInfo init_info
 	) {
-		return SReader<ISString>{
+		const SReader <ISString>& s_reader = SReader<ISString>{
 			DynBuffer::get(std::move(make), SInitInfo{init_info}),
 			[&caption](std::u32string_view value) {
 				caption.set_string(to_utf32(value));
 			}
 		};
+		return s_reader;
 	}
 	
 	auto CaptionString<SReader<ISString> >::get(SReader<ISString> const& object) -> sf::String {

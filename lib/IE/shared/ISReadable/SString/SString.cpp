@@ -65,6 +65,9 @@ namespace ie {
 	
 	auto ToMutable<SString>::set(std::u32string value) -> void {
 		data_ = std::move(value);
+		for(auto& read_fn : this->read_fns_) {
+			read_fn(this->data_);
+		}
 	}
 
 	auto Determine<SMString::Make>::determine(const ieml::Node& node) -> bool {
