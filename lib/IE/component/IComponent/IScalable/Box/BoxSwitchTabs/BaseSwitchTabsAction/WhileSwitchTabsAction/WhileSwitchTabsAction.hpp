@@ -2,7 +2,6 @@
 
 #include "../../BoxSwitchTabs.hpp"
 #include "../BaseSwitchTabsAction.hpp"
-#include "IE/modules/yaml-cpp/yaml.hpp"
 
 namespace ie {
 	class WhileSwitchTabsAction : public BaseSwitchTabsAction {
