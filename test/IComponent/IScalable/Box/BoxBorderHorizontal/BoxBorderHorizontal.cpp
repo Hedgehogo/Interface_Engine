@@ -2,7 +2,7 @@
 #include <IE/component/IComponent/IScalable/Box/BoxBorderHorizontal/BoxBorderHorizontal.hpp>
 #include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <IComponent/_InitInfoData/InitInfoData.hpp>
-#include "image_equal/image_equal.hpp"
+#include "_image_equal/image_equal.hpp"
 
 TEST(IComponent, BoxBorderHorizontal) {
 	InitInfoData data{{100, 100}};

@@ -4,7 +4,7 @@
 #include <IE/shared/ISReadable/ISRanged/SRanged/SRanged.hpp>
 #include <IE/shared/ISReadable/ISVec2/SVec2/SVec2.hpp>
 #include <IComponent/_InitInfoData/InitInfoData.hpp>
-#include <image_equal/image_equal.hpp>
+#include <_image_equal/image_equal.hpp>
 
 TEST(IComponent, ConstSlider) {
 	InitInfoData data{{100, 100}};

@@ -1,5 +1,5 @@
 #include "InitInfoData.hpp"
-#include "image_difference/image_difference.hpp"
+#include "_image_difference/image_difference.hpp"
 
 InitInfoData::InitInfoData(sf::Vector2u size) {
 	render_target.create(size.x, size.y);

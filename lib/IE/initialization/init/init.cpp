@@ -193,7 +193,8 @@ namespace ie {
 			add_type_make_named<Box, BoxConstBezel>();
 			add_type_make_named<Box, BoxConstRatio>();
 			add_type_make_named<Box, BoxConstRatioCenter>();
-			add_type_make_named<Box, BoxMovableBorder>();
+			add_type_make<Box, BoxMovableBorder>("BoxMovableBorder");
+			add_type_make<Box, MovableBorder>("MovableBorder");
 			add_type_make_named<Box, BoxPanel>();
 			add_type_make_named<Box, BoxRenderTexture>();
 			add_type_make_named<Box, BoxShader>();
