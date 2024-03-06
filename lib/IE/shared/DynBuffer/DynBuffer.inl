@@ -13,8 +13,10 @@ namespace ie {
 		if(auto pair{std::get_if<0>(&make_dyn.data_)}) {
 			auto& builder{rttb::Builder<ieml::Node const&, T>::builder()};
 			if(pair->id_ != 0) {
-				if(auto add_result{init_info.dyn_buffer.indexed_.emplace(pair->id_, pair->make_->make(init_info))}; add_result.second) {
-					return *builder.cast(add_result.first->second).except();
+				if(init_info.dyn_buffer.indexed_.count(pair->id_) == 0) {
+					if(auto add_result{init_info.dyn_buffer.indexed_.emplace(pair->id_, pair->make_->make(init_info))}; add_result.second) {
+						return *builder.cast(add_result.first->second).except();
+					}
 				}
 				return *builder.cast(init_info.dyn_buffer.indexed_.at(pair->id_)).except();
 			}
