@@ -3,7 +3,7 @@
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/sizing-positioning/IPositioning2/InternalPositioning2/InternalPositioning2.hpp"
-#include "../OnlyDrawable/OnlyDrawable.hpp"
+#include "../INonInteractive.hpp"
 
 namespace ie {
 	template<typename StringStorage_>
@@ -84,11 +84,13 @@ namespace ie {
 	}
 	
 	template<typename StringStorage_>
-	class BasicCaption : public OnlyDrawable {
+	class BasicCaption : public virtual INonInteractive, public virtual IDrawable {
 	public:
 		using Make = make_system::BasicCaption<StringStorage_>;
 		
 		BasicCaption(Make&& make, InitInfo init_info);
+		
+		auto get_render_target() -> sf::RenderTarget&;
 		
 		auto set_string(sf::String str) -> void;
 		
@@ -110,6 +112,8 @@ namespace ie {
 		static auto get_text_size(sf::Text const& text) -> sf::Vector2f;
 		
 		auto text_resize(sf::Vector2f size, sf::Vector2f position) -> void;
+		
+		sf::RenderTarget* render_target_;
 		
 		bool cut_back_;
 		

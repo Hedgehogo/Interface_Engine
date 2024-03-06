@@ -6,7 +6,7 @@
 #include "../INonInteractiveLayout/INonInteractiveBackground/INonInteractiveBackground.hpp"
 
 namespace ie {
-	class Bar : public OnlyDrawable, public virtual INonInteractiveBackground {
+	class Bar : public virtual INonInteractiveBackground {
 	public:
 		struct Make : public virtual INonInteractiveBackground::Make {
 			BoxPtr<INonInteractive::Make> background;
@@ -33,8 +33,6 @@ namespace ie {
 		auto get_value() -> float;
 		
 		auto set_value(float value) -> void;
-		
-		auto draw() -> void override;
 		
 		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		

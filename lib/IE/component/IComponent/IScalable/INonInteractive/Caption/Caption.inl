@@ -43,38 +43,38 @@ namespace ie {
 		}
 		
 		template<typename StringStorage_>
-		auto BasicCaption<StringStorage_>::set_font_size(int font_size)&& -> BasicCaption {
-			this->font_size = font_size;
+		auto BasicCaption<StringStorage_>::set_font_size(int new_font_size)&& -> BasicCaption {
+			font_size = new_font_size;
 			return std::move(*this);
 		}
 		
 		template<typename StringStorage_>
-		auto BasicCaption<StringStorage_>::set_color(sf::Color color)&& -> BasicCaption {
-			this->color = color;
+		auto BasicCaption<StringStorage_>::set_color(sf::Color new_color)&& -> BasicCaption {
+			color = new_color;
 			return std::move(*this);
 		}
 		
 		template<typename StringStorage_>
-		auto BasicCaption<StringStorage_>::set_style(sf::Text::Style style)&& -> BasicCaption {
-			this->style = style;
+		auto BasicCaption<StringStorage_>::set_style(sf::Text::Style new_style)&& -> BasicCaption {
+			style = new_style;
 			return std::move(*this);
 		}
 		
 		template<typename StringStorage_>
-		auto BasicCaption<StringStorage_>::set_positioning(InternalPositioning2::Make positioning)&& -> BasicCaption {
-			this->positioning = positioning;
+		auto BasicCaption<StringStorage_>::set_positioning(InternalPositioning2::Make new_positioning)&& -> BasicCaption {
+			positioning = new_positioning;
 			return std::move(*this);
 		}
 		
 		template<typename StringStorage_>
-		auto BasicCaption<StringStorage_>::set_cut_back(bool cut_back)&& -> BasicCaption {
-			this->cut_back = cut_back;
+		auto BasicCaption<StringStorage_>::set_cut_back(bool new_cut_back)&& -> BasicCaption {
+			cut_back = new_cut_back;
 			return std::move(*this);
 		}
 		
 		template<typename StringStorage_>
-		auto BasicCaption<StringStorage_>::set_min_size(sf::Vector2f min_size)&& -> BasicCaption {
-			this->min_size = min_size;
+		auto BasicCaption<StringStorage_>::set_min_size(sf::Vector2f new_min_size)&& -> BasicCaption {
+			min_size = new_min_size;
 			return std::move(*this);
 		}
 		
@@ -86,17 +86,23 @@ namespace ie {
 	
 	template<typename StringStorage_>
 	BasicCaption<StringStorage_>::BasicCaption(Make&& make, InitInfo init_info) :
-		OnlyDrawable(init_info),
+		render_target_(&init_info.render_target),
 		cut_back_(make.cut_back),
 		str_(CaptionString<StringStorage_>::make(*this, std::move(make.text), init_info)),
 		background_(make.background->make(init_info.copy(draw_manager_))),
 		minimum_size_(make.min_size),
 		positioning_(std::move(make.positioning), {init_info.render_target}) {
+		init_info.draw_manager.add(*this);
 		text_.setString(CaptionString<StringStorage_>::get(str_));
 		text_.setFont(make.font);
 		text_.setCharacterSize(make.font_size);
 		text_.setFillColor(make.color);
 		text_.setStyle(make.style);
+	}
+	
+	template<typename StringStorage_>
+	auto BasicCaption<StringStorage_>::get_render_target() -> sf::RenderTarget& {
+		return *render_target_;
 	}
 	
 	template<typename StringStorage_>

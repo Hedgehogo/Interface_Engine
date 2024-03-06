@@ -212,7 +212,10 @@ namespace ie {
 			add_type_make_named<IScalable, ButtonPanel>();
 			add_type_make_named<IScalable, Button>();
 			add_type_make_named<IScalable, Switcher>();
-			add_type_make_named<IComponent, IScalable>();
+			add_type_make_named<IScalableV, IScalable>();
+			add_type_make_named<IScalableH, IScalable>();
+			add_type_make_named<IComponent, IScalableV>();
+			add_type_make_named<IComponent, IScalableH>();
 			add_type_make_named<IComponent, Text>();
 			add_names<IComponent::Make>("IComponent");
 			
