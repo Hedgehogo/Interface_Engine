@@ -2,12 +2,12 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/component/IComponent/IScalable/Box/Box.hpp"
-#include "IE/component/IComponent/IComponentLayout/IComponentObject/IComponentObject.hpp"
+#include "IE/component/IComponent/IScalable/IScalableLayout/IScalableObject/IScalableObject.hpp"
 
 namespace ie {
-	class BoxDebug : public Box, public virtual IComponentObject, public virtual IDrawable {
+	class BoxDebug : public Box, public virtual IScalableObject, public virtual IDrawable {
 	public:
-		struct Make : public Box::Make, public virtual IComponentObject::Make {
+		struct Make : public Box::Make, public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> object;
 			
 			Make(BoxPtr<IScalable::Make>&& object);
@@ -44,6 +44,6 @@ namespace ie {
 }
 
 template<>
-struct ieml::Decode<char, ie::BoxDebug> {
-	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxDebug>;
+struct ieml::Decode<char, ie::BoxDebug::Make> {
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BoxDebug::Make>;
 };

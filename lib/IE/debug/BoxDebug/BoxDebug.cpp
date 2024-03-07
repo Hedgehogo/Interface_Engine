@@ -82,6 +82,6 @@ namespace ie {
 	}
 }
 
-auto ieml::Decode<char, ie::BoxDebug>::decode(ieml::Node const& node) -> orl::Option<ie::BoxDebug> {
-	return {{node.at("object").except().as<ie::BoxPtr<ie::IScalable> >().except()}};
+auto ieml::Decode<char, ie::BoxDebug::Make>::decode(ieml::Node const& node) -> orl::Option<ie::BoxDebug::Make> {
+	return {{node.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except()}};
 }
