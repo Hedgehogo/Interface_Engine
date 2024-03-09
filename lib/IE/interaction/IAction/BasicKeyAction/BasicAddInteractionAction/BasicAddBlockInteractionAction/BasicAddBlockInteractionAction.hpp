@@ -25,6 +25,8 @@ namespace ie {
 		
 	protected:
 		auto stop_pressed() -> void override;
+		
+		auto finish() -> void override;
 	};
 	
 	using AddBlockInteractionAction = BasicAddBlockInteractionAction<std::monostate>;

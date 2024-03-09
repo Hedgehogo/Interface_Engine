@@ -47,7 +47,7 @@ namespace ie {
 	
 	template<typename T>
 	auto BasicOneKeyInteraction<T>::finish(sf::Vector2i) -> void {
-		action_->set_pressed(false);
+		action_->finish();
 	}
 }
 

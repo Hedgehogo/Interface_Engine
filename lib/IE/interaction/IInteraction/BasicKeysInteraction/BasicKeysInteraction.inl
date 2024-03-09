@@ -62,7 +62,7 @@ namespace ie {
 	
 	template<typename T>
 	auto BasicKeysInteraction<T>::finish(sf::Vector2i) -> void {
-		action_->set_pressed(false);
+		action_->finish();
 	}
 	
 	template<typename T>

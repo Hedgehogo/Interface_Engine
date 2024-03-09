@@ -39,7 +39,7 @@ namespace ie {
 		
 		auto update(sf::Vector2i mouse_position) -> void override;
 		
-		auto finish(sf::Vector2i) -> void override;
+		auto finish(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
 		BoxPtr<BasicKeyAction<T> > action_;
