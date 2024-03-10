@@ -2,7 +2,7 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
-#include "IE/enums/KeyHandler/KeyHandler.hpp"
+#include "IE/event/KeyHandler/KeyHandler.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
 #include "../../BasicInteractiveData/BasicInteractiveData.hpp"

@@ -1,7 +1,7 @@
 #include "handle_event.hpp"
 
 #include "../MouseWheel/MouseWheel.hpp"
-#include "IE/enums/KeyHandler/KeyHandler.hpp"
+#include "IE/event/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
 	auto handle_event(sf::Event event) -> void {
