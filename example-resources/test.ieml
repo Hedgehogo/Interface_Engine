@@ -2,8 +2,7 @@ object: = BoxMovableBorder:
 	first-object: red
 	second-object: blue
 	border-value: = RLerp:
-		a: [0, 0]
-		b: [3, 1]
+		k: 0
 		value: = Time:
 			start: &start yes
 			end: *start

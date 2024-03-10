@@ -2,6 +2,7 @@
 
 #include "../../SRanged/SRanged.hpp"
 #include "IE/shared/ISReadable/ISRanged/SRanged/SRanged.hpp"
+#include "exception/SRLerpException.hpp"
 
 namespace ie{
 	template<typename T_>
