@@ -3,74 +3,46 @@
 #include "../../event/MouseWheel/MouseWheel.hpp"
 
 namespace ie {
-	std::vector<Key> KeyHandler::keys_pressed_{};
-	std::vector<Key> KeyHandler::global_keys_pressed_{};
-	
 	auto KeyHandler::update() -> void {
 		update_keyboard();
 		update_mouse();
 	}
 	
 	auto KeyHandler::update_keyboard() -> void {
-		for(int i = 0; i < static_cast<int>(Key::MouseLeft); ++i) {
-			if(sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(i))) {
-				if(std::find(keys_pressed_.begin(), keys_pressed_.end(), static_cast<Key>(i)) == keys_pressed_.end()) {
-					global_keys_pressed_.push_back(static_cast<Key>(i));
-				}
-			}
+		for(auto i{size_t{0}}; i < static_cast<size_t>(Key::MouseLeft); ++i) {
+			keys_[i] = sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(i));
 		}
 	}
 	
 	auto KeyHandler::update_mouse() -> void {
-		for(int i = static_cast<int>(Key::MouseLeft); i < static_cast<int>(Key::MouseWheelUp); ++i) {
-			if(sf::Mouse::isButtonPressed(static_cast<sf::Mouse::Button>(i - static_cast<int>(Key::MouseLeft)))) {
-				if(std::find(keys_pressed_.begin(), keys_pressed_.end(), static_cast<Key>(i)) == keys_pressed_.end()) {
-					global_keys_pressed_.push_back(static_cast<Key>(i));
-				}
-			}
+		for(auto i{static_cast<size_t>(Key::MouseLeft)}; i < static_cast<size_t>(Key::MouseWheelUp); ++i) {
+			keys_[i] = sf::Mouse::isButtonPressed(static_cast<sf::Mouse::Button>(i - static_cast<int>(Key::MouseLeft)));
 		}
 	}
 	
 	auto KeyHandler::add_key(Key key) -> void {
-		if(std::find(keys_pressed_.begin(), keys_pressed_.end(), key) == keys_pressed_.end()) {
-			keys_pressed_.push_back(key);
+		if(key != Key::Unknown) {
+			keys_[static_cast<size_t>(key)] = true;
 		}
 	}
 	
 	auto KeyHandler::delete_key(Key key) -> void {
-		auto element = std::find(keys_pressed_.begin(), keys_pressed_.end(), key);
-		if(element != keys_pressed_.end()) {
-			keys_pressed_.erase(element);
+		if(key != Key::Unknown) {
+			keys_[static_cast<size_t>(key)] = false;
 		}
 	}
 	
 	auto KeyHandler::clear() -> void {
-		keys_pressed_.clear();
-	}
-	
-	auto KeyHandler::clear_global_keys() -> void {
-		global_keys_pressed_.clear();
+		for(auto& item: keys_) {
+			item = false;
+		}
 	}
 	
 	auto KeyHandler::is_key_pressed(Key key) -> bool {
-		if(std::find(keys_pressed_.begin(), keys_pressed_.end(), key) != keys_pressed_.end()) {
-			return true;
-		} else if(std::find(global_keys_pressed_.begin(), global_keys_pressed_.end(), key) != global_keys_pressed_.end()) {
-			return true;
+		if(key != Key::Unknown) {
+			return keys_[static_cast<size_t>(key)];
 		}
-		sf::Vector2f delta = MouseWheel::get_delta();
-		switch(key) {
-			case Key::MouseWheelUp:
-				return delta.y > 0;
-			case Key::MouseWheelDown:
-				return delta.y < 0;
-			case Key::MouseWheelRight:
-				return delta.x > 0;
-			case Key::MouseWheelLeft:
-				return delta.x < 0;
-			default:
-				return false;
-		}
+		return false;
 	}
 	
 	auto is_key_pressed(Key key) -> orl::Option<bool> {

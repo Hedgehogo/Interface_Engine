@@ -116,8 +116,6 @@ namespace ie {
 		interface_.draw();
 		//interface.draw_debug(window, 0, 2, 90, 90);
 		window_.display();
-		
-		key_handler_.clear_global_keys();
 	}
 	
 	auto Window::get_interface() -> Interface& {

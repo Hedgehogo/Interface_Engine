@@ -19,13 +19,10 @@ namespace ie {
 		
 		auto clear() -> void;
 		
-		auto clear_global_keys() -> void;
-		
 		auto is_key_pressed(Key key) -> bool;
 	
-	protected:
-		static std::vector<Key> keys_pressed_;
-		static std::vector<Key> global_keys_pressed_;
+	private:
+		std::array<bool, static_cast<size_t>(Key::MouseWheelRight)> keys_;
 	};
 	
 	auto is_key_pressed(Key key) -> orl::Option<bool>;
