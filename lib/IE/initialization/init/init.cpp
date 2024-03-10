@@ -44,6 +44,7 @@ namespace ie {
 			add_type_with_make<SReadable<bool>, SLessOrEqual<T> >(std::string("(<=)") + name);
 			add_type_with_make<SReadable<bool>, SGreaterOrEqual<T> >(std::string("(>=)") + name);
 			add_type_with_make<SRanged<T>, SLerp<T> >("Lerp");
+			add_type_with_make<SRanged<T>, SRLerp<T> >("RLerp");
 			add_type_with_make<SRanged<T>, SRFloor<T> >("RFloor");
 			add_type_with_make<SRanged<T>, SRCeil<T> >("RCeil");
 			add_type_with_make<SRanged<T>, SRRound<T> >("RRound");
@@ -193,7 +194,8 @@ namespace ie {
 			add_type_make_named<Box, BoxConstBezel>();
 			add_type_make_named<Box, BoxConstRatio>();
 			add_type_make_named<Box, BoxConstRatioCenter>();
-			add_type_make_named<Box, BoxMovableBorder>();
+			add_type_make<Box, BoxMovableBorder>("BoxMovableBorder");
+			add_type_make<Box, MovableBorder>("MovableBorder");
 			add_type_make_named<Box, BoxPanel>();
 			add_type_make_named<Box, BoxRenderTexture>();
 			add_type_make_named<Box, BoxShader>();

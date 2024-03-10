@@ -1,24 +1,10 @@
 object: = BoxDebug:
-	object: = BoxConstBorder:
-		border-distance: 40
-		side: down
-		const-object: = BoxBorderHorizontal:
-			first-object: = Button:
-				background: red
-				interaction: = OneKeyI:
-					action: = AddIntAction:
-						value: &value 0
-						constant: 1
-			second-object: = Button:
-				background: green
-				interaction: = OneKeyI:
-					action: = AddIntAction:
-						value: *value
-						constant: -1
-		second-object: = EditCaption:
-			text: = ToStringI:
-				value: > 0
-				args: [*value]
-			background: blue
-			font: > ../../example-resources/segoeui.ttf
-			font-size: 30
+	object: = BoxMovableBorder:
+		first-object: red
+		second-object: blue
+		border-value: = RLerp:
+			a: [0, 0]
+			b: [3, 1]
+			value: = Time:
+				start: &start yes
+				end: *start

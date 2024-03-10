@@ -55,11 +55,12 @@ namespace ie {
 			for(auto const& delta: delta_) {
 				data += delta.asSeconds();
 			}
-			if(data_ < upper_bound_) {
-				data_ = data;
+			
+			if(data <= upper_bound_) {
+				data_ = lower_bound_ + data;
 			} else {
+				data_ = upper_bound_;
 				play_ = false;
-				data_ = 0;
 				for(auto& delta: delta_) {
 					delta = sf::Time{};
 				}

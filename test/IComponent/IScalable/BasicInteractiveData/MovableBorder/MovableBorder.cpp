@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
-#include <IE/component/IComponent/IScalable/Box/BoxMovableBorder/BoxMovableBorder.hpp>
+#include <IE/component/IComponent/IScalable/BasicInteractiveData/MovableBorder/MovableBorder.hpp>
 #include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
 #include <IE/shared/ISReadable/ISRanged/SRanged/SRanged.hpp>
 #include <IComponent/_InitInfoData/InitInfoData.hpp>
-#include <image_equal/image_equal.hpp>
+#include <_image_equal/image_equal.hpp>
 
-TEST(IComponent, BoxMovableBorder) {
+TEST(IComponent, MovableBorder) {
 	InitInfoData data{{100, 100}};
 	
 	ie::SMRFloat value{0.f};
-	ie::BoxMovableBorder box_movable_border{
+	ie::MovableBorder box_movable_border{
 		{
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green),
 			ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Red),
@@ -53,9 +53,9 @@ TEST(IComponent, BoxMovableBorder) {
 	ASSERT_EQ(box_movable_border.get_area_position(), (sf::Vector2f{33, 46}));
 	
 	data.draw_manager.draw();
-	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxMovableBorder-0.0.png"));
+	ASSERT_TRUE(data.render_equal_with_save("test-src/MovableBorder-0.0.png"));
 	
 	value.set(0.7f);
 	data.draw_manager.draw();
-	ASSERT_TRUE(data.render_equal_with_save("test-src/BoxMovableBorder-0.7.png"));
+	ASSERT_TRUE(data.render_equal_with_save("test-src/MovableBorder-0.7.png"));
 }
