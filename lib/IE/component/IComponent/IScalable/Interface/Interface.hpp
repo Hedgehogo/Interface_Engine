@@ -25,6 +25,7 @@ namespace ie {
 		explicit Interface(
 			sf::RenderWindow& window,
 			DynBuffer& dyn_buffer,
+			KeyHandler& key_handler,
 			BoxPtr<IScalable::Make>&& object
 		);
 		
@@ -83,6 +84,7 @@ namespace ie {
 	auto make_interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
+		KeyHandler& key_handler,
 		std::filesystem::path file_path,
 		int argc = 0,
 		char* argv[] = {}

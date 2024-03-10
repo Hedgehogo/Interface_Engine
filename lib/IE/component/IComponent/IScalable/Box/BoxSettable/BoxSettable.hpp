@@ -40,6 +40,7 @@ namespace ie {
 		sf::RenderWindow* window_;
 		sf::RenderTarget* render_target_;
 		DynBuffer* dyn_buffer_;
+		KeyHandler* key_handler_;
 		InteractionManager interaction_manager_;
 		PanelManagerInterceptor panel_manager_interceptor_;
 		BoxPtr<IScalable> object_;

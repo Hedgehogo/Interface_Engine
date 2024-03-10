@@ -58,7 +58,8 @@ namespace ie {
 	
 	protected:
 		sf::RenderWindow window_;
-		DynBuffer dyn_buffer;
+		DynBuffer dyn_buffer_;
+		KeyHandler key_handler_;
 		Interface interface_;
 		BoxPtr<BaseWindowResizer> resizer_;
 		sf::Vector2u min_size_;

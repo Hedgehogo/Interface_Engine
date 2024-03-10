@@ -11,6 +11,7 @@ ie::InitInfo InitInfoData::make_init_info() {
 		window,
 		render_target,
 		dyn_buffer,
+		key_handler,
 		draw_manager,
 		update_manager,
 		interaction_manager,

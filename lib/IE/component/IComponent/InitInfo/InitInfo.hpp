@@ -7,6 +7,8 @@ namespace ie {
 	
 	class DynBuffer;
 	
+	class KeyHandler;
+	
 	class DrawManager;
 	
 	class UpdateManager;
@@ -19,6 +21,7 @@ namespace ie {
 		sf::RenderWindow& window;
 		sf::RenderTarget& render_target;
 		DynBuffer& dyn_buffer;
+		KeyHandler& key_handler;
 		DrawManager& draw_manager;
 		UpdateManager& update_manager;
 		InteractionManager& interaction_manager;
@@ -28,6 +31,7 @@ namespace ie {
 			sf::RenderWindow& window_,
 			sf::RenderTarget& render_target_,
 			DynBuffer& dyn_buffer,
+			KeyHandler& key_handler_,
 			DrawManager& draw_manager_,
 			UpdateManager& update_manager_,
 			InteractionManager& interaction_manager_,
@@ -39,6 +43,8 @@ namespace ie {
 		auto copy(sf::RenderTarget& render_target_) const -> InitInfo;
 		
 		auto copy(DynBuffer& dyn_buffer_) const -> InitInfo;
+		
+		auto copy(KeyHandler& key_handler_) const -> InitInfo;
 		
 		auto copy(DrawManager& draw_manager_) const -> InitInfo;
 		
