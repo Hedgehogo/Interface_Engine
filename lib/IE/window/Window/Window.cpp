@@ -106,7 +106,7 @@ namespace ie {
 	}
 	
 	auto Window::update() -> void {
-		KeyHandler::update_mouse();
+		KeyHandler{}.update_mouse();
 		sf::Vector2i mouse_position{sf::Mouse::getPosition(window_)};
 		
 		bool resizer_updated = resizer_->update(mouse_position);
@@ -117,7 +117,7 @@ namespace ie {
 		//interface.draw_debug(window, 0, 2, 90, 90);
 		window_.display();
 		
-		KeyHandler::clear_global_keys();
+		KeyHandler{}.clear_global_keys();
 	}
 	
 	auto Window::get_interface() -> Interface& {

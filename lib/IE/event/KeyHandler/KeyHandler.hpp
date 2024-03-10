@@ -5,27 +5,25 @@
 namespace ie {
 	class KeyHandler {
 	public:
-		static auto get_keys_pressed() -> std::vector<Key>;
+		KeyHandler() = default;
 		
-		static auto set_keys_pressed(std::vector<Key> keys_pressed) -> void;
+		auto update() -> void;
 		
-		static auto update() -> void;
+		auto update_keyboard() -> void;
 		
-		static auto update_keyboard() -> void;
+		auto update_mouse() -> void;
 		
-		static auto update_mouse() -> void;
+		auto add_key(Key key) -> void;
 		
-		static auto add_key(Key key) -> void;
+		auto delete_key(Key key) -> void;
 		
-		static auto delete_key(Key key) -> void;
+		auto clear() -> void;
 		
-		static auto clear() -> void;
+		auto clear_global_keys() -> void;
 		
-		static auto clear_global_keys() -> void;
+		auto to_string(Key key) -> std::string;
 		
-		static auto to_string(Key key) -> std::string;
-		
-		static auto is_key_pressed(Key key) -> bool;
+		auto is_key_pressed(Key key) -> bool;
 	
 	protected:
 		static std::vector<Key> keys_pressed_;

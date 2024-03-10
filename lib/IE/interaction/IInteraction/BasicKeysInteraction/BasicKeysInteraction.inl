@@ -44,14 +44,14 @@ namespace ie {
 	auto BasicKeysInteraction<T>::update(sf::Vector2i mouse_position) -> void {
 		press_ = true;
 		for(auto& key: keys_) {
-			if(!KeyHandler::is_key_pressed(key)) {
+			if(!KeyHandler{}.is_key_pressed(key)) {
 				press_ = false;
 				break;
 			}
 		}
 		if(press_) {
 			for(auto& key: black_list_keys_) {
-				if(KeyHandler::is_key_pressed(key)) {
+				if(KeyHandler{}.is_key_pressed(key)) {
 					press_ = false;
 					break;
 				}

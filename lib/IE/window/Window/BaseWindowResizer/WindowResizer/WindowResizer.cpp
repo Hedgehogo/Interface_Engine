@@ -8,7 +8,7 @@ namespace ie {
 	}
 	
 	bool WindowResizer::update(sf::Vector2i mouse_position) {
-		if(KeyHandler::is_key_pressed(key_)) {
+		if(KeyHandler{}.is_key_pressed(key_)) {
 			if(current_border_.x || current_border_.y) {
 				auto global_mouse_position = mouse_position + window_->get_window().getPosition();
 				if(current_border_.y) {

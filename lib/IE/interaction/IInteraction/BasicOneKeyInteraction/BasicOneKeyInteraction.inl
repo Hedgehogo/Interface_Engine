@@ -42,7 +42,7 @@ namespace ie {
 	
 	template<typename T>
 	auto BasicOneKeyInteraction<T>::update(sf::Vector2i mouse_position) -> void {
-		action_->update(mouse_position, KeyHandler::is_key_pressed(key_));
+		action_->update(mouse_position, KeyHandler{}.is_key_pressed(key_));
 	}
 	
 	template<typename T>

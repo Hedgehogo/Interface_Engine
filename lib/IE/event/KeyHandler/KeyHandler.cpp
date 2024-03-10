@@ -6,14 +6,6 @@ namespace ie {
 	std::vector<Key> KeyHandler::keys_pressed_{};
 	std::vector<Key> KeyHandler::global_keys_pressed_{};
 	
-	auto KeyHandler::get_keys_pressed() -> std::vector<Key> {
-		return keys_pressed_;
-	}
-	
-	auto KeyHandler::set_keys_pressed(std::vector<Key> keys_pressed) -> void {
-		KeyHandler::keys_pressed_ = keys_pressed;
-	}
-	
 	auto KeyHandler::update() -> void {
 		update_keyboard();
 		update_mouse();
@@ -86,6 +78,6 @@ namespace ie {
 	}
 	
 	auto is_key_pressed(Key key) -> bool {
-		return KeyHandler::is_key_pressed(key);
+		return KeyHandler{}.is_key_pressed(key);
 	}
 }
