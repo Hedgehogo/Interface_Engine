@@ -50,7 +50,7 @@ auto main() -> int {
 		
 		auto event{sf::Event{}};
 		while(window.get_window().pollEvent(event)) {
-			ie::handle_event(event);
+			window.handle_event(event);
 			
 			if(event.type == sf::Event::Closed) {
 				window.get_window().close();

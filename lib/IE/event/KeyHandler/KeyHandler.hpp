@@ -21,8 +21,6 @@ namespace ie {
 		
 		auto clear_global_keys() -> void;
 		
-		auto to_string(Key key) -> std::string;
-		
 		auto is_key_pressed(Key key) -> bool;
 	
 	protected:
@@ -30,5 +28,5 @@ namespace ie {
 		static std::vector<Key> global_keys_pressed_;
 	};
 	
-	auto is_key_pressed(Key key) -> bool;
+	auto is_key_pressed(Key key) -> orl::Option<bool>;
 }

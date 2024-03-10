@@ -40,11 +40,11 @@ namespace ie {
 			sf::ContextSettings&& settings = sf::ContextSettings{}
 		);
 		
-		auto create(sf::VideoMode mode, const sf::String& title, sf::Uint32, const sf::ContextSettings& settings) -> void;
+		auto create(sf::VideoMode mode, sf::String const& title, sf::Uint32, sf::ContextSettings const& settings) -> void;
 		
-		virtual auto create(sf::VideoMode mode, const sf::String& title, const sf::ContextSettings& settings = sf::ContextSettings()) -> void;
+		virtual auto create(sf::VideoMode mode, sf::String const& title, sf::ContextSettings const& settings = sf::ContextSettings()) -> void;
 		
-		auto set_size(const sf::Vector2u& size) -> void;
+		auto set_size(sf::Vector2u const& size) -> void;
 		
 		virtual auto re_calculate_min_size() -> void;
 		
@@ -55,6 +55,8 @@ namespace ie {
 		auto get_window() -> sf::RenderWindow&;
 		
 		auto get_min_size() const -> sf::Vector2u;
+		
+		auto handle_event(sf::Event event) -> void;
 	
 	protected:
 		sf::RenderWindow window_;

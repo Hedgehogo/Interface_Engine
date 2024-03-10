@@ -73,11 +73,14 @@ namespace ie {
 		}
 	}
 	
-	auto KeyHandler::to_string(Key key) -> std::string {
-		return ie::to_string(key);
-	}
-	
-	auto is_key_pressed(Key key) -> bool {
-		return KeyHandler{}.is_key_pressed(key);
+	auto is_key_pressed(Key key) -> orl::Option<bool> {
+		auto value{static_cast<int>(key)};
+		if(value < static_cast<int>(Key::MouseLeft)) {
+			return {sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(value))};
+		} else if(value < static_cast<int>(Key::MouseWheelUp)) {
+			auto button{static_cast<sf::Mouse::Button>(value - static_cast<int>(Key::MouseLeft))};
+			return {sf::Mouse::isButtonPressed(button)};
+		}
+		return {};
 	}
 }

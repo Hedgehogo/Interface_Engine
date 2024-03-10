@@ -23,8 +23,14 @@ namespace ie {
 	template<typename T>
 	BasicMouseFnInteraction<T>::BasicMouseFnInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
 		BasicFnInteraction<T>({std::move(make.start_fn), std::move(make.finish_fn)}, init_info),
+		key_handler_(&init_info.key_handler),
 		left_button_action_(make.left_button_action->make(init_info)),
 		right_button_action_(make.right_button_action->make(init_info)) {
+	}
+	
+	template<typename T>
+	auto BasicMouseFnInteraction<T>::get_key_handler() -> KeyHandler& {
+		return *key_handler_;
 	}
 	
 	template<typename T>

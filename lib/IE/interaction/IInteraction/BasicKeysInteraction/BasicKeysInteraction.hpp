@@ -42,6 +42,7 @@ namespace ie {
 		auto finish(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
+		KeyHandler* key_handler_;
 		BoxPtr<BasicKeyAction<T> > action_;
 		std::vector<Key> keys_;
 		std::vector<Key> black_list_keys_;

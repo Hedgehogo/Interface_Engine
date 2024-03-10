@@ -27,6 +27,7 @@ namespace ie {
 		auto update(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
+		KeyHandler* key_handler_;
 		InteractionManager* interaction_manager_;
 	};
 	
