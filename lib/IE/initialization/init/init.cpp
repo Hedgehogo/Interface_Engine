@@ -44,6 +44,7 @@ namespace ie {
 			add_type_with_make<SReadable<bool>, SLessOrEqual<T> >(std::string("(<=)") + name);
 			add_type_with_make<SReadable<bool>, SGreaterOrEqual<T> >(std::string("(>=)") + name);
 			add_type_with_make<SRanged<T>, SLerp<T> >("Lerp");
+			add_type_with_make<SRanged<T>, SRLerp<T> >("RLerp");
 			add_type_with_make<SRanged<T>, SRFloor<T> >("RFloor");
 			add_type_with_make<SRanged<T>, SRCeil<T> >("RCeil");
 			add_type_with_make<SRanged<T>, SRRound<T> >("RRound");

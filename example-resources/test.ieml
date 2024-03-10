@@ -1,52 +1,9 @@
-object: = BoxBorderVertical:
-	objects:
-		- = BoxMovableBorder:
-			first-object: = BoxMovableBorder:
-				border-horizontal: yes
-				first-object: red
-				second-object: blue
-				border-value: = Time:
-					start: &start1 yes
-					end: &start2 no
-			second-object: = BoxMovableBorder:
-				border-horizontal: yes
-				first-object: cyan
-				second-object: magenta
-				border-value: = Time:
-					start: &_start1 yes
-					end: &_start2 no
-			border-value: &a 0.5
-		- = MovableBorder:
-			border-horizontal: yes
-			border-interaction-size: 30
-			first-object: = BoxMovableBorder:
-				border-horizontal: yes
-				first-object: red
-				second-object: blue
-				border-value: = Time:
-					start: *start2
-					end: &start3 no
-			second-object: = BoxMovableBorder:
-				border-horizontal: yes
-				first-object: cyan
-				second-object: magenta
-				border-value: = Time:
-					start: *_start2
-					end: &_start3 no
-			border-value: *a
-		- = BoxMovableBorder:
-			first-object: = BoxMovableBorder:
-				border-horizontal: yes
-				first-object: red
-				second-object: blue
-				border-value: = Time:
-					start: *start3
-					end: *start1
-			second-object: = BoxMovableBorder:
-				border-horizontal: yes
-				first-object: cyan
-				second-object: magenta
-				border-value: = Time:
-					start: *_start3
-					end: *_start1
-			border-value: *a
+object: = BoxMovableBorder:
+	first-object: red
+	second-object: blue
+	border-value: = RLerp:
+		a: [0, 0]
+		b: [3, 1]
+		value: = Time:
+			start: &start yes
+			end: *start

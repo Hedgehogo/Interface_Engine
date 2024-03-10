@@ -61,7 +61,6 @@
 #include "IE/interaction/IAction/BasicKeyAction/BasicCloseWindowAction/BasicCloseWindowAction.hpp"
 #include "IE/component/IComponent/IScalable/BasicInteractiveData/Switcher/SwitherAction/SwitcherAction.hpp"
 #include "IE/shared/ISReadable/readable.hpp"
-#include "IE/shared/ISReadable/ISRanged/STime/STime.hpp"
 #include "IE/debug/BoxDebug/BoxDebug.hpp"
 
 namespace ie {

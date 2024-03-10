@@ -15,12 +15,12 @@ namespace ie {
 			if(pair->id_ != 0) {
 				if(init_info.dyn_buffer.indexed_.count(pair->id_) == 0) {
 					if(auto add_result{init_info.dyn_buffer.indexed_.emplace(pair->id_, pair->make_->make(init_info))}; add_result.second) {
-						return *builder.cast(add_result.first->second).except();
+						return *builder.cast(add_result.first->second).except(); // if except is returned, it means that make structure returns the wrong type
 					}
 				}
-				return *builder.cast(init_info.dyn_buffer.indexed_.at(pair->id_)).except();
+				return *builder.cast(init_info.dyn_buffer.indexed_.at(pair->id_)).except(); // if except is returned, it means that make structure returns the wrong type
 			}
-			return *builder.cast(init_info.dyn_buffer.non_indexed_.emplace_back(pair->make_->make(init_info))).except();
+			return *builder.cast(init_info.dyn_buffer.non_indexed_.emplace_back(pair->make_->make(init_info))).except(); // if except is returned, it means that make structure returns the wrong type
 		}
 		return *std::get_if<1>(&make_dyn.data_);
 	}

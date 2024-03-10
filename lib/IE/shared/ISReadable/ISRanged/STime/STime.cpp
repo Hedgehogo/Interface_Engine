@@ -55,8 +55,9 @@ namespace ie {
 			for(auto const& delta: delta_) {
 				data += delta.asSeconds();
 			}
+			
 			if(data <= upper_bound_) {
-				data_ = data;
+				data_ = lower_bound_ + data;
 			} else {
 				data_ = upper_bound_;
 				play_ = false;
