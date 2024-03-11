@@ -3,13 +3,13 @@
 namespace ie {
 	namespace make_system {
 		template<typename T_>
-		SRLerp<T_>::SRLerp(MakeDyn<ie::ISRanged<T_> > x, T_ k, T_ b) :
-			x(std::move(x)), k(k), b(b) {
+		SRLerp<T_>::SRLerp(MakeDyn<ie::ISRanged<T_> > value, T_ k, T_ b) :
+			value(std::move(value)), k(k), b(b) {
 		}
 		
 		template<typename T_>
-		SRLerp<T_>::SRLerp(MakeDyn<ie::ISRanged<T_> > x, sf::Vector2<T_> a, sf::Vector2<T_> b) :
-			x(std::move(x)), k((b.y - a.y) / (b.x - a.x)), b(a.y - (k * a.x)) {
+		SRLerp<T_>::SRLerp(MakeDyn<ie::ISRanged<T_> > value, sf::Vector2<T_> a, sf::Vector2<T_> b) :
+			value(std::move(value)), k((b.y - a.y) / (b.x - a.x)), b(a.y - (k * a.x)) {
 		}
 		
 		template<typename T_>
@@ -21,12 +21,12 @@ namespace ie {
 	template<typename T_>
 	SRLerp<T_>::SRLerp(Make&& make, ie::SInitInfo init_info) :
 		SRanged<T_>(
-			{},
+			make.data,
 			init_info
 		),
 		value_(
 			DynBuffer::get(
-				std::move(make.x),
+				std::move(make.value),
 				init_info
 			),
 			[this](auto const&){
@@ -35,8 +35,13 @@ namespace ie {
 		),
 		k_(make.k),
 		b_(make.b){
-		this->upper_bound_ = k_ * value_.get().get_upper_bound() + b_;
-		this->lower_bound_ = k_ * value_.get().get_lower_bound() + b_;
+		if(k_ >= 0) {
+			this->upper_bound_ = k_ * value_.get().get_upper_bound() + b_;
+			this->lower_bound_ = k_ * value_.get().get_lower_bound() + b_;
+		} else {
+			this->upper_bound_ = k_ * value_.get().get_lower_bound() + b_;
+			this->lower_bound_ = k_ * value_.get().get_upper_bound() + b_;
+		}
 	}
 	
 	template<typename T_>

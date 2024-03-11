@@ -1,8 +1,125 @@
-object: = BoxMovableBorder:
-	first-object: red
-	second-object: blue
-	border-value: = RLerp:
-		k: 0
-		value: = Time:
-			start: &start yes
-			end: *start
+object: = BoxBorderHorizontal:
+	objects:
+		- = BoxMovableBorder:
+			border-horizontal: yes
+			first-object: red
+			second-object: blue
+			border-value: = RLerp:
+				k: 0.5
+				b: 0.5
+				value: = Cos:
+					frequency: 0.8
+					phase: 0
+					value: &time = Time:
+						start: &start yes
+						end: *start
+		- = BoxMovableBorder:
+			border-horizontal: yes
+			first-object: red
+			second-object: blue
+			border-value: = RLerp:
+				k: 0.5
+				b: 0.5
+				value: = Cos:
+					frequency: 0.8
+					phase: 0.94
+					value: *time
+		- = BoxMovableBorder:
+			border-horizontal: yes
+			first-object: red
+			second-object: blue
+			border-value: = RLerp:
+				k: 0.5
+				b: 0.5
+				value: = Cos:
+					frequency: 0.8
+					phase: 1.88
+					value: *time
+		- = BoxMovableBorder:
+			border-horizontal: yes
+			first-object: red
+			second-object: blue
+			border-value: = RLerp:
+				k: 0.5
+				b: 0.5
+				value: = Cos:
+					frequency: 0.8
+					phase: 2.82
+					value: *time
+		- = BoxMovableBorder:
+			border-horizontal: yes
+			first-object: red
+			second-object: blue
+			border-value: = RLerp:
+				k: 0.5
+				b: 0.5
+				value: = Cos:
+					frequency: 0.8
+					phase: 3.76
+					value: *time
+		- = BoxMovableBorder:
+			border-horizontal: yes
+			first-object: red
+			second-object: blue
+			border-value: = RLerp:
+				k: 0.5
+				b: 0.5
+				value: = Cos:
+					frequency: 0.8
+					phase: 4.71
+					value: *time
+		- = BoxMovableBorder:
+			border-horizontal: yes
+			first-object: red
+			second-object: blue
+			border-value: = RLerp:
+				k: 0.5
+				b: 0.5
+				value: = Cos:
+					frequency: 0.8
+					phase: 5.65
+					value: *time
+		- = BoxMovableBorder:
+			border-horizontal: yes
+			first-object: red
+			second-object: blue
+			border-value: = RLerp:
+				k: 0.5
+				b: 0.5
+				value: = Cos:
+					frequency: 0.8
+					phase: 6.59
+					value: *time
+		- = BoxMovableBorder:
+			border-horizontal: yes
+			first-object: red
+			second-object: blue
+			border-value: = RLerp:
+				k: 0.5
+				b: 0.5
+				value: = Cos:
+					frequency: 0.8
+					phase: 7.53
+					value: *time
+		- = BoxMovableBorder:
+			border-horizontal: yes
+			first-object: red
+			second-object: blue
+			border-value: = RLerp:
+				k: 0.5
+				b: 0.5
+				value: = Cos:
+					frequency: 0.8
+					phase: 8.48
+					value: *time
+		- = BoxMovableBorder:
+			border-horizontal: yes
+			first-object: red
+			second-object: blue
+			border-value: = RLerp:
+				k: 0.5
+				b: 0.5
+				value: = Cos:
+					frequency: 0.8
+					phase: 9.42
+					value: *time

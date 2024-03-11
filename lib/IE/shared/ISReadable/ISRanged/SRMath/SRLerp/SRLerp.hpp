@@ -11,13 +11,13 @@ namespace ie{
 	namespace make_system{
 		template<typename T_>
 		struct SRLerp : public virtual ie::SRanged<T_>::Make{
-			MakeDyn<ie::ISRanged<T_> > x;
+			MakeDyn<ie::ISRanged<T_> > value;
 			T_ k;
 			T_ b;
 			
-			SRLerp(MakeDyn<ie::ISRanged<T_> > x, T_ k, T_ b);
+			SRLerp(MakeDyn<ie::ISRanged<T_> > value, T_ k, T_ b);
 			
-			SRLerp(MakeDyn<ie::ISRanged<T_> > x, sf::Vector2<T_> a, sf::Vector2<T_> b);
+			SRLerp(MakeDyn<ie::ISRanged<T_> > value, sf::Vector2<T_> a, sf::Vector2<T_> b);
 			
 			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
