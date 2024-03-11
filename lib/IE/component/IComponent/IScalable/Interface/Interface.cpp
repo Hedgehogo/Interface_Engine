@@ -21,6 +21,7 @@ namespace ie {
 				init_info.window,
 				init_info.render_target,
 				init_info.dyn_buffer,
+				init_info.key_handler,
 				this->draw_manager_,
 				this->update_manager_,
 				this->interaction_manager_,
@@ -35,6 +36,7 @@ namespace ie {
 	Interface::Interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
+		KeyHandler& key_handler,
 		BoxPtr<IScalable::Make>&& object
 	) :
 		window_(&window),
@@ -44,6 +46,7 @@ namespace ie {
 				window,
 				window,
 				dyn_buffer,
+				key_handler,
 				this->draw_manager_,
 				this->update_manager_,
 				this->interaction_manager_,
@@ -161,7 +164,14 @@ namespace ie {
 		return Interface::Make{std::move(object)};
 	}
 	
-	auto make_interface(sf::RenderWindow& window, DynBuffer& dyn_buffer, std::filesystem::path file_path, int argc, char* argv[]) -> Interface {
+	auto make_interface(
+		sf::RenderWindow& window,
+		DynBuffer& dyn_buffer,
+		KeyHandler& key_handler,
+		std::filesystem::path file_path,
+		int argc,
+		char* argv[]
+	) -> Interface {
 		if(auto modules = std::filesystem::path{file_path}.replace_filename("modules.yaml"); std::filesystem::exists(modules)) {
 			load_modules(argc, argv, modules);
 		}
@@ -169,7 +179,7 @@ namespace ie {
 		auto node{ieml::from_file(file_path)};
 		auto map{node.get_map_view().except()};
 		auto object{map.at("object").except().as<BoxPtr<IScalable::Make> >().except()};
-		return Interface{window, dyn_buffer, std::move(object)};
+		return Interface{window, dyn_buffer, key_handler, std::move(object)};
 	}
 }
 

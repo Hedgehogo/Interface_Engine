@@ -107,11 +107,6 @@ namespace ie {
 		F15,                   ///< The F15 key
 		Pause,                 ///< The Pause key
 		
-		Dash = Hyphen,         ///< \deprecated Use Hyphen instead
-		BackSpace = Backspace, ///< \deprecated Use Backspace instead
-		BackSlash = Backslash, ///< \deprecated Use Backslash instead
-		SemiColon = Semicolon, ///< \deprecated Use Semicolon instead
-		
 		MouseLeft = 101,       ///< The left mouse button
 		MouseRight,            ///< The right mouse button
 		MouseMiddle,           ///< The middle (wheel) mouse button
@@ -124,38 +119,7 @@ namespace ie {
 		MouseWheelRight,       ///< The scroll the mouse wheel right
 	};
 	
-	class KeyHandler {
-	public:
-		static auto get_keys_pressed() -> std::vector<Key>;
-		
-		static auto set_keys_pressed(std::vector<Key> keys_pressed) -> void;
-		
-		static auto update() -> void;
-		
-		static auto update_key_board() -> void;
-		
-		static auto update_mouse() -> void;
-		
-		static auto add_key(Key key) -> void;
-		
-		static auto delete_key(Key key) -> void;
-		
-		static auto clear() -> void;
-		
-		static auto clear_global_keys() -> void;
-		
-		static auto to_string(Key key) -> std::string;
-		
-		static auto is_key_pressed(Key key) -> bool;
-	
-	protected:
-		static std::vector<Key> keys_pressed_;
-		static std::vector<Key> global_keys_pressed_;
-	};
-	
 	auto to_string(Key key) -> std::string;
-	
-	auto is_key_pressed(Key key) -> bool;
 }
 
 template<>

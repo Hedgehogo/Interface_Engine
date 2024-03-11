@@ -18,7 +18,7 @@ namespace ie {
 	
 	template<typename T>
 	auto BasicPressedInteraction<T>::update(sf::Vector2i mouse_position) -> void {
-		if(KeyHandler::is_key_pressed(this->key_)) {
+		if(key_handler_->is_key_pressed(this->key_)) {
 			this->action_->update(mouse_position, true);
 		} else {
 			this->action_->update(mouse_position, false);

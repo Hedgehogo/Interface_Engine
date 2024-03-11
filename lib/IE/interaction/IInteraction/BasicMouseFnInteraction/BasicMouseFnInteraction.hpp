@@ -36,6 +36,8 @@ namespace ie {
 		
 		BasicMouseFnInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
+		auto get_key_handler() -> KeyHandler& override;
+		
 		auto get_left_button_action() -> BasicKeyAction<T>& override;
 		
 		auto get_left_button_action() const -> BasicKeyAction<T> const& override;
@@ -45,6 +47,7 @@ namespace ie {
 		auto get_right_button_action() const -> BasicKeyAction<T> const& override;
 		
 	protected:
+		KeyHandler* key_handler_;
 		BoxPtr<BasicKeyAction<T> > left_button_action_;
 		BoxPtr<BasicKeyAction<T> > right_button_action_;
 	};

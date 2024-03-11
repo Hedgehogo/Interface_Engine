@@ -7,8 +7,8 @@ namespace ie {
 		internal_border_size_(internal_border_size), external_border_size_(external_border_size), key_(key) {
 	}
 	
-	bool WindowResizer::update(sf::Vector2i mouse_position) {
-		if(KeyHandler::is_key_pressed(key_)) {
+	bool WindowResizer::update(sf::Vector2i mouse_position, KeyHandler& key_handler) {
+		if(key_handler.is_key_pressed(key_)) {
 			if(current_border_.x || current_border_.y) {
 				auto global_mouse_position = mouse_position + window_->get_window().getPosition();
 				if(current_border_.y) {

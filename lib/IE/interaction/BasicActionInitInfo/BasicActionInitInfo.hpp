@@ -13,6 +13,7 @@ namespace ie {
 		sf::RenderWindow& window;
 		sf::RenderTarget& render_target;
 		DynBuffer& dyn_buffer;
+		KeyHandler& key_handler;
 		UpdateManager& update_manager;
 		InteractionManager& interaction_manager;
 		IPanelManager& panel_manager;
@@ -22,6 +23,7 @@ namespace ie {
 			sf::RenderWindow& window_,
 			sf::RenderTarget& render_target_,
 			DynBuffer& dyn_buffer_,
+			KeyHandler& key_handler_,
 			UpdateManager& update_manager_,
 			InteractionManager& interaction_manager_,
 			IPanelManager& panel_manager_,
@@ -37,6 +39,10 @@ namespace ie {
 		auto copy(sf::RenderTarget& render_target_) const -> BasicActionInitInfo<T>;
 		
 		auto copy(DynBuffer& dyn_buffer_) const -> BasicActionInitInfo<T>;
+		
+		auto copy(KeyHandler& key_handler) const -> BasicActionInitInfo<T>;
+		
+		auto copy(UpdateManager& update_manager_) const -> BasicActionInitInfo<T>;
 		
 		auto copy(InteractionManager& interaction_manager_) const -> BasicActionInitInfo<T>;
 		

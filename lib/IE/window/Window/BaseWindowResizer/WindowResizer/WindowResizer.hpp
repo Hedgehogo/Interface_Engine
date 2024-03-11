@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../BaseWindowResizer.hpp"
-#include "IE/enums/KeyHandler/KeyHandler.hpp"
+#include "IE/event/KeyHandler/KeyHandler.hpp"
 #include <variant>
 
 namespace ie {
@@ -13,7 +13,7 @@ namespace ie {
 	
 		WindowResizer(int internal_border_size = 5, int external_border_size = 5, Key key = Key::MouseLeft);
 		
-		auto update(sf::Vector2i mouse_position) -> bool override;
+		auto update(sf::Vector2i mouse_position, KeyHandler& key_handler) -> bool override;
 	
 	protected:
 		virtual auto set_size() -> void;

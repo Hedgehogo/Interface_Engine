@@ -1,5 +1,5 @@
 #include "Window.hpp"
-#include "IE/sfml-events/handle_event/handle_event.hpp"
+#include "IE/event/handle_event/handle_event.hpp"
 
 namespace ie {
 	auto get_window_resizer() -> BaseWindowResizer* {
@@ -77,7 +77,7 @@ namespace ie {
 	*/
 	
 	Window::Window(Interface::Make&& make, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) :
-		interface_(window_, dyn_buffer, std::move(make.object)),
+		interface_(window_, dyn_buffer_, key_handler_, std::move(make.object)),
 		resizer_(get_window_resizer()) {
 		
 		Window::re_calculate_min_size();
@@ -93,11 +93,11 @@ namespace ie {
 		resizer_->set_window(*this);
 	}
 	
-	auto Window::create(sf::VideoMode mode, const sf::String& title, sf::Uint32, const sf::ContextSettings& settings) -> void {
+	auto Window::create(sf::VideoMode mode, sf::String const& title, sf::Uint32, sf::ContextSettings const& settings) -> void {
 		window_.create(mode, title, sf::Style::None, settings);
 	}
 	
-	auto Window::create(sf::VideoMode mode, const sf::String& title, const sf::ContextSettings& settings) -> void {
+	auto Window::create(sf::VideoMode mode, sf::String const& title, sf::ContextSettings const& settings) -> void {
 		Window::create(mode, title, sf::Style::None, settings);
 	}
 	
@@ -106,18 +106,16 @@ namespace ie {
 	}
 	
 	auto Window::update() -> void {
-		KeyHandler::update_mouse();
+		key_handler_.update_mouse();
 		sf::Vector2i mouse_position{sf::Mouse::getPosition(window_)};
 		
-		bool resizer_updated = resizer_->update(mouse_position);
+		bool resizer_updated = resizer_->update(mouse_position, key_handler_);
 		
 		window_.clear();
 		interface_.update(sf::Vector2f{(mouse_position)}, !resizer_updated && window_.hasFocus());
 		interface_.draw();
 		//interface.draw_debug(window, 0, 2, 90, 90);
 		window_.display();
-		
-		KeyHandler::clear_global_keys();
 	}
 	
 	auto Window::get_interface() -> Interface& {
@@ -132,11 +130,29 @@ namespace ie {
 		return min_size_;
 	}
 	
-	auto Window::set_size(const sf::Vector2u& size) -> void {
+	auto Window::set_size(sf::Vector2u const& size) -> void {
 		sf::View view{sf::Vector2f{size / 2u}, sf::Vector2f{size}};
 		window_.setSize(size);
 		window_.setView(view);
 		interface_.set_size(sf::Vector2f{size});
+	}
+	
+	auto Window::handle_event(sf::Event event) -> void {
+		if(event.type == sf::Event::MouseWheelScrolled) {
+			MouseWheel::set_delta(event.mouseWheelScroll);
+		}
+		if(event.type == sf::Event::KeyPressed) {
+			key_handler_.add_key(static_cast<Key>(event.key.code));
+		}
+		if(event.type == sf::Event::KeyReleased) {
+			key_handler_.delete_key(static_cast<Key>(event.key.code));
+		}
+		if(event.type == sf::Event::MouseButtonPressed) {
+			key_handler_.add_key(static_cast<Key>(static_cast<int>(event.mouseButton.button) + static_cast<int>(Key::MouseLeft)));
+		}
+		if(event.type == sf::Event::MouseButtonReleased) {
+			key_handler_.delete_key(static_cast<Key>(static_cast<int>(event.mouseButton.button) + static_cast<int>(Key::MouseLeft)));
+		}
 	}
 	
 	auto make_window(fs::path file_path, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) -> Window {

@@ -19,4 +19,8 @@ namespace ie {
 	template<typename T>
 	auto BasicAddBlockInteractionAction<T>::stop_pressed() -> void {
 	}
+	
+	template<typename T>
+	auto BasicAddBlockInteractionAction<T>::finish() -> void {
+	}
 }

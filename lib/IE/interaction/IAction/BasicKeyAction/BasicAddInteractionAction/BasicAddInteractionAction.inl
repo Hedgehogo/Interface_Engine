@@ -38,4 +38,9 @@ namespace ie {
 	template<typename T>
 	auto BasicAddInteractionAction<T>::while_not_pressed() -> void {
 	}
+	
+	template<typename T>
+	auto BasicAddInteractionAction<T>::finish() -> void {
+		interaction_manager_->delete_interaction(*interaction_);
+	}
 }

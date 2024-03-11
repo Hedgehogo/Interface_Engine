@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IAction.hpp"
-#include "IE/sfml-events/MouseWheel/MouseWheel.hpp"
+#include "IE/event/MouseWheel/MouseWheel.hpp"
 
 namespace ie {
 	class WheelAction : public virtual IAction {

@@ -10,7 +10,7 @@ namespace ie {
 	public:
 		virtual auto set_window(Window& window) -> void;
 		
-		virtual auto update(sf::Vector2i mouse_position) -> bool = 0;
+		virtual auto update(sf::Vector2i mouse_position, KeyHandler& key_handler) -> bool = 0;
 		
 		virtual ~BaseWindowResizer() = default;
 	

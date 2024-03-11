@@ -1,4 +1,5 @@
 ﻿#include "IE/IE.hpp"
+#include "IE/event/Event/Event.hpp"
 #include <iostream>
 #include <array>
 
@@ -49,7 +50,7 @@ auto main() -> int {
 		
 		auto event{sf::Event{}};
 		while(window.get_window().pollEvent(event)) {
-			ie::handle_event(event);
+			window.handle_event(event);
 			
 			if(event.type == sf::Event::Closed) {
 				window.get_window().close();

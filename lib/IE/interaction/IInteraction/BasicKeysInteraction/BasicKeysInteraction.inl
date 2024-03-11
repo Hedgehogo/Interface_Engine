@@ -17,7 +17,11 @@ namespace ie {
 	
 	template<typename T>
 	BasicKeysInteraction<T>::BasicKeysInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
-		action_(make.action->make(init_info)), keys_(std::move(make.keys)), black_list_keys_(std::move(make.black_list_keys)), press_(false) {
+		key_handler_(&init_info.key_handler),
+		action_(make.action->make(init_info)),
+		keys_(std::move(make.keys)),
+		black_list_keys_(std::move(make.black_list_keys)),
+		press_(false) {
 		std::sort(keys_.begin(), keys_.end());
 	}
 	
@@ -44,14 +48,14 @@ namespace ie {
 	auto BasicKeysInteraction<T>::update(sf::Vector2i mouse_position) -> void {
 		press_ = true;
 		for(auto& key: keys_) {
-			if(!KeyHandler::is_key_pressed(key)) {
+			if(!key_handler_->is_key_pressed(key)) {
 				press_ = false;
 				break;
 			}
 		}
 		if(press_) {
 			for(auto& key: black_list_keys_) {
-				if(KeyHandler::is_key_pressed(key)) {
+				if(key_handler_->is_key_pressed(key)) {
 					press_ = false;
 					break;
 				}
@@ -62,7 +66,7 @@ namespace ie {
 	
 	template<typename T>
 	auto BasicKeysInteraction<T>::finish(sf::Vector2i) -> void {
-		action_->set_pressed(false);
+		action_->finish();
 	}
 	
 	template<typename T>

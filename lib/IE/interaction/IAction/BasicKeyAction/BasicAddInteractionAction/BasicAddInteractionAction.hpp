@@ -36,6 +36,8 @@ namespace ie {
 		
 		auto while_not_pressed() -> void override;
 		
+		auto finish() -> void override;
+		
 		InteractionManager* interaction_manager_;
 		BoxPtr<IBasicInteraction<T> > interaction_;
 	};

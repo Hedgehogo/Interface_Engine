@@ -78,8 +78,8 @@ namespace ie {
 		auto finish(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
-		std::vector<std::vector<Hotkey > > hotkey_states_;
-		std::vector<Hotkey >* now_hotkeys_;
+		std::vector<std::vector<Hotkey> > hotkey_states_;
+		std::vector<Hotkey>* now_hotkeys_;
 	};
 	
 	using HotkeyInteraction = BasicHotkeyInteraction<>;
