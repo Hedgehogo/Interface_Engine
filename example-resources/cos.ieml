@@ -1,0 +1,11 @@
+= BoxMovableBorder:
+border-horizontal: yes
+first-object: red
+second-object: blue
+border-value: = RLerp:
+	k: 0.5
+	b: 0.5
+	value: = Cos:
+		frequency: 0.8
+		phase: *phase
+		value: *time

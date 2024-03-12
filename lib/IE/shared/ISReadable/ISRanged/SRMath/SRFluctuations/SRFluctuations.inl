@@ -59,9 +59,9 @@ orl::Option<ie::make_system::SRFluctuations<T_, Fn_> > ieml::Decode<char, ie::ma
 	auto map{node.get_map_view().except()};
 	return ie::make_system::SRFluctuations<T_, Fn_>{
 		map.at("value").except().as<ie::MakeDyn<ie::ISRanged<T_> > >().except(),
-		map.get_as<T_>("amplitude").except().ok_or(1),
-		map.get_as<T_>("frequency").except().ok_or(1),
-		map.get_as<T_>("phase").except().ok_or(0)
+		map.get_as<T_>("amplitude", ieml::clear).except().ok_or(1),
+		map.get_as<T_>("frequency", ieml::clear).except().ok_or(1),
+		map.get_as<T_>("phase", ieml::clear).except().ok_or(0)
 	};
 	
 }
