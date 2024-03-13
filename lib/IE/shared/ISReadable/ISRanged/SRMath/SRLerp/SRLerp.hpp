@@ -36,6 +36,8 @@ namespace ie{
 		
 		auto set_lower_bound(T_ lower_bound) -> void override;
 		
+		auto set_bounds(T_ lower_bound, T_ upper_bound) -> void override;
+		
 	protected:
 		SReader<ISRanged<T_>> value_;
 		T_ k_;

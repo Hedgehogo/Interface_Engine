@@ -68,6 +68,16 @@ namespace ie {
 			value_.get().set_upper_bound((this->lower_bound_ - b_) / k_);
 		}
 	}
+	
+	template<typename T_>
+	auto SRLerp<T_>::set_bounds(T_ lower_bound, T_ upper_bound) -> void {
+		SRanged<T_>::set_bounds(lower_bound, upper_bound);
+		if(k_ >= 0) {
+			value_.get().set_bounds((this->lower_bound_ - b_) / k_, (this->upper_bound_ - b_) / k_);
+		} else {
+			value_.get().set_bounds((this->upper_bound_ - b_) / k_, (this->lower_bound_ - b_) / k_);
+		}
+	}
 }
 
 template<typename T_>
