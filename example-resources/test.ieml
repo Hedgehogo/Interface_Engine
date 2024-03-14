@@ -1,27 +1,8 @@
-object: = BoxBorderHorizontal:
-	objects:
-		- < cos
-			phase: 0
-			time: &time = Time:
-				start: &start yes
-				end: *start
-		- < cos
-			phase: 0.94
-		- < cos
-			phase: 1.88
-		- < cos
-			phase: 2.82
-		- < cos
-			phase: 3.76
-		- < cos
-			phase: 4.71
-		- < cos
-			phase: 5.65
-		- < cos
-			phase: 6.59
-		- < cos
-			phase: 7.53
-		- < cos
-			phase: 8.48
-		- < cos
-			phase: 9.42
+object: = BoxMovableBorder:
+	first-object: red
+	second-object: blue
+	border-value: = BezierCurve:
+		points: [0, 1, 0, 1]
+		value: = Time:
+			start: &start yes
+			end: *start

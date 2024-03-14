@@ -25,6 +25,11 @@ namespace tnl {
 		static auto type_name() -> StringView;
 	};
 	
+	template<typename T_, size_t size_>
+	struct TypeName<std::array<T_, size_> > {
+		static auto type_name() -> StringView;
+	};
+	
 	template<typename K_, typename V_>
 	struct TypeName<absl::flat_hash_map<K_, V_> > {
 		static auto type_name() -> StringView;
@@ -50,6 +55,11 @@ namespace ieml {
 	template<typename T>
 	struct Decode<char, std::vector<T> > {
 		static auto decode(ieml::Node const& node) -> orl::Option<std::vector<T> >;
+	};
+	
+	template<typename T_, size_t size_>
+	struct Decode<char, std::array<T_, size_> > {
+		static auto decode(ieml::Node const& node) -> orl::Option<std::array<T_, size_> >;
 	};
 	
 	template<typename T>

@@ -24,6 +24,15 @@ namespace tnl {
 		return {name};
 	}
 	
+	template<typename T_, size_t size_>
+	auto TypeName<std::array<T_, size_> >::type_name() -> StringView {
+		static auto name{[] {
+			auto name{tnl::type_name<T_>()};
+			return String{"Vec("} + String{name.begin(), name.end()} + String {", "} + std::to_string(size_) + String{")"};
+		}()};
+		return {name};
+	}
+	
 	template<typename K_, typename V_>
 	auto TypeName<absl::flat_hash_map<K_, V_> >::type_name() -> StringView {
 		static auto name{[] {
@@ -60,6 +69,16 @@ namespace ieml {
 		result.reserve(list.size());
 		for(auto& item: list) {
 			result.push_back(item.template as<T>().except());
+		}
+		return result;
+	}
+	
+	template<typename T, size_t size_>
+	auto Decode<char, std::array<T, size_> >::decode(ieml::Node const& node) -> orl::Option<std::array<T, size_> > {
+		auto& list = node.get_list().except();
+		auto result{std::array<T, size_>{}};
+		for(auto i{size_t{0}}; i < size_; ++i) {
+			result[i] = list.at(i).as<T>().except();
 		}
 		return result;
 	}

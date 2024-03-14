@@ -43,6 +43,7 @@ namespace ie {
 			add_type_with_make<SReadable<bool>, SGreater<T> >(std::string("(>)") + name);
 			add_type_with_make<SReadable<bool>, SLessOrEqual<T> >(std::string("(<=)") + name);
 			add_type_with_make<SReadable<bool>, SGreaterOrEqual<T> >(std::string("(>=)") + name);
+			add_type_with_make<SRanged<T>, SRBezierCurve<T> >("BezierCurve");
 			add_type_with_make<SRanged<T>, SRSin<T> >("Sin");
 			add_type_with_make<SRanged<T>, SRCos<T> >("Cos");
 			add_type_with_make<SRanged<T>, SLerp<T> >("Lerp");
