@@ -14,7 +14,7 @@ namespace ie {
 			}();
 	}
 	
-	SRLerpException* SRLerpException::clone() const {
+	auto SRLerpException::clone() const -> SRLerpException* {
 		return new SRLerpException{*this};
 	}
 }

@@ -8,7 +8,7 @@ namespace ie {
 		
 		auto get_description() const -> ieml::String override;
 		
-		SRLerpException* clone() const override;
+		auto clone() const -> SRLerpException* override;
 	
 	protected:
 		bool constructor_with_point;
