@@ -226,6 +226,14 @@ namespace ie {
 			return "mouse-wheel-right";
 		return "unknown";
 	}
+	
+	auto to_key(sf::Mouse::Button button) -> Key {
+		return static_cast<Key>(static_cast<int>(button) + static_cast<int>(Key::MouseLeft));
+	}
+	
+	auto to_key(sf::Keyboard::Key key) -> Key {
+		return static_cast<Key>(key);
+	}
 }
 
 auto ieml::Decode<char, ie::Key>::decode(ieml::Node const& node) -> orl::Option<ie::Key> {

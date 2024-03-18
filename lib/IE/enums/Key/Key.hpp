@@ -120,6 +120,10 @@ namespace ie {
 	};
 	
 	auto to_string(Key key) -> std::string;
+	
+	auto to_key(sf::Mouse::Button button) -> Key;
+	
+	auto to_key(sf::Keyboard::Key key) -> Key;
 }
 
 template<>
