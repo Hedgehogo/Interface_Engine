@@ -3,13 +3,13 @@
 namespace ie {
 	namespace make_system {
 		template<typename T_>
-		SRLerp<T_>::SRLerp(MakeDyn<ie::ISRanged<T_> > x, T_ k, T_ b) :
-			x(std::move(x)), k(k), b(b) {
+		SRLerp<T_>::SRLerp(MakeDyn<ie::ISRanged<T_> > value, T_ k, T_ b) :
+			value(std::move(value)), k(k), b(b) {
 		}
 		
 		template<typename T_>
-		SRLerp<T_>::SRLerp(MakeDyn<ie::ISRanged<T_> > x, sf::Vector2<T_> a, sf::Vector2<T_> b) :
-			x(std::move(x)), k((b.y - a.y) / (b.x - a.x)), b(a.y - (k * a.x)) {
+		SRLerp<T_>::SRLerp(MakeDyn<ie::ISRanged<T_> > value, sf::Vector2<T_> a, sf::Vector2<T_> b) :
+			value(std::move(value)), k((b.y - a.y) / (b.x - a.x)), b(a.y - (k * a.x)) {
 		}
 		
 		template<typename T_>
@@ -21,12 +21,12 @@ namespace ie {
 	template<typename T_>
 	SRLerp<T_>::SRLerp(Make&& make, ie::SInitInfo init_info) :
 		SRanged<T_>(
-			{},
+			make.data,
 			init_info
 		),
 		value_(
 			DynBuffer::get(
-				std::move(make.x),
+				std::move(make.value),
 				init_info
 			),
 			[this](auto const&){
@@ -35,8 +35,13 @@ namespace ie {
 		),
 		k_(make.k),
 		b_(make.b){
-		this->upper_bound_ = value_.get().get_upper_bound();
-		this->lower_bound_ = value_.get().get_lower_bound();
+		if(k_ >= 0) {
+			this->upper_bound_ = k_ * value_.get().get_upper_bound() + b_;
+			this->lower_bound_ = k_ * value_.get().get_lower_bound() + b_;
+		} else {
+			this->upper_bound_ = k_ * value_.get().get_lower_bound() + b_;
+			this->lower_bound_ = k_ * value_.get().get_upper_bound() + b_;
+		}
 	}
 	
 	template<typename T_>
@@ -63,22 +68,42 @@ namespace ie {
 			value_.get().set_upper_bound((this->lower_bound_ - b_) / k_);
 		}
 	}
+	
+	template<typename T_>
+	auto SRLerp<T_>::set_bounds(T_ lower_bound, T_ upper_bound) -> void {
+		SRanged<T_>::set_bounds(lower_bound, upper_bound);
+		if(k_ >= 0) {
+			value_.get().set_bounds((this->lower_bound_ - b_) / k_, (this->upper_bound_ - b_) / k_);
+		} else {
+			value_.get().set_bounds((this->upper_bound_ - b_) / k_, (this->lower_bound_ - b_) / k_);
+		}
+	}
 }
 
 template<typename T_>
 orl::Option<ie::make_system::SRLerp<T_> > ieml::Decode<char, ie::make_system::SRLerp<T_> >::decode(ieml::Node const& node) {
 	auto map{node.get_map_view().except()};
-	for(auto& k : map.at("k").ok_or_none()) {
+	for(auto& k_node : map.at("k").ok_or_none()) {
+		auto k{k_node.as<T_>().except()};
+		if(k == 0){
+			throw ie::SRLerpException{k_node.get_mark(), false};
+		}
 		return ie::make_system::SRLerp<T_>{
 			map.at("value").except().as<ie::MakeDyn<ie::ISRanged<T_> > >().except(),
-			k.as<T_>().except(),
+			k,
 			map.get_as<T_>("b").except().ok_or({})
 		};
 	}
+	const auto a = map.at("a").except().as<sf::Vector2<T_> >().except();
+	const auto b_node = map.at("b").except();
+	const auto b = b_node.as<sf::Vector2<T_> >().except();
+	if(a.x == b.x){
+		throw ie::SRLerpException{b_node.get_mark(), true};
+	}
 	return ie::make_system::SRLerp<T_>{
 		map.at("value").except().as<ie::MakeDyn<ie::ISRanged<T_> > >().except(),
-		map.at("a").except().as<sf::Vector2<T_> >().except(),
-		map.at("b").except().as<sf::Vector2<T_> >().except()
+		a,
+		b
 	};
 	
 }

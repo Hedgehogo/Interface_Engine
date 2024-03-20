@@ -59,7 +59,7 @@ namespace ie {
 	}
 	
 	template<typename T_>
-	SRanged<T_>::SRanged(T_ data, T_ upper_bound_, T_ lower_bound_) :
+	SRanged<T_>::SRanged(T_ data, T_ lower_bound_, T_ upper_bound_) :
 		SReadable<T_>(std::forward<T_>(data)),
 		upper_bound_(std::forward<T_>(upper_bound_)),
 		lower_bound_(std::forward<T_>(lower_bound_)) {
@@ -113,8 +113,8 @@ namespace ie {
 				set(lower_bound_);
 			}
 		} else {
-			set_upper_bound(upper_bound);
-			set_lower_bound(lower_bound);
+			SRanged<T_>::set_upper_bound(upper_bound);
+			SRanged<T_>::set_lower_bound(lower_bound);
 		}
 	}
 	

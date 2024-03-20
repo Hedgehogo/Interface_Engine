@@ -25,7 +25,7 @@ namespace ie {
 	STime::STime(
 		STime::Make&& make,
 		SInitInfo init_info
-	) : SRanged(make.data, make.end_time, 0),
+	) : SRanged(make.data, 0, make.end_time),
 		delta_([&]() -> orl::Option<sf::Time> {
 			if(make.pause_restart) {
 				return {};

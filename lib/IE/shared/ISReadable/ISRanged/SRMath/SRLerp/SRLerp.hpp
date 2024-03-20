@@ -2,6 +2,7 @@
 
 #include "../../SRanged/SRanged.hpp"
 #include "IE/shared/ISReadable/ISRanged/SRanged/SRanged.hpp"
+#include "exception/SRLerpException.hpp"
 
 namespace ie{
 	template<typename T_>
@@ -10,13 +11,13 @@ namespace ie{
 	namespace make_system{
 		template<typename T_>
 		struct SRLerp : public virtual ie::SRanged<T_>::Make{
-			MakeDyn<ie::ISRanged<T_> > x;
+			MakeDyn<ie::ISRanged<T_> > value;
 			T_ k;
 			T_ b;
 			
-			SRLerp(MakeDyn<ie::ISRanged<T_> > x, T_ k, T_ b);
+			SRLerp(MakeDyn<ie::ISRanged<T_> > value, T_ k, T_ b);
 			
-			SRLerp(MakeDyn<ie::ISRanged<T_> > x, sf::Vector2<T_> a, sf::Vector2<T_> b);
+			SRLerp(MakeDyn<ie::ISRanged<T_> > value, sf::Vector2<T_> a, sf::Vector2<T_> b);
 			
 			auto make(SInitInfo init_info) -> rttb::Dyn override;
 		};
@@ -34,6 +35,8 @@ namespace ie{
 		auto set_upper_bound(T_ upper_bound) -> void override;
 		
 		auto set_lower_bound(T_ lower_bound) -> void override;
+		
+		auto set_bounds(T_ lower_bound, T_ upper_bound) -> void override;
 		
 	protected:
 		SReader<ISRanged<T_>> value_;

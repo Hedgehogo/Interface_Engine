@@ -36,8 +36,7 @@ namespace ie {
 				this->set_border_position(value);
 			}
 		){
-		border_value_.get().set_lower_bound(0);
-		border_value_.get().set_upper_bound(1);
+		border_value_.get().set_bounds(0, 1);
 	}
 	
 	template<bool mutable_>
