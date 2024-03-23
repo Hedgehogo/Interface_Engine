@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/System/Vector2.hpp>
+#include "IE/event/EventHandler/EventHandler.hpp"
 #include "IE/interaction/IInteraction/IInteraction.hpp"
 
 namespace ie {
@@ -10,7 +11,7 @@ namespace ie {
 	public:
 		virtual auto set_window(Window& window) -> void;
 		
-		virtual auto update(sf::Vector2i mouse_position, KeyHandler& key_handler) -> bool = 0;
+		virtual auto update(std::vector<Event> const& events, EventHandler& event_handler) -> bool = 0;
 		
 		virtual ~BaseWindowResizer() = default;
 	

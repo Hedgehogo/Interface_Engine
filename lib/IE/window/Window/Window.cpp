@@ -37,7 +37,7 @@ namespace ie {
 		resizer_(get_window_resizer()) {
 		
 		Window::re_calculate_min_size();
-		sf::Vector2u size{mode.width, mode.height};
+		auto size{sf::Vector2u{mode.width, mode.height}};
 		if(size == sf::Vector2u{0, 0}) {
 			size = sf::Vector2u(map_vector2<float, std::ceil>(this->interface_.get_normal_size()));
 		}
@@ -63,7 +63,8 @@ namespace ie {
 	
 	auto Window::update(std::vector<Event> const& events) -> void {
 		auto mouse_position{event_handler_.get_touch(std::numeric_limits<size_t>::max()).some_or({})};
-		auto resizer_updated{resizer_->update(mouse_position, event_handler_.key_handler())};
+		
+		auto resizer_updated{resizer_->update(events, event_handler_)};
 		
 		window_.clear();
 		interface_.update(sf::Vector2f{mouse_position}, !resizer_updated && window_.hasFocus());

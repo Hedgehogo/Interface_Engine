@@ -116,6 +116,19 @@ namespace ie::event_system {
 		return {};
 	}
 	
+	auto Event::touch_pressed(bool pressed) const -> orl::Option<event_system::Touch> {
+		return touch().and_then([&](auto touch) -> orl::Option<event_system::Touch> {
+			if(touch.id == std::numeric_limits<size_t>::max()) {
+				if(pressed) {
+					return {touch};
+				} else {
+					return {};
+				}
+			}
+			return {touch};
+		});
+	}
+	
 	auto Event::type() const -> Event::Type {
 		return static_cast<Type>(data_.index());
 	}
@@ -123,4 +136,4 @@ namespace ie::event_system {
 	auto Event::operator<(Event const& event) -> bool {
 		return data_.index() < event.data_.index();
 	}
-	}
+}

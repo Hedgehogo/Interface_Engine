@@ -93,6 +93,8 @@ namespace ie {
 			
 			auto joystick_button() const -> orl::Option<event_system::JoystickButton>;
 			
+			auto touch_pressed(bool pressed) const -> orl::Option<event_system::Touch>;
+			
 			auto type() const -> Type;
 			
 			auto operator<(Event const& event) -> bool;
