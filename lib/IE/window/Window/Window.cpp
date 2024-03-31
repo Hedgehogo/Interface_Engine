@@ -91,6 +91,11 @@ namespace ie {
 		window_.setView(view);
 		interface_.set_size(sf::Vector2f{size});
 	}
+
+	auto Window::set_position(sf::Vector2i const& position) -> void {
+		event_handler_.move_window_position(window_.getPosition() - position);
+		window_.setPosition(position);
+	}
 	
 	auto Window::events() -> std::vector<Event> {
 		ie::clear_event();

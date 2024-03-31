@@ -16,18 +16,6 @@ namespace ie {
 		auto update(std::vector<Event> const& events, EventHandler& event_handler) -> bool override;
 	
 	protected:
-		virtual auto set_size() -> void;
-		
-		virtual auto set_borders() -> void;
-		
-		virtual auto get_current_border(
-			int& grip,
-			int*& current_border,
-			int& border,
-			int& border2,
-			int window_size,
-			int touch_position
-		) const -> void;
 		
 		int internal_border_size_;
 		int external_border_size_;
@@ -35,7 +23,7 @@ namespace ie {
 		
 		Borders borders_;
 		sf::Vector2i grip_;
-		sf::Vector2<int*> current_border_;
+		sf::Vector2<orl::Option<int*> > current_borders_;
 		bool old_key_pressed_;
 	};
 }

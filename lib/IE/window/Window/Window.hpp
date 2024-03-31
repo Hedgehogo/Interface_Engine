@@ -29,6 +29,8 @@ namespace ie {
 		
 		virtual auto create(sf::VideoMode mode, sf::String const& title, sf::ContextSettings const& settings = sf::ContextSettings()) -> void;
 		
+		auto set_position(sf::Vector2i const& position) -> void;
+		
 		auto set_size(sf::Vector2u const& size) -> void;
 		
 		virtual auto re_calculate_min_size() -> void;

@@ -40,6 +40,12 @@ namespace ie {
 		touch_[id] = value;
 	}
 	
+	auto EventHandler::move_window_position(sf::Vector2i position) -> void {
+		for(auto& [id, touch_position] : touch_) {
+			touch_position += position;
+		}
+	}
+	
 	auto EventHandler::remove_touch(size_t id) -> void {
 		touch_.erase(id);
 	}
