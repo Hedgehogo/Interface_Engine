@@ -22,7 +22,7 @@ namespace ie {
 		auto is_key_pressed(Key key) -> bool;
 	
 	private:
-		std::array<bool, static_cast<size_t>(Key::MouseWheelRight)> keys_;
+		std::bitset<static_cast<size_t>(Key::MouseWheelRight)> keys_;
 	};
 	
 	auto is_key_pressed(Key key) -> orl::Option<bool>;
