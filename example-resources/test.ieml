@@ -1,8 +1,15 @@
 object: = BoxMovableBorder:
 	first-object: red
 	second-object: blue
-	border-value: = BezierCurve:
-		points: [0, 1, 0, 1]
-		value: = Time:
-			start: &start yes
-			end: *start
+	border-value: = RListValue:
+		values:
+			- = BezierCurve:
+				points: [0, 1, 1, 1]
+				value: = Time:
+					start: &start yes
+					end: &end no
+			- = BezierCurve:
+				points: [1, 1, 1, 0]
+				value: = Time:
+					start: *end
+					end: *start
