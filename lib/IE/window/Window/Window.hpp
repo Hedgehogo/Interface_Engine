@@ -2,6 +2,8 @@
 
 #include <filesystem>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "IE/event/Event/Event.hpp"
+#include "IE/event/EventHandler/EventHandler.hpp"
 #include "IE/component/IComponent/IScalable/Interface/Interface.hpp"
 #include "BaseWindowResizer/WindowResizer/WindowResizer.hpp"
 
@@ -11,26 +13,9 @@ namespace ie {
 	class Window {
 	public:
 		/*old_yaml
-		explicit Window(Interface&& interface);
+		Window(Interface&& interface, sf::WindowHandle handle, sf::ContextSettings&& settings = sf::ContextSettings());
 		
-		Window(
-			Interface&& interface,
-			const sf::String& title,
-			const sf::VideoMode& mode = {1, 1},
-			const sf::ContextSettings& settings = sf::ContextSettings()
-		);
-		
-		Window(Interface&& interface, const sf::String& title, const sf::ContextSettings& settings);
-		
-		Window(Interface&& interface, sf::WindowHandle handle, const sf::ContextSettings& settings = sf::ContextSettings());
-		
-		explicit Window(const std::filesystem::path& interface);
-		
-		Window(const std::filesystem::path& interface, const sf::String& title, const sf::VideoMode& mode = {1, 1}, const sf::ContextSettings& settings = sf::ContextSettings());
-		
-		Window(const std::filesystem::path& interface, const sf::String& title, const sf::ContextSettings& settings);
-		
-		Window(const std::filesystem::path& interface, sf::WindowHandle handle, const sf::ContextSettings& settings = sf::ContextSettings());
+		Window(fs::path interface, sf::WindowHandle handle, sf::ContextSettings&& settings = sf::ContextSettings());
 		*/
 		
 		Window(
@@ -44,11 +29,13 @@ namespace ie {
 		
 		virtual auto create(sf::VideoMode mode, sf::String const& title, sf::ContextSettings const& settings = sf::ContextSettings()) -> void;
 		
+		auto set_position(sf::Vector2i const& position) -> void;
+		
 		auto set_size(sf::Vector2u const& size) -> void;
 		
 		virtual auto re_calculate_min_size() -> void;
 		
-		virtual auto update() -> void;
+		virtual auto update(std::vector<Event> const& events) -> void;
 		
 		auto get_interface() -> Interface&;
 		
@@ -56,12 +43,14 @@ namespace ie {
 		
 		auto get_min_size() const -> sf::Vector2u;
 		
+		auto events() -> std::vector<Event>;
+		
 		auto handle_event(sf::Event event) -> void;
 	
 	protected:
 		sf::RenderWindow window_;
 		DynBuffer dyn_buffer_;
-		KeyHandler key_handler_;
+		EventHandler event_handler_;
 		Interface interface_;
 		BoxPtr<BaseWindowResizer> resizer_;
 		sf::Vector2u min_size_;

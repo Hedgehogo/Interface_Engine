@@ -44,20 +44,8 @@ auto main() -> int {
 	};
 	
 	auto fps{FpsCounter<500>{}};
-	
 	while(window.get_window().isOpen()) {
 		window.get_window().setTitle(std::to_string(fps.restart()));
-		
-		auto event{sf::Event{}};
-		while(window.get_window().pollEvent(event)) {
-			window.handle_event(event);
-			
-			if(event.type == sf::Event::Closed) {
-				window.get_window().close();
-			}
-		}
-		
-		window.update();
-		ie::clear_event();
+		window.update(window.events());
 	}
 }

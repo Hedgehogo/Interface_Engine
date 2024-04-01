@@ -33,9 +33,7 @@ namespace ie {
 	}
 	
 	auto KeyHandler::clear() -> void {
-		for(auto& item: keys_) {
-			item = false;
-		}
+		keys_ = 0;
 	}
 	
 	auto KeyHandler::is_key_pressed(Key key) -> bool {

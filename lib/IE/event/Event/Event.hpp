@@ -20,7 +20,7 @@ namespace ie {
 		
 		struct Touch {
 			size_t id;
-			sf::Vector2f position;
+			sf::Vector2i position;
 		};
 		
 		struct JoystickConnect {
@@ -63,7 +63,7 @@ namespace ie {
 			
 			static auto Scroll(size_t wheel_id, float delta) -> Event;
 			
-			static auto Touch(size_t id, sf::Vector2f position) -> Event;
+			static auto Touch(size_t id, sf::Vector2i position) -> Event;
 			
 			static auto JoystickConnect(size_t id) -> Event;
 			
@@ -93,7 +93,11 @@ namespace ie {
 			
 			auto joystick_button() const -> orl::Option<event_system::JoystickButton>;
 			
+			auto touch_pressed(bool pressed) const -> orl::Option<event_system::Touch>;
+			
 			auto type() const -> Type;
+			
+			auto operator<(Event const& event) -> bool;
 		
 		private:
 			using Data = std::variant<

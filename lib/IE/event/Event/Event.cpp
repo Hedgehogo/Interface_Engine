@@ -24,7 +24,7 @@ namespace ie::event_system {
 		return Event{Data{std::in_place_index_t<4>(), event_system::Scroll{wheel_id, delta}}};
 	}
 	
-	auto Event::Touch(size_t id, sf::Vector2f position) -> Event {
+	auto Event::Touch(size_t id, sf::Vector2i position) -> Event {
 		return Event{Data{std::in_place_index_t<5>(), event_system::Touch{id, position}}};
 	}
 	
@@ -116,7 +116,24 @@ namespace ie::event_system {
 		return {};
 	}
 	
+	auto Event::touch_pressed(bool pressed) const -> orl::Option<event_system::Touch> {
+		return touch().and_then([&](auto touch) -> orl::Option<event_system::Touch> {
+			if(touch.id == std::numeric_limits<size_t>::max()) {
+				if(pressed) {
+					return {touch};
+				} else {
+					return {};
+				}
+			}
+			return {touch};
+		});
+	}
+	
 	auto Event::type() const -> Event::Type {
 		return static_cast<Type>(data_.index());
+	}
+	
+	auto Event::operator<(Event const& event) -> bool {
+		return data_.index() < event.data_.index();
 	}
 }
