@@ -1,6 +1,7 @@
 //included into ieml-basic.hpp
 
 #include "exception/Array/ArrayException.hpp"
+#include "IE/utils/array/array.hpp"
 
 namespace tnl {
 	template<typename T_>
@@ -77,16 +78,14 @@ namespace ieml {
 	
 	template<typename T, size_t size_>
 	auto Decode<char, std::array<T, size_> >::decode(ieml::Node const& node) -> orl::Option<std::array<T, size_> > {
-		auto& list = node.get_list().except();
-		if(list.size() != size_){
+		auto list = node.get_list_view().except();
+		if(list.get_size() != size_){
 			throw ie::ArrayException<size_>{node.get_mark()};
 		}
 		
-		auto result{std::array<T, size_>{}};
-		for(auto i{size_t{0}}; i < size_; ++i) {
-			result[i] = list.at(i).as<T>().except();
-		}
-		return result;
+		return ie::array_from_fn<size_>([&list](auto i){
+			return list.at(i).except().template as<T>().except();
+		});
 	}
 	
 	template<typename T>

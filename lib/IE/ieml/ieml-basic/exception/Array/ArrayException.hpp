@@ -10,7 +10,7 @@ namespace ie {
 		
 		auto get_description() const -> ieml::String override;
 		
-		auto clone() const -> ArrayException* override;;
+		auto clone() const -> ArrayException* override;
 	};
 }
 

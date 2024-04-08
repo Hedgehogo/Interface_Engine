@@ -39,7 +39,6 @@ namespace ie {
 	protected:
 		SReader<ISRanged<T_> > value_;
 		std::array<T_, 4> points_;
-		T_ k_;
 		T_ size_;
 	};
 }
