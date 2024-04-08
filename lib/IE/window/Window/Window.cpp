@@ -173,24 +173,6 @@ namespace ie {
 		return result;
 	}
 	
-	auto Window::handle_event(sf::Event event) -> void {
-		if(event.type == sf::Event::MouseWheelScrolled) {
-			MouseWheel::set_delta(event.mouseWheelScroll);
-		}
-		if(event.type == sf::Event::KeyPressed) {
-			event_handler_.set_key(to_key(event.key.code), true);
-		}
-		if(event.type == sf::Event::KeyReleased) {
-			event_handler_.set_key(to_key(event.key.code), false);
-		}
-		if(event.type == sf::Event::MouseButtonPressed) {
-			event_handler_.set_key(to_key(event.mouseButton.button), true);
-		}
-		if(event.type == sf::Event::MouseButtonReleased) {
-			event_handler_.set_key(to_key(event.mouseButton.button), false);
-		}
-	}
-	
 	auto make_window(fs::path file_path, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) -> Window {
 		return {make_interface(std::move(file_path)), std::move(title), std::move(mode), std::move(settings)};
 	}
