@@ -12,7 +12,7 @@ namespace ie {
 	auto y_size(std::vector<std::vector<T> >& vector) -> size_t;
 	
 	template<typename T, typename... As>
-	auto make_vector(T&& arg, As&&... args) -> std::vector<T>;
+	auto make_vector(T&& first, As&&... args) -> std::vector<T>;
 }
 
 #include "vector.inl"

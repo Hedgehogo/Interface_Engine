@@ -9,23 +9,12 @@ namespace ie {
 		return vector[0].size();
 	}
 	
-	namespace detail {
-		template<typename T>
-		auto add_items(std::vector<T>&) -> void {
-		}
-		
-		template<typename T, typename A, typename... As>
-		auto add_items(std::vector<T>& vector, A&& arg, As&& ... args) -> void {
-			vector.emplace_back(std::move(arg));
-			add_items<T, As...>(vector, std::move(args)...);
-		}
-	}
-	
 	template<typename T, typename... As>
-	auto make_vector(T&& arg, As&& ... args) -> std::vector<T> {
+	auto make_vector(T&& first, As&& ... args) -> std::vector<T> {
 		auto result{std::vector<T>{}};
 		result.reserve(sizeof...(As) + 1);
-		detail::add_items<T, As...>(result, std::move(arg), std::move(args)...);
+		result.emplace_back(std::forward<T>(first));
+		(static_cast<void>(result.emplace_back(std::forward<T>(args))), ...);
 		return result;
 	}
 }
