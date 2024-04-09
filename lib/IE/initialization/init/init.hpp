@@ -28,6 +28,7 @@
 #include "IE/component/IComponent/IScalable/Box/BoxSwitch/BoxSwitch.hpp"
 #include "IE/component/IComponent/IScalable/Box/BoxTabs/BoxTabs.hpp"
 #include "IE/component/IComponent/IScalable/Box/BoxSwitcherTabs/BoxSwitcherTabs.hpp"
+#include "IE/component/IComponent/IScalable/Box/BoxModulesLoader/BoxModulesLoader.hpp"
 #include "IE/component/IComponent/IScalable/Box/BoxConstCenter/BoxConstCenter.hpp"
 #include "IE/component/IComponent/IScalable/BasicInteractiveData/BaseSlider/ConstSlider/ConstSlider.hpp"
 #include "IE/component/IComponent/IScalable/BasicInteractiveData/BaseSlider/Slider/Slider.hpp"

@@ -23,15 +23,6 @@ namespace ie {
 		static absl::flat_hash_map<std::string, T> objects_;
 		static absl::flat_hash_map<std::string, T*> aliases_;
 	};
-
-#ifdef IE_ImageMagick_FOUND
-	/*old_yaml
-	template<>
-	struct LoadFromFile<std::vector<sf::Texture> > {
-		static auto load(std::vector<sf::Texture>& object, std::string name) -> void;
-	};
-	*/
-#endif
 }
 
 namespace tnl {
@@ -56,15 +47,6 @@ namespace ieml {
 	struct Decode<char, sf::Font&> {
 		static auto decode(ieml::Node const& node) -> orl::Option<sf::Font&>;
 	};
-	
-#ifdef IE_ImageMagick_FOUND
-	/*old_yaml
-	template<>
-	struct Decode<char, std::vector<sf::Texture>&> {
-		static auto decode(ieml::Node const& node) -> orl::Option<std::vector<sf::Texture>&>;
-	};
-	*/
-#endif
 }
 
 #include "FileBuffer.inl"

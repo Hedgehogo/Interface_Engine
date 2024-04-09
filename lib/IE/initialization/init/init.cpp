@@ -6,19 +6,9 @@
 #include "IE/modules/load_modules.hpp"
 #include "IE/ieml/shortcuts/shortcuts.hpp"
 #include "IE/utils/meta/is_contains_v/is_contains_v.hpp"
-#include "config.h"
-
-#ifdef IE_ImageMagick_FOUND
-#define MAGICKCORE_QUANTUM_DEPTH 16
-#define MAGICKCORE_HDRI_ENABLE MAGICKCORE_HDRI_ENABLE_OBSOLETE_IN_H
-#include <Magick++.h>
-#endif
 
 namespace ie {
 	auto init(int argc, char* argv[], std::filesystem::path modules_list) -> void {
-#ifdef IE_ImageMagick_FOUND
-		Magick::InitializeMagick("");
-#endif
 		ieml_rttb_init();
 		load_modules(argc, argv, modules_list);
 	}

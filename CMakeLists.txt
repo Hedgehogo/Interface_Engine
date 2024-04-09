@@ -56,6 +56,15 @@ crete_test_preparation(
 		"${CMAKE_CURRENT_BINARY_DIR}/bin/test-src/"
 )
 
+execute_process(
+		COMMAND git rev-parse HEAD
+		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+		OUTPUT_VARIABLE COMMIT_HASH
+		OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+configure_file(lib/config.h.in lib/config.h)
+
 if (IE_ENABLE_INSTALL)
 	create_install_target()
 endif ()

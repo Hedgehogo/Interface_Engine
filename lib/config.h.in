@@ -1,1 +1,1 @@
-#cmakedefine IE_ImageMagick_FOUND
+#define IE_COMMIT_HASH "${COMMIT_HASH}"

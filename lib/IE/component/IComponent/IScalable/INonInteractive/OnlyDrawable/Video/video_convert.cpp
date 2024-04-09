@@ -1,10 +1,5 @@
 #include "video_convert.hpp"
 #include "VideoFromFile/VideoFromFile.hpp"
-
-#ifdef IE_ImageMagick_FOUND
-#include "VideoFromFile/VideoFromFile.hpp"
-#endif
-
 #include "VideoFromTexture/VideoFromTexture.hpp"
 #include "IE/ieml/ieml-sfml/FileBuffer/FileBuffer.hpp"
 #include "IE/ieml/shortcuts/shortcuts.hpp"
@@ -20,16 +15,7 @@ namespace ie {
 		auto map{node.get_map_view().except()};
 		auto& path_node{map.at("path").except()};
 		auto viewing_progress{map.at("viewing-progress").except().as<MakeDyn<ISRFloat> >().except()};
-#ifdef IE_ImageMagick_FOUND
-		/*old_yaml
-		if(!map.at("offset").is_ok() && is_video(path_node.get_string().except())) {
-			return new VideoFromFile::Make{
-				path_node.as<std::vector<sf::Texture>&>().except(),
-				std::move(viewing_progress)
-			};
-		}
-		*/
-#endif
+
 		return new VideoFromTexture::Make{
 			path_node.as<sf::Texture&>().except(),
 			std::move(viewing_progress),

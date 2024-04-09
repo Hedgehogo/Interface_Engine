@@ -3,25 +3,6 @@ include(FetchContent)
 
 include(cmake/ConfigureDependency.cmake)
 
-function(connect_ImageMagick)
-	find_package(ImageMagick COMPONENTS Magick++ MagickCore)
-
-	message("<=================[ImageMagick]=================>")
-	message(${ImageMagick_FOUND})
-
-	if (DEFINED ImageMagick_INCLUDE_DIRS)
-		message(${ImageMagick_INCLUDE_DIRS})
-	endif ()
-
-	if (DEFINED ImageMagick_LIBRARIES)
-		message(${ImageMagick_LIBRARIES})
-	endif ()
-
-	message("<=================[ImageMagick]=================>")
-
-	configure_file(lib/config.h.in lib/config.h)
-endfunction()
-
 function(connect_yaml_cpp)
 	FetchContent_Declare(
 			yaml-cpp
@@ -99,7 +80,6 @@ function(dependency_management PROJECT)
 	FetchContent_MakeAvailable(SFML abseil ctre curl localisation-cpp box-ptr IEML_CBOR_cpp RTTB_cpp)
 
 	connect_yaml_cpp()
-	connect_ImageMagick()
 
 	configure_dependency(${PROJECT})
 endfunction()
