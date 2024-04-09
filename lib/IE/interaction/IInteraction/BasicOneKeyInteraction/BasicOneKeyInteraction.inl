@@ -13,7 +13,7 @@ namespace ie {
 	
 	template<typename T>
 	BasicOneKeyInteraction<T>::BasicOneKeyInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
-		key_handler_(&init_info.key_handler), action_(make.action->make(init_info)), key_(make.key) {
+		event_handler_(&init_info.event_handler), action_(make.action->make(init_info)), key_(make.key) {
 	}
 	
 	template<typename T>
@@ -42,7 +42,7 @@ namespace ie {
 	
 	template<typename T>
 	auto BasicOneKeyInteraction<T>::update(sf::Vector2i mouse_position) -> void {
-		action_->update(mouse_position, key_handler_->is_key_pressed(key_));
+		action_->update(mouse_position, event_handler_->get_key(key_));
 	}
 	
 	template<typename T>

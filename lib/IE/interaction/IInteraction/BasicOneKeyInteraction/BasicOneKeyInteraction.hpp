@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IInteraction.hpp"
-#include "IE/event/KeyHandler/KeyHandler.hpp"
+#include "IE/event/EventHandler/EventHandler.hpp"
 
 namespace ie {
 	template<typename T>
@@ -41,7 +41,7 @@ namespace ie {
 		auto finish(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
-		KeyHandler* key_handler_;
+		EventHandler* event_handler_;
 		BoxPtr<BasicKeyAction<T> > action_;
 		Key key_;
 	};

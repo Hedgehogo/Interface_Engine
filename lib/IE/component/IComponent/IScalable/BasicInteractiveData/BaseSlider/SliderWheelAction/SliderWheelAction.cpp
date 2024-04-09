@@ -11,7 +11,7 @@ namespace ie {
 	}
 	
 	SliderWheelAction::SliderWheelAction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info) :
-		key_handler_(&init_info.key_handler),
+		event_handler_(&init_info.event_handler),
 		slider_(&init_info.additional),
 		sensitivity_(make.sensitivity),
 		horizontal_(make.horizontal),
@@ -26,7 +26,7 @@ namespace ie {
 	
 	auto SliderWheelAction::while_pressed(sf::Vector2i, int value) -> void {
 		auto move{sensitivity_};
-		auto reverse{(key_handler_->is_key_pressed(Key::LShift) || key_handler_->is_key_pressed(Key::RShift)) != horizontal_};
+		auto reverse{(event_handler_->get_key(Key::LShift) || event_handler_->get_key(Key::RShift)) != horizontal_};
 		if(relativity_) {
 			auto slider_size{slider_->get_slider_size()};
 			auto area_size{slider_->get_area_size()};

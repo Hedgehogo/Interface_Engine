@@ -21,7 +21,7 @@ namespace ie {
 				init_info.window,
 				init_info.render_target,
 				init_info.dyn_buffer,
-				init_info.key_handler,
+				init_info.event_handler,
 				this->draw_manager_,
 				this->update_manager_,
 				this->interaction_manager_,
@@ -36,7 +36,7 @@ namespace ie {
 	Interface::Interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
-		KeyHandler& key_handler,
+		EventHandler& event_handler,
 		BoxPtr<IScalable::Make>&& object
 	) :
 		window_(&window),
@@ -46,7 +46,7 @@ namespace ie {
 				window,
 				window,
 				dyn_buffer,
-				key_handler,
+				event_handler,
 				this->draw_manager_,
 				this->update_manager_,
 				this->interaction_manager_,
@@ -167,7 +167,7 @@ namespace ie {
 	auto make_interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
-		KeyHandler& key_handler,
+		EventHandler& event_handler,
 		std::filesystem::path file_path,
 		int argc,
 		char* argv[]
@@ -179,7 +179,7 @@ namespace ie {
 		auto node{ieml::from_file(file_path)};
 		auto map{node.get_map_view().except()};
 		auto object{map.at("object").except().as<BoxPtr<IScalable::Make> >().except()};
-		return Interface{window, dyn_buffer, key_handler, std::move(object)};
+		return Interface{window, dyn_buffer, event_handler, std::move(object)};
 	}
 }
 

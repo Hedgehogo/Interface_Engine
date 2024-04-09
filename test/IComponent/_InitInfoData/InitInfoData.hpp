@@ -3,6 +3,7 @@
 #include <SFML/Window.hpp>
 #include "_image_equal/image_equal.hpp"
 #include <IE/shared/DynBuffer/DynBuffer.hpp>
+#include <IE/event/EventHandler/EventHandler.hpp>
 #include <IE/component/IDrawable/DrawManager/DrawManager.hpp>
 #include <IE/component/IUpdatable/UpdateManager/UpdateManager.hpp>
 #include <IE/interaction/InteractionManager/InteractionManager.hpp>
@@ -13,7 +14,7 @@ struct InitInfoData {
 	sf::RenderWindow window{};
 	sf::RenderTexture render_target{};
 	ie::DynBuffer dyn_buffer{};
-	ie::KeyHandler key_handler{};
+	ie::EventHandler event_handler{};
 	ie::DrawManager draw_manager{};
 	ie::UpdateManager update_manager{};
 	ie::InteractionManager interaction_manager{};
