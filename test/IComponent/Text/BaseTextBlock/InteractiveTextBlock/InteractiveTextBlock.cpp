@@ -35,5 +35,5 @@ TEST(IComponent_Text, InteractiveTextBlock) {
 	
 	ASSERT_FALSE(interactive_text_block.in({50, 50}));
 	ASSERT_TRUE(interactive_text_block.in({1, -1}));
-	ASSERT_TRUE(interactive_text_block.update_interactions({0, 0}));
+	ASSERT_TRUE(interactive_text_block.update_interactions(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})));
 }

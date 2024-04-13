@@ -54,8 +54,8 @@ namespace ie {
 		}
 	}
 	
-	auto BoxSwitch::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return value_.get() ? active_object_->update_interactions(mouse_position) : inactive_object_->update_interactions(mouse_position);
+	auto BoxSwitch::update_interactions(Event event) -> bool {
+		return value_.get() ? active_object_->update_interactions(event) : inactive_object_->update_interactions(event);
 	}
 	
 	auto BoxSwitch::get_first_object() -> IScalable& {

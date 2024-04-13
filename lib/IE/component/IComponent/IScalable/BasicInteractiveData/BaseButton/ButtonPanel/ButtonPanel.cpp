@@ -34,8 +34,8 @@ namespace ie {
 		interactive_.update();
 	}
 	
-	auto ButtonPanel::update_interactions(sf::Vector2f mouse_position) -> bool {
-		auto result{BaseButton::update_interactions(mouse_position)};
+	auto ButtonPanel::update_interactions(Event event) -> bool {
+		auto result{BaseButton::update_interactions(event)};
 		interactive_.update_interactions();
 		return result;
 	}

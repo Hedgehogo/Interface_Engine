@@ -188,17 +188,25 @@ namespace ie {
 		}
 	}
 	
-	auto Text::update_interactions(sf::Vector2f mouse_position) -> bool {
-		interact = true;
-		
-		for(auto& text_bock: text_blocks) {
-			if(text_bock->in(mouse_position)) {
-				if(text_bock->update_interactions(mouse_position)) {
-					return true;
+	auto Text::update_interactions(Event event) -> bool {
+		return event.touch().map([=](event_system::Touch touch) {
+			interact = true;
+			
+			for(auto& text_bock: text_blocks) {
+				if(text_bock->in(sf::Vector2f{touch.position})) {
+					if(text_bock->update_interactions(event)) {
+						return true;
+					}
 				}
 			}
-		}
-		return background->update_interactions(mouse_position);
+			return background->update_interactions(event);
+		}).some_or_else([=] {
+			auto updated{false};
+			for(auto& text_block: text_blocks) {
+				updated = text_block->update_interactions(event) || updated;
+			}
+			return background->update_interactions(event) || updated;
+		});
 	}
 	
 	auto Text::draw() -> void {

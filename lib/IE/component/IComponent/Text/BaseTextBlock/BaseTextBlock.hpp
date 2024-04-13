@@ -36,7 +36,7 @@ namespace ie {
 		
 		virtual auto update() -> void = 0;
 		
-		virtual auto update_interactions(sf::Vector2f mouse_position) -> bool = 0;
+		virtual auto update_interactions(Event event) -> bool = 0;
 	
 		virtual ~BaseTextBlock() = default;
 		

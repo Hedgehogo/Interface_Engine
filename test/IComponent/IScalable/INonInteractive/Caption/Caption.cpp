@@ -41,7 +41,7 @@ TEST(IComponent, BasicCaption) {
 	ASSERT_EQ(caption.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(caption.get_position(), sf::Vector2f{});
 	ASSERT_EQ(caption.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(caption.update_interactions({}), true);
+	ASSERT_EQ(caption.update_interactions(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
 	
 	caption.set_size({6, 14});
 	ASSERT_EQ(caption.get_size(), (sf::Vector2f{6, 14}));

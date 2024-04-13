@@ -14,8 +14,8 @@ namespace ie {
 		Box(make.min_size), bottom_object_(make.bottom_object->make(init_info)), top_object_(make.top_object->make(init_info)) {
 	}
 	
-	auto BoxAlternative::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return top_object_->update_interactions(mouse_position) || bottom_object_->update_interactions(mouse_position);
+	auto BoxAlternative::update_interactions(Event event) -> bool {
+		return top_object_->update_interactions(event) || bottom_object_->update_interactions(event);
 	}
 	
 	auto BoxAlternative::resize(sf::Vector2f size, sf::Vector2f position) -> void {

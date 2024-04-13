@@ -88,14 +88,14 @@ namespace ie {
 		interactive_.update();
 	}
 	
-	auto Switcher::update_interactions(sf::Vector2f mouse_position) -> bool {
-		auto background_update{
+	auto Switcher::update_interactions(Event event) -> bool {
+		auto updated{
 			active_.get() ?
-			active_background_->update_interactions(mouse_position) :
-			inactive_background_->update_interactions(mouse_position)
+			active_background_->update_interactions(event) :
+			inactive_background_->update_interactions(event)
 		};
 		interactive_.update_interactions();
-		return background_update;
+		return updated;
 	}
 	
 	auto Switcher::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {

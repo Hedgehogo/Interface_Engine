@@ -8,14 +8,14 @@ namespace ie {
 	
 	class BaseCharacter {
 	public:
-		enum class Special{
+		enum class Special {
 			No,
 			Space,
 			Enter,
 			Object,
 			FullLine,
 		};
-	
+		
 		BaseCharacter();
 		
 		virtual auto get_rerender() const -> bool;

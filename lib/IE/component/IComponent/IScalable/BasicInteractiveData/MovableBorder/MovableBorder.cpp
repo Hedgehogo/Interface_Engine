@@ -39,9 +39,9 @@ namespace ie {
 			init_info
 		),
 		interactive_(
-			make_box_ptr<IBasicInteraction<MovableBorder&>::Make, BasicOneKeyInteraction<MovableBorder&>::Make>(
+			make_box_ptr<BasicOneKeyInteraction<MovableBorder&>::Make>(
 				make_box_ptr<BasicAddBlockInteractionAction<MovableBorder&>::Make>(
-					make_box_ptr<BasicOneKeyInteraction<MovableBorder&>::Make, BasicPressedInteraction<MovableBorder&>::Make>(
+					make_box_ptr<BasicPressedInteraction<MovableBorder&>::Make>(
 						make_box_ptr<MovableBorderAction::Make>(
 							border_value_.get()
 						),
@@ -62,18 +62,26 @@ namespace ie {
 		interactive_.update();
 	}
 	
-	auto MovableBorder::update_interactions(sf::Vector2f mouse_position) -> bool {
-		auto border_position{layout_.position + first_object_->get_size()};
-		
-		if(
-			(!is_horizontal_border_ && (mouse_position.x < (border_position.x + border_interaction_size_) && mouse_position.x > (border_position.x - border_interaction_size_))) ||
-			(is_horizontal_border_ && (mouse_position.y < (border_position.y + border_interaction_size_) && mouse_position.y > (border_position.y - border_interaction_size_)))
-		) {
-			interactive_.update_interactions();
-		} else {
-			BasicBoxMovableBorder<true>::update_interactions(mouse_position);
-		}
-		return true;
+	auto MovableBorder::update_interactions(Event event) -> bool {
+		return event.touch().map([=](event_system::Touch touch) {
+			auto border_position{layout_.position + first_object_->get_size()};
+			auto in_border_axis = [=](float point_position, float border_position) {
+				return point_position < (border_position + border_interaction_size_) && point_position > (border_position - border_interaction_size_);
+			};
+			auto in_border{
+				is_horizontal_border_ ?
+				in_border_axis(touch.position.y, border_position.y) :
+				in_border_axis(touch.position.x, border_position.x)
+			};
+			
+			if(in_border) {
+				interactive_.update_interactions();
+				return true;
+			}
+			return BasicBoxMovableBorder<true>::update_interactions(event);
+		}).some_or_else([=] {
+			return BasicBoxMovableBorder<true>::update_interactions(event);
+		});
 	}
 }
 

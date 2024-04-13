@@ -19,11 +19,15 @@ namespace ie {
 		object_->resize(size - sf::Vector2f(thickness_ * 2.0f, thickness_ * 2.0f), position + sf::Vector2f(thickness_, thickness_));
 	}
 	
-	auto BoxConstBezel::update_interactions(sf::Vector2f mouse_position) -> bool {
-		if(object_->in_area(mouse_position)) {
-			return object_->update_interactions(mouse_position);
-		}
-		return bezel_->update_interactions(mouse_position);
+	auto BoxConstBezel::update_interactions(Event event) -> bool {
+		return event.touch().map([=](event_system::Touch touch) {
+			if(object_->in_area(sf::Vector2f{touch.position})) {
+				return object_->update_interactions(event);
+			}
+			return bezel_->update_interactions(event);
+		}).some_or_else([=] {
+			return object_->update_interactions(event) || bezel_->update_interactions(event);
+		});
 	}
 	
 	auto BoxConstBezel::get_min_size() const -> sf::Vector2f {

@@ -103,7 +103,7 @@ namespace ie {
 		interactive_.update();
 	}
 	
-	auto BaseSlider::update_interactions(sf::Vector2f) -> bool {
+	auto BaseSlider::update_interactions(Event event) -> bool {
 		interactive_.update_interactions();
 		return true;
 	}

@@ -9,6 +9,6 @@ namespace ie {
 			virtual auto make(InitInfo init_info) -> INonInteractive* = 0;
 		};
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
+		auto update_interactions(Event event) -> bool override;
 	};
 }

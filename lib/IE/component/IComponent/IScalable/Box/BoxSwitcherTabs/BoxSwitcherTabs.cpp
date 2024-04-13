@@ -55,9 +55,19 @@ namespace ie {
 		interactive_.update();
 	}
 	
-	auto BoxSwitcherTabs::update_interactions(sf::Vector2f) -> bool {
-		interactive_.update_interactions();
-		return true;
+	auto BoxSwitcherTabs::update_interactions(Event event) -> bool {
+		return event.touch().map([=](event_system::Touch touch) {
+			interactive_.update_interactions();
+			return true;
+		}).some_or_else([=] {
+			auto updated{false};
+			for(auto& object: objects_) {
+				if(object->update_interactions(event)) {
+					updated = true;
+				}
+			}
+			return updated;
+		});
 	}
 	
 	auto BoxSwitcherTabs::get_array_size() const -> size_t {

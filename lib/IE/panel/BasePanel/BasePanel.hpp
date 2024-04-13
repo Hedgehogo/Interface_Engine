@@ -59,9 +59,7 @@ namespace ie {
 		
 		auto update() -> void override;
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool;
-		
-		virtual auto update_interactions(sf::Vector2f mouse_position, bool active) -> bool;
+		virtual auto update_interactions(Event event, bool active) -> bool = 0;
 		
 		auto get_area_position() const -> sf::Vector2f;
 		

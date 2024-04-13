@@ -113,14 +113,21 @@ namespace ie {
 		background_->resize(size, position);
 	}
 	
-	auto BoxConstRatio::update_interactions(sf::Vector2f mouse_position) -> bool {
-		if(render_second_ && second_object_->in_area(mouse_position)) {
-			return second_object_->update_interactions(mouse_position);
-		}
-		if(const_object_->in_area(mouse_position)) {
-			return const_object_->update_interactions(mouse_position);
-		}
-		return background_->update_interactions(mouse_position);
+	auto BoxConstRatio::update_interactions(Event event) -> bool {
+		return event.touch().map([=](event_system::Touch touch) {
+			if(render_second_ && second_object_->in_area(sf::Vector2f{touch.position})) {
+				return second_object_->update_interactions(event);
+			}
+			if(const_object_->in_area(sf::Vector2f{touch.position})) {
+				return const_object_->update_interactions(event);
+			}
+			return background_->update_interactions(event);
+		}).some_or_else([=] {
+			auto second_updated{render_second_ && second_object_->update_interactions(event)};
+			auto const_updated{const_object_->update_interactions(event)};
+			auto background{background_->update_interactions(event)};
+			return second_updated || const_updated || background;
+		});
 	}
 	
 	auto BoxConstRatio::get_min_size() const -> sf::Vector2f {

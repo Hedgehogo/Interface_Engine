@@ -14,8 +14,8 @@ namespace ie {
 		return *background_;
 	}
 	
-	auto BaseButton::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return background_->update_interactions(mouse_position);
+	auto BaseButton::update_interactions(Event event) -> bool {
+		return background_->update_interactions(event);
 	}
 	
 	auto BaseButton::layout_get_data() -> LayoutData& {

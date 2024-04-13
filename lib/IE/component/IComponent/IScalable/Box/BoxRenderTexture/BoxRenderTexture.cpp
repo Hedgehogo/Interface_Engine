@@ -52,9 +52,12 @@ namespace ie {
 		active_ = true;
 	}
 	
-	auto BoxRenderTexture::update_interactions(sf::Vector2f mouse_position) -> bool {
-		active_ = true;
-		return object_->update_interactions(mouse_position);
+	auto BoxRenderTexture::update_interactions(Event event) -> bool {
+		if(object_->update_interactions(event)) {
+			active_ = true;
+			return true;
+		}
+		return false;
 	}
 	
 	auto BoxRenderTexture::get_min_size() const -> sf::Vector2f {

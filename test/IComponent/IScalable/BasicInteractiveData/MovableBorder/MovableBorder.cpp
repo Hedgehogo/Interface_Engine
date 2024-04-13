@@ -32,7 +32,7 @@ TEST(IComponent, MovableBorder) {
 	ASSERT_EQ(box_movable_border.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_movable_border.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_movable_border.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_movable_border.update_interactions({}), true);
+	ASSERT_EQ(box_movable_border.update_interactions(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
 	
 	box_movable_border.set_size({5, 11});
 	ASSERT_EQ(box_movable_border.get_size(), (sf::Vector2f{5, 11}));

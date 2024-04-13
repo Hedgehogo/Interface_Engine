@@ -41,7 +41,7 @@ namespace ie {
 		
 		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
+		auto update_interactions(Event event) -> bool override;
 		
 		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	

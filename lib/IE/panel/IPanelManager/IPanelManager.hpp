@@ -21,7 +21,7 @@ namespace ie {
 		
 		auto update() -> void override = 0;
 		
-		virtual auto update_interactions(sf::Vector2f mouse_position, bool active) -> bool = 0;
+		virtual auto update_interactions(Event event, bool active) -> bool = 0;
 		
 		virtual ~IPanelManager() = default;
 	};

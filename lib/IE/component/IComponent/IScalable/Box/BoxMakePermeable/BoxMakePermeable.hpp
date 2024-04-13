@@ -18,7 +18,7 @@ namespace ie {
 		
 		BoxMakePermeable(Make&& make, InitInfo init_info);
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
+		auto update_interactions(Event event) -> bool override;
 		
 		auto get_object() -> IScalable& override;
 		

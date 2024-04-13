@@ -54,8 +54,8 @@ namespace ie {
 		draw_managers_[value_.get()].draw();
 	}
 	
-	auto BoxTabs::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return objects_[value_.get()]->update_interactions(mouse_position);
+	auto BoxTabs::update_interactions(Event event) -> bool {
+		return objects_[value_.get()]->update_interactions(event);
 	}
 	
 	auto BoxTabs::get_array_size() const -> size_t {

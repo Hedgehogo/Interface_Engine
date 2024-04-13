@@ -30,6 +30,14 @@ namespace ie {
 	auto ConstPanel::is_free() -> bool {
 		return true;
 	}
+	
+	auto ConstPanel::update_interactions(Event event, bool active) -> bool {
+		displayed_ = true;
+		this->active_ = active;
+		return event.touch().map([=](event_system::Touch touch) {
+			return in_panel(sf::Vector2f{touch.position});
+		}).some_or(true) && object_->update_interactions(event);
+	}
 }
 
 auto ieml::Decode<char, ie::ConstPanel::Make>::decode(ieml::Node const& node) -> orl::Option<ie::ConstPanel::Make> {

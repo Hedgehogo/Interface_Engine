@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/event/EventHandler/EventHandler.hpp"
 #include "IE/component/IDrawable/DrawManager/DrawManager.hpp"
 #include "IE/component/IUpdatable/UpdateManager/UpdateManager.hpp"
 #include "IE/interaction/InteractionManager/InteractionManager.hpp"
@@ -52,7 +53,7 @@ namespace ie {
 		
 		virtual auto resize(sf::Vector2f size, sf::Vector2f position) -> void = 0;
 		
-		virtual auto update_interactions(sf::Vector2f mouse_position) -> bool = 0;
+		virtual auto update_interactions(Event event) -> bool = 0;
 		
 		static auto draw_debug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& render_target, size_t hue) -> void;
 		

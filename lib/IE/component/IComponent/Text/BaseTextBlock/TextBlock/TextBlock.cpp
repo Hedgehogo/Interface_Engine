@@ -112,7 +112,7 @@ namespace ie {
 	auto TextBlock::update() -> void {
 	}
 	
-	auto TextBlock::update_interactions(sf::Vector2f) -> bool {
+	auto TextBlock::update_interactions(Event) -> bool {
 		return false;
 	}
 	

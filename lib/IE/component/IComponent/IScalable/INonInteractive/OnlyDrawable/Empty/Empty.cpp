@@ -18,7 +18,7 @@ namespace ie {
 		layout_.resize(size, position);
 	}
 	
-	auto Empty::update_interactions(sf::Vector2f) -> bool {
+	auto Empty::update_interactions(Event event) -> bool {
 		return false;
 	}
 	

@@ -48,8 +48,8 @@ namespace ie {
 	auto ObjectTextBlock::update() -> void {
 	}
 	
-	auto ObjectTextBlock::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return object_character_.update_interactions(mouse_position);
+	auto ObjectTextBlock::update_interactions(Event event) -> bool {
+		return object_character_.update_interactions(event);
 	}
 }
 

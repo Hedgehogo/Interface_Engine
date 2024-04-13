@@ -26,7 +26,7 @@ TEST(IComponent, BoxSettable) {
 	ASSERT_EQ(box_settable.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_settable.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_settable.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_settable.update_interactions({}), true);
+	ASSERT_EQ(box_settable.update_interactions(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
 	
 	box_settable.set_size({5, 11});
 	ASSERT_EQ(box_settable.get_size(), (sf::Vector2f{5, 11}));

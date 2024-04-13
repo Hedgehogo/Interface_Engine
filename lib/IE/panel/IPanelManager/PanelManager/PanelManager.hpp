@@ -32,7 +32,7 @@ namespace ie {
 		
 		auto update() -> void override;
 		
-		auto update_interactions(sf::Vector2f mouse_position, bool active) -> bool override;
+		auto update_interactions(Event event, bool active) -> bool override;
 	
 	protected:
 		std::vector<BasePanel*> panels_;

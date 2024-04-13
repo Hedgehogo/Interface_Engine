@@ -66,8 +66,8 @@ namespace ie {
 		object_->resize(size - offset_ * 2.f, position + offset_);
 	}
 	
-	auto BoxBackground::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return object_->update_interactions(mouse_position);
+	auto BoxBackground::update_interactions(Event event) -> bool {
+		return object_->update_interactions(event);
 	}
 	
 	auto BoxBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {

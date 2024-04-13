@@ -61,13 +61,11 @@ namespace ie {
 		min_size_ = max(sf::Vector2u{map_vector2<float, std::ceil>(this->interface_.get_min_size())}, {1, 1});
 	}
 	
-	auto Window::update(std::vector<Event> const& events) -> void {
-		auto mouse_position{event_handler_.get_touch(std::numeric_limits<size_t>::max()).some_or({})};
-		
+	auto Window::update(std::vector<Event>&& events) -> void {
 		auto resizer_updated{resizer_->update(events, event_handler_)};
 		
 		window_.clear();
-		interface_.update(sf::Vector2f{mouse_position}, !resizer_updated && window_.hasFocus());
+		interface_.update(events, !resizer_updated && window_.hasFocus());
 		interface_.draw();
 		//interface.draw_debug(window, 0, 2, 90, 90);
 		window_.display();

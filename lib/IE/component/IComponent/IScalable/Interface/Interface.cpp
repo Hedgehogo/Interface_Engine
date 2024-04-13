@@ -122,21 +122,33 @@ namespace ie {
 		active_ = false;
 	}
 	
-	auto Interface::update(sf::Vector2f mouse_position, bool active) -> void {
+	auto Interface::update(std::vector<Event> const& events, bool active) -> void {
 		if(active) {
-			this->update_interactions(mouse_position);
+			for(auto& event: events) {
+				this->update_interactions(event);
+			}
 		} else {
-			this->mouse_position_ = mouse_position;
+			for(auto& event: events) {
+				for(auto& touch: event.touch()) {
+					if(touch.id == std::numeric_limits<size_t>::max()) {
+						mouse_position_ = sf::Vector2f{touch.position};
+					}
+				}
+			}
 		}
 		this->update();
 	}
 	
-	auto Interface::update_interactions(sf::Vector2f mouse_position) -> bool {
+	auto Interface::update_interactions(Event event) -> bool {
 		active_ = true;
-		this->mouse_position_ = mouse_position;
-		if(is_in_window(mouse_position) && !interaction_manager_.is_blocked()) {
-			if(!panel_manager_.update_interactions(mouse_position, true)) {
-				object_->update_interactions(mouse_position);
+		for(auto& touch: event.touch()) {
+			if(touch.id == std::numeric_limits<size_t>::max()) {
+				mouse_position_ = sf::Vector2f{touch.position};
+			}
+		}
+		if(is_in_window(mouse_position_) && !interaction_manager_.is_blocked()) {
+			if(!panel_manager_.update_interactions(event, true)) {
+				object_->update_interactions(event);
 			}
 		}
 		return true;

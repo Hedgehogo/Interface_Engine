@@ -72,7 +72,7 @@ namespace ie {
 		interact_ = false;
 	}
 	
-	auto InteractiveTextBlock::update_interactions(sf::Vector2f) -> bool {
+	auto InteractiveTextBlock::update_interactions(Event) -> bool {
 		interact_ = true;
 		return true;
 	}

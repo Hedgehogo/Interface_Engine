@@ -68,16 +68,6 @@ namespace ie {
 		update_manager_.update();
 	}
 	
-	auto BasePanel::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return in_panel(mouse_position) && object_->update_interactions(mouse_position);
-	}
-	
-	auto BasePanel::update_interactions(sf::Vector2f mouse_position, bool active) -> bool {
-		displayed_ = true;
-		this->active_ = active;
-		return update_interactions(mouse_position);
-	}
-	
 	auto BasePanel::get_area_position() const -> sf::Vector2f {
 		return layout_.position;
 	}

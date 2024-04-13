@@ -48,21 +48,33 @@ namespace ie {
 		}
 	}
 	
-	auto BoxBorder::update_interactions(sf::Vector2f mouse_position) -> bool {
-		auto position{sf::Vector2f{mouse_position.x - layout_.position.x, mouse_position.y - layout_.position.y}};
-		if(position.x < 0.0f || position.x > layout_.size.x || position.y < 0.0f || position.y > layout_.size.y) {
-			return false;
-		}
-		position = {position.x / layout_.size.x, position.y / layout_.size.y};
-		
-		auto object{sf::Vector2u{1, 1}};
-		while(position.x > bounds_horizontal_[object.x]) {
-			++object.x;
-		}
-		while(position.y > bounds_vertical_[object.y]) {
-			++object.y;
-		}
-		return objects_[object.x - 1][object.y - 1]->update_interactions(mouse_position);
+	auto BoxBorder::update_interactions(Event event) -> bool {
+		return event.touch().map([=](event_system::Touch touch) {
+			auto position{sf::Vector2f{touch.position.x - layout_.position.x, touch.position.y - layout_.position.y}};
+			if(position.x < 0.0f || position.x > layout_.size.x || position.y < 0.0f || position.y > layout_.size.y) {
+				return false;
+			}
+			position = {position.x / layout_.size.x, position.y / layout_.size.y};
+			
+			auto object{sf::Vector2u{1, 1}};
+			while(position.x > bounds_horizontal_[object.x]) {
+				++object.x;
+			}
+			while(position.y > bounds_vertical_[object.y]) {
+				++object.y;
+			}
+			return objects_[object.x - 1][object.y - 1]->update_interactions(event);
+		}).some_or_else([=] {
+			bool updated{false};
+			for(auto& line: objects_) {
+				for(auto& object: line) {
+					if(object->update_interactions(event)) {
+						updated = true;
+					}
+				}
+			}
+			return updated;
+		});
 	}
 	
 	auto BoxBorder::get_min_size() const -> sf::Vector2f {

@@ -42,8 +42,8 @@ namespace ie {
 		}
 	}
 	
-	auto BoxSwitchTabs::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return objects_[value_.get()]->update_interactions(mouse_position);
+	auto BoxSwitchTabs::update_interactions(Event event) -> bool {
+		return objects_[value_.get()]->update_interactions(event);
 	}
 	
 	auto BoxSwitchTabs::get_array_size() const -> size_t {

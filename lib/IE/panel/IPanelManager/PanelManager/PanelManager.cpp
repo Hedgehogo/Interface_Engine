@@ -75,9 +75,9 @@ namespace ie {
 		}
 	}
 	
-	auto PanelManager::update_interactions(sf::Vector2f mouse_position, bool active) -> bool {
+	auto PanelManager::update_interactions(Event event, bool active) -> bool {
 		for(auto iterator = active_panels_.begin(); iterator != active_panels_.end(); ++iterator) {
-			if((*iterator)->update_interactions(mouse_position, active) && active) {
+			if((*iterator)->update_interactions(event, active) && active) {
 				BasePanel* panel = *iterator;
 				active_panels_.erase(iterator);
 				active_panels_.insert(active_panels_.begin(), panel);

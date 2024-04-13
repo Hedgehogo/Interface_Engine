@@ -37,7 +37,7 @@ TEST(IComponent_Text, ObjectCharacter) {
 		ASSERT_EQ(character.is_enter(), false);
 		ASSERT_EQ(character.is_special(), ie::BaseCharacter::Special::No);
 		ASSERT_LE(character.get_min_advance(), full_color_min_size.x);
-		ASSERT_TRUE(character.update_interactions({}));
+		ASSERT_TRUE(character.update_interactions(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})));
 	}
 	{
 		InitInfoData data{{100, 100}};

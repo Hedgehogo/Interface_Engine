@@ -31,8 +31,8 @@ namespace ie {
 		object_->move(position);
 	}
 	
-	bool ObjectCharacter::update_interactions(sf::Vector2f mouse_position) {
-		return object_->update_interactions(mouse_position);
+	bool ObjectCharacter::update_interactions(Event event) {
+		return object_->update_interactions(event);
 	}
 	
 	char32_t ObjectCharacter::get_char() {

@@ -22,7 +22,7 @@ namespace ie {
 		
 		auto move(sf::Vector2f position) -> void override;
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool;
+		auto update_interactions(Event event) -> bool;
 		
 		auto get_line() -> std::vector<BoxPtr<BaseLine> > const& override;
 		
