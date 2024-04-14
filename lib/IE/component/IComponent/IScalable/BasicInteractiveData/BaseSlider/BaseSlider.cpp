@@ -103,8 +103,8 @@ namespace ie {
 		interactive_.update();
 	}
 	
-	auto BaseSlider::update_interactions(Event event) -> bool {
-		interactive_.update_interactions();
+	auto BaseSlider::handle_event(Event event) -> bool {
+		interactive_.handle_event();
 		return true;
 	}
 	

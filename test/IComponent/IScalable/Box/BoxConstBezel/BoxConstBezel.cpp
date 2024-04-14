@@ -28,7 +28,7 @@ TEST(IComponent, BoxConstBezel) {
 	ASSERT_EQ(box_const_bezel.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_const_bezel.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_const_bezel.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_const_bezel.update_interactions(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
+	ASSERT_EQ(box_const_bezel.handle_event(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
 	
 	box_const_bezel.set_size({5, 11});
 	ASSERT_EQ(box_const_bezel.get_size(), (sf::Vector2f{5, 11}));

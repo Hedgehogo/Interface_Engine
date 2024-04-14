@@ -31,7 +31,7 @@ TEST(IComponent, BoxPanel) {
 	ASSERT_EQ(box_panel.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_panel.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_panel.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_panel.update_interactions(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
+	ASSERT_EQ(box_panel.handle_event(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
 	
 	box_panel.set_size({5, 11});
 	ASSERT_EQ(box_panel.get_size(), (sf::Vector2f{5, 11}));

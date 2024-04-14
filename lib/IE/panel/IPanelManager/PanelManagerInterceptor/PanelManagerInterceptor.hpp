@@ -25,7 +25,7 @@ namespace ie {
 		
 		auto update() -> void override;
 		
-		auto update_interactions(Event event, bool active) -> bool override;
+		auto handle_event(Event event, bool active) -> bool override;
 	
 	protected:
 		IPanelManager* panel_manager_;

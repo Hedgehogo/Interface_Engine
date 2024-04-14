@@ -112,7 +112,7 @@ namespace ie {
 	auto TextBlock::update() -> void {
 	}
 	
-	auto TextBlock::update_interactions(Event) -> bool {
+	auto TextBlock::handle_event(Event) -> bool {
 		return false;
 	}
 	

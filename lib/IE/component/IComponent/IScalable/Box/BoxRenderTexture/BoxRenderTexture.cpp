@@ -52,8 +52,8 @@ namespace ie {
 		active_ = true;
 	}
 	
-	auto BoxRenderTexture::update_interactions(Event event) -> bool {
-		if(object_->update_interactions(event)) {
+	auto BoxRenderTexture::handle_event(Event event) -> bool {
+		if(object_->handle_event(event)) {
 			active_ = true;
 			return true;
 		}

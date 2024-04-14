@@ -36,7 +36,7 @@ namespace ie {
 		
 		virtual auto update() -> void = 0;
 		
-		virtual auto update_interactions(Event event) -> bool = 0;
+		virtual auto handle_event(Event event) -> bool = 0;
 	
 		virtual ~BaseTextBlock() = default;
 		

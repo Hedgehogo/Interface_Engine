@@ -55,14 +55,14 @@ namespace ie {
 		interactive_.update();
 	}
 	
-	auto BoxSwitcherTabs::update_interactions(Event event) -> bool {
+	auto BoxSwitcherTabs::handle_event(Event event) -> bool {
 		return event.touch().map([=](event_system::Touch touch) {
-			interactive_.update_interactions();
+			interactive_.handle_event();
 			return true;
 		}).some_or_else([=] {
 			auto updated{false};
 			for(auto& object: objects_) {
-				if(object->update_interactions(event)) {
+				if(object->handle_event(event)) {
 					updated = true;
 				}
 			}

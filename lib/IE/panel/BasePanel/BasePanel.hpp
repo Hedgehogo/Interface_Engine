@@ -59,7 +59,7 @@ namespace ie {
 		
 		auto update() -> void override;
 		
-		virtual auto update_interactions(Event event, bool active) -> bool = 0;
+		virtual auto handle_event(Event event, bool active) -> bool = 0;
 		
 		auto get_area_position() const -> sf::Vector2f;
 		

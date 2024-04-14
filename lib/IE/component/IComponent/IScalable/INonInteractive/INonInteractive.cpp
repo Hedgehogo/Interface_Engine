@@ -1,7 +1,7 @@
 #include "INonInteractive.hpp"
 
 namespace ie {
-	auto INonInteractive::update_interactions(Event event) -> bool {
+	auto INonInteractive::handle_event(Event event) -> bool {
 		return true;
 	}
 }

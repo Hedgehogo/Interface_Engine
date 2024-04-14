@@ -113,19 +113,19 @@ namespace ie {
 		background_->resize(size, position);
 	}
 	
-	auto BoxConstRatio::update_interactions(Event event) -> bool {
+	auto BoxConstRatio::handle_event(Event event) -> bool {
 		return event.touch().map([=](event_system::Touch touch) {
 			if(render_second_ && second_object_->in_area(sf::Vector2f{touch.position})) {
-				return second_object_->update_interactions(event);
+				return second_object_->handle_event(event);
 			}
 			if(const_object_->in_area(sf::Vector2f{touch.position})) {
-				return const_object_->update_interactions(event);
+				return const_object_->handle_event(event);
 			}
-			return background_->update_interactions(event);
+			return background_->handle_event(event);
 		}).some_or_else([=] {
-			auto second_updated{render_second_ && second_object_->update_interactions(event)};
-			auto const_updated{const_object_->update_interactions(event)};
-			auto background{background_->update_interactions(event)};
+			auto second_updated{render_second_ && second_object_->handle_event(event)};
+			auto const_updated{const_object_->handle_event(event)};
+			auto background{background_->handle_event(event)};
 			return second_updated || const_updated || background;
 		});
 	}

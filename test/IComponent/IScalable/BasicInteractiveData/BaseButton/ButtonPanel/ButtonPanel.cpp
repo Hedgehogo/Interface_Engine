@@ -35,7 +35,7 @@ TEST(IComponent, ButtonPanel) {
 	ASSERT_EQ(button_panel.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(button_panel.get_position(), sf::Vector2f{});
 	ASSERT_EQ(button_panel.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(button_panel.update_interactions({}), true);
+	ASSERT_EQ(button_panel.handle_event({}), true);
 	
 	button_panel.set_size({5, 11});
 	ASSERT_EQ(button_panel.get_size(), (sf::Vector2f{5, 11}));

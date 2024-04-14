@@ -31,12 +31,12 @@ namespace ie {
 		return true;
 	}
 	
-	auto ConstPanel::update_interactions(Event event, bool active) -> bool {
+	auto ConstPanel::handle_event(Event event, bool active) -> bool {
 		displayed_ = true;
 		this->active_ = active;
 		return event.touch().map([=](event_system::Touch touch) {
 			return in_panel(sf::Vector2f{touch.position});
-		}).some_or(true) && object_->update_interactions(event);
+		}).some_or(true) && object_->handle_event(event);
 	}
 }
 

@@ -18,7 +18,7 @@ namespace ie {
 		layout_.resize(size, position);
 	}
 	
-	auto Empty::update_interactions(Event event) -> bool {
+	auto Empty::handle_event(Event event) -> bool {
 		return false;
 	}
 	

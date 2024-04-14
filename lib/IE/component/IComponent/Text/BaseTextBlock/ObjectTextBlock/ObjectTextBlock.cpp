@@ -48,8 +48,8 @@ namespace ie {
 	auto ObjectTextBlock::update() -> void {
 	}
 	
-	auto ObjectTextBlock::update_interactions(Event event) -> bool {
-		return object_character_.update_interactions(event);
+	auto ObjectTextBlock::handle_event(Event event) -> bool {
+		return object_character_.handle_event(event);
 	}
 }
 

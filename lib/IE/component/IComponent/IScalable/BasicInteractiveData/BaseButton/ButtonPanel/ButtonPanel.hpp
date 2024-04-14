@@ -34,7 +34,7 @@ namespace ie {
 		
 		auto update() -> void override;
 		
-		auto update_interactions(Event event) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	

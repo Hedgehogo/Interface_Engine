@@ -29,7 +29,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto BasicInteractiveData<T>::update_interactions() -> void {
+	auto BasicInteractiveData<T>::handle_event() -> void {
 		interact_ = true;
 	}
 }

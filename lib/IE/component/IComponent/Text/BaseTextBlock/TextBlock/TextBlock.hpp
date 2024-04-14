@@ -58,7 +58,7 @@ namespace ie {
 		
 		auto update() -> void override;
 		
-		auto update_interactions(Event) -> bool override;
+		auto handle_event(Event) -> bool override;
 	
 	protected:
 		std::vector<BoxPtr<BaseCharacter> > text_characters_;

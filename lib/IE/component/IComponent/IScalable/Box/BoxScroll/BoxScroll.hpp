@@ -26,7 +26,7 @@ namespace ie {
 		
 		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		auto update_interactions(Event event) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 	protected:
 		auto get_new_object_position(sf::Vector2f normal_object_position) -> sf::Vector2f;

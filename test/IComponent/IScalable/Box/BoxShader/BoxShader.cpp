@@ -31,7 +31,7 @@ TEST(IComponent, BoxShader) {
 	ASSERT_EQ(box_shader.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_shader.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_shader.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_shader.update_interactions(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
+	ASSERT_EQ(box_shader.handle_event(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
 	
 	box_shader.set_size({5, 11});
 	ASSERT_EQ(box_shader.get_size(), (sf::Vector2f{5, 11}));

@@ -86,15 +86,15 @@ namespace ie {
 		BasePanel::update();
 	}
 	
-	auto Panel::update_interactions(Event event, bool active) -> bool {
+	auto Panel::handle_event(Event event, bool active) -> bool {
 		displayed_ = true;
 		this->active_ = active;
-		if(panel_manager_.update_interactions(event, active)) {
+		if(panel_manager_.handle_event(event, active)) {
 			return true;
 		}
 		return event.touch().map([=](event_system::Touch touch) {
 			return in_panel(sf::Vector2f{touch.position});
-		}).some_or(true) && object_->update_interactions(event);
+		}).some_or(true) && object_->handle_event(event);
 	}
 }
 

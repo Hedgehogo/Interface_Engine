@@ -38,7 +38,7 @@ namespace ie {
 		}
 	}
 	
-	auto BoxBorderHorizontal::update_interactions(Event event) -> bool {
+	auto BoxBorderHorizontal::handle_event(Event event) -> bool {
 		return event.touch().map([=](event_system::Touch touch) {
 			auto position{sf::Vector2f{touch.position.x - layout_.position.x, touch.position.y - layout_.position.y}};
 			if(position.x < 0.0f || position.x > layout_.size.x || position.y < 0.0f || position.y > layout_.size.y) {
@@ -50,11 +50,11 @@ namespace ie {
 			while(position.x > bounds_[object]) {
 				++object;
 			}
-			return objects_[object - 1]->update_interactions(event);
+			return objects_[object - 1]->handle_event(event);
 		}).some_or_else([=] {
 			bool updated{false};
 			for(auto& object: objects_) {
-				if(object->update_interactions(event)) {
+				if(object->handle_event(event)) {
 					updated = true;
 				}
 			}

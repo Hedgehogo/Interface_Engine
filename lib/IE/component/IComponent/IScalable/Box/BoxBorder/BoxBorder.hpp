@@ -28,7 +28,7 @@ namespace ie {
 		
 		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		auto update_interactions(Event event) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 		auto get_min_size() const -> sf::Vector2f override;
 		

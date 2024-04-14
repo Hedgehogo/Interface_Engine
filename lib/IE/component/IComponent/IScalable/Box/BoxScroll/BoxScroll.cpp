@@ -42,11 +42,11 @@ namespace ie {
 		object_->set_position(get_new_object_position(normal_object_position_.get().get()));
 	}
 	
-	auto BoxScroll::update_interactions(Event event) -> bool {
+	auto BoxScroll::handle_event(Event event) -> bool {
 		return event.scroll().map([=](event_system::Scroll) {
-			return object_->update_interactions(event);
+			return object_->handle_event(event);
 		}).some_or_else([=] {
-			return object_->update_interactions(event);
+			return object_->handle_event(event);
 		});
 	}
 	

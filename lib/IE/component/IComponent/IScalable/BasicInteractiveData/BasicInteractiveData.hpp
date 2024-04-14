@@ -12,7 +12,7 @@ namespace ie {
 		
 		auto update() -> void;
 		
-		auto update_interactions() -> void;
+		auto handle_event() -> void;
 	
 		InteractionManager* interaction_manager;
 		BoxPtr<IBasicInteraction<T> > interaction;

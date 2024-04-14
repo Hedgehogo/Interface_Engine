@@ -13,8 +13,8 @@ namespace ie {
 		Box(make.min_size), object_(make.object->make(init_info)) {
 	}
 	
-	auto BoxMakePermeable::update_interactions(Event event) -> bool {
-		object_->update_interactions(event);
+	auto BoxMakePermeable::handle_event(Event event) -> bool {
+		object_->handle_event(event);
 		return false;
 	}
 	

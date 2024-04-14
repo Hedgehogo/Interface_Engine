@@ -19,8 +19,8 @@ namespace ie {
 		get_object().resize(size, position);
 	}
 	
-	auto IComponentObject::update_interactions(Event event) -> bool {
-		return get_object().update_interactions(event);
+	auto IComponentObject::handle_event(Event event) -> bool {
+		return get_object().handle_event(event);
 	}
 	
 	auto IComponentObject::get_min_size() const -> sf::Vector2f {

@@ -88,13 +88,13 @@ namespace ie {
 		interactive_.update();
 	}
 	
-	auto Switcher::update_interactions(Event event) -> bool {
+	auto Switcher::handle_event(Event event) -> bool {
 		auto updated{
 			active_.get() ?
-			active_background_->update_interactions(event) :
-			inactive_background_->update_interactions(event)
+			active_background_->handle_event(event) :
+			inactive_background_->handle_event(event)
 		};
-		interactive_.update_interactions();
+		interactive_.handle_event();
 		return updated;
 	}
 	

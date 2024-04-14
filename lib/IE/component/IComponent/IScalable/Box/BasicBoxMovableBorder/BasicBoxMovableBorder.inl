@@ -50,24 +50,24 @@ namespace ie {
 	}
 	
 	template<bool mutable_>
-	auto BasicBoxMovableBorder<mutable_>::update_interactions(Event event) -> bool {
+	auto BasicBoxMovableBorder<mutable_>::handle_event(Event event) -> bool {
 		return event.touch().map([=](event_system::Touch touch) {
-			auto update_interactions_objects{
+			auto handle_event_objects{
 				[=](float first_object_size, float position) {
 					if(first_object_size > position) {
-						return first_object_->update_interactions(event);
+						return first_object_->handle_event(event);
 					}
-					return second_object_->update_interactions(event);
+					return second_object_->handle_event(event);
 				}
 			};
 			
 			if(is_horizontal_border_) {
-				return update_interactions_objects(first_object_->get_size().x, touch.position.x);
+				return handle_event_objects(first_object_->get_size().x, touch.position.x);
 			}
-			return update_interactions_objects(first_object_->get_size().y, touch.position.x);
+			return handle_event_objects(first_object_->get_size().y, touch.position.x);
 		}).some_or_else([=] {
-			auto first_updated{first_object_->update_interactions(event)};
-			auto second_updated{second_object_->update_interactions(event)};
+			auto first_updated{first_object_->handle_event(event)};
+			auto second_updated{second_object_->handle_event(event)};
 			return first_updated || second_updated;
 		});
 	}

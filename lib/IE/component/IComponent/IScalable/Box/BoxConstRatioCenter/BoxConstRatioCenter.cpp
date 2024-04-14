@@ -105,23 +105,23 @@ namespace ie {
 			second_object_->resize(objects_size, second_position);
 	}
 	
-	auto BoxConstRatioCenter::update_interactions(Event event) -> bool {
+	auto BoxConstRatioCenter::handle_event(Event event) -> bool {
 		return event.touch().map([=](event_system::Touch touch) {
 			if(object_->in_area(sf::Vector2f{touch.position})) {
-				return object_->update_interactions(event);
+				return object_->handle_event(event);
 			}
 			if(render_first_ && first_object_->in_area(sf::Vector2f{touch.position})) {
-				return first_object_->update_interactions(event);
+				return first_object_->handle_event(event);
 			}
 			if(render_second_ && second_object_->in_area(sf::Vector2f{touch.position})) {
-				return second_object_->update_interactions(event);
+				return second_object_->handle_event(event);
 			}
-			return background_->update_interactions(event);
+			return background_->handle_event(event);
 		}).some_or_else([=] {
-			auto object_updated{object_->update_interactions(event)};
-			auto first_updated{render_first_ && first_object_->update_interactions(event)};
-			auto second_updated{render_second_ && second_object_->update_interactions(event)};
-			auto background_updated{background_->update_interactions(event)};
+			auto object_updated{object_->handle_event(event)};
+			auto first_updated{render_first_ && first_object_->handle_event(event)};
+			auto second_updated{render_second_ && second_object_->handle_event(event)};
+			auto background_updated{background_->handle_event(event)};
 			return object_updated || first_updated || second_updated || background_updated;
 		});
 	}

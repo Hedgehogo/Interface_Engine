@@ -28,7 +28,7 @@ namespace ie {
 		
 		auto update() -> void override;
 		
-		auto update_interactions(Event event) -> bool override;
+		auto handle_event(Event event) -> bool override;
 	
 	protected:
 		ObjectCharacter object_character_;

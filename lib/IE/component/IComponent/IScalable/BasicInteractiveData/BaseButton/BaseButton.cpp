@@ -14,8 +14,8 @@ namespace ie {
 		return *background_;
 	}
 	
-	auto BaseButton::update_interactions(Event event) -> bool {
-		return background_->update_interactions(event);
+	auto BaseButton::handle_event(Event event) -> bool {
+		return background_->handle_event(event);
 	}
 	
 	auto BaseButton::layout_get_data() -> LayoutData& {

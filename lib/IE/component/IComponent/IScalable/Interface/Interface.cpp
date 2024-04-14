@@ -125,7 +125,7 @@ namespace ie {
 	auto Interface::update(std::vector<Event> const& events, bool active) -> void {
 		if(active) {
 			for(auto& event: events) {
-				this->update_interactions(event);
+				this->handle_event(event);
 			}
 		} else {
 			for(auto& event: events) {
@@ -139,7 +139,7 @@ namespace ie {
 		this->update();
 	}
 	
-	auto Interface::update_interactions(Event event) -> bool {
+	auto Interface::handle_event(Event event) -> bool {
 		active_ = true;
 		for(auto& touch: event.touch()) {
 			if(touch.id == std::numeric_limits<size_t>::max()) {
@@ -147,8 +147,8 @@ namespace ie {
 			}
 		}
 		if(is_in_window(mouse_position_) && !interaction_manager_.is_blocked()) {
-			if(!panel_manager_.update_interactions(event, true)) {
-				object_->update_interactions(event);
+			if(!panel_manager_.handle_event(event, true)) {
+				object_->handle_event(event);
 			}
 		}
 		return true;

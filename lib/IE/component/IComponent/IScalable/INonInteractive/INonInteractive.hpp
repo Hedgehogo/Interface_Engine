@@ -9,6 +9,6 @@ namespace ie {
 			virtual auto make(InitInfo init_info) -> INonInteractive* = 0;
 		};
 		
-		auto update_interactions(Event event) -> bool override;
+		auto handle_event(Event event) -> bool override;
 	};
 }

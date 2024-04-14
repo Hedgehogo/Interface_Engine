@@ -50,15 +50,15 @@ namespace ie {
 		}
 	}
 	
-	auto BoxConstBorder::update_interactions(Event event) -> bool {
+	auto BoxConstBorder::handle_event(Event event) -> bool {
 		return event.touch().map([=](event_system::Touch touch) {
 			if(const_object_->in_area(sf::Vector2f{touch.position})) {
-				return const_object_->update_interactions(event);
+				return const_object_->handle_event(event);
 			}
-			return second_object_->update_interactions(event);
+			return second_object_->handle_event(event);
 		}).some_or_else([=] {
-			auto const_updated{const_object_->update_interactions(event)};
-			auto second_updated{second_object_->update_interactions(event)};
+			auto const_updated{const_object_->handle_event(event)};
+			auto second_updated{second_object_->handle_event(event)};
 			return const_updated || second_updated;
 		});
 	}

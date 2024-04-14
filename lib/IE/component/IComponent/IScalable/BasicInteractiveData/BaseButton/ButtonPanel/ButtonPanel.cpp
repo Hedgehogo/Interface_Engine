@@ -34,9 +34,9 @@ namespace ie {
 		interactive_.update();
 	}
 	
-	auto ButtonPanel::update_interactions(Event event) -> bool {
-		auto result{BaseButton::update_interactions(event)};
-		interactive_.update_interactions();
+	auto ButtonPanel::handle_event(Event event) -> bool {
+		auto result{BaseButton::handle_event(event)};
+		interactive_.handle_event();
 		return result;
 	}
 	

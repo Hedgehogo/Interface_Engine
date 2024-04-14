@@ -19,7 +19,7 @@ namespace ie {
 		
 		BoxAlternative(Make&& make, InitInfo init_info);
 		
-		auto update_interactions(Event event) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		

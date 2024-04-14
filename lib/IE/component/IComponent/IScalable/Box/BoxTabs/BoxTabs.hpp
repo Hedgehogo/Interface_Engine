@@ -31,7 +31,7 @@ namespace ie {
 		
 		auto draw() -> void override;
 		
-		auto update_interactions(Event event) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 		auto get_array_size() const -> size_t override;
 		

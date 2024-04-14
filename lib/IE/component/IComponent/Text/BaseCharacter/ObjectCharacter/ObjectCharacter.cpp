@@ -31,8 +31,8 @@ namespace ie {
 		object_->move(offset);
 	}
 	
-	bool ObjectCharacter::update_interactions(Event event) {
-		return object_->update_interactions(event);
+	bool ObjectCharacter::handle_event(Event event) {
+		return object_->handle_event(event);
 	}
 	
 	char32_t ObjectCharacter::get_char() {

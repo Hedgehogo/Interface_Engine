@@ -62,7 +62,7 @@ namespace ie {
 		interactive_.update();
 	}
 	
-	auto MovableBorder::update_interactions(Event event) -> bool {
+	auto MovableBorder::handle_event(Event event) -> bool {
 		return event.touch().map([=](event_system::Touch touch) {
 			auto border_position{layout_.position + first_object_->get_size()};
 			auto in_border_axis = [=](float point_position, float border_position) {
@@ -75,12 +75,12 @@ namespace ie {
 			};
 			
 			if(in_border) {
-				interactive_.update_interactions();
+				interactive_.handle_event();
 				return true;
 			}
-			return BasicBoxMovableBorder<true>::update_interactions(event);
+			return BasicBoxMovableBorder<true>::handle_event(event);
 		}).some_or_else([=] {
-			return BasicBoxMovableBorder<true>::update_interactions(event);
+			return BasicBoxMovableBorder<true>::handle_event(event);
 		});
 	}
 }

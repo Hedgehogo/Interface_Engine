@@ -55,7 +55,7 @@ namespace ie {
 		
 		auto get_is_horizontal_border() -> bool;
 		
-		auto update_interactions(Event event) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		

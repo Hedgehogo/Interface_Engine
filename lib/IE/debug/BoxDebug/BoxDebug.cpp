@@ -33,9 +33,9 @@ namespace ie {
 		object_->resize(size, position);
 	}
 	
-	auto BoxDebug::update_interactions(Event event) -> bool {
+	auto BoxDebug::handle_event(Event event) -> bool {
 		active_ = true;
-		return object_->update_interactions(event);
+		return object_->handle_event(event);
 	}
 	
 	auto BoxDebug::get_min_size() const -> sf::Vector2f {

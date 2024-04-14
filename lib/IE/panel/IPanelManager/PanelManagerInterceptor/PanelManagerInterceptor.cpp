@@ -45,7 +45,7 @@ namespace ie {
 		panel_manager_->update();
 	}
 	
-	auto PanelManagerInterceptor::update_interactions(Event event, bool active) -> bool {
-		return panel_manager_->update_interactions(event, active);
+	auto PanelManagerInterceptor::handle_event(Event event, bool active) -> bool {
+		return panel_manager_->handle_event(event, active);
 	}
 }

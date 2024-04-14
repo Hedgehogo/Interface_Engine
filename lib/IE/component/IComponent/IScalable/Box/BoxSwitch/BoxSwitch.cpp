@@ -54,8 +54,8 @@ namespace ie {
 		}
 	}
 	
-	auto BoxSwitch::update_interactions(Event event) -> bool {
-		return value_.get() ? active_object_->update_interactions(event) : inactive_object_->update_interactions(event);
+	auto BoxSwitch::handle_event(Event event) -> bool {
+		return value_.get() ? active_object_->handle_event(event) : inactive_object_->handle_event(event);
 	}
 	
 	auto BoxSwitch::get_first_object() -> IScalable& {

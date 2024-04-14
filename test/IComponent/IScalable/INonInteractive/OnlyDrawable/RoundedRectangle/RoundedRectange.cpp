@@ -21,7 +21,7 @@ TEST(IComponent, RoundedRectangle) {
 	ASSERT_EQ(rounded_rectangle.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(rounded_rectangle.get_position(), sf::Vector2f{});
 	ASSERT_EQ(rounded_rectangle.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(rounded_rectangle.update_interactions(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
+	ASSERT_EQ(rounded_rectangle.handle_event(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
 	
 	rounded_rectangle.set_size({5, 11});
 	ASSERT_EQ(rounded_rectangle.get_size(), (sf::Vector2f{5, 11}));

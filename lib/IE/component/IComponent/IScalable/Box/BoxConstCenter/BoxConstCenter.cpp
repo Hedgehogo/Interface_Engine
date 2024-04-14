@@ -88,14 +88,14 @@ namespace ie {
 		return *background_;
 	}
 	
-	auto BoxConstCenter::update_interactions(Event event) -> bool {
+	auto BoxConstCenter::handle_event(Event event) -> bool {
 		return event.touch().map([=](event_system::Touch touch) {
 			if(const_object_->in(sf::Vector2f{touch.position})) {
-				return const_object_->update_interactions(event);
+				return const_object_->handle_event(event);
 			}
-			return background_->update_interactions(event);
+			return background_->handle_event(event);
 		}).some_or_else([=] {
-			return const_object_->update_interactions(event) || background_->update_interactions(event);
+			return const_object_->handle_event(event) || background_->handle_event(event);
 		});
 	}
 }

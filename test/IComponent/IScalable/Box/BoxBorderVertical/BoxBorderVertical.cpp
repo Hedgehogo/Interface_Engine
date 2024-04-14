@@ -28,7 +28,7 @@ TEST(IComponent, BoxBorderVertical) {
 	ASSERT_EQ(box_border_vertical.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_border_vertical.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_border_vertical.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_border_vertical.update_interactions(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
+	ASSERT_EQ(box_border_vertical.handle_event(ie::Event::Touch(std::numeric_limits<size_t>::max(), {})), true);
 	
 	box_border_vertical.set_size({5, 11});
 	ASSERT_EQ(box_border_vertical.get_size(), (sf::Vector2f{5, 11}));

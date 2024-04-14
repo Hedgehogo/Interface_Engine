@@ -20,8 +20,8 @@ namespace ie {
 		IComponentObject::resize(size, position);
 	}
 	
-	auto BoxUninteractive::update_interactions(Event event) -> bool {
-		return INonInteractive::update_interactions(event);
+	auto BoxUninteractive::handle_event(Event event) -> bool {
+		return INonInteractive::handle_event(event);
 	}
 	
 	auto BoxUninteractive::get_object() -> IScalable& {

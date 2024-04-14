@@ -53,7 +53,7 @@ namespace ie {
 		
 		virtual auto resize(sf::Vector2f size, sf::Vector2f position) -> void = 0;
 		
-		virtual auto update_interactions(Event event) -> bool = 0;
+		virtual auto handle_event(Event event) -> bool = 0;
 		
 		static auto draw_debug(sf::Vector2f position, sf::Vector2f size, sf::RenderTarget& render_target, size_t hue) -> void;
 		
