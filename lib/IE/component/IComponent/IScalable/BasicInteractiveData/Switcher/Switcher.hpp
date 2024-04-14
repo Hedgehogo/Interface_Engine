@@ -32,7 +32,7 @@ namespace ie {
 		
 		auto set_position(sf::Vector2f position) -> void override;
 		
-		auto move(sf::Vector2f position) -> void override;
+		auto move(sf::Vector2f offset) -> void override;
 		
 		auto set_size(sf::Vector2f size) -> void override;
 		

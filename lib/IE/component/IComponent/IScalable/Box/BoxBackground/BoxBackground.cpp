@@ -24,10 +24,10 @@ namespace ie {
 		object_->set_position(position);
 	}
 	
-	auto BoxBackground::move(sf::Vector2f position) -> void {
-		layout_.move(position);
-		background_->move(position);
-		object_->move(position);
+	auto BoxBackground::move(sf::Vector2f offset) -> void {
+		layout_.move(offset);
+		background_->move(offset);
+		object_->move(offset);
 	}
 	
 	auto BoxBackground::set_size(sf::Vector2f size) -> void {

@@ -20,7 +20,7 @@ namespace ie {
 		
 		auto resize(sf::Vector2f position, float end_position) -> void override;
 		
-		auto move(sf::Vector2f position) -> void override;
+		auto move(sf::Vector2f offset) -> void override;
 		
 		auto update_interactions(Event event) -> bool;
 		

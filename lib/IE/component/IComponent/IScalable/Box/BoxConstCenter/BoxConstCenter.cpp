@@ -33,15 +33,15 @@ namespace ie {
 		background_->set_position(position);
 	}
 	
-	auto BoxConstCenter::move(sf::Vector2f position) -> void {
-		Box::move(position);
+	auto BoxConstCenter::move(sf::Vector2f offset) -> void {
+		Box::move(offset);
 		if(resized_) {
 			const_object_->move(const_size_);
 		} else {
 			resized_ = true;
-			const_object_->resize(const_size_, layout_.position + position);
+			const_object_->resize(const_size_, layout_.position + offset);
 		}
-		background_->move(position);
+		background_->move(offset);
 	}
 	
 	auto BoxConstCenter::set_size(sf::Vector2f size) -> void {

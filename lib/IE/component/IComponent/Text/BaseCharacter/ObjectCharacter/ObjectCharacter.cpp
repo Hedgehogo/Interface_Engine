@@ -26,9 +26,9 @@ namespace ie {
 		);
 	}
 	
-	void ObjectCharacter::move(sf::Vector2f position) {
-		BaseCharacter::move(position);
-		object_->move(position);
+	void ObjectCharacter::move(sf::Vector2f offset) {
+		BaseCharacter::move(offset);
+		object_->move(offset);
 	}
 	
 	bool ObjectCharacter::update_interactions(Event event) {

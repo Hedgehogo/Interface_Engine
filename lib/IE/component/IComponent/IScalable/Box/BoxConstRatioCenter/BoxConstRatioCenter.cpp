@@ -54,12 +54,12 @@ namespace ie {
 		BoxConstRatioCenter::move(position - layout_.position);
 	}
 	
-	auto BoxConstRatioCenter::move(sf::Vector2f position) -> void {
-		layout_.move(position);
-		object_->move(position);
-		background_->move(position);
-		first_object_->move(position);
-		second_object_->move(position);
+	auto BoxConstRatioCenter::move(sf::Vector2f offset) -> void {
+		layout_.move(offset);
+		object_->move(offset);
+		background_->move(offset);
+		first_object_->move(offset);
+		second_object_->move(offset);
 	}
 	
 	auto BoxConstRatioCenter::set_size(sf::Vector2f size) -> void {

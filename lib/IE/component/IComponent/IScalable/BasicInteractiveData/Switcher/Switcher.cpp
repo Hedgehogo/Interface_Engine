@@ -50,10 +50,10 @@ namespace ie {
 		active_background_->set_position(position);
 	}
 	
-	auto Switcher::move(sf::Vector2f position) -> void {
-		layout_.move(position);
-		inactive_background_->move(position);
-		active_background_->move(position);
+	auto Switcher::move(sf::Vector2f offset) -> void {
+		layout_.move(offset);
+		inactive_background_->move(offset);
+		active_background_->move(offset);
 	}
 	
 	auto Switcher::set_size(sf::Vector2f size) -> void {

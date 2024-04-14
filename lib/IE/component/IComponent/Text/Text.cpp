@@ -119,7 +119,7 @@ namespace ie {
 		return text_characters;
 	}
 	
-	auto Text::get_character(sf::Vector2f mouse_position) -> orl::Option<std::vector<BaseCharacter*>::iterator> {
+	auto Text::get_character(sf::Vector2f point_position) -> orl::Option<std::vector<BaseCharacter*>::iterator> {
 		using Iterator = std::vector<BaseCharacter*>::iterator;
 		
 		auto get_distance_y = [](Iterator iterator, float mouse_position_y) -> float {
@@ -151,10 +151,10 @@ namespace ie {
 		
 		for(auto iterator = text_characters.begin(); iterator != text_characters.end(); ++iterator) {
 			result = result.map([=](auto& value) {
-				auto distance_y_to_iterator{get_distance_y(iterator, mouse_position.y)};
-				auto distance_y_to_result{get_distance_y(value, mouse_position.y)};
+				auto distance_y_to_iterator{get_distance_y(iterator, point_position.y)};
+				auto distance_y_to_result{get_distance_y(value, point_position.y)};
 				if(distance_y_to_iterator <= distance_y_to_result) {
-					if((distance_y_to_iterator < distance_y_to_result) || min_distance_x(iterator, value, mouse_position.x)) {
+					if((distance_y_to_iterator < distance_y_to_result) || min_distance_x(iterator, value, point_position.x)) {
 						return iterator;
 					}
 				}
@@ -163,7 +163,7 @@ namespace ie {
 		}
 		
 		for(auto& value: result) {
-			if(mouse_position.x > (*value)->get_position().x + (static_cast<float>((*value)->get_size_texture().x) / 2.f)) {
+			if(point_position.x > (*value)->get_position().x + (static_cast<float>((*value)->get_size_texture().x) / 2.f)) {
 				++value;
 			}
 		}
@@ -238,12 +238,12 @@ namespace ie {
 		render_target->draw(sprite);
 	}
 	
-	auto Text::move(sf::Vector2f position) -> void {
-		view.reset({get_position() + position, view.getSize()});
+	auto Text::move(sf::Vector2f offset) -> void {
+		view.reset({get_position() + offset, view.getSize()});
 		render_texture.setView(view);
-		sprite.move(position);
-		background->move(position);
-		resizer->move(position);
+		sprite.move(offset);
+		background->move(offset);
+		resizer->move(offset);
 	}
 	
 	auto Text::set_position(sf::Vector2f position) -> void {

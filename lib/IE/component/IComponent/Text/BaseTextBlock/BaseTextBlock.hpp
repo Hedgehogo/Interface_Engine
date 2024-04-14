@@ -30,7 +30,7 @@ namespace ie {
 		
 		virtual auto set_kerning(char32_t character) -> void;
 		
-		virtual auto in(sf::Vector2f mouse_position) -> bool = 0;
+		virtual auto in(sf::Vector2f point_position) -> bool = 0;
 		
 		virtual auto get_characters() -> std::vector<BaseCharacter*> = 0;
 		

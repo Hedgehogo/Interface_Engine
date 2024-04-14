@@ -13,7 +13,7 @@ namespace ie {
 		
 		auto set_position(sf::Vector2f position) -> void;
 		
-		auto move(sf::Vector2f position) -> void;
+		auto move(sf::Vector2f offset) -> void;
 		
 		auto set_size(sf::Vector2f size) -> void;
 		

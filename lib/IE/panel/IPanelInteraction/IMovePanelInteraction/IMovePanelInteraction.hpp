@@ -11,7 +11,7 @@ namespace ie {
 		
 		virtual auto get_at_start() -> bool = 0;
 		
-		virtual auto move(sf::Vector2i mouse_position) -> void = 0;
+		virtual auto move(sf::Vector2i offset) -> void = 0;
 		
 		auto start(sf::Vector2i mouse_position) -> void override;
 		

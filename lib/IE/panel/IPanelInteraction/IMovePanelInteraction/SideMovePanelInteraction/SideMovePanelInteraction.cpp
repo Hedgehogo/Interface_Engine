@@ -19,10 +19,10 @@ namespace ie {
 		return at_start_;
 	}
 	
-	auto SideMovePanelInteraction::move(sf::Vector2i mouse_position) -> void {
+	auto SideMovePanelInteraction::move(sf::Vector2i offset) -> void {
 		auto panel_size{panel_->get_area_size()};
 		auto panel_position{panel_->get_area_position()};
-		auto point_position{sf::Vector2f{mouse_position}};
+		auto point_position{sf::Vector2f{offset}};
 		auto position{
 			horizontal_ ?
 			(point_position.x - panel_size.x * coefficient_ + offset_) :

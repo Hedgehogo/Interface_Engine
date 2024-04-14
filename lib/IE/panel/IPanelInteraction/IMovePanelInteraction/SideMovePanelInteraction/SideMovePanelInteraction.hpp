@@ -21,7 +21,7 @@ namespace ie {
 		
 		auto get_at_start() -> bool override;
 		
-		auto move(sf::Vector2i mouse_position) -> void override;
+		auto move(sf::Vector2i offset) -> void override;
 		
 	protected:
 		float coefficient_;

@@ -66,7 +66,7 @@ namespace ie {
 		
 		auto get_characters() -> std::vector<BaseCharacter*>&;
 		
-		auto get_character(sf::Vector2f mouse_position) -> orl::Option<std::vector<BaseCharacter*>::iterator>;
+		auto get_character(sf::Vector2f point_position) -> orl::Option<std::vector<BaseCharacter*>::iterator>;
 		
 		auto update() -> void override;
 		
@@ -74,7 +74,7 @@ namespace ie {
 		
 		auto draw() -> void override;
 		
-		auto move(sf::Vector2f position) -> void override;
+		auto move(sf::Vector2f offset) -> void override;
 		
 		auto set_position(sf::Vector2f position) -> void override;
 		

@@ -29,10 +29,10 @@ namespace ie {
 		}
 	}
 	
-	auto BoxTabs::move(sf::Vector2f position) -> void {
-		layout_.move(position);
+	auto BoxTabs::move(sf::Vector2f offset) -> void {
+		layout_.move(offset);
 		for(auto& object: objects_) {
-			object->move(position);
+			object->move(offset);
 		}
 	}
 	

@@ -18,9 +18,9 @@ namespace ie {
 		return at_start_;
 	}
 	
-	auto CoefficientMovePanelInteraction::move(sf::Vector2i mouse_position) -> void {
+	auto CoefficientMovePanelInteraction::move(sf::Vector2i offset) -> void {
 		auto panel_size{panel_->get_area_size()};
-		auto point_position{sf::Vector2f{mouse_position}};
+		auto point_position{sf::Vector2f{offset}};
 		auto position{sf::Vector2f{
 			point_position.x - panel_size.x * coefficient_.x + offset_.x,
 			point_position.y - panel_size.y * coefficient_.y + offset_.y,

@@ -6,9 +6,9 @@ namespace ie {
 		resize(layout.size, position);
 	}
 	
-	auto IComponentLayout::move(sf::Vector2f position) -> void {
+	auto IComponentLayout::move(sf::Vector2f offset) -> void {
 		auto& layout{layout_get_data()};
-		resize(layout.size, layout.position + position);
+		resize(layout.size, layout.position + offset);
 	}
 	
 	auto IComponentLayout::set_size(sf::Vector2f size) -> void {

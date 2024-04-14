@@ -54,7 +54,7 @@ namespace ie {
 		
 		auto set_kerning(char32_t character) -> void override;
 		
-		auto in(sf::Vector2f mouse_position) -> bool override;
+		auto in(sf::Vector2f point_position) -> bool override;
 		
 		auto update() -> void override;
 		

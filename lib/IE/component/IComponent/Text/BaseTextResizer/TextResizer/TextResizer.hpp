@@ -17,7 +17,7 @@ namespace ie {
 		
 		TextResizer(Make&& make, TextResizerInitInfo init_info);
 		
-		auto move(sf::Vector2f position) -> void override;
+		auto move(sf::Vector2f offset) -> void override;
 		
 		auto set_position(sf::Vector2f position) -> void override;
 	

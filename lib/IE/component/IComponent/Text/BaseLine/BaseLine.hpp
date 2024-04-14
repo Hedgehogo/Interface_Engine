@@ -16,7 +16,7 @@ namespace ie {
 
 		virtual auto draw() -> void;
 		
-		virtual auto move(sf::Vector2f position) -> void;
+		virtual auto move(sf::Vector2f offset) -> void;
 		
 		virtual auto resize(float start, float end, float height) -> void = 0;
 		

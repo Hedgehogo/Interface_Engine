@@ -77,9 +77,9 @@ namespace ie {
 		return true;
 	}
 	
-	auto InteractiveTextBlock::in(sf::Vector2f mouse_position) -> bool {
+	auto InteractiveTextBlock::in(sf::Vector2f point_position) -> bool {
 		for(auto& character: text_characters_) {
-			if(character->in(mouse_position)) {
+			if(character->in(point_position)) {
 				return true;
 			}
 		}

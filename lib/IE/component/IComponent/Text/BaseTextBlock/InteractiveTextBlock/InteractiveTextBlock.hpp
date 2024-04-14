@@ -29,7 +29,7 @@ namespace ie {
 		
 		InteractiveTextBlock(Make&& make, TextBockInitInfo init_info);
 		
-		auto in(sf::Vector2f mouse_position) -> bool override;
+		auto in(sf::Vector2f point_position) -> bool override;
 		
 		auto update() -> void override;
 		

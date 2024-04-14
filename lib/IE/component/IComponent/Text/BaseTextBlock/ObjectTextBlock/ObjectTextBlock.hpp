@@ -22,7 +22,7 @@ namespace ie {
 		
 		ObjectTextBlock(Make&& make, TextBockInitInfo init_info);
 
-		auto in(sf::Vector2f mouse_position) -> bool override;
+		auto in(sf::Vector2f point_position) -> bool override;
 		
 		auto get_characters() -> std::vector<BaseCharacter*> override;
 		
