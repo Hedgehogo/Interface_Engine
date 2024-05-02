@@ -18,7 +18,7 @@ namespace ie {
 	public:
 		using Make = make_system::IBasicMouseInteraction<T>;
 		
-		virtual auto get_key_handler() -> KeyHandler& = 0;
+		virtual auto get_key_handler() -> KeyHandler const& = 0;
 		
 		virtual auto get_left_button_action() -> BasicKeyAction<T>& = 0;
 		

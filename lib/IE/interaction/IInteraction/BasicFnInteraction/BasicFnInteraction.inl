@@ -12,8 +12,8 @@ namespace ie {
 	}
 	
 	template<typename T>
-	BasicFnInteraction<T>::BasicFnInteraction(Make&& make, BasicActionInitInfo<T>) :
-		start_fn_(std::move(make.start_pointing)), finish_fn_(std::move(make.finish_pointing)) {
+	BasicFnInteraction<T>::BasicFnInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
+		event_handler_(init_info.event_handler), start_fn_(std::move(make.start_pointing)), finish_fn_(std::move(make.finish_pointing)) {
 	}
 	
 	template<typename T>
@@ -23,11 +23,11 @@ namespace ie {
 	
 	template<typename T>
 	auto BasicFnInteraction<T>::start(sf::Vector2i point_position) -> void {
-		start_fn_(point_position);
+		start_fn_(*event_handler_);
 	}
 	
 	template<typename T>
 	auto BasicFnInteraction<T>::finish(sf::Vector2i point_position) -> void {
-		finish_fn_(point_position);
+		finish_fn_(*event_handler_);
 	}
 }

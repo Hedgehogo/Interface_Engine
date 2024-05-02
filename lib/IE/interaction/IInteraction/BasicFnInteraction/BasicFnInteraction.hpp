@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "../IInteraction.hpp"
 #include <functional>
 
@@ -26,7 +27,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicFnInteraction : public virtual IBasicInteraction<T> {
 	public:
-		using FnType = std::function<void(sf::Vector2i point_position)>;
+		using FnType = std::function<void(EventHandler const& event_handler)>;
 		using Make = make_system::BasicFnInteraction<T>;
 		
 		BasicFnInteraction(Make&& make, BasicActionInitInfo<T> init_info);
@@ -38,6 +39,7 @@ namespace ie {
 		auto finish(sf::Vector2i mouse_position) -> void override;
 	
 	protected:
+		EventHandler const* event_handler_;
 		FnType start_fn_;
 		FnType finish_fn_;
 	};
