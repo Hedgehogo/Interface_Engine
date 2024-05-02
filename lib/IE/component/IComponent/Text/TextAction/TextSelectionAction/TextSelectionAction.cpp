@@ -13,14 +13,14 @@ namespace ie {
 	}
 	
 	auto TextSelectionAction::start_pressed() -> void {
-		text_->set_selection_start(start_ = text_->get_character(sf::Vector2f{mouse_position_}));
+		text_->set_selection_start(start_ = text_->get_character(sf::Vector2f{point_position_}));
 	}
 	
 	auto TextSelectionAction::stop_pressed() -> void {
 	}
 	
 	auto TextSelectionAction::while_pressed() -> void {
-		text_->set_selection_end(end_ = text_->get_character(sf::Vector2f{mouse_position_}));
+		text_->set_selection_end(end_ = text_->get_character(sf::Vector2f{point_position_}));
 		for(auto [start_value, end_value]: orl::clone(start_) && orl::clone(end_)) {
 			if(start_value > end_value) {
 				std::swap(start_value, end_value);
@@ -44,7 +44,7 @@ namespace ie {
 		return end_;
 	}
 	
-	auto TextSelectionAction::update(sf::Vector2i mouse_position, bool press) -> void {
+	auto TextSelectionAction::update(sf::Vector2i point_position, bool press) -> void {
 		for(auto [start_value, end_value]: press && orl::clone(start_) && orl::clone(end_)) {
 			if(start_value > end_value) {
 				std::swap(start_value, end_value);
@@ -54,7 +54,7 @@ namespace ie {
 				(*iterator)->set_selection(false);
 			}
 		}
-		BasicBaseKeyAction<Text&>::update(mouse_position, press);
+		BasicBaseKeyAction<Text&>::update(point_position, press);
 	}
 }
 

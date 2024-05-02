@@ -36,7 +36,7 @@ namespace ie {
 		keys_ = 0;
 	}
 	
-	auto KeyHandler::is_key_pressed(Key key) -> bool {
+	auto KeyHandler::is_key_pressed(Key key) const -> bool {
 		if(key != Key::Unknown) {
 			return keys_[static_cast<size_t>(key)];
 		}

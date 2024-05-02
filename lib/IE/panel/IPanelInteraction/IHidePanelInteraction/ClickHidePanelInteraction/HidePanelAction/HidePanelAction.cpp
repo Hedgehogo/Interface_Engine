@@ -20,8 +20,12 @@ namespace ie {
 	}
 	
 	auto HidePanelAction::stop_pressed() -> void {
-		sf::Vector2f point_position{static_cast<sf::Vector2f>(mouse_position_)};
-		if(only_on_parent ? panel_->get_parent_processed() : !panel_->in_panel(point_position) && !panel_->in_const_panels(point_position) && panel_->is_free()) {
+		sf::Vector2f point_position{static_cast<sf::Vector2f>(point_position_)};
+		if(
+			only_on_parent ?
+			panel_->get_parent_processed() :
+			!panel_->in_panel(point_position) && !panel_->in_const_panels(point_position) && panel_->is_free()
+			) {
 			panel_manager_->hide_panel(panel_);
 		}
 	}

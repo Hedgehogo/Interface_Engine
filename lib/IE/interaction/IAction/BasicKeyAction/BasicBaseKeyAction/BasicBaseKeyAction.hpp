@@ -10,7 +10,7 @@ namespace ie {
 		
 		auto set_pressed(bool pressed) -> void override;
 		
-		auto update(sf::Vector2i mouse_position, bool press) -> void override;
+		auto update(sf::Vector2i point_position, bool press) -> void override;
 	
 	protected:
 		virtual auto start_pressed() -> void = 0;
@@ -21,7 +21,7 @@ namespace ie {
 		
 		virtual auto while_not_pressed() -> void = 0;
 		
-		sf::Vector2i mouse_position_;
+		sf::Vector2i point_position_;
 	};
 	
 	using BaseKeyAction = BasicBaseKeyAction<>;

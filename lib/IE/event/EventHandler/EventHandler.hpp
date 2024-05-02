@@ -11,19 +11,19 @@ namespace ie {
 		
 		EventHandler() = default;
 		
-		auto key_handler() -> KeyHandler&;
-		
 		auto key_handler() const -> KeyHandler const&;
 		
-		auto get_key(Key key) -> bool;
+		auto key_handler() -> KeyHandler&;
+		
+		auto get_key(Key key) const -> bool;
 		
 		auto set_key(Key key, bool value) -> void;
 		
-		auto get_scroll() -> sf::Vector2f;
+		auto get_scroll() const -> sf::Vector2f;
 		
 		auto set_scroll(size_t id, float value) -> void;
 		
-		auto get_touch(size_t id) -> orl::Option<sf::Vector2i>;
+		auto get_touch(size_t id) const -> orl::Option<sf::Vector2i>;
 		
 		auto set_touch(size_t id, sf::Vector2i value) -> void;
 		
@@ -37,7 +37,7 @@ namespace ie {
 		
 		auto update() -> void;
 		
-		auto poll_events(std::vector<Event>& events) -> void;
+		auto poll_events(std::vector<Event>& events) const -> void;
 		
 	private:
 		KeyHandler key_handler_;

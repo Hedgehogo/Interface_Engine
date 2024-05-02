@@ -26,7 +26,7 @@ namespace ie {
 		
 		virtual auto set_pressed(bool pressed) -> void;
 		
-		virtual auto update(sf::Vector2i mouse_position, bool press) -> void = 0;
+		virtual auto update(sf::Vector2i point_position, bool press) -> void = 0;
 		
 	protected:
 		bool pressed_;

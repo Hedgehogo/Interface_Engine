@@ -1,15 +1,15 @@
 #include "EventHandler.hpp"
 
 namespace ie {
-	auto EventHandler::key_handler() -> KeyHandler& {
-		return key_handler_;
-	}
-	
 	auto EventHandler::key_handler() const -> KeyHandler const& {
 		return key_handler_;
 	}
 	
-	auto EventHandler::get_key(Key key) -> bool {
+	auto EventHandler::key_handler() -> KeyHandler& {
+		return key_handler_;
+	}
+	
+	auto EventHandler::get_key(Key key) const -> bool {
 		return key_handler_.is_key_pressed(key);
 	}
 	
@@ -21,7 +21,7 @@ namespace ie {
 		}
 	}
 	
-	auto EventHandler::get_scroll() -> sf::Vector2f {
+	auto EventHandler::get_scroll() const -> sf::Vector2f {
 		return {scroll_[0], scroll_[1]};
 	}
 	
@@ -29,7 +29,7 @@ namespace ie {
 		scroll_[id] = value;
 	}
 	
-	auto EventHandler::get_touch(size_t id) -> orl::Option<sf::Vector2i> {
+	auto EventHandler::get_touch(size_t id) const -> orl::Option<sf::Vector2i> {
 		if(auto iter{touch_.find(id)}; iter != touch_.end()) {
 			return {iter->second};
 		}
@@ -64,7 +64,7 @@ namespace ie {
 		}
 	}
 	
-	auto EventHandler::poll_events(std::vector<Event>& events) -> void {
+	auto EventHandler::poll_events(std::vector<Event>& events) const -> void {
 		for(auto i{size_t{0}}; i < scroll_.size(); ++i) {
 			if(scroll_[i] )
 			events.emplace_back(Event::Scroll(i, scroll_[i]));

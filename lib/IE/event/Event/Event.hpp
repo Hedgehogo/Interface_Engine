@@ -21,6 +21,8 @@ namespace ie {
 		struct Touch {
 			size_t id;
 			sf::Vector2i position;
+			
+			auto is_mouse() -> bool;
 		};
 		
 		struct JoystickConnect {
@@ -113,6 +115,14 @@ namespace ie {
 				event_system::JoystickButton   //!< A joystick button was pressed
 			>;
 			
+		public:
+			template<Type Type_>
+			using Alternative = std::variant_alternative_t<static_cast<size_t>(Type_), Data>;
+			
+			template<Type Type_>
+			auto alternative() const -> orl::Option<Alternative<Type_> >;
+			
+		private:
 			Event(Data data);
 			
 			Data data_;
@@ -121,3 +131,5 @@ namespace ie {
 	
 	using event_system::Event;
 }
+
+#include "Event.inl"

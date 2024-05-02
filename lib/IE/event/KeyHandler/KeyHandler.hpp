@@ -19,7 +19,7 @@ namespace ie {
 		
 		auto clear() -> void;
 		
-		auto is_key_pressed(Key key) -> bool;
+		auto is_key_pressed(Key key) const -> bool;
 	
 	private:
 		std::bitset<static_cast<size_t>(Key::MouseWheelRight)> keys_;

@@ -10,7 +10,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicFnKeyAction : public BasicKeyAction<T> {
-			using FnType = std::function<void(sf::Vector2i mouse_position)>;
+			using FnType = std::function<void(sf::Vector2i point_position)>;
 			
 			FnType start_pressed_fn;
 			FnType while_pressed_fn;
@@ -35,7 +35,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicFnKeyAction : public BasicBaseKeyAction<T> {
 	public:
-		using FnType = std::function<void(sf::Vector2i mouse_position)>;
+		using FnType = std::function<void(sf::Vector2i point_position)>;
 		using Make = make_system::BasicFnKeyAction<T>;
 		
 		BasicFnKeyAction(Make&& make, BasicActionInitInfo<T> init_info);

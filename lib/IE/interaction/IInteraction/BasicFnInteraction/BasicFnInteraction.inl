@@ -22,12 +22,12 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto BasicFnInteraction<T>::start(sf::Vector2i mouse_position) -> void {
-		start_fn_(mouse_position);
+	auto BasicFnInteraction<T>::start(sf::Vector2i point_position) -> void {
+		start_fn_(point_position);
 	}
 	
 	template<typename T>
-	auto BasicFnInteraction<T>::finish(sf::Vector2i mouse_position) -> void {
-		finish_fn_(mouse_position);
+	auto BasicFnInteraction<T>::finish(sf::Vector2i point_position) -> void {
+		finish_fn_(point_position);
 	}
 }

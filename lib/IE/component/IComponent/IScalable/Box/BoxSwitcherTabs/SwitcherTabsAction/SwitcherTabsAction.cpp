@@ -17,7 +17,7 @@ namespace ie {
 	}
 	
 	auto SwitcherTabsAction::stop_pressed() -> void {
-		value_.set(switcher_tabs_->get_tab(sf::Vector2f(mouse_position_)));
+		value_.set(switcher_tabs_->get_tab(sf::Vector2f(point_position_)));
 	}
 	
 	auto SwitcherTabsAction::while_pressed() -> void {

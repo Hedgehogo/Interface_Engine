@@ -1,6 +1,10 @@
 #include "Event.hpp"
 
 namespace ie::event_system {
+	auto Touch::is_mouse() -> bool {
+		return id == std::numeric_limits<size_t>::max();
+	}
+	
 	Event::Event(Event::Data data) : data_(std::move(data)) {
 	}
 	
@@ -45,75 +49,43 @@ namespace ie::event_system {
 	}
 	
 	auto Event::closed() const -> orl::Option<event_system::Empty> {
-		if(data_.index() == 0) {
-			return {{}};
-		}
-		return {};
+		return alternative<Type::Closed>();
 	}
 	
 	auto Event::lost_focus() const -> orl::Option<event_system::Empty> {
-		if(data_.index() == 1) {
-			return {{}};
-		}
-		return {};
+		return alternative<Type::LostFocus>();
 	}
 	
 	auto Event::gained_focus() const -> orl::Option<event_system::Empty> {
-		if(data_.index() == 2) {
-			return {{}};
-		}
-		return {};
+		return alternative<Type::GainedFocus>();
 	}
 	
 	auto Event::text_entered() const -> orl::Option<event_system::TextEntered> {
-		if(data_.index() == 3) {
-			return {std::get<3>(data_)};
-		}
-		return {};
-		
+		return alternative<Type::TextEntered>();
 	}
 	
 	auto Event::scroll() const -> orl::Option<event_system::Scroll> {
-		if(data_.index() == 4) {
-			return {std::get<4>(data_)};
-		}
-		return {};
-		
+		return alternative<Type::Scroll>();
 	}
 	
 	auto Event::touch() const -> orl::Option<event_system::Touch> {
-		if(data_.index() == 5) {
-			return {std::get<5>(data_)};
-		}
-		return {};
+		return alternative<Type::Touch>();
 	}
 	
 	auto Event::joystick_connect() const -> orl::Option<event_system::JoystickConnect> {
-		if(data_.index() == 6) {
-			return {std::get<6>(data_)};
-		}
-		return {};
+		return alternative<Type::JoystickConnect>();
 	}
 	
 	auto Event::joystick_disconnect() const -> orl::Option<event_system::JoystickConnect> {
-		if(data_.index() == 7) {
-			return {std::get<7>(data_)};
-		}
-		return {};
+		return alternative<Type::JoystickDisconnect>();
 	}
 	
 	auto Event::joystick_move() const -> orl::Option<event_system::JoystickMove> {
-		if(data_.index() == 8) {
-			return {std::get<8>(data_)};
-		}
-		return {};
+		return alternative<Type::JoystickMove>();
 	}
 	
 	auto Event::joystick_button() const -> orl::Option<event_system::JoystickButton> {
-		if(data_.index() == 9) {
-			return {std::get<9>(data_)};
-		}
-		return {};
+		return alternative<Type::JoystickButton>();
 	}
 	
 	auto Event::touch_pressed(bool pressed) const -> orl::Option<event_system::Touch> {

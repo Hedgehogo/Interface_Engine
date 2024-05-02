@@ -16,9 +16,9 @@ namespace ie {
 	
 	auto MovableBorderAction::start_pressed() -> void {
 		if(object_->get_is_horizontal_border()) {
-			offset_ = static_cast<float>(mouse_position_.y) - (object_->get_first_object().get_size().y + object_->get_first_object().get_position().y);
+			offset_ = static_cast<float>(point_position_.y) - (object_->get_first_object().get_size().y + object_->get_first_object().get_position().y);
 		} else {
-			offset_ = static_cast<float>(mouse_position_.x) - (object_->get_first_object().get_size().x + object_->get_first_object().get_position().x);
+			offset_ = static_cast<float>(point_position_.x) - (object_->get_first_object().get_size().x + object_->get_first_object().get_position().x);
 		}
 	}
 	
@@ -27,9 +27,9 @@ namespace ie {
 	
 	auto MovableBorderAction::while_pressed() -> void {
 		if (object_->get_is_horizontal_border()){
-			value_.set(((static_cast<float>(mouse_position_.y) - offset_) - object_->get_position().y) / object_->get_size().y);
+			value_.set(((static_cast<float>(point_position_.y) - offset_) - object_->get_position().y) / object_->get_size().y);
 		} else {
-			value_.set(((static_cast<float>(mouse_position_.x) - offset_) - object_->get_position().x) / object_->get_size().x);
+			value_.set(((static_cast<float>(point_position_.x) - offset_) - object_->get_position().x) / object_->get_size().x);
 		}
 	}
 	

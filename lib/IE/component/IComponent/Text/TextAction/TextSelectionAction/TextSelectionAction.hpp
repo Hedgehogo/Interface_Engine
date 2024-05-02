@@ -19,7 +19,7 @@ namespace ie {
 		
 		auto get_end() -> orl::Option<std::vector<BaseCharacter*>::iterator>;
 		
-		auto update(sf::Vector2i mouse_position, bool press) -> void override;
+		auto update(sf::Vector2i point_position, bool press) -> void override;
 		
 	protected:
 		auto start_pressed() -> void override;

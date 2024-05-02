@@ -26,7 +26,7 @@ namespace ie {
 	template<typename T = std::monostate>
 	class BasicFnInteraction : public virtual IBasicInteraction<T> {
 	public:
-		using FnType = std::function<void(sf::Vector2i mouse_position)>;
+		using FnType = std::function<void(sf::Vector2i point_position)>;
 		using Make = make_system::BasicFnInteraction<T>;
 		
 		BasicFnInteraction(Make&& make, BasicActionInitInfo<T> init_info);

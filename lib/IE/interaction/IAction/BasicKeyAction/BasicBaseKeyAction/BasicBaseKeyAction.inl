@@ -13,8 +13,8 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto BasicBaseKeyAction<T>::update(sf::Vector2i mouse_position, bool press) -> void {
-		this->mouse_position_ = mouse_position;
+	auto BasicBaseKeyAction<T>::update(sf::Vector2i point_position, bool press) -> void {
+		this->point_position_ = point_position;
 		set_pressed(press);
 		if(this->pressed_) {
 			while_pressed();

@@ -32,22 +32,22 @@ namespace ie {
 	
 	template<typename T>
 	void BasicFnKeyAction<T>::start_pressed() {
-		start_pressed_fn_(this->mouse_position_);
+		start_pressed_fn_(this->point_position_);
 	}
 	
 	template<typename T>
 	void BasicFnKeyAction<T>::stop_pressed() {
-		stop_pressed_fn_(this->mouse_position_);
+		stop_pressed_fn_(this->point_position_);
 	}
 	
 	template<typename T>
 	void BasicFnKeyAction<T>::while_pressed() {
-		while_pressed_fn_(this->mouse_position_);
+		while_pressed_fn_(this->point_position_);
 	}
 	
 	template<typename T>
 	void BasicFnKeyAction<T>::while_not_pressed() {
-		while_not_pressed_fn_(this->mouse_position_);
+		while_not_pressed_fn_(this->point_position_);
 	}
 }
 
