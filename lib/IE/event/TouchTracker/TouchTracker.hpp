@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Event/Event.hpp"
+#include "../EventHandler/EventHandler.hpp"
 
 namespace ie {
 	class TouchTracker {
@@ -9,10 +10,10 @@ namespace ie {
 		
 		auto collect(event_system::Touch touch) -> bool;
 		
-		auto reset() -> orl::Option<sf::Vector2i>;
+		auto reset() -> orl::Option<event_system::Touch>;
 	
 	private:
-		orl::Option<size_t> id_;
-		orl::Option<sf::Vector2i> position_;
+		orl::Option<event_system::Touch> touch_;
+		bool actual_;
 	};
 }
