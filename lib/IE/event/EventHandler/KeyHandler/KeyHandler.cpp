@@ -1,6 +1,6 @@
 #include "KeyHandler.hpp"
 
-#include "../../event/MouseWheel/MouseWheel.hpp"
+#include "../../MouseWheel/MouseWheel.hpp"
 
 namespace ie {
 	auto KeyHandler::update() -> void {

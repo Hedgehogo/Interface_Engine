@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Event/Event.hpp"
-#include "../KeyHandler/KeyHandler.hpp"
+#include "KeyHandler/KeyHandler.hpp"
 
 namespace ie {
 	class EventHandler {

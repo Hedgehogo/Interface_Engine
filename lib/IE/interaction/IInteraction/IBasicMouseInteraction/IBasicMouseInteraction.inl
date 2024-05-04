@@ -1,4 +1,4 @@
-#include "IE/event/KeyHandler/KeyHandler.hpp"
+#include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
 	template<typename T>

@@ -3,7 +3,7 @@
 #include <variant>
 #include <SFML/Window/Event.hpp>
 #include <option_result/option_result.hpp>
-#include "IE/event/KeyHandler/KeyHandler.hpp"
+#include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
 	namespace event_system {

@@ -11,7 +11,7 @@
 #include "IE/sizing-positioning/IPositioning2/Positioning2/Positioning2.hpp"
 #include "IE/sizing-positioning/IPositioning2/InternalPositioning2/InternalPositioning2.hpp"
 #include "IE/sizing-positioning/IPositioning2/FnPositioning2/FnPositioning2.hpp"
-#include "IE/event/KeyHandler/KeyHandler.hpp"
+#include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
 	class BasePanel : public virtual ILayoutObject, public virtual IDrawable, public virtual IUpdatable {

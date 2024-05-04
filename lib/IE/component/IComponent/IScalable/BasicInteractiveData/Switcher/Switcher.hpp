@@ -2,7 +2,7 @@
 
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISReadable/ISReadable.hpp"
-#include "IE/event/KeyHandler/KeyHandler.hpp"
+#include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
 #include "IE/component/IDrawable/IDrawable/IDrawable.hpp"
 #include "IE/component/IComponent/IComponentLayout/IComponentLayout.hpp"
 #include "../BasicInteractiveData.hpp"
