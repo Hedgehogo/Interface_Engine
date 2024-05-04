@@ -13,14 +13,12 @@ namespace ie {
 		
 		auto update_mouse() -> void;
 		
-		auto add_key(Key key) -> void;
+		auto get_key(Key key) const -> bool;
 		
-		auto delete_key(Key key) -> void;
+		auto set_key(Key key, bool value) -> void;
 		
 		auto clear() -> void;
 		
-		auto is_key_pressed(Key key) const -> bool;
-	
 	private:
 		std::bitset<static_cast<size_t>(Key::MouseWheelRight)> keys_;
 	};

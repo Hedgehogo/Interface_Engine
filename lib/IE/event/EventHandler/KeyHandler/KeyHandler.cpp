@@ -20,27 +20,21 @@ namespace ie {
 		}
 	}
 	
-	auto KeyHandler::add_key(Key key) -> void {
+	auto KeyHandler::get_key(Key key) const -> bool {
 		if(key != Key::Unknown) {
-			keys_[static_cast<size_t>(key)] = true;
+			return keys_[static_cast<size_t>(key)];
 		}
+		return false;
 	}
 	
-	auto KeyHandler::delete_key(Key key) -> void {
+	auto KeyHandler::set_key(Key key, bool value) -> void {
 		if(key != Key::Unknown) {
-			keys_[static_cast<size_t>(key)] = false;
+			keys_[static_cast<size_t>(key)] = value;
 		}
 	}
 	
 	auto KeyHandler::clear() -> void {
 		keys_ = 0;
-	}
-	
-	auto KeyHandler::is_key_pressed(Key key) const -> bool {
-		if(key != Key::Unknown) {
-			return keys_[static_cast<size_t>(key)];
-		}
-		return false;
 	}
 	
 	auto is_key_pressed(Key key) -> orl::Option<bool> {

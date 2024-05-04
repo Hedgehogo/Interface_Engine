@@ -10,15 +10,11 @@ namespace ie {
 	}
 	
 	auto EventHandler::get_key(Key key) const -> bool {
-		return key_handler_.is_key_pressed(key);
+		return key_handler_.get_key(key);
 	}
 	
 	auto EventHandler::set_key(Key key, bool value) -> void {
-		if(value) {
-			key_handler_.add_key(key);
-		} else {
-			key_handler_.delete_key(key);
-		}
+		key_handler_.set_key(key, value);
 	}
 	
 	auto EventHandler::get_scroll() const -> sf::Vector2f {
