@@ -133,7 +133,7 @@ namespace ie {
 					event_handler_.set_key(to_key(event.mouseButton.button), false);
 					break;
 				case sf::Event::MouseMoved:
-					event_handler_.set_touch(std::numeric_limits<size_t>::max(), {event.mouseMove.x, event.mouseMove.y});
+					event_handler_.set_pointer(std::numeric_limits<size_t>::max(), {event.mouseMove.x, event.mouseMove.y});
 					break;
 				case sf::Event::JoystickButtonPressed:
 					event_handler_.set_joystick_button(event.joystickButton.joystickId, event.joystickButton.button, true);
@@ -151,13 +151,13 @@ namespace ie {
 					result.emplace_back(Event::JoystickDisconnect(event.joystickConnect.joystickId));
 					break;
 				case sf::Event::TouchBegan:
-					event_handler_.set_touch(event.touch.finger, {event.touch.x, event.touch.y});
+					event_handler_.set_pointer(event.touch.finger, {event.touch.x, event.touch.y});
 					break;
 				case sf::Event::TouchMoved:
-					event_handler_.set_touch(event.touch.finger, {event.touch.x, event.touch.y});
+					event_handler_.set_pointer(event.touch.finger, {event.touch.x, event.touch.y});
 					break;
 				case sf::Event::TouchEnded:
-					event_handler_.remove_touch(event.touch.finger);
+					event_handler_.remove_pointer(event.touch.finger);
 					break;
 				case sf::Event::SensorChanged:
 					break;

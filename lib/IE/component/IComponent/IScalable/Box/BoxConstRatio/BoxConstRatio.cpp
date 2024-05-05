@@ -114,11 +114,11 @@ namespace ie {
 	}
 	
 	auto BoxConstRatio::handle_event(Event event) -> bool {
-		return event.touch().map([=](event_system::Touch touch) {
-			if(render_second_ && second_object_->in_area(sf::Vector2f{touch.position})) {
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			if(render_second_ && second_object_->in_area(sf::Vector2f{pointer.position})) {
 				return second_object_->handle_event(event);
 			}
-			if(const_object_->in_area(sf::Vector2f{touch.position})) {
+			if(const_object_->in_area(sf::Vector2f{pointer.position})) {
 				return const_object_->handle_event(event);
 			}
 			return background_->handle_event(event);

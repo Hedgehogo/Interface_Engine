@@ -129,9 +129,9 @@ namespace ie {
 			}
 		} else {
 			for(auto& event: events) {
-				for(auto& touch: event.touch()) {
-					if(touch.id == std::numeric_limits<size_t>::max()) {
-						mouse_position_ = sf::Vector2f{touch.position};
+				for(auto& pointer: event.pointer()) {
+					if(pointer.id == std::numeric_limits<size_t>::max()) {
+						mouse_position_ = sf::Vector2f{pointer.position};
 					}
 				}
 			}
@@ -141,9 +141,9 @@ namespace ie {
 	
 	auto Interface::handle_event(Event event) -> bool {
 		active_ = true;
-		for(auto& touch: event.touch()) {
-			if(touch.id == std::numeric_limits<size_t>::max()) {
-				mouse_position_ = sf::Vector2f{touch.position};
+		for(auto pointer: event.pointer()) {
+			if(pointer.id == std::numeric_limits<size_t>::max()) {
+				mouse_position_ = sf::Vector2f{pointer.position};
 			}
 		}
 		if(is_in_window(mouse_position_) && !interaction_manager_.is_blocked()) {

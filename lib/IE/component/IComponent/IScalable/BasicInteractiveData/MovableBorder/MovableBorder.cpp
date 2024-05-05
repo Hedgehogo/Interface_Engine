@@ -63,15 +63,15 @@ namespace ie {
 	}
 	
 	auto MovableBorder::handle_event(Event event) -> bool {
-		return event.touch().map([=](event_system::Touch touch) {
+		return event.pointer().map([=](event_system::Pointer pointer) {
 			auto border_position{layout_.position + first_object_->get_size()};
 			auto in_border_axis = [=](float point_position, float border_position) {
 				return point_position < (border_position + border_interaction_size_) && point_position > (border_position - border_interaction_size_);
 			};
 			auto in_border{
 				is_horizontal_border_ ?
-				in_border_axis(touch.position.y, border_position.y) :
-				in_border_axis(touch.position.x, border_position.x)
+				in_border_axis(pointer.position.y, border_position.y) :
+				in_border_axis(pointer.position.x, border_position.x)
 			};
 			
 			if(in_border) {

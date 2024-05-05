@@ -111,9 +111,9 @@ namespace ie {
 	}
 	
 	auto BoxShader::handle_event(Event event) -> bool {
-		for(auto touch: event.touch()) {
+		for(auto pointer: event.pointer()) {
 			if(transmission_ & Transmission::MousePosition) {
-				shader_->setUniform("mouse_position", sf::Vector2f{touch.position} - layout_.position);
+				shader_->setUniform("mouse_position", sf::Vector2f{pointer.position} - layout_.position);
 			}
 		}
 		return BoxRenderTexture::handle_event(event);

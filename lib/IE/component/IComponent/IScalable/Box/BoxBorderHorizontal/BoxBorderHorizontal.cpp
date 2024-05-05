@@ -39,8 +39,11 @@ namespace ie {
 	}
 	
 	auto BoxBorderHorizontal::handle_event(Event event) -> bool {
-		return event.touch().map([=](event_system::Touch touch) {
-			auto position{sf::Vector2f{touch.position.x - layout_.position.x, touch.position.y - layout_.position.y}};
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			auto position{sf::Vector2f{
+				pointer.position.x - layout_.position.x,
+				pointer.position.y - layout_.position.y
+			}};
 			if(position.x < 0.0f || position.x > layout_.size.x || position.y < 0.0f || position.y > layout_.size.y) {
 				return false;
 			}

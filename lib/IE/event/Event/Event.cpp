@@ -1,7 +1,7 @@
 #include "Event.hpp"
 
 namespace ie::event_system {
-	auto Touch::is_mouse() -> bool {
+	auto Pointer::is_mouse() -> bool {
 		return id == std::numeric_limits<size_t>::max();
 	}
 	
@@ -28,8 +28,8 @@ namespace ie::event_system {
 		return Event{Data{std::in_place_index_t<4>(), event_system::Scroll{wheel_id, delta}}};
 	}
 	
-	auto Event::Touch(size_t id, sf::Vector2i position) -> Event {
-		return Event{Data{std::in_place_index_t<5>(), event_system::Touch{id, position}}};
+	auto Event::Pointer(size_t id, sf::Vector2i position) -> Event {
+		return Event{Data{std::in_place_index_t<5>(), event_system::Pointer{id, position}}};
 	}
 	
 	auto Event::JoystickConnect(size_t id) -> Event {
@@ -68,8 +68,8 @@ namespace ie::event_system {
 		return alternative<Type::Scroll>();
 	}
 	
-	auto Event::touch() const -> orl::Option<event_system::Touch> {
-		return alternative<Type::Touch>();
+	auto Event::pointer() const -> orl::Option<event_system::Pointer> {
+		return alternative<Type::Pointer>();
 	}
 	
 	auto Event::joystick_connect() const -> orl::Option<event_system::JoystickConnect> {
@@ -88,16 +88,16 @@ namespace ie::event_system {
 		return alternative<Type::JoystickButton>();
 	}
 	
-	auto Event::touch_pressed(bool pressed) const -> orl::Option<event_system::Touch> {
-		return touch().and_then([&](auto touch) -> orl::Option<event_system::Touch> {
-			if(touch.id == std::numeric_limits<size_t>::max()) {
+	auto Event::touch(bool pressed) const -> orl::Option<event_system::Pointer> {
+		return pointer().and_then([&](auto pointer) -> orl::Option<event_system::Pointer> {
+			if(pointer.id == std::numeric_limits<size_t>::max()) {
 				if(pressed) {
-					return {touch};
+					return {pointer};
 				} else {
 					return {};
 				}
 			}
-			return {touch};
+			return {pointer};
 		});
 	}
 	

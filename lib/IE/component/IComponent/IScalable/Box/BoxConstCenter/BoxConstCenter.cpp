@@ -89,8 +89,8 @@ namespace ie {
 	}
 	
 	auto BoxConstCenter::handle_event(Event event) -> bool {
-		return event.touch().map([=](event_system::Touch touch) {
-			if(const_object_->in(sf::Vector2f{touch.position})) {
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			if(const_object_->in(sf::Vector2f{pointer.position})) {
 				return const_object_->handle_event(event);
 			}
 			return background_->handle_event(event);

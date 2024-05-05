@@ -18,7 +18,7 @@ namespace ie {
 			float delta;
 		};
 		
-		struct Touch {
+		struct Pointer {
 			size_t id;
 			sf::Vector2i position;
 			
@@ -48,7 +48,7 @@ namespace ie {
 				GainedFocus,
 				TextEntered,
 				Scroll,
-				Touch,
+				Pointer,
 				JoystickConnect,
 				JoystickDisconnect,
 				JoystickMove,
@@ -65,7 +65,7 @@ namespace ie {
 			
 			static auto Scroll(size_t wheel_id, float delta) -> Event;
 			
-			static auto Touch(size_t id, sf::Vector2i position) -> Event;
+			static auto Pointer(size_t id, sf::Vector2i position) -> Event;
 			
 			static auto JoystickConnect(size_t id) -> Event;
 			
@@ -85,7 +85,7 @@ namespace ie {
 			
 			auto scroll() const -> orl::Option<event_system::Scroll>;
 			
-			auto touch() const -> orl::Option<event_system::Touch>;
+			auto pointer() const -> orl::Option<event_system::Pointer>;
 			
 			auto joystick_connect() const -> orl::Option<event_system::JoystickConnect>;
 			
@@ -95,7 +95,7 @@ namespace ie {
 			
 			auto joystick_button() const -> orl::Option<event_system::JoystickButton>;
 			
-			auto touch_pressed(bool pressed) const -> orl::Option<event_system::Touch>;
+			auto touch(bool pressed) const -> orl::Option<event_system::Pointer>;
 			
 			auto type() const -> Type;
 			
@@ -108,7 +108,7 @@ namespace ie {
 				event_system::Empty,           //!< The window gained the focus
 				event_system::TextEntered,     //!< A character was entered
 				event_system::Scroll,          //!< The mouse wheel was scrolled
-				event_system::Touch,           //!< A touch moved
+				event_system::Pointer,         //!< A pointer exists
 				event_system::JoystickConnect, //!< A joystick was connected
 				event_system::JoystickConnect, //!< A joystick was disconnected
 				event_system::JoystickMove,    //!< The joystick moved along an axis

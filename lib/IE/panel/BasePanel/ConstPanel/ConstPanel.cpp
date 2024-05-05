@@ -34,8 +34,8 @@ namespace ie {
 	auto ConstPanel::handle_event(Event event, bool active) -> bool {
 		displayed_ = true;
 		this->active_ = active;
-		return event.touch().map([=](event_system::Touch touch) {
-			return in_panel(sf::Vector2f{touch.position});
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			return in_panel(sf::Vector2f{pointer.position});
 		}).some_or(true) && object_->handle_event(event);
 	}
 }

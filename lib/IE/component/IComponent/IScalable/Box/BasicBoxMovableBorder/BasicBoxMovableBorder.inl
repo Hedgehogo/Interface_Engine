@@ -51,7 +51,7 @@ namespace ie {
 	
 	template<bool mutable_>
 	auto BasicBoxMovableBorder<mutable_>::handle_event(Event event) -> bool {
-		return event.touch().map([=](event_system::Touch touch) {
+		return event.pointer().map([=](event_system::Pointer pointer) {
 			auto handle_event_objects{
 				[=](float first_object_size, float position) {
 					if(first_object_size > position) {
@@ -62,9 +62,9 @@ namespace ie {
 			};
 			
 			if(is_horizontal_border_) {
-				return handle_event_objects(first_object_->get_size().x, touch.position.x);
+				return handle_event_objects(first_object_->get_size().x, pointer.position.x);
 			}
-			return handle_event_objects(first_object_->get_size().y, touch.position.x);
+			return handle_event_objects(first_object_->get_size().y, pointer.position.x);
 		}).some_or_else([=] {
 			auto first_updated{first_object_->handle_event(event)};
 			auto second_updated{second_object_->handle_event(event)};

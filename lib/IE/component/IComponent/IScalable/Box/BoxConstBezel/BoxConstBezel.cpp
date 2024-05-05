@@ -20,8 +20,8 @@ namespace ie {
 	}
 	
 	auto BoxConstBezel::handle_event(Event event) -> bool {
-		return event.touch().map([=](event_system::Touch touch) {
-			if(object_->in_area(sf::Vector2f{touch.position})) {
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			if(object_->in_area(sf::Vector2f{pointer.position})) {
 				return object_->handle_event(event);
 			}
 			return bezel_->handle_event(event);

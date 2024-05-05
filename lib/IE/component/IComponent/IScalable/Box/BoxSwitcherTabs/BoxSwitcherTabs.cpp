@@ -56,7 +56,7 @@ namespace ie {
 	}
 	
 	auto BoxSwitcherTabs::handle_event(Event event) -> bool {
-		return event.touch().map([=](event_system::Touch touch) {
+		return event.pointer().map([=](event_system::Pointer pointer) {
 			interactive_.handle_event();
 			return true;
 		}).some_or_else([=] {
