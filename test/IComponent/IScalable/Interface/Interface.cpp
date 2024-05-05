@@ -33,7 +33,7 @@ TEST(IComponent, Interface) {
 	ASSERT_EQ(interface.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(interface.get_position(), sf::Vector2f{});
 	ASSERT_EQ(interface.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(interface.handle_event(ie::Event::Pointer(std::numeric_limits<size_t>::max(), {})), true);
+	ASSERT_EQ(interface.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})), true);
 	
 	interface.set_size({5, 11});
 	ASSERT_EQ(interface.get_size(), (sf::Vector2f{5, 11}));

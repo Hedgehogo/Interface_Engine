@@ -113,7 +113,7 @@ namespace ie {
 					result.emplace_back(Event::GainedFocus({}));
 					break;
 				case sf::Event::TextEntered:
-					result.emplace_back(Event::TextEntered(event.text.unicode));
+					result.emplace_back(Event::TextEntered({event.text.unicode}));
 					break;
 				case sf::Event::KeyPressed:
 					event_handler_.set_key(to_key(event.key.code), true);
@@ -142,13 +142,13 @@ namespace ie {
 					event_handler_.set_joystick_button(event.joystickButton.joystickId, event.joystickButton.button, false);
 					break;
 				case sf::Event::JoystickMoved:
-					result.emplace_back(Event::JoystickMove(event.joystickMove.joystickId, event.joystickMove.axis, event.joystickMove.position));
+					result.emplace_back(Event::JoystickMove({event.joystickMove.joystickId, event.joystickMove.axis, event.joystickMove.position}));
 					break;
 				case sf::Event::JoystickConnected:
-					result.emplace_back(Event::JoystickConnect(event.joystickConnect.joystickId));
+					result.emplace_back(Event::JoystickConnect({event.joystickConnect.joystickId}));
 					break;
 				case sf::Event::JoystickDisconnected:
-					result.emplace_back(Event::JoystickDisconnect(event.joystickConnect.joystickId));
+					result.emplace_back(Event::JoystickDisconnect({event.joystickConnect.joystickId}));
 					break;
 				case sf::Event::TouchBegan:
 					event_handler_.set_pointer(event.touch.finger, {event.touch.x, event.touch.y});

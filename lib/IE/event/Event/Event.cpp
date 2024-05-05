@@ -8,44 +8,44 @@ namespace ie::event_system {
 	Event::Event(Event::Data data) : data_(std::move(data)) {
 	}
 	
-	auto Event::Closed(std::monostate) -> Event {
+	auto Event::Closed(event_system::Empty) -> Event {
 		return Event{Data{std::in_place_index_t<0>(), event_system::Empty{}}};
 	}
 	
-	auto Event::LostFocus(std::monostate) -> Event {
+	auto Event::LostFocus(event_system::Empty) -> Event {
 		return Event{Data{std::in_place_index_t<1>(), event_system::Empty{}}};
 	}
 	
-	auto Event::GainedFocus(std::monostate) -> Event {
+	auto Event::GainedFocus(event_system::Empty) -> Event {
 		return Event{Data{std::in_place_index_t<2>(), event_system::Empty{}}};
 	}
 	
-	auto Event::TextEntered(char32_t unicode) -> Event {
-		return Event{Data{std::in_place_index_t<3>(), event_system::TextEntered{unicode}}};
+	auto Event::TextEntered(event_system::TextEntered value) -> Event {
+		return Event{Data{std::in_place_index_t<3>(), std::move(value)}};
 	}
 	
-	auto Event::Scroll(size_t wheel_id, float delta) -> Event {
-		return Event{Data{std::in_place_index_t<4>(), event_system::Scroll{wheel_id, delta}}};
+	auto Event::Scroll(event_system::Scroll value) -> Event {
+		return Event{Data{std::in_place_index_t<4>(), std::move(value)}};
 	}
 	
-	auto Event::Pointer(size_t id, sf::Vector2i position) -> Event {
-		return Event{Data{std::in_place_index_t<5>(), event_system::Pointer{id, position}}};
+	auto Event::Pointer(event_system::Pointer value) -> Event {
+		return Event{Data{std::in_place_index_t<5>(), std::move(value)}};
 	}
 	
-	auto Event::JoystickConnect(size_t id) -> Event {
-		return Event{Data{std::in_place_index_t<6>(), event_system::JoystickConnect{id}}};
+	auto Event::JoystickConnect(event_system::JoystickConnect value) -> Event {
+		return Event{Data{std::in_place_index_t<6>(), std::move(value)}};
 	}
 	
-	auto Event::JoystickDisconnect(size_t id) -> Event {
-		return Event{Data{std::in_place_index_t<7>(), event_system::JoystickConnect{id}}};
+	auto Event::JoystickDisconnect(event_system::JoystickConnect value) -> Event {
+		return Event{Data{std::in_place_index_t<7>(), std::move(value)}};
 	}
 	
-	auto Event::JoystickMove(size_t id, size_t axis_id, float position) -> Event {
-		return Event{Data{std::in_place_index_t<8>(), event_system::JoystickMove{id, axis_id, position}}};
+	auto Event::JoystickMove(event_system::JoystickMove value) -> Event {
+		return Event{Data{std::in_place_index_t<8>(), std::move(value)}};
 	}
 	
-	auto Event::JoystickButton(size_t id, size_t button_id) -> Event {
-		return Event{Data{std::in_place_index_t<9>(), event_system::JoystickButton{id, button_id}}};
+	auto Event::JoystickButton(event_system::JoystickButton value) -> Event {
+		return Event{Data{std::in_place_index_t<9>(), std::move(value)}};
 	}
 	
 	auto Event::closed() const -> orl::Option<event_system::Empty> {

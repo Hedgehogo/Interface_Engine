@@ -22,7 +22,7 @@ TEST(IComponent, Empty) {
 	ASSERT_EQ(empty.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(empty.get_position(), sf::Vector2f{});
 	ASSERT_EQ(empty.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(empty.handle_event(ie::Event::Pointer(std::numeric_limits<size_t>::max(), {})), false);
+	ASSERT_EQ(empty.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})), false);
 	
 	empty.set_size({5, 11});
 	ASSERT_EQ(empty.get_size(), (sf::Vector2f{5, 11}));

@@ -63,15 +63,15 @@ namespace ie {
 	auto EventHandler::poll_events(std::vector<Event>& events) const -> void {
 		for(auto i{size_t{0}}; i < scroll_.size(); ++i) {
 			if(scroll_[i] )
-			events.emplace_back(Event::Scroll(i, scroll_[i]));
+			events.emplace_back(Event::Scroll({i, scroll_[i]}));
 		}
 		for(auto [id, position]: pointers_) {
-			events.emplace_back(Event::Pointer(id, position));
+			events.emplace_back(Event::Pointer({id, position}));
 		}
 		for(auto& [id, joystick]: joystick_buttons_) {
 			for(auto [button_id, joystick_button]: joystick) {
 				if(joystick_button) {
-					events.emplace_back(Event::JoystickButton(id, button_id));
+					events.emplace_back(Event::JoystickButton({id, button_id}));
 				}
 			}
 		}

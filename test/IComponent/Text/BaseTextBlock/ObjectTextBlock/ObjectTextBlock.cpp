@@ -34,7 +34,7 @@ TEST(IComponent_Text, ObjectTextBlock) {
 			}
 		};
 		
-		ASSERT_TRUE(object_text_block.handle_event(ie::Event::Pointer(std::numeric_limits<size_t>::max(), {})));
+		ASSERT_TRUE(object_text_block.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})));
 		
 		auto characters{object_text_block.get_characters()};
 		
@@ -69,7 +69,7 @@ TEST(IComponent_Text, ObjectTextBlock) {
 			}
 		};
 		
-		ASSERT_FALSE(object_text_block.handle_event(ie::Event::Pointer(std::numeric_limits<size_t>::max(), {})));
+		ASSERT_FALSE(object_text_block.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})));
 		
 		auto characters{object_text_block.get_characters()};
 		

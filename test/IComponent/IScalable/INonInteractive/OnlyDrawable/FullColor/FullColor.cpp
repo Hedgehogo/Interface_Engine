@@ -21,7 +21,7 @@ TEST(IComponent, FullColor) {
 	ASSERT_EQ(full_color.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(full_color.get_position(), sf::Vector2f{});
 	ASSERT_EQ(full_color.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(full_color.handle_event(ie::Event::Pointer(std::numeric_limits<size_t>::max(), {})), true);
+	ASSERT_EQ(full_color.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})), true);
 	
 	full_color.set_size({5, 11});
 	ASSERT_EQ(full_color.get_size(), (sf::Vector2f{5, 11}));
