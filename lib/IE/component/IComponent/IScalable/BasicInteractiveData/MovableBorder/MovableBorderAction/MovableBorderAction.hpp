@@ -1,14 +1,14 @@
 #pragma once
 
-#include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 #include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
 
 namespace ie {
 	class MovableBorder;
 	
-	class MovableBorderAction : public BasicBaseKeyAction<MovableBorder&> {
+	class MovableBorderAction : public BasicBaseTouchAction<MovableBorder&> {
 	public:
-		struct Make : public virtual BasicKeyAction<MovableBorder&>::Make {
+		struct Make : public virtual BasicTouchAction<MovableBorder&>::Make {
 			ISMRFloat& value;
 			
 			Make(ISMRFloat& value);

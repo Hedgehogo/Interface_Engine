@@ -6,23 +6,23 @@
 
 namespace ie {
 	template<typename T>
-	class BasicKeyAction;
+	class BasicTouchAction;
 	
 	namespace make_system {
 		template<typename T = std::monostate>
-		struct BasicKeyAction {
-			virtual auto make(BasicActionInitInfo<T> init_info) -> ie::BasicKeyAction<T>* = 0;
+		struct BasicTouchAction {
+			virtual auto make(BasicActionInitInfo<T> init_info) -> ie::BasicTouchAction<T>* = 0;
 			
-			virtual ~BasicKeyAction() = default;
+			virtual ~BasicTouchAction() = default;
 		};
 	}
 	
 	template<typename T = std::monostate>
-	class BasicKeyAction : public virtual IAction {
+	class BasicTouchAction : public virtual IAction {
 	public:
-		using Make = make_system::BasicKeyAction<T>;
+		using Make = make_system::BasicTouchAction<T>;
 		
-		explicit BasicKeyAction();
+		explicit BasicTouchAction();
 		
 		virtual auto set_pressed(bool pressed) -> void;
 		
@@ -32,7 +32,7 @@ namespace ie {
 		bool pressed_;
 	};
 	
-	using KeyAction = BasicKeyAction<std::monostate>;
+	using TouchAction = BasicTouchAction<std::monostate>;
 }
 
-#include "BasicKeyAction.inl"
+#include "BasicTouchAction.inl"

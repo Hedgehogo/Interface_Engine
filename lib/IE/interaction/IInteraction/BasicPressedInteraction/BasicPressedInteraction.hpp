@@ -11,7 +11,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T = std::monostate>
 		struct BasicPressedInteraction : public BasicOneKeyInteraction<T>, public virtual IBasicBlockInteraction<T> {
-			BasicPressedInteraction(BoxPtr<BasicKeyAction<T> >&& action, Key key);
+			BasicPressedInteraction(BoxPtr<BasicTouchAction<T> >&& action, Key key);
 			
 			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicPressedInteraction<T>* override;
 		};

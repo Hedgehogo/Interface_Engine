@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../BasicBaseKeyAction/BasicBaseKeyAction.hpp"
 #include <string>
+#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 #include "IE/ieml/shortcuts/shortcuts.hpp"
 
 namespace ie {
@@ -10,7 +10,7 @@ namespace ie {
 	
 	namespace make_system {
 		template<typename T = std::monostate>
-		struct BasicOpenUrlAction : public BasicKeyAction<T> {
+		struct BasicOpenUrlAction : public BasicTouchAction<T> {
 			std::string url;
 			
 			BasicOpenUrlAction(std::string url);
@@ -20,7 +20,7 @@ namespace ie {
 	}
 	
 	template<typename T = std::monostate>
-	class BasicOpenUrlAction : public BasicBaseKeyAction<T> {
+	class BasicOpenUrlAction : public BasicBaseTouchAction<T> {
 	public:
 		using Make = make_system::BasicOpenUrlAction<T>;
 		

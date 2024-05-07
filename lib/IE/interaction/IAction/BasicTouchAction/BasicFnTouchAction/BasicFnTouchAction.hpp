@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "../BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 #include <functional>
 
 namespace ie {
 	template<typename T>
-	class BasicFnKeyAction;
+	class BasicFnTouchAction;
 	
 	namespace make_system {
 		template<typename T = std::monostate>
-		struct BasicFnKeyAction : public BasicKeyAction<T> {
+		struct BasicFnTouchAction : public BasicTouchAction<T> {
 			using FnType = std::function<void(sf::Vector2i point_position)>;
 			
 			FnType start_pressed_fn;
@@ -17,7 +17,7 @@ namespace ie {
 			FnType stop_pressed_fn;
 			FnType while_not_pressed_fn;
 			
-			BasicFnKeyAction(
+			BasicFnTouchAction(
 				FnType start_pressed_fn = [](sf::Vector2i) {
 				},
 				FnType while_pressed_fn = [](sf::Vector2i) {
@@ -28,19 +28,19 @@ namespace ie {
 				}
 			);
 			
-			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicFnKeyAction<T>* override;
+			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicFnTouchAction<T>* override;
 		};
 	}
 	
 	template<typename T = std::monostate>
-	class BasicFnKeyAction : public BasicBaseKeyAction<T> {
+	class BasicFnTouchAction : public BasicBaseTouchAction<T> {
 	public:
 		using FnType = std::function<void(sf::Vector2i point_position)>;
-		using Make = make_system::BasicFnKeyAction<T>;
+		using Make = make_system::BasicFnTouchAction<T>;
 		
-		BasicFnKeyAction(Make&& make, BasicActionInitInfo<T> init_info);
+		BasicFnTouchAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		BasicFnKeyAction(
+		BasicFnTouchAction(
 			FnType start_pressed_fn = [](sf::Vector2i) {
 			},
 			FnType while_pressed_fn = [](sf::Vector2i) {
@@ -66,7 +66,7 @@ namespace ie {
 		FnType while_not_pressed_fn_;
 	};
 	
-	using FnKeyAction = BasicFnKeyAction<>;
+	using FnTouchAction = BasicFnTouchAction<>;
 }
 
-#include "BasicFnKeyAction.inl"
+#include "BasicFnTouchAction.inl"

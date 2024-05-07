@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../BasicKeyAction.hpp"
+#include "../BasicTouchAction.hpp"
 
 namespace ie {
 	template<typename T = std::monostate>
-	class BasicBaseKeyAction : public virtual BasicKeyAction<T> {
+	class BasicBaseTouchAction : public virtual BasicTouchAction<T> {
 	public:
-		BasicBaseKeyAction() = default;
+		BasicBaseTouchAction() = default;
 		
 		auto set_pressed(bool pressed) -> void override;
 		
@@ -24,7 +24,7 @@ namespace ie {
 		sf::Vector2i point_position_;
 	};
 	
-	using BaseKeyAction = BasicBaseKeyAction<>;
+	using BaseTouchAction = BasicBaseTouchAction<>;
 }
 
-#include "BasicBaseKeyAction.inl"
+#include "BasicBaseTouchAction.inl"

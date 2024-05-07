@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../IAction/BasicKeyAction/BasicEmptyAction/BasicEmptyAction.hpp"
-#include "../IAction/BasicKeyAction/BasicFnKeyAction/BasicFnKeyAction.hpp"
+#include "../IAction/BasicTouchAction/BasicFnTouchAction/BasicFnTouchAction.hpp"
+#include "../IAction/BasicTouchAction/BasicEmptyAction/BasicEmptyAction.hpp"
 #include "../BasicActionInitInfo/BasicActionInitInfo.hpp"
 #include "IE/initialization/make/make.hpp"
 #include <box-ptr/BoxPtr.hpp>

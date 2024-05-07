@@ -4,8 +4,8 @@ namespace ie {
 	namespace make_system {
 		template<typename T>
 		BasicMouseFnInteraction<T>::BasicMouseFnInteraction(
-			BoxPtr<BasicKeyAction<T> >&& left_button_action,
-			BoxPtr<BasicKeyAction<T> >&& right_button_action,
+			BoxPtr<BasicTouchAction<T> >&& left_button_action,
+			BoxPtr<BasicTouchAction<T> >&& right_button_action,
 			FnType start_fn,
 			FnType finish_fn
 		) :
@@ -33,22 +33,22 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto BasicMouseFnInteraction<T>::get_left_button_action() -> BasicKeyAction<T>& {
+	auto BasicMouseFnInteraction<T>::get_left_button_action() -> BasicTouchAction<T>& {
 		return *left_button_action_;
 	}
 	
 	template<typename T>
-	auto BasicMouseFnInteraction<T>::get_left_button_action() const -> BasicKeyAction<T> const& {
+	auto BasicMouseFnInteraction<T>::get_left_button_action() const -> BasicTouchAction<T> const& {
 		return *left_button_action_;
 	}
 	
 	template<typename T>
-	auto BasicMouseFnInteraction<T>::get_right_button_action() -> BasicKeyAction<T>& {
+	auto BasicMouseFnInteraction<T>::get_right_button_action() -> BasicTouchAction<T>& {
 		return *right_button_action_;
 	}
 	
 	template<typename T>
-	auto BasicMouseFnInteraction<T>::get_right_button_action() const -> BasicKeyAction<T> const& {
+	auto BasicMouseFnInteraction<T>::get_right_button_action() const -> BasicTouchAction<T> const& {
 		return *right_button_action_;
 	}
 }

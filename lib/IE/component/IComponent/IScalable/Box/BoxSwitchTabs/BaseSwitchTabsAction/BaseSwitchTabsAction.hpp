@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../BoxSwitchTabs.hpp"
-#include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 
 namespace ie {
-	class BaseSwitchTabsAction : public BasicBaseKeyAction<BoxSwitchTabs&> {
+	class BaseSwitchTabsAction : public BasicBaseTouchAction<BoxSwitchTabs&> {
 	public:
-		struct Make : public virtual BasicKeyAction<BoxSwitchTabs&>::Make {
+		struct Make : public virtual BasicTouchAction<BoxSwitchTabs&>::Make {
 			auto make(BasicActionInitInfo<BoxSwitchTabs&> init_info) -> BaseSwitchTabsAction* override = 0;
 		};
 		

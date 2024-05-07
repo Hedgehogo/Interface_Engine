@@ -54,7 +54,7 @@ namespace ie {
 				(*iterator)->set_selection(false);
 			}
 		}
-		BasicBaseKeyAction<Text&>::update(point_position, press);
+		BasicBaseTouchAction<Text&>::update(point_position, press);
 	}
 }
 

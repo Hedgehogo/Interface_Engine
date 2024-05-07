@@ -1,13 +1,13 @@
 #pragma once
 
-#include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 
 namespace ie {
 	class BaseSlider;
 	
-	class SliderAction : public BasicBaseKeyAction<BaseSlider&> {
+	class SliderAction : public BasicBaseTouchAction<BaseSlider&> {
 	public:
-		struct Make : public BasicKeyAction<BaseSlider&>::Make {
+		struct Make : public BasicTouchAction<BaseSlider&>::Make {
 			sf::Vector2i division = {0, 0};
 			
 			Make(sf::Vector2i division = {0, 0});

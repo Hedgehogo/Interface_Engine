@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../BasicKeyAction.hpp"
+#include "../BasicTouchAction.hpp"
 
 namespace ie {
 	template<typename T>
@@ -8,13 +8,13 @@ namespace ie {
 	
 	namespace make_system {
 		template<typename T = std::monostate>
-		struct BasicEmptyAction : public BasicKeyAction<T> {
+		struct BasicEmptyAction : public BasicTouchAction<T> {
 			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicEmptyAction<T>* override;
 		};
 	}
 	
 	template<typename T = std::monostate>
-	class BasicEmptyAction : public virtual BasicKeyAction<T> {
+	class BasicEmptyAction : public virtual BasicTouchAction<T> {
 	public:
 		using Make = make_system::BasicEmptyAction<T>;
 		

@@ -12,14 +12,14 @@ namespace ie {
 		struct BasicMouseFnInteraction : public BasicFnInteraction<T>, public virtual IBasicMouseInteraction<T> {
 			using FnType = typename BasicFnInteraction<T>::FnType;
 			
-			BoxPtr<BasicKeyAction<T> > left_button_action;
-			BoxPtr<BasicKeyAction<T> > right_button_action;
+			BoxPtr<BasicTouchAction<T> > left_button_action;
+			BoxPtr<BasicTouchAction<T> > right_button_action;
 			
 			BasicMouseFnInteraction() = default;
 			
 			BasicMouseFnInteraction(
-				BoxPtr<BasicKeyAction<T> >&& left_button_action,
-				BoxPtr<BasicKeyAction<T> >&& right_button_action,
+				BoxPtr<BasicTouchAction<T> >&& left_button_action,
+				BoxPtr<BasicTouchAction<T> >&& right_button_action,
 				FnType start_fn,
 				FnType finish_fn
 			);
@@ -38,17 +38,17 @@ namespace ie {
 		
 		auto get_key_handler() -> KeyHandler const& override;
 		
-		auto get_left_button_action() -> BasicKeyAction<T>& override;
+		auto get_left_button_action() -> BasicTouchAction<T>& override;
 		
-		auto get_left_button_action() const -> BasicKeyAction<T> const& override;
+		auto get_left_button_action() const -> BasicTouchAction<T> const& override;
 		
-		auto get_right_button_action() -> BasicKeyAction<T>& override;
+		auto get_right_button_action() -> BasicTouchAction<T>& override;
 		
-		auto get_right_button_action() const -> BasicKeyAction<T> const& override;
+		auto get_right_button_action() const -> BasicTouchAction<T> const& override;
 		
 	protected:
-		BoxPtr<BasicKeyAction<T> > left_button_action_;
-		BoxPtr<BasicKeyAction<T> > right_button_action_;
+		BoxPtr<BasicTouchAction<T> > left_button_action_;
+		BoxPtr<BasicTouchAction<T> > right_button_action_;
 	};
 	
 	using MouseFnInteraction = BasicMouseFnInteraction<>;

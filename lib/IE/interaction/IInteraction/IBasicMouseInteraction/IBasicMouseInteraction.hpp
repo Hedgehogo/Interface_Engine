@@ -20,13 +20,13 @@ namespace ie {
 		
 		virtual auto get_key_handler() -> KeyHandler const& = 0;
 		
-		virtual auto get_left_button_action() -> BasicKeyAction<T>& = 0;
+		virtual auto get_left_button_action() -> BasicTouchAction<T>& = 0;
 		
-		virtual auto get_left_button_action() const -> BasicKeyAction<T> const& = 0;
+		virtual auto get_left_button_action() const -> BasicTouchAction<T> const& = 0;
 		
-		virtual auto get_right_button_action() -> BasicKeyAction<T>& = 0;
+		virtual auto get_right_button_action() -> BasicTouchAction<T>& = 0;
 		
-		virtual auto get_right_button_action() const -> BasicKeyAction<T> const& = 0;
+		virtual auto get_right_button_action() const -> BasicTouchAction<T> const& = 0;
 		
 		auto update(sf::Vector2i mouse_position) -> void override;
 	};

@@ -1,15 +1,15 @@
 #pragma once
 
-#include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class BaseCharacter;
 	class Text;
 	
-	class TextSelectionAction : public BasicBaseKeyAction<Text&> {
+	class TextSelectionAction : public BasicBaseTouchAction<Text&> {
 	public:
-		struct Make : public BasicBaseKeyAction<Text&>::Make {
+		struct Make : public BasicBaseTouchAction<Text&>::Make {
 			auto make(BasicActionInitInfo<Text&> init_info) -> TextSelectionAction* override;
 		};
 		

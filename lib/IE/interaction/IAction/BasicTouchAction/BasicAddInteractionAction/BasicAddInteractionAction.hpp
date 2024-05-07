@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "../BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 #include "../../../InteractionManager/InteractionManager.hpp"
 
 namespace ie {
@@ -9,7 +9,7 @@ namespace ie {
 	
 	namespace make_system {
 		template<typename T = std::monostate>
-		struct BasicAddInteractionAction : public BasicKeyAction<T> {
+		struct BasicAddInteractionAction : public BasicTouchAction<T> {
 			BoxPtr<IBasicInteraction<T> > interaction;
 			
 			BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
@@ -19,7 +19,7 @@ namespace ie {
 	}
 	
 	template<typename T = std::monostate>
-	class BasicAddInteractionAction : public BasicBaseKeyAction<T> {
+	class BasicAddInteractionAction : public BasicBaseTouchAction<T> {
 	public:
 		using Make = make_system::BasicAddInteractionAction<T>;
 		

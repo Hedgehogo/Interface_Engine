@@ -1,11 +1,11 @@
 #pragma once
 
 #include <string>
-#include <IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp>
+#include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseTouchAction.hpp"
 #include <IE/modules/yaml-cpp/yaml.hpp>
 
 namespace ie {
-	class ConsoleCommandAction : public BaseKeyAction {
+	class ConsoleCommandAction : public BaseTouchAction {
 	public:
 		explicit ConsoleCommandAction(std::string const& command);
 		

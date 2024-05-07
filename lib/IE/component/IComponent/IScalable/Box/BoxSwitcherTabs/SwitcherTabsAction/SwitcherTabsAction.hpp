@@ -1,14 +1,14 @@
 #pragma once
 
 #include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
-#include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 
 namespace ie {
 	class BoxSwitcherTabs;
 	
-	class SwitcherTabsAction : public BasicBaseKeyAction<BoxSwitcherTabs&> {
+	class SwitcherTabsAction : public BasicBaseTouchAction<BoxSwitcherTabs&> {
 	public:
-		struct Make : public virtual BasicKeyAction<BoxSwitcherTabs&>::Make {
+		struct Make : public virtual BasicTouchAction<BoxSwitcherTabs&>::Make {
 			MakeDyn<ISMRSize> value;
 			
 			Make(MakeDyn<ISMRSize> value);

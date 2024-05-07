@@ -2,14 +2,14 @@
 
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISReadable/ISReadable.hpp"
-#include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 
 namespace ie {
 	class Switcher;
 	
-	class SwitcherAction : public BaseKeyAction {
+	class SwitcherAction : public BaseTouchAction {
 	public:
-		struct Make : public BaseKeyAction::Make {
+		struct Make : public BaseTouchAction::Make {
 			MakeDyn<ISMBool> value;
 			
 			Make(MakeDyn<ISMBool> value);
