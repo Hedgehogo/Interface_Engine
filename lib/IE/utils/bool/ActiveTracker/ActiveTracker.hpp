@@ -5,13 +5,13 @@ namespace ie {
 	public:
 		ActiveTracker() = default;
 		
-		auto update(bool active) -> void;
+		auto update(bool active) -> ActiveTracker&;
 		
-		auto active() -> bool;
+		auto active() const -> bool;
 		
-		auto stopped() -> bool;
+		auto stopped() const -> bool;
 		
-		auto started() -> bool;
+		auto started() const -> bool;
 		
 	private:
 		bool active_;
