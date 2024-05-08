@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../BasicTouchAction.hpp"
+#include "../../BasicTouchAction/BasicTouchAction.hpp"
 
 namespace ie {
 	template<typename T>

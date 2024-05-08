@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../BasicBaseTouchAction/BasicBaseTouchAction.hpp"
+#include "../../BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 #include "../../../InteractionManager/InteractionManager.hpp"
 
 namespace ie {

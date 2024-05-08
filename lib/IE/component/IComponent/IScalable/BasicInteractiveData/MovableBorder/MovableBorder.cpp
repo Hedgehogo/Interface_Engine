@@ -1,5 +1,5 @@
 #include "MovableBorder.hpp"
-#include "IE/interaction/IAction/BasicTouchAction/BasicAddInteractionAction/BasicAddBlockInteractionAction/BasicAddBlockInteractionAction.hpp"
+#include "IE/interaction/IAction/IBasicAction/BasicAddInteractionAction/BasicAddBlockInteractionAction/BasicAddBlockInteractionAction.hpp"
 #include "MovableBorderAction/MovableBorderAction.hpp"
 
 namespace ie {
