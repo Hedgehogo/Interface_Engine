@@ -5,7 +5,7 @@
 #include "../../BasicActionInitInfo/BasicActionInitInfo.hpp"
 
 namespace ie {
-	template<typename A_>
+	template<typename A_ = std::monostate>
 	class IBasicAction;
 	
 	namespace make_system {

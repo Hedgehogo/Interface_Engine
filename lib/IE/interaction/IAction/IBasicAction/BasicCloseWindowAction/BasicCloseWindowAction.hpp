@@ -1,44 +1,38 @@
 #pragma once
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
-#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
+#include "../IBasicAction.hpp"
 
 namespace ie {
-	template<typename T>
+	template<typename A_>
 	class BasicCloseWindowAction;
 	
 	namespace make_system {
-		template<typename T = std::monostate>
-		struct BasicCloseWindowAction : public BasicTouchAction<T> {
-			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicCloseWindowAction<T>* override;
+		template<typename A_ = std::monostate>
+		struct BasicCloseWindowAction : public virtual IBasicAction<A_> {
+			auto make(BasicActionInitInfo<A_> init_info) -> ie::BasicCloseWindowAction<A_>* override;
 		};
 	}
 	
-	template<typename T = std::monostate>
-	class BasicCloseWindowAction : public BasicBaseTouchAction<T> {
+	template<typename A_ = std::monostate>
+	class BasicCloseWindowAction : public virtual IBasicAction<A_> {
 	public:
-		using Make = make_system::BasicCloseWindowAction<T>;
+		using Make = make_system::BasicCloseWindowAction<A_>;
 		
-		BasicCloseWindowAction(Make&& make, BasicActionInitInfo<T> init_info);
+		BasicCloseWindowAction(Make&& make, BasicActionInitInfo<A_> init_info);
 		
+		auto update(bool active) -> void override;
+	
 	protected:
-		auto start_pressed() -> void override;
-		
-		auto stop_pressed() -> void override;
-		
-		auto while_pressed() -> void override;
-		
-		auto while_not_pressed() -> void override;
-		
 		sf::RenderWindow* window_;
 	};
 	
 	using CloseWindowAction = BasicCloseWindowAction<std::monostate>;
 }
 
-template<typename T>
-struct ieml::Decode<char, ie::BasicCloseWindowAction<T> > {
-	static auto decode(ieml::Node const& node) -> orl::Option<ie::BasicCloseWindowAction<T> >;
+template<typename A_>
+struct ieml::Decode<char, ie::BasicCloseWindowAction<A_> > {
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BasicCloseWindowAction<A_> >;
 };
 
 #include "BasicCloseWindowAction.inl"

@@ -80,12 +80,13 @@ auto ieml::Decode<char, ie::make_system::BasicKeysInteraction<T> >::decode(
 	ieml::Node const& node
 ) -> orl::Option<ie::make_system::BasicKeysInteraction<T> > {
 	auto& clear_node{node.get_clear()};
-	for(auto& str: clear_node.get_string().ok_or_none()) {
+	//old_action
+	/*for(auto& str: clear_node.get_string().ok_or_none()) {
 		return ie::make_system::BasicKeysInteraction<T>{
 			bp::make_box_ptr<ie::make_system::BasicTouchAction<T>, ie::make_system::BasicOpenUrlAction<T> >(str),
 			std::vector{ie::Key::MouseLeft},
 		};
-	}
+	}*/
 	auto map{clear_node.get_map_view().except()};
 	return ie::make_system::BasicKeysInteraction<T>{
 		map.at("action").except().as<ie::BoxPtr<ie::make_system::BasicTouchAction<T> > >().except(),

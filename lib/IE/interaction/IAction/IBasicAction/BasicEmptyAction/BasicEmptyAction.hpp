@@ -1,28 +1,28 @@
 #pragma once
 
-#include "../../BasicTouchAction/BasicTouchAction.hpp"
+#include "../IBasicAction.hpp"
 
 namespace ie {
-	template<typename T>
+	template<typename A_>
 	class BasicEmptyAction;
 	
 	namespace make_system {
-		template<typename T = std::monostate>
-		struct BasicEmptyAction : public BasicTouchAction<T> {
-			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicEmptyAction<T>* override;
+		template<typename A_ = std::monostate>
+		struct BasicEmptyAction : public virtual IBasicAction<A_> {
+			auto make(BasicActionInitInfo<A_> init_info) -> ie::BasicEmptyAction<A_>* override;
 		};
 	}
 	
-	template<typename T = std::monostate>
-	class BasicEmptyAction : public virtual BasicTouchAction<T> {
+	template<typename A_ = std::monostate>
+	class BasicEmptyAction : public virtual IBasicAction<A_> {
 	public:
-		using Make = make_system::BasicEmptyAction<T>;
+		using Make = make_system::BasicEmptyAction<A_>;
 		
-		BasicEmptyAction(Make&& make, BasicActionInitInfo<T> init_info);
+		BasicEmptyAction(Make&& make, BasicActionInitInfo<A_> init_info);
 		
-		BasicEmptyAction();
+		BasicEmptyAction() = default;
 		
-		auto update(sf::Vector2i, bool) -> void override;
+		auto update(bool active) -> void override;
 	};
 	
 	using EmptyAction = BasicEmptyAction<>;

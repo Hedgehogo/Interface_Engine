@@ -30,8 +30,8 @@ namespace ie {
 		add_type_with_make<ISReadable<T>, SReadable<T> >(name);
 		add_names<ISReadable<T> >(std::string("I") + name);
 		
-		add_type_make<TouchAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
-		add_type_make<TouchAction, AddSValueAction<T> >(std::string("Add") + name + std::string("Action"));
+		add_type_make<IBasicAction<>, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
+		add_type_make<IBasicAction<>, AddSValueAction<T> >(std::string("Add") + name + std::string("Action"));
 		
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
 			add_type_with_make<SString, SToString<T> >(std::string("ToString") + std::string(1, first));
@@ -137,8 +137,8 @@ namespace ie {
 			add_type_make_named<BaseTextResizer, TextResizer>();
 			add_names<BaseTextResizer::Make>("BaseTextResizer");
 			
-			add_type_make<TouchAction, OpenUrlAction>("OpenUrlAction", "OpenUrlA");
-			add_type_make<TouchAction, CloseWindowAction>("CloseWindowAction", "CloseWindowA");
+			add_type_make<IBasicAction<>, OpenUrlAction>("OpenUrlAction", "OpenUrlA");
+			add_type_make<IBasicAction<>, CloseWindowAction>("CloseWindowAction", "CloseWindowA");
 			add_type_make<TouchAction, SwitcherAction>("SwitcherAction", "SwitcherA");
 			//add_type_make_named<KeyAction, SetSIntAction>("SetSIntA");
 			//add_type_make_named<KeyAction, SetSFloatAction>("SetSFloatA");

@@ -1,20 +1,16 @@
 namespace ie {
 	namespace make_system {
-		template<typename T>
-		auto BasicEmptyAction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicEmptyAction<T>* {
-			return new ie::BasicEmptyAction<T>{std::move(*this), init_info};
+		template<typename A_>
+		auto BasicEmptyAction<A_>::make(BasicActionInitInfo<A_> init_info) -> ie::BasicEmptyAction<A_>* {
+			return new ie::BasicEmptyAction<A_>{std::move(*this), init_info};
 		}
 	}
 	
-	template<typename T>
-	BasicEmptyAction<T>::BasicEmptyAction(Make&&, BasicActionInitInfo<T>) {
+	template<typename A_>
+	BasicEmptyAction<A_>::BasicEmptyAction(Make&&, BasicActionInitInfo<A_>) {
 	}
 	
-	template<typename T>
-	BasicEmptyAction<T>::BasicEmptyAction() {
-	}
-	
-	template<typename T>
-	auto BasicEmptyAction<T>::update(sf::Vector2i, bool) -> void {
+	template<typename A_>
+	auto BasicEmptyAction<A_>::update(bool) -> void {
 	}
 }

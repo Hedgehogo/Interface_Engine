@@ -1,42 +1,36 @@
 #pragma once
 
 #include <string>
-#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 #include "IE/ieml/shortcuts/shortcuts.hpp"
+#include "../IBasicAction.hpp"
 
 namespace ie {
-	template<typename T>
+	template<typename A_>
 	class BasicOpenUrlAction;
 	
 	namespace make_system {
-		template<typename T = std::monostate>
-		struct BasicOpenUrlAction : public BasicTouchAction<T> {
+		template<typename A_ = std::monostate>
+		struct BasicOpenUrlAction : public virtual IBasicAction<A_> {
 			std::string url;
 			
 			BasicOpenUrlAction(std::string url);
 			
-			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicOpenUrlAction<T>* override;
+			auto make(BasicActionInitInfo<A_> init_info) -> ie::BasicOpenUrlAction<A_>* override;
 		};
 	}
 	
-	template<typename T = std::monostate>
-	class BasicOpenUrlAction : public BasicBaseTouchAction<T> {
+	template<typename A_ = std::monostate>
+	class BasicOpenUrlAction : public virtual IBasicAction<A_> {
 	public:
-		using Make = make_system::BasicOpenUrlAction<T>;
+		using Make = make_system::BasicOpenUrlAction<A_>;
 		
-		BasicOpenUrlAction(Make&& make, BasicActionInitInfo<T> init_info);
+		BasicOpenUrlAction(Make&& make, BasicActionInitInfo<A_> init_info);
 		
 		BasicOpenUrlAction(std::string url);
 		
+		auto update(bool active) -> void override;
+	
 	protected:
-		auto start_pressed() -> void override;
-		
-		auto stop_pressed() -> void override;
-		
-		auto while_pressed() -> void override;
-		
-		auto while_not_pressed() -> void override;
-		
 		std::string url_;
 	};
 	
@@ -45,9 +39,9 @@ namespace ie {
 	auto determine_url(ieml::Node const& node) -> bool;
 }
 
-template<typename T>
-struct ieml::Decode<char, ie::make_system::BasicOpenUrlAction<T> > {
-	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicOpenUrlAction<T> >;
+template<typename A_>
+struct ieml::Decode<char, ie::make_system::BasicOpenUrlAction<A_> > {
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicOpenUrlAction<A_> >;
 };
 
 #include "BasicOpenUrlAction.inl"

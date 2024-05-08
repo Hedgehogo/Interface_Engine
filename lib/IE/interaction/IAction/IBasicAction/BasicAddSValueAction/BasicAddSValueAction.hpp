@@ -5,50 +5,44 @@
 #include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
 
 namespace ie {
-	template<typename T_, typename Value_, typename = std::enable_if_t<is_readable<Value_> > >
+	template<typename A_, typename Value_, typename = std::enable_if_t<is_readable<Value_> > >
 	class BasicAddSValueAction;
 	
 	namespace make_system {
-		template<typename T_, typename Value_, typename = std::enable_if_t<is_readable<Value_> > >
-		struct BasicAddSValueAction : public BasicTouchAction<T_> {
+		template<typename A_, typename Value_, typename = std::enable_if_t<is_readable<Value_> > >
+		struct BasicAddSValueAction : public virtual IBasicAction<A_> {
 			MakeDyn<Value_> value;
 			typename Value_::T constant;
 			
 			BasicAddSValueAction(MakeDyn<Value_>&& value, typename Value_::T constant);
 			
-			auto make(BasicActionInitInfo<T_> init_info) -> ie::BasicAddSValueAction<T_, Value_>*;
+			auto make(BasicActionInitInfo<A_> init_info) -> ie::BasicAddSValueAction<A_, Value_>*;
 		};
 	}
 }
 
-template<typename T_, typename Value_>
-struct ieml::Decode<char, ie::make_system::BasicAddSValueAction<T_, Value_> > {
-	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicAddSValueAction<T_, Value_> >;
+template<typename A_, typename Value_>
+struct ieml::Decode<char, ie::make_system::BasicAddSValueAction<A_, Value_> > {
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicAddSValueAction<A_, Value_> >;
 };
 
 namespace ie {
-	template<typename T_, typename Value_, typename>
-	class BasicAddSValueAction : public BasicBaseTouchAction<T_> {
+	template<typename A_, typename Value_, typename>
+	class BasicAddSValueAction : public virtual IBasicAction<A_> {
 	public:
-		using Make = make_system::BasicAddSValueAction<T_, Value_>;
+		using Make = make_system::BasicAddSValueAction<A_, Value_>;
 		
-		BasicAddSValueAction(Make&& make, BasicActionInitInfo<T_> init_info);
+		BasicAddSValueAction(Make&& make, BasicActionInitInfo<A_> init_info);
+		
+		auto update(bool active) -> void override;
 	
 	protected:
-		auto start_pressed() -> void override;
-		
-		auto stop_pressed() -> void override;
-		
-		auto while_pressed() -> void override;
-		
-		auto while_not_pressed() -> void override;
-		
 		Value_& value;
 		typename Value_::T constant;
 	};
 	
-	template<typename T_>
-	using AddSValueAction = BasicAddSValueAction<std::monostate, ISMutable<T_> >;
+	template<typename A_>
+	using AddSValueAction = BasicAddSValueAction<std::monostate, ISMutable<A_> >;
 	
 	using AddSBoolAction = AddSValueAction<bool>;
 	using AddSFloatAction = AddSValueAction<float>;
