@@ -3,7 +3,7 @@
 
 namespace ie {
 	ClickPanelInteraction::ClickPanelInteraction(BoxPtr<PanelAction::Make>&& action, Key key, PanelActionInitInfo init_info) :
-		BasicOneKeyInteraction<Panel&>({std::move(action), key}, init_info) {
+		BasicTouchInteraction<Panel&>({std::move(action), key}, init_info) {
 	}
 	
 	auto ClickPanelInteraction::set_panel(Panel& panel) -> void {

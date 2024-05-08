@@ -1,7 +1,7 @@
 #pragma once
 
+#include "IE/interaction/IInteraction/BasicTouchInteraction/BasicTouchInteraction.hpp"
 #include "../IBasicBlockInteraction/IBasicBlockInteraction.hpp"
-#include "../BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
 #include "../../InteractionManager/InteractionManager.hpp"
 
 namespace ie {
@@ -10,7 +10,7 @@ namespace ie {
 	
 	namespace make_system {
 		template<typename T = std::monostate>
-		struct BasicPressedInteraction : public BasicOneKeyInteraction<T>, public virtual IBasicBlockInteraction<T> {
+		struct BasicPressedInteraction : public BasicTouchInteraction<T>, public virtual IBasicBlockInteraction<T> {
 			BasicPressedInteraction(BoxPtr<BasicTouchAction<T> >&& action, Key key);
 			
 			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicPressedInteraction<T>* override;
@@ -18,7 +18,7 @@ namespace ie {
 	}
 	
 	template<typename T = std::monostate>
-	class BasicPressedInteraction : public BasicOneKeyInteraction<T>, public virtual IBasicBlockInteraction<T> {
+	class BasicPressedInteraction : public BasicTouchInteraction<T>, public virtual IBasicBlockInteraction<T> {
 	public:
 		using Make = make_system::BasicPressedInteraction<T>;
 		

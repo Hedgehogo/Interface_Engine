@@ -18,7 +18,7 @@ namespace ie {
 	}
 	
 	auto ClickDisplayPanelInteraction::finish(sf::Vector2i mouse_position) -> void {
-		BasicOneKeyInteraction<Panel&>::finish(mouse_position);
+		BasicTouchInteraction<Panel&>::finish(mouse_position);
 		dynamic_cast<PanelAction&>(*action_).get_panel()->set_parent_processed(false);
 	}
 }

@@ -142,18 +142,18 @@ namespace ie {
 			add_type_make<TouchAction, SwitcherAction>("SwitcherAction", "SwitcherA");
 			//add_type_make_named<KeyAction, SetSIntAction>("SetSIntA");
 			//add_type_make_named<KeyAction, SetSFloatAction>("SetSFloatA");
-			add_names<TouchAction::Make>("KeyAction");
+			add_names<TouchAction::Make>("TouchAction");
 			
 			add_type_make_named<BasicTouchAction<Text&>, TextCopyAction>("TextCopyA");
 			add_type_make_named<BasicTouchAction<Text&>, TextSelectionAction>("TextSelectionA");
-			add_names<BasicTouchAction<Text&>::Make>("TextKeyAction");
+			add_names<BasicTouchAction<Text&>::Make>("TextTouchAction");
 			
 			add_type_make_named<BaseSwitchTabsAction, SwitchTabsAction>("SwitchTabsA");
 			add_type_make_named<BaseSwitchTabsAction, WhileSwitchTabsAction>("WhileSwitchTabsA");
 			add_names<BaseSwitchTabsAction::Make>("BaseSwitchTabsAction");
 			
 			add_type_make_named<IBaseInteraction, HotkeyInteraction>("HotkeyI");
-			add_type_make_named<IBaseInteraction, OneKeyInteraction>("OneKeyI");
+			add_type_make_named<IBaseInteraction, TouchInteraction>("TouchI");
 			add_type_make_named<IBaseInteraction, KeysInteraction>("KeysI");
 			add_type_make_named<IBaseInteraction, EmptyInteraction>("EmptyI");
 			add_names<IBaseInteraction::Make>("IBaseInteraction");

@@ -2,7 +2,7 @@ namespace ie {
 	namespace make_system {
 		template<typename T>
 		BasicPressedInteraction<T>::BasicPressedInteraction(BoxPtr<BasicTouchAction<T> >&& action, Key key) :
-			BasicOneKeyInteraction<T>(std::move(action), key) {
+			BasicTouchInteraction<T>(std::move(action), key) {
 		}
 		
 		template<typename T>
@@ -13,7 +13,7 @@ namespace ie {
 	
 	template<typename T>
 	BasicPressedInteraction<T>::BasicPressedInteraction(Make&& make, BasicActionInitInfo<T> init_info) :
-		BasicOneKeyInteraction<T>({std::move(make.action), make.key}, init_info), interaction_manager_(&init_info.interaction_manager) {
+		BasicTouchInteraction<T>({std::move(make.action), make.key}, init_info), interaction_manager_(&init_info.interaction_manager) {
 	}
 	
 	template<typename T>

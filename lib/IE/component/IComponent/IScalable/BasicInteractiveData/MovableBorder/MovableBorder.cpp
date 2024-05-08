@@ -39,7 +39,7 @@ namespace ie {
 			init_info
 		),
 		interactive_(
-			make_box_ptr<BasicOneKeyInteraction<MovableBorder&>::Make>(
+			make_box_ptr<BasicTouchInteraction<MovableBorder&>::Make>(
 				make_box_ptr<BasicAddBlockInteractionAction<MovableBorder&>::Make>(
 					make_box_ptr<BasicPressedInteraction<MovableBorder&>::Make>(
 						make_box_ptr<MovableBorderAction::Make>(
