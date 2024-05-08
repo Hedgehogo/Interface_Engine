@@ -53,7 +53,6 @@
 #include "IE/sizing-positioning/ISizing/SmartSizing/SmartSizing.hpp"
 #include "IE/sizing-positioning/ISizing/FnSizing/FnSizing.hpp"
 #include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
-#include "IE/interaction/IInteraction/BasicMouseFnInteraction/BasicMouseFnInteraction.hpp"
 #include "IE/interaction/IInteraction/BasicHotkeyInteraction/BasicHotkeyInteraction.hpp"
 #include "IE/interaction/IAction/IBasicAction/BasicOpenUrlAction/BasicOpenUrlAction.hpp"
 #include "IE/interaction/IAction/IBasicAction/BasicSetSValueAction/BasicSetSValueAction.hpp"
