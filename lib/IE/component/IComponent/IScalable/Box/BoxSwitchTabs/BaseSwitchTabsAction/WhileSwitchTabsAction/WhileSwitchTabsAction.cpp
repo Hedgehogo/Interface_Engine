@@ -9,23 +9,16 @@ namespace ie {
 	}
 	
 	WhileSwitchTabsAction::WhileSwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> init_info) :
-		BaseSwitchTabsAction(init_info), size_(box_->get_array_size()), value_(box_->get_value()), step_(make.step) {
+		BaseSwitchTabsAction(init_info),
+		size_(box_->get_array_size()),
+		step_(((make.step % size_) + size_) % size_),
+		value_(box_->get_value()) {
 	}
 	
-	auto WhileSwitchTabsAction::start_pressed() -> void {
-	}
-	
-	auto WhileSwitchTabsAction::stop_pressed() -> void {
-		auto index_value{static_cast<int>(value_.get())};
-		index_value += step_;
-		index_value = (((index_value % size_) + size_) % size_);
-		value_.set(index_value);
-	}
-	
-	auto WhileSwitchTabsAction::while_pressed() -> void {
-	}
-	
-	auto WhileSwitchTabsAction::while_not_pressed() -> void {
+	auto WhileSwitchTabsAction::update(bool active) -> void {
+		if(active) {
+			value_.set((value_.get() + step_) % size_);
+		}
 	}
 }
 
