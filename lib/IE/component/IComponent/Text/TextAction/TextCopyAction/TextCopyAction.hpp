@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
+#include "IE/interaction/IAction/IBasicAction/IBasicAction.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
@@ -9,9 +9,9 @@ namespace ie {
 	template<typename T>
 	class BasicTextCopyAction;
 	
-	namespace make_system{
+	namespace make_system {
 		template<typename T>
-		struct BasicTextCopyAction : public BasicBaseTouchAction<Text&>::Make {
+		struct BasicTextCopyAction : public IBasicAction<Text&> {
 			bp::BoxPtr<T> clipboard;
 			
 			BasicTextCopyAction(bp::BoxPtr<T>&& clipboard = bp::BoxPtr<T>{});
@@ -21,21 +21,15 @@ namespace ie {
 	}
 	
 	template<typename T>
-	class BasicTextCopyAction : public BasicBaseTouchAction<Text&> {
+	class BasicTextCopyAction : public IBasicAction<Text&> {
 	public:
 		using Make = make_system::BasicTextCopyAction<T>;
 		
 		BasicTextCopyAction(Make&& make, BasicActionInitInfo<Text&> init_info);
 		
+		auto update(bool active) -> void override;
+	
 	protected:
-		auto start_pressed() -> void override;
-		
-		auto stop_pressed() -> void override;
-		
-		auto while_pressed() -> void override;
-		
-		auto while_not_pressed() -> void override;
-		
 		Text* text_;
 		bp::BoxPtr<T> clipboard_;
 	};

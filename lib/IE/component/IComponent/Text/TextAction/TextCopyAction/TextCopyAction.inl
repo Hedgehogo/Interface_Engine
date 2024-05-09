@@ -19,20 +19,10 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto BasicTextCopyAction<T>::start_pressed() -> void {
-	}
-	
-	template<typename T>
-	auto BasicTextCopyAction<T>::stop_pressed() -> void {
-		ProcessClipboard<T>::set_string(*clipboard_.get(), text_->get_selection_text());
-	}
-	
-	template<typename T>
-	auto BasicTextCopyAction<T>::while_pressed() -> void {
-	}
-	
-	template<typename T>
-	auto BasicTextCopyAction<T>::while_not_pressed() -> void {
+	auto BasicTextCopyAction<T>::update(bool active) -> void {
+		if(active) {
+			ProcessClipboard<T>::set_string(*clipboard_.get(), text_->get_selection_text());
+		}
 	}
 }
 
