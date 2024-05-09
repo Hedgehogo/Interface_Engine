@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../IAction/BasicTouchAction/BasicFnTouchAction/BasicFnTouchAction.hpp"
+#include "../IAction/BasicTouchAction/BasicTouchAction.hpp"
 #include "../IAction/IBasicAction/BasicEmptyAction/BasicEmptyAction.hpp"
 #include "../BasicActionInitInfo/BasicActionInitInfo.hpp"
 #include "IE/initialization/make/make.hpp"
