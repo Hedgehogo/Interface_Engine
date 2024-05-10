@@ -22,7 +22,7 @@ namespace ie {
 	public:
 		using Make = make_system::IBasicWheelAction<A_>;
 		
-		virtual auto update(sf::Vector2i mouse_position, int value) -> void = 0;
+		virtual auto update(int value) -> void = 0;
 	};
 	
 	using IWheelAction = IBasicWheelAction<>;

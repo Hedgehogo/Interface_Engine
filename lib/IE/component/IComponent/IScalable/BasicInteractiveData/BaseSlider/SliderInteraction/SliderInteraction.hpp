@@ -14,7 +14,13 @@ namespace ie {
 			SliderWheelAction::Relativity wheel_relativity;
 			sf::Vector2f wheel_sensitivity;
 			
-			Make(Key key, sf::Vector2i division, bool wheel_horizontal, SliderWheelAction::Relativity wheel_relativity, sf::Vector2f wheel_sensitivity);
+			Make(
+				Key key,
+				sf::Vector2i division,
+				bool wheel_horizontal,
+				SliderWheelAction::Relativity wheel_relativity,
+				sf::Vector2f wheel_sensitivity
+			);
 			
 			Make(
 				Key key,
@@ -30,10 +36,8 @@ namespace ie {
 		
 		SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info);
 		
-		auto set_slider(BaseSlider& slider) -> void;
-		
 		auto update(sf::Vector2i mouse_position) -> void override;
-		
+	
 	protected:
 		SliderWheelAction wheel_action_;
 	};

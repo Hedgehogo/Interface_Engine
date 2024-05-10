@@ -18,7 +18,7 @@ namespace ie {
 		relativity_(make.relativity == Relativity::RelationSlider) {
 	}
 	
-	auto SliderWheelAction::update(sf::Vector2i, int value) -> void {
+	auto SliderWheelAction::update(int value) -> void {
 		if(value != 0) {
 			auto move{sensitivity_};
 			auto reverse{(event_handler_->get_key(Key::LShift) || event_handler_->get_key(Key::RShift)) != horizontal_};

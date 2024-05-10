@@ -46,15 +46,8 @@ namespace ie {
 		);
 	}
 	
-	auto SliderInteraction::set_slider(BaseSlider& slider) -> void {
-		auto& slide_action{dynamic_cast<BasicAddBlockInteractionAction<BaseSlider&>&>(*action_)};
-		auto& slide_interaction{dynamic_cast<BasicPressedInteraction<BaseSlider&>&>(slide_action.get_interaction())};
-		dynamic_cast<SliderAction&>(slide_interaction.get_action()).set_slider(slider);
-		wheel_action_.set_slider(slider);
-	}
-	
 	auto SliderInteraction::update(sf::Vector2i mouse_position) -> void {
-		wheel_action_.update(mouse_position, MouseWheel::get_delta().y);
+		wheel_action_.update(MouseWheel::get_delta().y);
 		return BasicTouchInteraction<BaseSlider&>::update(mouse_position);
 	}
 }

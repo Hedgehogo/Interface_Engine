@@ -29,7 +29,7 @@ namespace ie {
 		
 		auto set_slider(BaseSlider& slider) -> void;
 		
-		auto update(sf::Vector2i mouse_position, int value) -> void override;
+		auto update(int value) -> void override;
 		
 	protected:
 		EventHandler* event_handler_;
