@@ -5,22 +5,22 @@
 #include "../../BasicActionInitInfo/BasicActionInitInfo.hpp"
 
 namespace ie {
-	template<typename T>
+	template<typename A_>
 	class IBasicTouchAction;
 	
 	namespace make_system {
-		template<typename T = std::monostate>
+		template<typename A_ = std::monostate>
 		struct IBasicTouchAction {
-			virtual auto make(BasicActionInitInfo<T> init_info) -> ie::IBasicTouchAction<T>* = 0;
+			virtual auto make(BasicActionInitInfo<A_> init_info) -> ie::IBasicTouchAction<A_>* = 0;
 			
 			virtual ~IBasicTouchAction() = default;
 		};
 	}
 	
-	template<typename T = std::monostate>
+	template<typename A_ = std::monostate>
 	class IBasicTouchAction : public virtual IAction {
 	public:
-		using Make = make_system::IBasicTouchAction<T>;
+		using Make = make_system::IBasicTouchAction<A_>;
 		
 		virtual auto update(sf::Vector2i point_position, bool active) -> void = 0;
 	};

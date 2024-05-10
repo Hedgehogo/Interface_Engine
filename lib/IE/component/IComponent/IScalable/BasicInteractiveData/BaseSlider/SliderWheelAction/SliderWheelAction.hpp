@@ -1,28 +1,28 @@
 #pragma once
 
 #include "IE/interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
-#include "IE/interaction/IAction/WheelAction/WheelAction.hpp"
+#include "IE/interaction/IAction/IBasicWheelAction/IBasicWheelAction.hpp"
 #include "IE/event/EventHandler/EventHandler.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class BaseSlider;
 	
-	class SliderWheelAction : public WheelAction {
+	class SliderWheelAction : public virtual IBasicWheelAction<BaseSlider&> {
 	public:
 		enum class Relativity {
 			RelationArea,
 			RelationSlider
 		};
 	
-		struct Make {
+		struct Make : public virtual IBasicWheelAction<BaseSlider&>::Make {
 			bool horizontal = false;
 			Relativity relativity = Relativity::RelationSlider;
 			sf::Vector2f sensitivity = {0.2f, 0.2f};
 			
 			Make(bool horizontal = false, Relativity relativity = Relativity::RelationSlider, sf::Vector2f sensitivity = {0.2f, 0.2f});
 			
-			auto make(BasicActionInitInfo<BaseSlider&> init_info) -> SliderWheelAction*;
+			auto make(BasicActionInitInfo<BaseSlider&> init_info) -> SliderWheelAction* override;
 		};
 		
 		SliderWheelAction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info);

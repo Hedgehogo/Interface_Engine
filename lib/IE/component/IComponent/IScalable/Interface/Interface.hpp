@@ -5,7 +5,7 @@
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/panel/IPanelManager/PanelManager/PanelManager.hpp"
 #include "IE/interaction/InteractionManager/InteractionManager.hpp"
-#include "IE/interaction/IAction/WheelAction/WheelAction.hpp"
+#include "IE/interaction/IAction/IBasicWheelAction/IBasicWheelAction.hpp"
 #include "IE/shared/DynBuffer/DynBuffer.hpp"
 #include "../IScalable.hpp"
 
