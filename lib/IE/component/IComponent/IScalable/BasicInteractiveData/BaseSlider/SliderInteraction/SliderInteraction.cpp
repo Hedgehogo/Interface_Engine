@@ -29,7 +29,7 @@ namespace ie {
 	}
 	
 	SliderInteraction::SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info) :
-		BasicTouchInteraction<BaseSlider&>(
+		BasicAnyPressingInteraction<BaseSlider&>(
 			{
 				make_box_ptr<BasicAddBlockInteractionAction<BaseSlider&>::Make>(
 					make_box_ptr<BasicTouchInteraction<BaseSlider&>::Make, BasicPressedInteraction<BaseSlider&>::Make>(
@@ -39,15 +39,10 @@ namespace ie {
 			}, init_info
 		),
 		wheel_action_({make.wheel_horizontal, make.wheel_relativity, make.wheel_sensitivity}, init_info) {
-		make_box_ptr<BasicAddBlockInteractionAction<BaseSlider&>::Make>(
-			make_box_ptr<BasicTouchInteraction<BaseSlider&>::Make, BasicPressedInteraction<BaseSlider&>::Make>(
-				make_box_ptr<SliderAction::Make>(make.division), make.key
-			)
-		);
 	}
 	
 	auto SliderInteraction::update(sf::Vector2i mouse_position) -> void {
 		wheel_action_.update(MouseWheel::get_delta().y);
-		return BasicTouchInteraction<BaseSlider&>::update(mouse_position);
+		BasicAnyPressingInteraction<BaseSlider&>::update(mouse_position);
 	}
 }

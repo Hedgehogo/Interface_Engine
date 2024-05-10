@@ -39,7 +39,7 @@ auto ieml::Decode<char, ie::make_system::BasicAnyPressingInteraction<A_> >::deco
 	ieml::Node const& node
 ) -> orl::Option<ie::make_system::BasicAnyPressingInteraction<A_> > {
 	auto& clear_node{node.get_clear()};
-	return ie::make_system::BasicTouchInteraction<A_>{
+	return ie::make_system::BasicAnyPressingInteraction<A_>{
 		clear_node.at("action").except().template as<bp::BoxPtr<ie::make_system::IBasicActivityAction<A_> > >().except(),
 		clear_node.get_as<ie::Key>("key").except().ok_or(ie::Key::MouseLeft),
 	};

@@ -17,8 +17,8 @@ namespace ie {
 	SwitcherAction::SwitcherAction(ISMBool& value) : value_(value) {
 	}
 	
-	auto SwitcherAction::update(orl::Option<Touch> touch) -> void {
-		if(tracker_.update(Touch::pressing(touch).is_some()).stopped()) {
+	auto SwitcherAction::update(bool active) -> void {
+		if(tracker_.update(active).stopped()) {
 			value_.set(!value_.get());
 		}
 	}

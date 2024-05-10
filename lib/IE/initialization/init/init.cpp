@@ -139,19 +139,20 @@ namespace ie {
 			
 			add_type_make<IActivityAction, OpenUrlAction>("OpenUrlAction", "OpenUrlA");
 			add_type_make<IActivityAction, CloseWindowAction>("CloseWindowAction", "CloseWindowA");
+			add_type_make<IActivityAction, SwitcherAction>("SwitcherAction", "SwitcherA");
 			add_names<IActivityAction::Make>("IActivityAction");
-			add_type_make<ITouchAction, SwitcherAction>("SwitcherAction", "SwitcherA");
 			add_names<ITouchAction::Make>("ITouchAction");
 			
 			add_type_make_named<IBasicTouchAction<Text&>, TextSelectionAction>("TextSelectionA");
-			add_names<IBasicTouchAction<Text&>::Make>("TextTouchAction");
+			add_names<IBasicTouchAction<Text&>::Make>("ITextTouchAction");
 			add_type_make_named<IBasicActivityAction<Text&>, TextCopyAction>("TextCopyA");
-			add_names<IBasicActivityAction<Text&>::Make>("ITextAction");
+			add_names<IBasicActivityAction<Text&>::Make>("ITextActivityAction");
 			
 			add_type_make_named<BaseSwitchTabsAction, SwitchTabsAction>("SwitchTabsA");
 			add_type_make_named<BaseSwitchTabsAction, WhileSwitchTabsAction>("WhileSwitchTabsA");
 			add_names<BaseSwitchTabsAction::Make>("BaseSwitchTabsAction");
 			
+			add_type_make_named<IBaseInteraction, AnyPressingInteraction>("AnyPressingI");
 			add_type_make_named<IBaseInteraction, HotkeyInteraction>("HotkeyI");
 			add_type_make_named<IBaseInteraction, TouchInteraction>("TouchI");
 			add_type_make_named<IBaseInteraction, KeysInteraction>("KeysI");

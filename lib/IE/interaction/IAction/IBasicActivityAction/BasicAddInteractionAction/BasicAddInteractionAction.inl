@@ -17,13 +17,8 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto BasicAddInteractionAction<T>::get_interaction() -> IBasicInteraction<T>& {
-		return *interaction_;
-	}
-	
-	template<typename T>
-	auto BasicAddInteractionAction<T>::update(orl::Option<Touch> touch) -> void {
-		tracker_.update(Touch::pressing(touch).is_some());
+	auto BasicAddInteractionAction<T>::update(bool active) -> void {
+		tracker_.update(active);
 		if(tracker_.changed()) {
 			if(tracker_.active()) {
 				interaction_manager_->add_interaction(*interaction_);

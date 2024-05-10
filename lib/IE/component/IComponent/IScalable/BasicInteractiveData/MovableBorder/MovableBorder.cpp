@@ -1,4 +1,5 @@
 #include "MovableBorder.hpp"
+#include "IE/interaction/IInteraction/BasicAnyPressingInteraction/BasicAnyPressingInteraction.hpp"
 #include "IE/interaction/IAction/IBasicActivityAction/BasicAddInteractionAction/BasicAddBlockInteractionAction/BasicAddBlockInteractionAction.hpp"
 #include "MovableBorderAction/MovableBorderAction.hpp"
 
@@ -39,7 +40,7 @@ namespace ie {
 			init_info
 		),
 		interactive_(
-			make_box_ptr<BasicTouchInteraction<MovableBorder&>::Make>(
+			make_box_ptr<BasicAnyPressingInteraction<MovableBorder&>::Make>(
 				make_box_ptr<BasicAddBlockInteractionAction<MovableBorder&>::Make>(
 					make_box_ptr<BasicPressedInteraction<MovableBorder&>::Make>(
 						make_box_ptr<MovableBorderAction::Make>(

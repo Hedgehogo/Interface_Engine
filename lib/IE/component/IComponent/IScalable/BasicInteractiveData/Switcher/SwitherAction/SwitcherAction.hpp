@@ -3,14 +3,14 @@
 #include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISReadable/ISReadable.hpp"
-#include "IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
+#include "IE/interaction/IAction/IBasicActivityAction/IBasicActivityAction.hpp"
 
 namespace ie {
 	class Switcher;
 	
-	class SwitcherAction : public virtual ITouchAction {
+	class SwitcherAction : public virtual IActivityAction {
 	public:
-		struct Make : public virtual ITouchAction::Make {
+		struct Make : public virtual IActivityAction::Make {
 			MakeDyn<ISMBool> value;
 			
 			Make(MakeDyn<ISMBool> value);
@@ -22,7 +22,7 @@ namespace ie {
 		
 		SwitcherAction(ISMBool& value);
 		
-		auto update(orl::Option<Touch> touch) -> void override;
+		auto update(bool active) -> void override;
 		
 	protected:
 		ActiveTracker tracker_;

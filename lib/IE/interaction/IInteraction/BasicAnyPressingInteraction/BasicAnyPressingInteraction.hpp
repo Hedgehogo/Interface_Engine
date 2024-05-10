@@ -37,6 +37,8 @@ namespace ie {
 		BoxPtr<IBasicActivityAction<A_> > action_;
 		Key key_;
 	};
+	
+	using AnyPressingInteraction = BasicAnyPressingInteraction<>;
 }
 
 template<typename A_>

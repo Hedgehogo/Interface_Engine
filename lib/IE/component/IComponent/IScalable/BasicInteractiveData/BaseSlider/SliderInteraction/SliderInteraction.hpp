@@ -1,11 +1,12 @@
 #pragma once
 
 #include "IE/interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
+#include "IE/interaction/IInteraction/BasicAnyPressingInteraction/BasicAnyPressingInteraction.hpp"
 #include "IE/component/IComponent/IScalable/BasicInteractiveData/BaseSlider/SliderAction/SliderAction.hpp"
 #include "../SliderWheelAction/SliderWheelAction.hpp"
 
 namespace ie {
-	class SliderInteraction : public BasicTouchInteraction<BaseSlider&> {
+	class SliderInteraction : public BasicAnyPressingInteraction<BaseSlider&> {
 	public:
 		struct Make : public virtual IBasicInteraction<BaseSlider&>::Make {
 			Key key;

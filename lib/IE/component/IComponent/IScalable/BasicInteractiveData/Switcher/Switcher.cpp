@@ -1,5 +1,5 @@
 #include "Switcher.hpp"
-#include "IE/interaction/IInteraction/BasicTouchInteraction/BasicTouchInteraction.hpp"
+#include "IE/interaction/IInteraction/BasicAnyPressingInteraction/BasicAnyPressingInteraction.hpp"
 #include "SwitherAction/SwitcherAction.hpp"
 
 namespace ie {
@@ -36,7 +36,9 @@ namespace ie {
 		Key key,
 		InitInfo init_info
 	) :
-		interactive_(make_box_ptr<TouchInteraction::Make>(make_box_ptr<SwitcherAction::Make>(value), key), init_info, {}),
+		interactive_(make_box_ptr<AnyPressingInteraction::Make>(
+			make_box_ptr<SwitcherAction::Make>(value), key
+		), init_info, {}),
 		inactive_background_(inactive_background->make(init_info.copy(inactive_draw_manager_))),
 		active_background_(active_background->make(init_info.copy(active_draw_manager_))),
 		active_(value) {

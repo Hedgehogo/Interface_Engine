@@ -23,7 +23,7 @@ namespace ie {
 		
 		BasicAddBlockInteractionAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		auto update(orl::Option<Touch> touch) -> void override;
+		auto update(bool active) -> void override;
 		
 		auto finish() -> void override;
 	};

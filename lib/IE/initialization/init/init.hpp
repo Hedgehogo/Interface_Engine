@@ -54,6 +54,7 @@
 #include "IE/sizing-positioning/ISizing/FnSizing/FnSizing.hpp"
 #include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 #include "IE/interaction/IInteraction/BasicHotkeyInteraction/BasicHotkeyInteraction.hpp"
+#include "IE/interaction/IInteraction/BasicAnyPressingInteraction/BasicAnyPressingInteraction.hpp"
 #include "IE/interaction/IAction/IBasicActivityAction/BasicOpenUrlAction/BasicOpenUrlAction.hpp"
 #include "IE/interaction/IAction/IBasicActivityAction/BasicSetSValueAction/BasicSetSValueAction.hpp"
 #include "IE/interaction/IAction/IBasicActivityAction/BasicAddSValueAction/BasicAddSValueAction.hpp"

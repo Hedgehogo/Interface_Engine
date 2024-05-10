@@ -11,7 +11,7 @@ namespace ie {
 	
 	namespace make_system {
 		template<typename T = std::monostate>
-		struct BasicAddInteractionAction : public virtual IBasicTouchAction<T> {
+		struct BasicAddInteractionAction : public virtual IBasicActivityAction<T> {
 			BoxPtr<IBasicInteraction<T> > interaction;
 			
 			BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
@@ -21,15 +21,13 @@ namespace ie {
 	}
 	
 	template<typename T = std::monostate>
-	class BasicAddInteractionAction : public virtual IBasicTouchAction<T> {
+	class BasicAddInteractionAction : public virtual IBasicActivityAction<T> {
 	public:
 		using Make = make_system::BasicAddInteractionAction<T>;
 		
 		BasicAddInteractionAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		auto get_interaction() -> IBasicInteraction<T>&;
-		
-		auto update(orl::Option<Touch> touch) -> void override;
+		auto update(bool active) -> void override;
 		
 		auto finish() -> void override;
 	
