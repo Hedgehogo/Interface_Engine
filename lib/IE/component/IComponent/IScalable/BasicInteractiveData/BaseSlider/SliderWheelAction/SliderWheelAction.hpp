@@ -1,14 +1,14 @@
 #pragma once
 
 #include "IE/interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
-#include "IE/interaction/IAction/WheelAction/BaseWheelAction/BaseWheelAction.hpp"
+#include "IE/interaction/IAction/WheelAction/WheelAction.hpp"
 #include "IE/event/EventHandler/EventHandler.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class BaseSlider;
 	
-	class SliderWheelAction : public BaseWheelAction {
+	class SliderWheelAction : public WheelAction {
 	public:
 		enum class Relativity {
 			RelationArea,
@@ -29,13 +29,7 @@ namespace ie {
 		
 		auto set_slider(BaseSlider& slider) -> void;
 		
-		auto start_pressed(sf::Vector2i mouse_position, int value) -> void override;
-		
-		auto stop_pressed(sf::Vector2i mouse_position, int value) -> void override;
-		
-		auto while_pressed(sf::Vector2i mouse_position, int value) -> void override;
-		
-		auto while_not_pressed(sf::Vector2i mouse_position, int value) -> void override;
+		auto update(sf::Vector2i mouse_position, int value) -> void override;
 		
 	protected:
 		EventHandler* event_handler_;

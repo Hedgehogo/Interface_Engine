@@ -18,26 +18,19 @@ namespace ie {
 		relativity_(make.relativity == Relativity::RelationSlider) {
 	}
 	
-	auto SliderWheelAction::start_pressed(sf::Vector2i, int) -> void {
-	}
-	
-	auto SliderWheelAction::stop_pressed(sf::Vector2i, int) -> void {
-	}
-	
-	auto SliderWheelAction::while_pressed(sf::Vector2i, int value) -> void {
-		auto move{sensitivity_};
-		auto reverse{(event_handler_->get_key(Key::LShift) || event_handler_->get_key(Key::RShift)) != horizontal_};
-		if(relativity_) {
-			auto slider_size{slider_->get_slider_size()};
-			auto area_size{slider_->get_area_size()};
-			move = {slider_size.x / area_size.x * move.x, slider_size.y / area_size.y * move.y};
+	auto SliderWheelAction::update(sf::Vector2i, int value) -> void {
+		if(value != 0) {
+			auto move{sensitivity_};
+			auto reverse{(event_handler_->get_key(Key::LShift) || event_handler_->get_key(Key::RShift)) != horizontal_};
+			if(relativity_) {
+				auto slider_size{slider_->get_slider_size()};
+				auto area_size{slider_->get_area_size()};
+				move = {slider_size.x / area_size.x * move.x, slider_size.y / area_size.y * move.y};
+			}
+			move *= -static_cast<float>(value);
+			(reverse ? move.y : move.x) = 0;
+			slider_->set_value(slider_->get_value() + move);
 		}
-		move *= -static_cast<float>(value);
-		(reverse ? move.y : move.x) = 0;
-		slider_->set_value(slider_->get_value() + move);
-	}
-	
-	auto SliderWheelAction::while_not_pressed(sf::Vector2i, int) -> void {
 	}
 	
 	auto SliderWheelAction::set_slider(BaseSlider& slider) -> void {
