@@ -1,14 +1,14 @@
 #pragma once
 
 #include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
-#include "IE/interaction/IAction/BasicTouchAction/BasicTouchAction.hpp"
+#include "IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
 
 namespace ie {
 	class BaseSlider;
 	
-	class SliderAction : public BasicTouchAction<BaseSlider&> {
+	class SliderAction : public virtual IBasicTouchAction<BaseSlider&> {
 	public:
-		struct Make : public BasicTouchAction<BaseSlider&>::Make {
+		struct Make : public virtual IBasicTouchAction<BaseSlider&>::Make {
 			sf::Vector2i division = {0, 0};
 			
 			Make(sf::Vector2i division = {0, 0});

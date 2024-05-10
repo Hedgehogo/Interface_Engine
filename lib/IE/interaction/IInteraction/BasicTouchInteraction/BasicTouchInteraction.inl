@@ -1,7 +1,7 @@
 namespace ie {
 	namespace make_system {
 		template<typename A_>
-		BasicTouchInteraction<A_>::BasicTouchInteraction(BoxPtr<BasicTouchAction<A_> >&& action, Key key) :
+		BasicTouchInteraction<A_>::BasicTouchInteraction(BoxPtr<IBasicTouchAction<A_> >&& action, Key key) :
 			action(std::move(action)), key(key) {
 		}
 		
@@ -22,17 +22,17 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicTouchInteraction<A_>::get_action() -> BasicTouchAction<A_>& {
+	auto BasicTouchInteraction<A_>::get_action() -> IBasicTouchAction<A_>& {
 		return *action_;
 	}
 	
 	template<typename A_>
-	auto BasicTouchInteraction<A_>::get_action() const -> BasicTouchAction<A_> const& {
+	auto BasicTouchInteraction<A_>::get_action() const -> IBasicTouchAction<A_> const& {
 		return *action_;
 	}
 	
 	template<typename A_>
-	auto BasicTouchInteraction<A_>::set_action(BoxPtr<BasicTouchAction<A_> >&& action) -> void {
+	auto BasicTouchInteraction<A_>::set_action(BoxPtr<IBasicTouchAction<A_> >&& action) -> void {
 		this->action_ = std::move(action);
 	}
 	
@@ -57,7 +57,7 @@ auto ieml::Decode<char, ie::make_system::BasicTouchInteraction<A_> >::decode(
 ) -> orl::Option<ie::make_system::BasicTouchInteraction<A_> > {
 	auto& clear_node{node.get_clear()};
 	return ie::make_system::BasicTouchInteraction<A_>{
-		clear_node.at("action").except().template as<bp::BoxPtr<ie::make_system::BasicTouchAction<A_> > >().except(),
+		clear_node.at("action").except().template as<bp::BoxPtr<ie::make_system::IBasicTouchAction<A_> > >().except(),
 		clear_node.get_as<ie::Key>("key").except().ok_or(ie::Key::MouseLeft),
 	};
 }

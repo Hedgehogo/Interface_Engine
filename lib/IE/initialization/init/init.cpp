@@ -140,11 +140,11 @@ namespace ie {
 			add_type_make<IBasicAction<>, OpenUrlAction>("OpenUrlAction", "OpenUrlA");
 			add_type_make<IBasicAction<>, CloseWindowAction>("CloseWindowAction", "CloseWindowA");
 			add_names<IBasicAction<>::Make>("IAction");
-			add_type_make<TouchAction, SwitcherAction>("SwitcherAction", "SwitcherA");
-			add_names<TouchAction::Make>("TouchAction");
+			add_type_make<ITouchAction, SwitcherAction>("SwitcherAction", "SwitcherA");
+			add_names<ITouchAction::Make>("TouchAction");
 			
-			add_type_make_named<BasicTouchAction<Text&>, TextSelectionAction>("TextSelectionA");
-			add_names<BasicTouchAction<Text&>::Make>("TextTouchAction");
+			add_type_make_named<IBasicTouchAction<Text&>, TextSelectionAction>("TextSelectionA");
+			add_names<IBasicTouchAction<Text&>::Make>("TextTouchAction");
 			add_type_make_named<IBasicAction<Text&>, TextCopyAction>("TextCopyA");
 			add_names<IBasicAction<Text&>::Make>("ITextAction");
 			

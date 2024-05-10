@@ -2,14 +2,14 @@
 
 #include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
 #include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
-#include "IE/interaction/IAction/BasicTouchAction/BasicTouchAction.hpp"
+#include "IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
 
 namespace ie {
 	class BoxSwitcherTabs;
 	
-	class SwitcherTabsAction : public BasicTouchAction<BoxSwitcherTabs&> {
+	class SwitcherTabsAction : public virtual IBasicTouchAction<BoxSwitcherTabs&> {
 	public:
-		struct Make : public virtual BasicTouchAction<BoxSwitcherTabs&>::Make {
+		struct Make : public virtual IBasicTouchAction<BoxSwitcherTabs&>::Make {
 			MakeDyn<ISMRSize> value;
 			
 			Make(MakeDyn<ISMRSize> value);

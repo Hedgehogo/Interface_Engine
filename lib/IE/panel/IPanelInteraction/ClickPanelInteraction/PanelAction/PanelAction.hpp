@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/interaction/IAction/BasicTouchAction/BasicTouchAction.hpp"
+#include "IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
 #include "../../PanelActionInitInfo/PanelActionInitInfo.hpp"
 
 namespace ie {
@@ -8,9 +8,9 @@ namespace ie {
 	
 	class IPanelManager;
 	
-	class PanelAction : public BasicTouchAction<Panel&> {
+	class PanelAction : public virtual IBasicTouchAction<Panel&> {
 	public:
-		struct Make : public virtual BasicTouchAction<Panel&>::Make {
+		struct Make : public virtual IBasicTouchAction<Panel&>::Make {
 			PanelAction* make(PanelActionInitInfo init_info) override = 0;
 		};
 		

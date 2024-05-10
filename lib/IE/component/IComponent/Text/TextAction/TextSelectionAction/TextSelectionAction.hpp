@@ -1,16 +1,16 @@
 #pragma once
 
 #include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
-#include "IE/interaction/IAction/BasicTouchAction/BasicTouchAction.hpp"
+#include "IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class BaseCharacter;
 	class Text;
 	
-	class TextSelectionAction : public BasicTouchAction<Text&> {
+	class TextSelectionAction : public virtual IBasicTouchAction<Text&> {
 	public:
-		struct Make : public BasicTouchAction<Text&>::Make {
+		struct Make : public virtual IBasicTouchAction<Text&>::Make {
 			auto make(BasicActionInitInfo<Text&> init_info) -> TextSelectionAction* override;
 		};
 		

@@ -1,15 +1,15 @@
 #pragma once
 
 #include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
-#include "IE/interaction/IAction/BasicTouchAction/BasicTouchAction.hpp"
+#include "IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
 #include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
 
 namespace ie {
 	class MovableBorder;
 	
-	class MovableBorderAction : public BasicTouchAction<MovableBorder&> {
+	class MovableBorderAction : public virtual IBasicTouchAction<MovableBorder&> {
 	public:
-		struct Make : public virtual BasicTouchAction<MovableBorder&>::Make {
+		struct Make : public virtual IBasicTouchAction<MovableBorder&>::Make {
 			ISMRFloat& value;
 			
 			Make(ISMRFloat& value);

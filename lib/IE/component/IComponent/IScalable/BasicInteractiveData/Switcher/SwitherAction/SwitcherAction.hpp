@@ -3,14 +3,14 @@
 #include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISReadable/ISReadable.hpp"
-#include "IE/interaction/IAction/BasicTouchAction/BasicTouchAction.hpp"
+#include "IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
 
 namespace ie {
 	class Switcher;
 	
-	class SwitcherAction : public TouchAction {
+	class SwitcherAction : public virtual ITouchAction {
 	public:
-		struct Make : public TouchAction::Make {
+		struct Make : public virtual ITouchAction::Make {
 			MakeDyn<ISMBool> value;
 			
 			Make(MakeDyn<ISMBool> value);

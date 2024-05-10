@@ -5,7 +5,7 @@
 namespace ie {
 	namespace make_system {
 		template<typename T>
-		BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<BasicTouchAction<T> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys) :
+		BasicKeysInteraction<T>::BasicKeysInteraction(BoxPtr<IBasicTouchAction<T> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys) :
 			action(std::move(action)), keys(std::move(keys)), black_list_keys(std::move(black_list_keys)) {
 		}
 		
@@ -31,12 +31,12 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto BasicKeysInteraction<T>::get_action() -> BasicTouchAction<T>* {
+	auto BasicKeysInteraction<T>::get_action() -> IBasicTouchAction<T>* {
 		return action_.get();
 	}
 	
 	template<typename T>
-	auto BasicKeysInteraction<T>::set_action(BasicTouchAction<T>* action) -> void {
+	auto BasicKeysInteraction<T>::set_action(IBasicTouchAction<T>* action) -> void {
 		this->action_.reset(action);
 	}
 	
@@ -89,7 +89,7 @@ auto ieml::Decode<char, ie::make_system::BasicKeysInteraction<T> >::decode(
 	}*/
 	auto map{clear_node.get_map_view().except()};
 	return ie::make_system::BasicKeysInteraction<T>{
-		map.at("action").except().as<ie::BoxPtr<ie::make_system::BasicTouchAction<T> > >().except(),
+		map.at("action").except().as<ie::BoxPtr<ie::make_system::IBasicTouchAction<T> > >().except(),
 		map.at("keys").except().as<std::vector<ie::Key> >().except(),
 		map.get_as<std::vector<ie::Key> >("black-list-keys").except().ok_or({}),
 	};

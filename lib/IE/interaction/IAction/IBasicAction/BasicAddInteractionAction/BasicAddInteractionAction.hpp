@@ -2,7 +2,7 @@
 
 #include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
-#include "../../BasicTouchAction/BasicTouchAction.hpp"
+#include "IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
 #include "../../../InteractionManager/InteractionManager.hpp"
 
 namespace ie {
@@ -11,7 +11,7 @@ namespace ie {
 	
 	namespace make_system {
 		template<typename T = std::monostate>
-		struct BasicAddInteractionAction : public BasicTouchAction<T> {
+		struct BasicAddInteractionAction : public virtual IBasicTouchAction<T> {
 			BoxPtr<IBasicInteraction<T> > interaction;
 			
 			BasicAddInteractionAction(BoxPtr<IBasicInteraction<T> >&& interaction);
@@ -21,7 +21,7 @@ namespace ie {
 	}
 	
 	template<typename T = std::monostate>
-	class BasicAddInteractionAction : public BasicTouchAction<T> {
+	class BasicAddInteractionAction : public virtual IBasicTouchAction<T> {
 	public:
 		using Make = make_system::BasicAddInteractionAction<T>;
 		

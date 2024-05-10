@@ -10,10 +10,10 @@ namespace ie {
 	namespace make_system {
 		template<typename A_ = std::monostate>
 		struct BasicTouchInteraction : public virtual IBasicInteraction<A_> {
-			BoxPtr<BasicTouchAction<A_> > action;
+			BoxPtr<IBasicTouchAction<A_> > action;
 			Key key;
 			
-			BasicTouchInteraction(BoxPtr<BasicTouchAction<A_> >&& action, Key key);
+			BasicTouchInteraction(BoxPtr<IBasicTouchAction<A_> >&& action, Key key);
 			
 			auto make(BasicActionInitInfo<A_> init_info) -> ie::BasicTouchInteraction<A_>* override;
 		};
@@ -28,11 +28,11 @@ namespace ie {
 		
 		auto get_key() -> Key;
 		
-		auto get_action() -> BasicTouchAction<A_>&;
+		auto get_action() -> IBasicTouchAction<A_>&;
 		
-		auto get_action() const -> BasicTouchAction<A_> const&;
+		auto get_action() const -> IBasicTouchAction<A_> const&;
 		
-		auto set_action(BoxPtr<BasicTouchAction<A_> >&& action) -> void;
+		auto set_action(BoxPtr<IBasicTouchAction<A_> >&& action) -> void;
 		
 		auto start(sf::Vector2i mouse_position) -> void override;
 		
@@ -42,7 +42,7 @@ namespace ie {
 		
 	protected:
 		EventHandler* event_handler_;
-		BoxPtr<BasicTouchAction<A_> > action_;
+		BoxPtr<IBasicTouchAction<A_> > action_;
 		Key key_;
 	};
 	
