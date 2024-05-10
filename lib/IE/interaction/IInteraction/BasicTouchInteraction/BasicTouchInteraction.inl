@@ -38,6 +38,7 @@ namespace ie {
 	
 	template<typename A_>
 	auto BasicTouchInteraction<A_>::start(sf::Vector2i) -> void {
+		action_->start();
 	}
 	
 	template<typename A_>
