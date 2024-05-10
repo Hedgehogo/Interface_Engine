@@ -17,11 +17,10 @@ namespace ie {
 		
 		HidePanelAction(Make&& make, PanelActionInitInfo init_info);
 		
-		auto update(sf::Vector2i point_position, bool active) -> void override;
+		auto update(orl::Option<Touch> touch) -> void override;
 		
 	protected:
-		ActiveTracker tracker_;
-		sf::Vector2f last_position_;
+		orl::Option<sf::Vector2f> pressing;
 		bool only_on_parent_;
 	};
 }

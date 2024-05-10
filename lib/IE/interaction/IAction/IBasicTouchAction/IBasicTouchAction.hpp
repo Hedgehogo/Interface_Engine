@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/System/Vector2.hpp>
+#include "IE/event/Touch/Touch.hpp"
 #include "../IAction.hpp"
 #include "../../BasicActionInitInfo/BasicActionInitInfo.hpp"
 
@@ -22,7 +23,7 @@ namespace ie {
 	public:
 		using Make = make_system::IBasicTouchAction<A_>;
 		
-		virtual auto update(sf::Vector2i point_position, bool active) -> void = 0;
+		virtual auto update(orl::Option<Touch> touch) -> void = 0;
 	};
 	
 	using ITouchAction = IBasicTouchAction<std::monostate>;

@@ -22,7 +22,7 @@ namespace ie {
 		
 		SwitcherAction(ISMBool& value);
 		
-		auto update(sf::Vector2i point_position, bool active) -> void override;
+		auto update(orl::Option<Touch> touch) -> void override;
 		
 	protected:
 		ActiveTracker tracker_;

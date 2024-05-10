@@ -13,7 +13,7 @@ namespace ie {
 		
 		DisplayPanelAction(Make&& make, PanelActionInitInfo init_info);
 		
-		auto update(sf::Vector2i point_position, bool active) -> void override;
+		auto update(orl::Option<Touch> touch) -> void override;
 		
 	protected:
 		ActiveTracker tracker_;

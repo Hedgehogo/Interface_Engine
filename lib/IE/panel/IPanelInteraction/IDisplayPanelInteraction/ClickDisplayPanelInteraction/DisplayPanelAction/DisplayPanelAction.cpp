@@ -9,8 +9,8 @@ namespace ie {
 	DisplayPanelAction::DisplayPanelAction(Make&&, PanelActionInitInfo init_info) : PanelAction(init_info) {
 	}
 	
-	auto DisplayPanelAction::update(sf::Vector2i point_position, bool active) -> void {
-		if(tracker_.update(active).stopped()) {
+	auto DisplayPanelAction::update(orl::Option<Touch> touch) -> void {
+		if(tracker_.update(Touch::pressing(touch).is_some()).stopped()) {
 			panel_manager_->display_panel(panel_);
 		}
 	}

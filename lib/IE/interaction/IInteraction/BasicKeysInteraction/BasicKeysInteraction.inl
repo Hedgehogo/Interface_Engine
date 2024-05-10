@@ -61,7 +61,7 @@ namespace ie {
 				}
 			}
 		}
-		action_->update(mouse_position, press_);
+		action_->update({{mouse_position, press_}});
 	}
 	
 	template<typename T>

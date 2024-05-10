@@ -19,9 +19,10 @@ namespace ie {
 		
 		SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> init_info);
 		
-		auto update(sf::Vector2i point_position, bool active) -> void override;
+		auto update(orl::Option<Touch> touch) -> void override;
 		
 	protected:
+		orl::Option<sf::Vector2f> pressing;
 		ActiveTracker tracker_;
 		ISMRSize& value_;
 		BoxSwitcherTabs* switcher_tabs_;

@@ -20,12 +20,13 @@ namespace ie {
 		
 		auto set_slider(BaseSlider& slider) -> void;
 		
-		auto update(sf::Vector2i point_position, bool active) -> void override;
+		auto update(orl::Option<Touch> touch) -> void override;
 		
 	protected:
+		bool active;
 		ActiveTracker tracker_;
 		BaseSlider* slider_;
-		sf::Vector2i start_mouse_position_;
+		sf::Vector2i start_touch_position_;
 		sf::Vector2f start_value_;
 		sf::Vector2i division_;
 	};

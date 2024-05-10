@@ -20,10 +20,10 @@ namespace ie {
 		
 		auto get_end() -> orl::Option<std::vector<BaseCharacter*>::iterator>;
 		
-		auto update(sf::Vector2i point_position, bool active) -> void override;
+		auto update(orl::Option<Touch> touch) -> void override;
 		
 	protected:
-		ActiveTracker tracker_;
+		bool active;
 		Text* text_;
 		orl::Option<std::vector<BaseCharacter*>::iterator> start_, end_;
 	};

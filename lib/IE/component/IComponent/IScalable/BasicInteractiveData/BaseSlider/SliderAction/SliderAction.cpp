@@ -14,25 +14,26 @@ namespace ie {
 		slider_(&init_info.additional), division_(make.division) {
 	}
 	
-	auto SliderAction::update(sf::Vector2i point_position, bool active) -> void {
-		tracker_.update(active);
-		if(tracker_.started()) {
-			if(!slider_->on_slider(point_position)) {
-				slider_->set_value_by_mouse(point_position);
+	auto SliderAction::update(orl::Option<Touch> touch) -> void {
+		auto const pressing{Touch::pressing(touch)};
+		for(auto const point_position: pressing) {
+			if(!active) {
+				if(!slider_->on_slider(point_position)) {
+					slider_->set_value_by_mouse(point_position);
+				}
+				start_value_ = slider_->get_value();
+				start_touch_position_ = point_position;
 			}
-			start_value_ = slider_->get_value();
-			start_mouse_position_ = point_position;
-		}
-		if(tracker_.active()) {
 			auto const mouse_offset{sf::Vector2f{sf::Vector2i{
-				point_position.x - start_mouse_position_.x,
-				point_position.y - start_mouse_position_.y
+				point_position.x - start_touch_position_.x,
+				point_position.y - start_touch_position_.y
 			}}};
 			slider_->set_value(BaseSlider::round_value_to_division(
 				slider_->move_slider(start_value_, mouse_offset),
 				division_
 			));
 		}
+		active = pressing.is_some();
 	}
 	
 	auto SliderAction::set_slider(BaseSlider& slider) -> void {

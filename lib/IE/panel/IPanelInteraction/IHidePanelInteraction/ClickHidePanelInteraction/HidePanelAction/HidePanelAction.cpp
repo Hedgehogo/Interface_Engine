@@ -10,20 +10,24 @@ namespace ie {
 	}
 	
 	HidePanelAction::HidePanelAction(Make&& make, PanelActionInitInfo init_info) :
-		PanelAction(init_info), only_on_parent_(make.only_on_parent), last_position_() {
+		PanelAction(init_info), pressing(), only_on_parent_(make.only_on_parent) {
 	}
 	
-	auto HidePanelAction::update(sf::Vector2i point_position, bool active) -> void {
-		last_position_ = sf::Vector2f{point_position};
-		if(tracker_.update(active).stopped()) {
-			if(
-				only_on_parent_ ?
-				panel_->get_parent_processed() :
-				!panel_->in_panel(last_position_) && !panel_->in_const_panels(last_position_) && panel_->is_free()
-				) {
-				panel_manager_->hide_panel(panel_);
+	auto HidePanelAction::update(orl::Option<Touch> touch) -> void {
+		pressing = touch.and_then([](Touch value) -> orl::Option<orl::Option<sf::Vector2f> > {
+			return value.active && orl::Option{sf::Vector2f{value.position}};
+		}).some_or_else([this] {
+			for(auto point_position: pressing) {
+				if(
+					only_on_parent_ ?
+					panel_->get_parent_processed() :
+					!panel_->in_panel(point_position) && !panel_->in_const_panels(point_position) && panel_->is_free()
+					) {
+					panel_manager_->hide_panel(panel_);
+				}
 			}
-		}
+			return orl::Option<sf::Vector2f>{};
+		});
 	}
 }
 

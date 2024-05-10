@@ -9,7 +9,8 @@ namespace ie {
 		return new TextSelectionAction{std::move(*this), init_info};
 	}
 	
-	TextSelectionAction::TextSelectionAction(Make&&, BasicActionInitInfo<Text&> init_info) : text_(&init_info.additional), start_(), end_() {
+	TextSelectionAction::TextSelectionAction(Make&&, BasicActionInitInfo<Text&> init_info) :
+		active(false), text_(&init_info.additional), start_(), end_() {
 	}
 	
 	auto TextSelectionAction::get_start() -> orl::Option<std::vector<BaseCharacter*>::iterator> {
@@ -20,9 +21,9 @@ namespace ie {
 		return end_;
 	}
 	
-	auto TextSelectionAction::update(sf::Vector2i point_position, bool active) -> void {
-		tracker_.update(active);
-		for(auto [start_value, end_value]: active && orl::clone(start_) && orl::clone(end_)) {
+	auto TextSelectionAction::update(orl::Option<Touch> touch) -> void {
+		auto const pressing{Touch::pressing(touch)};
+		for(auto [start_value, end_value]: pressing.is_some() && orl::clone(start_) && orl::clone(end_)) {
 			if(start_value > end_value) {
 				std::swap(start_value, end_value);
 			}
@@ -32,10 +33,10 @@ namespace ie {
 			}
 		}
 		
-		if(tracker_.started()) {
-			text_->set_selection_start(start_ = text_->get_character(sf::Vector2f{point_position}));
-		}
-		if(tracker_.active()) {
+		for(auto const point_position: pressing) {
+			if(!active) {
+				text_->set_selection_start(start_ = text_->get_character(sf::Vector2f{point_position}));
+			}
 			text_->set_selection_end(end_ = text_->get_character(sf::Vector2f{point_position}));
 			for(auto [start_value, end_value]: orl::clone(start_) && orl::clone(end_)) {
 				if(start_value > end_value) {
@@ -48,6 +49,7 @@ namespace ie {
 				}
 			}
 		}
+		active = pressing.is_some();
 	}
 }
 

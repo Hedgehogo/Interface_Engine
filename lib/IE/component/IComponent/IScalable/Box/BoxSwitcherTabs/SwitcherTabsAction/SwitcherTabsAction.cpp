@@ -10,12 +10,17 @@ namespace ie {
 	}
 	
 	SwitcherTabsAction::SwitcherTabsAction(Make&& make, BasicActionInitInfo<BoxSwitcherTabs&> init_info) :
-		value_(make.value.make(SInitInfo{init_info})), switcher_tabs_(&init_info.additional) {
+		pressing(), value_(make.value.make(SInitInfo{init_info})), switcher_tabs_(&init_info.additional) {
 	}
 	
-	auto SwitcherTabsAction::update(sf::Vector2i point_position, bool active) -> void {
-		if(tracker_.update(active).stopped()) {
-			value_.set(switcher_tabs_->get_tab(sf::Vector2f{point_position}));
-		}
+	auto SwitcherTabsAction::update(orl::Option<Touch> touch) -> void {
+		pressing = touch.and_then([](Touch value) -> orl::Option<orl::Option<sf::Vector2f> > {
+			return value.active && orl::Option{sf::Vector2f{value.position}};
+		}).some_or_else([this] {
+			for(auto point_position: pressing) {
+				value_.set(switcher_tabs_->get_tab(point_position));
+			}
+			return orl::Option<sf::Vector2f>{};
+		});
 	}
 }

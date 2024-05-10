@@ -42,7 +42,7 @@ namespace ie {
 	
 	template<typename A_>
 	auto BasicTouchInteraction<A_>::update(sf::Vector2i mouse_position) -> void {
-		action_->update(mouse_position, event_handler_->get_key(key_));
+		action_->update({{mouse_position, event_handler_->get_key(key_)}});
 	}
 	
 	template<typename A_>

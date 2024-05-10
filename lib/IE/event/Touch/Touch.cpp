@@ -11,4 +11,10 @@ namespace ie {
 	auto Touch::from(bool active) -> Touch::TouchMaker {
 		return TouchMaker{active};
 	}
+	
+	auto Touch::pressing(orl::Option<Touch> touch) -> orl::Option<sf::Vector2i> {
+		return touch.and_then([](Touch value) {
+			return value.active && orl::Option{value.position};
+		});
+	}
 }

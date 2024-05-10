@@ -19,10 +19,10 @@ namespace ie {
 		
 		MovableBorderAction(Make&& make, BasicActionInitInfo<MovableBorder&> init_info);
 		
-		auto update(sf::Vector2i point_position, bool active) -> void override;
+		auto update(orl::Option<Touch> touch) -> void override;
 	
 	protected:
-		ActiveTracker tracker_;
+		bool active;
 		ISMRFloat& value_;
 		MovableBorder* object_;
 		float offset_;

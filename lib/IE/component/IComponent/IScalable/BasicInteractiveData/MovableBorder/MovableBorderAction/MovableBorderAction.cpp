@@ -14,25 +14,26 @@ namespace ie {
 		object_(&init_info.additional) {
 	}
 	
-	auto MovableBorderAction::update(sf::Vector2i point_position, bool active) -> void {
-		tracker_.update(active);
-		if(tracker_.started()) {
-			if(object_->get_is_horizontal_border()) {
-				auto size{object_->get_first_object().get_size().y};
-				auto position{object_->get_first_object().get_position().y};
-				offset_ = static_cast<float>(point_position.y) - (position + size);
-			} else {
-				auto size{object_->get_first_object().get_size().x};
-				auto position{object_->get_first_object().get_position().x};
-				offset_ = static_cast<float>(point_position.x) - (position + size);
+	auto MovableBorderAction::update(orl::Option<Touch> touch) -> void {
+		auto const pressing{Touch::pressing(touch)};
+		for(auto const point_position: pressing) {
+			if(!active) {
+				if(object_->get_is_horizontal_border()) {
+					auto size{object_->get_first_object().get_size().y};
+					auto position{object_->get_first_object().get_position().y};
+					offset_ = static_cast<float>(point_position.y) - (position + size);
+				} else {
+					auto size{object_->get_first_object().get_size().x};
+					auto position{object_->get_first_object().get_position().x};
+					offset_ = static_cast<float>(point_position.x) - (position + size);
+				}
 			}
-		}
-		if(tracker_.active()) {
 			if(object_->get_is_horizontal_border()) {
 				value_.set(((static_cast<float>(point_position.y) - offset_) - object_->get_position().y) / object_->get_size().y);
 			} else {
 				value_.set(((static_cast<float>(point_position.x) - offset_) - object_->get_position().x) / object_->get_size().x);
 			}
 		}
+		active = pressing.is_some();
 	}
 }

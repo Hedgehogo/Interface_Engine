@@ -1,5 +1,7 @@
 //included into BasicStopActivityAction.hpp
 
+#include "option_result/Option/Option.hpp"
+
 namespace ie {
 	namespace make_system {
 		template<typename A_>
@@ -23,7 +25,7 @@ namespace ie {
 	
 	template<typename A_>
 	auto BasicStopActivityAction<A_>::update(bool active) -> void {
-		action->update(tracker.update(active).stopped());
+		action->update(orl::Option<Touch>());
 	}
 	
 	template<typename A_>
