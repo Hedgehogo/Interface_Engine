@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
-#include "../IBasicAction.hpp"
+#include "../IBasicActivityAction.hpp"
 
 namespace ie {
 	template<typename A_>
@@ -9,13 +9,13 @@ namespace ie {
 	
 	namespace make_system {
 		template<typename A_ = std::monostate>
-		struct BasicCloseWindowAction : public virtual IBasicAction<A_> {
+		struct BasicCloseWindowAction : public virtual IBasicActivityAction<A_> {
 			auto make(BasicActionInitInfo<A_> init_info) -> ie::BasicCloseWindowAction<A_>* override;
 		};
 	}
 	
 	template<typename A_ = std::monostate>
-	class BasicCloseWindowAction : public virtual IBasicAction<A_> {
+	class BasicCloseWindowAction : public virtual IBasicActivityAction<A_> {
 	public:
 		using Make = make_system::BasicCloseWindowAction<A_>;
 		

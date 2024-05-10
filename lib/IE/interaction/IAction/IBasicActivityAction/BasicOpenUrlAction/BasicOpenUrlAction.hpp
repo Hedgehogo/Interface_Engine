@@ -2,7 +2,7 @@
 
 #include <string>
 #include "IE/ieml/shortcuts/shortcuts.hpp"
-#include "../IBasicAction.hpp"
+#include "../IBasicActivityAction.hpp"
 
 namespace ie {
 	template<typename A_>
@@ -10,7 +10,7 @@ namespace ie {
 	
 	namespace make_system {
 		template<typename A_ = std::monostate>
-		struct BasicOpenUrlAction : public virtual IBasicAction<A_> {
+		struct BasicOpenUrlAction : public virtual IBasicActivityAction<A_> {
 			std::string url;
 			
 			BasicOpenUrlAction(std::string url);
@@ -20,7 +20,7 @@ namespace ie {
 	}
 	
 	template<typename A_ = std::monostate>
-	class BasicOpenUrlAction : public virtual IBasicAction<A_> {
+	class BasicOpenUrlAction : public virtual IBasicActivityAction<A_> {
 	public:
 		using Make = make_system::BasicOpenUrlAction<A_>;
 		

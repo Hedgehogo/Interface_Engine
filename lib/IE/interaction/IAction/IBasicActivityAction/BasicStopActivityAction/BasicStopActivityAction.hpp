@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../IBasicAction.hpp"
+#include "../IBasicActivityAction.hpp"
 #include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
 
 namespace ie {
@@ -9,17 +9,17 @@ namespace ie {
 	
 	namespace make_system {
 		template<typename A_>
-		struct BasicStopActivityAction : public virtual IBasicAction<A_> {
-			BoxPtr<IBasicAction<A_> > action;
+		struct BasicStopActivityAction : public virtual IBasicActivityAction<A_> {
+			BoxPtr<IBasicActivityAction<A_> > action;
 			
-			BasicStopActivityAction(BoxPtr<IBasicAction<A_> >&& action);
+			BasicStopActivityAction(BoxPtr<IBasicActivityAction<A_> >&& action);
 			
-			auto make(BasicActionInitInfo<A_> init_info) -> ie::IBasicAction<A_>* override;
+			auto make(BasicActionInitInfo<A_> init_info) -> ie::IBasicActivityAction<A_>* override;
 		};
 	}
 	
 	template<typename A_ = std::monostate>
-	class BasicStopActivityAction : public virtual IBasicAction<A_> {
+	class BasicStopActivityAction : public virtual IBasicActivityAction<A_> {
 	public:
 		using Make = make_system::BasicStopActivityAction<A_>;
 		
@@ -32,7 +32,7 @@ namespace ie {
 		auto finish() -> void override;
 	
 	protected:
-		BoxPtr<IBasicAction<A_> > action;
+		BoxPtr<IBasicActivityAction<A_> > action;
 		ActiveTracker tracker;
 	};
 	

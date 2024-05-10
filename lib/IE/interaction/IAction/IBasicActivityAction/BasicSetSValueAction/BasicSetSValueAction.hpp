@@ -2,7 +2,7 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/ISReadable/ISReadable.hpp"
-#include "../IBasicAction.hpp"
+#include "../IBasicActivityAction.hpp"
 
 namespace ie {
 	template<typename A_, typename Value_, typename = std::enable_if_t<is_readable<Value_> > >
@@ -10,7 +10,7 @@ namespace ie {
 	
 	namespace make_system {
 		template<typename A_, typename Value_, typename = std::enable_if_t<is_readable<Value_> > >
-		struct BasicSetSValueAction : public virtual IBasicAction<A_> {
+		struct BasicSetSValueAction : public virtual IBasicActivityAction<A_> {
 			MakeDyn<Value_> value;
 			typename Value_::T constant;
 			
@@ -21,7 +21,7 @@ namespace ie {
 	}
 	
 	template<typename A_, typename Value_, typename>
-	class BasicSetSValueAction : public virtual IBasicAction<A_> {
+	class BasicSetSValueAction : public virtual IBasicActivityAction<A_> {
 	public:
 		using Make = make_system::BasicSetSValueAction<A_, Value_>;
 		

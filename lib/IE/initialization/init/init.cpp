@@ -30,8 +30,8 @@ namespace ie {
 		add_type_with_make<ISReadable<T>, SReadable<T> >(name);
 		add_names<ISReadable<T> >(std::string("I") + name);
 		
-		add_type_make<IBasicAction<>, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
-		add_type_make<IBasicAction<>, AddSValueAction<T> >(std::string("Add") + name + std::string("Action"));
+		add_type_make<IActivityAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
+		add_type_make<IActivityAction, AddSValueAction<T> >(std::string("Add") + name + std::string("Action"));
 		
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
 			add_type_with_make<SString, SToString<T> >(std::string("ToString") + std::string(1, first));
@@ -137,16 +137,16 @@ namespace ie {
 			add_type_make_named<BaseTextResizer, TextResizer>();
 			add_names<BaseTextResizer::Make>("BaseTextResizer");
 			
-			add_type_make<IBasicAction<>, OpenUrlAction>("OpenUrlAction", "OpenUrlA");
-			add_type_make<IBasicAction<>, CloseWindowAction>("CloseWindowAction", "CloseWindowA");
-			add_names<IBasicAction<>::Make>("IAction");
+			add_type_make<IActivityAction, OpenUrlAction>("OpenUrlAction", "OpenUrlA");
+			add_type_make<IActivityAction, CloseWindowAction>("CloseWindowAction", "CloseWindowA");
+			add_names<IActivityAction::Make>("IActivityAction");
 			add_type_make<ITouchAction, SwitcherAction>("SwitcherAction", "SwitcherA");
-			add_names<ITouchAction::Make>("TouchAction");
+			add_names<ITouchAction::Make>("ITouchAction");
 			
 			add_type_make_named<IBasicTouchAction<Text&>, TextSelectionAction>("TextSelectionA");
 			add_names<IBasicTouchAction<Text&>::Make>("TextTouchAction");
-			add_type_make_named<IBasicAction<Text&>, TextCopyAction>("TextCopyA");
-			add_names<IBasicAction<Text&>::Make>("ITextAction");
+			add_type_make_named<IBasicActivityAction<Text&>, TextCopyAction>("TextCopyA");
+			add_names<IBasicActivityAction<Text&>::Make>("ITextAction");
 			
 			add_type_make_named<BaseSwitchTabsAction, SwitchTabsAction>("SwitchTabsA");
 			add_type_make_named<BaseSwitchTabsAction, WhileSwitchTabsAction>("WhileSwitchTabsA");
