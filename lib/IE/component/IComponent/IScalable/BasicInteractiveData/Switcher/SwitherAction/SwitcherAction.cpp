@@ -17,17 +17,10 @@ namespace ie {
 	SwitcherAction::SwitcherAction(ISMBool& value) : value_(value) {
 	}
 	
-	auto SwitcherAction::start_pressed() -> void {
-	}
-	
-	auto SwitcherAction::stop_pressed() -> void {
-		value_.set(!value_.get());
-	}
-	
-	auto SwitcherAction::while_pressed() -> void {
-	}
-	
-	auto SwitcherAction::while_not_pressed() -> void {
+	auto SwitcherAction::update(sf::Vector2i point_position, bool active) -> void {
+		if(tracker_.update(active).stopped()) {
+			value_.set(!value_.get());
+		}
 	}
 }
 

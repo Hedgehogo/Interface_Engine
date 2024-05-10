@@ -2,7 +2,7 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/ISReadable/ISReadable.hpp"
-#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
+#include "IE/interaction/IAction/IBasicAction/IBasicAction.hpp"
 
 namespace ie {
 	template<typename A_, typename Value_, typename = std::enable_if_t<is_readable<Value_> > >
