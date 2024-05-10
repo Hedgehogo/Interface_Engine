@@ -19,7 +19,7 @@ namespace ie {
 			Lowest,
 		};
 		
-		virtual auto is_blocked() const -> bool;
+		virtual auto is_prioritised() const -> bool;
 		
 		virtual auto get_priority() const -> Priority;
 		

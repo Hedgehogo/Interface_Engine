@@ -1,6 +1,6 @@
 namespace ie {
 	template<typename A_>
-	auto IBasicPrioritisedInteraction<A_>::is_blocked() const -> bool {
+	auto IBasicPrioritisedInteraction<A_>::is_prioritised() const -> bool {
 		return true;
 	}
 	

@@ -18,7 +18,7 @@ namespace ie {
 	public:
 		using Make = make_system::IBasicPrioritisedInteraction<A_>;
 		
-		auto is_blocked() const -> bool override;
+		auto is_prioritised() const -> bool override;
 		
 		/*old_action
 		virtual auto handle_event_prioritised(Event event) -> bool;

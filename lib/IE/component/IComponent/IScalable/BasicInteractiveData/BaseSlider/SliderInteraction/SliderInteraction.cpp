@@ -1,5 +1,5 @@
 #include "SliderInteraction.hpp"
-#include "IE/interaction/IAction/IBasicActivityAction/BasicAddInteractionAction/BasicAddBlockInteractionAction/BasicAddBlockInteractionAction.hpp"
+#include "IE/interaction/IAction/IBasicActivityAction/BasicAddInteractionAction/BasicAddPrioritisedInteractionAction/BasicAddPrioritisedInteractionAction.hpp"
 
 namespace ie {
 	SliderInteraction::Make::Make(
@@ -31,7 +31,7 @@ namespace ie {
 	SliderInteraction::SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info) :
 		BasicAnyPressingInteraction<BaseSlider&>(
 			{
-				make_box_ptr<BasicAddBlockInteractionAction<BaseSlider&>::Make>(
+				make_box_ptr<BasicAddPrioritisedInteractionAction<BaseSlider&>::Make>(
 					make_box_ptr<BasicTouchInteraction<BaseSlider&>::Make, BasicPressedInteraction<BaseSlider&>::Make>(
 						make_box_ptr<SliderAction::Make>(make.division), make.key
 					)

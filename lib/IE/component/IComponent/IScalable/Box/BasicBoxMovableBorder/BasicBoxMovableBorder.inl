@@ -1,4 +1,4 @@
-#include "IE/interaction/IAction/IBasicActivityAction/BasicAddInteractionAction/BasicAddBlockInteractionAction/BasicAddBlockInteractionAction.hpp"
+#include "IE/interaction/IAction/IBasicActivityAction/BasicAddInteractionAction/BasicAddPrioritisedInteractionAction/BasicAddPrioritisedInteractionAction.hpp"
 #include <algorithm>
 
 namespace ie {

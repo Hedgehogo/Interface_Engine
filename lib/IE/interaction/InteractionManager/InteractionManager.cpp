@@ -35,7 +35,7 @@ namespace ie {
 	
 	auto InteractionManager::is_blocked() const -> bool {
 		return std::any_of(this->interactions_.begin(), this->interactions_.end(), [](IInteraction* interaction) {
-			return interaction->is_blocked();
+			return interaction->is_prioritised();
 		});
 	}
 	

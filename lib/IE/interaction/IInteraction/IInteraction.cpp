@@ -1,7 +1,7 @@
 #include "IInteraction.hpp"
 
 namespace ie {
-	auto IInteraction::is_blocked() const -> bool {
+	auto IInteraction::is_prioritised() const -> bool {
 		return false;
 	}
 	
