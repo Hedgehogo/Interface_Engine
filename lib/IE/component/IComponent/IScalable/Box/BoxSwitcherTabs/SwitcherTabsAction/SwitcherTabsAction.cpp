@@ -13,16 +13,9 @@ namespace ie {
 		value_(make.value.make(SInitInfo{init_info})), switcher_tabs_(&init_info.additional) {
 	}
 	
-	auto SwitcherTabsAction::start_pressed() -> void {
-	}
-	
-	auto SwitcherTabsAction::stop_pressed() -> void {
-		value_.set(switcher_tabs_->get_tab(sf::Vector2f(point_position_)));
-	}
-	
-	auto SwitcherTabsAction::while_pressed() -> void {
-	}
-	
-	auto SwitcherTabsAction::while_not_pressed() -> void {
+	auto SwitcherTabsAction::update(sf::Vector2i point_position, bool active) -> void {
+		if(tracker_.update(active).stopped()) {
+			value_.set(switcher_tabs_->get_tab(sf::Vector2f{point_position}));
+		}
 	}
 }

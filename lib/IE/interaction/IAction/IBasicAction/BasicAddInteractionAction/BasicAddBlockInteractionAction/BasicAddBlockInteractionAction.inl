@@ -17,7 +17,10 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto BasicAddBlockInteractionAction<T>::stop_pressed() -> void {
+	auto BasicAddBlockInteractionAction<T>::update(sf::Vector2i, bool active) -> void {
+		if(this->tracker_.update(active).started()) {
+			this->interaction_manager_->add_interaction(*this->interaction_);
+		}
 	}
 	
 	template<typename T>

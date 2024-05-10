@@ -1,11 +1,12 @@
 #pragma once
 
-#include "IE/interaction/IAction/BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
+#include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
+#include "IE/interaction/IAction/BasicTouchAction/BasicTouchAction.hpp"
 
 namespace ie {
 	class BaseSlider;
 	
-	class SliderAction : public BasicBaseTouchAction<BaseSlider&> {
+	class SliderAction : public BasicTouchAction<BaseSlider&> {
 	public:
 		struct Make : public BasicTouchAction<BaseSlider&>::Make {
 			sf::Vector2i division = {0, 0};
@@ -19,17 +20,10 @@ namespace ie {
 		
 		auto set_slider(BaseSlider& slider) -> void;
 		
+		auto update(sf::Vector2i point_position, bool active) -> void override;
+		
 	protected:
-		auto get_mouse_position() -> sf::Vector2f;
-		
-		auto start_pressed() -> void override;
-		
-		auto stop_pressed() -> void override;
-		
-		auto while_pressed() -> void override;
-		
-		auto while_not_pressed() -> void override;
-		
+		ActiveTracker tracker_;
 		BaseSlider* slider_;
 		sf::Vector2i start_mouse_position_;
 		sf::Vector2f start_value_;

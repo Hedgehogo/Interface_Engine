@@ -22,21 +22,15 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto BasicAddInteractionAction<T>::start_pressed() -> void {
-		interaction_manager_->add_interaction(*interaction_);
-	}
-	
-	template<typename T>
-	auto BasicAddInteractionAction<T>::stop_pressed() -> void {
-		interaction_manager_->delete_interaction(*interaction_);
-	}
-	
-	template<typename T>
-	auto BasicAddInteractionAction<T>::while_pressed() -> void {
-	}
-	
-	template<typename T>
-	auto BasicAddInteractionAction<T>::while_not_pressed() -> void {
+	auto BasicAddInteractionAction<T>::update(sf::Vector2i, bool active) -> void {
+		tracker_.update(active);
+		if(tracker_.changed()) {
+			if(tracker_.active()) {
+				interaction_manager_->add_interaction(*interaction_);
+			} else {
+				interaction_manager_->delete_interaction(*interaction_);
+			}
+		}
 	}
 	
 	template<typename T>

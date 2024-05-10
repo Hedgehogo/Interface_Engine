@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../../BasicTouchAction/BasicBaseTouchAction/BasicBaseTouchAction.hpp"
+#include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
+#include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
+#include "../../BasicTouchAction/BasicTouchAction.hpp"
 #include "../../../InteractionManager/InteractionManager.hpp"
 
 namespace ie {
@@ -19,7 +21,7 @@ namespace ie {
 	}
 	
 	template<typename T = std::monostate>
-	class BasicAddInteractionAction : public BasicBaseTouchAction<T> {
+	class BasicAddInteractionAction : public BasicTouchAction<T> {
 	public:
 		using Make = make_system::BasicAddInteractionAction<T>;
 		
@@ -27,17 +29,12 @@ namespace ie {
 		
 		auto get_interaction() -> IBasicInteraction<T>&;
 		
-	protected:
-		auto start_pressed() -> void override;
-		
-		auto stop_pressed() -> void override;
-		
-		auto while_pressed() -> void override;
-		
-		auto while_not_pressed() -> void override;
+		auto update(sf::Vector2i point_position, bool active) -> void override;
 		
 		auto finish() -> void override;
-		
+	
+	protected:
+		ActiveTracker tracker_;
 		InteractionManager* interaction_manager_;
 		BoxPtr<IBasicInteraction<T> > interaction_;
 	};

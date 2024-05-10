@@ -23,8 +23,7 @@ namespace ie {
 		
 		BasicAddBlockInteractionAction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-	protected:
-		auto stop_pressed() -> void override;
+		auto update(sf::Vector2i point_position, bool active) -> void override;
 		
 		auto finish() -> void override;
 	};

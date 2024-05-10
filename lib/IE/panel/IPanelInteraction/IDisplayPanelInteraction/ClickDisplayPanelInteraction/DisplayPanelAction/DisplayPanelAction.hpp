@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../../../ClickPanelInteraction/PanelAction/PanelAction.hpp"
 
@@ -12,14 +13,10 @@ namespace ie {
 		
 		DisplayPanelAction(Make&& make, PanelActionInitInfo init_info);
 		
+		auto update(sf::Vector2i point_position, bool active) -> void override;
+		
 	protected:
-		auto start_pressed() -> void override;
-		
-		auto while_pressed() -> void override;
-		
-		auto stop_pressed() -> void override;
-		
-		auto while_not_pressed() -> void override;
+		ActiveTracker tracker_;
 	};
 }
 

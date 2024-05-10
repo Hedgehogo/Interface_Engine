@@ -9,17 +9,10 @@ namespace ie {
 	DisplayPanelAction::DisplayPanelAction(Make&&, PanelActionInitInfo init_info) : PanelAction(init_info) {
 	}
 	
-	auto DisplayPanelAction::start_pressed() -> void {
-	}
-	
-	auto DisplayPanelAction::while_pressed() -> void {
-	}
-	
-	auto DisplayPanelAction::stop_pressed() -> void {
-		panel_manager_->display_panel(panel_);
-	}
-	
-	auto DisplayPanelAction::while_not_pressed() -> void {
+	auto DisplayPanelAction::update(sf::Vector2i point_position, bool active) -> void {
+		if(tracker_.update(active).stopped()) {
+			panel_manager_->display_panel(panel_);
+		}
 	}
 }
 

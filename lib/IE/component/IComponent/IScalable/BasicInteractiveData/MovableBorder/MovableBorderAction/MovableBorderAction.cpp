@@ -11,28 +11,28 @@ namespace ie {
 	
 	MovableBorderAction::MovableBorderAction(Make&& make, BasicActionInitInfo<MovableBorder&> init_info) :
 		value_(make.value),
-		object_(&init_info.additional){
+		object_(&init_info.additional) {
 	}
 	
-	auto MovableBorderAction::start_pressed() -> void {
-		if(object_->get_is_horizontal_border()) {
-			offset_ = static_cast<float>(point_position_.y) - (object_->get_first_object().get_size().y + object_->get_first_object().get_position().y);
-		} else {
-			offset_ = static_cast<float>(point_position_.x) - (object_->get_first_object().get_size().x + object_->get_first_object().get_position().x);
+	auto MovableBorderAction::update(sf::Vector2i point_position, bool active) -> void {
+		tracker_.update(active);
+		if(tracker_.started()) {
+			if(object_->get_is_horizontal_border()) {
+				auto size{object_->get_first_object().get_size().y};
+				auto position{object_->get_first_object().get_position().y};
+				offset_ = static_cast<float>(point_position.y) - (position + size);
+			} else {
+				auto size{object_->get_first_object().get_size().x};
+				auto position{object_->get_first_object().get_position().x};
+				offset_ = static_cast<float>(point_position.x) - (position + size);
+			}
 		}
-	}
-	
-	auto MovableBorderAction::stop_pressed() -> void {
-	}
-	
-	auto MovableBorderAction::while_pressed() -> void {
-		if (object_->get_is_horizontal_border()){
-			value_.set(((static_cast<float>(point_position_.y) - offset_) - object_->get_position().y) / object_->get_size().y);
-		} else {
-			value_.set(((static_cast<float>(point_position_.x) - offset_) - object_->get_position().x) / object_->get_size().x);
+		if(tracker_.active()) {
+			if(object_->get_is_horizontal_border()) {
+				value_.set(((static_cast<float>(point_position.y) - offset_) - object_->get_position().y) / object_->get_size().y);
+			} else {
+				value_.set(((static_cast<float>(point_position.x) - offset_) - object_->get_position().x) / object_->get_size().x);
+			}
 		}
-	}
-	
-	auto MovableBorderAction::while_not_pressed() -> void {
 	}
 }

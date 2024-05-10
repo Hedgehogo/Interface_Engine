@@ -10,27 +10,20 @@ namespace ie {
 	}
 	
 	HidePanelAction::HidePanelAction(Make&& make, PanelActionInitInfo init_info) :
-		PanelAction(init_info), only_on_parent(make.only_on_parent) {
+		PanelAction(init_info), only_on_parent_(make.only_on_parent), last_position_() {
 	}
 	
-	auto HidePanelAction::start_pressed() -> void {
-	}
-	
-	auto HidePanelAction::while_pressed() -> void {
-	}
-	
-	auto HidePanelAction::stop_pressed() -> void {
-		sf::Vector2f point_position{static_cast<sf::Vector2f>(point_position_)};
-		if(
-			only_on_parent ?
-			panel_->get_parent_processed() :
-			!panel_->in_panel(point_position) && !panel_->in_const_panels(point_position) && panel_->is_free()
-			) {
-			panel_manager_->hide_panel(panel_);
+	auto HidePanelAction::update(sf::Vector2i point_position, bool active) -> void {
+		last_position_ = sf::Vector2f{point_position};
+		if(tracker_.update(active).stopped()) {
+			if(
+				only_on_parent_ ?
+				panel_->get_parent_processed() :
+				!panel_->in_panel(last_position_) && !panel_->in_const_panels(last_position_) && panel_->is_free()
+				) {
+				panel_manager_->hide_panel(panel_);
+			}
 		}
-	}
-	
-	auto HidePanelAction::while_not_pressed() -> void {
 	}
 }
 

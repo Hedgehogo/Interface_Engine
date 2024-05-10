@@ -14,33 +14,25 @@ namespace ie {
 		slider_(&init_info.additional), division_(make.division) {
 	}
 	
-	auto SliderAction::get_mouse_position() -> sf::Vector2f {
-		return sf::Vector2f{point_position_};
-	}
-	
-	auto SliderAction::start_pressed() -> void {
-		if(!slider_->on_slider(point_position_)) {
-			slider_->set_value_by_mouse(point_position_);
+	auto SliderAction::update(sf::Vector2i point_position, bool active) -> void {
+		tracker_.update(active);
+		if(tracker_.started()) {
+			if(!slider_->on_slider(point_position)) {
+				slider_->set_value_by_mouse(point_position);
+			}
+			start_value_ = slider_->get_value();
+			start_mouse_position_ = point_position;
 		}
-		start_value_ = slider_->get_value();
-		start_mouse_position_ = point_position_;
-	}
-	
-	auto SliderAction::stop_pressed() -> void {
-	}
-	
-	auto SliderAction::while_pressed() -> void {
-		auto const mouse_offset{sf::Vector2f{sf::Vector2i{
-			point_position_.x - start_mouse_position_.x,
-			point_position_.y - start_mouse_position_.y
-		}}};
-		slider_->set_value(BaseSlider::round_value_to_division(
-			slider_->move_slider(start_value_, mouse_offset),
-			division_
-		));
-	}
-	
-	auto SliderAction::while_not_pressed() -> void {
+		if(tracker_.active()) {
+			auto const mouse_offset{sf::Vector2f{sf::Vector2i{
+				point_position.x - start_mouse_position_.x,
+				point_position.y - start_mouse_position_.y
+			}}};
+			slider_->set_value(BaseSlider::round_value_to_division(
+				slider_->move_slider(start_value_, mouse_offset),
+				division_
+			));
+		}
 	}
 	
 	auto SliderAction::set_slider(BaseSlider& slider) -> void {
