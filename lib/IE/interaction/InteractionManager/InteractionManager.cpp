@@ -39,6 +39,17 @@ namespace ie {
 		});
 	}
 	
+	auto InteractionManager::handle_event(Event event) -> bool {
+		bool result{false};
+		for(auto iter = interactions_.begin(); iter != interactions_.end(); ++iter) {
+			if((*iter)->handle_event(event)) {
+				result = true;
+				break;
+			}
+		}
+		return result;
+	}
+	
 	auto InteractionManager::update(sf::Vector2i mouse_position) -> void {
 		position_ = mouse_position;
 		

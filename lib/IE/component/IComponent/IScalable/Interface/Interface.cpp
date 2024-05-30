@@ -146,8 +146,8 @@ namespace ie {
 				mouse_position_ = sf::Vector2f{pointer.position};
 			}
 		}
-		if(is_in_window(mouse_position_) && !interaction_manager_.is_blocked()) {
-			if(!panel_manager_.handle_event(event, true)) {
+		if(is_in_window(mouse_position_)) {
+			if(!interaction_manager_.handle_event(event) && !panel_manager_.handle_event(event, true)) {
 				object_->handle_event(event);
 			}
 		}

@@ -6,9 +6,9 @@
 namespace ie {
 	class PointerTracker {
 	public:
-		PointerTracker() = default;
+		PointerTracker();
 		
-		auto collect(EventHandler const& event_handler, event_system::Pointer pointer) -> bool;
+		auto collect(EventHandler const& event_handler, Event event) -> bool;
 		
 		auto reset(EventHandler const& event_handler) -> orl::Option<event_system::Pointer>;
 		

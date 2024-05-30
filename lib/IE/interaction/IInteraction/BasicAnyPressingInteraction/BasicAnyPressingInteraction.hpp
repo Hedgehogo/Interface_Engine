@@ -28,6 +28,8 @@ namespace ie {
 		
 		auto start(sf::Vector2i) -> void override;
 		
+		auto handle_event(Event event) -> bool override;
+		
 		auto update(sf::Vector2i mouse_position) -> void override;
 		
 		auto finish(sf::Vector2i) -> void override;

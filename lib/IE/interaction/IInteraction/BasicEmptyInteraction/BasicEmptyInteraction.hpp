@@ -3,26 +3,28 @@
 #include "../IInteraction.hpp"
 
 namespace ie {
-	template<typename T>
+	template<typename A_>
 	class BasicEmptyInteraction;
 	
 	namespace make_system {
-		template<typename T = std::monostate>
-		struct BasicEmptyInteraction : public virtual IBasicInteraction<T> {
-			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicEmptyInteraction<T>* override;
+		template<typename A_ = std::monostate>
+		struct BasicEmptyInteraction : public virtual IBasicInteraction<A_> {
+			auto make(BasicActionInitInfo<A_> init_info) -> ie::BasicEmptyInteraction<A_>* override;
 		};
 	}
 	
-	template<typename T = std::monostate>
-	class BasicEmptyInteraction : public virtual IBasicInteraction<T> {
+	template<typename A_ = std::monostate>
+	class BasicEmptyInteraction : public virtual IBasicInteraction<A_> {
 	public:
-		using Make = make_system::BasicEmptyInteraction<T>;
+		using Make = make_system::BasicEmptyInteraction<A_>;
 		
-		BasicEmptyInteraction(Make&& make, BasicActionInitInfo<T> init_info);
+		BasicEmptyInteraction(Make&& make, BasicActionInitInfo<A_> init_info);
 		
 		BasicEmptyInteraction();
 		
 		auto start(sf::Vector2i) -> void override;
+		
+		auto handle_event(Event event) -> bool override;
 		
 		auto update(sf::Vector2i) -> void override;
 		
@@ -32,9 +34,9 @@ namespace ie {
 	using EmptyInteraction = BasicEmptyInteraction<>;
 }
 
-template<typename T>
-struct ieml::Decode<char, ie::BasicEmptyInteraction<T> > {
-	static auto decode(ieml::Node const& node) -> orl::Option<ie::BasicEmptyInteraction<T> >;
+template<typename A_>
+struct ieml::Decode<char, ie::BasicEmptyInteraction<A_> > {
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::BasicEmptyInteraction<A_> >;
 };
 
 #include "BasicEmptyInteraction.inl"

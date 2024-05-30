@@ -17,11 +17,12 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto BasicPressedInteraction<T>::update(sf::Vector2i mouse_position) -> void {
-		if(key_handler_->get_key(this->key_)) {
-			this->action_->update({{mouse_position, true}});
+	auto BasicPressedInteraction<T>::update(sf::Vector2i) -> void {
+		auto touch{this->tracker_.reset().map(Touch::from(this->event_handler_->get_key(this->key_)))};
+		if(Touch::pressing(touch).is_some()) {
+			this->action_->update(touch);
 		} else {
-			this->action_->update({{mouse_position, false}});
+			this->action_->update(touch);
 			interaction_manager_->delete_interaction(*this);
 		}
 	}

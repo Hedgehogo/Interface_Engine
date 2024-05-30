@@ -15,6 +15,10 @@ namespace ie {
 		panel_->set_parent_processed(true);
 	}
 	
+	auto PointingDisplayPanelInteraction::handle_event(Event event) -> bool {
+		return false;
+	}
+	
 	auto PointingDisplayPanelInteraction::update(sf::Vector2i) -> void {
 	}
 	

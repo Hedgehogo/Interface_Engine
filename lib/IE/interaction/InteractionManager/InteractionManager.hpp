@@ -14,7 +14,7 @@ namespace ie {
 	
 	class InteractionManager {
 	public:
-		explicit InteractionManager();
+		InteractionManager();
 		
 		auto size() -> size_t;
 		
@@ -28,7 +28,9 @@ namespace ie {
 		
 		auto is_blocked() const -> bool;
 		
-		virtual auto update(sf::Vector2i mouse_position) -> void;
+		auto handle_event(Event event) -> bool;
+		
+		auto update(sf::Vector2i mouse_position) -> void;
 	
 		virtual ~InteractionManager() = default;
 		

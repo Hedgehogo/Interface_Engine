@@ -18,6 +18,10 @@ namespace ie {
 	auto PointingHidePanelInteraction::start(sf::Vector2i) -> void {
 	}
 	
+	auto PointingHidePanelInteraction::handle_event(Event event) -> bool {
+		return false;
+	}
+	
 	auto PointingHidePanelInteraction::update(sf::Vector2i mouse_position) -> void {
 		auto point_position{sf::Vector2f{mouse_position}};
 		if(!panel_->get_parent_processed()) {

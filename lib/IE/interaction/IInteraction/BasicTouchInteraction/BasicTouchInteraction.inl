@@ -42,8 +42,13 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicTouchInteraction<A_>::update(sf::Vector2i mouse_position) -> void {
-		action_->update({{mouse_position, event_handler_->get_key(key_)}});
+	auto BasicTouchInteraction<A_>::handle_event(Event event) -> bool {
+		return tracker_.collect(*event_handler_, event);
+	}
+	
+	template<typename A_>
+	auto BasicTouchInteraction<A_>::update(sf::Vector2i) -> void {
+		action_->update(tracker_.reset().map(Touch::from(event_handler_->get_key(key_))));
 	}
 	
 	template<typename A_>

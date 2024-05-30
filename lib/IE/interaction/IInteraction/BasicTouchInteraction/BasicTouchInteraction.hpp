@@ -2,6 +2,7 @@
 
 #include "../IInteraction.hpp"
 #include "IE/event/EventHandler/EventHandler.hpp"
+#include "IE/event/PointerTracker/PointerTracker.hpp"
 
 namespace ie {
 	template<typename A_>
@@ -36,11 +37,14 @@ namespace ie {
 		
 		auto start(sf::Vector2i mouse_position) -> void override;
 		
+		auto handle_event(Event event) -> bool override;
+		
 		auto update(sf::Vector2i mouse_position) -> void override;
 		
 		auto finish(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
+		PointerTracker tracker_;
 		EventHandler* event_handler_;
 		BoxPtr<IBasicTouchAction<A_> > action_;
 		Key key_;
