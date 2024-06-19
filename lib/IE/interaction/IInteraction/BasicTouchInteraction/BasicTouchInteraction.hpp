@@ -35,13 +35,13 @@ namespace ie {
 		
 		auto set_action(BoxPtr<IBasicTouchAction<A_> >&& action) -> void;
 		
-		auto start(sf::Vector2i mouse_position) -> void override;
+		auto start(sf::Vector2i) -> void override;
 		
 		auto handle_event(Event event) -> bool override;
 		
-		auto update(sf::Vector2i mouse_position) -> void override;
+		auto update(sf::Vector2i) -> void override;
 		
-		auto finish(sf::Vector2i mouse_position) -> void override;
+		auto finish(sf::Vector2i) -> void override;
 		
 	protected:
 		PointerTracker tracker_;

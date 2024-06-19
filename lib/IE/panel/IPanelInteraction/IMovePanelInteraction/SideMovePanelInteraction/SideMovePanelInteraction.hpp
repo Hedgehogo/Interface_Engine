@@ -4,7 +4,7 @@
 #include "../IMovePanelInteraction.hpp"
 
 namespace ie {
-	class SideMovePanelInteraction : public BasePanelInteraction, public virtual IMovePanelInteraction {
+	class SideMovePanelInteraction : public virtual IMovePanelInteraction {
 	public:
 		struct Make : public virtual IMovePanelInteraction::Make {
 			float coefficient;
@@ -19,11 +19,15 @@ namespace ie {
 		
 		SideMovePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
+		auto set_panel(Panel& panel) -> void override;
+		
 		auto get_at_start() -> bool override;
 		
 		auto move(sf::Vector2i offset) -> void override;
 		
 	protected:
+		Panel* panel_;
+		IPanelManager* panel_manager_;
 		float coefficient_;
 		float offset_;
 		bool horizontal_;

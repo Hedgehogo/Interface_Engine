@@ -2,10 +2,9 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../IHidePanelInteraction.hpp"
-#include "../../BasePanelInteraction/BasePanelInteraction.hpp"
 
 namespace ie {
-	class PointingHidePanelInteraction : public BasePanelInteraction, public virtual IHidePanelInteraction {
+	class PointingHidePanelInteraction : public virtual IHidePanelInteraction {
 	public:
 		struct Make : public virtual IHidePanelInteraction::Make {
 			bool only_on_parent = false;
@@ -17,6 +16,8 @@ namespace ie {
 		
 		PointingHidePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
+		auto set_panel(Panel& panel) -> void override;
+		
 		auto start(sf::Vector2i mouse_position) -> void override;
 		
 		auto handle_event(Event event) -> bool override;
@@ -26,7 +27,10 @@ namespace ie {
 		auto finish(sf::Vector2i mouse_position) -> void override;
 		
 	protected:
+		Panel* panel_;
+		IPanelManager* panel_manager_;
 		bool only_on_parent_;
+		bool active_;
 	};
 }
 

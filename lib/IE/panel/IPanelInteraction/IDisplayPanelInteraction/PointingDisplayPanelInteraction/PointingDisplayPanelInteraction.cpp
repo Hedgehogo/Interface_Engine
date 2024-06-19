@@ -7,7 +7,12 @@ namespace ie {
 	}
 	
 	PointingDisplayPanelInteraction::PointingDisplayPanelInteraction(Make&&, PanelActionInitInfo init_info) :
-		BasePanelInteraction(init_info) {
+		panel_(&init_info.additional),
+		panel_manager_(&init_info.panel_manager) {
+	}
+	
+	auto PointingDisplayPanelInteraction::set_panel(Panel& panel) -> void {
+		this->panel_ = &panel;
 	}
 	
 	auto PointingDisplayPanelInteraction::start(sf::Vector2i) -> void {

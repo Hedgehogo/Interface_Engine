@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../BasePanelInteraction/BasePanelInteraction.hpp"
+#include "../IPanelInteraction.hpp"
 
 namespace ie {
 	class IMovePanelInteraction : public virtual IPanelInteraction {

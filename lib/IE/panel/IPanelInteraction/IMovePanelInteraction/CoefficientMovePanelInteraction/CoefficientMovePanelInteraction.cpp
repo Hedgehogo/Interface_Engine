@@ -11,11 +11,19 @@ namespace ie {
 	}
 	
 	CoefficientMovePanelInteraction::CoefficientMovePanelInteraction(Make&& make, PanelActionInitInfo init_info) :
-		BasePanelInteraction(init_info), coefficient_(make.coefficient), offset_(make.offset), at_start_(make.at_start) {
+		panel_(&init_info.additional),
+		panel_manager_(&init_info.panel_manager),
+		coefficient_(make.coefficient),
+		offset_(make.offset),
+		at_start_(make.at_start) {
 	}
 	
 	auto CoefficientMovePanelInteraction::get_at_start() -> bool {
 		return at_start_;
+	}
+	
+	auto CoefficientMovePanelInteraction::set_panel(Panel& panel) -> void {
+		this->panel_ = &panel;
 	}
 	
 	auto CoefficientMovePanelInteraction::move(sf::Vector2i offset) -> void {

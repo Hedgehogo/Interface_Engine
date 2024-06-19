@@ -4,7 +4,7 @@
 #include "../IMovePanelInteraction.hpp"
 
 namespace ie {
-	class CoefficientMovePanelInteraction : public BasePanelInteraction, public virtual IMovePanelInteraction {
+	class CoefficientMovePanelInteraction : public virtual IMovePanelInteraction {
 	public:
 		struct Make : public virtual IMovePanelInteraction::Make {
 			sf::Vector2f coefficient;
@@ -20,9 +20,13 @@ namespace ie {
 		
 		auto get_at_start() -> bool override;
 		
+		auto set_panel(Panel& panel) -> void override;
+		
 		auto move(sf::Vector2i offset) -> void override;
 	
 	protected:
+		Panel* panel_;
+		IPanelManager* panel_manager_;
 		sf::Vector2f coefficient_;
 		sf::Vector2f offset_;
 		bool at_start_;

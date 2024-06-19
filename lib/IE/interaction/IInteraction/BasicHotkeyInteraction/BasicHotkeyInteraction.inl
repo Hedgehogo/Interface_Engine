@@ -66,32 +66,34 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicHotkeyInteraction<A_>::start(sf::Vector2i mouse_position) -> void {
+	auto BasicHotkeyInteraction<A_>::start(sf::Vector2i) -> void {
 		for(auto& hotkey: *now_hotkeys_) {
-			hotkey.interaction_->start(mouse_position);
+			hotkey.interaction_->start({});
 		}
 	}
 	
 	template<typename A_>
 	auto BasicHotkeyInteraction<A_>::handle_event(Event event) -> bool {
+		/*old_action*/
+		return false;
 	}
 	
 	template<typename A_>
-	auto BasicHotkeyInteraction<A_>::update(sf::Vector2i mouse_position) -> void {
+	auto BasicHotkeyInteraction<A_>::update(sf::Vector2i) -> void {
 		for(auto& hotkey: *now_hotkeys_) {
-			hotkey.interaction_->update(mouse_position);
+			hotkey.interaction_->update({});
 			if(hotkey.interaction_->is_press() && hotkey.state_ != std::numeric_limits<size_t>::max()) {
-				finish(mouse_position);
+				finish({});
 				now_hotkeys_ = &hotkey_states_[hotkey.state_];
-				start(mouse_position);
+				start({});
 			}
 		}
 	}
 	
 	template<typename A_>
-	auto BasicHotkeyInteraction<A_>::finish(sf::Vector2i mouse_position) -> void {
+	auto BasicHotkeyInteraction<A_>::finish(sf::Vector2i) -> void {
 		for(auto& hotkey: *now_hotkeys_) {
-			hotkey.interaction_->finish(mouse_position);
+			hotkey.interaction_->finish({});
 		}
 	}
 }

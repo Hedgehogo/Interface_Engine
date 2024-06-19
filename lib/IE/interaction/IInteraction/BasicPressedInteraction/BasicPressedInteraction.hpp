@@ -24,7 +24,7 @@ namespace ie {
 		
 		BasicPressedInteraction(Make&& make, BasicActionInitInfo<T> init_info);
 		
-		auto update(sf::Vector2i mouse_position) -> void override;
+		auto update(sf::Vector2i) -> void override;
 		
 	protected:
 		InteractionManager* interaction_manager_;

@@ -19,7 +19,7 @@ namespace ie {
 		
 		auto start(sf::Vector2i) -> void override;
 		
-		auto finish(sf::Vector2i mouse_position) -> void override;
+		auto finish(sf::Vector2i) -> void override;
 	};
 }
 

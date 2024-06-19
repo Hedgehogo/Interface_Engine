@@ -29,7 +29,7 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicAnyPressingInteraction<A_>::update(sf::Vector2i mouse_position) -> void {
+	auto BasicAnyPressingInteraction<A_>::update(sf::Vector2i) -> void {
 		action_->update(event_handler_->get_key(key_));
 	}
 	

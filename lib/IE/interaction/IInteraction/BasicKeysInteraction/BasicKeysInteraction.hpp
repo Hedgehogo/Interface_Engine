@@ -10,11 +10,11 @@ namespace ie {
 	namespace make_system {
 		template<typename A_ = std::monostate>
 		struct BasicKeysInteraction : public virtual IBasicInteraction<A_> {
-			BoxPtr<IBasicTouchAction<A_> > action;
+			BoxPtr<IBasicActivityAction<A_> > action;
 			std::vector<Key> keys;
 			std::vector<Key> black_list_keys = {};
 			
-			BasicKeysInteraction(BoxPtr<IBasicTouchAction<A_> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys = {});
+			BasicKeysInteraction(BoxPtr<IBasicActivityAction<A_> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys = {});
 			
 			auto make(BasicActionInitInfo<A_> init_info) -> ie::BasicKeysInteraction<A_>* override;
 		};
@@ -31,21 +31,21 @@ namespace ie {
 		
 		auto get_keys() -> std::vector<Key>;
 		
-		auto get_action() -> IBasicTouchAction<A_>*;
+		auto get_action() -> IBasicActivityAction<A_>*;
 		
-		auto set_action(IBasicTouchAction<A_>* action) -> void;
+		auto set_action(IBasicActivityAction<A_>* action) -> void;
 		
-		auto start(sf::Vector2i mouse_position) -> void override;
+		auto start(sf::Vector2i) -> void override;
 		
 		auto handle_event(Event event) -> bool override;
 		
-		auto update(sf::Vector2i mouse_position) -> void override;
+		auto update(sf::Vector2i) -> void override;
 		
-		auto finish(sf::Vector2i mouse_position) -> void override;
+		auto finish(sf::Vector2i) -> void override;
 		
 	protected:
 		EventHandler* event_handler_;
-		BoxPtr<IBasicTouchAction<A_> > action_;
+		BoxPtr<IBasicActivityAction<A_> > action_;
 		std::vector<Key> keys_;
 		std::vector<Key> black_list_keys_;
 		bool press_;

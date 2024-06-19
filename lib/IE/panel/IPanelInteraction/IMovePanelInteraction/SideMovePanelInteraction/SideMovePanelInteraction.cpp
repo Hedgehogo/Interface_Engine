@@ -11,8 +11,16 @@ namespace ie {
 	}
 	
 	SideMovePanelInteraction::SideMovePanelInteraction(Make&& make, PanelActionInitInfo init_info) :
-		BasePanelInteraction(init_info), coefficient_(make.coefficient), offset_(make.offset), horizontal_(make.horizontal),
+		panel_(&init_info.additional),
+		panel_manager_(&init_info.panel_manager),
+		coefficient_(make.coefficient),
+		offset_(make.offset),
+		horizontal_(make.horizontal),
 		at_start_(make.at_start) {
+	}
+	
+	auto SideMovePanelInteraction::set_panel(Panel& panel) -> void {
+		this->panel_ = &panel;
 	}
 	
 	auto SideMovePanelInteraction::get_at_start() -> bool {

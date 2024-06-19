@@ -41,8 +41,8 @@ namespace ie {
 		wheel_action_({make.wheel_horizontal, make.wheel_relativity, make.wheel_sensitivity}, init_info) {
 	}
 	
-	auto SliderInteraction::update(sf::Vector2i mouse_position) -> void {
+	auto SliderInteraction::update(sf::Vector2i) -> void {
 		wheel_action_.update(MouseWheel::get_delta().y);
-		BasicAnyPressingInteraction<BaseSlider&>::update(mouse_position);
+		BasicAnyPressingInteraction<BaseSlider&>::update({});
 	}
 }
