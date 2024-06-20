@@ -19,7 +19,7 @@ namespace ie {
 		this->panel_ = &panel;
 	}
 	
-	auto PointingHidePanelInteraction::start(sf::Vector2i) -> void {
+	auto PointingHidePanelInteraction::start() -> void {
 	}
 	
 	auto PointingHidePanelInteraction::handle_event(Event event) -> bool {
@@ -35,14 +35,14 @@ namespace ie {
 		return false;
 	}
 	
-	auto PointingHidePanelInteraction::update(sf::Vector2i) -> void {
+	auto PointingHidePanelInteraction::update() -> void {
 		if(active_) {
 			panel_manager_->hide_panel(panel_);
 			active_ = false;
 		}
 	}
 	
-	auto PointingHidePanelInteraction::finish(sf::Vector2i) -> void {
+	auto PointingHidePanelInteraction::finish() -> void {
 	}
 }
 

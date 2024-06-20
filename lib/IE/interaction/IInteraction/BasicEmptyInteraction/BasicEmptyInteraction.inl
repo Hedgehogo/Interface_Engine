@@ -15,7 +15,7 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicEmptyInteraction<A_>::start(sf::Vector2i) -> void {
+	auto BasicEmptyInteraction<A_>::start() -> void {
 	}
 	
 	template<typename A_>
@@ -24,11 +24,11 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicEmptyInteraction<A_>::update(sf::Vector2i) -> void {
+	auto BasicEmptyInteraction<A_>::update() -> void {
 	}
 	
 	template<typename A_>
-	auto BasicEmptyInteraction<A_>::finish(sf::Vector2i) -> void {
+	auto BasicEmptyInteraction<A_>::finish() -> void {
 	}
 }
 

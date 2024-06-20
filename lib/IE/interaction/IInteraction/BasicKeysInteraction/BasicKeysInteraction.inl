@@ -41,7 +41,7 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicKeysInteraction<A_>::start(sf::Vector2i) -> void {
+	auto BasicKeysInteraction<A_>::start() -> void {
 	}
 	
 	template<typename A_>
@@ -50,7 +50,7 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicKeysInteraction<A_>::update(sf::Vector2i) -> void {
+	auto BasicKeysInteraction<A_>::update() -> void {
 		press_ = true;
 		for(auto& key: keys_) {
 			if(!event_handler_->get_key(key)) {
@@ -70,7 +70,7 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicKeysInteraction<A_>::finish(sf::Vector2i) -> void {
+	auto BasicKeysInteraction<A_>::finish() -> void {
 		action_->finish();
 	}
 	

@@ -4,7 +4,7 @@
 
 namespace ie {
 	InteractionManager::InteractionManager() :
-		interactions_(), add_interactions_(), delete_interactions_(), position_(0, 0), block_(false) {
+		interactions_(), add_interactions_(), delete_interactions_(), block_(false) {
 	}
 	
 	auto InteractionManager::size() -> size_t {
@@ -28,7 +28,7 @@ namespace ie {
 	
 	auto InteractionManager::clear() -> void {
 		for(auto& interaction: interactions_) {
-			interaction->finish(position_);
+			interaction->finish();
 		}
 		interactions_.clear();
 	}
@@ -50,13 +50,11 @@ namespace ie {
 		return result;
 	}
 	
-	auto InteractionManager::update(sf::Vector2i mouse_position) -> void {
-		position_ = mouse_position;
-		
+	auto InteractionManager::update() -> void {
 		if(!delete_interactions_.empty()) {
 			ptr_sort(delete_interactions_);
 			for(auto& interaction: delete_interactions_) {
-				interaction->finish(mouse_position);
+				interaction->finish();
 			}
 			delete_interactions_.clear();
 		}
@@ -64,7 +62,7 @@ namespace ie {
 		if(!add_interactions_.empty()) {
 			ptr_sort(add_interactions_);
 			for(auto& interaction: add_interactions_) {
-				interaction->start(mouse_position);
+				interaction->start();
 				interactions_.push_back(interaction);
 			}
 		}
@@ -75,7 +73,7 @@ namespace ie {
 		}
 		
 		for(auto interaction: interactions_) {
-			interaction->update(mouse_position);
+			interaction->update();
 		}
 	}
 }

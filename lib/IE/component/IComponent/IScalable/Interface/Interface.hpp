@@ -66,7 +66,7 @@ namespace ie {
 	protected:
 		auto is_in_window(sf::Vector2f position) -> bool;
 		
-		auto update_cluster(sf::Vector2f mouse_position) -> void;
+		auto update_cluster() -> void;
 		
 		sf::RenderWindow* window_;
 		sf::RenderTarget* render_target_;

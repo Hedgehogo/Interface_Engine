@@ -30,7 +30,7 @@ namespace ie {
 		
 		auto handle_event(Event event) -> bool;
 		
-		auto update(sf::Vector2i mouse_position) -> void;
+		auto update() -> void;
 	
 		virtual ~InteractionManager() = default;
 		
@@ -38,7 +38,6 @@ namespace ie {
 		std::vector<IInteraction*> interactions_;
 		std::vector<IInteraction*> add_interactions_;
 		std::vector<IInteraction*> delete_interactions_;
-		sf::Vector2i position_;
 		bool block_;
 	};
 }

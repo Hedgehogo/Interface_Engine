@@ -37,7 +37,7 @@ namespace ie {
 		
 		SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info);
 		
-		auto update(sf::Vector2i) -> void override;
+		auto update() -> void override;
 	
 	protected:
 		SliderWheelAction wheel_action_;

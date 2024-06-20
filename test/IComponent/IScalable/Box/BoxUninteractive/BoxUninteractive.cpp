@@ -13,7 +13,7 @@ TEST(IComponent, BoxUninteractive) {
 		},
 		data.make_init_info()
 	};
-	data.interaction_manager.update({});
+	data.interaction_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(data.update_manager.size(), 0);

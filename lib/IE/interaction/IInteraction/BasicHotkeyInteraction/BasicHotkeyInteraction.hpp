@@ -71,13 +71,13 @@ namespace ie {
 		
 		auto get_hotkey(int state, int i) -> Hotkey;
 		
-		auto start(sf::Vector2i) -> void override;
+		auto start() -> void override;
 		
 		auto handle_event(Event event) -> bool override;
 		
-		auto update(sf::Vector2i) -> void override;
+		auto update() -> void override;
 		
-		auto finish(sf::Vector2i) -> void override;
+		auto finish() -> void override;
 		
 	protected:
 		std::vector<std::vector<Hotkey> > hotkey_states_;

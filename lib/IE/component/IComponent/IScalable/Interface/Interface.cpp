@@ -111,14 +111,14 @@ namespace ie {
 		return object_->get_normal_size();
 	}
 	
-	auto Interface::update_cluster(sf::Vector2f mouse_position) -> void {
-		interaction_manager_.update(sf::Vector2i(mouse_position));
+	auto Interface::update_cluster() -> void {
+		interaction_manager_.update();
 	}
 	
 	auto Interface::update() -> void {
 		panel_manager_.update();
 		update_manager_.update();
-		update_cluster(mouse_position_);
+		update_cluster();
 		active_ = false;
 	}
 	
@@ -126,14 +126,6 @@ namespace ie {
 		if(active) {
 			for(auto& event: events) {
 				this->handle_event(event);
-			}
-		} else {
-			for(auto& event: events) {
-				for(auto& pointer: event.pointer()) {
-					if(pointer.id == std::numeric_limits<size_t>::max()) {
-						mouse_position_ = sf::Vector2f{pointer.position};
-					}
-				}
 			}
 		}
 		this->update();

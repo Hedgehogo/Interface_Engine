@@ -25,7 +25,7 @@ namespace ie {
 	
 	template<typename A_>
 	auto BasicStopActivityAction<A_>::update(bool active) -> void {
-		action->update(orl::Option<Touch>());
+		action->update();
 	}
 	
 	template<typename A_>

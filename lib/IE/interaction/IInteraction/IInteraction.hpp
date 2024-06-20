@@ -23,13 +23,13 @@ namespace ie {
 		
 		virtual auto get_priority() const -> Priority;
 		
-		virtual auto start(sf::Vector2i mouse_position) -> void = 0;
+		virtual auto start() -> void = 0;
 		
 		virtual auto handle_event(Event event) -> bool = 0;
 		
-		virtual auto update(sf::Vector2i mouse_position) -> void = 0;
+		virtual auto update() -> void = 0;
 		
-		virtual auto finish(sf::Vector2i mouse_position) -> void = 0;
+		virtual auto finish() -> void = 0;
 		
 		bool operator<(IInteraction& interaction) const;
 		

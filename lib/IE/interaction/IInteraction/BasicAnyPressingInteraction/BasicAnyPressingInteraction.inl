@@ -19,7 +19,7 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicAnyPressingInteraction<A_>::start(sf::Vector2i) -> void {
+	auto BasicAnyPressingInteraction<A_>::start() -> void {
 		action_->start();
 	}
 	
@@ -29,12 +29,12 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicAnyPressingInteraction<A_>::update(sf::Vector2i) -> void {
+	auto BasicAnyPressingInteraction<A_>::update() -> void {
 		action_->update(event_handler_->get_key(key_));
 	}
 	
 	template<typename A_>
-	auto BasicAnyPressingInteraction<A_>::finish(sf::Vector2i) -> void {
+	auto BasicAnyPressingInteraction<A_>::finish() -> void {
 		action_->finish();
 	}
 }

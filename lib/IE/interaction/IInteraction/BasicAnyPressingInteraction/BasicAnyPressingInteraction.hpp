@@ -26,13 +26,13 @@ namespace ie {
 		
 		BasicAnyPressingInteraction(Make&& make, BasicActionInitInfo<A_> init_info);
 		
-		auto start(sf::Vector2i) -> void override;
+		auto start() -> void override;
 		
 		auto handle_event(Event event) -> bool override;
 		
-		auto update(sf::Vector2i) -> void override;
+		auto update() -> void override;
 		
-		auto finish(sf::Vector2i) -> void override;
+		auto finish() -> void override;
 	
 	protected:
 		EventHandler* event_handler_;

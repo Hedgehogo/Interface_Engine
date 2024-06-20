@@ -37,7 +37,7 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicTouchInteraction<A_>::start(sf::Vector2i) -> void {
+	auto BasicTouchInteraction<A_>::start() -> void {
 		action_->start();
 	}
 	
@@ -47,12 +47,12 @@ namespace ie {
 	}
 	
 	template<typename A_>
-	auto BasicTouchInteraction<A_>::update(sf::Vector2i) -> void {
+	auto BasicTouchInteraction<A_>::update() -> void {
 		action_->update(tracker_.reset().map(Touch::from(event_handler_->get_key(key_))));
 	}
 	
 	template<typename A_>
-	auto BasicTouchInteraction<A_>::finish(sf::Vector2i) -> void {
+	auto BasicTouchInteraction<A_>::finish() -> void {
 		action_->finish();
 	}
 }

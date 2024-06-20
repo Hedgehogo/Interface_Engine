@@ -17,7 +17,7 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto BasicPressedInteraction<T>::update(sf::Vector2i) -> void {
+	auto BasicPressedInteraction<T>::update() -> void {
 		auto touch{this->tracker_.reset().map(Touch::from(this->event_handler_->get_key(this->key_)))};
 		if(Touch::pressing(touch).is_some()) {
 			this->action_->update(touch);

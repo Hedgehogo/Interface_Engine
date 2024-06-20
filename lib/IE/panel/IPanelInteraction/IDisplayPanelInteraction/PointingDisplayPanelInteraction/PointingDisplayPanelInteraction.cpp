@@ -15,7 +15,7 @@ namespace ie {
 		this->panel_ = &panel;
 	}
 	
-	auto PointingDisplayPanelInteraction::start(sf::Vector2i) -> void {
+	auto PointingDisplayPanelInteraction::start() -> void {
 		panel_manager_->display_panel(panel_);
 		panel_->set_parent_processed(true);
 	}
@@ -24,10 +24,10 @@ namespace ie {
 		return false;
 	}
 	
-	auto PointingDisplayPanelInteraction::update(sf::Vector2i) -> void {
+	auto PointingDisplayPanelInteraction::update() -> void {
 	}
 	
-	auto PointingDisplayPanelInteraction::finish(sf::Vector2i) -> void {
+	auto PointingDisplayPanelInteraction::finish() -> void {
 		panel_->set_parent_processed(false);
 	}
 }
