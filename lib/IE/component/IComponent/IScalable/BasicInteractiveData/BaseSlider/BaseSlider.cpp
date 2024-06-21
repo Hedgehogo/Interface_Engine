@@ -104,8 +104,7 @@ namespace ie {
 	}
 	
 	auto BaseSlider::handle_event(Event event) -> bool {
-		interactive_.handle_event();
-		return true;
+		return interactive_.handle_event(event);
 	}
 	
 	auto BaseSlider::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {

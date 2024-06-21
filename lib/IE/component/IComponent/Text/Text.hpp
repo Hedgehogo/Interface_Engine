@@ -102,8 +102,6 @@ namespace ie {
 		
 		BoxPtr<INonInteractive> background;
 		
-		bool interact;
-		bool old_interact;
 		Selection selection;
 		size_t size;
 		

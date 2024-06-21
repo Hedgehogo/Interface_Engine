@@ -35,9 +35,7 @@ namespace ie {
 	}
 	
 	auto ButtonPanel::handle_event(Event event) -> bool {
-		auto result{BaseButton::handle_event(event)};
-		interactive_.handle_event();
-		return result;
+		return interactive_.handle_event(event) || BaseButton::handle_event(event);
 	}
 	
 	auto ButtonPanel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {

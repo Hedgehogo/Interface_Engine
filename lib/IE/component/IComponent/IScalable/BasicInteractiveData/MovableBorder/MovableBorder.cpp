@@ -1,6 +1,6 @@
 #include "MovableBorder.hpp"
-#include "IE/interaction/IInteraction/BasicAnyPressingInteraction/BasicAnyPressingInteraction.hpp"
-#include "IE/interaction/IAction/IBasicActivityAction/BasicAddInteractionAction/BasicAddPrioritisedInteractionAction/BasicAddPrioritisedInteractionAction.hpp"
+#include "IE/interaction/IInteraction/BasicTouchInteraction/BasicTouchInteraction.hpp"
+#include "IE/interaction/IInteraction/BasicActiveInteraction/BasicActiveInteraction.hpp"
 #include "MovableBorderAction/MovableBorderAction.hpp"
 
 namespace ie {
@@ -36,23 +36,15 @@ namespace ie {
 				make.is_horizontal_border,
 				std::move(make.border_value),
 				make.min_size
-			},
-			init_info
+			}, init_info
 		),
 		interactive_(
-			make_box_ptr<BasicAnyPressingInteraction<MovableBorder&>::Make>(
-				make_box_ptr<BasicAddPrioritisedInteractionAction<MovableBorder&>::Make>(
-					make_box_ptr<BasicPressedInteraction<MovableBorder&>::Make>(
-						make_box_ptr<MovableBorderAction::Make>(
-							border_value_.get()
-						),
-						make.key
-					)
-				),
-				make.key
-			),
-			init_info,
-			*this
+			make_box_ptr<BasicActiveInteraction<MovableBorder&>::Make>(
+				make_box_ptr<BasicTouchInteraction<MovableBorder&>::Make>(
+					make_box_ptr<MovableBorderAction::Make>(border_value_.get()),
+					make.key
+				)
+			), init_info, *this
 		),
 		border_interaction_size_(make.border_interaction_size) {
 		init_info.update_manager.add(*this);
@@ -75,11 +67,7 @@ namespace ie {
 				in_border_axis(pointer.position.x, border_position.x)
 			};
 			
-			if(in_border) {
-				interactive_.handle_event();
-				return true;
-			}
-			return BasicBoxMovableBorder<true>::handle_event(event);
+			return (in_border && interactive_.handle_event(event)) || BasicBoxMovableBorder<true>::handle_event(event);
 		}).some_or_else([=] {
 			return BasicBoxMovableBorder<true>::handle_event(event);
 		});

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../IInteraction.hpp"
+#include "../IPrioritisedInteraction/IPrioritisedInteraction.hpp"
 
 namespace ie {
 	template<typename A_>
@@ -14,18 +14,8 @@ namespace ie {
 	}
 	
 	template<typename A_ = std::monostate>
-	class IBasicPrioritisedInteraction : public virtual IBasicInteraction<A_> {
+	class IBasicPrioritisedInteraction : public virtual IBasicInteraction<A_>, public virtual IPrioritisedInteraction {
 	public:
 		using Make = make_system::IBasicPrioritisedInteraction<A_>;
-		
-		auto is_prioritised() const -> bool override;
-		
-		/*old_action
-		virtual auto handle_event_prioritised(Event event) -> bool;
-		*/
 	};
-	
-	using IPrioritisedInteraction = IBasicPrioritisedInteraction<>;
 }
-
-#include "IBasicPrioritisedInteraction.inl"

@@ -37,10 +37,6 @@ namespace ie {
 	
 	protected:
 		InteractionManager* interaction_manager_;
-		
-		bool interact_;
-		bool old_interact_;
-		
 		BoxPtr<IInteraction> interaction_;
 	};
 }

@@ -17,17 +17,17 @@ namespace ie {
 		BoxPtr<BaseTextResizer::Make>&& resizer,
 		BoxPtr<IBasicInteraction<Text&>::Make>&& text_interaction
 	) : text_blocks(std::move(text_blocks)),
-		font(font),
-		background(std::move(background)),
-		size(size),
-		text_color(text_color),
-		text_selection_color(text_selection_color),
-		background_selection_color(background_selection_color),
-		inactive_text_selection_color(inactive_text_selection_color),
-		inactive_background_selection_color(inactive_background_selection_color),
-		style(style),
-		resizer(std::move(resizer)),
-		text_interaction(std::move(text_interaction)) {
+	    font(font),
+	    background(std::move(background)),
+	    size(size),
+	    text_color(text_color),
+	    text_selection_color(text_selection_color),
+	    background_selection_color(background_selection_color),
+	    inactive_text_selection_color(inactive_text_selection_color),
+	    inactive_background_selection_color(inactive_background_selection_color),
+	    style(style),
+	    resizer(std::move(resizer)),
+	    text_interaction(std::move(text_interaction)) {
 	}
 	
 	auto Text::Make::make(InitInfo init_info) -> Text* {
@@ -38,8 +38,6 @@ namespace ie {
 		interaction_manager(&init_info.interaction_manager),
 		render_target(&init_info.render_target),
 		background(make.background->make(init_info)),
-		interact(false),
-		old_interact(false),
 		size(make.size),
 		text_blocks(
 			map_make(
@@ -172,16 +170,7 @@ namespace ie {
 	}
 	
 	auto Text::update() -> void {
-		if(interact != old_interact) {
-			old_interact = interact;
-			
-			if(interact) {
-				interaction_manager->add_interaction(*text_interaction);
-			} else {
-				interaction_manager->delete_interaction(*text_interaction);
-			}
-		}
-		interact = false;
+		text_interaction->update();
 		
 		for(auto& text_block: text_blocks) {
 			text_block->update();
@@ -189,24 +178,24 @@ namespace ie {
 	}
 	
 	auto Text::handle_event(Event event) -> bool {
-		return event.pointer().map([=](event_system::Pointer pointer) {
-			interact = true;
-			
-			for(auto& text_bock: text_blocks) {
-				if(text_bock->in(sf::Vector2f{pointer.position})) {
-					if(text_bock->handle_event(event)) {
-						return true;
+		return
+			text_interaction->handle_event(event) ||
+			event.pointer().map([=](event_system::Pointer pointer) {
+				for(auto& text_bock: text_blocks) {
+					if(text_bock->in(sf::Vector2f{pointer.position})) {
+						if(text_bock->handle_event(event)) {
+							return true;
+						}
 					}
 				}
-			}
-			return background->handle_event(event);
-		}).some_or_else([=] {
-			auto updated{false};
-			for(auto& text_block: text_blocks) {
-				updated = text_block->handle_event(event) || updated;
-			}
-			return background->handle_event(event) || updated;
-		});
+				return background->handle_event(event);
+			}).some_or_else([=] {
+				auto updated{false};
+				for(auto& text_block: text_blocks) {
+					updated = text_block->handle_event(event) || updated;
+				}
+				return background->handle_event(event) || updated;
+			});
 	}
 	
 	auto Text::draw() -> void {

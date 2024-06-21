@@ -11,7 +11,7 @@ TEST(IComponent, BoxRenderTexture) {
 		{ie::make_box_ptr<ie::IScalable::Make, ie::FullColor::Make>(sf::Color::Green)},
 		data.make_init_info()
 	};
-	data.interaction_manager.update();
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(&data.draw_manager.get(0), &box_render_texture);

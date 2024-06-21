@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../IInteraction/IInteraction.hpp"
+#include "../IInteraction/IPrioritisedInteraction/IPrioritisedInteraction.hpp"
 #include <algorithm>
 #include <vector>
 
@@ -18,11 +19,9 @@ namespace ie {
 		
 		auto size() -> size_t;
 		
-		auto get(size_t index) -> IInteraction&;
+		auto add_prioritised(IPrioritisedInteraction& interaction) -> void;
 		
-		auto add_interaction(IInteraction& interaction) -> void;
-		
-		auto delete_interaction(IInteraction& interaction) -> void;
+		auto delete_prioritised(IPrioritisedInteraction& interaction) -> void;
 		
 		auto clear() -> void;
 		
@@ -30,14 +29,9 @@ namespace ie {
 		
 		auto handle_event(Event event) -> bool;
 		
-		auto update() -> void;
-	
 		virtual ~InteractionManager() = default;
 		
 	protected:
-		std::vector<IInteraction*> interactions_;
-		std::vector<IInteraction*> add_interactions_;
-		std::vector<IInteraction*> delete_interactions_;
-		bool block_;
+		std::vector<IPrioritisedInteraction*> interactions_;
 	};
 }

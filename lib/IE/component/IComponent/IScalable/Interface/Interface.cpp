@@ -111,14 +111,9 @@ namespace ie {
 		return object_->get_normal_size();
 	}
 	
-	auto Interface::update_cluster() -> void {
-		interaction_manager_.update();
-	}
-	
 	auto Interface::update() -> void {
 		panel_manager_.update();
 		update_manager_.update();
-		update_cluster();
 		active_ = false;
 	}
 	

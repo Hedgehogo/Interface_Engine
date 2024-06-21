@@ -1,12 +1,12 @@
 #pragma once
 
-#include "IE/interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
-#include "IE/interaction/IInteraction/BasicAnyPressingInteraction/BasicAnyPressingInteraction.hpp"
+#include "IE/interaction/IInteraction/BasicTouchInteraction/BasicTouchInteraction.hpp"
+#include "IE/interaction/IInteraction/BasicActiveInteraction/BasicActiveInteraction.hpp"
 #include "IE/component/IComponent/IScalable/BasicInteractiveData/BaseSlider/SliderAction/SliderAction.hpp"
 #include "../SliderWheelAction/SliderWheelAction.hpp"
 
 namespace ie {
-	class SliderInteraction : public BasicAnyPressingInteraction<BaseSlider&> {
+	class SliderInteraction : public BasicActiveInteraction<BaseSlider&> {
 	public:
 		struct Make : public virtual IBasicInteraction<BaseSlider&>::Make {
 			Key key;
@@ -37,9 +37,12 @@ namespace ie {
 		
 		SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info);
 		
+		auto handle_event(Event event) -> bool override;
+		
 		auto update() -> void override;
 	
 	protected:
 		SliderWheelAction wheel_action_;
+		float delta_;
 	};
 }

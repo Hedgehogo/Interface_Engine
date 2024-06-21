@@ -56,10 +56,7 @@ namespace ie {
 	}
 	
 	auto BoxSwitcherTabs::handle_event(Event event) -> bool {
-		return event.pointer().map([=](event_system::Pointer pointer) {
-			interactive_.handle_event();
-			return true;
-		}).some_or_else([=] {
+		return interactive_.handle_event(event) || [this, event] {
 			auto updated{false};
 			for(auto& object: objects_) {
 				if(object->handle_event(event)) {
@@ -67,7 +64,7 @@ namespace ie {
 				}
 			}
 			return updated;
-		});
+		}();
 	}
 	
 	auto BoxSwitcherTabs::get_array_size() const -> size_t {

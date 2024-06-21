@@ -12,14 +12,9 @@ namespace ie {
 		
 		auto update() -> void;
 		
-		auto handle_event() -> void;
+		auto handle_event(Event event) -> bool;
 	
-		InteractionManager* interaction_manager;
 		BoxPtr<IBasicInteraction<T> > interaction;
-	
-	private:
-		bool interact_;
-		bool old_interact_;
 	};
 	
 	using InteractiveData = BasicInteractiveData<>;

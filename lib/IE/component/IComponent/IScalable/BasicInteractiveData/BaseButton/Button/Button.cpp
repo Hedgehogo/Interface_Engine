@@ -18,9 +18,7 @@ namespace ie {
 	}
 	
 	auto Button::handle_event(Event event) -> bool {
-		auto result{BaseButton::handle_event(event)};
-		interactive_.handle_event();
-		return result;
+		return BaseButton::handle_event(event) || interactive_.handle_event(event);
 	}
 }
 

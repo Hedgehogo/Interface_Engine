@@ -16,7 +16,7 @@ TEST(IComponent, BoxConstBorder) {
 		},
 		data.make_init_info()
 	};
-	data.interaction_manager.update();
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 2);
 	ASSERT_EQ(data.update_manager.size(), 0);

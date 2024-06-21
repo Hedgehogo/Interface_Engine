@@ -1,5 +1,4 @@
 #include "SliderInteraction.hpp"
-#include "IE/interaction/IAction/IBasicActivityAction/BasicAddInteractionAction/BasicAddPrioritisedInteractionAction/BasicAddPrioritisedInteractionAction.hpp"
 
 namespace ie {
 	SliderInteraction::Make::Make(
@@ -29,20 +28,30 @@ namespace ie {
 	}
 	
 	SliderInteraction::SliderInteraction(Make&& make, BasicActionInitInfo<BaseSlider&> init_info) :
-		BasicAnyPressingInteraction<BaseSlider&>(
+		BasicActiveInteraction<BaseSlider&>(
 			{
-				make_box_ptr<BasicAddPrioritisedInteractionAction<BaseSlider&>::Make>(
-					make_box_ptr<BasicTouchInteraction<BaseSlider&>::Make, BasicPressedInteraction<BaseSlider&>::Make>(
-						make_box_ptr<SliderAction::Make>(make.division), make.key
-					)
-				), make.key
+				make_box_ptr<BasicTouchInteraction<BaseSlider&>::Make>(
+					make_box_ptr<SliderAction::Make>(make.division), make.key
+				)
 			}, init_info
 		),
 		wheel_action_({make.wheel_horizontal, make.wheel_relativity, make.wheel_sensitivity}, init_info) {
 	}
 	
+	auto SliderInteraction::handle_event(Event event) -> bool {
+		return
+			BasicActiveInteraction<BaseSlider&>::handle_event(event) ||
+			event.scroll().map([this](event_system::Scroll scroll) {
+				if(scroll.wheel_id == 0) {
+					delta_ = scroll.delta;
+					return true;
+				}
+				return true;
+			}).some_or(false);
+	}
+	
 	auto SliderInteraction::update() -> void {
-		wheel_action_.update(MouseWheel::get_delta().y);
-		BasicAnyPressingInteraction<BaseSlider&>::update();
+		wheel_action_.update(delta_);
+		BasicActiveInteraction<BaseSlider&>::update();
 	}
 }

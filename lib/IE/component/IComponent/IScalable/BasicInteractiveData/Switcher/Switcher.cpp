@@ -91,13 +91,10 @@ namespace ie {
 	}
 	
 	auto Switcher::handle_event(Event event) -> bool {
-		auto updated{
-			active_.get() ?
+		return
+			interactive_.handle_event(event) && active_.get() ?
 			active_background_->handle_event(event) :
-			inactive_background_->handle_event(event)
-		};
-		interactive_.handle_event();
-		return updated;
+			inactive_background_->handle_event(event);
 	}
 	
 	auto Switcher::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
