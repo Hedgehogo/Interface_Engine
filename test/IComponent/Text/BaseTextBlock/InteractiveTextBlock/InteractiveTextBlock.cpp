@@ -35,5 +35,5 @@ TEST(IComponent_Text, InteractiveTextBlock) {
 	
 	ASSERT_FALSE(interactive_text_block.in({50, 50}));
 	ASSERT_TRUE(interactive_text_block.in({1, -1}));
-	ASSERT_FALSE(interactive_text_block.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})));
+	ASSERT_FALSE(interactive_text_block.handle_event(ie::Event::Pointer({})));
 }

@@ -26,7 +26,7 @@ TEST(IComponent, BoxMakePermeable) {
 	ASSERT_EQ(box_make_permeable.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_make_permeable.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_make_permeable.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_make_permeable.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})), false);
+	ASSERT_EQ(box_make_permeable.handle_event(ie::Event::Pointer({})), false);
 	
 	box_make_permeable.set_size({5, 11});
 	ASSERT_EQ(box_make_permeable.get_size(), (sf::Vector2f{5, 11}));

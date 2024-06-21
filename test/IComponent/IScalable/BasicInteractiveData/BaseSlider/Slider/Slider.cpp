@@ -33,7 +33,7 @@ TEST(IComponent, Slider) {
 	ASSERT_EQ(slider.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(slider.get_position(), sf::Vector2f{});
 	ASSERT_EQ(slider.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(slider.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})), true);
+	ASSERT_EQ(slider.handle_event(ie::Event::Pointer({})), true);
 	
 	slider.set_size({5, 11});
 	ASSERT_EQ(slider.get_size(), (sf::Vector2f{5, 11}));

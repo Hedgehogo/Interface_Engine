@@ -23,7 +23,7 @@ TEST(IComponent, Sprite) {
 	ASSERT_EQ(sprite.get_area_size(), (sf::Vector2f{112, 112}));
 	ASSERT_EQ(sprite.get_position(), sf::Vector2f{});
 	ASSERT_EQ(sprite.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(sprite.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})), true);
+	ASSERT_EQ(sprite.handle_event(ie::Event::Pointer({})), true);
 	
 	sprite.set_size({5, 11});
 	ASSERT_EQ(sprite.get_size(), (sf::Vector2f{5, 11}));

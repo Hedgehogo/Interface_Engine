@@ -28,7 +28,7 @@ TEST(IComponent, Button) {
 	ASSERT_EQ(button.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(button.get_position(), sf::Vector2f{});
 	ASSERT_EQ(button.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(button.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})), true);
+	ASSERT_EQ(button.handle_event(ie::Event::Pointer({})), true);
 	
 	button.set_size({5, 11});
 	ASSERT_EQ(button.get_size(), (sf::Vector2f{5, 11}));

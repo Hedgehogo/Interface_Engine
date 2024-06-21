@@ -1,6 +1,10 @@
 #include "Event.hpp"
 
 namespace ie::event_system {
+	Pointer::Pointer(size_t id, sf::Vector2i position) : id(id), position(position) {}
+	
+	Pointer::Pointer(sf::Vector2i position) : id(std::numeric_limits<size_t>::max()), position(position) {}
+	
 	auto Pointer::is_mouse() -> bool {
 		return id == std::numeric_limits<size_t>::max();
 	}

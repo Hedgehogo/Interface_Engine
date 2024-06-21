@@ -29,7 +29,7 @@ TEST(IComponent, BoxConstRatio) {
 	ASSERT_EQ(box_const_ratio.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_const_ratio.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_const_ratio.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_const_ratio.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})), true);
+	ASSERT_EQ(box_const_ratio.handle_event(ie::Event::Pointer({})), true);
 	
 	box_const_ratio.set_size({5, 11});
 	ASSERT_EQ(box_const_ratio.get_size(), (sf::Vector2f{5, 11}));

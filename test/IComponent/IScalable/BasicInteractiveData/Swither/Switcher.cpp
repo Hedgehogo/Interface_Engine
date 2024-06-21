@@ -31,7 +31,7 @@ TEST(IComponent, Switcher) {
 	ASSERT_EQ(switcher.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(switcher.get_position(), sf::Vector2f{});
 	ASSERT_EQ(switcher.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(switcher.handle_event(ie::Event::Pointer({std::numeric_limits<size_t>::max(), {}})), true);
+	ASSERT_EQ(switcher.handle_event(ie::Event::Pointer({})), true);
 	
 	switcher.set_size({5, 11});
 	ASSERT_EQ(switcher.get_size(), (sf::Vector2f{5, 11}));
