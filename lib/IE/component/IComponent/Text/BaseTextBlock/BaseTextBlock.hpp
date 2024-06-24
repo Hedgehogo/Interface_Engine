@@ -2,7 +2,6 @@
 
 #include "../TextVariables/TextVariables.hpp"
 #include "../BaseCharacter/BaseCharacter.hpp"
-#include "../../IScalable/BasicInteractiveData/BasicInteractiveData.hpp"
 #include "../../InitInfo/InitInfo.hpp"
 #include "TextBockInitInfo/TextBockInitInfo.hpp"
 

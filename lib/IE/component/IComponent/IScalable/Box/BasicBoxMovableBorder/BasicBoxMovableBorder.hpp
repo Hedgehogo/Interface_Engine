@@ -3,7 +3,6 @@
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
-#include "../../BasicInteractiveData/BasicInteractiveData.hpp"
 #include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 #include "../Box.hpp"
 

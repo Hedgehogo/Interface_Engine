@@ -3,9 +3,9 @@
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
 #include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
+#include "IE/interaction/IInteraction/BasicTouchInteraction/BasicTouchInteraction.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
-#include "../../BasicInteractiveData/BasicInteractiveData.hpp"
 
 namespace ie {
 	class BoxSwitcherTabs : public Box, public virtual IScalableObjectsArray, public virtual IUpdatable {
@@ -45,7 +45,7 @@ namespace ie {
 		auto get_tab(sf::Vector2f position) -> int;
 		
 	protected:
-		BasicInteractiveData<BoxSwitcherTabs&> interactive_;
+		BasicTouchInteraction<BoxSwitcherTabs&> interaction_;
 		std::vector<BoxPtr<IScalable> > objects_;
 		bool is_horizontal_;
 		ISMRSize& value_;
