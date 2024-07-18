@@ -10,7 +10,6 @@ endfunction()
 function(configure_dependency target)
     set(libs
             sfml-graphics sfml-system sfml-window
-            yaml-cpp
             libcurl
             localisation-cpp
             box-ptr

@@ -2,6 +2,7 @@
 
 #include "../SFn.hpp"
 #include "../../SReadable/SReadable.hpp"
+#include "../../SString/SString.hpp"
 
 namespace ie {
 	namespace detail {
@@ -20,6 +21,10 @@ namespace ie {
 			static auto greater_or_equal(T_ first, T_ second) -> bool;
 		};
 	}
+	
+	using SEqualS = ToSFn<SBool(ISString&, ISString&), detail::SCompOp<std::u32string>::equal>;
+	
+	using SNotEqualS = ToSFn<SBool(ISString&, ISString&), detail::SCompOp<std::u32string>::not_equal>;
 	
 	template<typename T>
 	using SEqual = ToSFn<SBool(ISReadable<T>&, ISReadable<T>&), detail::SCompOp<T>::equal>;

@@ -16,51 +16,14 @@ namespace ie {
 	
 	BoxConstCenter::BoxConstCenter(Make&& make, InitInfo init_info) :
 		Box(make.min_size),
-		const_object_(make.const_object->make(init_info)),
 		background_(make.background->make(init_info)),
+		const_object_(make.const_object->make(init_info)),
 		const_size_(make.const_size) {
-	}
-	
-	auto BoxConstCenter::set_position(sf::Vector2f position) -> void {
-		Box::set_position(position);
-		if(resized_) {
-			const_object_->move(const_size_);
-		} else {
-			resized_ = true;
-			const_object_->resize(const_size_, layout_.position + position);
-		}
-		const_object_->set_position(position + (layout_.size / 2.f) - (const_size_ / 2.f));
-		background_->set_position(position);
-	}
-	
-	auto BoxConstCenter::move(sf::Vector2f position) -> void {
-		Box::move(position);
-		if(resized_) {
-			const_object_->move(const_size_);
-		} else {
-			resized_ = true;
-			const_object_->resize(const_size_, layout_.position + position);
-		}
-		background_->move(position);
-	}
-	
-	auto BoxConstCenter::set_size(sf::Vector2f size) -> void {
-		Box::set_size(size);
-		if(!resized_) {
-			resized_ = true;
-			const_object_->set_size(const_size_);
-		}
-		background_->set_size(size);
 	}
 	
 	auto BoxConstCenter::resize(sf::Vector2f size, sf::Vector2f position) -> void {
 		layout_.resize(size, position);
-		if(resized_) {
-			const_object_->set_position(position + (size / 2.f) - (const_size_ / 2.f));
-		} else {
-			resized_ = true;
-			const_object_->resize(const_size_, position + (size / 2.f) - (const_size_ / 2.f));
-		}
+		const_object_->resize(const_size_, position + (size / 2.f) - (const_size_ / 2.f));
 		background_->resize(size, position);
 	}
 	
@@ -89,10 +52,11 @@ namespace ie {
 	}
 	
 	auto BoxConstCenter::update_interactions(sf::Vector2f) -> bool {
-		return
-			background_->in(layout_.position)
-			? background_->update_interactions(layout_.position)
-			: const_object_->update_interactions(layout_.position);
+		if(const_object_->in(layout_.position)){
+			return const_object_->update_interactions(layout_.position) ;
+		} else {
+			return background_->update_interactions(layout_.position);
+		}
 	}
 }
 

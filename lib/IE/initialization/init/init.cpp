@@ -14,21 +14,22 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto ieml_rttb_init_shared(char first, std::string name) -> void {
+	auto ieml_rttb_init_shared(std::string first, std::string name) -> void {
 		add_type_with_make<ISMutable<T>, SMutable<T> >(std::string("M") + name);
 		add_type_with_make<ISReadable<T>, ISMutable<T> >();
 		add_type_with_make<ISReadable<T>, SReadable<T> >(name);
 		add_names<ISReadable<T> >(std::string("I") + name);
+		add_names<typename ISReadable<T>::Make >(std::string("I") + name);
 		
 		add_type_make<KeyAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
 		add_type_make<KeyAction, AddSValueAction<T> >(std::string("Add") + name + std::string("Action"));
+		add_type_with_make<SReadable<bool>, SEqual<T> >(std::string("(=)") + name);
+		add_type_with_make<SReadable<bool>, SNotEqual<T> >(std::string("(!=)") + name);
 		
 		if constexpr(meta::is_contains_v<T, size_t, int, float>) {
-			add_type_with_make<SString, SToString<T> >(std::string("ToString") + std::string(1, first));
-			add_type_with_make<SReadable<bool>, SEqual<sf::Vector2<T> > >(std::string("(=)Vec2") + std::string(1, first));
-			add_type_with_make<SReadable<bool>, SNotEqual<sf::Vector2<T> > >(std::string("(!=)Vec2") + std::string(1, first));
-			add_type_with_make<SReadable<bool>, SEqual<T> >(std::string("(=)") + name);
-			add_type_with_make<SReadable<bool>, SNotEqual<T> >(std::string("(!=)") + name);
+			add_type_with_make<SString, SToString<T> >(std::string("ToString") + first);
+			add_type_with_make<SReadable<bool>, SEqual<sf::Vector2<T> > >(std::string("(=)Vec2") + first);
+			add_type_with_make<SReadable<bool>, SNotEqual<sf::Vector2<T> > >(std::string("(!=)Vec2") + first);
 			add_type_with_make<SReadable<bool>, SLess<T> >(std::string("(<)") + name);
 			add_type_with_make<SReadable<bool>, SGreater<T> >(std::string("(>)") + name);
 			add_type_with_make<SReadable<bool>, SLessOrEqual<T> >(std::string("(<=)") + name);
@@ -45,19 +46,19 @@ namespace ie {
 			add_type_with_make<SReadable<T>, SFloor<T> >("Floor");
 			add_type_with_make<SReadable<T>, SCeil<T> >("Ceil");
 			add_type_with_make<SReadable<T>, SRound<T> >("Round");
-			add_type_with_make<ISMVec2<T>, SMVec2<T> >(std::string("MVec2") + std::string(1, first));
-			add_type_with_make<ISMRVec2<T>, SMRVec2<T> >(std::string("MRVec2") + std::string(1, first));
+			add_type_with_make<ISMVec2<T>, SMVec2<T> >(std::string("MVec2") + first);
+			add_type_with_make<ISMRVec2<T>, SMRVec2<T> >(std::string("MRVec2") + first);
 			add_type_with_make<ISMutable<sf::Vector2<T> >, ISMVec2<T> >(
-				std::string("IMutable(Vec2") + std::string(1, first) + std::string(")")
+				std::string("IMutable(Vec2") + first + std::string(")")
 			);
 			add_type_with_make<ISMutable<T>, SMRanged<T> >(std::string("MR") + name);
 			add_type_with_make<ISMRanged<T>, SMRanged<T> >();
 			add_type_with_make<ISMutable<T>, ISMRanged<T> >(std::string("IMR") + name);
-			add_type_with_make<ISVec2<T>, SVec2<T> >(std::string("Vec2") + std::string(1, first));
-			add_type_with_make<ISRVec2<T>, ISMRVec2<T> >(std::string("IMRVec2") + std::string(1, first));
-			add_type_with_make<ISRVec2<T>, SRVec2<T> >(std::string("RVec2") + std::string(1, first));
-			add_type_with_make<ISVec2<T>, ISMVec2<T> >(std::string("IMVec2") + std::string(1, first));
-			add_type_with_make<ISReadable<sf::Vector2<T> >, ISVec2<T> >(std::string("IVec2") + std::string(1, first));
+			add_type_with_make<ISVec2<T>, SVec2<T> >(std::string("Vec2") + first);
+			add_type_with_make<ISRVec2<T>, ISMRVec2<T> >(std::string("IMRVec2") + first);
+			add_type_with_make<ISRVec2<T>, SRVec2<T> >(std::string("RVec2") + first);
+			add_type_with_make<ISVec2<T>, ISMVec2<T> >(std::string("IMVec2") + first);
+			add_type_with_make<ISReadable<sf::Vector2<T> >, ISVec2<T> >(std::string("IVec2") + first);
 			add_type_with_make<ISReadable<T>, SRanged<T> >(std::string("R") + name);
 			add_type_with_make<ISRanged<T>, SRanged<T> >(std::string("R") + name);
 			add_type_with_make<ISRanged<T>, ISMRanged<T> >(std::string("IMR") + name);
@@ -70,10 +71,10 @@ namespace ie {
 	
 	auto ieml_rttb_init() -> void {
 		[[maybe_unused]] static bool once{[]() {
-			ieml_rttb_init_shared<bool>('B', "Bool");
-			ieml_rttb_init_shared<size_t>('S', "Size");
-			ieml_rttb_init_shared<int>('I', "Int");
-			ieml_rttb_init_shared<float>('F', "Float");
+			ieml_rttb_init_shared<bool>("B", "Bool");
+			ieml_rttb_init_shared<size_t>("S", "Size");
+			ieml_rttb_init_shared<int>("I", "Int");
+			ieml_rttb_init_shared<float>("F", "Float");
 			add_type_with_make<SRFloat, STime>("Time");
 			add_type_with_make<ISInt, SCastF2I>("CastF");
 			add_type_with_make<ISSize, SCastF2S>("CastF");
@@ -91,6 +92,8 @@ namespace ie {
 			add_type_with_make<ISString, SString>("String");
 			add_type_with_make<ISString, ISMString>("IMString");
 			add_names<ISString::Make>("IString");
+			add_type_with_make<SReadable<bool>, SEqualS >(std::string("(=)String"));
+			add_type_with_make<SReadable<bool>, SNotEqualS >(std::string("(!=)String"));
 			
 			add_type_make_named<ISizing, ConstSizing>();
 			add_type_make_named<ISizing, RelativeNormalSizing>();
@@ -212,6 +215,9 @@ namespace ie {
 			add_type_make_named<IComponent, IScalableV>();
 			add_type_make_named<IComponent, IScalableH>();
 			add_type_make_named<IComponent, Text>();
+			add_names<BoxModulesLoader::LibsOneType>("LibsOneType");
+			add_names<BoxModulesLoader::LibType>("LibType");
+			add_names<BoxModulesLoader::Make>("BoxModulesLoader");
 			add_names<IComponent::Make>("IComponent");
 			
 			add_type_make_named<BasePanel, ConstPanel>();

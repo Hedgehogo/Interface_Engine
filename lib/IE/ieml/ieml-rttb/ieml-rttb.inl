@@ -22,7 +22,7 @@ namespace ieml {
 	template<typename Type_>
 	auto Decode<char, Type_*>::decode(const Node& node) -> orl::Option<Type_*> {
 		auto& clear_node{node.get_clear<NodeType::File, NodeType::TakeAnchor, NodeType::GetAnchor>()};
-		auto& tag_node{node.get_clear_data<NodeType::Tag>()};
+		auto& tag_node{clear_node.get_clear_data<NodeType::Tag>()};
 		auto& builder{rttb::Builder<ieml::Node const&, Type_>::builder()};
 		if(&tag_node != &clear_node) {
 			auto& type_name{clear_node.get_tag().some()};

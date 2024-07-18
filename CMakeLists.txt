@@ -42,8 +42,6 @@ add_executable(${PROJECT_NAME}_ex main.cpp)
 target_link_libraries(${PROJECT_NAME}_ex PRIVATE ${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME}_ex PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_subdirectory(example-resources/modules)
-
 create_tests(${PROJECT_NAME})
 
 create_projects_checking("${PROJECT_NAME};${PROJECT_NAME}_tests" "${PROJECT_NAME}_tests")
@@ -63,7 +61,9 @@ execute_process(
 		OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
-configure_file(lib/config.h.in lib/config.h)
+configure_file(lib/config.hpp.in lib/config.hpp)
+
+add_subdirectory(example-resources/modules)
 
 if (IE_ENABLE_INSTALL)
 	create_install_target()

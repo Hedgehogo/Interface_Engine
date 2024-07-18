@@ -1,11 +1,16 @@
 #include "ConsoleCommandAction.hpp"
 
+#include <utility>
+
 namespace ie {
-	ConsoleCommandAction::ConsoleCommandAction(const std::string& command) : command(command) {}
-	
-	auto ConsoleCommandAction::copy() -> ConsoleCommandAction* {
-		return new ConsoleCommandAction{*this};
+	ConsoleCommandAction::Make::Make(std::string command) : command(std::move(command)) {
 	}
+	
+	auto ConsoleCommandAction::Make::make(ActionInitInfo init_info) -> ConsoleCommandAction*{
+		return new ConsoleCommandAction{std::move(*this), init_info};
+	}
+	
+	ConsoleCommandAction::ConsoleCommandAction(Make&& make, ActionInitInfo init_info) : command(make.command) {}
 	
 	auto ConsoleCommandAction::start_pressed() -> void {}
 	
@@ -16,18 +21,17 @@ namespace ie {
 	auto ConsoleCommandAction::while_pressed() -> void {}
 	
 	auto ConsoleCommandAction::while_not_pressed() -> void {}
-	
-	/*old_yaml_decode_pointer_impl
-	bool DecodePointer<ConsoleCommandAction>::decode_pointer(const YAML::Node& node, ConsoleCommandAction*& console_command_action) {
-		console_command_action = new ConsoleCommandAction{
-			node["command"].as<std::string>()
-		};
-		return true;
 
+	extern "C" {
+		auto init() -> void {
+			add_type_with_make<BaseKeyAction, ConsoleCommandAction>("ConsoleCommandAction", "ConsoleCommandA");
+		}
 	}
-	*/
-	
-	auto init(int argc, char *argv[]) -> void {
-		//inherit<ie::KeyAction, ie::ConsoleCommandAction>({"ConsoleCommandAction"});
-	}
+}
+
+auto ieml::Decode<char, ie::ConsoleCommandAction::Make>::decode(ieml::Node const& node) -> orl::Option<ie::ConsoleCommandAction::Make>{
+	auto map{node.get_map_view().except()};
+	return ie::ConsoleCommandAction::Make{
+		map.at("command").except().as<std::string>().except()
+	};
 }

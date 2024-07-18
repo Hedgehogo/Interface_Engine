@@ -2,14 +2,20 @@
 
 #include <string>
 #include <IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp>
-#include <IE/modules/yaml-cpp/yaml.hpp>
+#include <IE/ieml/shortcuts/shortcuts.hpp>
 
 namespace ie {
 	class ConsoleCommandAction : public BaseKeyAction {
 	public:
-		explicit ConsoleCommandAction(std::string const& command);
+	struct Make : public BaseKeyAction::Make {
+		std::string command;
+			
+		explicit Make(std::string command);
 		
-		auto copy() -> ConsoleCommandAction* override;
+		auto make(ActionInitInfo init_info) -> ConsoleCommandAction* override;
+	};
+		
+		explicit ConsoleCommandAction(Make&& make, ActionInitInfo init_info);
 	
 	protected:
 		auto start_pressed() -> void override;
@@ -23,14 +29,12 @@ namespace ie {
 		std::string command;
 	};
 	
-	/*old_yaml_decode_pointer
-	template<>
-	struct DecodePointer<ConsoleCommandAction> {
-		static bool decode_pointer(const YAML::Node& node, ConsoleCommandAction*& console_command_action);
-	};
-	*/
-	
 	extern "C" {
-		auto init(int argc, char *argv[]) -> void;
+		auto init() -> void;
 	}
 }
+
+template<>
+struct ieml::Decode<char, ie::ConsoleCommandAction::Make> {
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::ConsoleCommandAction::Make>;
+};

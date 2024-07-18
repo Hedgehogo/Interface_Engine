@@ -3,29 +3,6 @@ include(FetchContent)
 
 include(cmake/ConfigureDependency.cmake)
 
-function(connect_yaml_cpp)
-	FetchContent_Declare(
-			yaml-cpp
-			GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
-			GIT_TAG yaml-cpp-0.7.0
-			FIND_PACKAGE_ARGS NAMES yaml-cpp
-	)
-
-	FetchContent_Populate(yaml-cpp)
-
-	file(READ "${yaml-cpp_SOURCE_DIR}/CMakeLists.txt" yaml-cpp_CMAKE)
-
-	string(REGEX REPLACE
-			"cmake_dependent_option\\(YAML_CPP_INSTALL[^\\)]+\\)"
-			"set(YAML_CPP_INSTALL ON)"
-			yaml-cpp_CMAKE_UPDATED
-			"${yaml-cpp_CMAKE}")
-
-	file(WRITE "${yaml-cpp_SOURCE_DIR}/CMakeLists.txt" "${yaml-cpp_CMAKE_UPDATED}")
-
-	add_subdirectory(${yaml-cpp_SOURCE_DIR})
-endfunction()
-
 set(download OFF)
 
 function(dependency_management PROJECT)
@@ -78,8 +55,6 @@ function(dependency_management PROJECT)
 			FIND_PACKAGE_ARGS NAMES RTTB_cpp
 	)
 	FetchContent_MakeAvailable(SFML abseil ctre curl localisation-cpp box-ptr IEML_CBOR_cpp RTTB_cpp)
-
-	connect_yaml_cpp()
 
 	configure_dependency(${PROJECT})
 endfunction()

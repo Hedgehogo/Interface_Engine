@@ -3,6 +3,7 @@
 #include <cmath>
 #include <IEML/parser.hpp>
 #include "IE/modules/load_modules.hpp"
+#include "../Box/BoxModulesLoader/BoxModulesLoader.hpp"
 
 namespace ie {
 	Interface::Make::Make(BoxPtr<IScalable::Make>&& object) :
@@ -154,13 +155,8 @@ namespace ie {
 	}
 	
 	auto make_interface(std::filesystem::path file_path, int argc, char* argv[]) -> Interface::Make {
-		if(auto modules = std::filesystem::path{file_path}.replace_filename("modules.ieml"); std::filesystem::exists(modules)) {
-			load_modules(argc, argv, modules);
-		}
-		
 		auto node{ieml::from_file(file_path)};
-		auto map{node.get_map_view().except()};
-		auto object{map.at("object").except().as<BoxPtr<IScalable::Make> >().except()};
+		auto object{bp::make_box_ptr<BoxModulesLoader::Make>(node.as<BoxModulesLoader::Make>().except())};
 		return Interface::Make{std::move(object)};
 	}
 	
@@ -172,13 +168,8 @@ namespace ie {
 		int argc,
 		char* argv[]
 	) -> Interface {
-		if(auto modules = std::filesystem::path{file_path}.replace_filename("modules.yaml"); std::filesystem::exists(modules)) {
-			load_modules(argc, argv, modules);
-		}
-		
 		auto node{ieml::from_file(file_path)};
-		auto map{node.get_map_view().except()};
-		auto object{map.at("object").except().as<BoxPtr<IScalable::Make> >().except()};
+		auto object{bp::make_box_ptr<BoxModulesLoader::Make>(node.as<BoxModulesLoader::Make>().except())};
 		return Interface{window, dyn_buffer, key_handler, std::move(object)};
 	}
 }

@@ -1,29 +1,12 @@
-object: = BoxMovableBorder:
-	border-horizontal: yes
-	first-object: blue
-	second-object: red
-	border-value: = RLerp:
-		a: [0, 1]
-		b: [1, 0]
-		value: = RAnyOf:
-			values:
-				- = RBezierCurve:
-					points: [0, 0.75, 0.75, 0.75]
-					value: = Time:
-						start: &start0 yes
-						end: &end0 no
-				- = RLerp:
-					k: 0.25
-					b: 0.5
-					value: = RCos:
-						value: = RLerp:
-							k: 6
-							value: = Time:
-								end-time: 3.14159265359
-								start: *end0
-								end: &end1 no
-				- = RBezierCurve:
-					points: [0.75, 0.75, 0.75, 0]
-					value: = Time:
-						start: *end1
-						end: *start0
+lib_dir: "../../example-resources/buildModules/"
+progress_bar_value: &progress_bar_value 0
+text_error_value: &text_error_value ""
+libs:
+	- = CLib:
+		urls: ["https://raw.githubusercontent.com/Andrewkoro105/test_eleases/main/libConsole_Command_Action"]
+object: < main-interface
+progress_bar: < progress-bar
+	background: 2F3033
+	background_bar: 27272D
+	bar: A0D408
+	error_color: F66151

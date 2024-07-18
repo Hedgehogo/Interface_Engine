@@ -20,4 +20,11 @@ namespace ieml {
 		}
 		return {{clear_node.get_string().except()}};
 	}
+	
+	auto Decode<char, std::filesystem::path>::decode(ieml::Node const& node) -> orl::Option<std::filesystem::path>{
+		return std::filesystem::path{
+			node.as<ie::LoadString>().except().str
+		};
+	}
+	
 }

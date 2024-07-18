@@ -1,7 +1,0 @@
-lib-dir: ../example-resources/
-CLib:
-  lib-dir: buildModules/
-  path: []
-#    - libtestModule
-#  download:
-#    - https://transfer.sh/hXVl8R/libtestModule

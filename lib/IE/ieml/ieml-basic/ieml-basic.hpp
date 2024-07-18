@@ -39,6 +39,11 @@ namespace tnl {
 	struct TypeName<ie::LoadString> {
 		constexpr static auto type_name = StringView{"String"};
 	};
+	
+	template<>
+	struct TypeName<std::filesystem::path> {
+		constexpr static auto type_name = StringView{"Path"};
+	};
 }
 
 namespace ieml {
@@ -70,6 +75,11 @@ namespace ieml {
 	template<>
 	struct Decode<char, ie::LoadString> {
 		static auto decode(ieml::Node const& node) -> orl::Option<ie::LoadString>;
+	};
+	
+	template<>
+	struct Decode<char, std::filesystem::path> {
+		static auto decode(ieml::Node const& node) -> orl::Option<std::filesystem::path>;
 	};
 }
 

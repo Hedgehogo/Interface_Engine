@@ -1,11 +1,8 @@
-cmake_minimum_required(VERSION 3.21)
-project(modules)
-set(CMAKE_CXX_STANDARD 17)
+add_library(Console_Command_Action-${COMMIT_HASH} MODULE ConsoleCommandAction/ConsoleCommandAction.cpp)
+target_include_directories(Console_Command_Action-${COMMIT_HASH} PUBLIC lib)
 
-add_library(testModule ConsoleCommandAction/ConsoleCommandAction.cpp)
-target_include_directories(testModule PUBLIC lib)
-set_target_properties(testModule PROPERTIES
+set_target_properties(Console_Command_Action-${COMMIT_HASH} PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/example-resources/buildModules
-        COMPILE_FLAGS ""
+        COMPILE_FLAGS "-fPIC"
 )
-target_link_libraries(testModule PUBLIC Interface_Engine)
+target_link_libraries(Console_Command_Action-${COMMIT_HASH} PUBLIC Interface_Engine)
