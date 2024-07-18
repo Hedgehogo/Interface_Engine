@@ -3,7 +3,7 @@
 #include <open-lib/DynamicLibrary.hpp>
 #include <utility>
 #include <curl/curl.h>
-#include "config.h"
+#include "config.hpp"
 #include "IE/utils/utf/to_utf/to_utf.hpp"
 #include "IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/Empty/Empty.hpp"
 #include "IE/shared/ISReadable/SString/SString.hpp"

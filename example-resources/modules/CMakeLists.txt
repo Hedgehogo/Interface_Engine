@@ -1,4 +1,4 @@
-add_library(Console_Command_Action-${COMMIT_HASH} MODULE ConsoleCommandAction/ConsoleCommandAction.cpp)
+add_library(Console_Command_Action-${COMMIT_HASH} MODULE ConsoleCommandAction/BasicConsoleCommandAction.cpp)
 target_include_directories(Console_Command_Action-${COMMIT_HASH} PUBLIC lib)
 
 set_target_properties(Console_Command_Action-${COMMIT_HASH} PROPERTIES

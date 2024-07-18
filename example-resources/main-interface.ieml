@@ -1,6 +1,6 @@
 = Button:
 background: red
-interaction: = OneKeyI:
-	key: f
+interaction: = KeysI:
+	keys: [f]
 	action: = ConsoleCommandA:
 		command: > echo "Hi, Interface Engine!"
