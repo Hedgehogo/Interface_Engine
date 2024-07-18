@@ -18,7 +18,7 @@ TEST(IComponent, BoxTabs) {
 			value
 		}, data.make_init_info()
 	};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(&data.draw_manager.get(0), &box_tabs);
@@ -32,7 +32,7 @@ TEST(IComponent, BoxTabs) {
 	ASSERT_EQ(box_tabs.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_tabs.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_tabs.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_tabs.update_interactions({}), true);
+	ASSERT_EQ(box_tabs.handle_event(ie::Event::Pointer({})), true);
 	
 	box_tabs.set_size({5, 11});
 	ASSERT_EQ(box_tabs.get_size(), (sf::Vector2f{5, 11}));

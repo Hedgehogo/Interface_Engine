@@ -15,7 +15,7 @@ TEST(IComponent, BoxBorderHorizontal) {
 			),
 		}, data.make_init_info()
 	};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 2);
 	ASSERT_EQ(data.update_manager.size(), 0);
@@ -28,7 +28,7 @@ TEST(IComponent, BoxBorderHorizontal) {
 	ASSERT_EQ(box_border_horizontal.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_border_horizontal.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_border_horizontal.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_border_horizontal.update_interactions({}), true);
+	ASSERT_EQ(box_border_horizontal.handle_event(ie::Event::Pointer({})), true);
 	
 	box_border_horizontal.set_size({5, 11});
 	ASSERT_EQ(box_border_horizontal.get_size(), (sf::Vector2f{5, 11}));

@@ -110,10 +110,13 @@ namespace ie {
 		BoxRenderTexture::resize(size, position);
 	}
 	
-	auto BoxShader::update_interactions(sf::Vector2f mouse_position) -> bool {
-		if(transmission_ & Transmission::MousePosition)
-			shader_->setUniform("mouse_position", mouse_position - layout_.position);
-		return BoxRenderTexture::update_interactions(mouse_position);
+	auto BoxShader::handle_event(Event event) -> bool {
+		for(auto pointer: event.pointer()) {
+			if(transmission_ & Transmission::MousePosition) {
+				shader_->setUniform("mouse_position", sf::Vector2f{pointer.position} - layout_.position);
+			}
+		}
+		return BoxRenderTexture::handle_event(event);
 	}
 }
 

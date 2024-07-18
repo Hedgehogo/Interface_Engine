@@ -28,10 +28,10 @@ namespace ie {
 		active_object_->set_position(position);
 	}
 	
-	auto BoxSwitch::move(sf::Vector2f position) -> void {
-		layout_.move(position);
-		inactive_object_->move(position);
-		active_object_->move(position);
+	auto BoxSwitch::move(sf::Vector2f offset) -> void {
+		layout_.move(offset);
+		inactive_object_->move(offset);
+		active_object_->move(offset);
 	}
 	
 	auto BoxSwitch::set_size(sf::Vector2f size) -> void {
@@ -54,8 +54,8 @@ namespace ie {
 		}
 	}
 	
-	auto BoxSwitch::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return value_.get() ? active_object_->update_interactions(mouse_position) : inactive_object_->update_interactions(mouse_position);
+	auto BoxSwitch::handle_event(Event event) -> bool {
+		return value_.get() ? active_object_->handle_event(event) : inactive_object_->handle_event(event);
 	}
 	
 	auto BoxSwitch::get_first_object() -> IScalable& {

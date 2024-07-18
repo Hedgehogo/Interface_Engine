@@ -24,10 +24,10 @@ namespace ie {
 		object_->set_position(position);
 	}
 	
-	auto BoxBackground::move(sf::Vector2f position) -> void {
-		layout_.move(position);
-		background_->move(position);
-		object_->move(position);
+	auto BoxBackground::move(sf::Vector2f offset) -> void {
+		layout_.move(offset);
+		background_->move(offset);
+		object_->move(offset);
 	}
 	
 	auto BoxBackground::set_size(sf::Vector2f size) -> void {
@@ -66,8 +66,8 @@ namespace ie {
 		object_->resize(size - offset_ * 2.f, position + offset_);
 	}
 	
-	auto BoxBackground::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return object_->update_interactions(mouse_position);
+	auto BoxBackground::handle_event(Event event) -> bool {
+		return object_->handle_event(event);
 	}
 	
 	auto BoxBackground::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {

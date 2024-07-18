@@ -17,9 +17,9 @@ namespace ie {
 		
 		ClickDisplayPanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		auto start(sf::Vector2i) -> void override;
+		auto start() -> void override;
 		
-		auto finish(sf::Vector2i mouse_position) -> void override;
+		auto finish() -> void override;
 	};
 }
 

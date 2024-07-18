@@ -57,11 +57,11 @@ namespace ie {
 		BoxConstRatio::move(position - layout_.position);
 	}
 	
-	auto BoxConstRatio::move(sf::Vector2f position) -> void {
-		layout_.move(position);
-		background_->move(position);
-		const_object_->move(position);
-		second_object_->move(position);
+	auto BoxConstRatio::move(sf::Vector2f offset) -> void {
+		layout_.move(offset);
+		background_->move(offset);
+		const_object_->move(offset);
+		second_object_->move(offset);
 	}
 	
 	auto BoxConstRatio::set_size(sf::Vector2f size) -> void {
@@ -113,14 +113,21 @@ namespace ie {
 		background_->resize(size, position);
 	}
 	
-	auto BoxConstRatio::update_interactions(sf::Vector2f mouse_position) -> bool {
-		if(render_second_ && second_object_->in_area(mouse_position)) {
-			return second_object_->update_interactions(mouse_position);
-		}
-		if(const_object_->in_area(mouse_position)) {
-			return const_object_->update_interactions(mouse_position);
-		}
-		return background_->update_interactions(mouse_position);
+	auto BoxConstRatio::handle_event(Event event) -> bool {
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			if(render_second_ && second_object_->in_area(sf::Vector2f{pointer.position})) {
+				return second_object_->handle_event(event);
+			}
+			if(const_object_->in_area(sf::Vector2f{pointer.position})) {
+				return const_object_->handle_event(event);
+			}
+			return background_->handle_event(event);
+		}).some_or_else([=] {
+			auto second_updated{render_second_ && second_object_->handle_event(event)};
+			auto const_updated{const_object_->handle_event(event)};
+			auto background{background_->handle_event(event)};
+			return second_updated || const_updated || background;
+		});
 	}
 	
 	auto BoxConstRatio::get_min_size() const -> sf::Vector2f {

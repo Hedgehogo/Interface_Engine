@@ -6,8 +6,8 @@ namespace ie {
 		resize(get_area_size(), position);
 	}
 	
-	auto IComponent::move(sf::Vector2f position) -> void {
-		resize(get_area_size(), get_area_position() + position);
+	auto IComponent::move(sf::Vector2f offset) -> void {
+		resize(get_area_size(), get_area_position() + offset);
 	}
 	
 	auto IComponent::set_size(sf::Vector2f size) -> void {

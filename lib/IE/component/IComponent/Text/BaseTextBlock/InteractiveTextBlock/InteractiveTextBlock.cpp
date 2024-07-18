@@ -54,32 +54,21 @@ namespace ie {
 			},
 			init_info
 		),
-		interact_(false),
-		old_interact_(false),
 		interaction_(make.interaction->make({static_cast<InitInfo>(init_info), {}})),
 		interaction_manager_(&init_info.text_interaction_manager) {
 	}
 	
 	auto InteractiveTextBlock::update() -> void {
-		if(interact_ != old_interact_) {
-			old_interact_ = interact_;
-			if(interact_) {
-				interaction_manager_->add_interaction(*interaction_);
-			} else {
-				interaction_manager_->delete_interaction(*interaction_);
-			}
-		}
-		interact_ = false;
+		interaction_->update();
 	}
 	
-	auto InteractiveTextBlock::update_interactions(sf::Vector2f) -> bool {
-		interact_ = true;
-		return true;
+	auto InteractiveTextBlock::handle_event(Event event) -> bool {
+		return interaction_->handle_event(event);
 	}
 	
-	auto InteractiveTextBlock::in(sf::Vector2f mouse_position) -> bool {
+	auto InteractiveTextBlock::in(sf::Vector2f point_position) -> bool {
 		for(auto& character: text_characters_) {
-			if(character->in(mouse_position)) {
+			if(character->in(point_position)) {
 				return true;
 			}
 		}

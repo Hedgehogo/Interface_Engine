@@ -1,7 +1,7 @@
 #include "INonInteractiveObject.hpp"
 
 namespace ie {
-	auto INonInteractiveObject::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return INonInteractive::update_interactions(mouse_position);
+	auto INonInteractiveObject::handle_event(Event event) -> bool {
+		return INonInteractive::handle_event(event);
 	}
 }

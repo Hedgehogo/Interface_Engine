@@ -56,7 +56,7 @@ TEST(IComponent_Text, TextBlock) {
 		ASSERT_NE(character0->get_advance(), advance_without_kerning);
 		ASSERT_FALSE(text_block.in({50, 50}));
 		ASSERT_FALSE(text_block.in({1, -1}));
-		ASSERT_FALSE(text_block.update_interactions({0, 0}));
+		ASSERT_FALSE(text_block.handle_event(ie::Event::Pointer({})));
 		
 		ASSERT_EQ(character0->get_line().size(), 2);
 		ASSERT_EQ(&character0->get_line(), &characters[1]->get_line());

@@ -5,7 +5,7 @@
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/panel/IPanelManager/PanelManager/PanelManager.hpp"
 #include "IE/interaction/InteractionManager/InteractionManager.hpp"
-#include "IE/interaction/IAction/WheelAction/WheelAction.hpp"
+#include "IE/interaction/IAction/IBasicWheelAction/IBasicWheelAction.hpp"
 #include "IE/shared/DynBuffer/DynBuffer.hpp"
 #include "../IScalable.hpp"
 
@@ -25,7 +25,7 @@ namespace ie {
 		explicit Interface(
 			sf::RenderWindow& window,
 			DynBuffer& dyn_buffer,
-			KeyHandler& key_handler,
+			EventHandler& event_handler,
 			BoxPtr<IScalable::Make>&& object
 		);
 		
@@ -47,7 +47,7 @@ namespace ie {
 		
 		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 		auto get_area_position() const -> sf::Vector2f override;
 		
@@ -59,14 +59,14 @@ namespace ie {
 		
 		auto update() -> void override;
 		
-		auto update(sf::Vector2f mouse_position, bool active) -> void;
+		auto update(std::vector<Event> const& events, bool active) -> void;
 		
 		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue = 0, size_t hue_offset = 36) -> void override;
 	
 	protected:
 		auto is_in_window(sf::Vector2f position) -> bool;
 		
-		auto update_cluster(sf::Vector2f mouse_position) -> void;
+		auto update_cluster() -> void;
 		
 		sf::RenderWindow* window_;
 		sf::RenderTarget* render_target_;
@@ -84,7 +84,7 @@ namespace ie {
 	auto make_interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
-		KeyHandler& key_handler,
+		EventHandler& event_handler,
 		std::filesystem::path file_path,
 		int argc = 0,
 		char* argv[] = {}

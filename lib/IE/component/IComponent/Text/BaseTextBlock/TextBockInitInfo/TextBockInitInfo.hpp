@@ -27,7 +27,7 @@ namespace ie {
 			sf::RenderWindow& window,
 			sf::RenderTarget& render_target,
 			DynBuffer& dyn_buffer,
-			KeyHandler& key_handler,
+			EventHandler& event_handler,
 			DrawManager& draw_manager,
 			UpdateManager& update_manager,
 			InteractionManager& interaction_manager,

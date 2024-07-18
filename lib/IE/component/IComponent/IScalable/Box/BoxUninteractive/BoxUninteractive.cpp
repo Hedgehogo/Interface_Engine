@@ -20,8 +20,8 @@ namespace ie {
 		IComponentObject::resize(size, position);
 	}
 	
-	auto BoxUninteractive::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return INonInteractive::update_interactions(mouse_position);
+	auto BoxUninteractive::handle_event(Event event) -> bool {
+		return INonInteractive::handle_event(event);
 	}
 	
 	auto BoxUninteractive::get_object() -> IScalable& {

@@ -1,49 +1,51 @@
 #pragma once
 
 #include "../IInteraction.hpp"
-#include "IE/event/KeyHandler/KeyHandler.hpp"
+#include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
-	template<typename T>
+	template<typename A_>
 	class BasicKeysInteraction;
 	
 	namespace make_system {
-		template<typename T = std::monostate>
-		struct BasicKeysInteraction : public virtual IBasicInteraction<T> {
-			BoxPtr<BasicKeyAction<T> > action;
+		template<typename A_ = std::monostate>
+		struct BasicKeysInteraction : public virtual IBasicInteraction<A_> {
+			BoxPtr<IBasicActivityAction<A_> > action;
 			std::vector<Key> keys;
 			std::vector<Key> black_list_keys = {};
 			
-			BasicKeysInteraction(BoxPtr<BasicKeyAction<T> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys = {});
+			BasicKeysInteraction(BoxPtr<IBasicActivityAction<A_> >&& action, std::vector<Key> keys, std::vector<Key> black_list_keys = {});
 			
-			auto make(BasicActionInitInfo<T> init_info) -> ie::BasicKeysInteraction<T>* override;
+			auto make(BasicActionInitInfo<A_> init_info) -> ie::BasicKeysInteraction<A_>* override;
 		};
 	}
 	
-	template<typename T = std::monostate>
-	class BasicKeysInteraction : public virtual IBasicInteraction<T> {
+	template<typename A_ = std::monostate>
+	class BasicKeysInteraction : public virtual IBasicInteraction<A_> {
 	public:
-		using Make = make_system::BasicKeysInteraction<T>;
+		using Make = make_system::BasicKeysInteraction<A_>;
 		
-		BasicKeysInteraction(Make&& make, BasicActionInitInfo<T> init_info);
+		BasicKeysInteraction(Make&& make, BasicActionInitInfo<A_> init_info);
 		
 		auto is_press() const -> bool;
 		
 		auto get_keys() -> std::vector<Key>;
 		
-		auto get_action() -> BasicKeyAction<T>*;
+		auto get_action() -> IBasicActivityAction<A_>*;
 		
-		auto set_action(BasicKeyAction<T>* action) -> void;
+		auto set_action(IBasicActivityAction<A_>* action) -> void;
 		
-		auto start(sf::Vector2i mouse_position) -> void override;
+		auto start() -> void override;
 		
-		auto update(sf::Vector2i mouse_position) -> void override;
+		auto handle_event(Event event) -> bool override;
 		
-		auto finish(sf::Vector2i mouse_position) -> void override;
+		auto update() -> void override;
+		
+		auto finish() -> void override;
 		
 	protected:
-		KeyHandler* key_handler_;
-		BoxPtr<BasicKeyAction<T> > action_;
+		EventHandler* event_handler_;
+		BoxPtr<IBasicActivityAction<A_> > action_;
 		std::vector<Key> keys_;
 		std::vector<Key> black_list_keys_;
 		bool press_;
@@ -52,9 +54,9 @@ namespace ie {
 	using KeysInteraction = BasicKeysInteraction<>;
 }
 
-template<typename T>
-struct ieml::Decode<char, ie::make_system::BasicKeysInteraction<T> > {
-	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicKeysInteraction<T> >;
+template<typename A_>
+struct ieml::Decode<char, ie::make_system::BasicKeysInteraction<A_> > {
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::make_system::BasicKeysInteraction<A_> >;
 };
 
 #include "BasicKeysInteraction.inl"

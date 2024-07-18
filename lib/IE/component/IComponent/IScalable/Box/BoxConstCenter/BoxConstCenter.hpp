@@ -34,7 +34,7 @@ namespace ie {
 		
 		auto get_second_object() const -> IScalable const& override;
 		
-		auto update_interactions(sf::Vector2f) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 	protected:
 		BoxPtr<IScalable> background_;

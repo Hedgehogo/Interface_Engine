@@ -1,33 +1,38 @@
 namespace ie {
 	namespace make_system {
-		template<typename T>
-		auto BasicEmptyInteraction<T>::make(BasicActionInitInfo<T> init_info) -> ie::BasicEmptyInteraction<T>* {
-			return new ie::BasicEmptyInteraction<T>{std::move(*this), init_info};
+		template<typename A_>
+		auto BasicEmptyInteraction<A_>::make(BasicActionInitInfo<A_> init_info) -> ie::BasicEmptyInteraction<A_>* {
+			return new ie::BasicEmptyInteraction<A_>{std::move(*this), init_info};
 		}
 	}
 	
-	template<typename T>
-	BasicEmptyInteraction<T>::BasicEmptyInteraction(Make&&, BasicActionInitInfo<T>) {
+	template<typename A_>
+	BasicEmptyInteraction<A_>::BasicEmptyInteraction(Make&&, BasicActionInitInfo<A_>) {
 	}
 	
-	template<typename T>
-	BasicEmptyInteraction<T>::BasicEmptyInteraction() {
+	template<typename A_>
+	BasicEmptyInteraction<A_>::BasicEmptyInteraction() {
 	}
 	
-	template<typename T>
-	auto BasicEmptyInteraction<T>::start(sf::Vector2i) -> void {
+	template<typename A_>
+	auto BasicEmptyInteraction<A_>::start() -> void {
 	}
 	
-	template<typename T>
-	auto BasicEmptyInteraction<T>::update(sf::Vector2i) -> void {
+	template<typename A_>
+	auto BasicEmptyInteraction<A_>::handle_event(Event event) -> bool {
+		return false;
 	}
 	
-	template<typename T>
-	auto BasicEmptyInteraction<T>::finish(sf::Vector2i) -> void {
+	template<typename A_>
+	auto BasicEmptyInteraction<A_>::update() -> void {
+	}
+	
+	template<typename A_>
+	auto BasicEmptyInteraction<A_>::finish() -> void {
 	}
 }
 
-template<typename T>
-auto ieml::Decode<char, ie::BasicEmptyInteraction<T> >::decode(ieml::Node const&) -> orl::Option<ie::BasicEmptyInteraction<T> > {
-	return ie::BasicEmptyInteraction<T>{};
+template<typename A_>
+auto ieml::Decode<char, ie::BasicEmptyInteraction<A_> >::decode(ieml::Node const&) -> orl::Option<ie::BasicEmptyInteraction<A_> > {
+	return ie::BasicEmptyInteraction<A_>{};
 }

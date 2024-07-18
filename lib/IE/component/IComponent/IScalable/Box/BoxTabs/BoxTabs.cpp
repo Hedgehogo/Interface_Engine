@@ -29,10 +29,10 @@ namespace ie {
 		}
 	}
 	
-	auto BoxTabs::move(sf::Vector2f position) -> void {
-		layout_.move(position);
+	auto BoxTabs::move(sf::Vector2f offset) -> void {
+		layout_.move(offset);
 		for(auto& object: objects_) {
-			object->move(position);
+			object->move(offset);
 		}
 	}
 	
@@ -54,8 +54,8 @@ namespace ie {
 		draw_managers_[value_.get()].draw();
 	}
 	
-	auto BoxTabs::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return objects_[value_.get()]->update_interactions(mouse_position);
+	auto BoxTabs::handle_event(Event event) -> bool {
+		return objects_[value_.get()]->handle_event(event);
 	}
 	
 	auto BoxTabs::get_array_size() const -> size_t {

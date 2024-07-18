@@ -54,12 +54,12 @@ namespace ie {
 		BoxConstRatioCenter::move(position - layout_.position);
 	}
 	
-	auto BoxConstRatioCenter::move(sf::Vector2f position) -> void {
-		layout_.move(position);
-		object_->move(position);
-		background_->move(position);
-		first_object_->move(position);
-		second_object_->move(position);
+	auto BoxConstRatioCenter::move(sf::Vector2f offset) -> void {
+		layout_.move(offset);
+		object_->move(offset);
+		background_->move(offset);
+		first_object_->move(offset);
+		second_object_->move(offset);
 	}
 	
 	auto BoxConstRatioCenter::set_size(sf::Vector2f size) -> void {
@@ -105,17 +105,25 @@ namespace ie {
 			second_object_->resize(objects_size, second_position);
 	}
 	
-	auto BoxConstRatioCenter::update_interactions(sf::Vector2f mouse_position) -> bool {
-		if(object_->in_area(mouse_position)) {
-			return object_->update_interactions(mouse_position);
-		}
-		if(render_first_ && first_object_->in_area(mouse_position)) {
-			return first_object_->update_interactions(mouse_position);
-		}
-		if(render_second_ && second_object_->in_area(mouse_position)) {
-			return second_object_->update_interactions(mouse_position);
-		}
-		return background_->update_interactions(mouse_position);
+	auto BoxConstRatioCenter::handle_event(Event event) -> bool {
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			if(object_->in_area(sf::Vector2f{pointer.position})) {
+				return object_->handle_event(event);
+			}
+			if(render_first_ && first_object_->in_area(sf::Vector2f{pointer.position})) {
+				return first_object_->handle_event(event);
+			}
+			if(render_second_ && second_object_->in_area(sf::Vector2f{pointer.position})) {
+				return second_object_->handle_event(event);
+			}
+			return background_->handle_event(event);
+		}).some_or_else([=] {
+			auto object_updated{object_->handle_event(event)};
+			auto first_updated{render_first_ && first_object_->handle_event(event)};
+			auto second_updated{render_second_ && second_object_->handle_event(event)};
+			auto background_updated{background_->handle_event(event)};
+			return object_updated || first_updated || second_updated || background_updated;
+		});
 	}
 	
 	auto BoxConstRatioCenter::get_min_size() const -> sf::Vector2f {

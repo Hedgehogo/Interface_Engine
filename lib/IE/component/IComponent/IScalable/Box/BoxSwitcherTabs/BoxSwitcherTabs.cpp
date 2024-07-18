@@ -1,8 +1,7 @@
 #include "BoxSwitcherTabs.hpp"
 
 #include "../BoxSwitch/BoxSwitch.hpp"
-#include "IE/event/KeyHandler/KeyHandler.hpp"
-#include "IE/interaction/IInteraction/BasicOneKeyInteraction/BasicOneKeyInteraction.hpp"
+#include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
 #include "IE/component/IComponent/IScalable/Box/BoxSwitcherTabs/SwitcherTabsAction/SwitcherTabsAction.hpp"
 
 namespace ie {
@@ -22,9 +21,10 @@ namespace ie {
 	
 	BoxSwitcherTabs::BoxSwitcherTabs(Make&& make, InitInfo init_info) :
 		Box(make.min_size),
-		interactive_(make_box_ptr<BasicOneKeyInteraction<BoxSwitcherTabs&>::Make>(
-			make_box_ptr<SwitcherTabsAction::Make>(make.value.make(SInitInfo{init_info})), make.key
-		), init_info, *this),
+		interaction_(
+			{make_box_ptr<SwitcherTabsAction::Make>(make.value.make(SInitInfo{init_info})), make.key},
+			{init_info, *this}
+		),
 		objects_(map_make(std::move(make.objects), init_info)),
 		is_horizontal_(make.is_horizontal),
 		value_(make.value.make(SInitInfo{init_info})) {
@@ -52,12 +52,19 @@ namespace ie {
 	}
 	
 	auto BoxSwitcherTabs::update() -> void {
-		interactive_.update();
+		interaction_.update();
 	}
 	
-	auto BoxSwitcherTabs::update_interactions(sf::Vector2f) -> bool {
-		interactive_.update_interactions();
-		return true;
+	auto BoxSwitcherTabs::handle_event(Event event) -> bool {
+		return interaction_.handle_event(event) || [this, event] {
+			auto updated{false};
+			for(auto& object: objects_) {
+				if(object->handle_event(event)) {
+					updated = true;
+				}
+			}
+			return updated;
+		}();
 	}
 	
 	auto BoxSwitcherTabs::get_array_size() const -> size_t {

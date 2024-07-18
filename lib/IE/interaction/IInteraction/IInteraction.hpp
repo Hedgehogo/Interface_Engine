@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../IAction/BasicKeyAction/BasicEmptyAction/BasicEmptyAction.hpp"
-#include "../IAction/BasicKeyAction/BasicFnKeyAction/BasicFnKeyAction.hpp"
+#include "../IAction/IBasicTouchAction/IBasicTouchAction.hpp"
+#include "../IAction/IBasicActivityAction/BasicEmptyAction/BasicEmptyAction.hpp"
 #include "../BasicActionInitInfo/BasicActionInitInfo.hpp"
 #include "IE/initialization/make/make.hpp"
 #include <box-ptr/BoxPtr.hpp>
@@ -19,15 +19,17 @@ namespace ie {
 			Lowest,
 		};
 		
-		virtual auto is_blocked() const -> bool;
+		virtual auto is_prioritised() const -> bool;
 		
 		virtual auto get_priority() const -> Priority;
 		
-		virtual auto start(sf::Vector2i mouse_position) -> void = 0;
+		virtual auto start() -> void = 0;
 		
-		virtual auto update(sf::Vector2i mouse_position) -> void = 0;
+		virtual auto handle_event(Event event) -> bool = 0;
 		
-		virtual auto finish(sf::Vector2i mouse_position) -> void = 0;
+		virtual auto update() -> void = 0;
+		
+		virtual auto finish() -> void = 0;
 		
 		bool operator<(IInteraction& interaction) const;
 		

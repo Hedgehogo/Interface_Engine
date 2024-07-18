@@ -8,10 +8,10 @@ namespace ie {
 	}
 	
 	auto WindowResizer::update(std::vector<Event> const& events, EventHandler& event_handler) -> bool {
-		orl::Option<event_system::Touch> maybe_touch;
+		orl::Option<event_system::Pointer> maybe_touch;
 		for(auto const& event: events) {
-			for(auto const touch_pressed: event.touch_pressed(event_handler.get_key(key_))) {
-				maybe_touch = touch_pressed;
+			for(auto const touch: event.touch(event_handler.get_key(key_))) {
+				maybe_touch = touch;
 			}
 		}
 		

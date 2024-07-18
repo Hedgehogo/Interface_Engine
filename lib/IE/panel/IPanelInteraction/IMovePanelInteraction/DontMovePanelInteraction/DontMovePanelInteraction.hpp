@@ -15,15 +15,17 @@ namespace ie {
 		
 		DontMovePanelInteraction() = default;
 		
-		auto get_at_start() -> bool override;
+		auto set_panel(Panel&) -> void override;
 		
 		auto move(sf::Vector2i) -> void override;
 		
-		auto start(sf::Vector2i) -> void override;
+		auto start() -> void override;
 		
-		auto update(sf::Vector2i) -> void override;
+		auto handle_event(Event event) -> bool override;
 		
-		auto set_panel(Panel&) -> void override;
+		auto update() -> void override;
+		
+		auto finish() -> void override;
 	};
 }
 

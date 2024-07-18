@@ -21,6 +21,8 @@ namespace ie {
 		auto is_independent() -> bool override;
 		
 		auto is_free() -> bool override;
+		
+		auto handle_event(Event event, bool active) -> bool override;
 	};
 }
 

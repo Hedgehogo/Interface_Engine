@@ -16,7 +16,7 @@ TEST(IComponent, BoxConstRatioCenter) {
 		},
 		data.make_init_info()
 	};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 3);
 	ASSERT_EQ(&data.draw_manager.get(2), &box_const_ratio_center);
@@ -30,7 +30,7 @@ TEST(IComponent, BoxConstRatioCenter) {
 	ASSERT_EQ(box_const_ratio_center.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_const_ratio_center.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_const_ratio_center.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_const_ratio_center.update_interactions({}), true);
+	ASSERT_EQ(box_const_ratio_center.handle_event(ie::Event::Pointer({})), true);
 	
 	box_const_ratio_center.set_size({5, 11});
 	ASSERT_EQ(box_const_ratio_center.get_size(), (sf::Vector2f{5, 11}));

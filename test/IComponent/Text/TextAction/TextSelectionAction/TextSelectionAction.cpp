@@ -31,27 +31,27 @@ TEST(IComponent_Text, TextSelectionAction) {
 	
 	text.resize({100, 100}, {0,  0});
 	
-	selection_action.update({2, 5}, true);
-	selection_action.update({7, 5}, true);
+	selection_action.update({{{2, 5}, true}});
+	selection_action.update({{{7, 5}, true}});
 	
 	ASSERT_EQ(text.get_selection_text().getSize(), 1);
 	
-	selection_action.update({14, 5}, true);
+	selection_action.update({{{14, 5}, true}});
 
 	ASSERT_EQ(text.get_selection_text().getSize(), 2);
 	
-	selection_action.update({14, 30}, true);
+	selection_action.update({{{14, 30}, true}});
 	
 	ASSERT_EQ(text.get_selection_text().getSize(), 6);
 	
-	selection_action.update({14, 30}, false);
-	selection_action.update({14, 30}, true);
-	selection_action.update({14, 30}, false);
+	selection_action.update({{{14, 30}, false}});
+	selection_action.update({{{14, 30}, true}});
+	selection_action.update({{{14, 30}, false}});
 	
 	ASSERT_EQ(text.get_selection_text().getSize(), 0);
 	
-	selection_action.update({90, 5}, true);
-	selection_action.update({90, 30}, true);
+	selection_action.update({{{90, 5}, true}});
+	selection_action.update({{{90, 30}, true}});
 	
 	ASSERT_EQ(text.get_selection_text().getSize(), 3);
 }

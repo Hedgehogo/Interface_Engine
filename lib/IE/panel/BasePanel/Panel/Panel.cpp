@@ -74,24 +74,20 @@ namespace ie {
 	
 	auto Panel::update() -> void {
 		panel_manager_.update();
-		if(old_displayed_ != displayed_) {
-			if(displayed_) {
-				interaction_manager_->add_interaction(*hide_interaction_);
-				interaction_manager_->add_interaction(*move_interaction_);
-			} else {
-				interaction_manager_->delete_interaction(*hide_interaction_);
-				interaction_manager_->delete_interaction(*move_interaction_);
-			}
-		}
+		hide_interaction_->update();
+		move_interaction_->update();
 		BasePanel::update();
 	}
 	
-	auto Panel::update_interactions(sf::Vector2f mouse_position, bool active) -> bool {
+	auto Panel::handle_event(Event event, bool active) -> bool {
 		displayed_ = true;
 		this->active_ = active;
-		if(panel_manager_.update_interactions(mouse_position, active))
-			return true;
-		return BasePanel::update_interactions(mouse_position);
+		auto updated{hide_interaction_->handle_event(event) || move_interaction_->handle_event(event)};
+		return
+			panel_manager_.handle_event(event, active) ||
+			event.pointer().map([=](event_system::Pointer pointer) {
+				return in_panel(sf::Vector2f{pointer.position});
+			}).some_or(true) && object_->handle_event(event) || updated;
 	}
 }
 

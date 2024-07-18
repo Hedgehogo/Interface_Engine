@@ -6,7 +6,7 @@ TEST(IComponent, RoundedRectangle) {
 	InitInfoData data{{100, 100}};
 	
 	ie::RoundedRectangle rounded_rectangle{{sf::Color::Red, 2}, data.make_init_info()};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(&data.draw_manager.get(0), &rounded_rectangle);
@@ -21,7 +21,7 @@ TEST(IComponent, RoundedRectangle) {
 	ASSERT_EQ(rounded_rectangle.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(rounded_rectangle.get_position(), sf::Vector2f{});
 	ASSERT_EQ(rounded_rectangle.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(rounded_rectangle.update_interactions({}), true);
+	ASSERT_EQ(rounded_rectangle.handle_event(ie::Event::Pointer({})), true);
 	
 	rounded_rectangle.set_size({5, 11});
 	ASSERT_EQ(rounded_rectangle.get_size(), (sf::Vector2f{5, 11}));

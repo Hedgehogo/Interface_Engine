@@ -29,7 +29,7 @@ namespace ie {
 		
 		virtual auto get_lines() const -> std::vector<BoxPtr<BaseLine> > const&;
 		
-		virtual auto move(sf::Vector2f position) -> void = 0;
+		virtual auto move(sf::Vector2f offset) -> void = 0;
 		
 		virtual auto set_position(sf::Vector2f position) -> void = 0;
 		

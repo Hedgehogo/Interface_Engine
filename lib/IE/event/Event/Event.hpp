@@ -3,7 +3,7 @@
 #include <variant>
 #include <SFML/Window/Event.hpp>
 #include <option_result/option_result.hpp>
-#include "IE/event/KeyHandler/KeyHandler.hpp"
+#include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
 
 namespace ie {
 	namespace event_system {
@@ -18,9 +18,15 @@ namespace ie {
 			float delta;
 		};
 		
-		struct Touch {
+		struct Pointer {
 			size_t id;
 			sf::Vector2i position;
+			
+			Pointer(size_t id, sf::Vector2i position = {});
+			
+			Pointer(sf::Vector2i position = {});;
+			
+			auto is_mouse() -> bool;
 		};
 		
 		struct JoystickConnect {
@@ -46,32 +52,48 @@ namespace ie {
 				GainedFocus,
 				TextEntered,
 				Scroll,
-				Touch,
+				Pointer,
 				JoystickConnect,
 				JoystickDisconnect,
 				JoystickMove,
 				JoystickButton,
 			};
 			
-			static auto Closed(std::monostate) -> Event;
+			using Data = std::variant<
+				event_system::Empty,           //!< The window requested to be closed
+				event_system::Empty,           //!< The window lost the focus
+				event_system::Empty,           //!< The window gained the focus
+				event_system::TextEntered,     //!< A character was entered
+				event_system::Scroll,          //!< The mouse wheel was scrolled
+				event_system::Pointer,         //!< A pointer exists
+				event_system::JoystickConnect, //!< A joystick was connected
+				event_system::JoystickConnect, //!< A joystick was disconnected
+				event_system::JoystickMove,    //!< The joystick moved along an axis
+				event_system::JoystickButton   //!< A joystick button was pressed
+			>;
 			
-			static auto LostFocus(std::monostate) -> Event;
+			template<Type Type_>
+			using Alternative = std::variant_alternative_t<static_cast<size_t>(Type_), Data>;
 			
-			static auto GainedFocus(std::monostate) -> Event;
+			static auto Closed(event_system::Empty) -> Event;
 			
-			static auto TextEntered(char32_t unicode) -> Event;
+			static auto LostFocus(event_system::Empty) -> Event;
 			
-			static auto Scroll(size_t wheel_id, float delta) -> Event;
+			static auto GainedFocus(event_system::Empty) -> Event;
 			
-			static auto Touch(size_t id, sf::Vector2i position) -> Event;
+			static auto TextEntered(event_system::TextEntered value) -> Event;
 			
-			static auto JoystickConnect(size_t id) -> Event;
+			static auto Scroll(event_system::Scroll value) -> Event;
 			
-			static auto JoystickDisconnect(size_t id) -> Event;
+			static auto Pointer(event_system::Pointer value) -> Event;
 			
-			static auto JoystickMove(size_t id, size_t axis_id, float position) -> Event;
+			static auto JoystickConnect(event_system::JoystickConnect value) -> Event;
 			
-			static auto JoystickButton(size_t id, size_t button_id) -> Event;
+			static auto JoystickDisconnect(event_system::JoystickConnect value) -> Event;
+			
+			static auto JoystickMove(event_system::JoystickMove value) -> Event;
+			
+			static auto JoystickButton(event_system::JoystickButton value) -> Event;
 			
 			auto closed() const -> orl::Option<event_system::Empty>;
 			
@@ -83,7 +105,7 @@ namespace ie {
 			
 			auto scroll() const -> orl::Option<event_system::Scroll>;
 			
-			auto touch() const -> orl::Option<event_system::Touch>;
+			auto pointer() const -> orl::Option<event_system::Pointer>;
 			
 			auto joystick_connect() const -> orl::Option<event_system::JoystickConnect>;
 			
@@ -93,26 +115,16 @@ namespace ie {
 			
 			auto joystick_button() const -> orl::Option<event_system::JoystickButton>;
 			
-			auto touch_pressed(bool pressed) const -> orl::Option<event_system::Touch>;
+			template<Type Type_>
+			auto alternative() const -> orl::Option<Alternative<Type_> >;
+			
+			auto touch(bool pressed) const -> orl::Option<event_system::Pointer>;
 			
 			auto type() const -> Type;
 			
 			auto operator<(Event const& event) -> bool;
 		
 		private:
-			using Data = std::variant<
-				event_system::Empty,           //!< The window requested to be closed
-				event_system::Empty,           //!< The window lost the focus
-				event_system::Empty,           //!< The window gained the focus
-				event_system::TextEntered,     //!< A character was entered
-				event_system::Scroll,          //!< The mouse wheel was scrolled
-				event_system::Touch,           //!< A touch moved
-				event_system::JoystickConnect, //!< A joystick was connected
-				event_system::JoystickConnect, //!< A joystick was disconnected
-				event_system::JoystickMove,    //!< The joystick moved along an axis
-				event_system::JoystickButton   //!< A joystick button was pressed
-			>;
-			
 			Event(Data data);
 			
 			Data data_;
@@ -121,3 +133,5 @@ namespace ie {
 	
 	using event_system::Event;
 }
+
+#include "Event.inl"

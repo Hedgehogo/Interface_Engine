@@ -38,18 +38,31 @@ namespace ie {
 		}
 	}
 	
-	auto BoxBorderHorizontal::update_interactions(sf::Vector2f mouse_position) -> bool {
-		auto position{sf::Vector2f{mouse_position.x - layout_.position.x, mouse_position.y - layout_.position.y}};
-		if(position.x < 0.0f || position.x > layout_.size.x || position.y < 0.0f || position.y > layout_.size.y) {
-			return false;
-		}
-		position.x = position.x / layout_.size.x;
-		
-		auto object{size_t{1}};
-		while(position.x > bounds_[object]) {
-			++object;
-		}
-		return objects_[object - 1]->update_interactions(mouse_position);
+	auto BoxBorderHorizontal::handle_event(Event event) -> bool {
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			auto position{sf::Vector2f{
+				pointer.position.x - layout_.position.x,
+				pointer.position.y - layout_.position.y
+			}};
+			if(position.x < 0.0f || position.x > layout_.size.x || position.y < 0.0f || position.y > layout_.size.y) {
+				return false;
+			}
+			position.x = position.x / layout_.size.x;
+			
+			auto object{size_t{1}};
+			while(position.x > bounds_[object]) {
+				++object;
+			}
+			return objects_[object - 1]->handle_event(event);
+		}).some_or_else([=] {
+			bool updated{false};
+			for(auto& object: objects_) {
+				if(object->handle_event(event)) {
+					updated = true;
+				}
+			}
+			return updated;
+		});
 	}
 	
 	auto BoxBorderHorizontal::get_min_size() const -> sf::Vector2f {

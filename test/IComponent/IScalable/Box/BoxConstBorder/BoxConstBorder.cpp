@@ -16,7 +16,7 @@ TEST(IComponent, BoxConstBorder) {
 		},
 		data.make_init_info()
 	};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 2);
 	ASSERT_EQ(data.update_manager.size(), 0);
@@ -29,7 +29,7 @@ TEST(IComponent, BoxConstBorder) {
 	ASSERT_EQ(box_const_border.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_const_border.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_const_border.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_const_border.update_interactions({}), true);
+	ASSERT_EQ(box_const_border.handle_event(ie::Event::Pointer({})), true);
 	
 	box_const_border.set_size({5, 11});
 	ASSERT_EQ(box_const_border.get_size(), (sf::Vector2f{5, 11}));

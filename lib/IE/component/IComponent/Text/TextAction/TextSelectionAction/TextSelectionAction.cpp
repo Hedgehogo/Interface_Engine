@@ -9,31 +9,8 @@ namespace ie {
 		return new TextSelectionAction{std::move(*this), init_info};
 	}
 	
-	TextSelectionAction::TextSelectionAction(Make&&, BasicActionInitInfo<Text&> init_info) : text_(&init_info.additional), start_(), end_() {
-	}
-	
-	auto TextSelectionAction::start_pressed() -> void {
-		text_->set_selection_start(start_ = text_->get_character(sf::Vector2f{mouse_position_}));
-	}
-	
-	auto TextSelectionAction::stop_pressed() -> void {
-	}
-	
-	auto TextSelectionAction::while_pressed() -> void {
-		text_->set_selection_end(end_ = text_->get_character(sf::Vector2f{mouse_position_}));
-		for(auto [start_value, end_value]: orl::clone(start_) && orl::clone(end_)) {
-			if(start_value > end_value) {
-				std::swap(start_value, end_value);
-			}
-			
-			for(auto iterator = start_value; iterator != end_value; ++iterator) {
-				(*iterator)->set_selection(true);
-				(*iterator)->set_active(true);
-			}
-		}
-	}
-	
-	auto TextSelectionAction::while_not_pressed() -> void {
+	TextSelectionAction::TextSelectionAction(Make&&, BasicActionInitInfo<Text&> init_info) :
+		active(false), text_(&init_info.additional), start_(), end_() {
 	}
 	
 	auto TextSelectionAction::get_start() -> orl::Option<std::vector<BaseCharacter*>::iterator> {
@@ -44,8 +21,9 @@ namespace ie {
 		return end_;
 	}
 	
-	auto TextSelectionAction::update(sf::Vector2i mouse_position, bool press) -> void {
-		for(auto [start_value, end_value]: press && orl::clone(start_) && orl::clone(end_)) {
+	auto TextSelectionAction::update(orl::Option<Touch> touch) -> void {
+		auto const pressing{Touch::pressing(touch)};
+		for(auto [start_value, end_value]: pressing.is_some() && orl::clone(start_) && orl::clone(end_)) {
 			if(start_value > end_value) {
 				std::swap(start_value, end_value);
 			}
@@ -54,7 +32,24 @@ namespace ie {
 				(*iterator)->set_selection(false);
 			}
 		}
-		BasicBaseKeyAction<Text&>::update(mouse_position, press);
+		
+		for(auto const point_position: pressing) {
+			if(!active) {
+				text_->set_selection_start(start_ = text_->get_character(sf::Vector2f{point_position}));
+			}
+			text_->set_selection_end(end_ = text_->get_character(sf::Vector2f{point_position}));
+			for(auto [start_value, end_value]: orl::clone(start_) && orl::clone(end_)) {
+				if(start_value > end_value) {
+					std::swap(start_value, end_value);
+				}
+				
+				for(auto iterator = start_value; iterator != end_value; ++iterator) {
+					(*iterator)->set_selection(true);
+					(*iterator)->set_active(true);
+				}
+			}
+		}
+		active = pressing.is_some();
 	}
 }
 

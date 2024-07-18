@@ -1,15 +1,16 @@
 #pragma once
 
-#include "IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp"
+#include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
+#include "IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class BaseCharacter;
 	class Text;
 	
-	class TextSelectionAction : public BasicBaseKeyAction<Text&> {
+	class TextSelectionAction : public virtual IBasicTouchAction<Text&> {
 	public:
-		struct Make : public BasicBaseKeyAction<Text&>::Make {
+		struct Make : public virtual IBasicTouchAction<Text&>::Make {
 			auto make(BasicActionInitInfo<Text&> init_info) -> TextSelectionAction* override;
 		};
 		
@@ -19,17 +20,10 @@ namespace ie {
 		
 		auto get_end() -> orl::Option<std::vector<BaseCharacter*>::iterator>;
 		
-		auto update(sf::Vector2i mouse_position, bool press) -> void override;
+		auto update(orl::Option<Touch> touch) -> void override;
 		
 	protected:
-		auto start_pressed() -> void override;
-		
-		auto stop_pressed() -> void override;
-		
-		auto while_pressed() -> void override;
-		
-		auto while_not_pressed() -> void override;
-		
+		bool active;
 		Text* text_;
 		orl::Option<std::vector<BaseCharacter*>::iterator> start_, end_;
 	};

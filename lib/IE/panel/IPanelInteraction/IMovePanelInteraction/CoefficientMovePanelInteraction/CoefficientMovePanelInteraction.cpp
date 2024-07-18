@@ -11,21 +11,48 @@ namespace ie {
 	}
 	
 	CoefficientMovePanelInteraction::CoefficientMovePanelInteraction(Make&& make, PanelActionInitInfo init_info) :
-		BasePanelInteraction(init_info), coefficient_(make.coefficient), offset_(make.offset), at_start_(make.at_start) {
+		panel_(&init_info.additional),
+		panel_manager_(&init_info.panel_manager),
+		event_handler_(&init_info.event_handler),
+		tracker_(),
+		active_(false),
+		coefficient_(make.coefficient),
+		offset_(make.offset),
+		at_start_(make.at_start) {
 	}
 	
-	auto CoefficientMovePanelInteraction::get_at_start() -> bool {
-		return at_start_;
+	auto CoefficientMovePanelInteraction::set_panel(Panel& panel) -> void {
+		this->panel_ = &panel;
 	}
 	
-	auto CoefficientMovePanelInteraction::move(sf::Vector2i mouse_position) -> void {
+	auto CoefficientMovePanelInteraction::move(sf::Vector2i offset) -> void {
 		auto panel_size{panel_->get_area_size()};
-		auto point_position{sf::Vector2f{mouse_position}};
+		auto point_position{sf::Vector2f{offset}};
 		auto position{sf::Vector2f{
 			point_position.x - panel_size.x * coefficient_.x + offset_.x,
 			point_position.y - panel_size.y * coefficient_.y + offset_.y,
 		}};
 		panel_->set_position(position);
+	}
+	
+	auto CoefficientMovePanelInteraction::start() -> void {
+	}
+	
+	auto CoefficientMovePanelInteraction::handle_event(Event event) -> bool {
+		return tracker_.collect(*event_handler_, event);
+	}
+	
+	auto CoefficientMovePanelInteraction::update() -> void {
+		active_ = tracker_.reset().map([this](event_system::Pointer pointer) {
+			if(!(at_start_ && active_)) {
+				move(pointer.position);
+			}
+			return true;
+		}).some_or(false);
+	}
+	
+	auto CoefficientMovePanelInteraction::finish() -> void {
+		active_ = false;
 	}
 }
 

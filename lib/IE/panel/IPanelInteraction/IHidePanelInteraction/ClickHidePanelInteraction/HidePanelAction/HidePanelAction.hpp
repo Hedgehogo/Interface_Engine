@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../../../ClickPanelInteraction/PanelAction/PanelAction.hpp"
 
@@ -16,16 +17,11 @@ namespace ie {
 		
 		HidePanelAction(Make&& make, PanelActionInitInfo init_info);
 		
+		auto update(orl::Option<Touch> touch) -> void override;
+		
 	protected:
-		auto start_pressed() -> void override;
-		
-		auto while_pressed() -> void override;
-		
-		auto stop_pressed() -> void override;
-		
-		auto while_not_pressed() -> void override;
-		
-		bool only_on_parent;
+		orl::Option<sf::Vector2f> pressing;
+		bool only_on_parent_;
 	};
 }
 

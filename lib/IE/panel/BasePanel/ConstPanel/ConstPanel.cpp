@@ -30,6 +30,14 @@ namespace ie {
 	auto ConstPanel::is_free() -> bool {
 		return true;
 	}
+	
+	auto ConstPanel::handle_event(Event event, bool active) -> bool {
+		displayed_ = true;
+		this->active_ = active;
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			return in_panel(sf::Vector2f{pointer.position});
+		}).some_or(true) && object_->handle_event(event);
+	}
 }
 
 auto ieml::Decode<char, ie::ConstPanel::Make>::decode(ieml::Node const& node) -> orl::Option<ie::ConstPanel::Make> {

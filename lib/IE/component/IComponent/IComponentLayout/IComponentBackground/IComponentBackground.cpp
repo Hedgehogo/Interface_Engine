@@ -5,8 +5,8 @@ namespace ie {
 		IComponentLayout::set_position(position);
 	}
 	
-	auto IComponentBackground::move(sf::Vector2f position) -> void {
-		IComponentLayout::move(position);
+	auto IComponentBackground::move(sf::Vector2f offset) -> void {
+		IComponentLayout::move(offset);
 	}
 	
 	auto IComponentBackground::set_size(sf::Vector2f size) -> void {

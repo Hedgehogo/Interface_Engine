@@ -21,8 +21,8 @@ namespace ie {
 		add_names<ISReadable<T> >(std::string("I") + name);
 		add_names<typename ISReadable<T>::Make >(std::string("I") + name);
 		
-		add_type_make<KeyAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
-		add_type_make<KeyAction, AddSValueAction<T> >(std::string("Add") + name + std::string("Action"));
+		add_type_make<IActivityAction, SetSValueAction<T> >(std::string("Set") + name + std::string("Action"));
+		add_type_make<IActivityAction, AddSValueAction<T> >(std::string("Add") + name + std::string("Action"));
 		add_type_with_make<SReadable<bool>, SEqual<T> >(std::string("(=)") + name);
 		add_type_with_make<SReadable<bool>, SNotEqual<T> >(std::string("(!=)") + name);
 		
@@ -130,23 +130,24 @@ namespace ie {
 			add_type_make_named<BaseTextResizer, TextResizer>();
 			add_names<BaseTextResizer::Make>("BaseTextResizer");
 			
-			add_type_make<KeyAction, OpenUrlAction>("OpenUrlAction", "OpenUrlA");
-			add_type_make<KeyAction, CloseWindowAction>("CloseWindowAction", "CloseWindowA");
-			add_type_make<KeyAction, SwitcherAction>("SwitcherAction", "SwitcherA");
-			//add_type_make_named<KeyAction, SetSIntAction>("SetSIntA");
-			//add_type_make_named<KeyAction, SetSFloatAction>("SetSFloatA");
-			add_names<KeyAction::Make>("KeyAction");
+			add_type_make<IActivityAction, OpenUrlAction>("OpenUrlAction", "OpenUrlA");
+			add_type_make<IActivityAction, CloseWindowAction>("CloseWindowAction", "CloseWindowA");
+			add_type_make<IActivityAction, SwitcherAction>("SwitcherAction", "SwitcherA");
+			add_names<IActivityAction::Make>("IActivityAction");
+			add_names<ITouchAction::Make>("ITouchAction");
 			
-			add_type_make_named<BasicKeyAction<Text&>, TextCopyAction>("TextCopyA");
-			add_type_make_named<BasicKeyAction<Text&>, TextSelectionAction>("TextSelectionA");
-			add_names<BasicKeyAction<Text&>::Make>("TextKeyAction");
+			add_type_make_named<IBasicTouchAction<Text&>, TextSelectionAction>("TextSelectionA");
+			add_names<IBasicTouchAction<Text&>::Make>("ITextTouchAction");
+			add_type_make_named<IBasicActivityAction<Text&>, TextCopyAction>("TextCopyA");
+			add_names<IBasicActivityAction<Text&>::Make>("ITextActivityAction");
 			
 			add_type_make_named<BaseSwitchTabsAction, SwitchTabsAction>("SwitchTabsA");
 			add_type_make_named<BaseSwitchTabsAction, WhileSwitchTabsAction>("WhileSwitchTabsA");
 			add_names<BaseSwitchTabsAction::Make>("BaseSwitchTabsAction");
 			
+			add_type_make_named<IBaseInteraction, AnyPressingInteraction>("AnyPressingI");
 			add_type_make_named<IBaseInteraction, HotkeyInteraction>("HotkeyI");
-			add_type_make_named<IBaseInteraction, OneKeyInteraction>("OneKeyI");
+			add_type_make_named<IBaseInteraction, TouchInteraction>("TouchI");
 			add_type_make_named<IBaseInteraction, KeysInteraction>("KeysI");
 			add_type_make_named<IBaseInteraction, EmptyInteraction>("EmptyI");
 			add_names<IBaseInteraction::Make>("IBaseInteraction");

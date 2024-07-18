@@ -27,21 +27,21 @@ namespace ie {
 		set_position(position);
 	}
 	
-	auto BaseCharacter::in(sf::Vector2f mouse_position) -> bool {
+	auto BaseCharacter::in(sf::Vector2f point_position) -> bool {
 		return
-			position_.x < mouse_position.x && position_.x + get_advance() > mouse_position.x &&
-			position_.y < mouse_position.y && position_.y + get_height() > mouse_position.y;
+			position_.x < point_position.x && position_.x + get_advance() > point_position.x &&
+			position_.y < point_position.y && position_.y + get_height() > point_position.y;
 	}
 	
 	auto BaseCharacter::get_position() const -> sf::Vector2f {
 		return position_;
 	}
 	
-	auto BaseCharacter::move(sf::Vector2f position) -> void {
-		if(position != sf::Vector2f{}) {
+	auto BaseCharacter::move(sf::Vector2f offset) -> void {
+		if(offset != sf::Vector2f{}) {
 			rerender_ = true;
 		}
-		this->position_ += position;
+		this->position_ += offset;
 	}
 	
 	auto BaseCharacter::is_enter() -> bool {

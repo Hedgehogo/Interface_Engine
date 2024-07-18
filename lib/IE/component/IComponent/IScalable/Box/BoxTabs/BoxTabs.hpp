@@ -23,7 +23,7 @@ namespace ie {
 		
 		auto set_position(sf::Vector2f position) -> void override;
 		
-		auto move(sf::Vector2f position) -> void override;
+		auto move(sf::Vector2f offset) -> void override;
 		
 		auto set_size(sf::Vector2f size) -> void override;
 		
@@ -31,7 +31,7 @@ namespace ie {
 		
 		auto draw() -> void override;
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 		auto get_array_size() const -> size_t override;
 		

@@ -1,10 +1,11 @@
 #pragma once
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
+#include "IE/event/PointerTracker/PointerTracker.hpp"
 #include "../IMovePanelInteraction.hpp"
 
 namespace ie {
-	class SideMovePanelInteraction : public BasePanelInteraction, public virtual IMovePanelInteraction {
+	class SideMovePanelInteraction : public virtual IMovePanelInteraction {
 	public:
 		struct Make : public virtual IMovePanelInteraction::Make {
 			float coefficient;
@@ -19,11 +20,24 @@ namespace ie {
 		
 		SideMovePanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		auto get_at_start() -> bool override;
+		auto set_panel(Panel& panel) -> void override;
 		
-		auto move(sf::Vector2i mouse_position) -> void override;
+		auto move(sf::Vector2i offset) -> void override;
 		
+		auto start() -> void override;
+		
+		auto handle_event(Event event) -> bool override;
+		
+		auto update() -> void override;
+		
+		auto finish() -> void override;
+	
 	protected:
+		Panel* panel_;
+		IPanelManager* panel_manager_;
+		EventHandler* event_handler_;
+		PointerTracker tracker_;
+		bool active_;
 		float coefficient_;
 		float offset_;
 		bool horizontal_;

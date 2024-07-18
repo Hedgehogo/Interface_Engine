@@ -12,17 +12,10 @@ namespace ie {
 		BaseSwitchTabsAction(init_info), index_(make.index), value_(box_->get_value()) {
 	}
 	
-	auto SwitchTabsAction::start_pressed() -> void {
-	}
-	
-	auto SwitchTabsAction::stop_pressed() -> void {
-		value_.set(index_);
-	}
-	
-	auto SwitchTabsAction::while_pressed() -> void {
-	}
-	
-	auto SwitchTabsAction::while_not_pressed() -> void {
+	auto SwitchTabsAction::update(bool active) -> void {
+		if(active) {
+			value_.set(index_);
+		}
 	}
 }
 

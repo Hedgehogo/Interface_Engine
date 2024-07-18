@@ -10,23 +10,24 @@ namespace ie {
 	}
 	
 	HidePanelAction::HidePanelAction(Make&& make, PanelActionInitInfo init_info) :
-		PanelAction(init_info), only_on_parent(make.only_on_parent) {
+		PanelAction(init_info), pressing(), only_on_parent_(make.only_on_parent) {
 	}
 	
-	auto HidePanelAction::start_pressed() -> void {
-	}
-	
-	auto HidePanelAction::while_pressed() -> void {
-	}
-	
-	auto HidePanelAction::stop_pressed() -> void {
-		sf::Vector2f point_position{static_cast<sf::Vector2f>(mouse_position_)};
-		if(only_on_parent ? panel_->get_parent_processed() : !panel_->in_panel(point_position) && !panel_->in_const_panels(point_position) && panel_->is_free()) {
-			panel_manager_->hide_panel(panel_);
-		}
-	}
-	
-	auto HidePanelAction::while_not_pressed() -> void {
+	auto HidePanelAction::update(orl::Option<Touch> touch) -> void {
+		pressing = touch.and_then([](Touch value) -> orl::Option<orl::Option<sf::Vector2f> > {
+			return value.active && orl::Option{sf::Vector2f{value.position}};
+		}).some_or_else([this] {
+			for(auto point_position: pressing) {
+				if(
+					only_on_parent_ ?
+					panel_->get_parent_processed() :
+					!panel_->in_panel(point_position) && !panel_->in_const_panels(point_position) && panel_->is_free()
+					) {
+					panel_manager_->hide_panel(panel_);
+				}
+			}
+			return orl::Option<sf::Vector2f>{};
+		});
 	}
 }
 

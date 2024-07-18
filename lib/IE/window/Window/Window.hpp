@@ -35,7 +35,7 @@ namespace ie {
 		
 		virtual auto re_calculate_min_size() -> void;
 		
-		virtual auto update(std::vector<Event> const& events) -> void;
+		virtual auto update(std::vector<Event>&& events) -> void;
 		
 		auto get_interface() -> Interface&;
 		
@@ -45,8 +45,6 @@ namespace ie {
 		
 		auto events() -> std::vector<Event>;
 		
-		auto handle_event(sf::Event event) -> void;
-	
 	protected:
 		sf::RenderWindow window_;
 		DynBuffer dyn_buffer_;

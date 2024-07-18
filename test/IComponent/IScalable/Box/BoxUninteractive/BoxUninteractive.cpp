@@ -13,7 +13,7 @@ TEST(IComponent, BoxUninteractive) {
 		},
 		data.make_init_info()
 	};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(data.update_manager.size(), 0);
@@ -26,7 +26,7 @@ TEST(IComponent, BoxUninteractive) {
 	ASSERT_EQ(box_uninteractive.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_uninteractive.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_uninteractive.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_uninteractive.update_interactions({}), true);
+	ASSERT_EQ(box_uninteractive.handle_event(ie::Event::Pointer({})), true);
 	
 	box_uninteractive.set_size({5, 11});
 	ASSERT_EQ(box_uninteractive.get_size(), (sf::Vector2f{5, 11}));

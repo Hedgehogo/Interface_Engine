@@ -37,8 +37,8 @@ namespace ie {
 		) {
 	}
 	
-	auto ObjectTextBlock::in(sf::Vector2f mouse_position) -> bool {
-		return object_character_.in(mouse_position);
+	auto ObjectTextBlock::in(sf::Vector2f point_position) -> bool {
+		return object_character_.in(point_position);
 	}
 	
 	auto ObjectTextBlock::get_characters() -> std::vector<BaseCharacter*> {
@@ -48,8 +48,8 @@ namespace ie {
 	auto ObjectTextBlock::update() -> void {
 	}
 	
-	auto ObjectTextBlock::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return object_character_.update_interactions(mouse_position);
+	auto ObjectTextBlock::handle_event(Event event) -> bool {
+		return object_character_.handle_event(event);
 	}
 }
 

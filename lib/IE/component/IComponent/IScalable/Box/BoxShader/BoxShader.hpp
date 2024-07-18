@@ -72,7 +72,7 @@ namespace ie {
 		
 		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 	protected:
 		sf::Shader* shader_;

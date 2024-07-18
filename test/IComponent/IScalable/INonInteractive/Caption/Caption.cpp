@@ -26,7 +26,7 @@ TEST(IComponent, BasicCaption) {
 			font
 		}.set_cut_back(true), data.make_init_info()
 	};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(&data.draw_manager.get(0), &caption);
@@ -41,7 +41,7 @@ TEST(IComponent, BasicCaption) {
 	ASSERT_EQ(caption.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(caption.get_position(), sf::Vector2f{});
 	ASSERT_EQ(caption.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(caption.update_interactions({}), true);
+	ASSERT_EQ(caption.handle_event(ie::Event::Pointer({})), true);
 	
 	caption.set_size({6, 14});
 	ASSERT_EQ(caption.get_size(), (sf::Vector2f{6, 14}));

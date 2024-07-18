@@ -16,7 +16,7 @@ TEST(IComponent, BoxSwitch) {
 			value
 		}, data.make_init_info()
 	};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(&data.draw_manager.get(0), &box_switch);
@@ -30,7 +30,7 @@ TEST(IComponent, BoxSwitch) {
 	ASSERT_EQ(box_switch.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_switch.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_switch.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_switch.update_interactions({}), true);
+	ASSERT_EQ(box_switch.handle_event(ie::Event::Pointer({})), true);
 	
 	box_switch.set_size({5, 11});
 	ASSERT_EQ(box_switch.get_size(), (sf::Vector2f{5, 11}));

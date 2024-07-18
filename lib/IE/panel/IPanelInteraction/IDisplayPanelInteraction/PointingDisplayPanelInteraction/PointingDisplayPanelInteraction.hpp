@@ -2,10 +2,9 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "../IDisplayPanelInteraction.hpp"
-#include "../../BasePanelInteraction/BasePanelInteraction.hpp"
 
 namespace ie {
-	class PointingDisplayPanelInteraction : public BasePanelInteraction, public virtual IDisplayPanelInteraction {
+	class PointingDisplayPanelInteraction : public virtual IDisplayPanelInteraction {
 	public:
 		struct Make : public virtual IDisplayPanelInteraction::Make {
 			auto make(PanelActionInitInfo init_info) -> PointingDisplayPanelInteraction* override;
@@ -13,11 +12,19 @@ namespace ie {
 		
 		PointingDisplayPanelInteraction(Make&& make, PanelActionInitInfo init_info);
 		
-		auto start(sf::Vector2i mouse_position) -> void override;
+		auto set_panel(Panel& panel) -> void override;
 		
-		auto update(sf::Vector2i mouse_position) -> void override;
+		auto start() -> void override;
 		
-		auto finish(sf::Vector2i mouse_position) -> void override;
+		auto handle_event(Event event) -> bool override;
+		
+		auto update() -> void override;
+		
+		auto finish() -> void override;
+		
+	protected:
+		Panel* panel_;
+		IPanelManager* panel_manager_;
 	};
 }
 

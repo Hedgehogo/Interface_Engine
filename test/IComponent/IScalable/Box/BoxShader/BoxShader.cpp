@@ -17,7 +17,7 @@ TEST(IComponent, BoxShader) {
 		},
 		data.make_init_info()
 	};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(&data.draw_manager.get(0), &box_shader);
@@ -31,7 +31,7 @@ TEST(IComponent, BoxShader) {
 	ASSERT_EQ(box_shader.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_shader.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_shader.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_shader.update_interactions({}), true);
+	ASSERT_EQ(box_shader.handle_event(ie::Event::Pointer({})), true);
 	
 	box_shader.set_size({5, 11});
 	ASSERT_EQ(box_shader.get_size(), (sf::Vector2f{5, 11}));

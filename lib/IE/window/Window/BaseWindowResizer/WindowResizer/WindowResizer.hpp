@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../BaseWindowResizer.hpp"
-#include "IE/event/KeyHandler/KeyHandler.hpp"
+#include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
 #include <variant>
 
 namespace ie {
@@ -16,7 +16,6 @@ namespace ie {
 		auto update(std::vector<Event> const& events, EventHandler& event_handler) -> bool override;
 	
 	protected:
-		
 		int internal_border_size_;
 		int external_border_size_;
 		Key key_;

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include <IE/component/IComponent/Text/BaseTextBlock/InteractiveTextBlock/InteractiveTextBlock.hpp>
 #include <IComponent/_InitInfoData/InitInfoData.hpp>
 #include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
+#include <IE/component/IComponent/Text/BaseTextBlock/InteractiveTextBlock/InteractiveTextBlock.hpp>
 
 TEST(IComponent_Text, InteractiveTextBlock) {
 	sf::Font font{};
@@ -35,5 +35,5 @@ TEST(IComponent_Text, InteractiveTextBlock) {
 	
 	ASSERT_FALSE(interactive_text_block.in({50, 50}));
 	ASSERT_TRUE(interactive_text_block.in({1, -1}));
-	ASSERT_TRUE(interactive_text_block.update_interactions({0, 0}));
+	ASSERT_FALSE(interactive_text_block.handle_event(ie::Event::Pointer({})));
 }

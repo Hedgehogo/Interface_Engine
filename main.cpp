@@ -30,8 +30,6 @@ private:
 auto main() -> int {
 	ie::init();
 	
-	auto font{sf::Font{}};
-	font.loadFromFile("../../example-resources/segoeui.ttf");
 	auto window{
 		ie::make_window(
 			"../../example-resources/test",

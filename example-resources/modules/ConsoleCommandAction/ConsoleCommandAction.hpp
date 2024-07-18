@@ -1,15 +1,15 @@
 #pragma once
 
 #include <string>
-#include <IE/interaction/IAction/BasicKeyAction/BasicBaseKeyAction/BasicBaseKeyAction.hpp>
+#include <IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp>
 #include <IE/ieml/shortcuts/shortcuts.hpp>
 
 namespace ie {
-	class ConsoleCommandAction : public BaseKeyAction {
+	class ConsoleCommandAction : public BaseTouchAction {
 	public:
 	struct Make : public BaseKeyAction::Make {
 		std::string command;
-			
+		
 		explicit Make(std::string command);
 		
 		auto make(ActionInitInfo init_info) -> ConsoleCommandAction* override;

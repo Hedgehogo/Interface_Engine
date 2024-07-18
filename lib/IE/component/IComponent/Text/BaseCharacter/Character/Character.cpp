@@ -141,11 +141,11 @@ namespace ie {
 		selection_vertex_array_[3].position -= {kerning, 0};
 	}
 	
-	auto Character::move(sf::Vector2f position) -> void {
-		BaseCharacter::move(position);
+	auto Character::move(sf::Vector2f offset) -> void {
+		BaseCharacter::move(offset);
 		for(size_t i = 0; i < 4; ++i) {
-			selection_vertex_array_[i].position += position;
-			vertex_array_[i].position += position;
+			selection_vertex_array_[i].position += offset;
+			vertex_array_[i].position += offset;
 		}
 	}
 	
@@ -153,10 +153,10 @@ namespace ie {
 		return lines_;
 	}
 	
-	auto Character::in(sf::Vector2f mouse_position) -> bool {
+	auto Character::in(sf::Vector2f point_position) -> bool {
 		return
-			position_.x < mouse_position.x && position_.x + get_advance() > mouse_position.x &&
-			position_.y - get_height() < mouse_position.y && position_.y > mouse_position.y;
+			position_.x < point_position.x && position_.x + get_advance() > point_position.x &&
+			position_.y - get_height() < point_position.y && position_.y > point_position.y;
 	}
 	
 	bool Character::debug_ = false;

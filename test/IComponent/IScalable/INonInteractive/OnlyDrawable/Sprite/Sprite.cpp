@@ -8,7 +8,7 @@ TEST(IComponent, Sprite) {
 	sf::Texture texture{};
 	texture.loadFromFile("../../example-resources/image.png");
 	ie::Sprite sprite{{texture}, data.make_init_info()};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(&data.draw_manager.get(0), &sprite);
@@ -23,7 +23,7 @@ TEST(IComponent, Sprite) {
 	ASSERT_EQ(sprite.get_area_size(), (sf::Vector2f{112, 112}));
 	ASSERT_EQ(sprite.get_position(), sf::Vector2f{});
 	ASSERT_EQ(sprite.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(sprite.update_interactions({}), true);
+	ASSERT_EQ(sprite.handle_event(ie::Event::Pointer({})), true);
 	
 	sprite.set_size({5, 11});
 	ASSERT_EQ(sprite.get_size(), (sf::Vector2f{5, 11}));

@@ -22,13 +22,13 @@ namespace ie {
 		
 		ObjectTextBlock(Make&& make, TextBockInitInfo init_info);
 
-		auto in(sf::Vector2f mouse_position) -> bool override;
+		auto in(sf::Vector2f point_position) -> bool override;
 		
 		auto get_characters() -> std::vector<BaseCharacter*> override;
 		
 		auto update() -> void override;
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
+		auto handle_event(Event event) -> bool override;
 	
 	protected:
 		ObjectCharacter object_character_;

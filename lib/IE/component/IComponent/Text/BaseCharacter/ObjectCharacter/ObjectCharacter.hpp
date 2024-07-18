@@ -20,9 +20,9 @@ namespace ie {
 		
 		auto resize(sf::Vector2f position, float end_position) -> void override;
 		
-		auto move(sf::Vector2f position) -> void override;
+		auto move(sf::Vector2f offset) -> void override;
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool;
+		auto handle_event(Event event) -> bool;
 		
 		auto get_line() -> std::vector<BoxPtr<BaseLine> > const& override;
 		

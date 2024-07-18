@@ -54,11 +54,11 @@ namespace ie {
 		
 		auto set_kerning(char32_t character) -> void override;
 		
-		auto in(sf::Vector2f mouse_position) -> bool override;
+		auto in(sf::Vector2f point_position) -> bool override;
 		
 		auto update() -> void override;
 		
-		auto update_interactions(sf::Vector2f) -> bool override;
+		auto handle_event(Event) -> bool override;
 	
 	protected:
 		std::vector<BoxPtr<BaseCharacter> > text_characters_;

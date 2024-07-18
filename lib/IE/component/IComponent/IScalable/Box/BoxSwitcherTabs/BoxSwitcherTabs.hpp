@@ -2,10 +2,10 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
-#include "IE/event/KeyHandler/KeyHandler.hpp"
+#include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
+#include "IE/interaction/IInteraction/BasicTouchInteraction/BasicTouchInteraction.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
-#include "../../BasicInteractiveData/BasicInteractiveData.hpp"
 
 namespace ie {
 	class BoxSwitcherTabs : public Box, public virtual IScalableObjectsArray, public virtual IUpdatable {
@@ -34,7 +34,7 @@ namespace ie {
 		
 		auto update() -> void override;
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 		auto get_array_size() const -> size_t override;
 		
@@ -45,7 +45,7 @@ namespace ie {
 		auto get_tab(sf::Vector2f position) -> int;
 		
 	protected:
-		BasicInteractiveData<BoxSwitcherTabs&> interactive_;
+		BasicTouchInteraction<BoxSwitcherTabs&> interaction_;
 		std::vector<BoxPtr<IScalable> > objects_;
 		bool is_horizontal_;
 		ISMRSize& value_;

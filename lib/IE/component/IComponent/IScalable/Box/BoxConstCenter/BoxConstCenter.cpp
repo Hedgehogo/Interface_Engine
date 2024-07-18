@@ -51,12 +51,15 @@ namespace ie {
 		return *background_;
 	}
 	
-	auto BoxConstCenter::update_interactions(sf::Vector2f) -> bool {
-		if(const_object_->in(layout_.position)){
-			return const_object_->update_interactions(layout_.position) ;
-		} else {
-			return background_->update_interactions(layout_.position);
-		}
+	auto BoxConstCenter::handle_event(Event event) -> bool {
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			if(const_object_->in(sf::Vector2f{pointer.position})) {
+				return const_object_->handle_event(event);
+			}
+			return background_->handle_event(event);
+		}).some_or_else([=] {
+			return const_object_->handle_event(event) || background_->handle_event(event);
+		});
 	}
 }
 

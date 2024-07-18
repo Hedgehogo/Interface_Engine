@@ -9,20 +9,23 @@ namespace ie {
 	DontMovePanelInteraction::DontMovePanelInteraction(Make&&, PanelActionInitInfo) {
 	}
 	
-	auto DontMovePanelInteraction::get_at_start() -> bool {
-		return false;
+	auto DontMovePanelInteraction::set_panel(Panel&) -> void {
 	}
 	
 	auto DontMovePanelInteraction::move(sf::Vector2i) -> void {
 	}
 	
-	auto DontMovePanelInteraction::start(sf::Vector2i) -> void {
+	auto DontMovePanelInteraction::start() -> void {
 	}
 	
-	auto DontMovePanelInteraction::update(sf::Vector2i) -> void {
+	auto DontMovePanelInteraction::handle_event(Event event) -> bool {
+		return false;
 	}
 	
-	auto DontMovePanelInteraction::set_panel(Panel&) -> void {
+	auto DontMovePanelInteraction::update() -> void {
+	}
+	
+	auto DontMovePanelInteraction::finish() -> void {
 	}
 }
 

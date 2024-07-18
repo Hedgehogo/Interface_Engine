@@ -17,17 +17,17 @@ namespace ie {
 		BoxPtr<BaseTextResizer::Make>&& resizer,
 		BoxPtr<IBasicInteraction<Text&>::Make>&& text_interaction
 	) : text_blocks(std::move(text_blocks)),
-		font(font),
-		background(std::move(background)),
-		size(size),
-		text_color(text_color),
-		text_selection_color(text_selection_color),
-		background_selection_color(background_selection_color),
-		inactive_text_selection_color(inactive_text_selection_color),
-		inactive_background_selection_color(inactive_background_selection_color),
-		style(style),
-		resizer(std::move(resizer)),
-		text_interaction(std::move(text_interaction)) {
+	    font(font),
+	    background(std::move(background)),
+	    size(size),
+	    text_color(text_color),
+	    text_selection_color(text_selection_color),
+	    background_selection_color(background_selection_color),
+	    inactive_text_selection_color(inactive_text_selection_color),
+	    inactive_background_selection_color(inactive_background_selection_color),
+	    style(style),
+	    resizer(std::move(resizer)),
+	    text_interaction(std::move(text_interaction)) {
 	}
 	
 	auto Text::Make::make(InitInfo init_info) -> Text* {
@@ -38,8 +38,6 @@ namespace ie {
 		interaction_manager(&init_info.interaction_manager),
 		render_target(&init_info.render_target),
 		background(make.background->make(init_info)),
-		interact(false),
-		old_interact(false),
 		size(make.size),
 		text_blocks(
 			map_make(
@@ -119,7 +117,7 @@ namespace ie {
 		return text_characters;
 	}
 	
-	auto Text::get_character(sf::Vector2f mouse_position) -> orl::Option<std::vector<BaseCharacter*>::iterator> {
+	auto Text::get_character(sf::Vector2f point_position) -> orl::Option<std::vector<BaseCharacter*>::iterator> {
 		using Iterator = std::vector<BaseCharacter*>::iterator;
 		
 		auto get_distance_y = [](Iterator iterator, float mouse_position_y) -> float {
@@ -151,10 +149,10 @@ namespace ie {
 		
 		for(auto iterator = text_characters.begin(); iterator != text_characters.end(); ++iterator) {
 			result = result.map([=](auto& value) {
-				auto distance_y_to_iterator{get_distance_y(iterator, mouse_position.y)};
-				auto distance_y_to_result{get_distance_y(value, mouse_position.y)};
+				auto distance_y_to_iterator{get_distance_y(iterator, point_position.y)};
+				auto distance_y_to_result{get_distance_y(value, point_position.y)};
 				if(distance_y_to_iterator <= distance_y_to_result) {
-					if((distance_y_to_iterator < distance_y_to_result) || min_distance_x(iterator, value, mouse_position.x)) {
+					if((distance_y_to_iterator < distance_y_to_result) || min_distance_x(iterator, value, point_position.x)) {
 						return iterator;
 					}
 				}
@@ -163,7 +161,7 @@ namespace ie {
 		}
 		
 		for(auto& value: result) {
-			if(mouse_position.x > (*value)->get_position().x + (static_cast<float>((*value)->get_size_texture().x) / 2.f)) {
+			if(point_position.x > (*value)->get_position().x + (static_cast<float>((*value)->get_size_texture().x) / 2.f)) {
 				++value;
 			}
 		}
@@ -172,33 +170,32 @@ namespace ie {
 	}
 	
 	auto Text::update() -> void {
-		if(interact != old_interact) {
-			old_interact = interact;
-			
-			if(interact) {
-				interaction_manager->add_interaction(*text_interaction);
-			} else {
-				interaction_manager->delete_interaction(*text_interaction);
-			}
-		}
-		interact = false;
+		text_interaction->update();
 		
 		for(auto& text_block: text_blocks) {
 			text_block->update();
 		}
 	}
 	
-	auto Text::update_interactions(sf::Vector2f mouse_position) -> bool {
-		interact = true;
-		
-		for(auto& text_bock: text_blocks) {
-			if(text_bock->in(mouse_position)) {
-				if(text_bock->update_interactions(mouse_position)) {
-					return true;
+	auto Text::handle_event(Event event) -> bool {
+		return
+			text_interaction->handle_event(event) ||
+			event.pointer().map([=](event_system::Pointer pointer) {
+				for(auto& text_bock: text_blocks) {
+					if(text_bock->in(sf::Vector2f{pointer.position})) {
+						if(text_bock->handle_event(event)) {
+							return true;
+						}
+					}
 				}
-			}
-		}
-		return background->update_interactions(mouse_position);
+				return background->handle_event(event);
+			}).some_or_else([=] {
+				auto updated{false};
+				for(auto& text_block: text_blocks) {
+					updated = text_block->handle_event(event) || updated;
+				}
+				return background->handle_event(event) || updated;
+			});
 	}
 	
 	auto Text::draw() -> void {
@@ -230,12 +227,12 @@ namespace ie {
 		render_target->draw(sprite);
 	}
 	
-	auto Text::move(sf::Vector2f position) -> void {
-		view.reset({get_position() + position, view.getSize()});
+	auto Text::move(sf::Vector2f offset) -> void {
+		view.reset({get_position() + offset, view.getSize()});
 		render_texture.setView(view);
-		sprite.move(position);
-		background->move(position);
-		resizer->move(position);
+		sprite.move(offset);
+		background->move(offset);
+		resizer->move(offset);
 	}
 	
 	auto Text::set_position(sf::Vector2f position) -> void {

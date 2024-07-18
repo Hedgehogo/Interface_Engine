@@ -13,8 +13,8 @@ namespace ie {
 		Box(make.min_size), object_(make.object->make(init_info)) {
 	}
 	
-	auto BoxMakePermeable::update_interactions(sf::Vector2f mouse_position) -> bool {
-		object_->update_interactions(mouse_position);
+	auto BoxMakePermeable::handle_event(Event event) -> bool {
+		object_->handle_event(event);
 		return false;
 	}
 	

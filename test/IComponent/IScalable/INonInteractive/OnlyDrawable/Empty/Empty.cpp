@@ -7,7 +7,7 @@ TEST(IComponent, Empty) {
 	InitInfoData data{{100, 100}};
 	
 	ie::Empty empty{{}, data.make_init_info()};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(&data.draw_manager.get(0), &empty);
@@ -22,7 +22,7 @@ TEST(IComponent, Empty) {
 	ASSERT_EQ(empty.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(empty.get_position(), sf::Vector2f{});
 	ASSERT_EQ(empty.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(empty.update_interactions({}), false);
+	ASSERT_EQ(empty.handle_event(ie::Event::Pointer({})), false);
 	
 	empty.set_size({5, 11});
 	ASSERT_EQ(empty.get_size(), (sf::Vector2f{5, 11}));

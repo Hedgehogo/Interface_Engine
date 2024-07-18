@@ -1,4 +1,3 @@
-#include "IE/interaction/IAction/BasicKeyAction/BasicAddInteractionAction/BasicAddBlockInteractionAction/BasicAddBlockInteractionAction.hpp"
 #include <algorithm>
 
 namespace ie {
@@ -15,7 +14,7 @@ namespace ie {
 			second_object(std::move(second_object)),
 			is_horizontal_border(is_horizontal_border),
 			border_value(std::move(border_value)),
-			min_size(min_size){
+			min_size(min_size) {
 		}
 		
 		template<bool mutable_>
@@ -35,7 +34,7 @@ namespace ie {
 			[this](const float& value) {
 				this->set_border_position(value);
 			}
-		){
+		) {
 		border_value_.get().set_bounds(0, 1);
 	}
 	
@@ -50,21 +49,26 @@ namespace ie {
 	}
 	
 	template<bool mutable_>
-	auto BasicBoxMovableBorder<mutable_>::update_interactions(sf::Vector2f mouse_position) -> bool {
-		auto update_interaction_objects{
-			[this, &mouse_position](float first_object_size, float position){
-				if(first_object_size > position) {
-					return first_object_->update_interactions(mouse_position);
+	auto BasicBoxMovableBorder<mutable_>::handle_event(Event event) -> bool {
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			auto handle_event_objects{
+				[=](float first_object_size, float position) {
+					if(first_object_size > position) {
+						return first_object_->handle_event(event);
+					}
+					return second_object_->handle_event(event);
 				}
-				return second_object_->update_interactions(mouse_position);
+			};
+			
+			if(is_horizontal_border_) {
+				return handle_event_objects(first_object_->get_size().x, pointer.position.x);
 			}
-		};
-		
-		if(is_horizontal_border_) {
-			return update_interaction_objects(first_object_->get_size().x, mouse_position.x);
-		} else {
-			return update_interaction_objects(first_object_->get_size().y, mouse_position.y);
-		}
+			return handle_event_objects(first_object_->get_size().y, pointer.position.x);
+		}).some_or_else([=] {
+			auto first_updated{first_object_->handle_event(event)};
+			auto second_updated{second_object_->handle_event(event)};
+			return first_updated || second_updated;
+		});
 	}
 	
 	template<bool mutable_>
@@ -118,8 +122,9 @@ namespace ie {
 	}
 	
 	template<bool mutable_>
-	auto
-	BasicBoxMovableBorder<mutable_>::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
+	auto BasicBoxMovableBorder<mutable_>::draw_debug(
+		sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset
+	) -> void {
 		IComponent::draw_debug(render_target, indent, indent_addition, hue, hue_offset);
 		first_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);
 		second_object_->draw_debug(render_target, indent + indent_addition, indent_addition, hue + hue_offset, hue_offset);

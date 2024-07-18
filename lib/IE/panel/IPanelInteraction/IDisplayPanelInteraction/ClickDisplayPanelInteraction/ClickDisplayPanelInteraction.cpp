@@ -13,12 +13,12 @@ namespace ie {
 		ClickPanelInteraction(make_box_ptr<DisplayPanelAction::Make>(), make.key, init_info) {
 	}
 	
-	auto ClickDisplayPanelInteraction::start(sf::Vector2i) -> void {
+	auto ClickDisplayPanelInteraction::start() -> void {
 		dynamic_cast<PanelAction&>(*action_).get_panel()->set_parent_processed(true);
 	}
 	
-	auto ClickDisplayPanelInteraction::finish(sf::Vector2i mouse_position) -> void {
-		BasicOneKeyInteraction<Panel&>::finish(mouse_position);
+	auto ClickDisplayPanelInteraction::finish() -> void {
+		BasicTouchInteraction<Panel&>::finish();
 		dynamic_cast<PanelAction&>(*action_).get_panel()->set_parent_processed(false);
 	}
 }

@@ -29,18 +29,14 @@ namespace ie {
 		
 		InteractiveTextBlock(Make&& make, TextBockInitInfo init_info);
 		
-		auto in(sf::Vector2f mouse_position) -> bool override;
+		auto in(sf::Vector2f point_position) -> bool override;
 		
 		auto update() -> void override;
 		
-		auto update_interactions(sf::Vector2f) -> bool override;
+		auto handle_event(Event) -> bool override;
 	
 	protected:
 		InteractionManager* interaction_manager_;
-		
-		bool interact_;
-		bool old_interact_;
-		
 		BoxPtr<IInteraction> interaction_;
 	};
 }

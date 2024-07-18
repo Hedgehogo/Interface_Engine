@@ -26,13 +26,13 @@ namespace ie {
 		);
 	}
 	
-	void ObjectCharacter::move(sf::Vector2f position) {
-		BaseCharacter::move(position);
-		object_->move(position);
+	void ObjectCharacter::move(sf::Vector2f offset) {
+		BaseCharacter::move(offset);
+		object_->move(offset);
 	}
 	
-	bool ObjectCharacter::update_interactions(sf::Vector2f mouse_position) {
-		return object_->update_interactions(mouse_position);
+	bool ObjectCharacter::handle_event(Event event) {
+		return object_->handle_event(event);
 	}
 	
 	char32_t ObjectCharacter::get_char() {

@@ -14,9 +14,9 @@ namespace ie {
 		render_target_->draw(vertex_array_);
 	}
 	
-	void BaseLine::move(sf::Vector2f position) {
+	void BaseLine::move(sf::Vector2f offset) {
 		for(auto i{size_t{0}}; i < vertex_array_.getVertexCount(); ++i) {
-			vertex_array_[i].position += position;
+			vertex_array_[i].position += offset;
 		}
 	}
 }

@@ -7,18 +7,27 @@ namespace ie {
 	}
 	
 	PointingDisplayPanelInteraction::PointingDisplayPanelInteraction(Make&&, PanelActionInitInfo init_info) :
-		BasePanelInteraction(init_info) {
+		panel_(&init_info.additional),
+		panel_manager_(&init_info.panel_manager) {
 	}
 	
-	auto PointingDisplayPanelInteraction::start(sf::Vector2i) -> void {
+	auto PointingDisplayPanelInteraction::set_panel(Panel& panel) -> void {
+		this->panel_ = &panel;
+	}
+	
+	auto PointingDisplayPanelInteraction::start() -> void {
 		panel_manager_->display_panel(panel_);
 		panel_->set_parent_processed(true);
 	}
 	
-	auto PointingDisplayPanelInteraction::update(sf::Vector2i) -> void {
+	auto PointingDisplayPanelInteraction::handle_event(Event event) -> bool {
+		return false;
 	}
 	
-	auto PointingDisplayPanelInteraction::finish(sf::Vector2i) -> void {
+	auto PointingDisplayPanelInteraction::update() -> void {
+	}
+	
+	auto PointingDisplayPanelInteraction::finish() -> void {
 		panel_->set_parent_processed(false);
 	}
 }

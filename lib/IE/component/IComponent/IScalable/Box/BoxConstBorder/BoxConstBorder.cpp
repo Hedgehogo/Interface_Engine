@@ -50,11 +50,17 @@ namespace ie {
 		}
 	}
 	
-	auto BoxConstBorder::update_interactions(sf::Vector2f mouse_position) -> bool {
-		if(const_object_->in_area(mouse_position)) {
-			return const_object_->update_interactions(mouse_position);
-		}
-		return second_object_->update_interactions(mouse_position);
+	auto BoxConstBorder::handle_event(Event event) -> bool {
+		return event.pointer().map([=](event_system::Pointer pointer) {
+			if(const_object_->in_area(sf::Vector2f{pointer.position})) {
+				return const_object_->handle_event(event);
+			}
+			return second_object_->handle_event(event);
+		}).some_or_else([=] {
+			auto const_updated{const_object_->handle_event(event)};
+			auto second_updated{second_object_->handle_event(event)};
+			return const_updated || second_updated;
+		});
 	}
 	
 	auto BoxConstBorder::get_min_size() const -> sf::Vector2f {

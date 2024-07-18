@@ -22,7 +22,7 @@ namespace ie {
 				init_info.window,
 				init_info.render_target,
 				init_info.dyn_buffer,
-				init_info.key_handler,
+				init_info.event_handler,
 				this->draw_manager_,
 				this->update_manager_,
 				this->interaction_manager_,
@@ -37,7 +37,7 @@ namespace ie {
 	Interface::Interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
-		KeyHandler& key_handler,
+		EventHandler& event_handler,
 		BoxPtr<IScalable::Make>&& object
 	) :
 		window_(&window),
@@ -47,7 +47,7 @@ namespace ie {
 				window,
 				window,
 				dyn_buffer,
-				key_handler,
+				event_handler,
 				this->draw_manager_,
 				this->update_manager_,
 				this->interaction_manager_,
@@ -112,32 +112,31 @@ namespace ie {
 		return object_->get_normal_size();
 	}
 	
-	auto Interface::update_cluster(sf::Vector2f mouse_position) -> void {
-		interaction_manager_.update(sf::Vector2i(mouse_position));
-	}
-	
 	auto Interface::update() -> void {
 		panel_manager_.update();
 		update_manager_.update();
-		update_cluster(mouse_position_);
 		active_ = false;
 	}
 	
-	auto Interface::update(sf::Vector2f mouse_position, bool active) -> void {
+	auto Interface::update(std::vector<Event> const& events, bool active) -> void {
 		if(active) {
-			this->update_interactions(mouse_position);
-		} else {
-			this->mouse_position_ = mouse_position;
+			for(auto& event: events) {
+				this->handle_event(event);
+			}
 		}
 		this->update();
 	}
 	
-	auto Interface::update_interactions(sf::Vector2f mouse_position) -> bool {
+	auto Interface::handle_event(Event event) -> bool {
 		active_ = true;
-		this->mouse_position_ = mouse_position;
-		if(is_in_window(mouse_position) && !interaction_manager_.is_blocked()) {
-			if(!panel_manager_.update_interactions(mouse_position, true)) {
-				object_->update_interactions(mouse_position);
+		for(auto pointer: event.pointer()) {
+			if(pointer.id == std::numeric_limits<size_t>::max()) {
+				mouse_position_ = sf::Vector2f{pointer.position};
+			}
+		}
+		if(is_in_window(mouse_position_)) {
+			if(!interaction_manager_.handle_event(event) && !panel_manager_.handle_event(event, true)) {
+				object_->handle_event(event);
 			}
 		}
 		return true;
@@ -163,14 +162,14 @@ namespace ie {
 	auto make_interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
-		KeyHandler& key_handler,
+		EventHandler& event_handler,
 		std::filesystem::path file_path,
 		int argc,
 		char* argv[]
 	) -> Interface {
 		auto node{ieml::from_file(file_path)};
 		auto object{bp::make_box_ptr<BoxModulesLoader::Make>(node.as<BoxModulesLoader::Make>().except())};
-		return Interface{window, dyn_buffer, key_handler, std::move(object)};
+		return Interface{window, dyn_buffer, event_handler, std::move(object)};
 	}
 }
 

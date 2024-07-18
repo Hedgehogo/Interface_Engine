@@ -11,8 +11,8 @@ namespace ie {
 		this->position = position;
 	}
 	
-	auto LayoutData::move(sf::Vector2f position) -> void {
-		this->position += position;
+	auto LayoutData::move(sf::Vector2f offset) -> void {
+		this->position += offset;
 	}
 	
 	auto LayoutData::set_size(sf::Vector2f size) -> void {

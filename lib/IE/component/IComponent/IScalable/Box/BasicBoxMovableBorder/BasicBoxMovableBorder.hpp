@@ -3,8 +3,6 @@
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
-#include "IE/interaction/IInteraction/BasicPressedInteraction/BasicPressedInteraction.hpp"
-#include "../../BasicInteractiveData/BasicInteractiveData.hpp"
 #include "../../IScalableLayout/IScalableTwoObjects/IScalableTwoObjects.hpp"
 #include "../Box.hpp"
 
@@ -12,7 +10,7 @@ namespace ie {
 	template<bool mutable_>
 	class BasicBoxMovableBorder;
 	
-	namespace make_system{
+	namespace make_system {
 		template<bool mutable_>
 		struct BasicBoxMovableBorder : public virtual IScalableTwoObjects::Make, public virtual Box::Make {
 			using Value_ = std::conditional_t<mutable_, ISMRFloat, ISRFloat>;
@@ -34,8 +32,9 @@ namespace ie {
 			auto make(InitInfo init_info) -> ie::BasicBoxMovableBorder<mutable_>* override;
 		};
 	}
+	
 	template<bool mutable_>
-	class BasicBoxMovableBorder : public virtual IScalableTwoObjects, public Box{
+	class BasicBoxMovableBorder : public virtual IScalableTwoObjects, public Box {
 	public:
 		using Make = make_system::BasicBoxMovableBorder<mutable_>;
 		using Value_ = typename Make::Value_;
@@ -54,7 +53,7 @@ namespace ie {
 		
 		auto get_is_horizontal_border() -> bool;
 		
-		auto update_interactions(sf::Vector2f mouse_position) -> bool override;
+		auto handle_event(Event event) -> bool override;
 		
 		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		

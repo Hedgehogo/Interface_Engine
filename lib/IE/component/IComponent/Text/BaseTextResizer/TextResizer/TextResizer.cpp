@@ -13,16 +13,16 @@ namespace ie {
 		BaseTextResizer{make.line_spacing, make.align, make.algorithm, init_info} {
 	}
 	
-	auto TextResizer::move(sf::Vector2f position) -> void {
-		start_render_ += position;
-		end_render_ += position;
+	auto TextResizer::move(sf::Vector2f offset) -> void {
+		start_render_ += offset;
+		end_render_ += offset;
 		
 		for(auto& character: characters_) {
-			character->move(position);
+			character->move(offset);
 		}
 		
 		for(auto& line: lines_) {
-			line->move(position);
+			line->move(offset);
 		}
 	}
 	

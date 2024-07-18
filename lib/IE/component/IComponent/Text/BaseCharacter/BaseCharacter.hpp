@@ -8,14 +8,14 @@ namespace ie {
 	
 	class BaseCharacter {
 	public:
-		enum class Special{
+		enum class Special {
 			No,
 			Space,
 			Enter,
 			Object,
 			FullLine,
 		};
-	
+		
 		BaseCharacter();
 		
 		virtual auto get_rerender() const -> bool;
@@ -26,7 +26,7 @@ namespace ie {
 		
 		virtual auto get_size_texture() -> sf::Vector2i = 0;
 		
-		virtual auto in(sf::Vector2f mouse_position) -> bool;
+		virtual auto in(sf::Vector2f point_position) -> bool;
 		
 		virtual auto set_selection(bool selection) -> void;
 		
@@ -36,7 +36,7 @@ namespace ie {
 		
 		virtual auto resize(sf::Vector2f position, float) -> void;
 		
-		virtual auto move(sf::Vector2f position) -> void;
+		virtual auto move(sf::Vector2f offset) -> void;
 		
 		virtual auto get_line() -> std::vector<BoxPtr<BaseLine> > const& = 0;
 		

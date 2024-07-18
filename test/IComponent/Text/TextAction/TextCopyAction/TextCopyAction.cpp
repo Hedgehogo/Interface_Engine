@@ -23,7 +23,7 @@ TEST(IComponent_Text, TextCopyAction) {
 	ie::Text text{
 		ie::Text::Make{
 			ie::make_vector(
-                    ie::make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
+				ie::make_box_ptr<ie::BaseTextBlock::Make, ie::TextBlock::Make>(
 					"aaa\naaa"
 				)
 			),
@@ -44,6 +44,6 @@ TEST(IComponent_Text, TextCopyAction) {
 	
 	text.set_selection({{text_characters.begin()}, {text_characters.begin() + 4}});
 	
-	copy_action.update({0, 0}, true);
-	copy_action.update({0, 0}, false);
+	copy_action.update(true);
+	copy_action.update(false);
 }

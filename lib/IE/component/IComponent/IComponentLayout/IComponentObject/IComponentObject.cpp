@@ -6,8 +6,8 @@ namespace ie {
 		IComponentLayout::set_position(position);
 	}
 	
-	auto IComponentObject::move(sf::Vector2f position) -> void {
-		IComponentLayout::move(position);
+	auto IComponentObject::move(sf::Vector2f offset) -> void {
+		IComponentLayout::move(offset);
 	}
 	
 	auto IComponentObject::set_size(sf::Vector2f size) -> void {
@@ -19,8 +19,8 @@ namespace ie {
 		get_object().resize(size, position);
 	}
 	
-	auto IComponentObject::update_interactions(sf::Vector2f mouse_position) -> bool {
-		return get_object().update_interactions(mouse_position);
+	auto IComponentObject::handle_event(Event event) -> bool {
+		return get_object().handle_event(event);
 	}
 	
 	auto IComponentObject::get_min_size() const -> sf::Vector2f {

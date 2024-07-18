@@ -33,7 +33,7 @@ namespace ie {
 	*/
 	
 	Window::Window(Interface::Make&& make, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) :
-		interface_(window_, dyn_buffer_, event_handler_.key_handler(), std::move(make.object)),
+		interface_(window_, dyn_buffer_, event_handler_, std::move(make.object)),
 		resizer_(get_window_resizer()) {
 		
 		Window::re_calculate_min_size();
@@ -61,13 +61,11 @@ namespace ie {
 		min_size_ = max(sf::Vector2u{map_vector2<float, std::ceil>(this->interface_.get_min_size())}, {1, 1});
 	}
 	
-	auto Window::update(std::vector<Event> const& events) -> void {
-		auto mouse_position{event_handler_.get_touch(std::numeric_limits<size_t>::max()).some_or({})};
-		
+	auto Window::update(std::vector<Event>&& events) -> void {
 		auto resizer_updated{resizer_->update(events, event_handler_)};
 		
 		window_.clear();
-		interface_.update(sf::Vector2f{mouse_position}, !resizer_updated && window_.hasFocus());
+		interface_.update(events, !resizer_updated && window_.hasFocus());
 		interface_.draw();
 		//interface.draw_debug(window, 0, 2, 90, 90);
 		window_.display();
@@ -115,7 +113,7 @@ namespace ie {
 					result.emplace_back(Event::GainedFocus({}));
 					break;
 				case sf::Event::TextEntered:
-					result.emplace_back(Event::TextEntered(event.text.unicode));
+					result.emplace_back(Event::TextEntered({event.text.unicode}));
 					break;
 				case sf::Event::KeyPressed:
 					event_handler_.set_key(to_key(event.key.code), true);
@@ -135,7 +133,7 @@ namespace ie {
 					event_handler_.set_key(to_key(event.mouseButton.button), false);
 					break;
 				case sf::Event::MouseMoved:
-					event_handler_.set_touch(std::numeric_limits<size_t>::max(), {event.mouseMove.x, event.mouseMove.y});
+					event_handler_.set_pointer(std::numeric_limits<size_t>::max(), {event.mouseMove.x, event.mouseMove.y});
 					break;
 				case sf::Event::JoystickButtonPressed:
 					event_handler_.set_joystick_button(event.joystickButton.joystickId, event.joystickButton.button, true);
@@ -144,22 +142,22 @@ namespace ie {
 					event_handler_.set_joystick_button(event.joystickButton.joystickId, event.joystickButton.button, false);
 					break;
 				case sf::Event::JoystickMoved:
-					result.emplace_back(Event::JoystickMove(event.joystickMove.joystickId, event.joystickMove.axis, event.joystickMove.position));
+					result.emplace_back(Event::JoystickMove({event.joystickMove.joystickId, event.joystickMove.axis, event.joystickMove.position}));
 					break;
 				case sf::Event::JoystickConnected:
-					result.emplace_back(Event::JoystickConnect(event.joystickConnect.joystickId));
+					result.emplace_back(Event::JoystickConnect({event.joystickConnect.joystickId}));
 					break;
 				case sf::Event::JoystickDisconnected:
-					result.emplace_back(Event::JoystickDisconnect(event.joystickConnect.joystickId));
+					result.emplace_back(Event::JoystickDisconnect({event.joystickConnect.joystickId}));
 					break;
 				case sf::Event::TouchBegan:
-					event_handler_.set_touch(event.touch.finger, {event.touch.x, event.touch.y});
+					event_handler_.set_pointer(event.touch.finger, {event.touch.x, event.touch.y});
 					break;
 				case sf::Event::TouchMoved:
-					event_handler_.set_touch(event.touch.finger, {event.touch.x, event.touch.y});
+					event_handler_.set_pointer(event.touch.finger, {event.touch.x, event.touch.y});
 					break;
 				case sf::Event::TouchEnded:
-					event_handler_.remove_touch(event.touch.finger);
+					event_handler_.remove_pointer(event.touch.finger);
 					break;
 				case sf::Event::SensorChanged:
 					break;
@@ -171,24 +169,6 @@ namespace ie {
 		event_handler_.poll_events(result);
 		
 		return result;
-	}
-	
-	auto Window::handle_event(sf::Event event) -> void {
-		if(event.type == sf::Event::MouseWheelScrolled) {
-			MouseWheel::set_delta(event.mouseWheelScroll);
-		}
-		if(event.type == sf::Event::KeyPressed) {
-			event_handler_.set_key(to_key(event.key.code), true);
-		}
-		if(event.type == sf::Event::KeyReleased) {
-			event_handler_.set_key(to_key(event.key.code), false);
-		}
-		if(event.type == sf::Event::MouseButtonPressed) {
-			event_handler_.set_key(to_key(event.mouseButton.button), true);
-		}
-		if(event.type == sf::Event::MouseButtonReleased) {
-			event_handler_.set_key(to_key(event.mouseButton.button), false);
-		}
 	}
 	
 	auto make_window(fs::path file_path, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) -> Window {

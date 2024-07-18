@@ -13,7 +13,7 @@ TEST(IComponent, BoxMakePermeable) {
 		},
 		data.make_init_info()
 	};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(data.update_manager.size(), 0);
@@ -26,7 +26,7 @@ TEST(IComponent, BoxMakePermeable) {
 	ASSERT_EQ(box_make_permeable.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(box_make_permeable.get_position(), sf::Vector2f{});
 	ASSERT_EQ(box_make_permeable.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(box_make_permeable.update_interactions({}), false);
+	ASSERT_EQ(box_make_permeable.handle_event(ie::Event::Pointer({})), false);
 	
 	box_make_permeable.set_size({5, 11});
 	ASSERT_EQ(box_make_permeable.get_size(), (sf::Vector2f{5, 11}));

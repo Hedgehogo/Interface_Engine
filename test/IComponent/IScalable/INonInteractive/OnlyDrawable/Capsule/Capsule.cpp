@@ -6,7 +6,7 @@ TEST(IComponent, Capsule) {
 	InitInfoData data{{100, 100}};
 	
 	ie::Capsule capsule{{sf::Color::Red}, data.make_init_info()};
-	data.interaction_manager.update({});
+	data.update_manager.update();
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(&data.draw_manager.get(0), &capsule);
@@ -21,7 +21,7 @@ TEST(IComponent, Capsule) {
 	ASSERT_EQ(capsule.get_area_size(), sf::Vector2f{});
 	ASSERT_EQ(capsule.get_position(), sf::Vector2f{});
 	ASSERT_EQ(capsule.get_area_position(), sf::Vector2f{});
-	ASSERT_EQ(capsule.update_interactions({}), true);
+	ASSERT_EQ(capsule.handle_event(ie::Event::Pointer({})), true);
 	
 	capsule.set_size({5, 11});
 	ASSERT_EQ(capsule.get_size(), (sf::Vector2f{5, 11}));

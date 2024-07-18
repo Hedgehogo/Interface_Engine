@@ -24,11 +24,11 @@ namespace ie {
 		
 		auto set_kerning(float kerning) -> void override;
 		
-		auto move(sf::Vector2f position) -> void override;
+		auto move(sf::Vector2f offset) -> void override;
 		
 		auto get_line() -> std::vector<BoxPtr<BaseLine> > const& override;
 		
-		auto in(sf::Vector2f mouse_position) -> bool override;
+		auto in(sf::Vector2f point_position) -> bool override;
 		
 		auto get_height() const -> float override;
 		

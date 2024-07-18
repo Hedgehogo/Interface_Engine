@@ -16,18 +16,12 @@ namespace ie {
 		
 		WhileSwitchTabsAction(Make&& make, BasicActionInitInfo<BoxSwitchTabs&> init_info);
 		
+		auto update(bool active) -> void override;
+	
 	protected:
-		auto start_pressed() -> void override;
-		
-		auto stop_pressed() -> void override;
-		
-		auto while_pressed() -> void override;
-		
-		auto while_not_pressed() -> void override;
-		
-		int size_;
+		size_t size_;
+		size_t step_;
 		ISMRSize& value_;
-		int step_;
 	};
 }
 

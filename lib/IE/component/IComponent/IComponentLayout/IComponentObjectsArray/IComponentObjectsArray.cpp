@@ -5,10 +5,10 @@ namespace ie {
 		IComponentObjectsArray::move(position - layout_get_data().position);
 	}
 	
-	void IComponentObjectsArray::move(sf::Vector2f position) {
-		layout_get_data().move(position);
+	void IComponentObjectsArray::move(sf::Vector2f offset) {
+		layout_get_data().move(offset);
 		for(size_t i = 0; i < get_array_size(); ++i) {
-			get_object_at(i).move(position);
+			get_object_at(i).move(offset);
 		}
 	}
 	
