@@ -169,7 +169,7 @@ namespace ie {
 	
 	template<typename StringStorage_>
 	auto BasicCaption<StringStorage_>::get_min_size() const -> sf::Vector2f {
-		return max(
+		auto result{max(
 			max(
 				minimum_size_,
 				get_text_size([&] {
@@ -181,7 +181,8 @@ namespace ie {
 				}())
 			),
 			background_->get_min_size()
-		);
+		)};
+		return result;
 	}
 	
 	template<typename StringStorage_>

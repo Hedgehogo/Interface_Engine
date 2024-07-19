@@ -3,7 +3,7 @@ progress_bar_value: &progress_bar_value 0
 text_error_value: &text_error_value ""
 libs:
 	- = CLib:
-		paths: ["libConsole_Command_Action"]
+		urls: ["not_corrected_url"]
 object: < main-interface
 progress_bar: < progress-bar
 	background: 2F3033

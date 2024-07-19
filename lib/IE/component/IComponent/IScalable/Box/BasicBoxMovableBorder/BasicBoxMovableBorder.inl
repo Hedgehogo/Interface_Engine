@@ -102,6 +102,24 @@ namespace ie {
 	}
 	
 	template<bool mutable_>
+	sf::Vector2f BasicBoxMovableBorder<mutable_>::get_min_size() const {
+		if(is_horizontal_border_) {
+			return {std::max(first_object_->get_min_size().x, second_object_->get_min_size().x), first_object_->get_min_size().y + second_object_->get_min_size().y};
+		} else {
+			return {first_object_->get_min_size().x + second_object_->get_min_size().x, std::max(first_object_->get_min_size().y, second_object_->get_min_size().y)};
+		}
+	}
+	
+	template<bool mutable_>
+	sf::Vector2f BasicBoxMovableBorder<mutable_>::get_normal_size() const {
+		if(is_horizontal_border_) {
+			return {std::max(first_object_->get_normal_size().x, second_object_->get_normal_size().x), first_object_->get_normal_size().y + second_object_->get_normal_size().y};
+		} else {
+			return {first_object_->get_normal_size().x + second_object_->get_normal_size().x, std::max(first_object_->get_normal_size().y, second_object_->get_normal_size().y)};
+		}
+	}
+	
+	template<bool mutable_>
 	auto BasicBoxMovableBorder<mutable_>::get_first_object() -> IScalable& {
 		return *first_object_;
 	}

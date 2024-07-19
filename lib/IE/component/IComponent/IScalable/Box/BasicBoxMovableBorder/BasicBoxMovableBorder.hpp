@@ -57,6 +57,10 @@ namespace ie {
 		
 		auto resize(sf::Vector2f size, sf::Vector2f position) -> void override;
 		
+		sf::Vector2f get_min_size() const override;
+		
+		sf::Vector2f get_normal_size() const override;
+		
 		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
