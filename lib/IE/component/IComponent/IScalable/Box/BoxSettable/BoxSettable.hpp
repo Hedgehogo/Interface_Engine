@@ -40,6 +40,7 @@ namespace ie {
 		sf::RenderWindow* window_;
 		sf::RenderTarget* render_target_;
 		DynBuffer* dyn_buffer_;
+		absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer_;
 		EventHandler* event_handler_;
 		InteractionManager interaction_manager_;
 		PanelManagerInterceptor panel_manager_interceptor_;

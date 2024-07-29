@@ -1,4 +1,5 @@
 #include "BoxSettable.hpp"
+#include "IE/ieml/Indexed/Indexed.hpp"
 
 namespace ie {
 	BoxSettable::Make::Make(BoxPtr<IScalable::Make>&& object, sf::Vector2f min_size) :
@@ -18,6 +19,7 @@ namespace ie {
 		window_(&init_info.window),
 		render_target_(&init_info.render_target),
 		dyn_buffer_(&init_info.dyn_buffer),
+		text_style_buffer_(init_info.text_style_buffer),
 		event_handler_(&init_info.event_handler),
 		panel_manager_interceptor_(init_info.panel_manager),
 		object_(object->make(
@@ -25,6 +27,7 @@ namespace ie {
 				init_info.window,
 				init_info.render_target,
 				init_info.dyn_buffer,
+				init_info.text_style_buffer,
 				init_info.event_handler,
 				draw_manager_,
 				update_manager_,
@@ -45,11 +48,12 @@ namespace ie {
 			*window_,
 			*render_target_,
 			*dyn_buffer_,
+			text_style_buffer_,
 			*event_handler_,
 			draw_manager_,
 			update_manager_,
 			interaction_manager_,
-			panel_manager_interceptor_
+			panel_manager_interceptor_,
 		};
 		object_ = BoxPtr<IScalable>{new_object->make(init_info)};
 	}

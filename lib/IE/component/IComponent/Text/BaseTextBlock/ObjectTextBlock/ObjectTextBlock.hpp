@@ -11,7 +11,7 @@ namespace ie {
 		struct Make : public BaseTextBlock::Make {
 			BoxPtr<IScalable::Make> object;
 			sf::Vector2f size;
-			ObjectCharacter::ObjectSpecial special = ObjectCharacter::ObjectSpecial::No;
+			ObjectCharacter::ObjectSpecial special;
 			
 			Make(BoxPtr<IScalable::Make>&& object, const sf::Vector2f& size, bool is_character = true);
 			

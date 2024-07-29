@@ -6,6 +6,8 @@
 #include "IE/event/EventHandler/EventHandler.hpp"
 #include "IE/component/IComponent/IScalable/Interface/Interface.hpp"
 #include "BaseWindowResizer/WindowResizer/WindowResizer.hpp"
+#include "IE/ieml/Indexed/Indexed.hpp"
+#include "IE/component/IComponent/Text/TextStyle/TextStyle.hpp"
 
 namespace ie {
 	auto get_window_resizer() -> BaseWindowResizer*;
@@ -48,6 +50,7 @@ namespace ie {
 	protected:
 		sf::RenderWindow window_;
 		DynBuffer dyn_buffer_;
+		absl::flat_hash_set<Indexed<TextStyle> > text_style_buffer_;
 		EventHandler event_handler_;
 		Interface interface_;
 		BoxPtr<BaseWindowResizer> resizer_;

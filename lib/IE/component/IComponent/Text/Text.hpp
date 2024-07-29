@@ -6,6 +6,7 @@
 #include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/ieml/ieml-sfml/FileBuffer/FileBuffer.hpp"
+#include "TextStyle/TextStyle.hpp"
 
 namespace ie {
 	class Text : public virtual IComponent, public virtual IDrawable, public virtual IUpdatable {
@@ -18,29 +19,13 @@ namespace ie {
 	public:
 		struct Make : public virtual IComponent::Make {
 			std::vector<BoxPtr<BaseTextBlock::Make> > text_blocks;
-			sf::Font& font;
 			BoxPtr<INonInteractive::Make> background = make_box_ptr<FullColor::Make>(sf::Color::White);
-			size_t size = 14;
-			sf::Color text_color = sf::Color::Black;
-			sf::Color text_selection_color = sf::Color::White;
-			sf::Color background_selection_color = sf::Color::Blue;
-			sf::Color inactive_text_selection_color = sf::Color::Black;
-			sf::Color inactive_background_selection_color = {150, 150, 150};
-			sf::Text::Style style = {};
 			BoxPtr<BaseTextResizer::Make> resizer = make_box_ptr<TextResizer::Make>(1.15f, BaseTextResizer::Align::Left);
 			BoxPtr<IBasicInteraction<Text&>::Make> text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>();
 			
 			explicit Make(
 				std::vector<BoxPtr<BaseTextBlock::Make> >&& text_blocks,
-				sf::Font& font,
 				BoxPtr<INonInteractive::Make>&& background = make_box_ptr<FullColor::Make>(sf::Color::White),
-				size_t size = 14,
-				sf::Color text_color = sf::Color::Black,
-				sf::Color text_selection_color = sf::Color::White,
-				sf::Color background_selection_color = sf::Color::Blue,
-				sf::Color inactive_text_selection_color = sf::Color::Black,
-				sf::Color inactive_background_selection_color = {150, 150, 150},
-				sf::Text::Style style = {},
 				BoxPtr<BaseTextResizer::Make>&& resizer = make_box_ptr<TextResizer::Make>(1.15f, BaseTextResizer::Align::Left),
 				BoxPtr<IBasicInteraction<Text&>::Make>&& text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>()
 			);
@@ -103,7 +88,6 @@ namespace ie {
 		BoxPtr<INonInteractive> background;
 		
 		Selection selection;
-		size_t size;
 		
 		std::vector<BaseCharacter*> text_characters;
 		std::vector<BoxPtr<BaseTextBlock> > text_blocks;

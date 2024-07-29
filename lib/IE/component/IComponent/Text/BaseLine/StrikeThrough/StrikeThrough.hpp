@@ -12,6 +12,8 @@ namespace ie {
 			
 			Make(orl::Option<sf::Color> color = {}, float strike_through_offset = 0.3);
 			
+			auto copy() ->Make* override;
+			
 			auto make(LineInitInfo init_info) -> BaseLine* override;
 		};
 		

@@ -24,7 +24,7 @@ namespace ie {
 			
 			Pointer(size_t id, sf::Vector2i position = {});
 			
-			Pointer(sf::Vector2i position = {});;
+			Pointer(sf::Vector2i position = {});
 			
 			auto is_mouse() -> bool;
 		};

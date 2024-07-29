@@ -9,12 +9,14 @@ namespace ie {
 		struct Make {
 			virtual auto make(LineInitInfo init_info) -> BaseLine* = 0;
 			
+			virtual auto copy() -> Make* = 0;
+			
 			virtual ~Make() = default;
 		};
 		
 		BaseLine(sf::PrimitiveType type, size_t vertex_count, orl::Option<sf::Color> color, LineInitInfo init_info);
 
-		virtual auto draw() -> void;
+		virtual auto draw(sf::RenderTarget* render_target) -> void;
 		
 		virtual auto move(sf::Vector2f offset) -> void;
 		
@@ -25,7 +27,6 @@ namespace ie {
 		virtual ~BaseLine() = default;
 	
 	protected:
-		sf::RenderTarget* render_target_;
 		sf::VertexArray vertex_array_;
 	};
 }

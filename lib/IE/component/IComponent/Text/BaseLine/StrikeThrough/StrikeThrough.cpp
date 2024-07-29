@@ -5,6 +5,10 @@ namespace ie {
 		color(std::move(color)), strike_through_offset(strike_through_offset) {
 	}
 	
+	auto StrikeThrough::Make::copy() -> StrikeThrough::Make* {
+		return new Make{*this};
+	}
+	
 	auto StrikeThrough::Make::make(LineInitInfo init_info) -> BaseLine* {
 		return new StrikeThrough{std::move(*this), init_info};
 	}

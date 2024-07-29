@@ -1,12 +1,21 @@
 lib_dir: "../../example-resources/buildModules/"
-progress_bar_value: &progress_bar_value 0
-text_error_value: &text_error_value ""
-libs:
-	- = CLib:
-		urls: ["not_corrected_url"]
+progress_bar_value: @progress_bar_value: 0
+text_error_value: @text_error_value: ""
 object: < main-interface
+	main-text-style:
+		text-color: white
+		text-selection-color: white
+		background-selection-color: blue
+		inactive-text-selection-color: 323232
+		inactive-background-selection-color: 6c6c6c
+		font-size: 30
+		font: > ../../example-resources/segoeui.ttf
+		bold: no
+		italic: no
+		lines: []
+		style: []
+	background: @background: 2F3033
 progress_bar: < progress-bar
-	background: 2F3033
 	background_bar: 27272D
 	bar: A0D408
 	error_color: F66151

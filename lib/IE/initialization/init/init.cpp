@@ -122,6 +122,7 @@ namespace ie {
 			add_type_make_named<BaseLine, StrikeThrough>();
 			add_names<BaseLine::Make>("BaseLine");
 			
+			add_names<TextStyle>("Style");
 			add_type_make_named<BaseTextBlock, TextBlock>();
 			add_type_make_named<BaseTextBlock, InteractiveTextBlock>();
 			add_type_make_named<BaseTextBlock, ObjectTextBlock>();

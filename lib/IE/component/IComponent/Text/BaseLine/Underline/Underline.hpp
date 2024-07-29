@@ -11,6 +11,8 @@ namespace ie {
 			
 			Make(orl::Option<sf::Color> color = {});
 			
+			auto copy() ->Make* override;
+			
 			auto make(LineInitInfo init_info) -> Underline* override;
 		};
 		

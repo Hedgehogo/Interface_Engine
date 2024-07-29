@@ -1,6 +1,13 @@
-= Button:
-background: red
-interaction: = KeysI:
-	keys: [f]
-	action: = ConsoleCommandA:
-		command: > echo "Hi, Interface Engine!"
+= BoxScroll:
+normal-object-position: [0, 0]
+object: = Text:
+	text-blocks:
+		-
+			text: "text"
+			style: @main-text-style
+		-
+			text: " text2"
+			style:
+				base-style: @main-text-style
+				text-color: red
+	background: @background

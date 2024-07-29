@@ -2,14 +2,14 @@
 
 #include <string>
 #include "../BaseCharacter.hpp"
-#include "../../TextVariables/TextVariables.hpp"
+#include "../../TextStyle/TextStyle.hpp"
 
 namespace ie {
 	class Character : public BaseCharacter {
 	public:
 		Character(
 			char32_t character,
-			TextVariables& text_variables,
+			TextStyle& text_style_,
 			std::vector<BoxPtr<BaseLine> >& lines,
 			orl::Option<sf::RenderTarget&> render_target
 		);
@@ -48,16 +48,16 @@ namespace ie {
 	
 	private:
 		static bool debug_;
-	
+		
 	protected:
 		orl::Option<sf::RenderTarget&> render_target_;
 		
-		char32_t character_;
+		TextStyle& text_style_;
 		
+		char32_t character_;
 		sf::Glyph glyph_;
 		float advance_;
 		float kerning_;
-		TextVariables& text_variables_;
 		sf::VertexArray vertex_array_;
 		sf::VertexArray selection_vertex_array_;
 		sf::Texture const& texture_;

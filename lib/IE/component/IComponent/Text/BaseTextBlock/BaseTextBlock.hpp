@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../TextVariables/TextVariables.hpp"
 #include "../BaseCharacter/BaseCharacter.hpp"
 #include "../../InitInfo/InitInfo.hpp"
 #include "TextBockInitInfo/TextBockInitInfo.hpp"
+#include "IE/ieml/Indexed/Indexed.hpp"
 
 namespace ie {
 	class BaseTextBlock {
@@ -14,18 +14,7 @@ namespace ie {
 			virtual ~Make() = default;
 		};
 		
-		explicit BaseTextBlock(TextVariables text_variables);
-		
-		virtual void set_text_variables(
-			sf::Color text_color,
-			sf::Color text_selection_color,
-			sf::Color background_selection_color,
-			sf::Color inactive_text_selection_color,
-			sf::Color inactive_background_selection_color,
-			sf::Font& font,
-			size_t size,
-			sf::Text::Style style
-		);
+		explicit BaseTextBlock();
 		
 		virtual auto set_kerning(char32_t character) -> void;
 		
@@ -38,8 +27,5 @@ namespace ie {
 		virtual auto handle_event(Event event) -> bool = 0;
 	
 		virtual ~BaseTextBlock() = default;
-		
-	protected:
-		TextVariables text_variables_;
 	};
 }

@@ -4,6 +4,7 @@
 #include <IEML/parser.hpp>
 #include "IE/modules/load_modules.hpp"
 #include "../Box/BoxModulesLoader/BoxModulesLoader.hpp"
+#include "IE/ieml/Indexed/Indexed.hpp"
 
 namespace ie {
 	Interface::Make::Make(BoxPtr<IScalable::Make>&& object) :
@@ -22,6 +23,7 @@ namespace ie {
 				init_info.window,
 				init_info.render_target,
 				init_info.dyn_buffer,
+				init_info.text_style_buffer,
 				init_info.event_handler,
 				this->draw_manager_,
 				this->update_manager_,
@@ -37,6 +39,7 @@ namespace ie {
 	Interface::Interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
+		absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer,
 		EventHandler& event_handler,
 		BoxPtr<IScalable::Make>&& object
 	) :
@@ -47,6 +50,7 @@ namespace ie {
 				window,
 				window,
 				dyn_buffer,
+				text_style_buffer,
 				event_handler,
 				this->draw_manager_,
 				this->update_manager_,
@@ -162,6 +166,7 @@ namespace ie {
 	auto make_interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
+		absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer,
 		EventHandler& event_handler,
 		std::filesystem::path file_path,
 		int argc,
@@ -169,7 +174,7 @@ namespace ie {
 	) -> Interface {
 		auto node{ieml::from_file(file_path)};
 		auto object{bp::make_box_ptr<BoxModulesLoader::Make>(node.as<BoxModulesLoader::Make>().except())};
-		return Interface{window, dyn_buffer, event_handler, std::move(object)};
+		return Interface{window, dyn_buffer, text_style_buffer, event_handler, std::move(object)};
 	}
 }
 

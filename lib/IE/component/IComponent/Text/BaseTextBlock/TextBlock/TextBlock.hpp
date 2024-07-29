@@ -11,44 +11,14 @@ namespace ie {
 	public:
 		struct Make : public BaseTextBlock::Make {
 			sf::String text;
-			orl::Option<sf::Color> text_color = {};
-			orl::Option<sf::Font&> font = {};
-			orl::Option<sf::Text::Style> style = {};
-			std::vector<BoxPtr<BaseLine::Make> > lines = {};
-			orl::Option<size_t> size = {};
-			orl::Option<sf::Color> text_selection_color = {};
-			orl::Option<sf::Color> background_selection_color = {};
-			orl::Option<sf::Color> inactive_text_selection_color = {};
-			orl::Option<sf::Color> inactive_background_selection_color = {};
+			Indexed<TextStyle> text_stile;
 			
-			Make(
-				sf::String  text,
-				orl::Option<sf::Color> text_color = {},
-				orl::Option<sf::Font&> font = {},
-				orl::Option<sf::Text::Style> style = {},
-				std::vector<BoxPtr<BaseLine::Make> >&& lines = {},
-				orl::Option<size_t> size = {},
-				orl::Option<sf::Color> text_selection_color = {},
-				orl::Option<sf::Color> background_selection_color = {},
-				orl::Option<sf::Color> inactive_text_selection_color = {},
-				orl::Option<sf::Color> inactive_background_selection_color = {}
-			);
+			Make(sf::String text, Indexed<TextStyle>&& text_stile);
 			
 			auto make(TextBockInitInfo init_info) -> BaseTextBlock* override;
 		};
 		
 		TextBlock(Make&& make, TextBockInitInfo init_info);
-		
-		void set_text_variables(
-			sf::Color text_color,
-			sf::Color text_selection_color,
-			sf::Color background_selection_color,
-			sf::Color inactive_text_selection_color,
-			sf::Color inactive_background_selection_color,
-			sf::Font& font,
-			size_t size,
-			sf::Text::Style style
-		) override;
 		
 		auto get_characters() -> std::vector<BaseCharacter*> override;
 		
@@ -64,6 +34,7 @@ namespace ie {
 		std::vector<BoxPtr<BaseCharacter> > text_characters_;
 		std::vector<BoxPtr<BaseLine> > lines_;
 		sf::String text_;
+		TextStyle& text_style_;
 	};
 	
 	template<>

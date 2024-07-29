@@ -20,32 +20,32 @@ namespace ie {
 	
 	Character::Character(
 		char32_t character,
-		TextVariables& text_variables,
+		TextStyle& text_style,
 		std::vector<BoxPtr<BaseLine> >& lines,
 		orl::Option<sf::RenderTarget&> render_target
 	) :
 		render_target_(character == '\n' ? orl::Option<sf::RenderTarget&>{} : render_target),
+		text_style_(text_style),
 		character_(character),
-		glyph_(text_variables.font.some().getGlyph(
+		glyph_(text_style_.font.getGlyph(
 			character,
-			text_variables.size.some(),
-			text_variables.style.some() & sf::Text::Style::Bold
+			text_style_.size,
+			text_style_.bold
 		)),
 		advance_(glyph_.advance),
 		kerning_(0),
-		text_variables_(text_variables),
 		vertex_array_(sf::Quads, 4),
 		selection_vertex_array_(sf::Quads, 4),
-		texture_(text_variables.font.some().getTexture(text_variables.size.some())),
+		texture_(text_style_.font.getTexture(text_style_.size)),
 		lines_(lines) {
 		if(render_target.is_some()) {
 			make_rect_bones_tex_coords(glyph_.textureRect, vertex_array_);
 			
-			make_rect_bones_position<int>({0, 0, glyph_.textureRect.width, glyph_.textureRect.height}, vertex_array_);
+			make_rect_bones_position<int>({{}, glyph_.textureRect.getSize()}, vertex_array_);
 			
-			make_rect_bones_position<float>({0, 0, get_advance(), get_height()}, selection_vertex_array_);
+			make_rect_bones_position<float>({{}, {get_advance(), get_height()}}, selection_vertex_array_);
 			
-			if(text_variables.style.some() & sf::Text::Style::Italic) {
+			if(text_style_.italic) {
 				float italic_shear = -0.26794;
 				
 				for(size_t i = 0; i < 4; ++i) {
@@ -57,8 +57,8 @@ namespace ie {
 				vertex_array_[i].position += {glyph_.bounds.left, glyph_.bounds.top};
 				selection_vertex_array_[i].position.y -= get_height();
 				
-				vertex_array_[i].color = text_variables.text_color.some();
-				selection_vertex_array_[i].color = text_variables.background_selection_color.some();
+				vertex_array_[i].color = text_style_.text_color;
+				selection_vertex_array_[i].color = text_style_.background_selection_color;
 			}
 		}
 	}
@@ -67,13 +67,13 @@ namespace ie {
 		BaseCharacter::set_active(active);
 		if(active) {
 			for(int i = 0; i < 4; ++i) {
-				vertex_array_[i].color = text_variables_.text_selection_color.some();
-				selection_vertex_array_[i].color = text_variables_.background_selection_color.some();
+				vertex_array_[i].color = text_style_.text_selection_color;
+				selection_vertex_array_[i].color = text_style_.background_selection_color;
 			}
 		} else {
 			for(int i = 0; i < 4; ++i) {
-				vertex_array_[i].color = text_variables_.inactive_text_selection_color.some();
-				selection_vertex_array_[i].color = text_variables_.inactive_background_selection_color.some();
+				vertex_array_[i].color = text_style_.inactive_text_selection_color;
+				selection_vertex_array_[i].color = text_style_.inactive_background_selection_color;
 			}
 		}
 	}
@@ -87,7 +87,7 @@ namespace ie {
 	
 	auto Character::set_selection(bool selection) -> void {
 		BaseCharacter::set_selection(selection);
-		auto current_color{selection ? text_variables_.text_selection_color.some() : text_variables_.text_color.some()};
+		auto current_color{selection ? text_style_.text_selection_color : text_style_.text_color};
 		for(size_t i = 0; i < 4; ++i) {
 			vertex_array_[i].color = current_color;
 		}
@@ -116,7 +116,7 @@ namespace ie {
 	}
 	
 	auto Character::get_kerning(char32_t character) -> float {
-		return text_variables_.font.some().getKerning(this->character_, character, text_variables_.size.some());
+		return text_style_.font.getKerning(this->character_, character, text_style_.size);
 	}
 	
 	auto Character::get_advance() -> float {
@@ -124,7 +124,7 @@ namespace ie {
 	}
 	
 	auto Character::get_height() const -> float {
-		return text_variables_.size.some_or(0);
+		return static_cast<float>(text_style_.size);
 	}
 	
 	auto Character::set_position(sf::Vector2f position) -> void {

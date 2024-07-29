@@ -23,7 +23,6 @@ namespace ie {
 		Make&& make,
 		TextBockInitInfo init_info
 	) :
-		BaseTextBlock({}),
 		object_character_(
 			BoxPtr<IScalable>{
 				[&]() {

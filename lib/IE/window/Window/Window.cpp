@@ -33,8 +33,8 @@ namespace ie {
 	*/
 	
 	Window::Window(Interface::Make&& make, sf::String&& title, sf::VideoMode&& mode, sf::ContextSettings&& settings) :
-		interface_(window_, dyn_buffer_, event_handler_, std::move(make.object)),
-		resizer_(get_window_resizer()) {
+		interface_(window_, dyn_buffer_, text_style_buffer_, event_handler_, std::move(make.object)),
+		resizer_(get_window_resizer()){
 		
 		Window::re_calculate_min_size();
 		auto size{sf::Vector2u{mode.width, mode.height}};

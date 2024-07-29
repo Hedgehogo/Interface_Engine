@@ -4,6 +4,10 @@ namespace ie {
 	Underline::Make::Make(orl::Option<sf::Color> color) : color(std::move(color)) {
 	}
 	
+	auto Underline::Make::copy() -> Underline::Make* {
+		return new Make{*this};
+	}
+	
 	auto Underline::Make::make(LineInitInfo init_info) -> Underline* {
 		return new Underline{std::move(*this), init_info};
 	}

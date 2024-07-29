@@ -1,4 +1,5 @@
 #include "TextBockInitInfo.hpp"
+#include "IE/ieml/Indexed/Indexed.hpp"
 
 namespace ie {
 	TextBockInitInfo::TextBockInitInfo(
@@ -13,11 +14,13 @@ namespace ie {
 		sf::RenderTarget& text_render_target,
 		DrawManager& text_draw_manager,
 		InteractionManager& text_interaction_manager,
-		TextVariables& text_variables
-	) : InitInfo(
+		absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer
+	) :
+		InitInfo(
 			window,
 			render_target,
 			dyn_buffer,
+			text_style_buffer,
 			event_handler,
 			draw_manager,
 			update_manager,
@@ -26,20 +29,18 @@ namespace ie {
 		),
 		text_render_target(text_render_target),
 		text_draw_manager(text_draw_manager),
-		text_interaction_manager(text_interaction_manager),
-		text_variables(text_variables) {
+		text_interaction_manager(text_interaction_manager) {
 	}
 	
 	TextBockInitInfo::TextBockInitInfo(
 		InitInfo init_info,
 		sf::RenderTarget& text_render_target,
 		DrawManager& text_draw_manager,
-		InteractionManager& text_interaction_manager,
-		TextVariables&& text_variables
-	) : InitInfo(init_info),
+		InteractionManager& text_interaction_manager
+	) :
+		InitInfo(init_info),
 		text_render_target(text_render_target),
 		text_draw_manager(text_draw_manager),
-		text_interaction_manager(text_interaction_manager),
-		text_variables(text_variables) {
+		text_interaction_manager(text_interaction_manager) {
 	}
 }

@@ -2,26 +2,13 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "IE/component/IComponent/InitInfo/InitInfo.hpp"
-#include "IE/component/IComponent/InitInfo/InitInfo.hpp"
-#include "../../TextVariables/TextVariables.hpp"
+#include "IE/component/IComponent/Text/TextStyle/TextStyle.hpp"
 
 namespace ie {
 	struct TextBockInitInfo : public InitInfo {
-		struct TextVariables {
-			sf::Color
-				text_color,
-				text_selection_color,
-				background_selection_color,
-				inactive_text_selection_color,
-				inactive_background_selection_color;
-			sf::Font& font;
-			sf::Text::Style style;
-			size_t size;
-		};
 		sf::RenderTarget& text_render_target;
 		DrawManager& text_draw_manager;
 		InteractionManager& text_interaction_manager;
-		TextVariables& text_variables;
 		
 		TextBockInitInfo(
 			sf::RenderWindow& window,
@@ -35,15 +22,14 @@ namespace ie {
 			sf::RenderTarget& text_render_target,
 			DrawManager& text_draw_manager,
 			InteractionManager& text_interaction_manager,
-			TextVariables& text_variables
+			absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer
 		);
 		
 		TextBockInitInfo(
 			InitInfo init_info,
 			sf::RenderTarget& text_render_target,
 			DrawManager& text_draw_manager,
-			InteractionManager& text_interaction_manager,
-			TextVariables&& text_variables
+			InteractionManager& text_interaction_manager
 		);
 	};
 }

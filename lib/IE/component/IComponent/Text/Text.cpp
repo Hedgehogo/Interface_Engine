@@ -5,27 +5,11 @@
 namespace ie {
 	Text::Make::Make(
 		std::vector<BoxPtr<BaseTextBlock::Make>>&& text_blocks,
-		sf::Font& font,
 		BoxPtr<INonInteractive::Make>&& background,
-		size_t size,
-		sf::Color text_color,
-		sf::Color text_selection_color,
-		sf::Color background_selection_color,
-		sf::Color inactive_text_selection_color,
-		sf::Color inactive_background_selection_color,
-		sf::Text::Style style,
 		BoxPtr<BaseTextResizer::Make>&& resizer,
 		BoxPtr<IBasicInteraction<Text&>::Make>&& text_interaction
 	) : text_blocks(std::move(text_blocks)),
-	    font(font),
 	    background(std::move(background)),
-	    size(size),
-	    text_color(text_color),
-	    text_selection_color(text_selection_color),
-	    background_selection_color(background_selection_color),
-	    inactive_text_selection_color(inactive_text_selection_color),
-	    inactive_background_selection_color(inactive_background_selection_color),
-	    style(style),
 	    resizer(std::move(resizer)),
 	    text_interaction(std::move(text_interaction)) {
 	}
@@ -38,7 +22,6 @@ namespace ie {
 		interaction_manager(&init_info.interaction_manager),
 		render_target(&init_info.render_target),
 		background(make.background->make(init_info)),
-		size(make.size),
 		text_blocks(
 			map_make(
 				std::move(make.text_blocks),
@@ -47,16 +30,6 @@ namespace ie {
 					render_texture,
 					draw_manager,
 					*interaction_manager,
-					TextBockInitInfo::TextVariables{
-						make.text_color,
-						make.text_selection_color,
-						make.background_selection_color,
-						make.inactive_text_selection_color,
-						make.inactive_background_selection_color,
-						make.font,
-						make.style,
-						make.size
-					}
 				}
 			)
 		),
@@ -217,7 +190,7 @@ namespace ie {
 			}
 			
 			for(auto& line: resizer->get_lines()) {
-				line->draw();
+				line->draw(render_target);
 			}
 			render_texture.display();
 			texture = render_texture.getTexture();
@@ -282,22 +255,11 @@ namespace ie {
 
 auto ieml::Decode<char, ie::Text::Make>::decode(ieml::Node const& node) -> orl::Option<ie::Text::Make> {
 	auto map{node.get_map_view().except()};
-	auto color{map.get_as<sf::Color>("text-color").except().ok_or(sf::Color::Black)};
 	return ie::Text::Make{
 		map.at("text-blocks").except().as<std::vector<bp::BoxPtr<ie::BaseTextBlock::Make> > >().except(),
-		map.at("font").except().as<sf::Font&>().except(),
 		map.get_as<bp::BoxPtr<ie::INonInteractive::Make> >("background").except().ok_or_else([] {
 			return bp::make_box_ptr<ie::INonInteractive::Make, ie::FullColor::Make>(sf::Color::White);
 		}),
-		map.get_as<size_t>("font-size").except().ok_or(14),
-		color,
-		map.get_as<sf::Color>("text-selection-color").except().ok_or(sf::Color::White),
-		map.get_as<sf::Color>("background-selection-color").except().ok_or(sf::Color::Blue),
-		map.get_as<sf::Color>("inactive-text-selection-color").except().ok_or(color),
-		map.get_as<sf::Color>("inactive-background-selection-color").except().ok_or(
-			sf::Color{150, 150, 150}
-		),
-		map.get_as<ie::LoadTextStyle>("style").except().ok_or({}).style,
 		map.get_as<bp::BoxPtr<ie::BaseTextResizer::Make> >("resizer").except().ok_or_else([] {
 			return bp::make_box_ptr<ie::BaseTextResizer::Make, ie::TextResizer::Make>(1.15f, ie::BaseTextResizer::Align::Left);
 		}),

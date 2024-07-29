@@ -13,15 +13,7 @@ namespace ie {
 			Make(
 				BoxPtr<IBaseInteraction::Make>&& interaction,
 				sf::String const& text,
-				orl::Option<sf::Color> text_color = {},
-				orl::Option<sf::Font&> font = {},
-				orl::Option<sf::Text::Style> style = {},
-				std::vector<BoxPtr<BaseLine::Make> >&& lines = {},
-				orl::Option<size_t> size = {},
-				orl::Option<sf::Color> text_selection_color = {},
-				orl::Option<sf::Color> background_selection_color = {},
-				orl::Option<sf::Color> inactive_text_selection_color = {},
-				orl::Option<sf::Color> inactive_background_selection_color = {}
+				Indexed<TextStyle>&& text_style
 			);
 			
 			auto make(TextBockInitInfo init_info) -> InteractiveTextBlock* override;
