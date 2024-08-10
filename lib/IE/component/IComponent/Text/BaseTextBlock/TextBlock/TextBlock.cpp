@@ -10,21 +10,11 @@ namespace ie {
 		sf::String text,
 		Indexed<TextStyle>&& text_stile
 	) : text(text),
-		text_stile(text_stile) {
+		text_stile(std::move(text_stile)) {
 	}
 	
 	auto TextBlock::Make::make(TextBockInitInfo init_info) -> BaseTextBlock* {
 		return new TextBlock{std::move(*this), init_info};
-	}
-	
-	auto generate_lines(std::vector<BoxPtr<BaseLine::Make> >&& lines, sf::Text::Style style) -> std::vector<BoxPtr<BaseLine::Make> >&& {
-		if(style & sf::Text::Underlined) {
-			lines.emplace_back(make_box_ptr<Underline::Make>());
-		}
-		if(style & sf::Text::StrikeThrough) {
-			lines.emplace_back(make_box_ptr<StrikeThrough::Make>());
-		}
-		return std::move(lines);
 	}
 	
 	TextBlock::TextBlock(Make&& make, TextBockInitInfo init_info) :

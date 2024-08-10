@@ -20,7 +20,7 @@ namespace ie {
 	
 	Character::Character(
 		char32_t character,
-		TextStyle& text_style,
+		TextStyle const& text_style,
 		std::vector<BoxPtr<BaseLine> >& lines,
 		orl::Option<sf::RenderTarget&> render_target
 	) :

@@ -34,7 +34,7 @@ namespace ie {
 		std::vector<BoxPtr<BaseCharacter> > text_characters_;
 		std::vector<BoxPtr<BaseLine> > lines_;
 		sf::String text_;
-		TextStyle& text_style_;
+		TextStyle const& text_style_;
 	};
 	
 	template<>

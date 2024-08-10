@@ -7,7 +7,7 @@ object: = Text:
 			style: @main-text-style
 		-
 			text: " text2"
-			style:
+			style: @ass:
 				base-style: @main-text-style
 				text-color: red
 	background: @background

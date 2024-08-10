@@ -6,9 +6,8 @@ namespace ie {
 	}
 	
 	template<typename T_>
-	auto Indexed<T_>::make(absl::flat_hash_set<Indexed<T_> >& set) -> T_& {
-		set.insert(std::move(*this));
-		return object_;
+	auto Indexed<T_>::make(absl::flat_hash_set<bp::BoxPtr<Indexed<T_>, true> >& set) -> T_ const& {
+		return (*set.insert(bp::BoxPtr<Indexed<T_>, true>{new Indexed<T_>{*this}}).first)->object_;
 	}
 	
 	template<typename T_>

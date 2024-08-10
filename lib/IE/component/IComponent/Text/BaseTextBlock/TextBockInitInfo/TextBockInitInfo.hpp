@@ -3,6 +3,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "IE/component/IComponent/InitInfo/InitInfo.hpp"
 #include "IE/component/IComponent/Text/TextStyle/TextStyle.hpp"
+#include "IE/ieml/Indexed/Indexed.hpp"
 
 namespace ie {
 	struct TextBockInitInfo : public InitInfo {
@@ -22,7 +23,7 @@ namespace ie {
 			sf::RenderTarget& text_render_target,
 			DrawManager& text_draw_manager,
 			InteractionManager& text_interaction_manager,
-			absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer
+			absl::flat_hash_set<bp::BoxPtr<Indexed<TextStyle> > >& text_style_buffer
 		);
 		
 		TextBockInitInfo(

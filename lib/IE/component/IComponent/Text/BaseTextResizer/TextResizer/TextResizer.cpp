@@ -216,7 +216,6 @@ namespace ie {
 		}
 		
 		delete_old_cash(size, position);
-		auto count{size_t{0}};
 		for(current_character_ = characters_.begin(); current_character_ != characters_.end(); ++current_character_) {
 			//printf("%c", static_cast<char>((*current_character)->get_char()));
 			switch((*current_character_)->is_special()) {
@@ -236,7 +235,6 @@ namespace ie {
 					object_resize(true);
 					break;
 			}
-			++count;
 		}
 		
 		end_line_equalize();

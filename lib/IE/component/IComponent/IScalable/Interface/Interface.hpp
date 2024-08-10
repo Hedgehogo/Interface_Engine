@@ -8,6 +8,8 @@
 #include "IE/interaction/IAction/IBasicWheelAction/IBasicWheelAction.hpp"
 #include "IE/shared/DynBuffer/DynBuffer.hpp"
 #include "../IScalable.hpp"
+#include "IE/ieml/Indexed/Indexed.hpp"
+#include "IE/component/IComponent/Text/TextStyle/TextStyle.hpp"
 
 namespace ie {
 	class Interface : public virtual IScalable, public virtual IDrawable, public virtual IUpdatable {
@@ -25,7 +27,7 @@ namespace ie {
 		explicit Interface(
 			sf::RenderWindow& window,
 			DynBuffer& dyn_buffer,
-			absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer,
+			absl::flat_hash_set<bp::BoxPtr<Indexed<TextStyle> > >& text_style_buffer,
 			EventHandler& event_handler,
 			BoxPtr<IScalable::Make>&& object
 		);
@@ -85,7 +87,7 @@ namespace ie {
 	auto make_interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
-		absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer,
+		absl::flat_hash_set<bp::BoxPtr<Indexed<TextStyle> > >& text_style_buffer,
 		EventHandler& event_handler,
 		std::filesystem::path file_path,
 		int argc = 0,

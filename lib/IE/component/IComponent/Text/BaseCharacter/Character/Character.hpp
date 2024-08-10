@@ -9,7 +9,7 @@ namespace ie {
 	public:
 		Character(
 			char32_t character,
-			TextStyle& text_style_,
+			TextStyle const& text_style_,
 			std::vector<BoxPtr<BaseLine> >& lines,
 			orl::Option<sf::RenderTarget&> render_target
 		);
@@ -52,7 +52,7 @@ namespace ie {
 	protected:
 		orl::Option<sf::RenderTarget&> render_target_;
 		
-		TextStyle& text_style_;
+		TextStyle const& text_style_;
 		
 		char32_t character_;
 		sf::Glyph glyph_;

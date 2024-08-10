@@ -1,6 +1,7 @@
 #pragma once
 
 #include <absl/container/flat_hash_set.h>
+#include <box-ptr/BoxPtr.hpp>
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
@@ -9,7 +10,7 @@ namespace ie {
 	public:
 		Indexed(T_&& object, size_t id = 0);
 		
-		auto make(absl::flat_hash_set<Indexed<T_> >& set) -> T_&;
+		auto make(absl::flat_hash_set<bp::BoxPtr<Indexed<T_>, true> >& set) -> T_ const&;
 		
 		auto get_id() const -> size_t;
 		
