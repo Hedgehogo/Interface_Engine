@@ -24,7 +24,7 @@ namespace ie {
 		
 		auto handle_event(Event event) -> bool;
 		
-		auto get_line() -> std::vector<BoxPtr<BaseLine> > const& override;
+		auto get_line() -> std::vector<BoxPtr<BaseLine::MainLine> > const& override;
 		
 		auto get_position() const -> sf::Vector2f override;
 		
@@ -48,7 +48,7 @@ namespace ie {
 	
 	protected:
 		BoxPtr<IScalable> object_;
-		std::vector<BoxPtr<BaseLine> > lines_;
+		std::vector<BoxPtr<BaseLine::MainLine> > lines_;
 		BaseCharacter::Special special_;
 	};
 }

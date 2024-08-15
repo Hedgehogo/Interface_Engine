@@ -22,7 +22,7 @@ namespace ie {
 		text_style_(make.text_stile.make(init_info.text_style_buffer)) {
 		text_characters_.resize(text_.getSize());
 		for(auto i{size_t{0}}; i < text_characters_.size(); ++i) {
-			text_characters_[i] = make_box_ptr<Character>(text_[i], text_style_, this->lines_, init_info.text_render_target);
+			text_characters_[i] = make_box_ptr<Character>(text_[i], text_style_, init_info.text_render_target);
 		}
 	}
 	

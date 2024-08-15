@@ -7,12 +7,7 @@
 namespace ie {
 	class Character : public BaseCharacter {
 	public:
-		Character(
-			char32_t character,
-			TextStyle const& text_style_,
-			std::vector<BoxPtr<BaseLine> >& lines,
-			orl::Option<sf::RenderTarget&> render_target
-		);
+		Character(char32_t character, TextStyle const& text_style_, orl::Option<sf::RenderTarget&> render_target);
 		
 		auto set_active(bool active) -> void override;
 		
@@ -26,7 +21,7 @@ namespace ie {
 		
 		auto move(sf::Vector2f offset) -> void override;
 		
-		auto get_line() -> std::vector<BoxPtr<BaseLine> > const& override;
+		auto get_line() -> std::vector<BoxPtr<BaseLine::MainLine> > const& override;
 		
 		auto in(sf::Vector2f point_position) -> bool override;
 		
@@ -62,7 +57,5 @@ namespace ie {
 		sf::VertexArray selection_vertex_array_;
 		sf::Texture const& texture_;
 		sf::Vector2f origin_;
-		
-		std::vector<BoxPtr<BaseLine> >& lines_;
 	};
 }

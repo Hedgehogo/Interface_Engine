@@ -3,11 +3,16 @@ normal-object-position: [0, 0]
 object: = Text:
 	text-blocks:
 		-
+			text: " "
+			style:
+				base-style: @main-text-style
+				lines: []
+		-
 			text: "text"
 			style: @main-text-style
 		-
 			text: " text2"
-			style: @ass:
+			style:
 				base-style: @main-text-style
 				text-color: red
 	background: @background

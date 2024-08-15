@@ -82,7 +82,7 @@ namespace ie {
 		
 		equalize_characters(end_character, line_size, 0);
 		
-		auto old_line{(std::vector<BoxPtr<BaseLine> > const*)nullptr};
+		auto old_line{(std::vector<BoxPtr<BaseLine::MainLine> > const*)nullptr};
 		auto start_line{0.f};
 		
 		for(auto character = after_enter_; character != end_character; ++character) {
@@ -90,10 +90,10 @@ namespace ie {
 			if(old_line != &character_line) {
 				auto character_pos{(*character)->get_position()};
 				if(old_line) {
-					for(auto& line: *old_line) {
-						auto copy_line{line->copy()};
-						copy_line->resize(start_line, character_pos.x, character_pos.y);
-						this->lines_.emplace_back(copy_line);
+					for(auto& make: *old_line) {
+						auto line{make->make()};
+						line->resize(start_line, character_pos.x, character_pos.y);
+						this->lines_.emplace_back(line);
 					}
 				}
 				
@@ -112,10 +112,10 @@ namespace ie {
 			auto line_end{character->get_position()};
 			line_end.x += character->get_advance();
 			
-			for(auto& line: *old_line) {
-				auto copy_line{line->copy()};
-				copy_line->resize(start_line, line_end.x, line_end.y);
-				this->lines_.emplace_back(copy_line);
+			for(auto& make: *old_line) {
+				auto line{make->make()};
+				line->resize(start_line, line_end.x, line_end.y);
+				this->lines_.emplace_back(line);
 			}
 		}
 		return line_size;

@@ -1,6 +1,6 @@
-lib_dir: "../../example-resources/buildModules/"
-progress_bar_value: @progress_bar_value: 0
-text_error_value: @text_error_value: ""
+lib-dir: "../../example-resources/buildModules/"
+progress-bar-value: @progress-bar-value: 0
+text-error-value: @text-error-value: ""
 object: < main-interface
 	main-text-style:
 		text-color: white
@@ -10,12 +10,12 @@ object: < main-interface
 		inactive-background-selection-color: 6c6c6c
 		font-size: 30
 		font: > ../../example-resources/segoeui.ttf
-		bold: no
-		italic: no
-		lines: []
-		style: []
+		lines:
+			- = Underline:
+				color: blue
+			- = StrikeThrough: null
 	background: @background: 2F3033
-progress_bar: < progress-bar
-	background_bar: 27272D
+progress-bar: < progress-bar
+	background-bar: 27272D
 	bar: A0D408
-	error_color: F66151
+	error-color: F66151

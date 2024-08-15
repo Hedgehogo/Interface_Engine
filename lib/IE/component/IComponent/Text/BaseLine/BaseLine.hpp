@@ -6,15 +6,36 @@
 namespace ie {
 	class BaseLine {
 	public:
-		struct Make {
-			virtual auto make(LineInitInfo init_info) -> BaseLine* = 0;
+		struct MainLine {
+			struct Make {
+				sf::PrimitiveType type;
+				size_t vertex_count;
+				orl::Option<sf::Color> color;
+				
+				Make(sf::PrimitiveType type, size_t vertex_count, const orl::Option<sf::Color>& color);
+				
+				virtual auto make(LineInitInfo init_info) -> MainLine* = 0;
+				
+				virtual auto copy() -> Make* = 0;
+				
+				virtual ~Make() = default;
+			};
 			
-			virtual auto copy() -> Make* = 0;
+			sf::VertexArray vertex_array_;
+			bool text_color_;
 			
-			virtual ~Make() = default;
+			MainLine(Make const& make, LineInitInfo init_info);
+			
+			virtual auto reinit(LineInitInfo init_info) -> void;
+			
+			virtual auto copy() -> MainLine* = 0;
+			
+			virtual auto make() -> BaseLine* = 0;
+			
+			virtual ~MainLine() = default;
 		};
 		
-		BaseLine(sf::PrimitiveType type, size_t vertex_count, orl::Option<sf::Color> color, LineInitInfo init_info);
+		BaseLine(MainLine const& main_line);
 
 		virtual auto draw(sf::RenderTarget* render_target) -> void;
 		

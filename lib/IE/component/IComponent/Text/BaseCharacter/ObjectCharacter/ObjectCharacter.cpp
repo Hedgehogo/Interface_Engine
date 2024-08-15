@@ -62,7 +62,7 @@ namespace ie {
 		object_->draw_debug(render_target, 0, indent_addition, hue, hue_offset);
 	}
 	
-	const std::vector<BoxPtr<BaseLine>>& ObjectCharacter::get_line() {
+	const std::vector<BoxPtr<BaseLine::MainLine>>& ObjectCharacter::get_line() {
 		return lines_;
 	}
 	

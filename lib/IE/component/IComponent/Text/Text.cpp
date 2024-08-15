@@ -190,7 +190,7 @@ namespace ie {
 			}
 			
 			for(auto& line: resizer->get_lines()) {
-				line->draw(render_target);
+				line->draw(&render_texture);
 			}
 			render_texture.display();
 			texture = render_texture.getTexture();

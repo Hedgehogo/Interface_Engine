@@ -18,12 +18,7 @@ namespace ie {
 		vertex_array[3].texCoords = sf::Vector2f{sf::Vector2<T>{rect.left, rect.top + rect.height}};
 	}
 	
-	Character::Character(
-		char32_t character,
-		TextStyle const& text_style,
-		std::vector<BoxPtr<BaseLine> >& lines,
-		orl::Option<sf::RenderTarget&> render_target
-	) :
+	Character::Character(char32_t character, TextStyle const& text_style, orl::Option<sf::RenderTarget&> render_target) :
 		render_target_(character == '\n' ? orl::Option<sf::RenderTarget&>{} : render_target),
 		text_style_(text_style),
 		character_(character),
@@ -36,8 +31,7 @@ namespace ie {
 		kerning_(0),
 		vertex_array_(sf::Quads, 4),
 		selection_vertex_array_(sf::Quads, 4),
-		texture_(text_style_.font.getTexture(text_style_.size)),
-		lines_(lines) {
+		texture_(text_style_.font.getTexture(text_style_.size)){
 		if(render_target.is_some()) {
 			make_rect_bones_tex_coords(glyph_.textureRect, vertex_array_);
 			
@@ -149,8 +143,8 @@ namespace ie {
 		}
 	}
 	
-	auto Character::get_line() -> std::vector<BoxPtr<BaseLine> > const& {
-		return lines_;
+	auto Character::get_line() -> std::vector<BoxPtr<BaseLine::MainLine> > const& {
+		return text_style_.lines;
 	}
 	
 	auto Character::in(sf::Vector2f point_position) -> bool {

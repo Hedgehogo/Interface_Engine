@@ -295,20 +295,20 @@ auto ieml::Decode<char, ie::BoxModulesLoader::Make>::decode(ieml::Node const& no
 	auto map{node.get_map_view().except()};
 	auto libs{map.get_as<std::vector<ie::BoxModulesLoader::LibsOneType> >("libs").except().ok_or({})};
 	return ie::BoxModulesLoader::Make{
-		map.get_as<std::filesystem::path>("lib_dir").except().ok_or("./"),
+		map.get_as<std::filesystem::path>("lib-dir").except().ok_or("./"),
 		libs,
 		[&map, &libs]{
 			if(libs.empty()) {
 				return map.at("object").except().as<bp::BoxPtr<ie::IScalable::Make> >().except();
 			}
-			return map.get_as<ie::BoxPtr<ie::IScalable::Make> >("progress_bar").except().ok_or_else([] {
+			return map.get_as<ie::BoxPtr<ie::IScalable::Make> >("progress-bar").except().ok_or_else([] {
 				return bp::make_box_ptr<ie::Empty::Make>(ie::Empty::Make{});
 			});
 		}(),
-		map.get_as<ie::MakeDyn<ie::ISMRFloat> >("progress_bar_value").except().ok_or_else([]{
+		map.get_as<ie::MakeDyn<ie::ISMRFloat> >("progress-bar-value").except().ok_or_else([]{
 			return ie::MakeDyn<ie::ISMRFloat>{bp::make_box_ptr<ie::SMRFloat::Make>(0.f)};
 		}),
-		map.get_as<ie::MakeDyn<ie::ISMString> >("text_error_value").except().ok_or_else([]{
+		map.get_as<ie::MakeDyn<ie::ISMString> >("text-error-value").except().ok_or_else([]{
 			return ie::MakeDyn<ie::ISMString>{bp::make_box_ptr<ie::SMString::Make>(U"")};
 		}),
 		[&map, &libs]() -> orl::Option<ieml::Node>{

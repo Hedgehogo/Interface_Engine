@@ -1,22 +1,51 @@
 #include "StrikeThrough.hpp"
 
 namespace ie {
-	StrikeThrough::Make::Make(orl::Option<sf::Color> color, float strike_through_offset) :
-		color(std::move(color)), strike_through_offset(strike_through_offset) {
+	StrikeThrough::MainLine::Make::Make(
+		orl::Option<sf::Color> color,
+		float strike_through_coefficient
+	) :
+		BaseLine::MainLine::Make(sf::TriangleStrip, 4, color),
+		color(color),
+		strike_through_coefficient(strike_through_coefficient) {
 	}
 	
-	auto StrikeThrough::Make::copy() -> StrikeThrough::Make* {
+	auto StrikeThrough::MainLine::Make::copy() -> Make* {
 		return new Make{*this};
 	}
 	
-	auto StrikeThrough::Make::make(LineInitInfo init_info) -> BaseLine* {
-		return new StrikeThrough{std::move(*this), init_info};
+	auto StrikeThrough::MainLine::Make::make(LineInitInfo init_info) -> MainLine* {
+		return new MainLine{std::move(*this), init_info};
 	}
 	
-	StrikeThrough::StrikeThrough(Make&& make, LineInitInfo init_info) :
-		BaseLine(sf::TriangleStrip, 4, std::move(make.color), init_info),
-		strike_through_offset_(make.strike_through_offset * init_info.size),
-		underline_thickness_(init_info.font.getUnderlineThickness(init_info.size)) {
+	StrikeThrough::MainLine::MainLine(
+		Make&& make,
+		LineInitInfo init_info
+	) :
+		BaseLine::MainLine(make, init_info),
+		strike_through_coefficient(make.strike_through_coefficient),
+		strike_through_offset(make.strike_through_coefficient * init_info.size),
+		underline_thickness(init_info.font.getUnderlineThickness(init_info.size)) {
+	}
+	
+	auto StrikeThrough::MainLine::reinit(LineInitInfo init_info) -> void {
+		BaseLine::MainLine::reinit(init_info);
+		strike_through_offset = strike_through_coefficient * init_info.size;
+		underline_thickness = init_info.font.getUnderlineThickness(init_info.size);
+	}
+	
+	auto StrikeThrough::MainLine::copy() -> MainLine* {
+		return new MainLine{*this};
+	}
+	
+	auto StrikeThrough::MainLine::make() -> StrikeThrough* {
+		return new StrikeThrough{std::move(*this)};
+	}
+	
+	StrikeThrough::StrikeThrough(MainLine&& main_line) :
+		BaseLine(main_line),
+		strike_through_offset_(main_line.strike_through_offset),
+		underline_thickness_(main_line.underline_thickness) {
 	}
 	
 	auto StrikeThrough::resize(float start, float end, float height) -> void {
@@ -31,10 +60,15 @@ namespace ie {
 	}
 }
 
-auto ieml::Decode<char, ie::StrikeThrough::Make>::decode(ieml::Node const& node) -> orl::Option<ie::StrikeThrough::Make> {
-	auto map{node.get_map_view().except()};
-	return ie::StrikeThrough::Make{
-		map.get_as<orl::Option<sf::Color> >("color").except().ok_or({}),
-		map.get_as<float>("strike-through-offset").except().ok_or(0.3f),
-	};
+auto ieml::Decode<char, ie::StrikeThrough::MainLine::Make>::decode(ieml::Node const& node) -> orl::Option<ie::StrikeThrough::MainLine::Make> {
+	if(node.is_map()) {
+		auto map{node.get_map_view().except()};
+		return ie::StrikeThrough::MainLine::Make{
+			map.get_as<orl::Option<sf::Color> >("color").except().ok_or({}),
+			map.get_as<float>("strike-through-coefficient").except().ok_or(0.3f),
+		};
+	} else if(node.is_null()) {
+		return ie::StrikeThrough::MainLine::Make{};
+	}
+	return {};
 }

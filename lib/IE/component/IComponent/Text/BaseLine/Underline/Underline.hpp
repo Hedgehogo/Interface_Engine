@@ -6,17 +6,28 @@
 namespace ie {
 	class Underline : public BaseLine {
 	public:
-		struct Make : public BaseLine::Make {
-			orl::Option<sf::Color> color;
+		struct MainLine : public BaseLine::MainLine{
+			struct Make : public BaseLine::MainLine::Make {
+				explicit Make(orl::Option<sf::Color> color = {});
+				
+				auto copy() ->Make* override;
+				
+				auto make(LineInitInfo init_info) -> MainLine* override;
+			};
 			
-			Make(orl::Option<sf::Color> color = {});
+			float underline_offset_;
+			float underline_thickness_;
 			
-			auto copy() ->Make* override;
+			MainLine(Make&& make, LineInitInfo init_info);
 			
-			auto make(LineInitInfo init_info) -> Underline* override;
+			auto reinit(LineInitInfo init_info) -> void override;
+			
+			auto copy() -> MainLine* override;
+			
+			auto make() -> Underline* override;
 		};
 		
-		Underline(Make&& make, LineInitInfo init_info);
+		Underline(MainLine&& main_line);
 		
 		auto resize(float start, float end, float height) -> void override;
 		
@@ -29,6 +40,6 @@ namespace ie {
 }
 
 template<>
-struct ieml::Decode<char, ie::Underline::Make> {
-	static auto decode(ieml::Node const& node) -> orl::Option<ie::Underline::Make>;
+struct ieml::Decode<char, ie::Underline::MainLine::Make> {
+	static auto decode(ieml::Node const& node) -> orl::Option<ie::Underline::MainLine::Make>;
 };

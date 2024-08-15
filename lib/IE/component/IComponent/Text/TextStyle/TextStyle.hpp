@@ -8,15 +8,9 @@
 #include "IE/ieml/ieml-sfml/FileBuffer/FileBuffer.hpp"
 
 namespace ie {
-	class TextStyleParameterException : std::exception{
+	class TextStyleParameterException : public std::runtime_error{
 	public:
 		explicit TextStyleParameterException(const std::string&  name);
-	
-	private:
-		auto what() const noexcept -> char const* override;
-		
-	protected:
-		std::string str;
 	};
 	
 	struct TextStyle {
@@ -30,7 +24,7 @@ namespace ie {
 		sf::Font& font;
 		bool bold;
 		bool italic;
-		std::vector<bp::BoxPtr<BaseLine> > lines;
+		std::vector<bp::BoxPtr<BaseLine::MainLine> > lines;
 		
 		explicit TextStyle(
 			orl::Option<TextStyle> const& base_stile,
@@ -43,7 +37,7 @@ namespace ie {
 			orl::Option<sf::Font&> const& font = {},
 			orl::Option<bool> const& bold = {},
 			orl::Option<bool> const& italic = {},
-			orl::Option<std::vector<bp::BoxPtr<BaseLine::Make> > > && lines = {},
+			orl::Option<std::vector<bp::BoxPtr<BaseLine::MainLine::Make> > > && lines = {},
 			sf::Text::Style const& style = sf::Text::Style::Regular
 		);
 		

@@ -7,18 +7,14 @@
 namespace ie {
 	TextStyleParameterException::TextStyleParameterException(
 		std::string const& name
-	) : 
-		str(
-			"it is not possible you maintain `" + 
-			name + 
-			"` because you have not specified a base style or you have not specified `" + 
-			name + 
+	) :
+		std::runtime_error(
+			"it is not possible you maintain `" +
+			name +
+			"` because you have not specified a base style or you have not specified `" +
+			name +
 			"` explicitly"
 		) {
-	}
-	
-	auto TextStyleParameterException::what() const noexcept -> char const* {
-		return str.c_str();
 	}
 	
 	template<typename T>
@@ -45,7 +41,7 @@ namespace ie {
 		orl::Option<sf::Font&> const& font,
 		orl::Option<bool> const& bold,
 		orl::Option<bool> const& italic,
-		orl::Option<std::vector<bp::BoxPtr<BaseLine::Make> > >&& lines,
+		orl::Option<std::vector<bp::BoxPtr<BaseLine::MainLine::Make> > >&& lines,
 		sf::Text::Style const& style
 	) :
 		text_color(
@@ -114,24 +110,18 @@ namespace ie {
 			})
 		),
 		bold(
-			get_param<bool>(
-				base_stile,
-				bold,
-				"bold",
-				[&style](auto const& param) {
-					return style & sf::Text::Style::Bold || param.bold;
-				}
-			)
+			bold.some_or_else([&base_stile, &style](){
+				return style & sf::Text::Style::Bold || base_stile.map([](auto const& text_style) {
+					return text_style.bold;
+				}).some_or(false);
+			})
 		),
 		italic(
-			get_param<bool>(
-				base_stile,
-				italic,
-				"italic",
-				[&style](auto const& param) {
-					return style & sf::Text::Style::Italic || param.italic;
-				}
-			)
+			italic.some_or_else([&base_stile, &style](){
+				return style & sf::Text::Style::Italic || base_stile.map([](auto const& text_style) {
+					return text_style.italic;
+				}).some_or(false);
+			})
 		),
 		lines(
 			[this, &lines, &base_stile, &style] {
@@ -140,14 +130,19 @@ namespace ie {
 					lines.map([&lines_init_info](auto lines) {
 						return map_make(std::move(lines), lines_init_info);
 					}).some_or_else([&] {
-						return base_stile.except(TextStyleParameterException{"lines"}).lines;
+						return base_stile.map([&lines_init_info](auto const& text_style) {
+							for(auto const& line: text_style.lines) {
+								line->reinit(lines_init_info);
+							}
+							return text_style.lines;
+						}).some_or({});
 					})
 				};
 				if(style & sf::Text::Style::Underlined){
-					result.emplace_back(bp::make_box_ptr<ie::Underline>(ie::Underline::Make{}, lines_init_info));
+					result.emplace_back(bp::make_box_ptr<ie::Underline::MainLine>(ie::Underline::MainLine::Make{}, lines_init_info));
 				}
 				if(style & sf::Text::Style::StrikeThrough){
-					result.emplace_back(bp::make_box_ptr<ie::StrikeThrough>(ie::StrikeThrough::Make{}, lines_init_info));
+					result.emplace_back(bp::make_box_ptr<ie::StrikeThrough::MainLine>(ie::StrikeThrough::MainLine::Make{}, lines_init_info));
 				}
 				return result;
 			}()
@@ -172,7 +167,7 @@ auto ieml::Decode<char, ie::TextStyle>::decode(ieml::Node const& node) -> orl::O
 		map.get_as<orl::Option<sf::Font&> >("font").except().ok_or({}),
 		map.get_as<orl::Option<bool> >("bold").except().ok_or({}),
 		map.get_as<orl::Option<bool> >("italic").except().ok_or({}),
-		map.get_as<orl::Option<std::vector<bp::BoxPtr<ie::BaseLine::Make> > > >("lines").except().ok_or({}),
+		map.get_as<orl::Option<std::vector<bp::BoxPtr<ie::BaseLine::MainLine::Make> > > >("lines").except().ok_or({}),
 		map.get_as<ie::LoadTextStyle>("style").except().map_ok([](auto style){return style.style;}).ok_or(sf::Text::Style::Regular)
 	};
 }

@@ -118,9 +118,9 @@ namespace ie {
 			add_type_named<IPositioning2, InternalPositioning2>("InternalPos2");
 			add_names<IPositioning>("IPos2");
 			
-			add_type_make_named<BaseLine, Underline>();
-			add_type_make_named<BaseLine, StrikeThrough>();
-			add_names<BaseLine::Make>("BaseLine");
+			add_type_make_named<BaseLine::MainLine, Underline::MainLine>("Underline");
+			add_type_make_named<BaseLine::MainLine, StrikeThrough::MainLine>("StrikeThrough");
+			add_names<BaseLine::MainLine::Make>("BaseLine");
 			
 			add_names<TextStyle>("Style");
 			add_type_make_named<BaseTextBlock, TextBlock>();

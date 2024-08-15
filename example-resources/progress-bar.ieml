@@ -7,24 +7,24 @@ border-value: = RLerp:
 		end-time: 0.5
 		start: = (!=)String:
 			value: no
-			args: [@text_error_value, ""]
+			args: [@text-error-value, ""]
 first-object: = BoxConstCenter:
 	background: @background
 	const-size: [500, 40]
 	const-object: = BoxBackground:
 		offset: [2, 2]
 		object: = MovableBorder:
-			border-value: @progress_bar_value
+			border-value: @progress-bar-value
 			first-object: = RoundedRectangle:
 				color: @bar
 				radius: 18
 			second-object: = Empty: null
 		background: = RoundedRectangle:
-			color: @background_bar
+			color: @background-bar
 			radius: 20
 second-object: = EditCaption:
 	background: @background
-	text: @text_error_value
+	text: @text-error-value
 	font: > ../../example-resources/segoeui.ttf
 	font-size: 20
-	color: @error_color
+	color: @error-color
