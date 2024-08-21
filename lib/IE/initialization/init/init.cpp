@@ -69,6 +69,16 @@ namespace ie {
 		}
 	}
 	
+	template<typename T>
+	auto ieml_rttb_init_interaction(std::string name) -> void {
+		add_type_make_named<IBasicInteraction<T>, BasicAnyPressingInteraction<T>>(name + "AnyPressingI");
+		add_type_make_named<IBasicInteraction<T>, BasicHotkeyInteraction<T>>(name + "HotkeyI");
+		add_type_make_named<IBasicInteraction<T>, BasicTouchInteraction<T>>(name + "TouchI");
+		add_type_make_named<IBasicInteraction<T>, BasicKeysInteraction<T>>(name + "KeysI");
+		add_type_make_named<IBasicInteraction<T>, BasicEmptyInteraction<T>>(name + "EmptyI");
+		add_names<typename IBasicInteraction<T>::Make>("I" + name + "BaseInteraction");
+	}
+	
 	auto ieml_rttb_init() -> void {
 		[[maybe_unused]] static bool once{[]() {
 			ieml_rttb_init_shared<bool>("B", "Bool");
@@ -146,12 +156,8 @@ namespace ie {
 			add_type_make_named<BaseSwitchTabsAction, WhileSwitchTabsAction>("WhileSwitchTabsA");
 			add_names<BaseSwitchTabsAction::Make>("BaseSwitchTabsAction");
 			
-			add_type_make_named<IBaseInteraction, AnyPressingInteraction>("AnyPressingI");
-			add_type_make_named<IBaseInteraction, HotkeyInteraction>("HotkeyI");
-			add_type_make_named<IBaseInteraction, TouchInteraction>("TouchI");
-			add_type_make_named<IBaseInteraction, KeysInteraction>("KeysI");
-			add_type_make_named<IBaseInteraction, EmptyInteraction>("EmptyI");
-			add_names<IBaseInteraction::Make>("IBaseInteraction");
+			ieml_rttb_init_interaction<std::monostate>("");
+			ieml_rttb_init_interaction<Text&>("Text");
 			
 			add_type_make_named<IHidePanelInteraction, DontHidePanelInteraction>("DontHidePI");
 			add_type_make_named<IHidePanelInteraction, ClickHidePanelInteraction>("ClickHidePI");
@@ -165,11 +171,6 @@ namespace ie {
 			add_type_make_named<IMovePanelInteraction, SideMovePanelInteraction>("SideMovePI");
 			add_type_make_named<IPanelInteraction, IMovePanelInteraction>("IMovePI");
 			add_names<IPanelInteraction::Make>("IPanelInteraction");
-			
-			add_type_make<IBasicInteraction<Text&>, BasicKeysInteraction<Text&> >("TextKeysInteraction", "TextKeysI");
-			add_type_make<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&> >("TextHotkeyInteraction", "TextHotkeyI");
-			add_type_make<IBasicInteraction<Text&>, BasicEmptyInteraction<Text&> >("TextEmptyInteraction", "TextEmptyI");
-			add_names<IBasicInteraction<Text&>::Make>("ITextInteraction");
 			
 			add_fn_make<OnlyDrawable>(video_convert, "Video");
 			//add_fn<Box>(switcher_tabs_decode_pointer, "SwitcherTabs", "SwitcherT");
@@ -243,154 +244,4 @@ namespace ie {
 			return true;
 		}()};
 	}
-	
-	/*
-	void yaml_builder_init_sfloat() {
-		inherit<ISfloat, Sfloat>({"Float"});
-		inherit<ISfloat, ISCoefficientValue>();
-		add_base<SCoefficientValue, Sfloat, ISCoefficientValue>(std::vector<std::string>{"SCoefficientValue"});
-		
-		inherit<Sfloat, SRfloat>({"RFloat"});
-		inherit<SRfloat, SCRfloat>({"CRFloat"});
-		inherit<Sfloat, SConvertToFloat<int>>({"CIntToFloat"});
-		
-		inherit<ISVector2, SVec2f>({"Vec2F"});
-		inherit<ISVector2, SRVec2f>({"RVec2F"});
-	}
-	
-	void yaml_builder_init_sint(){
-		inherit<ISint, Sint>({"Int"});
-		
-		inherit<Sint, SRint>({"RInt"});
-		inherit<SRint, SCRint>({"CRFloat"});
-		inherit<ISint, SConvertToInt<float> >({"CFloatToInt"});
-		
-		inherit<ISVector2, SVec2i>({"Vec2I"});
-		inherit<ISVector2, SRVec2i>({"RVec2I"});
-	}
-	
-	void yaml_builder_init() {
-		yaml_builder_init_sint();
-		yaml_builder_init_sfloat();
-		
-		inherit<ISizing, ConstSizing>();
-		inherit<ISizing, RelativeNormalSizing>();
-		inherit<ISizing, RelativeParentSizing>();
-		inherit<ISizing, ParentCoefficientSizing>();
-		inherit<ISizing, TargetCoefficientSizing>();
-		inherit<ISizing, SmartSizing>();
-		
-		inherit<ISizing2, Sizing2>();
-		inherit<ISizing2, ConstRatioSizing2>();
-		
-		inherit<IPositioning, InternalPositioning>({"InternalPos"});
-		inherit<IPositioning, InternalTargetPositioning>({"InternalTargetPos"});
-		inherit<IPositioning, MatchPositioning>({"MatchPos"});
-		inherit<IPositioning, MatchTargetPositioning>({"MatchTargetPos"});
-		inherit<IPositioning, MatchSidesPositioning>({"MatchSidesPos"});
-		
-		inherit<IPositioning2, Positioning2>({"Pos2"});
-		inherit<IPositioning2, InternalPositioning2>({"InternalPos2"});
-		
-		inherit<BaseLine, Underline>();
-		inherit<BaseLine, StrikeThrough>();
-		
-		inherit<BaseTextBlock, TextBlock>();
-		inherit<BaseTextBlock, InteractiveTextBlock>();
-		inherit<BaseTextBlock, ObjectTextBlock>();
-		
-		inherit<BaseResizer, Resizer>();
-		
-		inherit<KeyAction, OpenUrlAction>({"OpenUrlA"});
-		inherit<KeyAction, CloseWindowAction>({"CloseWindowA"});
-		inherit<KeyAction, SwitcherAction>({"SwitcherA", });
-		inherit<KeyAction, SetSIntAction>({"SetSIntA"});
-		inherit<KeyAction, SetSFloatAction>({"SetSFloatA"});
-		
-		inherit<BasicKeyAction<Text&>, TextCopyAction >({"TextCopyA"});
-		inherit<BasicKeyAction<Text&>, TextSelectionAction>({"TextSelectionA"});
-		
-		inherit<BaseSwitchTabsAction, SwitchTabsAction>({"SwitchTabsA"});
-		inherit<BaseSwitchTabsAction, WhileSwitchTabsAction>({"WhileSwitchTabsA"});
-		
-		inherit<IBaseInteraction, OneKeyInteraction>({"OneKeyI"});
-		inherit<IBaseInteraction, KeysInteraction>({"KeysI"});
-		inherit<IBaseInteraction, EmptyInteraction>({"EmptyI"});
-		
-		inherit<IHidePanelInteraction, DontHidePanelInteraction>({"DontHidePI"});
-		inherit<IHidePanelInteraction, ClickHidePanelInteraction>({"ClickHidePI"});
-		inherit<IHidePanelInteraction, PointingHidePanelInteraction>({"PointingHidePI"});
-		inherit<IPanelInteraction, IHidePanelInteraction>();
-		inherit<IDisplayPanelInteraction, ClickDisplayPanelInteraction>({"ClickDisplayPI"});
-		inherit<IDisplayPanelInteraction, PointingDisplayPanelInteraction>({"PointingDisplayPI"});
-		inherit<IPanelInteraction, IDisplayPanelInteraction>();
-		inherit<IMovePanelInteraction, CoefficientMovePanelInteraction>({"CoefficientMovePI"});
-		inherit<IMovePanelInteraction, DontMovePanelInteraction>({"DontMovePI"});
-		inherit<IMovePanelInteraction, SideMovePanelInteraction>({"SideMovePI"});
-		inherit<IPanelInteraction, IMovePanelInteraction>();
-		
-		inherit<IBasicInteraction<Text&>, BasicKeysInteraction<Text&>>({"TextKeysI"});
-		//inherit<IBasicInteraction<Text&>, BasicHotkeyInteraction<Text&>>({"TextHotkeyI"});
-		inherit<IBasicInteraction<Text&>, BasicEmptyInteraction<Text&>>({"TextEmptyI"});
-		
-		add_func<OnlyDrawable>(video_convert, {"Video"});
-		//add_func<Box>(switcher_tabs_decode_pointer, {"SwitcherTabs", "SwitcherT"});
-		
-		inherit<OnlyDrawable, Empty>();
-		inherit<OnlyDrawable, FullColor>();
-		inherit<OnlyDrawable, RoundedRectangle>();
-		inherit<OnlyDrawable, Capsule>();
-		inherit<OnlyDrawable, Sprite>();
-		inherit<IUninteractive, OnlyDrawable>();
-		inherit<IUninteractive, Bar>();
-		inherit<IUninteractive, Caption>();
-		inherit<IScalable, IUninteractive>();
-		inherit<Box, BoxDebug>();
-		inherit<Box, BoxBackground>();
-		inherit<Box, BoxAlternative>();
-		inherit<Box, BoxBorder>();
-		inherit<Box, BoxBorderVertical>();
-		inherit<Box, BoxBorderHorizontal>();
-		inherit<Box, BoxConstBorder>();
-		inherit<Box, BoxConstBezel>();
-		inherit<Box, BoxConstRatio>();
-		inherit<Box, BoxConstRatioCenter>();
-		inherit<Box, BoxMovableBorder>();
-		inherit<Box, BoxPanel>();
-		inherit<Box, BoxRenderTexture>();
-		inherit<Box, BoxShader>();
-		inherit<Box, BoxSwitchTabs>();
-		inherit<Box, BoxMakePermeable>();
-		inherit<Box, BoxScroll>();
-		inherit<Box, BoxSwitch>();
-		inherit<Box, BoxTabs>();
-		inherit<Box, BoxSwitcherTabs>();
-		inherit<Box, BoxConstCenter>();
-		add_base<BoxUninteractive, IUninteractive, Box>();
-		inherit<IScalable, Box>();
-		inherit<BaseSlider, Slider>();
-		inherit<BaseSlider, ConstSlider>();
-		inherit<IScalable, BaseSlider>();
-		inherit<IScalable, ButtonPanel>();
-		inherit<IScalable, Button>();
-		inherit<IScalable, Switcher>();
-		inherit<IComponent, IScalable>();
-		inherit<IComponent, Text>();
-		
-		inherit<BasePanel, ConstPanel>();
-		inherit<BasePanel, Panel>();
-		
-		add_determine<FullColor>();
-		add_determine<RoundedRectangle>();
-		add_determine<Sprite>();
-		add_determine<TextBlock>();
-		add_determine<ISizing>(determine_sizing);
-		add_determine<ISizing2>(determine_sizing2);
-		add_determine<IPositioning>(determine_positioning);
-		add_determine<IPositioning2>(determine_positioning2);
-		add_determine<OpenUrlAction>(determine_url);
-		add_determine<KeysInteraction>(determine_url);
-		add_determine<BasicKeysInteraction<Text&>>(determine_url);
-	}
-	 */
 }
