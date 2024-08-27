@@ -27,7 +27,7 @@ namespace ie {
 		explicit Interface(
 			sf::RenderWindow& window,
 			DynBuffer& dyn_buffer,
-			absl::flat_hash_set<bp::BoxPtr<Indexed<TextStyle> > >& text_style_buffer,
+			absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer,
 			EventHandler& event_handler,
 			BoxPtr<IScalable::Make>&& object
 		);
@@ -87,7 +87,7 @@ namespace ie {
 	auto make_interface(
 		sf::RenderWindow& window,
 		DynBuffer& dyn_buffer,
-		absl::flat_hash_set<bp::BoxPtr<Indexed<TextStyle> > >& text_style_buffer,
+		absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer,
 		EventHandler& event_handler,
 		std::filesystem::path file_path,
 		int argc = 0,

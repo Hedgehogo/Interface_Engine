@@ -50,7 +50,7 @@ namespace ie {
 	protected:
 		sf::RenderWindow window_;
 		DynBuffer dyn_buffer_;
-		absl::flat_hash_set<bp::BoxPtr<Indexed<TextStyle> > > text_style_buffer_;
+		absl::flat_hash_set<Indexed<TextStyle> > text_style_buffer_;
 		EventHandler event_handler_;
 		Interface interface_;
 		BoxPtr<BaseWindowResizer> resizer_;

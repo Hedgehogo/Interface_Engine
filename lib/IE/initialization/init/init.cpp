@@ -9,6 +9,7 @@
 
 namespace ie {
 	auto init(int argc, char* argv[], std::filesystem::path modules_list) -> void {
+		std::hash<std::string>{}("text");
 		ieml_rttb_init();
 		load_modules(argc, argv, modules_list);
 	}

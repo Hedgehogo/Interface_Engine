@@ -148,10 +148,6 @@ namespace ie {
 			}()
 		){
 	}
-	
-	auto TextStyle::copy() const -> TextStyle* {
-		return new TextStyle{*this};
-	}
 }
 
 auto ieml::Decode<char, ie::TextStyle>::decode(ieml::Node const& node) -> orl::Option<ie::TextStyle>{

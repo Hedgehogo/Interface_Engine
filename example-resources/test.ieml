@@ -3,7 +3,7 @@ progress-bar-value: @progress-bar-value: 0
 text-error-value: @text-error-value: ""
 object: < main-interface
 	main-text-style:
-		text-color: white
+		text-color: green
 		text-selection-color: white
 		background-selection-color: blue
 		inactive-text-selection-color: 323232

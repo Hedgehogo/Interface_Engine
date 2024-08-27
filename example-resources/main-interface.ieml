@@ -1,12 +1,14 @@
 = BoxScroll:
 normal-object-position: [0, 0]
 object: = Text:
+	background: @background
 	text-blocks:
 		-
 			text: " "
 			style:
 				base-style: @main-text-style
 				lines: []
+				text-color: magenta
 		-
 			text: "text"
 			style: @main-text-style
@@ -15,4 +17,8 @@ object: = Text:
 			style:
 				base-style: @main-text-style
 				text-color: red
-	background: @background
+		-
+			text: " text3"
+			style: @main-text-style
+	text-interaction: = TextTouchI:
+		action: = TextSelectionA: null

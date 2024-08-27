@@ -28,7 +28,7 @@ namespace ie {
 		sf::RenderWindow& window;
 		sf::RenderTarget& render_target;
 		DynBuffer& dyn_buffer;
-		absl::flat_hash_set<bp::BoxPtr<Indexed<TextStyle>, true> >& text_style_buffer;
+		absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer;
 		EventHandler& event_handler;
 		DrawManager& draw_manager;
 		UpdateManager& update_manager;
@@ -39,7 +39,7 @@ namespace ie {
 			sf::RenderWindow& window_,
 			sf::RenderTarget& render_target_,
 			DynBuffer& dyn_buffer_,
-			absl::flat_hash_set<bp::BoxPtr<Indexed<TextStyle>, true> >& text_style_buffer_,
+			absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer_,
 			EventHandler& event_handler_,
 			DrawManager& draw_manager_,
 			UpdateManager& update_manager_,
@@ -53,7 +53,7 @@ namespace ie {
 		
 		auto copy(DynBuffer& dyn_buffer_) const -> InitInfo;
 		
-		auto copy(absl::flat_hash_set<bp::BoxPtr<Indexed<TextStyle>, true> >& text_style_buffer_) const -> InitInfo;
+		auto copy(absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer_) const -> InitInfo;
 		
 		auto copy(EventHandler& event_handler_) const -> InitInfo;
 		

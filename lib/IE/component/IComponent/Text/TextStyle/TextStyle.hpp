@@ -40,8 +40,6 @@ namespace ie {
 			orl::Option<std::vector<bp::BoxPtr<BaseLine::MainLine::Make> > > && lines = {},
 			sf::Text::Style const& style = sf::Text::Style::Regular
 		);
-		
-		auto copy() const -> TextStyle*;
 	};
 }
 

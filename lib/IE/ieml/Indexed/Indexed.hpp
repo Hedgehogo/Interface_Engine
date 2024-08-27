@@ -10,7 +10,7 @@ namespace ie {
 	public:
 		Indexed(T_&& object, size_t id = 0);
 		
-		auto make(absl::flat_hash_set<bp::BoxPtr<Indexed<T_>, true> >& set) -> T_ const&;
+		auto make(absl::flat_hash_set<Indexed<T_> >& set) -> T_ const&;
 		
 		auto get_id() const -> size_t;
 		
@@ -18,7 +18,7 @@ namespace ie {
 	
 	protected:
 		size_t id_;
-		T_ object_;
+		std::unique_ptr<T_> object_;
 	};
 }
 

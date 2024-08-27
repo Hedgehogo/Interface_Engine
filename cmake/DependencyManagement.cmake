@@ -16,7 +16,6 @@ function(dependency_management PROJECT)
 			abseil
 			GIT_REPOSITORY https://github.com/abseil/abseil-cpp
 			GIT_TAG        "20240116.0"
-			FIND_PACKAGE_ARGS NAMES absl
 	)
 	FetchContent_Declare(
 			ctre

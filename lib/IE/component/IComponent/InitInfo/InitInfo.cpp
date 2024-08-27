@@ -7,7 +7,7 @@ namespace ie {
 		sf::RenderWindow& window_,
 		sf::RenderTarget& render_target_,
 		DynBuffer& dyn_buffer,
-		absl::flat_hash_set<bp::BoxPtr<Indexed<TextStyle> > >& text_style_buffer_,
+		absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer_,
 		EventHandler& event_handler_,
 		DrawManager& draw_manager_,
 		UpdateManager& update_manager_,
@@ -37,7 +37,7 @@ namespace ie {
 		return {window, render_target, dyn_buffer_, text_style_buffer, event_handler, draw_manager, update_manager, interaction_manager, panel_manager};
 	}
 	
-	auto InitInfo::copy(absl::flat_hash_set<bp::BoxPtr<Indexed<TextStyle> > >& text_style_buffer_) const -> InitInfo {
+	auto InitInfo::copy(absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer_) const -> InitInfo {
 		return {window, render_target, dyn_buffer, text_style_buffer_, event_handler, draw_manager, update_manager, interaction_manager, panel_manager};
 	}
 	
