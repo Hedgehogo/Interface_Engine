@@ -31,7 +31,7 @@ namespace ie {
 				init_info.event_handler,
 				draw_manager_,
 				update_manager_,
-				interaction_manager_,
+				trigger_manager_,
 				panel_manager_interceptor_
 			}
 		)) {
@@ -42,7 +42,7 @@ namespace ie {
 	auto BoxSettable::set_object(BoxPtr<IScalable::Make>&& new_object) -> void {
 		draw_manager_.clear();
 		update_manager_.clear();
-		interaction_manager_.clear();
+		trigger_manager_.clear();
 		panel_manager_interceptor_.clear();
 		InitInfo init_info{
 			*window_,
@@ -52,7 +52,7 @@ namespace ie {
 			*event_handler_,
 			draw_manager_,
 			update_manager_,
-			interaction_manager_,
+			trigger_manager_,
 			panel_manager_interceptor_,
 		};
 		object_ = BoxPtr<IScalable>{new_object->make(init_info)};

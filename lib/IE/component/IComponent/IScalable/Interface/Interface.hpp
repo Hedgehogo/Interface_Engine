@@ -4,8 +4,8 @@
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/panel/IPanelManager/PanelManager/PanelManager.hpp"
-#include "IE/interaction/InteractionManager/InteractionManager.hpp"
-#include "IE/interaction/IAction/IBasicWheelAction/IBasicWheelAction.hpp"
+#include "IE/trigger/TriggerManager/TriggerManager.hpp"
+#include "IE/trigger/IAction/IBasicWheelAction/IBasicWheelAction.hpp"
 #include "IE/shared/DynBuffer/DynBuffer.hpp"
 #include "../IScalable.hpp"
 #include "IE/ieml/Indexed/Indexed.hpp"
@@ -38,7 +38,7 @@ namespace ie {
 		
 		auto get_update_manager() -> UpdateManager&;
 		
-		auto get_interaction_manager() -> InteractionManager&;
+		auto get_trigger_manager() -> TriggerManager&;
 		
 		auto get_panel_manager() -> PanelManager&;
 		
@@ -75,7 +75,7 @@ namespace ie {
 		sf::RenderTarget* render_target_;
 		DrawManager draw_manager_;
 		UpdateManager update_manager_;
-		InteractionManager interaction_manager_;
+		TriggerManager trigger_manager_;
 		PanelManager panel_manager_;
 		BoxPtr<IScalable> object_;
 		sf::Vector2f mouse_position_;

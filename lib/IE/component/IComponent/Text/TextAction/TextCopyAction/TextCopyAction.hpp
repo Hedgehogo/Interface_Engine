@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IE/interaction/IAction/IBasicActivityAction/IBasicActivityAction.hpp"
+#include "IE/trigger/IAction/IBasicActivityAction/IBasicActivityAction.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {

@@ -9,7 +9,7 @@ namespace ie {
 	struct TextBockInitInfo : public InitInfo {
 		sf::RenderTarget& text_render_target;
 		DrawManager& text_draw_manager;
-		InteractionManager& text_interaction_manager;
+		TriggerManager& text_trigger_manager;
 		
 		TextBockInitInfo(
 			sf::RenderWindow& window,
@@ -18,11 +18,11 @@ namespace ie {
 			EventHandler& event_handler,
 			DrawManager& draw_manager,
 			UpdateManager& update_manager,
-			InteractionManager& interaction_manager,
+			TriggerManager& trigger_manager,
 			IPanelManager& panel_manager,
 			sf::RenderTarget& text_render_target,
 			DrawManager& text_draw_manager,
-			InteractionManager& text_interaction_manager,
+			TriggerManager& text_trigger_manager,
 			absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer
 		);
 		
@@ -30,7 +30,7 @@ namespace ie {
 			InitInfo init_info,
 			sf::RenderTarget& text_render_target,
 			DrawManager& text_draw_manager,
-			InteractionManager& text_interaction_manager
+			TriggerManager& text_trigger_manager
 		);
 	};
 }

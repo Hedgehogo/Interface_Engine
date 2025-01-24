@@ -6,7 +6,7 @@
 #include <IE/event/EventHandler/EventHandler.hpp>
 #include <IE/component/IDrawable/DrawManager/DrawManager.hpp>
 #include <IE/component/IUpdatable/UpdateManager/UpdateManager.hpp>
-#include <IE/interaction/InteractionManager/InteractionManager.hpp>
+#include <IE/trigger/TriggerManager/TriggerManager.hpp>
 #include <IE/panel/IPanelManager/PanelManager/PanelManager.hpp>
 #include <IE/component/IComponent/InitInfo/InitInfo.hpp>
 
@@ -17,7 +17,7 @@ struct InitInfoData {
 	ie::EventHandler event_handler{};
 	ie::DrawManager draw_manager{};
 	ie::UpdateManager update_manager{};
-	ie::InteractionManager interaction_manager{};
+	ie::TriggerManager trigger_manager{};
 	ie::PanelManager panel_manager{};
 	
 	InitInfoData(sf::Vector2u size = {1, 1});

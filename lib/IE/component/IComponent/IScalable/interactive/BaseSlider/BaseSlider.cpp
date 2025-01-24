@@ -5,11 +5,11 @@ namespace ie {
 	BaseSlider::BaseSlider(
 		BoxPtr<INonInteractive::Make>&& slider,
 		BoxPtr<INonInteractive::Make>&& background,
-		SliderInteraction::Make&& interaction,
+		SliderTrigger::Make&& trigger,
 		MakeDyn<ISMRVec2F>&& value,
 		InitInfo init_info
 	) :
-		interaction_(std::move(interaction), {init_info, *this}),
+		trigger_(std::move(trigger), {init_info, *this}),
 		background_(background->make(init_info)),
 		slider_(slider->make(init_info)),
 		value_(
@@ -100,11 +100,11 @@ namespace ie {
 	}
 	
 	auto BaseSlider::update() -> void {
-		interaction_.update();
+		trigger_.update();
 	}
 	
 	auto BaseSlider::handle_event(Event event) -> bool {
-		return interaction_.handle_event(event);
+		return trigger_.handle_event(event);
 	}
 	
 	auto BaseSlider::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {

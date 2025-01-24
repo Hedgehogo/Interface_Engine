@@ -5,7 +5,7 @@
 #include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
 #include "IE/component/IDrawable/IDrawable/IDrawable.hpp"
 #include "IE/component/IComponent/IComponentLayout/IComponentLayout.hpp"
-#include "IE/interaction/IInteraction/BasicAnyPressingInteraction/BasicAnyPressingInteraction.hpp"
+#include "IE/trigger/ITrigger/BasicAnyPressingTrigger/BasicAnyPressingTrigger.hpp"
 #include "../../INonInteractive/INonInteractive.hpp"
 #include "../../IScalableLayout/IScalableLayout.hpp"
 
@@ -64,7 +64,7 @@ namespace ie {
 		auto layout_get_data() const -> LayoutData const& override;
 		
 		LayoutData layout_;
-		AnyPressingInteraction interaction_;
+		AnyPressingTrigger trigger_;
 		DrawManager inactive_draw_manager_;
 		DrawManager active_draw_manager_;
 		BoxPtr<IScalable> inactive_background_;

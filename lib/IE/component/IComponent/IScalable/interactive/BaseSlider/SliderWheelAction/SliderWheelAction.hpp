@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IE/interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
-#include "IE/interaction/IAction/IBasicWheelAction/IBasicWheelAction.hpp"
+#include "IE/trigger/BasicActionInitInfo/BasicActionInitInfo.hpp"
+#include "IE/trigger/IAction/IBasicWheelAction/IBasicWheelAction.hpp"
 #include "IE/event/EventHandler/EventHandler.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 

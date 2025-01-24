@@ -7,11 +7,11 @@ namespace ie {
 		std::vector<BoxPtr<BaseTextBlock::Make>>&& text_blocks,
 		BoxPtr<INonInteractive::Make>&& background,
 		BoxPtr<BaseTextResizer::Make>&& resizer,
-		BoxPtr<IBasicInteraction<Text&>::Make>&& text_interaction
+		BoxPtr<IBasicTrigger<Text&>::Make>&& text_trigger
 	) : text_blocks(std::move(text_blocks)),
 	    background(std::move(background)),
 	    resizer(std::move(resizer)),
-	    text_interaction(std::move(text_interaction)) {
+	    text_trigger(std::move(text_trigger)) {
 	}
 	
 	auto Text::Make::make(InitInfo init_info) -> Text* {
@@ -19,7 +19,7 @@ namespace ie {
 	}
 	
 	Text::Text(Make&& make, InitInfo init_info) :
-		interaction_manager(&init_info.interaction_manager),
+		trigger_manager(&init_info.trigger_manager),
 		render_target(&init_info.render_target),
 		background(make.background->make(init_info)),
 		text_blocks(
@@ -29,7 +29,7 @@ namespace ie {
 					init_info,
 					render_texture,
 					draw_manager,
-					*interaction_manager,
+					*trigger_manager,
 				}
 			)
 		),
@@ -41,7 +41,7 @@ namespace ie {
 			}
 			return make.resizer->make(TextResizerInitInfo(text_characters));
 		}()),
-		text_interaction(make.text_interaction->make({init_info, *this})) {
+		text_trigger(make.text_trigger->make({init_info, *this})) {
 		init_info.update_manager.add(*this);
 		init_info.draw_manager.add(*this);
 	}
@@ -143,7 +143,7 @@ namespace ie {
 	}
 	
 	auto Text::update() -> void {
-		text_interaction->update();
+		text_trigger->update();
 		
 		for(auto& text_block: text_blocks) {
 			text_block->update();
@@ -152,7 +152,7 @@ namespace ie {
 	
 	auto Text::handle_event(Event event) -> bool {
 		return
-			text_interaction->handle_event(event) ||
+			text_trigger->handle_event(event) ||
 			event.pointer().map([=](event_system::Pointer pointer) {
 				for(auto& text_bock: text_blocks) {
 					if(text_bock->in(sf::Vector2f{pointer.position})) {
@@ -263,8 +263,8 @@ auto ieml::Decode<char, ie::Text::Make>::decode(ieml::Node const& node) -> orl::
 		map.get_as<bp::BoxPtr<ie::BaseTextResizer::Make> >("resizer").except().ok_or_else([] {
 			return bp::make_box_ptr<ie::BaseTextResizer::Make, ie::TextResizer::Make>(1.15f, ie::BaseTextResizer::Align::Left);
 		}),
-		map.get_as<bp::BoxPtr<ie::IBasicInteraction<ie::Text&>::Make> >("text-interaction").except().ok_or_else([] {
-			return bp::make_box_ptr<ie::IBasicInteraction<ie::Text&>::Make, ie::BasicEmptyInteraction<ie::Text&>::Make>();
+		map.get_as<bp::BoxPtr<ie::IBasicTrigger<ie::Text&>::Make> >("text-trigger").except().ok_or_else([] {
+			return bp::make_box_ptr<ie::IBasicTrigger<ie::Text&>::Make, ie::BasicEmptyTrigger<ie::Text&>::Make>();
 		}),
 	};
 }

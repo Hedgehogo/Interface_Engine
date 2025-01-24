@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
-#include "IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
+#include "IE/trigger/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {

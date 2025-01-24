@@ -1,5 +1,5 @@
 #include "MovableBorder.hpp"
-#include "IE/interaction/IInteraction/BasicTouchInteraction/BasicTouchInteraction.hpp"
+#include "IE/trigger/ITrigger/BasicTouchTrigger/BasicTouchTrigger.hpp"
 #include "MovableBorderAction/MovableBorderAction.hpp"
 
 namespace ie {
@@ -8,7 +8,7 @@ namespace ie {
 		BoxPtr<IScalable::Make>&& second_object,
 		bool is_horizontal_border,
 		MakeDyn<ISMRFloat> border_value,
-		int border_interaction_size,
+		int border_trigger_size,
 		Key key,
 		sf::Vector2f min_size
 	) :
@@ -19,7 +19,7 @@ namespace ie {
 			std::move(border_value),
 			min_size
 		),
-		border_interaction_size(border_interaction_size),
+		border_trigger_size(border_trigger_size),
 		key(key) {
 	}
 	
@@ -37,24 +37,24 @@ namespace ie {
 				make.min_size
 			}, init_info
 		),
-		interaction_({make_box_ptr<BasicTouchInteraction<MovableBorder&>::Make>(
+		trigger_({make_box_ptr<BasicTouchTrigger<MovableBorder&>::Make>(
 			make_box_ptr<MovableBorderAction::Make>(border_value_.get()),
 			make.key
 		)}, {init_info, *this}),
-		border_interaction_size_(make.border_interaction_size) {
+		border_trigger_size_(make.border_trigger_size) {
 		init_info.update_manager.add(*this);
 		
 	}
 	
 	auto MovableBorder::update() -> void {
-		interaction_.update();
+		trigger_.update();
 	}
 	
 	auto MovableBorder::handle_event(Event event) -> bool {
 		return event.pointer().map([this, event](event_system::Pointer pointer) {
 			auto border_position{layout_.position + first_object_->get_size()};
 			auto in_border_axis = [=](float point_position, float border_position) {
-				return point_position < (border_position + border_interaction_size_) && point_position > (border_position - border_interaction_size_);
+				return point_position < (border_position + border_trigger_size_) && point_position > (border_position - border_trigger_size_);
 			};
 			auto in_border{
 				is_horizontal_border_ ?
@@ -62,7 +62,7 @@ namespace ie {
 				in_border_axis(pointer.position.x, border_position.x)
 			};
 			
-			return (in_border && interaction_.handle_event(event)) || BasicBoxMovableBorder<true>::handle_event(event);
+			return (in_border && trigger_.handle_event(event)) || BasicBoxMovableBorder<true>::handle_event(event);
 		}).some_or_else([this, event] {
 			return BasicBoxMovableBorder<true>::handle_event(event);
 		});
@@ -76,7 +76,7 @@ auto ieml::Decode<char, ie::MovableBorder::Make>::decode(ieml::Node const& node)
 		map.at("second-object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 		map.get_as<bool>("border-horizontal").except().ok_or(false),
 		map.at("border-value").except().as<ie::MakeDyn<ie::ISMRFloat> >().except(),
-		map.get_as<int>("border-interaction-size").except().ok_or(5),
+		map.get_as<int>("border-trigger-size").except().ok_or(5),
 		map.get_as<ie::Key>("key").except().ok_or(ie::Key::MouseLeft),
 		map.get_as<sf::Vector2f>("min-size").except().ok_or({})
 	};

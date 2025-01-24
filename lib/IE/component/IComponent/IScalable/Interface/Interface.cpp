@@ -27,7 +27,7 @@ namespace ie {
 				init_info.event_handler,
 				this->draw_manager_,
 				this->update_manager_,
-				this->interaction_manager_,
+				this->trigger_manager_,
 				this->panel_manager_
 			}
 		)),
@@ -54,7 +54,7 @@ namespace ie {
 				event_handler,
 				this->draw_manager_,
 				this->update_manager_,
-				this->interaction_manager_,
+				this->trigger_manager_,
 				this->panel_manager_
 			}
 		)),
@@ -79,8 +79,8 @@ namespace ie {
 		return update_manager_;
 	}
 	
-	auto Interface::get_interaction_manager() -> InteractionManager& {
-		return interaction_manager_;
+	auto Interface::get_trigger_manager() -> TriggerManager& {
+		return trigger_manager_;
 	}
 	
 	auto Interface::get_panel_manager() -> PanelManager& {
@@ -139,7 +139,7 @@ namespace ie {
 			}
 		}
 		if(is_in_window(mouse_position_)) {
-			if(!interaction_manager_.handle_event(event) && !panel_manager_.handle_event(event, true)) {
+			if(!trigger_manager_.handle_event(event) && !panel_manager_.handle_event(event, true)) {
 				object_->handle_event(event);
 			}
 		}

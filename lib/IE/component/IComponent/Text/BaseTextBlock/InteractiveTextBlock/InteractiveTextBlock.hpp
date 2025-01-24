@@ -1,17 +1,17 @@
 #pragma once
 
 #include "../TextBlock/TextBlock.hpp"
-#include "IE/interaction/IInteraction/IInteraction.hpp"
+#include "IE/trigger/ITrigger/ITrigger.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 
 namespace ie {
 	class InteractiveTextBlock : public TextBlock {
 	public:
 		struct Make : public TextBlock::Make {
-			BoxPtr<IBaseInteraction::Make> interaction;
+			BoxPtr<IBaseTrigger::Make> trigger;
 			
 			Make(
-				BoxPtr<IBaseInteraction::Make>&& interaction,
+				BoxPtr<IBaseTrigger::Make>&& trigger,
 				sf::String const& text,
 				Indexed<TextStyle>&& text_style
 			);
@@ -28,8 +28,8 @@ namespace ie {
 		auto handle_event(Event) -> bool override;
 	
 	protected:
-		InteractionManager* interaction_manager_;
-		BoxPtr<IInteraction> interaction_;
+		TriggerManager* trigger_manager_;
+		BoxPtr<ITrigger> trigger_;
 	};
 }
 

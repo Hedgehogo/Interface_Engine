@@ -20,7 +20,7 @@ TEST(IComponent_Text, ObjectTextBlock) {
 				data.make_init_info(),
 				text_data.render_target,
 				text_data.draw_manager,
-				text_data.interaction_manager,
+				text_data.trigger_manager,
 				{
 					sf::Color::Black,
 					sf::Color::White,
@@ -55,7 +55,7 @@ TEST(IComponent_Text, ObjectTextBlock) {
 				data.make_init_info(),
 				text_data.render_target,
 				text_data.draw_manager,
-				text_data.interaction_manager,
+				text_data.trigger_manager,
 				{
 					sf::Color::Black,
 					sf::Color::White,
@@ -90,7 +90,7 @@ TEST(IComponent_Text, ObjectTextBlock) {
 				data.make_init_info(),
 				text_data.render_target,
 				text_data.draw_manager,
-				text_data.interaction_manager,
+				text_data.trigger_manager,
 				{
 					sf::Color::Black,
 					sf::Color::White,

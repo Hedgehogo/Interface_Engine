@@ -17,7 +17,7 @@ namespace ie {
 		Box(min_size),
 		sprite_(render_texture_.getTexture()),
 		object_(object->make(init_info.copy(render_texture_).copy(draw_manager_))),
-		interaction_manager_(&init_info.interaction_manager),
+		trigger_manager_(&init_info.trigger_manager),
 		render_target_(&init_info.render_target),
 		optimize_(optimize),
 		active_(true) {
@@ -25,7 +25,7 @@ namespace ie {
 	}
 	
 	auto BoxRenderTexture::draw() -> void {
-		if(!optimize_ || active_ || interaction_manager_->is_blocked()) {
+		if(!optimize_ || active_ || trigger_manager_->is_blocked()) {
 			render_texture_.clear(sf::Color(0, 0, 0, 0));
 			draw_manager_.draw();
 			render_texture_.display();

@@ -3,7 +3,7 @@
 #include "BaseTextBlock/BaseTextBlock.hpp"
 #include "IE/component/IComponent/Text/BaseTextResizer/TextResizer/TextResizer.hpp"
 #include "../IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp"
-#include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
+#include "IE/trigger/ITrigger/BasicEmptyTrigger/BasicEmptyTrigger.hpp"
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/ieml/ieml-sfml/FileBuffer/FileBuffer.hpp"
 #include "TextStyle/TextStyle.hpp"
@@ -21,13 +21,13 @@ namespace ie {
 			std::vector<BoxPtr<BaseTextBlock::Make> > text_blocks;
 			BoxPtr<INonInteractive::Make> background = make_box_ptr<FullColor::Make>(sf::Color::White);
 			BoxPtr<BaseTextResizer::Make> resizer = make_box_ptr<TextResizer::Make>(1.15f, BaseTextResizer::Align::Left);
-			BoxPtr<IBasicInteraction<Text&>::Make> text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>();
+			BoxPtr<IBasicTrigger<Text&>::Make> text_trigger = make_box_ptr<BasicEmptyTrigger<Text&>::Make>();
 			
 			explicit Make(
 				std::vector<BoxPtr<BaseTextBlock::Make> >&& text_blocks,
 				BoxPtr<INonInteractive::Make>&& background = make_box_ptr<FullColor::Make>(sf::Color::White),
 				BoxPtr<BaseTextResizer::Make>&& resizer = make_box_ptr<TextResizer::Make>(1.15f, BaseTextResizer::Align::Left),
-				BoxPtr<IBasicInteraction<Text&>::Make>&& text_interaction = make_box_ptr<BasicEmptyInteraction<Text&>::Make>()
+				BoxPtr<IBasicTrigger<Text&>::Make>&& text_trigger = make_box_ptr<BasicEmptyTrigger<Text&>::Make>()
 			);
 			
 			auto make(InitInfo init_info) -> Text* override;
@@ -76,7 +76,7 @@ namespace ie {
 		auto draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void override;
 	
 	protected:
-		InteractionManager* interaction_manager;
+		TriggerManager* trigger_manager;
 		sf::RenderTarget* render_target;
 		
 		sf::RenderTexture render_texture;
@@ -93,7 +93,7 @@ namespace ie {
 		std::vector<BoxPtr<BaseTextBlock> > text_blocks;
 		
 		BoxPtr<BaseTextResizer> resizer;
-		BoxPtr<IBasicInteraction<Text&> > text_interaction;
+		BoxPtr<IBasicTrigger<Text&> > text_trigger;
 	};
 }
 

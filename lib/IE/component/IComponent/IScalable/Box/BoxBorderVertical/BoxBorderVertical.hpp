@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
-#include "IE/interaction/InteractionManager/InteractionManager.hpp"
+#include "IE/trigger/TriggerManager/TriggerManager.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
 

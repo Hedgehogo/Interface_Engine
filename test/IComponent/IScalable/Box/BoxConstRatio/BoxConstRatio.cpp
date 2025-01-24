@@ -20,7 +20,7 @@ TEST(IComponent, BoxConstRatio) {
 	ASSERT_EQ(data.draw_manager.size(), 3);
 	ASSERT_EQ(&data.draw_manager.get(2), &box_const_ratio);
 	ASSERT_EQ(data.update_manager.size(), 0);
-	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.trigger_manager.size(), 0);
 	ASSERT_EQ(data.panel_manager.size(), 0);
 	
 	ASSERT_EQ(box_const_ratio.get_min_size(), sf::Vector2f{});

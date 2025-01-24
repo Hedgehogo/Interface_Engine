@@ -3,7 +3,7 @@
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISReadable/ISVec2/ISVec2.hpp"
 #include "IE/component/IComponent/IScalable/INonInteractive/INonInteractive.hpp"
-#include "SliderInteraction/SliderInteraction.hpp"
+#include "SliderTrigger/SliderTrigger.hpp"
 
 namespace ie {
 	class BaseSlider : public virtual IScalable, public virtual IUpdatable {
@@ -11,7 +11,7 @@ namespace ie {
 		BaseSlider(
 			BoxPtr<INonInteractive::Make>&& slider,
 			BoxPtr<INonInteractive::Make>&& background,
-			SliderInteraction::Make&& interaction,
+			SliderTrigger::Make&& trigger,
 			MakeDyn<ISMRVec2F>&& value,
 			InitInfo init_info
 		);
@@ -53,7 +53,7 @@ namespace ie {
 		
 		BoxPtr<INonInteractive> background_;
 		BoxPtr<INonInteractive> slider_;
-		SliderInteraction interaction_;
+		SliderTrigger trigger_;
 		SReader<ISMRVec2F> value_;
 		sf::Vector2f position_;
 		sf::Vector2f slider_size_;

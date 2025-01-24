@@ -21,7 +21,7 @@ namespace ie {
 	
 	BoxSwitcherTabs::BoxSwitcherTabs(Make&& make, InitInfo init_info) :
 		Box(make.min_size),
-		interaction_(
+		trigger_(
 			{make_box_ptr<SwitcherTabsAction::Make>(make.value.make(SInitInfo{init_info})), make.key},
 			{init_info, *this}
 		),
@@ -52,11 +52,11 @@ namespace ie {
 	}
 	
 	auto BoxSwitcherTabs::update() -> void {
-		interaction_.update();
+		trigger_.update();
 	}
 	
 	auto BoxSwitcherTabs::handle_event(Event event) -> bool {
-		return interaction_.handle_event(event) || [this, event] {
+		return trigger_.handle_event(event) || [this, event] {
 			auto updated{false};
 			for(auto& object: objects_) {
 				if(object->handle_event(event)) {

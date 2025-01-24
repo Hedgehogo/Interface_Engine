@@ -44,7 +44,7 @@ namespace ie {
 		DynBuffer* dyn_buffer_;
 		absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer_;
 		EventHandler* event_handler_;
-		InteractionManager interaction_manager_;
+		TriggerManager trigger_manager_;
 		PanelManagerInterceptor panel_manager_interceptor_;
 		BoxPtr<IScalable> object_;
 	};

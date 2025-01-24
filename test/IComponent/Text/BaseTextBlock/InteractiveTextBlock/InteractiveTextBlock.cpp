@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <IComponent/_InitInfoData/InitInfoData.hpp>
-#include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
+#include "IE/trigger/ITrigger/BasicEmptyTrigger/BasicEmptyTrigger.hpp"
 #include <IE/component/IComponent/Text/BaseTextBlock/InteractiveTextBlock/InteractiveTextBlock.hpp>
 
 TEST(IComponent_Text, InteractiveTextBlock) {
@@ -12,14 +12,14 @@ TEST(IComponent_Text, InteractiveTextBlock) {
 	
 	ie::InteractiveTextBlock interactive_text_block{
 		{
-			ie::make_box_ptr<ie::EmptyInteraction::Make>(),
+			ie::make_box_ptr<ie::EmptyTrigger::Make>(),
 			"aaa bbb"
 		},
 		{
 			data.make_init_info(),
 			text_data.render_target,
 			text_data.draw_manager,
-			text_data.interaction_manager,
+			text_data.trigger_manager,
 			{
 				sf::Color::Black,
 				sf::Color::White,

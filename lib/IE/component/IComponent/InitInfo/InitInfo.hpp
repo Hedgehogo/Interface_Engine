@@ -15,7 +15,7 @@ namespace ie {
 	
 	class UpdateManager;
 	
-	class InteractionManager;
+	class TriggerManager;
 	
 	class IPanelManager;
 	
@@ -32,7 +32,7 @@ namespace ie {
 		EventHandler& event_handler;
 		DrawManager& draw_manager;
 		UpdateManager& update_manager;
-		InteractionManager& interaction_manager;
+		TriggerManager& trigger_manager;
 		IPanelManager& panel_manager;
 		
 		InitInfo(
@@ -43,7 +43,7 @@ namespace ie {
 			EventHandler& event_handler_,
 			DrawManager& draw_manager_,
 			UpdateManager& update_manager_,
-			InteractionManager& interaction_manager_,
+			TriggerManager& trigger_manager_,
 			IPanelManager& panel_manager_
 		);
 		
@@ -61,7 +61,7 @@ namespace ie {
 		
 		auto copy(UpdateManager& update_manager_) const -> InitInfo;
 		
-		auto copy(InteractionManager& interaction_manager_) const -> InitInfo;
+		auto copy(TriggerManager& trigger_manager_) const -> InitInfo;
 		
 		auto copy(IPanelManager& panel_manager_) const -> InitInfo;
 	};

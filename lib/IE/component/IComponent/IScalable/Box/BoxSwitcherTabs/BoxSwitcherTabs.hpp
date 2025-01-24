@@ -3,7 +3,7 @@
 #include "IE/ieml/ieml-sfml/ieml-sfml.hpp"
 #include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
 #include "IE/event/EventHandler/KeyHandler/KeyHandler.hpp"
-#include "IE/interaction/IInteraction/BasicTouchInteraction/BasicTouchInteraction.hpp"
+#include "IE/trigger/ITrigger/BasicTouchTrigger/BasicTouchTrigger.hpp"
 #include "../Box.hpp"
 #include "../../IScalableLayout/IScalableObjectsArray/IScalableObjectsArray.hpp"
 
@@ -45,7 +45,7 @@ namespace ie {
 		auto get_tab(sf::Vector2f position) -> int;
 		
 	protected:
-		BasicTouchInteraction<BoxSwitcherTabs&> interaction_;
+		BasicTouchTrigger<BoxSwitcherTabs&> trigger_;
 		std::vector<BoxPtr<IScalable> > objects_;
 		bool is_horizontal_;
 		ISMRSize& value_;

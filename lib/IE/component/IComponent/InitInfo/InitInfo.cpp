@@ -11,7 +11,7 @@ namespace ie {
 		EventHandler& event_handler_,
 		DrawManager& draw_manager_,
 		UpdateManager& update_manager_,
-		InteractionManager& interaction_manager_,
+		TriggerManager& trigger_manager_,
 		IPanelManager& panel_manager_
 	) :
 		window(window_),
@@ -21,43 +21,43 @@ namespace ie {
 		event_handler(event_handler_),
 		draw_manager(draw_manager_),
 		update_manager(update_manager_),
-		interaction_manager(interaction_manager_),
+		trigger_manager(trigger_manager_),
 		panel_manager(panel_manager_) {
 	}
 	
 	auto InitInfo::copy(sf::RenderWindow& window_) const -> InitInfo {
-		return {window_, render_target, dyn_buffer, text_style_buffer, event_handler, draw_manager, update_manager, interaction_manager, panel_manager};
+		return {window_, render_target, dyn_buffer, text_style_buffer, event_handler, draw_manager, update_manager, trigger_manager, panel_manager};
 	}
 	
 	auto InitInfo::copy(sf::RenderTarget& render_target_) const -> InitInfo {
-		return {window, render_target_, dyn_buffer, text_style_buffer, event_handler, draw_manager, update_manager, interaction_manager, panel_manager};
+		return {window, render_target_, dyn_buffer, text_style_buffer, event_handler, draw_manager, update_manager, trigger_manager, panel_manager};
 	}
 	
 	auto InitInfo::copy(DynBuffer& dyn_buffer_) const -> InitInfo {
-		return {window, render_target, dyn_buffer_, text_style_buffer, event_handler, draw_manager, update_manager, interaction_manager, panel_manager};
+		return {window, render_target, dyn_buffer_, text_style_buffer, event_handler, draw_manager, update_manager, trigger_manager, panel_manager};
 	}
 	
 	auto InitInfo::copy(absl::flat_hash_set<Indexed<TextStyle> >& text_style_buffer_) const -> InitInfo {
-		return {window, render_target, dyn_buffer, text_style_buffer_, event_handler, draw_manager, update_manager, interaction_manager, panel_manager};
+		return {window, render_target, dyn_buffer, text_style_buffer_, event_handler, draw_manager, update_manager, trigger_manager, panel_manager};
 	}
 	
 	auto InitInfo::copy(EventHandler& event_handler_) const -> InitInfo {
-		return {window, render_target, dyn_buffer, text_style_buffer, event_handler_, draw_manager, update_manager, interaction_manager, panel_manager};
+		return {window, render_target, dyn_buffer, text_style_buffer, event_handler_, draw_manager, update_manager, trigger_manager, panel_manager};
 	}
 	
 	auto InitInfo::copy(DrawManager& draw_manager_) const -> InitInfo {
-		return {window, render_target, dyn_buffer, text_style_buffer, event_handler, draw_manager_, update_manager, interaction_manager, panel_manager};
+		return {window, render_target, dyn_buffer, text_style_buffer, event_handler, draw_manager_, update_manager, trigger_manager, panel_manager};
 	}
 	
 	auto InitInfo::copy(UpdateManager& update_manager_) const -> InitInfo {
-		return {window, render_target, dyn_buffer, text_style_buffer, event_handler, draw_manager, update_manager_, interaction_manager, panel_manager};
+		return {window, render_target, dyn_buffer, text_style_buffer, event_handler, draw_manager, update_manager_, trigger_manager, panel_manager};
 	}
 	
-	auto InitInfo::copy(InteractionManager& interaction_manager_) const -> InitInfo {
-		return {window, render_target, dyn_buffer, text_style_buffer, event_handler, draw_manager, update_manager, interaction_manager_, panel_manager};
+	auto InitInfo::copy(TriggerManager& trigger_manager_) const -> InitInfo {
+		return {window, render_target, dyn_buffer, text_style_buffer, event_handler, draw_manager, update_manager, trigger_manager_, panel_manager};
 	}
 	
 	auto InitInfo::copy(IPanelManager& panel_manager_) const -> InitInfo {
-		return {window, render_target, dyn_buffer, text_style_buffer, event_handler, draw_manager, update_manager, interaction_manager, panel_manager_};
+		return {window, render_target, dyn_buffer, text_style_buffer, event_handler, draw_manager, update_manager, trigger_manager, panel_manager_};
 	}
 }

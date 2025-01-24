@@ -88,7 +88,7 @@ namespace ie {
 	}
 	
 	auto BoxShader::draw() -> void {
-		if(!optimize_ || active_ || interaction_manager_->is_blocked()) {
+		if(!optimize_ || active_ || trigger_manager_->is_blocked()) {
 			render_texture_.clear(sf::Color(0, 0, 0, 0));
 			draw_manager_.draw();
 			render_texture_.display();

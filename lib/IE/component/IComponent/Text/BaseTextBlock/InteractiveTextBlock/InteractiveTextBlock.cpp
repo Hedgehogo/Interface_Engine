@@ -4,12 +4,12 @@
 
 namespace ie {
 	InteractiveTextBlock::Make::Make(
-		BoxPtr<IBaseInteraction::Make>&& interaction,
+		BoxPtr<IBaseTrigger::Make>&& trigger,
 		sf::String const& text,
 		Indexed<TextStyle>&& text_style
 	) :
 		TextBlock::Make(text, std::move(text_style)),
-		interaction(std::move(interaction)) {
+		trigger(std::move(trigger)) {
 	}
 	
 	auto InteractiveTextBlock::Make::make(TextBockInitInfo init_info) -> InteractiveTextBlock* {
@@ -27,16 +27,16 @@ namespace ie {
 			},
 			init_info
 		),
-		interaction_manager_(&init_info.text_interaction_manager),
-		interaction_(make.interaction->make({static_cast<InitInfo>(init_info), {}})) {
+		trigger_manager_(&init_info.text_trigger_manager),
+		trigger_(make.trigger->make({static_cast<InitInfo>(init_info), {}})) {
 	}
 	
 	auto InteractiveTextBlock::update() -> void {
-		interaction_->update();
+		trigger_->update();
 	}
 	
 	auto InteractiveTextBlock::handle_event(Event event) -> bool {
-		return interaction_->handle_event(event);
+		return trigger_->handle_event(event);
 	}
 	
 	auto InteractiveTextBlock::in(sf::Vector2f point_position) -> bool {
@@ -52,7 +52,7 @@ namespace ie {
 auto ieml::Decode<char, ie::InteractiveTextBlock::Make>::decode(ieml::Node const& node) -> orl::Option<ie::InteractiveTextBlock::Make> {
 	auto map{node.get_map_view().except()};
 	return ie::InteractiveTextBlock::Make{
-		map.at("interaction").except().as<bp::BoxPtr<ie::IBaseInteraction::Make> >().except(),
+		map.at("trigger").except().as<bp::BoxPtr<ie::IBaseTrigger::Make> >().except(),
 		map.at("text").except().as<sf::String>().except(),
 		map.at("text_style").except().as<ie::Indexed<ie::TextStyle> >().except()
 	};

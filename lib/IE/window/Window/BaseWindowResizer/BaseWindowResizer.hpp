@@ -2,7 +2,7 @@
 
 #include <SFML/System/Vector2.hpp>
 #include "IE/event/EventHandler/EventHandler.hpp"
-#include "IE/interaction/IInteraction/IInteraction.hpp"
+#include "IE/trigger/ITrigger/ITrigger.hpp"
 
 namespace ie {
 	class Window;

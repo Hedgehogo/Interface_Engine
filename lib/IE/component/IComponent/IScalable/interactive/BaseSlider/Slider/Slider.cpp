@@ -49,7 +49,7 @@ namespace ie {
 		BaseSlider(
 			std::move(make.slider),
 			std::move(make.background),
-			SliderInteraction::Make{make.key, make.division, make.wheel_horizontal, make.wheel_relativity, make.wheel_sensitivity},
+			SliderTrigger::Make{make.key, make.division, make.wheel_horizontal, make.wheel_relativity, make.wheel_sensitivity},
 			std::move(make.value),
 			init_info
 		), scale_(make.slider_scale) {

@@ -16,7 +16,7 @@ TEST(IComponent, BoxRenderTexture) {
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(&data.draw_manager.get(0), &box_render_texture);
 	ASSERT_EQ(data.update_manager.size(), 0);
-	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.trigger_manager.size(), 0);
 	ASSERT_EQ(data.panel_manager.size(), 0);
 	
 	ASSERT_EQ(box_render_texture.get_min_size(), (sf::Vector2f{1, 1}));

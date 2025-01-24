@@ -18,12 +18,12 @@ TEST(IComponent, Interface) {
 	ASSERT_EQ(&data.draw_manager.get(0), &interface);
 	ASSERT_EQ(data.update_manager.size(), 1);
 	ASSERT_EQ(&data.update_manager.get(0), &interface);
-	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.trigger_manager.size(), 0);
 	ASSERT_EQ(data.panel_manager.size(), 0);
 	
 	ASSERT_EQ(interface.get_draw_manager().size(), 1);
 	ASSERT_EQ(interface.get_update_manager().size(), 0);
-	ASSERT_EQ(interface.get_interaction_manager().size(), 0);
+	ASSERT_EQ(interface.get_trigger_manager().size(), 0);
 	ASSERT_EQ(interface.get_panel_manager().size(), 0);
 	
 	ASSERT_EQ(&interface.get_render_target(), &data.render_target);

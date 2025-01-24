@@ -8,9 +8,9 @@ namespace ie {
 	public:
 		struct Make : public virtual IScalableObject::Make {
 			BoxPtr<IScalable::Make> background;
-			BoxPtr<IBaseInteraction::Make> interaction;
+			BoxPtr<IBaseTrigger::Make> trigger;
 			
-			Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IBaseInteraction::Make>&& interaction);
+			Make(BoxPtr<IScalable::Make>&& background, BoxPtr<IBaseTrigger::Make>&& trigger);
 			
 			auto make(InitInfo init_info) -> Button* override;
 		};
@@ -22,7 +22,7 @@ namespace ie {
 		auto handle_event(Event event) -> bool override;
 		
 	protected:
-		BoxPtr<IBaseInteraction> interaction_;
+		BoxPtr<IBaseTrigger> trigger_;
 	};
 }
 

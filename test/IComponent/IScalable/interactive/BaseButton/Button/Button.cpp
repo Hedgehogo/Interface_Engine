@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <IE/component/IComponent/IScalable/interactive/BaseButton/Button/Button.hpp>
 #include <IE/component/IComponent/IScalable/INonInteractive/OnlyDrawable/FullColor/FullColor.hpp>
-#include "IE/interaction/IInteraction/BasicEmptyInteraction/BasicEmptyInteraction.hpp"
+#include "IE/trigger/ITrigger/BasicEmptyTrigger/BasicEmptyTrigger.hpp"
 #include <IComponent/_InitInfoData/InitInfoData.hpp>
 #include "_image_equal/image_equal.hpp"
 
@@ -11,7 +11,7 @@ TEST(IComponent, Button) {
 	ie::Button button{
 		{
 			ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Green),
-			ie::make_box_ptr<ie::EmptyInteraction::Make>(),
+			ie::make_box_ptr<ie::EmptyTrigger::Make>(),
 		}, data.make_init_info()
 	};
 	data.update_manager.update();
@@ -19,7 +19,7 @@ TEST(IComponent, Button) {
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(data.update_manager.size(), 1);
 	ASSERT_EQ(&data.update_manager.get(0), &button);
-	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.trigger_manager.size(), 0);
 	ASSERT_EQ(data.panel_manager.size(), 0);
 	
 	ASSERT_EQ(button.get_min_size(), sf::Vector2f{});

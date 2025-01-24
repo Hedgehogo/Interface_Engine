@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../BoxSwitchTabs.hpp"
-#include "IE/interaction/IAction/IBasicActivityAction/IBasicActivityAction.hpp"
+#include "IE/trigger/IAction/IBasicActivityAction/IBasicActivityAction.hpp"
 
 namespace ie {
 	class BaseSwitchTabsAction : public virtual IBasicActivityAction<BoxSwitchTabs&> {

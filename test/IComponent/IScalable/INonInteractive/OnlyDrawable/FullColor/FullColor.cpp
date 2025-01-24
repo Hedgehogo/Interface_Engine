@@ -11,7 +11,7 @@ TEST(IComponent, FullColor) {
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(&data.draw_manager.get(0), &full_color);
 	ASSERT_EQ(data.update_manager.size(), 0);
-	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.trigger_manager.size(), 0);
 	ASSERT_EQ(data.panel_manager.size(), 0);
 	
 	ASSERT_EQ(&full_color.get_render_target(), &data.render_target);

@@ -3,7 +3,7 @@
 #include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
 #include "IE/shared/SReader/SReader.hpp"
 #include "IE/shared/ISReadable/ISReadable.hpp"
-#include "IE/interaction/IAction/IBasicActivityAction/IBasicActivityAction.hpp"
+#include "IE/trigger/IAction/IBasicActivityAction/IBasicActivityAction.hpp"
 
 namespace ie {
 	class Switcher;

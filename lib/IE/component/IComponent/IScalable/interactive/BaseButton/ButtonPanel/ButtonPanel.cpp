@@ -1,8 +1,8 @@
 #include "ButtonPanel.hpp"
 
 namespace ie {
-	ButtonPanel::Make::Make(BoxPtr<Panel::Make>&& panel, BoxPtr<IDisplayPanelInteraction::Make>&& interaction, BoxPtr<IScalable::Make>&& background) :
-		panel(std::move(panel)), interaction(std::move(interaction)), background(std::move(background)) {
+	ButtonPanel::Make::Make(BoxPtr<Panel::Make>&& panel, BoxPtr<IDisplayPanelTrigger::Make>&& trigger, BoxPtr<IScalable::Make>&& background) :
+		panel(std::move(panel)), trigger(std::move(trigger)), background(std::move(background)) {
 	}
 	
 	auto ButtonPanel::Make::make(InitInfo init_info) -> ButtonPanel* {
@@ -12,7 +12,7 @@ namespace ie {
 	ButtonPanel::ButtonPanel(Make&& make, InitInfo init_info) :
 		BaseButton(std::move(make.background), init_info),
 		panel_(make.panel->make(init_info)),
-		interaction_(make.interaction->make({init_info, *panel_})) {
+		trigger_(make.trigger->make({init_info, *panel_})) {
 	}
 	
 	auto ButtonPanel::resize(sf::Vector2f size, sf::Vector2f position) -> void {
@@ -31,11 +31,11 @@ namespace ie {
 	}
 	
 	auto ButtonPanel::update() -> void {
-		interaction_->update();
+		trigger_->update();
 	}
 	
 	auto ButtonPanel::handle_event(Event event) -> bool {
-		return interaction_->handle_event(event) || BaseButton::handle_event(event);
+		return trigger_->handle_event(event) || BaseButton::handle_event(event);
 	}
 	
 	auto ButtonPanel::draw_debug(sf::RenderTarget& render_target, int indent, int indent_addition, size_t hue, size_t hue_offset) -> void {
@@ -48,7 +48,7 @@ auto ieml::Decode<char, ie::ButtonPanel::Make>::decode(ieml::Node const& node) -
 	auto map{node.get_map_view().except()};
 	return ie::ButtonPanel::Make{
 		map.at("panel").except().as<ie::BoxPtr<ie::Panel::Make> >().except(),
-		map.at("display-interaction").except().as<ie::BoxPtr<ie::IDisplayPanelInteraction::Make> >().except(),
+		map.at("display-trigger").except().as<ie::BoxPtr<ie::IDisplayPanelTrigger::Make> >().except(),
 		map.at("background").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
 	};
 }

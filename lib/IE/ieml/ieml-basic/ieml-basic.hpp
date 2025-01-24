@@ -3,7 +3,7 @@
 #include <box-ptr/BoxPtr.hpp>
 #include <IEML/node.hpp>
 #include "IE/ieml/ieml-rttb/ieml-rttb.hpp"
-#include "LoadString/LoadString.hpp"
+#include "ParseString/ParseString.hpp"
 
 namespace ie {
 	using namespace bp;
@@ -36,7 +36,7 @@ namespace tnl {
 	};
 	
 	template<>
-	struct TypeName<ie::LoadString> {
+	struct TypeName<ie::ParseString> {
 		constexpr static auto type_name = StringView{"String"};
 	};
 	
@@ -73,8 +73,8 @@ namespace ieml {
 	};
 	
 	template<>
-	struct Decode<char, ie::LoadString> {
-		static auto decode(ieml::Node const& node) -> orl::Option<ie::LoadString>;
+	struct Decode<char, ie::ParseString> {
+		static auto decode(ieml::Node const& node) -> orl::Option<ie::ParseString>;
 	};
 	
 	template<>

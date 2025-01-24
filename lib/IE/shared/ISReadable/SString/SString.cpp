@@ -22,7 +22,7 @@ auto ieml::Decode<char, ie::make_system::SString>::decode(const ieml::Node& node
 	if(clear_node.is_null()) {
 		return {{}};
 	}
-	return {{ie::to_utf32(clear_node.as<ie::LoadString>().except().str)}};
+	return {{ie::to_utf32(clear_node.as<ie::ParseString>().except().str)}};
 }
 
 auto ieml::Decode<char, ie::make_system::SMString>::decode(const ieml::Node& node) -> orl::Option<ie::make_system::SMString> {

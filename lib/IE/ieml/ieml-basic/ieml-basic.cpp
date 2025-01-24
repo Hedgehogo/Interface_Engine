@@ -2,7 +2,7 @@
 #include <localisation/system.hpp>
 
 namespace ieml {
-	auto Decode<char, ie::LoadString>::decode(ieml::Node const& node) -> orl::Option<ie::LoadString> {
+	auto Decode<char, ie::ParseString>::decode(ieml::Node const& node) -> orl::Option<ie::ParseString> {
 		auto& clear_node{node.get_clear()};
 		for(auto map: clear_node.get_map_view().ok_or_none()) {
 			for(auto& key: map.at("key").ok_or_none()) {
@@ -23,7 +23,7 @@ namespace ieml {
 	
 	auto Decode<char, std::filesystem::path>::decode(ieml::Node const& node) -> orl::Option<std::filesystem::path>{
 		return std::filesystem::path{
-			node.as<ie::LoadString>().except().str
+			node.as<ie::ParseString>().except().str
 		};
 	}
 	

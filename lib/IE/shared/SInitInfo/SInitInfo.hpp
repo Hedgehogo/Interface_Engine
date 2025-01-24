@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IE/component/IComponent/InitInfo/InitInfo.hpp"
-#include "IE/interaction/BasicActionInitInfo/BasicActionInitInfo.hpp"
+#include "IE/trigger/BasicActionInitInfo/BasicActionInitInfo.hpp"
 
 namespace ie {
 	struct SInitInfo {

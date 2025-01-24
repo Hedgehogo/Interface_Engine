@@ -35,7 +35,7 @@ namespace ie {
 		Key key,
 		InitInfo init_info
 	) :
-		interaction_({make_box_ptr<SwitcherAction::Make>(value), key}, {init_info, {}}),
+		trigger_({make_box_ptr<SwitcherAction::Make>(value), key}, {init_info, {}}),
 		inactive_background_(inactive_background->make(init_info.copy(inactive_draw_manager_))),
 		active_background_(active_background->make(init_info.copy(active_draw_manager_))),
 		active_(value) {
@@ -84,12 +84,12 @@ namespace ie {
 	}
 	
 	auto Switcher::update() -> void {
-		interaction_.update();
+		trigger_.update();
 	}
 	
 	auto Switcher::handle_event(Event event) -> bool {
 		return
-			interaction_.handle_event(event) && active_.get() ?
+			trigger_.handle_event(event) && active_.get() ?
 			active_background_->handle_event(event) :
 			inactive_background_->handle_event(event);
 	}

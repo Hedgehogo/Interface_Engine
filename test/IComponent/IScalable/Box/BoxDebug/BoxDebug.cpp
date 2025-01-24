@@ -16,7 +16,7 @@ TEST(IComponent, BoxDebug) {
 	ASSERT_EQ(data.draw_manager.size(), 2);
 	ASSERT_EQ(&data.draw_manager.get(1), &box_debug);
 	ASSERT_EQ(data.update_manager.size(), 0);
-	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.trigger_manager.size(), 0);
 	ASSERT_EQ(data.panel_manager.size(), 0);
 	
 	ASSERT_EQ(box_debug.get_min_size(), sf::Vector2f{});

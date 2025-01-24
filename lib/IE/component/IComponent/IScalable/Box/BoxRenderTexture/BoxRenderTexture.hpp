@@ -43,7 +43,7 @@ namespace ie {
 		sf::View view_;
 		DrawManager draw_manager_;
 		BoxPtr<IScalable> object_;
-		InteractionManager* interaction_manager_;
+		TriggerManager* trigger_manager_;
 		sf::RenderTarget* render_target_;
 		bool optimize_;
 		bool active_;

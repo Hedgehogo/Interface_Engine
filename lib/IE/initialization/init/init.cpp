@@ -71,13 +71,13 @@ namespace ie {
 	}
 	
 	template<typename T>
-	auto ieml_rttb_init_interaction(std::string name) -> void {
-		add_type_make_named<IBasicInteraction<T>, BasicAnyPressingInteraction<T>>(name + "AnyPressingI");
-		add_type_make_named<IBasicInteraction<T>, BasicHotkeyInteraction<T>>(name + "HotkeyI");
-		add_type_make_named<IBasicInteraction<T>, BasicTouchInteraction<T>>(name + "TouchI");
-		add_type_make_named<IBasicInteraction<T>, BasicKeysInteraction<T>>(name + "KeysI");
-		add_type_make_named<IBasicInteraction<T>, BasicEmptyInteraction<T>>(name + "EmptyI");
-		add_names<typename IBasicInteraction<T>::Make>("I" + name + "BaseInteraction");
+	auto ieml_rttb_init_trigger(std::string name) -> void {
+		add_type_make_named<IBasicTrigger<T>, BasicAnyPressingTrigger<T>>(name + "AnyPressingI");
+		add_type_make_named<IBasicTrigger<T>, BasicHotkeyTrigger<T>>(name + "HotkeyI");
+		add_type_make_named<IBasicTrigger<T>, BasicTouchTrigger<T>>(name + "TouchI");
+		add_type_make_named<IBasicTrigger<T>, BasicKeysTrigger<T>>(name + "KeysI");
+		add_type_make_named<IBasicTrigger<T>, BasicEmptyTrigger<T>>(name + "EmptyI");
+		add_names<typename IBasicTrigger<T>::Make>("I" + name + "BaseTrigger");
 	}
 	
 	auto ieml_rttb_init() -> void {
@@ -157,21 +157,21 @@ namespace ie {
 			add_type_make_named<BaseSwitchTabsAction, WhileSwitchTabsAction>("WhileSwitchTabsA");
 			add_names<BaseSwitchTabsAction::Make>("BaseSwitchTabsAction");
 			
-			ieml_rttb_init_interaction<std::monostate>("");
-			ieml_rttb_init_interaction<Text&>("Text");
+			ieml_rttb_init_trigger<std::monostate>("");
+			ieml_rttb_init_trigger<Text&>("Text");
 			
-			add_type_make_named<IHidePanelInteraction, DontHidePanelInteraction>("DontHidePI");
-			add_type_make_named<IHidePanelInteraction, ClickHidePanelInteraction>("ClickHidePI");
-			add_type_make_named<IHidePanelInteraction, PointingHidePanelInteraction>("PointingHidePI");
-			add_type_make_named<IPanelInteraction, IHidePanelInteraction>("IHidePI");
-			add_type_make_named<IDisplayPanelInteraction, ClickDisplayPanelInteraction>("ClickDisplayPI");
-			add_type_make_named<IDisplayPanelInteraction, PointingDisplayPanelInteraction>("PointingDisplayPI");
-			add_type_make_named<IPanelInteraction, IDisplayPanelInteraction>("IDisplayPI");
-			add_type_make_named<IMovePanelInteraction, CoefficientMovePanelInteraction>("CoefficientMovePI");
-			add_type_make_named<IMovePanelInteraction, DontMovePanelInteraction>("DontMovePI");
-			add_type_make_named<IMovePanelInteraction, SideMovePanelInteraction>("SideMovePI");
-			add_type_make_named<IPanelInteraction, IMovePanelInteraction>("IMovePI");
-			add_names<IPanelInteraction::Make>("IPanelInteraction");
+			add_type_make_named<IHidePanelTrigger, DontHidePanelTrigger>("DontHidePI");
+			add_type_make_named<IHidePanelTrigger, ClickHidePanelTrigger>("ClickHidePI");
+			add_type_make_named<IHidePanelTrigger, PointingHidePanelTrigger>("PointingHidePI");
+			add_type_make_named<IPanelTrigger, IHidePanelTrigger>("IHidePI");
+			add_type_make_named<IDisplayPanelTrigger, ClickDisplayPanelTrigger>("ClickDisplayPI");
+			add_type_make_named<IDisplayPanelTrigger, PointingDisplayPanelTrigger>("PointingDisplayPI");
+			add_type_make_named<IPanelTrigger, IDisplayPanelTrigger>("IDisplayPI");
+			add_type_make_named<IMovePanelTrigger, CoefficientMovePanelTrigger>("CoefficientMovePI");
+			add_type_make_named<IMovePanelTrigger, DontMovePanelTrigger>("DontMovePI");
+			add_type_make_named<IMovePanelTrigger, SideMovePanelTrigger>("SideMovePI");
+			add_type_make_named<IPanelTrigger, IMovePanelTrigger>("IMovePI");
+			add_names<IPanelTrigger::Make>("IPanelTrigger");
 			
 			add_fn_make<OnlyDrawable>(video_convert, "Video");
 			//add_fn<Box>(switcher_tabs_decode_pointer, "SwitcherTabs", "SwitcherT");
@@ -240,8 +240,8 @@ namespace ie {
 			add_determine<IPositioning>(determine_positioning);
 			add_determine_make<IPositioning2>(determine_positioning2);
 			add_bool_determine_make<OpenUrlAction>(determine_url);
-			add_bool_determine_make<KeysInteraction>(determine_url);
-			//add_bool_determine_make<BasicKeysInteraction<Text&> >(determine_url);
+			add_bool_determine_make<KeysTrigger>(determine_url);
+			//add_bool_determine_make<BasicKeysTrigger<Text&> >(determine_url);
 			return true;
 		}()};
 	}

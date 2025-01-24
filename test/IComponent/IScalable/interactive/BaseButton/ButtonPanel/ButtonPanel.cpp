@@ -12,20 +12,20 @@ TEST(IComponent, ButtonPanel) {
 		{
 			ie::make_box_ptr<ie::Panel::Make>(
 				ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Red),
-				ie::make_box_ptr<ie::PointingHidePanelInteraction::Make>(),
+				ie::make_box_ptr<ie::PointingHidePanelTrigger::Make>(),
 				ie::make_box_ptr<ie::Sizing2::Make>(sf::Vector2f{10, 10}),
 				ie::make_box_ptr<ie::Positioning2::Make>(sf::Vector2f{0.5f, 0.5f})
 			),
-			ie::make_box_ptr<ie::PointingDisplayPanelInteraction::Make>(),
+			ie::make_box_ptr<ie::PointingDisplayPanelTrigger::Make>(),
 			ie::make_box_ptr<ie::FullColor::Make>(sf::Color::Green),
 		}, data.make_init_info()
 	};
-	data.interaction_manager.update({});
+	data.trigger_manager.update({});
 	
 	ASSERT_EQ(data.draw_manager.size(), 1);
 	ASSERT_EQ(data.update_manager.size(), 1);
 	ASSERT_EQ(&data.update_manager.get(0), &button_panel);
-	ASSERT_EQ(data.interaction_manager.size(), 0);
+	ASSERT_EQ(data.trigger_manager.size(), 0);
 	ASSERT_EQ(data.panel_manager.size(), 1);
 	ASSERT_EQ(&data.panel_manager.get(0), &button_panel.get_panel());
 	

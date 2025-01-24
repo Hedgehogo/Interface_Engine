@@ -1,24 +1,24 @@
 #pragma once
 
 #include "../../IPanelManager/PanelManager/PanelManager.hpp"
-#include "../../IPanelInteraction/IHidePanelInteraction/IHidePanelInteraction.hpp"
-#include "../../IPanelInteraction/IMovePanelInteraction/IMovePanelInteraction.hpp"
+#include "../../IPanelTrigger/IHidePanelTrigger/IHidePanelTrigger.hpp"
+#include "../../IPanelTrigger/IMovePanelTrigger/IMovePanelTrigger.hpp"
 
 namespace ie {
 	class Panel : public BasePanel {
 	public:
 		struct Make : public virtual BasePanel::Make {
 			BoxPtr<IScalable::Make> object;
-			BoxPtr<IHidePanelInteraction::Make> hide_interaction;
-			BoxPtr<IMovePanelInteraction::Make> move_interaction;
+			BoxPtr<IHidePanelTrigger::Make> hide_trigger;
+			BoxPtr<IMovePanelTrigger::Make> move_trigger;
 			BoxPtr<ISizing2::Make> sizing;
 			BoxPtr<IPositioning2::Make> positioning;
 			bool displayed = false;
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
-				BoxPtr<IHidePanelInteraction::Make> hide_interaction,
-				BoxPtr<IMovePanelInteraction::Make> move_interaction,
+				BoxPtr<IHidePanelTrigger::Make> hide_trigger,
+				BoxPtr<IMovePanelTrigger::Make> move_trigger,
 				BoxPtr<ISizing2::Make> sizing,
 				BoxPtr<IPositioning2::Make> positioning,
 				bool displayed = false
@@ -26,7 +26,7 @@ namespace ie {
 			
 			Make(
 				BoxPtr<IScalable::Make>&& object,
-				BoxPtr<IHidePanelInteraction::Make> hide_interaction,
+				BoxPtr<IHidePanelTrigger::Make> hide_trigger,
 				BoxPtr<ISizing2::Make> sizing,
 				BoxPtr<IPositioning2::Make> positioning,
 				bool displayed = false
@@ -53,9 +53,9 @@ namespace ie {
 		
 	protected:
 		PanelManager panel_manager_;
-		InteractionManager* interaction_manager_;
-		BoxPtr<IHidePanelInteraction> hide_interaction_;
-		BoxPtr<IMovePanelInteraction> move_interaction_;
+		TriggerManager* trigger_manager_;
+		BoxPtr<IHidePanelTrigger> hide_trigger_;
+		BoxPtr<IMovePanelTrigger> move_trigger_;
 	};
 }
 

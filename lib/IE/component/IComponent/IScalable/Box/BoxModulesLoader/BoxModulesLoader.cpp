@@ -26,7 +26,7 @@ namespace ie {
 		auto write_function(char *ptr, size_t size, size_t nmemb, void *userdata) -> size_t {
 			auto write_data{static_cast<Write_data*>(userdata)};
 			if(!write_data->file) {
-				write_data->file = fopen(write_data->path.c_str(), "w+");
+				write_data->file = fopen(write_data->path.string().c_str(), "w+");
 			}
 			auto written{fwrite(ptr, size, nmemb, write_data->file)};
 			return written;
@@ -280,7 +280,7 @@ auto ieml::Decode<char, ie::BoxModulesLoader::LibsOneType>::decode(ieml::Node co
 	}
 	
 	auto map{node.get_map_view().except()};
-	auto urls_load_string{map.get_as<std::vector<ie::LoadString> >("urls").except().ok_or({})};
+	auto urls_load_string{map.get_as<std::vector<ie::ParseString> >("urls").except().ok_or({})};
 	auto urls_string{std::vector<std::string>{urls_load_string.size()}};
 	std::transform(urls_load_string.begin(), urls_load_string.end(), urls_string.begin(), [](auto load_string){return load_string.str;});
 	

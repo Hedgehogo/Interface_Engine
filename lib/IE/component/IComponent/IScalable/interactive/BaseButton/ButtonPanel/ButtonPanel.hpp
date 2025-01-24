@@ -2,24 +2,24 @@
 
 #include "../BaseButton.hpp"
 #include "IE/panel/BasePanel/Panel/Panel.hpp"
-#include "IE/panel/IPanelInteraction/IDisplayPanelInteraction/PointingDisplayPanelInteraction/PointingDisplayPanelInteraction.hpp"
-#include "IE/panel/IPanelInteraction/IDisplayPanelInteraction/ClickDisplayPanelInteraction/ClickDisplayPanelInteraction.hpp"
-#include "IE/panel/IPanelInteraction/IHidePanelInteraction/PointingHidePanelInteraction/PointingHidePanelInteraction.hpp"
-#include "IE/panel/IPanelInteraction/IHidePanelInteraction/ClickHidePanelInteraction/ClickHidePanelInteraction.hpp"
-#include "IE/panel/IPanelInteraction/IHidePanelInteraction/DontHidePanelInteraction/DontHidePanelInteraction.hpp"
-#include "IE/panel/IPanelInteraction/IMovePanelInteraction/DontMovePanelInteraction/DontMovePanelInteraction.hpp"
-#include "IE/panel/IPanelInteraction/IMovePanelInteraction/CoefficientMovePanelInteraction/CoefficientMovePanelInteraction.hpp"
-#include "IE/panel/IPanelInteraction/IMovePanelInteraction/SideMovePanelInteraction/SideMovePanelInteraction.hpp"
+#include "IE/panel/IPanelTrigger/IDisplayPanelTrigger/PointingDisplayPanelTrigger/PointingDisplayPanelTrigger.hpp"
+#include "IE/panel/IPanelTrigger/IDisplayPanelTrigger/ClickDisplayPanelTrigger/ClickDisplayPanelTrigger.hpp"
+#include "IE/panel/IPanelTrigger/IHidePanelTrigger/PointingHidePanelTrigger/PointingHidePanelTrigger.hpp"
+#include "IE/panel/IPanelTrigger/IHidePanelTrigger/ClickHidePanelTrigger/ClickHidePanelTrigger.hpp"
+#include "IE/panel/IPanelTrigger/IHidePanelTrigger/DontHidePanelTrigger/DontHidePanelTrigger.hpp"
+#include "IE/panel/IPanelTrigger/IMovePanelTrigger/DontMovePanelTrigger/DontMovePanelTrigger.hpp"
+#include "IE/panel/IPanelTrigger/IMovePanelTrigger/CoefficientMovePanelTrigger/CoefficientMovePanelTrigger.hpp"
+#include "IE/panel/IPanelTrigger/IMovePanelTrigger/SideMovePanelTrigger/SideMovePanelTrigger.hpp"
 
 namespace ie {
 	class ButtonPanel : public BaseButton {
 	public:
 		struct Make : public virtual IComponentObject::Make, public virtual IScalable::Make {
 			BoxPtr<Panel::Make> panel;
-			BoxPtr<IDisplayPanelInteraction::Make> interaction;
+			BoxPtr<IDisplayPanelTrigger::Make> trigger;
 			BoxPtr<IScalable::Make> background;
 			
-			Make(BoxPtr<Panel::Make>&& panel, BoxPtr<IDisplayPanelInteraction::Make>&& interaction, BoxPtr<IScalable::Make>&& background);
+			Make(BoxPtr<Panel::Make>&& panel, BoxPtr<IDisplayPanelTrigger::Make>&& trigger, BoxPtr<IScalable::Make>&& background);
 			
 			auto make(InitInfo init_info) -> ButtonPanel* override;
 		};
@@ -40,7 +40,7 @@ namespace ie {
 	
 	protected:
 		BoxPtr<Panel> panel_;
-		BoxPtr<IDisplayPanelInteraction> interaction_;
+		BoxPtr<IDisplayPanelTrigger> trigger_;
 	};
 }
 

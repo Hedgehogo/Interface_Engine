@@ -2,7 +2,7 @@
 
 #include "IE/utils/bool/ActiveTracker/ActiveTracker.hpp"
 #include "IE/shared/ISReadable/ISRanged/ISRanged.hpp"
-#include "IE/interaction/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
+#include "IE/trigger/IAction/IBasicTouchAction/IBasicTouchAction.hpp"
 
 namespace ie {
 	class BoxSwitcherTabs;

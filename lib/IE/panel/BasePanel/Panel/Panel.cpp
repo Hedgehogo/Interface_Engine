@@ -1,18 +1,18 @@
 #include "Panel.hpp"
-#include "../../IPanelInteraction/IMovePanelInteraction/DontMovePanelInteraction/DontMovePanelInteraction.hpp"
+#include "../../IPanelTrigger/IMovePanelTrigger/DontMovePanelTrigger/DontMovePanelTrigger.hpp"
 
 namespace ie {
 	Panel::Make::Make(
 		BoxPtr<IScalable::Make>&& object,
-		BoxPtr<IHidePanelInteraction::Make> hide_interaction,
-		BoxPtr<IMovePanelInteraction::Make> move_interaction,
+		BoxPtr<IHidePanelTrigger::Make> hide_trigger,
+		BoxPtr<IMovePanelTrigger::Make> move_trigger,
 		BoxPtr<ISizing2::Make> sizing,
 		BoxPtr<IPositioning2::Make> positioning,
 		bool displayed
 	) :
 		object(std::move(object)),
-		hide_interaction(std::move(hide_interaction)),
-		move_interaction(std::move(move_interaction)),
+		hide_trigger(std::move(hide_trigger)),
+		move_trigger(std::move(move_trigger)),
 		sizing(std::move(sizing)),
 		positioning(std::move(positioning)),
 		displayed(displayed) {
@@ -20,14 +20,14 @@ namespace ie {
 	
 	Panel::Make::Make(
 		BoxPtr<IScalable::Make>&& object,
-		BoxPtr<IHidePanelInteraction::Make> hide_interaction,
+		BoxPtr<IHidePanelTrigger::Make> hide_trigger,
 		BoxPtr<ISizing2::Make> sizing,
 		BoxPtr<IPositioning2::Make> positioning,
 		bool displayed
 	) :
 		object(std::move(object)),
-		hide_interaction(std::move(hide_interaction)),
-		move_interaction(make_box_ptr<DontMovePanelInteraction::Make>()),
+		hide_trigger(std::move(hide_trigger)),
+		move_trigger(make_box_ptr<DontMovePanelTrigger::Make>()),
 		sizing(std::move(sizing)),
 		positioning(std::move(positioning)),
 		displayed(displayed) {
@@ -46,9 +46,9 @@ namespace ie {
 			init_info.copy(panel_manager_),
 			init_info
 		),
-		interaction_manager_(&init_info.interaction_manager),
-		hide_interaction_(make.hide_interaction->make({init_info, *this})),
-		move_interaction_(make.move_interaction->make({init_info, *this})) {
+		trigger_manager_(&init_info.trigger_manager),
+		hide_trigger_(make.hide_trigger->make({init_info, *this})),
+		move_trigger_(make.move_trigger->make({init_info, *this})) {
 	}
 	
 	auto Panel::set_displayed() -> void {
@@ -74,15 +74,15 @@ namespace ie {
 	
 	auto Panel::update() -> void {
 		panel_manager_.update();
-		hide_interaction_->update();
-		move_interaction_->update();
+		hide_trigger_->update();
+		move_trigger_->update();
 		BasePanel::update();
 	}
 	
 	auto Panel::handle_event(Event event, bool active) -> bool {
 		displayed_ = true;
 		this->active_ = active;
-		auto updated{hide_interaction_->handle_event(event) || move_interaction_->handle_event(event)};
+		auto updated{hide_trigger_->handle_event(event) || move_trigger_->handle_event(event)};
 		return
 			panel_manager_.handle_event(event, active) ||
 			event.pointer().map([=](event_system::Pointer pointer) {
@@ -95,9 +95,9 @@ auto ieml::Decode<char, ie::Panel::Make>::decode(ieml::Node const& node) -> orl:
 	auto map{node.get_map_view().except()};
 	return ie::Panel::Make{
 		map.at("object").except().as<ie::BoxPtr<ie::IScalable::Make> >().except(),
-		map.at("hide-interaction").except().as<ie::BoxPtr<ie::IHidePanelInteraction::Make> >().except(),
-		map.get_as<ie::BoxPtr<ie::IMovePanelInteraction::Make> >("move-interaction").except().ok_or_else([] {
-			return ie::make_box_ptr<ie::IMovePanelInteraction::Make, ie::DontMovePanelInteraction::Make>();
+		map.at("hide-trigger").except().as<ie::BoxPtr<ie::IHidePanelTrigger::Make> >().except(),
+		map.get_as<ie::BoxPtr<ie::IMovePanelTrigger::Make> >("move-trigger").except().ok_or_else([] {
+			return ie::make_box_ptr<ie::IMovePanelTrigger::Make, ie::DontMovePanelTrigger::Make>();
 		}),
 		map.at("sizing").except().as<ie::BoxPtr<ie::ISizing2::Make> >().except(),
 		map.at("positioning").except().as<ie::BoxPtr<ie::IPositioning2::Make> >().except(),
